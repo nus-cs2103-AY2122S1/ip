@@ -29,7 +29,7 @@ public class Deadline extends Task {
         LocalDateTime dateTime = LocalDateTime.parse(deadline);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm a");
 
-        return "[D]" + "[" + super.getStatusIcon() + "] " + text + "(by: " + dateTime.format(formatter) + ")";
+        return "[D]" + "[" + super.getStatusIcon() + "] " + text + " (by: " + dateTime.format(formatter) + ")";
     }
 
 }

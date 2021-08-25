@@ -34,7 +34,7 @@ public class Event extends Task {
         LocalDateTime startDateTime = LocalDateTime.parse(startDate);
         LocalDateTime endDateTime = LocalDateTime.parse(endDate);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm a");
-        return "[E]" + "[" + super.getStatusIcon() + "] " + text + "(from: " + startDateTime.format(formatter) +
+        return "[E]" + "[" + super.getStatusIcon() + "] " + text + " (from: " + startDateTime.format(formatter) +
                 " to " + endDateTime.format(formatter) + ")";
     }
 
