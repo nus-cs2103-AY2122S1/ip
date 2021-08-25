@@ -4,26 +4,26 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TodoTest {
 
     @Test
-    void formatTask() {
+    void formatTask_formattedCorrectly() {
         Todo todo = new Todo("Read book");
         String[] expected = new String[]{"T", "1", "Read book"};
         assertArrayEquals(expected, todo.formatTask());
     }
 
     @Test
-    void markAsDone() {
+    void markAsDone_markedCorrectly() {
         Todo todo = new Todo("Read book");
         Todo doneTodo = todo.markAsDone();
-        Todo expected = new Todo("Read book", true);
-        assertEquals(expected.toString(), doneTodo.toString());
+        assertTrue(doneTodo.isDone());
     }
 
     @Test
-    void testToString() {
+    void toString_convertedCorrectly() {
         Todo todo = new Todo("Read book");
         String expected = "[T][ ] Read book";
         assertEquals(expected, todo.toString());
