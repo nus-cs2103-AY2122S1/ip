@@ -6,6 +6,9 @@ import duke.exception.DukeIndexOutOfRangeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * DoneCommand class encapsulates command to mark a task as done.
+ */
 public class DoneCommand extends Command {
     /**
      * Index of the task to be marked done.
@@ -15,7 +18,7 @@ public class DoneCommand extends Command {
     /**
      * Constructs an DoneCommand with the specified index.
      *
-     * @param index
+     * @param index Index of the task to be marked as done.
      */
     public DoneCommand(int index) {
         this.index = index;

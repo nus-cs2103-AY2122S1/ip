@@ -6,6 +6,9 @@ import duke.exception.DukeIndexOutOfRangeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * DeleteCommand class encapsulates command to delete deadline.
+ */
 public class DeleteCommand extends Command {
     /**
      * Index of the task to be removed.
@@ -15,7 +18,7 @@ public class DeleteCommand extends Command {
     /**
      * Constructs an DeleteCommand with the specified index.
      *
-     * @param index
+     * @param index Index of the task to be deleted.
      */
     public DeleteCommand(int index) {
         this.index = index;

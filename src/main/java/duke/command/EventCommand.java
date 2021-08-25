@@ -8,12 +8,15 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * EventCommand class encapsulates command to add a new event.
+ */
 public class EventCommand extends AddCommand {
 
     /**
      * Constructs an EventCommand with the specified description.
      *
-     * @param description
+     * @param description Description of the command.
      */
     public EventCommand(String description) {
         super(description);

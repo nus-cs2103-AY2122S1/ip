@@ -2,13 +2,15 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Ui class deals with loading tasks from the file and saving tasks in the file
+ */
 public class Ui {
-    private static final String logo = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-
 
     /**
      * Prompts user input and returns it.
@@ -35,7 +37,7 @@ public class Ui {
      */
     public void showWelcome() {
         this.showLine();
-        System.out.println(logo);
+        System.out.println(LOGO);
         System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?");
         this.showLine();
     }
@@ -46,7 +48,6 @@ public class Ui {
     public void showGoodBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
-
 
     /**
      * Prints divider.

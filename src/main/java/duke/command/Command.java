@@ -5,8 +5,10 @@ import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+/**
+ * Command class encapsulates the command input by user.
+ */
 public abstract class Command {
-
     /**
      * @param tasks   Task list used to store the tasks.
      * @param ui      Ui used to deal with interactions with the user.

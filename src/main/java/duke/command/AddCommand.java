@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * AddCommand class encapsulates command to add new task.
+ */
 public abstract class AddCommand extends Command {
     /**
      * Description of the task
@@ -9,7 +12,7 @@ public abstract class AddCommand extends Command {
     /**
      * Constructs an AddCommand with the specified description.
      *
-     * @param description
+     * @param description Description of the command.
      */
     public AddCommand(String description) {
         this.description = description;

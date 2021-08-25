@@ -3,6 +3,9 @@ package duke.task;
 import duke.exception.DukeException;
 import duke.exception.DukeIllegalFormatException;
 
+/**
+ * Task class encapsulates a task.
+ */
 public abstract class Task {
     /**
      * Description of the task.
@@ -26,11 +29,7 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
-
-    private String getStatusIcon() {
-        return isDone ? "X" : " ";
-    }
-
+    
     /**
      * Marks this task as done.
      * Note it does not update the db.
@@ -52,5 +51,9 @@ public abstract class Task {
      */
     public String toDataString() {
         return " | " + (this.getStatusIcon().equals("X") ? '1' : '0') + " | " + this.description;
+    }
+
+    private String getStatusIcon() {
+        return isDone ? "X" : " ";
     }
 }

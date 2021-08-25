@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Event class encapsulates an event task.
+ */
 public class Event extends Task {
     /**
      * Date of the event
@@ -15,7 +18,7 @@ public class Event extends Task {
     /**
      * Event Label ie. "E"
      */
-    private static final String label = "E";
+    private static final String LABEL = "E";
 
     /**
      * Constructs a Deadline with the specified description and date.
@@ -41,12 +44,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[" + label + "]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[" + LABEL + "]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String toDataString() {
-        return label + super.toDataString() + " | " + at;
+        return LABEL + super.toDataString() + " | " + at;
     }
 }
 

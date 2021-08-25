@@ -10,11 +10,11 @@ public class DukeParseException extends DukeException {
     public DukeParseException() {
         super();
     }
-    
+
     /**
      * Constructs a DukeParseException with the specified detail message.
      *
-     * @param errorMessage
+     * @param errorMessage Error message.
      */
     public DukeParseException(String errorMessage) {
         super(errorMessage);

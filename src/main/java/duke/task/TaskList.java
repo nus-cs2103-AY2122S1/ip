@@ -5,7 +5,9 @@ import duke.Storage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * TaskList class encapsulates a list of tasks.
+ */
 public class TaskList extends ArrayList<Task> {
     /**
      * Constructs a empty TaskList.

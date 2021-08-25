@@ -2,9 +2,11 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+/**
+ * Todo class encapsulates a todo task.
+ */
 public class Todo extends Task {
-
-    private static final String label = "T";
+    private static final String LABEL = "T";
 
     /**
      * Constructs a Todo with the specified description.
@@ -18,12 +20,12 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[" + label + "]" + super.toString();
+        return "[" + LABEL + "]" + super.toString();
     }
 
     @Override
     public String toDataString() {
-        return label + super.toDataString();
+        return LABEL + super.toDataString();
     }
 }
 

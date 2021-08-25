@@ -8,11 +8,14 @@ import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * DeadlineCommand class encapsulates command to add a new deadline.
+ */
 public class DeadlineCommand extends AddCommand {
     /**
      * Constructs an DeadlineCommand with the specified description.
      *
-     * @param description
+     * @param description Description of the command.
      */
     public DeadlineCommand(String description) {
         super(description);

@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Deadline class encapsulates a deadline task.
+ */
 public class Deadline extends Task {
     /**
      * Deadline
@@ -15,7 +18,7 @@ public class Deadline extends Task {
     /**
      * Deadline Label ie. "D"
      */
-    private static final String label = "D";
+    private static final String LABEL = "D";
 
     /**
      * Constructs a Deadline with the specified description and deadline.
@@ -41,12 +44,12 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + label + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[" + LABEL + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String toDataString() {
-        return label + super.toDataString() + " | " + by;
+        return LABEL + super.toDataString() + " | " + by;
     }
 
 }

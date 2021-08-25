@@ -10,8 +10,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
-    private final String filePath;
+    private String filePath;
 
     /**
      * Constructs a Storage with the specified filePath.
@@ -83,48 +86,48 @@ public class Storage {
             boolean isDone = row[1].equals("1");
             try {
                 switch (row[0]) {
-                    case "T": {
-                        Todo todo = new Todo(row[2]);
-                        list.add(todo);
-                        if (isDone) {
-                            todo.markAsDone();
-                        }
-                        break;
+                case "T": {
+                    Todo todo = new Todo(row[2]);
+                    list.add(todo);
+                    if (isDone) {
+                        todo.markAsDone();
                     }
-                    case "E": {
-                        if (row.length < 4) {
-                            if (!shouldFailSilently) {
-                                throw new DukeParseException();
-                            }
-                            continue;
-                        }
-                        Event event = new Event(row[2], row[3]);
-                        list.add(event);
-                        if (isDone) {
-                            event.markAsDone();
-                        }
-                        break;
-                    }
-                    case "D": {
-                        if (row.length < 4) {
-                            if (!shouldFailSilently) {
-                                throw new DukeParseException();
-                            }
-                            continue;
-                        }
-                        Deadline deadline = new Deadline(row[2], row[3]);
-                        list.add(deadline);
-                        if (isDone) {
-                            deadline.markAsDone();
-                        }
-                        break;
-                    }
-                    default: {
+                    break;
+                }
+                case "E": {
+                    if (row.length < 4) {
                         if (!shouldFailSilently) {
-                            // don't handle this, let it bubble up the stack and end the program
                             throw new DukeParseException();
                         }
+                        continue;
                     }
+                    Event event = new Event(row[2], row[3]);
+                    list.add(event);
+                    if (isDone) {
+                        event.markAsDone();
+                    }
+                    break;
+                }
+                case "D": {
+                    if (row.length < 4) {
+                        if (!shouldFailSilently) {
+                            throw new DukeParseException();
+                        }
+                        continue;
+                    }
+                    Deadline deadline = new Deadline(row[2], row[3]);
+                    list.add(deadline);
+                    if (isDone) {
+                        deadline.markAsDone();
+                    }
+                    break;
+                }
+                default: {
+                    if (!shouldFailSilently) {
+                        // don't handle this, let it bubble up the stack and end the program
+                        throw new DukeParseException();
+                    }
+                }
                 }
             } catch (DukeException e) {
                 if (!shouldFailSilently) {
