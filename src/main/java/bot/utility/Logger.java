@@ -1,9 +1,9 @@
-package utility;
+package bot.utility;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
+import bot.tasks.Deadline;
+import bot.tasks.Event;
+import bot.tasks.Task;
+import bot.tasks.ToDo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -45,7 +45,7 @@ public class Logger {
     }
 
     /**
-     * Writes to the file containing the tasks.
+     * Writes to the file containing the Bot.tasks.
      *
      * @param tasks The list of tasks that are due for writing.
      */

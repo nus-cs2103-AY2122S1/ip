@@ -1,4 +1,6 @@
-import utility.Duke;
+package bot;
+
+import bot.utility.Duke;
 
 /**
  * The entry point into the Duke program.

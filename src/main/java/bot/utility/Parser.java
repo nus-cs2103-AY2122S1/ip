@@ -1,11 +1,11 @@
-package utility;
+package bot.utility;
 
-import error.DukeException;
+import bot.error.DukeException;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.ToDo;
+import bot.tasks.Deadline;
+import bot.tasks.Event;
+import bot.tasks.Task;
+import bot.tasks.ToDo;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class Parser {
     }
 
     /**
-     * Allows the parser to interact with the ui, logger and the list of tasks when needed.
+     * Allows the parser to interact with the ui, logger and the list of Bot.tasks when needed.
      *
      * @param ui The Ui interacting with the user.
      * @param logger The logger that keeps track of the logs.

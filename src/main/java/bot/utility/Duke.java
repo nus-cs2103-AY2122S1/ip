@@ -1,4 +1,4 @@
-package utility;
+package bot.utility;
 
 /**
  * Simulates the Duke chatbot.
