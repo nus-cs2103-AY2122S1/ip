@@ -33,6 +33,15 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Get the description of the task.
+     *
+     * @return The description of the task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", isDone ? "X" : " ", this.description);

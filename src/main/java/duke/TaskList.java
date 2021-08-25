@@ -178,6 +178,21 @@ public class TaskList {
         }
     }
 
+    public String find(String command) throws InvalidFormatException {
+        String[] matches = Parser.validateRegexAndMatch(command, "^find (.+)",
+                "find {search term}");
+        String searchTerm = matches[1];
+        StringBuilder str = new StringBuilder("Here are the matching tasks in your list:\n");
+        int counter = 1;
+        for (Task t : this.tasks) {
+            if (t.getDescription().contains(searchTerm)) {
+                str.append(counter).append(".").append(t).append("\n");
+                counter++;
+            }
+        }
+        return str.toString();
+    }
+
     /**
      * Converts the TaskList to a string for saving.
      *
