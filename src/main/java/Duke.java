@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,7 +12,7 @@ public class Duke {
                                                         + "Now you have %d %s in the list.\n";
     private static final String MARK_DONE_MSG_TEMPLATE = "Nice! I've marked this task as done: \n  %s\n";
     private static final Scanner SCANNER = new Scanner(System.in);
-    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static final TaskList tasks = new TaskList();
 
     private static void greet() {
         System.out.println(GREETING_MSG);
@@ -26,37 +25,51 @@ public class Duke {
 
     private static void addTodo(String description) {
         Task taskToAdd = new Todo(description);
-        tasks.add(taskToAdd);
-        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size(), tasks.size() <= 1 ? "task" : "tasks");
+        System.out.printf(
+                ADD_TASK_MSG_TEMPLATE,
+                tasks.addTask(taskToAdd), 
+                tasks.getTaskCount(), 
+                tasks.getTaskCount() <= 1 ? "task" : "tasks"
+        );
     }
 
     private static void addDeadline(String description, String by) {
         Task taskToAdd = new Deadline(description, by);
-        tasks.add(taskToAdd);
-        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size(), tasks.size() <= 1 ? "task" : "tasks");
+        System.out.printf(
+                ADD_TASK_MSG_TEMPLATE,
+                tasks.addTask(taskToAdd),
+                tasks.getTaskCount(),
+                tasks.getTaskCount() <= 1 ? "task" : "tasks"
+        );
     }
 
     private static void addEvent(String description, String at) {
         Task taskToAdd = new Event(description, at);
-        tasks.add(taskToAdd);
-        System.out.printf(ADD_TASK_MSG_TEMPLATE, taskToAdd, tasks.size(), tasks.size() <= 1 ? "task" : "tasks");
+        System.out.printf(
+                ADD_TASK_MSG_TEMPLATE,
+                tasks.addTask(taskToAdd),
+                tasks.getTaskCount(),
+                tasks.getTaskCount() <= 1 ? "task" : "tasks"
+        );
     }
 
     private static void listTasks() {
         System.out.println(LIST_TASK_MSG);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("%d.%s\n", i + 1, tasks.get(i));
-        }
+        System.out.print(tasks);
     }
 
     private static void doneTask(int index) {
-        tasks.get(index).markAsDone();
-        System.out.printf(MARK_DONE_MSG_TEMPLATE, tasks.get(index));
+        tasks.getTask(index).markAsDone();
+        System.out.printf(MARK_DONE_MSG_TEMPLATE, tasks.getTask(index));
     }
 
     private static void deleteTask(int index) {
-        Task tasksToRemove = tasks.remove(index);
-        System.out.printf(DELETE_TASK_MSG_TEMPLATE, tasksToRemove, tasks.size(), tasks.size() <= 1 ? "task" : "tasks");
+        System.out.printf(
+                DELETE_TASK_MSG_TEMPLATE,
+                tasks.deleteTask(index),
+                tasks.getTaskCount(),
+                tasks.getTaskCount() <= 1 ? "task" : "tasks"
+        );
     }
 
     private static void runCommand(String cmd) throws DukeException {
@@ -78,13 +91,13 @@ public class Duke {
             listTasks();
         } else if (cmd.matches("^done[ \\t]+[0-9]+$")) {
             int i = Integer.parseInt(cmd.split("^done[ \\t]+")[1]) - 1;
-            if (i < 0 || i >= tasks.size()) {
+            if (i < 0 || i >= tasks.getTaskCount()) {
                 throw new DukeException(String.format("☹ OOPS!!! I'm sorry, but no task numbered %d", i + 1));
             }
             doneTask(i);
         } else if (cmd.matches("^delete[ \\t]+[0-9]+$")) {
             int i = Integer.parseInt(cmd.split("^delete[ \\t]+")[1]) - 1;
-            if (i < 0 || i >= tasks.size()) {
+            if (i < 0 || i >= tasks.getTaskCount()) {
                 throw new DukeException(String.format("☹ OOPS!!! I'm sorry, but no task numbered %d", i + 1));
             }
             deleteTask(i);
