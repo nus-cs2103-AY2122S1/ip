@@ -15,8 +15,13 @@ public class Storage {
         this.doesFileExists = this.taskListFile.exists();
     }
 
+    /**
+     * Retrieve the data saved and input into task list.
+     *
+     * @param taskList Task list for the data to be input in.
+     * @throws FileNotFoundException If file does not exists.
+     */
     public void retrieveFile(TaskList taskList) throws FileNotFoundException {
-
         Scanner fileScanner = new Scanner(taskListFile);
         while (fileScanner.hasNext()) {
             String currLine = fileScanner.nextLine();
@@ -49,6 +54,12 @@ public class Storage {
 
     }
 
+    /**
+     * Saves the data in task list onto a file.
+     *
+     * @param taskList Task list that data is retrieved from.
+     * @throws IOException If there is wrong input or output.
+     */
     public void saveFile(TaskList taskList) throws IOException {
         StringBuilder listBuilder = new StringBuilder();
         for (int j = 0; j < Task.noOfTask; j++) {
@@ -64,10 +75,20 @@ public class Storage {
         dukeTaskListWriter.close();
     }
 
+    /**
+     * Checks if the file specified exists.
+     *
+     * @return True if file exists and false if it does not.
+     */
     public Boolean getDoesFileExists() {
         return this.doesFileExists;
     }
 
+    /**
+     * Creates a new file.
+     *
+     * @throws IOException If there is wrong input or output.
+     */
     public void createFile() throws IOException {
         this.taskListFile.getParentFile().mkdir();
         this.taskListFile.createNewFile();

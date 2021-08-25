@@ -20,14 +20,19 @@ public class Task {
     }
 
     /**
-     * Returns the checkbox of the Task.
+     * Returns the checkbox of the task.
      *
-     * @return string representation of checkbox.
+     * @return String representation of checkbox.
      */
     public String checkIsDone() {
         return this.isDoneBox;
     }
 
+    /**
+     * Returns the description of the task.
+     *
+     * @return Description of task.
+     */
     public String getDescription() {
         return this.description;
     }
@@ -43,6 +48,4 @@ public class Task {
     public String getTaskType() {
         return this.taskType;
     }
-
-
 }

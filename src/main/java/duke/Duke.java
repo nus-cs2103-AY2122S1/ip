@@ -23,12 +23,23 @@ public class Duke {
         }
     }
 
+    /**
+     * Stops duke bot and save file.
+     *
+     * @param taskList Task list to save onto file.
+     * @throws IOException If there is wrong input or output.
+     */
     public void stopDuke(TaskList taskList) throws IOException {
         this.isRunning = false;
         this.storage.saveFile(taskList);
         this.ui.goodbyeMsg();
     }
 
+    /**
+     * Runs duke bot.
+     *
+     * @throws IOException If there is wrong input or output.
+     */
     public void run() throws IOException {
         this.isRunning = true;
         this.ui.greetingMsg();
@@ -36,14 +47,18 @@ public class Duke {
         while (this.isRunning){
             String input = sc.nextLine();
             if (input.equals("bye")) {
+                //Ends duke bot
                 stopDuke(this.taskList);
             } else if (input.equals("list")) {
+                //List task list
                 this.ui.listTaskList(this.taskList);
             } else if (input.contains("done ")) {
+                //Set task as done
                 Integer listIndex = parser.doneInputParser(input);
                 this.taskList.setTaskDone(listIndex);
                 this.ui.doneTaskMsg(this.taskList.getTask(listIndex));
             } else if (input.contains("delete ")) {
+                //Deletes task
                 Integer removeTaskIndex = parser.deleteInputParser(input);
                 Task removedTask = taskList.removeTask(removeTaskIndex);
                 this.ui.deleteTaskMsg(removedTask);
@@ -55,6 +70,7 @@ public class Duke {
                         newTask = new Todo(parser.toDoInputParser(input));
                     } else if (input.contains("deadline")) {
                         if (!input.contains("/by")) {
+                            //for missing dateline
                             throw new MissingDateException();
                         } else {
                             newTask = new Deadline(parser.deadlineInputTaskParser(input),
@@ -62,6 +78,7 @@ public class Duke {
                         }
                     } else if (input.contains("event")) {
                         if (!input.contains("/at")) {
+                            //for missing dateline
                             throw new MissingDateException();
                         } else {
                             newTask = new Event(parser.eventInputTaskParser(input),
