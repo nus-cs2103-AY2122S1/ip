@@ -79,30 +79,29 @@ public class Storage {
             while ((text = buffreader.readLine()) != null) {
                 String[] lineArr = text.split(" | ");
                 switch (lineArr.length) {
-                    case 3:
-                        // To complete TaskList class
-                        Task toDo = new Task(lineArr[2]);
-                        saved.add(toDo);
-                        if (lineArr[1].equals("1")) {
-                            toDo.complete();
-                        }
-                        break;
-                    case 4:
-                        if (lineArr[0].equals("D")) {
-                            Deadline deadline = new Deadline(lineArr[2], LocalDateTime.parse(lineArr[3], this.dateTimeFormat));
-                            saved.add(deadline);
-                        } else if (lineArr[0].equals("E")) {
-                            Event event = new Event(lineArr[2], LocalDateTime.parse(lineArr[3], this.dateTimeFormat));
-                            saved.add(event);
-                        }
-                        break;
+                case 3:
+                    // To complete TaskList class
+                    Task toDo = new Task(lineArr[2]);
+                    saved.add(toDo);
+                    if (lineArr[1].equals("1")) {
+                        toDo.complete();
+                    }
+                    break;
+                case 4:
+                    if (lineArr[0].equals("D")) {
+                        Deadline deadline = new Deadline(lineArr[2], LocalDateTime.parse(lineArr[3], this.dateTimeFormat));
+                        saved.add(deadline);
+                    } else if (lineArr[0].equals("E")) {
+                        Event event = new Event(lineArr[2], LocalDateTime.parse(lineArr[3], this.dateTimeFormat));
+                        saved.add(event);
+                    }
+                    break;
                 }
             }
             return saved;
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
-
     }
 
     /**

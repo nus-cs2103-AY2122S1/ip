@@ -89,5 +89,4 @@ public class TaskList {
     public ArrayList<Task> getAllTasks() {
         return this.list;
     }
-
 }
