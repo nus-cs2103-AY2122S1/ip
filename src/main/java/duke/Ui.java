@@ -85,6 +85,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Print the tasks that match the filter.
+     *
+     * @param filter The string to search for.
+     * @param taskList The taskList to search in.
+     */
     public void showSearchResult(String filter, TaskList taskList) {
         TaskList searchResult = taskList.findTasks(filter);
         if (searchResult.isEmpty()) {

@@ -97,9 +97,12 @@ public class TaskList {
         }
     }
 
-
-
-
+    /**
+     * Searches the arraylist for tasks that contain the filter string.
+     * 
+     * @param filter The string to search for.
+     * @return TaskList object that contains the arraylist of tasks that match the filter.
+     */
     public TaskList findTasks(String filter) {
         ArrayList<Task> searchResult = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
