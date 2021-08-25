@@ -5,7 +5,7 @@ public class AilurusException extends IllegalArgumentException {
      * List of errors for Ailurus
      */
     public enum Error {
-        EMPTYLIST, EMPTYTODO, EMPTYEVENT, EMPTYDEADLINE, EMPTYBY, EMPTYAT, BY, AT, NUMBER, NAN
+        EMPTYLIST, EMPTYTODO, EMPTYEVENT, EMPTYDEADLINE, EMPTYBY, EMPTYAT, BY, AT, NUMBER, NAN, LOAD
     }
 
     /**
@@ -17,8 +17,10 @@ public class AilurusException extends IllegalArgumentException {
         this.error = e;
     }
 
+
+
     @Override
-    public String toString() {
+    public String getMessage() {
         switch (this.error) {
             case EMPTYLIST:
                 return "☹ OOPS!!! No items in list!";
@@ -40,6 +42,8 @@ public class AilurusException extends IllegalArgumentException {
                 return "☹ OOPS!!! Invalid number used.";
             case NAN:
                 return "☹ OOPS!!! Not a number.";
+            case LOAD:
+                return "☹ OOPS!!! Unable to load tasks...";
             default:
                 return getMessage();
         }

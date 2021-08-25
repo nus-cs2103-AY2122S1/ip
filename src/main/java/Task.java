@@ -30,6 +30,11 @@ abstract public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Logs the task by writing data to storage.
+     *
+     * @param writer FileWriter to be written into.
+     */
     abstract public void log(FileWriter writer);
 
     @Override
