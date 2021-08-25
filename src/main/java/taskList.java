@@ -13,8 +13,6 @@ public class taskList {
     }
 
     public String addTask(String input) {
-        input = input.trim();
-
         Task newTask;
 
         if (input.startsWith("todo")) {
@@ -40,6 +38,10 @@ public class taskList {
         return String.format("Got it. I've added this task:\n    %s\nYou now have %d tasks tasks in the list.", newTask, this.lst.size());
     }
 
+    public void addToList(Task t) {
+        this.lst.add(t);
+    }
+
     public String deleteTask(int n) {
         if (n < 1 || n > this.lst.size()) {
             throw new DukeException("There is no task " + n);
@@ -63,6 +65,14 @@ public class taskList {
         }
 
         return temp;
+    }
+
+    public String getSaveData() {
+        StringBuilder output = new StringBuilder();
+        for (Task task : this.lst) {
+            output.append(task.getSaveData()).append("~");
+        }
+        return output.toString();
     }
 
     public String markAsDone(int n) {

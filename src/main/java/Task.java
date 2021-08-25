@@ -1,4 +1,4 @@
-public class Task implements Comparable<Task> {
+public abstract class Task implements Comparable<Task> {
     private static int count = 0;
     private boolean completed;
     private final String name;
@@ -7,12 +7,29 @@ public class Task implements Comparable<Task> {
     public Task(String name) {
         this.name = name;
         this.id = count++;
+        this.completed = false;
+    }
+
+    public Task(boolean completed, String name) {
+        this.name = name;
+        this.id = count++;
+        this.completed = completed;
+    }
+
+    protected String getName() {
+        return this.name;
     }
 
     public String completeTask() {
         this.completed = true;
         return this.toString();
     }
+
+    protected boolean isCompleted() {
+        return this.completed;
+    }
+
+    public abstract String getSaveData();
 
     @Override
     public String toString() {
