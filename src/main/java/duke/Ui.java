@@ -24,18 +24,18 @@ public class Ui {
     }
 
     public void fileNotFoundMsg() {
-        System.out.println("I am unable to find your file. " +
-                "Check that your 'duketest' file exists," +
-                " or that your 'data' folder exists.");
+        System.out.println("I am unable to find your file. "
+                + "Check that your 'duketest' file exists,"
+                + " or that your 'data' folder exists.");
     }
 
     public void ioErrorMsg() {
         System.out.println("Something went wrong!");
     }
 
-    public void taskAddedMsg(String task, int size) {
+    public void taskAddedMsg(String desc, int size) {
         System.out.println("    Got it. I've added this task:");
-        System.out.println("        " + task);
+        System.out.println("        " + desc);
         System.out.println("    Now you have " + size + " tasks in the list.");
     }
 
@@ -49,8 +49,8 @@ public class Ui {
         System.out.println("    Nice! I've marked this task as done:");
     }
 
-    public String taskErrorMsg(int i) {
-        switch (i) {
+    public String taskErrorMsg(int caseNumber) {
+        switch (caseNumber) {
         case 1:
             return "   ☹ OOPS!!! The description of a todo cannot be empty.";
         case 2:

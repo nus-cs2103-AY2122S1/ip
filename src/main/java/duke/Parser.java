@@ -25,7 +25,7 @@ public class Parser {
     }
 
     public String getDeadlineDescription(String input) {
-        return input.substring(9, input.indexOf("/")-1);
+        return input.substring(9, input.indexOf("/") - 1);
     }
 
     public boolean isValidEvent(String input) {
@@ -33,7 +33,7 @@ public class Parser {
     }
 
     public String getEventDescription(String input) {
-        return input.substring(6,  input.indexOf("/")-1);
+        return input.substring(6,  input.indexOf("/") - 1);
     }
 
     public boolean isDeleteCmd(String input) {
