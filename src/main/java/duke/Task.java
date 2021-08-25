@@ -29,5 +29,21 @@ public abstract class Task {
         return String.format("[%s] %s", isDone ? "X" : " ", this.description);
     }
 
-    public String toSaveFormat() { return String.format("%s,%s", isDone ? "1" : "0", this.description); };
+    public String toSaveFormat() { return String.format("%s,%s", isDone ? "1" : "0", this.description); }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Task)) {
+            return false;
+        }
+
+        // obj is an instance of Task, so it is okay to typecast here
+        Task other = (Task) obj;
+
+        return this.description.equals(other.description) && this.isDone == other.isDone;
+    }
 }

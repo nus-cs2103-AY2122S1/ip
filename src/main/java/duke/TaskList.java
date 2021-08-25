@@ -180,6 +180,15 @@ public class TaskList {
     }
 
     /**
+     * Returns the list of tasks. To be used solely for testing purposes.
+     *
+     * @return The list of tasks in the instance of TaskList.
+     */
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+
+    /**
      * Formats the inputted task as a string to be displayed back to the user.
      *
      * @param task The Task created.
