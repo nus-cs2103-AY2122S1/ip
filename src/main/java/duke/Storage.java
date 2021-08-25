@@ -17,11 +17,22 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Represents the class used to store the tasklist data.
+ */
 public class Storage {
+
+    /** User specified filePath destination */
     private final String givenFilePath;
+
+    /** Contains the filepath for the project's directory */
     private static final String PROJECT_DIRECTORY = System.getProperty("user.dir") + "/src/main/java/duke";
     private Path p;
 
+    /**
+     * @throws InvalidStorageFilePathException if filepath does not end with .txt, or invalid file path is given.
+     */
     Storage(String givenFilePath) throws InvalidStorageFilePathException {
         this.givenFilePath = givenFilePath;
         File currDir = new File(PROJECT_DIRECTORY);
@@ -35,10 +46,15 @@ public class Storage {
         }
     }
 
+    /** Helper function to determine if the specified path ends with .txt */
     public static boolean isValidPath(Path filepath) {
         return filepath.toString().endsWith(".txt");
     }
 
+    /**
+     * Helper function to determine if the specified directory exists.
+     * @return true if directory exists. false if any parent/child directory is missing in the file path.
+     */
     public static boolean isValidDirectory(String filePath) {
         String[] folderNames = filePath.split("/");
         String currentPath = PROJECT_DIRECTORY;
@@ -53,7 +69,13 @@ public class Storage {
         return true;
     }
 
-    public List<Task> load() throws InvalidStorageFilePathException, DukeException {
+    /**
+     * Reads the file upon app startup and attempts to load the data into a list for TaskList.java to parse.
+     * Creates a new .txt file if specified .txt file is not found within the directory.
+     * @return list of all tasks saved from the previous session.
+     * @throws DukeException if error occurs while attempting to create a new file.
+     */
+    public List<Task> load() throws DukeException {
         List<Task> lt = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(p);
@@ -72,11 +94,15 @@ public class Storage {
                 System.out.println("   Succesfully created 'tasklist.txt' within ./src/main/java/" + givenFilePath);
                 return lt;
             } catch (IOException x) {
+                System.out.println(x.getMessage());
                 throw new DukeException("   UNEXPECTED ERROR: Unable to create file...");
             }
         }
     }
 
+    /**
+     * Saves the list of tasks into the specified .txt file when function is invoked.
+     */
     public void save(TaskList listOfTasks) {
         String outputText = Storage.printListForSave(listOfTasks);
         try {
@@ -88,6 +114,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts the saved list of tasks into a format convenient for readability.
+     */
     public static String printListForSave(TaskList lst) {
         String outputText = "";
 
@@ -120,7 +149,10 @@ public class Storage {
         return outputText;
     }
 
-    // not sure what is the date specified thing (recheck)
+    /**
+     * Upon loading of the storage file, functions parses the inputs found in the file into their respective tasks.
+     * Invalid inputs for deadline/events will be filtered and converted accordingly.
+     */
     public Task convertToTask(String input) {
         List<String> words = List.of(input.split(" \\| "));
         Task output = null;
@@ -135,7 +167,9 @@ public class Storage {
             break;
         case "D":
             Deadline d = new Deadline(words.get(2), words.get(3));
-            if (words.size() == 4) { // add only if date is specified
+
+            /** add only if date is specified   */
+            if (words.size() == 4) {
                 if (words.get(1).equals("X")) {
                     d = d.markAsDone();
                 }
@@ -143,8 +177,10 @@ public class Storage {
             }
             break;
         case "E":
-            Event e = new Event(words.get(2), words.get(3));;
-            if (words.size() == 4) { // add only if date is specified
+            Event e = new Event(words.get(2), words.get(3));
+
+            /** add only if date is specified   */
+            if (words.size() == 4) {
                 if (words.get(1).equals("X")) {
                     e = e.markAsDone();
                 }
