@@ -91,11 +91,12 @@ public class Logic {
                 int indicatorDeadline = listOfCommandInputs.indexOf("/by");
                 String tempDeadlineString = new String();
                 String deadline = listOfCommandInputs.get(indicatorDeadline + 1);
+                String deadlineDateTime = deadlineDate + " " + deadlineTime;
                 for (int i = 0; i < indicatorDeadline; i++) {
                     tempDeadlineString = tempDeadlineString + listOfCommandInputs.get(i);
                 }
-                Deadline tempDeadLine = new Deadline(tempDeadlineString,deadline);
-                DataHandlerLayer.addToLog(new Deadline(tempDeadlineString, deadline));
+                Deadline tempDeadLine = new Deadline(tempDeadlineString, Parser.convertToDateTime(deadlineDateTime));
+                DataHandlerLayer.addToLog(tempDeadLine);
                 if (isWrittenToHistory) {
                     DataHandlerLayer.appendToHistory(tempDeadLine);
                 }
@@ -104,12 +105,13 @@ public class Logic {
                 int indicatorEvent = listOfCommandInputs.indexOf("/at");
                 String date = listOfCommandInputs.get(indicatorEvent + 1);
                 String time = listOfCommandInputs.get(indicatorEvent + 2);
+                String dateTime = date + " " + time;
                 String temp = new String();
                 for (int i = 0; i < indicatorEvent; i++) {
                     temp = temp + listOfCommandInputs.get(i);
                 }
 
-                Event tempEvent = new Event(temp, date, time);
+                Event tempEvent = new Event(temp, Parser.convertToDateTime(dateTime));
                 DataHandlerLayer.addToLog(tempEvent);
                 if (isWrittenToHistory) {
                     DataHandlerLayer.appendToHistory(tempEvent);
