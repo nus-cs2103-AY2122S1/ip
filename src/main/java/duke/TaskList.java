@@ -9,26 +9,59 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * A class that represents a list of tasks.
+ */
 public class TaskList {
+    /**
+     * The list of tasks.
+     */
     private final ArrayList<Task> taskList;
 
+    /**
+     * Constructs a {@code TaskList}.
+     *
+     * @param taskList The list of tasks.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Returns the number of tasks.
+     *
+     * @return The number of tasks.
+     */
     public int size() {
         return this.taskList.size();
     }
 
+    /**
+     * Gets the task with the specific index.
+     *
+     * @param index The index of the task.
+     * @return The task with given index.
+     */
     public Task getTask(int index) {
         return this.taskList.get(index);
     }
 
+    /**
+     * Adds a certain task to the list and print out the add message.
+     *
+     * @param task The task to be added.
+     */
     public void addTask(Task task) {
         this.taskList.add(task);
         Ui.addTaskMessage(this, task);
     }
 
+    /**
+     * Removes a certain task from the list and print out the remove message.
+     *
+     * @param index The index of the task item to be removed.
+     * @throws DukeException If the index is invalid.
+     */
     public void removeTask(int index) throws DukeException {
         if (index == 0) {
             throw new IndexMismatchException();
@@ -40,6 +73,12 @@ public class TaskList {
         this.taskList.remove(index - 1);
     }
 
+    /**
+     * Marks a certain task in the list as done.
+     *
+     * @param item The index of the task item to be marked done.
+     * @throws DukeException If the task is already done or the index is invalid.
+     */
     public void completeTask(int item) throws DukeException {
         if (item == 0) {
             throw new IndexMismatchException();
@@ -54,13 +93,20 @@ public class TaskList {
         this.taskList.get(item - 1).setDone(true);
     }
 
-    private void buildList(StringBuilder builder, ArrayList<Task> taskList, String emptyMessage) {
-        if (taskList.isEmpty()) {
+    /**
+     * Transforms the list to a string list and store it in the {@code StringBuilder}. If the list is empty, then it
+     * will store the {@code emptyMessage} instead.
+     *
+     * @param builder The {@code StringBuilder} to store the list.
+     * @param emptyMessage The message to be stored when the list is empty.
+     */
+    private void buildList(StringBuilder builder, String emptyMessage) {
+        if (this.taskList.isEmpty()) {
             builder.append(emptyMessage);
         } else {
-            int listSize = taskList.size();
+            int listSize = this.taskList.size();
             for (int i = 0; i < listSize; i++) {
-                builder.append("\t\t").append(i + 1).append(". ").append(taskList.get(i));
+                builder.append("\t\t").append(i + 1).append(". ").append(this.taskList.get(i));
                 if (i < listSize - 1) {
                     builder.append("\n");
                 }
@@ -68,21 +114,34 @@ public class TaskList {
         }
     }
 
+    /**
+     * Transforms the list to a string of task descriptions.
+     *
+     * @return A string of task descriptions.
+     */
     public String printList() {
         StringBuilder itemList = new StringBuilder("\tHere are the tasks in your list:\n");
-        buildList(itemList, this.taskList, "\tNothing here yet...");
+        this.buildList(itemList, "\tNothing here yet...");
 
         return itemList.toString();
     }
 
+    /**
+     * Find out all tasks that is related to the given date and list them as a string.
+     *
+     * @param date A certain to filter the list.
+     * @return A string of task description.
+     */
     public String printList(LocalDate date) {
 
         ArrayList<Task> targetTasks = this.taskList.stream()
                 .filter(x -> x.getDate() != null && x.getDate().equals(date))
                 .collect(Collectors.toCollection(ArrayList::new));
 
+        TaskList targetList = new TaskList(targetTasks);
+
         StringBuilder itemList = new StringBuilder("\tHere is the result:\n");
-        buildList(itemList, targetTasks, "\tNothing special will happen on this day");
+        targetList.buildList(itemList, "\tNothing special will happen on this day");
 
         return itemList.toString();
     }

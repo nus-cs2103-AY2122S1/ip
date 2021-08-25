@@ -1,18 +1,36 @@
 package duke.task;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
 
 import java.time.LocalDate;
 
+/**
+ * A class that represents tasks.
+ */
 public class Task {
+    /**
+     * The three type of tasks.
+     */
     public enum TaskType {
         TODO, DEADLINE, EVENT
     }
 
+    /**
+     * The description of the task.
+     */
     protected String description;
+
+    /**
+     * Whether the task is done.
+     */
     protected boolean isDone = false;
 
+    /**
+     * Constructs a {@code Task} object by the description. Throw a {@code DukeException} if the description is empty.
+     *
+     * @param description The description you want to store.
+     * @throws DukeException If the description is empty.
+     */
     public Task(String description) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeException("Your description cannot be empty!");
@@ -20,6 +38,14 @@ public class Task {
         this.description = description;
     }
 
+    /**
+     * Constructs a {@code Task} object by the description and specifying if it is done. Throws a {@code DukeException}
+     * if the description is empty.
+     *
+     * @param description The description you want to store.
+     * @param isDone Whether the task is done.
+     * @throws DukeException If the description is empty.
+     */
     public Task(String description, boolean isDone) throws DukeException {
         if (description.isEmpty()) {
             throw new DukeException("Your description cannot be empty!");
@@ -28,6 +54,11 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Transforms the task to a single line that can be stored in a txt file.
+     *
+     * @return A single line that can be stored in a txt file.
+     */
     public String taskToLine() {
         String isDone = this.isDone ? "1" : "0";
         return String.format(" | %s | %s", isDone, this.description);
@@ -37,6 +68,12 @@ public class Task {
         return this.isDone;
     }
 
+    /**
+     * Returns the starting or due time of the task, if possible. If there is no time related to the task, return
+     * {@code null}. In this case, it will always return {@code null}.
+     *
+     * @return null
+     */
     public LocalDate getDate() {
         return null;
     }
@@ -45,10 +82,19 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Returns {@code "[X]"} is the task is done and {@code "[ ]"} otherwise.
+     * @return An icon indicating whether the task is done.
+     */
     public String markDoneIcon() {
         return this.isDone ? "[X]" : "[ ]";
     }
 
+    /**
+     * Returns the string representation of the task.
+     *
+     * @return The string representation of the task.
+     */
     @Override
     public String toString() {
         return this.markDoneIcon() + " " + this.description;
