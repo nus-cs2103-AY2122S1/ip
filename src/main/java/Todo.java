@@ -12,7 +12,8 @@ public class Todo extends Task {
 
     @Override
     public String formatChnage() {
-        return super.formatChnage();
+        String mark = isDone ? "1" : "0";
+        return "T | " + mark + " | " + this.description;
     }
 
     @Override

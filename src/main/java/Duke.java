@@ -66,7 +66,7 @@ public class Duke {
 
     }
 
-    public static void done(String cmd) throws EmptyTaskListException, NoDescriptionException, NoCommandException {
+    public static void done(String cmd) throws EmptyTaskListException, NoDescriptionException, NoCommandException, IOException {
 
         if (cmd.split(" ").length == 1) {
             throw new NoDescriptionException("Done");
@@ -86,9 +86,10 @@ public class Duke {
             System.out.println(INDENTATION + UNDERLINE);
 
         }
+        writeData();
     }
 
-    public static void delete(String cmd) throws DeleteWrongIndexException, NoDescriptionException, NoCommandException {
+    public static void delete(String cmd) throws DeleteWrongIndexException, NoDescriptionException, NoCommandException, IOException {
 
         if (cmd.split(" ").length == 1)  {
             throw new NoDescriptionException("Delete");
@@ -110,6 +111,7 @@ public class Duke {
             System.out.println(INDENTATION + UNDERLINE);
             task.remove(removed);
         }
+        writeData();
     }
 
 
@@ -218,8 +220,9 @@ public class Duke {
         try {
             FileWriter fw = new FileWriter("data/duke.txt", false);
             for (Task t : task) {
-                fw.write(t.formatChnage());
+                fw.write(t.formatChnage() + "\n");
             }
+            fw.close();
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }

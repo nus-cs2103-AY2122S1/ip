@@ -14,7 +14,8 @@ public class Deadline extends Task{
 
     @Override
     public String formatChnage() {
-        return super.formatChnage();
+        String mark = isDone ? "1" : "0";
+        return "D | " + mark + " | " + this.description + " | " + this.by;
     }
 
     @Override

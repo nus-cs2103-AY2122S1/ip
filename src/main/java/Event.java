@@ -14,7 +14,8 @@ public class Event extends Task {
 
     @Override
     public String formatChnage() {
-        return super.formatChnage();
+        String mark = isDone ? "1" : "0";
+        return "E | " + mark + " | " + this.description +" | " + this.at;
     }
 
 
