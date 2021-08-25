@@ -14,6 +14,10 @@ public class Deadline extends Task{
 
     public String toString() {
         return "[D]" + super.toString() + "->by: "
-                + endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    public String saveTask() {
+        return "[D]" + super.toString() + "->by: " + endTime;
     }
 }

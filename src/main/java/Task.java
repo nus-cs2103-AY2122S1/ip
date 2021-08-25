@@ -1,7 +1,7 @@
 /**
  * General category
  */
-public class Task {
+abstract public class Task {
     private String name;
     private Boolean completed = false;
 
@@ -18,6 +18,10 @@ public class Task {
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
+    }
+
+    public String saveTask(){
+        return toString();
     }
 
     public String toString() {

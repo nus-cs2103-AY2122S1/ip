@@ -80,7 +80,7 @@ public class Duke {
             FileWriter fw = new FileWriter(file, false);
             for(int i=0; i<taskList.size(); i++) {
                 Task task= taskList.get(i);
-                fw.write(task.toString());
+                fw.write(task.saveTask());
                 fw.write("\r\n");
             }
             fw.close();

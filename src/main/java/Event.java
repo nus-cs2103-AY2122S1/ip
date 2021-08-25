@@ -14,6 +14,10 @@ public class Event extends Task{
 
     public String toString() {
         return "[E]" + super.toString() + "->at: " +
-                startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ ")";
+                startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    public String saveTask() {
+        return "[E]" + super.toString() + "->at: " + startTime;
     }
 }
