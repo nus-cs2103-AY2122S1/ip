@@ -5,7 +5,7 @@ import duke.commands.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> taskList;
+    protected ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;

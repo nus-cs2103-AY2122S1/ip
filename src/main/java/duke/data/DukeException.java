@@ -1,7 +1,7 @@
 package duke.data;
 
 public class DukeException extends Exception {
-    String header;
+    protected String header;
     public DukeException(String message) {
         super(message);
         this.header = "☹ OOPS!!! ";

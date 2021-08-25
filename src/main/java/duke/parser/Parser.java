@@ -16,7 +16,7 @@ public class Parser {
         event,
         delete
     }
-    private DateTimeFormatter df;
+    protected DateTimeFormatter df;
 
     public Parser() {
         this.df = DateTimeFormatter.ofPattern("yyyy-M-d H:mm");
