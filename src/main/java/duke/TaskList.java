@@ -86,4 +86,15 @@ public class TaskList {
 
         return itemList.toString();
     }
+
+    public String printList(String keyword) {
+        ArrayList<Task> targetTasks = this.taskList.stream()
+                .filter(x -> x.getDescription().contains(keyword))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        StringBuilder itemList = new StringBuilder("\tHere is the result:\n");
+        buildList(itemList, targetTasks, "\tWow! Nothing matches your keyword.");
+
+        return itemList.toString();
+    }
 }
