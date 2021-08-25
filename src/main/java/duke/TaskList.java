@@ -4,7 +4,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.stream.IntStream;
@@ -13,8 +12,8 @@ import static duke.Ui.dukePrint;
 
 public class TaskList {
 
-    private ArrayList<Task> list;
-    private Storage storage;
+    private final ArrayList<Task> list;
+    private final Storage storage;
 
     public TaskList(ArrayList<Task> list, Storage storage) {
         this.list = list;
@@ -27,13 +26,12 @@ public class TaskList {
     }
 
 
-
-    public void delete(String str) throws DukeException {
+    public void deleteTask(String str) throws DukeException {
         try {
             int i = Integer.parseInt(str);
 
             if (i > 0 && i <= list.size()) {
-                Task t =list.remove(i-1);
+                Task t = list.remove(i - 1);
                 storage.saveFile(list);
                 dukePrint("Got it. I've removed this task:\n" + t + "\n" + "Now you have " +
                         list.size() + " task" + (list.size() < 2 ? " " : "s ") + "in the list.");
@@ -45,7 +43,7 @@ public class TaskList {
         }
     }
 
-    public void done(String str) throws DukeException {
+    public void markDone(String str) throws DukeException {
         try {
             int i = Integer.parseInt(str);
 
@@ -101,6 +99,6 @@ public class TaskList {
             return;
         }
         dukePrint("Here are the tasks in your list:\n" +
-                IntStream.range(0, list.size() ).mapToObj((i)-> Integer.toString(i + 1) + ". " + list.get(i).toString()).reduce("",(str1, str2)->str1 + str2+"\n"));
+                IntStream.range(0, list.size()).mapToObj((i) -> (i + 1) + ". " + list.get(i).toString()).reduce("", (str1, str2) -> str1 + str2 + "\n"));
     }
 }

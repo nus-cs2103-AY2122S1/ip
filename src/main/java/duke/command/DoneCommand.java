@@ -7,11 +7,13 @@ import duke.Ui;
 
 public class DoneCommand implements Command {
     String desc;
+
     public DoneCommand(String desc) {
         this.desc = desc;
     }
+
     public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
-        task.done(desc);
+        task.markDone(desc);
     }
 
     public boolean isExit() {

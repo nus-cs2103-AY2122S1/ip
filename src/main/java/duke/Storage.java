@@ -5,8 +5,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -19,9 +17,9 @@ import java.util.Scanner;
 public class Storage {
 
     String filepath;
-    private ArrayList<Task> list = new ArrayList<>();
+    private final ArrayList<Task> list = new ArrayList<>();
 
-    public Storage (String filepath) {
+    public Storage(String filepath) {
         this.filepath = filepath;
     }
 
@@ -42,24 +40,25 @@ public class Storage {
         }
         return list;
     }
-        private Task processData(String str) throws DukeException {
-            Scanner stringProcessor  = new Scanner(str);
-            stringProcessor.useDelimiter("\\|");
-            try {
-                String type = stringProcessor.next();
-                switch (type) {
-                    case "T":
-                        return new ToDo(stringProcessor.next(),stringProcessor.next());
-                    case "D":
-                        return new Deadline(stringProcessor.next(), stringProcessor.next(),stringProcessor.next());
-                    case "E":
-                        return new Event(stringProcessor.next(), stringProcessor.next(),stringProcessor.next());
-                }
-                return null;
-            } catch (NoSuchElementException e){
-                throw new DukeException("Save file has invalid format.");
+
+    private Task processData(String str) throws DukeException {
+        Scanner stringProcessor = new Scanner(str);
+        stringProcessor.useDelimiter("\\|");
+        try {
+            String type = stringProcessor.next();
+            switch (type) {
+            case "T":
+                return new ToDo(stringProcessor.next(), stringProcessor.next());
+            case "D":
+                return new Deadline(stringProcessor.next(), stringProcessor.next(), stringProcessor.next());
+            case "E":
+                return new Event(stringProcessor.next(), stringProcessor.next(), stringProcessor.next());
             }
+            return null;
+        } catch (NoSuchElementException e) {
+            throw new DukeException("Save file has invalid format.");
         }
+    }
 
     void saveFile(ArrayList<Task> list) throws DukeException {
         try {
@@ -72,11 +71,10 @@ public class Storage {
                     "", (string1, string2) -> string1 + string2 + "\n"));
             writer.close();
 //            dukePrint("Tasks have been saved successfully.");
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new DukeException("IO Exception File Cannot Be Found");
         }
     }
 
-    }
+}
 

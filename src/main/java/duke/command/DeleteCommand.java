@@ -7,11 +7,13 @@ import duke.Ui;
 
 public class DeleteCommand implements Command {
     String desc;
+
     public DeleteCommand(String desc) {
         this.desc = desc;
     }
+
     public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
-        task.delete(desc);
+        task.deleteTask(desc);
     }
 
     public boolean isExit() {

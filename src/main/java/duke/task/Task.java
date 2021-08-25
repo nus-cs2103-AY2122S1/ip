@@ -3,6 +3,7 @@ package duke.task;
 public class Task {
     Boolean done;
     String description;
+
     public Task(String str) {
         done = false;
         description = str;
@@ -19,11 +20,11 @@ public class Task {
 
     @Override
     public String toString() {
-        return "["+ (done?'X':' ') + "] " + description;
+        return "[" + (done ? 'X' : ' ') + "] " + description;
 
     }
 
     public String saveString() {
-        return (done?"1":"0") + "|" + description;
+        return (done ? "1" : "0") + "|" + description;
     }
 }

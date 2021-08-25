@@ -16,8 +16,9 @@ public class Deadline extends Task {
         super(desc);
         parseDate(dateDesc);
     }
+
     public Deadline(String isDone, String desc, String date) {
-        super(isDone,desc);
+        super(isDone, desc);
         parseDate(date);
     }
 
@@ -28,8 +29,7 @@ public class Deadline extends Task {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu");
                 this.date = LocalDate.parse(m.group(1), formatter);
                 this.dateDesc = dateDesc.replace(m.group(1), date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
-            }
-            catch (DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 this.dateDesc = dateDesc;
                 this.date = null;
             }
