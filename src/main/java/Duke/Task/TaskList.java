@@ -42,7 +42,7 @@ public class TaskList {
      * @param time
      * @return void
      * @author Hang Zelin
-     * @description get all the events that match the time users take in.
+     * @description get all the tasks that match the time users take in.
      */
     public void getSpecificDateEvent(String time) {
         Parser p = new Parser("");
@@ -62,7 +62,29 @@ public class TaskList {
             }
         }
         if (count == 0) {
-            System.out.println("Sorry. There is no event occurred on the time you give me!! :(");
+            System.out.println("Sorry. There is no tasks occurred on the time you give me!! :(");
+        }
+    }
+
+    /**
+     * @param keyword
+     * @return void
+     * @author Hang Zelin
+     * @description find all the tasks that match the key word users take in.
+     */
+    public void FindTask(String keyword) {
+        int count = 0;
+
+        for (int i = 0; i < tasks.size(); i++) {
+            String Message = tasks.get(i).getTaskInfo();
+            if (Message.contains(keyword)) {
+                count++;
+                System.out.println(count + "." + Message);
+            }
+        }
+
+        if (count == 0) {
+            System.out.println("Sorry. There is no tasks matching the keyword you give me!! :(");
         }
     }
 
@@ -151,18 +173,18 @@ public class TaskList {
      * It also contains a method AssignTask Type to find the specific type of task to create.
      */
     public enum OperationType {
-        bye, done, delete, tell, list, todo, deadline, event;
+        bye, done, delete, tell, find, list, todo, deadline, event;
 
         public Task AssignTaskType(OperationType t, String task, LocalDateTime time) {
             switch (t) {
-            case todo:
-                return new ToDos(false, task);
-            case deadline:
-                return new Deadlines(false, task, time);
-            case event:
-                return new Events(false, task, time);
-            default:
-                return null;
+                case todo:
+                    return new ToDos(false, task);
+                case deadline:
+                    return new Deadlines(false, task, time);
+                case event:
+                    return new Events(false, task, time);
+                default:
+                    return null;
             }
         }
     }

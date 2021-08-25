@@ -193,7 +193,7 @@ public class Parser {
     public String getTask() throws DukeException {
         String task = "";
 
-        if (Message.startsWith("deadline") || Message.startsWith("event") || Message.startsWith("todo")) {
+        if (Message.startsWith("deadline") || Message.startsWith("event") || Message.startsWith("todo") || Message.startsWith("find")) {
             //Get Task description and time if it has it.
             if (Message.contains("/")) {
                 task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);

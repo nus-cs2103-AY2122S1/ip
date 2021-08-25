@@ -114,6 +114,16 @@ public class Ui {
         System.out.println("Here are all the tasks taking place on the date you give me:");
     }
 
+    /**
+     * @param
+     * @return void
+     * @auther Hang Zelin
+     * @description Print the Ui info for the FindTask method in Tasklists.
+     */
+    public void FindTask() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
 
     /**
      * @param

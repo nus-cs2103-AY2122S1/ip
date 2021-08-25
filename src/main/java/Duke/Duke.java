@@ -7,7 +7,7 @@
  * Duke also allow users to list all tasks, mark a task to be done if it is finished, and
  * delete the task if the task is finished.
  * <p>
- * You can also search a specific task by its date, keyword(to be done later).
+ * You can also search a specific task by its date, keyword.
  */
 package Duke;
 
@@ -85,6 +85,11 @@ public class Duke {
         case "tell": {
             ui.getSpecificDateEvent();
             tasks.getSpecificDateEvent(time);
+            break;
+        }
+        case "find": {
+            ui.FindTask();
+            tasks.FindTask(task);
             break;
         }
         default: {
