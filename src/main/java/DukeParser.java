@@ -1,151 +1,41 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
+/**
+ * This class handles the parsing of the user input into Duke
+ *
+ * Generally, it parses the command and returns a Command object.
+ *
+ */
 
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+public class DukeParser {
 
-import java.util.ArrayList;
-import java.util.Scanner;
+    public Command parse(String input) {
+        String[] parsedInput = input.split(" ", 2);
+        String command = parsedInput[0];
+        if (command.equals("list")) {
+            return new DisplayTasksCommand();
+        } else if (command.equals("bye")) {
+            return new QuitCommand();
+        } else if (command.equals("help")) {
+            return new QuitCommand(); //TODO
+        } else if (command.equals("done")) {
+            // assume command is in the form "done x"
+            Integer index = Integer.parseInt(parsedInput[1].trim());
 
-public class Duke {
+            // subtract 1 as task list is 0-indexed but on display it is 1-indexed.
+            return new MarkDoneCommand(index - 1);
+        } else if (command.equals("todo")) {
+            String desc = parsedInput[1];
+            return new AddTodoCommand(desc, false);
+        } else if (command.equals("event")) {
 
-    private Ui ui;
-    private TaskList taskList;
-    private Storage store;
-    private boolean isRunning;
-
-    Duke() {
-        this.ui = new Ui();
-        this.taskList = new TaskList();
-        this.store = new Storage();
-        this.isRunning = false;
-    }
-
-    public void run() {
-        this.isRunning = true;
-        Scanner sc = new Scanner(System.in);
-
-        this.ui.greet();
-
-        while (this.isRunning) {
-            String input = sc.nextLine();
-            Command c = this.ui.parseInput(input);
-            this.ui.printSepLine();
-            c.execute(this.ui, this.taskList, this.store);
-            this.ui.printSepLine();
-            this.isRunning = !c.isQuit();
         }
-        sc.close();
+        return new AddTaskCommand("read book", false);
     }
 
-    public static void main(String[] args) {
-        Duke d = new Duke();
-        d.run();
-    }
-
-    /**
-     * Takes in a line from the task file saved in disk and process it
-     * @param taskLine A line from the file that is being read from.
-     *
-     */
     /*
-    private static void process(String taskLine, ArrayList<Task> taskList) throws DukeException {
-        String[] parsedLine = taskLine.split(" \\| ", 3);
-        String command = parsedLine[0];
-        Boolean isDone = parsedLine[1].equals("1");
-        String next = parsedLine[2];
-        if (command.equals("T")) {
-            Todo todo = new Todo(next, isDone);
-            taskList.add(todo);
-        } else if (command.equals("D")) {
-            String[] details = next.split(" \\| ", 2);
-            String desc = details[0];
-            LocalDate dueDate = LocalDate.parse(details[1]);
-            Deadline dl = new Deadline(desc, isDone, dueDate);
-            taskList.add(dl);
-        } else if (command.equals("E")) {
-            String[] details = next.split(" \\| ", 2);
-            String desc = details[0];
-            String time = details[1];
-            Event e = new Event(desc, isDone, time);
-            taskList.add(e);
-        } else {
-            throw new DukeException();
-        }
-    }
-
-    private static void writeLineToFile(String line, File taskFile) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(taskFile));
-        writer.write(line);
-        writer.newLine();
-        writer.close();
-    }
-
-    public static void main(String[] args) {
-        // Initial values
-        String sepLine = "____________________________________________________________";
-        boolean isRunning = true;
-
-        Scanner sc = new Scanner(System.in);
-
-        String start = "Hello! I'm Duke. \n"
-                + "What can I do for you? \n"
-                + sepLine;
-
-        ArrayList<Task> taskList = new ArrayList<>();
-
-        // Gets the task file and reads the lines
-        String localDir = System.getProperty("user.dir");
-        File taskFile = new File(localDir + File.separator + "data/tasks.txt");
-        if (!taskFile.exists()) {
-            taskFile.getParentFile().mkdirs();
-            try {
-                taskFile.createNewFile();
-            } catch (IOException e) {
-                System.out.println("Failed to create new file");
-            }
-        }
-        try (BufferedReader br = new BufferedReader(new FileReader(taskFile))) {
-            String line;
-            while ((line = br.readLine()) != null && !line.equals("")) {
-                Duke.process(line, taskList);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("IO Exception occurred");
-        } catch (DukeException e) {
-            System.out.println("Invalid command found in file");
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Invalid file format");
-        }
-
-        System.out.println(start);
-
-        // Main loop for commands
-        while (isRunning) {
-            // split the input string into two parts:
-            // first part is the command (list, to-do, deadline, etc.)
-            // second part is any extra information based on what command was given
-            String[] next = sc.nextLine().split(" ", 2);
+    String[] next = sc.nextLine().split(" ", 2);
             String command = next[0];
-            if (command.equals("bye")) {
-                System.out.println(sepLine + "\n" + "Bye. Hope to see you again soon!" + "\n" + sepLine);
-                isRunning = false;
-            } else if (command.equals("list")) {
-                System.out.println(sepLine);
-                System.out.println("These are your tasks! \n");
-                for (int i = 0; i < taskList.size(); i++) {
-                    System.out.print(i + 1 + ". " + taskList.get(i) + "\n");
-                }
-                System.out.println(sepLine);
-            } else if (command.equals("done")) {
+            if (command.equals("done")) {
                 System.out.println(sepLine);
                 try {
                     // Mark a task as done
@@ -256,31 +146,5 @@ public class Duke {
                         System.out.println(sepLine + "\n I did not understand that command."
                                 + " Type 'help' for more info \n" + sepLine);
                     }
-                    try {
-                        StringBuilder textString = new StringBuilder(100);
-                        for (Task t : taskList) {
-                            textString.append(t.saveText());
-                        }
-                        Duke.writeLineToFile(textString.toString(), taskFile);
-                    } catch (IOException e) {
-                        throw new IOException();
-                    }
-                } catch (MissingFieldException e) {
-                    System.out.println("Please fill in a timing for your deadline / event.");
-                    System.out.println("Use '/by' for deadlines and '/at' for events.");
-                    System.out.println(sepLine);
-                } catch (EmptyDescException e) {
-                    System.out.println("Please fill in a description for your task.");
-                    System.out.println(sepLine);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("It seems like your command was not formatted properly.");
-                    System.out.println(sepLine);
-                } catch (IOException e) {
-                    System.out.println("Failed to save to file.");
-                }
-            }
-        }
-        sc.close();
-    }
-    */
+     */
 }
