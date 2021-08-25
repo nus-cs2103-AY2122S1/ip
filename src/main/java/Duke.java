@@ -4,10 +4,11 @@
 import java.nio.file.Files;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.time.LocalDate;
 
 
 public class Duke {
@@ -129,7 +130,6 @@ public class Duke {
             throw new DukeException("OOPS!!! Error occurs when reload the data");
         }
     }
-
 
     public static void main(String[] args) throws DukeException{
         //Greet
