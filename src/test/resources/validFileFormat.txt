@@ -1,0 +1,4 @@
+D | 0 | assignment | 01/09/2021
+E | 1 | concert | 03/10/2021
+T | 0 | borrow book
+T | 1 | go school
