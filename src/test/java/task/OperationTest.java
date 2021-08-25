@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class OperationTest {
 
     @Test
-    void getValue() {
+    void getValue_getTodoOperationValue_gotCorrectly() {
         assertEquals("todo", Operation.TODO.getValue());
     }
 
     @Test
-    void values() {
+    void values_getAllOperations_gotCorrectly() {
         Operation[] operations = new Operation[]{
             Operation.TODO,
             Operation.DEADLINE,
@@ -22,13 +22,14 @@ class OperationTest {
             Operation.DONE,
             Operation.DELETE,
             Operation.CLEAR,
+            Operation.FIND,
             Operation.BYE
         };
         assertArrayEquals(operations, Operation.values());
     }
 
     @Test
-    void valueOf() {
+    void valueOf_getTodoOperation_gotCorrectly() {
         assertEquals(Operation.valueOf("TODO"), Operation.TODO);
     }
 }
