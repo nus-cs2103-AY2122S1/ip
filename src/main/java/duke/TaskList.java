@@ -41,6 +41,22 @@ public class TaskList {
         System.out.println("removed Task " + Id);
     }
 
+    /**
+     * Finds Task that contains keyword.
+     *
+     * @param keyword keyword used to find Task.
+     */
+    public void findTasks(String keyword){
+        System.out.println("Matching task(s) are:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            String name = t.getName();
+            if(name.contains(keyword)){
+                System.out.println(i + ": " + t.toString());
+            }
+        }
+    }
+
     public String saveTasklist(){
         String txt = "";
         for (int i = 0; i < tasks.size(); i++) {
