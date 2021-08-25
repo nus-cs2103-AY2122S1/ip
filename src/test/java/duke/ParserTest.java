@@ -44,7 +44,7 @@ public class ParserTest {
                 "done 100",
                 "done -1"
         };
-        int[] expected = { 2, 100, -1 };
+        int[] expected = {2, 100, -1};
 
         for (String command : commands) {
             assertDoesNotThrow(() -> Parser.getIndexFromCommand(command));
@@ -53,7 +53,8 @@ public class ParserTest {
         for (int i = 0; i < commands.length; i++) {
             try {
                 assertEquals(expected[i], Parser.getIndexFromCommand(commands[i]));
-            } catch (InvalidFormatException ignored) {}
+            } catch (InvalidFormatException ignored) {
+            }
         }
     }
 
@@ -76,7 +77,7 @@ public class ParserTest {
         String command = "todo some description";
         String regex = "^todo (.+)";
         String validFormat = "todo {description}";
-        String[] expected = { "todo some description", "some description" };
+        String[] expected = {"todo some description", "some description"};
 
         assertDoesNotThrow(() -> Parser.validateRegexAndMatch(command, regex, validFormat));
         try {
@@ -84,7 +85,8 @@ public class ParserTest {
             for (int i = 0; i < expected.length; i++) {
                 assertEquals(expected[i], matches[i]);
             }
-        } catch (InvalidFormatException ignored) {}
+        } catch (InvalidFormatException ignored) {
+        }
     }
 
     @Test
@@ -92,7 +94,7 @@ public class ParserTest {
         String command = "deadline something /by 2020-08-25";
         String regex = "^deadline (.+) /by (.+)";
         String validFormat = "deadline {description} /by {date}";
-        String[] expected = { "deadline something /by 2020-08-25", "something", "2020-08-25" };
+        String[] expected = {"deadline something /by 2020-08-25", "something", "2020-08-25"};
 
         assertDoesNotThrow(() -> Parser.validateRegexAndMatch(command, regex, validFormat));
         try {
@@ -100,7 +102,8 @@ public class ParserTest {
             for (int i = 0; i < expected.length; i++) {
                 assertEquals(expected[i], matches[i]);
             }
-        } catch (InvalidFormatException ignored) {}
+        } catch (InvalidFormatException ignored) {
+        }
     }
 
     @Test
@@ -108,7 +111,7 @@ public class ParserTest {
         String command = "event something /at sometime";
         String regex = "^event (.+) /at (.+)";
         String validFormat = "event {description} /at {time}";
-        String[] expected = { "event something /at sometime", "something", "sometime" };
+        String[] expected = {"event something /at sometime", "something", "sometime"};
 
         assertDoesNotThrow(() -> Parser.validateRegexAndMatch(command, regex, validFormat));
         try {
@@ -116,6 +119,7 @@ public class ParserTest {
             for (int i = 0; i < expected.length; i++) {
                 assertEquals(expected[i], matches[i]);
             }
-        } catch (InvalidFormatException ignored) {}
+        } catch (InvalidFormatException ignored) {
+        }
     }
 }

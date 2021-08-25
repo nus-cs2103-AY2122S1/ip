@@ -42,7 +42,9 @@ public abstract class Task {
      * Converts the task to the save format.
      * @return Task in the save format as a string.
      */
-    public String toSaveFormat() { return String.format("%s,%s", isDone ? "1" : "0", this.description); }
+    public String toSaveFormat() {
+        return String.format("%s,%s", isDone ? "1" : "0", this.description);
+    }
 
     @Override
     public boolean equals(Object obj) {
