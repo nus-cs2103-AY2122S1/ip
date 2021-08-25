@@ -62,6 +62,9 @@ public class Parser {
             case "delete":
                 list.delete(Integer.parseInt(taskDetails));
                 break;
+            case "find":
+                list.find(taskDetails);
+                break;
             default:
                 throw new PibException("unknown-command");
             }

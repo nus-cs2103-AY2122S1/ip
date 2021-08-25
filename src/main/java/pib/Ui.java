@@ -27,12 +27,26 @@ public class Ui {
 
     public static void printList(TaskList list) throws PibException {
         list.viewList();
-        System.out.println(DIVIDER);
     }
 
     public static void printListSize(TaskList list) {
         list.viewListSize();
-        System.out.println(DIVIDER);
+    }
+
+    public static void printDataLoadSuccess() {
+        System.out.println("Saved data successfully loaded\n" + DIVIDER);
+    }
+
+    public static void printDataLoading() {
+        System.out.println("Saved data loading...");
+    }
+
+    public static void printQueryFound(String query) {
+        System.out.println("These task contains the word: " + query);
+    }
+
+    public static void printQueryNotFound(String query) {
+        System.out.println("No tasks contain the word: "  + query + "\n" + DIVIDER);
     }
 
     public static void printEnd() {
@@ -47,6 +61,9 @@ public class Ui {
             break;
         case "empty-task-description":
             System.out.println("Task description can't be blank\n");
+            break;
+        case "empty-query":
+            System.out.println("Tell me what word you are looking for!\n");
             break;
         case "d-wrong-format":
             System.out.println("Please format the command as: deadline <task> /by <yyyy-mm-dd> <hhmm>\n");

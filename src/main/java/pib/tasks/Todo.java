@@ -12,24 +12,24 @@ public class Todo extends Task {
      *
      * @param description description of the todo task
      */
-    private Todo(String description) {
-        super(description);
+    private Todo(String description, boolean printMessage) {
+        super(description, printMessage);
     }
 
-    private Todo(String description, int isDone) {
-        super(description, isDone);
+    private Todo(String description, int isDone, boolean printMessage) {
+        super(description, isDone, printMessage);
     }
 
-    public static Todo createTodo(String details) throws PibException {
+    public static Todo createTodo(String details, boolean printMessage) throws PibException {
         if (details.trim().isBlank()) {
             throw new PibException("empty-task-description");
         } else {
-            return new Todo(details.trim());
+            return new Todo(details.trim(), printMessage);
         }
     }
 
-    public static Todo createTodo(String details, int isDone) {
-        return new Todo(details.trim(), isDone);
+    public static Todo createTodo(String details, int isDone, boolean printMessage) {
+        return new Todo(details.trim(), isDone, printMessage);
     }
 
     public String toDataString() {
