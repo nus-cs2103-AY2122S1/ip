@@ -1,0 +1,4 @@
+T | 0 | qqq
+T | 0 | www
+D | 0 | eee | eeee
+E | 0 | rrr | rrrr
