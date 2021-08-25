@@ -14,12 +14,14 @@ public class TaskList {
     public TaskList(){
     }
 
-    void initialise(File file,Storage storage){
+    public boolean initialise(File file,Storage storage){
         try {
             storage.listFileContents(file.getPath());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     void makeDone(Storage storage, int taskNo){

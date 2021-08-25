@@ -7,8 +7,9 @@ public class Ui {
 
     };
 
-    void showWelcome(){
+    public String showWelcome(){
         System.out.println("Welcome. I am your virtual assistant Duke. Sparkle up your day (TM).");
+        return "Welcome. I am your virtual assistant Duke. Sparkle up your day (TM).";
     }
 
     void showList(List<String> list){

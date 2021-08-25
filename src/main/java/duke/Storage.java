@@ -15,14 +15,18 @@ public class Storage {
 
     }
 
-    void checkExistence(){
+    public boolean checkExistence(){
         if(!Duke.file.exists()){
             try {
                 new File("data").mkdir();
                 Duke.file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
+                return false;
             }
+            return true;
+        }else{
+            return true;
         }
     }
 
