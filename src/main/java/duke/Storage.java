@@ -25,7 +25,7 @@ public class Storage {
             FileWriter writer = new FileWriter(filepath);
             String toSave = "";
             for (int i = 0; i < tasks.size(); i++) {
-                Task currentTask = tasks.get(i);
+                Task currentTask = tasks.getTask(i);
                 toSave = toSave.concat(currentTask.taskType()
                         + " | "
                         + currentTask.isDoneToInt()
@@ -50,11 +50,11 @@ public class Storage {
 
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
-                String[] lineSplit = s.nextLine().split(" \\| ",4);
+                String[] lineSplit = s.nextLine().split(" \\| ",5);
                 if (lineSplit[0].equals("T")) {
                     loadedTaskList.add(new ToDo(lineSplit[2]));
                 } else if (lineSplit[0].equals("D")) {
-                    loadedTaskList.add(new Deadline(lineSplit[2], lineSplit[3]));
+                    loadedTaskList.add(new Deadline(lineSplit[2], lineSplit[3], lineSplit[4]));
                 } else if (lineSplit[0].equals("E")) {
                     loadedTaskList.add(new Event(lineSplit[2], lineSplit[3]));
                 }

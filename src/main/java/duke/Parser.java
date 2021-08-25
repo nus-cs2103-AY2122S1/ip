@@ -50,10 +50,14 @@ public class Parser {
             }
             try {
                 String[] commandDescSplit = commandDesc.split("/by");
-                this.tasks.addTask(new Deadline(commandDescSplit[0].trim(), commandDescSplit[1].trim()));
+                String dateAndTime = commandDescSplit[1].trim();
+                String[] dateAndTimeSplit = dateAndTime.split(" ");
+                String date = dateAndTimeSplit[0];
+                String time = dateAndTimeSplit[1];
+                this.tasks.addTask(new Deadline(commandDescSplit[0].trim(), date, time));
             } catch (DateTimeParseException e) {
-                throw new DukeException("You've entered a date in an invalid format! " +
-                        "\nIt should be in the form: yyyy-mm-dd");
+                throw new DukeException("You've entered a date or time in an invalid format! " +
+                        "\nIt should be in the form: yyyy-mm-dd hrs:mins");
             }
 
 
