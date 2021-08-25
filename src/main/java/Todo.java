@@ -3,6 +3,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, boolean isCompleted) {
+        super(description, isCompleted);
+    }
+
     public static Todo fromInput(String input) throws Exception {
         String todoDescription = input.trim();
         if (todoDescription.length() == 0) {

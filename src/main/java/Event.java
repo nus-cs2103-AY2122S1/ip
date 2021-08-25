@@ -6,6 +6,11 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public Event(String description, String time, boolean isCompleted) {
+        super(description, isCompleted);
+        this.time = time;
+    }
+
     public static Event fromInput(String input) throws Exception {
         String[] eventInputs = input.trim().split("\\s+/at\\s+", 2);
 
