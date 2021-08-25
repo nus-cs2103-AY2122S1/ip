@@ -100,7 +100,7 @@ public class Duke {
                 System.out.printf("\tUh-oh! %s\n", "The data failed to save to the save file.");
                 System.out.println(e.getMessage());
                 System.out.printf(FORMAT, LINE);
-            }catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 // When invalid command is given, it is unable to be parsed into the enum
                 System.out.printf(FORMAT, LINE);
                 System.out.printf("\tUh-oh! %s\n", "You have entered an invalid command.");
@@ -274,15 +274,15 @@ public class Duke {
         while (scanner.hasNextLine()) {
             String taskLine = scanner.nextLine();
             String[] taskData = taskLine.split("\\|");
-            switch(taskData[0]) {
-            case("T"):
+            switch (taskData[0]) {
+            case ("T"):
                 tasks.add(new Todo(taskData[2], Boolean.parseBoolean(taskData[1])));
                 break;
-            case("D"):
+            case ("D"):
                 tasks.add(new Deadline(taskData[2], Boolean.parseBoolean(taskData[1]),
                         parseDateFromInput(taskData[3]), parseTimeFromInput(taskData[4])));
                 break;
-            case("E"):
+            case ("E"):
                 tasks.add(new Event(taskData[2], Boolean.parseBoolean(taskData[1]),
                         parseDateFromInput(taskData[3]), parseTimeFromInput(taskData[4]),
                         parseTimeFromInput(taskData[5])));
@@ -330,13 +330,13 @@ public class Duke {
         String offset = input.substring(4, input.length() - 1);
         LocalDateTime dateTime = LocalDateTime.now();
         switch (input.charAt(input.length() - 1)) {
-        case('h'):
+        case ('h'):
             dateTime = dateTime.plusHours(Integer.parseInt(offset));
             break;
-        case('d'):
+        case ('d'):
             dateTime = dateTime.plusDays(Integer.parseInt(offset));
             break;
-        case('m'):
+        case ('m'):
             dateTime = dateTime.plusMonths(Integer.parseInt(offset));
             break;
         default:
