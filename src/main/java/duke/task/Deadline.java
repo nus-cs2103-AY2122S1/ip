@@ -19,7 +19,7 @@ public class Deadline extends TimedTask {
     }
 
     @Override
-    protected String dateTimeString() {
+    protected String getDateTimeString() {
         return " (by: " + this.getDateTime() + ")";
     }
 

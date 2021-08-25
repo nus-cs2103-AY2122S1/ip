@@ -5,19 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private final List<Task> store;
+    private final List<Task> tasks;
 
     TaskList() {
-        store = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     public int size() {
-        return store.size();
+        return tasks.size();
     }
 
     public Task get(int taskId) throws DukeException {
         try {
-            return this.store.get(taskId - 1);
+            return this.tasks.get(taskId - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Wrong index input.");
         }
@@ -25,12 +25,12 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
-       this.store.add(task);
+        this.tasks.add(task);
     }
 
     public Task deleteTask(int taskId) throws DukeException {
         try {
-            return this.store.remove(taskId - 1);
+            return this.tasks.remove(taskId - 1);
         } catch (java.lang.IndexOutOfBoundsException e) {
             throw new DukeException("That task does not exist.");
         }
@@ -38,9 +38,9 @@ public class TaskList {
 
     public Task markAsCompleted(int taskId) throws DukeException {
         try {
-            Task currentTask = this.store.get(taskId - 1);
+            Task currentTask = this.tasks.get(taskId - 1);
             Task completedTask = currentTask.complete();
-            this.store.set(taskId - 1, completedTask);
+            this.tasks.set(taskId - 1, completedTask);
             return completedTask;
         } catch (java.lang.IndexOutOfBoundsException e) {
             throw new DukeException("That task does not exist.");

@@ -56,7 +56,7 @@ public class EventCommand extends Command implements TaskListAddable {
     public String addTaskToTaskList(TaskList taskList, Task task) {
         taskList.addTask(task);
         return "Got it. I've added this task:\n  "
-                + task.details()
+                + task.getDetails()
                 + "\n"
                 + printListNumber(taskList);
     }

@@ -39,7 +39,7 @@ public class Formatter {
      */
     public String formatTaskToString(Task input) {
         StringBuilder result = new StringBuilder();
-        TaskType taskType = input.taskType();
+        TaskType taskType = input.getTaskType();
         result.append(taskType.toString())
                 .append("|")
                 .append(input.getCompleted())
