@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.*;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -93,6 +94,11 @@ public class Duke {
                     } catch (NumberFormatException e) {
                         throw new DukeException("A number must be given to specified the task.");
                     }
+                }
+                case FIND: {
+                    ArrayList<Task> matchTasks = taskList.findTask(rest);
+                    Ui.showFindTasks(matchTasks);
+                    break;
                 }
                 case UNKNOWN:
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");

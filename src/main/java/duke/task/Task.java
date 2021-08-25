@@ -10,9 +10,9 @@ import java.util.Objects;
 
 public class Task {
     /** Description of the task. */
-    protected String description;
+    private String description;
     /** State of the task. */
-    protected boolean isDone;
+    private boolean isDone;
 
     /**
      * Constructs a task instance using the given description.
@@ -33,6 +33,14 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

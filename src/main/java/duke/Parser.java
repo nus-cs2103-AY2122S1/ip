@@ -17,7 +17,7 @@ public class Parser {
      * The Action enum enumerates all possible actions
      */
     public enum Action {
-        BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, UNKNOWN
+        BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, FIND, UNKNOWN
     }
 
     /**
@@ -52,6 +52,8 @@ public class Parser {
             return Action.EVENT;
         case "delete":
             return Action.DELETE;
+        case "find":
+            return Action.FIND;
         default:
             return Action.UNKNOWN;
         }
