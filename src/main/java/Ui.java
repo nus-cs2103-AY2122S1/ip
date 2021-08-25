@@ -16,9 +16,7 @@ public class Ui {
      * Say Bye and close program
      */
     public void sayBye() {
-        showLine();
         System.out.println("Bye. Hope to see you again soon!\n");
-        showLine();
         System.exit(1);
     }
 }
