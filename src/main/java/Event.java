@@ -29,12 +29,12 @@ public class Event extends Task{
     public Event(String description, String at, boolean status) {
         super(description);
         this.at = at;
-        this.isDone = status;
+        super.isDone = status;
     }
 
     /**
      * Returns the file's details in the format "E,<isDone>,<desc>,<time>"
-     * to be stored in the hard disk
+     * to be stored in the hard disk.
      *
      * @return formatted string containing task details
      */

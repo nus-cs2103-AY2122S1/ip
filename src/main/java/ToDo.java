@@ -22,12 +22,12 @@ public class ToDo extends Task{
      */
     public ToDo(String description, boolean status) {
         super(description);
-        this.isDone = status;
+        super.isDone = status;
     }
 
     /**
      * Returns the file's details in the format "T,<isDone>,<desc>"
-     * to be stored in the hard disk
+     * to be stored in the hard disk.
      *
      * @return formatted string containing task details
      */
