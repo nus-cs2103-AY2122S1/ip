@@ -1,7 +1,7 @@
 package Duke;
 
 public class DukeException extends RuntimeException {
-    public enum TYPE {INCOMPLETE, OUT_OF_BOUND, INVALID}
+    public enum TYPE {INCOMPLETE, OUT_OF_BOUND, INVALID, WRONG_DATE_FORMAT}
     protected final TYPE type;
     public DukeException(String message, TYPE type) {
         super(message);
@@ -20,6 +20,8 @@ public class DukeException extends RuntimeException {
             case INVALID:
                 return "☹ OOPS! I'm sorry, but I don't know what that means :-(\n" +
                         "Please enter 'help' for further instructions!";
+            case WRONG_DATE_FORMAT:
+                return "Wrong date format";
             default:
                 return super.getMessage();
         }
