@@ -61,6 +61,10 @@ public class Task {
         return storedTask;
     }
 
+    public Boolean containsString(String string) {
+        return this.taskName.contains(string);
+    }
+
     public void setIsDone(Boolean isDone) {
         this.isDone = isDone;
     }
