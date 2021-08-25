@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates some of the output messages that will be shown to the user.
+ */
 public class UI {
 
     public static String addedText = "Got it. I've added this task:\n";
@@ -15,7 +18,7 @@ public class UI {
     }
 
     /**
-     * Handles the exiting or halting of DukePakage.Duke when the user has given the appropriate input.
+     * Handles the exiting or halting of Duke when the user has given the appropriate input.
      */
     public void exit() {
         String exitText = "Bye. Hope to see you again soon!";
