@@ -8,6 +8,7 @@
 public class Deadline extends Task {
 
     protected String by;
+    private final String TASK_MARKER = "D";
 
     /**
      * Class constructor for Deadline class.
@@ -28,6 +29,15 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return String.format("| %s | %s | %s", TASK_MARKER, super.toString(), by);
+    }
+
+    /**
+     * Returns task marker. 
+     *
+     * @return a one character string that is a marker for this task.
+     */
+    public String getTaskMarker() {
+        return TASK_MARKER;
     }
 }

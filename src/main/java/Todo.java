@@ -6,6 +6,8 @@
  */
 
 public class Todo extends Task {
+    
+    private final String TASK_MARKER = "T";
 
     /**
      * Class constructor for Todo class.
@@ -24,6 +26,15 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return String.format("| %s | %s", TASK_MARKER, super.toString());
+    }
+
+    /**
+     * Returns task marker. 
+     *
+     * @return a one character string that is a marker for this task.
+     */
+    public String getTaskMarker() {
+        return TASK_MARKER;
     }
 }

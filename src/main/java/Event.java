@@ -8,7 +8,8 @@
 public class Event extends Task {
 
     protected String timing;
-
+    private final String TASK_MARKER = "E";
+    
     /**
      * Class constructor for Event class.
      * 
@@ -28,6 +29,15 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + timing + ")";
+        return String.format("| %s | %s | %s", TASK_MARKER, super.toString(), timing);
+    }
+
+    /**
+     * Returns task marker. 
+     *
+     * @return a one character string that is a marker for this task.
+     */
+    public String getTaskMarker() {
+        return TASK_MARKER;
     }
 }

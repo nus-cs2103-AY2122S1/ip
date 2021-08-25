@@ -44,7 +44,16 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        return String.format("| %s | %s", getStatusIcon() == " " ? 1 : 0, description);
+    }
+
+    /**
+     * Returns task marker. 
+     *
+     * @return a one character string that is a marker for this task.
+     */
+    public String getTaskMarker() {
+        return "";
     }
 
 }
