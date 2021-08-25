@@ -10,12 +10,9 @@ public class Ui {
         this.in = in;
     }
 
-    public String[] readCommand() {
+    public String readCommand() {
         System.out.print("> ");
-        String commandString = in.next();
-        String arguments = in.nextLine().trim();
-
-        return new String[] { commandString, arguments };
+        return in.nextLine().trim();
     }
 
     public void printGreeting() {
