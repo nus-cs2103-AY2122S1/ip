@@ -18,4 +18,5 @@ public class Todo extends Task {
     public String getTask() {
         return "[T]" + "[" + getStatusIcon() + "] " + description;
     }
+
 }

@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Deadline class for tasks that need to be done before a specific date/time
  *
@@ -20,9 +24,12 @@ public class Deadline extends Task {
      */
     public String getTask() {
         String[] splitted = description.split("/by ", 2);
-        String text = splitted[0];
-        deadline = splitted[1];
-        return "[D]" + "[" + super.getStatusIcon() + "] " + text + "(by: " + deadline + ")";
+        String text = splitted[0].trim();
+        deadline = splitted[1].trim();
+        LocalDateTime dateTime = LocalDateTime.parse(deadline);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy HH:mm a");
+
+        return "[D]" + "[" + super.getStatusIcon() + "] " + text + "(by: " + dateTime.format(formatter) + ")";
     }
 
 }

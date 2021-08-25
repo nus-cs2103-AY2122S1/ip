@@ -9,9 +9,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     private static ArrayList<Task> request = new ArrayList<Task>();
@@ -25,7 +30,7 @@ public class Duke {
         saveList();
     }
 
-    private static void welcome() {
+    public static void welcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -38,7 +43,7 @@ public class Duke {
         System.out.println(DIVIDER);
     }
 
-    private static void loadTask() {
+    public static void loadTask() {
         try {
             File f = new File(SAVE_FILE_LOCATION);
             Scanner s = new Scanner(f);
@@ -69,7 +74,7 @@ public class Duke {
         }
     }
 
-    private static void saveList() {
+    public static void saveList() {
         try {
             FileWriter fw = new FileWriter(SAVE_FILE_LOCATION);
 
@@ -84,7 +89,7 @@ public class Duke {
         }
     }
 
-    private static void startDuke() {
+    public static void startDuke() {
         boolean exit = false;
 
         while (!exit) {
@@ -126,7 +131,7 @@ public class Duke {
         }
     }
 
-    private static String list() {
+    public static String list() {
         int count = 1;
         String str = "Here are the tasks in your list:";
         for (Task t : request) {
@@ -136,12 +141,12 @@ public class Duke {
         return str;
     }
 
-    private static String done(String str) {
+    public static String done(String str) {
         int index = Integer.parseInt(str.substring(5)) - 1;
         return request.get(index).markDone();
     }
 
-    private static String delete(String str) {
+    public static String delete(String str) {
         int index = Integer.parseInt(str.substring(7)) - 1;
         String result = "Noted. I've removed this task: \n" + request.get(index).delete() +
                 "\nNow you have " + (request.size() - 1) + " tasks in the list.";
@@ -149,32 +154,52 @@ public class Duke {
         return result;
     }
 
-    private static String addTask(String str) {
-        String[] words = str.split(" ");
-        if (words.length == 1) {
-            return "☹ OOPS!!! The description of a todo cannot be empty.";
-        } else {
-            words = str.split(" ", 2);
-            String type = words[0];
-            String text = words[1];
-            Task task;
+    public static String addTask(String str) {
+        String type = "";
+        try {
+            String[] words = str.split(" ");
+            if (words.length == 1) {
+                return "☹ OOPS!!! The description of a todo cannot be empty.";
+            } else {
+                words = str.split(" ", 2);
+                Task task;
+                type = words[0];
+                String text = words[1];
 
+                switch (type) {
+                    case "todo":
+                        task = new Todo(text, false);
+                        break;
+                    case "deadline":
+                        task = new Deadline(text, false);
+                        break;
+                    case "event":
+                        task = new Event(text, false);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected type: " + type);
+                }
+                String description = task.getTask();
+                request.add(task);
+                return "Got it. I've added this task: \n" + description + "\nNow you have " +
+                        request.size() + " tasks in the list.";
+            }
+        } catch (DateTimeParseException e) {
+            String message = "";
             switch (type) {
                 case "todo":
-                    task = new Todo(text, false);
+                    message = "☹ OOPS!!! Please use the format: todo <description>";
                     break;
                 case "deadline":
-                    task = new Deadline(text, false);
+                    message = "☹ OOPS!!! Please use the format: deadline <description> /by yyyy-mm-ddTHH:mm";
                     break;
                 case "event":
-                    task = new Event(text, false);
+                    message = "☹ OOPS!!! Please use the format: event <description> /from yyyy-mm-ddTHH:mm /to yyyy-mm-ddTHH:mm";
                     break;
                 default:
                     throw new IllegalStateException("Unexpected type: " + type);
             }
-            request.add(task);
-            return "Got it. I've added this task: \n" + task.getTask() + "\nNow you have " +
-                    request.size() + " tasks in the list.";
+            return message;
         }
     }
 }
