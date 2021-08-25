@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Lawbringer {
     public static void main(String[] args) throws IOException {
         List<Task> tasks = Lawbringer.createTaskList();
@@ -64,7 +67,9 @@ public class Lawbringer {
                 } else if (userInput.startsWith("deadline")) {
                     int index = userInput.indexOf('/');
                     String by = userInput.substring(index+4);
-                    Deadline deadline = new Deadline(userInput.substring(9,index), by);
+                    LocalDate localDate = LocalDate.parse(by);
+                    Deadline deadline = new Deadline(userInput.substring(9,index),
+                            localDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
                     tasks.add(deadline);
                     String message = "Got it. I've added this task:\n" + "  " +
                             deadline + "\nNow you have " + tasks.size() +
