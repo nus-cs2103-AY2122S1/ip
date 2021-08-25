@@ -1,3 +1,5 @@
+package ailurus.task;
+
 import java.io.FileWriter;
 
 abstract public class Task {

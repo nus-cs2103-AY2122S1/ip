@@ -1,13 +1,17 @@
+package ailurus.task;
+
+import ailurus.AilurusException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate at;
 
     /**
-     * Constructor for Event tasks
+     * Constructor for Ailurus.Event tasks
      *
      * @param description description of task /at specific date or time
      */

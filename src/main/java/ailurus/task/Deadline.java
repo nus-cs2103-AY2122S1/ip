@@ -1,13 +1,17 @@
+package ailurus.task;
+
+import ailurus.AilurusException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate by;
 
     /**
-     * Constructor for Deadline tasks
+     * Constructor for Ailurus.Deadline tasks
      *
      * @param description description of task /by specific date or time
      */

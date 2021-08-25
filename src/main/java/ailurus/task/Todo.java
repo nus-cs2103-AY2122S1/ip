@@ -1,9 +1,13 @@
+package ailurus.task;
+
+import ailurus.AilurusException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Todo extends Task{
     /**
-     * Constructor for Todo
+     * Constructor for Ailurus.Todo
      *
      * @param description description of task
      */

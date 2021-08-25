@@ -1,3 +1,7 @@
+package ailurus.task;
+
+import ailurus.AilurusException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -46,7 +50,7 @@ public class TaskList {
     /**
      * Adding task to list of tasks
      *
-     * @param task Task that has been added
+     * @param task Ailurus.Task that has been added
      */
     public Task addTask(Task task) {
         this.list.add(task);

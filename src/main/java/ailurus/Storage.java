@@ -1,3 +1,8 @@
+package ailurus;
+
+import ailurus.task.Task;
+import ailurus.task.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

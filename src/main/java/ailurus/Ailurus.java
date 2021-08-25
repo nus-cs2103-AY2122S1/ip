@@ -1,5 +1,12 @@
+package ailurus;
+
+import ailurus.task.Deadline;
+import ailurus.task.Event;
+import ailurus.task.TaskList;
+import ailurus.task.Todo;
+
 /**
- * The main task chatbot class for Ailurus Chatbot
+ * The main task chatbot class for Ailurus.Ailurus Chatbot
  *
  * @author Leeroy Liu
  */

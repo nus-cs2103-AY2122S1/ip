@@ -1,15 +1,17 @@
+package ailurus;
+
 public class AilurusException extends IllegalArgumentException {
     private Error error;
 
     /**
-     * List of errors for Ailurus
+     * List of errors for Ailurus.Ailurus
      */
     public enum Error {
         EMPTYLIST, EMPTYTODO, EMPTYEVENT, EMPTYDEADLINE, EMPTYBY, EMPTYAT, BY, AT, NUMBER, NAN, LOAD
     }
 
     /**
-     * Constructor for AilurusException
+     * Constructor for Ailurus.AilurusException
      *
      * @param e error to be thrown
      */
