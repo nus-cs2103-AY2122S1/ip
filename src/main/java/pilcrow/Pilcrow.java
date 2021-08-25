@@ -12,7 +12,7 @@ public class Pilcrow {
 
     private final static String PILCROW_FILE_PATH = "data/pilcrow.txt";
 
-    private Pilcrow() {
+    public Pilcrow() {
         this.ui = new Ui();
         this.storage = new Storage(Pilcrow.PILCROW_FILE_PATH);
         this.taskList = new TaskList(this.storage.load());

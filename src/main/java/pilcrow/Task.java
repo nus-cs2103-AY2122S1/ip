@@ -42,17 +42,6 @@ public class Task {
 
     public String convertToStoredTask() {
         String storedTask = "";
-        if (this instanceof ToDo) {
-            storedTask = "todo " + (this.isDone ? 'T' : 'F') + this.taskName;
-        } else if (this instanceof Deadline) {
-            Deadline deadline = (Deadline) this;
-            storedTask = "deadline " + (this.isDone ? 'T' : 'F') + this.taskName + "/" + deadline.getDeadline();
-        } else if (this instanceof Event) {
-            Event event = (Event) this;
-            storedTask = "event " + (this.isDone ? 'T' : 'F') + this.taskName + "/" + event.getDuration();
-        } else {
-            storedTask = "";
-        }
         return storedTask;
     }
 
@@ -78,6 +67,12 @@ public class Task {
     private static class ToDo extends Task {
         private ToDo(String taskName, Boolean isDone) {
             super(taskName, isDone);
+        }
+
+        @Override
+        public String convertToStoredTask() {
+            String storedTask = "todo " + (this.isDone ? 'T' : 'F') + this.taskName;
+            return storedTask;
         }
 
         @Override
@@ -118,6 +113,12 @@ public class Task {
             }
         }
 
+        @Override
+        public String convertToStoredTask() {
+            String storedTask = "deadline " + (this.isDone ? 'T' : 'F') + this.taskName + "/" + this.getDeadline();
+            return storedTask;
+        }
+
         public LocalDate getDeadline() {
             return this.deadline;
         }
@@ -155,6 +156,12 @@ public class Task {
 
             this.taskName = eventName;
             this.duration = duration;
+        }
+
+        @Override
+        public String convertToStoredTask() {
+            String storedTask = "event " + (this.isDone ? 'T' : 'F') + this.taskName + "/" + this.getDuration();
+            return storedTask;
         }
 
         public String getDuration() {
