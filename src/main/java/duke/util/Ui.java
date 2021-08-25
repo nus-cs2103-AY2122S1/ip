@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -47,6 +48,14 @@ public class Ui {
     public void showNewTask(Task task) {
         String words = "added:";
         print(words, task.toString());
+    }
+
+    public void showFind(ArrayList<Task> results) {
+        String words = "Here are the matching tasks in your list:";
+        for(int i = 1; i <= results.size(); i++) {
+            words = words + "\n    " + i + ". " + results.get(i-1);
+        }
+        print(words);
     }
 
     public String readCommand() {

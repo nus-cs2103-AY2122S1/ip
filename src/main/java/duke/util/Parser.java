@@ -5,6 +5,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.util.ArrayList;
+
 public class Parser {
     private TaskList taskList;
     private Storage storage;
@@ -83,6 +85,13 @@ public class Parser {
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The target of deleting duke.task cannot be empty.");
             }
+        } else if (lowerCase.startsWith("find")) {
+            try{
+                String keyword = lowerCase.substring(5).trim();
+                findKeyword(keyword);
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("OOPS!!! Keyword cannot be empty.");
+            }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -102,5 +111,15 @@ public class Parser {
 
     public boolean isExit(String command) {
         return command.toLowerCase().equals("bye");
+    }
+
+    public void findKeyword(String keyword) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (int i = 0; i < taskList.length(); i++) {
+            if (taskList.get(i).getDescription().toLowerCase().contains(keyword)) {
+                results.add(taskList.get(i));
+            }
+        }
+        ui.showFind(results);
     }
 }
