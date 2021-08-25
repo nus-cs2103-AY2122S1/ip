@@ -21,7 +21,8 @@ public class DukeException extends RuntimeException {
             return "☹ OOPS! I'm sorry, but I don't know what that means :-(\n" +
                     "Please enter 'help' for further instructions!";
         case INVALID_FORMAT:
-            return "OOPS! Wrong date format";
+            return "OOPS! Please try to enter the date in the following format:\n" +
+                    "YYYY-MM-DD (optionally, HH:MM)";
         default:
             return super.getMessage();
         }
