@@ -22,7 +22,8 @@ public class Event extends Task {
         if (time == null) {
             return "[E]" + super.toString() + " (at: " + when + ")";
         } else {
-            return "[E]" + super.toString() + " (at: "+ time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+            return "[E]" + super.toString() + " (at: " +
+                    time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }
     }
 }

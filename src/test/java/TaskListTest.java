@@ -2,6 +2,7 @@ import duke.DukeException;
 import duke.Task;
 import duke.TaskList;
 import org.junit.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
@@ -12,8 +13,9 @@ public class TaskListTest {
         try {
             Task task = new Task("test");
             list.add(task);
-            assertEquals(list.size(),1);
-        } catch (DukeException ignored) {}
+            assertEquals(list.size(), 1);
+        } catch (DukeException ignored) {
+        }
     }
 
     @Test
@@ -21,8 +23,9 @@ public class TaskListTest {
         try {
             Task task = new Task("test");
             list.add(task);
-            assertEquals(list.get(0),task);
-        } catch (DukeException ignored) {}
+            assertEquals(list.get(0), task);
+        } catch (DukeException ignored) {
+        }
     }
 
     @Test
@@ -30,9 +33,10 @@ public class TaskListTest {
         try {
             Task task = new Task("test");
             list.add(task);
-            assertEquals(list.size(),1);
+            assertEquals(list.size(), 1);
             list.delete(0);
-            assertEquals(list.size(),0);
-        } catch (DukeException ignored) {}
+            assertEquals(list.size(), 0);
+        } catch (DukeException ignored) {
+        }
     }
 }

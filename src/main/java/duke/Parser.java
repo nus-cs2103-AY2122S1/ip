@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    private static final DateValidator ISOLocalDateValidator = new DateValidator(DateTimeFormatter.ISO_LOCAL_DATE);
+    private static final DateValidator ISOLocalDateValidator =
+            new DateValidator(DateTimeFormatter.ISO_LOCAL_DATE);
     private static final DateValidator LocalDateValidator =
             new DateValidator(DateTimeFormatter.ofPattern("MMM dd yyyy"));
 
@@ -61,12 +62,12 @@ public class Parser {
                 break;
 
             case "[D]":
-                String dlLabel = string.substring(7, string.length()-1);
+                String dlLabel = string.substring(7, string.length() - 1);
                 task = Parser.check(dlLabel, " (by: ");
                 break;
 
             case "[E]":
-                String eLabel = string.substring(7, string.length()-1);
+                String eLabel = string.substring(7, string.length() - 1);
                 task = Parser.check(eLabel, " (at: ");
                 break;
 

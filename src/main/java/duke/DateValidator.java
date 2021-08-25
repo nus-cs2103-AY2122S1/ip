@@ -14,7 +14,7 @@ public class DateValidator {
     public boolean isValid(String string) {
         try {
             LocalDate.parse(string, format);
-        } catch (DateTimeParseException e ) {
+        } catch (DateTimeParseException e) {
             return false;
         }
 
