@@ -8,6 +8,10 @@ import duke.tasks.Todo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Container class for the lists of tasks
+ */
+
 public class TaskList {
     private ArrayList<Task> listOfTasks;
 
@@ -22,25 +26,36 @@ public class TaskList {
         listOfTasks = new ArrayList<>();
     }
 
+    /** Helper function to get the number of tasks in the list */
     public int getNumTasks() {
         return listOfTasks.size();
     }
 
+    /** Helper function to view the tasks in the list */
     public ArrayList<Task> getListOfTasks() {
         return this.listOfTasks;
     }
 
+    /** Helper function to get the add a new task to the list */
     public void addTask(Task t) {
         listOfTasks.add(t);
     }
 
+    /**
+     * Function to delete the specified task number from the list.
+     * Logic and extent of list modification is subjected to the following conditions:
+     * Condition 1: Only one task in the list
+     * Condition 2: Specified task is the first in the list
+     * Condition 3: Specified task is the last in the list
+     * Condition 4: Specified task is not the first/last task
+     */
     public String deleteTask(int deleteIndex) {
         String deletedTask = listOfTasks.get(deleteIndex - 1).toString();
-        if (this.listOfTasks.size() == 1) { // if there is only one task in the list
+        if (this.listOfTasks.size() == 1) {
             this.listOfTasks.clear();
-        } else if (deleteIndex == 1){ // deleting leftmost element
+        } else if (deleteIndex == 1){
             this.listOfTasks = new ArrayList<>(listOfTasks.subList(1, listOfTasks.size()));
-        } else if (deleteIndex == listOfTasks.size()) { // deleting rightmost element
+        } else if (deleteIndex == listOfTasks.size()) {
             this.listOfTasks = new ArrayList<>(listOfTasks.subList(0, listOfTasks.size() - 1));
         } else {
             ArrayList<Task> newList = new ArrayList<>(this.listOfTasks.subList(0, deleteIndex - 1));
@@ -52,6 +67,10 @@ public class TaskList {
         return deletedTask;
     }
 
+    /**
+     * Function to 'complete' the specified task in the list based on the task type.
+     * Returns the toString() value of the task for Ui class to output.
+     */
     public String completeTask(int taskIndex) {
         String taskInfo;
         if (this.listOfTasks.get(taskIndex - 1) instanceof Todo) {
@@ -70,6 +89,7 @@ public class TaskList {
         return taskInfo;
     }
 
+    /** Helper function to check if tasklist is empty */
     public boolean isEmptyTaskList() {
         return listOfTasks.isEmpty();
     }
