@@ -3,8 +3,13 @@ public class CompleteTask extends Command {
     private int taskNum;
 
     // taskNum is number in task list, one indexed
-    public CompleteTask(int taskNum) {
-        this.taskNum = taskNum - 1;
+    public CompleteTask(String taskNum) throws KermitException {
+        try {
+            this.taskNum = Integer.parseInt(taskNum) - 1;
+        } catch (NumberFormatException e) {
+            throw new KermitException("That is an invalid task number!");
+        }
+
     }
 
     @Override

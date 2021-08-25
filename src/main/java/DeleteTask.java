@@ -3,8 +3,13 @@ public class DeleteTask extends Command {
     int taskNum;
 
     // taskNum is number in task list, one indexed
-    public DeleteTask(int taskNum) {
-        this.taskNum = taskNum - 1;
+    public DeleteTask(String taskNum) throws KermitException {
+        try {
+            this.taskNum = Integer.parseInt(taskNum) - 1;
+        } catch (NumberFormatException e) {
+            throw new KermitException("That is an invalid task number!");
+        }
+
     }
 
     @Override

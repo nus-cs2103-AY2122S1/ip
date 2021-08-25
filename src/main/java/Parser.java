@@ -8,22 +8,6 @@ public class Parser {
     // ArrayList of all valid commands and tasks
     private static final String[] strCommands = {"bye", "list", "done", "deadline", "todo", "event", "delete"};
     private static final ArrayList<String> commands = new ArrayList<>(Arrays.asList(strCommands));
-    private static final String[] strTasks = {"deadline", "todo", "event"};
-    private static final ArrayList<String> validTasks = new ArrayList<>(Arrays.asList(strTasks));
-
-    // parses dates in form dd-mm-yyyy to localdate
-    private static LocalDate parseDate(String dateString) throws KermitException{
-        String[] components = dateString.split("-");
-        try {
-            String day = components[0];
-            String month = components[1];
-            String year = components[2];
-            LocalDate parsedDate = LocalDate.parse(String.join("-", year, month, day));
-            return parsedDate;
-        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
-            throw new KermitException("That is an invalid date!");
-        }
-    }
 
     public static Command parse(String fullCommand) throws KermitException {
         String command = "";
@@ -66,9 +50,6 @@ public class Parser {
             argumentBuilder.append(word);
         }
         argument = argumentBuilder.toString();
-        if (argument.equals("") && validTasks.contains(command)) {
-            throw new KermitException("The argument of the " + command + " command cannot be empty");
-        }
 
         // Get the flags provided for task and error check
         for (int i = 1; i < flagArr.length; i++) {
@@ -78,17 +59,7 @@ public class Parser {
             }
             flagBuilder.append(word);
         }
-        dateString = flagBuilder.toString();
-        // flag arguments for these tasks should not be empty
-        if (dateString.equals("")) {
-            switch (command) {
-                case "event":
-                    throw new KermitException("Events should be formatted as:\nevent <description> /at <time of event>");
-                case "deadline":
-                    throw new KermitException("Deadlines should be formatted as:\ndeadline <description> /by <deadline>");
-
-            }
-        }
+        flag = flagBuilder.toString();
 
         switch (command) {
             case "bye":
@@ -96,17 +67,15 @@ public class Parser {
             case "list":
                 return new ListTasks();
             case "done":
-                return new CompleteTask(Integer.parseInt(argument));
+                return new CompleteTask(argument);
             case "delete":
-                return new DeleteTask(Integer.parseInt(argument));
+                return new DeleteTask(argument);
             case "todo":
-                return new AddToDo(argument);
+                return new AddTask("todo", argument, flag);
             case "event":
-                date = parseDate(dateString);
-                return new AddDateDependentTask("event", argument, date);
+                return new AddTask("event", argument, flag);
             case "deadline":
-                date = parseDate(dateString);
-                return new AddDateDependentTask("deadline", argument, date);
+                return new AddTask("deadline", argument, flag);
             default:
                 throw new KermitException(invalidCommandText);
         }
