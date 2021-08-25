@@ -7,12 +7,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskFile {
+public class Storage {
     private static final Path DEFAULT_DIR = Paths.get("src", "main", "data");
 
     private File tasks;
 
-    public TaskFile(String fileName) {
+    public Storage(String fileName) {
         try {
             if (!Files.exists(DEFAULT_DIR)) {
                 Files.createDirectories(DEFAULT_DIR);
@@ -24,34 +24,32 @@ public class TaskFile {
                 this.tasks = taskPath.toFile();
             }
         } catch (IOException e) {
-            Message errorMessage = new Message("☹ OOPS!!! Unable to find or create a file!");
-            errorMessage.printMessage();
+            Ui.reportError("☹ OOPS!!! Unable to find or create a file!");
         }
     }
 
     public static Task lineToTask(String line) {
         String[] data = line.split(" \\| ");
-        return Task.of(data);
+        return Parser.arrayCommandToTask(data);
     }
 
-    public ArrayList<Task> parseToTasks() throws DukeException {
+    public TaskList parseToTaskList() throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
         try {
             List<String> data = Files.readAllLines(tasks.toPath());
             data.forEach(x -> result.add(lineToTask(x)));
         } catch (IOException e) {
-            Message errorMessage = new Message("☹ OOPS!!! Something wrong happened when reading the file.");
-            errorMessage.printMessage();
+            Ui.reportError("☹ OOPS!!! Something wrong happened when reading the file.");
         } catch (DukeException e) {
-            Message errorMessage = new Message(e.getMessage());
-            errorMessage.printMessage();
+            Ui.reportError(e);
         }
-        return result;
+        return new TaskList(result);
     }
 
-    public void appendToFile(String line) {
+    public void addTask(Task task) {
         try {
             FileWriter fileWriter = new FileWriter(this.tasks, true);
+            String line = task.taskToLine();
             if (this.tasks.length() == 0) {
                 fileWriter.write(line);
             } else {
@@ -59,26 +57,24 @@ public class TaskFile {
             }
             fileWriter.close();
         } catch (IOException e) {
-            Message errorMessage = new Message("☹ OOPS!!! Something wrong happened when modifying the file.");
-            errorMessage.printMessage();
+            Ui.reportError("☹ OOPS!!! Something wrong happened when modifying the file.");
         }
     }
 
-    public void rewriteFile(List<Task> tasksList) {
+    public void refreshTask(TaskList taskList) {
         try {
-            int numOfTask = tasksList.size();
+            int numOfTask = taskList.size();
             if (numOfTask == 0) {
                 return;
             }
             FileWriter fileWriter = new FileWriter(this.tasks);
             for (int i = 0; i < numOfTask - 1; i++) {
-                fileWriter.write(tasksList.get(i).taskToLine() + "\n");
+                fileWriter.write(taskList.getTask(i).taskToLine() + "\n");
             }
-            fileWriter.write(tasksList.get(numOfTask - 1).taskToLine());
+            fileWriter.write(taskList.getTask(numOfTask - 1).taskToLine());
             fileWriter.close();
         } catch (IOException e) {
-            Message errorMessage = new Message("☹ OOPS!!! Something wrong happened when modifying the file.");
-            errorMessage.printMessage();
+            Ui.reportError("☹ OOPS!!! Something wrong happened when modifying the file.");
         }
     }
 }
