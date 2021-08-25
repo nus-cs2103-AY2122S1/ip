@@ -91,39 +91,43 @@ public class Duke {
 
 
     private void run() {
-        try {
-            String rawInput = this.input.nextLine();
-            String[] userInput = rawInput.split(" ", 2);
-            CommandType command = this.getCommand(userInput[0]);
+        this.greet();
+        this.loadData();
 
-            switch (command) {
-            case BYE:
-                this.exit();
-                this.input.close();
-                return;
-            case LIST:
-                this.showList();
-                break;
-            case TODO:
-                this.addTodo(userInput);
-                break;
-            case EVENT:
-                this.addEvent(userInput);
-                break;
-            case DEADLINE:
-                this.addDeadline(userInput);
-                break;
-            case DONE:
-                this.markAsDone(userInput);
-                break;
-            case DELETE:
-                this.delete(userInput);
-                break;
+        while (true) {
+            try {
+                String rawInput = this.input.nextLine();
+                String[] userInput = rawInput.split(" ", 2);
+                CommandType command = this.getCommand(userInput[0]);
+
+                switch (command) {
+                case BYE:
+                    this.exit();
+                    this.input.close();
+                    return;
+                case LIST:
+                    this.showList();
+                    break;
+                case TODO:
+                    this.addTodo(userInput);
+                    break;
+                case EVENT:
+                    this.addEvent(userInput);
+                    break;
+                case DEADLINE:
+                    this.addDeadline(userInput);
+                    break;
+                case DONE:
+                    this.markAsDone(userInput);
+                    break;
+                case DELETE:
+                    this.delete(userInput);
+                    break;
+                }
+            } catch (DukeException e) {
+                System.out.printf("\t%s\n\n", e);
             }
-        } catch (DukeException e) {
-            System.out.printf("\t%s\n\n", e);
         }
-        this.run();
     }
 
 
@@ -262,9 +266,6 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.greet();
-        duke.loadData();
-        duke.run();
+        new Duke().run();
     }
 }
