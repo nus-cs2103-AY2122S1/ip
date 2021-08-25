@@ -24,6 +24,10 @@ public class Ui {
         allCommands();
     }
     
+
+    /**
+     * A method that prints out all the available commands that the bot supports
+     */
     public static void allCommands() {
         System.out.println("These are the list of available commands:\n" + 
                 "todo              [description]- Make a todo task\n" + 

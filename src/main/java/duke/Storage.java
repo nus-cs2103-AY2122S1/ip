@@ -9,13 +9,24 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import tasks.*;
+import tasks.TaskList;
+import tasks.Events;
+import tasks.Task;
+import tasks.Todo;
+import tasks.Deadline;
 
 public class Storage {
     private static final String DIRECTORY = "src/data";
     private static final String FILENAME = "duke.txt";
     private static final String PATH = DIRECTORY + "/" + FILENAME;
 
+    /**
+     * Checks if file and directory exist, creates new file or directory 
+     * if they do not exist.
+     * 
+     * @param path String of the path to look up
+     * @throws IOException Handles any errors that can occur when interacting with the file.
+     */
     public static void checkForFile(String path) throws IOException {
         File file = new File(path);
         File dir = new File(DIRECTORY);
@@ -28,6 +39,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the file to retrieve all the tasks.
+     * 
+     * @return The TaskList with all the tasks present in the file.
+     * @throws IOException Handles any errors that can occur when interacting with the file.
+     */
     public static TaskList readFile() throws IOException {
 
         checkForFile(Storage.PATH);
@@ -75,6 +92,12 @@ public class Storage {
         return new TaskList(tasks);
     }
 
+    /**
+     * Retrieve all the existing tasks in TaskList and write it to the file. 
+     * Rewrites the file everytime thus preventing duplicates.
+     * 
+     * @param tasks A List of tasks after the bot has been in use.
+     */
     public static void getAllTasks(List<Task> tasks) {
         try {
             String all = "";
@@ -88,6 +111,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds a new task to the file. 
+     * 
+     * @param task the Task to write to File
+     */
     public static void writeLine(Task task) {
         try {
             addToFile(DIRECTORY + "/" + FILENAME, task.toStringForFile() + "\n");
@@ -96,6 +124,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds the task to the file
+     * 
+     * @param path Path of the file to access
+     * @param line The String to write to the file
+     * @throws IOException
+     */
     public static void addToFile(String path, String line) throws IOException {
         checkForFile(path);
         FileWriter writer = new FileWriter(path, true);
@@ -103,6 +138,13 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Adds the task to the file
+     *
+     * @param path Path of the file to access
+     * @param line The String to write to the file
+     * @throws IOException
+     */
     public static void overWrite(String path, String line) throws IOException {
         checkForFile(path);
         FileWriter writer = new FileWriter(path);
@@ -110,6 +152,13 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * 
+     * @param unformattedDate The Date to format
+     * @return Formatted version of the date
+     * @throws DateTimeParseException Error that is thrown if the unformatted date 
+     * has issues
+     */
     public static String formatDate(String unformattedDate) throws DateTimeParseException {
         LocalDate date = LocalDate.parse(unformattedDate);
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

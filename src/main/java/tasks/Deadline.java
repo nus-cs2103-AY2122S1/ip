@@ -9,6 +9,12 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * A method that overwrites the toStringForFile() method
+     * in tasks
+     *
+     * @return the String representation of Deadline, to be written into the file
+     */
     public String toStringForFile() {
         return "D - " + super.toStringForFile() + " - " + by;
     }

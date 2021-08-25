@@ -8,6 +8,12 @@ public class Events extends Task {
         this.at = at;
     }
 
+    /**
+     * A method that overwrites the toStringForFile() method
+     * in tasks
+     *
+     * @return the String representation of Event, to be written into the file
+     */
     @Override
     public String toStringForFile() {
         return "E - " + super.toStringForFile() + " - " + at;

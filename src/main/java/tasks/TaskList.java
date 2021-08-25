@@ -1,14 +1,16 @@
 package tasks;
 
+import java.time.format.DateTimeParseException;
+import java.util.List;
+
 import duke.DukeException;
 import duke.Storage;
 
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
 
-
-
+/**
+ * A TaskList class that handles all the methods that manipulates
+ * the task list.
+ */
 public class TaskList {
     private final List<Task> tasks;
 
@@ -20,7 +22,12 @@ public class TaskList {
         tasks.add(task);
     }
 
-
+    /**
+     * The output that will be shown when the input command is list.
+     * 
+     * @param str
+     * @return a String with all the existing tasks shown in a list view. 
+     */
     public String showList(String str) {
         for (int i = 0; i < tasks.size(); i++) {
             str += (i+1) + ". " + tasks.get(i);
@@ -33,7 +40,8 @@ public class TaskList {
 
     /**
      * A method to mark the task as done
-     * @param str The input String
+     * 
+     * @param str The input command
      * @return The output that you want to be printed out in the console
      */
     public String markDone(String str) {
@@ -44,9 +52,11 @@ public class TaskList {
     }
 
     /**
-     * A method to add a to-do task
-     * @param str A string the that is the command
-     * @return The output that you want to be printed out in the console
+     * A method to create & add a to-do task
+     * 
+     * @param str The input command
+     * @return A response from the bot to indicate a to-do task has been created
+     * and added to the task list
      */
     public String todoTask(String str) throws DukeException {
         try {
@@ -64,9 +74,11 @@ public class TaskList {
     }
 
     /**
-     * A method to add a create deadline task
-     * @param str A string the that is the command
-     * @return The output that you want to be printed out in the console
+     * A method to create & add a deadline task
+     *
+     * @param str The input command
+     * @return A response from the bot to indicate a deadline task has been created
+     * and added to the task list
      */
     public String deadlineTask(String str) {
         try {
@@ -88,9 +100,11 @@ public class TaskList {
     }
 
     /**
-     * A method to add a create task
-     * @param str A string the that is the command
-     * @return The output that you want to be printed out in the console
+     * A method to create & add an event
+     *
+     * @param str The input command
+     * @return A response from the bot to indicate a event has been created
+     * and added to the task list
      */
     public String eventsTask(String str) {
         try {
@@ -112,8 +126,10 @@ public class TaskList {
 
     /**
      * A method to delete a task
-     * @param str A string the that is the command
-     * @return The output that you want to be printed out in the console
+     *
+     * @param str The input command
+     * @return A response from the bot to indicate a task has been deleted
+     * and added to the task list
      */
     public String deleteTask(String str) {
         int index = Integer.parseInt(str.substring(7)) - 1;

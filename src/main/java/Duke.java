@@ -1,18 +1,15 @@
-import duke.DukeException;
+import java.io.*;
+
 import duke.Parser;
 import duke.Storage;
 import duke.Ui;
-import tasks.*;
-
-import java.io.*;
+import tasks.TaskList;
 
 /**
  * A chat bot named Duke that is responsive to commands.
  * 
  * @author Raveen Prabhu 
  */
-
-
 public class Duke {
     private TaskList taskList;
     private Parser parser;

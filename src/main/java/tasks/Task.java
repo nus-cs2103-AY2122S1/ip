@@ -1,5 +1,8 @@
 package tasks;
 
+/**
+ * Task class that handles a task and methods that manipulated the task
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -19,22 +22,30 @@ public class Task {
 
     /**
      * A method to get the status icon
+     * 
      * @return the symbol that shows if an event is done or not
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    // File operations
+    /**
+     * A method to get the number that indicated the status of a task
+     * 
+     * @return the symbol that shows if an event is done or not
+     */
     public int getStatusNumber() {
         return (isDone ? 1 : 0); // mark done task with 1
     }
 
-    // Sample: D - 0 - return book - June 6th
+    /**
+     * A method that provides the desired string representation
+     *
+     * @return the String representation to be written into the file
+     */
     public String toStringForFile() {
         return String.format("%d - %s", this.getStatusNumber(), this.description);
     }
-
 
     /**
      *
