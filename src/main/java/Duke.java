@@ -14,15 +14,8 @@ import java.nio.file.Files;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("----------------------");
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-        System.out.println("----------------------");
+        UserInterface ui = new UserInterface();
+        ui.displayGreeting();
         Scanner stdin = new Scanner(System.in);
         List<Task> tasks = new ArrayList<>();
         DateTimeFormatter dtformatter = DateTimeFormatter.ISO_DATE;
@@ -66,9 +59,7 @@ public class Duke {
                 } catch (FileNotFoundException e) {
                     System.err.println("Error: Could not save file");
                 } finally {
-                    System.out.println("----------------------");
-                    System.out.println("Bye. Hope to see you again soon!");
-                    System.out.println("----------------------");
+                    ui.displayFarewell();
                     break;
                 }
             }
