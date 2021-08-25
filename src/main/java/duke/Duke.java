@@ -7,11 +7,19 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Represents a personal assistance to manage users' tasks list.
+ */
 public class Duke {
   private Storage storage;
   private Ui ui;
   private TaskList tasks;
 
+  /**
+   * Sets up the Duke program by instantiating a user interface, a storage and a task list.
+   *
+   * @param filePath File path of the storage.
+   */
   public Duke(String filePath) {
     this.ui = new Ui();
     try {
@@ -23,6 +31,9 @@ public class Duke {
     }
   }
 
+  /**
+   * Runs the Duke program.
+   */
   public void run() {
     ui.showWelcome();
     boolean isExit = false;
