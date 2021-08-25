@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import pib.Ui;
 import pib.pibexception.PibException;
 
 /**
@@ -16,12 +15,6 @@ public class Deadline extends Task {
     private String date;
     private String time;
 
-    /**
-     * A public constructor to create a Deadline task
-     *
-     * @param description description of the deadline task
-     * @param date        the date stated after "/by " portion
-     */
     private Deadline(String description, String date, String time, boolean printMessage) {
         super(description, printMessage);
         this.date = date;
@@ -34,6 +27,16 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * A public factory method to create a Deadline task
+     *
+     * @param details String containing the description, date and time
+     * @param printMessage Boolean to indicate whether to print the success message after each Task is added
+     * @return Deadline object with description initialised and isDone set to 0
+     * @throws PibException when user inputs blank task description
+     * @throws PibException when user inputs wrongly formatted command to create a new Deadline
+     * @throws PibException when user inputs wrongly formatted date/time
+     */
     public static Deadline createDeadline(String details, boolean printMessage) throws PibException {
         try {
             int byIndex = details.indexOf("/by ");
@@ -52,10 +55,25 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * A public factory method to create a Deadline task
+     *
+     * @param description task description
+     * @param isDone value 0 (false) or 1 (true)
+     * @param date String showing date of Deadline task
+     * @param time String showing time of Deadline task
+     * @param printMessage Boolean to indicate whether to print the success message after each Task is added
+     * @return Deadline object with these 4 fields initialised
+     */
     public static Deadline createDeadline(String description, int isDone, String date, String time, boolean printMessage) {
         return new Deadline(description, isDone, date, time, printMessage);
     }
 
+    /**
+     * Public method to convert task to a string format used to save inside a .txt file
+     *
+     * @return string format of Deadline task to be saved
+     */
     public String toDataString() {
         return "D," + getIsDone() + "," + getDescription() + "," + date + "," + time + System.lineSeparator();
     }
@@ -63,7 +81,7 @@ public class Deadline extends Task {
     /**
      * A public toString method to add the task type [D] in front of the checkbox, and the date behind the task description
      *
-     * @return the string representation of a deadline task
+     * @return the string representation of a Deadline task
      */
     @Override
     public String toString() {
