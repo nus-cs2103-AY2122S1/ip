@@ -1,5 +1,7 @@
+package duke;
+
 public class Ui {
-    private static final String introString = "Hey there! I'm Good Duke. How many I help you today?";
+    private static final String introString = "Hey there! I'm Good duke.Duke. How many I help you today?";
     private static final String outroString = "That was an excellent chat - I look forward to seeing you again soon!";
     private static final String readSaveString = "Sorry, there was a problem reading the save file :(";
     private static final String writeSaveString = "Sorry, there was a problem saving your tasks :(";
