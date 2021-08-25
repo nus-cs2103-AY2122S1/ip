@@ -9,7 +9,9 @@ import java.util.Scanner;
  * Duke is a chatbot application for CS2103T individual project.
  */
 public class Duke {
+    /** The local file path. */
     private static final String filePath = "data/duke.txt";
+    /** The storage instance. */
     private static final Storage storage = new Storage(filePath);
 
     /**
@@ -34,7 +36,7 @@ public class Duke {
                     return;
                 }
                 case LIST: {
-                    taskList.showTasks();
+                    Ui.showTasks(taskList.getTasks());
                     break;
                 }
                 case DONE: {

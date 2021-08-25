@@ -72,22 +72,6 @@ public class TaskList {
     }
 
     /**
-     * Prints the list of tasks.
-     */
-    public void showTasks() {
-        System.out.println(Ui.HORIZONTAL_LINE);
-        System.out.println(Ui.INDENTATION + "Here are the tasks in your list:");
-        if (tasks.isEmpty()) {
-            System.out.println(Ui.INDENTATION + "No tasks");
-        } else {
-            for (int i = 0; i < tasks.size(); ++i) {
-                System.out.println(Ui.INDENTATION + (i + 1) + ". " + tasks.get(i).toString());
-            }
-        }
-        System.out.println(Ui.HORIZONTAL_LINE);
-    }
-
-    /**
      * Marks the task specified by the given index as done.
      *
      * @param index The given index.
