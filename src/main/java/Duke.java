@@ -1,203 +1,103 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
 
-    private List<Task> taskList = new ArrayList<>();
-    private FileController fileController;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    public Duke(String filePath) {
-        this.fileController = new FileController(filePath);
+    public Duke(String filePath) throws IOException {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.load());
     }
 
-    /**
-     * Display formatted message.
-     * @param message Message to be printed in console.
-     */
-    public void display(String message) {
-        System.out.println("    * * * * * * * * * * * * * * * * * * * *");
-        System.out.println("    " + message);
-        System.out.println("    * * * * * * * * * * * * * * * * * * * *\n");
-    }
-
-    /**
-     * Display all items in the list.
-     */
-    public void displayAllItems() {
-        System.out.println("    * * * * * * * * * * * * * * * * * * * *");
-        System.out.println("    Here are the tasks in your list: ");
-        for (int i = 0; i < taskList.size(); i++) {
-            String item = "    " + (i + 1) + "." +  taskList.get(i);
-            System.out.println(item);
-        }
-        System.out.println("    * * * * * * * * * * * * * * * * * * * *\n");
-    }
-
-    /**
-     * Display greeting message.
-     */
-    public void greet() {
-        display("Hi, I'm Sync-Me Sebby.\n    " +
-                "I'm here to assist you with tracking and synchronizing of your personal tasks.\n    " +
-                "Let me know how I can help?");
-    }
-
-    /**
-     * Display exit message.
-     */
-    public void exit() {
-        this.display("Goodbye. See you again soon!");
-    }
-
-    /**
-     * Display success message for adding task.
-     * @param tasks The list of tasks.
-     * @param task The individual task which can be Todo, Deadline or Event.
-     */
-    public void displaySuccessMessage(List<Task> tasks, Task task) {
-        this.display("Got it. I've added this task: \n" + "      " + task + "\n    Now you have "
-                + tasks.size() + (tasks.size() <= 1 ? " task" : " tasks") + " in the list.");
-    }
-
-    public String getCommand(String userInput) {
-        return userInput.split(" ")[0];
-    }
-
-    public String getDescription(String userInput, String splitText, String splitTime) {
-        String[] splitInput = userInput.split(splitText)[1].split(splitTime);
-        return splitInput[0].trim();
-    }
-
-    public String getDate(String userInput, String splitTime) {
-        String[] splitInput = userInput.split(splitTime);
-        String date = splitInput[1];
-        if (date.split(" ").length > 1) {
-            return date.split(" ")[0];
-        }
-        return date;
-    }
-
-    public String getTime(String userInput) {
-        String[] splitInput = userInput.split(" ");
-        String time = splitInput[splitInput.length - 1];
-        return time.substring(0,2) + ":" + time.substring(2);
-    }
-
-    public int getTaskNumber(String userInput) {
-        return Integer.parseInt(userInput.split(" ")[1]);
-    }
-
-    /**
-     * Checks if description is given for Todo, Deadline and Event tasks.
-     * @param userInput the user input provided by scanner.
-     * @return true if description is provided; false otherwise.
-     */
-    public boolean isDescExists(String userInput) {
-        String[] arr = userInput.split(" ");
-        return arr.length >= 2;
-    }
-
-    public boolean isTaskExists(int taskNumber) {
-        return taskNumber <= this.taskList.size();
-    }
-
-    public void operate(String userInput) {
-        String command = this.getCommand(userInput);
+    public void execute(String userInput) {
+        String command = Parser.getCommand(userInput);
         switch (command) {
             case "todo":
-                if (this.isDescExists(userInput)) {
+                if (this.tasks.isDescExists(userInput)) {
                     // get task description
-                    String desc = this.getDescription(userInput, "todo", "ignore");
+                    String desc = Parser.getDescription(userInput, "todo", "ignore");
                     // add task to list
-                    Todo todo = new Todo(desc);
-                    this.taskList.add(todo);
-                    this.fileController.writeToFile(this.taskList);
-                    displaySuccessMessage(this.taskList, todo);
+                    Todo todo = tasks.createTodo(desc);
+                    ui.displaySuccessMessage(todo, tasks.length());
                 } else {
-                    display("OOPS! The description cannot be empty. Please try again.");
+                    ui.display("OOPS! The description cannot be empty. Please try again.");
                 }
                 break;
 
             case "deadline":
-                if (this.isDescExists(userInput)) {
-                    String descDeadline = this.getDescription(userInput, "deadline ", "/by ");
-                    String dateDeadline = this.getDate(userInput,"/by ");
-                    Deadline dl = new Deadline(descDeadline, dateDeadline);
-                    this.taskList.add(dl);
-                    this.fileController.writeToFile(this.taskList);
-                    displaySuccessMessage(this.taskList, dl);
+                if (this.tasks.isDescExists(userInput)) {
+                    String descDeadline = Parser.getDescription(userInput, "deadline ", "/by ");
+                    String dateDeadline = Parser.getDate(userInput,"/by ");
+                    Deadline dl = tasks.createDeadline(descDeadline, dateDeadline);
+                    ui.displaySuccessMessage(dl, tasks.length());
                 } else {
-                    display("OOPS! The description cannot be empty. Please try again.");
+                    ui.display("OOPS! The description cannot be empty. Please try again.");
                 }
                 break;
 
             case "event":
-               if (this.isDescExists(userInput)) {
-                   String descEvent = this.getDescription(userInput, "event ", "/at ");
-                   String dateEvent = this.getDate(userInput,  "/at ");
-                   String timeEvent = this.getTime(userInput);
+               if (this.tasks.isDescExists(userInput)) {
+                   String descEvent = Parser.getDescription(userInput, "event ", "/at ");
+                   String dateEvent = Parser.getDate(userInput,  "/at ");
+                   String timeEvent = Parser.getTime(userInput);
                    // add task to list
-                   Event event = new Event(descEvent, dateEvent, timeEvent);
-                   this.taskList.add(event);
-                   this.fileController.writeToFile(this.taskList);
-                   displaySuccessMessage(this.taskList, event);
+                   Event event = tasks.createEvent(descEvent, dateEvent, timeEvent);
+                   ui.displaySuccessMessage(event, tasks.length());
                } else {
-                   display("OOPS! The description cannot be empty. Please try again.");
+                   ui.display("OOPS! The description cannot be empty. Please try again.");
                }
                break;
 
             case "done":
-                if (this.isDescExists(userInput)) {
+                if (this.tasks.isDescExists(userInput)) {
                     // get task number
-                    int taskNumber = this.getTaskNumber(userInput);
-                    if (isTaskExists(taskNumber)) {
-                        Task task = this.taskList.get(taskNumber - 1);
+                    int taskNumber = Parser.getTaskNumber(userInput);
+                    if (this.tasks.isTaskExists(taskNumber)) {
+                        Task task = this.tasks.getTask(taskNumber - 1);
                         // mark done as done
                         task.markAsDone();
-                        this.fileController.writeToFile(this.taskList);
-                        display("Nice! This task is marked as done: \n" + "      " + task);
+                        ui.display("Nice! This task is marked as done: \n" + "      " + task);
                     } else {
-                        display("This task does not exist! Please try again.");
+                        ui.display("This task does not exist! Please try again.");
                     }
                 } else {
-                    display("OOPS! The description cannot be empty. Please try again.");
+                    ui.display("OOPS! The description cannot be empty. Please try again.");
                 }
                 break;
 
             case "delete":
-               if (this.isDescExists(userInput)) {
-                   int taskNumberDel = this.getTaskNumber(userInput);
-                   if (isTaskExists(taskNumberDel)) {
-                       Task taskDel = this.taskList.get(taskNumberDel - 1);
-                       this.taskList.remove(taskNumberDel - 1);
-                       this.fileController.writeToFile(this.taskList);
-                       display("Gotchu mate. I've removed this task: \n" + "      " + taskDel + "\n    Now you have "
-                               + this.taskList.size() + (this.taskList.size() <= 1 ? " task" : " tasks") + " in the list.");
+               if (this.tasks.isDescExists(userInput)) {
+                   int taskNumberDel = Parser.getTaskNumber(userInput);
+                   if (this.tasks.isTaskExists(taskNumberDel)) {
+                       Task taskDel = this.tasks.getTask(taskNumberDel - 1);
+                       tasks.deleteTask(taskNumberDel - 1);
+                       ui.display("Gotchu mate. I've removed this task: \n" + "      " + taskDel + "\n    Now you have "
+                               + this.tasks.length() + (this.tasks.length() <= 1 ? " task" : " tasks") + " in the list.");
                    } else {
-                       display("This task does not exist! Please try again.");
+                       ui.display("This task does not exist! Please try again.");
                    }
                } else {
-                   display("OOPS! The description cannot be empty. Please try again.");
+                   ui.display("OOPS! The description cannot be empty. Please try again.");
                }
                break;
 
             case "list":
-                this.displayAllItems();
+                this.tasks.displayAllItems();
                 break;
 
             default:
-                display("OOPS! I do not understand what does that mean. Maybe you can try either one of " +
+                ui.display("OOPS! I do not understand what does that mean. Maybe you can try either one of " +
                         "[todo, deadline, event, done, list, delete]?");
         }
     }
 
-    public void start() {
+    public void run() {
 
-        // create file if it does not exist
-        this.fileController.createFile();
-
-        this.greet();
+        ui.greet();
 
         // initialize Scanner object
         Scanner scan = new Scanner(System.in);
@@ -206,17 +106,19 @@ public class Duke {
         String userInput = scan.nextLine();
 
         while (!userInput.equals("bye")) {
-            this.operate(userInput);
+            this.execute(userInput);
             userInput = scan.nextLine();
         }
+
         scan.close();
 
-        this.exit();
+        this.storage.writeToFile(tasks.getAllTasks());
+
+        ui.exit();
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
-        duke.start();
+    public static void main(String[] args) throws IOException {
+        new Duke("data/duke.txt").run();
     }
 
 }
