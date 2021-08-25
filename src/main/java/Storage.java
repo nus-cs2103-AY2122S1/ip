@@ -1,7 +1,4 @@
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
+import task.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -18,8 +15,8 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() throws IOException {
-        ArrayList<Task> listTask = new ArrayList<>();
+    public TaskList load() throws IOException {
+        TaskList listTask = new TaskList(new ArrayList<>());
         try {
             File f = new File(this.filePath);
 
@@ -27,7 +24,7 @@ public class Storage {
                 Files.createDirectories(Paths.get(filePath).getParent());
                 f.createNewFile();
             }
-            
+
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
                 String description;
@@ -35,7 +32,6 @@ public class Storage {
                 String type = tokens[0];
                 boolean isDone = Integer.parseInt(tokens[1]) == 1;
                 String param = tokens[2];
-
 
                 switch (type) {
                 case ("T"):
@@ -64,7 +60,7 @@ public class Storage {
         return listTask;
     }
 
-    public void write(ArrayList<Task> task) {
+    public void write(TaskList task) {
         try {
             File f = new File(this.filePath);
 
@@ -75,7 +71,7 @@ public class Storage {
 
             FileWriter writer = new FileWriter(filePath);
 
-            for (Task t : task) {
+            for (Task t : task.getList()) {
                 writer.write(t.databaseString() + System.lineSeparator());
             }
 
