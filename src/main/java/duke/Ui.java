@@ -19,7 +19,6 @@ public class Ui {
     public void greet() {
         System.out.println("Hello! I'm duke.Duke\n" +
                 "What can I do for you?");
-        System.out.println("Here are your tasks: ");
     }
     public String readLine() {
         return scanner.nextLine();

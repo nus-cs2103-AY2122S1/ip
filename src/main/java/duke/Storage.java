@@ -85,9 +85,6 @@ public class Storage {
                 taskList.addTask(convertTextToTask(data));
             }
             myReader.close();
-//            taskList.forEach(task -> {
-//                System.out.println(task.toString());
-//            });
             return taskList;
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");

@@ -4,7 +4,7 @@ public class Deadline extends Task {
     private String deadline;
     public Deadline(String taskContent) {
         super(taskContent.split(" /by ")[0], "D");
-        this.deadline = formatTiming(taskContent.split(" /by ")[1]);
+        this.deadline = Parser.parseTiming(taskContent.split(" /by ")[1]);
     }
     public Deadline(String taskContent, String deadline) {
         super(taskContent, "D");

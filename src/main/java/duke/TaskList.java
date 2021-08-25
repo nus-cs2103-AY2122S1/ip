@@ -15,6 +15,7 @@ public class TaskList {
         return taskList.size();
     }
     public void printTask() {
+        System.out.println("Here are your tasks: ");
         taskList.forEach(task -> {
             System.out.println(task.toString());
         });
