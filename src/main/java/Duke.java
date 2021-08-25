@@ -192,6 +192,11 @@ public class Duke {
             String end = timestamps[1];
             LocalDateTime startTime = LocalDateTime.parse(start, formatter);
             LocalDateTime endTime = LocalDateTime.parse(end, formatter);
+            if (startTime.isAfter(endTime)) {
+                System.out.println("\tEnd time must be after the start time!\n");
+                return;
+            }
+
             this.list.add(new Event(splits[0], startTime, endTime));
             System.out.printf("\tadded event:\n\t\t%s\n", this.list.get(this.list.size() - 1));
             System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
