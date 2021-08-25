@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -77,12 +79,14 @@ public class Duke {
             throw new IllegalFormatException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
         if (splitTask.length == 1) {
-            throw new IllegalFormatException("☹ OOPS!!! Please specify the deadline date/time in the correct format.");
+            throw new IllegalFormatException("☹ OOPS!!! Please specify the deadline date in the format yyyy-mm-dd.");
         }
-        
-        String deadlineDateTime = splitTask[1];
-        if (deadlineDateTime.length() == 0) {
-            throw new IllegalFormatException("☹ OOPS!!! Please specify the deadline date/time in the correct format.");
+
+        LocalDate deadlineDateTime;
+        try {
+            deadlineDateTime = LocalDate.parse(splitTask[1]);
+        } catch (DateTimeParseException e) {
+            throw new IllegalFormatException("☹ OOPS!!! Please specify the deadline date in the format yyyy-mm-dd.");
         }
   
         Task taskToBeAdded = new Deadline(deadlineDescription, deadlineDateTime);
@@ -109,12 +113,14 @@ public class Duke {
             throw new IllegalFormatException("☹ OOPS!!! The description of a event cannot be empty.");
         }
         if (splitTask.length == 1) {
-            throw new IllegalFormatException("☹ OOPS!!! Please specify the event date/time in the correct format.");
+            throw new IllegalFormatException("☹ OOPS!!! Please specify the event date in the format yyyy-mm-dd.");
         }
 
-        String eventDateTime = splitTask[1];
-        if (eventDateTime.length() == 0) {
-            throw new IllegalFormatException("☹ OOPS!!! Please specify the event date/time in the correct format.");
+        LocalDate eventDateTime;
+        try {
+            eventDateTime = LocalDate.parse(splitTask[1]);
+        } catch (DateTimeParseException e) {
+            throw new IllegalFormatException("☹ OOPS!!! Please specify the event date in the format yyyy-mm-dd.");
         }
 
         Task taskToBeAdded = new Event(eventDescription, eventDateTime);
