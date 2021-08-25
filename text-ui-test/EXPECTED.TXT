@@ -20,20 +20,20 @@
         ☹ OOPS!!! The description of a deadline cannot be empty.
         ____________________________________________________________
         ____________________________________________________________
-        ☹ OOPS!!! Please specify the deadline date/time in the correct format.
+        ☹ OOPS!!! Please specify the deadline date in the format yyyy-mm-dd.
         ____________________________________________________________
         ____________________________________________________________
-        ☹ OOPS!!! Please specify the deadline date/time in the correct format.
+        ☹ OOPS!!! Please specify the deadline date in the format yyyy-mm-dd.
         ____________________________________________________________
         ____________________________________________________________
-        ☹ OOPS!!! Please specify the deadline date/time in the correct format.
+        ☹ OOPS!!! Please specify the deadline date in the format yyyy-mm-dd.
         ____________________________________________________________
         ____________________________________________________________
-        ☹ OOPS!!! Please specify the deadline date/time in the correct format.
+        ☹ OOPS!!! Please specify the deadline date in the format yyyy-mm-dd.
         ____________________________________________________________
         ____________________________________________________________
         Got it. I've added this task:
-          [D][ ] two (by: TODAY)
+          [D][ ] two (by: Aug 25 2021)
         Now you have 2 tasks in the list.
         ____________________________________________________________
         ____________________________________________________________
@@ -43,27 +43,27 @@
         ☹ OOPS!!! The description of a event cannot be empty.
         ____________________________________________________________
         ____________________________________________________________
-        ☹ OOPS!!! Please specify the event date/time in the correct format.
+        ☹ OOPS!!! Please specify the event date in the format yyyy-mm-dd.
         ____________________________________________________________
         ____________________________________________________________
-        ☹ OOPS!!! Please specify the event date/time in the correct format.
+        ☹ OOPS!!! Please specify the event date in the format yyyy-mm-dd.
         ____________________________________________________________
         ____________________________________________________________
-        ☹ OOPS!!! Please specify the event date/time in the correct format.
+        ☹ OOPS!!! Please specify the event date in the format yyyy-mm-dd.
         ____________________________________________________________
         ____________________________________________________________
-        ☹ OOPS!!! Please specify the event date/time in the correct format.
+        ☹ OOPS!!! Please specify the event date in the format yyyy-mm-dd.
         ____________________________________________________________
         ____________________________________________________________
         Got it. I've added this task:
-          [E][ ] three (at: TODAY)
+          [E][ ] three (at: Aug 25 2021)
         Now you have 3 tasks in the list.
         ____________________________________________________________
         ____________________________________________________________
         Here are the tasks in your list:
         1.[T][ ] one
-        2.[D][ ] two (by: TODAY)
-        3.[E][ ] three (at: TODAY)
+        2.[D][ ] two (by: Aug 25 2021)
+        3.[E][ ] three (at: Aug 25 2021)
         ____________________________________________________________
         ____________________________________________________________
         ☹ OOPS!!! Please specify task to be mark done in the correct format.
@@ -83,11 +83,11 @@
         ____________________________________________________________
         ____________________________________________________________
         Nice! I've marked this task as done:
-        [D][X] two (by: TODAY)
+        [D][X] two (by: Aug 25 2021)
         ____________________________________________________________
         ____________________________________________________________
         Nice! I've marked this task as done:
-        [E][X] three (at: TODAY)
+        [E][X] three (at: Aug 25 2021)
         ____________________________________________________________
         ____________________________________________________________
         ☹ OOPS!!! Please specify task to be removed in the correct format.
@@ -108,8 +108,8 @@
         ____________________________________________________________
         ____________________________________________________________
         Here are the tasks in your list:
-        1.[D][X] two (by: TODAY)
-        2.[E][X] three (at: TODAY)
+        1.[D][X] two (by: Aug 25 2021)
+        2.[E][X] three (at: Aug 25 2021)
         ____________________________________________________________
         ____________________________________________________________
         ☹ OOPS!!! I'm sorry, but I don't know what that means :-(

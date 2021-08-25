@@ -7,14 +7,14 @@ deadline two
 deadline two 
 deadline two /by
 deadline two /by 
-deadline two /by TODAY
+deadline two /by 2021-08-25
 event
 event 
 event three
 event three 
 event three /at
 event three /at 
-event three /at TODAY
+event three /at 2021-08-25
 list
 done
 done 
