@@ -25,4 +25,13 @@ public abstract class Task {
     public String toFile() {
         return "| " + (this.isDone ? 1 : 0) + " | " + this.description;
     }
+
+    /**
+     * Method which returns the description of the Task.
+     *
+     * @return String Description of the Task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
 }
