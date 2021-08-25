@@ -1,6 +1,9 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
 
  class Task {
     protected String description;
@@ -169,25 +172,52 @@ public class Duke {
 
             }
             if(item.contains("deadline")){
-                String by = item.substring(item.lastIndexOf("/") + 1);
-                String description = item.substring(9,item.lastIndexOf("/"));//Extract description
-//                System.out.println(by);
-                System.out.println(line);
-                System.out.println("     added: " + new Deadline(description,by));//Added item
-                toDo.add(new Deadline(description,by));//Added new task to arraylist
-                System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
-                System.out.println(line);
-                continue;
+                try{
+                    String by = item.substring(item.lastIndexOf("/") + 1);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    LocalDate localTimeObj = LocalDate.parse(by,formatter);
+                    String description = item.substring(9,item.lastIndexOf("/"));//Extract description
+                    System.out.println(line);
+                    System.out.println("     added: " + new Deadline(description,localTimeObj.toString()));//Added item
+                    toDo.add(new Deadline(description,localTimeObj.toString()));//Added new task to arraylist
+                    System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+                    System.out.println(line);
+                    continue;
+                }catch (Exception e){
+                    String by = item.substring(item.lastIndexOf("/") + 1);
+                    String description = item.substring(9,item.lastIndexOf("/"));//Extract description
+                    System.out.println(line);
+                    System.out.println("     added: " + new Deadline(description,by.toString()));//Added item
+                    toDo.add(new Deadline(description,by));//Added new task to arraylist
+                    System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+                    System.out.println(line);
+                    continue;
+                }
+
             }
             if(item.contains("event")){
-                String by = item.substring(item.lastIndexOf("/") + 1);
-                String description = item.substring(6,item.lastIndexOf("/"));
-                System.out.println(line);
-                System.out.println("     added: " + new Event(description,by));//Added item
-                toDo.add(new Event(description,by));//Added new task to arraylist
-                System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
-                System.out.println(line);
-                continue;
+                try{
+                    String by = item.substring(item.lastIndexOf("/") + 1);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    LocalDate localTimeObj = LocalDate.parse(by,formatter);
+                    String description = item.substring(6,item.lastIndexOf("/"));
+                    System.out.println(line);
+                    System.out.println("     added: " + new Event(description,localTimeObj.toString()));//Added item
+                    toDo.add(new Event(description,localTimeObj.toString()));//Added new task to arraylist
+                    System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+                    System.out.println(line);
+                    continue;
+                }catch (Exception e){
+                    String by = item.substring(item.lastIndexOf("/") + 1);
+                    String description = item.substring(6,item.lastIndexOf("/"));
+                    System.out.println(line);
+                    System.out.println("     added: " + new Event(description,by));//Added item
+                    toDo.add(new Event(description,by));//Added new task to arraylist
+                    System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+                    System.out.println(line);
+                    continue;
+                }
+
             }
 
             else{
