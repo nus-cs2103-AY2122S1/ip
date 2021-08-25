@@ -22,7 +22,7 @@ public abstract class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    protected int isDoneInt() {
+    protected int getStatusInt() {
         return isDone ? 1 : 0;
     }
 

@@ -42,7 +42,7 @@ public class Storage {
             task = new Event(splitLine[2], splitLine[3], isDone);
             break;
         default:
-            throw new NyxException("This seems to be an invalid task symbol!");
+            throw new NyxException("Invalid task symbol found. Unable to load data!");
         }
 
         return task;

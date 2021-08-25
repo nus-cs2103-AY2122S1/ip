@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  * This class inherits from the parent abstract Task class.
  */
 public class Deadline extends Task {
+    private static final String DATETIME_FORMAT = "yyyy-MM-dd H:m";
     private final LocalDateTime by;
 
     /**
@@ -18,7 +19,7 @@ public class Deadline extends Task {
      */
     public Deadline(String content, String by, boolean isDone) {
         super(content, isDone);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd H:m"));
+        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
     }
 
     /**
@@ -36,8 +37,8 @@ public class Deadline extends Task {
      */
     @Override
     public String dataFormat() {
-        String dateFormat =  by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd H:m"));
-        return String.format("D, %d, %s, %s\n", isDoneInt(), getContent(), dateFormat);
+        String dateFormat =  by.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        return String.format("D, %d, %s, %s\n", getStatusInt(), getContent(), dateFormat);
     }
 
     /**

@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
  * This class inherits from the parent abstract Task class.
  */
 public class Event extends Task {
+    private static final String DATETIME_FORMAT = "yyyy-MM-dd H:m";
     private final LocalDateTime at;
 
     /**
@@ -18,11 +19,11 @@ public class Event extends Task {
      */
     public Event(String content, String at, boolean isDone) {
         super(content, isDone);
-        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd H:m"));
+        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern(DATETIME_FORMAT));
     }
 
     /**
-     * Constructs an uncompleted event with its description, datetime
+     * Constructs an uncompleted event with its description, datetime.
      * @param content Description of the event.
      * @param at Datetime at which the event occurs.
      */
@@ -36,8 +37,8 @@ public class Event extends Task {
      */
     @Override
     public String dataFormat() {
-        String dateFormat =  at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd H:m"));
-        return String.format("E, %d, %s, %s\n", isDoneInt(), getContent(), dateFormat);
+        String dateFormat =  at.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        return String.format("E, %d, %s, %s\n", getStatusInt(), getContent(), dateFormat);
     }
 
     /**

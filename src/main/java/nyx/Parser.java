@@ -45,7 +45,9 @@ public class Parser {
             if (info.isEmpty()) {
                 throw new NyxException("The description of a todo cannot be empty.");
             }
+
             ToDo task = new ToDo(info);
+
             try {
                 dataManager.addData(task);
                 taskList.addTask(task);
@@ -59,8 +61,10 @@ public class Parser {
             if (info.isEmpty()) {
                 throw new NyxException("The description of a deadline cannot be empty.");
             }
+
             String[] splitInfo = info.split(" /by ");
             Deadline task = new Deadline(splitInfo[0].strip(), splitInfo[1]);
+
             try {
                 dataManager.addData(task);
                 taskList.addTask(task);
@@ -74,8 +78,10 @@ public class Parser {
             if (info.isEmpty()) {
                 throw new NyxException("The description of an event cannot be empty.");
             }
+
             String[] splitInfo = info.split(" /at ");
             Event task = new Event(splitInfo[0].strip(), splitInfo[1]);
+
             try {
                 dataManager.addData(task);
                 taskList.addTask(task);
@@ -88,6 +94,7 @@ public class Parser {
         case "delete":
             try {
                 int index = Integer.parseInt(info) - 1;
+
                 if (taskList.getNumTasks() > 0) {
                     Task task = taskList.getTask(index);
                     taskList.removeTask(index);
