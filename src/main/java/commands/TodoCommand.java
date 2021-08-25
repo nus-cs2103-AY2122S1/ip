@@ -6,6 +6,9 @@ import bot.Bot;
 import bot.Ui;
 import exceptions.InvalidArgumentsException;
 
+/**
+ * Command for adding a to-do task to the bot
+ */
 public class TodoCommand extends Command {
 
     @Override

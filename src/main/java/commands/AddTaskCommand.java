@@ -5,6 +5,9 @@ import tasks.Task;
 import bot.Bot;
 import bot.Ui;
 
+/**
+ * Command to add a task to the bot
+ */
 public class AddTaskCommand extends Command {
 
     @Override

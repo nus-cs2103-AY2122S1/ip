@@ -9,6 +9,9 @@ import bot.Bot;
 import bot.Ui;
 import exceptions.InvalidArgumentsException;
 
+/**
+ * Command for adding a deadline task to the bot
+ */
 public class DeadlineCommand extends Command {
 
     @Override

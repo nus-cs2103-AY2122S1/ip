@@ -2,6 +2,9 @@ package tasks;
 
 import bot.TaskType;
 
+/**
+ * General task
+ */
 public class GeneralTask extends Task {
 
     private final String description;

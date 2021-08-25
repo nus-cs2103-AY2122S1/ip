@@ -5,6 +5,9 @@ import java.util.List;
 
 import tasks.Task;
 
+/**
+ * Encapsulates bot task list
+ */
 public class TaskList {
 
     private List<Task> taskList;
@@ -14,11 +17,20 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-
+    /**
+     * Get the taskList
+     *
+     * @return Bot's list of tasks
+     */
     public List<Task> get() {
         return this.taskList;
     }
 
+    /**
+     * Set the taskList
+     *
+     * @param taskList list of tasks
+     */
     public void set(List<Task> taskList) {
         this.taskList = taskList;
     }

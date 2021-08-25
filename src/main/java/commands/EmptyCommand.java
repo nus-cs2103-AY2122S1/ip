@@ -3,6 +3,9 @@ package commands;
 import bot.Bot;
 import bot.Ui;
 
+/**
+ * Empty command for unrecognised input
+ */
 public class EmptyCommand extends Command {
 
     @Override

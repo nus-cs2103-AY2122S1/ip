@@ -2,14 +2,27 @@ package commands;
 
 import bot.Bot;
 
+/**
+ * Abstract class for commands
+ */
 public abstract class Command {
 
     String[] args;
 
+    /**
+     * Set the command's arguments
+     *
+     * @param args command arguments
+     */
     public void setArgs(String[] args) {
         this.args = args;
     }
 
+    /**
+     * Get the command's arguments
+     *
+     * @return command arguments
+     */
     public String[] getArgs() {
         return args;
     }
