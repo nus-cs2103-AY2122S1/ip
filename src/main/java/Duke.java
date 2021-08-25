@@ -6,7 +6,6 @@ import duke.ui.Ui;
 import java.lang.String;
 
 public class Duke {
-
     private static final String LOCATION = "./data/duke.txt";
     private TaskList tasks;
     private Storage storage;
