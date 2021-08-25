@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     /**
-     * The day and time in string
+     * The day and time in LocalDate.
      */
     protected LocalDate at;
     private static final DateTimeFormatter inputDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");

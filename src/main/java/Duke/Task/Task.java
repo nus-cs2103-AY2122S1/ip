@@ -5,12 +5,12 @@ package duke.task;
  */
 public class Task {
     /**
-     * the status of the task
+     * The status of the task.
      */
     protected boolean isComplete;
 
     /**
-     * the details of the task
+     * The details of the task.
      */
     protected final String taskDetails;
 
@@ -25,7 +25,7 @@ public class Task {
     }
 
     /**
-     * set isComplete as true
+     * set isComplete as true.
      */
     public void completeTask() {
         this.isComplete = true;

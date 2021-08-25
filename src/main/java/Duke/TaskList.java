@@ -109,10 +109,10 @@ public class TaskList {
     }
 
     /**
-     * Returns newly created  ToDo task otherwise throw an appropriate error.
+     * Returns newly created ToDo task otherwise throw an appropriate error.
      *
      * @param userInput user input String
-     * @return todo task.
+     * @return Todo task.
      * @throws NoTaskDescriptionException if there is no task description, it will result in this error.
      */
     public ToDo makeToDoTask(String userInput) throws NoTaskDescriptionException {
@@ -126,7 +126,7 @@ public class TaskList {
      * Returns newly created Event task otherwise throw an appropriate error.
      *
      * @param userInput user input String
-     * @return event task
+     * @return Event task
      * @throws NoTaskDescriptionException if there is no task description, it will result in this error.
      * @throws NoDateIndicatorException if there is no /by indicator, it will result in this error.
      * @throws NoDateException if there is no date, it will result in this error.
@@ -157,7 +157,7 @@ public class TaskList {
      * Returns newly created Deadline task otherwise throw an appropriate error.
      *
      * @param userInput user input String
-     * @return deadline task
+     * @return Deadline task
      * @throws NoTaskDescriptionException if there is no task description, it will result in this error.
      * @throws NoDateIndicatorException if there is no /by indicator, it will result in this error.
      * @throws NoDateException if there is no date, it will result in this error.

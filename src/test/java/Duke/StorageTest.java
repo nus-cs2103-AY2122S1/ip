@@ -1,5 +1,6 @@
 package Duke;
 
+import duke.Storage;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -9,7 +10,13 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Tests the Storage class
+ */
 class StorageTest {
+    /**
+     * Tests whether the storage writes properly.
+     */
     @Test
     void writeTest() {
         Storage storage = new Storage("data/Duke.txt");

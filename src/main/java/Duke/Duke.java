@@ -14,6 +14,9 @@ public class Duke {
         this.ui = new UI();
     }
 
+    /**
+     * Runs Duke and parses input using Parser class.
+     */
     public void run() {
         UI.greet();
         Parser parser = new Parser(this.tasks);
