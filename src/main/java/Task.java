@@ -1,7 +1,7 @@
 /**
  * An abstract class encapsulating a Task.
  *
- * @quthor Toh Wang Bin
+ * @author Toh Wang Bin
  */
 public abstract class Task {
 

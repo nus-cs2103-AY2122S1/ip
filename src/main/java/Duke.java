@@ -1,3 +1,9 @@
+import javax.xml.crypto.Data;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,11 +18,17 @@ public class Duke {
      * The variants of the Tasks handled by Duke
      */
     private enum Tasks {DEADLINE, EVENT, TODO}
-    
+
+    //path of file containing stored data
+    private static final String FILE_PATH = "data/test.txt";
+    //path of folder containing data file
+    private  static final String DIR_PATH = "data";
     //ArrayList containing tasks stored by Duke
     private static ArrayList<Task> taskArray = new ArrayList<>();
     //Integer that stores the number of tasks currently stored by Duke.
     private static int listIndex = 0;
+    //FIle containing stored data
+    private static File dataFile;
 
     /**
      * Starts the main process, activating the chatbot.
@@ -24,6 +36,25 @@ public class Duke {
      * @param args The default parameter for the main function.
      */
     public static void main(String[] args) {
+        //set up the file
+        dataFile = new File(FILE_PATH);
+        //file does not exist: attempt to create a new file.
+        if (!dataFile.canRead()) {
+            try {
+                new File(DIR_PATH).mkdir();
+                if (dataFile.createNewFile()) {
+                    System.out.println("A new save file has been created in root/data.");
+                }
+
+            } catch (Exception e) {
+                System.out.println("An error has occurred when creating your file.");
+                System.out.println("Please try running Duke again!");
+                return;
+            }
+        }
+
+        loadData();
+
         Scanner scan = new Scanner(System.in);
 
         String logo = " ____        _        \n"
@@ -139,67 +170,67 @@ public class Duke {
         StringBuilder str = new StringBuilder();
         Task tempTask = null;
         switch (taskType) {
-            case TODO: {
-                for (int i = 1; i < array.length; i++) {
-                    str.append(array[i]).append(" ");
-                }
-
-                tempTask = new Todos(str.toString());
-                break;
+        case TODO: {
+            for (int i = 1; i < array.length; i++) {
+                str.append(array[i]).append(" ");
             }
 
-            case DEADLINE:
-                String time = "";
-                boolean stringHasEnded = false;
+            tempTask = new Todos(str.toString());
+            break;
+        }
 
-                for (int i = 1; i < array.length; i++) {
-                    //repeatedly append strings in the array until the time is found
-                    String currentArrayElement = array[i];
-                    if (stringHasEnded) {
-                        time = currentArrayElement;
-                        break;
-                    }
-                    if (currentArrayElement.equals("/by")) {
-                        stringHasEnded = true;
-                        continue;
-                    }
-                    str.append(currentArrayElement).append(" ");
+        case DEADLINE:
+            String time = "";
+            boolean stringHasEnded = false;
+
+            for (int i = 1; i < array.length; i++) {
+                //repeatedly append strings in the array until the time is found
+                String currentArrayElement = array[i];
+                if (stringHasEnded) {
+                    time = currentArrayElement;
+                    break;
                 }
-                //check if a time was entered
-                if (!stringHasEnded) {
-                    System.out.println("Do you not have a deadline? If you do, you might as well enter it right?");
-                    return;
+                if (currentArrayElement.equals("/by")) {
+                    stringHasEnded = true;
+                    continue;
                 }
+                str.append(currentArrayElement).append(" ");
+            }
+            //check if a time was entered
+            if (!stringHasEnded) {
+                System.out.println("Do you not have a deadline? If you do, you might as well enter it right?");
+                return;
+            }
 
-                tempTask = new Deadlines(str.toString(), time);
-                break;
+            tempTask = new Deadlines(str.toString(), time);
+            break;
 
 
-            case EVENT:
-                String eventTime = "";
-                boolean stringHasTerminated = false;
+        case EVENT:
+            String eventTime = "";
+            boolean stringHasTerminated = false;
 
-                for (int i = 1; i < array.length; i++) {
-                    //repeatedly append strings in the array until the eventTime is found
-                    String currentArrayElement = array[i];
-                    if (stringHasTerminated) {
-                        eventTime = currentArrayElement;
-                        break;
-                    }
-                    if (currentArrayElement.equals("/at")) {
-                        stringHasTerminated = true;
-                        continue;
-                    }
-                    str.append(currentArrayElement).append(" ");
+            for (int i = 1; i < array.length; i++) {
+                //repeatedly append strings in the array until the eventTime is found
+                String currentArrayElement = array[i];
+                if (stringHasTerminated) {
+                    eventTime = currentArrayElement;
+                    break;
                 }
-                //check if a duration was entered
-                if (!stringHasTerminated) {
-                    System.out.println("So you have an event, but not a time period when it is happening?");
-                    return;
+                if (currentArrayElement.equals("/at")) {
+                    stringHasTerminated = true;
+                    continue;
                 }
+                str.append(currentArrayElement).append(" ");
+            }
+            //check if a duration was entered
+            if (!stringHasTerminated) {
+                System.out.println("So you have an event, but not a time period when it is happening?");
+                return;
+            }
 
-                tempTask = new Events(str.toString(), eventTime);
-                break;
+            tempTask = new Events(str.toString(), eventTime);
+            break;
 
         }
 
@@ -209,6 +240,31 @@ public class Duke {
         System.out.println("Ok can, sure. I have added this task as you wanted.");
         System.out.println(tempTask.toString());
         System.out.println("Now you have only " + listIndex + " tasks in the list. Try being more hardworking!");
+
+    }
+
+    private static void loadData() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(dataFile));
+            String nextLine;
+            while ((nextLine = reader.readLine()) != null) {
+                taskArray.add(DataParser.readData(nextLine));
+                listIndex += 1;
+
+            }
+        } catch (Exception e) {
+            if (e instanceof FileNotFoundException) {
+                System.out.println("Whoops, there is some problem with your file!");
+            } else {
+                System.out.println("Your save file is corrupted! Did you not take care of it?");
+                System.out.println("Try deleting your save file then try again!");
+            }
+
+        }
+
+    }
+
+    private static void saveData() {
 
     }
 
