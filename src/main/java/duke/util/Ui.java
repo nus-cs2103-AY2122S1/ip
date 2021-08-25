@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Ui {
     public void print(String... strings) {
         System.out.println("_________________________________________________");
-        for(String string: strings) {
+        for (String string: strings) {
             System.out.println("\n" + "    " + string);
         }
         System.out.println("_________________________________________________");

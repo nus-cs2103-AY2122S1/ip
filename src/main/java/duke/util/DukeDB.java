@@ -8,7 +8,9 @@ import duke.task.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -37,13 +39,11 @@ public class DukeDB {
     public ArrayList<Task> readData() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-
             Scanner scanner = new Scanner(file);
             while (scanner.hasNext()) {
                 String s = scanner.nextLine();
                 Task t = parse(s);
                 tasks.add(t);
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -131,11 +131,9 @@ public class DukeDB {
                 fileWriter.write(out);
             }
             fileWriter.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -219,7 +217,7 @@ public class DukeDB {
 
         data.addData(new Todo("hahaha"));
         ArrayList<Task> lst = data.readData();
-        for(int i = 0 ; i < lst.size(); i++) {
+        for (int i = 0 ; i < lst.size(); i++) {
             System.out.println(lst.get(i));
         }
         data.deleteData(1);

@@ -33,7 +33,7 @@ public class Parser {
             listCommand();
         } else if (lowerCase.startsWith("deadline")) {
             int indexOfTime = input.indexOf("/by");
-            if(indexOfTime == -1) {
+            if (indexOfTime == -1) {
                 throw new DukeException("OOPS!!! The timeline of a deadline cannot be empty.");
             }
             String item = input.substring(9, indexOfTime);
@@ -44,7 +44,7 @@ public class Parser {
             ui.showNewTask(deadline);
         } else if (lowerCase.startsWith("event")) {
             int indexOfTime = input.indexOf("/at");
-            if(indexOfTime == -1) {
+            if (indexOfTime == -1) {
                 throw new DukeException("OOPS!!! The timeline of a event cannot be empty.");
             }
             String item = input.substring(6, indexOfTime);
@@ -100,10 +100,10 @@ public class Parser {
      */
     public void listCommand() {
         String items = "";
-        if(taskList.length() > 0) {
+        if (taskList.length() > 0) {
             items = items + "1. " + taskList.get(0).toString();
         }
-        for(int i = 2 ; i <= taskList.length(); i++) {
+        for (int i = 2 ; i <= taskList.length(); i++) {
             items = items + "\n    " + i + ". " + taskList.get(i-1).toString();
         }
         ui.showList(items);

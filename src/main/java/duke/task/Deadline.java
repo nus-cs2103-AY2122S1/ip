@@ -33,7 +33,6 @@ public class Deadline extends Task{
      * @return transformed time of type LocalDateTime
      */
     public LocalDateTime parseTime(String time) {
-        String newDate;
         String[] str = time.split(" ");
         String[] oldDate = str[0].split("/");
         LocalDateTime localTime;
