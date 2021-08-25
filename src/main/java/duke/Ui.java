@@ -12,7 +12,7 @@ public class Ui {
     /**
      * Beautifies text output by wrapping it around a border.
      *
-     * @param input
+     * @param input Processed input from the user.
      */
     public void outputWrapper(String input) {
         System.out.println(SEPARATOR);
@@ -23,7 +23,7 @@ public class Ui {
     /**
      * Beautifies list of items by wrapping it around a border.
      *
-     * @param elements
+     * @param elements Tasklist of all the items in the current session's tasklist.
      */
     public void outputWrapper(Tasklist elements) {
         ListIterator<Task> it = elements.toIterable();
@@ -41,9 +41,10 @@ public class Ui {
     }
 
     /**
-     * Prints the confirmation message for any item added to list.
+     * Displays a confirmation message on the command line on addition of a Task to the task list.
      *
-     * @param task
+     * @param task Task object to be added.
+     * @param listOfItems Current session's Tasklist.
      */
     public void printAdditionConfirmation(Task task, Tasklist listOfItems) {
         String confirmationMessage = "You have successfully added an item:\n" + task + "\nto the list.\n";
@@ -56,9 +57,10 @@ public class Ui {
     }
 
     /**
-     * Prints the confirmations message for any item deleted from the list.
+     * Displays a confirmation message on the command line on deletion of a Task from the task list.
      *
-     * @param task
+     * @param task Task object to be deleted.
+     * @param listOfItems Current session's Tasklist.
      */
     public void printDeletionConfirmation(Task task, Tasklist listOfItems) {
         String confirmationMessage = "You have successfully deleted an item:\n" + task + "\nfrom the list.\n";

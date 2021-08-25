@@ -8,9 +8,9 @@ public class FileParser {
     /**
      * Takes in a string as an input and returns a task to be added to the task list.
      *
-     * @param input
-     * @return
-     * @throws DukeException
+     * @param input A line read from the save file in string format.
+     * @return A Task object to be added to the task list.
+     * @throws DukeException Throws an exception when an error is encountered when parsing the line from file.
      */
     public Task parse(String input) throws DukeException {
         try {

@@ -35,7 +35,7 @@ public class Duke {
     /**
      * Marks an item on the list as completed.
      *
-     * @param input
+     * @param input Command line input from the user.
      */
     private void markAsDone(String input) {
         String[] keywords = input.split(" ");
@@ -51,9 +51,9 @@ public class Duke {
     /**
      * Adds an item to the list as todo.
      *
-     * @param input
+     * @param input Command line input from the user.
      */
-    private void markAsTodo(String input) throws DukeException {
+    private void addAsTodo(String input) throws DukeException {
         // split input into command and text
         String[] elements = input.split(" ", 2);
         if (elements.length == 1) {
@@ -68,9 +68,9 @@ public class Duke {
     /**
      * Adds an item to the list as an event.
      *
-     * @param input
+     * @param input Command line input from the user.
      */
-    private void markAsEvent(String input) throws DukeException {
+    private void addAsEvent(String input) throws DukeException {
         String[] keywords = input.split(" ", 2);
         if (keywords.length == 1) {
             throw new DukeException("you need to describe your event to me in format: event (description)!");
@@ -89,9 +89,9 @@ public class Duke {
     /**
      * Adds an item to the list as deadline.
      *
-     * @param input
+     * @param input Command line input from the user.
      */
-    private void markAsDeadline(String input) throws DukeException {
+    private void addAsDeadline(String input) throws DukeException {
         String[] keywords = input.split(" ", 2);
         if (keywords.length == 1) {
             throw new DukeException("you need to describe your deadline to me in format: deadline (description)!");
@@ -110,12 +110,12 @@ public class Duke {
     /**
      * Deletes an item from the list by passing the index of the task to be deleted.
      *
-     * @param input
-     * @throws DukeException
+     * @param input Command line input from the user to be parsed.
+     * @throws DukeException Throws an exception if index is not on the list or with wrong input.
      */
     private void deleteItem(String input) throws DukeException {
         try {
-            Integer idx = Integer.parseInt(input.split(" ", 2)[1]);
+            Integer idx = Integer.parseInt(parser.getDescription(input));
             Task item = listOfItems.getTask(idx);
             listOfItems.removeTask(idx);
             ui.printDeletionConfirmation(item, listOfItems);
@@ -129,7 +129,7 @@ public class Duke {
     /**
      * Handles invalid commands from the user.
      *
-     * @throws DukeException
+     * @throws DukeException Throws an exception when a wrong input is given on the command line.
      */
     private void markAsInvalid(String input) throws DukeException {
         if (input.equals("")) {
@@ -142,7 +142,7 @@ public class Duke {
     /**
      * Handles the user's input and determines which command should be run.
      *
-     * @param input
+     * @param input Command line input from the user.
      */
     private void handleInput(String input) {
         String command = parser.getCommand(input);
@@ -155,13 +155,13 @@ public class Duke {
                     markAsDone(input);
                     break;
                 case "todo":
-                    markAsTodo(input);
+                    addAsTodo(input);
                     break;
                 case "event":
-                    markAsEvent(input);
+                    addAsEvent(input);
                     break;
                 case "deadline":
-                    markAsDeadline(input);
+                    addAsDeadline(input);
                     break;
                 case "delete":
                     deleteItem(input);

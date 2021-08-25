@@ -12,7 +12,7 @@ public class Task {
     }
 
     /**
-     * Sets task in tasklist to done.
+     * Sets a task in the tasklist to completed.
      */
     public void setDone() {
         isDone = true;

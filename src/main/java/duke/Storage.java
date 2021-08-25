@@ -22,8 +22,8 @@ public class Storage {
      * Loads data from savefile.
      * Starts the session with an empty tasklist if there was an error found.
      *
-     * @return
-     * @throws DukeException
+     * @return A Tasklist object containing all the information from the save file as Task objects.
+     * @throws DukeException Throws an exception if the file could not be read or no file was found.
      */
     public Tasklist load() throws DukeException {
         Tasklist taskList = new Tasklist();
@@ -40,10 +40,9 @@ public class Storage {
 
     /**
      * Accepts the tasklist and writes to file.
-     * Throws an exception if an error occurs.
      *
-     * @param taskList
-     * @throws IOException
+     * @param taskList The Tasklist object in the current user's session.
+     * @throws IOException Throws an exception if an error occurs while writing to file.
      */
     public void save(Tasklist taskList) throws IOException {
         String writableData = taskList.toWritable();

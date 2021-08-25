@@ -22,8 +22,6 @@ public class Deadline extends Task {
     public String toString() {
         String deadlineMarker = "[D]";
 
-
-
         if (isDone) {
             return deadlineMarker + "|" + hasCross + "|" + item + "|" + date.toString();
         } else {
