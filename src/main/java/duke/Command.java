@@ -54,20 +54,24 @@ public class Command {
                     }
                 case "todo":
                     try {
-                        Task todo = new Todo(sc.nextLine().trim(), count);
+                        String todoDescription = sc.nextLine().trim();
+                        Task todo = new Todo(todoDescription, count);
+                        if(todoDescription.isEmpty()){
+                            throw new DukeException(ui.emptyDescriptionError());
+                        }
                         tasks.add(todo);
                         count++;
                         ui.todo(todo,count);
                         break;
-                    } catch (Exception e){
-                        ui.showTodoError();
+                    } catch (DukeException e){
+                        System.out.println(e.getMessage());
                         break;
                     }
                 case "deadline":
                     try {
                         String[] deadlineArr = sc.nextLine().split("/by");
                         if(deadlineArr[0].strip().isEmpty()){
-                            throw new DukeException("");
+                            throw new DukeException(ui.emptyDescriptionError());
                         }
                         LocalDate d1 = LocalDate.parse(deadlineArr[1].trim());
                         Task deadline = new Deadline(deadlineArr[0].trim(),
@@ -80,19 +84,40 @@ public class Command {
                         ui.showDeadlineError1();
                         break;
                     } catch (DukeException e){
-                        ui.showDeadlineError2();
+                        System.out.println(e.getMessage());
                         break;
                     }
                 case "event":
                     try {
                         String[] eventArr = sc.nextLine().split("/at");
+                        if(eventArr[0].strip().isEmpty()){
+                            throw new DukeException(ui.emptyDescriptionError());
+                        }
                         Task event = new Event(eventArr[0].trim(),eventArr[1].trim(), count);
                         tasks.add(event);
                         count++;
                         ui.event(event,count);
                         break;
-                    } catch (Exception e){
-                        ui.showEventError();
+                    } catch (DukeException e){
+                        System.out.println(e.getMessage());
+                        break;
+                    }
+                case "find":
+                    try {
+                        String keyword = sc.nextLine().trim();
+                        String findList = "\n";
+                        if(keyword.strip().isEmpty()){
+                            throw new DukeException(ui.emptyDescriptionError());
+                        }
+                        for (int i = 0; i < tasks.size(); i++){
+                            if (tasks.get(i).getDescription().contains(keyword)){
+                                findList += tasks.get(i) + "\n";
+                            }
+                        }
+                        ui.find(findList);
+                        break;
+                    } catch (DukeException e){
+                        System.out.println(e.getMessage());
                         break;
                     }
                 default:

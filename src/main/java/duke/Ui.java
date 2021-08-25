@@ -42,10 +42,6 @@ public class Ui {
                 "\nNow you have " + count + " tasks in the list.\n" + line);
     }
 
-    public void showTodoError(){
-        System.out.println("\n" + line +
-                "\n☹ OOPS!!! The description of a todo cannot be empty.\n" + line);
-    }
 
     public void deadline(Task deadline,int count){
         System.out.println(line + "Got it. I've added this task:\n" + deadline +
@@ -57,19 +53,18 @@ public class Ui {
                 "\n☹ OOPS!!! The time must be in the format YYYY-MM-DD\n" + line);
     }
 
-    public void showDeadlineError2(){
-        System.out.println("\n" + line +
-                "\n☹ OOPS!!! The description of a deadline cannot be empty.\n" + line);
-    }
 
     public void event(Task event,int count){
         System.out.println(line + "Got it. I've added this task:\n" + event +
                 "\nNow you have " + count + " tasks in the list.\n" + line);
     }
 
-    public void showEventError(){
-        System.out.println("\n" + line +
-                "\n☹ OOPS!!! The description of a event cannot be empty.\n" + line);
+    public void find(String findList){
+        System.out.println(line + "Here are the matching tasks in your list:" + findList + line);
+    }
+
+    public String emptyDescriptionError(){
+        return "\n" + line + "\n☹ OOPS!!! The description cannot be empty.\n" + line;
     }
 
     public void defaultError(){
