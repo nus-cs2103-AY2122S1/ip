@@ -14,6 +14,15 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String taskIndicator() {
+        return "D";
+    }
+
+    public String getBy() {
+        return this.by.toString();
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString()
                 + " (by:" + changeDateFormat() + ")";

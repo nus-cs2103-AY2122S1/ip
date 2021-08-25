@@ -10,6 +10,15 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getAt() {
+        return at.toString();
+    }
+
+    @Override
+    public String taskIndicator() {
+        return "E";
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " +
