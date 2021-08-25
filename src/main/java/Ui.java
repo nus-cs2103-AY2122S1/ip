@@ -28,4 +28,8 @@ public class Ui {
        printMessage(EXIT_MESSAGE);
     }
 
+    public void printError(DukeException e) {
+        printMessage(e.toString());
+    }
+
 }

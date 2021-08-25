@@ -14,7 +14,7 @@ public class Storage {
 
     }
 
-    private static void parseAndCreateTask(String input, ArrayList<Task> taskList) {
+    private static void parseAndCreateTask(String input, ArrayList<Task> taskList) throws DukeException {
         String[] inputArr = input.split(",");
         Task currentTask;
         switch (inputArr[0]) {
@@ -43,34 +43,30 @@ public class Storage {
             break;
 
         default:
-            System.out.println("Database has invalid data!");
+            throw new DukeException("invalid data");
         }
 
     }
 
-    public ArrayList<Task> loadData() {
+    public ArrayList<Task> loadData() throws DukeException {
         File dataFile = new File(this.filePath);
-        System.out.println("Loading data from database..........");
         ArrayList<Task> taskList = new ArrayList<>();
         try (Scanner fileScanner = new Scanner(dataFile);){
 
             while (fileScanner.hasNext()) {
                 parseAndCreateTask(fileScanner.nextLine(), taskList);
             }
-            System.out.println("Database loaded!");
         } catch (FileNotFoundException fileException) {
-            System.out.println("No database found, creating database");
             try {
                 dataFile.createNewFile();
-                System.out.println("Database created");
             } catch (IOException ioException) {
-                System.out.println("Error creating database");
+                throw new DukeException("failed database creation");
             }
         }
         return taskList;
     }
 
-    public void saveData(TaskList taskList) {
+    public void saveData(TaskList taskList) throws DukeException {
         try (FileWriter fw = new FileWriter(this.filePath)) {
 
             StringBuilder dataString = new StringBuilder();
@@ -82,8 +78,7 @@ public class Storage {
             fw.write(dataString.toString());
 
         } catch (IOException e) {
-            System.out.println("Error saving data!");
-            e.printStackTrace();
+            throw new DukeException("failed data save");
         }
     }
 }
