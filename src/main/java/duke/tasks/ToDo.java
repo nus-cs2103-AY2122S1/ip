@@ -20,6 +20,11 @@ public class ToDo extends Task {
         }
     }
 
+    @Override
+    public String formatString() {
+        return toString();
+    }
+
     /**
      * Overriding toString method to display the relevant information.
      *

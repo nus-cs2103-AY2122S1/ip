@@ -52,6 +52,8 @@ public abstract class Task {
         this.isDone = done;
         return;
     }
+    
+    public abstract String formatString();
 
     /**
      * Overriding toString method to display the relevant information.

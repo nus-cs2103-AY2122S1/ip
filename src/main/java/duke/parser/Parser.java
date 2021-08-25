@@ -43,6 +43,8 @@ public class Parser {
             return "event";
         } else if (des.contains("todo") && des.startsWith("todo")) {
             return "todo";
+        } else if (des.contains("find") && des.startsWith("find")) {
+            return "find";
         }
         return null;
     }

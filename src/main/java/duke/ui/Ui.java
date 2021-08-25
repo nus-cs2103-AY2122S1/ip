@@ -8,6 +8,7 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.ToDoCommand;
@@ -89,6 +90,10 @@ public class Ui {
 
                     if (command.equals("delete")) {
                         c = new DeleteCommand();
+                    }
+
+                    if (command.equals("find")) {
+                        c = new FindCommand();
                     }
 
                     c.execute(des, tList);
