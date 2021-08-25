@@ -8,6 +8,7 @@ class DukeTest {
 
     @Test
     void run() {
+        // TODO: test console output
     }
 
     @Test
