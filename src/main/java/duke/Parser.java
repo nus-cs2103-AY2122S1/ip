@@ -1,11 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -95,6 +90,12 @@ public class Parser {
             }
         case "bye":
             return new ExitCommand();
+        case "find":
+            if (inputArr.length == 1) {
+                throw new DukeException("Input the keyword to be used for the search!");
+            } else {
+                return new FindCommand(inputArr[1]);
+            }
         default:
             throw new DukeException("I don't get what you mean? Try again!");
         }

@@ -19,8 +19,8 @@ public abstract class Command {
      * @param storage The storage associated with the current bot.
      * @throws DukeException If any error has occurred during the execution of the commands.
      */
-    public abstract void execute(TaskList task, UI userInt, Storage storage)
-            throws DukeException;
+    public abstract void execute(TaskList task, UI userInt, Storage storage) throws DukeException;
+
 
     /**
      * Returns a boolean determining whether the input should exit the bot.

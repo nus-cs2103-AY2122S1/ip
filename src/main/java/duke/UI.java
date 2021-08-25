@@ -83,8 +83,25 @@ public class UI {
     }
 
     /**
-     * Alerts the user that a task has been added.
+     * Updates the user that there are no matches in the list.
      */
+    public void notifyNoMatching() {
+        System.out.println("There were no keyword matches!");
+    }
+
+    /**
+     * Updates the user of the tasks in the list matching the keywords.
+     *
+     * @param taskArrList The ArrayList of tasks with matching keywords.
+     */
+    public void notifyMatchingList(ArrayList<Task> taskArrList) {
+        int listLength = taskArrList.size();
+        System.out.println("Here's are the matching results:");
+        for (int i = 0; i < listLength; i++) {
+            System.out.println(String.format("%d. %s", i + 1, taskArrList.get(i).displayInfo()));
+        }
+    }
+
     public void notifyAdd(ArrayList<Task> taskArrList) {
         int listLength = taskArrList.size();
         Task newTask = taskArrList.get(listLength - 1);
