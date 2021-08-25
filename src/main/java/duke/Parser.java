@@ -12,7 +12,12 @@ import duke.command.IncorrectCommand;
 
 
 public class Parser {
-
+    /**
+     * Parse a string to a Command
+     *
+     * @param fullCommand the command in string
+     * @return            the command in Command class
+     */
     public static Command parse(String fullCommand) {
         String[] inputValues = fullCommand.split(" ", 2);
         String commandInstruction = inputValues[0];
@@ -45,6 +50,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Retrieve the parameters from an array of String input values
+     *
+     * @param inputValues an array of input values
+     * @return            an array of parameters
+     */
     public static String[] getParameters(String[] inputValues) {
         String parameter_1 = "";
         String parameter_2 = "";

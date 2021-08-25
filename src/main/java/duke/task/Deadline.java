@@ -8,6 +8,9 @@ public class Deadline extends Task {
 
     protected String by;
 
+    /**
+     * Class constructor for Deadline Class specifying the description and the deadline 'by'
+     */
     public Deadline(String description, String by) {
         super(description);
 
@@ -19,7 +22,6 @@ public class Deadline extends Task {
         String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
         if (dateTime.length > 1) {
-            // store date and time
             String rawTime = dateTime[1];
             String processedRawTime = rawTime.substring(0, 2) + ":" + rawTime.substring(2);
             LocalTime time = LocalTime.parse(processedRawTime);
@@ -29,16 +31,29 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Class constructor for Deadline Class specifying the description, isDone and the deadline 'by'
+     */
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
         this.by = by;
     }
 
+    /**
+     * Return the toString of the class
+     *
+     * @return           toString of the class
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
 
+    /**
+     * Return the string format for data source
+     *
+     * @return           string format of task for data source
+     */
     @Override
     public String toData() {
         return "D" + super.toData() + " | " + this.by;

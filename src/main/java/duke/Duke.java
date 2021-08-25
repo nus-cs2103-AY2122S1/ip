@@ -12,6 +12,9 @@ public class Duke {
     private TaskList tasks;
     protected Ui ui;
 
+    /**
+     * Class constructor for Duke Class specifying the filepath
+     */
     public Duke(Path filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,11 +30,19 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method, create an instance of Duke and run it
+     *
+     * @param args arguments
+     */
     public static void main(String[] args) {
         Duke victor = new Duke(Paths.get(System.getProperty("user.dir"), "data", "duke.txt"));
         victor.run();
     }
 
+    /**
+     * Run the init commands of Duke
+     */
     public void run() {
         storage.load();
         ui.showWelcome();

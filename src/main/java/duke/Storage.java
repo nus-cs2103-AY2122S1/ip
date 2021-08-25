@@ -16,18 +16,25 @@ public class Storage {
     protected Path filePath;
     private Ui ui;
 
+    /**
+     * Class constructor for Storage Class specifying the filepath
+     */
     public Storage(Path filePath) {
         this.filePath = filePath;
         ui = new Ui();
     }
 
+    /**
+     * Return an ArrayList of tasks loaded from data source
+     *
+     * @return           an arraylist of tasks
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
         boolean directoryExists = Files.exists(filePath);
 
         try {
             if (directoryExists) {
-                // for everything in the data file, add to the list
                 List<String> data = Files.readAllLines(filePath);
                 for (String str : data) {
                     Task task = convertDataToTask(str);
@@ -42,9 +49,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Save the given task to the data source
+     *
+     * @param task the given task to save
+     */
     public void save(Task task) {
         boolean directoryExists = Files.exists(filePath);
-        // access the data file and make changes to it
         try {
             if (directoryExists) {
                 String newData = task.toData() + '\n';
@@ -58,6 +69,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Update the given task in the data source
+     *
+     * @param taskNumber the task number of the task
+     * @param task       the task given
+     * @param action     actions to perform to the task, eg: d-delete, m-modify
+     */
     public void update(int taskNumber, Task task, String action) {
         boolean directoryExists = Files.exists(filePath);
         try {
@@ -78,6 +96,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Convert data retrieved from data source to Task
+     *
+     * @param data the data retrieved from data source
+     * @return     the converted Task
+     */
     private Task convertDataToTask(String data) {
         try {
             String[] dataValues = data.split(" \\| ");
