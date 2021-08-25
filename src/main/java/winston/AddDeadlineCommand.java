@@ -12,6 +12,6 @@ public class AddDeadlineCommand extends Command{
     @Override
     public void run() {
         super.taskList.addTask(new DeadLine(description, dueDate));
-        Ui.printTasksLeft(taskList.size());
+        Ui.printTasksLeft(taskList.completedTasks());
     }
 }

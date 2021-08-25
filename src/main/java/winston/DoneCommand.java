@@ -12,6 +12,6 @@ public class DoneCommand extends Command{
     public void run() {
         super.taskList.markTask(this.index);
         Ui.printDontWorry();
-        Ui.printTasksLeft(super.taskList.size());
+        Ui.printTasksLeft(super.taskList.completedTasks());
     }
 }

@@ -10,6 +10,6 @@ public class AddTodoCommand extends Command {
     @Override
     public void run() {
         super.taskList.addTask(new ToDoTask(this.description));
-        Ui.printTasksLeft(taskList.size());
+        Ui.printTasksLeft(taskList.completedTasks());
     }
 }

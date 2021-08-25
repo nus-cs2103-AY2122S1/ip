@@ -13,6 +13,6 @@ public class AddEventCommand extends Command{
     @Override
     public void run() {
         super.taskList.addTask(new Event(this.description, this.dateAndTime));
-        Ui.printTasksLeft(taskList.size());
+        Ui.printTasksLeft(taskList.completedTasks());
     }
 }
