@@ -141,6 +141,19 @@ public class Parser {
             }
         }
 
+        // Check if fullCommand starts with "find"
+        else if (firstToken.equals("find")) {
+            // Validate command and arguments
+            if (fullCommand.split(" ").length <= 1) {
+                throw new DukeException("Please provide a valid search term!");
+            }
+
+            // Parse search terms
+            String searchTerms = fullCommand.substring(5).strip();
+
+            return new FindCommand(searchTerms);
+        }
+
         // Otherwise, throw an error
         else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

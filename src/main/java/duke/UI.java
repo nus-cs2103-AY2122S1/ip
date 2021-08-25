@@ -154,6 +154,29 @@ public class UI {
         }
 
         /**
+         * Returns a Response detailing the tasks that match a set of
+         * given search terms and prints it to the console.
+         *
+         * @param matches A Tasklist of tasks that match the search terms
+         * @return A Response detailing the matching Tasks
+         */
+        public static Response matchingTasks(Tasklist matches) {
+            if (matches.getTotalTasks() == 0) {
+                Response response = new Response("No matches found! :(");
+                System.out.println(response);
+                return response;
+            }
+
+            String msg = "Here are the matching tasks in your list:\n";
+            msg += matches.toString();
+
+            Response response = new Response(msg);
+            System.out.println(response);
+
+            return response;
+        }
+
+        /**
          * Returns a String representation of a Response with all formatting complete,
          * for use when printing to the console.
          *
@@ -256,6 +279,16 @@ public class UI {
      */
     public void showErrorMsg(DukeException e) {
         Response.error(e.getMessage());
+    }
+
+    /**
+     * Prints a formatted message detailing the tasks that match a given
+     * search term provided by the user.
+     *
+     * @param matches the Tasklist containing all Tasks that match the search terms
+     */
+    public void showMatchingTasks(Tasklist matches) {
+        Response.matchingTasks(matches);
     }
 
     /**
