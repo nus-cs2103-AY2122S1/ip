@@ -1,9 +1,21 @@
+package duke;
+
+import duke.command.*;
+import duke.exception.CorruptedFileException;
+import duke.exception.DukeException;
+import duke.exception.InvalidArgumentsException;
+import duke.exception.InvalidTaskException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    protected enum TaskType {
+    private enum TaskType {
         TODO,
         DEADLINE,
         EVENT,

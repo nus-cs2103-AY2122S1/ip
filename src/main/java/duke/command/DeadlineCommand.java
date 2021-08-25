@@ -1,7 +1,12 @@
-public class TodoCommand extends DukeCommand {
-    private final ToDo task;
+package duke.command;
 
-    public TodoCommand(ToDo task) {
+import duke.DukeList;
+import duke.task.Deadline;
+
+public class DeadlineCommand extends DukeCommand {
+    private final Deadline task;
+
+    public DeadlineCommand(Deadline task) {
         super();
         this.task = task;
     }

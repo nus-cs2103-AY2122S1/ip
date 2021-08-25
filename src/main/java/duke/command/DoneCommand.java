@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.DukeList;
+import duke.exception.InvalidArgumentsException;
+import duke.task.Task;
+
 public class DoneCommand extends DukeCommand {
     private final int id;
 

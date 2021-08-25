@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.DukeList;
+import duke.task.Event;
+
 public class EventCommand extends DukeCommand {
     private final Event task;
 

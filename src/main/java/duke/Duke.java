@@ -1,3 +1,10 @@
+package duke;
+
+import duke.command.DukeCommand;
+import duke.command.ExitCommand;
+import duke.exception.CorruptedFileException;
+import duke.exception.DukeException;
+
 public class Duke {
 
     private static void runDuke() {

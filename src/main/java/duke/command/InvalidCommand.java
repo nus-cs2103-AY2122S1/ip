@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.DukeList;
+import duke.exception.DukeException;
+
 public class InvalidCommand extends DukeCommand{
     private final DukeException e;
 
