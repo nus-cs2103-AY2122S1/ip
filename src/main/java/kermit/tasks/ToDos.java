@@ -6,7 +6,7 @@ package kermit.tasks;
  */
 public class ToDos extends Task {
     /**
-     * ToDo constructor
+     * ToDo constructor.
      *
      * @param description Description of task.
      */
@@ -15,7 +15,7 @@ public class ToDos extends Task {
     }
 
     /**
-     * ToDo constructor
+     * ToDo constructor.
      *
      * @param description Description of task.
      * @param isCompleted Boolean to set if task is completed.
