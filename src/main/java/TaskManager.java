@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Adam Ho
  */
 public class TaskManager {
-
+    private String TASK_FILE = "./data/duke.txt";
     private enum Command {
 
         LIST("list"),
@@ -25,7 +25,7 @@ public class TaskManager {
         }
     }
 
-    protected static ArrayList<Task> tasks = new ArrayList<>();
+    protected static ArrayList<Task> listOfTasks = new ArrayList<>();
 
     /**
      * Gets the description of the task.
@@ -50,17 +50,17 @@ public class TaskManager {
         Task t;
         if (cmd.equals("todo")) {
             t = new Todo(task);
-            tasks.add(t);
+            listOfTasks.add(t);
         } else if (cmd.equals("deadline")) {
             String date = task.split(" /by ")[1];
             task = task.split(" /by ")[0];
             t = new Deadline(task, date);
-            tasks.add(t);
+            listOfTasks.add(t);
         } else {
             String date = task.split(" /at ")[1];
             task = task.split(" /at ")[0];
             t = new Event(task, date);
-            tasks.add(t);
+            listOfTasks.add(t);
         }
         Message.add(t);
     }
@@ -72,8 +72,8 @@ public class TaskManager {
      */
     public void deleteTask(int taskId) throws DukeException.MissingTaskException {
         try {
-            Task t = tasks.get(taskId-1);
-            tasks.remove(t);
+            Task t = listOfTasks.get(taskId-1);
+            listOfTasks.remove(t);
             --Task.totalTasks;
             Message.delete(t);
         } catch (IndexOutOfBoundsException e) {
@@ -88,7 +88,7 @@ public class TaskManager {
      */
     public void markDone(int taskId) throws DukeException.MissingTaskException {
         try {
-            Task t = tasks.get(taskId-1);
+            Task t = listOfTasks.get(taskId-1);
             t.isDone = true;
             Message.done(t);
         } catch (IndexOutOfBoundsException e) {
@@ -117,6 +117,7 @@ public class TaskManager {
      */
     public void run() {
         Message.greet();
+        listOfTasks = TaskListReader.read(TASK_FILE);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -124,23 +125,25 @@ public class TaskManager {
             Command c = getCommand(input);
             try {
                 switch (c) {
-                    case LIST:
-                        Message.list(tasks);
-                        break;
-                    case DONE:
-                        markDone(Integer.parseInt(taskDescription(input)));
-                        break;
-                    case TODO:
-                    case DEADLINE:
-                    case EVENT:
-                        addTask(taskDescription(input), c.type);
-                        break;
-                    case DELETE:
-                        deleteTask(Integer.parseInt(taskDescription(input)));
-                        break;
-                    case INVALID:
-                        throw new DukeException.InvalidInputException();
+                case LIST:
+                    Message.list(listOfTasks);
+                    break;
+                case DONE:
+                    markDone(Integer.parseInt(taskDescription(input)));
+                    break;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    addTask(taskDescription(input), c.type);
+                    break;
+                case DELETE:
+                    deleteTask(Integer.parseInt(taskDescription(input)));
+                    break;
+                case INVALID:
+                    throw new DukeException.InvalidInputException();
                 }
+
+                TaskListWriter.write(TASK_FILE, listOfTasks);
             } catch (DukeException e) {
                 Message.error(e.toString());
             } finally {

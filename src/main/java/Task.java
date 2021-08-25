@@ -1,9 +1,11 @@
+import java.io.Serializable;
+
 /**
  * Encapsulates the details of a Task object.
  *
  * @author Adam Ho
  */
-public class Task {
+public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
     protected static int totalTasks = 0;

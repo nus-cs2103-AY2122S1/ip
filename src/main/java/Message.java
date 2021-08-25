@@ -22,7 +22,7 @@ public class Message {
     public static void add(Task task) {
         System.out.println("    ____________________________________________________________");
         System.out.println("    Got it. I've added this task: \n      " + task);
-        System.out.println("    Now you have " + Task.totalTasks + " in the list.");
+        System.out.println("    Now you have " + TaskManager.listOfTasks.size() + " in the list.");
         System.out.println("    ____________________________________________________________");
     }
 
@@ -49,7 +49,7 @@ public class Message {
     public static void delete(Task task) {
         System.out.println("    ____________________________________________________________");
         System.out.println("    Noted. I've removed this task: \n      " + task);
-        System.out.println("    Now you have " + Task.totalTasks + " in the list.");
+        System.out.println("    Now you have " + TaskManager.listOfTasks.size() + " in the list.");
         System.out.println("    ____________________________________________________________");
     }
 }
