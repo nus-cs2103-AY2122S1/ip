@@ -2,94 +2,99 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static ArrayList<Task> list = new ArrayList<Task>();
+    private static final String WELCOME_MESSAGE = "Hello! I'm Jacky\nWhat can I do for you?";
+    private static final String BYE_MESSAGE = "    Bye. Hope to see you again soon!";
     static boolean isTerminated = false;
+    private TaskHandler taskHandler;
+    private TaskSaver taskSaver;
 
-    public static void printList() {
-        System.out.println("    Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++)
-        {
-            System.out.println("    " + (i + 1) + ". " + list.get(i).toString());
+
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.initialiseDuke();
+        duke.runDuke();
+    }
+
+    public void initialiseDuke() {
+        try {
+            taskSaver = new TaskSaver("./data/taskList.txt");
+            ArrayList<Task> list = taskSaver.loadTasks();
+            taskHandler = new TaskHandler(list);
+        } catch (DukeException e) {
+            System.err.println("Error: Unable to initialise duke");
+            System.out.println(e.getMessage());
         }
     }
 
-    public static void printNoOfTasks() {
-        System.out.printf("    Now you have %d tasks in the list.\n", list.size());
-    }
-
-    public static void main(String[] args) throws DukeException {
+    public void runDuke() {
+        System.out.println(WELCOME_MESSAGE);
+        Scanner sc = new Scanner(System.in);
         while(!isTerminated) {
+            String cmd = sc.nextLine();
+            String input = cmd.split(" ")[0].toUpperCase();
             try {
-                System.out.println("Hello! I'm Jacky\nWhat can I do for you?");
-                Scanner sc = new Scanner(System.in);
-                String input = sc.nextLine();
-                while (!input.equals("bye")) {
-                    if (input.equals("list")) {
-                        printList();
-                        input = sc.nextLine();
-                        continue;
-                    } else if (input.contains("done")) {
-                        System.out.println("    Nice! I've marked this task as done: ");
-                        int taskNo = Integer.parseInt(input.substring(5));
-                        Task task = list.get(taskNo - 1);
-                        task.markAsDone();
-                        System.out.println("      " + task);
-                        input = sc.nextLine();
-                        continue;
-                    } else if (input.contains("delete")) {
-                        System.out.println("    Noted. I've removed this task: ");
-                        int taskNo = Integer.parseInt(input.substring(7));
-                        Task task = list.get(taskNo - 1);
-                        list.remove(taskNo - 1);
-                        System.out.println("      " + task);
-                        printNoOfTasks();
-                        input = sc.nextLine();
-                        continue;
-                    } else if (input.contains("todo")) {
-                        if (input.length() < 6) {
+                switch (input) {
+                    case "LIST":
+                        taskHandler.printList();
+                        break;
+
+                    case "DONE":
+                        taskHandler.markTaskAsDone(Integer.parseInt(cmd.substring(5)));
+                        taskSaver.updateFile(taskHandler.formatTaskToSave());
+                        break;
+
+                    case "DELETE":
+                        taskHandler.deleteTask(Integer.parseInt(cmd.substring(7)));
+                        taskHandler.printNoOfTasks();
+                        taskSaver.updateFile(taskHandler.formatTaskToSave());
+                        break;
+
+                    case "TODO":
+                        if (cmd.length() < 6) {
                             throw new DukeException("    OOPS!!! The description of a todo cannot be empty.");
                         } else {
-                            ToDo toDo = new ToDo(input.substring(5));
-                            list.add(toDo);
-                            System.out.println("    Got it. I've added this task:\n      " + toDo);
-                            printNoOfTasks();
+                            ToDo toDo = new ToDo(cmd.substring(5));
+                            taskHandler.addToDo(toDo);
+                            taskHandler.printNoOfTasks();
+                            taskSaver.updateFile(taskHandler.formatTaskToSave());
                         }
-                        input = sc.nextLine();
-                        continue;
-                    } else if (input.contains("deadline")) {
-                        if (input.length() < 10) {
+                        break;
+
+                    case "DEADLINE":
+                        if (cmd.length() < 10) {
                             throw new DukeException("    OOPS!!! The description of a deadline cannot be empty.");
                         } else {
-                            String[] split = input.split("/");
-                            Deadline deadline = new Deadline(split[0].substring(9), split[1].substring(3));
-                            list.add(deadline);
-                            System.out.println("    Got it. I've added this task:\n      " + deadline);
-                            printNoOfTasks();
-                            input = sc.nextLine();
-                            continue;
+                            String[] split = cmd.split("/by ");
+                            Deadline deadline = new Deadline(split[0].substring(9), split[1]);
+                            taskHandler.addDeadline(deadline);
+                            taskHandler.printNoOfTasks();
+                            taskSaver.updateFile(taskHandler.formatTaskToSave());
+                            break;
                         }
-                    } else if (input.contains("event")) {
-                        if (input.length() < 7) {
+
+                    case "EVENT":
+                        if (cmd.length() < 7) {
                             throw new DukeException("    OOPS!!! The description of an event cannot be empty.");
                         } else {
-                            String[] split = input.split("/");
-                            Event event = new Event(split[0].substring(6), split[1].substring(3));
-                            list.add(event);
-                            System.out.println("    Got it. I've added this task:\n      " + event);
-                            printNoOfTasks();
-                            input = sc.nextLine();
-                            continue;
+                            String[] split = cmd.split("/at ");
+                            Event event = new Event(split[0].substring(6), split[1]);
+                            taskHandler.addEvent(event);
+                            taskHandler.printNoOfTasks();
+                            taskSaver.updateFile(taskHandler.formatTaskToSave());
+                            break;
                         }
-                    } else {
+
+                    case "BYE":
+                        System.out.println(BYE_MESSAGE);
+                        isTerminated = true;
+                        System.exit(0);
+
+                    default:
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
                 }
             } catch(DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
-        System.out.println("    Bye. Hope to see you again soon!");
-        isTerminated = true;
-        System.exit(0);
     }
 }
