@@ -1,15 +1,22 @@
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Persistence {
+
 
     /**
      * In memory storage for log, for history, refer to the history variable
      */
     private static ArrayList<Task> log = new ArrayList<>();
+
+    /**
+     * History file that will be written to
+     */
+    private static String fileName = "src/main/Text/History.txt";
+
+    /**
+     * Init data storage handler for history.
+     */
+    private static DataStorageHandler history = new DataStorageHandler(fileName);
 
     /**
      * Adds the command to the log.
@@ -18,6 +25,7 @@ public class Persistence {
      */
     public static void addToLog(Task task) {
         log.add(task);
+        history.write(task.toString());
     }
 
     /**
@@ -60,5 +68,16 @@ public class Persistence {
             throw new IndexOutOfBoundsException();
         };
         log.remove(position - 1);
+    }
+
+    /**
+     * Prints all the lines in the history
+     */
+    public static void print_history() {
+        history.printAllLines();
+    }
+
+    public static void stopWriting() {
+        history.stopWriting();
     }
 }

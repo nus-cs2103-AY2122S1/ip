@@ -1,13 +1,13 @@
 public class Duke {
 
+    private static boolean isRunning = false;
     /**
      * Function starts the process of the dukebot, closes when the "Bye command is issued"
      */
     private static void start() {
         while (true) {
             String command = Presentation.scan();
-            // Check if player has entered a command, returns the command if command is not null or bye
-            if (command.equals("bye")) {
+            if (!isRunning) {
                 System.out.println("See ya");
                 break;
             } else {
@@ -19,6 +19,11 @@ public class Duke {
             }
         }
     }
+
+    protected static void stop() {
+        isRunning = false;
+    }
+
 
     /**
      * Starting point of the dukeBot

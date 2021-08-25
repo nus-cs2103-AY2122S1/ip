@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class Logic {
 
@@ -19,6 +18,10 @@ public class Logic {
 
         if (command.equals("")) {
             throw new EmptyCommandException();
+        } else if (command.equals("bye")) {
+            System.out.println("Comes here");
+            Duke.stop();
+            Persistence.stopWriting();
         } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
             Persistence.printLog();
         } else if (listOfCommandInputs.contains("delete")) {
