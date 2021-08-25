@@ -1,5 +1,7 @@
 package duke;
 
+import duke.command.Command;
+import duke.command.CommandExit;
 import task.TaskList;
 
 import java.util.Scanner;
@@ -16,9 +18,9 @@ public class DukeListener {
      *
      * @param taskList The task.TaskList that the parser should manage
      */
-    public DukeListener(TaskList taskList) {
+    public DukeListener(DukeParser parser) {
         sc = new Scanner(System.in);
-        parser = new DukeParser(taskList);
+        this.parser = parser;
     }
 
     /**
@@ -31,24 +33,17 @@ public class DukeListener {
             String input = sc.nextLine();
             System.out.println(Ui.LINE);
 
-            // Stop listening if "gubbai" is mentioned
-            if (input.equals("gubbai")) {
+            // TaskList related inputs
+            Command cmd = parser.parseInput(input);
+
+            if (cmd instanceof CommandExit) {
                 break;
-            } else if (input.equals("help")) {
-                Ui.displayHelp();
             } else {
-                // TaskList related inputs
-                parser.parseInput(input);
+                cmd.execute();
             }
 
             System.out.println(Ui.LINE);
         }
-
-        // Quit the program after listening stops
-        System.out.println(
-                Ui.OUTPUT_DISPLAY + "kimi no unmei no hito wa boku jyanai\n"
-                        + Ui.LINE
-        );
 
         sc.close();
     }

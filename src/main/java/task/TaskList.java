@@ -46,21 +46,17 @@ public class TaskList {
     /**
      * Adds a task into the task list
      *
-     * @param input A matcher object with the groups of information
-     *              required to create a task with the corresponding
-     *              task type
-     * @param type The task.TaskType of task to add
+     * @param task Task to add
      */
-    public void add(Matcher input, TaskType type) {
-        Optional.ofNullable(
-                TaskType.getNewTask(input, type))
-                    .map(task -> {
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(Ui.OUTPUT_SPACES + task);
-                        tasks.add(task);
-                        this.printSize();
-                        return null;
-                    });
+    public void add(Task task) {
+        Optional.ofNullable(task)
+                .map(x -> {
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(Ui.OUTPUT_SPACES + x);
+                    tasks.add(x);
+                    this.printSize();
+                    return null;
+                });
         Storage.saveList(tasks);
     }
     

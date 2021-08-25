@@ -7,23 +7,16 @@ import task.TaskList;
  */
 public class Duke {
     private final DukeListener listener;
-    private final TaskList taskList;
+    private final DukeParser parser;
 
     /**
      * Constructor
      * Instantiates a (saved) task.Task List and a duke.DukeListener for duke.Duke
      */
     private Duke() {
-        taskList = Storage.loadList();
-        listener = new DukeListener(taskList);
-    }
-
-    /**
-     * Starts the duke.Duke system
-     */
-    private void start(){
-        Ui.intro();
-        listener.startListen();
+        TaskList taskList = Storage.loadList();
+        parser = new DukeParser(taskList);
+        listener = new DukeListener(parser);
     }
 
     /**
@@ -35,4 +28,14 @@ public class Duke {
         Duke duke = new Duke();
         duke.start();
     }
+
+    /**
+     * Starts the duke.Duke system
+     */
+    private void start(){
+        Ui.intro();
+        listener.startListen();
+        Ui.goodBye();
+    }
+
 }

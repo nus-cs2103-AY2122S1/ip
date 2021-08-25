@@ -1,13 +1,8 @@
 package duke;
 
-import task.Task;
+import duke.command.*;
 import task.TaskList;
-import task.TaskType;
 
-import java.time.format.DateTimeParseException;
-
-import java.util.ArrayList;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -46,7 +41,13 @@ public class DukeParser {
      *
      * @param input String input from the Listener given by the User
      */
-    public void parseInput(String input) {
+    public Command parseInput(String input) {
+        if (input.equals("gubbai")) {
+            return new CommandExit();
+        } else if (input.equals("help")) {
+            return new CommandHelp();
+        }
+
         final Matcher checkList = listPattern.matcher(input);
         final Matcher checkDone = donePattern.matcher(input);
         final Matcher checkDelete = deletePattern.matcher(input);
@@ -55,47 +56,26 @@ public class DukeParser {
         final Matcher checkEvent = eventPattern.matcher(input);
 
         if (checkList.matches()) {
-            // List tasks
-            if (checkList.group(1) != null) {
-                // Extract modifiers and filter
-                try {
-                    ArrayList<Predicate<Task>> filters = TaskType.listStringToFilter(checkList.group(1));
-                    taskList.displayList(filters);
-                } catch (DateTimeParseException e) {
-                    System.out.println("Please enter a valid date! :(");
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                }
-            } else {
-                // Display items
-                ArrayList<Predicate<Task>> filter = new ArrayList<>();
-                filter.add(task -> true);
-                taskList.displayList(filter);
-            }
-
+            // Lists tasks based on given filter
+            return new CommandList(taskList, checkList.group(1));
         } else if (checkDone.matches()) {
             // Toggles completion of a task
-            taskList.toggleDone(Integer.parseInt(checkDone.group(1)));
-
+            return new CommandDone(taskList, Integer.parseInt(checkDone.group(1)));
         } else if (checkDelete.matches()) {
             // Remove a task from list
-            taskList.delete(Integer.parseInt(checkDelete.group(1)));
-
+            return new CommandDelete(taskList, Integer.parseInt(checkDelete.group(1)));
         } else if (checkTodo.matches()) {
             // Add a to-do task to list
-            taskList.add(checkTodo, TaskType.TODO);
-
+            return new CommandAddTodo(taskList, checkTodo.group(1));
         } else if (checkDeadline.matches()) {
             // Add a deadline to list
-            taskList.add(checkDeadline, TaskType.DEADLINE);
-
+            return new CommandAddDeadline(taskList, checkDeadline);
         } else if (checkEvent.matches()) {
             // Add an event to list
-            taskList.add(checkEvent, TaskType.EVENT);
-
+            return new CommandAddEvent(taskList, checkEvent);
         }  else {
             // Invalid command
-            System.out.println(Ui.OUTPUT_DISPLAY + "☹ eeeeeee~dameda!! " + input + " isn't a valid command!");
+            return new CommandInvalid(input);
         }
     }
 
