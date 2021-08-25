@@ -1,11 +1,15 @@
 package pilcrow;
 
-// Parses commands entered by the user
+// Object to parse commands entered by the user
 public class Parser {
     private String fullCommand;
     private String commandWord;
     private String restOfCommand;
 
+    /**
+     * Constructor for Parser object.
+     * @param fullCommand The String of the full text to be parsed.
+     */
     public Parser(String fullCommand) {
         this.fullCommand = fullCommand.trim();
         if (!this.fullCommand.contains(" ")) {
@@ -29,6 +33,12 @@ public class Parser {
         return this.restOfCommand;
     }
 
+    /**
+     * Returns the integer following the first word, if it exists.
+     * An error is thrown if an integer does not exist.
+     * Used for commands that expect an integer to follow, e.g. done, delete.
+     * @return Integer following initial word.
+     */
     public int getIndex() {
         int index;
         if (restOfCommand.equals("")) {

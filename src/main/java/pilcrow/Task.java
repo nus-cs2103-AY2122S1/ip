@@ -15,6 +15,13 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Factory method to create a Task.
+     * @param taskType String representing type of Task to be created. Maybe "todo", "deadline" or "event".
+     * @param taskName Name of the Task to be created.
+     * @param isDone Done status of the Task to be created.
+     * @return Task with specified fields.
+     */
     public static Task createTask(String taskType, String taskName, Boolean isDone) {
         Task task;
         if (taskType.equals("todo")) {
@@ -29,6 +36,11 @@ public class Task {
         return task;
     }
 
+    /**
+     * Converted a String that has been stored in Storage into a Task.
+     * @param storedTask String representing the stored task in Storage.
+     * @return Converted Task
+     */
     public static Task convertFromStoredTask(String storedTask) {
         Task task;
         Parser parser = new Parser(storedTask);
@@ -40,6 +52,10 @@ public class Task {
         return task;
     }
 
+    /**
+     * Dummy method, overridden by methods in subclasses.
+     * @return Dummy task
+     */
     public String convertToStoredTask() {
         String storedTask = "";
         return storedTask;
@@ -69,6 +85,10 @@ public class Task {
             super(taskName, isDone);
         }
 
+        /**
+         * Converts a ToDo into String form to be stored.
+         * @return String representing ToDo.
+         */
         @Override
         public String convertToStoredTask() {
             String storedTask = "todo " + (this.isDone ? 'T' : 'F') + this.taskName;
@@ -84,7 +104,7 @@ public class Task {
     }
 
     private static class Deadline extends Task {
-        LocalDate deadline;
+        private LocalDate deadline;
 
         private Deadline(String taskName, Boolean isDone) {
             super(taskName, isDone);
@@ -113,6 +133,10 @@ public class Task {
             }
         }
 
+        /**
+         * Converts a Deadline into String form to be stored.
+         * @return String representing Deadline.
+         */
         @Override
         public String convertToStoredTask() {
             String storedTask = "deadline " + (this.isDone ? 'T' : 'F') + this.taskName + "/" + this.getDeadline();
@@ -158,6 +182,10 @@ public class Task {
             this.duration = duration;
         }
 
+        /**
+         * Converts an Event into String form to be stored.
+         * @return String representing Event.
+         */
         @Override
         public String convertToStoredTask() {
             String storedTask = "event " + (this.isDone ? 'T' : 'F') + this.taskName + "/" + this.getDuration();
