@@ -7,8 +7,8 @@ import ponyo.storage.Storage;
 public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        for (int i = 1; i <= tasks.size(); i++) {
-            ui.show("\t" + i + "." + tasks.retrieveTask(i));
+        for (int i = 0; i < tasks.size(); i++) {
+            ui.show("\t" + (i + 1) + "." + tasks.retrieveTask(i));
         }
     }
 

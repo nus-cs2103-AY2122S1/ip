@@ -107,7 +107,7 @@ public class Storage {
     public void getFullContents(TaskList tasks) {
         try {
             String allContent = "";
-            for (int i = 1; i <= tasks.size(); i++) {
+            for (int i = 0; i < tasks.size(); i++) {
                 allContent += tasks.retrieveTask(i).toStringInFile() + "\n";
             }
             overwriteFile(PATH + "/" + FILENAME, allContent);
