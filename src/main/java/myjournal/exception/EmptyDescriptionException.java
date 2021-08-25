@@ -1,14 +1,14 @@
 package myjournal.exception;
 
 /**
- * A class to create empty description exceptions.
+ * Creates empty description exceptions.
  *
  * @author Felissa Faustine
  */
 public class EmptyDescriptionException extends MyJournalException {
 
     /**
-     * The constructor for the EmptyDescriptionExceptions.
+     * Constructs the EmptyDescriptionException objects.
      *
      * @param message The error message.
      */

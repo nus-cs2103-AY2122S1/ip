@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * A class to create chatBot called MyJournal.
+ * Creates chatBot called MyJournal.
  *
  * @author Felissa Faustine
  */
@@ -15,6 +15,11 @@ public class MyJournal {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructs the object MyJournal.
+     *
+     * @param filepath The filepath to MyJournal file.
+     */
     public MyJournal(String filepath) {
         ui = new Ui();
         parser = new Parser();
@@ -27,6 +32,11 @@ public class MyJournal {
         }
     }
 
+    /**
+     * Runs the whole programme of MyJournal.
+     *
+     * @throws IOException The exception thrown when file is corrupted.
+     */
     public void run() throws IOException {
         String input;
         Scanner reader = new Scanner(System.in);
