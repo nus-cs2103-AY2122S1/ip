@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Event extends Task{
     public String type;
     public String date_time = "";
@@ -8,6 +12,14 @@ public class Event extends Task{
         super(message);
         this.set_date_time();
         this.set_task();
+        this.set_type();
+    }
+
+    //constructor for Duke.txt
+    public Event (String message, Boolean b) {
+        super(message);
+        this.set_date_time2();
+        this.set_task2();
         this.set_type();
     }
 
@@ -35,6 +47,26 @@ public class Event extends Task{
         this.task = message.substring(start_index,end_index) + this.getDate_time();
     }
 
+    //set task for Duke.txt
+    @Override
+    public void set_task2() {
+        int start_index = 0;
+        int end_index = 0;
+        for (int i = 0; i < this.message.length(); i++) {
+            if (this.message.substring(i, i+1).equals("e")) {
+                start_index = i + 6;
+                break;
+            }
+        }
+        for (int i = 0; i < this.message.length(); i++) {
+            if (this.message.substring(i, i+1).equals("(")) {
+                end_index = i - 1;
+                break;
+            }
+        }
+        this.task = message.substring(start_index,end_index) + " " + this.getDate_time();
+    }
+
     @Override
     public String get_task() {
         return this.task;
@@ -55,6 +87,17 @@ public class Event extends Task{
             }
         }
         this.date_time = " (at: " + message.substring(start_index,message.length()) + ")";
+    }
+
+    public void set_date_time2() {
+        int start_index = 0;
+        for (int i = 0; i < this.message.length(); i++) {
+            if (this.message.substring(i, i+1).equals("(")) {
+                start_index = i;
+                break;
+            }
+        }
+        this.date_time = message.substring(start_index,message.length());
     }
 
     @Override

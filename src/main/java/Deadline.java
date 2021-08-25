@@ -1,13 +1,24 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
     public String type;
-    public String date_time;
     public String task = "";
+    public LocalDate date_time;
+    public String date_time2;
 
 
     public Deadline (String message) {
         super(message);
         this.set_date_time();
         this.set_task();
+        this.set_type();
+    }
+
+    public Deadline (String message, boolean b) {
+        super(message);
+        this.set_date_time2();
+        this.set_task2();
         this.set_type();
     }
 
@@ -41,6 +52,25 @@ public class Deadline extends Task{
     }
 
     @Override
+    public void set_task2() {
+        int start_index = 0;
+        int end_index = 0;
+        for (int i = 0; i < this.message.length(); i++) {
+            if (this.message.substring(i, i+1).equals("d")) {
+                start_index = i + 9;
+                break;
+            }
+        }
+        for (int i = 0; i < this.message.length(); i++) {
+            if (this.message.substring(i, i+1).equals("(")) {
+                end_index = i - 1;
+                break;
+            }
+        }
+        this.task = message.substring(start_index,end_index) + " " + this.get_date_time2();
+    }
+
+    @Override
     public String get_task() {
         return this.task;
     }
@@ -54,11 +84,21 @@ public class Deadline extends Task{
                 break;
             }
         }
-        this.date_time = " (by: " + message.substring(start_index) + ")";
+        String date_timing = message.substring(start_index);
+        this.date_time = LocalDate.parse(date_timing);
+    }
+
+    public void set_date_time2() {
+        int length = this.message.length();
+        this.date_time2 = "(" + message.substring(length - 15);
     }
 
     public String get_date_time() {
-        return this.date_time;
+        return this.date_time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    public String get_date_time2() {
+        return this.date_time2;
     }
 
 }

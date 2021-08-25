@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Task {
     public String type;
     public String date_time;
@@ -17,6 +21,9 @@ public class Task {
     }
 
     public void set_task() {
+    }
+
+    public void set_task2() {
     }
 
     public String get_task() {
