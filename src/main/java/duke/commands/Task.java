@@ -1,3 +1,4 @@
+package duke.commands;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -25,5 +26,5 @@ public abstract class Task {
         return getStatusIcon() + " " + description;
     }
 
-    abstract String printFormat();
+    public abstract String printFormat();
 }

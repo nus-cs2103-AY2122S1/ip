@@ -1,7 +1,11 @@
+import duke.data.TaskList;
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.parser.Parser;
 import java.util.Scanner;
 
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

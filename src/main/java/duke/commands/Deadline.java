@@ -1,3 +1,4 @@
+package duke.commands;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -22,7 +23,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    String printFormat() {
+    public String printFormat() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String dateString = by.format(format);
         String[] info = {"D", this.isDone ? "1" : "0", this.description, dateString};

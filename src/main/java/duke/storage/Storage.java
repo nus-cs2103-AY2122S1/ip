@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.commands.Deadline;
+import duke.commands.Task;
+import duke.commands.Todo;
+import duke.commands.Event;
+import duke.data.TaskList;
+
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +16,7 @@ public class Storage {
     private String path;
     private TaskList tasks;
 
-    Storage(String path, TaskList tasks) {
+    public Storage(String path, TaskList tasks) {
         this.path = path;
         this.tasks = tasks;
     }

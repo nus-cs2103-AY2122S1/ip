@@ -1,4 +1,6 @@
-public class Todo extends Task{
+package duke.commands;
+
+public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
@@ -13,7 +15,7 @@ public class Todo extends Task{
     }
 
     @Override
-    String printFormat() {
+    public String printFormat() {
         String[] info = {"T", this.isDone ? "1" : "0", this.description};
         return String.join(" | ", info);
     }

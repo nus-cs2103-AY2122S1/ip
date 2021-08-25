@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.commands.Task;
+import duke.data.TaskList;
+
 public class Ui {
     TaskList tasks;
 
