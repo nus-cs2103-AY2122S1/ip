@@ -18,6 +18,10 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("tasks.txt").run();
+    }
+
     private void run() {
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
@@ -37,9 +41,5 @@ public class Duke {
                 input = scanner.next();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
     }
 }

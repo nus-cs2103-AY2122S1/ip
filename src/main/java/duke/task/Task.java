@@ -1,16 +1,12 @@
 package duke.task;
 
 import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
 
 import java.time.LocalDate;
 
 public class Task {
-    public enum TaskType {
-        TODO, DEADLINE, EVENT
-    }
-
     protected String description;
+
     protected boolean isDone = false;
 
     public Task(String description) throws DukeException {
@@ -37,12 +33,12 @@ public class Task {
         return this.isDone;
     }
 
-    public LocalDate getDate() {
-        return null;
-    }
-
     public void setDone(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    public LocalDate getDate() {
+        return null;
     }
 
     public String markDoneIcon() {
@@ -52,5 +48,9 @@ public class Task {
     @Override
     public String toString() {
         return this.markDoneIcon() + " " + this.description;
+    }
+
+    public enum TaskType {
+        TODO, DEADLINE, EVENT
     }
 }

@@ -17,13 +17,13 @@ public class Deadline extends Task {
     }
 
     @Override
-    public LocalDate getDate() {
-        return this.timeDue;
+    public String taskToLine() {
+        return "D" + super.taskToLine() + " | " + this.timeDue;
     }
 
     @Override
-    public String taskToLine() {
-        return "D" + super.taskToLine() + " | " + this.timeDue;
+    public LocalDate getDate() {
+        return this.timeDue;
     }
 
     @Override
