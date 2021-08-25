@@ -5,8 +5,6 @@ import duke.exception.InvalidCommandException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import static java.time.temporal.ChronoUnit.MINUTES;
-import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * Represents events (a type of tasks) that Duke can keep track of.
