@@ -5,8 +5,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import pib.Ui;
 import pib.pibexception.PibException;
+
 /**
  * Event task which contains the task description, and the date of the event
  */
