@@ -1,10 +1,12 @@
 import org.junit.jupiter.api.Test;
+
 import tasks.Deadline;
 import tasks.Task;
 import tasks.Todo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +17,7 @@ class TaskListTest {
     void get() {
         String date = "2/12/2019 1800";
         LocalDateTime d = LocalDateTime.parse(date,
-                DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+            DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
 
         ArrayList<Task> tasks = new ArrayList<>() {
             {
