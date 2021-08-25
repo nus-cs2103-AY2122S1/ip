@@ -1,5 +1,3 @@
-//code is in 1 file for now as i have some issues with intellij and creating new class files
-
 import java.util.*;
 
 public class Duke {
@@ -118,81 +116,5 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(LINE);
         sc.close();
-    }
-}
-
-class Task {
-    protected String description;
-    protected boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    /**
-     * Returns the status of the task (X if done, blank if not done).
-     * @return the status of task
-     */
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
-    /**
-     * Marks a task as done.
-     */
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
-    }
-}
-
-class Deadline extends Task {
-    protected String by;
-
-    public Deadline(String description) {
-        super(description.substring(0, description.indexOf("/by")));
-        this.by = description.substring(description.indexOf("/by") + 4);
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
-    }
-}
-
-class Event extends Task {
-    protected String at;
-
-    public Event(String description) {
-        super(description.substring(0, description.indexOf("/at")));
-        this.at = description.substring(description.indexOf("/at ") + 4);
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
-    }
-}
-
-class Todo extends Task {
-
-    public Todo(String description) {
-        super(description);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-}
-
-class DukeException extends Exception {
-    public DukeException(String errorMessage) {
-        super(errorMessage);
     }
 }
