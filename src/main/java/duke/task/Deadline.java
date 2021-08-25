@@ -6,20 +6,36 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Task that stores date to do the task by.
+ */
 public class Deadline extends Task {
     private static final String REGEX = "(\\d{2}\\/\\d{2}\\/\\d{4})";
 
-    String dateDesc;
-    LocalDate date;
+    private String dateDesc;
+    private LocalDate date;
 
+    /**
+     * Constructor for Deadline.
+     *
+     * @param desc     Description of Task
+     * @param dateDesc Deadline for Task
+     */
     public Deadline(String desc, String dateDesc) {
         super(desc);
         parseDate(dateDesc);
     }
 
-    public Deadline(String isDone, String desc, String date) {
+    /**
+     * Constructor for Deadline.
+     *
+     * @param isDone   String representation of task being done
+     * @param desc     Description of Task
+     * @param dateDesc Deadline for Task
+     */
+    public Deadline(String isDone, String desc, String dateDesc) {
         super(isDone, desc);
-        parseDate(date);
+        parseDate(dateDesc);
     }
 
     private void parseDate(String dateDesc) {

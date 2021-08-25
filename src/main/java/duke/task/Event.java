@@ -1,26 +1,42 @@
 package duke.task;
 
+/**
+ * Task that stores when it is at.
+ */
 public class Event extends Task {
-    String date;
+    private final String dateDesc;
 
-    public Event(String desc, String date) {
+    /**
+     * Constructor for Event.
+     *
+     * @param desc     Description of Task
+     * @param dateDesc Deadline for Task
+     */
+    public Event(String desc, String dateDesc) {
         super(desc);
-        this.date = date;
+        this.dateDesc = dateDesc;
 
     }
 
-    public Event(String isDone, String desc, String date) {
+    /**
+     * Constructor for Event.
+     *
+     * @param isDone   String representation of task being done
+     * @param desc     Description of Task
+     * @param dateDesc Deadline for Task
+     */
+    public Event(String isDone, String desc, String dateDesc) {
         super(isDone, desc);
-        this.date = date;
+        this.dateDesc = dateDesc;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + date + ")";
+        return "[E]" + super.toString() + "(at: " + dateDesc + ")";
     }
 
     @Override
     public String saveString() {
-        return "E|" + super.saveString() + "|" + date;
+        return "E|" + super.saveString() + "|" + dateDesc;
     }
 }

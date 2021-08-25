@@ -32,7 +32,7 @@ public class Duke {
     }
 
     /**
-     * Start Duke chat bot.
+     * Starts Duke chat bot.
      */
     public void run() {
         ui.greet();
@@ -50,6 +50,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function for Duke.
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

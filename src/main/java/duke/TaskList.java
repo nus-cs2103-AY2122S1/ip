@@ -148,6 +148,11 @@ public class TaskList {
                 IntStream.range(0, list.size()).mapToObj((i) -> (i + 1) + ". " + list.get(i).toString()).reduce("", (str1, str2) -> str1 + str2 + "\n"));
     }
 
+    /**
+     * Prints list of tasks filtered based on user input.
+     *
+     * @param desc user input to find in task list
+     */
     public void findTask(String desc) {
         StringBuilder builder = new StringBuilder("Here are the matching tasks in your list:\n");
         int count = 0;

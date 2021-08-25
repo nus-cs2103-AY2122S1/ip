@@ -5,17 +5,27 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents command to delete Task.
+ */
 public class DeleteCommand implements Command {
-    String desc;
+    private final String desc;
 
+    /**
+     * Constructor for DeleteCommand.
+     *
+     * @param desc Description for Command
+     */
     public DeleteCommand(String desc) {
         this.desc = desc;
     }
 
+    @Override
     public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
         task.deleteTask(desc);
     }
 
+    @Override
     public boolean isExit() {
         return false;
     }

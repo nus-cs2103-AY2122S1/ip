@@ -7,7 +7,7 @@ import duke.command.*;
  */
 public class Parser {
 
-    enum Action {
+    private enum Action {
         Done,
         Delete,
         Todo,
