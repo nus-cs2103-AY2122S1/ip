@@ -1,9 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
-    private String by;
+    private LocalDate by;
 
     public Deadline (String taskDetails, String by) {
         super(taskDetails);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     public String taskType() {
