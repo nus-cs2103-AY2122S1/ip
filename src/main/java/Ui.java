@@ -4,7 +4,7 @@ public class Ui {
     private static final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
     private static final String goodbyeText = "Bye. Hope to see you again soon!";
     private static final String errorText = "Burp burp! Something went wrong!";
-    private static final String loadingErrorText = "Could not read this file AaaAHJHAJha!";
+    private static final String loadingErrorText = "Could not read this file Nuuuuuuu!";
 
     /**
      * Adds a top and bottom horizontal line to text
