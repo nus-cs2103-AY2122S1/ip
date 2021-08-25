@@ -56,3 +56,12 @@ class MissingNoException extends DukeException {
         super ("Thwere's no suchw taskw! Pwease enterw a *validw* numbewr after '"+ keyword + "'!");
     }
 }
+
+class ReadError extends DukeException {
+    /**
+     * Occurs when Duke tries to read txt file for Task list, but comes up empty.
+     */
+    ReadError() {
+        super("Uwu! File not found!");
+    }
+}

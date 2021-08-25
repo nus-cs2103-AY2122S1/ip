@@ -1,6 +1,8 @@
 import java.lang.reflect.Array;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 
 /**
@@ -27,15 +29,19 @@ public class Duke {
                 + linebreakend);
 
         Scanner in = new Scanner(System.in);
-        List<Task> taskarr = new ArrayList<>(100);
+
+        DataEditor dataeditor = new DataEditor("data/tasklist.txt");
+        try {
+            List<Task> taskarr = dataeditor.load();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            List<Task> taskarr = new ArrayList<>(100);
+        }
+
         int arrcounter = 0;
         // adds array for 'list' command, and arraycounter for no. of tasks on list currently
         boolean continueloop = true;
         // for checking loop
-
-
-
-
 
         while (continueloop) {
             // initiates loop.
