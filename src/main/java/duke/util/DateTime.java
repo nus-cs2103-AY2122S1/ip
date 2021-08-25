@@ -3,8 +3,11 @@ package duke.util;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DateTime {
 
@@ -31,11 +34,19 @@ public class DateTime {
         }
     }
 
+    private String dateToString() {
+        return date != null ? date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")): null;
+    }
+
+    private String timeToString() {
+        return time != null ? time.format(DateTimeFormatter.ofPattern("hh.mm a")) : null;
+    }
+
     @Override
     public String toString() {
-        // Maybe use an optional class
-        return String.format("%s%s",
-                date != null ? date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")): "",
-                time != null ? " " + time.format(DateTimeFormatter.ofPattern("hh.mm a")) : "");
+        // Thanks to https://stackoverflow.com/a/59323744/12499338
+        return Stream.of(dateToString(), timeToString())
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.joining(" "));
     }
 }
