@@ -20,6 +20,10 @@ public class TaskManager {
         this.taskList = taskList;
     }
 
+    public TaskManager() {
+        taskList = new ArrayList<>();
+    }
+
     public String addTask(Task task) {
         taskList.add(task);
         int taskCount = getTaskCount();
@@ -54,7 +58,7 @@ public class TaskManager {
         }
     }
 
-    private int getTaskCount() {
+    public int getTaskCount() {
         return taskList.size();
     }
 

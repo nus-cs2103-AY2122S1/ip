@@ -25,7 +25,7 @@ public class Storage {
         }
     }
 
-    public List<Task> loadTasks() {
+    public List<Task> loadTasks() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader(file);
@@ -42,7 +42,8 @@ public class Storage {
             bufferedReader.close();
             fileReader.close();
         } catch (IOException e) {
-            System.out.printf("An error occurred when trying to load %s:\n\t%s\n", filePath, e.getMessage());
+            throw new DukeException(String.format("An error occurred when trying to load %s:\n\t%s\n",
+                    filePath, e.getMessage()));
         }
         return taskList;
     }
