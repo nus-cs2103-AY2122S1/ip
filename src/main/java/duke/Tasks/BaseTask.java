@@ -2,6 +2,7 @@ package duke.Tasks;
 
 import duke.DukeExceptionBase;
 
+
 /**
  *  This class encapsulates a Task element in Duke's TDList, and features
  *  various methods to manipulate the Task.
@@ -17,14 +18,17 @@ public class BaseTask {
         DEADLINE
     }
 
+
+
     /**
-     * A constructor used to create a new TDLTask.
+     * A constructor for the Base Task used to directly create new tasks.
      *
-     * @param taskName      The name and description of the task.
+     * @param taskName The name and description of the task.
+     * @param isDone True if task was already completed, false if task is still incomplete.
      */
-    public BaseTask(String taskName) {
+    public BaseTask(String taskName, boolean isDone) {
         this.taskName = taskName;
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     /**
@@ -105,6 +109,14 @@ public class BaseTask {
         return this.getTaskName();
     }
 
+    /**
+     * Returns the extra info this task contains, if any.
+     *
+     * @return the String containing the extra info of this task if any. Returns null if there is none.
+     */
+    public String getTaskExtraInfo() {
+        return null;
+    }
 
     /**
      * Check the type of task represented by the current command.
@@ -120,6 +132,23 @@ public class BaseTask {
             return BaseTask.TaskType.TODO;
         } else {
             return BaseTask.TaskType.NONE;
+        }
+    }
+
+    /**
+     * Given the short form representing a task type, this function returns the enum representing it.
+     * @param taskLetter the letter of the task type that is wanted.
+     * @return the enum representing the wanted task type.
+     */
+    public static BaseTask.TaskType convertTaskLetterToEnum(String taskLetter) {
+        if (taskLetter.equals("T")) {
+            return TaskType.TODO;
+        } else if (taskLetter.equals("D")) {
+            return TaskType.DEADLINE;
+        } else if (taskLetter.equals("E")) {
+            return TaskType.EVENT;
+        } else {
+            return TaskType.NONE;
         }
     }
 

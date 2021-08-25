@@ -7,10 +7,28 @@ package duke.Tasks;
 
 public class EventTask extends BaseTask {
 
-    String atContents;
+    private String atContents;
 
+    /**
+     * Constructor for creating a new Event Task.
+     *
+     * @param taskName the name or description of the task.
+     * @param atContents describes where the task should be completed at.
+     */
     public EventTask(String taskName, String atContents) {
-        super(taskName);
+        super(taskName, false);
+        this.atContents = atContents;
+    }
+
+    /**
+     * Used for creating a new Event Task with ability to set all attributes.
+     *
+     * @param taskName the name or description of the task.
+     * @param atContents describes where the task should be completed at.
+     * @param isCompleted whether the task is already completed.
+     */
+    public EventTask(String taskName, String atContents, boolean isCompleted) {
+        super(taskName, isCompleted);
         this.atContents = atContents;
     }
 
@@ -44,4 +62,14 @@ public class EventTask extends BaseTask {
         return this.getTaskName() + "(at: " + this.atContents + ")";
     }
 
+
+    /**
+     * Returns the extra info this task contains, which is the at where data.
+     *
+     * @return the String containing the extra info of this task if any. Returns null if there is none.
+     */
+    @Override
+    public String getTaskExtraInfo() {
+        return this.atContents;
+    }
 }

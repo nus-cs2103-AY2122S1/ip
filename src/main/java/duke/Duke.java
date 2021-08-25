@@ -34,10 +34,15 @@ public class Duke {
 
         // Processes the path to use to access storage file
         try {
-            Path xmlPath = Paths.get("../", "dukeDocs", "listSave1.xml");
+            Path xmlPath = Paths.get("src", "main", "java", "dukeDocs", "listSave1.xml");
             //System.out.println(xmlPath.getFileName());
             this.currStorageMgr = new DukeStorageManager(xmlPath);
         } catch (InvalidPathException e) {
+            // If there was an error loading the save file, then create a new empty one.
+            this.currStorageMgr = new DukeStorageManager();
+        } catch (DukeExceptionBase e) {
+            //There is no Duke instance to print the error msg yet
+            System.out.println(e);
             // If there was an error loading the save file, then create a new empty one.
             this.currStorageMgr = new DukeStorageManager();
         }
@@ -90,6 +95,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke currDuke = getCurrDuke();
+        // Load Save File only after Duke is created.
+        currDuke.getCurrStorageMgr().reloadSaveFromXMLDoc();
 
         // Show Welcome Message
         currDuke.currUiCtrl.printWelcomeMessage();

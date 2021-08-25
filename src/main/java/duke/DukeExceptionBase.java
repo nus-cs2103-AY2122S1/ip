@@ -12,4 +12,9 @@ public class DukeExceptionBase extends Exception {
         Duke.dukeSays(this.exceptionMsg);
     }
 
+    @Override
+    public String toString() {
+        return exceptionMsg;
+    }
+
 }
