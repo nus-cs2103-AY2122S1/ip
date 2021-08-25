@@ -25,14 +25,18 @@ public class Duke {
      * @param stream The desired stream for the program's input.
      */
     public void run(InputStream stream) {
+        // Set up Scanner for input and isBye boolean for while loop
         Scanner input = new Scanner(stream);
         boolean isBye = false;
 
+        // Welcome message
         ui.showWelcome();
 
+        // Continuously takes user input until "bye" command is given
         while (!isBye) {
             try {
-                ui.showInput();
+                // performing action based on user command
+                ui.showInputPrompt();
                 String fullCommand = ui.readCommand(input);
                 ui.showOpenLine();
                 Command c = Parser.parse(fullCommand, taskList);
@@ -43,7 +47,7 @@ public class Duke {
                 ui.showException(e);
                 
             } catch (NumberFormatException e) { 
-                ui.showException(new DukeException(DukeExceptionType.INVALID_INDEX));
+                ui.showException(new DukeException(DukeExceptionType.INVALID_TASK_INDEX));
 
             } catch (DateTimeParseException e) {
                 ui.showException(new DukeException(DukeExceptionType.INVALID_DATETIME));

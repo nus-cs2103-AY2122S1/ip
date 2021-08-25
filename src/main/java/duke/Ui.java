@@ -35,7 +35,7 @@ public class Ui {
     /**
      * Displays the user input prompt.
      */
-    public void showInput() {
+    public void showInputPrompt() {
         System.out.print("> ");
     }
 

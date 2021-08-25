@@ -38,28 +38,32 @@ public class Storage {
      * @return An ArrayList of Tasks used to create the TaskList for the current instance of Duke.
      */
     public ArrayList<Task> load() {
+        // Initialise task list
         ArrayList<Task> savedTasks = new ArrayList<>(100);
 
         try {
+            
+            // Display initialisation message
             ui.showOpenLine();
             ui.showInitialise();
-
             if (direc.mkdirs()) {
                 ui.showNewDataDirectory();
             }
             if (duke.createNewFile()) {
                 ui.showNewHardDisk();
             }
-
             ui.showCloseLine();
 
+            // Initialise file reader
             BufferedReader reader = new BufferedReader(new FileReader(duke));
             String currLine = reader.readLine();
 
+            // Read through all saved tasks
             while (currLine != null) {
                 String[] taskString = currLine.split(" \\| ", 3);
                 Task newTask;
 
+                // Current task is a Deadline 
                 if (taskString[0].equals("D")) {
                     String[] deadlineDetails = taskString[2].split(" ");
                     if (deadlineDetails.length == 2) {
@@ -71,6 +75,7 @@ public class Storage {
                         throw new DukeException(DukeExceptionType.DB_READ);
                     }
 
+                // Current task is an Event
                 } else if (taskString[0].equals("E")) {
                     String[] periodDetails = taskString[2].split(" ");
                     if (periodDetails.length == 3) {
@@ -86,19 +91,22 @@ public class Storage {
                     } else {
                         throw new DukeException(DukeExceptionType.DB_READ);
                     }
-
-
+                    
+                // Current task is a Todo
                 } else if (taskString[0].equals("T")) {
                     newTask = new Todo(taskString[2]);
 
+                // Current task is in invalid format
                 } else {
                     throw new DukeException(DukeExceptionType.DB_READ);
                 }
 
+                // Handles whether or not Task is done
                 if (Integer.parseInt(taskString[1]) == 1) {
                     newTask.setDone();
                 }
 
+                // Add Task to task list, continue with next Task
                 savedTasks.add(newTask);
                 currLine = reader.readLine();
             }
@@ -136,15 +144,17 @@ public class Storage {
      */
     public void setDBEntryDone(String s) {
         try {
+            // Create updated file
             String updatedPath = filePath.split("/")[0] + "/updated.txt";
             File updated = new File(updatedPath);
             updated.createNewFile();
 
+            // Initialise file reader and writer
             FileWriter writer = new FileWriter(updated, true);
-
             BufferedReader reader = new BufferedReader(new FileReader(duke));
             String currLine = reader.readLine();
 
+            // Read through file, finds and sets specified task to done
             while (currLine != null) {
                 if (currLine.equals(s)) {
                     String[] toSetDone = currLine.split(" \\| ", 3);
@@ -155,8 +165,10 @@ public class Storage {
                 currLine = reader.readLine();
             }
 
+            // Close writer
             writer.close();
 
+            // Replace duke with the updated file
             duke.delete();
             updated.renameTo(duke);
 
@@ -172,15 +184,17 @@ public class Storage {
      */
     public void deleteDBEntry(String s) {
         try {
+            // Create updated file
             String updatedPath = filePath.split("/")[0] + "/updated.txt";
-            File updated = new File("data/updated.txt");
+            File updated = new File(updatedPath);
             updated.createNewFile();
 
+            // Initialise file reader and writer
             FileWriter writer = new FileWriter(updated, true);
-
             BufferedReader reader = new BufferedReader(new FileReader(duke));
             String currLine = reader.readLine();
 
+            // Read through file, finds and excludes entry to delete
             while (currLine != null) {
                 if (!currLine.equals(s)) {
                     writer.write(currLine + "\n");
@@ -188,8 +202,10 @@ public class Storage {
                 currLine = reader.readLine();
             }
 
+            // Close writer
             writer.close();
 
+            // Replace duke with the updated file
             duke.delete();
             updated.renameTo(duke);
 

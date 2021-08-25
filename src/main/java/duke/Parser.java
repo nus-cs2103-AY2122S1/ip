@@ -1,6 +1,13 @@
 package duke;
 
-import command.*;
+import command.AddCommand;
+import command.ByeCommand;
+import command.Command;
+import command.DoneCommand;
+import command.DeleteCommand;
+import command.FindCommand;
+import command.ListCommand;
+
 import exception.DukeException;
 import exception.DukeExceptionType;
 import task.Deadline;
@@ -23,38 +30,44 @@ public class Parser {
      */
     public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
         
-        // task function: add tasks
+        // Find case based on first word of command
         switch (fullCommand.split("\\s+")[0]) {
-        case "bye":   // bye function: exits the loop, ends process
+        
+        // "bye" command given  
+        case "bye":   
             return new ByeCommand();
-            
-        case "list":   // list function: iterates through taskList, prints Tasks' listEntry
+
+        // "list" command given    
+        case "list":   
             return new ListCommand();
             
-        case "done":   // done function: sets a task to done
+        // "done" command given
+        case "done":  
             if (fullCommand.split("\\s+").length == 1) {
-                throw new DukeException(DukeExceptionType.INVALID_INDEX);
+                throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
             } else {
                 int toSet = Integer.parseInt(fullCommand.split("\\s+")[1]);
                 if (taskList.isInvalidIndex(toSet)) {
-                    throw new DukeException(DukeExceptionType.INVALID_INDEX);
+                    throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
                 } else {
                     return new DoneCommand(toSet - 1);
                 }
             }
             
-        case "delete":   // delete function: delete a task
+        // "delete" command given
+        case "delete":   
             if (fullCommand.split("\\s+").length == 1) {
-                throw new DukeException(DukeExceptionType.INVALID_INDEX);
+                throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
             } else {
                 int toDelete = Integer.parseInt(fullCommand.split("\\s+")[1]);
                 if (taskList.isInvalidIndex(toDelete)) {
-                    throw new DukeException(DukeExceptionType.INVALID_INDEX);
+                    throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
                 } else {
                     return new DeleteCommand(toDelete - 1);
                 }
             }
             
+        // "find" command given
         case "find":
             if (fullCommand.split("\\s+").length == 1) {
                 throw new DukeException(DukeExceptionType.INVALID_FIND);
@@ -63,17 +76,20 @@ public class Parser {
                 return new FindCommand(desiredDate);
             }
             
+        // Task command given
         default:
-            if (fullCommand.split("\\s+").length == 1) { // task details not given or not valid task
+            
+            // Incomplete or invalid command
+            if (fullCommand.split("\\s+").length == 1) { 
                 switch (fullCommand) {
                 case "deadline":
-                    throw new DukeException(DukeExceptionType.DEADLINE_DESC);
+                    throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DESC);
 
                 case "event":
-                    throw new DukeException(DukeExceptionType.EVENT_DESC);
+                    throw new DukeException(DukeExceptionType.MISSING_EVENT_DESC);
 
                 case "todo":
-                    throw new DukeException(DukeExceptionType.TODO_DESC);
+                    throw new DukeException(DukeExceptionType.MISSING_TODO_DESC);
 
                 default:
                     throw new DukeException(DukeExceptionType.INVALID_INPUT);
@@ -81,35 +97,39 @@ public class Parser {
 
             } else {
                 Task newTask;
-
-                // split text string, first string will be the task type and second string will be task details
+                
                 String[] taskString = fullCommand.split("\\s+", 2);
                 String taskType = taskString[0];
                 String taskDetails = taskString[1];
 
-                // determine type of task, create new task
                 switch (taskType) {
+                    
+                // "deadline" command given
                 case "deadline": {
                     String[] details = taskDetails.split(" /by ");
 
-                    if (details.length == 1) { // time of deadline not given
-                        throw new DukeException(DukeExceptionType.DEADLINE_TIME);
+                    if (details.length == 1) { 
+                        throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DATETIME);
                     } else {
                         String[] deadline = details[1].split(" ");
                         if (deadline.length == 1) {
                             newTask = new Deadline(details[0], LocalDate.parse(details[1]));
-                        } else {
+                        } else if (deadline.length == 2) {
                             newTask = new Deadline(details[0], LocalDate.parse(deadline[0]),
                                     LocalTime.parse(deadline[1]));
+                        } else {
+                            throw new DukeException(DukeExceptionType.INVALID_DATETIME);
                         }
                     }
                     break;
                 }
+
+                // "event" command given
                 case "event": {
                     String[] details = taskDetails.split(" /at ");
 
-                    if (details.length == 1) { // period of event not given
-                        throw new DukeException(DukeExceptionType.EVENT_PERIOD);
+                    if (details.length == 1) { 
+                        throw new DukeException(DukeExceptionType.MISSING_EVENT_PERIOD);
                     } else {
                         String[] periodRange = details[1].split(" ");
                         if (periodRange.length == 2) {
@@ -128,14 +148,17 @@ public class Parser {
                     }
                     break;
                 }
+                
+                // "todo" command given
                 case "todo":
                     newTask = new Todo(taskDetails);
                     break;
-
-                default:  // taskName is invalid
+                    
+                // Invalid command
+                default:  
                     throw new DukeException(DukeExceptionType.INVALID_INPUT);
                 }
-                // add task to taskList
+                
                 return new AddCommand(newTask);
             }
         }
