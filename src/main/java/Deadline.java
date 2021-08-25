@@ -1,7 +1,10 @@
-public class Deadline extends Task {
-    protected String time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String time) {
+public class Deadline extends Task {
+    protected LocalDateTime time;
+
+    public Deadline(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
@@ -22,15 +25,21 @@ public class Deadline extends Task {
         }
 
         String description = deadlineInputs[0];
-        String time = deadlineInputs[1];
+        LocalDateTime time;
+        try {
+            time = LocalDateTime.parse(deadlineInputs[1], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        } catch (Exception e) {
+            throw new Exception(
+                    "Invalid datetime: " + deadlineInputs[1] + "\n" + "Please use format: YYYY-MM-DD HH:MM:SS");
+        }
 
         return new Deadline(description, time);
     }
 
     @Override
     public String toString() {
-        String time = this.time.length() > 0 ? (" (by: " + this.time + ")") : "";
+        String timeStr = this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm:ss"));
 
-        return "[D]" + super.toString() + time;
+        return "[D]" + super.toString() + " (by: " + timeStr + ")";
     }
 }

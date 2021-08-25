@@ -1,7 +1,10 @@
-public class Event extends Task {
-    protected String time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String time) {
+public class Event extends Task {
+    protected LocalDateTime time;
+
+    public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
@@ -22,15 +25,21 @@ public class Event extends Task {
         }
 
         String description = eventInputs[0];
-        String time = eventInputs[1];
+        LocalDateTime time;
+        try {
+            time = LocalDateTime.parse(eventInputs[1], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        } catch (Exception e) {
+            throw new Exception(
+                    "Invalid datetime: " + eventInputs[1] + "\n" + "Please use format: YYYY-MM-DD HH:MM:SS");
+        }
 
         return new Event(description, time);
     }
 
     @Override
     public String toString() {
-        String time = this.time.length() > 0 ? (" (at: " + this.time + ")") : "";
+        String timeStr = this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm:ss"));
 
-        return "[E]" + super.toString() + time;
+        return "[E]" + super.toString() + " (at: " + timeStr + ")";
     }
 }
