@@ -56,7 +56,7 @@ public class FileUtils {
      *
      * @return whether the contents are saved to file successfully
      */
-    public static boolean saveFile(String dirName, String fileName, List<String> contents) {
+    public static boolean isFileSaved(String dirName, String fileName, List<String> contents) {
         Path rootPath = Paths.get("");
         Path dirPath = Paths.get(rootPath.toAbsolutePath().toString(), dirName);
         if (!Files.exists(dirPath)) {

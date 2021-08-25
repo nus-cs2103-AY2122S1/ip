@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
- * The is the TaskManager class that that
+ * The is the TaskList class that that
  * contains a list of task.
  *
  * @author  HU JIAJUN
@@ -19,20 +19,20 @@ import java.util.stream.IntStream;
  * @since   1.0
  */
 
-public class TaskManager {
+public class TaskList {
     private static final String DIR_NAME = "data";
     private static final String FILE_NAME = "duke.txt";
     private final List<Task> tasks;
 
     /**
-     * This is constructor method of TaskManager.
+     * This is constructor method of TaskList.
      */
-    public TaskManager() {
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
     /**
-     * Add task to TaskManager.
+     * Add task to TaskList.
      */
     public void addTask(Task task) {
         tasks.add(task);
@@ -97,7 +97,7 @@ public class TaskManager {
     }
 
     /**
-     * Print tasks from TaskManager with format:
+     * Print tasks from TaskList with format:
      *      1. Task1
      *      2. Task2
      *      ...
@@ -164,14 +164,14 @@ public class TaskManager {
         List<String> formattedTasks = tasks.stream()
                 .map(task -> String.join(" | ", task.formatTask()))
                 .collect(Collectors.toList());
-        boolean saved = FileUtils.saveFile(DIR_NAME, FILE_NAME, formattedTasks);
-        if (!saved) {
+        boolean isSaved = FileUtils.isFileSaved(DIR_NAME, FILE_NAME, formattedTasks);
+        if (!isSaved) {
             throw new DukeIOException("☹ OOPS!!! Save tasks to file error.");
         }
     }
 
     /**
-     * Print tasks which contains keyword from TaskManager with format:
+     * Print tasks which contains keyword from TaskList with format:
      *      1. Task1
      *      2. Task2
      *      ...

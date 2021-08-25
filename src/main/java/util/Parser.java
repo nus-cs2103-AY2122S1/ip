@@ -11,14 +11,14 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 /**
- * The is the CommandUtils class that extracts contents from command.
+ * The is the Parser class that extracts contents from command.
  *
  * @author  HU JIAJUN
  * @version %I%, %G%
  * @since   1.0
  */
 
-public class CommandUtils {
+public class Parser {
 
     /**
      * Extract operation from command.
