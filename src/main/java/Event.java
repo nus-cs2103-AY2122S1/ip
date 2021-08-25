@@ -1,10 +1,7 @@
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
     private LocalDate time;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-
 
     public Event(String taskName, LocalDate time) {
         super(taskName);
