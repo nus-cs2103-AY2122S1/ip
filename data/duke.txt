@@ -1,0 +1,3 @@
+T | 0 | Go run
+T | 0 | Dry run | Today
+D | 0 | Homework | next week
