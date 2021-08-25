@@ -1,5 +1,6 @@
 package bob;
 
+import bob.exception.NoSearchResultException;
 import bob.task.Task;
 import java.util.ArrayList;
 
@@ -44,5 +45,23 @@ public class TaskList {
 
     public Task getTask(int index) {
         return this.taskList.get(index);
+    }
+
+    public String searchList(String keyword) throws NoSearchResultException {
+        String result = "";
+        int count = 1;
+        for (int index = 0; index < this.taskList.size(); index++) {
+            String currTask = this.taskList.get(index).printTask();
+            String currTaskDescription = currTask.split("\\Q[\\E.\\Q]\\E ", 2)[1];
+            if (currTaskDescription.contains(keyword)) {
+                result = result + count + "." + currTask + "\n";
+                count++;
+            }
+        }
+        if (count == 1) {
+            throw new NoSearchResultException();
+        } else {
+            return result;
+        }
     }
 }

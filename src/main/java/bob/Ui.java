@@ -1,5 +1,6 @@
 package bob;
 
+import bob.exception.NoSearchResultException;
 import bob.task.Task;
 
 public class Ui {
@@ -45,6 +46,16 @@ public class Ui {
                 + "Yay " + tasks.noOfTasks() + " tasks!\n");
     }
 
+    public void showSearchResult(String keyword, TaskList tasks) {
+        try {
+            String searchResult = tasks.searchList(keyword);
+            System.out.println("Are any of these tasks the one you're looking for?");
+            System.out.println(searchResult);
+        } catch (NoSearchResultException e) {
+            System.out.println("None of your tasks contain this word -_-\n");
+        }
+    }
+
     public void showInvalidInputException() {
         System.out.println("That doesn't make any sense! >:(\n");
     }
@@ -59,6 +70,10 @@ public class Ui {
 
     public void showNoEventTimingException() {
         System.out.println("When is the event? >:(\n");
+    }
+
+    public void showNoKeywordException() {
+        System.out.println("What are you even looking for >:(\n");
     }
 
     public void showOutOfBoundsException() {
