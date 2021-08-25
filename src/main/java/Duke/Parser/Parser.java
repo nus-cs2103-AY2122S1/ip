@@ -18,23 +18,23 @@ public class Parser {
         switch(firstWord) {
         case "bye":
             return new ExitCommand();
-            case "list":
-                return new ListCommand();
-            case "todo":
-                return todoParser(cleanCommand);
-            case "deadline":
-                return deadlineParser(cleanCommand);
-            case "event":
-                return eventParser(cleanCommand);
-            case "done":
-                return markDoneParser(cleanCommand);
-            case "undo":
-                return markUndoParser(cleanCommand);
-            case "delete":
-                return deleteParser(cleanCommand);
-            default:
-                return errorParser(cleanCommand);
-        }
+        case "list":
+            return new ListCommand();
+        case "todo":
+            return todoParser(cleanCommand);
+        case "deadline":
+            return deadlineParser(cleanCommand);
+        case "event":
+            return eventParser(cleanCommand);
+        case "done":
+            return markDoneParser(cleanCommand);
+        case "undo":
+            return markUndoParser(cleanCommand);
+        case "delete":
+            return deleteParser(cleanCommand);
+        default:
+            return errorParser(cleanCommand);
+    }
 
     }
 

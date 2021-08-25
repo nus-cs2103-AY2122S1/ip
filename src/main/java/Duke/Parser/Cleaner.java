@@ -31,6 +31,8 @@ public class Cleaner {
                 return markUndoCleaner(fullCommand, currentCapacity);
             case "delete":
                 return deleteCleaner(fullCommand, currentCapacity);
+            case "bye":
+                return byeCleaner(fullCommand);
             default:
                 return "error -1";
         }
