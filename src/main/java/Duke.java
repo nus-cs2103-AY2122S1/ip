@@ -82,6 +82,25 @@ public class Duke {
                 printMessage("Marking task as completed:\n    " + task.toString());
                 break;
             }
+            case "delete": {
+                if (!hasArguments) {
+                    throw new Exception("Command `delete` requires an argument");
+                }
+
+                Task task;
+                try {
+                    int taskIndex = Integer.parseInt(arguments);
+                    task = this.tasks.remove(taskIndex - 1);
+                } catch (NumberFormatException e) {
+                    throw new Exception("Unable to parse number from arguments: " + arguments);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new Exception("There is no task with the following number: " + arguments);
+                }
+
+                printMessage("Removed the following task:\n    " + task.toString() + "\n" + "You now have "
+                        + this.tasks.size() + " tasks in your list.");
+                break;
+            }
             case "todo": {
                 Task todo = Todo.fromInput(arguments);
                 this.tasks.add(todo);
