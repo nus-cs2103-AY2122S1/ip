@@ -19,8 +19,8 @@ public class TaskList {
         storage.write(tasks);
     }
 
-    public void remove(int index) {
-        Task task = tasks.remove(index);
+    public void remove(int index) throws IndexOutOfBoundsException {
+        Task task = tasks.remove(index - 1);
         Ui.showMessage("Noted. I've removed this task:\n  " +
                 task +
                 "\nNow you have " + tasks.size() + " tasks in the list.\n");

@@ -10,25 +10,13 @@ import java.time.format.DateTimeFormatter;
  */
 
 class Deadline extends Task {
+    public static String deliminator = "/by";
+    public static String typeName = "deadline";
     LocalDate time;
 
-    public Deadline(String description) throws EmptyDescriptionException, WrongFormatException {
-        super(processDeadline(description));
-        String[] descriptionTime = description.split(" /by ");
-        this.time = LocalDate.parse(descriptionTime[1]);
-    }
-
-    private static String processDeadline(String description) throws WrongFormatException {
-        String[] descriptionTime = description.split(" /by ");
-        if (description.trim().equals("/by") || description.isBlank()) {
-            return "";
-        } else if (descriptionTime.length < 2) {
-            throw new WrongFormatException("event <description> /by <yyyy-mm-dd>");
-        } else if (descriptionTime[0].isBlank() || descriptionTime[1].isBlank()) {
-            return "";
-        } else {
-            return descriptionTime[0];
-        }
+    public Deadline(String description, LocalDate time){
+        super(description);
+        this.time = time;
     }
 
     @Override

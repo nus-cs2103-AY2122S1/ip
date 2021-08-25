@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -61,11 +63,11 @@ public class Storage {
                 break;
             case "D":
                 time = strings[3];
-                task = new Deadline(taskDescription + " /by " + time);
+                task = new Deadline(taskDescription, LocalDate.parse(time));
                 break;
             case "E":
                 time = strings[3];
-                task = new Event(taskDescription + " /at " + time);
+                task = new Event(taskDescription, LocalDate.parse(time));
                 break;
             default:
                 throw new FileFormatException();
@@ -76,7 +78,7 @@ public class Storage {
             }
 
             return task;
-        } catch (IndexOutOfBoundsException | EmptyDescriptionException | WrongFormatException e) {
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
             throw new FileFormatException();
         }
     }

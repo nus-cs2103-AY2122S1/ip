@@ -7,7 +7,7 @@ package duke;
  */
 
 class Todo extends Task {
-    public Todo(String description) throws EmptyDescriptionException {
+    public Todo(String description) {
         super(description);
     }
 

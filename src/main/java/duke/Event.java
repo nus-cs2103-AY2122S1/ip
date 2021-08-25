@@ -10,30 +10,18 @@ import java.time.format.DateTimeFormatter;
  */
 
 class Event extends Task {
+    public static String deliminator = "/at";
+    public static String typeName = "event";
     LocalDate time;
 
-    public Event(String description) throws EmptyDescriptionException, WrongFormatException {
-        super(processEventDescription(description));
-        String[] descriptionTime = description.split(" /at ");
-        this.time = LocalDate.parse(descriptionTime[1]);
-    }
-
-    private static String processEventDescription(String description) throws WrongFormatException {
-        String[] descriptionTime = description.split(" /at ");
-        if (description.trim().equals("/at") || description.isBlank()) {
-            return "";
-        } else if (descriptionTime.length < 2) {
-            throw new WrongFormatException("event <description> /at <yyyy-mm-dd>");
-        } else if (descriptionTime[0].isBlank() || descriptionTime[1].isBlank()) {
-            return "";
-        } else {
-            return descriptionTime[0];
-        }
+    public Event(String description, LocalDate time){
+        super(description);
+        this.time = time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + time.format(DateTimeFormatter.ofPattern("MM d yyyy")) + ")";
+        return "[E]" + super.toString() + "(at: " + time.format(DateTimeFormatter.ofPattern("MM dd yyyy")) + ")";
     }
 
     /**

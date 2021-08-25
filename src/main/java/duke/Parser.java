@@ -1,11 +1,14 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     public static Command parse(String input) throws DukeException {
         Action action = getAction(input);
         String argument = getArgument(input);
+        String[] descriptionTime;
+        LocalDate time;
         Command command;
         switch (action) {
         case BYE:
@@ -21,15 +24,19 @@ public class Parser {
             command = new DeleteCommand(parseInt(argument));
             break;
         case TODO:
-            Task todo = new Todo(argument);
+            Task todo = new Todo(parseDescription(argument));
             command = new AddCommand(action, todo);
             break;
         case DEADLINE:
-            Task deadline = new Deadline(argument);
+            descriptionTime = parseDescription(argument, Deadline.typeName, Deadline.deliminator);
+            time = parseTime(descriptionTime[1]);
+            Task deadline = new Deadline(descriptionTime[0], time);
             command = new AddCommand(action, deadline);
             break;
         case EVENT:
-            Task event = new Event(argument);
+            descriptionTime = parseDescription(argument, Event.typeName, Event.deliminator);
+            time = parseTime(descriptionTime[1]);
+            Task event = new Event(descriptionTime[0], time);
             command = new AddCommand(action, event);
             break;
         default:
@@ -76,6 +83,35 @@ public class Parser {
             return Integer.parseInt(arg);
         } catch (NumberFormatException e) {
             throw new WrongFormatException("done/delete <index for the task>");
+        }
+    }
+
+    private static String[] parseDescription(String argument, String typeName, String deliminator) throws DukeException {
+        String[] descriptionTime = argument.split(" " + deliminator + " ");
+        if (argument.trim().equals(deliminator) || argument.isBlank()) {
+            throw new EmptyDescriptionException();
+        } else if (descriptionTime.length < 2) {
+            throw new WrongFormatException(typeName + " <description> " + deliminator + " <yyyy-mm-dd>");
+        } else if (descriptionTime[0].isBlank() || descriptionTime[1].isBlank()) {
+            throw new EmptyDescriptionException();
+        } else {
+            return descriptionTime;
+        }
+    }
+
+    private static String parseDescription(String argument) throws EmptyDescriptionException {
+        if (argument.isBlank()) {
+            throw new EmptyDescriptionException();
+        } else {
+            return argument;
+        }
+    }
+
+    private static LocalDate parseTime(String time) throws WrongFormatException {
+        try {
+            return LocalDate.parse(time);
+        } catch (DateTimeParseException e) {
+            throw new WrongFormatException("Please enter the correct datetime format <yyyy-mm-dd>");
         }
     }
 }
