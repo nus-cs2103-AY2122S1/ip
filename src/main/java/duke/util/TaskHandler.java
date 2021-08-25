@@ -2,7 +2,6 @@ package duke.util;
 
 import duke.task.*;
 import duke.exception.*;
-import duke.util.Ui;
 import java.util.ArrayList;
 
 /**

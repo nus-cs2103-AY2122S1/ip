@@ -9,11 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Parser {
-    private static final String BLANK_DESCRIPTION_MESSAGE = "OOPS!!! The description of %s cannot be empty! x_x";
-    private static final String INDEX_FORMAT_ERROR = "Please enter a positive number!";
-    private static final String DEADLINE_ERROR_MESSAGE = "Invalid use of 'deadline' command!! @_@\n\tTo add a new deadline, use 'deadline <task> /by <due-date>'.";
-    private static final String EVENT_ERROR_MESSAGE = "Invalid use of 'event' command!! @_@\n\tTo add a new event, use 'event <title> /at <time-stamp>'.";
-
     public Command parseRawInput(String input) throws DukeException {
         String[] splitInput = input.split("\\s+");
         String commandWord = splitInput[0];
@@ -43,18 +38,18 @@ public class Parser {
             case "bye":
                 return new ExitCommand();
             default:
-                throw new DukeException(("I don't quite understand you. :-("));
+                throw new DukeNoSuchCommandException();
         }
     }
 
     private static int parseIndex(String input) throws DukeException {
         String[] splitInput = input.split("\\s+");
         if (splitInput.length == 1) {
-            throw new DukeException(String.format(BLANK_DESCRIPTION_MESSAGE, splitInput[0]));
+            throw new DukeMissingIndexException(splitInput[0]);
         }
         String indexExtractedRaw = splitInput[1].trim();
         if (!indexExtractedRaw.matches("\\d+")) {
-            throw new DukeException(INDEX_FORMAT_ERROR);
+            throw new DukeInvalidIndexException();
         }
         return Integer.parseInt(indexExtractedRaw);
     }
@@ -62,20 +57,19 @@ public class Parser {
     private static String parseTodoDetails(String input) throws DukeException {
         String[] splitInput = input.split("\\s+");
         if (splitInput.length < 2) {
-            throw new DukeException(String.format(BLANK_DESCRIPTION_MESSAGE, splitInput[0]));
+            throw new DukeMissingDescriptionException(splitInput[0]);
         }
         return splitInput[1].trim();
     }
 
-
     private static String[] parseDeadlineDetails(String input) throws DukeException {
         String[] splitInput = input.split("\\s+");
-        if (splitInput.length == 1) {
-            throw new DukeException(String.format(BLANK_DESCRIPTION_MESSAGE, splitInput[0]));
+        if (splitInput.length < 2) {
+            throw new DukeMissingDescriptionException(splitInput[0]);
         }
         String[] deadlineDetails = input.split("\\s+/by\\s+", 2);
         if (deadlineDetails.length < 2 || deadlineDetails[1].isEmpty()) {
-            throw new DukeException(DEADLINE_ERROR_MESSAGE);
+            throw new DukeDeadlineMissingDateException();
         } else {
             return deadlineDetails;
 
@@ -84,12 +78,12 @@ public class Parser {
 
     private static String[] parseEventDetails(String input) throws DukeException {
         String[] splitInput = input.split("\\s+");
-        if (splitInput.length == 1) {
-            throw new DukeException(String.format(BLANK_DESCRIPTION_MESSAGE, splitInput[0]));
+        if (splitInput.length < 2) {
+            throw new DukeMissingDescriptionException(splitInput[0]);
         }
         String[] eventDetails = input.split("\\s+/at\\s+");
         if (eventDetails.length < 2 || eventDetails[1].isEmpty()) {
-            throw new DukeException(EVENT_ERROR_MESSAGE);
+            throw new DukeEventMissingDateException();
         } else {
             return eventDetails;
         }

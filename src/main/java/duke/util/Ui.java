@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Ui {
     private static final String EXIT_MESSAGE = "Goodbyeeee! Hope to see you again soon! :>";
     private static final String SEPARATOR = "\t-------------------------------------------------------";
-    private static final String INPUT_PROMPT = "Enter a command *_*";
+    private static final String INPUT_PROMPT = "Enter a command ^_^";
 
     /**
      * Formats the input and prints it in a formatted version.

@@ -27,16 +27,16 @@ public class Storage {
         }
     }
 
-    private static void newFile() {
+    private static void newFile() throws DukeException {
         try {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException e) {
-            System.err.println("IOException: Error creating directory/file. Your data will not be saved!");
+            throw new DukeIOException("Error creating directory/file. Your data were not saved. :_(");
         }
     }
 
-    public void writeToFile(Task task) throws DukeException {
+    public static void writeToFile(Task task) throws DukeException {
         if (!file.exists()) {
             newFile();
         }
@@ -46,7 +46,7 @@ public class Storage {
             fw.write(task.formatToSave() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("IOException: Unable to write to file");
+            throw new DukeIOException("Unable to write to data file. Your data were not saved. :_(");
         }
     }
 
@@ -58,7 +58,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("IOException: Unable to write to file");
+            throw new DukeIOException("Unable to write to data file. Your data were not saved. :_(");
         }
     }
 
@@ -77,7 +77,7 @@ public class Storage {
                 task = new Event(details[2], details[3]);
                 break;
             default:
-                throw new DukeException("Unexpected value: " + details[0]);
+                throw new DukeUnexpectedCharacterException(details[0]);
         }
         if (details[1].equals("1")) {
             task.markAsDone();
