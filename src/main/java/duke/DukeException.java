@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * The exceptions that may happen when run Duke
  */
