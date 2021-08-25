@@ -64,10 +64,6 @@ public class Duke {
             }
         }
     }
-
-    public void addTask(Task t) {
-
-    }
 }
 
 
