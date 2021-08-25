@@ -15,11 +15,11 @@ public class Event extends Task {
     /**
      * Class constructor.
      * @param taskName The name or description of the Event.
-     * @param doneStatus Whether or not the Event is done.
+     * @param isDone Whether or not the Event is done.
      * @param at The date and time of the Event.
      */
-    public Event(String taskName, boolean doneStatus, LocalDateTime at) {
-        super(taskName, doneStatus);
+    public Event(String taskName, boolean isDone, LocalDateTime at) {
+        super(taskName, isDone);
         this.at = at;
     }
 

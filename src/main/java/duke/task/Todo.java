@@ -10,10 +10,10 @@ public class Todo extends Task{
     /**
      * Class constructor to initialize a Todo.
      * @param taskName The name or description of the Todo.
-     * @param doneStatus Whether or not the Todo is done.
+     * @param isDone Whether or not the Todo is done.
      */
-    public Todo(String taskName, boolean doneStatus) {
-        super(taskName, doneStatus);
+    public Todo(String taskName, boolean isDone) {
+        super(taskName, isDone);
     }
 
     /**

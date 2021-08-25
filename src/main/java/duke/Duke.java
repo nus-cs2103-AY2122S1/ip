@@ -16,7 +16,7 @@ public class Duke {
      * @param filePath A String representation of the location of a text file as a file path. Duke loads task data from
      *                 and saves task data to this text file.
      */
-    public Duke(String filePath){
+    public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.list = new TaskList();
         this.ui = new Ui();
@@ -35,10 +35,7 @@ public class Duke {
         ui.welcome();
         String input = ui.getNextLine();
         Parser parser = new Parser(list);
-        while(true) {
-            if (input.equals("bye")) {
-                break;
-            }
+        while (!input.equals("bye")) {
             try {
                 parser.parse(input);
                 storage.writeTasks(list);

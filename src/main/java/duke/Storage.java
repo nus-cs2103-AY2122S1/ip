@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,7 +37,7 @@ public class Storage {
      * @param list The TaskList from which task data is used to write to the text file.
      * @throws DukeException In the case where the file is corrupted or cannot be located.
      */
-    public void writeTasks(TaskList list) throws DukeException{
+    public void writeTasks(TaskList list) throws DukeException {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
             for (int i = 0; i < list.size(); i++) {
@@ -102,5 +103,4 @@ public class Storage {
             throw new DukeException("Couldn't read the tasks!");
         }
     }
-
 }

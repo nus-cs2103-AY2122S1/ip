@@ -14,11 +14,11 @@ public class Deadline extends Task{
     /**
      * Class constructor.
      * @param taskName The name or description of the Deadline.
-     * @param doneStatus Whether or not the Deadline is done.
+     * @param isDone Whether or not the Deadline is done.
      * @param deadline The date of the Deadline.
      */
-    public Deadline(String taskName, boolean doneStatus, LocalDate deadline) {
-        super(taskName, doneStatus);
+    public Deadline(String taskName, boolean isDone, LocalDate deadline) {
+        super(taskName, isDone);
         this.deadline = deadline;
     }
 

@@ -8,23 +8,31 @@ package duke.task;
  */
 public class Task {
     private String taskName;
-    private boolean doneStatus;
+    private boolean isDone;
 
     /**
      * Class constructor to initialize a Task.
      * @param taskName The name or description of the Task.
-     * @param doneStatus Whether or not the Task is done.
+     * @param isDone Whether or not the Task is done.
      */
-    public Task(String taskName, boolean doneStatus) {
+    public Task(String taskName, boolean isDone) {
         this.taskName = taskName;
-        this.doneStatus = doneStatus;
+        this.isDone = isDone;
     }
 
     /**
      * Sets the Task as done.
      */
     public void setDone() {
-        this.doneStatus = true;
+        this.isDone = true;
+    }
+
+    /**
+     * Gets the Task name.
+     * @return String representation of the Task name.
+     */
+    public String getTaskName() {
+        return this.taskName;
     }
 
     /**
@@ -33,6 +41,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return this.doneStatus ? "[X] " + this.taskName : "[] " + this.taskName;
+        return this.isDone ? "[X] " + this.taskName : "[] " + this.taskName;
     }
 }
