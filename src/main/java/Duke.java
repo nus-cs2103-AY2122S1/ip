@@ -31,13 +31,9 @@ public class Duke {
     }
 
     public void addEvent(String description, String at) throws DateTimeParseException {
-        try {
-            Task task = new Event(description, at);
-            this.taskList.addTask(task);
-            this.informTaskAdded(task);
-        } catch (DateTimeParseException e) {
-            this.echo("Invalid date format");
-        }
+        Task task = new Event(description, at);
+        this.taskList.addTask(task);
+        this.informTaskAdded(task);
     }
 
     public void printList() {
