@@ -1,13 +1,12 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static String DATAPATH = "./data";
-    private static String DATAFILE = "duke.txt";
+    private static String DIR = "./data";
+    private static String FILENAME = "duke.txt";
+    private static String DATAPATH = String.valueOf(Paths.get(Duke.DIR, Duke.FILENAME));
 
     private Scanner input = new Scanner(System.in);
     private ArrayList<Task> list = new ArrayList<>();
@@ -17,6 +16,7 @@ public class Duke {
         TODO, EVENT, DEADLINE,
         DONE, DELETE,
     }
+
 
     private void greet() {
         String logo = " ____        _\n"
@@ -31,29 +31,53 @@ public class Duke {
 
 
     private void loadData() {
-        File f = new File(String.valueOf(Paths.get(Duke.DATAPATH, Duke.DATAFILE)));
+        File db = new File(Duke.DATAPATH);
         try {
-            Scanner fileReader = new Scanner(f);
-            System.out.println("data has been loaded");
+            Scanner fileReader = new Scanner(db);
             while (fileReader.hasNextLine()) {
                 String entry = fileReader.nextLine();
-                // TODO: read from database
+                readEntry(entry);
             }
             fileReader.close();
         } catch (FileNotFoundException e) {
             this.createDatabase();
+        } catch (DukeException e) {
+            System.out.println("Error when reading entry!");
         }
     }
 
 
+    private void readEntry(String entry) throws DukeDatabaseException {
+        String[] fields = entry.split("\\|");
+        Task taskToAdd;
+        switch (fields[0]) {
+        case "T":
+            taskToAdd = new Todo(fields[2]);
+            break;
+        case "E":
+            taskToAdd = new Event(fields[2], fields[3]);
+            break;
+        case "D":
+            taskToAdd = new Deadline(fields[2], fields[3]);
+            break;
+        default:
+            throw new DukeDatabaseException();
+        }
+        if (Integer.parseInt(fields[1]) == 1) {
+            taskToAdd.markAsDone();
+        }
+        this.list.add(taskToAdd);
+    }
+
+
     private void createDatabase() {
-        File f = new File(String.valueOf(Paths.get(Duke.DATAPATH, Duke.DATAFILE)));
-        File dir = new File(Duke.DATAPATH);
+        File db = new File(Duke.DATAPATH);
+        File dir = new File(Duke.DIR);
         dir.mkdir();
         try {
-            f.createNewFile();
+            db.createNewFile();
         } catch (IOException e) {
-            System.out.println("Error loading database!");
+            System.out.println("Error when creating the database!");
         }
     }
 
@@ -104,8 +128,24 @@ public class Duke {
 
 
     private void exit() {
-        // TODO: write to the database
-        System.out.println("\tBye, hope to see you again!");
+        try {
+            this.saveData();
+            System.out.println("\tBye, hope to see you again!");
+        } catch (IOException e) {
+            System.out.println("Error when saving data!");
+        }
+    }
+
+
+    private void saveData() throws IOException {
+        FileWriter fw = new FileWriter(Duke.DATAPATH, false);
+        BufferedWriter bw = new BufferedWriter(fw);
+        for (Task task : this.list) {
+            bw.write(task.stringifyTask());
+            bw.newLine();
+        }
+        bw.close();
+        fw.close();
     }
 
 
