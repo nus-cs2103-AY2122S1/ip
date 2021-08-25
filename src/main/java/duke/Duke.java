@@ -18,7 +18,7 @@ import java.time.format.DateTimeParseException;
 /**
  * This class runs a personal assistant chatbot that helps a person keep track of various tasks.
  * Commands for the bot are: list, mark, delete, bye, event, deadline, and todo.
- * Unrecognised command will be met with a prompt to enter a recognised one instead.
+ * Unrecognised commands will be met with a prompt to enter a recognised one instead.
  */
 public class Duke {
 
