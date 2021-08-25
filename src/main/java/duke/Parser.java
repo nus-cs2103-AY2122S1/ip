@@ -33,24 +33,29 @@ public class Parser {
                 return TODO.toString().toLowerCase();
             }
         },
-        EVENT{
+        EVENT {
             @Override
             public String asLowerCase() {
                 return EVENT.toString().toLowerCase();
             }
         },
-        DEADLINE{
+        DEADLINE {
             @Override
             public String asLowerCase() {
                 return DEADLINE.toString().toLowerCase();
             }
         },
-        DELETE{
+        DELETE {
             @Override
             public String asLowerCase() {
                 return DELETE.toString().toLowerCase();
             }
-
+        },
+        FIND{
+            @Override
+            public String asLowerCase() {
+                return FIND.toString().toLowerCase();
+            }
         };
 
         public abstract String asLowerCase();
@@ -131,6 +136,14 @@ public class Parser {
             } catch (DukeException e) {
                 ui.prettyPrinter(e.getMessage());
             }
+        } else if (command.startsWith(Commands.FIND.asLowerCase())) {
+            try {
+                formatChecker(command);
+                String substring = command.substring(5);
+                return new FindCommand(tdl, substring);
+            } catch (DukeException e) {
+                ui.prettyPrinter(e.getMessage());
+            }
         } else {
             return new ConfusedCommand(ui);
         }
@@ -145,6 +158,10 @@ public class Parser {
         } else if (command.startsWith("delete")) {
             if (!command.substring(6).startsWith(" ")) {
                 throw new DukeException("Hey hey hey, the format is delete <index>");
+            }
+        } else if (command.startsWith("find")) {
+            if (!command.substring(4).startsWith(" ")) {
+                throw new DukeException("Hey hey hey, the format is find <target>");
             }
         } else if (command.startsWith("todo")) {
             if (command.substring(4).isBlank()) {

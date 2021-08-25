@@ -2,10 +2,9 @@ package duke.task;
 
 public class Event extends Task {
     private String duration;
-    private String name;
 
     public Event(String name, String duration) {
-        this.name = name;
+        super(name);
         this.duration = duration;
     }
 
@@ -15,7 +14,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return this.name + " (at: " + this.duration + ")";
+        return super.getName() + " (at: " + this.duration + ")";
     }
 
     public String getDuration() {

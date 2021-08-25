@@ -104,5 +104,30 @@ public class ToDoList {
     protected Task getTask(int index) {
         return this.record.get(index);
     }
+
+    public void find(String target) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (Task t : this.record) {
+            if (t.getName().contains(target)) {
+                temp.add(t);
+            }
+        }
+        Integer number = 1;
+        System.out.println("========== " + this.name + " ===========");
+        if (temp.size() > 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            for (Task t : temp) {
+                if (t.isCompleted()) {
+                    System.out.println(number.toString() + "." + t.logo() + "[X] " + t.toString());
+                } else {
+                    System.out.println(number.toString() + "." + t.logo() + "[ ] " + t.toString());
+                }
+                number++;
+            }
+        } else {
+            System.out.println("No luck here.. Sorry buddy.");
+        }
+        System.out.println("========== " + this.name + " ===========\n");
+    }
 }
 

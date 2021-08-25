@@ -5,11 +5,10 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 
 public class Deadline extends Task {
-    private String name;
     private LocalDateTime deadline;
 
     public Deadline(String name, LocalDateTime deadline) {
-        this.name = name;
+        super(name);
         this.deadline = deadline;
     }
 
@@ -20,7 +19,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return this.name + " (by: " + this.deadline.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " +
+        return super.getName() + " (by: " + this.deadline.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " +
                 this.deadline.getDayOfMonth() + " " + this.deadline.getYear() + " " + this.deadline.toLocalTime() + ")";
     }
 
@@ -31,7 +30,4 @@ public class Deadline extends Task {
                 + this.deadline.getDayOfMonth() + " " + this.deadline.toLocalTime();
     }
 
-    public String getName() {
-        return this.name;
-    }
 }

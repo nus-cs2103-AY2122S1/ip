@@ -36,7 +36,7 @@ public class Storage {
                 System.out.println("Welcome back I guess..");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Hey.. You smell smoke..?");
         }
     }
 
@@ -109,14 +109,14 @@ public class Storage {
             for (Task a : this.tdl.getRecord()) {
                 if (a.isCompleted()) {
                     if (a instanceof Deadline) {
-                        fw.write(number.toString() + "." + a.logo() + "[X] " + ((Deadline) a).getName() +
+                        fw.write(number.toString() + "." + a.logo() + "[X] " +  a.getName() +
                                 " (by: " + ((Deadline) a).getDeadline() + ")\n");
                     } else {
                         fw.write(number.toString() + "." + a.logo() + "[X] " + a.toString() + "\n");
                     }
                 } else {
                     if (a instanceof Deadline) {
-                        fw.write(number.toString() + "." + a.logo() + "[ ] " + ((Deadline) a).getName() +
+                        fw.write(number.toString() + "." + a.logo() + "[ ] " + a.getName() +
                                 " (by: " + ((Deadline) a).getDeadline() + ")\n");
                     } else {
                         fw.write(number.toString() + "." + a.logo() + "[ ] " + a.toString()+ "\n");
