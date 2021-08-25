@@ -114,10 +114,10 @@ class Parser {
      */
     static String doTask(String index, TaskList taskList) {
         int idx;
-        ArrayList<Task> lst = taskList.getTasks();
+        ArrayList<Task> tasks = taskList.getTasks();
         try {
             idx = Integer.parseInt(index);
-            lst.get(idx - 1);
+            tasks.get(idx - 1);
         } catch (NumberFormatException nfe) {
             return "Please check the format of the index.";
         } catch (IndexOutOfBoundsException e) {
@@ -129,8 +129,8 @@ class Parser {
         s.append("    ____________________________________________________________\n");
         s.append("    Nice! I've marked this task as done: \n");
 
-        lst.get(idx - 1).setDone();
-        s.append("       " + lst.get(idx - 1).toString() + "\n");
+        tasks.get(idx - 1).setDone();
+        s.append("       " + tasks.get(idx - 1).toString() + "\n");
 
         s.append("    ____________________________________________________________\n");
 
@@ -138,16 +138,16 @@ class Parser {
     }
 
     static String getSchedule(String info, TaskList taskList) {
-        ArrayList<Task> lst = taskList.getTasks();
+        ArrayList<Task> tasks = taskList.getTasks();
         String output = "";
         LocalDate date;
         try {
             date = LocalDate.parse(info.split(" ")[1]);
         } catch (Exception e) {
             return "Wrong format of date";
-
         }
-        for (Task t : lst) {
+
+        for (Task t : tasks) {
             if (date.equals(t.getDate())) {
                 //System.out.println(t.toString());
                 output += (t.toString() + "\n");
@@ -157,30 +157,27 @@ class Parser {
     }
 
     static String deleteTask(String index, TaskList taskList) {
-        ArrayList<Task> lst = taskList.getTasks();
+        ArrayList<Task> tasks = taskList.getTasks();
         int idx;
         try {
             idx = Integer.parseInt(index);
-            lst.get(idx - 1);
+            tasks.get(idx - 1);
         } catch (NumberFormatException nfe) {
             return "Please check the format of the index.";
         } catch (IndexOutOfBoundsException e) {
             return "The task does not exist in task list.";
         }
 
-        Task currTask = lst.get(idx - 1);
-        lst.remove(currTask);
+        Task currTask = tasks.get(idx - 1);
+        tasks.remove(currTask);
 
         String output = "    ____________________________________________________________\n"
                 + "     Noted. I've removed this task: \n"
                 + "      " + currTask.toString() + "\n"
-                + "     Now you have " + lst.size() +" tasks in the list. \n"
+                + "     Now you have " + tasks.size() +" tasks in the list. \n"
                 + "    ____________________________________________________________\n";
         return output;
     }
-
-
-
 }
 
 

@@ -9,7 +9,6 @@ class Todo extends Task {
         super(content, isDone);
     }
 
-
     @Override
     String encoding() {
         return "T&&" + super.encoding();

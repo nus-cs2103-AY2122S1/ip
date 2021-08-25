@@ -33,7 +33,6 @@ class Event extends Task {
         return date;
     }
 
-
     @Override
     String encoding() {
         return "E&&" + super.encoding() + "&&" + at;
