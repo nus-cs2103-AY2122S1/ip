@@ -1,4 +1,4 @@
-package tasks;
+package bubbles.tasks;
 
 import bubbles.exceptions.EmptyTaskException;
 import bubbles.exceptions.IndexOutOfBoundsException;
@@ -60,7 +60,7 @@ public class TaskList {
         int n = 0;
 
         System.out.println(SEPARATOR);
-        System.out.println("Below are some of the tasks in your list!");
+        System.out.println("Below are some of the bubbles.tasks in your list!");
 
         for (Task t : this.tasks) {
             System.out.println((n + 1) + ". " + t);

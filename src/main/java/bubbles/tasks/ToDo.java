@@ -1,4 +1,4 @@
-package tasks;
+package bubbles.tasks;
 
 import bubbles.exceptions.EmptyTaskException;
 

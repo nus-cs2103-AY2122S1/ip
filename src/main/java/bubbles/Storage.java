@@ -1,7 +1,7 @@
 package bubbles;
 
-import tasks.Task;
-import tasks.TaskList;
+import bubbles.tasks.Task;
+import bubbles.tasks.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    // deals with loading tasks from the file and saving tasks in the file
+    // deals with loading bubbles.tasks from the file and saving bubbles.tasks in the file
     private File bubbles;
     private Parser parser;
     private TaskList taskList;
