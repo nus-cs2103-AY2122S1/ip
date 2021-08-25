@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskManager;
+import duke.ui.Ui;
+
 public class HelpCommand extends Command {
     private static final String[] ALL_USAGES = new String[]{
             AddToDoCommand.USAGE_MESSAGE,

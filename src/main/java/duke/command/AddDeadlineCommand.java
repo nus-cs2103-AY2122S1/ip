@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.TaskManager;
+import duke.ui.Ui;
+import duke.util.DukeDateTime;
+
 public class AddDeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     public static final String USAGE_MESSAGE = "To add a new deadline, use 'deadline <name> /by <due-date>'.";

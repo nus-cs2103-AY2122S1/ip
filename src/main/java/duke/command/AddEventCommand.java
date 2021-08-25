@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Event;
+import duke.task.TaskManager;
+import duke.ui.Ui;
+import duke.util.DukeDateTime;
+
 public class AddEventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     public static final String USAGE_MESSAGE = "To add a new event, use 'event <name> /at <event-timestamp>'.";

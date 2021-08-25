@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.util.DukeDateTime;
+import duke.exception.DukeException;
+
 public class Event extends Task implements Timestampable {
     private final DukeDateTime timestamp;
 
