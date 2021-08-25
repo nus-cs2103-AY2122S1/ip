@@ -15,6 +15,10 @@ public class Task {
         this.isDone = true;
     }
 
+    private String completeStatus() {
+        return this.isDone ? "x" : "";
+    }
+
     //getters
     public boolean isCompleted() {
         return this.isDone;
@@ -22,11 +26,13 @@ public class Task {
     public String getTaskSummary() {
         return this.taskSummary;
     }
-
-//    public abstract String giveTaskCategory();
+    public String toStorageFormat() {
+        return String.format("? | %d | %s ",
+                this.isCompleted() ? 1 : 0,this.getTaskSummary());
+    }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.isDone ? "x" : "",this.taskSummary);
+        return String.format("[%s] %s", this.completeStatus(),this.taskSummary);
     }
 }

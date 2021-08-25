@@ -11,12 +11,17 @@ public class Deadline extends Task {
         this.type = "Deadline";
         this.deadline = byDate;
     }
-
+    private String taskTypeSymbol() { return Character.toString(this.type.charAt(0)); }
+    public static String syntax() { return "deadline command syntax: \'deadline <task> /by <deadlineTime>\'"; }
+    public String toStorageFormat() {
+        return String.format("%s | %d | %s | %s",
+                this.taskTypeSymbol(), this.isCompleted() ? 1 : 0,this.getTaskSummary(), this.deadline);
+    }
     @Override
     public String toString() {
         return String.format(
                 "[%s][%s] %s (by: %s)",
-                this.type.charAt(0),
+                this.taskTypeSymbol(),
                 this.isCompleted() ? "X" : "",
                 this.getTaskSummary(),
                 this.deadline

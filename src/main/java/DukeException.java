@@ -15,11 +15,11 @@ public class DukeException extends IllegalArgumentException {
             String inputWord = userInput.split(" ", 2)[0].toLowerCase();
             switch (inputWord) {
                 case "todo":
-                    return "todo command syntax: \'todo <task>\'";
+                    return ToDo.syntax();
                 case "deadline":
-                    return "deadline command syntax: \'deadline <task> /by <deadlineTime>\'";
+                    return Deadline.syntax();
                 case "event":
-                    return "event command syntax: \'event <task> /by <eventTime>\'";
+                    return Event.syntax();
                 default:
                     return defaultReply;
             }

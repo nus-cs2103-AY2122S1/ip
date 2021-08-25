@@ -1,27 +1,21 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 // immutable principles?
-public final class ToDoList {
+public final class TaskList {
     private final ArrayList<Task> tasks;
 
     //only objects of class Task go into array
 //    @SafeVarargs
-    public static ToDoList of(ArrayList<Task> tasks) {
-        return new ToDoList(tasks);
+    public static TaskList of(ArrayList<Task> tasks) {
+        return new TaskList(tasks);
     }
-    private ToDoList(ArrayList<Task> tasks) {
+    private TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
     public void addTask(Task task) {
         this.tasks.add(task);
     }
-//
-//    public void removeTask(Task task) {
-//        this.tasks.remove(task);
-//    }
 
     public Task get(int idx) {
         return this.tasks.get(idx);

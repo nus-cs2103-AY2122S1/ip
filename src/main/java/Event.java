@@ -11,12 +11,18 @@ public class Event extends Task {
         this.type = "Event";
         this.eventTime = eventTime;
     }
+    private String taskTypeSymbol() { return Character.toString(this.type.charAt(0)); }
+    public static String syntax() { return "event command syntax: \'event <task> /at <eventTime>\'"; }
+    public String toStorageFormat() {
+        return String.format("%s | %d | %s | %s",
+                this.taskTypeSymbol(), this.isCompleted() ? 1 : 0,this.getTaskSummary(), this.eventTime);
+    }
 
     @Override
     public String toString() {
         return String.format(
                 "[%s][%s] %s (at: %s)",
-                this.type.charAt(0),
+                this.taskTypeSymbol(),
                 this.isCompleted() ? "X" : "",
                 this.getTaskSummary(),
                 this.eventTime

@@ -1,23 +1,47 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class Duke {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        ToDoList toDoList = ToDoList.of(new ArrayList<Task>());
+    private TaskList taskList;
+    private Storage dukeStore;
 
-        displayWithStyle(beginScript()); //display welcome msg
+//    public enum tasks {
+//        TODO, EVENT, DEADLINE
+//    }
+
+    public static void main(String[] args) {
+        String filePath = "data/duke-storage.txt";
+        new Duke().run(filePath);
+    }
+
+    public Duke() {
+        this.taskList = TaskList.of(new ArrayList<Task>());
+    }
+
+    public void run(String filePathToStorage) {
+        Scanner sc = new Scanner(System.in);
+
+        this.dukeStore = new Storage(filePathToStorage);
+        dukeStore.write(
+        ToDo.of("potato").toStorageFormat()+"\n"
+            +Event.of("party", "house").toStorageFormat()+"\n"
+            +Deadline.of("project","tonight").toStorageFormat()
+        );
+
+
+        printFormatted(beginScript()); //display welcome msg
 
         while (sc.hasNext()) {
-            int numOfTasks = toDoList.length();
+            int numOfTasks = taskList.length();
             String userInput = sc.nextLine();
             String msgOutput = "";
 
             try {
                 if (userInput.equals("list")) {
                     msgOutput = String.format(
-                            "Here are the tasks in your list:\n%s", toDoList.toString()
+                            "Here are the tasks in your list:\n%s", taskList.toString()
                     );
                 } else if (userInput.equals("bye")) {
                     msgOutput = endScript();
@@ -27,10 +51,10 @@ public class Duke {
                     String inputBody = userInput.split(" ", 2)[1];
                     int idxFrom0 = Integer.parseInt(inputBody) - 1;
                     if (!(idxFrom0 < 0 || idxFrom0 >= numOfTasks)) { //valid argument indexes
-                        toDoList.toggleDone(idxFrom0);
+                        taskList.toggleDone(idxFrom0);
                         msgOutput = String.format(
                                 "Nice! I've marked this task as done:\n    %s",
-                                toDoList.get(idxFrom0).toString()
+                                taskList.get(idxFrom0).toString()
                         );
                     }
                 } else if (userInput.matches("delete\s[0-9]{1,2}")) {
@@ -40,10 +64,10 @@ public class Duke {
                     if (!(idxFrom0 < 0 || idxFrom0 >= numOfTasks)) { //valid argument indexes
                         msgOutput = String.format(
                                 "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
-                                toDoList.get(idxFrom0).toString(),
+                                taskList.get(idxFrom0).toString(),
                                 numOfTasks - 1
                         );
-                        toDoList.removeTask(idxFrom0);
+                        taskList.removeTask(idxFrom0);
                     }
                 }else if (userInput.matches("todo\\s\\w+.*")) {
                     //eg. todo read book
@@ -53,7 +77,7 @@ public class Duke {
                             "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
                             newTask.toString(), numOfTasks + 1
                     );
-                    toDoList.addTask(newTask);
+                    taskList.addTask(newTask);
                 } else if (userInput.matches("deadline\s.+\s\\/by\s.+")) {
                     //eg. deadline xxx /by xxx
                     String inputBody = userInput.split(" ", 2)[1];
@@ -66,7 +90,7 @@ public class Duke {
                             "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
                             newTask.toString(), numOfTasks + 1
                     );
-                    toDoList.addTask(newTask);
+                    taskList.addTask(newTask);
                 } else if (userInput.matches("event\s.+\s\\/at\s.+")) {
                     //eg. deadline xxx /by xxx
                     String inputBody = userInput.split(" ", 2)[1];
@@ -79,19 +103,14 @@ public class Duke {
                             "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
                             newTask.toString(), numOfTasks + 1
                     );
-                    toDoList.addTask(newTask);
+                    taskList.addTask(newTask);
                 }  else {
-                            throw new DukeException(userInput);
-//                        msgOutput = defaultReplyToInvalidInput();
+                        throw new DukeException(userInput);
                 }
-//                else {
-//                    //user input not proper
-//                    msgOutput = defaultReplyToInvalidInput();
-//                }
             } catch (Exception e) {
                 msgOutput = e.toString();
             } finally {
-                displayWithStyle(msgOutput); //output msg to user
+                printFormatted(msgOutput); //output msg to user
             }
         }
 
@@ -109,15 +128,13 @@ public class Duke {
     public static String endScript() {
         String exitStatment = "Bye, hope to see you again! :)";
         return exitStatment;
-//        System.out.println(exitStatment);
     }
-    public static void displayWithStyle(String text) {
+    public static void printFormatted(String text) {
         String indent = "    ";
         String topBorder    = "____________________________________\n";
         String bottomBorder = "------------------------------------\n";
         String textWithBorders = topBorder +  text + "\n" + bottomBorder;
         String[] lines = textWithBorders.split("\n");
-//        System.out.println(Arrays.toString(lines));
         for (String line : lines) {
             System.out.println(indent + line);
         }
