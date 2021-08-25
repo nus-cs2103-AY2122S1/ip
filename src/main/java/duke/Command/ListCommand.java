@@ -1,4 +1,10 @@
-package duke;
+package duke.Command;
+
+import duke.Command.Command;
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class ListCommand extends Command {
 

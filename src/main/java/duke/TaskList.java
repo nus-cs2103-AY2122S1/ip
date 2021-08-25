@@ -23,8 +23,12 @@ public class TaskList {
         return tasks.size();
     }
 
-    public Task getTask(int index) {
-        return tasks.get(index);
+    public Task getTask(int index) throws DukeException {
+        try {
+            return tasks.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid Task. Please try again.");
+        }
     }
 
     public void addTask(Task task) {

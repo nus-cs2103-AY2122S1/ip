@@ -1,7 +1,0 @@
-T | 1 | read book
-D | 0 | return book | 2019-10-10
-T | 0 | join sports club
-T | 1 | test this
-T | 1 | this thing
-D | 0 | homework  | 2020-10-02
-E | 0 | birthday  | 2020-12-05 13:00

@@ -1,11 +1,16 @@
-package duke;
+package duke.Command;
 
-public class DeleteCommand extends Command {
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+public class DoneCommand extends Command {
     private int index;
 
-    public DeleteCommand(String input) throws DukeException {
+    public DoneCommand(String input) throws DukeException {
         try {
-            this.index = Integer.parseInt(input.substring(7));
+            this.index = Integer.parseInt(input.substring(5));
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Invalid Task. Please try again.\n");
         }
@@ -13,14 +18,12 @@ public class DeleteCommand extends Command {
 
     @Override
     public void runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.taskDeleted(taskList.getTask(index - 1));
-        taskList.deleteTask(index - 1);
-        ui.showTaskListSize(taskList);
+        taskList.markTask(index - 1);
+        ui.taskMarked(taskList.getTask(index - 1));
     }
 
     @Override
     public boolean isExit() {
         return false;
     }
-
 }

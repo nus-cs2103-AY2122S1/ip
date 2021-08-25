@@ -1,23 +1,6 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.FileWriter;
-import java.nio.file.Files;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.time.format.DateTimeParseException;
-
-import java.util.ArrayList;
-import java.util.Scanner;
+import duke.Command.Command;
 
 public class Duke {
     private Storage storage;
