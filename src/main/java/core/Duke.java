@@ -7,14 +7,13 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
-    public Duke() {
-        storage = new Storage("data/Duke.txt");
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         taskList = storage.loadStorageToTaskList();
     }
 
     private void run() {
         boolean shouldExit = false;
-
         Ui.greet();
         while (!shouldExit) {
             String input = Ui.readInput();
@@ -23,7 +22,8 @@ public class Duke {
             shouldExit = command.shouldExit();
         }
     }
+
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("data/Duke.txt").run();
     }
 }
