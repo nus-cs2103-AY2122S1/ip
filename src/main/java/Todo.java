@@ -23,4 +23,14 @@ public class Todo extends Task{
     public String toString() {
         return String.format("[T]%s", super.toString());
     }
+
+    @Override
+    public String getType() {
+        return "T";
+    }
+
+    @Override
+    public String getDeadline() {
+        return "";
+    }
 }

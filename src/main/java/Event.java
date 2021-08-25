@@ -11,4 +11,14 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), startTime);
     }
+
+    @Override
+    public String getType() {
+        return "E";
+    }
+
+    @Override
+    public String getDeadline() {
+        return this.startTime;
+    }
 }

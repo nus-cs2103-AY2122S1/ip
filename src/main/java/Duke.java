@@ -1,5 +1,10 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.File;
+
 
 /**
  * Project Duke is a educational software project.
@@ -10,22 +15,12 @@ public class Duke {
     /**
      * This is the scanner object used to get user input.
      */
-    private static Scanner sc = new Scanner(System.in);
-
-    /**
-     * This is the declared string that triggers the exit.
-     */
-    private static String cancelWord = "bye";
+    private static final Scanner sc = new Scanner(System.in);
 
     /**
      * Stores the array of todos
      */
-    private static ArrayList<Task> todos = new ArrayList<>();
-
-    /**
-     * Stores the current index that is awaiting to be filled.
-     */
-    private static int index = 0;
+    private static final ArrayList<Task> todos = new ArrayList<>();
 
     /**
      * Prints out the initial greeting message.
@@ -36,8 +31,37 @@ public class Duke {
                 "\t____________________________________________________________");
     }
 
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    private static void handleSaveText() {
+        String folderName = "./data";
+        String fileName =  "./data/duke.txt";
+        File directory = new File(folderName);
+
+        if (!directory.exists()){
+            directory.mkdir();
+        }
+
+        String output = "";
+        String separator = " | ";
+
+        for (Task t: todos) {
+            output = output + t.getType() + separator + ((t.checkDone()) ? 1 : 0) + separator +
+                    t.getDescription() + separator + t.getDeadline() + "\n";
+        }
+        try {
+            writeToFile(fileName , output);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
     /**
-     * Throws the corresposing DukeException when the Task input is empty.
+     * Throws the corresponding DukeException when the Task input is empty.
      *
      * @param input the array of String input to check
      * @param type  the type of Task it is called with
@@ -58,55 +82,56 @@ public class Duke {
     private static void handleInput(String response) throws DukeException {
         String[] output = response.split(" ");
 
-
         if (output.length == 0 || output[0].isEmpty() || output[0].equals(" ")) {
             throw new InvalidCommand();
         }
 
         String command = output[0];
-        Task newTask = null;
+        Task newTask;
 
         switch (command) {
-            case "done":
-                Task editedTask = todos.get(Integer.parseInt(output[1]) - 1);
-                editedTask.markIsDone();
-                System.out.println(String.format("\t____________________________________________________________\n" +
-                        "\tNice! I've marked this task as done:\n" +
+        case "done":
+            Task editedTask = todos.get(Integer.parseInt(output[1]) - 1);
+            editedTask.markIsDone();
+            System.out.printf("\t____________________________________________________________\n" +
+                    "\tNice! I've marked this task as done:\n" +
+                    "\t%s\n" +
+                    "\t____________________________________________________________%n", editedTask);
+            break;
+        case "delete":
+            try {
+                int index = Integer.parseInt(output[1]) - 1;
+                Task removedTask = todos.remove(index);
+                System.out.printf("\tNoted. I've removed this task:\n" +
                         "\t%s\n" +
-                        "\t____________________________________________________________", editedTask.toString()));
-                break;
-            case "delete":
-                try {
-                    int index = Integer.parseInt(output[1]) - 1;
-                    Task removedTask = todos.remove(index);
-                    System.out.println(String.format("\tNoted. I've removed this task:\n" +
-                            "\t%s\n" +
-                            "\tNow you have %d tasks in the list.", removedTask.toString(), todos.size()));
-                } catch (IndexOutOfBoundsException | NumberFormatException f) {
-                    throw new InvalidValue();
-                }
-                break;
-            case "todo":
-                checkInput(output, "todo");
-                String todoDescription = response.substring(5);
-                newTask = new Todo(todoDescription);
-                handleAdd(newTask);
-                break;
-            case "deadline":
-                checkInput(output, "deadline");
-                String deadlineDescription = response.substring(9);
-                newTask = new Deadline(deadlineDescription);
-                handleAdd(newTask);
-                break;
-            case "event":
-                checkInput(output, "event");
-                String eventDescription = response.substring(6);
-                newTask = new Event(eventDescription);
-                handleAdd(newTask);
-                break;
-            default:
-                throw new InvalidCommand();
+                        "\tNow you have %d tasks in the list.%n", removedTask.toString(), todos.size());
+            } catch (IndexOutOfBoundsException | NumberFormatException f) {
+                throw new InvalidValue();
+            }
+            break;
+        case "todo":
+            checkInput(output, "todo");
+            String todoDescription = response.substring(5);
+            newTask = new Todo(todoDescription);
+            handleAdd(newTask);
+            break;
+        case "deadline":
+            checkInput(output, "deadline");
+            String deadlineDescription = response.substring(9);
+            newTask = new Deadline(deadlineDescription);
+            handleAdd(newTask);
+            break;
+        case "event":
+            checkInput(output, "event");
+            String eventDescription = response.substring(6);
+            newTask = new Event(eventDescription);
+            handleAdd(newTask);
+            break;
+        default:
+            throw new InvalidCommand();
         }
+
+        handleSaveText();
     }
 
     private static void handleAdd(Task newTask) {
@@ -139,33 +164,33 @@ public class Duke {
         // boolean flag to indicate if loop should be exited
         boolean exit = false;
 
-        // if boolean is false, loop will be ran
+        // if boolean is false, loop will be run
         while (!exit) {
             String response = sc.nextLine();
 
             switch (response) {
-                case "list":
-                    System.out.println("\t____________________________________________________________");
-                    for (int i = 0; i < todos.size(); i++) {
-                        System.out.println(String.format("\t%d.%s", (i + 1), todos.get(i).toString()));
-                    }
-                    System.out.println("\t____________________________________________________________");
-                    break;
-                case "bye":
-                    System.out.println("\t____________________________________________________________\n\t" +
-                            "Bye. Hope to see you again soon!" +
-                            "\n\t____________________________________________________________");
-                    exit = true;
-                    break;
-                default:
-                    try {
-                        handleInput(response);
-                    } catch (DukeException e) {
-                        System.out.println(String.format("\t____________________________________________________________\n" +
-                                "\t%s\n" +
-                                "\t____________________________________________________________", e.toString()));
-                    }
-                    break;
+            case "list":
+                System.out.println("\t____________________________________________________________");
+                for (int i = 0; i < todos.size(); i++) {
+                    System.out.printf("\t%d.%s%n", (i + 1), todos.get(i).toString());
+                }
+                System.out.println("\t____________________________________________________________");
+                break;
+            case "bye":
+                System.out.println("\t____________________________________________________________\n\t" +
+                        "Bye. Hope to see you again soon!" +
+                        "\n\t____________________________________________________________");
+                exit = true;
+                break;
+            default:
+                try {
+                    handleInput(response);
+                } catch (DukeException e) {
+                    System.out.printf("\t____________________________________________________________\n" +
+                            "\t%s\n" +
+                            "\t____________________________________________________________%n", e);
+                }
+                break;
             }
         }
     }
