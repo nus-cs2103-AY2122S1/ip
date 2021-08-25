@@ -51,7 +51,7 @@ public enum TaskType {
      * @return LocalDate object
      * @throws DateTimeParseException Thrown if error in parsing date
      */
-    public static LocalDate getDate(String date) throws DateTimeParseException {
+    private static LocalDate getDate(String date) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
         return LocalDate.parse(date, formatter);
     }
@@ -64,7 +64,7 @@ public enum TaskType {
      * @throws DateTimeParseException Thrown if error in parsing dates
      * @throws IllegalArgumentException Thrown if an argument is in a wrong format
      */
-    public static ArrayList<Predicate<Task>> getArguments(String stringToParse)
+    public static ArrayList<Predicate<Task>> listStringToFilter(String stringToParse)
             throws DateTimeParseException, IllegalArgumentException {
 
         // Separate individual commands

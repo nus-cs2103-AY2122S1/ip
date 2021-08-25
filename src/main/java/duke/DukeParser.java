@@ -21,6 +21,7 @@ public class DukeParser {
     /**
      * Patterns for the Parser to look out for in the input
      */
+    final private Pattern listPattern = Pattern.compile("list( .+)?", Pattern.CASE_INSENSITIVE);
     final private Pattern donePattern = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
     final private Pattern deletePattern = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
     final private Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
@@ -29,10 +30,6 @@ public class DukeParser {
             Pattern.CASE_INSENSITIVE);
     final private Pattern eventPattern = Pattern.compile(
             "event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
-            Pattern.CASE_INSENSITIVE);
-    final private Pattern listPattern = Pattern.compile(
-            "list( .+)?",
-//            "list(( /date (\\d{1,2}/\\d{1,2}/\\d{4}+))|( /name (.+)))*",
             Pattern.CASE_INSENSITIVE);
 
     /**
@@ -62,8 +59,7 @@ public class DukeParser {
             if (checkList.group(1) != null) {
                 // Extract modifiers and filter
                 try {
-                    ArrayList<Predicate<Task>> filters = TaskType.getArguments(
-                            checkList.group(1));
+                    ArrayList<Predicate<Task>> filters = TaskType.listStringToFilter(checkList.group(1));
                     taskList.displayList(filters);
                 } catch (DateTimeParseException e) {
                     System.out.println("Please enter a valid date! :(");
