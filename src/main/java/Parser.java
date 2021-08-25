@@ -6,13 +6,6 @@ import java.util.*;
 
 public class Parser {
 
-    public static void main(String[] args) {
-        LocalDateTime curr = convertToDateTime("12/03/2021 23:00");
-        LocalDateTime temp = convertToDateTime("2021/03/12 23:00");
-        System.out.println(curr);
-        System.out.println(temp);
-    }
-
     /**
      * Function that handles all the parsing of the Parser system
      * @param command Refers to the entire line of strings the user entered. The line is then process here
@@ -56,21 +49,25 @@ public class Parser {
         return packagedCommand;
     }
 
-    public static LocalDateTime convertToDateTime(String datetimeString) {
-        String[] temp = datetimeString.split(" ");
-        String[] date = temp[0].split("/");
-        String[] time = temp[1].split(":");
-        DateTimeFormatter formatter;
-        if (date[0].length() == 2) {
-            formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        } else {
-            formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+    public static LocalDateTime convertToDateTime(String datetimeString) throws InvalidCommandException {
+        try {
+            String[] temp = datetimeString.split(" ");
+            String[] date = temp[0].split("/");
+            String[] time = temp[1].split(":");
+            DateTimeFormatter formatter;
+            if (date[0].length() == 2) {
+                formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            } else {
+                formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+            }
+
+            int year = Integer.parseInt(date[2]);
+            int month = Integer.parseInt(date[1]);
+            int day = Integer.parseInt(date[0]);
+
+            return LocalDateTime.parse(datetimeString, formatter);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidCommandException();
         }
-
-        int year = Integer.parseInt(date[2]);
-        int month = Integer.parseInt(date[1]);
-        int day = Integer.parseInt(date[0]);
-
-        return LocalDateTime.parse(datetimeString, formatter);
     }
 }

@@ -1,8 +1,10 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
 
     private LocalDateTime deadline;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     /**
      * Constructor for Deadline task
@@ -20,7 +22,7 @@ public class Deadline extends Task{
      * @return String. See above
      */
     public String toString() {
-        return "[D]" + super.toString() + String.format(" (by: %s)", deadline);
+        return "[D]" + super.toString() + String.format(" (by: %s)", formatter.format(deadline));
     }
 
 }

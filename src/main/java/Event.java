@@ -1,18 +1,19 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
 
-    private String date;
-    private String time;
+    private LocalDateTime dateTime;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     /**
      * Constructor for event class
      * @param name Name for the event
-     * @param date date the event is held
-     * @param time time the event is held
+     * @param dateTime date the event is held
      */
-    public Event(String name, String date, String time) {
+    public Event(String name, LocalDateTime dateTime) {
         super(name);
-        this.date = date;
-        this.time = time;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -20,6 +21,6 @@ public class Event extends Task{
      * @return String. See above.
      */
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (at: %s %s)", this.date, this.time);
+        return "[E]" + super.toString() + " " + formatter.format(this.dateTime);
     }
 }

@@ -44,21 +44,25 @@ public class Logic {
                 case DEADLINE:
                     int indicatorDeadline = listOfCommandInputs.indexOf("/by");
                     String tempDeadline = new String();
-                    String deadline = listOfCommandInputs.get(indicatorDeadline + 1);
+                    String deadlineDate = listOfCommandInputs.get(indicatorDeadline + 1);
+                    String deadlineTime = listOfCommandInputs.get(indicatorDeadline + 2);
+                    String deadlineDateTime = deadlineDate + " " + deadlineTime;
+                    System.out.println(deadlineDateTime);
                     for (int i = 0; i < indicatorDeadline; i++) {
                         tempDeadline = tempDeadline + listOfCommandInputs.get(i);
                     }
-                    Persistence.addToLog(new Deadline(tempDeadline, Parser.convertToDateTime(deadline)));
+                    Persistence.addToLog(new Deadline(tempDeadline, Parser.convertToDateTime(deadlineDateTime)));
                     break;
                 case EVENT:
                     int indicatorEvent = listOfCommandInputs.indexOf("/at");
                     String date = listOfCommandInputs.get(indicatorEvent + 1);
                     String time = listOfCommandInputs.get(indicatorEvent + 2);
+                    String dateTime = date + " " + time;
                     String temp = new String();
                     for (int i = 0; i < indicatorEvent; i++) {
                         temp = temp + listOfCommandInputs.get(i);
                     }
-                    Persistence.addToLog(new Event(temp, date, time));
+                    Persistence.addToLog(new Event(temp, Parser.convertToDateTime(dateTime)));
                     break;
                 case NOTAPPLICABLE:
                     //For echoing commands
