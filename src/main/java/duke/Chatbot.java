@@ -3,6 +3,9 @@ package duke;
 import java.util.*;
 
 public class Chatbot {
+    /**
+     * Chatbot is the main obj that is imported to any runner as an application
+     */
     private enum ChatCommands {
         BYE("bye"),
         LIST("list");
