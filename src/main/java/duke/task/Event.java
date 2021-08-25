@@ -22,8 +22,8 @@ public class Event extends Task {
     public Event(String description, String eventDate) {
         super(description, "E");
         LDateTimeParser logicDateTimeParser = new LDateTimeParser(eventDate);
-        this.timeOfEvent = logicDateTimeParser.getTime();
-        this.dateOfEvent = logicDateTimeParser.getDate();
+        timeOfEvent = logicDateTimeParser.getTime();
+        dateOfEvent = logicDateTimeParser.getDate();
     }
 
     @Override

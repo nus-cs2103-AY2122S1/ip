@@ -24,9 +24,9 @@ public class Ui {
      * Creates a new instance of a user interface by creating a new scanner and querying for the user's name.
      */
     public Ui() {
-        this.sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         String name = "";
-        this.willExit = false;
+        willExit = false;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -56,7 +56,7 @@ public class Ui {
     public void checkInput(TaskList taskList, LStorage storage) {
         String userInput = sc.nextLine();
         try {
-            this.willExit = (new LCommandParser(userInput, taskList, storage, this)).willExit();
+            willExit = (new LCommandParser(userInput, taskList, storage, this)).willExit();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         } finally {

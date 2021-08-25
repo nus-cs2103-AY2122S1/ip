@@ -26,15 +26,15 @@ public class LDateTimeParser {
         try {
             if (dateAndTime.length == 1) {
                 if (dateAndTime[0].contains("/")) { // User entered date
-                    this.date = LocalDate.parse(dateAndTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
-                    this.time = LocalTime.parse("23:59");
+                    date = LocalDate.parse(dateAndTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
+                    time = LocalTime.parse("23:59");
                 } else { // User likely entered time
-                    this.time = LocalTime.parse(dateAndTime[0], DateTimeFormatter.ofPattern("H:m"));
-                    this.date = this.time.isAfter(LocalTime.now()) ? LocalDate.now() : LocalDate.now().plusDays(1);
+                    time = LocalTime.parse(dateAndTime[0], DateTimeFormatter.ofPattern("H:m"));
+                    date = time.isAfter(LocalTime.now()) ? LocalDate.now() : LocalDate.now().plusDays(1);
                 }
             } else {
-                this.date = LocalDate.parse(dateAndTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
-                this.time = LocalTime.parse(dateAndTime[1], DateTimeFormatter.ofPattern("H:m"));
+                date = LocalDate.parse(dateAndTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
+                time = LocalTime.parse(dateAndTime[1], DateTimeFormatter.ofPattern("H:m"));
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date and time format. Please enter them in the format: d/M/YYYY H:m.\n" +

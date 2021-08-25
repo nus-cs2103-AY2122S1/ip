@@ -10,7 +10,7 @@ class TaskListTest {
     TaskList taskList;
     private static final int LIMIT = 5;
     TaskListTest() {
-        this.taskList = new TaskList(LIMIT);
+        taskList = new TaskList(LIMIT);
         for (int i = 0; i < 4; i++) {
             taskList.addTask(TasksEnum.TODO.getTask("Hello World"));
         }

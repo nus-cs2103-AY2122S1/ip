@@ -14,8 +14,8 @@ public class Duke {
     private final LStorage lStorage;
 
     public Duke(String filePath, int listLimit) {
-        this.taskList = new TaskList(listLimit);
-        this.lStorage = new LStorage(filePath, taskList);
+        taskList = new TaskList(listLimit);
+        lStorage = new LStorage(filePath, taskList);
     }
 
     public void run() {
