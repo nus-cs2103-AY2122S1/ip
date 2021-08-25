@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
+    /**
+     * Loads saved tasks from the hard-disk
+     * @param duke The current instance of the Duke class
+     */
      public void loadCommands(Duke duke){
         String directory = System.getProperty("user.dir");
         Path path = Paths.get(directory, "data/taskList.txt");
@@ -42,6 +46,10 @@ public class Storage {
 
     }
 
+    /**
+     * Saves task list to hard-disk
+     * @param commands list of tasks to be saved 
+     */
     public void saveCommands(ArrayList<Task> commands){
         String directory = System.getProperty("user.dir");
         StringBuilder text= new StringBuilder();

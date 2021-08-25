@@ -9,7 +9,11 @@ import java.util.ArrayList;
 
 public class TaskList {
     Ui ui = new Ui();
-    
+
+    /**
+     * Lists all the tasks in the chatbot
+     * @param commands tasks in chatbot
+     */
     public void list(ArrayList<Task> commands){
         try {
             if (commands.size() == 0) {
@@ -23,6 +27,11 @@ public class TaskList {
 
     }
 
+    /**
+     * Deletes a task from the list 
+     * @param listNumber index of task to be deleted
+     * @param commands tasks in chatbot
+     */
     public void remove(int listNumber, ArrayList<Task> commands){
         try {
             if (listNumber < commands.size()) {

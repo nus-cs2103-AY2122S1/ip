@@ -106,6 +106,10 @@ public class Duke {
 
     }
 
+    /**
+     * Marks a task as completed 
+     * @param listNumber index number of task to be marked as done
+     */
     void done(int listNumber) {
         try {
             if (listNumber < commands.size()) {
@@ -124,7 +128,10 @@ public class Duke {
         }
 
     }
-    
+
+    /**
+     * Execute the program
+     */
     void run(){
         storage.loadCommands(this);
         ui.greetingMessage();
@@ -146,6 +153,7 @@ public class Duke {
         sc.close();
     }
 
+    
     public static void main(String[] args){
         new Duke().run();
     }
