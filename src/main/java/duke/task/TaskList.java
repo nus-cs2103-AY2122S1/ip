@@ -79,4 +79,12 @@ public class TaskList {
         }
         return result.toString();
     }
+
+    public Task[] findTasksWithName(String searchTerm) {
+        return tasks
+                .stream()
+                .parallel()
+                .filter(task -> task.getTaskName().contains(searchTerm))
+                .toArray(Task[]::new);
+    }
 }

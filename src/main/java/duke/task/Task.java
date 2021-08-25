@@ -9,7 +9,11 @@ public abstract class Task {
             this.done = done;
         }
 
-        public void markAsDone() {
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void markAsDone() {
             this.done = true;
         }
 
