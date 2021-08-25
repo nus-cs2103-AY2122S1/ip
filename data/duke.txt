@@ -1,3 +1,3 @@
 [T][ ] work
-[D][ ] die (by: tomorrow)
-[E][ ] live (at: night 9pm)
+[D][X] ip (by: 2021-03-23)
+[E][ ] meeting (at: tmr 9pm)
