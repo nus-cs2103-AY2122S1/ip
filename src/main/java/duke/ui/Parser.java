@@ -68,6 +68,12 @@ public class Parser {
             return Parser.parseCommandWithTime(splitted, false);
         } else if (splitted[0].equals("event")) {
             return Parser.parseCommandWithTime(splitted, true);
+        } else if (splitted[0].equals("find")) {
+            if (splitted.length >= 2) {
+                return new FindTaskCommand(splitted[1]);
+            } else {
+                throw new MissingCommandDetailException("keyword","find", "");
+            }
         } else {
             throw new InvalidCommandException();
         }
