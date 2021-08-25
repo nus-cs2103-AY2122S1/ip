@@ -14,8 +14,13 @@ public class Duke {
     /**
      * Receives input from the user and executes Duke's actions
      *
+<<<<<<< HEAD
      * @param sc The given scanner instance
      * @param taskList The given task list instance.
+=======
+     * @param sc       the given scanner instance
+     * @param taskList the given task list instance.
+>>>>>>> branch-A-CodingStandard
      */
     public static void run(Scanner sc, TaskList taskList) {
         while (sc.hasNextLine()) {

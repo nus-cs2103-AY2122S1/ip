@@ -18,8 +18,13 @@ public class Todo extends Task {
     /**
      * Constructs a todo task using the given description and complete state.
      *
+<<<<<<< HEAD
      * @param description The given description.
      * @param isDone      The given complete state.
+=======
+     * @param description the given description.
+     * @param isDone      the given complete state.
+>>>>>>> branch-A-CodingStandard
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);

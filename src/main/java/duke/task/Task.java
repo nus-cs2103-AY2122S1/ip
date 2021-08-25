@@ -30,8 +30,13 @@ public class Task {
     /**
      * Constructs a task using the given description and complete state.
      *
+<<<<<<< HEAD
      * @param description The given description.
      * @param isDone      The given complete state.
+=======
+     * @param description the given description.
+     * @param isDone      the given complete state.
+>>>>>>> branch-A-CodingStandard
      */
     public Task(String description, boolean isDone) {
         this.description = description;

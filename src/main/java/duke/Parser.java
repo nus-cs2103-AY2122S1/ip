@@ -13,21 +13,15 @@ import java.time.format.DateTimeParseException;
  * The Parser class handles all actions from users' input.
  */
 public class Parser {
-    /**
-     * The Action enum enumerates all possible actions
-     */
+    /** The Action enum enumerates all possible actions. */
     public enum Action {
         BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, UNKNOWN
     }
 
-    /**
-     * The spliter for the date time.
-     */
+    /** The spliter for the date time. */
     public static final String SPLITER = ",";
 
-    /**
-     * The date time format.
-     */
+    /** The date time format. */
     public static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     /**

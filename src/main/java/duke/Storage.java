@@ -14,9 +14,7 @@ import java.util.Scanner;
  * This class handles file access.
  */
 public class Storage {
-    /**
-     * The path of the .txt file storing tasks
-     */
+    /** The path of the .txt file storing task. */
     private final String filePath;
 
     /**
