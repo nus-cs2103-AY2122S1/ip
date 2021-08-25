@@ -3,6 +3,9 @@ package duke.functionality;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates date and time into one object.
+ */
 public class Datetime {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
     private LocalDate datetime;

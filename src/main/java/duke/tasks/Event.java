@@ -2,6 +2,9 @@ package duke.tasks;
 
 import duke.functionality.Datetime;
 
+/**
+ * Represents an Event task.
+ */
 public class Event extends Task {
     private final Datetime eventDatetime;
     private static final String TASK_TAG = "event";
@@ -16,6 +19,11 @@ public class Event extends Task {
         this.eventDatetime = new Datetime(eventDatetime);
     }
 
+    /**
+     * Returns the string format in which this task is to be saved within a file.
+     *
+     * @return String representation of task for saving within a file.
+     */
     public String fileSaveFormat() {
         return String.format("E | %d | %s | %s", this.isDone() ? 1 : 0, this.taskName(),
                 this.eventDatetime.getDatetimeString());

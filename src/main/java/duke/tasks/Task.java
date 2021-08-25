@@ -1,5 +1,8 @@
 package duke.tasks;
 
+/**
+ * Abstract class for all types of tasks that Duke can handle.
+ */
 public abstract class Task {
     private final String taskName;
     private boolean isDone;

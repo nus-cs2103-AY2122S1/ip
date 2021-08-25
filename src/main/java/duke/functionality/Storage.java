@@ -1,5 +1,6 @@
 package duke.functionality;
 
+import duke.exceptions.DukeException;
 import duke.tasks.TaskList;
 import duke.tasks.*;
 
@@ -10,6 +11,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Represents a storage system that deals with loading tasks from and saving tasks to a file.
+ */
 public class Storage {
     private final static String FILE_NAME = "dukestorage.txt";
     private String filePath;
@@ -57,14 +61,30 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds a task to the TaskList within the storage object.
+     *
+     * @param taskName Name of the task to be inserted.
+     */
     public void addTask(Task taskName) {
         this.taskList.addTask(taskName);
     }
 
+    /**
+     * Deletes a task from the TaskList within the storage object.
+     *
+     * @param taskNum Index of the task to be deleted.
+     * @return Deleted task.
+     */
     public Task deleteTask(int taskNum) {
         return this.taskList.deleteTask(taskNum);
     }
 
+    /**
+     * Returns length of the TaskList within the storage object.
+     *
+     * @return Length of TaskList.
+     */
     public int taskListLen() {
         return this.taskList.taskListLen();
     }
@@ -73,10 +93,18 @@ public class Storage {
         return this.taskList.getTask(taskIndex);
     }
 
+    /**
+     * Returns the string representation of the TaskList within the storage object.
+     *
+     * @return String representation of TaskList.
+     */
     public String printTaskList() {
         return this.taskList.toString();
     }
 
+    /**
+     * Saves all contents of the current TaskList into a file on the system.
+     */
     public void saveToFile() {
         try {
             FileWriter fw = new FileWriter(this.filePath);

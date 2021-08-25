@@ -1,5 +1,8 @@
 package duke.exceptions;
 
+/**
+ * Represents exceptions created from Duke bot operations.
+ */
 public class DukeException extends Exception {
     public DukeException(String message) {
         super(message);

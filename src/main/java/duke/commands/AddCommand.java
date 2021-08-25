@@ -1,9 +1,13 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.functionality.Ui;
 import duke.functionality.Storage;
 import duke.tasks.*;
 
+/**
+ * Represents the command when the user wants to add a new task.
+ */
 public class AddCommand extends Command {
     private String taskType;
     private String taskName;
@@ -15,6 +19,12 @@ public class AddCommand extends Command {
         this.datetime = datetime;
     }
 
+    /**
+     * Executes the command, with execution method depending on the type of the task being added through this command.
+     *
+     * @param storage The storage system of the bot involved with this command.
+     * @param ui The ui of the bot involved with this command.
+     */
     public void execute(Storage storage, Ui ui) {
         if (this.taskType.equals(Todo.taskTag())) {
             int taskListLen = storage.taskListLen();
