@@ -1,45 +1,46 @@
 package duke;
 
 import java.util.ArrayList;
+
 import duke.task.Task;
 
 public class TaskList {
-    protected ArrayList<Task> list;
+    protected ArrayList<Task> tasks;
 
     public TaskList() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> taskList) {
-        this.list = taskList;
+        this.tasks = taskList;
     }
 
     public Task markAsDone(int taskNumber) {
-        Task task = this.list.get(taskNumber);
+        Task task = this.tasks.get(taskNumber);
         task.markAsDone();
         return task;
     }
 
     public void add(Task task) {
-        this.list.add(task);
+        this.tasks.add(task);
     }
 
     public Task remove(int taskNumber) {
-        Task task = this.list.get(taskNumber);
-        this.list.remove(task);
+        Task task = this.tasks.get(taskNumber);
+        this.tasks.remove(task);
         return task;
     }
 
     public int size() {
-        return this.list.size();
+        return this.tasks.size();
     }
 
     public ArrayList<Task> getList() {
-        return this.list;
+        return this.tasks;
     }
 
     @Override
     public String toString() {
-        return "Now you have " + list.size() + " tasks in the list.";
+        return "Now you have " + tasks.size() + " tasks in the list.";
     }
 }

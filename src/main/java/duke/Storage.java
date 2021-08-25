@@ -1,11 +1,14 @@
 package duke;
 
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -22,7 +25,7 @@ public class Storage {
     }
 
     public ArrayList<Task> load() {
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         boolean directoryExists = Files.exists(filePath);
 
         try {
@@ -31,15 +34,14 @@ public class Storage {
                 List<String> data = Files.readAllLines(filePath);
                 for (String str : data) {
                     Task task = convertDataToTask(str);
-                    taskList.add(task);
+                    tasks.add(task);
                 }
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             ui.showError(e.getMessage());
         }
 
-        return taskList;
+        return tasks;
     }
 
     public void save(Task task) {
@@ -52,8 +54,7 @@ public class Storage {
             } else {
                 throw new DukeException("Data file doesn't exist");
             }
-        }
-        catch (IOException | DukeException e) {
+        } catch (IOException | DukeException e) {
             ui.showError(e.getMessage());
         }
     }
@@ -72,8 +73,7 @@ public class Storage {
             } else {
                 throw new DukeException("Data file doesn't exist");
             }
-        }
-        catch (IOException | DukeException e) {
+        } catch (IOException | DukeException e) {
             ui.showError(e.getMessage());
         }
     }
@@ -97,8 +97,7 @@ public class Storage {
                 }
             }
             return new Todo(description, isCompleted);
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             ui.showError(e.getMessage());
         }
         return null;

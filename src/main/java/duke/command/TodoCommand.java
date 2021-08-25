@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.task.Todo;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
@@ -8,7 +9,7 @@ import duke.Storage;
 
 public class TodoCommand extends Command {
     protected Todo todo;
-    public static final String INSTRUCTION = "todo";
+    public static final String INSTRUCTION_TODO = "todo";
 
     public TodoCommand(String parameter_1) throws DukeException {
         if (parameter_1.equals("")) {
@@ -32,6 +33,6 @@ public class TodoCommand extends Command {
 
     @Override
     public String toString() {
-        return "[" + INSTRUCTION + "] - " + todo.toString();
+        return "[" + INSTRUCTION_TODO + "] - " + todo.toString();
     }
 }

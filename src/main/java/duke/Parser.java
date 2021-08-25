@@ -22,25 +22,25 @@ public class Parser {
 
         try {
             switch (commandInstruction) {
-                case ListCommand.INSTRUCTION:
-                    return new ListCommand();
-                case TodoCommand.INSTRUCTION:
-                    return new TodoCommand(parameter_1);
-                case DeadlineCommand.INSTRUCTION:
-                    return new DeadlineCommand(parameter_1, parameter_2);
-                case EventCommand.INSTRUCTION:
-                    return new EventCommand(parameter_1, parameter_2);
-                case DoneCommand.INSTRUCTION:
-                    return new DoneCommand(parameter_1);
-                case DeleteCommand.INSTRUCTION:
-                    return new DeleteCommand(parameter_1);
-                case ExitCommand.INSTRUCTION:
-                    return new ExitCommand();
-                default:
-                    return new IncorrectCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            case ListCommand.INSTRUCTION_LIST:
+                return new ListCommand();
+            case TodoCommand.INSTRUCTION_TODO:
+                return new TodoCommand(parameter_1);
+            case DeadlineCommand.INSTRUCTION_DEADLINE:
+                return new DeadlineCommand(parameter_1, parameter_2);
+            case EventCommand.INSTRUCTION_EVENT:
+                return new EventCommand(parameter_1, parameter_2);
+            case DoneCommand.INSTRUCTION_DONE:
+                return new DoneCommand(parameter_1);
+            case DeleteCommand.INSTRUCTION_DELETE:
+                return new DeleteCommand(parameter_1);
+            case ExitCommand.INSTRUCTION_EXIT:
+                return new ExitCommand();
+            default:
+                return new IncorrectCommand("☹ OOPS!!! I'm sorry, but I don't know what " +
+                        "that means :-(");
             }
-        }
-        catch (DukeException e) {
+        } catch (DukeException e) {
             return new IncorrectCommand(e.getMessage());
         }
     }

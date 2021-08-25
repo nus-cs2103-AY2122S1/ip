@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.task.Event;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
@@ -8,7 +9,7 @@ import duke.Storage;
 
 public class EventCommand extends Command {
     protected Event event;
-    public static final String INSTRUCTION = "event";
+    public static final String INSTRUCTION_EVENT = "event";
 
     public EventCommand(String parameter_1, String parameter_2) throws DukeException {
         if (parameter_1.equals("") || parameter_2.equals("")) {
@@ -31,6 +32,6 @@ public class EventCommand extends Command {
 
     @Override
     public String toString() {
-        return "[" + INSTRUCTION + "] - " + event.toString();
+        return "[" + INSTRUCTION_EVENT + "] - " + event.toString();
     }
 }

@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.task.Deadline;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
@@ -8,7 +9,7 @@ import duke.Storage;
 
 public class DeadlineCommand extends Command {
     protected Deadline deadline;
-    public static final String INSTRUCTION = "deadline";
+    public static final String INSTRUCTION_DEADLINE = "deadline";
 
     public DeadlineCommand(String parameter_1, String parameter_2) throws DukeException {
         if (parameter_1.equals("") || parameter_2.equals("")) {
@@ -31,6 +32,6 @@ public class DeadlineCommand extends Command {
 
     @Override
     public String toString() {
-        return "[" + INSTRUCTION + "] - " + deadline.toString();
+        return "[" + INSTRUCTION_DEADLINE + "] - " + deadline.toString();
     }
 }
