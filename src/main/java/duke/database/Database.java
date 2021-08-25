@@ -32,7 +32,7 @@ public abstract class Database {
      *
      * @return SQL connection
      */
-    public abstract Connection getSQLConnection();
+    public abstract Connection getSqlConnection();
 
     /**
      * Executes create table statement.
@@ -44,7 +44,7 @@ public abstract class Database {
      * statements from respective tables in the database.
      */
     protected void initialize() {
-        connection = this.getSQLConnection();
+        connection = this.getSqlConnection();
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + TASK_TABLE_NAME);
             ResultSet rs = ps.executeQuery();
@@ -88,10 +88,6 @@ public abstract class Database {
     public abstract Task markCompleted(int index);
 
     /**
-<<<<<<< HEAD
-     * Recreates a task based on provided information. Used when retrieving task
-     * from SQL database.
-=======
      * Finds tasks by searching for a keyword/phrase.
      * 
      * @param pattern keyword/phrase to be searched
@@ -100,9 +96,8 @@ public abstract class Database {
     public abstract List<Task> findTasksByName(String pattern);
 
     /**
-     * Recreate a task based on provided information. Used when retrieving task from
-     * SQL database.
->>>>>>> branch-Level-9
+     * Recreates a task based on provided information. Used when retrieving task
+     * from SQL database.
      * 
      * @param type      type of task
      * @param name      name of task

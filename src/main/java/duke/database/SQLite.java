@@ -22,7 +22,7 @@ public class SQLite extends Database {
             + " (`type` STRING NOT NULL, `name` TEXT NOT NULL, `completed` INTEGER NOT NULL, `date` TEXT);";
 
     @Override
-    public Connection getSQLConnection() {
+    public Connection getSqlConnection() {
         File dataFile = this.createOrOpenDataFile();
         try {
             if (connection != null && !connection.isClosed()) {
@@ -40,7 +40,7 @@ public class SQLite extends Database {
 
     @Override
     public void load() {
-        this.connection = getSQLConnection();
+        this.connection = getSqlConnection();
         try {
             Statement s = this.connection.createStatement();
             s.executeUpdate(SQLITE_CREATE_TASK_TABLE_STATEMENT);
@@ -55,7 +55,7 @@ public class SQLite extends Database {
     public List<Task> getTasksList() {
         List<Task> list = new ArrayList<>();
         try {
-            this.connection = getSQLConnection();
+            this.connection = getSqlConnection();
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + ";");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -79,7 +79,7 @@ public class SQLite extends Database {
         int completed = task.isCompleted() ? 1 : 0;
         String date = task.getDate() == null ? null : task.getDate().toString();
         try {
-            connection = getSQLConnection();
+            connection = getSqlConnection();
             PreparedStatement ps = connection
                     .prepareStatement("INSERT INTO " + TASK_TABLE_NAME + " (type, name, completed, date) VALUES('"
                             + type + "', '" + name + "', " + completed + ", '" + date + "')");
@@ -94,7 +94,7 @@ public class SQLite extends Database {
     public Task removeTask(int index) {
         Task result = null;
         try {
-            this.connection = getSQLConnection();
+            this.connection = getSqlConnection();
             PreparedStatement ps = connection
                     .prepareStatement("SELECT rowid, * FROM " + TASK_TABLE_NAME + " ORDER BY rowid;");
             ResultSet rs = ps.executeQuery();
@@ -125,7 +125,7 @@ public class SQLite extends Database {
     public Task markCompleted(int index) {
         Task result = null;
         try {
-            this.connection = getSQLConnection();
+            this.connection = getSqlConnection();
             PreparedStatement ps = connection.prepareStatement("SELECT rowid, * FROM " + TASK_TABLE_NAME + ";");
             ResultSet rs = ps.executeQuery();
 
@@ -154,7 +154,7 @@ public class SQLite extends Database {
     public List<Task> findTasksByName(String pattern) {
         List<Task> list = new ArrayList<>();
         try {
-            this.connection = getSQLConnection();
+            this.connection = getSqlConnection();
             PreparedStatement ps = connection
                     .prepareStatement("SELECT * FROM " + TASK_TABLE_NAME + " WHERE name LIKE '" + pattern + "';");
             ResultSet rs = ps.executeQuery();
