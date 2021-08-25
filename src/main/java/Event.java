@@ -1,3 +1,6 @@
+/**
+ * Event class that extends task. Events should have a dead and time as well as a name
+ */
 public class Event extends Task{
 
     private String date;

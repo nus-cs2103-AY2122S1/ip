@@ -1,14 +1,19 @@
 import java.util.ArrayList;
 
+
+/**
+ * This is the logic layer where most of the commands are processed and errors are handled.
+ * Please refer to the structure of the diagram in the docs for more information
+ */
 public class Logic {
 
 
     /**
-     * The process is the main function to process the parsed string from presentation.
+     * This is to check if any special command or empty command is given
      * @param command refers to the parsed string. See presentation for parsing
      * @throws InvalidCommandException is throwed when there is an invalid command in the form of a string
      */
-    public static void process(String command) throws InvalidCommandException{
+    public static void checkIfSpecialComand(String command) throws InvalidCommandException{
 
         //Logic to check each individual commands, checks for special commands first, then checks for other input
         //Use Parser to package command into a packaged command
@@ -45,8 +50,11 @@ public class Logic {
         }
     }
 
+    /**
+     * Loads in all the text history from previous times of running the bot
+     */
     public static void preload() {
-        System.out.println("Preloading works");
+        System.out.println("Ahhhhhh. It seems you have an old scroll. Let me read the contents......");
         try {
             ArrayList<Command> commandArrayList = DataHandlerLayer.loadPreset();
             for (Command command: commandArrayList) {
@@ -58,6 +66,14 @@ public class Logic {
     }
 
 
+    /**
+     * Process the tasks and pass it on to the data Handler layer for tasks
+     * @param packagedCommand Command that is parsed by the parser.
+     * @param isWrittenToHistory boolean value if the command should be written to history.
+     *                           most of the times this should be the case other than preload, since
+     *                           writing to history would result in double occurence of tasks
+     * @throws InvalidCommandException
+     */
     public static void processTask(Command packagedCommand, boolean isWrittenToHistory) throws InvalidCommandException {
         //Logic to check each individual commands, checks for special commands first, then checks for other input
         //Use Parser to package command into a packaged command

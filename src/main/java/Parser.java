@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ * Parser that handles all the string manipulation. The users input is taken in as a string and passed to parser
+ * for packaging into a command.
+ */
 public class Parser {
 
     /**

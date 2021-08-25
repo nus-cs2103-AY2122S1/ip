@@ -4,6 +4,10 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Persistent storage refers to the database used to store all the information regarding tasks. Allows for handling of
+ * .txt files and manages all of them
+ */
 public class PersistentStorageHandler {
 
     private File file;

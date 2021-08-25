@@ -1,5 +1,7 @@
+/**
+ * Empty Command exception
+ */
 public class EmptyCommandException extends InvalidCommandException {
-
     /**
      * Overridden method from InvalidCommandException. Constructor
      */

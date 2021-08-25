@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Handles all things related to data. This includes the in-memory storage represented by an arrayList or
+ * the persistent storage handled by the .txt files.
+ */
 public class DataHandlerLayer {
 
 

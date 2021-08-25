@@ -1,3 +1,6 @@
+/**
+ * Main file of the duke folder. Runs the while loop to keep the bot going
+ */
 public class Duke {
 
     private static boolean isRunning = false;
@@ -8,9 +11,9 @@ public class Duke {
         isRunning = true;
         Logic.preload();
         while (true) {
-            String command = UI.scan();
+            String command = Scanner.scan();
             try {
-                Logic.process(command);
+                Logic.checkIfSpecialComand(command);
             } catch (InvalidCommandException exception) {
                 System.out.println(exception.getMessage());
             }
@@ -23,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Stop the running of the bot
+     */
     protected static void stop() {
         isRunning = false;
     }

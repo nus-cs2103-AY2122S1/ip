@@ -1,5 +1,7 @@
 import java.util.ArrayList;
-
+/**
+ * Task that can be completed. Falls under three main cats, Event, Todo and deadline.
+ */
 public class Task {
 
     private boolean completedStatus = false;
