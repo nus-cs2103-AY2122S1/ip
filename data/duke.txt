@@ -1,1 +1,3 @@
 todo,0,test1
+todo,0,test2
+deadline,0,testteter3,2020-10-20
