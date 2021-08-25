@@ -34,5 +34,6 @@ public class Duke {
             parser.takeInput(input);
             parser.interactWith(ui, logger, tasks);
         } while (parser.flag == 1);
+        ui.close();
     }
 }

@@ -55,4 +55,8 @@ public class Ui {
     public void showToUser(String message) {
         out.println(line + message + line);
     }
+
+    protected void close() {
+        in.close();
+    }
 }
