@@ -9,9 +9,7 @@ public class PibException extends Exception {
         super(e);
         this.errorType = e;
     }
-    public PibException() {
 
-    }
     public void print() {
         Ui.printError(errorType);
     }
