@@ -56,8 +56,8 @@ public class Ui {
         formatAndPrintText(completeTaskText + "\n" + task);
     }
 
-    public void showErrorMessage(KermitException e) {
-        formatAndPrintText(errorText + "\n" + e.getMessage());
+    public void showErrorMessage(String e) {
+        formatAndPrintText(errorText + "\n" + e);
     }
 
     public void showLoadingError() {
