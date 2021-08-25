@@ -31,7 +31,7 @@ Hello from
     ____________________________________________________________
     ____________________________________________________________
     Got it. I've added this task:
-      [T][ ] borrow book 
+      [T][ ] borrow book
     Now you have 5 tasks in the list.
     ____________________________________________________________
     ____________________________________________________________
@@ -40,7 +40,7 @@ Hello from
     2. [D][ ] return book (by: 06 Jun 2021 1230)
     3. [E][ ] project meeting (at: 06 Aug 2021 1400)
     4. [T][ ] join sports club
-    5. [T][ ] borrow book 
+    5. [T][ ] borrow book
     ____________________________________________________________
     ____________________________________________________________
     Nice! I've marked this task as done:
@@ -60,7 +60,7 @@ Hello from
     2. [D][X] return book (by: 06 Jun 2021 1230)
     3. [E][ ] project meeting (at: 06 Aug 2021 1400)
     4. [T][X] join sports club
-    5. [T][ ] borrow book 
+    5. [T][ ] borrow book
     ____________________________________________________________
     ____________________________________________________________
     Noted. I've removed this task:
@@ -76,7 +76,7 @@ Hello from
     Here are the tasks in your list:
     1. [D][X] return book (by: 06 Jun 2021 1230)
     2. [T][X] join sports club
-    3. [T][ ] borrow book 
+    3. [T][ ] borrow book
     ____________________________________________________________
     ____________________________________________________________
     ☹ OI!!! Hello??? What you want me to do???
