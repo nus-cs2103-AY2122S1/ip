@@ -31,7 +31,7 @@ public class AddTaskCommand extends Command {
 
     public AddTaskCommand(String taskType, String description, String flag) throws KermitException {
         if (description.equals("")) {
-            throw new KermitException("The argument of the " + taskType + " kermit.command cannot be empty!");
+            throw new KermitException("The argument of the " + taskType + " command cannot be empty!");
         }
 
         if (taskType.equals("todo")) {

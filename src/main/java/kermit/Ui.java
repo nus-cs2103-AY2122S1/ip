@@ -5,7 +5,7 @@ import kermit.tasks.Task;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String introductionText = "Hello I am kermit.command.Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
+    private static final String introductionText = "Hello I am kermit.Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
     private static final String listText = "Here are the tasks in your list:";
     private static final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
     private static final String goodbyeText = "Bye. Hope to see you again soon!";
