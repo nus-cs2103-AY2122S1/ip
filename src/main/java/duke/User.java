@@ -1,3 +1,5 @@
+package duke;
+
 public class User {
     private String username;
     private boolean isNewUser;

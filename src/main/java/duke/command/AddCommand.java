@@ -1,6 +1,14 @@
+package duke.command;
+
+
+import duke.Storage;
+import duke.TaskList;
+import duke.UI;
+import duke.exception.DukeException;
+import duke.task.Task;
 import java.util.ArrayList;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private boolean isExit = false;
     private Task newTask;
 
