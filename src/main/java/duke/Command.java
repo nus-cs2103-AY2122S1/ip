@@ -9,17 +9,17 @@ public class Command {
 
     public void execute(TaskList tasks, Ui ui, Storage save) {
         ui.Start();
-        boolean exit = false;
+        boolean hasExit = false;
         Scanner sc = new Scanner(System.in);
         String filePath = "data/duke.txt";
         int count = tasks.size();
 
-        while (!exit) {
+        while (!hasExit) {
             String command = Parser.parseCommand(sc.next());
             switch(command){
                 case "bye":
                     ui.Bye();
-                    exit = true;
+                    hasExit = true;
                     break;
                 case "list":
                     String list = "";
