@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * Saves the input string to the instance file path.
+     *
      * @param text The text to be saved.
      */
     public void save(String text) {
@@ -44,6 +45,7 @@ public class Storage {
 
     /**
      * Loads the file specified by the instance file path.
+     *
      * @return The file contents as a BufferedReader
      * @throws FileNotFoundException When file is not found at the specified path
      */

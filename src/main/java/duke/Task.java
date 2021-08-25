@@ -29,7 +29,9 @@ public abstract class Task {
         return String.format("[%s] %s", isDone ? "X" : " ", this.description);
     }
 
-    public String toSaveFormat() { return String.format("%s,%s", isDone ? "1" : "0", this.description); }
+    public String toSaveFormat() {
+        return String.format("%s,%s", isDone ? "1" : "0", this.description);
+    }
 
     @Override
     public boolean equals(Object obj) {

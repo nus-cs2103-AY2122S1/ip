@@ -27,24 +27,24 @@ public class TaskList {
                 }
 
                 switch (values[0]) {
-                    case "T":   // Todo task
-                        newTask = new Todo(values[2], values[1].equals("1"));
-                        break;
-                    case "D":   // Deadline task
-                        LocalDate date;
-                        try {
-                            date = LocalDate.parse(values[3]);
-                        } catch (DateTimeParseException e) {
-                            throw new InvalidFileFormatException();
-                        }
-                        newTask = new Deadline(values[2], date, values[1].equals("1"));
-                        break;
-                    case "E":   // Event task
-                        newTask = new Event(values[2], values[3], values[1].equals("1"));
-                        break;
-                    default:
-                        // Should not reach this case due to regex check above
+                case "T":   // Todo task
+                    newTask = new Todo(values[2], values[1].equals("1"));
+                    break;
+                case "D":   // Deadline task
+                    LocalDate date;
+                    try {
+                        date = LocalDate.parse(values[3]);
+                    } catch (DateTimeParseException e) {
                         throw new InvalidFileFormatException();
+                    }
+                    newTask = new Deadline(values[2], date, values[1].equals("1"));
+                    break;
+                case "E":   // Event task
+                    newTask = new Event(values[2], values[3], values[1].equals("1"));
+                    break;
+                default:
+                    // Should not reach this case due to regex check above
+                    throw new InvalidFileFormatException();
                 }
                 loadedTasks.add(newTask);
             }
@@ -74,7 +74,7 @@ public class TaskList {
      * @param command The input command from the user.
      * @return Formatted string containing the task marked as done, to be displayed to the user.
      * @throws InvalidTaskIndexException When the index is out of bounds.
-     * @throws InvalidFormatException When the input command is of the wrong format.
+     * @throws InvalidFormatException    When the input command is of the wrong format.
      */
     public String done(String command) throws InvalidTaskIndexException, InvalidFormatException {
         int taskIdx = Parser.getIndexFromCommand(command);
@@ -94,7 +94,7 @@ public class TaskList {
      *
      * @param command The input command from the user.
      * @return Formatted string containing the added todo task, to be displayed to the user.
-     * @throws InvalidFormatException When the input command is of the wrong format.
+     * @throws InvalidFormatException        When the input command is of the wrong format.
      * @throws EmptyTodoDescriptionException When the description is empty.
      */
     public String todo(String command) throws InvalidFormatException, EmptyTodoDescriptionException {
@@ -153,7 +153,7 @@ public class TaskList {
      * @param command The input command from the user.
      * @return Formatted string containing the task deleted, to be displayed to the user.
      * @throws InvalidTaskIndexException When the index is out of bounds.
-     * @throws InvalidFormatException When the input command is of the wrong format.
+     * @throws InvalidFormatException    When the input command is of the wrong format.
      */
     public String delete(String command) throws InvalidTaskIndexException, InvalidFormatException {
         int taskIdx = Parser.getIndexFromCommand(command);
@@ -196,7 +196,7 @@ public class TaskList {
      */
     private String formatAddTaskString(Task task) {
         return String.format("Got it. I've added this task:\n  %s\n%s\n",
-                        task, formatNumTaskString());
+                task, formatNumTaskString());
     }
 
     /**
