@@ -36,7 +36,7 @@ public class Logic {
                 throw new InvalidCommandException();
             }
             DataHandlerLayer.updateHistory();
-        } else if (listOfCommandInputs.contains("done")) {
+    } else if (listOfCommandInputs.contains("done")) {
             int pos = Integer.parseInt(listOfCommandInputs.get(1));
             if (pos > Task.getNumberOfTask()) {
                 throw new InvalidCommandException();
@@ -90,7 +90,8 @@ public class Logic {
             case DEADLINE:
                 int indicatorDeadline = listOfCommandInputs.indexOf("/by");
                 String tempDeadlineString = new String();
-                String deadline = listOfCommandInputs.get(indicatorDeadline + 1);
+                String deadlineDate = listOfCommandInputs.get(indicatorDeadline + 1);
+                String deadlineTime = listOfCommandInputs.get(indicatorDeadline + 2);
                 String deadlineDateTime = deadlineDate + " " + deadlineTime;
                 for (int i = 0; i < indicatorDeadline; i++) {
                     tempDeadlineString = tempDeadlineString + listOfCommandInputs.get(i);

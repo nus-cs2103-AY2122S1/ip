@@ -34,6 +34,7 @@ public class DataHandlerLayer {
 
     /**
      * Returns the task at the specific log postion
+     *
      * @param position
      * @return Task
      */
@@ -62,7 +63,7 @@ public class DataHandlerLayer {
         for (Task temp : log) {
             if (temp.getCompletedStatus() == cond) {
                 System.out.println(taskNumber + ". " + temp.toString());
-                taskNumber ++;
+                taskNumber++;
             }
         }
     }
@@ -70,14 +71,15 @@ public class DataHandlerLayer {
     public static void delete(int position) throws IndexOutOfBoundsException {
         if (position == 0) {
             throw new IndexOutOfBoundsException();
-        };
+        }
+        ;
         log.remove(position - 1);
     }
 
     /**
      * Prints all the lines in the history
      */
-    public static void print_history() {
+    public static void printHistory() {
         history.printAllLines();
     }
 
@@ -86,7 +88,7 @@ public class DataHandlerLayer {
     }
 
     public static ArrayList<Command> loadPreset() throws InvalidCommandException {
-       return Parser.parsePreloadedTasks(history.getAll_lines());
+        return Parser.parsePreloadedTasks(history.getAll_lines());
     }
 
     public static void appendToHistory(Task task) {
@@ -95,7 +97,7 @@ public class DataHandlerLayer {
 
     public static void updateHistory() {
         history.clear_history();
-        for (Task task: log) {
+        for (Task task : log) {
             if (!task.getCompletedStatus()) {
                 appendToHistory(task);
             }
