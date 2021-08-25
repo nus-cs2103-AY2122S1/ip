@@ -1,4 +1,5 @@
 import java.lang.String;
+import java.time.LocalDate;
 
 public class ToDo extends Task{
 
@@ -15,7 +16,7 @@ public class ToDo extends Task{
     }
 
     @Override
-    public String getTime() {
+    public LocalDate getTime() {
         return null;
     }
 
@@ -28,6 +29,6 @@ public class ToDo extends Task{
         return String.format("[%s][%s] %s",
                 this.getTaskType(),
                 (this.isDone ? "X" : " "),
-                this.taskTitle);
+                this.getTaskTitle());
     }
 }

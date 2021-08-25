@@ -1,25 +1,26 @@
 import java.lang.String;
+import java.time.LocalDate;
 
 public class Event extends Task{
 
-    private String time;
+    private LocalDate time;
 
     /**
      * Constructor
      * @param tasktitle
      * @param time
      */
-    Event (String tasktitle, String time) {
+    Event (String tasktitle, LocalDate time) {
         super(tasktitle, "E");
         this.time = time;
     }
 
-    Event (boolean isDone, String taskTitle, String time) {
+    Event (boolean isDone, String taskTitle, LocalDate time) {
         super(taskTitle, isDone, "E");
         this.time = time;
     }
 
-    public String getTime() {
+    public LocalDate getTime() {
         return this.time;
     }
 
@@ -30,9 +31,9 @@ public class Event extends Task{
     @Override
     public String toString(){
         return String.format("[%s][%s] %s (at: %s)",
-                this.taskType,
+                this.getTaskType(),
                 (this.isDone ? "X" : " "),
-                this.taskTitle,
-                this.time);
+                this.getTaskTitle(),
+                this.getTime().toString());
     }
 }

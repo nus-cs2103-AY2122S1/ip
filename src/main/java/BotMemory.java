@@ -12,6 +12,8 @@ import java.util.Scanner;
 //  and tracks the tasks added
 public class BotMemory {
 
+    private BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
+
     final String LOGO =
                     "░░░░░░░░░░░░░░░░▄▄▄███████▄▄░░░░░░░░░░░░\n" +
                     "░░░░░░░░░░░░░░▄███████████████▄░░░░░░░░░\n" +
@@ -114,12 +116,12 @@ public class BotMemory {
                     return new Deadline(
                             stringDataToken[1] == "true" ? true : false,
                             stringDataToken[2],
-                            stringDataToken[3]);
+                            botTemporalUnit.convertStringToTemporalData(stringDataToken[3]));
                 case "E":
                     return new Event(
                             stringDataToken[1] == "true" ? true : false,
                             stringDataToken[2],
-                            stringDataToken[3]);
+                            botTemporalUnit.convertStringToTemporalData(stringDataToken[3]));
                 default:
                     throw new InvalidDataFormatException(
                             String.format(ERROR_MESSAGE_INVALID_DATA_FORMAT, stringData));

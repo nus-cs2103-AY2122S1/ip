@@ -1,25 +1,26 @@
 import java.lang.String;
+import java.time.LocalDate;
 
 public class Deadline extends Task{
 
-    private String time;
+    private LocalDate time;
 
     /**
      * Constructor
      * @param taskTitle
      * @param time
      */
-    Deadline(String taskTitle, String time){
+    Deadline(String taskTitle, LocalDate time){
         super(taskTitle, "D");
         this.time = time;
     }
 
-    Deadline (boolean isDone, String taskTitle, String time) {
+    Deadline (boolean isDone, String taskTitle, LocalDate time) {
         super (taskTitle, isDone, "D");
         this.time = time;
     }
 
-    public String getTime() {
+    public LocalDate getTime() {
         return this.time;
     }
 
@@ -29,10 +30,10 @@ public class Deadline extends Task{
      */
     @Override
     public String toString(){
-        return String.format("[%s][%s] %s (by: %s)",
-                this.taskType,
+        return String.format("[%s][%s] %s (at: %s)",
+                this.getTaskType(),
                 (this.isDone ? "X" : " "),
-                this.taskTitle,
-                this.time);
+                this.getTaskTitle(),
+                this.getTime().toString());
     }
 }

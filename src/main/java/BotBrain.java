@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -6,6 +7,7 @@ public class BotBrain {
 
     private BotMemory botMemory = new BotMemory();
     private BotPrinter botPrinter = new BotPrinter();
+    private BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
     private List<Task> taskTracker = botMemory.taskTracker;
     private boolean isTerminated = false;
 
@@ -45,8 +47,10 @@ public class BotBrain {
                 if (inputToken.length == 1) {
                     throw new InvalidCommandFormatException(botMemory.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
                 }
-                taskTracker.add(new ToDo(inputToken[1]));
-                return;
+                taskTracker.add(
+                        new ToDo(inputToken[1])
+                );
+                break;
 
             case DEADLINE:
                 String[] deadlineTask = inputToken[1].split(" /by ", 2);
@@ -55,8 +59,15 @@ public class BotBrain {
                 if (deadlineTask.length != 2) {
                     throw new InvalidCommandFormatException(botMemory.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
                 }
-                taskTracker.add(new Deadline(deadlineTask[0].trim(), deadlineTask[1].trim()));
-                return;
+
+                taskTracker.add(
+                        new Deadline(
+                                deadlineTask[0].trim(),
+                                botTemporalUnit.convertStringToTemporalData(deadlineTask[1].trim())
+                        )
+                );
+
+                break;
 
             case EVENT:
                 String[] eventTask = inputToken[1].split(" /at ", 2);
@@ -65,8 +76,15 @@ public class BotBrain {
                 if (eventTask.length != 2) {
                     throw new InvalidCommandFormatException(botMemory.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
                 }
-                taskTracker.add(new Event(eventTask[0].trim(), eventTask[1].trim()));
-                return;
+
+                taskTracker.add(
+                        new Event(
+                                eventTask[0].trim(),
+                                botTemporalUnit.convertStringToTemporalData(eventTask[1].trim())
+                        )
+                );
+
+                break;
 
             default:
                 throw new InvalidCommandException(botMemory.ERROR_MESSAGE_INVALID_COMMAND);
