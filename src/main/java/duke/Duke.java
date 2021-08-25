@@ -62,6 +62,11 @@ public class Duke {
                 Integer removeTaskIndex = parser.deleteInputParser(input);
                 Task removedTask = taskList.removeTask(removeTaskIndex);
                 this.ui.deleteTaskMsg(removedTask);
+            } else if(input.contains("find ")) {
+                //Find tasks
+                String keyword = parser.findInputParser(input);
+                TaskList taskListWithKeyword = this.taskList.findTasks(keyword);
+                this.ui.findTaskMsg(taskListWithKeyword);
             } else {
                 try {
                     //Initialise the task if its a valid input.
