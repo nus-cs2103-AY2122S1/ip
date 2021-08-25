@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
  */
 public class Task {
 
+    /** Category of task. */
     public enum Type {
         TODO, // task without a date
         EVENT, // task with a start date and end date
@@ -51,7 +52,7 @@ public class Task {
                 throw new InvalidTaskException(
                         "The two dates for deadline creation could not be parsed. Expected:\n"
                                 + "2 dates separated by ' - '. Dates come in the forms: "
-                                + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' where time comes in 24 hour format."
+                                + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' (Time in 24hr format)."
                 );
             }
             return new EventTask(args[0].trim(), startDate, endDate);
@@ -66,7 +67,7 @@ public class Task {
             } catch (DateTimeParseException e) {
                 throw new InvalidTaskException(
                         "Date for event creation could not be parsed. Expected:\n"
-                                + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' where time comes in 24 hour format."
+                                + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' (Time in 24hr format)."
                 );
             }
             return new DeadlineTask(args[0].trim(), date);

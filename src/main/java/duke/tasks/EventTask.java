@@ -10,6 +10,13 @@ public class EventTask extends Task {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 
+    /**
+     * Create a task based on the title, startDateTime and endDateTime
+     *
+     * @param title single line description of the task
+     * @param startDateTime start of the event.
+     * @param endDateTime end of the event
+     */
     public EventTask(String title, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(title, Type.EVENT);
         this.startDateTime = startDateTime;

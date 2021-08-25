@@ -1,6 +1,7 @@
 package duke;
 
-import java.util.Scanner;
+
+import duke.tasks.TaskList;
 
 /**
  * CLI Task manager based on Duke.
@@ -9,12 +10,22 @@ import java.util.Scanner;
  */
 public class Duke {
 
+    private final Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
+
     /**
-     * Begins main process of Duke.
-     *
-     * @param args java command line arguments.
+     * Instantiates the Duke object and its required components.
      */
-    public static void main(String[] args) {
+    public Duke() {
+        this.storage = new Storage();
+        this.tasks = storage.readFromDatabase();
+        Parser parser = new Parser(this.tasks);
+        ui = new Ui(parser);
+        storage.ui = ui;
+    }
+
+    protected void run() {
         String logo =
                 " ____        _        \n"
                         + "|  _ \\ _   _| | _____ \n"
@@ -22,33 +33,17 @@ public class Duke {
                         + "| |_| | |_| |   <  __/\n"
                         + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo + '\n' + "What can I do for you?");
-        monitor();
-    }
-
-    private static void monitor() {
-        Scanner sc = new Scanner(System.in);
-
-        Storage.readFromDatabase();
-
-        while (sc.hasNextLine()) {
-            String input = sc.nextLine();
-            DukeLogic.takeInput(input);
-            if (input.strip().equalsIgnoreCase("bye")) {
-                break;
-            }
-        }
-        sc.close();
-        Storage.writeToDatabase();
+        ui.monitor();
+        storage.writeToDatabase(tasks);
     }
 
     /**
-     * Function to print indented, outlined output to console.
+     * Begins main process of Duke.
      *
-     * @param output Multi-line or single line string.
+     * @param args java command line arguments.
      */
-    protected static void renderOutput(String output) {
-        System.out.println("    ____________________________________________________________");
-        output.lines().map(x -> "     " + x).forEach(System.out::println);
-        System.out.println("    ____________________________________________________________");
+    public static void main(String[] args) {
+        new Duke().run();
     }
+
 }
