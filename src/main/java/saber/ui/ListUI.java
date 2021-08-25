@@ -4,12 +4,11 @@ import saber.task.Task;
 import saber.TaskList;
 
 public class ListUI extends SaberCommandUI {
-    private TaskList taskList;
-
     private final String successMessage;
+    protected final String missingDescriptionError = "      I'm sorry, Master.\n"
+            + "      What ... exactly do you want me to add?\n";
 
     public ListUI(TaskList taskList) {
-        this.taskList = taskList;
         int totalTask = taskList.size();
         StringBuilder successTemp = new StringBuilder("      Would you like to know what you\n" +
                 "      told me to remember?\n" + "\n" +
@@ -29,5 +28,9 @@ public class ListUI extends SaberCommandUI {
 
     public void showSuccess() {
         System.out.println(successMessage);
+    }
+
+    public void showMissingDescriptionError() {
+        System.out.println(missingDescriptionError);
     }
 }
