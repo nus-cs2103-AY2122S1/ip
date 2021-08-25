@@ -9,9 +9,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
+/**
+ * The Parser class holds static methods which are used to parse and evaluate user commands, ensuring the right command
+ * is executed.
+ */
 public class Parser {
 
+    /**
+     * Static method which takes in user commands and ensures the right command is executed in the Duke application.
+     *
+     * @param command The user command entered.
+     * @return Command This returns the Command class that should be executed.
+     * @throws DukeException On wrong syntax of command entered.
+     */
     public static Command parse(String command) throws DukeException {
         String first = command.toLowerCase().split(" ")[0];
         switch (first) {
