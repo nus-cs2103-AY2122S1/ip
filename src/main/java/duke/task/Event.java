@@ -1,7 +1,6 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -25,9 +24,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the date and time of the event formatted as [MMM-dd-yyyy HH:mm]
+     * Returns the date of the event formatted as [MMM-dd-yyyy]
      *
-     * @return String formatted date and time
+     * @return The formatted date.
      */
     public String getDate() {
         DateTimeFormatter dateFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
@@ -35,6 +34,11 @@ public class Event extends Task {
         return formattedDate;
     }
 
+    /**
+     * Returns the time of the event formatted as [HH:mm].
+     *
+     * @return The formatted time.
+     */
     public String getTime() {
         DateTimeFormatter timeFormatObj = DateTimeFormatter.ofPattern("HH:mm");
         String formattedTime = time.format(timeFormatObj);
@@ -42,7 +46,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns formatted string to write to the duke.txt file.
+     * Returns formatted string to write to the file.
      *
      * @return String to write to duke.txt
      */

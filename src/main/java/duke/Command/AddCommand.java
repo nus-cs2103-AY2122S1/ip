@@ -11,9 +11,17 @@ import duke.task.Todo;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents user command to add a task to the TaskList.
+ */
 public class AddCommand extends Command {
     private Task task;
 
+    /**
+     * Class constructor.
+     * @param input The user input to indicate the task to add.
+     * @throws DukeException If the command format is invalid.
+     */
     public AddCommand(String input) throws DukeException {
         if (input.toUpperCase().startsWith("TODO")) {
             try {
@@ -49,6 +57,14 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Executes the add command by adding the task to the TaskList then outputting the number of
+     * current tasks in the TaskList.
+     *
+     * @param taskList A TaskList object that contains an arraylist of Task objects.
+     * @param ui A Ui object that deals with interactions with the user.
+     * @param storage A Storage object that loads and saves tasks in the file.
+     */
     @Override
     public void runCommand(TaskList taskList, Ui ui, Storage storage) {
         ui.taskAdded(task);
@@ -56,6 +72,10 @@ public class AddCommand extends Command {
         ui.showTaskListSize(taskList);
     }
 
+    /**
+     * Indicates if the command ends the program after executing.
+     * @return false
+     */
     @Override
     public boolean isExit() {
         return false;

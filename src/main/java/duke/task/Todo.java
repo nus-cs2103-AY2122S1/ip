@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 /**
  * Represents a task without any date or time attached to it.
  * E.g. walk the dog.

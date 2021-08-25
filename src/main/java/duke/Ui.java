@@ -4,13 +4,22 @@ import duke.task.Task;
 
 import java.util.Scanner;
 
+/**
+ * Class that deals with interacting with the users.
+ */
 public class Ui {
     protected Scanner scanner;
 
+    /**
+     * Class constructor. Initialises a new scanner for user input.
+     */
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Prints the greeting message and program usage at the start of the program.
+     */
     public void showStartup() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -32,22 +41,42 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Returns the user input from the user.
+     *
+     * @return The user input.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
 
+    /**
+     * Prints a line.
+     */
     public void showLine() {
         System.out.println("_______________________________________________________\n");
     }
 
+    /**
+     * Prints the loading error message.
+     */
     public void showLoadingError() {
         System.out.println("I can't locate the file!\n");
     }
 
+    /**
+     * Prints the error message.
+     *
+     * @param errorMsg The error message.
+     */
     public void showError(String errorMsg) {
         System.out.println(errorMsg);
     }
 
+    /**
+     * Prints all the current tasks in the TaskList.
+     * @param taskList The TaskList object containing all tasks.
+     */
     public void printTasks(TaskList taskList) {
         if (taskList.isEmpty()) {
             System.out.println("You have no tasks!\n");
@@ -56,27 +85,48 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the task that was successfully added.
+     *
+     * @param task The task object that was added.
+     */
     public void taskAdded(Task task) {
         System.out.println("Okay! I've added this task:\n    " + task.toString());
     }
 
+    /**
+     * Prints the current number of tasks in the TaskList.
+     *
+     * @param taskList The TaskList object containing all tasks.
+     */
     public void showTaskListSize(TaskList taskList){
         System.out.printf("You have %d task(s) in the list.\n\n", taskList.getSize());
     }
 
+    /**
+     * Prints the task that was successfully deleted.
+     *
+     * @param task The task object that was deleted.
+     */
     public void taskDeleted(Task task) {
         System.out.println("Okay! I've removed this task:\n    " + task.toString());
     }
 
+    /**
+     * Prints the task that was marked as done.
+     *
+     * @param task The task object that was marked done.
+     */
     public void taskMarked(Task task) {
         System.out.println("Okay! This task has been marked done:");
         System.out.println("  " + task.toString() + "\n");
     }
 
+    /**
+     * Prints the goodbye message.
+     */
     public void showGoodbye() {
         System.out.println("Bye bye!\n");
         scanner.close();
     }
-
-
 }

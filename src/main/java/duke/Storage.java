@@ -14,6 +14,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class to handle loading and storing tasks in the file specified.
+ */
 public class Storage {
     private String filePath;
 
@@ -22,11 +25,11 @@ public class Storage {
     }
 
     /**
-     * Reads the file and loads the tasks into the taskList array.
-     * If the directory or file does not exist, it will be created.
+     * Reads the tasks contained in the file specified. If the file or directory
+     * does not exist, a new empty file will be created.
      *
-     * @throws IOException If file cannot be created.
-     * @throws DukeException If the file has bad format.
+     * @return ArrayList<Task> The ArrayList containing tasks from the file.
+     * @throws DukeException If something is wrong with the file.
      */
     public ArrayList<Task> load() throws DukeException {
         try {
@@ -78,7 +81,7 @@ public class Storage {
     }
 
     /**
-     * Writes the tasks from the taskList into the file.
+     * Writes the tasks from the TaskList into the file.
      *
      * @throws DukeException If IOException is thrown.
      */

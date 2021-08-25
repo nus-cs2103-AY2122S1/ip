@@ -2,11 +2,19 @@ package duke;
 
 import duke.Command.Command;
 
+/**
+ * A chatbot that helps manages your tasks.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Class constructor. Initialises a Duke instance with the Ui, TaskList, and Storage.
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -18,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * To run the program.
+     */
     public void run() {
         ui.showStartup();
         boolean isExit = false;

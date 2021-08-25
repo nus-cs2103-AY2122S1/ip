@@ -2,10 +2,13 @@ package duke;
 
 import duke.Command.*;
 
+/**
+ * Class to handle the input commands of the user.
+ */
 public class Parser {
 
     /**
-     * Handles the input commands of the user and calls the appropriate method.
+     * Interpret the input from the user and calls the appropriate command.
      *
      * @throws DukeException If input command is not recognized.
      */

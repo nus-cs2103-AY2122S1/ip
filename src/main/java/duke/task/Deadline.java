@@ -24,7 +24,7 @@ public class Deadline extends Task {
     /**
      * Returns the date of the deadline formatted as [MMM-dd-yyyy]
      *
-     * @return String formatted date
+     * @return The formatted date
      */
     public String getDate() {
         DateTimeFormatter dateFormatObj = DateTimeFormatter.ofPattern("MMM-dd-yyyy");
