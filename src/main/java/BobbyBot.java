@@ -1,5 +1,3 @@
-import java.util.Scanner;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,56 +11,19 @@ import java.time.format.DateTimeFormatter;
 
 
 public class BobbyBot {
-    private static final List<Task> tasks = new ArrayList<Task>();
+    private List<Task> tasks = new ArrayList<>();
     private static final String div = "____________________________________________________________\n";
-    private static int totalTasks = 0;
-    private static final BotCommand[] acceptedCommands = BotCommand.values();
-    private static final String DBPATH = "data/database.txt";
+    private final String DBPATH = "data/database.txt";
     private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
-
+    private final Storage storage;
 
     public BobbyBot()  {
         System.out.println(div + "Hello! I'm Bobby\nWhat can I do for you?\n" + div);
-        File f = new File(DBPATH);
+        storage = new Storage(DBPATH);
         try {
-            if (f.isFile() && !f.isDirectory()) {
-                // load it if file exits
-                System.out.println("Loading saved tasks...");
-                load(f);
-            } else if (!f.isFile()) {
-                //create new file if file does not exist
-                System.out.println("No previously saved tasks.");
-                f.createNewFile();
-            }
-        } catch (IOException e) {
+            tasks = storage.load();
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-    }
-
-    /**
-     * Loads tasks in BobbyBot from hardcoded text file
-     */
-    private void load(File f) throws FileNotFoundException {
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        while (s.hasNext()) {
-            String[] row = s.nextLine().split(",");
-            // load row into task
-            switch (row[0]) {
-            // data format: [type],[isDone],[desc],[period]
-            case "T":
-                // load task
-                tasks.add(new ToDo(row[2], row[1].equals("1")));
-                break;
-            case "D":
-                // load deadline
-                tasks.add(new Deadline(row[2], row[3], row[1].equals("1"), DT_FORMATTER));
-                break;
-            case "E":
-                // load event
-                tasks.add(new Event(row[2], row[3], row[1].equals("1")));
-                break;
-            }
-            totalTasks += 1;
         }
     }
 
@@ -170,9 +131,12 @@ public class BobbyBot {
      * Print current to do list
      */
     private void printList() {
+        int i = 1;
         System.out.println(div + "Here are the tasks in your list:");
-        for (int i = 0; i < totalTasks; i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
+        for (Task task: tasks) {
+            System.out.print(i + ". ");
+            System.out.println(task);
+            i++;
         }
         System.out.println(div);
     }
@@ -201,8 +165,7 @@ public class BobbyBot {
         System.out.println(div + "Noted. I've removed this task:");
         System.out.println("  " + taskToDelete);
         tasks.remove(taskToDelete);
-        totalTasks--;
-        System.out.println("Now you have " + totalTasks + " tasks in the list.\n" + div);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.\n" + div);
     }
     /**
      * Creates a todo task
@@ -211,9 +174,8 @@ public class BobbyBot {
     private void createToDo(String description) {
         Task newToDo = new ToDo(description);
         tasks.add(newToDo);
-        totalTasks++;
-        System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
-                + "Now you have " + totalTasks + " tasks in the list.\n" + div);
+        System.out.println(div + "Got it. I've added this task:\n  " + newToDo + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n" + div);
     }
 
     /**
@@ -224,9 +186,8 @@ public class BobbyBot {
     private void createEvent(String description, String at) {
         Task newEvent = new Event(description, at);
         tasks.add(newEvent);
-        totalTasks++;
-        System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
-                + "Now you have " + totalTasks + " tasks in the list.\n" + div);
+        System.out.println(div + "Got it. I've added this task:\n  " + newEvent + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.\n" + div);
     }
 
     /**
@@ -238,10 +199,10 @@ public class BobbyBot {
         // convert string by to LocalDate
         try {
             LocalDateTime dateBy = LocalDateTime.parse(by, DT_FORMATTER);
-            tasks.add(new Deadline(description, dateBy));
-            totalTasks++;
-            System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
-                    + "Now you have " + totalTasks + " tasks in the list.\n" + div);
+            Task newDeadline = new Deadline(description, dateBy);
+            tasks.add(newDeadline);
+            System.out.println(div + "Got it. I've added this task:\n  " + newDeadline + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.\n" + div);
         } catch (DateTimeParseException e) {
             System.out.println(div+"Please input deadline date in the following format: [dd-mm-yyyy hh:mm] \n"+div);
         }
