@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class Duke {
@@ -90,7 +91,7 @@ public class Duke {
             }
 
 
-            return new Deadline(task, false, date);
+            return new Deadline(task, false, LocalDate.parse(date.trim()));
         } else if(userInput.startsWith("event")) {
             int start_id = userInput.indexOf("event");
             int task_id = userInput.indexOf("/at");
@@ -100,7 +101,7 @@ public class Duke {
             if(task_id == -1) {
                 throw new DukeException("You need to specify at using /at !");
             }
-            return new Event(task, false, date);
+            return new Event(task, false, LocalDate.parse(date.trim()));
         } else {
             throw new DukeException("I don't understand what you are talking about !");
         }
