@@ -1,11 +1,9 @@
 package duke;
 
 public class Duke {
-
     public static boolean active;
     public static TaskList taskList = new TaskList();
     public static int listIndex = 0;
-
 
     /**
      * awaken() awakens duke.Duke and allows one to input commands to duke.Duke.
@@ -54,7 +52,7 @@ public class Duke {
 
 
     /**
-     * markAsFinished marks items on duke.Duke's list as completed. Completed tasks will have a checkbox [X].
+     * markAsFinished marks items on duke.Duke's list as completed. Completed tasks will have a checkbox "[X]".
      * @param taskItemNumber the index of the task to be marked as finished.
      * @throws DukeException An exception stemming from incorrect or awkward input to duke.Duke.
      */
