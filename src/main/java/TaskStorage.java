@@ -1,7 +1,6 @@
 import java.io.*;
 import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -95,13 +94,13 @@ public class TaskStorage {
                 case deadline :
                     Deadline deadlineTask = (Deadline) task;
                     taskDetails.put("type", taskType[i].name());
-                    taskDetails.put("time", deadlineTask.by);
+                    taskDetails.put("time", deadlineTask.by.toString());
                     break;
 
                 case event :
                     Event eventTask = (Event) task;
                     taskDetails.put("type", taskType[i].name());
-                    taskDetails.put("time", eventTask.at);
+                    taskDetails.put("time", eventTask.at.toString());
                     break;
 
                 default :
