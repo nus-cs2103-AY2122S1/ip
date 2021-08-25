@@ -33,7 +33,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "E: " + super.toString() + " on: " + this.dateTime.format(DateTimeFormatter.ofPattern("E, dd MMM yyyy," +
-                " HH:mm"));
+        return "E: " + super.toString() + " on: " + this.dateTime.format(DateTimeFormatter.ofPattern(
+                Task.dateTimeFormat));
     }
 }

@@ -36,7 +36,7 @@ public abstract class DukeException extends Exception {
         }
     }
 
-    public static class TaskAlreadyCompleteException extends  DukeException {
+    public static class TaskAlreadyCompleteException extends DukeException {
         public TaskAlreadyCompleteException(String message) {
             super(message);
         }

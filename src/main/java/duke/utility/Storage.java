@@ -32,12 +32,12 @@ public class Storage {
                     + "\nTask log will be saved there.");
         }
     }
-    
+
     public List<Task> loadPreviousTasks() throws FileNotFoundException {
         List<Task> prevTasks = new ArrayList<Task>();
-        Scanner s = new Scanner(new File(this.filePath));
-        while (s.hasNextLine()) {
-            String task = s.nextLine();
+        Scanner sc = new Scanner(new File(this.filePath));
+        while (sc.hasNextLine()) {
+            String task = sc.nextLine();
             String[] tokens = task.split(";");
             boolean isCompleted = tokens[1].equals("T");
             String taskName = tokens[2];
@@ -58,48 +58,48 @@ public class Storage {
         }
         return prevTasks;
     }
+
+    void append(String e, String f, String taskName, String dateTime) throws IOException {
+        this.append(e, f, taskName + ";" + dateTime);
+    }
+
+    void append(String type, String isCompleted, String detail) throws IOException {
+        FileWriter fw = new FileWriter(this.filePath, true); // append flag true -> append, not overwrite
+        fw.write(type + ";" + isCompleted + ";" + detail + "\n");
+        fw.close();
+    }
     
     void changeTaskLogToCompleted(int lineNum) throws IOException {
-        int i = 0;
+        int currentLine = 0;
         Scanner sc = new Scanner(new File(this.filePath));
         StringBuilder sb = new StringBuilder();
-        while (sc.hasNextLine()) { // read the entire file except the line to change, which would be ignored
+        while (sc.hasNextLine()) { // read the entire file except the line to change, which is ignored
             String entry = sc.nextLine();
-            if (i != lineNum) { // line to be modified
+            if (currentLine != lineNum) { // line to be modified
                 sb.append(entry);
             } else { // generate new entry
                 sb.append(entry.replaceAll(";F;", ";T;"));
             }
             sb.append("\n");
-            i++;
+            currentLine++;
         }
-        FileWriter fw = new FileWriter(this.filePath, false); // append false -> overwrite file
+        FileWriter fw = new FileWriter(this.filePath, false); // append flag false -> overwrite file
         fw.write(sb.toString());
         fw.close();
         sc.close();
     }
-    
-    void append(String e, String f, String taskName, String dateTime) throws IOException {
-        this.append(e, f, taskName + ";" + dateTime);
-    }
-    
-    void append(String type, String isCompleted, String detail) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath, true); // append flag set to true to prevent clearing
-        fw.write(type + ";" + isCompleted + ";" + detail + "\n");
-        fw.close();
-    }
 
     void deleteTaskLogEntry(int lineIdx) throws IOException {
-        int i = 0;
+        int currentLine = 0;
         Scanner sc = new Scanner(new File(this.filePath));
         StringBuilder sb = new StringBuilder();
         while (sc.hasNextLine()) { // read the entire file except the line to change, which would be ignored
             String entry = sc.nextLine();
-            if (i != lineIdx) { // line to be modified
+            if (currentLine != lineIdx) { // line to be modified
                 sb.append(entry);
                 sb.append("\n");
             }
-            i++;
+            currentLine++;
         }
         FileWriter fw = new FileWriter(this.filePath, false); // append false -> overwrite file
         fw.write(sb.toString());

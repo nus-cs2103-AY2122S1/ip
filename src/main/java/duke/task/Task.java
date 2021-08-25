@@ -4,6 +4,7 @@ public abstract class Task {
 
     private final String taskName;
     private final boolean isCompleted;
+    protected static String dateTimeFormat = "E, dd MMM yyyy, HH:mm"; 
 
     Task(String itemName) {
         this.taskName = itemName;

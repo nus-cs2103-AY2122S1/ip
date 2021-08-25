@@ -14,12 +14,12 @@ public class Ui {
         String welcomeMessage = "Hello I'm Duke!\nWhat can I do for you?";
         this.printMessage(welcomeMessage);
 
-        boolean isCompleted = false;
-        while (! isCompleted) {
+        boolean shouldContinue = true;
+        while (shouldContinue) {
             String command = sc.nextLine();
             String message = parser.parseCommand(command);
             if (message.equals("TERMINATE")) {
-                isCompleted = true;
+                shouldContinue = false;
             } else {
                 this.printMessage(message);
             }
