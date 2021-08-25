@@ -1,16 +1,17 @@
-import java.util.List;
+import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 
 public class Duke {
     // TODO: handle more errors
+    public static final String dataPath = "./data/data.txt";
+
     private enum Action {
         LIST, DONE, REMOVE, TODO, DEADLINE, EVENT
     }
 
-    private static final List<Task> list = new ArrayList<>();
+    private static final TaskList list = new TaskList();
     private static final String divider = "____________________________________________________________";
     private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -18,8 +19,8 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-
-    private static void launch() {
+    private static void launch() throws IOException, DukeException {
+        list.refreshFromDB(true);
         System.out.println(divider);
         System.out.println(logo);
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
@@ -27,10 +28,12 @@ public class Duke {
     }
 
     private static void close() {
-        System.out.println(divider + "\n" + "Bye. Hope to see you again soon!" + "\n" + divider);
+        System.out.println(divider);
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(divider);
     }
 
-    private static void handleAction(Action action, Scanner sc) throws DukeException {
+    private static void handleAction(Action action, Scanner sc) throws DukeException, IOException {
         switch (action) {
             case LIST: {
                 int index = 1;
@@ -43,13 +46,13 @@ public class Duke {
             case DONE: {
                 int index = sc.nextInt();
                 if (index < 1 || index > list.toArray().length) {
-                    System.out.println(list.toArray().length > 0
+                    throw new DukeException(list.toArray().length > 0
                             ? "OOPS!!! I'm sorry, index is out of range! " +
                             "Please try with a number from 1 to " + list.toArray().length
                             : "OOPS!!! I'm sorry, there is nothing in the list yet.");
                 } else {
                     Task task = list.get(index - 1);
-                    task.markAsDone();
+                    list.markAsDone(task);
                     System.out.println("Nice! I've marked this task as done:\n  " + task);
                 }
                 break;
@@ -57,7 +60,7 @@ public class Duke {
             case REMOVE: {
                 int index = sc.nextInt();
                 if (index < 1 || index > list.toArray().length) {
-                    System.out.println(list.toArray().length > 0
+                    throw new DukeException(list.toArray().length > 0
                             ? "OOPS!!! I'm sorry, index is out of range! " +
                             "Please try with a number from 1 to " + list.toArray().length
                             : "OOPS!!! I'm sorry, there is nothing in the list yet.");
@@ -70,7 +73,7 @@ public class Duke {
                 break;
             }
             case TODO: {
-                String description = sc.nextLine();
+                String description = sc.nextLine().trim();
                 Task task = new Todo(description);
                 list.add(task);
                 System.out.println("Got it. I've added this task:\n  " +
@@ -79,7 +82,7 @@ public class Duke {
                 break;
             }
             case DEADLINE: {
-                String input2 = sc.nextLine();
+                String input2 = sc.nextLine().trim();
                 String[] line = input2.split(" /by ");
                 if (line.length != 2) {
                     throw new DukeException(
@@ -95,7 +98,7 @@ public class Duke {
                 break;
             }
             case EVENT: {
-                String input2 = sc.nextLine();
+                String input2 = sc.nextLine().trim();
                 String[] line = input2.split(" /at ");
                 if (line.length != 2) {
                     throw new DukeException(
@@ -113,7 +116,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, DukeException {
         launch();
         try (Scanner sc = new Scanner(System.in)) {
             String input = sc.next();
