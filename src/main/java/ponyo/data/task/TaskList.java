@@ -19,11 +19,11 @@ public class TaskList {
     }
 
     public void remove(int task) {
-        tasks.remove(task - 1);
+        tasks.remove(task);
     }
 
     public Task retrieveTask(int task) {
-        return tasks.get(task - 1);
+        return tasks.get(task);
     }
 
     public int size() {
