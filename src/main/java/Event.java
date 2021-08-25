@@ -1,13 +1,20 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
-    protected String at;
+    protected LocalDate date;
 
     public Event(String description, String at) {
         super(description);
-        this.at = at;
+        if(at.contains("/")) {
+            date = LocalDate.parse(at.split("/")[2] + "-" + at.split("/")[1] + "-" + (Integer.parseInt(at.split("/")[0]) < 10 ? "0" + at.split("/")[0] : at.split("/")[0]));
+        } else {
+            date = LocalDate.parse(at);
+        }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at:" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
