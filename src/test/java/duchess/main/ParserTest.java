@@ -1,8 +1,5 @@
 package duchess.main;
 
-import duchess.command.ByeCommand;
-import duchess.command.ListCommand;
-import duchess.command.TodoCommand;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

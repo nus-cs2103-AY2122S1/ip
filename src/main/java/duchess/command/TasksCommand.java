@@ -49,7 +49,7 @@ public class TasksCommand extends Command {
             if (e instanceof  ArrayIndexOutOfBoundsException)
                 duchess.getUi().prettyPrint(invalidMessage);
             else
-                duchess.getUi().prettyPrint(((DuchessException) e).getMessage());
+                duchess.getUi().prettyPrint(e.getMessage());
         }
         return true;
     }
