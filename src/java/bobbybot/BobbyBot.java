@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class BobbyBot {
     private final String DBPATH = "data/database.txt";
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public BobbyBot()  {
         ui = new Ui();
@@ -49,7 +49,6 @@ public class BobbyBot {
      * @param args Command Line Arguments
      */
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         new BobbyBot().run();
     }
 }
