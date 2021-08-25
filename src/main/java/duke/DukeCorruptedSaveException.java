@@ -7,7 +7,7 @@ public class DukeCorruptedSaveException extends Exception {
 
     /**
      * Constructor for the exception.
-     * 
+     *
      * @param message Exception message.
      */
     public DukeCorruptedSaveException(String message) {

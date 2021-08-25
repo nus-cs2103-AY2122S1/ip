@@ -25,6 +25,6 @@ public class StorageTest {
         Storage.saveTaskListToHardDisk(saved);
 
         File file = new File("src/data/duke.txt");
-        assert(file.exists());
+        assert (file.exists());
     }
 }

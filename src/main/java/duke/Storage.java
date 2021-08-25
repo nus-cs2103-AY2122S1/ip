@@ -19,13 +19,13 @@ import java.util.Scanner;
 public class Storage {
     private static final String DIRECTORY = "src/data";
     private static final String FILEPATH = "src/data/duke.txt";
-    
+
     /**
      * Save the task list to a location on the hard disk
-     * 
+     *
      * @param tasks The task list to be saved.
      */
-    
+
     public static void saveTaskListToHardDisk(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(FILEPATH);
@@ -44,8 +44,8 @@ public class Storage {
 
     /**
      * Load the saved task list, if the task list does not exist, then raise an exception
-     * 
-     * @return Saved task list. 
+     *
+     * @return Saved task list.
      * @throws IOException Task list does not exist.
      */
     public static ArrayList<Task> loadTaskListFromHardDisk() throws IOException {
