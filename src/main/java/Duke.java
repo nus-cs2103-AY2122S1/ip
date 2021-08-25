@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,6 +14,9 @@ public class Duke {
 
     private static final String LOCAL_STORAGE_LOCATION = "src/Data/LocalStorage.txt";
     private static ArrayList<Task> toDoList = new ArrayList<>();
+    private static DateTimeFormatter formatFromInput = DateTimeFormatter.ofPattern("d/MM/yyyy");
+    private static DateTimeFormatter formatFromLocalStorage = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -102,7 +108,14 @@ public class Duke {
                     throw new DukeException("Please include the keyword \"/by\" if you want to add a deadline.");
                 } else {
                     String[] parsedDeadlineInput = parsedUserInput[1].split("/by ", 2);
-                    Task newTask = new Deadline(parsedDeadlineInput[0], parsedDeadlineInput[1]);
+                    String date = parsedDeadlineInput[1];
+                    LocalDate localDate;
+                    try {
+                        localDate = LocalDate.parse(date, formatFromInput);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("Please write the date in this format: dd/MM/yyyy");
+                    }
+                    Task newTask = new Deadline(parsedDeadlineInput[0], localDate);
                     addTaskToList(newTask, parsedUserInput[1]);
                 }
             } else if (parsedUserInput[0].equals("event")) { // Add event
@@ -112,7 +125,14 @@ public class Duke {
                     throw new DukeException("Please include the keyword \"/at\" if you want to add an event.");
                 } else {
                     String[] parsedDeadlineInput = parsedUserInput[1].split("/at ", 2);
-                    Task newTask = new Event(parsedDeadlineInput[0], parsedDeadlineInput[1]);
+                    String date = parsedDeadlineInput[1];
+                    LocalDate localDate;
+                    try {
+                        localDate = LocalDate.parse(date, formatFromInput);
+                    } catch (DateTimeParseException e) {
+                        throw new DukeException("Please write the date in this format: dd/MM/yyyy");
+                    }
+                    Task newTask = new Event(parsedDeadlineInput[0], localDate);
                     addTaskToList(newTask, parsedUserInput[1]);
                 }
             } else {
@@ -165,7 +185,8 @@ public class Duke {
                 } else if (taskType == 'E') {
                     String[] parsedEventInput = restOfTheTask.split("\\(at: ", 2);
                     String eventTime = parsedEventInput[1].split("\\)", 2)[0];
-                    Task newTask = new Event(parsedEventInput[0], eventTime);
+                    LocalDate localDate = LocalDate.parse(eventTime, formatFromLocalStorage);
+                    Task newTask = new Event(parsedEventInput[0], localDate);
                     if (completed == '✅') {
                         newTask.markAsCompleted();
                     }
@@ -173,7 +194,8 @@ public class Duke {
                 } else if (taskType == 'D') {
                     String[] parsedDeadlineInput = restOfTheTask.split("\\(by: ", 2);
                     String deadlineTime = parsedDeadlineInput[1].split("\\)", 2)[0];
-                    Task newTask = new Event(parsedDeadlineInput[0], deadlineTime);
+                    LocalDate localDate = LocalDate.parse(deadlineTime, formatFromLocalStorage);
+                    Task newTask = new Event(parsedDeadlineInput[0], localDate);
                     if (completed == '✅') {
                         newTask.markAsCompleted();
                     }
@@ -182,6 +204,10 @@ public class Duke {
             }
         }
         scanner.close();
+    }
+
+    public static DateTimeFormatter getFormatter() {
+        return formatFromLocalStorage;
     }
 
     public static void updateLS() {
