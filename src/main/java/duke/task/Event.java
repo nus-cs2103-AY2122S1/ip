@@ -20,11 +20,11 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + this.formatDate() + " " + this.formatTime() + ")";
     }
 
-    public String formatDate() {
+    private String formatDate() {
         return this.duration.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
-    public String formatTime() {
+    private String formatTime() {
         return this.time.format(DateTimeFormatter.ofPattern("h:mm a"));
     }
 
