@@ -16,6 +16,8 @@ public abstract class Task {
         return (isDone? "[X]" : "[ ]");
     }
 
+    public abstract String getFileString();
+
     @Override
     public String toString() {
         return String.format("%s %s", getStatusIcon(), this.description);
