@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -14,7 +16,7 @@ public class Ui {
     }
 
     public void showWelcome() {
-        String startText = "Hello! I'm Duke\n" + "What can I do for you?";
+        String startText = "Hello! I'm duke.Duke\n" + "What can I do for you?";
         System.out.println(startText);
     }
 

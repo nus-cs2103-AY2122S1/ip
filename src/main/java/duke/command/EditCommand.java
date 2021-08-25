@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+
 public class EditCommand extends Command {
 
     private EditType type;
@@ -19,7 +27,7 @@ public class EditCommand extends Command {
             case DONE: {
                 Task completedTask = taskList.getTask(taskNumber - 1);
                 completedTask.markAsDone();
-                String message = "Good work! Task is now marked as done:\n" + completedTask + "\n";
+                String message = "Good work! duke.task.Task is now marked as done:\n" + completedTask + "\n";
                 ui.printMessage(message);
                 storage.saveList(taskList.getTasks());
                 break;
