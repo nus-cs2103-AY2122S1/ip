@@ -107,6 +107,11 @@ public class Ui {
         System.out.println("    ______________________________________");
     }
 
+    /**
+     * Prints results of finding tasks.
+     *
+     * @param result Result of tasks that pass the search.
+     */
     public void printFindTask(Task[] result) {
         if (result[0] == null) {
             System.out.println("    ______________________________________");
@@ -121,6 +126,11 @@ public class Ui {
 
     }
 
+    /**
+     * Helps printFindTask function.
+     *
+     * @param result Result of tasks that pass the search.
+     */
     public void printFindTaskHelper(Task[] result) {
         for (int i = 0; i < result.length; i++) {
             if (result[i] == null) {

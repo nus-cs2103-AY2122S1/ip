@@ -209,6 +209,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Facilitates which command to run based on the type of command processed by the Parser.
+     *
+     * @throws DukeException If command is not recognised or improperly formatted.
+     */
     private void commands() throws DukeException {
         ui.start();
         String command;
