@@ -23,7 +23,8 @@ public class Duke {
         Scanner input = new Scanner(System.in);
         while (this.isRunning) {
             String command = input.nextLine();
-            this.parser.parse(command, this.tdl, this.ui, this);
+            Command c = this.parser.parse(command, this.tdl, this.ui, this, this.storage);
+            c.execute();
         }
     }
 
@@ -36,8 +37,16 @@ public class Duke {
         System.out.println("========== " + Duke.name + " ===========\n");
     }
 
+    public static String getName() {
+        return name;
+    }
+
     public boolean isRunning() {
         return this.isRunning;
+    }
+
+    public void stopRunning() {
+        this.isRunning = false;
     }
 
     public static void main(String[] args) {

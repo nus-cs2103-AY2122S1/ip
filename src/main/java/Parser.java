@@ -55,26 +55,27 @@ public class Parser {
     public Parser() {
     }
 
-    public void parse(String command, ToDoList tdl, Ui ui, Duke chatBot) {
+    public Command parse(String command, ToDoList tdl, Ui ui, Duke chatBot, Storage storage) {
         if (command.equals(Commands.BYE.asLowerCase())) {
-            chatBot.exit(tdl);
+            return new ByeCommand(chatBot, ui, tdl, storage);
         } else if (command.equals(Commands.LIST.asLowerCase())) {
-            tdl.displayList();
+            return new ListCommand(tdl);
         } else if (command.startsWith(Commands.DONE.asLowerCase())) {
             try {
+                formatChecker(command);
                 String substring = command.substring(5);
                 int index = Integer.parseInt(substring);
-                tdl.markAsDone(index);
-            } catch (StringIndexOutOfBoundsException e) {
-                ui.prettyPrinter("And I'm supposed to guess which item you're done with?");
-            } catch (IndexOutOfBoundsException e) {
-                ui.prettyPrinter("Where's this item? It's not even on the list!");
+                return new DoneCommand(tdl, ui, index);
+            } catch (NumberFormatException e) {
+                ui.prettyPrinter("Dude, the format is done <index>");
+            } catch (DukeException e) {
+                ui.prettyPrinter(e.getMessage());
             }
         } else if (command.startsWith(Commands.TODO.asLowerCase())) {
             try {
                 formatChecker(command);
                 String substring = command.substring(5);
-                tdl.addToDo(substring);
+                return new ToDoCommand(tdl, substring);
             } catch (StringIndexOutOfBoundsException e) {
                 ui.prettyPrinter("OOPS!!! The description of a todo cannot be empty.");
             } catch (DukeException e) {
@@ -86,7 +87,7 @@ public class Parser {
                 String substring = command.substring(6);
                 String item = substring.substring(0, substring.indexOf("/"));
                 String duration = substring.substring(substring.indexOf("/") + 1).substring(2);
-                tdl.addEvent(item, duration);
+                return new EventCommand(tdl, item, duration);
             } catch (StringIndexOutOfBoundsException e) {
                 ui.prettyPrinter("Hold up... You got the format all wrong! It's supposed to " +
                         "be <event> <name> /at <duration>");
@@ -104,7 +105,7 @@ public class Parser {
                 }
                 LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ','T'),
                         DateTimeFormatter.ISO_DATE_TIME);
-                tdl.addDeadline(item, dl);
+                return new DeadlineCommand(tdl, item, dl);
             } catch (StringIndexOutOfBoundsException e) {
                 ui.prettyPrinter("Hold up... You got the format all wrong! It's supposed to " +
                         "be <deadline> <name> /by <dueDate>");
@@ -115,21 +116,33 @@ public class Parser {
             }
         } else if (command.startsWith(Commands.DELETE.asLowerCase())) {
             try {
+                formatChecker(command);
                 String substring = command.substring(7);
                 int index = Integer.parseInt(substring);
-                tdl.delete(index);
+                return new DeleteCommand(tdl, ui, index);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.prettyPrinter("And which item do you want to delete...? Try again :/");
-            } catch (IndexOutOfBoundsException e) {
-                ui.prettyPrinter("You're trying to delete something non-existent? Damn who is this guy?");
+                ui.prettyPrinter("And which item do you want to delete...?");
+            } catch (NumberFormatException e) {
+                ui.prettyPrinter("Dude, the format is delete <index>");
+            } catch (DukeException e) {
+                ui.prettyPrinter(e.getMessage());
             }
         } else {
-            ui.prettyPrinter("I'm confused... I need a raise...");
+            return new ConfusedCommand(ui);
         }
+        return new TryAgainCommand(ui);
     }
 
     private static void formatChecker(String command) throws DukeException {
-        if (command.startsWith("todo")) {
+        if (command.startsWith("done")) {
+            if (!command.substring(4).startsWith(" ")) {
+                throw new DukeException("Hey hey hey, the format is done <index>");
+            }
+        } else if (command.startsWith("delete")) {
+            if (!command.substring(6).startsWith(" ")) {
+                throw new DukeException("Hey hey hey, the format is delete <index>");
+            }
+        } else if (command.startsWith("todo")) {
             if (command.substring(4).isBlank()) {
                 throw new DukeException("C'mon.. you're gonna do nothing?");
             }
