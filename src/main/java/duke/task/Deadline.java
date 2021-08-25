@@ -4,9 +4,20 @@ import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+/**
+ * Deadline is a Task that encapsulates the attributes and behaviour of a Task with a due date.
+ *
+ * @author leezhixuan
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline;
 
+    /**
+     * Creates an instance of Deadline.
+     *
+     * @param name Name of Deadline.
+     * @param deadline Time at which the task is due.
+     */
     public Deadline(String name, LocalDateTime deadline) {
         super(name);
         this.deadline = deadline;

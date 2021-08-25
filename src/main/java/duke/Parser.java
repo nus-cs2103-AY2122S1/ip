@@ -6,6 +6,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser is a class that encapsulates the behaviour of an interpreter for commands.
+ *
+ * @author leezhixuan
+ */
 public class Parser {
 
     private enum Commands {
@@ -33,19 +38,19 @@ public class Parser {
                 return TODO.toString().toLowerCase();
             }
         },
-        EVENT {
+        EVENT{
             @Override
             public String asLowerCase() {
                 return EVENT.toString().toLowerCase();
             }
         },
-        DEADLINE {
+        DEADLINE{
             @Override
             public String asLowerCase() {
                 return DEADLINE.toString().toLowerCase();
             }
         },
-        DELETE {
+        DELETE{
             @Override
             public String asLowerCase() {
                 return DELETE.toString().toLowerCase();
@@ -61,9 +66,22 @@ public class Parser {
         public abstract String asLowerCase();
     }
 
+    /**
+     * Creates an instance of Parser.
+     */
     public Parser() {
     }
 
+    /**
+     * Returns the appropriate command to be executed after interpreting the user's inputted command.
+     *
+     * @param command Input commands from the user.
+     * @param tdl The ToDoList used by the chat bot to track tasks.
+     * @param ui The user interface that the chat bot uses.
+     * @param chatBot The instance of the chat bot itself.
+     * @param storage The Storage that the chat bot uses.
+     * @return The type of Command to be executed.
+     */
     protected Command parse(String command, ToDoList tdl, Ui ui, Duke chatBot, Storage storage) {
         if (command.equals(Commands.BYE.asLowerCase())) {
             return new ByeCommand(chatBot, ui, tdl, storage);
@@ -76,9 +94,9 @@ public class Parser {
                 int index = Integer.parseInt(substring);
                 return new DoneCommand(tdl, ui, index);
             } catch (NumberFormatException e) {
-                ui.prettyPrinter("Dude, the format is done <index>");
+                ui.printProper("Dude, the format is done <index>");
             } catch (DukeException e) {
-                ui.prettyPrinter(e.getMessage());
+                ui.printProper(e.getMessage());
             }
         } else if (command.startsWith(Commands.TODO.asLowerCase())) {
             try {
@@ -86,9 +104,9 @@ public class Parser {
                 String substring = command.substring(5);
                 return new ToDoCommand(tdl, substring);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.prettyPrinter("OOPS!!! The description of a todo cannot be empty.");
+                ui.printProper("OOPS!!! The description of a todo cannot be empty.");
             } catch (DukeException e) {
-                ui.prettyPrinter(e.getMessage());
+                ui.printProper(e.getMessage());
             }
         } else if (command.startsWith(Commands.EVENT.asLowerCase())) {
             try {
@@ -98,10 +116,10 @@ public class Parser {
                 String duration = substring.substring(substring.indexOf("/") + 1).substring(2);
                 return new EventCommand(tdl, item, duration);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.prettyPrinter("Hold up... You got the format all wrong! It's supposed to "
+                ui.printProper("Hold up... You got the format all wrong! It's supposed to "
                         + "be <event> <name> /at <duration>");
             } catch (DukeException e) {
-                ui.prettyPrinter(e.getMessage());
+                ui.printProper(e.getMessage());
             }
         } else if (command.startsWith(Commands.DEADLINE.asLowerCase())) {
             try {
@@ -116,12 +134,12 @@ public class Parser {
                         DateTimeFormatter.ISO_DATE_TIME);
                 return new DeadlineCommand(tdl, item, dl);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.prettyPrinter("Hold up... You got the format all wrong! It's supposed to "
+                ui.printProper("Hold up... You got the format all wrong! It's supposed to "
                         + "be <deadline> <name> /by <dueDate>");
             } catch (DateTimeParseException e) {
                 System.out.println("Please key in the date time as YYYY-MM-dd HH:mm");
             } catch (DukeException e) {
-                ui.prettyPrinter(e.getMessage());
+                ui.printProper(e.getMessage());
             }
         } else if (command.startsWith(Commands.DELETE.asLowerCase())) {
             try {
@@ -130,11 +148,11 @@ public class Parser {
                 int index = Integer.parseInt(substring);
                 return new DeleteCommand(tdl, ui, index);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.prettyPrinter("And which item do you want to delete...?");
+                ui.printProper("And which item do you want to delete...?");
             } catch (NumberFormatException e) {
-                ui.prettyPrinter("Dude, the format is delete <index>");
+                ui.printProper("Dude, the format is delete <index>");
             } catch (DukeException e) {
-                ui.prettyPrinter(e.getMessage());
+                ui.printProper(e.getMessage());
             }
         } else if (command.startsWith(Commands.FIND.asLowerCase())) {
             try {
@@ -142,7 +160,7 @@ public class Parser {
                 String substring = command.substring(5);
                 return new FindCommand(tdl, substring);
             } catch (DukeException e) {
-                ui.prettyPrinter(e.getMessage());
+                ui.printProper(e.getMessage());
             }
         } else {
             return new ConfusedCommand(ui);
@@ -169,8 +187,8 @@ public class Parser {
             }
         } else if (command.startsWith("event")) {
             if (!command.substring(command.indexOf("/")).startsWith("/at")) {
-                throw new DukeException("You got the format wrong.. Geez it's supposed to be <event> <name> "
-                        + "/at <duration>");
+                throw new DukeException("You got the format wrong.. Geez it's supposed to be <event> "
+                        + "<name> /at <duration>");
             } else if (command.substring(5).isBlank()) {
                 throw new DukeException("Really? An event of nothing?");
             }

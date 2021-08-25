@@ -4,6 +4,14 @@ import duke.command.Command;
 
 import java.util.Scanner;
 
+/**
+ * Duke is a personal assistant that keep a list of your tasks. Users
+ * are able to add different types of tasks to their own list as well as
+ * mark tasks as completed or delete tasks from their task list.
+ *
+ * @author leezhixuan
+ */
+
 public class Duke {
 
     private static String name = "Duke";
@@ -13,9 +21,9 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    public Duke() {
+    private Duke() {
         this.ui = new Ui(Duke.name);
-        this.ui.greeting();
+        this.ui.greet();
         this.tdl = new ToDoList(Duke.name);
         this.storage = new Storage(this.tdl);
         this.storage.reloadTask();
@@ -32,19 +40,13 @@ public class Duke {
         }
     }
 
-    public void exit(ToDoList tdl) {
-        this.isRunning = false;
-        System.out.println("========== " + Duke.name + " ===========");
-        System.out.println("Wow! I can get off work now :D");
-        this.storage.save();
-        System.out.println("Saved your work by the way!");
-        System.out.println("========== " + Duke.name + " ===========\n");
-    }
-
     public static String getName() {
         return name;
     }
 
+    /**
+     * Stops the chat bot.
+     */
     public void stopRunning() {
         this.isRunning = false;
     }
