@@ -12,38 +12,44 @@
     ---
     ---
     Got it. I've added this task:
-    [D][ ] testDeadline (by: byTime)
+    [D][ ] testDeadline (by: Dec 27 2019)
     Now you have 2 tasks in the list.
     ---
     ---
+    OOPS!!! Could not parse time input.
+    ---
+    ---
     Here are the tasks in your list:
     1.[T][ ] testTodo
-    2.[D][ ] testDeadline (by: byTime)
+    2.[D][ ] testDeadline (by: Dec 27 2019)
     ---
     ---
     Nice! I've marked this task as done:
-    [D][X] testDeadline (by: byTime)
+    [D][X] testDeadline (by: Dec 27 2019)
     ---
     ---
     Got it. I've added this task:
-    [E][ ] testEvent (at: 3pm)
+    [E][ ] testEvent (at: Mar 1 2022)
     Now you have 3 tasks in the list.
     ---
     ---
+    OOPS!!! Could not parse time input.
+    ---
+    ---
     Here are the tasks in your list:
     1.[T][ ] testTodo
-    2.[D][X] testDeadline (by: byTime)
-    3.[E][ ] testEvent (at: 3pm)
+    2.[D][X] testDeadline (by: Dec 27 2019)
+    3.[E][ ] testEvent (at: Mar 1 2022)
     ---
     ---
     Nice! I've marked this task as done:
-    [E][X] testEvent (at: 3pm)
+    [E][X] testEvent (at: Mar 1 2022)
     ---
     ---
     Here are the tasks in your list:
     1.[T][ ] testTodo
-    2.[D][X] testDeadline (by: byTime)
-    3.[E][X] testEvent (at: 3pm)
+    2.[D][X] testDeadline (by: Dec 27 2019)
+    3.[E][X] testEvent (at: Mar 1 2022)
     ---
     ---
     OOPS!!! The description of a todo cannot be empty.
@@ -60,8 +66,8 @@
     ---
     Here are the tasks in your list:
     1.[T][ ] testTodo
-    2.[D][X] testDeadline (by: byTime)
-    3.[E][X] testEvent (at: 3pm)
+    2.[D][X] testDeadline (by: Dec 27 2019)
+    3.[E][X] testEvent (at: Mar 1 2022)
     ---
     ---
     OOPS!!! /at not found.
@@ -72,18 +78,18 @@
     ---
     Here are the tasks in your list:
     1.[T][ ] testTodo
-    2.[D][X] testDeadline (by: byTime)
-    3.[E][X] testEvent (at: 3pm)
+    2.[D][X] testDeadline (by: Dec 27 2019)
+    3.[E][X] testEvent (at: Mar 1 2022)
     ---
     ---
     Noted. I've removed this task:
-    [D][X] testDeadline (by: byTime)
+    [D][X] testDeadline (by: Dec 27 2019)
     Now you have 2 tasks in the list.
     ---
     ---
     Here are the tasks in your list:
     1.[T][ ] testTodo
-    2.[E][X] testEvent (at: 3pm)
+    2.[E][X] testEvent (at: Mar 1 2022)
     ---
     ---
     Noted. I've removed this task:
@@ -92,7 +98,7 @@
     ---
     ---
     Here are the tasks in your list:
-    1.[E][X] testEvent (at: 3pm)
+    1.[E][X] testEvent (at: Mar 1 2022)
     ---
     ---
     OOPS!!! Task ID out of range!
@@ -108,11 +114,11 @@
     ---
     ---
     Here are the tasks in your list:
-    1.[E][X] testEvent (at: 3pm)
+    1.[E][X] testEvent (at: Mar 1 2022)
     ---
     ---
     Noted. I've removed this task:
-    [E][X] testEvent (at: 3pm)
+    [E][X] testEvent (at: Mar 1 2022)
     Now you have 0 tasks in the list.
     ---
     ---
