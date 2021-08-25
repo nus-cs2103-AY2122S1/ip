@@ -3,10 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.time.format.DateTimeFormatter;
 
 
@@ -16,6 +13,7 @@ public class BobbyBot {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private static String div = "____________________________________________________________\n";
 
     public BobbyBot()  {
         ui = new Ui();
@@ -28,103 +26,35 @@ public class BobbyBot {
         }
     }
 
-    /**
-     * Performs command based on String user input
-     * @param userInput string command for chatbot
-     * @throws InvalidArgumentException Invalid or no arguments given
-     * @throws TooManyArgumentsException Too many /by or /at connectors
-     */
-    public void doCommand(String userInput) throws InvalidArgumentException, TooManyArgumentsException {
-        List<String> userInputList = new LinkedList<>(Arrays.asList(userInput.split(" ")));
-        BotCommand command = BotCommand.valueOf(userInputList.get(0).toUpperCase());
-        String description;
-        String[] userInputArgs;
-
-        switch (command) {
-        case BYE:
-            ui.showLine();
-            ui.sayBye();
-            ui.showLine();
-            break;
-        case LIST:
-            ui.showLine();
-            tasks.printList();
-            ui.showLine();
-            break;
-        case DONE:
-            ui.showLine();
-            tasks.markAsDone(Integer.parseInt(userInputList.get(1)));
-            ui.showLine();
-            break;
-        case DELETE:
-            // check delete argument
-            if (!isNumeric(userInputList.get(1))) {
-                throw new InvalidArgumentException("Delete argument is not numeric");
+    public void run() {
+        Scanner sc = new Scanner(System.in);
+        Parser parser = new Parser();
+        while (true) {
+            String userInput = sc.nextLine();
+            try {
+                ui.showLine();
+                parser.parseCommand(userInput, tasks , ui, storage);
+                ui.showLine();
+                storage.save(tasks);
+            } catch (IllegalArgumentException e) {
+                System.out.println(div + "OOPS!!! I'm sorry but I don't know what that mean :-(\n" + div);
+            } catch (InvalidArgumentException e) {
+                System.out.println(div + "You did not specify the correct details for this command\n" + div);
+            } catch (TooManyArgumentsException e) {
+                System.out.println(div + "You gave me too many details for this command!\n" + div);
+            } catch (IOException e) {
+                System.out.println(div + "Could not save tasks to database!\n" + div);
             }
-            ui.showLine();
-            tasks.deleteTask(Integer.parseInt(userInputList.get(1)));
-            ui.showLine();
-            break;
-        case TODO:
-            userInputList.remove(0);
-            if (userInputList.size() == 0) {
-                throw new InvalidArgumentException("No arguments submitted for todo");
-            }
-            description = String.join(" ", userInputList);
-            ui.showLine();
-            tasks.createToDo(description);
-            ui.showLine();
-            break;
-        case DEADLINE:
-            userInputList.remove(0);
-            if (userInputList.size() == 0) {
-                throw new InvalidArgumentException("No arguments submitted for deadline");
-            }
-            //split description and by
-            userInputArgs = String.join(" ", userInputList).split("/by ");
-            if (userInputArgs.length > 2) {
-                throw new TooManyArgumentsException("Too many arguments given for deadline");
-            } else if (userInputArgs.length == 1) {
-                throw new InvalidArgumentException("Could not find connector /by ");
-            }
-            description = userInputArgs[0];
-            String by = userInputArgs[1];
-            ui.showLine();
-            tasks.createDeadline(description, by);
-            ui.showLine();
-            break;
-        case EVENT:
-            userInputList.remove(0);
-            if (userInputList.size() == 0) {
-                throw new InvalidArgumentException("No arguments submitted for event");
-            }
-            //split description and at
-            userInputArgs = String.join(" ", userInputList).split("/at ");
-            if (userInputArgs.length > 2) {
-                throw new TooManyArgumentsException("Too many arguments given");
-            } else if (userInputArgs.length == 1) {
-                throw new InvalidArgumentException("Could not find connector /at");
-            }
-            description = userInputArgs[0];
-            String at = userInputArgs[1];
-            ui.showLine();
-            tasks.createEvent(description, at);
-            ui.showLine();
-            break;
-        }
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
     /**
-     * Helper function to check if string is numeric
-     * @param str string to test if numeric
-     * @return boolean
+     * Our main method. Starts up the chatbot and waits for user inputs
+     * @param args Command Line Arguments
      */
-    public static boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        new BobbyBot().run();
     }
+
 }
