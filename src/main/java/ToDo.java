@@ -10,4 +10,11 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public String encode() {
+        return "t" + DukeMemory.DELIMITER
+                + (this.isCompleted() ? "1" : "0") + DukeMemory.DELIMITER
+                + this.getDescription();
+    }
 }
