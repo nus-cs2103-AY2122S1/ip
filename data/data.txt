@@ -1,1 +1,4 @@
 D,2020-08-21,false,idk
+D,2020-01-29,false,idk
+E,mon,false,test
+T,true,idk

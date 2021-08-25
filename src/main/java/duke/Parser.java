@@ -1,14 +1,9 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneTaskCommand;
-import duke.command.ExitCommand;
-import duke.command.PrintListCommand;
+import duke.command.*;
 
 public class Parser {
-    private static String[] SUPPORTED_COMMANDS = {"bye", "list", "done", "deadline", "event","todo", "delete"};
+    private static String[] SUPPORTED_COMMANDS = {"bye", "list", "done", "deadline", "event","todo", "delete", "find"};
 
     private static boolean isCommandSupported(String userInput) {
         boolean isSupported = false;
@@ -49,6 +44,10 @@ public class Parser {
 
         if (userInput.startsWith("delete")) {
             return new DeleteCommand(userInput);
+        }
+        
+        if (userInput.startsWith("find")) {
+            return new FindCommand(userInput);
         }
 
         return null;
