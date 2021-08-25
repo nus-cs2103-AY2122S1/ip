@@ -2,12 +2,12 @@ package tasks;
 
 public class Event extends Task {
     private String taskName;
-    private String date;
+    private String time;
     private String taskSymbol = "E";
 
-    public Event(String taskName, String date) {
+    public Event(String taskName, String time) {
         this.taskName = taskName;
-        this.date = date;
+        this.time = time;
     }
 
     @Override

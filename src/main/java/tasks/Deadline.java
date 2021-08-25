@@ -2,12 +2,12 @@ package tasks;
 
 public class Deadline extends Task {
     private String taskName;
-    private String date;
+    private String time;
     private String taskSymbol = "D";
 
-    public Deadline(String taskName, String date) {
+    public Deadline(String taskName, String time) {
         this.taskName = taskName;
-        this.date = date;
+        this.time = time;
     }
 
     @Override

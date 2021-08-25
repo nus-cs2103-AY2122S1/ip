@@ -6,8 +6,8 @@ import tasks.Deadline;
 public class DeadlineCommand extends Command {
     private Deadline deadlineTask;
 
-    public DeadlineCommand(String taskName, String date) {
-        deadlineTask = new Deadline(taskName, date);
+    public DeadlineCommand(String taskName, String time) {
+        deadlineTask = new Deadline(taskName, time);
     }
 
     @Override
