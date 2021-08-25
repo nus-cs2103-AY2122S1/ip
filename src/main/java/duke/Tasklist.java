@@ -57,4 +57,33 @@ public class Tasklist {
 
         return contents;
     }
+
+    /**
+     * Returns all Tasks whose descriptions contain any of the provided search terms.
+     *
+     * @param searchTerms A String describing the search terms to check the Tasks against
+     * @return An ArrayList of Tasks whose descriptions contain at least one of the search terms.
+     */
+    public Tasklist findAllTasksWith(String searchTerms) {
+        Tasklist result = new Tasklist();
+
+        // Parse searchTerms
+        String[] searchTokens = searchTerms.strip().split(" ");
+
+        for (int i = 0; i < this.lastItem; i++) {
+            Task current = this.taskList.get(i);
+
+            // Check if any search tokens are in the task description
+            for (String token : searchTokens) {
+                String taskDescription = current.getDescription();
+
+                if (taskDescription.contains(token)) {
+                    result.addTask(current);
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
 }

@@ -2,6 +2,7 @@ package duke;
 
 import duke.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
@@ -82,6 +83,29 @@ public class UI {
             System.out.println(response);
             return response;
         }
+
+        /**
+         * Returns a Response detailing the tasks that match a set of
+         * given search terms and prints it to the console.
+         *
+         * @param matches A Tasklist of tasks that match the search terms
+         * @return A Response detailing the matching Tasks
+         */
+        public static Response matchingTasks(Tasklist matches) {
+            if (matches.getTotalTasks() == 0) {
+                Response response = new Response("No matches found! :(");
+                System.out.println(response);
+                return response;
+            }
+
+            String msg = "Here are the matching tasks in your list:\n";
+            msg += matches.toString();
+
+            Response response = new Response(msg);
+            System.out.println(response);
+
+            return response;
+        }
         
         @Override
         public String toString() {
@@ -136,6 +160,10 @@ public class UI {
 
     public void showErrorMsg(DukeException e) {
         Response.error(e.getMessage());
+    }
+
+    public void showMatchingTasks(Tasklist matches) {
+        Response.matchingTasks(matches);
     }
 
     public String readCommand() {
