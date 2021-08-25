@@ -68,19 +68,7 @@ public class TaskList {
             throw new EmptyListException();
         }
 
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
-            sb.append(i + 1);
-            sb.append(". ");
-            sb.append(task);
-            if (i != taskList.size() - 1) {
-                sb.append("\n");
-            }
-        }
-
-        Ui.printMessage(sb.toString());
+        Ui.printList(taskList);
     }
 
     /**

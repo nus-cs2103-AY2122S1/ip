@@ -118,9 +118,7 @@ public class Parser {
                     throw new TaskNotFoundException();
                 }
 
-                for (Task task : matchedTasks) {
-                    System.out.println(task);
-                }
+                Ui.printList(matchedTasks);
                 break;
             case "":                                // empty user input
                 throw new EmptyCommandException();
