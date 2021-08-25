@@ -93,7 +93,7 @@ public class Duke {
                 int count = 1;
                 System.out.println("Do these soon:" + "\n");
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println(count + ". [" + list.get(i).get_type() + "][" + done_check.get(i) + "] " + list.get(i).get_task());
+                    System.out.println(count + ". [" + list.get(i).get_type() + "][" + done_check.get(i) + "]" + list.get(i).get_task());
                     count = count + 1;
                 }
                 first_time = 1;
@@ -125,7 +125,7 @@ public class Duke {
                 list.add(todo);
                 done_check.add(" ");
                 System.out.println("Added the task! :)");
-                System.out.println("[" + todo.get_type() + "][] " + todo.get_task());
+                System.out.println("[" + todo.get_type() + "][ ] " + todo.get_task());
                 System.out.println("Jiayou! you have " + list.size() + " tasks in the list.");
                 first_time = 1;
             }
@@ -136,7 +136,7 @@ public class Duke {
                 list.add(deadline);
                 done_check.add(" ");
                 System.out.println("Added the task! :)");
-                System.out.println("[" + deadline.get_type() + "][] " + deadline.get_task());
+                System.out.println("[" + deadline.get_type() + "][ ]" + deadline.get_task());
                 System.out.println("Jiayou! you have " + list.size() + " tasks in the list.");
                 first_time = 1;
             }
@@ -147,7 +147,7 @@ public class Duke {
                 list.add(event);
                 done_check.add(" ");
                 System.out.println("Added the task! :)");
-                System.out.println("[" + event.get_type() + "][] " + event.get_task());
+                System.out.println("[" + event.get_type() + "][ ]" + event.get_task());
                 System.out.println("Jiayou! you have " + list.size() + " tasks in the list.");
                 first_time = 1;
             }
