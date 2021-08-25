@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -17,7 +19,7 @@ public class Duke {
     }
 
     public void run() {
-        ui.printResponse("Hello! I'm Duke", "What can I do for you?");
+        ui.printResponse("Hello! I'm duke.Duke", "What can I do for you?");
         Parser parser = new Parser();
         Scanner scan = new Scanner(System.in);
         boolean active = true;

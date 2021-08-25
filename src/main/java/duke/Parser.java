@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.regex.Pattern;
 
 public class Parser {
