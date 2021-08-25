@@ -1,5 +1,5 @@
 public class Event extends Task{
-    private String eventDatetime;
+    private final DateTime eventDatetime;
     private static final String EVENT_DELIMITER = "/at";
     private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command. Use 'event <text> /at <datetime>'";
     private static final String MISSING_EVENT_MESSAGE = "Some arguments are missing. Use 'event <text> /at <datetime>'";
@@ -9,7 +9,7 @@ public class Event extends Task{
 
     private Event(String text, String eventDatetime, boolean isDone) {
         super(text, isDone);
-        this.eventDatetime = eventDatetime;
+        this.eventDatetime = new DateTime(eventDatetime);
     }
 
     public static Event newEvent(String input, boolean isDone) throws DukeException {

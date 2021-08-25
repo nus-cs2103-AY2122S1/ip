@@ -1,5 +1,5 @@
 public class Deadline extends Task {
-    private final String dueDate;
+    private final DateTime dueDate;
     private static final String DEADLINE_DELIMITER = "/by";
     private static final String INVALID_DEADLINE_MESSAGE = "Invalid use of deadline command. Use 'deadline <text> /by <datetime>'";
     private static final String MISSING_DEADLINE_MESSAGE = "Some arguments are missing. Use 'deadline <text> /by <datetime>'";
@@ -8,7 +8,7 @@ public class Deadline extends Task {
 
     private Deadline(String text, String dueDate, boolean isDone) {
         super(text, isDone);
-        this.dueDate = dueDate;
+        this.dueDate = new DateTime(dueDate);
     }
 
     public static Deadline newDeadline(String input, boolean isDone) throws DukeException {
