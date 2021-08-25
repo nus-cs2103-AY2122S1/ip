@@ -6,7 +6,8 @@ package duke;
 public class Task {
     String name;
     boolean done;
-    public Task(String name){
+
+    public Task(String name) {
         this.name = name;
         done = false;
     }
@@ -14,44 +15,46 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void makeDone(){
+    public void makeDone() {
         done = true;
     }
 
     /**
      * Marks the task as undone.
      */
-    public void makeUndone(){
+    public void makeUndone() {
         done = false;
     }
 
     /**
      * Returns the string representation of the task.
+     *
      * @return Indication of if the task is done or not followed by its name.
      */
     @Override
-    public String toString(){
-        if(done == true){
+    public String toString() {
+        if (done == true) {
             return "[X] " + name;
-        }else{
+        } else {
             return "[ ] " + name;
         }
     }
 
     /**
      * Returns true if the object being compared with is equivalent.
+     *
      * @param obj Object to be compared with.
      * @return True if the object is a Task with the same name. False otherwise.
      */
     @Override
-    public boolean equals(Object obj){
-        if(!(obj instanceof Task)){
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Task)) {
             return false;
-        }else{
+        } else {
             Task objTask = (Task) obj;
-            if(objTask.name.equals(this.name)){
+            if (objTask.name.equals(this.name)) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }

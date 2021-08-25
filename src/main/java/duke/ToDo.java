@@ -10,32 +10,34 @@ public class ToDo extends Task {
 
     /**
      * Returns the string representation of the task.
+     *
      * @return Indication that the task is a to-do type and if the task
-     *         is done or not followed by its name.
+     * is done or not followed by its name.
      */
     @Override
-    public String toString(){
-        if(done == true){
+    public String toString() {
+        if (done == true) {
             return "[T][X] " + name;
-        }else{
+        } else {
             return "[T][ ] " + name;
         }
     }
 
     /**
      * Returns true if the object being compared with is equivalent.
+     *
      * @param obj Object to be compared with.
      * @return True if the object is a ToDo with the same name. False otherwise.
      */
     @Override
-    public boolean equals(Object obj){
-        if(!(obj instanceof ToDo)){
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ToDo)) {
             return false;
-        }else{
+        } else {
             ToDo objTask = (ToDo) obj;
-            if(objTask.name.equals(this.name)){
+            if (objTask.name.equals(this.name)) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         }

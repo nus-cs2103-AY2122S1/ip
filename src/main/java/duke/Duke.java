@@ -1,19 +1,10 @@
 package duke;
 
-import java.time.DateTimeException;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 import java.lang.String;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.LocalDate;
-
 
 public class Duke {
     private static Ui ui = new Ui();
@@ -28,7 +19,7 @@ public class Duke {
 
         ui.showFileLocation(file.getAbsolutePath());
 
-        taskList.initialise(file,storage);
+        taskList.initialise(file, storage);
 
         Parser.parse();
     }

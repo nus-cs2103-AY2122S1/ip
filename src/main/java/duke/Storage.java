@@ -1,30 +1,30 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Represents Duke's storage system and handles file operations.
  */
 public class Storage {
     //private static List<String> lines;
-    public Storage(){
+    public Storage() {
 
     }
 
     /**
      * Checks if the list file exists and creates it if it doesn't.
+     *
      * @return true if the file exists or was successfully created
-     *         and false if there was an error creating the file.
+     * and false if there was an error creating the file.
      */
-    public boolean checkExistence(){
-        if(!Duke.file.exists()){
+    public boolean checkExistence() {
+        if (!Duke.file.exists()) {
             try {
                 new File("data").mkdir();
                 Duke.file.createNewFile();
@@ -33,13 +33,14 @@ public class Storage {
                 return false;
             }
             return true;
-        }else{
+        } else {
             return true;
         }
     }
 
     /**
      * Loads the file contents into the list of strings for Duke to use.
+     *
      * @param filePath File path.
      * @throws FileNotFoundException If the file is missing.
      */
@@ -56,6 +57,7 @@ public class Storage {
 
     /**
      * Writes the contents of the list of strings Duke uses into the list file.
+     *
      * @param filePath File path.
      * @throws IOException If the file cannot be written to.
      */
@@ -64,7 +66,7 @@ public class Storage {
         clearer.write(""); //clear the file
         clearer.close();
         FileWriter fw = new FileWriter(filePath, true);
-        for(String line : TaskList.lines){
+        for (String line : TaskList.lines) {
             fw.write(line + System.lineSeparator());
         }
         fw.close();

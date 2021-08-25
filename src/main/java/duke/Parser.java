@@ -1,32 +1,34 @@
 package duke;
 
-import java.io.File;
+import java.util.Scanner;
+
 import java.io.IOException;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Parser {
     private static Ui ui = new Ui();
     private static Storage storage = new Storage();
     private static TaskList taskList = new TaskList();
-    public Parser(){
+
+    public Parser() {
 
     }
 
     public static void parse() {
         Scanner sc = new Scanner(System.in);
-        while(true){
+        while (true) {
             String command = sc.nextLine();
-            if(command.equals("bye")) {
+            if (command.equals("bye")) {
                 sc.close();
                 ui.sayBye();
                 break;
-            }else if(command.equals("list")) {
+            } else if (command.equals("list")) {
 
                 ui.showList(TaskList.lines);
 
-            }else if(command.contains("done")) {
+            } else if (command.contains("done")) {
                 String numbers = command.substring(5);
                 try {
                     int taskNo = Integer.parseInt(numbers);
@@ -45,8 +47,8 @@ public class Parser {
                     continue;
                 }
                 taskNo--;
-                taskList.makeDone(storage,taskNo);
-            }else if(command.contains("delete") || command.contains("remove")){
+                taskList.makeDone(storage, taskNo);
+            } else if (command.contains("delete") || command.contains("remove")) {
                 String numbers = command.substring(7);
                 try {
                     int taskNo = Integer.parseInt(numbers);
@@ -65,48 +67,48 @@ public class Parser {
                     continue;
                 }
                 taskNo--;
-                taskList.delete(storage,taskNo);
+                taskList.delete(storage, taskNo);
 
-            }else if(command.contains("todo")){
-                String task=command.substring(5);
-                if(task.equals("")){
+            } else if (command.contains("todo")) {
+                String task = command.substring(5);
+                if (task.equals("")) {
                     ui.showNoNameError();
                     continue;
                 }
                 ToDo taskToAdd = new ToDo(task);
 
                 String toBeAdded = taskToAdd.toString();
-                taskList.add(storage,toBeAdded);
+                taskList.add(storage, toBeAdded);
                 try {
                     storage.writeListToFile(Duke.file.getPath());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-            }else if(command.contains("deadline")){
-                String taskNDate=command.substring(9);
-                if(!(taskNDate.contains("/by"))){
+            } else if (command.contains("deadline")) {
+                String taskNDate = command.substring(9);
+                if (!(taskNDate.contains("/by"))) {
                     ui.showNoDateError();
                     continue;
                 }
-                int splitIndex=taskNDate.indexOf("/by");
-                String task =taskNDate.substring(0,splitIndex-1);
-                String date =taskNDate.substring(splitIndex+4);
-                if(task.equals("")){
+                int splitIndex = taskNDate.indexOf("/by");
+                String task = taskNDate.substring(0, splitIndex - 1);
+                String date = taskNDate.substring(splitIndex + 4);
+                if (task.equals("")) {
                     ui.showNoNameError();
                     continue;
                 }
 
-                try{
+                try {
                     LocalDate test = LocalDate.parse(date);
-                }catch(DateTimeException error){
+                } catch (DateTimeException error) {
                     ui.showBadDateError();
                     continue;
                 }
 
-                Deadline taskToAdd = new Deadline(task,date);
+                Deadline taskToAdd = new Deadline(task, date);
                 String toBeAdded = taskToAdd.toString();
-                taskList.add(storage,toBeAdded);
+                taskList.add(storage, toBeAdded);
 
                 try {
                     storage.writeListToFile(Duke.file.getPath());
@@ -114,7 +116,7 @@ public class Parser {
                     e.printStackTrace();
                 }
 
-            }else if(command.contains("event")) {
+            } else if (command.contains("event")) {
                 String taskNDate = command.substring(6);
                 if (!(taskNDate.contains("/at"))) {
                     ui.showNoDateError();
@@ -128,16 +130,16 @@ public class Parser {
                     continue;
                 }
 
-                try{
+                try {
                     LocalDate test = LocalDate.parse(date);
-                }catch(DateTimeException error){
+                } catch (DateTimeException error) {
                     ui.showBadDateError();
                     continue;
                 }
 
-                Deadline taskToAdd = new Deadline(task,date);
+                Deadline taskToAdd = new Deadline(task, date);
                 String toBeAdded = taskToAdd.toString();
-                taskList.add(storage,toBeAdded);
+                taskList.add(storage, toBeAdded);
 
                 try {
                     storage.writeListToFile(Duke.file.getPath());
@@ -145,9 +147,9 @@ public class Parser {
                     e.printStackTrace();
                 }
 
-            }else if(command.equals("WIPE")){
+            } else if (command.equals("WIPE")) {
                 System.out.println("ARE YOU SURE? SAY Y IF YOU ARE AND LITERALLY ANYTHING ELSE IF YOU AREN'T");
-                if(sc.nextLine().equals("Y")) {
+                if (sc.nextLine().equals("Y")) {
                     TaskList.lines.clear();
                     try {
                         storage.writeListToFile(Duke.file.getPath());
@@ -155,10 +157,10 @@ public class Parser {
                         e.printStackTrace();
                     }
                     System.out.println("BAYUM! The list has been wiped. How tragic.");
-                }else{
+                } else {
                     System.out.println("WOWZA! That was real close.");
                 }
-            }else{
+            } else {
                 System.out.println("(WHAT IS THIS PERSON TRYING TO SAY WHY IS HE TYPING GIBBERISH I'M JUST TRYING TO SURVIVE)");
             }
         }
