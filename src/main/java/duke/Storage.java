@@ -19,11 +19,13 @@ public class Storage {
     private Storage() throws DukeException {
         try {
             this.targetDirectory =
-                    Paths.get(".", DEFAULT_FILE_DIRECTORY, DEFAULT_FILE_NAME).toAbsolutePath().normalize();
+                    Paths.get(".", DEFAULT_FILE_DIRECTORY, DEFAULT_FILE_NAME)
+                            .toAbsolutePath()
+                            .normalize();
             if (!java.nio.file.Files.exists(this.targetDirectory)) {
                 try {
                     Files.createDirectory(Paths.get(".", DEFAULT_FILE_DIRECTORY).toAbsolutePath().normalize());
-                } catch(java.nio.file.FileAlreadyExistsException e) {
+                } catch (java.nio.file.FileAlreadyExistsException e) {
                     System.out.println("Directory exists but file does not. Creating file...");
                 }
                 Files.createFile(this.targetDirectory);
@@ -47,7 +49,7 @@ public class Storage {
                         directory.append(args[i]);
                         Files.createDirectory(Paths.get(directory.toString()).toAbsolutePath().normalize());
                         directory.append("/");
-                    } catch(java.nio.file.FileAlreadyExistsException e) {
+                    } catch (java.nio.file.FileAlreadyExistsException e) {
                         System.out.println("Directory exists but file does not. Creating file...");
                     }
                     i++;
@@ -81,7 +83,7 @@ public class Storage {
                 taskList.addTask(this.formatter.formatStringToTask(line));
                 line = this.reader.readLine();
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("Unable to load file.");
             e.printStackTrace();
         }

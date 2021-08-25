@@ -20,6 +20,6 @@ public class DoneCommand extends Command{
         TaskList taskList = super.getTaskList();
         Task completedTask = taskList.markAsCompleted(this.taskId);
         return new CommandResult("Nice! I've marked this task as done:\n "
-                + completedTask.details(), false);
+                + completedTask.getDetails(), false);
     }
 }

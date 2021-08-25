@@ -13,5 +13,7 @@ public class CommandResult {
         return this.feedbackResult;
     }
 
-    public boolean isExit() { return this.isExit; }
+    public boolean isExit() {
+        return this.isExit;
+    }
 }

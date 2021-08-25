@@ -28,21 +28,21 @@ public abstract class Task {
 
     public abstract Task complete();
 
-    public abstract String details();
+    public abstract String getDetails();
 
     public abstract String getLabel();
 
-    public String taskTypeString() {
+    public String getTaskTypeString() {
         return "[" + this.taskType.toString() + "]";
     }
 
-    public TaskType taskType() {
+    public TaskType getTaskType() {
         return this.taskType;
     }
 
     @Override
     public String toString() {
-        return details();
+        return getDetails();
     }
 
     public static final class EmptyTask extends Task {
@@ -66,7 +66,7 @@ public abstract class Task {
         }
 
         @Override
-        public String details() {
+        public String getDetails() {
             return "Empty";
         }
 

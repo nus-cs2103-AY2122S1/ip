@@ -9,7 +9,7 @@ public class Event extends TimedTask {
     }
 
     @Override
-    protected String dateTimeString() {
+    protected String getDateTimeString() {
         return " (at: " + this.getDateTime() + ")";
     }
 

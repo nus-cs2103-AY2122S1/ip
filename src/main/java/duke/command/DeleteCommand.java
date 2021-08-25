@@ -26,7 +26,7 @@ public class DeleteCommand extends Command implements ListNumberPrintable {
         TaskList taskList = super.getTaskList();
         Task deletedTask = taskList.deleteTask(this.taskId);
         return new CommandResult("Noted. I've removed this task:\n "
-                + deletedTask.details()
+                + deletedTask.getDetails()
                 + "\n"
                 + printListNumber(taskList),
                 false);
