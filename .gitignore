@@ -20,3 +20,7 @@ bin/
 /text-ui-test/EXPECTED-UNIX.TXT
 
 data
+
+.classpath
+.project
+.settings
