@@ -14,7 +14,7 @@ class Deadline extends Task {
     public static String typeName = "deadline";
     LocalDate time;
 
-    public Deadline(String description, LocalDate time){
+    public Deadline(String description, LocalDate time) {
         super(description);
         this.time = time;
     }
