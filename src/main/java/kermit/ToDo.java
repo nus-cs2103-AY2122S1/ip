@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  ToDo list stores tasks
+ *  ToDo list stores tasks.
  */
 public class ToDo extends ArrayList<Task> {
 
@@ -48,9 +48,9 @@ public class ToDo extends ArrayList<Task> {
     }
 
     /**
-     * String representation of todo list
+     * String representation of todo list.
      *
-     * @return String representation of todo list
+     * @return String representation of todo list.
      */
     @Override
     public String toString() {
