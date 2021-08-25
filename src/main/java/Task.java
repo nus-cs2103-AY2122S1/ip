@@ -11,6 +11,11 @@ public class Task {
         this.title = title.trim();
     }
 
+    public Task(String title, boolean isDone) {
+        this.title = title.trim();
+        this.isDone = isDone;
+    }
+
     /**
      * If task is done, return "X" else " "
      *
@@ -18,6 +23,10 @@ public class Task {
      */
     private String getStatusIcon() {
         return isDone ? "X" : " ";
+    }
+
+    private int convertIsDoneToInt() {
+        return isDone ? 1 : 0;
     }
 
     /**
@@ -34,6 +43,10 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    public String toFileString() {
+        return String.format("%d | %s", convertIsDoneToInt(), title);
     }
 
     /**

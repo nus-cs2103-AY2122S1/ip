@@ -5,7 +5,7 @@ public class Deadline extends Task {
     /**
      * Constructor of a Deadline object.
      *
-     * @param title title of the Deadline task
+     * @param title   title of the Deadline task
      * @param endDate endDate of the Deadline task
      */
     public Deadline(String title, String endDate) {
@@ -13,9 +13,18 @@ public class Deadline extends Task {
         this.endDate = endDate.trim();
     }
 
+    public Deadline(String title, String endDate, boolean isDone) {
+        super(title, isDone);
+        this.endDate = endDate.trim();
+    }
+
+    public String toFileString() {
+        return String.format("D | %s | %s", super.toFileString(), endDate);
+    }
+
     /**
-     * Return a String representation of a Deadline task.
-     * Starts "[D]" to indicate that it is a Deadline task.
+     * Return a String representation of a Deadline task. Starts "[D]" to indicate
+     * that it is a Deadline task.
      *
      * @return String representation of an Deadline.
      */

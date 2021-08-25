@@ -1,21 +1,21 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Duke {
     private final ArrayList<Task> tasks = new ArrayList<>();
+    private static final String FILE_PATH = "./data/duke.txt";
 
     private enum Action {
-        BYE("bye"),
-        DEADLINE("deadline"),
-        DELETE("delete"),
-        DONE("done"),
-        EVENT("event"),
-        LIST("list"),
-        TODO("todo");
+        BYE("bye"), DEADLINE("deadline"), DELETE("delete"), DONE("done"), EVENT("event"), LIST("list"), TODO("todo");
 
         private final String name;
 
-        Action (String name) {
+        Action(String name) {
             this.name = name;
         }
 
@@ -80,8 +80,8 @@ public class Duke {
     }
 
     /**
-     * Marks the corresponding task as done.
-     * If message does not contain a number, this method will print an error message.
+     * Marks the corresponding task as done. If message does not contain a number,
+     * this method will print an error message.
      *
      * @param taskNo String user input
      */
@@ -90,19 +90,10 @@ public class Duke {
             validateActionDescription(taskNo, Action.DONE);
             Task selectedTask = tasks.get(Integer.parseInt(taskNo) - 1);
             if (selectedTask.isDone()) {
-                printMessage(
-                        String.format("Task %s is already done!\n\t  %s",
-                                taskNo,
-                                selectedTask
-                        )
-                );
+                printMessage(String.format("Task %s is already done!\n\t  %s", taskNo, selectedTask));
             } else {
                 selectedTask.markAsDone();
-                printMessage(
-                        String.format("Nice! I've marked this task as done:\n\t  %s",
-                                selectedTask
-                        )
-                );
+                printMessage(String.format("Nice! I've marked this task as done:\n\t  %s", selectedTask));
             }
         } catch (NumberFormatException e) {
             throw new DukeException("Enter a number for a done action!");
@@ -130,8 +121,8 @@ public class Duke {
     }
 
     /**
-     * Add a Deadline task to tasks.
-     * Throws DukeException if deadline description or end time is missing.
+     * Add a Deadline task to tasks. Throws DukeException if deadline description or
+     * end time is missing.
      *
      * @param message String user input. Should start with "deadline"
      */
@@ -148,8 +139,8 @@ public class Duke {
     }
 
     /**
-     * Add an Event task to tasks.
-     * Throws DukeException if event description or deadline is missing.
+     * Add an Event task to tasks. Throws DukeException if event description or
+     * deadline is missing.
      *
      * @param message String user input
      */
@@ -231,18 +222,101 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        printMessage("Hello! I'm Duke\n\tWhat can I do for you?");
+        printMessage("Hello! I'm Duke\n"
+                + "\tWhat can I do for you?\n"
+                + "\tTrying to read from " + FILE_PATH + "...");
+    }
+
+    private boolean convertIsDoneStrToBool(String s) throws DukeException {
+        if (s.equals("1")) {
+            return true;
+        } else if (s.equals("0")) {
+            return false;
+        } else {
+            throw new DukeException("Invalid input for isDone. Only 0 or 1 is accepted.");
+        }
+    }
+
+    public void handleFileInput(String input, int lineNo) {
+        try {
+            String fileSplitRegex = " \\| ";
+            String action = input.split(fileSplitRegex)[0];
+            boolean isDone = convertIsDoneStrToBool(input.split(fileSplitRegex)[1]);
+            String title = input.split(fileSplitRegex)[2];
+            switch (action) {
+                case "T":
+                    tasks.add(new Todo(title, isDone));
+                    break;
+                case "D":
+                    String endDate = input.split(fileSplitRegex)[3];
+                    tasks.add(new Deadline(title, endDate, isDone));
+                    break;
+                case "E":
+                    String deadline = input.split(fileSplitRegex)[3];
+                    tasks.add(new Event(title, deadline, isDone));
+                    break;
+                default:
+                    throw new DukeException("Unknown action type. Only \"T\", \"D\", \"E\" are accepted.");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(String.format("Line %d is missing input values!", lineNo));
+        }
+
+    }
+
+    public void readDukeList() throws DukeException {
+        Scanner scanner = null;
+        try {
+            int lineCount = 0;
+            scanner = new Scanner(new File(FILE_PATH));
+            while (scanner.hasNextLine()) {
+                lineCount++;
+                handleFileInput(scanner.nextLine(), lineCount);
+            }
+        } catch (FileNotFoundException e) {
+            throw new DukeException("No such file or directory: " + FILE_PATH);
+        } finally {
+            if (scanner != null) {
+                scanner.close();
+            }
+        }
+    }
+
+    public void writeToList() throws DukeException {
+        PrintWriter printWriter = null;
+        try {
+            printWriter = new PrintWriter(new FileWriter(FILE_PATH));
+            for (Task task : tasks) {
+                printWriter.println(task.toFileString());
+            }
+        } catch (FileNotFoundException e) {
+            throw new DukeException("No such file or directory in " + FILE_PATH);
+        } catch (IOException e) {
+            throw new DukeException("Unable to write to file");
+        } finally {
+            if (printWriter != null) {
+                printWriter.close();
+            }
+        }
     }
 
     public static void main(String[] args) {
         greet();
         Scanner scanner = new Scanner(System.in);
         Duke duke = new Duke();
+        boolean isActive;
+        try {
+            duke.readDukeList();
+            isActive = true;
+        } catch (DukeException e) {
+            printMessage(e.getMessage());
+            isActive = false;
+        }
 
-        boolean isActive = true;
         while (isActive) {
             try {
                 isActive = duke.handleInput(scanner.nextLine().trim());
+                duke.writeToList();
             } catch (DukeException e) {
                 printMessage(e.getMessage());
             }

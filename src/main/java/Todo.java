@@ -8,9 +8,17 @@ public class Todo extends Task {
         super(title);
     }
 
+    public Todo(String title, boolean isDone) {
+        super(title, isDone);
+    }
+
+    public String toFileString() {
+        return String.format("T | %s", super.toFileString());
+    }
+
     /**
-     * Return a String representation of a Todo task.
-     * Starts "[T]" to indicate that it is a Todo task.
+     * Returns a String representation of a Todo task. Starts "[T]" to indicate that
+     * it is a Todo task.
      *
      * @return String representation of a Todo.
      */
