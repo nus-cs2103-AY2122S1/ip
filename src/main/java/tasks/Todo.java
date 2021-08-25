@@ -1,4 +1,9 @@
-public class Todo extends Task{
+package tasks;
+
+import tasks.Task;
+import tasks.Todo;
+
+public class Todo extends Task {
 
     public Todo(String description) {
         super(description);

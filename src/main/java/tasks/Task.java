@@ -1,3 +1,7 @@
+package tasks;
+
+import tasks.Task;
+
 public class Task {
         protected String description;
         protected boolean isDone;
