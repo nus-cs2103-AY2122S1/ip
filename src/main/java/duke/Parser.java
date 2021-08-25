@@ -12,8 +12,10 @@ public class Parser {
             return new ListCommand(fullCommand);
         } else {
             String[] parsedUserInput = fullCommand.split(" ", 2);
-            if (parsedUserInput[0].equals("done")) { // Mark duke.task as completed
+            if (parsedUserInput[0].equals("done")) {
                 return new DoneCommand(fullCommand);
+            } else if (parsedUserInput[0].equals("find")) {
+                return new FindCommand(fullCommand);
             } else if (parsedUserInput[0].equals("delete")) {
                 return new DeleteCommand(fullCommand);
             } else if (parsedUserInput[0].equals("todo") || parsedUserInput[0].equals("deadline") || parsedUserInput[0].equals("event")) {

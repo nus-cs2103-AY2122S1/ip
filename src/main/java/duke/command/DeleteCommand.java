@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
         if (parsedUserInput.length == 1) {
             throw new DukeException("☹ OOPS!!! Please enter \"delete\" followed the number corresponding to " +
-                    "the duke.task you want deleted");
+                    "the task you want deleted");
         } else {
             try {
                 int taskToDelete = Integer.parseInt(parsedUserInput[1]) - 1;
