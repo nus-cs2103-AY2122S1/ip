@@ -41,6 +41,16 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
+    public TaskList filteredTaskList(String string) {
+        TaskList filteredTaskList = new TaskList();
+        for (int i = 0; i < this.taskList.size(); i++) {
+            if (taskList.get(i).containsString(string)) {
+                filteredTaskList.addTask(taskList.get(i));
+            }
+        }
+        return filteredTaskList;
+    }
+
     @Override
     public String toString() {
         String tasksAsString = "";

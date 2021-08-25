@@ -70,6 +70,10 @@ public class Pilcrow {
             storage.save(taskList);
             ui.printSetTaskIsDoneMessage(taskList.getTask(index), taskList);
             break;
+        case "search":
+            String searchString = parser.getRestOfCommand();
+            ui.printTaskList(taskList.filteredTaskList(searchString));
+            break;
         case "delete":
             index = parser.getIndex();
             taskList.deleteTask(index);
