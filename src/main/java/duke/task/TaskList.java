@@ -21,7 +21,7 @@ public class TaskList {
             completedTask.markDone();
             Ui.printDoneMessage(completedTask);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("\t☹ OOPS!!! This is not a valid task number.");
+            System.out.println("\tOOPS!!! This is not a valid task number.");
         }
     }
 
@@ -49,7 +49,7 @@ public class TaskList {
             this.tasks.remove(taskNumber);
             Ui.printDeleteMessage(removedTask, this.tasks.size());
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("\t☹ OOPS!!! This is not a valid task number.");
+            System.out.println("\tOOPS!!! This is not a valid task number.");
         }
     }
 

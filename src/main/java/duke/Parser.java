@@ -25,14 +25,14 @@ public class Parser {
 
         if (commandWord.equals("done")) {
             if (commandDesc.equals("")) {
-                throw new DukeException("\t☹ OOPS!!! Please specify the task number for the task " +
+                throw new DukeException("\tOOPS!!! Please specify the task number for the task " +
                         "you want to complete.");
             }
             try {
                 int taskNumber = Integer.parseInt(commandDesc);
                 this.tasks.markDone(taskNumber);
             } catch (NumberFormatException e) {
-                System.out.println("\t☹ OOPS!!! Please input a task number instead.");
+                System.out.println("\tOOPS!!! Please input a task number instead.");
             }
 
         } else if (commandWord.equals("list")) {
@@ -40,13 +40,13 @@ public class Parser {
 
         } else if (commandWord.equals("todo")) {
             if (commandDesc.equals("")) {
-                throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("\tOOPS!!! The description of a todo cannot be empty.");
             }
             this.tasks.addTask(new ToDo(commandDesc));
 
         } else if (commandWord.equals("deadline")) {
             if (commandDesc.equals("")) {
-                throw new DukeException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("\tOOPS!!! The description of a deadline cannot be empty.");
             }
             try {
                 String[] commandDescSplit = commandDesc.split("/by");
@@ -63,26 +63,26 @@ public class Parser {
 
         } else if (commandWord.equals("event")) {
             if (commandDesc.equals("")) {
-                throw new DukeException("\t☹ OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("\tOOPS!!! The description of a event cannot be empty.");
             }
             String[] commandDescSplit = commandDesc.split("/at");
             this.tasks.addTask(new Event(commandDescSplit[0].trim(), commandDescSplit[1].trim()));
 
         } else if (commandWord.equals("delete")) {
             if (commandDesc.equals("")) {
-                throw new DukeException("\t☹ OOPS!!! Please specify the task number for the task " +
+                throw new DukeException("\tOOPS!!! Please specify the task number for the task " +
                         "you want to delete.");
             }
             try {
                 int taskNumber = Integer.parseInt(commandDesc);
                 this.tasks.deleteTask(taskNumber);
             } catch (NumberFormatException e) {
-                System.out.println("\t☹ OOPS!!! Please input a task number instead.");
+                System.out.println("\tOOPS!!! Please input a task number instead.");
             }
         } else if (commandWord.equals("bye")) {
             return 1;
         } else {
-            throw new DukeException("\t☹ OOPS!!! You have entered an invalid command, please try again!");
+            throw new DukeException("\tOOPS!!! You have entered an invalid command, please try again!");
         }
         return 0;
     }
