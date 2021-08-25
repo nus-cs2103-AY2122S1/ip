@@ -15,11 +15,32 @@ import java.util.Scanner;
 
 public class Duke {
     private static ArrayList<Task> request = new ArrayList<Task>();
-//    private static final String SAVE_FILE_LOCATION = "duke.txt";
+    private static final String SAVE_FILE_LOCATION = "data/duke.txt";
+    private static String DIVIDER = "____________________________________________________________";
+
+    public static void main(String[] args) {
+        welcome();
+        loadTask();
+        startDuke();
+        saveList();
+    }
+
+    private static void welcome() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Duke: Hello from\n" + logo);
+
+        System.out.println(DIVIDER);
+        System.out.println("Duke: Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println(DIVIDER);
+    }
 
     private static void loadTask() {
         try {
-            File f = new File("data/duke.txt");
+            File f = new File(SAVE_FILE_LOCATION);
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String nextLine = s.nextLine();
@@ -50,7 +71,7 @@ public class Duke {
 
     private static void saveList() {
         try {
-            FileWriter fw = new FileWriter("data/duke.txt");
+            FileWriter fw = new FileWriter(SAVE_FILE_LOCATION);
 
             for (Task t : request) {
                 String str = t.type + ", " + t.isDone + ", " + t.description;
@@ -63,20 +84,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Duke: Hello from\n" + logo);
-        String divider = "____________________________________________________________";
-        System.out.println(divider);
-        System.out.println("Duke: Hello! I'm Duke\nWhat can I do for you?");
-        System.out.println(divider);
-
-        loadTask();
-
+    private static void startDuke() {
         boolean exit = false;
 
         while (!exit) {
@@ -84,7 +92,7 @@ public class Duke {
             Scanner sc = new Scanner(System.in);
             String str = sc.nextLine();
 
-            System.out.println(divider);
+            System.out.println(DIVIDER);
             try {
                 if (str.equals("bye")) {
                     exit = true;
@@ -114,12 +122,11 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            System.out.println(divider);
+            System.out.println(DIVIDER);
         }
-        saveList();
     }
 
-    public static String list() {
+    private static String list() {
         int count = 1;
         String str = "Here are the tasks in your list:";
         for (Task t : request) {
@@ -129,12 +136,12 @@ public class Duke {
         return str;
     }
 
-    public static String done(String str) {
+    private static String done(String str) {
         int index = Integer.parseInt(str.substring(5)) - 1;
         return request.get(index).markDone();
     }
 
-    public static String delete(String str) {
+    private static String delete(String str) {
         int index = Integer.parseInt(str.substring(7)) - 1;
         String result = "Noted. I've removed this task: \n" + request.get(index).delete() +
                 "\nNow you have " + (request.size() - 1) + " tasks in the list.";
@@ -142,7 +149,7 @@ public class Duke {
         return result;
     }
 
-    public static String addTask(String str) {
+    private static String addTask(String str) {
         String[] words = str.split(" ");
         if (words.length == 1) {
             return "☹ OOPS!!! The description of a todo cannot be empty.";
