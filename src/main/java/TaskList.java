@@ -38,6 +38,46 @@ public class TaskList {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + taskCompleted);
     }
+
+    /**
+     * Delete a task
+     * @param taskNo Task Number (starting from index 1)
+     */
+    public void deleteTask(int taskNo) {
+        if (taskNo > tasks.size() || taskNo < 1) {
+            System.out.println("Cannot find task! Use list command to see available tasks");
+            return;
+        }
+        Task taskToDelete = tasks.get(taskNo - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + taskToDelete);
+        tasks.remove(taskToDelete);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list." );
+    }
+
+    /**
+     * Creates a todo task
+     * @param description description of task
+     */
+    public void createToDo(String description) {
+        Task newToDo = new ToDo(description);
+        tasks.add(newToDo);
+        System.out.println("Got it. I've added this task:\n  " + newToDo + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    /**
+     * Creates an event task
+     * @param description description of task
+     * @param at time period of Event (start-end)
+     */
+    public void createEvent(String description, String at) {
+        Task newEvent = new Event(description, at);
+        tasks.add(newEvent);
+        System.out.println("Got it. I've added this task:\n  " + newEvent + "\n"
+                + "Now you have " + tasks.size() + " tasks in the list.");
+    }
+
     public void printList() {
         int i = 1;
         System.out.println("Here are the tasks in your list:");

@@ -72,7 +72,9 @@ public class BobbyBot {
             if (!isNumeric(userInputList.get(1))) {
                 throw new InvalidArgumentException("Delete argument is not numeric");
             }
-            deleteTask(Integer.parseInt(userInputList.get(1)));
+            ui.showLine();
+            tasks.deleteTask(Integer.parseInt(userInputList.get(1)));
+            ui.showLine();
             break;
         case TODO:
             userInputList.remove(0);
@@ -80,7 +82,9 @@ public class BobbyBot {
                 throw new InvalidArgumentException("No arguments submitted for todo");
             }
             description = String.join(" ", userInputList);
-            createToDo(description);
+            ui.showLine();
+            tasks.createToDo(description);
+            ui.showLine();
             break;
         case DEADLINE:
             userInputList.remove(0);
@@ -112,8 +116,9 @@ public class BobbyBot {
             }
             description = userInputArgs[0];
             String at = userInputArgs[1];
-
-            createEvent(description, at);
+            ui.showLine();
+            tasks.createEvent(description, at);
+            ui.showLine();
             break;
         }
         try {
@@ -124,49 +129,9 @@ public class BobbyBot {
     }
 
 
-    /**
-     * Delete a task
-     * @param taskNo Task Number (starting from index 1)
-     */
-    private void deleteTask(int taskNo) {
-        if (taskNo > tasks.size() || taskNo < 1) {
-            System.out.println("Cannot find task! Use list command to see available tasks");
-            return;
-        }
-        Task taskToDelete = tasks.getTask(taskNo - 1);
-        ui.showLine();
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + taskToDelete);
-        tasks.remove(taskToDelete);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list." );
-        ui.showLine();
-    }
-    /**
-     * Creates a todo task
-     * @param description description of task
-     */
-    private void createToDo(String description) {
-        Task newToDo = new ToDo(description);
-        tasks.add(newToDo);
-        ui.showLine();
-        System.out.println("Got it. I've added this task:\n  " + newToDo + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.");
-        ui.showLine();
-    }
 
-    /**
-     * Creates an event task
-     * @param description description of task
-     * @param at time period of Event (start-end)
-     */
-    private void createEvent(String description, String at) {
-        Task newEvent = new Event(description, at);
-        tasks.add(newEvent);
-        ui.showLine();
-        System.out.println("Got it. I've added this task:\n  " + newEvent + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.");
-        ui.showLine();
-    }
+
+
 
     /**
      * Creates a deadline task
