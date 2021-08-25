@@ -1,14 +1,14 @@
 /**
  * Represents a processor that can delete a task from the task list. A subclass of the Processor class.
  */
-public class DeleteATaskProcessor extends Processor {
+public class DeleteTaskCommand extends Command {
     /**
      * Constructor of the class `DeleteATaskProcessor`.
      *
      * @param task Task to be deleted.
      */
-    public DeleteATaskProcessor(Task task, Duke duke) {
-        super("delete", duke);
+    public DeleteTaskCommand(Task task) {
+        super("delete");
         this.task = task;
     }
 

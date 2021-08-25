@@ -1,14 +1,14 @@
 /**
  * Represents a processor that can add a task to the task list. A subclass of the Processor class.
  */
-public class AddATaskProcessor extends Processor {
+public class AddTaskCommand extends Command {
     /**
      * Constructor of the class `AddATaskProcessor`.
      *
      * @param task Task to be added.
      */
-    public AddATaskProcessor(Task task, Duke duke) {
-        super("add", duke);
+    public AddTaskCommand(Task task) {
+        super("add");
         this.task = task;
     }
 

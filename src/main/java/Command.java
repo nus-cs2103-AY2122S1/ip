@@ -1,24 +1,21 @@
 /**
  * Represents a processor that can process a command and print out the results.
  */
-public class Processor {
+public class Command {
     /** The command to be processed */
-    protected String command;
+    protected String content;
     /** Message generated */
     protected String message;
     /** Task involved in the command */
     protected Task task;
-    /** Duke program to be processed */
-    protected Duke duke;
 
     /**
      * Constructor of the class `Processor`.
      *
-     * @param command The command received.
+     * @param content The command received.
      */
-    public Processor(String command, Duke duke) {
-        this.command = command;
-        this.duke = duke;
+    public Command(String content) {
+        this.content = content;
     }
 
     /**
@@ -27,7 +24,7 @@ public class Processor {
      * @return Whether the program is still running.
      */
     public boolean process() {
-        this.message = this.command;
+        this.message = this.content;
         return true;
     }
 

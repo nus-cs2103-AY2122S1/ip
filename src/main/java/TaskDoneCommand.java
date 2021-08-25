@@ -1,11 +1,11 @@
 /**
  * Represents a processor that can mark a task as done. A subclass of the Processor class.
  */
-public class TaskDoneProcessor extends Processor {
+public class TaskDoneCommand extends Command {
     /**
      * Constructor of the class `TaskDoneProcessor`.
      */
-    public TaskDoneProcessor(Task task, Duke duke) {
+    public TaskDoneCommand(Task task, Duke duke) {
         super("done", duke);
         this.task = task;
         this.message = "Nice! I've marked this task as done:\n";

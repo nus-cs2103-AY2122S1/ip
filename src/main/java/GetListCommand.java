@@ -3,11 +3,11 @@ import java.util.ArrayList;
 /**
  * Represents a processor that can retrieve the task list. A subclass of the Processor class.
  */
-public class GetListProcessor extends Processor {
+public class GetListCommand extends Command {
     /**
      * Constructor of the class `GetListProcessor`.
      */
-    public GetListProcessor(Duke duke) {
+    public GetListCommand(Duke duke) {
         super("list", duke);
         this.message = "Here are the tasks in your list:\n";
     }
