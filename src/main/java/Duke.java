@@ -19,14 +19,24 @@ public class Duke {
         duke.run();
     }
 
-    public void run() {
+    UserInterface ui;
+    DateTimeFormatter dtformatter;
+    Storage storage;
+    TaskList taskList;
+    Parser parser;
+
+    public Duke() {
         UserInterface ui = new UserInterface();
-        ui.displayGreeting();
         DateTimeFormatter dtformatter = DateTimeFormatter.ISO_DATE;
         String home = System.getProperty("user.home");
         Path dukePath = Paths.get(home, "Documents", "duke", "data.csv");
         Storage storage = new Storage(dukePath);
         TaskList taskList = storage.load(ui);
+        Parser parser = new Parser(this);
+    }
+
+    public void run() {
+        ui.displayGreeting();
         while (true){
             String command = ui.getResponse();
             if ("bye".equals(command)){
