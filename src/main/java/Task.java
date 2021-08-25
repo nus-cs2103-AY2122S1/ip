@@ -8,6 +8,8 @@ public class Task {
         this.message = message;
         }
 
+    public Task (String message, boolean b) {}
+
     public String get_type() {
         return this.type;
     }
@@ -17,6 +19,9 @@ public class Task {
     }
 
     public void set_task() {
+    }
+
+    public void set_task2() {
     }
 
     public String get_task() {

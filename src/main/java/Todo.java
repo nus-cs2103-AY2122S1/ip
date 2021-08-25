@@ -11,6 +11,13 @@ public class Todo extends Task{
         this.set_type();
     }
 
+    public Todo (String message, Boolean b) {
+        super(message);
+        this.set_date_time();
+        this.set_task();
+        this.set_type();
+    }
+
     @Override
     public String get_type() {
         return this.type;
