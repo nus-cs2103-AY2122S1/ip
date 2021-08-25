@@ -61,8 +61,17 @@ public class TaskList {
      * 
      * @param desiredDate The date used to find tasks.
      */
-    public void findTasks(LocalDate desiredDate) {
-        ui.showFind(list, list.size(), desiredDate);
+    public void findTasksByDate(LocalDate desiredDate) {
+        ui.showDateFind(list, list.size(), desiredDate);
+    }
+
+    /**
+     * Instructs the Ui to display a list of tasks that contain the given keyword.
+     *
+     * @param keyword The keyword to look for in task names.
+     */
+    public void findTasksByKeyword(String keyword) {
+        ui.showKeywordFind(list, list.size(), keyword);
     }
 
     /**

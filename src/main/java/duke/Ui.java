@@ -13,23 +13,23 @@ public class Ui {
      * Displays the Duke welcome message.
      */
     public void showWelcome() {
-        System.out.println("  ______________________________________________________________");
+        showOpenLine();
         System.out.print("  Hello! I'm Duke.\n  What's up?\n");
-        System.out.println("  ______________________________________________________________\n");
+        showCloseLine();
     }
 
     /**
      * Displays a line to represent the top of the Duke message box.
      */
     public void showOpenLine() {
-        System.out.println("  ______________________________________________________________");
+        System.out.println("  __________________________________________________________________");
     }
 
     /**
      * Displays a line to represent the bottom of the Duke message box.
      */
     public void showCloseLine() {
-        System.out.println("  ______________________________________________________________\n");
+        System.out.println("  __________________________________________________________________\n");
     }
 
     /**
@@ -92,16 +92,33 @@ public class Ui {
 
     /**
      * Displays a list of tasks in the current task list that takes place on the given date.
-     * 
+     *
      * @param taskList The task list.
      * @param listLength The length of the current task list.
      * @param desiredDate The date used to find tasks.
      */
-    public void showFind(ArrayList<Task> taskList, int listLength, LocalDate desiredDate) {
+    public void showDateFind(ArrayList<Task> taskList, int listLength, LocalDate desiredDate) {
         System.out.println("  Here are the tasks for the given day:");
         for (int i = 0; i < listLength; ++i) {
             Task currTask = taskList.get(i);
             if (currTask.isTodayTask(desiredDate)) {
+                System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
+            }
+        }
+    }
+
+    /**
+     * Displays a list of tasks in the current task list that contain the given keyword.
+     *
+     * @param taskList The task list.
+     * @param listLength The length of the current task list.
+     * @param keyword The keyword to look for in the task names.
+     */
+    public void showKeywordFind(ArrayList<Task> taskList, int listLength, String keyword) {
+        System.out.println("  Here are the tasks with the given keyword:");
+        for (int i = 0; i < listLength; ++i) {
+            Task currTask = taskList.get(i);
+            if (currTask.containsKeyword(keyword)) {
                 System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
             }
         }

@@ -22,11 +22,11 @@ public class DukeException extends Exception {
                     + "  Check out duke.txt for any erroneous entries or incorrect formatting.";
             break;
         case INVALID_DATETIME:
-            customMessage = "  OOPS!!! The deadline you provided is not in a correct format!\n"
+            customMessage = "  OOPS!!! The date you provided is not in a correct format!\n"
                     + "  The required format is yyyy-mm-dd or yyyy-mm-dd hh:mm.";
             break;
         case INVALID_FIND:
-            customMessage = "  OOPS!!! You need to specify a date!";
+            customMessage = "  OOPS!!! You need to specify a keyword or date!";
             break;
         case INVALID_INPUT:
             customMessage = "  OOPS!!! I don't recognise the command you've given me.";
@@ -42,7 +42,7 @@ public class DukeException extends Exception {
             customMessage = "  OOPS!!! That is not a valid task index!";
             break;
         case MISSING_DEADLINE_DATETIME:
-            customMessage = "  OOPS!!! The time of a deadline cannot be empty!";
+            customMessage = "  OOPS!!! The time of a deadline cannot be empty!\n  Remember to use the /by keyword.";
             break;
         case MISSING_DEADLINE_DESC:
             customMessage = "  OOPS!!! The description of a deadline cannot be empty!";
@@ -51,7 +51,13 @@ public class DukeException extends Exception {
             customMessage = "  OOPS!!! The description of an event cannot be empty!";
             break;
         case MISSING_EVENT_PERIOD:
-            customMessage = "  OOPS!!! The period of an event cannot be empty!";
+            customMessage = "  OOPS!!! The period of an event cannot be empty!\n  Remember to use the /at keyword.";
+            break;
+        case MISSING_FIND_DATE:
+            customMessage = "  OOPS!!! You need to specify a date!";
+            break;
+        case MISSING_FIND_KEYWORD:
+            customMessage = "  OOPS!!! You need to specify a keyword!";
             break;
         case MISSING_TODO_DESC:
             customMessage = "  OOPS!!! The description of a todo cannot be empty!";

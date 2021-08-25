@@ -5,7 +5,8 @@ import command.ByeCommand;
 import command.Command;
 import command.DoneCommand;
 import command.DeleteCommand;
-import command.FindCommand;
+import command.FindDateCommand;
+import command.FindKeywordCommand;
 import command.ListCommand;
 
 import exception.DukeException;
@@ -29,7 +30,6 @@ public class Parser {
      * @throws DukeException If the parser encounters an invalid command.
      */
     public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
-        
         // Find case based on first word of command
         switch (fullCommand.split("\\s+")[0]) {
         
@@ -69,16 +69,32 @@ public class Parser {
             
         // "find" command given
         case "find":
-            if (fullCommand.split("\\s+").length == 1) {
-                throw new DukeException(DukeExceptionType.INVALID_FIND);
+            String[] parsedCommand = fullCommand.split("\\s+");
+            if (parsedCommand.length == 1) {
+                throw new DukeException(DukeExceptionType.INVALID_FIND); 
             } else {
-                LocalDate desiredDate = LocalDate.parse(fullCommand.split("\\s+")[1]);
-                return new FindCommand(desiredDate);
+                if (parsedCommand[1].contains("/date")) {
+                    if (parsedCommand.length == 2) {
+                        throw new DukeException(DukeExceptionType.MISSING_FIND_DATE);
+                    } else {
+                        LocalDate desiredDate = LocalDate.parse(parsedCommand[2]); 
+                        return new FindDateCommand(desiredDate);
+                    }
+                } else if (parsedCommand[1].contains("/keyword")) {
+                    if (parsedCommand.length == 2) {
+                        throw new DukeException(DukeExceptionType.MISSING_FIND_KEYWORD);
+                    } else {
+                        String keyword = parsedCommand[2];
+                        return new FindKeywordCommand(keyword);
+                    }
+                } else {
+                    throw new DukeException(DukeExceptionType.INVALID_FIND); 
+                }
+                
             }
             
         // Task command given
         default:
-            
             // Incomplete or invalid command
             if (fullCommand.split("\\s+").length == 1) { 
                 switch (fullCommand) {
