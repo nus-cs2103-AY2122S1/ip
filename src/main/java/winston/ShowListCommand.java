@@ -8,6 +8,6 @@ public class ShowListCommand extends Command {
     @Override
     public void run() {
         Ui.printList(taskList);
-        Ui.printTasksLeft(taskList.size());
+        Ui.printTasksLeft(taskList.completedTasks());
     }
 }
