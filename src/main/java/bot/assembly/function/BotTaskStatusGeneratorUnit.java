@@ -1,3 +1,11 @@
+package bot.assembly.function;
+
+import bot.assembly.memory.BotStaticMemoryUnit;
+import bot.assembly.memory.BotDynamicMemoryUnit;
+import bot.assembly.error.*;
+
+import bot.assembly.task.Task;
+
 import java.util.List;
 
 public class BotTaskStatusGeneratorUnit {

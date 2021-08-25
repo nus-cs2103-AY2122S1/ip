@@ -1,3 +1,5 @@
+package bot.assembly.function;
+
 public class BotPrinter {
 
     private final String HORIZONTAL_LINE =
@@ -6,7 +8,7 @@ public class BotPrinter {
                     "\t'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `";
 
     // Constructor
-    BotPrinter(){}
+    public BotPrinter(){}
 
     /**
      * prints each input message within the two horizontal divider
