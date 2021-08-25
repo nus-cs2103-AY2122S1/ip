@@ -28,7 +28,6 @@ public class Ui {
         System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + task);
         System.out.println("Now you have " + tasks.size() + (tasks.size() == 1 ? " task." : " tasks.")
                 + "\n");
-
     }
 
     public void showList(TaskList tasks) {
