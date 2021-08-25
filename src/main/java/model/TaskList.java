@@ -7,6 +7,8 @@ import model.task.Task;
 import model.task.ToDo;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TaskList {
     private final ArrayList<Task> storage;
@@ -42,6 +44,11 @@ public class TaskList {
         }
         index -= 1;
         return storage.remove(id);
+    }
+
+    public Task[] findByName(String name) {
+        System.out.println("World" + name + "Hello");
+        return storage.stream().filter(x -> x.toString().contains(name)).toArray(Task[]::new);
     }
 
     public int numTasks() {

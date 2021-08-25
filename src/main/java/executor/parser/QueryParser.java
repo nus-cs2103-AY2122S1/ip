@@ -6,7 +6,7 @@ import java.util.Set;
 public class QueryParser {
     private static final Set<String> taskCreation = Set.of("todo", "event", "deadline");
     private static final Set<String> taskMarking = Set.of("done", "delete");
-    private static final Set<String> basicCommand = Set.of("list", "bye");
+    private static final Set<String> basicCommand = Set.of("list", "find", "bye");
 
     BasicCommandParser basicCommandParser = new BasicCommandParser();
     CreationCommandParser taskCreationParser = new CreationCommandParser();
@@ -16,7 +16,7 @@ public class QueryParser {
         String[] queryArr = query.split("\\s");
         String command = queryArr[0];
         if (basicCommand.contains(command)) {
-            return basicCommandParser.parse(command, new String[0]);
+            return basicCommandParser.parse(command, queryArr);
         } else if (taskMarking.contains(command)){
             return taskMarkingParser.parse(command, queryArr);
         } else if (taskCreation.contains(command)) {
