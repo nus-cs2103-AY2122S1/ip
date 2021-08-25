@@ -16,12 +16,17 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Parser {
+/**
+ * Parser class which handles the processing of the inputs detected
+ * by the User Interface.
+ */
 
+public class Parser {
     /**
-     * This method parses the input from the user.
+     * Parses the input from the user.
      *
      * @param input The input inserted by the user.
+     * @return The respective commands to be executed based on the input.
      * @throws DukeException This exception is thrown when the input is invalid.
      */
     public static Command parse(String input) throws DukeException {

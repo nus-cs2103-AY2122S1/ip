@@ -4,9 +4,10 @@ import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * UI class which handles all the interactions with the user.
+ */
 public class UI {
-
-    public UI(){};
 
     private static String logo = " ____        _ _\n"
             + "|  _ \\ _   _(_|_)\n"
@@ -15,7 +16,7 @@ public class UI {
             + "|____/ \\__,_|_|_|\n";
 
     /**
-     * This method prints the greetings to the user's terminal.
+     * Prints the welcome message to the user's terminal.
      */
     public void greet(User user) {
         System.out.println(logo);
@@ -23,33 +24,56 @@ public class UI {
         System.out.println("What do you need help with?");
     }
 
+    /**
+     * Prints the error message which has occurred during loading of file.
+     */
     public void showLoadingError() {
         System.out.println("Error starting up Duii.");
     }
 
+    /**
+     * Gets the input passed in by the user.
+     *
+     * @return The input keyed in by the user.
+     */
     public String readCommand(Scanner sc) {
         return sc.nextLine().toLowerCase();
     }
 
+    /**
+     * Prints the seperating line to the terminal.
+     */
     public void showLine() {
         System.out.println("___________________");
     }
 
+    /**
+     * Prints the error message from the thrown exception.
+     */
     public void showError(String error) {
         System.out.println(error);
     }
 
+    /**
+     * Alerts the user that a task has been marked as done.
+     */
     public void notifyDone(Task doneTask) {
         System.out.println("You've finished the task? Good job!");
         System.out.println("This task has been marked as done:");
         System.out.println(doneTask.displayInfo());
     }
 
+    /**
+     * Alerts the user that a task has been deleted.
+     */
     public void notifyDelete(Task removedTask) {
         System.out.println("Okay! Removing the task:");
         System.out.println(removedTask.displayInfo());
     }
 
+    /**
+     * Displays the list of tasks in the current active session.
+     */
     public void notifyList(ArrayList<Task> taskArrList) {
         int listLength = taskArrList.size();
         System.out.println("Here's your current list:");
@@ -58,6 +82,9 @@ public class UI {
         }
     }
 
+    /**
+     * Alerts the user that a task has been added.
+     */
     public void notifyAdd(ArrayList<Task> taskArrList) {
         int listLength = taskArrList.size();
         Task newTask = taskArrList.get(listLength - 1);
@@ -66,6 +93,10 @@ public class UI {
         System.out.println(String.format("Now you have %d task(s) in the list.", listLength));
     }
 
+    /**
+     * Shows the tasks recorded from the previous session.
+     * If the user is a new user, nothing is printed to the terminal.
+     */
     public void printPrevSession(TaskList tasks, User user) {
         if (!user.isNewUser()) {
             ArrayList<Task> taskArrList = tasks.getAllTasks();
@@ -85,7 +116,7 @@ public class UI {
     }
 
     /**
-     * This method prints the exit message to the user's terminal.
+     * Prints the exit message to the user's terminal.
      */
     public void exit() {
         System.out.println("You're going already? Hope to see you again soon!");

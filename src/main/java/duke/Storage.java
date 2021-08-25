@@ -15,14 +15,28 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Storage class handles the reading and writing of data
+ * from the local file system.
+ */
 public class Storage {
     private DateTimeFormatter dateTimeFormat;
     private File file;
 
+    /**
+     * Public constructor to initialise the storage for the Duii Bot.
+     */
     public Storage() {
         this.dateTimeFormat = DateTimeFormatter.ofPattern("yyyy MMM dd HH:mm");
     }
 
+    /**
+     * Searches the current file system for existing saved files.
+     * Creates a new data directory consisting of the text file to write
+     * into if saved file does not exist.
+     *
+     * @return The abstract representation of the pathname of the created file
+     */
     public File getfiles() {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "ip","data");
@@ -47,6 +61,14 @@ public class Storage {
         return file;
     }
 
+    /**
+     * Writes the saved tasks from previous sessions (if any) into
+     * the local TaskList object.
+     *
+     * @return An ArrayList initialised with the previously saved tasks.
+     * @throws DukeException If an IOException occurs upon reading of file, which is passed on to
+     *                       the main() method of Duke class.
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             file = this.getfiles();
@@ -83,6 +105,13 @@ public class Storage {
 
     }
 
+    /**
+     * Writes the tasks of the current session into the dynamically created file
+     * on the local filesystem.
+     *
+     * @throws DukeException If an IOException occurs during writing of file, which
+     *                       is passed on to the main() method of Duke class.
+     */
     public void save(TaskList list) throws DukeException {
         try {
             FileWriter writer = new FileWriter(file, false);

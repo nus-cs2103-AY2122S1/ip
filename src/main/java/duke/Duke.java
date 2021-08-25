@@ -4,6 +4,9 @@ import java.util.Scanner;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+/**
+ * Main class of project.
+ */
 public class Duke {
     private Storage storage;
     private UI userInt;
@@ -11,7 +14,13 @@ public class Duke {
     private User user;
     private static Scanner sc = new Scanner(System.in);
 
-    public Duke(User user) {
+    /**
+     * Constructor of Duke instance, which initalises the other
+     * components of the project.
+     *
+     * @param user User object which encapsulates the users' name and visit history
+     */
+    private Duke(User user) {
         this.user = user;
         this.storage = new Storage();
         this.userInt = new UI();
@@ -23,7 +32,11 @@ public class Duke {
         }
     }
 
-    public void run() {
+    /**
+     * Main method which starts up the Duii Bot,
+     * parsing input and executing the respective behaviours.
+     */
+    private void run() {
         userInt.greet(this.user);
         userInt.printPrevSession(this.tasks, this.user);
         userInt.showLine();
@@ -43,10 +56,18 @@ public class Duke {
         System.out.println("Session Terminated.");
     }
 
+    /**
+     * Fully terminates the bot to prevent any inputs from any user.
+     */
     public static void shutdown() {
         Duke.sc.close();
     }
 
+    /**
+     * Main method of the project.
+     *
+     * @param args Command Line arguments.
+     */
     public static void main(String[] args) {
         Duke user1 = new Duke(new User("User 1"));
         user1.run();
