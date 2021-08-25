@@ -1,10 +1,7 @@
 public class Event extends Task {
 
-    protected String at;
-
     public Event(String description, String at) {
-        super(description);
-        this.at = at;
+        super(description, at);
     }
 
     public String save() {
@@ -13,6 +10,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + at + ")";
+        return "[E]" + super.toString() + " (at:" + super.time.format(TIME_FORMAT) + ")";
     }
 }
