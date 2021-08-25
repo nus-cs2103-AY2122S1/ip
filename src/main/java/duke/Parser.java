@@ -9,7 +9,7 @@ public class Parser {
     TaskList tasks;
 
     enum Activity {
-        TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL
+        TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL, FIND
     }
 
     public Parser (String command, Ui ui, Storage storage, TaskList tasks) {
@@ -23,7 +23,7 @@ public class Parser {
         return !storage.isExit();
     }
 
-    public void parseCommand() throws DukeException, DeleteException, IOException {
+    public void parseCommand() throws DukeException, DeleteException, IOException, FindException {
 
         Activity activity;
         if (command.equals("bye")) {
@@ -47,6 +47,8 @@ public class Parser {
         } else if (command.startsWith("delete")){
             activity = Activity.DELETE;
 
+        } else if (command.startsWith("find")) {
+            activity = Activity.FIND;
         } else {
             activity = Activity.NORMAL;
         }
@@ -123,6 +125,26 @@ public class Parser {
                 tasks.add(deadline);
                 ui.showTaskMessage(deadline, tasks);
                 storage.save(tasks);
+                break;
+            }
+            case FIND: {
+                TaskList matchingTasks = new TaskList();
+                String desc = command.substring(4);
+
+                if (desc.isEmpty()) {
+                    throw new FindException();
+                }
+
+                for (Task t : tasks) {
+                    if (t.toString().contains(desc)) {
+                        matchingTasks.add(t);
+                    }
+                }
+                if (matchingTasks.isEmpty()) {
+                    ui.showNothingFoundMessage();
+                } else {
+                    ui.showListMessage("matching", matchingTasks);
+                }
                 break;
             }
             default: {

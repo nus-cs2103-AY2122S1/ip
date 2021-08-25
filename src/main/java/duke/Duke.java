@@ -15,7 +15,7 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
+            ui.showLoadingErrorMessage();
             tasks = new TaskList();
         }
     }
@@ -33,8 +33,8 @@ public class Duke {
             try {
                 Parser p = new Parser(sc.nextLine(), ui, storage, tasks);
                 p.parseCommand();
-            } catch (DeleteException | DukeException | IOException e) {
-                e.getMessage();
+            } catch (DeleteException | DukeException | IOException | FindException e) {
+                System.out.format(e.getMessage());
             }
         }
     }
