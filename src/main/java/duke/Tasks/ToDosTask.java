@@ -7,10 +7,27 @@ package duke.Tasks;
 
 public class ToDosTask extends BaseTask {
 
+    /**
+     * Constructor for creating a new To Do Task.
+     *
+     * @param taskName the name or description of the task.
+     */
     public ToDosTask(String taskName) {
-        super(taskName);
+        super(taskName, false);
     }
 
+
+    /**
+     * Constructor for directly creating and setting all attributes of a To Do Task,
+     * for example when loading it from a Save File.
+     *
+     * @param taskName the name or description of the task.
+     * @param isCompleted whether the task is already completed.
+     */
+    public ToDosTask(String taskName, boolean isCompleted) {
+        super(taskName, isCompleted);
+
+    }
 
     /**
      * Gets the type of the Task in enum form.
