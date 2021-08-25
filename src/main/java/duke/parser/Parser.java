@@ -9,6 +9,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates the processing of user inputs to duke.
+ *
+ * @author Zhi Bin
+ * @version Duke Level 8
+ */
 public class Parser {
     private TaskList list;
     private Storage storage;
