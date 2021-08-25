@@ -9,7 +9,7 @@ public class DukeException extends Exception {
             this.dukeError = "☹ OOPS!!! The description of a todo cannot be empty.";
         }
 
-        if (errorCommand.equals("unknown duke.command")) {
+        if (errorCommand.equals("unknown duke command")) {
             this.dukeError = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
 

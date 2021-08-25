@@ -19,6 +19,11 @@ public class Task {
         return String.format("%b,%s", this.isDone,this.description);
     }
 
+    /**
+     * Returns the string representation of a Task.
+     *
+     * @return String representing a task
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
