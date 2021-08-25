@@ -10,13 +10,23 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * This class deals with making sense of the user command.
+ */
 public class Parser {
 
     private final String input;
+
+    /** A list of all valid commands recognised */
     enum Commands {
         BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND
     }
 
+    /**
+     * Public constructor to parse a user's input.
+     *
+     * @param input The whole command given by the user.
+     */
     public Parser(String input) {
         this.input = input;
     }
@@ -40,6 +50,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Executes a command given by the user.
+     *
+     * @param tasks The current list of tasks.
+     * @param ui The current user interface.
+     * @param storage The storage to store/load data from.
+     * @return A boolean value signifying if there are any more commands to execute after this command.
+     */
     public boolean execute(TaskList tasks, Ui ui, Storage storage) {
         if (input.equals(Commands.BYE.toString().toLowerCase())) {
             byeCommand(ui);
@@ -62,7 +80,7 @@ public class Parser {
             } else if (input.startsWith(Commands.EVENT.toString().toLowerCase())) {
                 t = eventCommand();
             } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
             tasks.addTask(t, ui);
         }
@@ -117,7 +135,7 @@ public class Parser {
     public Todo todoCommand() throws DukeException {
         String description = input.substring("todo".length()).trim();
         if (description.isEmpty()) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty :-(");
+            throw new DukeException("The description of a todo cannot be empty :-(");
         }
         return new Todo(description);
     }

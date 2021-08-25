@@ -13,13 +13,28 @@ import duke.task.*;
 import static duke.parser.Parser.dateFormatter;
 import static duke.parser.Parser.timeFormatter;
 
+/**
+ * Encapsulates the loading of tasks from the file and the saving of tasks to the file
+ */
 public class Storage {
 
     private final String filePath;
+
+    /**
+     * Public constructor to initialize a Storage object with the path of the file to be saved to and loaded from.
+     *
+     * @param filePath Path of the file to be saved to and loaded from.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the list of tasks from the file given in filePath.
+     *
+     * @return A list of tasks from the file.
+     * @throws DukeException Throws exception if the file could not be found.
+     */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(filePath);
         ArrayList<Task> list = new ArrayList<>();
@@ -50,6 +65,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves the current list of tasks to the file given in filePath.
+     *
+     * @param tasks A list of tasks to be saved to the file.
+     * @throws IOException Throws exception if the file could not be opened.
+     */
     public void saveToDisk(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < tasks.numberOfTasks(); i++) {

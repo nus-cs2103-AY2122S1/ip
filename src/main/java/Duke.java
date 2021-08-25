@@ -3,12 +3,18 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.exceptions.DukeException;
 
+/** This is the main class for the program. */
 public class Duke {
     private TaskList tasks;
     private final Storage storage;
     private static final String FILE_PATH = "data.txt";
     private final Ui ui;
 
+    /**
+     * Construct an instance of Duke program.
+     *
+     * @param filePath The path of the file to load saved data from.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,7 +28,7 @@ public class Duke {
 
 
 
-    /** Start of the program */
+    /** Start of the program. */
     public void run() {
         ui.welcomeMessage();
         boolean isExit = false;
