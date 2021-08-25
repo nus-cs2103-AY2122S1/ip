@@ -18,13 +18,26 @@ public class Deadline extends Task {
 
     }
 
-    private Deadline(String description, String by) {
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
+    public Deadline(String description, String by) {
         super(description);
         this.by = by;
     }
 
+    private String identifier() {
+        return "D";
+    }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by:" + by + ")";
+        return "[" + identifier() + "]" + super.toString() + " (by:" + by + ")";
+    }
+
+    public String formatForStorage() {
+        return identifier() + STORAGE_DELIMITER + super.formatForStorage() + STORAGE_DELIMITER + by;
     }
 }

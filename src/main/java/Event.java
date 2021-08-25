@@ -17,13 +17,26 @@ public class Event extends Task{
         }
     }
 
-    private Event(String description, String at) {
+    public Event(String description, boolean isDone, String at) {
+        super(description, isDone);
+        this.at = at;
+    }
+
+    public Event(String description, String at) {
         super(description);
         this.at = at;
     }
 
+    private String identifier() {
+        return "E";
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + at + ")";
+        return "[" + identifier() + "]" + super.toString() + " (at:" + at + ")";
+    }
+
+    public String formatForStorage() {
+        return identifier() + STORAGE_DELIMITER + super.formatForStorage() + STORAGE_DELIMITER + at;
     }
 }

@@ -9,12 +9,24 @@ public class Todo extends Task {
                 "todo [description]");
         }
     }
-    private Todo(String description) {
+
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+    public Todo(String description) {
         super(description);
+    }
+
+    private String identifier() {
+        return "T";
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + identifier() + "]" + super.toString();
+    }
+
+    public String formatForStorage() {
+        return identifier() + STORAGE_DELIMITER + super.formatForStorage();
     }
 }

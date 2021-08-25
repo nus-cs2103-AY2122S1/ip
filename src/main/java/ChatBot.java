@@ -11,7 +11,7 @@ public class ChatBot {
     public ChatBot() {
         this.isRunning = true;
         this.inputHandler = new InputHandler();
-        this.taskList = new TaskList();
+        this.taskList = new TaskList(Storage.loadTasks());
     }
 
     public void start() {
@@ -24,6 +24,7 @@ public class ChatBot {
                 display(e.getMessage());
             }
         }
+        Storage.saveTasks(taskList.save());
     }
 
     private void respond(String userInput) throws UnsupportedCommandException, MalformedCommandException {
