@@ -32,6 +32,7 @@ public class Event extends DateDependentTask {
      *
      * @return String abbreviation of task.
      */
+    @Override
     public String getShortForm() {
         return "E";
     }
