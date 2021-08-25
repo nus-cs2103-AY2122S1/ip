@@ -15,12 +15,13 @@ public class Ui {
         dukePrint("Hello! I'm Duke.\n" + "What can I do for you?");
     }
 
+
     /**
      * Prints message with dividers and indentation.
      *
      * @param str message to be printed
      */
-     public static void dukePrint(String str) {
+    public static void dukePrint(String str) {
         Scanner scanner = new Scanner(str);
         System.out.print(divider);
         while (scanner.hasNextLine()) {
@@ -39,9 +40,10 @@ public class Ui {
 
     /**
      * Prints Error message for Duke.
+     *
      * @param errorMessage Error Message to be printed
      */
     public void printError(String errorMessage) {
-        dukePrint( "☹ OOPS!!! " + errorMessage);
+        dukePrint("☹ OOPS!!! " + errorMessage);
     }
 }
