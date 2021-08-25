@@ -23,17 +23,13 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    public ArrayList<Task> getAllTasks(){
-        return this.tasks;
-    }
-
     public void GetSpecificDateEvent(String time){
         Parser p = new Parser("");
         int count = 0;//count the number of the events happen on the time.
 
         for (int i = 0; i < tasks.size(); i++) {
-            String Message = tasks.get(i).PrintTaskInfo();
-            String UnParsedInfo = tasks.get(i).GetTime();
+            String Message = tasks.get(i).getTaskInfo();
+            String UnParsedInfo = tasks.get(i).getTime();
             String timeInFormat =(p.ParseTime(time) != null)?
                     p.ParseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
                     :"Nope";

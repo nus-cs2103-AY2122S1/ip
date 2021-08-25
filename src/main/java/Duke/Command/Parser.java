@@ -109,7 +109,7 @@ public class Parser {
         String time;
 
         char taskType = Message.charAt(0);
-        if (taskType == 'D' || taskType == 'E') {
+        if ((taskType == 'D' || taskType == 'E') && Message.contains("/")) {
             time = Message.substring(Message.lastIndexOf("|") + 2);
         } else {
             time = "";

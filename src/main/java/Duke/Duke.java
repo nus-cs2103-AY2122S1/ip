@@ -37,7 +37,7 @@ public class Duke {
         case "done": {
             try {
                 tasks.MarkDone(index);
-                ui.MarkDone(tasks.get(index).PrintTaskInfo());
+                ui.MarkDone(tasks.get(index).getTaskInfo());
             } catch (DukeException e){
                 e.PrintErrorMessage();
                 }
@@ -46,7 +46,7 @@ public class Duke {
         case "delete":{
             try {
                 tasks.Delete(index);
-                ui.Delete(tasks.get(index).PrintTaskInfo(), tasks.size());
+                ui.Delete(tasks.get(index).getTaskInfo(), tasks.size());
             } catch (DukeException e){
                 e.PrintErrorMessage();
             }
@@ -60,7 +60,7 @@ public class Duke {
         default:{
             try {
                 tasks.add(taskType, task, time);
-                ui.add(tasks.get(tasks.size() -1).PrintTaskInfo(), tasks.size());
+                ui.add(tasks.get(tasks.size() -1).getTaskInfo(), tasks.size());
             } catch (DukeException e)
             {
                 e.PrintErrorMessage();

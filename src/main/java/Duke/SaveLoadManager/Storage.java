@@ -26,7 +26,7 @@ public class Storage {
         try {
             ReadDataFromFile();
         } catch (FileNotFoundException e){
-            System.out.println("Cannot Read From Data.");
+            throw new DukeException("Cannot Read From Data.");
         }
 
         return this.list;
@@ -49,7 +49,7 @@ public class Storage {
     public void SaveListDataToFile(TaskList Tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (int i = 0; i < Tasks.size(); i++) {
-            fw.write( Tasks.get(i).GetDataInfo()+ "\n");
+            fw.write( Tasks.get(i).getSaveDataInfo()+ "\n");
         }
         fw.close();
     }

@@ -11,4 +11,9 @@ public class DukeException extends Exception {
     public void PrintErrorMessage(){
         System.out.println(this.ErrorMessage);
     }
+
+    @Override
+    public String getMessage() {
+        return this.ErrorMessage;
+    }
 }
