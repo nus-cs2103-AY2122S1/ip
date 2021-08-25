@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * The DukeException class encapsulates exceptions specific to Duke.
  */

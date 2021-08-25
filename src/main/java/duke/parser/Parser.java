@@ -1,3 +1,15 @@
+package duke.parser;
+
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ErrorCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+
 /**
  * The Parser class encapsulates the dealing of user commands by Duke.
  */
@@ -7,7 +19,7 @@ public class Parser {
      * @param fullCommand The full command input by the user.
      * @return The corresponding type of executable command from the user input.
      */
-    public static Command parse(String fullCommand) {
+    public Command parse(String fullCommand) {
         Command command = null;
         String[] commandSplit = fullCommand.split(" ", 2);
 

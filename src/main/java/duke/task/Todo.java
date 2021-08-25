@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * The To-do class encapsulates a Todo task.
  */

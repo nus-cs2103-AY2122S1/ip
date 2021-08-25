@@ -1,7 +1,13 @@
+package duke.command;
+
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 /**
- * The DoneCommand class encapsulates an unrecognised command from the user.
+ * The ListCommand class encapsulates the execution of the list command from the user.
  */
-public class ErrorCommand extends Command {
+public class ListCommand extends Command {
     /**
      * Executes the response to the delete command from the user.
      * @param storage The storage Duke uses to save and load the tasklist from.
@@ -10,6 +16,6 @@ public class ErrorCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) {
-        ui.showUnrecognised();
+        ui.showList(taskList);
     }
 }

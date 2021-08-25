@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 import java.io.IOException;
 
 /**
@@ -15,6 +24,8 @@ public class Duke {
 
     /** The Ui for Duke to deal with all the interactions with the user. */
     private Ui ui;
+
+    /** The parser for Duke to handle
 
 
     /**
@@ -41,7 +52,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
-                Command c = Parser.parse(fullCommand);
+                Command c = new Parser().parse(fullCommand);
                 c.execute(storage, taskList, ui);
                 isExit = c.isExit();
             } catch (DukeException | IOException e) {
