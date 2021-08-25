@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * A representation of task with description and status
  *

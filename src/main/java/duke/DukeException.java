@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * This is the parent for all Exceptions that can be thrown
  * when interacting with a Duke

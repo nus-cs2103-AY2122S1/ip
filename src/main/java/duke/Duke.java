@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Duke(Hiko created by me) is a personal assistant.
  *
