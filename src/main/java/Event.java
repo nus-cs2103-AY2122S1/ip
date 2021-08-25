@@ -1,16 +1,13 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Event extends Task{
-    private LocalDate eventDatetime;
+    private final DateTime eventDatetime;
     private static final String EVENT_DELIMITER = "/at";
     private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command. Use 'event <text> /at <datetime>'";
     private static final String MISSING_EVENT_MESSAGE = "Some arguments are missing. Use 'event <text> /at <datetime>'";
 
     private Event(String text, String eventDatetime) {
         super(text);
-        this.eventDatetime  = LocalDate.parse(eventDatetime);
+        this.eventDatetime = new DateTime(eventDatetime);
     }
 
     public static Event newEvent(String input) throws DukeException {
@@ -29,6 +26,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.eventDatetime.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+        return String.format("[E]%s (at: %s)", super.toString(), this.eventDatetime);
     }
 }
