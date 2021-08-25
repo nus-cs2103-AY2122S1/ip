@@ -18,12 +18,6 @@ public class ToDoList {
         this.name = name;
     }
 
-    public void echo(String statement) {
-        System.out.println("========== " + this.name + " ===========");
-        System.out.println(statement + "\n");
-        System.out.println("========== " + this.name + " ===========\n");
-    }
-
     public void displayList() {
         Integer number = 1;
         System.out.println("========== " + this.name + " ===========");

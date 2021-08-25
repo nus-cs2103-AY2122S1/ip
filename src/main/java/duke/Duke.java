@@ -45,10 +45,6 @@ public class Duke {
         return name;
     }
 
-    public boolean isRunning() {
-        return this.isRunning;
-    }
-
     public void stopRunning() {
         this.isRunning = false;
     }
