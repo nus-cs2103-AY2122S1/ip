@@ -171,4 +171,13 @@ public class DukeListMgr {
         currDuke.getCurrStorageMgr().saveCurrentTasks(this.toDoList);
     }
 
+    /**
+     * Loads a new ArrayList of tasks for use with Duke.
+     *
+     * @param loadedTasks the ArrayList of BaseTasks to load.
+     */
+    public void loadTaskList(ArrayList<BaseTask> loadedTasks) {
+        this.toDoList = loadedTasks;
+    }
+
 }
