@@ -3,6 +3,7 @@ package duke;
 import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TaskList {
     private final List<Task> store;
@@ -47,11 +48,23 @@ public class TaskList {
         }
     }
 
+    public TaskList filter(String input) {
+        TaskList taskList = new TaskList();
+        for ( int i = 0; i < this.size() ; i++ ) {
+            Task task = this.store.get(i);
+            String nameOfTask = task.getName();
+            if (nameOfTask.contains(input)) {
+                taskList.addTask(task);
+            }
+        }
+        return taskList;
+    }
+
     @Override()
     public String toString() {
         StringBuilder result = new StringBuilder();
         for (int j = 1; j <= this.size() ; j++) {
-            String line = null;
+            String line = "";
             try {
                 line = j + "." + this.get(j).toString();
             } catch (DukeException e) {

@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.TodoCommand;
+import duke.command.FindCommand;
 
 public class Parser {
 
@@ -39,6 +40,14 @@ public class Parser {
             case EventCommand.COMMAND_WORD:
                 rest = combine(words, words.length);
                 return new EventCommand(taskList, rest).execute();
+            case FindCommand.COMMAND_WORD:
+                if (words.length < 2) {
+                    throw new DukeException("You need to include a search word.");
+                }
+                if (words.length > 2) {
+                    throw new DukeException("You can only include 1 search word.");
+                }
+                return new FindCommand(taskList, words[1]).execute();
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand(taskList).execute();
             default:
