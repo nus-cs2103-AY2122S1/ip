@@ -23,8 +23,8 @@ public class Responses {
         try {
             if (uResponse.equals ("bye")) {
                 Exit.chat();
-            } else if (uResponse.equals("list")) {
-                List.chat();
+            } else if (uResponse.startsWith("list")) {
+                List.chat(uResponse);
             } else if (uResponse.startsWith("done")) {
                 Done.chat(uResponse);
             } else if (uResponse.startsWith("delete")) {
