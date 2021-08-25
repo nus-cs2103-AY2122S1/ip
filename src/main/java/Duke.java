@@ -1,4 +1,6 @@
 import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     private static List<String> taskString = new ArrayList<>();
@@ -60,9 +62,13 @@ public class Duke {
      */
     private static void addSpecificTask(String task) throws DukeException {
         if (task.startsWith("deadline")) {
-            addTask(new Deadline(task));
+            String[] input = task.split(" /by ");
+            LocalDateTime dueTime = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+            addTask(new Deadline(task, dueTime));
         } else if (task.startsWith("event") && task.contains("/at ")) {
-            addTask(new Event(task));
+            String[] input = task.split(" /at ");
+            LocalDateTime startTime = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+            addTask(new Event(task, startTime));
         } else if (task.startsWith("todo")) {
             addTask(new Todo(task));
         }
