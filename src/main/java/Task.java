@@ -11,6 +11,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public String toSaveData() {
+        return (this.isDone ? "1" : "0") + "|" + this.taskName;
+    }
+
     @Override
     public String toString() {
         String statusString = this.isDone ? "X" : " ";

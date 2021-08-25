@@ -7,7 +7,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String toSaveData() {
+        return "E|" + super.toSaveData() + "|" + this.date;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + ")";
+        return "[E]" + super.toString() + " (at: " + this.date + ")";
     }
 }

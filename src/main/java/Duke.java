@@ -3,6 +3,14 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Duke {
     private static final String FORMAT = "\t%s\n";
     private static final String LINE = "______________________________________________________";
@@ -39,19 +47,27 @@ public class Duke {
                     break;
                 case DONE:
                     runDoneCommand(input, tasks);
+                    saveTasksToFile(tasks);
                     break;
                 case TODO:
                 case DEADLINE:
                 case EVENT:
                     runAddTaskCommand(input, command, tasks);
+                    saveTasksToFile(tasks);
                     break;
                 case DELETE:
                     runDeleteCommand(input, tasks);
+                    saveTasksToFile(tasks);
                     break;
                 default:
                     throw new DukeException("You have entered an invalid command.");
                 }
-            } catch (IllegalArgumentException e) {
+            } catch (IOException e) {
+                System.out.printf(FORMAT, LINE);
+                System.out.printf("\tUh-oh! %s\n", "The data failed to save to the save file.");
+                System.out.println(e.getMessage());
+                System.out.printf(FORMAT, LINE);
+            }catch (IllegalArgumentException e) {
                 // When invalid command is given, it is unable to be parsed into the enum
                 System.out.printf(FORMAT, LINE);
                 System.out.printf("\tUh-oh! %s\n", "You have entered an invalid command.");
@@ -109,6 +125,9 @@ public class Duke {
 
     // Abstraction to make main function neater
     private static void runAddTaskCommand(String input, Command command, List<Task> tasks) throws DukeException {
+        if (input.contains("|")) {
+            throw new DukeException("Input contains |, which is an invalid character.");
+        }
         Task task;
         switch (command) {
         case TODO:
@@ -133,7 +152,7 @@ public class Duke {
             break;
         }
 
-        // Common functionality: add task to list, print task and list size
+        // Common functionality: add task to list, print task and list size, save tasks to file
         tasks.add(task);
         System.out.printf(FORMAT, LINE);
         System.out.printf(FORMAT, "Got it. The following task has been added: ");
@@ -165,4 +184,19 @@ public class Duke {
         }
         System.out.printf(FORMAT, LINE);
     }
+
+    // Saves tasks to the file ./data/tasks.txt. Called when list is modified.
+    private static void saveTasksToFile(List<Task> tasks) throws IOException {
+        String curDir = System.getProperty("user.dir");
+        Path path = Paths.get(curDir, "data", "tasks.txt");
+        Files.createDirectories(Paths.get(curDir, "data")); // Create data directory if it does not exist
+        FileWriter fw = new FileWriter(path.toAbsolutePath().toString());
+        StringBuilder saveData = new StringBuilder();
+        for (Task task : tasks) {
+            saveData.append(task.toSaveData()).append(System.lineSeparator());
+        }
+        fw.write(saveData.toString());
+        fw.close();
+    }
+
 }
