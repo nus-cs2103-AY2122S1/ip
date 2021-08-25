@@ -1,6 +1,11 @@
 package bob;
 
-import bob.exception.*;
+import bob.exception.InvalidInputException;
+import bob.exception.NoDeadlineException;
+import bob.exception.NoEventTimingException;
+import bob.exception.NoTaskException;
+import bob.exception.OutOfBoundsException;
+
 import bob.task.Deadline;
 import bob.task.Event;
 import bob.task.Task;
@@ -18,7 +23,7 @@ public class Parser {
 
         while (!Objects.equals(response, "bye")) {
             try {
-                inputChecker(response, tasks);
+                checkInput(response, tasks);
 
                 if (Objects.equals(response, "list")) { //show list of tasks
                     ui.showList(tasks);
@@ -33,11 +38,10 @@ public class Parser {
                     ui.showIndexDeleted(Integer.parseInt(splitResponse[1]) - 1, tasks);
                     storage.updateBobFile(tasks);
                     response = scanner.nextLine();
-                } else if (response.matches("todo(.*)") || response.matches("deadline(.*)") //add a new task
+                } else if (response.matches("todo(.*)") || response.matches("deadline(.*)") //add new task
                         || response.matches("event(.*)")) {
                     String[] splitResponse = response.split(" ", 2);
                     Task newTask;
-
                     if (Objects.equals(splitResponse[0], "todo")) {
                         newTask = new Todo(splitResponse[1]);
                     } else if (Objects.equals(splitResponse[0], "deadline")) {
@@ -47,7 +51,6 @@ public class Parser {
                         String[] splitAgain = splitResponse[1].split(" /at ", 2);
                         newTask = new Event(splitAgain[0], splitAgain[1]);
                     }
-
                     ui.showTaskAdded(newTask, tasks);
                     storage.updateBobFile(tasks);
                     response = scanner.nextLine();
@@ -71,14 +74,14 @@ public class Parser {
         }
     }
 
-    private void inputChecker(String response, TaskList tasklist) throws InvalidInputException, NoTaskException,
+    private void checkInput(String response, TaskList tasklist) throws InvalidInputException, NoTaskException,
             NoDeadlineException, NoEventTimingException, OutOfBoundsException {
         if (Objects.equals(response, "list")) {
-            //correct input checker, do nothing
+            // Correct input checker, do nothing
         } else if (response.matches("done(.*)") || response.matches("delete(.*)")) {
             String[] splitResponse = response.split(" ", 2);
             if (Integer.parseInt(splitResponse[1]) <= 0
-                    || Integer.parseInt(splitResponse[1]) > Integer.parseInt(tasklist.noOfTasks())) {
+                    || Integer.parseInt(splitResponse[1]) > Integer.parseInt(tasklist.getNoOfTasks())) {
                 throw new OutOfBoundsException();
             }
         } else if (response.matches("todo(.*)")) {

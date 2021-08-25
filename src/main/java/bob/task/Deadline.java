@@ -1,9 +1,10 @@
 package bob.task;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 public class Deadline extends Task {
+    /** Deadline date of Deadline */
     private LocalDate deadline;
 
     public Deadline(String description, String deadline) {

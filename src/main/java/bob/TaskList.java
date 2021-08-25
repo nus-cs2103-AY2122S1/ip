@@ -1,9 +1,11 @@
 package bob;
 
 import bob.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
+    /** List of user tasks to keep track of. */
     private ArrayList<Task> taskList;
 
     public TaskList() {
@@ -38,7 +40,7 @@ public class TaskList {
         return selectedTask.printTask();
     }
 
-    public String noOfTasks() {
+    public String getNoOfTasks() {
         return Integer.toString(this.taskList.size());
     }
 

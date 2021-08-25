@@ -1,20 +1,23 @@
 package bob.task;
 
 public class Task {
+    /** Description of user Task */
     private String description;
-    private boolean completed;
+
+    /** Whether the Task has been completed by the user */
+    private boolean isCompleted;
 
     public Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public String getStatusIcon() {
-        return (completed ? "X" : " "); // mark done task with X
+        return (isCompleted ? "X" : " ");
     }
 
     public void markCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     public String printTask() {

@@ -1,9 +1,10 @@
 package bob.task;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 public class Event extends Task {
+    /** Date of event */
     private LocalDate time;
 
     public Event(String description, String time) {
