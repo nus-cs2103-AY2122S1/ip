@@ -19,49 +19,48 @@ public class Duke {
     }
 
     public void OperationForDuke(String taskType, String task, String time, int index) {
-        String date = "";
         switch (taskType) {
-            case "bye": {
-                ui.GoodbyeMessage();
-                break;}
-            case "list": {
-                ui.PrintList(tasks);
-                break;
-            }
-            case "done": {
-                try {
-                    tasks.MarkDone(index);
-                    ui.MarkDone(tasks.get(index).PrintTaskInfo());
-                } catch (DukeException e){
-                    e.PrintErrorMessage();
+        case "bye": {
+            ui.GoodbyeMessage();
+            break;
+        }
+        case "list": {
+            ui.PrintList(tasks);
+            break;
+        }
+        case "done": {
+            try {
+                tasks.MarkDone(index);
+                ui.MarkDone(tasks.get(index).PrintTaskInfo());
+            } catch (DukeException e){
+                e.PrintErrorMessage();
                 }
-                break;
+            break;
+        }
+        case "delete":{
+            try {
+                tasks.Delete(index);
+                ui.Delete(tasks.get(index).PrintTaskInfo(), tasks.size());
+            } catch (DukeException e){
+                e.PrintErrorMessage();
             }
-            case "delete":{
-                try {
-                    tasks.Delete(index);
-                    ui.Delete(tasks.get(index).PrintTaskInfo(), tasks.size());
-                } catch (DukeException e){
-                    e.PrintErrorMessage();
-                }
-                break;
+            break;
+        }
+        case "tell": {
+            ui.getSpecificEventOnTime();
+            tasks.GetSpecificDateEvent(time);
+            break;
+        }
+        default:{
+            try {
+                tasks.add(taskType, task, time);
+                ui.add(tasks.get(tasks.size() -1).PrintTaskInfo(), tasks.size());
+            } catch (DukeException e)
+            {
+                e.PrintErrorMessage();
             }
-/*            case "tell": {
-                date = (Message.contains(" "))? Message.substring(Message.indexOf(" ") + 1)
-                        :"nope";
-                SpecificDateEvent(date);
-                break;
-            }*/
-            default:{
-                try {
-                    tasks.add(taskType, task, time);
-                    ui.add(tasks.get(tasks.size() -1).PrintTaskInfo(), tasks.size());
-                } catch (DukeException e)
-                {
-                    e.PrintErrorMessage();
-                }
-                break;
-            }
+            break;
+        }
         }
     }
 
@@ -75,7 +74,7 @@ public class Duke {
 
     public void run() {
         //Say Hello to the User
-        ArrayList<String> Messages = new ArrayList<>();
+        ArrayList<String> Messages;
         String taskType = "";
         String task = "";
         String time = "";
@@ -110,8 +109,6 @@ public class Duke {
                 break;
             }
         }
-
-
     }
 
     public static void main(String[] args) {

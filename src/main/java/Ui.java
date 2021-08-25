@@ -17,27 +17,6 @@ public class Ui {
         System.out.println(Goodbye_message);
     }
 
-
- /*   public void SpecificDateEvent(String time){
-        int count = 0;//count the number of the events happen on the time.
-        System.out.println("Here are all the tasks taking place on the date you give me:");
-        for (int i = 0; i < list.size(); i++) {
-            String Message = list.get(i).PrintTaskInfo();
-            String UnParsedInfo = list.get(i).GetTime();
-            if (UnParsedInfo != null && (UnParsedInfo.contains(time) || (ParseTime(time)!=null && UnParsedInfo.contains(
-                    ParseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH)))))
-                    ||Message.contains(time) || (ParseTime(time)!=null && Message.contains(
-                    ParseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))))) {
-                count++;
-                System.out.println(i + 1 + "." + Message);
-            }
-        }
-        if (count == 0) {
-            System.out.println("Sorry. There is no event occurred on the time you give me!! :(");
-        }
-    }*/
-
-
     public void PrintList(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
@@ -68,19 +47,19 @@ public class Ui {
         System.out.println(line);
     }
 
+    public void getSpecificEventOnTime() {System.out.println("Here are all the tasks taking place on the date you give me:");}
+
     public String getInput() {
         Scanner scanner = new Scanner(System.in);
-        String Message = scanner.nextLine();
 
-        return Message;
+        return scanner.nextLine();
     }
 
     public ArrayList<String> ARoundOfInput() throws DukeException{
         System.out.println();
         Parser p;
         ArrayList<String> Info = new ArrayList<>();
-        String Message = "";
-        String OperationType = "";
+        String Message;
 
         Message = getInput();
         p = new Parser(Message);

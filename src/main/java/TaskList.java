@@ -1,5 +1,7 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskList {
 
@@ -17,8 +19,26 @@ public class TaskList {
         return this.tasks;
     }
 
-    public void AddToList(Task task) {
-        this.tasks.add(task);
+    public void GetSpecificDateEvent(String time){
+        Parser p = new Parser("");
+        int count = 0;//count the number of the events happen on the time.
+
+        for (int i = 0; i < tasks.size(); i++) {
+            String Message = tasks.get(i).PrintTaskInfo();
+            String UnParsedInfo = tasks.get(i).GetTime();
+            String timeInFormat =(p.ParseTime(time) != null)?
+                    p.ParseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
+                    :"Nope";
+
+            if ((UnParsedInfo != null && (UnParsedInfo.contains(time) || UnParsedInfo.contains(timeInFormat)))
+                            || Message.contains(time) || Message.contains(timeInFormat)) {
+                count++;
+                System.out.println(count + "." + Message);
+            }
+        }
+        if (count == 0) {
+            System.out.println("Sorry. There is no event occurred on the time you give me!! :(");
+        }
     }
 
     public void MarkDone(int index) throws DukeException{

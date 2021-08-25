@@ -155,26 +155,34 @@ public class Parser {
         String time = "";
 
         //throw exceptions for deadline or events' format.
-        if (Message.contains("/")) {
-            if (Message.startsWith("deadline")) {
-                if (Message.contains("/by")) {
-                    time = Message.substring(Message.indexOf("/by") + 4);
+        if (Message.startsWith("todo") || Message.startsWith("deadline") || Message.startsWith("event")) {
+            if (Message.contains("/")) {
+                if (Message.startsWith("deadline")) {
+                    if (Message.contains("/by")) {
+                        time = Message.substring(Message.indexOf("/by") + 4);
+                    } else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but the format of deadline is wrong :-(");
+                    }
+                } else if (Message.startsWith("event")) {
+                    if (Message.contains("/at")) {
+                        time = Message.substring(Message.indexOf("/at") + 4);
+                    } else {
+                        throw new DukeException("☹ OOPS!!! I'm sorry, but the format of event is wrong :-(");
+                    }
                 } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but the format of deadline is wrong :-(");
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but the format of todo is wrong :-(");
                 }
-            } else if (Message.startsWith("event")) {
-                if (Message.contains("/at")) {
-                    time = Message.substring(Message.indexOf("/at") + 4);
-                } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but the format of event is wrong :-(");
-                }
+            }
+        } else if (Message.startsWith("tell")) {
+            if (!Message.contains(" ")) {
+                throw new DukeException("☹ OOPS!!! I'm sorry, but the format of tell is wrong :-(");
             } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but the format of todo is wrong :-(");
+                time = Message.substring(Message.indexOf(" ") + 1);
             }
         }
 
         //Time for deadlines or event cannot be empty.
-        if ((Message.startsWith("event") || Message.startsWith("deadline")) && time.equals("")) {
+        if ((Message.startsWith("event") || Message.startsWith("deadline") || Message.startsWith("tell")) && time.equals("")) {
             throw new DukeException("☹ OOPS!!! The time of a " + Message.substring(0, Message.indexOf(" ")) +" cannot be empty.");
         }
 

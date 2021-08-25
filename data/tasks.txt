@@ -1,6 +1,5 @@
+T | 0 | borrow book
 D | 0 | return book | 2/12/2019 1800
-E | 0 | project meeting | I don't know the time
+E | 1 | project meeting | I don't know the time
 D | 0 | return book | 23/9/2020 1525
-E | 0 | project splashdown | 15/10/2019 0000
 T | 0 | join sports club
-
