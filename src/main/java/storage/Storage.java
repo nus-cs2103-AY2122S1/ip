@@ -86,6 +86,10 @@ public class Storage implements IStorage {
         return this.list.getSize();
     }
 
+    public TaskList findKeyword(String keyword) {
+        return this.list.findKeyword(keyword);
+    }
+
     @Override
     public String toString() {
         return this.list.toString();

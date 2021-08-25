@@ -40,6 +40,9 @@ public class Processor implements IProcessor {
             case DELETE:
                 processDelete(arguments.get(1));
                 break;
+            case FIND:
+                processFind(arguments.get(1));
+                break;
             default:
                 processDefault(arguments);
         }
@@ -115,6 +118,11 @@ public class Processor implements IProcessor {
         } catch (DukeException e) {
             Ui.print(e.getMessage());
         }
+    }
+
+    @Override
+    public void processFind(String keyword) {
+        Ui.print(this.storage.findKeyword(keyword).toString());
     }
 
     @Override

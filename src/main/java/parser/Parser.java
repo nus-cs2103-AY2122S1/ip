@@ -34,6 +34,9 @@ public class Parser implements IParser {
         } else if(arguments.get(0).equals("delete")) {
             this.processor.processCommand(Command.DELETE, arguments);
             return true;
+        } else if(arguments.get(0).equals("find")) {
+            this.processor.processCommand(Command.FIND, arguments);
+            return true;
         } else {
             this.processor.processCommand(Command.DEFAULT, arguments);
             return true;

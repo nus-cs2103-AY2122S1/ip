@@ -5,5 +5,6 @@ public enum Command {
     LIST,
     DONE,
     DELETE,
-    DEFAULT
+    DEFAULT,
+    FIND
 };

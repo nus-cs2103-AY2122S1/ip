@@ -4,6 +4,7 @@ import exception.DukeException;
 import models.Task;
 
 import java.io.Serializable;
+import java.lang.String;
 import java.util.ArrayList;
 
 public class TaskList implements Serializable {
@@ -45,6 +46,16 @@ public class TaskList implements Serializable {
         } catch(IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with number " + (index + 1) + " in the list");
         }
+    }
+
+    public TaskList findKeyword(String keyword) {
+        TaskList result = new TaskList();
+        for (int i = 0; i < this.list.size(); i++) {
+            if (this.list.get(i).toString().contains(keyword)) {
+                result.addTask(this.list.get(i));
+            }
+        }
+        return result;
     }
 
     @Override

@@ -2,6 +2,7 @@ package storage;
 
 import exception.DukeException;
 import models.Task;
+import tasklist.TaskList;
 
 public interface IStorage {
 
@@ -16,4 +17,6 @@ public interface IStorage {
     public String deleteTask(int index) throws DukeException;
 
     public int getSize();
+
+    public TaskList findKeyword(String keyword);
 }

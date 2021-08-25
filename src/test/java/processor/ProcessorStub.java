@@ -35,4 +35,9 @@ public class ProcessorStub implements IProcessor{
     public void processBye() {
 
     }
+
+    @Override
+    public void processFind(String keyword) {
+
+    }
 }
