@@ -130,7 +130,6 @@ public class Duke {
             throw new DukeException("OOPS!!! Error occurs when reload the data");
         }
     }
-
     public static void main(String[] args) throws DukeException{
         //Greet
         String logo = " ____        _        \n"
