@@ -26,7 +26,7 @@ public class TaskListTest {
     @Test
     void constructor_nonEmptyList_success() {
         TaskList taskLists = new TaskList(tasks);
-        String expected =  "Here are the tasks in your list:\n" +
+        String expected = "Here are the tasks in your list:\n" +
                 "1. [T][ ] description\n" +
                 "2. [D][ ] deadline(by: 08 09 2021)\n" +
                 "3. [E][ ] event(at: 08 09 2021)\n";
@@ -36,7 +36,7 @@ public class TaskListTest {
     @Test
     void remove_existingTask_success() {
         TaskList taskLists = new TaskList(tasks);
-        String existing =  "Here are the tasks in your list:\n" +
+        String existing = "Here are the tasks in your list:\n" +
                 "1. [T][ ] description\n" +
                 "2. [D][ ] deadline(by: 08 09 2021)\n" +
                 "3. [E][ ] event(at: 08 09 2021)\n";

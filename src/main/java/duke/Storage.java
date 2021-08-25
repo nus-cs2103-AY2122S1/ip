@@ -29,7 +29,7 @@ public class Storage {
      *
      * @return the list of task for display
      * @throws FileNotFoundException thrown when a file is not found
-     * @throws FileFormatException thrown when the file is wrongly formatted
+     * @throws FileFormatException   thrown when the file is wrongly formatted
      */
     public List<Task> load() throws LoadingException, FileFormatException {
         parseFile(file);

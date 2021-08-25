@@ -9,8 +9,8 @@ import java.io.IOException;
  */
 
 abstract class Command {
-    private Action action;
-    private String argument;
+    private final Action action;
+    private final String argument;
 
     public Command(Action action, String argument) {
         this.action = action;
@@ -20,8 +20,8 @@ abstract class Command {
     /**
      * abstract method that executes the respective command.
      *
-     * @param tasks the TaskList object that is used to interact with the tasks.
-     * @param ui the ui object used to interact with the user
+     * @param tasks   the TaskList object that is used to interact with the tasks.
+     * @param ui      the ui object used to interact with the user
      * @param storage the storage object used to read/write to files.
      * @throws DukeException any exception thrown when interacting with Duke.
      */
@@ -72,6 +72,7 @@ class ExitCommand extends Command {
 
 class DeleteCommand extends Command {
     private final int index;
+
     public DeleteCommand(int index) {
         super(Action.DELETE, "");
         this.index = index;
@@ -102,6 +103,7 @@ class ListCommand extends Command {
 
 class DoneCommand extends Command {
     private final int index;
+
     public DoneCommand(int index) {
         super(Action.DONE, "");
         this.index = index;
@@ -119,6 +121,7 @@ class DoneCommand extends Command {
 
 class AddCommand extends Command {
     private final Task task;
+
     public AddCommand(Action action, Task task) {
         super(action, "");
         this.task = task;

@@ -16,6 +16,6 @@ class EventTest {
 
     @Test
     void saveStrings_success() {
-        assertEquals("E::0::event::2021-08-09", String.join( "::", event.saveStrings()));
+        assertEquals("E::0::event::2021-08-09", String.join("::", event.saveStrings()));
     }
 }
