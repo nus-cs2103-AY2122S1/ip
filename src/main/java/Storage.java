@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -91,10 +94,12 @@ public class Storage {
                     task = new Todo(taskBreakdown[2]);
                     break;
                 case "Deadline":
-                    task = new Deadline(taskBreakdown[2], taskBreakdown[3]);
+                    LocalDate by = LocalDate.parse(taskBreakdown[3]);
+                    task = new Deadline(taskBreakdown[2], by);
                     break;
                 case "Event":
-                    task = new Event(taskBreakdown[2], taskBreakdown[3]);
+                    LocalDateTime at = LocalDateTime.parse(taskBreakdown[3]);
+                    task = new Event(taskBreakdown[2], at);
                     break;
                 }
 

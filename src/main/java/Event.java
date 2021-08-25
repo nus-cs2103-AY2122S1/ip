@@ -22,7 +22,7 @@ public class Event extends Task {
      * Gets the at description for the Event task.
      * @return The at description for the Event task.
      */
-    public String getAt() {
+    public LocalDateTime getAt() {
         return this.at;
     }
 
