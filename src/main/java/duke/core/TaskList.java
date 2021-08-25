@@ -38,6 +38,27 @@ public class TaskList {
         Ui.formatAndPrint(sb.substring(0, sb.length() - 1));
     }
 
+    public void findAndListTasks(String keyword) {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+        int index = 1;
+        String regex = " ";
+        for (Task task : listOfTasks) {
+            String[] splittedTaskString = task.toString().split(regex);
+            for (String s : splittedTaskString) {
+                // Check whether final character of string is ')'. If so, remove the ')'.
+                if (s.charAt(s.length() - 1) == ')') {
+                    s = s.substring(0, s.length() - 1);
+                }
+                if (s.equals(keyword)) {
+                    sb.append(String.format("%s. %s\n", index, task));
+                    index++;
+                    break;
+                }
+            }
+        }
+        Ui.formatAndPrint(sb.substring(0, sb.length() - 1));
+    }
+
     public void markAsDone(int index) {
         Task taskToMark = listOfTasks.get(index - 1);
         taskToMark.setCompleted();
