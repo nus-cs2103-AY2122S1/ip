@@ -5,7 +5,7 @@ public class Constants {
 
     }
 
-    public static final String HELLO = "\nHello! I'm duke.Duke\nWhat can I do for you?\n";
+    public static final String HELLO = "\nHello! I'm Duke\nWhat can I do for you?\n";
     public static final String LINE = "=================================================================";
     public static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

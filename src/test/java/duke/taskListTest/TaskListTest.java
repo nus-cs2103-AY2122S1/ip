@@ -29,7 +29,7 @@ public class TaskListTest {
 
 
     @Test
-    public void containsTaskTestPositive() {
+    public void containsTaskTest() {
         loadTestList(testList);
         Task task1 = new ToDo("clean room");
         assertTrue(testList.containsTask(task1));

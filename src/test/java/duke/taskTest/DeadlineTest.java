@@ -3,7 +3,6 @@ package duke.taskTest;
 import duke.parser.DateTimeParser;
 import duke.task.Deadline;
 import duke.task.Task;
-import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

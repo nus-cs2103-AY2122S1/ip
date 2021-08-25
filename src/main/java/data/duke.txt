@@ -1,4 +1,6 @@
-T | 0 | watch a movie
 D | 0 | read book | Dec 31 2021
 D | 1 | return book | Jan 01 2022
 E | 0 | university fair | Jan 01 2022 0900
+T | 0 | assignments
+T | 0 | homework
+D | 0 | submit worksheet | Oct 13 2021

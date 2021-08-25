@@ -116,7 +116,7 @@ public class Parser {
                 case "event": throw new IncorrectFormatException(
                         "Please specify a description, date and time for your event!" + Constants.EVENT_FORMAT);
                 default: throw new IncorrectFormatException(
-                        "Please specify a description and date/time for your duke.task!");
+                        "Please specify a description and date/time for your task!");
             }
         }
     }
