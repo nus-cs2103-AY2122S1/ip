@@ -61,7 +61,7 @@ public class Duke {
         try {
             while (input.hasNextLine()) {
                 String userInput = ui.readInput();
-                Parser.parse(userInput, this.ui, this.storage, this.tasks);
+                Parser.parse(userInput, this.ui, this.tasks);
             }
         } catch (IllegalStateException e) {
             storage.saveFile(tasks);

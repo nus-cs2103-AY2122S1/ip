@@ -1,6 +1,9 @@
 package duke;
 import java.util.ArrayList;
 
+/**
+ * Stores the list of tasks in an array list. This list can then be altered based on the user's inputs
+ */
 public class TaskList {
     public ArrayList<Task> tasks;
     public int count;
@@ -14,6 +17,10 @@ public class TaskList {
         this.count = tasks.size();
     }
 
+    /**
+     * Marks a task in the tasklist as done
+     * @param i Takes in an integer to find the correct string placement
+     */
     public void doTask(int i) {
         if (i > tasks.size()) {
             System.out.println("Invalid Input for done command");
@@ -26,6 +33,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds an event task to the tasklist
+     * @param in Provides the string input for the event task
+     * @param i Takes in an integer to find the correct string placement in the string input
+     */
     public void addEventTask(String in, int i) {
         System.out.println("Got it. I've added this task:");
         tasks.add(new EventTask(in.substring(6, i), in.substring(i + 1)));
@@ -37,6 +49,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a deadline task to the task list
+     * @param in Provides the string input for the deadline task
+     * @param i Takes in an integer to find the correct string placement in the string input
+     */
     public void addDeadlineTask(String in, int i) {
         System.out.println("Got it. I've added this task:");
         tasks.add(new DeadlineTask(in.substring(9, i), in.substring(i + 1)));
@@ -48,9 +65,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a todo task to the task list
+     * @param in Provides the string input for the todo task
+     */
     public void addToDoTask(String in) {
         System.out.println("Got it. I've added this task:");
-        tasks.add(new ToDoTask(in.substring(4)));
+        tasks.add(new ToDoTask(in.substring(5)));
         System.out.println(tasks.get(tasks.size()-1));
         if (tasks.size() == 1) {
             System.out.println("Now you have " + tasks.size() + " task in the list.");
@@ -59,6 +80,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Displays the tasklist
+     */
     public void showList() {
         int counter = 1;
         System.out.println(" Here are the tasks in your list:");
@@ -71,6 +95,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delets a task from the tasklist
+     * @param i
+     */
     public void deleteTask(int i) {
         if (tasks.isEmpty()) {
             System.out.println("The list is empty.");

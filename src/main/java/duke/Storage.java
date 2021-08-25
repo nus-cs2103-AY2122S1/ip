@@ -7,11 +7,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Storage class loads and saves the list in a file so it can be kept for future use
+ */
 public class Storage {
 
     public Storage (String filePath) {
     }
 
+    /**
+     * Loads the given tasklist
+     * @return
+     */
     public ArrayList loadFile() {
         ArrayList<Task> storedList = new ArrayList<Task>();
         try {
@@ -49,7 +56,11 @@ public class Storage {
         return storedList;
 
     }
-
+    
+    /**
+     * Saves the given tasklist into a file
+     * @param taskList
+     */
     public void saveFile(TaskList taskList) {
         File items = new File("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
         try {

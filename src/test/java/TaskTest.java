@@ -7,6 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Checks Task class and its subclasses, and checks Tasklist to see if they function
+ */
+
 public class TaskTest {
 
     /**
@@ -47,7 +51,7 @@ public class TaskTest {
     public void taskListTest2() {
         TaskList tasks = new TaskList();
         tasks.addToDoTask("todo eat lunch");
-        assertEquals("[T][ ]  eat lunch ", tasks.toString());
+        assertEquals("[T][ ] eat lunch ", tasks.toString());
     }
 
     @Test
@@ -57,7 +61,7 @@ public class TaskTest {
         tasks.addToDoTask("todo eat dinner");
         tasks.addToDoTask("todo go to sleep");
         tasks.doTask(1);
-        assertEquals("[T][X]  buy dinner [T][ ]  eat dinner [T][ ]  go to sleep ", tasks.toString());
+        assertEquals("[T][X] buy dinner [T][ ] eat dinner [T][ ] go to sleep ", tasks.toString());
     }
 
     @Test
