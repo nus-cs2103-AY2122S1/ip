@@ -1,10 +1,18 @@
+package duke.storage;
+
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.exception.InvalidInputException;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-
 import java.util.ArrayList;
 
 public class Storage {
@@ -14,6 +22,7 @@ public class Storage {
     public Storage(String location) {
         filePath = location;
     }
+
     public static void saveData(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(filePath);
