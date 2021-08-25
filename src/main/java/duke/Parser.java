@@ -72,13 +72,13 @@ public class Parser {
     }
 
     public static Command addToDo(String input) {
-        String name = input.substring(input.indexOf(" ") + 1);
+        String name = input.substring(input.indexOf(" ") + 1).strip();
         ToDo t = new ToDo(name);
         return new AddCommand(t);
     }
 
     public static Command addDeadline(String input) throws DateTimeParseException {
-        String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/by") - 1);
+        String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/by") - 1).strip();
         String by = input.substring(input.lastIndexOf("/by") + 4);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Deadline d = new Deadline(name, LocalDateTime.parse(by, formatter));
@@ -86,7 +86,7 @@ public class Parser {
     }
 
     public static Command addEvent(String input) throws DateTimeParseException {
-        String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/at") - 1);
+        String name = input.substring(input.indexOf(" ") + 1, input.lastIndexOf("/at") - 1).strip();
         String at = input.substring(input.lastIndexOf("/at") + 4);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Event e = new Event(name, LocalDateTime.parse(at, formatter));
