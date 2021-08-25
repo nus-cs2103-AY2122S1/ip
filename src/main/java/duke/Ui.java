@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -52,5 +54,31 @@ public class Ui {
      */
     public void showExit() {
         System.out.println("Bye. See you again soon! :)");
+    }
+
+    public void showAllTasks(TaskList listOfTasks) {
+        if (listOfTasks.isEmpty()) {
+            System.out.println("You currently have no tasks! Add one now ☻");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            showTasks(listOfTasks);
+        }
+    }
+
+    public void showMatchingTasks(TaskList listOfTasks) {
+        if (listOfTasks.isEmpty()) {
+            System.out.println("No matching tasks found! ☹");
+        } else {
+            System.out.println("Here are the tasks that match this keyword:");
+            showTasks(listOfTasks);
+        }
+    }
+
+    public void showTasks(TaskList listOfTasks) {
+        int size = listOfTasks.size();
+        for (int i = 0; i < size; i++) {
+            Task t = listOfTasks.get(i);
+            System.out.println((i + 1) + "." + t.toString());
+        }
     }
 }

@@ -49,6 +49,18 @@ public class TaskList {
         }
     }
 
+    public boolean isEmpty() {
+        return this.listOfTasks.isEmpty();
+    }
+
+    public int size() {
+        return this.listOfTasks.size();
+    }
+
+    public Task get(int i) {
+        return this.listOfTasks.get(i);
+    }
+
     /**
      * The method to add a Task to the list
      *
@@ -95,5 +107,16 @@ public class TaskList {
             t.markAsDone();
             System.out.println("Nice! I've marked this task as done:\n  " + t.toString());
         }
+    }
+
+    public TaskList findMatchingTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task t : this.listOfTasks) {
+            String name = t.getName();
+            if (name.equals(keyword) || name.contains(keyword)) {
+                matchingTasks.add(t);
+            }
+        }
+        return new TaskList(matchingTasks);
     }
 }

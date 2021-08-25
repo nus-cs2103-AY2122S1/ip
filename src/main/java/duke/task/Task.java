@@ -38,6 +38,10 @@ public abstract class Task {
         return (this.isDone ? "X" : " ");
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     /**
      * Method to mark the task as done
      */
