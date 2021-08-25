@@ -102,7 +102,7 @@ public class Parser {
             LocalDateTime ldt = LocalDateTime.parse(input, inputDateTimeFormatter);
             return ldt;
         } catch (DateTimeParseException e) {
-            throw new DukeException("time should be in the format: dd/MM/yyyy HH:mm");
+            throw new DukeException("time should be in the format: DD/MM/YYYY HH:MM");
         }
     }
 }

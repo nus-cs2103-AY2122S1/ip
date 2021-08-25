@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.Parser;
 
+import java.util.Objects;
+
 /**
  * This class represents a task.
  */
@@ -67,5 +69,19 @@ public class Task {
     public String toTxtFormat() {
         String state = isDone ? "1" : "0";
         return state + Parser.SPLITER + description;
+    }
+
+    /**
+     * Returns true if the given object is equal to this, otherwise false.
+     *
+     * @param o the given object.
+     * @return true if the given object is equal to this, otherwise false.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return isDone == task.isDone && Objects.equals(description, task.description);
     }
 }

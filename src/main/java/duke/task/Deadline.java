@@ -4,6 +4,7 @@ import duke.Parser;
 import duke.Ui;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * This class represents a deadline task.
@@ -57,5 +58,20 @@ public class Deadline extends Task {
     public String toTxtFormat() {
         return "D" + Parser.SPLITER + super.toTxtFormat() +
                 Parser.SPLITER + deadlineTime.format(Parser.inputDateTimeFormatter);
+    }
+
+    /**
+     * Returns true if the given object is equal to this, otherwise false.
+     *
+     * @param o the given object.
+     * @return true if the given object is equal to this, otherwise false.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Deadline deadline = (Deadline) o;
+        return super.equals(o) && Objects.equals(deadlineTime, deadline.deadlineTime);
     }
 }

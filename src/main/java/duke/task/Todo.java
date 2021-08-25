@@ -45,4 +45,21 @@ public class Todo extends Task{
     public String toTxtFormat() {
         return "T" + Parser.SPLITER + super.toTxtFormat();
     }
+
+    /**
+     * Returns true if the given object is equal to this, otherwise false.
+     *
+     * @param obj the given object.
+     * @return true if the given object is equal to this, otherwise false.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj instanceof Todo) {
+            Todo todo = (Todo) obj;
+            return (this.description.equals(todo.description)) && (this.isDone == todo.isDone);
+        } else {
+            return false;
+        }
+    }
 }

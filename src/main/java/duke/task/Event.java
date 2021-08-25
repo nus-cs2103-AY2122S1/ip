@@ -4,6 +4,7 @@ import duke.Parser;
 import duke.Ui;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * This class represents an event task.
@@ -55,5 +56,19 @@ public class Event extends Task{
     public String toTxtFormat() {
         return "E" + Parser.SPLITER + super.toTxtFormat()
                 + Parser.SPLITER + eventTime.format(Parser.inputDateTimeFormatter);
+    }
+
+    /**
+     * Returns true if the given object is equal to this, otherwise false.
+     *
+     * @param o the given object.
+     * @return true if the given object is equal to this, otherwise false.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return super.equals(o) && Objects.equals(eventTime, event.eventTime);
     }
 }
