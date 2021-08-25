@@ -1,9 +1,11 @@
 public class Task {
     protected String name;
     protected boolean isDone;
+    private boolean isTimed;
 
-    public Task(String name){
+    public Task(String name, boolean isTimed){
         this.name = name;
+        this.isTimed = isTimed;
         this.isDone = false;
     }
 
@@ -13,6 +15,10 @@ public class Task {
 
     public void markDone(){
         this.isDone = true;
+    }
+
+    public boolean isTimed(){
+        return isTimed;
     }
 
     @Override
