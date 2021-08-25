@@ -58,6 +58,9 @@ public class TaskList {
         case "event":
             addEvent(input);
             break;
+        case "find":
+            findTask(input);
+            break;
         default:
             throw new InvalidCommandException("Command not found.");
         }
@@ -232,6 +235,42 @@ public class TaskList {
                 + (taskList.size() == 1 ? "task" : "tasks")
                 + " in your list!\n",
                 taskName, taskList.size());
+    }
+
+    /**
+     * Finds the tasks requested by the user and prints them.
+     *
+     * @param input The event inputted by the user.
+     * @throws MissingTaskException If task is unspecified after command.
+     * @throws MissingTimeException If time is unspecified after command.
+     */
+    public static void findTask(String input) throws MissingTaskException {
+        ArrayList<Task> toPrint = new ArrayList<>();
+
+        if (input.length() < 6) {
+            throw new MissingTaskException("Task not found.");
+        }
+
+        String taskName = input.substring(5);
+
+        for (int i = 0; i < taskList.size(); i++) {
+            String currentTask = taskList.get(i).toString();
+            if (currentTask.indexOf(taskName) != -1) {
+                toPrint.add(taskList.get(i));
+            }
+        }
+
+        if (toPrint.size() == 0) {
+            System.out.printf("It seems like there are no tasks matching your search.\n");
+            return;
+        }
+
+        System.out.println("The matching "
+                + (toPrint.size() == 1 ? "task in your list is:" : "tasks in your list are:"));
+
+        for (int i = 0; i < toPrint.size(); i++) {
+            System.out.printf("%d.%s\n", i + 1, toPrint.get(i));
+        }
     }
 
     /**
