@@ -1,5 +1,7 @@
 package duke.parser;
 
+import duke.exception.TaskNotFoundException;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 import duke.exception.DukeException;
@@ -8,6 +10,8 @@ import duke.exception.IncorrectFormatException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.MessageEmptyException;
+
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -75,6 +79,31 @@ public class Parser {
                 }
                 String deleteTaskIndex = words[words.length - 1];
                 taskList.deleteTask(deleteTaskIndex);
+                break;
+            case "find":
+                if (words.length == 1) {
+                    throw new MessageEmptyException();
+                }
+
+                ArrayList<String> isolateCommand = new ArrayList<>();
+                for (String word : words) {
+                    isolateCommand.add(word);
+                }
+
+                // remove "find"
+                isolateCommand.remove(0);
+
+                String query = String.join(" ", isolateCommand);
+
+                ArrayList<Task> matchedTasks = taskList.findTask(query);
+
+                if (matchedTasks.size() == 0) {
+                    throw new TaskNotFoundException();
+                }
+
+                for (Task task : matchedTasks) {
+                    System.out.println(task);
+                }
                 break;
             case "":                                // empty user input
                 throw new EmptyCommandException();
