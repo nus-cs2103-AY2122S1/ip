@@ -37,7 +37,6 @@ public class Ui {
     public void PrintSpecialTasks(TaskList taskList) {
         String message = taskList.get(taskList.size() - 1).toString();
         int total = taskList.size();
-
         String newMsg = String.
                 format("Got it, I've added this task:\n  %s\nNow you have a total of %d tasks in the list.",
                 message, total);
@@ -45,7 +44,6 @@ public class Ui {
     }
 
     public void PrintDelete(Task deleted, TaskList taskList) {
-
         String message = deleted.toString();
         int total = taskList.size();
         String newMsg = String.
