@@ -58,4 +58,8 @@ public class Task {
     public String toFileFormatString() {
         return String.format("%s / %s\n", this.isDone ? "1" : "0", this.description);
     }
+
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
 }
