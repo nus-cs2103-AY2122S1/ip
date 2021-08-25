@@ -271,7 +271,6 @@ public class TaskList {
 
     private LocalDate getDate(String t) throws DukeException{
         LocalDate date;
-
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             date = LocalDate.parse(t, formatter);
