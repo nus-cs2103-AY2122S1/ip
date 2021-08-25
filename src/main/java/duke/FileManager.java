@@ -47,7 +47,7 @@ public class FileManager {
         }
     }
 
-    public void updateTaskList(Tasklist tasks, UI ui) {
+    public void updateTaskList(Tasklist tasks, Ui ui) {
         try {
             FileWriter newfileWriter = new FileWriter(this.taskList);
             newfileWriter.write(tasks.stringSaveFile());

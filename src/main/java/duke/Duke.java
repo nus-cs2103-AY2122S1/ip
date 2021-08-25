@@ -5,10 +5,10 @@ import duke.command.Command;
 public class Duke {
     private FileManager filemanager;
     private Tasklist tasks;
-    private UI ui;
+    private Ui ui;
 
     public Duke(String filePath) {
-        ui = new UI();
+        ui = new Ui();
         filemanager = new FileManager(filePath);
         tasks = new Tasklist(filemanager.getTaskList());
     }

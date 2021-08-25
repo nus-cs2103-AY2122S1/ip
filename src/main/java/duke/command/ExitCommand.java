@@ -2,11 +2,11 @@ package duke.command;
 
 import duke.FileManager;
 import duke.Tasklist;
-import duke.UI;
+import duke.Ui;
 
 public class ExitCommand extends Command {
     @Override
-    public void execute(Tasklist task, UI ui, FileManager fileManager) {
+    public void execute(Tasklist task, Ui ui, FileManager fileManager) {
         ui.sayBye();
     }
 

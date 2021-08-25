@@ -3,7 +3,7 @@ package duke.command;
 import duke.DukeException;
 import duke.FileManager;
 import duke.Tasklist;
-import duke.UI;
+import duke.Ui;
 import duke.task.Task;
 
 public abstract class Command {
@@ -29,6 +29,6 @@ public abstract class Command {
         }
     }
 
-    public abstract void execute(Tasklist task, UI ui, FileManager fileManager) throws DukeException;
+    public abstract void execute(Tasklist task, Ui ui, FileManager fileManager) throws DukeException;
     public abstract boolean isExit();
 }
