@@ -113,7 +113,7 @@ public class Storage {
      *
      * @param tasks the current task list
      */
-    public void saveToStorage(List<Task> tasks){
+    public void saveToStorage(List<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task: tasks) fw.write(task.toString() + "\n");

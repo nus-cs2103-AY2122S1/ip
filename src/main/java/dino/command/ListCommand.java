@@ -14,10 +14,13 @@ public class ListCommand extends Command {
      *
      * @param storage the local storage file
      * @param taskList the current task list to be displayed
-     * @throws EmptyListException if the list to be displayed is empty
      */
     @Override
-    public void execute(Storage storage, TaskList taskList) throws EmptyListException {
-        taskList.printTaskList();
+    public void execute(Storage storage, TaskList taskList) {
+        try {
+            taskList.printTaskList();
+        } catch (EmptyListException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

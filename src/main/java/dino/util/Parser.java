@@ -18,19 +18,31 @@ public class Parser {
      * and thus cannot be understood
      */
     public static Command parse(String input) throws InvalidInputException {
-        String type = getFirstWord(input);
-        if (type.equals("todo") || type.equals("deadline") || type.equals("event")) {
-            Command.CMDTYPE taskType = Command.CMDTYPE.valueOf(type.toUpperCase());
-            return new AddTaskCommand(input, taskType);
-        } else if (type.equals("done") || type.equals("delete")) {
-            Command.CMDTYPE markType = Command.CMDTYPE.valueOf(type.toUpperCase());
-            return new MarkCommand(input, markType);
-        } else if (type.equals("list")) {
-            return new ListCommand();
-        } else if (type.equals("find")) {
-            return new FindCommand(input);
-        } else {
+        Command.CMDTYPE type;
+        try {
+            type= Command.CMDTYPE.valueOf(getFirstWord(input).toUpperCase());
+        } catch (IllegalArgumentException e) {
             throw new InvalidInputException();
+        }
+        switch (type) {
+            case TODO:
+            case EVENT:
+            case DEADLINE: {
+                return new AddTaskCommand(input, type);
+            }
+            case DONE:
+            case DELETE: {
+                return new MarkCommand(input, type);
+            }
+            case LIST: {
+                return new ListCommand();
+            }
+            case FIND: {
+                return new FindCommand(input);
+            }
+            default: {
+                throw new InvalidInputException();
+            }
         }
     }
 
