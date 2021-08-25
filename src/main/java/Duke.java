@@ -16,37 +16,13 @@ public class Duke {
     public static void main(String[] args) {
         UserInterface ui = new UserInterface();
         ui.displayGreeting();
-        Scanner stdin = new Scanner(System.in);
-        List<Task> tasks = new ArrayList<>();
         DateTimeFormatter dtformatter = DateTimeFormatter.ISO_DATE;
         String home = System.getProperty("user.home");
         Path dukePath = Paths.get(home, "Documents", "duke", "data.csv");
-        File dukeData = dukePath.toFile();
-        try {
-            Scanner dukeDataScanner = new Scanner(dukeData);
-            while (dukeDataScanner.hasNext()) {
-                String taskData = dukeDataScanner.nextLine();
-                String[] taskTokens = taskData.split(",");
-                Task task = null;
-                if (taskTokens[0].equals("todo")) {
-                    task = new ToDo(taskTokens[1], Boolean.parseBoolean(taskTokens[2]));
-                } else if (taskTokens[0].equals("deadline")) {
-                    task = new Deadline(taskTokens[1], taskTokens[2],
-                                Boolean.parseBoolean(taskTokens[3]));
-                } else if (taskTokens[0].equals("event")) {
-                    task = new Event(taskTokens[1], taskTokens[2],
-                            Boolean.parseBoolean(taskTokens[3]));
-                }
-                if (task != null) {
-                    tasks.add(task);
-                }
-            }
-            dukeDataScanner.close();
-        } catch (FileNotFoundException ex) {
-            System.err.printf("File %s not found\n", dukePath.toString());
-        }
+        Storage storage = new Storage(dukePath);
+        TaskList taskList = storage.load(ui);
         while (true){
-            String command = stdin.nextLine();
+            String command = ui.getResponse();
             if ("bye".equals(command)){
                 dukeData = dukePath.toFile();
                 try {
