@@ -41,6 +41,14 @@ public class Ui {
     }
 
     /**
+     * Method to show message to warn user that keyword is missing
+     */
+    public static void warningMissingKeyword() {
+        String message = "OOPS!!! To find a task, a keyword must be stated.";
+        showToUser(LINE, message, LINE);
+    }
+
+    /**
      * Method that warns user that there is a missing description for the task.
      * @param command
      */
@@ -154,6 +162,28 @@ public class Ui {
         System.out.println("OOPS!!! The details of an event cannot be empty.");
         System.out.println("Please input time, day, or - if details unknown.");
         System.out.println("---------------------------------------------");
+    }
+
+    /**
+     * Shows message upon successful search of keyword
+     */
+    public static void showSuccessfulFind() {
+        String message = "Here are the matching tasks in your list:";
+        showToUser(LINE, message);
+    }
+
+    /**
+     * Shows message upon unsuccessful search of keyword
+     */
+    public static void showUnsuccessfulFind() {
+        showToUser("There are no tasks with this keyword.");
+    }
+
+    /**
+     * Shows all tasks with keyword
+     */
+    public static void showResults(int count, String description) {
+        System.out.println(count + ". " + description);
     }
 
     /**

@@ -89,4 +89,31 @@ public class TaskList {
     public Task getIndividualTask(int id) {
         return this.tasks.get(id);
     }
+
+    /**
+     * Allows users to find a task by searching for a keyword
+     * and using command 'find'
+     *
+     * @param keyword
+     */
+    public void findTasks(String keyword) {
+        int count = 0;
+        Ui.showSuccessfulFind();
+        for (int i = 0; i < this.tasks.size(); i++) {
+            String taskDescription = this.getIndividualTask(i).toString();
+
+            int index = taskDescription.indexOf(keyword);
+
+            if (index != -1) {
+                count += 1;
+                Ui.showResults(count, taskDescription);
+            }
+        }
+
+        if (count == 0) {
+            Ui.showUnsuccessfulFind();
+        }
+
+        Ui.showLine();
+    }
 }
