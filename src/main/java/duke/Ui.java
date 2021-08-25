@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Class to handle user interaction.
+ */
 public class Ui {
     private final static String LOGO =
             "                 |`._         |\\\n" +
@@ -37,6 +40,11 @@ public class Ui {
 
     private static final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Prints out content with borders.
+     *
+     * @param content Content of message.
+     */
     public static void display(String content) {
         System.out.println(
                 "69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969\n"
@@ -44,20 +52,33 @@ public class Ui {
                         + "\n69696969696969696969696969696969696969696969696969696969696966969696969696969696969696969696969\n"
         );
     }
+
+    /**
+     * Displays message when starting bot.
+     */
     public static void greet() {
         display(LOGO);
         display(BOOT_MESSAGE);
         display(LOAD_MESSAGE);
     }
 
+    /**
+     * Displays message when save file loaded.
+     */
     public static void begin() {
         display(BEGIN_MESSAGE);
     }
 
+    /**
+     * Displays message when exiting bot.
+     */
     public static void bye() {
         display(BYE_MESSAGE);
     }
 
+    /**
+     * Reads user input.
+     */
     public static String readLine() {
         return sc.nextLine();
     }

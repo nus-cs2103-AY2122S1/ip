@@ -1,6 +1,13 @@
 package duke.exception;
 
-public class InvalidTaskException extends DukeException{
+/**
+ * A DukeException that occurs when an unknown command is given.
+ */
+public class InvalidTaskException extends DukeException {
+
+    /**
+     * Public constructor to create an InvalidTaskException.
+     */
     public InvalidTaskException() {
         super("Invalid Command");
     }

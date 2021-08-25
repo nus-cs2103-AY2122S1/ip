@@ -12,10 +12,21 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Class to loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
+    /** Save file path. */
     private final static String SAVE_FILE = "data/tasks.txt";
+    /** Save file location. */
     private final static String SAVE_DIR = "data/";
 
+    /**
+     * Returns the Success/Error message after loading save file.
+     *
+     * @param list DukeList to be populated.
+     * @return Success/Error message.
+     */
     public static String load(DukeList list) {
         File file = new File(SAVE_FILE);
         try {
@@ -34,6 +45,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves DukeList into save file.
+     *
+     * @param list DukeList to be saved.
+     * @throws CorruptedFileException If error occurs while writing into save file.
+     */
     public static void saveFile(DukeList list) throws CorruptedFileException {
         File dir = new File(SAVE_DIR);
         if (!Files.exists(Paths.get(SAVE_DIR))) {

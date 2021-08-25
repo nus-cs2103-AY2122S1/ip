@@ -5,8 +5,13 @@ import duke.command.ExitCommand;
 import duke.exception.CorruptedFileException;
 import duke.exception.DukeException;
 
+/**
+ * Main class of duke package.
+ */
 public class Duke {
-
+    /**
+     * Static method to start the bot.
+     */
     private static void runDuke() {
         DukeList list = new DukeList();
         Ui.greet();

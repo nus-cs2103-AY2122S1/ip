@@ -14,13 +14,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class to deal with making sense of the user command
+ */
 public class Parser {
+    /** Types of tasks. */
     private enum TaskType {
         TODO,
         DEADLINE,
         EVENT,
     }
 
+    /**
+     * Returns the DukeCommand parsed from input.
+     *
+     * @param input Input to be parsed.
+     * @return DukeCommand parsed.
+     */
     public static DukeCommand parseInput(String input) {
         try {
             if (input.equals("bye")) {
@@ -69,6 +79,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the Task parsed from file line.
+     *
+     * @param line File line to be parsed.
+     * @return Task parsed.
+     * @throws CorruptedFileException If file line is invalid.
+     */
     public static Task parseFileLine(String line) throws CorruptedFileException {
         String[] splitted = line.split("%,", 4);
         String input;
@@ -97,6 +114,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the Task parsed from input.
+     *
+     * @param input Input to be parsed.
+     * @param type Type of Task.
+     * @return Task parsed.
+     * @throws InvalidArgumentsException If arguments are missing or invalid.
+     * @throws InvalidTaskException If input contains unknown commands.
+     */
     private static Task parseTask(String input, TaskType type) throws InvalidArgumentsException, InvalidTaskException {
         int descriptionEnd;
         String description;
@@ -137,7 +163,7 @@ public class Parser {
                 if (description.trim().isEmpty()) {
                     throw new InvalidArgumentsException();
                 }
-                // StringIndexOutOfBoundsException thrown here if input = "$String /by "
+                // StringIndexOutOfBoundsException thrown here if input = "deadline $String /by "
                 dateTime = input.substring(descriptionEnd + 5);
                 // Checks if dateTime is all whitespace
                 if (dateTime.trim().isEmpty()) {
@@ -164,7 +190,7 @@ public class Parser {
                 if (description.trim().isEmpty()) {
                     throw new InvalidArgumentsException();
                 }
-                // StringIndexOutOfBoundsException thrown here if input = "$String /at "
+                // StringIndexOutOfBoundsException thrown here if input = "event $String /at "
                 dateTime = input.substring(descriptionEnd + 5);
                 // Checks if dateTime is all whitespace
                 if (dateTime.trim().isEmpty()) {
