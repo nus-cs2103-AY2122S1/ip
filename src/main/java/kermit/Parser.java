@@ -11,9 +11,6 @@ import java.util.Arrays;
  */
 public class Parser {
     private static final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
-    // ArrayList of all valid commands and tasks
-    private static final String[] strCommands = {"bye", "list", "done", "deadline", "todo", "event", "delete"};
-    private static final ArrayList<String> commands = new ArrayList<>(Arrays.asList(strCommands));
 
     /**
      * Parses user commands for Kermit and determine next action.
@@ -42,10 +39,6 @@ public class Parser {
         command = commandArr[0];
         flag = flagArr[0];
 
-        // Check if kermit.command is valid
-        if (!commands.contains(command)) {
-            throw new KermitException(invalidCommandText);
-        }
         String argument = "";
         String dateString = "";
         LocalDate date;
