@@ -1,12 +1,7 @@
 package duke.util;
 
+import duke.command.*;
 import duke.task.TaskType;
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,6 +16,14 @@ public class Parser {
                     return new ExitCommand();
                 case "list":
                     return new ListCommand();
+            case "find":
+                if (userInput.matches("^find .+")) {
+                    String searchTerm = userInput.substring(indexOfSpace + 1);
+                    return new FindCommand(searchTerm);
+                } else {
+                    throw new DukeException(">:( include search term after find:\n"
+                            + "find <some search term>");
+                }
                 case "done":
                     if (userInput.matches("^done [0-9]+")) {
                         int taskNumber = Integer.parseInt(userInput.split(" ")[1]);

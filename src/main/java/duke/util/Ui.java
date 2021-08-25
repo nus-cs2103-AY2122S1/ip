@@ -1,5 +1,7 @@
 package duke.util;
 
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -12,6 +14,15 @@ public class Ui {
     public void respond(String message) {
         System.out.println("\n============Duke says============");
         System.out.println(message);
+        System.out.println("=================================");
+    }
+
+    public void findResponse(Task[] tasks) {
+        System.out.println("\n============Duke says============");
+        System.out.println("Found " + tasks.length + " tasks");
+        for (Task task : tasks) {
+            System.out.println(task.toString());
+        }
         System.out.println("=================================");
     }
 
