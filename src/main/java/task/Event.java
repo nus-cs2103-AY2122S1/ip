@@ -1,15 +1,15 @@
-package tasks;
+package task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task {
+public class Event extends Task {
     private String taskName;
     private String time;
-    private String taskSymbol = "D";
+    private String taskSymbol = "E";
 
-    public Deadline(String taskName, String time) {
+    public Event(String taskName, String time) {
         this.taskName = taskName;
         this.time = time;
     }
@@ -32,12 +32,13 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String statusIcon = getStatusIcon();
-        return String.format("[%s][%s] %s (by: %s)", taskSymbol, statusIcon, taskName, timeToString());
+        return String.format("[%s][%s] %s (at: %s)", taskSymbol, statusIcon, taskName, timeToString());
     }
 
     @Override
     public String toStorageFormat() {
         return String.format("%s/%s/%s/%s", taskSymbol, isCompleted(), taskName, time);
     }
-
 }
+
+

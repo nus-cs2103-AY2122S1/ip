@@ -2,7 +2,7 @@ package command;
 
 import core.Storage;
 import core.TaskList;
-import tasks.Todo;
+import task.Todo;
 
 public class TodoCommand extends Command {
     private Todo todoTask;

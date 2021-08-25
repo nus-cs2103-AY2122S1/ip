@@ -1,7 +1,7 @@
 package core;
 
 import gui.Ui;
-import tasks.Task;
+import task.Task;
 
 import java.io.File;
 import java.io.FileWriter;

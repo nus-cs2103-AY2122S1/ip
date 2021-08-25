@@ -1,4 +1,4 @@
-package tasks;
+package task;
 
 public abstract class Task {
     private boolean completed;

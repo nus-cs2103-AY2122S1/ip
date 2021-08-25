@@ -1,10 +1,10 @@
 package core;
 
 import gui.Ui;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

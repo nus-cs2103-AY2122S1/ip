@@ -2,7 +2,7 @@ package command;
 
 import core.Storage;
 import core.TaskList;
-import tasks.Event;
+import task.Event;
 
 public class EventCommand extends Command {
     private Event eventTask;

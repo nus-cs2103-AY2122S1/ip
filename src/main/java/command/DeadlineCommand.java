@@ -2,7 +2,7 @@ package command;
 
 import core.Storage;
 import core.TaskList;
-import tasks.Deadline;
+import task.Deadline;
 
 public class DeadlineCommand extends Command {
     private Deadline deadlineTask;
