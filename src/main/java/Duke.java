@@ -3,6 +3,10 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 public class Duke {
     private static final String FORMAT = "\t%s\n";
     private static final String LINE = "______________________________________________________";
@@ -64,12 +68,31 @@ public class Duke {
         }
     }
 
-    // Helper function to separate a string into taskName and date
-    private static String[] splitWith(String input, int startIndex, String regex) throws DukeException {
+    // Helper function to separate a string into pieces (e.g. input into taskName and dateTime)
+    private static String[] splitWith(String input, int startIndex, String regex, String errorMessage)
+            throws DukeException {
         if (startIndex >= input.length() || !input.contains(regex)) {
-            throw new DukeException("Command must be in the format: [taskName]" + regex + "[date]");
+            throw new DukeException(errorMessage);
         }
         return input.substring(startIndex).split(regex);
+    }
+
+    // Helper function to parse a date from an input
+    private static LocalDate parseDateFromInput(String dateString) throws DukeException {
+        try {
+            return LocalDate.parse(dateString);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date must be of the form YYYY-MM-DD, and must be a real/valid date.");
+        }
+    }
+
+    // Helper function to parse a time from and input
+    private static LocalTime parseTimeFromInput(String timeString) throws DukeException {
+        try {
+            return LocalTime.parse(timeString);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Time must be of the form HH:MM. (HH from 00-23, MM from 00-59)");
+        }
     }
 
     // Abstraction to make main function neater
@@ -119,14 +142,19 @@ public class Duke {
             task = new Todo(input.substring(5));
             break;
         case DEADLINE:
-            String[] splitInput = splitWith(input, 9, " /by ");
+            String errorMessage = "Command must be in the format: [taskName] /by [date(YYYY-MM-DD)] [time(HH:MM)]";
+            String[] splitInput = splitWith(input, 9, " /by ", errorMessage);
             String taskName = splitInput[0];
-            String date = splitInput[1];
-            task = new Deadline(taskName, date);
+            errorMessage = "Date and time must be in the format: YYYY-MM-DD HH:MM";
+            String[] dateTime = splitWith(splitInput[1], 0, " ", errorMessage);
+            String date = dateTime[0];
+            String time = dateTime[1];
+            task = new Deadline(taskName, parseDateFromInput(date), parseTimeFromInput(time));
             break;
         default: // default is guaranteed to be event task due to use of enum + outer control flow
             // Add Event task
-            splitInput = splitWith(input, 6, " /at ");
+            errorMessage = "Command must be in the format: [taskName] /at [date]";
+            splitInput = splitWith(input, 6, " /at ", errorMessage);
             taskName = splitInput[0];
             date = splitInput[1];
             task = new Event(taskName, date);
