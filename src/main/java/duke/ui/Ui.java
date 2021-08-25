@@ -48,14 +48,14 @@ public class Ui {
     }
 
     public void showDone(Task task) {
-        String done = String.format("Nice! I've marked this task as done:\n%s",
-                task.toString()) ;
+        String done = String.format("Nice! I've marked this task as done:\n%s", task.toString()) ;
         this.sendMessage(done);
     }
 
     public void showList(TaskList taskList) throws DukeException {
         int numTask = taskList.totalTask();
         String task;
+
         if (numTask == 0) {
             task = "";
         } else {
@@ -64,6 +64,7 @@ public class Ui {
                 task = task + "\n" + taskNumber + ". " + taskList.getTask(taskNumber).toString();
             }
         }
+
         String listStatement = "Here are the tasks in your list:\n";
         String output = listStatement + task;
         this.sendMessage(output);

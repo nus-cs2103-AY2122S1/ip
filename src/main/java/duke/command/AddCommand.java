@@ -6,7 +6,7 @@ import duke.ui.Ui;
 import duke.task.*;
 
 public class AddCommand extends Command {
-    Task task;
+    private Task task;
 
     public AddCommand(String command, String description) throws DukeException{
         if (command.equals("todo")) {
