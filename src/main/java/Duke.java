@@ -210,10 +210,6 @@ public class Duke {
         return this.shouldExit;
     }
 
-    private void shutdown() {
-        in.close();
-    }
-
     private static void printMessage(String string) {
         System.out.print("------------------------------------------------\n" + string + "\n"
                 + "------------------------------------------------\n\n");
@@ -242,6 +238,7 @@ public class Duke {
                 printMessage("Error: " + e.getMessage());
             }
         }
-        duke.shutdown();
+
+        input.close();
     }
 }
