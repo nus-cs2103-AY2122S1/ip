@@ -1,9 +1,12 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
     private List<Task> tasks = new ArrayList<>();
-
+    private final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
@@ -76,6 +79,24 @@ public class TaskList {
         tasks.add(newEvent);
         System.out.println("Got it. I've added this task:\n  " + newEvent + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    /**
+     * Creates a deadline task
+     * @param description description of task
+     * @param by date and time that the task should be completed by
+     */
+    public void createDeadline(String description, String by) {
+        // convert string by to LocalDate
+        try {
+            LocalDateTime dateBy = LocalDateTime.parse(by, DT_FORMATTER);
+            Task newDeadline = new Deadline(description, dateBy);
+            tasks.add(newDeadline);
+            System.out.println("Got it. I've added this task:\n  " + newDeadline + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.");
+        } catch (DateTimeParseException e) {
+            System.out.println("Please input deadline date in the following format: [dd-mm-yyyy hh:mm]");
+        }
     }
 
     public void printList() {

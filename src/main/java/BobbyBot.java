@@ -28,7 +28,6 @@ public class BobbyBot {
         }
     }
 
-
     /**
      * Performs command based on String user input
      * @param userInput string command for chatbot
@@ -43,7 +42,9 @@ public class BobbyBot {
 
         switch (command) {
         case BYE:
+            ui.showLine();
             ui.sayBye();
+            ui.showLine();
             break;
         case LIST:
             ui.showLine();
@@ -88,7 +89,9 @@ public class BobbyBot {
             }
             description = userInputArgs[0];
             String by = userInputArgs[1];
-            createDeadline(description, by);
+            ui.showLine();
+            tasks.createDeadline(description, by);
+            ui.showLine();
             break;
         case EVENT:
             userInputList.remove(0);
@@ -113,33 +116,6 @@ public class BobbyBot {
             storage.save(tasks);
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-
-
-
-
-
-    /**
-     * Creates a deadline task
-     * @param description description of task
-     * @param by date and time that the task should be completed by
-     */
-    private void createDeadline(String description, String by) {
-        // convert string by to LocalDate
-        try {
-            LocalDateTime dateBy = LocalDateTime.parse(by, DT_FORMATTER);
-            Task newDeadline = new Deadline(description, dateBy);
-            tasks.add(newDeadline);
-            ui.showLine();
-            System.out.println("Got it. I've added this task:\n  " + newDeadline + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list.");
-            ui.showLine();
-        } catch (DateTimeParseException e) {
-            ui.showLine();
-            System.out.println("Please input deadline date in the following format: [dd-mm-yyyy hh:mm]");
-            ui.showLine();
         }
     }
 
