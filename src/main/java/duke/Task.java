@@ -1,3 +1,4 @@
+package duke;
 /**
  * Encapsulates a task in a task list.
  */

@@ -1,3 +1,4 @@
+package duke;
 import java.util.Scanner;
 /**
  * Encapsulates the user interface. Scans for input and responds to user.

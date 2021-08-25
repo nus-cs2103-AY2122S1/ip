@@ -1,3 +1,4 @@
+package duke;
 /**
  * Main class for Duke, scans for inputs and responds to user.
  */

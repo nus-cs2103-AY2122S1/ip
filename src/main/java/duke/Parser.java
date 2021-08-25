@@ -1,3 +1,4 @@
+package duke;
 /**
  * Encapsulates a Parser class. Parses user input into commands.
  */

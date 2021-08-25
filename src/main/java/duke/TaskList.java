@@ -1,3 +1,4 @@
+package duke;
 import java.util.ArrayList;
 /**
  * Encapsulates a TaskList. Stores an array of tasks.
