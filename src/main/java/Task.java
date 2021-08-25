@@ -36,6 +36,16 @@ public class Task {
     }
 
     /**
+     * Returns the file's details in the format "T,<isDone>,<desc>"
+     * to be stored in the hard disk
+     *
+     * @return formatted string containing task details
+     */
+    public String getText() {
+        return String.format("%s,%s\n", this.isDone, this.description);
+    }
+
+    /**
      * Represents the task description and status
      *
      * @return details of the task in a given format

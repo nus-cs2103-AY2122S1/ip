@@ -14,6 +14,22 @@ public class ToDo extends Task{
         super(description);
     }
 
+    //TODO
+    public ToDo(String description, boolean status) {
+        super(description);
+        this.isDone = status;
+    }
+
+    /**
+     * Returns the file's details in the format "T,<isDone>,<desc>"
+     * to be stored in the hard disk
+     *
+     * @return formatted string containing task details
+     */
+    public String getText() {
+        return String.format("T,%s,%s\n", this.isDone, this.description);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

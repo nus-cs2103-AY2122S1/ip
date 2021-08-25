@@ -18,6 +18,24 @@ public class Deadline extends Task{
         this.by = by;
     }
 
+    //TODO
+    public Deadline(String description, String by, boolean status) {
+        super(description);
+        this.by = by;
+        this.isDone = status;
+    }
+
+    /**
+     * Returns the file's details in the format "D,<isDone>,<desc>,<time>"
+     * to be stored in the hard disk
+     *
+     * @return formatted string containing task details
+     */
+    public String getText() {
+        return String.format("D,%s,%s,%s\n", this.isDone, this.description, this.by);
+    }
+
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
