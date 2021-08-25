@@ -2,20 +2,20 @@
  * Represents an event task with a time and a name.
  */
 public class Event extends Task {
-	private String time;
+	private String dateTime;
 
-	public Event (String name, String time) {
+	public Event (String name, String dateTime) {
 		super(name);
-		this.time = time;
+		this.dateTime = dateTime;
 	}
 
-	public String getTime() {
-		return time;
+	public String getDateTime() {
+		return dateTime;
 	}
 
 	@Override
 	public String toString() {
-		return "[E]" + super.toString() + " (at: " + this.getTime() + ")";
+		return "[E]" + super.toString() + " (at: " + this.getDateTime() + ")";
 	}
 	
 }

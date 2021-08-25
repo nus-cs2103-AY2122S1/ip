@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
+
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents the list of tasks a user has.
@@ -100,6 +103,7 @@ public class TaskList {
      * @throws DukeException
      */
     protected void addTaskWithTime(String command, String type) throws DukeException {
+        // ToDo: Split into addDeadline and addEvent and create helper methods
         boolean isDeadline = type.equals("deadline");
         String splitWord = isDeadline ? "/by " : "/at ";
         String[] commandSplit = command.split(splitWord);   // Split the task from the date/time
@@ -109,13 +113,23 @@ public class TaskList {
             throw new DukeException("You need to provide a date/time!" + "\n");
         }
         
-        String task = commandSplit[0].split(type)[1].trim();   // The task is everything after the action
-        String time = commandSplit[1];               // The time is the second part of the command
+        String task = commandSplit[0].split(type)[1].trim();   // Everything after the action
+        if (task.isEmpty()) {
+            throw new DukeException("You need to provide a task!" + "\n");
+        }
+
+        String dateTime = commandSplit[1];      // dateTime is the second part of the command
 
         if (isDeadline) {
-            addTask(new Deadline(task, time));
+            // Check if the time is in the yyyy-mm-dd datetime format 
+            try {
+                LocalDate date = LocalDate.parse(dateTime);
+                addTask(new Deadline(task, date));
+            } catch (DateTimeParseException err) {
+                throw new DukeException("Please use the dd/mm/yyyy format for deadline!\n");    
+            }
         } else {
-            addTask(new Event(task, time));
+            addTask(new Event(task, dateTime));
         }
     }
 
@@ -123,6 +137,11 @@ public class TaskList {
      * Print all the tasks in the ArrayList of tasks.
      */
     protected void printTasks() throws DukeException{
+        if (tasks.isEmpty()) {
+            Duke.printFormattedMessage("You have no tasks!\n");
+            return;
+        }
+        
 		String taskListMessage = "I present to you, your collection of tasks!\n\n";
 
         for (int i = 0; i < tasks.size(); i++) {
