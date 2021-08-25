@@ -1,17 +1,20 @@
+package duke;
+
+import task.*;
+import ui.*;
+
 /**
  * The possible type of DukeExceptions
  *
  * @author: Wei Yangken
  */
 
-// Te
-
 public class DukeException extends Exception{
     /**
      * Constructs the DukeException
      * @param errorMsg Message to be indicated when error occurs
      */
-    DukeException(String errorMsg) {
+    public DukeException(String errorMsg) {
         super(errorMsg);
     }
 
@@ -19,7 +22,7 @@ public class DukeException extends Exception{
      * Exception when arguments for creation of tasks are insufficient
      */
     public static class InsufficientArgumentsException extends DukeException {
-        InsufficientArgumentsException(String errorMsg) {
+        public InsufficientArgumentsException(String errorMsg) {
             super(errorMsg);
         }
     }
@@ -28,7 +31,7 @@ public class DukeException extends Exception{
      * Exception when task type is not available
      */
     public static class TaskTypeNotFoundException extends DukeException {
-        TaskTypeNotFoundException(String errorMsg) {
+        public TaskTypeNotFoundException(String errorMsg) {
             super(errorMsg);
         }
     }
@@ -37,7 +40,7 @@ public class DukeException extends Exception{
      * Exception when task has not been added
      */
     public static class TaskNotAddedException extends DukeException {
-        TaskNotAddedException(String errorMsg) {
+        public TaskNotAddedException(String errorMsg) {
             super(errorMsg);
         }
     }
@@ -46,7 +49,7 @@ public class DukeException extends Exception{
      * Exception when to-do list is empty
      */
     public static class EmptyListException extends DukeException {
-        EmptyListException(String errorMsg) {
+        public EmptyListException(String errorMsg) {
             super(errorMsg);
         }
     }

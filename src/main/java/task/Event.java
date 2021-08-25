@@ -1,5 +1,7 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package task;
+
+import duke.*;
+import ui.*;
 
 /**
  * A type of task that requires event details and extends from Task
@@ -17,7 +19,7 @@ public class Event extends Task{
      * @param name Name of task
      * @param eventDetails Location or time of event
      */
-    Event(String name, String eventDetails, boolean isDone) {
+    public Event(String name, String eventDetails, boolean isDone) {
         super(name, taskCat, isDone);
         this.eventDetails = eventDetails;
     }

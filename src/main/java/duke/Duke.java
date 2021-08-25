@@ -1,5 +1,7 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+package duke;
+
+import task.*;
+import ui.*;
 
 /**
  * Allows for the main initialization of the Duke Program

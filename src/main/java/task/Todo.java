@@ -1,3 +1,8 @@
+package task;
+
+import duke.*;
+import ui.*;
+
 /**
  * A type of task that has no additional arguments and extends from Task
  *
@@ -12,7 +17,7 @@ public class Todo extends Task{
      * Constructor to create a TODO task
      * @param name Name of task
      */
-    Todo(String name, boolean isDone) {
+    public Todo(String name, boolean isDone) {
         super(name, taskCat, isDone);
     }
 

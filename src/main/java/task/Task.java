@@ -1,6 +1,7 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+package task;
+
+import duke.*;
+import ui.*;
 
 /**
  * Encapsulates the creation of tasks found in the to-do list
@@ -17,7 +18,7 @@ public class Task {
      * Construct a generic task yet to be completed
      * @param name The name of the task
      */
-    Task(String name, String taskCat, boolean isDone) {
+    public Task(String name, String taskCat, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
         this.taskCat = taskCat;

@@ -1,5 +1,7 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package task;
+
+import duke.*;
+import ui.*;
 
 /**
  * A type of task that requires a deadline that extends from Task
@@ -16,7 +18,7 @@ public class Deadline extends Task{
      * @param name Name of task
      * @param deadline Deadline of task
      */
-    Deadline(String name, String deadline, boolean isDone) {
+    public Deadline(String name, String deadline, boolean isDone) {
         super(name, taskCat, isDone);
         this.deadline = deadline;
     }

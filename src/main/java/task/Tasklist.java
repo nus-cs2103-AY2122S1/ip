@@ -1,7 +1,8 @@
-import java.io.FileWriter;
+package task;
+
 import java.util.ArrayList;
-import java.io.File;
-import java.io.IOException;
+import duke.*;
+import ui.*;
 
 /**
  * Class that contains the initialization of a list to store the tasks
@@ -15,7 +16,7 @@ public class Tasklist {
     /**
      * Constructor to create a new taskList to store tasks
      */
-    Tasklist(ArrayList<Task> taskList) {
+    public Tasklist(ArrayList<Task> taskList) {
        this.taskList = taskList;
     }
 
