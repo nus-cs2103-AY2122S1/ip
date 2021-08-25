@@ -1,10 +1,59 @@
-import java.util.Locale;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
 
+/**
+ * This class is used to simulate an automatic list creator which saves its data and changes it
+ * when the user interacts with it.
+ */
 public class Duke {
+    /**
+     * Prints the contents of the specified file.
+     * @param filePath The path of the file to be printed.
+     * @throws FileNotFoundException if file is not found.
+     */
+    private static void printFileContents(String filePath) throws FileNotFoundException {
+        File testFile = new File(filePath);
+        Scanner s = new Scanner(testFile);
+        while (s.hasNext()) {
+            System.out.println(s.nextLine());
+        }
+    }
+
+    /**
+     * Writes content to a file with given content.
+     * @param filePath The path of the file to be written.
+     * @param addedText The text to be written in the file
+     * @throws IOException if text to be written has errors
+     *                     while being processed
+     */
+    private static void writeFile(String filePath, String addedText) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(addedText);
+        fw.close();
+    }
+
     public static void main(String[] args) {
-        System.out.println("Welcome to Ben's. How may I help you?");
+        System.out.println("Welcome to Ben's. How may I help you?\n");
+        String filePath = "data/duke.txt";
+        File dukeFile = new File(filePath);
+        filePath = dukeFile.getAbsolutePath();
+
+        try {
+            System.out.println("Current list:");
+            printFileContents(dukeFile.getAbsolutePath());
+        } catch (FileNotFoundException e) {
+            System.out.println("\nNote: This is your first time using Duke. " +
+                    "We will now create a new file for you.");
+        }
+
+        File parentDir = dukeFile.getParentFile();
+        if(!parentDir.exists()) {
+            parentDir.mkdirs();
+        }
 
         Scanner newScan = new Scanner(System.in);
         ArrayList<Task> contents = new ArrayList<>();
@@ -72,6 +121,21 @@ public class Duke {
             }
             userInput = newScan.nextLine();
         }
+        int count = 0;
+
+        for (Task content : contents) {
+            try {
+                writeFile(filePath, content.printTask());
+                count++;
+            } catch (IOException e) {
+                System.out.println("Error with writing to file. Error: " + e.getMessage());
+            }
+        }
+
+        if (count == contents.size() && count != 0) {
+            System.out.println("Successfully written contents to file.");
+        }
+
         System.out.println("\nGoodbye! Have a nice day. :)");
         System.exit(0);
     }
