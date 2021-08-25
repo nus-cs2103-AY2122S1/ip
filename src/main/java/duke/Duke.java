@@ -32,7 +32,7 @@ public class Duke {
         String command = sc.next();
         String description = sc.nextLine();
         while(!command.equals("bye")) {
-            ui.executeCommand(command, description);
+            handleCommandExecution(command,description);
             command = sc.next();
             if(!command.equals("bye")) {
                 description = sc.nextLine();
@@ -40,6 +40,10 @@ public class Duke {
             storage.saveData();
         }
         ui.displayByeMessage();
+    }
+
+    public void handleCommandExecution(String command, String description)throws DukeException {
+        ui.executeCommand(command,description);
     }
 
 }

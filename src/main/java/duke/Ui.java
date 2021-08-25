@@ -82,6 +82,7 @@ public class Ui {
             printLines();
             System.out.println(e.getMessage());
             printLines();
+            throw e;
         }
 
     }
