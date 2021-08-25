@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyCommandException;
@@ -9,16 +10,29 @@ import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.MessageEmptyException;
 
+/**
+ * Handles and interprets user commands for Duke.
+ */
 public class Parser {
 
+    /**
+     * List of tasks.
+     */
     private final TaskList taskList;
 
+    /**
+     * Constructor for Parser.
+     *
+     * @param taskList list of tasks.
+     */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
 
     /**
      * Logic for handling different commands and executing the appropriate methods for the inputted command.
+     * Throws appropriate exceptions for its respective error.
+     *
      * @param input The entire user input.
      */
 
@@ -27,7 +41,6 @@ public class Parser {
         String command = words[0];
 
         try {
-            System.out.println("__________________________________");
             switch (command) {
             case "list":
                 taskList.displayList();
@@ -81,10 +94,8 @@ public class Parser {
             default:                                // all other inputs that are not supported
                 throw new InvalidCommandException();
             }
-            System.out.println("__________________________________");
         } catch (DukeException e) {
-            System.out.println(e.getMessage());     // prints only error message out for user
-            System.out.println("__________________________________");
+            Ui.printMessage(e.getMessage());     // prints only error message out for user
         }
     }
 }

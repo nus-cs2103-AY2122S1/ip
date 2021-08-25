@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Exception of Duke that occurs when the date or time format given is invalid.
+ */
 public class InvalidDateTimeException extends DukeException {
     public InvalidDateTimeException() {
         super("Your date or time format is wrong! " +
