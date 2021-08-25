@@ -37,7 +37,7 @@ public abstract class Command {
     
     @Override
     public boolean equals(Object o) {
-        @SuppressWarnings({})
+        @SuppressWarnings("unchecked")
         Command other = (Command) o;
         return Arrays.equals(this.inputTokens, other.inputTokens);
     } 

@@ -66,4 +66,12 @@ public abstract class Task {
         return name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        @SuppressWarnings("unchecked")
+        Task otherTask = (Task) o;
+        return this.isDone == otherTask.isDone
+                && this.name.equals(otherTask.name);
+    }
+
 }

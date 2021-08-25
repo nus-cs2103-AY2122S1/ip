@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     @Test
-    public void parserParse_matchingCommand_success() throws YoyoException {
+    public void parserParse_matchingCommand_success() {
         String input1 = "bye";
         String input2 = "list";
         String input3 = "done 3";

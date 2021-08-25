@@ -38,4 +38,13 @@ public class Deadline extends Task {
     public String printType() {
         return "[D]";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        @SuppressWarnings("unchecked")
+        Deadline otherDeadline = (Deadline) o;
+        return this.isDone == otherDeadline.isDone
+                && this.name.equals(otherDeadline.name)
+                && this.datetime.equals(otherDeadline.datetime);
+    }
 }

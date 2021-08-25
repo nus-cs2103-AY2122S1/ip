@@ -48,4 +48,13 @@ public class Event extends Task {
         return "[E]";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        @SuppressWarnings("unchecked")
+        Event otherEvent = (Event) o;
+        return this.isDone == otherEvent.isDone
+                && this.name.equals(otherEvent.name)
+                && this.datetime.equals(otherEvent.datetime);
+    }
+
 }

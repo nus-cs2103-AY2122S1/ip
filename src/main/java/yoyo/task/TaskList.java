@@ -7,7 +7,7 @@ public class TaskList {
 
     public TaskList() {}
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -25,6 +25,13 @@ public class TaskList {
 
     public void remove(int index) {
         tasks.remove(index);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        @SuppressWarnings("unchecked")
+        TaskList otherTaskList = (TaskList) o;
+        return this.tasks.equals(otherTaskList.tasks);
     }
 
 
