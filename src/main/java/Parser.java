@@ -2,7 +2,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
-    private static final DateValidator dateValidator = new DateValidator(DateTimeFormatter.ISO_LOCAL_DATE);
+    private static final DateValidator ISOLocalDateValidator = new DateValidator(DateTimeFormatter.ISO_LOCAL_DATE);
+    private static final DateValidator LocalDateValidator =
+            new DateValidator(DateTimeFormatter.ofPattern("MMM dd yyyy"));
 
     public static Task check(String str, String check) throws DukeException {
         int partition = str.indexOf(check);
@@ -11,11 +13,12 @@ public class Parser {
         }
         String str1 = str.substring(0, partition);
         String str2 = str.substring(partition + check.length());
-        System.out.println(str2);
         LocalDate date = null;
 
-        if (dateValidator.isValid(str2)) {
+        if (ISOLocalDateValidator.isValid(str2)) {
             date = LocalDate.parse(str2);
+        } else if (LocalDateValidator.isValid(str2)) {
+            date = LocalDate.parse(str2, DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
 
         switch (check) {
