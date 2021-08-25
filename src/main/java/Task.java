@@ -2,17 +2,17 @@ public class Task {
     private String taskName;
     private boolean status;
 
-    Task(String taskName) {
+    Task(String taskName, boolean status) {
         this.taskName = taskName;
-        status = false;
+        this.status = status;
     }
 
     public String displayTask() {
         String display;
         if (status) {
-            display = "[X] " + taskName;
+            display = "|1|" + taskName;
         } else {
-            display = "[ ] " + taskName;
+            display = "|0|" + taskName;
         }
         return display;
     }
