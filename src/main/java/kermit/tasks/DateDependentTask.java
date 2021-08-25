@@ -37,7 +37,7 @@ public abstract class DateDependentTask extends Task {
     /**
      * Get string representation of date associated to task.
      *
-     * @return Stringified date in form YYYY-MM-DD
+     * @return Stringified date in form YYYY-MM-DD.
      */
     public String getDate() {
         return this.date.toString();
