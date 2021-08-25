@@ -1,6 +1,10 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 import java.io.File;
 
@@ -12,6 +16,8 @@ public class Duke {
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
     private static final String DELETE = "delete";
+
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
 
     private static final String PATHNAME = "./data/duke.txt";
 
@@ -132,11 +138,13 @@ public class Duke {
                         list.add(newTodo);
                         break;
                     case "E":
-                        Events newEvent = new Events(parsed[2], parsed[1], parsed[3]);
+                        LocalDateTime at = LocalDateTime.parse(parsed[3], formatter);
+                        Events newEvent = new Events(parsed[2], parsed[1], at);
                         list.add(newEvent);
                         break;
                     case "D":
-                        Deadlines newDeadline = new Deadlines(parsed[2], parsed[1], parsed[3]);
+                        LocalDateTime by = LocalDateTime.parse(parsed[3], formatter);
+                        Deadlines newDeadline = new Deadlines(parsed[2], parsed[1], by);
                         list.add(newDeadline);
                         break;
                 }
@@ -188,7 +196,8 @@ public class Duke {
                     if (at.equals("")) {
                         throw new ArrayIndexOutOfBoundsException();
                     }
-                    Events newEvent = new Events(desc, at);
+                    LocalDateTime finalAt = LocalDateTime.parse(at, formatter);
+                    Events newEvent = new Events(desc, finalAt);
                     printAdd(newEvent);
                 } else if (command.equals(DEADLINE)) {
                     String desc = str.split(" /by ")[0].substring(9);
@@ -199,7 +208,8 @@ public class Duke {
                     if (by.equals("")) {
                         throw new ArrayIndexOutOfBoundsException();
                     }
-                    Deadlines newDeadline = new Deadlines(desc, by);
+                    LocalDateTime finalBy = LocalDateTime.parse(by, formatter);
+                    Deadlines newDeadline = new Deadlines(desc, finalBy);
                     printAdd(newDeadline);
                 } else {
                     throw new DukeException("(￣ ￣|||) Sorry I do not understand.");
@@ -215,6 +225,10 @@ public class Duke {
             } catch (ArrayIndexOutOfBoundsException e) {
                 printBreak();
                 System.out.println(indentation + "(-_-) You forgot the date...");
+                printBreak();
+            } catch (DateTimeException e) {
+                printBreak();
+                System.out.println(indentation + "(`ー´) Please input a valid date format of 'dd/mm/yyyy HHmm' in 24 Hour Format");
                 printBreak();
             }
         }
