@@ -1,6 +1,11 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddTaskCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitDukeCommand;
+import duke.command.ListCommand;
 
 // duke.Parser: deals with making sense of the user duke.command
 public class Parser {
