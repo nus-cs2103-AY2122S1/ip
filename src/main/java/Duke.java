@@ -1,6 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.*;
-import java.lang.*;
+import java.lang.String;
+
 
 /**
  * @author  Zhang Zhiyao
@@ -21,12 +26,10 @@ public class Duke {
         BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT
     }
 
-
     /**
      * the method of greeting at starting of program.
      */
     public static void greeting(){
-
         System.out.println(INDENTATION + UNDERLINE);
         System.out.println(INDENTATION + "Hello! I'm Duke\n" +
                            INDENTATION + "What can I do for you?");
@@ -39,7 +42,6 @@ public class Duke {
      * @return boolean
      */
     public static boolean isInteger(String input) {
-
         if (input == null) {
             return false;
         } else {
@@ -52,9 +54,11 @@ public class Duke {
         }
     }
 
-    public static void list() {
+    public static void list() throws IOException{
+
         System.out.println(INDENTATION + UNDERLINE);
         System.out.println(INDENTATION + "Here are the tasks in your list:");
+        order = task.size();
         for (int i = 0; i < order; i ++) {
             System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + task.get(i));
         }
@@ -109,7 +113,7 @@ public class Duke {
     }
 
 
-    public static void addTask(String cmd) throws NoDescriptionException, NoTimeException, NoCommandException {
+    public static void addTask(String cmd) throws NoDescriptionException, NoTimeException, NoCommandException, IOException {
 
         Operation instruction = Operation.valueOf(cmd.toUpperCase().split(" ")[0]);
         if (cmd.split(" ").length != 1) {
@@ -119,7 +123,7 @@ public class Duke {
                         throw new NoDescriptionException(instruction.name());
 
                     } else {
-                        Todo todo = new Todo(cmd.substring(5));
+                        Todo todo = new Todo(cmd.substring(5), false);
                         task.add(order, todo);
                     }
                     break;
@@ -131,7 +135,7 @@ public class Duke {
 
                     } else {
                         Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
-                                subString_deadline.split(" /by ")[1]);
+                                subString_deadline.split(" /by ")[1], false);
                         task.add(order, deadline);
                     }
                     break;
@@ -143,7 +147,7 @@ public class Duke {
 
                     } else {
                         Event event = new Event(subString_event.split(" /at ")[0],
-                                subString_event.split(" /at ")[1]);
+                                subString_event.split(" /at ")[1], false);
                         task.add(order, event);
                     }
                     break;
@@ -173,6 +177,7 @@ public class Duke {
         System.out.println(INDENTATION + UNDERLINE);
         cmdList[order] = cmd;
 
+        writeData();
     }
 
     public static void bye() {
@@ -182,21 +187,57 @@ public class Duke {
 
     }
 
+    public static void readData() throws IOException {
+        try {
+            File myData = new File("data/duke.txt");
+            Scanner sc = new Scanner(myData);
+            while (sc.hasNext()) {
+                String cur = sc.nextLine();
+                String[] curTask = cur.split(" \\| ");
+                boolean isDone = curTask[1].equals("1");
+                if (curTask[0].equals("T")) {
+                    task.add(new Todo(curTask[2], isDone));
+                } else if(curTask[0].equals("D")) {
+                    task.add(new Deadline(curTask[2], curTask[3], isDone));
+                } else if(curTask[0].equals("E")) {
+                    task.add(new Event(curTask[2], curTask[3], isDone));
+                } else {}
+            }
 
+        } catch (FileNotFoundException e) {
+            if (new File("data").mkdir()) {
+                System.out.println("data folder does not exist, create now");
+            } else if (new File("data/duke.txt").createNewFile()){
+                System.out.println("duke.txt file not exist, create now");
+            }
+        }
+
+    }
+
+    public static void writeData() throws IOException {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt", false);
+            for (Task t : task) {
+                fw.write(t.formatChnage());
+            }
+        } catch (IOException exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
 
     /**
      * This is Main method
      * @param args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner sc = new Scanner(System.in);
         greeting();
+        readData();
 
 loop:
         while(true) {
             String cmd = sc.nextLine();
-            int numOfTasks = 0;
             Operation operation;
 
             try {
@@ -241,8 +282,7 @@ loop:
 
                 }
 
-            } catch (NoDescriptionException | EmptyTaskListException | NoCommandException
-                    | NoTimeException | DeleteWrongIndexException e) {
+            } catch (NoDescriptionException | EmptyTaskListException | NoCommandException | NoTimeException | DeleteWrongIndexException | IOException e) {
 
                 e.printStackTrace();
             }

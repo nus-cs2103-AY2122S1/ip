@@ -1,8 +1,8 @@
 public class Event extends Task {
     protected String at;
 
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, String at, boolean isDone) {
+        super(description, isDone);
         this.at = at;
     }
 
@@ -11,6 +11,12 @@ public class Event extends Task {
         super.markDone();
         return this;
     }
+
+    @Override
+    public String formatChnage() {
+        return super.formatChnage();
+    }
+
 
     @Override
     public String toString() {
