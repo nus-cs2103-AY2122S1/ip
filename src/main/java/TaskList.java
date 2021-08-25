@@ -33,7 +33,7 @@ public class TaskList {
     public void addSavedTask(String input) throws ArrayIndexOutOfBoundsException, DukeException {
         String[] inputArr = input.split("\\|");
         String symbol = inputArr[0];
-        String remainingText = Duke.getRemainingText(symbol, input);
+        String remainingText = Parser.getRemainingText(symbol, input);
         switch (symbol.charAt(0)) {
         case ToDo.SYMBOL:
             ToDo myTodo = ToDo.newToDoFromSave(remainingText);

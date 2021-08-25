@@ -16,14 +16,6 @@ public class Duke {
     private static final String MISSING_DELETE_NUMBER_MESSAGE = "Please input a number after the delete command";
     private static final String MISSING_DONE_NUMBER_MESSAGE = "Please input a number after the done command";
 
-    public static String getRemainingText(String firstWord, String input) {
-        String remainingText = "";
-        if (input.length() > firstWord.length() + 1) {
-            remainingText = input.substring(firstWord.length() + 1).trim();
-        }
-        return remainingText;
-    }
-
     private static void inputLoop(TaskList taskList, Storage storage) {
         Scanner sc = new Scanner(System.in);
         boolean canContinue = true;
@@ -32,7 +24,7 @@ public class Duke {
             String[] inputArr = input.split(" ");
             try {
                 String firstWord = inputArr[0];
-                String remainingText = Duke.getRemainingText(firstWord, input);
+                String remainingText = Parser.getRemainingText(firstWord, input);
                 Command command = Command.initialiseCommand(firstWord);
                 switch (command) {
                 case LIST:
