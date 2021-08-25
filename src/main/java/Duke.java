@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,17 +47,33 @@ public class Duke {
             if (command.equals("todo")) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            add(command.substring(5), TaskType.TODO);
+            try {
+                add(command.substring(5), TaskType.TODO);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please write your date and time in the following format: " +
+                        "D/MM/YYYY HH:MM");
+            }
         } else if (command.startsWith("deadline")) {
             if (command.equals("deadline")) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             }
-            add(command.substring(9), TaskType.DEADLINE);
+            try {
+                add(command.substring(9), TaskType.DEADLINE);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please write your date and time in the following format: " +
+                        "D/MM/YYYY HH:MM");
+
+            }
         } else if (command.startsWith("event")) {
             if (command.equals("event")) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
             }
-            add(command.substring(6), TaskType.EVENT);
+            try {
+                add(command.substring(6), TaskType.EVENT);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please write your date and time in the following format: " +
+                        "D/MM/YYYY HH:MM");
+            }
         } else if (command.startsWith("delete")) {
             delete(command.substring(7));
         } else {
@@ -73,34 +90,26 @@ public class Duke {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public void add(String description, TaskType taskType) {
+    public void add(String description, TaskType taskType) throws DateTimeParseException {
         if (toDoList.size() < 100) {
 
-            System.out.println("Got it. I've added this task:");
-
+            Task task;
 
             if (taskType == TaskType.TODO) {
-                Task task = new Todo(description);
-                toDoList.add(task);
-                System.out.println(task);
-            }
-
-            if (taskType == TaskType.DEADLINE) {
+                task = new Todo(description);
+            } else if (taskType == TaskType.DEADLINE) {
                 String newDescription = description.substring(0, description.indexOf(" /by "));
                 String by = description.substring(description.indexOf("/by ") + 4);
-                Task task = new Deadline(newDescription, by);
-                toDoList.add(task);
-                System.out.println(task);
-            }
-
-            if (taskType == TaskType.EVENT) {
+                task = new Deadline(newDescription, by);
+            } else {
                 String newDescription = description.substring(0, description.indexOf(" /at "));
                 String at = description.substring(description.indexOf("/at ") + 4);
-                Task task = new Event(newDescription, at);
-                toDoList.add(task);
-                System.out.println(task);
+                task = new Event(newDescription, at);
             }
 
+            System.out.println("Got it. I've added this task:");
+            toDoList.add(task);
+            System.out.println(task);
             printNowSize();
         }
     }
