@@ -1,1 +1,4 @@
 E | 1 | hello | 1999-12-12
+T | 0 | hello
+T | 0 | how are you
+T | 0 | i am fine
