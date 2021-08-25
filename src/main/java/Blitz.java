@@ -19,6 +19,9 @@ public class Blitz {
         }
     }
 
+    /**
+     * Begins running the application.
+     */
     public void run() {
         ui.printGreeting();
         ui.printList(tasks);

@@ -23,6 +23,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads contents from the file and stores data in a list.
+     *
+     * @return list containing tasks from the file.
+     * @throws BlitzException if there's an error while creating the file
+     *     in case it doesn't exist.
+     */
     public ArrayList<Task> loadFileContents() throws BlitzException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         File f = new File(filePath);
@@ -63,6 +70,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the updates list of tasks to the file.
+     *
+     * @param tasks list of tasks to be saved onto the file.
+     * @throws IOException if the program cannot create or
+     *     write to the file indicated.
+     */
     public void saveTasksInFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter("data/blitz.txt");
         for(Task t : tasks.getTaskList()) {
