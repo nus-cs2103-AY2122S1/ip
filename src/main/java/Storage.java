@@ -64,7 +64,7 @@ public class Storage {
                 }
             }
             return taskList;
-        } catch (IOException e) {
+        } catch (IOException | ArrayIndexOutOfBoundsException e) {
             throw new KermitException(fileErrorText);
         }
     }
