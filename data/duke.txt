@@ -1,1 +1,2 @@
-[T][ ] todo 4
+[T][X] todo hi
+[E][ ] hi  (at: Jan 19 2020 1800)

@@ -12,18 +12,11 @@ public class Store {
                 case "event" -> throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                 case "todo" -> throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
-            if (task.startsWith("deadline")) {
-                Deadline d = new Deadline(task);
-                TaskList.add(d);
-                writer.write(d.toString());
-            } else if (task.startsWith("event") && task.contains("/at ")) {
-                Event e = new Event(task);
-                TaskList.add(e);
-                writer.write(e.toString());
-            } else if (task.startsWith("todo")) {
-                Todo t = new Todo(task);
-                TaskList.add(t);
-                writer.write(t.toString() + "\n");
+            if (task.startsWith("deadline") ||
+                    (task.startsWith("event") && task.contains("/at ")) ||
+                    (task.startsWith("todo"))) {
+                TaskList.addSpecificTask(task);
+                writer.write(TaskList.getLast().toString() + "\n");
             }
             writer.close();
             FileWriter fWriter = new FileWriter(text, true);
@@ -52,24 +45,21 @@ public class Store {
                 curr[2] = line.substring(7);
                 switch (curr[1]) {
                     case "T" -> {
-                        Tasks todo = new Todo("todo " + curr[2]);
-                        TaskList.add(todo);
+                        TaskList.addSpecificTask("todo " + curr[2]);
                         if (curr[1].equals("X")) {
-                            todo.markAsDone();
+                            TaskList.getLast().markAsDone();
                         }
                     }
                     case "E" -> {
-                        Tasks event = new Event("event " + curr[2]);
-                        TaskList.add(event);
+                        TaskList.addSpecificTask("event " + curr[2]);
                         if (curr[1].equals("X")) {
-                            event.markAsDone();
+                            TaskList.getLast().markAsDone();
                         }
                     }
                     case "D" -> {
-                        Tasks deadline = new Deadline("deadline " + curr[2]);
-                        TaskList.add(deadline);
+                        TaskList.addSpecificTask("deadline " + curr[2]);
                         if (curr[1].equals("X")) {
-                            deadline.markAsDone();
+                            TaskList.getLast().markAsDone();
                         }
                     }
                     default -> {
