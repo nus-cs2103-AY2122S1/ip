@@ -10,7 +10,7 @@ public abstract class Command {
         this.args = args;
     }
     
-    public static Command createCommand(String input) throws DukeException{
+    public static Command createCommand(String input) throws DukeException {
         String[] cmd_args = Parser.parseUserInput(input);
         Command cmd;
         switch (cmd_args[0]){
@@ -41,5 +41,5 @@ public abstract class Command {
         return cmd;
     }
 
-    public abstract void execute(TaskList taskList, Ui ui, Storage store, Duke bot);
+    public abstract void execute(TaskList tasklist, Ui ui, Storage store, Duke bot);
 }
