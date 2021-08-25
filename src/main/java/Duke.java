@@ -1,23 +1,34 @@
+import java.io.IOException;
+
 import java.util.Scanner;
 
 /**
  * The Duke class encapsulates the action of the chatbot Duke.
  */
 public class Duke {
+    /** The path name to be converted to create a new File instance. */
+    private static final String PATH_NAME = "./data/tasklist.txt";
+
+    /** The storage for Duke to save and load the tasklist to. */
+    private Storage storage;
+
     /** The tasklist for Duke to store all the tasks. */
     private TaskList taskList;
 
     /**
      * Constructor to initialise the Duke chatbot.
      */
-    private Duke() {
-        this.taskList = new TaskList();
+    private Duke(String pathName) throws IOException {
+        this.storage = new Storage(pathName);
+        this.taskList = new TaskList(storage.loadFile());
     }
 
     /**
      * Carry out the command entered by the user to Duke.
+     * @throws DukeException
+     * @throws IOException
      */
-    public void followCommand() throws DukeException {
+    public void followCommand() throws DukeException, IOException {
 
         Scanner scan = new Scanner(System.in);
         String description = scan.nextLine();
@@ -45,7 +56,7 @@ public class Duke {
                     String des = description.substring(5);
                     Todo ttask = new Todo(des);
                     taskList.storeTask(ttask);
-                    System.out.println("  " + ttask.toString() + "\n" + taskList.toString());
+                    System.out.println("  " + ttask + "\n" + taskList.toString());
                 } else if (description.startsWith("deadline")) {
                     if (description.equals("deadline")) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -56,7 +67,7 @@ public class Duke {
                     String by = description.substring(pos + 4);
                     Deadline dtask = new Deadline(des, by);
                     taskList.storeTask(dtask);
-                    System.out.println("  " + dtask.toString() + "\n" + taskList.toString());
+                    System.out.println("  " + dtask + "\n" + taskList.toString());
                 } else if (description.startsWith("event")) {
                     if (description.equals("event")) {
                         throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
@@ -67,13 +78,14 @@ public class Duke {
                     String at = description.substring(pos + 4);
                     Event etask = new Event(des, at);
                     taskList.storeTask(etask);
-                    System.out.println("  " + etask.toString() + "\n" + taskList.toString());
+                    System.out.println("  " + etask + "\n" + taskList.toString());
                 } else {
                     throw new DukeException("☹ I'm sorry! I'm not quite sure what you need me to do!");
                 }
-            } catch (DukeException exception) {
-                System.out.println(exception.toString());
+            } catch (DukeException e) {
+                System.out.println(e.toString());
             }
+            storage.saveFile(taskList.getAllTasks());
             System.out.println("-------------------------------------------------------------------");
             description = scan.nextLine();
         }
@@ -83,7 +95,7 @@ public class Duke {
         scan.close();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -93,7 +105,7 @@ public class Duke {
         System.out.println("Hello I'm\n" + logo + "How may I help you today master?\n");
         System.out.println("-------------------------------------------------------------------");
 
-        Duke chatbot = new Duke();
+        Duke chatbot = new Duke(PATH_NAME);
         chatbot.followCommand();
     }
 }
