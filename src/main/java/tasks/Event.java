@@ -22,7 +22,7 @@ public class Event extends Task {
         super(description);
         this.at = at;
     }
-    
+
     /**
      * Return string representation of the task to write to hard disk.
      *
@@ -36,7 +36,7 @@ public class Event extends Task {
             return "E ; 0 ; " + this.description + " ; " + this.at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
     }
-    
+
     /**
      * String representation of this task.
      *
