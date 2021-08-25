@@ -1,9 +1,10 @@
-package commands;
+package duke.commands;
 
 import java.time.LocalDate;
 import java.util.*;
-import tasks.*;
-import utils.*;
+
+import duke.tasks.*;
+import duke.utils.*;
 
 public class GetAtCommand extends Command{
     LocalDate date;

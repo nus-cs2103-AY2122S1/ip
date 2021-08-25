@@ -1,6 +1,6 @@
-package utils;
+package duke.utils;
 
-import commands.*;
+import duke.commands.*;
 
 public class Parser {
     public static Command parse(String input) throws DukeException {

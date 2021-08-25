@@ -1,0 +1,10 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Users\\Dion Neo Wen Shun\\Desktop\\junit-platform-console-standalone-1.7.0-M1.jar"
+    ],
+    "java.project.sourcePaths": [
+        "src/test/java/duke/",
+        "src/main/java/"
+    ]
+}

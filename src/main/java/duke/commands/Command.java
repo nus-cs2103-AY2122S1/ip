@@ -1,8 +1,9 @@
-package commands;
+package duke.commands;
 
 import java.util.*;
-import tasks.Task;
-import utils.*;
+
+import duke.tasks.Task;
+import duke.utils.*;
 
 public abstract class Command {    
 

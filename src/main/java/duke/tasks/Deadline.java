@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 public class Deadline extends TaskWithDate {
     public Deadline(String description, String by, boolean done) {
         super(description,by);

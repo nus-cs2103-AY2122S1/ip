@@ -1,7 +1,9 @@
-package utils;
+package duke.utils;
 
 import java.util.*;
-import tasks.*;
+
+import duke.tasks.*;
+
 import java.io.*;
 
 public class Storage {

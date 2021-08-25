@@ -1,6 +1,8 @@
+package duke;
 import java.util.*;
-import utils.*;
-import commands.Command;
+
+import duke.commands.Command;
+import duke.utils.*;
 
 public class Duke {
     private Storage storage;
@@ -34,10 +36,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke("data");
-        duke.run();
     }
 }
