@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -142,7 +143,7 @@ public class TaskList {
                     break;
                 }
                 case "D": {
-                    Task temp = new Deadline(currentLine[2].trim(), currentLine[3].trim());
+                    Task temp = new Deadline(currentLine[2].trim(), LocalDate.parse(currentLine[3].trim()));
                     if (currentLine[1].equals("1")) {
                         temp.markAsDone();
                     }
@@ -150,7 +151,7 @@ public class TaskList {
                     break;
                 }
                 case "E": {
-                    Task temp = new Event(currentLine[2].trim(), currentLine[3].trim());
+                    Task temp = new Event(currentLine[2].trim(), LocalDate.parse(currentLine[3].trim()));
                     if (currentLine[1].equals("1")) {
                         temp.markAsDone();
                     }
