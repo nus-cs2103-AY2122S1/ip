@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExceptionalCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.helpful_functions.HelpfulFunctions;
@@ -23,6 +24,8 @@ public class Parser {
                 return new DoneCommand(Integer.valueOf(splittedInput[1]));
             case "delete":
                 return new DeleteCommand(Integer.valueOf(splittedInput[1]));
+            case "find":
+                return new FindCommand(splittedInput[1]);
             case "bye":
                 return new ByeCommand();
             case "todo":
