@@ -2,8 +2,9 @@ public class DeleteTask extends Command {
     // zero-indexed
     int taskNum;
 
+    // taskNum is number in task list, one indexed
     public DeleteTask(int taskNum) {
-        this.taskNum = taskNum;
+        this.taskNum = taskNum - 1;
     }
 
     @Override
@@ -12,7 +13,7 @@ public class DeleteTask extends Command {
             Task deletedTask = taskList.deleteTask(taskNum);
             ui.showDeleteTaskMessage(deletedTask, taskList);
             storage.save(taskList);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new KermitException("That is an invalid task!");
         }
     }

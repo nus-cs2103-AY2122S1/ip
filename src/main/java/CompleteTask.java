@@ -2,8 +2,9 @@ public class CompleteTask extends Command {
     // zero indexed
     private int taskNum;
 
+    // taskNum is number in task list, one indexed
     public CompleteTask(int taskNum) {
-        this.taskNum = taskNum;
+        this.taskNum = taskNum - 1;
     }
 
     @Override
@@ -12,7 +13,7 @@ public class CompleteTask extends Command {
             Task task = taskList.completeTask(taskNum);
             ui.showCompleteTaskMessage(task);
             storage.save(taskList);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new KermitException("That is an invalid task!");
         }
     }
