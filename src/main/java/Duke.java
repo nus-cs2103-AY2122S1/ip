@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -101,7 +104,8 @@ public class Duke {
                         } else if (parts[1].equals(" ")) {
                             throw new TaskNoDateTimeException("error", "deadline");
                         } else {
-                            Deadline deadline = new Deadline(parts[0], parts[1]);
+                            LocalDateTime dateTime = getDateTime(parts[1]);
+                            Deadline deadline= new Deadline(parts[0], dateTime);
                             list.add(deadline);
                             echo(deadline, list.size());
                         }
@@ -135,7 +139,8 @@ public class Duke {
                         } else if (parts[1].equals(" ")) {
                             throw new TaskNoDateTimeException("error", "event");
                         } else {
-                            Event event = new Event(parts[0], parts[1]);
+                            LocalDateTime dateTime = getDateTime(parts[1]);
+                            Event event = new Event(parts[0], dateTime);
                             list.add(event);
                             echo(event, list.size());
                         }
@@ -215,5 +220,17 @@ public class Duke {
             throw new DukeEmptyException("error", s);
         }
         return "";
+    }
+
+    private static LocalDateTime getDateTime(String s) {
+        try{
+            String dt = s.replaceFirst(" ", "");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(dt, formatter);
+            return dateTime;
+        } catch (DateTimeParseException e) {
+            System.out.println("( ⚆ _ ⚆ ) OOPS!!! Please enter date & time in this format (yyyy-MM-dd HH:mm)");
+        }
+        return null;
     }
 }
