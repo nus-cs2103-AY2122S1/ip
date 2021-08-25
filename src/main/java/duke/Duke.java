@@ -21,7 +21,7 @@ public class Duke {
     public void run() {
         ui.greet();
         boolean exit = false;
-        while(!exit) {
+        while (!exit) {
             try {
                 Command c = Parser.parseInputs(ui.nextCommand());
                 c.execute(storage, taskList, ui);

@@ -13,12 +13,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) {
-        try {
+    public void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
             storage.writeToDisk(taskList.compileTasks());
-        } catch (DukeException e) {
-            e.printStackTrace();
-            ui.respond(e.getMessage());
-        }
     }
 }

@@ -8,10 +8,10 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) {
-        ui.respond(String.format(
-                        "Ooh yeah! Here are your %d tasks\n%s",
-                        taskList.getSize(),
-                        taskList.list())
+        ui.respond(
+                String.format("Ooh yeah! Here are your %d tasks\n%s",
+                    taskList.getSize(),
+                    taskList.list())
         );
     }
 }

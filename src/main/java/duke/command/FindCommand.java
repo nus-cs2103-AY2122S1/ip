@@ -11,6 +11,7 @@ public class FindCommand extends Command{
     public FindCommand(String searchTerm) {
         this.searchTerm = searchTerm;
     }
+
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) {
         Task[] tasks = taskList.findTasksWithName(this.searchTerm);
