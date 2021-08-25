@@ -7,6 +7,7 @@ public class Skeltal {
 
     public static void main(String[] args) throws SkeltalException {
 
+        Manager.loadTaskList(Storage.loadFile());
         Display.introduction();
 
         boolean shutdown = false;
@@ -17,6 +18,7 @@ public class Skeltal {
                 System.out.println("Thanks for chatting! Hope to see you again soon! ");
                 shutdown = true;
                 System.out.println(Display.line);
+                sc.close();
                 continue;
             } else {
                 Display.response(userReply);

@@ -19,14 +19,17 @@ public class Display {
                     break;
                 case "done":
                     Manager.done(arrReply[1]);
+                    Storage.store();
                     break;
                 case "deadline":
                     Deadline dead = new Deadline(arrReply[1]);
                     Manager.addReply(dead);
+                    Storage.store();
                     break;
                 case "event":
                     Event event = new Event(arrReply[1]);
                     Manager.addReply(event);
+                    Storage.store();
                     break;
                 case "todo":
                     if (arrReply.length == 1) {
@@ -34,15 +37,20 @@ public class Display {
                     }
                     ToDo todo = new ToDo(arrReply[1]);
                     Manager.addReply(todo);
+                    Storage.store();
                     break;
                 case "delete":
                     System.out.println("Noted. I have removed this task");
                     Manager.delete(arrReply[1]);
+                    Storage.store();
+                    break;
+                case "store":
+                    Storage.store();
                     break;
                 default:
                     throw new SkeltalException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        } catch (SkeltalException spook) {
+        } catch (Exception spook) {
             System.out.println(spook.getMessage());
         }
 

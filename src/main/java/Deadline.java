@@ -8,17 +8,21 @@ public class Deadline extends Task {
             throw new SkeltalException("OOPS! The description of a deadline cannot be empty!");
         }
         String time = rawTime.split("/", 2)[1];
-        time = "(" + time + ")";
         this.time = time;
     }
 
-    public String getTime() {
-        System.out.println(time);
-        return time;
+    public String formatTime() {
+        String formatTime = "(" + this.time + ")";
+        return formatTime;
+    }
+
+    @Override
+    public String store() {
+        return "D | " + super.store() + "| " + this.time;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + time;
+        return "[D]" + super.toString() + formatTime();
     }
 }

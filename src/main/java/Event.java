@@ -8,16 +8,21 @@ public class Event extends Task {
             throw new SkeltalException("OOPS! The description of an event cannot be empty!");
         }
         String time = procTime[1];
-        time = "(" + time + ")";
         this.time = time;
     }
 
-    public String getTime() {
-        return time;
+    public String formatTime() {
+        String formatTime = "(" + this.time + ")";
+        return formatTime;
+    }
+
+    @Override
+    public String store() {
+        return "E | " + super.store() + "| " + time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + time;
+        return "[E]" + super.toString() + formatTime();
     }
 }
