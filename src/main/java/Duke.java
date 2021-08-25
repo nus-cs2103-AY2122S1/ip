@@ -1,5 +1,13 @@
+
 import java.io.*;
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -15,7 +23,7 @@ public class Duke {
             }
             String parts[] = s.split("\\|", 5);
             if (parts[0].equals("D")) {
-                Deadline dl = new Deadline(parts[2], parts[3]);
+                Deadline dl = new Deadline(parts[2], dateFormatting(parts[3]));
                 if (parts[1].equals("1")) {
                     dl.changeIsDone(true);
                 }
@@ -27,7 +35,7 @@ public class Duke {
                 }
                 xs.add(td);
             } else if (parts[0].equals("E")) {
-                Event e = new Event(parts[2], parts[3]);
+                Event e = new Event(parts[2], dateFormatting(parts[3]));
                 if (parts[1].equals("1")) {
                     e.changeIsDone(true);
                 }
@@ -86,6 +94,12 @@ public class Duke {
         return "\n    ";
     }
 
+    public static LocalDateTime dateFormatting(String stringDate) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime localDate = LocalDateTime.parse(stringDate, dateTimeFormatter);
+        return localDate;
+    }
+
     /**
      * checks for user input and decide from there what the chatbot will do.
      *
@@ -109,8 +123,11 @@ public class Duke {
                         allDone = false;
                     }
                 }
-                if (allDone) {
+                if (allDone && xs.size() > 0) {
                     System.out.println("    " + "Congratulations! You've completed all your tasks!");
+                }
+                if (xs.size() == 0) {
+                    System.out.println("    You currently have nothing on your list!");
                 }
                 System.out.println(lineProducer());
                 continue;
@@ -144,18 +161,29 @@ public class Duke {
                     continue;
                 }
                 String endTime = str.substring(endDescription + 4);
-                Deadline dl = new Deadline(description, endTime);
-                xs.add(dl);
-                bw.newLine();
-                bw.write("D|0|" + description + "|" + endTime);
-                System.out.println(lineProducer() + indentationAdder() + "Understood! The following task has been added:" + indentationAdder() + " " + dl);
-                System.out.println("    You have " + xs.size() + " " + (xs.size() == 1? "task" : "tasks" ) + " in your current list");
-                System.out.println(lineProducer());
-                bw.flush();
+                try {
+                    LocalDateTime ld = dateFormatting(endTime);
+                    if (ld.compareTo(LocalDateTime.now()) < 0) {
+                        System.out.println(lineProducer() + indentationAdder() + "Please key in a date that's not in the past!");
+                        System.out.println(lineProducer());
+                        continue;
+                    }
+                    Deadline dl = new Deadline(description, ld);
+                    xs.add(dl);
+                    bw.newLine();
+                    bw.write("D|0|" + description + "|" + endTime);
+                    System.out.println(lineProducer() + indentationAdder() + "Understood! The following task has been added:" + indentationAdder() + " " + dl);
+                    System.out.println("    You have " + xs.size() + " " + (xs.size() == 1? "task" : "tasks" ) + " in your current list");
+                    System.out.println(lineProducer());
+                    bw.flush();
+                } catch (DateTimeParseException e) {
+                    System.out.println(lineProducer() + indentationAdder() + "Oh oh! Please follow the format strictly and key in a suitable date!");
+                    System.out.println(lineProducer());
+                }
                 continue;
             } else if (str.contains("event")) {
                 if (!str.contains("/")) {
-                    System.out.println(lineProducer() + indentationAdder() + "Sorry please indicate a time your event begins with a '/at' after your event title!");
+                    System.out.println(lineProducer() + indentationAdder() + "Sorry please indicate a time your event begins with a '/on' after your event title!");
                     System.out.println(lineProducer());
                     continue;
                 }
@@ -171,15 +199,26 @@ public class Duke {
                     System.out.println(lineProducer());
                     continue;
                 }
-                String endTime = str.substring(endDescription + 4);
-                Event ev = new Event(description, endTime);
-                xs.add(ev);
-                bw.newLine();
-                bw.write("E|0|" + description + "|" + endTime);
-                System.out.println(lineProducer() + indentationAdder() + "Understood! The following task has been added:" + indentationAdder() + " " + ev);
-                System.out.println("    You have " + xs.size() + " " + (xs.size() == 1? "task" : "tasks" ) + " in your current list");
-                System.out.println(lineProducer());
-                bw.flush();
+                String startTime = str.substring(endDescription + 4);
+                try {
+                    LocalDateTime st = dateFormatting(startTime);
+                    if (st.compareTo(LocalDateTime.now()) < 0) {
+                        System.out.println(lineProducer() + indentationAdder() + "Please key in a date that's not in the past!");
+                        System.out.println(lineProducer());
+                        continue;
+                    }
+                    Event ev = new Event(description, st);
+                    xs.add(ev);
+                    bw.newLine();
+                    bw.write("E|0|" + description + "|" + startTime);
+                    System.out.println(lineProducer() + indentationAdder() + "Understood! The following task has been added:" + indentationAdder() + " " + ev);
+                    System.out.println("    You have " + xs.size() + " " + (xs.size() == 1? "task" : "tasks" ) + " in your current list");
+                    System.out.println(lineProducer());
+                    bw.flush();
+                } catch (DateTimeException e) {
+                    System.out.println(lineProducer() + indentationAdder() + "Oh oh! Please follow the format strictly!");
+                    System.out.println(lineProducer());
+                }
                 continue;
             } else if (str.contains("todo")) {
                 if (str.length() < 5) {
@@ -227,6 +266,13 @@ public class Duke {
                 System.out.println(lineProducer() + indentationAdder() + "Note: I've removed the following task from your list:" +
                         indentationAdder() + toDelete + "\n" + lineProducer());
                 continue;
+            } else if (str.contains("help")) {
+                System.out.println(lineProducer() + indentationAdder() + "The following commands are compatible with our task-planning chatbot!" + indentationAdder() +
+                "list:" + indentationAdder() + "provides a list of items in your task list." + indentationAdder() +
+                "done {number}:" + indentationAdder() + "ticks the task with that number as done!" + indentationAdder() +
+                "delete {number}:" + indentationAdder() + "deletes the task with that number off the list." + indentationAdder() +
+                "bye:" + indentationAdder() + "ends the program.\n" + lineProducer());
+                continue;
             }
             System.out.println(lineProducer() + indentationAdder() + "I'm sorry :( I don't quite seem to understand, try again pls!");
             System.out.println(lineProducer());
@@ -244,8 +290,12 @@ public class Duke {
         if (!data.exists()) {
             data.createNewFile();
         }
-        System.out.println(lineProducer() + indentationAdder() + "Hello I'm your friendly chatbot Duke!" +
-                indentationAdder() + "What can I help you with?\n" + lineProducer() );
+        System.out.println(lineProducer() + indentationAdder() + "Hello I'm your friendly task-planning chatbot Duke!" +
+                indentationAdder() + "To enter a deadline, please type in this format: 'deadline {title of item} /by d/mm/yyyy hh:mm'" + indentationAdder() +
+                "To enter an event, please type in this format: 'event {title of item} /on d/mm/yyyy hh:mm''"+ indentationAdder() +
+                "To enter a todo, please type in this format: 'todo {title of item}'" + indentationAdder() +
+                "type help to know more commands available in this bot!\n"+ lineProducer() );
+
         stringReader(sc, data);
 
         sc.close();
