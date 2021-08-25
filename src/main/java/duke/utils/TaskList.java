@@ -6,6 +6,7 @@ import duke.tasks.Task;
 import duke.tasks.ToDos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -57,5 +58,23 @@ public class TaskList {
 
     public int getSize() {
         return tasks.size();
+    }
+
+    /**
+     * Returns a new instance of TaskList containing the tasks that matches the keyword.
+     *
+     * @param keyword the word in which to search within all the tasks.
+     * @return a new instance of TaskList containing the tasks that matches the keyword.
+     */
+    public HashMap<String, Task> getMatchingTasks(String keyword) {
+        HashMap<String, Task> matchingTasks = new HashMap<>();
+        int counter = 1; // Start from 1 because that is how we print
+        for (Task currTask: tasks) {
+            if (currTask.toString().contains(keyword)) {
+                matchingTasks.put(String.valueOf(counter), currTask);
+            }
+            counter += 1;
+        }
+        return matchingTasks;
     }
 }

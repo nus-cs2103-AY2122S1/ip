@@ -8,6 +8,8 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.HashMap;
+
 public abstract class Command {
     private boolean isExit = false;
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
@@ -32,7 +34,7 @@ public abstract class Command {
         }
     }
     public static class DoneCommand extends Command {
-        private int taskNum;
+        private final int taskNum;
         public DoneCommand(int taskNum) {
             this.taskNum = taskNum;
         }
@@ -44,7 +46,7 @@ public abstract class Command {
         }
     }
     public static class ToDoCommand extends Command {
-        private String description;
+        private final String description;
         public ToDoCommand(String description) {
             this.description = description;
         }
@@ -57,8 +59,8 @@ public abstract class Command {
         }
     }
     public static class DeadlineCommand extends Command {
-        private String description;
-        private String dateTimeBy;
+        private final String description;
+        private final String dateTimeBy;
         public DeadlineCommand(String description, String dateTimeBy) {
             this.description = description;
             this.dateTimeBy = dateTimeBy;
@@ -72,8 +74,8 @@ public abstract class Command {
         }
     }
     public static class EventCommand extends Command {
-        private String description;
-        private String dateTimeAt;
+        private final String description;
+        private final String dateTimeAt;
         public EventCommand(String description, String dateTimeAt) {
             this.description = description;
             this.dateTimeAt = dateTimeAt;
@@ -87,7 +89,7 @@ public abstract class Command {
         }
     }
     public static class DeleteCommand extends Command {
-        private int taskNum;
+        private final int taskNum;
         public DeleteCommand(int taskNum) {
             this.taskNum = taskNum;
         }
@@ -97,6 +99,20 @@ public abstract class Command {
             tasks.deleteTask(this.taskNum);
             storage.removePersistedTask(this.taskNum);
             ui.showTaskDeletedInteraction(taskToDelete, tasks);
+        }
+    }
+
+    public static class FindCommand extends Command {
+        private final String keyword;
+
+        public FindCommand(String keyword) {
+            this.keyword = keyword;
+        }
+
+        @Override
+        public void execute(TaskList tasks, Ui ui, Storage storage) {
+            HashMap<String, Task> matchingTasks = tasks.getMatchingTasks(this.keyword);
+            ui.showMessagePrintingAllMatchingTasks(matchingTasks, tasks);
         }
     }
 }
