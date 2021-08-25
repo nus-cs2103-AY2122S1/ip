@@ -42,7 +42,6 @@ public class BotStaticMemoryUnit {
     public final String ERROR_MESSAGE_INVALID_DATA_FORMAT = "HOLD ON! The data: \n\t\t%s\n\t is in the wrong format! Stop feeding me shit!";
     public final String ERROR_MESSAGE_INVALID_FILE = "WAIT! There are some errors with your file!";
     public final String ERROR_MESSAGE_INVALID_DATETIME_FORMAT = "I CANNOT UNDER THE TIMING FORMAT! Please input in the following format \n\t\t{yyyy-mm-ddThh:mm:ss}";
-    public final String HARD_DISK_DATA_NAME = "data.txt";
 
     public BotStaticMemoryUnit(){}
 
