@@ -1,8 +1,16 @@
+import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.time.format.DateTimeFormatter;
+
 
 public class BobbyBot {
     private static final List<Task> tasks = new ArrayList<Task>();
@@ -10,6 +18,8 @@ public class BobbyBot {
     private static int totalTasks = 0;
     private static final BotCommand[] acceptedCommands = BotCommand.values();
     private static final String DBPATH = "data/database.txt";
+    private static final DateTimeFormatter DT_INPUT_FORMAT = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
+
 
     public BobbyBot()  {
         System.out.println(div + "Hello! I'm Bobby\nWhat can I do for you?\n" + div);
@@ -225,11 +235,16 @@ public class BobbyBot {
      * @param by date and time that the task should be completed by
      */
     private void createDeadline(String description, String by) {
-        Task newDeadLine = new Deadline(description, by);
-        tasks.add(newDeadLine);
-        totalTasks++;
-        System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
-                + "Now you have " + totalTasks + " tasks in the list.\n" + div);
+        // convert string by to LocalDate
+        try {
+            LocalDateTime dateBy = LocalDateTime.parse(by, DT_INPUT_FORMAT);
+            tasks.add(new Deadline(description, dateBy));
+            totalTasks++;
+            System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
+                    + "Now you have " + totalTasks + " tasks in the list.\n" + div);
+        } catch (DateTimeParseException e) {
+            System.out.println(div+"Please input deadline date in the following format: [dd-mm-yyyy hh:mm] \n"+div);
+        }
     }
 
     /**
