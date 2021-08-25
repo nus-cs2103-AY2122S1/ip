@@ -62,6 +62,14 @@ public class Parser {
                     log.append("\n\t Nice! I've marked this task as done:\n\t\t").append(task);
                 }
                 break;
+            case "find":
+                log.append("\n\t Here are the matching tasks in your list:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    if (tasks.get(i).toString().contains(words[1])) {
+                        log.append("\n\t ").append(i + 1).append(". ").append(tasks.get(i));
+                    }
+                }
+                break;
             case "todo":
                 ToDo newTask = new ToDo(words[1]);
                 tasks.add(newTask);
@@ -112,6 +120,8 @@ public class Parser {
                 throw new DukeException("\n\t ☹ Oh lord!. I need some description and a time limit!");
             case "event":
                 throw new DukeException("\n\t ☹ By the heavens!. I need some description and a timing!");
+            case "find":
+                throw new DukeException("\n\t ☹ I need something to search for!");
             }
         } else if (log.length == 2) {
             switch (log[0]) {
