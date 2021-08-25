@@ -37,4 +37,22 @@ delete 1
 list
 delete 999
 clear
+event koifishy /at 2021-08-22 14:35 /priority H
+deadline carpfishy /by 2021-08-22 14:35 /priority M
+todo fjoaip /priority L
+list
+event koifishy /at 2021-08-22 14:35 /priority
+event koifishy /at /priority
+event /at 2021-08-22 14:35 /priority H
+event /at /priority H
+list
+deadline carpfishy /by 2021-08-22 14:35 /priority
+dateline carpfishy /at /priority S
+dateline /by 2021   -08-22 14:35 /priority M
+DEADLINE /by /priority H
+list
+todo /priority L
+Todo fjoaip /priority
+list
+clear
 bye

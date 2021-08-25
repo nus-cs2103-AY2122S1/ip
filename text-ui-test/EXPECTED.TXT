@@ -105,4 +105,43 @@ Index 999 is out of bounds of your task list size of 10.
 Please make sure your index is at least 1.
 Use the list command to see task indices.
 I've cleared all your tasks!
+Excellent! I've added this event:
+[E] [H] Koifishy 	(at 2021-08-22 14:35)
+Excellent! I've added this deadline:
+[D] [M] Carpfishy 	(by 2021-08-22 14:35)
+Excellent! I've added this task:
+[T] [L] Fjoaip
+1.	 [E] [H] Koifishy 	(at 2021-08-22 14:35)
+2.	 [D] [M] Carpfishy 	(by 2021-08-22 14:35)
+3.	 [T] [L] Fjoaip
+Event priority property cannot be empty.
+Please ensure you key in the command in the format specified.
+Event priority property cannot be empty.
+Please ensure you key in the command in the format specified.
+Event description property cannot be empty.
+Please ensure you key in the command in the format specified.
+Event description property cannot be empty.
+Please ensure you key in the command in the format specified.
+1.	 [E] [H] Koifishy 	(at 2021-08-22 14:35)
+2.	 [D] [M] Carpfishy 	(by 2021-08-22 14:35)
+3.	 [T] [L] Fjoaip
+Deadline priority property cannot be empty.
+Please ensure you key in the command in the format specified.
+Deadline priority property cannot be empty.
+Please ensure you key in the command in the format specified.
+Deadline description property cannot be empty.
+Please ensure you key in the command in the format specified.
+Deadline description property cannot be empty.
+Please ensure you key in the command in the format specified.
+1.	 [E] [H] Koifishy 	(at 2021-08-22 14:35)
+2.	 [D] [M] Carpfishy 	(by 2021-08-22 14:35)
+3.	 [T] [L] Fjoaip
+ToDo description property cannot be empty.
+Please ensure you key in the command in the format specified.
+ToDo priority property cannot be empty.
+Please ensure you key in the command in the format specified.
+1.	 [E] [H] Koifishy 	(at 2021-08-22 14:35)
+2.	 [D] [M] Carpfishy 	(by 2021-08-22 14:35)
+3.	 [T] [L] Fjoaip
+I've cleared all your tasks!
 Bye. Hope to see you again soon!
