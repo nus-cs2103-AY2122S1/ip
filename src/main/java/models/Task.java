@@ -5,15 +5,15 @@ import java.io.Serializable;
 public class Task implements Serializable {
 
     protected String description;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Task implements Serializable {
 
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[X] " + this.description;
         }
         return "[ ] " + this.description;
