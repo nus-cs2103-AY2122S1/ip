@@ -1,5 +1,6 @@
 package core;
 
+import gui.Ui;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -16,6 +17,9 @@ import java.util.Scanner;
  */
 public class Storage {
     private File file;
+    private static final int N_SEGMENTS_IN_DEADLINE = 4;
+    private static final int N_SEGMENTS_IN_EVENT = 4;
+    private static final int N_SEGMENTS_IN_TODO = 3;
 
     public Storage(String filePath) {
         file = new File("data/duke.txt");
@@ -33,58 +37,111 @@ public class Storage {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
+            int lineNumber = 0;
             while (sc.hasNext()) {
+                lineNumber ++;
                 String nextLine = sc.nextLine();
                 switch(nextLine.charAt(0)) {
                 case 'T':
-                    addTodoToList(nextLine, listOfTasks);
+                    addTodoToList(nextLine, listOfTasks, lineNumber);
                     break;
                 case 'D':
-                    addDeadlineToList(nextLine, listOfTasks);
+                    addDeadlineToList(nextLine, listOfTasks, lineNumber);
                     break;
                 case 'E':
-                    addEventToList(nextLine, listOfTasks);
+                    addEventToList(nextLine, listOfTasks, lineNumber);
                     break;
+                default:
+                    System.out.println(
+                            String.format("Error in Line %s of storage: Line should begin with T, D or E", lineNumber));
                 }
             }
             return listOfTasks;
         } catch (FileNotFoundException e) {
-            System.out.println("Storage file not found: " + e.getMessage());
-            System.out.println("Task List will be initialized to empty state.");
-            System.out.println("Duke.txt will be created for you once you add tasks to the list.");
+            Ui.showStorageFileNotFoundError(e.getMessage());
             return listOfTasks;
         }
-
-    }
-    
-    public void addTodoToList(String line, List<Task> listOfTasks) {
-        String regex = "/";
-        String[] splittedLine = line.split(regex);
-        Todo todo = new Todo(splittedLine[2]);
-        if (splittedLine[1].equals("1")) {
-            todo.setCompleted();
-        }
-        listOfTasks.add(todo);
     }
 
-    public void addEventToList(String line, List<Task> listOfTasks) {
+    public void addTodoToList(String line, List<Task> listOfTasks, int lineNumber) {
         String regex = "/";
         String[] splittedLine = line.split(regex);
-        Event event = new Event(splittedLine[2], splittedLine[3]);
-        if (splittedLine[1].equals("1")) {
-            event.setCompleted();
+        try {
+            checkStoredTodoValidity(splittedLine, lineNumber);
+            Todo todo = new Todo(splittedLine[2]);
+            if (splittedLine[1].equals("1")) {
+                todo.setCompleted();
+            }
+            listOfTasks.add(todo);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
-        listOfTasks.add(event);
     }
 
-    public void addDeadlineToList(String line, List<Task> listOfTasks) {
+    public void addEventToList(String line, List<Task> listOfTasks, int lineNumber) {
         String regex = "/";
         String[] splittedLine = line.split(regex);
-        Deadline deadline = new Deadline(splittedLine[2], splittedLine[3]);
-        if (splittedLine[1].equals("1")) {
-            deadline.setCompleted();
+        try {
+            checkStoredEventValidity(splittedLine, lineNumber);
+            Event event = new Event(splittedLine[2], splittedLine[3]);
+            if (splittedLine[1].equals("1")) {
+                event.setCompleted();
+            }
+            listOfTasks.add(event);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
-        listOfTasks.add(deadline);
+    }
+
+    public void addDeadlineToList(String line, List<Task> listOfTasks, int lineNumber) {
+        String regex = "/";
+        String[] splittedLine = line.split(regex);
+        try {
+            checkStoredDeadlineValidity(splittedLine, lineNumber);
+            Deadline deadline = new Deadline(splittedLine[2], splittedLine[3]);
+            if (splittedLine[1].equals("1")) {
+                deadline.setCompleted();
+            }
+            listOfTasks.add(deadline);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public boolean checkStoredTodoValidity(String[] splittedLine, int lineNumber) throws DukeException {
+        String errorHeading = String.format("Error in Line %s of storage file: ", lineNumber);
+        if (splittedLine.length != 3) {
+            throw new DukeException(errorHeading
+                    + String.format("There should be %s segments in storage data", N_SEGMENTS_IN_TODO));
+        }
+        if (!(splittedLine[1].equals("0") || splittedLine[1].equals("1"))) {
+            throw new DukeException(errorHeading + "Completion status should be 0 or 1");
+        }
+        return true;
+    }
+
+    public boolean checkStoredEventValidity(String[] splittedLine, int lineNumber) throws DukeException {
+        String errorHeading = String.format("Error in Line %s of storage file: ", lineNumber);
+        if (splittedLine.length != N_SEGMENTS_IN_EVENT) {
+            throw new DukeException(errorHeading
+                    + String.format("There should be %s segments in storage data", N_SEGMENTS_IN_EVENT));
+        }
+        if (!(splittedLine[1].equals("0") || splittedLine[1].equals("1"))) {
+            throw new DukeException(errorHeading + "Completion status should be 0 or 1");
+        }
+        return true;
+    }
+
+    public boolean checkStoredDeadlineValidity(String[] splittedLine, int lineNumber) throws DukeException {
+        String errorHeading = String.format("Error in Line %s of storage file: ", lineNumber);
+        if (splittedLine.length != N_SEGMENTS_IN_DEADLINE) {
+            throw new DukeException(errorHeading
+                    + String.format("There should be %s segments in storage data", N_SEGMENTS_IN_DEADLINE));
+        }
+        if (!(splittedLine[1].equals("0") || splittedLine[1].equals("1"))) {
+            throw new DukeException(errorHeading + "Completion status should be 0 or 1");
+        }
+        return true;
     }
 
 }
