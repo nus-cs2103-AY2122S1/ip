@@ -1,7 +1,7 @@
-public class DukeException extends Exception {
+public class BlitzException extends Exception {
 
     protected String message;
-    public DukeException(String message) {
+    public BlitzException(String message) {
         this.message = message;
     }
 

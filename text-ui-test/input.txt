@@ -1,8 +1,8 @@
-todo read book
-deadline return book /by June 6th
-event project meeting/at Aug 6th 2-4pm
-done 1
+todo go cycling
+event project meeting /at Aug 6th 2-4pm
+list
 delete 4
+list
 done 3
 list
 bye
