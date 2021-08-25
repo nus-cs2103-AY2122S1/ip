@@ -1,14 +1,25 @@
-import java.lang.reflect.Array;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+package Duke;
+
+import Duke.Commands.Command;
+import Duke.Commands.EditCommand;
+import Duke.Errors.DukeError;
+import Duke.Parser.CustomDateFormatter;
+import Duke.Storage.Storage;
+import Duke.Task.Deadline;
+import Duke.Task.Event;
+import Duke.Task.Task;
+import Duke.Task.TaskList;
+import Duke.Task.ToDo;
+import Duke.Ui.Ui;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class Duke {
 
@@ -440,6 +451,31 @@ public class Duke {
         }
     }
 
+//    private Ui ui;
+//    private Storage storage;
+//    private TaskList tasks;
+//
+//    public Duke(String filePath) {
+//        ui = new Ui();
+//
+//    }
+//
+//    public void run() {
+//        ui.showWelcome();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            String fullCommand = ui.readCommand();
+//        }
+//
+//        String temp = ui.readCommand();
+//        System.out.println(temp);
+//    }
+
+
+//    public static void main(String[] args) {
+//        new Duke("data/tasks.txt").run();
+//    }
+
     public static void main(String[] args) {
         Scanner myScanner = new Scanner(System.in);
         ArrayList<Task> userTaskList = initialiseArrayList();
@@ -463,177 +499,7 @@ public class Duke {
                 }
             }
         }
+        System.out.println("Goodbye!");
 
-//        try {
-//            File myObj = new File("./data/duke.txt");
-////            FileWriter myWriter = new FileWriter("./data/duke.txt");
-////            myWriter.write("written!");
-////            myWriter.close();
-//            Scanner myReader = new Scanner(myObj);
-//            ArrayList<String> temp = new ArrayList<>(100);
-//            while (myReader.hasNextLine()) {
-//                String data = myReader.nextLine();
-//                String[] arrz = data.split("\|||");
-//                for (int i = 0; i < arrz.length; i++) {
-//                    System.out.println(arrz[i]);
-//                }
-//            }
-//            myReader.close();
-//
-//        } catch (FileNotFoundException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        }
-//        Scanner sc = new Scanner(System.in);
-//        String greetingMessage = "Henlo, this is Duke.\nHow may I help?";
-//        System.out.println(greetingMessage);
-//        String listCommand = "list";
-//        String byeString = "bye";
-//        String listFullMessage = "Your current list is full! Unable to add any more items!";
-//        String taskAddedMessage  = "Got it. I've added this task:\n  %s\nNow you have %d task%s in the list\n";
-//        ArrayList<Task> userTaskList = new ArrayList<Task>(100);
-//        int currentCapacity = 0;
-//
-//        while (true) {
-//            String response = sc.nextLine();
-//
-//            if (response.equals(byeString)) {
-//                System.out.println("Byebye!! Hehe..");
-//                break;
-//            } else if (response.startsWith("done ")) {
-//                if (doneCheck(response, currentCapacity) > 0) {
-//                    int positionToMarkDone = doneCheck(response, currentCapacity);
-//                    userTaskList.get(positionToMarkDone - 1).markDone();
-//                    String replyString = "Nice! I've marked this task as done:\n";
-//                    replyString += String.format("  %s", userTaskList.get(positionToMarkDone - 1));
-//                    System.out.println(replyString);
-//                    continue;
-//                } else if (doneCheck(response, currentCapacity) == -1) {
-//                    System.out.println("No such task exists! Please try again!");
-//                    continue;
-//                } else {
-//                    System.out.println("Please indicate the task you'd like to mark as done!");
-//                }
-//            } else if (response.startsWith("undo ")) {
-//                if (undoCheck(response, currentCapacity) > 0) {
-//                    int positionToMarkUndone = undoCheck(response, currentCapacity);
-//                    userTaskList.get(positionToMarkUndone - 1).markUndone();
-//                    String replyString = "Oh no! I've marked this task as undone:\n";
-//                    replyString += String.format("  %s", userTaskList.get(positionToMarkUndone - 1));
-//                    System.out.println(replyString);
-//                    continue;
-//                } else if (undoCheck(response, currentCapacity) == -1) {
-//                    System.out.println("No such task exists! Please try again!");
-//                    continue;
-//                } else {
-//                    System.out.println("Please indicate the task you'd like to undo!");
-//                }
-//            } else if (response.startsWith("delete ")){
-//                if (deleteCheck(response, currentCapacity) > 0) {
-//                    int positionToRemove = deleteCheck(response, currentCapacity);
-//                    Task removedTask = userTaskList.remove(positionToRemove - 1);
-//                    currentCapacity -= 1;
-//                    System.out.printf("Noted. I've removed this task:\n  %s\nNow you have %d task%s in the list.\n", removedTask, currentCapacity, pluralOrNo(currentCapacity));
-//                } else if (deleteCheck(response, currentCapacity) == -1) {
-//                    System.out.println("No such task exists! Please try again!");
-//                    continue;
-//                } else {
-//                    System.out.println("Please indicate the task you'd like to delete!");
-//                }
-//
-//            } else if (response.equals(listCommand)) {
-//                if (currentCapacity > 0) {
-//                    String toPrint = "Here are the tasks in your list:\n";
-//                    for (int i = 0; i < currentCapacity; i++) {
-//                        Task task = userTaskList.get(i);
-//                        toPrint += String.format("%d. %s\n", i + 1, task);
-//                    }
-//                    System.out.print(toPrint);
-//                } else {
-//                    System.out.println("You have no tasks!");
-//                }
-//            } else if (response.startsWith("todo")) {
-//                if (response.strip().length() == 4) {
-//                    System.out.println("The description of a todo cannot be empty.");
-//                    continue;
-//                }
-//                if (!response.startsWith("todo ")) {
-//                    System.out.println("Did you mean to use the 'todo' command?");
-//                    continue;
-//                }
-//                if (currentCapacity < 100) {
-//                    userTaskList.add(new ToDo(responseToTodo(response)));
-//                    System.out.printf(taskAddedMessage, userTaskList.get(currentCapacity), currentCapacity + 1, pluralOrNo(currentCapacity + 1));
-//                    currentCapacity += 1;
-//                } else {
-//                    System.out.println(listFullMessage);
-//                }
-//            } else if (response.startsWith("event")) {
-//                if (response.split("/at")[0].strip().length() == 5) {
-//                    System.out.println("The description of an event cannot be empty.");
-//                    continue;
-//                }
-//                if (!response.startsWith("event ")) {
-//                    System.out.println("Did you mean to use the 'event' command?");
-//                    continue;
-//                }
-//
-//                if (!response.contains("/at")) {
-//                    System.out.println("Please specify the date of the event with '/at'.");
-//                    continue;
-//                }
-//                if (response.split("/at").length < 2 || response.split("/at")[1].strip().length() < 1) {
-//                    System.out.println("The date of an event cannot be empty.");
-//                    continue;
-//                }
-//                if (currentCapacity < 100) {
-//                    String[] eventSplit = response.split("/at");
-//                    String description = eventSplit[0].strip().substring(6);
-//                    String date = eventSplit[1].strip();
-//                    userTaskList.add(new Event(description, date));
-//                    System.out.printf(taskAddedMessage, userTaskList.get(currentCapacity), currentCapacity + 1, pluralOrNo(currentCapacity + 1));
-//                    currentCapacity += 1;
-//                } else {
-//                    System.out.println(listFullMessage);
-//                }
-//            } else if (response.startsWith("deadline")) {
-//                if (response.split("/by")[0].strip().length() == 8) {
-//                    System.out.println("The description of a deadline cannot be empty.");
-//                    continue;
-//                }
-//                if (!response.startsWith("deadline ")) {
-//                    System.out.println("Did you mean to use the 'deadline' command?");
-//                    continue;
-//                }
-//
-//                if (!response.contains("/by")) {
-//                    System.out.println("Please specify the date of the deadline with '/by'.");
-//                    continue;
-//                }
-//                if (response.split("/by").length < 2 || response.split("/by")[1].strip().length() < 1) {
-//                    System.out.println("The date of a deadline cannot be empty.");
-//                    continue;
-//                }
-//                if (currentCapacity < 100) {
-//                    String[] deadlineSplit = response.split("/by");
-//                    String description = deadlineSplit[0].strip().substring(9);
-//                    if (description.length() < 1) {
-//                        System.out.println("The description of a deadline cannot be empty.");
-//                        continue;
-//                    }
-//                    String date = deadlineSplit[1].strip();
-//                    userTaskList.add(new Deadline(description, date));
-//                    System.out.printf(taskAddedMessage, userTaskList.get(currentCapacity), currentCapacity + 1, pluralOrNo(currentCapacity + 1));
-//                    currentCapacity += 1;
-//                } else {
-//                    System.out.println(listFullMessage);
-//                }
-//            } else {
-//                System.out.printf("I don't quite understand the command '%s'. Please try again!\n", response);
-//            }
-//        }
     }
 }

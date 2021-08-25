@@ -1,3 +1,5 @@
+package Duke.Errors;
+
 public enum DukeError {
     INVALID_COMMAND(-1, "Unrecognised command detected. Please try again."),
     ESCAPE_CHARACTER(0, "Please do not use the \\n in your input as it makes me sad. ):"),
@@ -34,6 +36,6 @@ public enum DukeError {
 
     @Override
     public String toString() {
-        return code + ": " + description;
+        return "Error " + code + ": " + description;
     }
 }
