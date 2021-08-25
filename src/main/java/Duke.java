@@ -2,6 +2,7 @@ import task.Deadline;
 import task.Event;
 import task.TaskList;
 import task.Todo;
+import ui.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,18 +12,13 @@ import java.util.Scanner;
 public class Duke {
     static TaskList taskList;
     static Storage storage;
+    static Ui ui;
 
-    static String introMsg = "Hello! I'm Biscuit.\n"
-            + "What do you want me to do?\n";
     static String byeMsg = "Bye. Hope to see you again soon!";
     static String listMsg = "Here are the tasks in your list:";
     static String doneMsg = "Nice! I've marked this task as done:";
     static String todoMsg = "Got it. I've added this task:";
     static String deleteMsg = "Noted. I've removed this task:";
-
-    static void introduce() {
-        System.out.println(introMsg);
-    }
 
     static void init() {
         storage = new Storage("data/duke.txt");
@@ -32,6 +28,7 @@ public class Duke {
             e.printStackTrace();
             taskList = new TaskList(new ArrayList<>());
         }
+        ui = new Ui();
     }
 
     static void reply() {
@@ -118,7 +115,7 @@ public class Duke {
 
     public static void main(String[] args) {
         init();
-        introduce();
+        ui.greet();
         reply();
     }
 }
