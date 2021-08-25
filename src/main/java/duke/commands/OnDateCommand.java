@@ -44,7 +44,7 @@ public class OnDateCommand extends Command {
         }
     };
 
-    public void identifyTasksByDate(String dateString, TaskList tasks) {
+    private void identifyTasksByDate(String dateString, TaskList tasks) {
         LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         ArrayList<Task> tasksOnDate = new ArrayList<>();
         ArrayList<Task> taskList = tasks.getTaskList();
