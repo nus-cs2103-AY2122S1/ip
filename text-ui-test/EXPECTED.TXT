@@ -1,6 +1,6 @@
-[31mYou do not have any saved task.
+[31m@_@ OOPS!!! You do not have any saved task.
 [0m
-> [35mHello from
+[35mHello from
  _   _ _ _
 | | | (_) | _____
 | |_| | | |/ / _ \
@@ -13,33 +13,33 @@ What can I do for you?
 Now you have 1 tasks in the list.
 [0m
 > [35mGot it. I've added this task:
-  [E][ ] read book(at: tmr)
+  [E][ ] read book(at: 09 9 2020)
 Now you have 2 tasks in the list.
 [0m
 > [35mGot it. I've added this task:
-  [D][ ] return book(by: Friday)
+  [D][ ] return book(by: 01 01 2020)
 Now you have 3 tasks in the list.
 [0m
 > [35mHere are the tasks in your list:
 1. [T][ ] borrow book
-2. [E][ ] read book(at: tmr)
-3. [D][ ] return book(by: Friday)
+2. [E][ ] read book(at: 09 9 2020)
+3. [D][ ] return book(by: 01 01 2020)
 [0m
 > [35mNice! I've marked this task as done:
-[E][X] read book(at: tmr)
+[T][X] borrow book
 [0m
 > [35mHere are the tasks in your list:
-1. [T][ ] borrow book
-2. [E][X] read book(at: tmr)
-3. [D][ ] return book(by: Friday)
+1. [T][X] borrow book
+2. [E][ ] read book(at: 09 9 2020)
+3. [D][ ] return book(by: 01 01 2020)
 [0m
 > [35mNoted. I've removed this task:
-  [E][X] read book(at: tmr)
+  [E][ ] read book(at: 09 9 2020)
 Now you have 2 tasks in the list.
 [0m
 > [35mHere are the tasks in your list:
-1. [T][ ] borrow book
-2. [D][ ] return book(by: Friday)
+1. [T][X] borrow book
+2. [D][ ] return book(by: 01 01 2020)
 [0m
 > [31m@_@ OOPS!!! The description of a task cannot be empty.
 [0m
@@ -54,18 +54,20 @@ Now you have 2 tasks in the list.
 > [31m@_@ OOPS!!! The description of a task cannot be empty.
 [0m
 > [31m@_@ OOPS!!! Please use the correct format:
-  event <description> /at <time>
+  event <description> /at <yyyy-mm-dd>
 So that I can understand!
 [0m
 > [31m@_@ OOPS!!! The description of a task cannot be empty.
 [0m
 > [31m@_@ OOPS!!! Please use the correct format:
-  event <description> /at <time>
+  event <description> /at <yyyy-mm-dd>
 So that I can understand!
 [0m
 > [31m@_@ OOPS!!! Please use the correct format:
-  event <description> /at <time>
+  event <description> /at <yyyy-mm-dd>
 So that I can understand!
+[0m
+> [31m@_@ OOPS!!! The description of a task cannot be empty.
 [0m
 > [31m@_@ OOPS!!! The description of a task cannot be empty.
 [0m
@@ -73,43 +75,40 @@ So that I can understand!
 [0m
 > [31m@_@ OOPS!!! The description of a task cannot be empty.
 [0m
-> [31m@_@ OOPS!!! The description of a task cannot be empty.
-[0m
 > [31m@_@ OOPS!!! Please use the correct format:
-  event <description> /by <time>
+  event <description> /by <yyyy-mm-dd>
 So that I can understand!
 [0m
 > [31m@_@ OOPS!!! The description of a task cannot be empty.
 [0m
 > [31m@_@ OOPS!!! Please use the correct format:
-  event <description> /by <time>
+  event <description> /by <yyyy-mm-dd>
 So that I can understand!
 [0m
 > [31m@_@ OOPS!!! Please use the correct format:
-  event <description> /by <time>
+  event <description> /by <yyyy-mm-dd>
 So that I can understand!
 [0m
 > [31m@_@ OOPS!!! Please use the correct format:
-  done <index for the task>
+  done/delete <index for the task>
 So that I can understand!
 [0m
 > [31m@_@ OOPS!!! Please use the correct format:
-  done <index for the task>
+  done/delete <index for the task>
 So that I can understand!
 [0m
 > [31m@_@ OOPS!!! Please enter the number within the range of the list!
 [0m
 > [31m@_@ OOPS!!! Please use the correct format:
-  delete <index for the task>
+  done/delete <index for the task>
 So that I can understand!
 [0m
 > [31m@_@ OOPS!!! Please use the correct format:
-  delete <index for the task>
+  done/delete <index for the task>
 So that I can understand!
 [0m
 > [31m@_@ OOPS!!! Please enter the number within the range of the list!
 [0m
 > [31m@_@ OOPS!!! I'm sorry, but I don't know what that means :-(
 [0m
-> [31merror while saving the tasks![0m
 > [35mBye! Hope to see you again soon![0m

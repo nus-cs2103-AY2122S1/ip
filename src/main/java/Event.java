@@ -8,13 +8,11 @@ import java.time.format.DateTimeFormatter;
  */
 
 class Event extends Task {
-    private final String task;
     LocalDate time;
 
     public Event(String description) throws EmptyDescriptionException, WrongFormatException {
         super(processEventDescription(description));
         String[] descriptionTime = description.split(" /at ");
-        this.task = descriptionTime[0];
         this.time = LocalDate.parse(descriptionTime[1]);
     }
 
@@ -33,7 +31,7 @@ class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + "(at: " + time.format(DateTimeFormatter.ofPattern("MM d yyyy")) + ")";
     }
 
     /**
@@ -43,6 +41,6 @@ class Event extends Task {
      */
     public String[] saveStrings() {
         String isDone = this.getIsDone() ? "1" : "0";
-        return new String[]{"E", isDone, this.task, time.format(DateTimeFormatter.ofPattern("MMM d yyyy"))};
+        return new String[]{"E", isDone, this.getDescription(), time.format(DateTimeFormatter.ISO_LOCAL_DATE)};
     }
 }

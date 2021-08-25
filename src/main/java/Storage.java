@@ -27,17 +27,22 @@ public class Storage {
      * @throws FileNotFoundException thrown when a file is not found
      * @throws FileFormatException thrown when the file is wrongly formatted
      */
-    public List<Task> load() throws FileNotFoundException, FileFormatException {
+    public List<Task> load() throws LoadingException, FileFormatException {
         parseFile(file);
         return tasks;
     }
 
-    private void parseFile(File file) throws FileNotFoundException, FileFormatException {
-        Scanner sc = new Scanner(file);
-        while (sc.hasNext()) {
-            Task task = parseLine(sc.nextLine());
-            tasks.add(task);
+    private void parseFile(File file) throws LoadingException, FileFormatException {
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                Task task = parseLine(sc.nextLine());
+                tasks.add(task);
+            }
+        } catch (FileNotFoundException e) {
+            throw new LoadingException();
         }
+
     }
 
     private Task parseLine(String string) throws FileFormatException {

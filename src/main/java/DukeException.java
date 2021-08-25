@@ -47,10 +47,19 @@ class ListIndexException extends DukeException {
 }
 
 /**
- * This is thrown when the file has wrong format
+ * This is thrown when the file has wrong format.
  */
 class FileFormatException extends DukeException {
     public FileFormatException() {
         super("The saved tasks has wrong format!\n");
+    }
+}
+
+/**
+ * This is thrown when the file is not found.
+ */
+class LoadingException extends DukeException {
+    public LoadingException() {
+        super("You do not have any saved task.\n");
     }
 }

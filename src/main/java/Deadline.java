@@ -8,13 +8,11 @@ import java.time.format.DateTimeFormatter;
  */
 
 class Deadline extends Task {
-    private final String task;
     LocalDate time;
 
     public Deadline(String description) throws EmptyDescriptionException, WrongFormatException {
         super(processDeadline(description));
         String[] descriptionTime = description.split(" /by ");
-        this.task = descriptionTime[0];
         this.time = LocalDate.parse(descriptionTime[1]);
     }
 
@@ -33,7 +31,7 @@ class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+        return "[D]" + super.toString() + "(by: " + time.format(DateTimeFormatter.ofPattern("MM dd yyyy")) + ")";
     }
 
     /**
@@ -43,6 +41,6 @@ class Deadline extends Task {
      */
     public String[] saveStrings() {
         String isDone = this.getIsDone() ? "1" : "0";
-        return new String[]{"D", isDone, this.task, time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))};
+        return new String[]{"D", isDone, this.getDescription(), time.format(DateTimeFormatter.ISO_LOCAL_DATE)};
     }
 }
