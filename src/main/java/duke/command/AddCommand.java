@@ -12,9 +12,19 @@ import duke.util.Ui;
 
 import java.time.LocalDateTime;
 
+/**
+ * Add task to task list. A Task can be of type Event, Deadline or Todo.
+ */
 public class AddCommand extends Command {
     Task task;
 
+    /**
+     * Constructs an command that adds a task to the task list.
+     *
+     * @param taskType type of task.
+     * @param name task name.
+     * @param dateTime date time information of task.
+     */
     public AddCommand(TaskType taskType, String name, LocalDateTime dateTime) {
         switch (taskType) {
         case DEADLINE:
@@ -29,6 +39,14 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Add the appropriate task to the task list and display confirmation response to
+     * the user.
+     *
+     * @param storage storage instance initialised when duke is created.
+     * @param taskList task list instance initialised when duke is created.
+     * @param ui ui instance initialised when duke is created.
+     */
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
             taskList.addTask(task);
