@@ -1,13 +1,11 @@
 package processor;
 
-import config.Setting;
 import exception.DukeException;
 import models.Command;
 import models.Deadline;
 import models.Event;
 import models.Todo;
 import storage.IStorage;
-import storage.Storage;
 import ui.Ui;
 
 import java.util.List;
@@ -16,15 +14,29 @@ import java.util.List;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
 
-
+/**
+ * Processor implementation which processes command.
+ */
 public class Processor implements IProcessor {
 
+    /** Storage object which writes and reads from local file. */
     private IStorage storage;
 
+    /**
+     * Constructor of the processor object.
+     *
+     * @param storage Storage object for the processor.
+     */
     public Processor(IStorage storage) {
         this.storage = storage;
     }
 
+    /**
+     * Process command implementation based on the type.
+     *
+     * @param command Type of command.
+     * @param arguments Other arguments for the command.
+     */
     @Override
     public void processCommand(Command command, List<String> arguments) {
         switch(command) {
@@ -46,6 +58,11 @@ public class Processor implements IProcessor {
         }
     }
 
+    /**
+     * Process command implementation ith type DEFAULT.
+     *
+     * @param arguments List of arguments related to the command.
+     */
     @Override
     public void processDefault(List<String> arguments) {
         try {
@@ -91,11 +108,19 @@ public class Processor implements IProcessor {
         }
     }
 
+    /**
+     * Process command implementation with type LIST.
+     */
     @Override
     public void processList() {
         Ui.print(this.storage.toString());
     }
 
+    /**
+     * Process command implementation with type DONE.
+     *
+     * @param index Index that specify which Task is done.
+     */
     @Override
     public void processDone(String index) {
         try {
@@ -107,6 +132,11 @@ public class Processor implements IProcessor {
         }
     }
 
+    /**
+     * Process command implementation with type DELETE.
+     *
+     * @param index Index that specify which tASK
+     */
     @Override
     public void processDelete(String index) {
         try {
@@ -118,6 +148,9 @@ public class Processor implements IProcessor {
         }
     }
 
+    /**
+     * Process command implementation with type BYE.
+     */
     @Override
     public void processBye() {
         Ui.print("Bye. Please meet me again later!");
