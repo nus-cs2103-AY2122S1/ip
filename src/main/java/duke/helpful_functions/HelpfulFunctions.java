@@ -1,4 +1,4 @@
-package helpful_functions;
+package duke.helpful_functions;
 
 public class HelpfulFunctions {
     public static boolean isInteger(String s) {

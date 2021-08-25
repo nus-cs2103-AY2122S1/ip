@@ -1,7 +1,7 @@
-package command;
+package duke.command;
 
-import core.Storage;
-import core.TaskList;
+import duke.core.Storage;
+import duke.core.TaskList;
 
 public class DoneCommand extends Command {
     private int indexOfCompleted;

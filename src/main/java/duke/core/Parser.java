@@ -1,15 +1,15 @@
-package core;
+package duke.core;
 
-import command.ByeCommand;
-import command.Command;
-import command.DeadlineCommand;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.EventCommand;
-import command.ExceptionalCommand;
-import command.ListCommand;
-import command.TodoCommand;
-import helpful_functions.HelpfulFunctions;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExceptionalCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.helpful_functions.HelpfulFunctions;
 
 public class Parser {
     public static Command parse(String input, TaskList taskList) {

@@ -1,7 +1,7 @@
-package core;
+package duke.core;
 
-import gui.Ui;
-import task.Task;
+import duke.gui.Ui;
+import duke.task.Task;
 
 import java.io.File;
 import java.io.FileWriter;

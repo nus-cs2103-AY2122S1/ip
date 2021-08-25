@@ -1,7 +1,7 @@
-package core;
+package duke.core;
 
-import command.Command;
-import gui.Ui;
+import duke.command.Command;
+import duke.gui.Ui;
 
 public class Duke {
     private TaskList taskList;

@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import core.Storage;
-import core.TaskList;
-import task.Todo;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.task.Todo;
 
 public class TodoCommand extends Command {
     private Todo todoTask;

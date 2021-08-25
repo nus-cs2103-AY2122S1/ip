@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import core.Storage;
-import core.TaskList;
-import gui.Ui;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.gui.Ui;
 
 public class ExceptionalCommand extends Command {
     private Exception e;

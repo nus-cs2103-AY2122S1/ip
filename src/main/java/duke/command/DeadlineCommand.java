@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import core.Storage;
-import core.TaskList;
-import task.Deadline;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.task.Deadline;
 
 public class DeadlineCommand extends Command {
     private Deadline deadlineTask;

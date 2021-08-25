@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import core.Storage;
-import core.TaskList;
-import task.Event;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.task.Event;
 
 public class EventCommand extends Command {
     private Event eventTask;
