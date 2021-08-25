@@ -127,6 +127,24 @@ public class Duke {
     }
 
     /**
+     * Displays a list of items on the command line that contain the keyword entered by the user.
+     *
+     * @param input Command line input from the user.
+     * @throws DukeException Throws an exception if no keyword was entered or if no tasks match the keyword given.
+     */
+    private void findItems(String input) throws DukeException {
+        try {
+            String keyword = parser.getDescription(input);
+            Tasklist validItems = listOfItems.findAllBy(keyword);
+            ui.outputWrapper(validItems);
+        }catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("please input a keyword in the format: [find] (keyword)");
+        } catch (NullPointerException e) {
+            throw new DukeException("no tasks match your given keyword!");
+        }
+
+    }
+    /**
      * Handles invalid commands from the user.
      *
      * @throws DukeException Throws an exception when a wrong input is given on the command line.
@@ -165,6 +183,9 @@ public class Duke {
                     break;
                 case "delete":
                     deleteItem(input);
+                    break;
+                case "find":
+                    findItems(input);
                     break;
                 default:
                     markAsInvalid(input);
