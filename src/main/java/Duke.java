@@ -117,14 +117,16 @@ public class Duke {
             break;
         case "deadline":
             checkInput(output, "deadline");
-            String deadlineDescription = response.substring(9);
-            newTask = new Deadline(deadlineDescription);
+            String deadlineDescription = response.substring(9).split(" /by ")[0];
+            String deadlineDate = response.substring(9).split(" /by ")[1];
+            newTask = new Deadline(deadlineDescription, deadlineDate);
             handleAdd(newTask);
             break;
         case "event":
             checkInput(output, "event");
-            String eventDescription = response.substring(6);
-            newTask = new Event(eventDescription);
+            String eventDescription = response.substring(6).split(" /at ")[0];
+            String eventDate = response.substring(6).split(" /at ")[1];
+            newTask = new Event(eventDescription, eventDate);
             handleAdd(newTask);
             break;
         default:

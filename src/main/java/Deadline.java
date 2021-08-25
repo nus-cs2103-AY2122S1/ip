@@ -2,9 +2,9 @@ public class Deadline extends Task {
 
     private String deadline;
 
-    public Deadline(String description) {
-        super(description.split(" /by ")[0]);
-        this.deadline = description.split(" /by ")[1];
+    public Deadline(String description, String deadline) {
+        super(description);
+        this.deadline = deadline;
     }
 
     @Override
