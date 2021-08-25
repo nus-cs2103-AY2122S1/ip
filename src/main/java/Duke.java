@@ -1,5 +1,9 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -13,7 +17,7 @@ public class Duke {
 
     public enum Commands {
         LIST, BYE, DELETE, DONE,
-            TODO, EVENT, DEADLINE;
+        TODO, EVENT, DEADLINE;
     }
 
 
@@ -152,12 +156,26 @@ public class Duke {
                     Task toAdd;
                     switch (taskType) {
                         case "deadline":
-                            toAdd = new Deadline(splitTask[0], splitTask[1]);
-                            addTask(toAdd);
+                            try {
+                                LocalDate date = LocalDate.parse(splitTask[1].trim());
+                                toAdd = new Deadline(splitTask[0], date);
+                                addTask(toAdd);
+                            } catch (DateTimeParseException e) {
+                                System.out.println(indent1 + "OH NO :( I can't seem to understand the date you have entered.\n"
+                                        + indent1 + "I can only understand if it is in  the yyyy-mm-dd format..");
+                            }
                             break;
                         case "event":
-                            toAdd = new Event(splitTask[0], splitTask[1]);
-                            addTask(toAdd);
+                            try {
+                                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                                LocalDateTime dateTime = LocalDateTime.parse(splitTask[1].trim(), dtf);
+                                toAdd = new Event(splitTask[0], dateTime);
+                                addTask(toAdd);
+                            } catch (DateTimeParseException e) {
+                                System.out.println(indent1 + "OH NO :( I can't seem " +
+                                        "to understand the date and time you have entered.\n"
+                                        + indent1 + "I can only understand if it is in yyyy-MM-dd HH:mm format..");
+                            }
                             break;
                     }
                 } else {
