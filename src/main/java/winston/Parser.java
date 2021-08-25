@@ -4,14 +4,25 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.time.LocalDate;
 
-
+/**
+ * A class that manages user commands
+ */
 public class Parser {
     private TaskList taskList;
-    
+
+    /**
+     * Constructor for class Parser
+     * @param taskList the TaskList that will be modified based on commands
+     */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
-    
+
+    /**
+     * Method that parses the given user input
+     * @param str user input
+     * @return A command depending on the user input
+     */
     public Command parse(String str) {
         String[] splitBySpace = str.split(" ");
         String cmd = splitBySpace[0];

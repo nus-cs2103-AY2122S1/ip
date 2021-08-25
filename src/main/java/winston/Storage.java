@@ -9,9 +9,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class that manages storage for the bot
+ */
 public class Storage {
     private final java.nio.file.Path path;
-    
+
+    /**
+     * Constructor for class Storage
+     */
     public Storage() {
         String pathToThisFile = System.getProperty("user.dir");
         Path dataDir = Paths.get(pathToThisFile, "data");
@@ -34,6 +40,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Method used to read the file if it exists
+     * @return an ArrayList<Task> of the information stores in the file. If the file doesn't exist, it returns
+     * an empty ArrayList<Task>
+     */
     public ArrayList<Task> read() {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -48,7 +59,12 @@ public class Storage {
     }
 
 
-
+    /**
+     * A method that assist the read method to create tasks based on the data stored on the file
+     * @param line the lines found in the file
+     * @return A task based on the information on the given line
+     * @throws IOException
+     */
     private Task createTask(String line) throws IOException {
         char taskType = line.charAt(0);
         String[] lineData = line.split(",");
@@ -64,7 +80,11 @@ public class Storage {
             throw new IOException("There is an error in the saved file");
         }
     }
-    
+
+    /**
+     * A method to save the data on the TaskList to the given file
+     * @param tList The TaskList to be saved
+     */
     public void save(TaskList tList) {
         try {
             Files.deleteIfExists(this.path);

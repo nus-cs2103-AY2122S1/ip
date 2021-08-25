@@ -1,5 +1,8 @@
 package winston;
 
+/**
+ * Represents the tasks that the user input
+ */
 public class Task {
     private String description;
     private boolean done;
@@ -14,10 +17,17 @@ public class Task {
         this.done = isCompleted;
     }
 
+    /**
+     * Mark a task as complete
+     */
     public void setComplete() {
         this.done = true;
     }
 
+    /**
+     * Check the completion of the task
+     * @return "[X]" if task is completed and "[ ]" if the task isn't
+     */
     public String taskCompletion() {
         if (done) {
             return "[X]";
@@ -26,6 +36,11 @@ public class Task {
         }
     }
 
+    /**
+     * Method to convert information from object instance into a different format to be saved
+     *
+     * @return a string with completion status, task description
+     */
     protected String saveFormat() {
         if (done) {
             return 1 + "," + this.description;
@@ -33,7 +48,12 @@ public class Task {
             return 0 + "," + this.description;
         }
     }
-    
+
+    /**
+     *  Method to convert information from object instance into a more readable format
+     *
+     * @return a string with the task description
+     */
     @Override
     public String toString() {
         return this.description;

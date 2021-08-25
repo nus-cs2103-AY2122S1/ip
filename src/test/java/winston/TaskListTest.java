@@ -24,7 +24,7 @@ public class TaskListTest {
             }
         }
         TaskList taskList = new TaskList(list);
-        assertEquals(taskList.completedTasks(), 10);
+        assertEquals(taskList.uncompletedTasks(), 10);
     }
     
     @Test
