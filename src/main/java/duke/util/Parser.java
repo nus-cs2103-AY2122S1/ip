@@ -31,13 +31,7 @@ public class Parser {
             case "list":
                 return new ListCommand();
             case "find":
-                if (userInput.matches("^find .+")) {
-                    String searchTerm = userInput.substring(indexOfSpace + 1);
-                    return new FindCommand(searchTerm);
-                } else {
-                    throw new DukeException(">:( include search term after find:\n"
-                            + "find <some search term>");
-                }
+                return getFindCommand(userInput, indexOfSpace);
             case "done":
                 return getDoneCommand(userInput);
             case "delete":
@@ -50,6 +44,16 @@ public class Parser {
                 return getAddTodoCommand(userInput, indexOfSpace);
             default:
                 throw new DukeException("Say something I can understand!! >:(");
+        }
+    }
+
+    private static FindCommand getFindCommand(String userInput, int indexOfSpace) throws DukeException {
+        if (userInput.matches("^find .+")) {
+            String searchTerm = userInput.substring(indexOfSpace + 1);
+            return new FindCommand(searchTerm);
+        } else {
+            throw new DukeException(">:( include search term after find:\n"
+                    + "find <some search term>");
         }
     }
 

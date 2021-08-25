@@ -49,12 +49,12 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
-            taskList.addTask(task);
-            storage.writeToDisk(taskList.compileTasks());
-            ui.respond(
-                String.format("Caan Do!\n  added: %s\nLook at me! %d tasks in the list now!",
-                    this.task,
-                    taskList.getSize())
-            );
+        taskList.addTask(task);
+        storage.writeToDisk(taskList.compileTasks());
+        ui.respond(
+            String.format("Caan Do!\n  added: %s\nLook at me! %d tasks in the list now!",
+                this.task,
+                taskList.getSize())
+        );
     }
 }
