@@ -64,4 +64,9 @@ public class Command {
             return true;
         }
     }
+
+    //for testing purposes
+    public void setTaskListEmpty() {
+        this.taskList = new TaskList();
+    }
 }

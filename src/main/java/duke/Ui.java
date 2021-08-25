@@ -17,6 +17,7 @@ public class Ui {
     public void iterateTaskList(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
             System.out.println("List is empty!");
+            return;
         }
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
@@ -29,5 +30,6 @@ public class Ui {
     public void endMessage() {
         System.out.println("Bye! See you next time!");
     }
+
 
 }

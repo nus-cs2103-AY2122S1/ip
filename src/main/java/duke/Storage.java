@@ -39,7 +39,11 @@ public class Storage {
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNext()) {
                 String line = fileScanner.nextLine();
-                parseLineInFile(line, tasks);
+                boolean hasNoError = parseLineInFile(line, tasks);
+                if (!hasNoError) {
+                    tasks = new ArrayList<Task>();
+                    break;
+                }
             }
             return tasks;
         } catch (FileNotFoundException e) {
@@ -49,7 +53,7 @@ public class Storage {
     }
 
     //format of string should be typeOfTask||status||description||time
-    private void parseLineInFile(String string, ArrayList<Task> tasks) {
+    private boolean parseLineInFile(String string, ArrayList<Task> tasks) {
         try {
             if (string.length() < 7) {
                 throw new DukeException("Cannot read file.");
@@ -78,8 +82,10 @@ public class Storage {
             } else {
                 throw new DukeException("Cannot read file.");
             }
+            return true;
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+            return false;
         }
     }
 
