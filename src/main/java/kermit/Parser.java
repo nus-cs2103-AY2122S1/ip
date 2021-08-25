@@ -1,3 +1,7 @@
+package kermit;
+
+import kermit.command.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +20,7 @@ public class Parser {
         StringBuilder argumentBuilder = new StringBuilder();
         StringBuilder flagBuilder = new StringBuilder();
 
-        // Task description and flag should be separated by some /command
+        // kermit.command.Task description and flag should be separated by some /kermit.command
         String[] userInput = fullCommand.split("/");
         String commandString = userInput[0];
         String flagString = userInput.length > 1 ? userInput[1] : "";
@@ -24,11 +28,11 @@ public class Parser {
         String[] commandArr = commandString.split(" ");
         String[] flagArr = flagString.split(" ");
 
-        // first item is command
+        // first item is kermit.command
         command = commandArr[0];
         flag = flagArr[0];
 
-        // Check if command is valid
+        // Check if kermit.command is valid
         if (!commands.contains(command)) {
             throw new KermitException(invalidCommandText);
         }

@@ -1,3 +1,7 @@
+package kermit;
+
+import kermit.tasks.*;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -11,7 +15,7 @@ public class Storage {
     private String filePath;
     private File file;
     public Storage(String filePath) {
-        // Check if Kermit data exists, else create it
+        // Check if kermit.command.Kermit data exists, else create it
         this.filePath = filePath;
     }
 

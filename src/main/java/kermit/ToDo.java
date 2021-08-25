@@ -1,13 +1,17 @@
+package kermit;
+
+import kermit.tasks.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ToDo list stores items
+ * kermit.command.ToDo list stores items
  */
 public class ToDo extends ArrayList<Task> {
 
     /**
-     * ToDo constructor
+     * kermit.command.ToDo constructor
      */
     public ToDo() {
         super();

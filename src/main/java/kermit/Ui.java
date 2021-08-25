@@ -1,7 +1,11 @@
+package kermit;
+
+import kermit.tasks.Task;
+
 import java.util.Scanner;
 
 public class Ui {
-    private static final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
+    private static final String introductionText = "Hello I am kermit.command.Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
     private static final String listText = "Here are the tasks in your list:";
     private static final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
     private static final String goodbyeText = "Bye. Hope to see you again soon!";
@@ -39,7 +43,7 @@ public class Ui {
     /**
      * Pretty format text when task is added
      *
-     * @param task Task that is added to list
+     * @param task kermit.command.Task that is added to list
      * @param list List that task was added to
      */
     public void showAddTaskMessage(Task task, ToDo list) {

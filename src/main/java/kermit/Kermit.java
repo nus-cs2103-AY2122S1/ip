@@ -1,9 +1,9 @@
+package kermit;
+
+import kermit.command.Command;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.lang.StringBuilder;
 
 public class Kermit {
     private Storage storage;
