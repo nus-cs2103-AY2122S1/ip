@@ -1,3 +1,13 @@
+package duke;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DisplayCommand;
+import duke.command.ExitCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.task.TaskList;
+
 public class Parser {
     public static Command parse(String fullCommand, TaskList tasks) throws DukeException {
         String[] cmdWordDetails = fullCommand.split(" ", 2); // split into command and details

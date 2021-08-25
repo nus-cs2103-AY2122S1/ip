@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.TaskList;
+import duke.Ui;
+import duke.task.Storage;
+
 public abstract class Command {
 
     /** Executes the user command */
