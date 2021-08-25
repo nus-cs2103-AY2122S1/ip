@@ -3,9 +3,9 @@
  *
  * @author Sherman Ng Wei Sheng
  */
-public class Task {
-    protected final String description;
-    protected boolean isDone;
+public abstract class Task {
+    private final String description;
+    private boolean isDone;
 
     /**
      * Constructor to initialize a new Task.
@@ -15,6 +15,17 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    /**
+     * Constructor to initialize a new Task with a boolean argument.
+     *
+     * @param description The description of the task.
+     * @param isDone The status of the task.
+     */
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
     /**
@@ -42,4 +53,14 @@ public class Task {
     public String toString() {
         return getStatusIcon() + " " + this.description;
     }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+    
+    public abstract String encodeTaskForStorage();
 }

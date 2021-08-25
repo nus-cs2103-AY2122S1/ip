@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
 
 /**
  * Represents a list that contains a <code>List</code> of tasks.
@@ -8,12 +9,14 @@ import java.util.List;
  */
 public class TaskList {
     private final List<Task> list;
+    private final Storage storage;
 
     /**
      * Constructor to initialize a new TaskList
      */
     public TaskList() {
         this.list = new ArrayList<>();
+        this.storage = new Storage();
     }
 
     /**
@@ -23,6 +26,7 @@ public class TaskList {
      */
     public void add(Task task) {
         this.list.add(task);
+        this.saveToStorage();
     }
 
     /**
@@ -58,6 +62,7 @@ public class TaskList {
         } else {
             Task taskToBeMarkDone = this.get(index);
             taskToBeMarkDone.markAsDone();
+            this.saveToStorage();
             return true;
         }
     }
@@ -72,7 +77,29 @@ public class TaskList {
         if (index > this.size()-1 || index < 0) {
             return null;
         } else {
-            return this.list.remove(index);
+            Task removedTask = this.list.remove(index);
+            this.saveToStorage();
+            return removedTask;
         }
+    }
+    
+    public String generateMessage() {
+        int listSize = this.list.size();
+
+        StringBuilder message = new StringBuilder("Here are the tasks in your list:");
+        for (int i = 0; i < listSize; i++) {
+            int index = i + 1;
+            Task content = this.list.get(i);
+            message.append("\n").append(index).append(".").append(content);
+        }
+        return message.toString();
+    }
+    
+    public void loadFromStorage() {
+        this.storage.loadDataTo(this);
+    }
+    
+    public void saveToStorage() {
+        this.storage.saveDataFrom(this);
     }
 }

@@ -16,7 +16,10 @@ public class Duke {
      */
     public Duke(String name) {
         this.name = name;
-        this.list = new TaskList();
+        
+        TaskList taskList = new TaskList();
+        taskList.loadFromStorage();
+        this.list = taskList;
     }
 
     /**
@@ -197,15 +200,8 @@ public class Duke {
      * Prints the formatted list of content in <code>list</code>.
      */
     private void printList() {
-        int listSize = this.list.size();
-
-        StringBuilder message = new StringBuilder("Here are the tasks in your list:");
-        for (int i = 0; i < listSize; i++) {
-            int index = i + 1;
-            Task content = this.list.get(i);
-            message.append("\n").append(index).append(".").append(content);
-        }
-        printMessage(message.toString());
+        String message = this.list.generateMessage();
+        printMessage(message);
     }
     
     /**
@@ -228,10 +224,10 @@ public class Duke {
      */
     private void printMessage(String content) {
         String format = 
-                "\t____________________________________________________________\n" + 
-                "\t%s\n" + 
-                "\t____________________________________________________________\n";
-        System.out.printf(format, content.replaceAll("\n", "\n\t"));
+                "        ____________________________________________________________\n" + 
+                "        %s\n" + 
+                "        ____________________________________________________________\n";
+        System.out.printf(format, content.replaceAll("\n", "\n        "));
     }
 
     /**
