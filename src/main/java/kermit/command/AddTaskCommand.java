@@ -56,14 +56,14 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
+    public void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
         taskList.add(task);
         ui.showAddTaskMessage(task, taskList);
         storage.save(taskList);
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

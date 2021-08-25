@@ -9,12 +9,12 @@ public class ListTasksCommand extends Command {
     public ListTasksCommand() {}
 
     @Override
-    void execute(ToDo taskList, Ui ui, Storage storage) {
+    public void execute(ToDo taskList, Ui ui, Storage storage) {
         ui.showListItems(taskList);
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

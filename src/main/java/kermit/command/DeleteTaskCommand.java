@@ -21,7 +21,7 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
+    public void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
         try {
             Task deletedTask = taskList.deleteTask(taskNum);
             ui.showDeleteTaskMessage(deletedTask, taskList);
@@ -32,7 +32,7 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

@@ -21,7 +21,7 @@ public class CompleteTaskCommand extends Command {
     }
 
     @Override
-    void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
+    public void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
         try {
             Task task = taskList.completeTask(taskNum);
             ui.showCompleteTaskMessage(task);
@@ -32,7 +32,7 @@ public class CompleteTaskCommand extends Command {
     }
 
     @Override
-    boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }
