@@ -1,11 +1,13 @@
+package duke;
+
 /**
- * Class for Todo, a child class of Task.
+ * Class for duke.Todo, a child class of duke.Task.
  * @author Liew Jian Hong
  */
 public class Todo extends Task{
 
     /**
-     * Constructor for a Todo task.
+     * Constructor for a duke.Todo task.
      * @param desc String array consisting of parsed description.
      */
     public Todo(String[] desc) {

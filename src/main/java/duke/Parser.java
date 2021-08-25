@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Class for parsing input of user for Duke.
+ * Class for parsing input of user for duke.Duke.
  * @author Liew Jian Hong
  */
 

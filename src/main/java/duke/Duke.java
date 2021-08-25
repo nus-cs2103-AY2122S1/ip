@@ -1,6 +1,4 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
+package duke;
 
 /**
  * Class to keep track of Tasks.
@@ -8,7 +6,7 @@ import java.util.Scanner;
 public class Duke {
 
     /**
-     * TaskList containing Tasks.
+     * duke.TaskList containing Tasks.
      */
     private TaskList tl;
     private Storage storage;
@@ -16,7 +14,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Constructor for a Duke.
+     * Constructor for a duke.Duke.
      */
     public Duke() {
         this.storage = new Storage();
@@ -26,7 +24,7 @@ public class Duke {
     }
 
     /**
-     * Exit the Duke program.
+     * Exit the duke.Duke program.
      */
     private void exit() {
         this.ui.showExitMessage();
@@ -34,7 +32,7 @@ public class Duke {
     }
 
     /**
-     * Adds a task for Duke to track given a parsed command.
+     * Adds a task for duke.Duke to track given a parsed command.
      * @param t String array of parsed user input.
      * @throws DukeException Exception for wrong user inputs.
      */
@@ -70,8 +68,8 @@ public class Duke {
 
     /**
      * Gets the task from duke given an index.
-     * @param index Index of Task.
-     * @return Task of the given index.
+     * @param index Index of duke.Task.
+     * @return duke.Task of the given index.
      */
     private Task getTaskByIndex(int index) {
         return this.tl.getTaskByIndex(index);
@@ -79,7 +77,7 @@ public class Duke {
 
     /**
      * Marks a task as done given its position in the list.
-     * @param itemNum Position of Task in the list.
+     * @param itemNum Position of duke.Task in the list.
      */
     private void markDone(int itemNum){
         this.tl.markDone(itemNum);
@@ -106,7 +104,7 @@ public class Duke {
     }
 
     /**
-     * Start Duke to allow for inputs.
+     * Start duke.Duke to allow for inputs.
      */
     private void run() {
         this.ui.showGreetMessage();

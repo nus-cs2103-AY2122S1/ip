@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Class for Task, to be added to the TaskList
+ * Class for duke.Task, to be added to the duke.TaskList
  * @author Liew Jian Hong
  */
 
@@ -16,7 +18,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for a Task
+     * Constructor for a duke.Task
      * @param desc Description of the task details.
      * @param isDone Completion status of the task.
      */

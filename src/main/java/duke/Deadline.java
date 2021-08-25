@@ -1,8 +1,10 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class for Deadline, a child class of Task.
+ * Class for duke.Deadline, a child class of duke.Task.
  * @author Liew Jian Hong
  */
 
@@ -13,7 +15,7 @@ public class Deadline extends Task{
     protected LocalDate date;
 
     /**
-     * Constructor for a Deadline task.
+     * Constructor for a duke.Deadline task.
      * @param desc String array consisting of parsed description.
      */
     public Deadline(String[] desc) {

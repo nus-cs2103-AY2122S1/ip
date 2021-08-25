@@ -1,9 +1,11 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
 /**
- * Class for Event, a child class of Task.
+ * Class for duke.Event, a child class of duke.Task.
  * @author Liew Jian Hong
  */
 public class Event extends Task{
@@ -13,7 +15,7 @@ public class Event extends Task{
     protected LocalDate date;
 
     /**
-     * Constructor for an Event task.
+     * Constructor for an duke.Event task.
      * @param desc String array consisting of parsed description.
      */
     public Event(String[] desc) {

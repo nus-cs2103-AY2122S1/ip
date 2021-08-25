@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -18,8 +20,8 @@ public class Storage {
         }
     }
     /**
-     * Loads the TaskList stored in predetermined file
-     * @return TaskList
+     * Loads the duke.TaskList stored in predetermined file
+     * @return duke.TaskList
      */
     public TaskList load() {
         TaskList tasks = new TaskList();
