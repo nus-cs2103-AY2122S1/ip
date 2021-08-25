@@ -12,14 +12,11 @@ public class Storage {
 	
 	public Storage(String path) throws IOException {
 		this.path = path;
-		try {
-			fileIn = new FileReader(path);
-			sc = new Scanner(fileIn);
-		} catch (IOException e) {
-			File storeFile = new File(path);
-			storeFile.getParentFile().mkdirs();
-			storeFile.createNewFile();
-		}
+		File storeFile = new File(path);
+		storeFile.getParentFile().mkdirs();
+		storeFile.createNewFile();
+		fileIn = new FileReader(path);
+		sc = new Scanner(fileIn);
 	}
 	
 	public ArrayList<Task> load() {
