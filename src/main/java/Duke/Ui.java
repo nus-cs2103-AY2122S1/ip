@@ -7,7 +7,7 @@ public class Ui {
 
     private void printDuke(String str) {
         System.out.printf(String.format("%s\n%s\n%s\n", BORDER, str, BORDER)
-            .replaceAll("(?m)^", "\t"));
+                .replaceAll("(?m)^", "\t"));
     }
 
     public void showWelcome() {
