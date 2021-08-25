@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 
 /**
  * The Task class encapsulates a task for the user to complete.
+ * It contains information about the task's description and its completion status.
  */
 public class Task {
     /** The description of the task. */
@@ -13,7 +14,7 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Constructor for a Task object.
+     * Constructs a task object that is not completed yet.
      *
      * @param description The description of the task.
      */
@@ -23,7 +24,7 @@ public class Task {
     }
 
     /**
-     * Constructor for a Task object.
+     * Constructs a task object with a specifiable completion status.
      *
      * @param description The description of the task.
      * @param isDone A boolean indicating whether the task has been completed.
@@ -34,7 +35,7 @@ public class Task {
     }
 
     /**
-     * Gets the status icon of the task.
+     * Gets the icon representing the completion status of the task.
      *
      * @return "X" if the task is done, " " otherwise.
      */
@@ -62,10 +63,21 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Returns the format in which the task is stored in the save file.
+     *
+     * @return A string representing how the task is saved.
+     */
     public String getSaveFormat() {
         return (isDone ? "1" : "0") + "|" + this.description;
     }
 
+    /**
+     * Checks whether another object is equal with this task.
+     *
+     * @param other The object being compared to.
+     * @return true if both are tasks and share the same description and completion status, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other instanceof Task) {

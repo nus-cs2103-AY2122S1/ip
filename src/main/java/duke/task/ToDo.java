@@ -1,43 +1,54 @@
 package duke.task;
 
 /**
- * The duke.task.ToDo class encapsulates a duke.task to be done by the user.
+ * The ToDo class encapsulates a task to be done by the user.
  */
 public class ToDo extends Task {
     /**
-     * Constructor for the duke.task.ToDo class.
+     * Constructs a todo object that is not completed yet.
      *
-     * @param description The description of the duke.task.
+     * @param description The description of the task.
      */
     public ToDo(String description) {
         super(description);
     }
 
     /**
-     * Constructor for the duke.task.ToDo class.
+     * Constructs a todo object with a specifiable completion status.
      *
-     * @param description The description of the duke.task.
-     * @param isDone A boolean indicating whether the duke.task has been completed.
+     * @param description The description of the task.
+     * @param isDone A boolean indicating whether the task has been completed.
      */
     public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
 
     /**
-     * Returns the string representation of the duke.task.
+     * Returns the string representation of the task.
      *
-     * @return A string representing the duke.task.ToDo duke.task.
+     * @return A string representing the task.
      */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Returns the format in which the task is stored in the save file.
+     *
+     * @return A string representing how the task is saved.
+     */
     @Override
     public String getSaveFormat() {
         return "T|" + super.getSaveFormat() + '\n';
     }
 
+    /**
+     * Checks whether another object is equal with this task.
+     *
+     * @param other The object being compared to.
+     * @return true if both are tasks and share the same description and completion status, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other instanceof ToDo) {

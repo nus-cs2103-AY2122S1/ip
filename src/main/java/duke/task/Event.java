@@ -7,17 +7,18 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The Event class encapsulates a task that occurs at a specific date/time.
+ * The Event class encapsulates a task that occurs at a specific date.
  */
 public class Event extends Task {
-    /** The date/time that the event occurs at. */
+    /** The date that the event occurs at. */
     private LocalDate at;
 
     /**
-     * Constructor for the Event class.
+     * Constructs an event object that is not completed yet.
      *
      * @param description The description of the event.
-     * @param at The date/time that the event occurs at.
+     * @param at The date that the event occurs at.
+     * @throws DukeException If the deadline of the task is not in YYYY-MM-DD format.
      */
     public Event(String description, String at) throws DukeException {
         super(description);
@@ -29,13 +30,14 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor for the Event class.
+     * Constructs an event object with a specifiable completion status.
      *
      * @param description The description of the event.
      * @param isDone A boolean indicating whether the task has been completed.
-     * @param at The date/time that the event occurs at.
+     * @param at The date that the event occurs at.
+     * @throws DukeException If the deadline of the task is not in YYYY-MM-DD format.
      */
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, String at) throws DukeException {
         super(description, isDone);
         try {
             this.at = LocalDate.parse(at);
@@ -45,9 +47,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of the Event.
+     * Returns the string representation of the event.
      *
-     * @return A string representing the Event.
+     * @return A string representing the event.
      */
     @Override
     public String toString() {
@@ -55,11 +57,22 @@ public class Event extends Task {
                 + this.at.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) + ")";
     }
 
+    /**
+     * Returns the format in which the event is stored in the save file.
+     *
+     * @return A string representing how the event is saved.
+     */
     @Override
     public String getSaveFormat() {
         return "E|" + super.getSaveFormat() + "|" + this.at + '\n';
     }
 
+    /**
+     * Checks whether another object is equal with this event.
+     *
+     * @param other The object being compared to.
+     * @return true if both are events and share the same date, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other instanceof Event) {
