@@ -6,7 +6,7 @@ import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 public class Tasklist {
-    private final List<Task> taskList = new ArrayList<>();
+    private final List<Task> tasks = new ArrayList<>();
     public Tasklist() {
 
     }
@@ -22,7 +22,7 @@ public class Tasklist {
      * @return Number of Tasks in the list.
      */
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -35,7 +35,7 @@ public class Tasklist {
      */
     public Task getTask(int idx) throws IndexOutOfBoundsException {
         int i = idx - 1;
-        return taskList.get(i);
+        return tasks.get(i);
     }
 
     /**
@@ -48,7 +48,7 @@ public class Tasklist {
      */
     public Task removeTask(int idx) throws IndexOutOfBoundsException {
         int i = idx - 1;
-        return taskList.remove(i);
+        return tasks.remove(i);
     }
 
     /**
@@ -56,7 +56,7 @@ public class Tasklist {
      * @param t Task passed by the user.
      */
     public void addTask(Task t) {
-        taskList.add(t);
+        tasks.add(t);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Tasklist {
      * @return Concatenated string of all Tasks in the Tasklist.
      */
     public String toWritable() {
-        return taskList.stream().map(task -> task.toString() + "\n").collect(Collectors.joining());
+        return tasks.stream().map(task -> task.toString() + "\n").collect(Collectors.joining());
     }
 
     /**
@@ -89,6 +89,6 @@ public class Tasklist {
      * @return A ListIterator object to be displayed.
      */
     public ListIterator<Task> toIterable() {
-        return taskList.listIterator();
+        return tasks.listIterator();
     }
 }

@@ -11,8 +11,8 @@ public class Deadline extends Task {
     public Deadline(String description, String date) {
         super(description);
         try {
-            int[] dateArr = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
-            this.date = LocalDate.of(dateArr[0], dateArr[1], dateArr[2]);
+            int[] dateArgs = Arrays.stream(date.split("-")).mapToInt(Integer::parseInt).toArray();
+            this.date = LocalDate.of(dateArgs[0], dateArgs[1], dateArgs[2]);
         } catch (NumberFormatException | DateTimeException | ArrayIndexOutOfBoundsException e) {
             throw new DukeException("the event date has to be in format yyyy-mm-dd");
         }
