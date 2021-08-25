@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.nio.file.Files;
@@ -14,6 +15,11 @@ import java.nio.file.Paths;
 public class Duke {
     private static final String FORMAT = "\t%s\n";
     private static final String LINE = "______________________________________________________";
+    private static final Path SAVEFILE_DIR =
+            Paths.get(System.getProperty("user.dir"), "data");
+    private static final Path SAVEFILE_PATH =
+            Paths.get(System.getProperty("user.dir"), "data", "tasks.txt");
+
 
     public static void main(String[] args) {
         String logo = "\t ____        _        \n"
@@ -21,11 +27,21 @@ public class Duke {
                 + "\t| | | | | | | |/ / _ \\\n"
                 + "\t| |_| | |_| |   <  __/\n"
                 + "\t|____/ \\__,_|_|\\_\\___|\n";
-        List<Task> tasks = new ArrayList<>();
 
         System.out.print(logo);
         System.out.printf(FORMAT, LINE);
-        System.out.printf(FORMAT, "Hello there, I'm Duke!");
+
+        List<Task> tasks = new ArrayList<>();
+        try {
+            tasks = loadTasksFromFile();
+            System.out.printf(FORMAT, "Welcome back!");
+        } catch (FileNotFoundException e) {
+            // If file is not found, greet user with first time welcome message
+            System.out.printf(FORMAT, "Hello there, I'm Duke!");
+        } catch (Exception e) {
+            System.out.printf("\tUh-oh! %s\n", e.getMessage());
+        }
+
         System.out.printf(FORMAT, "What can I do for you today?");
         System.out.printf(FORMAT, LINE);
 
@@ -187,16 +203,40 @@ public class Duke {
 
     // Saves tasks to the file ./data/tasks.txt. Called when list is modified.
     private static void saveTasksToFile(List<Task> tasks) throws IOException {
-        String curDir = System.getProperty("user.dir");
-        Path path = Paths.get(curDir, "data", "tasks.txt");
-        Files.createDirectories(Paths.get(curDir, "data")); // Create data directory if it does not exist
-        FileWriter fw = new FileWriter(path.toAbsolutePath().toString());
+        Files.createDirectories(SAVEFILE_DIR); // Create data directory if it does not exist
+        FileWriter fw = new FileWriter(SAVEFILE_PATH.toAbsolutePath().toString());
         StringBuilder saveData = new StringBuilder();
         for (Task task : tasks) {
             saveData.append(task.toSaveData()).append(System.lineSeparator());
         }
         fw.write(saveData.toString());
         fw.close();
+    }
+
+    // Loads tasks from the save file ./data/tasks.txt. Called when Duke starts.
+    private static List<Task> loadTasksFromFile() throws FileNotFoundException, DukeException {
+        File saveFile = SAVEFILE_PATH.toFile();
+        Scanner scanner = new Scanner(saveFile);
+        List<Task> tasks = new ArrayList<>();
+        while (scanner.hasNextLine()) {
+            String taskLine = scanner.nextLine();
+            String[] taskData = taskLine.split("\\|");
+            switch(taskData[0]) {
+            case("T"):
+                tasks.add(new Todo(taskData[2], Boolean.parseBoolean(taskData[1])));
+                break;
+            case("D"):
+                tasks.add(new Deadline(taskData[2], Boolean.parseBoolean(taskData[1]), taskData[3]));
+                break;
+            case("E"):
+                tasks.add(new Event(taskData[2], Boolean.parseBoolean(taskData[1]), taskData[3]));
+                break;
+            default:
+                throw new DukeException("Save file contains invalid task data (Invalid task type)");
+            }
+        }
+
+        return tasks;
     }
 
 }

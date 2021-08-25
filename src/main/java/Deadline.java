@@ -6,6 +6,11 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    public Deadline(String taskName, boolean isDone, String date) {
+        super(taskName, isDone);
+        this.date = date;
+    }
+
     @Override
     public String toSaveData() {
         return "D|" + super.toSaveData() + "|" + this.date;
