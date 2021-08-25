@@ -1,6 +1,10 @@
-import javax.xml.crypto.Data;
-import java.io.*;
-import java.nio.file.Path;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -119,7 +123,7 @@ public class Duke {
                     System.out.println("Now you have " + listIndex + " tasks remaining. Get to work!");
                     saveData();
 
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException exception) {
                     System.out.println("Enter a valid number! Or do you not know basic math?");
                 } finally {
                     continue;
@@ -200,14 +204,20 @@ public class Duke {
                 return;
             }
 
-            tempTask = new Deadlines(str.toString(), time);
+            //check if a valid time was entered
+            try {
+                LocalDate date = LocalDateParser.parse(time);
+                tempTask = new Deadlines(str.toString(), date);
+            } catch (IllegalArgumentException exception) {
+                System.out.println("Enter a valid date format! (yyyy-mm-dd)");
+                return;
+            }
             break;
 
 
         case EVENT:
             String eventTime = "";
             boolean stringHasTerminated = false;
-
             for (int i = 1; i < array.length; i++) {
                 //repeatedly append strings in the array until the eventTime is found
                 String currentArrayElement = array[i];
@@ -227,9 +237,15 @@ public class Duke {
                 return;
             }
 
-            tempTask = new Events(str.toString(), eventTime);
+            //check if a valid time was entered
+            try {
+                LocalDate date = LocalDateParser.parse(eventTime);
+                tempTask = new Events(str.toString(), date);
+            } catch (IllegalArgumentException exception) {
+                System.out.println("Enter a valid date format! (yyyy-mm-dd)");
+                return;
+            }
             break;
-
         }
 
         taskArray.add(tempTask);

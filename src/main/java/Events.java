@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A class encapsulating a Event variant of a Task.
  *
@@ -6,7 +9,7 @@
 public class Events extends Task {
 
     //The duration during which the specified Task occurs.
-    private String time;
+    private LocalDate time;
 
     /**
      * Constructor for a Event instance.
@@ -14,7 +17,7 @@ public class Events extends Task {
      * @param name A String describing the Task.
      * @oaram time A String describing the duration of the Task.
      */
-    public Events(String name,String time) {
+    public Events(String name,LocalDate time) {
         super(name);
         this.time = time;
     }
@@ -26,10 +29,11 @@ public class Events extends Task {
      */
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         if (isDone) {
-            return ("[E] [X] " + name  + " (at: " + time + ")");
+            return ("[E] [X] " + name  + " (at: " + time.format(formatter).toString() + ")");
         } else {
-            return ("[E] [ ] " + name  + " (at: " + time + ")");
+            return ("[E] [ ] " + name  + " (at: " + time.format(formatter).toString() + ")");
         }
     }
 
