@@ -1,3 +1,5 @@
+package bobbybot;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -48,7 +50,7 @@ public class Storage {
     }
 
     /**
-     * Saves all tasks in BobbyBot to hardcoded text file
+     * Saves all tasks in bobbybot.BobbyBot to hardcoded text file
      */
     public void save(TaskList tasks) throws IOException {
         // save task to .txt file

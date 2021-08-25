@@ -1,3 +1,5 @@
+package bobbybot;
+
 /** Represents a task without any time restrictions
  *  @auther mokdarren
  */

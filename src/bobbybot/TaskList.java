@@ -1,3 +1,5 @@
+package bobbybot;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -33,7 +35,7 @@ public class TaskList {
 
     /**
      * Mark a task as done
-     * @param taskNo Task Number (starting from index 1)
+     * @param taskNo bobbybot.Task Number (starting from index 1)
      */
     public void markAsDone(int taskNo) {
         Task taskCompleted = getTask(taskNo - 1);
@@ -44,7 +46,7 @@ public class TaskList {
 
     /**
      * Delete a task
-     * @param taskNo Task Number (starting from index 1)
+     * @param taskNo bobbybot.Task Number (starting from index 1)
      */
     public void deleteTask(int taskNo) {
         if (taskNo > tasks.size() || taskNo < 1) {
@@ -72,7 +74,7 @@ public class TaskList {
     /**
      * Creates an event task
      * @param description description of task
-     * @param at time period of Event (start-end)
+     * @param at time period of bobbybot.Event (start-end)
      */
     public void createEvent(String description, String at) {
         Task newEvent = new Event(description, at);

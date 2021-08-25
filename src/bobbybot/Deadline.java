@@ -1,8 +1,10 @@
+package bobbybot;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-/** Represents a Task that should be completed by a specified Date and Time
+/** Represents a bobbybot.Task that should be completed by a specified Date and Time
  *  @author mokdarren
  */
 public class Deadline extends Task{

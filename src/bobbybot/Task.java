@@ -1,3 +1,5 @@
+package bobbybot;
+
 /** Represents a task that can be completed
  * @author mokdarren
  */
