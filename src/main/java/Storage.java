@@ -1,7 +1,9 @@
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 // todo
@@ -9,63 +11,65 @@ import java.util.Scanner;
 
 public class Storage {
     private static final String fileErrorText = "Ribiit! Something was wrong with the file!";
-
-    private File toDoFile;
-    private ToDo taskList;
-
-    public Storage(String filePath) throws IOException, KermitException {
+    private String filePath;
+    private File file;
+    public Storage(String filePath) {
         // Check if Kermit data exists, else create it
-        this.toDoFile = new File(filePath);
-        this.taskList = readToDoData(this.toDoFile);
+        this.filePath = filePath;
     }
 
-    private ToDo readToDoData(File file) throws IOException, KermitException {
-        if (toDoFile.getParentFile() != null) {
-            toDoFile.getParentFile().mkdirs();
-        }
+    public List<Task> load() throws KermitException {
+        try {
+            file = new File(filePath);
+            if (file.getParentFile() != null) {
+                file.getParentFile().mkdirs();
+            }
 
-        boolean didCreateFile = toDoFile.createNewFile();
-        ToDo todo = new ToDo();
-        String line;
-        Task task;
-        Scanner sc = new Scanner(file);
-        // Read file line by line
-        if (!didCreateFile) {
-            while (sc.hasNextLine()) {
-                line = sc.nextLine();
-                String[] commands = line.split(" \\| ");
-                String taskShortForm = commands[0];
-                boolean isCompleted = commands[1].equals("1");
-                String description = commands[2];
+            boolean didCreateFile = file.createNewFile();
+            ArrayList<Task> taskList = new ArrayList<>();
+            String line;
+            Task task;
+            Scanner sc = new Scanner(file);
+            // Read file line by line
+            if (!didCreateFile) {
+                while (sc.hasNextLine()) {
+                    line = sc.nextLine();
+                    String[] commands = line.split(" \\| ");
+                    String taskShortForm = commands[0];
+                    boolean isCompleted = commands[1].equals("1");
+                    String description = commands[2];
 
-                // todo
-                LocalDate date = LocalDate.now();
-                if (taskShortForm.equals("E") || taskShortForm.equals("D")) {
-                    try {
-                        date = LocalDate.parse(commands[3]);
-                    } catch (DateTimeParseException e){
-                        throw new KermitException("Invalid date in data file!");
+                    // todo
+                    LocalDate date = LocalDate.now();
+                    if (taskShortForm.equals("E") || taskShortForm.equals("D")) {
+                        try {
+                            date = LocalDate.parse(commands[3]);
+                        } catch (DateTimeParseException e) {
+                            throw new KermitException("Invalid date in data file!");
+                        }
+                    }
+
+                    // Create task based on line data
+                    switch (taskShortForm) {
+                        case "T":
+                            task = new ToDos(description, isCompleted);
+                            taskList.add(task);
+                            break;
+                        case "D":
+                            task = new Deadline(description, date, isCompleted);
+                            taskList.add(task);
+                            break;
+                        case "E":
+                            task = new Event(description, date, isCompleted);
+                            taskList.add(task);
+                            break;
                     }
                 }
-
-                // Create task based on line data
-                switch (taskShortForm) {
-                    case "T":
-                        task = new ToDos(description, isCompleted);
-                        todo.add(task);
-                        break;
-                    case "D":
-                        task = new Deadline(description, date, isCompleted);
-                        todo.add(task);
-                        break;
-                    case "E":
-                        task = new Event(description, date, isCompleted);
-                        todo.add(task);
-                        break;
-                }
             }
+            return taskList;
+        } catch (IOException e) {
+            throw new KermitException(fileErrorText);
         }
-        return todo;
     }
 
     private String formatWriteString(Task task) {
@@ -81,16 +85,12 @@ public class Storage {
         return formattedString;
     }
 
-    public ToDo getToDoList() {
-        return this.taskList;
-    }
-
     // Saves task list data to file, file is overwritten
-    public void save() throws KermitException {
+    public void save(ToDo todo) throws KermitException {
         try {
-            FileWriter fw = new FileWriter(toDoFile);
+            FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
-            Iterator<Task> taskIter = taskList.iterator();
+            Iterator<Task> taskIter = todo.iterator();
             while (taskIter.hasNext()) {
                 Task task = taskIter.next();
                 String taskData = formatWriteString(task);
