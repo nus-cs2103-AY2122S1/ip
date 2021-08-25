@@ -183,5 +183,25 @@ public class TaskList {
             throw new WhoBotException("Ensure that the command is of the form \"show /on #date\". The description can not be empty.");
         }
     }
-
+    
+    public void findTask(String text, UI ui) {
+        String searchText = text.substring(6).toLowerCase(Locale.ROOT);
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : this.LIST) {
+            if (task.getDescription().toLowerCase(Locale.ROOT).contains(searchText)) {
+                matchingTasks.add(task);
+            }
+        }
+        if (matchingTasks.isEmpty()) {
+            ui.echo("There are currently no tasks that match your search.", UI.TYPE.COMPLETE);
+            return;
+        }
+        String listString = "The tasks in your list that match your search are:\n";
+        int i;
+        for (i = 0; i < matchingTasks.size() - 1; i++) {
+            listString = listString.concat("\t\t\t" + (i + 1) + ". " + matchingTasks.get(i) + "\n");
+        }
+        listString = listString.concat("\t\t\t" + (i + 1) + ". " + matchingTasks.get(i));
+        ui.echo(listString, UI.TYPE.COMPLETE);
+    }
 }

@@ -59,6 +59,9 @@ public class Parser {
         } else if (commandList[0].equals("show")) {
             //If input starts with todos, add that to list
             taskList.showOnDate(command, ui);
+        } else if (commandList[0].equals("find")) {
+            //If input starts with todos, add that to list
+            taskList.findTask(command, ui);
         } else {
             // Else Invalid
             throw new WhoBotException("Oops, That's an invalid command. Type in help to get list of possible commands.");
