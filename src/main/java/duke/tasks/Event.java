@@ -22,10 +22,6 @@ public class Event extends Task {
         this.end = end;
     }
 
-    public String formatString() {
-        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.start.format(DateTimeFormatter.ofPattern("h:mma")) + " " + this.end.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
-    }
-
     public Event(String done, String description, LocalDate date, LocalTime start, LocalTime end) {
         super(description);
         this.date = date;
@@ -36,6 +32,13 @@ public class Event extends Task {
         } else {
             this.setIsDone(false);
         }
+    }
+
+    public String formatString() {
+        return "[E]" + super.toString()
+                + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + " " + this.start.format(DateTimeFormatter.ofPattern("h:mma")) + " "
+                + this.end.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
     }
 
     /**

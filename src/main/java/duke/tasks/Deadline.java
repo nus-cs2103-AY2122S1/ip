@@ -20,10 +20,6 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    public String formatString() {
-        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
-    }
-
     public Deadline(String done, String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
@@ -33,6 +29,11 @@ public class Deadline extends Task {
         } else {
             this.setIsDone(false);
         }
+    }
+
+    public String formatString() {
+        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " "
+                + this.time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
     }
 
     /**

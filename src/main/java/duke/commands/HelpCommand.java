@@ -32,11 +32,13 @@ public class HelpCommand extends Command {
         System.out.println("               - Inputs the a ToDo task into the task list");
         System.out.println();
 
-        System.out.println("5. deadline ---- Usage --> \"deadline submit essay /by Sunday \", remember not to miss the \"/by\" symbol!");
+        System.out.println("5. deadline ---- Usage --> \"deadline submit essay /by Sunday \", "
+                + "remember not to miss the \"/by\" symbol!");
         System.out.println("               - Inputs the an Deadline task into the task list");
         System.out.println();
 
-        System.out.println("6. event ------- Usage --> \"event project meeting /at Mon 2-4pm \", remember not to miss the \"/at\" symbol!");
+        System.out.println("6. event ------- Usage --> \"event project meeting /at Mon 2-4pm \", "
+                + "remember not to miss the \"/at\" symbol!");
         System.out.println("               - Inputs the an Event task into the task list");
 
         System.out.println("7. delete ------ Usage --> delete x, where x is an integer.");

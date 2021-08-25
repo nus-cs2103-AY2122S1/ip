@@ -24,14 +24,17 @@ public class EventCommand extends Command {
     @Override
     public void execute(String des, TaskList tList) throws DukeException {
         if (des.equals("event")) {
-            throw new DukeException("\"event\" command not correctly formatted \nPlease insert task and timeframe arguments");
+            throw new DukeException("\"event\" command not correctly formatted \n"
+                    + "Please insert task and timeframe arguments");
         }
         if (!des.contains("/at")) {
-            throw new DukeException("\"event\" command not correctly formatted \nPlease do not forget to include \"at\" and insert timeframe argument");
+            throw new DukeException("\"event\" command not correctly formatted \n"
+                    + "Please do not forget to include \"at\" and insert timeframe argument");
         }
         try {
             if (des.chars().filter(c -> c == '/').count() > 1) {
-                throw new DukeException("Format Error. Do not use the special character \"/\" within your task description.");
+                throw new DukeException("Format Error. "
+                        + "Do not use the special character \"/\" within your task description.");
             }
             String description = des.substring(6, des.indexOf('/') - 1);
             LocalDate date = Storage.extractDate(des);

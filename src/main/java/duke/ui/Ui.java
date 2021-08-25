@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
@@ -9,13 +11,10 @@ import duke.commands.EventCommand;
 import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.ToDoCommand;
-
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-
-import java.util.Scanner;
 
 public class Ui {
 
@@ -48,7 +47,8 @@ public class Ui {
             try {
                 this.printLine();
                 if (command == null) {
-                    throw new DukeException(des + " is not a recognised command\nPlease refer to the available commands using the \"allCmd\" command");
+                    throw new DukeException(des + " is not a recognised command\n"
+                            + "Please refer to the available commands using the \"allCmd\" command");
                 } else {
                     Command c = null;
                     if (command.equals("bye")) {
@@ -98,6 +98,7 @@ public class Ui {
     }
 
     public static void printLine() {
-        System.out.println("_____________________________________________________________________________________________________________");
+        System.out.println("____________________________________________________"
+                + "_________________________________________________________");
     }
 }
