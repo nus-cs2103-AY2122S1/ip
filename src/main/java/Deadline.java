@@ -6,6 +6,11 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public Deadline(String description, String time, boolean isCompleted) {
+        super(description, isCompleted);
+        this.time = time;
+    }
+
     public static Deadline fromInput(String input) throws Exception {
         String[] deadlineInputs = input.trim().split("\\s+/by\\s+", 2);
 

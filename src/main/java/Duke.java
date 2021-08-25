@@ -2,6 +2,9 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     private static String WELCOME_TEXT = "Hey there I'm Duke!\n" + "How can I help you today?";
@@ -9,16 +12,118 @@ public class Duke {
 
     private Scanner in;
     private List<Task> tasks;
+    private File tasksFile;
     private boolean shouldExit;
 
     public enum Command {
         BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT,
     }
 
-    Duke(Scanner in, List<Task> tasks) {
+    Duke(Scanner in, String filePath) throws IOException {
         this.in = in;
-        this.tasks = tasks;
         this.shouldExit = false;
+
+        File dataDirectory = new File("data");
+        if (!dataDirectory.exists()) {
+            dataDirectory.mkdir();
+        }
+        File tasksFile = new File("data/" + filePath);
+        if (!tasksFile.exists()) {
+            tasksFile.createNewFile();
+        }
+        this.tasksFile = tasksFile;
+        try {
+            this.tasks = this.loadTasks();
+        } catch (Exception e) {
+            this.tasks = new ArrayList<>();
+        }
+    }
+
+    private String escapeString(String str) {
+        return str.replace("|", "||");
+    }
+
+    private String unescapeString(String str) {
+        return str.replace("||", "|");
+    }
+
+    private List<Task> loadTasks() throws Exception {
+        List<Task> tasks = new ArrayList<>();
+        Scanner s = new Scanner(this.tasksFile);
+        try {
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] components = line.split(" \\| ");
+                if (components.length < 3) {
+                    throw new Exception("Invalid format");
+                }
+                boolean isCompleted = components[1] == "1" ? true : false;
+                String description = unescapeString(components[2]);
+                switch (components[0]) {
+                    case "T": {
+                        tasks.add(new Todo(description, isCompleted));
+                        break;
+                    }
+                    case "E": {
+                        if (components.length != 4) {
+                            throw new Exception("Invalid format");
+                        }
+                        tasks.add(new Event(description, unescapeString(components[3]), isCompleted));
+                        break;
+                    }
+                    case "D": {
+                        if (components.length != 4) {
+                            throw new Exception("Invalid format");
+                        }
+                        tasks.add(new Event(description, unescapeString(components[3]), isCompleted));
+                        break;
+                    }
+                    default: {
+                        throw new Exception("Invalid format");
+                    }
+                }
+            }
+        } finally {
+            s.close();
+        }
+
+        return tasks;
+    }
+
+    private void saveTasks() throws IOException {
+        FileWriter writer = new FileWriter(this.tasksFile);
+
+        for (Task task : this.tasks) {
+            this.writeTask(writer, task);
+        }
+
+        writer.close();
+    }
+
+    private void writeTask(FileWriter writer, Task task) throws IOException {
+        if (task instanceof Todo) {
+            writer.write("T | ");
+            writer.write(task.isCompleted ? "1" : "0");
+            writer.write(" | ");
+            writer.write(escapeString(task.description));
+            writer.write(System.lineSeparator());
+        } else if (task instanceof Event) {
+            writer.write("E | ");
+            writer.write(task.isCompleted ? "1" : "0");
+            writer.write(" | ");
+            writer.write(escapeString(task.description));
+            writer.write(" | ");
+            writer.write(escapeString(((Event) task).time));
+            writer.write(System.lineSeparator());
+        } else if (task instanceof Deadline) {
+            writer.write("D | ");
+            writer.write(task.isCompleted ? "1" : "0");
+            writer.write(" | ");
+            writer.write(escapeString(task.description));
+            writer.write(" | ");
+            writer.write(escapeString(((Deadline) task).time));
+            writer.write(System.lineSeparator());
+        }
     }
 
     private void greet() {
@@ -91,6 +196,7 @@ public class Duke {
                     throw new Exception("There is no task with the following number: " + arguments);
                 }
 
+                this.saveTasks();
                 printMessage("Marking task as completed:\n    " + task.toString());
                 break;
             }
@@ -109,6 +215,7 @@ public class Duke {
                     throw new Exception("There is no task with the following number: " + arguments);
                 }
 
+                this.saveTasks();
                 printMessage("Removed the following task:\n    " + task.toString() + "\n" + "You now have "
                         + this.tasks.size() + " tasks in your list.");
                 break;
@@ -117,6 +224,7 @@ public class Duke {
                 Task todo = Todo.fromInput(arguments);
                 this.tasks.add(todo);
 
+                this.saveTasks();
                 this.printTaskAddedMessage(todo);
                 break;
             }
@@ -124,6 +232,7 @@ public class Duke {
                 Task deadline = Deadline.fromInput(arguments);
                 this.tasks.add(deadline);
 
+                this.saveTasks();
                 this.printTaskAddedMessage(deadline);
                 break;
             }
@@ -131,6 +240,7 @@ public class Duke {
                 Task event = Event.fromInput(arguments);
                 this.tasks.add(event);
 
+                this.saveTasks();
                 this.printTaskAddedMessage(event);
                 break;
             }
@@ -146,10 +256,6 @@ public class Duke {
         return this.shouldExit;
     }
 
-    private void shutdown() {
-        in.close();
-    }
-
     private static void printMessage(String string) {
         System.out.print("------------------------------------------------\n" + string + "\n"
                 + "------------------------------------------------\n\n");
@@ -157,7 +263,16 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Duke duke = new Duke(input, new ArrayList<>());
+        String filePath = "duke.txt";
+        Duke duke;
+
+        try {
+            duke = new Duke(input, filePath);
+        } catch (Exception e) {
+            printMessage("Unable to initialize data file");
+            input.close();
+            return;
+        }
 
         duke.greet();
         while (!duke.shouldExit()) {
@@ -169,6 +284,7 @@ public class Duke {
                 printMessage("Error: " + e.getMessage());
             }
         }
-        duke.shutdown();
+
+        input.close();
     }
 }
