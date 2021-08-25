@@ -9,6 +9,13 @@ import java.util.Map;
 
 public class Parser {
 
+    /**
+     * Parses the user input and split it into different variables.
+     *
+     * @param input The user input.
+     * @return A Map containing the type, description and time (if applicable) of a Task.
+     * @throws DukeException if the input is in invalid format.
+     */
     public static Map<String, String> parseTextFromInput(String input) throws DukeException {
         input = input.trim();
         String type = "";
@@ -45,6 +52,12 @@ public class Parser {
 
     }
 
+    /**
+     * Parses the text from the file which contains the task list.
+     *
+     * @param input The text from the file containing the task list.
+     * @return A Map containing the type, description and time (if applicable) of a Task.
+     */
     public static Map<String, String> parseTextFromFile(String input) {
         String type = input.substring(1, 2);
         String status = input.substring(4, 5);

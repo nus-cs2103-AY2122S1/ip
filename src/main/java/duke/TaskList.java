@@ -13,8 +13,16 @@ import java.util.Map;
 public class TaskList {
     private static ArrayList<Task> myList = new ArrayList<>();
 
+    /**
+     * A constructor of a TaskList.
+     */
     public TaskList() {}
 
+    /**
+     * Gets the ArrayList.
+     *
+     * @return The ArrayList of a TaskList.
+     */
     public ArrayList<Task> getTaskList() {
         return myList;
     }

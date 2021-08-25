@@ -1,6 +1,5 @@
 package duke.tasks;
 
-import duke.Duke;
 import duke.DukeException;
 
 import java.time.LocalDate;

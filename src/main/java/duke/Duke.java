@@ -12,6 +12,11 @@ public class Duke {
     private Storage storage;
     private TaskList tl;
 
+    /**
+     * A constructor for a Duke chat bot.
+     *
+     * @param filePath The path of the file the task list is saved in.
+     */
     public Duke(String filePath) {
         tl = new TaskList();
         storage = new Storage(filePath, tl);
@@ -23,6 +28,9 @@ public class Duke {
 
     }
 
+    /**
+     * Runs the programme.
+     */
     public void run() {
         TextUi.showWelcomeMessage();
         Scanner sc = new Scanner(System.in);
