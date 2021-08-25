@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -90,7 +91,7 @@ public class Duke {
                     }
                     System.out.println("Now you have " + listIndex + " tasks remaining. Get to work!");
 
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException exception) {
                     System.out.println("Enter a valid number! Or do you not know basic math?");
                 } finally {
                     continue;
@@ -170,10 +171,15 @@ public class Duke {
                     System.out.println("Do you not have a deadline? If you do, you might as well enter it right?");
                     return;
                 }
-
-                tempTask = new Deadlines(str.toString(), time);
+                //check if a valid time was entered
+                try {
+                    LocalDate date = LocalDateParser.parse(time);
+                    tempTask = new Deadlines(str.toString(), date);
+                } catch (IllegalArgumentException exception) {
+                    System.out.println("Enter a valid date format! (yyyy-mm-dd)");
+                    return;
+                }
                 break;
-
 
             case EVENT:
                 String eventTime = "";
@@ -198,7 +204,14 @@ public class Duke {
                     return;
                 }
 
-                tempTask = new Events(str.toString(), eventTime);
+                //check if a valid time was entered
+                try {
+                    LocalDate date = LocalDateParser.parse(eventTime);
+                    tempTask = new Events(str.toString(), date);
+                } catch (IllegalArgumentException exception) {
+                    System.out.println("Enter a valid date format! (yyyy-mm-dd)");
+                    return;
+                }
                 break;
 
         }

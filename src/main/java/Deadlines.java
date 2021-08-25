@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A class encapsulating a Deadline variant of a Task.
  *
@@ -6,7 +9,7 @@
 public class Deadlines extends Task {
 
     //The time by which the Task should be completed, i.e. the deadline.
-    private String deadline;
+    private LocalDate deadline;
 
     /**
      * Constructor for a Deadline instance.
@@ -14,7 +17,7 @@ public class Deadlines extends Task {
      * @param name A String describing the Task.
      * @param deadline A String describing the deadline of the Task.
      */
-    public Deadlines(String name, String deadline) {
+    public Deadlines(String name, LocalDate deadline) {
         super(name);
         this.deadline = deadline;
     }
@@ -26,10 +29,11 @@ public class Deadlines extends Task {
      */
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         if (isDone) {
-            return ("[D] [X] " + name + " (by: " + deadline + ")");
+            return ("[E] [X] " + name  + " (at: " + deadline.format(formatter).toString() + ")");
         } else {
-            return ("[D] [ ] " + name + " (by: " + deadline + ")");
+            return ("[E] [ ] " + name  + " (at: " + deadline.format(formatter).toString() + ")");
         }
     }
 }
