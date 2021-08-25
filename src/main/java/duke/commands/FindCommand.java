@@ -8,6 +8,9 @@ import duke.tasks.TaskList;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the command when the user wants to find a task based on a keyword.
+ */
 public class FindCommand extends Command {
     private String keyword;
 
@@ -15,6 +18,12 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the command and finds saved tasks that match the keyword input by the user.
+     *
+     * @param storage The storage system of the bot involved with this command.
+     * @param ui The ui of the bot involved with this command.
+     */
     public void execute(Storage storage, Ui ui) {
         TaskList taskList = storage.getTaskList();
         List<Task> listOfMatches = new ArrayList<Task>();

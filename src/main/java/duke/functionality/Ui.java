@@ -1,6 +1,5 @@
 package duke.functionality;
 
-import duke.exceptions.DukeException;
 import duke.tasks.Task;
 
 import java.io.InputStream;
