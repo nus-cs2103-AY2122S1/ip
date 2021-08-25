@@ -5,15 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Storage {
-    String filePath;
+    String filePath = "./data/duke.txt";
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage() {
+
     }
 
     public File loadDataFile() {
         try {
-            File f = new File("./data/duke.txt");
+            File f = new File(filePath);
             if (!f.exists()) {
                 File dir = new File("./data");
                 if(dir.mkdir() && f.createNewFile()) {
@@ -34,6 +34,7 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
+            throw new DukeException("Unable to write to disk :(");
         }
     }
 }

@@ -7,8 +7,6 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import java.util.Objects;
-
 public class Duke {
     private Storage storage;
     private TaskList taskList;
@@ -16,7 +14,7 @@ public class Duke {
 
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage();
         taskList = new TaskList(storage.loadDataFile());
     }
 
@@ -26,13 +24,9 @@ public class Duke {
         while(!exit) {
             try {
                 Command c = Parser.parseInputs(ui.nextCommand());
-                if (Objects.isNull(c)) {
-                    ui.clarify();
-                } else {
-                    c.execute(storage, taskList, ui);
-                    exit = c.isExit();
-                    ui.promptNext();
-                }
+                c.execute(storage, taskList, ui);
+                exit = c.isExit();
+                ui.promptNext();
             } catch (DukeException e) {
                 ui.respond(e.getMessage());
             }

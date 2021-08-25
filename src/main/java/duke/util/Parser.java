@@ -66,11 +66,11 @@ public class Parser {
                                 "todo <some task name>");
                     }
                 default:
-                    return null;
+                    throw new DukeException("Say something I can understand!! >:(");
             }
     }
 
-    public static LocalDateTime parseDate(String string) throws DukeException {
+    private static LocalDateTime parseDate(String string) throws DukeException {
         try {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
             return LocalDateTime.parse(string, dateTimeFormatter);

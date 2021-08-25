@@ -24,7 +24,4 @@ public class Ui {
     public void promptNext() {
         System.out.print("Whats next?");
     }
-    public void clarify() {
-        this.respond("Say something I can understand!! >:(");
-    }
 }
