@@ -21,7 +21,11 @@ public class Ui {
      * @param message the string to be shown to the user.
      */
     public String formatMessage(String message) {
-        return "    ____________________________________________________________\n" + INDENTATION
-                + message + "    ____________________________________________________________";
+        StringBuilder builder = new StringBuilder();
+        builder.append("    ____________________________________________________________\n");
+        builder.append(INDENTATION);
+        builder.append(message);
+        builder.append("    ____________________________________________________________");
+        return  builder.toString();
     }
 }
