@@ -1,5 +1,8 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     private static final String BYE = "Bye!";
@@ -9,6 +12,8 @@ public class Duke {
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
     private static final String DELETE = "delete";
+
+    private static final String PATHNAME = "./data/duke.txt";
 
     private static List list = new List();
 
@@ -88,8 +93,34 @@ public class Duke {
         }
     }
 
+    private static void writeToFile() {
+        try {
+            File data = new File(PATHNAME);
+            if (!data.exists()) {
+                data.getParentFile().mkdirs();
+                data.createNewFile();
+                printBreak();
+                System.out.println(indentation + "╰(▔∀▔)╯ File created!");
+                printBreak();
+            }
+            System.out.println(data.getAbsolutePath());
+            FileWriter fw = new FileWriter(data.getAbsoluteFile());
+
+            for (int i = 0; i < list.getList().size(); i++) {
+                fw.write(list.getList().get(i).toSaveString() + System.lineSeparator());
+            }
+
+            fw.close();
+        } catch (IOException e) {
+            printBreak();
+            System.out.println(indentation + "╮(￣ω￣;)╭ File cannot be created..." + e.getMessage());
+            printBreak();
+        }
+    }
+
 
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello from\n" + logo);
 
@@ -155,5 +186,6 @@ public class Duke {
                 printBreak();
             }
         }
+        writeToFile();
     }
 }
