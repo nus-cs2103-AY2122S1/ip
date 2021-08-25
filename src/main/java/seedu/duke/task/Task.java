@@ -26,6 +26,10 @@ public class Task {
         isCompleted = false;
     }
 
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     /**
      * Mark <code>Task</code> object as completed.
      */

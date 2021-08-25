@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 class Duke {
 
     private enum UserCommands {
-        DONE, TODO, DEADLINE, EVENT, GET, DELETE, LIST, BYE;
+        DONE, TODO, DEADLINE, EVENT, FIND, GET, DELETE, LIST, BYE;
     }
 
     /**
@@ -75,6 +75,8 @@ class Duke {
                     throw new DukeException("Invalid task number");
                 }
                 return UserCommands.DONE;
+            case "find":
+                return UserCommands.FIND;
             case "get":
                 try {
                     manager.parseDateTime(arrOfCommandWords[1]);
@@ -119,32 +121,29 @@ class Duke {
          *
          * @param input The user input to Duke.
          */
-        private void handleInvalidInputs(String input) {
-            try {
-                switch (input) {
-                case "todo": // fallthrough
-                case "deadline": // fallthrough
-                case "event": {
-                    throw new DukeException(
-                            String.format(
-                                    "☹ OOPS!!! The description of a %s cannot be empty.",
-                                    input
-                            )
-                    );
-                }
-                case "done": // fallthrough
-                case "delete":
-                    throw new DukeException("Please enter the task index.");
-                case "get":
-                    throw new DukeException("Please enter a date in dd/MM/yyyy format.");
-                default:
-                    throw new DukeException(
-                            "☹ OOPS!!! I'm sorry, but I don't know what that means :-("
-                    );
-                }
-            } catch (DukeException e) {
-                System.out.println(String.format("%4s%s",
-                        " ", e.getMessage()));
+        private void handleInvalidInputs(String input) throws DukeException {
+            switch (input) {
+            case "todo": // fallthrough
+            case "deadline": // fallthrough
+            case "event": {
+                throw new DukeException(
+                        String.format(
+                                "☹ OOPS!!! The description of a %s cannot be empty.",
+                                input
+                        )
+                );
+            }
+            case "done": // fallthrough
+            case "delete":
+                throw new DukeException("Please enter the task index.");
+            case "get":
+                throw new DukeException("Please enter a date in dd/MM/yyyy format.");
+            case "find":
+                throw new DukeException("Please enter keyword to search for.");
+            default:
+                throw new DukeException(
+                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-("
+                );
             }
         }
 
@@ -162,6 +161,9 @@ class Duke {
                 break;
             case LIST:
                 returnTaskList();
+                break;
+            case FIND:
+                findTasks(list_of_words[1]);
                 break;
             case GET:
                 returnTasksOnDate(list_of_words[1]);
@@ -233,7 +235,6 @@ class Duke {
         divide();
         ui.outputMessage(Commands.EXIT);
         divide();
-        System.exit(0);
     }
 
     /**
@@ -262,6 +263,16 @@ class Duke {
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private void findTasks(String keyword) {
+        // Run through the tasks in the current list
+        TaskList matchingTasks = this.taskList.findTasksByKeyword(keyword);
+
+        divide();
+        ui.outputMessage(Commands.FIND);
+        System.out.println(matchingTasks.toString());
+        divide();
     }
 
 
@@ -358,11 +369,16 @@ class Duke {
             try {
                 UserCommands type = parser.parseString(command);
                 parser.executeTasks(type);
+                if (type.equals(UserCommands.BYE)) {
+                    break;
+                }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
-            } finally {
             }
         }
+        // Close the scanner if "bye" command is given and
+        // the Duke exits the while loop.
+        sc.close();
     }
 
     /**

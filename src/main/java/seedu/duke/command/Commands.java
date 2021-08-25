@@ -10,6 +10,7 @@ public enum Commands {
      */
     GREET(String.format("Hello! I'm Duke\n%4sWhat can I do for you?", " ")),
     ADD("Got it. I've added this task:"),
+    FIND("Here are the matching tasks in your list."),
     DONE("Nice! I've marked this task as done:"),
     DELETE("Noted. I've removed this task:"),
     LIST("Here are the tasks in your list:"),
