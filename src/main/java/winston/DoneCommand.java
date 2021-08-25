@@ -1,3 +1,5 @@
+package winston;
+
 public class DoneCommand extends Command{
     private int index;
     

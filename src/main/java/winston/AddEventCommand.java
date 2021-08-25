@@ -1,3 +1,4 @@
+package winston;
 
 public class AddEventCommand extends Command{
     private String dateAndTime;

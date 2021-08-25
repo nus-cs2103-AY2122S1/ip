@@ -1,8 +1,10 @@
+package winston;
+
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> list;
-    private Storage storage;
+    private final ArrayList<winston.Task> list;
+    private winston.Storage storage;
     
     public TaskList(ArrayList<Task> list) {
         this.list = list;

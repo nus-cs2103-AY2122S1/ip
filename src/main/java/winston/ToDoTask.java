@@ -1,4 +1,6 @@
-public class ToDoTask extends Task {
+package winston;
+
+public class ToDoTask extends winston.Task {
     private final String type;
     /**
      * Constructor for ToDoTask

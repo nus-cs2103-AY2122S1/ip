@@ -1,3 +1,5 @@
+package winston;
+
 public class TerminateCommand extends Command {
     private static boolean isTerminated = false;
     
