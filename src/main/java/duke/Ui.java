@@ -20,7 +20,16 @@ public class Ui {
                 "|_______|  /__/    \\_ \\  |_|  \\_\\       \\__/        |__|     |_____| \n"
                 ;
         
-        System.out.println("Hello from\n" + logo2 + Ui.LINES);
+        String VICTORIA =
+                "__        ___  _    _____   _______   _______   ______   _       _           #     #         \n" +        
+                "\\ \\      /  / | |  |  ___| |__   __| |  ___  | |  __  | | |     /  \\      #     #     #         \n" +
+                " \\ \\    /  /  | |  | |        | |    | |   | | | |__| | | |    / /_ \\    #             #      \n" + 
+                "  \\ \\  /  /   | |  | |        | |    | |   | | |  ____| | |   /  __  \\     #         #        \n" + 
+                "   \\ \\/  /    | |  | |___     | |    | |___| | | | \\ \\  | |  /  /  \\  \\      #     #          \n" +
+                "    \\___/     |_|  |_____|    |_|    |_______| |_|  \\_\\ |_| /__/    \\_ \\        #          \n" ;
+        
+        
+        System.out.println("Hey darling, I'm\n" + VICTORIA + Ui.LINES);
         allCommands();
     }
     
@@ -29,7 +38,7 @@ public class Ui {
      * A method that prints out all the available commands that the bot supports
      */
     public static void allCommands() {
-        System.out.println("These are the list of available commands:\n" + 
+        System.out.println("These are the services I can provide you:\n" + 
                 "todo              [description]- Make a todo task\n" + 
                 "deadline          [description] /at YYYY-MM-DD xxxx  - Make a new deadline event\n" + 
                 "event             [description] /at YYYY-MM-DD xxxx  - Make a event\n" + 
@@ -39,8 +48,8 @@ public class Ui {
                 "help              Show all available commands\n" +
                 "bye               Quit Duke.\n" + 
                 Ui.LINES +
-                "What can I do for you?\n" + 
-                "Enter a command: \n"
+                "So, how can I please you today?\n" + 
+                "Tell me : \n"
         );
     }
 }

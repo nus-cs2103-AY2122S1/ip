@@ -48,7 +48,7 @@ public class Parser {
                 }
 
                 else if (str.contains("find")) {
-                    System.out.println(horizontalLines);
+                    System.out.println(LINE);
                     System.out.println(taskList.findTask(str.substring(5)));
                 }
 
