@@ -1,3 +1,12 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
+
 import java.util.Objects;
 
 public class Duke {
@@ -29,8 +38,5 @@ public class Duke {
             }
         }
         ui.respond("Ooooh yeah! Can do!");
-    }
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

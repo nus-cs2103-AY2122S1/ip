@@ -1,6 +1,18 @@
+package duke.command;
+
+import duke.task.Task;
+import duke.task.TaskType;
+import duke.task.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.util.Ui;
+
 import java.time.LocalDateTime;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     Task task;
 
     public AddCommand(TaskType taskType, String name, LocalDateTime dateTime) {
@@ -20,7 +32,7 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException{
+    public void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
         try {
             taskList.addTask(task);
             ui.respond(

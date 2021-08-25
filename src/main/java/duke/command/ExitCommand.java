@@ -1,4 +1,11 @@
-public class ExitCommand extends Command{
+package duke.command;
+
+import duke.util.DukeException;
+import duke.util.Storage;
+import duke.task.TaskList;
+import duke.util.Ui;
+
+public class ExitCommand extends Command {
 
     @Override
     public boolean isExit() {
