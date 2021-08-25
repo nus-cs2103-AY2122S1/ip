@@ -163,29 +163,42 @@ public class TaskManager {
         return Command.INVALID;
     }
 
+    /**
+     * Writes the list of tasks to a text file.
+     * @param filePath The filepath of the text file where the list of tasks is stored.
+     * @throws IOException The exception is thrown if an error occurred while writing to the text file.
+     */
     public void saveTaskList(String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        String tasks = "";
         for (Task t : listOfTasks) {
+            String taskDetails;
             String done = t.isDone ? "1" : "0";
             Command c = getCommand(t.getClass().getName().toLowerCase());
             switch (c) {
             case TODO:
-                tasks += "T" + " uwu " + done + " uwu " + t.description + "\n";
+                taskDetails = "T" + " uwu " + done + " uwu " + t.description + "\n";
                 break;
             case DEADLINE:
                 Deadline d = (Deadline) t;
-                tasks += "D" + " uwu " + done + " uwu " + d.description + " uwu " + d.by + "\n";
+                taskDetails = "D" + " uwu " + done + " uwu " + d.description + " uwu " + d.by + "\n";
                 break;
             case EVENT:
                 Event e = (Event) t;
-                tasks += "E" + " uwu " + done + " uwu " + e.description + " uwu " + e.at + "\n";
+                taskDetails = "E" + " uwu " + done + " uwu " + e.description + " uwu " + e.at + "\n";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + c);
             }
+            fw.write(taskDetails);
         }
-        fw.write(tasks);
         fw.close();
     }
 
+    /**
+     * Reads the list of tasks from a text file.
+     * @param filePath The filepath of the text file where the list of tasks is stored.
+     * @throws FileNotFoundException The exception is thrown if the text file does not exist in the directory.
+     */
     public void loadTaskList(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
