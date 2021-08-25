@@ -20,4 +20,13 @@ public class ToDo extends Task{
             return "[T][ ] " + this.taskString;
         }
     }
+
+    public boolean getDone() {
+        return done;
+    }
+
+    public String getDescription() {
+        return taskString;
+    }
+
 }

@@ -22,5 +22,17 @@ public class Event extends Task{
             return "[E][ ] " + this.taskString + " (at: " + this.timeSlot + ")";
         }
     }
+
+    public boolean getDone() {
+        return done;
+    }
+
+    public String getDescription() {
+        return taskString;
+    }
+
+    public String getTimeSlot() {
+        return timeSlot;
+    }
 }
 
