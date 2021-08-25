@@ -13,22 +13,43 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds task
+     * @param task
+     */
     public void add(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Removes task
+     * @param task
+     */
     public void remove(Task task) {
         tasks.remove(task);
     }
 
+    /**
+     * Getter for task, index starts from 0
+     * @param i
+     * @return task chosen
+     */
     public Task getTask(int i) {
         return tasks.get(i);
     }
 
+    /**
+     * Getter for List of tasks
+     * @return
+     */
     public List<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Getter for size of task list
+     * @return
+     */
     public int size() {
         return tasks.size();
     }
