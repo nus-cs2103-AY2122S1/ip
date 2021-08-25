@@ -1,7 +1,8 @@
-import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+package duke;
+
+import duke.task.*;
+import dukeException.DukeException;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -88,7 +89,7 @@ public class Duke {
                 }
                 input = sc.nextLine();
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                this.ui.showErrorMessage(e);
                 input = sc.nextLine();
             }
         }
