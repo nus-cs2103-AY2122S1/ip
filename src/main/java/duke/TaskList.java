@@ -82,12 +82,34 @@ public class TaskList {
                 + (size() == 1 ? " task" : " tasks") + " in the list.");
     }
 
+<<<<<<< HEAD
     /**
      * Returns the task at a specified index in the taskList.
      *
      * @param index The index of the task to retrieve in the taskList.
      * @return The task at the index-th position in the taskList.
      */
+=======
+    public void searchAndDisplay(String keyword) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (int i = 0; i < size(); i++) {
+            if (get(i).getDescription().contains(keyword)) {
+                temp.add(get(i));
+            }
+        }
+        if (temp.size() == 0) {
+            System.out.println("    There are no matching tasks in your list!");
+        } else {
+            System.out.println("    Here are the matching tasks in your list");
+            for (int i = 0; i < temp.size(); i++) {
+                int currNum = i + 1;
+                Task currTask = temp.get(i);
+                System.out.println("     " + currNum + ". " + currTask.toString());
+            }
+        }
+    }
+
+>>>>>>> branch-Level-9
     public Task get(int index) {
         return this.taskList.get(index);
     }

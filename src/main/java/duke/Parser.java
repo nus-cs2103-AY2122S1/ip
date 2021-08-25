@@ -34,6 +34,8 @@ public class Parser {
             return new EventCommand();
         } else if (inputValues[0].equals("todo")) {
             return new TodoCommand();
+        } else if (inputValues[0].equals("find")) {
+            return new FindCommand();
         } else {
             return new InvalidCommand();
         }
