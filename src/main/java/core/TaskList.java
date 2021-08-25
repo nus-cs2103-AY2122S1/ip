@@ -15,16 +15,16 @@ public class TaskList {
         listOfTasks = new ArrayList<>();
     }
 
+    public TaskList(ArrayList<Task> listOfTasks) {
+        this.listOfTasks = listOfTasks;
+    }
+
     public void addTask(Task task) {
         listOfTasks.add(task);
         String outputLine1 = String.format("Got it. I've added this task:\n%s\n", task);
         String outputLine2 = String.format("Now you have %s tasks in the list.", listOfTasks.size());
         String output = outputLine1 + outputLine2;
         Ui.formatAndPrint(output);
-    }
-
-    public void addTaskQuietly(Task task) {
-        listOfTasks.add(task);
     }
 
     public void listTasks() {
