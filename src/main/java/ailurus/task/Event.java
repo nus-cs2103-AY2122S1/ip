@@ -15,7 +15,7 @@ public class Event extends Task {
      *
      * @param description description of task /at specific date or time
      */
-    public Event(String description) {
+    public Event(String description) throws AilurusException {
         super(description.split("/at", -1)[0].trim());
         String[] arr = description.split("/at", -1);
         if (arr[0].length() == 0) {
@@ -35,11 +35,11 @@ public class Event extends Task {
      * @param writer file writer for writing data to file
      */
     @Override
-    public void log(FileWriter writer) {
+    public void log(FileWriter writer) throws AilurusException {
         try {
             writer.write(String.format("E|%d|%s|%s\n", this.isDone ? 1 : 0, this.description, this.at));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new AilurusException(AilurusException.Error.LOAD);
         }
     }
 
