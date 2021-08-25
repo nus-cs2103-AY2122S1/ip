@@ -5,13 +5,9 @@ public class Storage {
     private static BufferedWriter writer;
 
     //takes in a task and adds it to the list while writing it to a file
-    static void writeToFile(String task) throws DukeException {
+    static void writeToFile(String task) throws IOException {
         try {
-            switch (task) {
-                case "deadline" -> throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                case "event" -> throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-                case "todo" -> throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
+            Parser.parseTask(task);
             if (task.startsWith("deadline") ||
                     (task.startsWith("event") && task.contains("/at ")) ||
                     (task.startsWith("todo"))) {
@@ -21,10 +17,8 @@ public class Storage {
             writer.close();
             FileWriter fWriter = new FileWriter(text, true);
             writer = new BufferedWriter(fWriter);
-        } catch (DukeException e) {
-            System.out.println("DukeException occurred");
-        } catch (IOException e) {
-            System.out.println("IOException occurred");
+        } catch (IOException | DukeException e) {
+            System.out.println("Something went wrong");
         }
     }
 
