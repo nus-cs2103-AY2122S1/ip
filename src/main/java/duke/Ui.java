@@ -67,4 +67,12 @@ public class Ui {
                 String.format("Now you have %s tasks in the list.\n", newList.getLength()) +
                 "-----------------------------------------\n");
     }
+
+    public void showSearchResults(String result) {
+        System.out.println("-----------------------------------------\n" +
+                "Here are the matching tasks in your list:\n" +
+                result +
+                "-----------------------------------------\n");
+
+    }
 }

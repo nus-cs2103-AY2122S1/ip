@@ -67,6 +67,19 @@ public class TaskList {
         this.al.remove(itemNum);
     }
 
+    public String find(String searchTerm) {
+        String result = "";
+        int k = 1;
+        for (int i = 0; i < this.al.size(); i++) {
+            Task current = this.al.get(i);
+            if (current.toString().contains(searchTerm)) {
+                result += Integer.toString(k) + ". " + current.toString();
+                k++;
+            }
+        }
+        return result;
+    }
+
     /**
      * Returns a string representation of the TaskList.
      *

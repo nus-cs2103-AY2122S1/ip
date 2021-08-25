@@ -139,6 +139,10 @@ public class Duke {
                 case "delete":
                     this.deleteTask(items);
                     break;
+                case "find":
+                    String result = this.taskList.find(items[1]);
+                    this.ui.showSearchResults(result);
+                    break;
                 default:
                     throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
