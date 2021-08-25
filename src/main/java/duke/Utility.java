@@ -27,6 +27,10 @@ public class Utility {
         return dateTime.format(outputFormat);
     }
 
+    public String dateToInputString(LocalDateTime dateTime) {
+        return dateTime.format(inputFormat);
+    }
+
     /**
      * Seperates the date and task from the users input.
      * @param taskIndex Beginning index of the task in the given String.

@@ -52,8 +52,7 @@ public class Task {
         if(this.taskSymbol.equals("T")) {
             data = String.format("%s,%s,%s", this.getTaskType(), status, this.task);
         } else {
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            data = String.format("%s,%s,%s,%s", this.getTaskType(), status, this.task, this.date.format(inputFormat));
+            data = String.format("%s,%s,%s,%s", this.getTaskType(), status, this.task,utility.dateToInputString(this.date));
         }
         return data;
     }

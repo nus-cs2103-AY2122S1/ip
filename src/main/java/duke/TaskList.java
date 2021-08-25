@@ -21,6 +21,7 @@ public class TaskList {
 
     public TaskList() {
         this.tasks = new ArrayList<Task>(100);
+        utility = new Utility();
     }
 
     /**

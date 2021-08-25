@@ -1,2 +1,5 @@
-todo,0,hello
 event,1,big bang,1997-02-02 1111
+event,0,Sam Birthday,1999-02-02 1234
+deadline,1,homework,2014-02-03 1200
+todo,0,efhbf
+deadline,0,shez,2019-03-04 1420
