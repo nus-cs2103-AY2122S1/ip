@@ -3,18 +3,44 @@ package duke.task;
 
 import duke.DukeException;
 
+
+/**
+ * Represents a user's task. Contains mainly a description of the task as well as other useful information.
+ *
+ * @author Aiken Wong
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Gets description of the task.
+     *
+     * @return Description.
+     */
     public String getDescription() {
         return description.substring(0);
     }
 
+
+    /**
+     * Information on whether the task has been completed.
+     *
+     * @return Information on task completion.
+     */
     public boolean getIsDone() {
         return isDone ? true : false;
     }
 
+
+    /**
+     * The main factory constructor method for Todo, Deadline and Event instances.
+     *
+     * @param taskType Enum representing the type of task to be initialized.
+     * @param input The raw input command from the user.
+     * @return Task constructed based of input command.
+     * @throws DukeException
+     */
     public static Task taskFactory(TaskType taskType, String input) throws DukeException {
         Task newTask = null;
 
@@ -66,16 +92,29 @@ public class Task {
         return newTask;
     }
 
-
+    /**
+     * Initializes a Task. Note that taskFactory method should be used instead.
+     *
+     * @param description Description of task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Returns an enum representing the type of this Task.
+     *
+     * @return
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+
+    /**
+     * Marks the Task instance as completed.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
