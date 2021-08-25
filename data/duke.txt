@@ -1,3 +1,5 @@
 [T][ ] work
 [D][X] ip (by: 2021-03-23)
 [E][ ] meeting (at: tmr 9pm)
+[D][ ] work (by: 2021-02-23)
+[T][X] work

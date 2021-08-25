@@ -44,31 +44,52 @@ public class TaskList {
                                 + "\n\tNow you have " + tasks.size() + " tasks in the list.\n"); 
     } 
 
-
-	/**
-     * Delete or mark a task as done.
-     * 
-     * @param command user input to extract task number
-     * @param action delete or mark as done
-     * @throws DukeException
-     */
-    protected void handleTasksOperation(String command, String action) throws DukeException {
-        if (command.equals(action)) {
-            throw new DukeException("You need to specify the task!\n");
-        }
+    
+    public int getTaskNum(String command) throws DukeException {
+        int taskNum;
 
         try {
-            int taskNum = Integer.parseInt(command.split(" ")[1]);
-            if (action.equals("done")) completeTask(taskNum);
-            else deleteTask(taskNum);
+            taskNum = Integer.parseInt(command.split(" ")[1]);
         } catch (NumberFormatException err) {
             throw new DukeException("Please use the task number instead of task name!\n");
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("I'm sorry, but that task number is out of range.\n");
         }
+
+        return taskNum;
     }
 
-	    /**
+	/**
+     * Delete a task.
+     * 
+     * @param command user input to extract task number
+     * @throws DukeException
+     */
+    protected void handleDelete(String command) throws DukeException {
+        if (command.equals("delete")) {
+            throw new DukeException("You need to specify the task!\n");
+        }
+
+        int taskNum = getTaskNum(command);
+        deleteTask(taskNum);
+    }
+
+    /**
+     * Mark a task as done.
+     * 
+     * @param command user input to extract task number
+     * @throws DukeException
+     */
+    protected void handleDone(String command) throws DukeException {
+        if (command.equals("done")) {
+            throw new DukeException("You need to specify the task!\n");
+        }
+
+        int taskNum = getTaskNum(command);
+        completeTask(taskNum);
+    }
+
+    /**
      * Add a task to the ArrayList of tasks.
      * 
      * @param t the task to add
@@ -96,41 +117,72 @@ public class TaskList {
     }
 
     /**
+     * Add event task with datetime.
+     * 
+     * @param command user input to extract task and datetime
+     * @throws DukeException
+     */
+    protected void addEvent(String command) throws DukeException {
+        if (command.equals("event")) {
+            throw new DukeException("You need to specify which event you want to add!\n");
+        }
+
+        String eventDetails = command.substring(6);
+        String[] commandSplit = splitCommand(eventDetails, "/at");  // "taskName /at datetime"
+        String task = getTask(commandSplit);              
+        String dateTime = getDateTime(commandSplit);    // dateTime is the 2nd part of the command
+        addTask(new Event(task, dateTime));
+    }
+
+    /**
      * Add deadline or event task with date/time.
      * 
      * @param command user input to extract task and date/time
      * @param type    type of task to add
      * @throws DukeException
      */
-    protected void addTaskWithTime(String command, String type) throws DukeException {
-        // ToDo: Split into addDeadline and addEvent and create helper methods
-        boolean isDeadline = type.equals("deadline");
-        String splitWord = isDeadline ? "/by " : "/at ";
-        String[] commandSplit = command.split(splitWord);   // Split the task from the date/time
+    protected void addDeadline(String command) throws DukeException {
+        if (command.equals("deadline")) {
+            throw new DukeException("You need to specify which deadline you want to add!\n");
+        }
 
+        String taskDetails = command.substring(9);
+        String[] commandSplit = splitCommand(taskDetails, "/by");   
+        String task = getTask(commandSplit);                         
+        String dateTime = getDateTime(commandSplit);     
+       
+        // Check if the time is in the yyyy-mm-dd datetime format 
+        try {
+            LocalDate date = LocalDate.parse(dateTime);
+            addTask(new Deadline(task, date));
+        } catch (DateTimeParseException err) {
+            throw new DukeException("Please use the yyyy-mm-dd format for deadline!\n");    
+        }
+    }
+
+    public String[] splitCommand(String command, String by) throws DukeException {
+        String[] commandSplit = command.split(by);
+        
         // If cannot split the command, throw an exception
         if (commandSplit.length <= 1) {
             throw new DukeException("You need to provide a date/time!" + "\n");
         }
-        
-        String task = commandSplit[0].split(type)[1].trim();   // Everything after the action
+        return commandSplit;
+    }
+
+    public String getTask(String[] commandSplit) throws DukeException {
+        // String task = commandSplit[0].split("deadline")[1].trim();
+        String task = commandSplit[0].trim();
+
         if (task.isEmpty()) {
             throw new DukeException("You need to provide a task!" + "\n");
         }
 
-        String dateTime = commandSplit[1];      // dateTime is the second part of the command
+        return task;
+    }
 
-        if (isDeadline) {
-            // Check if the time is in the yyyy-mm-dd datetime format 
-            try {
-                LocalDate date = LocalDate.parse(dateTime);
-                addTask(new Deadline(task, date));
-            } catch (DateTimeParseException err) {
-                throw new DukeException("Please use the dd/mm/yyyy format for deadline!\n");    
-            }
-        } else {
-            addTask(new Event(task, dateTime));
-        }
+    public String getDateTime(String[] commandSplit) {
+        return commandSplit[1].trim(); 
     }
 
 	/**
