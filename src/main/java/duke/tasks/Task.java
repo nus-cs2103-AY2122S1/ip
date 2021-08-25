@@ -46,6 +46,10 @@ public abstract class Task {
         return this;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Formats the Task into a String that will be saved into a text file for storage.
      * @return a String representation of the task
