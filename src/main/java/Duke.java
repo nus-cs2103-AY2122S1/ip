@@ -185,25 +185,27 @@ public class Duke {
 
     private void addEvent(String[] userInput) throws DukeMissingArgumentException {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
             String[] splits = userInput[1].split(" /from ", 2);
             String[] timestamps = splits[1].split(" /to ", 2);
-            LocalDateTime startTime = LocalDateTime.parse(timestamps[0], formatter);
-            LocalDateTime endTime = LocalDateTime.parse(timestamps[1], formatter);
+            String start = timestamps[0];
+            String end = timestamps[1];
+            LocalDateTime startTime = LocalDateTime.parse(start, formatter);
+            LocalDateTime endTime = LocalDateTime.parse(end, formatter);
             this.list.add(new Event(splits[0], startTime, endTime));
             System.out.printf("\tadded event:\n\t\t%s\n", this.list.get(this.list.size() - 1));
             System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         } catch (DateTimeParseException e) {
-            System.out.println("\tPlease enter the start/end time in the format of <DD/MM/YYYY HH:MM>!\n");
+            System.out.println("\tPlease enter the start/end time in the format of <DD/MM/YY HH:MM>!\n");
         }
     }
 
 
     private void addDeadline(String[] userInput) throws DukeMissingArgumentException {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
             String[] splits = userInput[1].split(" /by ", 2);
             LocalDateTime time = LocalDateTime.parse(splits[1], formatter);
             this.list.add(new Deadline(splits[0], time));
@@ -212,7 +214,7 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         } catch (DateTimeParseException e) {
-            System.out.println("\tPlease enter the time in the format of <DD/MM/YYYY HH:MM>!\n");
+            System.out.println("\tPlease enter the time in the format of <DD/MM/YY HH:MM>!\n");
         }
     }
 
