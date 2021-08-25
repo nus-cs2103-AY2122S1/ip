@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * List of available command known by Dub.
+ */
 public enum Command {
     BYE,
     LIST,
