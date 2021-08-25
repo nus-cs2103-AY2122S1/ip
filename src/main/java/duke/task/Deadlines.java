@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadlines extends Task {
     protected String by;
     protected LocalDateTime localDateTime;
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     public Deadlines(String description, String by) {
         super(description);
@@ -32,7 +32,7 @@ public class Deadlines extends Task {
     @Override
     public String toString() {
         localDateTime = new Parser().parseLocalDateTime(by);
-        return "[D]" + super.toString() + " (by: " + localDateTime.format(dtf) + ")";
+        return "[D]" + super.toString() + " (by: " + localDateTime.format(dateTimeFormatter) + ")";
     }
 
     /**

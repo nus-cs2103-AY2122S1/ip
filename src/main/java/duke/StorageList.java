@@ -17,7 +17,7 @@ public class StorageList {
 
     public StorageList() {};
 
-    public StorageList(File file) throws FileNotFoundException{
+    public StorageList(File file) throws FileNotFoundException {
         this.file = file;
         readFile(new Scanner(file));
     }
@@ -37,11 +37,11 @@ public class StorageList {
                 storageList.add(todo);
             } else {
                 int thirdBarIdx = input.indexOf('|', 7);
-                String taskDesc = input.substring(8, thirdBarIdx-1);
+                String taskDesc = input.substring(8, thirdBarIdx - 1);
                 String taskTime = input.substring(thirdBarIdx + 2);
-                if(type == 'D'){
+                if (type == 'D') {
                     Deadlines dl = new Deadlines(taskDesc, taskTime);
-                    if(doneState == 1){
+                    if (doneState == 1) {
                         dl.markAsDone();
                     }
                     storageList.add(dl);
@@ -59,20 +59,20 @@ public class StorageList {
     /**
      * Adds a task to the storage list/task list.
      *
-     * @param text
+     * @param task
      */
-    public void add(Task text){
-        storageList.add(text);
+    public void add(Task task){
+        storageList.add(task);
     }
 
     /**
      * Returns the task at the specified index.
      *
-     * @param i Index of the task.
+     * @param idx Index of the task.
      * @return The task at index i.
      */
-    public Task get(int i){
-        return storageList.get(i);
+    public Task get(int idx){
+        return storageList.get(idx);
     }
 
     /**
@@ -89,7 +89,7 @@ public class StorageList {
      *
      * @param idx The index of the task to be deleted.
      */
-    public void delete(int idx){
+    public void delete(int idx) {
         String desc = storageList.get(idx).getDescription();
         storageList.remove(idx);
         ui.taskDeleteMsg(desc, storageList.size());

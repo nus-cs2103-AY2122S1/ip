@@ -18,13 +18,7 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    /**
-     * Returns the file to be read into the Duke program.
-     *
-     * @return The file to be read.
-     * @throws FileNotFoundException If the file is not found.
-     */
-    public File load() throws FileNotFoundException{
+    public File load() throws FileNotFoundException {
         File file = new File(filepath);
         if (!file.exists()) {
             throw new FileNotFoundException();
@@ -33,15 +27,11 @@ public class Storage {
         return file;
     }
 
-    /**
-     * Writes and saves changes to the file read by the Duke program.
-     *
-     * @throws IOException If there is an error related to IO.
-     */
     public void save(StorageList storageList) throws IOException {
         FileWriter fw = new FileWriter(filepath);
         String textToAdd = "";
-        for (int i = 0; i < storageList.size(); i++){
+
+        for (int i = 0; i < storageList.size(); i++) {
             Task task = storageList.get(i);
             String taskType = "";
             String status = task.isDone() ? "1 " : "0 ";
@@ -58,8 +48,7 @@ public class Storage {
                     taskType = "E ";
                     taskTime = ((Events) task).getAt();
                 }
-                textToAdd += taskType + "| " + status + "| " + taskDesc
-                        + " | " + taskTime + "\n";
+                textToAdd += taskType + "| " + status + "| " + taskDesc + " | " + taskTime + "\n";
             }
 
         }

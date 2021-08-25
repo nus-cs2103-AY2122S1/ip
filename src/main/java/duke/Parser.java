@@ -55,7 +55,7 @@ public class Parser {
      * @return Deadline description.
      */
     public String getDeadlineDescription(String input) {
-        return input.substring(9, input.indexOf("/")-1);
+        return input.substring(9, input.indexOf("/") - 1);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Parser {
      * @return Event description.
      */
     public String getEventDescription(String input) {
-        return input.substring(6,  input.indexOf("/")-1);
+        return input.substring(6,  input.indexOf("/") - 1);
     }
 
     /**

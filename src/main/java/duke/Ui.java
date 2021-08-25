@@ -36,9 +36,9 @@ public class Ui {
      * Prints a message to warn users that Duke cannot find the given file.
      */
     public void fileNotFoundMsg() {
-        System.out.println("I am unable to find your file. " +
-                "Check that your 'duketest' file exists," +
-                " or that your 'data' folder exists.");
+        System.out.println("I am unable to find your file. "
+                + "Check that your 'duketest' file exists,"
+                + " or that your 'data' folder exists.");
     }
 
     /**
@@ -51,12 +51,12 @@ public class Ui {
     /**
      * Prints a message to confirm that a task has been added to the list.
      *
-     * @param task The description of the task.
+     * @param desc The description of the task.
      * @param size The size of the list.
      */
-    public void taskAddedMsg(String task, int size) {
+    public void taskAddedMsg(String desc, int size) {
         System.out.println("    Got it. I've added this task:");
-        System.out.println("        " + task);
+        System.out.println("        " + desc);
         System.out.println("    Now you have " + size + " tasks in the list.");
     }
 
@@ -85,8 +85,9 @@ public class Ui {
      * @param i The case number.
      * @return The error message relevant to the problem.
      */
-    public String taskErrorMsg(int i) {
-        switch (i) {
+
+    public String taskErrorMsg(int caseNumber) {
+        switch (caseNumber) {
         case 1:
             return "   ☹ OOPS!!! The description of a todo cannot be empty.";
         case 2:
