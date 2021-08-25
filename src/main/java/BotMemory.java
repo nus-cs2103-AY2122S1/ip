@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.Scanner;
 //  BotMemory imitates a bot's memory unit that stores the commonly used messages
 //  and tracks the tasks added
 public class BotMemory {
+
+    private BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
 
     final String LOGO =
                     "░░░░░░░░░░░░░░░░▄▄▄███████▄▄░░░░░░░░░░░░\n" +
@@ -49,6 +52,7 @@ public class BotMemory {
     final String ERROR_MESSAGE_INVALID_TASK_INDEX = "HOLD ON! The index you entered is not an Integer!";
     final String ERROR_MESSAGE_INVALID_DATA_FORMAT = "HOLD ON! The data: \n\t\t%s\n\t is in the wrong format! Stop feeding me shit!";
     final String ERROR_MESSAGE_INVALID_FILE = "WAIT! There are some errors with your file!";
+    final String ERROR_MESSAGE_INVALID_DATETIME_FORMAT = "I CANNOT UNDER THE TIMING FORMAT! Please input in the following format \n\t\t{yyyy-mm-ddThh:mm:ss}";
     final String HARD_DISK_DATA_NAME = "data.txt";
 
 
@@ -85,7 +89,7 @@ public class BotMemory {
                         task.getTaskType(),
                         task.getIsDone(),
                         task.getTaskTitle(),
-                        task.getTime()
+                        task.getDateTime()
                         );
             }
         }
@@ -108,18 +112,18 @@ public class BotMemory {
             switch (stringDataType){
                 case "T":
                     return new ToDo(
-                            stringDataToken[1] == "true" ? true : false,
+                            stringDataToken[1].equals("true") ? true : false,
                             stringDataToken[2]);
                 case "D":
                     return new Deadline(
-                            stringDataToken[1] == "true" ? true : false,
+                            stringDataToken[1].equals("true") ? true : false,
                             stringDataToken[2],
-                            stringDataToken[3]);
+                            botTemporalUnit.convertStringToTemporalData(stringDataToken[3]));
                 case "E":
                     return new Event(
-                            stringDataToken[1] == "true" ? true : false,
+                            stringDataToken[1].equals("true") ? true : false,
                             stringDataToken[2],
-                            stringDataToken[3]);
+                            botTemporalUnit.convertStringToTemporalData(stringDataToken[3]));
                 default:
                     throw new InvalidDataFormatException(
                             String.format(ERROR_MESSAGE_INVALID_DATA_FORMAT, stringData));

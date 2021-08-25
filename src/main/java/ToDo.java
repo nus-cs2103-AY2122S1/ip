@@ -1,4 +1,5 @@
 import java.lang.String;
+import java.time.LocalDateTime;
 
 public class ToDo extends Task{
 
@@ -6,16 +7,16 @@ public class ToDo extends Task{
      * Constructor
      * @param taskTitle
      */
-    ToDo (String taskTitle){
+    public ToDo (String taskTitle){
         super(taskTitle, "T");
     }
 
-    ToDo (boolean isDone, String taskTitle) {
+    public ToDo (boolean isDone, String taskTitle) {
         super(taskTitle, isDone, "T");
     }
 
     @Override
-    public String getTime() {
+    public LocalDateTime getDateTime() {
         return null;
     }
 
@@ -28,6 +29,6 @@ public class ToDo extends Task{
         return String.format("[%s][%s] %s",
                 this.getTaskType(),
                 (this.isDone ? "X" : " "),
-                this.taskTitle);
+                this.getTaskTitle());
     }
 }

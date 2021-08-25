@@ -1,1 +1,6 @@
-T | true | go home
+E | true | have fun | 2021-01-01T19:00
+E | false | meeting | 2021-09-22T18:00
+T | false | eat food
+D | false | have food | 2021-02-09T18:00:12
+E | false | make friend | 2021-01-02T10:11:12
+D | true | have nothing | 2021-01-02T10:01:12

@@ -1,8 +1,12 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public abstract class Task {
 
     public String taskTitle;
     public boolean isDone;
     public String taskType;
+
     /**
      * Constructor
      * @param taskTitle
@@ -31,7 +35,7 @@ public abstract class Task {
         return this.isDone;
     }
 
-    public abstract String getTime();
+    public abstract LocalDateTime getDateTime();
 
     /**
      * Returns the type of the task in String
@@ -47,7 +51,4 @@ public abstract class Task {
     public void maskAsDone() {
         this.isDone = true;
     }
-
-
-
 }
