@@ -22,7 +22,6 @@ public class ToDo extends TaskItem {
      * Overriden toFileString method. Writes the task item into the dukeData file.
      * @return
      */
-
     @Override
     public String toFileString() {
         return "[T]" + super.toString();

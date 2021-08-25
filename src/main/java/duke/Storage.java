@@ -9,6 +9,10 @@ public class Storage {
     private static boolean appendMode = true;
     private static String filePath = "./data/dukeData.txt";
 
+    /**
+     * loads data about the task list from dukeData.txt.
+     * @return an ArrayList of TaskItems that will be used to create Duke's TaskList.
+     */
     public static ArrayList<TaskItem> loadData() {
         File folder = new File("./data/");
 
@@ -78,6 +82,10 @@ public class Storage {
         return new ArrayList<TaskItem>();
     }
 
+    /**
+     * Writes task items as strings to dukeData.txt
+     * @param content the content that is to be written to dukeData.txt.
+     */
     public static void appendToFile(String content) {
         try {
             FileWriter fw = new FileWriter(filePath, appendMode);
@@ -89,6 +97,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Used to rewrite the whole file, given a TaskList.
+     * @param taskList Duke's TaskList.
+     */
     public static void rewriteFile(TaskList taskList) {
         File dukeData = new File("./data/dukeData.txt");
         dukeData.delete();

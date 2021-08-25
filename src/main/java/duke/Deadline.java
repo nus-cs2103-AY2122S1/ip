@@ -26,9 +26,10 @@ public class Deadline extends TaskItem {
         }
     }
 
-//    public duke.Deadline(String description) {
-//        super(description);
-//    }
+    /**
+     * toFileString returns the Deadline in a string.
+     * @return returns the Deadline in a string format that is specifically made for the dukeData.txt file.
+     */
     @Override
     public String toFileString() {
         return "[D]" + super.toString() + "--" + byDateAndTime.toString();
