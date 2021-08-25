@@ -37,7 +37,7 @@ public class Duke {
         tList.addTask(newDeadline);
         String deadlineMessage = "    ____________________________________________________________\n"
                 + "     Got it. I've added this task:\n"
-                + "       " + newDeadline.showType()
+                + "       " + "[" + newDeadline.showType() + "]"
                             + newDeadline.checkDone() + " "
                             + newDeadline.showTaskOnly() + " by "
                             + newDeadline.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
@@ -52,9 +52,11 @@ public class Duke {
         tList.addTask(newEvent);
         String eventMessage = "    ____________________________________________________________\n"
                 + "     Got it. I've added this task:\n"
-                + "       " + newEvent.showType()
-                + newEvent.checkDone() + " "
-                + newEvent.showTask() + "\n"
+                + "       " + "[" + newEvent.showType() + "]"
+                            + newEvent.checkDone() + " "
+                            + newEvent.showTaskOnly() + " at "
+                            + newEvent.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                            + newEvent.showTime() + "\n"
                 + "     Now you have " + tList.length() + " tasks in the list.\n"
                 + "    ____________________________________________________________";
         System.out.println(eventMessage);

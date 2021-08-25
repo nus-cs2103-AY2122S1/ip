@@ -37,7 +37,7 @@ public class TaskList {
         System.out.println("    ____________________________________________________________\n"
                         + "     " + "Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
-                String taskItem = "     " + (i + 1) + "." + list.get(i).showType() + list.get(i).checkDone() + " " + list.get(i).showTask();
+                String taskItem = "     " + (i + 1) + "." + "[" +  list.get(i).showType() + "]" + list.get(i).checkDone() + " " + list.get(i).showTask();
                 System.out.println(taskItem);
         }
         System.out.println("    ____________________________________________________________");

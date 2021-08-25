@@ -17,9 +17,6 @@ public class Deadline extends Task {
 
     public Deadline(String taskName) {
         String[] TaskBySplit = taskName.split("/", 2);
-        String[] removeBy = TaskBySplit[1].split(" ", 2);
-        this.taskName = TaskBySplit[0];
-        this.by = removeBy[1];
 
         if (taskName.contains("|")) {
             TaskBySplit = taskName.split("\\|", 2);
@@ -55,7 +52,7 @@ public class Deadline extends Task {
         return this.taskName;
     }
 
-    public String showBy() {
+    public String showWhen() {
         return this.by;
     }
 
