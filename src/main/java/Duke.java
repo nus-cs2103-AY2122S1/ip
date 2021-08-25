@@ -6,26 +6,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Duke {
+    private String storageFileName;
+
+    public Duke(String storageFileName) {
+        this.storageFileName = storageFileName;
+    }
+
     public static class DukeException extends Exception {
         public DukeException(String errorMessage) {
             super(errorMessage);
         }
     }
 
-
-
     public void run() throws IOException, DukeException {
         Ui ui = new Ui();
         Parser parser = new Parser();
         TaskList storage = new TaskList();
-        Files.createDirectories(Paths.get("data/"));
-        File file = new File("data/duke.txt");
+        Files.createDirectories(Paths.get(this.storageFileName).getParent().getFileName());
+        File file = new File(this.storageFileName);
 
-        // Load data if exists, else create new TaskList
-//        if (Files.exists(java.nio.file.Paths.get(".", "data", "duke.txt"))) {
         if (!file.createNewFile()) {
             try {
-                FileInputStream fis = new FileInputStream("data/duke.txt");
+                FileInputStream fis = new FileInputStream(this.storageFileName);
                 ObjectInputStream ois = new ObjectInputStream(fis);
                 storage = (TaskList) ois.readObject();
                 ois.close();
@@ -55,14 +57,14 @@ public class Duke {
             ended = parser.parse(input, storage);
         }
 
-        FileOutputStream fos = new FileOutputStream("./data/duke.txt");
+        FileOutputStream fos = new FileOutputStream(this.storageFileName);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(storage);
         oos.close();
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke("data/duke.txt");
         try {
             duke.run();
         } catch (IOException e) {
