@@ -16,5 +16,6 @@ bin/
 # .class files
 *.class
 
+out/artifacts/ip_jar/ip.jar
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT

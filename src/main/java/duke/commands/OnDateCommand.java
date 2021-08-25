@@ -58,7 +58,9 @@ public class OnDateCommand extends Command {
                 Event event = (Event) task;
                 if (event.getTimeFormatted() != null) {
                     LocalDate eventDate = event.getTimeFormatted().toLocalDate();
-                    if (eventDate.equals(date)) tasksOnDate.add(event);
+                    if (eventDate.equals(date)) {
+                        tasksOnDate.add(event);
+                    }
                 }
             }
         }
