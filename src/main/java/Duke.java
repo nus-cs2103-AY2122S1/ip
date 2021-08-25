@@ -55,7 +55,7 @@ public class Duke {
             }
         }
 
-        //exception handling
+        //exception handling for task with no description
         String next_line = scan.nextLine();
         int caught = 0;
 
@@ -76,6 +76,7 @@ public class Duke {
         }
 
 
+        //main block
         int first_time = 0;
         while (true) {
             if (first_time == 1) {
@@ -170,20 +171,22 @@ public class Duke {
         }
 
 
+        //exception for ./data nt existing and creating it
         try {
             check_file();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            System.out.println("Data File not found");
             try {
                 Path path = Paths.get("./data");
                 Files.createDirectories(path);
-                System.out.println("Directory data created");
+                System.out.println("Directory named data created");
             } catch (IOException r) {
                 System.err.println("Failed to create directory!" + r.getMessage());
             }
         }
 
 
+        // writing the content in the list to Duke.txt
         try {
             String task = "Do these soon!!" + "\n";
             for (int i = 0; i < list.size(); i++) {

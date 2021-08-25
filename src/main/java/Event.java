@@ -1,9 +1,13 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Event extends Task{
     public String type;
     public String date_time = "";
     public String task;
 
-
+    //primary constructor
     public Event (String message) {
         super(message);
         this.set_date_time();
@@ -11,9 +15,10 @@ public class Event extends Task{
         this.set_type();
     }
 
+    //constructor for Duke.txt
     public Event (String message, Boolean b) {
         super(message);
-        this.set_date_time();
+        this.set_date_time2();
         this.set_task2();
         this.set_type();
     }
@@ -23,6 +28,7 @@ public class Event extends Task{
         return this.type;
     }
 
+    //set task for primary constructor
     @Override
     public void set_task() {
         int start_index = 0;
@@ -42,13 +48,14 @@ public class Event extends Task{
         this.task = message.substring(start_index,end_index) + this.getDate_time();
     }
 
+    //set task for Duke.txt
     @Override
     public void set_task2() {
         int start_index = 0;
         int end_index = 0;
         for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i+1).equals("t")) {
-                start_index = i + 2;
+            if (this.message.substring(i, i+1).equals("e")) {
+                start_index = i + 6;
                 break;
             }
         }
@@ -58,7 +65,7 @@ public class Event extends Task{
                 break;
             }
         }
-        this.task = message.substring(start_index,end_index) + this.getDate_time();
+        this.task = message.substring(start_index,end_index) + " " + this.getDate_time();
     }
 
     @Override
@@ -80,7 +87,18 @@ public class Event extends Task{
                 break;
             }
         }
-        this.date_time = " (at: " + message.substring(start_index,message.length()) + ")";
+        this.date_time = " (at " + message.substring(start_index,message.length()) + ")";
+    }
+
+    public void set_date_time2() {
+        int start_index = 0;
+        for (int i = 0; i < this.message.length(); i++) {
+            if (this.message.substring(i, i+1).equals("(")) {
+                start_index = i;
+                break;
+            }
+        }
+        this.date_time = message.substring(start_index,message.length());
     }
 
 

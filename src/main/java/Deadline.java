@@ -1,7 +1,13 @@
+import java.awt.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
     public String type;
-    public String date_time;
-    public String task = "";
+    public String task;
+    public LocalDate date_time;
+    public String date_time2;
+
 
 
     public Deadline (String message) {
@@ -13,7 +19,7 @@ public class Deadline extends Task{
 
     public Deadline (String message, Boolean b) {
         super(message);
-        this.set_date_time();
+        this.set_date_time2();
         this.set_task2();
         this.set_type();
     }
@@ -44,7 +50,7 @@ public class Deadline extends Task{
                 break;
             }
         }
-        this.task = message.substring(start_index,end_index) + this.date_time;
+        this.task = message.substring(start_index,end_index) + " (by " + this.get_date_time() + ")";
     }
 
     @Override
@@ -52,8 +58,8 @@ public class Deadline extends Task{
         int start_index = 0;
         int end_index = 0;
         for (int i = 0; i < this.message.length(); i++) {
-            if (this.message.substring(i, i+1).equals("e")) {
-                start_index = i + 8;
+            if (this.message.substring(i, i+1).equals("d")) {
+                start_index = i + 9;
                 break;
             }
         }
@@ -63,7 +69,7 @@ public class Deadline extends Task{
                 break;
             }
         }
-        this.task = message.substring(start_index,end_index) + this.date_time;
+        this.task = message.substring(start_index,end_index) + " " + this.get_date_time2();
     }
 
     @Override
@@ -80,11 +86,23 @@ public class Deadline extends Task{
                 break;
             }
         }
-        this.date_time = " (by: " + message.substring(start_index) + ")";
+        String date_timing = message.substring(start_index);
+        this.date_time = LocalDate.parse(date_timing);
+    }
+
+    public void set_date_time2() {
+        int length = this.message.length();
+        this.date_time2 = "(" + message.substring(length - 15);
     }
 
     public String get_date_time() {
-        return this.date_time;
+        return this.date_time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
+    public String get_date_time2() {
+        return this.date_time2;
+    }
+
+
 
 }

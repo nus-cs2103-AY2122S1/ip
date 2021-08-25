@@ -1,7 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 public class Task {
     public String type;
-    public String date_time;
     public String message;
+    public LocalDate date_time;
 
 
     public Task (String message) {
@@ -33,11 +37,11 @@ public class Task {
     }
 
     public void set_date_time() {
-        this.date_time = "";
+        return;
     }
 
     public String getDate_time() {
-        return date_time;
+        return "";
     }
 
 }
