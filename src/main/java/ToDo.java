@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ToDo list stores items
@@ -10,6 +11,10 @@ public class ToDo extends ArrayList<Task> {
      */
     public ToDo() {
         super();
+    }
+
+    public ToDo(List<Task> taskArr) {
+        super(taskArr);
     }
 
     public Task completeTask(int index) {
