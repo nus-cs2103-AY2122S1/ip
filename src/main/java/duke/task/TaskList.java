@@ -1,14 +1,14 @@
 package duke.task;
 
-import duke.exception.DukeIOException;
-import duke.exception.DukeTaskNumberOutOfBoundsException;
-import duke.util.DateTimeUtils;
-import duke.util.FileUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import duke.exception.DukeIoException;
+import duke.exception.DukeTaskNumberOutOfBoundsException;
+import duke.util.DateTimeUtils;
+import duke.util.FileUtils;
 
 /**
  * The is the TaskList class that that
@@ -98,14 +98,14 @@ public class TaskList {
      */
     public String[] printTasks() {
         return IntStream.range(0, tasks.size())
-            .mapToObj(i -> (i + 1) + ". " + tasks.get(i).toString())
-            .collect(Collectors.toList()).toArray(String[]::new);
+                .mapToObj(i -> (i + 1) + ". " + tasks.get(i).toString())
+                .collect(Collectors.toList()).toArray(String[]::new);
     }
 
     /**
      * Loads tasks from file with path: src/data/duke.txt.
      */
-    public void loadTasksFromFile() throws DukeIOException {
+    public void loadTasksFromFile() throws DukeIoException {
         List<String> formattedTasks = FileUtils.loadFile(DIR_NAME, FILE_NAME);
         try {
             formattedTasks.forEach(formattedTask -> {
@@ -114,53 +114,53 @@ public class TaskList {
                 String isDone = contents[1];
                 String name = contents[2];
                 switch (taskID) {
-                    case Todo.ID:
-                        Todo todo = new Todo(name, isDone.equals("0"));
-                        addTask(todo);
-                        break;
-                    case Deadline.ID:
-                        String byTime = contents[3];
-                        Deadline deadline = new Deadline(
+                case Todo.ID:
+                    Todo todo = new Todo(name, isDone.equals("0"));
+                    addTask(todo);
+                    break;
+                case Deadline.ID:
+                    String byTime = contents[3];
+                    Deadline deadline = new Deadline(
                             name,
                             DateTimeUtils.parseDateTime(byTime),
                             isDone.equals("0")
-                        );
-                        addTask(deadline);
-                        break;
-                    case Event.ID:
-                        String atTime = contents[3];
-                        String[] dateTimes = atTime.split(" ", 2);
-                        String[] times = dateTimes[1].split("-", 2);
-                        String atDate = dateTimes[0];
-                        String startTime = times[0];
-                        String endTime = times[1];
-                        EventDateTime eventDateTime = new EventDateTime(
+                    );
+                    addTask(deadline);
+                    break;
+                case Event.ID:
+                    String atTime = contents[3];
+                    String[] dateTimes = atTime.split(" ", 2);
+                    String[] times = dateTimes[1].split("-", 2);
+                    String atDate = dateTimes[0];
+                    String startTime = times[0];
+                    String endTime = times[1];
+                    EventDateTime eventDateTime = new EventDateTime(
                             DateTimeUtils.parseDate(atDate),
                             DateTimeUtils.parseTime(startTime),
                             DateTimeUtils.parseTime(endTime)
-                        );
-                        Event event = new Event(name, eventDateTime, isDone.equals("0"));
-                        addTask(event);
-                        break;
-                    default:
-                        break;
+                    );
+                    Event event = new Event(name, eventDateTime, isDone.equals("0"));
+                    addTask(event);
+                    break;
+                default:
+                    break;
                 }
             });
         } catch (Exception e) {
-            throw new DukeIOException("☹ OOPS!!! Load tasks from file error.");
+            throw new DukeIoException("☹ OOPS!!! Load tasks from file error.");
         }
     }
 
     /**
      * Saves tasks to file with path: src/data/duke.txt.
      */
-    public void saveTasksToFile() throws DukeIOException {
+    public void saveTasksToFile() throws DukeIoException {
         List<String> formattedTasks = tasks.stream()
                 .map(task -> String.join(" | ", task.formatTask()))
                 .collect(Collectors.toList());
         boolean isSaved = FileUtils.isFileSaved(DIR_NAME, FILE_NAME, formattedTasks);
         if (!isSaved) {
-            throw new DukeIOException("☹ OOPS!!! Save tasks to file error.");
+            throw new DukeIoException("☹ OOPS!!! Save tasks to file error.");
         }
     }
 
@@ -171,10 +171,10 @@ public class TaskList {
      */
     public String[] findTasks(String keyword) {
         List<Task> filteredTasks = tasks.stream()
-            .filter(task -> task.getName().contains(keyword))
-            .collect(Collectors.toList());
+                .filter(task -> task.getName().contains(keyword))
+                .collect(Collectors.toList());
         return IntStream.range(0, filteredTasks.size())
-            .mapToObj(i -> (i + 1) + ". " + filteredTasks.get(i).toString())
-            .collect(Collectors.toList()).toArray(String[]::new);
+                .mapToObj(i -> (i + 1) + ". " + filteredTasks.get(i).toString())
+                .collect(Collectors.toList()).toArray(String[]::new);
     }
 }

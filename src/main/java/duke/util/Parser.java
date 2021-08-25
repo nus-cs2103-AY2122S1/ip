@@ -1,14 +1,14 @@
 package duke.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+
 import duke.exception.DukeExtractCommandException;
 import duke.exception.DukeTaskNumberOutOfBoundsException;
 import duke.exception.DukeUnknownException;
 import duke.task.EventDateTime;
 import duke.task.Operation;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 /**
  * The is the Parser class that extracts contents from command.
@@ -23,16 +23,16 @@ public class Parser {
      * @throws DukeUnknownException If operation is unknown.
      */
     public static Operation extractOperation(String command)
-        throws DukeExtractCommandException, DukeUnknownException {
+            throws DukeExtractCommandException, DukeUnknownException {
         String[] contents = command.split(" ");
         if (contents.length == 0) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The operation cannot be extracted properly.");
+                    "☹ OOPS!!! The operation cannot be extracted properly.");
         }
         String operation = contents[0];
         if (operation.equals("")) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The operation cannot be empty.");
+                    "☹ OOPS!!! The operation cannot be empty.");
         } else {
             if (operation.equals(Operation.TODO.getValue())) {
                 return Operation.TODO;
@@ -54,7 +54,7 @@ public class Parser {
                 return Operation.BYE;
             } else {
                 throw new DukeUnknownException(
-                    "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
@@ -69,12 +69,12 @@ public class Parser {
      * @throws DukeTaskNumberOutOfBoundsException If task number is not a positive integer.
      */
     public static int extractTaskNumber(String command)
-        throws DukeExtractCommandException, NumberFormatException,
+            throws DukeExtractCommandException, NumberFormatException,
         DukeTaskNumberOutOfBoundsException {
         String[] contents = command.split(" ", 2);
         if (contents.length != 2) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The task number cannot be extracted properly.");
+                    "☹ OOPS!!! The task number cannot be extracted properly.");
         }
         int number = 0;
         try {
@@ -84,7 +84,7 @@ public class Parser {
         }
         if (number < 1) {
             throw new DukeTaskNumberOutOfBoundsException(
-                "☹ OOPS!!! The task number is not a positive integer.");
+                    "☹ OOPS!!! The task number is not a positive integer.");
         }
         return number;
     }
@@ -102,12 +102,14 @@ public class Parser {
         String operation = contents[0];
         if (contents.length != 2) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The description of a " + operation + " cannot be extracted properly.");
+                    "☹ OOPS!!! The description of a "
+                            + operation + " cannot be extracted properly.");
         }
         String description = contents[1];
         if (description.equals("")) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The description of a " + operation + " cannot be empty.");
+                    "☹ OOPS!!! The description of a "
+                            + operation + " cannot be empty.");
         }
         return description;
     }
@@ -119,19 +121,20 @@ public class Parser {
      * @param regex " /at " or " /by ".
      * @return Task details from description if they exist and can be extracted properly,
      *         else throw exception.
-     * @throws DukeExtractCommandException If task details are empty or cannot be extracted properly.
+     * @throws DukeExtractCommandException If task details are empty
+     *                                     or cannot be extracted properly.
      */
     public static String[] extractTaskDetails(String description, String regex)
-        throws DukeExtractCommandException {
+            throws DukeExtractCommandException {
         String[] details = description.split(regex, 2);
         if (details.length != 2) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The task details cannot be extracted properly.");
+                    "☹ OOPS!!! The task details cannot be extracted properly.");
         }
         if (Arrays.stream(details).filter(detail -> detail.equals(""))
             .toArray(String[]::new).length > 0) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The task details cannot be empty.");
+                    "☹ OOPS!!! The task details cannot be empty.");
         }
         return details;
     }
@@ -146,11 +149,11 @@ public class Parser {
      * @throws DukeExtractCommandException If dateTime are empty or cannot be extracted properly.
      */
     public static EventDateTime extractEventDatetime(String dateTime, String regex)
-        throws DukeExtractCommandException {
+            throws DukeExtractCommandException {
         String[] dateAndTimes = dateTime.split(regex, 3);
         if (dateAndTimes.length != 3) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The event date and time cannot be extracted properly.");
+                    "☹ OOPS!!! The event date and time cannot be extracted properly.");
         }
         String atDate = dateAndTimes[0];
         String startTime = dateAndTimes[1];
@@ -160,7 +163,7 @@ public class Parser {
                 DateTimeUtils.parseTime(startTime), DateTimeUtils.parseTime(endTime));
         } catch (DateTimeParseException e) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The event date and time cannot be extracted properly.");
+                    "☹ OOPS!!! The event date and time cannot be extracted properly.");
         }
     }
 
@@ -177,7 +180,7 @@ public class Parser {
             return DateTimeUtils.parseDateTime(dateTime);
         } catch (DateTimeParseException e) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The deadline date and time cannot be extracted properly.");
+                    "☹ OOPS!!! The deadline date and time cannot be extracted properly.");
         }
     }
 
@@ -192,7 +195,7 @@ public class Parser {
         String[] contents = command.split(" ", 2);
         if (contents.length != 2) {
             throw new DukeExtractCommandException(
-                "☹ OOPS!!! The keyword cannot be extracted properly.");
+                    "☹ OOPS!!! The keyword cannot be extracted properly.");
         }
         return contents[1];
     }

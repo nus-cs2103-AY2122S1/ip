@@ -47,19 +47,19 @@ public class Event extends Task {
     }
 
     private String formatPrintDateTime() {
-        return atDateTime.getAtDate().format(DateTimeFormatter.ofPattern(PRINT_DATE_PATTERN)) +
-            " " +
-            atDateTime.getStartTime().format(DateTimeFormatter.ofPattern(PRINT_TIME_PATTERN)) +
-            "-" +
-            atDateTime.getEndTime().format(DateTimeFormatter.ofPattern(PRINT_TIME_PATTERN));
+        return atDateTime.getAtDate().format(DateTimeFormatter.ofPattern(PRINT_DATE_PATTERN))
+                + " "
+                + atDateTime.getStartTime().format(DateTimeFormatter.ofPattern(PRINT_TIME_PATTERN))
+                + "-"
+                + atDateTime.getEndTime().format(DateTimeFormatter.ofPattern(PRINT_TIME_PATTERN));
     }
 
     private String formatSaveDateTime() {
-        return atDateTime.getAtDate().format(DateTimeFormatter.ofPattern(SAVE_DATE_PATTERN)) +
-            " " +
-            atDateTime.getStartTime().format(DateTimeFormatter.ofPattern(SAVE_TIME_PATTERN)) +
-            "-" +
-            atDateTime.getEndTime().format(DateTimeFormatter.ofPattern(SAVE_TIME_PATTERN));
+        return atDateTime.getAtDate().format(DateTimeFormatter.ofPattern(SAVE_DATE_PATTERN))
+                + " "
+                + atDateTime.getStartTime().format(DateTimeFormatter.ofPattern(SAVE_TIME_PATTERN))
+                + "-"
+                + atDateTime.getEndTime().format(DateTimeFormatter.ofPattern(SAVE_TIME_PATTERN));
     }
 
     /**

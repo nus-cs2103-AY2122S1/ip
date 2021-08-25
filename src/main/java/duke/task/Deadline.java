@@ -48,13 +48,13 @@ public class Deadline extends Task {
     }
 
     private String formatPrintDateTime() {
-        return byDateTime.format(DateTimeFormatter.ofPattern(PRINT_DATE_PATTERN)) + " " +
-                byDateTime.format(DateTimeFormatter.ofPattern(PRINT_TIME_PATTERN));
+        return byDateTime.format(DateTimeFormatter.ofPattern(PRINT_DATE_PATTERN))
+                + " " + byDateTime.format(DateTimeFormatter.ofPattern(PRINT_TIME_PATTERN));
     }
 
     private String formatSaveDateTime() {
-        return byDateTime.format(DateTimeFormatter.ofPattern(SAVE_DATE_PATTERN)) + " " +
-            byDateTime.format(DateTimeFormatter.ofPattern(SAVE_TIME_PATTERN));
+        return byDateTime.format(DateTimeFormatter.ofPattern(SAVE_DATE_PATTERN))
+                + " " + byDateTime.format(DateTimeFormatter.ofPattern(SAVE_TIME_PATTERN));
     }
 
     /**

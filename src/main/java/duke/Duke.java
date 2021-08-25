@@ -1,7 +1,7 @@
 package duke;
 
-import duke.storage.Storage;
 import duke.listener.Message;
+import duke.storage.Storage;
 import duke.task.Operation;
 import duke.ui.Ui;
 
@@ -9,9 +9,6 @@ import duke.ui.Ui;
  * The project aims to build a product named Duke,
  * a Personal Assistant Chatbot that helps a person
  * to keep track of various things.
- */
-
-/**
  * This is the Main class that will contain the main method
  * to be executed at run-time.
  */
@@ -50,9 +47,9 @@ public class Duke implements Message {
                 storage.clearTasks();
             } else if (operation == Operation.FIND) {
                 storage.findTasks(command);
-            } else if (operation == Operation.TODO ||
-                operation == Operation.DEADLINE ||
-                operation == Operation.EVENT) {
+            } else if (operation == Operation.TODO
+                || operation == Operation.DEADLINE
+                || operation == Operation.EVENT) {
                 storage.addTask(command);
             }
             storage.saveTasksToFile();

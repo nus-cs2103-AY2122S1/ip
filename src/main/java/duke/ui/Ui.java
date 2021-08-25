@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final String HORIZONTAL_LINE =
-        "    ____________________________________________________________";
+            "    ____________________________________________________________";
     private static final String INDENTATION = "     ";
     private final Scanner scanner;
 
@@ -24,10 +24,10 @@ public class Ui {
      */
     public void logo() {
         String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
     }
 
@@ -55,9 +55,8 @@ public class Ui {
      */
     public void show(String... messages) {
         System.out.println(HORIZONTAL_LINE);
-        Arrays.stream(messages).forEach(
-            message -> System.out.println(INDENTATION + message)
-        );
+        Arrays.stream(messages)
+                .forEach(message -> System.out.println(INDENTATION + message));
         System.out.println(HORIZONTAL_LINE);
     }
 
