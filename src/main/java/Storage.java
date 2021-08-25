@@ -22,22 +22,31 @@ public class Storage {
     protected void deleteFromFile(String textToDelete) throws IOException {
         File file = new File(filePath);
         Scanner s = new Scanner(file);
-        String newFileText = "";
+        StringBuilder newFileText = new StringBuilder();
         while (s.hasNext()) {
             String line = s.nextLine();
             if (textToDelete.equals(line)) {
                 continue;
             }
-            newFileText += line + "\n";
+            newFileText.append(line).append("\n");
         }
         FileWriter fw = new FileWriter(filePath);
-        fw.write(newFileText);
+        fw.write(newFileText.toString());
+        fw.close();
+    }
+
+    protected void rewriteFile(List<Task> tasks) throws IOException {
+        StringBuilder newFileText = new StringBuilder();
+        for (Task task : tasks) {
+            newFileText.append(task.toString()).append("\n");
+        }
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(String.valueOf(newFileText));
         fw.close();
     }
 
     protected List<Task> createTaskList() throws IOException {
         List<Task> tasks = new ArrayList<>();
-        // Creates an arrayList of tasks from filepath
         File file = new File(filePath);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
