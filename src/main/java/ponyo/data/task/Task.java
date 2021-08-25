@@ -30,4 +30,8 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    public boolean containsKeyword(String kw) {
+        return description.contains(kw);
+    }
 }
