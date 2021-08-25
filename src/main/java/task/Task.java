@@ -1,6 +1,5 @@
 package task;
 
-import duke.*;
 import ui.*;
 
 /**

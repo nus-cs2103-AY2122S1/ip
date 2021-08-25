@@ -1,7 +1,5 @@
 package duke;
 
-import task.*;
-import ui.*;
 
 /**
  * The possible type of DukeExceptions

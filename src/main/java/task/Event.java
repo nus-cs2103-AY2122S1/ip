@@ -1,7 +1,5 @@
 package task;
 
-import duke.*;
-import ui.*;
 
 /**
  * A type of task that requires event details and extends from Task
