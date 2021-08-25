@@ -38,6 +38,12 @@ public class AddCommand extends Command {
         storage.writeToFile(tasks);
     }
 
+    /**
+     * Method to determine if two instances of AddCommand are equal
+     *
+     * @param obj the object to be used for comparison
+     * @return boolean indicating if the two AddCommand instances are equal
+     */
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof AddCommand) && this.task.equals((((AddCommand) obj).task));

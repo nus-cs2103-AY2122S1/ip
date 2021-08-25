@@ -15,12 +15,24 @@ import java.util.Scanner;
 
 public class Storage {
 
+    /** the path of the file used for storage */
     private String filePath;
 
+    /**
+     * The constructor of the Storage class
+     *
+     * @param filePath the path of the file used for storage
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * The method to load the data from an already existing file into a new list of tasks
+     *
+     * @return the list of tasks
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -51,6 +63,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * The method to write the list of tasks to a storage file
+     *
+     * @param tasks the list of tasks to be written to the storage file
+     */
     public void writeToFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -63,6 +80,12 @@ public class Storage {
         }
     }
 
+    /**
+     * The method to parse a line from the storage file and get the Task object it represents
+     *
+     * @param line the line to be parsed
+     * @return the Task to be added into the list of tasks
+     */
     public Task parseLine(String line) {
         String[] x = line.split("\\|");
         String taskType = x[0].strip();

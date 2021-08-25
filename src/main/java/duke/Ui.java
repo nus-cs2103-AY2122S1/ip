@@ -6,8 +6,12 @@ import java.io.InputStreamReader;
 
 public class Ui {
 
+    /** the reader to get the user input */
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+    /**
+     * The method to show the welcome message
+     */
     public void showWelcome() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -19,6 +23,9 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * The method to show a horizontal divider line
+     */
     public void showLine() {
         for (int i = 0; i < 60; i++) {
             System.out.print("_");
@@ -26,14 +33,23 @@ public class Ui {
         System.out.println();
     }
 
+    /**
+     * The method to read the user input
+     */
     public String readCommand() throws IOException {
         return reader.readLine();
     }
 
+    /**
+     * The method to show the error message
+     */
     public void showError(String msg) {
         System.out.println(msg);
     }
 
+    /**
+     * The method to show the exit message
+     */
     public void showExit() {
         System.out.println("Bye. See you again soon! :)");
     }

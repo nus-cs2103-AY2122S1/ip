@@ -7,6 +7,7 @@ import duke.Ui;
 public class DeleteCommand extends Command {
     private int index;
 
+    /** Constructor of DeleteCommand class */
     public DeleteCommand(int index) {
         this.index = index;
     }
@@ -34,6 +35,12 @@ public class DeleteCommand extends Command {
         storage.writeToFile(tasks);
     }
 
+    /**
+     * Method to determine if two instances of DeleteCommand are equal
+     *
+     * @param obj the object to be used for comparison
+     * @return boolean indicating if the two DeleteCommand instances are equal
+     */
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof DeleteCommand) && (this.index == ((DeleteCommand) obj).index);
