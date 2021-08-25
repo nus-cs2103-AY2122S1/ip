@@ -74,4 +74,16 @@ public class TaskList {
     public int indexOf(Task task) {
         return this.tasks.indexOf(task);
     }
+
+    public ArrayList<Task> filter(String keyword) {
+        int len = this.getNumOfTasks();
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (int i = 0; i < len; i++) {
+            Task task = this.tasks.get(i);
+            if (task.containsKeyword(keyword)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
+    }
 }
