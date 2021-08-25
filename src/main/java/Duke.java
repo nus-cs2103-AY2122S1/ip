@@ -1,8 +1,15 @@
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
 
+    private static final String LOCAL_STORAGE_LOCATION = "src/Data/LocalStorage.txt";
     private static ArrayList<Task> toDoList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -13,6 +20,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
+        getTodoListFromLS();
         start();
     }
 
@@ -35,6 +43,7 @@ public class Duke {
         String lines = "--------------------------------------------------------------------------------------------";
         String newString = lines + "\nOutput: \n" + dukeReply + "\n" + lines + "\n";
         System.out.println(newString);
+        updateLS();
         start();
     }
 
@@ -92,7 +101,7 @@ public class Duke {
                 } else if (!parsedUserInput[1].contains("/by")) {
                     throw new DukeException("Please include the keyword \"/by\" if you want to add a deadline.");
                 } else {
-                    String[] parsedDeadlineInput = parsedUserInput[1].split("/by", 2);
+                    String[] parsedDeadlineInput = parsedUserInput[1].split("/by ", 2);
                     Task newTask = new Deadline(parsedDeadlineInput[0], parsedDeadlineInput[1]);
                     addTaskToList(newTask, parsedUserInput[1]);
                 }
@@ -102,12 +111,12 @@ public class Duke {
                 } else if (!parsedUserInput[1].contains("/at")) {
                     throw new DukeException("Please include the keyword \"/at\" if you want to add an event.");
                 } else {
-                    String[] parsedDeadlineInput = parsedUserInput[1].split("/at", 2);
+                    String[] parsedDeadlineInput = parsedUserInput[1].split("/at ", 2);
                     Task newTask = new Event(parsedDeadlineInput[0], parsedDeadlineInput[1]);
                     addTaskToList(newTask, parsedUserInput[1]);
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("☹ OOWOOPS!!! I'm sowwie, but I don't know what that mweans :-(");
             }
         }
     }
@@ -121,5 +130,79 @@ public class Duke {
     public static String addToStringToPrint(int pos, String toDoListToPrint) {
         Task currentTask = toDoList.get(pos);
         return toDoListToPrint + (pos + 1) + "." + currentTask.toString();
+    }
+
+    public static void getTodoListFromLS() {
+        File localStorageFile = new File(LOCAL_STORAGE_LOCATION);
+        try {
+            if (!localStorageFile.createNewFile()) {
+                populateToDoList(localStorageFile);
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // change to duke exception
+        }
+    }
+
+    public static void populateToDoList(File localStorageFile) {
+        Scanner scanner = null; // create a Scanner using the File as the source
+        try {
+            scanner = new Scanner(localStorageFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();//replace with duke exception?
+        }
+        while (scanner.hasNext()) {
+            String lineFromLocalStorage = scanner.nextLine();
+            if (lineFromLocalStorage.contains("[") && lineFromLocalStorage.contains("]") ) {
+                char taskType = lineFromLocalStorage.charAt(1);
+                char completed = lineFromLocalStorage.charAt(4);
+                String restOfTheTask = lineFromLocalStorage.substring(7);
+                if (taskType == 'T') {
+                    Task newTask = new ToDo(restOfTheTask);
+                    if (completed == '✅') {
+                        newTask.markAsCompleted();
+                    }
+                    toDoList.add(newTask);
+                } else if (taskType == 'E') {
+                    String[] parsedEventInput = restOfTheTask.split("\\(at: ", 2);
+                    String eventTime = parsedEventInput[1].split("\\)", 2)[0];
+                    Task newTask = new Event(parsedEventInput[0], eventTime);
+                    if (completed == '✅') {
+                        newTask.markAsCompleted();
+                    }
+                    toDoList.add(newTask);
+                } else if (taskType == 'D') {
+                    String[] parsedDeadlineInput = restOfTheTask.split("\\(by: ", 2);
+                    String deadlineTime = parsedDeadlineInput[1].split("\\)", 2)[0];
+                    Task newTask = new Event(parsedDeadlineInput[0], deadlineTime);
+                    if (completed == '✅') {
+                        newTask.markAsCompleted();
+                    }
+                    toDoList.add(newTask);
+                }
+            }
+        }
+        scanner.close();
+    }
+
+    public static void updateLS() {
+        try {
+            Files.delete(Paths.get(LOCAL_STORAGE_LOCATION));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        FileWriter fw;
+        try {
+            fw = new FileWriter(LOCAL_STORAGE_LOCATION, true);
+            for (Task task : toDoList) {
+                try {
+                    fw.write(task.toString() + "\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
