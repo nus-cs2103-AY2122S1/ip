@@ -45,6 +45,9 @@ public class Parser { //The Parser to handle the inputs from the terminal
         case "delete":
             return new DeleteCommand(details);
 
+        case "find":
+            return new FindCommand(details);
+
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

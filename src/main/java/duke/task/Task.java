@@ -47,6 +47,14 @@ public class Task { //Base Task Class
     }
 
     /**
+     * Returns the name of the task
+     * @return name of the task
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Returns the task as String
      *
      * @return list format of the task

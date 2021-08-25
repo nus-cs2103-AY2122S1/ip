@@ -108,6 +108,22 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     }
 
     /**
+     * Searches the list for any task with the given string
+     * @param string Input string pattern to find
+     */
+    public void searchList(String string) {
+        int newCount = 0;
+        for (int i = 0; i < count; i++) {
+            if (listArray.get(i).getName().contains(string)) {
+                System.out.println(++newCount + ". " + listArray.get(i));
+            }
+        }
+        if (newCount == 0) {
+            System.out.println("Oh no! Seems like there was no match for your search");
+        }
+    }
+
+    /**
      * Returns the list of task for the user
      */
     public void printList() {
