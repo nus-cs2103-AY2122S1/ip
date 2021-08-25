@@ -2,7 +2,7 @@ package duke;
 
 public class DukeException extends Exception {
     private static final String invalidInput = "OOPS!!! I'm sorry, but I don't know what that means :(";
-    private static final String emptyDescription = "OOPS!!! The description of a duke.task cannot be empty";
+    private static final String emptyDescription = "OOPS!!! The description of a todo cannot be empty";
 
     private DukeException(String message) {
         super(message);
