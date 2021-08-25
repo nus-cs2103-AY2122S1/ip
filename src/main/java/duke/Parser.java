@@ -5,6 +5,9 @@ import java.time.format.DateTimeParseException;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * The Parser class processes the data inputs from the Ui, and uses this input to alter the list
+ */
 public class Parser {
 
     /**
@@ -23,7 +26,13 @@ public class Parser {
         return true;
     }
 
-    public static void parse(String in, Ui ui, Storage storage, TaskList tasklist) {
+    /**
+     * The main method that processes the Ui input,
+     * @param in The input from the Ui to be processed
+     * @param ui Ui to close when necessary
+     * @param tasklist The list that is adjusted when a specific input is given
+     */
+    public static void parse(String in, Ui ui, TaskList tasklist) {
         try {
             if (in.equals("bye") || in.equals("Bye")) {
                 Parser.byeOutput();
@@ -47,18 +56,34 @@ public class Parser {
             Parser.invalidInputResponse();
         }
     }
+
+    /**
+     * The default message when the input is not a proper command
+     */
     public static void invalidInputResponse() {
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+    /**
+     * Exits Duke and closes the scanner
+     */
     public static void byeOutput() {
         System.out.println("Bye. Hope to see you again!");
     }
 
+    /**
+     * Lists out the items in the list
+     * @param tasklist items to be listed
+     */
     public static void listOutput(TaskList tasklist) {
         tasklist.showList();
     }
 
+    /**
+     * Marks the given task as done
+     * @param in task to be marked as done
+     * @param taskList
+     */
     public static void doneOutput(String in, TaskList taskList) {
         if (in.length() < 6) {
             System.out.println("Invalid Input for done command");

@@ -50,7 +50,7 @@ public class TaskList {
 
     public void addToDoTask(String in) {
         System.out.println("Got it. I've added this task:");
-        tasks.add(new ToDoTask(in.substring(4)));
+        tasks.add(new ToDoTask(in.substring(5)));
         System.out.println(tasks.get(tasks.size()-1));
         if (tasks.size() == 1) {
             System.out.println("Now you have " + tasks.size() + " task in the list.");
