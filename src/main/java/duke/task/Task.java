@@ -59,6 +59,12 @@ public class Task {
         return String.format("%s / %s\n", this.isDone ? "1" : "0", this.description);
     }
 
+    /**
+     * Returns whether the task description contains a keyword.
+     *
+     * @param keyword Keyword to be checked.
+     * @return whether the task description contains the keyword.
+     */
     public boolean containsKeyword(String keyword) {
         return this.description.contains(keyword);
     }

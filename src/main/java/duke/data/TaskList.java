@@ -75,6 +75,12 @@ public class TaskList {
         return this.tasks.indexOf(task);
     }
 
+    /**
+     * Filters the task list and returns a new list with tasks containing the keyword.
+     *
+     * @param keyword The keyword to be checked.
+     * @return A new list with tasks containing the keyword.
+     */
     public ArrayList<Task> filter(String keyword) {
         int len = this.getNumOfTasks();
         ArrayList<Task> filteredTasks = new ArrayList<>();
