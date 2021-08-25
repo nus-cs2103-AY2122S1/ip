@@ -23,4 +23,9 @@ public class AddCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return toAddTask.toString();
+    }
 }
