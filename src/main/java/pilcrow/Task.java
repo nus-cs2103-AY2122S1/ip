@@ -89,23 +89,22 @@ public class Task {
         private Deadline(String taskName, Boolean isDone) {
             super(taskName, isDone);
 
+            // Retrieve Deadline name as String
             taskName.trim();
             if (taskName.length() == 0) {
                 throw new InvalidInputException("Must enter valid description.");
             }
-
             if (!taskName.contains("/")) {
                 throw new InvalidInputException("Must indicate deadline with '/' symbol.");
             }
-
             String deadlineName = taskName.substring(0, taskName.indexOf("/")).trim();
             if (deadlineName.length() == 0 ) {
                 throw new InvalidInputException("Must enter valid deadline name.");
             }
-
-            String deadline = taskName.substring(taskName.indexOf("/") + 1).trim();
-
             this.taskName = deadlineName;
+
+            // Retrieve Deadline deadline as LocalDate
+            String deadline = taskName.substring(taskName.indexOf("/") + 1).trim();
             try {
                 this.deadline = LocalDate.parse(deadline);
             } catch (DateTimeParseException exception) {
@@ -138,23 +137,22 @@ public class Task {
         private Event(String taskName, Boolean isDone) {
             super(taskName, isDone);
 
+            // Retrieve Event name as String
             taskName.trim();
             if (taskName.length() == 0) {
                 throw new InvalidInputException("Must enter valid description.");
             }
-
             if (!taskName.contains("/")) {
                 throw new InvalidInputException("Must indicate duration with '/' symbol.");
             }
-
             String eventName = taskName.substring(0, taskName.indexOf("/")).trim();
             if (eventName.length() == 0 ) {
                 throw new InvalidInputException("Must enter valid event name.");
             }
-
-            String duration = taskName.substring(taskName.indexOf("/") + 1).trim();
-
             this.taskName = eventName;
+
+            // Retrieve Event duration as String
+            String duration = taskName.substring(taskName.indexOf("/") + 1).trim();
             this.duration = duration;
         }
 

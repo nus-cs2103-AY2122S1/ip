@@ -8,6 +8,7 @@ public class Parser {
 
     public Parser(String fullCommand) {
         this.fullCommand = fullCommand.trim();
+
         if (!this.fullCommand.contains(" ")) {
             this.commandWord = fullCommand.trim();
             this.restOfCommand = "";
