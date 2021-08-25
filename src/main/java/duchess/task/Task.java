@@ -52,6 +52,21 @@ public abstract class Task {
     public abstract LocalDateTime getDateTime();
 
     /**
+     * Checks if a task contains a certain keyword.
+     * @param keyword The keyword to check in a task.
+     * @return Whether the task contains part of or all of the keyword.
+     */
+    public boolean contains(String keyword) {
+        return name.contains(keyword);
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public abstract LocalDateTime getDateTime();
+
+    /**
      * Returns a string representation of the task, with an [X] marked for done and [ ] as undone.
      * @return the string representation of the task.
      */
