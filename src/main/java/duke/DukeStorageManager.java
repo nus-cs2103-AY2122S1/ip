@@ -224,7 +224,97 @@ public class DukeStorageManager {
      * @param listOfTasks The ArrayList containing the tasks to be saved.
      */
     public void saveCurrentTasks(ArrayList<BaseTask> listOfTasks) {
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
+
+            // Create new XML File
+            Document newXmlDoc = documentBuilder.newDocument();
+
+            // Overwrite the current XML Save file in the Storage Manager
+            this.xmlSaveFileDoc = newXmlDoc;
+
+            // Create saveFile root tag
+            Element saveFileRoot = newXmlDoc.createElement("saveFile");
+            newXmlDoc.appendChild(saveFileRoot);
+
+            // Create taskList container
+            Element taskListElement = newXmlDoc.createElement("taskList");
+            saveFileRoot.appendChild(taskListElement);
+
+            int counter = 0;
+            for (BaseTask currTask : listOfTasks) {
+                Element convertedTaskAsset = this.createTaskAssetElement(currTask);
+                convertedTaskAsset.setAttribute("id", Integer.toString(counter));
+
+                taskListElement.appendChild(convertedTaskAsset);
+
+                counter++;
+            }
+
+
+            // Now write the file to local storage
+
+
+
+        } catch (ParserConfigurationException e) {
+            Duke.dukeLaterSay("Document builder cannot be created. (List not saved)");
+        } finally {
+
+        }
 
     }
+
+    /**
+     * Converts a given Task into a format storable in the XML save file.
+     *
+     * @param currTask the respective task in question.
+     * @return the task converted into an XML Element.
+     */
+    public Element createTaskAssetElement(BaseTask currTask) {
+        BaseTask.TaskType currTaskType = currTask.getTaskType();
+        Element createdTaskElement;
+
+        String taskTypeStr = currTask.getTaskTypeStringHeader().substring(1, 2);
+        String taskName = currTask.getTaskName();
+        boolean isTaskDone = currTask.isTaskDone();
+
+        // Create General Task Element
+        createdTaskElement = this.xmlSaveFileDoc.createElement("taskAsset");
+
+        // Create General Task Data Elements
+        Element taskTypeElement = this.xmlSaveFileDoc.createElement("taskType");
+        Element taskDataElement = this.xmlSaveFileDoc.createElement("taskData");
+        Element taskCompletedElement = this.xmlSaveFileDoc.createElement("taskCompleted");
+
+        taskTypeElement.setTextContent(taskTypeStr);
+        taskDataElement.setTextContent(taskName);
+        taskCompletedElement.setTextContent(Boolean.toString(isTaskDone));
+
+        createdTaskElement.appendChild(taskTypeElement);
+        createdTaskElement.appendChild(taskDataElement);
+        createdTaskElement.appendChild(taskCompletedElement);
+
+
+        switch (currTaskType) {
+        case TODO:
+            // Do nothing extra
+            break;
+        case DEADLINE:
+        case EVENT:
+            // Extra Task Data Processing
+            Element taskExtraInfoElement = this.xmlSaveFileDoc.createElement("taskExtraInfo");
+
+            taskExtraInfoElement.setTextContent(currTask.getTaskExtraInfo());
+            createdTaskElement.appendChild(taskExtraInfoElement);
+            break;
+        case NONE:
+            Duke.dukeLaterSay("Unidentified task type expected, cannot save this task: " + currTask.toString());
+            createdTaskElement = null;
+        }
+
+        return createdTaskElement;
+    }
+
 
 }
