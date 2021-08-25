@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class AddDeadlineCommand extends Command {
 
     // Regex pattern for finding deadline commands
-    private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline (.*) /by (\\d{4}-\\d{2}-\\d{2})$");
+    private static final Pattern PATTERN_DEADLINE = Pattern.compile("^deadline (.*) /by (\\d{4}-\\d{2}-\\d{2})$");
 
     public AddDeadlineCommand(String input) {
         super(input);
@@ -23,7 +23,7 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public boolean execute(TaskList tasks, Ui ui) {
-        Matcher matcher = DEADLINE_PATTERN.matcher(input);
+        Matcher matcher = PATTERN_DEADLINE.matcher(input);
         if (!matcher.find()) {
             throw new DukeException("Give me a deadline like this: deadline <task> /by YYYY-MM-DD");
         }

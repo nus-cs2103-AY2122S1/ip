@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class AddTodoCommand extends Command {
 
     // Regex pattern for finding todo commands
-    private static final Pattern TODO_PATTERN = Pattern.compile("^todo (.*)$");
+    private static final Pattern PATTERN_TODO = Pattern.compile("^todo (.*)$");
 
     public AddTodoCommand(String input) {
         super(input);
@@ -23,7 +23,7 @@ public class AddTodoCommand extends Command {
 
     @Override
     public boolean execute(TaskList tasks, Ui ui) {
-        Matcher matcher = TODO_PATTERN.matcher(input);
+        Matcher matcher = PATTERN_TODO.matcher(input);
         if (!matcher.find()) {
             throw new DukeException("Give me a description of the todo to add it as a task");
         }
