@@ -30,6 +30,6 @@ public class ToDo extends Task {
 
     public String showWhen() { return ""; }
 
-    public String showTaskOnly() { return ""; }
+    public String showTaskOnly() { return taskName; }
 
 }

@@ -112,4 +112,20 @@ public class TaskList {
         return refreshList;
     }
 
+    public void searchList(String keyword) {
+        System.out.println("    ____________________________________________________________");
+        String searchList = "     " + "Here are the matching tasks in your list:";
+        for (int k = 0; k < list.size(); k++) {
+            if (list.get(k).showTaskOnly().contains(keyword)) {
+                String searchItem = "\n" + "     " + (k + 1) + "." + "["
+                        + list.get(k).showType() + "]"
+                        + list.get(k).checkDone() + " "
+                        + list.get(k).showTask();
+                searchList += searchItem;
+            }
+        }
+        System.out.println(searchList);
+        System.out.println("    ____________________________________________________________");
+    }
+
 }

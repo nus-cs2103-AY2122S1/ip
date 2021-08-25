@@ -129,7 +129,7 @@ public class Parser {
             case "delete":
                 try {
                     int deleteIndex = Integer.parseInt(instruction[1]);
-                    taskList.deleteTask(deleteIndex);
+                    this.taskList.deleteTask(deleteIndex);
                     this.storage.refresh(this.taskList);
                 } catch (IndexOutOfBoundsException | NumberFormatException | IOException i) {
                     System.out.println("    ____________________________________________________________\n"
@@ -140,7 +140,7 @@ public class Parser {
             case "done":
                 try {
                     int doneIndex = Integer.parseInt(instruction[1]);
-                    taskList.markDone(doneIndex);
+                    this.taskList.markDone(doneIndex);
                     this.storage.refresh(this.taskList);
                 } catch (IndexOutOfBoundsException | NumberFormatException | IOException i) {
                     System.out.println("    ____________________________________________________________\n"
@@ -149,7 +149,11 @@ public class Parser {
                 }
                 break;
             case "list":
-                taskList.showList();
+                this.taskList.showList();
+                break;
+            case "find":
+                String keyword = instruction[1];
+                this.taskList.searchList(keyword);
                 break;
             default:
                 try {
