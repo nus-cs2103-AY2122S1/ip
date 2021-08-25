@@ -1,3 +1,6 @@
+package duke.task;
+
+import duke.DateTime;
 import java.time.LocalDateTime;
 
 public class Deadline extends Task {
@@ -11,6 +14,10 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime time, boolean isCompleted) {
         super(description, isCompleted);
         this.time = time;
+    }
+
+    public LocalDateTime getTime() {
+        return this.time;
     }
 
     public static Deadline fromInput(String input) throws Exception {

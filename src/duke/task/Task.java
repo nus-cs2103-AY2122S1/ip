@@ -1,4 +1,6 @@
-abstract class Task {
+package duke.task;
+
+public abstract class Task {
     protected String description;
     protected boolean isCompleted;
 
@@ -10,6 +12,14 @@ abstract class Task {
     public Task(String description, boolean isCompleted) {
         this.description = description;
         this.isCompleted = isCompleted;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean getIsCompleted() {
+        return this.isCompleted;
     }
 
     public void markCompleted() {

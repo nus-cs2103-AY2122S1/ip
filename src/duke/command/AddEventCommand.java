@@ -1,7 +1,15 @@
-public class AddDeadlineCommand extends Command {
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.task.Task;
+import duke.task.Event;
+
+public class AddEventCommand extends Command {
     private String arguments;
 
-    public AddDeadlineCommand(String arguments) throws Exception {
+    public AddEventCommand(String arguments) throws Exception {
         if (arguments.length() == 0) {
             throw new Exception("Command `deadline` requires arguments");
         }
@@ -9,11 +17,11 @@ public class AddDeadlineCommand extends Command {
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
-        Task deadline = Deadline.fromInput(arguments);
-        taskList.addTask(deadline);
+        Task event = Event.fromInput(arguments);
+        taskList.addTask(event);
 
         storage.saveTasks(taskList);
-        ui.printMessage("Added the following task:\n    " + deadline.toString() + "\n" + "You now have "
+        ui.printMessage("Added the following task:\n    " + event.toString() + "\n" + "You now have "
                 + taskList.size() + " tasks in your list.");
     }
 

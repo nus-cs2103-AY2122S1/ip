@@ -1,3 +1,6 @@
+package duke;
+
+import duke.task.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -76,25 +79,25 @@ public class Storage {
     private void writeTask(FileWriter writer, Task task) throws IOException {
         if (task instanceof Todo) {
             writer.write("T | ");
-            writer.write(task.isCompleted ? "1" : "0");
+            writer.write(task.getIsCompleted() ? "1" : "0");
             writer.write(" | ");
-            writer.write(escapeString(task.description));
+            writer.write(escapeString(task.getDescription()));
             writer.write(System.lineSeparator());
         } else if (task instanceof Event) {
             writer.write("E | ");
-            writer.write(task.isCompleted ? "1" : "0");
+            writer.write(task.getIsCompleted() ? "1" : "0");
             writer.write(" | ");
-            writer.write(escapeString(task.description));
+            writer.write(escapeString(task.getDescription()));
             writer.write(" | ");
-            writer.write(DateTime.stringify(((Event) task).time));
+            writer.write(DateTime.stringify(((Event) task).getTime()));
             writer.write(System.lineSeparator());
         } else if (task instanceof Deadline) {
             writer.write("D | ");
-            writer.write(task.isCompleted ? "1" : "0");
+            writer.write(task.getIsCompleted() ? "1" : "0");
             writer.write(" | ");
-            writer.write(escapeString(task.description));
+            writer.write(escapeString(task.getDescription()));
             writer.write(" | ");
-            writer.write(DateTime.stringify(((Deadline) task).time));
+            writer.write(DateTime.stringify(((Deadline) task).getTime()));
             writer.write(System.lineSeparator());
         }
     }

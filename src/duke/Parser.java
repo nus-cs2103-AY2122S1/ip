@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.*;
+
 public class Parser {
     public enum CommandType {
         BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT,
