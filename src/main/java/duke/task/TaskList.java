@@ -76,4 +76,14 @@ public class TaskList {
         }
         return numList;
     }
+
+    public TaskList filter(String word) {
+        ArrayList<Task> filterList = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.toString().contains(word)) {
+                filterList.add(t);
+            }
+        }
+        return new TaskList(filterList);
+    }
 }

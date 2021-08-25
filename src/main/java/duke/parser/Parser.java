@@ -18,6 +18,7 @@ public class Parser {
     static String doneMsg = "Nice! I've marked this duke.task as done:";
     static String todoMsg = "Got it. I've added this duke.task:";
     static String deleteMsg = "Noted. I've removed this duke.task:";
+    static String findMsg = "Here are the matching tasks in your list:";
 
     /**
      * A method to convert the user's input into a command.
@@ -52,6 +53,11 @@ public class Parser {
             List<String> enumerate = taskList.enumerate();
             enumerate.forEach(System.out::println);
             System.out.println("There are currently " + taskList.getSize() + " tasks in your list.");
+            break;
+        case "find":
+            System.out.println(findMsg);
+            enumerate = taskList.filter(param).enumerate();
+            enumerate.forEach(System.out::println);
             break;
         case "deadline":
             System.out.println(todoMsg);
