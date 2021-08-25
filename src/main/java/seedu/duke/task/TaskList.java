@@ -94,8 +94,7 @@ public class TaskList {
      */
     public String status() {
         String t = this.length != 1 ? "tasks" : "seedu/duke/task";
-        return
-                String.format("Now you have %d %s in the list.",
+        return String.format("Now you have %d %s in the list.",
                 this.length, t);
     }
 

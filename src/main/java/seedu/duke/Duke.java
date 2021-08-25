@@ -95,9 +95,12 @@ class Duke {
                 if (indexOfDate < 0) {
                     throw new DukeException("No date specified for task.");
                 }
+
                 String description = userInput.substring(startOfDescription, indexOfDate);
                 list_of_words[1] = description;
-                LocalDate date = manager.parseDateTime(userInput.substring(indexOfDate + command.length()));
+                LocalDate date = manager.parseDateTime(
+                        userInput.substring(indexOfDate + command.length())
+                );
                 this.date = date;
             } catch (DateTimeParseException | DukeException e) {
                 System.out.println(e.getMessage());
@@ -191,10 +194,9 @@ class Duke {
     /**
      * Dividing line for formatting Duke's replies.
      */
-    private void divider() {
+    private void divide() {
         StringBuilder builder = new StringBuilder(100);
         Stream.generate(() -> '-').limit(60).forEach(e -> builder.append(e));
-
         String line = String.format("%4s+%s+\n", " ", builder.toString());
         System.out.println(line);
     }
@@ -203,18 +205,18 @@ class Duke {
      * Method that prints Duke's greetings.
      */
     private void greet() {
-        divider();
+        divide();
         ui.outputMessage(Commands.GREET);
-        divider();
+        divide();
     }
 
     /**
      * Method that prints Duke's exit message.
      */
     private void exit() {
-        divider();
+        divide();
         ui.outputMessage(Commands.EXIT);
-        divider();
+        divide();
         System.exit(0);
     }
 
@@ -222,10 +224,10 @@ class Duke {
      * Method that prints the current tasks in the task list.
      */
     private void returnTaskList() {
-        divider();
+        divide();
         ui.outputMessage(Commands.LIST);
         System.out.println(taskList);
-        divider();
+        divide();
     }
 
     /**
@@ -237,6 +239,7 @@ class Duke {
         String customPattern ="dd/MM/yyyy";
         DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(customPattern);
         DateTimeManager dateTimeManager = new DateTimeManager(customFormatter);
+
         try {
             LocalDate date = dateTimeManager.parseDateTime(dateTime);
             System.out.println(dateTasks.getOrDefault(date, new ArrayList<>()));
@@ -248,13 +251,13 @@ class Duke {
 
     private void updateTasks(Task task) {
         this.taskList = this.taskList.add(task);
-        divider();
+        divide();
         ui.outputMessage(Commands.ADD);
         System.out.println(
                 String.format("%5s%s\n%4s%s", " ", task,
                         " ", this.taskList.status())
         );
-        divider();
+        divide();
         storage.addTaskToFile(task);
     }
 
@@ -266,11 +269,13 @@ class Duke {
      */
     private void markTaskAsCompleted(int index) {
         try {
+            divide();
+
             boolean isValid = this.taskList.isValidTaskIndex(index);
-            divider();
             if (isValid) {
                 String toUpdate = this.taskList.getTask(index).toString();
                 Task task = this.taskList.markTaskAsCompleted(index);
+
                 ui.outputMessage(Commands.DONE);
                 System.out.println(
                         String.format("%6s%s\n%4s%s", " ", task,
@@ -280,7 +285,7 @@ class Duke {
             } else {
                 throw new DukeException("There is no such task.");
             }
-            divider();
+            divide();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -293,11 +298,13 @@ class Duke {
      */
     private void deleteTask(int index) {
         try {
+            divide();
+
             boolean isValid = taskList.isValidTaskIndex(index);
-            divider();
             if (isValid) {
                 Task task = taskList.getTask(index);
                 this.taskList = this.taskList.deleteTask(index);
+
                 ui.outputMessage(Commands.DELETE);
                 System.out.println(
                         String.format("%6s%s\n%4s%s", " ", task,
@@ -307,7 +314,7 @@ class Duke {
             } else {
                 throw new DukeException("There is no such task.");
             }
-            divider();
+            divide();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -347,6 +354,7 @@ class Duke {
     public static void main(String[] args) {
         String directoryPath = "./data";
         String filePath = "./data/duke.text";
+        
         File directory = new File(directoryPath);
         // Check folder exists
         if (!directory.exists()) {

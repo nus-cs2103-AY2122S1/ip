@@ -33,16 +33,20 @@ class Storage {
             File file = new File(filePath);
             // Create a new file if it does not already exist
             file.createNewFile();
+
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
+
             String task;
             while((task = reader.readLine()) != null) {
                 char type = task.charAt(1);
                 boolean isCompleted = task.charAt(4) == 'X';
 
                 DateTimeManager manager = new DateTimeManager(DateTimeFormatter.ISO_DATE);
+
                 String description = parseDescription(task);
                 Task newTask;
                 LocalDate time;
+
                 switch (type) {
                 case 'T':
                     newTask = new ToDo(description);
@@ -85,6 +89,7 @@ class Storage {
         if (timeIndex < 0) {
             throw new DukeException("Invalid task");
         }
+
         String timeDescription = task.substring(timeIndex + command.length(),
                 task.indexOf(')'));
         LocalDate time = LocalDate.parse(timeDescription);
@@ -96,6 +101,7 @@ class Storage {
         if (startOfDescription < 0) {
             throw new DukeException("Description cannot be empty.");
         }
+
         String description = task.substring(startOfDescription);
         int timeIndex = description.indexOf("  (");
         if (timeIndex >= 0) {
@@ -127,6 +133,7 @@ class Storage {
     public void markTaskAsCompleted(String task, String toUpdate) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
+
             String line;
             String newContent = "";
             while((line = reader.readLine()) != null) {
