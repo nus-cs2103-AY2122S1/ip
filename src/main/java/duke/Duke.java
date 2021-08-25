@@ -29,7 +29,7 @@ public class Duke {
     }
 
     /**
-     * Starts the duke.ToDo app.
+     * Starts the ToDo app.
      *
      * @param args duke.Command line arguments
      */
@@ -58,6 +58,13 @@ public class Duke {
 
     }
 
+    /**
+     * Execute the given Command with the arguments.
+     *
+     * @param c Command to be executed
+     * @param arguments Arguments of the Command
+     * @throws DukeException
+     */
     private void execute(Command c, String[] arguments) throws DukeException {
         switch (c) {
         case TODO:

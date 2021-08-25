@@ -20,7 +20,7 @@ public abstract class Task {
     /**
      * Constructor.
      *
-     * @param description Description of the task
+     * @param description Description of the task.
      * @param isCompleted If the task is completed.
      */
     public Task(String description, Boolean isCompleted) {
