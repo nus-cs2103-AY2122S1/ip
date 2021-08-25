@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public class DukeTest {
     @Test
-    public void DeadlineTest() {
+    public void Deadline_createDeadline_deadlineStringReturned() {
         Deadline deadline = new Deadline(
                 "Finish assignment",
                 LocalDate.parse("2020-12-12")
@@ -23,7 +23,7 @@ public class DukeTest {
     }
 
     @Test
-    public void TodoTest() {
+    public void Todo_completeTodo_TodoStringReturned() {
         Todo todo = new Todo(
                 "Eat my potatoes"
         );
@@ -32,7 +32,7 @@ public class DukeTest {
     }
 
     @Test
-    public void EventTest() {
+    public void Event_completeEvent_EventStringReturned() {
         Event event = new Event(
                 "Meeting friends",
                 "NUS"

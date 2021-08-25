@@ -6,15 +6,15 @@
  */
 package duke;
 
-import duke.exceptions.*;
+import duke.command.Command;
+import duke.exceptions.CommandDoesNotExist;
+import duke.exceptions.DukeExceptions;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.tasks.*;
 import duke.ui.Ui;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
@@ -22,11 +22,13 @@ public class Duke {
     private final Storage storage;
     private final TaskList taskList;
     private final Ui ui;
+    private final Command command;
 
     public Duke(String filePath) throws IOException {
-        ui = new Ui(); // has the self intro
-        storage = new Storage(filePath);
-        taskList = new TaskList(storage.load());
+        this.ui = new Ui(); // Performs the self introduction upon successful initialization.
+        this.storage = new Storage(filePath);
+        this.taskList = new TaskList(storage.load());
+        this.command = new Command(storage, ui);
     }
 
     /**
@@ -34,100 +36,58 @@ public class Duke {
      */
     public void run() throws DukeExceptions, IOException {
         ui.showWelcome();
-        String command; // this is the container for the full command received from the user
-        String cmd; // this is the container for the first word of the command
+        String user_command; // this is the container for the full command received from the user
+        String cmd; // this is the container for the first word of the command received from the user
 
         ///// This listens for the commands and interprets them
         // This part listens for user input and repeats until the command "bye" is identified
         Scanner sc = new Scanner(System.in);
         while (true) {
-            command = sc.nextLine();
-            Parser parser = new Parser(command);
+            user_command = sc.nextLine();
+            Parser parser = new Parser(user_command);
             cmd = parser.getFirstWord();
 
             // 'bye' : Ends the program
-            if (command.equals("bye") || cmd.equals("bye")) {
-                ui.showBye();
+            if (user_command.equals("bye") || cmd.equals("bye")) {
+                command.bye();
                 sc.close();
                 break;
 
-
             // 'list' : Retrieves information from the hard drive and prints it
             } else if (cmd.equals("list")) {
-                ui.showList(taskList);
-                ui.showLine();
-
+                command.list(taskList);
 
             // 'done [int]' : marks the corresponding number in the list as done
             } else if (cmd.equals("done")) {
+                command.done(user_command, taskList);
 
-                // Throws exception if there is error accessing the integer following "done"
-                // Marks the task as done and prints statements as proof
-                int ref = parser.getSecondInteger(taskList.size()) - 1;
-                Task task = taskList.get(ref);
-
-                if (task.getStatusIcon().equals("X")) {
-                    System.out.println("You've already done this!");
-                } else {
-                    task.markAsDone();
-                    storage.updateDone(ref, task.getStatusString());
-                    ui.showCompletion(taskList.get(ref).toString());
-                }
-                ui.showLine();
-
-
-                // 'delete [int]' : delete the corresponding number
+            // 'delete [int]' : delete the corresponding number
             } else if (cmd.equals("delete")) {
-                int ref = parser.getSecondInteger(taskList.size()) - 1;
-                ui.showRemoval(taskList.get(ref).toString(), taskList.size() - 1);
-                taskList.remove(ref);
-                storage.removeTask(ref);
-                ui.showLine();
+                command.delete(user_command, taskList);
 
             } else if (cmd.equals("find")) {
-                String wordSearch = parser.getSecondWord();
-                ui.showSearch(taskList.search(wordSearch));
-                ui.showLine();
+                command.find(user_command, taskList);
 
 
-                // Else, an item has been added to the chat bot
-                // Commands are either todo, deadline or event
+            // Else, an item has been added to the chat bot
+            // Commands are either todo, deadline or event
             } else {
-
                 switch (cmd) {
-                case "todo" : {
-                    String taskInfo = parser.getTodoInfo();
-                    taskList.add(new Todo(taskInfo));
-                    storage.addTask(taskList.getLastStatusString());
-                    ui.showAddition(cmd, command);
-                    ui.showLine();
+                case "todo" :
+                    command.addTodo(user_command, cmd, taskList);
                     break;
 
-                }
-                case "deadline" : {
-
-                    String description = parser.getDeadlineInfo();
-                    LocalDate date = parser.getDeadlineDate();
-
-                    taskList.add(new Deadline(description, date));
-                    storage.addTask(taskList.getLastStatusString());
-                    ui.showAddition(cmd, command);
-                    ui.showLine();
+                case "deadline" :
+                    command.addDeadline(user_command, cmd, taskList);
                     break;
 
-                }
-                case "event" : {
-
-                    String description = parser.getEventInfo();
-                    String eventDetails = parser.getEventLocation();
-                    taskList.add(new Event(description, eventDetails));
-                    storage.addTask(taskList.getLastStatusString());
-                    ui.showAddition(cmd, command);
-                    ui.showLine();
+                case "event" :
+                    command.addEvent(user_command, cmd, taskList);
                     break;
 
-                }
-                default : throw new CommandDoesNotExist(command);
+                default :
+                    throw new CommandDoesNotExist(user_command);
+                    // Fallthrough
                 }
             }
         }

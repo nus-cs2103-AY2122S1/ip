@@ -1,5 +1,6 @@
 /**
- * This class handles interaction with the user: interpreting user command and logs
+ * This class handles interaction with the user.
+ * Interprets user command and creates logs
  *
  * @author Megan Wee Rui En
  * @version CS2103T AY21/22 Semester 1
@@ -13,8 +14,8 @@ import java.time.LocalDate;
 
 public class Parser {
 
-    String command;
-    String[] commandWords;
+    private final String command;
+    private final String[] commandWords;
 
     public Parser(String command) {
         this.command = command;
@@ -22,10 +23,9 @@ public class Parser {
     }
 
     /**
-     * This function returns the command (the first word) given.
+     * Returns the command (the first word) given.
      *
-     * @return The first word (aka the command) from the user
-     * @throws EmptyDescriptionException
+     * @return Command (which is the first word) from the user
      */
     public String getFirstWord() {
         return commandWords[0].toLowerCase();
@@ -39,57 +39,63 @@ public class Parser {
     }
 
     /**
-     * This function checks if the second integer is viable for the done and delete commands
-     * and returns it.
+     * Checks if the second integer is viable for the done and delete commands and returns it.
      *
-     * @param size this is the length of the taskList
+     * @param size The length of the taskList
      * @return The second word (aka the number) from the user
      * @throws NotDoneRightException
      */
     public int getSecondInteger(int size) throws NotDoneRightException {
+
         if (command.toLowerCase().split(" ").length == 1
                 || Integer.parseInt(command.split(" ")[1]) < 1
                 || Integer.parseInt(command.split(" ")[1]) > size) {
             throw new NotDoneRightException("1", String.valueOf(size));
+
         } else {
             return Integer.parseInt(commandWords[1]);
         }
     }
 
     /**
-     * This function retrieves the information of a Todo task.
+     * Returns the information of a Todo task.
      *
      * @return The description of a Todo task
      * @throws EmptyDescriptionException
      */
     public String getTodoInfo() throws EmptyDescriptionException {
+
         if (commandWords.length == 1) {
             throw new EmptyDescriptionException("todo");
         }
+
        return this.commandWords[1];
     }
 
     /**
-     * This function retrieves information about a Deadline task
+     * Returns information about a Deadline task.
      *
      * @return The description of a Deadline task
      * @throws EmptyDescriptionException
      */
     public String getDeadlineInfo() throws EmptyDescriptionException {
+
         if (commandWords.length == 1 || this.command.split(" ", 2).length == 1) {
             throw new EmptyDescriptionException("deadline");
         }
+
         String allDetails = this.command.split(" ", 2)[1];
         return allDetails.split("/by", 2)[0];
     }
 
     /**
-     * This function retrieves the date of a Deadline task.
+     * Returns the date of a Deadline task.
      *
-     * @return The date of a todo task
+     * @return The date of a Deadline task
      * @throws EmptyDescriptionException
      */
     public LocalDate getDeadlineDate() throws EmptyDescriptionException {
+
         if (commandWords.length == 1 || this.command.split(" ", 2).length == 1) {
             throw new EmptyDescriptionException("deadline");
         }
@@ -100,21 +106,23 @@ public class Parser {
     }
 
     /**
-     * This function retrieves the information of an Event task.
+     * Returns the information of an Event task.
      *
      * @return The description of an Event task
      * @throws EmptyDescriptionException
      */
     public String getEventInfo() throws EmptyDescriptionException {
+
         if (commandWords.length == 1 || this.command.split(" ", 2).length == 1) {
             throw new EmptyDescriptionException("event");
         }
+
         String allDetails = this.command.split(" ", 2)[1];
         return allDetails.split("/at", 2)[0];
     }
 
     /**
-     * This function retrieves the location/additional information of an Event task.
+     * Returns the location/additional information of an Event task.
      *
      * @return The location/context of an Event task
      * @throws EmptyDescriptionException
@@ -123,6 +131,7 @@ public class Parser {
         if (commandWords.length == 1 || this.command.split(" ", 2).length == 1) {
             throw new EmptyDescriptionException("event");
         }
+
         String allDetails = this.command.split(" ", 2)[1];
         return allDetails.split("/at", 2)[1];
     }

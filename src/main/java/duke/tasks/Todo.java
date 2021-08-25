@@ -18,7 +18,7 @@ public class Todo extends Task {
     }
 
     /**
-     * This function returns the string of the task to be represented in the list.
+     * Returns the string of the task to be represented in the list.
      *
      * @returns the string of the task to be represented in the list
      */
@@ -28,10 +28,12 @@ public class Todo extends Task {
     }
 
     /**
-     * This function returns the string of the task to be represented in the text file.
+     * Returns the string of the task to be represented in the text file.
      *
      * @returns the string of the task to be represented in the text file
      */
     @Override
-    public String getStatusString() { return "T@" + (isDone ? 1 : 0) + "@" + this.description; }
+    public String getStatusString() {
+        return "T@" + (isDone ? 1 : 0) + "@" + this.description;
+    }
 }

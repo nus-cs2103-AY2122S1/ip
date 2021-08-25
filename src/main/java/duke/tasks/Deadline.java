@@ -10,7 +10,7 @@ package duke.tasks;
 import java.time.LocalDate;
 
 public class Deadline extends Task {
-    protected final LocalDate dateBy;
+    private final LocalDate dateBy;
 
     public Deadline(String description, LocalDate dateBy) {
         super(description);
@@ -25,22 +25,23 @@ public class Deadline extends Task {
     }
 
     /**
-     * This function returns the string of the task to be represented in the list.
+     * Returns the string of the task to be represented in the list.
      *
      * @returns the string of the task to be represented in the list
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + description + " (by: " +
-                dateBy.getDayOfMonth() + " " + dateBy.getMonth().toString() + " " + dateBy.getYear() + ")";
+        return "[D]" + super.toString() + description + " (by: " + dateBy.getDayOfMonth()
+                + " " + dateBy.getMonth().toString() + " " + dateBy.getYear() + ")";
     }
 
     /**
-     * This function returns the string of the task to be represented in the text file.
+     * Returns the string of the task to be represented in the text file.
      *
      * @returns the string of the task to be represented in the text file
      */
     @Override
-    public String getStatusString() { return "D@" + (isDone ? 1 : 0) + "@" + this.description + "@" + this.dateBy.toString(); }
-
+    public String getStatusString() {
+        return "D@" + (isDone ? 1 : 0) + "@" + this.description + "@" + this.dateBy.toString();
+    }
 }

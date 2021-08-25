@@ -2,4 +2,4 @@ T@1@read book
 D@0@return book@2019-10-15
 E@0@project meeting@Aug 6th 2-4pm
 T@1@join sports club
-D@0@Finish 2103 Homework @2020-12-12
+D@1@Finish 2103 Homework @2020-12-12
