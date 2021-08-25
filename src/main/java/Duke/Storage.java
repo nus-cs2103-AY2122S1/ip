@@ -16,6 +16,9 @@ import java.util.Scanner;
 public class Storage {
 
     private final String filePath;
+    private static final int startOfTaskDes = 8;
+    private static final int taskTypeIndex = 0;
+    private static final int taskStatusIndex = 4;
 
     /**
      * Creates new file at filePath if the file does not exist.
@@ -42,9 +45,8 @@ public class Storage {
             Scanner s = new Scanner(initStorageFile());
             while (s.hasNext()) {
                 String line = s.nextLine();
-                char taskType = line.charAt(0);
-                char taskStatus = line.charAt(4);
-                int startOfTaskDes = 8;
+                char taskType = line.charAt(taskTypeIndex);
+                char taskStatus = line.charAt(taskStatusIndex);
                 int taskDescIdentifier  = line.indexOf('|', startOfTaskDes);
 
                 String taskDesc = line.substring(startOfTaskDes, taskDescIdentifier - 1);
