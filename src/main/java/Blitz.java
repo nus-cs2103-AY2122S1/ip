@@ -21,7 +21,7 @@ public class Blitz {
 
     public void run() {
         ui.printGreeting();
-        ui.printList(tasks);
+        ui.printList(tasks, "Here are the tasks in your list:");
         ui.printFormatted("So what can I do for you today?");
 
         Scanner scanner = new Scanner(System.in);

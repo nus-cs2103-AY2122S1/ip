@@ -17,9 +17,10 @@ public class Ui {
         printLine();
     }
 
-    public void printList(TaskList tasks) {
+    public void printList(TaskList tasks, String str) {
         int ctr = 1;
-        System.out.println("\tHere are the tasks in your list:");
+        System.out.println("\t" + str);
+        //System.out.println("\tHere are the tasks in your list:");
         if(tasks.size() == 0) {
             System.out.println("\t---No items stored yet---");
         } else {

@@ -39,7 +39,7 @@ public class Parser {
         boolean isTask = firstKeyword.equals("todo") || firstKeyword.equals("event")
                 || firstKeyword.equals("deadline");
         boolean isFeature = firstKeyword.equals("list") || firstKeyword.equals("done")
-                || firstKeyword.equals("delete");
+                || firstKeyword.equals("delete") || firstKeyword.equals("find");
 
         //suppose it's a valid keyword
         if(isTask || isFeature) {
@@ -57,7 +57,7 @@ public class Parser {
                         throw new BlitzException("No items added to list yet!");
                     }
                     ui.printLine();
-                    ui.printList(tasks);
+                    ui.printList(tasks, "Here are the tasks in your list:");
                     ui.printLine();
                     break;
                 case "done":
@@ -81,6 +81,22 @@ public class Parser {
                         ui.printFormatted(ex.toString());
                     }
                     break;
+                default:
+                    String findKeyword = keywords[1];
+
+                    if(tasks.size() == 0) {
+                        throw new BlitzException("Cannot perform find on empty list!!");
+                    }
+
+                    TaskList matchingList = tasks.findMatchingTasks(findKeyword);
+
+                    if(matchingList.size() == 0) {
+                        throw new BlitzException("No matches found!");
+                    }
+
+                    ui.printLine();
+                    ui.printList(matchingList, "Here are the matching tasks in your list:");
+                    ui.printLine();
                 }
             } else {
                 Task current = new Task("");
