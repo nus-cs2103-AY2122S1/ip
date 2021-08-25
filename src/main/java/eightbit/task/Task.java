@@ -1,3 +1,5 @@
+package eightbit.task;
+
 /**
  * Represents a task that can be completed.
  */
@@ -15,12 +17,20 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    private String getStatusIcon() {
+        return (isDone ? "X" : " "); // mark done task with X
     }
 
     /**

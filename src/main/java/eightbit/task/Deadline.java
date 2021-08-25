@@ -1,3 +1,5 @@
+package eightbit.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,6 +18,10 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime by, boolean isDone) {
         super(description, isDone);
         this.by = by;
+    }
+
+    public LocalDateTime getBy() {
+        return this.by;
     }
 
     /**

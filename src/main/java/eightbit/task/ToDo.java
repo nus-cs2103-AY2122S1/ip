@@ -1,3 +1,5 @@
+package eightbit.task;
+
 /**
  * Represents a todo item.
  */

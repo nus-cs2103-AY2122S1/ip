@@ -1,3 +1,5 @@
+package eightbit;
+
 /**
  * Exception that is used to handle incorrect inputs from user.
  */

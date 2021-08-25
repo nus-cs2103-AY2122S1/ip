@@ -1,3 +1,10 @@
+package eightbit.command;
+
+import eightbit.EightBitException;
+import eightbit.util.Storage;
+import eightbit.util.TaskList;
+import eightbit.util.Ui;
+
 public abstract class Command {
     protected boolean isExit = false;
 

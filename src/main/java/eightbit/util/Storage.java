@@ -1,3 +1,10 @@
+package eightbit.util;
+
+import eightbit.task.Deadline;
+import eightbit.task.Event;
+import eightbit.task.Task;
+import eightbit.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -18,16 +25,16 @@ public class Storage {
     }
 
     private String parseTaskToFileFormat(Task task) {
-        String isDone = task.isDone ? "1" : "0";
+        String isDone = task.isDone() ? "1" : "0";
         if (task instanceof ToDo) {
             ToDo t = (ToDo) task;
-            return "T | " + isDone + " | " + t.description;
+            return "T | " + isDone + " | " + t.getDescription();
         } else if (task instanceof Deadline) {
             Deadline d = (Deadline) task;
-            return "D | " + isDone + " | " + d.description + " | " + d.by;
+            return "D | " + isDone + " | " + d.getDescription() + " | " + d.getBy();
         } else if (task instanceof Event) {
             Event e = (Event) task;
-            return "E | " + isDone + " | " + e.description + " | " + e.at;
+            return "E | " + isDone + " | " + e.getDescription() + " | " + e.getAt();
         } else {
             return "";
         }

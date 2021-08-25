@@ -1,8 +1,15 @@
-public class DeleteCommand extends Command {
+package eightbit.command;
+
+import eightbit.EightBitException;
+import eightbit.util.Storage;
+import eightbit.util.TaskList;
+import eightbit.util.Ui;
+
+public class DoneCommand extends Command {
 
     private final int index;
 
-    public DeleteCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
 
@@ -12,9 +19,8 @@ public class DeleteCommand extends Command {
             throw new EightBitException("OOPS!!! Task " + (index + 1) + " does not exist.");
         }
 
-        Task deletedTask = taskList.remove(index);
+        taskList.get(index).markAsDone();
         storage.rewriteFileWithTasks(taskList);
-        ui.printWithLines("Noted. I've removed this task:\n  " + deletedTask
-                + "\nNow you have " + taskList.size() + " tasks in the list.");
+        ui.printWithLines("Great job on completing this task!\n" + taskList.get(index).toString());
     }
 }

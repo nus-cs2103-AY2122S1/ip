@@ -1,3 +1,7 @@
+package eightbit.util;
+
+import eightbit.task.Task;
+
 import java.util.List;
 
 public class TaskList {

@@ -1,3 +1,7 @@
+package eightbit.util;
+
+import eightbit.EightBitException;
+
 import java.util.Scanner;
 
 public class Ui {

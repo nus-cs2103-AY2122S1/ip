@@ -1,3 +1,10 @@
+package eightbit.command;
+
+import eightbit.task.Deadline;
+import eightbit.util.Storage;
+import eightbit.util.TaskList;
+import eightbit.util.Ui;
+
 public class DeadlineCommand extends Command {
 
     private final Deadline deadline;

@@ -1,3 +1,5 @@
+package eightbit.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,6 +18,10 @@ public class Event extends Task {
     public Event(String description, LocalDateTime at, boolean isDone) {
         super(description, isDone);
         this.at = at;
+    }
+
+    public LocalDateTime getAt() {
+        return this.at;
     }
 
     /**

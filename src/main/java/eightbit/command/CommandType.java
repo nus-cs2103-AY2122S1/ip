@@ -1,3 +1,5 @@
+package eightbit.command;
+
 /**
  * Enum containing the different commands available.
  */

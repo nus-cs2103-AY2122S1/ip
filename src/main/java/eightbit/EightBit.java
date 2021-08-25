@@ -1,3 +1,11 @@
+package eightbit;
+
+import eightbit.command.Command;
+import eightbit.util.Parser;
+import eightbit.util.Storage;
+import eightbit.util.TaskList;
+import eightbit.util.Ui;
+
 /**
  * Represents the chat bot.
  */

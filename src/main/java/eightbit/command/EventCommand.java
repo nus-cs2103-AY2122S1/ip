@@ -1,3 +1,10 @@
+package eightbit.command;
+
+import eightbit.task.Event;
+import eightbit.util.Storage;
+import eightbit.util.TaskList;
+import eightbit.util.Ui;
+
 public class EventCommand extends Command {
 
     private final Event event;
