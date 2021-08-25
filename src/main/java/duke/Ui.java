@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Ui {
     private static final String LINE = "     __________________________________________________\n"; // 5 spaces, 50 dashes
     private static final String INDENT = "     "; // 5 spaces
-    private static final Scanner scanner = new Scanner(System.in);
+    private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void printWelcome() {
         String logo = " ____        _        \n"
@@ -26,7 +26,7 @@ public class Ui {
     }
 
     public static String readInput() {
-        return scanner.nextLine();
+        return SCANNER.nextLine();
     }
 
     public static void printList(List<Task> listToPrint) {

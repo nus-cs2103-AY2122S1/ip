@@ -24,30 +24,30 @@ public class DukeTaskList {
      * Method to read data from the save file, and load them
      * into the list in a current run of Duke.
      *
-     * @param type type of task stored in save file.
+     * @param type  type of task stored in save file.
      * @param state state of task stored in save file. 0 for not done and 1 for done.
-     * @param body includes the description, date(if any) and time(if any)
-     *             stored in save file.
+     * @param body  includes the description, date(if any) and time(if any)
+     *              stored in save file.
      */
     public void loadDataToList(String type, String state, String body) {
         Task currTask = null;
         String[] bodySplit = body.split("\\|", 4);
 
         switch (type) {
-            case "T":
-                currTask = new ToDos(body);
-                break;
-            case "D":
-                currTask = new Deadlines(bodySplit[0],
-                    LocalDate.parse(bodySplit[1]),
-                    LocalTime.parse(bodySplit[2]));
-                break;
-            case "E":
-                currTask = new Events(bodySplit[0],
-                    LocalDate.parse(bodySplit[1]),
-                    LocalTime.parse(bodySplit[2]),
-                    LocalTime.parse(bodySplit[3]));
-                break;
+        case "T":
+            currTask = new ToDos(body);
+            break;
+        case "D":
+            currTask = new Deadlines(bodySplit[0],
+                LocalDate.parse(bodySplit[1]),
+                LocalTime.parse(bodySplit[2]));
+            break;
+        case "E":
+            currTask = new Events(bodySplit[0],
+                LocalDate.parse(bodySplit[1]),
+                LocalTime.parse(bodySplit[2]),
+                LocalTime.parse(bodySplit[3]));
+            break;
         }
 
         assert currTask != null;
@@ -92,7 +92,7 @@ public class DukeTaskList {
         }
         Task doneTask = taskList.get(doneTaskNo - 1);
         doneTask.markAsDone();
-        Ui.printDoneTask( doneTask.toString());
+        Ui.printDoneTask(doneTask.toString());
     }
 
     /**
@@ -116,41 +116,42 @@ public class DukeTaskList {
      *
      * @param toDoText description of the todos task
      */
-    public void addToDo(String toDoText){
+    public void addToDo(String toDoText) {
         Task currTask = new ToDos(toDoText); // description trimmed of trailing white space behind
         taskList.add(currTask);
         Ui.printAddTask(currTask.toString(), taskList.size());
     }
 
     /**
-     * Method to add a deadline task to the list.
+     * Method to add a deadline task to the list. Input format for deadline:
+     * /by yyyy-mm-dd hh:mm (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME)
      *
      * @param DdlText description of the deadline task
      * @param DdlDate date when deadline is due.
-     *                  Must be in the format yyyy-mm-dd.
+     *                Must be in the format yyyy-mm-dd.
      * @param DdlTime time point when deadline is due.
-     *                 Must be in the format hh:mm in 24-hours time.
+     *                Must be in the format hh:mm in 24-hours time.
      */
-    // Input format for deadline: /by yyyy-mm-dd hh:mm (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME)
-    public void addDeadline(String DdlText, LocalDate DdlDate, LocalTime DdlTime){
+    public void addDeadline(String DdlText, LocalDate DdlDate, LocalTime DdlTime) {
         Task currTask = new Deadlines(DdlText, DdlDate, DdlTime);
         taskList.add(currTask);
         Ui.printAddTask(currTask.toString(), taskList.size());
     }
 
     /**
-     * Method to add a event task to the list.
+     * Method to add a event task to the list. Input format for event:
+     * /at yyyy-mm-dd hh:mm-hh:mm
+     * (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME, dash, ISO_LOCAL_TIME)
      *
-     * @param eventText description of the event.
-     * @param eventDate date when the event happens.
-     *                  Must be in the format yyyy-mm-dd.
+     * @param eventText      description of the event.
+     * @param eventDate      date when the event happens.
+     *                       Must be in the format yyyy-mm-dd.
      * @param eventStartTime time point when the event starts.
      *                       Must be in the format hh:mm in 24-hours time.
-     * @param eventEndTime time point when the event ends.
-     *                     Must be in the format hh:mm in 24-hours time.
+     * @param eventEndTime   time point when the event ends.
+     *                       Must be in the format hh:mm in 24-hours time.
      */
-    // Input format for event: /at yyyy-mm-dd hh:mm-hh:mm (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME, dash, ISO_LOCAL_TIME)
-    public void addEvent(String eventText, LocalDate eventDate, LocalTime eventStartTime, LocalTime eventEndTime){
+    public void addEvent(String eventText, LocalDate eventDate, LocalTime eventStartTime, LocalTime eventEndTime) {
         Task currTask = new Events(eventText, eventDate, eventStartTime, eventEndTime);
         taskList.add(currTask);
         Ui.printAddTask(currTask.toString(), taskList.size());
