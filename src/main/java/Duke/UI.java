@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * UI for Duke.
+ */
 public class UI {
 
     private final static String ROBOT_ICON = "[~o_o~]";
@@ -58,15 +61,18 @@ public class UI {
         System.out.println(e.getMessage());
         System.out.println(LINE);
     }
+
     public static void printLine() {
         System.out.println(LINE);
     }
+
     public static void printNoOfTasks(int noOfTasks) {
         System.out.println(ROBOT_ICON + ": " + "Now you have " + noOfTasks + " tasks!");
     }
 
     /**
      * Prints the input text prefixed with robot icon.
+     *
      * @param text user input string
      */
     public static void printRobotMsg(String text) {
@@ -75,6 +81,7 @@ public class UI {
 
     /**
      * Print message input by user.
+     *
      * @param text user input string
      */
     public static void printMsg(String text) {
@@ -82,7 +89,7 @@ public class UI {
     }
 
     /**
-     * Constructs a Duke.UI.
+     * Constructs a UI.
      */
     public UI() {
         this.myScanner = new Scanner(System.in);
@@ -91,4 +98,6 @@ public class UI {
     public String readInput() {
         return myScanner.nextLine();
     }
+
+
 }

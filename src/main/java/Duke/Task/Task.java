@@ -58,4 +58,11 @@ public class Task {
         return "G" + " | " + completeBinary + " | " + this.taskDetails + " | ";
     }
 
+    /**
+     * Returns TaskDetails
+     * @return taskDetails
+     */
+    public String getTaskDetails() {
+        return this.taskDetails;
+    }
 }
