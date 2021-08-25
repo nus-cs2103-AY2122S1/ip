@@ -34,7 +34,9 @@ public class Event extends Task {
     }
 
     public String showTask() {
-        return this.taskName + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", " + this.time + ")";
+        return this.taskName + " (at: "
+                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                + this.time + ")";
     }
 
     public String showTaskOnly() { return this.taskName; }
