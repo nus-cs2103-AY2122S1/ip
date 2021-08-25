@@ -1,12 +1,16 @@
-package Duke;
+package Duke.Main;
+
+import Duke.Task.*;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.List;
 
 public class Storage {
 
+    /**
+     * Process and convert instructions.txt file to String of instructions
+     * @return string of instructional guidelines
+     */
     public static String processInstructions() {
         StringBuilder builder = new StringBuilder();
         try {
@@ -22,6 +26,11 @@ public class Storage {
         return builder.toString();
     }
 
+    /**
+     * Update current task list content to file
+     * @param file a file that saved the task entered and date
+     * @param taskList task list
+     */
     public static void saveData(File file, TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(file);
@@ -35,6 +44,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load and preprocess data to task list from file
+     * @param file a file that contains previously entered tasks and dates
+     * @param taskList task list
+     */
     public static void loadData(File file, TaskList taskList) {
         try {
             FileReader reader = new FileReader(file);
@@ -47,36 +61,36 @@ public class Storage {
                 String taskDescription = (taskArray.length < 2) ? "" : taskArray[1];
                 Task curr;
                 switch (type) {
-                    case 'T':
-                        taskDescription = taskDescription.trim();
-                        curr = new Todo(taskDescription);
-                        if (status == 'X') {
-                            curr.markAsCompleted();
-                        }
-                        taskList.addTask(curr);
-                        break;
-                    case 'D':
-                        taskDescription = taskDescription.trim().
-                                replaceAll("\\(", "/").
-                                replaceAll("\\)", "");
-                        curr = new Deadline(taskDescription);
-                        if (status == 'X') {
-                            curr.markAsCompleted();
-                        }
-                        taskList.addTask(curr);
-                        break;
-                    case 'E':
-                        taskDescription = taskDescription.
-                                replaceAll("\\(", "/").
-                                replaceAll("\\)", "");
-                        curr = new Event(taskDescription);
-                        if (status == 'X') {
-                            curr.markAsCompleted();
-                        }
-                        taskList.addTask(curr);
-                        break;
-                    default:
-                        break;
+                case 'T':
+                    taskDescription = taskDescription.trim();
+                    curr = new Todo(taskDescription);
+                    if (status == 'X') {
+                        curr.markAsCompleted();
+                    }
+                    taskList.addTask(curr);
+                    break;
+                case 'D':
+                    taskDescription = taskDescription.trim().
+                            replaceAll("\\(", "/").
+                            replaceAll("\\)", "");
+                    curr = new Deadline(taskDescription);
+                    if (status == 'X') {
+                        curr.markAsCompleted();
+                    }
+                    taskList.addTask(curr);
+                    break;
+                case 'E':
+                    taskDescription = taskDescription.
+                            replaceAll("\\(", "/").
+                            replaceAll("\\)", "");
+                    curr = new Event(taskDescription);
+                    if (status == 'X') {
+                        curr.markAsCompleted();
+                    }
+                    taskList.addTask(curr);
+                    break;
+                default:
+                    break;
                 }
             }
             sc.close();

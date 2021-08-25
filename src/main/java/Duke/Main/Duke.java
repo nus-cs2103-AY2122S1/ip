@@ -1,19 +1,29 @@
-package Duke;
+package Duke.Main;
 
 import java.io.File;
-import java.util.Scanner;
 
 public class Duke {
 
-    private TaskList taskList;
-    private Ui ui;
-    private File file;
-    public Duke() {
+    private final TaskList taskList;
+    private final Ui ui;
+    private final File file;
+
+    /**
+     * Constructor for Duke - initializing task list from
+     * preprocessed file and initializing UI component
+     */
+    public Duke(String fileName) {
         this.taskList = new TaskList();
-        this.file = new File("taskFile/taskList.txt");
+        this.file = new File(fileName);
         Storage.loadData(file, taskList);
         this.ui = new Ui();
     }
+
+    /**
+     * Run Duke. UI is first started, then any command is processed
+     * through the Parser class to retrieve a reply, with task list
+     * and storage being constantly updated after each cycle
+     */
     public void run() {
         ui.start();
         String command = ui.readCommand();
