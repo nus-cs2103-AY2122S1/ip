@@ -4,6 +4,9 @@ import kermit.tasks.Task;
 
 import java.util.Scanner;
 
+/**
+ * Ui handles interface with user such as receiving user input and printing messages to user.
+ */
 public class Ui {
     private static final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
     private static final String listText = "Here are the tasks in your list:";
@@ -14,7 +17,7 @@ public class Ui {
     Scanner sc = new Scanner(System.in);
 
     /**
-     * Adds a top and bottom horizontal line to text
+     * Adds a top and bottom horizontal line to text.
      *
      * @param text Text to be formatted.
      * @return Formatted version of text.
@@ -41,33 +44,57 @@ public class Ui {
     }
 
     /**
-     * Pretty format text when task is added
+     * Pretty format text when task is added.
      *
-     * @param task kermit.command.Task that is added to list
-     * @param list List that task was added to
+     * @param task Task that is added to list.
+     * @param list List that task was added to.
      */
     public void showAddTaskMessage(Task task, ToDo list) {
         formatAndPrintText("Got it. I've added this task:\n"
                 + task + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
+    /**
+     * Pretty format text when task is deleted.
+     *
+     * @param task Task that is deleted from list.
+     * @param list List that task was deleted from.
+     */
     public void showDeleteTaskMessage(Task task, ToDo list) {
         formatAndPrintText("Noted. I've removed this task:\n"
                 + task + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
+    /**
+     * Pretty format text when task is completed.
+     *
+     * @param task Task that is completed.
+     */
     public void showCompleteTaskMessage(Task task) {
         formatAndPrintText(completeTaskText + "\n" + task);
     }
 
+    /**
+     * Pretty format text error.
+     *
+     * @param e Error message.
+     */
     public void showErrorMessage(String e) {
         formatAndPrintText(errorText + "\n" + e);
     }
 
+    /**
+     * Pretty format text error when loading file.
+     */
     public void showLoadingError() {
         formatAndPrintText(loadingErrorText);
     }
 
+    /**
+     * Reads user input.
+     *
+     * @return user input.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
