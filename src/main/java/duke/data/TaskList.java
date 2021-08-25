@@ -37,20 +37,6 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of string, which is a copy of `tasks` list.
-     *
-     * @return A copy of tasks list.
-     */
-    public ArrayList<Task> getTasks() {
-        ArrayList<Task> copy = new ArrayList<>();
-        int len = this.getNumOfTasks();
-        for (int i = 0; i < len; i++) {
-            copy.add(this.tasks.get(i));
-        }
-        return copy;
-    }
-
-    /**
      * Returns a task as a string to be stored in the file.
      *
      * @param index Index of the task.
