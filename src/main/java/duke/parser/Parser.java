@@ -16,7 +16,19 @@ import duke.task.ToDo;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The Parser class encapsulates parsing operations that involve reading in data and
+ * transforming it into a useful format to be utilised by other classes.
+ */
 public class Parser {
+    /**
+     * Parses a list of strings representing the contents of a save file and
+     * transforms it into a list of task objects.
+     *
+     * @param saveFileContents A list of strings, each representing a task.
+     * @return A list of task objects.
+     * @throws DukeException If strings passed to the parser are not in the expected format.
+     */
     public static List<Task> parseSaveFile(List<String> saveFileContents) throws DukeException {
         return saveFileContents.stream().map(task -> {
             try {
@@ -40,6 +52,15 @@ public class Parser {
         }).collect(Collectors.toList());
     }
 
+    /**
+     * Parses a string representing the user's input and creates a
+     * command object with relevant data extracted from the user input.
+     *
+     * @param userInput The user's input.
+     * @return A command object with relevant data.
+     * @throws DukeException If the string passed to the parser does not contain information in the
+     * correct format for a command object to be created.
+     */
     public static Command parseUserInput(String userInput) throws DukeException {
         switch (userInput) {
         case "bye":

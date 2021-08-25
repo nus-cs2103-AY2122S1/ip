@@ -6,17 +6,40 @@ import duke.storage.Storage;
 import duke.task.*;
 import duke.ui.Ui;
 
+/**
+ * The AddCommand class encapsulates the data and instructions
+ * needed to add a task to the user's task list on Duke.
+ */
 public class AddCommand extends Command {
+    /** The type of task to be added. */
     private TaskType taskType;
+
+    /** The description of the task to be added. */
     private String taskDescription;
+
+    /** The date associated with the task to be added. */
     private String date;
 
+    /**
+     * Constructs an add command with information on the task to be added.
+     *
+     * @param taskType The type of task to be added.
+     * @param taskDescription The description of the task to be added.
+     * @param date The date associated with the task to be added.
+     */
     public AddCommand(TaskType taskType, String taskDescription, String date) {
         this.taskType = taskType;
         this.taskDescription = taskDescription;
         this.date = date;
     }
 
+    /**
+     * Executes the instructions for adding a task to the user's task list on Duke.
+     *
+     * @param taskList Task list of the user loaded on Duke.
+     * @param ui The object representing Duke's UI.
+     * @param storage The object representing Duke's data and storage.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;
@@ -38,11 +61,22 @@ public class AddCommand extends Command {
         ui.updateUserOnAddedTask(newTask, taskList.getNumberOfTasks());
     }
 
+    /**
+     * Checks whether the command exits Duke.
+     *
+     * @return false.
+     */
     @Override
     public boolean isExit() {
         return false;
     }
 
+    /**
+     * Checks whether another object is equal with this add command.
+     *
+     * @param other The object being compared to.
+     * @return true if both are add commands and share the same task type, description and date, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other instanceof AddCommand) {

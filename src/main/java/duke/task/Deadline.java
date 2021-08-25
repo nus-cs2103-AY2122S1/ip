@@ -14,10 +14,11 @@ public class Deadline extends Task {
     private LocalDate by;
 
     /**
-     * Constructor for the Deadline class.
+     * Constructs a deadline object that is not completed yet.
      *
      * @param description The description of the task.
      * @param by The deadline of the task.
+     * @throws DukeException If the deadline of the task is not in YYYY-MM-DD format.
      */
     public Deadline(String description, String by) throws DukeException {
         super(description);
@@ -29,13 +30,14 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for the Deadline class.
+     * Constructs a deadline object with a specifiable completion status.
      *
      * @param description The description of the task.
      * @param isDone A boolean indicating whether the task has been completed.
      * @param by The deadline of the task.
+     * @throws DukeException If the deadline of the task is not in YYYY-MM-DD format.
      */
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, String by) throws DukeException {
         super(description, isDone);
         try {
             this.by = LocalDate.parse(by);
@@ -47,7 +49,7 @@ public class Deadline extends Task {
     /**
      * Returns the string representation of the task.
      *
-     * @return A string representing the Deadline task.
+     * @return A string representing the deadline task.
      */
     @Override
     public String toString() {
@@ -55,11 +57,22 @@ public class Deadline extends Task {
                 + this.by.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) + ")";
     }
 
+    /**
+     * Returns the format in which the task is stored in the save file.
+     *
+     * @return A string representing how the task is saved.
+     */
     @Override
     public String getSaveFormat() {
         return "D|" + super.getSaveFormat() + "|" + this.by + '\n';
     }
 
+    /**
+     * Checks whether another object is equal with this deadline task.
+     *
+     * @param other The object being compared to.
+     * @return true if both are deadline tasks and share the same date, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other instanceof Deadline) {
