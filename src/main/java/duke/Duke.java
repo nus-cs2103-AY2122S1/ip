@@ -19,6 +19,11 @@ public class Duke {
         this.isRunning = false;
     }
 
+    /**
+     * Runs this instance of Duke, which starts a new Scanner object
+     * to accept user commands.
+     *
+     */
     public void run() {
         this.isRunning = true;
         this.taskList = new TaskList(this.store.readFile());
@@ -39,6 +44,11 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Gives the number of tasks that this instance of Duke has.
+     *
+     * @return The number of tasks in the task list of this instance of Duke.
+     */
     public int getNumberOfTasks() {
         return this.taskList.numberOfTasks();
     }

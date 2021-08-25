@@ -22,14 +22,14 @@ public class Task {
     }
 
     /**
-     * Sets the task as done
+     * Sets the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Sets the task as not done
+     * Sets the task as not done.
      */
     public void markAsUndone() {
         this.isDone = false;
@@ -39,6 +39,12 @@ public class Task {
         return (isDone ? "[X] " : "[ ] ");
     }
 
+    /**
+     * Provides the String representation of the task in the format
+     * meant for writing to the file.
+     *
+     * @return The string representation of this deadline for the file to be saved to.
+     */
     public String saveText() {
         int isDone = this.isDone ? 1 : 0;
         return "T | " + isDone + " | " + desc + "\n";

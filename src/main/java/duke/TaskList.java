@@ -8,7 +8,7 @@ import exceptions.*;
 
 /**
  * This class encapsulates a duke.Duke task list.
- * It is responsible for maintaining the tasks in an instance of duke.Duke.
+ * It is responsible for maintaining the tasks in an instance of Duke.
  *
  */
 public class TaskList {
@@ -25,35 +25,36 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the task list
-     * @param task The task to be added.
+     * Adds a task to the task list.
      *
+     * @param task The task to be added.
      */
     public void addTask(Task task) {
         this.taskList.add(task);
     }
 
     /**
-     * Removes a task from the task list
-     * @param index The index of the task to be removed.
+     * Removes a task from the task list.
      *
+     * @param index The index of the task to be removed.
      */
     public void deleteTask(int index) {
         this.taskList.remove(index);
     }
 
     /**
-     * Get the task from the specified index
+     * Get the task from the specified index.
+     *
      * @param index The index of the task to get.
-     * @return
+     * @return The Task at the specified index.
      */
     public Task getTask(int index) {
         return this.taskList.get(index);
     }
 
     /**
-     * Returns the total number of tasks in the task list
-     * @return Number of tasks in the task list
+     * Returns the total number of tasks in the task list.
+     * @return Number of tasks in the task list.
      */
     public int numberOfTasks() {
         return this.taskList.size();

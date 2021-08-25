@@ -18,8 +18,11 @@ import tasks.*;
 import exceptions.*;
 
 /**
- * This class is responsible for reading and writing to the file for a duke.Duke program.
+ * This class is responsible for reading and writing to the file for a Duke program.
  *
+ * On initialization, it will contain a File object to which it will read and write to.
+ * If the file path specified does not exist, it will instead create a new clean file
+ * for writing to.
  */
 public class Storage {
 
@@ -39,9 +42,12 @@ public class Storage {
     }
 
     /**
-     * Takes in a line from the task file saved in disk and process it
-     * @param taskLine A line from the file that is being read from.
+     * Takes in a line from the task file saved in disk and processes it
+     * by adding it to the provided ArrayList of Tasks.
      *
+     * @param taskLine A line from the file that is being read from.
+     * @param taskList The ArrayList which will contain the Tasks in the file.
+     * @throws DukeException If the letter in each line does not match any of the task types.
      */
     private void process(String taskLine, ArrayList<Task> taskList) throws DukeException {
         String[] parsedLine = taskLine.split(" \\| ", 3);
@@ -68,6 +74,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the file of the current Storage object and stores the Tasks
+     * saved in the file into a ArrayList of Tasks.
+     *
+     * @return The ArrayList of Tasks read from the file.
+     */
     public ArrayList<Task> readFile() {
         try (BufferedReader br = new BufferedReader(new FileReader(this.taskFile))) {
             ArrayList<Task> taskList = new ArrayList<>();
@@ -91,6 +103,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes each Task in the taskList into the file line by line in the format
+     * specified in each task object.
+     *
+     * @param taskList The TaskList which contains the Tasks to be written into the file.
+     * @param taskFile The file which will be written into.
+     * @throws IOException
+     */
     public void writeTasksToFile(TaskList taskList, File taskFile) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(this.taskFile));
         for (int i = 0; i < taskList.numberOfTasks(); i++) {
@@ -100,6 +120,10 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Gets the File that belongs to this instance of Storage.
+     * @return The File object belonging to this Storage.
+     */
     public File getTaskFile() {
         return this.taskFile;
     }
