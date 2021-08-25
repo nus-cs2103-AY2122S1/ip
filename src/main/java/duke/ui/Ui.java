@@ -1,6 +1,9 @@
-import exceptions.DukeException;
-import task.Task;
+package duke.ui;
 
+import duke.exceptions.DukeException;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.utils.Constants;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -40,13 +43,13 @@ public class Ui {
     }
 
     public void displayDone(String taskDetails) {
-        System.out.println("Nice! I've marked this task as done:");
+        System.out.println("Nice! I've marked this duke.task as done:");
         System.out.println(taskDetails);
     }
 
 
     public void displayDelete(String taskDetails, TaskList list) {
-        System.out.println("Noted. I've removed this task:");
+        System.out.println("Noted. I've removed this duke.task:");
         System.out.println(taskDetails);
         list.printRemainingTasks();
 
@@ -73,7 +76,7 @@ public class Ui {
     }
 
     public void displayAdd(Task task, TaskList taskList) {
-        System.out.println("Got it. I've added this task:");
+        System.out.println("Got it. I've added this duke.task:");
         System.out.println(task.toString());
         taskList.printRemainingTasks();
     }

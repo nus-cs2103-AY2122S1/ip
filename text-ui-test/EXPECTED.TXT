@@ -4,22 +4,22 @@
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm Duke
+Hello! I'm duke.Duke
 What can I do for you?
 =======================================================
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [D][ ] read book (by: Dec 31 2021)
-Now you have 1 task in the list.
+Now you have 1 duke.task in the list.
 =======================================================
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [D][ ] return book (by: Jan 01 2022)
 Now you have 2 tasks in the list.
 =======================================================
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [E][ ] watch movie (at: Dec 31 2021 2000)
 Now you have 3 tasks in the list.
 =======================================================
-Got it. I've added this task:
+Got it. I've added this duke.task:
 [E][ ] university fair (at: Jan 01 2022 0900)
 Now you have 4 tasks in the list.
 =======================================================

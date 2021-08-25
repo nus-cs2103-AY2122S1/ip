@@ -1,5 +1,10 @@
-import exceptions.DukeException;
-import task.*;
+package duke.storage;
+
+import duke.exceptions.DukeException;
+import duke.task.*;
+import duke.parser.DateTimeParser;
+import duke.tasklist.TaskList;
+
 import java.io.*;
 import java.util.*;
 
@@ -31,7 +36,7 @@ public class Storage {
                 }
             }
         } catch (IOException ex) {
-            throw new DukeException("The storage file could not be created");
+            throw new DukeException("The duke.storage file could not be created");
         }
     }
 
@@ -44,7 +49,7 @@ public class Storage {
             }
             f.close();
         } catch (IOException ex) {
-            throw new DukeException("The storage file could not be found");
+            throw new DukeException("The duke.storage file could not be found");
         }
     }
 

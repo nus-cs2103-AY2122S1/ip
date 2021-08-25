@@ -1,5 +1,9 @@
-import exceptions.RepeatedTaskException;
-import task.Task;
+package duke.commands;
+
+import duke.exceptions.RepeatedTaskException;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class AddCommand extends Command {
     Task task;

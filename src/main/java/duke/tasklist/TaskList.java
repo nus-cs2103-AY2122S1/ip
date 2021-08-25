@@ -1,7 +1,7 @@
-import exceptions.DukeException;
-import exceptions.InvalidNumberInputException;
-import task.Task;
+package duke.tasklist;
 
+import duke.exceptions.InvalidNumberInputException;
+import duke.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -40,7 +40,7 @@ public class TaskList {
 
     public void printRemainingTasks() {
         if (taskList.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
+            System.out.println("Now you have 1 duke.task in the list.");
         } else {
             System.out.printf("Now you have %s tasks in the list.%n", taskList.size());
         }

@@ -1,6 +1,10 @@
-import exceptions.InvalidNumberInputException;
-import exceptions.RepeatedDoneException;
-import task.Task;
+package duke.commands;
+
+import duke.exceptions.InvalidNumberInputException;
+import duke.exceptions.RepeatedDoneException;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class DoneCommand extends Command{
 

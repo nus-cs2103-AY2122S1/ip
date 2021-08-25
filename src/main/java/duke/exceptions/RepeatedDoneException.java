@@ -1,9 +1,9 @@
-package exceptions;
+package duke.exceptions;
 
 public class RepeatedDoneException extends DukeException{
 
     public RepeatedDoneException() {
-        super("The task has already been completed");
+        super("The duke.task has already been completed");
     }
 
 }

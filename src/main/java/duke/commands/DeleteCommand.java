@@ -1,5 +1,9 @@
-import exceptions.InvalidNumberInputException;
-import task.Task;
+package duke.commands;
+
+import duke.exceptions.InvalidNumberInputException;
+import duke.task.Task;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class DeleteCommand extends Command{
 

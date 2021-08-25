@@ -1,9 +1,13 @@
-import exceptions.*;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
+package duke.parser;
 
+import duke.commands.*;
+import duke.exceptions.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+import duke.utils.Constants;
 import java.time.LocalDate;
 
 
@@ -112,7 +116,7 @@ public class Parser {
                 case "event": throw new IncorrectFormatException(
                         "Please specify a description, date and time for your event!" + Constants.EVENT_FORMAT);
                 default: throw new IncorrectFormatException(
-                        "Please specify a description and date/time for your task!");
+                        "Please specify a description and date/time for your duke.task!");
             }
         }
     }
