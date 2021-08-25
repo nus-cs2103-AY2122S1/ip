@@ -1,8 +1,9 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class TaskList {
+    private ArrayList<Task> list = new ArrayList<>();
 
     public static Task stringToTask(String str){
         String[] taskData = str.split("\\|");
@@ -23,5 +24,31 @@ public class TaskList {
             ToDo toDo = new ToDo(taskData[2], isDone);
             return toDo;
         }
+    }
+
+    protected void add(Task task){
+        list.add(task);
+    }
+
+    protected Task delete(int taskNum){
+        return list.remove(taskNum-1);
+    }
+
+    protected Task mark(int taskNum){
+        Task task = list.get(taskNum-1);
+        task.markDone();
+        return task;
+    }
+
+    protected int size(){
+        return list.size();
+    }
+
+    protected ArrayList<Task> getList(){
+        return list;
+    }
+
+    protected void loadFromList(ArrayList<Task> list){
+        this.list = list;
     }
 }

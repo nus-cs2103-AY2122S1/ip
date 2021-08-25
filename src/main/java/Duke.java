@@ -12,49 +12,47 @@ public class Duke {
 
     private final String INDENTATION = "    ";
     private Storage storage;
-    private ArrayList<Task> taskList;
+    private TaskList taskList;
     private boolean isActive;
     private Ui ui;
 
     public Duke(){
         this.ui = new Ui();
         this.storage = new Storage();
-        this.taskList = new ArrayList<>();
+        this.taskList = new TaskList();
     }
 
     private void exit(){
         ui.farewellMsg();
-        this.isActive = false;
+        isActive = false;
     }
 
     private void addTask(Task task){
-        this.taskList.add(task);
-        ui.addTaskMsg(taskList, task);
-        storage.save(taskList);
+        taskList.add(task);
+        ui.addTaskMsg(taskList.size(), task);
+        storage.save(taskList.getList());
     }
 
     private void deleteTask(int taskNum){
-        Task task = taskList.remove(taskNum-1);
-        ui.deleteTaskMsg(taskList, task);
-        storage.save(taskList);
+        Task task = taskList.delete(taskNum);
+        ui.deleteTaskMsg(taskList.size(), task);
+        storage.save(taskList.getList());
     }
 
     private void markTaskAsDone(int taskNumber){
-        Task task = taskList.get(taskNumber-1);
-        task.markDone();
-        ui.markDoneMsg(task);
-        storage.save(taskList);
+        ui.markDoneMsg(taskList.mark(taskNumber));
+        storage.save(taskList.getList());
     }
 
     private void start(){
-        this.isActive = true;
-        this.taskList = storage.load();
+        isActive = true;
+        taskList.loadFromList(storage.load());
 
         ui.greet();
 
         Scanner sc = new Scanner(System.in);
 
-        while (this.isActive){
+        while (isActive){
             String command = sc.nextLine();
             try {
                 processCommand(command);
@@ -66,7 +64,7 @@ public class Duke {
     }
 
     private void listTasks(){
-        ui.listTasks(taskList);
+        ui.listTasks(taskList.getList());
     }
 
     private void processCommand(String command) throws DukeException{

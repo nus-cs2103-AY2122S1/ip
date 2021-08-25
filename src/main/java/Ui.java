@@ -10,7 +10,7 @@ public class Ui {
             + INDENTATION + "| |_| | |_| |   <  __/\n"
             + INDENTATION + "|____/ \\__,_|_|\\_\\___|\n"
             + INDENTATION + "What can I do for you?";
-    
+
     public static void printMessageWithFormat(String msg){
         System.out.println(INDENTATION + HORIZONTAL_LINE);
         System.out.println(INDENTATION + msg);
@@ -25,15 +25,15 @@ public class Ui {
         printMessageWithFormat("Bye bye, i go sleep already. See you again.");
     }
 
-    protected void addTaskMsg(ArrayList<Task> taskList, Task task){
+    protected void addTaskMsg(int taskLeft, Task task){
         String msg = "Got it. I've added this task:\n" + INDENTATION + "  " + task.checkStatus();
-        msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskList.size());
+        msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskLeft);
         printMessageWithFormat(msg);
     }
 
-    protected void deleteTaskMsg(ArrayList<Task> taskList, Task task){
+    protected void deleteTaskMsg(int taskLeft, Task task){
         String msg = "Noted. I've removed this task:\n" + INDENTATION + "  " + task.checkStatus();
-        msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskList.size());
+        msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskLeft);
         printMessageWithFormat(msg);
     }
 
