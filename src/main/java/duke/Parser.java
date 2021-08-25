@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 /**
- * Class that parse user commands
+ * Class that parse user commands.
  */
 public class Parser {
     public Command parseCommand(String input) throws DukeException {
@@ -28,6 +28,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the arguments based on the Command and input.
+     * @param c Command that is associated with the arguments.
+     * @param input Input string containing the arguments.
+     * @return Array of arguments.
+     * @throws DukeException If the input string is invalid.
+     */
     public String[] parseArguments(Command c, String input) throws DukeException {
         switch(c) {
         case TODO:
@@ -64,6 +71,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses date in LocalDate format.
+     *
+     * @param input String to be parsed.
+     * @return LocalDate object representing the String.
+     * @throws DukeException When input is not a valid date format.
+     */
     public LocalDate parseDate(String input) throws DukeException {
         try {
             return LocalDate.parse(input);
@@ -72,6 +86,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a integer based on a string.
+     * @param input Input String to be parsed.
+     * @return Integer from the String.
+     * @throws DukeException If the String is not a representation of a valid integer.
+     */
     public Integer parseInt(String input) throws DukeException {
         try {
             return Integer.parseInt(input);
@@ -80,18 +100,28 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if a Command is BYE.
+     * @param input Command to be checked.
+     * @return If the Command is BYE.
+     */
     public Boolean isBye(Command input) {
         return input.equals(Command.BYE);
     }
 
-    public Boolean isValid(Command input) {
-        return !input.equals(Command.INVALID);
-    }
-
+    /**
+     * Returns the first word of a String, determined by the first whitespace.
+     * @param input String where the word will be extracted.
+     * @return First word of the string.
+     */
     private String getFirstWord(String input) {
         return input.split(" ")[0];
     }
 
+    /**
+     * Trims every element in a given String array.
+     * @param array Array to be trimmed.
+     */
     private void trimMap (String[] array) {
         for (int i = 0 ; i < array.length; i++) {
             array[i] = array[i].trim();

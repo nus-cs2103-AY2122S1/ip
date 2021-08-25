@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Class representing a Task of an Event.
+ * Class representing an Event.
  */
 public class Event extends Task {
 
@@ -32,7 +32,7 @@ public class Event extends Task {
     /**
      * Returns the Date of the Event.
      *
-     * @ Date of the Event.
+     * @return Date of the Event.
      */
     public String getAt() {
         return this.at;
