@@ -1,0 +1,5 @@
+T|0|read book
+D|0|return book|2021-06-06T12:30
+E|0|project meeting|2021-08-06T14:00
+T|0|join sports club
+T|0|borrow book
