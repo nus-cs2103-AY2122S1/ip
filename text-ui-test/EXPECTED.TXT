@@ -111,5 +111,19 @@
     1.[E][X] testEvent (at: 3pm)
     ---
     ---
+    Noted. I've removed this task:
+    [E][X] testEvent (at: 3pm)
+    Now you have 0 tasks in the list.
+    ---
+    ---
+    OOPS!!! Task ID out of range!
+    ---
+    ---
+    OOPS!!! Task ID out of range!
+    ---
+    ---
+    Here are the tasks in your list:
+    ---
+    ---
     Bye mate!
     ---
