@@ -7,7 +7,6 @@ import java.util.Objects;
 /**
  * This class represents a task.
  */
-
 public class Task {
     /** Description of the task. */
     protected String description;
@@ -28,7 +27,7 @@ public class Task {
      * Constructs a task using the given description and complete state.
      *
      * @param description the given description.
-     * @param isDone the given complete state.
+     * @param isDone      the given complete state.
      */
     public Task(String description, boolean isDone) {
         this.description = description;

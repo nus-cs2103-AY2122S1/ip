@@ -14,7 +14,7 @@ public class Duke {
     /**
      * Receives input from the user and executes Duke's actions
      *
-     * @param sc             the given scanner instance
+     * @param sc       the given scanner instance
      * @param taskList the given task list instance.
      */
     public static void run(Scanner sc, TaskList taskList) {

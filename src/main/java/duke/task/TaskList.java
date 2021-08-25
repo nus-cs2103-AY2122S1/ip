@@ -91,7 +91,7 @@ public class TaskList {
      * @param index the given index.
      * @throws DukeException if the index is out of range.
      */
-    public void markTaskAsDone(int index) throws DukeException{
+    public void markTaskAsDone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("Task number: " + (index + 1) + " does not exist.");
         }

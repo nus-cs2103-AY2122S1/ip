@@ -9,11 +9,8 @@ import java.util.Objects;
 /**
  * This class represents a deadline task.
  */
-
 public class Deadline extends Task {
-    /**
-     * Deadline time of the task.
-     */
+    /** Deadline time of the task. */
     private final LocalDateTime deadlineTime;
 
     /**

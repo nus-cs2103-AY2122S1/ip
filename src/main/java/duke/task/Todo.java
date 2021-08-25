@@ -5,8 +5,7 @@ import duke.Parser;
 /**
  * This class represents a todo task.
  */
-
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Constructs a todo using the given description.
      *
@@ -20,7 +19,7 @@ public class Todo extends Task{
      * Constructs a todo task using the given description and complete state.
      *
      * @param description the given description.
-     * @param isDone the given complete state.
+     * @param isDone      the given complete state.
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
