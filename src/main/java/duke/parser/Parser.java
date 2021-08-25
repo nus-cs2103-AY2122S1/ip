@@ -23,7 +23,8 @@ public class Parser {
         todo,
         deadline,
         event,
-        delete
+        delete,
+        find
     }
     /** Date/time format to be parsed/stored */
     protected DateTimeFormatter df;
@@ -186,6 +187,10 @@ public class Parser {
      * @param input The input string.
      * @return True if it is a "blah", false otherwise.
      */
+    public boolean isFind(String input) {
+        return input.equals(SPECIAL_TASK.find.name());
+    }
+
     public boolean isBlah(String input) {
         return input.equals("Blah");
     }
@@ -251,6 +256,10 @@ public class Parser {
      * @param taskList The taskList to check the index from.
      * @throws DukeException If index outside the range of number of tasks in the taskList.
      */
+    public void parseFind(String[] splitInput) throws DukeException {
+        checkDesc(splitInput, SPECIAL_TASK.find.name());
+    }
+
     public void checkTaskIndex(int index, TaskList taskList) throws DukeException {
         if (index >= taskList.size() || index <= 0) {
             throw new DukeException("duke.commands.Task number does not exist!");
