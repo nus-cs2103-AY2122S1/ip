@@ -1,19 +1,18 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
     //To do list storage DS
-    private static ArrayList<Task> list = new ArrayList<>();
+    private static final ArrayList<Task> list = new ArrayList<>();
 
+    private static final String filepath = "data/duke.txt";
     //Constants
     // Some String format
-    private static String start = "____________________________________________________________\n";
-    private static String end = "____________________________________________________________";
-    private static String logo = " ____        _        \n"
+    private static final String start = "____________________________________________________________\n";
+    private static final String end = "____________________________________________________________";
+    private static final String logo = " ____        _        \n"
                                 + "|  _ \\ _   _| | _____ \n"
                                 + "| | | | | | | |/ / _ \\\n"
                                 + "| |_| | |_| |   <  __/\n"
@@ -25,7 +24,7 @@ public class Duke {
         Duke.welcomeMessage();
 
         try {
-            loadFileContents("data/duke.txt");
+            loadFileContents(Duke.filepath);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
@@ -113,25 +112,28 @@ public class Duke {
                                     + "☹ OOPS!!! The description of a todo cannot be empty.\n"
                                     + Duke.end);
         }
-        String t = input.split("todo")[1];
+        String t = input.split("todo ")[1];
         ToDo td = new ToDo(t);
         Duke.list.add(td);
+        Duke.handleEventToAdd(td);
         System.out.println(Duke.start + "Got it. I've added this task: \n " + td.toString() + "\n"
                             + "Now you have " + Duke.list.size()  + " tasks in the list."  + "\n" +Duke.end);
     }
 
     public static void deadline(String input) {
-        String t = input.split("deadline")[1];
+        String t = input.split("deadline ")[1];
         Deadline dl = new Deadline(t);
         Duke.list.add(dl);
+        Duke.handleEventToAdd(dl);
         System.out.println(Duke.start + "Got it. I've added this task: \n " + dl.toString() + "\n"
                 + "Now you have " + Duke.list.size()  + " tasks in the list."  + "\n" +Duke.end);
     }
 
     public static void event(String input) {
-        String t = input.split("event")[1];
+        String t = input.split("event ")[1];
         Event e = new Event(t);
         Duke.list.add(e);
+        Duke.handleEventToAdd(e);
         System.out.println(Duke.start + "Got it. I've added this task: \n " + e.toString() + "\n"
                 + "Now you have " + Duke.list.size()  + " tasks in the list."  + "\n" +Duke.end);
     }
@@ -139,7 +141,7 @@ public class Duke {
     public static void delete(int i) {
         System.out.println(Duke.start + "Noted. I've removed this task: ");
         String deleted = Duke.list.get(i-1).toString();
-        Duke.list.remove(((int) i - 1));
+        Duke.list.remove(i - 1);
         System.out.println(" " + deleted);
         System.out.println("Now you have " + Duke.list.size() + " tasks in the list." + "\n" +  Duke.end);
     }
@@ -175,6 +177,21 @@ public class Duke {
         //Check if its completed or not (0,1) and mark accordingly
         if (arrOfInputs[1].equals("1")) {
             Duke.list.get(currListLength - 1).markAsDone();
+        }
+    }
+
+    private static void writeFile(String filepath, String textToAdd) throws IOException {
+        BufferedWriter fw = new BufferedWriter(new FileWriter(filepath, true));
+        fw.write(System.lineSeparator() + textToAdd);
+        fw.close();
+    }
+
+    private static void handleEventToAdd(Task t) {
+        String info = t.getTaskInfo();
+        try {
+            writeFile(Duke.filepath, info);
+        } catch (IOException e) {
+            System.out.println("Something went wrong:" + e.getMessage());
         }
     }
 }
