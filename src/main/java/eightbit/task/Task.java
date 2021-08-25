@@ -4,6 +4,7 @@ package eightbit.task;
  * Represents a task that can be completed.
  */
 public class Task {
+
     protected String description;
     protected boolean isDone;
 

@@ -6,6 +6,7 @@ import eightbit.util.TaskList;
 import eightbit.util.Ui;
 
 public abstract class Command {
+
     protected boolean isExit = false;
 
     public boolean isExit() {
