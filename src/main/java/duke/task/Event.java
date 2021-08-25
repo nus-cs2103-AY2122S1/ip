@@ -46,31 +46,20 @@ public class Event extends Task {
                     this.time = LocalTime.parse(dateTime[1]);
                 }
 
-                checkChronologicalOrder();
-            }
-        }
-    }
 
-    private void checkChronologicalOrder() throws InvalidCommandException {
-        LocalDate dateNow = LocalDate.now();
-        LocalTime timeNow = LocalTime.now();
-        if (dateNow.until(this.date, DAYS) < 0) {
-            //check if deadline date < current date
-            throw new InvalidCommandException(
-                    "     Error! Date and time entered must be some time in the future!");
-        } else if (dateNow.until(this.date, DAYS) == 0) {
-            //if deadline date == current date, break ties by checking time.
-            if (timeNow.until(this.time, MINUTES) <= 0) {
-                //if deadline time <= current time
-                throw new InvalidCommandException(
-                        "     Error! Date and time entered must be some time in the future!");
             }
         }
     }
 
     @Override
     public String saveToFile() {
-        return "E " + super.saveToFile() + " | " + this.at;
+        String[] dateTime = this.at.split(" ");
+        if (dateTime.length == 1 && dateTime[0].length() == 5) {
+            //user only entered time. so save task date (default)
+            return "E " + super.saveToFile() + " | " + this.date.toString() + " " + this.at;
+        } else {
+            return "E " + super.saveToFile() + " | " + this.at;
+        }
     }
 
     @Override
