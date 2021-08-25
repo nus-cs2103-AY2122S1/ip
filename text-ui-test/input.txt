@@ -16,6 +16,11 @@ list
 done 14
 delete 3
 list
+find book
+ok
+find
+find nday
+list
 delete 34
 delete 1
 delete 1

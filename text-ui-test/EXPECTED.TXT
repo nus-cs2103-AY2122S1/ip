@@ -98,6 +98,34 @@ Here is your list of tasks:
 6.[E][ ] project meeting (at: Aug 27 2021 2-4pm)
 ___________________________________________________________
 ___________________________________________________________
+The matching tasks in your list are:
+1.[T][X] read book
+2.[D][ ] return book (by: Jun 06 2021)
+3.[T][ ] borrow book
+4.[D][ ] return book (by: Aug 09 2021 (Sunday))
+___________________________________________________________
+___________________________________________________________
+I don't quite understand what that means.
+Could you please rephrase that?
+___________________________________________________________
+___________________________________________________________
+I don't quite understand what that means.
+Could you please rephrase that?
+___________________________________________________________
+___________________________________________________________
+The matching task in your list is:
+1.[D][ ] return book (by: Aug 09 2021 (Sunday))
+___________________________________________________________
+___________________________________________________________
+Here is your list of tasks:
+1.[T][X] read book
+2.[D][ ] return book (by: Jun 06 2021)
+3.[T][X] join sports club
+4.[T][ ] borrow book
+5.[D][ ] return book (by: Aug 09 2021 (Sunday))
+6.[E][ ] project meeting (at: Aug 27 2021 2-4pm)
+___________________________________________________________
+___________________________________________________________
 You might have mistyped the task number.
 Please recheck your task number and enter again.
 ___________________________________________________________
