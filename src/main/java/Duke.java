@@ -1,8 +1,13 @@
 import javax.sound.midi.SysexMessage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private Storage storage;
+
+
     public static void main(String[] args) throws NoSuchTaskException, InvalidInputException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -104,6 +109,7 @@ public class Duke {
         // TODO: MAKE NECRO TELL JOKES
         ArrayList<Task> tasks = new ArrayList<>();
         int counter = 0;
+
         while (true) {
             String input = sc.nextLine();
 

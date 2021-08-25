@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-public class FileManager {
+public class Storage {
 
     private static void createNewFile(String fileName) {
         File f = new File(fileName);
