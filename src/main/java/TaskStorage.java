@@ -66,7 +66,7 @@ public class TaskStorage {
                 break;
 
             case todo :
-                parsedTask = new ToDo(description, isDone);
+                parsedTask = new Todo(description, isDone);
                 break;
 
             default :
