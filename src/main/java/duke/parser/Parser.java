@@ -26,7 +26,7 @@ public class Parser {
         delete
     }
     /** Date/time format to be parsed/stored */
-    private DateTimeFormatter df;
+    protected DateTimeFormatter df;
 
     /**
      * Constructor for a parser.

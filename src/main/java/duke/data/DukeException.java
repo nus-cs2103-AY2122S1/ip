@@ -11,7 +11,7 @@ package duke.data;
  */
 public class DukeException extends Exception {
     /** Header for the exception message */
-    String header;
+    protected String header;
 
     /**
      * Constructor for a DukeException.

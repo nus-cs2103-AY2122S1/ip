@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     /** List of tasks */
-    private ArrayList<Task> taskList;
+    protected ArrayList<Task> taskList;
 
     /**
      * Constructor for a TaskList.
