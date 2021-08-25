@@ -1,3 +1,5 @@
+package duke.util;
+
 import static java.lang.Math.max;
 
 public class Message {

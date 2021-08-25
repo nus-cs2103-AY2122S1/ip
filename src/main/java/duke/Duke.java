@@ -1,10 +1,22 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.task.Deadline;
+import duke.command.task.Event;
+import duke.command.task.TaskList;
+import duke.command.task.ToDo;
+import duke.util.DukeException;
+import duke.util.Message;
+import duke.util.Parser;
+import duke.util.Storage;
+
 import java.util.Scanner;
 
 public class Duke {
 
     // Messages
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String REWELCOME_MESSAGE = "Welcome back!\nWhat can Duke do once again for you?";
+    private static final String REWELCOME_MESSAGE = "Welcome back!\nWhat can Duke do for you once again?";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:\n%s";
     private static final String NO_TASKS_IN_LIST_MESSAGE = "You have no tasks currently. Go create some!";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";

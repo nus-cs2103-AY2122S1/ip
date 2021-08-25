@@ -1,3 +1,5 @@
+package duke.command.task;
+
 public abstract class Task {
     private final String text;
     private boolean isDone;

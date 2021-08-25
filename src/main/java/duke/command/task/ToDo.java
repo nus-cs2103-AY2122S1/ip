@@ -1,3 +1,7 @@
+package duke.command.task;
+
+import duke.util.DukeException;
+
 public class ToDo extends Task{
     private static final String MISSING_TODO_MESSAGE = "Please input text after the todo command";
     private static final String INVALID_SAVE_MESSAGE = "Todo save is given in the wrong format";

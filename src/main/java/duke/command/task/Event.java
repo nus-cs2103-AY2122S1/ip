@@ -1,3 +1,8 @@
+package duke.command.task;
+
+import duke.util.DateTime;
+import duke.util.DukeException;
+
 public class Event extends Task{
     private final DateTime eventDatetime;
     private static final String EVENT_DELIMITER = "/at";

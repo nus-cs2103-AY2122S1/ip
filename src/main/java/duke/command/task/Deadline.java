@@ -1,3 +1,8 @@
+package duke.command.task;
+
+import duke.util.DateTime;
+import duke.util.DukeException;
+
 public class Deadline extends Task {
     private final DateTime dueDate;
     private static final String DEADLINE_DELIMITER = "/by";

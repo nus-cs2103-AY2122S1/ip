@@ -1,3 +1,5 @@
+package duke.util;
+
 public class Parser {
     public static String getRemainingText(String firstWord, String input) {
         String remainingText = "";
