@@ -4,7 +4,7 @@ package duke;
  * Represents a function that will be called in the Duke running loop.
  */
 public class Command {
-    TriConsumer func;
+    private TriConsumer func;
     private boolean isExit;
 
     /**

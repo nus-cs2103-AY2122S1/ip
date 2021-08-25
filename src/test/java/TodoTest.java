@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     @Test
-    public void toString_normal() throws Exception{
+    public void toString_normal() throws Exception {
         Todo todo = new Todo("task");
         Assertions.assertEquals("[T][ ] task", todo.toString());
     }

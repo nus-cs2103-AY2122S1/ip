@@ -42,5 +42,5 @@ public abstract class Task {
         return isDone;
     }
 
-    abstract public TaskType getType();
+    public abstract TaskType getType();
 }

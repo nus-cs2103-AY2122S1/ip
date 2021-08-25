@@ -3,7 +3,7 @@ package duke;
 /**
  * Basic task that can be initialized.
  */
-public class Todo extends Task{
+public class Todo extends Task {
     public Todo(String description) throws DukeException {
         super(description);
     }
