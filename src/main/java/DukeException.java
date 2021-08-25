@@ -65,3 +65,9 @@ class ReadError extends DukeException {
         super("Uwu! File not found!");
     }
 }
+
+class TaskDoneError extends DukeException {
+    TaskDoneError() {
+        super ("Looksw wike thisw taskw is alweady done! That's gweat!\n");
+    }
+}

@@ -33,7 +33,7 @@ public class DataEditor {
 
         if (directoryExists) {
             try {
-                ArrayList<Task> tasklist = new ArrayList<>();
+                ArrayList<Task> tasklist = new ArrayList<>(100);
                 List<String> lines = Files.readAllLines(path);
 
                 for (String str: lines) {
@@ -42,23 +42,23 @@ public class DataEditor {
                         continue;
                         // incorrect task
                     } else {
-
+//
                     }
 
                 }
-
 
                 return tasklist;
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
         } else {
-            throw new ReadError();
+//            throw new ReadError();
         }
-
+        return new ArrayList<>(100);
     }
 
     public void save() throws DukeException {
+        String home = System.getProperty("user.dir");
 
     }
 
