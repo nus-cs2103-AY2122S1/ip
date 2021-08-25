@@ -1,23 +1,41 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 
 public class Duke {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+
+        // Source : https://patorjk.com/software/taag/#p=display&f=Standard&t=Dude
+        String logo2 = " ____            _      \n"
+                + "|  _ \\ _   _  __| | ___ \n"
+                + "| | | | | | |/ _` |/ _ \\\n"
+                + "| |_| | |_| | (_| |  __/\n"
+                + "|____/ \\__,_|\\__,_|\\___|\n";
+
+        System.out.println("Hello from\n" + logo2);
         System.out.println("Hello! I'm Dude");
+
+
+        Scanner stdIn =  new Scanner(System.in);
+        boolean isRunning = true;
+        ToDoList toDoList;
+
+        File dukeData = new File("./duke_data.txt");
+
         System.out.println("What can I do for you?");
 
-        Scanner sc =  new Scanner(System.in);
-        boolean isRunning = true;
-        ToDoList toDoList = new ToDoList();
+        try {
+            dukeData.createNewFile();
+            toDoList = new ToDoList(dukeData);
+
+        } catch (IOException e) {
+            System.out.println("Cannot create/access data file\n" + e.toString());
+            toDoList = new ToDoList();
+        }
 
         while (isRunning) {
-            String input = getPrompt(sc);
+            String input = getPrompt(stdIn);
             isRunning = processInput(input, toDoList);
         }
     }
@@ -29,6 +47,7 @@ public class Duke {
     static boolean processInput(String str, ToDoList toDoList){
         if (str.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
+            toDoList.saveToFile();
             return false;
         } else if (str.equals("list")) {
             System.out.println(toDoList.list());
@@ -56,4 +75,5 @@ public class Duke {
         }
         return true;
     }
+
 }
