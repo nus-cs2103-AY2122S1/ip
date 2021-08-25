@@ -3,22 +3,25 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
 
-    protected LocalDateTime at;
+    protected LocalDateTime dateTimeAt;
+    protected String at;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
-    public Event(String description, String by) {
+    public Event(String description, String at) {
         super(description);
-        this.at = LocalDateTime.parse(by, formatter);
+        this.at = at;
+        this.dateTimeAt = LocalDateTime.parse(at, formatter);
     }
 
     public Event(String num, String description, String at) {
         this(description, at);
         this.isDone = !num.equals("0");
+        this.dateTimeAt = LocalDateTime.parse(at, formatter);
     }
 
-    public String getAt() {
-        return this.at;
+    public String getFormattedAt() {
+        return this.dateTimeAt.format(DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a"));
     }
 
     @Override
@@ -29,7 +32,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String formattedAt = at.format(DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a"));
-        return "[E]" + super.toString() + " (at: " + formattedAt + ")";
+        return "[E]" + super.toString() + " (at: " + getFormattedAt() + ")";
     }
+
+
 }

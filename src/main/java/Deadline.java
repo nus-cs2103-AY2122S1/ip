@@ -3,22 +3,25 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    protected LocalDateTime by;
+    protected LocalDateTime dateTimeBy;
+    protected String by;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
     public Deadline(String description, String by){
         super(description);
-        this.by = LocalDateTime.parse(by, formatter);
+        this.by = by;
+        this.dateTimeBy = LocalDateTime.parse(by, formatter);
     }
 
     public Deadline(String num, String description, String by) {
         this(description, by);
         this.isDone = !num.equals("0");
+        this.dateTimeBy = LocalDateTime.parse(by, formatter);
     }
 
-    public String getBy() {
-        return this.by;
+    public String getFormattedBy() {
+        return this.dateTimeBy.format(DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a"));
     }
 
     @Override
@@ -28,7 +31,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String formattedBy = by.format(DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a"));
-        return "[D]" + super.toString() + " (by: " + formattedBy + ")";
+        return "[D]" + super.toString() + " (by: " + getFormattedBy() + ")";
     }
 }

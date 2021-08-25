@@ -45,7 +45,12 @@ public class Duke {
         if (command.equals("list")) {
             list();
         } else if (command.startsWith("done")) {
-            done(command.substring(5));
+            try {
+                done(command.substring(5));
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("Please provide a number after the done command that is within the total number of tasks: " + toDoList.size());
+            }
+
         } else if (command.startsWith("todo")) {
             if (command.equals("todo")) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -54,7 +59,7 @@ public class Duke {
                 add(command.substring(5), TaskType.TODO);
             } catch (DateTimeParseException e) {
                 throw new DukeException("Please write your date and time in the following format: " +
-                        "D/MM/YYYY HH:MM");
+                        "D/MM/YYYY HHMM");
             }
         } else if (command.startsWith("deadline")) {
             if (command.equals("deadline")) {
@@ -64,8 +69,11 @@ public class Duke {
                 add(command.substring(9), TaskType.DEADLINE);
             } catch (DateTimeParseException e) {
                 throw new DukeException("Please write your date and time in the following format: " +
-                        "D/MM/YYYY HH:MM");
+                        "D/MM/YYYY HHMM");
 
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please write your deadline command in the following format: " +
+                        "deadline task /by datetime");
             }
         } else if (command.startsWith("event")) {
             if (command.equals("event")) {
@@ -75,10 +83,17 @@ public class Duke {
                 add(command.substring(6), TaskType.EVENT);
             } catch (DateTimeParseException e) {
                 throw new DukeException("Please write your date and time in the following format: " +
-                        "D/MM/YYYY HH:MM");
+                        "D/MM/YYYY HHMM");
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please write your event command in the following format: " +
+                        "event task /at datetime");
             }
         } else if (command.startsWith("delete")) {
-            delete(command.substring(7));
+            try {
+                delete(command.substring(7));
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("Please provide a number after the delete command that is within the total number of tasks: " + toDoList.size());
+            }
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -115,16 +130,21 @@ public class Duke {
     }
 
     public void list() {
-        System.out.println("Here are the tasks in your list:");
-        int num = 1;
-        for (Task task: toDoList) {
-            System.out.printf("%d.%s%n", num, task);
-            num++;
+        if (toDoList.size() == 0) {
+            System.out.println("There are no tasks in your list!");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            int num = 1;
+            for (Task task: toDoList) {
+                System.out.printf("%d.%s%n", num, task);
+                num++;
+            }
         }
+
     }
 
 
-    public void add(String description, TaskType taskType) throws DateTimeParseException {
+    public void add(String description, TaskType taskType) throws DateTimeParseException, StringIndexOutOfBoundsException {
         if (toDoList.size() < 100) {
 
             Task task;
@@ -143,6 +163,7 @@ public class Duke {
 
             toDoList.add(task);
             System.out.println("Got it. I've added this task:");
+            System.out.println(task);
             fio.appendToFile(task.getFileString());
             printNowSize();
         }
@@ -150,24 +171,22 @@ public class Duke {
 
     public void delete(String num) {
         int listNum = Integer.parseInt(num);
-        if (listNum <= toDoList.size()) {
-            Task deletedTask = toDoList.remove(listNum - 1);
-            fio.deleteFileLine(listNum - 1);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(deletedTask);
-            printNowSize();
-        }
+        Task deletedTask = toDoList.remove(listNum - 1);
+        fio.deleteFileLine(listNum - 1);
+        System.out.println("Noted. I've removed this task:");
+        System.out.println(deletedTask);
+        printNowSize();
+
     }
 
-    public void done(String num) {
+    public void done(String num){
         int listNum = Integer.parseInt(num);
-        if (listNum <= toDoList.size()) {
-            toDoList.get(listNum - 1).setIsDone(true);
-            Task task = toDoList.get(listNum - 1);
-            fio.replaceFileLine(task.getFileString(), listNum - 1);
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(toDoList.get(listNum - 1));
-        }
+        toDoList.get(listNum - 1).setIsDone(true);
+        Task task = toDoList.get(listNum - 1);
+        fio.replaceFileLine(task.getFileString(), listNum - 1);
+        System.out.println("Nice! I've marked this task as done:");
+        System.out.println(toDoList.get(listNum - 1));
+
     }
 
     public void printNowSize() {
