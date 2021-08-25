@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /** Represents a Task that should be completed by a specified Date and Time
  *  @author mokdarren
@@ -18,14 +19,18 @@ public class Deadline extends Task{
     }
 
     /**
-     *
+     * Overloaded constructor used to load task from string
      * @param description description of task
      * @param by date and time that the task should be completed by
      * @param isDone
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String by, boolean isDone, DateTimeFormatter formatter) {
         super(description);
-        this.by = by;
+        try {
+            this.by = LocalDateTime.parse(by, formatter);
+        } catch (DateTimeParseException e) {
+            System.out.println(description + " could not loaded from database");
+        }
         this.isDone = isDone;
     }
 
@@ -35,7 +40,7 @@ public class Deadline extends Task{
     @Override
     public String getSaveFormatString() {
         int isDoneInt = isDone ? 1 : 0;
-        return("D," + isDoneInt + "," + description + "," + by);
+        return("D," + isDoneInt + "," + description + "," + by.format(DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm")));
     }
 
     @Override

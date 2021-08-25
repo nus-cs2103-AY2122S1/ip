@@ -1,9 +1,1 @@
-T,1,read book
-D,1,return book,June 6th
-E,1,project meeting,Aug 6th 2-4pm
-T,1,join sports club
-T,1,should be able to see this
-T,1,and this on next line
-E,1,and this too ,sunday
-T,1,show this
-T,1,new thing
+D,0,finish this assignment ,01-01-2021 12:01

@@ -18,7 +18,7 @@ public class BobbyBot {
     private static int totalTasks = 0;
     private static final BotCommand[] acceptedCommands = BotCommand.values();
     private static final String DBPATH = "data/database.txt";
-    private static final DateTimeFormatter DT_INPUT_FORMAT = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
+    private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
 
 
     public BobbyBot()  {
@@ -55,7 +55,7 @@ public class BobbyBot {
                 break;
             case "D":
                 // load deadline
-                tasks.add(new Deadline(row[2], row[3], row[1].equals("1")));
+                tasks.add(new Deadline(row[2], row[3], row[1].equals("1"), DT_FORMATTER));
                 break;
             case "E":
                 // load event
@@ -237,7 +237,7 @@ public class BobbyBot {
     private void createDeadline(String description, String by) {
         // convert string by to LocalDate
         try {
-            LocalDateTime dateBy = LocalDateTime.parse(by, DT_INPUT_FORMAT);
+            LocalDateTime dateBy = LocalDateTime.parse(by, DT_FORMATTER);
             tasks.add(new Deadline(description, dateBy));
             totalTasks++;
             System.out.println(div + "Got it. I've added this task:\n  " + tasks.get(totalTasks - 1) + "\n"
