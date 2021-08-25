@@ -1,9 +1,11 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
     private static final String LINE = "____________________________________________________________";
     private static final Scanner sc = new Scanner(System.in);
     private static final TaskList list = new TaskList();
+    private static final Storage storage = new Storage();
 
     public static void main(String[] args) {
         greet();

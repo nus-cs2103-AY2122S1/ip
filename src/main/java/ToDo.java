@@ -4,9 +4,13 @@ public class ToDo extends Task {
         super(description);
     }
 
+    public ToDo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
     @Override
     public String format() {
-        return String.format("T | %d | %s", isDone ? 1 : 0, description);
+        return String.format("T, %d, %s", isDone ? 1 : 0, description);
     }
 
     @Override
