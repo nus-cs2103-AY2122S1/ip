@@ -26,7 +26,7 @@ public class Duke {
     /**
      * Exit the duke.Duke program.
      */
-    private void exit() {
+    public void exit() {
         this.ui.showExitMessage();
         System.exit(0);
     }
@@ -36,7 +36,7 @@ public class Duke {
      * @param t String array of parsed user input.
      * @throws DukeException Exception for wrong user inputs.
      */
-    private void add(String[] t) throws DukeException{
+    public void add(String[] t) throws DukeException{
         Task newTask = null;
         switch (t[0]) {
             case "todo":
@@ -71,7 +71,7 @@ public class Duke {
      * @param index Index of duke.Task.
      * @return duke.Task of the given index.
      */
-    private Task getTaskByIndex(int index) {
+    public Task getTaskByIndex(int index) {
         return this.tl.getTaskByIndex(index);
     }
 
@@ -79,7 +79,7 @@ public class Duke {
      * Marks a task as done given its position in the list.
      * @param itemNum Position of duke.Task in the list.
      */
-    private void markDone(int itemNum){
+    public void markDone(int itemNum){
         this.tl.markDone(itemNum);
         this.storage.write(this.tl);
         this.ui.showMarkDoneMessage(this.getTaskByIndex(itemNum - 1));
@@ -90,7 +90,7 @@ public class Duke {
      * @param items Parsed delete command from user.
      * @throws DukeException Exception for wrong user inputs.
      */
-    private void deleteTask(String[] items) throws DukeException{
+    public void deleteTask(String[] items) throws DukeException{
         if (items[1].equals("")) {
             throw new DukeException("☹ OOPS!!! The task's number cannot be empty");
         } else {
@@ -106,7 +106,7 @@ public class Duke {
     /**
      * Start duke.Duke to allow for inputs.
      */
-    private void run() {
+    public void run() {
         this.ui.showGreetMessage();
         this.storage.load();
         boolean isExit = false;
