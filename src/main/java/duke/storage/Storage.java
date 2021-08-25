@@ -1,6 +1,6 @@
-package storage;
+package duke.storage;
 
-import task.*;
+import duke.task.*;
 
 import java.io.File;
 import java.io.FileWriter;

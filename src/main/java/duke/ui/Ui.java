@@ -1,4 +1,4 @@
-package ui;
+package duke.ui;
 
 public class Ui {
     private static final String INTRO_MESSAGE = "Hello! I'm Biscuit.\n"
