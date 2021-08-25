@@ -32,17 +32,16 @@ public class Task {
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
-    
+
     public String getDescription() {
         return this.description;
     }
-
+    
     /**
      * Sets the status of a task.
      *
      * @param done A boolean representing if the task is completed.
      */
-
     public void setIsDone(boolean done) {
         this.isDone = done;
     }
