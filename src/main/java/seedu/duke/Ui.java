@@ -1,6 +1,6 @@
-package duke;
+package seedu.duke;
 
-import duke.command.Commands;
+import seedu.duke.command.Commands;
 
 class Ui {
     public void outputMessage(Commands command) {

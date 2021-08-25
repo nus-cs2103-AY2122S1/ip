@@ -1,4 +1,4 @@
-package duke.task;
+package seedu.duke.task;
 
 /**
  * Class encapsulating a duke.task.

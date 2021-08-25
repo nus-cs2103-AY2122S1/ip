@@ -1,10 +1,10 @@
-package duke;
+package seedu.duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.Event;
+import seedu.duke.task.Task;
+import seedu.duke.task.TaskList;
+import seedu.duke.task.ToDo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -61,7 +61,7 @@ class Storage {
                     manager.updateDateTasks(dateTasks, time, newTask);
                     break;
                 default:
-                    throw new DukeException("Invalid duke.task.");
+                    throw new DukeException("Invalid task.");
                 }
                 System.out.println(task);
             }
@@ -83,7 +83,7 @@ class Storage {
     private LocalDate parseTime(String task, String command) throws DukeException {
         int timeIndex = task.indexOf(command);
         if (timeIndex < 0) {
-            throw new DukeException("Invalid duke.task.Task");
+            throw new DukeException("Invalid task");
         }
         String timeDescription = task.substring(timeIndex + command.length(),
                 task.indexOf(')'));

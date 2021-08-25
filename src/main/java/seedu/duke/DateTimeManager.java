@@ -1,9 +1,10 @@
-package duke;
+package seedu.duke;
 
-import duke.task.Task;
+import seedu.duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,8 +22,12 @@ class DateTimeManager {
         dateTasks.put(date, tasksOnDate);
     }
 
-    public LocalDate parseDateTime(String dateTime) {
-        LocalDate date = LocalDate.parse(dateTime, formatter);
-        return date;
+    public LocalDate parseDateTime(String dateTime) throws DukeException {
+        try {
+            LocalDate date = LocalDate.parse(dateTime, formatter);
+            return date;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Cannot read date.");
+        }
     }
 }

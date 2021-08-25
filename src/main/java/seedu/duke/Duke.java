@@ -1,11 +1,11 @@
-package duke;
+package seedu.duke;
 
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.task.TaskList;
-import duke.command.Commands;
+import seedu.duke.task.Task;
+import seedu.duke.task.ToDo;
+import seedu.duke.task.Event;
+import seedu.duke.task.Deadline;
+import seedu.duke.task.TaskList;
+import seedu.duke.command.Commands;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -17,7 +17,7 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 /**
- * Class encapsulating a duke.Duke and its commands.
+ * Class encapsulating a Duke and its commands.
  */
 class Duke {
 
@@ -65,7 +65,7 @@ class Duke {
                     int index = Integer.parseInt(arrOfCommandWords[1]) - 1;
                     this.taskIndex = index;
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid duke.task number");
+                    throw new DukeException("Invalid task number");
                 }
                 return UserCommands.DONE;
             case "get":
@@ -80,7 +80,7 @@ class Duke {
                     int index = Integer.parseInt(arrOfCommandWords[1]) - 1;
                     this.taskIndex = index;
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid duke.task number");
+                    throw new DukeException("Invalid task number");
                 }
                 return UserCommands.DELETE;
             default:
@@ -93,7 +93,7 @@ class Duke {
                 int indexOfDate = userInput.indexOf(command);
                 int startOfDescription = userInput.indexOf(' ');
                 if (indexOfDate < 0) {
-                    throw new DukeException("No date specified for duke.task.");
+                    throw new DukeException("No date specified for task.");
                 }
                 String description = userInput.substring(startOfDescription, indexOfDate);
                 list_of_words[1] = description;
@@ -105,9 +105,9 @@ class Duke {
         }
 
         /**
-         * Method for duke.Duke to handle invalid inputs by the user.
+         * Method for Duke to handle invalid inputs by the user.
          *
-         * @param input The user input to duke.Duke.
+         * @param input The user input to Duke.
          */
         private void handleInvalidInputs(String input) {
             try {
@@ -124,7 +124,7 @@ class Duke {
                 }
                 case "done": // fallthrough
                 case "delete":
-                    throw new DukeException("Please enter the duke.task index.");
+                    throw new DukeException("Please enter the task index.");
                 case "get":
                     throw new DukeException("Please enter a date in dd/MM/yyyy format.");
                 default:
@@ -171,7 +171,7 @@ class Duke {
     }
 
     /**
-     * Field for duke to keep track of duke.task list.
+     * Field for duke to keep track of task list.
      */
     private TaskList taskList;
     private Storage storage;
@@ -180,7 +180,7 @@ class Duke {
     private Parser parser = new Parser();
 
     /**
-     * Constructor for duke.Duke
+     * Constructor for Duke
      */
     public Duke(TaskList taskList, Storage storage, Ui ui) {
         this.taskList = taskList;
@@ -189,7 +189,7 @@ class Duke {
     }
 
     /**
-     * Dividing line for formatting duke.Duke's replies.
+     * Dividing line for formatting Duke's replies.
      */
     private void divider() {
         StringBuilder builder = new StringBuilder(100);
@@ -200,7 +200,7 @@ class Duke {
     }
 
     /**
-     * Method that prints duke.Duke's greetings.
+     * Method that prints Duke's greetings.
      */
     private void greet() {
         divider();
@@ -209,16 +209,17 @@ class Duke {
     }
 
     /**
-     * Method that prints duke.Duke's exit message.
+     * Method that prints Duke's exit message.
      */
     private void exit() {
         divider();
         ui.outputMessage(Commands.EXIT);
         divider();
+        System.exit(0);
     }
 
     /**
-     * Method that prints the current tasks in the duke.task list.
+     * Method that prints the current tasks in the task list.
      */
     private void returnTaskList() {
         divider();
@@ -236,8 +237,12 @@ class Duke {
         String customPattern ="dd/MM/yyyy";
         DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(customPattern);
         DateTimeManager dateTimeManager = new DateTimeManager(customFormatter);
-        LocalDate date = dateTimeManager.parseDateTime(dateTime);
-        System.out.println(dateTasks.getOrDefault(date, new ArrayList<>()));
+        try {
+            LocalDate date = dateTimeManager.parseDateTime(dateTime);
+            System.out.println(dateTasks.getOrDefault(date, new ArrayList<>()));
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
@@ -255,9 +260,9 @@ class Duke {
 
 
     /**
-     * Method for duke.Duke to mark the respective tasks as completed.
+     * Method for Duke to mark the respective tasks as completed.
      *
-     * @param index Index of the duke.task to be deleted.
+     * @param index Index of the task to be deleted.
      */
     private void markTaskAsCompleted(int index) {
         try {
@@ -273,7 +278,7 @@ class Duke {
                 );
                 storage.markTaskAsCompleted(task.toString(), toUpdate);
             } else {
-                throw new DukeException("There is no such duke.task.");
+                throw new DukeException("There is no such task.");
             }
             divider();
         } catch (DukeException e) {
@@ -282,9 +287,9 @@ class Duke {
     }
 
     /**
-     * Method for duke.Duke to delete the corresponding duke.task.
+     * Method for Duke to delete the corresponding task.
      *
-     * @param index Index of the duke.task to be deleted.
+     * @param index Index of the task to be deleted.
      */
     private void deleteTask(int index) {
         try {
@@ -300,7 +305,7 @@ class Duke {
                 );
                 storage.deleteTaskFromFile(this.taskList);
             } else {
-                throw new DukeException("There is no such duke.task.");
+                throw new DukeException("There is no such task.");
             }
             divider();
         } catch (DukeException e) {
@@ -310,7 +315,7 @@ class Duke {
 
 
     /**
-     * Runs the duke.Duke chatbot.
+     * Runs the Duke chatbot.
      */
     private void run() {
 
@@ -330,14 +335,12 @@ class Duke {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             } finally {
-
             }
         }
-        // sc.close();
     }
 
     /**
-     * Main method to execute duke.Duke's functions.
+     * Main method to execute Duke's functions.
      *
      * @param args Command line arguments.
      */
