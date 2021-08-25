@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
-
 import java.time.format.DateTimeParseException;
 
 /**
@@ -17,6 +16,10 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor for TaskList with initial tasks.
+     * @param tasks Initial tasks.
+     */
 	public TaskList(ArrayList<Task> tasks) {
 		this.tasks = tasks;
 	}
@@ -51,7 +54,12 @@ public class TaskList {
                                 + "\n\tNow you have " + tasks.size() + " tasks in the list.\n"); 
     } 
 
-    
+    /**
+     * Get the task number in the list.
+     * @param command Command to extract task number from.
+     * @return Task number.
+     * @throws DukeException
+     */
     public int getTaskNum(String command) throws DukeException {
         int taskNum;
 
@@ -67,9 +75,9 @@ public class TaskList {
     }
 
 	/**
-     * Delete a task.
+     * Handle task deletion.
      * 
-     * @param command user input to extract task number
+     * @param command user input to parse
      * @throws DukeException
      */
     protected void handleDelete(String command) throws DukeException {
@@ -82,9 +90,9 @@ public class TaskList {
     }
 
     /**
-     * Mark a task as done.
+     * Handle task completion.
      * 
-     * @param command user input to extract task number
+     * @param command user input to parse
      * @throws DukeException
      */
     protected void handleDone(String command) throws DukeException {
@@ -142,10 +150,9 @@ public class TaskList {
     }
 
     /**
-     * Add deadline or event task with date/time.
+     * Add deadline task with date/time.
      * 
-     * @param command user input to extract task and date/time
-     * @param type    type of task to add
+     * @param command user input to extract task and datetime
      * @throws DukeException
      */
     protected void addDeadline(String command) throws DukeException {
@@ -178,7 +185,6 @@ public class TaskList {
     }
 
     public String getTask(String[] commandSplit) throws DukeException {
-        // String task = commandSplit[0].split("deadline")[1].trim();
         String task = commandSplit[0].trim();
 
         if (task.isEmpty()) {
