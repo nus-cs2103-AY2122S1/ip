@@ -1,7 +1,6 @@
 package duke.tasks;
 
 public class ToDos extends Task {
-
     /**
      * Contructor which inherits from the super class. Default having the isDone
      * parameter to be false.

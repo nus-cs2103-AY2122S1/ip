@@ -4,7 +4,6 @@ import java.io.IOException;
 import duke.Duke;
 
 public class Main {
-
     /**
      * Runs the main Duke ToDo Application
      * 
