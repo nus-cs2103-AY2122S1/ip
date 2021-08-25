@@ -23,8 +23,8 @@ public class Pib {
     public Pib() {
         this.ui = new Ui();
         this.list = new TaskList();
-        this.storage = new Storage(DATA_FILE_PATH);
         try {
+            this.storage = new Storage(DATA_FILE_PATH);
             storage.loadData(this.list);
         } catch (PibException e) {
             e.print();

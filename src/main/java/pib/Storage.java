@@ -24,9 +24,16 @@ public class Storage {
      *
      * @param filePath String to locate the stored data
      */
-    public Storage(String filePath) {
+    public Storage(String filePath) throws PibException {
         this.filePath = filePath;
         this.file = new File(filePath);
+        try {
+            if (this.file.createNewFile()) {
+                Ui.printNoSavedDataFound();
+            }
+        } catch (IOException e) {
+            throw new PibException("io-exception");
+        }
     }
 
     /**
@@ -38,30 +45,35 @@ public class Storage {
     public void loadData(TaskList list) throws PibException {
         try {
             Scanner sc = new Scanner(this.file);
-            Ui.printDataLoading();
-            while (sc.hasNext()) {
-                String[] taskDetails = sc.nextLine().split(",");
-                Task newTask = null;
-                switch (taskDetails[0]) {
-                case "T":
-                    newTask = Todo.createTodo(taskDetails[2], Integer.parseInt(taskDetails[1]), false);
-                    break;
-                case "E":
-                    newTask = Event.createEvent(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
-                    break;
-                case "D":
-                    newTask = Deadline.createDeadline(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
-                    break;
-                default:
-                    break;
+            if (sc.hasNext()) {
+                Ui.printDataLoading();
+                while (sc.hasNext()) {
+                    String[] taskDetails = sc.nextLine().split(",");
+                    Task newTask = null;
+                    switch (taskDetails[0]) {
+                    case "T":
+                        newTask = Todo.createTodo(taskDetails[2], Integer.parseInt(taskDetails[1]), false);
+                        break;
+                    case "E":
+                        newTask = Event.createEvent(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
+                        break;
+                    case "D":
+                        newTask = Deadline.createDeadline(taskDetails[2], Integer.parseInt(taskDetails[1]), taskDetails[3], taskDetails[4], false);
+                        break;
+                    default:
+                        break;
+                    }
+                    if (newTask != null) {
+                        list.addSavedData(newTask);
+                    }
                 }
-                if (newTask != null) {
-                    list.addSavedData(newTask);
-                }
+                Ui.printDataLoadSuccess();
+                Ui.printList(list);
+            } else {
+                Ui.printNoSavedDataFound();
             }
-            Ui.printDataLoadSuccess();
-            Ui.printList(list);
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             throw new PibException("fnf-exception");
         }
     }

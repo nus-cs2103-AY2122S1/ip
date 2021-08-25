@@ -1,4 +1,1 @@
-D,0,read,12 Nov 2020,11:59 PM
-T,0,read book
-T,0,study
-T,0,read more
+T,0,read

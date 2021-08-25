@@ -1,0 +1,4 @@
+T,1,read book
+D,1,homework,12 Dec 2021,11:59 PM
+E,0,party,01 Jan 1999,03:30 PM
+D,0,read notes,10 Oct 2020,12:30 PM

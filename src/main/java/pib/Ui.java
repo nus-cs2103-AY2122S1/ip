@@ -44,6 +44,10 @@ public class Ui {
         System.out.println("Saved data loading...");
     }
 
+    public static void printNoSavedDataFound() {
+        System.out.println("No saved data found\n" + DIVIDER);
+    }
+
     public static void printQueryFound(String query) {
         System.out.println("These task contains the word: " + query);
     }
