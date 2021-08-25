@@ -1,9 +1,6 @@
 package bot;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +8,11 @@ import tasks.Task;
 
 public class Storage {
 
-  public static final String savefilePath = "./data/save.txt";
+  public static final String savefilePath = "data/save.txt";
 
   private static void write(List<String> texts) {
     try {
-      FileWriter writer = new FileWriter(savefilePath);
+      FileWriter writer = new FileWriter(getAbsolutePath());
       for (String s: texts) {
         writer.write(s + System.lineSeparator());
       }
@@ -52,6 +49,10 @@ public class Storage {
       }
     }
     bot.taskList.set(tasks);
+  }
+
+  private static String getAbsolutePath() {
+    return new File(savefilePath).getAbsolutePath();
   }
   
 }

@@ -24,11 +24,15 @@ public class Parser {
     return reader.nextLine();
   }
 
-  public static Command getCommand() {
-    String[] input = getInput().split(" ", 2);
-    Command cmd = CommandType.getCommandFromName(input[0]);
-    cmd.setArgs(new String[]{ input.length >=2 ? input[1] : "" });
+  public static Command commandFromString(String input) {
+    String[] inputArr = input.split(" ", 2);
+    Command cmd = CommandType.getCommandFromName(inputArr[0]);
+    cmd.setArgs(new String[]{ inputArr.length >=2 ? inputArr[1] : "" });
     return cmd;
+  }
+
+  public static Command getCommand() {
+    return commandFromString(getInput());
   }
 
   /**
