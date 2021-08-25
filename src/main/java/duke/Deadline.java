@@ -1,8 +1,8 @@
 package duke;
 
+import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
     /** Date aspect of the deadline */
