@@ -26,7 +26,7 @@ public abstract class Task {
         return isDone ? 1 : 0;
     }
 
-    protected String getContent() {
+    String getContent() {
         return this.content;
     }
 
