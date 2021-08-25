@@ -1,4 +1,6 @@
-public class Task {
+package task;
+
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -18,6 +20,10 @@ public class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String databaseString() {
+        return String.format("%s | %s", isDone ? 1 : 0, description);
     }
 
     @Override
