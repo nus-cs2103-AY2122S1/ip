@@ -135,4 +135,16 @@ public class TaskList {
         }
         return str.toString();
     }
+
+    public String findTask(List<Task> tasks, String userInput) {
+        String keyWord = userInput.substring(5);
+        List<Task> tempList = new ArrayList<>();
+
+        tasks.forEach(task -> {
+            if(task.toString().contains(keyWord)) {
+                tempList.add(task);
+            };
+        });
+        return showTasks(tempList);
+    }
 }

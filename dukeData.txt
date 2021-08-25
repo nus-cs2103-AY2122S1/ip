@@ -1,5 +1,8 @@
 event,0,Sam Birthday,1999-02-02 1234
 deadline,1,homework,2014-02-03 1200
-todo,0,efhbf
-deadline,1,shez,2019-03-04 1420
-todo,0,jdbec
+deadline,0,shez,2019-03-04 1420
+todo,1,big ben
+todo,0,biggg
+todo,0,shez
+deadline,1,jum around,1987-08-08 1221
+event,0,scoibydoobydo,1909-04-03 1321

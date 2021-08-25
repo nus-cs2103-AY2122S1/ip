@@ -29,13 +29,14 @@ public class Parser {
             return false;
         } else if (userInput.equalsIgnoreCase("list")) {
             toReply = taskList.showTasks(taskList.getTasks());
-            // cant put done word as a task
         } else if (userInput.toLowerCase().startsWith("done")) {
             toReply = taskList.markTaskDone(userInput);
             storage.updateDataSet(taskList.getTasks());
         } else if (userInput.toLowerCase().startsWith("delete")) {
             toReply = taskList.deleteTask(userInput);
             storage.updateDataSet(taskList.getTasks());
+        } else if (userInput.toLowerCase().startsWith("find")) {
+            toReply = taskList.findTask(taskList.getTasks(), userInput);
         } else {
             toReply = taskList.addTask(userInput, storage.getDataPath());
         }
