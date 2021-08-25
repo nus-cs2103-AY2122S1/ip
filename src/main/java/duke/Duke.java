@@ -27,7 +27,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initiates the chat bot by loading the given file.
+     * Initiates the chatbot by loading the given file.
      *
      * @param filepath The location of the file to load.
      */
@@ -44,7 +44,7 @@ public class Duke {
     }
 
     /**
-     * Starts the chat bot's interactions with the user.
+     * Starts the chatbot's interactions with the user.
      */
     public void run() {
         ui.printWelcomeMessage();
@@ -81,7 +81,6 @@ public class Duke {
 
         ui.printBye();
     }
-
 
     /**
      * Initializes the chatbot.
