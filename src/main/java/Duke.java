@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,7 +12,8 @@ public class Duke {
     private static String DATAPATH = String.valueOf(Paths.get(Duke.DIR, Duke.FILENAME));
 
     private Scanner input = new Scanner(System.in);
-    private ArrayList<Task> list = new ArrayList<>();
+//    private ArrayList<Task> list = new ArrayList<>();
+    private TaskList taskList = new TaskList();
 
     private enum CommandType {
         BYE, LIST,
@@ -74,7 +74,7 @@ public class Duke {
         if (Integer.parseInt(fields[1]) == 1) {
             taskToAdd.markAsDone();
         }
-        this.list.add(taskToAdd);
+        this.taskList.add(taskToAdd);
     }
 
 
@@ -153,8 +153,8 @@ public class Duke {
     private void saveData() throws IOException {
         FileWriter fw = new FileWriter(Duke.DATAPATH, false);
         BufferedWriter bw = new BufferedWriter(fw);
-        for (Task task : this.list) {
-            bw.write(task.stringifyTask());
+        for (int i = 1; i <= this.taskList.getLength(); i++) {
+            bw.write(this.taskList.get(i).stringifyTask());
             bw.newLine();
         }
         bw.close();
@@ -163,13 +163,13 @@ public class Duke {
 
 
     private void showList() {
-        if (this.list.size() == 0) {
+        if (this.taskList.isEmpty()) {
             System.out.println("\tYou have no task in your list.\n");
             return;
         }
         System.out.println("\tHere are the tasks in your list:");
-        for (int i = 1; i <= this.list.size(); i++) {
-            System.out.println("\t" + i + ". " + this.list.get(i - 1));
+        for (int i = 1; i <= this.taskList.getLength(); i++) {
+            System.out.println("\t" + i + ". " + this.taskList.get(i));
         }
         System.out.println();
     }
@@ -178,9 +178,9 @@ public class Duke {
     private void addTodo(String[] userInput) throws DukeMissingArgumentException {
         try {
             String description = userInput[1];
-            this.list.add(new Todo(description));
-            System.out.printf("\tadded todo:\n\t\t%s\n", this.list.get(this.list.size() - 1));
-            System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
+            this.taskList.add(new Todo(description));
+            System.out.printf("\tadded todo:\n\t\t%s\n", this.taskList.get(this.taskList.getLength()));
+            System.out.printf("\tYou have %d tasks in the list.\n\n", this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         }
@@ -201,9 +201,9 @@ public class Duke {
                 return;
             }
 
-            this.list.add(new Event(splits[0], startTime, endTime));
-            System.out.printf("\tadded event:\n\t\t%s\n", this.list.get(this.list.size() - 1));
-            System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
+            this.taskList.add(new Event(splits[0], startTime, endTime));
+            System.out.printf("\tadded event:\n\t\t%s\n", this.taskList.get(this.taskList.getLength()));
+            System.out.printf("\tYou have %d tasks in the list.\n\n", this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         } catch (DateTimeParseException e) {
@@ -217,9 +217,9 @@ public class Duke {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
             String[] splits = userInput[1].split(" /by ", 2);
             LocalDateTime time = LocalDateTime.parse(splits[1], formatter);
-            this.list.add(new Deadline(splits[0], time));
-            System.out.printf("\tadded deadline:\n\t\t%s\n", this.list.get(this.list.size() - 1));
-            System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
+            this.taskList.add(new Deadline(splits[0], time));
+            System.out.printf("\tadded deadline:\n\t\t%s\n", this.taskList.get(this.taskList.getLength()));
+            System.out.printf("\tYou have %d tasks in the list.\n\n", this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         } catch (DateTimeParseException e) {
@@ -232,12 +232,12 @@ public class Duke {
             throws DukeNoTaskFoundException, DukeMissingArgumentException, DukeInvalidArgumentException {
         try {
             int taskNum = Integer.parseInt(userInput[1]);
-            if (taskNum > this.list.size()) {
+            if (taskNum > this.taskList.getLength()) {
                 throw new DukeNoTaskFoundException(taskNum);
             }
-            this.list.get(taskNum - 1).markAsDone();
+            this.taskList.get(taskNum).markAsDone();
             System.out.println("\tI've marked this task as done!");
-            System.out.printf("\t\t%s\n\n", this.list.get(taskNum - 1));
+            System.out.printf("\t\t%s\n\n", this.taskList.get(taskNum));
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException();
         } catch (IndexOutOfBoundsException e) {
@@ -250,13 +250,13 @@ public class Duke {
             throws DukeNoTaskFoundException, DukeMissingArgumentException, DukeInvalidArgumentException {
         try {
             int taskNum = Integer.parseInt(userInput[1]);
-            if (taskNum > this.list.size()) {
+            if (taskNum > this.taskList.getLength()) {
                 throw new DukeNoTaskFoundException(taskNum);
             }
             System.out.println("\tI've deleted this task from the list!");
-            System.out.printf("\t\t%s\n", this.list.get(taskNum - 1));
-            this.list.remove(taskNum - 1);
-            System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
+            System.out.printf("\t\t%s\n", this.taskList.get(taskNum));
+            this.taskList.delete(taskNum);
+            System.out.printf("\tYou have %d tasks in the list.\n\n", this.taskList.getLength());
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException();
         } catch (IndexOutOfBoundsException e) {
