@@ -12,10 +12,10 @@ public class SaberParser {
     public SaberParser(String unparsedCommand) {
         String unparsedCommandWithoutTime;
         String[] parsedCommandTemp = unparsedCommand.split(" ", 2);
-        boolean isAddCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.add.name());
-        boolean isTodoCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.todo.name());
+        boolean isDeadlineCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.deadline.name());
+        boolean isEventCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.event.name());
         boolean hasTime = unparsedCommand.contains("/at ") || unparsedCommand.contains("/by ");
-        if (hasTime && !isAddCommandType && !isTodoCommandType) {
+        if (hasTime && isDeadlineCommandType && isEventCommandType) {
             int slashIndex = unparsedCommand.indexOf("/at ");
             if (slashIndex == -1) {
                 slashIndex = unparsedCommand.indexOf("/by ");
