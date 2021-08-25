@@ -1,4 +1,7 @@
 public class Task {
+    public enum TaskType {
+        TODO, EVENT, DEADLINE
+    }
     private String description;
     private boolean isDone;
 

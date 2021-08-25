@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class FileManager {
+public class Storage {
 
     private File f;
 
-    public FileManager(String pathname) {
+    public Storage(String pathname) {
         f = new File(pathname);
     }
 
-    public ArrayList<Task> loadInTasks() throws IOException {
+    public ArrayList<Task> load() throws IOException {
         if (!f.exists()) {
             f.getParentFile().mkdirs();
             f.createNewFile();
@@ -21,12 +21,13 @@ public class FileManager {
             Scanner scanner = new Scanner(f);
             ArrayList<Task> res = new ArrayList<>();
             while (scanner.hasNextLine()) {
-                Task t = parse(scanner.nextLine());
+                Task t = Parser.parseFileContent(scanner.nextLine());
                 res.add(t);
             }
             return res;
         }
     }
+
     public void saveTask(Task task) throws IOException {
         FileWriter fw = new FileWriter(f, true);
         if (f.length() != 0) {
@@ -63,22 +64,6 @@ public class FileManager {
         tempWriter.close();
         f.delete();
         temp.renameTo(f);
-    }
-
-    private static Task parse(String s) throws IllegalArgumentException {
-        char taskType = s.charAt(1);
-        String desc = s.substring(7);
-        boolean isDone = s.charAt(4) == 'X';
-        switch (taskType) {
-            case 'T':
-                return new Todo(desc, isDone);
-            case 'D':
-                return Deadline.createDeadline(desc, isDone);
-            case 'E':
-                return Event.createEvent(desc, isDone);
-            default:
-                throw new IllegalArgumentException("File improperly formatted");
-        }
     }
 
 

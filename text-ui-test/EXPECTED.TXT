@@ -3,26 +3,31 @@ ______________________
  What can I do for you?
 ______________________
 ______________________
- Added: [T][ ] farming leylines
+ Successfully added:
+ [T][ ] farming leylines
  You now have 1 task(s).
 ______________________
 ______________________
- Added: [D][ ] clip toenails (by: Sep 1 2021)
+ Successfully added:
+ [D][ ] clip toenails (by: Sep 1 2021)
  You now have 2 task(s).
 ______________________
 ______________________
  Time must be in yyyy-mm-dd format.
 ______________________
 ______________________
- Added: [D][ ] code (by: Aug 29 2021)
+ Successfully added:
+ [D][ ] code (by: Aug 29 2021)
  You now have 3 task(s).
 ______________________
 ______________________
- Added: [E][ ] lecture (at: Sep 1 2021)
+ Successfully added:
+ [E][ ] lecture (at: Sep 1 2021)
  You now have 4 task(s).
 ______________________
 ______________________
- Added: [T][ ] brush teeth
+ Successfully added:
+ [T][ ] brush teeth
  You now have 5 task(s).
 ______________________
 ______________________
@@ -52,10 +57,10 @@ ______________________
  [T][X] farming leylines
 ______________________
 ______________________
- Time must be stipulated for deadlines using '/by'
+ Time must be stipulated for deadlines using '/by'.
 ______________________
 ______________________
- Time must be stipulated for events using '/at'
+ Time must be stipulated for events using '/at'.
 ______________________
 ______________________
  The description of DEADLINE cannot be empty.
@@ -88,7 +93,8 @@ ______________________
  3. [T][X] brush teeth
 ______________________
 ______________________
- Bye. I love Imagine Dragons.
+ Bye. I love Imagine Dragons...
+
 
 
  Imagine Dragon Deez Nuts Cross Your Face.

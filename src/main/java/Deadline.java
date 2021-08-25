@@ -13,7 +13,7 @@ public class Deadline extends Task {
             LocalDate time = LocalDate.parse(arr[1].trim());
             return new Deadline(arr[0].trim(), time);
         } else {
-            throw new InputMismatchException();
+            throw new InputMismatchException("Time must be stipulated for deadlines using '/by'.");
         }
     }
 
@@ -26,7 +26,7 @@ public class Deadline extends Task {
                     time,
                     isDone);
         } else {
-            throw new InputMismatchException();
+            throw new InputMismatchException("");
         }
     }
 

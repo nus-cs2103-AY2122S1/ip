@@ -14,7 +14,7 @@ public class Event extends Task {
             LocalDate time = LocalDate.parse(arr[1].trim());
             return new Event(arr[0].trim(), time);
         } else {
-            throw new InputMismatchException();
+            throw new InputMismatchException("Time must be stipulated for events using '/at'.");
         }
     }
 
