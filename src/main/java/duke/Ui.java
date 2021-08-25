@@ -1,8 +1,5 @@
 package duke;
 
-import duke.Task;
-import duke.TaskList;
-
 public class Ui {
     String line = "____________________________________________________________\n";
 

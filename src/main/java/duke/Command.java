@@ -17,50 +17,38 @@ public class Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage save) {
         ui.Start();
-        boolean exit = false;
+        boolean hasExit = false;
         Scanner sc = new Scanner(System.in);
         String filePath = "data/duke.txt";
         int count = tasks.size();
 
-        while (!exit) {
+        while (!hasExit) {
             String command = Parser.parseCommand(sc.next());
             switch(command){
-                case "bye":
-                    ui.Bye();
-                    exit = true;
+            case "bye":
+                ui.Bye();
+                hasExit = true;
+                break;
+            case "list":
+                String list = "";
+                int listNum = 1;
+                for (int i = 0; i < tasks.size(); i++){
+                    list += listNum + "." + tasks.get(i) + "\n";
+                    listNum++;
+                }
+                ui.list(list);
+                break;
+            case "done":
+                int doneNum = sc.nextInt() - 1;
+                try {
+                    tasks.get(doneNum).markAsDone();
+                    ui.Done(tasks,doneNum);
                     break;
-                case "list":
-                    String list = "";
-                    int listNum = 1;
-                    for(int i = 0;i<tasks.size();i++){
-                        list += listNum + "." + tasks.get(i) +"\n";
-                        listNum++;
-                    }
-                    ui.list(list);
+                } catch (IndexOutOfBoundsException e) {
+                    ui.showDoneError();
                     break;
-                case "done":
-                    int doneNum = sc.nextInt() - 1;
-                    try{
-                        tasks.get(doneNum).markAsDone();
-                        ui.Done(tasks,doneNum);
-                        break;
-                    }catch (IndexOutOfBoundsException e){
-                        ui.showDoneError();
-                        break;
-                    }
-                case "delete":
-                    int delNum = sc.nextInt()-1;
-                    try{
-                        Task delete = tasks.get(delNum);
-                        count--;
-                        ui.Delete(delete,count);
-                        tasks.remove(delNum);
-                        break;
-                    }catch (IndexOutOfBoundsException e){
-                        ui.showDeleteError();
-                        break;
-                    }
-                case "todo":
+                }
+            case "todo":
                     try {
                         String todoDescription = sc.nextLine().trim();
                         Task todo = new Todo(todoDescription, count);
@@ -75,7 +63,19 @@ public class Command {
                         System.out.println(e.getMessage());
                         break;
                     }
-                case "deadline":
+            case "delete":
+                int delNum = sc.nextInt()-1;
+                try {
+                    Task delete = tasks.get(delNum);
+                    count--;
+                    ui.Delete(delete,count);
+                    tasks.remove(delNum);
+                    break;
+                } catch (IndexOutOfBoundsException e){
+                    ui.showDeleteError();
+                    break;
+                }
+            case "deadline":
                     try {
                         String[] deadlineArr = sc.nextLine().split("/by");
                         if(deadlineArr[0].strip().isEmpty()){
@@ -130,10 +130,8 @@ public class Command {
                     }
                 default:
                     ui.defaultError();
-            }
-
+                }
             save.writeToFile(filePath,tasks);
-
         }
     }
 }

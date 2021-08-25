@@ -21,13 +21,13 @@ public class Storage {
     Storage(String filePath){
         this.filePath = filePath;
         file = new File(filePath);
-        if(!file.exists()){
-            try{
+        if (!file.exists()) {
+            try {
                 file = new File("data");
                 file.mkdir();
                 file = new File("data/duke.txt");
                 file.createNewFile();
-            }catch (IOException e){
+            } catch (IOException e){
                 System.out.println("Something went wrong: " + e.getMessage());
             }
         }
@@ -39,16 +39,16 @@ public class Storage {
      * @param list list of tasks that will be written into the file
      */
     public void writeToFile(String filePath, TaskList list){
-        try{
+        try {
             String text = "";
             FileWriter fw = new FileWriter(filePath);
-            for(int i=0;i<list.size();i++){
+            for (int i = 0; i < list.size(); i++){
                 Task t = list.get(i);
                 text += textToAdd(t);
             }
             fw.write(text);
             fw.close();
-        }catch (IOException e){
+        } catch (IOException e){
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
@@ -67,49 +67,49 @@ public class Storage {
         while (s.hasNext()) {
             String taskType = s.next();
             switch(taskType){
-                case "T":
-                    String[] todoArr = s.nextLine().trim().split("\\|");
-                    Task todo = new Todo(todoArr[2].trim(),count);
-                    if(Integer.parseInt(todoArr[1].trim()) == 1){
-                        todo.markAsDone();
-                    }
-                    list.add(todo);
-                    count++;
-                    break;
-                case "D":
-                    String[] deadlineArr = s.nextLine().trim().split("\\|");
-                    Task deadline = new Deadline(deadlineArr[2].trim(),deadlineArr[3].trim(),count);
-                    if(Integer.parseInt(deadlineArr[1].trim()) == 1){
-                        deadline.markAsDone();
-                    }
-                    list.add(deadline);
-                    count++;
-                    break;
-                case "E":
-                    String[] eventArr = s.nextLine().trim().split("\\|");
-                    Task event = new Event(eventArr[2].trim(),eventArr[3].trim(),count);
-                    if(Integer.parseInt(eventArr[1].trim()) == 1){
-                        event.markAsDone();
-                    }
-                    list.add(event);
-                    count++;
-                    break;
+            case "T":
+                String[] todoArr = s.nextLine().trim().split("\\|");
+                Task todo = new Todo(todoArr[2].trim(),count);
+                if (Integer.parseInt(todoArr[1].trim()) == 1) {
+                    todo.markAsDone();
+                }
+                list.add(todo);
+                count++;
+                break;
+            case "D":
+                String[] deadlineArr = s.nextLine().trim().split("\\|");
+                Task deadline = new Deadline(deadlineArr[2].trim(),deadlineArr[3].trim(),count);
+                if (Integer.parseInt(deadlineArr[1].trim()) == 1) {
+                    deadline.markAsDone();
+                }
+                list.add(deadline);
+                count++;
+                break;
+            case "E":
+                String[] eventArr = s.nextLine().trim().split("\\|");
+                Task event = new Event(eventArr[2].trim(),eventArr[3].trim(),count);
+                if (Integer.parseInt(eventArr[1].trim()) == 1) {
+                    event.markAsDone();
+                }
+                list.add(event);
+                count++;
+                break;
             }
         }
         return list;
     }
 
 
-    private static String textToAdd(Task t){
+    private static String textToAdd(Task t) {
         String mes = "";
-        if(t instanceof Todo){
+        if (t instanceof Todo) {
             mes += "T" + statusIcon(t) + t.description +"\n";
         }
-        if(t instanceof Deadline){
+        if (t instanceof Deadline) {
             Deadline d = (Deadline)t;
             mes += "D" + statusIcon(t) + t.description + " | " + d.getBy() + "\n";
         }
-        if(t instanceof Event){
+        if (t instanceof Event) {
             Event e = (Event)t;
             mes += "E" + statusIcon(t) + t.description + " | " + e.getAt() + "\n";
         }
@@ -117,11 +117,10 @@ public class Storage {
     }
 
     private static String statusIcon(Task t){
-        if(t.getStatusIcon() == "X"){
+        if (t.getStatusIcon() == "X") {
             return " | 1 | ";
-        }else{
+        } else {
             return " | 0 | ";
         }
     }
-
 }

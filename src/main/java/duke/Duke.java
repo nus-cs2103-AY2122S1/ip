@@ -34,7 +34,7 @@ public class Duke {
         c.execute(tasks,ui,storage);
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 }
