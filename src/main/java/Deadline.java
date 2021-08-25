@@ -19,6 +19,11 @@ public class Deadline extends Task {
         this.endDate = parseDateTime(endDate.trim());
     }
 
+    public Deadline(String title, String endDate, boolean isDone) {
+        super(title, isDone);
+        this.endDate = parseDateTime(endDate.trim());
+    }
+
     private LocalDateTime parseDateTime(String date) {
         try {
             LocalDateTime parsedDateTime = LocalDateTime.parse(date, FORMATTER);
@@ -30,13 +35,10 @@ public class Deadline extends Task {
         }
     }
 
-    public Deadline(String title, String endDate, boolean isDone) {
-        super(title, isDone);
-        this.endDate = endDate.trim();
-    }
+    
 
     public String toFileString() {
-        return String.format("D | %s | %s", super.toFileString(), endDate);
+        return String.format("D | %s | %s", super.toFileString(), endDate.format(PRINT_FORMATTER));
     }
 
     /**
