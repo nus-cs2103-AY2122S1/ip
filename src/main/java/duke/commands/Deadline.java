@@ -1,3 +1,5 @@
+package duke.commands;
+
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -8,6 +10,10 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime by) {
         super(description, "D");
         this.by = by;
+    }
+
+    public LocalDateTime getBy() {
+        return this.by;
     }
 
     @Override

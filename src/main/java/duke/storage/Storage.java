@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.Task;
+import duke.commands.Todo;
+import duke.data.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -17,18 +25,18 @@ public class Storage {
             PrintWriter printWriter = new PrintWriter(FileName);
             StringBuilder sb = new StringBuilder();
             for (Task task : arr) {
-                sb.append(task.logo);
+                sb.append(task.getLogo());
                 sb.append(",");
-                sb.append(task.isDone ? "1" : "0");
+                sb.append(task.checkDone() ? "1" : "0");
                 sb.append(",");
-                sb.append(task.description);
+                sb.append(task.getDescription());
                 if (task instanceof Event) {
                     sb.append(",");
-                    sb.append(((Event) task).at);
+                    sb.append(((Event) task).getAt());
                 }
                 if (task instanceof Deadline) {
                     sb.append(",");
-                    sb.append(((Deadline) task).by);
+                    sb.append(((Deadline) task).getBy());
                 }
                 sb.append(System.lineSeparator());
             }

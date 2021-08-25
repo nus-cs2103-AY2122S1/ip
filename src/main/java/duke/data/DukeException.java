@@ -1,3 +1,5 @@
+package duke.data;
+
 public class DukeException extends Exception {
     String header;
     public DukeException(String message) {

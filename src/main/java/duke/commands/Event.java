@@ -1,3 +1,7 @@
+package duke.commands;
+
+import duke.commands.Task;
+
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -8,6 +12,10 @@ public class Event extends Task {
     public Event(String description, LocalDateTime at) {
         super(description, "E");
         this.at = at;
+    }
+
+    public LocalDateTime getAt() {
+        return this.at;
     }
 
     @Override

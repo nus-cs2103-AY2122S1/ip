@@ -1,3 +1,5 @@
+package duke.commands;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -22,6 +24,18 @@ public class Task {
     public String markDone() {
         this.isDone = true;
         return String.format("Nice! I've marked this task as done:\n  [X] %s", this.description);
+    }
+
+    public String getLogo() {
+        return this.logo;
+    }
+
+    public boolean checkDone() {
+        return this.isDone;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public String toString() {

@@ -1,25 +1,23 @@
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.Task;
+import duke.commands.Todo;
+import duke.data.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.data.TaskList;
+import duke.ui.Ui;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
-    enum SPECIAL_TASK {
-        bye,
-        done,
-        list,
-        todo,
-        deadline,
-        event,
-        delete
-    }
-
+public class Main {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
     private Parser parser;
 
-    public Duke() {
+    public Main() {
         this.storage = new Storage();
         this.ui = new Ui();
         this.taskList = new TaskList(storage.Load());
@@ -31,48 +29,43 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while (!input.equals(SPECIAL_TASK.bye.name())) {
+        while (!this.parser.isBye(input)) {
             String[] splitInput = this.parser.splitType(input);
-            if (splitInput[0].equals(SPECIAL_TASK.done.name())) {
+            if (this.parser.isDone(splitInput[0])) {
                 int index = this.parser.getIndex(splitInput);
                 String returnString = this.taskList.markDone(index);
                 this.ui.PrintMessage(returnString);
-            } else if (input.equals(SPECIAL_TASK.list.name())) {
+            } else if (this.parser.isList(splitInput[0])) {
                 this.ui.PrintList(taskList);
-            } else if (splitInput[0].equals(SPECIAL_TASK.todo.name())) {
+            } else if (this.parser.isTodo(splitInput[0])) {
                 try {
-                    this.parser.checkDesc(splitInput, SPECIAL_TASK.todo.name());
+                    this.parser.parseTodo(splitInput);
                     this.taskList.add(new Todo(splitInput[1]));
                     ui.PrintSpecialTasks(taskList);
                 } catch (DukeException e) {
                     ui.PrintMessage(e.getMessage());
                 }
-            } else if (splitInput[0].equals(SPECIAL_TASK.deadline.name())) {
+            } else if (this.parser.isDeadline(splitInput[0])) {
                 try {
-                    this.parser.checkDesc(splitInput, SPECIAL_TASK.deadline.name());
-                    String[] furtherSplits = this.parser.furtherSplit(splitInput[1], "/by");
-                    this.parser.checkFurtherDesc(furtherSplits, "deadline");
+                    String[] furtherSplits = this.parser.parseDeadline(splitInput);
                     LocalDateTime by = this.parser.parseTime(furtherSplits[1]);
                     this.taskList.add(new Deadline(furtherSplits[0], by));
                     ui.PrintSpecialTasks(this.taskList);
                 } catch (DukeException e) {
                     ui.PrintMessage(e.getMessage());
                 }
-            } else if (splitInput[0].equals(SPECIAL_TASK.event.name())) {
+            } else if (this.parser.isEvent(splitInput[0])) {
                 try {
-                    this.parser.checkDesc(splitInput, SPECIAL_TASK.event.name());
-                    String[] furtherSplits = this.parser.furtherSplit(splitInput[1], "/at");
-                    this.parser.checkFurtherDesc(furtherSplits, "event");
-                    LocalDateTime by = this.parser.parseTime(furtherSplits[1]);
-                    this.taskList.add(new Event(furtherSplits[0], by));
+                    String[] furtherSplits = this.parser.parseEvent(splitInput);
+                    LocalDateTime at = this.parser.parseTime(furtherSplits[1]);
+                    this.taskList.add(new Event(furtherSplits[0], at));
                     ui.PrintSpecialTasks(this.taskList);
                 } catch (DukeException e) {
                     ui.PrintMessage(e.getMessage());
                 }
-            } else if (splitInput[0].equals(SPECIAL_TASK.delete.name())) {
+            } else if (this.parser.isDelete(splitInput[0])) {
                 try {
-                    this.parser.checkDesc(splitInput, SPECIAL_TASK.delete.name());
-                    int index = this.parser.getIndex(splitInput);
+                    int index = this.parser.parseDelete(splitInput);
                     this.parser.checkTaskIndex(index, taskList);
                     Task deleted = this.taskList.delete(index);
                     ui.PrintDelete(deleted, taskList);
@@ -84,7 +77,7 @@ public class Duke {
                 }
             } else {
                 try {
-                    if (input.equals("blah")) {
+                    if (this.parser.isBlah(input)) {
                         throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
                     this.taskList.add(new Task(input));
@@ -100,6 +93,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Main().run();
     }
 }
