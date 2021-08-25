@@ -8,13 +8,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the interactions with the data file.
+ */
 public class Storage {
+
+    /** The relative file path of the data file. */
     private String filepath;
 
+    /** Constructs a Storage object to handle the interactions with the data file. */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Saves the user's TaskList to the data file when the user exits the program.
+     * If the data file does not exist the the file path, a new data file is created
+     * for the user.
+     *
+     * @param tasks The user's TaskList to be saved.
+     */
     public void save(TaskList tasks) {
         try {
             File file = new File(filepath);
@@ -32,7 +45,6 @@ public class Storage {
                         + " | "
                         + currentTask.getTaskDetails() + "\n");
             }
-
             writer.write(toSave);
             writer.close();
         } catch (IOException e) {
@@ -40,6 +52,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the data from the data file and returns the TaskList from when the user last ran Duke.
+     * If the data file does not exist in the file path, an empty TaskList will be returned.
+     *
+     * @return If the data files exists in the file path, returns the TaskList that is loaded.
+     * If not, returns an empty TaskList.
+     */
     public TaskList load() {
         ArrayList<Task> loadedTaskList = new ArrayList<>();
         try {
