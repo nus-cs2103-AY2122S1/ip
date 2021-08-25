@@ -1,6 +1,5 @@
 public class Deadline extends Task{
-
-    private final String deadline;
+    private final DateString dateLine;
 
     public Deadline(String description) {
         super(description);
@@ -8,18 +7,18 @@ public class Deadline extends Task{
             throw new IllegalArgumentException("Description of Deadline cannot be empty!");
         }
         this.type = 'D';
-        this.deadline = "";
+        this.dateLine = new DateString("");
     }
 
     public Deadline(String description, String deadline) {
         super(description);
         this.type = 'D';
-        this.deadline = deadline;
+        this.dateLine = new DateString(deadline);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + this.deadline + ")";
+        return super.toString() + " (by: " + this.dateLine.toString() + ")";
     }
 
 }
