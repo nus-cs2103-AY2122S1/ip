@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * Represents the storage of tasks. Storage is able to load and save tasks.
@@ -21,8 +22,7 @@ public class Storage {
 	 * @throws DukeException
 	 */
 	public ArrayList<Task> loadTasks() throws DukeException {
-		// We will populate an ArrayList of tasks
-		ArrayList<Task> tasks = new ArrayList<>();
+		ArrayList<Task> tasks = new ArrayList<>();		// We will populate an ArrayList of tasks
 
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filepath));
@@ -37,14 +37,14 @@ public class Storage {
 				// If the line contains by -> add a new Deadline
 				if (line.contains("[D]")) {
 					String[] details = lineWithoutBoxes.split("by:");
-					String deadlineTask = details[0].substring(0, details[0].length() - 1).trim();
-					String deadline = details[1].substring(1, details[1].length() - 1);
+					String deadlineTask = getTask(details[0]);
+					LocalDate deadline = LocalDate.parse(getDateTime(details[1]));
 					task = new Deadline(deadlineTask, deadline);
 				} else if (line.contains("[E]")) {
 					String[] details = lineWithoutBoxes.split("at:");
-					String eventTask = details[0].substring(0, details[0].length() - 1).trim();
-					String time = details[1].substring(1, details[1].length() - 1);
-					task = new Event(eventTask, time);
+					String eventTask = getTask(details[0]);
+					String dateTime = getDateTime(details[1]);
+					task = new Event(eventTask, dateTime);
 				} else {
 					task = new ToDo(lineWithoutBoxes);
 				}
@@ -61,6 +61,14 @@ public class Storage {
 		}
 		return tasks;
 	}
+
+	public String getTask(String taskDetails) {
+		return taskDetails.substring(0, taskDetails.length() - 1).trim();
+	}
+
+	public String getDateTime(String dateTimeDetails) {
+		return dateTimeDetails.substring(1, dateTimeDetails.length() - 1);
+	}
 	
 	/**
 	 * 	Save the tasks to the data file.
@@ -73,7 +81,12 @@ public class Storage {
 
 			// Write lines to file
 			for (Task task : tasks) {
-				fw.write(task + "\n");
+				if (task instanceof Deadline) {
+					Deadline deadline = (Deadline) task;
+					fw.write(deadline.toSaveString() + "\n");
+				} else {
+					fw.write(task + "\n");
+				}
 			}
 			fw.close();
 		} catch (IOException e) {
