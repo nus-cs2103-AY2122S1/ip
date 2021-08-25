@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * This class encapsulates the Duke application.
+ */
 public class Duke {
     private final Ui ui;
     private final Storage storage;

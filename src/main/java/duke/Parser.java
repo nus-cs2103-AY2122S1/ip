@@ -3,6 +3,9 @@ package duke;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class encapsulates the parsing logic for the application.
+ */
 public class Parser {
     /**
      * Handles input commands to the Duke application.

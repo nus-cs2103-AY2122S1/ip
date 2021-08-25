@@ -6,11 +6,24 @@ package duke;
 public class Event extends Task {
     private String at;
 
+    /**
+     * Constructor for a new Event task.
+     *
+     * @param description The task description.
+     * @param at The time of this task.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Constructor for a new Event task.
+     *
+     * @param description The task description.
+     * @param at The time of this task.
+     * @param isDone Whether this task is marked as done.
+     */
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
         this.at = at;

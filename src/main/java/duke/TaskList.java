@@ -5,13 +5,23 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class encapsulates a list of Tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Constructor which takes in no arguments.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor which takes in a List of strings.
+     * @param lines The lines from the application save file.
+     */
     public TaskList(List<String> lines) {
         ArrayList<Task> loadedTasks = new ArrayList<>();
 
