@@ -2,33 +2,66 @@ package nyx;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a list to keep track of Task objects.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
+    /**
+     * Constructs a tasks list containing tasks specified in the given list of tasks.
+     * @param tasks The list of tasks to be placed into this task list.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Constructs an empty tasks list.
+     */
     public TaskList() {
         this(new ArrayList<Task>());
     }
 
+    /**
+     * Returns the task at the specified position in this list.
+     * @param index Index of the task to return.
+     * @return the task at the specified position in this list.
+     */
     public Task getTask(int index) {
         return tasks.get(index);
     }
 
+    /**
+     * Returns the number of tasks currently in this list.
+     * @return the number of tasks in this list.
+     */
     public int getNumTasks() {
         return tasks.size();
     }
 
+    /**
+     * Appends the specified task to the end of this list.
+     * @param task The task to be appended to this list.
+     */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Removes the task at the specified position in this list.
+     * @param index The index of the task to be removed.
+     */
     public void removeTask(int index) {
         tasks.remove(index);
     }
 
+    /**
+     * Marks the task at the specified position in this list as done.
+     * Returns true if the task is successfully marked as done, false otherwise.
+     * @param index The index of the task to be marked as done.
+     * @return true if the task is successfully marked as done, false otherwise.
+     */
     public boolean markDone(int index) {
         if (tasks.isEmpty()) {
             return false;
@@ -38,12 +71,21 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a combined String representation of all the tasks in the list
+     * in the format required for saving into hard disk.
+     * @return String representation of all the tasks in the list in the format required for saving into hard disk.
+     */
     public String genSaveFormat() {
         StringBuilder sb = new StringBuilder();
         tasks.stream().map(Task::dataFormat).forEach(sb::append);
         return sb.toString();
     }
 
+    /**
+     * Returns a String representation of the list.
+     * @return String representation of the list.
+     */
     @Override
     public String toString() {
         if (tasks.isEmpty()) {

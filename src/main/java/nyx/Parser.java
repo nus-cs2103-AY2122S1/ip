@@ -2,7 +2,19 @@ package nyx;
 
 import java.io.IOException;
 
+/**
+ * Deals with making sense of the user input.
+ */
+
 public class Parser {
+    /**
+     * Interprets the user input and executes the command specified in the input using TaskList and Storage objects.
+     * @param input String representation of the user input.
+     * @param taskList TaskList object that keeps track of all the tasks.
+     * @param dataManager Storage object to handle operations with the hard disk.
+     * @return String representation of the message to show the user.
+     * @throws NyxException If an error has occurred while executing the command.
+     */
     public static String parse(String input, TaskList taskList, Storage dataManager) throws NyxException {
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
