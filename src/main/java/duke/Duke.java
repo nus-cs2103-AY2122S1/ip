@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+
 import commands.Command;
 import tasks.*;
 import exceptions.*;
@@ -19,7 +20,7 @@ public class Duke {
         this.isRunning = false;
     }
 
-    public void run() {
+    private void run() {
         this.isRunning = true;
         this.taskList = new TaskList(this.store.readFile());
 

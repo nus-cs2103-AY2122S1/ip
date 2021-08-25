@@ -3,6 +3,7 @@ package commands;
 import duke.*;
 import tasks.*;
 import exceptions.*;
+
 public class ErrorCommand implements Command {
 
     String msg;
