@@ -1,15 +1,10 @@
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 
-
 public class BobbyBot {
     private final String DBPATH = "data/database.txt";
-    private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
