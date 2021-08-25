@@ -12,7 +12,7 @@ public class Event extends Task{
 
     @Override
     public String getTaskDetails() {
-        return super.getTaskDetails() + "|" + at;
+        return super.getTaskDetails() + " | " + at;
     }
 
     @Override
