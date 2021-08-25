@@ -74,6 +74,16 @@ public class Duke {
                     taskToAdd = true;
                 }
                 break;
+            case FIND:
+                if (input.equals("")) {
+                    throw new MultipleKeywordException();
+                }
+                String[] keyword = input.trim().split(" ");
+                if (keyword.length > 1) {
+                    throw new MultipleKeywordException();
+                }
+                taskList.find(keyword[0], commands);
+                break;
             case LIST:
                 taskList.list(commands);
                 break;
@@ -113,11 +123,6 @@ public class Duke {
 
     }
 
-    /**
-     * Marks a task as completed
-     *
-     * @param listNumber index number of task to be marked as done
-     */
     void done(int listNumber) {
         try {
             if (listNumber < commands.size()) {
@@ -131,7 +136,7 @@ public class Duke {
             } else {
                 throw new InvalidTaskException();
             }
-        } catch (DukeException e) {
+        } catch (DukeException e){
             System.out.println(e.getMessage());
         }
 
