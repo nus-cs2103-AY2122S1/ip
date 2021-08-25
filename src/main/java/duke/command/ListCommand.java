@@ -25,6 +25,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void run(Duke duke, Parser parser) {
-        Ui.displayTasks(duke.getList());
+        Ui.displayTasks(duke.getList(), duke.getList().size());
     }
 }

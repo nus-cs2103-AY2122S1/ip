@@ -51,6 +51,19 @@ public class Parser {
     }
 
     /**
+     * Gets the search term in the argument for the find command
+     *
+     * @return Search term inputted by user.
+     * @throws DukeException If no search term provided.
+     */
+    public String getSearchTerm() throws DukeException {
+        if (this.arguments == null) {
+            throw new DukeException("No search term provided.");
+        }
+        return arguments;
+    }
+
+    /**
      * Parse arguments if type is task.
      *
      * @throws DukeException If name is not present.

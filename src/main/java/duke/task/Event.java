@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * This class represents an event - a task that starts at a specific date
- * and ends at a specific date.
+ * This class represents an event - a task that starts at a specific date and
+ * ends at a specific date.
  */
 public class Event extends Task {
     public static final String IDENTIFIER = "E";
@@ -52,5 +52,3 @@ public class Event extends Task {
         return String.format("[E]%s (at: %s)", super.toString(), this.date.format(FORMATTER));
     }
 }
-
-
