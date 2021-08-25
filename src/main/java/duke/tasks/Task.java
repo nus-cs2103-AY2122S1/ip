@@ -65,4 +65,8 @@ public class Task {
      * @return X or O
      */
     public String doneString() {return (isDone ? "X" : "O");}
+
+    public boolean descContains(String str) {
+        return description.contains(str);
+    }
 }

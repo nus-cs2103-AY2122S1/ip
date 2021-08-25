@@ -47,7 +47,6 @@ public class DukeUI {
 
     /**
      * Unary Function that prints list of task
-     *
      * @param taskList List of Duke.tasks to print
      */
     static void printList(TaskList taskList) {
@@ -63,7 +62,6 @@ public class DukeUI {
 
     /**
      * Unary Function that marks task as Done and prints a confirmation message
-     *
      * @param task Task that is marked as complete
      */
     static void completeTask(Task task) {
@@ -75,7 +73,6 @@ public class DukeUI {
 
     /**
      * Binary Function that deletes a task and prints a confirmation message
-     *
      * @param task Task that was removed
      * @param size Remaining size of the list
      */
@@ -89,7 +86,6 @@ public class DukeUI {
 
     /**
      * Unary Function that prints the most recently added Task
-     *
      * @param lst List of Task that was added to
      */
     static void printTask(TaskList lst) {
@@ -117,6 +113,20 @@ public class DukeUI {
     public static void printDateTimeError() {
         printDivider();
         System.out.println("!!! Provide Date in yyyy-MM-dd format. !!!");
+        printDivider();
+    }
+
+    /**
+     * Unary function printing the post-filtered list of tasks
+     * @param tasks list of tasks post-filter
+     */
+    public static void printFiltered(List<Task> tasks) {
+        printDivider();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            System.out.println((i + 1) + "." + task.toString());
+        }
         printDivider();
     }
 }

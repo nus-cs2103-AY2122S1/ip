@@ -15,14 +15,15 @@ import static java.lang.Integer.parseInt;
 public class DukeParser {
     //List of enum keywords
     enum Keywords {
-        list,
         bye,
-        todo,
         deadline,
-        event,
-        done,
         delete,
+        done,
         error,
+        event,
+        find,
+        list,
+        todo,
     }
 
     private TaskList taskList;
@@ -93,6 +94,9 @@ public class DukeParser {
         DateTimeFormatter standard = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate time = LocalDate.now();
 
+        //Filter
+        List<Task> filtered = null;
+
         //Switch variables
         Keywords key = Keywords.error;
         int index = 0;
@@ -120,6 +124,9 @@ public class DukeParser {
                     }
                     key = Keywords.delete;
                 }
+            } else if (temp.equals("find")) {
+                key = Keywords.find;
+                filtered = taskList.filter(str.replaceFirst("find", "").trim());
             } else if (temp.equals("todo")) {
                 key = Keywords.todo;
                 desc = str.replaceFirst("todo ", "");
@@ -181,6 +188,9 @@ public class DukeParser {
                 }
                 Task task = taskList.remove(index);
                 ui.removeTask(task, taskList.size());
+                break;
+            case find:
+                ui.printFiltered(filtered);
                 break;
             case bye:
                 return true;
