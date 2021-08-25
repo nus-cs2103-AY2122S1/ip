@@ -48,7 +48,7 @@ public class ParsedInput {
         }
     }
 
-    private static String joinStrings(String[] strArr, int start, int end) {
+    public static String joinStrings(String[] strArr, int start, int end) {
         String result = "";
         for(int i = start; i < strArr.length && i <= end; i++) {
             result += strArr[i] + " ";
@@ -56,7 +56,7 @@ public class ParsedInput {
         return result.stripTrailing();
     }
 
-    private static int findFirstIndexOf(String option, String[] splitInput) {
+    public static int findFirstIndexOf(String option, String[] splitInput) {
         for(int i=0; i<splitInput.length; i++) {
             if (splitInput[i].equals(option)) {
                 return i;
