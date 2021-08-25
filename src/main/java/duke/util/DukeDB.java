@@ -12,6 +12,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a hard disk.
+ */
 public class DukeDB {
     private File file;
 
@@ -26,6 +29,11 @@ public class DukeDB {
         }
     }
 
+    /**
+     * Reads data from a hard disk.
+     *
+     * @return Task List
+     */
     public ArrayList<Task> readData() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -43,6 +51,11 @@ public class DukeDB {
         return tasks;
     }
 
+    /**
+     * Adds a new task into the hard disk.
+     *
+     * @param task the task item added to hard disk
+     */
     public void addData(Task task) {
         try {
             FileWriter fileWriter = new FileWriter(file,true);
@@ -77,6 +90,11 @@ public class DukeDB {
 
     }
 
+    /**
+     * Rewrite the entire file.
+     *
+     * @param tasks task list written into the hard disk
+     */
     public void entireWriteData (ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(file);
@@ -120,6 +138,11 @@ public class DukeDB {
 
     }
 
+    /**
+     * Marks a task as Done in the hard disk.
+     *
+     * @param index the index of task that is marked as Done
+     */
     public void doneData(int index) {
         ArrayList<Task> readOut = readData();
         Task temp = readOut.get(index);
@@ -128,14 +151,24 @@ public class DukeDB {
         entireWriteData(readOut);
     }
 
+    /**
+     * Deletes a task from the hard disk.
+     *
+     * @param index the index of task that is deleted
+     */
     public void deleteData(int index) {
         ArrayList<Task> readOut = readData();
         readOut.remove(index);
         entireWriteData(readOut);
     }
 
-    //from: E & 0 & project meeting & 6/8/2021 1400
-    //  to: Task
+    /**
+     * Parses a full command into a Task object,
+     * example of command should be like: E & 0 & project meeting & 6/8/2021 1400 .
+     *
+     * @param string the original full command
+     * @return Task
+     */
     public Task parse(String string) {
         Task task;
         boolean isDone = false;

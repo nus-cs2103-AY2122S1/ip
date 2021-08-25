@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task with a <code>description</code> corresponding to the content
+ * and a <code>by</code> time representing the deadline time.
+ */
 public class Deadline extends Task{
     protected LocalDateTime by;
     private Boolean hasTime = true;
@@ -13,10 +17,21 @@ public class Deadline extends Task{
         this.by = parseTime(by);
     }
 
+    /**
+     * Gets a By time of a Deadline object.
+     *
+     * @return by time of type LocalDateTime
+     */
     public LocalDateTime getBy() {
         return by;
     }
 
+    /**
+     * Parses a time String into a LocalDateTime.
+     *
+     * @param time a String of format dd/mm/yyyy hhmm(optional)
+     * @return transformed time of type LocalDateTime
+     */
     public LocalDateTime parseTime(String time) {
         String newDate;
         String[] str = time.split(" ");
@@ -36,16 +51,6 @@ public class Deadline extends Task{
         return localTime;
     }
 
-    public String writeToFile() {
-        String s = "D" + " | ";
-        if (this.isDone) {
-            s += "1";
-        } else {
-            s += "0";
-        }
-        s = s + " | " + description + " | " + by;
-        return s;
-    }
 
     @Override
     public String toString() {

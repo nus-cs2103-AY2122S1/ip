@@ -5,6 +5,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a dealer to process a full command.
+ */
 public class Parser {
     private TaskList taskList;
     private Storage storage;
@@ -16,8 +19,12 @@ public class Parser {
         this.storage = storage;
     }
 
-    // from: deadline return book /by 2/12/2019 1800
-    // to: command
+    /**
+     * Parses an input and process it,
+     * example of the input command should be like: deadline return book /by 2/12/2019 1800 .
+     *
+     * @param input a full command
+     */
     public void parse(String input) {
         String lowerCase = input.toLowerCase();
         if(lowerCase.equals("bye")) {
@@ -88,7 +95,9 @@ public class Parser {
         }
     }
 
-    // fetch from TaskList and print out by ui
+    /**
+     * Fetches Task item from TaskList and print through Ui
+     */
     public void listCommand() {
         String items = "";
         if(taskList.length() > 0) {
@@ -100,6 +109,12 @@ public class Parser {
         ui.showList(items);
     }
 
+    /**
+     * Determines if the command is to exit the program.
+     *
+     * @param command the input
+     * @return true or false
+     */
     public boolean isExit(String command) {
         return command.toLowerCase().equals("bye");
     }

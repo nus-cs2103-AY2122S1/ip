@@ -1,21 +1,14 @@
 package duke.task;
 
+/**
+ * Represents an todo task with a <code>description</code> corresponding to the content.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {
         super(description);
     }
 
-    public String writeToFile() {
-        String s = "D" + " | ";
-        if (this.isDone) {
-            s += "1";
-        } else {
-            s += "0";
-        }
-        s = s + " | " + description + " | ";
-        return s;
-    }
 
     @Override
     public String toString(){

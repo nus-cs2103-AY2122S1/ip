@@ -5,6 +5,9 @@ import duke.util.Ui;
 
 import java.io.IOException;
 
+/**
+ * Represents the core of Duke.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -18,6 +21,9 @@ public class Duke {
         parser = new Parser(taskList, ui, storage);
     }
 
+    /**
+     * Start the program
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
