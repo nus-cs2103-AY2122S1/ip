@@ -1,3 +1,10 @@
+package duke.utils;
+
+import duke.tasks.Deadlines;
+import duke.tasks.Events;
+import duke.tasks.Task;
+import duke.tasks.ToDos;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.stream.Stream;

@@ -1,3 +1,9 @@
+package duke.utils;
+
+import duke.commands.Command;
+import duke.exceptions.EmptyTaskDescriptionException;
+import duke.exceptions.UnknownInputException;
+
 public class Parser {
 
     public static Command parse(String fullCommand) throws UnknownInputException, EmptyTaskDescriptionException {

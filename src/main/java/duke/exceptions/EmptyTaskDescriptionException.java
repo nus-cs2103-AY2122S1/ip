@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 public class EmptyTaskDescriptionException extends DukeException {
 
     public EmptyTaskDescriptionException(String taskName) {

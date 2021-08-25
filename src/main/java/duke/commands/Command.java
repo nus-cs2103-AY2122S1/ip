@@ -1,3 +1,13 @@
+package duke.commands;
+
+import duke.tasks.Deadlines;
+import duke.tasks.Events;
+import duke.tasks.Task;
+import duke.tasks.ToDos;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Ui;
+
 public abstract class Command {
     private boolean isExit = false;
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
@@ -8,20 +18,20 @@ public abstract class Command {
     public void setExitTrue() {
         isExit = true;
     }
-    static class ExitCommand extends Command {
+    public static class ExitCommand extends Command {
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
             ui.showByeMessage();
             super.setExitTrue();
         }
     }
-    static class ListAllCommand extends Command {
+    public static class ListAllCommand extends Command {
         @Override
         public void execute(TaskList tasks, Ui ui, Storage storage) {
             ui.showGettingAllTaskItemsInteraction(tasks);
         }
     }
-    static class DoneCommand extends Command {
+    public static class DoneCommand extends Command {
         private int taskNum;
         public DoneCommand(int taskNum) {
             this.taskNum = taskNum;
@@ -33,7 +43,7 @@ public abstract class Command {
             ui.showTaskDoneInteraction(tasks.getTask(this.taskNum));
         }
     }
-    static class ToDoCommand extends Command {
+    public static class ToDoCommand extends Command {
         private String description;
         public ToDoCommand(String description) {
             this.description = description;
@@ -46,7 +56,7 @@ public abstract class Command {
             storage.addTaskToPersistedData(newToDo);
         }
     }
-    static class DeadlineCommand extends Command {
+    public static class DeadlineCommand extends Command {
         private String description;
         private String dateTimeBy;
         public DeadlineCommand(String description, String dateTimeBy) {
@@ -61,7 +71,7 @@ public abstract class Command {
             storage.addTaskToPersistedData(newDeadline);
         }
     }
-    static class EventCommand extends Command {
+    public static class EventCommand extends Command {
         private String description;
         private String dateTimeAt;
         public EventCommand(String description, String dateTimeAt) {
@@ -76,7 +86,7 @@ public abstract class Command {
             storage.addTaskToPersistedData(newEvent);
         }
     }
-    static class DeleteCommand extends Command {
+    public static class DeleteCommand extends Command {
         private int taskNum;
         public DeleteCommand(int taskNum) {
             this.taskNum = taskNum;
