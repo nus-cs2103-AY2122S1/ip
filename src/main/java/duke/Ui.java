@@ -9,6 +9,7 @@ public class Ui {
     private static final String ADD_MESSAGE = "Got it. I've added this task:\n%s\nNow you have %d %s in your list.";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n";
     private static final String REMOVE_MESSAGE = "Noted. I've removed this task:\n%s\nNow you have %d %s in your list.";
+    private static final String NO_TASKS_MESSAGE = "No tasks to display.";
     private static final String LINE = "____________________________________________________________\n";
 
     public static void welcomeMessage() {
@@ -19,8 +20,14 @@ public class Ui {
         formatAndPrint(GOODBYE_MESSAGE);
     }
 
-    public static void displayTasks(TaskList list) {
-       formatAndPrint(LIST_MESSAGE + list.toString());
+    /**
+     * Displays user's list of tasks.
+     *
+     * @param list Task list to be displayed.
+     * @param size Size of the task list.
+     */
+    public static void displayTasks(TaskList list, int size) {
+        formatAndPrint(size == 0 ? NO_TASKS_MESSAGE : LIST_MESSAGE + list.toString());
     }
 
     public static void addTaskMessage(Task task, int size) {

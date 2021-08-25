@@ -5,6 +5,7 @@ import duke.task.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private static final String STORAGE_PATH = "data/duke.txt";
@@ -22,6 +23,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
+     *
      * @param task Task to be added to the list.
      */
     public void add(Task task) {
@@ -50,6 +52,24 @@ public class TaskList {
         return this.list.size();
     }
 
+    /**
+     * Searches task list for tasks with description containing search term.
+     *
+     * @param searchTerm Search term inputted by user.
+     * @return task list containing only tasks that match search term.
+     */
+    public TaskList search(String searchTerm) {
+        List<Task> matches = list.stream()
+                .filter(task -> task.getName().contains(searchTerm))
+                .collect(Collectors.toList());
+        TaskList output = new TaskList();
+        output.list = matches;
+        return output;
+    }
+
+    /**
+     * Saves the task list to text file.
+     */
     private void save() {
         try {
             storage.save(this.list);
@@ -60,6 +80,7 @@ public class TaskList {
 
     /**
      * Formats the task list for display.
+     *
      * @return Formatted task list in a string.
      */
     @Override

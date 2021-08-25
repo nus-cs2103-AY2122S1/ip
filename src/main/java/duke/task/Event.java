@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     public static final String IDENTIFIER = "E";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
-    private LocalDateTime date;
+    private final LocalDateTime date;
 
     public Event(String description, LocalDateTime date) {
         super(description);

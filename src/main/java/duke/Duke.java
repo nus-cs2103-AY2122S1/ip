@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+
 import java.util.Scanner;
 
 /**
@@ -15,11 +16,9 @@ public class Duke {
      */
     public void start() {
         Ui.welcomeMessage();
-        Scanner sc = new Scanner(System.in);
         while (!this.isStopped) {
-            String input = sc.nextLine();
             try {
-                listen(input);
+                listen();
             } catch (DukeException e) {
                 Ui.formatAndPrint(e.getMessage());
             }
@@ -36,12 +35,13 @@ public class Duke {
     }
 
     /**
-     * Accepts user input and runs the appropriate function.
+     * Listens for user input and parses user's input.
      *
-     * @param input String containing user input.
-     * @return Boolean that controls whether to continue accepting user input.
+     * @throws DukeException If input is invalid.
      */
-    public void listen(String input) throws DukeException {
+    public void listen() throws DukeException {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
         Parser parser = new Parser(input);
         Command command = Command.identifyCommand(parser.getCommandWord());
         command.run(this, parser);

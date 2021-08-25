@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Constructor for a Storage object.
+     *
      * @param path Path of the file where data should be saved.
      * @throws IOException
      */
@@ -36,6 +37,7 @@ public class Storage {
 
     /**
      * Saves a lists of tasks into a text file.
+     *
      * @param list List of tasks to be saved.
      * @throws IOException
      */
@@ -52,6 +54,7 @@ public class Storage {
 
     /**
      * Creates a list of tasks from a file.
+     *
      * @return List of Tasks extracted from file.
      * @throws FileNotFoundException
      */
@@ -70,6 +73,7 @@ public class Storage {
      * identifier | completion status | name | date
      * Identifier is a single letter representing the type of task.
      * Completion status is represented by 0 (not complete) or 1 (complete).
+     *
      * @param task Task to be formatted.
      * @return String containing the task details.
      */
@@ -93,6 +97,7 @@ public class Storage {
     /**
      * Creates a task from the string provided. String must be in the form:
      * identifier | completion status | name | date
+     *
      * @param input String representing the task to be created.
      * @return Task created.
      */

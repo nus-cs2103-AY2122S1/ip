@@ -20,6 +20,7 @@ public class Parser {
 
     /**
      * Gets the command word that the user inputted.
+     *
      * @return Command word.
      */
     public String getCommandWord() {
@@ -28,14 +29,28 @@ public class Parser {
 
     /**
      * Gets the number in the argument for done and delete commands.
+     *
      * @return Array index provided by user.
      */
     public int getNumber() throws DukeException {
         if (this.arguments == null) {
-           throw new DukeException("No number provided.");
+            throw new DukeException("No number provided.");
         }
         // Retrieve value inputted by user and subtract 1 to get the index in the array.
         return parseInt(arguments) - 1;
+    }
+
+    /**
+     * Gets the search term in the argument for the find command
+     *
+     * @return Search term inputted by user.
+     * @throws DukeException If no search term provided.
+     */
+    public String getSearchTerm() throws DukeException {
+        if (this.arguments == null) {
+            throw new DukeException("No search term provided.");
+        }
+        return arguments;
     }
 
     /**
@@ -54,7 +69,8 @@ public class Parser {
 
     /**
      * Parse task date to LocalDateTime.
-     * @throws DukeException
+     *
+     * @throws DukeException If date is invalid.
      */
     public void parseDate() throws DukeException {
         // Error handling: no time provided.

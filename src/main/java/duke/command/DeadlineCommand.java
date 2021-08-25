@@ -3,11 +3,11 @@ package duke.command;
 import duke.Duke;
 import duke.DukeException;
 import duke.Parser;
+import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
-import duke.Ui;
 
-public class DeadlineCommand extends Command{
+public class DeadlineCommand extends Command {
     private static final String COMMAND_WORD = "deadline";
 
     @Override
