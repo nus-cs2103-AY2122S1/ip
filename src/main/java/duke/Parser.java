@@ -70,6 +70,9 @@ public class Parser {
             tasks.add(task);
             storage.writeTaskList(tasks);
             Ui.printTaskAdded(tasks, task);
+        } else if (command.equals("find") && parameters.length >= 2) {
+            String query = input.replace("find", "").strip();
+            Ui.printFoundTasks(tasks.find(query));
         } else {
             throw new Exception(
                 "I'm sorry, but I don't know what that means :-("
