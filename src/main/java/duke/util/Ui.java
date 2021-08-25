@@ -1,3 +1,6 @@
+package duke.util;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class Ui {
@@ -8,22 +11,22 @@ public class Ui {
             + "\\_/ \\_/___/_| |_|\\__, |\n"
             + "                 |___/\n";
     
-    void greetingMessage(){
+    public void greetingMessage(){
         System.out.println("Hello! I'm\n" +logo+ "\nWhat can I do for you?");
     }
     
-    void exitMessaage(){
+    public void exitMessaage(){
         System.out.println("\t ByeBye! Hope to see you again!");
     }
     
-    void listTasksOutput(ArrayList<Task> commands){
+    public void listTasksOutput(ArrayList<Task> commands){
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < commands.size(); i++) {
             System.out.println((i + 1) + ". " + commands.get(i));
         }
     }
     
-    void doneOutput(Task task, int tasksRemaining){
+    public void doneOutput(Task task, int tasksRemaining){
         System.out.println("Good job! I've marked this task as completed:");
         System.out.println(task);
         System.out.println("You now have " + tasksRemaining + " tasks to complete");

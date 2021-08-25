@@ -1,3 +1,7 @@
+package duke;
+import duke.exceptions.*;
+import duke.task.*;
+import duke.util.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +14,7 @@ public class Duke {
     Parser parser = new Parser();
     TaskList taskList = new TaskList();
     
-    void execute(DukeCommands command, String input, int isDone){
+    public void execute(DukeCommands command, String input, int isDone){
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("d-MM-yyyy");             
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d-MM-yyyy HHmm");        
         try {

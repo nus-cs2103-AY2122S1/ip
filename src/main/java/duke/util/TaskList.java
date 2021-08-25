@@ -1,9 +1,16 @@
+package duke.util;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyTaskListException;
+import duke.exceptions.InvalidTaskException;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
     Ui ui = new Ui();
     
-    void list(ArrayList<Task> commands){
+    public void list(ArrayList<Task> commands){
         try {
             if (commands.size() == 0) {
                 throw new EmptyTaskListException();
@@ -16,7 +23,7 @@ public class TaskList {
 
     }
 
-    void remove(int listNumber, ArrayList<Task> commands){
+    public void remove(int listNumber, ArrayList<Task> commands){
         try {
             if (listNumber < commands.size()) {
                 ui.removeOutput(commands.get(listNumber), commands.size()-1);

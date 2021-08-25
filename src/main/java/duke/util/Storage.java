@@ -1,3 +1,8 @@
+package duke.util;
+
+import duke.Duke;
+import duke.task.*;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-     void loadCommands(Duke duke){
+     public void loadCommands(Duke duke){
         String directory = System.getProperty("user.dir");
         Path path = Paths.get(directory, "data/taskList.txt");
         boolean exists = Files.exists(path);
@@ -37,7 +42,7 @@ public class Storage {
 
     }
 
-    void saveCommands(ArrayList<Task> commands){
+    public void saveCommands(ArrayList<Task> commands){
         String directory = System.getProperty("user.dir");
         StringBuilder text= new StringBuilder();
         for(Task command: commands){
