@@ -2,16 +2,15 @@ package yoyo.core;
 
 import org.junit.jupiter.api.Test;
 import yoyo.task.Deadline;
-import yoyo.task.Event;
 import yoyo.task.Task;
 import yoyo.task.Todo;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
-    private static LocalDateTime sampleTime = LocalDateTime.
+    private static final LocalDateTime sampleTime = LocalDateTime.
             of(2021, 7, 11, 18, 11);
 
     @Test

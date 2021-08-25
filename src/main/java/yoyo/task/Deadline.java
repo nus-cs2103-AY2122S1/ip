@@ -22,7 +22,7 @@ public class Deadline extends Task {
 
     @Override
     public String showStatus() {
-        String status =  super.showStatus();
+        String status = super.showStatus();
         return status + " (by: " + datetime.toString().replace('T', ' ') + ")";
 
     }

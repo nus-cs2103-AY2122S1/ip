@@ -14,16 +14,10 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Storage {
-    private final String DATA_PATH;
-    private File file;
     private static final int TYPE_STR_INDEX = 1;
     private static final int ISDONE_STR_INDEX = 4;
-
-    private enum TaskType {
-        TODO,
-        EVENT,
-        DEADLINE
-    }
+    private final String DATA_PATH;
+    private File file;
 
     public Storage(String dataPath) {
         this.DATA_PATH = dataPath;
@@ -64,16 +58,16 @@ public class Storage {
                         : TaskType.EVENT;
                 currStrArr = currLine.split(", ");
                 switch (currType) {
-                    case TODO:
-                        tasks.add(new Todo(currStrArr[1], isCurrTaskComplete));
-                        break;
-                    case EVENT:
-                        tasks.add(new Event(currStrArr[1], LocalDateTime.parse(currStrArr[2]), isCurrTaskComplete));
-                        break;
-                    case DEADLINE:
-                        tasks.add(new Deadline(currStrArr[1], LocalDateTime.parse(currStrArr[2]), isCurrTaskComplete));
-                        break;
-                    default:
+                case TODO:
+                    tasks.add(new Todo(currStrArr[1], isCurrTaskComplete));
+                    break;
+                case EVENT:
+                    tasks.add(new Event(currStrArr[1], LocalDateTime.parse(currStrArr[2]), isCurrTaskComplete));
+                    break;
+                case DEADLINE:
+                    tasks.add(new Deadline(currStrArr[1], LocalDateTime.parse(currStrArr[2]), isCurrTaskComplete));
+                    break;
+                default:
                 }
             }
             return tasks;
@@ -96,6 +90,12 @@ public class Storage {
             System.out.println("Something went wrong while creating file writer:\n"
                     + e.getMessage());
         }
+    }
+
+    private enum TaskType {
+        TODO,
+        EVENT,
+        DEADLINE
     }
 
 }
