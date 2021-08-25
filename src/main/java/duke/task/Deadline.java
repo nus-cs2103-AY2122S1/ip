@@ -9,7 +9,6 @@ import java.util.Objects;
 /**
  * This class represents a deadline task.
  */
-
 public class Deadline extends Task {
     /**
      * Deadline time of the task.
@@ -63,8 +62,8 @@ public class Deadline extends Task {
     /**
      * Returns true if the given object is equal to this, otherwise false.
      *
-     * @param o the given object.
-     * @return true if the given object is equal to this, otherwise false.
+     * @param o The given object.
+     * @return True if the given object is equal to this, otherwise false.
      */
     @Override
     public boolean equals(Object o) {

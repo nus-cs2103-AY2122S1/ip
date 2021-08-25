@@ -3,12 +3,11 @@ package duke;
 /**
  * This class represents exceptions in duke.
  */
-
 public class DukeException extends RuntimeException {
     /**
      * Constructs a DukeException instance using the given errorMessage
      *
-     * @param errorMessage the given error message.
+     * @param errorMessage The given error message.
      */
     public DukeException(String errorMessage) {
         super(errorMessage);
@@ -17,7 +16,7 @@ public class DukeException extends RuntimeException {
     /**
      * Returns a error message string.
      *
-     * @return error message string.
+     * @return Error message string.
      */
     @Override
     public String getMessage() {

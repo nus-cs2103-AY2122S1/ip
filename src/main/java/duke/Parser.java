@@ -33,8 +33,8 @@ public class Parser {
     /**
      * Returns an action based on the given input string.
      *
-     * @param input the given input string.
-     * @return an action based on the given string.
+     * @param input The given input string.
+     * @return An action based on the given string.
      */
     public static Action getAction(String input) {
         switch (input) {
@@ -60,8 +60,8 @@ public class Parser {
     /**
      * Returns the boolean value based on the input string.
      *
-     * @param input string 0 or 1.
-     * @return false if the string is 0, returns true otherwise.
+     * @param input String 0 or 1.
+     * @return False if the string is 0, returns true otherwise.
      */
     public static boolean parseIsDone(String input) {
         if (input.equals("0")) {
@@ -74,8 +74,9 @@ public class Parser {
     /**
      * Returns a task based on the given input string from .txt file.
      *
-     * @param input the given input string from .txt file.
-     * @return a task based on the given input string.
+     * @param input The given input string from .txt file.
+     * @return A task based on the given input string.
+     * @throws DukeException If parse fails.
      */
     public static Task parseDocument(String input) {
         String[] array = input.split(SPLITER);
@@ -94,8 +95,8 @@ public class Parser {
     /**
      * Returns LocalDateTime instance based on the input string.
      *
-     * @param input the given input string whose format follows dd/MM/yyyy HH:mm.
-     * @return a LocalDateTime instance based on the input string.
+     * @param input The given input string whose format follows dd/MM/yyyy HH:mm.
+     * @return A LocalDateTime instance based on the input string.
      */
     public static LocalDateTime parseDateTime(String input) {
         try {

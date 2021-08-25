@@ -8,11 +8,17 @@ import java.time.format.DateTimeFormatter;
  * This class contains some common utility methods regrading text ui.
  */
 public class Ui {
-    /** Text UI: horizontal line. */
+    /**
+     * Text UI: horizontal line.
+     */
     public static final String HORIZONTAL_LINE = "  -----------------------";
-    /** Text UI: indentation. */
+    /**
+     * Text UI: indentation.
+     */
     public static final String INDENTATION = "    ";
-    /** Text UI: date time format. */
+    /**
+     * Text UI: date time format.
+     */
     public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy");
 
     /**
@@ -34,7 +40,7 @@ public class Ui {
     /**
      * Prints the given string with horizontal line and indentation.
      *
-     * @param s the given string.
+     * @param s The given string.
      */
     public static void showMessage(String s) {
         System.out.println(HORIZONTAL_LINE);
@@ -45,8 +51,8 @@ public class Ui {
     /**
      * Prints add task message and the number of tasks in the list.
      *
-     * @param task the task added.
-     * @param size the number of tasks in the list.
+     * @param task The task added.
+     * @param size The number of tasks in the list.
      */
     public static void showAddTaskMessage(Task task, int size) {
         System.out.println(HORIZONTAL_LINE);
@@ -63,8 +69,8 @@ public class Ui {
     /**
      * Prints remove task message and the number of tasks in the list.
      *
-     * @param task the task removed
-     * @param size the number of tasks in the list.
+     * @param task The task removed
+     * @param size The number of tasks in the list.
      */
     public static void showRemoveTaskMessage(Task task, int size) {
         System.out.println(HORIZONTAL_LINE);

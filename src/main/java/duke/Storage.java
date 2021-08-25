@@ -22,7 +22,7 @@ public class Storage {
     /**
      * Constructs a storage instance using the given file path.
      *
-     * @param filePath the given file path.
+     * @param filePath The given file path.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -31,7 +31,7 @@ public class Storage {
     /**
      * Returns a task list read from the .txt file.
      *
-     * @return a task list read from the .txt file.
+     * @return A task list read from the .txt file.
      */
     public ArrayList<Task> readFromTaskTxt() {
         File file = new File(filePath);
@@ -58,7 +58,7 @@ public class Storage {
     /**
      * Write the task list to the .txt file
      *
-     * @param tasks the given task list.
+     * @param tasks The given task list.
      */
     public void writeToTaskTxt(ArrayList<Task> tasks) {
         try {

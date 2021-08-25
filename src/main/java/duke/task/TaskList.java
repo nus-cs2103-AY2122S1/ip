@@ -9,7 +9,9 @@ import java.util.ArrayList;
  * This class manage all the tasks of Duke.
  */
 public class TaskList {
-    /** List of tasks. */
+    /**
+     * List of tasks.
+     */
     private final ArrayList<Task> tasks;
 
     /**
@@ -22,7 +24,7 @@ public class TaskList {
     /**
      * Constructs a TaskList instance based on the given task list.
      *
-     * @param tasks the given task list.
+     * @param tasks The given task list.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -31,7 +33,7 @@ public class TaskList {
     /**
      * Adds the given task to the list.
      *
-     * @param task the given task.
+     * @param task The given task.
      */
     public void addTask(Task task) {
         this.tasks.add(task);
@@ -40,8 +42,8 @@ public class TaskList {
     /**
      * Removes the task specified by the given index from the list and returns the task.
      *
-     * @param index the given index.
-     * @return the removed task.
+     * @param index The given index.
+     * @return The removed task.
      */
     public Task removeTask(int index) {
         if (index < 0 || index >= tasks.size()) {
@@ -53,7 +55,7 @@ public class TaskList {
     /**
      * Returns the list of tasks.
      *
-     * @return the list of tasks.
+     * @return The list of tasks.
      */
     public ArrayList<Task> getTasks() {
         ArrayList<Task> result = new ArrayList<>(this.tasks);
@@ -63,7 +65,7 @@ public class TaskList {
     /**
      * Returns the size of the tasks list.
      *
-     * @return the size of the tasks list.
+     * @return The size of the tasks list.
      */
     public int getSize() {
         return tasks.size();
@@ -88,10 +90,10 @@ public class TaskList {
     /**
      * Marks the task specified by the given index as done.
      *
-     * @param index the given index.
-     * @throws DukeException if the index is out of range.
+     * @param index The given index.
+     * @throws DukeException If the index is out of range.
      */
-    public void markTaskAsDone(int index) throws DukeException{
+    public void markTaskAsDone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("Task number: " + (index + 1) + " does not exist.");
         }

@@ -7,17 +7,20 @@ import java.util.Objects;
 /**
  * This class represents a task.
  */
-
 public class Task {
-    /** Description of the task. */
+    /**
+     * Description of the task.
+     */
     protected String description;
-    /** State of the task. */
+    /**
+     * State of the task.
+     */
     protected boolean isDone;
 
     /**
      * Constructs a task instance using the given description.
      *
-     * @param description the given description.
+     * @param description The given description.
      */
     public Task(String description) {
         this.description = description;
@@ -27,8 +30,8 @@ public class Task {
     /**
      * Constructs a task using the given description and complete state.
      *
-     * @param description the given description.
-     * @param isDone the given complete state.
+     * @param description The given description.
+     * @param isDone      The given complete state.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -54,7 +57,7 @@ public class Task {
     /**
      * Returns a string representation of the task.
      *
-     * @return a string representation of the task.
+     * @return A string representation of the task.
      */
     @Override
     public String toString() {
@@ -64,7 +67,7 @@ public class Task {
     /**
      * Returns a string representation of the task following .txt format.
      *
-     * @return a string representation of the task following .txt format.
+     * @return A string representation of the task following .txt format.
      */
     public String toTxtFormat() {
         String state = isDone ? "1" : "0";
@@ -74,8 +77,8 @@ public class Task {
     /**
      * Returns true if the given object is equal to this, otherwise false.
      *
-     * @param o the given object.
-     * @return true if the given object is equal to this, otherwise false.
+     * @param o The given object.
+     * @return True if the given object is equal to this, otherwise false.
      */
     @Override
     public boolean equals(Object o) {
