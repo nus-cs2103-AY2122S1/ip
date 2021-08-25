@@ -103,4 +103,20 @@ public class TaskList {
         dukePrint("Here are the tasks in your list:\n" +
                 IntStream.range(0, list.size() ).mapToObj((i)-> Integer.toString(i + 1) + ". " + list.get(i).toString()).reduce("",(str1, str2)->str1 + str2+"\n"));
     }
+
+    public void findTask(String desc) {
+        StringBuilder builder = new StringBuilder("Here are the matching tasks in your list:\n");
+        int count = 0;
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).toString().contains(desc)) {
+                count ++;
+                builder.append(count +". " + list.get(i).toString() + "\n" );
+            }
+        }
+        if (count == 0) {
+            dukePrint("No tasks in list were matched.");
+        } else {
+            dukePrint(builder.toString());
+        }
+    }
 }

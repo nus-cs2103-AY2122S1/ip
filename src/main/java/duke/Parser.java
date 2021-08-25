@@ -11,6 +11,7 @@ public class Parser {
         TODO,
         DEADLINE,
         EVENT,
+        Find,
     }
 
     public static Command parse(String str) throws DukeException {
@@ -49,6 +50,8 @@ public class Parser {
                 return Action.DEADLINE;
             case "event":
                 return Action.EVENT;
+        case "find":
+            return Action.Find;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
@@ -67,6 +70,8 @@ public class Parser {
                 return new AddDeadlineCommand(str);
             case EVENT:
                 return new AddEventCommand(str);
+        case Find:
+            return new FindCommand(str);
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
