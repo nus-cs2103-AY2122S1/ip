@@ -1,8 +1,9 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 
 public class Storage {
