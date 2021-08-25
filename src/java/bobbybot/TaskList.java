@@ -97,6 +97,17 @@ public class TaskList {
         }
     }
 
+    public void find(String keyword) {
+        int i = 1;
+        System.out.println("Here are the tasks you're looking for sir!");
+        for (Task task : tasks) {
+            String sentence = task.toString();
+            if (sentence.toLowerCase().indexOf(keyword.toLowerCase()) != -1) {
+                System.out.println(i + "." + sentence);
+                i++;
+            }
+        }
+    }
     /**
      * Prints all task in TaskList
      */
