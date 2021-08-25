@@ -7,13 +7,11 @@ public class Duke {
     private final Ui ui;
     private final Storage storage;
     private final TaskList taskList;
-    private final Parser parser;
 
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
         this.taskList = new TaskList(storage.initialise());
-        this.parser = new Parser();
     }
 
     public void run() {

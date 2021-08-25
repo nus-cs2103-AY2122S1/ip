@@ -11,6 +11,7 @@ public class RemoveCommand extends Command {
     public RemoveCommand(int indexToRemove){
         this.indexToRemove = indexToRemove;
     }
+
     @Override
     public boolean isExit() {
         return false;
@@ -22,6 +23,4 @@ public class RemoveCommand extends Command {
                 + taskList.getSize() + " tasks in the list";
         ui.print(message);
     }
-
-
 }

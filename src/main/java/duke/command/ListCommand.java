@@ -6,6 +6,7 @@ import duke.Ui;
 import duke.command.Command;
 
 public class ListCommand extends Command {
+
     @Override
     public boolean isExit() {
         return false;

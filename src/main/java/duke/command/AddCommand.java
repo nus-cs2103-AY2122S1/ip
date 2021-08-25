@@ -11,6 +11,7 @@ public class AddCommand extends Command{
     public AddCommand(Task toAdd){
         this.toAdd = toAdd;
     }
+
     @Override
     public boolean isExit() {
         return false;

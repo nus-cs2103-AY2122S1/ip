@@ -44,7 +44,7 @@ public class Parser {
         return input.startsWith("remove ");
     }
 
-    public static boolean isDone(String input, int listLength) {
+    public static boolean isDone(String input) {
 //        String[] splited = phrase.split(" ");
 ////        System.out.println(splited);
 //        if (splited.length != 2) {
@@ -115,7 +115,7 @@ public class Parser {
     public static Command parse(String userInput, Ui ui, TaskList taskList) throws DukeException{
         if (userInput.equals("list")) {
             return new ListCommand();
-        } else if (Parser.isDone(userInput, taskList.getSize())) {
+        } else if (Parser.isDone(userInput)) {
             String[] splited = userInput.split(" ");
             if (splited.length < 2 || !splited[1].matches("\\d+") || Integer.valueOf(splited[1]) > taskList.getSize()) {
                 throw new DukeException(ui.buildMessage("Please key in valid number to mark as done."));
