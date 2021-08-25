@@ -84,12 +84,20 @@ public class Duke {
         if (indexOfSlash == -1) {
             throw new DukeException("Sorry ☹, please enter a deadline!");
         }
-        String deadlineDate = deadlineEntry.substring(indexOfSlash + 3);
-        String deadlineTitle = deadlineEntry.substring(9, indexOfSlash);
-        Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
-        storage.add(newDeadline);
-        print("Alright. I'm adding this task:\n  " + newDeadline.toString() + "\nNow there are " + storage.size()
-                + " tasks in the list" );
+        String deadlineDate = deadlineEntry.substring(indexOfSlash + 4);
+
+        if (Time.validateJavaDate(deadlineDate)) {
+            String deadlineTitle = deadlineEntry.substring(9, indexOfSlash);
+            System.out.println(deadlineDate);
+            deadlineDate = Time.changeDateFormat(deadlineDate);
+            Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
+            storage.add(newDeadline);
+            print("Alright. I'm adding this task:\n  " + newDeadline.toString() + "\nNow there are " + storage.size()
+                    + " tasks in the list" );
+        } else {
+            throw new DukeException("Sorry ☹, please enter the deadline in the correct format! (DD-MM-YYYY)");
+        }
+
     }
 
     public static void event(String eventEntry) throws DukeException {
@@ -100,12 +108,18 @@ public class Duke {
         if (indexOfSlash == -1) {
             throw new DukeException("Sorry ☹, please enter an event time!");
         }
-        String eventDate = eventEntry.substring(indexOfSlash + 3);
-        String eventTitle = eventEntry.substring(6, indexOfSlash);
-        Event newEvent = new Event(eventTitle, eventDate);
-        storage.add(newEvent);
-        print("Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are " + storage.size()
-                + " tasks in the list" );
+
+        String eventDate = eventEntry.substring(indexOfSlash + 4);
+
+        if (Time.validateJavaDate(eventDate)) {
+            String eventTitle = eventEntry.substring(6, indexOfSlash);
+            Event newEvent = new Event(eventTitle, eventDate);
+            storage.add(newEvent);
+            print("Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are " + storage.size()
+                    + " tasks in the list" );
+        } else {
+            throw new DukeException("Sorry ☹, please enter the event in the correct format! (DD-MM-YYYY)");
+        }
     }
 
     public static void invalidInput() throws DukeException {
