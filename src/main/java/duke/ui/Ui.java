@@ -5,6 +5,9 @@ import duke.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Class that deals with interactions with the user.
+ */
 public class Ui {
     private final Scanner sc;
 
@@ -12,6 +15,9 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Default welcome message printed when user starts the program.
+     */
     public void welcomeMessage() {
         lineGenerator();
         String logo = " ____        _        \n"
@@ -26,11 +32,11 @@ public class Ui {
     }
 
     public void lineGenerator() {
-        System.out.println("____________________________________________________________");
+        System.out.println("____________________________________________________________\n");
     }
 
     public void enterCommand() {
-        System.out.print("\nEnter command: ");
+        System.out.print("Enter command: ");
     }
 
     public String readInput() {
