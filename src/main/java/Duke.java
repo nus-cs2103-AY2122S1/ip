@@ -4,11 +4,10 @@
 import java.nio.file.Files;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.io.File;
-import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.time.LocalDate;
+import java.io.File;
+import java.io.FileWriter;
 
 
 public class Duke {
@@ -130,6 +129,11 @@ public class Duke {
             throw new DukeException("OOPS!!! Error occurs when reload the data");
         }
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> parent of 8ad8444 (Handle conflicts)
     public static void main(String[] args) throws DukeException{
         //Greet
         String logo = " ____        _        \n"
