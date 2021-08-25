@@ -68,6 +68,16 @@ public class Ui {
     }
 
     /**
+     * Prints all Tasks that match the user's search term.
+     *
+     * @param taskList a TaskList of Tasks that match the user's search term
+     */
+    public void showSearchResults(TaskList taskList) {
+        reply("Here are your search results:");
+        System.out.println(taskList);
+    }
+
+    /**
      * Shows success message for adding of a task.
      *
      * @param taskList the current TaskList object

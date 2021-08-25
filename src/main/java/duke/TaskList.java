@@ -122,8 +122,8 @@ public class TaskList {
      * @param searchTerm search term to find
      * @return an ArrayList containing all Tasks with the search term in their message
      */
-    public ArrayList<Task> search(String searchTerm) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
+    public TaskList search(String searchTerm) {
+        TaskList matchingTasks = new TaskList();
         for (Task task: this.taskList) {
             if (task.getMessage().contains(searchTerm)) {
                 matchingTasks.add(task);

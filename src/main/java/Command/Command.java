@@ -39,6 +39,8 @@ public abstract class Command {
             return new TaskCompletedCommand(extraInput);
         case "delete":
             return new DeleteTaskCommand(extraInput);
+        case "find":
+            return new SearchCommand(extraInput);
         case "todo":
             return new CreateNewToDoCommand(extraInput);
         case "event":
