@@ -9,8 +9,8 @@ public class Manager {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
     public static void listReply() {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(tasks.get(i));
+        for (Task task : tasks) {
+            System.out.println(task);
         }
     }
 
@@ -32,5 +32,17 @@ public class Manager {
         System.out.println(tasks.get(i));
         tasks.remove(i);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    public static void loadTaskList(ArrayList<Task> arrayList) {
+        tasks = arrayList;
+    }
+
+    public static String storeTasks() {
+        String toWrite = "";
+        for (Task task : tasks) {
+            toWrite += task.store() + "\n";
+        }
+        return toWrite;
     }
 }

@@ -10,6 +10,14 @@ public class Task {
         this.task = task;
     }
 
+    public String getTask() {
+        return task;
+    }
+
+    public String store() {
+        int done = this.isCompleted() ? 1 : 0;
+        return done + " | " + this.getTask();
+    }
 
 
     public boolean isCompleted() {
