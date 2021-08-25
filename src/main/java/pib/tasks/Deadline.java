@@ -40,7 +40,7 @@ public class Deadline extends Task {
             String description = details.substring(0, byIndex).trim();
             if (description.isBlank()) {
                 Ui.printError("empty-task-description");
-                throw new PibException();
+                throw new PibException("Task description can't be blank");
             }
             String[] dateTime = details.substring(byIndex + 4).trim().split(" ");
             String date = LocalDate.parse(dateTime[0].trim()).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
@@ -48,10 +48,10 @@ public class Deadline extends Task {
             return new Deadline(description, date, time);
         } catch (IndexOutOfBoundsException e) {
             Ui.printError("d-wrong-format");
-            throw new PibException();
+            throw new PibException("Wrong command format");
         } catch (DateTimeParseException e) {
             Ui.printError("wrong-datetime-format");
-            throw new PibException();
+            throw new PibException("Wrong date-time format");
         }
     }
 
