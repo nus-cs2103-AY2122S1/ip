@@ -71,11 +71,11 @@ public abstract class Task {
      *
      * @return task decsription string
      */
-    abstract String getTaskDesc();
+    public abstract String getTaskDesc();
 
-    abstract String getTaskText();
+    public abstract String getTaskText();
 
-    abstract String getTaskTime();
+    public abstract String getTaskTime();
 
-    abstract TaskType getTaskType();
+    public abstract TaskType getTaskType();
 }

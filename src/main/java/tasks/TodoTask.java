@@ -12,22 +12,22 @@ public class TodoTask extends Task {
     }
 
     @Override
-    String getTaskDesc() {
+    public String getTaskDesc() {
         return this.taskDesc;
     }
 
     @Override
-    String getTaskText() {
+    public String getTaskText() {
         return this.taskDesc;
     }
 
     @Override
-    String getTaskTime() {
+    public String getTaskTime() {
         return "";
     }
 
     @Override
-    TaskType getTaskType() {
+    public TaskType getTaskType() {
         return this.taskType;
     }
 

@@ -3,22 +3,14 @@ package bot;
 import java.util.HashMap;
 import java.util.Map;
 
-import commands.ByeCommand;
-import commands.Command;
-import commands.DeadlineCommand;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.EmptyCommand;
-import commands.EventCommand;
-import commands.ListCommand;
-import commands.TodoCommand;
+import commands.*;
 
 public enum CommandType {
 
     BYE("bye", new ByeCommand()), LIST("list", new ListCommand()),
     DONE("done", new DoneCommand()), DEADLINE("deadline", new DeadlineCommand()),
     TODO("todo", new TodoCommand()), EVENT("event", new EventCommand()),
-    DELETE("delete", new DeleteCommand()),
+    DELETE("delete", new DeleteCommand()), FIND("find", new FindCommand()),
     ;
 
     private final Command command;
