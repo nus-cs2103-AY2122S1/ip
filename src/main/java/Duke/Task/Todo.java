@@ -1,6 +1,8 @@
-package Duke;
+package Duke.Task;
 
-public class Todo extends Task{
+import Duke.Main.DukeException;
+
+public class Todo extends Task {
 
     private String taskDescription;
 
