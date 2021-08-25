@@ -10,7 +10,7 @@ import java.util.Scanner;
 import myjournal.exception.EmptyDescriptionException;
 import myjournal.exception.InvalidTaskNumberException;
 import myjournal.exception.InvalidTypeException;
-import myjournal.exception.MyJournalException;
+import myjournal.exception.InvalidWordException;
 import myjournal.task.Deadline;
 import myjournal.task.Event;
 import myjournal.task.Task;
@@ -38,6 +38,9 @@ public class Parser {
                 case "delete":
                     ui.removeTaskPrint(Parser.parseDelete(line, tasks));
                     break;
+                case "find":
+                    ui.findTaskPrint(Parser.parseFind(line, tasks));
+                    break;
                 case "list":
                     Parser.parseList(tasks);
                     break;
@@ -62,9 +65,39 @@ public class Parser {
             System.out.println(e.toString());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.toString());
+        } catch (InvalidWordException e) {
+            System.out.println(e.toString());
         } catch (DateTimeParseException exception) {
             System.out.println(exception.toString());
         }
+    }
+
+    /**
+     * Parses user's input for the command "find".
+     *
+     * @param line The current line that is being parsed.
+     * @param tasks The list of tasks.
+     * @return A task which has been marked as done.
+     */
+    public static TaskList parseFind(Scanner line, TaskList tasks) {
+        if (!line.hasNext()) {
+            throw new EmptyDescriptionException("OOPS!!! Please tell me which word you want to find!!");
+        }
+        String find = line.next();
+        if (line.hasNext()) {
+            throw new InvalidWordException("Please enter only one word!!");
+        }
+        TaskList newList = new TaskList();
+        for (int i = 0; i < tasks.getSize(); i++) {
+            Task currTask = tasks.getTask(i);
+            Scanner taskName = new Scanner(currTask.getTaskName());
+            while (taskName.hasNext()) {
+                if (taskName.next().equals(find)) {
+                    newList.addTask(currTask);
+                }
+            }
+        }
+        return newList;
     }
 
     /**

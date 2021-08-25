@@ -43,6 +43,22 @@ public class Ui {
     }
 
     /**
+     * Prints the task with the keyword.
+     *
+     * @param tasks The list of the tasks with the keyword.
+     */
+    public void findTaskPrint(TaskList tasks) {
+        if (tasks.getSize() == 0) {
+            System.out.println("You have no task that matches the word!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.getSize(); i++) {
+                System.out.println((i + 1) + "." + tasks.getTask(i));
+            }
+        }
+    }
+
+    /**
      * Prints the task that has been marked as done.
      *
      * @param task The task that has been marked as done.
