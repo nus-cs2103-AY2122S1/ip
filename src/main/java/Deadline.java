@@ -1,7 +1,10 @@
-public class Deadline extends Task{
-    protected String by;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, String by, boolean isDone) {
+public class Deadline extends Task{
+    protected LocalDateTime by;
+
+    public Deadline(String description, LocalDateTime by, boolean isDone) {
         super(description, isDone);
         this.by = by;
     }
@@ -13,13 +16,13 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String formatChnage() {
+    public String formatChange() {
         String mark = isDone ? "1" : "0";
-        return "D | " + mark + " | " + this.description + " | " + this.by;
+        return "D | " + mark + " | " + this.description + " | " + this.by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm")) + ")";
     }
 }

@@ -2,9 +2,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.String;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -19,6 +21,7 @@ public class Duke {
 
     private final static String UNDERLINE = "_________________________________";
     private final static String INDENTATION ="  ";
+    private final static DateTimeFormatter  timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static String[] cmdList = new String[100];
     private static ArrayList<Task> task = new ArrayList<>();
     private static int order = 0;
@@ -137,7 +140,7 @@ public class Duke {
 
                     } else {
                         Deadline deadline = new Deadline(subString_deadline.split(" /by ")[0],
-                                subString_deadline.split(" /by ")[1], false);
+                                LocalDateTime.parse(subString_deadline.split(" /by ")[1], timeFormat), false);
                         task.add(order, deadline);
                     }
                     break;
@@ -149,7 +152,7 @@ public class Duke {
 
                     } else {
                         Event event = new Event(subString_event.split(" /at ")[0],
-                                subString_event.split(" /at ")[1], false);
+                                LocalDateTime.parse(subString_event.split(" /at ")[1], timeFormat), false);
                         task.add(order, event);
                     }
                     break;
@@ -200,9 +203,9 @@ public class Duke {
                 if (curTask[0].equals("T")) {
                     task.add(new Todo(curTask[2], isDone));
                 } else if(curTask[0].equals("D")) {
-                    task.add(new Deadline(curTask[2], curTask[3], isDone));
+                    task.add(new Deadline(curTask[2], LocalDateTime.parse(curTask[3], timeFormat), isDone));
                 } else if(curTask[0].equals("E")) {
-                    task.add(new Event(curTask[2], curTask[3], isDone));
+                    task.add(new Event(curTask[2], LocalDateTime.parse(curTask[3], timeFormat), isDone));
                 } else {}
             }
 
@@ -220,7 +223,7 @@ public class Duke {
         try {
             FileWriter fw = new FileWriter("data/duke.txt", false);
             for (Task t : task) {
-                fw.write(t.formatChnage() + "\n");
+                fw.write(t.formatChange() + "\n");
             }
             fw.close();
         } catch (IOException exception) {
@@ -237,6 +240,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         greeting();
         readData();
+        System.out.println(task);
 
 loop:
         while(true) {

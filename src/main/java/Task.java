@@ -17,7 +17,7 @@ public class Task {
 
     }
 
-    public String formatChnage() {
+    public String formatChange() {
         String mark = isDone ? "1" : "0";
         return "|" + mark + "0" + this.description;
 
