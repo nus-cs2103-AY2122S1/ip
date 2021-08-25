@@ -4,7 +4,16 @@ package duke.task;
  * Represents a task that can be marked as completed/done.
  */
 public abstract class Task {
+    /**
+     * Description or name of the task.
+     */
     private final String description;
+
+    /**
+     * The completion status of the task.
+     *
+     * True if the task is already completed.
+     */
     private boolean completed;
 
     Task(String description, boolean completed) {
@@ -12,10 +21,18 @@ public abstract class Task {
         this.completed = completed;
     }
 
+    /**
+     * Provides the task description.
+     * @return task descrption.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Provides the completion status of the task.
+     * @return Completion status of task.
+     */
     public boolean isCompleted() {
         return completed;
     }

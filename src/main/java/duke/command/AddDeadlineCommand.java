@@ -14,7 +14,9 @@ import java.util.regex.Pattern;
  */
 public class AddDeadlineCommand extends Command {
 
-    // Regex pattern for finding deadline commands
+    /**
+     * Regex pattern for finding deadline commands
+     */
     private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline (.*) /by (\\d{4}-\\d{2}-\\d{2})$");
 
     public AddDeadlineCommand(String input) {

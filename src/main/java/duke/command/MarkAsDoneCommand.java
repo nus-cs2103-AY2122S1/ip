@@ -14,7 +14,9 @@ import java.util.regex.Pattern;
  */
 public class MarkAsDoneCommand extends Command {
 
-    // Regex pattern for finding done commands
+    /**
+     * Regex pattern for finding done commands
+     */
     private static final Pattern DONE_PATTERN = Pattern.compile("^done (\\d*)$");
 
     public MarkAsDoneCommand(String input) {

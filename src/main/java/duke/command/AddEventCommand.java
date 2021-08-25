@@ -13,7 +13,9 @@ import java.util.regex.Pattern;
  * a single event.
  */
 public class AddEventCommand extends Command {
-    // Regex pattern for finding event commands
+    /**
+     * Regex pattern for finding event commands
+     */
     private static final Pattern EVENT_PATTERN = Pattern.compile("^event (.*) /at (\\d{4}-\\d{2}-\\d{2})$");
 
     public AddEventCommand(String input) {
