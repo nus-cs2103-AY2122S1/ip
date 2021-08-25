@@ -1,5 +1,8 @@
 import java.io.*;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,15 +53,17 @@ public class Duke {
     private void readEntry(String entry) throws DukeDatabaseException {
         String[] fields = entry.split("\\|");
         Task taskToAdd;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
         switch (fields[0]) {
         case "T":
             taskToAdd = new Todo(fields[2]);
             break;
         case "E":
-            taskToAdd = new Event(fields[2], fields[3]);
+            taskToAdd = new Event(fields[2], LocalDateTime.parse(fields[3], formatter));
             break;
         case "D":
-            taskToAdd = new Deadline(fields[2], fields[3]);
+            taskToAdd = new Deadline(fields[2], LocalDateTime.parse(fields[3], formatter));
             break;
         default:
             throw new DukeDatabaseException();
@@ -177,11 +182,15 @@ public class Duke {
     private void addEvent(String[] userInput) throws DukeMissingArgumentException {
         try {
             String[] splits = userInput[1].split(" /at ", 2);
-            this.list.add(new Event(splits[0], splits[1]));
+            LocalDateTime time = LocalDateTime.parse(splits[1],
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+            this.list.add(new Event(splits[0], time));
             System.out.printf("\tadded event:\n\t\t%s\n", this.list.get(this.list.size() - 1));
             System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
+        } catch (DateTimeParseException e) {
+            System.out.println("\tPlease enter the time in the format of <DD/MM/YYYY HH:MM>!\n");
         }
     }
 
@@ -189,11 +198,15 @@ public class Duke {
     private void addDeadline(String[] userInput) throws DukeMissingArgumentException {
         try {
             String[] splits = userInput[1].split(" /by ", 2);
-            this.list.add(new Deadline(splits[0], splits[1]));
+            LocalDateTime time = LocalDateTime.parse(splits[1],
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+            this.list.add(new Deadline(splits[0], time));
             System.out.printf("\tadded deadline:\n\t\t%s\n", this.list.get(this.list.size() - 1));
             System.out.printf("\tYou have %d tasks in the list.\n\n", this.list.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
+        } catch (DateTimeParseException e) {
+            System.out.println("\tPlease enter the time in the format of <DD/MM/YYYY HH:MM>!\n");
         }
     }
 

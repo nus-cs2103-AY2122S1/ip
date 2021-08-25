@@ -1,6 +1,7 @@
 todo drop CS2103T
-event macdonald's interview /at 20 Aug 2021 4-6pm
-deadline fail test /by exam week
+event macdonald's interview /at 20 Aug 2021 2pm
+event macdonald's interview /at 20/08/2021 14:00
+deadline fail test /by 01/09/2021 23:59
 list
 todo dropout university
 done 2
