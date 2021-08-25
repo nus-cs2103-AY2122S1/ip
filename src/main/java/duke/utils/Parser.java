@@ -1,7 +1,9 @@
 package duke.utils;
 
 import duke.commands.*;
-
+/**
+ * Helps to parse the user input and returns back a Command object which will be executed by the main Duke Program.
+ */
 public class Parser {
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {

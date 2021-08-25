@@ -6,6 +6,9 @@ import java.util.*;
 import duke.tasks.*;
 import duke.utils.*;
 
+/**
+ * Represent a retrieval action to be executed.
+ */
 public class GetAtCommand extends Command{
     LocalDate date;
 
@@ -16,7 +19,13 @@ public class GetAtCommand extends Command{
         }
         date = LocalDate.parse(datestring);
     }
-
+    /**
+     * prints out the tasks at with a specific deadline/timing
+     *
+     * @param tasks    the tasklist
+     * @param ui    the user-interface
+     * @param storage Persistent storage for data
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){
         ArrayList<Task> userInputs = tasks.getTasks();

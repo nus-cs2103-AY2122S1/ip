@@ -1,14 +1,23 @@
 package duke;
+
 import java.util.*;
 
 import duke.commands.Command;
 import duke.utils.*;
 
+/**
+ * The main program
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor. Initializes the ui, database and tasklists
+     *
+     * @param filePath  takes in filepath to for the database(.txt)
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +29,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to run the program. Will not be terminated unless user exits or gives the bye command
+     *
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -38,6 +51,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Entry point for the JAR file.
+     *
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("data");
         duke.run();

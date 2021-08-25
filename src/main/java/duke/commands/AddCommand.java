@@ -6,6 +6,9 @@ import java.util.*;
 import duke.tasks.*;
 import duke.utils.*;
 
+/**
+ * Represent an addition action to be executed.
+ */
 public class AddCommand extends Command {
     public enum Type {
         todo, deadline, event
@@ -25,6 +28,13 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Adds a task of interest from both short-term and long-term memory.
+     *
+     * @param tasks    the tasklist
+     * @param ui    the user-interface
+     * @param storage Persistent storage for data
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String description;

@@ -1,4 +1,7 @@
 package duke.tasks;
+/**
+ * Represent a task with a deadline.
+ */
 public class Deadline extends TaskWithDate {
     public Deadline(String description, String by, boolean done) {
         super(description,by);

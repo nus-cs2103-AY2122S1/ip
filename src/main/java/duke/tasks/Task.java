@@ -1,4 +1,7 @@
 package duke.tasks;
+/**
+ * Works as a object to store information about a task
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

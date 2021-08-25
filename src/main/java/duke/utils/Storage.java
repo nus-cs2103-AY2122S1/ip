@@ -6,6 +6,9 @@ import duke.tasks.*;
 
 import java.io.*;
 
+/**
+ * An abstraction to persist data incase the user reboots the program.
+ */
 public class Storage {
     static File directory;
     static File data;
@@ -27,6 +30,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the tasks that were saved in the persistant storage
+     *
+     * @return An ArrayList containing the saved tasks
+     * @throws DukeException If database file is not found.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> savedTasks = new ArrayList<>();
         try {
@@ -49,6 +58,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Removes a specific data entry in the database
+     *
+     * @param lineNumber and integer containing the index of the entry.
+     * @throws IOException .
+     */
     public static void removeLine(int lineNumber) throws IOException {
         int counter = 0;
         // Instantiating the Scanner class to read the file
@@ -73,6 +88,12 @@ public class Storage {
         writer.flush();
     }
 
+    /**
+     * Updates a specific task to be done
+     *
+     * @param lineNumber and integer containing the index of the entry.
+     * @throws IOException .
+     */
     public static void updateLine(int lineNumber) throws IOException {
         int counter = 0;
         // Instantiating the Scanner class to read the file

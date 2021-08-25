@@ -5,6 +5,9 @@ import java.util.*;
 import duke.tasks.Task;
 import duke.utils.*;
 
+/**
+ * Represent an Done action to be executed.
+ */
 public class DoneCommand extends Command {
     String index;
 
@@ -12,6 +15,13 @@ public class DoneCommand extends Command {
         index = input.replaceAll("[^0-9]", "");
     }
 
+    /**
+     * Marks the task of interest as completed
+     *
+     * @param tasks    the tasklist
+     * @param ui    the user-interface
+     * @param storage Persistent storage for data
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage){
         try {

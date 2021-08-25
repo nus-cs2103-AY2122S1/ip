@@ -1,7 +1,9 @@
 package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Is a special task with dates. Deadline and Event will inherit from this.
+ */
 public class TaskWithDate extends Task{
     public final LocalDate date;
     

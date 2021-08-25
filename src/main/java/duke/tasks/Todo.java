@@ -1,4 +1,7 @@
 package duke.tasks;
+/**
+ * Represent a task with no deadline or date.
+ */
 public class Todo extends Task{
 
     public Todo(String description, boolean done) {

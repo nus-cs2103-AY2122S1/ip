@@ -1,4 +1,7 @@
 package duke.tasks;
+/**
+ * Represent a task with a date.
+ */
 public class Event extends TaskWithDate{
     public Event(String description, String at, boolean done) {
         super(description,at);
