@@ -81,7 +81,7 @@ public class Parser {
      * @return int value of the String entered
      * @throws DukeException if command is incomplete or invalid (not a number)
      */
-    private static int getNum(String val) {
+    public static int getNum(String val) {
         try {
             if (val.equalsIgnoreCase("")) {
                 throw new DukeException("Error", DukeException.Type.INCOMPLETE);
