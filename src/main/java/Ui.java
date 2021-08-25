@@ -83,38 +83,6 @@ public class Ui {
         System.out.println(output);
     }
 
-    public String printListForSave(TaskList lst) {
-        String outputText = "";
-
-        for (Task t: lst.getListOfTasks()) {
-            if (t instanceof Todo) {
-                outputText += "T | ";
-                if (t.getStatusIcon().equals("X")) {
-                    outputText += "X | " + t.getDescription() + "\n";
-                } else {
-                    outputText += "0 | " + t.getDescription() + "\n";
-                }
-            } else if (t instanceof Deadline) {
-                Deadline d = (Deadline) t;
-                outputText += "D | ";
-                if (d.getStatusIcon().equals("X")) {
-                    outputText += "X | " + d.getDescription() + " | " + d.getBy() + "\n";
-                } else {
-                    outputText += "0 | " + d.getDescription() + " | " + d.getBy() + "\n";
-                }
-            } else if (t instanceof Event) {
-                Event e = (Event) t;
-                outputText += "E | ";
-                if (e.getStatusIcon().equals("X")) {
-                    outputText += "X | " + e.getDescription() + " | " + e.getAt() + "\n";
-                } else {
-                    outputText += "0 | " + e.getDescription() + " | " + e.getAt() + "\n";
-                }
-            }
-        }
-        return outputText;
-    }
-
     public String readCommand() {
         return sc.nextLine();
     }

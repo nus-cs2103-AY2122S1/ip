@@ -6,7 +6,7 @@ public class ExitCommand extends Command{
 
     // saves tasklist and calls ui to print bye message
     public void execute(TaskList task, Ui ui, Storage storage) {
-        storage.save(task, ui);
+        storage.save(task);
         ui.showByeMessage();
     }
 
