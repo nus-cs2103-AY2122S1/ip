@@ -3,6 +3,7 @@ Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?
 What can I do for you?
 ____________________________________________________________________________
 ____________________________________________________________________________
+Burp burp! Something went wrong!
 ☹ BURP-ribbit ribbit. I'm sorry, but I don't know what that means :-(
 ____________________________________________________________________________
 ____________________________________________________________________________
@@ -70,19 +71,24 @@ Here are the tasks in your list:
 3. [D] [X] Do CS2103T iP (by: Jan 19 2021)
 ____________________________________________________________________________
 ____________________________________________________________________________
+Burp burp! Something went wrong!
 ☹ BURP-ribbit ribbit. The description of a todo cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
+Burp burp! Something went wrong!
 ☹ BURP-ribbit ribbit. The description of a event cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
+Burp burp! Something went wrong!
 ☹ BURP-ribbit ribbit. Events should be formatted as:
 event <description> /at <time of event>
 ____________________________________________________________________________
 ____________________________________________________________________________
+Burp burp! Something went wrong!
 ☹ BURP-ribbit ribbit. The description of a deadline cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
+Burp burp! Something went wrong!
 ☹ BURP-ribbit ribbit. Deadlines should be formatted as:
 deadline <description> /by <deadline>
 ____________________________________________________________________________
