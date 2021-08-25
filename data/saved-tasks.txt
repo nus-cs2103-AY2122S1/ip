@@ -1,0 +1,5 @@
+T | 1 | read book
+D | 0 | return book | June 6th
+T | 1 | join sports club
+D | 0 | return book by | Oct 09 2019
+E | 1 | dance tonight at | Oct 10 2019
