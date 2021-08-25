@@ -40,9 +40,7 @@ class DateTimeManager {
      * representation of the date.
      *
      * @param dateTime The string to be parsed as a LocalDate object.
-     *
      * @return The LocalDate object of the string given.
-     *
      * @throws DukeException If the string is not given in the valid format
      * as specified by the DateTimeFormatter.
      */

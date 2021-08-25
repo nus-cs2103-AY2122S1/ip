@@ -37,7 +37,6 @@ public class TaskList {
      * Returns true if it is.
      *
      * @param index Index of task to be checked.
-     *
      * @return boolean Indicate whether the task is in the task list.
      */
     public boolean isValidTaskIndex(int index) {
@@ -58,7 +57,6 @@ public class TaskList {
      * Add a new task to the task list.
      *
      * @param newTask The task to be added.
-     *
      * @return A new task list that contains the required tasks.
      */
     public TaskList add(Task newTask) {
@@ -71,7 +69,6 @@ public class TaskList {
      * Mark a specific task as completed.
      *
      * @param index Index of the task to be marked as completed.
-     *
      * @return The task that was marked as completed.
      */
     public Task markTaskAsCompleted(int index) {
@@ -84,7 +81,6 @@ public class TaskList {
      * Delete task from the task list.
      *
      * @param index Index of the task to be deleted.
-     *
      * @return A new task list that contains the remaining tasks.
      */
     public TaskList deleteTask(int index) {
