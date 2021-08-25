@@ -14,7 +14,8 @@ public class Parser {
         todo,
         deadline,
         event,
-        delete
+        delete,
+        find
     }
     private DateTimeFormatter df;
 
@@ -81,6 +82,10 @@ public class Parser {
         return input.equals(SPECIAL_TASK.delete.name());
     }
 
+    public boolean isFind(String input) {
+        return input.equals(SPECIAL_TASK.find.name());
+    }
+
     public boolean isBlah(String input) {
         return input.equals("Blah");
     }
@@ -107,6 +112,10 @@ public class Parser {
         checkDesc(splitInput, SPECIAL_TASK.delete.name());
         int index = getIndex(splitInput);
         return index;
+    }
+
+    public void parseFind(String[] splitInput) throws DukeException {
+        checkDesc(splitInput, SPECIAL_TASK.find.name());
     }
 
     public void checkTaskIndex(int index, TaskList taskList) throws DukeException {
