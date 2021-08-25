@@ -3,6 +3,9 @@ package duke.tasks;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+/**
+ * Internal representation of list of tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
