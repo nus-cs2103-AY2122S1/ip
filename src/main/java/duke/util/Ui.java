@@ -9,8 +9,8 @@ public class Ui {
     private final Scanner s;
     private final String MESSAGE_START = "Hi there! I'm Duke\nHow may I help you?";
     private final String MESSAGE_END = "Bye! Hope to see you again soon!";
-    private final String START_LINE_BORDER = "--------------------------------------------------\n";
-    private final String END_LINE_BORDER = "\n--------------------------------------------------";
+    private final String BORDER_START_LINE = "--------------------------------------------------\n";
+    private final String BORDER_END_LINE = "\n--------------------------------------------------";
 
     /**
      * Constructor for Ui.
@@ -30,7 +30,7 @@ public class Ui {
     }
 
     public void printMessage(String message) {
-        System.out.println(START_LINE_BORDER + message + END_LINE_BORDER);
+        System.out.println(BORDER_START_LINE + message + BORDER_END_LINE);
     }
 
     /**
