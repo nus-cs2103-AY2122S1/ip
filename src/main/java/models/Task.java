@@ -11,7 +11,7 @@ public class Task implements Serializable {
     protected String description;
 
     /** Boolean value that shows whether the task is done or not. */
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Constructor of the Task class.
@@ -20,14 +20,14 @@ public class Task implements Serializable {
      */
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
      * Make the Task done.
      */
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -57,7 +57,7 @@ public class Task implements Serializable {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[X] " + this.description;
         }
         return "[ ] " + this.description;

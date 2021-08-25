@@ -40,20 +40,21 @@ public class Processor implements IProcessor {
     @Override
     public void processCommand(Command command, List<String> arguments) {
         switch(command) {
-            case BYE:
-                processBye();
-                break;
-            case LIST:
-                processList();
-                break;
-            case DONE:
-                processDone(arguments.get(1));
-                break;
-            case DELETE:
-                processDelete(arguments.get(1));
-                break;
-            default:
-                processDefault(arguments);
+        case BYE:
+            processBye();
+            break;
+        case LIST:
+            processList();
+            break;
+        case DONE:
+            processDone(arguments.get(1));
+            break;
+        case DELETE:
+            processDelete(arguments.get(1));
+            break;
+        default:
+            processDefault(arguments);
+            break;
         }
     }
 
