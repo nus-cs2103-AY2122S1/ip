@@ -28,4 +28,12 @@ public class TaskList {
         }
         return tempBuilder.toString();
     }
+    
+    public ArrayList<String> toBackupFormat() {
+        ArrayList<String> backupData = new ArrayList<>();
+        for (Task t: tasks) {
+            backupData.add(t.toBackupFormat());
+        }
+        return backupData;
+    }
 }

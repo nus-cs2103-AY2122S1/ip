@@ -6,6 +6,11 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+    
+    public Task(boolean isDone, String description) {
+        this.description = description;
+        this.isDone = isDone;
+    }
 
     protected String getStatusIcon() {
         return (isDone ? "X" : " ");
@@ -21,5 +26,9 @@ public class Task {
 
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);
+    }
+    
+    public String toBackupFormat() {
+        return String.format("%s|%d", description, isDone ? 1 : 0);
     }
 }
