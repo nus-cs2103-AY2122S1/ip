@@ -2,7 +2,7 @@ package duke;
 
 public class Ui {
     
-    public static String LINES = "--------------------------------------------------------------------------------------\n";
+    private static String LINES = "--------------------------------------------------------------------------------------\n";
     
     public static void intro() {
         String logo = " ____        _        \n"
