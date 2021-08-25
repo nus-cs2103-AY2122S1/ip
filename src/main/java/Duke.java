@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -40,14 +42,14 @@ public class Duke {
         this.saveData();
     }
 
-    public void addDeadline(String description, String by) {
+    public void addDeadline(String description, String by) throws DateTimeParseException {
         Task task = new Deadline(description, by);
         this.taskList.addTask(task);
         this.informTaskAdded(task);
         this.saveData();
     }
 
-    public void addEvent(String description, String at) {
+    public void addEvent(String description, String at) throws DateTimeParseException {
         Task task = new Event(description, at);
         this.taskList.addTask(task);
         this.informTaskAdded(task);
@@ -117,7 +119,7 @@ public class Duke {
             this.echo("No stored data found");
         }
     }
-    
+
     public void saveData() {
         try {
             FileWriter fout = new FileWriter(SAVE_FILE_DIRECTORY.toString());
@@ -183,6 +185,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 this.echo(e.getMessage() + "\n");
+            } catch (DateTimeParseException e) {
+                this.echo("Invalid date format (must be in yyyy-mm-dd). Unable to add task.");
             }
         }
     }
