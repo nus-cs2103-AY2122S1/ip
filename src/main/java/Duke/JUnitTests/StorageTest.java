@@ -1,28 +1,29 @@
 /**
  * @author Hang Zelin
- *
  * @description a JUnit class that tests some methods in Storage.
- *
  */
 package Duke.JUnitTests;
 
 import Duke.Excpetions.DukeException;
 import Duke.SaveLoadManager.Storage;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.Test;
+
 import java.util.ArrayList;
 
 public class StorageTest {
 
     @Test
     public void HandleTaskTest() {
-        assertEquals('0' , new Storage("data/tasks.txt").HandleTaskText("T | 0 | borrow book"));
-        assertEquals('1' , new Storage("data/tasks.txt").HandleTaskText("D | 1 | return book | 2/12/2019 1800"));
-        assertEquals('1' , new Storage("data/tasks.txt").HandleTaskText("E | 1 | project meeting | I don't know the time"));
-        assertEquals('0' , new Storage("data/tasks.txt").HandleTaskText("D | 0 | return book | 23/9/2020 1525"));
-        assertEquals('0' , new Storage("data/tasks.txt").HandleTaskText("E | 0 | project splashdown | 15/10/2019 0000"));
-        assertEquals('1' , new Storage("data/tasks.txt").HandleTaskText("T | 1 | join sports club"));
+        assertEquals('0', new Storage("data/tasks.txt").HandleTaskText("T | 0 | borrow book"));
+        assertEquals('1', new Storage("data/tasks.txt").HandleTaskText("D | 1 | return book | 2/12/2019 1800"));
+        assertEquals('1', new Storage("data/tasks.txt").HandleTaskText("E | 1 | project meeting | I don't know the time"));
+        assertEquals('0', new Storage("data/tasks.txt").HandleTaskText("D | 0 | return book | 23/9/2020 1525"));
+        assertEquals('0', new Storage("data/tasks.txt").HandleTaskText("E | 0 | project splashdown | 15/10/2019 0000"));
+        assertEquals('1', new Storage("data/tasks.txt").HandleTaskText("T | 1 | join sports club"));
     }
 
     @Test

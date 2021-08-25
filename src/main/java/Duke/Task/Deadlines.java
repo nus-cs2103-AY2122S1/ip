@@ -1,9 +1,7 @@
 /**
  * @author Hang Zelin
- *
  * @description Deadlines class that extends Task class. It is one of the types in 3 tasks.
  * Will contain a time in the form of "/by"
- *
  */
 package Duke.Task;
 
@@ -11,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Deadlines extends Task{
+public class Deadlines extends Task {
 
     private boolean done = false;
     private String task = "";
@@ -33,7 +31,7 @@ public class Deadlines extends Task{
             done_str = "X";
         }
 
-        return "[" + taskType + "]" + "[" + done_str + "] "  + task +" (by: " + ParsedTime() + ")";
+        return "[" + taskType + "]" + "[" + done_str + "] " + task + " (by: " + ParsedTime() + ")";
     }
 
     @Override
@@ -59,15 +57,15 @@ public class Deadlines extends Task{
             return "I don't know the time";
         }
         return this.time.getDayOfMonth() + "/" + this.time.getMonthValue() + "/" + this.time.getYear() + " " +
-                ((this.time.getHour() < 10)? "0" + this.time.getHour()
-                        :this.time.getHour())
-                + ((this.time.getMinute() < 10)? "0" + this.time.getMinute()
-                :this.time.getMinute());
+                ((this.time.getHour() < 10) ? "0" + this.time.getHour()
+                        : this.time.getHour())
+                + ((this.time.getMinute() < 10) ? "0" + this.time.getMinute()
+                : this.time.getMinute());
     }
 
 
     @Override
     public String getSaveDataInfo() {
-        return this.taskType + " | " + (this.done? 1 : 0) + " | " + task + " | " + getTime();
+        return this.taskType + " | " + (this.done ? 1 : 0) + " | " + task + " | " + getTime();
     }
 }
