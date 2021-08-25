@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Storage;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -8,7 +12,7 @@ public class Event extends Task {
 
     private LocalDate eventDate;
 
-    Event(String description, boolean completed, LocalDate eventDate) {
+    public Event(String description, boolean completed, LocalDate eventDate) {
         super(description, completed);
         this.eventDate = eventDate;
     }

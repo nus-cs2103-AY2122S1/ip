@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a task that can be marked as completed/done.
  */
@@ -31,9 +33,9 @@ public abstract class Task {
     }
 
     /**
-     * Encodes the Task into a String that can be stored.
+     * Encodes the duke.tasks.Task into a String that can be stored.
      *
-     * @return A one-line String containing the data of the Task
+     * @return A one-line String containing the data of the duke.tasks.Task
      */
     public abstract String encode();
 }

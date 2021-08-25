@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -25,8 +29,8 @@ public class Duke {
                 Command command = Parser.parse(userInput);
                 exit = command.execute(tasks, ui);
             } catch (DukeException e) {
-                // Get Duke to say out the error
-                ui.notifyException(e);
+                // Get duke.Duke to say out the error
+                ui.notifyError(e);
             }
         }
     }

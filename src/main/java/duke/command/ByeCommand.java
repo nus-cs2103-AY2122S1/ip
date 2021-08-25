@@ -1,5 +1,13 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+
+/**
+ * Handles the bye command which exits duke.Duke.
+ */
 public class ByeCommand extends Command{
-    ByeCommand(String input) {
+    public ByeCommand(String input) {
         super(input);
     }
 

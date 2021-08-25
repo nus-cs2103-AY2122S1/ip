@@ -1,12 +1,23 @@
+package duke.command;
+
+import duke.task.Deadline;
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Handles the deadline command which adds
+ * a single deadline.
+ */
 public class AddDeadlineCommand extends Command {
 
     // Regex pattern for finding deadline commands
     private static final Pattern DEADLINE_PATTERN = Pattern.compile("^deadline (.*) /by (\\d{4}-\\d{2}-\\d{2})$");
 
-    AddDeadlineCommand(String input) {
+    public AddDeadlineCommand(String input) {
         super(input);
     }
 

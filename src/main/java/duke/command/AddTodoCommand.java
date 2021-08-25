@@ -1,12 +1,23 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.task.ToDo;
+import duke.Ui;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Handles the todo command which
+ * adds a single todo.
+ */
 public class AddTodoCommand extends Command {
 
     // Regex pattern for finding todo commands
     private static final Pattern TODO_PATTERN = Pattern.compile("^todo (.*)$");
 
-    AddTodoCommand(String input) {
+    public AddTodoCommand(String input) {
         super(input);
     }
 

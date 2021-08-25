@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Storage;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -8,7 +12,7 @@ public class Deadline extends Task {
 
     private LocalDate endDate;
 
-    Deadline(String description, boolean completed, LocalDate endDate) {
+    public Deadline(String description, boolean completed, LocalDate endDate) {
         super(description, completed);
         this.endDate = endDate;
     }

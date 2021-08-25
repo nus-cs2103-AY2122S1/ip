@@ -1,5 +1,16 @@
+package duke;
+
+import duke.command.*;
+
+/**
+ * Parses commands for duke.Duke.
+ */
 public class Parser {
-    
+    /**
+     * Parses an input command and returns a corresponding duke.commands.Command.
+     * @param input single-line user input
+     * @return duke.commands.Command which performs the corresponding action.
+     */
     static Command parse(String input) {
         if (input.equals("bye")) {
             return new ByeCommand(input);

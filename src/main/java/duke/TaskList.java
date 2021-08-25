@@ -1,8 +1,12 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Manages the list of tasks for Duke.
+ * Manages the list of tasks for duke.Duke.
  */
 public class TaskList {
     private final Storage storage;

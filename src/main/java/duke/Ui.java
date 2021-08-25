@@ -1,5 +1,9 @@
+package duke;
+
+import duke.task.Task;
+
 /**
- * Handles all UI elements for Duke.
+ * Handles all UI elements for duke.Duke.
  */
 public class Ui {
     private static final String line = "    ____________________________________________________________";
@@ -57,7 +61,7 @@ public class Ui {
         this.say("I have marked the task as done!", String.format("%d. %s", index + 1, task));
     }
 
-    public void notifyException(DukeException exception) {
+    public void notifyError(DukeException exception) {
         this.say(exception.getMessage());
     }
 

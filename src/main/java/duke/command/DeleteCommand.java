@@ -1,11 +1,22 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Handles the delete command which
+ * deletes a single task.
+ */
 public class DeleteCommand extends Command {
     // Regex pattern for finding delete commands
     private static final Pattern DELETE_PATTERN = Pattern.compile("^delete (\\d*)$");
 
-    DeleteCommand(String input) {
+    public DeleteCommand(String input) {
         super(input);
     }
 

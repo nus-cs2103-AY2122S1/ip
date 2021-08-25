@@ -1,12 +1,23 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Handles the done command which
+ * marks a single task as done.
+ */
 public class MarkAsDoneCommand extends Command {
 
     // Regex pattern for finding done commands
     private static final Pattern DONE_PATTERN = Pattern.compile("^done (\\d*)$");
 
-    MarkAsDoneCommand(String input) {
+    public MarkAsDoneCommand(String input) {
         super(input);
     }
 

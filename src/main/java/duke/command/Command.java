@@ -1,9 +1,21 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-abstract class Command {
+/**
+ * Carries out a certain action depending on user input.
+ */
+abstract public class Command {
 
+    /**
+     * Original user input.
+     */
     protected final String input;
 
     /**

@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,7 +17,7 @@ import java.io.File;
 import java.util.Scanner;
 
 /**
- * Handles data persistence for Duke.
+ * Handles data persistence for duke.Duke.
  */
 public class Storage {
 
@@ -75,9 +82,9 @@ public class Storage {
     }
 
     /**
-     * Converts the line to the corresponding Task
-     * @param line Serialized String containing the data of the Task
-     * @return Task obtained from deserializing the line
+     * Converts the line to the corresponding duke.tasks.Task
+     * @param line Serialized String containing the data of the duke.tasks.Task
+     * @return duke.tasks.Task obtained from deserializing the line
      */
     private Task decodeLine(String line) {
         String[] parts = line.split(String.valueOf(DELIMITER));
