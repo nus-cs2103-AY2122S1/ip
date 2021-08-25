@@ -61,4 +61,15 @@ public class TaskList {
         tasks.remove(idx);
         storage.saveToFile(tasks);
     }
+
+    /**
+     * Returns string form of all tasks whose name contains the given query.
+     *
+     * @param query string to match upon
+     * @return string representation of all tasks whose names contain the given query
+     */
+    public String getMatches(String query) {
+        return String.join("\n", tasks.stream().filter(task -> task.getName().contains(query))
+                .map(task -> task.toString()).toArray(String[]::new));
+    }
 }
