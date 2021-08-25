@@ -14,4 +14,12 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + String.format(" (by: %s)", endDateTime);
     }
+
+    @Override
+    public String encode() {
+        return "d" + DukeMemory.DELIMITER
+                + (this.isCompleted() ? "1" : "0") + DukeMemory.DELIMITER
+                + endDateTime + DukeMemory.DELIMITER
+                + this.getDescription();
+    }
 }

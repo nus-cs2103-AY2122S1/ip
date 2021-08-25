@@ -6,8 +6,10 @@ import java.util.regex.Pattern;
 
 public class Duke {
 
+    private static final DukeMemory dukeMemory = new DukeMemory("data/tasks.txt");
+
     // Array for storing user inputs
-    private static final List<Task> store = new ArrayList<>();
+    private static List<Task> store;
 
     // Regex pattern for finding done commands
     private static final Pattern DONE_PATTERN = Pattern.compile("^done (\\d*)$");
@@ -32,6 +34,9 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        // Read tasks from store
+        store = dukeMemory.readTasks();
+
         Scanner scanner = new Scanner((System.in));
 
         say("Hello, I'm Duke.", "Make me do something.");
@@ -48,17 +53,22 @@ public class Duke {
                     list();
                 } else if (userInput.startsWith("done")) {
                     markAsDone(userInput);
+                    dukeMemory.saveTasks(store);
                 } else if (userInput.startsWith("delete")) {
                     delete(userInput);
+                    dukeMemory.saveTasks(store);
                 } else if (userInput.startsWith("todo")) {
                     // User is attempting to add a to-do
                     addToDo(userInput);
+                    dukeMemory.saveTasks(store);
                 } else if (userInput.startsWith("deadline")) {
                     // User is attempting to add a deadline
                     addDeadline(userInput);
+                    dukeMemory.saveTasks(store);
                 } else if (userInput.startsWith("event")) {
                     // User is attempting to add an event
                     addEvent(userInput);
+                    dukeMemory.saveTasks(store);
                 } else {
                     // Invalid command
                     throw new DukeException("Sorry, I didn't understand what you meant by that");

@@ -14,4 +14,12 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + String.format(" (at: %s)", eventDateTime);
     }
+
+    @Override
+    public String encode() {
+        return "e" + DukeMemory.DELIMITER
+                + (this.isCompleted() ? "1" : "0") + DukeMemory.DELIMITER
+                + eventDateTime + DukeMemory.DELIMITER
+                + this.getDescription();
+    }
 }
