@@ -34,60 +34,60 @@ public class Ailurus {
                 String fullCommand = ui.readCommand();
                 String command = Parser.parse(fullCommand);
                 switch (command) {
-                    case "bye":
-                        this.storage.unload(this.tasks);
-                        this.ui.sayBye();
-                        isExit = true;
-                        break;
-                    case "list":
-                        try {
-                            this.ui.sayList(this.tasks);
-                        } catch (AilurusException e) {
-                            this.ui.showError(e.getMessage());
-                        }
-                        break;
-                    case "done":
-                        try {
-                            String str = Parser.parseMessage(fullCommand);
-                            this.ui.sayDone(this.tasks.done(str));
-                        } catch (AilurusException e) {
-                            this.ui.showError(e.getMessage());
-                        }
-                        break;
-                    case "todo":
-                        try {
-                            String todoMessage = Parser.parseMessage(fullCommand);
-                            this.ui.sayAdd(this.tasks.addTask(new Todo(todoMessage)), this.tasks.length());
-                        } catch (AilurusException e) {
-                            this.ui.showError(e.getMessage());
-                        }
-                        break;
-                    case "deadline":
-                        try {
-                            String deadlineMessage = Parser.parseMessage(fullCommand);
-                            this.ui.sayAdd(this.tasks.addTask(new Deadline(deadlineMessage)), this.tasks.length());
-                        } catch (AilurusException e) {
-                            this.ui.showError(e.getMessage());
-                        }
-                        break;
-                    case "event":
-                        try {
-                            String eventMessage = Parser.parseMessage(fullCommand);
-                            this.ui.sayAdd(this.tasks.addTask(new Event(eventMessage)), this.tasks.length());
-                        } catch (AilurusException e) {
-                            this.ui.showError(e.getMessage());
-                        }
-                        break;
-                    case "delete":
-                        try {
-                            String str = Parser.parseMessage(fullCommand);
-                            this.ui.sayDelete(this.tasks.deleteTask(str), this.tasks.length());
-                        } catch (AilurusException e) {
-                            this.ui.showError(e.getMessage());
-                        }
-                        break;
-                    default:
-                        this.ui.sayInvalidCommand();
+                case "bye":
+                    this.storage.unload(this.tasks);
+                    this.ui.sayBye();
+                    isExit = true;
+                    break;
+                case "list":
+                    try {
+                        this.ui.sayList(this.tasks);
+                    } catch (AilurusException e) {
+                        this.ui.showError(e.getMessage());
+                    }
+                    break;
+                case "done":
+                    try {
+                        String str = Parser.parseMessage(fullCommand);
+                        this.ui.sayDone(this.tasks.done(str));
+                    } catch (AilurusException e) {
+                        this.ui.showError(e.getMessage());
+                    }
+                    break;
+                case "todo":
+                    try {
+                        String todoMessage = Parser.parseMessage(fullCommand);
+                        this.ui.sayAdd(this.tasks.addTask(new Todo(todoMessage)), this.tasks.length());
+                    } catch (AilurusException e) {
+                        this.ui.showError(e.getMessage());
+                    }
+                    break;
+                case "deadline":
+                    try {
+                        String deadlineMessage = Parser.parseMessage(fullCommand);
+                        this.ui.sayAdd(this.tasks.addTask(new Deadline(deadlineMessage)), this.tasks.length());
+                    } catch (AilurusException e) {
+                        this.ui.showError(e.getMessage());
+                    }
+                    break;
+                case "event":
+                    try {
+                        String eventMessage = Parser.parseMessage(fullCommand);
+                        this.ui.sayAdd(this.tasks.addTask(new Event(eventMessage)), this.tasks.length());
+                    } catch (AilurusException e) {
+                        this.ui.showError(e.getMessage());
+                    }
+                    break;
+                case "delete":
+                    try {
+                        String str = Parser.parseMessage(fullCommand);
+                        this.ui.sayDelete(this.tasks.deleteTask(str), this.tasks.length());
+                    } catch (AilurusException e) {
+                        this.ui.showError(e.getMessage());
+                    }
+                    break;
+                default:
+                    this.ui.sayInvalidCommand();
                 }
             } catch (AilurusException e) {
                 ui.showError(e.getMessage());
