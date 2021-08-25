@@ -30,6 +30,10 @@ public abstract class Task {
             return " | 0 | " + taskName;
         }
     }
+
+    public boolean containsKeyword(String keyword) {
+        return taskName.contains(keyword);
+    }
     
     public abstract boolean isTodayTask(LocalDate l);
 }

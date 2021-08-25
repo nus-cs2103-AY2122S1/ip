@@ -38,11 +38,11 @@ public class TaskList {
     }
     
     public void findTasksByDate(LocalDate desiredDate) {
-        ui.showFind(list, list.size(), desiredDate);
+        ui.showDateFind(list, list.size(), desiredDate);
     }
 
     public void findTasksByKeyword(String keyword) {
-        
+        ui.showKeywordFind(list, list.size(), keyword);
     }
     
     public void addTask(Task newTask) {

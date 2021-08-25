@@ -53,11 +53,21 @@ public class Ui {
                 + "\n  Now you have " + listLength + " tasks in the list.\n");
     }
     
-    public void showFind(ArrayList<Task> taskList, int listLength, LocalDate desiredDate) {
+    public void showDateFind(ArrayList<Task> taskList, int listLength, LocalDate desiredDate) {
         System.out.println("  Here are the tasks for the given day:");
         for (int i = 0; i < listLength; ++i) {
             Task currTask = taskList.get(i);
             if (currTask.isTodayTask(desiredDate)) {
+                System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
+            }
+        }
+    }
+
+    public void showKeywordFind(ArrayList<Task> taskList, int listLength, String keyword) {
+        System.out.println("  Here are the tasks with the given keyword:");
+        for (int i = 0; i < listLength; ++i) {
+            Task currTask = taskList.get(i);
+            if (currTask.containsKeyword(keyword)) {
                 System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
             }
         }
