@@ -39,6 +39,8 @@ public class Parser {
                 return this.taskList.getAllTasks();
             case "delete":
                 return this.parseDeleteTask(command.substring(7));
+            case "find":
+                return this.taskList.search(command.substring(5).trim());
             default:
                 return this.parseNewTask(command); // default is add new duke.task
             }
@@ -51,7 +53,7 @@ public class Parser {
         } catch (IOException ex) {
             return "Unable to log task.";
         } catch (StringIndexOutOfBoundsException ex) {
-            return "Invalid task description: missing name / date & time!";
+            return "Invalid task description: missing details!";
         } catch (NumberFormatException ex) {
             return "Invalid input for delete command. Please enter [delete] followed by the number of the line to " +
                     "delete\ne.g. delete 2";
