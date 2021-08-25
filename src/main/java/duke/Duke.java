@@ -7,12 +7,19 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents the main class that the program runs from.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Initialises the program to the filepath of the text file where the tasks are saved.
+     * @param filePath the filepath of the text file where the tasks are saved.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     */
     public void run() {
         ui.sayHello();
         boolean isExit = false;

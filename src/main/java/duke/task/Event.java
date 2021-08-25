@@ -7,10 +7,20 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event task.
+ */
 public class Event extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Creats an event with a description, time and date.
+     * @param description given description.
+     * @param dateString given date.
+     * @param timeString given time.
+     * @throws DukeException
+     */
     public Event(String description, String dateString, String timeString) throws DukeException {
         super(description);
         try {
@@ -22,22 +32,38 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns the type of event to be written to the text file during saving.
+     * @return the type of event.
+     */
     @Override
     public String getType() {
         return "E";
     }
 
+    /**
+     * Returns the description of the event.
+     * @return the description of the event.
+     */
     @Override
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns the string representation of the date and time of the event.
+     * @return the string representation of the date and time of the event.
+     */
     @Override
     public String getDateTimeString() {
         return this.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
                 + " " + this.time.format(DateTimeFormatter.ofPattern("HHmm"));
     }
 
+    /**
+     * Returns the string representation of the event.
+     * @return the string representation of the event.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " +

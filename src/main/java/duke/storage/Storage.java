@@ -3,16 +3,25 @@ package duke.storage;
 import duke.task.Task;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage that interacts with the text file to retrieve and save tasks upon starting
+ * and exiting the program.
+ */
+
 public class Storage {
 
     File savedTasksFile;
 
+    /**
+     * Creates a new Storage object that has its file path set to that of the file used
+     * to save the tasks.
+     * @param filePath Path of the text file used to store the saved tasks.
+     */
     public Storage(String filePath) {
         this.savedTasksFile = new File(filePath);
         File dir = new File(savedTasksFile.getParent());
@@ -21,6 +30,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns an ArrayList of Strings where each element is a line from the text file.
+     * @return ArrayList of Strings
+     */
     public ArrayList<String> load() {
         try {
             if (savedTasksFile.createNewFile()) {
@@ -41,6 +54,10 @@ public class Storage {
         return new ArrayList<>();
     }
 
+    /**
+     * Formats and writes each task in the ArrayList of tasks into the task.txt file.
+     * @param tasks The ArrayList of tasks to be saved into task.txt.
+     */
     public void save(ArrayList<Task> tasks) {
         try {
             savedTasksFile.createNewFile();

@@ -8,12 +8,21 @@ import duke.task.Todo;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the ArrayList where the tasks of the program is stored.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private final int todoLength = 3;
     private final int deadlineLength = 4;
     private final int eventLength = 4;
 
+    /**
+     * Reads in from an ArrayList of strings that is formatted to represent a task, and creates and adds
+     * the appropriate task into the ArrayList of tasks.
+     * @param loadingStrings the given ArrayList of formatted string that represents a task.
+     * @throws DukeException if the String is of the wrong format.
+     */
     public TaskList(ArrayList<String> loadingStrings) throws DukeException {
         this.tasks = new ArrayList<>();
         for (int i = 0; i < loadingStrings.size(); i++) {
@@ -57,32 +66,60 @@ public class TaskList {
 
     }
 
+    /**
+     * Creates an empty ArrayList of tasks.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Returns the task at the given index of the ArrayList of tasks.
+     * @param index of the task that is to be returned.
+     * @return the task at the given index of the ArrayList of tasks.
+     */
     public Task get(int index) {
         return tasks.get(index);
     }
 
+    /**
+     * Returns the ArrayList of tasks.
+     * @return the ArrayList of tasks.
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
+    /**
+     * Removes the Task at the given Index from the ArrayList of Tasks.
+     * @param delIndex the given index that the task should be removed.
+     */
     public void deleteTask(int delIndex) {
         Task task = tasks.get(delIndex);
         tasks.remove(delIndex);
     }
 
+    /**
+     * Marks the task at the given index from the ArrayList of tasks as done.
+     * @param index the given index of the task that should be marked as done.
+     */
     public void markTask(int index) {
         Task task = tasks.get(index);
         task.markAsDone();
     }
 
-    public void addTask(Task task) throws DukeException {
+    /**
+     * Adds the task to the ArrayList of tasks.
+     * @param task the task to be added.
+     */
+    public void addTask(Task task) {
         this.tasks.add(task);
     }
 
+    /**
+     * Returns the size of the ArrayList of tasks.
+     * @return the size of the ArrayList of tasks.
+     */
     public int size() {
         return tasks.size();
     }

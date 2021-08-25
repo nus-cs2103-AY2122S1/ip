@@ -7,7 +7,16 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents the parser that parses user input to make sense of the given input and produce
+ * the appropriate command.
+ */
 public class Parser {
+    /**
+     * Takes in a String input and parses it to produce the appropriate command
+     * @param input the user input.
+     * @return the appropriate command.
+     */
     public static Command parse(String input) {
         try {
             String[] words = input.split(" ", 2);
