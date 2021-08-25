@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class Duke {
         }
         System.out.println(output);
     }
+
     public static List<Task> loadTasks(File f) {
         try {
             Scanner s = new Scanner(f);
@@ -59,9 +62,6 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        //testSplit("T // 1 // read book");
-        //System.exit(1);
-
         File store = new File("data/duke.txt");
         try {
             Scanner s = new Scanner(store);
@@ -95,8 +95,9 @@ public class Duke {
                         fw.close();
                     } catch (IOException e) {
                         System.out.println("unable to write to file :<");
+                    } finally {
+                        break;
                     }
-                    break;
                 } else if (userInput.equals("list")) {
                     c.list_execute();
                 } else if (splitInput[0].equals("done")) {
