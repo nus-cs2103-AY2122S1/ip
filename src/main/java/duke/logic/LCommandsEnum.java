@@ -81,6 +81,13 @@ public enum LCommandsEnum {
                     "This will add a deadline task \"give $1 million to charity\" to the list," +
                     " with the date on 31 December 2090 on 12pm." ;
         }
+    }, FIND() {
+        @Override
+        public String helpMessage() {
+            return "Usage: find <item>\n" +
+                    "For example: find book\n" +
+                    "This will list every task that contains \"book\".";
+        }
     };
 
     /**

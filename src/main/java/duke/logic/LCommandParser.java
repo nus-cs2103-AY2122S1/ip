@@ -6,6 +6,8 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TasksEnum;
 
+import java.util.ArrayList;
+
 /**
  * The logic for parsing commands typed by the user.
  */
@@ -64,6 +66,9 @@ public class LCommandParser {
                 throw new DukeException(TOO_LITTLE_ARGUMENTS_MESSAGE);
             }
             switch (commandEnum) {
+            case FIND:
+                ui.printAllTasks(taskList.getTasksContaining(inputArr[1]));
+                break;
             case TODO:
             case EVENT:
             case DEADLINE:
