@@ -11,13 +11,33 @@ import duke.exception.TaskCompletedException;
 
 import duke.task.Task;
 
+/**
+ * A command class encapsulating the logic that occurs when the user issues a 'bye' command.
+ */
 public class DoneCommand extends Command {
+    /** The index of the todo to complete */
     String action;
+
+    /**
+     * Constructor for the Done Command
+     * @param action The string input of the task
+     */
     public DoneCommand(String action) {
         super(false);
         this.action = action;
     }
 
+    /**
+     * Sets a task to complete.
+     *
+     * @param tasks List of existing tasks
+     * @param ui User interface current interacting with the user
+     * @param storage Storage class handling the persistence of the tasks
+     * @throws TaskNotFoundException if index of task is out of bounds
+     * @throws InvalidInputException if input cannot be parsed into an integer
+     * @throws TaskCompletedException if task is already completed
+     * @throws SaveFileException if there are issues with the save file
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
             InvalidInputException, TaskCompletedException, SaveFileException {
