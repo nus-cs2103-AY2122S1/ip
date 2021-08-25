@@ -28,4 +28,16 @@ public class CreateNewEventCommand extends Command {
         String[] message_and_eventDate = super.getExtraInput().split("/at ");
         taskList.add(new Event(message_and_eventDate[0], message_and_eventDate[1]));
     }
+
+    /**
+     * Overrides equals method. To be used for JUnit testing.
+     *
+     * @param o other object for checking
+     * @return true if this instance and o are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof CreateNewEventCommand &&
+                super.getExtraInput().equals(((CreateNewEventCommand) o).getExtraInput());
+    }
 }

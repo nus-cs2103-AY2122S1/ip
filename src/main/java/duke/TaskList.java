@@ -48,7 +48,7 @@ public class TaskList {
     public String toString() {
         String allTasks = "";
         for (int i = 0; i < taskList.size(); i++) {
-            allTasks += (i + 1) + ". " + taskList.get(i).toString() + "\n";
+            allTasks += "      " + (i + 1) + ". " + taskList.get(i).toString() + "\n";
         }
         return allTasks;
     }
@@ -71,8 +71,6 @@ public class TaskList {
      */
     public void add(Task task) {
         this.taskList.add(task);
-        System.out.println("Alright, I've added the following task:");
-        System.out.println(taskList.get(taskList.size() - 1) + "\nNow you have " + taskList.size() + " tasks in the list.\n");
     }
 
     /**
@@ -102,5 +100,14 @@ public class TaskList {
      */
     public int size() {
         return this.taskList.size();
+    }
+
+    /**
+     * Returns the Task object at the respective taskIndex.
+     * @param taskIndex integer index of object to return
+     * @return a Task
+     */
+    public Task get(int taskIndex) {
+        return this.taskList.get(taskIndex);
     }
 }

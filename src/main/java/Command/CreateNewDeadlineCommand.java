@@ -28,4 +28,16 @@ public class CreateNewDeadlineCommand extends Command {
         String[] message_and_endTime = super.getExtraInput().split("/by ");
         taskList.add(new Deadline(message_and_endTime[0], message_and_endTime[1]));
     }
+
+    /**
+     * Overrides equals method. To be used for JUnit testing.
+     *
+     * @param o other object for checking
+     * @return true if this instance and o are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof CreateNewDeadlineCommand &&
+                super.getExtraInput().equals(((CreateNewDeadlineCommand) o).getExtraInput());
+    }
 }

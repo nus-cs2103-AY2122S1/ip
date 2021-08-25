@@ -67,6 +67,16 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows success message for adding of a task.
+     *
+     * @param taskList the current TaskList object
+     */
+    public void showAddedTask(TaskList taskList) {
+        reply("Alright, I've added the following task:");
+        System.out.println("      " + taskList.get(taskList.size() - 1) + "\n      Now you have " + taskList.size() +
+                " tasks in the list.\n");
+    }
 
     /**
      * Print a message to tell the user that the task has been deleted.

@@ -26,5 +26,18 @@ public class CreateNewToDoCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(new ToDo(super.getExtraInput()));
+        ui.showAddedTask(taskList);
+    }
+
+    /**
+     * Overrides equals method. To be used for JUnit testing.
+     *
+     * @param o other object for checking
+     * @return true if this instance and o are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        return o instanceof CreateNewToDoCommand &&
+                super.getExtraInput().equals(((CreateNewToDoCommand) o).getExtraInput());
     }
 }
