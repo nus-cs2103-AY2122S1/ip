@@ -1,5 +1,19 @@
+package duke;
+
 import java.util.Scanner;
 import java.nio.file.Paths;
+import duke.storage.Storage;
+import duke.parser.Parser;
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.exception.DukeTaskDetailsException;
+import duke.exception.DukeIndexInputException;
+import duke.ui.Ui;
+import duke.command.Command;
+
 
 public class Duke {
 
@@ -8,8 +22,8 @@ public class Duke {
     private Ui ui;
 
     Duke() {
-        this.storage = new Storage(Paths.get("..", "..", "..", "data"),
-                                   Paths.get("..", "..", "..", "data", "tasks.txt"));
+        this.storage = new Storage(Paths.get(".", "data"),
+                                   Paths.get(".", "data", "tasks.txt"));
         this.tasks = new TaskList(this.storage.getTasks());
         this.ui = new Ui();
     }

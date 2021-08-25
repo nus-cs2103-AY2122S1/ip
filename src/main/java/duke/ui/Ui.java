@@ -1,8 +1,11 @@
+package duke.ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class Ui {
 
 	public static String DIVIDER_LINE = "\t____________________________";
-
-	Ui() {}
 
 	public void greet() {
 		String logo = " ____        _\n"

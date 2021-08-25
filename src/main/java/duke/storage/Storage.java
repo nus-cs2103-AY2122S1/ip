@@ -1,22 +1,29 @@
+package duke.storage;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
 
 public class Storage {
 
 	Path dirPath;
 	Path filePath;
 
-	Storage(Path dirPath, Path filePath) {
+	public Storage(Path dirPath, Path filePath) {
 		this.dirPath = dirPath;
 		this.filePath = filePath;
 	}
 
     public ArrayList<Task> getTasks() {
 		try {
+        System.out.println(System.getProperty("user.dir"));
 			File taskFile = new File(this.filePath.toString());
 			ArrayList<Task> tasks = new ArrayList<>();
 			Scanner sc = new Scanner(taskFile);

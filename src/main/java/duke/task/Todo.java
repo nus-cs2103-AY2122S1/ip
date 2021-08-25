@@ -1,14 +1,16 @@
+package duke.task;
+
 /**
  * class to represent todos, a type of task
  *
  */
 public class Todo extends Task {
 
-	Todo(String title) {
+	public Todo(String title) {
 		super(title);
 	}
 
-	Todo(String title, Boolean done) {
+	public Todo(String title, Boolean done) {
 		super(title, done);
 	}
 

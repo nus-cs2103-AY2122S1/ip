@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -12,12 +14,12 @@ public class Event extends Task {
 	private LocalTime eventTime = null;
 
 
-	Event(String title, String eventString) {
+	public Event(String title, String eventString) {
 		super(title);
 		this.parseDate(eventString);
 	}
 
-	Event(String title, Boolean done, String eventDate) {
+	public Event(String title, Boolean done, String eventDate) {
 		super(title, done);
 		this.parseDate(eventDate);
 	}

@@ -1,10 +1,14 @@
+package duke.task;
+
 import java.util.ArrayList;
+import duke.exception.DukeTaskDetailsException;
+import duke.exception.DukeIndexInputException;
 
 public class TaskList {
 
 	private ArrayList<Task> tasks;
 
-	TaskList(ArrayList<Task> tasks) {
+	public TaskList(ArrayList<Task> tasks) {
 		this.tasks = tasks;
 	}
 	

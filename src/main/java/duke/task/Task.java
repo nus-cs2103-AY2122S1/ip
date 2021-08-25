@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * class to represent tasks
  *

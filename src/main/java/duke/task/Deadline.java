@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -11,12 +13,12 @@ public class Deadline extends Task {
 	private LocalDate deadlineDate = null;
 	private LocalTime deadlineTime = null;
 
-	Deadline(String title, String deadline) {
+	public Deadline(String title, String deadline) {
 		super(title);
 		this.parseDate(deadline);
 	}
 
-	Deadline(String title, Boolean done, String deadline) {
+	public Deadline(String title, Boolean done, String deadline) {
 		super(title, done);
 		this.parseDate(deadline);
 	}
