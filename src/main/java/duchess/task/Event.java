@@ -5,7 +5,6 @@ import duchess.main.DuchessException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * This class implements an Event task.
@@ -49,7 +48,7 @@ public class Event extends Task {
      * @param date The user input date as a string.
      * @param duration The user input duration as a string.
      * @return An array of LocalDateTime containing the start and end LocalDateTimes respectively.
-     * @throws DuchessException Exception thrown when an incorrect format is used for Event.
+     * @throws DuchessException When an incorrect format is used for Event.
      */
     public static LocalDateTime[] convertStringToDate (String date, String duration) throws DuchessException {
         try {

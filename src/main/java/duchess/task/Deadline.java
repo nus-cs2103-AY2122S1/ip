@@ -5,7 +5,6 @@ import duchess.main.DuchessException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * This class implements a Deadline task.
@@ -51,7 +50,7 @@ public class Deadline extends Task{
      * Converts the user input string to a LocalDateTime.
      * @param by The user input date as a string.
      * @return The LocalDateTime representation.
-     * @throws DuchessException Exception thrown when an incorrect format is used for Deadline.
+     * @throws DuchessException When an incorrect format is used for Deadline.
      */
     public static LocalDateTime convertStringToDate (String by) throws DuchessException {
         try {

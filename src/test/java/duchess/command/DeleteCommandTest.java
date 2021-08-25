@@ -1,9 +1,7 @@
 package duchess.command;
 
-import duchess.command.DoneCommand;
 import duchess.main.Duchess;
 import duchess.main.DuchessFileHandler;
-import duchess.task.ToDo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
