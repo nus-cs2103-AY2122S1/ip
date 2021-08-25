@@ -43,7 +43,7 @@ public class Deadline extends Task {
         int startIndex = hasTime ? 2 : hasDate ? 1 : 0;
         this.dueStr = "";
         for (int i = startIndex; i < dateTimeArr.length; i++) {
-            if (i != 0) dueStr += " ";
+            if (i != 0) this.dueStr += " ";
             this.dueStr += dateTimeArr[i];
         }
         if (hasTime) {
