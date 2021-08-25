@@ -47,36 +47,36 @@ public class Storage {
                 String taskDescription = (taskArray.length < 2) ? "" : taskArray[1];
                 Task curr;
                 switch (type) {
-                    case 'T':
-                        taskDescription = taskDescription.trim();
-                        curr = new Todo(taskDescription);
-                        if (status == 'X') {
-                            curr.markAsCompleted();
-                        }
-                        taskList.addTask(curr);
-                        break;
-                    case 'D':
-                        taskDescription = taskDescription.trim().
-                                replaceAll("\\(", "/").
-                                replaceAll("\\)", "");
-                        curr = new Deadline(taskDescription);
-                        if (status == 'X') {
-                            curr.markAsCompleted();
-                        }
-                        taskList.addTask(curr);
-                        break;
-                    case 'E':
-                        taskDescription = taskDescription.
-                                replaceAll("\\(", "/").
-                                replaceAll("\\)", "");
-                        curr = new Event(taskDescription);
-                        if (status == 'X') {
-                            curr.markAsCompleted();
-                        }
-                        taskList.addTask(curr);
-                        break;
-                    default:
-                        break;
+                case 'T':
+                    taskDescription = taskDescription.trim();
+                    curr = new Todo(taskDescription);
+                    if (status == 'X') {
+                        curr.markAsCompleted();
+                    }
+                    taskList.addTask(curr);
+                    break;
+                case 'D':
+                    taskDescription = taskDescription.trim().
+                            replaceAll("\\(", "/").
+                            replaceAll("\\)", "");
+                    curr = new Deadline(taskDescription);
+                    if (status == 'X') {
+                        curr.markAsCompleted();
+                    }
+                    taskList.addTask(curr);
+                    break;
+                case 'E':
+                    taskDescription = taskDescription.
+                            replaceAll("\\(", "/").
+                            replaceAll("\\)", "");
+                    curr = new Event(taskDescription);
+                    if (status == 'X') {
+                        curr.markAsCompleted();
+                    }
+                    taskList.addTask(curr);
+                    break;
+                default:
+                    break;
                 }
             }
             sc.close();

@@ -14,7 +14,7 @@ public class Deadline extends Task {
     public Deadline(String taskName) {
         super(taskName.split("/by")[0].trim());
         if (!taskName.contains("/by")) {
-            throw new DukeException("", DukeException.TYPE.INCOMPLETE);
+            throw new DukeException("", DukeException.Type.INCOMPLETE);
         }
         String[] divide = taskName.split("/by");
         this.taskDescription = divide[0].trim();
@@ -22,7 +22,7 @@ public class Deadline extends Task {
         try {
             this.date = LocalDate.parse(taskTime);
         } catch (DateTimeParseException e) {
-            throw new DukeException("", DukeException.TYPE.INVALID_FORMAT);
+            throw new DukeException("", DukeException.Type.INVALID_FORMAT);
         }
         date1 = Parser.convert(this.date);
     }

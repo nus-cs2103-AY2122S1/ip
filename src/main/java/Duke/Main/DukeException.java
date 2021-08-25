@@ -1,9 +1,9 @@
 package Duke.Main;
 
 public class DukeException extends RuntimeException {
-    public enum TYPE {INCOMPLETE, OUT_OF_BOUND, SYNTAX_ERROR, INVALID_FORMAT}
-    protected final TYPE type;
-    public DukeException(String message, TYPE type) {
+    public enum Type {INCOMPLETE, OUT_OF_BOUND, SYNTAX_ERROR, INVALID_FORMAT}
+    protected final Type type;
+    public DukeException(String message, Type type) {
         super(message);
         this.type = type;
     }

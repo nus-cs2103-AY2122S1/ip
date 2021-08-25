@@ -4,12 +4,12 @@ import java.io.File;
 
 public class Duke {
 
-    private TaskList taskList;
-    private Ui ui;
-    private File file;
-    public Duke() {
+    private final TaskList taskList;
+    private final Ui ui;
+    private final File file;
+    public Duke(String fileName) {
         this.taskList = new TaskList();
-        this.file = new File("taskFile/taskList.txt");
+        this.file = new File(fileName);
         Storage.loadData(file, taskList);
         this.ui = new Ui();
     }

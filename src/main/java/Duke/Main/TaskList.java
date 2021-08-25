@@ -36,7 +36,7 @@ public class TaskList {
 
     public String done(int index) {
         if (index > taskList.size() || index <= 0) {
-            throw new DukeException("", DukeException.TYPE.OUT_OF_BOUND);
+            throw new DukeException("", DukeException.Type.OUT_OF_BOUND);
         } else {
             index--;
             Task calledTask = taskList.remove(index);
@@ -55,7 +55,7 @@ public class TaskList {
 
     public String delete(int index) {
         if (index > taskList.size() || index <= 0) {
-            throw new DukeException("Error", DukeException.TYPE.OUT_OF_BOUND);
+            throw new DukeException("Error", DukeException.Type.OUT_OF_BOUND);
         } else {
             index--;
             Task deletedTask = taskList.remove(index);
@@ -72,17 +72,17 @@ public class TaskList {
         task = task.trim();
         Task newTask;
         switch (type) {
-            case TODO:
-                newTask = new Todo(task);
-                break;
-            case DEADLINE:
-                newTask = new Deadline(task);
-                break;
-            case EVENT:
-                newTask = new Event(task);
-                break;
-            default:
-                throw new DukeException("Error: ", DukeException.TYPE.SYNTAX_ERROR);
+        case TODO:
+            newTask = new Todo(task);
+            break;
+        case DEADLINE:
+            newTask = new Deadline(task);
+            break;
+        case EVENT:
+            newTask = new Event(task);
+            break;
+        default:
+            throw new DukeException("Error: ", DukeException.Type.SYNTAX_ERROR);
         }
         this.taskList.add(newTask);
         return "Got it! I've added this task:\n" + newTask +

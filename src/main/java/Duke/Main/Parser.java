@@ -2,7 +2,6 @@ package Duke.Main;
 
 import Duke.Task.Task;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -24,30 +23,30 @@ public class Parser {
         String type = components[0].toLowerCase().trim();
         String description = (components.length < 2) ? "" : components[1].trim();
         switch (type) {
-            case "help":
-                return Storage.processInstructions();
-            case "list":
-                return taskList.printList();
-            case "done":
-                if (description.trim().equalsIgnoreCase("all")) {
-                    return taskList.doneAll();
-                } else {
-                    return taskList.done(getNum(description));
-                }
-            case "todo":
-                return taskList.addTask(description, Task.Type.TODO);
-            case "deadline":
-                return taskList.addTask(description, Task.Type.DEADLINE);
-            case "event":
-                return taskList.addTask(description, Task.Type.EVENT);
-            case "delete":
-                if (description.trim().equalsIgnoreCase("all")) {
-                    return taskList.deleteAll();
-                } else {
-                    return taskList.delete(getNum(description));
-                }
-            default:
-                throw new DukeException("Error: ", DukeException.TYPE.SYNTAX_ERROR);
+        case "help":
+            return Storage.processInstructions();
+        case "list":
+            return taskList.printList();
+        case "done":
+            if (description.trim().equalsIgnoreCase("all")) {
+                return taskList.doneAll();
+            } else {
+                return taskList.done(getNum(description));
+            }
+        case "todo":
+            return taskList.addTask(description, Task.Type.TODO);
+        case "deadline":
+            return taskList.addTask(description, Task.Type.DEADLINE);
+        case "event":
+            return taskList.addTask(description, Task.Type.EVENT);
+        case "delete":
+            if (description.trim().equalsIgnoreCase("all")) {
+                return taskList.deleteAll();
+            } else {
+                return taskList.delete(getNum(description));
+            }
+        default:
+            throw new DukeException("Error: ", DukeException.Type.SYNTAX_ERROR);
         }
     }
 
@@ -58,11 +57,11 @@ public class Parser {
     private static int getNum(String val) {
         try {
             if (val.equalsIgnoreCase("")) {
-                throw new DukeException("Error", DukeException.TYPE.INCOMPLETE);
+                throw new DukeException("Error", DukeException.Type.INCOMPLETE);
             }
             return Integer.parseInt(val);
         } catch (NumberFormatException e) {
-            throw new DukeException("Error", DukeException.TYPE.SYNTAX_ERROR);
+            throw new DukeException("Error", DukeException.Type.SYNTAX_ERROR);
         }
     }
 }

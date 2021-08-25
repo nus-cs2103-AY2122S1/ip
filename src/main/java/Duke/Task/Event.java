@@ -15,7 +15,7 @@ public class Event extends Task {
     public Event(String taskName) {
         super(taskName.split("/at")[0].trim());
         if (!taskName.contains("/at")) {
-            throw new DukeException("", DukeException.TYPE.INCOMPLETE);
+            throw new DukeException("", DukeException.Type.INCOMPLETE);
         }
         String[] divide = taskName.split("/at");
         this.taskDescription = divide[0];
@@ -23,7 +23,7 @@ public class Event extends Task {
         try {
             this.date = LocalDate.parse(taskTime);
         } catch (DateTimeParseException e) {
-            throw new DukeException("", DukeException.TYPE.INVALID_FORMAT);
+            throw new DukeException("", DukeException.Type.INVALID_FORMAT);
         }
         date1 = Parser.convert(this.date);
     }
