@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 /**
  * This exception indicates a task of the right type was not returned.

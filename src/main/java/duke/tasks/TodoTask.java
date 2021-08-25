@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 /**
  * Handles tasks that have no dates.

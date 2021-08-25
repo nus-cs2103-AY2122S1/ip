@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.ArrayList;
 
-import tasks.InvalidTaskException;
-import tasks.Task;
+import duke.tasks.InvalidTaskException;
+import duke.tasks.Task;
 
 /**
  * Handles matching input to behaviour and execution action.
