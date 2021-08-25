@@ -1,8 +1,50 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileWriter;
 
 public class ToDoList {
 
-    private final ArrayList<Task> arrayList = new ArrayList<>();
+    private final ArrayList<Task> arrayList;
+    private final File dataFile;
+
+    public ToDoList(){
+        this.arrayList = new ArrayList<>();
+        this.dataFile = null;
+    }
+
+    public ToDoList(File dataFile) {
+        this.arrayList = new ArrayList<>();
+        this.dataFile = dataFile;
+
+        try {
+            Scanner sc = new Scanner(dataFile);
+            String fileLine;
+            while (sc.hasNext()) {
+                fileLine = sc.nextLine();
+                if (fileLine.startsWith("[T]", 3)) {
+                    this.addToDo(fileLine.substring(10));
+                } else if (fileLine.startsWith("[D]", 3)) {
+                    String[] subStringArray = fileLine.substring(10).split(" \\(by: ", 2);
+                    String deadLineStr = subStringArray[1];
+                    this.addDeadLine(subStringArray[0], deadLineStr.
+                            substring(0, deadLineStr.length() - 1));
+                } else if (fileLine.startsWith("[E]", 3)) {
+                    String[] subStringArray = fileLine.substring(10).split(" \\(at: ", 2);
+                    String deadLineStr = subStringArray[1];
+                    this.addEvent(subStringArray[0], deadLineStr.
+                            substring(0, deadLineStr.length() - 1));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found, should have been created already");
+
+        }
+
+    }
+
 
     public String addToDo(String description) {
         ToDo toDo;
@@ -61,5 +103,17 @@ public class ToDoList {
         Task t = this.arrayList.get(index - 1);
         this.arrayList.remove(index - 1);
         return "Noted. I've removed this task:\n" + t.toString();
+    }
+
+    public void saveToFile() {
+        if (this.dataFile != null) {
+            try {
+                FileWriter writer = new FileWriter(this.dataFile);
+                writer.write(this.list());
+                writer.close();
+            } catch (IOException e) {
+                System.out.println(e.toString());
+            }
+        }
     }
 }
