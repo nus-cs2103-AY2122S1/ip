@@ -2,7 +2,13 @@
 package duke;
 
 import duke.Tasks.BaseTask;
+import duke.Tasks.DeadlineTask;
+import duke.Tasks.EventTask;
+import duke.Tasks.ToDosTask;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -20,10 +26,13 @@ import java.util.ArrayList;
 public class DukeStorageManager {
 
     /** The local storage file. */
-    File saveFile;
+    private File saveFile = null;
 
     /** The Document (XML) file after the saveFile is loaded */
-    Document xmlSaveFileDoc;
+    private Document xmlSaveFileDoc = null;
+
+    /** ArrayList to contain loaded tasks before sending over to ListManager */
+    private ArrayList<BaseTask> loadedTasks = new ArrayList<>();
 
     /**
      * Loads storage file from the provided path.
@@ -33,8 +42,6 @@ public class DukeStorageManager {
     public DukeStorageManager(Path savePath) throws DukeExceptionBase {
         try {
             this.saveFile = savePath.toFile();
-//        System.out.println(saveFile.exists());
-//        System.out.println(saveFile.getAbsolutePath());
 
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -48,6 +55,10 @@ public class DukeStorageManager {
             // "Fatal Error" is not needed since this error has been foreseen and can be automatically handled.
             // The SAXParseException is still thrown and caught as shown in the lines below,
             // and when it happens, a new save file will be created instead.
+
+            // According to this website: https://stackoverflow.com/questions/1575925/disable-logging-in-java-xerces-fatal-error-11-content-is-not-allowed-in-p
+            // the fatal error is automatically logged into the console even if the exception is caught.
+            // It also says that the next line below is the only way to stop the unwanted line from being printed.
             documentBuilder.setErrorHandler(null);
 
             this.xmlSaveFileDoc = documentBuilder.parse(this.saveFile);
@@ -69,18 +80,140 @@ public class DukeStorageManager {
     }
 
     /**
-     * Creates a new blank file for use as storage instead of loading.
+     * Constructor to create a new blank file for use as storage instead of loading.
      */
     public DukeStorageManager() {
         this.createBlankSaveFile();
     }
 
+    /**
+     * Runs when an exception is thrown while trying to load or parse the XML Save File.
+     * @throws DukeExceptionBase as the Save File cannot be loaded.
+     */
     private void failedToLoadSaveFile() throws DukeExceptionBase {
         throw new DukeExceptionBase("Failed to load saved XML File.");
     }
 
+    /**
+     * Creates a new blank save file.
+     */
     private void createBlankSaveFile() {
 
+    }
+
+    /**
+     * Run this to reload the save data from the XML doc obj into Duke's
+     * List Manager.
+     */
+    public void reloadSaveFromXMLDoc() {
+        if (this.xmlSaveFileDoc == null) {
+            System.out.println("Loading of Save File from Storage Manager not done.");
+            return;
+        }
+
+        Element xmlRoot = xmlSaveFileDoc.getDocumentElement();
+        NodeList taskList = xmlRoot.getElementsByTagName("taskList");
+
+        // There should be only 1 taskList node=
+        if (taskList.getLength() > 1) {
+            System.out.println("Loaded XML file contains more than 1 task list. Only first one will be loaded.");
+        }
+
+        Node firstTaskList = taskList.item(0);
+        NodeList taskAssetList = firstTaskList.getChildNodes();
+
+        for (int id = 0; id < taskAssetList.getLength(); id++) {
+            Node currTaskAsset = taskAssetList.item(id);
+
+            this.processTaskNode(currTaskAsset);
+        }
+
+        // Send the loaded task list into the list manager.
+        Duke.getCurrDuke().getCurrListMgr().loadTaskList(this.loadedTasks);
+
+    }
+
+    /**
+     * Processes individual Task Node from XML Save File.
+     * @param currTaskAsset the relevant Task Node Object.
+     */
+    private void processTaskNode(Node currTaskAsset) {
+        if (currTaskAsset.getNodeName().equals("taskAsset")) {
+            NodeList taskAssetChildren = currTaskAsset.getChildNodes();
+            // Confirms that this taskAsset has contents
+            if (currTaskAsset.getNodeType() == Node.ELEMENT_NODE) {
+                // Convert to DOM Element so that we can get elements by Tag Name
+                Element currTaskAssetElement = (Element) currTaskAsset;
+
+                Node taskTypeNode = getFirstNodeByTagName(currTaskAssetElement, "taskType");
+                Node taskDataNode = getFirstNodeByTagName(currTaskAssetElement, "taskData");
+                Node taskCompletedNode = getFirstNodeByTagName(currTaskAssetElement, "taskCompleted");
+
+                boolean isCurrTaskCompleted = taskCompletedNode.getTextContent().equals("true");
+
+                BaseTask createdTask = null;
+                Node taskExtraInfoNode;
+
+                BaseTask.TaskType currTaskType = BaseTask.convertTaskLetterToEnum(taskTypeNode.getTextContent());
+
+                switch (currTaskType) {
+                case TODO:
+                    createdTask = new ToDosTask(taskDataNode.getTextContent(), isCurrTaskCompleted);
+                    break;
+                case DEADLINE:
+                    taskExtraInfoNode = getFirstNodeByTagName(currTaskAssetElement, "taskExtraInfo");
+
+                    createdTask = new DeadlineTask(taskDataNode.getTextContent(), taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
+                    break;
+                case EVENT:
+                    taskExtraInfoNode = getFirstNodeByTagName(currTaskAssetElement, "taskExtraInfo");
+
+                    createdTask = new EventTask(taskDataNode.getTextContent(), taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
+                    break;
+                case NONE:
+                    System.out.println("Unknown Task Type Loaded: " + currTaskType + " with data: " + taskDataNode.getTextContent());
+                    return;
+                }
+
+                this.loadedTasks.add(createdTask);
+
+
+            } else {
+                System.out.println("Current loaded Task Asset is empty.");
+            }
+        } else {
+            System.out.println("Non-TaskAsset found in taskList: " + currTaskAsset.getNodeName());
+        }
+
+    }
+
+    /**
+     * Gets the first node in the XML heirarchy with the given tag name.
+     * @param parentEle the Parent Element Node to search.
+     * @param tagName the tag to search for.
+     * @return the first Node found in the Parent Element Node with the corresponding tagName.
+     */
+    private Node getFirstNodeByTagName(Element parentEle, String tagName) {
+        NodeList tagNodeList = parentEle.getElementsByTagName(tagName);
+        if (tagNodeList.getLength() == 0) {
+            System.out.println("Node with tag: " + tagName + " not found.");
+            return null;
+        } else {
+            return tagNodeList.item(0);
+        }
+    }
+
+    private void thingy(Node node) {
+        System.out.println(node.getNodeName());
+        System.out.println(node.getTextContent());
+
+        NodeList nl = node.getChildNodes();
+        for (int i = 0; i < nl.getLength(); i++) {
+            Node currNode = nl.item(i);
+            if (currNode.getNodeType() == Node.ELEMENT_NODE) {
+                thingy(currNode);
+            }
+        }
     }
 
 
