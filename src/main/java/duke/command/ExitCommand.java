@@ -20,13 +20,22 @@ public class ExitCommand extends Command {
     /**
      * Updates the message to be printed. Returns false because the program stops.
      *
-     * @param taskList A list of tasks.
+     * @param tasks A list of tasks.
      * @param storage An instance of Storage that can read from and write to the hard disk.
      * @return Whether the program is still running.
      */
     @Override
-    public boolean execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         this.message = ExitCommand.EXITING_MESSAGE;
+    }
+
+    /**
+     * Returns false because the duke program stops.
+     *
+     * @return Whether the program is running.
+     */
+    @Override
+    public boolean isRunning() {
         return false;
     }
 }

@@ -35,7 +35,7 @@ public class Task {
     /**
      * Marks the current task as done.
      */
-    public void markAsDone() {
+    public void setDone() {
         this.isDone = true;
     }
 

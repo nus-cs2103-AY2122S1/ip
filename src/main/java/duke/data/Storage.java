@@ -25,17 +25,17 @@ public class Storage {
     /** Path of file containing data saved */
     private static File data;
     /** A temporary list of tasks */
-    private TaskList taskList;
+    private TaskList tasks;
 
     /**
      * Constructor of the `Storage` class.
      *
      * @param filePath Path to the file to be loaded.
-     * @param taskList A temporary list of tasks.
+     * @param tasks A temporary list of tasks.
      */
-    public Storage(Path filePath, TaskList taskList) {
+    public Storage(Path filePath, TaskList tasks) {
         Storage.data = filePath.toFile();
-        this.taskList = taskList;
+        this.tasks = tasks;
         this.readFile();
     }
 
@@ -51,13 +51,13 @@ public class Storage {
                 this.readData(task);
             }
             fileScanner.close();
-        } catch (FileNotFoundException fileNotFoundException) { // if file doesn't exist, create it.
+        } catch (FileNotFoundException fileNotFoundException) { // If file doesn't exist, create it.
             try {
                 Storage.data.createNewFile();
-            } catch (IOException ioException) { // if directory doesn't exist, create it.
+            } catch (IOException ioException) { // If directory doesn't exist, create it.
                 File directory = Paths.get(Storage.DIRECTORY_PATH, "data").toFile();
                 directory.mkdirs();
-                this.readFile(); // run this method again to create a file.
+                this.readFile(); // Run this method again to create a file.
             }
         }
     }
@@ -68,7 +68,10 @@ public class Storage {
      * @param line A line of data.
      */
     private void readData(String line) {
+        // Split data into words
         String[] splitted = line.split(" / ");
+
+        // Determine type of the task and create corresponding task instance
         Task task;
         if (splitted[0].equals("T")) { // a todo task
             task = new ToDo(splitted[2]);
@@ -79,10 +82,14 @@ public class Storage {
         } else {
             task = new Task(splitted[2]);
         }
+
+        // Check whether task is done
         if (splitted[1].equals("1")) {
-            task.markAsDone();
+            task.setDone();
         }
-        taskList.addTask(task); // add to task list.
+
+        // Add to task list
+        tasks.addTask(task);
     }
 
     /**
@@ -110,7 +117,7 @@ public class Storage {
         try {
             List<String> lines = Files.readAllLines(Storage.data.toPath());
             FileWriter fileWriter = new FileWriter(Storage.data);
-            for (int i = 0; i < this.taskList.getNumOfTasks(); i++) { // remove this task from file.
+            for (int i = 0; i < this.tasks.getNumOfTasks(); i++) { // remove this task from file.
                 if (i != index) {
                     fileWriter.append(lines.get(i) + "\n");
                 }
@@ -128,8 +135,8 @@ public class Storage {
     public void rewriteFile() {
         try {
             FileWriter fileWriter = new FileWriter(Storage.data);
-            for (int i = 0; i < this.taskList.getNumOfTasks(); i++) {
-                fileWriter.append(this.taskList.getFileFormattedTask(i));
+            for (int i = 0; i < this.tasks.getNumOfTasks(); i++) {
+                fileWriter.append(this.tasks.getFileFormattedTask(i));
             }
             fileWriter.close();
         } catch (IOException ioException) {

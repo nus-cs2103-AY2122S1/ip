@@ -26,15 +26,22 @@ public abstract class Command {
     }
 
     /**
-     * Updates the message to be printed. Returns whether the program is still running.
+     * Updates the message to be printed.
      *
-     * @param taskList A list of tasks.
+     * @param tasks A list of tasks.
      * @param storage An instance of Storage that can read from and write to the hard disk.
-     * @return Whether the program is still running.
      * @throws DukeException If error occurs while executing the command.
      */
-    public boolean execute(TaskList taskList, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         this.message = this.content;
+    }
+
+    /**
+     * Returns whether the program is still running.
+     *
+     * @return Whether the program is running.
+     */
+    public boolean isRunning() {
         return true;
     }
 

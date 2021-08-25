@@ -17,18 +17,15 @@ public class GetListCommand extends Command {
 
     /**
      * Executes the command. Updates the message to be printed.
-     * Returns true because the program is still running.
      *
-     * @param taskList A list of tasks.
+     * @param tasks A list of tasks.
      * @param storage An instance of Storage that can read from and write to the hard disk.
-     * @return Whether the program is still running.
      */
     @Override
-    public boolean execute(TaskList taskList, Storage storage) {
-        int len = taskList.getNumOfTasks();
+    public void execute(TaskList tasks, Storage storage) {
+        int len = tasks.getNumOfTasks();
         for (int i = 0; i < len; i++) {
-            this.message += String.format("%o.%s\n", i + 1, taskList.get(i).toString());
+            this.message += String.format("%o.%s\n", i + 1, tasks.get(i).toString());
         }
-        return true;
     }
 }
