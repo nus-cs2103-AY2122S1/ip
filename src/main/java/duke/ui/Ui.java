@@ -39,14 +39,19 @@ public class Ui {
         System.out.println("__________________________________");
     }
 
-    public static void printList(ArrayList<Task> messages) {
+    /**
+     * Prints all elements in an ArrayList of Tasks.
+     *
+     * @param tasks various tasks in an ArrayList.
+     */
+    public static void printList(ArrayList<Task> tasks) {
         System.out.println("__________________________________");
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < messages.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             sb.append(i + 1);
             sb.append(". ");
-            sb.append(messages.get(i).toString());
-            if (i != messages.size() - 1) {
+            sb.append(tasks.get(i).toString());
+            if (i != tasks.size() - 1) {
                 sb.append("\n");
             }
         }
