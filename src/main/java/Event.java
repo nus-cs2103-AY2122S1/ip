@@ -1,22 +1,24 @@
 public class Event extends Task{
-    private final String time;
+    private final DateString time;
+
     public Event(String description) {
         super(description);
         if (description.isBlank()) {
             throw new IllegalArgumentException("Description of Event cannot be empty!");
         }
         this.type = 'E';
-        this.time = "";
+        this.time = new DateString("");
     }
 
     public Event(String description, String time) {
         super(description);
         this.type = 'E';
-        this.time = time;
+        this.time = new DateString(time);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + this.time + ")";
+
+        return super.toString() + " (at: " + this.time.toString() + ")";
     }
 }

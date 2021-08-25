@@ -102,7 +102,7 @@ public class ToDoList {
     public String delete(int index) {
         Task t = this.arrayList.get(index - 1);
         this.arrayList.remove(index - 1);
-        return "Noted. I've removed this task:\n" + t.toString();
+        return "Noted. Removed this task:\n" + t.toString();
     }
 
     public void saveToFile() {
