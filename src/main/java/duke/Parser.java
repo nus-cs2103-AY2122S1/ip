@@ -1,9 +1,9 @@
+package duke;
+
 import java.time.LocalDate;
-import java.util.Scanner;
 
 public class Parser {
     TaskList taskList = new TaskList();
-    Ui ui = new Ui();
 
     Parser() { }
 

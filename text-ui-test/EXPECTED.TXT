@@ -6,35 +6,40 @@ Now you have 1 tasks in the list.
 Here are the tasks in your list:
 1.[T][ ] borrow book
 Got it. I've added this task:
-  [D][ ] return book (by: Sunday)
+  [D][ ] return book (by: Dec 12 2019 1800)
 Now you have 2 tasks in the list.
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][ ] return book
+2.[D][ ] return book (by: Dec 12 2019 1800)
 Nice! I've marked this task as done:
-  [D][X] return book (by: Sunday)
+  [D][X] return book (by: Dec 12 2019 1800)
 Here are the tasks in your list:
 1.[T][ ] borrow book
-2.[D][X] return book
+2.[D][X] return book (by: Dec 12 2019 1800)
 Nice! I've marked this task as done:
   [T][X] borrow book
 Here are the tasks in your list:
 1.[T][X] borrow book
-2.[D][X] return book
+2.[D][X] return book (by: Dec 12 2019 1800)
 Got it. I've added this task:
-  [E][ ] project meeting (at: Mon 2-4pm)
+  [E][ ] tear book (at: Dec 12 2019 )
 Now you have 3 tasks in the list.
 Here are the tasks in your list:
 1.[T][X] borrow book
-2.[D][X] return book
-3.[E][ ] project meeting
+2.[D][X] return book (by: Dec 12 2019 1800)
+3.[E][ ] tear book (at: Dec 12 2019 )
 Nice! I've marked this task as done:
-  [E][X] project meeting (at: Mon 2-4pm)
+  [E][X] tear book (at: Dec 12 2019 )
 Here are the tasks in your list:
 1.[T][X] borrow book
-2.[D][X] return book
-3.[E][X] project meeting
+2.[D][X] return book (by: Dec 12 2019 1800)
+3.[E][X] tear book (at: Dec 12 2019 )
 ☹ OOPS!!! The description of a todo cannot be empty.
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Noted. I've removed this task:
+  [D][X] return book (by: Dec 12 2019 1800)
+Now you have 2 tasks left in the list
+Here are the tasks in your list:
+1.[T][X] borrow book
+2.[E][X] tear book (at: Dec 12 2019 )
 Bye. Hope to see you again soon!
-
