@@ -43,13 +43,13 @@ public class Storage {
                 this.readData(task);
             }
             fileScanner.close();
-        } catch (FileNotFoundException fileNotFoundException) { // if file doesn't exist, create it.
+        } catch (FileNotFoundException fileNotFoundException) { // If file doesn't exist, create it.
             try {
                 Storage.data.createNewFile();
-            } catch (IOException ioException) { // if directory doesn't exist, create it.
+            } catch (IOException ioException) { // If directory doesn't exist, create it.
                 File directory = Paths.get(Storage.DIRECTORY_PATH, "data").toFile();
                 directory.mkdirs();
-                this.readFile(); // run this method again to create a file.
+                this.readFile(); // Run this method again to create a file.
             }
         }
     }
@@ -60,7 +60,10 @@ public class Storage {
      * @param line A line of data.
      */
     private void readData(String line) {
+        // Split data into words
         String[] splitted = line.split(" / ");
+
+        // Determine type of the task and create corresponding task instance
         Task task;
         if (splitted[0].equals("T")) { // a todo task
             task = new ToDo(splitted[2]);
@@ -71,10 +74,14 @@ public class Storage {
         } else {
             task = new Task(splitted[2]);
         }
+
+        // Check whether task is done
         if (splitted[1].equals("1")) {
             task.setDone();
         }
-        tasks.addTask(task); // add to task list.
+
+        // Add to task list
+        tasks.addTask(task);
     }
 
     /**

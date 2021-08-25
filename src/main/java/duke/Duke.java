@@ -36,8 +36,11 @@ public class Duke {
      * Runs the duke program.
      */
     public void run() {
+        // Print welcome message, start running
         this.ui.showWelcome();
         boolean isRunning = true;
+
+        // Read in commands while the program is running
         while (isRunning) {
             String commandString = this.ui.getCommand();
             Command command;

@@ -23,8 +23,11 @@ public class AddTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {
+        // Add the task
         tasks.addTask(this.task);
         storage.addToFile(this.task);
+
+        // Update message
         this.message = String.format(
                 "Got it. I've added this task:\n  %s\nNow you have %o tasks in the list.\n",
                 this.task, tasks.getNumOfTasks());

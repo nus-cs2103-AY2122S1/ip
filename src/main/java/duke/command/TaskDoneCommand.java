@@ -9,6 +9,7 @@ import duke.exception.InvalidTaskNoException;
  */
 public class TaskDoneCommand extends Command {
     int taskIndex;
+
     /**
      * Constructor of the class `TaskDoneProcessor`.
      */
@@ -23,13 +24,18 @@ public class TaskDoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws InvalidTaskNoException {
+        // Get task from index
         try {
             this.task = tasks.get(this.taskIndex);
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
             throw new InvalidTaskNoException();
         }
+
+        // Mark task as done
         this.task.setDone();
         storage.rewriteFile();
+
+        // Update message
         this.message += String.format("  %s\n", this.task.toString());
     }
 }

@@ -9,6 +9,7 @@ import duke.exception.InvalidTaskNoException;
  */
 public class DeleteTaskCommand extends Command {
     int taskIndex;
+
     /**
      * Constructor of the class `DeleteATaskProcessor`.
      */
@@ -22,13 +23,18 @@ public class DeleteTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Storage storage) throws InvalidTaskNoException {
+        // Get task from index
         try {
             this.task = tasks.get(this.taskIndex);
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
             throw new InvalidTaskNoException();
         }
+
+        // Remove the task
         tasks.removeFromList(this.task);
         storage.removeFromFile(tasks.indexOf(this.task));
+
+        // Update message
         this.message = String.format(
                 "Noted. I've removed this task:\n  %s\nNow you have %o tasks in the list.\n",
                 this.task, tasks.getNumOfTasks());
