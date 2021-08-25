@@ -5,15 +5,25 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+/**
+ * A class that represents a list of tasks.
+ */
 public class TaskList {
     private final List<Task> taskList = new ArrayList<>();
 
+    /**
+     * Constructs an instance of task list from a List of Tasks.
+     * @param taskList a List of Tasks.
+     */
     public TaskList(List<Task> taskList) {
         for (Task task : taskList) {
             this.taskList.add(task);
         }
     }
 
+    /**
+     * Constructs an instance of task list that is empty.
+     */
     public TaskList() {
 
     }
@@ -73,6 +83,10 @@ public class TaskList {
         return outputString;
     }
 
+    /**
+     * Returns a string that shows the details of the list of tasks.
+     * @return a string of the tasks' details.
+     */
     @Override
     public String toString() {
         AtomicInteger idx = new AtomicInteger(1);

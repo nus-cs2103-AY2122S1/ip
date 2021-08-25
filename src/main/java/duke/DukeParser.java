@@ -2,7 +2,13 @@ package duke;
 
 import duke.exception.DukeFileSystemException;
 
+/**
+ * A class that handles anything related to the parsing of information for Duke.
+ */
 public class DukeParser {
+    /**
+     * Constructs a new instance of the DukeParser. No arguments are expected.
+     */
     public DukeParser() {
 
     }

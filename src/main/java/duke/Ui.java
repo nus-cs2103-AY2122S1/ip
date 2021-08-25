@@ -2,6 +2,9 @@ package duke;
 
 import duke.exception.InvalidDukeCommandException;
 
+/**
+ * A class that handles anything related to the display of Duke.
+ */
 public class Ui {
     private static final String LINE_BREAK = "--------------------------\n";
 
@@ -15,6 +18,9 @@ public class Ui {
         return LINE_BREAK + s + "\n" + LINE_BREAK;
     }
 
+    /**
+     * Constructs a new instance of Ui. No arguments are expected.
+     */
     public Ui() {
 
     }
