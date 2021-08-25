@@ -17,6 +17,7 @@ public class Duke {
                     System.out.println("Bye. Hope to see you again soon!");
                     break;
                 } else if (input.equals("list")) {
+                    System.out.println("All tasks:");
                     int i = 1;
                     for (Task item : list) {
                         System.out.println(i + ". " + item.getTaskType() + item.getStatusIcon() + " " + item.getDescription());
@@ -35,6 +36,18 @@ public class Duke {
                     temp.setStatus(true);
                     System.out.println("Marked as done:\n" + temp.getDescription());
 
+                } else if (first_word.equals("delete")) {
+                    int index;
+                    try {
+                        index = Integer.parseInt(input.split(" ")[1]) - 1;
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("Sorry, please enter an integer after 'delete'. (e.g. delete 2)");
+                    }
+
+                    Task temp = list.get(index);
+                    System.out.println("Deleted:\n" + temp.getDescription());
+                    list.remove(index);
+                    System.out.println("There are " + list.size() + " tasks remaining in the list");
                 }
                 else {
                     Task task = null;

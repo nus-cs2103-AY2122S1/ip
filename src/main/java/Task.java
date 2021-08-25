@@ -51,7 +51,7 @@ public class Task {
 
         @Override
         public String getDescription() {
-            return super.getDescription() + "(by: " + this.by + ")";
+            return super.getDescription() + "(by:" + this.by + ")";
         }
 
     }
@@ -71,7 +71,7 @@ public class Task {
 
         @Override
         public String getDescription() {
-            return super.getDescription() + "(at: " + this.at + ")";
+            return super.getDescription() + "(at:" + this.at + ")";
         }
 
     }

@@ -1,17 +1,23 @@
 Hello! I'm Magnolia
 What can I do for you?
-Added: [T][ ]  borrow book
+Added: [T][ ] borrow book
 There are 1 tasks in the list
-Added: [E][ ] project meeting (at:  Mon 2-4pm)
+Added: [E][ ] dinner with friends (at: Tues 7-8pm)
 There are 2 tasks in the list
- Sunday 3pm
-Added: [D][ ] return book (by:  Sunday 3pm)
+Added: [E][ ] project meeting (at: Mon 2-4pm)
 There are 3 tasks in the list
+ Sunday 3pm
+Added: [D][ ] return book (by: Sunday 3pm)
+There are 4 tasks in the list
 Marked as done:
-return book (by:  Sunday 3pm)
+return book (by: Sunday 3pm)
 Sorry, I don't understand what that means. :(
 Sorry, tasks must include descriptions.
 Sorry, please enter an integer after 'done'. (e.g. done 2)
-1. [T][ ]  borrow book
-2. [E][ ] project meeting (at:  Mon 2-4pm)
-3. [D][X] return book (by:  Sunday 3pm)
+Deleted:
+dinner with friends (at: Tues 7-8pm)
+There are 3 tasks remaining in the list
+All tasks:
+1. [T][ ] borrow book
+2. [E][ ] project meeting (at: Mon 2-4pm)
+3. [D][X] return book (by: Sunday 3pm)

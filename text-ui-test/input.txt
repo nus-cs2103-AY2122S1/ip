@@ -1,8 +1,10 @@
-todo  borrow book
+todo borrow book
+event dinner with friends at Tues 7-8pm
 event project meeting at Mon 2-4pm
 deadline return book by Sunday 3pm
-done 3
+done 4
 smth blah blah
 todo
 done
+delete 2
 list
