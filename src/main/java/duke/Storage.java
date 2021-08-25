@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -55,13 +56,14 @@ public class Storage {
                 String[] nextItem = nextLine.split("\\Q|\\E", 0);
                 switch (nextItem[0]) {
                 case "T":
-                    tasks.addTask(new ToDo(nextItem[1].trim(), nextItem[2].trim().equals("1")));
+                    tasks.addTask(new ToDo(nextItem[2].trim(), nextItem[1].trim().equals("1")));
                     break;
                 case "D":
-                    tasks.addTask(new Deadline(nextItem[1].trim(), nextItem[2].trim().equals("1"), LocalDate.parse(nextItem[3].trim())));
+                    tasks.addTask(new Deadline(nextItem[2].trim(), nextItem[1].trim().equals("1"),
+                            LocalDate.parse(nextItem[3].trim())));
                     break;
                 case "E":
-                    tasks.addTask(new Event(nextItem[1].trim(), nextItem[2].trim().equals("1"), nextItem[3].trim()));
+                    tasks.addTask(new Event(nextItem[2].trim(), nextItem[1].trim().equals("1"), nextItem[3].trim()));
                     break;
                 }
             }

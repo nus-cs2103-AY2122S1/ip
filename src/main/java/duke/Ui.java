@@ -1,5 +1,7 @@
 package duke;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -67,6 +69,16 @@ public class Ui {
         System.out.println("---------");
         System.out.println("Noted. I've removed this task");
         System.out.println("Now you have " + size + " task in the list");
+        System.out.println("---------");
+    }
+
+    public void printSearchResult(ArrayList<Integer> indexes, TaskList tasks) throws DukeException{
+        System.out.println("---------");
+        int i = 1;
+        for (int index : indexes) {
+            System.out.println(i+"."+ tasks.get(index));
+            i++;
+        }
         System.out.println("---------");
     }
 
