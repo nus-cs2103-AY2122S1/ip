@@ -23,7 +23,8 @@ public class Parser {
         DEADLINE ("deadline"),
         EVENT ("event"),
         DELETE ("delete"),
-        TASKS ("tasks");
+        TASKS ("tasks"),
+        FIND ("find");
         private String commandName;
         CommandNames(String commandName) {
             this.commandName = commandName;

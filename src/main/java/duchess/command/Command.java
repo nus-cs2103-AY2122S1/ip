@@ -42,6 +42,8 @@ public abstract class Command {
             return new DeleteCommand(description);
         case "tasks":
             return new TasksCommand(description);
+        case "find":
+            return new FindCommand(description);
         }
         // Should not reach here
         return null;
