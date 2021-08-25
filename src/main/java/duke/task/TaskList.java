@@ -1,9 +1,9 @@
-package task;
+package duke.task;
 
-import exception.DukeIOException;
-import exception.DukeTaskNumberOutOfBoundsException;
-import util.DateTimeUtils;
-import util.FileUtils;
+import duke.exception.DukeIOException;
+import duke.exception.DukeTaskNumberOutOfBoundsException;
+import duke.util.DateTimeUtils;
+import duke.util.FileUtils;
 
 import java.util.ArrayList;
 import java.util.List;

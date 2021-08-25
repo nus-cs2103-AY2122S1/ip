@@ -1,4 +1,4 @@
-package util;
+package duke.util;
 
 import org.junit.jupiter.api.Test;
 

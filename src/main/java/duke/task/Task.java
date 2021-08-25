@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * The is the Task class that contains the properties

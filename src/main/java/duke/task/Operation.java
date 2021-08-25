@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * The is the Operation class that contains task operations.

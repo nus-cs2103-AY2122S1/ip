@@ -1,10 +1,10 @@
-package util;
+package duke.util;
 
-import exception.DukeExtractCommandException;
-import exception.DukeTaskNumberOutOfBoundsException;
-import exception.DukeUnknownException;
-import task.EventDateTime;
-import task.Operation;
+import duke.exception.DukeExtractCommandException;
+import duke.exception.DukeTaskNumberOutOfBoundsException;
+import duke.exception.DukeUnknownException;
+import duke.task.EventDateTime;
+import duke.task.Operation;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;

@@ -1,18 +1,18 @@
-package storage;
+package duke.storage;
 
-import exception.DukeExtractCommandException;
-import exception.DukeIOException;
-import exception.DukeTaskNumberOutOfBoundsException;
-import exception.DukeUnknownException;
-import listener.Message;
-import task.Deadline;
-import task.Event;
-import task.EventDateTime;
-import task.Operation;
-import task.Task;
-import task.TaskList;
-import task.Todo;
-import util.Parser;
+import duke.exception.DukeExtractCommandException;
+import duke.exception.DukeIOException;
+import duke.exception.DukeTaskNumberOutOfBoundsException;
+import duke.exception.DukeUnknownException;
+import duke.listener.Message;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.EventDateTime;
+import duke.task.Operation;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.util.Parser;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;

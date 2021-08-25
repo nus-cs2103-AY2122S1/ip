@@ -1,4 +1,4 @@
-package exception;
+package duke.exception;
 
 /**
  * The is the DukeExtractCommandException class that extends from Exception

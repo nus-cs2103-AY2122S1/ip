@@ -1,4 +1,4 @@
-package listener;
+package duke.listener;
 
 /**
  * The is the Message interface.

@@ -1,7 +1,9 @@
-import storage.Storage;
-import listener.Message;
-import task.Operation;
-import ui.Ui;
+package duke;
+
+import duke.storage.Storage;
+import duke.listener.Message;
+import duke.task.Operation;
+import duke.ui.Ui;
 
 /**
  * The project aims to build a product named Duke,
