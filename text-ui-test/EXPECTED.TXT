@@ -72,11 +72,11 @@ Here are the tasks in your list:
 ____________________________________________________________________________
 ____________________________________________________________________________
 Burp burp! Something went wrong!
-☹ BURP-ribbit ribbit. The description of a todo cannot be empty
+☹ BURP-ribbit ribbit. The argument of the todo command cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
 Burp burp! Something went wrong!
-☹ BURP-ribbit ribbit. The description of a event cannot be empty
+☹ BURP-ribbit ribbit. The argument of the event command cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
 Burp burp! Something went wrong!
@@ -85,7 +85,7 @@ event <description> /at <time of event>
 ____________________________________________________________________________
 ____________________________________________________________________________
 Burp burp! Something went wrong!
-☹ BURP-ribbit ribbit. The description of a deadline cannot be empty
+☹ BURP-ribbit ribbit. The argument of the deadline command cannot be empty
 ____________________________________________________________________________
 ____________________________________________________________________________
 Burp burp! Something went wrong!
