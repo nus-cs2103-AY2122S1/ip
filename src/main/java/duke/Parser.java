@@ -16,7 +16,7 @@ public class Parser {
         this.isExit = false;
     }
 
-    public void list() throws DukeException {
+    private void list() throws DukeException {
         if (this.tasks.size() == 0) {
             throw new DukeException("There are currently no tasks in your list.");
         }

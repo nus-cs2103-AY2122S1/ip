@@ -9,10 +9,10 @@ import java.time.format.DateTimeFormatter;
 
 public class ParserTest {
     @Test
-    public void listTasks_noTasks_exceptionThrown() {
+    public void parse_list_exceptionThrown() {
         TaskList taskList = new TaskList();
         Parser parser = new Parser(taskList);
-        assertThrows(DukeException.class, parser::list);
+        assertThrows(DukeException.class, () -> parser.parse("list"));
     }
 
     @Test
