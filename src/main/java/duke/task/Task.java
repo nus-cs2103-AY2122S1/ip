@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
     public abstract String showTask();
     public abstract String showTaskOnly();

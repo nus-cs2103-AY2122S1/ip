@@ -1,7 +1,11 @@
+package duke.task;
+
+import duke.task.Task;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
     private String taskName;
     private String type = "T";
 
