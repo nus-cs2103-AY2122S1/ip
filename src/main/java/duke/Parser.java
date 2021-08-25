@@ -56,6 +56,9 @@ public class Parser {
                         "Try again.");
             case ("delete"):
                 throw new DukeException("Please ensure that there is a number after the command 'delete'. Try again.");
+            case ("find"):
+                throw new DukeException("Please ensure that there is a search term after the command 'find'. " +
+                        "Try again.");
             default:
                 throw new DukeException("I didn't quite get what you meant. To add a task, begin with " +
                         "'deadline', 'event' or 'todo'.");
@@ -148,6 +151,10 @@ public class Parser {
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DukeException("Please add a number after the command 'delete'. Try again.");
                 }
+            case ("find"):
+                String searchTerm = splitInput[1];
+                list.printFilteredTasks(searchTerm);
+                break;
             default:
                 throw new DukeException("I didn't quite get what you meant. To add a task, begin with " +
                         "'deadline', 'event' or 'todo'.");
