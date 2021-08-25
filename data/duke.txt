@@ -2,3 +2,5 @@ E | 1 | team meeting | 2021-09-21
 T | 1 | read book
 D | 0 | assignment 1 | 2021-09-21
 E | 1 | party | 2021-07-04
+T | 0 | read weekly readings
+T | 0 | help
