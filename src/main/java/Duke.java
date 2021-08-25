@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
     Storage storage;
+
     public Duke(File file) {
         this.storage = new Storage(file);
     }
@@ -29,7 +30,7 @@ public class Duke {
         String input = scanner.next();
 
         while (!Objects.equals(input, "bye")) {
-            switch(input) {
+            switch (input) {
                 case "list":
                     System.out.println("──────────────────────────────────────────");
                     list.display();
