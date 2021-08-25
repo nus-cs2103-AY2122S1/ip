@@ -2,3 +2,8 @@ T | 0 | qqq
 T | 0 | www
 D | 0 | eee | eeee
 E | 0 | rrr | rrrr
+D | 0 | some work | null
+E | 0 | read book | 
+E | 0 | read book | 
+D | 0 | read book | 
+D | 0 |  | Sunday
