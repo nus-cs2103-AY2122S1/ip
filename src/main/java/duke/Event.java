@@ -47,7 +47,6 @@ public class Event extends Task {
             LocalDate date = LocalDate.parse(time);
             return date;
         } catch (DateTimeParseException e) {
-            System.out.println("Wrong format of event time. Event must be in the format of YYYY-MM-DD.");
             return null;
         }
     }
