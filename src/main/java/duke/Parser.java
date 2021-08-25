@@ -9,13 +9,32 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates a Parser, which parses user inputs, interprets them as commands and
+ * updates the TaskList.
+ *
+ * @author Hanif Kamal
+ */
 public class Parser {
+    /** The TaskList that the Parser updates after command interpretation */
     private TaskList list;
 
+    /**
+     * Class constructor to initialize a Parser instance.
+     *
+     * @param list The TaskList that is to be updated.
+     */
     public Parser(TaskList list) {
         this.list = list;
     }
 
+    /**
+     * Takes in a String which represents user input, and parses it. It executes the
+     * interpreted commands and then updates the TaskList accordingly.
+     *
+     * @param input The String that is input by the user.
+     * @throws DukeException In the case of invalid inputs.
+     */
     public void parse(String input) throws DukeException {
         String[] splitInput = input.split(" ", 2);
         String first = splitInput[0];

@@ -2,23 +2,44 @@ package duke;
 import duke.task.Task;
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a list of Tasks that the user sets, with relevant processing methods.
+ *
+ * @author Hanif Kamal
+ */
 public class TaskList {
     private final ArrayList<Task> list;
 
+    /**
+     * Class constructor to initialize the TaskList instance.
+     */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
+    /**
+     * Looks up the Task at the given index in the TaskList and sets the Task as done.
+     * @param index The index of the Task, to be set as done, in the TaskList.
+     */
     public void completeTask(int index) {
         Task task = this.list.get(index - 1);
         task.setDone();
         System.out.println("Nice! I've marked this task as done:\n" + "  " + task);
     }
 
+    /**
+     * Adds the given Task to the TaskList.
+     * @param task The Task to be added to the TaskList.
+     */
     public void addToList(Task task) {
         this.list.add(task);
     }
 
+    /**
+     * Prints all Tasks in the TaskList for the user.
+     *
+     * @throws DukeException In the case where the TaskList is empty.
+     */
     public void printTasks() throws DukeException {
         if (this.list.size() < 1) {
             throw new DukeException("You haven't added anything to the list yet! Try adding something.");
@@ -34,6 +55,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Looks up the Task at the given index in the TaskList and removes the Task from the list.
+     * @param index The index of the Task, to be deleted, in the TaskList.
+     * @throws DukeException In the case where the TaskList is empty, or the index is out of bounds.
+     */
     public void deleteTask(int index) throws DukeException {
         if (this.list.size() < 1) {
             throw new DukeException("You haven't added anything to the list yet! Try adding something before " +
@@ -47,6 +73,7 @@ public class TaskList {
             throw new DukeException("Couldn't find that task in the list! Try again.");
         }
     }
+
 
     public int size() {
         return this.list.size();

@@ -14,13 +14,28 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates a class that handles saving to and loading from the text file that contains task data.
+ *
+ * @author Hanif Kamal
+ */
 public class Storage {
+    /** A String representation of the location of the text file as a file path. */
     private final String filePath;
 
+    /**
+     * Class constructor.
+     * @param filePath A String representation of the location of the text file as a file path.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Writes task data from the TaskList to the text file, line by line.
+     * @param list The TaskList from which task data is used to write to the text file.
+     * @throws DukeException In the case where the file is corrupted or cannot be located.
+     */
     public void writeTasks(TaskList list) throws DukeException{
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
@@ -34,6 +49,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads a text file, line by line. Parses the lines into task data, and adds it to the given TaskList.
+     *
+     * @param list An empty TaskList to be filled with tasks, as parsed from the text file
+     * @throws DukeException In the case where the file is corrupted or cannot be located.
+     */
     public void readTasks(TaskList list) throws DukeException {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
