@@ -11,6 +11,7 @@ public class Parser {
      * Parse message and return command
      *
      * @param message message to be parsed
+     * @return command that is passed
      */
     public static String parse(String message) {
         return message.split(" ")[0];
@@ -20,6 +21,7 @@ public class Parser {
      * Parse message and return string after command
      *
      * @param message message to be parsed
+     * @return message string that is after command
      */
     public static String parseMessage(String message) {
         int index = message.indexOf(" ");
@@ -31,9 +33,10 @@ public class Parser {
     }
 
     /**
-     * Parse data stored in hard disk
+     * Parse data stored in hard disk by line
      *
-     * @param data data to be parsed
+     * @param data line of data to be parsed
+     * @return task that is parsed from line
      */
     public static Task parseData(String data) {
         String[] dataArr = data.split("[|]");

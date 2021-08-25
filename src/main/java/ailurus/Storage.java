@@ -17,6 +17,12 @@ public class Storage {
     private File ailurusObj = null;
     private FileWriter writer = null;
 
+    /**
+     * Constructor for storage
+     *
+     * @param directoryName name of directory to be created and for storage of data
+     * @param filename name of file to be created and for storage of data
+     */
     public Storage(String directoryName, String filename) {
         this.directoryName = directoryName;
         this.filename = filename;
@@ -38,6 +44,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads and loads the tasks in the data file, and creates a FileWriter
+     * that must be followed with unload() to close writer
+     *
+     * @return list of tasks that is loaded from data file
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> list = new ArrayList<>();
         // load tasks from file
@@ -58,6 +70,11 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Unloads and writes all the tasks to file, must be preceded by load()
+     *
+     * @param list list of tasks to be written to the data file
+     */
     public void unload(TaskList list) {
         // write all tasks to file
         if (this.writer != null) {

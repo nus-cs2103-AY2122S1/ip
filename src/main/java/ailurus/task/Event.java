@@ -11,7 +11,7 @@ public class Event extends Task {
     private LocalDate at;
 
     /**
-     * Constructor for Ailurus.Event tasks
+     * Constructor for Event tasks
      *
      * @param description description of task /at specific date or time
      */

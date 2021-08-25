@@ -6,7 +6,7 @@ import ailurus.task.TaskList;
 import ailurus.task.Todo;
 
 /**
- * The main task chatbot class for Ailurus.Ailurus Chatbot
+ * The main task chatbot class for Ailurus Chatbot
  *
  * @author Leeroy Liu
  */
@@ -15,6 +15,12 @@ public class Ailurus {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Ailurus Chatbot
+     *
+     * @param directory directory of the file to store data
+     * @param filename filename of the file to store data (with .txt)
+     */
     public Ailurus(String directory, String filename) {
         this.ui = new Ui();
         this.storage = new Storage(directory, filename);
@@ -26,6 +32,9 @@ public class Ailurus {
         }
     }
 
+    /**
+     * Run the chatbot program with the correct environment setups.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -19,8 +19,11 @@ public class AilurusException extends IllegalArgumentException {
         this.error = e;
     }
 
-
-
+    /**
+     * Overriden method to get error message
+     *
+     * @return error message string
+     */
     @Override
     public String getMessage() {
         switch (this.error) {

@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Todo extends Task{
     /**
-     * Constructor for Ailurus.Todo
+     * Constructor for Todo
      *
      * @param description description of task
      */

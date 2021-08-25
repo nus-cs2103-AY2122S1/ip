@@ -19,6 +19,8 @@ public class Ui {
 
     /**
      * Read user input
+     *
+     * @return user input as string
      */
     public String readCommand() {
         System.out.print(this.YOU + ": ");
@@ -45,6 +47,8 @@ public class Ui {
 
     /**
      * Printing out of the list of tasks
+     *
+     * @param list TaskList to be said by chatbot
      */
     public void sayList(TaskList list) {
         if (list.length() == 0) {
@@ -66,24 +70,35 @@ public class Ui {
     }
 
     /**
-     * Tell the user that the task is marked as done
+     * Tell the user that the task is added
      *
-     * @param task task that is marked as done
+     * @param task task that is added
      */
     public void sayAdd(Task task, int size) {
         this.say(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
                 task.toString(), size));
     }
 
+    /**
+     * Tell the user that the task is deleted
+     *
+     * @param task task that is deleted
+     */
     public void sayDelete(Task task, int size) {
         this.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d tasks in the list.",
                 task, size));
     }
 
+    /**
+     * Tell the user that the command given was invalid
+     */
     public void sayInvalidCommand() {
         this.say("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+    /**
+     * Tell the user that it is the end of chatting
+     */
     public void sayBye() {
         this.say("Bye. Hope to see you again soon!");
     }
