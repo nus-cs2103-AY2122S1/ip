@@ -14,11 +14,10 @@ public class Storage {
     public Storage(String location) {
         filePath = location;
     }
-
-    public void saveData(ArrayList<Task> tasks) {
+    public static void saveData(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(filePath);
-            for (Task task : tasks) {
+            for (Task task : tasks.getTaskList()) {
                 writer.write(task.formatSave() + '\n');
             }
             writer.close();
@@ -63,19 +62,19 @@ public class Storage {
         String taskDescription = format[2].trim();
 
         switch (taskType) {
-            case ("T"):
-                task = new Todo(taskDescription);
-                break;
-            case ("E"):
-                String at = format[3].trim();
-                task = new Event(taskDescription, at);
-                break;
-            case ("D"):
-                String by = format[3].trim();
-                task = new Deadline(taskDescription, by);
-                break;
-            default:
-                throw new InvalidInputException("Error converting tasks!");
+        case ("T"):
+            task = new Todo(taskDescription);
+            break;
+        case ("E"):
+            String at = format[3].trim();
+            task = new Event(taskDescription, at);
+            break;
+        case ("D"):
+            String by = format[3].trim();
+            task = new Deadline(taskDescription, by);
+            break;
+        default:
+            throw new InvalidInputException("Error converting tasks!");
         }
 
         if (isDone) {

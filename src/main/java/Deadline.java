@@ -30,13 +30,13 @@ public class Deadline extends Task {
 
     public String formatSave() {
         if (time != null) {
-            return "D | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() +  " | " +
+            return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() +  " | " +
                     date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time;
         } else if (date != null) {
-            return "D | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " +
+            return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | " +
                     date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } else {
-            return "D | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " + getTime();
+            return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | " + getTime();
         }
     }
 
