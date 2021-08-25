@@ -50,8 +50,8 @@ public class Ui {
     /**
      * Checks the user input from stdin.
      *
-     * @param taskList The task list that the user is using.
-     * @param storage The storage that the user wants the data to be stored into.
+     * @param taskList the task list that the user is using
+     * @param storage the storage that the user wants the data to be stored into
      */
     public void checkInput(TaskList taskList, LStorage storage) {
         String userInput = sc.nextLine();
@@ -74,8 +74,9 @@ public class Ui {
 
     /**
      * Called when the user successfully adds the task to tasklist.
-     * @param task The task that is added
-     * @param sizeOfList The number of tasks so far
+     *
+     * @param task the task that is added
+     * @param sizeOfList the number of tasks so far
      */
     public void addTaskMessage(Task task, int sizeOfList) {
         System.out.println("Got it, " + name + ". I have added this task:");
@@ -86,8 +87,9 @@ public class Ui {
 
     /**
      * Called when the user removes a task from the task list.
-     * @param task The task that is removed or deleted.
-     * @param size The final size of the task list.
+     *
+     * @param task the task that is removed or deleted
+     * @param size the final size of the task list
      */
     public void removeTaskMessage(Task task, int size) {
         System.out.println("Noted. I've removed this task:");
@@ -116,7 +118,7 @@ public class Ui {
     /**
      * Prints all upcoming tasks from a list of tasks.
      *
-     * @param tasks The list of tasks
+     * @param tasks the list of tasks
      */
     public void printUpcomingTasks(List<? extends Task> tasks) {
         int taskSize = tasks.size();
@@ -144,7 +146,7 @@ public class Ui {
     /**
      * Prints all tasks from a list of tasks.
      *
-     * @param tasks The list of tasks
+     * @param tasks the list of tasks
      */
     public void printAllTasks(List<? extends Task> tasks) {
         int taskSize = tasks.size();

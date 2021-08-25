@@ -11,7 +11,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * The constructor for a task object
+     * Creates a new task object with the description and type of task.
      *
      * @param description The description of the task
      * @param taskType    The type of task (todo/event/deadline)
@@ -45,6 +45,7 @@ public abstract class Task {
 
     /**
      * Marks the current task as done.
+     *
      * @return true if task is successfully marked, or false if task has been marked as done before.
      */
     public boolean markAsDone() {

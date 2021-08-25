@@ -8,7 +8,7 @@ public class DukeException extends RuntimeException {
     /**
      * Creates a new runtime exception when there is a problem with inputs or adding tasks.
      *
-     * @param message The description of the error
+     * @param message the description of the error
      */
     public DukeException(String message) {
         super(message);

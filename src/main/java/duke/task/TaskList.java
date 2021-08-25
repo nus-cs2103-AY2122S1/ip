@@ -1,9 +1,7 @@
 package duke.task;
 
 import duke.DukeException;
-import duke.logic.LStorage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +16,7 @@ public class TaskList {
     /**
      * Creates the task list with the given limit.
      *
-     * @param limit The limit to the size of the list. The number of tasks cannot exceed this limit.
+     * @param limit the limit to the size of the list. The number of tasks cannot exceed this limit.
      */
     public TaskList(int limit) {
         this.tasks = new ArrayList<>();
@@ -59,6 +57,7 @@ public class TaskList {
 
     /**
      * Gets the task associated with the task number.
+     *
      * @param taskNumber The task number of the task to be retrieved. This is the number that the user sees.
      * @return the relevant task
      * @throws InvalidTaskNumberException when the task number given is invalid.

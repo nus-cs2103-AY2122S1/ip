@@ -16,9 +16,10 @@ public class Todo extends Task {
     }
 
     /**
-     * There is no datetime associated with Todo so null is returned.
+     * Returns null.
+     * This is because Todo does not have any associated date and time.
      *
-     * @return null.
+     * @return null
      */
     @Override
     public LocalDateTime getDateTime() {
