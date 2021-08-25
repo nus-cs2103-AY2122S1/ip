@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -63,7 +64,6 @@ public class Duke {
                 "\n Now you have " + taskList.size() + " tasks in the list.\n" + DIVIDER);
     }
 
-
     public static void markTaskAsDone(String taskNum) throws DukeException {
         try {
             int taskIdx = Integer.valueOf(taskNum) - 1;
@@ -90,6 +90,61 @@ public class Duke {
                     "\n Now you have " + taskList.size() + " tasks in the list.\n" + DIVIDER);
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid Command. 'delete' must be followed by the task number");
+        }
+    }
+
+    public static void readFromFile(String filename) {
+        try {
+            Scanner sc = new Scanner(new FileReader(filename));
+            while (sc.hasNextLine()) {
+                String input = sc.nextLine();
+                String[] parts = input.split(" ", 3);
+                Task task;
+
+                switch (parts[0]) {
+                case "[T]":
+                    task = createTask("todo", parts[2]);
+                    taskList.add(task);
+                    if (parts[1].equals("[X]")) {
+                        task.markAsDone();
+                    }
+                    break;
+                case "[D]":
+                    task = createTask("deadline", parts[2]);
+                    taskList.add(task);
+                    if (parts[1].equals("[X]")) {
+                        task.markAsDone();
+                    }
+                    break;
+                case "[E]":
+                    task = createTask("event", parts[2]);
+                    taskList.add(task);
+                    if (parts[1].equals("[X]")) {
+                        task.markAsDone();
+                    }
+                    break;
+                }
+
+            }
+        } catch (Exception e) {
+            File file = new File(filename);
+            try {
+                file.createNewFile();
+            } catch (IOException ioException) {
+                System.out.println("Error: " + ioException);
+            }
+        }
+    }
+
+    public static void writeToFile() {
+        try {
+            FileWriter fw = new FileWriter("data/duke.txt");
+            for (Task task : taskList) {
+                fw.write(task + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 
@@ -127,11 +182,13 @@ public class Duke {
             } catch (Exception e) {
                 System.out.print(DIVIDER + e.getMessage() + "\n" + DIVIDER);
             }
+            writeToFile();
         }
     }
 
     public static void main(String[] args) {
         greetUser();
+        readFromFile("data/duke.txt");
         getInputs();
     }
 }
