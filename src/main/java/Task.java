@@ -6,7 +6,7 @@ public abstract class Task {
     public String taskTitle;
     public boolean isDone;
     public String taskType;
-    private final String timeOutputFormat = "";
+
     /**
      * Constructor
      * @param taskTitle
@@ -51,7 +51,4 @@ public abstract class Task {
     public void maskAsDone() {
         this.isDone = true;
     }
-
-
-
 }

@@ -7,11 +7,11 @@ public class ToDo extends Task{
      * Constructor
      * @param taskTitle
      */
-    ToDo (String taskTitle){
+    public ToDo (String taskTitle){
         super(taskTitle, "T");
     }
 
-    ToDo (boolean isDone, String taskTitle) {
+    public ToDo (boolean isDone, String taskTitle) {
         super(taskTitle, isDone, "T");
     }
 

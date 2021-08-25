@@ -12,16 +12,17 @@ public class Event extends Task{
      * @param tasktitle
      * @param time
      */
-    Event (String tasktitle, LocalDateTime time) {
+    public Event (String tasktitle, LocalDateTime time) {
         super(tasktitle, "E");
         this.time = time;
     }
 
-    Event (boolean isDone, String taskTitle, LocalDateTime time) {
+    public Event (boolean isDone, String taskTitle, LocalDateTime time) {
         super(taskTitle, isDone, "E");
         this.time = time;
     }
 
+    @Override
     public LocalDateTime getDateTime() {
         return this.time;
     }

@@ -10,13 +10,11 @@ public class BotTemporalUnit {
     public LocalDateTime convertStringToTemporalData(String data) {
         return LocalDateTime.parse(
                 data,
-                DateTimeFormatter.ISO_DATE_TIME
+                DateTimeFormatter.ISO_LOCAL_DATE_TIME
                 );
     }
 
-    void decipherTemproalDataInput() {
 
-    }
 
 
 }

@@ -12,16 +12,17 @@ public class Deadline extends Task{
      * @param taskTitle
      * @param time
      */
-    Deadline(String taskTitle, LocalDateTime time){
+    public Deadline(String taskTitle, LocalDateTime time){
         super(taskTitle, "D");
         this.time = time;
     }
 
-    Deadline (boolean isDone, String taskTitle, LocalDateTime time) {
+    public Deadline (boolean isDone, String taskTitle, LocalDateTime time) {
         super (taskTitle, isDone, "D");
         this.time = time;
     }
 
+    @Override
     public LocalDateTime getDateTime() {
         return this.time;
     }
