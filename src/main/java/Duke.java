@@ -11,6 +11,10 @@ public class Duke {
     private List<Task> tasks;
     private boolean shouldExit;
 
+    public enum Command {
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT,
+    }
+
     Duke(Scanner in, List<Task> tasks) {
         this.in = in;
         this.tasks = tasks;
@@ -23,12 +27,20 @@ public class Duke {
 
     private void handleInput() throws Exception {
         System.out.print("> ");
-        String command = this.in.next();
+        String commandString = this.in.next();
         String arguments = this.in.nextLine().trim();
         boolean hasArguments = arguments.length() != 0;
 
+        Command command;
+        try {
+            command = Command.valueOf(commandString.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            String fullInput = commandString + " " + arguments;
+            throw new Exception("Command not recognized: " + fullInput);
+        }
+
         switch (command) {
-            case "bye": {
+            case BYE: {
                 if (hasArguments) {
                     throw new Exception("Command `bye` does not accept arguments");
                 }
@@ -37,7 +49,7 @@ public class Duke {
                 printMessage(BYE_TEXT);
                 break;
             }
-            case "list": {
+            case LIST: {
                 if (hasArguments) {
                     throw new Exception("Command `list` does not accept arguments");
                 }
@@ -63,7 +75,7 @@ public class Duke {
 
                 break;
             }
-            case "done": {
+            case DONE: {
                 if (!hasArguments) {
                     throw new Exception("Command `done` requires an argument");
                 }
@@ -82,7 +94,7 @@ public class Duke {
                 printMessage("Marking task as completed:\n    " + task.toString());
                 break;
             }
-            case "delete": {
+            case DELETE: {
                 if (!hasArguments) {
                     throw new Exception("Command `delete` requires an argument");
                 }
@@ -101,30 +113,26 @@ public class Duke {
                         + this.tasks.size() + " tasks in your list.");
                 break;
             }
-            case "todo": {
+            case TODO: {
                 Task todo = Todo.fromInput(arguments);
                 this.tasks.add(todo);
 
                 this.printTaskAddedMessage(todo);
                 break;
             }
-            case "deadline": {
+            case DEADLINE: {
                 Task deadline = Deadline.fromInput(arguments);
                 this.tasks.add(deadline);
 
                 this.printTaskAddedMessage(deadline);
                 break;
             }
-            case "event": {
+            case EVENT: {
                 Task event = Event.fromInput(arguments);
                 this.tasks.add(event);
 
                 this.printTaskAddedMessage(event);
                 break;
-            }
-            default: {
-                String fullInput = command + " " + arguments;
-                throw new Exception("Command not recognized: " + fullInput);
             }
         }
     }
