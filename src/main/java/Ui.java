@@ -35,4 +35,8 @@ public class Ui {
     public String readInput() {
         return scanner.nextLine();
     }
+
+    public void reply(String message) {
+        System.out.println(message);
+    }
 }

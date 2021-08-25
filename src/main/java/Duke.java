@@ -23,7 +23,7 @@ public class Duke {
                 String input = ui.readInput();
                 ui.showLine();
                 Command c = Parser.parse(input);
-                c.execute(tasks, storage);
+                c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());

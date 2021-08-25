@@ -7,13 +7,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index <= 0 || index > tasks.size()) {
             throw new DukeException("Looks like there is no such task to be marked as done");
         }
         Task task = tasks.markTaskAsDone(index);
         storage.save(tasks);
         String message = String.format("Nice! I've marked this task as done:\n  %s", task);
-        System.out.println(message);
+        ui.reply(message);
+
     }
 }

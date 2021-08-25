@@ -7,7 +7,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);
         storage.save(tasks);
         int len = tasks.size();
@@ -15,6 +15,6 @@ public class AddCommand extends Command {
                 task.toString(),
                 len,
                 len <= 1 ? "task" : "tasks");
-        System.out.println(message);
+        ui.reply(message);
     }
 }
