@@ -27,4 +27,15 @@ public class Todos extends Task {
             return ("[T] [ ] " + name);
         }
     }
+
+    public String toDataString() {
+        StringBuilder str = new StringBuilder();
+        if (isDone) {
+            str.append("T|1|").append(super.name);
+            return str.toString();
+        } else {
+            str.append("T|0|").append(super.name);
+            return str.toString();
+        }
+    }
 }

@@ -32,4 +32,15 @@ public class Events extends Task {
             return ("[E] [ ] " + name  + " (at: " + time + ")");
         }
     }
+
+    public String toDataString() {
+        StringBuilder str = new StringBuilder();
+        if (isDone) {
+            str.append("E|1|").append(super.name).append("|").append(time);
+            return str.toString();
+        } else {
+            str.append("E|0|").append(super.name).append("|").append(time);
+            return str.toString();
+        }
+    }
 }
