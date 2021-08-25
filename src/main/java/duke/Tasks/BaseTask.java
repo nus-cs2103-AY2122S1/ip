@@ -109,6 +109,14 @@ public class BaseTask {
         return this.getTaskName();
     }
 
+    /**
+     * Returns the extra info this task contains, if any.
+     *
+     * @return the String containing the extra info of this task if any. Returns null if there is none.
+     */
+    public String getTaskExtraInfo() {
+        return null;
+    }
 
     /**
      * Check the type of task represented by the current command.

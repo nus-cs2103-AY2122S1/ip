@@ -62,4 +62,14 @@ public class EventTask extends BaseTask {
         return this.getTaskName() + "(at: " + this.atContents + ")";
     }
 
+
+    /**
+     * Returns the extra info this task contains, which is the at where data.
+     *
+     * @return the String containing the extra info of this task if any. Returns null if there is none.
+     */
+    @Override
+    public String getTaskExtraInfo() {
+        return this.atContents;
+    }
 }

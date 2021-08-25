@@ -62,4 +62,14 @@ public class DeadlineTask extends BaseTask {
     public String getTaskDescription() {
         return this.getTaskName() + "(by: " + this.byWhen + ")";
     }
+
+    /**
+     * Returns the extra info this task contains, which is the by when data.
+     *
+     * @return the String containing the extra info of this task if any. Returns null if there is none.
+     */
+    @Override
+    public String getTaskExtraInfo() {
+        return this.byWhen;
+    }
 }
