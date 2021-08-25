@@ -11,7 +11,7 @@ public class Todo extends Task{
      *
      * @param description description of task
      */
-    public Todo(String description) {
+    public Todo(String description) throws AilurusException {
         super(description.trim());
         if (description.length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYTODO);

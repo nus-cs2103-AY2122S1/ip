@@ -58,7 +58,7 @@ public class TaskList {
      * @param str String to be converted to integer, representing task number to be marked as done
      * @return task that has been marked as done
      */
-    public Task done(String str) {
+    public Task done(String str) throws AilurusException {
         try {
             int taskNo = Integer.parseInt(str);
             if (taskNo > list.size() || taskNo < 1) {

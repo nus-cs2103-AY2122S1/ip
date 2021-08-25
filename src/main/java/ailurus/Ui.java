@@ -90,6 +90,16 @@ public class Ui {
     }
 
     /**
+     * Tell the user that there are matching tasks, and the list of them
+     *
+     * @param tasks list of tasks that are matching
+     */
+    public void sayFind(TaskList tasks) {
+        this.say("Here are the matching tasks in your list:");
+        this.sayList(tasks);
+    }
+
+    /**
      * Tell the user that the command given was invalid
      */
     public void sayInvalidCommand() {

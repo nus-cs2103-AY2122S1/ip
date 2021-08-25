@@ -39,6 +39,15 @@ abstract public class Task {
      */
     abstract public void log(FileWriter writer);
 
+    /**
+     * Get the description of the task
+     *
+     * @return description of task
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s]%s", this.getStatusIcon(), this.description);

@@ -95,6 +95,14 @@ public class Ailurus {
                         this.ui.showError(e.getMessage());
                     }
                     break;
+                case "find":
+                    try {
+                        String match = Parser.parseMessage(fullCommand);
+                        this.ui.sayFind(Parser.parseFind(match, this.tasks));
+                    } catch (AilurusException e) {
+                        this.ui.showError(e.getMessage());
+                    }
+                    break;
                 default:
                     this.ui.sayInvalidCommand();
                 }

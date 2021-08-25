@@ -44,13 +44,14 @@ public class Storage {
         }
     }
 
+
     /**
      * Reads and loads the tasks in the data file, and creates a FileWriter
      * that must be followed with unload() to close writer
      *
      * @return list of tasks that is loaded from data file
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws AilurusException {
         ArrayList<Task> list = new ArrayList<>();
         // load tasks from file
         try {
@@ -75,7 +76,7 @@ public class Storage {
      *
      * @param list list of tasks to be written to the data file
      */
-    public void unload(TaskList list) {
+    public void unload(TaskList list) throws AilurusException {
         // write all tasks to file
         if (this.writer != null) {
             try {
@@ -85,7 +86,7 @@ public class Storage {
                 }
                 writer.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new AilurusException(AilurusException.Error.LOAD);
             }
         }
     }
