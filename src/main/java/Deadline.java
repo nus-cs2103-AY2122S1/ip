@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDateTime time;
@@ -25,20 +24,14 @@ public class Deadline extends Task {
         }
 
         String description = deadlineInputs[0];
-        LocalDateTime time;
-        try {
-            time = LocalDateTime.parse(deadlineInputs[1], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        } catch (Exception e) {
-            throw new Exception(
-                    "Invalid datetime: " + deadlineInputs[1] + "\n" + "Please use format: YYYY-MM-DD HH:MM:SS");
-        }
+        LocalDateTime time = DateTime.parse(deadlineInputs[1]);
 
         return new Deadline(description, time);
     }
 
     @Override
     public String toString() {
-        String timeStr = this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm:ss"));
+        String timeStr = DateTime.stringify(this.time);
 
         return "[D]" + super.toString() + " (by: " + timeStr + ")";
     }
