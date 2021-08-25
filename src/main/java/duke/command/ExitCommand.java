@@ -11,4 +11,9 @@ public class ExitCommand extends Command {
         String closingMessage =  "Goodbye! Hope to see you again soon!\n";
         ui.printMessage(closingMessage);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ExitCommand;
+    }
 }
