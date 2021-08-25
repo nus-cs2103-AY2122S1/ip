@@ -37,8 +37,12 @@ public class TaskList {
         ui.showDelete(deleted, list.size());
     }
     
-    public void findTasks(LocalDate desiredDate) {
+    public void findTasksByDate(LocalDate desiredDate) {
         ui.showFind(list, list.size(), desiredDate);
+    }
+
+    public void findTasksByKeyword(String keyword) {
+        
     }
     
     public void addTask(Task newTask) {

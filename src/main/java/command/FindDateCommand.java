@@ -5,16 +5,16 @@ import duke.Ui;
 
 import java.time.LocalDate;
 
-public class FindCommand extends Command {
+public class FindDateCommand extends Command {
     private final LocalDate desiredDate;
 
-    public FindCommand(LocalDate desiredDate) {
+    public FindDateCommand(LocalDate desiredDate) {
         super();
         this.desiredDate = desiredDate;
     }
 
     @Override
     public void execute(Ui ui, TaskList taskList) {
-        taskList.findTasks(desiredDate);
+        taskList.findTasksByDate(desiredDate);
     }
 }
