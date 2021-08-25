@@ -3,74 +3,51 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    private static String introString = "Hey there! I'm Good Duke. How many I help you today?";
-    private static String outroString = "That was an excellent chat - I look forward to seeing you again soon!";
-    private static String saveLocation = "duke.txt";
+    private Ui ui;
+    private String filePath;
+    private Scanner sc = new Scanner(System.in);
+    private ArrayList<Task> taskList;
 
-    private static Scanner sc = new Scanner(System.in);
-    private static ArrayList<Task> taskList;
-
-    public static String taskListString() {
-        String output = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            output += String.format("%d. %s\n", i + 1, taskList.get(i));
-        }
-        return output;
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.filePath = filePath;
+        this.readSave();
     }
 
-    public static String addedString(Task task) {
-        return String.format("Alright, I've added this task: \n\t%s\nNow, you have %d tasks in the list.\n", task, taskList.size());
-    }
-
-    public static String doneString(Task task) {
-        return String.format("Certainly, I've marked this task as done: \n\t%s\n", task);
-    }
-
-    public static String deletedString(Task task) {
-        return String.format("Certainly, I've deleted this task: \n\t%s\nNow, you have %d tasks in the list.\n", task, taskList.size());
-    }
-
-    public static void print(String str) {
-        String horizontalLine = "________________________________________________________________________________";
-        System.out.println(horizontalLine);
-        System.out.println(str);
-        System.out.println(horizontalLine);
-
-    }
-
-    public static void writeSave() {
+    public void writeSave() {
         try {
-            FileOutputStream writeData = new FileOutputStream(saveLocation);
+            FileOutputStream writeData = new FileOutputStream(filePath);
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
             writeStream.writeObject(taskList);
             writeStream.flush();
             writeStream.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            ui.showWriteSaveError();
         }
     }
 
-    public static void readSave() {
+    public void readSave() {
         try {
-            File f = new File(saveLocation);
+            File f = new File(filePath);
             if (!f.createNewFile()) { // save file exists
-                FileInputStream readData = new FileInputStream(saveLocation);
+                FileInputStream readData = new FileInputStream(filePath);
                 ObjectInputStream readStream = new ObjectInputStream(readData);
                 @SuppressWarnings("unchecked")
                 ArrayList<Task> readList = (ArrayList<Task>) readStream.readObject();
-                Duke.taskList = readList;
+                this.taskList = readList;
                 readStream.close();
             } else {
-                Duke.taskList = new ArrayList<>();
+                this.taskList = new ArrayList<>();
             }
+        } catch (EOFException e) {
+            this.taskList = new ArrayList<Task>();
+            writeSave();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            ui.showReadSaveError();
         }
     }
 
-
-
-    public static Command parseUserInput(String input) throws DukeException {
+    public Command parseUserInput(String input) throws DukeException {
         String[] strings = input.split(" ");
         String operation = strings[0];
         switch (operation) {
@@ -125,54 +102,57 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException {
-        print(introString);
-        readSave();
+    public void run() {
         Command command;
-        label:
+        ui.showIntro();
+        outer:
         while (true) {
             String userEntry = sc.nextLine();
             try {
                 command = parseUserInput(userEntry);
             } catch (DukeException e) {
-                print(e.toString());
+                ui.print(e.toString());
                 continue;
             }
             Task task;
             switch (command.getOperation()) {
             case "bye":
-                print(outroString);
+                ui.showOutro();
                 writeSave();
-                break label;
+                break outer;
             case "list":
-                print(taskListString());
+                ui.showTasks(taskList);
                 break;
             case "done":
                 task = taskList.get(command.getIndex() - 1);
                 task.setDone(true);
-                print(doneString(task));
+                ui.showDone(task);
                 break;
             case "todo":
                 task = new ToDo(command.getDescription());
                 taskList.add(task);
-                print(addedString(task));
+                ui.showAdded(task, taskList.size());
                 break;
             case "deadline":
                 task = new Deadline(command.getDescription(), command.getTime());
                 taskList.add(task);
-                print(addedString(task));
+                ui.showAdded(task, taskList.size());
                 break;
             case "event":
                 task = new Event(command.getDescription(), command.getTime());
                 taskList.add(task);
-                print(addedString(task));
+                ui.showAdded(task, taskList.size());
                 break;
             case "delete":
                 task = taskList.get(command.getIndex() - 1);
                 taskList.remove(command.getIndex() - 1);
-                print(deletedString(task));
+                ui.showDeleted(task, taskList.size());
                 break;
             }
         }
+    }
+
+    public static void main(String[] args) throws DukeException {
+        new Duke("duke.txt").run();
     }
 }
