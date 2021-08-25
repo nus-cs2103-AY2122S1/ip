@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Encapsulates the Data that is stored and interpreted by Duke.
+ */
 public class Data {
 
     private static File data;
@@ -19,8 +21,8 @@ public class Data {
     }
 
     /**
-     * Loads the Tasks stored in the form of an ArrayList<DukePakage.Task>.
-     * @return An ArrayList of type DukePakage.Task with all Tasks previously stored.
+     * Loads the Tasks stored in the form of an ArrayList<Task>.
+     * @return An ArrayList of type Task with all Tasks previously stored.
      */
     public static ArrayList<Task> loadData() {
         try {
@@ -28,7 +30,7 @@ public class Data {
             ArrayList<Task> loadedTasks = new ArrayList<>();
             while (scanner.hasNext()) {
                 try {
-                    loadedTasks.add(txtToTasks(scanner.nextLine()));
+                    loadedTasks.add(convertTxtToTask(scanner.nextLine()));
                 } catch (IllegalStateException e) {
                     System.err.println(e);
                 }
@@ -41,7 +43,7 @@ public class Data {
     }
 
     /**
-     * Writes the DukePakage.Task to the current txt file.
+     * Writes the Task to the current txt file.
      */
     public static void writeToFile(Task task) throws DukeException {
         if (!data.exists()) {
@@ -72,27 +74,27 @@ public class Data {
     }
 
     /**
-     * Converts txt String into a DukePakage.Task object.
+     * Converts txt String into a Task object.
      * @param txt the String that is read from the txt file.
-     * @return a new DukePakage.Task interpreted from the txt file.
+     * @return a new Task interpreted from the txt file.
      */
-    public static Task txtToTasks(String txt) {
+    public static Task convertTxtToTask(String txt) {
         String[] read = txt.split(" \\| ");
         String taskCategory = read[0];
         Task task;
 
         switch(taskCategory) {
-            case "D":
-                task = new Deadline(read[2], read[3]);
-                break;
-            case "E":
-                task = new Event(read[2], read[3]);
-                break;
-            case "T":
-                task = new Todo(read[2]);
-                break;
-            default:
-                throw new IllegalStateException("Oops! It seems there is a category I do not understand.");
+        case "D":
+            task = new Deadline(read[2], read[3]);
+            break;
+        case "E":
+            task = new Event(read[2], read[3]);
+            break;
+        case "T":
+            task = new Todo(read[2]);
+            break;
+        default:
+            throw new IllegalStateException("Oops! It seems there is a category I do not understand.");
         }
         if (read[1].equals("1")) {
             task.markDone();

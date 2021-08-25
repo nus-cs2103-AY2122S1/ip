@@ -5,10 +5,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Encapsulates the Deadlines which is a subtype of Task.
+ */
 public class Deadline extends Task{
 
-    private final Date deadline;
-    private final String dateInput;
+    private final Date DEADLINE;
+    private final String DATE_INPUT;
 
     /**
      * Constructor to create a DukePakage.Deadline.
@@ -17,8 +20,8 @@ public class Deadline extends Task{
      */
     public Deadline(String description, String dateInput) {
         super(description);
-        this.dateInput = dateInput;
-        this.deadline = stringToDate(dateInput);
+        this.DATE_INPUT = dateInput;
+        this.DEADLINE = stringToDate(dateInput);
     }
 
     /**
@@ -48,17 +51,17 @@ public class Deadline extends Task{
      * @return A String object of the Date
      */
     public String dateToString() {
-        if (deadline == null) {
-            return dateInput;
+        if (DEADLINE == null) {
+            return DATE_INPUT;
         }
 
         DateFormat outFormat;
-        if (this.dateInput.split(" ").length == 2) {
+        if (this.DATE_INPUT.split(" ").length == 2) {
             outFormat =  new SimpleDateFormat("MMM dd yyyy h.mm aa");
         } else {
             outFormat = new SimpleDateFormat("MMM dd yyyy");
         }
-        return outFormat.format(this.deadline);
+        return outFormat.format(this.DEADLINE);
     }
 
     /**
@@ -67,13 +70,18 @@ public class Deadline extends Task{
      */
     @Override
     public String toTxt() {
-        return String.format("D | %d | %s | %s", super.getIsDone() ? 1 : 0, super.getDescription(),
-                dateToString());
+        return String.format("D | %d | %s | %s"
+                , super.getIsDone() ? 1 : 0
+                , super.getDescription()
+                , dateToString());
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateToString() + ")";
+        return "[D]"
+                + super.toString()
+                + " (by: " + dateToString()
+                + ")";
     }
 
 }

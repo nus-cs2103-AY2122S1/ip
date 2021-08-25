@@ -1,16 +1,18 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
-public class ToDoList {
+/**
+ * Encapsulates the TodoList which is the overall list of all Tasks in Duke.
+ */
+public class TaskList {
 
     private static ArrayList<Task> dukeList;
     private static Data data;
 
-    public ToDoList(ArrayList<Task> dukeList, Data data) {
-        ToDoList.dukeList = dukeList;
-        ToDoList.data = data;
+    public TaskList(ArrayList<Task> dukeList, Data data) {
+        TaskList.dukeList = dukeList;
+        TaskList.data = data;
     }
 
     public static void add(Task task) {
@@ -18,8 +20,8 @@ public class ToDoList {
     }
 
     /**
-     * Shows all Tasks in the list that the user has given to DukePakage.Duke to store.
-     * Tasks are ordered from least recent to most recent. If no tasks have been given to DukePakage.Duke,
+     * Shows all Tasks in the list that the user has given to Duke to store.
+     * Tasks are ordered from least recent to most recent. If no tasks have been given to Duke,
      * the appropriate message is shown.
      */
     public static void showList() {
@@ -37,14 +39,15 @@ public class ToDoList {
     }
 
     /**
-     * Updates the marking of a certain DukePakage.Task as 'done'.
+     * Updates the marking of a certain Task as 'done'.
      * @param input The entire String that the user has input i.e. "done 2".
      * @throws DukeException If an incorrect input is entered.
      */
     public static void markDone(String input) throws DukeException{
         int itemNumber;
         if (input.split(" ", 2).length == 1) {
-            throw new DukeException("☹ Oops! Looks like you are missing the task number you wish to mark as done! Try again :-)");
+            throw new DukeException("☹ Oops! Looks like you are missing the task number you wish to mark as done!"
+                    + " Try again :-)");
         }
         String numberInput = input.split(" ", 2)[1];
         try {
@@ -54,7 +57,7 @@ public class ToDoList {
         }
         String message = "☹ Oops! I cannot seem to find that task number. Try again!";
         if (dukeList.isEmpty()) {
-            message = "☹ Oops! Your list is empty! Try adding a DukePakage.Task first!";
+            message = "☹ Oops! Your list is empty! Try adding a Task first!";
         } else if (itemNumber <= dukeList.size()){
             Task targetItem = dukeList.get(itemNumber - 1);
             targetItem.markDone();
@@ -64,14 +67,15 @@ public class ToDoList {
     }
 
     /**
-     * Deletes a specific task that DukePakage.Duke has stored.
+     * Deletes a specific task that Duke has stored.
      * @param input The entire String that the user has input i.e. "delete 2".
      * @throws DukeException If an incorrect input is entered.
      */
     public static void delete(String input) throws DukeException{
         int itemNumber;
         if (input.split(" ", 2).length == 1) {
-            throw new DukeException("☹ Oops! Looks like you are missing the number of the task you wish to delete! Try again :-)");
+            throw new DukeException("☹ Oops! Looks like you are missing the number of the task you wish to delete! "
+                    + "Try again :-)");
         }
         String numberInput = input.split(" ", 2)[1];
         try {
@@ -81,34 +85,31 @@ public class ToDoList {
         }
         String message = "☹ Oops! You may have incorrectly entered a number. Try again!";
         if (itemNumber > dukeList.size()) {
-            throw new DukeException("☹ Oops! Looks like you are trying to delete something that is not in your list! Try again!");
+            throw new DukeException("☹ Oops! Looks like you are trying to delete something that is not in your list! "
+                    + "Try again!");
         }
         Task removed = dukeList.remove(itemNumber - 1);
-        System.out.println("Noted. I've removed this task:\n" + removed.toString() + "\nNow you have " + (dukeList.size())
+        System.out.println("Noted. I've removed this task:\n"
+                + removed.toString()
+                + "\nNow you have "
+                + (dukeList.size())
                 + " tasks in the list");
     }
 
+    /**
+     * Updates the stored Data.
+     * @throws DukeException If file not found or error updating data.
+     */
     public static void update() throws DukeException{
         Data.updateData(dukeList);
     }
 
     /**
-     * Searches the entire dukeList for Tasks that contain the keyword.
-     * @param keyword User input that they wish to search for.
-     * @return An ArrayList of Tasks that contain the keyword.
+     * Gets the number of Tasks in the TodoList.
+     * @return An integer representing the number of Tasks.
      */
-    public static ArrayList<Task> searchList(String keyword) {
-        ArrayList<Task> results = new ArrayList<>();
-        for (Task task : dukeList) {
-            if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
-                results.add(task);
-            }
-        }
-        return results;
-    }
-
     public static int numberOfTasks() {
-        return ToDoList.dukeList.size();
+        return TaskList.dukeList.size();
     }
 
 }

@@ -5,10 +5,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Encapsulates an Event which is a subtype of Task.
+ */
 public class Event extends Task {
 
-    private final Date eventTime;
-    private final String dateInput;
+    private final Date EVENT_TIME;
+    private final String DATE_INPUT;
 
     /**
      * Constructor for an DukePakage.Event.
@@ -17,8 +20,8 @@ public class Event extends Task {
      */
     public Event(String description, String dateInput) {
         super(description);
-        this.dateInput = dateInput;
-        this.eventTime = stringToDate(dateInput);
+        this.DATE_INPUT = dateInput;
+        this.EVENT_TIME = stringToDate(dateInput);
     }
 
 
@@ -49,17 +52,17 @@ public class Event extends Task {
      * @return A String object of the Date
      */
     public String dateToString() {
-        if (eventTime == null) {
-            return dateInput;
+        if (EVENT_TIME == null) {
+            return DATE_INPUT;
         }
 
         DateFormat outFormat;
-        if (this.dateInput.split(" ").length == 2) {
+        if (this.DATE_INPUT.split(" ").length == 2) {
             outFormat =  new SimpleDateFormat("MMM dd yyyy h.mm aa");
         } else {
             outFormat = new SimpleDateFormat("MMM dd yyyy");
         }
-        return outFormat.format(this.eventTime);
+        return outFormat.format(this.EVENT_TIME);
     }
 
     /**
@@ -68,13 +71,19 @@ public class Event extends Task {
      */
     @Override
     public String toTxt() {
-        return String.format("E | %d | %s | %s", super.getIsDone() ? 1 : 0, super.getDescription(),
-                dateToString());
+        return String.format("E | %d | %s | %s"
+                , super.getIsDone() ? 1 : 0
+                , super.getDescription()
+                , dateToString());
     }
 
     @Override
     public String toString() {
-        return "[E]"+ super.toString() + " (at: " + dateToString() + ")";
+        return "[E]"
+                + super.toString()
+                + " (at: "
+                + dateToString()
+                + ")";
     }
 
 }

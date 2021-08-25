@@ -1,12 +1,15 @@
 package duke;
 
+/**
+ * Encapsulates the supertype of Deadlines, Events and Todos which is Task.
+ */
 public abstract class Task {
     private String description;
     private boolean isDone;
 
     /**
      * Constructor
-     * @param description The string that describes the DukePakage.Task.
+     * @param description The string that describes the Task.
      */
     public Task(String description) {
         this.description = description;
@@ -26,8 +29,8 @@ public abstract class Task {
     }
 
     /**
-     * Return the status of whether the DukePakage.Task is done.
-     * @return Boolean indicating if DukePakage.Task is done.
+     * Return the status of whether the Task is done.
+     * @return Boolean indicating if Task is done.
      */
     public Boolean getIsDone() {
         return this.isDone;
@@ -41,8 +44,8 @@ public abstract class Task {
     }
 
     /**
-     * Return the description of the DukePakage.Task.
-     * @return String of the DukePakage.Task description.
+     * Return the description of the Task.
+     * @return String of the Task description.
      */
     public String getDescription() {
         return this.description;
