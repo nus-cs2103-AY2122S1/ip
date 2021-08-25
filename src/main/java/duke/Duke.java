@@ -146,6 +146,7 @@ public class Duke {
                 break;
             case INVALID:
                 defaultHandler();
+                // Fallthrough
             }
             if (storage.isPresent()) {
                 storage.get().writeTasksToFile(this.taskList);
