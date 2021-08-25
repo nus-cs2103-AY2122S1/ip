@@ -10,14 +10,27 @@ public class Ui {
             .replaceAll("(?m)^", "\t"));
     }
 
+    /**
+     * Prints a Welcome message to the screen.
+     *
+     */
     public void showWelcome() {
         printDuke(GREETING);
     }
 
+    /**
+     * Prints a Farewell message to the screen.
+     *
+     */
     public void showFarewell() {
         printDuke(FAREWELL);
     }
 
+    /**
+     * Prints a message to the screen with border.
+     *
+     * @param message message to print to the screen
+     */
     public void showMessage(String message) {
         printDuke(message);
     }

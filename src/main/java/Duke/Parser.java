@@ -31,6 +31,13 @@ public class Parser {
         "delete", (args, tasks) -> deleteTask(args, tasks)
     );
 
+    /**
+     * Executes a command represented by input string and updates provided tasklist.
+     *
+     * @param input command to execute
+     * @param tasks TaskList to update
+     * @return message to present to the user
+     */
     public String execute(String input, TaskList tasks) {
         String[] tmp =  input.split(" ", 2);
         String command = tmp[0];
