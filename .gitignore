@@ -8,6 +8,10 @@
 /build/
 src/main/resources/docs/
 
+# Saved tasks in disk
+src/main/java/data
+src/test/data
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml

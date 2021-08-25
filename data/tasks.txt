@@ -1,2 +1,0 @@
-T | 1 | test no file start
-E | 0 | test event | Sunday

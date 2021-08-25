@@ -29,7 +29,7 @@ public class Duke {
 
         while (this.isRunning) {
             String input = sc.nextLine();
-            commands.Command c = this.ui.parseInput(input);
+            Command c = this.ui.parseInput(input);
             this.ui.printSepLine();
             c.execute(this.ui, this.taskList, this.store);
             this.ui.printSepLine();
@@ -37,6 +37,10 @@ public class Duke {
         }
 
         sc.close();
+    }
+
+    public int getNumberOfTasks() {
+        return this.taskList.numberOfTasks();
     }
 
     public static void main(String[] args) {
