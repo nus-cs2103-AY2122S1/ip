@@ -38,7 +38,7 @@ public class Storage {
      * @return an ArrayList of tasks
      * @throws DukeException If file is not found
      */
-    public ArrayList load() throws DukeException {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> userDataList = new ArrayList<>();
         try {
             Scanner sc = new Scanner(userData);
