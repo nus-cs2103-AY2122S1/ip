@@ -34,21 +34,21 @@ public class TaskList {
         String dataToStore;
 
         try{
-            if(userInput.toLowerCase().startsWith("todo")) {
+            if (userInput.toLowerCase().startsWith("todo")) {
                 taskToAdd = new ToDo(userInput.substring(5));
             } else {
                 String[] input = userInput.split(" ");
 
                 int taskIndex = input[0].length() + 1;
                 int dateIndex = userInput.indexOf("/");
-                String[] dateAndTask = utility.sepDateFromTask(dateIndex,taskIndex, userInput);
+                String[] dateAndTask = utility.seperateDateFromTask(dateIndex,taskIndex, userInput);
 
                 String str = dateAndTask[1];
                 LocalDateTime dateTime = utility.stringToDate(str);
 
                 if (userInput.toLowerCase().startsWith("deadline")){
                     taskToAdd = new Deadline(dateAndTask[0], dateTime);
-                } else if(userInput.toLowerCase().startsWith("event")) {
+                } else if (userInput.toLowerCase().startsWith("event")) {
                     taskToAdd = new Event(dateAndTask[0], dateTime);
                 } else {
                     throw new IllegalArgumentException("Please specify type of task");
@@ -63,13 +63,9 @@ public class TaskList {
             return(String.format("Got it. I've added this task:\n" +
                     "%s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
 
-        }catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } catch(IOException e) {
-            return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
-        } catch(StringIndexOutOfBoundsException e) {
-            return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
-        } catch (DateTimeParseException e) {
+        } catch (IOException | StringIndexOutOfBoundsException | DateTimeParseException e) {
             return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
         }
     }
@@ -86,11 +82,11 @@ public class TaskList {
             this.tasks.remove(taskToDel);
             return(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
                     , task, this.tasks.size()));
-        } catch(StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             return("OOPS!!! You cannot delete nothing!");
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return("OOPS!!! Must be a number bodoh");
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return("OOPS!!! Number doesnt exist");
         }
     }
@@ -109,11 +105,11 @@ public class TaskList {
                 task.setDone();
                 return("Nice! I've marked this task as done:\n" + task.toString());
             }
-        } catch(StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             return("OOPS!!! You cannot mark nothing as done!");
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return("OOPS!!! Must be a number bodoh");
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return("OOPS!!! NUmber doesnt exist");
         }
     }
@@ -129,7 +125,7 @@ public class TaskList {
     public String showTasks(List<Task> tasks) {
         StringBuilder str = new StringBuilder().append("\n");
         System.out.println("Here are the tasks in your list:");
-        for( int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             str.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
         }
         return str.toString();
