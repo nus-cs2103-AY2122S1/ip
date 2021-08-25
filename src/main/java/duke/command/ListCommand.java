@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.Storage;
 
 public class ListCommand extends Command{
-    public static final String INSTRUCTION = "list";
+    public static final String INSTRUCTION_LIST = "list";
 
     /**
      * Execute the command
@@ -36,6 +36,6 @@ public class ListCommand extends Command{
      */
     @Override
     public String toString() {
-        return "[" + INSTRUCTION + "]";
+        return "[" + INSTRUCTION_LIST + "]";
     }
 }

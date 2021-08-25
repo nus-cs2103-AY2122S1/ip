@@ -1,23 +1,24 @@
 package duke;
 
 import java.util.ArrayList;
+
 import duke.task.Task;
 
 public class TaskList {
-    protected ArrayList<Task> list;
+    protected ArrayList<Task> tasks;
 
     /**
      * Class constructor for TaskList Class when not loading data
      */
     public TaskList() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
      * Class constructor for TaskList Class when loading data
      */
     public TaskList(ArrayList<Task> taskList) {
-        this.list = taskList;
+        this.tasks = taskList;
     }
 
     /**
@@ -27,7 +28,7 @@ public class TaskList {
      * @return           the task marked as done
      */
     public Task markAsDone(int taskNumber) {
-        Task task = this.list.get(taskNumber);
+        Task task = this.tasks.get(taskNumber);
         task.markAsDone();
         return task;
     }
@@ -38,7 +39,7 @@ public class TaskList {
      * @param task a task
      */
     public void add(Task task) {
-        this.list.add(task);
+        this.tasks.add(task);
     }
 
     /**
@@ -48,18 +49,18 @@ public class TaskList {
      * @return           the task removed
      */
     public Task remove(int taskNumber) {
-        Task task = this.list.get(taskNumber);
-        this.list.remove(task);
+        Task task = this.tasks.get(taskNumber);
+        this.tasks.remove(task);
         return task;
     }
-
+    
     /**
      * Return the task list
      *
      * @return           the task list
      */
     public ArrayList<Task> getList() {
-        return this.list;
+        return this.tasks;
     }
 
     /**
@@ -69,6 +70,6 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        return "Now you have " + list.size() + " tasks in the list.";
+        return "Now you have " + tasks.size() + " tasks in the list.";
     }
 }

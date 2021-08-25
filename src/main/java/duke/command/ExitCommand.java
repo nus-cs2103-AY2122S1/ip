@@ -5,7 +5,7 @@ import duke.Ui;
 import duke.Storage;
 
 public class ExitCommand extends Command {
-    public static final String INSTRUCTION = "bye";
+    public static final String INSTRUCTION_EXIT = "bye";
 
     /**
      * Execute the command
@@ -36,6 +36,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String toString() {
-        return "[" + INSTRUCTION + "]";
+        return "[" + INSTRUCTION_EXIT + "]";
     }
 }

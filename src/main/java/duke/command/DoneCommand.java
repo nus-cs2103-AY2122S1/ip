@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.task.Task;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
@@ -8,7 +9,7 @@ import duke.Storage;
 
 public class DoneCommand extends Command {
     protected int taskNumber;
-    public static final String INSTRUCTION = "done";
+    public static final String INSTRUCTION_DONE = "done";
 
     /**
      * Class constructor for DoneCommand Class specifying the task number
@@ -51,6 +52,6 @@ public class DoneCommand extends Command {
      */
     @Override
     public String toString() {
-        return "[" + INSTRUCTION + "] - " + taskNumber;
+        return "[" + INSTRUCTION_DONE + "] - " + taskNumber;
     }
 }

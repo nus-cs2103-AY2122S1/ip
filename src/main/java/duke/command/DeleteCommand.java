@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.task.Task;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.Ui;
@@ -8,7 +9,7 @@ import duke.Storage;
 
 public class DeleteCommand extends Command {
     protected int taskNumber;
-    public static final String INSTRUCTION = "delete";
+    public static final String INSTRUCTION_DELETE = "delete";
 
     /**
      * Class constructor for DeleteCommand Class specifying the task number
@@ -51,6 +52,6 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String toString() {
-        return "[" + INSTRUCTION + "] - " + taskNumber;
+        return "[" + INSTRUCTION_DELETE + "] - " + taskNumber;
     }
 }
