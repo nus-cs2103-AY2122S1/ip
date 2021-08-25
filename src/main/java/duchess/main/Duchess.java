@@ -11,9 +11,9 @@ import duchess.command.Command;
  */
 
 public class Duchess {
-    /** The duchessList which holds the string stored by the user.*/
+    /** The DuchessList which holds the string stored by the user.*/
     private DuchessList duchessList;
-    /** The scanner used to read in user input.*/
+    /** The Scanner used to read in user input.*/
     private Scanner sc;
     /** The Ui object which handles printing to screen.*/
     private Ui ui;

@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * This class implements a DukeList to be used in storing string from Duke
+ * This class implements a Deadline task.
  *
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
@@ -16,16 +16,16 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task{
 
-    /** The date and time of the deadline task */
+    /** The date and time of the deadline task.*/
     protected LocalDateTime by;
 
-    /** The DateTimeFormatter used when printing the Event. */
+    /** The DateTimeFormatter used when printing the Event.*/
     private static final DateTimeFormatter PRINT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
-    /** The DateTimeFormatter when converting time from string. */
+    /** The DateTimeFormatter when converting time from string.*/
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy ha");
 
-    /** The DateTimeFormatter when converting time with minutes from string. */
+    /** The DateTimeFormatter when converting time with minutes from string.*/
     private static final DateTimeFormatter DATE_MINUTES_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy h:mma");
 
 

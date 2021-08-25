@@ -4,7 +4,7 @@ import duchess.task.Task;
 
 import java.util.ArrayList;
 /**
- * This class implements a DukeList to be used in storing string from Duke
+ * This class implements a DuchessList to be used in storing string from Duchess.
  *
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
@@ -23,7 +23,7 @@ public class DuchessList {
     }
 
     /**
-     * Adds a string to the back of the DukeList array.
+     * Adds a string to the back of the DuchessList.
      * @param input The string to be added.
      */
     public void add(Task input)
@@ -32,7 +32,7 @@ public class DuchessList {
     }
 
     /**
-     * Prints the items in the DukeList in order.
+     * Prints the items in the DuchessList in order.
      * @return The string of printed items in a list.
      */
     public String printList()

@@ -3,7 +3,7 @@ package duchess.task;
 import java.time.LocalDateTime;
 
 /**
- * This class implements a Task to be stored in a DukeList
+ * This class implements a Task.
  *
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1
@@ -16,7 +16,7 @@ public abstract class Task {
     protected String name;
 
     /**
-     * Constructor of the task.
+     * Constructs a task.
      * @param name The name of the task.
      */
     public Task(String name)
@@ -34,17 +34,22 @@ public abstract class Task {
         isDone = doneOrNot;
     }
 
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public abstract LocalDateTime getDateTime();
 
     /**
      * Returns a simplified representation of the task for easier recovery from save file.
      * @return The file formatted string representation of the task.
      */
     public abstract String toFileFormat();
+
+    public boolean contains(String keyword) {
+        return name.contains(keyword);
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public abstract LocalDateTime getDateTime();
 
     /**
      * Returns a string representation of the task, with an [X] marked for done and [ ] as undone.

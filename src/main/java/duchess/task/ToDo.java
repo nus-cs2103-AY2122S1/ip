@@ -3,7 +3,7 @@ package duchess.task;
 import java.time.LocalDateTime;
 
 /**
- * This class implements a DukeList to be used in storing string from Duke
+ * This class implements a ToDo task.
  *
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1

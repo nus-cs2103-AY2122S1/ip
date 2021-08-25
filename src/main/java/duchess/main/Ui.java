@@ -13,7 +13,7 @@ public class Ui {
     private static final String HORIZONTAL_BARS = "\n____________________________________________________________\n";
 
     /**
-     * Prints to System.out fancily including horizontal bars ontop and bottom.
+     * Prints fancily including horizontal bars on top and bottom.
      * @param input String to be printed fancily.
      */
     public void prettyPrint(String input)
@@ -22,7 +22,7 @@ public class Ui {
     }
 
     /**
-     * Prints a message given for invalid inputs
+     * Prints a message given for invalid inputs.
      */
     public void printError()
     {

@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * This class implements a DukeList to be used in storing string from Duke
+ * This class implements an Event task.
  *
  * @author Amos Tan
  * @version CS2103T AY21/22 Semester 1

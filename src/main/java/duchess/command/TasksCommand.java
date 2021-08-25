@@ -13,7 +13,7 @@ public class TasksCommand extends Command {
     }
 
     /**
-     * Handles the logic for checking tasks before or after a date
+     * Handles the logic for checking tasks before or after a date.
      * @param duchess The Duchess to return the output to.
      * @return The tasks which match the condition input.
      */
