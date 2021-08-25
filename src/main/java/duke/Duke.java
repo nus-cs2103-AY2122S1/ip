@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Duke {
 
     private Command command;
@@ -14,7 +12,6 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke("file.text");
         duke.command.startDuke();
-
     }
 
 }
