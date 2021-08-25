@@ -2,8 +2,10 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Parser that parses input given by the user.
+ */
 public class Parser {
-
 
     enum Action {
         DONE,
@@ -14,6 +16,13 @@ public class Parser {
         Find,
     }
 
+    /**
+     * Returns Command based on input given by the user.
+     *
+     * @param str User input
+     * @return Command for Duke to run
+     * @throws DukeException
+     */
     public static Command parse(String str) throws DukeException {
 
             String[] arr = str.split(" ", 2);
