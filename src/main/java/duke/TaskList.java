@@ -67,7 +67,7 @@ public class TaskList {
 
         } catch (IllegalArgumentException e) {
             return("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } catch(IOException | DateTimeParseException | StringIndexOutOfBoundsException e) {
+        } catch(IOException | StringIndexOutOfBoundsException | DateTimeParseException  e) {
             return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
         }
     }
