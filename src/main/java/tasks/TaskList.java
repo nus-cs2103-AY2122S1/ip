@@ -140,4 +140,16 @@ public class TaskList {
                 + t
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
+
+    public String findTask(String keyword) {
+        String results = "Here are the matching tasks in your list: \n";
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).description.contains(keyword))
+                results += (i+1) + ". " + tasks.get(i);
+            if (i != tasks.size() - 1) {
+                results += "\n";
+            }
+        }
+        return results;
+    } 
 }
