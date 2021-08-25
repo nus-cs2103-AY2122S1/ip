@@ -1,8 +1,5 @@
 import javax.xml.crypto.Data;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -120,6 +117,7 @@ public class Duke {
                         System.out.println("Ok, very nice. I have deleted the following task.\n" + currentTask.toString());
                     }
                     System.out.println("Now you have " + listIndex + " tasks remaining. Get to work!");
+                    saveData();
 
                 } catch (NumberFormatException e) {
                     System.out.println("Enter a valid number! Or do you not know basic math?");
@@ -240,6 +238,7 @@ public class Duke {
         System.out.println("Ok can, sure. I have added this task as you wanted.");
         System.out.println(tempTask.toString());
         System.out.println("Now you have only " + listIndex + " tasks in the list. Try being more hardworking!");
+        saveData();
 
     }
 
@@ -265,6 +264,17 @@ public class Duke {
     }
 
     private static void saveData() {
+        try {
+            FileWriter writer = new FileWriter(dataFile);
+            StringBuilder str = new StringBuilder();
+            for (Task task: taskArray) {
+                str.append(task.toDataString()).append("\n");
+            }
+            writer.write(str.toString());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occured while saving your file.");
+        }
 
     }
 

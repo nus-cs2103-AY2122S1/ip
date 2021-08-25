@@ -32,4 +32,15 @@ public class Deadlines extends Task {
             return ("[D] [ ] " + name + " (by: " + deadline + ")");
         }
     }
+
+    public String toDataString() {
+        StringBuilder str = new StringBuilder();
+        if (isDone) {
+            str.append("D|1|").append(super.name).append("|").append(deadline);
+            return str.toString();
+        } else {
+            str.append("D|0|").append(super.name).append("|").append(deadline);
+            return str.toString();
+        }
+    }
 }
