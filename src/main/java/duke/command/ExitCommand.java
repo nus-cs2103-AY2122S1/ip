@@ -18,8 +18,17 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Storage storage) {
         this.message = ExitCommand.EXITING_MESSAGE;
+    }
+
+    /**
+     * Returns false because the duke program stops.
+     *
+     * @return Whether the program is running.
+     */
+    @Override
+    public boolean isRunning() {
         return false;
     }
 }

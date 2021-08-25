@@ -19,11 +19,9 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Updates the message to be printed.
-     *
-     * @return Whether the program is still running.
      */
     @Override
-    public boolean execute(TaskList taskList, Storage storage) throws InvalidTaskNoException {
+    public void execute(TaskList taskList, Storage storage) throws InvalidTaskNoException {
         try {
             this.task = taskList.get(this.taskIndex);
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
@@ -34,6 +32,5 @@ public class DeleteTaskCommand extends Command {
         this.message = String.format(
                 "Noted. I've removed this task:\n  %s\nNow you have %o tasks in the list.\n",
                 this.task, taskList.getNumOfTasks());
-        return true;
     }
 }

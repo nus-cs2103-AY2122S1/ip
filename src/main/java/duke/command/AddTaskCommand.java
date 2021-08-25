@@ -20,16 +20,13 @@ public class AddTaskCommand extends Command {
 
     /**
      * Adds a task into the list and updates the message to be printed.
-     *
-     * @return Whether the program is still running.
      */
     @Override
-    public boolean execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Storage storage) {
         taskList.addTask(this.task);
         storage.addToFile(this.task);
         this.message = String.format(
                 "Got it. I've added this task:\n  %s\nNow you have %o tasks in the list.\n",
                 this.task, taskList.getNumOfTasks());
-        return true;
     }
 }

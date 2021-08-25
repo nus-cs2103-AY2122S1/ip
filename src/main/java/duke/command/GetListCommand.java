@@ -17,15 +17,12 @@ public class GetListCommand extends Command {
 
     /**
      * Generates the message to be printed.
-     *
-     * @return Whether the program is still running.
      */
     @Override
-    public boolean execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Storage storage) {
         int len = taskList.getNumOfTasks();
         for (int i = 0; i < len; i++) {
             this.message += String.format("%o.%s\n", i + 1, taskList.get(i).toString());
         }
-        return true;
     }
 }

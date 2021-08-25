@@ -17,7 +17,7 @@ public class Duke {
     /** Storage that can write to or retrieve data from a file on hard disk */
     private Storage storage;
     /** List of tasks added */
-    private TaskList taskList;
+    private TaskList tasks;
     /** UI of the program */
     private Ui ui;
 
@@ -28,8 +28,8 @@ public class Duke {
      */
     public Duke(Path filePath) {
         this.ui = new Ui();
-        this.taskList = new TaskList();
-        this.storage = new Storage(filePath, this.taskList);
+        this.tasks = new TaskList();
+        this.storage = new Storage(filePath, this.tasks);
     }
 
     /**
@@ -43,8 +43,9 @@ public class Duke {
             Command command;
             try {
                 command = Parser.parse(commandString);
-                isRunning = command.execute(this.taskList, this.storage);
+                command.execute(this.tasks, this.storage);
                 this.ui.showCommandOutput(command);
+                isRunning = command.isRunning();
             } catch (DukeException dukeException) {
                 this.ui.showError(dukeException);
                 continue;

@@ -20,19 +20,16 @@ public class TaskDoneCommand extends Command {
 
     /**
      * Generates the message to be printed.
-     *
-     * @return Whether the program is still running.
      */
     @Override
-    public boolean execute(TaskList taskList, Storage storage) throws InvalidTaskNoException {
+    public void execute(TaskList taskList, Storage storage) throws InvalidTaskNoException {
         try {
             this.task = taskList.get(this.taskIndex);
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
             throw new InvalidTaskNoException();
         }
-        this.task.markAsDone();
+        this.task.setDone();
         storage.rewriteFile();
         this.message += String.format("  %s\n", this.task.toString());
-        return true;
     }
 }

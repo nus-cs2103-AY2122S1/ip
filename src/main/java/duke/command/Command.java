@@ -27,11 +27,17 @@ public abstract class Command {
 
     /**
      * Updates the message to be printed.
-     *
-     * @return Whether the program is still running.
      */
-    public boolean execute(TaskList taskList, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Storage storage) throws DukeException {
         this.message = this.content;
+    }
+
+    /**
+     * Returns whether the program is still running.
+     *
+     * @return Whether the program is running.
+     */
+    public boolean isRunning() {
         return true;
     }
 
