@@ -1,9 +1,11 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
-public class Event extends Task{
+public class Event extends Task {
     private final static String symbol = "[E]";
     private final LocalDateTime deadline;
 

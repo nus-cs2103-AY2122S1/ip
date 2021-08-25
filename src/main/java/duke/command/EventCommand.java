@@ -1,6 +1,22 @@
+package duke.command;
+
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Storage;
+
+import duke.exception.InvalidInputException;
+import duke.exception.NoActionException;
+import duke.exception.NoTimeException;
+import duke.exception.SaveFileException;
+
+import duke.util.Parser;
+
+import duke.task.Task;
+import duke.task.Event;
+
 import java.time.LocalDateTime;
 
-public class EventCommand extends Command{
+public class EventCommand extends Command {
     String action;
     public EventCommand(String action) {
         super(false);
@@ -9,9 +25,9 @@ public class EventCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException,
-                NoTimeException, NoActionException, SaveFileException{
+            NoTimeException, NoActionException, SaveFileException {
             if (action.trim().length() == 0) {
-                throw new NoActionException("Command 'event' requires a task action");
+                throw new NoActionException("duke.command.Command 'event' requires a task action");
             }
             String[] eventInputs = action.split("/at", 2);
             if (eventInputs.length <=1){

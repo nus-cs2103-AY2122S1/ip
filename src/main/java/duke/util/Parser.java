@@ -1,9 +1,14 @@
+package duke.util;
+
+import duke.command.*;
+import duke.exception.InvalidInputException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public final class Parser {
-    public static Command parse(String[] fullCommand) throws InvalidInputException{
+    public static Command parse(String[] fullCommand) throws InvalidInputException {
         String command = fullCommand[0];
         String action = fullCommand[1];
         switch (command) {
@@ -22,7 +27,7 @@ public final class Parser {
             case "delete":
                 return new DeleteCommand(action);
             default:
-                throw new InvalidInputException("This is an unknown command.");
+                throw new InvalidInputException("This is an unknown duke.command.");
         }
     }
 

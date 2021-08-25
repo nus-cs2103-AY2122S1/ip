@@ -1,6 +1,22 @@
+package duke.command;
+
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Storage;
+
+import duke.exception.InvalidInputException;
+import duke.exception.NoActionException;
+import duke.exception.NoTimeException;
+import duke.exception.SaveFileException;
+
+import duke.util.Parser;
+
+import duke.task.Task;
+import duke.task.Deadline;
+
 import java.time.LocalDateTime;
 
-public class DeadlineCommand extends Command{
+public class DeadlineCommand extends Command {
     String action;
     public DeadlineCommand(String action) {
         super(false);
@@ -12,7 +28,7 @@ public class DeadlineCommand extends Command{
             NoActionException, NoTimeException, SaveFileException {
         String[] deadlineInputs = action.split("/by", 2);
         if (deadlineInputs[0].length() == 0) {
-            throw new NoActionException("Command 'deadline' requires a task action");
+            throw new NoActionException("duke.command.Command 'deadline' requires a task action");
         }
         if (deadlineInputs.length <=1){
             throw new NoTimeException(

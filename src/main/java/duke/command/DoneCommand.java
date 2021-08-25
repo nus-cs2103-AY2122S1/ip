@@ -1,4 +1,17 @@
-public class DoneCommand extends Command{
+package duke.command;
+
+import duke.util.TaskList;
+import duke.util.Ui;
+import duke.util.Storage;
+
+import duke.exception.InvalidInputException;
+import duke.exception.SaveFileException;
+import duke.exception.TaskNotFoundException;
+import duke.exception.TaskCompletedException;
+
+import duke.task.Task;
+
+public class DoneCommand extends Command {
     String action;
     public DoneCommand(String action) {
         super(false);
@@ -7,7 +20,7 @@ public class DoneCommand extends Command{
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws TaskNotFoundException,
-            InvalidInputException, TaskCompletedException, SaveFileException{
+            InvalidInputException, TaskCompletedException, SaveFileException {
         try {
             int taskNumber = Integer.parseInt(action);
             if (taskNumber <= tasks.size() && taskNumber > 0) {
