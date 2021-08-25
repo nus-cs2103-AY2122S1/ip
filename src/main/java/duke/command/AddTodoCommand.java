@@ -13,8 +13,9 @@ import java.util.regex.Pattern;
  * adds a single todo.
  */
 public class AddTodoCommand extends Command {
-
-    // Regex pattern for finding todo commands
+    /**
+     * Regex pattern for finding todo commands
+     */
     private static final Pattern PATTERN_TODO = Pattern.compile("^todo (.*)$");
 
     public AddTodoCommand(String input) {

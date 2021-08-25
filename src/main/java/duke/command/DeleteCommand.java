@@ -13,7 +13,9 @@ import java.util.regex.Pattern;
  * deletes a single task.
  */
 public class DeleteCommand extends Command {
-    // Regex pattern for finding delete commands
+    /**
+     * Regex pattern for finding todo commands
+     */
     private static final Pattern PATTERN_DELETE = Pattern.compile("^delete (\\d*)$");
 
     public DeleteCommand(String input) {

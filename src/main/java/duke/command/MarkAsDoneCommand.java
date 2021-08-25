@@ -13,8 +13,9 @@ import java.util.regex.Pattern;
  * marks a single task as done.
  */
 public class MarkAsDoneCommand extends Command {
-
-    // Regex pattern for finding done commands
+    /**
+     * Regex pattern for finding done commands
+     */
     private static final Pattern PATTERN_DONE = Pattern.compile("^done (\\d*)$");
 
     public MarkAsDoneCommand(String input) {
