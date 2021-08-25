@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 public class TaskStub extends Task {
 
+    private boolean isDone;
+
     public TaskStub(String description, boolean isDone, LocalDate localDate) {
         super(description, isDone, localDate);
     }
@@ -26,7 +28,7 @@ public class TaskStub extends Task {
 
     @Override
     public void taskDone() {
-        super.isDone = true;
+        this.isDone = true;
     }
 
     @Override
