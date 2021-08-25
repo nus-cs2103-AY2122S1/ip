@@ -10,7 +10,15 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    public static int getTaskNumber(String keyword, String task) {
+    /**
+     * Returns the task number (as indexed in the task list)
+     * of the task to be deleted or marked as done.
+     *
+     * @param keyword indicates if the task is to be deleted or marked as done.
+     * @param task task to be deleted or marked as done (required).
+     * @return index of the required task in the task list.
+     */
+    private static int getTaskNumber(String keyword, String task) {
         int idx = 0;
         for (int i = task.length() - 1; i > keyword.length(); i--) {
             idx+= (task.charAt(i) - 48) * Math.pow(10, task.length() - 1 - i);
@@ -18,6 +26,15 @@ public class Parser {
         return idx - 1;
     }
 
+    /**
+     * Returns the index of the task to be deleted or marked as done
+     * in case it is valid, else throws a BlitzException.
+     *
+     * @param command command entered by the user.
+     * @param listSize current size of the task list.
+     * @return index of the required task in the task list if valid.
+     * @throws BlitzException if the computed index is invalid.
+     */
     public static int getIndex(String command, int listSize) throws BlitzException {
         String keyword = command.substring(0, command.indexOf(' '));
         int index = getTaskNumber(keyword,command);
@@ -29,6 +46,17 @@ public class Parser {
         return index;
     }
 
+    /**
+     * Makes sense of the user command and performs the
+     * required action.
+     *
+     * @param command command entered by the user.
+     * @param tasks current list of tasks
+     * @param ui current user interface instance
+     * @throws BlitzException if the command description is missing, or
+     *     if a request to print an empty list is made or if the user enters
+     *     an invalid command.
+     */
     public static void parse(String command, TaskList tasks, Ui ui) throws BlitzException{
         String[] keywords = command.split(" ");
 
