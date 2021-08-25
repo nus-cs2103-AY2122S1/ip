@@ -1,5 +1,8 @@
 package jared.common;
 
+/**
+ * Container for user visible messages.
+ */
 public class Message {
     public static final String MESSAGE_WELCOME = "____________________________________________________________\n"
             + "Hello! I'm Jared\n"

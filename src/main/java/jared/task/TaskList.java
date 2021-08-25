@@ -8,6 +8,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Deals with tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private Storage storage;
@@ -17,6 +20,12 @@ public class TaskList {
         this.storage = storage;
     }
 
+    /**
+     * Adds a task to the list.
+     * @param command User input string command.
+     * @param next Full user input string.
+     * @throws DukeException If user input command is invalid.
+     */
     public void add(String command, String next) throws DukeException {
         Task newTask;
         String desc;
@@ -89,6 +98,9 @@ public class TaskList {
         );
     }
 
+    /**
+     * Lists the tasks.
+     */
     public void list() {
         String res = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
@@ -98,6 +110,11 @@ public class TaskList {
         System.out.println(res);
     }
 
+    /**
+     * Marks the specified task as done.
+     * @param next Full user input string.
+     * @throws DukeException If task is invalid.
+     */
     public void done(String next) throws DukeException {
         int taskNum;
         Task currTask;
@@ -115,10 +132,10 @@ public class TaskList {
     }
 
     /**
-     * @param next String entered by the user.
-     * @throws DukeException
+     * Deletes task from list.
+     * @param next Full user input string.
+     * @throws DukeException If task is invalid.
      */
-
     public void delete(String next) throws DukeException {
         int taskNum;
         Task currTask;

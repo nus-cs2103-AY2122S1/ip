@@ -1,5 +1,8 @@
 package jared.task;
 
+/**
+ * Represents a task.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -17,11 +20,19 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Converts to string for printing list.
+     * @return String of task details.
+     */
     @Override
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 
+    /**
+     * Converts to string for saving in data.
+     * @return String of task details in save format.
+     */
     public String saveFormat() {
         return String.format("%d _ %s", this.isDone ? 1 : 0, this.description);
     }

@@ -15,12 +15,21 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with data from the file.
+ */
 public class Storage {
     private final String fileName;
 
     public Storage(String fileName) {
         this.fileName = fileName;
     }
+
+    /**
+     * Loads data from the file.
+     * @return List of tasks from the file.
+     * @throws DukeException if file cannot be processed.
+     */
     public ArrayList<Task> loadData() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(fileName);
@@ -79,6 +88,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves data to the file.
+     * @param tasks List of tasks to be saved to the file.
+     */
     public void saveData(ArrayList<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(fileName);
