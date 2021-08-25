@@ -13,7 +13,7 @@ public class Storage {
     private static final String FILE_NAME = "./data/tasks.txt";
     private static final File file = new File(FILE_NAME);
 
-    public static ArrayList<Task> loadTasks() throws DukeException {
+    public ArrayList<Task> loadTasks() throws DukeException {
         try {
             Scanner sc = new Scanner(file);
             ArrayList<Task> loadedTasks = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Storage {
         }
     }
 
-    public static void writeToFile(Task task) throws DukeException {
+    public void writeToFile(Task task) throws DukeException {
         if (!file.exists()) {
             newFile();
         }
@@ -84,5 +84,4 @@ public class Storage {
         }
         return task;
     }
-    
 }

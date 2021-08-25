@@ -3,7 +3,6 @@ package duke;
 import duke.util.*;
 import duke.command.*;
 import duke.exception.*;
-import duke.task.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,9 +25,9 @@ public class Duke {
             taskHandler = new TaskHandler(storage.loadTasks());
         } catch (DukeException e) {
             ui.prettify(e.getMessage());
-            taskHandler = new TaskHandler(new ArrayList<Task>());
+            taskHandler = new TaskHandler(new ArrayList<>());
         } finally {
-            parser = new Parser(taskHandler, storage);
+            parser = new Parser();
         }
     }
 
@@ -45,7 +44,8 @@ public class Duke {
             try {
                 ui.prompt();
                 String input = sc.nextLine();
-                Command c = parser.parse(input);
+                Command c = parser.parseRawInput(input);
+                c.execute(taskHandler, storage, ui);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.prettify(e.getMessage());
@@ -53,8 +53,8 @@ public class Duke {
         }
     }
 
-        public static void main (String[]args){
-            Duke duke = new Duke();
-            duke.start();
-        }
+    public static void main (String[] args) {
+        Duke duke = new Duke();
+        duke.start();
     }
+}

@@ -7,8 +7,6 @@ public class Ui {
     private static final String EXIT_MESSAGE = "Goodbyeeee! Hope to see you again soon! :>";
     private static final String SEPARATOR = "\t-------------------------------------------------------";
     private static final String INPUT_PROMPT = "Enter a command *_*";
-    private static final String TASK_LIST = "Here are the task(s) in your list! n_n\n\t";
-    private static final String NO_TASKS_FOUND = "Nothing in the list... :( Type todo/event/deadline to add something first! :^)";
 
     /**
      * Formats the input and prints it in a formatted version.
@@ -20,7 +18,7 @@ public class Ui {
     }
 
     /** Prints introduction message when bot is first launched. **/
-    public static void printIntroMessage() {
+    public void printIntroMessage() {
         prettify(
                 "Hello! I'm Duke, your personal CLI bot! :D\n\t"
                         + "I function as a simple TodoList.\n\t"
@@ -38,28 +36,11 @@ public class Ui {
 
     }
 
-    public static void printExitMessage() {
+    public void printExitMessage() {
         prettify(EXIT_MESSAGE);
     }
 
-    public static void printTaskList(ArrayList<Task> taskList) {
-        StringBuilder allTasks = new StringBuilder(TASK_LIST);
-        if (taskList.size() == 0) {
-            prettify(NO_TASKS_FOUND);
-        } else {
-            for (int i  = 0; i < taskList.size(); i++) {
-                int taskNumber =  i + 1;
-                String taskName = taskList.get(i).toString();
-                allTasks.append(String.format("\t%d. %s\n\t", taskNumber, taskName));
-            }
-            prettify(allTasks.toString());
-        }
-    }
-
-    public static void prompt() {
+    public void prompt() {
         prettify(INPUT_PROMPT);
     }
-
-
-
 }
