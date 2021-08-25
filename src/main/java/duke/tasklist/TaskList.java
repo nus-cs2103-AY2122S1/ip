@@ -46,4 +46,13 @@ public class TaskList {
         taskList.remove(index);
     }
 
+    public ArrayList<String> search(String word) {
+        ArrayList<String> wordList = new ArrayList<String>();
+        for (Task t : taskList) {
+            if (t.toString().contains(word)) {
+                wordList.add(t.toString());
+            }
+        }
+        return wordList;
+    }
 }

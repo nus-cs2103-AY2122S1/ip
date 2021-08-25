@@ -29,7 +29,6 @@ public class Duke {
         String command; // this is the container for the full command received from the user
         String cmd; // this is the container for the first word of the command
 
-
         ///// This listens for the commands and interprets them
         // This part listens for user input and repeats until the command "bye" is identified
         Scanner sc = new Scanner(System.in);
@@ -71,11 +70,15 @@ public class Duke {
 
                 // 'delete [int]' : delete the corresponding number
             } else if (cmd.equals("delete")) {
-
                 int ref = parser.getSecondInteger(taskList.size()) - 1;
                 ui.showRemoval(taskList.get(ref).toString(), taskList.size() - 1);
                 taskList.remove(ref);
                 storage.removeTask(ref);
+                ui.showLine();
+
+            } else if (cmd.equals("find")) {
+                String wordSearch = parser.getSecondWord();
+                ui.showSearch(taskList.search(wordSearch));
                 ui.showLine();
 
 
