@@ -33,7 +33,7 @@ public class ParserTest {
 
         String inputList = "list";
         String inputDone = "done 1";
-        String inputFind = "find 2021-11-23";
+        String inputFind = "find/date 2021-11-23";
         String inputDelete = "delete 1";
         String inputTodo = "todo party";
         String inputDeadline = "deadline party /by 2021-11-23";

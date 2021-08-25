@@ -107,6 +107,15 @@ Here are the deadlines and events that match the date Sir/Mdm:
 2. [E][ ] exam (at: 23 November 2021 to 25 November 2021)
 3. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
 
+Here are the results of the search Sir/Mdm:
+1. [T][ ] feed momo
+
+Here are the results of the search Sir/Mdm:
+1. [E][ ] test (at: 23 November 2021 16:00 to 25 November 2021 17:00)
+
+Here are the results of the search Sir/Mdm:
+
+
 Here are your tasks Sir/Mdm:
 1. [T][ ] check email
 2. [T][ ] feed momo
