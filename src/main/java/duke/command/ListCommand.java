@@ -6,7 +6,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * This class used to print all tasks.
+ * This class is used to list all tasks.
  */
 public class ListCommand implements Command {
 
@@ -18,14 +18,14 @@ public class ListCommand implements Command {
      * @throws DukeException thrown if there are input/parsing errors
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.printAll(taskList.getTasks(), "Here are the tasks in your list:");
     }
 
     /**
      * Method to determine if Duke should stop running.
      *
-     * @return true as this is an exit command
+     * @return false as this is not an exit command
      */
     @Override
     public boolean isExit() {

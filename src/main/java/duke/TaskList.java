@@ -4,6 +4,9 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * This class manages all current tasks
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;

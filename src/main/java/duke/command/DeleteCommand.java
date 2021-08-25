@@ -33,14 +33,14 @@ public class DeleteCommand implements  Command {
             String t = taskList.removeTask(i);
             ui.echo("Noted. I removed this task: " + t);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Oops! Enter a valid duke.task no. to delete the duke.task.");
+            throw new DukeException("Oops! Enter a valid task no. to delete the task.");
         }
     }
 
     /**
      * Method to determine if Duke should stop running.
      *
-     * @return true as this is an exit command
+     * @return false as this is not an exit command
      */
     @Override
     public boolean isExit() {

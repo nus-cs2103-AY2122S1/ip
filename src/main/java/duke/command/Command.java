@@ -23,7 +23,7 @@ public interface Command {
     /**
      * Method to determine if Duke should stop running.
      *
-     * @return A boolean true if the command is an exit command and false otherwise
+     * @return true if the command is an exit command and false otherwise
      */
     boolean isExit();
 }

@@ -13,7 +13,7 @@ public class DoneCommand implements  Command {
 
     /**
      *
-     * @param no A string to be parsed to task number.
+     * @param no A string to be parsed to task number
      */
     public DoneCommand(String no) {
         this.number = no;
@@ -33,14 +33,14 @@ public class DoneCommand implements  Command {
             String t = taskList.markDone(i);
             ui.echo("Nice! I marked this task as completed: " + t);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException("Oops! Enter a valid duke.task no. to complete the duke.task.");
+            throw new DukeException("Oops! Enter a valid task no. to complete the task.");
         }
     }
 
     /**
      * Method to determine if Duke should stop running.
      *
-     * @return true as this is an exit command
+     * @return false as this is not an exit command
      */
     @Override
     public boolean isExit() {

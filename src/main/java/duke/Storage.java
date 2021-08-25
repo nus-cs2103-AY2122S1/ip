@@ -20,19 +20,33 @@ import java.util.Scanner;
 public class Storage {
 
     private static String filePath = "data/list.txt";
+    private Ui ui;
+
+    public Storage() {
+        this.ui = new Ui();
+    }
 
     /**
      *
      * @param tasks List of tasks to be saved to disk
      */
     public void save(ArrayList<Task> tasks) {
-        FileWriter w, fw;
+        FileWriter w;
+        File f = new File(filePath);
+
+        if (!f.getParentFile().exists()) {
+            f.getParentFile().mkdir();
+        } if (!f.exists()) {
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                ui.echo("Error writing tasks to file: " + e.getLocalizedMessage());
+            }
+        }
+
         try {
             w = new FileWriter(filePath);
             w.write("");
-            w.close();
-
-            fw = new FileWriter(filePath);
             for(int i = 0; i < tasks.size(); i++) {
                 Task t = tasks.get(i);
                 String taskDesc = t.getType() + (t.isDone() ? " | 1 | " : " | 0 | ") + t.getDetail();
@@ -43,11 +57,11 @@ public class Storage {
                     Event e = ((Event) t);
                     taskDesc += " | " + e.getTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
                 }
-                fw.write(taskDesc + "\n");
+                w.write(taskDesc + "\n");
             }
-            fw.close();
+            w.close();
         } catch (IOException e) {
-            System.out.println("Error writing to file : "+ e.getLocalizedMessage());
+            ui.echo("Error writing to file : " + e.getLocalizedMessage());
         }
     }
 
@@ -73,7 +87,6 @@ public class Storage {
             Scanner sc = new Scanner(f);
             while(sc.hasNextLine()) {
                 Task newTask = null;
-                //should not have errors if saved in correct format
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 String[] t = sc.nextLine().split("\\|", 4);
                 if (t[0].contains("T")) {
@@ -93,7 +106,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw  new DukeException("File not found : "+ e.getLocalizedMessage());
+            throw new DukeException("File not found : " + e.getLocalizedMessage());
         }
         return list;
     }
