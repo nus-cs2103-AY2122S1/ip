@@ -1,4 +1,4 @@
-public class DukeNoTaskFoundException extends DukeException{
+public class DukeNoTaskFoundException extends DukeException {
     private int taskNum;
 
     public DukeNoTaskFoundException(int taskNum) {

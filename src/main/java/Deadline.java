@@ -6,6 +6,11 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    @Override
+    public String stringifyTask() {
+        return String.format("D|%d|%s|%s", this.isDone ? 1 : 0, this.description, this.time);
+    }
+
 
     @Override
     public String toString() {

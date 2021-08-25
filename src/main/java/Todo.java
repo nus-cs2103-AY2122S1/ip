@@ -3,6 +3,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    @Override
+    public String stringifyTask() {
+        return String.format("T|%d|%s", this.isDone ? 1 : 0, this.description);
+    }
 
     @Override
     public String toString() {

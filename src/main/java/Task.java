@@ -1,6 +1,6 @@
 public abstract class Task {
-    private String description;
-    private boolean isDone;
+    protected String description;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -16,6 +16,9 @@ public abstract class Task {
     private String getStatus() {
         return this.isDone ? "X" : " ";
     }
+
+
+    public abstract String stringifyTask();
 
 
     @Override
