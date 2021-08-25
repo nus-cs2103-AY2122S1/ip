@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 public class Duke {
 
-    /** Default line separator designs. */
-    private static String sepLine = "===========================================";
-    private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
-    private static String sepLineClose = "\\\\\\<<<===================================>>>///";
+//    /** Default line separator designs. */
+//    private static String sepLine = "===========================================";
+//    private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
+//    private static String sepLineClose = "\\\\\\<<<===================================>>>///";
 
     /** Tracks whether the exit command was used. */
     private boolean isExited;
@@ -23,12 +23,12 @@ public class Duke {
 
     private DukeCommandParser currDukeCmdParser;
     private DukeStorageManager currStorageMgr;
-    private DukeUI currUiCtrl;
+    private DukeUi currUiCtrl;
     private TDList currTDL;
 
     private Duke() {
         this.currTDL = new TDList();
-        this.currUiCtrl = new DukeUI();
+        this.currUiCtrl = new DukeUi();
         this.currDukeCmdParser = new DukeCommandParser();
         this.isExited = false;
 
@@ -66,28 +66,12 @@ public class Duke {
         Duke currDuke = getCurrDuke();
 
         // Show Welcome Message
+        currDuke.currUiCtrl.printWelcomeMessage();
 
         // Start accepting input
         currDuke.runInputLoopMain();
     }
-        //Initialize variables
-//        currTDL = new TDList();
-//        isExited = false;
-//
-//
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-//        System.out.println("Give me something to do!");
-//
-//        System.out.println(sepLine);
-//
-//        runInputLoopMain();
-//    }
-//
+
     /**
      * The main loop used when detecting keyboard input.
      * Stops when "bye" is detected.
@@ -156,10 +140,22 @@ public class Duke {
      * @param printThis The message to print inside Duke's text bubble
      */
     public static void dukeSays(String printThis) {
-        System.out.println("");
-        System.out.println(sepLineOpen);
-        System.out.println(printThis);
-        System.out.println(sepLineClose);
+        Duke currDuke = Duke.getCurrDuke();
+
+        // Updated to work with new UI Controller which contains a buffer
+        currDuke.currUiCtrl.addToDukeBuffer(printThis);
+        currDuke.currUiCtrl.dukeBufferRelease();
+    }
+
+    /**
+     * Used to add something that Duke will say later into it's UI buffer.
+     *
+     * @param printLater The message that Duke will say when the buffer is released.
+     */
+    public static void dukeLaterSay(String printLater) {
+        Duke currDuke = Duke.getCurrDuke();
+
+        currDuke.currUiCtrl.addToDukeBuffer(printLater);
     }
 
     private void unknownCommandEntered() throws DukeExceptionBase {
