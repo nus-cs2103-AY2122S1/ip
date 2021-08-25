@@ -16,7 +16,7 @@ public class Storage {
             File f = new File(filePath);
             if (!f.exists()) {
                 File dir = new File("./data");
-                if(dir.mkdir() && f.createNewFile()) {
+                if (dir.mkdir() && f.createNewFile()) {
                     return f;
                 }
             }

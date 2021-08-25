@@ -34,33 +34,33 @@ public class TaskList {
         String taskType = taskDetails[0];
         boolean done = taskDetails[1].equals("1");
         switch (taskType) {
-            case "T":
-                return new Todo(done, taskDetails[2]);
-            case "E": {
-                String info = taskDetails[3];
-                return new Event(done, taskDetails[2], LocalDateTime.parse(info));
-            }
-            case "D": {
-                String info = taskDetails[3];
-                return new Deadline(done, taskDetails[2], LocalDateTime.parse(info));
-            }
-            default:
-                return null;
+        case "T":
+            return new Todo(done, taskDetails[2]);
+        case "E": {
+            String info = taskDetails[3];
+            return new Event(done, taskDetails[2], LocalDateTime.parse(info));
+        }
+        case "D": {
+            String info = taskDetails[3];
+            return new Deadline(done, taskDetails[2], LocalDateTime.parse(info));
+        }
+        default:
+            return null;
         }
     }
 
     public String list() {
         StringBuilder result = new StringBuilder();
-        for(int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             result.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
         }
         return result.toString();
     }
 
     public Task markAsDone(int taskNumber) {
-            Task task = tasks.get(taskNumber - 1);
-            task.markAsDone();
-            return task;
+        Task task = tasks.get(taskNumber - 1);
+        task.markAsDone();
+        return task;
     }
 
     public void addTask(Task task) {
