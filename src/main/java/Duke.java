@@ -1,25 +1,25 @@
-import java.nio.file.Files;
-import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.IOException;
-import java.util.stream.Collectors;
+
 
 public class Duke {
-    private static ArrayList<Task> todoList = new ArrayList<>();
 
+    private static Storage storage;
+    
+    private static ArrayList<Task> todoList;
+    
     private enum TaskType {
         TODO,
         DEADLINE,
         EVENT
     }
     
-    private static final java.nio.file.Path dataPath = java.nio.file.Paths.get("data", "dukeData.txt"); // ~/data/dukeData.txt
-
     public static void main(String[] args) {
+        
         try {
-            initDatabase();
-            loadDatabaseToList();
+            String filePath = "data/tasks.txt";
+            storage = new Storage(filePath);
+            todoList = storage.load();
         } catch (DukeException e) {
             System.out.println(e.toString());
             return;
@@ -83,58 +83,6 @@ public class Duke {
         }
     }
     
-    /** Creates a data file */
-    private static void initDatabase() throws DukeException {
-        try {
-            Files.createDirectories(dataPath.getParent());
-            if (!java.nio.file.Files.exists(dataPath)) {
-                java.nio.file.Files.createFile(dataPath);
-            }
-        } catch (IOException e) {
-            throw new DukeException("Could not initialise database. " + e.getMessage());
-        }
-    }
-
-    /** Writes over data file to save current todoList contents */
-    private static void writeListToDatabase() throws DukeException {
-        try {
-            // task saved as e.g. E|0|meeting|2pm
-            List<String> dataStrings = todoList.stream().map(task -> task.toDataString("|")).collect(Collectors.toList());
-            Files.write(dataPath, dataStrings);
-        } catch (IOException e) {
-            throw new DukeException("Could not save list to database. " + e.getMessage());
-        }
-    }
-
-    /** Loads database into todoList */
-    private static void loadDatabaseToList() throws DukeException {
-        try {
-            List<String> dataList = Files.lines(dataPath).collect(Collectors.toList());
-            for (String line : dataList) {
-                String[] details = line.split("\\|",4);
-                String tag = details[0];
-                Boolean done = details[1].equals("1"); 
-                Task task;
-                if (tag.equals("T")) {
-                    task = new ToDo(details[2]);
-                } else if (tag.equals("D")) {
-                    task = new Deadline(details[2], details[3]);
-                } else if (tag.equals("E")) {
-                    task = new Event(details[2], details[3]);
-                } else {
-                    throw new DukeException("Unknown tag '" + tag + "'.");
-                }
-                if (done) {
-                    task.markAsDone();
-                }
-                todoList.add(task);
-            }
-        } catch (IOException | DukeException e) {
-            throw new DukeException("Could not load database into todo list. " + e.getMessage());
-        }
-    }
-
-
     /** Prints the to-do list in order */
     private static void displayList() {
         System.out.println("Your task list:");
@@ -179,7 +127,7 @@ public class Duke {
         System.out.println(task.toString());
         System.out.println("Now you have " + todoList.size() + " tasks in the list.");
         
-        writeListToDatabase();
+        storage.save(todoList);
     }
 
     /** Mark a task with given task number as done */
@@ -189,7 +137,7 @@ public class Duke {
         System.out.println("Good work! I've marked this task as done:");
         System.out.println(task.toString());
 
-        writeListToDatabase();
+        storage.save(todoList);
     }
 
     /** Delete a task with given task number */
@@ -199,7 +147,7 @@ public class Duke {
         System.out.println(task.toString());
         System.out.println("Now you have " + todoList.size() + " tasks in the list.");
 
-        writeListToDatabase();
+        storage.save(todoList);
     }
 
     /** checks if input is a valid task number and returns task number if valid */
