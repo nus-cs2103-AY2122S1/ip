@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    public final File file;
+    private final File file;
 
     /**
      * Pubic constructor for storage class that takes in a file to write data to
