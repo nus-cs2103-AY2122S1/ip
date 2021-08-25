@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeException extends Exception {
     DukeException() {
         super("todo/event/delete cannot be empty");

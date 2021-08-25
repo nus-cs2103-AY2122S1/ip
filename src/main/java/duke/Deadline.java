@@ -1,23 +1,21 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Deadline extends Task {
     protected String description;
     protected boolean isDone;
-    final String EVENT = "[E]";
+    final String DEADLINE = "[D]";
     protected String dateAndTime;
     protected LocalDateTime localDateTime;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
-    public Event(String description, String dateAndTime) {
+    public Deadline(String description, String dateAndTime) {
         super(description);
         this.description = description;
         this.isDone = false;
         this.dateAndTime = dateAndTime;
-    }
-
-    public String getDate() {
-        return this.dateAndTime;
     }
 
     public void formatLocalDateTime() {
@@ -29,9 +27,14 @@ public class Event extends Task{
         }
     }
 
+    public String getDate() {
+        return this.dateAndTime;
+    }
+
     @Override
     public String toString() {
         formatLocalDateTime();
-        return EVENT + this.getStatusIcon() + " " + this.getDescription() + " (at: " + localDateTime.format(dtf) + ")";
+        return DEADLINE + this.getStatusIcon() + " " + this.getDescription() + " (by: " + localDateTime.format(dtf) + ")";
     }
+
 }
