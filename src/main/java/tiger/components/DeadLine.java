@@ -11,21 +11,6 @@ public class DeadLine extends Task {
     /** Date deadline is due by. */
     private final CustomDate date;
 
-    /**
-     * Private constructor for {@code DeadLine} class.
-     *
-     * @param taskDescription description of Task.
-     * @param done whether the Task is done.
-     * @param customDate A {@code CustomDate object}.
-     * @throws TigerDateParsingException if the input date is invalid.
-     */
-
-    public DeadLine(String taskDescription, boolean done, CustomDate customDate) {
-        super(taskDescription, done);
-        this.date = customDate;
-        this.priority = Priority.MEDIUM;
-    }
-
     public DeadLine(String taskDescription, boolean done, CustomDate customDate, Priority priority) {
         super(taskDescription, done);
         this.date = customDate;
@@ -38,7 +23,7 @@ public class DeadLine extends Task {
 
     @Override
     public DeadLine markDone() {
-        return new DeadLine(this.taskDescription, true, this.date);
+        return new DeadLine(this.taskDescription, true, this.date, this.priority);
     }
 
     /**

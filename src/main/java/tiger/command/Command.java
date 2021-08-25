@@ -82,10 +82,13 @@ public class Command {
             ToDoParser toDoCommand = new ToDoParser(command);
             toDoCommand.parse();
             return new ToDoAction(applicationState, toDoCommand.getTodo(), toDoCommand.getPriority());
+        case "dateline":
+            // Fallthrough;
         case "deadline":
             DeadLineParser deadLineCommand = new DeadLineParser(command);
             deadLineCommand.parse();
-            return new DeadLineAction(applicationState, deadLineCommand.getTodo(), deadLineCommand.getDate());
+            return new DeadLineAction(applicationState, deadLineCommand.getTodo(), deadLineCommand.getDate(),
+                    deadLineCommand.getPriority());
         case "event":
             EventParser eventCommand = new EventParser(command);
             eventCommand.parse();

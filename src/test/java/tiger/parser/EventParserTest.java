@@ -157,7 +157,7 @@ public class EventParserTest {
     }
 
     @Test
-    public void toDoParser_invalidPriorityArgument_failure() {
+    public void eventParser_invalidPriorityArgument_failure() {
         TigerException thrown = assertThrows(TigerInvalidArgumentException.class, () -> {
             new EventParser("event fa fa /at  /priority S").parse();
         });

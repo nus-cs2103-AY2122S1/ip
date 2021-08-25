@@ -77,7 +77,7 @@ public class Event extends Task {
             // check that the event timing is non-empty
             assert (!stringArray[3].equals(""));
             assert (stringArray[4].equals("L") || stringArray[4].equals("M") || stringArray[4].equals("H"));
-            Priority p = Priority.getPriorityFromLetter(stringArray[3]);
+            Priority p = Priority.getPriorityFromLetter(stringArray[4]);
             if (stringArray[1].equals("true")) {
                 // task description, done, timing
                 return new Event(stringArray[2], true, dateStringConverter.getDateFromString(stringArray[3]), p);
