@@ -15,10 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * <h2>Storage</h2>
+ * A class that helps read previous task logs from local memory and write to that task log based on user input.
+ */
+
 public class Storage {
     
     private final String filePath;
-    
+
+    /**
+     * Creates a link to a locally saved task log or creates a new file for future logging of tasks.
+     * @param filePath the path to the file to read from and write to or location to create the new file if it does not
+     *                exist.
+     * @throws IOException if file does not exist and cannot be created.
+     */
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
         // try to load the file, if not, create it
@@ -32,7 +43,13 @@ public class Storage {
                     + "\nTask log will be saved there.");
         }
     }
-    
+
+    /**
+     * Parses the locally saved task log from the file path provided and generates a list of tasks to import.
+     * @return a list of tasks generated from parsing the locally saved task log.
+     * @throws FileNotFoundException if the stipulated file can neither be read from (e.g. does not exist) nor
+     * be created.
+     */
     public List<Task> loadPreviousTasks() throws FileNotFoundException {
         List<Task> prevTasks = new ArrayList<Task>();
         Scanner s = new Scanner(new File(this.filePath));

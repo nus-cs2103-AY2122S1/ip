@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * <h2>TaskList</h2>
+ * Organises all tasks created by the user.
+ * Handles details from the {@link duke.utility.Parser} class and adds, modifies, or deletes tasks accordingly.
+ */
+
 public class TaskList {
 
     private final List<Task> tasks;
@@ -26,7 +32,7 @@ public class TaskList {
         }
     }
     
-    String add(Task task) {
+    String add(Task task) { //TODO refactor: add task from here not from parser
         this.tasks.add(task);
         this.existingTasks.add(task.getTaskName());
         return String.format("New duke.task added to list:\n%s", task);
@@ -67,6 +73,11 @@ public class TaskList {
         return "Task marked as completed:\n" + this.tasks.get(taskIdx).toString();
     }
 
+    /**
+     * Aggregates all the tasks in the list and presents it neatly to output to the user.
+     * @return all the tasks currently in the list as a <code>String</code> representation.
+     * @throws DukeException.EmptyTaskListException if the taskList currently contains no tasks.
+     */
     public String getAllTasks() throws DukeException.EmptyTaskListException {
         StringBuilder sb = new StringBuilder();
         if (this.tasks.size() == 0) {
