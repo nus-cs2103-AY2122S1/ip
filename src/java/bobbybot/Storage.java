@@ -17,6 +17,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Load files from .txt file
+     * @return List of tasks
+     * @throws FileNotFoundException
+     */
     public List<Task> load() throws FileNotFoundException {
         System.out.println("loading from db....");
         File f = new File(filePath);

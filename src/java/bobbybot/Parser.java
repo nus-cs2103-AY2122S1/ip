@@ -86,7 +86,7 @@ public class Parser {
      * @param str string to test if numeric
      * @return boolean
      */
-    public static boolean isNumeric(String str) {
+    private static boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");
     }
 }
