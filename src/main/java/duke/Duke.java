@@ -24,10 +24,10 @@ public class Duke {
     private DukeCommandParser currDukeCmdParser;
     private DukeStorageManager currStorageMgr;
     private DukeUi currUiCtrl;
-    private DukeListMgr currTDL;
+    private DukeListMgr currDukeList;
 
     private Duke() {
-        this.currTDL = new DukeListMgr();
+        this.currDukeList = new DukeListMgr();
         this.currUiCtrl = new DukeUi();
         this.currDukeCmdParser = new DukeCommandParser();
         this.isExited = false;
@@ -56,6 +56,32 @@ public class Duke {
         return dukeInstance;
     }
 
+    /**
+     * Getter for Duke's Command Parser.
+     *
+     * @return the current Duke Command Parser.
+     */
+    public DukeCommandParser getCurrDukeCmdParser() {
+        return this.currDukeCmdParser;
+    }
+
+    /**
+     * Getter for Duke's Storage Manager.
+     *
+     * @return the current Duke Storage Manager.
+     */
+    public DukeStorageManager getCurrStorageMgr() {
+        return this.currStorageMgr;
+    }
+
+    /**
+     * Getter for Duke's current list manager.
+     *
+     * @return the current list manager.
+     */
+    public DukeListMgr getCurrListMgr() {
+        return this.currDukeList;
+    }
 
 
 
@@ -163,12 +189,12 @@ public class Duke {
     }
 
     private void addToTDL(String str, BaseTask.TaskType currTaskType) throws DukeExceptionBase {
-        this.currTDL.tdlAdd(str, currTaskType);
+        this.currDukeList.tdlAdd(str, currTaskType);
     }
 
 
     private void listOutTDL() {
-        this.currTDL.printOutWholeList();
+        this.currDukeList.printOutWholeList();
     }
 
     private void markItemDoneInTDL(String command) throws DukeExceptionBase {
@@ -184,7 +210,7 @@ public class Duke {
             throw new DukeExceptionBase("Please enter an integer.");
 
         }
-        String dukeOutput = this.currTDL.markTaskAsDone(taskNo);
+        String dukeOutput = this.currDukeList.markTaskAsDone(taskNo);
         dukeSays(dukeOutput);
     }
 
@@ -201,7 +227,7 @@ public class Duke {
             throw new DukeExceptionBase("Please enter an integer.");
 
         }
-        String dukeOutput = this.currTDL.deleteTask(taskNo);
+        String dukeOutput = this.currDukeList.deleteTask(taskNo);
         dukeSays(dukeOutput);
     }
 
