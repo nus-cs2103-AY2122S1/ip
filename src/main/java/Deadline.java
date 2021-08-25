@@ -24,7 +24,7 @@ public class Deadline extends Task {
     }
     
     private String getDateString() {
-        return by.format(DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm a"));
+        return by.format(DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm a")).replace("AM", "am").replace("PM","pm");
     }
 
     @Override
