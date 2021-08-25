@@ -12,14 +12,14 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
-    public Deadline(String description, String by, boolean done) {
+    public Deadline(String description, String by, boolean done) throws DateTimeParseException {
         super(description, done);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     @Override
     public String serialize() {
-        return String.join(" | ", "D", this.done ? "1" : "0", this.description, this.by);
+        return String.join(" | ", "D", this.done ? "1" : "0", this.description, this.by.toString());
     }
 
     @Override

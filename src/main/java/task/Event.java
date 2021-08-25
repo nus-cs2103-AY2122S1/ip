@@ -12,14 +12,14 @@ public class Event extends Task {
         this.at = LocalDate.parse(at);
     }
 
-    public Event(String description, String at, boolean done) {
+    public Event(String description, String at, boolean done) throws DateTimeParseException {
         super(description, done);
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
     @Override
     public String serialize() {
-        return String.join(" | ", "E", this.done ? "1" : "0", this.description, this.at);
+        return String.join(" | ", "E", this.done ? "1" : "0", this.description, this.at.toString());
     }
 
     @Override

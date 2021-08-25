@@ -111,7 +111,7 @@ public class Duke {
             taskList = TaskList.deserialize(data);
 
             this.echo("Data retrieved");
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | DateTimeParseException e) {
             // Data stored in incorrect format
             this.echo("Unable to retrieve data. Data stored in invalid format");
         } catch (IOException e) {
