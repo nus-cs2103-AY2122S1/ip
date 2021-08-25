@@ -3,6 +3,7 @@ done
 done 1
 todo   
 todo Buy bread
+todo Buy|bread
 deadline   
 deadline Presentation Slides Due/byFri 5pm
 deadline Presentation Slides Due /by Fri 5pm

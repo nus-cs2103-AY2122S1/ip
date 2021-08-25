@@ -6,8 +6,18 @@ public class Event extends Task {
         this.date = date;
     }
 
+    public Event(String taskName, boolean isDone, String date) {
+        super(taskName, isDone);
+        this.date = date;
+    }
+
+    @Override
+    public String toSaveData() {
+        return "E|" + super.toSaveData() + "|" + this.date;
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + ")";
+        return "[E]" + super.toString() + " (at: " + this.date + ")";
     }
 }

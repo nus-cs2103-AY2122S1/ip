@@ -7,8 +7,17 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String taskName, boolean isDone) {
+        this.taskName = taskName;
+        this.isDone = isDone;
+    }
+
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public String toSaveData() {
+        return this.isDone + "|" + this.taskName;
     }
 
     @Override
