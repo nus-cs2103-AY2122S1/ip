@@ -32,4 +32,13 @@ public abstract class DateTask extends Task {
         return date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof DateTask) || !super.equals(obj)) {
+            return false;
+        }
+        DateTask other = (DateTask) obj;
+        return dateString.equals(other.getDateString());
+    }
+
 }
