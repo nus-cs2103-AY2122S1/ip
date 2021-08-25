@@ -1,18 +1,17 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.exception.MissingArgumentException;
 
-public class Ui {
-    private Scanner userInputScanner = new Scanner(System.in);
+import java.util.Scanner;
 
+public class Ui {
     private static final String LOGO = "  /$$                           /$$      \n"
             + " | $$                          | $$      \n" + " | $$$$$$$   /$$$$$$  /$$   /$$| $$$$$$$ \n"
             + " | $$__  $$ /$$__  $$| $$  | $$| $$__  $$\n" + " | $$  \\ $$| $$  \\__/| $$  | $$| $$  \\ $$\n"
             + " | $$  | $$| $$      | $$  | $$| $$  | $$\n" + " | $$$$$$$/| $$      |  $$$$$$/| $$  | $$\n"
             + " |_______/ |__/       \\______/ |__/  |__/\n";
+    private final Scanner userInputScanner = new Scanner(System.in);
 
     public String readUserInput() throws MissingArgumentException {
         if (userInputScanner.hasNextLine()) {
@@ -37,12 +36,9 @@ public class Ui {
 
     /**
      * Checks for missing argument in the user input.
-     * 
-     * @param sections     The user's entered arguments, divided into relevant
-     *                     sections.
-     * @param errorMessage The error message to be displayed, in the case of missing
-     *                     arguments.
-     * @throws MissingArgumentException if missing arguments are detected.
+     *
+     * @param content The user's entered arguments, divided into relevant
+     *                sections.
      */
     private String formatContent(String content) {
         final String divider = "____________________________________________________________\n";

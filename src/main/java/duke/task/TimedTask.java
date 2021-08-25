@@ -5,7 +5,7 @@ import duke.exception.InvalidArgumentException;
 import duke.parser.Parser;
 
 public abstract class TimedTask extends Task {
-    private LocalDateTimeOrString dateTimeOrString;
+    private final LocalDateTimeOrString dateTimeOrString;
 
     public TimedTask(String description, char symbol, String dateTimeInput) {
         super(description, symbol);
@@ -34,7 +34,7 @@ public abstract class TimedTask extends Task {
         return this.dateTimeOrString.equals(dateTimeOrString);
     }
 
-    protected String getDateTimeDesc() {
-        return dateTimeOrString.getDateTimeDesc();
+    public String getDateTimeDesc() {
+        return dateTimeOrString.getDesc();
     }
 }

@@ -11,7 +11,7 @@ public abstract class Command {
         description = runAndGenerateDescription(taskList, ui, storage);
     }
 
-    abstract String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage);
+    abstract public String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage);
 
     public String getDescription() {
         return description;

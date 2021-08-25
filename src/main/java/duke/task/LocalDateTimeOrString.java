@@ -6,12 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class LocalDateTimeOrString implements Serializable {
-    private LocalDateTime dateTime;
-    private String dateTimeString;
-
     private static final DateTimeFormatter IN_FORMATTER = DateTimeFormatter
             .ofPattern("" + "[dd-MM-yyyy HHmm]" + "[dd/MM/yyyy HHmm]");
     private static final DateTimeFormatter OUT_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
+    private LocalDateTime dateTime;
+    private String dateTimeString;
 
     public LocalDateTimeOrString(String dateTimeInput) {
         try {
@@ -21,7 +20,7 @@ public class LocalDateTimeOrString implements Serializable {
         }
     }
 
-    protected String getDateTimeDesc() {
+    public String getDesc() {
         return (dateTime != null) ? OUT_FORMATTER.format(dateTime) : dateTimeString;
     }
 

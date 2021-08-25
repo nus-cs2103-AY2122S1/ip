@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage) {
+    public String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage) {
         return "Bye. Hope to see you again soon!";
     }
 }

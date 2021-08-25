@@ -8,9 +8,9 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 public class Bruh {
-    private TaskList taskList;
-    private Storage storage;
-    private Ui ui;
+    private final TaskList taskList;
+    private final Storage storage;
+    private final Ui ui;
 
     public Bruh(String filePath) {
         this.ui = new Ui();

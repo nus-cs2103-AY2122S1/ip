@@ -1,12 +1,12 @@
 package duke.tasklist;
 
+import duke.task.LocalDateTimeOrString;
+import duke.task.Task;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import duke.task.LocalDateTimeOrString;
-import duke.task.Task;
 
 public class TaskList implements Serializable {
     private List<Task> taskList;
@@ -21,7 +21,7 @@ public class TaskList implements Serializable {
 
     public String listTasks() {
         if (taskList.isEmpty()) {
-            return getOverview();
+            return getTaskCountDesc();
         }
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:");
@@ -31,10 +31,10 @@ public class TaskList implements Serializable {
         return sb.toString();
     }
 
-    public String getOverview() {
+    public String getTaskCountDesc() {
         return taskList.isEmpty() ? "There are no tasks."
                 : String.format("Now you have %d task%s in the list.", taskList.size(),
-                        (taskList.size() == 1 ? "" : "s"));
+                (taskList.size() == 1 ? "" : "s"));
     }
 
     public void add(Task taskToAdd) {

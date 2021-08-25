@@ -1,5 +1,7 @@
 package duke.storage;
 
+import duke.tasklist.TaskList;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -9,10 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import duke.tasklist.TaskList;
-
 public class Storage {
-    private Path storageFilePath;
+    private final Path storageFilePath;
 
     public Storage(String pathString) {
         this.storageFilePath = Paths.get(pathString);
@@ -28,7 +28,7 @@ public class Storage {
 
     public TaskList loadTaskList() {
         try (InputStream is = Files.newInputStream(storageFilePath);
-                ObjectInputStream ois = new ObjectInputStream(is)) {
+             ObjectInputStream ois = new ObjectInputStream(is)) {
             // Only Task objects are written to / removed from the list
             return (TaskList) ois.readObject();
         } catch (IOException e) {
@@ -42,7 +42,7 @@ public class Storage {
 
     public void saveToDisk(TaskList taskList) {
         try (OutputStream os = Files.newOutputStream(storageFilePath);
-                ObjectOutputStream oos = new ObjectOutputStream(os);) {
+             ObjectOutputStream oos = new ObjectOutputStream(os)) {
             oos.writeObject(taskList);
         } catch (IOException e) {
             System.out.printf("Failed to save to disk: %s\n", e.getMessage());

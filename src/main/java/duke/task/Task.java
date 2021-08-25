@@ -1,13 +1,13 @@
 package duke.task;
 
-import java.io.Serializable;
-
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 
+import java.io.Serializable;
+
 public abstract class Task implements Serializable {
-    private String description;
-    private char symbol;
+    private final String description;
+    private final char symbol;
     private boolean isDone;
 
     public Task(String description, char symbol) {
@@ -32,10 +32,6 @@ public abstract class Task implements Serializable {
 
     public boolean isAtTime(LocalDateTimeOrString dateTimeOrString) {
         return false;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public void markAsDone() {
