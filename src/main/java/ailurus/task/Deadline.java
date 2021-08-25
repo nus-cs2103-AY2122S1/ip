@@ -15,7 +15,7 @@ public class Deadline extends Task {
      *
      * @param description description of task /by specific date or time
      */
-    public Deadline(String description) {
+    public Deadline(String description) throws AilurusException {
         super(description.split("/by", -1)[0].trim());
         String[] arr = description.split("/by", -1);
         if (arr[0].length() == 0) {

@@ -1,9 +1,6 @@
 package ailurus;
 
-import ailurus.task.Deadline;
-import ailurus.task.Event;
-import ailurus.task.Task;
-import ailurus.task.Todo;
+import ailurus.task.*;
 
 public class Parser {
 
@@ -67,6 +64,28 @@ public class Parser {
                 return event;
             default:
                 return null;
+        }
+    }
+
+    /**
+     * Parse matching string and return Tasklist of matching string
+     *
+     * @param match matching string
+     * @return TaskList matching string
+     */
+    public static TaskList parseFind(String match, TaskList tasks) throws AilurusException {
+        TaskList newList = new TaskList();
+        for (int i = 0; i < tasks.length(); i++) {
+            Task task = tasks.getTask(i);
+            String desc = task.getDescription();
+            if (desc.indexOf(match) != -1) {
+                newList.addTask(task);
+            }
+        }
+        if (newList.length() != 0) {
+            return newList;
+        } else {
+            throw new AilurusException(AilurusException.Error.FIND);
         }
     }
 

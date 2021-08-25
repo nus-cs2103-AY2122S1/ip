@@ -7,7 +7,8 @@ public class AilurusException extends IllegalArgumentException {
      * List of errors for Ailurus.Ailurus
      */
     public enum Error {
-        EMPTYLIST, EMPTYTODO, EMPTYEVENT, EMPTYDEADLINE, EMPTYBY, EMPTYAT, BY, AT, NUMBER, NAN, LOAD
+        EMPTYLIST, EMPTYTODO, EMPTYEVENT, EMPTYDEADLINE,
+        EMPTYBY, EMPTYAT, BY, AT, NUMBER, NAN, LOAD, FIND,
     }
 
     /**
@@ -46,6 +47,8 @@ public class AilurusException extends IllegalArgumentException {
                 return "☹ OOPS!!! Not a number.";
             case LOAD:
                 return "☹ OOPS!!! Unable to load tasks...";
+            case FIND:
+                return "☹ OOPS!!! Sorry, no matching tasks in your list...";
             default:
                 return getMessage();
         }

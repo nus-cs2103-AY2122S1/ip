@@ -80,6 +80,11 @@ public class Ui {
                 task, size));
     }
 
+    public void sayFind(TaskList tasks) {
+        this.say("Here are the matching tasks in your list:");
+        this.sayList(tasks);
+    }
+
     public void sayInvalidCommand() {
         this.say("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }

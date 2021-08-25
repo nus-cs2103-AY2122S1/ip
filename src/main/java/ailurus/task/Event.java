@@ -15,7 +15,7 @@ public class Event extends Task {
      *
      * @param description description of task /at specific date or time
      */
-    public Event(String description) {
+    public Event(String description) throws AilurusException {
         super(description.split("/at", -1)[0].trim());
         String[] arr = description.split("/at", -1);
         if (arr[0].length() == 0) {

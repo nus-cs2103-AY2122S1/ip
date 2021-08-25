@@ -38,7 +38,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws AilurusException {
         ArrayList<Task> list = new ArrayList<>();
         // load tasks from file
         try {
@@ -58,7 +58,7 @@ public class Storage {
         return list;
     }
 
-    public void unload(TaskList list) {
+    public void unload(TaskList list) throws AilurusException {
         // write all tasks to file
         if (this.writer != null) {
             try {
@@ -68,7 +68,7 @@ public class Storage {
                 }
                 writer.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new AilurusException(AilurusException.Error.LOAD);
             }
         }
     }
