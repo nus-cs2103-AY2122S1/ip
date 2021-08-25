@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Arrays;
+
 public class Duke {
     public static boolean active;
     public static TaskList taskList = new TaskList();
@@ -101,6 +103,14 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
+    /**
+     * Finds tasks based on the keyword the user inputs and prints them to the user
+     * @param keyword keyword used to find matching tasks
+     * @return a TaskList with matching tasks to be printed.
+     */
+    public static TaskList findTask(String keyword) {
+        return taskList.findTask(keyword);
+    }
 
     /**
      * main method.

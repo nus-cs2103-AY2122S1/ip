@@ -54,5 +54,26 @@ public class TaskList {
 
     }
 
+    /**
+     * finds tasks that contain a given keyword.
+     * @param keyword if a task contains this, it will be printed to the user.
+     * @return the TaskList containing tasks matching the keyword, if any.
+     */
+    public TaskList findTask(String keyword) {
+        ArrayList<TaskItem> copyOfTaskList = new ArrayList<TaskItem>(arrayList);
+        //System.out.println(copyOfTaskList.toString());
+        copyOfTaskList.removeIf(task -> {
+            String taskDescription = task.describeTaskItem();
+            String[] splicedTaskDescription = taskDescription.split(" ");
+            for (String s: splicedTaskDescription) {
+                if (s.equals(keyword)) {
+                    return false;
+                }
+            }
+            return true;
+        });
+        return new TaskList(copyOfTaskList);
+    }
+
 
 }

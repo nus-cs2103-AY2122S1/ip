@@ -5,3 +5,5 @@
 [T][ ] kill rick and morty
 [T][ ] kill rick
 [D][ ] kill morty --2021-08-25T12:00
+[T][ ] kill rick and morty
+[T][ ] subscribe to subroza on twitch
