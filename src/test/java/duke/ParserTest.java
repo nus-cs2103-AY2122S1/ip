@@ -1,7 +1,7 @@
+package duke;
+
 import Command.Command;
-import duke.Parser;
 import exceptions.NoSuchCommandException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
