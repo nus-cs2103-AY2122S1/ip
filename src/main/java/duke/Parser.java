@@ -52,7 +52,7 @@ public class Parser {
 
     public static void main(String[] args) {
         Parser p = new Parser();
-        String[] res = p.parseFromFile("event--false--meet--at Oct 15 1000-1200");
+        String[] res = p.parse("find book");
         System.out.println(res[0]);
         System.out.println(res[1]);
         System.out.println(res[2]);
