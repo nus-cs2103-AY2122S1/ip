@@ -6,45 +6,65 @@ import whobot.utils.Storage;
 import whobot.utils.Parser;
 import whobot.utils.TaskList;
 
+/**
+ * Main Driver Class
+ */
 public class WhoBot {
 
-    // The Global Variables used by the ChatBot
+    /** Scanner for getting input from user */
     private static final Scanner CMD_READER = new Scanner(System.in);
-    public final UI UI;
-    private Storage STORAGE;
-    private final Parser PARSER;
-    private TaskList TASK_LIST;
 
+    /** UI to output to */
+    public final UI ui;
+
+    /** Storage to store Task list in */
+    private Storage storage;
+
+    /** Parser to parse user input */
+    private final Parser parser;
+
+    /** Task List to store all tasks */
+    private TaskList taskList;
+
+    /***
+     * Constructor Class for WhoBot Class
+     */
     public WhoBot() {
-        this.PARSER = new Parser();
-        this.UI = new UI();
+        this.parser = new Parser();
+        this.ui = new UI();
         try {
-            this.STORAGE = new Storage("." + File.separator + "data" + File.separator + "WhoBotData.txt");
-            this.TASK_LIST = new TaskList(STORAGE);
+            this.storage = new Storage("." + File.separator + "data" + File.separator + "WhoBotData.txt");
+            this.taskList = new TaskList(storage);
         } catch (WhoBotException ex) {
-            UI.echo(ex.getMessage(), whobot.main.UI.TYPE.ERROR);
+            ui.echo(ex.getMessage(), UI.TYPE.ERROR);
             System.exit(0);
         }
     }
 
-
+    /***
+     * Runs the WhoBot and Accepts Input from the User
+     */
     public void run() {
-        UI.greeting();
+        ui.greeting();
         while (true) {
             try {
                 String command;
-                System.out.print(whobot.main.UI.COLOR_PURPLE + "> " + whobot.main.UI.COLOR_RESET);
+                System.out.print(UI.COLOR_PURPLE + "> " + UI.COLOR_RESET);
                 command = CMD_READER.nextLine().trim();
-                if (PARSER.parse(command, UI, STORAGE, TASK_LIST) == -1) {
+                if (parser.parse(command, ui, storage, taskList) == -1) {
                     break;
                 };
             } catch (WhoBotException ex) {
-                UI.echo(ex.getMessage(), whobot.main.UI.TYPE.ERROR);
+                ui.echo(ex.getMessage(), UI.TYPE.ERROR);
             }
         }
     }
 
-    //Main Method
+    /***
+     * Main Method
+     *
+     * @param args Commandline arguments
+     */
     public static void main(String[] args) {
         WhoBot whoBot = new WhoBot();
         whoBot.run();
