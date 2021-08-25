@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -110,6 +112,11 @@ public class TaskManager {
             }
         }
         return Command.INVALID;
+    }
+
+    public String formatDate(String date) {
+        LocalDate d = LocalDate.parse(date);
+        return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
