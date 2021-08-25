@@ -119,6 +119,15 @@ public class SaberParser {
                 }
                 break;
 
+            case find:
+                try {
+                    String findString = getArgument();
+                    command = new FindCommand(findString, false);
+                } catch (MissingArgumentException e) {
+                    command = new FindCommand("", true);
+                }
+                break;
+
             case todo:
                 try {
                     String taskForTodo = getArgument();
