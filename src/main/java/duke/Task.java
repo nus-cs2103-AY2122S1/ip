@@ -7,11 +7,20 @@ public abstract class Task {
     private final String description;
     private boolean isDone;
 
+    /**
+     * Constructor for a new Task, to be called by its subclasses.
+     * @param description The task description.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructor for a new Task, to be called by its subclasses.
+     * @param description The task description.
+     * @param isDone Whether this task is marked as done.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -29,6 +38,10 @@ public abstract class Task {
         return String.format("[%s] %s", isDone ? "X" : " ", this.description);
     }
 
+    /**
+     * Converts the task to the save format.
+     * @return Task in the save format as a string.
+     */
     public String toSaveFormat() { return String.format("%s,%s", isDone ? "1" : "0", this.description); }
 
     @Override

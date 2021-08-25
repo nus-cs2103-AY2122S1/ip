@@ -15,6 +15,10 @@ import java.util.List;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor for a new Storage object.
+     * @param filePath The filepath to the save file for the application.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
