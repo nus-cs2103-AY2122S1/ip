@@ -12,6 +12,6 @@ public class Event extends Task { //needs a start and end time, right now is jus
 
     @Override
     public String toString() {
-        return "[" + this.getTaskIcon() + "] [" + this.getStatusIcon() + "] " + description + " (" + time + ")";
+        return this.getTaskIcon() + "//" + this.getStatusIcon() + "//" + description + "//" + time;
     }
 }

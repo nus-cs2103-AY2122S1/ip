@@ -9,6 +9,6 @@ public class ToDo extends Task { //this only needs a description and isDone
 
     @Override
     public String toString() {
-        return "[" + this.getTaskIcon() + "] [" + this.getStatusIcon() + "] " + description;
+        return this.getTaskIcon() + "//" + this.getStatusIcon() + "//" + description;
     }
 }

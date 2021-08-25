@@ -17,7 +17,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (isDone ? "1" : "0");
     }
 
     public String getDescription() {
