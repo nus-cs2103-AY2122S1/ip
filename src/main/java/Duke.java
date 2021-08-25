@@ -45,7 +45,12 @@ public class Duke {
             // If file is not found, greet user with first time welcome message
             System.out.printf(FORMAT, "Hello there, I'm Duke!");
         } catch (Exception e) {
+            // Other error found, exit
             System.out.printf("\tUh-oh! %s\n", e.getMessage());
+            System.out.printf(FORMAT, "This appears to be an error with your save file.");
+            System.out.printf(FORMAT, "Either edit data/tasks.txt to rectify the error, or delete it.");
+            System.out.printf(FORMAT, LINE);
+            return;
         }
 
         System.out.printf(FORMAT, "What can I do for you today?");
@@ -204,6 +209,10 @@ public class Duke {
             taskName = splitInput[0];
             errorMessage = "Date and times must be in the format: YYYY-MM-DD HH:MM HH:MM.";
             dateTime = splitWith(splitInput[1], 0, " ", errorMessage);
+            // If user only input in one time
+            if (dateTime.length < 3) {
+                throw new DukeException(errorMessage);
+            }
             date = dateTime[0];
             String startTime = dateTime[1];
             String endTime = dateTime[2];
@@ -311,7 +320,6 @@ public class Duke {
 
     // Abstraction to make main function neater
     // Lists all tasks that are due X hours/days from now (from timezone of device)
-
     private static void runDueCommand(String input, List<Task> tasks) throws DukeException {
         // Check if input is valid and input number is an integer
         if (input.length() <= 4 || !input.substring(4, input.length() - 1).matches("\\d+")) {
