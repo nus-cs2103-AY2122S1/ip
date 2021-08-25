@@ -2,7 +2,7 @@ package BobCat.executor.parser;
 
 /**
  * Implements a <code>CommandParser</code> which process basic commands i.e. commands that do read-only operations
- * Such commands include "list" and "bye".
+ * Such commands include "list", "find", and "bye".
  */
 public class BasicCommandParser implements CommandParser{
     /**
@@ -13,6 +13,6 @@ public class BasicCommandParser implements CommandParser{
      */
     @Override
     public String[] parse(String command, String[] commandArgs) {
-        return new String[]{command};
+        return commandArgs;
     }
 }

@@ -48,6 +48,15 @@ public class ExecutionUnit {
             return initialReply.toArray(new String[0]);
         case "bye":
             return new String[]{"Bye! Hope to see you again soon!"};
+        case "find":
+                List<String> initReply = new ArrayList<String>();
+                initReply.add("Here are the matching tasks in your list:");
+                Task[] foundTasks = taskList.findByName(queryArr[1]);
+                initReply.addAll(Stream.iterate(1, x -> x + 1)
+                        .limit(foundTasks.length)
+                        .map(num -> num.toString() + "." + foundTasks[num - 1])
+                        .collect(Collectors.toList()));
+                return initReply.toArray(new String[0]);
         case "done":
             Task markedTask = taskList.markDone(Integer.parseInt(queryArr[1]));
             storeExecutor.saveStorage(storagePath, taskList);

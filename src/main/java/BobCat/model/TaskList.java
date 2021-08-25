@@ -41,6 +41,11 @@ public class TaskList {
         return storage.remove(id);
     }
 
+    public Task[] findByName(String name) {
+        System.out.println("World" + name + "Hello");
+        return storage.stream().filter(x -> x.toString().contains(name)).toArray(Task[]::new);
+    }
+
     public int numTasks() {
         return index;
     }
