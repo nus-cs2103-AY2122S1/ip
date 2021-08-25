@@ -16,6 +16,14 @@ public class Event extends Task {
     }
 
     /**
+     * Gets the at description for the Event task.
+     * @return The at description for the Event task.
+     */
+    public String getAt() {
+        return this.at;
+    }
+
+    /**
      * Returns the string representation of the Event task.
      * @return The string representation of the Event task.
      */

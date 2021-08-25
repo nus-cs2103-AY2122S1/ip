@@ -12,9 +12,9 @@ public class TaskList {
     /**
      * Constructor to initialise a TaskList.
      */
-    public TaskList() {
-        this.allTasks = new ArrayList<>();
-        this.nextSpaceToStore = 0;
+    public TaskList(ArrayList<Task> allTasks) {
+        this.allTasks = allTasks;
+        this.nextSpaceToStore = allTasks.size();
     }
 
     /**
@@ -55,6 +55,10 @@ public class TaskList {
         allTasks.remove(taskNo - 1);
         nextSpaceToStore = nextSpaceToStore - 1;
         System.out.println("  " + deleteTask.toString());
+    }
+
+    public ArrayList<Task> getAllTasks() {
+        return this.allTasks;
     }
 
     /**
