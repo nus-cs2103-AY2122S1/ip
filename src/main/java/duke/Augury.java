@@ -12,8 +12,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The {@code Augury} class contains the entry point of the entire Task Management app.
+ * Create an instance of {@code Augury}, initialize with {@code init()}, and start the program
+ * with {@code loop()}.
+ *
+ * <p>{@code Augury} takes in a {@code String path} as argument in its constructor.
+ * This file stores data created by the app. If no file exists at the specified path,
+ * {@code Augury} will create a new file.</p>
+ *
+ * @author Jefferson (@qreoct)
+ */
 public class Augury {
-    static String VER     = "v0.8.0"; // Level-8 Dates and Times + A-MoreOOP, A-Packages, A-JUnit, A-Jar
+    static String VER     = "v0.8.0"; // Level-8 Dates and Times + A-MoreOOP, A-Packages, A-JUnit, A-Jar, A-JavaDoc
     static String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -29,12 +40,24 @@ public class Augury {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Initialises a new {@code Augury} object which uses the
+     * provided {@code String path} as location of the .txt save file.
+     *
+     * @param path A {@code String} containing the location of the .txt save file.
+     */
     public Augury(String path) {
         ui = new Ui();
         this.storage = new Storage(path);
         this.parser = new Parser();
     }
 
+    /**
+     * Initialises the private {@code TaskList} using the data from the
+     * save file provided.
+     *
+     * @throws FileIOException If file cannot be read or created
+     */
     public void init() throws AuguryException {
         try {
             this.storage.initializeTaskList(this.taskList);
@@ -43,10 +66,20 @@ public class Augury {
         }
     }
 
+    /**
+     * Prints a welcome message to the user.
+     */
     public void greet() {
         System.out.println(WELCOME);
     }
 
+    /**
+     * Main loop of {@code Augury}. Parses and execute commands in a loop.
+     *
+     * @throws InvalidActionException If action commands were malformed.
+     * @throws InvalidTaskCreationException If invalid parameters were provided in task creation.
+     * @throws UnknownCommandException If an unrecognized command was provided.
+     */
     public void loop() throws AuguryException {
         Scanner scan = new Scanner(System.in);
         ui.speak("Hello! How may I help you?");
@@ -121,7 +154,7 @@ public class Augury {
                 throw new InvalidActionException("Task " + i + " does not exist, please try again");
             }
         }
-        ui.speak(taskList.markAsDone(listOfTasks));
+        ui.speak(taskList.markAsDoneAndAnnounce(listOfTasks));
         storage.saveTaskListToStorage(taskList);
     }
 
@@ -139,7 +172,7 @@ public class Augury {
                 throw new InvalidActionException("Task " + i + " does not exist, please try again");
             }
         }
-        ui.speak(taskList.deleteTasks(listOfTasks));
+        ui.speak(taskList.deleteTasksAndAnnounce(listOfTasks));
         storage.saveTaskListToStorage(taskList);
     }
 

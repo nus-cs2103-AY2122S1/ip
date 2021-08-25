@@ -1,5 +1,8 @@
 package duke.io;
 
+/**
+ * The {@code Parser} class handles command parsing.
+ */
 public class Parser {
     private final String COMMAND_MAKE_TASK = "COMMAND_MAKE_TASK";
     private final String COMMAND_LIST_TASKS = "COMMAND_LIST_TASKS";
@@ -8,10 +11,14 @@ public class Parser {
     private final String COMMAND_DELETE_TASK = "COMMAND_DELETE_TASK";
     private final String COMMAND_UNKNOWN = "COMMAND_UNKNOWN";
 
-    public Parser() {
+    public Parser() { }
 
-    }
-
+    /**
+     * Converts the provided user {@code String input} and parses the desired command.
+     *
+     * @param input {@code String} of user input.
+     * @return {@code String} which corresponds to the command that the user entered.
+     */
     public String parse(String input) {
 
         if (input.equals("bye") || input.equals("exit") || input.equals("quit")) {

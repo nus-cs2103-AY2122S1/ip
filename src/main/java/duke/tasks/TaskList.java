@@ -1,21 +1,60 @@
 package duke.tasks;
 
+import duke.exceptions.InvalidTaskCreationException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * The {@code TaskList} contains and has methods for interacting with {@code Task}s.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Initializes an instance of {@code TaskList} with an {@code ArrayList} containing {@code Task}s.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Returns an {@code ArrayList} of {@code Task}s in this {@code TaskList},
+     *
+     * @return {@code ArrayList} containing all tasks in this {@code TaskList}.
+     */
+    public ArrayList<Task> tasks() {
+        return this.tasks;
+    }
+
+    /**
+     * Returns the number of {@code Task}s in this {@code TaskList},
+     *
+     * @return {@code int} - the number of tasks in this {@code TaskList}.
+     */
+    public int size() {
+        return tasks.size();
+    }
+
+    /**
+     * Adds a single {@code Task} to this {@code TaskList}.
+     *
+     * @param t {@code Task} to be added.
+     */
     public void addTask(Task t) {
         tasks.add(t);
     }
 
+    /**
+     * Adds a single {@code Task} to this {@code TaskList},
+     * then forms a String with information about the {@code TaskList}.
+     *
+     * @param taskType {@code String}. One of: 'todo', 'event', 'deadline'.
+     * @param t {@code Task} to be added.
+     * @return {@code String} containing information about the {@code TaskList} after the operation.
+     */
     public String addTaskAndAnnounce(String taskType, Task t) {
         String res = "";
         tasks.add(t);
@@ -24,15 +63,14 @@ public class TaskList {
         return res;
     }
 
-    public ArrayList<Task> tasks() {
-        return this.tasks;
-    }
-
-    public int size() {
-        return tasks.size();
-    }
-
-    public String markAsDone(ArrayList<Integer> listOfTasks) {
+    /**
+     * Marks a given {@code listOfTasks} as done,
+     * then forms a String with information about the {@code TaskList}.
+     *
+     * @param listOfTasks {@code ArrayList<Integer>} representing the index of {@code Task}s to be marked as done.
+     * @return {@code String} containing information about the {@code TaskList} after the operation.
+     */
+    public String markAsDoneAndAnnounce(ArrayList<Integer> listOfTasks) {
         StringBuilder res = new StringBuilder("Nice! I've marked these tasks as done: \n\t\t");
 
         for (int i = 0; i < listOfTasks.size(); i++) {
@@ -50,10 +88,17 @@ public class TaskList {
         return res.toString();
     }
 
-    public String deleteTasks(ArrayList<Integer> listOfTasks) {
+    /**
+     * Deletes a given {@code listOfTasks},
+     * then forms a String with information about the {@code TaskList}.
+     *
+     * @param listOfTasks {@code ArrayList<Integer>} representing the index of {@code Task}s to be deleted.
+     * @return {@code String} containing information about the {@code TaskList} after the operation.
+     */
+    public String deleteTasksAndAnnounce(ArrayList<Integer> listOfTasks) {
         StringBuilder res = new StringBuilder("I've removed these tasks: \n\t\t");
 
-        // reverse-sort the duke.tasks and remove duplicates
+        // reverse-sorting the list of tasks and remove duplicates
         Set<Integer> s = new LinkedHashSet<>(listOfTasks);
         listOfTasks.clear();
         listOfTasks.addAll(s);

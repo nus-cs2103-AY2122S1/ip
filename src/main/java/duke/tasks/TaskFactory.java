@@ -6,11 +6,21 @@ import java.time.format.DateTimeFormatter;
 import duke.exceptions.AuguryException;
 import duke.exceptions.InvalidTaskCreationException;
 
+/**
+ * The {@code TaskFactory} is a factory class responsible for creating {@code Task}s.
+ */
 public class TaskFactory {
     static DateTimeFormatter TIME_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM y, E, kk:mm");
 
-    public TaskFactory() {    }
+    public TaskFactory() {  }
 
+    /**
+     * Creates a single {@code Task} from the given {@code String newTaskDetails}.
+     * This method signature is called when creating tasks from the save file.
+     *
+     * @param newTaskDetails {@code String} containing details of the task.
+     *                                     Example: {@code [E] event (at: 6 Sep 2021, Tue, 21:00)}
+     */
     public Task createTask(String newTaskDetails) {
         // this method is used when reading from duke.tasks.txt file
         // the syntax is [E][X] description (at: time)
@@ -42,6 +52,15 @@ public class TaskFactory {
         }
     }
 
+    /**
+     * Creates a single {@code Task} from the given {@code String newTaskType} and {@code String newTaskDetails}.
+     * This method signature is called when creating tasks from user input.
+     *
+     * @param newTaskType {@code String}, one of: 'todo', 'event', 'deadline'.
+     * @param newTaskDetails {@code String} representing full user input.
+     *                                     Example: {@code event shopping /at 2021-08-08 2300}
+     * @throws InvalidTaskCreationException If user input has missing paramenters or malformed date.
+     */
     public Task createTask(String newTaskType, String newTaskDetails) throws AuguryException {
         if (newTaskType == null) {
             return null;

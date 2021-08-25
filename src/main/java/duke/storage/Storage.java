@@ -13,14 +13,29 @@ import duke.tasks.Task;
 import duke.tasks.TaskFactory;
 import duke.tasks.TaskList;
 
+/**
+ * The {@code Storage} class handles reading and writing data from files.
+ */
 public class Storage {
 
     private String path;
 
+    /**
+     * Initializes a {@code Storage} instance to have a {@code String path}.
+     *
+     * @param path {@code String} representing path to work on.
+     */
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Initializes a {@code TaskList t} using data from the save file.
+     * If save file does not exist, {@code Storage} will attempt to create the directory and file.
+     *
+     * @param t {@code TaskList} to write data to.
+     * @throws IOException If file cannot be found or written to
+     */
     public void initializeTaskList(TaskList t) throws IOException, AuguryException {
         String directory = "data";
         File dir = new File(directory);
@@ -33,6 +48,12 @@ public class Storage {
         loadTaskListFromStorage(t);
     }
 
+    /**
+     * Saves the given {@code TaskList t} into the save file.
+     *
+     * @param t {@code TaskList} to read data from.
+     * @throws FileIOException If file cannot be found or written to
+     */
     public void saveTaskListToStorage(TaskList t) throws AuguryException {
         try {
             File f = new File(path);
@@ -57,7 +78,7 @@ public class Storage {
     }
 
     private void loadTaskListFromStorage(TaskList t) throws IOException, AuguryException {
-        // read duke.tasks.txt
+        // read tasks.txt
         Scanner s = new Scanner(new File(path)); // create a Scanner using the File as the source
         ArrayList<String> tasks = new ArrayList<>();
         while (s.hasNext()) {
