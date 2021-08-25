@@ -16,6 +16,12 @@ public class Storage {
     protected File f;
     protected TaskList tl;
 
+    /**
+     * A constructor of a Storage.
+     *
+     * @param filePath The path of the file the task list is saved in.
+     * @param tl The TaskList of the chat bot.
+     */
     public Storage(String filePath, TaskList tl) {
         this.filePath = filePath;
         this.f = new File(filePath);
