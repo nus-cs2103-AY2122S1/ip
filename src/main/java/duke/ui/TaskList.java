@@ -11,11 +11,20 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
     private final ArrayList<Task> listArray;
     protected int count;
 
+    /**
+     * Constructor for TaskList
+     */
     public TaskList() {
         this.listArray = new ArrayList<Task>(100);
         this.count = 0;
     }
 
+    /**
+     * Constructor, Creates the tasklist from the existing file
+     * @param file Input exisiting file
+     * @throws IOException Catches if the filepath or file has issue
+     * @throws DukeException Catches if the file content is incorrect to be parsed
+     */
     public TaskList(BufferedReader file) throws IOException, DukeException {
         String line = file.readLine();
         this.listArray = new ArrayList<Task>(100);
@@ -27,6 +36,12 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
         }
     }
 
+    /**
+     * Parses each line of the file and creates the task accordingly
+     * @param line input line of file
+     * @return the tasks for the constructor
+     * @throws DukeException if the file content is not of the right format to be parsed
+     */
     public Task parseLine(String line) throws DukeException {
         String[] splits;
         Task t;
@@ -57,23 +72,44 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
         return t;
     }
 
+    /**
+     * Add the tasks to the list
+     * @param t task to be added
+     */
     public void add(Task t) {
         this.listArray.add(count++, t);
     }
 
+    /**
+     * Gets the task at the given index
+     * @param i the index to get the task from
+     * @return the task
+     */
     public Task get(int i) {
         return this.listArray.get(i);
     }
 
+    /**
+     * Gets the number of task in the list
+     * @return the number of task in the list
+     */
     public int getCount() {
         return count;
     }
 
+    /**
+     * Deletes the task at the given index
+     * @param i the index that the task to be deleted is at
+     * @return the deleted task
+     */
     public Task delete(int i) {
         this.count--;
         return this.listArray.remove(i);
     }
 
+    /**
+     * Returns the list of task for the user
+     */
     public void printList() {
         if (count == 0) {
             //When the list is empty

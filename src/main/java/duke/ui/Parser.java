@@ -5,7 +5,13 @@ import duke.command.*;
 
 public class Parser { //The Parser to handle the inputs from the terminal
 
-    //The below function converts the input to the proper command and returns an error if the input is not valid
+    /**
+     * The below function converts the input to the proper command and returns an error if the input is not valid
+     *
+     * @param input User input
+     * @return the new Command
+     * @throws DukeException If the input is not of the right format
+     */
     public static Command parse(String input) throws DukeException {
         int spaceIndex = input.indexOf(" ");
         String command;
