@@ -72,25 +72,23 @@ Here are the tasks in your list:
 ____________________________________________________________________________
 ____________________________________________________________________________
 Burp burp! Something went wrong!
-☹ BURP-ribbit ribbit. The argument of the todo command cannot be empty
+☹ BURP-ribbit ribbit. The argument of the todo command cannot be empty!
 ____________________________________________________________________________
 ____________________________________________________________________________
 Burp burp! Something went wrong!
-☹ BURP-ribbit ribbit. The argument of the event command cannot be empty
+☹ BURP-ribbit ribbit. The argument of the event command cannot be empty!
 ____________________________________________________________________________
 ____________________________________________________________________________
 Burp burp! Something went wrong!
-☹ BURP-ribbit ribbit. Events should be formatted as:
-event <description> /at <time of event>
+☹ BURP-ribbit ribbit. That is an invalid date!
 ____________________________________________________________________________
 ____________________________________________________________________________
 Burp burp! Something went wrong!
-☹ BURP-ribbit ribbit. The argument of the deadline command cannot be empty
+☹ BURP-ribbit ribbit. The argument of the deadline command cannot be empty!
 ____________________________________________________________________________
 ____________________________________________________________________________
 Burp burp! Something went wrong!
-☹ BURP-ribbit ribbit. Deadlines should be formatted as:
-deadline <description> /by <deadline>
+☹ BURP-ribbit ribbit. That is an invalid date!
 ____________________________________________________________________________
 ____________________________________________________________________________
 Noted. I've removed this task:
