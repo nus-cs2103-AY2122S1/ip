@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -11,7 +13,7 @@ public class Task {
 
     /**
      * Constructor for Events and Deadlines which have a date
-     * @param task Deadline or Event.
+     * @param task Deadline or duke.Event.
      * @param taskSymbol D or T.
      * @param date Date associated with task.
      */
@@ -66,7 +68,7 @@ public class Task {
 
     /**
      * Getter for the type of task - todo, event and deadline.
-     * @return Task type.
+     * @return duke.Task type.
      */
     public String getTaskType() {
         if(this.taskSymbol.equals("T")) {

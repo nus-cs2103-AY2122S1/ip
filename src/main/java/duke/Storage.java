@@ -1,7 +1,7 @@
+package duke;
+
 import java.io.IOException;
 import java.nio.file.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +13,6 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
-        //TO change
-        dirPath = Paths.get("dataSets");
         dataPath = Paths.get(filePath);
         utility = new Utility();
     }
@@ -24,7 +22,6 @@ public class Storage {
 
         try {
             if(!Files.exists(this.dataPath)) {
-                Files.createDirectories(this.dirPath);
                 Files.createFile(this.dataPath);
             }
 
@@ -58,11 +55,10 @@ public class Storage {
     /**
      * Rewrites content in dataset according to the ArrayList.
      * @param list ArrayList of tasks.
-     * @param dataPath Path to data set.
      */
     public void updateDataSet(List<Task> list) {
         try {
-            Path tempPath = Paths.get("datasets/temp.txt");
+            Path tempPath = Paths.get("temp.txt");
             Files.createFile(tempPath);
 
             for(int i = 0; i < list.size(); i++) {
@@ -70,7 +66,7 @@ public class Storage {
                 Files.writeString(tempPath, toAdd + System.lineSeparator(), StandardOpenOption.APPEND);
             }
 
-            Files.move(tempPath, tempPath.resolveSibling("Data.txt"), StandardCopyOption.REPLACE_EXISTING);
+            Files.move(tempPath, tempPath.resolveSibling(this.filePath), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
             System.out.println("cant update dataset");
         }

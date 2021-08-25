@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -123,12 +125,12 @@ public class TaskList {
      * Prints the list of todos sequentially.
      * @param tasks List of current tasks.
      */
-    public void showTasks(List<Task> tasks) {
-        //drawLine();
+    public String showTasks(List<Task> tasks) {
+        StringBuilder str = new StringBuilder().append("\n");
         System.out.println("Here are the tasks in your list:");
         for( int i = 0; i < tasks.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, tasks.get(i).toString());
+            str.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
         }
-        //drawLine();
+        return str.toString();
     }
 }

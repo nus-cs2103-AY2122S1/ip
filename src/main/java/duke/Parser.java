@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     Ui ui;
     Storage storage;
@@ -15,8 +17,7 @@ public class Parser {
             ui.dukeReply("Bye. Hope to see you again soon!");
             return false;
         } else if(userInput.equalsIgnoreCase("list")) {
-            taskList.showTasks(taskList.getTasks());
-            return true;
+            toReply = taskList.showTasks(taskList.getTasks());
             // cant put done word as a task
         }else if (userInput.toLowerCase().startsWith("done")) {
             toReply = taskList.markTaskDone(userInput);

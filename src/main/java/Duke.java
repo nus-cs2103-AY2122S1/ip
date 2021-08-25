@@ -1,3 +1,7 @@
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import java.util.Scanner;
 
 public class Duke {
@@ -28,6 +32,6 @@ public class Duke {
 
     public static void main(String[] args) {
         new Ui().greeting();
-        new Duke("dataSets/Data.txt").run();
+        new Duke("dukeData.txt").run();
     }
 }
