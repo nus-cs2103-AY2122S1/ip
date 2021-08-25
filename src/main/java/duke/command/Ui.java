@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.exception.InvalidCommandException;
+
 import java.util.Scanner;
 
 /**

@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * This class represents tasks to be done by the user.
  */

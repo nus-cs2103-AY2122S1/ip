@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * This class represents exceptions created specific to the Duke bot.
  */

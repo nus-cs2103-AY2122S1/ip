@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * This class creates to do instances which can be done any time.
  */
