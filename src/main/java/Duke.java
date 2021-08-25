@@ -60,6 +60,7 @@ public class Duke {
                 } else if (cmd.equals(deleteCmd)) {
                     Integer taskNum = validateTaskNumber(description);
                     tasks.deleteTask(taskNum);
+                    storage.save(tasks.getListData());
                 } else {
                     throw new DukeException("Sorry, I don't know what that means.");
                 }
