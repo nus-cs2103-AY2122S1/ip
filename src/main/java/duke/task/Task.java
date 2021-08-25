@@ -25,6 +25,7 @@ public class Task {
     }
 
     /**
+     * Gets string representation of task object.
      *
      * @return String representation of a task.
      */
