@@ -1,7 +1,92 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hey there, I'm Duke! Nice to meet you!
+I'm a bot build by SpdPnd98, let me know how I can help you!
+Here are some things I can do now:
+1. Bye
+I'll learn what you're saying and repeat it to you next time you say it if it's something new!
+------------------------------------------------------------------------------------
+How can I help you?
+User: @OOPS!!! Looks like I don't support those commands yet...
+------------------------------------------------------------------------------------
+How can I help you?
+User: @OOPS!!! Looks like I don't support those commands yet...
+------------------------------------------------------------------------------------
+How can I help you?
+User: You haven't asked me to store anything yet... Good! :)
+------------------------------------------------------------------------------------
+How can I help you?
+User: @OOPS!!! No items specified for 'todo'!
+------------------------------------------------------------------------------------
+How can I help you?
+User: @OOPS!!! No items specified for 'deadline'!
+------------------------------------------------------------------------------------
+How can I help you?
+User: @OOPS!!! No items specified for 'event'!
+------------------------------------------------------------------------------------
+How can I help you?
+User: Got it. Added the following task
+[T][ ] test1
+------------------------------------------------------------------------------------
+How can I help you?
+User: @OOPS!!! No commands specified for task 'deadline'!
+------------------------------------------------------------------------------------
+How can I help you?
+User: @OOPS!!! Unknown command provided to Deadline! did you use '/by'?
+------------------------------------------------------------------------------------
+How can I help you?
+User: @OOPS!!! Unknown command provided to Deadline! did you use '/by'?
+------------------------------------------------------------------------------------
+How can I help you?
+User: Got it. Added the following task
+[D][ ] test2 (by: time)
+------------------------------------------------------------------------------------
+How can I help you?
+User: @OOPS!!! Unknown command provided to Event! did you use '/at'?
+------------------------------------------------------------------------------------
+How can I help you?
+User: @OOPS!!! Unknown command provided to Event! did you use '/at'?
+------------------------------------------------------------------------------------
+How can I help you?
+User: Got it. Added the following task
+[E][ ] test3 (at: time)
+------------------------------------------------------------------------------------
+How can I help you?
+User: Here are the tasks in the list:
+1. [T][ ] test1
+2. [D][ ] test2 (by: time)
+3. [E][ ] test3 (at: time)
+------------------------------------------------------------------------------------
+How can I help you?
+User: test1
+Nice! I've marked this task as done:
+  [T][X] test1
+------------------------------------------------------------------------------------
+How can I help you?
+User: Here are the tasks in the list:
+1. [T][X] test1
+2. [D][ ] test2 (by: time)
+3. [E][ ] test3 (at: time)
+------------------------------------------------------------------------------------
+How can I help you?
+User: test2
+Nice! I've marked this task as done:
+  [D][X] test2 (by: time)
+------------------------------------------------------------------------------------
+How can I help you?
+User: Here are the tasks in the list:
+1. [T][X] test1
+2. [D][X] test2 (by: time)
+3. [E][ ] test3 (at: time)
+------------------------------------------------------------------------------------
+How can I help you?
+User: test3
+Nice! I've marked this task as done:
+  [E][X] test3 (at: time)
+------------------------------------------------------------------------------------
+How can I help you?
+User: Here are the tasks in the list:
+1. [T][X] test1
+2. [D][X] test2 (by: time)
+3. [E][X] test3 (at: time)
+------------------------------------------------------------------------------------
+How can I help you?
+User: Bye. Hope to see you again soon!
