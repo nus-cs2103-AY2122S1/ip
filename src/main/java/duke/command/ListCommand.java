@@ -17,6 +17,11 @@ public class ListCommand extends Command {
         userInt.notifyList(taskArrList);
     }
 
+    @Override
+    public Task getTask() {
+        return null;
+    }
+
     public boolean isExit() {
         return this.isExit;
     }

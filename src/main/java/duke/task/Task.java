@@ -46,4 +46,8 @@ public class Task {
         }
     }
 
+    public boolean equals(Task task) {
+        return this.taskName.equals(task.getTaskName());
+    }
+
 }

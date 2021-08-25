@@ -24,6 +24,11 @@ public class AddCommand extends Command {
         storage.save(task);
     }
 
+    @Override
+    public Task getTask() {
+        return this.newTask;
+    }
+
     public boolean isExit() {
         return this.isExit;
     }
