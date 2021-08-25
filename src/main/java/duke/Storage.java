@@ -10,10 +10,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private static final String DIRECTORY = "src/data";
     private static final String FILEPATH = "src/data/duke.txt";
-    
+
+    /**
+     * Save the task list to a location on the hard disk
+     * 
+     * @param tasks The task list to be saved.
+     */
     public static void saveTaskListToHardDisk(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(FILEPATH);
@@ -30,6 +38,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Load the saved task list, if the task list does not exist, then raise an exception
+     * 
+     * @return Saved task list. 
+     * @throws IOException Task list does not exist.
+     */
     public static ArrayList<Task> loadTaskListFromHardDisk() throws IOException {
         File dir = new File(DIRECTORY);
         File logs = new File(FILEPATH);

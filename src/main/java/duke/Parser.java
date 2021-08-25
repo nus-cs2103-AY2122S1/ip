@@ -143,7 +143,7 @@ public class Parser {
     }
 
     /**
-     * Start the IO handler and begin the program
+     * Start the parser and begin the program
      */
     public void start() {
         String currentCommand = sc.nextLine().trim();

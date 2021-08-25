@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Utility to help print out the responses of Duke
+ * Utility to help deals with interactions with the user
  */
 public class Ui {
     
