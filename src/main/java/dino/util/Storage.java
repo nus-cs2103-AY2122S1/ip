@@ -86,7 +86,9 @@ public class Storage {
                             "Event | Status | Description | Time");
                 }
                 }
-                if (status.equals("1")) task.setDone();
+                if (status.equals("1")) {
+                    task.setDone();
+                }
                 taskList.add(task);
             }
         } catch (FileNotFoundException | DinoException | DateTimeParseException e) {

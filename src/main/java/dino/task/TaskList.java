@@ -13,12 +13,12 @@ public class TaskList {
     }
 
     public List<Task> getTaskList() {
-        return this.taskList;
+        return taskList;
     }
 
     public void addTask(Task task) {
-        this.taskList.add(task);
-        int size = this.taskList.size();
+        taskList.add(task);
+        int size = taskList.size();
         System.out.println("Got it. I've added this task: \n"
                 + "  " + taskList.get(size - 1));
         System.out.println("Now you have " + size +
