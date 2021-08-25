@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.Arrays;
+
 public class Duke {
     public static boolean active;
     public static TaskList taskList = new TaskList();
@@ -101,22 +103,49 @@ public class Duke {
         System.out.println("____________________________________________________________");
     }
 
-//    /**
-//     * sends the greeting message for duke.Duke.
-//     */
-//    public static void sendStartMessage() {
-//
-//        duke.Ui.sendStartMessage();
-//    }
+    public static TaskList findTask(String keyword) {
+        /*
+        TaskList matchingTasks = new TaskList();
+        int number = 1;
 
-//    /**
-//     * sends the closing message for duke.Duke.
-//     */
-//    public static void sendEndMessage() {
-//        System.out.println("____________________________________________________________");
-//        System.out.println(endMessage);
-//        System.out.println("____________________________________________________________");
-//    }
+        for (int i = 0; i < taskList.size(); i++) {
+            TaskItem task = taskList.get(i);
+            String taskDescrption = task.describeTaskItem();
+            String[] splicedTaskDescription = taskDescrption.split(" ");
+            boolean matched = false;
+            splicedTaskDescription = (String[]) Arrays.stream(splicedTaskDescription).filter(x -> {
+               if (x.equals(keyword)) {
+                   return true;
+               } else {
+                   return false;
+               }
+            }).toArray();
+
+            if (splicedTaskDescription.length > 0) {
+                matched = true;
+            }
+
+            if (matched) {
+                matchingTasks.add(task);
+            }
+        }
+
+        if (matchingTasks.size() == 0) {
+            System.out.println("____________________________________________________________\n" +
+                    "☹ OOPS!!! No tasks match your search.\n" +
+                    "____________________________________________________________");
+        } else {
+            System.out.println("____________________________________________________________");
+            System.out.println("Here is what I found:");
+            for (int i = 0; i < matchingTasks.size(); i++) {
+                System.out.println(number + "." + matchingTasks.get(i).toString());
+                number++;
+            }
+        }
+        */
+        return taskList.findTask(keyword);
+
+    }
 
     /**
      * main method.

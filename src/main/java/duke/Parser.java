@@ -145,9 +145,38 @@ public class Parser {
                 //rewrite whole txt file
                 Storage.rewriteFile(Duke.taskList);
             } catch (DukeException e) {
-
+                Ui.customErrorMessage(e.getMessage());
             }
 
+        } else if (input.split(" ")[0].equals("find")) {
+            try {
+                if (input.split(" ").length == 1) {
+                    throw new DukeException(
+                            "____________________________________________________________\n" +
+                                    "☹ OOPS!!! Please tell me what you want to find!\n" +
+                                    "____________________________________________________________"
+                    );
+                }
+
+                String keyword = input.split(" ")[1];
+                TaskList matchingTasks = Duke.findTask(keyword);
+
+                if (matchingTasks.size() == 0) {
+                    System.out.println("____________________________________________________________\n" +
+                            "☹ OOPS!!! No tasks match your search.\n" +
+                            "____________________________________________________________");
+                } else {
+                    int number = 1;
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Here is what I found:");
+                    for (int i = 0; i < matchingTasks.size(); i++) {
+                        System.out.println(number + "." + matchingTasks.get(i).toString());
+                        number++;
+                    }
+                }
+            } catch (DukeException e) {
+                Ui.customErrorMessage(e.getMessage());
+            }
         } else {
             System.out.println("____________________________________________________________");
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
