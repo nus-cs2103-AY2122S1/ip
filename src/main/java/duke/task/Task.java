@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * This class encapsulates a duke.task.Task.
+ * This class encapsulates a Task.
  * Contains the boolean logic to store if a task has been completed, as well as the task description.
  */
 
@@ -62,9 +62,23 @@ public class Task {
     }
 
 
+    /**
+     * Gets the string of the save-friendly version of the object.
+     *
+     * @return The String of the save-friendly version of the object.
+     */
     public String saveString() {
         return String.format("T|%s|%s",
                 this.description,
                 isDone ? "1" : "0");
+    }
+
+    /**
+     * Getter to get the description of the task
+     *
+     * @return String of the description.
+     */
+    public String getDescription() {
+        return this.description;
     }
 }

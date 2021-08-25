@@ -3,7 +3,9 @@ package duke.util;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class DukeTaskList {
     private final ArrayList<Task> tasklist;
@@ -40,6 +42,10 @@ public class DukeTaskList {
             tasklist.remove(indexToRemove);
             return Optional.of(toRemove);
         }
+    }
+
+    public List<Task> toFind(String query) {
+        return this.tasklist.stream().filter(x -> x.getDescription().matches(query)).collect(Collectors.toList());
     }
 
     public int getSize() {

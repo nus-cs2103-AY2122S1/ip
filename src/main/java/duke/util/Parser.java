@@ -93,11 +93,28 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the dateTime without config. Used exclusively for DukeDB.
+     * @param dateTime the dateTime string to be parsed.
+     *
+     * @return Optional of LocalDateTime.
+     *
+     * @throws DukeException If the dateTime string is invalid.
+     */
     public static Optional<LocalDateTime> parseDateTime(String dateTime) throws DukeException {
         return Parser.parseDateTime(dateTime, new DukeConfig());
     }
 
 
+    /**
+     * Parses a given string dateTime to a java LocalDateTime object.
+     * @param dateTime The string to be parsed.
+     * @param config The date config object
+     *
+     * @return An Optional of LocalDateTIme
+     *
+     * @throws DukeException When the date specified is invalid.
+     */
     public static Optional<LocalDateTime> parseDateTime(String dateTime, DukeConfig config) throws DukeException{
         String dateConfig = config.getDateConfig();
         String[] timeSplit = dateTime.split("\\s");

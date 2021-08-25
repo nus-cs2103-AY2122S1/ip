@@ -3,6 +3,10 @@ package duke.command;
 import java.util.Arrays;
 import java.util.Optional;
 
+
+/**
+ * The DukeCommands enum encapsulates the logic for commands.
+ */
 public enum DukeCommands {
 
     BYE("bye",new ByeCommand()),
@@ -12,6 +16,7 @@ public enum DukeCommands {
     DELETE("delete", new DeleteCommand()),
     DEADLINE("deadline", new DeadlineCommand()),
     TODO("todo", new TodoCommand()),
+    FIND("find", new FindCommand()),
     INVALID("invalid", new InvalidCommand());
 
 
