@@ -5,6 +5,11 @@ import exceptions.DukeException;
 
 import java.io.IOException;
 
+/**
+ * Duke is a bot capable of storing a todo list with an interactive interface.
+ *
+ * @author Quan Teng Foong
+ */
 public class Duke {
 
     private Storage storage;
@@ -30,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * Runs Duke.
+     * Runs a Duke instance.
      */
     public void run() {
         ui.greet();
