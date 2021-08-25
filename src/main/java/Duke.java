@@ -106,7 +106,7 @@ public class Duke {
                 Task event = new Event(eventDescription, false, at);
                 addTask(event);
             } catch (DateTimeParseException e){
-                System.out.println("Please enter Date and Time in YYYY-MM-DD H:MM.");
+                System.out.println("Please enter Date and Time in YYYY-MM-DD HH:MM.");
             }
             break;
 
@@ -118,7 +118,7 @@ public class Duke {
                 Task deadline = new Deadline(deadlineDescription, false, by);
                 addTask(deadline);
             } catch (DateTimeParseException e){
-                System.out.println("Please enter Date and Time in YYYY-MM-DD H:MM.");
+                System.out.println("Please enter Date and Time in YYYY-MM-DD HH:MM.");
             }
             break;
 
