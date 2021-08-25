@@ -42,6 +42,8 @@ public class Ui {
                     tasks.done(next);
                 } else if (command.equals("delete")) {
                     tasks.delete(next);
+                } else if (command.equals("find")) {
+                    tasks.find(next);
                 } else {
                     tasks.add(command, next);
                 }
