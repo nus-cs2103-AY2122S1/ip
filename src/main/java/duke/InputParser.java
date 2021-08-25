@@ -9,7 +9,5 @@ public class InputParser {
         return input.split(" ")[0];
     }
 
-    public String getDescription(String input) {
-        return input.split(" ", 2)[1];
-    }
+
 }
