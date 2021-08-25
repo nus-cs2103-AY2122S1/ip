@@ -5,8 +5,6 @@ import duke.exception.InvalidCommandException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import static java.time.temporal.ChronoUnit.MINUTES;
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Event extends Task {
 
@@ -45,8 +43,6 @@ public class Event extends Task {
                     this.date = LocalDate.parse(dateTime[0]);
                     this.time = LocalTime.parse(dateTime[1]);
                 }
-
-
             }
         }
     }
