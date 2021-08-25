@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import java.util.List;
@@ -55,6 +56,9 @@ public class Duke {
                     break;
                 case ONDATE:
                     runOnDateCommand(input, tasks);
+                    break;
+                case DUE:
+                    runDueCommand(input, tasks);
                     break;
                 default:
                     throw new DukeException("You have entered an invalid command.");
@@ -206,7 +210,7 @@ public class Duke {
         System.out.printf(FORMAT, LINE);
     }
 
-    // Abstraction to make main function neater, returns all tasks on the inputted date
+    // Abstraction to make main function neater, lists all tasks on the inputted date
     private static void runOnDateCommand(String input, List<Task> tasks) throws DukeException {
         if (input.length() <= 7) {
             throw new DukeException("Date must be of the form YYYY-MM-DD, and must be a real/valid date.");
@@ -219,11 +223,56 @@ public class Duke {
 
         System.out.printf(FORMAT, LINE);
         if (onDateTasks.size() == 0) {
-            System.out.printf(FORMAT, "You do not have any tasks occurring on this date.");
+            System.out.printf(FORMAT, "You do not have any tasks occurring before this date.");
         } else {
             System.out.printf(FORMAT, "Here are the tasks occurring on this date:");
             for (int i = 0; i < onDateTasks.size(); i++) {
                 System.out.printf("\t%d.%s\n", i + 1, onDateTasks.get(i));
+            }
+        }
+        System.out.printf(FORMAT, LINE);
+    }
+
+    // Abstraction to make main function neater
+    // Lists all tasks that are due X hours/days from now (from timezone of device)
+
+    private static void runDueCommand(String input, List<Task> tasks) throws DukeException {
+        // Check if input is valid and input number is an integer
+        if (input.length() <= 4 || !input.substring(4, input.length() - 1).matches("\\d+")) {
+            throw new DukeException("Command must be of the form: due [integer][h/d/m] "
+                    + "(h = hours, d = days, m = months)");
+        }
+
+        String offset = input.substring(4, input.length() - 1);
+        LocalDateTime dateTime = LocalDateTime.now();
+        switch (input.charAt(input.length() - 1)) {
+        case('h'):
+            dateTime = dateTime.plusHours(Integer.parseInt(offset));
+            break;
+        case('d'):
+            dateTime = dateTime.plusDays(Integer.parseInt(offset));
+            break;
+        case('m'):
+            dateTime = dateTime.plusMonths(Integer.parseInt(offset));
+            break;
+        default:
+            throw new DukeException("Command must be of the form: due [integer][h/d/m] "
+                    + "(h = hours, d = days, m = months)");
+        }
+
+        // Copy dateTime to an effectively final variable for use in lambda
+        LocalDateTime finalDateTime = dateTime;
+        List<Task> beforeDateTasks = tasks.stream()
+                .filter(task -> task.isBeforeDate(finalDateTime))
+                .collect(Collectors.toList());
+
+        System.out.printf(FORMAT, LINE);
+        if (beforeDateTasks.size() == 0) {
+            System.out.printf(FORMAT, "You do not have any tasks occurring within this time period.");
+        } else {
+            System.out.printf(FORMAT, "Here are the tasks occurring within this time period:");
+            for (int i = 0; i < beforeDateTasks.size(); i++) {
+                System.out.printf("\t%d.%s\n", i + 1, beforeDateTasks.get(i));
             }
         }
         System.out.printf(FORMAT, LINE);

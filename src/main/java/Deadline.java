@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,6 +16,12 @@ public class Deadline extends Task {
     @Override
     public boolean hasSameDate(LocalDate date) {
         return this.date.equals(date);
+    }
+
+    @Override
+    public boolean isBeforeDate(LocalDateTime dateTime) {
+        // Will also return true if the date times are equal
+        return !this.date.atTime(this.time).isAfter(dateTime);
     }
 
     @Override

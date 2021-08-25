@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Task {
     private String taskName;
@@ -14,6 +15,10 @@ public class Task {
     }
 
     public boolean hasSameDate(LocalDate date) {
+        return false;
+    }
+
+    public boolean isBeforeDate(LocalDateTime dateTime) {
         return false;
     }
 
