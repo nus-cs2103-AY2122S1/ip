@@ -16,6 +16,15 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns true if the description of the task contains a specified pattern within it, and false otherwise.
+     * @param pattern a string of the keyword to be checked against the description.
+     * @return true if pattern is contained within task description.
+     */
+    public boolean hasKeyWord(String pattern) {
+        return this.taskDescription.contains(pattern);
+    }
+
     public String toDukeStoreFormat() {
         return String.format("%s | %s", this.isDone ? "1" : "0", this.taskDescription);
     }

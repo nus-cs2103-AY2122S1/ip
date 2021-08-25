@@ -52,6 +52,9 @@ public class DukeParser {
         DukeCommand inputCommand;
         String command = inputString.split(" ", 2)[0];
         switch (command) {
+        case "find":
+            inputCommand = DukeCommand.FIND;
+            break;
         case "done":
             inputCommand = DukeCommand.DONE;
             break;

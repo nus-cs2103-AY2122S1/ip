@@ -63,6 +63,21 @@ public class TaskList {
     }
 
     /**
+     * Returns a list of tasks whose descriptions contains a specified pattern.
+     * @param pattern a string of the pattern to be matched.
+     * @return a list of matching tasks.
+     */
+    public TaskList findTasks(String pattern) {
+        TaskList filteredList = new TaskList();
+        for (Task task : this.taskList) {
+            if (task.hasKeyWord(pattern)) {
+                filteredList.appendTask(task);
+            }
+        }
+        return filteredList;
+    }
+
+    /**
      * Produces a string representing the store format of the list of tasks for Duke.
      *
      * @return a String of the list of tasks in Duke store format.

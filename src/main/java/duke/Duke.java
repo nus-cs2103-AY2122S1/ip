@@ -103,6 +103,15 @@ public class Duke {
         ui.dukePrint(returnMessage);
     }
 
+    private void findHandler(String args) {
+        TaskList filteredList = this.taskList.findTasks(args);
+        if (filteredList.size() > 0) {
+            this.ui.dukePrint("Here are the matching tasks in your list:\n" + filteredList);
+        } else {
+            this.ui.dukePrint(("We did not find any tasks that matched your query pattern."));
+        }
+    }
+
     private void byeHandler() {
         ui.dukePrint("Bye. Hope to see you again soon!");
     }
@@ -120,6 +129,9 @@ public class Duke {
     private void handleInput(DukeCommand command, String argsLiteral) {
         try {
             switch (command) {
+            case FIND:
+                findHandler(argsLiteral);
+                break;
             case DONE:
                 doneHandler(argsLiteral);
                 break;
