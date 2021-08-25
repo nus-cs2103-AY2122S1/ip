@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.main.DukeException;
+import duke.main.Parser;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -9,18 +10,37 @@ public class Deadline extends Task {
 
     private LocalDate by;
 
-    public Deadline(String description, String by) {
+    /**
+     * Constructor for a Deadline.
+     *
+     * @param description of Deadline.
+     * @param before      Time for Deadline.
+     */
+    public Deadline(String description, String before) {
         super(description);
-        this.by = Task.parseTime(by);
+        this.by = Parser.parseTime(before);
     }
 
+    /**
+     * Constructor for a Deadline.
+     *
+     * @param descAndTime String containing description and time
+     * @throws DukeException If extraction fails.
+     */
     public Deadline(String descAndTime) throws DukeException {
         this(extractDesc(descAndTime), extractTime(descAndTime));
     }
 
-    public Deadline(String desc, String time, boolean completed) {
-        this(desc, time);
-        super.completed = completed;
+    /**
+     * Overloaded constructor for Deadline.
+     *
+     * @param desc        Description for Deadline.
+     * @param before      Time for Deadline.
+     * @param isCompleted indicates whether deadline is completed.
+     */
+    public Deadline(String desc, String before, boolean isCompleted) {
+        this(desc, before);
+        super.completed = isCompleted;
     }
 
     private static String extractDesc(String descAndTime) throws DukeException {
@@ -43,6 +63,11 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + Task.printTime(by) + ")";
     }
 
+    /**
+     * Generates a formatted String for storing Deadline.
+     *
+     * @return formatted String for storing Deadline.
+     */
     @Override
     public String storageString() {
         return "D | " + super.completed + " | " + super.description + " | " + this.by;

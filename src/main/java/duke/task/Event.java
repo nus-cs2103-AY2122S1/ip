@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.main.DukeException;
+import duke.main.Parser;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -9,18 +10,35 @@ public class Event extends Task {
 
     private LocalDate at;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description of Event.
+     * @param at          Time for Event.
+     */
     public Event(String description, String at) {
         super(description);
-        this.at = Task.parseTime(at);
+        this.at = Parser.parseTime(at);
     }
 
+    /**
+     * Constructor for an Event.
+     *
+     * @param descAndTime String containing description and time
+     * @throws DukeException If extraction fails.
+     */
     public Event(String descAndTime) throws DukeException {
         this(extractDesc(descAndTime), extractTime(descAndTime));
     }
 
-    public Event(String desc, String time, boolean completed) {
-        this(desc, time);
-        super.completed = completed;
+    /**
+     * @param desc        Description of Event.
+     * @param at          Time for Event.
+     * @param isCompleted indicates whether event is completed.
+     */
+    public Event(String desc, String at, boolean isCompleted) {
+        this(desc, at);
+        super.completed = isCompleted;
     }
 
     private static String extractDesc(String descAndTime) throws DukeException {
@@ -43,6 +61,11 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + Task.printTime(at) + ")";
     }
 
+    /**
+     * Generates a formatted String for storing Event.
+     *
+     * @return formatted String for storing Event.
+     */
     @Override
     public String storageString() {
         return "E | " + super.completed + " | " + super.description + " | " + this.at;

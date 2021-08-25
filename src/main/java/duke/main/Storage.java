@@ -12,10 +12,20 @@ import java.util.stream.Collectors;
 public class Storage {
     private final Path filePath;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath Location at which tasks are stored
+     */
     public Storage(String filePath) {
         this.filePath = Path.of(filePath);
     }
 
+    /**
+     * Loads tasks from text storage.
+     *
+     * @return Loaded TaskList.
+     */
     public TaskList load() {
         try {
             List<Task> taskList = Files.lines(filePath).map((line) -> {
@@ -48,7 +58,12 @@ public class Storage {
         }
     }
 
-    public void updateStorage(TaskList tasklist) {
+    /**
+     * Write taskList to Storage
+     *
+     * @param tasklist that is written to Storage
+     */
+    public void write(TaskList tasklist) {
         try {
             Files.write(filePath, tasklist.formatStorage(), StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -56,6 +71,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Clear text file containing tasks.
+     */
     public void resetTasks() {
         try {
             System.out.println("\tClearing tasks...\n");

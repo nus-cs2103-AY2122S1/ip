@@ -2,7 +2,19 @@ package duke.main;
 
 import duke.task.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 public class Parser {
+    /**
+     * Parses user inputs.
+     *
+     * @param taskList list of user Tasks.
+     * @param storage  Storage liked to current session.
+     * @param input    String from user.
+     * @param ui       Ui for Duke.
+     * @return true if input is not "bye", else false.
+     */
     public static boolean parse(TaskList taskList, Storage storage, String input, Ui ui) {
         String[] commandAndDesc = input.split(" ", 2);
         String command = commandAndDesc[0];
@@ -16,7 +28,7 @@ public class Parser {
                 taskList.clearTasks();
                 break;
             case "list":
-                ui.printTaskList(taskList);
+                ui.displayTaskList(taskList);
                 break;
             case "deadline":
                 taskList.addTask(new Deadline(description));
@@ -53,11 +65,22 @@ public class Parser {
                 }
                 break;
         }
-        storage.updateStorage(taskList);
+        storage.write(taskList);
         return true;
     }
 
-    private void onDelete() {
-
+    /**
+     * Parses the time input.
+     *
+     * @param time input String.
+     * @return LocalDate generated from Parsing
+     * @throws DateTimeParseException if the input String is incorrectly formatted.
+     */
+    public static LocalDate parseTime(String time) throws DateTimeParseException {
+        try {
+            return LocalDate.parse(time);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("\t☹ OOPS!!! Please specify the time in the yyyy-mm-dd format.\n");
+        }
     }
 }
