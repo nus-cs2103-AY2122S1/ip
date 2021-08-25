@@ -8,8 +8,16 @@ public class Event extends Task {
     public String getDescription() {
         String temp = super.getDescription();
         temp = temp.replace("event ", "");
-        if (temp.contains("/at")) {
-            temp = temp.replace("/at", "(at:");
+
+        String oldDate = temp.substring(temp.lastIndexOf("at") + 3);
+        DateTimeConverter converter = new DateTimeConverter();
+        String newDate = converter.convertDateAndTime(oldDate);
+        temp = temp.replace(oldDate, newDate);
+
+        int intBeforeBy = temp.lastIndexOf("at") - 1;
+        if (temp.charAt(intBeforeBy) != ' ') {
+            char tempChar = temp.charAt(intBeforeBy);
+            temp = temp.replace(String.valueOf(tempChar), "(");
             return temp + ")";
         }
         return "(" + temp + ")";

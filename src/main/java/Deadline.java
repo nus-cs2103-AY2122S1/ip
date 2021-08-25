@@ -8,8 +8,16 @@ public class Deadline extends Task {
     public String getDescription() {
         String temp = super.getDescription();
         temp = temp.replace("deadline ", "");
-        if (temp.contains("/by")) {
-            temp = temp.replace("/by", "(by");
+
+        String oldDate = temp.substring(temp.lastIndexOf("by") + 3);
+        DateTimeConverter converter = new DateTimeConverter();
+        String newDate = converter.convertDateAndTime(oldDate);
+        temp = temp.replace(oldDate, newDate);
+
+        int intBeforeBy = temp.lastIndexOf("by") - 1;
+        if (temp.charAt(intBeforeBy) != ' ') {
+            char tempChar = temp.charAt(intBeforeBy);
+            temp = temp.replace(String.valueOf(tempChar), "(");
             return temp + ")";
         }
         return "(" + temp + ")";
