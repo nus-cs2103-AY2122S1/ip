@@ -1,4 +1,3 @@
-import java.sql.DataTruncation;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -6,15 +5,16 @@ import java.time.format.FormatStyle;
 
 public class Event extends Task{
     private final static String symbol = "[E]";
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
 
-    public Event(String action, String deadline) throws DateTimeParseException {
+    public Event(String action, LocalDateTime deadline) throws DateTimeParseException {
         super(action);
-        this.deadline = Task.parseDate(deadline);
+        this.deadline = deadline;
     }
 
     public String toSaveFormat() {
-        return String.format("%s||%s||%s||%s", symbol, super.isComplete(), super.getAction(), this.deadline);
+        return String.format("%s||%s||%s||%s", symbol, super.isComplete(), super.getAction(),
+                this.deadline.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")));
     }
 
     public String toString() {

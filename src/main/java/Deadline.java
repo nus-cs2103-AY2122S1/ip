@@ -3,17 +3,18 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class Deadline extends Task{
-    private LocalDateTime deadline;
+    private final LocalDateTime deadline;
     private final static String symbol = "[D]";
 
-    public Deadline(String action, String deadline){
+    public Deadline(String action, LocalDateTime deadline){
         super(action);
-        this.deadline = Task.parseDate(deadline);
+        this.deadline = deadline;
     }
 
     @Override
     public String toSaveFormat() {
-        return String.format("%s||%s||%s||%s", symbol, super.isComplete(), super.getAction(), this.deadline);
+        return String.format("%s||%s||%s||%s", symbol, super.isComplete(),
+                super.getAction(), this.deadline.format(DateTimeFormatter.ofPattern("d/M/yyyy HHmm")));
     }
 
     @Override

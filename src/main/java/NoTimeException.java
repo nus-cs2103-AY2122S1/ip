@@ -1,10 +1,5 @@
-public class NoTimeException  extends Exception{
+public class NoTimeException  extends DukeException{
     public NoTimeException(String errorMessage) {
         super(errorMessage);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("No Time Provided: %s", super.getMessage());
     }
 }

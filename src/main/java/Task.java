@@ -1,8 +1,3 @@
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public abstract class Task {
     final private String action;
     private boolean isCompleted;
@@ -30,12 +25,6 @@ public abstract class Task {
 
 
     abstract public String toSaveFormat() ;
-
-    public static LocalDateTime parseDate(String deadline) throws DateTimeParseException{
-        LocalDateTime date = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-        return date;
-    }
-
 
     @Override
     public String toString() {
