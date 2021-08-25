@@ -43,7 +43,7 @@ public class Parser {
                     String deadlineString = input.substring(deadlineIndex);
                     LocalDate deadline = LocalDate.parse(deadlineString, dtf);
                     String firstTrimmed = input.substring(9);
-                    String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/by"));
+                    String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/by") - 1);
                     Deadline createdDeadlineTask = new Deadline(lastTrimmed, false, deadline);
                     list.addToList(createdDeadlineTask);
                     System.out.println("Got it. I've added this task:\n" + "  " + createdDeadlineTask + "\n"
@@ -77,7 +77,7 @@ public class Parser {
                     int atIndex = input.indexOf("/at") + 4;
                     String atString = input.substring(atIndex);
                     String firstTrimmed = input.substring(6);
-                    String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/at"));
+                    String lastTrimmed = firstTrimmed.substring(0, firstTrimmed.indexOf("/at") - 1);
                     LocalDateTime at = LocalDateTime.parse(atString, dtf);
                     Event createdEventTask = new Event(lastTrimmed, false, at);
                     list.addToList(createdEventTask);
