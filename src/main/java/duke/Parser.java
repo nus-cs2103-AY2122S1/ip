@@ -111,6 +111,14 @@ public class Parser {
                 ui.showInputError("dateformat");
             }
             break;
+        case("find"): // Find all tasks corresponding to the given keyword
+            if (splitMessage.length == 2) { // If there is a keyword given
+                ArrayList<String> results = taskList.findTask(splitMessage[1]);
+                ui.showList(results);
+            } else { // If no keyword given
+                ui.showInputError("find");
+            }
+            break;
         default: // If input does not have a recognised command
             ui.showInputError("invalid");
             break;

@@ -104,6 +104,9 @@ public class Ui {
         case("index"):
             writeOutput("You forgot to indicate which task!!!");
             break;
+        case("find"):
+            writeOutput("Please enter a keyword/phrase to search for!");
+            break;
         default:
             writeOutput("Oops, something went wrong!");
             break;
@@ -126,8 +129,9 @@ public class Ui {
      */
     public String menu() {
         return "Commands supported:\n"
-                + "bye: quit program\n"
-                + "list: show the list of tasks\n"
+                + "bye: Quit program\n"
+                + "list: Displays the list of tasks\n"
+                + "find {keyword}: Shows a list of tasks containing {keyword}\n"
                 + "done {index}: Marks the {index} task as done\n"
                 + "delete {index}: Deletes the {index} task\n"
                 + "todo {task name}: Adds {task name} to the list\n"

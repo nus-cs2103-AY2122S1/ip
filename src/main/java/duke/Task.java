@@ -22,6 +22,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     /**
      * Changes the status of the Task to true.
      */
@@ -44,7 +48,7 @@ public class Task {
      *
      * @return "X" if task is done, " " otherwise.
      */
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 

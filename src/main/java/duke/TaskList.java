@@ -148,6 +148,17 @@ public class TaskList {
         }
     }
 
+    public ArrayList<String> findTask(String keyword) {
+        ArrayList<String> resultArray = new ArrayList<>();
+        keyword = keyword.toLowerCase();
+        for (Task t : list) {
+            if (t.getDescription().toLowerCase().contains(keyword)) {
+                resultArray.add(t.toString());
+            }
+        }
+        return resultArray;
+    }
+
     /**
      * Returns an array of tasks in their string representation.
      *
