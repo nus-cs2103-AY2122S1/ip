@@ -13,8 +13,7 @@ public class Ui {
 
     public void showWelcome() {
         String botName = "HuAI";
-        System.out.printf("Hello! I'm %s\n", botName);
-        System.out.println("What can I do for you?");
+        System.out.printf("Hello! I'm %s\nWhat can I do for you?\n", botName);
     }
 
     public void showBye() {
@@ -38,16 +37,12 @@ public class Ui {
     }
 
     public void showDivider() {
-        String bar = "";
-        for (int i = 0; i < 50; i++) {
-            bar += "_";
-        }
-        System.out.println(bar);
+        System.out.println("_".repeat(50));
     }
 
     /**
      * Prints error message from duke
-     * @param e Erorr thrown by Duke
+     * @param e Erorr thrown by duke.Duke
      */
     public void showDukeException(DukeException e) {
         System.out.printf("HuAI Liddat!!! %s\n", e);

@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 
 /**
- * Represents the persistent storage for tasks in Duke
+ * Represents the persistent storage for tasks in duke.Duke
  */
 public class Storage {
     private String filePath;

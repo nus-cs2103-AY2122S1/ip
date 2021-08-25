@@ -1,14 +1,11 @@
-import duke.Command;
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+package duke;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintStream;
 
 /**
- * Main class for running Duke
+ * Main class for running duke.Duke
  */
 public class Duke {
     private Storage storage;
@@ -57,7 +54,38 @@ public class Duke {
         }
     }
 
+    /**
+     * Run commands obtained from GUI to obtain output
+     */
+    public String getResponse(String fullCommand) {
+        // Change stdout of UI
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+        try {
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.showDukeException(e);
+        } catch (Exception e) {
+            ui.showException(e);
+        }
+        return output.toString();
+    }
+
+    /**
+     * Bridging function to print welcome message
+     */
+    public String getWelcomeMessage() {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
+        ui.showWelcome();
+        return output.toString();
+    }
+
+    /**
+     * Main entry method for duke.Duke
+     */
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new duke.Duke("data/tasks.txt").run();
     }
 }
