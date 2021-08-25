@@ -2,7 +2,7 @@ public class Task {
     protected String description;
     protected boolean status;
 
-    public Task(String description) {
+    private Task(String description) {
         this.description = description;
         this.status = false;
     }

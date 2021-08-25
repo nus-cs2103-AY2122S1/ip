@@ -9,6 +9,9 @@ Added: [D][ ] return book (by:  Sunday 3pm)
 There are 3 tasks in the list
 Marked as done:
 return book (by:  Sunday 3pm)
+Sorry, I don't understand what that means. :(
+Sorry, tasks must include descriptions.
+Sorry, please enter an integer after 'done'. (e.g. done 2)
 1. [T][ ]  borrow book
 2. [E][ ] project meeting (at:  Mon 2-4pm)
 3. [D][X] return book (by:  Sunday 3pm)
