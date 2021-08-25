@@ -20,7 +20,7 @@ bin/
 /text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
 
-# Task data
+# saber.task.Task data
 /data/
 
 
