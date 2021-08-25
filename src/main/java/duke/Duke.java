@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.File;
+import java.util.InputMismatchException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -43,7 +44,7 @@ public class Duke {
                         Ui.Border();
                         input = scanner.next();
                         break;
-                    } catch (DukeException e) {
+                    } catch (InputMismatchException | DukeException e) {
                         System.out.println(e.getMessage());
                         Ui.Border();
                         input = scanner.next();
