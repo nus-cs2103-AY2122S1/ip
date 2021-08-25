@@ -3,39 +3,34 @@ package task;
 /**
  * The is the Todo class that extends from Task.
  * Todo task does not have any date/time attached to it.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public class Todo extends Task {
     public static final String ID = "T";
 
     /**
-     * This is constructor method of Todo.
+     * Constructs a Todo object.
      *
-     * @param name task name
+     * @param name Task name.
      */
     public Todo(String name) {
         super(name);
     }
 
     /**
-     * This is constructor method of Todo.
+     * Constructs a Todo object.
      *
-     * @param name   task name
-     * @param isDone task status: done or not done
+     * @param name Task name.
+     * @param isDone Task status: done or not done.
      */
     public Todo(String name, boolean isDone) {
         super(name, isDone);
     }
 
     /**
-     * Format Task to String array.
+     * Formats Task to String array.
      * If task is done, [T, 0, Task1]; else, [T, 1, Task1].
      *
-     * @return Task in String array
+     * @return Task in String array.
      */
     @Override
     public String[] formatTask() {
@@ -49,9 +44,9 @@ public class Todo extends Task {
     }
 
     /**
-     * Mark task status as done.
+     * Returns task with done status.
      *
-     * @return task with done status
+     * @return Task with done status.
      */
     @Override
     public Todo markAsDone() {
@@ -59,7 +54,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Print task with format:
+     * Prints task.
      * If task is done, [T][X] Task1; else, [T][ ] Task1.
      */
     @Override

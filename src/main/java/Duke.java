@@ -7,23 +7,18 @@ import ui.Ui;
  * The project aims to build a product named Duke,
  * a Personal Assistant Chatbot that helps a person
  * to keep track of various things.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
 
 /**
  * This is the Main class that will contain the main method
  * to be executed at run-time.
  */
-
 public class Duke implements Message {
     private final Ui ui;
     private final Storage storage;
 
     /**
-     * This is constructor method of Duke.
+     * Constructs a Duke object.
      */
     public Duke() {
         ui = new Ui();
@@ -31,7 +26,7 @@ public class Duke implements Message {
     }
 
     /**
-     * Run Duke program.
+     * Runs Duke program.
      */
     public void run() {
         storage.loadTasks();
@@ -65,7 +60,7 @@ public class Duke implements Message {
     }
 
     /**
-     * This is Main method.
+     * Runs entry point for the Duke program.
      *
      * @param args an array of command-line arguments for the application
      */
@@ -74,7 +69,7 @@ public class Duke implements Message {
     }
 
     /**
-     * Display messages.
+     * Displays messages.
      */
     @Override
     public void show(String... messages) {

@@ -3,18 +3,13 @@ package exception;
 /**
  * The is the DukeIOException class that extends from Exception
  * to catch the IO exception.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public class DukeIOException extends Exception {
 
     /**
-     * This is constructor method of DukeIOException.
+     * Constructs a DukeIOException object.
      *
-     * @param message exception message
+     * @param message Exception message.
      */
     public DukeIOException(String message) {
         super(message);

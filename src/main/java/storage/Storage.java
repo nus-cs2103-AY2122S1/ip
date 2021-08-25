@@ -20,18 +20,15 @@ import java.util.stream.Stream;
 
 /**
  * The is the Storage class for task operations.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public class Storage {
     private final TaskManager taskManager;
     private final Message onMessage;
 
     /**
-     * This is constructor method of Storage.
+     * Constructs a Storage object.
+     *
+     * @param onMessage Message interface.
      */
     public Storage(Message onMessage) {
         taskManager = new TaskManager();
@@ -39,7 +36,7 @@ public class Storage {
     }
 
     /**
-     * Load tasks.
+     * Loads tasks.
      */
     public void loadTasks() {
         try {
@@ -50,7 +47,9 @@ public class Storage {
     }
 
     /**
-     * Get operation from command.
+     * Returns operation from command.
+     *
+     * @param command Command from user input.
      */
     public Operation getOperation(String command) {
         try {
@@ -93,7 +92,9 @@ public class Storage {
     }
 
     /**
-     * Add task.
+     * Adds task.
+     *
+     * @param command Command from user input.
      */
     public void addTask(String command) {
         Operation operation = getOperation(command);
@@ -152,7 +153,9 @@ public class Storage {
     }
 
     /**
-     * Complete task by number extracted from command.
+     * Completes task by number extracted from command.
+     *
+     * @param command Command from user input.
      */
     public void completeTask(String command) {
         Operation operation = getOperation(command);
@@ -175,7 +178,9 @@ public class Storage {
     }
 
     /**
-     * Delete task by number extracted from command.
+     * Deletes task by number extracted from command.
+     *
+     * @param command Command from user input.
      */
     public void deleteTask(String command) {
         Operation operation = getOperation(command);
@@ -199,7 +204,7 @@ public class Storage {
     }
 
     /**
-     * Clear all tasks.
+     * Clears all tasks.
      */
     public void clearTasks() {
         taskManager.clearTasks();
@@ -207,7 +212,7 @@ public class Storage {
     }
 
     /**
-     * Print tasks from TaskManager with format:
+     * Prints tasks from TaskManager with format:
      *      1. Task1
      *      2. Task2
      *      ...
@@ -220,7 +225,7 @@ public class Storage {
     }
 
     /**
-     * Save tasks to file.
+     * Saves tasks to file.
      */
     public void saveTasksToFile() {
         try {
@@ -231,7 +236,9 @@ public class Storage {
     }
 
     /**
-     * Find tasks by keyword extracted from command.
+     * Finds tasks by keyword extracted from command.
+     *
+     * @param command Command from user input.
      */
     public void findTasks(String command) {
         Operation operation = getOperation(command);
