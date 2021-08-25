@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Represents the main logic of the code when the user enters an input.
+ */
 public class Parser {
     private Scanner scan;
     private Storage storage;
@@ -14,12 +17,12 @@ public class Parser {
     private String input = "";
 
     /**
-     * A consructor to create a parser object
+     * A constructor to create a parser object.
      *
-     * @param scan A scanner that takes in the input from the user
-     * @param storage A storage that deals with loading and saving files
-     * @param taskList A list that keeps track of all tasks
-     * @param ui An object that perform tasks related to interactions with user
+     * @param scan A scanner that takes in the input from the user.
+     * @param storage A storage that deals with loading and saving files.
+     * @param taskList A list that keeps track of all tasks.
+     * @param ui An object that perform tasks related to interactions with user.
      */
     Parser(Scanner scan, Storage storage, TaskList taskList, Ui ui) {
         this.scan = scan;
@@ -29,10 +32,10 @@ public class Parser {
     }
 
     /**
-     * Checks if a string is an integer or not
+     * Checks if a string is an integer or not.
      *
-     * @param s A string from the user input
-     * @return True if it is an integer, false otherwise
+     * @param s A string from the user input.
+     * @return True if it is an integer, false otherwise.
      */
     public static boolean isNumeric(String s) {
         try {
@@ -44,7 +47,7 @@ public class Parser {
     }
 
     /**
-     * Makes sense of the user input
+     * Makes sense of the user input.
      */
     public void parse() {
         do {
@@ -52,65 +55,21 @@ public class Parser {
                 input = scan.nextLine();
                 arr = input.split(" ");
                 if (input.equals("bye")) {
-                    ui.printBye();
+                    break;
                 } else if (arr[0].equals("done")) {
-                    if (arr.length == 1) {
-                        throw new InvalidCommandException("Please specify a number");
-                    } else if (!isNumeric(arr[1])) {
-                        throw new InvalidCommandException("Please enter a number");
-                    } else if (taskList.getSize() == 0) {
-                        throw new InvalidCommandException("You have not added any task!");
-                    } else if ((Integer.parseInt(arr[1]) > taskList.getSize()
-                            || Integer.parseInt(arr[1]) <= 0)) {
-                        throw new InvalidValueException("Enter a valid number!");
-                    } else {
-                        ui.printDone();
-                        taskList.markAsDone(parseInt(arr[1]) - 1);
-                        ui.printCurrentTask(taskList, parseInt(arr[1]) - 1);
-                    }
+                    parseDone(arr);
                 } else if (arr[0].equals("delete")) {
-                    if (arr.length == 1) {
-                        throw new InvalidCommandException("Please specify a number");
-                    } else if (!isNumeric(arr[1])) {
-                        throw new InvalidCommandException("Please enter a number");
-                    } else if (taskList.getSize() == 0) {
-                        throw new InvalidCommandException("You have not added any task!");
-                    } else if ((Integer.parseInt(arr[1]) > taskList.getSize()
-                            || Integer.parseInt(arr[1]) <= 0)) {
-                        throw new InvalidValueException("Enter a valid number!");
-                    } else {
-                        ui.printRemove();
-                        ui.printCurrentTask(taskList, parseInt(arr[1]) - 1);
-                        taskList.removeTask(parseInt(arr[1]) - 1);
-                    }
+                    parseDelete(arr);
                 } else if (arr[0].equals("todo")) {
-                    if (arr.length < 2) {
-                        throw new EmptyDescriptionException("Missing description / date");
-                    }
-                    taskList.addTask(new Todo(TaskList.getDescription(arr)));
-                    ui.printAddTask(taskList);
+                    parseTodo(arr);
                 } else if (arr[0].equals("deadline")) {
-                    if (arr.length < 2) {
-                        throw new EmptyDescriptionException("Missing description / date");
-                    }
-                    taskList.addTask(new Deadline(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
-                    ui.printAddTask(taskList);
+                    parseDeadline(arr);
                 } else if (arr[0].equals("event")) {
-                    if (arr.length < 2) {
-                        throw new EmptyDescriptionException("Missing description / date");
-                    }
-                    taskList.addTask(new Event(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
-                    ui.printAddTask(taskList);
+                    parseEvent(arr);
                 } else if (input.equals("list")) {
-                    ui.displayList(taskList);
+                    parseList();
                 } else if (arr[0].equals("find")) {
-                    if (arr.length == 1) {
-                        throw new InvalidCommandException("Please specify a task you want to search");
-                    } else if (taskList.getSize() == 0) {
-                        throw new InvalidCommandException("You have not added any task!");
-                    } else {
-                        taskList.findTask(arr[1]);
-                    }
+                    parseFind(arr);
                 } else {
                     throw new InvalidCommandException("Command not Found");
                 }
@@ -125,5 +84,118 @@ public class Parser {
                 System.out.println(e.getMessage());
             }
         } while (!input.equals("bye"));
+    }
+
+    /**
+     * Deals with the user input when the user types "done".
+     *
+     * @param arr Array of strings from the user input.
+     * @throws InvalidCommandException If the following input is not valid.
+     */
+    public void parseDone(String[] arr) throws InvalidCommandException {
+        if (arr.length == 1) {
+            throw new InvalidCommandException("Please specify a number");
+        } else if (!isNumeric(arr[1])) {
+            throw new InvalidCommandException("Please enter a number");
+        } else if (taskList.getSize() == 0) {
+            throw new InvalidCommandException("You have not added any task!");
+        } else if ((Integer.parseInt(arr[1]) > taskList.getSize()
+                || Integer.parseInt(arr[1]) <= 0)) {
+            throw new InvalidValueException("Enter a valid number!");
+        } else {
+            ui.printDone();
+            taskList.markAsDone(parseInt(arr[1]) - 1);
+            ui.printCurrentTask(taskList, parseInt(arr[1]) - 1);
+        }
+    }
+
+    /**
+     * Deals with the user input when the user types "delete".
+     *
+     * @param arr Array of strings from the user input.
+     * @throws InvalidCommandException If the following input is not valid.
+     * @throws InvalidValueException If the following input is not a valid number.
+     */
+    public void parseDelete(String[] arr) throws InvalidCommandException,
+            InvalidValueException {
+        if (arr.length == 1) {
+            throw new InvalidCommandException("Please specify a number");
+        } else if (!isNumeric(arr[1])) {
+            throw new InvalidCommandException("Please enter a number");
+        } else if (taskList.getSize() == 0) {
+            throw new InvalidCommandException("You have not added any task!");
+        } else if ((Integer.parseInt(arr[1]) > taskList.getSize()
+                || Integer.parseInt(arr[1]) <= 0)) {
+            throw new InvalidValueException("Enter a valid number!");
+        } else {
+            ui.printRemove();
+            ui.printCurrentTask(taskList, parseInt(arr[1]) - 1);
+            taskList.removeTask(parseInt(arr[1]) - 1);
+        }
+    }
+
+    /**
+     * Deals with the user input when the user types "todo".
+     *
+     * @param arr Array of strings from the user input.
+     * @throws EmptyDescriptionException If the next input is missing.
+     */
+    public void parseTodo(String[] arr) throws EmptyDescriptionException {
+        if (arr.length < 2) {
+            throw new EmptyDescriptionException("Missing description / date");
+        }
+        taskList.addTask(new Todo(TaskList.getDescription(arr)));
+        ui.printAddTask(taskList);
+    }
+
+    /**
+     * Deals with the user input when the user types "deadline".
+     *
+     * @param arr Array of strings from the user input.
+     * @throws EmptyDescriptionException If the next input is missing.
+     */
+    public void parseDeadline(String[] arr) throws EmptyDescriptionException {
+        if (arr.length < 2) {
+            throw new EmptyDescriptionException("Missing description / date");
+        }
+        taskList.addTask(new Deadline(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
+        ui.printAddTask(taskList);
+    }
+
+    /**
+     * Deals with the user input when the user types "event".
+     *
+     * @param arr Array of strings from the user input.
+     * @throws EmptyDescriptionException If the next input is missing.
+     */
+    public void parseEvent(String[] arr) throws EmptyDescriptionException {
+        if (arr.length < 2) {
+            throw new EmptyDescriptionException("Missing description / date");
+        }
+        taskList.addTask(new Event(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
+        ui.printAddTask(taskList);
+    }
+
+    /**
+     * Deals with the user input when the user types "list".
+     */
+    public void parseList() {
+        ui.displayList(taskList);
+    }
+
+    /**
+     * Deals with the user input when the user types "find".
+     *
+     * @param arr Array of strings from the user input.
+     * @throws InvalidCommandException If the following input is not valid.
+     */
+    public void parseFind(String[] arr) throws InvalidCommandException {
+        if (arr.length == 1) {
+            throw new InvalidCommandException("Please specify a task you want to search");
+        } else if (taskList.getSize() == 0) {
+            throw new InvalidCommandException("You have not added any task!");
+        } else {
+            taskList.findTask(arr[1]);
+        }
     }
 }

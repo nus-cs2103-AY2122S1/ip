@@ -1,14 +1,17 @@
 package duke;
 
+/**
+ * Represents an error when the command is invalid.
+ */
 public class InvalidCommandException extends RuntimeException {
     InvalidCommandException(String message) {
         super(message);
     }
 
     /**
-     * Returns the string representation of InvalidCommandException
+     * Returns the string representation of InvalidCommandException.
      *
-     * @return The string representation of InvalidCommandException
+     * @return The string representation of InvalidCommandException.
      */
     @Override
     public String toString() {

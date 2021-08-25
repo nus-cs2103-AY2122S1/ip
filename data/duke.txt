@@ -1,6 +1,7 @@
 1.E|Done a (a: a)
-2.D|NotDone a (by: a)
+2.D|Done a (by: a)
 3.D|NotDone a (by: )
 4.E|NotDone ball (at: )
 5.T|NotDone swimming 
 6.T|NotDone swimmingpoool 
+7.E|NotDone a (at: )

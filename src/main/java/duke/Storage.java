@@ -6,23 +6,26 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the file used to load and save data.
+ */
 public class Storage {
 
     private String filepath;
 
     /**
-     * A constructor to create a Storage object
+     * A constructor to create a Storage object.
      *
-     * @param filepath The location of the file to load from and save to
+     * @param filepath The location of the file to load from and save to.
      */
     Storage(String filepath) {
         this.filepath = filepath;
     }
 
     /**
-     * Reads the list of tasks from a file
+     * Reads the list of tasks from a file.
      *
-     * @param ls A list to keep track of all tasks
+     * @param ls A list to keep track of all tasks.
      */
     public void readFile(TaskList ls) {
         try {
@@ -83,9 +86,9 @@ public class Storage {
     }
 
     /**
-     * Writes to a file
+     * Writes to a file.
      *
-     * @param ls A list to keep track of all files
+     * @param ls A list to keep track of all files.
      */
     public static void saveFile(TaskList ls) {
         try {

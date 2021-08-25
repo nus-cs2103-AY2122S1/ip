@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Represents a list of tasks with its operations.
+ */
 public class TaskList {
     private ArrayList<Task> ls;
     private ArrayList<Task> searchList;
@@ -17,10 +20,10 @@ public class TaskList {
     }
 
     /**
-     * Returns the description from a task entered by the user
+     * Returns the description from a task entered by the user.
      *
-     * @param arr The array that contains strings from the user input
-     * @return A string containing the description only
+     * @param arr The array that contains strings from the user input.
+     * @return A string containing the description only.
      */
     public static String getDescription(String[] arr) {
         String str = "";
@@ -36,10 +39,10 @@ public class TaskList {
     }
 
     /**
-     * Returns the deadline from a task entered by the user
+     * Returns the deadline from a task entered by the user.
      *
-     * @param arr The array that contains strings from the user input
-     * @return A string containing the deadline only
+     * @param arr The array that contains strings from the user input.
+     * @return A string containing the deadline only.
      */
     public static String getDeadline(String[] arr) throws DateTimeParseException {
         String str = "";
@@ -87,53 +90,53 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the collection of tasks
+     * Adds a task to the collection of tasks.
      *
-     * @param task The task to be added
+     * @param task The task to be added.
      */
     public void addTask(Task task) {
         ls.add(task);
     }
 
     /**
-     * Removes a task at a certain index in the collection
+     * Removes a task at a certain index in the collection.
      *
-     * @param index Index of the task to be removed
+     * @param index Index of the task to be removed.
      */
     public void removeTask(int index) {
         ls.remove(index);
     }
 
     /**
-     * Sets isBoolean to true
+     * Sets isBoolean to true.
      *
-     * @param index Index of the task to be marked as done
+     * @param index Index of the task to be marked as done.
      */
     public void markAsDone(int index) {
         ls.get(index).markAsDone();
     }
 
     /**
-     * Returns a task a certain index in the location
+     * Returns a task a certain index in the location.
      *
-     * @param index Index of the task to be returned
-     * @return a Task at a certain index
+     * @param index Index of the task to be returned.
+     * @return a Task at a certain index.
      */
     public Task getTask(int index) {
         return ls.get(index);
     }
 
     /**
-     * Returns the size of the list
+     * Returns the size of the list.
      *
-     * @return The size of the list
+     * @return The size of the list.
      */
     public int getSize() {
         return ls.size();
     }
 
     /**
-     * Prints the list of tasks
+     * Prints the list of tasks.
      */
     public void displayList() {
         if (ls.size() == 0) {
@@ -147,7 +150,7 @@ public class TaskList {
     }
 
     /**
-     * Prints the acknowledgement and the current number of tasks in the list
+     * Prints the acknowledgement and the current number of tasks in the list.
      */
     public void printAddTask() {
         System.out.println("Got it. I've added this task: ");
@@ -156,9 +159,9 @@ public class TaskList {
     }
 
     /**
-     * Allows the user to find a task in the list
+     * Allows the user to find a task in the list.
      *
-     * @param search The search term
+     * @param search The search term.
      */
     public void findTask(String search) {
         searchList = new ArrayList<>();

@@ -2,10 +2,13 @@ package duke;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Represents a class that deals with interaction with the user.
+ */
 public class Ui {
 
     /**
-     * Prints the welcome message
+     * Prints the welcome message.
      */
     public void printWelcome() {
         System.out.println(
@@ -22,46 +25,46 @@ public class Ui {
     }
 
     /**
-     * Prints the goodbye message
+     * Prints the goodbye message.
      */
     public void printBye() {
         System.out.println("Good Bye. Have a nice day!");
     }
 
     /**
-     * Informs the user that a task has been marked as done
+     * Informs the user that a task has been marked as done.
      */
     public void printDone() {
         System.out.println("Nice! I've marked this task as done: ");
     }
 
     /**
-     * Informs the user that a task has been removed from the list
+     * Informs the user that a task has been removed from the list.
      */
     public void printRemove() {
         System.out.println("Noted. I've removed this task: ");
     }
 
     /**
-     * Informs the user that a task has been added
-     * @param ls The list of tasks
+     * Informs the user that a task has been added.
+     * @param ls The list of tasks.
      */
     public void printAddTask(TaskList ls) {
         ls.printAddTask();
     }
 
     /**
-     * Displays the list of tasks
-     * @param ls The list of tasks
+     * Displays the list of tasks.
+     * @param ls The list of tasks.
      */
     public void displayList(TaskList ls) {
         ls.displayList();
     }
 
     /**
-     * Prints a task at a certain index in the list
-     * @param ls The list of tasks
-     * @param index The index of the tasks in the list
+     * Prints a task at a certain index in the list.
+     * @param ls The list of tasks.
+     * @param index The index of the tasks in the list.
      */
     public void printCurrentTask(TaskList ls, int index) {
         System.out.println(ls.getTask(index).toString());

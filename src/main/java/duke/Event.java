@@ -1,13 +1,16 @@
 package duke;
 
+/**
+ * Represents a task that has a description and time.
+ */
 public class Event extends Task {
     protected String by;
 
     /**
-     * A constructor to create an Event object
+     * A constructor to create an Event object.
      *
-     * @param description The description of an Event object
-     * @param by The deadline of an Event object
+     * @param description The description of an Event object.
+     * @param by The deadline of an Event object.
      */
     public Event(String description, String by) {
         super(description);
@@ -16,9 +19,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of a Event object
+     * Returns the string representation of a Event object.
      *
-     * @return The string representation of a Event object
+     * @return The string representation of a Event object.
      */
     @Override
     public String toString() {
