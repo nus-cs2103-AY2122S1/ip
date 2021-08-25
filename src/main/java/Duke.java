@@ -23,53 +23,90 @@ public class Duke {
 
     private void handleInput() throws Exception {
         System.out.print("> ");
-        String input = this.in.next();
+        String command = this.in.next();
+        String arguments = this.in.nextLine().trim();
+        boolean hasArguments = arguments.length() != 0;
 
-        if (input.equals("bye")) {
-            this.shouldExit = true;
-            printMessage(BYE_TEXT);
-        } else if (input.equals("list")) {
-            StringBuilder builder = new StringBuilder();
-            int numTasks = this.tasks.size();
-
-            for (int i = 0; i < numTasks; i++) {
-                Task item = this.tasks.get(i);
-                builder.append(i + 1);
-                builder.append(". ");
-                builder.append(item.toString());
-                if (i < numTasks - 1) {
-                    builder.append("\n");
+        switch (command) {
+            case "bye": {
+                if (hasArguments) {
+                    throw new Exception("Command `bye` does not accept arguments");
                 }
+
+                this.shouldExit = true;
+                printMessage(BYE_TEXT);
+                break;
             }
+            case "list": {
+                if (hasArguments) {
+                    throw new Exception("Command `list` does not accept arguments");
+                }
 
-            printMessage(builder.toString());
-        } else if (input.equals("done")) {
-            int taskIndex = this.in.nextInt();
-            Task task = this.tasks.get(taskIndex - 1);
-            task.markCompleted();
+                StringBuilder builder = new StringBuilder();
+                int numTasks = this.tasks.size();
 
-            printMessage("Marking task as completed:\n    " + task.toString());
-        } else if (input.equals("todo")) {
-            String todoInput = this.in.nextLine().trim();
-            Task todo = Todo.fromInput(todoInput);
-            this.tasks.add(todo);
+                if (numTasks == 0) {
+                    printMessage("No tasks saved");
+                } else {
+                    for (int i = 0; i < numTasks; i++) {
+                        Task item = this.tasks.get(i);
+                        builder.append(i + 1);
+                        builder.append(". ");
+                        builder.append(item.toString());
+                        if (i < numTasks - 1) {
+                            builder.append("\n");
+                        }
+                    }
 
-            this.printTaskAddedMessage(todo);
-        } else if (input.equals("deadline")) {
-            String deadlineInput = this.in.nextLine();
-            Task deadline = Deadline.fromInput(deadlineInput);
-            this.tasks.add(deadline);
+                    printMessage(builder.toString());
+                }
 
-            this.printTaskAddedMessage(deadline);
-        } else if (input.equals("event")) {
-            String eventInput = this.in.nextLine();
-            Task event = Event.fromInput(eventInput);
-            this.tasks.add(event);
+                break;
+            }
+            case "done": {
+                if (!hasArguments) {
+                    throw new Exception("Command `done` requires an argument");
+                }
 
-            this.printTaskAddedMessage(event);
-        } else {
-            String fullInput = input + " " + this.in.nextLine();
-            throw new Exception("Command not recognized: " + fullInput);
+                Task task;
+                try {
+                    int taskIndex = Integer.parseInt(arguments);
+                    task = this.tasks.get(taskIndex - 1);
+                    task.markCompleted();
+                } catch (NumberFormatException e) {
+                    throw new Exception("Unable to parse number from arguments: " + arguments);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new Exception("There is no task with the following number: " + arguments);
+                }
+
+                printMessage("Marking task as completed:\n    " + task.toString());
+                break;
+            }
+            case "todo": {
+                Task todo = Todo.fromInput(arguments);
+                this.tasks.add(todo);
+
+                this.printTaskAddedMessage(todo);
+                break;
+            }
+            case "deadline": {
+                Task deadline = Deadline.fromInput(arguments);
+                this.tasks.add(deadline);
+
+                this.printTaskAddedMessage(deadline);
+                break;
+            }
+            case "event": {
+                Task event = Event.fromInput(arguments);
+                this.tasks.add(event);
+
+                this.printTaskAddedMessage(event);
+                break;
+            }
+            default: {
+                String fullInput = command + " " + arguments;
+                throw new Exception("Command not recognized: " + fullInput);
+            }
         }
     }
 

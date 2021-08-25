@@ -3,7 +3,11 @@ public class Todo extends Task {
         super(description);
     }
 
-    public static Todo fromInput(String input) {
+    public static Todo fromInput(String input) throws Exception {
+        String todoDescription = input.trim();
+        if (todoDescription.length() == 0) {
+            throw new Exception("Todo must have description");
+        }
         return new Todo(input);
     }
 

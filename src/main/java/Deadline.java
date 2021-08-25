@@ -9,6 +9,14 @@ public class Deadline extends Task {
     public static Deadline fromInput(String input) throws Exception {
         String[] deadlineInputs = input.trim().split("\\s+/by\\s+", 2);
 
+        if (deadlineInputs.length == 1) {
+            if (deadlineInputs[0].length() == 0) {
+                throw new Exception("Deadline must have description and time");
+            } else {
+                throw new Exception("Deadline must have time");
+            }
+        }
+
         if (deadlineInputs.length != 2) {
             throw new Exception("Deadline must have description and time");
         }
