@@ -82,6 +82,7 @@ public class DukeListMgr {
         }
 
         toDoList.add(createdTask);
+        this.triggerSaveTasks();
 
 
         Duke.dukeSays("Ok, I have added this task: \n" + createdTask.getLineOfTaskInfo()
@@ -109,6 +110,7 @@ public class DukeListMgr {
         if (taskIndex >= 0 && taskIndex < toDoList.size()) {
             BaseTask currTask = toDoList.get(taskIndex);
             currTask.setAsDone();
+            this.triggerSaveTasks();
 
             return "Nice! I've marked this task as done:\n" + currTask.getLineOfTaskInfo();
         } else {
@@ -132,6 +134,7 @@ public class DukeListMgr {
             BaseTask currTask = toDoList.get(taskIndex);
 
             toDoList.remove(taskIndex);
+            this.triggerSaveTasks();
             return "Ok, this task has been removed:\n" + currTask.getLineOfTaskInfo()
                     + "\nCurrent total amount of tasks in list: " + toDoList.size();
         } else {
