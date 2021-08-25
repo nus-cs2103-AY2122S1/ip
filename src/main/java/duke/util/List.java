@@ -1,12 +1,18 @@
+package duke.util;
+
+import duke.task.*;
+import duke.util.Storage;
+import duke.exception.DukeException;
 import java.util.ArrayList;
 import java.io.*;
 
 public class List {
     private ArrayList<Task> list;
+    private Storage store;
 
     public List() {
-        this.list = new ArrayList<>();
-        loadFromFile();
+        this.store = new Storage("list.ser");
+        this.list = store.loadFromFile();
     }
 
     public void addToDo(String text) {
@@ -15,7 +21,7 @@ public class List {
         System.out.println("Got it. I've added this task: ");
         System.out.println(newToDo);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
-        writeToFile();
+        store.writeToFile(list);
     }
 
     public void addDeadline(String text, String by) throws DukeException {
@@ -24,7 +30,7 @@ public class List {
         System.out.println("Got it. I've added this task: ");
         System.out.println(newDl);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
-        writeToFile();
+        store.writeToFile(list);
     }
 
     public void addEvent(String text, String at) {
@@ -33,7 +39,7 @@ public class List {
         System.out.println("Got it. I've added this task: ");
         System.out.println(newEvent);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
-        writeToFile();
+        store.writeToFile(list);
     }
 
     public void setIndexDone(int index) {// starts from 1
@@ -44,7 +50,7 @@ public class List {
         list.get(index - 1).setDone();
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(list.get(index - 1).toString());
-        writeToFile();
+        store.writeToFile(list);
     }
 
     public void deleteTask(int index) {//starts from 1
@@ -56,7 +62,7 @@ public class List {
         System.out.println(list.get(index - 1).toString());
         list.remove(index - 1);
         System.out.println("Now you have " + list.size() + " tasks in the list.");
-        writeToFile();
+        store.writeToFile(list);
     }
 
     public void show() {
@@ -68,32 +74,5 @@ public class List {
             System.out.println(i + "." + list.get(i - 1).toString());
         }
     }
-    private void writeToFile() {
-        try {
-            FileOutputStream writeData = new FileOutputStream("list.ser");
-            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
 
-            writeStream.writeObject(list);
-            writeStream.flush();
-            writeStream.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void loadFromFile() {
-        try{
-            FileInputStream readData = new FileInputStream("list.ser");
-            ObjectInputStream readStream = new ObjectInputStream(readData);
-
-            ArrayList list2 = (ArrayList<Task>) readStream.readObject();
-            this.list = list2;
-            readStream.close();
-        }catch (FileNotFoundException e) {
-            return;
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 }

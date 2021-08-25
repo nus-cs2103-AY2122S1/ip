@@ -1,3 +1,7 @@
+import duke.util.List;
+import duke.util.Parser;
+import duke.util.Ui;
+
 public class Duke {
 
     private Ui ui;

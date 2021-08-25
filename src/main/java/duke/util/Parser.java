@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.util.List;
+
 import java.util.Scanner;
 
 public class Parser {

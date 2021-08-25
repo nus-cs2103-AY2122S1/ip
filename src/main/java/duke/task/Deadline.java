@@ -1,13 +1,16 @@
+package duke.task;
+
+import duke.exception.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate byDate;
     protected String byTime;
 
-    public Deadline(String description, String by) throws DukeException{
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
             String[] parts = by.split(" ");//split along the whitespace to get the integer
