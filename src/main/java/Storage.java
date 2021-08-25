@@ -18,7 +18,7 @@ public class Storage {
             System.out.println("Something went wrong: " + e.getMessage());
         } finally {
             if (created){
-                System.out.println("New data file has been created.");
+                System.out.println("    New data file has been created.");
             } else {
                 System.out.println("Data file already exist.");
             }
