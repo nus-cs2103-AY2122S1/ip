@@ -4,6 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+    /**
+     * the endpoint for parsing the user input.
+     *
+     * @param input input string from the user.
+     * @return the command instance.
+     * @throws DukeException thrown when there are error parsing.
+     */
     public static Command parse(String input) throws DukeException {
         Action action = getAction(input);
         String argument = getArgument(input);

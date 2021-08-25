@@ -12,6 +12,11 @@ public class Duke {
     private final Ui ui;
     private TaskList tasks;
 
+    /**
+     * public constructor for Duke.
+     *
+     * @param path the path for the saved file.
+     */
     public Duke(String path) {
         this.storage = new Storage(path);
         this.ui = new Ui();
