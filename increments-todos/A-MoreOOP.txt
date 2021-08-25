@@ -26,5 +26,5 @@ GnosisParser:
 -- aka logic controller for reciving user command
 
 GnsosisTaskManager:
--- model.Task Manager handling logic
+-- model.task Manager handling logic
 

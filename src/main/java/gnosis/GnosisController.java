@@ -1,7 +1,7 @@
 package gnosis;
 
-import Task.TaskCommandManager;
-import Task.TaskStorageManager;
+import task.TaskCommandManager;
+import task.TaskStorageManager;
 import model.*;
 import util.GnosisConstants;
 

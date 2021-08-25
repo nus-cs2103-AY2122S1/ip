@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 import util.GnosisConstants;
 import gnosis.GnosisException;

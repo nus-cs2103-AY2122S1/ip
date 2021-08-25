@@ -27,7 +27,7 @@ Extension: A-Collections
 A-Collections
 ↳ Use Java Collections classes
 
-Use Java Collections classes for storing data. For example, you can use an ArrayList<model.Task> to store the tasks.
+Use Java Collections classes for storing data. For example, you can use an ArrayList<model.task> to store the tasks.
 
 Tasks to achieve level-6:
 

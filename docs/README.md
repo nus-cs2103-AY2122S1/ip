@@ -3,7 +3,7 @@
 
 ## gnosis.Gnosis Feature(s)
 
-### model.Task Manager
+### model.task Manager
 
 gnosis.Gnosis provides the ability to create, retrieve and delete different variety of tasks
 to manage.</br>
@@ -100,13 +100,13 @@ Expected outcome:
 Marks specified task done.<br/>
 [X] - denotes a task that is marked has done<br/>
 ```
-model.Task 2 marked as done:
+model.task 2 marked as done:
 [D][X] return book  (by: Sunday)
 ```
 ***
 ### `delete` - Deletes task from list
 
-Deletes task from task Task list.
+Deletes task from task task list.
 
 Example of usage:
 
@@ -116,7 +116,7 @@ Expected outcome:
 
 Displays deleted task.<br/>
 ```
-Understood. model.Task has been deleted:
+Understood. model.task has been deleted:
 3. [E][ ] project meeting  (at: Mon 2-4pm)
 ```
 ***
