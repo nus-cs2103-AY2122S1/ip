@@ -8,12 +8,12 @@ public class ExitCommand extends Command {
     /**
      * Constructor of the class `ExitProcessor`.
      */
-    public ExitCommand(Duke duke) {
-        super("bye", duke);
+    public ExitCommand() {
+        super("bye");
     }
 
     @Override
-    public boolean process() {
+    public boolean execute(TaskList taskList, Storage storage) {
         this.message = ExitCommand.EXITING_MESSAGE;
         return false;
     }

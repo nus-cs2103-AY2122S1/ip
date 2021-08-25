@@ -18,11 +18,12 @@ public class AddTaskCommand extends Command {
      * @return Whether the program is still running.
      */
     @Override
-    public boolean process() {
-        this.duke.addToList(this.task);
+    public boolean execute(TaskList taskList, Storage storage) {
+        taskList.addTask(this.task);
+        storage.addToFile(this.task);
         this.message = String.format(
                 "Got it. I've added this task:\n  %s\nNow you have %o tasks in the list.\n",
-                this.task, this.duke.getNumOfTasks());
+                this.task, taskList.getNumOfTasks());
         return true;
     }
 }

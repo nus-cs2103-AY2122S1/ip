@@ -1,6 +1,5 @@
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 /**
  * Represents the Duke program. Manages tasks based on commands received.
@@ -19,44 +18,28 @@ public class Duke {
      * @param filePath Path of the file to retrieve data.
      */
     public Duke(Path filePath) {
+        this.ui = new Ui();
         this.taskList = new TaskList();
         this.storage = new Storage(filePath, this.taskList);
-    }
-
-    public void addToList(Task task) {
-        this.taskList.addTask(task);
-        this.storage.addToFile(task);
-    }
-
-    public void removeFromList(Task task) {
-        this.taskList.removeFromList(task);
-        this.storage.removeFromFile(this.taskList.indexOf(task));
-    }
-
-    public int getNumOfTasks() {
-        return this.taskList.getNumOfTasks();
-    }
-
-    public ArrayList<Task> getTasks() {
-        return this.taskList.getTasks();
-    }
-
-    public Task getTaskAt(int index) {
-        return this.taskList.get(index);
-    }
-
-    public void rewriteFile() {
-        this.storage.rewriteFile();
     }
 
     /**
      * Runs the duke program.
      */
     public void run() {
-        this.ui = new Ui(this);
+        this.ui.showWelcome();
         boolean isRunning = true;
         while (isRunning) {
-            isRunning = this.ui.getCommandOutput();
+            String commandString = this.ui.getCommand();
+            Command command;
+            try {
+                command = Parser.parse(commandString);
+                isRunning = command.execute(this.taskList, this.storage);
+                this.ui.showCommandOutput(command);
+            } catch (DukeException dukeException) {
+                this.ui.showError(dukeException);
+                continue;
+            }
         }
     }
 

@@ -2,12 +2,13 @@
  * Represents a processor that can mark a task as done. A subclass of the Processor class.
  */
 public class TaskDoneCommand extends Command {
+    int taskIndex;
     /**
      * Constructor of the class `TaskDoneProcessor`.
      */
-    public TaskDoneCommand(Task task, Duke duke) {
-        super("done", duke);
-        this.task = task;
+    public TaskDoneCommand(int taskIndex) {
+        super("done");
+        this.taskIndex = taskIndex;
         this.message = "Nice! I've marked this task as done:\n";
     }
 
@@ -17,9 +18,14 @@ public class TaskDoneCommand extends Command {
      * @return Whether the program is still running.
      */
     @Override
-    public boolean process() {
+    public boolean execute(TaskList taskList, Storage storage) throws InvalidTaskNoException {
+        try {
+            this.task = taskList.get(this.taskIndex);
+        } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
+            throw new InvalidTaskNoException();
+        }
         this.task.markAsDone();
-        this.duke.rewriteFile();
+        storage.rewriteFile();
         this.message += String.format("  %s\n", this.task.toString());
         return true;
     }

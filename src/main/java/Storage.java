@@ -121,9 +121,4 @@ public class Storage {
             Ui.showFileNotFoundError();
         }
     }
-
-    public void markTaskAsDone(Task task) {
-        task.markAsDone();
-        this.rewriteFile();
-    }
 }

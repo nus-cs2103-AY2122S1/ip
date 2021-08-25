@@ -1,7 +1,7 @@
 /**
  * Represents a processor that can process a command and print out the results.
  */
-public class Command {
+public abstract class Command {
     /** The command to be processed */
     protected String content;
     /** Message generated */
@@ -23,7 +23,7 @@ public class Command {
      *
      * @return Whether the program is still running.
      */
-    public boolean process() {
+    public boolean execute(TaskList taskList, Storage storage) throws DukeException {
         this.message = this.content;
         return true;
     }
