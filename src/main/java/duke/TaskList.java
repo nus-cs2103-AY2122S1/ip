@@ -66,7 +66,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the taskList and prints a success message.
+     * Adds a task to the TaskList and prints a success message.
      * @param task the task to be added
      */
     public void add(Task task) {
@@ -86,11 +86,16 @@ public class TaskList {
     }
 
     /**
-     * Returns the taskList.
-     * @return an ArrayList holding the list of tasks
+     * Converts the TaskList to a storable string.
+     *
+     * @return String to be stored
      */
-    public ArrayList<Task> getTaskList() {
-        return this.taskList;
+    public String toStorage() {
+        String storage = "";
+        for (Task task : taskList) {
+            storage += task.toStorage() + "\n";
+        }
+        return storage;
     }
 
     /**

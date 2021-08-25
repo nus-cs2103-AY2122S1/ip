@@ -58,11 +58,16 @@ public class Storage {
      * @throws IOException if there is an error writing to the fileIO
      */
     public void save(TaskList taskList) throws IOException {
-        ArrayList<Task> allTasks = taskList.getTaskList();
         FileWriter fileWriter = new FileWriter(this.filePath);
-        for (Task task : allTasks) {
-            fileWriter.write(task.toStorage() + "\n");
-        }
+        fileWriter.write(taskList.toStorage());
         fileWriter.close();
+    }
+
+    /**
+     * Deletes the storage file at filePath.
+     */
+    public void clear() {
+        File file = new File(this.filePath);
+        file.delete();
     }
 }

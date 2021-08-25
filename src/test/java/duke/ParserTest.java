@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
 
+    /**
+     * Tests if the Parser returns an equivalent ToDo object.
+     */
     @Test
     public void parseToDo() {
         String userInput = "todo homework";
@@ -18,6 +21,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if the Parser returns an equivalent Event object.
+     */
     @Test
     public void parseEvent() {
         String userInput = "event lecture /at 2021-08-25";
@@ -28,6 +34,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if the Parser returns an equivalent Deadline object.
+     */
     @Test
     public void parseDeadline() {
         String userInput = "deadline submit assignment /by 2021-08-25";
@@ -38,6 +47,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests if the correct exception is thrown when an invalid command is parsed.
+     */
     @Test
     public void noSuchCommandExceptionTest() {
         String userInput = "duke is stupid";
