@@ -9,16 +9,16 @@ import java.util.Scanner;
 
 public class Duke {
 
-    /* Default line separator design. */
+    /** Default line separator designs. */
     private static String sepLine = "===========================================";
     private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
     private static String sepLineClose = "\\\\\\<<<===================================>>>///";
 
+    /** Tracks whether the exit command was used. */
+    private boolean isExited;
 
-    private static boolean isExited;
 
-
-    // Storage and Management of Duke Objects
+    /** Storage and Management of Duke Objects. */
     private static Duke dukeInstance;
 
     private DukeCommandParser currDukeCmdParser;
@@ -27,17 +27,19 @@ public class Duke {
     private TDList currTDL;
 
     private Duke() {
-        currTDL = new TDList();
-        currUiCtrl = new DukeUI();
-        currDukeCmdParser = new DukeCommandParser();
+        this.currTDL = new TDList();
+        this.currUiCtrl = new DukeUI();
+        this.currDukeCmdParser = new DukeCommandParser();
+        this.isExited = false;
 
-        //Processes the path to use to access storage file
+        // Processes the path to use to access storage file
         try {
             Path xmlPath = Paths.get("../", "dukeDocs", "listSave1.xml");
             //System.out.println(xmlPath.getFileName());
-            currStorageMgr = new DukeStorageManager(xmlPath);
+            this.currStorageMgr = new DukeStorageManager(xmlPath);
         } catch (InvalidPathException e) {
-            currStorageMgr = new DukeStorageManager();
+            // If there was an error loading the save file, then create a new empty one.
+            this.currStorageMgr = new DukeStorageManager();
         }
 
 
@@ -61,41 +63,48 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        //Initialize variables
-        currTDL = new TDList();
-        isExited = false;
+        Duke currDuke = getCurrDuke();
 
+        // Show Welcome Message
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Give me something to do!");
-
-        System.out.println(sepLine);
-
-        runInputLoopMain();
+        // Start accepting input
+        currDuke.runInputLoopMain();
     }
-
+        //Initialize variables
+//        currTDL = new TDList();
+//        isExited = false;
+//
+//
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        System.out.println("Hello from\n" + logo);
+//        System.out.println("Give me something to do!");
+//
+//        System.out.println(sepLine);
+//
+//        runInputLoopMain();
+//    }
+//
     /**
      * The main loop used when detecting keyboard input.
      * Stops when "bye" is detected.
      */
-    private static void runInputLoopMain() {
+    private void runInputLoopMain() {
         /* Create scanner for detecting input. */
         Scanner currScanner = new Scanner(System.in);
 
         /* Stores last input by user. */
         String lastInput = null;
 
-        while (!isExited) {
+        while (!this.isExited) {
             System.out.println("");
             lastInput = currScanner.nextLine();
 
             try {
-                processCmdInput(lastInput);
+                this.processCmdInput(lastInput);
             } catch (DukeExceptionBase dukeE) {
                 dukeE.dukeSayErrorMsg();
             }
@@ -105,24 +114,27 @@ public class Duke {
     }
 
     /**
-     * Runs to process the command input.
+     * Runs to process the command input using the command parser.
      *
      * @param lastInput   The command to process.
      */
-    private static void processCmdInput(String lastInput) throws DukeExceptionBase {
+    private void processCmdInput(String lastInput) throws DukeExceptionBase {
+        // Get the type of command that this input represents
+        DukeCommandParser.CommandType cmdType = this.currDukeCmdParser.parse(lastInput);
+
         TDLTask.TaskType currTaskType = TDLTask.checkTaskType(lastInput);
 
 
-        if (lastInput.equals("bye")) {
-            dukeExiter();
-        } else if (lastInput.equals("list")) {
-            listOutTDL();
-        } else if (lastInput.length() >= 4 && lastInput.substring(0, 4).equals("done")) {
-            markItemDoneInTDL(lastInput);
-        } else if (lastInput.length() >= 6 && lastInput.substring(0, 6).equals("delete")) {
-            deleteTaskInTDL(lastInput);
-        } else if (currTaskType != TDLTask.TaskType.NONE) {
-            addToTDL(lastInput, currTaskType);
+        if (cmdType == DukeCommandParser.CommandType.BYE) {
+            this.dukeExiter();
+        } else if (cmdType == DukeCommandParser.CommandType.LIST) {
+            this.listOutTDL();
+        } else if (cmdType == DukeCommandParser.CommandType.MARK_TASK_DONE) {
+            this.markItemDoneInTDL(lastInput);
+        } else if (cmdType == DukeCommandParser.CommandType.DEL_TASK) {
+            this.deleteTaskInTDL(lastInput);
+        } else if (cmdType == DukeCommandParser.CommandType.ADD_TASK) {
+            this.addToTDL(lastInput, currTaskType);
 
         } else {
             unknownCommandEntered();
@@ -132,9 +144,9 @@ public class Duke {
     /**
      * Runs when program is going to exit.
      */
-    private static void dukeExiter() {
+    private void dukeExiter() {
         dukeSays("Bye. Hope to see you soon!");
-        isExited = true;
+        this.isExited = true;
     }
 
     /**
@@ -150,20 +162,20 @@ public class Duke {
         System.out.println(sepLineClose);
     }
 
-    private static void unknownCommandEntered() throws DukeExceptionBase {
+    private void unknownCommandEntered() throws DukeExceptionBase {
         throw new DukeExceptionBase("Please enter something valid!");
     }
 
-    private static void addToTDL(String str, TDLTask.TaskType currTaskType) throws DukeExceptionBase {
-        currTDL.tdlAdd(str, currTaskType);
+    private void addToTDL(String str, TDLTask.TaskType currTaskType) throws DukeExceptionBase {
+        this.currTDL.tdlAdd(str, currTaskType);
     }
 
 
-    private static void listOutTDL() {
-        currTDL.printOutTDL();
+    private void listOutTDL() {
+        this.currTDL.printOutTDL();
     }
 
-    private static void markItemDoneInTDL(String command) throws DukeExceptionBase {
+    private void markItemDoneInTDL(String command) throws DukeExceptionBase {
         if (command.length() < 6) {
             throw new DukeExceptionBase("You need to specify a task to set as done.");
         }
@@ -176,11 +188,11 @@ public class Duke {
             throw new DukeExceptionBase("Please enter an integer.");
 
         }
-        String dukeOutput = currTDL.markTaskAsDone(taskNo);
+        String dukeOutput = this.currTDL.markTaskAsDone(taskNo);
         dukeSays(dukeOutput);
     }
 
-    private static void deleteTaskInTDL(String command) throws DukeExceptionBase {
+    private void deleteTaskInTDL(String command) throws DukeExceptionBase {
         if (command.length() < 8) {
             throw new DukeExceptionBase("You need to specify a task to delete.");
         }
@@ -193,7 +205,7 @@ public class Duke {
             throw new DukeExceptionBase("Please enter an integer.");
 
         }
-        String dukeOutput = currTDL.deleteTask(taskNo);
+        String dukeOutput = this.currTDL.deleteTask(taskNo);
         dukeSays(dukeOutput);
     }
 
