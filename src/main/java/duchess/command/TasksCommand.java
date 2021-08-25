@@ -13,17 +13,16 @@ public class TasksCommand extends Command {
     }
 
     /**
-     * Handles the logic for checking and creating ToDo tasks.
-     * @param input
-     * @param duchess
-     * @return
+     * Handles the logic for checking tasks before or after a date
+     * @param duchess The Duchess to return the output to.
+     * @return The tasks which match the condition input.
      */
-    public boolean handleLogic(String input, Duchess duchess) {
+    public boolean handleLogic(Duchess duchess) {
         String invalidMessage = "The command \"tasks\" should be followed by " +
                 "a keyword \"/after\" or \"/before\", a date and/or a time (e.g before 2/10/2019 2pm" +
                 "or after today)";
         try {
-            String[] timeSplit = input.substring(6).split(" ", 2);
+            String[] timeSplit = getName().substring(6).split(" ", 2);
             String keyword = timeSplit[0];
             String date = timeSplit[1];
             boolean isBefore;

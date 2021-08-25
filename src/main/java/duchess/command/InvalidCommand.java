@@ -18,11 +18,10 @@ public class InvalidCommand extends Command {
 
     /**
      * Handles the logic for creating an invalid command.
-     * @param input The user given input.
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(String input, Duchess duchess) {
+    public boolean handleLogic(Duchess duchess) {
         duchess.getUi().printError();
         return true;
     }

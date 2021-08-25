@@ -25,14 +25,13 @@ public class EventCommand extends Command {
 
     /**
      * Handles the logic for checking and creating Event tasks.
-     * @param input The user given input.
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(String input, Duchess duchess)  {
+    public boolean handleLogic(Duchess duchess)  {
         String invalidMessage = "The command \"event\" should be followed by " +
                 "a task and a date and time, e.g (meeting /at 2/10/2019 2pm-4pm).";
-        String taskAndDuration = input.split(" ", 2)[1];
+        String taskAndDuration = getName().split(" ", 2)[1];
         try {
             if (!taskAndDuration.contains(" /at "))
                 throw new DuchessException(invalidMessage);

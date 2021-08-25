@@ -1,6 +1,8 @@
 package duchess.task;
 
 import duchess.main.DuchessException;
+
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,7 +20,7 @@ public class Deadline extends Task{
     protected LocalDateTime by;
 
     /** The DateTimeFormatter used when printing the Event. */
-    private static final DateTimeFormatter PRINT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private static final DateTimeFormatter PRINT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
     /** The DateTimeFormatter when converting time from string. */
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy ha");
@@ -57,8 +59,7 @@ public class Deadline extends Task{
             System.out.println(replacement);
             return LocalDateTime.parse(replacement,
                     replacement.contains(":") ? DATE_MINUTES_FORMATTER : DATE_FORMATTER);
-        } catch (DateTimeParseException e) {
-            e.printStackTrace();
+        } catch (DateTimeException e) {
             throw new DuchessException("Wrong format used.");
         }
     }

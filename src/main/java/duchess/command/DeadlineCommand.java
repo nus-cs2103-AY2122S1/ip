@@ -24,14 +24,13 @@ public class DeadlineCommand extends Command {
 
     /**
      * Handles the logic for checking and creating Deadline tasks.
-     * @param input The user given input.
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(String input, Duchess duchess)  {
+    public boolean handleLogic(Duchess duchess)  {
         String invalidMessage = "The command \"deadline\" should be followed by " +
                 "a task and a date and time, e.g (read book /by 11/10/2019 4pm).";
-        String taskAndBy = input.split(" ", 2)[1];
+        String taskAndBy = getName().split(" ", 2)[1];
         try {
             if (!taskAndBy.contains(" /by "))
                 throw new DuchessException(invalidMessage);

@@ -24,7 +24,7 @@ public class ByeCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(String input, Duchess duchess) {
+    public boolean handleLogic(Duchess duchess) {
         return false;
     }
 

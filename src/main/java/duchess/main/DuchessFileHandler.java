@@ -131,4 +131,9 @@ public class DuchessFileHandler {
             return new DuchessList();
         }
     }
+
+    public static void clear() {
+        File savedDuchess = new File(FILE_LOCATION);
+        savedDuchess.delete();
+    }
 }

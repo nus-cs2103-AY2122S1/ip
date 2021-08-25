@@ -48,7 +48,7 @@ public class Duchess {
             try {
                 String input = sc.nextLine();
                 Command c = parser.checkPrefix(input);
-                isRunning = c.handleLogic(input, this);
+                isRunning = c.handleLogic(this);
             } catch (DuchessException d){
                 ui.prettyPrint(d.getMessage());
             }

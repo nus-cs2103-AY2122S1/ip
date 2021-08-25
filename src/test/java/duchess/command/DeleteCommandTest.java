@@ -1,0 +1,18 @@
+package duchess.command;
+
+import duchess.command.DoneCommand;
+import duchess.main.Duchess;
+import duchess.main.DuchessFileHandler;
+import duchess.task.ToDo;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class DeleteCommandTest {
+    @Test
+    public void testHandleLogic() {
+        DuchessFileHandler.clear();
+        Duchess d = new Duchess();
+        assertEquals(new DeleteCommand("delete 1").handleLogic(d), true);
+    }
+}

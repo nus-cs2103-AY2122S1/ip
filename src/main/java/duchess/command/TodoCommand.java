@@ -23,12 +23,11 @@ public class TodoCommand extends Command {
 
     /**
      * Handles the logic for checking and creating ToDo tasks.
-     * @param input The user given input.
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(String input, Duchess duchess) {
-        String task = input.split(" ", 2)[1];
+    public boolean handleLogic(Duchess duchess) {
+        String task = getName().split(" ", 2)[1];
         // Valid input
         ToDo todo = new ToDo(task);
         duchess.getDuchessList().add(todo);

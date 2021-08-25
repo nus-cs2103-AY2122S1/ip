@@ -24,12 +24,11 @@ public class DoneCommand extends Command {
 
     /**
      * Handles the logic for marking a task a done.
-     * @param input The user given input.
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(String input, Duchess duchess)  {
-        String index = input.split(" ", 2)[1];
+    public boolean handleLogic(Duchess duchess)  {
+        String index = getName().split(" ", 2)[1];
         // Parsing a non-numeric string will throw a NumberFormatException
         try {
             if (duchess.getDuchessList().checkWithinRange(Integer.parseInt(index))) {
