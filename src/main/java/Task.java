@@ -36,7 +36,7 @@ public class Task {
     }
 
     /**
-     * Returns the file's details in the format "T,<isDone>,<desc>"
+     * Returns the file's details in the format "<isDone>,<desc>"
      * to be stored in the hard disk
      *
      * @return formatted string containing task details

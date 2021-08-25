@@ -18,7 +18,13 @@ public class Deadline extends Task{
         this.by = by;
     }
 
-    //TODO
+    /**
+     * Constructor for a Deadline task.
+     *
+     * @param description the title or description for the task
+     * @param by date/time by which task must be done.
+     * @param status boolean indicating true if task is done, false otherwise.
+     */
     public Deadline(String description, String by, boolean status) {
         super(description);
         this.by = by;

@@ -19,7 +19,13 @@ public class Event extends Task{
         this.at = at;
     }
 
-    //TODO
+    /**
+     * Constructor for an Event task.
+     *
+     * @param description the title or description for the task
+     * @param at date/time of the task.
+     * @param status boolean indicating true if task is done, false otherwise.
+     */
     public Event(String description, String at, boolean status) {
         super(description);
         this.at = at;

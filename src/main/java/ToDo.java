@@ -14,7 +14,12 @@ public class ToDo extends Task{
         super(description);
     }
 
-    //TODO
+    /**
+     * Constructor for a ToDo Task.
+     *
+     * @param description the title or description of the task.
+     * @param status boolean indicating true if task is done, false otherwise.
+     */
     public ToDo(String description, boolean status) {
         super(description);
         this.isDone = status;
