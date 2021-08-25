@@ -52,4 +52,22 @@ public class TaskList {
     public int getSize() {
         return this.tasks.size();
     }
+
+    /**
+     * Method which finds all the Task in the TaskList that match the keyword given.
+     *
+     * @param keyword The keyword entered by the user.
+     * @return TaskList The resultant TaskList that contains all the Task that match the keyword.
+     */
+    public TaskList findMatchingTask(String keyword) {
+        ArrayList<Task> resultList = new ArrayList<>();
+
+        for (Task t : this.tasks) {
+            if (t.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
+                resultList.add(t);
+            }
+        }
+
+        return new TaskList(resultList);
+    }
 }
