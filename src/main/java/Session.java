@@ -62,6 +62,9 @@ public class Session {
             case DELETE:
                 this.taskList.removeTask(parsedInput.taskIndex, true);
                 break;
+            case FIND:
+                this.taskList.findTasks(parsedInput.taskDescription);
+                break;
             case BYE:
                 this.bye();
         }

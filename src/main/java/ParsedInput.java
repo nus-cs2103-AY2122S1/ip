@@ -51,6 +51,9 @@ public class ParsedInput {
                 this.commandType = CommandType.DELETE;
                 this.taskIndex = Integer.parseInt(splitInput[1]);
                 break;
+            case "find":
+                this.commandType = CommandType.FIND;
+                this.taskDescription = joinStrings(splitInput, 1, splitInput.length - 1);
             default:
                 throw JadenInputException.unrecognized();
         }
