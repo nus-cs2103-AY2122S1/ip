@@ -21,9 +21,9 @@ public class Deadline extends Task {
 
     @Override
     public String encode() {
-        return "d" + DukeMemory.DELIMITER
-                + (this.isCompleted() ? "1" : "0") + DukeMemory.DELIMITER
-                + endDate.format(DateTimeFormatter.ISO_LOCAL_DATE) + DukeMemory.DELIMITER
+        return "d" + Storage.DELIMITER
+                + (this.isCompleted() ? "1" : "0") + Storage.DELIMITER
+                + endDate.format(DateTimeFormatter.ISO_LOCAL_DATE) + Storage.DELIMITER
                 + this.getDescription();
     }
 }

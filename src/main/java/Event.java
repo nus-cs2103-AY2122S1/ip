@@ -21,9 +21,9 @@ public class Event extends Task {
 
     @Override
     public String encode() {
-        return "e" + DukeMemory.DELIMITER
-                + (this.isCompleted() ? "1" : "0") + DukeMemory.DELIMITER
-                + eventDate.format(DateTimeFormatter.ISO_LOCAL_DATE) + DukeMemory.DELIMITER
+        return "e" + Storage.DELIMITER
+                + (this.isCompleted() ? "1" : "0") + Storage.DELIMITER
+                + eventDate.format(DateTimeFormatter.ISO_LOCAL_DATE) + Storage.DELIMITER
                 + this.getDescription();
     }
 }

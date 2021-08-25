@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * Handles data persistence for Duke.
  */
-public class DukeMemory {
+public class Storage {
 
     /**
      * Delimiter character for separating fields.
@@ -24,7 +24,7 @@ public class DukeMemory {
      */
     private final File file;
 
-    DukeMemory(String filePath) {
+    Storage(String filePath) {
         this.file = new File(filePath);
     }
 

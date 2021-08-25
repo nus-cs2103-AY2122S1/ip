@@ -13,8 +13,8 @@ public class ToDo extends Task {
 
     @Override
     public String encode() {
-        return "t" + DukeMemory.DELIMITER
-                + (this.isCompleted() ? "1" : "0") + DukeMemory.DELIMITER
+        return "t" + Storage.DELIMITER
+                + (this.isCompleted() ? "1" : "0") + Storage.DELIMITER
                 + this.getDescription();
     }
 }
