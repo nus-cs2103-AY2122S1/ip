@@ -7,10 +7,6 @@ public class TaskHandler {
         this.list = list;
     }
 
-    public TaskHandler() {
-        this.list = new ArrayList<Task>();
-    }
-
     public void printList() {
         System.out.println("    Here are the tasks in your list:");
         for (int i = 0; i < list.size(); i++)

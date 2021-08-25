@@ -8,7 +8,6 @@ public class Duke {
     private TaskHandler taskHandler;
     private TaskSaver taskSaver;
 
-
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.initialiseDuke();
@@ -98,3 +97,4 @@ public class Duke {
         }
     }
 }
+
