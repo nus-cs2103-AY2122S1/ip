@@ -4,34 +4,59 @@ import duke.tasks.Task;
 
 import java.util.ArrayList;
 
-// Class that handles the storing of Tasks
+/**
+ * Class that handles the storing of Tasks during the app's runtime
+  */
 public class Tasklist {
+    /** Used to store each Task */
     private ArrayList<Task> taskList;
+
+    /** To keep track of the current number of Tasks */
     private int lastItem = 0;
 
-    // Constructor for a list
+    /**
+     * Constructor for a Tasklist
+     */
     public Tasklist() {
         this.taskList = new ArrayList<>();
     }
 
-    // Mark a certain task as done
+    /**
+     * Marks a target task in the Tasklist as complete and returns it
+     *
+     * @param index The index (as shown on the UI) of the task to be completed
+     * @return The completed task
+     */
     public Task markAsDone(int index) {
         this.taskList.get(index - 1).completeTask();
         return this.taskList.get(index - 1); 
     }
 
-    // Method to add a task to the list
+    /**
+     * Adds a task to the Tasklist
+     *
+     * @param task The task to be added to the Tasklist
+     */
     public void addTask(Task task) {
         taskList.add(lastItem, task);
         this.lastItem++;
     }
 
-    // Get number of tasks in list
+    /**
+     * Returns the total number of tasks in the Tasklist
+     *
+     * @return The total number of tasks in the Tasklist
+     */
     public int getTotalTasks() {
         return this.lastItem;
     }
 
-    // Method for deletion of tasks
+    /**
+     * Deletes the target task by index
+     *
+     * @param index The target task's index (as shown on the UI)
+     * @return The deleted task
+     */
     public Task deleteTask(int index) {
         Task removed = this.taskList.get(index - 1);
         this.taskList.remove(index - 1);
@@ -39,12 +64,21 @@ public class Tasklist {
         return removed;
     }
 
-    // Method to get list of all tasks
+    /**
+     * Returns the list of all Tasks.
+     *
+     * @return An ArrayList containing all Tasks in the Tasklist
+     */
     public ArrayList<Task> getAllTasks() {
         return this.taskList;
     }
 
-    // String representation of the tasklist
+    /**
+     * Returns the String representation of the Tasklist, with
+     * each task numbered starting from 1.
+     *
+     * @return A String representation of the Tasklist
+     */
     @Override
     public String toString() {
         String contents = "";

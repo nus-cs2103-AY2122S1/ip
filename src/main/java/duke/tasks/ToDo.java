@@ -1,24 +1,47 @@
 package duke.tasks;
-// class that handles ToDo tasks 
-// -> ToDo is a type of Task with no date/time
+
+/**
+ * Class that encapsulates a ToDo.
+ * A ToDo is a type of task with no associated datetime information.
+ */
 public class ToDo extends Task {
-    
-    // Constructor for a ToDo
+
+    /**
+     * A Constructor for a ToDo.
+     *
+     * @param description The String description of the ToDo
+     */
     public ToDo(String description) {
         super(description);
     }
 
-    // Constructor for a ToDo that may be completed
+    /**
+     * An alternate constructor for a ToDo that may be completed
+     *
+     * @param description A String description of the ToDo
+     * @param isComplete A Boolean representing if the ToDo is complete
+     */
     public ToDo(String description, Boolean isComplete) {
         super(description, isComplete);
     }
 
+    /**
+     * Returns an easily parsable, String file representation of a ToDo
+     * for use in persistent storage.
+     *
+     * @return An easily parsable String representing the ToDo
+     */
     @Override
     public String getFileRepr() {
         return "T" + super.getFileRepr();
     }
 
-    // String representation of a ToDo
+    /**
+     * Returns a String representation of a ToDo for use in
+     * the Duke UI.
+     *
+     * @return A user-friendly, readable String representing the ToDo
+     */
     @Override
     public String toString() {
         if (this.isCompleted()) {
