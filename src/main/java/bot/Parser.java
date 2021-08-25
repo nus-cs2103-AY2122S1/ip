@@ -9,7 +9,7 @@ import commands.Command;
  */
 public class Parser {
 
-    private static final Scanner reader;
+    private static Scanner reader;
 
     static {
         reader = new Scanner(System.in);

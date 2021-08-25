@@ -7,8 +7,8 @@ import bot.TaskType;
  */
 public class TodoTask extends Task {
 
-    private final String taskDesc;
-    private final TaskType taskType = TaskType.Todo;
+    private String taskDesc;
+    private final TaskType TASK_TYPE = TaskType.Todo;
 
     public TodoTask(String description) {
         this.taskDesc = description.trim();
@@ -31,7 +31,7 @@ public class TodoTask extends Task {
 
     @Override
     TaskType getTaskType() {
-        return this.taskType;
+        return this.TASK_TYPE;
     }
 
 }

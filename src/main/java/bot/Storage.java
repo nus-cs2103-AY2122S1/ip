@@ -11,7 +11,7 @@ import tasks.Task;
  */
 public class Storage {
 
-    public static final String savefilePath = "data/save.txt";
+    public static final String SAVE_FILE_PATH = "data/save.txt";
 
     private static void write(List<String> texts) {
         try {
@@ -20,14 +20,14 @@ public class Storage {
                 writer.write(s + System.lineSeparator());
             }
             writer.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 
     private static List<String> read() {
         try {
             List<String> lines = new ArrayList<>();
-            BufferedReader reader = new BufferedReader(new FileReader(savefilePath));
+            BufferedReader reader = new BufferedReader(new FileReader(SAVE_FILE_PATH));
             String line = reader.readLine();
             while (line != null) {
                 lines.add(line);
@@ -41,7 +41,7 @@ public class Storage {
     }
 
     /**
-     * Save bot's task list
+     * Save Bot's task list
      *
      * @param bot running bot
      */
@@ -50,7 +50,7 @@ public class Storage {
     }
 
     /**
-     * Load saved data to bot's saved list
+     * Load saved data to Bot's saved list
      *
      * @param bot running bot
      */
@@ -66,7 +66,7 @@ public class Storage {
     }
 
     private static String getAbsolutePath() {
-        return new File(savefilePath).getAbsolutePath();
+        return new File(SAVE_FILE_PATH).getAbsolutePath();
     }
 
 }
