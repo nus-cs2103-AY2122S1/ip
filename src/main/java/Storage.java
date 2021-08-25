@@ -20,6 +20,7 @@ public class Storage {
                 writer.write("\n");
             }
 
+            System.out.println("List saved!");
             writer.close();
 
         } catch (IOException | DukeException e) {
@@ -36,6 +37,7 @@ public class Storage {
                 list.read(Parser.read(temp));
             }
 
+            System.out.println("List loaded successfully!");
             scanner.close();
 
         } catch (IOException | DukeException e) {
