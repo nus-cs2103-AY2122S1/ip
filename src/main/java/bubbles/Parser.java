@@ -1,3 +1,5 @@
+package bubbles;
+
 public class Parser {
     // deals with making sense of the user command
     public Object[] formatTask(String task) {

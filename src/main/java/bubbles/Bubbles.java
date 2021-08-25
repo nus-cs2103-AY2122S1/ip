@@ -1,3 +1,5 @@
+package bubbles;
+
 public class Bubbles {
     private String FILEPATH = "data/bubbles.txt";
     private Storage storage;
@@ -21,7 +23,7 @@ public class Bubbles {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         String introduction = "You should do what you want to do!\n"
-                + "Hello I'm Bubbles from the Powerpuff Girls, what are you up to?";
+                + "Hello I'm bubbles.Bubbles from the Powerpuff Girls, what are you up to?";
 
         System.out.println("Hello from\n" + logo);
         formatting(introduction);

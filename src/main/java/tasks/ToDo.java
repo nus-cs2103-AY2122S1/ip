@@ -1,6 +1,6 @@
 package tasks;
 
-import exceptions.EmptyTaskException;
+import bubbles.exceptions.EmptyTaskException;
 
 public class ToDo extends Task {
     private ToDo(String description, boolean completed) {

@@ -1,8 +1,8 @@
 package tasks;
 
-import exceptions.EmptyTaskException;
-import exceptions.IndexOutOfBoundsException;
-import exceptions.InvalidCommandException;
+import bubbles.exceptions.EmptyTaskException;
+import bubbles.exceptions.IndexOutOfBoundsException;
+import bubbles.exceptions.InvalidCommandException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -158,7 +158,7 @@ public class TaskList {
                 t.markAsDone();
 
                 String encouragement = "Good job! I've marked this task as done:";
-                String reward = "Bubbles will reward you with a piece of candy.";
+                String reward = "bubbles.Bubbles will reward you with a piece of candy.";
 
                 System.out.println(SEPARATOR + "\n"
                         + encouragement + "\n"
