@@ -1,6 +1,8 @@
 package tiger.parser;
 
+import tiger.constants.Priority;
 import tiger.exceptions.inputs.TigerEmptyStringException;
+import tiger.exceptions.inputs.TigerInvalidArgumentException;
 import tiger.utils.CustomDate;
 import tiger.utils.DateStringConverter;
 import tiger.utils.StringUtils;
@@ -13,6 +15,7 @@ public class EventParser extends Parser {
     private String todo = "";
     private CustomDate date;
     private String dateString = "";
+    private Priority priority = Priority.MEDIUM;
 
     /**
      * The {@code EventParser} parser class takes in an input String and
@@ -28,32 +31,47 @@ public class EventParser extends Parser {
     }
 
     public void parse() throws TigerEmptyStringException {
-        StringUtils removeSpaces = new StringUtils();
+        StringUtils stringUtils = new StringUtils();
+        String regex = "^(event|Event|EVENT)|(/at)|(/priority)";
         List<String> array =
-                Arrays.asList(removeSpaces.removeBackAndFrontSpaces(this.input).split(" "));
-        boolean atFound = false;
-        for (int i = 1; i < array.size(); i++) {
-            if (array.get(i).equals("/at")) {
-                atFound = true;
-                continue;
+                Arrays.asList(stringUtils.removeBackAndFrontSpaces(this.input).split(regex));
+        // assert that the array is at size at least 3
+        if (array.size() <= 1) {
+            throw new TigerEmptyStringException("Event description");
+        }
+        if (array.size() <= 2) {
+            throw new TigerEmptyStringException("Event date");
+        }
+        if (this.input.contains("/priority")) {
+            // task priority
+            if (array.size() < 4) {
+                throw new TigerEmptyStringException("Event priority");
             }
-            if (!atFound) {
-                this.todo += (array.get(i) + " ");
-            } else {
-                this.dateString += (array.get(i) + " ");
+            String p;
+            try {
+                p = stringUtils.removeBackAndFrontSpaces(array.get(3));
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new TigerEmptyStringException("Event priority");
+            }
+            this.priority = Priority.getPriorityFromLetter(p);
+            if (this.priority.equals(Priority.INVALID)) {
+                throw new TigerInvalidArgumentException(p, "Event priority");
             }
         }
+        // task description
         try {
-            this.todo = removeSpaces.removeLastSpaces(this.todo);
+            this.todo = stringUtils.removeBackAndFrontSpaces(array.get(1));
         } catch (StringIndexOutOfBoundsException e) {
             throw new TigerEmptyStringException("Event description");
         }
+        this.todo = stringUtils.capitaliseFirstLetter(this.todo);
+
         try {
-            this.dateString = removeSpaces.removeLastSpaces(this.dateString);
+            this.dateString = stringUtils.removeBackAndFrontSpaces(array.get(2));
         } catch (StringIndexOutOfBoundsException e) {
             throw new TigerEmptyStringException("Event date");
         }
-        this.date = new DateStringConverter().getDateFromString(dateString);
+        this.date = new DateStringConverter().getDateFromString(this.dateString);
     }
 
     public String getTodo() {
@@ -62,5 +80,9 @@ public class EventParser extends Parser {
 
     public CustomDate getDate() {
         return this.date;
+    }
+
+    public Priority getPriority() {
+        return this.priority;
     }
 }

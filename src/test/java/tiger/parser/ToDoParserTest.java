@@ -60,7 +60,7 @@ public class ToDoParserTest {
     public void toDoParser_withPriorityWithSpaces_success() {
         ToDoParser toDoParser = new ToDoParser("todo     444  4      /priority   H   ");
         toDoParser.parse();
-        assertEquals("4444  4", toDoParser.getTodo());
+        assertEquals("444  4", toDoParser.getTodo());
         assertEquals(Priority.HIGH, toDoParser.getPriority());
     }
 

@@ -11,20 +11,6 @@ public class Event extends Task {
     /** Date event is at. */
     private final CustomDate date;
 
-    /**
-     * Public constructor for {@code Event} class.
-     *
-     * @param taskDescription description of Task.
-     * @param done whether the Task is done.
-     * @param date A {@code CustomDate object}.
-     */
-
-    public Event(String taskDescription, boolean done, CustomDate date) {
-        super(taskDescription, done);
-        this.priority = Priority.MEDIUM;
-        this.date = date;
-    }
-
     public Event(String taskDescription, boolean done, CustomDate date, Priority priority) {
         super(taskDescription, done);
         this.priority = priority;
@@ -37,7 +23,7 @@ public class Event extends Task {
 
     @Override
     public Event markDone() {
-        return new Event(this.taskDescription, true, this.date);
+        return new Event(this.taskDescription, true, this.date, this.priority);
     }
 
     /**
@@ -91,17 +77,7 @@ public class Event extends Task {
             // check that the event timing is non-empty
             assert (!stringArray[3].equals(""));
             assert (stringArray[4].equals("L") || stringArray[4].equals("M") || stringArray[4].equals("H"));
-            Priority p;
-            switch (stringArray[4]) {
-            case "L":
-                p = Priority.LOW;
-                break;
-            case "H":
-                p = Priority.HIGH;
-                break;
-            default:
-                p = Priority.MEDIUM;
-            }
+            Priority p = Priority.getPriorityFromLetter(stringArray[3]);
             if (stringArray[1].equals("true")) {
                 // task description, done, timing
                 return new Event(stringArray[2], true, dateStringConverter.getDateFromString(stringArray[3]), p);

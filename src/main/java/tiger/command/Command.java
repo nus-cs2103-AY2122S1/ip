@@ -89,7 +89,7 @@ public class Command {
         case "event":
             EventParser eventCommand = new EventParser(command);
             eventCommand.parse();
-            return new EventAction(applicationState, eventCommand.getTodo(), eventCommand.getDate());
+            return new EventAction(applicationState, eventCommand.getTodo(), eventCommand.getDate(), eventCommand.getPriority());
         case "search":
             // Fallthrough
         case "find":
