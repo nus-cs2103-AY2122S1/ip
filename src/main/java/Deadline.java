@@ -13,13 +13,12 @@ public class Deadline extends TimedTask {
     }
 
     public Deadline(String name, String time, boolean isDone){
-        super(name, isDone);
-        this.time = time;
+        super(name, time, isDone);
     }
 
     @Override
     public String toCsvRow() {
-        return String.join(",", "deadline", name, time, String.valueOf(isDone));
+        return String.join(",", "deadline", name, time.toString(), String.valueOf(isDone));
     }
 
     @Override

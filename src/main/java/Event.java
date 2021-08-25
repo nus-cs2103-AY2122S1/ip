@@ -14,13 +14,12 @@ public class Event extends TimedTask {
     }
 
     public Event(String name, String time, boolean isDone){
-        super(name, isDone);
-        this.time = time;
+        super(name, time, isDone);
     }
 
     @Override
     public String toCsvRow() {
-        return String.join(",", "event", name, time, String.valueOf(isDone));
+        return String.join(",", "event", name, time.toString(), String.valueOf(isDone));
     }
 
     @Override
