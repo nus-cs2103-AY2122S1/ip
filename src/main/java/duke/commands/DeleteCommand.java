@@ -8,6 +8,7 @@ import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     private final int index;
+
     public DeleteCommand(int index) {
         super(false);
         this.index = index;
