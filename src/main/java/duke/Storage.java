@@ -18,7 +18,7 @@ public class Storage {
     private final String DIRPATH;
 
     public Storage() {
-        this.FILEPATH = "data/history.txt";
+        this.FILEPATH = "data" + File.separator + "history.txt";
         this.DIRPATH = "data";
     }
 
