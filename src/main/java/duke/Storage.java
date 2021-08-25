@@ -15,16 +15,29 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-
+/**
+ * Storage helper for storage related tasks.
+ */
 public class Storage {
 
     String filepath;
     private ArrayList<Task> list = new ArrayList<>();
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param filepath path for saving and loading
+     */
     public Storage (String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Return list of task loaded from save file.
+     *
+     * @return List of Tasks
+     * @throws DukeException Exceptions for file not found
+     */
     public ArrayList<Task> load() throws DukeException {
         File file = new File(filepath);
         try {

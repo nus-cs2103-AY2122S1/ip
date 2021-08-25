@@ -3,12 +3,22 @@ package duke;
 import duke.command.Command;
 import java.util.Scanner;
 
+/**
+ * Main driver for Duke chat bot.
+ *
+ * @author nzixuan
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor of Duke.
+     *
+     * @param filePath file path of to retrieve save file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Start Duke chat bot.
+     */
     public void run() {
         ui.greet();
         boolean isExit = false;

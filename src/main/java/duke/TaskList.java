@@ -11,23 +11,41 @@ import java.util.stream.IntStream;
 
 import static duke.Ui.dukePrint;
 
+/**
+ * A list of Tasks recorded by Duke.
+ */
 public class TaskList {
 
     private ArrayList<Task> list;
     private Storage storage;
 
+    /**
+     * Constructor for TaskList.
+     *
+     * @param list List of Tasks
+     * @param storage Storage object of Duke
+     */
     public TaskList(ArrayList<Task> list, Storage storage) {
         this.list = list;
         this.storage = storage;
     }
 
+    /**
+     * Constructor for TaskList.
+     *
+     * @param storage Storage object of Duke
+     */
     public TaskList(Storage storage) {
         this.list = new ArrayList<>();
         this.storage = storage;
     }
 
-
-
+    /**
+     * Deletes task from list based on user input.
+     *
+     * @param str User input of what task to delete
+     * @throws DukeException Exception based on invalid user input
+     */
     public void delete(String str) throws DukeException {
         try {
             int i = Integer.parseInt(str);
@@ -45,6 +63,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Mark task as done based on user input.
+     *
+     * @param str User input of what task to delete
+     * @throws DukeException Exception based on invalid user input
+     */
     public void done(String str) throws DukeException {
         try {
             int i = Integer.parseInt(str);
@@ -62,6 +86,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add Event to list with description from user input.
+     *
+     * @param str User input of description
+     * @throws DukeException Exception based on invalid user input
+     */
     public void addEvent(String str) throws DukeException {
         if (str.contains("/at ")) {
             String[] arr = str.split("/at ", 2);
@@ -72,6 +102,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Add Deadline to list with description from user input.
+     *
+     * @param str User input of description
+     * @throws DukeException Exception based on invalid user input
+     */
     public void addDeadline(String str) throws DukeException {
         if (str.contains("/by ")) {
             String[] arr = str.split("/by ", 2);
@@ -82,7 +118,11 @@ public class TaskList {
         }
     }
 
-
+    /**
+     * Add ToDo to list with description from user input.
+     * @param str User input of description
+     * @throws DukeException Exception based on invalid user input
+     */
     public void addToDo(String str) throws DukeException {
         Task t = new ToDo(str);
         addTask(t);
@@ -95,6 +135,9 @@ public class TaskList {
         storage.saveFile(list);
     }
 
+    /**
+     * Displays full list of task in TaskList.
+     */
     public void displayList() {
         if (list.size() == 0) {
             dukePrint("list empty");
