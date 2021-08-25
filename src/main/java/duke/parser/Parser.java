@@ -1,6 +1,11 @@
 package duke.parser;
 
-import duke.commands.*;
+import duke.commands.Command;
+import duke.commands.AddCommand;
+import duke.commands.ExitCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ListCommand;
+import duke.commands.DeleteCommand;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -13,8 +18,8 @@ import java.util.Arrays;
 /**
  * Parses user input.
  */
-
 public class Parser {
+
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye") || input.equals("exit")) {
             return new ExitCommand();
