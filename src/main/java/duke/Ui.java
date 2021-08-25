@@ -1,6 +1,5 @@
 package duke;
 
-
 import java.util.Scanner;
 
 /**
@@ -8,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    final private Parser parser;
+    private final Parser parser;
 
     protected Ui(Parser parser) {
         this.parser = parser;
@@ -19,7 +18,8 @@ public class Ui {
 
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
-            this.parser.takeInput(input);
+
+            renderOutput(this.parser.takeInput(input));
             if (input.strip().equalsIgnoreCase("bye")) {
                 break;
             }

@@ -32,7 +32,7 @@ public class Storage {
             return new TaskList(new ArrayList<>());
         }
 
-        ui.renderOutput("Reading last save  - " + filePath);
+        System.out.println("Reading last save  - " + filePath);
         ArrayList<String> failedParses = new ArrayList<>();
 
         ArrayList<Task> taskArr = new ArrayList<>();
@@ -50,7 +50,7 @@ public class Storage {
             );
             databaseToString.close();
         } catch (IOException e) {
-            ui.renderOutput("Save file could not be read. It will be wiped on the next save.");
+            System.out.println("Save file could not be read. It will be wiped on the next save.");
         }
 
         if (failedParses.size() > 0) {
@@ -61,7 +61,7 @@ public class Storage {
             );
             status += "Failed to parse\n:";
             status += failedParses.stream().map(x -> x + "\n").reduce("", (a, b) -> a + b);
-            ui.renderOutput(status);
+            System.out.println(status);
         }
         return new TaskList(taskArr);
     }
