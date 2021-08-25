@@ -107,4 +107,26 @@ public class Ui {
         System.out.println("    ______________________________________");
     }
 
+    public void printFindTask(Task[] result) {
+        if (result[0] == null) {
+            System.out.println("    ______________________________________");
+            System.out.println("     There are no matching tasks in your list!");
+            System.out.println("    ______________________________________");
+        } else {
+            System.out.println("    ______________________________________");
+            System.out.println("     Here are the matching tasks in your list:");
+            printFindTaskHelper(result);
+            System.out.println("    ______________________________________");
+        }
+
+    }
+
+    public void printFindTaskHelper(Task[] result) {
+        for (int i = 0; i < result.length; i++) {
+            if (result[i] == null) {
+                break;
+            }
+            System.out.printf("     %d. %s\n", i + 1, result[i]);
+        }
+    }
 }
