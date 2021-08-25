@@ -21,8 +21,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the duke.TaskList.
-     * @param t duke.Task to be added.
+     * Adds a task to the TaskList.
+     *
+     * @param t Task to be added.
      */
     public void addTask(Task t) {
         this.al.add(t);
@@ -30,6 +31,7 @@ public class TaskList {
 
     /**
      * Marks the task in index itemNum (1-indexed) as completed.
+     *
      * @param itemNum The number in the Tasklist of the duke.Task to be mark completed (1-indexed).
      */
     public void markDone(int itemNum) {
@@ -39,7 +41,8 @@ public class TaskList {
 
     /**
      * Gets the task given its index.
-     * @param index The index of the duke.Task in the duke.TaskList(0-indexed).
+     *
+     * @param index The index of the Task in the TaskList(0-indexed).
      * @return duke.Task with the index in the duke.TaskList.
      */
     public Task getTaskByIndex(int index) {
@@ -47,8 +50,9 @@ public class TaskList {
     }
 
     /**
-     * Gets length of the duke.TaskList.
-     * @return Length of the duke.TaskList.
+     * Gets length of the TaskList.
+     *
+     * @return Length of the TaskList.
      */
     public int getLength() {
         return this.al.size();
@@ -56,15 +60,17 @@ public class TaskList {
 
     /**
      * Deletes a task given its index.
-     * @param itemNum The index of the duke.Task in the duke.TaskList(0-indexed).
+     *
+     * @param itemNum The index of the Task in the TaskList(0-indexed).
      */
     public void deleteTask(int itemNum) {
         this.al.remove(itemNum);
     }
 
     /**
-     * Returns a string representation of the duke.TaskList.
-     * @return All the items in the duke.TaskList.
+     * Returns a string representation of the TaskList.
+     *
+     * @return All the items in the TaskList.
      */
     @Override
     public String toString() {

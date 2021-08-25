@@ -1,13 +1,14 @@
 package duke;
 
 /**
- * Class for duke.Duke-specific exceptions.
+ * Class for Duke-specific exceptions.
  * @author Liew Jian Hong
  */
 
 public class DukeException extends Exception {
     /**
-     * Constructor for duke.DukeException.
+     * Constructor for DukeException.
+     *
      * @param message Exception Message.
      */
     public DukeException(String message) {

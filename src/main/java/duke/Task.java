@@ -18,7 +18,8 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for a duke.Task
+     * Constructor for a Task
+     *
      * @param desc Description of the task details.
      * @param isDone Completion status of the task.
      */
@@ -28,7 +29,7 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as done, changing its completion status to true.
+     * Marks the task as done, changing its completion status to true.
      */
     public void markDone() {
         this.isDone = true;
@@ -36,7 +37,8 @@ public abstract class Task {
 
     public abstract String toWrite();
     /**
-     * Return a string representation of the task.
+     * Returns a string representation of the task.
+     *
      * @return Return the completion status and description of the task.
      */
     @Override

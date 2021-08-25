@@ -10,12 +10,13 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task{
     /**
-     * The date and time of the event.
+     * The date the event.
      */
     protected LocalDate date;
 
     /**
      * Constructor for an duke.Event task.
+     *
      * @param desc String array consisting of parsed description.
      */
     public Event(String[] desc) {
@@ -25,13 +26,19 @@ public class Event extends Task{
 
     }
 
+    /**
+     * Converts the task into a string to be written into storage.
+     *
+     * @return String to be written into storage
+     */
     @Override
     public String toWrite() {
         return "event--" + Boolean.toString(this.isDone) + "--" + this.desc + "--" + this.date.toString() + "\n";
     }
 
     /**
-     * Return a string representation of the event.
+     * Returns a string representation of the event.
+     *
      * @return Return the type, completion status and description of the event.
      */
     @Override
