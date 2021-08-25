@@ -24,10 +24,9 @@ public class StorageTest {
         try {
             assertEquals("[T][ ] borrow book", new Storage("data/tasks.txt").load().get(0).getTaskInfo());
             assertEquals("[D][ ] return book (by: Dec 02 2019 18:00)", new Storage("data/tasks.txt").load().get(1).getTaskInfo());
-            assertEquals("[E][ ] project meeting (at: I don't know the time.)", new Storage("data/tasks.txt").load().get(2).getTaskInfo());
+            assertEquals("[E][X] project meeting (at: I don't know the time.)", new Storage("data/tasks.txt").load().get(2).getTaskInfo());
             assertEquals("[D][ ] return book (by: Sep 23 2020 15:25)", new Storage("data/tasks.txt").load().get(3).getTaskInfo());
-            assertEquals("[E][ ] project splashdown (at: Oct 15 2019 00:00)", new Storage("data/tasks.txt").load().get(4).getTaskInfo());
-            assertEquals("[T][ ] join sports club", new Storage("data/tasks.txt").load().get(5).getTaskInfo());
+            assertEquals("[E][X] project splashdown (at: Oct 15 2019 00:00)", new Storage("data/tasks.txt").load().get(4).getTaskInfo());
         } catch (DukeException e) {
             //Should not reach this.
             fail();

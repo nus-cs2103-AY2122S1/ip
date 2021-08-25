@@ -36,6 +36,7 @@ public class Duke {
         }
         case "done": {
             try {
+                tasks.detectIndex(index);
                 tasks.MarkDone(index);
                 ui.MarkDone(tasks.get(index).getTaskInfo());
             } catch (DukeException e){
@@ -45,8 +46,9 @@ public class Duke {
         }
         case "delete":{
             try {
+                tasks.detectIndex(index);
+                ui.Delete(tasks.get(index).getTaskInfo(), tasks.size() - 1);
                 tasks.Delete(index);
-                ui.Delete(tasks.get(index).getTaskInfo(), tasks.size());
             } catch (DukeException e){
                 e.PrintErrorMessage();
             }

@@ -45,20 +45,12 @@ public class TaskList {
         }
     }
 
-    public void MarkDone(int index) throws DukeException {
-        if (index < 0 || index >= this.tasks.size()) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
-        } else {
-            this.tasks.get(index).MarkDone();
-        }
+    public void MarkDone(int index) {
+        this.tasks.get(index).MarkDone();
     }
 
     public void Delete(int index) throws DukeException{
-        if (index < 0 || index >= this.tasks.size()) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
-        } else {
-            this.tasks.remove(index);
-        }
+        this.tasks.remove(index);
     }
 
     public void add(String taskType, String task, String time) throws DukeException{
@@ -82,6 +74,12 @@ public class TaskList {
 
     public int size(){
         return this.tasks.size();
+    }
+
+    public void detectIndex(int index) throws DukeException{
+        if (index < 0 || index >= this.tasks.size()) {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
+        }
     }
 
     public enum OperationType{
