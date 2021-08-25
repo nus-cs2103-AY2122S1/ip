@@ -22,7 +22,7 @@ public class Ui {
      * Reads the next line of user input, if exists
      */
     public String readNextLine() {
-        return sc.nextLine();
+        return this.sc.nextLine();
     }
 
     /**
@@ -45,7 +45,7 @@ public class Ui {
         storage.saveToStorage(taskList.getTaskList());
         System.out.println("Goodbye~ \n"
                 + "Your cute Dino is always around you :D");
-        sc.close();
+        this.sc.close();
     }
 
 }

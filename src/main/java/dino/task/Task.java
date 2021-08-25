@@ -20,15 +20,15 @@ public class Task {
     }
 
     public void setDone() {
-        isDone = true;
+        this.isDone = true;
     }
 
     public boolean getStatus() {
-        return isDone;
+        return this.isDone;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
@@ -38,8 +38,8 @@ public class Task {
      */
     @Override
     public String toString() {
-        return " | " + (isDone ? "1" : "0") + " | "
-                + description;
+        return " | " + (this.isDone ? "1" : "0") + " | "
+                + this.description;
     }
 
 }

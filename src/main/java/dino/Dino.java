@@ -8,13 +8,13 @@ import dino.util.Ui;
 import dino.util.Storage;
 
 /**
- * Represents a Personal Assistant ChatBot name Dino
+ * Represents a Personal Assistant Chatbot name Dino
  * It helps the user to keep track of various things
  */
 public class Dino {
-    private final TaskList taskList;
+    private TaskList taskList;
     private final Storage storage;
-    private final Ui ui;
+    private Ui ui;
     private boolean isExited = false;
 
     /**
@@ -35,19 +35,19 @@ public class Dino {
      */
     public void run() {
         ui.greeting();
-        while(!isExited) {
+        while(!this.isExited) {
             String input = ui.readNextLine();
             if (input.equals("bye")) isExited = true;
             else {
                 try {
                     Command cmd = Parser.parse(input);
-                    cmd.execute(storage, taskList);
+                    cmd.execute(this.storage, this.taskList);
                 } catch (DinoException e) {
                     System.out.println(e.getMessage());
                 }
             }
         }
-        ui.processExit(storage, taskList);
+        ui.processExit(this.storage, this.taskList);
     }
 
     /**
