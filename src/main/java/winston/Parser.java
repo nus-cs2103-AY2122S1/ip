@@ -64,6 +64,14 @@ public class Parser {
             } catch (InputMismatchException | IndexOutOfBoundsException e) {
                 return new InvalidCommand(taskList);
             }
+        } else if (cmd.equals("find")) {
+            try {
+                int index = str.indexOf(" ");
+                String keyword = str.substring(index + 1);
+                return new FindCommand(taskList, keyword);
+            } catch (InputMismatchException | IndexOutOfBoundsException e) {
+                return new InvalidCommand(taskList);
+            }
         } else {
             return new InvalidCommand(taskList);
         }

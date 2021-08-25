@@ -34,6 +34,10 @@ public class Task {
         }
     }
     
+    public boolean isSubString(String str) {
+        return this.description.toLowerCase().indexOf(str.toLowerCase()) >= 0;
+    }
+    
     @Override
     public String toString() {
         return this.description;

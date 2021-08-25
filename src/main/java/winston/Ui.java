@@ -12,7 +12,7 @@ public class Ui {
         System.out.println(tasksLeft + " Tasks Left");
     }
     
-    public static void printList(winston.TaskList taskList) {
+    public static void printList(TaskList taskList) {
         System.out.println(taskList.getList());
     }
     
@@ -20,13 +20,16 @@ public class Ui {
         System.out.println("Don't worry, I've got you. Task Marked!");
     }
     
+    public static void printMatchingTasks() {
+        System.out.println("Here are the matching tasks in your list:\n");
+    }
     public static void invalidDateFormat() {
         System.out.println("Invalid date format. Please give a valid date format. E.g 2021-12-12");
     }
     
     public static void welcomeMessage() {
         System.out.println("Hi there! Winston reporting.\nWhat can I do for you?\n" +
-                "Available Commands: done, list, todo, deadline, event, bye, delete");
+                "Available Commands: done, list, todo, deadline, event, bye, delete, find");
     }
     
     public static void terminationMessage() {
