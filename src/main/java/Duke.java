@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -20,8 +23,10 @@ public class Duke {
                 int middle;
                 int index;
                 String description;
-                String at;
-                String by;
+                String dateString;
+                LocalDateTime at;
+                LocalDateTime by;
+                DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
                 switch (keyword) {
                     case list:
                         iterList(list);
@@ -35,8 +40,13 @@ public class Duke {
                             throw new DukeException("Missing deadline.");
                         }
                         description = String.join(" ", Arrays.copyOfRange(tokens, 1, middle));
-                        by = String.join(" ", Arrays.copyOfRange(tokens, middle + 1, tokens.length));
-                        addToList(list, new Deadline(description, by));
+                        dateString = String.join(" ", Arrays.copyOfRange(tokens, middle + 1, tokens.length));
+                        try {
+                            by = LocalDateTime.parse(dateString, format);
+                            addToList(list, new Deadline(description, by));
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Please enter a date in the following format: dd/MM/yyyy HHmm");
+                        }
                         break;
                     case event:
                         middle = Arrays.asList(tokens).indexOf("/at");
@@ -44,8 +54,13 @@ public class Duke {
                             throw new DukeException("Missing time of event.");
                         }
                         description = String.join(" ", Arrays.copyOfRange(tokens, 1, middle));
-                        at = String.join(" ", Arrays.copyOfRange(tokens, middle + 1, tokens.length));
-                        addToList(list, new Event(description, at));
+                        dateString = String.join(" ", Arrays.copyOfRange(tokens, middle + 1, tokens.length));
+                        try {
+                            at = LocalDateTime.parse(dateString, format);
+                            addToList(list, new Event(description, at));
+                        } catch (DateTimeParseException e) {
+                            System.out.println("Please enter a date in the following format: dd/MM/yyyy HHmm");
+                        }
                         break;
                     case done:
                         index = Integer.parseInt(tokens[1]) - 1;
