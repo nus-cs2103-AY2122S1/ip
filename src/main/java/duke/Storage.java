@@ -10,13 +10,13 @@ import java.util.List;
 public class Storage {
     String filepath = "src/main/data/duke.txt";
 
-    public Storage() { }
+    public Storage() {
+    }
 
     public void createFile() throws IOException {
         Files.createDirectories(Paths.get("src/main/data"));
-        String directory = "src/main/data";
         File file = new File("src/main/data/duke.txt");
-        if(!(file.exists())) {
+        if (!(file.exists())) {
             file.createNewFile();
 
         }
@@ -30,8 +30,8 @@ public class Storage {
 
     public void save(List<Task> listOfText2) {
         String temp = "";
-        for(int i = 0; i < listOfText2.size(); i++) {
-            temp = temp + listOfText2.get(i) +"\n";
+        for (int i = 0; i < listOfText2.size(); i++) {
+            temp = temp + listOfText2.get(i) + "\n";
         }
 
         try {

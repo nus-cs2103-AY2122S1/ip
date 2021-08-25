@@ -1,6 +1,6 @@
 package duke;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
     protected String logo = "[T]";
 
     public ToDo(String description) {
@@ -13,7 +13,7 @@ public class ToDo extends Task{
 
     @Override
     public String toString() {
-        return "[T]" + super.getStatusIcon() +  " " + super.description;
+        return "[T]" + super.getStatusIcon() + " " + super.description;
     }
 }
 

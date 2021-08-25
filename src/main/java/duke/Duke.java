@@ -10,12 +10,12 @@ public class Duke {
         ui.hi();
         Parser parser = new Parser();
         String input;
-        while(!((input = sc.nextLine()).equals("bye"))) {
+        while (!((input = sc.nextLine()).equals("bye"))) {
             parser.commands(input);
 
         }
 
-        if(input.equals("bye")) {
+        if (input.equals("bye")) {
             ui.bye();
         }
     }

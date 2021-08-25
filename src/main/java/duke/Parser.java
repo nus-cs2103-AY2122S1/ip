@@ -5,15 +5,17 @@ import java.time.LocalDate;
 public class Parser {
     TaskList taskList = new TaskList();
 
-    Parser() { }
+    Parser() {
+    }
 
     /**
      * Check if description is missing
+     *
      * @param input
      * @return validity
      */
     private boolean checkInvalidDescription(String input) {
-        if(input.trim().equals("todo") || input.trim().equals("deadline") || input.trim().equals("event")) {
+        if (input.trim().equals("todo") || input.trim().equals("deadline") || input.trim().equals("event")) {
             return true;
         }
         return false;
@@ -21,13 +23,13 @@ public class Parser {
 
     public void commands(String input) {
         try {
-            if(input.equals("list")) {
+            if (input.equals("list")) {
                 taskList.printList();
-            }else if (input.length() > 5 && input.substring(0, 5).equals("done ")) {
+            } else if (input.length() > 5 && input.substring(0, 5).equals("done ")) {
                 String[] split = input.split("\\s+");
                 int number = Integer.parseInt(split[1]);
                 taskList.changeStatus(number);
-            }else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) { //date then time
+            } else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) { //date then time
                 String[] split = input.substring(9).split(" /by ");
                 String[] split2 = split[1].split("\\s+"); //split into date and time
                 LocalDate ld_D = LocalDate.parse(split2[0]);

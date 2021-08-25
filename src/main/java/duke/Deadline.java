@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate deadline;
     protected String logo = "[D]";
     protected String time;
@@ -24,6 +24,6 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "[D]" + super.getStatusIcon() +  " " + super.description + " (by: " + dateFormat() + " " + time +")";
+        return "[D]" + super.getStatusIcon() + " " + super.description + " (by: " + dateFormat() + " " + time + ")";
     }
 }
