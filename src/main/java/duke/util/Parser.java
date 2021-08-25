@@ -55,6 +55,10 @@ public class Parser {
             LocalDateTime[] dateTimes = parseEventDateTime(splited);
             return new CommandAdd(new Event(description, dateTimes[0], dateTimes[1]));
         }
+        case "find": {
+            String keyword = parseKeyword(splited);
+            return new CommandFind(keyword);
+        }
         default:
             throw new DukeException("The command is invalid");
         }
@@ -96,6 +100,13 @@ public class Parser {
         }
 
         return sb.toString();
+    }
+
+    private static String parseKeyword(String[] strArr) throws DukeException {
+        if(strArr.length < 2) {
+            throw new DukeException("Missing keyword after command");
+        }
+        return strArr[1];
     }
 
     private static LocalDateTime parseDeadlineDateTime(String[] strArr) throws DukeException {

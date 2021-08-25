@@ -17,6 +17,7 @@ public class CommandList extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.printMsg("Here are the tasks in your list:");
         ui.printMsg(tasks.toString());
     }
 }

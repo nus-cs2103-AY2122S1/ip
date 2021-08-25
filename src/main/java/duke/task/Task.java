@@ -37,6 +37,15 @@ public class Task {
     }
 
     /**
+     * Check if the content of the task has the given keyword.
+     * @param keyword
+     * @return
+     */
+    public boolean containsKeyword(String keyword) {
+        return content.contains(keyword);
+    }
+
+    /**
      * Encode the task in format "t35698askType isDone content"
      * @return encoded task string
      */

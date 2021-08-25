@@ -87,15 +87,35 @@ public class TaskList {
     }
 
     /**
+     * Search and return a TaskList containing all tasks with keyword.
+     * @param keyword The keyword used to match tasks.
+     * @return A TaskList containing all tasks with keyword.
+     */
+    public TaskList find(String keyword) {
+        List<Task> matched = new ArrayList<>();
+        for(Task task : tasks) {
+            if(task.containsKeyword(keyword)) {
+                matched.add(task);
+            }
+        }
+
+        return new TaskList(matched);
+    }
+
+    public boolean isEmpty() {
+        return this.tasks.size() == 0;
+    }
+
+    /**
      * String representation of a TaskList.
      * @return String representation of the TaskList.
      */
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append("Here are the tasks in your list:\n");
-        for (int i = 1; i <= this.tasks.size(); i++) {
+        for (int i = 1; i <= this.tasks.size() - 1; i++) {
             str.append(String.format("%d.%s\n", i, tasks.get(i-1)));
         }
+        str.append(String.format("%d.%s", tasks.size(), tasks.get(tasks.size()-1)));
         return str.toString();
     }
 
