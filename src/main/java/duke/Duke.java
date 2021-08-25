@@ -4,15 +4,15 @@ import command.Command;
 
 public class Duke {
 
-    private final TaskList taskList;
+    private final TaskList tasklist;
     private final Storage store;
     private final Ui ui;
     private boolean isRunning = true;
 
     public Duke(){
         store = new Storage("./data/duke.txt");
-        taskList = new TaskList();
-        this.store.retrieveTasks(taskList);
+        tasklist = new TaskList();
+        this.store.retrieveTasks(tasklist);
         this.ui = new Ui();
         System.out.println("Hello! I'm Duke.Duke\n" + "What can I do for you?");
     }
@@ -22,7 +22,7 @@ public class Duke {
             String input = ui.getInput();
             try {
                 Command cmd = Command.createCommand(input);
-                cmd.execute(this.taskList, this.ui, this.store, this);
+                cmd.execute(this.tasklist, this.ui, this.store, this);
             }catch (DukeException e){
                 System.out.println(e);
             }

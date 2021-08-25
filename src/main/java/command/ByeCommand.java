@@ -9,9 +9,9 @@ public class ByeCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage store, Duke bot){
+    public void execute(TaskList tasklist, Ui ui, Storage store, Duke bot){
         ui.close();
-        store.saveToFile(taskList);
+        store.saveToFile(tasklist);
         bot.close();
     }
 }

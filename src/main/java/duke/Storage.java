@@ -14,7 +14,7 @@ public class Storage {
     public Storage(String path_to_file){
         file = new File(path_to_file);
         try {
-            checkExist(file.getParentFile());
+            createDirectory(file.getParentFile());
             if(!file.exists()){
                 file.createNewFile();
             }
@@ -24,11 +24,11 @@ public class Storage {
         }
     }
 
-    private void checkExist(File file){
+    private void createDirectory(File file){
         if (file.exists()) {
             return;
         } else {
-            checkExist(file.getParentFile());
+            createDirectory(file.getParentFile());
             file.mkdir();
         }
     }
@@ -39,7 +39,7 @@ public class Storage {
      *
      * @param taskList Task list to store retrieved Tasks.
      */
-    public void retrieveTasks(TaskList taskList) {
+    public void retrieveTasks(TaskList tasklist) {
         try {
             ArrayList<String> lines = new ArrayList<>();
             Scanner myReader = new Scanner(file);
@@ -48,7 +48,7 @@ public class Storage {
                 lines.add(data);
             }
             myReader.close();
-            lines.forEach(s -> taskList.add(s));
+            lines.forEach(s -> tasklist.add(s));
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -60,9 +60,9 @@ public class Storage {
      *
      * @param taskList Task list containing Tasks to store.
      */
-    public void saveToFile(TaskList taskList){
+    public void saveToFile(TaskList tasklist){
         try {
-            String txt = taskList.saveTasklist();
+            String txt = tasklist.saveTasklist();
             FileWriter myWriter = new FileWriter(file);
             myWriter.write(txt);
             myWriter.close();

@@ -1,6 +1,0 @@
-todo|Task 1|0
-event|Task 2/at2021-03-09|0
-deadline|Task 3/by2022-05-08|0
-todo|Task 4|1
-event|Task 5/at2023-04-07|1
-deadline|Task 6/by2024-09-10|1

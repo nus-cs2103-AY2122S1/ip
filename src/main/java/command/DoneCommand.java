@@ -9,8 +9,8 @@ public class DoneCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage store, Duke bot){
-        taskList.doneTask(Integer.valueOf(this.args));
-        taskList.printTasks();
+    public void execute(TaskList tasklist, Ui ui, Storage store, Duke bot){
+        tasklist.doneTask(Integer.valueOf(this.args));
+        tasklist.printTasks();
     }
 }
