@@ -1,7 +1,11 @@
 package duke.util;
 
 import duke.exceptions.CorruptedFileException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -50,17 +54,17 @@ public class Storage {
             String input = s.nextLine();
 
             switch (input.charAt(1)) {
-                case 'T':
-                    task = loadTodo(input);
-                    break;
-                case 'E':
-                    task = loadEvent(input);
-                    break;
-                case 'D':
-                    task = loadDeadline(input);
-                    break;
-                default:
-                    throw new CorruptedFileException();
+            case 'T':
+                task = loadToDo(input);
+                break;
+            case 'E':
+                task = loadEvent(input);
+                break;
+            case 'D':
+                task = loadDeadline(input);
+                break;
+            default:
+                throw new CorruptedFileException();
             }
             if (input.charAt(4) == 'X') {
                 task.markDone();
@@ -78,7 +82,7 @@ public class Storage {
      * @param input todo task data string
      * @return todo task
      */
-    private Task loadTodo(String input) {
+    private Task loadToDo(String input) {
         Task task;
         String description;
 

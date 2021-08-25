@@ -36,7 +36,8 @@ public class TaskList {
      * @param correctFormat command format to follow
      * @throws IllegalFormatException if user gives invalid command
      */
-    private void checkCommandFormat(String command, String regex, String correctFormat) throws IllegalFormatException {
+    private void checkCommandFormat(String command, String regex, String correctFormat)
+            throws IllegalFormatException {
         if (!command.matches(regex)) {
             throw new IllegalFormatException(correctFormat);
         }
@@ -206,8 +207,8 @@ public class TaskList {
         return "Got it. I've added this task:\n" + task +
                 "\nNow you have " + size +
                 (size <= 1
-                        ? " task "
-                        : " tasks " + "in your list.");
+                ? " task "
+                : " tasks " + "in your list.");
     }
 
     /**
@@ -221,8 +222,8 @@ public class TaskList {
         return "Noted. I've removed the following task:\n" + task +
                 "\nNow you have " + size +
                 (size <= 1
-                        ? " task "
-                        : " tasks " + "in your list.");
+                ? " task "
+                : " tasks " + "in your list.");
     }
 
     /**
