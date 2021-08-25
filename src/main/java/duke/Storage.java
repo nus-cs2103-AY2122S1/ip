@@ -41,6 +41,7 @@ public class Storage {
     public void fetchData() throws IOException {
         File savedFile = new File("./data/saved-tasks.txt");
         if(!savedFile.exists()) {
+            savedFile.getParentFile().mkdirs();
             savedFile.createNewFile();
         }
         Scanner scanner = new Scanner(savedFile);
