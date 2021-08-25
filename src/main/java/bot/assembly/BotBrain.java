@@ -1,3 +1,8 @@
+package bot.assembly;
+
+import bot.assembly.function.*;
+import bot.assembly.memory.*;
+
 import java.util.Scanner;
 
 public class BotBrain {
@@ -10,7 +15,7 @@ public class BotBrain {
 
     private boolean isTerminated = false;
 
-    BotBrain() {}
+    public BotBrain() {}
 
     private void reactToCommand(String input) throws Exception {
         CommandInput commandInitial = botCommandReceiverUnit.identifyCommand(input);

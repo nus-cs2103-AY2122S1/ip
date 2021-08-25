@@ -1,3 +1,5 @@
+package bot.assembly.task;
+
 import java.lang.String;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

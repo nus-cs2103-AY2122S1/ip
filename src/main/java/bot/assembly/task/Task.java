@@ -1,3 +1,5 @@
+package bot.assembly.task;
+
 import java.time.LocalDateTime;
 
 public abstract class Task {

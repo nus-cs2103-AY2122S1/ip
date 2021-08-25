@@ -1,3 +1,12 @@
+package bot.assembly.memory;
+
+import bot.assembly.task.Task;
+import bot.assembly.task.Deadline;
+import bot.assembly.task.Event;
+import bot.assembly.task.ToDo;
+import bot.assembly.function.BotTemporalUnit;
+import bot.assembly.error.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,12 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+
+
 public class BotDynamicMemoryUnit {
 
     BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
     BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
 
-    List<Task> taskTracker = new ArrayList<Task>();
+    public List<Task> taskTracker = new ArrayList<Task>();
     private static BotDynamicMemoryUnit dynamicMemoryUnit = null;
 
     public BotDynamicMemoryUnit() {}
