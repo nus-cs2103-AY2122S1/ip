@@ -37,7 +37,6 @@ public class DukeTest {
                 "|  Cat:  See you again, meow!\n" +
                 "__________________________________________________________________________________\n" +
                 "\n").replaceAll("\n", "").replaceAll("\r", "");
-        ;
 
         assertEquals(expected, outputStream.toString().replaceAll("\n", "").replaceAll("\r", ""));
     }
@@ -66,7 +65,6 @@ public class DukeTest {
                 "|  Cat:  See you again, meow!\n" +
                 "__________________________________________________________________________________\n" +
                 "\n").replaceAll("\n", "").replaceAll("\r", "");
-        ;
 
         assertEquals(expected, outputStream.toString().replaceAll("\n", "").replaceAll("\r", ""));
     }

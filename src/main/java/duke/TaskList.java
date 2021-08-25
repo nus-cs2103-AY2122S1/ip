@@ -141,8 +141,9 @@ public class TaskList {
     public TaskList find(String searchKey) {
         TaskList results = new TaskList();
         taskList.forEach((task) -> {
-            if (task.containsString(searchKey))
+            if (task.containsString(searchKey)) {
                 results.add(task);
+            }
         });
         return results;
     }

@@ -84,17 +84,19 @@ public class Duke {
                     break;
 
                 case DONE:
-                    if (parser.description == null)
+                    if (parser.description == null) {
                         ui.showMarkedDoneMessage(tasks.markDone(parser.index));
-                    else
+                    } else {
                         ui.showMarkedDoneMessage(tasks.markDone(parser.description, parser.taskTypes));
+                    }
                     break;
 
                 case DELETE:
-                    if (parser.description == null)
+                    if (parser.description == null) {
                         ui.showDeletedMessage(tasks.remove(parser.index), tasks.size());
-                    else
+                    } else {
                         ui.showDeletedMessage(tasks.remove(parser.description, parser.taskTypes), tasks.size());
+                    }
                     break;
 
                 case FIND:
@@ -104,8 +106,10 @@ public class Duke {
 
                 case TODO:
                     // Extra Functionality: No duplicate tasks
-                    if (tasks.getTaskIndex(parser.description, TaskTypes.TODO) != -1)
+                    if (tasks.getTaskIndex(parser.description, TaskTypes.TODO) != -1) {
                         throw new TaskExistsException(TaskTypes.TODO, parser.description);
+                    }
+
 
                     Task todo = new Todo(parser.description);
                     tasks.add(todo);
@@ -114,8 +118,9 @@ public class Duke {
 
                 case DEADLINE:
                     // Extra Functionality: No duplicate tasks
-                    if (tasks.getTaskIndex(parser.description, TaskTypes.DEADLINE) != -1)
+                    if (tasks.getTaskIndex(parser.description, TaskTypes.DEADLINE) != -1) {
                         throw new TaskExistsException(TaskTypes.DEADLINE, parser.description);
+                    }
 
                     Task deadline;
                     if (parser.by.trim().split("\\s+").length < 2) {          // no time given
@@ -130,8 +135,9 @@ public class Duke {
 
                 case EVENT:
                     // Extra Functionality: No duplicate tasks
-                    if (tasks.getTaskIndex(parser.description, TaskTypes.EVENT) != -1)
+                    if (tasks.getTaskIndex(parser.description, TaskTypes.EVENT) != -1) {
                         throw new TaskExistsException(TaskTypes.EVENT, parser.description);
+                    }
 
                     Task event;
                     if (parser.at.trim().split("\\s+").length < 2) {      // no time given
