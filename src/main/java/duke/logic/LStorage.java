@@ -1,6 +1,5 @@
 package duke.logic;
 
-import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 

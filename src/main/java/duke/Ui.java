@@ -6,11 +6,10 @@ import duke.logic.LStorage;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
+
+import static java.util.AbstractMap.SimpleImmutableEntry;
 
 /**
  * The user interface of Duke. Deals with printing messages to the console and reading user input.
@@ -51,7 +50,7 @@ public class Ui {
      * Checks the user input from stdin.
      *
      * @param taskList the task list that the user is using
-     * @param storage the storage that the user wants the data to be stored into
+     * @param storage  the storage that the user wants the data to be stored into
      */
     public void checkInput(TaskList taskList, LStorage storage) {
         String userInput = sc.nextLine();
@@ -68,14 +67,14 @@ public class Ui {
      * Called when the user wants to exit the program.
      */
     public void sayGoodBye() {
-        System.out.println("Bye, " + name +"! Hope to see you again soon.");
+        System.out.println("Bye, " + name + "! Hope to see you again soon.");
         sc.close();
     }
 
     /**
      * Called when the user successfully adds the task to tasklist.
      *
-     * @param task the task that is added
+     * @param task       the task that is added
      * @param sizeOfList the number of tasks so far
      */
     public void addTaskMessage(Task task, int sizeOfList) {
@@ -116,47 +115,50 @@ public class Ui {
     }
 
     /**
-     * Prints all upcoming tasks from a list of tasks.
+     * Prints all tasks from a list of tasks and task numbers.
      *
-     * @param tasks the list of tasks
+     * @param tasksWithTaskNumbers the list of tasks and task numbers, each in a SimpleImmutableEntry
+     * @param maxTaskNumber the size of the task list. This will ensure proper padding of numbers.
      */
-    public void printUpcomingTasks(List<? extends Task> tasks) {
-        int taskSize = tasks.size();
-        Map<Task, Integer> upcomingTasks = new TreeMap<>((task1, task2) -> {
-            LocalDateTime dateTime1 = task1.getDateTime();
-            LocalDateTime dateTime2 = task2.getDateTime();
-            // time can be null if task is to-do. By default, put all to-do to the last.
-            return dateTime1 == null
-                    ? 1
-                    : dateTime2 == null
-                    ? -1
-                    : dateTime1.compareTo(dateTime2);
-        });
-        for (int i = 1; i <= taskSize; i++) {
-            Task task = tasks.get(i - 1);
-            String type = task.getTaskType();
-            if (!task.isDone() && // Task is not done and it is either to-do or the date is later than now.
-                    (type.equals("T") || task.getDateTime().isAfter(LocalDateTime.now()))) {
-                upcomingTasks.put(task, i);
-            }
-        }
-        upcomingTasks.forEach((task, i) -> print(task, i, taskSize));
+    public void printAllTasks(List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+                              int maxTaskNumber) {
+        System.out.println("Ok, " + name + ". I am getting all your tasks:");
+        printMultipleTasks(tasksWithTaskNumbers, maxTaskNumber);
     }
 
     /**
-     * Prints all tasks from a list of tasks.
+     * Prints all upcoming tasks from a list of tasks and task numbers.
      *
-     * @param tasks the list of tasks
+     * @param tasksWithTaskNumbers the list of tasks and task numbers, each in a SimpleImmutableEntry
+     * @param maxTaskNumber the size of the task list. This will ensure proper padding of numbers.
      */
-    public void printAllTasks(List<? extends Task> tasks) {
-        int taskSize = tasks.size();
-        for (int i = 1; i <= taskSize; i++) {
-            Task task = tasks.get(i - 1);
-            print(task, i, taskSize);
+    public void printUpcomingTasks(List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+                                   int maxTaskNumber) {
+        System.out.println("Ok, " + name + ". I am getting all your upcoming tasks:");
+        printMultipleTasks(tasksWithTaskNumbers, maxTaskNumber);
+    }
+
+    /**
+     * Prints all tasks from a list of tasks and task numbers containing a pattern.
+     *
+     * @param pattern the string pattern that the user is searching for
+     * @param tasksWithTaskNumbers the list of tasks and task numbers, each in a SimpleImmutableEntry
+     * @param maxTaskNumber the size of the task list. This will ensure proper padding of numbers.
+     */
+    public void printTasksContaining(String pattern, List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+                                     int maxTaskNumber) {
+        System.out.println("Ok, " + name + ". I am getting all tasks containing " + pattern + ":");
+        printMultipleTasks(tasksWithTaskNumbers, maxTaskNumber);
+    }
+
+    private void printMultipleTasks(List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+                                    int maxTaskNumber) {
+        for (SimpleImmutableEntry<? extends Task, Integer> task : tasksWithTaskNumbers) {
+            printSingleTask(task.getKey(), task.getValue(), maxTaskNumber);
         }
     }
 
-    private void print(Task task, int number, int max) {
+    private void printSingleTask(Task task, int number, int max) {
         String leadingSpace = " ".repeat((int) Math.log10(max) - (int) Math.log10(number));
         // For better formatting if numbers exceed 9
         System.out.printf("%s%d: %s\n", leadingSpace, number, task);

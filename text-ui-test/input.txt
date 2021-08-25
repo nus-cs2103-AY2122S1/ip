@@ -15,22 +15,22 @@ deadline hello
 event Job Interview /at 15:00
 deadline Write resume /by 2/11/2021 14:20
 deadline Prepare presentation /by 21:30
-event Mum's birthday /at 24/11/2021, 20:00
+event Mum's birthday /at 2/11/2021, 14:20
 todo Get a life
 todo Get a wife
 todo Get 6 packs
 event Sleep /at 2:00
 deadline CS2100 homework /by 25/8/2021
-todo Learn to bake
+todo Learn to do homework
 todo Renew passport
 upcoming
 done 2
 done 2
-done 7
+done 13
 done
 delete
 list
 help help
 help something
-find homework
+find HOmework
 bye

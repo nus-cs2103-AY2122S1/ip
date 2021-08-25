@@ -44,10 +44,10 @@ public class LCommandParser {
             willExit = true;
             break;
         case LIST:
-            ui.printAllTasks(taskList.getTasks());
+            ui.printAllTasks(taskList.getAllTasks(), taskList.size());
             break;
         case UPCOMING:
-            ui.printUpcomingTasks(taskList.getTasks());
+            ui.printUpcomingTasks(taskList.getUpcomingTasks(), taskList.size());
             break;
         case HELP:
             try {
@@ -62,7 +62,8 @@ public class LCommandParser {
             }
             switch (commandEnum) {
             case FIND:
-                ui.printAllTasks(taskList.getTasksContaining(inputArr[1]));
+                ui.printTasksContaining(inputArr[1],
+                        taskList.getTasksContaining(inputArr[1]), taskList.size());
                 break;
             case TODO: // fallthrough intended
             case EVENT: // fallthrough intended
