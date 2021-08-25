@@ -28,7 +28,7 @@ public abstract class Command {
     /**
      * Updates the message to be printed.
      */
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         this.message = this.content;
     }
 

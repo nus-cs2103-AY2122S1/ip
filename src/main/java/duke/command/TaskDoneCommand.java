@@ -22,9 +22,9 @@ public class TaskDoneCommand extends Command {
      * Generates the message to be printed.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) throws InvalidTaskNoException {
+    public void execute(TaskList tasks, Storage storage) throws InvalidTaskNoException {
         try {
-            this.task = taskList.get(this.taskIndex);
+            this.task = tasks.get(this.taskIndex);
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
             throw new InvalidTaskNoException();
         }

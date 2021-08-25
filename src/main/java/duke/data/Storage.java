@@ -24,11 +24,11 @@ public class Storage {
     public static final String DIRECTORY_PATH = System.getProperty("user.dir");
     /** Path of file containing data saved */
     private static File data;
-    private TaskList taskList;
+    private TaskList tasks;
 
-    public Storage(Path filePath, TaskList taskList) {
+    public Storage(Path filePath, TaskList tasks) {
         Storage.data = filePath.toFile();
-        this.taskList = taskList;
+        this.tasks = tasks;
         this.readFile();
     }
 
@@ -72,9 +72,9 @@ public class Storage {
             task = new Task(splitted[2]);
         }
         if (splitted[1].equals("1")) {
-            task.markAsDone();
+            task.setDone();
         }
-        taskList.addTask(task); // add to task list.
+        tasks.addTask(task); // add to task list.
     }
 
     /**
@@ -102,7 +102,7 @@ public class Storage {
         try {
             List<String> lines = Files.readAllLines(Storage.data.toPath());
             FileWriter fileWriter = new FileWriter(Storage.data);
-            for (int i = 0; i < this.taskList.getNumOfTasks(); i++) { // remove this task from file.
+            for (int i = 0; i < this.tasks.getNumOfTasks(); i++) { // remove this task from file.
                 if (i != index) {
                     fileWriter.append(lines.get(i) + "\n");
                 }
@@ -120,8 +120,8 @@ public class Storage {
     public void rewriteFile() {
         try {
             FileWriter fileWriter = new FileWriter(Storage.data);
-            for (int i = 0; i < this.taskList.getNumOfTasks(); i++) {
-                fileWriter.append(this.taskList.getFileFormattedTask(i));
+            for (int i = 0; i < this.tasks.getNumOfTasks(); i++) {
+                fileWriter.append(this.tasks.getFileFormattedTask(i));
             }
             fileWriter.close();
         } catch (IOException ioException) {

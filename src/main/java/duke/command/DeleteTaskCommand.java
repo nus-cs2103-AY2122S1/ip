@@ -21,16 +21,16 @@ public class DeleteTaskCommand extends Command {
      * Updates the message to be printed.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) throws InvalidTaskNoException {
+    public void execute(TaskList tasks, Storage storage) throws InvalidTaskNoException {
         try {
-            this.task = taskList.get(this.taskIndex);
+            this.task = tasks.get(this.taskIndex);
         } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
             throw new InvalidTaskNoException();
         }
-        taskList.removeFromList(this.task);
-        storage.removeFromFile(taskList.indexOf(this.task));
+        tasks.removeFromList(this.task);
+        storage.removeFromFile(tasks.indexOf(this.task));
         this.message = String.format(
                 "Noted. I've removed this task:\n  %s\nNow you have %o tasks in the list.\n",
-                this.task, taskList.getNumOfTasks());
+                this.task, tasks.getNumOfTasks());
     }
 }

@@ -22,11 +22,11 @@ public class AddTaskCommand extends Command {
      * Adds a task into the list and updates the message to be printed.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        taskList.addTask(this.task);
+    public void execute(TaskList tasks, Storage storage) {
+        tasks.addTask(this.task);
         storage.addToFile(this.task);
         this.message = String.format(
                 "Got it. I've added this task:\n  %s\nNow you have %o tasks in the list.\n",
-                this.task, taskList.getNumOfTasks());
+                this.task, tasks.getNumOfTasks());
     }
 }
