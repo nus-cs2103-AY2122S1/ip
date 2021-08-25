@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Represents a function that will be called in the Duke running loop.
+ * Represents a function that will be called in the duke.Duke running loop.
  */
 public class Command {
     private TriConsumer func;
