@@ -4,11 +4,11 @@ import duke.data.Storage;
 import duke.data.TaskList;
 
 /**
- * Represents a processor that can retrieve the task list. A subclass of the Processor class.
+ * Represents a command that retrieves the task list. A subclass of the Command class.
  */
 public class GetListCommand extends Command {
     /**
-     * Constructor of the class `GetListProcessor`.
+     * Constructor of the class `GetListCommand`.
      */
     public GetListCommand() {
         super("list");
@@ -16,8 +16,11 @@ public class GetListCommand extends Command {
     }
 
     /**
-     * Generates the message to be printed.
+     * Executes the command. Updates the message to be printed.
+     * Returns true because the program is still running.
      *
+     * @param taskList A list of tasks.
+     * @param storage An instance of Storage that can read from and write to the hard disk.
      * @return Whether the program is still running.
      */
     @Override

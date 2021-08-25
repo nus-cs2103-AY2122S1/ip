@@ -6,7 +6,7 @@ import duke.exception.DukeException;
 import java.util.Scanner;
 
 /**
- * Represents the UI of the Duke program.
+ * Represents UI of the Duke program.
  */
 public class Ui {
     /** Greeting message to be printed when the program starts */
@@ -25,14 +25,27 @@ public class Ui {
         this.input = new Scanner(System.in);
     }
 
+    /**
+     * Prints welcome message.
+     */
     public void showWelcome() {
         System.out.println(Ui.GREETING_MESSAGE);
     }
 
+    /**
+     * Returns command received from keyboard.
+     *
+     * @return Command received.
+     */
     public String getCommand() {
         return this.input.nextLine().trim();
     }
 
+    /**
+     * Prints the output of a command.
+     *
+     * @param command Processed command.
+     */
     public void showCommandOutput(Command command) {
         System.out.println(command);
     }
@@ -48,6 +61,11 @@ public class Ui {
         return String.format("Please follow the format:\n%s <task description> %s", taskType, timeFormat);
     }
 
+    /**
+     * Prints the given exception.
+     *
+     * @param dukeException The given exception.
+     */
     public void showError(DukeException dukeException) {
         System.out.println(dukeException);
     }
