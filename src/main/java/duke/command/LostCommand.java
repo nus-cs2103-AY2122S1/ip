@@ -15,4 +15,5 @@ public class LostCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 }
