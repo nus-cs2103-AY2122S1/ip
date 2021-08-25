@@ -13,7 +13,6 @@ public class EventTask extends Task{
         this.time = time;
     }
 
-
     @Override
     public String toString() {
         return "[" + this.type + "]" + "[" + this.getStatusIcon() + "] " + this.description + "(at: "

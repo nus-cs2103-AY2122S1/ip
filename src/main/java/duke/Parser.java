@@ -72,7 +72,6 @@ public class Parser {
                 taskList.doTask(taskDone);
             }
         }
-        //System.out.println(taskDone);
     }
 
     public static void deleteOutput(String in, TaskList tasklist) {
