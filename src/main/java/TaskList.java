@@ -5,17 +5,17 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileWriter;
 
-public class ToDoList {
+public class TaskList {
 
     private final ArrayList<Task> arrayList;
     private final File dataFile;
 
-    public ToDoList(){
+    public TaskList(){
         this.arrayList = new ArrayList<>();
         this.dataFile = null;
     }
 
-    public ToDoList(File dataFile) {
+    public TaskList(File dataFile) {
         this.arrayList = new ArrayList<>();
         this.dataFile = dataFile;
 
