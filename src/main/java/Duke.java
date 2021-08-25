@@ -111,7 +111,7 @@ public class Duke {
         try {
             List<String> dataList = Files.lines(dataPath).collect(Collectors.toList());
             for (String line : dataList) {
-                String[] details = line.split("\\|",5);
+                String[] details = line.split("\\|",4);
                 String tag = details[0];
                 Boolean done = details[1].equals("1"); 
                 Task task;

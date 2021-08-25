@@ -4,6 +4,8 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
+    
+    private final String inputPattern = "dd-MM-yyyy HH:mm";
 
     public Deadline(String description, String by) throws DukeException {
         super(description);
@@ -13,7 +15,6 @@ public class Deadline extends Task {
         if (by == "") {
             throw new DukeException("Looks like you forgot to include a deadline for the task.");
         }
-        String inputPattern = "dd-MM-yyyy HH:mm";
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(inputPattern);
             this.by = LocalDateTime.parse(by, formatter);
@@ -35,6 +36,6 @@ public class Deadline extends Task {
     public String toDataString(String delimiter) {
         String tag = "D";
         String done = super.isDone ? "1" : "0";
-        return String.join(delimiter, tag, done, super.description, by);
+        return String.join(delimiter, tag, done, super.description, by.format(DateTimeFormatter.ofPattern(inputPattern)));
     }
 }
