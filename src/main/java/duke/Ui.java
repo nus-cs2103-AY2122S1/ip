@@ -9,7 +9,7 @@ import tasks.*;
  * This class is responsible for the printing to console
  * and accepting responses from the user.
  *
- * Responses are passed on to a parser which will parse the user input
+ * Responses are passed on to a parser which will parse the user input.
  */
 public class Ui {
 
@@ -21,12 +21,19 @@ public class Ui {
         this.parser = new DukeParser();
     }
 
+    /**
+     * Prints the initial greeting upon starting an instance of Duke.
+     *
+     */
     public void greet() {
         System.out.println("Hello! I'm Duke. \n"
                 + "What can I do for you? \n"
                 + SEP_LINE);
     }
 
+    /**
+     * Prints the help guide when user types the command 'help'
+     */
     public void printHelp() {
         String helpMessage = "HELP \n" + SEP_LINE + "\n"
                 + "Available commands: \n"
@@ -52,14 +59,28 @@ public class Ui {
         System.out.println(SEP_LINE);
     }
 
+    /**
+     * Prints out the message when a task has been successfully added to the TaskList in Duke.
+     * @param t The task that was added to the TaskList.
+     */
     public void printAddTask(Task t) {
         System.out.println("The following task has been added! \n" + t);
     }
 
+    /**
+     * Prints out the message when a task has been successfully marked as done.
+     * @param t The task that was marked as done.
+     * @param index The index of the task t in the TaskList.
+     */
     public void printTaskDone(Task t, int index) {
         System.out.println("The task has been marked as done! \n" + (index + 1) + ". " + t);
     }
 
+    /**
+     * Prints out the message when a task has been successfully deleted.
+     * @param t The task that was deleted.
+     * @param index The index of the task t in the TaskList.
+     */
     public void printDeleteTask(Task t, int index) {
         System.out.println("The task has been removed! \n" + (index + 1) + ". " + t);
     }
@@ -71,6 +92,12 @@ public class Ui {
     public void printFileWriteFail(File file) {
         System.out.println("Failed to write to file at " + file);
     }
+
+    /**
+     * Passes the input to the parser and returns the corresponding Command returned by it.
+     * @param s The user input string.
+     * @return The Command corresponding to the user's input.
+     */
     public Command parseInput(String s) {
         return this.parser.parse(s);
     }
