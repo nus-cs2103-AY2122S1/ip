@@ -115,4 +115,20 @@ public class TaskList {
     public Task get(int taskIndex) {
         return this.taskList.get(taskIndex);
     }
+
+    /**
+     * Searches all Tasks in the TaskList to find all Tasks that contain searchTerm.
+     *
+     * @param searchTerm search term to find
+     * @return an ArrayList containing all Tasks with the search term in their message
+     */
+    public ArrayList<Task> search(String searchTerm) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task: this.taskList) {
+            if (task.getMessage().contains(searchTerm)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
 }

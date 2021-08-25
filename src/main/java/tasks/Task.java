@@ -100,4 +100,13 @@ public abstract class Task {
     public String toStorage() {
         return (this.completed ? "1|" : "0|") + this.message;
     }
+
+    /**
+     * Returns the message field of the Task.
+     *
+     * @return the message field as a String
+     */
+    public String getMessage() {
+        return this.message;
+    }
 }
