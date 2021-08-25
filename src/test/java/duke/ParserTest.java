@@ -13,7 +13,7 @@ public class ParserTest {
         try {
             Parser parser = new Parser();
             Task newTask = Task.makeTask("todo", "get a life");
-            Command addCommand = Command.makeCommand(CommandsTypes.Add, newTask, 0);
+            Command addCommand = Command.makeCommand(CommandsTypes.Add, newTask);
             String command = "todo get a life";
             assertTrue(addCommand.toString().replaceAll("\\s+","")
                     .equals(parser.parse(command).toString().replaceAll("\\s+","")));
@@ -28,7 +28,7 @@ public class ParserTest {
         try {
             Parser parser = new Parser();
             Task newTask = Task.makeTask("deadline", "get a life /by 1/1/2021 900");
-            Command addCommand = Command.makeCommand(CommandsTypes.Add, newTask, 0);
+            Command addCommand = Command.makeCommand(CommandsTypes.Add, newTask);
             String command = "deadline get a life /by 1/1/2021 900";
             assertTrue(addCommand.toString().replaceAll("\\s+","")
                     .equals(parser.parse(command).toString().replaceAll("\\s+","")));
@@ -43,7 +43,7 @@ public class ParserTest {
         try {
             Parser parser = new Parser();
             Task newTask = Task.makeTask("event", "get a life /at 1/1/2021 900");
-            Command addCommand = Command.makeCommand(CommandsTypes.Add, newTask, 0);
+            Command addCommand = Command.makeCommand(CommandsTypes.Add, newTask);
             String command = "event get a life /at 1/1/2021 900";
             assertTrue(addCommand.toString().replaceAll("\\s+","")
                     .equals(parser.parse(command).toString().replaceAll("\\s+","")));
@@ -57,7 +57,7 @@ public class ParserTest {
     public void testList() {
         try {
             Parser parser = new Parser();
-            Command addCommand = Command.makeCommand(CommandsTypes.List, null, 0);
+            Command addCommand = Command.makeCommand(CommandsTypes.List);
             assertTrue(addCommand.toString().replaceAll("\\s+", "")
                     .equals(parser.parse("list").toString().replaceAll("\\s+", "")));
         } catch (DukeException e) {

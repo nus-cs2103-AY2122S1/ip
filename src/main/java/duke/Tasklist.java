@@ -93,6 +93,22 @@ public class Tasklist {
     }
 
     /**
+     * Finds tasks that contain a keyword.
+     *
+     * @param keyword the keyword which related tasks contain.
+     * @return a list of tasks which contain the keyword.
+     */
+    public Tasklist findRelated(String keyword) {
+        ArrayList<Task> relatedTasks = new ArrayList<>();
+        for (Task task: tasklist) {
+            if (task.toString().contains(keyword)) {
+                relatedTasks.add(task);
+            }
+        }
+        return new Tasklist(relatedTasks);
+    }
+
+    /**
      * Gets a string that shows the list of current tasks.
      *
      * @return string that shows the list of current tasks

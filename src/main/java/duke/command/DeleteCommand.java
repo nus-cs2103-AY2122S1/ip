@@ -10,17 +10,14 @@ import duke.task.Task;
  * A command which aims to delete a task.
  */
 public class DeleteCommand extends Command {
-    private final Task task;
     private final int index;
 
     /**
      * Makes a DeleteCommand that deletes the task that was inputted.
      *
-     * @param task the task to be deleted.
      * @param index the index of the task to be deleted.
      */
-    public DeleteCommand(Task task, int index) {
-        this.task = task;
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
@@ -34,8 +31,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(Tasklist tasks, Ui ui, FileManager fileManager) throws DukeException {
+        Task removedTask = tasks.getTask(this.index);
         tasks.delete(this.index);
-        ui.deleteTask(this.task);
+        ui.deleteTask(removedTask);
         fileManager.updateTaskList(tasks, ui);
     }
 

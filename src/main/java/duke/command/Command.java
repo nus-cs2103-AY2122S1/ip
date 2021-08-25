@@ -10,22 +10,20 @@ import duke.task.Task;
  * Class which represents a command to be run by Duke.
  */
 public abstract class Command {
-    /**
-     * Creates a command.
-     *
-     * @param type the type of command.
-     * @param task the task to be acted upon in the command.
-     * @param index the index of the task to be acted upon in the tasklist.
-     * @return command made based on input.
-     * @throws DukeException if input is invalid.
-     */
-    public static Command makeCommand(CommandsTypes type, Task task, int index) throws DukeException {
+    public static Command makeCommand(CommandsTypes type, Task task) throws DukeException {
         switch (type) {
         case Add: {
             return new AddCommand(task);
         }
+        default:
+            throw new DukeException("Invalid command inputted");
+        }
+    }
+
+    public static Command makeCommand(CommandsTypes type, int index) throws DukeException {
+        switch (type) {
         case Delete: {
-            return new DeleteCommand(task, index);
+            return new DeleteCommand(index);
         }
         case MarkDone: {
             return new MarkDoneCommand(index);
@@ -41,6 +39,28 @@ public abstract class Command {
         }
     }
 
+    public static Command makeCommand(CommandsTypes type) throws DukeException {
+        switch (type) {
+        case Exit: {
+            return new ExitCommand();
+        }
+        case List: {
+            return new ListCommand();
+        }
+        default:
+            throw new DukeException("Invalid command inputted");
+        }
+    }
+
+    public static Command makeCommand(CommandsTypes type, String keyword) throws DukeException {
+        switch (type) {
+        case Find:
+            return new FindCommand(keyword);
+        default:
+            throw new DukeException("Invalid command inputted");
+        }
+    }
+
     /**
      * Command will execute.
      *
@@ -50,6 +70,5 @@ public abstract class Command {
      * @throws DukeException if command has issues.
      */
     public abstract void execute(Tasklist task, Ui ui, FileManager fileManager) throws DukeException;
-
     public abstract boolean isExit();
 }
