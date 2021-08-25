@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,7 +11,7 @@ import java.util.Scanner;
  * @author Adam Ho
  */
 public class TaskManager {
-
+    private final String TASK_FILE = "./data/duke.txt";
     private enum Command {
 
         LIST("list"),
@@ -25,7 +29,54 @@ public class TaskManager {
         }
     }
 
-    protected static ArrayList<Task> tasks = new ArrayList<>();
+    protected static ArrayList<Task> listOfTasks = new ArrayList<>();
+
+    /**
+     * Gets input from user and respond to the commands accordingly.
+     */
+    public void run() {
+        Message.greet();
+        try {
+            loadTaskList(TASK_FILE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+
+        while (!input.equals("bye")) {
+            Command c = getCommand(input);
+            try {
+                switch (c) {
+                case LIST:
+                    Message.list(listOfTasks);
+                    break;
+                case DONE:
+                    markDone(Integer.parseInt(taskDescription(input)));
+                    break;
+                case TODO:
+                case DEADLINE:
+                case EVENT:
+                    addTask(taskDescription(input), c.type);
+                    break;
+                case DELETE:
+                    deleteTask(Integer.parseInt(taskDescription(input)));
+                    break;
+                case INVALID:
+                    throw new DukeException.InvalidInputException();
+                }
+
+                saveTaskList(TASK_FILE);
+            } catch (IOException e) {
+                System.out.println("Oops, something went wrong!");
+            } catch (DukeException e) {
+                Message.error(e.toString());
+            } finally {
+                input = sc.nextLine();
+            }
+        }
+        Message.exit();
+    }
 
     /**
      * Gets the description of the task.
@@ -50,17 +101,17 @@ public class TaskManager {
         Task t;
         if (cmd.equals("todo")) {
             t = new Todo(task);
-            tasks.add(t);
+            listOfTasks.add(t);
         } else if (cmd.equals("deadline")) {
             String date = task.split(" /by ")[1];
             task = task.split(" /by ")[0];
             t = new Deadline(task, date);
-            tasks.add(t);
+            listOfTasks.add(t);
         } else {
             String date = task.split(" /at ")[1];
             task = task.split(" /at ")[0];
             t = new Event(task, date);
-            tasks.add(t);
+            listOfTasks.add(t);
         }
         Message.add(t);
     }
@@ -72,8 +123,8 @@ public class TaskManager {
      */
     public void deleteTask(int taskId) throws DukeException.MissingTaskException {
         try {
-            Task t = tasks.get(taskId-1);
-            tasks.remove(t);
+            Task t = listOfTasks.get(taskId-1);
+            listOfTasks.remove(t);
             --Task.totalTasks;
             Message.delete(t);
         } catch (IndexOutOfBoundsException e) {
@@ -88,7 +139,7 @@ public class TaskManager {
      */
     public void markDone(int taskId) throws DukeException.MissingTaskException {
         try {
-            Task t = tasks.get(taskId-1);
+            Task t = listOfTasks.get(taskId-1);
             t.isDone = true;
             Message.done(t);
         } catch (IndexOutOfBoundsException e) {
@@ -112,41 +163,44 @@ public class TaskManager {
         return Command.INVALID;
     }
 
-    /**
-     * Gets input from user and respond to the commands accordingly.
-     */
-    public void run() {
-        Message.greet();
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        while (!input.equals("bye")) {
-            Command c = getCommand(input);
-            try {
-                switch (c) {
-                case LIST:
-                    Message.list(tasks);
-                    break;
-                case DONE:
-                    markDone(Integer.parseInt(taskDescription(input)));
-                    break;
-                case TODO:
-                case DEADLINE:
-                case EVENT:
-                    addTask(taskDescription(input), c.type);
-                    break;
-                case DELETE:
-                    deleteTask(Integer.parseInt(taskDescription(input)));
-                    break;
-                case INVALID:
-                    throw new DukeException.InvalidInputException();
-                }
-            } catch (DukeException e) {
-                Message.error(e.toString());
-            } finally {
-                input = sc.nextLine();
+    public void saveTaskList(String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        String tasks = "";
+        for (Task t : listOfTasks) {
+            String done = t.isDone ? "1" : "0";
+            Command c = getCommand(t.getClass().getName().toLowerCase());
+            switch (c) {
+            case TODO:
+                tasks += "T" + " uwu " + done + " uwu " + t.description + "\n";
+                break;
+            case DEADLINE:
+                Deadline d = (Deadline) t;
+                tasks += "D" + " uwu " + done + " uwu " + d.description + " uwu " + d.by + "\n";
+                break;
+            case EVENT:
+                Event e = (Event) t;
+                tasks += "E" + " uwu " + done + " uwu " + e.description + " uwu " + e.at + "\n";
             }
         }
-        Message.exit();
+        fw.write(tasks);
+        fw.close();
+    }
+
+    public void loadTaskList(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            Task t;
+            String[] taskFormat = s.nextLine().split(" uwu ");
+            if (taskFormat[0].equals("T")) {
+                t = new Todo(taskFormat[2]);
+            } else if (taskFormat[0].equals("D")) {
+                t = new Deadline(taskFormat[2], taskFormat[3]);
+            } else {
+                t = new Event(taskFormat[2], taskFormat[3]);
+            }
+            t.isDone = taskFormat[1].equals("1");
+            listOfTasks.add(t);
+        }
     }
 }
