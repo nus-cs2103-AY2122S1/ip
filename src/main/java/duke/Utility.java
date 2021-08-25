@@ -10,7 +10,6 @@ public class Utility {
     public Utility() {
         inputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         outputFormat = DateTimeFormatter.ofPattern("dd MM yyyy | HHmm");
-
     }
 
     /**
@@ -49,13 +48,13 @@ public class Utility {
      * @param userInput String of task containing task and date.
      * @return Array with task at index 0 and date at index 1.
      */
-    public String[] sepDateFromTask(int dateIndex, int taskIndex, String userInput) {
+    public String[] seperateDateFromTask(int dateIndex, int taskIndex, String userInput) {
         String task;
         String date;
-        if(dateIndex > 0) {
+        if (dateIndex > 0) {
             task = userInput.substring(taskIndex, dateIndex - 1);
             date = userInput.substring(dateIndex + 4);
-        }else {
+        } else {
             task = userInput.substring(taskIndex);
             date = "?";
         }

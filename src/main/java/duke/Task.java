@@ -9,7 +9,7 @@ public class Task {
     private String statusIcon = " ";
     private String taskSymbol;
     private LocalDateTime date;
-    private  Utility utility;
+    private Utility utility;
 
     /**
      * Constructor for Events and Deadlines which have a date
@@ -45,13 +45,13 @@ public class Task {
     public String getDataRep() {
         String status;
         String data;
-        if(this.isDone) {
+        if (this.isDone) {
             status = "1";
         } else {
             status = "0";
         }
 
-        if(this.taskSymbol.equals("T")) {
+        if (this.taskSymbol.equals("T")) {
             data = String.format("%s,%s,%s", this.getTaskType(), status, this.task);
         } else {
             data = String.format("%s,%s,%s,%s", this.getTaskType(), status, this.task,utility.dateToInputString(this.date));
@@ -74,7 +74,7 @@ public class Task {
      * @return String representation of task type.
      */
     public String getTaskType() {
-        if(this.taskSymbol.equals("T")) {
+        if (this.taskSymbol.equals("T")) {
             return "todo";
         } else if (this.taskSymbol.equals("D")) {
             return "deadline";

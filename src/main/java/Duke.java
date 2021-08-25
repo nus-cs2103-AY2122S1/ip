@@ -27,7 +27,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         while (true) {
             String userInput = sc.nextLine();
-            if(!parser.command(userInput)) {
+            if (!parser.command(userInput)) {
                 break;
             }
         }

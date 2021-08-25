@@ -26,7 +26,7 @@ public class Storage {
         List<Task> tasks = new ArrayList<Task>(100);
 
         try {
-            if(!Files.exists(this.dataPath)) {
+            if (!Files.exists(this.dataPath)) {
                 Files.createFile(this.dataPath);
             }
 
@@ -34,23 +34,23 @@ public class Storage {
                 String[] data = x.split(",");
                 String taskType = data[0];
                 Task toAdd;
-                if(taskType.equalsIgnoreCase("todo")) {
+                if (taskType.equalsIgnoreCase("todo")) {
                     toAdd = new ToDo(data[2]);
-                }else if(taskType.equalsIgnoreCase("deadline")) {
+                } else if (taskType.equalsIgnoreCase("deadline")) {
                     toAdd = new Deadline(data[2], utility.stringToDate(data[3]));
-                } else if(taskType.equalsIgnoreCase("event")) {
+                } else if (taskType.equalsIgnoreCase("event")) {
                     toAdd = new Event(data[2], utility.stringToDate(data[3]));
                 } else {
                     throw new IllegalArgumentException("Unrecognised task type on loading");
                 }
 
-                if(data[1].equals("1")) {
+                if (data[1].equals("1")) {
                     toAdd.setDone();
                 }
                 tasks.add(toAdd);
             });
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
 
@@ -67,7 +67,7 @@ public class Storage {
             Path tempPath = Paths.get("temp.txt");
             Files.createFile(tempPath);
 
-            for(int i = 0; i < list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 String toAdd = list.get(i).getDataRep();
                 Files.writeString(tempPath, toAdd + System.lineSeparator(), StandardOpenOption.APPEND);
             }

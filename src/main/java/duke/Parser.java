@@ -27,18 +27,19 @@ public class Parser {
         if (userInput.equalsIgnoreCase("bye")) {
             ui.dukeReply("Bye. Hope to see you again soon!");
             return false;
-        } else if(userInput.equalsIgnoreCase("list")) {
+        } else if (userInput.equalsIgnoreCase("list")) {
             toReply = taskList.showTasks(taskList.getTasks());
             // cant put done word as a task
-        }else if (userInput.toLowerCase().startsWith("done")) {
+        } else if (userInput.toLowerCase().startsWith("done")) {
             toReply = taskList.markTaskDone(userInput);
             storage.updateDataSet(taskList.getTasks());
-        } else if(userInput.toLowerCase().startsWith("delete")) {
+        } else if (userInput.toLowerCase().startsWith("delete")) {
             toReply = taskList.deleteTask(userInput);
             storage.updateDataSet(taskList.getTasks());
         } else {
             toReply = taskList.addTask(userInput, storage.getDataPath());
         }
+
         ui.dukeReply(toReply);
         return true;
     }
