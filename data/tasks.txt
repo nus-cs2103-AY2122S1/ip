@@ -1,8 +1,2 @@
 T | 1 | test no file start
-
-E | 0 | test file refactor | June 6th
-
-D | 0 | test task | 2021-12-01
-
-T | 1 | test refactored code
-
+E | 0 | test event | Sunday

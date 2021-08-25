@@ -1,10 +1,16 @@
+package commands;
+
 import java.io.IOException;
-import java.time.*;
+import java.time.LocalDate;
+
+import duke.*;
+import tasks.*;
+import exceptions.*;
 
 public class AddDeadlineCommand extends AddTaskCommand {
     LocalDate deadline;
 
-    AddDeadlineCommand(String desc, boolean isDone, LocalDate deadline) {
+    public AddDeadlineCommand(String desc, boolean isDone, LocalDate deadline) {
         super(desc, isDone);
         this.deadline = deadline;
     }

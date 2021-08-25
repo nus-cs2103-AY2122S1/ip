@@ -1,6 +1,10 @@
+package tasks;
+
+import exceptions.*;
+
 /**
- * A Task object represent a task in Duke
- * A Task contains a description and a check for whether it has been done
+ * A tasks.Task object represent a task in duke.Duke
+ * A tasks.Task contains a description and a check for whether it has been done
  */
 
 public class Task {
@@ -9,7 +13,7 @@ public class Task {
     String desc;
     boolean isDone;
 
-    Task(String desc, Boolean isDone) throws EmptyDescException {
+    public Task(String desc, Boolean isDone) throws EmptyDescException {
         if (desc.isBlank()) {
             throw new EmptyDescException();
         }
@@ -20,14 +24,14 @@ public class Task {
     /**
      * Sets the task as done
      */
-    void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
     /**
      * Sets the task as not done
      */
-    void markAsUndone() {
+    public void markAsUndone() {
         this.isDone = false;
     }
 
@@ -35,7 +39,7 @@ public class Task {
         return (isDone ? "[X] " : "[ ] ");
     }
 
-    String saveText() {
+    public String saveText() {
         int isDone = this.isDone ? 1 : 0;
         return "T | " + isDone + " | " + desc + "\n";
     }

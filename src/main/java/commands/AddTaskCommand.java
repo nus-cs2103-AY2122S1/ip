@@ -1,4 +1,10 @@
+package commands;
+
 import java.io.IOException;
+
+import duke.*;
+import tasks.*;
+import exceptions.*;
 
 /**
  * This command adds a task to the taskList, given a description and flag.
@@ -10,7 +16,7 @@ public class AddTaskCommand implements Command {
     String desc;
     boolean isDone;
 
-    AddTaskCommand(String desc, boolean isDone) {
+    public AddTaskCommand(String desc, boolean isDone) {
         this.desc = desc;
         this.isDone = isDone;
     }

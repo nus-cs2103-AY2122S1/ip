@@ -1,8 +1,14 @@
-public class UnknownCommand implements Command {
+package commands;
+
+import duke.*;
+import tasks.*;
+import exceptions.*;
+
+public class HelpCommand implements Command {
 
     @Override
     public void execute(Ui ui, TaskList taskList, Storage storage) {
-        ui.printUnknownCommand();
+        ui.printHelp();
     }
 
     @Override

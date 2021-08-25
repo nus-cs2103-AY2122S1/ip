@@ -1,4 +1,9 @@
+package duke;
+
 import java.util.Scanner;
+import commands.Command;
+import tasks.*;
+import exceptions.*;
 
 public class Duke {
 
@@ -24,7 +29,7 @@ public class Duke {
 
         while (this.isRunning) {
             String input = sc.nextLine();
-            Command c = this.ui.parseInput(input);
+            commands.Command c = this.ui.parseInput(input);
             this.ui.printSepLine();
             c.execute(this.ui, this.taskList, this.store);
             this.ui.printSepLine();

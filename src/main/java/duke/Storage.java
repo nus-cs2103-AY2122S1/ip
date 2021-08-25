@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,8 +13,12 @@ import java.time.LocalDate;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
+import commands.*;
+import tasks.*;
+import exceptions.*;
+
 /**
- * This class is responsible for reading and writing to the file for a Duke program.
+ * This class is responsible for reading and writing to the file for a duke.Duke program.
  *
  */
 public class Storage {
@@ -90,7 +96,6 @@ public class Storage {
         for (int i = 0; i < taskList.numberOfTasks(); i++) {
             String line = taskList.getTask(i).saveText();
             writer.write(line);
-            writer.newLine();
         }
         writer.close();
     }

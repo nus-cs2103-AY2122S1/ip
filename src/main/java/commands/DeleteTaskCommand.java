@@ -1,10 +1,16 @@
+package commands;
+
 import java.io.IOException;
+
+import duke.*;
+import tasks.*;
+import exceptions.*;
 
 public class DeleteTaskCommand implements Command {
 
     int index;
 
-    DeleteTaskCommand(int index) {
+    public DeleteTaskCommand(int index) {
         this.index = index;
     }
 

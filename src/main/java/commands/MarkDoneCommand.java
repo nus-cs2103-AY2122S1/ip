@@ -1,4 +1,10 @@
+package commands;
+
 import java.io.IOException;
+
+import duke.*;
+import tasks.*;
+import exceptions.*;
 
 /**
  * This command marks a task in the task list as done.
@@ -9,7 +15,7 @@ public class MarkDoneCommand implements Command {
     // The index of the task to be marked as done
     int index;
 
-    MarkDoneCommand(int index) {
+    public MarkDoneCommand(int index) {
         this.index = index;
     }
 

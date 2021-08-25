@@ -1,4 +1,9 @@
+package duke;
+
 import java.io.File;
+
+import commands.*;
+import tasks.*;
 
 /**
  * This class is responsible for the printing to console

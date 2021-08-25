@@ -1,8 +1,14 @@
+package duke;
+
 import java.util.ArrayList;
 
+import commands.*;
+import tasks.*;
+import exceptions.*;
+
 /**
- * This class encapsulates a Duke task list.
- * It is responsible for maintaining the tasks in an instance of Duke.
+ * This class encapsulates a duke.Duke task list.
+ * It is responsible for maintaining the tasks in an instance of duke.Duke.
  *
  */
 public class TaskList {
@@ -39,6 +45,7 @@ public class TaskList {
     /**
      * Get the task from the specified index
      * @param index The index of the task to get.
+     * @return
      */
     public Task getTask(int index) {
         return this.taskList.get(index);

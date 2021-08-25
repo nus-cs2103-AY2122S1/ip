@@ -1,3 +1,9 @@
+package commands;
+
+import duke.*;
+import tasks.*;
+import exceptions.*;
+
 public class QuitCommand implements Command {
 
     public void execute(Ui ui, TaskList taskList, Storage storage) {

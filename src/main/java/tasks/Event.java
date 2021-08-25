@@ -1,8 +1,10 @@
+package tasks;
+
 public class Event extends Task {
 
     String time;
 
-    Event(String desc, Boolean isDone, String time) {
+    public Event(String desc, Boolean isDone, String time) {
         super(desc, isDone);
         this.time = time;
     }

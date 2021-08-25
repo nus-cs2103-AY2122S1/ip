@@ -1,8 +1,13 @@
-import java.text.*;
-import java.time.*;
+package duke;
+
+import java.time.LocalDate;
+
+import commands.*;
+import tasks.*;
+import exceptions.*;
 
 /**
- * This class handles the parsing of the user input into Duke
+ * This class handles the parsing of the user input into duke.Duke
  *
  * Generally, it parses the command and returns a Command object.
  *
@@ -66,16 +71,16 @@ public class DukeParser {
                     // Mark a task as done
                     // We assume the command is of the form "done xxx" where xxx is an integer
                     Integer taskNum = Integer.parseInt(next[1]);
-                    Task taskToComplete = taskList.get(taskNum - 1);
+                    tasks.Task taskToComplete = taskList.get(taskNum - 1);
                     taskToComplete.markAsDone();
                     System.out.println("The task has been marked as done!");
                     System.out.println(taskToComplete);
                     System.out.println(sepLine);
                     StringBuilder textString = new StringBuilder(100);
-                    for (Task t : taskList) {
+                    for (tasks.Task t : taskList) {
                         textString.append(t.saveText());
                     }
-                    Duke.writeLineToFile(textString.toString(), taskFile);
+                    duke.Duke.writeLineToFile(textString.toString(), taskFile);
                 } catch (NumberFormatException e) {
                     System.out.println("It seems like you have entered an invalid number for done.");
                     System.out.println("Please enter the task number as shown in the list.");
@@ -88,16 +93,16 @@ public class DukeParser {
                 System.out.println(sepLine);
                 try {
                     Integer taskNum = Integer.parseInt(next[1]);
-                    Task taskToDelete = taskList.get(taskNum - 1);
+                    tasks.Task taskToDelete = taskList.get(taskNum - 1);
                     System.out.println("The task has been deleted!");
                     System.out.println(taskToDelete);
                     taskList.remove(taskNum - 1);
                     System.out.println(sepLine);
                     StringBuilder textString = new StringBuilder(100);
-                    for (Task t : taskList) {
+                    for (tasks.Task t : taskList) {
                         textString.append(t.saveText());
                     }
-                    Duke.writeLineToFile(textString.toString(), taskFile);
+                    duke.Duke.writeLineToFile(textString.toString(), taskFile);
                 } catch (NumberFormatException e) {
                     System.out.println("It seems like you have entered an invalid number to delete.");
                     System.out.println("Please enter the task number as shown in the list.");
@@ -129,10 +134,10 @@ public class DukeParser {
                         + sepLine;
                 System.out.println(helpMessage);
             } else {
-                // Task is added to task list
+                // tasks.Task is added to task list
                 try {
                     if (command.equals("todo")) {
-                        Todo todo = new Todo(next[1], false);
+                        tasks.Todo todo = new tasks.Todo(next[1], false);
                         taskList.add(todo);
                         System.out.println(sepLine + "\n added: " + todo + "\n");
                         System.out.println("You now have " + taskList.size() + " tasks");
@@ -143,13 +148,13 @@ public class DukeParser {
                         try {
                             String desc = text[0];
                             LocalDate dueDate = LocalDate.parse(text[1]);
-                            Deadline dl = new Deadline(desc, false, dueDate);
+                            tasks.Deadline dl = new tasks.Deadline(desc, false, dueDate);
                             taskList.add(dl);
                             System.out.println(sepLine + "\n added: " + dl + "\n");
                             System.out.println("You now have " + taskList.size() + " tasks");
                             System.out.println(sepLine);
                         } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new MissingFieldException();
+                            throw new exceptions.MissingFieldException();
                         } catch (DateTimeParseException e) {
                             System.out.println("Failed to parse date given");
                         }
@@ -159,13 +164,13 @@ public class DukeParser {
                         try {
                             String desc = text[0];
                             String time = text[1];
-                            Event event = new Event(desc, false, time);
+                            tasks.Event event = new tasks.Event(desc, false, time);
                             taskList.add(event);
                             System.out.println(sepLine + "\n added: " + event + "\n");
                             System.out.println("You now have " + taskList.size() + " tasks");
                             System.out.println(sepLine);
                         } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new MissingFieldException();
+                            throw new exceptions.MissingFieldException();
                         }
                     } else {
                         System.out.println(sepLine + "\n I did not understand that command."

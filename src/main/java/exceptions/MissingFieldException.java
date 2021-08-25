@@ -1,3 +1,5 @@
+package exceptions;
+
 /**
  * This Exception is thrown when either:
  * "deadline" is called without passing in a due date with "/by"

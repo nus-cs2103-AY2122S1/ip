@@ -1,11 +1,13 @@
+package tasks;
+
 import java.time.LocalDate;
-import java.time.format.*;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
     LocalDate dueDate;
 
-    Deadline(String desc, Boolean isDone, LocalDate time) {
+    public Deadline(String desc, Boolean isDone, LocalDate time) {
         super(desc, isDone);
         this.dueDate = time;
     }

@@ -1,8 +1,13 @@
+package commands;
+
+import duke.*;
+import tasks.*;
+import exceptions.*;
 public class ErrorCommand implements Command {
 
     String msg;
 
-    ErrorCommand(String message) {
+    public ErrorCommand(String message) {
         this.msg = message;
     }
 

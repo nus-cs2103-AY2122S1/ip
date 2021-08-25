@@ -1,10 +1,16 @@
+package commands;
+
 import java.io.IOException;
+
+import duke.*;
+import tasks.*;
+import exceptions.*;
 
 public class AddEventCommand extends AddTaskCommand {
 
     String time;
 
-    AddEventCommand(String desc, Boolean isDone, String time) {
+    public AddEventCommand(String desc, Boolean isDone, String time) {
         super(desc, isDone);
         this.time = time;
     }
