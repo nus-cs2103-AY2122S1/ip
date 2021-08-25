@@ -11,6 +11,11 @@ public class Duke {
     private final Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructor for a Duke chat-bot.
+     *
+     * @param fileName The name of the file to store data in.
+     */
     public Duke(String fileName) {
         this.ui = new Ui();
         this.storage = new Storage(fileName);
@@ -23,6 +28,9 @@ public class Duke {
         this.parser = new Parser(this.tasks);
     }
 
+    /**
+     * Run Duke, accepting commands until a "bye" command is issued.
+     */
     public void run() {
         while (true) {
             try {
@@ -40,6 +48,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method where Duke is run from.
+     *
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         new Duke("duke.txt").run();
     }

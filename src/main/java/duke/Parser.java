@@ -4,19 +4,29 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class encapsulates the mechanism to parse user commands.
+ *
+ * @author Kleon Ang
+ */
 public class Parser {
     private TaskList tasks;
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
     private boolean toRewriteData;
     private boolean isExit;
 
+    /**
+     * Constructor for a Parser class.
+     *
+     * @param tasks A TaskList for the Parser to refer to.
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
         this.toRewriteData = false;
         this.isExit = false;
     }
 
-    public void list() throws DukeException {
+    private void list() throws DukeException {
         if (this.tasks.size() == 0) {
             throw new DukeException("There are currently no tasks in your list.");
         }
@@ -43,14 +53,31 @@ public class Parser {
         Ui.printReply("Nice! I've marked this task as done:\n  " + doneTask);
     }
 
+    /**
+     * Getter for the rewrite status of the last parsed command.
+     *
+     * @return True if data in Storage needs to be rewritten.
+     */
     public boolean toRewrite() {
         return this.toRewriteData;
     }
 
+    /**
+     * Getter for the exit status of the last parsed command.
+     *
+     * @return True if ready to exit Duke after "bye" command.
+     */
     public boolean toExit() {
         return this.isExit;
     }
 
+    /**
+     * Parses the user input and runs the corresponding command.
+     *
+     * @param readIn A string containing the user input.
+     * @return A TaskList containing the updated Tasks after command is parsed.
+     * @throws DukeException A Duke-specific exception that occurs when user input is parsed.
+     */
     public TaskList parse(String readIn) throws DukeException {
         if (readIn.equals("bye")) {
             Ui.printReply("Bye. Hope to see you again soon!");

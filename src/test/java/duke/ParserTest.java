@@ -7,14 +7,27 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class encapsulates a unit test for the Parser class.
+ *
+ * @author Kleon Ang
+ */
 public class ParserTest {
+    /**
+     * Test the parse method when a list command is given with an empty TaskList.
+     */
     @Test
-    public void listTasks_noTasks_exceptionThrown() {
+    public void parse_list_exceptionThrown() {
         TaskList taskList = new TaskList();
         Parser parser = new Parser(taskList);
-        assertThrows(DukeException.class, parser::list);
+        assertThrows(DukeException.class, () -> parser.parse("list"));
     }
 
+    /**
+     * Test the parse method when a new Deadline is added.
+     *
+     * @throws DukeException A Duke-specific exception that may occur when adding a new Deadline.
+     */
     @Test
     public void parse_newDeadline_taskAdded() throws DukeException {
         TaskList taskList = new TaskList();

@@ -11,16 +11,32 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * This class encapsulates the mechanism of storing data for Duke.
+ *
+ * @author Kleon Ang
+ */
 public class Storage {
     private final String fileName;
     private static final String DATA_FILEPATH = System.getProperty("user.dir") + "/data/";
     private static final String DATA_DELIMITER = " \\| ";
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
 
+    /**
+     * Constructor for a Storage class.
+     *
+     * @param fileName The name of the file to store data in.
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Load the data from the data file if available into Duke.
+     *
+     * @return a List of Tasks saved in the data file.
+     * @throws DukeException An exception specifically encountered in Duke's operations.
+     */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         File directory = new File(DATA_FILEPATH);
@@ -73,6 +89,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Rewrite the data in the data file with the most recent Tasks.
+     *
+     * @param tasks A TaskList containing the most updated tasks.
+     */
     public void rewriteData(TaskList tasks) {
         try {
             FileWriter fileWriter = new FileWriter(DATA_FILEPATH + this.fileName, false);

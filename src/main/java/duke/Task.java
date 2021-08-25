@@ -6,8 +6,8 @@ package duke;
  * @author Kleon Ang
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private final String description;
+    private boolean isDone;
 
     /**
      * Constructor for a Task.
