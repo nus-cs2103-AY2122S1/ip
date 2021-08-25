@@ -12,6 +12,7 @@ import java.util.Scanner;
  * The Storage class saves and loads tasks from the save file.
  */
 public class Storage {
+    /** The path of the file to read/write */
     private Path filepath;
 
     /**

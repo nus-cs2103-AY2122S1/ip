@@ -4,7 +4,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Main class of Duke chatbot.
+ * Main class of Duke chatbot. Contains the main method that initialises Duke
+ * and starts the chatbot.
  */
 public class Duke {
     private Ui ui;

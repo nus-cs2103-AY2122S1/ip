@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * and printing of the entire current list.
  */
 public class TaskList {
+    /** The list of tasks stored */
     private ArrayList<Task> list;
     private Ui ui;
 

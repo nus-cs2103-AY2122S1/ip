@@ -5,7 +5,9 @@ package duke;
  * Allows for changing of the state of the class.
  */
 public class Task {
+    /** Description of the task */
     private String description;
+    /** Indicates if task is done */
     private boolean isDone;
 
     /**
