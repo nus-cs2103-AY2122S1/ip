@@ -9,7 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.IncorrectCommand;
-
+import duke.command.FindCommand;
 
 public class Parser {
     /**
@@ -39,6 +39,8 @@ public class Parser {
                 return new DoneCommand(parameter_1);
             case DeleteCommand.INSTRUCTION_DELETE:
                 return new DeleteCommand(parameter_1);
+            case FindCommand.INSTRUCTION_FIND:
+                return new FindCommand(parameter_1);
             case ExitCommand.INSTRUCTION_EXIT:
                 return new ExitCommand();
             default:
