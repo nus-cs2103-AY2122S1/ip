@@ -1,3 +1,6 @@
+import exceptions.DukeException;
+import exceptions.DukeParseException;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,48 +45,54 @@ public class TaskList extends ArrayList<Task> {
                 continue;
             }
             boolean isDone = row[1].equals("1");
-            switch (row[0]) {
-                case "T": {
-                    Todo todo = new Todo(row[2]);
-                    super.add(todo);
-                    if (isDone) {
-                        todo.markAsDone();
+            try {
+                switch (row[0]) {
+                    case "T": {
+                        Todo todo = new Todo(row[2]);
+                        super.add(todo);
+                        if (isDone) {
+                            todo.markAsDone();
+                        }
+                        break;
                     }
-                    break;
-                }
-                case "E": {
-                    if (row.length < 4) {
+                    case "E": {
+                        if (row.length < 4) {
+                            if (!shouldFailSilently) {
+                                throw new IOException(IOErrorMessage);
+                            }
+                            continue;
+                        }
+                        Event event = new Event(row[2], row[3]);
+                        super.add(event);
+                        if (isDone) {
+                            event.markAsDone();
+                        }
+                        break;
+                    }
+                    case "D": {
+                        if (row.length < 4) {
+                            if (!shouldFailSilently) {
+                                throw new IOException(IOErrorMessage);
+                            }
+                            continue;
+                        }
+                        Deadline deadline = new Deadline(row[2], row[3]);
+                        super.add(deadline);
+                        if (isDone) {
+                            deadline.markAsDone();
+                        }
+                        break;
+                    }
+                    default: {
                         if (!shouldFailSilently) {
+                            // don't handle this, let it bubble up the stack and end the program
                             throw new IOException(IOErrorMessage);
                         }
-                        continue;
                     }
-                    Event event = new Event(row[2], row[3]);
-                    super.add(event);
-                    if (isDone) {
-                        event.markAsDone();
-                    }
-                    break;
                 }
-                case "D": {
-                    if (row.length < 4) {
-                        if (!shouldFailSilently) {
-                            throw new IOException(IOErrorMessage);
-                        }
-                        continue;
-                    }
-                    Deadline deadline = new Deadline(row[2], row[3]);
-                    super.add(deadline);
-                    if (isDone) {
-                        deadline.markAsDone();
-                    }
-                    break;
-                }
-                default: {
-                    if (!shouldFailSilently) {
-                        // don't handle this, let it bubble up the stack and end the program
-                        throw new IOException(IOErrorMessage);
-                    }
+            } catch (DukeException e) {
+                if (!shouldFailSilently) {
+                    throw new DukeParseException(e.getMessage());
                 }
             }
         }

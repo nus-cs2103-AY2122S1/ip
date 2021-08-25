@@ -1,4 +1,6 @@
-import java.io.IOException;
+import exceptions.DukeException;
+import exceptions.DukeIllegalFormatException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,12 +12,12 @@ public class Event extends Task {
     public Event(String description, String at) throws DukeException {
         super(description);
         if (at.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The date of an event cannot be empty.");
+            throw new DukeIllegalFormatException("☹ OOPS!!! The date of an event cannot be empty.");
         }
         try {
             this.at = LocalDate.parse(at);
         } catch (DateTimeParseException e) {
-            throw new DukeException(
+            throw new DukeIllegalFormatException(
                     "☹ OOPS!!! Seems like you have entered a wrong date format. " +
                             "Try this instead: YYYY-MM-DD"
             );

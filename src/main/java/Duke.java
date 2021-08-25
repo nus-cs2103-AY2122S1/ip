@@ -1,3 +1,7 @@
+import exceptions.DukeException;
+import exceptions.DukeIndexOutOfRangeException;
+import exceptions.DukeIllegalFormatException;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.NoSuchElementException;
@@ -46,7 +50,7 @@ public class Duke {
             case DONE: {
                 int index = sc.nextInt();
                 if (index < 1 || index > list.toArray().length) {
-                    throw new DukeException(list.toArray().length > 0
+                    throw new DukeIndexOutOfRangeException(list.toArray().length > 0
                             ? "OOPS!!! I'm sorry, index is out of range! " +
                             "Please try with a number from 1 to " + list.toArray().length
                             : "OOPS!!! I'm sorry, there is nothing in the list yet.");
@@ -60,7 +64,7 @@ public class Duke {
             case REMOVE: {
                 int index = sc.nextInt();
                 if (index < 1 || index > list.toArray().length) {
-                    throw new DukeException(list.toArray().length > 0
+                    throw new DukeIndexOutOfRangeException(list.toArray().length > 0
                             ? "OOPS!!! I'm sorry, index is out of range! " +
                             "Please try with a number from 1 to " + list.toArray().length
                             : "OOPS!!! I'm sorry, there is nothing in the list yet.");
@@ -85,7 +89,7 @@ public class Duke {
                 String input2 = sc.nextLine().trim();
                 String[] line = input2.split(" /by ");
                 if (line.length != 2) {
-                    throw new DukeException(
+                    throw new DukeIllegalFormatException(
                             "☹ OOPS!!! Seems like you have entered a wrong format for a deadline task. " +
                                     "Try this instead: deadline <description> /by <date>"
                     );
@@ -101,7 +105,7 @@ public class Duke {
                 String input2 = sc.nextLine().trim();
                 String[] line = input2.split(" /at ");
                 if (line.length != 2) {
-                    throw new DukeException(
+                    throw new DukeIllegalFormatException(
                             "☹ OOPS!!! Seems like you have entered a wrong format for an event task. " +
                                     "Try this instead: event <description> /at <date>"
                     );

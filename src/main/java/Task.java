@@ -1,3 +1,6 @@
+import exceptions.DukeException;
+import exceptions.DukeIllegalFormatException;
+
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -9,7 +12,7 @@ public abstract class Task {
 
     public Task(String description) throws DukeException {
         if (description.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeIllegalFormatException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         this.description = description;
         this.isDone = false;
