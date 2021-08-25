@@ -1,5 +1,6 @@
 package main.java.storage;
 
+import main.java.parser.Parser;
 import main.java.task.Deadline;
 import main.java.task.Event;
 import main.java.task.Task;
@@ -50,22 +51,30 @@ public class Storage {
                 String line = "";
                 if (task instanceof Deadline) {
                     Deadline deadlineTask = (Deadline) task;
+                    /*
                     String encodedString = Base64.getEncoder().encodeToString(deadlineTask.getDescription().getBytes());
-
                     line += "deadline " + deadlineTask.getIsDone() + " " + deadlineTask.getBy() + " " + encodedString;
+                     */
+                    line += Parser.encodeDeadline(deadlineTask);
 
                 } else if (task instanceof Event) {
                     Event eventTask = (Event) task;
+                    /*
                     String encodedDescription = Base64.getEncoder().encodeToString(eventTask.getDescription().getBytes());
                     String encodedAt = Base64.getEncoder().encodeToString(eventTask.getAt().getBytes());
-
                     line += "event " + eventTask.getIsDone() + " " + encodedAt + " " + encodedDescription;
+                    */
+
+                    line += Parser.encodeEvent(eventTask);
 
                 } else {
                     //task instance of Todo
+                    Todo todoTask = (Todo) task;
+                    /*
                     String encodedString = Base64.getEncoder().encodeToString(task.getDescription().getBytes());
-
                     line += "todo " + task.getIsDone() + " " + encodedString;
+                     */
+                    line += Parser.encodeTodo(todoTask);
                 }
 
                 line += "\n";
