@@ -184,7 +184,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a duke.tasks.Task from the list of Tasks.
+     * Deletes a Task from the list of Tasks.
      * @param taskIndex Index of the duke.tasks.Task to be deleted.
      * @throws EmptyListException If the list of Tasks is empty and there is nothing to be deleted.
      * @throws InvalidIndexException If the index of the duke.tasks.Task provided is out of range of the current list of Tasks.
@@ -204,6 +204,29 @@ public class TaskList {
         System.out.println("Noted. I've removed this task:\n" + task);
         String taskGrammar = (taskList.size() == 1) ? " task" : " tasks";
         System.out.println("Now you have " + taskList.size() + taskGrammar + " in the list.");
+    }
+
+    /**
+     * Finds all Tasks that matches the query and is case insensitive.
+     *
+     * @param query case insensitive query to find from Task list.
+     * @return ArrayList of Tasks filled with Tasks that match the query.
+     */
+    public ArrayList<Task> findTask(String query) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+
+        // regex that matches any string to the query and is case insensitive
+        String regex = "(?i)(.*)(" + query + ")(.*)";
+
+        for (Task task : taskList) {
+            String taskString = task.toString();
+
+            if (taskString.matches(regex)) {
+                matchingTasks.add(task);
+            }
+        }
+
+        return matchingTasks;
     }
 
 }
