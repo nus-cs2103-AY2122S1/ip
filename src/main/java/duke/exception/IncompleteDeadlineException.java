@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class IncompleteDeadlineException extends DukeException{
     private static String line = "____________________________________________________________";
     private static String message = "OOPS!!! The description or date of a deadline cannot be empty.";

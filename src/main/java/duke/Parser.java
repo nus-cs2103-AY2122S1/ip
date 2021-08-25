@@ -1,3 +1,20 @@
+package duke;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.RemoveCommand;
+import duke.exception.DukeException;
+import duke.exception.IncompleteDeadlineException;
+import duke.exception.IncompleteEventException;
+import duke.exception.IncompleteToDoException;
+import duke.exception.InvalidCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -38,7 +55,7 @@ public class Parser {
         return input.startsWith("done ");
     }
 
-    public static String[] splitInput(String input, String type) throws DukeException{
+    public static String[] splitInput(String input, String type) throws DukeException {
         if (type.equals("deadline") || type.equals("event")) {
             String[] str = input.split("/");
             if (str.length == 1) {

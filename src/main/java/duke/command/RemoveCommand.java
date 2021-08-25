@@ -1,4 +1,11 @@
-public class RemoveCommand extends Command{
+package duke.command;
+
+import duke.Storage;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
+
+public class RemoveCommand extends Command {
     private final int indexToRemove;
 
     public RemoveCommand(int indexToRemove){
