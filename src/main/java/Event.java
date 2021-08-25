@@ -3,7 +3,7 @@ public class Event extends Task{
 
     public Event(String name, String eventTime) {
         super(name);
-        this.eventTime = eventTime;
+        this.eventTime = TaskTime.convertDateTimeFormat(eventTime);
     }
 
     @Override

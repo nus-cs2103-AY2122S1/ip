@@ -3,7 +3,7 @@ public class Deadline extends Task{
 
     public Deadline(String name, String dueDate) {
         super(name);
-        this.dueDate = dueDate;
+        this.dueDate = TaskTime.convertDateTimeFormat(dueDate);
     }
 
     @Override
