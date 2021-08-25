@@ -109,4 +109,21 @@ public class TaskList {
         }
         return sb.toString();
     }
+
+    /**
+     * Retrieves all matching tasks in the task list that match a specified keyword.
+     *
+     * @param keyword The keyword being searched.
+     * @return A task list object containing all of the tasks that match the keyword specified.
+     */
+    public TaskList getMatchingTasks(String keyword) {
+        TaskList results = new TaskList();
+        for (int i = 0; i < this.numberOfTasks; i++) {
+            Task currentTask = this.taskList.get(i);
+            if (currentTask.containsKeyword(keyword)) {
+                results.add(currentTask);
+            }
+        }
+        return results;
+    }
 }

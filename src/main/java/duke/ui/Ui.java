@@ -68,6 +68,26 @@ public class Ui {
     }
 
     /**
+     * Displays the tasks matching the keyword searched by the user, if any.
+     *
+     * @param taskList The task list containing the tasks that match the keyword searched.
+     */
+    public void printMatchingTasks(TaskList taskList) {
+        if (taskList.getNumberOfTasks() < 1) {
+            System.out.println(DIVIDER
+                    + "No matching tasks were found in your list.\n"
+                    + DIVIDER
+            );
+        } else {
+            System.out.println(DIVIDER
+                    + "Here are the matching tasks I found in your list:\n"
+                    + taskList.toString()
+                    + DIVIDER
+            );
+        }
+    }
+
+    /**
      * Displays a task that has been edited to the user. If the task was deleted,
      * the number of remaining tasks on the task list is displayed as well.
      *

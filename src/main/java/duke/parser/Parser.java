@@ -1,10 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.EditCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.constant.EditType;
 import duke.constant.TaskType;
 import duke.exception.DukeException;
@@ -120,9 +116,15 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("Please enter a valid task number.");
             }
+        } else if (userCommand.equals("find")) {
+            if (commandAndArgument.length < 2 || commandAndArgument[1].strip().equals("")) {
+                throw new DukeException("Please enter a keyword to search for in the following manner:\n"
+                        + "find <keyword>");
+            }
+            return new FindCommand(commandAndArgument[1]);
         } else {
             throw new DukeException("Invalid command. List of valid commands include:\n"
-                    + "list|todo|deadline|event|done|delete|bye");
+                    + "list|todo|deadline|event|done|delete|find|bye");
         }
     }
 }
