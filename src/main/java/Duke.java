@@ -118,7 +118,8 @@ public class Duke {
         switch (type) {
         case TODO:
             try {
-                String taskDesc = description.substring(5);
+                String text = description.trim();
+                String taskDesc = text.substring(5);
                 tasks.add(new ToDo(taskDesc));
             } catch (StringIndexOutOfBoundsException e){
                 throw new DukeException("The todo task description cannot be empty. " +
