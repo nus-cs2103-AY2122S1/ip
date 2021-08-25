@@ -1,5 +1,7 @@
+package tasks;
+
 /**
- * Task without any date/time attached to it
+ * tasks.Task without any date/time attached to it
  */
 public class ToDo extends Task {
 

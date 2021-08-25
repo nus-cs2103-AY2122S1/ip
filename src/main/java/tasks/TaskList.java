@@ -1,3 +1,8 @@
+package tasks;
+
+import duke.Storage;
+import duke.Ui;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -9,7 +14,7 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructor for TaskList
+     * Constructor for tasks.TaskList
      */
     public TaskList() {
         ArrayList<Task> temp;

@@ -1,8 +1,12 @@
+package tasks;
+
+import tasks.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Task that need to be done before a specific date/time
+ * tasks.Task that need to be done before a specific date/time
  */
 public class Deadline extends Task {
 

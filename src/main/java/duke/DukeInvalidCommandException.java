@@ -1,3 +1,5 @@
+package duke;
+
 public class DukeInvalidCommandException extends Exception {
     /**
      * Constructor for invalid commands in Duke

@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Utility to help print out the responses of Duke
  */

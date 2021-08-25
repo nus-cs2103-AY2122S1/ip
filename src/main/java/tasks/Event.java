@@ -1,8 +1,12 @@
+package tasks;
+
+import tasks.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Task that start at a specific time and ends at a specific time
+ * tasks.Task that start at a specific time and ends at a specific time
  */
 public class Event extends Task {
 

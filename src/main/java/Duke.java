@@ -1,3 +1,6 @@
+import duke.Parser;
+import duke.Ui;
+
 /**
  * Main program
  */

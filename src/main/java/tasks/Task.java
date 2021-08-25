@@ -1,3 +1,5 @@
+package tasks;
+
 /**
  * An individual task
  */
@@ -6,7 +8,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for the Task class
+     * Constructor for the tasks.Task class
      *
      * @param description The description of the task.
      */
@@ -21,7 +23,7 @@ public class Task {
     /**
      * Return the completion status of the task
      *
-     * @return Task completion status.
+     * @return tasks.Task completion status.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
