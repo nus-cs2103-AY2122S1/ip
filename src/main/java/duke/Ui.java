@@ -6,7 +6,7 @@ public class Ui {
     private static final String divider = "\t____________________________________________________________\n";
 
     public void greet() {
-        dukePrint("Hello! I'm Duke.\n" + "What can I do for you?\n");
+        dukePrint("Hello! I'm Duke.\n" + "What can I do for you?");
     }
 
      public static void dukePrint(String str) {
@@ -16,7 +16,7 @@ public class Ui {
             System.out.print("\t");
             System.out.println(scanner.nextLine());
         }
-        System.out.println(divider);
+        System.out.print(divider);
     }
 
     public void showLoadingError() {

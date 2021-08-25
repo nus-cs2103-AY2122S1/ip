@@ -102,7 +102,5 @@ public class TaskList {
         }
         dukePrint("Here are the tasks in your list:\n" +
                 IntStream.range(0, list.size() ).mapToObj((i)-> Integer.toString(i + 1) + ". " + list.get(i).toString()).reduce("",(str1, str2)->str1 + str2+"\n"));
-
-
     }
 }
