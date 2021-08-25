@@ -1,12 +1,1 @@
-E | 0 | daf ~ 7月 14 2018 4.44 pm
-D | 1 | uck ~ 7月 14 2018 4.44 pm
-T | 0 | fa
-T | 0 | 
-T | 0 |  
-T | 0 | dfas
-D | 0 | dsa ~ fdsaf
-E | 0 | dd ~ ddd
-T | 0 | dd
-T | 0 | fsa
-T | 0 | fsa
 T | 0 | fsaf

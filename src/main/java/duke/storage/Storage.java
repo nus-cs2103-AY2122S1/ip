@@ -53,7 +53,7 @@ public class Storage {
         java.nio.file.Path path = java.nio.file.Paths.get(dir,"data");
         boolean directoryExists = java.nio.file.Files.exists(path);
         if (!directoryExists) {
-            new File(dir + "/data");
+            new File(dir + "/data").mkdir();
         }
         File f = new File(path + file);
         try {
@@ -98,7 +98,13 @@ public class Storage {
             content = sb.toString();
             return taskList;
         } catch (FileNotFoundException e) {
-            throw new LoadingException();
+            try {
+                f.createNewFile();
+                throw new LoadingException();
+            } catch (IOException io) {
+                System.out.println("file not created");
+                return null;
+            }
         }
     }
 
