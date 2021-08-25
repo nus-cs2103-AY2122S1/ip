@@ -1,3 +1,5 @@
+package duke;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.File;
@@ -9,15 +11,19 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
 
-class Storage {
+public class Storage {
     private String filePath;
 
-    Storage(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
-    ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<Task>();
         File f = new File(filePath);
         if (f.exists()){
@@ -58,7 +64,7 @@ class Storage {
         return list;
     }
 
-    void write(TaskList tasks) throws IOException {
+    public void write(TaskList tasks) throws IOException {
         File toWrite = new File("../../../data");
         if (!toWrite.exists()) {
             toWrite.mkdir();

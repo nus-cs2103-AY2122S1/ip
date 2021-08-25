@@ -1,6 +1,12 @@
-class ListCommand extends Command {
+package duke.command;
 
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
+public class ListCommand extends Command {
+
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printList(tasks);
     }
 

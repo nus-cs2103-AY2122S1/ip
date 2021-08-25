@@ -1,30 +1,33 @@
-import java.util.ArrayList;
+package duke;
 
-class TaskList {
+import java.util.ArrayList;
+import duke.task.Task;
+
+public class TaskList {
 
     private ArrayList<Task> tasks;
 
-    TaskList() {
+    public TaskList() {
         this(new ArrayList<Task>());
     }
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    void delete(int index) {
+    public void delete(int index) {
         tasks.remove(index);
     }
 
-    void add(Task t) {
+    public void add(Task t) {
         tasks.add(t);
     }
 
-    Task get(int index) {
+    public Task get(int index) {
         return tasks.get(index);
     }
 
-    int size() {
+    public int size() {
         return tasks.size();
     }
 }

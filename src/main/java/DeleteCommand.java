@@ -1,12 +1,19 @@
-class DeleteCommand extends Command {
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
+
+public class DeleteCommand extends Command {
 
     private int index;
 
-    DeleteCommand(int index) {
+    public DeleteCommand(int index) {
         this.index = index;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage){
         ui.printDelete(tasks, index);
         tasks.delete(index);
     }

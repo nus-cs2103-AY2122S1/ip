@@ -1,9 +1,24 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-class Parser {
+
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.exception.IllegalCommandException;
+import duke.exception.IllegalTaskException;
+
+public class Parser {
     
-    static Command parse(String fullCommand) throws IllegalCommandException, IllegalTaskException {
+    public static Command parse(String fullCommand) throws IllegalCommandException, IllegalTaskException {
         String command = fullCommand.split(" ")[0];
         if (command.equals("list")){
             return new ListCommand();

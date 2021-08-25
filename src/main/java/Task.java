@@ -1,4 +1,6 @@
-abstract class Task {
+package duke.task;
+
+public abstract class Task {
     private int done;
     private String toDo;
 
@@ -11,7 +13,7 @@ abstract class Task {
         this.toDo = toDo;
     }
 
-    void complete(){
+    public void complete(){
         this.done = 1;
     }
 
@@ -23,7 +25,7 @@ abstract class Task {
         return String.valueOf(done);
     }
 
-    String getToWrite() {
+    public String getToWrite() {
         return  this.getDone() + " | "  + this.getToDo();
     }
 

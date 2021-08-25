@@ -1,12 +1,18 @@
-class DoneCommand extends Command {
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
+public class DoneCommand extends Command {
     
     private int toComplete;
 
-    DoneCommand(int toComplete) {
+    public DoneCommand(int toComplete) {
         this.toComplete = toComplete;
     }
 
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printDone(tasks, toComplete);
         tasks.get(toComplete).complete();
     }

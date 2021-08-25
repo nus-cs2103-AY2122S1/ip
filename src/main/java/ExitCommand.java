@@ -1,13 +1,19 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 import java.io.IOException;
 
-class ExitCommand extends Command {
+public class ExitCommand extends Command {
 
-    void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         storage.write(tasks);
         ui.printExit();
     }
 
-    boolean isExit() {
+    public boolean isExit() {
         return true;
     }
 

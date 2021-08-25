@@ -1,5 +1,8 @@
-class ToDo extends Task {
-    ToDo(String toDo){
+package duke.task;
+
+public class ToDo extends Task {
+
+    public ToDo(String toDo){
         super(toDo);
     }
 
@@ -7,7 +10,7 @@ class ToDo extends Task {
         return "T";
     }
 
-    String getToWrite() {
+    public String getToWrite() {
         return this.getType() + " | " + super.getToWrite();
     }
 

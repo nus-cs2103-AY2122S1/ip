@@ -1,5 +1,7 @@
-class IllegalCommandException extends Exception {
-    IllegalCommandException(String message){
+package duke.exception;
+
+public class IllegalCommandException extends Exception {
+    public IllegalCommandException(String message){
         super(message);
     }
 }

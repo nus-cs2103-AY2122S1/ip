@@ -1,13 +1,15 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-class Event extends Task {
+public class Event extends Task {
 
     private LocalDate date;
     private LocalTime time;
 
-    Event(String toDo, LocalDate date, LocalTime time){
+    public Event(String toDo, LocalDate date, LocalTime time){
         super(toDo);
         this.date = date;
         this.time = time;
@@ -22,7 +24,7 @@ class Event extends Task {
         time.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 
-    String getToWrite() {
+    public String getToWrite() {
         return this.getType() + " | " + super.getToWrite() + " | " + this.getDateString();
     }
 
