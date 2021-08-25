@@ -1,4 +1,4 @@
-
+package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -13,72 +13,9 @@ import java.util.List;
 import java.util.Scanner;
 import java.time.LocalDate;
 
- class Task {
-    protected String description;
-    protected boolean isDone;
-
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
-    public void markAsDone(){
-        this.isDone = true;
-    }
-
-    @Override
-    public String toString(){
-      return "[" + getStatusIcon() + "] " + description;
-    }
-}
- class Deadline extends Task {//Need to be done by deadline
-
-    protected String by;
-
-    public Deadline(String description, String by) {
-        super(description);
-        this.by = by;
-    }
-
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + "(" + by + ")";
-    }
-}
-
- class ToDo extends Task {//No deadline
 
 
-    public ToDo(String description) {
-        super(description);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-}
-
-class Event extends Task {//Starts and ends by a certain time
-
-    protected String by;//Range of timing
-
-    public Event(String description, String by) {
-        super(description);
-        this.by = by;
-    }
-
-    @Override
-    public String toString() {
-        return "[E]" + super.toString()  + "(" + by + ")";
-    }
-}
-
-public class Duke {
+class Duke {
 
     Scanner myScanner = new Scanner(System.in);
 
