@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 public class Duke {
     private static String introString = "Hey there! I'm Good Duke. How many I help you today?";
