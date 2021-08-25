@@ -2,6 +2,8 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.List;
+
 /**
  * Handles all UI elements for duke.Duke.
  */
@@ -91,6 +93,22 @@ public class Ui {
      */
     public void notifyMarkDone(Task task, int index) {
         this.say("I have marked the task as done!", String.format("%d. %s", index + 1, task));
+    }
+
+    /**
+     * Notify user on results of find command.
+     * @param results tasks found through find command
+     */
+    public void notifyFindResults(List<TaskList.FindResult> results) {
+        String[] listItems = new String[results.size() + 1];
+
+        listItems[0] = "Here are some tasks matching your search:";
+        for (int i = 0; i < results.size(); ++i) {
+            TaskList.FindResult result = results.get(i);
+            listItems[i + 1] = String.format("%d. %s", result.index + 1, result.task);
+        }
+
+        this.say(listItems);
     }
 
     /**
