@@ -68,6 +68,15 @@ public class Ui { //IU Class used to handle the interactions with the user.
     }
 
     /**
+     * Prints the list of task for the users with the pattern in the task name
+     * @param taskList List of tasks
+     * @param pattern pattern to be searched
+     */
+    public static void searchList(TaskList taskList, String pattern) {
+        taskList.searchList(pattern);
+    }
+
+    /**
      * Prints the done Message to inform the user that the task has been marked as done
      * @param msg  task's message when marked as done
      */
