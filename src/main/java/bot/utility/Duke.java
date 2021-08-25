@@ -1,4 +1,4 @@
-package Bot.utility;
+package bot.utility;
 
 /**
  * Simulates the Duke chatbot.
@@ -18,7 +18,7 @@ public class Duke {
     }
 
     private void start() {
-        logger = new Logger("Bot.tasks.txt");
+        logger = new Logger("tasks.txt");
         parser = new Parser();
         ui = new Ui();
         ui.greet();
