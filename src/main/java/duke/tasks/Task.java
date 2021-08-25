@@ -52,6 +52,10 @@ public class Task {
         System.out.println(this.prefix + showStatus() + this.name);
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return (this.prefix + " " + showStatus() + this.name);

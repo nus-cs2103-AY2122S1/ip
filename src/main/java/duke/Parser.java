@@ -4,6 +4,7 @@ import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.OnDateCommand;
 import duke.commands.UnknownCommand;
@@ -21,6 +22,10 @@ public class Parser {
         case "on" : {
             String dateString = userInput.substring(3);
             return new OnDateCommand(dateString);
+        }
+        case "find" : {
+            String keyword = userInput.substring(5);
+            return new FindCommand(keyword);
         }
         case "done" : {
             int taskNum = Integer.parseInt(userInput.substring(5));

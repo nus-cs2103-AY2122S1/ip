@@ -8,6 +8,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a new Duke object with the given file path.
+     * 
+     * @param filePath file path for creating the text file of interactions
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
