@@ -30,6 +30,16 @@ public abstract class Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Task)){
+            return false;
+        } else {
+            Task oTask = (Task) o;
+            return this.toString().equals(oTask.toString());
+        }
+    }
+
+    @Override
     public String toString(){
         if(done == 1){
             return String.format("[X] %s", toDo);

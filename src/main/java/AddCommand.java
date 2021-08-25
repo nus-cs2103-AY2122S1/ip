@@ -17,4 +17,18 @@ public class AddCommand extends Command {
         tasks.add(task);
         ui.printAdd(task, tasks);
     }
+
+    public Task getTask() {
+        return task;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof AddCommand)) {
+            return false;
+        } else {
+            AddCommand oAddCommand = (AddCommand) o;
+            return task.toString().equals((oAddCommand.getTask().toString()));
+        }
+    }
 }
