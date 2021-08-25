@@ -7,6 +7,9 @@ import jared.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Deals with user interactions.
+ */
 public class Ui {
     private final Scanner scan;
 
@@ -22,10 +25,16 @@ public class Ui {
         System.out.println(Message.MESSAGE_WELCOME);
     }
 
+    /**
+     * Prints exit message.
+     */
     public void showExitMessage() {
         System.out.println(Message.MESSAGE_EXIT);
     }
 
+    /**
+     * Starts the scanner to scan for tasks from user.
+     */
     public void runScanner(TaskList tasks) {
         while (scan.hasNextLine()) {
             String next = scan.nextLine();

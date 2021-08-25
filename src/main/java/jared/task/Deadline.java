@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline task.
+ */
 public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
@@ -19,6 +22,10 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * Converts to string for printing list.
+     * @return String of deadline details.
+     */
     @Override
     public String toString() {
         String res = "[D]" + super.toString() + " (by: "
@@ -29,6 +36,10 @@ public class Deadline extends Task {
         return res += ")";
     }
 
+    /**
+     * Converts to string for saving in data.
+     * @return String of deadline details in save format.
+     */
     @Override
     public String saveFormat() {
         String res = "D _ " + super.saveFormat() + " _ " + this.date;

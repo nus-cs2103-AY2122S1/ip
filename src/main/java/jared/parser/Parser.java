@@ -2,12 +2,24 @@ package jared.parser;
 
 import jared.common.DukeException;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
     public static String parseCommand(String s) {
         String[] inputArr = s.split(" ",2);
         String command = inputArr[0];
         return command;
     }
+
+    /**
+     * Parses user input into specified data required.
+     *
+     * @param s user input string.
+     * @param output data output required.
+     * @return the required data specified.
+     * @throws DukeException
+     */
 
     public static String parseData(String s, String output) throws DukeException {
         String[] dataArr = s.split(" _ ");
