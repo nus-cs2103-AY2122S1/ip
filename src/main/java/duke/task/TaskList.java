@@ -90,6 +90,11 @@ public class TaskList {
         return getTask(taskNumber).markAsDone();
     }
 
+    /**
+     * Gets the size of the task list.
+     *
+     * @return the size of the list as an integer.
+     */
     public int size() {
         return tasks.size();
     }

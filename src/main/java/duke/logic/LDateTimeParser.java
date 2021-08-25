@@ -42,10 +42,18 @@ public class LDateTimeParser {
         }
     }
 
+    /**
+     * Gets the date of this datetime.
+     * @return the local date object.
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * Gets the time of this datetime.
+     * @return the local time object.
+     */
     public LocalTime getTime() {
         return time;
     }

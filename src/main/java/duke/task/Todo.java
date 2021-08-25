@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  */
 public class Todo extends Task {
     /**
-     * Creates a duke.Todo object that does not have any dates.
+     * Creates a Todo object that does not have any dates.
      *
      * @param description The description of the task to be done
      */
@@ -15,6 +15,11 @@ public class Todo extends Task {
         super(description, "T");
     }
 
+    /**
+     * There is no datetime associated with Todo so null is returned.
+     *
+     * @return null.
+     */
     @Override
     public LocalDateTime getDateTime() {
         return null;

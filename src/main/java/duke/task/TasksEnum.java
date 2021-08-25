@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ * An enum of tasks that each have a method to create a new instance of the task.
+ */
 public enum TasksEnum {
     TODO () {
         @Override

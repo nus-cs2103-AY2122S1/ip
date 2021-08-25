@@ -19,9 +19,6 @@ public class LCommandParser {
             " some tasks";
     private static final String INVALID_NUMBER_MESSAGE = "Please input a valid task number after the command.";
 
-
-
-
     /**
      * Creates a new command parser for the input.
      *
