@@ -10,8 +10,8 @@ public class TaskListWriter {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(taskList);
             oos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch(IOException e) {
+            System.out.println("Oops! Data file not found!");
         }
     }
 }

@@ -11,8 +11,9 @@ public class TaskListReader {
             ArrayList<Task> taskList = (ArrayList<Task>) objectIn.readObject();
             objectIn.close();
             return taskList;
+
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Unable to load your task list :(");
             return null;
         }
     }

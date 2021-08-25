@@ -7,7 +7,7 @@ import java.util.Scanner;
  * @author Adam Ho
  */
 public class TaskManager {
-    final String DATA_FILE = "./data/duke.txt";
+    private String TASK_FILE = "./data/duke.txt";
     private enum Command {
 
         LIST("list"),
@@ -117,7 +117,7 @@ public class TaskManager {
      */
     public void run() {
         Message.greet();
-        listOfTasks = TaskListReader.read(DATA_FILE);
+        listOfTasks = TaskListReader.read(TASK_FILE);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
@@ -143,7 +143,7 @@ public class TaskManager {
                     throw new DukeException.InvalidInputException();
                 }
 
-                TaskListWriter.write(DATA_FILE, listOfTasks);
+                TaskListWriter.write(TASK_FILE, listOfTasks);
             } catch (DukeException e) {
                 Message.error(e.toString());
             } finally {
