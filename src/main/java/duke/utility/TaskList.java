@@ -83,4 +83,30 @@ public class TaskList {
         }
         throw new DukeException.NoSuchTaskException("Task is not in list!");
     }
+    
+    protected String search(String keywords) throws DukeException.InvalidTaskDescriptionException, 
+            DukeException.NoSuchTaskException {
+        if (keywords.equals("")) {
+            throw new DukeException.InvalidTaskDescriptionException("Please enter some keywords to search for!");
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < this.tasks.size(); i++) {
+                String taskName = this.tasks.get(i).getTaskName();
+                if (taskName.contains(keywords)) {
+                    sb.append(i + 1);
+                    sb.append(".");
+                    sb.append(this.tasks.get(i).toString());
+                    if (i < this.tasks.size() - 1) {
+                        sb.append("\n");
+                    }
+                }
+            }
+            if (sb.length() == 0) {
+                throw new DukeException.NoSuchTaskException(String.format("No tasks found containing the keyword(s) " 
+                        + "\"%s\"", keywords));
+            } else {
+                return String.format("Tasks found with names containing \"%s\" as a substring:\n", keywords) + sb; 
+            }
+        }
+    }
 }
