@@ -7,8 +7,9 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.addTask(task);
+        storage.save(tasks);
         int len = tasks.size();
         String message = String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
                 task.toString(),

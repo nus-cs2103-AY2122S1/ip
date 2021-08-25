@@ -6,11 +6,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         if (index <= 0 || index > tasks.size()) {
             throw new DukeException("Looks like there is no such task to be deleted");
         }
         Task task = tasks.deleteTask(index);
+        storage.save(tasks);
         int len = tasks.size();
         String message = String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.",
                 task.toString(),

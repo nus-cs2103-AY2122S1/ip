@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -42,9 +43,9 @@ public class Storage {
         if (arr[0].trim().contains("T")) {
             task = new ToDo(arr[2].trim(), arr[1].trim().equals("1"));
         } else if (arr[0].trim().contains("E")) {
-            task = new Event(arr[2].trim(), arr[1].trim().equals("1"), arr[3].trim());
+            task = new Event(arr[2].trim(), arr[1].trim().equals("1"), LocalDate.parse(arr[3].trim()));
         } else if (arr[0].trim().contains("D")) {
-            task = new Deadline(arr[2].trim(), arr[1].trim().equals("1"), arr[3].trim());
+            task = new Deadline(arr[2].trim(), arr[1].trim().equals("1"), LocalDate.parse(arr[3].trim()));
         }
         return task;
     }

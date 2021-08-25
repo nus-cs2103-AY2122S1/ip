@@ -30,7 +30,7 @@ public class Duke {
                 String input = sc.nextLine();
                 System.out.println(LINE);
                 Command c = Parser.parse(input);
-                c.execute(tasks);
+                c.execute(tasks, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
