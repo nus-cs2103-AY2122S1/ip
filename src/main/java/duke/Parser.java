@@ -18,7 +18,8 @@ public class Parser {
      * should continue running.
      * @throws Exception
      */
-    public static boolean runCommand(TaskList tasks, Storage storage, String input) throws Exception {
+    public static boolean runCommand(TaskList tasks, Storage storage,
+            String input) throws Exception {
         var parameters = input.split(" ");
         var command = parameters[0];
         if (command.equals("bye") && parameters.length == 1) {
@@ -43,11 +44,14 @@ public class Parser {
             Ui.printBanner(new String[] {
                 "Noted. I've removed this task:",
                 "  " + Ui.renderTask(task),
-                String.format("Now you have %d tasks in the list.", tasks.size()),
+                String.format("Now you have %d tasks in the list.",
+                        tasks.size()),
             });
         } else if (command.equals("todo")) {
             if (parameters.length == 1) {
-                throw new Exception("The description of a todo cannot be empty.");
+                throw new Exception(
+                    "The description of a todo cannot be empty."
+                );
             }
             String taskLine = input.replace("todo", "").strip();
             var task = Parser.parseTaskLine(taskLine, TaskType.TODO);
@@ -67,7 +71,9 @@ public class Parser {
             storage.writeTaskList(tasks);
             Ui.printTaskAdded(tasks, task);
         } else {
-            throw new Exception("I'm sorry, but I don't know what that means :-(");
+            throw new Exception(
+                "I'm sorry, but I don't know what that means :-("
+            );
         }
         return false;
     }
@@ -80,22 +86,24 @@ public class Parser {
      */
     public static Task parseTaskLine(String taskLine, TaskType taskType) {
         switch (taskType) {
-            case TODO:
-                return new Todo(taskLine);
-            case DEADLINE:
-                String[] deadlineParts = taskLine.split("\\s+/by\\s+", 2);
-                return new Deadline(
-                    deadlineParts[0],
-                    LocalDate.parse(deadlineParts[1])
-                );
-            case EVENT:
-                String[] eventParts = taskLine.split("\\s+/at\\s+", 2);
-                return new Event(
-                    eventParts[0],
-                    LocalDate.parse(eventParts[1])
-                );
-            default:
-                throw new UnsupportedOperationException("task type is not a valid enum value");
+        case TODO:
+            return new Todo(taskLine);
+        case DEADLINE:
+            String[] deadlineParts = taskLine.split("\\s+/by\\s+", 2);
+            return new Deadline(
+                deadlineParts[0],
+                LocalDate.parse(deadlineParts[1])
+            );
+        case EVENT:
+            String[] eventParts = taskLine.split("\\s+/at\\s+", 2);
+            return new Event(
+                eventParts[0],
+                LocalDate.parse(eventParts[1])
+            );
+        default:
+            throw new UnsupportedOperationException(
+                "task type is not a valid enum value"
+            );
         }
     }
 }

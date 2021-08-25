@@ -43,14 +43,14 @@ public enum TaskType {
      */
     public static TaskType convertTaskIcon(String taskIcon) {
         switch (taskIcon) {
-            case "D":
-                return TaskType.DEADLINE;
-            case "E":
-                return TaskType.EVENT;
-            case "T":
-                return TaskType.TODO;
-            default:
-                throw new UnsupportedOperationException("unknown task icon");
+        case "D":
+            return TaskType.DEADLINE;
+        case "E":
+            return TaskType.EVENT;
+        case "T":
+            return TaskType.TODO;
+        default:
+            throw new UnsupportedOperationException("unknown task icon");
         }
     }
 };

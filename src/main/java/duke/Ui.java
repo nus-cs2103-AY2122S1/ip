@@ -8,14 +8,16 @@ import java.util.stream.Stream;
  * Class containing methods for UI-related functionality.
  */
 public class Ui {
-    private static final String SEPARATOR = "____________________________________________________________";
+    private static final String SEPARATOR =
+            "____________________________________________________________";
     private static final String PREFIX = "\t";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String WELCOME_MSG = "Hello from\n" + LOGO + "What can I do for you?";
+    private static final String WELCOME_MSG =
+            "Hello from\n" + LOGO + "What can I do for you?";
     private static final String BYE_MSG = "Bye. Hope to see you again soon!";
 
     /**
@@ -56,7 +58,9 @@ public class Ui {
                         .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 );
             default:
-                throw new UnsupportedOperationException("task type is not a valid enum value");
+                throw new UnsupportedOperationException(
+                    "task type is not a valid enum value"
+                );
         }
     }
 
