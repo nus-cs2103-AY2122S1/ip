@@ -1,10 +1,10 @@
 package pilcrow;
 
+import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.io.FileWriter;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,6 +28,7 @@ public class Storage {
     public ArrayList<Task> load() {
         File pilcrowFile = new File(this.filePath);
         Scanner scanner;
+
         try {
             scanner = new Scanner(pilcrowFile);
         } catch (FileNotFoundException exception) {
@@ -38,12 +39,13 @@ public class Storage {
             }
             scanner = new Scanner("");
         }
-        ArrayList<Task> taskList = new ArrayList<>();
 
+        ArrayList<Task> taskList = new ArrayList<>();
         while (scanner.hasNext()) {
             taskList.add(Task.convertFromStoredTask(scanner.nextLine()));
         }
         scanner.close();
+
         return taskList;
     }
 
