@@ -1,3 +1,14 @@
+package kermit.command;
+
+import kermit.KermitException;
+import kermit.Ui;
+import kermit.ToDo;
+import kermit.Storage;
+import kermit.tasks.Deadline;
+import kermit.tasks.Event;
+import kermit.tasks.Task;
+import kermit.tasks.ToDos;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -5,7 +16,7 @@ public class AddTaskCommand extends Command {
     Task task;
 
     // parses dates in form dd-mm-yyyy to localdate
-    private static LocalDate parseDate(String dateString) throws KermitException{
+    private static LocalDate parseDate(String dateString) throws KermitException {
         String[] components = dateString.split("-");
         try {
             String day = components[0];
@@ -20,7 +31,7 @@ public class AddTaskCommand extends Command {
 
     public AddTaskCommand(String taskType, String description, String flag) throws KermitException {
         if (description.equals("")) {
-            throw new KermitException("The argument of the " + taskType + " command cannot be empty!");
+            throw new KermitException("The argument of the " + taskType + " kermit.command cannot be empty!");
         }
 
         if (taskType.equals("todo")) {

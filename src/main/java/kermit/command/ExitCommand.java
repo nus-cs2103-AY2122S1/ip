@@ -1,3 +1,10 @@
+package kermit.command;
+
+import kermit.KermitException;
+import kermit.Storage;
+import kermit.ToDo;
+import kermit.Ui;
+
 public class ExitCommand extends Command {
     public ExitCommand() {
     }

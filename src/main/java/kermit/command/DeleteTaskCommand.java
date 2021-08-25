@@ -1,9 +1,17 @@
-public class CompleteTaskCommand extends Command {
-    // zero indexed
-    private int taskNum;
+package kermit.command;
+
+import kermit.KermitException;
+import kermit.Ui;
+import kermit.ToDo;
+import kermit.Storage;
+import kermit.tasks.Task;
+
+public class DeleteTaskCommand extends Command {
+    // zero-indexed
+    int taskNum;
 
     // taskNum is number in task list, one indexed
-    public CompleteTaskCommand(String taskNum) throws KermitException {
+    public DeleteTaskCommand(String taskNum) throws KermitException {
         try {
             this.taskNum = Integer.parseInt(taskNum) - 1;
         } catch (NumberFormatException e) {
@@ -15,8 +23,8 @@ public class CompleteTaskCommand extends Command {
     @Override
     void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
         try {
-            Task task = taskList.completeTask(taskNum);
-            ui.showCompleteTaskMessage(task);
+            Task deletedTask = taskList.deleteTask(taskNum);
+            ui.showDeleteTaskMessage(deletedTask, taskList);
             storage.save(taskList);
         } catch (IndexOutOfBoundsException e) {
             throw new KermitException("That is an invalid task!");
