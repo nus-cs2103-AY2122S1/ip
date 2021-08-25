@@ -6,21 +6,30 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class that represents a Parser object for parsing Strings to Commands
+ */
 public class Parser {
+
+    /**
+     * Returns a Command by parsing a user provided String input
+     * that can be executed.
+     *
+     * @param fullCommand A String input direct from the user.
+     * @return A subtype of Command
+     * @throws DukeException In the event of parse or invalid argument errors
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String firstToken = fullCommand.split(" ")[0];
 
         // Check if fullCommand is "bye"
         if (fullCommand.equals("bye")) {
             return new ByeCommand();
-            // Response.exit();
-            // break;
         } 
 
         // Check if fullCommand is "list"
         else if (fullCommand.equals("list")) {
             return new ListAllCommand();
-            // Response.listAllItems(store);
         }
 
         // Check if fullCommand starts with "delete"
@@ -33,16 +42,7 @@ public class Parser {
                 
                 // Determine index of task to delete
                 int index = Integer.parseInt(fullCommand.split(" ")[1]);
-
-                // // Check for valid task number provided
-                // if (index < 1 || index > store.getTotalTasks()) {
-                //     throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
-                // }
                 return new DeleteCommand(index);
-
-                // // Remove item
-                // Task removed = store.deleteTask(index);
-                // Response.removed(store, removed);
 
             } catch (NumberFormatException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
@@ -60,16 +60,7 @@ public class Parser {
                 // Determine index of task to mark as done
                 int index = Integer.parseInt(fullCommand.split(" ")[1]);
 
-                // Check for valid task number provided
-                // if (index > store.getTotalTasks() || index < 1) {
-                //     throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
-                // }
-
                 return new DoneCommand(index);
-
-                // Mark item as done
-                // Task completedTask = store.markAsDone(index);
-                // Response.completed(completedTask);
 
             } catch (NumberFormatException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
@@ -84,9 +75,6 @@ public class Parser {
             }
             String description = fullCommand.substring(5);
             return new TodoCommand(description);
-            // ToDo todo = new ToDo(description);
-            // store.addTask(todo);
-            // Response.added(store, todo);
         }
         
         // Check if user adding a Deadline
@@ -113,10 +101,6 @@ public class Parser {
                     .substring(9);
                 
                 return new DeadlineCommand(description, dueDateTime);
-
-                // Deadline deadline = new Deadline(description, dueDateTime);
-                // store.addTask(deadline);
-                // Response.added(store, deadline);
 
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid due date.");
@@ -147,10 +131,6 @@ public class Parser {
                     .substring(6);
                 
                 return new EventCommand(description, eventDateTime);
-
-                // Event event = new Event(description, eventDateTime);
-                // store.addTask(event);
-                // Response.added(store, event);
 
             } catch (DateTimeParseException e) {
                 throw new DukeException("☹ OOPS!!! Please provide a valid event time.");

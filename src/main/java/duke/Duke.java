@@ -4,12 +4,21 @@ import duke.commands.Command;
 
 import java.util.Scanner;
 
+/**
+ * Class that encapsulates the Duke application
+ */
 public class Duke {
 
     private PersistentStorage storage;
     private Tasklist taskList;
     private UI ui;
 
+    /** 
+     * Public constructor for a Duke object
+     * 
+     * @param filepath A filepath to a text file that serves
+     *    as persistent storage for Duke.
+     */
     public Duke(String filePath) {
         ui = new UI(new Scanner(System.in));
         storage = new PersistentStorage(filePath);
@@ -21,6 +30,9 @@ public class Duke {
         }
     }
 
+    /** 
+     * Runs the Duke application.
+     */
     public void run() {
         ui.showStartMsg();
         Boolean exit = false;
@@ -38,6 +50,13 @@ public class Duke {
         }
     }
 
+    
+    
+    /**
+     * Main function to be run.
+     *
+     * @param args Command line arguments to main.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("./data/taskdata.txt");
         duke.run();
