@@ -25,18 +25,21 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
-
-
+    
     /** Start of the program. */
     public void run() {
         ui.welcomeMessage();
         boolean isExit = false;
+
+        // Main loop of program
         while (!isExit) {
             try {
+                // Deal with user's input
                 ui.enterCommand();
                 String fullCommand = ui.readInput();
                 ui.lineGenerator();
+
+                // Execute command based on user's input
                 duke.parser.Parser parser = new duke.parser.Parser(fullCommand);
                 isExit = parser.execute(tasks, ui, storage);
             } catch (DukeException e) {
