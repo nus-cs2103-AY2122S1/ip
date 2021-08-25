@@ -7,6 +7,9 @@ import ponyo.storage.Storage;
 
 import java.util.ArrayList;
 
+/**
+ * Search for a task using a keyword.
+ */
 public class FindCommand extends Command {
     private final String keywordToFind;
 
