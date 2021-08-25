@@ -65,11 +65,7 @@ public class TaskList {
 
         }catch(IllegalArgumentException e) {
             return("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } catch(IOException e) {
-            return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
-        } catch(StringIndexOutOfBoundsException e) {
-            return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
-        } catch (DateTimeParseException e) {
+        } catch(IOException | StringIndexOutOfBoundsException | DateTimeParseException e) {
             return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
         }
     }
@@ -133,5 +129,17 @@ public class TaskList {
             str.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
         }
         return str.toString();
+    }
+
+    public String findTask(List<Task> tasks, String userInput) {
+        String keyWord = userInput.substring(5);
+        List<Task> tempList = new ArrayList<>();
+
+        tasks.forEach(task -> {
+            if(task.toString().contains(keyWord)) {
+                tempList.add(task);
+            };
+        });
+        return showTasks(tempList);
     }
 }
