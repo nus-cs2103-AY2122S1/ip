@@ -1,9 +1,3 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -20,16 +14,11 @@ public class Duke {
      */
     private enum Tasks {DEADLINE, EVENT, TODO}
 
-    //path of file containing stored data
-    private static final String FILE_PATH = "data/test.txt";
-    //path of folder containing data file
-    private  static final String DIR_PATH = "data";
     //ArrayList containing tasks stored by Duke
-    private static ArrayList<Task> taskArray = new ArrayList<>();
+    public static ArrayList<Task> taskArray = new ArrayList<>();
     //Integer that stores the number of tasks currently stored by Duke.
-    private static int listIndex = 0;
-    //FIle containing stored data
-    private static File dataFile;
+    public static int listIndex = 0;
+
 
     /**
      * Starts the main process, activating the chatbot.
@@ -37,24 +26,7 @@ public class Duke {
      * @param args The default parameter for the main function.
      */
     public static void main(String[] args) {
-        //set up the file
-        dataFile = new File(FILE_PATH);
-        //file does not exist: attempt to create a new file.
-        if (!dataFile.canRead()) {
-            try {
-                new File(DIR_PATH).mkdir();
-                if (dataFile.createNewFile()) {
-                    System.out.println("A new save file has been created in root/data.");
-                }
-
-            } catch (Exception e) {
-                System.out.println("An error has occurred when creating your file.");
-                System.out.println("Please try running Duke again!");
-                return;
-            }
-        }
-
-        loadData();
+        Storage.start();
 
         Scanner scan = new Scanner(System.in);
 
@@ -121,7 +93,7 @@ public class Duke {
                         System.out.println("Ok, very nice. I have deleted the following task.\n" + currentTask.toString());
                     }
                     System.out.println("Now you have " + listIndex + " tasks remaining. Get to work!");
-                    saveData();
+                    Storage.saveData();
 
                 } catch (NumberFormatException exception) {
                     System.out.println("Enter a valid number! Or do you not know basic math?");
@@ -254,43 +226,7 @@ public class Duke {
         System.out.println("Ok can, sure. I have added this task as you wanted.");
         System.out.println(tempTask.toString());
         System.out.println("Now you have only " + listIndex + " tasks in the list. Try being more hardworking!");
-        saveData();
-
-    }
-
-    private static void loadData() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(dataFile));
-            String nextLine;
-            while ((nextLine = reader.readLine()) != null) {
-                taskArray.add(DataParser.readData(nextLine));
-                listIndex += 1;
-
-            }
-        } catch (Exception e) {
-            if (e instanceof FileNotFoundException) {
-                System.out.println("Whoops, there is some problem with your file!");
-            } else {
-                System.out.println("Your save file is corrupted! Did you not take care of it?");
-                System.out.println("Try deleting your save file then try again!");
-            }
-
-        }
-
-    }
-
-    private static void saveData() {
-        try {
-            FileWriter writer = new FileWriter(dataFile);
-            StringBuilder str = new StringBuilder();
-            for (Task task: taskArray) {
-                str.append(task.toDataString()).append("\n");
-            }
-            writer.write(str.toString());
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("An error occured while saving your file.");
-        }
+        Storage.saveData();
 
     }
 
