@@ -11,6 +11,11 @@ public class Tasklist {
 
     }
 
+    public Tasklist(List<Task> tasks) {
+        for (Task t: tasks) {
+            this.tasks.add(t);
+        }
+    }
     /**
      * Returns the current number of Tasks in the list.
      *
@@ -54,6 +59,21 @@ public class Tasklist {
         taskList.add(t);
     }
 
+    /**
+     * Returns a Tasklist containing all the items matching the given keyword.
+     *
+     * @param keyword String keyword given by the user.
+     * @return A Tasklist containing all valid entries from the main list of items.
+     */
+    public Tasklist findAllBy(String keyword) {
+        Tasklist t = new Tasklist(tasks.stream().filter(task -> task.toString().contains(keyword))
+                .collect(Collectors.toList()));
+        if (t.size() == 0) {
+            return null;
+        } else {
+            return t;
+        }
+    }
     /**
      * Returns the Tasklist in a file-writable String format.
      *
