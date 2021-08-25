@@ -1,17 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Duke {
 
-//    enum stdInputs {
-//        BYE,
-//        LIST,
-//        DONE,
-//        DELETE,
-//        TODO,
-//        DEADLINE,
-//        EVENT
-//    }
+public class Duke {
 
     public static void main(String[] args) {
         String logo = " ____        _        \n"
@@ -59,9 +50,8 @@ public class Duke {
                         break;
                     } catch (DukeException e) {
                         e.printMsg();
-                    } finally {
-                        break;
                     }
+                    break;
                 case "deadline":
                     try {
                         Task newTask = new Deadline(scan.nextLine());
@@ -69,9 +59,8 @@ public class Duke {
                         newTask.addTaskMsg(myTasks.size()); // Print confirmation message
                     } catch (DukeException e) {
                         e.printMsg();
-                    } finally {
-                        break;
                     }
+                    break;
 
                 case "event":
                     try {
@@ -80,9 +69,8 @@ public class Duke {
                         newTask.addTaskMsg(myTasks.size()); // Print confirmation message
                     } catch (DukeException e) {
                         e.printMsg();
-                    } finally {
-                        break;
                     }
+                    break;
 
                 default:
                     System.out.println("What are you even typing omg get it right...");
