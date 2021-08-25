@@ -80,17 +80,19 @@ public class TaskList {
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+
         tasks.add(newTask);
         storage.saveData(tasks);
 
-        System.out.println(String.format("Got it. I've added this task:\n" +
-                        "%s\nNow you have %d tasks in the list.",
+        System.out.println(String.format("Got it. I've added this task:\n"
+                        + "%s\nNow you have %d tasks in the list.",
                 newTask, tasks.size())
         );
     }
 
     public void list() {
         String res = "Here are the tasks in your list:\n";
+
         for (int i = 0; i < tasks.size(); i++) {
             Task currTask = tasks.get(i);
             res += String.format("%d. %s\n", i + 1, currTask.toString());
@@ -101,14 +103,17 @@ public class TaskList {
     public void done(String next) throws DukeException {
         int taskNum;
         Task currTask;
+
         try {
             taskNum = Integer.valueOf(next.split(" ", 2)[1]);
             currTask = tasks.get(taskNum-1);
         } catch (Exception e) {
             throw new DukeException("Invalid task number provided.");
         }
+
         currTask.markDone();
         storage.saveData(tasks);
+
         String res = String.format("Nice! I've marked this task as done:\n%s",
                 currTask);
         System.out.println(res);
@@ -132,8 +137,9 @@ public class TaskList {
         }
         tasks.remove(index);
         storage.saveData(tasks);
-        System.out.println(String.format("Noted. I've removed this task:\n" +
-                "%s\nNow you have %d tasks in the list.", currTask.toString(), tasks.size()));
+        System.out.println(String
+                .format("Noted. I've removed this task:\n" + "%s\nNow you have %d tasks in the list.",
+                        currTask.toString(), tasks.size()));
     }
 
 }
