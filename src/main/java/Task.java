@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     private String task;
     private boolean completed;
     private String taskType;
@@ -14,6 +14,13 @@ public class Task {
         this.completed = false;
         this.taskType = taskType;
     }
+
+    public Task(String task, boolean completed, String taskType) {
+        this.task = task;
+        this.completed = completed;
+        this.taskType = taskType;
+    }
+
 
     public boolean getCompleted() {
         return this.completed;
@@ -35,4 +42,6 @@ public class Task {
     public String getTask() {
         return this.task;
     }
+
+    public abstract String parseForStorage();
 }

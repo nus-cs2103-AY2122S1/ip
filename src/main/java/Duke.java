@@ -11,7 +11,7 @@ public class Duke {
 
     public Duke() {
         this.active = true;
-        this.list = new ArrayList<Task>();
+        this.list = SaveHelper.readData();
     }
 
     public void executeCommand(String input) throws DukeException {
@@ -53,6 +53,7 @@ public class Duke {
             default:
                 throw new InvalidCommandException("Invalid Command");
         }
+        SaveHelper.writeData(list);
     }
 
     public void terminate() {
@@ -74,14 +75,14 @@ public class Duke {
         System.out.println("____________________________________________________________\n");
     }
 
-    public void addTask(String input) {
+    /*public void addTask(String input) {
         this.list.add(new Task(input));
         String message =
                 "____________________________________________________________\n" +
                 " added: " + input + "\n" +
                 "____________________________________________________________\n";
         System.out.println(message);
-    }
+    }*/
 
     public void addTodo(String input) throws ToDoDescriptionNotFoundException {
     if (input.length() <= 5 || input.substring(5).stripLeading().length() <= 0) {
