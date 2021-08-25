@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Class representing a Task of an Event.
  */

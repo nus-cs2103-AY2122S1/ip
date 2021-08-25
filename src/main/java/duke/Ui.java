@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 /**
@@ -14,7 +16,7 @@ public class Ui {
     }
 
     public void printWelcome() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+        System.out.println("Hello! I'm \nWhat can I do for you?");
     }
 
     public void printGoodbye() {
@@ -58,6 +60,13 @@ public class Ui {
         System.out.println("---------");
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(tasks);
+        System.out.println("---------");
+    }
+
+    public void printDeleteTask(int size) {
+        System.out.println("---------");
+        System.out.println("Noted. I've removed this task");
+        System.out.println("Now you have " + size + " task in the list");
         System.out.println("---------");
     }
 

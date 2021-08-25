@@ -1,5 +1,5 @@
-/**
- * Class representing a Task with Deadline
+package duke; /**
+ * Class representing a duke.Task with duke.Deadline
  */
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,10 +9,10 @@ public class Deadline extends Task {
     private LocalDate by;
 
     /**
-     * Constructor of a Deadline, defaults to not completed.
+     * Constructor of a duke.Deadline, defaults to not completed.
      *
-     * @param description Description of the Deadline.
-     * @param by Due date of the Deadline
+     * @param description Description of the duke.Deadline.
+     * @param by Due date of the duke.Deadline
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -20,11 +20,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor of a Deadline, defaults to not completed.
+     * Constructor of a duke.Deadline, defaults to not completed.
      *
-     * @param description Description of the Deadline.
-     * @param isCompleted If the Deadline is completed.
-     * @param by Due date of the Deadline
+     * @param description Description of the duke.Deadline.
+     * @param isCompleted If the duke.Deadline is completed.
+     * @param by Due date of the duke.Deadline
      */
     public Deadline(String description, Boolean isCompleted, LocalDate by) {
         super(description, isCompleted);
@@ -32,7 +32,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the due date of the Deadline.
+     * Returns the due date of the duke.Deadline.
      *
      * @return Due date of the deadline.
      */
@@ -41,9 +41,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns String representation of the Deadline.
+     * Returns String representation of the duke.Deadline.
      *
-     * @return String representation of the Deadline.
+     * @return String representation of the duke.Deadline.
      */
     @Override
     public String toString() {
@@ -51,9 +51,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns String representation of the Deadline in save format.
+     * Returns String representation of the duke.Deadline in save format.
      *
-     * @return String representation of the Deadline in save format.
+     * @return String representation of the duke.Deadline in save format.
      */
     @Override
     public String save() {
