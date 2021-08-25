@@ -66,7 +66,7 @@ public class Duke {
             throw new DukeException("invalidToDo");
         } else {
             String name = command.substring(5);
-            Task task  = new ToDo(name);
+            Task task = new ToDo(name);
             tasks.add(task);
             if (printOutput) {
                 try {
