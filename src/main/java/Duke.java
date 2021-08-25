@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -115,9 +116,14 @@ public class Duke {
         } else {
             String description = userInput.substring(9, userInput.indexOf("/by") - 1);
             String by = userInput.substring(userInput.indexOf("/by") + 4);
-            Task t =  new Deadline(description, by);
-            items.add(t);
-            echo(t.toString(), "added");
+            try{
+                LocalDate time = LocalDate.parse(by);
+                Task t =  new Deadline(description, by);
+                items.add(t);
+                echo(t.toString(), "added");
+            } catch (Exception e){
+                System.out.println("Enter a valid date in the format yyyy-mm-dd\n");
+            }
         }
     }
     
