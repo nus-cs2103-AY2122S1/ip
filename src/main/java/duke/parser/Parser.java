@@ -2,7 +2,7 @@
  * This class handles interaction with the user: interpreting user command and logs
  *
  * @author Megan Wee Rui En
- * @version CS2103 AY21/22 Semester 1
+ * @version CS2103T AY21/22 Semester 1
  */
 
 package duke.parser;

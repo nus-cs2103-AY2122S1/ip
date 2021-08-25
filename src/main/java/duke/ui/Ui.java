@@ -1,3 +1,10 @@
+/**
+ * This class handles the outputs for logging purposes, responding to the user
+ *
+ * @author Megan Wee Rui En
+ * @version CS2103 AY21/22 Semester 1
+ */
+
 package duke.ui;
 
 import duke.tasklist.TaskList;
@@ -15,14 +22,23 @@ public class Ui {
         System.out.println(linebreak);
     }
 
+    /**
+     * This function prints out the error relevant to loading the file for the todo list.
+     */
     public void showLoadingError() {
         System.out.println("Sorry! There was an error loading the file :(");
     }
 
+    /**
+     * This function prints a linebreak.
+     */
     public void showLine() {
         System.out.println(linebreak);
     }
 
+    /**
+     * This function prints out a welcome message when a user starts using the chatbot
+     */
     public void showWelcome() {
         ///// Introduction of possible commands
         System.out.println("There are three special tasks you can add: Deadline, Event and Todo");
@@ -35,20 +51,32 @@ public class Ui {
         System.out.println(linebreak);
     }
 
+    /**
+     * This function prints out a message when a 'bye' command is entered  (when the program ends).
+     */
     public void showBye() {
         System.out.println("Bye bye!! It was nice meeting you!");
         System.out.println(linebreak);
     }
 
+    /**
+     * This function logs the addition of a Task.
+     */
     public void showAddition(String taskType, String command) {
         System.out.println("added: " + command);
     }
 
+    /**
+     * This function logs the removal of a Task.
+     */
     public void showRemoval(String taskRemoved, int taskListSize) {
         System.out.println("Oki! I have removed this task:");
         System.out.println(taskListSize + " more tasks to go!");
     }
 
+    /**
+     * This function prints out the taskList in a neat manner.
+     */
     public void showList(TaskList taskList) {
         if (taskList.size() == 0) {
             System.out.println("Yay! Nothing on your list right now :>");
@@ -59,6 +87,9 @@ public class Ui {
         }
     }
 
+    /**
+     * This function logs the completion of a Task.
+     */
     public void showCompletion(String s) {
         System.out.println("Yay good job!");
         System.out.println(s + " has been completed");
@@ -78,5 +109,4 @@ public class Ui {
             System.out.println("Good luck!");
         }
     }
-
 }

@@ -1,3 +1,9 @@
+/**
+ * This function simulates a chat bot who interacts with a user to keep track of a todo list.
+ *
+ * @author Megan Wee Rui En
+ * @version CS2103T AY21/22 Semester 1
+ */
 package duke;
 
 import duke.exceptions.*;
@@ -17,13 +23,15 @@ public class Duke {
     private final TaskList taskList;
     private final Ui ui;
 
-    // Initialising the object
     public Duke(String filePath) throws IOException {
         ui = new Ui(); // has the self intro
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
     }
 
+    /**
+     * This function is the body of the chat bot, and contains the flow and commands.
+     */
     public void run() throws DukeExceptions, IOException {
         ui.showWelcome();
         String command; // this is the container for the full command received from the user
