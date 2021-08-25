@@ -87,6 +87,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds all tasks containing a keyword
+     * @param in keyword to be found
+     */
+    public void findTask(String in) {
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task item : tasks) {
+            if (item.toString().contains(in)) {
+                System.out.println(item.toString());
+            }
+        }
+    }
+
     public String toString() {
         if (tasks.isEmpty()) {
             return "No tasks";

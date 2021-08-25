@@ -40,6 +40,8 @@ public class Parser {
                 Parser.eventOutput(in, tasklist);
             } else if (in.substring(0, 8).equals("deadline")) {
                 Parser.deadlineOutput(in, tasklist);
+            } else if (in.substring(0,4).equals("find")) {
+                Parser.findOutput(in, tasklist);
             } else {
                 Parser.invalidInputResponse();
             }
@@ -122,5 +124,15 @@ public class Parser {
                 System.out.println("Invalid date and time");
             }
         }
+    }
+
+    /**
+     * Returns a list of all the tasks containing that keyword in the tasklist
+     * @param in keyword to be found
+     * @param tasklist
+     */
+    public static void findOutput(String in, TaskList tasklist) {
+        String keyword = in.substring(4);
+        tasklist.findTask(keyword);
     }
 }
