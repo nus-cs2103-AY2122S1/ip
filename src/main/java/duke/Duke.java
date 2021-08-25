@@ -6,7 +6,7 @@ public class Duke {
     private final Ui ui;
 
 
-    public Duke(String filePath){
+    public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.list = new TaskList();
         this.ui = new Ui();
@@ -22,7 +22,7 @@ public class Duke {
         ui.welcome();
         String input = ui.getNextLine();
         Parser parser = new Parser(list);
-        while(true) {
+        while (true) {
             if (input.equals("bye")) {
                 break;
             }

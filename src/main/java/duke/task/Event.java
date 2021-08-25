@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime at;
 
-    public Event(String taskName, boolean doneStatus, LocalDateTime at) {
-        super(taskName, doneStatus);
+    public Event(String taskName, boolean isDone, LocalDateTime at) {
+        super(taskName, isDone);
         this.at = at;
     }
 

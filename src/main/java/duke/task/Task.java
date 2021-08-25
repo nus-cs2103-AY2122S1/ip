@@ -2,19 +2,19 @@ package duke.task;
 
 public class Task {
     private String taskName;
-    private boolean doneStatus;
+    private boolean isDone;
     
-    public Task(String taskName, boolean doneStatus) {
+    public Task(String taskName, boolean isDone) {
         this.taskName = taskName;
-        this.doneStatus = doneStatus;
+        this.isDone = isDone;
     }
 
     public void setDone() {
-        this.doneStatus = true;
+        this.isDone = true;
     }
 
     @Override
     public String toString() {
-        return this.doneStatus ? "[X] " + this.taskName : "[] " + this.taskName;
+        return this.isDone ? "[X] " + this.taskName : "[] " + this.taskName;
     }
 }

@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task{
     private LocalDate deadline;
 
-    public Deadline(String taskName, boolean doneStatus, LocalDate deadline) {
-        super(taskName, doneStatus);
+    public Deadline(String taskName, boolean isDone, LocalDate deadline) {
+        super(taskName, isDone);
         this.deadline = deadline;
     }
 
