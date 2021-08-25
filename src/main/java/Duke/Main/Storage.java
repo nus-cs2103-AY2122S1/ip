@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 public class Storage {
 
+    /**
+     * Process and convert instructions.txt file to String of instructions
+     * @return string of instructional guidelines
+     */
     public static String processInstructions() {
         StringBuilder builder = new StringBuilder();
         try {
@@ -22,6 +26,11 @@ public class Storage {
         return builder.toString();
     }
 
+    /**
+     * Update current task list content to file
+     * @param file a file that saved the task entered and date
+     * @param taskList task list
+     */
     public static void saveData(File file, TaskList taskList) {
         try {
             FileWriter writer = new FileWriter(file);
@@ -35,6 +44,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Load and preprocess data to task list from file
+     * @param file a file that contains previously entered tasks and dates
+     * @param taskList task list
+     */
     public static void loadData(File file, TaskList taskList) {
         try {
             FileReader reader = new FileReader(file);
