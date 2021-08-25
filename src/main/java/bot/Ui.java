@@ -60,4 +60,13 @@ public class Ui {
         System.out.println(RESPONSE_BLOCK_MARGIN + DIVIDER);
     }
 
+    /**
+     * Prints given message without dividers
+     *
+     * @param message message to print
+     */
+    public static void printNoDivider(String message) {
+        System.out.println(RESPONSE_BLOCK_MARGIN + TEXT_BLOCK_MARGIN + message);
+    }
+
 }

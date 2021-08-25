@@ -16,13 +16,24 @@ public class ListCommand extends Command {
     @Override
     public void run(Bot bot, String[] args) {
         List<Task> taskList = bot.taskList.get();
-        List<String> taskDescriptions = IntStream.range(0, taskList.size())
-                .mapToObj(i -> {
-                    Task t = taskList.get(i);
-                    return String.format("%d. %s", i + 1, t.toString());
-                })
-                .collect(Collectors.toList());
-        Ui.print(taskDescriptions.toArray(new String[0]));
+        Ui.print(commandsToStrings(taskList));
+    }
+
+    /**
+     * Converts list of tasks to list of string
+     * representation of tasks
+     *
+     * @param tasks List of tasks
+     * @return List of string representation of tasks
+     */
+    public static String[] commandsToStrings(List<Task> tasks) {
+        List<String> taskStrings =  IntStream.range(0, tasks.size())
+            .mapToObj(i -> {
+                Task t = tasks.get(i);
+                return String.format("%d. %s", i + 1, t.toString());
+            })
+            .collect(Collectors.toList());
+        return taskStrings.toArray(new String[0]);
     }
 
 }

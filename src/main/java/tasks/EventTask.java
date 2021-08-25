@@ -19,22 +19,22 @@ public class EventTask extends Task {
     }
 
     @Override
-    String getTaskDesc() {
+    public String getTaskDesc() {
         return String.format("%s (at: %s)", taskText, getTaskTime());
     }
 
     @Override
-    String getTaskText() {
+    public String getTaskText() {
         return this.taskText;
     }
 
     @Override
-    String getTaskTime() {
+    public String getTaskTime() {
         return this.taskTime.format(Task.OUTPUT_TIME_FORMAT);
     }
 
     @Override
-    TaskType getTaskType() {
+    public TaskType getTaskType() {
         return this.TASK_TYPE;
     }
 

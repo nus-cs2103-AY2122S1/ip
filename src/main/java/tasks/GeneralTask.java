@@ -20,17 +20,17 @@ public class GeneralTask extends Task {
     }
 
     @Override
-    String getTaskText() {
+    public String getTaskText() {
         return this.description;
     }
 
     @Override
-    String getTaskTime() {
+    public String getTaskTime() {
         return "";
     }
 
     @Override
-    TaskType getTaskType() {
+    public TaskType getTaskType() {
         return this.TASK_TYPE;
     }
 

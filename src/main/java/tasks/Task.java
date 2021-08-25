@@ -86,26 +86,27 @@ public abstract class Task {
      *
      * @return task description string
      */
-    abstract String getTaskDesc();
+    public abstract String getTaskDesc();
 
     /**
      * Get text associated with task
      *
      * @return Task's text
      */
-    abstract String getTaskText();
+    public abstract String getTaskText();
 
     /**
      * Get time associated with task
      *
      * @return Task's time
      */
-    abstract String getTaskTime();
+    public abstract String getTaskTime();
 
     /**
      * Get task's TaskType
      *
      * @return Task's TaskType
      */
-    abstract TaskType getTaskType();
+    public abstract TaskType getTaskType();
+
 }
