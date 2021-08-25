@@ -65,4 +65,3 @@ Here are your tasks summoner. Please do complete them as fast as possible. I hav
 4. [D][✓] deadlineone (by: Sunday)
 5. [D][✓] deadlinetwo (by: Monday)
 6. [D][✓] deadlinethree (by: Tuesday)
-See ya

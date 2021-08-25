@@ -5,17 +5,20 @@ public class Duke {
      * Function starts the process of the dukebot, closes when the "Bye command is issued"
      */
     private static void start() {
+        isRunning = true;
+        Logic.preload();
         while (true) {
-            String command = Presentation.scan();
+            String command = UI.scan();
+            try {
+                Logic.process(command);
+            } catch (InvalidCommandException exception) {
+                System.out.println(exception.getMessage());
+            }
+
+            //Check if the logic has made any changes to quit the programme or continue running
             if (!isRunning) {
                 System.out.println("See ya");
                 break;
-            } else {
-                try {
-                    Logic.process(command);
-                } catch (InvalidCommandException exception) {
-                    System.out.println(exception.getMessage());
-                }
             }
         }
     }

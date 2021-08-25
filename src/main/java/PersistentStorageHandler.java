@@ -1,26 +1,24 @@
 import java.io.*;
-import java.util.stream.Collectors;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DataStorageHandler {
+public class PersistentStorageHandler {
 
-
+    private File file;
+    private String fileName;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private int numberOfLines = 0;
     private int maxNumberOfLines = 10;
     private boolean hasStorageTextFile = false;
+    private ArrayList<String> all_lines = new ArrayList<>();
 
-    public DataStorageHandler(String fileName) {
-        //Check if file exist. If not create a new file
-        if (!hasStorageTextFile) {
-            //Create a storage text file with the same name
-            File file = new File(fileName);
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    public PersistentStorageHandler(String fileName) {
+        //Name the file
+        this.fileName = fileName;
+        this.file = new File(fileName);
 
         // Create the writer and buffered writer
         try {
@@ -31,6 +29,25 @@ public class DataStorageHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //Check if file exist. If not create a new file
+        if (!hasStorageTextFile) {
+            //Create a storage text file with the same name
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            //Add all lines of the file to all_lines variable
+            try {
+                List<String> list = Files.readAllLines(new File(fileName).toPath(), Charset.defaultCharset());
+                all_lines.addAll(list);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     public void write(String text)  {
@@ -49,19 +66,31 @@ public class DataStorageHandler {
 
         //Add the number of lines
         numberOfLines += linesInAddedText;
+
+        //Accumulate all lines
+        all_lines.add(text);
     }
 
     public void printAllLines() {
-        String all_lines =  bufferedReader.lines().collect(Collectors.joining());
-        System.out.println(all_lines);
+        for (String line: all_lines) {
+            System.out.println(line);
+        }
     }
 
     /**
      * Clears the entire history of the log
      */
     //I see what youre doing yes. Why are you clearing history?
-    public static void clear_history() {
+    public void clear_history() {
         //Code to clear history
+        this.all_lines.clear();
+        try {
+            FileWriter fileWriter = new FileWriter(fileName);
+            fileWriter.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void stopWriting() {
@@ -70,5 +99,10 @@ public class DataStorageHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public ArrayList<String> getAll_lines() {
+        return this.all_lines;
     }
 }

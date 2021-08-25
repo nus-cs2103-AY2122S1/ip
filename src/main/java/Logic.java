@@ -15,59 +15,94 @@ public class Logic {
         Command packagedCommand = Parser.parse(command);
         ArrayList<String> listOfCommandInputs = packagedCommand.getListOfCommandInputs();
         String loggedCommand = packagedCommand.getLog();
-
         if (command.equals("")) {
             throw new EmptyCommandException();
         } else if (command.equals("bye")) {
-            System.out.println("Comes here");
             Duke.stop();
-            Persistence.stopWriting();
+            DataHandlerLayer.updateHistory();
+            DataHandlerLayer.stopWriting();
         } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
-            Persistence.printLog();
+            DataHandlerLayer.printLog();
         } else if (listOfCommandInputs.contains("delete")) {
             int position = Integer.parseInt(listOfCommandInputs.get(listOfCommandInputs.indexOf("delete") + 1));
             try {
-                Persistence.delete(position);
+                DataHandlerLayer.delete(position);
             } catch (IndexOutOfBoundsException exception) {
                 throw new InvalidCommandException();
             }
+            DataHandlerLayer.updateHistory();
         } else if (listOfCommandInputs.contains("done")) {
             int pos = Integer.parseInt(listOfCommandInputs.get(1));
             if (pos > Task.getNumberOfTask()) {
                 throw new InvalidCommandException();
             }
-            Task currentTask = Persistence.getTask(pos - 1 );
+            Task currentTask = DataHandlerLayer.getTask(pos - 1 );
             currentTask.completeTask();
+            DataHandlerLayer.updateHistory();
             System.out.println("Ohhhh myyyy. I have been waiting for this quest to complete for ages.");
         } else {
-            switch (packagedCommand.getTaskType()) {
-                case TODO:
-                    Persistence.addToLog(new Todo(loggedCommand));
-                    break;
-                case DEADLINE:
-                    int indicatorDeadline = listOfCommandInputs.indexOf("/by");
-                    String tempDeadline = new String();
-                    String deadline = listOfCommandInputs.get(indicatorDeadline + 1);
-                    for (int i = 0; i < indicatorDeadline; i++) {
-                        tempDeadline = tempDeadline + listOfCommandInputs.get(i);
-                    }
-                    Persistence.addToLog(new Deadline(tempDeadline, deadline));
-                    break;
-                case EVENT:
-                    int indicatorEvent = listOfCommandInputs.indexOf("/at");
-                    String date = listOfCommandInputs.get(indicatorEvent + 1);
-                    String time = listOfCommandInputs.get(indicatorEvent + 2);
-                    String temp = new String();
-                    for (int i = 0; i < indicatorEvent; i++) {
-                        temp = temp + listOfCommandInputs.get(i);
-                    }
-                    Persistence.addToLog(new Event(temp, date, time));
-                    break;
-                case NOTAPPLICABLE:
-                    //For echoing commands
-                    throw new InvalidCommandException();
-            }
+            processTask(packagedCommand, true);
         }
+    }
 
+    public static void preload() {
+        System.out.println("Preloading works");
+        try {
+            ArrayList<Command> commandArrayList = DataHandlerLayer.loadPreset();
+            for (Command command: commandArrayList) {
+                processTask(command, false);
+            }
+        } catch (InvalidCommandException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void processTask(Command packagedCommand, boolean isWrittenToHistory) throws InvalidCommandException {
+        //Logic to check each individual commands, checks for special commands first, then checks for other input
+        //Use Parser to package command into a packaged command
+        ArrayList<String> listOfCommandInputs = packagedCommand.getListOfCommandInputs();
+        String loggedCommand = packagedCommand.getLog();
+
+        switch (packagedCommand.getTaskType()) {
+            case TODO:
+                Todo tempTodo = new Todo(loggedCommand);
+                DataHandlerLayer.addToLog(tempTodo);
+                if (isWrittenToHistory) {
+                    DataHandlerLayer.appendToHistory(tempTodo);
+                }
+                break;
+            case DEADLINE:
+                int indicatorDeadline = listOfCommandInputs.indexOf("/by");
+                String tempDeadlineString = new String();
+                String deadline = listOfCommandInputs.get(indicatorDeadline + 1);
+                for (int i = 0; i < indicatorDeadline; i++) {
+                    tempDeadlineString = tempDeadlineString + listOfCommandInputs.get(i);
+                }
+                Deadline tempDeadLine = new Deadline(tempDeadlineString,deadline);
+                DataHandlerLayer.addToLog(new Deadline(tempDeadlineString, deadline));
+                if (isWrittenToHistory) {
+                    DataHandlerLayer.appendToHistory(tempDeadLine);
+                }
+                break;
+            case EVENT:
+                int indicatorEvent = listOfCommandInputs.indexOf("/at");
+                String date = listOfCommandInputs.get(indicatorEvent + 1);
+                String time = listOfCommandInputs.get(indicatorEvent + 2);
+                String temp = new String();
+                for (int i = 0; i < indicatorEvent; i++) {
+                    temp = temp + listOfCommandInputs.get(i);
+                }
+
+                Event tempEvent = new Event(temp, date, time);
+                DataHandlerLayer.addToLog(tempEvent);
+                if (isWrittenToHistory) {
+                    DataHandlerLayer.appendToHistory(tempEvent);
+                }
+                break;
+            case NOTAPPLICABLE:
+                //For echoing commands
+                throw new InvalidCommandException();
+        }
     }
 }

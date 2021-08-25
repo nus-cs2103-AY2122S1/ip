@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Persistence {
+public class DataHandlerLayer {
 
 
     /**
@@ -16,7 +16,8 @@ public class Persistence {
     /**
      * Init data storage handler for history.
      */
-    private static DataStorageHandler history = new DataStorageHandler(fileName);
+    private static PersistentStorageHandler history = new PersistentStorageHandler(fileName);
+
 
     /**
      * Adds the command to the log.
@@ -25,7 +26,6 @@ public class Persistence {
      */
     public static void addToLog(Task task) {
         log.add(task);
-        history.write(task.toString());
     }
 
     /**
@@ -79,5 +79,22 @@ public class Persistence {
 
     public static void stopWriting() {
         history.stopWriting();
+    }
+
+    public static ArrayList<Command> loadPreset() throws InvalidCommandException {
+       return Parser.parsePreloadedTasks(history.getAll_lines());
+    }
+
+    public static void appendToHistory(Task task) {
+        history.write(task.toString());
+    }
+
+    public static void updateHistory() {
+        history.clear_history();
+        for (Task task: log) {
+            if (!task.getCompletedStatus()) {
+                appendToHistory(task);
+            }
+        }
     }
 }
