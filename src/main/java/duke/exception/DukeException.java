@@ -7,7 +7,6 @@ public class DukeException extends RuntimeException {
 
     @Override
     public String toString() {
-        return "Error detected by Duke:\n"
-                + getMessage();
+        return "Error detected by Duke:\n" + getMessage();
     }
 }
