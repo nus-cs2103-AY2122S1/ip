@@ -7,8 +7,11 @@ public class BotTemporalUnit {
 
     BotTemporalUnit(){}
 
-    public LocalDate convertStringToTemporalData(String data) {
-        return LocalDate.parse(data);
+    public LocalDateTime convertStringToTemporalData(String data) {
+        return LocalDateTime.parse(
+                data,
+                DateTimeFormatter.ISO_DATE_TIME
+                );
     }
 
     void decipherTemproalDataInput() {

@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public abstract class Task {
 
@@ -34,7 +35,7 @@ public abstract class Task {
         return this.isDone;
     }
 
-    public abstract LocalDate getTime();
+    public abstract LocalDateTime getDateTime();
 
     /**
      * Returns the type of the task in String

@@ -87,7 +87,7 @@ public class BotMemory {
                         task.getTaskType(),
                         task.getIsDone(),
                         task.getTaskTitle(),
-                        task.getTime()
+                        task.getDateTime()
                         );
             }
         }
@@ -110,16 +110,16 @@ public class BotMemory {
             switch (stringDataType){
                 case "T":
                     return new ToDo(
-                            stringDataToken[1] == "true" ? true : false,
+                            stringDataToken[1].equals("true") ? true : false,
                             stringDataToken[2]);
                 case "D":
                     return new Deadline(
-                            stringDataToken[1] == "true" ? true : false,
+                            stringDataToken[1].equals("true") ? true : false,
                             stringDataToken[2],
                             botTemporalUnit.convertStringToTemporalData(stringDataToken[3]));
                 case "E":
                     return new Event(
-                            stringDataToken[1] == "true" ? true : false,
+                            stringDataToken[1].equals("true") ? true : false,
                             stringDataToken[2],
                             botTemporalUnit.convertStringToTemporalData(stringDataToken[3]));
                 default:

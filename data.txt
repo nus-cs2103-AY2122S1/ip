@@ -1,3 +1,7 @@
 T | true | go home
-D | false | have joy | 2021-08-22
-E | false | have fun | 2021-01-01
+D | true | have joy | 2021-08-22T18:00
+E | true | have fun | 2021-01-01T19:00
+E | false | meeting | 2021-09-22T18:00
+T | false | eat food
+D | false | have food | 2021-02-09T18:00:12
+T | false | clear maths
