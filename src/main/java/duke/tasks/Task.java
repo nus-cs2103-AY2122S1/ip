@@ -5,14 +5,10 @@ package duke.tasks;
  */
 public class Task {
 
-    /**
-     * Description of task.
-     */
+    /** Description of task. */
     private final String description;
 
-    /**
-     * Whether the task has been completed.
-     */
+    /** Whether the task has been completed. */
     private boolean isDone;
 
     /**

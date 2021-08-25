@@ -15,9 +15,7 @@ import duke.exception.MessageEmptyException;
  */
 public class Parser {
 
-    /**
-     * List of tasks.
-     */
+    /** List of tasks */
     private final TaskList taskList;
 
     /**

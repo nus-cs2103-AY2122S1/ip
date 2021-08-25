@@ -24,9 +24,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    /**
-     * Path to data file.
-     */
+    /** Path to data file. */
     private final String filePath;
 
     /**

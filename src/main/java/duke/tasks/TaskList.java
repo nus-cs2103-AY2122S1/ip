@@ -22,9 +22,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    /**
-     * The list of Tasks
-     */
+    /** The list of Task. */
     private final ArrayList<Task> taskList;
 
     /**

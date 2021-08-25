@@ -28,19 +28,13 @@ import java.util.Scanner;
 
 public class Duke {
 
-    /**
-     * Handles loading and saving of Tasks.
-     */
+    /** Handles loading and saving of Tasks. */
     private final Storage storage;
 
-    /**
-     * Stores all tasks.
-     */
+    /** Stores all tasks */
     private TaskList tasks;
 
-    /**
-     * Handles interactions with users.
-     */
+    /** Handles interactions with users. */
     private final Ui ui;
 
     /**
@@ -102,7 +96,7 @@ public class Duke {
     /**
      * Runs the Duke chatbot.
      *
-     * @param args Command line arguments.
+     * @param args command line arguments.
      */
     public static void main(String[] args) {
         new Duke("data.txt").run();
