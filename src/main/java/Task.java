@@ -15,6 +15,14 @@ public class Task {
         this.isDone = true;
     }
 
+    public String getZeroOrOne() {
+        return (isDone ? "1" : "0");
+    }
+
+    public String getTaskInfo() {
+        return getZeroOrOne() + "|" + description;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " +  this.description;

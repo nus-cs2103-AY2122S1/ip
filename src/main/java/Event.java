@@ -10,6 +10,12 @@ public class Event extends Task{
         this.dateTime = description.substring(description.indexOf("/at ") + 4);
         this.dt = LocalDateTime.parse(this.dateTime);
     }
+
+    @Override
+    public String getTaskInfo() {
+        return "E" + "|" + super.getZeroOrOne() + "|" + description + "|" + dateTime;
+    }
+
     @Override
     public String toString() {
         String formatDate = dt.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
