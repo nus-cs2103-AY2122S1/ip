@@ -15,7 +15,7 @@ public abstract class Task {
     }
 
     /**
-     * Sets current task as completed.
+     * Marks current task as completed.
      */
     public void setCompleted() {
         this.isCompleted = true;

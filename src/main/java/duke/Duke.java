@@ -13,15 +13,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
- * Description:
- * Duke the ChatBot allows users to add 3 different types of tasks, mark them as done, and delete tasks.
+ * Allows users to add 3 different types of tasks, mark them as done, and delete tasks.
+ *
  * The commands for usage are as follows:
  * 1. "todo <name>" where name is what the user would like the todo to be called.
- * 2. "event <name> /at <date>" where name is what the user would like the event to be called and date is when the event is happening.
- * 3. "deadline <name> /by <date>" where name is what the user would like the deadline to be called and date is when the deadline is set.
+ * 2. "event <name> /at <YYYY-MM-DD>"
+ * 3. "deadline <name> /by <YYYY-MM-DD>"
  * 4. "list" to view current tasks added to the tasks list.
- * 5. "done <number>" where number is the task with the corresponding number in the list which the user would like to mark as completed.
- * 6. "delete <number>" where number is the task with the corresponding number in the list which the user would like to remove.
+ * 5. "done <number>" to mark task as completed.
+ * 6. "delete <number>"
  * 7. "bye" to leave the ChatBot.
  * Disclaimer: any other commands will not be recognised and user will be prompted to enter a valid command.
  *
@@ -58,8 +58,8 @@ public class Duke {
     /**
      * Adds a ToDo to the list of tasks.
      *
-     * @param command entered by the user.
-     * @throws DukeException upon invalid command format.
+     * @param command Command entered by the user.
+     * @throws DukeException Upon invalid command format.
      */
     public void addToDo(String command, boolean printOutput) throws DukeException {
         if (command.length() < 6 || command == null) {
@@ -83,8 +83,8 @@ public class Duke {
     /**
      * Adds a deadline to the list of tasks.
      *
-     * @param command entered by the user.
-     * @throws DukeException upon invalid command format.
+     * @param command Command entered by the user.
+     * @throws DukeException Upon invalid command format.
      */
     public void addDeadline(String command, boolean printOutput) throws DukeException {
         String[] words = command.split(" ");
@@ -115,8 +115,8 @@ public class Duke {
     /**
      * Adds event to the list of tasks.
      *
-     * @param command entered by the user.
-     * @throws DukeException upon invalid command format.
+     * @param command Command entered by the user.
+     * @throws DukeException Upon invalid command format.
      */
     public void addEvent(String command, boolean printOutput) throws DukeException {
         String[] words = command.split(" ");
@@ -147,8 +147,8 @@ public class Duke {
     /**
      * Marks a specific task in the list as completed.
      *
-     * @param command entered by the user.
-     * @throws DukeException upon incorrect command format.
+     * @param command Command entered by the user.
+     * @throws DukeException Upon incorrect command format.
      */
     public void markCompleted(String command, boolean printOutput) throws DukeException {
         boolean numeric;
@@ -182,8 +182,8 @@ public class Duke {
     /**
      * Deletes a specified task from the list of tasks.
      *
-     * @param command entered by the user.
-     * @throws DukeException upon incorrect command format.
+     * @param command Command entered by the user.
+     * @throws DukeException Upon incorrect command format.
      */
     private void deleteTask(String command) throws DukeException {
         String restOfCommand = command.substring(7);
