@@ -9,10 +9,10 @@ import java.time.LocalDate;
  * Represents the storage of tasks. Storage is able to load and save tasks.
  */
 public class Storage {
-	private final String filepath;
+	private final String filePath;
 	
-	public Storage(String filepath) {
-		this.filepath = filepath;
+	public Storage(String filePath) {
+		this.filePath = filePath;
 	}
 
 	/**
@@ -25,14 +25,13 @@ public class Storage {
 		ArrayList<Task> tasks = new ArrayList<>();		// We will populate an ArrayList of tasks
 
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(filepath));
+			BufferedReader reader = new BufferedReader(new FileReader(filePath));
 			String line;
 			Task task;
 
 			// Read lines from file
 			while ((line = reader.readLine()) != null) {
 				String lineWithoutBoxes = line.substring(7);
-				System.out.println(lineWithoutBoxes);
 					
 				// If the line contains by -> add a new Deadline
 				if (line.contains("[D]")) {
@@ -77,7 +76,7 @@ public class Storage {
 	 */
 	public void saveTasks(ArrayList<Task> tasks) {
 		try {
-			FileWriter fw = new FileWriter(filepath);
+			FileWriter fw = new FileWriter(filePath);
 
 			// Write lines to file
 			for (Task task : tasks) {
