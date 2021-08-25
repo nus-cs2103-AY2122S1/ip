@@ -11,6 +11,11 @@ public class Task {
         this.completed = true;
     }
 
+    public String toSaveFormat() {
+        String completedStr = completed ? "1" : "0";
+        return completedStr + "|" + name;
+    }
+
     @Override
     public String toString() {
         String symbol = completed ? "X" : " ";
