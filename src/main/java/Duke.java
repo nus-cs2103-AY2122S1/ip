@@ -1,11 +1,18 @@
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Duke {
+    private static String DATAPATH = "./data";
+    private static String DATAFILE = "duke.txt";
+
     private Scanner input = new Scanner(System.in);
     private ArrayList<Task> list = new ArrayList<>();
 
-    private static enum CommandType {
+    private enum CommandType {
         BYE, LIST,
         TODO, EVENT, DEADLINE,
         DONE, DELETE,
@@ -20,6 +27,34 @@ public class Duke {
         System.out.println(logo);
         System.out.println("Welcome! I'm Duke.");
         System.out.println("What can I do for you?\n");
+    }
+
+
+    private void loadData() {
+        File f = new File(String.valueOf(Paths.get(Duke.DATAPATH, Duke.DATAFILE)));
+        try {
+            Scanner fileReader = new Scanner(f);
+            System.out.println("data has been loaded");
+            while (fileReader.hasNextLine()) {
+                String entry = fileReader.nextLine();
+                // TODO: read from database
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            this.createDatabase();
+        }
+    }
+
+
+    private void createDatabase() {
+        File f = new File(String.valueOf(Paths.get(Duke.DATAPATH, Duke.DATAFILE)));
+        File dir = new File(Duke.DATAPATH);
+        dir.mkdir();
+        try {
+            f.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Error loading database!");
+        }
     }
 
 
@@ -69,6 +104,7 @@ public class Duke {
 
 
     private void exit() {
+        // TODO: write to the database
         System.out.println("\tBye, hope to see you again!");
     }
 
@@ -162,6 +198,7 @@ public class Duke {
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.greet();
+        duke.loadData();
         duke.run();
     }
 }
