@@ -69,7 +69,7 @@ public class Duke {
             parser.handleCommands(input);
         }
 
-        sc.close(); // closes the Scanner
+        sc.close();
 
         try {
             storage.save(tasks.getTaskList());
