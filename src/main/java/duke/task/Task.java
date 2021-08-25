@@ -2,23 +2,24 @@ package duke.task;
 
 /**
  * Encapsulates a task object.
- *
- * @author Dickson
  */
 public class Task {
     private final String description;
     private boolean isDone;
 
     /**
-     * Constructor for Task object.
+     * Constructor for Task.
      *
-     * @param description
+     * @param description description of task task.
      */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Marks task as done.
+     */
     public void markDone() {
         this.isDone = true;
     }

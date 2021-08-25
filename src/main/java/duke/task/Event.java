@@ -5,16 +5,23 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Encapsulates an event object.
- * Event objects are task objects that start and end at specific times.
- *
- * @author Dickson
+ * Encapsulates an event task.
+ * Event tasks are tasks that needs to be done on a specific date
+ * from a starting time to an ending time.
  */
 public class Event extends Task {
     private final LocalDate date;
     private final LocalTime startTime;
     private final LocalTime endTime;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description description of event task
+     * @param date date of event task
+     * @param startTime start time of event task
+     * @param endTime end time of event task
+     */
     public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description);
         this.date = date;

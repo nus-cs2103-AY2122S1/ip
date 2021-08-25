@@ -4,15 +4,13 @@ import java.util.Scanner;
 
 /**
  * Encapsulates Ui of Duke bot.
- *
- * @author Dickson
  */
 public class Ui {
-    private final String START_LINE_BORDER = "--------------------------------------------------\n";
-    private final String END_LINE_BORDER = "\n--------------------------------------------------";
+    private final Scanner s;
     private final String MESSAGE_START = "Hi there! I'm Duke\nHow may I help you?";
     private final String MESSAGE_END = "Bye! Hope to see you again soon!";
-    private final Scanner s;
+    private final String START_LINE_BORDER = "--------------------------------------------------\n";
+    private final String END_LINE_BORDER = "\n--------------------------------------------------";
 
     /**
      * Constructor for Ui.

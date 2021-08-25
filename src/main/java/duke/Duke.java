@@ -1,9 +1,9 @@
 package duke;
 
 import duke.exceptions.DukeException;
+import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
-import duke.util.TaskList;
 import duke.util.Ui;
 
 import java.io.IOException;
@@ -19,6 +19,11 @@ public class Duke {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath user filepath to store text file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -30,6 +35,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the duke bot.
+     */
     public void run() {
         String input;
 

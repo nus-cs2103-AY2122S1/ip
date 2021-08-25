@@ -1,7 +1,11 @@
 package duke.util;
 
 import duke.exceptions.DukeException;
+import duke.task.TaskList;
 
+/**
+ * Encapsulates command interface to handle DukeException thrown by bot.
+ */
 public interface Command {
     String execute(TaskList tasks) throws DukeException;
 }

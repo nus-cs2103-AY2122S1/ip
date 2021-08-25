@@ -1,12 +1,8 @@
-package duke.util;
+package duke.task;
 
 import duke.exceptions.EmptyListException;
 import duke.exceptions.IllegalFormatException;
 import duke.exceptions.TaskNotFoundException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,9 +12,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
- * Encapsulates a TaskList object.
- *
- * @author Dickson
+ * Encapsulates a TaskList containing tasks.
  */
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -34,12 +28,27 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Checks user command format.
+     *
+     * @param command user input command
+     * @param regex command format to match
+     * @param correctFormat command format to follow
+     * @throws IllegalFormatException if user gives invalid command
+     */
     private void checkCommandFormat(String command, String regex, String correctFormat) throws IllegalFormatException {
         if (!command.matches(regex)) {
             throw new IllegalFormatException(correctFormat);
         }
     }
 
+    /**
+     * Adds a todo task to TaskList.
+     *
+     * @param command user input command
+     * @return message for successful addition of todo task
+     * @throws IllegalFormatException if user gives invalid command
+     */
     public String addTodo(String command) throws IllegalFormatException {
         String regexToMatch = "^todo .*";
         String correctFormat = "todo <todo description>";
@@ -51,6 +60,13 @@ public class TaskList {
         return addMessage(task, tasks.size());
     }
 
+    /**
+     * Adds an event task to TaskList.
+     *
+     * @param command user input command
+     * @return message for successful addition of event task
+     * @throws IllegalFormatException if user gives invalid command
+     */
     public String addEvent(String command) throws IllegalFormatException {
         String regexToMatch = "^event .* /at \\d{2}/\\d{2}/\\d{2} \\d{4}-\\d{4}";
         String correctFormat = "event <event description> /at <dd/MM/yy> <HHmm>-<HHmm>";
@@ -85,6 +101,13 @@ public class TaskList {
         return addMessage(task, tasks.size());
     }
 
+    /**
+     * Adds a deadline task to TaskList.
+     *
+     * @param command user input command
+     * @return message for successful addition of deadline task
+     * @throws IllegalFormatException if user gives invalid command
+     */
     public String addDeadline(String command) throws IllegalFormatException {
         String regexToMatch = "^deadline .* /by \\d{2}/\\d{2}/\\d{2} \\d{4}";
         String correctFormat = "deadline <deadline description> /by <dd/MM/yy> <HHmm>";
@@ -109,6 +132,14 @@ public class TaskList {
         return addMessage(task, tasks.size());
     }
 
+    /**
+     * Marks task in TaskList as done.
+     *
+     * @param command user input command
+     * @return message for successful marking of task as done
+     * @throws TaskNotFoundException if user inputs invalid task index
+     * @throws IllegalFormatException if user gives invalid command
+     */
     public String markTaskDone(String command) throws TaskNotFoundException, IllegalFormatException {
         String regexToMatch = "^done [0-9].*";
         String correctFormat = "done <task index>";
@@ -132,6 +163,14 @@ public class TaskList {
         return doneMessage(task);
     }
 
+    /**
+     * Deletes a task from TaskList.
+     *
+     * @param command user input command
+     * @return message for successful deletion of task
+     * @throws TaskNotFoundException if user inputs invalid task index
+     * @throws IllegalFormatException if user gives invalid command
+     */
     public String deleteTask(String command) throws TaskNotFoundException, IllegalFormatException {
         String regexToMatch = "^delete [0-9].*";
         String correctFormat = "delete <task index>";
@@ -156,6 +195,13 @@ public class TaskList {
         return deleteMessage(task, size);
     }
 
+    /**
+     * Generates message for successful addition of task.
+     *
+     * @param task task added to TaskList
+     * @param size size of TaskList after addition
+     * @return message for successful addition of task
+     */
     private String addMessage(Task task, int size) {
         return "Got it. I've added this task:\n" + task +
                 "\nNow you have " + size +
@@ -164,6 +210,13 @@ public class TaskList {
                         : " tasks " + "in your list.");
     }
 
+    /**
+     * Generates message for successful deletion of task.
+     *
+     * @param task task deleted from TaskList
+     * @param size size of TaskList after deletion
+     * @return message for successful deletion of task
+     */
     private String deleteMessage(Task task, int size) {
         return "Noted. I've removed the following task:\n" + task +
                 "\nNow you have " + size +
@@ -172,10 +225,21 @@ public class TaskList {
                         : " tasks " + "in your list.");
     }
 
+    /**
+     * Generates message for successfully marking task as done.
+     *
+     * @param task task from TaskList marked as done.
+     * @return message for successfully marking task as done
+     */
     private String doneMessage(Task task) {
         return "Nice! I've marked this task as done:\n" + task;
     }
 
+    /**
+     * Prints the TaskList stored so far.
+     * @return string representation of TaskList
+     * @throws EmptyListException if TaskList is empty
+     */
     public String printTaskList() throws EmptyListException {
         String str = "";
         int size = tasks.size();

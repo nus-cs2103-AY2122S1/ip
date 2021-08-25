@@ -2,8 +2,6 @@ package duke.exceptions;
 
 /**
  * Encapsulates the UnknownCommandException thrown by the Duke bot.
- *
- * @author Dickson
  */
 public class UnknownCommandException extends DukeException {
     /**

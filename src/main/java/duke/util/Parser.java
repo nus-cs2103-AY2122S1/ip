@@ -1,13 +1,19 @@
 package duke.util;
 
-import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
 
 /**
  * Encapsulates Parser of Duke bot.
  */
 public class Parser {
-    public static Command parse(String command) throws DukeException {
+    /**
+     * Parses user input command and returns command to run in duke bot.
+     *
+     * @param command user input command
+     * @return Command to run in duke bot.
+     * @throws UnknownCommandException invalid user command
+     */
+    public static Command parse(String command) throws UnknownCommandException {
         if (command.contains("list")) {
             return tasks -> tasks.printTaskList();
         } else if (command.contains("todo")) {
