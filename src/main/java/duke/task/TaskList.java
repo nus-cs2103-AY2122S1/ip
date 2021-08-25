@@ -67,4 +67,19 @@ public class TaskList {
         return fileTask;
     }
 
+    public ArrayList<Task> findTask(String keyWord) throws DukeException{
+        ArrayList<Task> newTasks = new ArrayList<>();
+
+        int numTask = this.totalTask();
+
+        for(int i = 1; i <= numTask; i++) {
+            Task task = this.getTask(i);
+            if (task.isKeyWordPresent(keyWord)) {
+                newTasks.add(task);
+            }
+        }
+
+        return newTasks;
+    }
+
 }
