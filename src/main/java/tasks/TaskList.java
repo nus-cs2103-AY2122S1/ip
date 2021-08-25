@@ -80,7 +80,30 @@ public class TaskList {
         Storage.saveTaskListToHardDisk(tasks);
         return response.toString();
     }
-    
+
+    /**
+     * Find a task with a given keyword.
+     * 
+     * @param keyword The given keyword.
+     * @return The result of the search.
+     */
+    public String findTask(String keyword) {
+        int count = 0;
+        StringBuilder res = new StringBuilder("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(keyword)) {
+                String temp = "\t" + " " + (i + 1) + "." + tasks.get(i).toString() + "\n";
+                res.append(temp);
+                count++;
+            }
+        }
+        res.deleteCharAt(res.toString().length() - 1);
+        if (count == 0) {
+            return "There are no tasks with the given keyword";
+        } else {
+            return res.toString();
+        }
+    }
     /**
      * Return the size of the task list
      * 
