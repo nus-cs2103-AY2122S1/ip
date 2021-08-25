@@ -41,23 +41,23 @@ public class AddTaskCommand extends Command {
         String description = getTaskDescription(this.taskString, this.taskType);
         Task task;
         switch (this.taskType) {
-            case TODO: {
-                task = new ToDo(description);
-                taskList.addTask(task);
-                break;
-            }
-            case DEADLINE: {
-                LocalDate time = getTaskTime(this.taskString);
-                task = new Deadline(description, time);
-                taskList.addTask(task);
-                break;
-            }
-            case EVENT : {
-                LocalDate time = getTaskTime(this.taskString);
-                task = new Event(description, time);
-                taskList.addTask(task);
-                break;
-            }
+        case TODO: {
+            task = new ToDo(description);
+            taskList.addTask(task);
+            break;
+        }
+        case DEADLINE: {
+            LocalDate time = getTaskTime(this.taskString);
+            task = new Deadline(description, time);
+            taskList.addTask(task);
+            break;
+        }
+        case EVENT : {
+            LocalDate time = getTaskTime(this.taskString);
+            task = new Event(description, time);
+            taskList.addTask(task);
+            break;
+        }
         }
     }
 
