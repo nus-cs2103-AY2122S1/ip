@@ -15,8 +15,6 @@ public class Duke {
 
 
     public void run() throws IOException, DukeException {
-
-
         Ui ui = new Ui();
         Parser parser = new Parser();
         TaskList storage = new TaskList();
