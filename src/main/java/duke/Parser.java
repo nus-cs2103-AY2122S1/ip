@@ -13,6 +13,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
+/**
+ * The Parser class is responsible for parsing all user commands and input dates and times for Duke.
+ *
+ * @author Aiken Wong
+ */
 public class Parser {
 
     private static String errorMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n"
@@ -23,6 +28,18 @@ public class Parser {
             + "2019-02-13 18:00\n"
             + "Examples for DATE: 13/2/2019, 2019-02-13";
 
+
+    /**
+     * Returns an executable Command after parsing the user's input.
+     * If the command is invalid, a DukeException is thrown
+     *
+     * @param input   User command line input.
+     * @param ui      A Duke user interface object.
+     * @param tasks   List of all tasks in the user's current task list.
+     * @param storage Current storage object used to store the user's current tasks.
+     * @return Executable command.
+     * @throws DukeException
+     */
     public static Command parse(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException {
 
         if (input.equals("bye")) {
@@ -33,7 +50,8 @@ public class Parser {
             String[] parsedInput = input.split(" ");
 
             if (parsedInput.length != 2) {
-                throw (new DukeException("Please specify a task you would like marked as done Sir/Mdm:\n" + ui.list(tasks)));
+                throw (new DukeException("Please specify a task you would like marked as done Sir/Mdm:\n"
+                        + ui.list(tasks)));
             }
 
             int taskToMark;
@@ -113,6 +131,15 @@ public class Parser {
         }
     }
 
+
+    /**
+     * Parses date and time Strings into a LocalDateTime object.
+     *
+     * @param dateInput The input String for date.
+     * @param timeInput The input Sting for time.
+     * @return LocalDateTime object.
+     * @throws DukeException
+     */
     public static LocalDateTime parseDateAndTime(String dateInput, String timeInput) throws DukeException {
 
 
@@ -122,6 +149,13 @@ public class Parser {
 
     }
 
+    /**
+     * Formats LocalDateTime object into String for UI display.
+     *
+     * @param dateTime The LocalDateTime object to be formatted.
+     * @param isDateOnly Determines whether time will be displayed along with the date.
+     * @return Formatted date and/or time String.
+     */
     public static String dateTimeToString(LocalDateTime dateTime, boolean isDateOnly) {
 
         int len = dateTime.toString().length();

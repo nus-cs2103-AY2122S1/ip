@@ -11,13 +11,30 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * Class that handles storage for a user's data inside a hard disk. Data is saved as a pre-formatted text file
+ *
+ * @author Aiken Wong
+ */
 public class Storage {
     protected String filePath;
 
+    /**
+     * Initialises Storage object.
+     *
+     * @param filePath Specifies the directory and filename of the stored user data in the hard disk.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads up user data from the hard disk using the filePath indicated in the Storage instance.
+     *
+     * @return TaskList containing all the user's current tasks stored in hard disk
+     * @throws DukeException
+     */
     public TaskList load() throws DukeException {
         createDir();
         File taskList = new File(this.filePath);
@@ -67,13 +84,19 @@ public class Storage {
 
     }
 
-    protected void createDir() {
+    private void createDir() {
 
 
         File dataDir = new File(this.filePath.substring(0, this.filePath.lastIndexOf('/')));
         dataDir.mkdirs();
     }
 
+
+    /**
+     * Saves the user's tasks into the hard disk. Data is stored as a formatted text file.
+     *
+     * @param tasks Tasks stored into hard disk.
+     */
     public void save(TaskList tasks) {
         createDir();
         File taskListFile = new File(this.filePath);
