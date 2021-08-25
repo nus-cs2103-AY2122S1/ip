@@ -1,5 +1,6 @@
 package bob;
 
+import bob.exception.NoSearchResultException;
 import bob.task.Task;
 
 /**
@@ -41,6 +42,8 @@ public class Ui {
 
     /**
      * Displays current list of tasks.
+     *
+     * @param tasks Current list of tasks.
      */
     public void showList(TaskList tasks) {
         String result = "Here's your tasks! Wow I'm so helpful!\n";
@@ -49,6 +52,9 @@ public class Ui {
     }
     /**
      * Adds new task to the task list and displays the corresponding message.
+     *
+     * @param task New task to be added to the list.
+     * @param tasks Current list of tasks.
      */
     public void showTaskAdded(Task task, TaskList tasks) {
         tasks.addTask(task);
@@ -58,6 +64,9 @@ public class Ui {
 
     /**
      * Marks the specified task as completed and displays the corresponding message.
+     *
+     * @param index Index of the specified task in the task list.
+     * @param tasks Current list of tasks.
      */
     public void showIndexCompleted(int index, TaskList tasks) {
         System.out.println("Wow you finally did something productive!\n" + tasks.markIndexCompleted(index) + "\n");
@@ -65,10 +74,29 @@ public class Ui {
 
     /**
      * Deletes the specified task and displays the corresponding message.
+     *
+     * @param index Index of the specified task in the task list.
+     * @param tasks Current list of tasks.
      */
     public void showIndexDeleted(int index, TaskList tasks) {
         System.out.println("Okay task yeeted away :D\n" + tasks.deleteIndex(index) + "\n"
                 + "Yay " + tasks.getNoOfTasks() + " tasks!\n");
+    }
+
+    /**
+     * Searches for a specific keyword in the list of tasks and displays the tasks containing the keyword.
+     *
+     * @param keyword Keyword from the user to search for in the list of tasks.
+     * @param tasks Current list of tasks.
+     */
+    public void showSearchResult(String keyword, TaskList tasks) {
+        try {
+            String searchResult = tasks.searchList(keyword);
+            System.out.println("Are any of these tasks the one you're looking for?");
+            System.out.println(searchResult);
+        } catch (NoSearchResultException e) {
+            System.out.println("None of your tasks contain this word -_-\n");
+        }
     }
 
     /**
@@ -97,6 +125,13 @@ public class Ui {
      */
     public void showNoEventTimingException() {
         System.out.println("When is the event? >:(\n");
+    }
+
+    /**
+     * Displays message when the user does not specify any keyword for their search.
+     */
+    public void showNoKeywordException() {
+        System.out.println("What are you even looking for >:(\n");
     }
 
     /**

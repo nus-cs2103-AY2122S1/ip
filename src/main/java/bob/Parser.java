@@ -3,6 +3,7 @@ package bob;
 import bob.exception.InvalidInputException;
 import bob.exception.NoDeadlineException;
 import bob.exception.NoEventTimingException;
+import bob.exception.NoKeywordException;
 import bob.exception.NoTaskException;
 import bob.exception.OutOfBoundsException;
 
@@ -38,10 +39,10 @@ public class Parser {
             try {
                 checkInput(response, tasks);
 
-                if (Objects.equals(response, "list")) { //show list of tasks
+                if (Objects.equals(response, "list")) {
                     ui.showList(tasks);
                     response = scanner.nextLine();
-                } else if (response.matches("done(.*)")) { //complete a task
+                } else if (response.matches("done(.*)")) {
                     String[] splitResponse = response.split(" ", 2);
                     ui.showIndexCompleted(Integer.parseInt(splitResponse[1]) - 1, tasks);
                     storage.updateBobFile(tasks);
@@ -51,7 +52,7 @@ public class Parser {
                     ui.showIndexDeleted(Integer.parseInt(splitResponse[1]) - 1, tasks);
                     storage.updateBobFile(tasks);
                     response = scanner.nextLine();
-                } else if (response.matches("todo(.*)") || response.matches("deadline(.*)") //add new task
+                } else if (response.matches("todo(.*)") || response.matches("deadline(.*)")
                         || response.matches("event(.*)")) {
                     String[] splitResponse = response.split(" ", 2);
                     Task newTask;
@@ -67,6 +68,10 @@ public class Parser {
                     ui.showTaskAdded(newTask, tasks);
                     storage.updateBobFile(tasks);
                     response = scanner.nextLine();
+                } else if (response.matches("find(.*)")) {
+                    String[] splitResponse = response.split(" ", 2);
+                    ui.showSearchResult(splitResponse[1], tasks);
+                    response = scanner.nextLine();
                 }
             } catch (InvalidInputException e) {
                 ui.showInvalidInputException();
@@ -79,6 +84,9 @@ public class Parser {
                 response = scanner.nextLine();
             } catch (NoEventTimingException e) {
                 ui.showNoEventTimingException();
+                response = scanner.nextLine();
+            } catch (NoKeywordException e) {
+                ui.showNoKeywordException();
                 response = scanner.nextLine();
             } catch (OutOfBoundsException e) {
                 ui.showOutOfBoundsException();
@@ -97,10 +105,10 @@ public class Parser {
      * @throws NoDeadlineException If the user does not specify the deadline of their Deadline task.
      * @throws NoEventTimingException If the user does not specify the timing of their Event task.
      * @throws OutOfBoundsException If the user tries to mark as completed or remove a task not inside the task list.
+     * @throws NoKeywordException If the user does not specify the keyword in their task search.
      */
-
     private void checkInput(String response, TaskList tasklist) throws InvalidInputException, NoTaskException,
-            NoDeadlineException, NoEventTimingException, OutOfBoundsException {
+            NoDeadlineException, NoEventTimingException, OutOfBoundsException, NoKeywordException {
         if (Objects.equals(response, "list")) {
             // Correct input checker, do nothing
         } else if (response.matches("done(.*)") || response.matches("delete(.*)")) {
@@ -127,6 +135,11 @@ public class Parser {
                 throw new NoTaskException();
             } else if (!response.contains("/at")) {
                 throw new NoEventTimingException();
+            }
+        } else if (response.matches("find(.*)")) {
+            String[] splitResponse = response.split(" ", 2);
+            if (splitResponse.length == 1) {
+                throw new NoKeywordException();
             }
         } else {
             throw new InvalidInputException();
