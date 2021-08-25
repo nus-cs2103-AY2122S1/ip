@@ -7,7 +7,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
-    int taskNumber;
+    private int taskNumber;
 
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
