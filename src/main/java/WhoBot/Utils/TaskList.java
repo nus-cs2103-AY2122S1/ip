@@ -244,7 +244,13 @@ public class TaskList {
             throw new WhoBotException("Ensure that the command is of the form \"show /on #date\". The description can not be empty.");
         }
     }
-    
+
+    /***
+     * Finds Tasks containing the specific keyword
+     *
+     * @param text Keyword to search for
+     * @param ui UI to show output to
+     */
     public void findTask(String text, UI ui) {
         String searchText = text.substring(6).toLowerCase(Locale.ROOT);
         ArrayList<Task> matchingTasks = new ArrayList<>();
