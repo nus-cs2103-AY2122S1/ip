@@ -23,6 +23,10 @@ public abstract class Task {
         return this;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     abstract public String format();
 
     @Override

@@ -80,6 +80,13 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("Please provide a number");
             }
+        } else if (input.contains("find")) {
+            String[] inputArr = input.split(" ");
+            if (inputArr.length <= 1) {
+                throw new DukeException("You need to provide the search keyword");
+            }
+            String description = input.substring(5);
+            return new FindCommand(description);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
