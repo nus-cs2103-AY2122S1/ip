@@ -9,7 +9,7 @@ public class Duke {
 
     public Duke(String filePath) {
         storage = new Storage(filePath);
-        taskList = storage.loadStorageToTaskList();
+        taskList = new TaskList(storage.load());
     }
 
     private void run() {
