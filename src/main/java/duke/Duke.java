@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * Duke class to store a list of tasks, which you can add upon.
  * The 3 different tasks include event, todo, and deadline.
- * Duke supports functions such as done, delete and list too.
+ * Duke supports functions such as done, delete, find, and list too.
  */
 public class Duke {
 
@@ -47,7 +47,7 @@ public class Duke {
             try {
                 Parser p = new Parser(sc.nextLine(), ui, storage, tasks);
                 p.parseCommand();
-            } catch (DeleteException | DukeException | IOException | StringIndexOutOfBoundsException | FindException e) {
+            } catch (DeleteException | DukeException | IOException | StringIndexOutOfBoundsException | duke.FindException e) {
                 System.out.println(e.getMessage());
             }
         }

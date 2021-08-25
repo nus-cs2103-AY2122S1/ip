@@ -2,11 +2,11 @@ package duke;
 
 public class DeleteException extends Exception {
     public DeleteException() {
-        super("There is nothing to delete here!\n");
+        super("There is nothing to delete here!");
     }
 
     public DeleteException(String message) {
-        super(message + "\n");
+        super(message);
     }
 
 }

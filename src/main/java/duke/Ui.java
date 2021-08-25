@@ -94,6 +94,9 @@ public class Ui {
         System.out.println("Your file seems to have issues loading.");
     }
 
+    /**
+     * Prints message if there are no matches in find.
+     */
     public void showNothingFoundMessage() {
         System.out.println("Sorry, there are no matching tasks");
     }
