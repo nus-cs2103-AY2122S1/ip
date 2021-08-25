@@ -21,6 +21,8 @@ public class Parser {
             return new DoneCommand(input);
         } else if (input.toUpperCase().startsWith("DELETE")) {
             return new DeleteCommand(input);
+        } else if (input.toUpperCase().startsWith("FIND")) {
+            return new FindCommand(input);
         } else if (input.toUpperCase().startsWith("TODO") ||
                 input.toUpperCase().startsWith("DEADLINE") ||
                 input.toUpperCase().startsWith("EVENT")) {

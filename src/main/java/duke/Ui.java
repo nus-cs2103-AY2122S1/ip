@@ -85,6 +85,16 @@ public class Ui {
         }
     }
 
+    public void showSearchResult(String filter, TaskList taskList) {
+        TaskList searchResult = taskList.findTasks(filter);
+        if (searchResult.isEmpty()) {
+            System.out.println("Sorry, there are no tasks that match your search!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:\n"
+                    + searchResult.toString());
+        }
+    }
+
     /**
      * Prints the task that was successfully added.
      *

@@ -97,6 +97,20 @@ public class TaskList {
         }
     }
 
+
+
+
+    public TaskList findTasks(String filter) {
+        ArrayList<Task> searchResult = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getDescription().contains(filter)) {
+               searchResult.add(task);
+            }
+        }
+        return new TaskList(searchResult);
+    }
+
     /**
      * Returns the formatted string to write to the file.
      *
