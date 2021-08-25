@@ -2,7 +2,9 @@ package duke.classes;
 
 import duke.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private List<Task> taskList;
@@ -41,5 +43,15 @@ public class TaskList {
 
     public void completeTask(int index) {
         taskList.get(index).markAsDone();
+    }
+
+    /**
+     * Filters taskList for tasks containing input filter in the description
+     * @param filter String that contains the word(s) that the function filters by
+     * @return Returns List of Tasks that contain tasks with the filter word(s) in their description
+     */
+    public List<Task> filter(String filter) {
+        return taskList.stream().filter(task -> task.descContains(filter))
+                                .collect(Collectors.toList());
     }
 }
