@@ -5,6 +5,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Represents a dealer to process a full command.
+ */
 public class Parser {
     private TaskList taskList;
     private Storage storage;
@@ -16,8 +19,12 @@ public class Parser {
         this.storage = storage;
     }
 
-    // from: deadline return book /by 2/12/2019 1800
-    // to: command
+    /**
+     * Parses an input and process it,
+     * example of the input command should be like: deadline return book /by 2/12/2019 1800 .
+     *
+     * @param input a full command
+     */
     public void parse(String input) {
         String lowerCase = input.toLowerCase();
         if(lowerCase.equals("bye")) {
@@ -26,7 +33,7 @@ public class Parser {
             listCommand();
         } else if (lowerCase.startsWith("deadline")) {
             int indexOfTime = input.indexOf("/by");
-            if(indexOfTime == -1) {
+            if (indexOfTime == -1) {
                 throw new DukeException("OOPS!!! The timeline of a deadline cannot be empty.");
             }
             String item = input.substring(9, indexOfTime);
@@ -37,7 +44,7 @@ public class Parser {
             ui.showNewTask(deadline);
         } else if (lowerCase.startsWith("event")) {
             int indexOfTime = input.indexOf("/at");
-            if(indexOfTime == -1) {
+            if (indexOfTime == -1) {
                 throw new DukeException("OOPS!!! The timeline of a event cannot be empty.");
             }
             String item = input.substring(6, indexOfTime);
@@ -88,18 +95,26 @@ public class Parser {
         }
     }
 
-    // fetch from TaskList and print out by ui
+    /**
+     * Fetches Task item from TaskList and print through Ui
+     */
     public void listCommand() {
         String items = "";
-        if(taskList.length() > 0) {
+        if (taskList.length() > 0) {
             items = items + "1. " + taskList.get(0).toString();
         }
-        for(int i = 2 ; i <= taskList.length(); i++) {
+        for (int i = 2 ; i <= taskList.length(); i++) {
             items = items + "\n    " + i + ". " + taskList.get(i-1).toString();
         }
         ui.showList(items);
     }
 
+    /**
+     * Determines if the command is to exit the program.
+     *
+     * @param command the input
+     * @return true or false
+     */
     public boolean isExit(String command) {
         return command.toLowerCase().equals("bye");
     }

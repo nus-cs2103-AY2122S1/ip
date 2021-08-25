@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task with a <code>description</code> corresponding to the content
+ * and a <code>at</code> time representing the event time.
+ */
 public class Event extends Task {
     protected LocalDateTime at;
     private Boolean hasTime = true;
@@ -13,10 +17,21 @@ public class Event extends Task {
         this.at = parseTime(at);
     }
 
+    /**
+     * Gets an At time of an Event object.
+     *
+     * @return at time of type LocalDateTime
+     */
     public LocalDateTime getAt() {
         return at;
     }
 
+    /**
+     * Parses a time String into a LocalDateTime.
+     *
+     * @param time a String of format dd/mm/yyyy hhmm(optional)
+     * @return transformed time of type LocalDateTime
+     */
     public LocalDateTime parseTime(String time) {
         String newDate;
         String[] str = time.split(" ");
@@ -36,16 +51,6 @@ public class Event extends Task {
         return localTime;
     }
 
-    public String writeToFile() {
-        String s = "D" + " | ";
-        if (this.isDone) {
-            s += "1";
-        } else {
-            s += "0";
-        }
-        s = s + " | " + description + " | " + at;
-        return s;
-    }
 
     @Override
     public String toString() {
