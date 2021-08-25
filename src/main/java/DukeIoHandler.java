@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -65,9 +67,14 @@ public class DukeIoHandler {
         String[] parsedArguments = parsedInput[1].split(" /by ");
         if (parsedArguments.length != 2) {
             throw new DukeInvalidCommandException("OOPS!!! Wrong format. \n" +
-                    "\t Correct format should be: deadline <deadline_description> /at <deadline_time>");
-        } 
-        PrintUtil.displayContentBetweenLines(taskList.addTask(new Deadline(parsedArguments[0], parsedArguments[1])));
+                    "\t Correct format should be: deadline <deadline_description> /by <deadline_time>");
+        }
+        try {
+            LocalDate date = LocalDate.parse(parsedArguments[1]);
+            PrintUtil.displayContentBetweenLines(taskList.addTask(new Deadline(parsedArguments[0], date)));
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidCommandException("OOPS!!! Wrong time format. Correct format should be yyyy-mm-dd");
+        }
     }
 
     private void handleEvent(String[] parsedInput) throws DukeInvalidCommandException{
@@ -79,7 +86,12 @@ public class DukeIoHandler {
             throw new DukeInvalidCommandException("OOPS!!! Wrong format. \n" +
                     "\t Correct format should be: event <event_description> /at <event_time>");
         }
-        PrintUtil.displayContentBetweenLines(taskList.addTask(new Event(parsedArguments[0], parsedArguments[1])));
+        try {
+            LocalDate date = LocalDate.parse(parsedArguments[1]);
+            PrintUtil.displayContentBetweenLines(taskList.addTask(new Event(parsedArguments[0], date)));
+        } catch (DateTimeParseException e) {
+            throw new DukeInvalidCommandException("OOPS!!! Wrong time format. Correct format should be yyyy-mm-dd");
+        }
     }
 
     private void handleTodo(String[] parsedInput) throws DukeInvalidCommandException{
