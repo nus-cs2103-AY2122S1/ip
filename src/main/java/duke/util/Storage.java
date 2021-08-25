@@ -4,14 +4,26 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Reads and write memory to local storage.
+ */
 public class Storage {
     String filePath = "./data/duke.txt";
 
+    /**
+     * Initiates a storage instance.
+     */
     public Storage() {
 
     }
 
-    public File loadDataFile() {
+    /**
+     * Retrieves file from local storage. If file does not exist create file in local storage.
+     *
+     * @return a File from local storage.
+     * @throws DukeException if error encountered when opening or creating file on local storage.
+     */
+    public File loadDataFile() throws DukeException {
         try {
             File f = new File(filePath);
             if (!f.exists()) {
@@ -23,10 +35,15 @@ public class Storage {
             return f;
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
+            throw new DukeException("Unable to load data file");
         }
     }
 
+    /**
+     * Writes duke data to local storage.
+     *
+     * @throws DukeException if error encountered when writing to data file on local storage.
+     */
     public void writeToDisk(String data) throws DukeException {
         try {
             FileWriter fw = new FileWriter("./data/duke.txt");

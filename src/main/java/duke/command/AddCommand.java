@@ -6,12 +6,14 @@ import duke.task.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.Ui;
 
 import java.time.LocalDateTime;
 
+/**
+ * Add task to task list. A Task can be of type Event, Deadline or Todo.
+ */
 public class AddCommand extends Command {
     Task task;
 
@@ -26,14 +28,19 @@ public class AddCommand extends Command {
             case TODO:
                 this.task = new Todo(false, name);
                 break;
-            default:
-                this.task = null;
         }
     }
 
+    /**
+     * Add the appropriate task to the task list and display confirmation response to
+     * the user.
+     *
+     * @param storage storage instance initialised when duke is created.
+     * @param taskList task list instance initialised when duke is created.
+     * @param ui ui instance initialised when duke is created.
+     */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
-        try {
+    public void execute(Storage storage, TaskList taskList, Ui ui) {
             taskList.addTask(task);
             ui.respond(
                     String.format("Caan Do!\n" +
@@ -42,8 +49,5 @@ public class AddCommand extends Command {
                             this.task,
                             taskList.getSize())
             );
-        } catch (NullPointerException e) {
-            throw new DukeException("No task to execute");
-        }
     }
 }
