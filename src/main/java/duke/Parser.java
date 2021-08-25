@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * This class represents a parser, which extracts the user's input into commands
+ * for Duke.
+ */
 public class Parser {
     private final String commandWord;
     private final String arguments;
@@ -12,6 +16,11 @@ public class Parser {
     private String dateString;
     private LocalDateTime date;
 
+    /**
+     * Constructor for a parser.
+     *
+     * @param input User input.
+     */
     public Parser(String input) {
         String[] splitCommand = input.split(" ", 2);
         this.commandWord = splitCommand[0];
@@ -31,6 +40,7 @@ public class Parser {
      * Gets the number in the argument for done and delete commands.
      *
      * @return Array index provided by user.
+     * @throws DukeException If no number is provided.
      */
     public int getNumber() throws DukeException {
         if (this.arguments == null) {
@@ -42,6 +52,8 @@ public class Parser {
 
     /**
      * Parse arguments if type is task.
+     *
+     * @throws DukeException If name is not present.
      */
     public void parseTask() throws DukeException {
         if (this.arguments == null) {
@@ -53,11 +65,10 @@ public class Parser {
         this.dateString = splitMessage.length > 1 ? splitMessage[1] : null;
     }
 
-
     /**
      * Parse task date to LocalDateTime.
      *
-     * @throws DukeException
+     * @throws DukeException If date is invalid.
      */
     public void parseDate() throws DukeException {
         // Error handling: no time provided.
@@ -81,10 +92,20 @@ public class Parser {
         }
     }
 
+    /**
+     * Getter for the name of the task.
+     *
+     * @return Name of the task provided by user.
+     */
     public String getTaskName() {
         return this.taskName;
     }
 
+    /**
+     * Getter for the date of the task.
+     *
+     * @return Date of the task inputted by user.
+     */
     public LocalDateTime getDate() {
         return this.date;
     }

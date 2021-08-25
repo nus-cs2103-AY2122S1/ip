@@ -6,13 +6,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents Duke's list of tasks.
+ */
 public class TaskList {
     private static final String STORAGE_PATH = "data/duke.txt";
     private List<Task> list = new ArrayList<>();
     private Storage storage;
 
+    /**
+     * Constructor for a TaskList.
+     */
     public TaskList() {
         try {
+            // Load data from saved file, if present.
             this.storage = new Storage(STORAGE_PATH);
             list = storage.readFile();
         } catch (IOException e) {
@@ -30,16 +37,34 @@ public class TaskList {
         this.save();
     }
 
+    /**
+     * Gets a task from the task list.
+     *
+     * @param index Index of the task to be retrieved.
+     * @return Task at given index.
+     */
     public Task get(int index) {
         return this.list.get(index);
     }
 
+    /**
+     * Removes a task from the task list.
+     *
+     * @param index Index of the task to be removed.
+     * @return Removed task.
+     */
     public Task remove(int index) {
         Task task = this.list.remove(index);
         this.save();
         return task;
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param index Index of the task to be marked done.
+     * @return Task marked as done.
+     */
     public Task setDone(int index) {
         Task task = list.get(index);
         task.setDone();
@@ -47,10 +72,18 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Gets the number of tasks in the task list.
+     *
+     * @return Number of tasks in the task list.
+     */
     public int size() {
         return this.list.size();
     }
 
+    /**
+     * Saves the task list to text file.
+     */
     private void save() {
         try {
             storage.save(this.list);

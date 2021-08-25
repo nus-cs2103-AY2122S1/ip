@@ -17,6 +17,9 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * This class represents a Storage object, which saves the user's tasks into a text file.
+ */
 public class Storage {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private final File file;
@@ -25,7 +28,7 @@ public class Storage {
      * Constructor for a Storage object.
      *
      * @param path Path of the file where data should be saved.
-     * @throws IOException
+     * @throws IOException If an I/O error occurs.
      */
     public Storage(String path) throws IOException {
         this.file = new File(path);
@@ -39,7 +42,7 @@ public class Storage {
      * Saves a lists of tasks into a text file.
      *
      * @param list List of tasks to be saved.
-     * @throws IOException
+     * @throws IOException If an I/O error occurs.
      */
     public void save(List<Task> list) throws IOException {
         FileWriter writer = new FileWriter(this.file);
@@ -56,7 +59,7 @@ public class Storage {
      * Creates a list of tasks from a file.
      *
      * @return List of Tasks extracted from file.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException If file is not found.
      */
     public List<Task> readFile() throws FileNotFoundException {
         List<Task> output = new ArrayList<>();
@@ -123,6 +126,12 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Parses the date from a string.
+     *
+     * @param s String representing a date.
+     * @return LocalDateTime object representing the date.
+     */
     private LocalDateTime parseDate(String s) {
         String[] splitDate = s.split(" ", 2);
         // Split day, month, year
