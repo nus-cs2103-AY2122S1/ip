@@ -8,22 +8,29 @@ import duke.task.ToDo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * The ToDoList is a class that encapsulates the attributes and behaviours of a list of things to do.
+ *
+ * @author leezhixuan
+ */
 public class ToDoList {
 
     private String name;
     private ArrayList<Task> record = new ArrayList<>();
     private Integer totalNumber = 0;
 
+    /**
+     * Creates an instance of ToDoList.
+     *
+     * @param name This is the name of the chat bot.
+     */
     public ToDoList(String name) {
         this.name = name;
     }
 
-    public void echo(String statement) {
-        System.out.println("========== " + this.name + " ===========");
-        System.out.println(statement + "\n");
-        System.out.println("========== " + this.name + " ===========\n");
-    }
-
+    /**
+     * Displays the content in ToDoList as a numbered list.
+     */
     public void displayList() {
         Integer number = 1;
         System.out.println("========== " + this.name + " ===========");
@@ -38,6 +45,11 @@ public class ToDoList {
         System.out.println("========== " + this.name + " ===========\n");
     }
 
+    /**
+     * Marks the item at index num on the ToDoList as done.
+     *
+     * @param num The index of the item that is to be marked as done.
+     */
     public void markAsDone(int num) {
         this.record.get(num-1).setCompleted();
         System.out.println("========== " + this.name + " ===========");
@@ -46,7 +58,11 @@ public class ToDoList {
         System.out.println("========== " + this.name + " ===========\n");
     }
 
-
+    /**
+     * Adds a ToDo Task to the ToDoList.
+     *
+     * @param item Name of ToDo.
+     */
     public void addToDo(String item) {
         ToDo todo = new ToDo(item);
         this.record.add(todo);
@@ -58,6 +74,12 @@ public class ToDoList {
         System.out.println("========== " + this.name + " ===========\n");
     }
 
+    /**
+     * Adds an Event Task to the ToDoList.
+     *
+     * @param item Name of Event.
+     * @param duration Time between start and end of Event.
+     */
     public void addEvent(String item, String duration) {
         Event event = new Event(item, duration);
         this.record.add(event);
@@ -69,6 +91,12 @@ public class ToDoList {
         System.out.println("========== " + this.name + " ===========\n");
     }
 
+    /**
+     * Adds a Deadline Task to the ToDoList.
+     *
+     * @param item Name of Task.
+     * @param deadline Date and Time at which the Task is due.
+     */
     public void addDeadline(String item, LocalDateTime deadline) {
         Deadline dl = new Deadline(item, deadline);
         this.record.add(dl);
@@ -80,6 +108,11 @@ public class ToDoList {
         System.out.println("========== " + this.name + " ===========\n");
     }
 
+    /**
+     * Deletes the Task at index on the ToDoList.
+     *
+     * @param index Index of the Task to be deleted from ToDoList.
+     */
     public void delete(int index) {
         Task removed = this.record.remove(index-1);
         String status = removed.isCompleted() ? "[X]" : "[ ]";
@@ -97,6 +130,11 @@ public class ToDoList {
         System.out.println("========== " + this.name + " ===========\n");
     }
 
+    /**
+     * Returns the ArrayList of Tasks.
+     *
+     * @return ArrayList of Tasks.
+     */
     protected ArrayList<Task> getRecord() {
         return this.record;
     }

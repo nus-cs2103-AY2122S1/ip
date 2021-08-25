@@ -11,14 +11,29 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * The Storage class encapsulates the attributes and behaviours of a dynamic storage used by the chat bot.
+ *
+ * @author leezhixuan
+ */
 public class Storage {
     private ToDoList tdl;
 
-    public Storage(ToDoList tdl) {
+    /**
+     * Creates an instance of the Storage class.
+     *
+     * @param tdl The ToDoList that will either be saving its contents onto memory or have its content loaded
+     *            from memory.
+     */
+    protected Storage(ToDoList tdl) {
         this.tdl = tdl;
         Storage.createTaskListStorage();
     }
 
+    /**
+     * Checks if there is already a storage directory created on the user's machine.
+     * If not, creates one of such for the user.
+     */
     protected static void createTaskListStorage() {
         //creates a file to store content
         File s = new File("./data");
@@ -40,6 +55,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads content from memory (if any) into the current instance of ToDoList.
+     */
     protected void reloadTask() {
         try {
             int counter = 0;
@@ -102,6 +120,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the contents in this instance of ToDoList onto memory.
+     */
     public void save() {
         try {
             FileWriter fw = new FileWriter("./data/task-list.txt");
@@ -109,15 +130,15 @@ public class Storage {
             for (Task a : this.tdl.getRecord()) {
                 if (a.isCompleted()) {
                     if (a instanceof Deadline) {
-                        fw.write(number.toString() + "." + a.logo() + "[X] " + ((Deadline) a).getName() +
-                                " (by: " + ((Deadline) a).getDeadline() + ")\n");
+                        fw.write(number.toString() + "." + a.logo() + "[X] " + ((Deadline) a).getName()
+                                + " (by: " + ((Deadline) a).getDeadline() + ")\n");
                     } else {
                         fw.write(number.toString() + "." + a.logo() + "[X] " + a.toString() + "\n");
                     }
                 } else {
                     if (a instanceof Deadline) {
-                        fw.write(number.toString() + "." + a.logo() + "[ ] " + ((Deadline) a).getName() +
-                                " (by: " + ((Deadline) a).getDeadline() + ")\n");
+                        fw.write(number.toString() + "." + a.logo() + "[ ] " + ((Deadline) a).getName()
+                                + " (by: " + ((Deadline) a).getDeadline() + ")\n");
                     } else {
                         fw.write(number.toString() + "." + a.logo() + "[ ] " + a.toString()+ "\n");
                     }
