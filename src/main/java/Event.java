@@ -18,12 +18,29 @@ public class Event extends Task {
     }
 
     /**
+     * Constructor to initialize a new Event.
+     *
+     * @param description The description of the task.
+     * @param isDone The status of the task.
+     */
+    public Event(String description, String dateTime, boolean isDone) {
+        super(description, isDone);
+        this.dateTime = dateTime;
+    }
+
+    /**
      * Returns the string representation of the task in a desired format.
      *
      * @return The String representation of the task, prefixed with a status icon and events identifier.
      */
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.description, this.dateTime);
+        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.getDescription(), this.dateTime);
+    }
+    
+    @Override
+    public String encodeTaskForStorage() {
+        int encodedIsDone = this.getIsDone() ? 1 : 0;
+        return String.format("E | %d | %s | %s", encodedIsDone, this.getDescription(), this.dateTime);
     }
 }
