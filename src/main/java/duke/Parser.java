@@ -8,7 +8,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
 
-    enum Commands {
+    private enum Commands {
         BYE {
             @Override
             public String asLowerCase() {
@@ -59,7 +59,7 @@ public class Parser {
     public Parser() {
     }
 
-    public Command parse(String command, ToDoList tdl, Ui ui, Duke chatBot, Storage storage) {
+    protected Command parse(String command, ToDoList tdl, Ui ui, Duke chatBot, Storage storage) {
         if (command.equals(Commands.BYE.asLowerCase())) {
             return new ByeCommand(chatBot, ui, tdl, storage);
         } else if (command.equals(Commands.LIST.asLowerCase())) {

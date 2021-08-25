@@ -19,7 +19,7 @@ public class Storage {
         Storage.createTaskListStorage();
     }
 
-    public static void createTaskListStorage() {
+    protected static void createTaskListStorage() {
         //creates a file to store content
         File s = new File("./data");
         boolean sResult;
@@ -40,7 +40,7 @@ public class Storage {
         }
     }
 
-    public void reloadTask() {
+    protected void reloadTask() {
         try {
             int counter = 0;
             File file = new File("./data/task-list.txt");

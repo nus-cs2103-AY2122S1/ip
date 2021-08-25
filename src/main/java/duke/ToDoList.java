@@ -14,7 +14,7 @@ public class ToDoList {
     private ArrayList<Task> record = new ArrayList<>();
     private Integer totalNumber = 0;
 
-    ToDoList(String name) {
+    public ToDoList(String name) {
         this.name = name;
     }
 
@@ -97,11 +97,11 @@ public class ToDoList {
         System.out.println("========== " + this.name + " ===========\n");
     }
 
-    public ArrayList<Task> getRecord() {
+    protected ArrayList<Task> getRecord() {
         return this.record;
     }
 
-    public Task getTask(int index) {
+    protected Task getTask(int index) {
         return this.record.get(index);
     }
 }
