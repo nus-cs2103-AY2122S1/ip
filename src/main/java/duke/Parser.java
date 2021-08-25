@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     static void parseTask(String input) throws DukeException {
         switch (input) {

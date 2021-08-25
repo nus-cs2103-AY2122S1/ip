@@ -1,3 +1,7 @@
+package duke;
+
+import duke.tasks.TaskList;
+
 import java.io.*;
 
 public class Storage {
@@ -24,7 +28,7 @@ public class Storage {
 
     static void readFromFile() throws IOException {
         try {
-            //create a BufferedReader which loads the data when Duke starts up
+            //create a BufferedReader which loads the data when duke.Duke starts up
             String line;
             FileReader fReader = new FileReader(text);
             BufferedReader reader = new BufferedReader(fReader);
