@@ -21,7 +21,7 @@ public class Ui {
     }
 
     public void greetUser() {
-        String greetings = "Hello! I'm duke.Yoyo.\n"
+        String greetings = "Hello! I'm Yoyo.\n"
                 + "What can I do for you?";
         outputWrapper();
         System.out.println(greetings);
@@ -69,7 +69,7 @@ public class Ui {
      * prints success message for adding task.
      *
      * @param newTask The task that has been created.
-     * @param tasks duke.task.Task list.
+     * @param tasks Task list.
      */
     public void printAddMessage(Task newTask, TaskList tasks) {
         outputWrapper();
