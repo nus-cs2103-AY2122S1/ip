@@ -60,7 +60,7 @@ public class Duke {
             Optional<DukeCommands> prefix = DukeCommands.getCommand(scannedLine.split(" ")[0]);
             DukeCommands command = prefix.orElseGet(() -> DukeCommands.INVALID);
             try {
-                terminate = command.action.run(Parser.parseCommand(scannedLine), this.list, this.database,
+                terminate = command.action.runAndCanContinue(Parser.parseCommand(scannedLine), this.list, this.database,
                         this.config, this.ui);
                 this.database.save(this.list.getList());
             } catch(DukeException e) {

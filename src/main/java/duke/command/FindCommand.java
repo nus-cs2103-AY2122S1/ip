@@ -23,7 +23,7 @@ public class FindCommand implements DukeActions {
      * @throws DukeException When erroneous inputs are given.
      */
     @Override
-    public boolean run(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config, Ui ui)
+    public boolean runAndCanContinue(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config, Ui ui)
             throws DukeException {
         if (!map.containsKey("find")) {
             throw new DukeException("Find is missing positional argument 'keyword'.");
