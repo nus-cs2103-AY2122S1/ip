@@ -63,7 +63,7 @@ public class Storage {
         }
     }
 
-    public void addTodoToList(String line, List<Task> listOfTasks, int lineNumber) {
+    private void addTodoToList(String line, List<Task> listOfTasks, int lineNumber) {
         String regex = "/";
         String[] splittedLine = line.split(regex);
         try {
@@ -78,7 +78,7 @@ public class Storage {
         }
     }
 
-    public void addEventToList(String line, List<Task> listOfTasks, int lineNumber) {
+    private void addEventToList(String line, List<Task> listOfTasks, int lineNumber) {
         String regex = "/";
         String[] splittedLine = line.split(regex);
         try {
@@ -93,7 +93,7 @@ public class Storage {
         }
     }
 
-    public void addDeadlineToList(String line, List<Task> listOfTasks, int lineNumber) {
+    private void addDeadlineToList(String line, List<Task> listOfTasks, int lineNumber) {
         String regex = "/";
         String[] splittedLine = line.split(regex);
         try {
@@ -108,7 +108,7 @@ public class Storage {
         }
     }
 
-    public boolean checkStoredTodoValidity(String[] splittedLine, int lineNumber) throws DukeException {
+    private boolean checkStoredTodoValidity(String[] splittedLine, int lineNumber) throws DukeException {
         String errorHeading = String.format("Error in Line %s of storage file: ", lineNumber);
         if (splittedLine.length != 3) {
             throw new DukeException(errorHeading
@@ -120,7 +120,7 @@ public class Storage {
         return true;
     }
 
-    public boolean checkStoredEventValidity(String[] splittedLine, int lineNumber) throws DukeException {
+    private boolean checkStoredEventValidity(String[] splittedLine, int lineNumber) throws DukeException {
         String errorHeading = String.format("Error in Line %s of storage file: ", lineNumber);
         if (splittedLine.length != N_SEGMENTS_IN_EVENT) {
             throw new DukeException(errorHeading
@@ -132,7 +132,7 @@ public class Storage {
         return true;
     }
 
-    public boolean checkStoredDeadlineValidity(String[] splittedLine, int lineNumber) throws DukeException {
+    private boolean checkStoredDeadlineValidity(String[] splittedLine, int lineNumber) throws DukeException {
         String errorHeading = String.format("Error in Line %s of storage file: ", lineNumber);
         if (splittedLine.length != N_SEGMENTS_IN_DEADLINE) {
             throw new DukeException(errorHeading
