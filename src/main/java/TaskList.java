@@ -4,12 +4,16 @@ public class TaskList {
     private ArrayList<Task> list;
     private int counter = 0;
 
+    public TaskList(ArrayList<Task> list) {
+        this.list = list;
+    }
+
     public TaskList() {
-        list = new ArrayList<>();
+        this.list = new ArrayList<>();
     }
 
     public void addTask(Task task) {
-        list.add(task);
+        this.list.add(task);
         counter++;
     }
 
