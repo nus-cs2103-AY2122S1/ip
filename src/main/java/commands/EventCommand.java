@@ -7,8 +7,8 @@ import tasks.Event;
 public class EventCommand extends Command {
     private Event eventTask;
 
-    public EventCommand(String taskName, String date) {
-        eventTask = new Event(taskName, date);
+    public EventCommand(String taskName, String time) {
+        eventTask = new Event(taskName, time);
     }
 
     @Override
