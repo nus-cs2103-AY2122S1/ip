@@ -8,8 +8,7 @@ public class Ui {
     }
     
     public void showStartUpError(DukeException e) {
-        System.out.println(new DukeException("Error starting up."));
-        System.out.println(e);
+        System.out.println((new DukeException("Error starting up.").concat(e)));
     }
 
     public void showWelcome() {

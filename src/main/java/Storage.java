@@ -60,7 +60,7 @@ public class Storage {
             }
             return todoList;
         } catch (IOException | DukeException e) {
-            throw new DukeException("Could not load database into todo list. " + e.getMessage());
+            throw new DukeException("Could not load database into todo list.").concat(e);
         }
     }
 
