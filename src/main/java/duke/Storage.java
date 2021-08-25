@@ -78,7 +78,7 @@ public class Storage {
     }
 
     // duke.Storage
-    public void updateLS(ArrayList<Task> toDoList) {
+    public void updateLs(ArrayList<Task> toDoList) {
         try {
             Files.delete(Paths.get(Duke.getLocalStorageLocation()));
         } catch (IOException e) {

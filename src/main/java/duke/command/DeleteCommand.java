@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
                 int taskToDelete = Integer.parseInt(parsedUserInput[1]) - 1;
                 Task deletedTask = tasks.getTasks().get(taskToDelete);
                 tasks.getTasks().remove(taskToDelete);
-                storage.updateLS(tasks.getTasks());
+                storage.updateLs(tasks.getTasks());
                 ui.reply("Noted. I've removed this duke.task: \n" + deletedTask.toString() +
                         "\nNow you have " + tasks.getTasks().size() + " tasks in the list.");
             } catch (NumberFormatException e) {

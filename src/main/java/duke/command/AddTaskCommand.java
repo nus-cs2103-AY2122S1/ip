@@ -4,7 +4,10 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -66,7 +69,7 @@ public class AddTaskCommand extends Command {
 
     private void addTaskToList(Task newTask, Ui ui, TaskList tasks, Storage storage) {
         tasks.getTasks().add(newTask);
-        storage.updateLS(tasks.getTasks());
+        storage.updateLs(tasks.getTasks());
         ui.reply("Got it. I've added this duke.task: \n" + newTask.toString() +
                 "     \nNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
