@@ -141,6 +141,11 @@ public class TaskList {
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
+    /**
+     * Command to find and display all tasks containing keyword 
+     * @param keyword word to search for
+     * @return A string of all the results presented in a list view
+     */
     public String findTask(String keyword) {
         String results = "Here are the matching tasks in your list: \n";
         for (int i = 0; i < tasks.size(); i++) {
