@@ -4,45 +4,45 @@
     -----------------------------------------
 
     -----------------------------------------
-    Got it. I've added this task:
-    [ ] task one
+    Got it. I've added this Tasks:
+    [ ] Tasks one
     Now you have 1 tasks in the list.
     -----------------------------------------
 
     -----------------------------------------
-    Got it. I've added this task:
-    [T][ ] todo task two
+    Got it. I've added this Tasks:
+    [T][ ] todo Tasks two
     Now you have 2 tasks in the list.
     -----------------------------------------
 
     -----------------------------------------
-    Nice! I've marked this task as done:
-    2. [T][X] todo task two
+    Nice! I've marked this Tasks as done:
+    2. [T][X] todo Tasks two
     -----------------------------------------
 
     -----------------------------------------
-    Got it. I've added this task:
-    [E][ ] event task three  (at: 11pm)
+    Got it. I've added this Tasks:
+    [E][ ] event Tasks three  (at: 11pm)
     Now you have 3 tasks in the list.
     -----------------------------------------
 
     -----------------------------------------
-    Nice! I've marked this task as done:
-    3. [E][X] event task three  (at: 11pm)
+    Nice! I've marked this Tasks as done:
+    3. [E][X] event Tasks three  (at: 11pm)
     -----------------------------------------
 
     -----------------------------------------
-    Got it. I've added this task:
-    [D][ ] deadline task four  (by: 2359)
+    Got it. I've added this Tasks:
+    [D][ ] deadline Tasks four  (by: 2359)
     Now you have 4 tasks in the list.
     -----------------------------------------
 
     -----------------------------------------
     Here are the tasks in your list:
-    1. [ ] task one
-    2. [T][X] todo task two
-    3. [E][X] event task three  (at: 11pm)
-    4. [D][ ] deadline task four  (by: 2359)
+    1. [ ] Tasks one
+    2. [T][X] todo Tasks two
+    3. [E][X] event Tasks three  (at: 11pm)
+    4. [D][ ] deadline Tasks four  (by: 2359)
     -----------------------------------------
 
     -----------------------------------------
