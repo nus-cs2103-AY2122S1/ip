@@ -17,6 +17,62 @@ public class Storage {
     public static final ArrayList<Task> tasksList = new ArrayList<>();
 
     /**
+     * Appends specified task to the end of the list.
+     *
+     * @param t new Task
+     * @return boolean - has adding of task succeeded.
+     */
+    public static boolean add(Task t) {
+        return tasksList.add(t);
+    }
+
+    /**
+     * Returns the task at the specified position in this list.
+     *
+     * @param index index of the task to return
+     * @return the element at the specified position in this list
+     * @throws IndexOutOfBoundsException if there is no such index in list.
+     */
+    public static Task get(int index) {
+        return tasksList.get(index);
+    }
+
+    /**
+     * Removes all tasks from internal list. List will be empty after this call.
+     */
+    public static void clear() {
+        tasksList.clear();
+    }
+
+    /**
+     * Removes a specific task from internal list. List will be empty after this call.
+     *
+     * @param index index of the task to return
+     * @throws IndexOutOfBoundsException if there is no such index in list.
+     */
+    public static void remove(int index) {
+        tasksList.remove(index);
+    }
+
+    /**
+     * Returns number of tasks in list.
+     *
+     * @return integer number of tasks in list.
+     */
+    public static int size() {
+        return tasksList.size();
+    }
+
+    /**
+     * Returns stream of Tasks in the list.
+     *
+     * @return stream of Tasks in the list
+     */
+    public static Stream<Task> stream() {
+        return tasksList.stream();
+    }
+
+    /**
      * Checks for the save file, and if it exists, read from it to restore tasks.
      * Relies on the Task class to handle conversions to and from a task object to
      * a string stored in the database.
@@ -52,12 +108,13 @@ public class Storage {
 
         if (failedParses.size() > 0) {
             String status = String.format(
-                    "Save file was read partially. %d tasks added, %d tasks could not be understood:\n",
+                    "Save file was read partially. %d tasks added, %d tasks not understood:\n",
                     tasksList.size(),
                     failedParses.size()
             );
-            status +=
-                    "Failed to parse\n:" + failedParses.stream().map(x -> x + "\n").reduce("", (a, b) -> a + b);
+            status += "Failed to parse\n:";
+            status += failedParses
+                    .stream().map(x -> x + "\n").reduce("", (a, b) -> a + b);
             Duke.renderOutput(status);
         }
     }

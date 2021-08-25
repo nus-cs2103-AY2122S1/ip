@@ -101,7 +101,7 @@ public class DukeLogic {
         try {
             int taskNum = Integer.parseInt(taskNumStr);
             Task task = tasks.get(taskNum - 1);
-            String output = ""/**/;
+            String output = "";
             switch (action) {
             case DELETE:
                 tasks.remove(taskNum - 1);
