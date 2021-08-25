@@ -49,6 +49,7 @@ public class Storage {
         return storedList;
 
     }
+
     public void saveFile(TaskList taskList) {
         File items = new File("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt");
         try {
@@ -74,7 +75,5 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("File does not exist");
         }
-
-
     }
 }
