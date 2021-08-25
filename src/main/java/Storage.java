@@ -6,9 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-// todo
-// 1. Check existence of file and create it
-
 public class Storage {
     private static final String fileErrorText = "Ribiit! Something was wrong with the file!";
     private String filePath;
