@@ -15,7 +15,7 @@ public class TaskList {
      *
      * @return the number of tasks left in the list that are not completed
      */
-    public int completedTasks() {
+    public int uncompletedTasks() {
         int counter = 0;
         for (Task task : list) {
             if (task.taskCompletion().equals("[ ]")) {

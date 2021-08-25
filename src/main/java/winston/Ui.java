@@ -1,5 +1,8 @@
 package winston;
 
+/**
+ * A class that manages all lines that handles user experience and lines that are commonly used.
+ */
 public class Ui {
     public Ui() {
     }
