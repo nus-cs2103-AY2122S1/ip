@@ -30,7 +30,7 @@ public class Event extends Task {
         }
 
         format += this.description;
-        format += " | ";
+        format += " | at ";
         format += this.eventTime;
 
         return format;

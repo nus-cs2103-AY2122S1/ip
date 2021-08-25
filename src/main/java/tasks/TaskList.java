@@ -5,7 +5,7 @@ import exceptions.IndexOutOfBoundsException;
 import exceptions.InvalidCommandException;
 import java.util.ArrayList;
 
-public class ToDoList {
+public class TaskList {
     private final String SEPARATOR = "-----------------------------------------------------------------";
     private enum taskType {
         TODO,
@@ -15,7 +15,7 @@ public class ToDoList {
     private final ArrayList<Task> tasks;
     private int count;
 
-    public ToDoList() {
+    public TaskList() {
         this.tasks = new ArrayList<>();
         this.count = 0;
     }
@@ -75,18 +75,24 @@ public class ToDoList {
         String[] arr = input.split(" ", 2);
 
         try {
-            Task recentlyAdded;
+            Task recentlyAdded = null;
 
-            if (t == taskType.TODO) {
-                if (arr.length == 1) {
-                    recentlyAdded = ToDo.addToDo("", false);
-                }
+            switch (t) {
+                case TODO:
+                    if (arr.length == 1) {
+                        recentlyAdded = ToDo.addToDo("", false);
+                    }
 
-                recentlyAdded = ToDo.addToDo(arr[1], false);
-            } else if (t == taskType.DEADLINE) {
-                recentlyAdded = Deadline.addDeadline(arr[1], false);
-            } else {
-                recentlyAdded = Event.addEvent(arr[1], false);
+                    recentlyAdded = ToDo.addToDo(arr[1], false);
+                    break;
+                case DEADLINE:
+                    recentlyAdded = Deadline.addDeadline(arr[1], false);
+                    break;
+                case EVENT:
+                    recentlyAdded = Event.addEvent(arr[1], false);
+                    break;
+                default:
+                    break;
             }
 
             this.tasks.add(recentlyAdded);
@@ -99,6 +105,7 @@ public class ToDoList {
                     + "     " + recentlyAdded + "\n"
                     + taskCount + "\n"
                     + SEPARATOR);
+
         } catch (EmptyTaskException e) {
             System.out.println(SEPARATOR + "\n"
                     + e

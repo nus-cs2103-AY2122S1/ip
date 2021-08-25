@@ -30,6 +30,7 @@ public class Deadline extends Task {
         }
 
         format += this.description;
+        format += " | by ";
         format += this.dueDate;
 
         return format;
