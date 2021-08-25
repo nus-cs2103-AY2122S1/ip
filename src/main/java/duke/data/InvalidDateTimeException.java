@@ -1,3 +1,5 @@
+package duke.data;
+
 public class InvalidDateTimeException extends DukeException{
     public InvalidDateTimeException(){ super(); }
 

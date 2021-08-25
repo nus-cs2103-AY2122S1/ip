@@ -1,3 +1,5 @@
+package duke.data;
+
 public class UnknownCommandException extends DukeException{
     public UnknownCommandException(){
         super();

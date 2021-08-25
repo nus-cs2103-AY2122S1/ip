@@ -1,3 +1,6 @@
+package duke.data;
+
+import duke.commands.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -26,29 +29,29 @@ public class TaskList {
         }
     }
 
-    protected void add(Task task){
+    public void add(Task task){
         list.add(task);
     }
 
-    protected Task delete(int taskNum){
+    public Task delete(int taskNum){
         return list.remove(taskNum-1);
     }
 
-    protected Task mark(int taskNum){
+    public Task mark(int taskNum){
         Task task = list.get(taskNum-1);
         task.markDone();
         return task;
     }
 
-    protected int size(){
+    public int size(){
         return list.size();
     }
 
-    protected ArrayList<Task> getList(){
+    public ArrayList<Task> getList(){
         return list;
     }
 
-    protected void loadFromList(ArrayList<Task> list){
+    public void loadFromList(ArrayList<Task> list){
         this.list = list;
     }
 }

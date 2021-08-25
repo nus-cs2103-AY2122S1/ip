@@ -1,3 +1,5 @@
+package duke.data;
+
 public abstract class DukeException extends Exception{
 
     protected String formatMessage(String msg){

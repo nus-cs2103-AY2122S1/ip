@@ -1,3 +1,5 @@
+package duke.data;
+
 public class NoToDoDescriptionException extends DukeException{
     public NoToDoDescriptionException(){
         super();

@@ -1,3 +1,9 @@
+import duke.data.DukeException;
+import duke.data.TaskList;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 import java.util.Scanner;
 
 public class Duke {

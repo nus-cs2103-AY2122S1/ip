@@ -1,3 +1,7 @@
+package duke.ui;
+
+import duke.commands.Task;
+
 import java.util.ArrayList;
 
 public class Ui {
@@ -17,33 +21,33 @@ public class Ui {
         System.out.println(INDENTATION + HORIZONTAL_LINE);
     }
 
-    protected void greet(){
+    public void greet(){
         printMessageWithFormat(INTRO);
     }
 
-    protected void farewellMsg(){
+    public void farewellMsg(){
         printMessageWithFormat("Bye bye, i go sleep already. See you again.");
     }
 
-    protected void addTaskMsg(int taskLeft, Task task){
+    public void addTaskMsg(int taskLeft, Task task){
         String msg = "Got it. I've added this task:\n" + INDENTATION + "  " + task.checkStatus();
         msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskLeft);
         printMessageWithFormat(msg);
     }
 
-    protected void deleteTaskMsg(int taskLeft, Task task){
+    public void deleteTaskMsg(int taskLeft, Task task){
         String msg = "Noted. I've removed this task:\n" + INDENTATION + "  " + task.checkStatus();
         msg += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskLeft);
         printMessageWithFormat(msg);
     }
 
-    protected void markDoneMsg(Task task){
+    public void markDoneMsg(Task task){
         String msg = "Nice! I've marked this task as done:\n   ";
         msg += INDENTATION + task.checkStatus();
         printMessageWithFormat(msg);
     }
 
-    protected void listTasks(ArrayList<Task> taskList){
+    public void listTasks(ArrayList<Task> taskList){
         String msg = "Here are the tasks in your list:";
         for (int i = 1; i <= taskList.size(); i++){
             msg += String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i-1).checkStatus());

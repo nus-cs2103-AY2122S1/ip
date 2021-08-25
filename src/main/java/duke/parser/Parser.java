@@ -1,3 +1,10 @@
+package duke.parser;
+
+import duke.commands.*;
+import duke.data.*;
+import duke.storage.Storage;
+import duke.ui.Ui;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -17,7 +24,7 @@ public class Parser {
         this.ui = ui;
     }
 
-    protected boolean process(String cmd) throws DukeException{
+    public boolean process(String cmd) throws DukeException {
         switch (stringToCommand(cmd)){
         case EXIT:
             ui.farewellMsg();
@@ -38,7 +45,7 @@ public class Parser {
             try {
                 LocalDateTime at = LocalDateTime.parse(cmd.substring(cmd.indexOf("at")+3),
                         DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
-                Task event = new Event(eventDescription, false, at);
+                Event event = new Event(eventDescription, false, at);
                 addTask(event);
             } catch (DateTimeParseException e){
                 System.out.println("Please enter Date and Time in YYYY-MM-DD HH:MM.");
@@ -50,7 +57,7 @@ public class Parser {
             try {
                 LocalDateTime by = LocalDateTime.parse(cmd.substring(cmd.indexOf("by")+3),
                         DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
-                Task deadline = new Deadline(deadlineDescription, false, by);
+                Deadline deadline = new Deadline(deadlineDescription, false, by);
                 addTask(deadline);
             } catch (DateTimeParseException e){
                 System.out.println("Please enter Date and Time in YYYY-MM-DD HH:MM.");
