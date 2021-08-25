@@ -2,7 +2,7 @@ package catobot.item;
 
 import catobot.exception.EmptyCommandException;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     /** Due datetime of the deadline. */
-    private final LocalDate by;
+    private final LocalDateTime by;
 
     /**
      * Constructor for Deadline.
@@ -19,7 +19,7 @@ public class Deadline extends Task {
      * @param by The due datetime.
      * @throws EmptyCommandException If the description is empty.
      */
-    private Deadline(String description, LocalDate by) throws EmptyCommandException {
+    private Deadline(String description, LocalDateTime by) throws EmptyCommandException {
         super(description);
         this.by = by;
     }
@@ -32,7 +32,7 @@ public class Deadline extends Task {
      * @return The created Deadline
      * @throws EmptyCommandException if the description is empty.
      */
-    public static Deadline of(String description, LocalDate by) throws EmptyCommandException {
+    public static Deadline of(String description, LocalDateTime by) throws EmptyCommandException {
         if (description.isEmpty()) {
             throw new EmptyCommandException("deadline");
         } else {
@@ -50,7 +50,7 @@ public class Deadline extends Task {
         return "[D]"
                 + super.toString()
                 + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+                + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
                 + ")";
     }
 
@@ -62,7 +62,7 @@ public class Deadline extends Task {
     @Override
     public String toStringInDoc() {
         String s = super.toStringInDoc();
-        String s1 = String.format("D | %s | %s", s, this.by);
-        return s1;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        return String.format("D | %s | %s", s, this.by.format(formatter));
     }
 }

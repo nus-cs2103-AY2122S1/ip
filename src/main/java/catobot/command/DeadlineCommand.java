@@ -4,12 +4,13 @@ import catobot.Storage;
 import catobot.Ui;
 import catobot.exception.BotException;
 import catobot.exception.EmptyCommandException;
-import catobot.exception.InvalidDateException;
+import catobot.exception.InvalidDateTimeException;
 import catobot.exception.InvalidDeadlineException;
 import catobot.item.Deadline;
 import catobot.item.TaskList;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -47,10 +48,11 @@ public class DeadlineCommand extends Command {
         String[] inputs = content.split("deadline")[1].trim().split(" /by ");
         String description = inputs[0].trim();
         try {
-            LocalDate date = LocalDate.parse(inputs[1]);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime date = LocalDateTime.parse(inputs[1], formatter);
             Ui.respond(tasks.add(Deadline.of(description, date)));
         } catch (DateTimeParseException e) {
-            throw new InvalidDateException();
+            throw new InvalidDateTimeException();
         }
     }
 

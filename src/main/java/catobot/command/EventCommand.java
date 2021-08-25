@@ -4,12 +4,13 @@ import catobot.Storage;
 import catobot.Ui;
 import catobot.exception.BotException;
 import catobot.exception.EmptyCommandException;
-import catobot.exception.InvalidDateException;
+import catobot.exception.InvalidDateTimeException;
 import catobot.exception.InvalidEventException;
 import catobot.item.Event;
 import catobot.item.TaskList;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -48,10 +49,11 @@ public class EventCommand extends Command {
         String[] inputs = content.split("event")[1].trim().split(" /at ");
         String description = inputs[0].trim();
         try {
-            LocalDate date = LocalDate.parse(inputs[1]);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+            LocalDateTime date = LocalDateTime.parse(inputs[1], formatter);
             Ui.respond(tasks.add(Event.of(description, date)));
         } catch (DateTimeParseException e) {
-            throw new InvalidDateException();
+            throw new InvalidDateTimeException();
         }
     }
 

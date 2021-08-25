@@ -11,7 +11,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -61,16 +62,17 @@ public class Storage {
                 String type = input[0];
                 int isDone = Integer.parseInt(input[1]);
                 String description = input[2];
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                 switch (type) {
                 case "D":
-                    Deadline deadline = Deadline.of(description, LocalDate.parse(input[3]));
+                    Deadline deadline = Deadline.of(description, LocalDateTime.parse(input[3], formatter));
                     if (isDone == 1) {
                         deadline.markAsDone();
                     }
                     taskList.add(deadline);
                     break;
                 case "E":
-                    Event event = Event.of(description, LocalDate.parse(input[3]));
+                    Event event = Event.of(description, LocalDateTime.parse(input[3], formatter));
                     if (isDone == 1) {
                         event.markAsDone();
                     }

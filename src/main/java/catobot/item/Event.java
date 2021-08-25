@@ -2,7 +2,7 @@ package catobot.item;
 
 import catobot.exception.EmptyCommandException;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     /** The time of the event. */
-    private final LocalDate at;
+    private final LocalDateTime at;
 
     /**
      * Constructor for Event.
@@ -19,7 +19,7 @@ public class Event extends Task {
      * @param at The time of the event.
      * @throws EmptyCommandException If the description is empty.
      */
-    private Event(String description, LocalDate at) throws EmptyCommandException {
+    private Event(String description, LocalDateTime at) throws EmptyCommandException {
         super(description);
         this.at = at;
     }
@@ -32,7 +32,7 @@ public class Event extends Task {
      * @return The created Event.
      * @throws EmptyCommandException if the description is empty.
      */
-    public static Event of(String description, LocalDate at) throws EmptyCommandException {
+    public static Event of(String description, LocalDateTime at) throws EmptyCommandException {
         if (description.isEmpty()) {
             throw new EmptyCommandException("event");
         } else {
@@ -50,7 +50,7 @@ public class Event extends Task {
         return "[E]"
                 + super.toString()
                 + " (at: "
-                + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+                + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a"))
                 + ")";
     }
 
@@ -62,7 +62,7 @@ public class Event extends Task {
     @Override
     public String toStringInDoc() {
         String s = super.toStringInDoc();
-        String s1 = String.format("E | %s | %s", s, this.at);
-        return s1;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        return String.format("E | %s | %s", s, this.at.format(formatter));
     }
 }
