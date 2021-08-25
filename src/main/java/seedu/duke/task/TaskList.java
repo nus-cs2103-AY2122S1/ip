@@ -63,6 +63,17 @@ public class TaskList {
         return new TaskList(newList);
     }
 
+    public TaskList findTasksByKeyword(String keyword) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : this.tasks) {
+            if (task.containsKeyword(keyword)) {
+                // Add task to the tasklist of matching tasks.
+                matchingTasks = matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
     /**
      * Method to mark a specific task as completed.
      *
@@ -93,7 +104,7 @@ public class TaskList {
      * @return String representation of the number of tasks in the task list.
      */
     public String status() {
-        String t = this.length != 1 ? "tasks" : "seedu/duke/task";
+        String t = this.length != 1 ? "tasks" : "task";
         return String.format("Now you have %d %s in the list.",
                 this.length, t);
     }

@@ -24,6 +24,10 @@ public class Task {
         isCompleted = false;
     }
 
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     /**
      * Method to mark duke.task as completed.
      */
