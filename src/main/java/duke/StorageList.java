@@ -95,4 +95,17 @@ public class StorageList {
         ui.taskDeleteMsg(desc, storageList.size());
     }
 
+    public void findAndPrint(String keyword) {
+        System.out.println("    Here are the matching tasks in your list:");
+        int size = storageList.size();
+        int itemNumber = 1;
+        for (int i = 0; i < size; i++) {
+            Task task = storageList.get(i);
+            if (task.getDescription().contains(keyword)) {
+                System.out.println("        " + itemNumber + "." + task.toString());
+                itemNumber++;
+            }
+        }
+    }
+
 }

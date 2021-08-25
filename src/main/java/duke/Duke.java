@@ -91,6 +91,12 @@ public class Duke {
                     }
                     int idx = parser.getDeleteIdx(input);
                     SL.delete(idx);
+                } else if (parser.isFindCmd(input)) {
+                    if (input.length() == 4) {
+                        throw new DukeException(ui.taskErrorMsg(TASK_UNKNOWN));
+                    }
+                    String keyword = input.substring(5);
+                    SL.findAndPrint(keyword);
                 } else {
                     Task task = new Task(input);
                     String desc = task.getDescription();
