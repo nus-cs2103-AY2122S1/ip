@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import java.util.Scanner;
 
 /**
@@ -54,7 +58,8 @@ public class Duke {
                     int pos = description.indexOf("/");
                     String des = description.substring(9, pos - 1);
                     String by = description.substring(pos + 4);
-                    Deadline dtask = new Deadline(des, by);
+                    LocalDate byDate = LocalDate.parse(by);
+                    Deadline dtask = new Deadline(des, byDate);
                     taskList.storeTask(dtask);
                     System.out.println("  " + dtask.toString() + "\n" + taskList.toString());
                 } else if (description.startsWith("event")) {
@@ -65,7 +70,8 @@ public class Duke {
                     int pos = description.indexOf("/");
                     String des = description.substring(6, pos - 1);
                     String at = description.substring(pos + 4);
-                    Event etask = new Event(des, at);
+                    LocalDateTime atDateTime = LocalDateTime.parse(at);
+                    Event etask = new Event(des, atDateTime);
                     taskList.storeTask(etask);
                     System.out.println("  " + etask.toString() + "\n" + taskList.toString());
                 } else {
