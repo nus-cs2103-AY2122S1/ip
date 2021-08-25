@@ -8,6 +8,13 @@ import duke.task.*;
 public class AddCommand extends Command {
     Task task;
 
+    /**
+     * Constructs an AddCommand object.
+     *
+     * @param command The type of tasks to be added.
+     * @param description The description to be added when creating a task.
+     * @throws DukeException If description given is invalid.
+     */
     public AddCommand(String command, String description) throws DukeException{
         if (command.equals("todo")) {
             String[] splitString = description.split("todo ");
@@ -43,6 +50,15 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Adds and store new task in the list and storage.
+     * Sends added message to user.
+     *
+     * @param tasks Task List that store all current task.
+     * @param ui Ui object to interact with user.
+     * @param storage Storage that store tasks in hard-drive.
+     * @throws DukeException If arguments enters has error.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);
@@ -50,6 +66,11 @@ public class AddCommand extends Command {
         ui.showAddTask(task, tasks);
     }
 
+    /**
+     * Checks whether the command is an exit command.
+     *
+     * @return Boolean whether command is an exit command.
+     */
     @Override
     public boolean isExit() {
         return false;

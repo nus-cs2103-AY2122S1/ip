@@ -14,11 +14,22 @@ public class Storage {
     private File file;
     private String fileName;
 
+    /**
+     * Constructs a storage object.
+     *
+     * @param fileName The name of the file that stored the Task List.
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
         file = new File(fileName);
     }
 
+    /**
+     * Return an array of task that are stored in the file.
+     *
+     * @return Array of task that are store in the file.
+     * @throws DukeException If file is corrupted.
+     */
     public ArrayList<Task> load() throws DukeException{
         ArrayList<Task> taskList = new ArrayList<>();
 
@@ -61,6 +72,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Stores all current tasks in the hard-drive.
+     *
+     * @param tasks Task list with all current tasks.
+     * @throws DukeException If overriding of file can't be done.
+     */
     public void save(TaskList tasks) throws DukeException {
         try {
             String fileTask = tasks.toFileString();

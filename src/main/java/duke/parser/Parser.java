@@ -5,6 +5,13 @@ import duke.command.*;
 
 public class Parser {
 
+    /**
+     * Returns command to be execute based on user's command.
+     *
+     * @param fullCommand User's input text.
+     * @return Command to be executed.
+     * @throws DukeException if command created has error.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String command = fullCommand.split(" ")[0];
         Command newCommand;
