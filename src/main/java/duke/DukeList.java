@@ -32,16 +32,28 @@ public class DukeList implements Iterable<Task> {
         list.remove(i);
     }
 
+    public String getMatches(String keyWord) {
+        StringBuilder listString = new StringBuilder("Here are the matching tasks in your list:\n");
+        int matches = 0;
+        for (Task task : list) {
+            if (task.getDescription().contains(keyWord)) {
+                listString.append("  ").append(matches++ + 1).append(".").append(task.toString()).append("\n");
+            }
+        }
+        if (matches == 0) {
+            return "No matches found";
+        } else {
+            return listString.toString();
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder listString = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            String line = "  " + (i + 1) + "." + task.toString();
+            String line = "  " + (i + 1) + "." + task.toString() + "\n";
             listString.append(line);
-            if (i != list.size() - 1) {
-                listString.append("\n");
-            }
         }
         return listString.toString();
     }
