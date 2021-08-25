@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -21,6 +23,13 @@ public class Duke {
     public static void main(String[] args) {
         //Print welcome message to the user
         Duke.welcomeMessage();
+
+        try {
+            loadFileContents("data/duke.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
         Scanner s = new Scanner(System.in);
         Duke.getPrompt();
         String input = s.nextLine();
@@ -133,6 +142,40 @@ public class Duke {
         Duke.list.remove(((int) i - 1));
         System.out.println(" " + deleted);
         System.out.println("Now you have " + Duke.list.size() + " tasks in the list." + "\n" +  Duke.end);
+    }
+
+    private static void loadFileContents(String filePath) throws FileNotFoundException {
+        File f = new File(filePath);
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            // Read and add the task into the list
+            String input = s.nextLine();
+            String[] arrOfInputs = input.split("\\|");
+            readInputs(arrOfInputs);
+        }
+    }
+
+    private static void readInputs(String[] arrOfInputs) {
+        //Check for T, D, E
+        if (arrOfInputs[0].equals("T")) {
+            String t = arrOfInputs[2];
+            ToDo td = new ToDo(t);
+            Duke.list.add(td);
+        } else if (arrOfInputs[0].equals("D")) {
+            String t = arrOfInputs[2] + " /by " + arrOfInputs[3];
+            Deadline d = new Deadline(t);
+            Duke.list.add(d);
+        } else if (arrOfInputs[0].equals("E")) {
+            String t = arrOfInputs[2] + " /at " + arrOfInputs[3];
+            Event e = new Event(t);
+            Duke.list.add(e);
+        }
+
+        int currListLength = Duke.list.size();
+        //Check if its completed or not (0,1) and mark accordingly
+        if (arrOfInputs[1].equals("1")) {
+            Duke.list.get(currListLength - 1).markAsDone();
+        }
     }
 }
 
