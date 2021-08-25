@@ -117,7 +117,14 @@ public class Parser {
         }
         Ui.displayContentBetweenLines(taskList.delete(taskIndex));
     }
-
+    
+    private void handleFind(String[] parsedInput) throws DukeInvalidCommandException {
+        if (parsedInput.length < 2) {
+            throw new DukeInvalidCommandException("OOPS!!! Type in the keyword you want to search");
+        }
+        Ui.displayContentBetweenLines(taskList.findTask(parsedInput[1]));
+    }
+    
     private void dukeCommandController(String[] parsedInput) throws DukeInvalidCommandException {
         switch (parsedInput[0]) {
         case "list":
@@ -137,6 +144,9 @@ public class Parser {
             break;
         case "delete":
             handleDelete(parsedInput);
+            break;
+        case "find":
+            handleFind(parsedInput);
             break;
         default:
             throw new DukeInvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
