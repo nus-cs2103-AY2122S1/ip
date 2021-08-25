@@ -35,7 +35,7 @@ public class Duke {
     /**
      * Runs the Duke bot. Users may deal with tasks by entering command.
      */
-    public void run() {
+    private void run() {
         Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         Ui.greet();

@@ -42,32 +42,32 @@ public class Parser {
         String description = data[2];
 
         switch (proposedType) {
-            case "T":
-                if (data.length == 3) {
-                    return new ToDo(description, isDone);
-                } else {
-                    throw new InvalidCommandException();
-                }
-            case "D":
-                if (data.length != 4) {
-                    throw new InvalidCommandException();
-                }
-                try {
-                    return new Deadline(description, isDone, LocalDate.parse(data[3]));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
-                }
-            case "E":
-                if (data.length != 4) {
-                    throw new InvalidCommandException();
-                }
-                try {
-                    return new Event(description, isDone, LocalDate.parse(data[3]));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
-                }
-            default:
+        case "T":
+            if (data.length == 3) {
+                return new ToDo(description, isDone);
+            } else {
                 throw new InvalidCommandException();
+            }
+        case "D":
+            if (data.length != 4) {
+                throw new InvalidCommandException();
+            }
+            try {
+                return new Deadline(description, isDone, LocalDate.parse(data[3]));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
+            }
+        case "E":
+            if (data.length != 4) {
+                throw new InvalidCommandException();
+            }
+            try {
+                return new Event(description, isDone, LocalDate.parse(data[3]));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
+            }
+        default:
+            throw new InvalidCommandException();
         }
     }
 
@@ -165,67 +165,67 @@ public class Parser {
             String description = command.split(" ", 2)[1].trim();
 
             switch (commandType) {
-                case "todo": {
-                    Task task = descriptionToTask(Task.TaskType.TODO, description);
-                    taskList.addTask(task);
-                    storage.addTask(task);
-                    return;
+            case "todo": {
+                Task task = descriptionToTask(Task.TaskType.TODO, description);
+                taskList.addTask(task);
+                storage.addTask(task);
+                return;
+            }
+            case "deadline": {
+                Task task = descriptionToTask(Task.TaskType.DEADLINE, description);
+                taskList.addTask(task);
+                storage.addTask(task);
+                return;
+            }
+            case "event": {
+                Task task = descriptionToTask(Task.TaskType.EVENT, description);
+                taskList.addTask(task);
+                storage.addTask(task);
+                return;
+            }
+            case "done": {
+                if (description.matches("\\d+")) {
+                    int item = Integer.parseInt(description);
+                    taskList.completeTask(item);
+                    storage.refreshTask(taskList);
+                } else {
+                    throw new IndexMismatchException();
                 }
-                case "deadline": {
-                    Task task = descriptionToTask(Task.TaskType.DEADLINE, description);
-                    taskList.addTask(task);
-                    storage.addTask(task);
-                    return;
+                return;
+            }
+            case "delete": {
+                if (description.matches("\\d+")) {
+                    int item = Integer.parseInt(description);
+                    taskList.removeTask(item);
+                    storage.refreshTask(taskList);
+                } else {
+                    throw new IndexMismatchException();
                 }
-                case "event": {
-                    Task task = descriptionToTask(Task.TaskType.EVENT, description);
-                    taskList.addTask(task);
-                    storage.addTask(task);
-                    return;
-                }
-                case "done": {
-                    if (description.matches("\\d+")) {
-                        int item = Integer.parseInt(description);
-                        taskList.completeTask(item);
-                        storage.refreshTask(taskList);
-                    } else {
-                        throw new IndexMismatchException();
-                    }
-                    return;
-                }
-                case "delete": {
-                    if (description.matches("\\d+")) {
-                        int item = Integer.parseInt(description);
-                        taskList.removeTask(item);
-                        storage.refreshTask(taskList);
-                    } else {
-                        throw new IndexMismatchException();
-                    }
-                    return;
-                }
-                case "query": {
-                    try {
-                        Ui.printMessage(taskList.printList(LocalDate.parse(description)));
-                    } catch (DateTimeParseException e) {
-                        throw new InvalidCommandException();
-                    }
-                    return;
-                }
-                default: {
+                return;
+            }
+            case "query": {
+                try {
+                    Ui.printMessage(taskList.printList(LocalDate.parse(description)));
+                } catch (DateTimeParseException e) {
                     throw new InvalidCommandException();
                 }
+                return;
+            }
+            default: {
+                throw new InvalidCommandException();
+            }
             }
         }
 
         switch (command) {
-            case "list":
-                Ui.printMessage(taskList.printList());
-                break;
-            case "bye":
-                Ui.farewell();
-                break;
-            default:
-                throw new InvalidCommandException();
+        case "list":
+            Ui.printMessage(taskList.printList());
+            break;
+        case "bye":
+            Ui.farewell();
+            break;
+        default:
+            throw new InvalidCommandException();
         }
     }
 }

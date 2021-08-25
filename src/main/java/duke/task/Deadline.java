@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -42,8 +40,8 @@ public class Deadline extends Task {
      * @return The due time of the task.
      */
     @Override
-    public LocalDate getDate() {
-        return this.timeDue;
+    public String taskToLine() {
+        return "D" + super.taskToLine() + " | " + this.timeDue;
     }
 
     /**
@@ -52,8 +50,8 @@ public class Deadline extends Task {
      * @return A single line that can be stored in a txt file.
      */
     @Override
-    public String taskToLine() {
-        return "D" + super.taskToLine() + " | " + this.timeDue;
+    public LocalDate getDate() {
+        return this.timeDue;
     }
 
     /**
