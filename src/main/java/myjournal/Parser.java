@@ -22,6 +22,9 @@ public class Parser {
                 case "delete":
                     ui.removeTaskPrint(Parser.parseDelete(line, tasks));
                     break;
+                case "find":
+                    Parser.parseFind(line, tasks);
+                    break;
                 case "list":
                     Parser.parseList(tasks);
                     break;
@@ -46,8 +49,38 @@ public class Parser {
             System.out.println(e.toString());
         } catch (EmptyDescriptionException e) {
             System.out.println(e.toString());
+        } catch (InvalidWordException e) {
+            System.out.println(e.toString());
         } catch (DateTimeParseException exception) {
             System.out.println(exception.toString());
+        }
+    }
+
+    public static void parseFind(Scanner line, TaskList tasks) {
+        if (!line.hasNext()) {
+            throw new EmptyDescriptionException("OOPS!!! Please tell me which word you want to find!!");
+        }
+        String find = line.next();
+        if (line.hasNext()) {
+            throw new InvalidWordException("Please enter only one word!!");
+        }
+        TaskList newList = new TaskList();
+        for (int i = 0; i < tasks.getSize(); i++) {
+            Task currTask = tasks.getTask(i);
+            Scanner taskName = new Scanner(currTask.getTaskName());
+            while (taskName.hasNext()) {
+                if (taskName.next().equals(find)) {
+                    newList.addTask(currTask);
+                }
+            }
+        }
+        if (newList.getSize() == 0) {
+            System.out.println("You have no task that matches the word!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < newList.getSize(); i++) {
+                System.out.println((i + 1) + "." + newList.getTask(i));
+            }
         }
     }
 
