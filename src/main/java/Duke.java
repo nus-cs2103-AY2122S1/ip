@@ -3,19 +3,17 @@
  */
 public class Duke {
 
+    private static final String CACHE_PATH = "data/cache.txt";
+    private Storage storage;
+    private TaskList tasks;
     private Ui ui;
 
-    public Duke() {
-        ui = new Ui();
-
+    public Duke(String filePath) {
         try {
-            Task.readCache();
-        } catch (DukeException e){
-            Ui.printMsg(new String[] {e.getMessage()});
-        }
-
-        try {
-            Task.initializeCache();
+            storage = new Storage(filePath);
+            tasks = storage.load();
+            // load should read and initialize cache
+            ui = new Ui(tasks, storage);
         } catch (DukeException e){
             Ui.printMsg(new String[] {e.getMessage()});
         }
@@ -31,6 +29,6 @@ public class Duke {
      * @param args Will not be used
      */
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke(CACHE_PATH).run();
     }
 }
