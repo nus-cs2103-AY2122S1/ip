@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser to parse user inputs, and invoke corresponding functions
+ */
 public class Parser {
     private static boolean isRunning = true;
 
@@ -11,6 +14,14 @@ public class Parser {
         return isRunning;
     }
 
+    /**
+     * Static parse method of the class.
+     *
+     * @param userInput user inputs.
+     * @param dukeTaskList a dukeTaskList object of the current run of Duke.
+     * @throws DukeException if input format is invalid.
+     * @throws NumberFormatException if user doesn't enter valid integers when entering task numbers.
+     */
     public static void parse(String userInput, DukeTaskList dukeTaskList) {
         String[] slashSplitInput = userInput.split("/", 2);
         String[] spaceSplitInput = slashSplitInput[0].split(" ", 2); // Everything before the slash, split again by space
