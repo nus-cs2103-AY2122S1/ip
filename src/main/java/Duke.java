@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -5,14 +8,16 @@ public class Duke {
 
     private ArrayList<Task> taskList;
     private Scanner sc;
+    private File localFile;
 
     public Duke() {
         taskList = new ArrayList<>();
     }
 
-    public enum TaskType { TODO, DEADLINE, EVENT }
+    public enum TaskType {TODO, DEADLINE, EVENT}
 
     public void chat() {
+        getFile();
         String startText = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(startText);
         sc = new Scanner(System.in);
@@ -39,6 +44,7 @@ public class Duke {
                         completedTask.markAsDone();
                         String message = "Good work! Task is now marked as done:\n" + completedTask + "\n";
                         System.out.println(outputTemplate(message));
+                        saveList();
                         break;
                     }
                     case "todo": {
@@ -58,6 +64,7 @@ public class Duke {
                         Task deletedTask = taskList.remove(taskNumber - 1);
                         String message = "Alright! I've deleted this task:\n" + deletedTask + getTaskListStatus();
                         System.out.println(outputTemplate(message));
+                        saveList();
                         break;
                     }
                     default: {
@@ -110,6 +117,7 @@ public class Duke {
                 break;
             }
         }
+        saveList();
     }
 
     private String getDescription(String taskType) throws DukeException {
@@ -137,6 +145,62 @@ public class Duke {
             return "\nThere is currently 1 task in your list\n";
         } else {
             return String.format("\nThere are currently %d tasks in your list\n", taskList.size());
+        }
+    }
+
+    private void getFile() {
+        try {
+            File dataFolder = new File("data");
+            dataFolder.mkdir();
+            localFile = new File(dataFolder,"duke.txt");
+            if (localFile.createNewFile()) {
+
+            } else {
+                Scanner fileScanner = new Scanner(localFile);
+                while (fileScanner.hasNextLine()) {
+                    String data = fileScanner.nextLine();
+                    String[] parameters = data.split(" / ");
+                    switch (parameters[0]) {
+                    case "T": {
+                        ToDo task = new ToDo(parameters[2]);
+                        task.setDone(Integer.parseInt(parameters[1]));
+                        taskList.add(task);
+                        break;
+                    }
+                    case "D": {
+                        Deadline task = new Deadline(parameters[2], parameters[3]);
+                        task.setDone(Integer.parseInt(parameters[1]));
+                        taskList.add(task);
+                        break;
+                    }
+                    case "E": {
+                        Event task = new Event(parameters[2], parameters[3]);
+                        task.setDone(Integer.parseInt(parameters[1]));
+                        taskList.add(task);
+                        break;
+                    }
+                    }
+                }
+                fileScanner.close();
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    private void saveList() {
+        String content = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            content += taskList.get(i).toFileFormat() + "\n";
+        }
+        try {
+            FileWriter myWriter = new FileWriter("./data/duke.txt");
+            myWriter.write(content);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }

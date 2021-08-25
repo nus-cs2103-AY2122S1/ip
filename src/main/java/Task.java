@@ -15,8 +15,20 @@ public class Task {
         isDone = true;
     }
 
+    public void setDone(int done) {
+        if (done == 1) {
+            isDone = true;
+        } else {
+            isDone = false;
+        }
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), this.description);
+    }
+
+    public String toFileFormat() {
+        return String.format("%d / %s", isDone ? 1 : 0, this.description);
     }
 }
