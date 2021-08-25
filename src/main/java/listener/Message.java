@@ -2,16 +2,13 @@ package listener;
 
 /**
  * The is the Message interface.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public interface Message {
 
     /**
-     * Show messages.
+     * Shows messages.
+     *
+     * @param messages Multiple message strings or messages array.
      */
     public void show(String... messages);
 }

@@ -6,12 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * The is the Deadline class that extends from Task.
  * Deadline task needs to be done before a specific time.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public class Deadline extends Task {
     public static final String ID = "D";
     private static final String PRINT_DATE_PATTERN = "MMM dd yyyy";
@@ -21,10 +16,10 @@ public class Deadline extends Task {
     private final LocalDateTime byDateTime;
 
     /**
-     * This is constructor method of Deadline.
+     * Constructs a Deadline object.
      *
-     * @param name   task name
-     * @param byDateTime a specific date and time of task that needs to be done before it
+     * @param name Task name.
+     * @param byDateTime A specific date and time of task that needs to be done before it.
      */
     public Deadline(String name, LocalDateTime byDateTime) {
         super(name);
@@ -34,9 +29,9 @@ public class Deadline extends Task {
     /**
      * This is constructor method of Deadline.
      *
-     * @param name   task name
-     * @param byDateTime a specific date and time of task that needs to be done before it
-     * @param isDone task status: done or not done
+     * @param name Task name.
+     * @param byDateTime A specific date and time of task that needs to be done before it.
+     * @param isDone Task status: done or not done.
      */
     public Deadline(String name, LocalDateTime byDateTime, boolean isDone) {
         super(name, isDone);
@@ -44,9 +39,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Get the specific date and time of task that needs to be done before it.
+     * Returns the specific date and time of task that needs to be done before it.
      *
-     * @return the specific date and time of task that needs to be done before it
+     * @return The specific date and time of task that needs to be done before it.
      */
     public LocalDateTime getByDateTime() {
         return byDateTime;
@@ -63,10 +58,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Format Task to String array.
+     * Formats Task to String array.
      * If task is done, [D, 0, Task1, DateTime]; else, [D, 1, Task1, DateTime].
      *
-     * @return Task in String array
+     * @return Task in String array.
      */
     @Override
     public String[] formatTask() {
@@ -80,9 +75,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Mark task status as done.
+     * Returns task with done status.
      *
-     * @return task with done status
+     * @return Task with done status.
      */
     @Override
     public Deadline markAsDone() {
@@ -90,7 +85,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Print task with format:
+     * Prints task.
      * If task is done, [D][X] Task1; else, [D][ ] Task1.
      */
     @Override

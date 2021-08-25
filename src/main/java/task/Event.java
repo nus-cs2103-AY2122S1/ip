@@ -5,12 +5,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * The is the Event class that extends from Task.
  * Event task starts at a specific time and ends at a specific time.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public class Event extends Task {
     public static final String ID = "E";
     private static final String PRINT_DATE_PATTERN = "MMM dd yyyy";
@@ -20,10 +15,10 @@ public class Event extends Task {
     private final EventDateTime atDateTime;
 
     /**
-     * This is constructor method of Event.
+     * Constructs a Event object.
      *
-     * @param name       task name
-     * @param atDateTime a specific date, start time and end time of task
+     * @param name Task name.
+     * @param atDateTime A specific date, start time and end time of task.
      */
     public Event(String name, EventDateTime atDateTime) {
         super(name);
@@ -31,11 +26,11 @@ public class Event extends Task {
     }
 
     /**
-     * This is constructor method of Event.
+     * Constructs a Event object.
      *
-     * @param name       task name
-     * @param atDateTime a specific date, start time and end time of task
-     * @param isDone     task status: done or not done
+     * @param name Task name.
+     * @param atDateTime A specific date, start time and end time of task.
+     * @param isDone Task status: done or not done.
      */
     public Event(String name, EventDateTime atDateTime, boolean isDone) {
         super(name, isDone);
@@ -43,9 +38,9 @@ public class Event extends Task {
     }
 
     /**
-     * Get the specific date, start time and end time of task.
+     * Returns the specific date, start time and end time of task.
      *
-     * @return the specific date, start time and end time of task
+     * @return The specific date, start time and end time of task.
      */
     public EventDateTime getAtDateTime() {
         return atDateTime;
@@ -68,10 +63,10 @@ public class Event extends Task {
     }
 
     /**
-     * Format Task to String array.
+     * Formats Task to String array.
      * If task is done, [E, 0, Task1, DateTime]; else, [E, 1, Task1, DateTime].
      *
-     * @return Task in String array
+     * @return Task in String array.
      */
     @Override
     public String[] formatTask() {
@@ -85,9 +80,9 @@ public class Event extends Task {
     }
 
     /**
-     * Mark task status as done.
+     * Returns task with done status.
      *
-     * @return task with done status
+     * @return Task with done status.
      */
     @Override
     public Event markAsDone() {
@@ -95,7 +90,7 @@ public class Event extends Task {
     }
 
     /**
-     * Print task with format:
+     * Prints task.
      * If task is done, [E][X] Task1; else, [E][ ] Task1.
      */
     @Override

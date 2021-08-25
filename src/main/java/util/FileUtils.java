@@ -13,18 +13,15 @@ import java.util.Scanner;
 
 /**
  * The is the FileUtils class to do file operations.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public class FileUtils {
 
     /**
-     * Load list of contents from file.
+     * Returns list of contents from file.
      *
-     * @return list of contents
+     * @param dirName Directory name.
+     * @param fileName File name.
+     * @return List of contents.
      */
     public static List<String> loadFile(String dirName, String fileName) {
         List<String> contents = new ArrayList<>();
@@ -52,9 +49,12 @@ public class FileUtils {
     }
 
     /**
-     * Save list of contents to file.
+     * Returns true if list of contents are saved to file successfully, else return false.
      *
-     * @return whether the contents are saved to file successfully
+     * @param dirName Directory name.
+     * @param fileName File name.
+     * @param contents List of contents.
+     * @return Whether the contents are saved to file successfully.
      */
     public static boolean isFileSaved(String dirName, String fileName, List<String> contents) {
         Path rootPath = Paths.get("");

@@ -3,18 +3,13 @@ package exception;
 /**
  * The is the DukeUnknownException class that extends from Exception
  * to catch the unknown exception.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public class DukeUnknownException extends Exception {
 
     /**
-     * This is constructor method of DukeUnknownException.
+     * Constructs a DukeUnknownException object.
      *
-     * @param message exception message
+     * @param message Exception message.
      */
     public DukeUnknownException(String message) {
         super(message);

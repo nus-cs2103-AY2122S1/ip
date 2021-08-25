@@ -12,20 +12,15 @@ import java.util.Arrays;
 
 /**
  * The is the Parser class that extracts contents from command.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public class Parser {
 
     /**
-     * Extract operation from command.
+     * Returns operation from command.
      *
-     * @return operation from command if exists, else throw exception
-     * @throws DukeExtractCommandException if operation is empty or cannot be extracted properly
-     * @throws DukeUnknownException if operation is unknown
+     * @return Operation from command if exists, else throw exception.
+     * @throws DukeExtractCommandException If operation is empty or cannot be extracted properly.
+     * @throws DukeUnknownException If operation is unknown.
      */
     public static Operation extractOperation(String command)
         throws DukeExtractCommandException, DukeUnknownException {
@@ -65,13 +60,13 @@ public class Parser {
     }
 
     /**
-     * Extract task number from command.
+     * Returns task number from command.
      *
-     * @return task number from command if it exists and is a positive integer,
-     *         else throw exception
-     * @throws DukeExtractCommandException if task number is empty
-     * @throws NumberFormatException if task number is not a integer
-     * @throws DukeTaskNumberOutOfBoundsException if task number is not a positive integer
+     * @return Task number from command if it exists and is a positive integer,
+     *         else throw exception.
+     * @throws DukeExtractCommandException If task number is empty.
+     * @throws NumberFormatException If task number is not a integer.
+     * @throws DukeTaskNumberOutOfBoundsException If task number is not a positive integer.
      */
     public static int extractTaskNumber(String command)
         throws DukeExtractCommandException, NumberFormatException,
@@ -95,12 +90,12 @@ public class Parser {
     }
 
     /**
-     * Extract task description from command.
+     * Returns task description from command.
      *
-     * @return task description from command if it exists and can be extracted properly,
-     *         else throw exception
-     * @throws DukeExtractCommandException if task description is empty
-     *                                     or cannot be extracted properly
+     * @return Task description from command if it exists and can be extracted properly,
+     *         else throw exception.
+     * @throws DukeExtractCommandException If task description is empty
+     *                                     or cannot be extracted properly.
      */
     public static String extractTaskDescription(String command) throws DukeExtractCommandException {
         String[] contents = command.split(" ", 2);
@@ -118,13 +113,13 @@ public class Parser {
     }
 
     /**
-     * Extract task details that contains task name and task (at/by) time from task description.
+     * Returns task details that contains task name and task (at/by) time from task description.
      *
-     * @param  description extracted from task command
-     * @param  regex " /at " or " /by "
-     * @return task details from description if they exist and can be extracted properly,
-     *         else throw exception
-     * @throws DukeExtractCommandException if task details are empty or cannot be extracted properly
+     * @param description Extracted from task command.
+     * @param regex " /at " or " /by ".
+     * @return Task details from description if they exist and can be extracted properly,
+     *         else throw exception.
+     * @throws DukeExtractCommandException If task details are empty or cannot be extracted properly.
      */
     public static String[] extractTaskDetails(String description, String regex)
         throws DukeExtractCommandException {
@@ -142,13 +137,13 @@ public class Parser {
     }
 
     /**
-     * Extract event date, start time and end time.
+     * Returns event date, start time and end time.
      *
-     * @param  dateTime extracted from description
-     * @param  regex " "
-     * @return date, start time and end time from datetime if they exist
-     *         and can be extracted properly, else throw exception
-     * @throws DukeExtractCommandException if dateTime are empty or cannot be extracted properly
+     * @param dateTime Extracted from description.
+     * @param regex " ".
+     * @return Date, start time and end time from datetime if they exist
+     *         and can be extracted properly, else throw exception.
+     * @throws DukeExtractCommandException If dateTime are empty or cannot be extracted properly.
      */
     public static EventDateTime extractEventDatetime(String dateTime, String regex)
         throws DukeExtractCommandException {
@@ -170,11 +165,11 @@ public class Parser {
     }
 
     /**
-     * Extract deadline ate and time.
+     * Returns deadline ate and time.
      *
-     * @param  dateTime extracted from description
-     * @return dateTime format if it can be extracted properly, else throw exception
-     * @throws DukeExtractCommandException if dateTime cannot be extracted properly
+     * @param dateTime Extracted from description.
+     * @return DateTime format if it can be extracted properly, else throw exception.
+     * @throws DukeExtractCommandException If dateTime cannot be extracted properly.
      */
     public static LocalDateTime extractDeadlineDateTime(String dateTime)
         throws DukeExtractCommandException {
@@ -187,11 +182,11 @@ public class Parser {
     }
 
     /**
-     * Extract keyword from command.
+     * Returns keyword from command.
      *
-     * @return keyword from command if it can be extracted properly,
-     *         else throw exception
-     * @throws DukeExtractCommandException if keyword cannot be extracted properly
+     * @return Keyword from command if it can be extracted properly,
+     *         else throw exception.
+     * @throws DukeExtractCommandException If keyword cannot be extracted properly.
      */
     public static String extractKeyword(String command) throws DukeExtractCommandException {
         String[] contents = command.split(" ", 2);

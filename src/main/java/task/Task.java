@@ -3,20 +3,15 @@ package task;
 /**
  * The is the Task class that contains the properties
  * of a task.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public abstract class Task {
     private final String name;
     private final boolean isDone;
 
     /**
-     * This is constructor method of Task.
+     * Constructs a Task object.
      *
-     * @param name task name
+     * @param name Task name.
      */
     public Task(String name) {
         this.name = name;
@@ -24,10 +19,10 @@ public abstract class Task {
     }
 
     /**
-     * This is constructor method of Task.
+     * Constructs a Task object.
      *
-     * @param name   task name
-     * @param isDone task status: done or not done
+     * @param name Task name.
+     * @param isDone Task status: done or not done.
      */
     public Task(String name, boolean isDone) {
         this.name = name;
@@ -35,34 +30,34 @@ public abstract class Task {
     }
 
     /**
-     * Get status of task.
+     * Returns status of task.
      *
-     * @return task status
+     * @return Task status.
      */
     public boolean isDone() {
         return isDone;
     }
 
     /**
-     * Mark task status as done.
+     * Returns task with done status.
      *
-     * @return task with done status
+     * @return Task with done status.
      */
     public abstract Task markAsDone();
 
     /**
-     * Get name of task.
+     * Returns name of task.
      *
-     * @return task name
+     * @return Task name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Format Task to String array.
+     * Formats Task to String array.
      *
-     * @return Task in String array
+     * @return Task in String array.
      */
     public abstract String[] formatTask();
 
@@ -71,7 +66,7 @@ public abstract class Task {
     }
 
     /**
-     * Print task with format:
+     * Prints task.
      * If task is done, [X] Task1; else, [ ] Task1.
      */
     @Override

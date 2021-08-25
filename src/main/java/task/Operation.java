@@ -2,14 +2,8 @@ package task;
 
 /**
  * The is the Operation class that contains task operations.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public enum Operation {
-
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
@@ -27,9 +21,9 @@ public enum Operation {
     }
 
     /**
-     * Get value of operation.
+     * Returns value of operation.
      *
-     * @return operation value
+     * @return Operation value.
      */
     public String getValue() {
         return value;

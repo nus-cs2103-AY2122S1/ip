@@ -5,12 +5,7 @@ import java.util.Scanner;
 
 /**
  * The is the Ui class for UI display.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public class Ui {
     private static final String HORIZONTAL_LINE =
         "    ____________________________________________________________";
@@ -18,14 +13,14 @@ public class Ui {
     private final Scanner scanner;
 
     /**
-     * This is constructor method of Ui.
+     * Constructs a Ui object.
      */
     public Ui() {
         scanner = new Scanner(System.in);
     }
 
     /**
-     * Display logo.
+     * Displays logo.
      */
     public void logo() {
         String logo = " ____        _        \n"
@@ -37,7 +32,7 @@ public class Ui {
     }
 
     /**
-     * Display greet.
+     * Displays greet.
      */
     public void greet() {
         System.out.println(HORIZONTAL_LINE);
@@ -47,7 +42,7 @@ public class Ui {
     }
 
     /**
-     * Display command.
+     * Displays command.
      */
     public void echo(String command) {
         System.out.println(HORIZONTAL_LINE);
@@ -56,7 +51,7 @@ public class Ui {
     }
 
     /**
-     * Display messages.
+     * Displays messages.
      */
     public void show(String... messages) {
         System.out.println(HORIZONTAL_LINE);
@@ -67,7 +62,7 @@ public class Ui {
     }
 
     /**
-     * Display bye.
+     * Displays bye.
      */
     public void bye() {
         System.out.println(HORIZONTAL_LINE);
@@ -76,9 +71,9 @@ public class Ui {
     }
 
     /**
-     * Read one line of command.
+     * Returns one line of command.
      *
-     * @return one line of command
+     * @return One line of commands.
      */
     public String readCommand() {
         return scanner.nextLine();

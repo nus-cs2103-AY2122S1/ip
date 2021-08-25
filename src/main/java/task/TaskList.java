@@ -13,45 +13,42 @@ import java.util.stream.IntStream;
 /**
  * The is the TaskList class that that
  * contains a list of task.
- *
- * @author  HU JIAJUN
- * @version %I%, %G%
- * @since   1.0
  */
-
 public class TaskList {
     private static final String DIR_NAME = "data";
     private static final String FILE_NAME = "duke.txt";
     private final List<Task> tasks;
 
     /**
-     * This is constructor method of TaskList.
+     * Constructs a TaskList object.
      */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
     /**
-     * Add task to TaskList.
+     * Adds task to TaskList.
+     *
+     * @param task Task.
      */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
     /**
-     * Get size of tasks.
+     * Returns size of tasks.
      *
-     * @return tasks size
+     * @return Tasks size.
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * Find task by number.
+     * Returns task by number.
      *
-     * @param number number of task
-     * @return       task by number if exists, else empty
+     * @param number Number of task.
+     * @return Task by number if exists, else empty.
      */
     public Task findTaskByNumber(int number) {
         int index = number - 1;
@@ -62,10 +59,10 @@ public class TaskList {
     }
 
     /**
-     * Complete task by number, start from 1.
+     * Completes task by number, start from 1.
      *
-     * @param number number of task
-     * @throws DukeTaskNumberOutOfBoundsException if task number is out of bounds
+     * @param number Number of task.
+     * @throws DukeTaskNumberOutOfBoundsException If task number is out of bounds.
      */
     public void completeTask(int number) throws DukeTaskNumberOutOfBoundsException {
         int index = number - 1;
@@ -76,10 +73,10 @@ public class TaskList {
     }
 
     /**
-     * Delete task by number, start from 1.
+     * Deletes task by number, start from 1.
      *
-     * @param number number of task
-     * @throws DukeTaskNumberOutOfBoundsException if task number is out of bounds
+     * @param number Number of task.
+     * @throws DukeTaskNumberOutOfBoundsException If task number is out of bounds.
      */
     public Task deleteTask(int number) throws DukeTaskNumberOutOfBoundsException {
         int index = number - 1;
@@ -90,17 +87,14 @@ public class TaskList {
     }
 
     /**
-     * Clear all tasks.
+     * Clears all tasks.
      */
     public void clearTasks() {
         tasks.clear();
     }
 
     /**
-     * Print tasks from TaskList with format:
-     *      1. Task1
-     *      2. Task2
-     *      ...
+     * Prints tasks from TaskList.
      */
     public String[] printTasks() {
         return IntStream.range(0, tasks.size())
@@ -109,7 +103,7 @@ public class TaskList {
     }
 
     /**
-     * Load tasks from file with path: src/data/duke.txt.
+     * Loads tasks from file with path: src/data/duke.txt.
      */
     public void loadTasksFromFile() throws DukeIOException {
         List<String> formattedTasks = FileUtils.loadFile(DIR_NAME, FILE_NAME);
@@ -158,7 +152,7 @@ public class TaskList {
     }
 
     /**
-     * Save tasks to file with path: src/data/duke.txt.
+     * Saves tasks to file with path: src/data/duke.txt.
      */
     public void saveTasksToFile() throws DukeIOException {
         List<String> formattedTasks = tasks.stream()
@@ -171,10 +165,9 @@ public class TaskList {
     }
 
     /**
-     * Print tasks which contains keyword from TaskList with format:
-     *      1. Task1
-     *      2. Task2
-     *      ...
+     * Prints tasks which contains keyword from TaskList.
+     *
+     * @param keyword Keyword of task name.
      */
     public String[] findTasks(String keyword) {
         List<Task> filteredTasks = tasks.stream()
