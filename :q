@@ -2,7 +2,7 @@
 Author: over-fitted <overfitted@gmail.com>
 Date:   Wed Aug 25 01:11:22 2021 +0800
 
-    Separate TaskList, add TaskList saving functionality
+    Separate Duke.TaskList, add Duke.TaskList saving functionality
 
 [33mcommit 0be034baa25c2d104355222ea6568e4dcc7ede61[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
 Author: over-fitted <overfitted@gmail.com>
@@ -56,7 +56,7 @@ Date:   Fri Aug 20 04:26:43 2021 +0800
 Author: over-fitted <overfitted@gmail.com>
 Date:   Fri Aug 20 04:08:26 2021 +0800
 
-    Add Event functionality, fix related event-related bugs
+    Add Duke.Event functionality, fix related event-related bugs
 
 [33mcommit 89c39061057f6d1eb0184c8e36edda231dd14ea5[m
 Author: over-fitted <overfitted@gmail.com>
@@ -68,19 +68,19 @@ Date:   Fri Aug 20 01:50:53 2021 +0800
 Author: over-fitted <overfitted@gmail.com>
 Date:   Fri Aug 20 01:48:12 2021 +0800
 
-    Separate task classes out from Duke, add todo + addcustom functionality
+    Separate task classes out from Duke.Duke, add todo + addcustom functionality
 
 [33mcommit 8064eaacec714568638b2e034d6014f04cdbf29b[m
 Author: over-fitted <overfitted@gmail.com>
 Date:   Fri Aug 20 00:03:21 2021 +0800
 
-    Add Todo, Deadilne and Event subclasses of Task
+    Add Duke.Todo, Deadilne and Duke.Event subclasses of Duke.Task
 
 [33mcommit 0627c7d8e170d334086d807d68e10e91257efbad[m[33m ([m[1;33mtag: Level-3[m[33m)[m
 Author: over-fitted <overfitted@gmail.com>
 Date:   Thu Aug 19 23:45:01 2021 +0800
 
-    Add Task class, add task completion marker and funtionality
+    Add Duke.Task class, add task completion marker and funtionality
 
 [33mcommit 4168c167c60056c209c95cb29c7931dc6e9e5c14[m[33m ([m[1;33mtag: Level-2[m[33m)[m
 Author: over-fitted <overfitted@gmail.com>
@@ -254,10 +254,10 @@ Date:   Wed Aug 14 15:30:37 2019 +0800
 Author: Jeffry Lum <22460123+j-lum@users.noreply.github.com>
 Date:   Mon Aug 12 14:24:27 2019 +0800
 
-    Adapt JavaFX tutorial for Duke
+    Adapt JavaFX tutorial for Duke.Duke
     
-    Rather than to have distinct tutorials building up to a Duke-like
-    application, let's merge the tutorials into Duke's tutorials
+    Rather than to have distinct tutorials building up to a Duke.Duke-like
+    application, let's merge the tutorials into Duke.Duke's tutorials
     to enhance cohesiveness in the course material.
     
     We also merge the gradle/gradleless tutorials into one by providing a
@@ -266,7 +266,7 @@ Date:   Mon Aug 12 14:24:27 2019 +0800
     
     Fix header levels in JavaFX Tutorial 1.
     
-    Change code samples to use Duke.
+    Change code samples to use Duke.Duke.
     
     Add hints on required import statements.
     
@@ -340,7 +340,7 @@ Date:   Mon Aug 5 19:26:04 2019 +0800
 Author: damithc <damith@gmail.com>
 Date:   Mon Aug 5 19:08:53 2019 +0800
 
-    Move Duke.java out of the package
+    Move Duke.Duke.java out of the package
 
 [33mcommit 6bb6b9f6c525f5343fdc6dd3a43a086a11e9708e[m
 Author: damithc <damith@gmail.com>
