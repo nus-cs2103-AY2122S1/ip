@@ -19,18 +19,22 @@ import java.util.stream.Collectors;
 public class Parser {
     public static List<Task> parseSaveFile(List<String> saveFileContents) throws DukeException {
         return saveFileContents.stream().map(task -> {
-            String[] taskInfo = task.split("\\|");
-            String taskType = taskInfo[0];
-            boolean isDone = taskInfo[1].equals("1");
-            String taskDescription = taskInfo[2];
-            switch (taskType) {
-            case "T":
-                return new ToDo(taskDescription, isDone);
-            case "D":
-                return new Deadline(taskDescription, isDone, taskInfo[3]);
-            case "E":
-                return new Event(taskDescription, isDone, taskInfo[3]);
-            default:
+            try {
+                String[] taskInfo = task.split("\\|");
+                String taskType = taskInfo[0];
+                boolean isDone = taskInfo[1].equals("1");
+                String taskDescription = taskInfo[2];
+                switch (taskType) {
+                case "T":
+                    return new ToDo(taskDescription, isDone);
+                case "D":
+                    return new Deadline(taskDescription, isDone, taskInfo[3]);
+                case "E":
+                    return new Event(taskDescription, isDone, taskInfo[3]);
+                default:
+                    throw new DukeException("Your save file is corrupted and has an invalid format.");
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Your save file is corrupted and has an invalid format.");
             }
         }).collect(Collectors.toList());
@@ -49,7 +53,7 @@ public class Parser {
         String[] commandAndArgument = userInput.split(" ", 2);
         String userCommand = commandAndArgument[0];
         if (userCommand.equals("todo") || userCommand.equals("deadline") || userCommand.equals("event")) {
-            if (commandAndArgument.length < 2 || commandAndArgument[1].strip().equals("")) {
+            if (commandAndArgument.length < 2) {
                 throw new DukeException("The description of a task cannot be empty.\n"
                         + "Please input your task in the following manner:\n"
                         + "todo|deadline|event <task_description>");
