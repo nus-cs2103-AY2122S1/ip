@@ -43,4 +43,8 @@ public abstract class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.name;
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
