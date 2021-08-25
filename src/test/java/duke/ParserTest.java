@@ -16,6 +16,7 @@ public class ParserTest {
                 "deadline thing /by 2021-08-25",
                 "event somewhere /at 6pm",
                 "delete 1",
+                "find something"
         };
 
         for (String command : commands) {
@@ -117,5 +118,22 @@ public class ParserTest {
                 assertEquals(expected[i], matches[i]);
             }
         } catch (InvalidFormatException ignored) {}
+    }
+
+    @Test
+    void validateRegexAndMatch_validInputFind_success() {
+        String command = "find something";
+        String regex = "^find (.+)";
+        String validFormat = "find {search term}";
+        String[] expected = {"find something", "something"};
+
+        assertDoesNotThrow(() -> Parser.validateRegexAndMatch(command, regex, validFormat));
+        try {
+            String[] matches = Parser.validateRegexAndMatch(command, regex, validFormat);
+            for (int i = 0; i < expected.length; i++) {
+                assertEquals(expected[i], matches[i]);
+            }
+        } catch (InvalidFormatException ignored) {
+        }
     }
 }

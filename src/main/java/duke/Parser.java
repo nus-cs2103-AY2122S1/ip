@@ -23,6 +23,8 @@ public class Parser {
             return tasks -> tasks.event(command);
         } else if (command.matches("^delete -?[0-9]+$")) {
             return tasks -> tasks.delete(command);
+        } else if (command.matches("^find( .*)?")) {
+            return tasks -> tasks.find(command);
         } else {
             throw new UnknownCommandException();
         }
