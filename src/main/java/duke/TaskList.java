@@ -1,3 +1,10 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.exception.IndexMismatchException;
+import duke.exception.IndexOutOfBoundException;
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -40,7 +47,7 @@ public class TaskList {
         if (item > this.taskList.size()) {
             throw new IndexOutOfBoundException();
         }
-        if (this.taskList.get(item - 1).isDone) {
+        if (this.taskList.get(item - 1).isDone()) {
             throw new DukeException("☹ OOPS!!! The task is already done!");
         }
         Ui.taskDoneMessage(this, item);

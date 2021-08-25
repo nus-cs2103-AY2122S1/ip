@@ -1,7 +1,9 @@
+package duke.task;
+
 import java.time.LocalDate;
 
 public class Task {
-    enum TaskType {
+    public enum TaskType {
         TODO, DEADLINE, EVENT
     }
 
@@ -20,6 +22,10 @@ public class Task {
     public String taskToLine() {
         String isDone = this.isDone ? "1" : "0";
         return String.format(" | %s | %s", isDone, this.description);
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public LocalDate getDate() {
