@@ -37,4 +37,13 @@ public class ToDo extends Task {
     public String getSaveFormat() {
         return "T|" + super.getSaveFormat() + '\n';
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof ToDo) {
+            return super.equals(other);
+        } else {
+            return false;
+        }
+    }
 }
