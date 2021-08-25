@@ -12,7 +12,7 @@ public class Parser {
      * @throws InvalidArgumentException Invalid or no arguments given
      * @throws TooManyArgumentsException Too many /by or /at connectors
      */
-    public void parseCommand(String userInput, TaskList tasks, Ui ui, Storage storage ) throws InvalidArgumentException,
+    public void parseCommand(String userInput, TaskList tasks, Ui ui) throws InvalidArgumentException,
             TooManyArgumentsException {
         List<String> userInputList = new LinkedList<>(Arrays.asList(userInput.split(" ")));
         BotCommand command = BotCommand.valueOf(userInputList.get(0).toUpperCase());

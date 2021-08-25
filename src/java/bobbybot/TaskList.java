@@ -3,35 +3,18 @@ package bobbybot;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private List<Task> tasks = new ArrayList<>();
+    private final List<Task> tasks;
     private final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
     /**
-     * Adds task
-     * @param task
-     */
-    public void add(Task task) {
-        tasks.add(task);
-    }
-
-    /**
-     * Removes task
-     * @param task
-     */
-    public void remove(Task task) {
-        tasks.remove(task);
-    }
-
-    /**
-     * Getter for task, index starts from 0
-     * @param i
+     * Getter for task
+     * @param i task number to get, index starts from 0
      * @return task chosen
      */
     public Task getTask(int i) {
@@ -40,23 +23,15 @@ public class TaskList {
 
     /**
      * Getter for List of tasks
-     * @return
+     * @return List of task
      */
     public List<Task> getTasks() {
         return tasks;
     }
 
     /**
-     * Getter for size of task list
-     * @return
-     */
-    public int size() {
-        return tasks.size();
-    }
-
-    /**
      * Mark a task as done
-     * @param taskNo bobbybot.Task Number (starting from index 1)
+     * @param taskNo bobbybot Task Number (starting from index 1)
      */
     public void markAsDone(int taskNo) {
         Task taskCompleted = getTask(taskNo - 1);
@@ -122,6 +97,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all task in TaskList
+     */
     public void printList() {
         int i = 1;
         System.out.println("Here are the tasks in your list:");

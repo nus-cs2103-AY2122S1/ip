@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-/** Represents a bobbybot.Task that should be completed by a specified Date and Time
+/** Represents a bobbybot. Task that should be completed by a specified Date and Time
  *  @author mokdarren
  */
 public class Deadline extends Task{
@@ -24,7 +24,7 @@ public class Deadline extends Task{
      * Overloaded constructor used to load task from string
      * @param description description of task
      * @param by date and time that the task should be completed by
-     * @param isDone
+     * @param isDone boolean flag if task is done
      */
     public Deadline(String description, String by, boolean isDone, DateTimeFormatter formatter) {
         super(description);

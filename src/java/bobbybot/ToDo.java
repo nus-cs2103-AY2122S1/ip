@@ -1,7 +1,7 @@
 package bobbybot;
 
 /** Represents a task without any time restrictions
- *  @auther mokdarren
+ *  @author mokdarren
  */
 public class ToDo extends Task{
 
@@ -15,7 +15,7 @@ public class ToDo extends Task{
 
     /**
      * Overloaded constructor to specify if completed
-     * @param isDone
+     * @param isDone boolean flag if task is done
      * @param description description of task
      */
     public ToDo(String description, boolean isDone) {

@@ -19,8 +19,8 @@ public class Event extends Task {
     /**
      * Overloaded constructor to specify if completed
      * @param description description of task
-     * @param at time period of bobbybot.Event (start-end)
-     * @param isDone
+     * @param at time period of Event (start-end)
+     * @param isDone boolean flag if task is done
      */
     public Event(String description, String at, boolean isDone)  {
         super(description);

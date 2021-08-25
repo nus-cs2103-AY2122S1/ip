@@ -10,6 +10,9 @@ public class BobbyBot {
     private TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructor to initialise classes
+     */
     public BobbyBot()  {
         ui = new Ui();
         ui.showWelcome();
@@ -21,6 +24,9 @@ public class BobbyBot {
         }
     }
 
+    /**
+     * Start running the chatbot
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser();
@@ -28,7 +34,7 @@ public class BobbyBot {
             String userInput = sc.nextLine();
             ui.showLine();
             try {
-                parser.parseCommand(userInput, tasks , ui, storage);
+                parser.parseCommand(userInput, tasks , ui);
                 storage.save(tasks);
             } catch (IllegalArgumentException e) {
                 System.out.println("OOPS!!! I'm sorry but I don't know what that mean :-(");
