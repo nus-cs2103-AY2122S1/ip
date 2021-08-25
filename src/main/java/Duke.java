@@ -2,10 +2,8 @@ import java.util.Scanner;
 import java.lang.StringBuilder;
 
 public class Duke {
-    private static String WELCOME_TEXT = "Hey there I'm Duke!\n" + "How can I help you today?";
-    private static String BYE_TEXT = "Bye! Hope to see you again!";
-
     private Scanner in;
+    private Ui ui;
     private TaskList taskList;
     private Storage storage;
     private boolean shouldExit;
@@ -17,12 +15,10 @@ public class Duke {
     Duke(Scanner in, String filePath) throws Exception {
         this.in = in;
         this.shouldExit = false;
+        this.ui = new Ui();
         this.storage = new Storage(filePath);
+        // TODO: throw error if unable to create file?
         this.taskList = new TaskList(storage.loadTasks());
-    }
-
-    private void greet() {
-        printMessage(WELCOME_TEXT);
     }
 
     private void handleInput() throws Exception {
@@ -46,7 +42,6 @@ public class Duke {
                 }
 
                 this.shouldExit = true;
-                printMessage(BYE_TEXT);
                 break;
             }
             case LIST: {
@@ -58,7 +53,7 @@ public class Duke {
                 int numTasks = this.taskList.size();
 
                 if (numTasks == 0) {
-                    printMessage("No tasks saved");
+                    ui.printMessage("No tasks saved");
                 } else {
                     for (int i = 0; i < numTasks; i++) {
                         Task item = this.taskList.getTask(i);
@@ -70,7 +65,7 @@ public class Duke {
                         }
                     }
 
-                    printMessage(builder.toString());
+                    ui.printMessage(builder.toString());
                 }
 
                 break;
@@ -92,7 +87,7 @@ public class Duke {
                 }
 
                 this.storage.saveTasks(this.taskList);
-                printMessage("Marking task as completed:\n    " + task.toString());
+                ui.printMessage("Marking task as completed:\n    " + task.toString());
                 break;
             }
             case DELETE: {
@@ -111,7 +106,7 @@ public class Duke {
                 }
 
                 this.storage.saveTasks(this.taskList);
-                printMessage("Removed the following task:\n    " + task.toString() + "\n" + "You now have "
+                ui.printMessage("Removed the following task:\n    " + task.toString() + "\n" + "You now have "
                         + this.taskList.size() + " tasks in your list.");
                 break;
             }
@@ -143,7 +138,7 @@ public class Duke {
     }
 
     private void printTaskAddedMessage(Task task) {
-        printMessage("Added the following task:\n    " + task.toString() + "\n" + "You now have " + this.taskList.size()
+        ui.printMessage("Added the following task:\n    " + task.toString() + "\n" + "You now have " + this.taskList.size()
                 + " tasks in your list.");
     }
 
@@ -151,9 +146,19 @@ public class Duke {
         return this.shouldExit;
     }
 
-    private static void printMessage(String string) {
-        System.out.print("------------------------------------------------\n" + string + "\n"
-                + "------------------------------------------------\n\n");
+    public void run() {
+        ui.printGreeting();
+
+        while (!shouldExit()) {
+            try {
+                handleInput();
+            } catch (Exception e) {
+                // TODO: custom Duke exceptions?
+                ui.printMessage("Error: " + e.getMessage());
+            }
+        }
+
+        ui.printGoodbye();
     }
 
     public static void main(String[] args) {
@@ -164,21 +169,13 @@ public class Duke {
         try {
             duke = new Duke(input, filePath);
         } catch (Exception e) {
-            printMessage("Unable to initialize data file");
+            // TODO: figure out static/non-static Ui class
+            System.out.println("Unable to initialize data file");
             input.close();
             return;
         }
 
-        duke.greet();
-        while (!duke.shouldExit()) {
-            try {
-                duke.handleInput();
-            } catch (Exception e) {
-                // TODO: custom Duke exceptions?
-                printMessage("Error: " + e.getMessage());
-            }
-        }
-
+        duke.run();
         input.close();
     }
 }
