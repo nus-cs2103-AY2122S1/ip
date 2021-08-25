@@ -20,7 +20,9 @@ public class Parser {
     private final String ERR_EVENT_FORMAT = "Error in command usage. Usage: event <name> /at dd/MM/yyyy HHmm";
     private final String ERR_DONE_FORMAT = "Please provide a valid number! Usage: done <num>";
     private final String ERR_DELETE_FORMAT = "Please provide a valid number! Usage: delete <num>";
+    private final String ERR_FIND_FORMAT = "Please provide a query! Usage: find <query>";
     private final String ERR_MAX_TASKS = "Sorry! You have reached maximum Task capacity.";
+    private final String ERR_NO_MATCHES = "No tasks match given query.";
     private final int MAX_TASKS = 100;
     private final Map<String, BiFunction<String, TaskList, String>> commandsMap = Map.of(
         "list", (args, tasks) -> listTasks(tasks),
@@ -28,7 +30,8 @@ public class Parser {
         "todo", (args, tasks) -> addTodo(args, tasks),
         "deadline", (args, tasks) -> addDeadline(args, tasks),
         "event", (args, tasks) -> addEvent(args, tasks),
-        "delete", (args, tasks) -> deleteTask(args, tasks)
+        "delete", (args, tasks) -> deleteTask(args, tasks),
+        "find", (args, tasks) -> findTasks(args, tasks)
     );
 
     /**
@@ -51,6 +54,20 @@ public class Parser {
         return MSG_TASK_ADDED + "\n"
                 + "   " + tasks.get(tasks.size() - 1).toString() + "\n"
                 + String.format(MSG_TASK_COUNT, tasks.size());
+    }
+
+    private String findTasks(String args, TaskList tasks) {
+        if (tasks.size() == 0) {
+            return ERR_NO_TASKS;
+        }
+        if (args.equals("")) {
+            return ERR_FIND_FORMAT;
+        }
+        String matchingTasks = tasks.getMatches(args);
+        if (matchingTasks.equals("")) {
+            return ERR_NO_MATCHES;
+        }
+        return matchingTasks;
     }
 
     private String addTodo(String args, TaskList tasks) {
