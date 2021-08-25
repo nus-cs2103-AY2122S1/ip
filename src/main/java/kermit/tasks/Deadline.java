@@ -1,5 +1,6 @@
+package kermit.tasks;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Deadline extends DateDependentTask {
     public Deadline(String description, LocalDate by) {
@@ -10,7 +11,7 @@ public class Deadline extends DateDependentTask {
         super(description, by, isCompleted);
     }
 
-    protected String getShortForm() {
+    public String getShortForm() {
         return "D";
     }
 

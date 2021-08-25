@@ -1,4 +1,6 @@
-public class ToDos extends Task{
+package kermit.tasks;
+
+public class ToDos extends Task {
     public ToDos(String description) {
         super(description);
     }

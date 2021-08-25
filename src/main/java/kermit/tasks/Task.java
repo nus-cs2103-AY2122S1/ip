@@ -1,3 +1,5 @@
+package kermit.tasks;
+
 /**
  * Encapsulates a task to be completed
  */
@@ -6,7 +8,7 @@ public abstract class Task {
     private boolean isCompleted = false;
 
     /**
-     * Task constructor
+     * kermit.command.Task constructor
      *
      * @param description Name of task.
      */
@@ -34,7 +36,7 @@ public abstract class Task {
         return this.description;
     }
 
-    abstract String getShortForm();
+    public abstract String getShortForm();
     /**
      * @return String representation of task.
      */

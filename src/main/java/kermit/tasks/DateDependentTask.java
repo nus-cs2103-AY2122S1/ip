@@ -1,3 +1,5 @@
+package kermit.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +16,7 @@ public abstract class DateDependentTask extends Task {
         this.date = date;
     }
 
-    protected String getDate() {
+    public String getDate() {
         return this.date.toString();
     }
 
