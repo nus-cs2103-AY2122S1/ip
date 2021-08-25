@@ -1,3 +1,0 @@
-T, 0, Go run
-E, 0, Dry run, Today
-D, 0, Homework, next week
