@@ -1,7 +1,7 @@
-package storage;
+package duke.storage;
 
-import exceptions.DukeException;
-import tasks.*;
+import duke.exceptions.DukeException;
+import duke.tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

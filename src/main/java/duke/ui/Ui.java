@@ -1,4 +1,4 @@
-package ui;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -7,7 +7,7 @@ public class Ui {
     private final Scanner scanner = new Scanner(System.in);
 
     public void showLoadingError() {
-        String message = "Oops, looks like there is a problem loading Duke";
+        String message = "Oops, looks like there is a problem loading duke.Duke";
         System.out.println(message);
     }
 
@@ -21,7 +21,7 @@ public class Ui {
                 """;
         System.out.println(LINE);
         System.out.println(logo);
-        System.out.println("Hi, I'm Duke, your Personal Assistant Chatbot\n" +
+        System.out.println("Hi, I'm duke.Duke, your Personal Assistant Chatbot\n" +
                 "What can I do for you today?");
         System.out.println(LINE);
     }
