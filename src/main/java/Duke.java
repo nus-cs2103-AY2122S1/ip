@@ -54,14 +54,13 @@ public class Duke {
                         int index = desc.indexOf("at:");
                         int n = desc.length();
                         String date = desc.substring(index + 4, n-1);
-                        LocalDate inputDate = LocalDate.parse(date);
-                        currTask = new Event(desc.substring(0,index), done, inputDate);
+                        currTask = new Event(desc.substring(0,index), done, date);
                     } else if(tasktype == 'D') {
                         int index = desc.indexOf("by:");
                         int n = desc.length();
                         String date = desc.substring(index + 4, n-1);
-                        LocalDate inputDate = LocalDate.parse(date);
-                        currTask = new Deadline(desc.substring(0, index), done, inputDate);
+
+                        currTask = new Deadline(desc.substring(0, index), done, date);
                     }
                     tasks.add(currTask);
                 }
@@ -161,8 +160,7 @@ public class Duke {
                 //if remaining string is whitespace or empty
                 throw new DukeException("deadline needs to have dates !");
             }
-            LocalDate inputDate = LocalDate.parse(date);
-            return new Deadline(task, false, inputDate);
+            return new Deadline(task, false, date);
         } else if(userInput.startsWith("event")) {
             int start_id = userInput.indexOf("event");
             int task_id = userInput.indexOf("/at");
@@ -172,8 +170,7 @@ public class Duke {
             if(task_id == -1) {
                 throw new DukeException("You need to specify at using /at !");
             }
-            LocalDate inputDate = LocalDate.parse(date.trim());
-            return new Event(task, false, inputDate);
+            return new Event(task, false, date);
         } else {
             throw new DukeException("I don't understand what you are talking about !");
         }
