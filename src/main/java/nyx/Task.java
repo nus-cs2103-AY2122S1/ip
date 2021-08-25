@@ -19,7 +19,7 @@ public abstract class Task {
         return isDone ? 1 : 0;
     }
 
-    public String getContent() {
+    protected String getContent() {
         return this.content;
     }
 
@@ -27,7 +27,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
