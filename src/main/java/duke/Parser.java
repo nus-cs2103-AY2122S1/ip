@@ -2,6 +2,7 @@ package duke;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.MissingDescriptionException;
+import duke.exceptions.MissingKeywordException;
 import duke.exceptions.MissingTaskNumberException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -40,6 +41,23 @@ public class Parser {
         } else {
             String number = strArr[1];
             return Integer.parseInt(number);
+        }
+    }
+
+    /**
+     * Takes in user input and returns the keyword after 'find' command
+     *
+     * @param input
+     * @return Keyword after 'find' command
+     * @throws MissingKeywordException
+     */
+    public static String getKeyword(String input) throws MissingKeywordException{
+        String[] strArr = input.split(" ", 2);
+        if (strArr.length < 2) {
+            Ui.warningMissingKeyword();
+            throw new MissingKeywordException();
+        } else {
+            return strArr[1];
         }
     }
 
@@ -122,6 +140,9 @@ public class Parser {
                 int taskNum = Parser.taskNumber(action);
                 Storage.markAsDeleted(file, taskList.getIndividualTask(taskNum - 1)); //todo
                 taskList.deleteTask(taskNum); //todo
+            } else if (Parser.getCommand(action).equals("find")) { // find tasks
+                String keyword = getKeyword(action);
+                taskList.findTasks(keyword);
             } else { // if there is an invalid input
                 Ui.showInvalidInputMessage();
                 throw new IllegalArgumentException();
