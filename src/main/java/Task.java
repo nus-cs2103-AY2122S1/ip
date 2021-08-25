@@ -20,6 +20,9 @@ public class Task {
         this.completed = false;
     }
 
+    /**
+     * Mark a task as completed.
+     */
     public void markCompleted() {
         completed = true;
     }

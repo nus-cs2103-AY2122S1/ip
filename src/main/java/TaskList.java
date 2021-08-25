@@ -1,14 +1,19 @@
 import java.util.ArrayList;
-
+/**
+ * Encapsulates a TaskList. Stores an array of tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> taskArray;
 
+    /**
+     * Constructor for a TaskList.
+     */
     public TaskList() {
         taskArray = new ArrayList<Task>();
     }
 
     /**
-     * Add a task to the task list
+     * Add a task to the task list.
      *
      * @param t Task to be added
      * @return String notifying the task added.
@@ -25,7 +30,7 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as completed.
+     * Mark a task as completed.
      *
      * @param index Numerical index of task completed.
      * @return String reporting that task is marked done.
@@ -35,7 +40,6 @@ public class TaskList {
         if (invalidID(index)) {
             throw new DukeException("Task ID out of range!");
         }
-
         Task t = taskArray.get(index);
         t.markCompleted();
         return new String[] {
@@ -55,7 +59,6 @@ public class TaskList {
         if (invalidID(index)) {
             throw new DukeException("Task ID out of range!");
         }
-
         Task t = taskArray.remove(index);
         return new String[] {
                 "Noted. I've removed this task:",
@@ -81,7 +84,7 @@ public class TaskList {
     }
 
     /**
-     * Checks if an ID is an invalid index for the task list.
+     * Check if an ID is an invalid index for the task list.
      *
      * @param ID Integer index of the task.
      * @return Boolean representing validity of ID.

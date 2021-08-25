@@ -8,25 +8,32 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for a Duke program.
+     * 
+     * @param filePath Relative path of cache as string.
+     */
     public Duke(String filePath) {
         try {
             storage = new Storage(filePath);
             tasks = storage.load();
-            // load should read and initialize cache
             ui = new Ui(tasks, storage);
         } catch (DukeException e){
             Ui.printMsg(new String[] {e.getMessage()});
         }
     }    
 
+    /**
+     * Run a Duke program.
+     */
     public void run() {
         ui.run();
     }
 
     /**
-     * Main execution when Duke is run.
+     * Create and run a duke program.
      *
-     * @param args Will not be used
+     * @param args Will not be used.
      */
     public static void main(String[] args) {
         new Duke(CACHE_PATH).run();

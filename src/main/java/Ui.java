@@ -1,24 +1,38 @@
 import java.util.Scanner;
-
+/**
+ * Encapsulates the user interface. Scans for input and responds to user.
+ */
 public class Ui {
 
-    public static final String[] WELCOME_MSG = new String[] {"What's up, I'm duke!"};
+    public static final String[] WELCOME_MSG = new String[] {
+        "What's up, I'm duke!"
+    };
     public static final String[] BYE_MSG = new String[] {"Bye mate!"};
     private final TaskList tasks;
     private final Storage storage;
 
+    /**
+     * Constructor for a Ui
+     * 
+     * @param tasks TaskList to record tasks.
+     * @param storage Storage to store tasks.
+     */
     public Ui(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
     }
 
+    /**
+     * Run the Ui and read input from the user.
+     */
     public void run() {
+        // Print a welcome message
         printMsg(WELCOME_MSG);
-
+        
+        // Let user input commands and take actions accordingly.
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(tasks);
         boolean exit = false;
-
         while(!exit) {
             try {
                 if (sc.hasNextLine()) {
@@ -37,7 +51,6 @@ public class Ui {
             }
 
         }
-
         sc.close();
     }
 
