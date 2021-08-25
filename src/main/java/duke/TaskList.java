@@ -2,19 +2,41 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList is the wrapper around ArrayList to store the tasks created.
+ *
+ * @author meerian
+ */
 public class TaskList {
     private final ArrayList<Task> list = new ArrayList<>();
 
+    /**
+     * Adds the task into the list.
+     *
+     * @param task task provided to add to the list.
+     */
     public void add(Task task) {
         list.add(task);
         System.out.println("added: " + task);
         System.out.println("Now you have " + list.size() + " tasks in the list");
     }
 
+    /**
+     * Adds the task into the list without print statements.
+     *
+     * @param task task provided to add to the list.
+     */
     public void read(Task task) {
         list.add(task);
     }
 
+    /**
+     * Fetches the task specified by the user.
+     *
+     * @param pos index of the task the user wants.
+     * @return the task in the corresponding index.
+     * @throws DukeException when no task is found at the index.
+     */
     public Task get(int pos) throws DukeException {
         if (pos < 0 || pos > list.size()) {
             throw new DukeException("☹ OOPS!!! No such task found!");
@@ -22,10 +44,20 @@ public class TaskList {
         return list.get(pos);
     }
 
+    /**
+     * Returns the size of the current task list.
+     *
+     * @return the size of the current task list.
+     */
     public int size() {
         return list.size();
     }
 
+    /**
+     * Prints out a visual representation of the current task list
+     * in a legible manner.
+     *
+     */
     public void display() {
         for (int i = 0; i < list.size(); i++) {
             String cur = list.get(i).toString();
@@ -34,6 +66,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task entry from the list.
+     *
+     * @param pos index of the task the user wants to delete.
+     * @throws DukeException when no task is found at the index.
+     */
     public void delete(int pos) throws DukeException {
         if (pos - 1 < 0 || pos > list.size()) {
             throw new DukeException("☹ OOPS!!! No such task found!");

@@ -5,13 +5,32 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Storage is a class that deals with loading and saving tasks from the
+ * provided file.
+ *
+ * @author meerian
+ */
 public class Storage {
+    /**
+     * Represents the file to read/write the TaskList to.
+     */
     File taskList;
 
+    /**
+     * Creates a Storage with the provided file.
+     *
+     * @param taskList The deadline's description.
+     */
     public Storage(File taskList) {
         this.taskList = taskList;
     }
 
+    /**
+     * Writes the provided TaskList into the file.
+     *
+     * @param list the provided task list to write.
+     */
     public void write(TaskList list) {
         try {
             FileWriter writer = new FileWriter(taskList);
@@ -30,6 +49,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the provided file and interpreting it into a TaskList.
+     *
+     * @param list the provided task list to rebuild.
+     */
     public void read(TaskList list) {
         try {
             Scanner scanner = new Scanner(taskList);

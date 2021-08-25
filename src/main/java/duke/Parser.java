@@ -3,12 +3,27 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parser is a static class that interprets the users inputs.
+ *
+ * @author meerian
+ */
 public class Parser {
+    /**
+     * Represents the DateValidators the parser uses to interpret users inputs.
+     */
     private static final DateValidator ISOLocalDateValidator =
             new DateValidator(DateTimeFormatter.ISO_LOCAL_DATE);
     private static final DateValidator LocalDateValidator =
             new DateValidator(DateTimeFormatter.ofPattern("MMM dd yyyy"));
 
+    /**
+     * Interpret what task the user is trying to create.
+     *
+     * @param str the description of the task.
+     * @param check used to verify what task to create.
+     * @return the relevant task from the strings provided.
+     */
     public static Task check(String str, String check) throws DukeException {
         int partition = str.indexOf(check);
         if (partition < 0 || partition + check.length() > str.length()) {
@@ -50,6 +65,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Interpret the lines in the save file and recreate the correct tasks.
+     *
+     * @param string the description of the task to recreate.
+     * @return the relevant task from the string provided.
+     */
     public static Task read(String string) throws DukeException {
         Task task;
         String taskType = string.substring(0, 3);
