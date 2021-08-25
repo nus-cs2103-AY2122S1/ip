@@ -15,6 +15,7 @@ import java.util.stream.Stream;
  */
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
+
     private final Consumer<String> loadDataAction = s -> {
         String[] loadedLine = s.split(",");
         char typeOfTask = loadedLine[0].charAt(0);

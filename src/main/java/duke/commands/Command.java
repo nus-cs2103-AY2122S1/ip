@@ -32,6 +32,7 @@ public abstract class Command {
     public boolean isExitCommand() {
         return isExit;
     }
+
     private void setExitTrue() {
         isExit = true;
     }
@@ -53,6 +54,7 @@ public abstract class Command {
             super.setExitTrue();
         }
     }
+
 
     /**
      * The command indicating that the user wants to list all the tasks within the
@@ -232,4 +234,5 @@ public abstract class Command {
             ui.showTaskDeletedInteraction(taskToDelete, tasks);
         }
     }
+
 }

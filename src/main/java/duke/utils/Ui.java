@@ -101,4 +101,5 @@ public class Ui {
     public void showError(DukeException e) {
         System.out.println(e.getMessage());
     }
+
 }
