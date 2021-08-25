@@ -1,11 +1,8 @@
 package duke.logic;
 
-import duke.DukeException;
-import duke.Ui;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.TasksEnum;
-
+/**
+ * The enums of the commands available. Also contains the help messages of each command.
+ */
 public enum LCommandsEnum {
     DELETE() {
         @Override
@@ -15,16 +12,6 @@ public enum LCommandsEnum {
                     "This will delete the first task in the list.";
         }
 
-        /**
-         * Runs the delete command.
-         *
-         * @param taskNumber The task number to be deleted. This is the number that the user sees.
-         * @param taskList The task list that the user is using.
-         * @return the deleted task.
-         */
-        public Task run(int taskNumber, TaskList taskList) {
-            return taskList.removeTask(taskNumber);
-        }
     }, HELP() {
         @Override
         public String helpMessage() {
@@ -56,35 +43,11 @@ public enum LCommandsEnum {
                     "This will mark the first task as done.";
         }
 
-        /**
-         * Runs the done command.
-         *
-         * @param taskNumber The task number to be marked as done. This is the number that the user sees.
-         * @param taskList The task list that the user is using.
-         * @return The task that is marked as done.
-         */
-        public Task run(int taskNumber, TaskList taskList) {
-            if (!taskList.markAsDone(taskNumber)) { // task already marked as done
-                throw new DukeException("You have already marked this task (%s) as done",
-                        taskList.getTask(taskNumber));
-            }
-            return taskList.getTask(taskNumber);
-        }
     }, UPCOMING() {
         @Override
         public String helpMessage() {
             return "Usage: upcoming\n" +
                     "This will display all the upcoming tasks, in chronological order.";
-        }
-
-        /**
-         * Runs the upcoming command.
-         *
-         * @param taskList The task list that the user is using.
-         * @param ui The user interface that the user is using.
-         */
-        public void run(TaskList taskList, Ui ui) {
-            ui.printUpcomingTasks(taskList.getTasks());
         }
     }, TODO() {
         @Override
@@ -126,22 +89,4 @@ public enum LCommandsEnum {
      */
     public abstract String helpMessage();
 
-
-
-    /**
-     * Attempts to add the task to the tasklist based on the user command.
-     * @param tasksEnum the action of either todo, event or deadline
-     * @param otherInput the rest of the string without the action
-     * @param taskList the list of task to be added to
-     * @return the task that is added.
-     */
-    private static Task addTask(TasksEnum tasksEnum, String otherInput, TaskList taskList) {
-        boolean addTaskIsSuccessful;
-        Task result = tasksEnum.getTask(otherInput);
-        addTaskIsSuccessful = taskList.addTask(result);
-        if (!addTaskIsSuccessful) {
-            throw new DukeException("Unable to add task. List is full. Consider deleting some tasks");
-        }
-        return result;
-    }
 }
