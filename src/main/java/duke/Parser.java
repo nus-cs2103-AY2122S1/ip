@@ -8,6 +8,7 @@ import duke.commands.TodoCommand;
 import duke.commands.ListAllCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
