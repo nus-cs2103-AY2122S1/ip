@@ -6,6 +6,9 @@ import duke.task.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Represents a parser that interprets the user's inputs into commands.
+ */
 public class Parser {
     private static final DateTimeFormatter DATE_TIME_PARSE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
@@ -15,6 +18,13 @@ public class Parser {
     static String todoMsg = "Got it. I've added this duke.task:";
     static String deleteMsg = "Noted. I've removed this duke.task:";
 
+    /**
+     * A method to convert the user's input into a command.
+     *
+     * @param userInput the user's input given as a string
+     * @param taskList  the list containing the tasks
+     * @throws DukeException if the inputs are not expected
+     */
     public static void parse(String userInput, TaskList taskList) throws DukeException {
         String[] tokens = userInput.split("\\s+", 2);
         String command = tokens[0];
