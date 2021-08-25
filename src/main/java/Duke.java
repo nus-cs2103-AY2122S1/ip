@@ -1,5 +1,6 @@
 import task.*;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Duke {
@@ -23,16 +24,20 @@ public class Duke {
         this.informTaskAdded(task);
     }
 
-    public void addDeadline(String description, String by) {
+    public void addDeadline(String description, String by) throws DateTimeParseException {
         Task task = new Deadline(description, by);
         this.taskList.addTask(task);
         this.informTaskAdded(task);
     }
 
-    public void addEvent(String description, String at) {
-        Task task = new Event(description, at);
-        this.taskList.addTask(task);
-        this.informTaskAdded(task);
+    public void addEvent(String description, String at) throws DateTimeParseException {
+        try {
+            Task task = new Event(description, at);
+            this.taskList.addTask(task);
+            this.informTaskAdded(task);
+        } catch (DateTimeParseException e) {
+            this.echo("Invalid date format");
+        }
     }
 
     public void printList() {
@@ -117,6 +122,8 @@ public class Duke {
                 }
             } catch (DukeException e) {
                 this.echo(e.getMessage() + "\n");
+            } catch (DateTimeParseException e) {
+                this.echo("Invalid date format (must be in yyyy-mm-dd). Unable to add task.");
             }
         }
     }
