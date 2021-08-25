@@ -1,7 +1,9 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
     public static void main(String[] args) {
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -16,7 +18,9 @@ public class Duke {
         try {
             Scanner sc = new Scanner(System.in);
             ArrayList<Task> list = new ArrayList<>();
+            DataStorage storage = new DataStorage("/data/duke.txt", list);
             System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+            list = storage.loadData();
             while (sc.hasNext()) {
                 String s = sc.nextLine();
                 if (s.equals("bye")) {
@@ -28,17 +32,26 @@ public class Duke {
                     int num = getNum(s, list.size());
                     if (num != -1) {
                         done(list, num);
+                        storage.updateData(list);
                     }
                 } else if (s.contains("todo")) {
+                    // edit txt file
                     todo(s, list);
+                    storage.updateData(list);
                 } else if (s.contains("deadline")) {
+                    // edit txt file
                     deadline(s, list);
+                    storage.updateData(list);
                 } else if (s.contains("event")) {
+                    // edit txt file
                     event(s, list);
+                    storage.updateData(list);
                 } else if (s.contains("delete")) {
+                    // edit txt file
                     int num = getNum(s, list.size());
                     if (num != -1) {
                         delete(list, num);
+                        storage.updateData(list);
                     }
                 } else {
                     invalidEntry();
@@ -47,11 +60,13 @@ public class Duke {
             sc.close();
         } catch (DukeException e) {
             e.printError();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
 
-//    private static void echo(String s) {
+    //    private static void echo(String s) {
 //        System.out.println("added: " + s);
 //    }
     private static void invalidEntry() throws DukeInvalidException {
