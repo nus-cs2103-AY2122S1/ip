@@ -98,19 +98,29 @@ public class Parser {
         //System.out.println(taskDone);
     }
 
-    public static void deleteOutput(String in, TaskList tasklist) {
+    /**
+     * Deletes the given task
+     * @param in task to be marked as deleted
+     * @param taskList
+     */
+    public static void deleteOutput(String in, TaskList taskList) {
         if (in.length() < 8) {
             System.out.println("Invalid Input for delete command");
         } else {
             try {
                 int taskDeleted = parseInt(in.substring(7));
-                tasklist.deleteTask(taskDeleted);
+                taskList.deleteTask(taskDeleted);
             } catch (NumberFormatException e) {
                 System.out.println("Invalid Input for delete command");
             }
         }
     }
 
+    /**
+     * Adds the given input as a todo task to the list
+     * @param in todo task to be added
+     * @param taskList
+     */
     public static void toDoOutput(String in, TaskList taskList) {
         if (in.length() == 4) {
             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -119,6 +129,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Adds the given input as a event task to the list
+     * @param in event task to be added
+     * @param taskList
+     */
     public static void eventOutput(String in, TaskList taskList) {
         int i = in.indexOf("/");
         if (i < 0) {
@@ -134,14 +149,19 @@ public class Parser {
         }
     }
 
-    public static void deadlineOutput(String in, TaskList tasklist) {
+    /**
+     * Adds the given input as a deadline task to the list
+     * @param in deadline task to be added
+     * @param taskList
+     */
+    public static void deadlineOutput(String in, TaskList taskList) {
         int i = in.indexOf("/");
         if (i < 0) {
             System.out.println("Time not detected. Please try again");
         } else {
             try {
                 if (isValid(in.substring(i + 1, i + 11))) {
-                    tasklist.addDeadlineTask(in, i);
+                    taskList.addDeadlineTask(in, i);
                 }
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println("Invalid date and time");
