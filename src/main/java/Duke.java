@@ -142,10 +142,12 @@ public class Duke {
             task = new Todo(input.substring(5));
             break;
         case DEADLINE:
-            String errorMessage = "Command must be in the format: [taskName] /by [date(YYYY-MM-DD)] [time(HH:MM)]";
+            // Add Deadline task
+            String errorMessage = "Command must be in the format: [taskName] /by "
+                    + "[date(YYYY-MM-DD)] [time(HH:MM)].";
             String[] splitInput = splitWith(input, 9, " /by ", errorMessage);
             String taskName = splitInput[0];
-            errorMessage = "Date and time must be in the format: YYYY-MM-DD HH:MM";
+            errorMessage = "Date and time must be in the format: YYYY-MM-DD HH:MM.";
             String[] dateTime = splitWith(splitInput[1], 0, " ", errorMessage);
             String date = dateTime[0];
             String time = dateTime[1];
@@ -153,11 +155,17 @@ public class Duke {
             break;
         default: // default is guaranteed to be event task due to use of enum + outer control flow
             // Add Event task
-            errorMessage = "Command must be in the format: [taskName] /at [date]";
+            errorMessage = "Command must be in the format: [taskName] /at "
+                    + "[date(YYYY-MM-DD)] [start time(HH:MM)] [end time(HH:MM)].";
             splitInput = splitWith(input, 6, " /at ", errorMessage);
             taskName = splitInput[0];
-            date = splitInput[1];
-            task = new Event(taskName, date);
+            errorMessage = "Date and times must be in the format: YYYY-MM-DD HH:MM HH:MM.";
+            dateTime = splitWith(splitInput[1], 0, " ", errorMessage);
+            date = dateTime[0];
+            String startTime = dateTime[1];
+            String endTime = dateTime[2];
+            task = new Event(taskName, parseDateFromInput(date),
+                    parseTimeFromInput(startTime), parseTimeFromInput(endTime));
             break;
         }
 
