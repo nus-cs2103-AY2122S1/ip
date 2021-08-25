@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Class that represents a list of tasks.
  */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     /**
      * Constructor to make a task list.
@@ -23,6 +23,7 @@ public class TaskList {
      * @return
      */
     public int length() {
+
         return taskList.size();
     }
 
@@ -32,6 +33,7 @@ public class TaskList {
      * @param task A Task object.
      */
     public void addTask(Task task) {
+
         taskList.add(task);
     }
 
@@ -42,6 +44,7 @@ public class TaskList {
      * @return Task object of index given.
      */
     public Task getTask(int index) {
+
         return taskList.get(index);
     }
 
@@ -51,6 +54,7 @@ public class TaskList {
      * @param index Position of Task that has to be deleted.
      */
     public void deleteTask(int index) {
+
         taskList.remove(index);
     }
 
@@ -60,6 +64,7 @@ public class TaskList {
      * @return A TaskList.
      */
     public ArrayList<Task> toArrayList() {
+
         return taskList;
     }
 }

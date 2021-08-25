@@ -3,7 +3,9 @@ package duke.util;
 import java.util.Scanner;
 
 import duke.Duke;
+
 import duke.exceptions.UserInputError;
+
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -35,6 +37,7 @@ public class Ui {
      * @return boolean value if there is an input.
      */
     public boolean hasInput() {
+
         return sc.hasNextLine();
     }
 
@@ -44,6 +47,7 @@ public class Ui {
      * @return User input string.
      */
     public String nextInput() {
+
         return sc.nextLine();
     }
 
@@ -53,13 +57,15 @@ public class Ui {
      * @return Boolean value if Duke is stopped.
      */
     public boolean hasEnded() {
+
         return isEndChat;
     }
 
     /**
      * Method to end chat with Duke.
      */
-    public void endChat() {
+    public void setEndChat() {
+
         isEndChat = true;
     }
 

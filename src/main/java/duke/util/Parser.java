@@ -1,6 +1,7 @@
 package duke.util;
 
 import duke.Duke;
+
 import duke.exceptions.ExceedListSizeException;
 import duke.exceptions.InvalidInputException;
 import duke.exceptions.NoDescriptionException;
@@ -52,6 +53,7 @@ public class Parser {
      */
     private int getTaskNumber() {
         String[] result = input.split(" ");
+
         if (result[1].matches("\\d+")) {
             return Integer.parseInt(result[1]);
         }
@@ -64,8 +66,7 @@ public class Parser {
      * @param index Input index proposed by user.
      * @throws ExceedListSizeException
      */
-    private void checkIndexRange(int index)
-            throws ExceedListSizeException {
+    private void checkIndexRange(int index) throws ExceedListSizeException {
         if (index < 0) {
             throw new ExceedListSizeException(
                     "Invalid task reference!\nIndex should be more than 0."
@@ -96,8 +97,7 @@ public class Parser {
      *
      * @throws NoDescriptionException
      */
-    private void checkDescExist()
-            throws NoDescriptionException {
+    private void checkDescExist() throws NoDescriptionException {
         if (input.split(" ").length == 1) {
             throw new NoDescriptionException(
                     "Oops! Please add description for your command."
@@ -113,6 +113,7 @@ public class Parser {
      */
     private String getFirstWord(String text) {
         int index = text.indexOf(' ');
+
         if (index > -1) { // Check if there is more than one word.
             return text.substring(0, index).trim(); // Extract first word.
         } else {
