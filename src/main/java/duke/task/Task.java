@@ -9,13 +9,6 @@ import java.time.LocalDate;
  */
 public class Task {
     /**
-     * The three type of tasks.
-     */
-    public enum TaskType {
-        TODO, DEADLINE, EVENT
-    }
-
-    /**
      * The description of the task.
      */
     protected String description;
@@ -43,7 +36,7 @@ public class Task {
      * if the description is empty.
      *
      * @param description The description you want to store.
-     * @param isDone Whether the task is done.
+     * @param isDone      Whether the task is done.
      * @throws DukeException If the description is empty.
      */
     public Task(String description, boolean isDone) throws DukeException {
@@ -68,9 +61,13 @@ public class Task {
         return this.isDone;
     }
 
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
     /**
-     * Returns the starting or due time of the task, if possible. If there is no time related to the task, return
-     * {@code null}. In this case, it will always return {@code null}.
+     * Returns the starting or due time of the task, if possible. If there is no time related to the task, return {@code
+     * null}. In this case, it will always return {@code null}.
      *
      * @return null
      */
@@ -82,12 +79,9 @@ public class Task {
         return this.description;
     }
 
-    public void setDone(boolean isDone) {
-        this.isDone = isDone;
-    }
-
     /**
      * Returns {@code "[X]"} is the task is done and {@code "[ ]"} otherwise.
+     *
      * @return An icon indicating whether the task is done.
      */
     public String markDoneIcon() {
@@ -102,5 +96,12 @@ public class Task {
     @Override
     public String toString() {
         return this.markDoneIcon() + " " + this.description;
+    }
+
+    /**
+     * The three type of tasks.
+     */
+    public enum TaskType {
+        TODO, DEADLINE, EVENT
     }
 }

@@ -18,7 +18,7 @@ public class ToDo extends Task {
      * if the description is empty.
      *
      * @param description The description you want to store.
-     * @param isDone Whether the task is done.
+     * @param isDone      Whether the task is done.
      * @throws DukeException If the description is empty.
      */
     public ToDo(String description, boolean isDone) {

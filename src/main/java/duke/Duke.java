@@ -33,6 +33,15 @@ public class Duke {
     }
 
     /**
+     * Invokes the Duke bot.
+     *
+     * @param args The command line arguments.
+     */
+    public static void main(String[] args) {
+        new Duke("tasks.txt").run();
+    }
+
+    /**
      * Runs the Duke bot. Users may deal with tasks by entering command.
      */
     private void run() {
@@ -54,14 +63,5 @@ public class Duke {
                 input = scanner.next();
             }
         }
-    }
-
-    /**
-     * Invokes the Duke bot.
-     *
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
     }
 }

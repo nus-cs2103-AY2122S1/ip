@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * description is empty.
      *
      * @param description The description you want to store.
-     * @param timeDue The due date of the deadline.
+     * @param timeDue     The due date of the deadline.
      */
     public Deadline(String description, LocalDate timeDue) {
         super(description);
@@ -26,8 +26,8 @@ public class Deadline extends Task {
      * {@code DukeException} if the description is empty.
      *
      * @param description The description you want to store.
-     * @param isDone Whether the task is done.
-     * @param timeDue The due date of the deadline.
+     * @param isDone      Whether the task is done.
+     * @param timeDue     The due date of the deadline.
      */
     public Deadline(String description, boolean isDone, LocalDate timeDue) {
         super(description, isDone);

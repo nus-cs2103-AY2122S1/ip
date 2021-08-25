@@ -97,7 +97,7 @@ public class TaskList {
      * Transforms the list to a string list and store it in the {@code StringBuilder}. If the list is empty, then it
      * will store the {@code emptyMessage} instead.
      *
-     * @param builder The {@code StringBuilder} to store the list.
+     * @param builder      The {@code StringBuilder} to store the list.
      * @param emptyMessage The message to be stored when the list is empty.
      */
     private void buildList(StringBuilder builder, String emptyMessage) {
@@ -146,13 +146,21 @@ public class TaskList {
         return itemList.toString();
     }
 
+    /**
+     * Find out all tasks that contains the given keyword and list them as a string.
+     *
+     * @param keyword A keyword to filter the list.
+     * @return A string of task description.
+     */
     public String printList(String keyword) {
         ArrayList<Task> targetTasks = this.taskList.stream()
                 .filter(x -> x.getDescription().contains(keyword))
                 .collect(Collectors.toCollection(ArrayList::new));
 
+        TaskList targetList = new TaskList(targetTasks);
+
         StringBuilder itemList = new StringBuilder("\tHere is the result:\n");
-        buildList(itemList, targetTasks, "\tWow! Nothing matches your keyword.");
+        targetList.buildList(itemList, "\tWow! Nothing matches your keyword.");
 
         return itemList.toString();
     }

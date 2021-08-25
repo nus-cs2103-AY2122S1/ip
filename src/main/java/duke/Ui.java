@@ -47,7 +47,7 @@ public class Ui {
      * Prints a message when a task is added to a {@code TaskList}.
      *
      * @param tasks The list to which a new task is added.
-     * @param task The task added to the list.
+     * @param task  The task added to the list.
      */
     public static void addTaskMessage(TaskList tasks, Task task) {
         String message = "\tGot it. I've added this task:\n\t\t"
@@ -61,7 +61,7 @@ public class Ui {
      * Prints a message when a task is removed from the list.
      *
      * @param tasks The list from which a task is removed.
-     * @param item The index of the task.
+     * @param item  The index of the task.
      */
     public static void removeTaskMessage(TaskList tasks, int item) {
         int tasksSize = tasks.size() - 1;
@@ -76,7 +76,7 @@ public class Ui {
      * Prints a message when a task is done.
      *
      * @param tasks The task list.
-     * @param item The index of the task.
+     * @param item  The index of the task.
      */
     public static void taskDoneMessage(TaskList tasks, int item) {
         String message = "\tNice! I've marked this task as done:\n\t\t"

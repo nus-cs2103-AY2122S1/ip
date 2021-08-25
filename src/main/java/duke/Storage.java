@@ -60,8 +60,8 @@ public class Storage {
     }
 
     /**
-     * Parses the entire file to a {@code TaskList} by parsing each line to a task. It will return an empty
-     * {@code TaskList} if anything wrong happens.
+     * Parses the entire file to a {@code TaskList} by parsing each line to a task. It will return an empty {@code
+     * TaskList} if anything wrong happens.
      *
      * @return A {@code TaskList} based on the file content.
      */

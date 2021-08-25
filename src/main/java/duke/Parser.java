@@ -83,7 +83,7 @@ public class Parser {
      * </ul>
      * then a {@code DukeException} will be thrown.
      *
-     * @param type The task type you want to transform the description to.
+     * @param type        The task type you want to transform the description to.
      * @param description The necessary information to create a {@code Task} object.
      * @return A {@code Task} object parsed from the description.
      * @throws DukeException If the description does not make sense.
@@ -91,48 +91,48 @@ public class Parser {
     public static Task descriptionToTask(Task.TaskType type, String description) throws DukeException {
         Task task;
         switch (type) {
-            case TODO: {
-                if (!description.trim().isEmpty()) {
-                    task = new ToDo(description);
-                } else {
-                    throw new InvalidCommandException();
-                }
-                break;
-            }
-            case DEADLINE: {
-                if (description.contains("/by")) {
-                    String[] information = description.split("/by ", 2);
-                    if (information[0].isEmpty()) {
-                        throw new InvalidCommandException();
-                    }
-                    try {
-                        task = new Deadline(information[0], LocalDate.parse(information[1]));
-                    } catch (DateTimeParseException e) {
-                        throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
-                    }
-                } else {
-                    throw new InvalidCommandException();
-                }
-                break;
-            }
-            case EVENT: {
-                if (description.contains("/at")) {
-                    String[] information = description.split("/at ", 2);
-                    if (information[0].isEmpty()) {
-                        throw new InvalidCommandException();
-                    }
-                    try {
-                        task = new Deadline(information[0], LocalDate.parse(information[1]));
-                    } catch (DateTimeParseException e) {
-                        throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
-                    }
-                } else {
-                    throw new InvalidCommandException();
-                }
-                break;
-            }
-            default:
+        case TODO: {
+            if (!description.trim().isEmpty()) {
+                task = new ToDo(description);
+            } else {
                 throw new InvalidCommandException();
+            }
+            break;
+        }
+        case DEADLINE: {
+            if (description.contains("/by")) {
+                String[] information = description.split("/by ", 2);
+                if (information[0].isEmpty()) {
+                    throw new InvalidCommandException();
+                }
+                try {
+                    task = new Deadline(information[0], LocalDate.parse(information[1]));
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
+                }
+            } else {
+                throw new InvalidCommandException();
+            }
+            break;
+        }
+        case EVENT: {
+            if (description.contains("/at")) {
+                String[] information = description.split("/at ", 2);
+                if (information[0].isEmpty()) {
+                    throw new InvalidCommandException();
+                }
+                try {
+                    task = new Deadline(information[0], LocalDate.parse(information[1]));
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
+                }
+            } else {
+                throw new InvalidCommandException();
+            }
+            break;
+        }
+        default:
+            throw new InvalidCommandException();
         }
         return task;
     }
@@ -153,9 +153,9 @@ public class Parser {
      *     <li>{@code bye}: terminate the bot.</li>
      * </ul>
      *
-     * @param command The command to perform certain action.
+     * @param command  The command to perform certain action.
      * @param taskList The task list to store the tasks.
-     * @param storage The file to store the tasks.
+     * @param storage  The file to store the tasks.
      * @throws DukeException When the command is invalid.
      */
     public static void parseCommand(String command, TaskList taskList, Storage storage) throws DukeException {
