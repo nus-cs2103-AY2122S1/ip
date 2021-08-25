@@ -47,7 +47,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " +
+                by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**
@@ -57,6 +58,7 @@ public class Deadline extends Task {
      */
     @Override
     public String save() {
-        return "D|" + (this.getStatus() ? "1" : "0") + "|" + this.getDescription() + "|" + this.getBy();
+        return "D|" + (this.getStatus() ? "1" : "0") +
+                "|" + this.getDescription() + "|" + this.getBy();
     }
 }

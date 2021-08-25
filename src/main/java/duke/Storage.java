@@ -58,7 +58,13 @@ public class Storage {
                     tasks.addTask(new ToDo(nextItem[1].trim(), nextItem[2].trim().equals("1")));
                     break;
                 case "D":
-                    tasks.addTask(new Deadline(nextItem[1].trim(), nextItem[2].trim().equals("1"), LocalDate.parse(nextItem[3].trim())));
+                    tasks.addTask(
+                            new Deadline(
+                                    nextItem[1].trim(),
+                                    nextItem[2].trim().equals("1"),
+                                    LocalDate.parse(nextItem[3].trim())
+                            )
+                    );
                     break;
                 case "E":
                     tasks.addTask(new Event(nextItem[1].trim(), nextItem[2].trim().equals("1"), nextItem[3].trim()));
