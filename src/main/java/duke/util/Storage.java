@@ -1,6 +1,8 @@
 package duke.util;
 
 import duke.exceptions.CorruptedFileException;
+import duke.exceptions.EmptyListException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -161,11 +163,12 @@ public class Storage {
      *
      * @param tasks tasks with data to be loaded into text file
      * @throws IOException if given file path is a directory instead of a text file
+     * @throws EmptyListException if TaskList is empty
      */
-    public void saveFile(TaskList tasks) throws IOException {
+    public void saveFile(TaskList tasks) throws IOException, EmptyListException {
         String path = System.getProperty("user.dir") + filePath;
         FileWriter myWriter = new FileWriter(path);
-        myWriter.write(tasks.toString());
+        myWriter.write(tasks.printFullTaskList());
         myWriter.close();
     }
 }
