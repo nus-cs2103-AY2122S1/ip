@@ -31,7 +31,7 @@ public class Task {
     }
 
     public String toString() {
-        if(completed){
+        if(completed) {
             return "[X] " + name;
         }
         return "[ ] " + name;

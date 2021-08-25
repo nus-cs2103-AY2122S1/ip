@@ -6,13 +6,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
     private File file;
 
-    public Storage(File file){
+    public Storage(File file) {
         this.file = file;
     };
 
@@ -23,7 +22,8 @@ public class Storage {
      * @return a new 'Storage' object
      * @throws DukeException Exception of Duke system
      */
-    public static Storage initStorage(String directory, String filePath) throws DukeException{
+
+    public static Storage initStorage (String directory, String filePath) throws DukeException {
         try {
             Files.createDirectories(Paths.get("data/"));
             File file = new File("data/duke.txt");
@@ -47,14 +47,13 @@ public class Storage {
     public void saveToFile(TaskList taskList) throws DukeException {
         try {
             FileWriter fw = new FileWriter(file, false);
-            for(int i=0; i<taskList.size(); i++) {
+            for (int i=0; i<taskList.size(); i++) {
                 Task task= taskList.get(i);
                 fw.write(task.saveTask());
                 fw.write("\r\n");
             }
             fw.close();
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("☹ OOPS!!! Error occurs when save the data");
         }
     }
@@ -64,7 +63,7 @@ public class Storage {
      * @param taskList a list of tasks
      * @throws DukeException Exceptions that are possible to occur in Duke
      */
-    public void readFile(TaskList taskList) throws DukeException{
+    public void readFile(TaskList taskList) throws DukeException {
         try {
             Scanner s = new Scanner(file);
             String current, desc, name;
@@ -73,12 +72,12 @@ public class Storage {
             while(s.hasNext()) {
                 current = s.nextLine();
                 type = current.charAt(1);
-                if(type == 'T') {
+                if (type == 'T') {
                     Task newTask = new Todo(current.substring(7));
                     newTask.setCompleted(current.charAt(4)=='X');
                     taskList.add(newTask);
                 }
-                else if(type == 'E') {
+                else if (type == 'E') {
                     desc = current.substring(7);
                     String[] split = desc.split("->at: ", 2);
                     name = split[0];
@@ -97,8 +96,7 @@ public class Storage {
                     taskList.add(newTask);
                 }
             }
-        }
-        catch(IOException e) {
+        } catch (IOException e) {
             throw new DukeException("OOPS!!! Error occurs when reload the data");
         }
     }

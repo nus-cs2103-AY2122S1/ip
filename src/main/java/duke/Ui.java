@@ -36,7 +36,7 @@ public class Ui {
     /**
      * Handle bye category input
      */
-    public static void bye(){
+    public static void bye() {
         System.out.println("    Bye. Hope to see you again soon!");
     }
 
