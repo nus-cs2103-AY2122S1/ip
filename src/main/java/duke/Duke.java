@@ -16,7 +16,7 @@ public class Duke {
     /** 
      * Public constructor for a Duke object
      * 
-     * @param filepath A filepath to a text file that serves
+     * @param filePath A filepath to a text file that serves
      *    as persistent storage for Duke.
      */
     public Duke(String filePath) {
