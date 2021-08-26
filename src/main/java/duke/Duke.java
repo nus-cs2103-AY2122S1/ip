@@ -17,6 +17,7 @@ public class Duke {
                 ui.printLoadTasks(tasks);
         } catch (DukeException e) {
             ui.printErrorMessage(e.getMessage());
+            tasks = new TaskList();
         }
     }
 

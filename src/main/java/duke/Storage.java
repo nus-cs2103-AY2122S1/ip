@@ -21,8 +21,10 @@ public class Storage {
             return loadTasks(savePath);
         else {
             try {
+                Files.createDirectories(savePath.getParent());
                 Files.createFile(savePath);
             } catch (IOException e) {
+                e.printStackTrace();
                 throw new LoadingException();
             }
             return null;
