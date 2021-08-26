@@ -1,13 +1,17 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task{
 
-    private String due;
+    private LocalDateTime due;
 
-    Deadline(String taskName, String due, boolean status) {
+    Deadline(String taskName, LocalDateTime due, boolean status) {
         super(taskName, status);
         this.due = due;
     }
 
     public String displayTask() {
-        return "D " + super.displayTask() + "| " + due;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h.mma");
+        return "[D]" + super.displayTask() + " (by: " + due.format(formatter) + ")";
     }
 }

@@ -1,13 +1,17 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Event extends Task{
 
-    private String duration;
+    private LocalDateTime duration;
 
-    Event(String taskName, String duration, boolean status) {
+    Event(String taskName, LocalDateTime duration, boolean status) {
         super(taskName, status);
         this.duration = duration;
     }
 
     public String displayTask() {
-        return "E " + super.displayTask() + "| " + duration;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h.mma");
+        return "[E]" + super.displayTask() + " (at: " + duration.format(formatter) + ")";
     }
 }
