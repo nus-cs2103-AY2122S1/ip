@@ -38,6 +38,15 @@ public class TaskListTest {
     }
 
     @Test
+    public void testFind() {
+        for (int i = 1; i < 5; i++) {
+            list.add(new TaskStub(i));
+        }
+        list.add(new TaskStub(4));
+        assertEquals(2, list.find("4").size());
+    }
+
+    @Test
     public void testFormatData() {
         String[] data = new String[4];
         for (int i = 1; i < 5; i++) {

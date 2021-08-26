@@ -76,6 +76,16 @@ public class TaskList {
     }
 
     /**
+     * Finds all tasks whose descriptions contain the specified keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @return A list of resulting tasks.
+     */
+    public List<Task> find(String keyword) {
+        return list.stream().filter(t -> t.containsKeyword(keyword)).collect(Collectors.toList());
+    }
+
+    /**
      * Returns the string representation of the whole task list
      * that will be used to save to file. It is aggregated from
      * the format string of each task.
