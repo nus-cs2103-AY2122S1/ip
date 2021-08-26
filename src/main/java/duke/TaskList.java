@@ -34,6 +34,10 @@ public class TaskList {
         return doneTask;
     }
 
+    public Task getTask(int index) {
+        return tasks.get(index);
+    }
+
     @Override
     public String toString() {
         String taskList = "";
