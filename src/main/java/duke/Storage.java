@@ -1,5 +1,7 @@
-package duke;//duke.Storage: deals with loading tasks from the file and saving tasks in the file
-import java.io.*;
+package duke;
+
+import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;

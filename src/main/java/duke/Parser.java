@@ -1,4 +1,4 @@
-package duke;//duke.Parser: deals with making sense of the user command
+package duke;
 
 import java.io.IOException;
 
