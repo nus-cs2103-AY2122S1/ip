@@ -1,8 +1,11 @@
 package duke;
 
 public class ToDo extends Task {
+    private String description;
+
     public ToDo(String description) {
         super(description);
+        this.description = description;
     }
 
     public String getTaskIcon() {

@@ -7,7 +7,7 @@ import java.io.FileWriter;
 
 public class Duke {
 
-    static int index = 0;
+    static int index = 0; //will figure out a way to make this private :<
     private final String filePath;
     private final TaskList tasks;
     private Ui ui;

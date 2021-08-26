@@ -1,10 +1,12 @@
 package duke;
 
 public class Event extends Task {
-    public String time;
+    private String description;
+    private String time;
 
     public Event(String description, String time) {
         super(description);
+        this.description = description;
         this.time = time;
     }
 

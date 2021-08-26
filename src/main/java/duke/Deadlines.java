@@ -1,10 +1,12 @@
 package duke;
 
 public class Deadlines extends Task {
-    protected String time;
+    private String description;
+    private String time;
 
     public Deadlines(String description, String time) {
         super(description);
+        this.description = description;
         this.time = time;
     }
 
