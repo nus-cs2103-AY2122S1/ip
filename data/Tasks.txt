@@ -1,10 +1,5 @@
 
-T  N  read book
-E  N  help  2001-01-01T18:00
-D  N  do tis  2001-01-01
-E  N  do this  2001-01-01T18:00
-T  N  read book
-T  N  read book
-E  N  help  2021-01-01T18:00
-T  N  read book
-E  N  help  2001-01-01T18:00
+T  Y  read book
+E  N  help  Jan 1 2021 05:00
+T  N  read me
+E  N  help  Jan 1 2021 18:00

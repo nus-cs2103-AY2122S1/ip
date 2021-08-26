@@ -6,8 +6,8 @@ public class Ui {
 
     private Scanner scanner;
     private final static String DIVIDER = "  ---------------------------------------------";
-    private final static String INDENT_1 = "    ";
-    private final static String INDENT_2 = "      ";
+    protected final static String INDENT_1 = "    ";
+    protected final static String INDENT_2 = "      ";
 
     public Ui() {
 
@@ -51,6 +51,14 @@ public class Ui {
         System.out.println(INDENT_1 + "Sure! I've removed this task:\n");
         System.out.println(INDENT_2 + task.toString());
         ;
+    }
+
+    public void findTask() {
+        System.out.println(INDENT_1 + "I have found these matching tasks!!");
+    }
+
+    public void noSuchTask() {
+        System.out.println(INDENT_1 + "I cannot find any matching tasks :(");
     }
 
     public void addTask(Task task) {

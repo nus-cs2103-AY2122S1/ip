@@ -43,11 +43,18 @@ public class Parser {
         case "bye":
             return new ExitCommand(command);
 
+
         case "list":
             if (splitInput.length > 1) {
                 throw new DukeException(ui.commandError());
             }
             return new ListCommand(command);
+
+        case "find":
+            if (splitInput.length == 1) {
+                throw new DukeException(ui.commandError());
+            }
+            return new FindCommand(command);
 
         case "done":
             return checkDone(command);
@@ -62,8 +69,12 @@ public class Parser {
 
         default:
             throw new DukeException(ui.commandError());
+
+
         }
     }
+
+
 
     /**
      * Checks if the input of the user for commands indicating
@@ -106,7 +117,7 @@ public class Parser {
             } else {
                 if (taskType.equals("deadline") && !splitInput2[1].contains("/by")
                         || taskType.equals("event")
-                                && !splitInput2[1].contains("/at")) {
+                        && !splitInput2[1].contains("/at")) {
                     throw new DukeException(ui.incorrectAtOrBy(taskType));
                 }
 

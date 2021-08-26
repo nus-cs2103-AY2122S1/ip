@@ -49,10 +49,12 @@ public class Deadline extends Task {
         return "D";
     }
 
+
     public String getBy() {
 
         return this.by.toString();
     }
+
 
     /**
      * Returns the string representation of a
