@@ -1,7 +1,5 @@
 package tasks;
 
-import tasks.Task;
-
 /**
  * To-do class for tasks without any date/time attached to it
  *
