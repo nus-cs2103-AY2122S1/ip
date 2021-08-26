@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * ToDo class represents tasks without any date/time attached to it e.g., visit new theme park.
  *
@@ -23,5 +25,10 @@ public class ToDo extends Task {
     @Override
     public String format() {
         return String.format("T | %s", super.format());
+    }
+
+    @Override
+    public boolean hasDate(LocalDate date) {
+        return false;
     }
 }

@@ -34,22 +34,22 @@ public class Deadline extends Task {
      */
     private String formatDateTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        String date = this.dueDate.format(formatter);
-        return date + " " + this.dueTime.toString();
+        String date = dueDate.format(formatter);
+        return date + " " + dueTime.toString();
     }
 
     @Override
-    public boolean checkDate(LocalDate date) {
-        return this.dueDate.equals(date);
+    public boolean hasDate(LocalDate date) {
+        return dueDate.equals(date);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.formatDateTime() + ")";
+        return "[D]" + super.toString() + " (by: " + formatDateTime() + ")";
     }
 
     @Override
     public String format() {
-        return String.format("D | %s | %s %s", super.format(), this.dueDate, this.dueTime);
+        return String.format("D | %s | %s %s", super.format(), dueDate, dueTime);
     }
 }

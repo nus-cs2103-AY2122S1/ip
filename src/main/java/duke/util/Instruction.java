@@ -1,5 +1,8 @@
 package duke.util;
 
+/**
+ * Instruction represents the set of instructions that Duke recognises.
+ */
 public enum Instruction {
     LIST("list"),
     DONE("done"),

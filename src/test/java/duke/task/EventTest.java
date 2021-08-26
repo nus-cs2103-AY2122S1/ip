@@ -14,14 +14,14 @@ class EventTest {
     void checkDate1() {
         Event task = new Event("CCA", LocalDate.parse("2021-08-23"), LocalTime.parse("20:00"),
                 LocalTime.parse("23:00"));
-        assertEquals(true, task.checkDate(LocalDate.parse("2021-08-23")));
+        assertEquals(true, task.hasDate(LocalDate.parse("2021-08-23")));
     }
 
     @Test
     void checkDate2() {
         Event task = new Event("CCA", LocalDate.parse("2021-08-23"), LocalTime.parse("20:00"),
                 LocalTime.parse("23:00"));
-        assertEquals(false, task.checkDate(LocalDate.parse("2021-08-24")));
+        assertEquals(false, task.hasDate(LocalDate.parse("2021-08-24")));
     }
 
     @Test

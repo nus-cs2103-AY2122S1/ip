@@ -7,7 +7,7 @@ import java.time.LocalDate;
  *
  * @author Chng Zi Hao
  */
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -20,6 +20,8 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    public abstract boolean hasDate(LocalDate date);
 
     /**
      * Gets the String representation of Task's status.
@@ -51,10 +53,12 @@ public class Task {
         return String.format("%s | %s", isDone ? "1" : "0", this.description);
     }
 
-    public boolean checkDate(LocalDate date) {
-        return false;
-    }
-
+    /**
+     * Checks if the description contains keyword substring.
+     *
+     * @param keyword Keyword to be checked against.
+     * @return true if the description contains keyword substring, false otherwise.
+     */
     public boolean hasKeyword(String keyword) {
         return description.contains(keyword);
     }

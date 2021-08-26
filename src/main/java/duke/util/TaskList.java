@@ -112,9 +112,9 @@ public class TaskList {
     public String filterByDate(LocalDate date) {
         String ls = "";
         int count = 1;
-        for (int i = 0; i < this.list.size(); i++) {
-            Task task = this.list.get(i);
-            if (task.checkDate(date)) {
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            if (task.hasDate(date)) {
                 ls += String.format("%d.%s\n", count, task);
                 count++;
             }
@@ -135,8 +135,8 @@ public class TaskList {
     public String filterByKeyword(String keyword) {
         String ls = "";
         int count = 1;
-        for (int i = 0; i < this.list.size(); i++) {
-            Task task = this.list.get(i);
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
             if (task.hasKeyword(keyword)) {
                 ls += String.format("%d.%s\n", count, task);
                 count++;

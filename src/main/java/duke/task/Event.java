@@ -21,7 +21,7 @@ public class Event extends Task {
      * @param description The description of the event
      * @param date The date of event.
      * @param startTime The start time of event.
-     * @param endTime The endtime of event.
+     * @param endTime The end time of event.
      */
     public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description);
@@ -38,21 +38,21 @@ public class Event extends Task {
     private String formatDateTime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
         String date = this.date.format(formatter);
-        return date + " " + this.startTime.toString() + "-" + this.endTime.toString();
+        return date + " " + startTime.toString() + "-" + endTime.toString();
     }
 
     @Override
-    public boolean checkDate(LocalDate date) {
+    public boolean hasDate(LocalDate date) {
         return this.date.equals(date);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.formatDateTime() + ")";
+        return "[E]" + super.toString() + " (at: " + formatDateTime() + ")";
     }
 
     @Override
     public String format() {
-        return String.format("E | %s | %s %s-%s", super.format(), this.date, this.startTime, this.endTime);
+        return String.format("E | %s | %s %s-%s", super.format(), date, startTime, endTime);
     }
 }

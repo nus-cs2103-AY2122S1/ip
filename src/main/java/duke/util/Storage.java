@@ -38,7 +38,7 @@ public class Storage {
      * @throws DukeException If there is an I/O exception.
      */
     public ArrayList<Task> retrieveData() throws DukeException {
-        if (!this.file.exists()) {
+        if (!file.exists()) {
             try {
                 System.out.println("data.txt file does not exist. Creating new file...");
                 File directory = new File(DIRECTORY);
@@ -57,7 +57,7 @@ public class Storage {
             return taskList;
         }
         try {
-            Scanner fileReader = new Scanner(this.file);
+            Scanner fileReader = new Scanner(file);
             while (fileReader.hasNextLine()) {
                 String data = fileReader.nextLine();
                 String[] dataBreakdown = data.split(" \\| ");

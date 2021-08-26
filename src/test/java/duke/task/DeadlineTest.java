@@ -12,13 +12,13 @@ class DeadlineTest {
     @Test
     void checkDate1() {
         Deadline task = new Deadline("return book", LocalDate.parse("2021-08-23"), LocalTime.parse("20:00"));
-        assertEquals(true, task.checkDate(LocalDate.parse("2021-08-23")));
+        assertEquals(true, task.hasDate(LocalDate.parse("2021-08-23")));
     }
 
     @Test
     void checkDate2() {
         Deadline task = new Deadline("return book", LocalDate.parse("2021-08-23"), LocalTime.parse("20:00"));
-        assertEquals(false, task.checkDate(LocalDate.parse("2021-08-24")));
+        assertEquals(false, task.hasDate(LocalDate.parse("2021-08-24")));
     }
 
     @Test
