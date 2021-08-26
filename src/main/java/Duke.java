@@ -1,19 +1,14 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
 
 public class Duke {
 
-    private static final String DUKE = "\nDuke:";
-    private static final String USER = "\nUser:";
     private static ArrayList<Task> tasks = new ArrayList<>();
+    private static Ui ui = new Ui();
+    private static Storage storage = null;
 
     private static String dir = System.getProperty("user.dir");
     private static Path path = Paths.get(dir, "data");
@@ -21,39 +16,26 @@ public class Duke {
 
     public static void main(String[] args) throws DukeException {
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        storage = new Storage("data/duke.txt");
 
         try {
-            Files.createDirectory(path);
-        } catch (FileAlreadyExistsException e) {
-            // ignore this exception
-        } catch (IOException e) {
-            e.printStackTrace();
+            tasks = storage.load();
+            if (tasks == null)
+                tasks = new ArrayList<>();
+            else
+                ui.printLoadTasks(tasks);
+        } catch (DukeException e) {
+            ui.printErrorMessage(e.getMessage());
         }
 
-        if (Files.exists(savePath))
-            loadTasks(savePath);
-        else {
-            try {
-                Files.createFile(savePath);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        System.out.println(DUKE + "Hi, what do you want from me?\n");
+        ui.startInteractionsMessage();
 
         Scanner scanner = new Scanner(System.in);
         String userInput;
         boolean exiting = false;
 
         do {
-            System.out.print(USER);
+            ui.waitUserInput();
             userInput = scanner.nextLine();
 
             Scanner userInputScanner = new Scanner(userInput);
@@ -66,7 +48,7 @@ public class Duke {
                         break;
 
                     case "list":
-                        listTasks();
+                        ui.printListTasks(tasks);
                         break;
 
                     case "done":
@@ -93,25 +75,17 @@ public class Duke {
                         throw new UnsupportedOperationException();
                 }
             } catch (DukeException e) {
-                printErrorMessage(e.getMessage());
+                ui.printErrorMessage(e.getMessage());
             }
         } while (!exiting);
 
-        System.out.println(DUKE + "Bye. Have a nice day.");
-    }
-
-    private static void listTasks() {
-        System.out.println(DUKE + "\n\tTasks:");
-        for (int i = 0; i < tasks.size(); i++)
-            System.out.printf("\t\t%d.%s\n", i + 1, tasks.get(i));
-        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+        ui.exitMessage();
     }
 
     private static void completeTask(int taskNum) {
         tasks.get(taskNum - 1).setDone(true);
-        saveTasks(savePath);
-        System.out.println(DUKE + "\n\tMarking task as completed:");
-        System.out.printf("\t\t%s\n", tasks.get(taskNum - 1));
+        storage.saveTasks(tasks, savePath);
+        ui.printCompleteTask(tasks.get(taskNum - 1));
     }
 
     private static void createNewTask(Scanner userInputScanner, TaskType taskType)
@@ -137,65 +111,13 @@ public class Duke {
 
     private static void addNewTask(Task newTask) {
         tasks.add(newTask);
-        saveTasks(savePath);
-        System.out.println(DUKE + "\n\tAdded:\n\t\t" + newTask);
-        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
-    }
-
-    private static void saveTasks(Path savePath) {
-        try {
-            BufferedWriter writer = Files.newBufferedWriter(savePath);
-            for (Task t: tasks) {
-                writer.write(t.toSaveFormat() + "\n");
-            }
-            writer.close();
-        } catch(IOException ex){
-            ex.printStackTrace();
-        }
-    }
-
-    private static void loadTasks(Path savePath) {
-        try (BufferedReader reader = Files.newBufferedReader(savePath)) {
-            String line = null;
-            Scanner saveDataScanner;
-            while ((line = reader.readLine()) != null) {
-                saveDataScanner = new Scanner(line).useDelimiter(", ");
-                String taskType = saveDataScanner.next();
-                boolean isTaskDone = saveDataScanner.nextInt() == 1;
-                String taskDesc = saveDataScanner.next();
-                switch (taskType) {
-                    case "T":
-                        tasks.add(new ToDo(taskDesc, isTaskDone));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(taskDesc,
-                                LocalDate.parse(saveDataScanner.next()), isTaskDone));
-                        break;
-                    case "E":
-                        tasks.add(new Event(taskDesc,
-                                LocalDate.parse(saveDataScanner.next()), isTaskDone));
-                        break;
-                }
-                saveDataScanner.close();
-            }
-            reader.close();
-            System.out.println(DUKE + "I have loaded your past tasks list!");
-            listTasks();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    private static void printErrorMessage(String message) {
-        System.out.println(DUKE);
-        System.out.println("\tError: " + message + ".");
+        storage.saveTasks(tasks, savePath);
+        ui.printAddTask(tasks, newTask);
     }
 
     private static void deleteTask(int taskNum) {
         Task deletedTask = tasks.remove(taskNum - 1);
-        saveTasks(savePath);
-        System.out.println(DUKE + "\n\tRemoving task:");
-        System.out.printf("\t\t%s\n", deletedTask);
-        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+        storage.saveTasks(tasks, savePath);
+        ui.printDeleteTask(tasks, deletedTask);
     }
 }
