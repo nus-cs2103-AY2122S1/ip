@@ -11,16 +11,29 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Storage class that stores all previous chat history and list in data/duke.txt
+ */
 public class Storage {
     private File f;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
     private TaskList taskList;
 
+    /**
+     * Constructor for Storage
+     * @param pathname relative path to where the chat history is stored
+     */
     public Storage(String pathname) {
         this.taskList = new TaskList();
         f = new File(pathname);
     }
 
+    /**
+     * read and parse data from previous chat history
+     * @return List of previous stated task
+     * @throws IOException when file cannot be read
+     *
+     */
     public TaskList readFile() throws IOException {
         if (!f.exists()) {
             f.getParentFile().mkdirs();
@@ -52,6 +65,11 @@ public class Storage {
     }
 
 
+    /**
+     * saves the current list to the chat history file
+     * @param taskList updated list after commands are executed
+     * @throws IOException when file cannot be saved
+     */
     public void writeToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(f.getAbsoluteFile());
 

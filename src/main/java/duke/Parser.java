@@ -6,6 +6,9 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parser object that parses all the input from user to commands understood by Duke
+ */
 public class Parser {
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
     private static String[] parsed;
@@ -60,6 +63,11 @@ public class Parser {
         return LocalDateTime.parse(dateTime, formatter);
     }
 
+    /**
+     * Parses input line by line
+     * @param input the input of the user
+     * @return returns a command type to be executed in duke.run()
+     */
     public static Command parseCommands(String input) {
         parsed = input.split(" ");
         try {

@@ -11,6 +11,11 @@ public class Duke {
     private Storage storage;
     private static TaskList taskList = new TaskList();
 
+    /**
+     * Constructor for Duke object
+     *
+     * @param filePath relative path to where the data was stored
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +28,9 @@ public class Duke {
     }
 
 
+    /**
+     * Runs duke program - a chatbot with personality
+     */
     public void run() {
         ui.printGreetings();
         //isExit implementation is referenced from classmate Wu Xiaoyun
@@ -40,6 +48,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Driver for duke
+     * @param args arguments that user inputs
+     */
     public static void main(String[] args) {
         new Duke(PATHNAME).run();
     }
