@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class AddTaskCommand extends Command {
-    Task task;
+    private Task task;
 
     // parses dates in form dd-mm-yyyy to localdate
     private static LocalDate parseDate(String dateString) throws KermitException {
