@@ -46,4 +46,7 @@ public abstract class Task implements Comparable<Task> {
     public int compareTo(Task other) {
         return Integer.compare(this.id, other.id);
     }
+
+    @Override
+    abstract public boolean equals(Object o);
 }

@@ -17,6 +17,10 @@ public class Deadlines extends Task {
         this.date = LocalDate.parse(deadline);
     }
 
+    public LocalDate getDate() {
+        return this.date;
+    }
+
     @Override
     public String getSaveData() {
         if (this.isCompleted()) {
@@ -32,5 +36,17 @@ public class Deadlines extends Task {
                 super.toString(),
                 this.date.format(
                         DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Deadlines)) return false;
+
+        Deadlines deadline = (Deadlines) o;
+
+        return this.getName().equals(deadline.getName()) &&
+                this.isCompleted() == deadline.isCompleted() &&
+                this.date.equals(deadline.getDate());
     }
 }

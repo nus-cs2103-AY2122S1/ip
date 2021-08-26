@@ -8,6 +8,10 @@ import duke.data.tasks.Task;
 public class TaskList {
     private final ArrayList<Task> lst;
 
+    public TaskList() {
+        this(new ArrayList<>());
+    }
+
     public TaskList(ArrayList<Task> loadedTasks) {
         this.lst = loadedTasks;
     }

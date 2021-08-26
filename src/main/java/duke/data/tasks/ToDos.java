@@ -22,4 +22,15 @@ public class ToDos extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ToDos)) return false;
+
+        ToDos todo = (ToDos) o;
+
+        return this.getName().equals(todo.getName()) &&
+                this.isCompleted() == todo.isCompleted();
+    }
 }
