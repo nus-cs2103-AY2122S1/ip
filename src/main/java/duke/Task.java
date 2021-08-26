@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * An abstract class encapsulating a Task.
  *

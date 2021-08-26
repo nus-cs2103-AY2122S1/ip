@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * A class encapsulating a Todo variant of a Task.
  *
