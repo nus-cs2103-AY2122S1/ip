@@ -13,6 +13,7 @@ public class Parser {
 			return true;
 		} else if (command.startsWith("list")) {
 			Duke.tasks.printTasks();
+			return false;
 		} else if (command.startsWith("done")) {
 			Duke.tasks.handleDone(command);
 		} else if (command.startsWith("delete")) {

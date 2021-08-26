@@ -97,7 +97,8 @@ public class Storage {
 			}
 			fw.close();
 		} catch (IOException e) {
-			throw new DukeException("File not found!");
+			e.printStackTrace();
+			throw new DukeException("File not found!\n");
 		}
 	}
 }
