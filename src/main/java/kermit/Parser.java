@@ -65,22 +65,22 @@ public class Parser {
         flag = flagBuilder.toString();
 
         switch (command) {
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ListTasksCommand();
-            case "done":
-                return new CompleteTaskCommand(argument);
-            case "delete":
-                return new DeleteTaskCommand(argument);
-            case "todo":
-                return new AddTaskCommand("todo", argument, flag);
-            case "event":
-                return new AddTaskCommand("event", argument, flag);
-            case "deadline":
-                return new AddTaskCommand("deadline", argument, flag);
-            default:
-                throw new KermitException(invalidCommandText);
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListTasksCommand();
+        case "done":
+            return new CompleteTaskCommand(argument);
+        case "delete":
+            return new DeleteTaskCommand(argument);
+        case "todo":
+            return new AddTaskCommand("todo", argument, flag);
+        case "event":
+            return new AddTaskCommand("event", argument, flag);
+        case "deadline":
+            return new AddTaskCommand("deadline", argument, flag);
+        default:
+            throw new KermitException(invalidCommandText);
         }
     }
 }
