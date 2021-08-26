@@ -12,6 +12,7 @@ public abstract class Command {
             new ExitCommand(),
             new AddTaskCommand(),
             new ListTasksCommand(),
+            new FindTaskCommand(),
             new DoneTaskCommand(),
             new RemoveTaskCommand()
     };
