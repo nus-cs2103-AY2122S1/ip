@@ -16,7 +16,7 @@ import java.util.Scanner;
  * Encapsulate the handling of loading and storing files on local directory for duke.
  *
  * @author Zhi Bin
- * @version Duke Level 8
+ * @version Duke Level 9
  */
 public class Storage {
     private static final String FOLDER_NAME = "data";

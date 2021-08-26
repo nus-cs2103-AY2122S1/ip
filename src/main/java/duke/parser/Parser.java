@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Encapsulates the processing of user inputs to duke.
  *
  * @author Zhi Bin
- * @version Duke Level 8
+ * @version Duke Level 9
  */
 public class Parser {
     private final TaskList list;

@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * and when is the event occurring.
  *
  * @author Zhi Bin
- * @version Duke Level 8
+ * @version Duke Level 9
  */
 public class Event extends Task {
     private final LocalDateTime when;

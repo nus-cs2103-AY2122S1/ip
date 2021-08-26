@@ -5,7 +5,7 @@ package duke.task;
  * The task has a description of what the user wants to do.
  *
  * @author Zhi Bin
- * @version Duke Level 8
+ * @version Duke Level 9
  */
 public class ToDo extends Task {
 

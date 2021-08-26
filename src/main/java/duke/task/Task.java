@@ -6,7 +6,7 @@ package duke.task;
  * and a boolean to store if the task is done.
  *
  * @author Zhi Bin
- * @version Duke Level 8
+ * @version Duke Level 9
  */
 public abstract class Task {
     protected final String description;

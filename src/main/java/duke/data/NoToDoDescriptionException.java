@@ -4,7 +4,7 @@ package duke.data;
  * Signals that an error has occurred due to empty description of a todo task.
  *
  * @author Zhi Bin
- * @version Duke Level 8
+ * @version Duke Level 9
  */
 public class NoToDoDescriptionException extends DukeException {
     public NoToDoDescriptionException() {

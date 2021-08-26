@@ -6,7 +6,7 @@ package duke.data;
  * produced by failed or interrupted operations.
  *
  * @author Zhi Bin
- * @version Duke Level 8
+ * @version Duke Level 9
  */
 public abstract class DukeException extends Exception {
 

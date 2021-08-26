@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Encapsulates the handling of user interactions of duke.
  *
  * @author Zhi Bin
- * @version Duke Level 8
+ * @version Duke Level 9
  */
 public class Ui {
     private static final String INDENTATION = "    ";

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Encapsulates the operations related to managing task.
  *
  * @author Zhi Bin
- * @version Duke Level 8
+ * @version Duke Level 9
  */
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
