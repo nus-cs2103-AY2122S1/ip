@@ -107,6 +107,10 @@ public class Ui {
         System.out.printf(DEFAULT_SPACES + "Now you have %d tasks in the list.%n", tasks.size());
     }
 
+    public static void defaultMessage() {
+        System.out.println(DEFAULT_SPACES + "OOPS I did not quite understand that :(");
+    }
+
     public static void showLine() {
         System.out.println("    ____________________________________________________________");
     }

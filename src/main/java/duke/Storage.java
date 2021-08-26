@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 /**
  * This class takes in a saved file and loads whatever tasks were saved in it.
  */
-
 public class Storage {
     String filePath;
     Scanner saveFile;
@@ -41,7 +40,6 @@ public class Storage {
             }
             File file = new File(filePath);
             this.saveFile = new Scanner(file);
-
         } catch (FileNotFoundException e) {
             Ui.fileNotFoundError();
         } catch (IOException e) {

@@ -20,7 +20,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ui.arrayIndexOutOfBoundsExceptionMessage();
                 Ui.toDoHint();
-                break;
+                throw e;
             }
         case "event":
             try {
@@ -31,11 +31,11 @@ public class Parser {
                 break;
             } catch (DateTimeParseException e) {
                 Ui.dateTimeParseExceptionMessage();
-                break;
+                throw e;
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ui.arrayIndexOutOfBoundsExceptionMessage();
                 Ui.eventHint();
-                break;
+                throw e;
             }
         case "deadline":
             try {
@@ -46,11 +46,11 @@ public class Parser {
                 break;
             } catch (DateTimeParseException e) {
                 Ui.dateTimeParseExceptionMessage();
-                break;
+                throw e;
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ui.arrayIndexOutOfBoundsExceptionMessage();
                 Ui.deadlineHint();
-                break;
+                throw e;
             }
         case "list":
             output = new ListCommand();
@@ -62,10 +62,10 @@ public class Parser {
                 break;
             } catch (NumberFormatException e) {
                 Ui.numberFormatExceptionMessage();
-                break;
+                throw e;
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ui.arrayIndexOutOfBoundsExceptionMessage();
-                break;
+                throw e;
             }
         case "delete":
             try {
@@ -74,13 +74,16 @@ public class Parser {
                 break;
             } catch (NumberFormatException e) {
                 Ui.numberFormatExceptionMessage();
-                break;
+                throw e;
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ui.arrayIndexOutOfBoundsExceptionMessage();
-                break;
+                throw e;
             }
         case "bye":
             output = new ByeCommand();
+            break;
+        default:
+            Ui.defaultMessage();
             break;
         }
         return output;
