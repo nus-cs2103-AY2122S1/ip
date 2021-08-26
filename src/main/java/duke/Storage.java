@@ -49,6 +49,7 @@ public class Storage {
                         list.add(e);
                     }
                 }
+                fileReader.close();
             }
         } catch (IOException e) {
             System.out.println("An error occurred.");

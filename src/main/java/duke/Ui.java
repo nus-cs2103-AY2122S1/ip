@@ -24,7 +24,8 @@ public class Ui {
         ArrayList<Task> list = taskList;
         String separator = "    ____________________________________________________________";
         try {
-            if (Parser.parse(input).equals("list")) {
+            String parsedInput = Parser.parse(input);
+            if (parsedInput.equals("list")) {
                 if (list.size() == 0) {
                     System.out.println(separator);
                     System.out.println("     You have no tasks in your list!");
@@ -36,7 +37,7 @@ public class Ui {
                         System.out.println(String.format("     %d. %s", (i + 1), item.toString()));
                     }
                 }
-            } else if (Parser.parse(input).equals("done")) {
+            } else if (parsedInput.equals("done")) {
                 if (input.replaceAll("\\s", "").length() == 4) {
                     throw new DukeException(DukeException.Type.EmptyDone);
                 } else {
@@ -52,7 +53,7 @@ public class Ui {
                         System.out.println(String.format("       %s", item.toString()));
                     }
                 }
-            } else if (Parser.parse(input).equals("delete")) {
+            } else if (parsedInput.equals("delete")) {
                 if (input.replaceAll("\\s", "").length() == 6) {
                     throw new DukeException(DukeException.Type.EmptyDelete);
                 } else {
@@ -68,7 +69,7 @@ public class Ui {
                         System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
                     }
                 }
-            } else if (Parser.parse(input).equals("todo")) {
+            } else if (parsedInput.equals("todo")) {
                 if (input.replaceAll("\\s", "").length() == 4) {
                     throw new DukeException(DukeException.Type.EmptyTodo);
                 } else {
@@ -80,7 +81,7 @@ public class Ui {
                     System.out.println("       " + t.toString());
                     System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
                 }
-            } else if (Parser.parse(input).equals("event")) {
+            } else if (parsedInput.equals("event")) {
                 if (input.replaceAll("\\s", "").length() == 5) {
                     throw new DukeException(DukeException.Type.EmptyEvent);
                 } else {
@@ -92,7 +93,7 @@ public class Ui {
                     System.out.println("       " + e.toString());
                     System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
                 }
-            } else if (Parser.parse(input).equals("deadline")) {
+            } else if (parsedInput.equals("deadline")) {
                 if (input.replaceAll("\\s", "").length() == 8) {
                     throw new DukeException(DukeException.Type.EmptyDeadline);
                 } else {
@@ -104,7 +105,27 @@ public class Ui {
                     System.out.println("       " + d.toString());
                     System.out.println(String.format("     Now you have %d tasks in the list.", list.size()));
                 }
-            } else if (Parser.parse(input).equals("InvalidCommand")) {
+            } else if (parsedInput.equals("find")) {
+                String query = input.substring(5).toLowerCase();
+                ArrayList<Task> tasksContainingQuery = new ArrayList<Task>();
+                for (int i = 0; i < list.size(); i++) {
+                    Task t = list.get(i);
+                    if (list.get(i).description.toLowerCase().contains(query)) {
+                        tasksContainingQuery.add(t);
+                    }
+                }
+                if (tasksContainingQuery.size() == 0) {
+                    System.out.println(separator);
+                    System.out.println("     You have no matching tasks in your list!");
+                } else {
+                    System.out.println(separator);
+                    System.out.println("     Here are the matching tasks in your list:");
+                    for (int i = 0; i < tasksContainingQuery.size(); i++) {
+                        Task item = tasksContainingQuery.get(i);
+                        System.out.println(String.format("     %d. %s", (i + 1), item.toString()));
+                    }
+                }
+            } else if (parsedInput.equals("InvalidCommand")) {
                 throw new DukeException(DukeException.Type.InvalidCommand);
             }
             System.out.println(separator);

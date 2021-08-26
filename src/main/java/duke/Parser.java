@@ -21,8 +21,10 @@ public class Parser {
             return "todo";
         } else if (inputLower.length() >= 5 && inputLower.substring(0, 5).equals("event")) {
             return "event";
-        }  else if (input.length() >= 8 && inputLower.substring(0, 8).equals("deadline")) {
+        } else if (inputLower.length() >= 8 && inputLower.substring(0, 8).equals("deadline")) {
             return "deadline";
+        } else if (inputLower.length() >=4 && inputLower.substring(0, 4).equals("find")) {
+            return "find";
         } else {
             return "InvalidCommand";
         }

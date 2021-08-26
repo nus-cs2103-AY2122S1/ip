@@ -23,7 +23,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
         while(!Parser.parse(input).equals("bye")) {
-            Storage.save(this.ui.run(Storage.load(), input), this.filePath);
+            this.storage.save(this.ui.run(Storage.load(), input), this.filePath);
             input = in.nextLine();
         }
         System.out.println(separator);
@@ -32,6 +32,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:\\Users\\Rickie\\Documents\\University\\Year 2\\Semester 1\\CS2103T\\week 2\\ip\\Data\\taskList.txt").run();
+        new Duke("C:\\Users\\Rickie\\Documents\\University\\Year 2\\Semester 1\\CS2103T\\ip\\Data\\taskList.txt").run();
     }
 }
