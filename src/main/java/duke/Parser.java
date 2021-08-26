@@ -194,6 +194,8 @@ public class Parser {
             throw new InvalidCommandException("Please specify a task you want to search");
         } else if (taskList.getSize() == 0) {
             throw new InvalidCommandException("You have not added any task!");
+        } else if (arr.length > 2) {
+            throw new InvalidCommandException("Please enter a single keyword!");
         } else {
             taskList.findTask(arr[1]);
         }
