@@ -1,4 +1,4 @@
-package operation;
+package duke.operation;
 
 /**
  * This is the ToDo class for todo tasks.

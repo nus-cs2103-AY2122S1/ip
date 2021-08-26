@@ -1,9 +1,11 @@
-import operation.TaskList;
-import storage.Storage;
-import ui.Ui;
-import Parser.Parser;
-import exception.DukeException;
-import operation.Command;
+package duke;
+
+import duke.operation.TaskList;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.Parser.Parser;
+import duke.exception.DukeException;
+import duke.operation.Command;
 
 import java.util.Scanner;
 

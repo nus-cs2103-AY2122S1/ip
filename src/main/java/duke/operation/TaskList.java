@@ -1,7 +1,7 @@
-package operation;
+package duke.operation;
 
-import Parser.Parser;
-import exception.DukeException;
+import duke.Parser.Parser;
+import duke.exception.DukeException;
 
 import java.util.ArrayList;
 

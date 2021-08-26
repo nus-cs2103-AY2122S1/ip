@@ -1,7 +1,7 @@
-package storage;
+package duke.storage;
 
-import operation.Task;
-import operation.TaskList;
+import duke.operation.Task;
+import duke.operation.TaskList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -14,7 +14,7 @@ import java.nio.file.Paths;
  * This is the Storage class to load and save tasks in file.
  */
 public class Storage {
-	private Path dir = Paths.get(System.getProperty("user.dir") + "/src/main/java/data");
+	private Path dir = Paths.get(System.getProperty("user.dir") + "/src/main/java/output");
 
 	/**
 	 * Creates duke.txt to contain task list, if not exists.

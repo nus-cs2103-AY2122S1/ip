@@ -1,6 +1,6 @@
-package Parser;
+package duke.Parser;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 
 public class Parser {
 	/**

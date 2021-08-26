@@ -1,4 +1,4 @@
-package operation;
+package duke.operation;
 
 /**
  * This is Command class to contain command strings to separate

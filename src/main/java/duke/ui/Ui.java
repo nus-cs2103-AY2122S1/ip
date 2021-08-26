@@ -1,4 +1,4 @@
-package ui;
+package duke.ui;
 
 /**
  * This is the Display class to handle UI of Duke.
