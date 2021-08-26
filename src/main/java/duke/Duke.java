@@ -5,12 +5,16 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Duke {
-    static Path DATA_PATH = Paths.get(
+    private static final Path DATA_PATH = Paths.get(
         System.getProperty("user.dir"),
         "data",
         "duke.txt"
     );
 
+    /**
+     * Main method for Duke class.
+     * @param args List of arguments.
+     */
     public static void main(String[] args) {
         TaskList tasks = new TaskList();
         Storage storage = new Storage(DATA_PATH);

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Wrapper class around List<Task>, representing a list of tasks.
+ * Wrapper class around List object, representing a list of tasks.
  */
 public class TaskList {
     private List<Task> tasks;
