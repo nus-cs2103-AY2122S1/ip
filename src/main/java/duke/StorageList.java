@@ -15,8 +15,6 @@ public class StorageList {
     private File file;
     private Ui ui = new Ui();
 
-    public StorageList() {};
-
     public StorageList(File file) throws FileNotFoundException {
         this.file = file;
         readFile(new Scanner(file));
