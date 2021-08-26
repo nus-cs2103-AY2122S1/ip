@@ -1,6 +1,7 @@
-package saber;
+package saber.parser;
 
 /** Import all saber commands as the parse function require all of them */
+import saber.Saber;
 import saber.commands.*;
 
 import saber.exceptions.MissingArgumentException;
@@ -96,88 +97,79 @@ public class SaberParser {
      */
     public SaberCommand parse() throws SaberCommandNotFoundException {
         Saber.InputCommand commandType = getCommandType();
+
         SaberCommand command;
-
         switch (commandType) {
-            case add:
-                try {
-                    String taskForAdd = getArgument();
-                    command = new AddCommand(taskForAdd, false);
-                } catch (MissingArgumentException e) {
-                    command = new AddCommand("", true);
-                }
-                break;
-
-            case bye:
-                command = new ByeCommand();
-                break;
-
-            case done:
-                try {
-                    int taskIndex = Integer.parseInt(getArgument());
-                    command = new DoneCommand(taskIndex - 1, false);
-                } catch (MissingArgumentException | NumberFormatException e) {
-                    command = new DoneCommand(0, true);
-                }
-                break;
-
-            case deadline:
-                try {
-                    String deadlineTask = getArgument();
-                    String deadlineTime = getTime();
-                    command = new DeadlineCommand(deadlineTask, deadlineTime, false, false);
-                } catch (MissingArgumentException e) {
-                    command = new DeadlineCommand("", "", true, false);
-                } catch (MissingTimeException e) {
-                    command = new DeadlineCommand("", "", false, true);
-                }
-                break;
-
-            case delete:
-                try {
-                    int taskIndex = Integer.parseInt(getArgument());
-                    command = new DeleteCommand(taskIndex - 1, false);
-                } catch (MissingArgumentException | NumberFormatException e) {
-                    command = new DeleteCommand(0, true);
-                }
-                break;
-
-            case event:
-                try {
-                    String eventTask = getArgument();
-                    String eventTime = getTime();
-                    command = new EventCommand(eventTask, eventTime, false, false);
-                } catch (MissingArgumentException e) {
-                    command = new EventCommand("", "", true, false);
-                } catch (MissingTimeException e) {
-                    command = new EventCommand("", "", false, true);
-                }
-                break;
-
-            case find:
-                try {
-                    String findString = getArgument();
-                    command = new FindCommand(findString, false);
-                } catch (MissingArgumentException e) {
-                    command = new FindCommand("", true);
-                }
-                break;
-
-            case todo:
-                try {
-                    String taskForTodo = getArgument();
-                    command = new TodoCommand(taskForTodo, false);
-                } catch (MissingArgumentException e) {
-                    command = new TodoCommand("", true);
-                }
-                break;
-
-            case list:
-                command = new ListCommand();
-                break;
-
-            default:
-                command = null;
+        case add:
+            try {
+                String taskForAdd = getArgument();
+                command = new AddCommand(taskForAdd, false);
+            } catch (MissingArgumentException e) {
+                command = new AddCommand("", true);
+            }
+            break;
+        case bye:
+            command = new ByeCommand();
+            break;
+        case done:
+            try {
+                int taskIndex = Integer.parseInt(getArgument());
+                command = new DoneCommand(taskIndex - 1, false);
+            } catch (MissingArgumentException | NumberFormatException e) {
+                command = new DoneCommand(0, true);
+            }
+            break;
+        case deadline:
+            try {
+                String deadlineTask = getArgument();
+                String deadlineTime = getTime();
+                command = new DeadlineCommand(deadlineTask, deadlineTime, false, false);
+            } catch (MissingArgumentException e) {
+                command = new DeadlineCommand("", "", true, false);
+            } catch (MissingTimeException e) {
+                command = new DeadlineCommand("", "", false, true);
+            }
+            break;
+        case delete:
+            try {
+                int taskIndex = Integer.parseInt(getArgument());
+                command = new DeleteCommand(taskIndex - 1, false);
+            } catch (MissingArgumentException | NumberFormatException e) {
+                command = new DeleteCommand(0, true);
+            }
+            break;
+        case event:
+            try {
+                String eventTask = getArgument();
+                String eventTime = getTime();
+                command = new EventCommand(eventTask, eventTime, false, false);
+            } catch (MissingArgumentException e) {
+                command = new EventCommand("", "", true, false);
+            } catch (MissingTimeException e) {
+                command = new EventCommand("", "", false, true);
+            }
+            break;
+        case find:
+            try {
+                String findString = getArgument();
+                command = new FindCommand(findString, false);
+            } catch (MissingArgumentException e) {
+                command = new FindCommand("", true);
+            }
+            break;
+        case todo:
+            try {
+                String taskForTodo = getArgument();
+                command = new TodoCommand(taskForTodo, false);
+            } catch (MissingArgumentException e) {
+                command = new TodoCommand("", true);
+            }
+            break;
+        case list:
+            command = new ListCommand();
+            break;
+        default:
+            command = null;
         }
         return command;
     }

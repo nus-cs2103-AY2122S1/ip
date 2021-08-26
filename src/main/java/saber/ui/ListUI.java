@@ -1,7 +1,7 @@
 package saber.ui;
 
 import saber.task.Task;
-import saber.TaskList;
+import saber.tasklist.TaskList;
 
 /**
  * A class to encapsulate the UI corresponding to ListCommand

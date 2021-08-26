@@ -1,6 +1,6 @@
 package saber.ui;
 
-import saber.TaskList;
+import saber.tasklist.TaskList;
 import saber.task.Task;
 
 /**
@@ -46,7 +46,6 @@ public class FindUI extends SaberCommandUI {
         if (!hasFoundAtLeastOneTask) {
             successTemp.append("\n      Ah, currently Master has no such task.\n");
         }
-
         this.successMessage = successTemp.toString();
     }
 

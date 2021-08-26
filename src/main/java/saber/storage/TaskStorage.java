@@ -1,4 +1,4 @@
-package saber;
+package saber.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +15,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import saber.Saber;
+import saber.tasklist.TaskList;
 import saber.exceptions.SaberStorageLoadException;
 import saber.exceptions.SaberStorageStoreException;
 import saber.exceptions.SaberTaskTypeNotFoundException;
@@ -54,8 +56,9 @@ public class TaskStorage {
         // This will load from givenpath/data/tasks.json
         java.nio.file.Path path = java.nio.file.Paths.get(this.path, "data", "tasks.json");
 
-        try (FileReader reader = new FileReader(path.toString()))
-        {
+        try {
+            FileReader reader = new FileReader(path.toString());
+
             // Read JSON file
             Object obj = jsonParser.parse(reader);
             JSONArray taskJsonList = (JSONArray) obj;
@@ -86,6 +89,7 @@ public class TaskStorage {
         boolean isDone = (Boolean) taskObject.get("isDone");
         String type = (String) taskObject.get("type");
         String time = (String) taskObject.get("time");
+
         Saber.TaskType taskType;
         try {
             taskType =  Saber.TaskType.valueOf(type);
@@ -97,21 +101,18 @@ public class TaskStorage {
         // Create the new task object depending on the task type
         Task parsedTask;
         switch (taskType) {
-            case deadline :
-                parsedTask = new Deadline(description, time, isDone);
-                break;
-
-            case event :
-                parsedTask = new Event(description, time, isDone);
-                break;
-
-            case todo :
-                parsedTask = new Todo(description, isDone);
-                break;
-
-            default :
-                parsedTask = new Task(description, isDone);
-                break;
+        case deadline :
+            parsedTask = new Deadline(description, time, isDone);
+            break;
+        case event :
+            parsedTask = new Event(description, time, isDone);
+            break;
+        case todo :
+            parsedTask = new Todo(description, isDone);
+            break;
+        default :
+            parsedTask = new Task(description, isDone);
+            break;
         };
 
         return parsedTask;
@@ -138,22 +139,22 @@ public class TaskStorage {
             taskDetails.put("isDone", task.getIsDone());
 
             switch (taskType[i]) {
-                case deadline :
-                    Deadline deadlineTask = (Deadline) task;
-                    taskDetails.put("type", taskType[i].name());
-                    taskDetails.put("time", deadlineTask.getTimeInString());
-                    break;
+            case deadline :
+                Deadline deadlineTask = (Deadline) task;
 
-                case event :
-                    Event eventTask = (Event) task;
-                    taskDetails.put("type", taskType[i].name());
-                    taskDetails.put("time", eventTask.getTimeInString());
-                    break;
+                taskDetails.put("type", taskType[i].name());
+                taskDetails.put("time", deadlineTask.getTimeInString());
+                break;
+            case event :
+                Event eventTask = (Event) task;
 
-                default :
-                    taskDetails.put("type", taskType[i].name());
-                    taskDetails.put("time", "");
-                    break;
+                taskDetails.put("type", taskType[i].name());
+                taskDetails.put("time", eventTask.getTimeInString());
+                break;
+            default :
+                taskDetails.put("type", taskType[i].name());
+                taskDetails.put("time", "");
+                break;
             }
 
             JSONObject taskObject = new JSONObject();

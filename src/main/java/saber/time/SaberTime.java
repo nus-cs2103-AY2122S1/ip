@@ -1,4 +1,4 @@
-package saber;
+package saber.time;
 
 import saber.exceptions.SaberTimeParserException;
 
@@ -73,6 +73,7 @@ public class SaberTime {
             }
         }
 
+        // Throw an exception if all prescribed date format fails
         if (this.localDate == null && this.localDateTime == null) {
             throw new SaberTimeParserException("Unable to parse time");
         }
@@ -90,7 +91,6 @@ public class SaberTime {
         } else {
             time = localDate.format(DATE_FORMAT_WITHOUT_HOURS_FOR_DISPLAY);
         }
-
         return time;
     }
 

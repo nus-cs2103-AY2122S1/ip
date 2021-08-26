@@ -1,6 +1,6 @@
 package saber.commands;
 
-import saber.TaskList;
+import saber.tasklist.TaskList;
 import saber.ui.FindUI;
 
 /**
