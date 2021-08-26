@@ -24,6 +24,7 @@ public class ExitCommand extends Command {
      * @param storage  Instance of storage class used.
      * @throws KermitException if there is an error saving the file.
      */
+    @Override
     public void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
         ui.showGoodbyeMessage();
         storage.save(taskList);
@@ -34,6 +35,7 @@ public class ExitCommand extends Command {
      *
      * @return Always returns true as this is the exit command.
      */
+    @Override
     public boolean isExit() {
         return true;
     }
