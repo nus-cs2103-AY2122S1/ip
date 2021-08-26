@@ -64,6 +64,24 @@ public class TaskList {
         return tasks.remove(taskNumber - 1);
     }
 
+    /**
+     * Filters tasks that contains the query into an ArrayList of
+     * tasks and returns the string representation of it.
+     *
+     * @param query The keyword to search for in the task list.
+     * @return The string representation of the task list that is
+     *         filtered to those that satisfy the query.
+     */
+    public String getFilteredTasksString(String query) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(query)) {
+                filteredTasks.add(task);
+            }
+        }
+        return getStringFromTasks(filteredTasks);
+    }
+
     public int getSize() {
         return tasks.size();
     }
@@ -72,20 +90,24 @@ public class TaskList {
         return tasks.get(index);
     }
 
-    @Override
-    public String toString() {
+    private String getStringFromTasks(ArrayList<Task> tasks) {
         StringBuilder tasksString = new StringBuilder();
 
-        for (int i = 0; i < getSize(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             int taskNumber = i + 1;
             tasksString
                     .append(taskNumber)
                     .append(".")
-                    .append(getTask(i))
-                    .append(i == (getSize() - 1) ? "" : "\n");
+                    .append(tasks.get(i))
+                    .append(i == (tasks.size() - 1) ? "" : "\n");
         }
 
         return tasksString.toString();
+    }
+
+    @Override
+    public String toString() {
+        return getStringFromTasks(tasks);
     }
 
 }

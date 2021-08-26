@@ -45,6 +45,19 @@ public class Message {
                 + (taskCount == 1 ? " task " : " tasks ") + "in the list."));
     }
 
+    /**
+     * Prints the matching tasks in the user's list after the user has made a query
+     * to find tasks.
+     *
+     * @param filteredTasksString Tasks that have been filtered out and are stored as a
+     *                            number list representation in a string.
+     */
+    public static void printFindTasksMessage(String filteredTasksString) {
+        System.out.println(formatDukeResponse("Here are the matching tasks in your list:\n"
+                + filteredTasksString));
+    }
+
+
     public static void printInvalidCommandMessage() {
         System.out.println(formatDukeResponse("Oops!!! I'm sorry, but I don't know what that means."));
     }

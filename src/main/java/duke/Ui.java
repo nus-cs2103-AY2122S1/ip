@@ -47,6 +47,17 @@ public class Ui {
         Message.printDeleteTaskMessage(removedTask, tasks.getSize());
     }
 
+    /**
+     * Handles the scenario when the user wants to find tasks that contains
+     * what he/she wants to query for.
+     *
+     * @param query The keyword(s) to find the tasks in the task list.
+     */
+    private void handleFindTask(String query) {
+        String filteredTasksString = tasks.getFilteredTasksString(query);
+        Message.printFindTasksMessage(filteredTasksString);
+    }
+
     private int retrieveTaskNumber(String taskNumberString) throws DukeException {
         int taskNumber;
         try {
@@ -91,6 +102,9 @@ public class Ui {
                 case "deadline":
                 case "event":
                     handleAddDateTask(action, command);
+                    break;
+                case "find":
+                    handleFindTask(action);
                     break;
                 default:
                     Message.printInvalidCommandMessage();
