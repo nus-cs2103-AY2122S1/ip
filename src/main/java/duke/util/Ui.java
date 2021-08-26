@@ -22,7 +22,7 @@ public class Ui {
     public void showIntroduction() {
         System.out.print(LOGO);
         System.out.printf(FORMAT, LINE);
-        System.out.printf(FORMAT, "Hello there, I'm duke.Duke!");
+        System.out.printf(FORMAT, "Hello there, I'm Duke!");
         System.out.printf(FORMAT, "What can I do for you today?");
         System.out.printf(FORMAT, LINE);
     }
@@ -44,7 +44,7 @@ public class Ui {
     }
 
     public void showFileNotFoundError() {
-        System.out.printf(FORMAT, "This appears to be your first time using duke.Duke.");
+        System.out.printf(FORMAT, "This appears to be your first time using Duke.");
         System.out.printf(FORMAT, "A save file will be created to save your tasks when you first add a task.");
     }
 
