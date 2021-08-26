@@ -17,6 +17,6 @@ public class DoneCommand extends Command {
         }
         return (taskList.markAsDone(taskNo))
                 ? new CommandResult("I've marked this task as done:\n  " + taskList.get(taskNo))
-                : new CommandResult("duke.task.Task already done.");
+                : new CommandResult("Task already done.");
     }
 }
