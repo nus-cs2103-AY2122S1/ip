@@ -26,7 +26,8 @@ public class TaskList {
         listOfTask.add(task);
         int counter = listOfTask.size();
         storage.save(listOfTask);
-        System.out.println("Got it. I've added this task:\n" + "  " + task.toString() + "\nNow you have " + counter + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + "  " + task.toString() + "\nNow you have " + counter +
+                " tasks in the list.");
     }
 
     /**
@@ -38,7 +39,8 @@ public class TaskList {
         Task item = listOfTask.get(index - 1);
         listOfTask.remove(index - 1);
         storage.save(listOfTask);
-        System.out.println("Noted. I've removed this task:\n  " + item + "\nNow you have " + listOfTask.size() + " tasks left in the list");
+        System.out.println("Noted. I've removed this task:\n  " + item + "\nNow you have " + listOfTask.size() +
+                " tasks left in the list");
     }
 
     /**
@@ -66,6 +68,27 @@ public class TaskList {
             storage.save(listOfTask);
             System.out.println("Nice! I've marked this task as done:\n  " + listOfTask.get(number - 1));
             return;
+        }
+    }
+
+    /**
+     * Find text on arraylist that contains user input
+     *
+     * @param toFind is the user input
+     */
+    public void find(String toFind) {
+        int counter = 0;
+        for(int i = 0; i < listOfTask.size(); i++) {
+            if(listOfTask.get(i).toString().contains(toFind)) {
+                counter++;
+                if(counter == 1) {
+                    System.out.println("Here are the matching tasks in your list:");
+                }
+                System.out.println(counter + "." + listOfTask.get(i));
+            }
+        }
+        if(counter == 0) {
+            System.out.println("There are no matching tasks in your list");
         }
     }
 }

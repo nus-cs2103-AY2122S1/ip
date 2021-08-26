@@ -43,6 +43,9 @@ public class Parser {
             } else if (input.length() > 7 && input.substring(0, 7).equals("delete ")) {
                 String[] split = input.substring(6).split("\\s+");
                 taskList.deleteTask(Integer.parseInt(split[1]));
+            } else if (input.length() > 5 && input.substring(0, 5).equals("find ")) {
+                String toFind = input.substring(5);
+                taskList.find(toFind);
             } else if (checkInvalidDescription(input)) {
                 throw new InvalidDescription(input);
             } else if (input.length() > 0) {
