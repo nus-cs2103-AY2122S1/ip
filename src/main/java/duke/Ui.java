@@ -31,7 +31,10 @@ TaskList taskList;
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
     }
-
+    /**
+     * Marks item as done on the list
+     * @param item User input to complete item from list
+     */
     public void doneResponse(String item) {
         try {
             item = item.replaceAll("\\D+","");//Extracts number from input
@@ -50,7 +53,10 @@ TaskList taskList;
 //            continue;
         }
     }
-
+    /**
+     * Removes task from TaskList and updates user with number of tasks left to do
+     * @param item User input to delete item from list
+     */
     public void deleteResponse(String item) {
         item = item.replaceAll("\\D+","");//Extracts number from input
         int removeItem = Integer.parseInt(item);

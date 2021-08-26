@@ -16,8 +16,12 @@ class Storage {
         this.filePath = filePath;
         this.tasklist = new TaskList();
     }
-
-     void saveTasks(TaskList tasks){//Called on "bye"
+    /**
+     * Gets called when user inputs bye.Saves tasks to hard disk in
+     * DukeData.txt file
+     * @param tasks TaskList containing tasks
+     */
+     void saveTasks(TaskList tasks){
         try{
             File data_file = new File("Data/DukeData.txt");
             FileWriter writer = new FileWriter("Data/DukeData.txt");//Overwriting entire file
@@ -37,7 +41,10 @@ class Storage {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Called when chatbot starts to load up TaskList
+     * @param filePath FilePath where data is stored
+     */
      static void readFile(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source

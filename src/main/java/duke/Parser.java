@@ -9,6 +9,7 @@ class Parser {
    Scanner myScanner;
    boolean breakLoop = false;
 
+
      Parser(Scanner myScanner) {
           this.storage = new Storage("Data/DukeData.txt");
           this.myScanner = myScanner;
@@ -28,8 +29,12 @@ class Parser {
      public void breakOutLoop(){
           breakLoop = true;
      }
-
-     public void parse(String input) {//Call appropriate UI function
+    /**
+     * Calls appropriate UI functions based on input
+     * @param input String passed by user
+     *
+     */
+     public void parse(String input) {
           if (input.equals("bye")) {
                ui.byeResponse();
                storage.saveTasks(tasklist);
