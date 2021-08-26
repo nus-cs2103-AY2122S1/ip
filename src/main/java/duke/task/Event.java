@@ -5,6 +5,7 @@ import duke.util.DukeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -59,11 +60,6 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
-    @Override
-    public Task markAsDone() {
-        return new Event(this.taskName, true, this.date, this.startTime, this.endTime);
-    }
-
     /**
      * Checks if the current task has the same date as the input date.
      *
@@ -91,6 +87,11 @@ public class Event extends Task {
     public String toSaveData() {
         return "E|" + super.toSaveData() + "|" + this.date
                 + "|" + this.startTime + "|" + this.endTime;
+    }
+
+    @Override
+    public Task markAsDone() {
+        return new Event(this.taskName, true, this.date, this.startTime, this.endTime);
     }
 
     @Override

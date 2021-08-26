@@ -32,6 +32,29 @@ public class Task {
     }
 
     /**
+     * Checks if the current task has the same date as the input date.
+     * Proper functionality is present in the Deadline and Event classes.
+     *
+     * @param date A LocalDate object that contains date information.
+     * @return False, since this class does not contain a date attribute.
+     */
+
+    public boolean hasSameDate(LocalDate date) {
+        return false;
+    }
+
+    /**
+     * Checks if the current task occurs before the input date and time.
+     * Proper functionality is present in the Deadline and Event classes.
+     *
+     * @param dateTime A LocalDateTime object that contains date and time information.
+     * @return False, since this class does not contain date/time attributes.
+     */
+    public boolean isBeforeDate(LocalDateTime dateTime) {
+        return false;
+    }
+
+    /**
      * Marks the current task as done. Returns a new instance of the task to maintain immutability.
      *
      * @return A task with the same task name, but is marked as done.
@@ -47,28 +70,6 @@ public class Task {
      */
     public String toSaveData() {
         return this.isDone + "|" + this.taskName;
-    }
-
-    /**
-     * Checks if the current task has the same date as the input date.
-     * Proper functionality is present in the Deadline and Event classes.
-     *
-     * @param date A LocalDate object that contains date information.
-     * @return False, since this class does not contain a date attribute.
-     */
-    public boolean hasSameDate(LocalDate date) {
-        return false;
-    }
-
-    /**
-     * Checks if the current task occurs before the input date and time.
-     * Proper functionality is present in the Deadline and Event classes.
-     *
-     * @param dateTime A LocalDateTime object that contains date and time information.
-     * @return False, since this class does not contain date/time attributes.
-     */
-    public boolean isBeforeDate(LocalDateTime dateTime) {
-        return false;
     }
 
     /**

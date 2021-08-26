@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -40,11 +41,6 @@ public class Deadline extends Task {
         this.time = time;
     }
 
-    @Override
-    public Task markAsDone() {
-        return new Deadline(this.taskName, true, this.date, this.time);
-    }
-
     /**
      * Checks if the current task has the same date as the input date.
      *
@@ -71,6 +67,11 @@ public class Deadline extends Task {
     @Override
     public String toSaveData() {
         return "D|" + super.toSaveData() + "|" + this.date + "|" + this.time;
+    }
+
+    @Override
+    public Task markAsDone() {
+        return new Deadline(this.taskName, true, this.date, this.time);
     }
 
     @Override
