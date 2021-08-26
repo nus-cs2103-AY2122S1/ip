@@ -1,9 +1,8 @@
 package duke;
 
 /**
- * Task class. List HAS-A Task (encapsulation).
- *
- * @author Timothy Wong Eu-Jin
+ * Task class.
+ * TODO: Make abstract
  */
 
 public class Task {
@@ -11,29 +10,52 @@ public class Task {
     private String description;
     private boolean isDone;
 
-    //Constructor
+    /**
+     * Constructs a Task object.
+     *
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    //markAsDone method indicates a task in completed
+    /**
+     * Marks the Task as done.
+     */
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Queries whether the Task is done.
+     * @return boolean isDone.
+     */
     public boolean isDone() {
         return this.isDone;
     }
 
+    /**
+     * Returns the status icon depending on whether the Task is done.
+     * @return String Representation.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * Returns the description of the Task.
+     * @return Description.
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Returns ths string representation of Task.
+     *
+     * @return Representation of Task.
+     */
     @Override
     public String toString() {
         return ("[" + this.getStatusIcon() + "] " + this.getDescription());

@@ -2,7 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 /**
- * Contains the task list e.g. it has operation to add/delete tasks in the list
+ * Contains the task list e.g. it has operation to add/delete tasks in the list.
  *
  * @author Timothy Wong Eu-Jin
  */
@@ -11,22 +11,30 @@ public class TaskList {
 
     private ArrayList<Task> arrayList;
 
-    /** Constructor for a new TaskList */
+    /**
+     * Constructor for a new, empty TaskList.
+     *
+     */
     public TaskList() {
         this.arrayList = new ArrayList<Task>();
     }
 
-    /** Constructor for an empty TaskList */
-    public TaskList(ArrayList<Task> arrayList) {
-        this.arrayList = arrayList;
-    }
-
-    /** Adds a task to the TaskList. */
+    /**
+     * Adds a task to the TaskList.
+     *
+     * @param task The task to be added.
+     */
     public void add(Task task) {
         this.arrayList.add(task);
     }
 
-    /** Returns a task at the specified index. */
+    /**
+     * Returns a task at the specified index.
+     *
+     * @param index Index of task.
+     * @return Task Task at index.
+     * @throws InvalidDescriptionException If index is out of bounds of TaskList.
+     */
     public Task getIndex(int index) throws InvalidDescriptionException {
         if (index < 1 || index > arrayList.size()) {
             throw new InvalidDescriptionException("The task you have indicated does not exist!");
@@ -34,34 +42,39 @@ public class TaskList {
         return this.arrayList.get(index - 1);
     }
 
-    /** Marks a specific task as done, returns the task. */
+    /**
+     * Marks a specific task as done.
+     *
+     * @param index Index of task.
+     * @return Task Completed Task at index.
+     * @throws InvalidDescriptionException
+     */
     public Task markAsDone(int index) throws InvalidDescriptionException {
         Task completedTask = this.getIndex(index);
         completedTask.markAsDone();
         return completedTask;
-
     }
 
-    /** Deletes a specific task, returns the task. */
+    /**
+     * Deletes a specific task.
+     *
+     * @param index Index of task.
+     * @return Task Deleted Task at index.
+     * @throws InvalidDescriptionException
+     */
     public Task deleteTask(int index) throws InvalidDescriptionException {
         Task deletedTask = this.getIndex(index);
         this.arrayList.remove(index - 1);
         return deletedTask;
     }
 
-//    //getNumOfTasks method prints the number of tasks in the list
-//    public void getNumOfTasks() {
-//        int totalNum = this.array.size();
-//        if (totalNum == 1) {
-//            System.out.println("Now you have " + totalNum + " task in the list");
-//        } else {
-//            System.out.println("Now you have " + totalNum + " tasks in the list");
-//        }
-//    }
-
-    //getAll method to return all entries in list
+    /**
+     * Gets the entire instance of the TaskList.
+     *
+     * TODO: Change this to toString (information hiding).
+     * @return
+     */
     public ArrayList<Task> getAll() {
         return this.arrayList;
     }
-
 }

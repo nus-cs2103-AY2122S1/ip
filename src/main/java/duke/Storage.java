@@ -7,16 +7,28 @@ import java.util.Scanner;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-/** Deals with loading tasks from the file and saving tasks in the file */
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     String filePath;
 
-    /** Constructor */
+    /**
+     * Constructs a Storage object.
+     *
+     * @param filePath The path of saved file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     };
 
-    /** Starts up the file reader, creates file if it does not exist. */
+    /**
+     * Starts up the file reader, creates file if it does not exist.
+     *
+     * @return TaskList New TaskList with inputs from filePath.
+     * @throws DukeException
+     * @throws IOException
+     */
     public TaskList load() throws DukeException, IOException {
         File f = new File(filePath);
         if (!f.exists()) {
@@ -26,8 +38,8 @@ public class Storage {
         TaskList storedTaskList = new TaskList();
         int index = 1;
 
+        // Insert tasks from hard disk into TaskList.
         Scanner s = new Scanner(f);
-
         while (s.hasNext()) {
             String unformattedTask = s.nextLine();
             System.out.println(unformattedTask);
@@ -61,21 +73,23 @@ public class Storage {
         return storedTaskList;
     }
 
-    /** Write to file. Rewrite everytime there is a done / delete command */
-    public static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    /** Append to file. Append when adding a new item*/
-    public static void appendToFile(String filePath, String textToAppend) throws IOException {
+    /**
+     * Appends to file. Append when adding new tasks.
+     * @param textToAppend
+     * @throws IOException
+     */
+    public void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(System.lineSeparator() + textToAppend);
         fw.close();
     }
 
-    /** Rewrites the entire file with the given string. */
+    /**
+     * Rewrites the entire file with the given string.
+     *
+     * @param tasks TaskList to write into file.
+     * @throws IOException
+     */
     public void rewriteFile(TaskList tasks) throws IOException {
         String req = "";
         for (Task task : tasks.getAll()) {
@@ -98,18 +112,18 @@ public class Storage {
                 req += System.lineSeparator();
             }
         }
-        Storage.writeToFile(filePath, req);
+
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(req);
+        fw.close();
     }
 
-    /** Test */
-    public static void run() {
-        String filePath = "data/list.txt";
-        File f = new File(filePath);
-        System.out.println("full path:" + f.getAbsolutePath());
-        System.out.println("file exists?:" + f.exists());
-        System.out.println("is directory?:" + f.isDirectory());
-    }
-
-    public static void main(String[] args) {
-    }
+//    /** Test */
+//    public static void run() {
+//        String filePath = "data/list.txt";
+//        File f = new File(filePath);
+//        System.out.println("full path:" + f.getAbsolutePath());
+//        System.out.println("file exists?:" + f.exists());
+//        System.out.println("is directory?:" + f.isDirectory());
+//    }
 }

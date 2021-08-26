@@ -3,30 +3,39 @@ package duke;
 import java.util.Scanner;
 import java.util.ArrayList;
 /**
- * Ui class
- *
- * @author Timothy Wong Eu-Jin
+ * Deals with interactions with the user.
  */
-
-/** Deals with interactions with the user. */
 public class Ui {
 
-    boolean isExit;
+    private boolean isExit;
 
+    /**
+     * Constructs a Ui Object.
+     */
     public Ui() {
         isExit = false;
     }
 
+    /**
+     * Creates a scanner to read the input command.
+     *
+     * @return One command line.
+     */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
+    /**
+     * Prints a standard line break.
+     */
     public void showDivider() {
         System.out.println("-------------------------------------");
     }
 
-    /** Prints greeting statement */
+    /**
+     * Prints greeting statement.
+     */
     public void greet() {
         String logo = " ____        _\n"
                 + "|  _ \\ _   _| | _____\n"
@@ -41,20 +50,31 @@ public class Ui {
         showDivider();
     }
 
-    /** Checks if program has exited */
+    /**
+     * Checks if program has exited.
+     * @return boolean isExit.
+     */
     public boolean isExit() {
         return this.isExit;
     }
 
-    /** Prints goodbye statement */
+    /**
+     * Prints goodbye statement.
+     *
+     * Changes isExit to true.
+     */
     public void sendGoodbye() {
         showDivider();
         System.out.println("Bye. Hope to see you again soon!");
         showDivider();
-        isExit = true;
+        this.isExit = true;
     }
 
-    /** Prints response after successfully adding task */
+    /**
+     * Prints response after successfully adding task.
+     *
+     * @param task Added Task.
+     */
     public void sendAddTask(Task task) {
         showDivider();
         System.out.println("Got it. I've added this task:");
@@ -62,7 +82,11 @@ public class Ui {
         showDivider();
     }
 
-    /** Prints done task statement */
+    /**
+     * Prints done task statement.
+     *
+     * @param task Completed Task.
+     */
     public void sendDone(Task task) {
         showDivider();
         System.out.println("Nice! I've marked this task as done:");
@@ -70,14 +94,22 @@ public class Ui {
         showDivider();
     }
 
-    /** Prints deleted task statement */
+    /**
+     * Prints deleted task statement.
+     *
+     * @param task Deleted Task.
+     */
     public void sendDeleted(Task task) {
         showDivider();
         System.out.println("Noted. I've removed this task:\n" + task.toString());
         showDivider();
     }
 
-    /** Prints all tasks statement */
+    /**
+     * Prints all tasks statement.
+     *
+     * @param tasks
+     */
     public void enumTasks(ArrayList<Task> tasks) {
         showDivider();
         int count = 1;
@@ -88,7 +120,11 @@ public class Ui {
         showDivider();
     }
 
-    /** Print error message */
+    /**
+     * Prints error message.
+     *
+     * @param s
+     */
     public void showError(String s) {
         System.err.println(s);
     }

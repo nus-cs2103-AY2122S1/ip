@@ -3,9 +3,7 @@ package duke;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 /**
- * Duke class
- *
- * @author Timothy Wong Eu-Jin
+ * Runs the program Duke.
  */
 public class Duke {
     private Storage storage;
@@ -13,7 +11,13 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    //Constructor
+    /**
+     * Constructs a Duke object to start the program.
+     *
+     * Calls storage to load the TaskList data from the hard disk.
+     *
+     * @param filePath relative file path of output file.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -28,8 +32,14 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program
+     *
+     * Handles errors within a while loop.
+     */
     public void run() {
-        this.ui.greet();
+        ui.greet();
+
         boolean isExit = false;
         while(!isExit) {
             try {
@@ -40,17 +50,19 @@ public class Duke {
                 isExit = ui.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } catch (IOException e) {
+            } catch (IOException | DateTimeParseException e) {
                 System.err.println(e.getMessage());
-            } catch (DateTimeParseException e) {
-                System.err.println(e.getMessage());
-            }
-            finally {
+            } finally {
                 ui.showDivider();
             }
         }
     }
 
+    /**
+     * Initialises an instance of Duke and runs it.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("data/tasks.txt");
         duke.run();
