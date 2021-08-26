@@ -1,87 +1,94 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class TaskList {
     private final List<Task> tasks;
-    public TaskList(Scanner sc) {
+
+    public TaskList() {
         tasks = new ArrayList<>();
-        loadTasks(sc);
     }
 
-    public void loadTasks(Scanner sc) {
-        if(sc != null){
+    public void loadTasks(File file) throws StorageException {
+        try {
+            Scanner sc = new Scanner(file);
             while(sc.hasNext()) {
                 String taskString = sc.nextLine();
                 String[] splitTaskString = taskString.split(Task.STORAGE_DELIMITER);
                 Task task = null;
 
-                if(splitTaskString[0].equals("T")) {
-                    task = new Todo(splitTaskString[1], Boolean.valueOf(splitTaskString[2]));
-                } else if(splitTaskString[0].equals("E")) {
-                    task = new Event(splitTaskString[1], Boolean.valueOf(splitTaskString[2]), splitTaskString[3]);
-                } else if(splitTaskString[0].equals("D")) {
-                    task = new Deadline(splitTaskString[1], Boolean.valueOf(splitTaskString[2]), splitTaskString[3]);
+                switch (splitTaskString[0]) {
+                case Todo.IDENTIFIER:
+                    task = new Todo(splitTaskString[1], Boolean.parseBoolean(splitTaskString[2]));
+                    break;
+                case Event.IDENTIFIER:
+                    task = new Event(splitTaskString[1], Boolean.parseBoolean(splitTaskString[2]), splitTaskString[3]);
+                    break;
+                case Deadline.IDENTIFIER:
+                    task =
+                        new Deadline(splitTaskString[1], Boolean.parseBoolean(splitTaskString[2]), splitTaskString[3]);
+                    break;
                 }
 
                 if(task != null) {
                     tasks.add(task);
                 }
             }
+        } catch (FileNotFoundException ignored) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+            throw new StorageException("Txt file for loading tasks is wrongly formatted. Some tasks were not loaded");
         }
     }
 
-    public String add(Task task) {
+    public Task add(Task task) {
         tasks.add(task);
-        return "Got it. I've added this task:\n  " + task + '\n' +
-            "You have " + numTasks() + " tasks in the list\n";
+        return task;
     }
 
-    public String markTaskDone(String userInput) throws MalformedCommandException {
+    public Task markTaskDone(int taskIndex) throws MalformedCommandException {
         try {
-            String userProvidedIndex = userInput.split(" ", 2)[1];
-            int taskIndex = Integer.valueOf(userProvidedIndex) - 1;
             Task task = tasks.get(taskIndex);
             task.markDone();
-            return "Nice! this task has been marked done:\n  " + task + "\n";
-        } catch(NumberFormatException | IndexOutOfBoundsException e) {
-            throw new MalformedCommandException(
-                "Please provide a valid integer index for the task you want to mark as done like so: " +
-                    "done [taskIndex in integer form]");
+            return task;
+        } catch(IndexOutOfBoundsException e) {
+
+            throw new MalformedCommandException("You only have " + numTasks() + " tasks currently. " +
+                "Please provide a task index from that list");
         }
+
     }
 
-    public String list() {
-        String taskStringRepresentation = "";
-        for(int i = 0; i < numTasks(); i++) {
-           taskStringRepresentation += (i+1) + ". " + tasks.get(i) + "\n";
-        }
-       return "Here are the tasks in your list:\n" + taskStringRepresentation;
-    }
-
-    public String save() {
-        String taskStorageRepresentation = "";
-        for(int i = 0; i < numTasks(); i++) {
-            taskStorageRepresentation += tasks.get(i).formatForStorage() + "\n";
-        }
-        return taskStorageRepresentation;
-    }
-
-    public String delete(String userInput) throws MalformedCommandException {
+    public Task delete(int taskIndex) throws MalformedCommandException {
         try {
-            String userProvidedIndex = userInput.split(" ", 2)[1];
-            int taskIndex = Integer.valueOf(userProvidedIndex) - 1;
-            Task task = tasks.remove(taskIndex);
-            return "Noted. I've removed this task:\n " + task + '\n' +
-                "You have " + numTasks() + " tasks in the list\n";
-        } catch(NumberFormatException | IndexOutOfBoundsException e) {
-            throw new MalformedCommandException(
-                "Please provide a valid integer index for the task you want to delete: " +
-                    "delete [taskIndex in integer form]");
+            return tasks.remove(taskIndex);
+        } catch(IndexOutOfBoundsException e) {
+            throw new MalformedCommandException("You only have " + numTasks() + " tasks currently. " +
+                "Please provide a task index from that list");
         }
+
     }
 
-    private int numTasks() {
+    public int numTasks() {
         return tasks.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder taskListStringRepresentation = new StringBuilder();
+        for(int i = 0; i < numTasks(); i++) {
+            taskListStringRepresentation.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+        }
+        return taskListStringRepresentation.toString();
+    }
+
+    public String toStorageFormat() {
+        StringBuilder taskStorageRepresentation = new StringBuilder();
+        for(int i = 0; i < numTasks(); i++) {
+            taskStorageRepresentation.append(tasks.get(i).toStorageFormat()).append("\n");
+        }
+        return taskStorageRepresentation.toString();
     }
 }

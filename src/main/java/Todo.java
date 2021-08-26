@@ -1,4 +1,5 @@
 public class Todo extends Task {
+    public static final String IDENTIFIER = "T";
 
     public static Task create(String userInput) throws MalformedCommandException {
         try {
@@ -13,20 +14,18 @@ public class Todo extends Task {
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
+
     public Todo(String description) {
         super(description);
     }
 
-    private String identifier() {
-        return "T";
+    @Override
+    public String toString() {
+        return "[" + IDENTIFIER + "]" + super.toString();
     }
 
     @Override
-    public String toString() {
-        return "[" + identifier() + "]" + super.toString();
-    }
-
-    public String formatForStorage() {
-        return identifier() + STORAGE_DELIMITER + super.formatForStorage();
+    public String toStorageFormat() {
+        return IDENTIFIER + STORAGE_DELIMITER + super.toStorageFormat();
     }
 }

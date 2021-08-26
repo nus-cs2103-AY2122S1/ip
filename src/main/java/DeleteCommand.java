@@ -1,0 +1,33 @@
+public class DeleteCommand implements Command {
+    public static final String COMMAND_IDENTIFIER = "delete";
+
+    private int taskIndex;
+
+
+    public static Command create(String userInput) throws MalformedCommandException {
+        try {
+            int taskIndex = Integer.parseInt(userInput.split(" ")[1]);
+            return new DeleteCommand(taskIndex);
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException  e) {
+            throw new MalformedCommandException(
+                "Please provide a valid integer index for the task you want to delete like so: " +
+                    "delete [taskIndex in integer form]");
+        }
+    }
+
+    private DeleteCommand(int taskIndex) {
+        this.taskIndex = taskIndex;
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui) throws MalformedCommandException {
+        Task taskDeleted = tasks.delete(taskIndex - 1);
+        int numTasksRemaining = tasks.numTasks();
+        ui.showTaskDeletedMessage(taskDeleted, numTasksRemaining);
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+}

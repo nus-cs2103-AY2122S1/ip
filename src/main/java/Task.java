@@ -27,7 +27,7 @@ public abstract class Task {
         return isDone ? "[X]" : "[ ]";
     }
 
-    public String formatForStorage() {
+    public String toStorageFormat() {
         return description + STORAGE_DELIMITER + isDone;
     }
 }
