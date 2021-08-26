@@ -1,6 +1,7 @@
+package duke;
 public class Parser {
 
-    private enum TaskObjective {
+    private enum TaskObjectives {
         BYE,
         DEADLINE,
         DELETE,
@@ -11,15 +12,15 @@ public class Parser {
         UNKNOWN
     }
 
-    private TaskObjective getCommand(String command) {
+    private TaskObjectives getCommand(String command) {
         try {
             if (command != null) {
-                return TaskObjective.valueOf(command.toUpperCase());
+                return TaskObjectives.valueOf(command.toUpperCase());
             } else {
-                return TaskObjective.UNKNOWN;
+                return TaskObjectives.UNKNOWN;
             }
         } catch (IllegalArgumentException e) {
-            return TaskObjective.UNKNOWN;
+            return TaskObjectives.UNKNOWN;
         }
     }
 

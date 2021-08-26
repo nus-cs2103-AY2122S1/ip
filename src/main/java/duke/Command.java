@@ -1,3 +1,7 @@
+package duke;
+import duke.Task.DeadlineTask;
+import duke.Task.EventTask;
+import duke.Task.ToDoTask;
 import java.time.format.DateTimeParseException;
 
 public class Command {
@@ -12,8 +16,8 @@ public class Command {
         UNKNOWN
     }
 
-    Commands typeOfCommand;
-    String taskDetails;
+    private final Commands typeOfCommand;
+    private final String taskDetails;
 
     public Command(Commands type, String taskDetails) {
         if (type != null) {
@@ -41,7 +45,12 @@ public class Command {
                 break;
             case UNKNOWN:
                 this.typeOfCommand = Commands.UNKNOWN;
+                break;
+            default:
+                this.typeOfCommand = Commands.UNKNOWN;
             }
+        } else {
+            this.typeOfCommand = Commands.UNKNOWN;
         }
         this.taskDetails = taskDetails;
     }

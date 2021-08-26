@@ -1,3 +1,4 @@
+package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -6,6 +7,10 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import duke.Task.ToDoTask;
+import duke.Task.Task;
+import duke.Task.EventTask;
+import duke.Task.DeadlineTask;
 
 public class Storage {
     public enum Commands {
@@ -76,6 +81,7 @@ public class Storage {
 
     public List<Task> load() {
         List<Task> taskList = new ArrayList<>();
+        UI ui = new UI();
 
         try {
             Scanner dataInput = new Scanner(storageFile);
@@ -122,17 +128,12 @@ public class Storage {
 
 
             if (isDataCorrupted) {
-                System.out.println("____________________________________________________________________________________" +
-                        "____________________________________");
-                System.out.println("     Data was partially Corrupted");
-                System.out.println("____________________________________________________________________________________" +
-                        "____________________________________");
+                ui.showLine();
+                ui.showError("Data was partially Corrupted");
+                ui.showLine();
             }
-        } catch (FileNotFoundException e) {
-            UI ui = new UI();
-            ui.showLine();
-            ui.showError("File Not Found");
-            ui.showLine();
+        } catch (FileNotFoundException ignored) {
+
         }
         return taskList;
     }

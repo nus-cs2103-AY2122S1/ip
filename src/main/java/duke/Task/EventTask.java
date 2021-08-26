@@ -1,8 +1,9 @@
+package duke.Task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class EventTask extends Task {
-    protected LocalDateTime details;
+    private final LocalDateTime details;
 
     public EventTask(String description, String details) {
         super(description);
