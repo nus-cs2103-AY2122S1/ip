@@ -1,3 +1,8 @@
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -14,7 +19,6 @@ public class Duke {
     }
 
     private void serve() throws DukeException {
-        // getTasksFromFile();
         this.ui.greet();
         Scanner input = new Scanner(System.in);
 
