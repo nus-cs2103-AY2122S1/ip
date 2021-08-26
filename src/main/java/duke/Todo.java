@@ -1,6 +1,5 @@
 package duke;
 
-
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -16,7 +15,6 @@ public class Todo extends Task {
     public String getFileString() {
         return String.format("T | %d | %s", this.isDone ? 1 : 0, this.description);
     }
-
 
     @Override
     public String toString() {

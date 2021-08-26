@@ -1,4 +1,5 @@
 package duke;
+
 import java.util.ArrayList;
 
 public class Ui {
@@ -7,27 +8,26 @@ public class Ui {
         System.out.println(error);
     }
 
-    public void greeting() {
+    public void printGreeting() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
-    public void doneMessage(Task doneTask) {
+    public void printDoneMessage(Task doneTask) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(doneTask);
-
     }
 
-    public void deleteMessage(Task deletedTask) {
+    public void printDeleteMessage(Task deletedTask) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(deletedTask);
     }
 
-    public void addMessage(Task addedTask) {
+    public void printAddMessage(Task addedTask) {
         System.out.println("Got it. I've added this task:");
         System.out.println(addedTask);
     }
 
-    public void taskListSize(int size) {
+    public void printTaskListSize(int size) {
         if (size == 1) {
             System.out.println("Now you have 1 task in the list.");
         } else {
@@ -35,13 +35,11 @@ public class Ui {
         }
     }
 
-    public void bye() {
+    public void printGoodbye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
     public void showTasks(ArrayList<Task> taskList) {
-
-
         if (taskList.size() == 0) {
             System.out.println("There are no tasks in your list!");
         } else {
