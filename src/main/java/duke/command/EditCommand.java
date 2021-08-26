@@ -24,21 +24,19 @@ public class EditCommand extends Command {
             throw new DukeException("I cannot find this task number!\n");
         } else {
             switch (type) {
-            case DONE: {
+            case DONE:
                 Task completedTask = taskList.getTask(taskNumber - 1);
                 completedTask.markAsDone();
-                String message = "Good work! duke.task.Task is now marked as done:\n" + completedTask + "\n";
-                ui.printMessage(message);
+                String completeMessage = "Good work! duke.task.Task is now marked as done:\n" + completedTask + "\n";
+                ui.printMessage(completeMessage);
                 storage.saveList(taskList.getTasks());
                 break;
-            }
-            case DELETE: {
+            case DELETE:
                 Task deletedTask = taskList.removeTask(taskNumber - 1);
-                String message = "Alright! I've deleted this task:\n" + deletedTask + taskList.getListStatus();
-                ui.printMessage(message);
+                String deleteMessage = "Alright! I've deleted this task:\n" + deletedTask + taskList.getListStatus();
+                ui.printMessage(deleteMessage);
                 storage.saveList(taskList.getTasks());
                 break;
-            }
             }
         }
     }

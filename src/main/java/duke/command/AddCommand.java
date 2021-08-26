@@ -26,27 +26,24 @@ public class AddCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String messageHeader = "Alright! New task added:\n";
         switch (type) {
-            case DEADLINE: {
-                Deadline task = new Deadline(parameters[0].trim(), LocalDate.parse(parameters[1]));
-                taskList.addTask(task);
-                String message = messageHeader + task + taskList.getListStatus();
-                ui.printMessage(message);
-                break;
-            }
-            case EVENT: {
-                Event task = new Event(parameters[0], LocalDate.parse(parameters[1]));
-                taskList.addTask(task);
-                String message = messageHeader + task + taskList.getListStatus();
-                ui.printMessage(message);
-                break;
-            }
-            case TODO: {
-                ToDo task = new ToDo(parameters[0]);
-                taskList.addTask(task);
-                String message = messageHeader + task + taskList.getListStatus();
-                ui.printMessage(message);
-                break;
-            }
+        case DEADLINE:
+            Deadline deadline = new Deadline(parameters[0].trim(), LocalDate.parse(parameters[1]));
+            taskList.addTask(deadline);
+            String deadlineMessage = messageHeader + deadline + taskList.getListStatus();
+            ui.printMessage(deadlineMessage);
+            break;
+        case EVENT:
+            Event event = new Event(parameters[0], LocalDate.parse(parameters[1]));
+            taskList.addTask(event);
+            String eventMessage = messageHeader + event + taskList.getListStatus();
+            ui.printMessage(eventMessage);
+            break;
+        case TODO:
+            ToDo toDo = new ToDo(parameters[0]);
+            taskList.addTask(toDo);
+            String toDoMessage = messageHeader + toDo + taskList.getListStatus();
+            ui.printMessage(toDoMessage);
+            break;
         }
         storage.saveList(taskList.getTasks());
     }
