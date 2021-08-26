@@ -12,7 +12,17 @@ import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.helpful_functions.HelpfulFunctions;
 
+/**
+ * Parser is a class that provides useful method(s) to make sense of and translate user input into Command.
+ */
 public class Parser {
+    /**
+     * parse is a static method that makes sense of and translates user input into a Command.
+     *
+     * @param input The user's input in String format.
+     * @param taskList The TaskList object storing all the tasks.
+     * @return A Command object that will be executed by Duke to carry out the instructions of the user.
+     */
     public static Command parse(String input, TaskList taskList) {
         try {
             // Check if the input is in a valid format, and throw a DukeException if it is not

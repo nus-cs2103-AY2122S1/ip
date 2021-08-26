@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Encapsulates a storage object that handles loading data from and updating data to a file.
+ * Encapsulates a storage object that handles saving data into a file and loading data from the file.
  */
 public class Storage {
     private File file;
@@ -21,6 +21,11 @@ public class Storage {
     private static final int N_SEGMENTS_IN_EVENT = 4;
     private static final int N_SEGMENTS_IN_TODO = 3;
 
+    /**
+     * Constructs a Storage object.
+     *
+     * @param filePath The relative filepath of the storage file.
+     */
     public Storage(String filePath) {
         file = new File("data/duke.txt");
         // Create folder for the file if it does not exist
@@ -29,10 +34,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks within the task list into the storage file.
+     *
+     * @param taskList The TaskList object storing all the tasks.
+     */
     public void saveTasksToFile(TaskList taskList) {
         taskList.saveContents(file);
     }
 
+    /**
+     * Loads the tasks from the storage file into an ArrayList.
+     *
+     * @return An ArrayList of tasks.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
