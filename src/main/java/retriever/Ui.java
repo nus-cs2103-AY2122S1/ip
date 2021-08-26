@@ -74,7 +74,6 @@ public class Ui {
      */
     public void printTaskAdded(Task task, int taskListLength) {
         System.out.println("-> Where's My Treat? I Added:\n\t" + task);
-        // Add Task Size here.
         System.out.println("\nYou Owe Me " + taskListLength + " Treat(s), Master!");
     }
 
@@ -88,9 +87,7 @@ public class Ui {
         System.out.println("Woof! Whose a Bad Boy?\n"
                 + "Task Deleted!\n"
                 + "\t" + task
-                // Add Task Size here.
                 + "\nYou Owe Me " + taskListLength + " Treat(s), Master!");
-
     }
 
     /**

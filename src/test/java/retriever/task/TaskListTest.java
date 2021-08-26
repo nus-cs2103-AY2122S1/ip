@@ -21,6 +21,7 @@ public class TaskListTest {
     public void addDeadlineTask_addingTaskUsingCorrectFormat_success() {
         boolean hasPassed = false;
         String task = "deadline CS2103T iP /by 26/08/2021";
+
         try {
             TaskList taskList = new TaskList(new StorageStub());
             taskList.addDeadlineTask(task);
@@ -28,6 +29,7 @@ public class TaskListTest {
         } catch (RetrieverException e) {
             fail();
         }
+
         assertTrue(hasPassed);
     }
 
@@ -35,6 +37,7 @@ public class TaskListTest {
     public void addEventTask_addingTaskUsingCorrectFormat_success() {
         boolean hasPassed = false;
         String task = "event Apple WWDC 2021 /at 10/06/2021";
+
         try {
             TaskList taskList = new TaskList(new StorageStub());
             taskList.addEventTask(task);
@@ -42,6 +45,7 @@ public class TaskListTest {
         } catch (RetrieverException e) {
             fail();
         }
+
         assertTrue(hasPassed);
     }
 
@@ -49,6 +53,7 @@ public class TaskListTest {
     public void addTodoTask_addingTaskUsingCorrectFormat_success() {
         boolean hasPassed = false;
         String task = "todo laundry";
+
         try {
             TaskList taskList = new TaskList(new StorageStub());
             taskList.addTodoTask(task);
@@ -56,6 +61,7 @@ public class TaskListTest {
         } catch (RetrieverException e) {
             fail();
         }
+
         assertTrue(hasPassed);
     }
 
@@ -71,6 +77,7 @@ public class TaskListTest {
     public void addDeadlineTask_addingTaskUsingIncorrectDateFormat_exceptionThrown() {
         boolean hasPassed = false;
         String task = "deadline CS2103T iP /by 26-08-2021";
+
         try {
             TaskList taskList = new TaskList(new StorageStub());
             taskList.addDeadlineTask(task);
@@ -85,6 +92,7 @@ public class TaskListTest {
     public void addEventTask_addingTaskUsingIncorrectDateFormat_exceptionThrown() {
         boolean hasPassed = false;
         String task = "event Apple WWDC 2021 /at 10th June 2021";
+
         try {
             TaskList taskList = new TaskList(new StorageStub());
             taskList.addEventTask(task);
@@ -97,7 +105,7 @@ public class TaskListTest {
 }
 
 class StorageStub extends Storage {
-    public StorageStub(){
+    public StorageStub() {
         super("file_name_stub");
     }
 

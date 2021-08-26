@@ -4,7 +4,6 @@ package retriever.task;
  * This class keeps track of tasks with a deadline.
  */
 public class Deadline extends Task {
-
     private TaskDateAndTime by;
 
     /**

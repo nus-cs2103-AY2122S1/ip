@@ -37,9 +37,9 @@ public class Storage {
         try {
             File myFile = new File(filePath);
 
-            if (myFile.createNewFile()){
+            if (myFile.createNewFile()) {
                 System.out.println("Woof! File is Created!");
-            }else{
+            } else {
                 System.out.println("File Already Exists Master.");
             }
         } catch (IOException e) {
@@ -69,27 +69,33 @@ public class Storage {
                 String taskDescription = tokens[2];
 
                 // Checking the type of task.
-                if(taskType.contains("D")) {
+                if (taskType.contains("D")) {
                     Task deadlineTask = new Deadline(taskDescription, new TaskDateAndTime(tokens[3]));
-                    if(completionStatus.contains("1")) {
+
+                    if (completionStatus.contains("1")) {
                         deadlineTask.markAsDone();
                     }
+
                     taskList.add(deadlineTask);
                 }
 
-                if(taskType.contains("E")) {
+                if (taskType.contains("E")) {
                     Task eventTask = new Event(taskDescription, new TaskDateAndTime(tokens[3]));
-                    if(completionStatus.contains("1")) {
+
+                    if (completionStatus.contains("1")) {
                         eventTask.markAsDone();
                     }
+
                     taskList.add(eventTask);
                 }
 
-                if(taskType.contains("T")) {
+                if (taskType.contains("T")) {
                     Task todoTask = new Todo(taskDescription);
-                    if(completionStatus.contains("1")) {
+
+                    if (completionStatus.contains("1")) {
                         todoTask.markAsDone();
                     }
+
                     taskList.add(todoTask);
                 }
             }
@@ -99,7 +105,6 @@ public class Storage {
                     + "I Shall Create One For You! :)");
             // In case the file doesn't exist, one is created.
             createNewFile();
-
         }
         return taskList;
     }
@@ -111,23 +116,23 @@ public class Storage {
      * @param taskDescription The description of the task.
      * @param taskDeadline The deadline of the task.
      */
-    public void writeTask(Task.TaskType task, String taskDescription, String taskDeadline){
+    public void writeTask(Task.TaskType task, String taskDescription, String taskDeadline) {
         String taskAsText;
 
         // Formatting the string appropriately to add task to the text file.
         switch (task) {
-            case DEADLINE:
-                taskAsText = "D | 0 | " + taskDescription + " | " + taskDeadline + System.getProperty("line.separator");
-                break;
-            case EVENT:
-                taskAsText = "E | 0 | " + taskDescription + " | " + taskDeadline + System.getProperty("line.separator");
-                break;
-            case TODO:
-                taskAsText = "T | 0 | " + taskDescription + System.getProperty("line.separator");
-                break;
-            default:
-                taskAsText = " ";
-                break;
+        case DEADLINE:
+            taskAsText = "D | 0 | " + taskDescription + " | " + taskDeadline + System.getProperty("line.separator");
+            break;
+        case EVENT:
+            taskAsText = "E | 0 | " + taskDescription + " | " + taskDeadline + System.getProperty("line.separator");
+            break;
+        case TODO:
+            taskAsText = "T | 0 | " + taskDescription + System.getProperty("line.separator");
+            break;
+        default:
+            taskAsText = " ";
+            break;
         }
 
         // Writing the task to file.
@@ -156,8 +161,8 @@ public class Storage {
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
             String currentLine;
 
-            while((currentLine = reader.readLine()) != null) {
-                if(counter == taskNumber) {
+            while ((currentLine = reader.readLine()) != null) {
+                if (counter == taskNumber) {
 
                 } else {
                     writer.write(currentLine + System.getProperty("line.separator"));
@@ -190,13 +195,13 @@ public class Storage {
             BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
             String currentLine;
 
-            while((currentLine = reader.readLine()) != null) {
-                if(counter == taskNumber) {
+            while ((currentLine = reader.readLine()) != null) {
+                if (counter == taskNumber) {
                     String[] taskToUpdate = currentLine.split(" \\| ");
 
                     String newLine = taskToUpdate[0] + " | 1 | " + taskToUpdate[2];
 
-                    if(!taskToUpdate[0].contains("T")) {
+                    if (!taskToUpdate[0].contains("T")) {
                         newLine += " | " + taskToUpdate[3];
                     }
 
