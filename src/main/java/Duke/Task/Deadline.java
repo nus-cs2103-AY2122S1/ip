@@ -10,7 +10,9 @@ public class Deadline extends Task {
 
     public Deadline(String description, LocalDate endDate, boolean isDone) throws InvalidTaskException {
         super(description, isDone);
-        if (endDate == null) throw new InvalidTaskException(END_DATE_EMPTY_MESSAGE);
+        if (endDate == null) {
+            throw new InvalidTaskException(END_DATE_EMPTY_MESSAGE);
+        }
         this.endDate = endDate;
     }
 

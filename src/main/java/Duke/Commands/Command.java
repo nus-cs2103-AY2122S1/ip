@@ -37,8 +37,9 @@ public abstract class Command {
         String keyword = input.getKeyword();
         for (Command cmd : COMMAND_LIST) {
             // Case insensitive contains
-            if (cmd.getKeywords().stream().anyMatch(keyword::equalsIgnoreCase))
+            if (cmd.getKeywords().stream().anyMatch(keyword::equalsIgnoreCase)) {
                 return cmd;
+            }
         }
 
         throw new UnknownCommandException(input.getRaw());

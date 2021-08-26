@@ -22,7 +22,7 @@ public class Duke {
     private static final String DEFAULT_TASK_STORAGE_PATH = "data/duke.txt";
 
     /** Boolean indicating whether the program has been stopped */
-    private boolean stopped = false;
+    private boolean isStopped = false;
 
     /** List of tasks as added by the user */
     private final TaskList taskList;
@@ -59,7 +59,7 @@ public class Duke {
      */
     public void run() {
         Ui.print(Ui.GREETING_MESSAGE);
-        while (!this.stopped) {
+        while (!this.isStopped) {
             UserInput input = Parser.parse(Ui.read());
             try {
                 Command.matching(input).run(this, input);
@@ -75,7 +75,7 @@ public class Duke {
      * Exits the program gracefully with an exit message on the next iteration of the read-eval-print loop.
      */
     public void stop() {
-        this.stopped = true;
+        this.isStopped = true;
     }
 
     public TaskList getTaskList() {

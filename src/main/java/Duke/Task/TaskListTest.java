@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskListTest {
     @Test
@@ -35,13 +37,15 @@ public class TaskListTest {
                 taskList = List.of(
                         new Todo("homework")
                 );
-            } catch (InvalidTaskException ignored) { }
+            } catch (InvalidTaskException ignored) {
+            }
         }
 
         public List<Task> load() {
             return taskList;
         }
 
-        public void save(List<Task> list) { }
+        public void save(List<Task> list) {
+        }
     }
 }

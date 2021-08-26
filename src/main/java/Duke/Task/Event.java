@@ -10,7 +10,9 @@ public class Event extends Task {
 
     public Event(String description, LocalDate at, boolean isDone) throws InvalidTaskException {
         super(description, isDone);
-        if (at == null) throw new InvalidTaskException(AT_DATE_EMPTY_MESSAGE);
+        if (at == null) {
+            throw new InvalidTaskException(AT_DATE_EMPTY_MESSAGE);
+        }
         this.at = at;
     }
 
