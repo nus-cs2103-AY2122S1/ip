@@ -70,7 +70,7 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> newArrayList = new ArrayList<>(100);
         try {
             Scanner myScanner = new Scanner(storageFile);
@@ -82,8 +82,7 @@ public class Storage {
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("File not found! Check that ~/data/duke.txt is there.");
-            e.printStackTrace();
+            throw e;
         }
         return newArrayList;
     }

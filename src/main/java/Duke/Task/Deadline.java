@@ -24,4 +24,12 @@ public class Deadline extends Task {
     public String getDataString() {
         return String.format("%s_~_%s_~_%s_~_%s", this.taskType, this.getStatusInt(), this.description, this.date.format(DateTimeFormatter.ofPattern("d/MM/yyyy")));
     }
+    @Override
+    public boolean equals(Object object) {
+        Deadline otherDeadline = (Deadline) object;
+        return this.date.equals(otherDeadline.date) &&
+                this.getStatusIcon().equals(otherDeadline.getStatusIcon()) &&
+                this.description.equals(otherDeadline.description) &&
+                this.taskType.equals(otherDeadline.taskType);
+    }
 }

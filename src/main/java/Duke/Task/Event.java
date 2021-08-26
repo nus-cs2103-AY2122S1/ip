@@ -25,4 +25,13 @@ public class Event extends Task {
         return String.format("%s_~_%s_~_%s_~_%s", this.taskType, this.getStatusInt(), this.description, this.date.format(DateTimeFormatter.ofPattern("d/MM/yyyy")));
     }
 
+    @Override
+    public boolean equals(Object object) {
+        Event otherEvent = (Event) object;
+        return this.date.equals(otherEvent.date) &&
+                this.getStatusIcon().equals(otherEvent.getStatusIcon()) &&
+                this.description.equals(otherEvent.description) &&
+                this.taskType.equals(otherEvent.taskType);
+    }
+
 }
