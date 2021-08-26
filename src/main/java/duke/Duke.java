@@ -101,6 +101,13 @@ public class Duke {
                     this.ui.showAddTaskMessage(newTask, this.tasks.size());
                     break;
                 }
+
+                case FIND: {
+                    String keyword = parser.parseDescription(input);
+                    this.ui.showMatchMessage(keyword, this.tasks);
+                    break;
+                }
+
                 }
                 input = sc.nextLine();
             } catch (DukeException e) {

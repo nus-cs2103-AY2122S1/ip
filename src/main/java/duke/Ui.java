@@ -31,22 +31,18 @@ public class Ui {
         System.out.println(e.getMessage());
     }
 
-
     /**
      * Informs the user that there are no tasks in the list
      */
-
     public void showNoTaskMessage() {
         System.out.println("There are no tasks!");
     }
-
 
     /**
      * Shows the user the current task list
      *
      * @param taskList the list of the tasks
      */
-
     public void showTaskList(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i < taskList.size() + 1; i++) {
@@ -83,5 +79,22 @@ public class Ui {
      */
     public void showDoneMessage(Task doneTask) {
         System.out.println("Nice! I've marked this task as done:\n  " + doneTask);
+    }
+
+    /**
+     * Shows the user the matched tasks
+     *
+     * @param keyword the keyword user enters
+     * @param taskList the list of tasks
+     */
+    public void showMatchMessage(String keyword, TaskList taskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        int currentNo = 1;
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            if (taskList.get(i).toString().contains(keyword)) {
+                System.out.printf("  %d.%s%n", currentNo, taskList.get(i));
+                currentNo++;
+            }
+        }
     }
 }
