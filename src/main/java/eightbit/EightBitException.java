@@ -7,7 +7,7 @@ public class EightBitException extends Exception {
     private String errorMessage;
 
     /**
-     * Constructor.
+     * Constructs the exception with the error message.
      *
      * @param errorMessage Error message to be shown to user.
      */

@@ -13,7 +13,7 @@ public class TaskList {
     private List<Task> tasks;
 
     /**
-     * Constructor.
+     * Constructs a list of the user's tasks.
      *
      * @param tasks A list of tasks.
      */

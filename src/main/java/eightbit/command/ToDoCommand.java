@@ -12,10 +12,22 @@ public class ToDoCommand extends Command {
 
     private final ToDo toDo;
 
+    /**
+     * Constructs a command to add a todo.
+     *
+     * @param toDo ToDo instance to be added.
+     */
     public ToDoCommand(ToDo toDo) {
         this.toDo = toDo;
     }
 
+    /**
+     * Adds the todo into the user's list.
+     *
+     * @param taskList User's list of tasks.
+     * @param ui Ui responsible for printing messages.
+     * @param storage Storage responsible for reading/writing the file.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(toDo);

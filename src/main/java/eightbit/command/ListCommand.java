@@ -9,6 +9,13 @@ import eightbit.util.Ui;
  */
 public class ListCommand extends Command {
 
+    /**
+     * Prints the user's list of tasks.
+     *
+     * @param taskList User's list of tasks.
+     * @param ui Ui responsible for printing messages.
+     * @param storage Storage responsible for reading/writing the file.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         StringBuilder listOfTasks = new StringBuilder();

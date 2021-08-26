@@ -17,7 +17,7 @@ public class EightBit {
     private Ui ui;
 
     /**
-     * Constructor.
+     * Constructs the chat bot.
      *
      * @param filepath Path of file to store the tasks in local machine.
      */

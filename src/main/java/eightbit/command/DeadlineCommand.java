@@ -12,10 +12,22 @@ public class DeadlineCommand extends Command {
 
     private final Deadline deadline;
 
+    /**
+     * Constructs a command to add a deadline.
+     *
+     * @param deadline Deadline instance to be added.
+     */
     public DeadlineCommand(Deadline deadline) {
         this.deadline = deadline;
     }
 
+    /**
+     * Adds the deadline into the user's list.
+     *
+     * @param taskList User's list of tasks.
+     * @param ui Ui responsible for printing messages.
+     * @param storage Storage responsible for reading/writing the file.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(deadline);

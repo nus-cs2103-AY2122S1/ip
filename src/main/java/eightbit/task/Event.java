@@ -10,11 +10,24 @@ public class Event extends Task {
 
     protected LocalDateTime at;
 
+    /**
+     * Constructs an event.
+     *
+     * @param description Description of the event.
+     * @param at Date and time of the event.
+     */
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Constructs an event. Marks the event as done or not.
+     *
+     * @param description Description of the event.
+     * @param at Date and time of the event.
+     * @param isDone Whether the task is done.
+     */
     public Event(String description, LocalDateTime at, boolean isDone) {
         super(description, isDone);
         this.at = at;

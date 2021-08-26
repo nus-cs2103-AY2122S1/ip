@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Responsible for loading/writing data from/to a file.
+ * Responsible for reading/writing data from/to a file.
  */
 public class Storage {
 
@@ -27,7 +27,7 @@ public class Storage {
     }
 
     /**
-     * Constructor.
+     * Constructs a Storage to deal with reading/writing a file.
      *
      * @param filepath Path of the file.
      */
