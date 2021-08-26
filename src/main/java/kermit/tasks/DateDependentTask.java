@@ -16,11 +16,12 @@ public abstract class DateDependentTask extends Task {
         this.date = date;
     }
 
-    public String getDate() {
+    
+    public String getDateString() {
         return this.date.toString();
     }
 
-    protected String getDateString() {
+    protected String getFormattedDateString() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }

@@ -15,12 +15,12 @@ public class Deadline extends DateDependentTask {
         return "D";
     }
 
-    public String getDateString() {
-        return super.getDateString();
+    public String getFormattedDateString() {
+        return super.getFormattedDateString();
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + super.getDateString() + ")";
+        return super.toString() + " (by: " + super.getFormattedDateString() + ")";
     }
 }

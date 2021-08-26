@@ -17,6 +17,6 @@ public class Event extends DateDependentTask {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + super.getDateString() + ")";
+        return super.toString() + " (at: " + super.getFormattedDateString() + ")";
     }
 }
