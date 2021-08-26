@@ -70,11 +70,11 @@ public class Event extends Task {
      */
     public String formatSave() {
         if (time != null) {
-            return "E | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " +
-                    date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time;
+            return "E | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | "
+                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time;
         } else if (date != null) {
-            return "E | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " +
-                    date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            return "E | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | "
+                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
         return "E | "  + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " + getTime();
     }
@@ -82,10 +82,12 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (time != null) {
-            return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+            return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern(
+                    "MMM dd yyyy"))
                     + ", " + time + ")";
         } else if (time != null) {
-            return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+            return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern(
+                    "MMM dd yyyy")) + ")";
         } else {
             return "[D]" + super.toString() + " (by: " + at + ")";
         }

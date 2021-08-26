@@ -128,7 +128,8 @@ public class TaskList {
      * @param tasks a TaskList object containing the tasks.
      */
     public void printTaskNumber(TaskList tasks) {
-        System.out.println("Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in the list.");
+        System.out.println("Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks")
+                + " in the list.");
     }
 
 }

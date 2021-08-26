@@ -71,11 +71,11 @@ public class Deadline extends Task {
      */
     public String formatSave() {
         if (time != null) {
-            return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() +  " | " +
-                    date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time;
+            return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() +  " | "
+                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time;
         } else if (date != null) {
-            return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | " +
-                    date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | "
+                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } else {
             return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | " + getTime();
         }
@@ -84,10 +84,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (time != null) {
-            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                    + ", " + time + ")";
+            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern(
+                    "MMM dd yyyy")) + ", " + time + ")";
         } else if (date != null) {
-            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern(
+                    "MMM dd yyyy")) + ")";
         } else {
             return "[D]" + super.toString() + " (by: " + by + ")";
         }
