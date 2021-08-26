@@ -10,8 +10,8 @@ public class Todo extends Task{
      *
      * @param description the task description
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, boolean completed) {
+        super(description, completed);
     }
 
     /**
@@ -22,5 +22,15 @@ public class Todo extends Task{
     @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
+    }
+
+    @Override
+    public String getType() {
+        return "T";
+    }
+
+    @Override
+    public String getDeadline() {
+        return "";
     }
 }

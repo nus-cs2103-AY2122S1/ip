@@ -1,0 +1,4 @@
+T | 0 | hehe | 
+T | 0 | haha | 
+E | 0 | lmao | lmaoaoao
+T | 0 | lmao | 

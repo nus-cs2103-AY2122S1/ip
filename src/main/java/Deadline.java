@@ -2,13 +2,23 @@ public class Deadline extends Task {
 
     private String deadline;
 
-    public Deadline(String description) {
-        super(description.split(" /by ")[0]);
-        this.deadline = description.split(" /by ")[1];
+    public Deadline(String description, String deadline, boolean completed) {
+        super(description, completed);
+        this.deadline = deadline;
     }
 
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), deadline);
+    }
+
+    @Override
+    public String getType() {
+        return "D";
+    }
+
+    @Override
+    public String getDeadline() {
+        return this.deadline;
     }
 }
