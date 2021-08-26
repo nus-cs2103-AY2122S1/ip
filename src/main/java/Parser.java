@@ -1,15 +1,14 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
-public class Command {
+public class Parser {
 
-    List<Task> storedInputs;
+    TaskList tasks;
     String userInput;
     int index;
 
-    public Command(List<Task> storedInputs, String userInput, int index) {
-        this.storedInputs = storedInputs;
+    public Parser(TaskList tasks, String userInput, int index) {
+        this.tasks = tasks;
         this.userInput = userInput;
         this.index = index;
     }
@@ -25,8 +24,8 @@ public class Command {
         String message = "    ----------------------------\n"
                 + "    " + "Here are the tasks in your list:\n";
         int i = 0;
-        while (i < storedInputs.size()) {
-            message += "    " + (i+1) + ". " + storedInputs.get(i).toString() + "\n";
+        while (i < tasks.getNumberOfTasks()) {
+            message += "    " + (i+1) + ". " + tasks.get(i).toString() + "\n";
             i++;
         }
         message += "    ----------------------------";
@@ -36,13 +35,13 @@ public class Command {
     public void done_execute() {
         String userIndex = userInput.substring(5);
         int i = Integer.valueOf(userIndex);
-        if (storedInputs.get(i-1) == null) {
+        if (tasks.get(i-1) == null) {
             System.out.println("no task found!");
         } else {
-            storedInputs.get(i-1).markAsDone();
+            tasks.get(i-1).markAsDone();
             String message = "    ----------------------------\n"
                     +"Nice! I have marked this task as done:\n"
-                    +"[X] " + storedInputs.get(i-1).getDescription() + "\n" + "    ----------------------------";
+                    +"[X] " + tasks.get(i-1).getDescription() + "\n" + "    ----------------------------";
             System.out.println(message);
         }
     }
@@ -50,7 +49,7 @@ public class Command {
     public void todo_execute() {
         try {
             Task A = new ToDo(userInput.substring(5));
-            storedInputs.add(A);
+            tasks.addTask(A);
             Duke.index++;
             String message = "    ----------------------------\n"+
                     "Got it, I've added this task: \n"
@@ -73,7 +72,7 @@ public class Command {
             LocalDate d = LocalDate.parse(date);
             String formattedTime = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             Task A = new Event(description, formattedTime);
-            storedInputs.add(A);
+            tasks.addTask(A);
             Duke.index++;
             String message = "    ----------------------------\n"
                     +"Got it, I've added this task: \n"
@@ -96,7 +95,7 @@ public class Command {
             LocalDate d = LocalDate.parse(date);
             String formattedTime = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             Task A = new Deadlines(description, formattedTime);
-            storedInputs.add(A);
+            tasks.addTask(A);
             Duke.index++;
             String message = "    ----------------------------\n"
                     +"Got it, I've added this task: \n"
@@ -112,27 +111,27 @@ public class Command {
     public void delete_execute() {
         String userIndex = userInput.substring(7);
         int i = Integer.valueOf(userIndex);
-        if (storedInputs.get(i-1) == null) {
+        if (tasks.get(i-1) == null) {
             System.out.println("no task found!");
         } else {
             Duke.index--;
             String message = "    ----------------------------\n"
                     +"Got it, I've removed this task: \n"
-                    + storedInputs.get(i-1).toString() + "\n"
+                    + tasks.get(i-1).toString() + "\n"
                     + "Now you have " + Duke.index + " tasks in the list\n"
                     +"    ----------------------------";
             System.out.println(message);
-            storedInputs.remove(i-1);
+            tasks.removeTask(i-1);
         }
     }
 
     public String generateTasks() {
-        String tasks = "";
+        String taskString = "";
         int i = 0;
-        while (i < storedInputs.size()) {
-            tasks += storedInputs.get(i).toString() + "\n";
+        while (i < tasks.getNumberOfTasks()) {
+            taskString += tasks.get(i).toString() + "\n";
             i++;
         }
-        return tasks;
+        return taskString;
     }
 }
