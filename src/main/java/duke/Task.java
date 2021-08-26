@@ -38,7 +38,7 @@ public class Task {
     }
 
     /**
-     * The task string representation
+     * Returns the string representation of a task
      * @return The description of the task
      */
     public String toString() {

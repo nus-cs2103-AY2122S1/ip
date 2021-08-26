@@ -45,7 +45,7 @@ public class Items {
      * Marks the task at the given index as done
      * @param index The index to be marked as done
      * @return  A status message to be displayed
-     * @throws DukeException
+     * @throws DukeException when a task is not found
      */
     public String markDone(int index) throws DukeException {
         index = index - 1;
@@ -67,7 +67,7 @@ public class Items {
      * Removes a task in the list
      * @param index The index of the task to be removed
      * @return A status message to be displayed
-     * @throws DukeException
+     * @throws DukeException when a task is not found
      */
     public String removeItem(int index) throws DukeException {
         index = index - 1;

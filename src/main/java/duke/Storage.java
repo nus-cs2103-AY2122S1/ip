@@ -21,6 +21,11 @@ public class Storage {
     // The contents of the file as a List of Strings
     private final List<String> fileContent;
 
+    /**
+     * Constructor
+     * @param directory The path to the directory
+     * @param file The file name
+     */
     public Storage(String directory, String file) {
         this.directory = directory;
         this.file = file;

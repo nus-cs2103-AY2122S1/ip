@@ -22,6 +22,10 @@ public class Event extends Task {
         this.at = LocalDateTime.parse(at);
     }
 
+    /**
+     * Returns the string representation of an Event
+     * @return the string representation of an Event
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
