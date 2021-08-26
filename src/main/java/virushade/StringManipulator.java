@@ -53,24 +53,31 @@ public class StringManipulator {
                 int hours = timeIn24hRepresentation/100;
                 int minutes = timeIn24hRepresentation%100;
 
-                if (hours > 12) {
-                    hours -= 12;
+                if (hours > 11) {
+                    if (hours != 12) {
+                        hours -= 12;
+                    }
+
                     if (hours < 10 && minutes < 10) {
                         return "0" + hours + ":0" + minutes + "PM";
                     } else if (hours < 10) {
                         return "0" + hours + ":" + minutes + "PM";
                     } else if (minutes < 10) {
-                        return hours + ":" + minutes + "PM";
+                        return hours + ":0" + minutes + "PM";
                     } else {
                         return hours + ":" + minutes + "PM";
                     }
                 } else {
+                    if (hours == 0) {
+                        hours += 12;
+                    }
+
                     if (hours < 10 && minutes < 10) {
                         return "0" + hours + ":0" + minutes + "AM";
                     } else if (hours < 10) {
                         return "0" + hours + ":" + minutes + "AM";
                     } else if (minutes < 10) {
-                        return hours + ":" + minutes + "AM";
+                        return hours + ":0" + minutes + "AM";
                     } else {
                         return hours + ":" + minutes + "AM";
                     }

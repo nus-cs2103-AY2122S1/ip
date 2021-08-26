@@ -4,7 +4,7 @@ import virushade.tasks.TaskList;
 
 import java.util.Scanner;
 
-public class UI {
+public class Ui {
     /**
      * Prints a line break. Used after every interaction with Virushade.
      */

@@ -11,7 +11,7 @@ public class Virushade {
         try {
             TaskList tasks = new TaskList(storageFile);
         } catch (VirushadeException e) {
-            UI.handleVirushadeException(e);
+            Ui.handleVirushadeException(e);
         }
     }
 
@@ -19,7 +19,7 @@ public class Virushade {
      * The running sequence for Virushade.
      */
     public void run() {
-        UI.interact();
+        Ui.interact();
     }
 
     public static void main(String[] args) {
