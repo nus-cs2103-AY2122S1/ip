@@ -63,15 +63,4 @@ public class Storage {
         }
     }
 
-    public void writeNewTask(Task newTask) {
-        try {
-            FileWriter fw = new FileWriter(filePath, true);
-            fw.write(newTask.getText());
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 }
