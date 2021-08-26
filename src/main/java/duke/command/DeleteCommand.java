@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.TaskManager;
 import duke.Ui;
+import duke.task.Task;
 
 /**
  * Represents the command "delete x" to delete a task at index x (1-indexed).

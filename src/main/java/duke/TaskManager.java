@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Represents a TaskManager object that stores and operates on a List of tasks.
+ */
 public class TaskManager {
     private List<Task> taskList;
     private final Storage storage = new Storage();
