@@ -1,10 +1,15 @@
+package duke;
+
+import duke.utils.Ui;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.Parser;
+
+import duke.exceptions.DukeException;
+
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.ArrayList;
 
 public class Duke {
 

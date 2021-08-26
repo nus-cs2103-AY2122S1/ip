@@ -1,3 +1,5 @@
+package duke.utils;
+
 import java.util.Scanner;
 import java.util.List;
 

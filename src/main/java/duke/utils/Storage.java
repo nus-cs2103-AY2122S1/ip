@@ -1,3 +1,12 @@
+package duke.utils;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
+import duke.tasks.Task;
+
+import duke.exceptions.InvalidTaskIDException;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
