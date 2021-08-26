@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Represents a Duke bot that can interact with users
+ * and keep track of different tasks.
+ */
 
 public class Duke {
 
@@ -8,6 +12,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor for Duke
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +29,10 @@ public class Duke {
         parser = new Parser(ui, tasks);
 
     }
+
+    /**
+     * Runs the program.
+     */
 
     public void run() {
         ui.greetUser();
@@ -39,6 +52,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates an instance of Duke and runs the program.
+     *
+     * @param args Command line arguments
+     */
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();

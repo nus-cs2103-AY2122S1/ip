@@ -5,16 +5,44 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A class to represent the command of adding
+ * a task into TaskList.
+ */
+
 public class AddCommand extends Command {
+
+    /** String to represent the command */
     private String command;
+
+    /** The type of the task */
     private String taskType;
 
 
+    /**
+     * A public constructor to intialize the command
+     * and task type to the given one.
+     *
+     * @param command A string from the input of the user.
+     * @param taskType The type of the task inputted by the user.
+     */
     public AddCommand(String command, String taskType) {
         super(command);
         this.command = command;
         this.taskType = taskType;
     }
+
+    /**
+     * Checks if the command is written correctly and executes
+     * the command. If the date and time is not indicated wrongly, a
+     * DukeException is thrown.
+     *
+     * @param tasks The list of tasks stored so far.
+     * @param ui A Ui which deals with interactions with user.
+     * @param storage The storage which saves and edits the file.
+     * @throws DukeException DukeException thrown when format of date/time
+     * is incorrect.
+     */
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
