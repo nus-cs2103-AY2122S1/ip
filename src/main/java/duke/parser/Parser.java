@@ -14,13 +14,30 @@ import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
 import duke.commands.ToDoCommand;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param text The user input string.
+     * @return The command based on the user input.
+     */
     public Command parse(String text) {
         String[] tokens = text.split(" ", 2);   // split at the first white space
         Command command = parseTokens(tokens);
         return command;
     }
 
+    /**
+     * Categorizes the input into respective command types,
+     * to prepare for further processing.
+     *
+     * @param tokens The tokenized input array.
+     * @return The command based on the user input.
+     */
     private Command parseTokens(String[] tokens) {
         switch (tokens[0]) {
         case "bye":
@@ -41,7 +58,13 @@ public class Parser {
             return new InvalidCommand("Unknown command!");
         }
     }
-    
+
+    /**
+     * Parses the tokens for an exit command.
+     *
+     * @param tokens The tokenized input array.
+     * @return The prepared command.
+     */
     private Command handleBye(String[] tokens) {
         if (tokens.length > 1) {
             return new InvalidCommand("Unknown command! Did you mean 'bye'?");
@@ -49,6 +72,12 @@ public class Parser {
         return new ExitCommand();
     }
 
+    /**
+     * Parses the tokens for a list tasks command.
+     *
+     * @param tokens The tokenized input array.
+     * @return The prepared command.
+     */
     private Command handleList(String[] tokens) {
         if (tokens.length > 1) {
             return new InvalidCommand("Unknown command! Did you mean 'list'?");
@@ -56,6 +85,12 @@ public class Parser {
         return new ListCommand();
     }
 
+    /**
+     * Parses the tokens for a mark task as done command.
+     *
+     * @param tokens The tokenized input array.
+     * @return The prepared command.
+     */
     private Command handleDone(String[] tokens) {
         if (tokens.length < 2) {
             return new InvalidCommand("Which task would you like to mark as done?");
@@ -68,6 +103,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the tokens for a delete task command.
+     *
+     * @param tokens The tokenized input array.
+     * @return The prepared command.
+     */
     private Command handleDelete(String[] tokens) {
         if (tokens.length < 2) {
             return new InvalidCommand("Which task would you like to delete?");
@@ -80,6 +121,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the tokens for an add to-do task command.
+     *
+     * @param tokens The tokenized input array.
+     * @return The prepared command.
+     */
     private Command handleToDo(String[] tokens) {
         if (tokens.length < 2) {
             return new InvalidCommand("The description of a todo cannot be empty.");
@@ -87,6 +134,12 @@ public class Parser {
         return new ToDoCommand(tokens[1]);
     }
 
+    /**
+     * Parses the tokens for an add deadline task command.
+     *
+     * @param tokens The tokenized input array.
+     * @return The prepared command.
+     */
     private Command handleDeadline(String[] tokens) {
         if (tokens.length < 2) {
             return new InvalidCommand("The description of a deadline cannot be empty.");
@@ -103,6 +156,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the tokens for an add event task command.
+     *
+     * @param tokens The tokenized input array.
+     * @return The prepared command.
+     */
     private Command handleEvent(String[] tokens) {
         if (tokens.length < 2) {
             return new InvalidCommand("The description of an event cannot be empty.");

@@ -10,6 +10,7 @@ import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
+/** Entry point of Duke. Initializes the application and runs the program. */
 public class Duke {
     private Ui ui;
     private Parser parser;
@@ -19,12 +20,16 @@ public class Duke {
         new Duke().run();
     }
 
+    /** Runs the program in three steps: start, loop for input, end. */
     private void run() {
         start();
         runCommandLoopUntilExitCommand();
         exit();
     }
 
+    /**
+     * Sets up the required objects, loads the data from the storage file, and displays the welcome message.
+     */
     private void start() {
         ui = new Ui();
         parser = new Parser();
@@ -37,6 +42,9 @@ public class Duke {
         ui.showWelcome();
     }
 
+    /**
+     * Reads the user command, executes it and displays the result until exit signal.
+     */
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
@@ -51,6 +59,9 @@ public class Duke {
         } while (!(command instanceof ExitCommand));
     }
 
+    /**
+     * Saves current data into the file, displays the goodbye message and closes the program.
+     */
     private void exit() {
         try {
             Storage.save(taskList.formatData());
