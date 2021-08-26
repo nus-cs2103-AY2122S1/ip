@@ -93,6 +93,20 @@ public class Duke {
         System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
     }
 
+    public static void findTask(String input) {
+        String searchKey = input.split("find ")[1];
+        System.out.println("Here are the matching tasks in your list:");
+        int currIndex = 1;
+        for (int i = 0; i < tasks.getSize(); i++) {
+            String currTask = tasks.getTask(i).getTaskInfo();
+            if (currTask.contains(searchKey)) {
+                String foundTask = currIndex + ". " + tasks.getTask(i);
+                System.out.println(foundTask);
+                currIndex++;
+            }
+        }
+    }
+
     public static void main(String[] args) throws FileNotFoundException {
         new Duke("data/duke.txt").run();
     }
