@@ -14,22 +14,48 @@ import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * A class that contains the base functionality for a task list,
+ * including adding, deleting, listing, and marking tasks as done.
+ */
 public class TaskList {
     private final List<Task> tasks;
 
+    /**
+     * Creates a task list with no tasks.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates a task list with a given list of tasks.
+     *
+     * @param tasks A list of tasks.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
     }
 
+    /**
+     * Applies a function to every task in the task list.
+     *
+     * @param consumer A function that is to be applied to each task in the list.
+     */
     public void forEach(Consumer<? super Task> consumer) {
         tasks.forEach(consumer);
     }
 
-    public TaskList addTask(String input, Ui ui) {
+    /**
+     * Adds a task to the task list with a task name.
+     * Task is either a todo, deadline or event task depending on the input.
+     *
+     * @param input String containing user input.
+     * @param ui    Object that handles user interface functionality. (e.g. printing)
+     * @return A new TaskList instance containing the new task.
+     * @throws DukeException If input contains |, or is in an invalid format.
+     */
+    public TaskList addTask(String input, Ui ui) throws DukeException {
         List<Task> newTasks = new ArrayList<>(tasks);
         if (input.contains("|")) {
             throw new DukeException("Input contains |, which is an invalid character.");
@@ -85,6 +111,15 @@ public class TaskList {
         return new TaskList(newTasks);
     }
 
+    /**
+     * Deletes a task from the task list.
+     * Index of deleted task depends on the input.
+     *
+     * @param input String containing user input.
+     * @param ui    Object that handles user interface functionality. (e.g. printing)
+     * @return A new TaskList instance with the selected task removed.
+     * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
+     */
     public TaskList deleteTask(String input, Ui ui) {
         List<Task> newTasks = new ArrayList<>(tasks);
         if (input.length() <= 7) {
@@ -107,6 +142,15 @@ public class TaskList {
         return new TaskList(newTasks);
     }
 
+    /**
+     * Marks a task as done on in the task list.
+     * Index of marked task depends on the input.
+     *
+     * @param input String containing user input.
+     * @param ui    Object that handles user interface functionality. (e.g. printing)
+     * @return A new TaskList instance with the selected task marked as done.
+     * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
+     */
     public TaskList markTask(String input, Ui ui) {
         List<Task> newTasks = new ArrayList<>(tasks);
         if (input.length() <= 5) {
@@ -128,7 +172,14 @@ public class TaskList {
         return new TaskList(newTasks);
     }
 
-    public TaskList getDueTasks(String input) {
+    /**
+     * Gets all tasks due in x hours/days/months from now, depending on the user's input.
+     *
+     * @param input String containing user input.
+     * @return A new TaskList instance containing all tasks due within the inputted period.
+     * @throws DukeException If input is in an invalid format.
+     */
+    public TaskList getDueTasks(String input) throws DukeException {
         // Check if input is valid and input number is an integer
         if (input.length() <= 4 || !input.substring(4, input.length() - 1).matches("\\d+")) {
             throw new DukeException("Command must be of the form: due [integer][h/d/m] "
@@ -160,6 +211,13 @@ public class TaskList {
         return new TaskList(beforeDateTasks);
     }
 
+    /**
+     * Gets all tasks occurring on a given date, depending on the user's input.
+     *
+     * @param input String containing user input.
+     * @return A new TaskList instance containing all tasks occurring on the input date.
+     * @throws DukeException If input is in an invalid format, or an invalid date is given.
+     */
     public TaskList getOnDateTasks(String input) {
         if (input.length() <= 7) {
             throw new DukeException("Date must be of the form YYYY-MM-DD, and must be a real/valid date.");
@@ -171,13 +229,15 @@ public class TaskList {
                 .collect(Collectors.toList());
         return new TaskList(onDateTasks);
     }
-
-    // Returns list in numbered format (1., 2., 3., etc.)
-    // Example string format is: \t[1.task name]\n
-    //                           \t\t[2.task name]\n
-    //                           \t\t[3.task name]
+    
+    /**
+     * Converts the TaskList data into a string format.
+     * The tasks are listed in a numerical order. (1, 2, 3...)
+     *
+     * @return A string representation of the TaskList instance.
+     */
     @Override
-    public String toString() throws DukeException {
+    public String toString() {
         if (tasks.size() == 0) {
             return "No tasks found.";
         }
