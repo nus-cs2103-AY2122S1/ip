@@ -11,6 +11,7 @@ public class Event extends DateDependentTask {
         super(description, at, isCompleted);
     }
 
+    @Override
     public String getShortForm() {
         return "E";
     }
