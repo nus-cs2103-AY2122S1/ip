@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
 /**
  * Parser class
  *
@@ -106,6 +107,17 @@ public class Parser {
         return deletedTask;
     }
 
+    public void validateFind(String req) throws NoDescriptionException {
+        if (req.equals("find")) {
+            throw new NoDescriptionException("Please specify a keyword to search up.");
+        }
+
+        String[] splitReq = req.split(" ", 2);
+        String keyword = splitReq[1];
+        ArrayList<Task> matchedTasks = tasks.findTasks(keyword);
+        ui.sendMatchedTasks(matchedTasks);
+    }
+
     /** Receives an invalid command and throws and exception*/
     public void invalidInput(String req) throws InvalidCommandException {
         throw new InvalidCommandException(
@@ -161,6 +173,10 @@ public class Parser {
                 Task deletedTask = validateDelete(fullCommand);
                 storage.rewriteFile(tasks);
                 ui.sendDeleted(deletedTask);
+                break;
+
+            case "find":
+                validateFind(fullCommand);
                 break;
 
             default:

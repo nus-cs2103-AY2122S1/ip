@@ -1,5 +1,6 @@
 package duke;
 
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 /**
@@ -77,13 +78,33 @@ public class Ui {
         showDivider();
     }
 
-    /** Prints all tasks statement */
-    public void enumTasks(ArrayList<Task> tasks) {
+    /**
+     * Prints matched Tasks.
+     *
+     * @param tasks ArrayList of matched tasks.
+     */
+    public void sendMatchedTasks(ArrayList<Task> tasks) {
         showDivider();
         int count = 1;
         for (Task t : tasks) {
             System.out.println(count + ". " + t.toString());
             count += 1;
+        }
+        showDivider();
+    }
+
+    /** Prints all tasks statement */
+    public void enumTasks(ArrayList<Task> tasks) {
+        showDivider();
+        int count = 1;
+
+        if (tasks.size() == 0) {
+            System.out.println("No matches!");
+        } else {
+            for (Task t : tasks) {
+                System.out.println(count + ". " + t.toString());
+                count += 1;
+            }
         }
         showDivider();
     }
