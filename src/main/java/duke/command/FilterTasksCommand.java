@@ -1,13 +1,17 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 import duke.task.Task;
 
 public class FilterTasksCommand extends Command {
     private String searchInput;
 
+    /**
+     * Creates a command that filters a user's tasklist by the search string.
+     * @param arguments Command arguments.
+     */
     public FilterTasksCommand(String arguments) throws Exception {
         if (arguments.length() == 0) {
             throw new Exception("Command `find` requires an argument");
@@ -15,6 +19,12 @@ public class FilterTasksCommand extends Command {
         this.searchInput = arguments;
     }
 
+    /**
+     * Filters a user's tasklist.
+     * @param taskList The tasklist.
+     * @param ui The instance of the {@link Ui} class.
+     * @param storage The instance of the {@link Storage} class.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
         TaskList filteredTaskList = taskList.filterTasks(searchInput);
 
