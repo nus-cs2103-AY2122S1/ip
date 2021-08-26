@@ -1,9 +1,11 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
        /* String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -11,9 +13,20 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
         startBot();
+        ArrayList<Task> toDoList;
+        DataManager dataManager;
 
-        //level 4
-        List<Task> toDoList = new ArrayList<>();
+        //check if file exist
+        File tempFile = new File("data/dukeData.txt");
+        if (tempFile.exists()) {
+            dataManager = new DataManager(tempFile);
+            toDoList = dataManager.txtToArrayList();
+        } else {
+            toDoList = new ArrayList<>();
+            tempFile.createNewFile();
+            dataManager = new DataManager(tempFile);
+        }
+        //add the data, create file and write into the list
 
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
@@ -31,6 +44,8 @@ public class Duke {
                     canTaskBeFound(taskToDelete(message), toDoList.size());
                     displayDeletedTask(toDoList.get(taskToDelete(message) - 1), toDoList.size() - 1);
                     toDoList.remove(taskToDelete(message) - 1);
+                    dataManager.updateFile(toDoList);
+                    //update the file
 
                 } else
                     if (taskToCheck(message) != 0) {
@@ -41,8 +56,10 @@ public class Duke {
                     if (isToDo(message)) {
                         isValidEntry(message, "todo");
                         String taskName = message.substring(message.indexOf(" "));
-                        Task newTask = new Todo(taskName);
+                        Task newTask = new Todo(taskName, false);
                         toDoList.add(newTask);
+                        //write data
+                        dataManager.updateFile(toDoList);
                         System.out.println(add(newTask.displayTask(), toDoList.size()));
 
                     } else {
@@ -52,8 +69,9 @@ public class Duke {
                             String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
                             String temp = message.substring(message.indexOf("/") + 1);
                             String due = temp.substring(temp.indexOf(" ") + 1);
-                            Task newTask = new Deadline(taskName, due);
+                            Task newTask = new Deadline(taskName, due, false);
                             toDoList.add(newTask);
+                            dataManager.updateFile(toDoList);
                             System.out.println(add(newTask.displayTask(), toDoList.size()));
 
                         } else if (isEvent(message)) {
@@ -62,8 +80,9 @@ public class Duke {
                             String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
                             String temp = message.substring(message.indexOf("/") + 1);
                             String due = temp.substring(temp.indexOf(" ") + 1);
-                            Task newTask = new Event(taskName, due);
+                            Task newTask = new Event(taskName, due, false);
                             toDoList.add(newTask);
+                            dataManager.updateFile(toDoList);
                             System.out.println(add(newTask.displayTask(), toDoList.size()));
 
                         } else {
