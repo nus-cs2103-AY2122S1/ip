@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -100,15 +102,18 @@ public class Duke {
                     int posSlash = splitStr[1].indexOf("/") - 1;
                     String desc = splitStr[1].substring(0, posSlash);
                     String date = splitStr[1].substring(posBy);
-                    Deadlines addDeadline = new Deadlines(desc, date);
-                    taskList.add(addDeadline);
-                    printMessage("Oh no! A new deadline?! It's okay, you got this!", addDeadline.toString(),
-                            "Now you have a total of " + taskList.size() + " task(s)!");
+                    
                     try {
+                        String formattedDate = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                        Deadlines addDeadline = new Deadlines(desc, formattedDate);
+                        taskList.add(addDeadline);
                         appendToFile(fpath, addDeadline + System.lineSeparator());
-                    }
-                    catch (IOException e){
-                        System.out.print("Something went wrong: " + e.getMessage());
+                        printMessage("Oh no! A new deadline?! It's okay, you got this!", addDeadline.toString(),
+                                "Now you have a total of " + taskList.size() + " task(s)!");
+                    } catch (Exception e) {
+                        printMessage("Oh no! " + e.getMessage(),
+                                "Something went wrong......",
+                                "Please make sure that your date format is in yyyy-MM-dd");
                     }
                 }
                 break;
