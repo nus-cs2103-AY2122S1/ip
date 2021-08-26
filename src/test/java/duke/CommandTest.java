@@ -19,8 +19,8 @@ public class CommandTest {
     @Test
     public void runCommand(){
         CommandTest test = new CommandTest();
-        assertEquals(false, test.command.runCommand("bye","") );
-        assertEquals(true, test.command.runCommand("empty","") );
+        assertEquals(false, test.command.runNextCommand("bye", ""));
+        assertEquals(true, test.command.runNextCommand("empty", ""));
 
     }
 }

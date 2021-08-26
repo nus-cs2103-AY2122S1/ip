@@ -21,7 +21,7 @@ public class Command {
         this.ui = new Ui();
         this.parser = new Parser();
         this.storage = new Storage(filePath);
-        boolean hasCreatedFile = this.storage.createdFile();
+        boolean hasCreatedFile = this.storage.hasCreatedFile();
         this.canUseFilePath = true;
         if (!hasCreatedFile) {
             //file is read or an error has occurred when creating the file
@@ -49,13 +49,13 @@ public class Command {
             System.out.println("File path is corrupted :( Cannot start Duke.");
             return;
         }
-        this.ui.startMessage(this.taskList.getTaskList());
+        this.ui.printStartMessage(this.taskList.getTaskList());
         Scanner scanner = new Scanner(System.in);
         boolean hasNextCommand = true;
         while (hasNextCommand) {
-            String echo = scanner.nextLine();
-            String action = this.parser.parseCommand(echo);
-            hasNextCommand = runCommand(action,echo);
+            String command = scanner.nextLine();
+            String action = this.parser.parseCommand(command);
+            hasNextCommand = runNextCommand(action, command);
         }
     }
 
@@ -64,10 +64,10 @@ public class Command {
      * should be stop or not.
      *
      * @param typeOfCommand String that determines the actions of Duke.
-     * @param description The original command given by the user.
+     * @param description   The original command given by the user.
      * @return True if Duke should continue to take in commands from the user and false if Duke should stop.
      */
-    public boolean runCommand(String typeOfCommand, String description) {
+    public boolean runNextCommand(String typeOfCommand, String description) {
         try {
             if (typeOfCommand.equals("bye")) {
                 this.ui.endMessage();

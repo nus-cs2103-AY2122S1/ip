@@ -23,7 +23,7 @@ public abstract class Task {
      * @return "X" if the task is completed. " " if the task is incomplete.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     /**
@@ -31,7 +31,7 @@ public abstract class Task {
      *
      * @return The type of task.
      */
-    public abstract String typeOfTask();
+    public abstract String getTypeOfTask();
 
     /**
      * Marks the Task object as done.

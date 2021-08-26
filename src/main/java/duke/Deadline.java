@@ -64,7 +64,8 @@ public class Deadline extends Task {
      */
     @Override
     public String saveTaskToFile() {
-        return typeOfTask() + "||" + getStatusIcon() + "||" + this.getDescription() + "||" + this.getDeadline();
+        return this.getTypeOfTask() + "||" + this.getStatusIcon() + "||"
+                + this.getDescription() + "||" + this.getDeadline();
     }
 
     /**
@@ -73,18 +74,18 @@ public class Deadline extends Task {
      * @return "D".
      */
     @Override
-    public String typeOfTask() {
+    public String getTypeOfTask() {
         return "D";
     }
 
     /**
      * Returns the Deadline object in a string format.
      *
-      * @return String in the format of "[D][marked as done?]_deadlineDescription_(by:_deadline)."
+     * @return String in the format of "[D][marked as done?]_deadlineDescription_(by:_deadline)."
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s)", this.typeOfTask(),
+        return String.format("[%s][%s] %s (by: %s)", this.getTypeOfTask(),
                 this.getStatusIcon(), this.getDescription(), this.getDeadline());
     }
 }

@@ -18,7 +18,7 @@ public class ToDo extends Task {
      * @return "T".
      */
     @Override
-    public String typeOfTask() {
+    public String getTypeOfTask() {
         return "T";
     }
 
@@ -29,7 +29,7 @@ public class ToDo extends Task {
      */
     @Override
     public String saveTaskToFile() {
-        return this.typeOfTask() + "||" + this.getStatusIcon() + "||" + this.getDescription();
+        return this.getTypeOfTask() + "||" + this.getStatusIcon() + "||" + this.getDescription();
     }
 
     /**
@@ -39,6 +39,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", this.typeOfTask(),this.getStatusIcon(), this.getDescription());
+        return String.format("[%s][%s] %s", this.getTypeOfTask(),this.getStatusIcon(), this.getDescription());
     }
 }
