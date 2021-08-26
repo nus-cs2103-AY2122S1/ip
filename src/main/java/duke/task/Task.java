@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.Ui;
+
 /**
  * This class represents a task to be done in the TaskList.
  */

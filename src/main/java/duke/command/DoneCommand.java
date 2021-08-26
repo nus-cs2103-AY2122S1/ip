@@ -1,14 +1,19 @@
-public class ToDoCommand extends Command{
-    String task;
+package duke.command;
 
-    public ToDoCommand(String task) {
-        this.task = task;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
+
+public class DoneCommand extends Command {
+    private int index;
+
+    public DoneCommand(int index) {
+        this.index = index;
     }
 
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) {
-        ToDo item = new ToDo(this.task);
-        tasks.add(item, true);
+        tasks.finishTask(index);
         String saveFileString = tasks.save();
         storage.save(saveFileString);
     }

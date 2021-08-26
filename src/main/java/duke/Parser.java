@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -5,7 +9,8 @@ public class Parser {
     public static Command parse(String input) {
         String[] splitText = input.trim().split("\\s+", 2);
         String command = splitText[0];
-        Command output = new EmptyCommand();
+        Command output;
+        output = new EmptyCommand();
         switch (command) {
         case "todo":
             try {
