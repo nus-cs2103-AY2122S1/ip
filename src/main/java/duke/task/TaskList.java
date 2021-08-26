@@ -12,11 +12,11 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
     private Ui ui = new Ui();
 
-    public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public TaskList() {
@@ -24,29 +24,29 @@ public class TaskList {
     }
 
     public int listLength() {
-        return taskList.size();
+        return tasks.size();
     }
 
     public String addTaskToList(Task task) {
-        taskList.add(task);
-        return ui.showTaskAdded(task, taskList.size());
+        tasks.add(task);
+        return ui.showTaskAdded(task, tasks.size());
     }
 
     public void printTasksInList() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("\t%s."+ taskList.get(i).toString() + "%n", i + 1);
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.printf("\t%s."+ tasks.get(i).toString() + "%n", i + 1);
         }
     }
 
     public String deleteFromList(int deleteNumber) {
-        Task task = taskList.get(deleteNumber);
-        taskList.remove(deleteNumber);
-        return ui.showTaskDeleted(task, taskList.size());
+        Task task = tasks.get(deleteNumber);
+        tasks.remove(deleteNumber);
+        return ui.showTaskDeleted(task, tasks.size());
     }
 
     public String setTaskAsDone(int doneNumber) {
-        Task task = taskList.get(doneNumber);
+        Task task = tasks.get(doneNumber);
         task.setDone();
         return ui.showTaskDone(task);
     }
@@ -78,17 +78,17 @@ public class TaskList {
     }
 
     public void saveTasksInStorage(FileWriter writer) throws IOException {
-        for (Task tasks : taskList) {
+        for (Task tasks : tasks) {
             writer.write(tasks.saveTaskFormat() + System.lineSeparator());
         }
     }
 
     public String getTasks() {
-        String tasks = "Here are the tasks in your list:\n";
-        for (int i = 0; i < taskList.size(); i++) {
-            tasks += String.format("\t%s.%s\n", i + 1, taskList.get(i).toString());
+        String list = "Here are the tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            list += String.format("\t%s.%s\n", i + 1, tasks.get(i).toString());
         }
-        return tasks;
+        return list;
     }
 
 }
