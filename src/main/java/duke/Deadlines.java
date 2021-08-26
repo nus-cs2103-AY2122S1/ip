@@ -40,13 +40,13 @@ public class Deadlines extends Task {
     }
 
     public String toDataString() {
-        StringBuilder str = new StringBuilder();
+        StringBuilder string = new StringBuilder();
         if (isDone) {
-            str.append("D|1|").append(super.name).append("|").append(deadline);
-            return str.toString();
+            string.append("D|1|").append(super.name).append("|").append(deadline);
+            return string.toString();
         } else {
-            str.append("D|0|").append(super.name).append("|").append(deadline);
-            return str.toString();
+            string.append("D|0|").append(super.name).append("|").append(deadline);
+            return string.toString();
         }
     }
 }

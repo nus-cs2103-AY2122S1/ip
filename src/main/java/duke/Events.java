@@ -40,13 +40,13 @@ public class Events extends Task {
     }
 
     public String toDataString() {
-        StringBuilder str = new StringBuilder();
+        StringBuilder string = new StringBuilder();
         if (isDone) {
-            str.append("E|1|").append(super.name).append("|").append(time);
-            return str.toString();
+            string.append("E|1|").append(super.name).append("|").append(time);
+            return string.toString();
         } else {
-            str.append("E|0|").append(super.name).append("|").append(time);
-            return str.toString();
+            string.append("E|0|").append(super.name).append("|").append(time);
+            return string.toString();
         }
     }
 }

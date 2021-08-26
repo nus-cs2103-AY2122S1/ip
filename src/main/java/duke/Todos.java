@@ -31,13 +31,13 @@ public class Todos extends Task {
     }
 
     public String toDataString() {
-        StringBuilder str = new StringBuilder();
+        StringBuilder string = new StringBuilder();
         if (isDone) {
-            str.append("T|1|").append(super.name);
-            return str.toString();
+            string.append("T|1|").append(super.name);
+            return string.toString();
         } else {
-            str.append("T|0|").append(super.name);
-            return str.toString();
+            string.append("T|0|").append(super.name);
+            return string.toString();
         }
     }
 }
