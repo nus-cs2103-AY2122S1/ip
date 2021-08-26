@@ -5,7 +5,7 @@ package duke;
  *
  * @author Lethicia
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
      * Constructor for a Duke Exception
      *

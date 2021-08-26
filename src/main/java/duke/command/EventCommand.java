@@ -24,6 +24,7 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList taskList) {
         taskList.addTask(taskType.EVENT, fields);
+
         Ui.showAddedTask(taskList);
         Ui.showTaskCount(taskList);
     }
