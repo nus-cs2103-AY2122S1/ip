@@ -1,8 +1,13 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String taskType;
     protected String by;
+    protected LocalDate date;
 
     public Task(String description, String taskType) {
         this.description = description;
@@ -14,7 +19,13 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.taskType = taskType;
-        this.by = by;
+        if (by.contains("/")) {
+            date = LocalDate.parse(by.split("/")[2] + "-" + by.split("/")[1] + "-" +
+                    (Integer.parseInt(by.split("/")[0]) < 10 ? "0" + by.split("/")[0] :
+                            by.split("/")[0]));
+        } else {
+            date = LocalDate.parse(by);
+        }
     }
 
     public String getDescription() {
@@ -38,7 +49,7 @@ public class Task {
     }
 
     public String getBy() {
-        return this.by;
+        return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override
