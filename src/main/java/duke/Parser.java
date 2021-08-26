@@ -1,7 +1,6 @@
-//Parser: deals with making sense of the user command
+package duke;//duke.Parser: deals with making sense of the user command
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 
 public class Parser {
     public static boolean parse(String command) throws DukeException, IOException {

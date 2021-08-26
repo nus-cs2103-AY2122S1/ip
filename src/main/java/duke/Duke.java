@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -23,9 +25,9 @@ public class Duke {
                 Scanner s = new Scanner(System.in);
                 String command = s.nextLine();
                 isExit = Parser.parse(command);
-                //Command c = Parser.parse(fullCommand);
+                //Command c = duke.Parser.parse(fullCommand);
                 //c.execute(tasks, ui, storage);
-            //} catch (DukeException e) {
+            //} catch (duke.DukeException e) {
             //    ui.showError(e.getMessage());
             } catch (DukeException | IOException e) {
                 e.printStackTrace();

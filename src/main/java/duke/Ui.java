@@ -1,4 +1,4 @@
-//Ui: deals with interactions with the user
+package duke;//duke.Ui: deals with interactions with the user
 import java.util.Scanner;
 
 public class Ui {
@@ -15,7 +15,7 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        String welcome = "Hello! I'm Duke. A friendly chatbot!! :)\n"
+        String welcome = "Hello! I'm duke.Duke. A friendly chatbot!! :)\n"
                 + "What can I do for you?\n";
         System.out.println(DIVIDER + "\n" + LOGO + "\n" + welcome + DIVIDER);
     }
@@ -34,18 +34,18 @@ public class Ui {
 
 //Code to expand on in the future
 
-//    public void printMarkedDone(Task t) {
+//    public void printMarkedDone(duke.Task t) {
 //        String message = "Nice! I've marked this task as done:\n";
 //        printUiMessage(message + t);
 //    }
 //
-//    public void printDeleteMessage(Task t, int size) {
+//    public void printDeleteMessage(duke.Task t, int size) {
 //        String message = "Noted. I've removed this task: \n";
 //        String update = "Now you have " + size + " tasks in the list.";
 //        printUiMessage(message + t + "\n" + update);
 //    }
 //
-//    public void printAddMessage(Task t, int size) {
+//    public void printAddMessage(duke.Task t, int size) {
 //        String message = "Noted. I've added this task: \n";
 //        String update = "Now you have " + size + " tasks in the list.";
 //        printUiMessage(message + t + "\n" + update);

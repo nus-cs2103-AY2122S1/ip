@@ -5,7 +5,7 @@ ____________________________________________________________
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-Hello! I'm Duke. A friendly chatbot!! :)
+Hello! I'm duke.Duke. A friendly chatbot!! :)
 What can I do for you?
 ____________________________________________________________
 Add to-do list ({input})/ View list (list) / Complete task (done {input}) / End (bye) :

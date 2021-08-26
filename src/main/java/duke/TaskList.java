@@ -1,4 +1,4 @@
-//TaskList: contains the task list e.g., it has operations to add/delete tasks in the list
+package duke;//duke.TaskList: contains the task list e.g., it has operations to add/delete tasks in the list
 
 import java.io.*;
 import java.nio.file.Path;
