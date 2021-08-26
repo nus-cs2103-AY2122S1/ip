@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 /**
  * Deadline (Task). Can be added to list in Duke.
  *
@@ -15,6 +19,7 @@ public class Deadline extends Task {
     public Deadline(String taskstr, String deadline) {
         super(taskstr);
         this.by = deadline;
+        super.date = LocalDate.parse(deadline);
     }
 
     @Override

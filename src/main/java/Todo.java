@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 /**
  * Todo (Task). Can be added to list in Duke.
  *
@@ -12,6 +16,7 @@ public class Todo extends Task {
      */
     public Todo(String taskstr) {
         super(taskstr);
+        super.date = null;
     }
 
     /**
