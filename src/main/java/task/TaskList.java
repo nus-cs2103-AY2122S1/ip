@@ -1,5 +1,6 @@
 package task;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class TaskList {
         return serializedData;
     }
 
-    public static TaskList deserialize(List<String> list) {
+    public static TaskList deserialize(List<String> list) throws IllegalArgumentException, DateTimeParseException {
         TaskList taskList = new TaskList();
 
         for (String data : list) {

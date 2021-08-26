@@ -1,5 +1,7 @@
 package task;
 
+import java.time.format.DateTimeParseException;
+
 public class Task {
     protected String description;
     protected boolean done;
@@ -30,7 +32,7 @@ public class Task {
         return this.description;
     }
 
-    public static Task deserialize(String data) throws IllegalArgumentException {
+    public static Task deserialize(String data) throws IllegalArgumentException, DateTimeParseException {
         try {
             // Format:
             // "taskType | isDone | description | time"

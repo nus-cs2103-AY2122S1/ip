@@ -1,5 +1,7 @@
 package task;
 
+import exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -7,14 +9,24 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private LocalDate by;
 
-    public Deadline(String description, String by) throws DateTimeParseException {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = LocalDate.parse(by);
+
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format: " + by);
+        }
     }
 
-    public Deadline(String description, String by, boolean done) throws DateTimeParseException {
+    public Deadline(String description, String by, boolean done) throws DukeException {
         super(description, done);
-        this.by = LocalDate.parse(by);
+
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format: " + by);
+        }
     }
 
     @Override

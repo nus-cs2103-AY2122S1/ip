@@ -2,85 +2,28 @@ import java.io.IOException;
 
 import java.time.format.DateTimeParseException;
 
-import java.util.List;
-
+import command.Command;
+import exception.DukeException;
+import parser.Parser;
 import storage.Storage;
-import task.Deadline;
-import task.Event;
-import task.Task;
 import task.TaskList;
-import task.Todo;
-
 import ui.Ui;
 
 public class Duke {
     private Ui ui;
     private TaskList taskList;
-    Storage storage = new Storage("data/duke.txt");
+    private Storage storage;
 
-    public Duke() {
+    public Duke(String filePath) {
         ui = new Ui();
-        taskList = new TaskList();
-    }
+        storage = new Storage(filePath);
 
-    public void addTodo(String description) {
-        Task task = new Todo(description);
-        this.taskList.addTask(task);
-        ui.sayAddTask(task, taskList.size());
-        this.saveData();
-    }
-
-    public void addDeadline(String description, String by) throws DateTimeParseException {
-        Task task = new Deadline(description, by);
-        this.taskList.addTask(task);
-        ui.sayAddTask(task, taskList.size());
-        this.saveData();
-    }
-
-    public void addEvent(String description, String at) throws DateTimeParseException {
-        Task task = new Event(description, at);
-        this.taskList.addTask(task);
-        ui.sayAddTask(task, taskList.size());
-        this.saveData();
-    }
-
-    public void markDone(int index) {
-        // Converting 1-based to 0-based
-        this.taskList.markDone(index - 1);
-        ui.sayMarkDoneTask(index);
-        this.saveData();
-    }
-
-    public void deleteTask(int index) {
-        // Converting 1-based to 0-based
-        Task deletedTask = this.taskList.getTask(index - 1);
-        this.taskList.deleteTask(index - 1);
-        ui.sayDeleteTask(deletedTask, this.taskList.size());
-        this.saveData();
-    }
-
-    public void loadData() {
-        ui.say("Retrieving data...");
         try {
-            List<String> data = storage.load();
-            taskList = TaskList.deserialize(data);
-
-            ui.sayRetrieveData();
-        } catch (IllegalArgumentException | DateTimeParseException e) {
-            // Data stored in incorrect format
-            ui.say("Unable to retrieve data. Data stored in invalid format");
-        } catch (IOException e) {
-            // Do nothing
-            ui.say("No stored data found");
-        }
-    }
-
-    public void saveData() {
-        try {
-            storage.store(taskList.serialize());
-        } catch (IOException e) {
-            // Do nothing
-            ui.say("Unable to save data");
+            taskList = TaskList.deserialize(storage.load());
+            ui.sayLoadingSuccess();
+        } catch (DateTimeParseException | IllegalArgumentException | IOException e) {
+            ui.sayLoadingFail();
+            taskList = new TaskList();
         }
     }
 
@@ -88,50 +31,19 @@ public class Duke {
         ui.sayGreet();
         ui.sayHelp();
 
-        this.loadData();
-
         String response = "";
+        boolean isExit = false;
 
-        while (true) {
-            response = ui.getUserCommand();
-
+        while (!isExit) {
             try {
-                if (response.equals("list")) {
-                    ui.sayList(this.taskList);
-                } else if (response.equals("bye")) {
-                    break;
-                } else if (response.startsWith("done ")) {
-                    int index = Integer.parseInt(response.substring(5));
-                    this.markDone(index);
-                } else if (response.startsWith("delete ")) {
-                    int index = Integer.parseInt(response.substring(7));
-                    this.deleteTask(index);
-                } else if (response.startsWith("todo ")) {
-                    String description = response.substring(5);
-                    this.addTodo(description);
-                } else if (response.startsWith("deadline ")) {
-                    if (!response.contains(" /by ")) {
-                        throw new DukeException("Invalid format for `deadline` command. '/by' keyword is needed");
-                    }
-                    String[] params = response.substring(9).split(" /by ");
-                    String description = params[0];
-                    String by = params[1];
-                    this.addDeadline(description, by);
-                } else if (response.startsWith("event ")) {
-                    if (!response.contains(" /at ")) {
-                        throw new DukeException("Invalid format for `event` command. '/at' keyword is needed");
-                    }
-                    String[] params = response.substring(6).split(" /at ");
-                    String description = params[0];
-                    String at = params[1];
-                    this.addEvent(description, at);
-                } else {
-                    throw new DukeException("Invalid command: " + response);
-                }
+                response = ui.getUserCommand();
+                Command c = Parser.parse(response);
+                c.execute(taskList, ui, storage);
+                isExit = c.isExit();
+            } catch (IOException e) {
+                ui.sayError(e.getMessage());
             } catch (DukeException e) {
-                ui.say(e.getMessage() + "\n");
-            } catch (DateTimeParseException e) {
-                ui.say("Invalid date format (must be in yyyy-mm-dd). Unable to add task.");
+                ui.sayError(e.getMessage());
             }
         }
 
@@ -139,7 +51,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        Duke duke = new Duke("data/duke.txt");
 
         duke.run();
     }
