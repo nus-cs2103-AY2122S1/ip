@@ -1,10 +1,12 @@
+package duke.util;
+
 public class Ui {
 	private final static String LINE = "\t----------------------------------------------------\n";
 	
     /**
      * Print a welcome message to the user.
      */
-    protected void greetUser() {
+    public void greetUser() {
         String LOGO = " ____        _        \n"
                                      + "|  _ \\ _   _| | _____ \n"
                                      + "| | | | | | | |/ / _ \\\n"
@@ -21,7 +23,7 @@ public class Ui {
      * 
      * @param message The message to print within 2 lines.
      */
-    protected static void printFormattedMessage(String message) {
+    public static void printFormattedMessage(String message) {
         System.out.println(LINE + "\t" + message + LINE);
     }
 }

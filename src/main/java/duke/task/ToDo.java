@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a ToDo task to be completed with no time restriction.
  */

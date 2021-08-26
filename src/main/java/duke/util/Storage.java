@@ -1,9 +1,17 @@
+package duke.util;
+
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Represents the storage of tasks. Storage is able to load and save tasks.
@@ -19,7 +27,7 @@ public class Storage {
 	 * Load the data from the hard disk.
 	 * 
 	 * @return ArrayList of tasks
-	 * @throws DukeException
+	 * @throws DukeException File cannot be found
 	 */
 	public ArrayList<Task> loadTasks() throws DukeException {
 		ArrayList<Task> tasks = new ArrayList<>();		// We will populate an ArrayList of tasks
@@ -74,7 +82,7 @@ public class Storage {
 	 * 
 	 * @param tasks ArrayList of tasks to be saved
 	 */
-	public void saveTasks(ArrayList<Task> tasks) {
+	public void saveTasks(ArrayList<Task> tasks) throws DukeException {
 		try {
 			FileWriter fw = new FileWriter(filePath);
 
@@ -89,7 +97,7 @@ public class Storage {
 			}
 			fw.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new DukeException("File not found!");
 		}
 	}
 }

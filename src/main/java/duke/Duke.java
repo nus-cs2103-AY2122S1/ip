@@ -1,12 +1,19 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
+
 import java.util.Scanner;
 
 /**
  * Represents a Personal Assistant Chatbot that helps a person to keep track of various things.
  */
 public class Duke {
-    protected static Storage storage;
-    protected static TaskList tasks;
-    private Ui ui;
+    public static Storage storage;
+    public static TaskList tasks;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -40,6 +47,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("../../../data/duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 }

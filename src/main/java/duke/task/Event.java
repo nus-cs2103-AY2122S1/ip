@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents an event task with a time and a name.
  */

@@ -1,3 +1,12 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.util.Ui;
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -37,7 +46,7 @@ public class TaskList {
     protected void completeTask(int taskNum) {
         Task task = tasks.get(taskNum - 1);
         task.setDone(true);
-        Ui.printFormattedMessage("Good job! I've marked this task as done:\n\n\t" + task + "\n");  
+        Ui.printFormattedMessage("Good job! I've marked this task as done:\n\n\t" + task + "\n");
     }
 
 	/**
@@ -58,7 +67,7 @@ public class TaskList {
      * Get the task number in the list.
      * @param command Command to extract task number from.
      * @return Task number.
-     * @throws DukeException
+     * @throws DukeException Task number not valid
      */
     public int getTaskNum(String command) throws DukeException {
         int taskNum;
@@ -78,9 +87,9 @@ public class TaskList {
      * Handle task deletion.
      * 
      * @param command user input to parse
-     * @throws DukeException
+     * @throws DukeException Task not specified
      */
-    protected void handleDelete(String command) throws DukeException {
+    public void handleDelete(String command) throws DukeException {
         if (command.equals("delete")) {
             throw new DukeException("You need to specify the task!\n");
         }
@@ -93,9 +102,9 @@ public class TaskList {
      * Handle task completion.
      * 
      * @param command user input to parse
-     * @throws DukeException
+     * @throws DukeException Task not specified
      */
-    protected void handleDone(String command) throws DukeException {
+    public void handleDone(String command) throws DukeException {
         if (command.equals("done")) {
             throw new DukeException("You need to specify the task!\n");
         }
@@ -109,7 +118,7 @@ public class TaskList {
      * 
      * @param t the task to add
      */
-    private void addTask(Task t) throws DukeException {
+    private void addTask(Task t) {
 		this.tasks.add(t);
         Ui.printFormattedMessage("Got it. I've added this task:\n\t" 
                                 + t 
@@ -120,9 +129,9 @@ public class TaskList {
      * Add ToDo task to the ArrayList of tasks.
      * 
      * @param command user input to extract task
-     * @throws DukeException
+     * @throws DukeException Task not specified
      */
-    protected void addToDo(String command) throws DukeException {
+    public void addToDo(String command) throws DukeException {
         if (command.equals("todo")) {
             throw new DukeException("You need to specify which task you want to add!\n");
         }
@@ -134,10 +143,10 @@ public class TaskList {
     /**
      * Add event task with datetime.
      * 
-     * @param command user input to extract task and datetime
-     * @throws DukeException
+     * @param command User input to extract task and datetime
+     * @throws DukeException Task not specified
      */
-    protected void addEvent(String command) throws DukeException {
+    public void addEvent(String command) throws DukeException {
         if (command.equals("event")) {
             throw new DukeException("You need to specify which event you want to add!\n");
         }
@@ -152,10 +161,10 @@ public class TaskList {
     /**
      * Add deadline task with date/time.
      * 
-     * @param command user input to extract task and datetime
-     * @throws DukeException
+     * @param command User input to extract task and datetime
+     * @throws DukeException Task not specified
      */
-    protected void addDeadline(String command) throws DukeException {
+    public void addDeadline(String command) throws DukeException {
         if (command.equals("deadline")) {
             throw new DukeException("You need to specify which deadline you want to add!\n");
         }
@@ -201,20 +210,20 @@ public class TaskList {
 	/**
      * Print all the tasks in the ArrayList of tasks.
      */
-    protected void printTasks() throws DukeException{
+    public void printTasks() {
         if (tasks.isEmpty()) {
             Ui.printFormattedMessage("You have no tasks!\n");
             return;
         }
         
-		String taskListMessage = "I present to you, your collection of tasks!\n\n";
+		StringBuilder taskListMessage = new StringBuilder("I present to you, your collection of tasks!\n\n");
 
         for (int i = 0; i < tasks.size(); i++) {
             int taskNum = i + 1;
             String task = "\t" + taskNum+ ". " + tasks.get(i);
-            taskListMessage += task + "\n";
+            taskListMessage.append(task).append("\n");
         }
 
-		Ui.printFormattedMessage(taskListMessage);
+		Ui.printFormattedMessage(taskListMessage.toString());
     }
 }

@@ -1,5 +1,6 @@
 [T][ ] work
 [D][X] ip (by: 2021-03-23)
 [E][X] meeting (at: tmr 9pm)
-[T][X] work
 [D][ ] SLEEP (by: 2021-08-26)
+[T][X] new task
+[D][ ] drink (by: 2012-02-12)
