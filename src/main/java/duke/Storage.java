@@ -24,9 +24,9 @@ public class Storage {
     private final File duke;
     private final Ui ui;
     
-    public Storage(String fileDirectory, String fileName, Ui ui) {
-        this.filePath = fileDirectory + "/" + fileName;
-        this.ui = ui;
+    public Storage(String fileDirectory, String fileName) {
+        filePath = fileDirectory + "/" + fileName;
+        ui = new Ui();
 
         direc = new File(fileDirectory);
         duke = new File(filePath);
@@ -126,7 +126,7 @@ public class Storage {
      * 
      * @param s A string representation of the task to be added to the database.
      */
-    public void addDBEntry(String s) {
+    public void addDbEntry(String s) {
         try {
             FileWriter writer = new FileWriter(duke, true);
             writer.write(s + "\n");
@@ -142,7 +142,7 @@ public class Storage {
      *
      * @param s A string representation of the task in the database to be set to 'done'.
      */
-    public void setDBEntryDone(String s) {
+    public void setDbEntryDone(String s) {
         try {
             // Create updated file
             String updatedPath = filePath.split("/")[0] + "/updated.txt";
@@ -182,7 +182,7 @@ public class Storage {
      *
      * @param s A string representation of the task to be deleted from the database.
      */
-    public void deleteDBEntry(String s) {
+    public void deleteDbEntry(String s) {
         try {
             // Create updated file
             String updatedPath = filePath.split("/")[0] + "/updated.txt";

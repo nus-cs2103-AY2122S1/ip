@@ -31,7 +31,8 @@ public class Parser {
      */
     public static Command parse(String fullCommand, TaskList taskList) throws DukeException {
         // Find case based on first word of command
-        switch (fullCommand.split("\\s+")[0]) {
+        String[] parsedCommand = fullCommand.split("\\s+", 3);
+        switch (parsedCommand[0]) {
         
         // "bye" command given  
         case "bye":   
@@ -43,10 +44,10 @@ public class Parser {
             
         // "done" command given
         case "done":  
-            if (fullCommand.split("\\s+").length == 1) {
+            if (parsedCommand.length == 1) {
                 throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
             } else {
-                int toSet = Integer.parseInt(fullCommand.split("\\s+")[1]);
+                int toSet = Integer.parseInt(parsedCommand[1]);
                 if (taskList.isInvalidIndex(toSet)) {
                     throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
                 } else {
@@ -56,10 +57,10 @@ public class Parser {
             
         // "delete" command given
         case "delete":   
-            if (fullCommand.split("\\s+").length == 1) {
+            if (parsedCommand.length == 1) {
                 throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
             } else {
-                int toDelete = Integer.parseInt(fullCommand.split("\\s+")[1]);
+                int toDelete = Integer.parseInt(parsedCommand[1]);
                 if (taskList.isInvalidIndex(toDelete)) {
                     throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
                 } else {
@@ -69,7 +70,6 @@ public class Parser {
             
         // "find" command given
         case "find":
-            String[] parsedCommand = fullCommand.split("\\s+");
             if (parsedCommand.length == 1) {
                 throw new DukeException(DukeExceptionType.INVALID_FIND); 
             } else {
@@ -96,7 +96,7 @@ public class Parser {
         // Task command given
         default:
             // Incomplete or invalid command
-            if (fullCommand.split("\\s+").length == 1) { 
+            if (parsedCommand.length == 1) { 
                 switch (fullCommand) {
                 case "deadline":
                     throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DESC);

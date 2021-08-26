@@ -1,7 +1,5 @@
 package duke;
 
-import exception.DukeException;
-import exception.DukeExceptionType;
 import org.junit.jupiter.api.Test;
 
 import task.Task;
@@ -12,8 +10,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
-    Ui ui = new Ui();
-    Storage testStorage = new Storage("data", "duke.txt", ui);
+    Storage testStorage = new Storage("data", "duke.txt");
     
     @Test
     public void testEmptyLoad() {

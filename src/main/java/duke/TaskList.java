@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class TaskList {
     private final Storage storage;
-    private final Ui ui;
     private final ArrayList<Task> list;
+    private final Ui ui;
     
-    public TaskList(Storage storage, Ui ui, ArrayList<Task> list) {
+    public TaskList(Storage storage) {
         this.storage = storage;
-        this.ui = ui;
-        this.list = list;
+        list = storage.load();
+        ui = new Ui();
     }
 
     /**
@@ -40,7 +40,7 @@ public class TaskList {
      */
     public void setTaskDone(int index) {
         Task toSetDone = list.get(index);
-        storage.setDBEntryDone(toSetDone.databaseEntry());
+        storage.setDbEntryDone(toSetDone.databaseEntry());
         toSetDone.setDone();
         ui.showDone(toSetDone);
     }
@@ -52,7 +52,7 @@ public class TaskList {
      */
     public void deleteTask(int index) {
         Task deleted = list.remove(index);
-        storage.deleteDBEntry(deleted.databaseEntry());
+        storage.deleteDbEntry(deleted.databaseEntry());
         ui.showDelete(deleted, list.size());
     }
 
@@ -81,7 +81,7 @@ public class TaskList {
      */
     public void addTask(Task newTask) {
         list.add(newTask);
-        storage.addDBEntry(newTask.databaseEntry());
+        storage.addDbEntry(newTask.databaseEntry());
         ui.showAdd(newTask, list.size());
     }
 }
