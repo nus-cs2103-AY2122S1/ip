@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Task {
 
@@ -7,16 +8,20 @@ public class Task {
 
     private String description;
     private boolean isDone;
-    protected LocalDateTime time;
+    protected LocalDateTime time = null;
 
     protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    protected Task(String description, String time) {
+    protected Task(String description, String time) throws DukeException {
         this(description);
-        this.time = LocalDateTime.parse(time.trim());
+        try {
+            this.time = LocalDateTime.parse(time);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Incorrect Time Format!");
+        }
     }
 
     public void finishTask() {
@@ -27,13 +32,13 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    public String save() {
-        return String.format("%s | %s", isDone, description);
+    protected String saveString() {
+        return String.format("%s|%s|%s", isDone, description, time);
     }
     
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "]" + description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 
 }
