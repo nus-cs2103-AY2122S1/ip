@@ -80,7 +80,7 @@ class DukeBot {
             taskList.add(deadline);
             return "I've added:\n  " + deadline;
         } catch (DateTimeParseException e) {
-            return "I cannot understand the date :( Please format it as YYYY-MM-DD";
+            return "I cannot understand the date :( Please format it as DD-MM-YYYY hhmm (24hr time)";
         }
     }
 
