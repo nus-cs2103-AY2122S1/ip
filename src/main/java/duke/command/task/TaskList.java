@@ -1,6 +1,7 @@
 package duke.command.task;
 
 import duke.util.DukeException;
+import duke.util.Message;
 import duke.util.Parser;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class TaskList {
     private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:\n  %s\n" + NUMBER_OF_TASKS_MESSAGE;
     private static final String REMOVE_TASK_MESSAGE = "Noted. I've removed this task:\n %s\n" + NUMBER_OF_TASKS_MESSAGE;
     private static final String ERROR_SAVING_MESSAGE = "Error reading taskLst. Symbol not found.";
+    private static final String NO_TASK_FOUND_MESSAGE = "Unfortunately no tasks with that name are found";
+    private static final String MATCHING_TASKS_MESSAGE = "Here are the matching tasks in your list:\n";
 
     // Nouns
     private String taskWord() {
@@ -33,6 +36,26 @@ public class TaskList {
     public String addTask(Task task) {
         this.taskArr.add(task);
         return String.format(ADD_TASK_MESSAGE, task, this.size(), taskWord());
+    }
+
+    public String findTask(String input) {
+        StringBuilder printedList = new StringBuilder();
+        int index = 1;
+        for (Task task : this.taskArr) {
+            if (task.getText().contains(input)) {
+                // Index from 1 onwards
+                String indexStr = Integer.toString(index);
+                printedList.append(String.format("%s. %s\n", indexStr, task));
+                index++;
+            }
+        }
+        if (index == 1) {
+            printedList.insert(0, NO_TASK_FOUND_MESSAGE );
+        } else {
+            printedList.insert(0, MATCHING_TASKS_MESSAGE );
+        }
+        // Remove the last newline
+        return printedList.toString().trim();
     }
 
     public void addSavedTask(String input) throws ArrayIndexOutOfBoundsException, DukeException {

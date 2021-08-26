@@ -6,6 +6,7 @@ public enum Command {
     BYE,
     LIST,
     DONE,
+    FIND,
     DELETE,
     DEADLINE,
     EVENT,

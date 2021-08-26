@@ -75,6 +75,9 @@ public class Duke {
                     ToDo myTodo = ToDo.newTodo(remainingText);
                     Message.display_message(taskList.addTask(myTodo));
                     break;
+                case FIND:
+                    Message.display_message(taskList.findTask(remainingText));
+                    break;
                 case DEADLINE:
                     Deadline myDeadline = Deadline.newDeadline(remainingText, false);
                     Message.display_message(taskList.addTask(myDeadline));
