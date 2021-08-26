@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.task.Task;
 import duke.task.TaskList;
+import java.util.ArrayList;
 
 public class Ui {
 
@@ -25,6 +26,13 @@ public class Ui {
 	}
 
 	public void list(TaskList tasks) {
+		for (int i = 0; i < tasks.size(); i++) {
+			System.out.println("\t" + (i + 1) + ". " + tasks.get(i).toString());
+		}
+	}
+
+  public void list(ArrayList<Task> tasks) {
+      System.out.println("\tHere are the matching tasks in your list.");
 		for (int i = 0; i < tasks.size(); i++) {
 			System.out.println("\t" + (i + 1) + ". " + tasks.get(i).toString());
 		}

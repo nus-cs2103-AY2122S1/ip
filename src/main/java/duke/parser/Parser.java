@@ -13,6 +13,8 @@ public class Parser {
             return Command.INDEXCOMMAND;
         } else if (input[0].equals("todo") || input[0].equals("deadline") || input[0].equals("event")) {
             return Command.ADDCOMMAND;
+        } else if (input[0].equals("find")) {
+            return Command.FIND;
         } else {
             return Command.UNKNOWN;
         }

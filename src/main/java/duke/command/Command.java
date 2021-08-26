@@ -6,4 +6,5 @@ public enum Command {
      INDEXCOMMAND,
      ADDCOMMAND,
      UNKNOWN,
+     FIND,
 }
