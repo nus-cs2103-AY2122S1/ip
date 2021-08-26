@@ -11,8 +11,12 @@ public class Deadline extends Task {
         return "D," + super.toFileData();
     }
 
+    public Deadline(String description, String date) throws DukeException {
+        super(description, date);
+    }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString();
+        return String.format("[D]%s (by: %s)", super.toString(), super.getDateString());
     }
 }

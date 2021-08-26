@@ -69,10 +69,10 @@ public class Duke {
                             taskList.add(new Todo(userInput));
                         } else if (userCommand.equals("deadline")) {
                             String[] deadlineInfo = splitBetween(userInput, "/by");
-                            taskList.add(new Deadline(buildDescription(deadlineInfo, "by")));
+                            taskList.add(new Deadline(deadlineInfo[0], deadlineInfo[1]));
                         } else {
                             String[] eventInfo = splitBetween(userInput, "/at");
-                            taskList.add(new Event(buildDescription(eventInfo, "at")));
+                            taskList.add(new Event(eventInfo[0], eventInfo[1]));
                         }
                         addTask(taskList.get(taskList.size() - 1));
                         break;
@@ -135,10 +135,6 @@ public class Duke {
         }
 
         return new String[] {String.valueOf(start), String.valueOf(end)};
-    }
-
-    private static String buildDescription(String[] info, String preposition) {
-        return String.format("%s (%s: %s)", info[0], preposition, info[1]);
     }
 
     private static int getInputNumber(String userInput) throws DukeException {
