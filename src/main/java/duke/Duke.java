@@ -4,12 +4,19 @@ import duke.command.Command;
 import duke.task.Storage;
 import duke.task.TaskList;
 
+/**
+ * Represents a Personal Assistant Chatbot that helps a person to keep track of tasks to do.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs a Duke Chatbot with a data storage file.
+     * @param filePath The path of the data file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -21,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Chatbot program.
+     */
     public void run() {
         ui.showWelcome();
 
@@ -39,7 +49,11 @@ public class Duke {
             }
         }
     }
-    
+
+    /**
+     * The main program.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

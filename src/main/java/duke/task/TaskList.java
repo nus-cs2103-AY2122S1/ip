@@ -6,24 +6,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a list of tasks to do.
+ */
 public class TaskList {
+    /**
+     * The todo list that stores tasks.
+     */
     private ArrayList<Task> todoList;
-    
+
+    /**
+     * The types of tasks that this list contains.
+     */
     public enum TaskType {
         TODO,
         DEADLINE,
         EVENT
     }
 
+    /**
+     * Constructs a task list with no tasks in it.
+     */
     public TaskList() {
         this.todoList = new ArrayList<>();
     }
-    
+
+    /**
+     * Constructs a task list with the tasks given.
+     * @param tasks An array of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.todoList = tasks;
     }
 
-    /** Prints the to-do list in order */
+    /**
+     * Prints this todo list in order.
+     */
     public void displayList() {
         System.out.println("Your task list:");
         for (int i = 0; i < todoList.size(); i++) {
@@ -33,7 +51,14 @@ public class TaskList {
         }
     }
 
-    /** Add a task to the to-do list */
+    /**
+     * Add a task to this todo list.
+     *
+     * @param taskType The type of task to be added.
+     * @param details The details of the task.
+     * @return The task added into the list.
+     * @throws DukeException
+     */
     public Task addTask(TaskType taskType, String details) throws DukeException {
         Task task;
         if (taskType.equals(TaskType.TODO)) {
@@ -63,11 +88,17 @@ public class TaskList {
             throw new DukeException("Invalid task type.");
         }
         todoList.add(task);
-        
+
         return task;
     }
 
-    /** Mark a task with given task number as done */
+    /**
+     * Mark a task with given task number as done.
+     *
+     * @param taskNum The task number of the task to be marked as done.
+     * @return The task marked as done.
+     * @throws DukeException
+     */
     public Task markTaskDone(Integer taskNum) throws DukeException {
         Task task = todoList.get(taskNum - 1);
         task.markAsDone();
@@ -75,20 +106,34 @@ public class TaskList {
         return task;
     }
 
-    /** Delete a task with given task number */
+    /**
+     * Delete a task with given task number.
+     *
+     * @param taskNum The task number of the task to be deleted from the list.
+     * @return The deleted task.
+     * @throws DukeException
+     */
     public Task deleteTask(Integer taskNum) throws DukeException {
         Task task = todoList.remove(taskNum - 1);
 
         return task;
     }
-    
-    /** Returns a list of tasks in data string format */
+
+    /**
+     * Convert this task list into data string format.
+     *
+     * @return A list of tasks in data string format.
+     */
     public List<String> getListData() {
          return todoList.stream().map(task -> task.toDataString("|")).collect(Collectors.toList());
     }
 
-    /** Returns the size of the list */
+    /**
+     * Returns the size of this task list.
+     *
+     * @return returns the size of this task list.
+     */
     public Integer getListSize() {
-        return todoList.size(); 
+        return todoList.size();
     }
 }
