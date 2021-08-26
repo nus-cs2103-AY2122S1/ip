@@ -9,7 +9,7 @@ public class Event extends Task{
         this.time = time;
     }
 
-    public Event(String task, boolean completed, String time) {
+    public Event(String task, boolean completed, LocalDateTime time) {
         super(task, completed, "E");
         this.time = time;
     }
@@ -25,6 +25,6 @@ public class Event extends Task{
 
     @Override
     public String parseForStorage() {
-        return String.format("%s | %d | %s | %s", this.getTaskType(), this.getCompleted() ? 1 : 0, this.getTask(), this.time);
+        return String.format("%s | %d | %s | %s", this.getTaskType(), this.getCompleted() ? 1 : 0, this.getTask(), this.getTime());
     }
 }

@@ -4,6 +4,9 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -41,10 +44,12 @@ public class SaveHelper{
                     list.add(new ToDo(values[2], values[1].equals("1")));
                     break;
                 case "E":
-                    list.add(new Event(values[2], values[1].equals("1"), values[3]));
+                    LocalDateTime dateTime = LocalDateTime.parse(values[3], DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+                    list.add(new Event(values[2], values[1].equals("1"), dateTime));
                     break;
                 case "D":
-                    list.add(new Deadline(values[2], values[1].equals("1"), values[3]));
+                    LocalDate date = LocalDate.parse(values[3], DateTimeFormatter.ofPattern("dd MMM yyyy"));
+                    list.add(new Deadline(values[2], values[1].equals("1"), date));
                     break;
                 }
             }

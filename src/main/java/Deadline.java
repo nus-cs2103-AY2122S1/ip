@@ -10,7 +10,7 @@ public class Deadline extends Task{
         this.date = date;
     }
 
-    public Deadline(String task, boolean completed, String date) {
+    public Deadline(String task, boolean completed, LocalDate date) {
         super(task, completed,"D");
         this.date = date;
     }
@@ -26,6 +26,6 @@ public class Deadline extends Task{
 
     @Override
     public String parseForStorage() {
-        return String.format("%s | %d | %s | %s", this.getTaskType(), this.getCompleted() ? 1 : 0, this.getTask(), this.date);
+        return String.format("%s | %d | %s | %s", this.getTaskType(), this.getCompleted() ? 1 : 0, this.getTask(), this.getDate());
     }
 }
