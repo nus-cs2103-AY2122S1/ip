@@ -11,10 +11,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulate the handling of loading and storing files on local directory for duke.
+ *
+ * @author Zhi Bin
+ * @version Duke Level 8
+ */
 public class Storage {
     private static final String FOLDER_NAME = "data";
     private static final String FILE_NAME = "duke.txt";
 
+    /**
+     * Creates a data file named 'duke.txt' to store the task list on local directory under the folder data.
+     * Prints different message when it is created successfully or failed due to an error or file existed.
+     */
     public void createFile(){
         File file = new File(String.format("%s/%s",FOLDER_NAME, FILE_NAME));
         boolean created = false;
@@ -31,6 +41,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a folder named 'data' to contain the data file storing task list on local directory.
+     * Prints message if the folder could not be created.
+     */
     public void createFolder(){
         File folder = new File(FOLDER_NAME);
         boolean created = folder.mkdir();
@@ -39,6 +53,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the data file stored on the local directory into duke to get the previously stored task list.
+     * If the data file does not exist, means it is the first time user use duke, proceed to create folder and file.
+     * Else, load the data from the file to an ArrayList to be used by TaskList class.
+     *
+     * @return The ArrayList of Task to be used by TaskList class to recreate the stored task list.
+     */
     public ArrayList<Task> load(){
         ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(String.format("%s/%s", FOLDER_NAME, FILE_NAME));
@@ -59,6 +80,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the current task list to a data file on local directory.
+     * Prints error message if an IOException is thrown.
+     *
+     * @param taskList The current task list to be saved to the data file.
+     */
     public void save(ArrayList<Task> taskList){
         try {
             FileWriter writer = new FileWriter(String.format("%s/%s", FOLDER_NAME, FILE_NAME));
