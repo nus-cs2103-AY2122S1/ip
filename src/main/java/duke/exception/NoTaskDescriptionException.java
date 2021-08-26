@@ -1,13 +1,13 @@
 package duke.exception;
 
 /**
- * Signals that an error has occurred due to empty description of a todo task.
+ * Signals that an error has occurred due to empty description of a task.
  *
  * @author Zhi Bin
  * @version Duke Level 9
  */
-public class NoToDoDescriptionException extends DukeException {
-    public NoToDoDescriptionException() {
+public class NoTaskDescriptionException extends DukeException {
+    public NoTaskDescriptionException() {
         super();
     }
 
@@ -19,6 +19,6 @@ public class NoToDoDescriptionException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.formatMessage("Hello??? What you want me to do???");
+        return super.formatMessage("Hello??? Your task no description one ah???");
     }
 }
