@@ -1,13 +1,12 @@
 package bot.assembly.function;
 
-import bot.assembly.function.BotTaskStatusGeneratorUnit;
-import bot.assembly.function.BotPrinter;
-import bot.assembly.function.BotTemporalUnit;
-import bot.assembly.function.BotCommandResponderUnit;
 import bot.assembly.memory.BotStaticMemoryUnit;
 import bot.assembly.memory.BotDynamicMemoryUnit;
 import bot.assembly.memory.CommandInput;
-import bot.assembly.error.*;
+import bot.assembly.error.InvalidCommandException;
+import bot.assembly.error.InvalidCommandFormatException;
+import bot.assembly.error.TaskOutOfRangeException;
+import bot.assembly.error.InvalidTaskIndexException;
 
 import bot.assembly.task.Task;
 import bot.assembly.task.Deadline;
@@ -21,15 +20,15 @@ import java.util.List;
  */
 public class BotCommandResponderUnit {
 
-    BotPrinter botPrinter = new BotPrinter();
-    BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
-    BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
-    BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
+    private BotPrinter botPrinter = new BotPrinter();
+    private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
+    private BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
+    private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
 
     /**
      * ArrayList as a main data structure to store Task
      */
-    List<Task> taskTracker = botDynamicMemoryUnit.taskTracker;
+    private List<Task> taskTracker = botDynamicMemoryUnit.taskTracker;
 
     /**
      * Constructor
@@ -43,7 +42,7 @@ public class BotCommandResponderUnit {
      * @param input command input
      * @return [Command Type, Rest of the command]
      */
-    public String[] tokenize(String input) {
+    private String[] tokenize(String input) {
 
         String[] token = input.split(" ", 2);
 
@@ -60,7 +59,7 @@ public class BotCommandResponderUnit {
      * @throws InvalidCommandException if the command input entered is not TODO, EVENT, DEADLINE
      * @throws InvalidCommandFormatException if the command input entered is in the wrong format
      */
-    public void addTask(String input) throws InvalidCommandException, InvalidCommandFormatException{
+    public void addTask(String input) throws InvalidCommandException, InvalidCommandFormatException {
 
         String[] inputToken = tokenize(input);
 
@@ -72,7 +71,9 @@ public class BotCommandResponderUnit {
 
                 //  throw InvalidCommandFormatException if command input is entered without task title
                 if (inputToken.length == 1) {
-                    throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
+                    throw new InvalidCommandFormatException(
+                            botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT
+                    );
                 }
 
                 taskTracker.add(
@@ -87,7 +88,9 @@ public class BotCommandResponderUnit {
 
                 // throw InvalidCommandFormatException if command input does not contain task title and task datetime
                 if (deadlineTask.length != 2) {
-                    throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
+                    throw new InvalidCommandFormatException(
+                            botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT
+                    );
                 }
 
                 taskTracker.add(
@@ -105,7 +108,9 @@ public class BotCommandResponderUnit {
 
                 // throw InvalidCommandFormatException if command input does not contain task title and task datetime
                 if (eventTask.length != 2) {
-                    throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
+                    throw new InvalidCommandFormatException(
+                            botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT
+                    );
                 }
 
                 taskTracker.add(
@@ -135,7 +140,7 @@ public class BotCommandResponderUnit {
         try {
             Integer.parseInt(str);
             return true;
-        } catch(NumberFormatException e){
+        } catch(NumberFormatException e) {
             return false;
         }
     }
@@ -181,7 +186,8 @@ public class BotCommandResponderUnit {
         Task completedTask = taskTracker.get(index-1);
         completedTask.markAsDone();
 
-        String output = String.format("%s\n\t\t%s%s\n\t%s",
+        String output = String.format(
+                "%s\n\t\t%s%s\n\t%s",
                 botStaticMemoryUnit.MESSAGE_TASK_COMPLETE,
                 (index) + ". ",
                 completedTask,
@@ -205,7 +211,8 @@ public class BotCommandResponderUnit {
         Integer index = Integer.parseInt(input.split(" ", 2)[1]);
         Task removedTask = taskTracker.get(index-1);
 
-        String output = String.format("%s\n\t\t%s%s\n\t",
+        String output = String.format(
+                "%s\n\t\t%s%s\n\t",
                 botStaticMemoryUnit.MESSAGE_REMOVE_TASK,
                 (index) + ". ",
                 removedTask);
