@@ -38,7 +38,6 @@ public class Parser {
         }
         String argument = "";
         String dateString = "";
-        LocalDate date;
 
         // Clear contents of string builders
         argumentBuilder.setLength(0);
@@ -62,7 +61,7 @@ public class Parser {
             }
             flagBuilder.append(word);
         }
-        flag = flagBuilder.toString();
+        dateString = flagBuilder.toString();
 
         switch (command) {
         case "bye":
@@ -74,11 +73,11 @@ public class Parser {
         case "delete":
             return new DeleteTaskCommand(argument);
         case "todo":
-            return new AddTaskCommand("todo", argument, flag);
+            return new AddTaskCommand("todo", argument, dateString);
         case "event":
-            return new AddTaskCommand("event", argument, flag);
+            return new AddTaskCommand("event", argument, dateString);
         case "deadline":
-            return new AddTaskCommand("deadline", argument, flag);
+            return new AddTaskCommand("deadline", argument, dateString);
         default:
             throw new KermitException(invalidCommandText);
         }
