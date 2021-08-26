@@ -166,8 +166,11 @@ public class TaskList {
     public void findTask(String search) {
         searchList = new ArrayList<>();
         for (int i = 0; i < ls.size(); i++) {
-            if(ls.get(i).getDescription().contains(search)) {
-                searchList.add(ls.get(i));
+            String[] arr = ls.get(i).getDescription().split(" ");
+            for(int j = 0; j < arr.length; j++) {
+                if (arr[j].equals(search)) {
+                    searchList.add(ls.get(i));
+                }
             }
         }
         if (searchList.size() == 0) {
