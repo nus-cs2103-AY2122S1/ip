@@ -11,18 +11,24 @@ import java.io.File;
 public class Duke {
     private Storage storage;
     private Ui ui;
-    private TaskList tasks;
+    private TaskList taskList;
+    private Parser parser;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = storage.load();
-            ui.greetWithFamiliarity(tasks);
+            taskList = storage.load();
+            ui.greetWithFamiliarity(taskList);
         } catch (DukeException e) {
             ui.showDukeException(e.getMessage());
             storage.resetTasks();
-            tasks.clearTasks();
+
+            if (taskList != null) {
+                taskList.clearTasks();
+            }
+        } finally {
+            parser = new Parser(storage, ui, taskList);
         }
     }
 
@@ -31,7 +37,7 @@ public class Duke {
 
         while (true) {
             try {
-                boolean keepParsing = Parser.parse(tasks, storage, input, ui);
+                boolean keepParsing = parser.parse(input);
                 if (!keepParsing) {
                     break;
                 }

@@ -11,7 +11,8 @@ public class ParserTest {
         Ui ui = new Ui();
         tasks.addTask(new ToDo("test"));
         Storage storage = new Storage("test.txt");
-        Parser.parse(tasks, storage, "delete 1", ui);
+        Parser parser = new Parser(storage, ui, tasks);
+        parser.parse("delete 1");
         assert (tasks.isEmpty());
     }
 }

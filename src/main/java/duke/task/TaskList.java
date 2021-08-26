@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.main.DukeException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -37,7 +39,27 @@ public class TaskList {
         System.out.println(taskSummary());
     }
 
-    public List<String> formatStorage() {
+    /**
+     * Finds tasks that match any keyword.
+     *
+     * @param query for matching Tasks.
+     * @return List of matching Tasks.
+     */
+    public List<Task> find(String query) {
+        if (query.isEmpty()) {
+            throw new DukeException("\tYou haven't specified any keywords\n");
+        }
+        String[] keywords = query.split(" ");
+        List<Task> matches = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.containsKeyword(keywords)) {
+                matches.add(task);
+            }
+        }
+        return matches;
+    }
+
+    public List<String> formatForStorage() {
         return taskList.stream().map(Task::storageString).collect(Collectors.toList());
     }
 
@@ -45,16 +67,24 @@ public class TaskList {
         return this.taskList.size() == 0;
     }
 
+    /**
+     * Enumerates the list of tasks.
+     *
+     * @param taskList to enumerate
+     * @return String enumeration of taskList.
+     */
+    public static String enumerateTasks(List<Task> taskList) {
+        String toPrint = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            int index = i + 1;
+            toPrint += ("\t " + index + ". " + taskList.get(i) + "\n");
+        }
+        return toPrint;
+    }
+
     @Override
     public String toString() {
-        String toPrint = "";
-
-        for (int i = 0; i < this.taskList.size(); i++) {
-            int index = i + 1;
-            toPrint += ("\t " + index + ". " + this.taskList.get(i) + "\n");
-        }
-
-        return toPrint;
+        return enumerateTasks(taskList);
     }
 
     public void clearTasks() {
