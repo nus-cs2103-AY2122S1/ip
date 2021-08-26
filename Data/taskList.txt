@@ -1,2 +1,4 @@
 T | 0 | borrow book
 D | 0 | return book | Sunday
+T | 0 | borrow book
+T | 0 | return book
