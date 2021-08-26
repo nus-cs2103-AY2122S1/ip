@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    public String WelcomeMessage() {
+    public static String WelcomeMessage() {
         String separator = "    ____________________________________________________________";
         return separator + "\n" + "     Hello! I'm Duke" + "\n" + "     What can I do for you?"  + "\n" + separator;
     }

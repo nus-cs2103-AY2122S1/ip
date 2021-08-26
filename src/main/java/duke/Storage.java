@@ -9,24 +9,24 @@ import java.util.Scanner;
 public class Storage {
 
     protected String filePath;
-    protected File taskList;
+    protected static File taskList;
 
     public Storage(String filePath) {
         this.filePath = filePath;
         this.taskList = new File(filePath);
     }
 
-    public ArrayList<Task> load() {
+    public static ArrayList<Task> load() {
         ArrayList<Task> list = new ArrayList<>();
         try {
-            if (!this.taskList.createNewFile()) {
-                Scanner fileReader = new Scanner(this.taskList);
+            if (!taskList.createNewFile()) {
+                Scanner fileReader = new Scanner(taskList);
                 while (fileReader.hasNextLine()) {
                     String line = fileReader.nextLine();
                     String[] splitString = line.split(" \\| ");
                     if (splitString[0].equals("T")) {
                         Todo t = new Todo(line.substring(8));
-                        if (line.substring(4, 5).equals("1")) {
+                        if (line.charAt(4) == '1') {
                             t.markAsDone();
                         }
                         list.add(t);
