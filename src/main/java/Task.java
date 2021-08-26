@@ -20,7 +20,7 @@ public class Task {
         return this.isDone;
     }
 
-    public void setIsDone(boolean isDone) {
+    public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 
