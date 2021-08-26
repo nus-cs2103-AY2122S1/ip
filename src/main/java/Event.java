@@ -7,7 +7,11 @@ class Event extends Task {
 
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
-        this.at = at;
+        String[] tokens = at.split(" to ");
+        this.at = LocalDateTime.parse(tokens[0], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        if (tokens.length > 1) {
+            end = LocalDateTime.parse(tokens[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        }
     }
 
     public Event(String description, String at) {
