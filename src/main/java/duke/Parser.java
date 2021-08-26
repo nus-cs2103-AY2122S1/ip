@@ -116,7 +116,14 @@ public class Parser {
         }
     }
 
-    public String parseFindKeyWord(String str) throws DukeException {
+    /**
+     * Returns String use as the keyword for finding matching tasks.
+     *
+     * @param str A command to find matching tasks.
+     * @return The string that is to be used as the keyword.
+     * @throws DukeException If the format of the find command is incorrect.
+     */
+    public String parseFindCommand(String str) throws DukeException {
         if (str.length() < 6 || str.indexOf(" ") == -1) {
             //check if str follows the find command format: find_keyword
             throw new DukeException("Wrong input for finding task.");

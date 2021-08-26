@@ -92,7 +92,7 @@ public class Command {
                 System.out.println("Please enter a new task or action.");
                 return true;
             } else if (typeOfCommand.equals("find")) {
-                String str = this.parser.parseFindKeyWord(description);
+                String str = this.parser.parseFindCommand(description);
                 ArrayList<Task> matchingTasks = this.taskList.findTask(str);
                 this.ui.iterateMatchingTaskList(matchingTasks);
                 return true;
