@@ -59,16 +59,16 @@ class Storage {
 
     private TaskList readFile() throws FileNotFoundException {
         Scanner sc = new Scanner(bubbles);
-        TaskList toDoList = new TaskList();
+        TaskList taskList = new TaskList();
 
         while (sc.hasNext()) {
             String task = sc.nextLine();
             Object[] inputs = parser.formatTask(task);
 
-            toDoList.addTask((String) inputs[0], (String) inputs[1], (Boolean) inputs[2]);
+            taskList.addTask((String) inputs[0], (String) inputs[1], (Boolean) inputs[2]);
         }
 
-        return toDoList;
+        return taskList;
     }
 
     /**
