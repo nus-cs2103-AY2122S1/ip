@@ -12,22 +12,22 @@ import java.util.stream.Collectors;
  * Encapsulates a list of tasks, as well as associated functions.
  */
 public class TaskList implements Serializable {
-    private final List<Task> taskList;
+    private final List<Task> tasks;
 
     /**
      * Constructor for a pre-existing task list.
      *
      * @param taskList The pre-existing list of tasks.
      */
-    public TaskList(List<Task> taskList) {
-        this.taskList = taskList;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
      * Constructor for a new task list.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -36,13 +36,13 @@ public class TaskList implements Serializable {
      * @return A string of all the tasks in the list.
      */
     public String listTasks() {
-        if (taskList.isEmpty()) {
+        if (tasks.isEmpty()) {
             return getTaskCountDesc();
         }
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            sb.append(String.format("\n%d.%s", i + 1, taskList.get(i).toString()));
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(String.format("\n%d.%s", i + 1, tasks.get(i).toString()));
         }
         return sb.toString();
     }
@@ -53,9 +53,9 @@ public class TaskList implements Serializable {
      * @return A description of the number of tasks in the list.
      */
     public String getTaskCountDesc() {
-        return taskList.isEmpty() ? "There are no tasks."
-                : String.format("Now you have %d task%s in the list.", taskList.size(),
-                (taskList.size() == 1 ? "" : "s"));
+        return tasks.isEmpty() ? "There are no tasks."
+                : String.format("Now you have %d task%s in the list.", tasks.size(),
+                (tasks.size() == 1 ? "" : "s"));
     }
 
     /**
@@ -64,7 +64,7 @@ public class TaskList implements Serializable {
      * @param taskToAdd The task to be added to the list.
      */
     public void add(Task taskToAdd) {
-        taskList.add(taskToAdd);
+        tasks.add(taskToAdd);
     }
 
     /**
@@ -74,7 +74,7 @@ public class TaskList implements Serializable {
      * @return The removed task.
      */
     public Task remove(int indexToDelete) {
-        return taskList.remove(indexToDelete);
+        return tasks.remove(indexToDelete);
     }
 
     /**
@@ -84,7 +84,7 @@ public class TaskList implements Serializable {
      * @return The task marks as done.
      */
     public Task markAsDone(int indexToMarkDone) {
-        Task task = taskList.get(indexToMarkDone);
+        Task task = tasks.get(indexToMarkDone);
         task.markAsDone();
         return task;
     }
@@ -97,7 +97,11 @@ public class TaskList implements Serializable {
      * @return A new task list containing the filtered items.
      */
     public TaskList filterByDateTimeOrString(LocalDateTimeOrString dateTimeOrString) {
+<<<<<<<HEAD
         List<Task> filtered = taskList.stream().filter(x -> x.isAtDateTime(dateTimeOrString)).collect(Collectors.toList());
+=======
+        List<Task> filtered = tasks.stream().filter(x -> x.isAtTime(dateTimeOrString)).collect(Collectors.toList());
+>>>>>>>branch - A - CodingStandard
         return new TaskList(filtered);
     }
 }
