@@ -12,7 +12,6 @@ public class Ui {
     // initialize Scanner object
     private Scanner scan = new Scanner(System.in);
 
-
     /**
      * Prints a standard formatted message.
      *
