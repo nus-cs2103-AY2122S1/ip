@@ -9,17 +9,14 @@ public class Task {
     private boolean isDone = false;
     private LocalDate date = null;
 
-    public Task(String description) {
-        this.description = description;
-    }
-
     public Task(String description, boolean done) {
-        this.isDone = done;
         this.description = description;
+        this.isDone = done;
     }
 
-    public Task(String description, String date) throws DukeException {
+    public Task(String description, String date, boolean done) throws DukeException {
         this.description = description;
+        this.isDone = done;
         try {
             this.date = LocalDate.parse(date);
         } catch (DateTimeParseException e) {
@@ -34,7 +31,6 @@ public class Task {
     private String getDoneSymbol() {
         return isDone ? "X" : " ";
     }
-
 
     private String getDoneString() { return isDone ? "1" : "0"; }
 

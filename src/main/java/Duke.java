@@ -12,7 +12,11 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        File taskFile = loadTasksFromFile();
+        try {
+            loadTasksFromFile();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -66,13 +70,13 @@ public class Duke {
                         }
 
                         if (userCommand.equals("todo")) {
-                            taskList.add(new Todo(userInput));
+                            taskList.add(new Todo(userInput, false));
                         } else if (userCommand.equals("deadline")) {
                             String[] deadlineInfo = splitBetween(userInput, "/by");
-                            taskList.add(new Deadline(deadlineInfo[0], deadlineInfo[1]));
+                            taskList.add(new Deadline(deadlineInfo[0], deadlineInfo[1], false));
                         } else {
                             String[] eventInfo = splitBetween(userInput, "/at");
-                            taskList.add(new Event(eventInfo[0], eventInfo[1]));
+                            taskList.add(new Event(eventInfo[0], eventInfo[1], false));
                         }
                         addTask(taskList.get(taskList.size() - 1));
                         break;
@@ -145,7 +149,7 @@ public class Duke {
         }
     }
 
-    private static File loadTasksFromFile() {
+    private static File loadTasksFromFile() throws DukeException {
         try {
             File taskFile = new File("./data/tasks.txt");
             if (!taskFile.createNewFile()) {
@@ -156,28 +160,27 @@ public class Duke {
                 }
             }
             return taskFile;
-        } catch (IOException e) {
-            System.out.println("An error occurred with File handling.");
-            e.printStackTrace();
-            return null;
+        } catch (IOException | DukeException e) {
+            throw new DukeException("Unable to load tasks from file.");
         }
     }
 
-    private static Task dataToTask(String str) {
+    private static Task dataToTask(String str) throws DukeException {
         String[] taskArr = str.split(",");
         String taskType = taskArr[0];
         boolean taskDone = taskArr[1].equals("1");
         String taskDescription = taskArr[2];
+        String taskDate = taskArr[3];
         Task res = null;
         switch (taskType) {
             case("T"):
                 res = new Todo(taskDescription, taskDone);
                 break;
             case("D"):
-                res = new Deadline(taskDescription, taskDone);
+                res = new Deadline(taskDescription, taskDate, taskDone);
                 break;
             case("E"):
-                res = new Event(taskDescription, taskDone);
+                res = new Event(taskDescription, taskDate, taskDone);
                 break;
         }
         return res;
