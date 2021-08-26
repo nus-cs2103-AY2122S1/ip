@@ -1,12 +1,16 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class DateTimeParser extends Parser<LocalDate> {
-	public static final DateTimeFormatter[] dateTimeFormatters = new DateTimeFormatter[] {
-			DateTimeFormatter.ofPattern("yyyy-MM-dd"),
-			DateTimeFormatter.ofPattern("d/M/yyyy"),
-	};
+	private final ArrayList<DateTimeFormatter> dateTimeFormatters = new ArrayList<>();
+	
+	public DateTimeParser(String[] dateFormats) {
+		for (String format : dateFormats) {
+			dateTimeFormatters.add(DateTimeFormatter.ofPattern(format));
+		}
+	}
 	
 	public LocalDate parse(String s) {
 		for (DateTimeFormatter formatter : dateTimeFormatters) {

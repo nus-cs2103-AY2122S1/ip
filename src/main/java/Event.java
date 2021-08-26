@@ -19,9 +19,10 @@ public class Event extends Task {
         this.atDate = atDate;
     }
 
-    public Event(boolean isDone, String description, String at) {
+    public Event(boolean isDone, String description, String at, LocalDate atDate) {
         super(isDone, description);
         this.at = at;
+        this.atDate = atDate;
     }
 
 
@@ -36,6 +37,11 @@ public class Event extends Task {
 
     @Override
     public String toBackupFormat() {
-        return String.format("E|%s|%s", super.toBackupFormat(), at);
+        return String.format(
+                "E | %s | %s | %s | ", 
+                super.toBackupFormat(), 
+                at == null ? "" : at,
+                atDate == null ? "" : atDate.format(DATE_TIME_FORMAT)
+        );
     }
 }

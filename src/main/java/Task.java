@@ -29,6 +29,6 @@ public class Task {
     }
     
     public String toBackupFormat() {
-        return String.format("%s|%d", description, isDone ? 1 : 0);
+        return String.format("%s | %d", description, isDone ? 1 : 0);
     }
 }

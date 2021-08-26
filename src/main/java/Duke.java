@@ -1,5 +1,7 @@
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -18,7 +20,8 @@ public class Duke {
 
     private static Storage taskStorage;
     private static TaskList tasks = new TaskList();
-    private static final DateTimeParser dateTimeParser = new DateTimeParser();
+    private static final DateTimeParser dateTimeParser = new DateTimeParser(
+            new String[] {"yyyy-MM-dd", "d/M/yyyy"});
 
     private static void greet() {
         System.out.println(GREETING_MSG);

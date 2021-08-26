@@ -14,6 +14,6 @@ public class Todo extends Task {
     
     @Override
     public String toBackupFormat() {
-        return String.format("T|%s", super.toBackupFormat());
+        return String.format("T | %s | ", super.toBackupFormat());
     }
 }

@@ -12,9 +12,10 @@ public class Deadline extends Task {
         this.byDate = null;
     }
     
-    public Deadline(boolean isDone, String description, String by) {
+    public Deadline(boolean isDone, String description, String by, LocalDate byDate) {
         super(isDone, description);
         this.by = by;
+        this.byDate = byDate;
     }
 
     public Deadline(String description, LocalDate byDate) {
@@ -35,6 +36,11 @@ public class Deadline extends Task {
 
     @Override
     public String toBackupFormat() {
-        return String.format("D|%s|%s", super.toBackupFormat(), by);
+        return String.format(
+                "D | %s | %s | %s | ", 
+                super.toBackupFormat(),
+                by == null ? "" : by,
+                byDate == null ? "" : byDate.format(DATE_TIME_FORMAT)
+        );
     }
 }
