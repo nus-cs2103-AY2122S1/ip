@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Manager {
+public class TaskList {
     private static ArrayList<Task> tasks = new ArrayList<>();
     public static void addReply(Task assignment) {
         tasks.add(assignment);

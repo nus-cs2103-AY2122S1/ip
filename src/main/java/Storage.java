@@ -1,5 +1,3 @@
-import jdk.jshell.spi.ExecutionControlProvider;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -60,7 +58,7 @@ public class Storage {
 
     public static void store() throws Exception {
         FileWriter fw = new FileWriter("src/main/Data/skeltal.txt", false);
-        fw.write(Manager.storeTasks());
+        fw.write(TaskList.storeTasks());
         System.out.println("wrote to skeltal.txt");
         fw.close();
     }

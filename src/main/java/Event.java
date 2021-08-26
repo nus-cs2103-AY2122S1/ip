@@ -18,13 +18,11 @@ public class Event extends Task {
             time = date.format(DateTimeFormatter.ofPattern("dd MMM yy"));
         } catch (DateTimeParseException e) {
             time = procTime[1];
-            System.out.println(e);
         }
-        time = "(" + time + ")";
         this.time = time;
     }
 
-    public String formatTime() {
+    private String formatTime() {
         String formatTime = "(" + this.time + ")";
         return formatTime;
     }

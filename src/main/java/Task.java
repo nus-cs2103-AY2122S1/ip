@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Task {
 
     private boolean completed;
@@ -33,7 +31,7 @@ public class Task {
     @Override
     public String toString() {
         String tick = this.isCompleted() ? "[X] " : "[ ] ";
-        int num = Manager.getIndex(this) + 1;
+        int num = TaskList.getIndex(this) + 1;
         String str = tick + num + ". " + this.task;
         return str;
     }
