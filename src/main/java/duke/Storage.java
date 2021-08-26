@@ -4,7 +4,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,10 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private String filePath;
     private File storage;
 
+    /**
+     * Constructor of Storage.
+     * Creates necessary folder or file if they do not exist.
+     *
+     * @param filePath File to be handled.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
 
@@ -39,6 +47,11 @@ public class Storage {
     }
 
 
+    /**
+     * Load tasks from file to targeted task list.
+     *
+     * @return List of Task generated from the file.
+     */
     public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -55,6 +68,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Used in this class to parse each line in file into a Task.
+     *
+     * @param str Line of the file.
+     * @param tasks Target list of tasks.
+     */
     public void parseTask(String str, List<Task> tasks) {
         Scanner sc = new Scanner(str);
         String category = sc.next();
@@ -76,6 +95,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Save the current task list to the file.
+     *
+     * @param tasks The task list in the programme.
+     */
     public void save(List<Task> tasks) {
         try {
             FileWriter myWriter = new FileWriter(filePath);
