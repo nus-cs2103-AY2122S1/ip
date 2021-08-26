@@ -5,16 +5,35 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The EditCommand class extends the Command class and is the Command that
+ * edits a Task to the TaskList.
+ */
 public class EditCommand extends Command {
 
+    /** The line to be edited. */
     private int lineNumber;
 
+    /**
+     * The constructor for the EditCommand object.
+     *
+     * @param commandType The Command type
+     * @param lineNumber The line to be edited
+     */
     public EditCommand(CommandType commandType, int lineNumber) {
         super(commandType, false);
         this.lineNumber = lineNumber;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+  /**
+   * The execute command that executes the necessary actions when a Task
+   * is edited in the TaskList.
+   *
+   * @param tasks The TaskList to be added to
+   * @param ui The Ui object to interact with the user
+   * @param storage The Storage object that stores the TaskList on the Local Machine
+   */
+  public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task editedTask = tasks.editTaskList(lineNumber, this.getCommandType());
         storage.editStorage(lineNumber, this.getCommandType());
         ui.showEditTaskMessage(editedTask, this.getCommandType(), tasks);

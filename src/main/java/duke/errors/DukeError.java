@@ -1,7 +1,11 @@
 package duke.errors;
 
+/**
+ * The enumeration of the known errors produced by Duke. I opted to use enums instead of
+ * making a class that extends the Exceptions class as it is cleaner to flag since the CLI
+ * is the mode of interaction with the user.
+ */
 public enum DukeError {
-    // I prefered to keep the enum structure rather than extend Exceptions as I didn't want to interrupt the UI.
     INVALID_COMMAND(-1, "Unrecognised command detected. Please try again."),
     ESCAPE_CHARACTER(0, "Please do not use the \\n in your input as it makes me sad. ):"),
     POLLUTED_LIST_COMMAND(1, "Please only type 'list' to view the task list."),
@@ -13,17 +17,27 @@ public enum DukeError {
     EMPTY_LIST_NUMBER(7, "Please indicate which item on your list you would like to modify."),
     TOO_MANY_INPUTS(8, "Too many inputs!"),
     INVALID_LIST_NUMBER(9, "Please use a valid list number!"),
-    LIST_FULL(10, "The list is full, please remove an existing Task before trying to add a new Task."),
+    LIST_FULL(10, "The list is full, "
+            + "please remove an existing Task before trying to add a new Task."),
     SEPARATOR_DETECTED(11, "Please do not use '_~_' in your input as it breaks me! ):"),
     INVALID_DATE_FORMAT(12, "Invalid date. Please use the dd-mm-yyyy convention!"),
     POLLUTED_EXIT_COMMAND(13, "Please only type 'bye' to exit"),
     EMPTY_SEARCH_STRING(14, "Please key in something for me to find!");
 
+    /** The error code. */
     private final int code;
+
+    /** The error message. */
     private final String description;
 
+    /**
+     * This method gets the respective DukeError from the code.
+     *
+     * @param code The error code
+     * @return The respective DukeError
+     */
     public static DukeError getError(int code) {
-        switch(code) {
+        switch (code) {
             case -1:
                 return DukeError.INVALID_COMMAND;
             case 0:
@@ -61,15 +75,31 @@ public enum DukeError {
         }
     }
 
+    /**
+     * The constructor for the DukeError.
+     *
+     * @param code The error code
+     * @param description The error message
+     */
     DukeError(int code, String description) {
         this.code = code;
         this.description = description;
     }
 
+    /**
+     * Gets the description of the DukeError object.
+     *
+     * @return The error message
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Gets the error message of the DukeError object.
+     *
+     * @return The error code
+     */
     public int getCode() {
         return code;
     }
