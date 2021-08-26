@@ -4,6 +4,7 @@ import duke.Parser.Parser;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is the TaskList class to contain task list and handle operations.
@@ -13,6 +14,10 @@ public class TaskList {
 
 	public TaskList(){
 		this.taskList = new ArrayList<>();
+	}
+
+	public TaskList(ArrayList<Task> list) {
+		this.taskList = list;
 	}
 
 	public ArrayList<Task> getTaskList(){
