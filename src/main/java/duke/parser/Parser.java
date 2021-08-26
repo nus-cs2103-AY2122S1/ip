@@ -1,21 +1,12 @@
 package duke.parser;
 
-import duke.command.Add;
-import duke.command.Delete;
-import duke.command.Done;
-import duke.command.DukeCommand;
-import duke.command.Exit;
-import duke.command.Find;
-import duke.command.List;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.NoToDoDescriptionException;
 import duke.exception.UnknownCommandException;
 import duke.storage.Storage;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.ToDo;
+import duke.task.*;
 import duke.ui.Ui;
 
 import java.time.LocalDateTime;
@@ -32,6 +23,10 @@ public class Parser {
     private final TaskList list;
     private final Storage storage;
     private final Ui ui;
+
+    private enum TaskTypes {
+        TODO, DEADLINE, EVENT
+    }
 
     /**
      * Creates a Parser that handles user input and turn it into respective
@@ -69,32 +64,13 @@ public class Parser {
             return new Done(ui, storage, list, Integer.parseInt(userInput.split(" ")[1]));
 
         case "todo":
-            int spaceIndex = userInput.indexOf(" ");
-            String toDoDescription = userInput.substring(spaceIndex + 1);
-            if (toDoDescription.isBlank() || spaceIndex == -1) {
-                throw new NoToDoDescriptionException();
-            }
-            return new Add(ui, storage, list, new ToDo(toDoDescription, false));
+            return new Add(ui, storage, list, processTaskDescriptions(TaskTypes.TODO, userInput));
 
         case "deadline":
-            String deadlineDescription = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf("/by") - 1);
-            try {
-                LocalDateTime by = LocalDateTime.parse(userInput.substring(userInput.indexOf("by") + 3),
-                        DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
-                return new Add(ui, storage, list, new Deadline(deadlineDescription, false, by));
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateTimeException();
-            }
+            return new Add(ui, storage, list, processTaskDescriptions(TaskTypes.DEADLINE, userInput));
 
         case "event":
-            String eventDescription = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf("/at") - 1);
-            try {
-                LocalDateTime at = LocalDateTime.parse(userInput.substring(userInput.indexOf("at") + 3),
-                        DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
-                return new Add(ui, storage, list, new Event(eventDescription, false, at));
-            } catch (DateTimeParseException e) {
-                throw new InvalidDateTimeException();
-            }
+            return new Add(ui, storage, list, processTaskDescriptions(TaskTypes.EVENT, userInput));
 
         case "delete":
             return new Delete(ui, storage, list, Integer.parseInt(userInput.split(" ")[1]));
@@ -104,6 +80,38 @@ public class Parser {
 
         default:
             throw new UnknownCommandException();
+        }
+    }
+
+    private Task processTaskDescriptions(TaskTypes t, String userInput) throws InvalidDateTimeException, NoToDoDescriptionException {
+        switch (t){
+        case DEADLINE:
+            String deadlineDescription = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf("/by") - 1);
+            try {
+                LocalDateTime by = LocalDateTime.parse(userInput.substring(userInput.indexOf("by") + 3),
+                        DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
+                return new Deadline(deadlineDescription, false, by);
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateTimeException();
+            }
+
+        case EVENT:
+            String eventDescription = userInput.substring(userInput.indexOf(" ") + 1, userInput.indexOf("/at") - 1);
+            try {
+                LocalDateTime at = LocalDateTime.parse(userInput.substring(userInput.indexOf("at") + 3),
+                        DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
+                return new Event(eventDescription, false, at);
+            } catch (DateTimeParseException e) {
+                throw new InvalidDateTimeException();
+            }
+
+        default:
+            int spaceIndex = userInput.indexOf(" ");
+            String toDoDescription = userInput.substring(spaceIndex + 1);
+            if (toDoDescription.isBlank() || spaceIndex == -1) {
+                throw new NoToDoDescriptionException();
+            }
+            return new ToDo(toDoDescription, false);
         }
     }
 }
