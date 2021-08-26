@@ -8,12 +8,21 @@ import duke.task.*;
 
 import java.time.LocalDate;
 
+/**
+ * This class handles command that add task to list.
+ */
 public class AddCommand extends Command {
 
     private String description;
     private String time;
     private String category;
 
+    /**
+     * Constructor for AddCommand.
+     *
+     * @param input The line that user inputs after heading.
+     * @param category The category of task to be added.
+     */
     public AddCommand(String input, String category) {
         super();
         this.category = category;
@@ -24,6 +33,14 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Method to execute command.
+     *
+     * @param tasks The list of tasks in the current programme.
+     * @param ui The user interface.
+     * @param storage Handles interaction with the file.
+     * @throws DukeException All exceptions related to Duke.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.showLine();
