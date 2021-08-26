@@ -3,12 +3,17 @@ public class Event extends Task {
     protected String at;
 
     public Event(String description, String at) {
-        super(description);
+        super(description, 'E');
         this.at = at;
     }
 
     @Override
+    public String getDueTime() {
+        return at;
+    }
+
+    @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[" + this.getCat() + "]" + super.toString() + " (at: " + at + ")";
     }
 }

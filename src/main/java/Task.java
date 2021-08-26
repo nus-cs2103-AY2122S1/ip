@@ -1,10 +1,12 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected char category;
 
-    public Task(String description) {
+    public Task(String description, char category) {
         this.description = description;
         this.isDone = false;
+        this.category = category;
     }
 
     public String getStatusIcon() {
@@ -17,6 +19,14 @@ public class Task {
 
     public String getDesc() {
         return this.description;
+    }
+
+    public char getCat() {
+        return this.category;
+    }
+
+    public String getDueTime() {
+        return "";
     }
 
     @Override
