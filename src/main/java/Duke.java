@@ -13,8 +13,8 @@ public class Duke {
     private final Ui ui;
     private final Storage storage;
 
-    public Duke() {
-        storage = new Storage();
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         ui = new Ui(48);
         taskList = new TaskList();
         parser = new Parser(storage, taskList, ui);
@@ -43,6 +43,6 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("tmp/storedMsg").run();
     }
 }

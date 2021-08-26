@@ -15,11 +15,11 @@ public class Storage {
 
     private File savedOutput;
 
-    public Storage() {
+    public Storage(String filePath) {
         try {
-            File dir = new File("tmp/storedMsg");
+            File dir = new File(filePath);
             dir.mkdirs();
-            File savedOutput = new File("tmp/storedMsg/savedOutput.txt");
+            File savedOutput = new File(filePath + "/savedOutput.txt");
             if (!savedOutput.exists()) {
                 savedOutput.createNewFile();
             }
