@@ -3,6 +3,9 @@ package duke.util;
 import duke.task.Task;
 import java.util.Scanner;
 
+/**
+ * Encapsulates user interaction.
+ */
 public class Ui {
     private Scanner scanner = new Scanner(System.in);
     private static final String LINE = "----------------------------------------------------";
@@ -18,18 +21,36 @@ public class Ui {
             "|\t7. bye - exit duke                                                           |\n" +
             LINE + "-----------------------------\n";
 
+    /**
+     * Prints welcome message.
+     */
     public void showWelcome() {
         System.out.println(WELCOME_MESSAGE);
     }
 
+    /**
+     * Returns string of user command entered.
+     *
+     * @return String representation of user input
+     */
     public String readCommand() {
         return scanner.nextLine().trim();
     }
 
+    /**
+     * Prints horizontal line.
+     */
     public void showLine() {
         System.out.println(LINE);
     }
 
+    /**
+     * Returns string of task added.
+     *
+     * @param task Task added
+     * @param listLength Length of task list
+     * @return String representation of task list
+     */
     public String showTaskAdded(Task task, int listLength) {
         String output = String.format("added: " + task.toString()
                 + "\nNow you have %s tasks in your list\n" , listLength);
@@ -37,6 +58,13 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Returns string of task deleted.
+     *
+     * @param task Task deleted
+     * @param listLength Length of task list
+     * @return String representation of task deleted
+     */
     public String showTaskDeleted(Task task, int listLength) {
         String output = String.format("Noted. I've removed this task:\n" + task.toString()
                 + "\nNow you have %s tasks in your list\n" , listLength);
@@ -44,6 +72,12 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Returns string of task done.
+     *
+     * @param task Task set as done
+     * @return String representation of task set as done.
+     */
     public String showTaskDone(Task task) {
         String output = "Nice! I've marked this task as done:\n"
                 + task.toString();
@@ -51,10 +85,19 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Prints bye message.
+     */
     public void showBye() {
         System.out.println("Bye! Hope to see you again soon!");
     }
 
+    /**
+     * Returns string of error message.
+     *
+     * @param message Error message
+     * @return String representation of error
+     */
     public String printError(String message) {
         System.out.println(message);
         return message;
