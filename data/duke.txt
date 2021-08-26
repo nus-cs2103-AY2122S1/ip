@@ -1,0 +1,6 @@
+T|1|read book
+D|0|return book|2012-06-20
+E|1|project meeting|2021-08-26
+T|1|join sports club
+T|1|hide
+T|0|run
