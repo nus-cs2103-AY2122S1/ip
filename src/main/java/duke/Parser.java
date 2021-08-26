@@ -1,6 +1,8 @@
 package duke;
 
-import dukeException.*;
+import exception.InvalidTaskException;
+import exception.NoDescriptionException;
+import exception.WrongDescriptionException;
 
 public class Parser {
     public Parser() {}
@@ -17,10 +19,10 @@ public class Parser {
         }
 
         if (!validCommand) {
-            throw new InvalidTaskException("Invalid command! Please enter the following commands only:\n" +
-                    "list\ndone (task number)\n" +
-                    "delete (task number)\ntodo (description)\n" +
-                    "deadline (description) /by (time)\nevent (description) /at (time)");
+            throw new InvalidTaskException("Invalid command! Please enter the following commands only:\n"
+                                           + "list\ndone (task number)\n"
+                                           + "delete (task number)\ntodo (description)\n"
+                                           + "deadline (description) /by (time)\nevent (description) /at (time)");
         } else {
             return parsedCommand;
         }
@@ -45,7 +47,8 @@ public class Parser {
         }
     }
 
-    public String[] parseDescription(String input, String conjunction) throws NoDescriptionException, WrongDescriptionException {
+    public String[] parseDescription(String input, String conjunction) throws NoDescriptionException,
+                                                                                WrongDescriptionException {
         String[] parsed = input.split(" ", 2);
         if (parsed.length == 1) {
             throw new NoDescriptionException("Please enter the task no.!");

@@ -1,8 +1,8 @@
 package duke;
 
-import dukeException.InvalidTaskException;
-import dukeException.NoDescriptionException;
-import dukeException.WrongDescriptionException;
+import exception.InvalidTaskException;
+import exception.NoDescriptionException;
+import exception.WrongDescriptionException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,11 +1,9 @@
 package duke;
 
 import duke.task.Task;
-import dukeException.*;
+import exception.DukeException;
 
 public class Ui {
-    public Ui() {}
-
     public void greet() {
         System.out.println("Hello! I'm Duke!\nWhat can I do for you?\n");
     }
@@ -18,32 +16,8 @@ public class Ui {
         System.out.println(e.getMessage());
     }
 
-    public void createFileErrorMessage() {
-        System.out.println("Error has occurred when creating file!");
-    }
-
-    public void editFileErrorMessage() {
-        System.out.println("Error has occurred when editing file!");
-    }
-
-    public void writeFileErrorMessage() {
-        System.out.println("Error has occurred when writing to file!");
-    }
-
-    public void dukeNotFoundMessage() {
-        System.out.println("duke.txt not found!");
-    }
-
     public void showNoTaskMessage() {
         System.out.println("There are no tasks!");
-    }
-
-    public void createDirMessage() {
-        System.out.println("Directory for file created.");
-    }
-
-    public void createFileMessage() {
-        System.out.println("File created: duke.txt");
     }
 
     public void showTaskList(TaskList taskList) {
