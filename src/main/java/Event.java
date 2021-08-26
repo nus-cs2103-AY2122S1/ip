@@ -10,7 +10,7 @@ public class Event extends Task {
     }
 
     public String getTimePeriod() {
-        return this.timePeriod;
+        return this.timePeriod.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override

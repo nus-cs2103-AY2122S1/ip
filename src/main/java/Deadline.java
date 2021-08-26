@@ -10,7 +10,7 @@ public class Deadline extends Task {
     }
 
     public String getDeadline() {
-        return this.deadline;
+        return this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override
