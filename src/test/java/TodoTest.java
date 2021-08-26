@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ToDoTest {
     @Test
-    public void testCreateTodoTask(){
+    public void testCreateTodoTaskDisplaysCorrectly(){
         ToDo todoTask = new ToDo("work");
         assertEquals(todoTask.toString(), "[T][ ] work");
     }
