@@ -39,6 +39,9 @@ public class Parser {
                 LocalDate date = LocalDate.parse(dateString.trim());
                 return new OnCommand(date);
             }
+            case "find":
+                String query = message[1];
+                return new FindCommand(query);
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(\n");
         }
