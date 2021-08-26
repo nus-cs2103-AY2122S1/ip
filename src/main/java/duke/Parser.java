@@ -27,6 +27,8 @@ public class Parser {
                     System.out.println("Bye. Hope to see you again soon!");
                 } else if (str.equals("list")) {
                     System.out.println(tasks.list());
+                } else if (str.contains("find")) {
+                    System.out.println(tasks.findTask(str));
                 } else if (str.contains("done")) {
                     System.out.println(tasks.done(str));
                 } else if (str.contains("delete")) {
