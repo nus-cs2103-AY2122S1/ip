@@ -7,13 +7,13 @@ public class InvalidInputException extends DukeException {
     }
 
     @Override
-    void printErrorMessage() {
+    public String getMessage() {
         if (errorMessage.equals("invalid task number entered")) {
-            System.out.println("☹ OOPS!!! Please key in a valid task number within the list.");
+            return "☹ OOPS!!! Please key in a valid task number within the list.";
         } else if (errorMessage.equals("error")) {
-            System.out.println("☹ OOPS!!! Error occurred.");
+            return "☹ OOPS!!! Error occurred.";
         } else {
-            System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
     }
 }

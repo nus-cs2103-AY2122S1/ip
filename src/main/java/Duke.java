@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+//todo command to print deadlines/events occuring on specific date
+
 public class Duke {
 
     public static final String TODO = "todo";
@@ -92,48 +94,34 @@ public class Duke {
             } else if (message.startsWith("delete")) {
                 deleteTask(message, tasks);
             } else if (message.startsWith("todo")) {
-                Task todo = null;
-                try {
-                    todo = getTask(message, TODO);
-                    if (todo.isEmpty()) {
-                        throw new InvalidInputException("error");
-                    }
-                    addTask(todo, tasks);
-                } catch (DukeException e) {
-                    e.printErrorMessage();
-                }
+                addTaskFromCommand(tasks, message, TODO);
             } else if (message.startsWith("deadline")) {
-                Task deadline = null;
-                try {
-                    deadline = getTask(message, DEADLINE);
-                    if (deadline.isEmpty()) {
-                        throw new InvalidInputException("error");
-                    }
-                    addTask(deadline, tasks);
-                } catch (DukeException e) {
-                    e.printErrorMessage();
-                }
+                addTaskFromCommand(tasks, message, DEADLINE);
             } else if (message.startsWith("event")) {
-                Task event = null;
-                try {
-                    event = getTask(message, EVENT);
-                    if (event.isEmpty()) {
-                        throw new InvalidInputException("error");
-                    }
-                    addTask(event, tasks);
-                } catch (DukeException e) {
-                    e.printErrorMessage();
-                }
+                addTaskFromCommand(tasks, message, EVENT);
             } else {
                 try {
                     throw new InvalidInputException("invalid input");
                 } catch (DukeException e) {
-                    e.printErrorMessage();
+                    System.out.println(e.getMessage());
                 }
             }
         }
 
         sc.close();
+    }
+
+    private static void addTaskFromCommand(List<Task> tasks, String message, String taskType) {
+        Task task = null;
+        try {
+            task = getTask(message, taskType);
+            if (task.isEmpty()) {
+                throw new InvalidInputException("error");
+            }
+            addTask(task, tasks);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void deleteTask(String message, List<Task> tasks) {
@@ -150,7 +138,7 @@ public class Duke {
                 System.out.println(displayedMessage);
             }
         } catch (DukeException e) {
-            e.printErrorMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -189,25 +177,27 @@ public class Duke {
     private static String getDateAndTime(String message, String taskType) throws InvalidDateAndTimeException, InvalidInputException {
         int startingIndex;
 
-        checkValidTaskName(message);
+        checkValidTaskName(message);  //todo move to better slot?
 
         switch (taskType) {
             case DEADLINE:
                 startingIndex = message.indexOf("/by ");
 
                 if (startingIndex < 0 || startingIndex + 3 == message.length() - 1) {
-                    throw new InvalidDateAndTimeException("Invalid deadline", DEADLINE);
+                    throw new InvalidDateAndTimeException("missing deadline");
                 }
 
-                return message.substring(startingIndex + 4);
+                DateAndTime dateAndTime1 = new DateAndTime(message);
+                return dateAndTime1.getReformattedDateAndTime();
             case EVENT:
                 startingIndex = message.indexOf("/at ");
 
                 if (startingIndex < 0 || startingIndex + 3 == message.length() - 1) {
-                    throw new InvalidDateAndTimeException("Invalid event time", EVENT);
+                    throw new InvalidDateAndTimeException("missing event time");
                 }
 
-                return message.substring(startingIndex + 4);
+                DateAndTime dateAndTime2 = new DateAndTime(message);
+                return dateAndTime2.getReformattedDateAndTime();
             }
         return "";
     }
@@ -246,7 +236,7 @@ public class Duke {
                 System.out.println(displayedMessage);
             }
         } catch (DukeException e) {
-            e.printErrorMessage();
+            System.out.println(e.getMessage());
         }
     }
 

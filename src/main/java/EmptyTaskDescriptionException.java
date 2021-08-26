@@ -7,18 +7,16 @@ public class EmptyTaskDescriptionException extends DukeException {
     }
 
     @Override
-    void printErrorMessage() {
+    public String getMessage() {
         switch (taskType) {
-            case Duke.TODO:
-                System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                break;
-            case Duke.DEADLINE:
-                System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
-                break;
-            case Duke.EVENT:
-                System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
-                break;
-
+        case Duke.TODO:
+            return "☹ OOPS!!! The description of a todo cannot be empty.";
+        case Duke.DEADLINE:
+            return "☹ OOPS!!! The description of a deadline cannot be empty.";
+        case Duke.EVENT:
+            return "☹ OOPS!!! The description of a event cannot be empty.";
+        default:
+            return "Error: EmptyTaskDescriptionException";
         }
     }
 }
