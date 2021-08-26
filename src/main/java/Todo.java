@@ -14,7 +14,7 @@ public class Todo extends Task{
     public Todo (String message, Boolean b) {
         super(message);
         this.set_date_time();
-        this.set_task();
+        this.set_task2();
         this.set_type();
     }
 
@@ -30,6 +30,18 @@ public class Todo extends Task{
 
     @Override
     public void set_task() {
+        int start_index = 0;
+        for (int i = 0; i < this.message.length(); i++) {
+            if (this.message.substring(i, i+1).equals("o")) {
+                start_index = i + 4;
+                break;
+            }
+        }
+        this.task = " " + message.substring(start_index,this.message.length());
+    }
+
+    @Override
+    public void set_task2() {
         int start_index = 0;
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("o")) {
