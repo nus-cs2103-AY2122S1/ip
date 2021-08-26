@@ -7,16 +7,36 @@ import util.GnosisConstants;
 
 import java.util.Scanner;
 
+/**
+ * Represents Logic flow of interaction of user input and, to specified
+ * managers to perform from user command.
+ *
+ * @author Pawandeep Singh
+ * */
 public class GnosisController {
 
+    /** Task Manager to handle task commands */
     private TaskCommandManager taskCommandManager;
+
+    /** UI view of Gnosis */
     private GnosisUI view;
 
+    /**
+     * GnosisController constructor to connect with GnosisView and,
+     * to initialise TaskCommanagerManager with loaded task.
+     *
+     * @param view UI view to user.
+     */
     public GnosisController(GnosisUI view) {
         this.view = view;
         this.taskCommandManager = new TaskCommandManager(TaskStorageManager.loadGnosisTasks());
     }
 
+    /**
+     * starts execution of Gnosis program.
+     *
+     * @param sc user input
+     */
     public void startGnosis(Scanner sc) {
         view.displayGreetMessage(TaskStorageManager.isDataFileAvail());
         do {
@@ -25,6 +45,13 @@ public class GnosisController {
 
     }
 
+    /**
+     * Executes specified command from input.
+     *
+     * @param command Command specified by user.
+     * @param commandInput input to perform from command.
+     * @throws GnosisException If command not found.
+     */
     public void executeCommand(String command, String commandInput) throws GnosisException {
         Command gc;
         try {
@@ -43,6 +70,15 @@ public class GnosisController {
         }
     }
 
+    /**
+     * Executes specified command from input.
+     * Updates user tasks into file system.
+     *
+     * @param gc task command to perform
+     * @param taskInput input to perform from task command.
+     * @throws GnosisException If command not found.
+     * @throws NumberFormatException if taskInput for DONE and DELETE command cannot be converted to integer.
+     */
     public void executeTaskCommand(Command gc, String taskInput) throws GnosisException, NumberFormatException {
         switch (gc) {
             case TODO:
