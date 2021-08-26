@@ -67,8 +67,21 @@ public class Ui {
         System.out.print(H_LINE);
     }
 
+    public void showFindList(ArrayList<Task> tasks) {
+        System.out.print(H_LINE);
+        if (tasks.size() > 0) {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println("  " + (i + 1) + ". " + tasks.get(i));
+            }
+        } else {
+            System.out.println("There are no matching tasks in your list.");
+        }
+        System.out.print(H_LINE);
+    }
+    
     /**
-     * Prints a message indicating that a user command has failied to be understood by the bot.
+     * Prints a message indicating that a user command has failed to be understood by the bot.
      */
     public void showCommandFail() {
         System.out.print(H_LINE + "I didn't get that. Please try again.\n" + H_LINE);

@@ -13,6 +13,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public boolean contains(String content) {
+        return description.contains(content);
+    }
+    
     @Override
     public String toString() {
         return (this.isDone ? "[X] " : "[ ] ") + this.description;
