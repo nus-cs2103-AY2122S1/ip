@@ -35,6 +35,7 @@ public enum CommandType {
      */
     public static CommandType find(String request) {
         String command = request.split(" ")[0];
+
         for(CommandType req : CommandType.values()) {
             if (command.equals(req.command)) {
                 return req;

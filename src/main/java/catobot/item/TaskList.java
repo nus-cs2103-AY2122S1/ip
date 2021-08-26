@@ -94,6 +94,7 @@ public class TaskList {
      */
     public String search(String keyword) {
         ArrayList<Task> filtered = new ArrayList<>();
+
         for (Task curr : taskList) {
             if (curr.contains(keyword)) {
                 filtered.add(curr);
@@ -102,6 +103,7 @@ public class TaskList {
         if (filtered.isEmpty()) {
             return "Meow! No tasks found!";
         }
+
         String s = String.format(
                 "Here are the matching tasks in your list:%s",
                 new TaskList(filtered));
@@ -112,6 +114,7 @@ public class TaskList {
         if (taskList.isEmpty()) {
             throw new EmptyTaskListException();
         }
+
         if (index < 1 || index > taskList.size()) {
             String expected = String.format("%d - %d", 1, taskList.size());
             String actual = String.format("%d", index);
@@ -131,6 +134,7 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("");
+
         for (int i = 0; i < taskList.size(); i++) {
             s.append("\n    ");
             s.append(String.format("%d. %s", i + 1, this.taskList.get(i)));
@@ -145,6 +149,7 @@ public class TaskList {
      */
     public String toStringInDoc() {
         StringBuilder s = new StringBuilder("");
+
         for (int i = 0; i < taskList.size(); i++) {
             s.append(this.taskList.get(i).toStringInDoc());
             if (i == taskList.size() - 1) { break; }

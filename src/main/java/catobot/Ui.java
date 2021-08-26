@@ -8,11 +8,12 @@ import java.util.Scanner;
  * Represents the User Interface.
  */
 public class Ui {
-    private static final String name = "catobot.Catobot";
-    private static final String banner = "(=^^=)(=^^=)(=^^=)(=^^=)";
-    private static final String greeting
-            = "Hello I am " + name + " (>^^<)\n    What can I do for you meow?";
-    private static final String byeMessage
+    private static final String BANNER = "(=^^=)(=^^=)(=^^=)(=^^=)";
+
+    private static final String WELCOME
+            = String.format("Hello I am %s (>^^<)\n    What can I do for you meow?", Catobot.NAME);
+
+    private static final String BYE
             = "Bye meow! I will always wait here meow(>^^<)";
     
     /** The Scanner to receive input. */
@@ -31,7 +32,7 @@ public class Ui {
      * @param message The key messages to be sent to the user.
      */
     public static void respond(String message) {
-        String s = String.format("    %s\n    %s\n    %s", banner, message, banner);
+        String s = String.format("    %s\n    %s\n    %s", BANNER, message, BANNER);
         System.out.println(s);
     }
 
@@ -39,7 +40,7 @@ public class Ui {
      * Sends a greeting message.
      */
     public void showWelcome() {
-        respond(greeting);
+        respond(WELCOME);
     }
 
     /**
@@ -55,7 +56,7 @@ public class Ui {
      * Sends an exit message.
      */
     public void exit() {
-        respond(byeMessage);
+        respond(BYE);
         sc.close();
     }
 

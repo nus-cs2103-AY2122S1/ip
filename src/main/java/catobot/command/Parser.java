@@ -16,6 +16,7 @@ public class Parser {
      */
     public static Command parse(String content) throws BotException {
         CommandType commandType = CommandType.find(content);
+
         switch (commandType) {
         case LIST:
             return new ListCommand();

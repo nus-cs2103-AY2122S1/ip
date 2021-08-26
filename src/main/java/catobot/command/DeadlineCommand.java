@@ -45,6 +45,7 @@ public class DeadlineCommand extends Command {
         if (!content.contains("/by") || content.split("/by").length < 2) {
             throw new InvalidDeadlineException();
         }
+
         String[] inputs = content.split("deadline")[1].trim().split(" /by ");
         String description = inputs[0].trim();
         try {

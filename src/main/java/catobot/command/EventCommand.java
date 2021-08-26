@@ -46,6 +46,7 @@ public class EventCommand extends Command {
         if (!content.contains("/at") || content.split("/at").length < 2) {
             throw new InvalidEventException();
         }
+
         String[] inputs = content.split("event")[1].trim().split(" /at ");
         String description = inputs[0].trim();
         try {

@@ -10,10 +10,14 @@ import catobot.item.TaskList;
  * Represents a Catobot.
  */
 public class Catobot {
+    public static final String NAME = "Catobot";
+
     /** Storage of the tasks. */
     private final Storage storage;
+
     /** List of tasks for the Catobot. */
     private TaskList tasks;
+
     /** User interface of the Catobot. */
     private final Ui ui;
 
@@ -25,6 +29,7 @@ public class Catobot {
     private Catobot(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (LoadingException e) {
@@ -38,6 +43,7 @@ public class Catobot {
      */
     private void run() {
         ui.showWelcome();
+
         boolean isExit = false;
         while (!isExit) {
             try {

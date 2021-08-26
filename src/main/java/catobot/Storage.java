@@ -23,6 +23,7 @@ import java.util.Scanner;
 public class Storage {
     /** The path to the file. */
     private final String filePath;
+
     /** The file storing the tasks. */
     private final File storage;
 
@@ -34,6 +35,7 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         this.storage = new File(filePath);
+
         try {
             if (!storage.exists()) {
                 storage.getParentFile().mkdirs();
@@ -48,21 +50,24 @@ public class Storage {
      * Loads the tasks from local memory to Catobot.
      *
      * @return The list of tasks from local memory.
-     * @throws FileNotFoundException If the file is not found.
-     * @throws EmptyCommandException If the tasks from local memory have empty description.
+     * @throws LoadingException If the tasks cannot be loaded from storage.
      */
     public List<Task> load() throws LoadingException {
         ArrayList<Task> taskList = new ArrayList<>();
 
         try {
-            Scanner s = new Scanner(storage); // create a Scanner using the File as the source
+            Scanner s = new Scanner(storage);
+
             while (s.hasNext()) {
                 String rawTask = s.nextLine();
+
                 String[] input = rawTask.split(" \\| ", 4);
                 String type = input[0];
                 int isDone = Integer.parseInt(input[1]);
                 String description = input[2];
+
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+
                 switch (type) {
                 case "D":
                     Deadline deadline = Deadline.of(description, LocalDateTime.parse(input[3], formatter));
