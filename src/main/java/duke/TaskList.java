@@ -35,5 +35,24 @@ public class TaskList {
         return taskNumber;
     }
 
+    public void find(String string) {
+        List<Task> list = new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.name.contains(string)) {
+                list.add(task);
+            }
+        }
+        if (list.isEmpty()) {
+            Ui.printNoMatch();
+        } else {
+            Ui.printMatch();
+            int index = 1;
+            for (Task task: list) {
+                System.out.println(index + "." + task.toString());
+                index += 1;
+            }
+        }
+
+    }
 
 }

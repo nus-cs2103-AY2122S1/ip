@@ -31,6 +31,10 @@ public class Ui {
 
     private static final String UNKNOWN_ERROR = "An unknown error has occurred. Try restarting me!";
 
+    private static final String NO_MATCHES = "Looks like none of your tasks match with what you are searching for.";
+
+    private static final String YES_MATCHES = "Lucky for you, the following Tasks seem to match your search term.";
+
     public static void printNumberError() {
         System.out.println(NUMBER_ERROR);
     }
@@ -81,5 +85,19 @@ public class Ui {
 
     public static void printUnknownError() {
         System.out.println(UNKNOWN_ERROR);
+    }
+
+    /**
+     * Prints a message about no matches found.
+     */
+    public static void printNoMatch() {
+        System.out.println(NO_MATCHES);
+    }
+
+    /**
+     * Prints a message that a match has been found.
+     */
+    public static void printMatch() {
+        System.out.println(YES_MATCHES);
     }
 }

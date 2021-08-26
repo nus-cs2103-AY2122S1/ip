@@ -114,6 +114,20 @@ public class Duke {
                 continue;
             }
 
+            if (firstString.equals("find")) {
+                if (inputArray.length < 2) {
+                    //case if no number is entered
+                    Ui.printNumberError();
+                    continue;
+                }
+                StringBuilder str = new StringBuilder();
+                for (int i = 1; i < inputArray.length; i++) {
+                    str.append(inputArray[i]).append(" ");
+                }
+                taskList.find(str.toString());
+                continue;
+            }
+
             //case if first string input is not a keyword
             Ui.printBadInputError();
         }
