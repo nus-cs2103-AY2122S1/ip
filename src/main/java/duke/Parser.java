@@ -1,3 +1,6 @@
+package duke;
+
+import duke.command.*;
 import java.util.Scanner;
 
 public class Parser {

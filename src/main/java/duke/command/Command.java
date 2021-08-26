@@ -1,3 +1,9 @@
+package duke.command;
+import duke.TaskList;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+
 public class Command {
 
     public Command() {

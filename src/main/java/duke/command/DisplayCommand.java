@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+
 public class DisplayCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
@@ -6,7 +13,6 @@ public class DisplayCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        System.out.println("display");
         tasks.display();
     }
 }
