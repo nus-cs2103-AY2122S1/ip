@@ -161,7 +161,7 @@ public class BotCommandResponderUnit {
 
         Integer index = Integer.parseInt(input.split(" ", 2)[1]);
         Task completedTask = taskTracker.get(index-1);
-        completedTask.maskAsDone();
+        completedTask.markAsDone();
 
         String output = String.format("%s\n\t\t%s%s\n\t%s",
                 botStaticMemoryUnit.MESSAGE_TASK_COMPLETE,
