@@ -2,6 +2,11 @@ package Duke.Storage;
 
 import java.io.IOException;
 
+/**
+ * Signals that the file to be read is in an unknown format.
+ *
+ * @author cai
+ */
 public class FileFormatException extends IOException {
     private static final String UNKNOWN_FILE_FORMAT_MESSAGE = "Unknown file format: %s";
 

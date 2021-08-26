@@ -12,8 +12,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * A command that adds a specified task to the list.
+ *
+ * @author cai
+ */
 class AddTaskCommand extends Command {
-    // Use the names of the enum values as keywords
+    /**
+     * The list of keywords associated with adding a task.
+     * The names of the values in the enum `TaskType` is used as keywords.
+     */
     private static final Set<String> KEYWORDS = new HashSet<>(
             Arrays.stream(TaskType.values())
                     .map(Enum::name)
@@ -23,6 +31,7 @@ class AddTaskCommand extends Command {
     private static final String DEADLINE_BY_REGEX = "(?i)\\s+/by\\s+";
     private static final String EVENT_AT_REGEX = "(?i)\\s+/at\\s+";
 
+    /** The possible types of task to add */
     private enum TaskType {
         TODO,
         DEADLINE,
@@ -37,6 +46,13 @@ class AddTaskCommand extends Command {
         Ui.print(String.format(ADD_TASK_SUCCESS_MESSAGE, newTask, taskList.size()));
     }
 
+    /**
+     * Constructs a Task corresponding to the provided user input.
+     *
+     * @param input The input containing the type and details of the task.
+     * @return The corresponding task with the specified type and details.
+     * @throws InvalidTaskException If invalid task details were provided.
+     */
     private static Task createTask(UserInput input) throws InvalidTaskException {
         TaskType taskType = TaskType.valueOf(input.getKeyword().toUpperCase());
         try {
