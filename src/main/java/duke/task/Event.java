@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
+public class Event extends Task {
     //date of event in format LocalDate
     protected LocalDate atDate;
     //time of event in format String

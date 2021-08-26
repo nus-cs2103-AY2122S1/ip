@@ -1,13 +1,12 @@
 package duke.util;
 
 import duke.exception.DukeException;
-import duke.util.List;
 
 import java.util.Scanner;
 
 public class Parser {
-    private Scanner sc;
-    private List list;
+    private final Scanner sc;
+    private final List list;
 
     public Parser(List list) {
         this.sc = new Scanner(System.in);
@@ -23,6 +22,7 @@ public class Parser {
         String numStr = parts[1];
         return Integer.valueOf(numStr);
     }
+
     public void execute() {
         String input = sc.nextLine(); // scan the line for the user's input
 
@@ -68,18 +68,18 @@ public class Parser {
                 }
 
                 switch (input) {
-                    case "bye":
-                    case "Bye":
-                    case "BYE":
-                        System.out.println("Bye. Hope to see you again soon!");
-                        shouldContinue = false;
-                        break;
-                    case "list":
-                        list.show();
-                        input = sc.nextLine();
-                        break;
-                    default:
-                        throw new DukeException();
+                case "bye":
+                case "Bye":
+                case "BYE":
+                    System.out.println("Bye. Hope to see you again soon!");
+                    shouldContinue = false;
+                    break;
+                case "list":
+                    list.show();
+                    input = sc.nextLine();
+                    break;
+                default:
+                    throw new DukeException();
                 }
             } catch (DukeException e) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

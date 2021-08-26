@@ -1,19 +1,19 @@
 package duke.util;
 
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.ToDo;
-import duke.task.Event;
 import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class List {
     //List that holds all the Tasks.
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
     //Storage to load the list and write to list,
-    private Storage store;
+    private final Storage store;
 
     /**
      * Constructor for List.
@@ -82,7 +82,7 @@ public class List {
      * @param index Position of Task to be set to done.
      */
     public void setIndexDone(int index) {// starts from 1
-        if(index > list.size() || index < 1){//check for invalid index number
+        if (index > list.size() || index < 1) {//check for invalid index number
             System.out.println("There is no duke.task " + index);
             return;
         }
@@ -98,7 +98,7 @@ public class List {
      * @param index Index of task to be deleted in list.
      */
     public void deleteTask(int index) {//starts from 1
-        if(index > list.size() || index < 1){
+        if (index > list.size() || index < 1) {
             System.out.println("There is no duke.task " + index);
             return;
         }
@@ -117,7 +117,7 @@ public class List {
         if (length == 0) {
             System.out.println("YAY! You have no more tasks left :)");
         }
-        for(int i = 1; i <= length; i++) {
+        for (int i = 1; i <= length; i++) {
             System.out.println(i + "." + list.get(i - 1).toString());
         }
     }

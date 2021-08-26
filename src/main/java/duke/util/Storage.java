@@ -3,17 +3,16 @@ package duke.util;
 import duke.task.Task;
 
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.ObjectInputStream;
-import java.io.IOException;
 import java.io.FileNotFoundException;
-
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class Storage {
     //File name of file to be used to write and load list of task.
-    private String fileName;
+    private final String fileName;
 
     /**
      * Constructor of Storage.

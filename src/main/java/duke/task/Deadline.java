@@ -16,8 +16,8 @@ public class Deadline extends Task {
      * Constructor for Deadline Task.
      *
      * @param description String input of description of Deadline Task.
-     * @param by          String for Deadline due format dd/mm/yyyy HHmm.
-     * @throws DukeException          if by is incomplete.
+     * @param by String for Deadline due format dd/mm/yyyy HHmm.
+     * @throws DukeException if by is incomplete.
      * @throws DateTimeParseException date is in incorrect format.
      */
     public Deadline(String description, String by) throws DukeException, DateTimeParseException {
