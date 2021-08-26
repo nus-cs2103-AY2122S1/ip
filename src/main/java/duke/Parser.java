@@ -10,7 +10,14 @@ import java.util.Date;
  * Deals with making sense of the user command to Duck Chatbot.
  */
 public class Parser {
-
+    
+    /**
+     * Returns Command called by the user.
+     * 
+     * @param fullCommand Entire line of user input from scanner.
+     * @return Command object based on the command word used by user.
+     * @throws DukeException If task description is empty, user input for date or task number is invalid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String commandWord;
         String taskDescription = null;
