@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 class DukeBot {
@@ -6,12 +7,28 @@ class DukeBot {
 
     public DukeBot(Scanner sc) {
         this.sc = sc;
-        this.taskList = new TaskList();
+        TaskList temp;
+        try {
+            temp = new TaskList(Storage.load());
+        } catch (IOException e) {
+            handleLoadingError();
+            temp = new TaskList();
+        }
+        taskList = temp;
+    }
+
+    private void handleLoadingError() {
+        System.out.println("Could not load your saved tasks. Creating a new task list...");
     }
 
     private String handleBye(String[] inputs) throws InvalidCommandException {
         if (inputs.length > 1) {
             throw new InvalidCommandException("Unknown command! Did you mean 'bye'?");
+        }
+        try {
+            Storage.save(taskList.formatData());
+        } catch (IOException e) {
+            System.out.println("Error while saving tasks: " + e.getMessage());
         }
         return "Bye. Hope to see you again soon!";
     }

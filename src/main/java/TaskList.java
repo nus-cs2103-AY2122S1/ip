@@ -1,11 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 class TaskList {
     private final List<Task> list;
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        list = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> lines) {
+        list = new ArrayList<>(lines);
     }
 
     public void add(Task t) {
@@ -26,6 +31,10 @@ class TaskList {
 
     public boolean markAsDone(int taskNo) {
         return list.get(--taskNo).markAsDone();
+    }
+
+    public List<String> formatData() {
+        return list.stream().map(Task::formatForSave).collect(Collectors.toList());
     }
 
     @Override
