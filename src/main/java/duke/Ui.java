@@ -1,7 +1,9 @@
+package duke;
+
 public class Ui {
 
     public void startBot() {
-        String intro = "Hello! I'm Duke\n" +
+        String intro = "Hello! I'm duke.Duke\n" +
                 "    What can I do for you?";
         System.out.println(intro);
     }

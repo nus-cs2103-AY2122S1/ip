@@ -1,6 +1,8 @@
+package duke.exception;
+
 public class InvalidTaskTypeException extends DukeException{
 
-    InvalidTaskTypeException(String e) {
+    public InvalidTaskTypeException(String e) {
         super(e);
     }
 }

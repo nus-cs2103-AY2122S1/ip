@@ -1,6 +1,8 @@
+package duke.exception;
+
 public class TaskNotFoundException extends DukeException{
 
-    TaskNotFoundException(String e) {
+    public TaskNotFoundException(String e) {
         super(e);
     }
 }

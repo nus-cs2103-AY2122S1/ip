@@ -1,6 +1,8 @@
+package duke.exception;
+
 public class DescriptionEmptyException extends DukeException{
 
-    DescriptionEmptyException(String e) {
+    public DescriptionEmptyException(String e) {
         super(e);
     }
 

@@ -1,6 +1,8 @@
+package duke.exception;
+
 public class IncorrectFormatException extends DukeException{
 
-    IncorrectFormatException(String e) {
+    public IncorrectFormatException(String e) {
         super(e);
     }
 }
