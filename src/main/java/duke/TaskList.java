@@ -46,4 +46,14 @@ public class TaskList {
         }
         return backupData;
     }
+    
+    public TaskList findTask(String s) {
+        ArrayList<Task> res = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(s)) {
+                res.add(task);
+            }
+        }
+        return new TaskList(res);
+    }
 }

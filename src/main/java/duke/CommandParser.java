@@ -2,7 +2,7 @@ package duke;
 
 public class CommandParser extends Parser<String[]> {
 	private final static String[] COMMANDS_WITH_ARGS = new String[] {"todo", "deadline", 
-			"event", "delete", "done"};
+			"event", "delete", "done", "find"};
 	private final static String[] COMMANDS_WITHOUT_ARGS = new String[] {"list", "bye"};
 	private final static String UNKNOWN_COMMAND_MSG = "☹ OOPS!!! " +
 			"I'm sorry, but I don't know what that means :-(";
@@ -42,6 +42,7 @@ public class CommandParser extends Parser<String[]> {
 		case "todo":
 		case "done":
 		case "delete":
+		case "find":
 			return cmdSplit;
 		case "deadline":
 			String[] deadlineArgs = cmdSplit[1].split("[ \\t]+/by[ \\t]+", 2);

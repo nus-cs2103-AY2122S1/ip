@@ -8,6 +8,7 @@ public class Duke {
     private static final String GREETING_MSG = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String GOODBYE_MSG = "Bye. Hope to see you again soon!";
     private static final String LIST_TASK_MSG = "Here are the tasks in your list: ";
+    private static final String FIND_TASK_MSG = "Here are the matching tasks in your list: ";
     private static final String ADD_TASK_MSG_TEMPLATE = "Got it. I've added this task: \n"
                                                         + "  %s\n"
                                                         + "Now you have %d %s in the list.\n";
@@ -74,7 +75,7 @@ public class Duke {
 
     private void listTasks() {
         ui.show(LIST_TASK_MSG);
-        ui.show(tasks);
+        ui.showf(tasks.toString());
     }
 
     private void doneTask(int index) throws IOException {
@@ -91,6 +92,11 @@ public class Duke {
                 tasks.getTaskCount() <= 1 ? "task" : "tasks"
         );
         taskStorage.backup(tasks);
+    }
+    
+    private void findTask(String s) {
+        ui.show(FIND_TASK_MSG);
+        ui.showf(tasks.findTask(s).toString());
     }
 
     private void runCommand(String[] cmd) throws DukeException, IOException {
@@ -123,6 +129,10 @@ public class Duke {
             break;
         case "list":
             listTasks();
+            break;
+        case "find":
+            findTask(cmd[1]);
+            break;
         }
     }
 
