@@ -8,53 +8,48 @@ import java.io.IOException;
 public class Duke {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
+        Parser parser = new Parser();
+        UI ui = new UI(new Scanner(System.in));
         Storage storage = new Storage("./data/tasks.txt");
         TaskList tasks;
 
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            ui.showException(e);
             tasks = new TaskList(new ArrayList<>());
             // TODO: Create new file when cannot load tasks from current file
         }
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you today?");
+        ui.showWelcome();
 
-        String userCommand;
         String userInput;
+        String userCommand;
+        String userArgument;
 
         mainLoop:
         while (true) {
             try {
-                userCommand = scanner.next();
-                userInput = scanner.nextLine().trim();
+                userInput = ui.getUserInput();
+                userCommand = parser.getUserCommand(userInput);
+                userArgument = parser.getUserArgument(userInput);
 
                 switch (userCommand) {
                     case "list":
                         if (tasks.isEmpty()) {
-                            System.out.println("Currently no tasks!");
+                            ui.showMessage("Currently no tasks!");
                         }
-                        for (int i = 0; i < tasks.numberOfTasks(); i++) {
-                            System.out.printf("%d. %s%n", i + 1, tasks.getTask(i));
-                        }
+                        ui.showTasks(tasks);
                         break;
                     case "bye":
-                        System.out.println("Good bye.");
+                        ui.goodBye();
                         break mainLoop;
                     case "done":
-                        int done = getInputNumber(userInput);
+                        int done = getInputNumber(userArgument);
 
                         if (done >= tasks.numberOfTasks()|| done < 0) {
-                            System.out.println("Task does not exist!");
+                            ui.showMessage("Task does not exist!");
                             continue;
                         }
 
@@ -62,32 +57,32 @@ public class Duke {
                         doneTask.markAsDone();
                         storage.editTaskFromFile(done, tasks);
 
-                        System.out.printf("I've marked this task as done:\n" +
-                                "%s\n", doneTask.toString());
+                        ui.showMessage(String.format("I've marked this task as done:\n" +
+                                "%s\n", doneTask.toString()));
 
                         break;
                     case ("todo"):
                     case("deadline"):
                     case("event"):
-                        if (userInput.equals("")) {
+                        if (userArgument.equals("")) {
                             throw new DukeException("The description of a Task cannot be empty.");
                         }
 
                         if (userCommand.equals("todo")) {
-                            tasks.addTask(new Todo(userInput, false));
+                            tasks.addTask(new Todo(userArgument, false));
                         } else if (userCommand.equals("deadline")) {
-                            String[] deadlineInfo = splitBetween(userInput, "/by");
+                            String[] deadlineInfo = splitBetween(userArgument, "/by");
                             tasks.addTask(new Deadline(deadlineInfo[0], deadlineInfo[1], false));
                         } else {
-                            String[] eventInfo = splitBetween(userInput, "/at");
+                            String[] eventInfo = splitBetween(userArgument, "/at");
                             tasks.addTask(new Event(eventInfo[0], eventInfo[1], false));
                         }
-                        addTask(tasks.getTask(tasks.numberOfTasks() - 1), storage, tasks);
+                        addTask(tasks.getTask(tasks.numberOfTasks() - 1), storage, tasks, ui);
                         break;
                     case("delete"):
-                        int delete = getInputNumber(userInput);
+                        int delete = getInputNumber(userArgument);
                         if (delete >= tasks.numberOfTasks() || delete < 0) {
-                            System.out.println("Task does not exist!");
+                            ui.showMessage("Task does not exist!");
                             continue;
                         }
 
@@ -95,22 +90,22 @@ public class Duke {
                         storage.deleteTaskFromFile(delete, tasks);
                         tasks.removeTask(delete);
 
-                        System.out.printf("I've removed this task:\n%s\n", removedTask.toString());
-                        System.out.printf("Now you have %d tasks in your list.\n", tasks.numberOfTasks());
+                        ui.showMessage(String.format("I've removed this task:\n%s", removedTask.toString()));
+                        ui.showMessage(String.format("Now you have %d tasks in your list.\n", tasks.numberOfTasks()));
                         break;
                     default:
                         throw new DukeException("Sorry I do not understand this directive.");
                 }}
             catch (DukeException exception) {
-                System.out.println(exception.getMessage());
+                ui.showException(exception);
             }
         }
     }
 
-    private static void addTask(Task newTask, Storage storage, TaskList tasks) {
+    private static void addTask(Task newTask, Storage storage, TaskList tasks, UI ui) {
         storage.saveTaskToFile(newTask);
-        System.out.printf("Got it, I've added this task:\n %s\n", newTask.toString());
-        System.out.printf("Now you have %d tasks in your list.\n", tasks.numberOfTasks());
+        ui.showMessage(String.format("Got it, I've added this task:\n %s\n", newTask.toString()));
+        ui.showMessage(String.format("Now you have %d tasks in your list.\n", tasks.numberOfTasks()));
     }
 
     private static String[] splitBetween(String str, String separator) throws DukeException {
