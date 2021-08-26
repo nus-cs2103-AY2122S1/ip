@@ -19,6 +19,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles all interaction between the program and the files.
+ */
 public class Storage {
 
     String folderName;
@@ -27,6 +30,10 @@ public class Storage {
     String filePath;
     Ui ui = new Ui();
 
+    /**
+     * Initialise the path for the files.
+     * @param filePath The filePath that is needed to be stored.
+     */
     public Storage(String filePath) {
         String[] stringArr = filePath.split("/");
         folderName = stringArr[0];
@@ -35,6 +42,12 @@ public class Storage {
         this.filePath = dirPath + "\\" + fileName;
     }
 
+    /**
+     * Read the json file and initialise it into Duke program.
+     *
+     * @return The list of Task to be used in the program.
+     * @throws InitialisationError Failure to retrieve information from the files.
+     */
     public List<Task> load() throws InitialisationError {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -58,6 +71,11 @@ public class Storage {
 
     }
 
+    /**
+     * Save and write data from the program into the files.
+     *
+     * @param taskList The list of task that will be saved.
+     */
     @SuppressWarnings("unchecked")
     public void saveData(TaskList taskList) {
 //        String dirPath = System.getProperty("user.dir") + "\\src\\main\\data\\dukeData.json";
@@ -97,6 +115,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Helper function that conver json to List of Task objects.
+     *
+     * @param fileName The name of the file.
+     * @return The list of Tasks.
+     */
     @SuppressWarnings("unchecked")
     public List<Task> convertJsonToTaskListObj(String fileName) {
         List<Task> taskList = new ArrayList<>();
@@ -122,6 +146,12 @@ public class Storage {
 
     }
 
+    /**
+     * Convert JSONObject into Task.
+     *
+     * @param task JSONObject that contains information about task.
+     * @return A new Task object.
+     */
     private Task parseTaskObject(JSONObject task) {
         //Get task object within list
         JSONObject taskObject = (JSONObject) task.get("task");
