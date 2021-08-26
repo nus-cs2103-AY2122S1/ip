@@ -1,10 +1,7 @@
 package duke.parser;
 
 import duke.command.*;
-import duke.exception.DukeException;
-import duke.exception.InvalidDateTimeException;
-import duke.exception.NoTaskDescriptionException;
-import duke.exception.UnknownCommandException;
+import duke.exception.*;
 import duke.storage.Storage;
 import duke.task.*;
 import duke.ui.Ui;
@@ -83,7 +80,7 @@ public class Parser {
         }
     }
 
-    private Task processTaskDescriptions(TaskTypes t, String userInput) throws InvalidDateTimeException, NoTaskDescriptionException {
+    private Task processTaskDescriptions(TaskTypes t, String userInput) throws InvalidDateTimeException, NoTaskDescriptionException, NoDateTimeException {
         int spaceIndex = userInput.indexOf(" ");
         String taskDescription = userInput.substring(spaceIndex + 1);
         if (taskDescription.isBlank() || spaceIndex == -1) {
@@ -92,7 +89,11 @@ public class Parser {
         switch (t) {
         case DEADLINE:
             try {
-                String deadlineDescription = taskDescription.substring(0, taskDescription.indexOf("/by") - 1);
+                int byIndex = taskDescription.indexOf("/by") - 1;
+                if (byIndex < 0) {
+                    throw new NoDateTimeException();
+                }
+                String deadlineDescription = taskDescription.substring(0, byIndex);
                 if (deadlineDescription.isBlank()) {
                     throw new NoTaskDescriptionException();
                 }
@@ -110,7 +111,11 @@ public class Parser {
 
         case EVENT:
             try {
-                String eventDescription = taskDescription.substring(0, taskDescription.indexOf("/at") - 1);
+                int atIndex = taskDescription.indexOf("/at") - 1;
+                if (atIndex < 0) {
+                    throw new NoDateTimeException();
+                }
+                String eventDescription = taskDescription.substring(0, atIndex);
                 if (eventDescription.isBlank()) {
                     throw new NoTaskDescriptionException();
                 }

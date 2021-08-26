@@ -13,7 +13,7 @@ public class NoTaskDescriptionException extends DukeException {
 
     /**
      * Returns a formatted error message to tell the
-     * user that a todo task must come with a description.
+     * user that a task must come with a description.
      *
      * @return The formatted error message.
      */
