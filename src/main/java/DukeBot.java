@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 class DukeBot {
@@ -74,9 +75,13 @@ class DukeBot {
         if (tokens.length != 2) {
             throw new InvalidCommandException("Wrong deadline format! Requires <task name> /by <time>");
         }
-        Task deadline = new Deadline(tokens[0], tokens[1]);
-        taskList.add(deadline);
-        return "I've added:\n  " + deadline;
+        try {
+            Task deadline = new Deadline(tokens[0], tokens[1]);
+            taskList.add(deadline);
+            return "I've added:\n  " + deadline;
+        } catch (DateTimeParseException e) {
+            return "I cannot understand the date :( Please format it as YYYY-MM-DD";
+        }
     }
 
     private String handleEvent(String[] inputs) throws InvalidCommandException {
@@ -87,9 +92,13 @@ class DukeBot {
         if (tokens.length != 2) {
             throw new InvalidCommandException("Wrong event format! Requires <task name> /at <time>");
         }
-        Task event = new Event(tokens[0], tokens[1]);
-        taskList.add(event);
-        return "I've added:\n  " + event;
+        try {
+            Task event = new Event(tokens[0], tokens[1]);
+            taskList.add(event);
+            return "I've added:\n  " + event;
+        } catch (DateTimeParseException e) {
+            return "I cannot understand the date :( Please format is as YYYY-MM-DD";
+        }
     }
 
     private String getResponseToCommand(String[] inputs) throws InvalidCommandException {
