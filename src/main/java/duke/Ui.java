@@ -19,7 +19,7 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     /** Duke's greeting. */
-    private static final String DUKE_GREETING = "\nHello I'm duke.Duke!\n"
+    private static final String DUKE_GREETING = "\nHello I'm Duke!\n"
             + "What can I do for you?\n";
 
     /** Duke's farewells. */
