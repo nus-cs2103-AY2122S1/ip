@@ -1,2 +1,10 @@
-package PACKAGE_NAME;public class Parser {
+public class Parser {
+    String input;
+    public Parser(String input) {
+        this.input = input;
+    }
+
+    public void parse() {
+
+    }
 }

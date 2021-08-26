@@ -10,15 +10,12 @@ public class Duke {
         String s;
         int taskNumber;
 
-
         Storage storage = new Storage();
         TaskList list = new TaskList(storage.load(storage.getFilePath()));
         Ui ui = new Ui(storage, list);
 
         ui.greet();
-
         Scanner input = new Scanner(System.in);
-
         while(true) {
             try {
                 s = input.nextLine();
