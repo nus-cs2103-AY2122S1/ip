@@ -97,7 +97,8 @@ class DukeBot {
             taskList.add(event);
             return "I've added:\n  " + event;
         } catch (DateTimeParseException e) {
-            return "I cannot understand the date :( Please format is as YYYY-MM-DD";
+            return "I cannot understand the date :( " +
+                    "Please format it as DD-MM-YYYY hhmm[ to DD-MM-YYY hhmm] (Time in 24hr format)";
         }
     }
 
