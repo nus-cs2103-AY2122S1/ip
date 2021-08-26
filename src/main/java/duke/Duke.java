@@ -114,6 +114,22 @@ public class Duke {
                         break;
                     }
 
+                case "find":
+                    try {
+                        String find = scanner.nextLine();
+                        Ui.Border();
+                        list.find(find);
+                        Ui.Border();
+                        input = scanner.next();
+                        break;
+
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                        Ui.Border();
+                        input = scanner.next();
+                        break;
+                    }
+
                 default:
                     scanner.nextLine();
                     Ui.UnknownCommand();
