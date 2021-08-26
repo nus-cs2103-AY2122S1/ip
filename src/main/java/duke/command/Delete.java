@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.data.NoSuchTaskException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -30,9 +31,11 @@ public class Delete extends DukeCommand {
     /**
      * Executes the Delete command. Deletes task to the task list and
      * prints a message after deleting, and update the local data file.
+     *
+     * @throws NoSuchTaskException When the task number is invalid.
      */
     @Override
-    public void execute() {
+    public void execute() throws NoSuchTaskException {
         Task t = list.delete(taskNumber);
         ui.deleteTaskMessage(list.size(), t);
         storage.save(list.getList());

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.data.NoSuchTaskException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -29,9 +30,11 @@ public class Done extends DukeCommand {
     /**
      * Executes the Delete command. Marks a task in the task list as done,
      * prints a message after marking, and update the local data file.
+     *
+     * @throws NoSuchTaskException When the task number is invalid.s
      */
     @Override
-    public void execute() {
+    public void execute() throws NoSuchTaskException{
         ui.markDoneMessage(list.mark(taskNumber));
         storage.save(list.getList());
     }

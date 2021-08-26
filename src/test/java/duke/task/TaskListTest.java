@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.data.NoSuchTaskException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -30,7 +31,11 @@ public class TaskListTest {
         ArrayList<Task> list = new ArrayList<>();
         list.add(new ToDo("sleep", false));
         tasklist.loadFromList(list);
-        tasklist.delete(1);
-        assertEquals(0, tasklist.size());
+        try {
+            tasklist.delete(1);
+            assertEquals(0, tasklist.size());
+        } catch (NoSuchTaskException e) {
+            e.printStackTrace();
+        }
     }
 }

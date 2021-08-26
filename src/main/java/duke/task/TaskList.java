@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.data.NoSuchTaskException;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -52,19 +54,27 @@ public class TaskList {
      *
      * @param taskNumber The task number.
      * @return The task deleted.
+     * @throws NoSuchTaskException When the task number is invalid.
      */
-    public Task delete(int taskNumber) {
+    public Task delete(int taskNumber) throws NoSuchTaskException {
+        if (taskNumber < 0 || taskNumber > list.size() + 1) {
+            throw new NoSuchTaskException();
+        }
         return list.remove(taskNumber - 1);
     }
 
     /**
      * Marks a specific task corresponding to the number in the list as done.
      *
-     * @param taskNum The task number.
+     * @param taskNumber The task number.
      * @return The task that was marked as done.
+     * @throws NoSuchTaskException When the task number is invalid.
      */
-    public Task mark(int taskNum) {
-        Task task = list.get(taskNum - 1);
+    public Task mark(int taskNumber) throws NoSuchTaskException {
+        if (taskNumber < 0 || taskNumber > list.size() + 1) {
+            throw new NoSuchTaskException();
+        }
+        Task task = list.get(taskNumber - 1);
         task.markDone();
         return task;
     }
