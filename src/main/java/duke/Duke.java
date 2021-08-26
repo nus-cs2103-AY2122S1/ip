@@ -9,6 +9,7 @@ import duke.ui.Ui;
  * The project aims to build a product named Duke,
  * a Personal Assistant Chatbot that helps a person
  * to keep track of various things.
+ *
  * This is the Main class that will contain the main method
  * to be executed at run-time.
  */
@@ -61,7 +62,7 @@ public class Duke implements Message {
     /**
      * Runs entry point for the Duke program.
      *
-     * @param args an array of command-line arguments for the application
+     * @param args an array of command-line arguments for the application.
      */
     public static void main(String[] args) {
         new Duke().run();
