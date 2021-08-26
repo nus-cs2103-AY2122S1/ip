@@ -2,14 +2,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    private static List<Task> tasks;
+    List<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
-
     public TaskList(List<Task> existingTasks) {
-        this.tasks = existingTasks;
+        this.tasks = (existingTasks == null ? new ArrayList<>() : existingTasks);
+    }
+
+    public Duke.TaskType getTaskType(String taskInput) {
+        return taskInput.equals("event") ? Duke.TaskType.Event
+                : taskInput.equals("deadline") ? Duke.TaskType.Deadline
+                : taskInput.equals("todo") ? Duke.TaskType.ToDo
+                : Duke.TaskType.Invalid;
     }
 
     private String formatNumTasks() {
@@ -17,13 +23,6 @@ public class TaskList {
         return size == 0 ? "no tasks"
                 : size == 1 ? "1 task"
                 : size + " tasks";
-    }
-
-    private Duke.TaskType getTaskType(String taskInput) {
-        return taskInput.equals("event") ? Duke.TaskType.Event
-                : taskInput.equals("deadline") ? Duke.TaskType.Deadline
-                : taskInput.equals("todo") ? Duke.TaskType.ToDo
-                : Duke.TaskType.Invalid;
     }
 
     public void handleDisplayTasks() {
@@ -53,27 +52,27 @@ public class TaskList {
         Task t;
         String taskInfo = params[1];
         switch (type) {
-            case Event:
-                String[] eventInfo = taskInfo.split(" /at ");
-                if (eventInfo.length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please enter event information in the following " +
-                            "format:\nevent [event name] \\at [date and time]");
-                }
-                t = new Event(eventInfo[0], eventInfo[1]);
-                break;
-            case Deadline:
-                String[] deadlineInfo = taskInfo.split(" /by ");
-                if (deadlineInfo.length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please enter deadline information in the following " +
-                            "format:\ndeadline [deadline name] \\by [date and time]");
-                }
-                t = new Deadline(deadlineInfo[0], deadlineInfo[1]);
-                break;
-            case ToDo:
-                t = new ToDo(taskInfo);
-                break;
-            default:
-                return;
+        case Event:
+            String[] eventInfo = taskInfo.split(" /at ");
+            if (eventInfo.length == 1) {
+                throw new DukeException("☹ OOPS!!! Please enter event information in the following " +
+                        "format:\nevent [event name] /at [date and time]");
+            }
+            t = new Event(eventInfo[0], eventInfo[1]);
+            break;
+        case Deadline:
+            String[] deadlineInfo = taskInfo.split(" /by ");
+            if (deadlineInfo.length == 1) {
+                throw new DukeException("☹ OOPS!!! Please enter deadline information in the following " +
+                        "format:\ndeadline [deadline name] /by [date and time]");
+            }
+            t = new Deadline(deadlineInfo[0], deadlineInfo[1]);
+            break;
+        case ToDo:
+            t = new ToDo(taskInfo);
+            break;
+        default:
+            return;
         }
         tasks.add(t);
         System.out.println(Ui.format("Got it. I've added this task: \n\t" + t +

@@ -10,7 +10,7 @@ public class Ui {
     }
 
     public void displayGoodbyeMsg() {
-        System.out.println(format("Hello! I'm Duke\nWhat can I do for you?"));
+        System.out.println(format("See you next time!"));
     }
 
     public void displayErrorMsg(DukeException e) {

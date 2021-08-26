@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,8 +13,10 @@ public class Duke {
     private static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        TaskList taskList = new TaskList();
         Ui ui = new Ui();
+        Storage storage = new Storage("data/duke.txt");
+        TaskList taskList;
+        taskList = storage.loadTasksFromFile();
         //Parser parser = new Parser();
         ui.displayWelcomeMsg();
         String[] params = sc.nextLine().split(" ", 2);
@@ -36,6 +39,7 @@ public class Duke {
             params = sc.nextLine().split(" ", 2);
             firstParam = params[0];
         }
+        storage.writeTasksToFile(taskList.tasks);
         ui.displayGoodbyeMsg();
     }
 }

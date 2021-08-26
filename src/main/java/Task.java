@@ -4,7 +4,14 @@ public abstract class Task {
 
     public abstract String getTypeIndicator();
 
+    public abstract String toFileRecord();
+
     public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = false;
     }

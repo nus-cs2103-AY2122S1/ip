@@ -1,0 +1,4 @@
+E | 1 | eventname | dsjkdflj
+T | 1 | this
+T | 1 | that
+E | 0 | thisadadline | time
