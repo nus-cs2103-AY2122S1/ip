@@ -1,3 +1,5 @@
+package duke;
+
 public class CommandParser extends Parser<String[]> {
 	private final static String[] COMMANDS_WITH_ARGS = new String[] {"todo", "deadline", 
 			"event", "delete", "done"};

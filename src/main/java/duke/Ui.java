@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
 	public void showf(String format, Object... args) {
 		System.out.printf(format, args);
