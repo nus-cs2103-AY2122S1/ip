@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.nio.file.Path;
@@ -123,11 +124,13 @@ public class Duke {
         else {
             if (taskType == TaskType.DEADLINE) {
                 userInputScanner.useDelimiter(" /by ");
-                addNewTask(new Deadline(userInputScanner.next().trim(), userInputScanner.next().trim()));
+                addNewTask(new Deadline(userInputScanner.next().trim(),
+                        LocalDate.parse(userInputScanner.next().trim())));
             }
             else {
                 userInputScanner.useDelimiter(" /at ");
-                addNewTask(new Event(userInputScanner.next().trim(), userInputScanner.next().trim()));
+                addNewTask(new Event(userInputScanner.next().trim(),
+                        LocalDate.parse(userInputScanner.next().trim())));
             }
         }
     }
