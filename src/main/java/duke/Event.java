@@ -3,31 +3,55 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class representing an event task.
+ */
 public class Event extends Task {
     private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
     protected String at;
     protected LocalDate atDate;
 
-
+    /**
+     * A constructor for the event task.
+     *
+     * @param description The description of the task.
+     * @param at The note represented by a string.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
         this.atDate = null;
     }
 
+    /**
+     * A constructor for the event task.
+     *
+     * @param description The description of the task.
+     * @param atDate The date of the event task.
+     */
     public Event(String description, LocalDate atDate) {
         super(description);
         this.at = null;
         this.atDate = atDate;
     }
 
+    /**
+     * A constructor for the deadline task which is mainly used for restoring from duke.txt.
+     *
+     * @param isDone The status of the task.
+     * @param description The description of the task.
+     * @param at The note represented by a string.
+     * @param atDate The date of the event task.
+     */
     public Event(boolean isDone, String description, String at, LocalDate atDate) {
         super(isDone, description);
         this.at = at;
         this.atDate = atDate;
     }
-
-
+    
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return String.format(
@@ -37,6 +61,9 @@ public class Event extends Task {
         );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toBackupFormat() {
         return String.format(

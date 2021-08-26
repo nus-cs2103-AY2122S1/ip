@@ -7,12 +7,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class representing the storage for tasks.
+ */
 public class Storage {
 	private static final DateTimeParser DATE_TIME_PARSER = new DateTimeParser(new String[] {"MMM dd yyyy"});
 	private final Scanner sc;
 	private final String path;
-	
-	
+
+	/**
+	 * A constructor for the storage.
+	 * 
+	 * @param path The path which the information for the tasks should be stored.
+	 * @throws IOException If unexpected IO errors still occur when reading the file.
+	 */
 	public Storage(String path) throws IOException {
 		this.path = path;
 		File storeFile = new File(path);
@@ -21,7 +29,12 @@ public class Storage {
 		FileReader fileIn = new FileReader(path);
 		sc = new Scanner(fileIn);
 	}
-	
+
+	/**
+	 * Loads the task data from the path and returns it as an array.
+	 * 
+	 * @return An array of tasks loaded from the path.
+	 */
 	public ArrayList<Task> load() {
 		ArrayList<Task> taskData = new ArrayList<>();
 		if (sc == null) {
@@ -54,10 +67,16 @@ public class Storage {
 		}
 		return taskData;
 	}
-	
-	public void backup(TaskList tasklist) throws IOException {
+
+	/**
+	 * Backups the task data from the task list into the path.
+	 * 
+	 * @param taskList The task list of which the task data should be backup-ed from.
+	 * @throws IOException If unexpected IO errors still occur when writing to the file.
+	 */
+	public void backup(TaskList taskList) throws IOException {
 		FileWriter fileOut = new FileWriter(path, false);
-		fileOut.write(String.join("\n", tasklist.toBackupFormat()));
+		fileOut.write(String.join("\n", taskList.toBackupFormat()));
 		fileOut.flush();
 		fileOut.close();
 	}

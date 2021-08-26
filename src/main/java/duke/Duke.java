@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * A class representing the duke application.
+ */
 public class Duke {
     private static final String GREETING_MSG = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String GOODBYE_MSG = "Bye. Hope to see you again soon!";
@@ -127,6 +130,11 @@ public class Duke {
     }
 
 
+    /**
+     * Starts the duke application.
+     * 
+     * @param args Ignored arguments.
+     */
     public static void main(String[] args) {
         try {
             Duke duke = new Duke("data/duke.txt");
