@@ -1,5 +1,8 @@
 package bot.assembly.function;
 
+/**
+ * A class in charge of printing system response to the console
+ */
 public class BotPrinter {
 
     private final String HORIZONTAL_LINE =
@@ -7,12 +10,14 @@ public class BotPrinter {
                     "\t:::::.\\::::::::.\\::::::::.\\::::::::.\\::::::::.\\::::::::.\\::::::::.\\::::::::.\\\n" +
                     "\t'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `";
 
-    // Constructor
+    /**
+     * Constructor
+     */
     public BotPrinter(){}
 
     /**
-     * prints each input message within the two horizontal divider
-     * @param input
+     * A method that prints each system response message within the two horizontal divider
+     * @param input system feedback
      */
     public void print(String input){
         System.out.println(HORIZONTAL_LINE);

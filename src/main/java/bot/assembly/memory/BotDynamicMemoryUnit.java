@@ -14,8 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-
+/**
+ * A class that handles the task list
+ */
 public class BotDynamicMemoryUnit {
 
     BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
@@ -27,14 +28,28 @@ public class BotDynamicMemoryUnit {
     public List<Task> taskTracker = new ArrayList<Task>();
     private static BotDynamicMemoryUnit dynamicMemoryUnit = null;
 
+    /**
+     * Constructor
+     */
     public BotDynamicMemoryUnit() {}
 
+    /**
+     * A method that users generateEasyDataTaskFormat() method and convert the data
+     * in task list into String
+     * @return String single line data string
+     */
     public String produceStringData(){
         StringBuilder outputData = new StringBuilder();
         taskTracker.stream().forEach(x -> outputData.append(generateEasyDataTaskFormat(x)));
         return outputData.toString();
     }
 
+    /**
+     * A method that helps to format task in task list into the following format:
+     * Task Type | isDone | Task Title | DateTime for Event & Deadline Task
+     * @param task
+     * @return String single line data string
+     */
     public String generateEasyDataTaskFormat(Task task){
 
         String taskType = task.getTaskType();
@@ -60,6 +75,11 @@ public class BotDynamicMemoryUnit {
         }
     }
 
+    /**
+     * A method that saves String data generated produceStringData() method
+     * and save to the HARD_DISK_DATA_STORAGE_DIRECTORY as HARD_DISK_DATA_NAME
+     * @throws IOException if there is IO issue
+     */
     public void saveToHardDisk() throws IOException {
         FileWriter fw = new FileWriter(
                 String.format(
@@ -73,13 +93,26 @@ public class BotDynamicMemoryUnit {
         fw.close();
     }
 
+    /**
+     * A method to help parse the data from data.txt
+     * @param input
+     * @return String[] that contains the essential information of task
+     */
     public String[] tokenizeData(String input) {
         return input.split(" \\| ");
     }
 
+    /**
+     * A method that deciphers string data and create the respective task
+     * @param stringData
+     * @return Task
+     * @throws InvalidDataFormatException if data string is in the wrong format
+     */
     public Task decipherStringData(String stringData) throws InvalidDataFormatException {
+
         String[] stringDataToken = tokenizeData(stringData);
         String stringDataType = stringDataToken[0];
+
         try {
             switch (stringDataType){
                 case "T":
@@ -106,6 +139,10 @@ public class BotDynamicMemoryUnit {
         }
     }
 
+    /**
+     * A method to load the data.txt from the user's directory
+     * @throws IOException if there is IO issue
+     */
     public void loadFromHardDisk() throws IOException {
         try {
             File dataFile = new File(
@@ -116,6 +153,8 @@ public class BotDynamicMemoryUnit {
                     )
             );
 
+            // If data.txt cannot be found in the specified directory, then create a new data.txt
+            // in that directory
             if (dataFile.createNewFile()) {
                 return;
             }
@@ -127,15 +166,22 @@ public class BotDynamicMemoryUnit {
                 taskTracker.add(decipherStringData(data));
             }
             myReader.close();
+
         } catch (IOException e) {
             throw new InvalidFileException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_FILE);
         }
     }
 
+    /**
+     A method that ensures that only 1 BotDynamicMemoryUnit exists (Singleton)
+     */
     public static BotDynamicMemoryUnit getInstance() {
+
+        // create new BotDynamicMemoryUnit if it doesn't exit
         if (dynamicMemoryUnit == null) {
             dynamicMemoryUnit = new BotDynamicMemoryUnit();
         }
+
         return dynamicMemoryUnit;
     }
 }

@@ -8,6 +8,9 @@ import bot.assembly.task.Task;
 
 import java.util.List;
 
+/**
+ * A class that handles generation of responses to the user
+ */
 public class BotTaskStatusGeneratorUnit {
 
     BotPrinter botPrinter = new BotPrinter();
@@ -15,12 +18,15 @@ public class BotTaskStatusGeneratorUnit {
     BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
     List<Task> taskTracker = botDynamicMemoryUnit.taskTracker;
 
+    /**
+     * Constructor
+     */
     public BotTaskStatusGeneratorUnit() {}
 
     /**
-     *  A method to feedback to user of the new task added
+     * A method that generates a feedback message to the user when a task is added
      */
-    public void generateTaskFeedback(){
+    public void generateAddTaskFeedback(){
 
         String output = String.format(
                 "%s\n\t\t%s\n\t",
@@ -35,11 +41,10 @@ public class BotTaskStatusGeneratorUnit {
     }
 
     /**
-     * A method to format all tasks from the list into a single string for printing
-     * @return (String) formatted list of tasks
-     * @throws EmptyTaskListException for empty list
+     * A method that generates a summary report of all task in task list to the user
+     * @throws EmptyTaskListException if the task list is empty
      */
-    public void reportTaskTracker() throws EmptyTaskListException {
+    public void generateTaskTrackerReport() throws EmptyTaskListException {
 
         // throw empty list exception if task list is empty
         if (taskTracker.size() == 0) {

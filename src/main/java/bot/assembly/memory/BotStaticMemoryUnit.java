@@ -1,7 +1,8 @@
 package bot.assembly.memory;
 
-//  BotMemory imitates a bot's memory unit that stores the commonly used messages
-//  and tracks the tasks added
+/**
+ * A class that serves as a storage unit for (final) item
+ */
 public class BotStaticMemoryUnit {
 
     public final String LOGO =
@@ -82,6 +83,9 @@ public class BotStaticMemoryUnit {
     public final String ERROR_MESSAGE_INVALID_FILE = "WAIT! There are some errors with your file!";
     public final String ERROR_MESSAGE_INVALID_DATETIME_FORMAT = "I CANNOT UNDER THE TIMING FORMAT! Please input in the following format \n\t\t{yyyy-mm-ddThh:mm:ss}";
 
+    /**
+     * Constructor
+     */
     public BotStaticMemoryUnit(){}
 
 }
