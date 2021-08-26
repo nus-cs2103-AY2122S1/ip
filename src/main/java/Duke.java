@@ -1,4 +1,6 @@
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -72,14 +74,16 @@ public class Duke {
                     String time = "";
                     while (s.hasNext()) {
                         String temp = s.next();
-                        if (temp.equals("/by")) {
+                        if (temp.equals("-")) {
                             time = s.nextLine();
                         } else {
                             ddlName += temp + " ";
                         }
                     }
                     s.close();
-                    Deadline ddl = new Deadline(ddlName, time);
+                    time = time.strip();
+                    LocalDate ld = LocalDate.parse(time);
+                    Deadline ddl = new Deadline(ddlName, ld);
                     tasks.add(ddl);
                     System.out.println("Ok~ I've added the task:\n" + ddl.toString());
                 } else if (input.startsWith("event")) {
@@ -92,14 +96,16 @@ public class Duke {
                     String time = "";
                     while (s.hasNext()) {
                         String temp = s.next();
-                        if (temp.equals("/at")) {
+                        if (temp.equals("-")) {
                             time = s.nextLine();
                         } else {
                             eventName += temp + " ";
                         }
                     }
+                    time = time.strip();
                     s.close();
-                    Event event = new Event(eventName, time);
+                    LocalDate ld = LocalDate.parse(time);
+                    Event event = new Event(eventName, ld);
                     tasks.add(event);
                     System.out.println("Ok~ I've added the task:\n" + event.toString());
                 } else if (input.startsWith("delete")){
