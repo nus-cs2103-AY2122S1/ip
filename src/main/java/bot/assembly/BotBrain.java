@@ -1,7 +1,12 @@
 package bot.assembly;
 
-import bot.assembly.function.*;
-import bot.assembly.memory.*;
+
+import bot.assembly.function.BotPrinter;
+import bot.assembly.function.BotCommandResponderUnit;
+import bot.assembly.function.BotTaskStatusGeneratorUnit;
+import bot.assembly.memory.BotDynamicMemoryUnit;
+import bot.assembly.memory.BotStaticMemoryUnit;
+import bot.assembly.memory.CommandInput;
 
 import java.util.Scanner;
 
@@ -10,11 +15,11 @@ import java.util.Scanner;
  */
 public class BotBrain {
 
-    BotPrinter botPrinter = new BotPrinter();
-    BotCommandResponderUnit botCommandReceiverUnit = new BotCommandResponderUnit();
-    BotTaskStatusGeneratorUnit botTaskGeneratorUnit = new BotTaskStatusGeneratorUnit();
-    BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
-    BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
+    private BotPrinter botPrinter = new BotPrinter();
+    private BotCommandResponderUnit botCommandReceiverUnit = new BotCommandResponderUnit();
+    private BotTaskStatusGeneratorUnit botTaskGeneratorUnit = new BotTaskStatusGeneratorUnit();
+    private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
+    private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
 
     private boolean isTerminated = false;
 

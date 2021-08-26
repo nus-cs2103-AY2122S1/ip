@@ -13,13 +13,13 @@ public class BotPrinter {
     /**
      * Constructor
      */
-    public BotPrinter(){}
+    public BotPrinter() {}
 
     /**
      * A method that prints each system response message within the two horizontal divider
      * @param input system feedback
      */
-    public void print(String input){
+    public void print(String input) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println("\t" + input);
         System.out.println(HORIZONTAL_LINE);

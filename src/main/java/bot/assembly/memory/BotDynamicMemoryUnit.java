@@ -5,7 +5,8 @@ import bot.assembly.task.Deadline;
 import bot.assembly.task.Event;
 import bot.assembly.task.ToDo;
 import bot.assembly.function.BotTemporalUnit;
-import bot.assembly.error.*;
+import bot.assembly.error.InvalidDataFormatException;
+import bot.assembly.error.InvalidFileException;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,13 +20,14 @@ import java.util.Scanner;
  */
 public class BotDynamicMemoryUnit {
 
-    BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
-    BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
+    private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
+    private BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
 
-    public final String HARD_DISK_DATA_NAME = "data.txt";
-    public final String HARD_DISK_DATA_STORAGE_DIRECTORY = System.getProperty("user.home");
+    private final String HARD_DISK_DATA_NAME = "data.txt";
+    private final String HARD_DISK_DATA_STORAGE_DIRECTORY = System.getProperty("user.home");
 
     public List<Task> taskTracker = new ArrayList<Task>();
+
     private static BotDynamicMemoryUnit dynamicMemoryUnit = null;
 
     /**
@@ -38,7 +40,7 @@ public class BotDynamicMemoryUnit {
      * in task list into String
      * @return String single line data string
      */
-    public String produceStringData(){
+    private String produceStringData() {
         StringBuilder outputData = new StringBuilder();
         taskTracker.stream().forEach(x -> outputData.append(generateEasyDataTaskFormat(x)));
         return outputData.toString();
@@ -50,10 +52,11 @@ public class BotDynamicMemoryUnit {
      * @param task
      * @return String single line data string
      */
-    public String generateEasyDataTaskFormat(Task task){
+    private String generateEasyDataTaskFormat(Task task) {
 
         String taskType = task.getTaskType();
-        switch (taskType){
+
+        switch (taskType) {
             case "T": {
                 return String.format(
                         "%s | %s | %s\n",
@@ -81,6 +84,7 @@ public class BotDynamicMemoryUnit {
      * @throws IOException if there is IO issue
      */
     public void saveToHardDisk() throws IOException {
+
         FileWriter fw = new FileWriter(
                 String.format(
                         "%s/%s",
@@ -89,6 +93,7 @@ public class BotDynamicMemoryUnit {
                 ),
                 false
         );
+
         fw.write(produceStringData());
         fw.close();
     }
@@ -98,7 +103,7 @@ public class BotDynamicMemoryUnit {
      * @param input
      * @return String[] that contains the essential information of task
      */
-    public String[] tokenizeData(String input) {
+    private String[] tokenizeData(String input) {
         return input.split(" \\| ");
     }
 
@@ -108,7 +113,7 @@ public class BotDynamicMemoryUnit {
      * @return Task
      * @throws InvalidDataFormatException if data string is in the wrong format
      */
-    public Task decipherStringData(String stringData) throws InvalidDataFormatException {
+    private Task decipherStringData(String stringData) throws InvalidDataFormatException {
 
         String[] stringDataToken = tokenizeData(stringData);
         String stringDataType = stringDataToken[0];

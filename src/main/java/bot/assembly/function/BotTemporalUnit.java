@@ -12,7 +12,7 @@ public class BotTemporalUnit {
     /**
      * Constructor
      */
-    public BotTemporalUnit(){}
+    public BotTemporalUnit() {}
 
     /**
      * A method that converts datetime input from string to LocalDateTime
