@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class BotBrain {
 
     private BotPrinter botPrinter = new BotPrinter();
-    private BotCommandResponderUnit botCommandReceiverUnit = new BotCommandResponderUnit();
+    private BotCommandResponderUnit botCommandResponderUnit = new BotCommandResponderUnit();
     private BotTaskStatusGeneratorUnit botTaskGeneratorUnit = new BotTaskStatusGeneratorUnit();
     private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
     private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
@@ -37,7 +37,7 @@ public class BotBrain {
      */
     private void reactToCommand(String input) throws Exception {
 
-        CommandInput commandInitial = botCommandReceiverUnit.identifyCommand(input);
+        CommandInput commandInitial = botCommandResponderUnit.identifyCommand(input);
 
         switch (commandInitial) {
             case BYE:
@@ -48,13 +48,16 @@ public class BotBrain {
                 botTaskGeneratorUnit.generateTaskTrackerReport();
                 break;
             case DONE:
-                botCommandReceiverUnit.markTaskAsDone(input);
+                botCommandResponderUnit.markTaskAsDone(input);
                 break;
             case DELETE:
-                botCommandReceiverUnit.deleteTaskFromList(input);
+                botCommandResponderUnit.deleteTaskFromList(input);
+                break;
+            case FIND:
+                botCommandResponderUnit.findTaskFromList(input);
                 break;
             default:
-                botCommandReceiverUnit.addTask(input);
+                botCommandResponderUnit.addTask(input);
                 botTaskGeneratorUnit.generateAddTaskFeedback();
         }
     }

@@ -13,6 +13,8 @@ import bot.assembly.task.Deadline;
 import bot.assembly.task.Event;
 import bot.assembly.task.ToDo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -221,6 +223,75 @@ public class BotCommandResponderUnit {
         taskTracker.remove(removedTask);
 
         botPrinter.print(output);
+    }
+
+    // input: find fun
+    private void checkFindTaskFormat(String input) throws InvalidCommandFormatException {
+        String[] inputToken = tokenize(input);
+
+        if (inputToken.length == 1) {
+            throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
+        }
+    }
+
+    // input: find fun joy happy
+    public void findTaskFromList(String input) throws InvalidCommandFormatException{
+
+        // 1. check the input format -> whether is correct or not (Done)
+        // 2. parsing of data in to token (Done)
+        // 3. create data structure to temporary store the String data (Done)
+        // 4. Iterate through each token, check by keyword (Done)
+        //      i) check if the DS already contains the task, yes -> add
+        //      ii) else skip
+        // 5. Check if the DS is empty
+        // 6. If empty -> print some feedback
+        //      i) create feedback message in static memory
+        // 7. Not empty -> print proper message
+        //      i) create opening message in static memory
+        //      ii) format way to print
+        //      iii) create summary message in static meory
+        checkFindTaskFormat(input);
+
+        // fun joy happy
+        String keyword = tokenize(input)[1];
+        // [fun, joy, happy]
+        String[] keywordToken = keyword.split(" ");
+
+        List<String> taskToStringList = new ArrayList<String>();
+        List<String> searchResultList = new ArrayList<String>();
+        botDynamicMemoryUnit.taskTracker.stream().forEach(x -> taskToStringList.add(x.toString()));
+
+        for (String eachKeyword : keywordToken) {
+            for (String eachTaskString : taskToStringList) {
+                if (eachTaskString.contains(eachKeyword) && !searchResultList.contains(eachTaskString)) {
+                    searchResultList.add("\t\t" + eachTaskString + "\n");
+                }
+            }
+        }
+
+        String keywordOutput = "";
+        for (String eachKeyword : keywordToken) {
+            keywordOutput += "\t\t" + eachKeyword + "\n";
+        }
+
+        if (searchResultList.isEmpty()) {
+
+            botPrinter.print(botStaticMemoryUnit.MESSAGE_KEYWORD_NO_FOUND + keywordOutput);
+
+        } else {
+            String taskFoundOutput = "";
+            for (String searchResult : searchResultList) {
+                taskFoundOutput += searchResult;
+            }
+
+            botPrinter.print(String.format(
+                    botStaticMemoryUnit.MESSAGE_TASK_FOUND,
+                    keywordOutput,
+                    taskFoundOutput
+                    )
+            );
+        }
+
     }
 
     /**
