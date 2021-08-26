@@ -80,7 +80,7 @@ public class Deadline extends Task {
     /**
      * Returns the Deadline object in a string format.
      *
-      * @return String in the format of "[D][marked as done?]_deadlineDescription_(by:_deadline)."
+     * @return String in the format of "[D][marked as done?]_deadlineDescription_(by:_deadline)."
      */
     @Override
     public String toString() {

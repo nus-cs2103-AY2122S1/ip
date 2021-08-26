@@ -12,7 +12,7 @@ public class Ui {
      *
      * @param taskList The user's current todo list.
      */
-    public void startMessage(ArrayList<Task> taskList) {
+    public void printStartMessage(ArrayList<Task> taskList) {
         System.out.println("Hello I am Duke.\nWhat can I do for you?");
         System.out.println();
         if (taskList.size() > 0) {

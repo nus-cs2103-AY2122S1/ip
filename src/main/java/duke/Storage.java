@@ -25,7 +25,7 @@ public class Storage {
      * @return True if a file is created successfully.
      * False if the file already exists or an error occurred.
      */
-    public boolean createdFile() {
+    public boolean hasCreatedFile() {
         try {
             File file = new File(this.filePath);
             if (file.createNewFile()) {
