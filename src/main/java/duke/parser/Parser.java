@@ -1,6 +1,15 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ErrorCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 /**
  * The Parser class encapsulates the dealing of user commands by Duke.
