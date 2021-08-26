@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -12,8 +13,19 @@ public class Items {
      */
     private ArrayList<Task> list;
 
+    /**
+     * Constructor for Items
+     */
     public Items() {
         list = new ArrayList<>();
+    }
+
+    /**
+     * Constructor for Items
+     * @param tasks An ArrayList of Tasks
+     */
+    public  Items(ArrayList<Task> tasks) {
+        list = tasks;
     }
 
     /**
@@ -78,11 +90,24 @@ public class Items {
      * The String representation of the Items object
      * @return The string representation of the Items object
      */
+    @Override
     public String toString() {
-        String str = "This your task in list:\n";
+        StringBuilder str = new StringBuilder();
+        for (Task task : list) {
+            str.append(task.toString()).append("\n");
+        }
+        return str.toString();
+    }
+
+    /**
+     * Return the message of the status of the Task List
+     * @return the status message of the Task List
+     */
+    public String getListMessage() {
+        StringBuilder str = new StringBuilder("This your task in list:\n");
         int size = list.size();
         for (int i = 0; i < size; ++i) {
-            str += " " + (i + 1) + ". " + list.get(i).toString() + "\n";
+            str.append(" ").append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
         }
         return size == 0 ? "You currently have nothing in your list" : str.substring(0, str.length() - 1);
     }

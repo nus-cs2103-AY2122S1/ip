@@ -4,6 +4,7 @@
 public class DukeException extends Exception{
 
     public enum Errors {
+        FILE_NOT_FOUND      ("Saved File not found"),
         INVALID_COMMAND     ("what you mean? Do: `help` to view all commands."),
         MISSING_DESCRIPTION ("Command is missing a description."),
         MISSING_DATE        ("Command is missing a date."),
@@ -11,7 +12,8 @@ public class DukeException extends Exception{
         INVALID_TIME        ("The time is invalid.  Do `dates` command to see all possible time."),
         INVALID_ARGUMENT    ("The argument is invalid."),
         WRONG_ARGUMENT_TYPE ("Invalid argument type."),
-        TASK_NOT_FOUND      ("No task found.");
+        TASK_NOT_FOUND      ("No task found."),
+        SAVE_FAIL           ("Failed to save current state");
 
         private final String description;
 

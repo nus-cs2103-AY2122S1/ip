@@ -13,37 +13,32 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Duke {
-    /**
-     * Global Variables
-     */
-    private static final String DATA_DIRECTORY = "./data";
-    private static final String DATA_FILE = "duke.txt";
-    private static final String DATA_FILE_DIRECTORY = DATA_DIRECTORY + "/" + DATA_FILE;
+
     private Ui ui;
     private Constants constants;
+    private Storage storage;
+    private Items list;
 
-    public Duke() {
+    public Duke(String directory, String file) {
         ui = new Ui();
         constants = new Constants();
+        storage = new Storage(directory, file);
+        try {
+            list = new Items(storage.load());
+        } catch (DukeException e) {
+            ui.showMessage(e.getMessage());
+            list = new Items();
+        }
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("./data", "duke.txt").run();
     }
 
     /**
      * The main function of Borat
      */
     public void run() {
-        // The list of the Borat app
-        Items list = new Items();
-
-        // Read from saved file.
-        List<String> fileContent = readSaved(list);
-        if (fileContent == null) {
-            System.out.println("File read error");
-            return;
-        }
 
         // Greetings
         ui.showGreetings();
@@ -69,7 +64,7 @@ public class Duke {
                         break label;
                     case list:
                         // Displays the tasks in the list
-                        output = list.toString();
+                        output = list.getListMessage();
 
                         break;
                     case done:
@@ -77,9 +72,9 @@ public class Duke {
                         // Marks a task as done.
                         output = list.markDone(idx);
                         // Edit the file content.
-                        task = fileContent.get(idx - 1);
+                        task = storage.getFileLine(idx - 1);
                         task = task.substring(0, 4) + "1" + task.substring(5);
-                        fileContent.set(idx - 1, task);
+                        storage.updateLineFile(idx - 1, task);
 
                         break;
                     case todo:
@@ -87,7 +82,7 @@ public class Duke {
                         output = list.addItem(new Todo(input[1]));
                         // Add to file content.
                         task = "T | 0 | " + input[1];
-                        fileContent.add(task);
+                        storage.addToFile(task);
 
                         break;
                     case deadline:
@@ -95,7 +90,7 @@ public class Duke {
                         output = list.addItem(new Deadline(input[1], input[2]));
                         // Add to file content.
                         task = "D | 0 | " + input[1] + " | " + input[2];
-                        fileContent.add(task);
+                        storage.addToFile(task);
 
                         break;
                     case event:
@@ -103,7 +98,7 @@ public class Duke {
                         output = list.addItem(new Event(input[1], input[2]));
                         // Add to file content.
                         task = "E | 0 | " + input[1] + " | " + input[2];
-                        fileContent.add(task);
+                        storage.addToFile(task);
 
                         break;
                     case delete:
@@ -111,13 +106,12 @@ public class Duke {
                         // Delete an event from the list.
                         output = list.removeItem(id);
                         // Remove from file content.
-                        fileContent.remove(id-1);
+                        storage.removeFromFile(id-1);
 
                         break;
                     case dates:
                         output = ui.getAllAcceptedDates();
                 }
-                Files.write(Paths.get(DATA_FILE_DIRECTORY), fileContent, StandardCharsets.UTF_8);
                 ui.showMessage(output);
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());
@@ -133,65 +127,6 @@ public class Duke {
          * Good bye message from Borat
          */
         ui.showMessage("Bye. Have a good time!");
-    }
-
-
-    /**
-     * Read the data from a file and save it to the given list.
-     * @param list The list of tasks
-     * @return Each line of the file in a list.
-     */
-    private List<String> readSaved(Items list) {
-        // Make directory and/or file if they don't exist
-        File dataDir = new File(DATA_DIRECTORY);
-        dataDir.mkdirs();
-        File dataFile = new File(DATA_DIRECTORY + "/" + DATA_FILE);
-        try {
-            dataFile.createNewFile();
-        } catch (IOException e) {
-            System.out.println("Failed to create a new file");
-            return null;
-        }
-
-        List<String> fileContent = new ArrayList<>();
-        try {
-            Scanner fileReader = new Scanner(dataFile);
-            while (fileReader.hasNextLine()) {
-                String rawData = fileReader.nextLine();
-                fileContent.add(rawData);
-                String[] data = rawData.split(" \\| ");
-                String taskType = data[0];
-                boolean isDone = data[1].equals("1");
-                Task task = null;
-                switch (taskType) {
-                    case "T":
-                        // Add a todo task.
-                        task = new Todo(data[2]);
-
-                        break;
-                    case "D":
-                        // Add a deadline task.
-                        task = new Deadline(data[2], data[3]);
-
-                        break;
-                    case "E":
-                        // Add an event task.
-                        task = new Event(data[2], data[3]);
-                }
-                if (task != null) {
-                    if (isDone) {
-                        task.markDone();
-                    }
-                    list.addItem(task);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            ui.showMessage("No Saved data found");
-            return null;
-        } catch (DukeException e) {
-            ui.showMessage("Loading Saved Data Fault: " + e.getMessage());
-        }
-        return fileContent;
     }
 
 
