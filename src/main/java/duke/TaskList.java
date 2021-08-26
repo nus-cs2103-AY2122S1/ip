@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TaskList {
+
     private ArrayList<Task> xs = new ArrayList<>();
 
     public TaskList(File file) throws DukeException {
@@ -77,7 +78,6 @@ public class TaskList {
                 }
                 xs.add(e);
             }
-
         }
         fileScanner.close();
     }
