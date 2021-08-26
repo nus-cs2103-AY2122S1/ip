@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 class User {
     Scanner sc = new Scanner(System.in);
     public String command() {
@@ -63,6 +65,7 @@ class DukeException extends Exception {
     public DukeException(String message) {
         this.message = message;
     }
+    @Override
     public String toString() {
         return message;
     }
@@ -72,6 +75,7 @@ class EmptyDescriptionException extends DukeException {
     public EmptyDescriptionException(String message) {
         super(message);
     }
+    @Override
     public String toString() {
         return super.toString();
     }
@@ -96,7 +100,7 @@ public class Duke {
         System.out.println("Hello from Duke!");
         System.out.println("Hope you are doing well. How can I help you?");
         User user1 = new User();
-        List<Task> userList = new ArrayList<>();
+        ArrayList<Task> userList = new ArrayList<>();
         while (true) {
             String command = user1.command();
             if (command.equals("")) {
