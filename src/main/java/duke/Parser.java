@@ -23,6 +23,7 @@ public class Parser {
 
     /**
      * Parses the user input to return the different types of Command which will then be processed accordingly.
+     *
      * @param fullCommand user input
      * @return the command based on the user input
      * @throws InvalidInputException if 'done' or 'delete' command is not preceded by a number
@@ -77,6 +78,7 @@ public class Parser {
 
     /**
      * Parses the user input for 'deadline' for readability.
+     *
      * @param deadlineDescription user input description and time of the 'deadline' task
      * @return array of 2 elements where 1st element = 'deadline' description, 2nd element = time
      */
@@ -89,6 +91,7 @@ public class Parser {
 
     /**
      * Parses the user input for 'event' for readability.
+     *
      * @param eventDescription user input description and time of the 'event' task
      * @return array of 2 elements where 1st element = 'event' description, 2nd element = time
      */
@@ -102,6 +105,7 @@ public class Parser {
     /**
      * Reads the input date in 'YYYY-MM-DD TIME' format and converts it to local date format.
      * If time is specified, it will be parsed as well. Otherwise, the output will not include the time.
+     *
      * @param inputDate 'YYYY-MM-DD TIME' format i.e '2021-08-25'
      * @return String output in local date format i.e '2021-08-25' --> Aug 25 2021
      */

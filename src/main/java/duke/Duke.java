@@ -23,6 +23,7 @@ public class Duke {
 
     /**
      * Initialises the Duke object which will run the main program.
+     *
      * @param filePath user specified file path to store/load saved data
      */
     Duke(String filePath)  {

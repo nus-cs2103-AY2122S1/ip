@@ -98,6 +98,12 @@ public class Ui {
         System.out.println("   INVALID INPUT: Start the sentence with either 'todo'/'deadline'/'event'/'list'/'done'/'delete'/'bye'");
     }
 
+    /**
+     * Helper method used by printList(TaskList lst) and printFoundTasks(ArrayList<Task> listOfTasks, String keyWord)
+     * Processes the list and concatenates the toString() values of tasks into a readable format
+     *
+     * @param listOfTasks The list to be processed (filtered by prior conditions in other functions)
+     */
     public String processList(ArrayList<Task> listOfTasks) {
         String output = "";
         boolean isEmptyList = false;
@@ -116,6 +122,11 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Prints out all the tasks in the list
+     *
+     * @param lst current session's most updated list
+     */
     public void printList(TaskList lst) {
         if (lst.getListOfTasks().size() == 0) {
             System.out.println("   Current List is empty...");
@@ -126,6 +137,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints out all matching tasks in the list which contains the keyword
+     *
+     * @param listOfTasks ArrayList of current session's most updated list
+     * @param keyWord user input
+     */
     public void printFoundTasks(ArrayList<Task> listOfTasks, String keyWord) {
         if (listOfTasks.size() == 0) {
             System.out.println(String.format("  No matching tasks containing '%s' could be found :(", keyWord));

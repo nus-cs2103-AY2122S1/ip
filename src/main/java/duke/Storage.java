@@ -53,6 +53,7 @@ public class Storage {
 
     /**
      * Helper function to determine if the specified directory exists.
+     *
      * @return true if directory exists. false if any parent/child directory is missing in the file path.
      */
     public static boolean isValidDirectory(String filePath) {
@@ -72,6 +73,7 @@ public class Storage {
     /**
      * Reads the file upon app startup and attempts to load the data into a list for TaskList.java to parse.
      * Creates a new .txt file if specified .txt file is not found within the directory.
+     *
      * @return list of all tasks saved from the previous session.
      * @throws DukeException if error occurs while attempting to create a new file.
      */
