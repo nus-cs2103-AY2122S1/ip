@@ -25,6 +25,10 @@ public class Task {
         return this.isDone + "|" + this.taskName;
     }
 
+    public boolean containsPhrase(String phrase) {
+        return taskName.contains(phrase);
+    }
+
     public boolean hasSameDate(LocalDate date) {
         return false;
     }

@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.DueCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.OnDateCommand;
 
@@ -52,6 +53,8 @@ public class Parser {
             return new OnDateCommand(input);
         case "DUE":
             return new DueCommand(input);
+        case "FIND":
+            return new FindCommand(input);
         default:
             throw new DukeException("You have entered an invalid command.");
         }

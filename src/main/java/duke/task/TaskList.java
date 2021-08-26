@@ -128,6 +128,17 @@ public class TaskList {
         return new TaskList(newTasks);
     }
 
+    public TaskList findTasks(String input) throws DukeException {
+        if (input.length() <= 4) {
+            throw new DukeException("Please type in a keyphrase to search your tasks with.");
+        }
+        String keyphrase = input.substring(5);
+        List<Task> foundTasks = tasks.stream()
+                .filter(task -> task.containsPhrase(keyphrase))
+                .collect(Collectors.toList());
+        return new TaskList(foundTasks);
+    }
+
     public TaskList getDueTasks(String input) {
         // Check if input is valid and input number is an integer
         if (input.length() <= 4 || !input.substring(4, input.length() - 1).matches("\\d+")) {
