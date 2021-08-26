@@ -23,7 +23,7 @@ public enum Command {
 	}
 
 	/**
-	 * Returns Command enum
+	 * Returns Command enum.
 	 *
 	 * @param input input String of a line
 	 * @return Command enum
@@ -56,7 +56,6 @@ public enum Command {
 			return INVALID_COMMAND;
 		}
 		}
-
 	}
 }
 
