@@ -6,7 +6,7 @@ import duke.tasks.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     int index;
 
@@ -15,7 +15,7 @@ public class DoneCommand extends Command{
     }
 
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return false;
     }
 

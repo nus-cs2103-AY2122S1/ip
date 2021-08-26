@@ -9,14 +9,14 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private Scanner sc;
+    private final Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
     public void init() {
-        System.out.println(Constants.logo + Constants.HELLO + Constants.LINE);
+        System.out.println(Constants.LOGO + Constants.HELLO + Constants.LINE);
     }
 
     public String read() {

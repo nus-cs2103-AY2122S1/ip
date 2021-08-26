@@ -6,23 +6,22 @@ import duke.parser.*;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-import java.io.IOException;
 
 public class Duke {
 
     private TaskList taskList;
-    private Ui ui;
-    private Storage storage;
-    private String filePath = "./data/duke.txt";
-    private String folderPath = "./data";
+    private final Ui ui;
+    private final Storage storage;
+    private final String FILEPATH = "./data/duke.txt";
+    private final String FOLDERPATH = "./data";
 
     public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath, folderPath);
+        storage = new Storage(FILEPATH, FOLDERPATH);
         taskList = new TaskList();
         try {
             storage.readTasks(taskList);
-        } catch (DukeException | IOException ex) {
+        } catch (DukeException ex) {
             ui.displayLoadingError(ex);
             taskList = new TaskList();
         }

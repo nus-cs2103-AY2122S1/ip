@@ -2,12 +2,11 @@ package duke.utils;
 
 public class Constants {
     private Constants() {
-
     }
 
     public static final String HELLO = "\nHello! I'm Duke\nWhat can I do for you?\n";
     public static final String LINE = "=================================================================";
-    public static final String logo = " ____        _        \n"
+    public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -19,6 +18,4 @@ public class Constants {
             "deadline [deadline_description] /by [deadline_date]";
     public static final String EVENT_FORMAT = "\nPlease use the following format:\n" +
             "event [event_description] /at [event_date_and_time]";
-
-
 }

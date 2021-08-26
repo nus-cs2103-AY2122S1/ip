@@ -11,7 +11,8 @@ public class DateTimeParser extends Parser {
 
     public static LocalDate deadlineDateParse(String date) {
         try {
-            return LocalDate.parse(date, DateTimeFormatter.ofPattern("uuuu-MM-dd").withResolverStyle(ResolverStyle.STRICT));
+            return LocalDate.parse(date, DateTimeFormatter.ofPattern("uuuu-MM-dd")
+                    .withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException ex) {
            throw new IncorrectFormatException("Incorrect date format! " +
                    "\nPlease enter a valid date in the given format:" +
@@ -21,7 +22,8 @@ public class DateTimeParser extends Parser {
 
     public static LocalDate readDate(String date) {
         try {
-            return LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM dd uuuu").withResolverStyle(ResolverStyle.STRICT));
+            return LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM dd uuuu")
+                    .withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException ex) {
             ex.printStackTrace();
             throw new IncorrectFormatException("The date has been stored in the wrong format");
@@ -32,7 +34,8 @@ public class DateTimeParser extends Parser {
 
     public static LocalDateTime eventDateTimeParse(String dateTime) {
         try {
-            return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm").withResolverStyle(ResolverStyle.STRICT));
+            return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm")
+                    .withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException ex) {
             throw new IncorrectFormatException("Incorrect date and time format! " +
                     "\nPlease enter a valid date in the given format:" +
@@ -42,7 +45,8 @@ public class DateTimeParser extends Parser {
 
     public static LocalDateTime readDateTime(String dateTime) {
         try {
-            return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("MMM dd uuuu HHmm").withResolverStyle(ResolverStyle.STRICT));
+            return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("MMM dd uuuu HHmm")
+                    .withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException ex) {
             System.out.println(ex.toString());
             throw new IncorrectFormatException("The date and time have been stored in the wrong format");
