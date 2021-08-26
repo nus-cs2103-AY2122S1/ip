@@ -1,13 +1,12 @@
 package bot.assembly.function;
 
-import bot.assembly.function.BotTaskStatusGeneratorUnit;
-import bot.assembly.function.BotPrinter;
-import bot.assembly.function.BotTemporalUnit;
-import bot.assembly.function.BotCommandResponderUnit;
 import bot.assembly.memory.BotStaticMemoryUnit;
 import bot.assembly.memory.BotDynamicMemoryUnit;
 import bot.assembly.memory.CommandInput;
-import bot.assembly.error.*;
+import bot.assembly.error.InvalidCommandException;
+import bot.assembly.error.InvalidCommandFormatException;
+import bot.assembly.error.TaskOutOfRangeException;
+import bot.assembly.error.InvalidTaskIndexException;
 
 import bot.assembly.task.Task;
 import bot.assembly.task.Deadline;
@@ -16,25 +15,34 @@ import bot.assembly.task.ToDo;
 
 import java.util.List;
 
+/**
+ * A class that handles the command input of the user
+ */
 public class BotCommandResponderUnit {
 
-    BotPrinter botPrinter = new BotPrinter();
-    BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
-    BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
-    BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
+    private BotPrinter botPrinter = new BotPrinter();
+    private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
+    private BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
+    private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
 
-    List<Task> taskTracker = botDynamicMemoryUnit.taskTracker;
+    /**
+     * ArrayList as a main data structure to store Task
+     */
+    private List<Task> taskTracker = botDynamicMemoryUnit.taskTracker;
 
+    /**
+     * Constructor
+     */
     public BotCommandResponderUnit() {}
 
     /**
-     * Tokenizes input to 2 parts:
+     * A method that tokenizes the command input to 2 parts:
      * 1. Command Type
      * 2. Rest of the command
-     * @param input
+     * @param input command input
      * @return [Command Type, Rest of the command]
      */
-    public String[] tokenize(String input) {
+    private String[] tokenize(String input) {
 
         String[] token = input.split(" ", 2);
 
@@ -42,24 +50,30 @@ public class BotCommandResponderUnit {
     }
 
     /**
-     * Check the type of command, whether we can recognise
-     * if can, then add the newly instantiated task into the task tracker
-     * @param input
-     * @throws InvalidCommandException for any commands that cannot be recognised
-     * @throws InvalidCommandFormatException for wrong format of command
+     * A method that checks the type of command and proceed to break down the command into
+     * 1) Task Title
+     * 2) Task DateTime (format: ISO_LOCAL_DATE_TIME)
+     *
+     * Then proceed to create the respective task and add into the task list
+     * @param input command input
+     * @throws InvalidCommandException if the command input entered is not TODO, EVENT, DEADLINE
+     * @throws InvalidCommandFormatException if the command input entered is in the wrong format
      */
-    public void addTask(String input) throws InvalidCommandException, InvalidCommandFormatException{
+    public void addTask(String input) throws InvalidCommandException, InvalidCommandFormatException {
 
         String[] inputToken = tokenize(input);
+
         CommandInput taskType = identifyCommand(input);
 
         switch (taskType) {
 
             case TODO:
 
-                //  throw invalid format exception if "todo" is entered without anymore information
+                //  throw InvalidCommandFormatException if command input is entered without task title
                 if (inputToken.length == 1) {
-                    throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
+                    throw new InvalidCommandFormatException(
+                            botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT
+                    );
                 }
 
                 taskTracker.add(
@@ -72,9 +86,11 @@ public class BotCommandResponderUnit {
 
                 String[] deadlineTask = inputToken[1].split(" /by ", 2);
 
-                // throw invalid format exception if deadline is not in the format of "task /by time"
+                // throw InvalidCommandFormatException if command input does not contain task title and task datetime
                 if (deadlineTask.length != 2) {
-                    throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
+                    throw new InvalidCommandFormatException(
+                            botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT
+                    );
                 }
 
                 taskTracker.add(
@@ -90,9 +106,11 @@ public class BotCommandResponderUnit {
 
                 String[] eventTask = inputToken[1].split(" /at ", 2);
 
-                // throw invalid command format if event is not in the format of "task /at time"
+                // throw InvalidCommandFormatException if command input does not contain task title and task datetime
                 if (eventTask.length != 2) {
-                    throw new InvalidCommandFormatException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT);
+                    throw new InvalidCommandFormatException(
+                            botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND_FORMAT
+                    );
                 }
 
                 taskTracker.add(
@@ -105,43 +123,47 @@ public class BotCommandResponderUnit {
                 break;
 
             default:
+                //  throw InvalidCommandException if all 3 cases above are not triggered
                 throw new InvalidCommandException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_COMMAND);
         }
     }
 
     /**
      * A method to check if the index entered by the user are truly an Integer:
-     * 1. done
-     * 2. delete
-     * @param str
-     * @return
+     * This method is specifically used by command type of:
+     * 1) Done
+     * 2) Delete
+     * @param str index of command input
+     * @return true if command input's index can be converted to Integer
      */
     private boolean isInteger(String str) {
         try {
             Integer.parseInt(str);
             return true;
-        } catch(NumberFormatException e){
+        } catch(NumberFormatException e) {
             return false;
         }
     }
 
     /**
-     * A method to check the validity of the index entered for:
-     * 1. mark task as done
-     * 2. delete task from list
-     * @param input
-     * @throws TaskOutOfRangeException
-     * @throws InvalidTaskIndexException
+     * A method to check the validity of the index entered
+     * This method is specifically used by command type of:
+     * 1) Done
+     * 2) Delete
+     * @param input command input
+     * @throws TaskOutOfRangeException if index entered is out of the range of the task list
+     * @throws InvalidTaskIndexException if the command input's index entered cannot be converted to Integer
      */
     private void checkTaskListModificationCommand(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
 
-        // throw invalid index exception if index entered is not an Integer
+        // throw InvalidTaskIndexException if index entered is not an Integer
         if (!isInteger(input.split(" ", 2)[1])) {
             throw new InvalidTaskIndexException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_TASK_INDEX);
         }
 
         Integer index = Integer.parseInt(input.split(" ", 2)[1]);
-        //  if the list is empty
+
+        // throw TaskOutOfRangeException if the index entered is out of task list's range or when the task list is empty
         if (index - 1 > taskTracker.size() || taskTracker.size() == 0) {
             throw new TaskOutOfRangeException(botStaticMemoryUnit.ERROR_MESSAGE_TASK_OUT_OF_RANGE);
         }
@@ -149,21 +171,23 @@ public class BotCommandResponderUnit {
     }
 
     /**
-     * A method to mark the task's isDone to be true
-     * and provide some feedback to notify the users
-     * @param input
-     * @throws TaskOutOfRangeException
-     * @throws InvalidTaskIndexException
+     * A method to check off a task and mark it as done
+     * Then proceed to report feedback to user
+     * @param input command input
+     * @throws TaskOutOfRangeException if index entered is out of the range of the task list
+     * @throws InvalidTaskIndexException if the command input's index entered cannot be converted to Integer
      */
     public void markTaskAsDone(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
 
+        // verify the command entered
         checkTaskListModificationCommand(input);
 
         Integer index = Integer.parseInt(input.split(" ", 2)[1]);
         Task completedTask = taskTracker.get(index-1);
         completedTask.markAsDone();
 
-        String output = String.format("%s\n\t\t%s%s\n\t%s",
+        String output = String.format(
+                "%s\n\t\t%s%s\n\t%s",
                 botStaticMemoryUnit.MESSAGE_TASK_COMPLETE,
                 (index) + ". ",
                 completedTask,
@@ -174,23 +198,24 @@ public class BotCommandResponderUnit {
 
     /**
      * A method to delete a task from the list
-     * and provide some feedback to notify the users
-     * @param input
-     * @throws TaskOutOfRangeException
-     * @throws InvalidTaskIndexException
+     * and provide feedback to notify the users
+     * @param input command input
+     * @throws TaskOutOfRangeException if index entered is out of the range of the task list
+     * @throws InvalidTaskIndexException if the command input's index entered cannot be converted to Integer
      */
     public void deleteTaskFromList(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
 
+        // verify the command entered
         checkTaskListModificationCommand(input);
 
         Integer index = Integer.parseInt(input.split(" ", 2)[1]);
         Task removedTask = taskTracker.get(index-1);
 
-        String output = String.format("%s\n\t\t%s%s\n\t",
+        String output = String.format(
+                "%s\n\t\t%s%s\n\t",
                 botStaticMemoryUnit.MESSAGE_REMOVE_TASK,
                 (index) + ". ",
                 removedTask);
-
         output += String.format(botStaticMemoryUnit.MESSAGE_ADD_TASK_SUMMARY, taskTracker.size() - 1);
 
         taskTracker.remove(removedTask);
@@ -199,14 +224,16 @@ public class BotCommandResponderUnit {
     }
 
     /**
-     * A method to identify the command types
-     * and Convert from String to Enum
+     * A method to identify the purpose of the command
+     * and convert the purpose of the command from string to enum
      * @param command
      * @return enum CommandInput
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException if the command entered is not in CommandInput
      */
     public CommandInput identifyCommand(String command) throws InvalidCommandException{
+
         String commandInitial = command.trim().split(" ")[0];
+
         try {
             CommandInput taskType = CommandInput.valueOf(commandInitial.toUpperCase());
             return taskType;

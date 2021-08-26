@@ -2,44 +2,51 @@ package bot.assembly.function;
 
 import bot.assembly.memory.BotStaticMemoryUnit;
 import bot.assembly.memory.BotDynamicMemoryUnit;
-import bot.assembly.error.*;
+import bot.assembly.error.EmptyTaskListException;
 
 import bot.assembly.task.Task;
 
 import java.util.List;
 
+/**
+ * A class that handles generation of responses to the user
+ */
 public class BotTaskStatusGeneratorUnit {
 
-    BotPrinter botPrinter = new BotPrinter();
-    BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
-    BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
-    List<Task> taskTracker = botDynamicMemoryUnit.taskTracker;
+    private BotPrinter botPrinter = new BotPrinter();
+    private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
+    private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
+    private List<Task> taskTracker = botDynamicMemoryUnit.taskTracker;
 
+    /**
+     * Constructor
+     */
     public BotTaskStatusGeneratorUnit() {}
 
     /**
-     *  A method to feedback to user of the new task added
+     * A method that generates a feedback message to the user when a task is added
      */
-    public void generateTaskFeedback(){
+    public void generateAddTaskFeedback() {
 
         String output = String.format(
                 "%s\n\t\t%s\n\t",
                 botStaticMemoryUnit.MESSAGE_ADD_TASK_NOTICE,
-                taskTracker.get(taskTracker.size()-1).toString());
+                taskTracker.get(taskTracker.size()-1).toString()
+        );
 
         output+= String.format(
                 botStaticMemoryUnit.MESSAGE_ADD_TASK_SUMMARY,
-                taskTracker.size());
+                taskTracker.size()
+        );
 
         botPrinter.print(output);
     }
 
     /**
-     * A method to format all tasks from the list into a single string for printing
-     * @return (String) formatted list of tasks
-     * @throws EmptyTaskListException for empty list
+     * A method that generates a summary report of all task in task list to the user
+     * @throws EmptyTaskListException if the task list is empty
      */
-    public void reportTaskTracker() throws EmptyTaskListException {
+    public void generateTaskTrackerReport() throws EmptyTaskListException {
 
         // throw empty list exception if task list is empty
         if (taskTracker.size() == 0) {
@@ -49,7 +56,15 @@ public class BotTaskStatusGeneratorUnit {
         StringBuilder formattedTask = new StringBuilder();
         formattedTask.append(botStaticMemoryUnit.MESSAGE_TASK_REPORT + "\n\t");
         taskTracker.stream().
-                forEach(x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n\t"));
+                forEach(
+                        x -> formattedTask.append(
+                                (taskTracker.indexOf(x) + 1)
+                                        + ". "
+                                        + x.toString()
+                                        + "\n\t"
+                        )
+                );
+
         formattedTask.append("(end)");
 
         botPrinter.print(formattedTask.toString());
