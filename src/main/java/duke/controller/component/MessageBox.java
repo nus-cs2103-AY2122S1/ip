@@ -8,6 +8,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * MessageBox component.
+ */
 public class MessageBox extends Label {
 
     /**
@@ -43,8 +46,8 @@ public class MessageBox extends Label {
         setLayoutY(layoutY);
         setPadding(new Insets(10, 10, 10, 10));
         setBackground(
-            new Background(
-                new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+                new Background(
+                        new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         setPrefWidth(200);
         setMinHeight(65);
         setFont(new Font(15));
