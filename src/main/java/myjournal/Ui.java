@@ -13,11 +13,14 @@ public class Ui {
      */
     public void welcomeMessage() {
         System.out.println("Hello!\n"
-                + "1. Type a task (todo/event/deadline) to be added into your task list.\n"
+                + "1. Type a task (todo/event/deadline) to be added into your task list,\n"
+                + "followed by the time for events and due date for deadlines \n"
+                + "in form of yyyy-mm-dd for date and hh:mm for time.\n"
                 + "2. Type 'list' if you want to generate your task list.\n"
                 + "3. Type 'done [number]' to mark a task as done.\n"
                 + "4. Type 'delete [number]' to delete a task.\n"
-                + "5. Type 'bye' to exit");
+                + "5. Type 'find [keyword]' to get the list of tasks with that keyword.\n"
+                + "6. Type 'bye' to exit");
     }
 
     /**

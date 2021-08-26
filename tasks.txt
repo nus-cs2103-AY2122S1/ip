@@ -4,3 +4,10 @@ T|0| read book
 E|0| watch | 2021/02/30
 E|1| watch | 2021/03/40
 E|1| watch | 2021/01/02
+E|0| watch | THURSDAY, 5 Aug 2021
+E|0| do | 04:00pm
+E|0| yas | THURSDAY, 6 May 2021
+E|0| watch | 00:00am
+D|0| hw | 12:00am
+D|0| hw | 04:00pm
+D|0| hw | 04:00am

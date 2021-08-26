@@ -176,7 +176,9 @@ public class Parser {
             } else if (isTime(currWord)) {
                 LocalTime time = LocalTime.parse(currWord);
                 String beforeOrAfterNoon = time.getHour() >= 12 ? "pm" : "am";
-                int hour = time.getHour() >= 12
+                int hour = time.getHour() == 0
+                        ? 12
+                        : time.getHour() >= 12
                         ? time.getHour() - 12
                         : time.getHour();
                 int min = time.getMinute();
@@ -197,11 +199,14 @@ public class Parser {
      * @return A boolean stating whether the string is a date.
      */
     public static boolean isDate(String string) {
-        String year = string.substring(0, 4);
-        String month = string.substring(5, 7);
-        String day = string.substring(8, 10);
-        return string.length() == 10 && string.charAt(4) == '-' && string.charAt(7) == '-'
-                && isInteger(year) && isInteger(month) && isInteger(day);
+        if (string.length() == 10) {
+            String year = string.substring(0, 4);
+            String month = string.substring(5, 7);
+            String day = string.substring(8, 10);
+            return string.length() == 10 && string.charAt(4) == '-' && string.charAt(7) == '-'
+                    && isInteger(year) && isInteger(month) && isInteger(day);
+        }
+        return false;
     }
 
     /**
