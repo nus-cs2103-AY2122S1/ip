@@ -50,6 +50,13 @@ public class Parser {
      */
     public DukeCommand processInput(String userInput) throws DukeException {
         String commandType = userInput.split(" ")[0];
+
+        int spaceIndex = userInput.indexOf(" ");
+        String commandDescription = userInput.substring(spaceIndex + 1);
+        if (!commandType.equals("list") && (commandDescription.isBlank() || spaceIndex == -1)) {
+            throw new NoCommandDescriptionException();
+        }
+
         switch (commandType) {
         case "list":
             return new List(ui, storage, list);
@@ -90,7 +97,7 @@ public class Parser {
         case DEADLINE:
             try {
                 int byIndex = taskDescription.indexOf("/by") - 1;
-                if (byIndex < 0) {
+                if (byIndex < -1) {
                     throw new NoDateTimeException();
                 }
                 String deadlineDescription = taskDescription.substring(0, byIndex);
@@ -112,7 +119,7 @@ public class Parser {
         case EVENT:
             try {
                 int atIndex = taskDescription.indexOf("/at") - 1;
-                if (atIndex < 0) {
+                if (atIndex < -1) {
                     throw new NoDateTimeException();
                 }
                 String eventDescription = taskDescription.substring(0, atIndex);
