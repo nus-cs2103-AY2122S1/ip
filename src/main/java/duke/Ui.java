@@ -96,6 +96,17 @@ public class Ui {
     }
 
     /**
+     * Handles the scenario when the user wants to find tasks that contains
+     * what he/she wants to query for.
+     *
+     * @param query The keyword(s) to find the tasks in the task list.
+     */
+    private void handleFindTask(String query) {
+        String filteredTasksString = tasks.getFilteredTasksString(query);
+        Message.printFindTasksMessage(filteredTasksString);
+    }
+
+    /**
      * Retrieves the task number as an integer from the task number string,
      * that is within the boundaries of the task list size.
      *
@@ -159,6 +170,9 @@ public class Ui {
                 case "deadline":
                 case "event":
                     handleAddDateTask(action, command);
+                    break;
+                case "find":
+                    handleFindTask(action);
                     break;
                 default:
                     Message.printInvalidCommandMessage();

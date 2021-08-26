@@ -102,6 +102,24 @@ public class TaskList {
     }
 
     /**
+     * Filters tasks that contains the query into an ArrayList of
+     * tasks and returns the string representation of it.
+     *
+     * @param query The keyword to search for in the task list.
+     * @return The string representation of the task list that is
+     *         filtered to those that satisfy the query.
+     */
+    public String getFilteredTasksString(String query) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(query)) {
+                filteredTasks.add(task);
+            }
+        }
+        return getStringFromTasks(filteredTasks);
+    }
+
+    /**
      * Gets the current size of the task list.
      *
      * @return The number of tasks in the task list.
@@ -120,6 +138,21 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    private String getStringFromTasks(ArrayList<Task> tasks) {
+        StringBuilder tasksString = new StringBuilder();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            int taskNumber = i + 1;
+            tasksString
+                    .append(taskNumber)
+                    .append(".")
+                    .append(tasks.get(i))
+                    .append(i == (tasks.size() - 1) ? "" : "\n");
+        }
+
+        return tasksString.toString();
+    }
+
     /**
      * Returns a string whereby the task list is represented
      * as a numbered list.
@@ -128,18 +161,7 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        StringBuilder tasksString = new StringBuilder();
-
-        for (int i = 0; i < getSize(); i++) {
-            int taskNumber = i + 1;
-            tasksString
-                    .append(taskNumber)
-                    .append(".")
-                    .append(getTask(i))
-                    .append(i == (getSize() - 1) ? "" : "\n");
-        }
-
-        return tasksString.toString();
+        return getStringFromTasks(tasks);
     }
 
 }

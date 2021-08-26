@@ -82,6 +82,18 @@ public class Message {
     }
 
     /**
+     * Prints the matching tasks in the user's list after the user has made a query
+     * to find tasks.
+     *
+     * @param filteredTasksString Tasks that have been filtered out and are stored as a
+     *                            number list representation in a string.
+     */
+    public static void printFindTasksMessage(String filteredTasksString) {
+        System.out.println(formatDukeResponse("Here are the matching tasks in your list:\n"
+                + filteredTasksString));
+    }
+
+    /**
      * Prints an invalid command message when the user inputs an invalid command.
      */
     public static void printInvalidCommandMessage() {
