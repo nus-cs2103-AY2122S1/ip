@@ -7,6 +7,11 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor.
+     *
+     * @param description task description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -29,13 +34,18 @@ public abstract class Task {
         return isDone;
     }
 
+    /**
+     * Writes to a file using a FileWriter.
+     *
+     * @param myWriter the given FileWriter
+     * @throws IOException ...
+     */
+    public abstract void writeToFile(FileWriter myWriter) throws IOException;
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
     }
 
-
-
-    public abstract void writeToFile(FileWriter myWriter) throws IOException;
 
 }

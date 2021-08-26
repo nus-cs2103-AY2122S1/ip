@@ -21,6 +21,12 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints different message depending on whether a task was checked or unchecked.
+     *
+     * @param task task to be marked
+     * @param isDone boolean flag for whether the task is done or not
+     */
     public static void taskDoneMessage(Task task, boolean isDone) {
         if (isDone) {
             System.out.println("Nice! I've marked this task as done:\n" + task);
