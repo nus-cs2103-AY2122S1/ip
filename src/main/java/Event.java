@@ -2,14 +2,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-
     LocalDateTime at;
 
     public Event(String name, LocalDateTime at) {
         super(name);
         this.at = at;
     }
-
 
     public Event(String name, LocalDateTime at, boolean isDone) {
         super(name, isDone);
