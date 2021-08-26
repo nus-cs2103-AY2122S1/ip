@@ -6,12 +6,19 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Parses user commands for Kermit.
+ */
 public class Parser {
     private static final String invalidCommandText = "I'm sorry, but I don't know what that means :-(";
-    // ArrayList of all valid commands and tasks
-    private static final String[] strCommands = {"bye", "list", "done", "deadline", "todo", "event", "delete"};
-    private static final ArrayList<String> commands = new ArrayList<>(Arrays.asList(strCommands));
 
+    /**
+     * Parses user commands for Kermit and determine next action.
+     *
+     * @param fullCommand user input to be parsed.
+     * @return Command that is executable based on user input.
+     * @throws KermitException if invalid command is provided.
+     */
     public static Command parse(String fullCommand) throws KermitException {
         String command = "";
         String flag;
@@ -32,10 +39,6 @@ public class Parser {
         command = commandArr[0];
         flag = flagArr[0];
 
-        // Check if kermit.command is valid
-        if (!commands.contains(command)) {
-            throw new KermitException(invalidCommandText);
-        }
         String argument = "";
         String dateString = "";
 

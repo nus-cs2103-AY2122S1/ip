@@ -1,8 +1,14 @@
 package kermit;
 
-import kermit.tasks.*;
-
-import java.io.*;
+import kermit.tasks.Task;
+import kermit.tasks.ToDo;
+import kermit.tasks.Deadline;
+import kermit.tasks.Event;
+import kermit.tasks.DateDependentTask;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -10,15 +16,33 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage loads and saves task data from file.
+ */
 public class Storage {
     private static final String fileErrorText = "Ribiit! Something was wrong with the file!";
     private String filePath;
     private File file;
+
+
+    /**
+     * Storage Constructor.
+     *
+     * @param filePath The relative path where the data should be read/ saved to.
+     */
     public Storage(String filePath) {
         // Check if kermit.command.Kermit data exists, else create it
         this.filePath = filePath;
     }
 
+    /**
+     * Loads data from the relative file path provided.
+     * If the file tree or the file does not exist, it would recursively
+     * create any parent folders necessary and the file itself.
+     *
+     * @return List of tasks that have been loaded from the file.
+     * @throws KermitException if data in the file is not readable.
+     */
     public List<Task> load() throws KermitException {
         try {
             file = new File(filePath);
@@ -73,6 +97,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Helper function to format tasks.
+     * This format is used to write the task to the filePath to allow it to be loaded.
+     *
+     * @param task Task to be converted into saved form.
+     * @return Format string of task to be saved.
+     */
     private String formatWriteString(Task task) {
         String delimiter = " | ";
 
@@ -86,6 +117,12 @@ public class Storage {
         return formattedString;
     }
 
+    /**
+     * Saves todo list to file.
+     *
+     * @param todo ToDo list to be saved.
+     * @throws KermitException if there is an error writing to the file.
+     */
     // Saves task list data to file, file is overwritten
     public void save(TaskList todo) throws KermitException {
         try {

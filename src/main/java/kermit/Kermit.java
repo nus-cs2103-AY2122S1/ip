@@ -5,11 +5,19 @@ import kermit.command.Command;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Driver class for Kermit, a frog that keeps tracks of your tasks.
+ */
 public class Kermit {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor for Kermit.
+     *
+     * @param filePath File path for where data for task list should be stored.
+     */
     public Kermit(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -21,6 +29,9 @@ public class Kermit {
         }
     }
 
+    /**
+     * Driver function to start Kermit.
+     */
     public void run() {
         ui.showIntroMessage();
         boolean isExit = false;
@@ -35,6 +46,12 @@ public class Kermit {
             }
         }
     }
+
+    /**
+     * Starts Kermit and saves data in data/tasks.txt.
+     *
+     * @param args  The commandline arguments.
+     */
     public static void main(String[] args){
         new Kermit("data/tasks.txt").run();
     }

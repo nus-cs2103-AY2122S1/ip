@@ -6,17 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * kermit.command.ToDo list stores items
+ *  Task list stores tasks.
  */
 public class TaskList extends ArrayList<Task> {
 
     /**
-     * kermit.command.ToDo constructor
+     * Task list constructor.
+     * Initialises with no tasks.
      */
     public TaskList() {
         super();
     }
 
+    /**
+     * Task list constructor.
+     * Initialises list with tasks.
+     *
+     * @param taskArr Tasks to initialise task list.
+     */
     public TaskList(List<Task> taskArr) {
         super(taskArr);
     }
@@ -27,6 +34,13 @@ public class TaskList extends ArrayList<Task> {
         return task;
     }
 
+    /**
+     * Delete task from task list using its index.
+     * List is zero-indexed.
+     *
+     * @param index Index of task to delete.
+     * @return Task that is deleted.
+     */
     public Task deleteTask(int index) {
         Task task = super.get(index);
         super.remove(index);
@@ -34,7 +48,9 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * @return String representation of todo list
+     * String representation of task list.
+     *
+     * @return String representation of task list.
      */
     @Override
     public String toString() {
