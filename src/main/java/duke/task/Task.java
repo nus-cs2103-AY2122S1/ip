@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Locale;
+
 public class Task {
     private String description;
     private boolean isDone;
@@ -23,5 +25,10 @@ public class Task {
 
     public String toSaveString() {
         return isDone ? "1" : "0" + "|" + this.description;
+    }
+
+    public boolean findKeyword(String keyword) {
+        String processed = description;
+        return processed.toLowerCase().contains(keyword);
     }
 }

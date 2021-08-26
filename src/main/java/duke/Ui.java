@@ -163,4 +163,17 @@ public class Ui {
         System.out.println(INDENTATION + message);
         printBreak();
     }
+
+    public void printFound(ArrayList<Task> foundTasks) {
+        printBreak();
+        if (foundTasks.size() == 0) {
+            System.out.println(INDENTATION + "(///￣ ￣///) No tasks with that keyword was found...");
+        } else {
+            System.out.println(INDENTATION + "(*¯︶¯*) Here are the matching tasks in your list:");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                System.out.println(INDENTATION + (i + 1) + ": " + foundTasks.get(i).toString());
+            }
+        }
+        printBreak();
+    }
 }
