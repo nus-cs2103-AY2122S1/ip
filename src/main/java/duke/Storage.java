@@ -69,7 +69,7 @@ public class Storage {
         for (int i = 0; i < taskList.getTotalNumberOfTask(); i++) {
             Task currTask = taskList.getTaskById(i);
             JSONObject TaskDetails = new JSONObject();
-            String type = currTask.getClass().getName().toUpperCase();
+            String type = currTask.getType().toString();
             TaskDetails.put("type", type);
             TaskDetails.put("value", currTask.getValue());
             TaskDetails.put("time", currTask.getTime() == null ? "" : currTask.getTime().toString());
