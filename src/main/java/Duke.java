@@ -1,8 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
 
 public class Duke {
+    private final static String DATA_FILEPATH = "./data/data.txt";
     public static Task createTask(String input) throws DukeException {
         String[] inputList = input.split(" ");
         if (inputList[0].equals("todo")){
@@ -19,9 +23,59 @@ public class Duke {
             return new Event(withoutAction[0].trim(), withoutAction[1].trim());
         }
     }
-    public static void main(String[] args) {
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
+    public static ArrayList<Task> loadTasksFromDataFile() throws IOException, DukeException {
+        File directory = new File("./data");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        File f = new File(DATA_FILEPATH);
+        if (!f.exists()) {
+            f.createNewFile();
+        }
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (s.hasNext()) {
+            String l = s.nextLine();
+            System.out.println(l);
+            String[] TaskEntry = l.split("\\|");
+            System.out.println(TaskEntry);
+            System.out.println(TaskEntry[2]);
+            switch(TaskEntry[0]) {
+            case "T":
+                tasks.add(new Todo(TaskEntry[2]));
+                break;
+            case "D":
+                tasks.add(new Deadline(TaskEntry[2], TaskEntry[3]));
+                break;
+            case "E":
+                tasks.add(new Event(TaskEntry[2], TaskEntry[3]));
+                break;
+            default:
+               throw new DukeException("Invalid Task Type stored in Data File");
+            }
+            if (TaskEntry[1].equals("X")) {
+                tasks.get(tasks.size() - 1).markAsDone();
+            }
+        }
+        return tasks;
+    }
+
+    public static void updateDataFile(ArrayList<Task> tasks) throws IOException {
+        FileWriter fw = new FileWriter(DATA_FILEPATH);
+        for (Task currTask: tasks) {
+            fw.write(currTask.toStringData() + "\n");
+        }
+        fw.close();
+    }
+    public static void main(String[] args) {
+        ArrayList<Task> tasks;
+        try {
+            tasks = loadTasksFromDataFile();
+        } catch (IOException e) {
+            System.out.println("Error loading data file:" + e.getMessage());
+            return;
+        }
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -61,9 +115,21 @@ public class Duke {
                         System.out.println(removedTask);
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     }
+                    try {
+                        updateDataFile(tasks);
+                    } catch (IOException e) {
+                        System.out.println("Error writing data file:" + e.getMessage());
+                        return;
+                    }
                 } else if (action.equals("todo") || action.equals("deadline") || action.equals("event")) {
                     Task newTask = createTask(input);
                     tasks.add(newTask);
+                    try {
+                        updateDataFile(tasks);
+                    } catch (IOException e) {
+                        System.out.println("Error writing data file:" + e.getMessage());
+                        return;
+                    }
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newTask);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
