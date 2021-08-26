@@ -1,8 +1,8 @@
 package yoyo.command;
 
 import yoyo.core.Storage;
-import yoyo.task.TaskList;
 import yoyo.core.Ui;
+import yoyo.task.TaskList;
 
 public class CommandBye extends Command {
 

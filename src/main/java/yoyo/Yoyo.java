@@ -8,9 +8,9 @@ import yoyo.exception.YoyoException;
 import yoyo.task.TaskList;
 
 public class Yoyo {
+    private final Storage storage;
+    private final Ui ui;
     private TaskList tasks;
-    private Storage storage;
-    private Ui ui;
 
     public Yoyo(String filePath) {
         ui = new Ui();
@@ -21,6 +21,10 @@ public class Yoyo {
             ui.printErrorMessage(e);
             tasks = new TaskList();
         }
+    }
+
+    public static void main(String[] args) {
+        new Yoyo("data/yoyo.txt").run();
     }
 
     private void run() {
@@ -36,10 +40,6 @@ public class Yoyo {
                 ui.printErrorMessage(e);
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Yoyo("data/yoyo.txt").run();
     }
 
 

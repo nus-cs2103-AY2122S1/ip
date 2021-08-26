@@ -6,11 +6,11 @@ import yoyo.task.TaskList;
 import java.util.Scanner;
 
 public class Ui {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public Ui() {
         this.scanner = new Scanner(System.in);
-    };
+    }
 
     /**
      * Prints a decoration line for output.
@@ -85,7 +85,7 @@ public class Ui {
      * prints success message for adding task.
      *
      * @param newTask The task that has been created.
-     * @param tasks Task list.
+     * @param tasks   Task list.
      */
     public void printAddMessage(Task newTask, TaskList tasks) {
         outputWrapper();
@@ -97,9 +97,9 @@ public class Ui {
         outputWrapper();
     }
 
-    public void printErrorMessage(Exception e) {
+    public void printErrorMessage(Exception exception) {
         outputWrapper();
-        System.out.println(e.getMessage());
+        System.out.println(exception.getMessage());
         outputWrapper();
     }
 

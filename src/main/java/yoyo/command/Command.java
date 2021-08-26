@@ -1,14 +1,18 @@
 package yoyo.command;
 
 import yoyo.core.Storage;
-import yoyo.task.TaskList;
 import yoyo.core.Ui;
 import yoyo.exception.YoyoException;
+import yoyo.task.TaskList;
 
 import java.util.Arrays;
 
 public abstract class Command {
     protected String[] inputTokens;
+
+    public Command(String[] inputTokens) {
+        this.inputTokens = inputTokens;
+    }
 
     /**
      * Checks remaining user input for incomplete commands.
@@ -24,22 +28,18 @@ public abstract class Command {
         }
     }
 
-    public Command(String[] inputTokens) {
-        this.inputTokens = inputTokens;
-    }
-
     public boolean shouldContinueProgram() {
         return true;
     }
 
     public abstract void execute(TaskList tasks, Storage storage, Ui ui)
             throws YoyoException;
-    
+
     @Override
     public boolean equals(Object o) {
         @SuppressWarnings("unchecked")
         Command other = (Command) o;
         return Arrays.equals(this.inputTokens, other.inputTokens);
-    } 
+    }
 
 }

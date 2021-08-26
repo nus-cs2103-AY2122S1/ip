@@ -1,11 +1,11 @@
 package yoyo.command;
 
 import yoyo.core.Storage;
-import yoyo.task.TaskList;
 import yoyo.core.Ui;
 import yoyo.exception.YoyoException;
+import yoyo.task.TaskList;
 
-public class CommandDone extends Command{
+public class CommandDone extends Command {
     public CommandDone(String[] inputTokens) {
         super(inputTokens);
     }

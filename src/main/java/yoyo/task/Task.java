@@ -52,19 +52,19 @@ public abstract class Task {
      *
      * @return A status string containing name.
      */
-     public String showStatus() {
+    public String showStatus() {
         return this.printType() + this.printCompletionStatus() + " " + this.name;
-     }
+    }
 
     /**
      * Returns an info string for writing to file.
      *
      * @return A status string.
      */
-     public String showStatusWrite() {
-         return this.printType() + this.printCompletionStatus()
+    public String showStatusWrite() {
+        return this.printType() + this.printCompletionStatus()
                 + Separator.SEPARATOR + this.name;
-     }
+    }
 
     @Override
     public String toString() {
