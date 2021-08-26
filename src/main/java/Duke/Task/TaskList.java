@@ -3,6 +3,7 @@ package Duke.Task;
 import Duke.Storage.Storage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -39,6 +40,16 @@ public class TaskList {
     public void markAsDone(int taskIndex) throws InvalidTaskException {
         this.get(taskIndex).markAsDone();
         this.save();
+    }
+
+    public List<Task> findByKeyword(String keyword) {
+       List<Task> results = new ArrayList<>();
+       for (Task task : this.list) {
+           if (task.getDescription().contains(keyword)) {
+               results.add(task);
+           }
+       }
+       return results;
     }
 
     public int size() {
