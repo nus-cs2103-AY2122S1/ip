@@ -9,16 +9,34 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A class which encapsulates interaction with the file,
+ * such as saving or editing the file.
+ */
 public class Storage {
-
+    /** The relative path of the file */
     private String filePath;
+
+    /** The file which will be edited */
     private File taskFile;
 
+    /**
+     * A public constructor to initialise the file path
+     * to the given one.
+     * @param filePath The relative path of the file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.taskFile = new File(filePath);
     }
 
+    /**
+     * Checks if the required directory and file is present.
+     * Creates the file and/or the directory if it is
+     * not present.
+     * @throws DukeException If the file or directory cannot
+     * be created.
+     */
     public void checkFile() throws DukeException {
         if (!taskFile.exists()) {
             File dir = new File("data");
@@ -36,6 +54,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the current file content and adds the tasks
+     * into the TaskList if any.
+     * @return An ArrayList containing the tasks.
+     * @throws DukeException If the file cannot be found.
+     */
     public ArrayList<Task> load() throws DukeException {
 
         ArrayList<Task> userInput = new ArrayList<>();
@@ -72,6 +96,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the string containing the task in
+     * a format which can be saved in the file.
+     * @param task The task to be saved in the file.
+     * @return The string representing the task.
+     */
     public String fileString(Task task) {
         String toAdd = task.taskIndicator() + "  " + (task.getStatusIcon().equals("X")
                 ? "Y" : "N") + "  " + task.description.trim();
@@ -86,6 +116,11 @@ public class Storage {
         return toAdd;
     }
 
+    /**
+     * Rewrites the entire file according to
+     * what is stored in the list.
+     * @param taskList The list containing the tasks.
+     */
     public void editFileAll(TaskList taskList) {
         for (int i = 0; i < taskList.size(); i++) {
             Task tempFile = taskList.get(i);
@@ -98,6 +133,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Rewrites the entire file with the string given.
+     * @param content The content to be added into the file.
+     */
     public void editFile(String content) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -108,6 +147,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends content to the file.
+     * @param content The content to be appended.
+     */
     public void appendToFile(String content) {
         try {
             FileWriter fw = new FileWriter(filePath, true);
