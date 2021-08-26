@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 /**
  * Parent class. Inherited by a bunch of classes like Event and Deadline.
  *
@@ -6,6 +10,7 @@
 public class Task {
     protected String taskString;
     protected boolean isDone;
+    protected LocalDate date;
 
     /**
      * Constructor to initialize Deadline.
@@ -18,6 +23,10 @@ public class Task {
     }
 
     public String getTime() {
+        return "";
+    }
+
+    public String getTimeStorage() {
         return "";
     }
 

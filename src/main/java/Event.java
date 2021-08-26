@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+
 /**
  * Event (Task). Can be added to list in Duke.
  *
@@ -12,14 +16,20 @@ public class Event extends Task {
      * @param taskstr Task.
      * @param at Date/Time of task.
      */
-    public Event(String taskstr, String at) {
+    public Event(String taskstr, LocalDate at) {
         super(taskstr);
-        this.at = at;
+        this.at = at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        super.date = at;
     }
 
     @Override
     public String getTime() {
         return this.at;
+    }
+
+    @Override
+    public String getTimeStorage() {
+        return this.date.toString();
     }
 
     /**

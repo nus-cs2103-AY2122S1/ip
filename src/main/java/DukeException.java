@@ -78,8 +78,18 @@ class SaveFileError extends DukeException {
     }
 }
 
+class LoadFileError extends DukeException {
+    LoadFileError() {
+        super ("Oops! Somethingw's wrong with the text in thew saved file! "
+                + "You may have to dewete itw!");
+    }
+}
+
 class SaveDirectoryError extends DukeException {
     SaveDirectoryError(){
         super ("Oh now! I guess the diwectowwy doesn't exist.");
     }
 }
+
+
+

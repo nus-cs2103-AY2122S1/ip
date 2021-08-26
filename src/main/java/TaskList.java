@@ -1,5 +1,10 @@
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Stores list of Tasks in an array for reference.
@@ -37,37 +42,34 @@ public class TaskList {
     }
 
     public void addDeadline(String[] strparse) throws DukeException {
-        if (strparse.length == 1) {
-            throw new MissingInputException("deadline");
-        }
-        StringBuilder taskb = new StringBuilder();
-        StringBuilder deadlineb = new StringBuilder();
-        int i = 1;
-        while (i < strparse.length
-                && !strparse[i].equalsIgnoreCase("/by")) {
-            taskb.append(strparse[i]);
-            if (i != strparse.length - 1) {
-                taskb.append(" ");
+        try {
+            if (strparse.length == 1) {
+                throw new MissingInputException("deadline");
+            }
+            StringBuilder taskb = new StringBuilder();
+            int i = 1;
+            while (i < strparse.length
+                    && !strparse[i].equalsIgnoreCase("/by")) {
+                taskb.append(strparse[i]);
+                if (i != strparse.length - 1) {
+                    taskb.append(" ");
+                }
+                i++;
             }
             i++;
-        }
-        i++;
-        while (i < strparse.length) {
-            deadlineb.append(strparse[i]);
-            if (i != strparse.length - 1) {
-                deadlineb.append(" ");
+            if (taskb.toString().equals("") || i != strparse.length - 1) {
+                throw new IncorrectInputException("deadline", "using 'deadline (task) /by (yyyy-mm-dd format)'");
             }
-            i++;
+            LocalDate deadline = LocalDate.parse(strparse[i]);
+            taskArr.add(new Deadline(taskb.toString(), deadline));
+            counter++;
+        } catch (DateTimeParseException e) {
+            throw new IncorrectInputException("deadline", "using 'deadline (task) /by (yyyy-mm-dd format)'");
         }
-        if (taskb.toString().equals("") || deadlineb.toString().equals("")) {
-            throw new IncorrectInputException("deadline", "using 'deadline (task) /by (date)'");
-        }
-        taskArr.add(new Deadline(taskb.toString(), deadlineb.toString()));
-        counter++;
     }
 
     public void addReadDeadline(String task, int isDoneInt, String by) throws DukeException {
-        taskArr.add(new Deadline(task, by));
+        taskArr.add(new Deadline(task, LocalDate.parse(by)));
         if (isDoneInt == 1) {
             this.markReadDone(this.counter);
         }
@@ -75,37 +77,35 @@ public class TaskList {
     }
 
     public void addEvent(String[] strparse) throws DukeException {
-        if (strparse.length == 1) {
-            throw new MissingInputException("event");
-        }
-        StringBuilder taskb = new StringBuilder();
-        StringBuilder atb = new StringBuilder();
-        int i = 1;
-        while (i < strparse.length
-                && !strparse[i].equalsIgnoreCase("/at")) {
-            taskb.append(strparse[i]);
-            if (i != strparse.length - 1) {
-                taskb.append(" ");
+        try {
+            if (strparse.length == 1) {
+                throw new MissingInputException("event");
+            }
+            StringBuilder taskb = new StringBuilder();
+            StringBuilder atb = new StringBuilder();
+            int i = 1;
+            while (i < strparse.length
+                    && !strparse[i].equalsIgnoreCase("/at")) {
+                taskb.append(strparse[i]);
+                if (i != strparse.length - 1) {
+                    taskb.append(" ");
+                }
+                i++;
             }
             i++;
-        }
-        i++;
-        while (i < strparse.length) {
-            atb.append(strparse[i]);
-            if (i != strparse.length - 1) {
-                atb.append(" ");
+            if (taskb.toString().equals("") || i != strparse.length - 1) {
+                throw new IncorrectInputException("event", "'event (event) /at (date)'");
             }
-            i++;
+            LocalDate deadline = LocalDate.parse(strparse[i]);
+            taskArr.add(new Event(taskb.toString(), deadline));
+            counter++;
+        } catch (DateTimeParseException e) {
+            throw new IncorrectInputException("deadline", "a cowwect (yyyy-mm-dd format)'");
         }
-        if (taskb.toString().equals("") || atb.toString().equals("")) {
-            throw new IncorrectInputException("event", "'event (event) /at (date)'");
-        }
-        taskArr.add(new Event(taskb.toString(), atb.toString()));
-        counter++;
     }
 
     public void addReadEvent(String task, int isDoneInt, String at) throws DukeException {
-        taskArr.add(new Event(task.toString(), at));
+        taskArr.add(new Event(task.toString(), LocalDate.parse(at)));
         if (isDoneInt == 1) {
             this.markReadDone(this.counter);
         }
@@ -136,7 +136,7 @@ public class TaskList {
         boolean temp = taskArr.get(i).markAsDone();
     }
 
-        public Task delete(String[] strparse) throws DukeException {
+    public Task delete(String[] strparse) throws DukeException {
         if (strparse.length == 1) {
             throw new MissingInputException("delete");
         }
@@ -180,7 +180,7 @@ public class TaskList {
         return taskArr.get(counter - 1).toString();
     }
 
-    public String saveString() throws DukeException {
+    public String saveAsString() throws DukeException {
         StringBuilder strb = new StringBuilder();
         for (int i = 0; i < this.counter; i++) {
             if (taskArr.get(i) instanceof Todo) {
@@ -200,16 +200,15 @@ public class TaskList {
             strb.append(taskArr.get(i).getTaskStr());
             if (taskArr.get(i) instanceof Deadline) {
                 strb.append(" | ");
-                strb.append(taskArr.get(i).getTime());
+                strb.append(taskArr.get(i).getTimeStorage());
             } else if (taskArr.get(i) instanceof Event) {
                 strb.append(" | ");
-                strb.append(taskArr.get(i).getTime());
+                strb.append(taskArr.get(i).getTimeStorage());
             } else {
                 // do nothing
             }
             strb.append('\n');
         }
-
         return strb.toString();
     }
 }
