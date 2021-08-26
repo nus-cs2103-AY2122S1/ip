@@ -26,7 +26,7 @@ public class Duke {
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.printError(e.getMessage());
+            ui.showError(e.getMessage());
             taskList = new TaskList();
         }
     }
@@ -43,7 +43,7 @@ public class Duke {
                 ui.showLine();
                 isExit = Parser.parse(fullCommand, taskList, ui, storage);
             } catch (DukeException e) {
-                ui.printError(e.getMessage());
+                ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }

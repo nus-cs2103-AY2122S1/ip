@@ -8,9 +8,9 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner scanner = new Scanner(System.in);
-    private static final String LINE = "----------------------------------------------------";
+    private static final String HORIZONTAL_LINE = "----------------------------------------------------";
     private static final String WELCOME_MESSAGE= "Hello! I'm Duke " +
-            "What can I do for you?\n\n" + LINE + "-----------------------------\n" +
+            "What can I do for you?\n\n" + HORIZONTAL_LINE + "-----------------------------\n" +
             "|\tPlease enter one of the following commands:                                  |\n" +
             "|\t1. todo <description> (eg. todo paint)                                       |\n" +
             "|\t2. deadline <description> /by <date> (e.g deadline submit hw /by 2020-01-01) |\n" +
@@ -19,7 +19,7 @@ public class Ui {
             "|\t5. delete <task number> (e.g delete 1) - delete a task from list             |\n" +
             "|\t6. done <task number> (e.g done 1) - mark a task in list as done             |\n" +
             "|\t7. bye - exit duke                                                           |\n" +
-            LINE + "-----------------------------\n";
+            HORIZONTAL_LINE + "-----------------------------\n";
 
     /**
      * Prints welcome message.
@@ -41,7 +41,7 @@ public class Ui {
      * Prints horizontal line.
      */
     public void showLine() {
-        System.out.println(LINE);
+        System.out.println(HORIZONTAL_LINE);
     }
 
     /**
@@ -98,10 +98,9 @@ public class Ui {
      * @param message Error message
      * @return String representation of error
      */
-    public String printError(String message) {
+    public String showError(String message) {
         System.out.println(message);
         return message;
     }
-
 
 }

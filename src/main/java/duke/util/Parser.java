@@ -1,19 +1,17 @@
 package duke.util;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidTaskDeletionException;
+import duke.exception.InvalidTaskDoneException;
 import duke.exception.NoCommandException;
 import duke.exception.NoDescriptionAndTimeException;
 import duke.exception.NoDescriptionException;
 import duke.exception.NoTimeException;
-import duke.exception.InvalidTaskDeletionException;
-import duke.exception.InvalidTaskDoneException;
 import duke.task.TaskList;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
 
 /**
  * Encapsulates the parsing of user inputs.
@@ -33,23 +31,25 @@ public class Parser {
      */
     public static boolean parse(String fullCommand, TaskList taskList,
                                 Ui ui, Storage storage) throws DukeException {
+
         String[] command = fullCommand.split(" ", 2);
         String commandWord = command[0].trim();
+
         switch (commandWord) {
         case "todo":
-            return parseTodo(taskList, command);
+            return hasParsedTodo(taskList, command);
         case "event":
-            return parseEvent(taskList, command);
+            return hasParsedEvent(taskList, command);
         case "deadline":
-            return parseDeadline(taskList, command);
+            return hasParsedDeadline(taskList, command);
         case "bye":
-            return parseBye(storage, ui, taskList);
+            return hasParsedBye(storage, ui, taskList);
         case "list":
-            return parseList(taskList);
+            return hasParsedList(taskList);
         case "delete":
-            return parseDelete(taskList, command);
+            return hasParsedDelete(taskList, command);
         case "done":
-            return parseDone(taskList, command);
+            return hasParsedDone(taskList, command);
         default:
             throw new NoCommandException();
         }
@@ -66,12 +66,15 @@ public class Parser {
      */
     public static String[] parseDescriptionAndTime(String[] userInput,String regex,
                                           String taskType) throws DukeException {
+
         String[] next = userInput[1].trim().split(regex);
+
         if (next[0].trim().length() == 0) {
             throw new NoDescriptionException(taskType);
         } else if (next.length < 2) {
             throw new NoTimeException(taskType);
         }
+
         return next;
     }
 
@@ -88,13 +91,14 @@ public class Parser {
         return date;
     }
 
+
     /**
      * Returns false for duke to continue running.
      *
      * @param taskList List of tasks
      * @return Boolean value for duke to continue running
      */
-    public static boolean parseList(TaskList taskList) {
+    public static boolean hasParsedList(TaskList taskList) {
         taskList.printTasksInList();
         return false;
     }
@@ -107,15 +111,16 @@ public class Parser {
      * @return Boolean value for duke to continue running
      * @throws DukeException If details doesn't contain description/date or date is of wrong format
      */
-    public static boolean parseEvent(TaskList taskList, String[] details) throws DukeException {
+    public static boolean hasParsedEvent(TaskList taskList, String[] details) throws DukeException {
         if (details.length == 1) {
             throw new NoDescriptionAndTimeException("event");
+        } else {
+            String[] eventDetail = parseDescriptionAndTime(details,
+                    "/at", "event");
+            taskList.addEventToList(eventDetail[0].trim(),
+                    eventDetail[1].trim());
         }
-        String[] eventDetail = parseDescriptionAndTime(details,
-                "/at", "event");
 
-        taskList.addEventToList(eventDetail[0].trim(),
-                eventDetail[1].trim());
         return false;
     }
 
@@ -127,14 +132,15 @@ public class Parser {
      * @return Boolean value for duke to continue running
      * @throws DukeException If details doesn't contain description/date or date is of wrong format
      */
-    public static boolean parseDeadline(TaskList taskList, String[] details) throws DukeException {
+    public static boolean hasParsedDeadline(TaskList taskList, String[] details) throws DukeException {
         if (details.length == 1) {
             throw new NoDescriptionAndTimeException("deadline");
+        } else {
+            String[] eventDetail = parseDescriptionAndTime(details,
+                    "/by", "deadline");
+            taskList.addDeadlineToList(eventDetail[0].trim(),
+                    eventDetail[1].trim());
         }
-        String[] eventDetail = parseDescriptionAndTime(details,
-                "/by", "deadline");
-        taskList.addDeadlineToList(eventDetail[0].trim(),
-                eventDetail[1].trim());
         return false;
     }
 
@@ -147,8 +153,8 @@ public class Parser {
      * @return Boolean value to stop duke from running
      * @throws DukeException If folder/file for storage doesn't exist
      */
-    public static boolean parseBye(Storage storage, Ui ui, TaskList taskList) throws DukeException {
-        storage.saveTaskList(taskList);
+    public static boolean hasParsedBye(Storage storage, Ui ui, TaskList taskList) throws DukeException {
+        storage.save(taskList);
         ui.showBye();
         return true;
     }
@@ -161,16 +167,18 @@ public class Parser {
      * @return Boolean value for duke to continue running
      * @throws DukeException If task number for deletion is not entered or out of range
      */
-    public static boolean parseDelete(TaskList taskList, String[] userInput)
-            throws DukeException {
+    public static boolean hasParsedDelete(TaskList taskList, String[] userInput) throws DukeException {
         if (userInput.length == 1) {
             throw new DukeException("No task number entered!");
         }
+
         int deleteNumber = Integer.parseInt(userInput[1].trim()) - 1;
         if (deleteNumber < 0 || deleteNumber > taskList.listLength()-1) {
             throw new InvalidTaskDeletionException();
+        } else {
+            taskList.deleteFromList(deleteNumber);
         }
-        taskList.deleteFromList(deleteNumber);
+
         return false;
     }
 
@@ -182,16 +190,18 @@ public class Parser {
      * @return Boolean value for duke to continue running
      * @throws DukeException If task number is not entered or is out of range
      */
-    public static boolean parseDone(TaskList taskList, String[] userInput)
-            throws DukeException {
+    public static boolean hasParsedDone(TaskList taskList, String[] userInput) throws DukeException {
         if (userInput.length == 1) {
             throw new DukeException("No task number entered!");
         }
+
         int doneNumber = Integer.parseInt(userInput[1].trim()) - 1;
         if (doneNumber < 0 || doneNumber > taskList.listLength()-1) {
             throw new InvalidTaskDoneException();
+        } else {
+            taskList.setTaskAsDone(doneNumber);
         }
-        taskList.setTaskAsDone(doneNumber);
+
         return false;
     }
 
@@ -203,12 +213,13 @@ public class Parser {
      * @return Boolean value for duke to continue running
      * @throws DukeException If no description is entered
      */
-    public static boolean parseTodo(TaskList taskList, String[] userInput)
-            throws DukeException {
+    public static boolean hasParsedTodo(TaskList taskList, String[] userInput) throws DukeException {
         if (userInput.length == 1) {
             throw new NoDescriptionException("todo");
+        } else {
+            taskList.addTodoToList(userInput[1].trim());
         }
-        taskList.addTodoToList(userInput[1].trim());
+
         return false;
     }
 
