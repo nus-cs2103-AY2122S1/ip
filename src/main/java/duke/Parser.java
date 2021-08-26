@@ -3,18 +3,32 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Parser that receives inputs from the user and executes the correct commands.
+ */
 public class Parser {
 
     TaskList tasks;
     String userInput;
     int index;
 
+    /**
+     * Constructor for the Parser object
+     *
+     * @param tasks
+     * @param userInput
+     * @param index
+     */
     public Parser(TaskList tasks, String userInput, int index) {
         this.tasks = tasks;
         this.userInput = userInput;
         this.index = index;
     }
 
+    /**
+     * Executes when Duke receives a bye command
+     * Sends a goodbye message to the user
+     */
     public void bye_execute() {
         String byeMsg = "    ----------------------------\n"
                 + "    okay :<, bye!" + "\n"
@@ -22,6 +36,10 @@ public class Parser {
         System.out.println(byeMsg);
     }
 
+    /**
+     * Executes when Duke receives a list command
+     * Outputs the list of current tasks to the user
+     */
     public void list_execute() {
         String message = "    ----------------------------\n"
                 + "    " + "Here are the tasks in your list:\n";
@@ -34,6 +52,10 @@ public class Parser {
         System.out.println(message);
     }
 
+    /**
+     * Executes when Duke receives a done command
+     * Marks the relevant task as done
+     */
     public void done_execute() {
         String userIndex = userInput.substring(5);
         int i = Integer.valueOf(userIndex);
@@ -48,6 +70,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Executes when Duke receives a toDo command
+     * Adds a todo task to the list of tasks
+     */
     public void todo_execute() {
         try {
             Task A = new ToDo(userInput.substring(5));
@@ -64,6 +90,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Executes when Duke receives an event command
+     * Adds an event task to the list of tasks
+     */
     public void event_execute() {
         try {
             int i = userInput.indexOf("/");
@@ -87,6 +117,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Executes when Duke receives a deadline command
+     * Adds a deadline task to the list of tasks
+     */
     public void deadline_execute() {
         try {
             int i = userInput.indexOf("/");
@@ -110,6 +144,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Executes when Duke receives a delete command
+     * Deletes the relevant task from the list of tasks
+     */
     public void delete_execute() {
         String userIndex = userInput.substring(7);
         int i = Integer.valueOf(userIndex);
@@ -127,6 +165,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Generates a formatted string of tasks to be outputted to the user and to be saved into hard disk.
+     * @return Formatted string of tasks
+     */
     public String generateTasks() {
         String taskString = "";
         int i = 0;
