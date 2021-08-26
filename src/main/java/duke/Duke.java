@@ -11,6 +11,7 @@ import duke.ui.Ui;
 
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class Duke {
@@ -57,6 +58,10 @@ public class Duke {
                 case ADDCOMMAND:
                     Task addedTask = this.tasks.addTask(splitInput);
                     this.ui.addTask(addedTask, this.tasks.size());
+                    break;
+                case FIND:
+                    ArrayList<Task> list = this.tasks.find(splitInput[1]);
+                    this.ui.list(list);
                     break;
                 default:
                     this.ui.unknownCommand();

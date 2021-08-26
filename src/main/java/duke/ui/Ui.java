@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.task.Task;
 import duke.task.TaskList;
+import java.util.ArrayList;
 
 public class Ui {
 
@@ -46,6 +47,20 @@ public class Ui {
         }
     }
 
+    /**
+     * Method for listing through tasks in a given ArrayList, and printing them
+     * Used during find commands
+     *
+     * @param tasks ArrayList of Task objects to loop through
+     */
+    public void list(ArrayList<Task> tasks) {
+        System.out.println("Here are the matching tasksn your list");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("\t" + (i + 1) + ". " + tasks.get(i).toString());
+        }
+    }
+
+    
     /**
      * Method for generate the string corresponging to Command.INDEXCOMMAND
      *

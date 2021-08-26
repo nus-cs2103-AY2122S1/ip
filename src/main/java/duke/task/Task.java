@@ -50,4 +50,8 @@ public class Task {
             return "Task : 0 : " + this.title;
         }
     }
+
+    public String getTitle() {
+        return this.title;
+    }
 }
