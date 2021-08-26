@@ -52,18 +52,18 @@ public class Storage {
 
                     // Create task based on line data
                     switch (taskShortForm) {
-                        case "T":
-                            task = new ToDos(description, isCompleted);
-                            taskList.add(task);
-                            break;
-                        case "D":
-                            task = new Deadline(description, date, isCompleted);
-                            taskList.add(task);
-                            break;
-                        case "E":
-                            task = new Event(description, date, isCompleted);
-                            taskList.add(task);
-                            break;
+                    case "T":
+                        task = new ToDos(description, isCompleted);
+                        taskList.add(task);
+                        break;
+                    case "D":
+                        task = new Deadline(description, date, isCompleted);
+                        taskList.add(task);
+                        break;
+                    case "E":
+                        task = new Event(description, date, isCompleted);
+                        taskList.add(task);
+                        break;
                     }
                 }
             }
