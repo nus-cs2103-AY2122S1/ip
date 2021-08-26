@@ -1,6 +1,7 @@
 /**
  * @author Hang Zelin
- * @description Stores all the tasks for the Duke. Duke can refer to this tasklist to see a specific task
+ *
+ * Stores all the tasks for the Duke. Duke can refer to this tasklist to see a specific task
  * or make use of the methods in it to execute an operation.
  */
 package duke.task;
@@ -18,43 +19,41 @@ public class TaskList {
     ArrayList<Task> tasks;
 
     /**
-     * @author Hang Zelin
-     * @description Constructor to store all the tasks in a Generic ArrayList.
+     * Constructor to store all the tasks in a Generic ArrayList.
+     *
+     * @param tasks A list of Task type variables.
      */
     public TaskList(ArrayList<Task> tasks) {
-
         this.tasks = tasks;
     }
 
     /**
-     * @author Hang Zelin
-     * @description Another Constructor to initialize an empty TaskList if there is no save data.
+     * Another Constructor to initialize an empty TaskList if there is no save data.
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
     /**
-     * @param time
-     * @return void
-     * @author Hang Zelin
-     * @description get all the tasks that match the time users take in.
+     * Gets all the tasks that match the time users take in.
+     *
+     * @param time String message that indicates time users take in to find specific event.
      */
     public void getSpecificDateEvent(String time) {
-        Parser p = new Parser("");
+        Parser parser = new Parser("");
         int count = 0;//count the number of the events happen on the time.
 
         for (int i = 0; i < tasks.size(); i++) {
-            String Message = tasks.get(i).getTaskInfo();
-            String UnParsedInfo = tasks.get(i).getTime();
-            String timeInFormat = (p.ParseTime(time) != null) ?
-                    p.ParseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
+            String message = tasks.get(i).getTaskInfo();
+            String unParsedInfo = tasks.get(i).getTime();
+            String timeInFormat = (parser.parseTime(time) != null) ?
+                    parser.parseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
                     : "Nope";
 
-            if ((UnParsedInfo != null && (UnParsedInfo.contains(time) || UnParsedInfo.contains(timeInFormat)))
-                    || Message.contains(time) || Message.contains(timeInFormat)) {
+            if ((unParsedInfo != null && (unParsedInfo.contains(time) || unParsedInfo.contains(timeInFormat)))
+                    || message.contains(time) || message.contains(timeInFormat)) {
                 count++;
-                System.out.println(count + "." + Message);
+                System.out.println(count + "." + message);
             }
         }
         if (count == 0) {
@@ -63,12 +62,11 @@ public class TaskList {
     }
 
     /**
-     * @param keyword
-     * @return void
-     * @author Hang Zelin
-     * @description find all the tasks that match the key word users take in.
+     * Finds all the tasks that match the key word users take in.
+     *
+     * @param keyword String message that indicates the keyword users want to search.
      */
-    public void FindTask(String keyword) {
+    public void findTasks(String keyword) {
         int count = 0;
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -85,43 +83,40 @@ public class TaskList {
     }
 
     /**
-     * @param index
-     * @return void
-     * @author Hang Zelin
-     * @description Mark a specific task as done.
+     * Marks a specific task as done.
+     *
+     * @param index Integer indicates the index for the task
      */
-    public void MarkDone(int index) {
-        this.tasks.get(index).MarkDone();
+    public void markDone(int index) {
+        this.tasks.get(index).markDone();
     }
 
     /**
-     * @param index
-     * @return void
-     * @author Hang Zelin
-     * @description delete a specific task.
+     * Deletes a specific task.
+     *
+     * @param index Integer indicates the index for the task
      */
-    public void Delete(int index) {
+    public void delete(int index) {
         this.tasks.remove(index);
     }
 
     /**
-     * @param taskType
-     * @param task
-     * @param time
-     * @return void
-     * @throws DukeException
-     * @author Hang Zelin
-     * @description Add a task to the TaskLists. This method will automatically decide which type of the
+     * Adds a task to the TaskLists. This method will automatically decide which type of the
      * task is added to the list.
+     *
+     * @param taskType String message indicates the task type.
+     * @param task String message indicates the task info.
+     * @param time String message indicates the time info.
+     * @throws DukeException Throws when a task cannot be created or added to the TaskList.
      */
     public void add(String taskType, String task, String time) throws DukeException {
-        Parser p = new Parser("");
+        Parser parser = new Parser("");
 
-        LocalDateTime parsedTime = p.ParseTime(time);
+        LocalDateTime parsedTime = parser.parseTime(time);
         OperationType[] taskTypes = OperationType.values();
         for (OperationType t : taskTypes) {
             if (t.toString().equals(taskType)) {
-                Task newTask = t.AssignTaskType(t, task, parsedTime);
+                Task newTask = t.assignTaskType(t, task, parsedTime);
                 tasks.add(newTask);
                 break;
             }
@@ -130,32 +125,30 @@ public class TaskList {
     }
 
     /**
-     * @param index
-     * @return Task
-     * @author Hang Zelin
-     * @description Return a specific task users are referring to.
-     */
+     * Returns a specific task users refer to.
+     *
+     * @param index An integer indicates the index of the task.
+     * @return Task users refer to
+     * */
     public Task get(int index) {
         return this.tasks.get(index);
     }
 
 
     /**
-     * @param
-     * @return int
-     * @author Hang Zelin
-     * @description Return the size of the TaskList
+     * Returns the size of the TaskList
+     *
+     * @return Integer indicates the size of the TaskList.
      */
     public int size() {
         return this.tasks.size();
     }
 
     /**
-     * @param index
-     * @return void
-     * @throws DukeException
-     * @author Hang Zelin
-     * @description detect if the index taking in is invalid or not.
+     * Detects if the index taking in is invalid or not.
+     *
+     * @param index Integer indicates the index of the task.
+     * @throws DukeException Throws when the index is invalid.
      */
     public void detectIndex(int index) throws DukeException {
         if (index < 0 || index >= this.tasks.size()) {
@@ -164,15 +157,14 @@ public class TaskList {
     }
 
     /**
-     * @author Hang Zelin
-     * @description The enum of all types of operations that is able to execute.
+     * Enum of all types of operations that is able to execute.
      * It also contains a method AssignTask Type to find the specific type of task to create.
      */
     public enum OperationType {
         bye, done, delete, tell, find, list, todo, deadline, event;
 
-        public Task AssignTaskType(OperationType t, String task, LocalDateTime time) {
-            switch (t) {
+        public Task assignTaskType(OperationType type, String task, LocalDateTime time) {
+            switch (type) {
                 case todo:
                     return new ToDos(false, task);
                 case deadline:

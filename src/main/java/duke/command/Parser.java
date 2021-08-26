@@ -1,12 +1,10 @@
 /**
  * @author Hang Zelin
- * @description Parser Programme will take in a full input Message and take out the operation type, task, time, index from the
+ *
+ * Parser will take in a full input Message and take out the operation type, task, time, index from the
  * one line command input by users.
- * <p>
  * It can also deal with the local saved data and return the parsed Message, which can be a task, time, done(or not).
- * <p>
  * It can also parse the time users input into the LocalDateTime.
- * <p>
  * Some invalid input Messages may cause throwing DukeException.
  */
 
@@ -23,16 +21,14 @@ public class Parser {
     String Message;
 
     /**
-     * @param Message
-     * @author
-     * @description Constructor that stores the Message users take in to be parsed.
+     * @param Message Message users take in to be parsed.
      */
     public Parser(String Message) {
         this.Message = Message;
     }
 
 
-    private static boolean ValidDate(int day, int month, int year, int hour, int minute) {
+    private static boolean isValidDate(int day, int month, int year, int hour, int minute) {
         if (((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) && month == 2) {
             if (day > 29 || day <= 0) {
                 return false;
@@ -69,21 +65,21 @@ public class Parser {
     }
 
     /**
-     * @param time
-     * @return LocalDateTime
-     * @author Hang Zelin
-     * @description return a LocalDateTime type that encapsulates the year, month, day, hour, minute of a time input.
+     * Returns a LocalDateTime type that encapsulates the year, month, day, hour, minute of a time input.
      * The method takes in a String of time and convert into LocalDateTime type.
      * The format can only be: 1. dd/mm/yyyy hhmm
      * 2. yyyy-mm-dd
+     *
+     * @param time Time User takes in to be parsed.
+     * @return Parsed time converted in the type of LocalDateTime
      */
-    public LocalDateTime ParseTime(String time) {
-        LocalDateTime parsedTime = null;
-        int day = 0;
-        int month = 0;
-        int year = 0;
-        int hour = 0;
-        int minute = 0;
+    public LocalDateTime parseTime(String time) {
+        LocalDateTime parsedTime;
+        int day;
+        int month;
+        int year;
+        int hour;
+        int minute;
 
         if (time.contains("/") && time.indexOf("/", 3) != -1 && time.contains(" ") && !time.contains("-")) {
             int endIndex1 = time.indexOf("/");
@@ -109,7 +105,7 @@ public class Parser {
         }
 
         //Some Other cases;
-        if (!ValidDate(day, month, year, hour, minute)) {
+        if (!isValidDate(day, month, year, hour, minute)) {
             return null;
         } else {
             parsedTime = LocalDate.of(year, month, day).atTime(hour, minute);
@@ -120,11 +116,10 @@ public class Parser {
     }
 
     /**
-     * @param
-     * @return String
-     * @author Hang Zelin
-     * @description return a String which is a task info in a local save data.
-     * noted: you must specify it as local data, otherwise it can go wrong.
+     * Returns a String which is a task info in a local save data.
+     * Noted: you must specify it as local data, otherwise it can go wrong.
+     *
+     * @return Task retrieved from save data.
      */
     public String getSaveTask() {
         String task;
@@ -139,11 +134,10 @@ public class Parser {
     }
 
     /**
-     * @param
-     * @return String
-     * @author Hang Zelin
-     * @description return a String which is a time info in a local save data.
-     * noted: you must specify it as local data, otherwise it can go wrong.
+     * Returns a String which is a time info in a local save data.
+     * Noted: you must specify it as local data, otherwise it can go wrong.
+     *
+     * @return Time retrieved from save data.
      */
     public String getSaveTime() {
         String time;
@@ -158,11 +152,11 @@ public class Parser {
     }
 
     /**
-     * @param
-     * @return String
-     * @throws DukeException
-     * @author Hang Zelin
-     * @description return a String which is an operation type in a line of command.
+     * Returns a String which is an operation type in a line of command.
+     *
+     * @return Operation type parsed from users' one line of command.
+     * @throws DukeException Throws when the operation type does not belong to any one of the types that
+     * duke can do.
      */
     public String getOperationType() throws DukeException {
         String OperationType;
@@ -184,11 +178,10 @@ public class Parser {
     }
 
     /**
-     * @param
-     * @return String
-     * @throws DukeException
-     * @author Hang Zelin
-     * @description return a String which is task info in a line of command.
+     * Returns a String which is task info in a line of command.
+     *
+     * @return Operation type parsed from users' one line of command.
+     * @throws DukeException Throws when the task info cannot be retrieved from users' one line of command.
      */
     public String getTask() throws DukeException {
         String task = "";
@@ -210,11 +203,11 @@ public class Parser {
     }
 
     /**
-     * @param
-     * @return String
-     * @throws DukeException
-     * @author Hang Zelin
-     * @description return a String which is time info in a line of command.
+     * Returns a String which is time info in a line of command.
+     *
+     * @return Time parsed from users' one line of command.
+     * @throws DukeException Throws when users' the time cannot be parsed out or the parsed out time does not
+     * fit the format for a specific task type.
      */
     public String getTime() throws DukeException {
         String time = "";
@@ -255,12 +248,11 @@ public class Parser {
     }
 
     /**
-     * @param
-     * @return Integer
-     * @author Hang Zelin
-     * @description return a String which is index info in a line of command.
+     * return a String which is index info in a line of command.
      * Noted: It is possible that index does not exist. This method will only be applicable for "tell", "find",
      * "done" and "delete" operation type.
+     *
+     * @return Index parsed from users' one line of command if it contains an index.
      */
     public Integer getIndex() {
         int index = (Message.contains(" ") && (Message.startsWith("done") || Message.startsWith("delete")))

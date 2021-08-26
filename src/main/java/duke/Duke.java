@@ -1,12 +1,9 @@
 /**
  * @author Hang Zelin
- * The main Programme to execute the Duke Project
- * <p>
+ * Main Programme to execute the Duke Project
  * Duke will allow users to add three types of tasks: "todo" "deadline" "event".
- * <p>
  * Duke also allow users to list all tasks, mark a task to be done if it is finished, and
  * delete the task if the task is finished.
- * <p>
  * You can also search a specific task by its date, keyword.
  */
 package duke;
@@ -42,43 +39,42 @@ public class Duke {
     }
 
     /**
-     * @param taskType
-     * @param task
-     * @param time
-     * @param index
-     * @return void
-     * @auther Hang Zelin
-     * @description Choose a specific task to execute via tasks type and add to the tasklists.
+     * Chooses a specific task to execute via tasks type and add to the tasklists.
      * Every time an execution is done, the task will be stored to the local file called tasks.txt
      * via Storage.
+     *
+     * @param operationType Type of the operation users input.
+     * @param task Task info users input.
+     * @param time Time info users input.
+     * @param index Index of the task users input.
      */
-    public void OperationForDuke(String taskType, String task, String time, int index) {
-        switch (taskType) {
+    public void operationForDuke(String operationType, String task, String time, int index) {
+        switch (operationType) {
         case "bye": {
-            ui.GoodbyeMessage();
+            ui.goodbyeMessage();
             break;
         }
         case "list": {
-            ui.PrintList(tasks);
+            ui.printList(tasks);
             break;
         }
         case "done": {
             try {
                 tasks.detectIndex(index);
-                tasks.MarkDone(index);
-                ui.MarkDone(tasks.get(index).getTaskInfo());
+                tasks.markDone(index);
+                ui.markDone(tasks.get(index).getTaskInfo());
             } catch (DukeException e) {
-                e.PrintErrorMessage();
+                e.printErrorMessage();
             }
             break;
         }
         case "delete": {
             try {
                 tasks.detectIndex(index);
-                ui.Delete(tasks.get(index).getTaskInfo(), tasks.size() - 1);
-                tasks.Delete(index);
+                ui.delete(tasks.get(index).getTaskInfo(), tasks.size() - 1);
+                tasks.delete(index);
             } catch (DukeException e) {
-                e.PrintErrorMessage();
+                e.printErrorMessage();
             }
             break;
         }
@@ -88,16 +84,16 @@ public class Duke {
             break;
         }
         case "find": {
-            ui.FindTask();
-            tasks.FindTask(task);
+            ui.findTasks();
+            tasks.findTasks(task);
             break;
         }
         default: {
             try {
-                tasks.add(taskType, task, time);
+                tasks.add(operationType, task, time);
                 ui.add(tasks.get(tasks.size() - 1).getTaskInfo(), tasks.size());
             } catch (DukeException e) {
-                e.PrintErrorMessage();
+                e.printErrorMessage();
             }
             break;
         }
@@ -105,33 +101,26 @@ public class Duke {
     }
 
     /**
-     * @param
-     * @return void
-     * @author Hang Zelin
-     * @Description Update a save data every time a round of execution is done.
+     * Updates a save data every time a round of execution is done.
      */
-    public void UpdateSaveData() {
+    public void updateSaveData() {
         try {
-            storage.SaveListDataToFile(tasks);
+            storage.saveListDataToFile(tasks);
         } catch (IOException e) {
             ui.showSavingError();
         }
     }
 
     /**
-     * @param
-     * @return void
-     * @author Hang Zelin
-     * @description Run the programme of Duke. It will firstly say Hello to users. Then it will repeatedly accept input from
+     * Runs the programme of Duke. It will firstly say Hello to users. Then it will repeatedly accept input from
      * users and filter out key commands, then call OperationForDuke to execute a task by commands. The process will not stop
      * until users enter "goodbye".
-     * <p>
      * Noted: Every time an execution is done, the savedata will be updated.
      */
     public void run() {
         //Say Hello to the User
-        ArrayList<String> Messages;
-        String taskType = "";
+        ArrayList<String> messages;
+        String operationType = "";
         String task = "";
         String time = "";
         int index = 0;
@@ -139,29 +128,29 @@ public class Duke {
 
         while (true) {
             try {
-                Messages = ui.ARoundOfInput();
+                messages = ui.getInputForARound();
             } catch (DukeException e) {
-                ui.PrintAline();
-                e.PrintErrorMessage();
-                ui.PrintAline();
+                ui.printAline();
+                e.printErrorMessage();
+                ui.printAline();
                 continue;
             }
 
-            if (Messages.size() < 4) {
+            if (messages.size() < 4) {
                 continue;
             }
 
-            taskType = Messages.get(0);
-            task = Messages.get(1);
-            time = Messages.get(2);
-            index = Integer.parseInt(Messages.get(3));
+            operationType = messages.get(0);
+            task = messages.get(1);
+            time = messages.get(2);
+            index = Integer.parseInt(messages.get(3));
 
-            ui.PrintAline();
-            OperationForDuke(taskType, task, time, index);
-            ui.PrintAline();
+            ui.printAline();
+            operationForDuke(operationType, task, time, index);
+            ui.printAline();
 
-            UpdateSaveData(); //Update the SaveData every time a round of operation is done.
-            if (taskType.equals("bye")) {
+            updateSaveData(); //Update the SaveData every time a round of operation is done.
+            if (operationType.equals("bye")) {
                 break;
             }
         }

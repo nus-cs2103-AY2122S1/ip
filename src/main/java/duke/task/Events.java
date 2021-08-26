@@ -1,6 +1,7 @@
 /**
  * @author Hang Zelin
- * @description Events class that extends Task class. It is one of the types in 3 tasks.
+ * <p>
+ * Events class that extends Task class. It is one of the types in 3 tasks.
  * Will contain a time in the form of "/by"
  */
 package duke.task;
@@ -11,9 +12,9 @@ import java.util.Locale;
 
 public class Events extends Task {
 
-    private boolean done = false;
-    private String task = "";
-    private LocalDateTime time = null;
+    private boolean done;
+    private String task;
+    private LocalDateTime time;
     private String taskType = "E";
 
     public Events(boolean done, String task, LocalDateTime time) {
@@ -31,16 +32,16 @@ public class Events extends Task {
             done_str = "X";
         }
 
-        return "[" + taskType + "]" + "[" + done_str + "] " + task + " (at: " + ParsedTime() + ")";
+        return "[" + taskType + "]" + "[" + done_str + "] " + task + " (at: " + parsedTime() + ")";
     }
 
     @Override
-    public void MarkDone() {
+    public void markDone() {
         this.done = true;
     }
 
     @Override
-    public String ParsedTime() {
+    public String parsedTime() {
         String parsedTime = "";
         if (this.time != null) {
             parsedTime = this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH));
