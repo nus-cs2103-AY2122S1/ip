@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Parser {
 
     public enum Keyword {
-        TODO, EVENT, DEADLINE, LIST, DONE, DELETE, BYE
+        TODO, EVENT, DEADLINE, LIST, DONE, DELETE, BYE, FIND
     }
 
     private TaskList tasks;
@@ -100,6 +100,21 @@ public class Parser {
             addComplete(new Event(description, date, timing));
         }
     }
+
+    private void printTasksWithKeyword(String keyword) throws InvalidDescriptionException {
+        TaskList listWithKeyword = new TaskList();
+        for (Task task : tasks.getTaskList()) {
+            if (task.toString().contains(keyword)) {
+                listWithKeyword.add(task);
+            }
+        }
+        if (listWithKeyword.size() < 1) {
+            throw new InvalidDescriptionException("There are no tasks that matches this keyword!");
+        } else {
+            TaskList.printItemList(listWithKeyword);
+        }
+    }
+
     public boolean parseCommand() {
 
         String input;
@@ -148,6 +163,13 @@ public class Parser {
                     String eventDescription = getSecondWord(arr_event[0]);
                     String eventTiming = getSecondWord(arr_event[1]).substring(0, getSecondWord(arr_event[1]).length() - 1);
                     addEvent(eventDescription, eventTiming);
+                    break;
+                case FIND:
+                    if (getSecondWord(input).length() < 1) {
+                        throw new InvalidDescriptionException("☹ OOPS!!! Please enter a suitable keyword to find!");
+                    }
+                    String findKeyword = getSecondWord(input);
+                    printTasksWithKeyword(findKeyword);
                     break;
                 default:
                     throw new InvalidInputException("Please check your input!");

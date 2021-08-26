@@ -62,7 +62,7 @@ public class TaskList {
         return tasks;
     }
 
-    public void printItemList(TaskList tasks) {
+    public static void printItemList(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + "." + tasks.get(i).toString());
