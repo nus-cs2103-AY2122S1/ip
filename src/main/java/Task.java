@@ -3,10 +3,10 @@ public abstract class Task {
     protected boolean isDone;
     protected Integer order;
 
-    public Task(String description) throws DukeException1 {
-        if(description.equals("blah")) {
+    public Task(String description) {
+        /*if(description.equals("blah")) {
             throw new DukeException1();
-        }
+        }*/
         this.description = description;
         this.isDone = false;
         this.order = 0;
@@ -35,6 +35,8 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract String storeTask();
 
     @Override
     public String toString() {

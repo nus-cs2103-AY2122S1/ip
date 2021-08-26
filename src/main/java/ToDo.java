@@ -1,8 +1,8 @@
 public class ToDo extends Task {
-    public ToDo(String description) throws DukeException1 {
+    public ToDo(String description) throws TodoException {
         super(description);
         if(description.equals("todo")) {
-            throw new DukeException1();
+            throw new TodoException();
         }
     }
 
@@ -12,6 +12,11 @@ public class ToDo extends Task {
 
     public String getType() {
         return "T";
+    };
+
+    @Override
+    public String storeTask() {
+        return "T/" + getDone() + "/" + getDescription();
     };
 
     @Override
