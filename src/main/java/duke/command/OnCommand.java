@@ -10,10 +10,18 @@ import duke.task.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * OnCommand class handles the 'on' command to list the tasks on a date.
+ */
 public class OnCommand extends Command {
 
     private LocalDate date;
 
+    /**
+     * Constructs the OnCommand object.
+     *
+     * @param date Date queried for the 'on' command.
+     */
     public OnCommand(LocalDate date) {
         this.date = date;
     }

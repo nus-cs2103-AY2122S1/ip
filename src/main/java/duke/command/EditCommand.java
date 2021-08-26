@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * EditCommand class handles the commands that edit a particular task in the tasklist.
+ */
 public class EditCommand extends Command {
 
     private EditType type;
@@ -13,6 +16,12 @@ public class EditCommand extends Command {
 
     public enum EditType {DELETE, DONE}
 
+    /**
+     * Constructs the EditCommand object.
+     *
+     * @param type Edit type of the command.
+     * @param taskNumber Task number of the task to be edited.
+     */
     public EditCommand(EditType type, int taskNumber) {
         this.type = type;
         this.taskNumber = taskNumber;

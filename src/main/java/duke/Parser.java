@@ -4,8 +4,18 @@ import duke.command.*;
 
 import java.time.LocalDate;
 
+/**
+ * Parser class deals with making sense of the user command.
+ */
 public class Parser {
 
+    /**
+     * Returns the command to be executed based on the user's command message.
+     *
+     * @param commandMessage Command message from user's input.
+     * @return Command to be executed.
+     * @throws DukeException  If correct command cannot be created.
+     */
     public static Command parse(String commandMessage) throws DukeException {
         String[] message = commandMessage.split(" ", 2);
         String command = message[0];
@@ -44,6 +54,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks that the Deadline description is valid.
+     *
+     * @param des User's command message excluding the command word.
+     * @return Deadline description string.
+     * @throws DukeException If description is empty or does not contain a date.
+     */
     public static String checkDeadlineDescription(String des) throws DukeException {
         String description = des.trim();
         if (description.isEmpty()) {
@@ -55,6 +72,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks that the Event description is valid.
+     *
+     * @param des User's command message excluding the command word.
+     * @return Event description string.
+     * @throws DukeException If description is empty or does not contain a date.
+     */
     public static String checkEventDescription(String des) throws DukeException {
         String description = des.trim();
         if (description.isEmpty()) {
@@ -66,6 +90,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks that the ToDo description is valid.
+     *
+     * @param des User's command message excluding the command word.
+     * @return ToDo description string.
+     * @throws DukeException If description is empty.
+     */
     public static String checkToDoDescription(String des) throws DukeException {
         String description = des.trim();
         if (description.isEmpty()) {
@@ -75,6 +106,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Retrieves the task number from the user's command message.
+     *
+     * @param des User's command message excluding the command word.
+     * @return Task number of task to be edited.
+     * @throws DukeException If no task number is provided.
+     */
     public static int getTaskNumber(String des) throws DukeException {
         String description = des.trim();
         if (description.isEmpty()) {

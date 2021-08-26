@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * ExitCommand class handles the 'bye' command to close Duke.
+ */
 public class ExitCommand extends Command {
 
     @Override
