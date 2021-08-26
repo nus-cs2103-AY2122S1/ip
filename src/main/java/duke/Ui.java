@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package duke;
+
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
