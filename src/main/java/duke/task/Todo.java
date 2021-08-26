@@ -1,19 +1,34 @@
 package duke.task;
 
+/**
+ * This class represents a {@code Todo} task.
+ * 
+ * @author Eizabeth Chow
+ */
 public class Todo extends Task {
     /**
-     * Constructor of a Todo task.
+     * Constructs a {@code Todo} task with the given title.
      *
-     * @param title title of the Todo task
+     * @param title Title of {@code Todo} task.
      */
     public Todo(String title) {
         super(title);
     }
 
+    /**
+     * Constructs a {@code Todo} task with the given title and status.
+     * 
+     * @param title  Title of {@code Todo}.
+     * @param isDone Status of {@code Todo}.
+     */
     public Todo(String title, boolean isDone) {
         super(title, isDone);
     }
 
+    /**
+     * {@inheritDoc} Adds "T |" infront to indicate that it is a {@code Todo} task.
+     */
+    @Override
     public String toFileString() {
         return String.format("T | %s", super.toFileString());
     }
@@ -26,10 +41,5 @@ public class Todo extends Task {
      */
     public String toString() {
         return String.format("[T]%s", super.toString());
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return super.equals(other);
     }
 }

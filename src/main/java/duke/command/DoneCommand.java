@@ -1,20 +1,33 @@
 package duke.command;
 
+import duke.Pair;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
-
-import java.util.Arrays;
-
-import duke.Pair;
-
 import duke.task.Task;
 
+/**
+ * This class represents a {@code DoneCommand}. User input for a
+ * {@code DoneCommand} starts with "done".
+ * 
+ * @author Elizabeth Chow
+ */
 public class DoneCommand extends Command {
+    /**
+     * Constructor for a {@code DeleteCommand}
+     * 
+     * @param args {@code String} array with length 1. {@code args[0]} contains the
+     *             task number to be marked as done.
+     */
     public DoneCommand(String[] args) {
         super(args);
     }
 
+    /**
+     * {@inheritDoc} Marks a {@code Task} as done and writes to storage. If task is
+     * already done, ui will display an error message.
+     */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         int taskNo = Integer.valueOf(args[0]);
         Pair<Boolean, Task> statusTaskPair = tasks.markTaskDone(taskNo);
@@ -29,16 +42,14 @@ public class DoneCommand extends Command {
         storage.writeToFile(tasks);
     }
 
-    public boolean isExit() {
-        return false;
-    }
-
+    /**
+     * Returns {@code false}. Program should not terminate after
+     * {@code DoneCommand}.
+     * 
+     * @return {@code false}
+     */
     @Override
-    public boolean equals(Object other) {
-        if (other instanceof DoneCommand) {
-            DoneCommand otherCommand = (DoneCommand) other;
-            return Arrays.equals(this.args, otherCommand.args);
-        }
+    public boolean isExit() {
         return false;
     }
 }

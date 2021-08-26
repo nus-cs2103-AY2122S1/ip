@@ -13,13 +13,28 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * This class represents a {@code Storage} to read and write to files.
+ * 
+ * @author Elizabeth Chow
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a new {@code Storage} with the given filePath.
+     * 
+     * @param filePath File path of the txt file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads file from the file path and returns a list of {@code Task} in the file.
+     * 
+     * @return An ArrayList of {@code Task}
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = null;
@@ -65,6 +80,13 @@ public class Storage {
 
     }
 
+    /**
+     * Writes to file at the specified file path with the given tasks.
+     * 
+     * @param tasks Tasks to be written to be file.
+     * 
+     * @throws DukeException IOException occured when writing to file.
+     */
     public void writeToFile(TaskList tasks) throws DukeException {
         PrintWriter printWriter = null;
         try {

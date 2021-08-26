@@ -1,11 +1,16 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
+
+/**
+ * This class represents a {@code Deadline} task.
+ * 
+ * @author Eizabeth Chow
+ */
 public class Deadline extends Task {
     // End date of the Deadline object
     private LocalDateTime endDate;
@@ -13,22 +18,30 @@ public class Deadline extends Task {
     private final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
 
     /**
-     * Constructor of a Deadline object.
+     * Constructs a {@code Deadline} object with the given title and end date.
      *
-     * @param title   title of the Deadline task
-     * @param endDate endDate of the Deadline task
+     * @param title   Title of {@code Deadline}.
+     * @param endDate End date of {@code Deadline}.
      */
     public Deadline(String title, String endDate) {
         super(title);
         this.endDate = parseDateTime(endDate.trim());
     }
 
+    /**
+     * Constructs a {@code Deadline} object with the given title, end date and
+     * status.
+     * 
+     * @param title   Title of {@code Deadline}.
+     * @param endDate End date of {@code Deadline}.
+     * @param isDone  Status of {@code Deadline}.
+     */
     public Deadline(String title, String endDate, boolean isDone) {
         super(title, isDone);
         this.endDate = parseDateTime(endDate.trim());
     }
 
-    private LocalDateTime parseDateTime(String date) {
+    private LocalDateTime parseDateTime(String date) throws DukeException {
         try {
             LocalDateTime parsedDateTime = LocalDateTime.parse(date, FORMATTER);
             return parsedDateTime;
@@ -39,6 +52,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc} Adds "D |" infront to indicate that it is a {@code Deadline}
+     * task.
+     */
+    @Override
     public String toFileString() {
         return String.format("D | %s | %s", super.toFileString(), endDate.format(FORMATTER));
     }
@@ -53,6 +71,9 @@ public class Deadline extends Task {
         return String.format("[D]%s (by: %s)", super.toString(), endDate.format(PRINT_FORMATTER));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object other) {
         if (other instanceof Deadline) {
