@@ -193,6 +193,7 @@ public class Duke {
 
     private static void deleteTask(int taskNum) {
         Task deletedTask = tasks.remove(taskNum - 1);
+        saveTasks(savePath);
         System.out.println(DUKE + "\n\tRemoving task:");
         System.out.printf("\t\t%s\n", deletedTask);
         System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
