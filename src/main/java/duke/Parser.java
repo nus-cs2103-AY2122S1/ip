@@ -6,6 +6,7 @@ public class Parser {
         String operation = strings[0];
         switch (operation) {
         case "bye":
+            // Fallthrough
         case "list":
             return new Command(operation);
         case "done":
@@ -51,6 +52,11 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("The task to be deleted should be indicated its list index.");
             }
+        case "find":
+            if (strings.length == 1) {
+                throw new DukeException(Ui.EXPECTED_SEARCH_QUERY);
+            }
+            return new Command(strings[0], input.substring(5));
         default:
             throw new DukeException("Sorry, I do not understand this command.");
         }

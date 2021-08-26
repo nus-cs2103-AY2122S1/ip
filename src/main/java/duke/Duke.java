@@ -71,6 +71,9 @@ public class Duke {
                 taskList.delete(command.getIndex() - 1);
                 ui.showDeleted(task, taskList.size());
                 break;
+            case "find":
+                TaskList filteredTasks = taskList.find(command.getDescription());
+                ui.showMatches(filteredTasks);
             }
         }
     }

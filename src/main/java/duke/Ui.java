@@ -1,11 +1,13 @@
 package duke;
 
 public class Ui {
-    private static final String introString = "Hey there! I'm Good duke.Duke. How many I help you today?";
-    private static final String outroString = "That was an excellent chat - I look forward to seeing you again soon!";
-    private static final String readSaveString = "Sorry, there was a problem reading the save file :(";
-    private static final String writeSaveString = "Sorry, there was a problem saving your tasks :(";
-    private static final String newSaveString = "Empty save file detected - loading a blank list.";
+    static final String introString = "Hey there! I'm Good duke.Duke. How many I help you today?";
+    static final String outroString = "That was an excellent chat - I look forward to seeing you again soon!";
+    static final String readSaveString = "Sorry, there was a problem reading the save file :(";
+    static final String writeSaveString = "Sorry, there was a problem saving your tasks :(";
+    static final String newSaveString = "Empty save file detected - loading a blank list.";
+    static final String SHOW_MATCHES_STRING = "Here are the matching tasks in your list:";
+    static final String EXPECTED_SEARCH_QUERY = "The search query of a find operation cannot be empty.";
 
     private String addedString(Task task, int size) {
         return String.format("Alright, I've added this task: \n\t%s\nNow, you have %d tasks in the list.\n", task, size);
@@ -68,5 +70,9 @@ public class Ui {
 
     public void showNewSave() {
         print(newSaveString);
+    }
+    
+    public void showMatches(TaskList tasks) {
+        print(SHOW_MATCHES_STRING + "\n" + taskListString(tasks));
     }
 }
