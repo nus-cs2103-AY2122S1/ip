@@ -20,6 +20,12 @@ import retriever.task.*;
 public class Storage {
     private String filePath;
 
+    /**
+     * Sets the file path, so that operations such as read and write may be
+     * performed on that file.
+     *
+     * @param filePath The file path in which tasks may be stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }

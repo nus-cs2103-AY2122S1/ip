@@ -15,12 +15,23 @@ public class TaskList {
     private Storage taskStorage;
     private Ui ui;
 
+    /**
+     * Initializes the task list, calls a method to read
+     * and parse the file to populate the user task list.
+     *
+     * @param taskStorage The storage object is used to read and write the tasks in a text file.
+     */
     public TaskList(Storage taskStorage) {
         this.taskStorage = taskStorage;
         this.userTaskList = taskStorage.readTasks();
         this.ui = new Ui();
     }
 
+    /***
+     * Returns the number of tasks present in the task list.
+     *
+     * @return The length of the user task list.
+     */
     public int taskListLength() {
         return userTaskList.size();
     }

@@ -11,6 +11,11 @@ public class TaskDateAndTime {
     private String userInputDateAndTime;
     private LocalDate taskDateAndTime;
 
+    /**
+     * Initializes a date and time for a task.
+     *
+     * @param userInputDateAndTime The date and time entered by the user.
+     */
     public TaskDateAndTime(String userInputDateAndTime) {
         this.userInputDateAndTime = userInputDateAndTime;
         isValidDate();

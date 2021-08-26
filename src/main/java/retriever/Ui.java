@@ -22,6 +22,9 @@ public class Ui {
 
     private Scanner scanner;
 
+    /**
+     * Sets up the scanner to take in user input.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
     }
