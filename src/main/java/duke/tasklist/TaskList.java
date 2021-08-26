@@ -5,7 +5,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * The TaskList class encapsulates a List of Tasks.
+ * The TaskList class encapsulates a list of tasks.
  */
 public class TaskList {
     /** An arraylist of Tasks to note all the Tasks stored in the TaskList. */
@@ -58,14 +58,27 @@ public class TaskList {
         nextSpaceToStore = nextSpaceToStore - 1;
     }
 
+    /**
+     * Returns the next position to store the task in the tasklist.
+     * @return The next position to store the task in the tasklist.
+     */
     public int getNextSpaceToStore() {
         return this.nextSpaceToStore;
     }
 
+    /**
+     * Returns the entire ArrayList the tasks are stored in.
+     * @return The entire ArrayList the tasks are stored in.
+     */
     public ArrayList<Task> getAllTasks() {
         return this.allTasks;
     }
 
+    /**
+     * Returns the specified task from the tasklist.
+     * @param taskNo The task to be retrieved.
+     * @return The specified task from the tasklist.
+     */
     public Task getSpecificTask(int taskNo) {
         return allTasks.get(taskNo - 1);
     }

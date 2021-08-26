@@ -20,7 +20,7 @@ public class Parser {
      * @return The corresponding type of executable command from the user input.
      */
     public Command parse(String fullCommand) {
-        Command command = null;
+        Command command;
         String[] commandSplit = fullCommand.split(" ", 2);
 
         // Determine the type of command and initialise the according command
