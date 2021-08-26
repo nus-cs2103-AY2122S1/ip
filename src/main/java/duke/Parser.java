@@ -9,7 +9,6 @@ import duke.commands.ListCommand;
 import duke.commands.UnknownCommand;
 import duke.commands.FindCommand;
 
-import duke.exceptions.DukeException;
 import duke.exceptions.InvalidInputException;
 
 import java.time.LocalDate;
