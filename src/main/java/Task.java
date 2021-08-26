@@ -3,6 +3,8 @@ public abstract class Task {
     private TaskType taskType;
     private boolean isDone;
 
+    public abstract String toSaveFormat();
+
     public Task(String taskName, TaskType taskType, boolean isDone) {
         this.taskName = taskName;
         this.taskType = taskType;
@@ -19,6 +21,10 @@ public abstract class Task {
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
+    }
+
+    public TaskType getTaskType() {
+        return taskType;
     }
 
     public boolean isDone() {
