@@ -1,6 +1,11 @@
 package duke;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Encapsulates the methods needed to read and write to a save file.
@@ -19,6 +24,7 @@ public class Storage {
 
     /**
      * Writes the contents of Duke's task list to the save file
+     *
      * @param taskList The list of tasks to be saved
      * @throws IOException If the file cannot be written to
      */
@@ -35,7 +41,7 @@ public class Storage {
      * the saved tasks
      *
      * @return TaskList object containing saved tasks
-     * @throws IOException If the reading of the file fails
+     * @throws IOException            If the reading of the file fails
      * @throws ClassNotFoundException If the save data is of a missing class
      */
     public TaskList readSave() throws IOException, ClassNotFoundException {
@@ -49,6 +55,5 @@ public class Storage {
         } else {
             return new TaskList();
         }
-
     }
 }

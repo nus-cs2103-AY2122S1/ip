@@ -18,7 +18,7 @@ public class Deadline extends Task {
      * a LocalDate object will be created to represent the date.
      *
      * @param description Description of the deadline task
-     * @param by Deadline of the task
+     * @param by          Deadline of the task
      */
     public Deadline(String description, String by) {
         super(description);
@@ -57,6 +57,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + ((byDate == null) ? by : parseByDate()) + ")";
+        return "[D]" + super.toString()
+                + " (by: "
+                + ((byDate == null) ? by : parseByDate())
+                + ")";
     }
 }

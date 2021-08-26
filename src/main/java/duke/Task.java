@@ -17,7 +17,7 @@ public class Task implements Serializable {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Task implements Serializable {
      * @param bool Whether the task should be marked as done
      */
     public void setDone(boolean bool) {
-        this.isDone = bool;
+        isDone = bool;
     }
 
     /**
@@ -46,6 +46,6 @@ public class Task implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 }
