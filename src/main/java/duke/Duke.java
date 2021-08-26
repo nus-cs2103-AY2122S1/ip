@@ -1,15 +1,4 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
+package duke;
 
 
 public class Duke {
