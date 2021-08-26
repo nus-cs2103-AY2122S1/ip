@@ -19,8 +19,9 @@ public class Parser {
 			Ui.printFormattedMessage("Bye. Hope to see you again soon!\n");
 			return true;
 		} else if (command.startsWith("list")) {
-			Duke.tasks.printTasks();
-			return false;
+			Duke.tasks.printTasks("");
+		} else if (command.startsWith("find")) {
+			Duke.tasks.findTasks(command);
 		} else if (command.startsWith("done")) {
 			Duke.tasks.handleDone(command);
 		} else if (command.startsWith("delete")) {
@@ -35,7 +36,6 @@ public class Parser {
 			throw new DukeException("I don't understand that command!\n");
 		}
 
-		Duke.storage.saveTasks(Duke.tasks.getTasks());
 		return false;
 	}
 }

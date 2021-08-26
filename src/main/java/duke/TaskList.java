@@ -38,16 +38,17 @@ public class TaskList {
 		return tasks;
 	}
 
-	
     /**
      * Marks a task as done.
      * 
      * @param taskNum the task number to mark as done
+     * @throws DukeException if file not found
      */
-    protected void completeTask(int taskNum) {
+    protected void completeTask(int taskNum) throws DukeException {
         Task task = tasks.get(taskNum - 1);
         task.setDone(true);
         Ui.printFormattedMessage("Good job! I've marked this task as done:\n\n\t" + task + "\n");
+        Duke.storage.saveTasks(this.getTasks());
     }
 
 	/**
@@ -55,13 +56,14 @@ public class TaskList {
      * 
      * @param num the task number to delete
      */
-    protected void deleteTask(int num) {
+    protected void deleteTask(int num) throws DukeException{
         int taskIdx = num - 1;
         Task taskToDelete = tasks.get(taskIdx);
         tasks.remove(taskIdx);
         Ui.printFormattedMessage("Noted. I've removed this task:\n\t" 
                                 + taskToDelete
-                                + "\n\tNow you have " + tasks.size() + " tasks in the list.\n"); 
+                                + "\n\tNow you have " + tasks.size() + " tasks in the list.\n");
+        Duke.storage.saveTasks(this.getTasks());
     } 
 
     /**
@@ -116,11 +118,12 @@ public class TaskList {
      * 
      * @param t the task to add
      */
-    private void addTask(Task t) {
+    private void addTask(Task t) throws DukeException {
 		this.tasks.add(t);
         Ui.printFormattedMessage("Got it. I've added this task:\n\t" 
                                 + t 
                                 + "\n\tNow you have " + tasks.size() + " tasks in the list.\n"); 
+        Duke.storage.saveTasks(this.getTasks());
     } 
 
     /**
@@ -224,7 +227,7 @@ public class TaskList {
 	/**
      * Prints all the tasks in the ArrayList of tasks.
      */
-    public void printTasks() {
+    public void printTasks(String keyword) {
         if (tasks.isEmpty()) {
             Ui.printFormattedMessage("You have no tasks!\n");
             return;
@@ -234,10 +237,21 @@ public class TaskList {
 
         for (int i = 0; i < tasks.size(); i++) {
             int taskNum = i + 1;
-            String task = "\t" + taskNum+ ". " + tasks.get(i);
-            taskListMessage.append(task).append("\n");
+            String task = "\t" + taskNum + ". " + tasks.get(i);
+            if (task.contains(keyword)) {
+                taskListMessage.append(task).append("\n");
+            }
         }
 
 		Ui.printFormattedMessage(taskListMessage.toString());
+    }
+
+    public void findTasks(String command) throws DukeException{
+        if (command.trim().equals("find")) {
+            throw new DukeException("You need to specify a keyword!");
+        }
+
+        String keyword = command.split(" ")[1];
+        printTasks(keyword);
     }
 }
