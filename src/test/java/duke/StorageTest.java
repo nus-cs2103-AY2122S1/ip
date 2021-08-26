@@ -9,6 +9,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Tests the methods in Storage class.
+ */
 public class StorageTest {
 
     @Test
