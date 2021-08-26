@@ -1,6 +1,8 @@
+package duke.tasks;
+
 import java.time.LocalDateTime;
 
-public class Event extends Task{
+public class Event extends Task {
 
     private Event(String description, LocalDateTime time) {
         super(description, "E", time);

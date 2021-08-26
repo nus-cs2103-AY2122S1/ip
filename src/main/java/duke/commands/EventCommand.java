@@ -1,4 +1,10 @@
-public class EventCommand extends Command{
+package duke.commands;
+
+import duke.Ui;
+import duke.storage.Storage;
+import duke.tasks.Event;
+
+public class EventCommand extends Command {
     Event event;
     public EventCommand(Event event) {
         this.event = event;

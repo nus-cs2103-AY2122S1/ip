@@ -1,3 +1,8 @@
+package duke.storage;
+
+import duke.tasks.Task;
+import duke.DukeExceptions;
+
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;

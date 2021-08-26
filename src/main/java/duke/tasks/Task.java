@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -23,7 +25,7 @@ public class Task {
         this.time = time;
     }
 
-    protected String getStatusIcon() {
+    public String getStatusIcon() {
         return (isDone? "X" : " ");
     }
 

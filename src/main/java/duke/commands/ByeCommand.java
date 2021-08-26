@@ -1,7 +1,11 @@
+package duke.commands;
+
+import duke.Ui;
+import duke.storage.Storage;
 public class ByeCommand extends Command {
 
     /**
-     * Call Ui to print goodbye
+     * Call duke.Ui to print goodbye
      * Returns true to break main loop
       */
     @Override

@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.DukeExceptions;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -60,7 +68,7 @@ public class TaskList extends ArrayList<Task>{
         return result.toString();
     }
 
-    public void markAsFinished(int index) throws DukeExceptions{
+    public void markAsFinished(int index) throws DukeExceptions {
         Task task = this.get(index);
         if (task.getStatusIcon().equals("X")) {
             throw new DukeExceptions("That task was already marked as done");
