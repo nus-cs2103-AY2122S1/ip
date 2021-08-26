@@ -1,3 +1,4 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -76,18 +77,10 @@ public class Duke {
                 System.out.println(e.getMessage());
             } catch (TaskException e){
                 System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("Your time for the deadline is not in the correct format of dd-MM-yyyy HH:mm");
             }
             System.out.println("Now you have " + list.getNumTask() + " task" + (list.getNumTask() > 1 ? "s " : " ") + "in the list");
-
-//            if (commandSplit[0].equals("todo")) {
-//                Todo newTask = new Todo(commandSplit[1]);
-//                list.add(newTask);
-//
-//            }
-//            Task newTask = new Task(command);
-
-//            list.add(newTask);
-
         }
     }
 }
