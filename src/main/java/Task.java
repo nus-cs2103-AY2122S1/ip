@@ -26,7 +26,7 @@ public class Task {
      * @return "X" if the test is done, else " "
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "1" : "0"); // mark done task with X
     }
 
     /**
@@ -43,6 +43,6 @@ public class Task {
      * @return The description of the task
      */
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "| " + getStatusIcon() + " | " + description;
     }
 }

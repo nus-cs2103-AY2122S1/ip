@@ -60,7 +60,7 @@ public class Items {
         Task task = list.get(index - 1);
         list.remove(index - 1);
         String output = "Noted. I have removed this task:\n" + task.toString()
-                + "\n Now you have " + list.size() + " tasks remaining";
+                + "\n Number of tasks remaining: " + list.size();
         return output;
 
     }
@@ -77,9 +77,9 @@ public class Items {
 
         for (int i = 0; i < list.size(); i++) {
             if (i < list.size() - 1) {
-                str.append(" ").append(i + 1).append(".").append(list.get(i).toString()).append("\n");
+                str.append(" ").append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
             } else {
-                str.append(" ").append(i + 1).append(".").append(list.get(i).toString());
+                str.append(" ").append(i + 1).append(". ").append(list.get(i).toString());
             }
         }
         return str.toString();
