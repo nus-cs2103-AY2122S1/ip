@@ -1,18 +1,18 @@
 package duke;
 
-import duke.exceptions.CommandParamException;
-import duke.exceptions.DukeFileException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exceptions.CommandParamException;
+import duke.exceptions.DukeFileException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * This is a Storage class that deals with loading tasks

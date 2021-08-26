@@ -37,7 +37,7 @@ public class Duke {
         ui.showWelcomeMessage();
         boolean isExit = false;
 
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.decipher(fullCommand);
@@ -51,9 +51,10 @@ public class Duke {
 
     }
 
+    /** Main method */
     public static void main(String[] args) {
         java.nio.file.Path filepath = java.nio.file.Paths.get("src",
-                "main", "java","data","StoredData.txt");
+                "main", "java", "data", "StoredData.txt");
         new Duke(filepath.toString()).run();
     }
 

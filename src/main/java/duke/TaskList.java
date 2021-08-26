@@ -1,13 +1,13 @@
 package duke;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.exceptions.DukeFileException;
 import duke.exceptions.EmptyListException;
 import duke.exceptions.TaskIsCompleteException;
 import duke.exceptions.TaskNotFoundException;
 import duke.task.Task;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * This is a TaskList class that contains the task list.
