@@ -50,6 +50,8 @@ public class Parser {
             return hasParsedDelete(taskList, command);
         case "done":
             return hasParsedDone(taskList, command);
+        case "find":
+            return hasParsedFind(taskList, command);
         default:
             throw new NoCommandException();
         }
@@ -100,6 +102,25 @@ public class Parser {
      */
     public static boolean hasParsedList(TaskList taskList) {
         taskList.printTasksInList();
+        return false;
+    }
+
+    /**
+     * Returns false for duke to continue running.
+     *
+     * @param taskList List of tasks
+     * @param details Array of details about the find command entered by user
+     * @return Boolean value to keep duke running
+     * @throws DukeException If user didn't enter keyword for find
+     */
+    public static boolean hasParsedFind(TaskList taskList, String[] details) throws DukeException {
+        if (details.length == 1) {
+            throw new DukeException("Please enter a keyword to find matching tasks...");
+        }
+
+        String keyword = details[1].trim();
+        taskList.findMatchingTasks(keyword);
+
         return false;
     }
 

@@ -53,7 +53,7 @@ public class Ui {
      */
     public String showTaskAdded(Task task, int listLength) {
         String output = String.format("added: " + task.toString()
-                + "\nNow you have %s tasks in your list\n" , listLength);
+                + "\nNow you have %s tasks in your list" , listLength);
         System.out.println(output);
         return output;
     }
@@ -86,11 +86,22 @@ public class Ui {
     }
 
     /**
+     * Prints task number in list and task details.
+     *
+     * @param task Task to be printed
+     * @param listPosition Index of task in list
+     */
+    public void showTask(Task task, int listPosition) {
+        System.out.printf("\t%s." + task.toString() + "%n", listPosition);
+    }
+
+    /**
      * Prints bye message.
      */
     public void showBye() {
         System.out.println("Bye! Hope to see you again soon!");
     }
+
 
     /**
      * Returns string of error message.
@@ -98,9 +109,8 @@ public class Ui {
      * @param message Error message
      * @return String representation of error
      */
-    public String showError(String message) {
+    public void showError(String message) {
         System.out.println(message);
-        return message;
     }
 
 }

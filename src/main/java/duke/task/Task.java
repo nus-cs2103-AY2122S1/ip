@@ -21,6 +21,17 @@ public class Task {
     }
 
     /**
+     * Returns true if this task contains the keyword.
+     * Otherwise, false is returned.
+     *
+     * @param keyword Word to match in task list
+     * @return boolean value whether the task contains keyword
+     */
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
+    /**
      * Returns task as string in the format to be saved.
      *
      * @return String representation of task to be saved
