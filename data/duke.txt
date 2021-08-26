@@ -1,3 +1,0 @@
-E,0,hello,8pm
-T,1,fight
-D,1,speech,8pm

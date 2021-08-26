@@ -27,14 +27,10 @@ public class Event extends Entry{
     }
 
     @Override
-<<<<<<< HEAD
-    public boolean isEmpty() { return super.isEmpty() || event.length() < 1; }
-
-    @Override
     public String saveString() {
         return "E" + super.saveString() + "," + this.event;
     }
-=======
+
+    @Override
     public boolean isEmpty() { return super.isEmpty() && event.isAfter(LocalDate.now()); }
->>>>>>> branch-Level-8
 }

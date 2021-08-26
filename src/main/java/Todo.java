@@ -12,12 +12,9 @@ public class Todo extends Entry {
     public String toString() {
         return "[T]" + super.toString();
     }
-<<<<<<< HEAD
 
     @Override
     public String saveString() {
         return "T" + super.saveString();
     }
 }
-}
->>>>>>> branch-Level-8
