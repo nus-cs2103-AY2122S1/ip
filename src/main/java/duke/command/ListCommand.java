@@ -6,6 +6,9 @@ import duke.task.TaskManager;
 import duke.ui.Ui;
 import duke.util.DukeDateTime;
 
+/**
+ * Represents a command for listing tasks.
+ */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String USAGE_MESSAGE =

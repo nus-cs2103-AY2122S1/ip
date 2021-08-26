@@ -4,6 +4,9 @@ import duke.task.TaskManager;
 
 import java.util.Scanner;
 
+/**
+ * UI of the application.
+ */
 public class Ui {
     private static final int DEFAULT_INDENTATION_LEVEL = 4;
     private static final String DEFAULT_SEPARATOR = "_";
@@ -18,6 +21,11 @@ public class Ui {
         separator = DEFAULT_SEPARATOR.repeat(DEFAULT_SEPARATOR_LENGTH);
     }
 
+    /**
+     * Greets the user upon starting the application.
+     * @param taskManager the initial <code>TaskManager</code>, used for displaying different messages depending on
+     *                    whether there are tasks found
+     */
     public void greet(TaskManager taskManager) {
         if (taskManager.getTaskCount() > 0) {
             print("Welcome back! I'm Duke. These are the tasks I recall from your last visit.\n\n" + taskManager);
@@ -26,10 +34,16 @@ public class Ui {
         }
     }
 
+    /**
+     * Reads and returns the command entered by the user.
+     */
     public String readCommand() {
         return scanner.nextLine();
     }
 
+    /**
+     * Displays a message when the user exits the application.
+     */
     public void farewell() {
         scanner.close();
         print("Goodbye. Hope to see you again soon!");
@@ -45,6 +59,9 @@ public class Ui {
         System.out.println(indent(separator));
     }
 
+    /**
+     * Formats and displays the response to the ser.
+     */
     public void print(String response) {
         printSeparator();
         System.out.println(indent(response));

@@ -3,6 +3,9 @@ package duke.task;
 import duke.util.DukeDateTime;
 import duke.exception.DukeException;
 
+/**
+ * Represents a <code>Task</code> that occurs on a specific date and time.
+ */
 public class Event extends Task implements Timestampable {
     private final DukeDateTime timestamp;
 
@@ -16,6 +19,12 @@ public class Event extends Task implements Timestampable {
         this.timestamp = timestamp;
     }
 
+    /**
+     * Parses its text representation.
+     * @param text the text representation found
+     * @return the corresponding <code>Event</code> object
+     * @throws DukeException if the text representation cannot be parsed accurately
+     */
     public static Event fromText(String text) throws DukeException {
         String[] eventDetails = text.split(" \\| ", 4);
         if (eventDetails.length < 4) {

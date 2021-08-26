@@ -7,6 +7,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a wrapper around a <code>LocalDateTime</code>.
+ */
 public class DukeDateTime {
     private final static DateTimeFormatter USER_INPUT_DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
@@ -23,6 +26,12 @@ public class DukeDateTime {
         this.dateTime = date.atStartOfDay();
     }
 
+    /**
+     * Parses datetime string entered by the user.
+     * @param str the string entered by the user
+     * @return the corresponding <code>DukeDateTime</code> object
+     * @throws DukeException if the datetime cannot be parsed with the given format
+     */
     public static DukeDateTime parseUserInputDateTime(String str) throws DukeException {
         LocalDateTime dt;
         try {
@@ -34,6 +43,12 @@ public class DukeDateTime {
         return new DukeDateTime(dt);
     }
 
+    /**
+     * Parses date string entered by the user.
+     * @param str the string entered by the user
+     * @return the corresponding <code>DukeDateTime</code> object
+     * @throws DukeException if the date cannot be parsed with the given format
+     */
     public static DukeDateTime parseUserInputDate(String str) throws DukeException {
         LocalDate dt;
         try {
@@ -45,6 +60,12 @@ public class DukeDateTime {
         return new DukeDateTime(dt);
     }
 
+    /**
+     * Parses a datetime string in ISO format.
+     * @param str the datetime string
+     * @return the corresponding <code>DukeDateTime</code> object
+     * @throws DukeException if the date cannot be parsed with the ISO format
+     */
     public static DukeDateTime parseISO(String str) throws DukeException {
         LocalDateTime dt;
         try {
@@ -55,10 +76,16 @@ public class DukeDateTime {
         return new DukeDateTime(dt);
     }
 
+    /**
+     * Returns true if the two <code>DukeDateTime</code> objects fall on the same date.
+     */
     public static boolean onSameDay(DukeDateTime d1, DukeDateTime d2) {
         return d1.dateTime.toLocalDate().equals(d2.dateTime.toLocalDate());
     }
 
+    /**
+     * Returns the datetime formatted in ISO.
+     */
     public String toISO() {
         return this.dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }

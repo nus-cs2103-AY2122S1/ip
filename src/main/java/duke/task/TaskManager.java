@@ -6,6 +6,9 @@ import duke.exception.DukeException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the interface that deals with user's tasks
+ */
 public class TaskManager {
     // Success Messages
     private static final String TASKS_COUNT_MESSAGE = "Now you have %d %s in the list.";
@@ -29,6 +32,11 @@ public class TaskManager {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Adds a <code>Task</code> into the list of tasks.
+     * @param task the task to be added
+     * @return a message containing the task just added and the updated number of tasks
+     */
     public String addTask(Task task) {
         taskList.add(task);
         int taskCount = getTaskCount();
@@ -36,6 +44,12 @@ public class TaskManager {
         return String.format(TASK_ADDED_MESSAGE, task, taskCount, pluralised);
     }
 
+    /**
+     * Marks a <code>Task</code> as completed.
+     * @param taskNumber the number of the task to be marked as completed
+     * @return a message containing the task just marked as completed and the updated number of incomplete tasks
+     * @throws DukeException if a task with that number cannot be found
+     */
     public String markTaskAsDone(int taskNumber) throws DukeException {
         try {
             // User input is 1-indexed
@@ -50,6 +64,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Deletes a <code>Task</code> from the list.
+     * @param taskNumber the number of the task to be deleted
+     * @return a message containing the task just deleted and the updated number of tasks
+     * @throws DukeException if a task with that number cannot be found
+     */
     public String deleteTask(int taskNumber) throws DukeException {
         try {
             // User input is 1-indexed
@@ -63,10 +83,16 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Returns the number of tasks.
+     */
     public int getTaskCount() {
         return taskList.size();
     }
 
+    /**
+     * Returns the number of incomplete tasks.
+     */
     private int getUndoneTaskCount() {
         int count = 0;
         for (Task t : taskList) {
@@ -77,6 +103,9 @@ public class TaskManager {
         return count;
     }
 
+    /**
+     * Returns the text representation of the task list.
+     */
     public String toText() {
         String[] tasks = new String[taskList.size()];
         for (int i = 0; i < taskList.size(); i++) {
@@ -85,6 +114,9 @@ public class TaskManager {
         return String.join("\n", tasks);
     }
 
+    /**
+     * Displays the user's tasks.
+     */
     public String list() {
         String[] allTasks = new String[taskList.size()];
         for (int i = 0; i < allTasks.length; i++) {
@@ -110,6 +142,11 @@ public class TaskManager {
         return tasks;
     }
 
+    /**
+     * Displays the user's tasks that fall on a specific date.
+     * @param dateTime the date to filter by
+     * @return the string representation of the filtered tasks
+     */
     public String list(DukeDateTime dateTime) {
         List<Task> filteredTasks = filterByDate(dateTime);
         String[] filteredTasksStrings = new String[filteredTasks.size()];

@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
 
+/**
+ * Represents a command for marking a <code>Task</code> as completed.
+ */
 public class CompleteTaskCommand extends Command {
     public static final String COMMAND_WORD = "done";
     public static final String USAGE_MESSAGE = "To mark a task as done, use 'done <task-number>'.";

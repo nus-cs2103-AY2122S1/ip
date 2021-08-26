@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
 
+/**
+ * Represents a command for displaying help information and usage of the different commands.
+ */
 public class HelpCommand extends Command {
     private static final String[] ALL_USAGES = new String[]{
             AddToDoCommand.USAGE_MESSAGE,

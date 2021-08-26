@@ -5,6 +5,9 @@ import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
 
+/**
+ * Represents a command for deleting a <code>Task</code>.
+ */
 public class DeleteTaskCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String USAGE_MESSAGE = "To delete a task, use 'delete <task-number>'.";

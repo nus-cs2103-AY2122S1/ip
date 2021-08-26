@@ -3,6 +3,9 @@ package duke.task;
 import duke.util.DukeDateTime;
 import duke.exception.DukeException;
 
+/**
+ * Represents a <code>Task</code> with a due date.
+ */
 public class Deadline extends Task implements Timestampable {
     private final DukeDateTime dueDate;
 
@@ -16,6 +19,12 @@ public class Deadline extends Task implements Timestampable {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Parses its text representation.
+     * @param text the text representation found
+     * @return the corresponding <code>Deadline</code> object
+     * @throws DukeException if the text representation cannot be parsed accurately
+     */
     public static Deadline fromText(String text) throws DukeException {
         String[] deadlineDetails = text.split(" \\| ", 4);
         if (deadlineDetails.length < 4) {
