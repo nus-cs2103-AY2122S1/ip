@@ -1,6 +1,7 @@
 package Duke.Task;
 
 import Duke.DukeException.DukeIncompleteException;
+import Duke.DukeException.DukeWrongCommandException;
 
 public class Todo extends Task {
     /**
@@ -11,6 +12,10 @@ public class Todo extends Task {
         super(taskName);
         if (taskName.length() == 0) {
             throw new DukeIncompleteException();
+        } else if (taskName.contains("/by")) {
+            throw new DukeWrongCommandException("Deadline");
+        } else if (taskName.contains("/at")) {
+            throw new DukeWrongCommandException("Event");
         }
     }
 
@@ -22,5 +27,10 @@ public class Todo extends Task {
     @Override
     public String save() {
         return this.toString();
+    }
+
+    @Override
+    public String getDate() {
+        return "There are no date specified with task ";
     }
 }

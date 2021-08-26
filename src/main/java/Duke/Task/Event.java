@@ -2,6 +2,7 @@ package Duke.Task;
 
 import Duke.DukeException.DukeIncompleteException;
 import Duke.DukeException.DukeInvalidFormatException;
+import Duke.DukeException.DukeWrongCommandException;
 import Duke.Main.Parser;
 
 import java.time.LocalDate;
@@ -20,7 +21,11 @@ public class Event extends Task {
     public Event(String taskName) {
         super(taskName.split("/at")[0].trim());
         if (!taskName.contains("/at")) {
-            throw new DukeIncompleteException();
+            if (taskName.contains("/by")) {
+                throw new DukeWrongCommandException("Deadline");
+            } else {
+                throw new DukeWrongCommandException("Todo");
+            }
         }
         String[] divide = taskName.split("/at");
         this.taskDescription = divide[0];
@@ -50,4 +55,8 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at " + date + ")";
     }
 
+    @Override
+    public String getDate() {
+        return this.date;
+    }
 }

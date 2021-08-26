@@ -76,6 +76,15 @@ public class TaskList {
         }
     }
 
+    public Task get(int index) {
+        if (index > taskList.size() || index <= 0) {
+            throw new DukeOutOfBoundException();
+        } else {
+            index--;
+            return taskList.get(index);
+        }
+    }
+
     /**
      * Delete all tasks and reset the Task List to empty
      * @return Confirmation that the Task List is reset to empty

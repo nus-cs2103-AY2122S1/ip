@@ -8,7 +8,7 @@ public abstract class DukeException extends RuntimeException {
      * SYNTAX_ERROR: Command type is not recognized
      * INVALID_FORMAT: Date and time format entered are not supported
      */
-    public enum Type {INCOMPLETE, OUT_OF_BOUND, SYNTAX_ERROR, INVALID_FORMAT}
+    public enum Type {INCOMPLETE, OUT_OF_BOUND, SYNTAX_ERROR, INVALID_FORMAT, WRONG_COMMAND}
 
     private final String DEFAULT_STRING = "Please type in 'help' for instructions";
 

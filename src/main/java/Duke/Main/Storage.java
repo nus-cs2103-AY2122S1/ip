@@ -9,25 +9,6 @@ import java.util.Scanner;
 public class Storage {
 
     /**
-     * Process and convert instructions.txt file to String of instructions
-     * @return string of instructional guidelines
-     */
-    public static String processInstructions() {
-        StringBuilder builder = new StringBuilder();
-        try {
-            File file = new File("taskFile/instructions.txt");
-            Scanner sc = new Scanner(file);
-            while (sc.hasNextLine()) {
-                builder.append(sc.nextLine()).append("\n");
-            }
-            sc.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return builder.toString();
-    }
-
-    /**
      * Update current task list content to file
      * @param file a file that saved the task entered and date
      * @param taskList task list

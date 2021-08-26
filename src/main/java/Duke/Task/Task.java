@@ -42,6 +42,8 @@ public abstract class Task {
 
     public abstract String save();
 
+    public abstract String getDate();
+
     public String getTaskName() {
         return this.taskName;
     }

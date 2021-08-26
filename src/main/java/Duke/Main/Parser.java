@@ -41,15 +41,17 @@ public class Parser {
             case "done":
                 return new DoneCommand(description, taskList);
             case "todo":
-                return new TodoCommand(description, taskList);
+                return new TaskCommand(description, taskList, Task.Type.TODO);
             case "deadline":
-                return new DeadlineCommand(description, taskList);
+                return new TaskCommand(description, taskList, Task.Type.DEADLINE);
             case "event":
-                return new EventCommand(description, taskList);
+                return new TaskCommand(description, taskList, Task.Type.EVENT);
             case "delete":
                 return new DeleteCommand(description, taskList);
             case "find":
                 return new FindCommand(description, taskList);
+            case "date-of":
+                return new DateOfCommand(description, taskList);
             default:
                 throw new DukeSyntaxErrorException(type);
         }
