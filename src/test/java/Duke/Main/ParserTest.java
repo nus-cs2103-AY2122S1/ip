@@ -4,6 +4,7 @@ import Duke.DukeException.DukeException;
 import Duke.Task.Task;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -33,58 +34,27 @@ public class ParserTest {
 
     @Test
     public void testParser() {
-//        assertTrue(Parser.parse("help", null).contains(
-//                        "Here is a comprehensive list of commands you can use:"));
-//        assertTrue(Parser.parse("help", null).contains(
-//                "8. 'bye': Exit the program"));
-        assertEquals("1. Item 1\n2. Item 2\n3. Item 3",
-                Parser.parse("list", new TaskListStub()));
-        assertEquals("Task of index 3 is done",
-                Parser.parse("done 3", new TaskListStub()));
-        assertEquals("All tasks are done",
-                Parser.parse("done all", new TaskListStub()));
-        assertEquals("Task of index 69 is done",
-                Parser.parse("done 69", new TaskListStub()));
-        assertEquals("Task of index 6 is deleted",
-                Parser.parse("delete 6", new TaskListStub()));
-        assertEquals("Task list is reset to empty",
-                Parser.parse("delete all", new TaskListStub()));
-        assertEquals("Task of index 35 is deleted",
-                Parser.parse("delete 35", new TaskListStub()));
-        assertThrows(DukeException.class, () ->
-                Parser.parse("bruh", new TaskListStub()));
-        assertThrows(DukeException.class, () ->
-                Parser.parse("oof", new TaskListStub()));
-        assertEquals("Noted, task coding is added",
-                Parser.parse("todo coding", new TaskListStub()));
-        assertEquals("Noted, task IP project is added",
-                Parser.parse("deadline IP project", new TaskListStub()));
+        assertTrue(Parser.parse("help", new TaskList()).reply()
+                    .contains("Here is a comprehensive list of commands you can use:"));
+
+        assertTrue(Parser.parse("help", new TaskList()).reply()
+                .contains("8. 'bye': Exit the program"));
+        TaskList taskList = new TaskList();
+        File testFile = new File("taskFile/testFile1.txt");
+        Storage.loadData(testFile, taskList);
+        assertEquals(Parser.parse("done 1", taskList).reply(),
+                "Nice! I've marked this task as done: \n" + taskList.get(1));
+        assertTrue(taskList.get(1).isCompleted());
+        assertEquals("Nice! I've marked all tasks in your list as done!",
+                Parser.parse("done all", taskList).reply());
+        assertTrue(taskList.get(2).isCompleted());
+        assertTrue(taskList.get(3).isCompleted());
+        taskList.delete(2);
+        assertEquals(2, taskList.size());
+        assertEquals(Parser.parse("todo walk 10000 steps", taskList).reply(),
+                "Nice! I've added the following task to your list:\n" +
+                        taskList.get(3) +
+                        "\nNow you have " + taskList.size() + " tasks in your list");
     }
 
-    private static class TaskListStub extends TaskList {
-//        @Override
-//        public Task done(int index) {
-//            return "Task of index " + index + " is done";
-//        }
-//
-//        @Override
-//        public String doneAll() {
-//            return "All tasks are done";
-//        }
-//
-//        @Override
-//        public String delete(int index) {
-//            return "Task of index " + index + " is deleted";
-//        }
-//
-//        @Override
-//        public String deleteAll() {
-//            return "Task list is reset to empty";
-//        }
-//
-//        @Override
-//        public String addTask(String task, Task.Type type) {
-//            return "Noted, task " + task + " is added";
-//        }
-    }
 }
