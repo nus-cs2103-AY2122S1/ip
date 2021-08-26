@@ -30,13 +30,11 @@ public class DateTime {
         Pattern datePattern = Pattern.compile(DATE_REGEX);
         Matcher dateMatcher = datePattern.matcher(input);
         if (dateMatcher.matches()) {
-//            System.out.println(dateMatcher.group(1));
             date = LocalDate.parse(dateMatcher.group(1));
         }
         Pattern timePattern = Pattern.compile(TIME_REGEX);
         Matcher timeMatcher = timePattern.matcher(input);
         if (timeMatcher.matches()) {
-//            System.out.println(timeMatcher.group(1));
             time = LocalTime.parse(timeMatcher.group(1), DateTimeFormatter.ofPattern("HHmm"));
         }
     }
