@@ -53,6 +53,9 @@ public class Duke {
                 case DELETE:
                     this.delete(Parser.parseArgs(userInput));
                     break;
+                case FIND:
+                    this.ui.showSearchResult(this.taskList, Parser.parseArgs(userInput));
+                    break;
                 }
             } catch (DukeException e) {
                 this.ui.showDukeException(e);

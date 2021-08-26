@@ -3,8 +3,6 @@ package duke;
 import duke.exception.DukeMissingArgumentException;
 import duke.exception.DukeUnknownCommandException;
 
-import java.lang.reflect.Array;
-
 public class Parser {
     public static CommandType parseCmd(String input) throws DukeUnknownCommandException {
         String command = input.split(" ", 2)[0];

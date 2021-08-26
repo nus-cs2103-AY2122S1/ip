@@ -69,6 +69,34 @@ public class Ui {
     }
 
 
+    public void showSearchResult(TaskList taskList, String keyword) {
+        if (taskList.isEmpty()) {
+            System.out.println("\tYou have no task in your list.\n");
+            return;
+        }
+
+        TaskList filteredList = new TaskList();
+        for (int i = 1; i <= taskList.getLength(); i++) {
+            Task task = taskList.get(i);
+            if (task.contains(keyword)) {
+                filteredList.add(task);
+            }
+        }
+
+        if (filteredList.isEmpty()) {
+            System.out.println("\tYou have no matching task in your list.\n");
+            return;
+        }
+
+        System.out.println("\tHere are the matching tasks in your list:");
+        int count = 1;
+        for (int i = 1; i <= filteredList.getLength(); i++) {
+            System.out.println("\t" + count++ + ". " + filteredList.get(i));
+        }
+        System.out.println();
+    }
+
+
     public void showSavingError() {
         System.out.println("Error when saving data!");
     }
@@ -86,4 +114,5 @@ public class Ui {
     public void showDukeException(DukeException e) {
         System.out.printf("\t%s\n\n", e);
     }
+
 }
