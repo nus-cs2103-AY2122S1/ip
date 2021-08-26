@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.util.Ui;
+import duke.util.Storage;
+
+import duke.task.TaskList;
+
 public class DueCommand extends Command {
     public DueCommand(String input) {
         super(input);

@@ -1,13 +1,20 @@
+package duke.command;
+
+import duke.util.Ui;
+import duke.util.Storage;
+
+import duke.task.TaskList;
+
 import java.io.IOException;
 
-public class DoneCommand extends Command {
-    public DoneCommand(String input) {
+public class AddCommand extends Command {
+    public AddCommand(String input) {
         super(input);
     }
 
     @Override
     public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        TaskList newTasks = tasks.markTask(input, ui);
+        TaskList newTasks = tasks.addTask(input, ui);
         storage.saveTasksToFile(newTasks);
         return newTasks;
     }

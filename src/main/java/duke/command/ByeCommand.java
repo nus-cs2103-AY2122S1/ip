@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.util.Ui;
+import duke.util.Storage;
+
+import duke.task.TaskList;
+
 public class ByeCommand extends Command {
     @Override
     public TaskList execute(TaskList tasks, Ui ui, Storage storage) {

@@ -1,3 +1,9 @@
+package duke.task;
+
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,15 +38,15 @@ public class TaskList {
         String commandString = input.split(" ")[0].toUpperCase();
         switch (commandString) {
         case "TODO":
-            // Add Todo task
+            // Add duke.task.Todo task
             if (input.length() <= 5) {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
             task = new Todo(input.substring(5));
             break;
         case "DEADLINE":
-            // Add Deadline task
-            String errorMessage = "Command must be in the format: [taskName] /by "
+            // Add duke.task.Deadline task
+            String errorMessage = "duke.command.Command must be in the format: [taskName] /by "
                     + "[date(YYYY-MM-DD)] [time(HH:MM)].";
             String[] splitInput = Parser.splitWith(input, 9, " /by ", errorMessage);
             String taskName = splitInput[0];
@@ -51,8 +57,8 @@ public class TaskList {
             task = new Deadline(taskName, Parser.parseDateFromInput(date), Parser.parseTimeFromInput(time));
             break;
         default: // default is guaranteed to be event task due to use of enum + outer control flow
-            // Add Event task
-            errorMessage = "Command must be in the format: [taskName] /at "
+            // Add duke.task.Event task
+            errorMessage = "duke.command.Command must be in the format: [taskName] /at "
                     + "[date(YYYY-MM-DD)] [start time(HH:MM)] [end time(HH:MM)].";
             splitInput = Parser.splitWith(input, 6, " /at ", errorMessage);
             taskName = splitInput[0];
@@ -125,7 +131,7 @@ public class TaskList {
     public TaskList getDueTasks(String input) {
         // Check if input is valid and input number is an integer
         if (input.length() <= 4 || !input.substring(4, input.length() - 1).matches("\\d+")) {
-            throw new DukeException("Command must be of the form: due [integer][h/d/m] "
+            throw new DukeException("duke.command.Command must be of the form: due [integer][h/d/m] "
                     + "(h = hours, d = days, m = months)");
         }
 
@@ -142,7 +148,7 @@ public class TaskList {
             dateTime = dateTime.plusMonths(Integer.parseInt(offset));
             break;
         default:
-            throw new DukeException("Command must be of the form: due [integer][h/d/m] "
+            throw new DukeException("duke.command.Command must be of the form: due [integer][h/d/m] "
                     + "(h = hours, d = days, m = months)");
         }
 

@@ -1,3 +1,11 @@
+package duke.util;
+
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+
 import java.util.Scanner;
 
 import java.util.ArrayList;
@@ -20,7 +28,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    // Loads tasks from the given file path. Called when Duke starts.
+    // Loads tasks from the given file path. Called when duke.Duke starts.
     public List<Task> loadTasksFromFile() throws FileNotFoundException, DukeException {
         File saveFile = this.filePath.toFile();
         Scanner scanner = new Scanner(saveFile);
