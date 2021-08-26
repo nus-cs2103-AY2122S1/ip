@@ -1,0 +1,3 @@
+[T][ ] print stuff
+[D][X] homework (by: Sun)
+[E][ ] dinner (at: Later)
