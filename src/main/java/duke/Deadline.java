@@ -14,7 +14,7 @@ public class Deadline extends Task{
     private final LocalDateTime dt;
 
     /**
-     * Constructor for Dealine.
+     * Constructor for Deadline.
      * @param description Takes in a description of Deadline task
      */
     public Deadline(String description) {

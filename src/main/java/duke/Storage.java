@@ -6,7 +6,7 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
 /**
- * deals with loading tasks from the file and saving tasks in the file
+ * Deals with loading tasks from the file and saving tasks in the file.
  *
  * @author Erwin Quek
  * @version CS2103 AY21/22 Sem 1
@@ -29,23 +29,19 @@ public class Storage {
     }
 
     /**
-     * A method to check if path is valid.
-     * @param path
-     * @return
+     * Method to check if filepath is valid.
+     * @param path path to duke.txt
+     * @return boolean value if path is a txt file
      */
     private boolean isValidPath(Path path) {
         return path.toString().endsWith(".txt");
     }
 
-    public void saveList(TaskList taskList) {
-        createNewFile(path.getParent(), path);
-//        try {
-//            Files.writeString(path, taskList.saveString());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-    }
-
+    /**
+     * Method to create new file if file does not exist.
+     * @param directory directory path
+     * @param filepath expected file path
+     */
     public static void createNewFile(Path directory, Path filepath) {
         if (Files.notExists(directory)) {
             try {
@@ -63,66 +59,19 @@ public class Storage {
         }
     }
 
+    /**
+     * Method to return the path.
+     * @return path
+     */
     public Path load() {
         return this.path;
     }
 
+    /**
+     * Method to getPath in String.
+     * @return return String representation of path
+     */
     public String getPath()  {
         return this.stringPath;
     }
 }
-
-// Old ccode - to be reviewed
-//    public String[] load() throws FileNotFoundException {
-//        path = Paths.get(filePath);
-//        filePath f = new File(this.filePath);
-//        Scanner s = new Scanner(f);
-//        while (s.hasNext()) {
-//            // Read and add the task into the list
-//            String input = s.nextLine();
-//            String[] arrOfInputs = input.split("\\|");
-//            readInputs(arrOfInputs);
-//        }
-//        return new String[2];
-//    }
-//
-//    private static void readInputs(String[] arrOfInputs) {
-//        //Check for T, D, E
-//        if (arrOfInputs[0].equals("T")) {
-//            String t = arrOfInputs[2];
-//            duke.ToDo td = new duke.ToDo(t);
-//            duke.Duke.list.add(td);
-//        } else if (arrOfInputs[0].equals("D")) {
-//            String t = arrOfInputs[2] + " /by " + arrOfInputs[3];
-//            duke.Deadline d = new duke.Deadline(t);
-//            duke.Duke.list.add(d);
-//        } else if (arrOfInputs[0].equals("E")) {
-//            String t = arrOfInputs[2] + " /at " + arrOfInputs[3];
-//            duke.Event e = new duke.Event(t);
-//            duke.Duke.list.add(e);
-//        }
-//
-//        int currListLength = duke.Duke.list.size();
-//        //Check if its completed or not (0,1) and mark accordingly
-//        if (arrOfInputs[1].equals("1")) {
-//            duke.Duke.list.get(currListLength - 1).markAsDone();
-//        }
-//    }
-//
-//    public static void writeToFile(String filePath, ArrayList<duke.Task> taskList) throws duke.DukeException {
-//        try {
-//            File file = new File(filePath);
-//            if (!file.exists()) {
-//                file.createNewFile();
-//            }
-//            FileWriter fileWriter = new FileWriter(file.getAbsolutePath());
-//            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-//            for (duke.Task t: taskList) {
-//                bufferedWriter.write(t.getTaskInfo() + System.lineSeparator());
-//            }
-//            bufferedWriter.close();
-//        } catch (IOException e) {
-//            throw new duke.DukeException("Could not write to file!");
-//        }
-//    }
-//}
