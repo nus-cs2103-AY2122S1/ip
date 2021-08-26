@@ -67,7 +67,7 @@ public class Event extends Task {
      */
     @Override
     public String saveTaskToFile() {
-        return typeOfTask() + "||" + getStatusIcon() + "||" + this.getDescription() + "||" + this.getTime();
+        return this.getTypeOfTask() + "||" + this.getStatusIcon() + "||" + this.getDescription() + "||" + this.getTime();
     }
 
     /**
@@ -76,7 +76,7 @@ public class Event extends Task {
      * @return "E".
      */
     @Override
-    public String typeOfTask() {
+    public String getTypeOfTask() {
         return "E";
     }
 
@@ -87,7 +87,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (at: %s)", this.typeOfTask(),
+        return String.format("[%s][%s] %s (at: %s)", this.getTypeOfTask(),
                 this.getStatusIcon(), this.getDescription(), this.getTime());
     }
 }

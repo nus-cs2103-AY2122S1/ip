@@ -64,7 +64,8 @@ public class Deadline extends Task {
      */
     @Override
     public String saveTaskToFile() {
-        return typeOfTask() + "||" + getStatusIcon() + "||" + this.getDescription() + "||" + this.getDeadline();
+        return this.getTypeOfTask() + "||" + this.getStatusIcon() + "||"
+                + this.getDescription() + "||" + this.getDeadline();
     }
 
     /**
@@ -73,7 +74,7 @@ public class Deadline extends Task {
      * @return "D".
      */
     @Override
-    public String typeOfTask() {
+    public String getTypeOfTask() {
         return "D";
     }
 
@@ -84,7 +85,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s)", this.typeOfTask(),
+        return String.format("[%s][%s] %s (by: %s)", this.getTypeOfTask(),
                 this.getStatusIcon(), this.getDescription(), this.getDeadline());
     }
 }
