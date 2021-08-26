@@ -11,7 +11,7 @@ public class Duke {
     private TaskList list;
 
     /**
-     * Constructor specifying the name of the Chatbot to be created.
+     * Constructor specifying the file path of the database to be stored and retrieved from for this bot.
      *
      * @param filePath File path to store and retrieve the duke bot information.
      */
@@ -27,7 +27,7 @@ public class Duke {
     }
     
     /**
-     * Starts the Chatbot and listens for user input.
+     * Starts the Chatbot, listens for user input and executes the command accordingly.
      */
     public void start() {
         this.ui.printGreetings();

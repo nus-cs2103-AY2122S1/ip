@@ -15,7 +15,7 @@ public class Deadline extends Task {
      * Constructor to initialize a new Deadline.
      *
      * @param description The description of the task.
-     * @param dateTime The date and time of the deadline for the task.
+     * @param dateTime The date of the deadline for the task.
      */
     public Deadline(String description, LocalDate dateTime) {
         super(description);
@@ -23,10 +23,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor to initialize a new Deadline.
+     * Constructor to initialize a new Deadline with status.
      *
      * @param description The description of the task.
-     * @param dateTime The date and time of the deadline for the task.
+     * @param dateTime The date of the deadline for the task.
      * @param isDone The status of the task.
      */
     public Deadline(String description, LocalDate dateTime, boolean isDone) {
@@ -47,6 +47,11 @@ public class Deadline extends Task {
                 this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 
+    /**
+     * Returns the string representation of this task that is suitable for storage.
+     * 
+     * @return The string representation of the encoded string for storage.
+     */
     @Override
     public String encodeTaskForStorage() {
         int encodedIsDone = this.getIsDone() ? 1 : 0;

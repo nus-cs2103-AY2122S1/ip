@@ -55,14 +55,29 @@ public abstract class Task {
     public String toString() {
         return getStatusIcon() + " " + this.description;
     }
-    
+
+    /**
+     * Returns the description of the task.
+     * 
+     * @return The description of the task.
+     */
     public String getDescription() {
         return this.description;
     }
-    
+
+    /**
+     * Returns the boolean value whether the task is done.
+     * 
+     * @return True if the task is marked done and false if otherwise.
+     */
     public boolean getIsDone() {
         return this.isDone;
     }
-    
+
+    /**
+     * Returns the encoded string for storage.
+     * 
+     * @return The string that is suitable for saving the data.
+     */
     public abstract String encodeTaskForStorage();
 }

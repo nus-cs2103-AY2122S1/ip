@@ -14,8 +14,8 @@ public class Event extends Task {
     /**
      * Constructor to initialize a new Event.
      *
-     * @param description The description of the task.
-     * @param dateTime The date and time of the event.
+     * @param description The description of the event.
+     * @param dateTime The date of the event.
      */
     public Event(String description, LocalDate dateTime) {
         super(description);
@@ -25,8 +25,9 @@ public class Event extends Task {
     /**
      * Constructor to initialize a new Event.
      *
-     * @param description The description of the task.
-     * @param isDone The status of the task.
+     * @param description The description of the event.
+     * @param dateTime The date of the event.
+     * @param isDone The status of the event.
      */
     public Event(String description, LocalDate dateTime, boolean isDone) {
         super(description, isDone);
@@ -45,7 +46,12 @@ public class Event extends Task {
                 this.getDescription(),
                 this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
-    
+
+    /**
+     * Returns the string representation of this task that is suitable for storage.
+     *
+     * @return The string representation of the encoded string for storage.
+     */
     @Override
     public String encodeTaskForStorage() {
         int encodedIsDone = this.getIsDone() ? 1 : 0;
