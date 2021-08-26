@@ -4,8 +4,7 @@ package bubbles;
  * A class that deals with making sense of the
  * user command.
  */
-public class Parser {
-
+class Parser {
     /**
      * Breaks down the line of input read from the file saved on the local hard disk.
      * Creates and returns an array that contains the necessary information for the
@@ -20,6 +19,7 @@ public class Parser {
      */
     public Object[] formatTask(String task) {
         String input = "";
+
         String[] arr = task.split(" \\| ");
         int n = arr.length;
 
@@ -27,7 +27,6 @@ public class Parser {
 
         String completed = arr[1];
         boolean isDone = false;
-
         if (completed.equals("1")) {
             isDone = true;
         }

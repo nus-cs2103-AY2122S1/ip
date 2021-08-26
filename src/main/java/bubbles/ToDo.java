@@ -1,14 +1,12 @@
-package bubbles.tasks;
-
-import bubbles.exceptions.EmptyTaskException;
+package bubbles;
 
 /**
  * A child class of Task, representing the tasks without any
  * date/time attached to it.
  */
-public class ToDo extends Task {
-    private ToDo(String description, boolean completed) {
-        super(description, completed);
+class ToDo extends Task {
+    private ToDo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     /**
@@ -16,16 +14,16 @@ public class ToDo extends Task {
      * if the input from the user is empty (after the "todo" command).
      *
      * @param input The description of the ToDo
-     * @param completed Whether the ToDo is done/completed
+     * @param isDone Whether the ToDo is done/completed
      * @return The created ToDo Object
      * @throws EmptyTaskException Exception thrown when the ToDo description is empty
      */
-    public static ToDo addToDo(String input, boolean completed) throws EmptyTaskException {
+    public static ToDo addToDo(String input, boolean isDone) throws EmptyTaskException {
         if (input.equals("")) {
             throw new EmptyTaskException("todo");
         }
 
-        ToDo item = new ToDo(input, completed);
+        ToDo item = new ToDo(input, isDone);
 
         return item;
     }

@@ -2,18 +2,17 @@ package bubbles;
 
 import java.util.Scanner;
 
-import bubbles.tasks.TaskList;
-
 /**
  * A class that deals with interactions with the user,
  * mainly accepting user input and echoing back to the user
  * through System output.
  */
-public class Ui {
+class Ui {
     /**
      * Echos the user input through printing out the input
      * String onto the System output line.
      */
+    //deals with interactions with the user
     public void echo() {
         Scanner sc = new Scanner(System.in);
 
@@ -55,7 +54,6 @@ public class Ui {
                 storage.writeTasks();
 
                 String farewell = "Bye-bye! Hope to see you again soon!";
-
                 formatting(farewell);
                 break;
             } else {

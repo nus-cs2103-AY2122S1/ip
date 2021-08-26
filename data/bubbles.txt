@@ -1,2 +1,3 @@
 T | 1 | complete level-8
 D | 1 | finish a-moreclasses | by 2021-08-26
+E | 1 | complete 2105 tutorial | at 2021-08-26

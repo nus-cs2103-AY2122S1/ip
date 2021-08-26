@@ -1,4 +1,4 @@
-package bubbles.tasks;
+package bubbles;
 
 import java.time.LocalDate;
 
@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * A class that represents a Task object - a piece of
  * work to be done or undertaken.
  */
-public class Task {
+class Task {
     protected String description;
     protected boolean isDone;
 
@@ -16,17 +16,14 @@ public class Task {
      * been completed yet.
      *
      * @param description The description of the task
-     * @param completed Whether the task has been completed
+     * @param isDone Whether the task has been completed
      */
-    public Task(String description, boolean completed) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = completed;
+        this.isDone = isDone;
     }
 
-    /**
-     * To mark this Task as done/completed.
-     */
-    public void markAsDone() {
+    public void setAsDone() {
         this.isDone = true;
     }
 

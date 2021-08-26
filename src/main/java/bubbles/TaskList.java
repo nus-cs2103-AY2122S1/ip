@@ -1,20 +1,17 @@
-package bubbles.tasks;
+package bubbles;
 
-import bubbles.exceptions.EmptyTaskException;
-import bubbles.exceptions.IndexOutOfBoundsException;
-import bubbles.exceptions.InvalidCommandException;
 import java.util.ArrayList;
 
 /**
  * A list of Task objects, that contains and tracks the Tasks the Bubbles bot
  * user has entered (including previous entries read from the hard dusk file).
  */
-public class TaskList {
+class TaskList {
     private final String SEPARATOR = "-----------------------------------------------------------------";
     private enum taskType {
-        TODO,
-        DEADLINE,
-        EVENT
+        ToDo,
+        Deadline,
+        Event
     }
     private final ArrayList<Task> tasks;
     private int count;
@@ -42,26 +39,26 @@ public class TaskList {
             String command = arr[0];
 
             switch (command) {
-                case "todo":
-                    addTask(taskType.TODO, input);
-                    break;
-                case "deadline":
-                    addTask(taskType.DEADLINE, input);
-                    break;
-                case "event":
-                    addTask(taskType.EVENT, input);
-                    break;
-                case "list":
-                    listTasks();
-                    break;
-                case "done":
-                    markAsDone(input);
-                    break;
-                case "delete":
-                    deleteTask(input);
-                    break;
-                default:
-                    throw new InvalidCommandException(input);
+            case "todo":
+                addTask(taskType.ToDo, input);
+                break;
+            case "deadline":
+                addTask(taskType.Deadline, input);
+                break;
+            case "event":
+                addTask(taskType.Event, input);
+                break;
+            case "list":
+                listTasks();
+                break;
+            case "done":
+                markAsDone(input);
+                break;
+            case "delete":
+                deleteTask(input);
+                break;
+            default:
+                throw new InvalidCommandException(input);
             }
         } catch (InvalidCommandException e) {
             System.out.println(SEPARATOR + "\n"
@@ -78,7 +75,7 @@ public class TaskList {
         int n = 0;
 
         System.out.println(SEPARATOR);
-        System.out.println("Below are some of the bubbles.tasks in your list!");
+        System.out.println("Below are some of the tasks in your list!");
 
         for (Task t : this.tasks) {
             System.out.println((n + 1) + ". " + t);
@@ -104,28 +101,27 @@ public class TaskList {
             Task recentlyAdded = null;
 
             switch (t) {
-                case TODO:
-                    if (arr.length == 1) {
-                        recentlyAdded = ToDo.addToDo("", false);
-                    }
+            case ToDo:
+                if (arr.length == 1) {
+                    recentlyAdded = ToDo.addToDo("", false);
+                }
 
-                    recentlyAdded = ToDo.addToDo(arr[1], false);
-                    break;
-                case DEADLINE:
-                    recentlyAdded = Deadline.addDeadline(arr[1], false);
-                    break;
-                case EVENT:
-                    recentlyAdded = Event.addEvent(arr[1], false);
-                    break;
-                default:
-                    break;
+                recentlyAdded = ToDo.addToDo(arr[1], false);
+                break;
+            case Deadline:
+                recentlyAdded = Deadline.addDeadline(arr[1], false);
+                break;
+            case Event:
+                recentlyAdded = Event.addEvent(arr[1], false);
+                break;
+            default:
+                break;
             }
 
             this.tasks.add(recentlyAdded);
             this.count++;
 
             String taskCount = "Now you have " + count + " task(s) in the list!";
-
             System.out.println(SEPARATOR + "\n"
                     + "Received order! I've added this task:\n"
                     + "     " + recentlyAdded + "\n"
@@ -206,19 +202,16 @@ public class TaskList {
     public void markAsDone(String input) {
         try {
             String[] arr = input.split(" ");
-
             int index = Integer.parseInt(arr[1]) - 1;
 
             if (index >= count) {
                 throw new IndexOutOfBoundsException("");
             } else {
                 Task t = this.tasks.get(index);
-
-                t.markAsDone();
+                t.setAsDone();
 
                 String encouragement = "Good job! I've marked this task as done:";
-                String reward = "bubbles.Bubbles will reward you with a piece of candy.";
-
+                String reward = "Bubbles will reward you with a piece of candy.";
                 System.out.println(SEPARATOR + "\n"
                         + encouragement + "\n"
                         + "     " + t + "\n"
@@ -241,7 +234,6 @@ public class TaskList {
     public void deleteTask(String input) {
         try {
             String[] arr = input.split(" ");
-
             int index = Integer.parseInt(arr[1]) - 1;
 
             if (index >= count) {
@@ -251,7 +243,6 @@ public class TaskList {
                 count--;
 
                 String taskCount = "Now you have " + count + " task(s) in the list!";
-
                 System.out.println(SEPARATOR + "\n"
                         + "Noted! I've removed this task:\n"
                         + "     " + removed + "\n"
