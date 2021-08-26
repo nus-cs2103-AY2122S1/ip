@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.data.NoSuchTaskException;
+import duke.exception.NoSuchTaskException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.data.NoSuchTaskException;
+import duke.exception.NoSuchTaskException;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

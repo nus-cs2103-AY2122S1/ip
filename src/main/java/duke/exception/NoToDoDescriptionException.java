@@ -1,4 +1,4 @@
-package duke.data;
+package duke.exception;
 
 /**
  * Signals that an error has occurred due to empty description of a todo task.

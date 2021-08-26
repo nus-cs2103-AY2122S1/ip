@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.data.NoSuchTaskException;
+import duke.exception.NoSuchTaskException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;

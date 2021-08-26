@@ -1,4 +1,4 @@
-package duke.data;
+package duke.exception;
 
 /**
  * Signals that an error has occurred while trying to do
