@@ -2,6 +2,8 @@ import javax.swing.plaf.synth.SynthDesktopIconUI;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 import javax.xml.stream.FactoryConfigurationError;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.DoubleToIntFunction;
@@ -16,8 +18,13 @@ import java.util.function.DoubleToIntFunction;
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>();
     private int bufferLength = 5;
+<<<<<<< HEAD
     private DataFile dataFile;
     public enum Command { done, list, delete, others};
+=======
+    
+    public enum Command { done, list, delete, filter, others};
+>>>>>>> branch-Level-8
     
     /**
      * Constructor for the Duke class.
@@ -60,6 +67,11 @@ public class Duke {
             return new DukeException(se).getMessage();
         } catch (NullPointerException ne) {
             return new DukeException(ne).getMessage();
+<<<<<<< HEAD
+=======
+        } catch (DateTimeParseException de) {
+            return new DukeException(de).getMessage();
+>>>>>>> branch-Level-8
         }
     }
     
@@ -167,6 +179,8 @@ public class Duke {
                 return iterate();
             case delete:
                 return delete(input);
+            case filter:
+                return filter(input);
             default:
                 return add(input);
         }
@@ -182,12 +196,18 @@ public class Duke {
         try {
             String index = input.substring("delete ".length());
             int taskNum = Integer.parseInt(index);
+<<<<<<< HEAD
             try {
                 if (taskNum > tasks.size() || taskNum < 1) {
                     throw new ArrayIndexOutOfBoundsException();
                 }
             } catch (ArrayIndexOutOfBoundsException ae) {
               return new DukeException(ae).getMessage();  
+=======
+            if(taskNum > counter || taskNum < 1) {
+                Exception ae = new ArrayIndexOutOfBoundsException();
+                return new DukeException(ae).getMessage();
+>>>>>>> branch-Level-8
             }
             Task task = tasks.get(taskNum - 1);
             tasks.remove(taskNum - 1);
@@ -206,6 +226,28 @@ public class Duke {
         }
     }
 
+    /**
+     * filters tasks which dates matches the input date and prints out the tasks.
+     * 
+     * @param date the date of interest.
+     * @return a list of events with dates matching the given date.
+     */
+    public String filter(String date) {
+        try {
+            String datetime = date.substring(date.indexOf(" ") + 1);
+            DateDue dateDue = new DateDue(datetime);
+            LocalDate localDate = dateDue.getLocalDate();
+            System.out.println(String.format("On %s, you have: ", dateDue.toString()));
+            for (Task t : tasks) {
+                if (t.isSameDate(localDate)) {
+                    System.out.println(t.toString());
+                }
+            }
+            return "";
+        } catch (DateTimeParseException e) {
+            return new DukeException(e).getMessage();
+        }
+    }
     /**
      * Closes the duke bot, by bidding user farewell.
      * @return a closing statement to user.

@@ -1,3 +1,6 @@
+import javax.xml.stream.FactoryConfigurationError;
+import java.time.LocalDate;
+
 /**
  * Represents a task which can be marked done.
  * 
@@ -54,6 +57,16 @@ public class Task {
      */
     public String getTaskMarker() {
         return "";
+    }
+
+    /**
+     * checks if given datetime matches the deadline of the task.
+     * 
+     * @param dt the local date time to compare with.
+     * @return false.
+     */
+    public boolean isSameDate(Object dt) {
+        return false;
     }
 
 }
