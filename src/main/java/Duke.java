@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -7,7 +6,7 @@ import java.io.File;
 
 
 /**
- * Project Duke is a educational software project.
+ * Project Duke is an educational software project.
  * It is designed to take you through the steps of building a small software incrementally.
  */
 
@@ -39,22 +38,22 @@ public class Duke {
 
     private static void handleSaveText() {
         String folderName = "./data";
-        String fileName =  "./data/duke.txt";
+        String fileName = "./data/duke.txt";
         File directory = new File(folderName);
 
-        if (!directory.exists()){
+        if (!directory.exists()) {
             directory.mkdir();
         }
 
         String output = "";
         String separator = " | ";
 
-        for (Task t: todos) {
+        for (Task t : todos) {
             output = output + t.getType() + separator + ((t.checkDone()) ? 1 : 0) + separator +
                     t.getDescription() + separator + t.getDeadline() + "\n";
         }
         try {
-            writeToFile(fileName , output);
+            writeToFile(fileName, output);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
@@ -62,39 +61,44 @@ public class Duke {
 
     private static void handleLoadText() {
         String folderName = "./data";
-        String fileName =  "./data/duke.txt";
+        String fileName = "./data/duke.txt";
         File directory = new File(folderName);
+        File doc = new File(fileName);
 
-        if (!directory.exists()){
+        if (!directory.exists()) {
             directory.mkdir();
         }
 
         try {
-            Scanner scanner = new Scanner(new File(fileName));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                // process the line
-                String[] output = line.split("\\s\\|\\s");
-                switch (output[0]) {
-                    case "T":
-                        Task newTodo = new Todo(output[1]);
-                        todos.add(newTodo);
-                        break;
-                    case "D":
-                        Task newDeadline = new Deadline(output[1], output[2]);
-                        todos.add(newDeadline);
-                        break;
-                    case "E":
-                        Task newEvent = new Event(output[1], output[2]);
-                        todos.add(newEvent);
-                        break;
-                    default:
-                        System.out.println("Detected invalid task type. Please check...");
-                        break;
+            if (doc.exists()) {
+                Scanner scanner = new Scanner(new File(fileName));
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    // process the line
+                    String[] output = line.split("\\s\\|\\s");
+                    switch (output[0]) {
+                        case "T":
+                            Task newTodo = new Todo(output[2], output[1] == "1");
+                            todos.add(newTodo);
+                            break;
+                        case "D":
+                            Task newDeadline = new Deadline(output[2], output[3], output[1] == "1");
+                            todos.add(newDeadline);
+                            break;
+                        case "E":
+                            Task newEvent = new Event(output[2], output[3], output[1] == "1");
+                            todos.add(newEvent);
+                            break;
+                        default:
+                            System.out.println("Detected invalid task type. Please check...");
+                            break;
+                    }
                 }
+            } else {
+                writeToFile(fileName, "");
             }
-        } catch (FileNotFoundException e) {
-
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 
@@ -128,47 +132,47 @@ public class Duke {
         Task newTask;
 
         switch (command) {
-        case "done":
-            Task editedTask = todos.get(Integer.parseInt(output[1]) - 1);
-            editedTask.markIsDone();
-            System.out.printf("\t____________________________________________________________\n" +
-                    "\tNice! I've marked this task as done:\n" +
-                    "\t%s\n" +
-                    "\t____________________________________________________________%n", editedTask);
-            break;
-        case "delete":
-            try {
-                int index = Integer.parseInt(output[1]) - 1;
-                Task removedTask = todos.remove(index);
-                System.out.printf("\tNoted. I've removed this task:\n" +
+            case "done":
+                Task editedTask = todos.get(Integer.parseInt(output[1]) - 1);
+                editedTask.markIsDone();
+                System.out.printf("\t____________________________________________________________\n" +
+                        "\tNice! I've marked this task as done:\n" +
                         "\t%s\n" +
-                        "\tNow you have %d tasks in the list.%n", removedTask.toString(), todos.size());
-            } catch (IndexOutOfBoundsException | NumberFormatException f) {
-                throw new InvalidValue();
-            }
-            break;
-        case "todo":
-            checkInput(output, "todo");
-            String todoDescription = response.substring(5);
-            newTask = new Todo(todoDescription);
-            handleAdd(newTask);
-            break;
-        case "deadline":
-            checkInput(output, "deadline");
-            String deadlineDescription = response.substring(9).split(" /by ")[0];
-            String deadlineDate = response.substring(9).split(" /by ")[1];
-            newTask = new Deadline(deadlineDescription, deadlineDate);
-            handleAdd(newTask);
-            break;
-        case "event":
-            checkInput(output, "event");
-            String eventDescription = response.substring(6).split(" /at ")[0];
-            String eventDate = response.substring(6).split(" /at ")[1];
-            newTask = new Event(eventDescription, eventDate);
-            handleAdd(newTask);
-            break;
-        default:
-            throw new InvalidCommand();
+                        "\t____________________________________________________________%n", editedTask);
+                break;
+            case "delete":
+                try {
+                    int index = Integer.parseInt(output[1]) - 1;
+                    Task removedTask = todos.remove(index);
+                    System.out.printf("\tNoted. I've removed this task:\n" +
+                            "\t%s\n" +
+                            "\tNow you have %d tasks in the list.%n", removedTask.toString(), todos.size());
+                } catch (IndexOutOfBoundsException | NumberFormatException f) {
+                    throw new InvalidValue();
+                }
+                break;
+            case "todo":
+                checkInput(output, "todo");
+                String todoDescription = response.substring(5);
+                newTask = new Todo(todoDescription, false);
+                handleAdd(newTask);
+                break;
+            case "deadline":
+                checkInput(output, "deadline");
+                String deadlineDescription = response.substring(9).split(" /by ")[0];
+                String deadlineDate = response.substring(9).split(" /by ")[1];
+                newTask = new Deadline(deadlineDescription, deadlineDate, false);
+                handleAdd(newTask);
+                break;
+            case "event":
+                checkInput(output, "event");
+                String eventDescription = response.substring(6).split(" /at ")[0];
+                String eventDate = response.substring(6).split(" /at ")[1];
+                newTask = new Event(eventDescription, eventDate, false);
+                handleAdd(newTask);
+                break;
+            default:
+                throw new InvalidCommand();
         }
 
         handleSaveText();
@@ -210,28 +214,28 @@ public class Duke {
             String response = sc.nextLine();
 
             switch (response) {
-            case "list":
-                System.out.println("\t____________________________________________________________");
-                for (int i = 0; i < todos.size(); i++) {
-                    System.out.printf("\t%d.%s%n", (i + 1), todos.get(i).toString());
-                }
-                System.out.println("\t____________________________________________________________");
-                break;
-            case "bye":
-                System.out.println("\t____________________________________________________________\n\t" +
-                        "Bye. Hope to see you again soon!" +
-                        "\n\t____________________________________________________________");
-                exit = true;
-                break;
-            default:
-                try {
-                    handleInput(response);
-                } catch (DukeException e) {
-                    System.out.printf("\t____________________________________________________________\n" +
-                            "\t%s\n" +
-                            "\t____________________________________________________________%n", e);
-                }
-                break;
+                case "list":
+                    System.out.println("\t____________________________________________________________");
+                    for (int i = 0; i < todos.size(); i++) {
+                        System.out.printf("\t%d.%s%n", (i + 1), todos.get(i).toString());
+                    }
+                    System.out.println("\t____________________________________________________________");
+                    break;
+                case "bye":
+                    System.out.println("\t____________________________________________________________\n\t" +
+                            "Bye. Hope to see you again soon!" +
+                            "\n\t____________________________________________________________");
+                    exit = true;
+                    break;
+                default:
+                    try {
+                        handleInput(response);
+                    } catch (DukeException e) {
+                        System.out.printf("\t____________________________________________________________\n" +
+                                "\t%s\n" +
+                                "\t____________________________________________________________%n", e);
+                    }
+                    break;
             }
         }
     }
