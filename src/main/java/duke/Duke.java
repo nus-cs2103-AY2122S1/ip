@@ -5,12 +5,23 @@ import duke.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * The class for the chat bot, Duke
+ */
 public class Duke {
+
+    /** Storage object to save to and load from the data file */
     private Storage storage;
+    /** List of all the Tasks */
     private TaskList tasks;
+    /** Ui object to handle the UI output to the user */
     private Ui ui;
 
-
+    /**
+     * Constructor for Duke class.
+     *
+     * @param filePath The specified filepath to save and load the data file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
