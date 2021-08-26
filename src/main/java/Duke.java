@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -71,13 +73,16 @@ public class Duke {
             }
         }
 
+        time = time.strip();
+        LocalDate ld = LocalDate.parse(time);
+
         if (category.equals("T")) {
             tasks.add(new Todo(taskName));
             System.out.println("todo");
         } else if (category == "D") {
-            tasks.add(new Deadline(taskName, time));
+            tasks.add(new Deadline(taskName, ld));
         } else {
-            tasks.add(new Event(taskName, time));
+            tasks.add(new Event(taskName, ld));
         }
 
 
@@ -151,7 +156,9 @@ public class Duke {
                         }
                     }
                     s.close();
-                    Deadline ddl = new Deadline(ddlName, time);
+                    time = time.strip();
+                    LocalDate ld = LocalDate.parse(time);
+                    Deadline ddl = new Deadline(ddlName, ld);
                     tasks.add(ddl);
                     System.out.println("Ok~ I've added the task:\n" + ddl.toString());
                 } else if (input.startsWith("event")) {
@@ -170,8 +177,10 @@ public class Duke {
                             eventName += temp + " ";
                         }
                     }
+                    time = time.strip();
                     s.close();
-                    Event event = new Event(eventName, time);
+                    LocalDate ld = LocalDate.parse(time);
+                    Event event = new Event(eventName, ld);
                     tasks.add(event);
                     System.out.println("Ok~ I've added the task:\n" + event.toString());
                 } else if (input.startsWith("delete")){
