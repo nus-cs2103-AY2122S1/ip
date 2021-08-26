@@ -115,8 +115,8 @@ public class Ui {
     }
 
     public String doneError() {
-        return INDENT_1 + "☹ OOPS!!! There is no corresponding task to be " +
-                "marked done.";
+        return INDENT_1 + "☹ OOPS!!! There is no corresponding task to be "
+                + "marked done.";
     }
 
     public String doneNoNumError() {
