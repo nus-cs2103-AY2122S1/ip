@@ -21,7 +21,7 @@ class Storage {
         try{
             File data_file = new File("Data/DukeData.txt");
             FileWriter writer = new FileWriter("Data/DukeData.txt");//Overwriting entire file
-            for(int i = 0;i < tasks.size();i++){
+            for(int i = 0; i < tasks.size(); i++){
                 Task task = tasks.get(i);
                 writer.write(task.toString());
                 writer.write("\n");
