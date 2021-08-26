@@ -1,7 +1,6 @@
 package command;
 
 import duke.TaskList;
-import duke.Ui;
 
 public class ListCommand extends Command {
     
@@ -12,11 +11,10 @@ public class ListCommand extends Command {
     /**
      * Executes the command of displaying the given task list.
      *
-     * @param ui Ui not used in this execution.
      * @param taskList The task list to be displayed.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList) {
+    public void execute(TaskList taskList) {
         taskList.showList();
     }
 }

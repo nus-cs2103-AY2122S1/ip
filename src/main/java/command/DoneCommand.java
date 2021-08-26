@@ -1,7 +1,6 @@
 package command;
 
 import duke.TaskList;
-import duke.Ui;
 
 public class DoneCommand extends Command {
     private final int index;
@@ -14,11 +13,10 @@ public class DoneCommand extends Command {
     /**
      * Executes the command of setting the given task to done.
      *
-     * @param ui Ui not used in this execution.
      * @param taskList The task list containing the task to be set to done.
      */
     @Override
-    public void execute(Ui ui, TaskList taskList) {
+    public void execute(TaskList taskList) {
         taskList.setTaskDone(index);
     }
 }

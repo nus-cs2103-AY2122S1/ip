@@ -1,7 +1,6 @@
 package command;
 
 import duke.TaskList;
-import duke.Ui;
 
 public class FindKeywordCommand extends Command {
     private final String keyword;
@@ -12,7 +11,7 @@ public class FindKeywordCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList) {
+    public void execute(TaskList taskList) {
         taskList.findTasksByKeyword(keyword);
     }
 }
