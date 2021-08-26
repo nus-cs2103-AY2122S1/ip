@@ -28,7 +28,8 @@ public class TaskListTest {
     }
 
     @Test
-    public void taskList_validFileFormat_correctTasksAndSize() throws DukeException, FileParseException, IOException {
+    public void taskList_validFileFormat_correctTasksAndSize()
+            throws DukeException, FileParseException, IOException {
         String validFileLocation = "resources/validFileFormat.txt";
         TaskList tasks = new TaskList(new StorageStub(validFileLocation));
 
@@ -59,7 +60,8 @@ public class TaskListTest {
     }
 
     @Test
-    public void markTask_firstUndoneTask_taskIsDone() throws DukeException, FileParseException, IOException {
+    public void markTask_firstUndoneTask_taskIsDone()
+            throws DukeException, FileParseException, IOException {
         String validFileLocation = "resources/validFileFormat.txt";
         TaskList tasks = new TaskList(new StorageStub(validFileLocation));
 
@@ -73,7 +75,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTask_thirdTask_taskCannotBeRetrieved() throws DukeException, FileParseException, IOException {
+    public void deleteTask_thirdTask_taskCannotBeRetrieved() throws FileParseException, IOException {
         String validFileLocation = "resources/validFileFormat.txt";
         TaskList tasks = new TaskList(new StorageStub(validFileLocation));
 

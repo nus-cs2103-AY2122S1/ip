@@ -3,7 +3,8 @@ package duke;
 import duke.task.Task;
 
 public class Message {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static final String HORIZONTAL_LINE =
+            "____________________________________________________________";
 
     private static String formatDukeResponse(String response) {
         return HORIZONTAL_LINE + "\n" + response + "\n" + HORIZONTAL_LINE + "\n";
