@@ -65,11 +65,6 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException(Ui.EXPECTED_DELETED_INDEX_GOT_OTHER);
             }
-        case "find":
-            if (strings.length == 1) {
-                throw new DukeException(Ui.EXPECTED_SEARCH_QUERY);
-            }
-            return new Command(strings[0], input.substring(5));
         default:
             throw new DukeException(Ui.UNRECOGNISED_OPERATION);
         }

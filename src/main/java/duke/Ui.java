@@ -5,12 +5,12 @@ package duke;
  * messages to the console.
  */
 public class Ui {
+
     static final String INTRO_STRING = "Hey there! I'm Good Duke. How many I help you today?";
     static final String OUTRO_STRING = "That was an excellent chat - I look forward to seeing you again soon!";
     static final String READ_SAVE_STRING = "Sorry, there was a problem reading the save file :(";
     static final String WRITE_SAVE_STRING = "Sorry, there was a problem saving your tasks :(";
     static final String NEW_SAVE_STRING = "Empty save file detected - loading a blank list.";
-    static final String SHOW_MATCHES_STRING = "Here are the matching tasks in your list:";
     static final String EXPECTED_DONE_INDEX_GOT_NONE = "You need to indicate which task number should be marked as done.";
     static final String EXPECTED_DONE_INDEX_GOT_OTHER = "The task to be marked as done should be indicated its list index.";
     static final String EXPECTED_TO_DO_DESCRIPTION = "The description of a todo cannot be empty.";
@@ -21,7 +21,6 @@ public class Ui {
     static final String EXPECTED_DELETED_INDEX_GOT_NONE = "You need to indicate which task number should be deleted.";
     static final String EXPECTED_DELETED_INDEX_GOT_OTHER = "The task to be deleted should be indicated its list index.";
     static final String UNRECOGNISED_OPERATION = "Sorry, I do not understand this command.";
-    static final String EXPECTED_SEARCH_QUERY = "The search query of a find operation cannot be empty.";
 
 
     /**
@@ -145,9 +144,5 @@ public class Ui {
      */
     public void showNewSave() {
         print(NEW_SAVE_STRING);
-    }
-
-    public void showMatches(TaskList tasks) {
-        print(SHOW_MATCHES_STRING + "\n" + taskListString(tasks));
     }
 }

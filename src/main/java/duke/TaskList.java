@@ -13,7 +13,7 @@ public class TaskList implements Serializable {
      * Class constructor which initialises a blank TaskList.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -22,7 +22,7 @@ public class TaskList implements Serializable {
      * @param task Task to be added
      */
     public void add(Task task) {
-        this.tasks.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList implements Serializable {
      * @return The task that has been deleted
      */
     public Task delete(int index) {
-        return this.tasks.remove(index);
+        return tasks.remove(index);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList implements Serializable {
      * @return Number of tasks in list
      */
     public int size() {
-        return this.tasks.size();
+        return tasks.size();
     }
 
     /**
@@ -51,7 +51,7 @@ public class TaskList implements Serializable {
      * @return Task found at that index in the list
      */
     public Task get(int index) {
-        return this.tasks.get(index);
+        return tasks.get(index);
     }
 
     public TaskList find(String query) {
