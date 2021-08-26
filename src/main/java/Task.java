@@ -1,11 +1,25 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
+
 public class Task {
 
     private String description;
-    private boolean isDone;
+    private boolean isDone = false;
+    private LocalDate date = null;
 
     public Task(String description) {
-        this.isDone = false;
         this.description = description;
+    }
+
+    public Task(String description, String date) throws DukeException {
+        this.description = description;
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid Date format!");
+        }
     }
 
     public void markAsDone() {
@@ -14,6 +28,10 @@ public class Task {
 
     private String getDoneSymbol() {
         return isDone ? "X" : " ";
+    }
+
+    public String getDateString() {
+        return this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
     @Override
