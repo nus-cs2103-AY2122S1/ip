@@ -279,6 +279,7 @@ public class BotCommandResponderUnit {
             botPrinter.print(botStaticMemoryUnit.MESSAGE_KEYWORD_NO_FOUND + keywordOutput);
 
         } else {
+            
             String taskFoundOutput = "";
             for (String searchResult : searchResultList) {
                 taskFoundOutput += searchResult;
