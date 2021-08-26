@@ -30,10 +30,10 @@ public class TaskList {
     }
 
     public Task remove(int taskIndex) throws InvalidTaskException {
-       Task task = this.get(taskIndex);
-       this.list.remove(task);
-       this.save();
-       return task;
+        Task task = this.get(taskIndex);
+        this.list.remove(task);
+        this.save();
+        return task;
     }
 
     public void markAsDone(int taskIndex) throws InvalidTaskException {
@@ -42,7 +42,7 @@ public class TaskList {
     }
 
     public int size() {
-       return this.list.size();
+        return this.list.size();
     }
 
     private void save() {
@@ -60,8 +60,8 @@ public class TaskList {
         }
 
         StringBuilder builder = new StringBuilder();
-        for(int i = 0; i < this.list.size(); i++) {
-           builder.append(String.format("%d. %s\n", i + 1, this.list.get(i).toString()));
+        for (int i = 0; i < this.list.size(); i++) {
+            builder.append(String.format("%d. %s\n", i + 1, this.list.get(i).toString()));
         }
         return builder.toString();
     }

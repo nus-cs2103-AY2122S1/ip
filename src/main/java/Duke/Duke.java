@@ -15,7 +15,7 @@ import java.io.IOException;
 public class Duke {
     private static final String DEFAULT_TODO_STORAGE_PATH = "data/duke.txt";
 
-    private boolean stopped = false;
+    private boolean isStopped = false;
     private final TaskList taskList;
 
     public Duke(String todoStoragePath) throws IOException {
@@ -34,7 +34,7 @@ public class Duke {
 
     public void run() {
         Ui.print(Ui.GREETING_MESSAGE);
-        while (!this.stopped) {
+        while (!this.isStopped) {
             UserInput input = Parser.parse(Ui.read());
             try {
                 Command.matching(input).run(this, input);
@@ -46,7 +46,7 @@ public class Duke {
     }
 
     public void stop() {
-        this.stopped = true;
+        this.isStopped = true;
     }
 
     public TaskList getTaskList() {

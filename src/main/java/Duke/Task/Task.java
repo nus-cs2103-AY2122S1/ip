@@ -12,7 +12,9 @@ public abstract class Task {
     private boolean isDone;
 
     Task(String description, boolean isDone) throws InvalidTaskException {
-        if (description.isEmpty()) throw new InvalidTaskException(DESCRIPTION_EMPTY_MESSAGE);
+        if (description.isEmpty()) {
+            throw new InvalidTaskException(DESCRIPTION_EMPTY_MESSAGE);
+        }
         this.description = description;
         this.isDone = isDone;
     }
