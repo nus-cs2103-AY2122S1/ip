@@ -91,7 +91,6 @@ class Duke {
         while (myScanner.hasNext()) {
             try {
                 String input = myScanner.nextLine();//Parse the line
-                System.out.println(input);//User input typed
                 parser.parse(input);
                 if(parser.getBreak()){
                     break;

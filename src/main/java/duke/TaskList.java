@@ -20,17 +20,17 @@ public class TaskList {
         this.list.remove(i);
     }
 
-//    public Task deleteTask(String[] inputSplit) {
-//        Task t = null;
-//        try {
-//            int i = Integer.parseInt(inputSplit[1]);
-//            t = list.get(i - 1);
-//            list.remove(i - 1);
-//        } catch (IndexOutOfBoundsException e) {
-//            System.out.println("That is an invalid index!!");
-//        }
-//        return t;
-//    }
+    public TaskList findTask(String input){
+        TaskList searchResult = new TaskList();
+        for(int i = 0; i < list.size(); i++){
+            Task task = list.get(i);
+            if(task.toString().contains(input)){
+                searchResult.addTask(task);
+            }
+        }
+        return searchResult;
+    }
+
 
     public int size() {
         return list.size();
