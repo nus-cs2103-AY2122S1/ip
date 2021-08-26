@@ -10,7 +10,7 @@ public class Duke {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String line = "❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤";
+        String line = "____________________________________________________________";
         ArrayList<Task> task = new ArrayList<>();
         System.out.println("Hello from\n" + logo + line + "\nWhat can I do for you?\n" + line);
 
@@ -45,7 +45,7 @@ public class Duke {
                 System.out.println(line);
             } else if (parts.length == 1) {
                 System.out.println(line);
-                System.out.println("☹ OOPS!!! The description of a " + parts[0] + " cannot be empty.");
+                System.out.println("OOPS!!! The description of a " + parts[0] + " cannot be empty.");
                 System.out.println(line);
             } else if (parts[0].equals("deadline")){
                 String[] part2 = input.split("/by ");
@@ -73,7 +73,7 @@ public class Duke {
                 System.out.println(line);
             } else {
                 System.out.println(line);
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 System.out.println(line);
             }
             input = s.nextLine();
