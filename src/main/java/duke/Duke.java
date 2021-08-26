@@ -53,7 +53,7 @@ public class Duke {
 
     private void exit() {
         try {
-            Storage.save(taskList.formatData());
+            Storage.save(taskList.toSaveFormat());
         } catch (IOException e) {
             ui.showSavingError(e.getMessage());
         }

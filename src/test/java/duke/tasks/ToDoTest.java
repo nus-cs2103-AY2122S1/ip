@@ -9,7 +9,7 @@ public class ToDoTest {
 
     @Test
     public void testFormatForSave() {
-        assertEquals("T | 1 | JUnit test iP", t.formatForSave());
+        assertEquals("T | 1 | JUnit test iP", t.toSaveFormat());
     }
 
     @Test

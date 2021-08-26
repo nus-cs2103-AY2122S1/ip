@@ -11,7 +11,7 @@ public class DeadlineTest {
 
     @Test
     public void testFormatForSave() {
-        assertEquals("D | 0 | JUnit test iP | 2021-08-26T22:30", dl.formatForSave());
+        assertEquals("D | 0 | JUnit test iP | 2021-08-26T22:30", dl.toSaveFormat());
     }
 
     @Test

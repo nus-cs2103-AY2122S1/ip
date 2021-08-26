@@ -25,7 +25,7 @@ public abstract class Task {
         return false;
     }
 
-    public String formatForSave() {
+    public String toSaveFormat() {
         return String.format(" | %d | %s", isDone ? 1 : 0, description);
     }
 

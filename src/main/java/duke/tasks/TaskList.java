@@ -11,8 +11,8 @@ public class TaskList {
         list = new ArrayList<>();
     }
 
-    public TaskList(List<Task> lines) {
-        list = new ArrayList<>(lines);
+    public TaskList(List<Task> tasks) {
+        list = new ArrayList<>(tasks);
     }
 
     public void add(Task t) {
@@ -35,8 +35,8 @@ public class TaskList {
         return list.get(--taskNo).markAsDone();
     }
 
-    public List<String> formatData() {
-        return list.stream().map(Task::formatForSave).collect(Collectors.toList());
+    public List<String> toSaveFormat() {
+        return list.stream().map(Task::toSaveFormat).collect(Collectors.toList());
     }
 
     @Override

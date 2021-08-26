@@ -10,8 +10,9 @@ public class ToDo extends Task {
         super(description);
     }
 
-    public String formatForSave() {
-        return "T" + super.formatForSave();
+    @Override
+    public String toSaveFormat() {
+        return "T" + super.toSaveFormat();
     }
 
     @Override

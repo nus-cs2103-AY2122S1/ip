@@ -16,8 +16,9 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public String formatForSave() {
-        return "D" + super.formatForSave() + " | " + by;
+    @Override
+    public String toSaveFormat() {
+        return "D" + super.toSaveFormat() + " | " + by;
     }
 
     @Override
