@@ -81,6 +81,8 @@ public class Parser {
             return new AddTaskCommand("event", argument, dateString);
         case "deadline":
             return new AddTaskCommand("deadline", argument, dateString);
+        case "find":
+            return new FindCommand(argument);
         default:
             throw new KermitException(invalidCommandText);
         }

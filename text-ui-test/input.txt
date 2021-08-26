@@ -19,4 +19,6 @@ deadline
 deadline SomeDeadline
 delete 1
 list
+deadline Write CS2103T notes /by 23-04-2021
+find CS2103T
 bye

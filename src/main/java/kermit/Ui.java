@@ -1,6 +1,7 @@
 package kermit;
 
 import kermit.tasks.Task;
+import kermit.tasks.ToDo;
 
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ public class Ui {
             "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
     private static final String listText = "Here are the tasks in your list:";
     private static final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
+    private static final String filteredTaskText = "Here are the matching tasks in your list:";
     private static final String goodbyeText = "Bye. Hope to see you again soon!";
     private static final String errorText = "Burp burp! Something went wrong!";
     private static final String loadingErrorText = "Could not read this file Nuuuuuuu!";
@@ -104,6 +106,13 @@ public class Ui {
      */
     public void showLoadingError() {
         formatAndPrintText(loadingErrorText);
+    }
+
+    /**
+     * Pretty format tasks that match filter.
+     */
+    public void showFilteredTasks(TaskList filteredTasks) {
+        formatAndPrintText(filteredTaskText + "\n" + filteredTasks);
     }
 
     /**

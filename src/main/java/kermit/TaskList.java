@@ -3,6 +3,7 @@ package kermit;
 import kermit.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -45,6 +46,24 @@ public class TaskList extends ArrayList<Task> {
         Task task = super.get(index);
         super.remove(index);
         return task;
+    }
+
+    /**
+     * Filters tasks that contain a string.
+     *
+     * @param searchString String to search for.
+     * @return ArrayList of all tasks that contain searchstring.
+     */
+    public TaskList filter(String searchString) {
+        TaskList filteredTasks = new TaskList();
+        Iterator<Task> taskIter = super.iterator();
+        while (taskIter.hasNext()) {
+            Task task = (Task) taskIter.next();
+            if (task.getDescription().contains(searchString)) {
+                filteredTasks.add(task);
+            }
+        }
+        return filteredTasks;
     }
 
     /**
