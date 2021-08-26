@@ -1,6 +1,14 @@
 package yoyo.core;
 
-import yoyo.command.*;
+import yoyo.command.Command;
+import yoyo.command.CommandBye;
+import yoyo.command.CommandDeadline;
+import yoyo.command.CommandDelete;
+import yoyo.command.CommandDone;
+import yoyo.command.CommandEvent;
+import yoyo.command.CommandFind;
+import yoyo.command.CommandList;
+import yoyo.command.CommandTodo;
 import yoyo.exception.YoyoException;
 
 import java.time.DateTimeException;
@@ -32,6 +40,8 @@ public class Parser {
             return new CommandDeadline(inputTokens);
         case "event":
             return new CommandEvent(inputTokens);
+        case "find":
+            return new CommandFind(inputTokens);
         default:
             throw new YoyoException.YoyoCommandNotFoundException("Yoyo doesn't understand "
                     + "what you mean :-(");
@@ -72,5 +82,5 @@ public class Parser {
         }
         return result;
     }
-    
+
 }

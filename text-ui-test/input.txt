@@ -33,4 +33,8 @@ deadline geq quiz /by 2021/08/13 1800
 event computing day /at 2021/09/13 1800
 done 1
 list
+find geq
+find computing
+find sleep
+find coffee
 bye
