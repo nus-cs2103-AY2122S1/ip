@@ -1,7 +1,12 @@
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
     public static void main(String[] args) {
@@ -14,11 +19,21 @@ public class Duke {
         String taskDdl = "deadline";
         String taskEve = "event";
         ArrayList<Task> inputs = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy kk:mm", Locale.ENGLISH);
+
+//        String dtString = "26/08/2021 20:00";
+//        LocalDateTime datetime = LocalDateTime.parse(dtString, formatter);
+//        System.out.println(datetime.toString());
 
         // Welcome message
         System.out.println(lineBreak
                 + "\n"
                 + "Hello! I'm Azure.\n"
+                + "You can create Tasks here.\n"
+                + "To add a Todo, simply key in `todo` followed by the name;\n"
+                + "To add a Deadline, simply key in `deadline` followed by its name, `/by` and the deadline;\n"
+                + "To add an Event, simply key in `event` followed by its name, `/at` and its time.\n"
+                + "Please key in the date and time in the format of `26/08/2021 20:20`.\n"
                 + "How can I help you today?\n"
                 + lineBreak + "\n");
 
@@ -87,7 +102,8 @@ public class Duke {
                     String[] ddlGroup = input.split(" /by ");
                     String ddlToAdd = ddlGroup[0].substring(9); // name of the task is after "deadline" and space
                     String ddlByTime = ddlGroup[1];
-                    Task newDeadline = new Deadline(ddlToAdd, ddlByTime);
+                    LocalDateTime dateTime = LocalDateTime.parse(ddlByTime, formatter);
+                    Task newDeadline = new Deadline(ddlToAdd, dateTime);
                     inputs.add(newDeadline);
                     System.out.println("Roger! Added the task: ");
                     System.out.println("    " + newDeadline.toString());
@@ -101,7 +117,8 @@ public class Duke {
                     String[] eveGroup = input.split(" /at ");
                     String eveToAdd = eveGroup[0].substring(6); // name of the task is after "event" and space
                     String eveAtTime = eveGroup[1];
-                    Task newEvent = new Event(eveToAdd, eveAtTime);
+                    LocalDateTime dateTime = LocalDateTime.parse(eveAtTime, formatter);
+                    Task newEvent = new Event(eveToAdd, dateTime);
                     inputs.add(newEvent);
                     System.out.println("Roger! Added the task: ");
                     System.out.println("    " + newEvent.toString());
