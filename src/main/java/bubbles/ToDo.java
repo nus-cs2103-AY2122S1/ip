@@ -1,18 +1,16 @@
-package bubbles.tasks;
+package bubbles;
 
-import bubbles.exceptions.EmptyTaskException;
-
-public class ToDo extends Task {
-    private ToDo(String description, boolean completed) {
-        super(description, completed);
+class ToDo extends Task {
+    private ToDo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
-    public static ToDo addToDo(String input, boolean completed) throws EmptyTaskException {
+    public static ToDo addToDo(String input, boolean isDone) throws EmptyTaskException {
         if (input.equals("")) {
             throw new EmptyTaskException("todo");
         }
 
-        ToDo item = new ToDo(input, completed);
+        ToDo item = new ToDo(input, isDone);
 
         return item;
     }

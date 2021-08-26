@@ -1,9 +1,10 @@
 package bubbles;
 
-public class Parser {
+class Parser {
     // deals with making sense of the user command
     public Object[] formatTask(String task) {
         String input = "";
+
         String[] arr = task.split(" \\| ");
         int n = arr.length;
 
@@ -11,7 +12,6 @@ public class Parser {
 
         String completed = arr[1];
         boolean isDone = false;
-
         if (completed.equals("1")) {
             isDone = true;
         }

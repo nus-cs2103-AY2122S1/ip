@@ -1,6 +1,6 @@
-package bubbles.exceptions;
+package bubbles;
 
-public class EmptyTaskException extends Exception {
+class EmptyTaskException extends Exception {
     private String taskType;
 
     public EmptyTaskException(String taskType) {

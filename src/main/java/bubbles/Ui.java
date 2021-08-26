@@ -2,9 +2,7 @@ package bubbles;
 
 import java.util.Scanner;
 
-import bubbles.tasks.TaskList;
-
-public class Ui {
+class Ui {
     //deals with interactions with the user
     public void echo() {
         Scanner sc = new Scanner(System.in);
@@ -37,7 +35,6 @@ public class Ui {
                 storage.writeTasks();
 
                 String farewell = "Bye-bye! Hope to see you again soon!";
-
                 formatting(farewell);
                 break;
             } else {

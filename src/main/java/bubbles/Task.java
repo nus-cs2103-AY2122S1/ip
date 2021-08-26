@@ -1,17 +1,17 @@
-package bubbles.tasks;
+package bubbles;
 
 import java.time.LocalDate;
 
-public class Task {
+class Task {
     protected String description;
     protected boolean isDone;
 
-    public Task(String description, boolean completed) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.isDone = completed;
+        this.isDone = isDone;
     }
 
-    public void markAsDone() {
+    public void setAsDone() {
         this.isDone = true;
     }
 

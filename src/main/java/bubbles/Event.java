@@ -1,20 +1,20 @@
-package bubbles.tasks;
+package bubbles;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
+class Event extends Task {
     private LocalDate eventTime;
 
-    private Event(String description, boolean completed, String eventTime) {
-        super(description, completed);
+    private Event(String description, boolean isDone, String eventTime) {
+        super(description, isDone);
         this.eventTime = Task.formatDate(eventTime);
     }
 
-    public static Event addEvent(String input, boolean completed) {
+    public static Event addEvent(String input, boolean isDone) {
         String[] arr = input.split(" /at ");
 
-        Event item = new Event(arr[0], completed, arr[1]);
+        Event item = new Event(arr[0], isDone, arr[1]);
 
         return item;
     }
@@ -40,7 +40,6 @@ public class Event extends Task {
     public String toString() {
         String date = this.eventTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         String time = "(at: " + date + ")";
-
         String res = "[E] [" + this.getStatus() + "] " + this.description + " " + time;
 
         return res;

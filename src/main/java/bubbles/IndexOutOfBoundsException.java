@@ -1,6 +1,6 @@
-package bubbles.exceptions;
+package bubbles;
 
-public class IndexOutOfBoundsException extends Exception {
+class IndexOutOfBoundsException extends Exception {
     public IndexOutOfBoundsException(String message) {
         super(message);
     }
