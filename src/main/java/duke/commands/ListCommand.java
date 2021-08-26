@@ -1,4 +1,6 @@
-class ListCommand extends Command {
+package duke.commands;
+
+public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {

@@ -1,7 +1,11 @@
+package duke.ui;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 
-class Ui {
+import duke.commands.CommandResult;
+
+public class Ui {
     private static final String LOGO = " ____        _\n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"

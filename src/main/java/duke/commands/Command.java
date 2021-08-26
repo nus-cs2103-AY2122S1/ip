@@ -1,4 +1,8 @@
-abstract class Command {
+package duke.commands;
+
+import duke.tasks.TaskList;
+
+public abstract class Command {
     // BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT;
 
     protected TaskList taskList;

@@ -1,5 +1,6 @@
-// Only for wrong syntax
-class InvalidCommand extends Command {
+package duke.commands;
+
+public class InvalidCommand extends Command {
     private final String message;
 
     public InvalidCommand(String message) {

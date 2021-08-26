@@ -1,4 +1,6 @@
-class CommandResult {
+package duke.commands;
+
+public class CommandResult {
     private final String message;
 
     public CommandResult(String message) {

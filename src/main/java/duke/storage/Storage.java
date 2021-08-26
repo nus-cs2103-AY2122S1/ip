@@ -1,3 +1,5 @@
+package duke.storage;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,11 +9,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 // to divide into
 // encoder
 // decoder
 
-class Storage {
+public class Storage {
     private static final String FILE_NAME = "./duke.txt";
     private static final Path FILE_PATH = Paths.get(FILE_NAME);
 

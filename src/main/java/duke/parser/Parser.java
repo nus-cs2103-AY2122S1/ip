@@ -1,8 +1,20 @@
+package duke.parser;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-class Parser {
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
+import duke.commands.ToDoCommand;
+
+public class Parser {
     public Command parse(String text) {
         String[] tokens = text.split(" ", 2);   // split at the first white space
         Command command = parseTokens(tokens);

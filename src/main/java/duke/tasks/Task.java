@@ -1,4 +1,6 @@
-abstract class Task {
+package duke.tasks;
+
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -25,7 +27,7 @@ abstract class Task {
 
     public String formatForSave() {
         return String.format(" | %d | %s", isDone ? 1 : 0, description);
-    };
+    }
 
     @Override
     public String toString() {

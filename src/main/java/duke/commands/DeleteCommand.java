@@ -1,7 +1,9 @@
-class DoneCommand extends Command {
+package duke.commands;
+
+public class DeleteCommand extends Command {
     private final int taskNo;
 
-    public DoneCommand(int taskNo) {
+    public DeleteCommand(int taskNo) {
         this.taskNo = taskNo;
     }
 
@@ -13,8 +15,6 @@ class DoneCommand extends Command {
                     : "Invalid take number! Must be between 1 and " + taskList.size();
             return new CommandResult(msg);
         }
-        return (taskList.markAsDone(taskNo))
-                ? new CommandResult("I've marked this task as done:\n  " + taskList.get(taskNo))
-                : new CommandResult("Task already done.");
+        return new CommandResult("Noted. I've deleted this task:\n  " + taskList.delete(taskNo));
     }
 }

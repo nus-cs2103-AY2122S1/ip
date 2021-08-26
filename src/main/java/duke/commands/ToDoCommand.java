@@ -1,4 +1,8 @@
-class ToDoCommand extends Command {
+package duke.commands;
+
+import duke.tasks.ToDo;
+
+public class ToDoCommand extends Command {
     private final ToDo toDo;
 
     public ToDoCommand(String taskDescription) {

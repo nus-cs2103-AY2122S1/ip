@@ -1,6 +1,10 @@
+package duke.commands;
+
 import java.time.LocalDateTime;
 
-class DeadlineCommand extends Command {
+import duke.tasks.Deadline;
+
+public class DeadlineCommand extends Command {
     private final Deadline deadline;
 
     public DeadlineCommand(String taskDescription, LocalDateTime by) {

@@ -1,5 +1,13 @@
 import java.io.IOException;
 
+import duke.commands.Command;
+import duke.commands.CommandResult;
+import duke.commands.ExitCommand;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
     private Ui ui;
     private Parser parser;

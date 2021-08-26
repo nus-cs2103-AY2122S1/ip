@@ -1,4 +1,6 @@
-class ExitCommand extends Command {
+package duke.commands;
+
+public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute() {
