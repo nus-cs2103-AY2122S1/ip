@@ -1,8 +1,10 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+
+import java.util.Arrays;
 
 public class TodoCommand extends Command {
     public TodoCommand(String[] args) {
@@ -16,6 +18,15 @@ public class TodoCommand extends Command {
     }
 
     public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof TodoCommand) {
+            TodoCommand otherCommand = (TodoCommand) other;
+            return Arrays.equals(this.args, otherCommand.args);
+        }
         return false;
     }
 }

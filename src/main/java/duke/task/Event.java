@@ -33,4 +33,13 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), deadline);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Event) {
+            Event otherEvent = (Event) other;
+            return this.deadline.equals(otherEvent.deadline) && super.equals(other);
+        }
+        return false;
+    }
 }

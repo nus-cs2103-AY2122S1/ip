@@ -63,4 +63,12 @@ public class TaskList {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof TaskList) {
+            TaskList otherTaskList = (TaskList) other;
+            return this.tasks.equals(otherTaskList.tasks);
+        }
+        return false;
+    }
 }

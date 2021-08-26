@@ -3,6 +3,9 @@ package duke.command;
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
+
+import java.util.Arrays;
+
 import duke.Pair;
 
 import duke.task.Task;
@@ -27,6 +30,15 @@ public class DoneCommand extends Command {
     }
 
     public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof DoneCommand) {
+            DoneCommand otherCommand = (DoneCommand) other;
+            return Arrays.equals(this.args, otherCommand.args);
+        }
         return false;
     }
 }

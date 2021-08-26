@@ -39,8 +39,6 @@ public class Deadline extends Task {
         }
     }
 
-    
-
     public String toFileString() {
         return String.format("D | %s | %s", super.toFileString(), endDate.format(FORMATTER));
     }
@@ -53,5 +51,14 @@ public class Deadline extends Task {
      */
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), endDate.format(PRINT_FORMATTER));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Deadline) {
+            Deadline otherDeadline = (Deadline) other;
+            return this.endDate.equals(otherDeadline.endDate) && super.equals(other);
+        }
+        return false;
     }
 }

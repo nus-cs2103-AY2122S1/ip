@@ -64,4 +64,13 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), title);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Task) {
+            Task otherTask = (Task) other;
+            return (this.isDone == otherTask.isDone) && this.title.equals(otherTask.title);
+        }
+        return false;
+    }
 }

@@ -40,9 +40,9 @@ public class Parser {
 
     private static Command parseDeadlineInput(String input) {
         try {
-            String taskDescription = input.replaceAll("/by.*", "");
+            String taskDescription = input.replaceAll("/by.*", "").trim();
             validateDescription(taskDescription, "deadline");
-            String deadline = input.split("/by")[1];
+            String deadline = input.split("/by")[1].trim();
             return new DeadlineCommand(new String[] { taskDescription, deadline });
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The end time of a deadline cannot be empty.");
@@ -71,9 +71,9 @@ public class Parser {
 
     private static Command parseEventInput(String input) {
         try {
-            String taskDescription = input.replaceAll("/at.*", "");
+            String taskDescription = input.replaceAll("/at.*", "").trim();
             validateDescription(taskDescription, "event");
-            String deadline = input.split("/at")[1];
+            String deadline = input.split("/at")[1].trim();
             return new EventCommand(new String[] { taskDescription, deadline });
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The start and end time of a event cannot be empty.");

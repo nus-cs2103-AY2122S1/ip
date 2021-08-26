@@ -1,10 +1,11 @@
 package duke.command;
 
+import duke.task.Task;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
-import duke.task.Task;
+import java.util.Arrays;
 
 public class DeleteCommand extends Command {
     public DeleteCommand(String[] args) {
@@ -18,6 +19,15 @@ public class DeleteCommand extends Command {
     }
 
     public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof DeleteCommand) {
+            DeleteCommand otherCommand = (DeleteCommand) other;
+            return Arrays.equals(this.args, otherCommand.args);
+        }
         return false;
     }
 }
