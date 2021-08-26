@@ -1,5 +1,6 @@
 import bot.assembly.BotBrain;
 
+// A class that represents the Bot itself
 public class Bot {
 
     /**
