@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.List;
+import duke.TaskList;
 import duke.Storage;
 import duke.Ui;
 
@@ -15,15 +15,15 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(List list, Ui ui, Storage storage) throws
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws
             ArrayIndexOutOfBoundsException,
             IOException {
         try {
-            if (taskNo == -1 || taskNo + 1 > list.getList().size()) {
+            if (taskNo == -1 || taskNo + 1 > taskList.getList().size()) {
                 throw new ArrayIndexOutOfBoundsException();
             }
-            String display = list.complete(this.taskNo);
-            storage.writeToFile(list);
+            String display = taskList.complete(this.taskNo);
+            storage.writeToFile(taskList);
             ui.printDone(display);
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.printError(

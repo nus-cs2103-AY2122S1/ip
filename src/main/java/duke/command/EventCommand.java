@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.task.Events;
-import duke.List;
+import duke.TaskList;
 import duke.Storage;
 import duke.Ui;
 
@@ -19,10 +19,10 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(List list, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Events newEvent = new Events(this.desc, this.at);
-        list.add(newEvent);
-        storage.writeToFile(list);
-        ui.printAdd(newEvent, list.getList().size());
+        taskList.add(newEvent);
+        storage.writeToFile(taskList);
+        ui.printAdd(newEvent, taskList.getList().size());
     }
 }

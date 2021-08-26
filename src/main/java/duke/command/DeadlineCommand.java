@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.task.Deadlines;
-import duke.List;
+import duke.TaskList;
 import duke.Storage;
 import duke.Ui;
 
@@ -19,10 +19,10 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(List list, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Deadlines newDeadline = new Deadlines(this.desc, this.by);
-        list.add(newDeadline);
-        storage.writeToFile(list);
-        ui.printAdd(newDeadline, list.getList().size());
+        taskList.add(newDeadline);
+        storage.writeToFile(taskList);
+        ui.printAdd(newDeadline, taskList.getList().size());
     }
 }

@@ -14,14 +14,14 @@ import java.util.Scanner;
 public class Storage {
     private File f;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
-    private List list;
+    private TaskList taskList;
 
     public Storage(String pathname) {
-        this.list = new List();
+        this.taskList = new TaskList();
         f = new File(pathname);
     }
 
-    public List readFile() throws IOException {
+    public TaskList readFile() throws IOException {
         if (!f.exists()) {
             f.getParentFile().mkdirs();
             f.createNewFile();
@@ -34,29 +34,29 @@ public class Storage {
             switch (parsed[0]) {
                 case "T":
                     Todos newTodo = new Todos(parsed[2], parsed[1]);
-                    list.add(newTodo);
+                    taskList.add(newTodo);
                     break;
                 case "E":
                     LocalDateTime at = LocalDateTime.parse(parsed[3], formatter);
                     Events newEvent = new Events(parsed[2], parsed[1], at);
-                    list.add(newEvent);
+                    taskList.add(newEvent);
                     break;
                 case "D":
                     LocalDateTime by = LocalDateTime.parse(parsed[3], formatter);
                     Deadlines newDeadline = new Deadlines(parsed[2], parsed[1], by);
-                    list.add(newDeadline);
+                    taskList.add(newDeadline);
                     break;
             }
         }
-        return list;
+        return taskList;
     }
 
 
-    public void writeToFile(List list) throws IOException {
+    public void writeToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(f.getAbsoluteFile());
 
-        for (int i = 0; i < list.getList().size(); i++) {
-            fw.write(list.getList().get(i).toSaveString() + System.lineSeparator());
+        for (int i = 0; i < taskList.getList().size(); i++) {
+            fw.write(taskList.getList().get(i).toSaveString() + System.lineSeparator());
         }
 
         fw.close();

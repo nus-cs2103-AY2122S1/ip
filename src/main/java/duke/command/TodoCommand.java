@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.List;
+import duke.TaskList;
 import duke.Storage;
 import duke.task.Todos;
 import duke.Ui;
@@ -16,13 +16,13 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(List list, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         if (this.desc.equals("")) {
             throw new IllegalArgumentException();
         }
         Todos newTodo = new Todos(this.desc);
-        list.add(newTodo);
-        storage.writeToFile(list);
-        ui.printAdd(newTodo, list.getList().size());
+        taskList.add(newTodo);
+        storage.writeToFile(taskList);
+        ui.printAdd(newTodo, taskList.getList().size());
     }
 }

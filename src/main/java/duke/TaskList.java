@@ -4,13 +4,13 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-public class List {
+public class TaskList {
     ArrayList<Task> list = new ArrayList<>(100);
 
-    public List() {}
+    public TaskList() {}
 
-    public List(List list) {
-        this.list = list.getList();
+    public TaskList(TaskList taskList) {
+        this.list = taskList.getList();
     }
 
     public void add(Task task) {

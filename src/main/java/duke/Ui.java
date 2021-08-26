@@ -33,9 +33,9 @@ public class Ui {
         System.out.println("Hello from\n" + LOGO);
     }
 
-    public void printList(List list) {
+    public void printList(TaskList taskList) {
         printBreak();
-        ArrayList<Task> todos = list.getList();
+        ArrayList<Task> todos = taskList.getList();
         todos.trimToSize();
         if (todos.size() == 0) {
             System.out.println(INDENTATION + " ٩(◕‿◕｡)۶ Ehe no task for now.");

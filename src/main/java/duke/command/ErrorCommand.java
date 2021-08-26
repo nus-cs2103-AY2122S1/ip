@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.List;
+import duke.TaskList;
 import duke.Storage;
 import duke.Ui;
 
@@ -19,7 +19,7 @@ public class ErrorCommand extends Command {
     }
 
     @Override
-    public void execute(List list, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (this.emoticon != null) {
             ui.printError(this.error, this.emoticon);
         } else {

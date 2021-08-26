@@ -9,14 +9,14 @@ public class Duke {
 
     private Ui ui;
     private Storage storage;
-    private static List list = new List();
+    private static TaskList taskList = new TaskList();
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            List temp = storage.readFile();
-            list = temp == null ? new List() : new List(temp);
+            TaskList temp = storage.readFile();
+            taskList = temp == null ? new TaskList() : new TaskList(temp);
         } catch (IOException e) {
             ui.printFileError(e);
         }
@@ -31,7 +31,7 @@ public class Duke {
             try {
                 String input = ui.readInput();
                 Command c = Parser.parseCommands(input);
-                c.execute(this.list, this.ui, this.storage);
+                c.execute(this.taskList, this.ui, this.storage);
                 isExit = c.isExit;
             } catch (IOException e) {
                 ui.printFileError(e);

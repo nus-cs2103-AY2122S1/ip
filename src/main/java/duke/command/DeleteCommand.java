@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.List;
+import duke.TaskList;
 import duke.Storage;
 import duke.Ui;
 
@@ -15,14 +15,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(List list, Ui ui, Storage storage) throws IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         try{
-            if (taskNo == -1 || taskNo + 1 > list.getList().size()) {
+            if (taskNo == -1 || taskNo + 1 > taskList.getList().size()) {
                 throw new ArrayIndexOutOfBoundsException();
             }
-            String display = list.delete(this.taskNo);
-            storage.writeToFile(list);
-            ui.printDelete(display, list.getList().size());
+            String display = taskList.delete(this.taskNo);
+            storage.writeToFile(taskList);
+            ui.printDelete(display, taskList.getList().size());
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.printError("Eh... No such task found. Cannot delete.", "(＃￣ω￣)");
         }
