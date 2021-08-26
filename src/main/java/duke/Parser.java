@@ -4,7 +4,7 @@ import duke.command.*;
 
 public class Parser {
     public enum CommandType {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT,
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND,
     }
 
     public static Command parse(String fullCommand) throws Exception {
@@ -34,6 +34,9 @@ public class Parser {
 
             case DELETE:
                 return new DeleteTaskCommand(arguments);
+
+            case FIND:
+                return new FilterTasksCommand(arguments);
 
             case TODO:
                 return new AddTodoCommand(arguments);
