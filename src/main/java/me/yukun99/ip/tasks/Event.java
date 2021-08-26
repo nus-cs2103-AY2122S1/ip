@@ -32,7 +32,7 @@ public class Event extends Task {
 
 	@Override
 	public DateTimePair getDate() {
-		return this.pair;
+		return pair;
 	}
 
 	@Override
@@ -47,23 +47,23 @@ public class Event extends Task {
 			return false;
 		}
 		Event event = (Event) o;
-		return super.equals(o) && this.pair.equals(event.pair);
+		return super.equals(o) && pair.equals(event.pair);
 	}
 
 	@Override
 	public String saveString() {
 		String save = "E:";
-		if (this.done) {
+		if (done) {
 			save += "T:";
 		} else {
 			save += "F:";
 		}
-		save += this.name + ":" + this.pair.toString();
-		return save;
+		save += name + ":" + pair.toString();
+		return save + super.saveString();
 	}
 
 	@Override
 	public String toString() {
-		return " [E]" + super.toString() + " (at: " + this.pair.toString() + ")";
+		return " [E]" + super.toString() + " (at: " + pair.toString() + ")";
 	}
 }

@@ -14,6 +14,6 @@ public class FindCommand extends Command {
 		if (args.length == 0) {
 			throw new HelpBotIllegalArgumentException(null);
 		}
-		this.ui.findByWord(this.args[0]);
+		ui.findByWord(args[0]);
 	}
 }

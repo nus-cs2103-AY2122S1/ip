@@ -33,7 +33,7 @@ public class Storage {
 		this.taskList = taskList;
 		this.filepath = filepath.replace("\\", "/");
 		File input = new File(this.filepath + "/input.txt");
-		this.outpath = this.filepath + "/ACTUAL.txt";
+		this.outpath = filepath + "/ACTUAL.txt";
 		File previous = new File(this.filepath + "/ACTUAL.txt");
 		if (previous.exists()) {
 			previous.delete();
@@ -62,7 +62,7 @@ public class Storage {
 	 * @throws IOException If message could not be written to file.
 	 */
 	public void saveMessage(String message) throws IOException {
-		FileWriter output = new FileWriter(this.outpath, true);
+		FileWriter output = new FileWriter(outpath, true);
 		output.write(message);
 		output.close();
 	}
@@ -71,7 +71,7 @@ public class Storage {
 	 * Loads previously saved tasks from file.
 	 */
 	public void loadTasks() {
-		File saved = new File(this.filepath + "/tasks.txt");
+		File saved = new File(filepath + "/tasks.txt");
 		Scanner savedScanner;
 		try {
 			savedScanner = new Scanner(saved);
@@ -82,9 +82,9 @@ public class Storage {
 			Task task = parseTask(savedScanner.nextLine());
 			if (task != null) {
 				try {
-					this.taskList.addTask(task, task.getDate());
+					taskList.addTask(task, task.getDate());
 				} catch (HelpBotInvalidTaskTypeException e) {
-					this.taskList.addTask(task, null);
+					taskList.addTask(task, null);
 				}
 			}
 		}
@@ -132,11 +132,11 @@ public class Storage {
 	 */
 	public void saveTask(Task task) {
 		try {
-			File previous = new File(this.filepath + "/tasks.txt");
+			File previous = new File(filepath + "/tasks.txt");
 			if (!previous.exists()) {
 				previous.createNewFile();
 			}
-			FileWriter output = new FileWriter(this.filepath + "/tasks.txt", true);
+			FileWriter output = new FileWriter(filepath + "/tasks.txt", true);
 			String strTask = task.saveString();
 			output.write(strTask);
 			output.close();
@@ -148,7 +148,7 @@ public class Storage {
 	 */
 	public void updateTasks() {
 		try {
-			FileWriter output = new FileWriter(this.filepath + "/tasks.txt");
+			FileWriter output = new FileWriter(filepath + "/tasks.txt");
 			String strTaskList = taskList.saveString();
 			output.write(strTaskList);
 			output.close();

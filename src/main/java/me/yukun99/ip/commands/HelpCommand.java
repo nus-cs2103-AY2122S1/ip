@@ -10,6 +10,6 @@ public class HelpCommand extends Command {
 
 	@Override
 	public void run() {
-		this.ui.help();
+		ui.help();
 	}
 }

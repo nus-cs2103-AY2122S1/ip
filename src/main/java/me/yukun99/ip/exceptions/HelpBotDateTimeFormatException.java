@@ -1,8 +1,16 @@
 package me.yukun99.ip.exceptions;
 
+/**
+ * Exception resulting from user inputting date in wrong format.
+ */
 public class HelpBotDateTimeFormatException extends HelpBotException {
 	private String argument;
 
+	/**
+	 * Constructor for a HelpBotDateTimeFormatException instance.
+	 *
+	 * @param argument Erroneous date entered by the user.
+	 */
 	public HelpBotDateTimeFormatException(String argument) {
 		super();
 		this.argument = argument;

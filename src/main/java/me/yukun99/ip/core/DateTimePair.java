@@ -32,8 +32,8 @@ public class DateTimePair {
 	 * @param pair DateTimePair instance containing newly parsed values.
 	 */
 	public void update(DateTimePair pair) {
-		this.date = pair.date;
-		this.time = pair.time;
+		date = pair.date;
+		time = pair.time;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class DateTimePair {
 		if (o == null) {
 			return false;
 		}
-		return this.date.equals(o.date);
+		return date.equals(o.date);
 	}
 
 	@Override
@@ -86,20 +86,20 @@ public class DateTimePair {
 			return false;
 		}
 		DateTimePair dateTimePair = (DateTimePair) o;
-		return this.date.equals(dateTimePair.date) && this.time.equals(dateTimePair.time);
+		return date.equals(dateTimePair.date) && time.equals(dateTimePair.time);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.date, this.time);
+		return Objects.hash(date, time);
 	}
 
 	@Override
 	public String toString() {
-		if (this.time == null) {
-			return this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+		if (time == null) {
+			return date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
 		}
-		return this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ", "
-				+ this.time.format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
+		return date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ", "
+				+ time.format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
 	}
 }

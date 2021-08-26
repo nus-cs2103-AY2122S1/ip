@@ -91,7 +91,7 @@ public abstract class Task {
 			return false;
 		}
 		Task task = (Task) o;
-		return this.name.equals(task.name);
+		return name.equals(task.name);
 	}
 
 	/**
@@ -102,9 +102,9 @@ public abstract class Task {
 	 */
 	public void updateFinder(TaskFinder taskFinder, boolean delete) {
 		if (!delete) {
-			taskFinder.addTask(this, this.name);
+			taskFinder.addTask(this, name);
 		} else {
-			taskFinder.deleteTask(this, this.name);
+			taskFinder.deleteTask(this, name);
 		}
 	}
 
@@ -122,11 +122,13 @@ public abstract class Task {
 	 *
 	 * @return String representation of the task to be saved into a file.
 	 */
-	public abstract String saveString();
+	public String saveString() {
+		return System.lineSeparator();
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.name, this.done);
+		return Objects.hash(name, done);
 	}
 
 	/**
@@ -137,8 +139,8 @@ public abstract class Task {
 	@Override
 	public String toString() {
 		if (!done) {
-			return PREFIX_NOT_DONE + this.name;
+			return PREFIX_NOT_DONE + name;
 		}
-		return PREFIX_DONE + this.name;
+		return PREFIX_DONE + name;
 	}
 }

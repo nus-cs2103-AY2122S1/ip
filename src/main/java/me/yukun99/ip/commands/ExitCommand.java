@@ -14,6 +14,6 @@ public class ExitCommand extends Command {
 
 	@Override
 	public void run() {
-		this.helpBot.exit();
+		helpBot.exit();
 	}
 }

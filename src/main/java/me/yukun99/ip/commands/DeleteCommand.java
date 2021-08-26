@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
 
 	@Override
 	public void run() throws HelpBotInvalidTaskException {
-		Task deleted = this.taskList.deleteTask(args[0]);
+		Task deleted = taskList.deleteTask(args[0]);
 		deleted.deleteMessage(ui);
 		storage.updateTasks();
 	}

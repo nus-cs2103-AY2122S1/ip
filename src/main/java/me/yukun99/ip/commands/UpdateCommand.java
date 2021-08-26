@@ -19,11 +19,11 @@ public class UpdateCommand extends Command {
 	@Override
 	public void run() throws HelpBotInvalidTaskException, HelpBotInvalidTaskTypeException {
 		try {
-			Task updated = this.taskList.updateTask(this.args[0], this.args[1]);
-			this.ui.update(updated);
+			Task updated = taskList.updateTask(args[0], args[1]);
+			ui.update(updated);
 			storage.updateTasks();
 		} catch (HelpBotDateTimeFormatException e) {
-			this.ui.error(e);
+			ui.error(e);
 		}
 	}
 }

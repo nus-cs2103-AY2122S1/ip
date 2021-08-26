@@ -57,31 +57,31 @@ public class Parser {
 	 * @throws HelpBotInvalidCommandException If command sent by the user is invalid.
 	 */
 	public final Command parse() throws HelpBotIllegalArgumentException, HelpBotInvalidCommandException {
-		String message = this.scanner.nextLine();
+		String message = scanner.nextLine();
 		Command command = null;
 		if (message.equals("list")) {
-			command = new ListCommand(null, this.taskList, this.ui);
+			command = new ListCommand(null, taskList, ui);
 		}
 		if (message.startsWith("list ")) {
 			String date = message.replace("list ", "");
 			String[] args = {date};
-			command = new ListCommand(args, this.taskList, this.ui);
+			command = new ListCommand(args, taskList, ui);
 		}
 		if (message.startsWith("find ")) {
 			String word = message.replaceFirst("find ", "");
 			String[] args = word.split(" ");
-			command = new FindCommand(args, this.taskList, this.ui);
+			command = new FindCommand(args, taskList, ui);
 		}
 		if (message.startsWith("todo ")) {
 			String name = message.replaceFirst("todo ", "");
 			String[] args = {name};
-			command = new AddCommand(args, this.taskList, this.ui, Type.TODO, this.storage);
+			command = new AddCommand(args, taskList, ui, Type.TODO, storage);
 		}
 		if (message.startsWith("deadline ")) {
 			String args = message.replaceFirst("deadline ", "");
 			if (args.contains(" /by ")) {
 				String[] argsSplit = args.split(" /by ");
-				command = new AddCommand(argsSplit, this.taskList, this.ui, Type.DEADLINE, this.storage);
+				command = new AddCommand(argsSplit, taskList, ui, Type.DEADLINE, storage);
 			} else {
 				throw new HelpBotIllegalArgumentException(args);
 			}
@@ -90,7 +90,7 @@ public class Parser {
 			String args = message.replaceFirst("event ", "");
 			if (args.contains(" /at ")) {
 				String[] argsSplit = args.split(" /at ");
-				command = new AddCommand(argsSplit, this.taskList, this.ui, Type.EVENT, this.storage);
+				command = new AddCommand(argsSplit, taskList, ui, Type.EVENT, storage);
 			} else {
 				throw new HelpBotIllegalArgumentException(args);
 			}
@@ -99,7 +99,7 @@ public class Parser {
 			String args = message.replaceFirst("update ", "");
 			if (args.contains(" /to ")) {
 				String[] argsSplit = args.split(" /to ");
-				command = new UpdateCommand(argsSplit, this.taskList, this.ui, this.storage);
+				command = new UpdateCommand(argsSplit, taskList, ui, storage);
 			} else {
 				throw new HelpBotIllegalArgumentException(args);
 			}
@@ -107,18 +107,18 @@ public class Parser {
 		if (message.startsWith("delete ")) {
 			String strIndex = message.replaceFirst("delete ", "");
 			String[] args = {strIndex};
-			command = new DeleteCommand(args, this.taskList, this.ui, this.storage);
+			command = new DeleteCommand(args, taskList, ui, storage);
 		}
 		if (message.startsWith("done ")) {
 			String strIndex = message.replaceFirst("done ", "");
 			String[] args = {strIndex};
-			command = new DoneCommand(args, this.taskList, this.ui);
+			command = new DoneCommand(args, taskList, ui);
 		}
 		if (message.equals("help")) {
-			command = new HelpCommand(null, null, this.ui);
+			command = new HelpCommand(null, null, ui);
 		}
 		if (message.equals("bye")) {
-			command = new ExitCommand(null, null, this.ui, this.helpBot);
+			command = new ExitCommand(null, null, ui, helpBot);
 		}
 		if (command == null) {
 			throw new HelpBotInvalidCommandException(message);
