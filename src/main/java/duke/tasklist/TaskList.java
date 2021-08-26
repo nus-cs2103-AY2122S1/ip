@@ -1,7 +1,7 @@
 package duke.tasklist;
 
 import duke.exceptions.InvalidNumberInputException;
-import duke.task.Task;
+import duke.tasks.Task;
 import java.util.ArrayList;
 
 public class TaskList {

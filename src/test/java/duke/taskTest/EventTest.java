@@ -1,8 +1,8 @@
 package duke.taskTest;
 
 import duke.parser.DateTimeParser;
-import duke.task.Event;
-import duke.task.Task;
+import duke.tasks.Event;
+import duke.tasks.Task;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;

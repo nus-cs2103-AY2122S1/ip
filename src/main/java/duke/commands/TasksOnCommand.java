@@ -1,8 +1,8 @@
 package duke.commands;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import java.time.LocalDate;

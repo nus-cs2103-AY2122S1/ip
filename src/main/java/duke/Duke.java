@@ -1,8 +1,8 @@
 package duke;
 
-import duke.commands.Command;
-import duke.exceptions.DukeException;
-import duke.parser.Parser;
+import duke.commands.*;
+import duke.exceptions.*;
+import duke.parser.*;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -13,8 +13,8 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
-    private String filePath = "src/main/java/data/duke.txt";
-    private String folderPath = "src/main/java/data";
+    private String filePath = "./data/duke.txt";
+    private String folderPath = "./data";
 
     public Duke() {
         ui = new Ui();

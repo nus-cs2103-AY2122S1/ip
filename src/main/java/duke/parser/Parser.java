@@ -2,10 +2,10 @@ package duke.parser;
 
 import duke.commands.*;
 import duke.exceptions.*;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 import duke.tasklist.TaskList;
 import duke.utils.Constants;
 import java.time.LocalDate;
@@ -47,7 +47,7 @@ public class Parser {
         return new ListCommand();
     }
 
-    public static AddCommand parseTask(String input, TaskList taskList) {
+    private static AddCommand parseTask(String input, TaskList taskList) {
         Task task;
         String[] splitTasks = input.split("\\s", 2);
         String taskType = splitTasks[0].toLowerCase();
@@ -121,7 +121,7 @@ public class Parser {
         }
     }
 
-    public static DoneCommand parseDone(String input, TaskList taskList) {
+    private static DoneCommand parseDone(String input, TaskList taskList) {
         try {
             String[] parsedTask = input.split("\\s", 2);
             String indexOfTask = parsedTask[1].trim();
@@ -162,11 +162,11 @@ public class Parser {
     }
 
 
-    public static boolean hasEmptyDesc(String[] taskArray) {
+    private static boolean hasEmptyDesc(String[] taskArray) {
         return taskArray.length == 1 || taskArray[1].isBlank() || taskArray[1].isEmpty();
     }
 
-    public static boolean hasDateButEmptyDesc(String[] taskArray) {
+    private static boolean hasDateButEmptyDesc(String[] taskArray) {
         return (taskArray[0].isBlank() || taskArray[0].isEmpty()) && (!taskArray[1].isBlank());
     }
 

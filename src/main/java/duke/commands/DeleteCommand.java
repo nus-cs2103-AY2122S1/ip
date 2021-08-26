@@ -1,7 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.InvalidNumberInputException;
-import duke.task.Task;
+import duke.tasks.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 

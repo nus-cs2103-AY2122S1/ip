@@ -1,10 +1,10 @@
 package duke.taskListTest;
 
 import duke.parser.DateTimeParser;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 import duke.tasklist.TaskList;
 import org.junit.jupiter.api.Test;
 

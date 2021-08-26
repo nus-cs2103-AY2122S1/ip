@@ -1,4 +1,4 @@
-package duke.task;
+package duke.tasks;
 
 
 public class ToDo extends Task {

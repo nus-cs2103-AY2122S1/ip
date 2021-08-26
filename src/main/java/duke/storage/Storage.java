@@ -1,7 +1,7 @@
 package duke.storage;
 
 import duke.exceptions.DukeException;
-import duke.task.*;
+import duke.tasks.*;
 import duke.parser.DateTimeParser;
 import duke.tasklist.TaskList;
 
@@ -36,7 +36,8 @@ public class Storage {
                 }
             }
         } catch (IOException ex) {
-            throw new DukeException("The storage file could not be created");
+            ex.printStackTrace();
+           // throw new DukeException("The storage file could not be created");
         }
     }
 

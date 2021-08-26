@@ -1,7 +1,7 @@
 package duke.ui;
 
 import duke.exceptions.DukeException;
-import duke.task.Task;
+import duke.tasks.Task;
 import duke.tasklist.TaskList;
 import duke.utils.Constants;
 import java.time.LocalDate;
