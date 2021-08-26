@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 
 public class Duke {
+
     public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -25,21 +26,19 @@ public class Duke {
         System.out.println(linebreakstart
                 + "\nHewwo!! From:\n"
                 + logo
-                + "How mayw Iw hewlp youw, Mastwer? uwu\n\n"
+                + "How mayw Iw hewlp youw, Mastwer? Pwease type 'help' for a list of commandws uwu\n\n"
                 + linebreakend);
 
         Scanner in = new Scanner(System.in);
 
-//        DataEditor dataeditor = new DataEditor("data/tasklist.txt");
-//        try {
-//            ArrayList<Task> taskarr = dataeditor.load();
-//        } catch (DukeException e) {
-//            System.out.println(e.getMessage());
-//            ArrayList<Task> taskarr = new ArrayList<>(100);
-//        }
-
-        TaskList tasklist = new TaskList();
-        // initiates new tasklist
+        DataEditor dataeditor = new DataEditor("data/tasklist.txt");
+        TaskList tasklist;
+        try {
+            tasklist = dataeditor.load();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            tasklist = new TaskList();
+        }
 
         boolean continueloop = true;
         // for checking loop
@@ -62,6 +61,23 @@ public class Duke {
                     System.out.println(e.getMessage());
                     System.out.println(linebreakend);
                 }
+            } else if (strparse[0].equalsIgnoreCase("help")) {
+                // lists command list
+                try {
+                    if (strparse.length > 1) {
+                        throw new IncorrectInputException("help", "'help'");
+                    }
+                    System.out.println(linebreakstart);
+                    System.out.println("Commandws supported:\n");
+                    System.out.println("- bye\n- help\n- list\n- todo\n- even\n- deadline\n");
+                    System.out.println(linebreakend);
+                } catch (DukeException e) {
+                    System.out.println(linebreakstart);
+                    System.out.println(e.getMessage());
+                    System.out.println(linebreakend);
+                }
+
+
             } else if (strparse[0].equalsIgnoreCase("list")) {
                 // lists history of current tasks.
                 try {

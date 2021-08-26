@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 
 /**
@@ -26,39 +27,43 @@ public class DataEditor {
      * @return ArrayList of tasks.
      * @throws DukeException Exception if any when reading file.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public TaskList load() throws DukeException {
         String home = System.getProperty("user.dir");
         Path path = Paths.get(home, this.filepath);
         boolean directoryExists = Files.exists(path);
 
         if (directoryExists) {
             try {
-                ArrayList<Task> tasklist = new ArrayList<>(100);
+                TaskList tasklist = new TaskList();
                 List<String> lines = Files.readAllLines(path);
 
                 for (String str: lines) {
-                    String[] strparse = str.split(" | ");
+                    String[] strparse = str.split(Pattern.quote(" | "));
                     if (strparse.length < 3) {
                         continue;
-                        // incorrect task
-                    } else {
-//
+                        // incorrect task listed for some reason
+                    } else if (strparse[0].equals("T")) {
+                            tasklist.addReadTodo(strparse[2].split(" "));
+                        } else if (strparse[0].equals("D")) {
+                            tasklist.addReadDeadline(strparse[2].split(" "));
+                        } else if (strparse[0].equals("E")) {
+                        tasklist.addReadEvent(strparse[2].split(" "));
                     }
-
                 }
-
                 return tasklist;
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                throw new ReadError();
             }
         } else {
-//            throw new ReadError();
+            throw new ReadError();
         }
-        return new ArrayList<>(100);
     }
 
-    public void save() throws DukeException {
+    public void save(TaskList tasklist) throws DukeException {
         String home = System.getProperty("user.dir");
+
+        String temp = tasklist.saveString();
+
 
     }
 

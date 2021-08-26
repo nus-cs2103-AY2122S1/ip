@@ -62,7 +62,7 @@ class ReadError extends DukeException {
      * Occurs when Duke tries to read txt file for Task list, but comes up empty.
      */
     ReadError() {
-        super("Uwu! File not found!");
+        super("Uwu! File not found! Creating new file. . .");
     }
 }
 
