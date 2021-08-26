@@ -49,7 +49,7 @@ public abstract class Task {
     /**
      * Sets isDone to true
      */
-    public void maskAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 }
