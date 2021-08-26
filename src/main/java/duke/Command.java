@@ -27,19 +27,19 @@ public class Command {
     }
 
     public String getOperation() {
-        return this.operation;
+        return operation;
     }
 
     public int getIndex() {
-        return this.index;
+        return index;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public String getTime() {
-        return this.time;
+        return time;
     }
 }
 
