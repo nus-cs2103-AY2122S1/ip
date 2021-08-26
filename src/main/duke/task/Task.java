@@ -1,6 +1,11 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
+
 
 public class Task {
 
@@ -32,8 +37,12 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    protected String saveString() {
+    public String saveString() {
         return String.format("%s|%s|%s", isDone, description, time);
+    }
+
+    public LocalDateTime time() {
+        return time;
     }
     
     @Override

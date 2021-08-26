@@ -1,4 +1,11 @@
+package duke.command;
+
 import java.time.LocalDateTime;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.task.Task;
 
 public class ListCommand extends Command {
 
@@ -15,7 +22,7 @@ public class ListCommand extends Command {
         String response = "Here are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
-            if (time != null && !t.time.equals(time)) {
+            if (time != null && !t.time().equals(time)) {
                 break;
             } 
             response += String.format("\n%d. %s", i + 1, t);
