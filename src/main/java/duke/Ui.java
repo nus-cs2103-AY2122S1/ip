@@ -51,6 +51,20 @@ public class Ui {
                 + "What can I do for you?");
     }
 
+    /**
+     * Prints out TaskList of tasks with given keyword for users to see.
+     *
+     * @param tasksWithKeyword TaskList of tasks with given keyword.
+     */
+    public void printKeywordTasks(TaskList tasksWithKeyword) {
+        System.out.println(LINE);
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasksWithKeyword.getSize() ; i++) {
+            System.out.println((i + 1) + "." + tasksWithKeyword.taskToString(i));
+        }
+        System.out.println(LINE);
+    }
+
     public void exit() {
         print("Bye. Hope to see you again soon!");
         sc.close();

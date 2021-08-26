@@ -43,6 +43,24 @@ public class TaskList {
         this.tasks.get(index).markAsDone();
     }
 
+    /**
+     * Finds tasks with given keyword in tasks.
+     *
+     * @param keyword Keyword of tasks we want to find.
+     * @return TaskList of Tasks with given keyword.
+     */
+    public TaskList findTasksWithKeyword(String keyword) {
+        ArrayList<Task> tasksWithKeyword = new ArrayList<>();
+
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.tasks.get(i).hasKeyword(keyword)) {
+                tasksWithKeyword.add(this.tasks.get(i));
+            }
+        }
+
+        return new TaskList(tasksWithKeyword);
+    }
+
     @Override
     public String toString() {
         return tasks.toString();

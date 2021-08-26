@@ -24,6 +24,24 @@ public class Task {
         return printStatusIcon() + "|" + description;
     }
 
+    /**
+     * Checks if description of Task has given keyword.
+     *
+     * @param keyword Keyword to check if description of Task contains.
+     * @return true if Task contains keyword, else false.
+     */
+    public boolean hasKeyword(String keyword) {
+        String[] deconstructedDescription = description.split(" ");
+
+        for (int i = 0; i < deconstructedDescription.length; i++) {
+            if (deconstructedDescription[i].equals(keyword)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
