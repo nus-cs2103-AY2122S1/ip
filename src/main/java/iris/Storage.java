@@ -51,7 +51,7 @@ public class Storage {
         } catch (FileNotFoundException exception) {
             createTaskFile();
         } catch (IrisException exception) {
-            throw new Error("tasks.txt has been corrupted");
+            throw new IrisException("tasks.txt has been corrupted");
         }
     }
 
