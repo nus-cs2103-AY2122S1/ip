@@ -3,7 +3,8 @@ todo cs2103 tut
 list
 done 1
 deadline return book /by 20/8/2021
+deadline return book /by 2021-08-20 12:00
 done 2
-event meeting /at Monday
+event meeting /at 2021-08-23 17:00
 list
 bye

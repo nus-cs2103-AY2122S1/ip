@@ -1,13 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.lang.String;
-import java.time.format.DateTimeFormatter;
-
 
 /**
  * @author  Zhang Zhiyao
@@ -19,9 +11,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Duke {
 
-
-
-//-------------new implemenation-------------------
     private Storage storage;
     private TaskList task;
     private Ui ui;
@@ -37,15 +26,20 @@ public class Duke {
         }
     }
 
-
-    public void run() {
+    public void run() throws IOException {
         ui.showLogo();
         ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String cmd = ui.getCommand();
-            Task comingCmdTask = Parser.parse(cmd, task);
-            isExit = !comingCmdTask.isExit;
+        boolean isProcess = true;
+        while (isProcess) {
+            try {
+                String cmd = ui.getCommand();
+                Task comingCmdTask = Parser.parse(cmd, task);
+                comingCmdTask.excute(task, ui, storage);
+                isProcess = !comingCmdTask.isExit;
+            } catch (NullPointerException e) {
+                continue;
+            }
+
         }
         ui.exit();
     }
@@ -53,8 +47,6 @@ public class Duke {
     public static void main(String[] args) throws IOException{
         new Duke("data/tasks.txt").run();
     }
-
-    //-------------new implemenation-------------------
 
 }
 

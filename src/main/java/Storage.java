@@ -43,7 +43,6 @@ public class Storage {
                 System.out.println("duke.txt file not exist, create now");
             }
         }
-
         return task;
     }
 
