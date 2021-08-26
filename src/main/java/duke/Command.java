@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -9,6 +10,7 @@ public class Command {
     private Task.TaskType taskType;
     private ArrayList<String> listOfCommandInputs;
     private String log;
+    private LocalDateTime localDateTime;
 
 
     /**
@@ -23,6 +25,14 @@ public class Command {
         this.listOfCommandInputs = listOfCommandInputs;
         this.log = log;
     }
+
+    public Command(Task.TaskType taskType, ArrayList<String> listOfCommandInputs, String log, LocalDateTime localDateTime) {
+        this.taskType = taskType;
+        this.listOfCommandInputs = listOfCommandInputs;
+        this.log = log;
+        this.localDateTime = localDateTime;
+    }
+
 
     /**
      * Returns tasktype
@@ -46,5 +56,9 @@ public class Command {
      */
     public String getLog() {
         return this.log;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return this.localDateTime;
     }
 }

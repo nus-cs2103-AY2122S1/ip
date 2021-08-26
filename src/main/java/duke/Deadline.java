@@ -27,7 +27,7 @@ public class Deadline extends Task{
      * @return String. See above
      */
     public String toString() {
-        return "[D]" + super.toString() + String.format(" (by: %s)", formatter.format(deadline));
+        return "[D]" + super.toString() + " " + formatter.format(deadline);
     }
 
 }

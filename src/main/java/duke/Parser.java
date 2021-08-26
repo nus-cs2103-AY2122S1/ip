@@ -65,20 +65,27 @@ public class Parser {
             Collections.addAll(packaged_history, temp_packaged_history);
 
             Task.TaskType eventType = Task.TaskType.NOTAPPLICABLE;
+            char temp = packaged_history.get(0).charAt(eventTypeIndex);
+            System.out.println("=========================");
+            System.out.println(temp);
+            System.out.println("=========================");
             switch (packaged_history.get(0).charAt(eventTypeIndex)) {
             case 'T':
                 eventType = Task.TaskType.TODO;
                 break;
             case 'E':
                 eventType = Task.TaskType.EVENT;
+                packaged_history.remove("event");
                 break;
             case 'D':
                 eventType = Task.TaskType.DEADLINE;
+                packaged_history.remove("deadline");
+                break;
             case 'N':
                 eventType = Task.TaskType.NOTAPPLICABLE;
             }
-            boolean isCompleted = packaged_history.get(0).charAt(isCompletedIndex) == '✓';
             packaged_history.remove(0);
+            System.out.println(eventType);
             Command command = new Command(eventType, packaged_history, String.join(" ", packaged_history));
             preloadedList.add(command);
         }
@@ -87,6 +94,7 @@ public class Parser {
 
     public static LocalDateTime convertToDateTime(String datetimeString) throws InvalidCommandException {
         try {
+            System.out.println(datetimeString);
             String[] temp = datetimeString.split(" ");
             String[] date = temp[0].split("/");
             String[] time = temp[1].split(":");

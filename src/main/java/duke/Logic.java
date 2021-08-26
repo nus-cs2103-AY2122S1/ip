@@ -65,6 +65,8 @@ public class Logic {
             ArrayList<Command> commandArrayList = DataHandlerLayer.loadPreset();
             for (Command command : commandArrayList) {
                 processTask(command, false);
+                System.out.println("preload");
+                System.out.println(command.getTaskType());
             }
         } catch (InvalidCommandException e) {
             e.printStackTrace();
@@ -119,7 +121,9 @@ public class Logic {
             for (int i = 0; i < indicatorEvent; i++) {
                 temp = temp + listOfCommandInputs.get(i);
             }
-
+            System.out.println("=====================");
+            System.out.println(dateTime);
+            System.out.println("=====================");
             Event tempEvent = new Event(temp, Parser.convertToDateTime(dateTime));
             DataHandlerLayer.addToLog(tempEvent);
             if (isWrittenToHistory) {
@@ -130,5 +134,6 @@ public class Logic {
             //For echoing commands
         }
         DataHandlerLayer.updateHistory();
+        DataHandlerLayer.printHistory();
     }
 }
