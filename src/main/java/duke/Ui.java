@@ -77,7 +77,7 @@ public class Ui {
     }
 
     /**
-     * Ui to welcome user to Duke.
+     * Welcomes user to Duke.
      */
     public void welcome() {
         print("Hello! I'm duke.Duke\n"
@@ -90,7 +90,7 @@ public class Ui {
     }
 
     /**
-     * Ui to say bye to user and closes scanner.
+     * Says bye to user and closes scanner.
      */
     public void exit() {
         print("Bye. Hope to see you again soon!");

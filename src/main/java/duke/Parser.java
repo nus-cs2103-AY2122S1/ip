@@ -87,7 +87,7 @@ public class Parser {
      * Splits string which contains a description and possibly a deadline of Task Objects.
      *
      * @param input Input which contains a description and possibly a deadline.
-     * @param type Type of Task information the input contains
+     * @param type Type of Task information the input contains.
      * @return String[] containing the description at index 0 and the deadline (if any) at index 1.
      * @throws DukeException If no deadline or description for respective Task objects.
      */

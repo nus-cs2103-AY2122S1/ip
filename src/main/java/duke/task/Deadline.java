@@ -28,7 +28,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of Deadline object.
+     * Converts Deadline object to its String representation.
      *
      * @return String representation of Deadline object.
      */

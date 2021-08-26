@@ -27,7 +27,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * String representation of ToDoObject.
+     * Converts ToDoObject into its String representation.
      *
      * @return String representation of ToDoObject.
      */

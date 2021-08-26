@@ -28,7 +28,7 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of Event object.
+     * Converts Event object into its String representation.
      *
      * @return String representation of Event object.
      */

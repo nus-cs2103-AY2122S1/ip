@@ -45,14 +45,14 @@ public class Task {
     /**
      * Converts Task object into String form to save.
      *
-     * @return {StatusIcon}|{description}
+     * @return {StatusIcon}|{description}.
      */
     public String convertToString() {
         return printStatusIcon() + "|" + description;
     }
 
     /**
-     * String representation of Task object.
+     * Converts Task object into its String representation.
      *
      * @return String representation of Task object.
      */
