@@ -1,5 +1,0 @@
-TODO @ 1 @ read a book
-DEADLINE @ 0 @ return the book @ today
-EVENT @ 0 @ death @ room
-TODO @ 1 @ read a book
-DEADLINE @ 0 @ return a book @ today

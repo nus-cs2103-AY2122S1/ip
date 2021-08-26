@@ -8,12 +8,12 @@ public class ToDoTask extends Task{
         super(isCompleted, description);
     }
 
-    public String getType() {
-        return "TODO";
+    public String writeToFile() {
+        return String.format("TODO | %s | %s\n", getIsCompleted(), getDescription());
     }
 
     @Override
     public String toString() {
-        return String.format("[T]" + super.toString());
+        return "[T]" + super.toString();
     }
 }

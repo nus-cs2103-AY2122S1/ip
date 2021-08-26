@@ -11,15 +11,16 @@ public class DeadlineTask extends Task {
 
     public DeadlineTask(String isCompleted, String description, String deadline) {
         super(isCompleted, description);
-        this.by = deadline;
+        this.deadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     public String getDeadline() {
-        return this.by;
+        return this.deadline.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
-    public String getType() {
-        return "DEADLINE";
+    @Override
+    public String writeToFile() {
+        return String.format("DEADLINE | %s | %s | %s\n", getIsCompleted(), getDescription(), getDeadline());
     }
 
     @Override

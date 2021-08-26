@@ -9,17 +9,18 @@ public class EventTask extends Task {
         this.details = LocalDateTime.parse(details, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
-    public EventTask(String isCompleted, String description, String at) {
+    public EventTask(String isCompleted, String description, String details) {
         super(isCompleted, description);
-        this.at = at;
+        this.details = LocalDateTime.parse(details, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
     public String getDetails() {
-        return this.at;
+        return this.details.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
-    public String getType() {
-        return "EVENT";
+    @Override
+    public String writeToFile() {
+        return String.format("EVENT | %s | %s | %s\n", getIsCompleted(), getDescription(), getDetails());
     }
 
     @Override

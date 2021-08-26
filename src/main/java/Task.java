@@ -9,7 +9,7 @@ public class Task {
 
     public Task(String isCompleted, String description) {
         this.description = description;
-        this.isCompleted = isCompleted.equals("1") ? true : false;
+        this.isCompleted = isCompleted.equals("1");
     }
 
     public String getDescription() {
@@ -26,6 +26,10 @@ public class Task {
 
     public void markAsCompleted() {
         this.isCompleted = true;
+    }
+
+    public String writeToFile() {
+        return String.format("TASK | %s | %s\n", getIsCompleted(), getDescription());
     }
 
     @Override
