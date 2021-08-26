@@ -146,4 +146,14 @@ public class Ui {
         System.out.println("\tBye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints the response on the user interface to the find input by user.
+     */
+    public void respondToFind(ArrayList<Task> tasks) {
+        System.out.println("\tHere are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println("\t" + Integer.toString(i + 1) + "." + tasks.get(i).toString());
+        }
+    }
+
 }
