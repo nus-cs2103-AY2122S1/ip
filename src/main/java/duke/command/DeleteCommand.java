@@ -8,7 +8,7 @@ import duke.Ui;
  * Deletes a task from the task list provided.
  */
 public class DeleteCommand extends Command {
-    private int index;
+    private final int index;
 
     /**
      * Class constructor.

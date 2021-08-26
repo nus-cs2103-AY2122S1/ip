@@ -40,7 +40,7 @@ public class FindCommand extends Command {
     public String message(TaskList tasks) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the matching tasks in your list:\n");
-        for(int i = 0; i < tasks.getSize(); i++) {
+        for (int i = 0; i < tasks.getSize(); i++) {
             stringBuilder.append(String.format("%d. %s\n", i + 1, tasks.getIndex(i).toString()));
         }
         return stringBuilder.toString();

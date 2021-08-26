@@ -4,7 +4,7 @@ package duke.exception;
  * Represents problems encountered specifically with Duke.
  */
 public class DukeException extends Exception {
-    private String message;
+    private final String message;
 
     /**
      * Class constructor.

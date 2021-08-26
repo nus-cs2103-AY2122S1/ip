@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @author Chang-CH
  */
 public class Ui {
-    private Scanner inputReader;
+    private final Scanner inputReader;
 
     /**
      * Sole constructor for invocation by Duke.

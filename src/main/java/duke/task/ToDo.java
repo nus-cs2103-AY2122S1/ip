@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Normal tasks
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Class constructor.

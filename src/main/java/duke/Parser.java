@@ -1,12 +1,21 @@
 package duke;
 
-import duke.command.*;
+import java.time.LocalDate;
+
+// Duke Commands
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+// Duke Exceptions
 import duke.exception.DukeException;
+// Duke Tasks
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-
-import java.time.LocalDate;
 
 /**
  * Parses string inputs from user.

@@ -1,6 +1,8 @@
 package duke.command;
 
-import duke.*;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
 
 /**
  * Abstract command class providing the skeleton of all commands
@@ -21,7 +23,9 @@ public abstract class Command {
      *
      * @return Whether Duke should exit.
      */
-    public boolean isExit() {return false;}
+    public boolean isExit() {
+        return false;
+    }
 
     /**
      * Message to be displayed while performing the task.

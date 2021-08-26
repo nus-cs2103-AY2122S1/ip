@@ -7,11 +7,10 @@ import duke.exception.DukeException;
  * Main class of the project.
  */
 public class Duke {
-    private static String PATH;
 
     private Storage storage;
-    private Ui ui;
-    private TaskList tasks;
+    private final Ui ui;
+    private final TaskList tasks;
 
     /**
      * Private constructor to initialize other components.
@@ -31,9 +30,9 @@ public class Duke {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        PATH = System.getProperty("user.dir")
+        String userPath = System.getProperty("user.dir")
                 + "\\data\\save.txt";
-        new Duke(PATH).run();
+        new Duke(userPath).run();
     }
 
     /**

@@ -1,22 +1,23 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
+
+// Duke Exceptions
+import duke.exception.DukeException;
+// Duke Tasks
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 /**
  * Reads and writes the task list on the disk.
  */
 public class Storage {
-    private String path;
+    private final String path;
 
     /**
      * Sole constructor for invocation by Duke.
@@ -38,7 +39,7 @@ public class Storage {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             String line;
 
-            while((line = bufferedReader.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 String[] arr;
                 boolean isDone;
 
@@ -46,20 +47,20 @@ public class Storage {
                 isDone = arr[1].equals("1");
 
                 switch (arr[0]) {
-                    case "T":
-                        tasks.add(new ToDo(isDone, arr[2]));
-                        break;
-                    case "E":
-                        tasks.add(new Event(isDone, arr[2], LocalDate.parse(arr[3])));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(isDone, arr[2], LocalDate.parse(arr[3])));
-                        break;
-                    default:
-                        throw new DukeException("Unrecognized task flag");
+                case "T":
+                    tasks.add(new ToDo(isDone, arr[2]));
+                    break;
+                case "E":
+                    tasks.add(new Event(isDone, arr[2], LocalDate.parse(arr[3])));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(isDone, arr[2], LocalDate.parse(arr[3])));
+                    break;
+                default:
+                    throw new DukeException("Unrecognized task flag");
                 }
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e.toString());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -78,7 +79,7 @@ public class Storage {
             fileWriter.write(tasks.toString());
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 }

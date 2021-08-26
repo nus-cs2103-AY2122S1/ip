@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * Command to mark a task as done.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private final int index;
 
     /**

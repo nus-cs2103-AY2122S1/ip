@@ -1,13 +1,15 @@
 package duke.command;
 
-import duke.*;
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
 import duke.task.Task;
 
 /**
  * Adds a task to the task list provided.
  */
 public class AddCommand extends Command {
-    private Task task;
+    private final Task task;
 
     /**
      * Class constructor.
