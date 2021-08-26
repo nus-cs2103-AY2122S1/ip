@@ -11,7 +11,7 @@ public class Ui {
     private static final String DELETE_TASK = "Noted. I've removed this task: ";
     private static final String EMPTY_LIST = "You haven't added anything to your list!";
 
-    public static void welcome() {
+    public static void greet() {
         System.out.println(WELCOME_MESSAGE);
     }
 

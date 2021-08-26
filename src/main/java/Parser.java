@@ -18,75 +18,47 @@ public class Parser {
     }
 
     public void runDuke() {
-        Ui.welcome();
+        Ui.greet();
         Scanner sc = new Scanner(System.in);
         while(!isTerminated) {
             String cmd = sc.nextLine();
-            String input = cmd.split(" ")[0].toUpperCase();
+            String commandWord = cmd.split(" ")[0].toUpperCase();
             try {
-                switch (input) {
-                    case "LIST":
-                        taskHandler.printList();
+                switch (commandWord) {
+                    case ListCommand.COMMAND_WORD:
+                        ListCommand lc = new ListCommand(taskHandler, storage);
+                        lc.execute(cmd);
                         break;
 
-                    case "DONE":
-                        taskHandler.markTaskAsDone(Integer.parseInt(cmd.substring(5)));
-                        storage.updateFile(taskHandler.formatTaskToSave());
+                    case DoneCommand.COMMAND_WORD:
+                        DoneCommand dc = new DoneCommand(taskHandler, storage);
+                        dc.execute(cmd);
                         break;
 
-                    case "DELETE":
-                        taskHandler.deleteTask(Integer.parseInt(cmd.substring(7)));
-                        taskHandler.printNoOfTasks();
-                        storage.updateFile(taskHandler.formatTaskToSave());
+                    case DeleteCommand.COMMAND_WORD:
+                        DeleteCommand dlc = new DeleteCommand(taskHandler, storage);
+                        dlc.execute(cmd);
                         break;
 
-                    case "TODO":
-                        if (cmd.length() < 6) {
-                            throw new DukeException(Ui.emptyDescription("todo"));
-                        } else {
-                            ToDo toDo = new ToDo(cmd.substring(5));
-                            taskHandler.addToDo(toDo);
-                            taskHandler.printNoOfTasks();
-                            storage.updateFile(taskHandler.formatTaskToSave());
-                        }
+                    case ToDoCommand.COMMAND_WORD:
+                        ToDoCommand tc = new ToDoCommand(taskHandler, storage);
+                        tc.execute(cmd);
                         break;
 
-                    case "DEADLINE":
-                        if (cmd.length() < 10) {
-                            throw new DukeException(Ui.emptyDescription("deadline"));
-                        } else {
-                            String[] split = cmd.split("/by ");
-                            if (split.length > 1) {
-                                Deadline deadline = new Deadline(split[0].substring(9), split[1]);
-                                taskHandler.addDeadline(deadline);
-                                taskHandler.printNoOfTasks();
-                                storage.updateFile(taskHandler.formatTaskToSave());
-                            } else {
-                                throw new DukeException(Ui.dateMissing());
-                            }
-                            break;
-                        }
+                    case DeadlineCommand.COMMAND_WORD:
+                        DeadlineCommand deadlinec = new DeadlineCommand(taskHandler, storage);
+                        deadlinec.execute(cmd);
+                        break;
 
-                    case "EVENT":
-                        if (cmd.length() < 7) {
-                            throw new DukeException(Ui.emptyDescription("event"));
-                        } else {
-                            String[] split = cmd.split("/at ");
-                            if (split.length > 1) {
-                                Event event = new Event(split[0].substring(6), split[1]);
-                                taskHandler.addEvent(event);
-                                taskHandler.printNoOfTasks();
-                                storage.updateFile(taskHandler.formatTaskToSave());
-                            } else {
-                                throw new DukeException(Ui.dateMissing());
-                            }
-                            break;
-                        }
+                    case EventCommand.COMMAND_WORD:
+                        EventCommand ec = new EventCommand(taskHandler, storage);
+                        ec.execute(cmd);
+                        break;
 
-                    case "BYE":
-                        Ui.bye();
+                    case ByeCommand.COMMAND_WORD:
                         isTerminated = true;
-                        System.exit(0);
+                        ByeCommand bc = new ByeCommand(taskHandler, storage);
+                        bc.execute(cmd);
 
                     default:
                         throw new DukeException(Ui.inputUnknown());
