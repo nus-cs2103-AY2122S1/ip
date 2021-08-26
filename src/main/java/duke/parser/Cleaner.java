@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/main/java/Duke/Parser/Cleaner.java
-package Duke.Parser;
-=======
 package duke.parser;
->>>>>>> branch-A-CodingStandard:src/main/java/duke/parser/Cleaner.java
 
 public class Cleaner {
 
