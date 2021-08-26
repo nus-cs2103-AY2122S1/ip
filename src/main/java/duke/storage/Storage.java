@@ -11,8 +11,10 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Storage {
+
     private static final Path DIRECTORY = Paths.get("data");
     private static final Path FILE_PATH = Paths.get("data", "duke.txt");
+
     private TaskList tasks = new TaskList();
 
     private static void directoryCreator() {
