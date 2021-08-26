@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.TaskList;
 import duke.Storage;
-import duke.task.Todos;
+import duke.task.Todo;
 import duke.Ui;
 
 import java.io.IOException;
@@ -13,6 +13,7 @@ public class TodoCommand extends Command {
 
     /**
      * Constructor for Todo Command
+     *
      * @param desc description of todo task
      */
     public TodoCommand(String desc) {
@@ -22,6 +23,7 @@ public class TodoCommand extends Command {
     /**
      * Executes Todo Command, adds a todo task to the list, prints response
      * and stores updated list in file
+     *
      * @param taskList current list
      * @param ui current ui to access print responses
      * @param storage current storage
@@ -33,7 +35,7 @@ public class TodoCommand extends Command {
         if (this.desc.equals("")) {
             throw new IllegalArgumentException();
         }
-        Todos newTodo = new Todos(this.desc);
+        Todo newTodo = new Todo(this.desc);
         taskList.add(newTodo);
         storage.writeToFile(taskList);
         ui.printAdd(newTodo, taskList.getList().size());

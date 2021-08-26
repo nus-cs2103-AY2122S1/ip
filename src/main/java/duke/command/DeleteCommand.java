@@ -12,6 +12,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for Delete Command
+     *
      * @param taskNo the index of task deleted
      *
      */
@@ -22,6 +23,7 @@ public class DeleteCommand extends Command {
     /**
      * Executes Delete Command to delete task, stores updated list in file
      * and prints response
+     *
      * @param taskList current list
      * @param ui current ui to access print responses
      * @param storage current storage

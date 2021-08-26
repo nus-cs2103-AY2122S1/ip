@@ -12,6 +12,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor for Done Command
+     *
      * @param taskNo the index of task completed
      *
      */
@@ -22,6 +23,7 @@ public class DoneCommand extends Command {
     /**
      * Executes Done Command to mark task as completed, stores updated list in file
      * and prints response
+     *
      * @param taskList current list
      * @param ui current ui to access print responses
      * @param storage current storage

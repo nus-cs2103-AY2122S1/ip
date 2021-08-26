@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.task.Events;
+import duke.task.Event;
 import duke.TaskList;
 import duke.Storage;
 import duke.Ui;
@@ -15,6 +15,7 @@ public class EventCommand extends Command {
 
     /**
      * Constructor for Event Command
+     *
      * @param desc description of task
      * @param at when task starts
      *
@@ -27,6 +28,7 @@ public class EventCommand extends Command {
     /**
      * Executes Events Command, adds an event task to the list, prints response
      * and stores updated list in file
+     *
      * @param taskList current list
      * @param ui current ui to access print responses
      * @param storage current storage
@@ -34,7 +36,7 @@ public class EventCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        Events newEvent = new Events(this.desc, this.at);
+        Event newEvent = new Event(this.desc, this.at);
         taskList.add(newEvent);
         storage.writeToFile(taskList);
         ui.printAdd(newEvent, taskList.getList().size());

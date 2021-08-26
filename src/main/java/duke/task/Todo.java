@@ -1,12 +1,12 @@
 package duke.task;
 
-public class Todos extends Task {
+public class Todo extends Task {
 
-    public Todos(String task) {
+    public Todo(String task) {
         super(task, false);
     }
 
-    public Todos(String task, String isDone) {
+    public Todo(String task, String isDone) {
         super(task, isDone == "1");
     }
 

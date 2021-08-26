@@ -65,6 +65,7 @@ public class Parser {
 
     /**
      * Parses input line by line
+     *
      * @param input the input of the user
      * @return returns a command type to be executed in duke.run()
      */
@@ -72,24 +73,24 @@ public class Parser {
         parsed = input.split(" ");
         try {
             switch (parsed[0]) {
-                case ByeCommand.COMMAND:
-                    return new ByeCommand();
-                case ListCommand.COMMAND:
-                    return new ListCommand();
-                case DoneCommand.COMMAND:
-                    return new DoneCommand(parseTaskNo(parsed[1]));
-                case DeleteCommand.COMMAND:
-                    return new DeleteCommand(parseTaskNo(parsed[1]));
-                case TodoCommand.COMMAND:
-                    return new TodoCommand(parseTodoTask());
-                case EventCommand.COMMAND:
-                    String[] eventDetails = parseEventTask(input);
-                    return new EventCommand(eventDetails[0], parseDate(eventDetails[1]));
-                case DeadlineCommand.COMMAND:
-                    String[] deadlineDetails = parseDeadlineTask(input);
-                    return new EventCommand(deadlineDetails[0], parseDate(deadlineDetails[1]));
-                default:
-                    throw new DukeException("Ehhh... (￣ ￣|||) Sorry I do not understand.");
+            case ByeCommand.COMMAND:
+                return new ByeCommand();
+            case ListCommand.COMMAND:
+                return new ListCommand();
+            case DoneCommand.COMMAND:
+                return new DoneCommand(parseTaskNo(parsed[1]));
+            case DeleteCommand.COMMAND:
+                return new DeleteCommand(parseTaskNo(parsed[1]));
+            case TodoCommand.COMMAND:
+                return new TodoCommand(parseTodoTask());
+            case EventCommand.COMMAND:
+                String[] eventDetails = parseEventTask(input);
+                return new EventCommand(eventDetails[0], parseDate(eventDetails[1]));
+            case DeadlineCommand.COMMAND:
+                String[] deadlineDetails = parseDeadlineTask(input);
+                return new EventCommand(deadlineDetails[0], parseDate(deadlineDetails[1]));
+            default:
+                throw new DukeException("Ehhh... (￣ ￣|||) Sorry I do not understand.");
             }
         } catch (DukeException e) {
             return new ErrorCommand(e.getMessage());

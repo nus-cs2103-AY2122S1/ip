@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Deadlines;
-import duke.task.Events;
-import duke.task.Todos;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * Constructor for Storage
+     *
      * @param pathname relative path to where the chat history is stored
      */
     public Storage(String pathname) {
@@ -30,6 +31,7 @@ public class Storage {
 
     /**
      * read and parse data from previous chat history
+     *
      * @return List of previous stated task
      * @throws IOException when file cannot be read
      *
@@ -45,20 +47,20 @@ public class Storage {
             String[] parsed = task.split("\\|");
 
             switch (parsed[0]) {
-                case "T":
-                    Todos newTodo = new Todos(parsed[2], parsed[1]);
-                    taskList.add(newTodo);
-                    break;
-                case "E":
-                    LocalDateTime at = LocalDateTime.parse(parsed[3], formatter);
-                    Events newEvent = new Events(parsed[2], parsed[1], at);
-                    taskList.add(newEvent);
-                    break;
-                case "D":
-                    LocalDateTime by = LocalDateTime.parse(parsed[3], formatter);
-                    Deadlines newDeadline = new Deadlines(parsed[2], parsed[1], by);
-                    taskList.add(newDeadline);
-                    break;
+            case "T":
+                Todo newTodo = new Todo(parsed[2], parsed[1]);
+                taskList.add(newTodo);
+                break;
+            case "E":
+                LocalDateTime at = LocalDateTime.parse(parsed[3], formatter);
+                Event newEvent = new Event(parsed[2], parsed[1], at);
+                taskList.add(newEvent);
+                break;
+            case "D":
+                LocalDateTime by = LocalDateTime.parse(parsed[3], formatter);
+                Deadline newDeadline = new Deadline(parsed[2], parsed[1], by);
+                taskList.add(newDeadline);
+                break;
             }
         }
         return taskList;
@@ -67,6 +69,7 @@ public class Storage {
 
     /**
      * saves the current list to the chat history file
+     *
      * @param taskList updated list after commands are executed
      * @throws IOException when file cannot be saved
      */

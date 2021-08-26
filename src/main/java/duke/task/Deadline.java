@@ -3,28 +3,28 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Events extends Task {
-    protected LocalDateTime at;
+public class Deadline extends Task {
+    protected LocalDateTime by;
     private DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("dd MMM uuuu HHmm");
     private DateTimeFormatter saveFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
 
-    public Events(String description, LocalDateTime at) {
+    public Deadline(String description, LocalDateTime by) {
         super(description, false);
-        this.at = at;
+        this.by = by;
     }
 
-    public Events(String description, String isDone, LocalDateTime at) {
+    public Deadline(String description, String isDone, LocalDateTime by) {
         super(description, isDone == "1");
-        this.at = at;
+        this.by = by;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(displayFormatter) + ")" ;
+        return "[D]" + super.toString() + " (by: " + by.format(displayFormatter) + ")";
     }
 
     @Override
     public String toSaveString() {
-        return "E|" + super.toSaveString() + "|" + at.format(saveFormatter);
+        return "D|" + super.toSaveString() + "|" + by.format(saveFormatter);
     }
 }
