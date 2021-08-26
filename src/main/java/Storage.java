@@ -30,14 +30,14 @@ public class Storage {
                 if (splitItem.length > 3) date = splitItem[3];
                 Task nextTask = null;
                 switch (taskType) {
-                    case ("T"):
-                        nextTask = new Todo(desc);
-                        break;
-                    case ("D"):
-                        nextTask = new Deadline(desc, date);
-                        break;
-                    case ("E"):
-                        nextTask = new Event(desc, date);
+                case ("T"):
+                    nextTask = new Todo(desc);
+                    break;
+                case ("D"):
+                    nextTask = new Deadline(desc, date);
+                    break;
+                case ("E"):
+                    nextTask = new Event(desc, date);
                 }
                 if (completed.equals("1") && nextTask != null) nextTask.markAsDone();
                 taskList.add(nextTask);

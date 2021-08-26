@@ -1,60 +1,97 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
-    final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private String input;
-    private String[] wordArray;
-    private String command;
-    private String description;
-    private LocalDateTime time;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public Parser(String input) {
-        this.input = input;
-        this.wordArray = input.split(" ");
+    public static Command parse(String input) throws DukeException {
+        String[] wordArray = input.split(" ");
+        String type = "";
+        String description = "";
+        LocalDateTime time = null;
 
         if (wordArray.length == 0) {
-            return;
+            throw new DukeException("Please enter a command!");
         } else {
-            this.command = wordArray[0];
+            type = wordArray[0];
         }
 
-        String newDescription = "";
-        String newTime = "";
+        String timeString = "";
         int pointer = 1;
         while (pointer < wordArray.length
                 && !wordArray[pointer].equals("/by")
                 && !wordArray[pointer].equals("/at")) {
-            newDescription += wordArray[pointer] + " ";
+            description += wordArray[pointer] + " ";
             pointer++;
         }
         pointer++;
-        newDescription = newDescription.trim();   // delete the last space
+        description = description.trim();   // delete the last space
 
         while (pointer < wordArray.length) {
-            newTime += wordArray[pointer] + " ";
+            timeString += wordArray[pointer] + " ";
             pointer++;
         }
-        newTime = newTime.trim();   // delete the last space
+        timeString = timeString.trim();   // delete the last space
 
-        this.description = newDescription;
-        this.time = LocalDateTime.parse(newTime, FORMATTER);
-    }
+        try {
+            time = LocalDateTime.parse(timeString, FORMATTER);
+        } catch (DateTimeParseException e) {
+            // Does nothing
+        }
 
-    public String getCommand() {
-        return this.command;
-    }
-
-    public String getDescription() {
-        return this.description;
-    }
-
-    public LocalDateTime getTime() {
-        return this.time;
-    }
-
-    @Override
-    public String toString() {
-        return this.input;
+        switch (type) {
+        case ("list"):
+            description += timeString;
+            if (description.equals("")) {
+                return new ListCommand();
+            } else {
+                throw new DukeException("Command 'list' does not need additional arguments");
+            }
+        case ("done"):
+            try {
+                int index = Integer.parseInt(description) - 1;
+                return new DoneCommand(index);
+            } catch (NumberFormatException nfe) {
+                throw new DukeException("Please follow command 'done' with an integer!");
+            }
+        case ("todo"):
+            if (!description.equals("")) {
+                Todo newTodo = new Todo(description);
+                return new AddCommand(newTodo);
+            } else {
+                throw new DukeException("Please follow format: 'todo [description]'");
+            }
+        case ("deadline"):
+            if (!description.equals("") && time != null) {
+                Deadline newDeadline = new Deadline(description, time);
+                return new AddCommand(newDeadline);
+            } else {
+                throw new DukeException("Please follow format: 'deadline [description] /by [yyyy-MM-dd HH:mm]'");
+            }
+        case ("event"):
+            if (!description.equals("") && time != null) {
+                Event newEvent = new Event(description, time);
+                return new AddCommand(newEvent);
+            } else {
+                throw new DukeException("Please follow format: 'event [description] /at [yyyy-MM-dd HH:mm]'");
+            }
+        case ("delete"):
+            try {
+                int index = Integer.parseInt(description) - 1;
+                return new DeleteCommand(index);
+            } catch (NumberFormatException nfe) {
+                throw new DukeException("Please follow command 'delete' with an integer!");
+            }
+        case ("bye"):
+            description += timeString;
+            if (description.equals("")) {
+                return new ExitCommand();
+            } else {
+                throw new DukeException("Type 'bye' only to exit");
+            }
+        default:
+            throw new DukeException("Command not recognised!");
+        }
     }
 }

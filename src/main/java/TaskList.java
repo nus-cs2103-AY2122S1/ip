@@ -7,33 +7,24 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-    public void deleteTask(int index) {
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
+
+    public String deleteTask(int index) {
         String taskString = taskList.get(index).toString();
         this.taskList.remove(index);
-
-        System.out.println("Noted. I've removed this task:\n"
-                + "  "
-                + taskString + "\n"
-                + "Now you have " + taskList.size()
-                + " task" + (taskList.size() > 1 ? "s" : "") + " in the list.");
+        return taskString;
     }
 
     public void addTask(Task task) {
         this.taskList.add(task);
-
-        System.out.println("Got it. I've added this task:\n"
-                + "  " + task.toString() + "\n"
-                + "Now you have " + taskList.size()
-                + " task" + (taskList.size() > 1 ? "s" : "") + " in the list.");
     }
 
-    public void markAsDone(int index) {
+    public String markAsDone(int index) {
         Task task = taskList.get(index);
         task.markAsDone();
-
-        System.out.println("Nice! I've marked this task as done:\n"
-                + "  "
-                + task.toString());
+        return task.toString();
     }
 
     public String toStorageString() {
@@ -44,6 +35,10 @@ public class TaskList {
             result += nextString;
         }
         return result.trim();
+    }
+
+    public int getSize() {
+        return this.taskList.size();
     }
 
     @Override

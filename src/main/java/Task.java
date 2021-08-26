@@ -1,6 +1,7 @@
 public abstract class Task {
     private String description;
     private boolean isDone;
+
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -10,7 +11,9 @@ public abstract class Task {
         return this.isDone ? "[X]" : "[ ]"; // Done task marked with X
     }
 
-    public String getStatusNumber() { return this.isDone ? "1" : "0"; }
+    public String getStatusNumber() {
+        return this.isDone ? "1" : "0";
+    }
 
     public String getDescription() {
         return this.description;
