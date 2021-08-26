@@ -77,7 +77,7 @@ public class Tasklist {
         try {
             removedTask = this.taskList.remove(idx - 1);
         } catch (IndexOutOfBoundsException e) {
-            System.out.printf("Item %d cannot be found.", idx);
+            System.out.printf("Task number %d not found.\n", idx);
             System.out.println(Ui.breakline);
             return;
         }
@@ -104,8 +104,30 @@ public class Tasklist {
      * @param idx Index in the arraylist
      * @return Task of a particular index
      */
-    public Task getTask(int idx) {
-        return taskList.get(idx);
+    public Task getTask(int idx) throws DukeException.TaskNotFoundException{
+        Task task = null;
+        try {
+            task = taskList.get(idx);
+        } catch (IndexOutOfBoundsException e) {
+            String errMsg = String.format("Task number %d not found.",idx + 1);
+            throw new DukeException.TaskNotFoundException(errMsg);
+        }
+        return task;
+    }
+
+    /**
+     * Sets task to completed
+     *
+     * @param idx Index of task set to compeleted
+     */
+    public void setToCompleted(int idx) {
+        try {
+            Task task = this.getTask(idx);
+            task.setToCompleted();
+        } catch(DukeException.TaskNotFoundException e) {
+            System.out.println(e.getMessage());
+            System.out.println(Ui.breakline);
+        }
     }
 
     /**

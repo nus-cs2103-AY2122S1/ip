@@ -45,9 +45,6 @@ public class Task {
         return this.isDone;
     }
 
-    /**
-     * Sets task to completed
-     */
     public void setToCompleted() {
         this.isDone = true;
         System.out.println("Nice! I've marked this task as done:");

@@ -56,7 +56,7 @@ public class Ui {
                 break;
             case "done":
                 int idx = Integer.parseInt(input.trim()) - 1;
-                tasklist.getTask(idx).setToCompleted();
+                tasklist.setToCompleted(idx);
                 break;
             case "todo":
             case "deadline":
@@ -102,7 +102,7 @@ public class Ui {
                 break;
             case "done":
                 int idx = Integer.parseInt(input.trim()) - 1;
-                tasklist.getTask(idx).setToCompleted();
+                tasklist.setToCompleted(idx);
                 break;
             case "todo":
             case "deadline":

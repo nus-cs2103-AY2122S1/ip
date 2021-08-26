@@ -54,4 +54,11 @@ public class DukeException extends Exception{
         }
     }
 
+    /**
+     * Exception when task is not found
+     */
+    public static class TaskNotFoundException extends DukeException {
+        public TaskNotFoundException(String errorMsg) {super(errorMsg);}
+    }
+
 }
