@@ -7,6 +7,8 @@ import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
 import duke.commands.ListCommand;
 import duke.commands.UnknownCommand;
+import duke.commands.FindCommand;
+
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidInputException;
 
@@ -28,6 +30,9 @@ public class Parser {
         Command c;
 
         switch (firstWord) {
+        case "find":
+            c = new FindCommand(remainingWords);
+            break;
         case "list":
             c = new ListCommand();
             break;

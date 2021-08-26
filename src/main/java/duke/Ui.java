@@ -1,5 +1,8 @@
 package duke;
 
+import duke.tasks.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -64,25 +67,42 @@ public class Ui {
         System.out.println("   INVALID INPUT: Start the sentence with either 'todo'/'deadline'/'event'/'list'/'done'/'delete'/'bye'");
     }
 
-    public void printList(TaskList lst) {
+    public String processList(ArrayList<Task> listOfTasks) {
+        String output = "";
         boolean isEmptyList = false;
         int counter = 1;
-        String output = "   Here are the tasks in your list: \n";
 
         while (!isEmptyList) {
-            if (lst.getListOfTasks().isEmpty()) {
-                output += "   Current List is empty...";
-                isEmptyList = true;
-            } else if (counter - lst.getListOfTasks().size() == 1) { // when there are no more tasks to iterate
+            if (counter - listOfTasks.size() == 1) {
                 output = output.replaceAll("[\n\r]$", ""); // remove last newline
                 isEmptyList = true;
-            } else { // adds current task to the list based on counter index
-                String lineAdded = String.format("   %d.%s \n", counter, lst.getListOfTasks().get(counter - 1));
+            } else {
+                String lineAdded = String.format("   %d.%s \n", counter, listOfTasks.get(counter - 1));
                 output += lineAdded;
                 counter++;
             }
         }
-        System.out.println(output);
+        return output;
+    }
+
+    public void printList(TaskList lst) {
+        if (lst.getListOfTasks().size() == 0) {
+            System.out.println("   Current List is empty...");
+        } else {
+            String output = "   Here are the tasks in your list: \n";
+            output += processList(lst.getListOfTasks());
+            System.out.println(output);
+        }
+    }
+
+    public void printFoundTasks(ArrayList<Task> listOfTasks, String keyWord) {
+        if (listOfTasks.size() == 0) {
+            System.out.println(String.format("  No matching tasks containing '%s' could be found :(", keyWord));
+        } else {
+            String output = "   Here are the matching tasks in your list: \n";
+            output += processList(listOfTasks);
+            System.out.println(output);
+        }
     }
 
     public String readCommand() {

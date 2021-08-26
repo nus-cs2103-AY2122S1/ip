@@ -70,6 +70,16 @@ public class TaskList {
         return taskInfo;
     }
 
+    public ArrayList<Task> findMatching(String keyWord) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t: listOfTasks) {
+            if (t.toString().contains(keyWord)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
+    }
+
     public boolean isEmptyTaskList() {
         return listOfTasks.isEmpty();
     }
