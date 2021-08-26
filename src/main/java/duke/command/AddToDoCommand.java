@@ -26,7 +26,7 @@ public class AddToDoCommand extends Command {
         }
         ToDo toDo = new ToDo(commandArguments);
         ui.print(taskManager.addTask(toDo));
-        storage.saveTasks(taskManager.toText());
+        storage.saveTasks(taskManager);
     }
 
     @Override

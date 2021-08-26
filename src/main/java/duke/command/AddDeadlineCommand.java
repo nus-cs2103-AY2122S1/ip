@@ -30,7 +30,7 @@ public class AddDeadlineCommand extends Command {
         DukeDateTime deadlineDueDate=  DukeDateTime.parseUserInputDateTime(deadlineDetails[1]);
         Deadline deadline = new Deadline(deadlineName, deadlineDueDate);
         ui.print(taskManager.addTask(deadline));
-        storage.saveTasks(taskManager.toText());
+        storage.saveTasks(taskManager);
     }
 
     @Override

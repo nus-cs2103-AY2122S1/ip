@@ -23,32 +23,30 @@ public abstract class Task {
         return this;
     }
 
+    /**
+     * Returns the name of the task.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns whether the task is marked as completed.
+     */
     public boolean checkTaskDone() {
         return isDone;
     }
 
+    /**
+     * Returns the string representation of the completion status of the <code>Task</code>.
+     */
     public String getStatusIcon() {
         return isDone ? "X" : " ";
     }
 
-    public static Task fromText(String text) throws DukeException {
-        char taskType = text.charAt(0);
-        switch (taskType) {
-        case 'T':
-            return ToDo.fromText(text);
-        case 'D':
-            return Deadline.fromText(text);
-        case 'E':
-            return Event.fromText(text);
-        default:
-            throw new DukeException(String.format("Cannot parse Task from \n\t`%s`", text));
-        }
-    }
-
+    /**
+     * Returns the text representation of the <code>Task</code>.
+     */
     public abstract String toText();
 
     @Override

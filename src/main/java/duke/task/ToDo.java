@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 /**
  * Represents a To-do.
  */
@@ -12,22 +10,6 @@ public class ToDo extends Task {
 
     public ToDo(String name, boolean isDone) {
         super(name, isDone);
-    }
-
-    /**
-     * Parses its text representation.
-     * @param text the text representation found
-     * @return the corresponding <code>ToDo</code> object
-     * @throws DukeException if the text representation cannot be parsed accurately
-     */
-    public static ToDo fromText(String text) throws DukeException {
-        String[] toDoDetails = text.split(" \\| ", 3);
-        if (toDoDetails.length < 3) {
-            throw new DukeException(String.format("Cannot parse ToDo from \n\t`%s`", text));
-        }
-        boolean isDone = toDoDetails[1].equals("X");
-        String name = toDoDetails[2];
-        return new ToDo(name, isDone);
     }
 
     @Override

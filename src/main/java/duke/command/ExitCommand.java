@@ -14,7 +14,7 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskManager taskManager, Ui ui, Storage storage) {
         ui.farewell();
-        storage.saveTasks(taskManager.toText());
+        storage.saveTasks(taskManager);
     }
 
     @Override

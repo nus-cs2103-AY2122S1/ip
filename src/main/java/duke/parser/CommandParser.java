@@ -14,7 +14,7 @@ import duke.command.ListCommand;
 /**
  * Parses user input.
  */
-public class Parser {
+public class CommandParser {
     /**
      * Parses the command as well as any arguments entered by the user.
      * @param fullCommand the full command entered by the user

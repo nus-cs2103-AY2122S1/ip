@@ -26,7 +26,7 @@ public class DeleteTaskCommand extends Command {
         try {
             int taskNumber = Integer.parseInt(commandArguments);
             ui.print(taskManager.deleteTask(taskNumber));
-            storage.saveTasks(taskManager.toText());
+            storage.saveTasks(taskManager);
         } catch (NumberFormatException e) {
             // User provided an argument that is not parsable.
             throw new DukeException("Invalid task number.");

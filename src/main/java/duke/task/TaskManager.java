@@ -33,6 +33,26 @@ public class TaskManager {
     }
 
     /**
+     * Returns the number of tasks.
+     */
+    public int getTaskCount() {
+        return taskList.size();
+    }
+
+    /**
+     * Returns the number of incomplete tasks.
+     */
+    private int getUndoneTaskCount() {
+        int count = 0;
+        for (Task t : taskList) {
+            if (!t.checkTaskDone()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
      * Adds a <code>Task</code> into the list of tasks.
      * @param task the task to be added
      * @return a message containing the task just added and the updated number of tasks
@@ -84,37 +104,6 @@ public class TaskManager {
     }
 
     /**
-     * Returns the number of tasks.
-     */
-    public int getTaskCount() {
-        return taskList.size();
-    }
-
-    /**
-     * Returns the number of incomplete tasks.
-     */
-    private int getUndoneTaskCount() {
-        int count = 0;
-        for (Task t : taskList) {
-            if (!t.checkTaskDone()) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    /**
-     * Returns the text representation of the task list.
-     */
-    public String toText() {
-        String[] tasks = new String[taskList.size()];
-        for (int i = 0; i < taskList.size(); i++) {
-            tasks[i] = taskList.get(i).toText();
-        }
-        return String.join("\n", tasks);
-    }
-
-    /**
      * Displays the user's tasks.
      */
     public String list() {
@@ -126,20 +115,6 @@ public class TaskManager {
             allTasks[i] = prependNumberToTask(taskNumber, task);
         }
         return String.join("\n", allTasks);
-    }
-
-    private List<Task> filterByDate(DukeDateTime dateTime) {
-        List<Task> tasks = new ArrayList<>();
-        for (Task t : taskList) {
-            if (!(t instanceof Timestampable)) {
-                continue;
-            }
-            Timestampable timestampableTask = (Timestampable) t;
-            if (timestampableTask.onSameDayAs(dateTime)) {
-                tasks.add(t);
-            }
-        }
-        return tasks;
     }
 
     /**
@@ -158,16 +133,6 @@ public class TaskManager {
         return String.join("\n", filteredTasksStrings);
     }
 
-    private List<Task> filterByName(String searchString) {
-        List<Task> tasks = new ArrayList<>();
-        for (Task t : taskList) {
-            if (t.getName().contains(searchString)) {
-                tasks.add(t);
-            }
-        }
-        return tasks;
-    }
-
     /**
      * Displays the user's tasks which have names that contain the specified search string.
      * @param searchString the target search string
@@ -184,8 +149,53 @@ public class TaskManager {
         return String.join("\n", filteredTasksStrings);
     }
 
+    /**
+     * Returns a list of tasks that occur on the specified date.
+     * @param dateTime the date to filter by
+     * @return the filtered list
+     */
+    private List<Task> filterByDate(DukeDateTime dateTime) {
+        List<Task> tasks = new ArrayList<>();
+        for (Task t : taskList) {
+            if (!(t instanceof Timestampable)) {
+                continue;
+            }
+            Timestampable timestampableTask = (Timestampable) t;
+            if (timestampableTask.onSameDayAs(dateTime)) {
+                tasks.add(t);
+            }
+        }
+        return tasks;
+    }
+
+    /**
+     * Returns a list of tasks that have names that include the specified search string.
+     * @param searchString the string to filter by
+     * @return the filtered list
+     */
+    private List<Task> filterByName(String searchString) {
+        List<Task> tasks = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.getName().contains(searchString)) {
+                tasks.add(t);
+            }
+        }
+        return tasks;
+    }
+
     private String prependNumberToTask(int taskNumber, Task task) {
         return String.format("%d. %s", taskNumber, task.toString());
+    }
+
+    /**
+     * Returns the text representation of the task list.
+     */
+    public String toText() {
+        String[] tasks = new String[taskList.size()];
+        for (int i = 0; i < taskList.size(); i++) {
+            tasks[i] = taskList.get(i).toText();
+        }
+        return String.join("\n", tasks);
     }
 
     @Override

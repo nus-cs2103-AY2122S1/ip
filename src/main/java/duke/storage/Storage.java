@@ -1,7 +1,9 @@
 package duke.storage;
 
 import duke.exception.DukeException;
+import duke.parser.TaskParser;
 import duke.task.Task;
+import duke.task.TaskManager;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -46,7 +48,7 @@ public class Storage {
             String nextLine = bufferedReader.readLine();
             while (nextLine != null) {
                 try {
-                    taskList.add(Task.fromText(nextLine));
+                    taskList.add(TaskParser.parse(nextLine));
                 } catch (DukeException e) {
                     System.out.printf("Bad task format found in %s: %s\nSkipping over...\n", filePath, e.getMessage());
                 }
@@ -65,10 +67,10 @@ public class Storage {
      * Saves the tasks into the file.
      * @param tasks tasks to be saved into the file
      */
-    public void saveTasks(String tasks) {
+    public void saveTasks(TaskManager tasks) {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(tasks);
+            fileWriter.write(tasks.toText());
             fileWriter.close();
         } catch (IOException e) {
             System.out.printf("An error occurred when trying to save tasks locally:\n\t%s\n", e.getMessage());

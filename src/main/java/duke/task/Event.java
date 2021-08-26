@@ -19,23 +19,6 @@ public class Event extends Task implements Timestampable {
         this.timestamp = timestamp;
     }
 
-    /**
-     * Parses its text representation.
-     * @param text the text representation found
-     * @return the corresponding <code>Event</code> object
-     * @throws DukeException if the text representation cannot be parsed accurately
-     */
-    public static Event fromText(String text) throws DukeException {
-        String[] eventDetails = text.split(" \\| ", 4);
-        if (eventDetails.length < 4) {
-            throw new DukeException(String.format("Cannot parse Event from \n\t`%s`", text));
-        }
-        boolean isDone = eventDetails[1].equals("X");
-        String name = eventDetails[2];
-        DukeDateTime timestamp = DukeDateTime.parseISO(eventDetails[3]);
-        return new Event(name, isDone, timestamp);
-    }
-
     @Override
     public String toText() {
         String[] props = new String[]{"E", super.getStatusIcon(), super.getName(), timestamp.toISO()};

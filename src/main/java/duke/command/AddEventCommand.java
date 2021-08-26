@@ -30,7 +30,7 @@ public class AddEventCommand extends Command {
         DukeDateTime eventTimestamp = DukeDateTime.parseUserInputDateTime(eventDetails[1]);
         Event event = new Event(eventName, eventTimestamp);
         ui.print(taskManager.addTask(event));
-        storage.saveTasks(taskManager.toText());
+        storage.saveTasks(taskManager);
     }
 
     @Override
