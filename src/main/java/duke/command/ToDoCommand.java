@@ -24,7 +24,9 @@ public class ToDoCommand extends Command {
     @Override
     public void execute(TaskList taskList) {
         String[] fields = new String[] {description};
+
         taskList.addTask(taskType.TODO, fields);
+
         Ui.showAddedTask(taskList);
         Ui.showTaskCount(taskList);
     }
