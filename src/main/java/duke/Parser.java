@@ -1,6 +1,12 @@
 package duke;
 public class Parser {
 
+    /**
+     * Returns the command inputted by the user
+     * 
+     * @param input
+     * @return command
+     */
     public static String parse(String input) {
         String inputLower = input.toLowerCase();
         if (input.replaceAll("\\s","").toLowerCase().equals("bye")) {

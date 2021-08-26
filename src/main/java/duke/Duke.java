@@ -14,6 +14,9 @@ public class Duke {
         this.storage = new Storage(filePath);
     }
 
+    /**
+     * runs the Duke chat bot
+     */
     public void run() {
         String separator = "    ____________________________________________________________";
         System.out.println(Ui.WelcomeMessage());

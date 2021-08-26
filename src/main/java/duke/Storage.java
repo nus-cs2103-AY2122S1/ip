@@ -16,6 +16,11 @@ public class Storage {
         this.taskList = new File(filePath);
     }
 
+    /**
+     * Returns user's list of tasks
+     * 
+     * @return Task List
+     */
     public static ArrayList<Task> load() {
         ArrayList<Task> list = new ArrayList<>();
         try {

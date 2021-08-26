@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 public class Ui {
 
+    /**
+     * Returns the welcome message of the duke chat bot.
+     * 
+     * @return Welcome Message
+     */
     public static String WelcomeMessage() {
         String separator = "    ____________________________________________________________";
         return separator + "\n" + "     Hello! I'm Duke" + "\n" + "     What can I do for you?"  + "\n" + separator;
