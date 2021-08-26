@@ -1,6 +1,6 @@
 package saber.task;
 
-import saber.SaberTime;
+import saber.time.SaberTime;
 import saber.exceptions.SaberTimeParserException;
 
 /**

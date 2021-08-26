@@ -6,10 +6,13 @@ import saber.exceptions.SaberCommandNotFoundException;
 import saber.exceptions.SaberStorageLoadException;
 import saber.exceptions.SaberStorageStoreException;
 
+import saber.parser.SaberParser;
+import saber.storage.TaskStorage;
 import saber.task.Deadline;
 import saber.task.Event;
 import saber.task.Todo;
 
+import saber.tasklist.TaskList;
 import saber.ui.SaberUI;
 
 import java.util.ArrayList;
@@ -31,7 +34,7 @@ public class Saber {
     private TaskList taskList;
 
     /** The enum that represents all the possible command to Saber application */
-    enum InputCommand {
+    public enum InputCommand {
         add,
         bye,
         done,
@@ -44,7 +47,7 @@ public class Saber {
     }
 
     /** The enum that represents all the task types that are supported by the Saber application */
-    enum TaskType {
+    public enum TaskType {
         deadline,
         event,
         normalTask,
@@ -60,6 +63,7 @@ public class Saber {
     public Saber(String filePath) {
         saberGeneralUI = new SaberUI();
         storage = new TaskStorage(filePath);
+
         try {
             this.taskList = new TaskList(storage.load());
         } catch (SaberStorageLoadException e) {
@@ -85,6 +89,7 @@ public class Saber {
                 taskTypeArray[i] = TaskType.normalTask;
             }
         }
+
         try {
             storage.store(taskList, taskTypeArray);
         } catch (SaberStorageStoreException e) {
@@ -105,8 +110,10 @@ public class Saber {
                 String input = saberGeneralUI.readInput();
                 SaberParser saberParser = new SaberParser(input);
                 saberGeneralUI.showLineBreak();
+
                 SaberCommand command = saberParser.parse();
                 command.execute(taskList);
+
                 isEnd = command.isExit();
             } catch (SaberCommandNotFoundException e) {
                 saberGeneralUI.showCommandNotFoundError();
