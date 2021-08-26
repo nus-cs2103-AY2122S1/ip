@@ -91,7 +91,7 @@ public class Duke {
             this.deadline = deadline;
         }
 
-        public Deadline(String name, String deadline, boolean done) throws NoNameException {
+        public Deadline(String name, LocalDateTime deadline, boolean done) throws NoNameException {
             super(name, "#Deadline", done);
             this.deadline = deadline;
         }
@@ -115,9 +115,9 @@ public class Duke {
             this.when = when;
         }
 
-        public Event(String name, String time, boolean done) throws NoNameException {
+        public Event(String name, LocalDateTime when, boolean done) throws NoNameException {
             super(name, "#Event", done);
-            this.time = time;
+            this.when = when;
         }
 
         public String toString() {
@@ -125,7 +125,7 @@ public class Duke {
         }
 
         public String toStringSave() {
-            return super.toStringSave() + ">" + time;
+            return super.toStringSave() + ">" + when;
         }
 
     }
@@ -296,10 +296,10 @@ public class Duke {
                         newTask = new ToDo(name, done);
                         break;
                     case "D":
-                        newTask = new Deadline(name, taskDetails[3], done);
+                        newTask = new Deadline(name, LocalDateTime.parse(taskDetails[3]), done);
                         break;
                     case "E":
-                        newTask = new Event(name, taskDetails[3], done);
+                        newTask = new Event(name, LocalDateTime.parse(taskDetails[3]), done);
                         break;
                     default:
                         throw new NoNameException("Task type invalid");
