@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public abstract class DateDependentTask extends Task {
-    LocalDate date;
+    private LocalDate date;
 
     public DateDependentTask(String description, LocalDate date) {
         super(description);
