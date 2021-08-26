@@ -7,11 +7,19 @@ import duke.util.Storage;
 import duke.util.Ui;
 import java.io.IOException;
 
+/**
+ * Encapsulates duke program
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructor for duke
+     *
+     * @param filePath path in which data is stored
+     */
     public Duke(String filePath) {
         ui = new Ui();
         this.storage = new Storage(filePath);
@@ -23,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the duke program
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
