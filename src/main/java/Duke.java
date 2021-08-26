@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Duke {
     static boolean isTerminated = false;
     private TaskHandler taskHandler;
-    private TaskSaver taskSaver;
+    private Storage storage;
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -14,8 +14,8 @@ public class Duke {
 
     public void initialiseDuke() {
         try {
-            taskSaver = new TaskSaver("./data/taskList.txt");
-            ArrayList<Task> list = taskSaver.loadTasks();
+            storage = new Storage("./data/taskList.txt");
+            ArrayList<Task> list = storage.loadTasks();
             taskHandler = new TaskHandler(list);
         } catch (DukeException e) {
             System.err.println("Error: Unable to initialise duke");
@@ -37,13 +37,13 @@ public class Duke {
 
                     case "DONE":
                         taskHandler.markTaskAsDone(Integer.parseInt(cmd.substring(5)));
-                        taskSaver.updateFile(taskHandler.formatTaskToSave());
+                        storage.updateFile(taskHandler.formatTaskToSave());
                         break;
 
                     case "DELETE":
                         taskHandler.deleteTask(Integer.parseInt(cmd.substring(7)));
                         taskHandler.printNoOfTasks();
-                        taskSaver.updateFile(taskHandler.formatTaskToSave());
+                        storage.updateFile(taskHandler.formatTaskToSave());
                         break;
 
                     case "TODO":
@@ -53,7 +53,7 @@ public class Duke {
                             ToDo toDo = new ToDo(cmd.substring(5));
                             taskHandler.addToDo(toDo);
                             taskHandler.printNoOfTasks();
-                            taskSaver.updateFile(taskHandler.formatTaskToSave());
+                            storage.updateFile(taskHandler.formatTaskToSave());
                         }
                         break;
 
@@ -66,7 +66,7 @@ public class Duke {
                                 Deadline deadline = new Deadline(split[0].substring(9), split[1]);
                                 taskHandler.addDeadline(deadline);
                                 taskHandler.printNoOfTasks();
-                                taskSaver.updateFile(taskHandler.formatTaskToSave());
+                                storage.updateFile(taskHandler.formatTaskToSave());
                             } else {
                                 throw new DukeException(Ui.dateMissing());
                             }
@@ -82,7 +82,7 @@ public class Duke {
                                 Event event = new Event(split[0].substring(6), split[1]);
                                 taskHandler.addEvent(event);
                                 taskHandler.printNoOfTasks();
-                                taskSaver.updateFile(taskHandler.formatTaskToSave());
+                                storage.updateFile(taskHandler.formatTaskToSave());
                             } else {
                                 throw new DukeException(Ui.dateMissing());
                             }

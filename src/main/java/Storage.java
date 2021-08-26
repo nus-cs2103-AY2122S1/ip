@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TaskSaver {
+public class Storage {
     private final String filePath;
     private final File file;
 
-    public TaskSaver(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
         try {
