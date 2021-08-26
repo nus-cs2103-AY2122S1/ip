@@ -12,9 +12,11 @@ import duke.exceptions.DukeException1;
 
 public class AddCommand extends Command {
     String command;
+
     public AddCommand(String command) {
         this.command = command;
     }
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
@@ -53,8 +55,6 @@ public class AddCommand extends Command {
         } catch (DukeException1 e) {
             ui.showError(e.getMessage());
         }
-
-        //System.out.println("hi");;
     }
 
     @Override
