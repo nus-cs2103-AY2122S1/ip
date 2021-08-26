@@ -48,6 +48,22 @@ public class Ui {
         outputWrapper();
     }
 
+    public void printMatchingTaskList(TaskList tasks) {
+        int currListLength = tasks.size();
+        outputWrapper();
+        if (currListLength == 0) {
+            System.out.println("Sorry :-(. Yoyo has not found any matching tasks.");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < currListLength; i++) {
+                System.out.println(i + 1 + "." + tasks.get(i).showStatus());
+            }
+        }
+        outputWrapper();
+    }
+
+
+
     public void printMarkTaskMessage(TaskList tasks, int taskIndex) {
         outputWrapper();
         System.out.println("Nice! I've marked this task as done:\n"

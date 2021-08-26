@@ -15,6 +15,11 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+
+    public boolean containsString(String str) {
+        return this.name.contains(str);
+    }
+
     /**
      * Returns a status string indicating state of completion.
      *

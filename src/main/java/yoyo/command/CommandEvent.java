@@ -10,7 +10,7 @@ import yoyo.task.TaskList;
 
 import java.time.LocalDateTime;
 
-public class CommandEvent extends Command{
+public class CommandEvent extends Command {
     public CommandEvent(String[] inputTokens) {
         super(inputTokens);
     }
