@@ -17,11 +17,6 @@ public class Deadline extends DateDependentTask {
     }
 
     @Override
-    public String getFormattedDateString() {
-        return super.getFormattedDateString();
-    }
-
-    @Override
     public String toString() {
         return super.toString() + " (by: " + super.getFormattedDateString() + ")";
     }
