@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
-import java.time.LocalDate;
 
 /**
  * The DeadlineCommand class encapsulates the execution of the deadline command from the user.

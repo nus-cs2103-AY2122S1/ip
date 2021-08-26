@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * The DoneCommand class encapsulates the execution of the done command from the user.

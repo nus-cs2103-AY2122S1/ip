@@ -1,19 +1,17 @@
 package duke.storage;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * The Storage class encapsulates the action of saving the taskList created by Duke.

@@ -1,10 +1,10 @@
 package duke.ui;
 
-import duke.task.Task;
-import duke.tasklist.TaskList;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.tasklist.TaskList;
 
 /**
  * The Ui class encapsulates the user interactions Duke will provide to the user.
