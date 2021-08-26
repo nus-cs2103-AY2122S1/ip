@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 
@@ -11,15 +10,18 @@ import java.util.Scanner;
  * @author Sherman Ng Wei Sheng
  */
 public class Storage {
-    private final String FILEDIR = "data/";
-    private final String FILENAME = "duke.txt";
-    private final String FILEPATH = FILEDIR + FILENAME;
-    private String data = "";
+    private final String fileDir;
+    private final String filePath;
     
-    public Storage() {
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        this.fileDir = this.filePath.substring(0,this.filePath.lastIndexOf("/") + 1);
+    }
+    
+    public String load() throws StorageLoadingException {
         try {
-            File storageDir = new File(FILEDIR);
-            File storageFile = new File(FILEPATH);
+            File storageDir = new File(this.fileDir);
+            File storageFile = new File(this.filePath);
             boolean isDirExistent = storageDir.exists();
             boolean isFileExistent = storageFile.exists();
             if (!isDirExistent) {
@@ -29,61 +31,23 @@ public class Storage {
                 storageFile.createNewFile();
             }
             Scanner scanner = new Scanner(storageFile);
+            StringBuilder data = new StringBuilder();
             while (scanner.hasNext()) {
-                this.data = this.data + scanner.nextLine() + "\n";
+                data.append(scanner.nextLine()).append("\n");
             }
+            return data.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new StorageLoadingException();
         }
     }
     
-    public void loadDataTo(TaskList taskList) {
-        String[] lines = this.data.split("\n");
-        if (lines[0].equals("")) {
-            return;
-        }
-        for (String line : lines) {
-            String[] split = line.split(" \\| ");
-            String taskType = split[0];
-            boolean isDone = split[1].equals("0") ? false : true;;
-            String description = split[2];
-            String dateTimeString;
-            switch (taskType) {
-            case "T":
-                ToDo toDoTask = new ToDo(description, isDone);
-                taskList.add(toDoTask);
-                break;
-            case "D":
-                dateTimeString = split[3];
-                Deadline deadlineTask = new Deadline(description, LocalDate.parse(dateTimeString), isDone);
-                taskList.add(deadlineTask);
-                break;
-            case "E":
-                dateTimeString = split[3];
-                Event eventTask = new Event(description, LocalDate.parse(dateTimeString), isDone);
-                taskList.add(eventTask);
-                break;
-            }
-        }
-    }
-    
-    public void saveDataFrom(TaskList list) {
+    public void save(String data) throws StorageSavingException {
         try {
-            int size = list.size();
-            String finalMessage = "";
-            for (int i = 0; i < size; i++) {
-                Task currentTask = list.get(i);
-                String taskMessage = currentTask.encodeTaskForStorage();
-                finalMessage += taskMessage;
-                if (i != size - 1) {
-                    finalMessage += "\n";
-                }
-            }
-            FileWriter fw = new FileWriter(FILEPATH);
-            fw.write(finalMessage);
+            FileWriter fw = new FileWriter(this.filePath);
+            fw.write(data);
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new StorageSavingException();
         }
     }
 }

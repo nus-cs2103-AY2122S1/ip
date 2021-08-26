@@ -1,6 +1,6 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedMap;
 
 /**
  * Represents a list that contains a <code>List</code> of tasks.
@@ -9,14 +9,20 @@ import java.util.SortedMap;
  */
 public class TaskList {
     private final List<Task> list;
-    private final Storage storage;
 
     /**
      * Constructor to initialize a new TaskList
      */
     public TaskList() {
         this.list = new ArrayList<>();
-        this.storage = new Storage();
+    }
+    
+    /**
+     * Constructor to initialize a new TaskList
+     */
+    public TaskList(String data) {
+        this.list = new ArrayList<>();
+        this.loadFromStorage(data);
     }
 
     /**
@@ -26,7 +32,6 @@ public class TaskList {
      */
     public void add(Task task) {
         this.list.add(task);
-        this.saveToStorage();
     }
 
     /**
@@ -62,7 +67,6 @@ public class TaskList {
         } else {
             Task taskToBeMarkDone = this.get(index);
             taskToBeMarkDone.markAsDone();
-            this.saveToStorage();
             return true;
         }
     }
@@ -77,9 +81,7 @@ public class TaskList {
         if (index > this.size()-1 || index < 0) {
             return null;
         } else {
-            Task removedTask = this.list.remove(index);
-            this.saveToStorage();
-            return removedTask;
+            return this.list.remove(index);
         }
     }
     
@@ -95,11 +97,47 @@ public class TaskList {
         return message.toString();
     }
     
-    public void loadFromStorage() {
-        this.storage.loadDataTo(this);
+    private void loadFromStorage(String data) {
+        String[] lines = data.split("\n");
+        if (lines[0].equals("")) {
+            return;
+        }
+        for (String line : lines) {
+            String[] split = line.split(" \\| ");
+            String taskType = split[0];
+            boolean isDone = !split[1].equals("0");
+            String description = split[2];
+            String dateTimeString;
+            switch (taskType) {
+            case "T":
+                ToDo toDoTask = new ToDo(description, isDone);
+                this.add(toDoTask);
+                break;
+            case "D":
+                dateTimeString = split[3];
+                Deadline deadlineTask = new Deadline(description, LocalDate.parse(dateTimeString), isDone);
+                this.add(deadlineTask);
+                break;
+            case "E":
+                dateTimeString = split[3];
+                Event eventTask = new Event(description, LocalDate.parse(dateTimeString), isDone);
+                this.add(eventTask);
+                break;
+            }
+        }
     }
     
-    public void saveToStorage() {
-        this.storage.saveDataFrom(this);
+    public String convertToStorageString() {
+        int size = list.size();
+        StringBuilder finalMessage = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            Task currentTask = list.get(i);
+            String taskMessage = currentTask.encodeTaskForStorage();
+            finalMessage.append(taskMessage);
+            if (i != size - 1) {
+                finalMessage.append("\n");
+            }
+        }
+        return finalMessage.toString();
     }
 }
