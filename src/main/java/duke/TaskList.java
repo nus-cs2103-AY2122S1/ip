@@ -1,5 +1,6 @@
 package duke;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskList {
     ArrayList<Task> list;
@@ -20,25 +21,16 @@ public class TaskList {
         this.list.remove(i);
     }
 
-
-
-//    public Task doneTask(String[] inputSplit) throws DukeException {
-//        Task task = null;
-//        if (inputSplit.length < 2) {
-//            throw new DukeException("Please enter the number of task to mark as completed!");
-//        }
-//        try {
-//            int index = Integer.parseInt(inputSplit[1]);
-//            if (index > list.size() || index <= 0) {
-//                throw new DukeException("That number is not in the list!");
-//            }
-//            task = list.get(index - 1);
-//            task.toggleCompleted();
-//        } catch (NumberFormatException e) {
-//            System.out.println("Please input a proper number pls");
-//        }
-//        return task;
-//    }
+    public TaskList findTask(String input){
+        TaskList searchResult = new TaskList();
+        for(int i = 0; i < list.size(); i++){
+            Task task = list.get(i);
+            if(task.toString().contains(input)){
+                searchResult.addTask(task);
+            }
+        }
+        return searchResult;
+    }
 
     public Task deleteTask(String[] inputSplit) {
         Task t = null;

@@ -1,6 +1,7 @@
 package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class Ui {
     String line = "-----------------------------------------";
@@ -125,26 +126,33 @@ TaskList taskList;
     }
     public void eventResponse(String input){
         try{
-                    String by = input.substring(input.lastIndexOf("/") + 1);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                    LocalDate localTimeObj = LocalDate.parse(by,formatter);
-                    String description = input.substring(6,input.lastIndexOf("/"));
-                    System.out.println(line);
-                    System.out.println("     added: " + new Event(description,localTimeObj.toString()));//Added item
-                    taskList.addTask(new Event(description,localTimeObj.toString()));//Added new task to arraylist
-                    System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
-                    System.out.println(line);
-//                    continue;
-                }catch (Exception e){
-                    String by = input.substring(input.lastIndexOf("/") + 1);
-                    String description = input.substring(6,input.lastIndexOf("/"));
-                    System.out.println(line);
-                    System.out.println("     added: " + new Event(description,by));//Added item
-                    taskList.addTask(new Event(description,by));//Added new task to arraylist
-                    System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
-                    System.out.println(line);
-//                    continue;
-                }
+            String by = input.substring(input.lastIndexOf("/") + 1);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate localTimeObj = LocalDate.parse(by,formatter);
+            String description = input.substring(6,input.lastIndexOf("/"));
+            System.out.println(line);
+            System.out.println("     added: " + new Event(description,localTimeObj.toString()));//Added item
+            taskList.addTask(new Event(description,localTimeObj.toString()));//Added new task to arraylist
+            System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+            System.out.println(line);
+        }catch (Exception e) {
+            String by = input.substring(input.lastIndexOf("/") + 1);
+            String description = input.substring(6, input.lastIndexOf("/"));
+            System.out.println(line);
+            System.out.println("     added: " + new Event(description, by));//Added item
+            taskList.addTask(new Event(description, by));//Added new task to arraylist
+            System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
+            System.out.println(line);
+        }
+    }
+
+    public void findResponse(String input){
+        String keyWord = input.substring(input.lastIndexOf("find") + 5);
+        TaskList results = taskList.findTask(keyWord);
+        for(int i = 0; i < results.size(); i++){
+            Task result = results.get(i);
+            System.out.println(result + "\n");
+        }
     }
 
     void invalidInput(){

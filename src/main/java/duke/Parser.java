@@ -44,6 +44,9 @@ class Parser {
           else if (input.contains("delete")) {
                ui.deleteResponse(input);
           }
+          else if (input.contains("find")) {
+              ui.findResponse(input);
+          }
           else if (input.contains("todo")) {
                ui.todoResponse(input);
           }
