@@ -6,7 +6,18 @@ import duke.command.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
+
+    /**
+     * Parses user input into command for execution.
+     *
+     * @param input full user input string
+     * @return the command based on user input
+     * @throws DukeException if user input string is not a valid format
+     */
     public static Command getCommand(String input) throws DukeException {
         if (input.trim().equals("bye")){
             return new ExitCommand();

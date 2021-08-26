@@ -4,6 +4,9 @@ import duke.tasks.*;
 
 import java.util.ArrayList;
 
+/**
+ * A TaskList class encapsulates the list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> TaskList;
 
@@ -15,6 +18,12 @@ public class TaskList {
         return TaskList;
     }
 
+    /**
+     * Adds a Task to the tasklist.
+     *
+     * @param type type of task
+     * @param details description of the task
+     */
     public void addTask(taskType type, String[] details) {
         switch (type) {
         case TODO:
@@ -30,6 +39,13 @@ public class TaskList {
 
     }
 
+    /**
+     * Deletes a task from a task list.
+     *
+     * @param taskNo the task number to be deleted
+     * @return the deleted task
+     * @throws DukeException if task number is invalid
+     */
     public Task deleteTask(int taskNo) throws DukeException {
         int index = taskNo - 1;
         try {
@@ -42,6 +58,13 @@ public class TaskList {
 
     }
 
+    /**
+     * Marks the task as done and updates the list when new tasks are completed.
+     *
+     * @param taskNo completed task nunmber
+     * @return completed task
+     * @throws DukeException if task number is invalid
+     */
     public Task doneTask(int taskNo) throws DukeException {
         int index = taskNo - 1;
         try {
@@ -52,15 +75,31 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns details of a specified task in the list.
+     *
+     * @param taskNo task number
+     * @return task specified by task number
+     */
     public Task getTask(int taskNo) {
         Task toPrint = TaskList.get(taskNo - 1);
         return toPrint;
     }
 
+    /**
+     * Returns the number of task in the list
+     *
+     * @return the number of tasks in the list
+     */
     public int count() {
         return TaskList.size();
     }
 
+    /**
+     * Formats the task list as a numbered list.
+     *
+     * @return String showing all tasks
+     */
     public String toDisplay() {
         String str = "";
         int i = 1;
