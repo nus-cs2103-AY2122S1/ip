@@ -88,6 +88,23 @@ public class Items {
     }
 
     /**
+     * Returns all the task (represented by a string) that contains the given keyword
+     * @param keyword The keyword to search the task
+     * @return all the tasks (string) that contains the given keyword
+     */
+    public String find(String keyword) {
+        StringBuilder str = new StringBuilder();
+        str.append("Here are the matching tasks in your list:\n");
+        int id = 1;
+        for (Task task : list) {
+            if (task.toString().contains(keyword)) {
+                str.append(id++).append(". ").append(task.toString()).append("\n");
+            }
+        }
+        return str.toString();
+    }
+
+    /**
      * The String representation of the Items object
      * @return The string representation of the Items object
      */

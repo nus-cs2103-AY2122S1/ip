@@ -119,6 +119,10 @@ public class Duke {
                         break;
                     case dates:
                         output = ui.getAllAcceptedDates();
+
+                        break;
+                    case find:
+                        output = list.find(input[1]);
                 }
                 ui.showMessage(output);
             } catch (DukeException e) {

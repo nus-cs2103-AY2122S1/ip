@@ -118,6 +118,13 @@ public class Parser {
             }
             return new String[] {input[0]};
 
+        case find:
+            if (input.length < 2) {
+                throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString() + " (example: 'find book')");
+            }
+            String keyword = combineStringArray(input, 1, input.length);
+            return new String[] {input[0], keyword};
+
         default:
             throw new DukeException(DukeException.Errors.INVALID_ARGUMENT.toString());
         }

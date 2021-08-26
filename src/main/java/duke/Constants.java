@@ -11,6 +11,7 @@ public class Constants {
         event       ("[description] /at [dd-MM-yyyy] [*optional hh:mm]", "Adds an event to the task"),
         delete      ("[index]", "Removes a task from the task list"),
         done        ("[index]", "Marks a task as done"),
+        find        ("[keyword]", "Find a task by searching for a keyword"),
         help        ("", "Shows all the commands available"),
         dates       ("", "Shows all the available date and time type"),
         bye         ("", "Quit the app");
