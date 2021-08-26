@@ -12,23 +12,22 @@ public class Deadline extends Task {
             throw new DukeException("Your Deadline cannot be empty :(");
         }
 
-
-        // deadline poopoo /by 29-08-2021 2359
         int index = description.indexOf("/by");
 
-        timing = LocalDateTime.parse(description.substring(index + 3).strip(), DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        timing = LocalDateTime.parse(description.substring(index + 3).strip(),
+                    DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         this.description = description.substring(0, index);
-
     }
 
     @Override
     public String toString() {
-
-        return "[D]" + super.toString() + "(by: " + timing.format(DateTimeFormatter.ofPattern("MMM d yyy HH:mm")) + ")";
-
+        return "[D]" + super.toString() + "(by: "
+                + timing.format(DateTimeFormatter.ofPattern("MMM d yyy HH:mm")) + ")";
     }
+
     public void writeToFile(FileWriter myWriter) throws IOException {
-        myWriter.write("deadline" + description + " /by" + timing);
+        myWriter.write("deadline" + description + "/by "
+                + timing.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
 
     }
 }
