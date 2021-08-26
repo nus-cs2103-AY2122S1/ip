@@ -44,7 +44,7 @@ public class Storage {
             ArrayList<Task> todoList = new ArrayList<>();
             List<String> dataList = Files.lines(filePath).collect(Collectors.toList());
             for (String line : dataList) {
-                String[] details = line.split("\\|",4);
+                String[] details = line.split("\\|", 4);
                 String tag = details[0];
                 Boolean done = details[1].equals("1");
                 Task task;

@@ -1,14 +1,14 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.task.TaskList;
 import duke.Ui;
 import duke.task.Storage;
 import duke.task.Task;
+import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
     private Integer taskNum;
-    
+
     public DeleteCommand(Integer taskNum) {
         this.taskNum = taskNum;
     }
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
         ui.showMessage("Ok, I've deleted this task:");
         ui.showMessage(task.toString());
         ui.showMessage("Now you have " + tasks.getListSize() + " tasks in the list.");
-        
+
         storage.save(tasks.getListData());
     }
 

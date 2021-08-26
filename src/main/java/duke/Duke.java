@@ -6,9 +6,9 @@ import duke.task.TaskList;
 
 public class Duke {
 
+    private Ui ui;
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -19,6 +19,10 @@ public class Duke {
             ui.showStartUpError(e);
             tasks = new TaskList();
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 
     public void run() {
@@ -38,9 +42,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-    }
-    
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

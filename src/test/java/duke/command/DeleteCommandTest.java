@@ -16,7 +16,7 @@ public class DeleteCommandTest {
             TaskList tasks = new TaskList();
             Ui ui = new Ui();
             Storage storage = new Storage("data/tasks.txt");
-            
+
             tasks.addTask(TaskList.TaskType.TODO, "task");
             assertEquals(1, tasks.getListSize());
 
@@ -27,5 +27,5 @@ public class DeleteCommandTest {
             fail();
         }
     }
-    
+
 }
