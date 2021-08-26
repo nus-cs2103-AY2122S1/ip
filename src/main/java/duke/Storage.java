@@ -8,13 +8,26 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Loads and save the tasks in the file
+ */
 public class Storage {
     File taskFile;
 
+    /**
+     * Class Constructor
+     *
+     * @param filePath The file to save and load tasks
+     */
     public Storage(String filePath) {
         this.taskFile = new File(filePath);
     }
 
+    /**
+     * Loads the saved tasks from the file
+     *
+     * @return ArrayList of tasks in the file
+     */
     public ArrayList<Task> load() {
         if (!this.taskFile.exists()) {
             try {
@@ -67,6 +80,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the new task to the file
+     *
+     * @param content the content of the task
+     */
     public void writeTask(String content) {
         try {
             FileWriter fileWriter = new FileWriter(this.taskFile, true);
@@ -79,6 +97,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Edits the content of the task in the file
+     *
+     * @param oldContent old content of the task
+     * @param newContent new content of the task
+     */
     public void editTask(String oldContent, String newContent) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.taskFile));
@@ -102,6 +126,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Removes the task from the file
+     *
+     * @param taskContent the content of the task
+     */
     public void deleteTask(String taskContent) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.taskFile));

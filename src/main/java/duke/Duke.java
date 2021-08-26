@@ -5,17 +5,30 @@ import dukeException.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * Personal Assistant Chat bot to keep track of tasks
+ */
 public class Duke {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
 
+
+    /**
+     * Class Constructor
+     *
+     * @param filePath The file to save and load tasks
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.tasks = new TaskList(this.storage.load());
     }
 
+
+    /**
+     * Method to run Duke
+     */
     public void run() {
         //Greet
         this.ui.greet();

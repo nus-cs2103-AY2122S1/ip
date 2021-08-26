@@ -2,9 +2,19 @@ package duke;
 
 import dukeException.*;
 
-public class Parser {
-    public Parser() {}
 
+/**
+ * A parser to make sense of the user's input
+ */
+public class Parser {
+
+    /**
+     * Returns the type of command from the user input
+     *
+     * @param input user input
+     * @return the type of command
+     * @throws InvalidTaskException if the input does not match the supported command
+     */
     public Command parseCommand(String input) throws InvalidTaskException {
         String parsed = input.split(" ", 2)[0];
         boolean validCommand = false;
@@ -27,6 +37,13 @@ public class Parser {
 
     }
 
+    /**
+     * Returns the task number from the user input
+     *
+     * @param input user input
+     * @return task number
+     * @throws NoDescriptionException if task number not included in user input
+     */
     public int getTaskNo(String input) throws NoDescriptionException {
         String[] parsed = input.split(" ", 2);
         if (parsed.length == 1) {
@@ -36,6 +53,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the description of the task from the user input
+     *
+     * @param input user input
+     * @return description of the task
+     * @throws NoDescriptionException if description not included in user input
+     */
     public String parseDescription(String input) throws NoDescriptionException {
         String[] parsed = input.split(" ", 2);
         if (parsed.length == 1) {
@@ -45,6 +69,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the description of the task from the user input
+     *
+     * @param input user input
+     * @param conjunction "at" or "by"
+     * @return separated description and time
+     * @throws NoDescriptionException if description not included in user input
+     * @throws WrongDescriptionException if conjunction not included in user input
+     */
     public String[] parseDescription(String input, String conjunction) throws NoDescriptionException, WrongDescriptionException {
         String[] parsed = input.split(" ", 2);
         if (parsed.length == 1) {
