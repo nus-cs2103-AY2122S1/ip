@@ -1,29 +1,22 @@
-package data;
+package operation;
 
+import Parser.Parser;
 import exception.DukeException;
-import operation.Event;
-import operation.Task;
-import operation.Deadline;
-import operation.ToDo;
-import operation.Command;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
- * This is the StoreRoom class to store tasks and handle actions.
+ * This is the TaskList class to contain task list and handle operations.
  */
-public class StoreRoom {
-	private ArrayList<Task> taskList;
-	private Path dir = Paths.get(System.getProperty("user.dir") + "/src/main/java/data");
+public class TaskList {
+	protected ArrayList<Task> taskList;
 
-	public StoreRoom() {
+	public TaskList(){
 		this.taskList = new ArrayList<>();
+	}
+
+	public ArrayList<Task> getTaskList(){
+		return taskList;
 	}
 
 	/**
@@ -38,8 +31,8 @@ public class StoreRoom {
 		Task task;
 		switch (command) {
 		case TODO: {
-			Task.checkIfFirstWordValid(inputLine, "todo");
-			if (Task.isDescriptionEmpty(inputLine)) {
+			Parser.checkIfFirstWordValid(inputLine, "todo");
+			if (Parser.isDescriptionEmpty(inputLine)) {
 				message = "____________________________________________________________\n"
 						+ "OOPS!!! The description of a "
 						+ "todo"
@@ -48,13 +41,13 @@ public class StoreRoom {
 				throw new DukeException(message);
 			}
 			task = new ToDo(inputLine.substring(5));
-			taskList.add(task);
-			task.printAddTask(taskList.size());
+			this.taskList.add(task);
+			printAddTask(taskList.size(),task);
 			break;
 		}
 		case DEADLINE: {
-			Task.checkIfFirstWordValid(inputLine, "deadline");
-			if (Task.isDescriptionEmpty(inputLine)) {
+			Parser.checkIfFirstWordValid(inputLine, "deadline");
+			if (Parser.isDescriptionEmpty(inputLine)) {
 				message = "____________________________________________________________\n"
 						+ "OOPS!!! The description of a "
 						+ "deadline"
@@ -64,12 +57,12 @@ public class StoreRoom {
 			}
 			task = Deadline.splitDeadline(inputLine);
 			taskList.add(task);
-			task.printAddTask(taskList.size());
+			printAddTask(taskList.size(), task);
 			break;
 		}
 		case EVENT: {
-			Task.checkIfFirstWordValid(inputLine, "event");
-			if (Task.isDescriptionEmpty(inputLine)) {
+			Parser.checkIfFirstWordValid(inputLine, "event");
+			if (Parser.isDescriptionEmpty(inputLine)) {
 				message = "____________________________________________________________\n"
 						+ "OOPS!!! The description of a "
 						+ "event"
@@ -79,7 +72,7 @@ public class StoreRoom {
 			}
 			task = Event.splitEvent(inputLine);
 			taskList.add(task);
-			task.printAddTask(taskList.size());
+			printAddTask(taskList.size(), task);
 			break;
 		}
 		default: {
@@ -91,6 +84,7 @@ public class StoreRoom {
 		}
 	}
 
+
 	/**
 	 * Marks a task as finished.
 	 *
@@ -101,7 +95,7 @@ public class StoreRoom {
 		Task doneTask = this.taskList.get(intValue - 1);
 		doneTask.doneTask();
 		this.taskList.set(intValue - 1, doneTask);
-		doneTask.printDoneTask();
+		printDoneTask(doneTask);
 	}
 
 	/**
@@ -129,55 +123,49 @@ public class StoreRoom {
 		int intValue = Integer.parseInt(nextLine.replaceAll("[^0-9]", ""));
 		Task taskToDelete = taskList.get(intValue - 1);
 		taskList.remove(intValue - 1);
-		taskToDelete.printDeleteTask(taskList.size());
+		printDeleteTask(taskList.size(), taskToDelete);
 	}
 
 	/**
-	 * Handles situation when input is invalid.
-	 *
-	 * @throws DukeException
+	 * Prints the task that is marked done.
 	 */
-	public void invalidTask() throws DukeException {
-		String message = "____________________________________________________________\n"
-				+ "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-				+ "____________________________________________________________\n";
-		throw new DukeException(message);
+	public void printDoneTask(Task doneTask) {
+		System.out.println("____________________________________________________________\n"
+				+ "Nice! I've marked this task as done:\n  "
+				+ doneTask
+				+ "\n"
+				+ "____________________________________________________________\n");
 	}
 
 	/**
-	 * Creates duke.txt to contain task list, if not exists.
+	 * Prints the message when a task is added.
+	 * @param size current size of the storeroom
 	 */
-	public void createFile() {
-		if (!Files.exists(dir)) {
-			try {
-				Files.createDirectories(dir);
-			} catch (IOException e) {
-				System.out.println("Unexpected IO error occurred.");
-			}
-		}
-		try {
-			String path = dir.toString() + "/duke.txt";
-			File file = new File(path);
-			file.createNewFile();
-		} catch (IOException e) {
-			System.out.println("Unexpected IO error occurred.");
-		}
+	public void printAddTask(int size,Task task) {
+		System.out.println("____________________________________________________________\n"
+				+ "Got it. I've added this task:\n  "
+				+ task
+				+ "\n"
+				+ "Now you have "
+				+ size
+				+ " tasks in the list."
+				+ "\n"
+				+ "____________________________________________________________\n");
 	}
 
 	/**
-	 * Updates task list inside duke.txt.
+	 * Prints the message when a task is deleted.
+	 * @param size current size of the storeroom
 	 */
-	public void updateFile() {
-		try {
-			String path = dir.toString() + "/duke.txt";
-			FileWriter fileWriter = new FileWriter(path);
-			for (Task task : taskList) {
-				fileWriter.write(task.toString());
-				fileWriter.write("\n");
-			}
-			fileWriter.close();
-		} catch (IOException e) {
-			System.out.println("Unexpected IO error occurred");
-		}
+	public void printDeleteTask(int size, Task task) {
+		System.out.println("____________________________________________________________\n"
+				+ "Noted. I've removed this task:\n  "
+				+ task
+				+ "\n"
+				+ "Now you have "
+				+ size
+				+ " tasks in the list."
+				+ "\n"
+				+ "____________________________________________________________\n");
 	}
 }

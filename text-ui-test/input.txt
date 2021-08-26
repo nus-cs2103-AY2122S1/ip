@@ -1,7 +1,7 @@
 todo 111
 todo 222
-deadline 333 /by date1
-event 444 /at date2
+deadline 333 /by 2012-12-10 12:10
+event 444 /at 2030-10-28 13:12
 list
 done 1
 done 3

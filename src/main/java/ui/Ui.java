@@ -1,9 +1,9 @@
-package display;
+package ui;
 
 /**
  * This is the Display class to handle UI of Duke.
  */
-public class Display {
+public class Ui {
 	/**
 	 * Prints welcome message.
 	 */

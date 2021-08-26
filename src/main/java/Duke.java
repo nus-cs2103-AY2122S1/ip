@@ -1,5 +1,7 @@
-import data.StoreRoom;
-import display.Display;
+import operation.TaskList;
+import storage.Storage;
+import ui.Ui;
+import Parser.Parser;
 import exception.DukeException;
 import operation.Command;
 
@@ -10,20 +12,22 @@ import java.util.Scanner;
  * This is the Driver class for Duke application.
  */
 public class Duke {
+
 	public static void main(String[] args) {
-		Display.showWelcomeMessage();
+		Ui.showWelcomeMessage();
 
 		// ask for user input
 		Scanner in = new Scanner(System.in);
 		String nextLine = in.nextLine();
 		Command nextCommand = Command.getCommandWordFromString(nextLine);
-		StoreRoom storeRoom = new StoreRoom();
-		storeRoom.createFile();
+		Storage storage = new Storage();
+		storage.createFile();
+		TaskList storeRoom = new TaskList();
 
 		while (true) {
 			try {
 				if (nextCommand == Command.BYE) {
-					Display.showByeMessage();
+					Ui.showByeMessage();
 					break;
 				} else if (nextCommand == Command.TODO) {
 					storeRoom.addTask(nextCommand, nextLine);
@@ -38,14 +42,14 @@ public class Duke {
 				} else if (nextCommand == Command.DELETE) {
 					storeRoom.deleteTask(nextLine);
 				} else {
-					storeRoom.invalidTask();
+					Parser.invalidTask();
 				}
 			} catch (DukeException e){
 				System.out.println(e);
 			}
 			nextLine = in.nextLine();
 			nextCommand = Command.getCommandWordFromString(nextLine);
-			storeRoom.updateFile();
+			storage.updateFile(storeRoom);
 		}
 		in.close();
 	}
