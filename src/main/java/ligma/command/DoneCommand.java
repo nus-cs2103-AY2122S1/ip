@@ -11,7 +11,6 @@ import java.io.IOException;
  * This class represents a command to mark a task as completed.
  */
 public class DoneCommand implements Command {
-
     private int index;
 
     public DoneCommand(int index) {

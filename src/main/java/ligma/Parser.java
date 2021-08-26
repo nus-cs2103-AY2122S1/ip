@@ -14,8 +14,6 @@ import java.util.InputMismatchException;
  * either Task or Command objects.
  */
 public class Parser {
-    //should handle incorrect command format exceptions
-
     /**
      * Parses user input to Command object.
      *
@@ -70,18 +68,18 @@ public class Parser {
     private static Command handleBadCommands(String action)
             throws NoSuchMethodException, InputMismatchException, DateTimeParseException {
         switch (action) {
-            case "todo":
-            case "event":
-            case "deadline":
-                throw new InputMismatchException(
-                        String.format("The description of %s cannot be empty.",
-                                action.toUpperCase()));
-            case "done":
-                throw new InputMismatchException("Indicate index of item to be marked as done.");
-            case "delete":
-                throw new InputMismatchException("Indicate index of item to be deleted.");
-            default:
-                throw new NoSuchMethodException("Sorry, command does not exist.");
+        case "todo":
+        case "event":
+        case "deadline":
+            throw new InputMismatchException(
+                    String.format("The description of %s cannot be empty.",
+                            action.toUpperCase()));
+        case "done":
+            throw new InputMismatchException("Indicate index of item to be marked as done.");
+        case "delete":
+            throw new InputMismatchException("Indicate index of item to be deleted.");
+        default:
+            throw new NoSuchMethodException("Sorry, command does not exist.");
         }
     }
 

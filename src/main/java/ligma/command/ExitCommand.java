@@ -8,7 +8,6 @@ import ligma.Ui;
  * This class represents a command to exit the Ligma program.
  */
 public class ExitCommand implements Command {
-
     /**
      * Updates UI to bid user farewell.
      *

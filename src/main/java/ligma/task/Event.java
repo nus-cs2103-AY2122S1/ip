@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
  * This class represents an Event Task.
  */
 public class Event extends Task {
-
     private LocalDate time;
 
     /**

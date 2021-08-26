@@ -14,7 +14,6 @@ import java.util.ArrayList;
  * and read from during the execution of the Ligma program.
  */
 public class Storage {
-
     private File f;
 
     public Storage(String pathname) {

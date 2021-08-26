@@ -7,7 +7,6 @@ import java.util.InputMismatchException;
  * This class represents a Todo Task.
  */
 public class Todo extends Task {
-
     /**
      * Creates a Todo object.
      *

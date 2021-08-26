@@ -11,7 +11,6 @@ import java.io.IOException;
  * This class represents a command to delete a task.
  */
 public class DeleteCommand implements Command {
-
     private int index;
 
     public DeleteCommand(int index) {

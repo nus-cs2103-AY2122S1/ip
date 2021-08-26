@@ -13,7 +13,6 @@ import java.io.IOException;
  * to the existing tasks during execution.
  */
 public class Ligma {
-
     private static Storage storage;
     private TaskList tasks;
 
