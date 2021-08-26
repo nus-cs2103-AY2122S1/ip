@@ -24,14 +24,16 @@ public class Ui {
 
     public void showAddTaskMessage(Task task, TaskList taskList) {
         int size = taskList.getCapacity();
-        System.out.printf("Got it. I've added this task:\n    %s\nNow you have %d task%s in the list\n", task , size, pluralOrNo(size));
+        System.out.printf("Got it. I've added this task:\n    %s\n" +
+                "Now you have %d task%s in the list\n", task , size, pluralOrNo(size));
     }
 
     public void showEditTaskMessage(Task task, CommandType commandType, TaskList taskList) {
         switch(commandType) {
         case DELETE:
             int size = taskList.getCapacity();
-            System.out.printf("Noted. Ive removed this task:\n    %s\nNow you have %d task%s in the list\n", task, size, pluralOrNo(size));
+            System.out.printf("Noted. Ive removed this task:\n    %s\n" +
+                    "Now you have %d task%s in the list\n", task, size, pluralOrNo(size));
             break;
         case DONE:
             System.out.printf("Nice! I've marked this task as done:\n    %s\n", task);
@@ -58,6 +60,19 @@ public class Ui {
         }
     }
 
+    public void showSearchMessage(ArrayList<Task> tasks) {
+
+        int size = tasks.size();
+        if (size < 1) {
+            System.out.println("Sorry, no tasks match your search query!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 1; i <= size; i++) {
+                System.out.println("    " + i + ". " + tasks.get(i - 1));
+            }
+        }
+    }
+
     public void showExitMessage() {
         System.out.println("Good bye!");
     }
@@ -66,6 +81,4 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
-
-
 }

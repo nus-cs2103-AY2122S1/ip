@@ -11,6 +11,17 @@ public class TaskList {
         this.taskList = arrayList;
     }
 
+    public ArrayList<Task> searchTaskList(String searchString, TaskList tasks) {
+        ArrayList<Task> taskList = tasks.getArrayList();
+        ArrayList<Task> arrayList = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getDescription().contains(searchString)) {
+                arrayList.add(task);
+            }
+        }
+        return arrayList;
+    }
+
     public void addToTaskList(Task task) {
         this.taskList.add(task);
     }

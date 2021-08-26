@@ -1,7 +1,5 @@
 package Duke.Parser;
 
-import Duke.Parser.CustomDateFormatter;
-
 public class Cleaner {
 
 
@@ -33,9 +31,19 @@ public class Cleaner {
                 return deleteCleaner(fullCommand, currentCapacity);
             case "bye":
                 return byeCleaner(fullCommand);
+            case "find":
+                return findCleaner(fullCommand);
             default:
                 return "error -1";
         }
+    }
+
+    private String findCleaner(String fullCommand) {
+        if (fullCommand.strip().length() == 4) {
+            return "error 14";
+        }
+        String searchString = fullCommand.substring(5);
+        return "find " + searchString.strip();
     }
 
     private String listCleaner(String fullCommand) {

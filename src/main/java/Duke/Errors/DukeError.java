@@ -15,7 +15,8 @@ public enum DukeError { // I prefered to keep the enum structure rather than ext
     LIST_FULL(10, "The list is full, please remove an existing Task before trying to add a new Task."),
     SEPARATOR_DETECTED(11, "Please do not use '_~_' in your input as it breaks me! ):"),
     INVALID_DATE_FORMAT(12, "Invalid date. Please use the dd-mm-yyyy convention!"),
-    POLLUTED_EXIT_COMMAND(13, "Please only type 'bye' to exit");
+    POLLUTED_EXIT_COMMAND(13, "Please only type 'bye' to exit"),
+    EMPTY_SEARCH_STRING(14, "Please key in something for me to find!");
 
     private final int code;
     private final String description;
@@ -52,6 +53,8 @@ public enum DukeError { // I prefered to keep the enum structure rather than ext
                 return DukeError.INVALID_DATE_FORMAT;
             case 13:
                 return DukeError.POLLUTED_EXIT_COMMAND;
+            case 14:
+                return DukeError.EMPTY_SEARCH_STRING;
             default:
                 return null;
         }

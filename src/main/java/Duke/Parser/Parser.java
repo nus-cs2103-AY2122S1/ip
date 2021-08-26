@@ -32,10 +32,17 @@ public class Parser {
             return markUndoParser(cleanCommand);
         case "delete":
             return deleteParser(cleanCommand);
+        case "find":
+            return findParser(cleanCommand);
         default:
             return errorParser(cleanCommand);
+        }
+
     }
 
+    public static Command findParser(String input) {
+        String searchString = input.substring(5);
+        return new SearchCommand(searchString);
     }
 
     public static Command todoParser(String input) {

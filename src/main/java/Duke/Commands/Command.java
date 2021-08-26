@@ -14,7 +14,8 @@ abstract public class Command {
         UNDO,
         ERROR,
         EXIT,
-        LIST
+        LIST,
+        SEARCH
     }
     private CommandType commandType;
 
