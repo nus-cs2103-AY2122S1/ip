@@ -11,7 +11,7 @@ import java.util.Scanner;
  * A class representing the storage for tasks.
  */
 public class Storage {
-	private static final DateTimeParser DATE_TIME_PARSER = new DateTimeParser(new String[] {"MMM dd yyyy"});
+	private static final DateTimeParser DATE_TIME_PARSER = new DateTimeParser(new String[]{"MMM dd yyyy"});
 	private final Scanner sc;
 	private final String path;
 
@@ -49,15 +49,15 @@ public class Storage {
 				break;
 			case "D":
 				taskData.add(new Deadline(
-						temp[2].equals("1"), 
-						temp[1], 
-						temp[3].equals("") ? null : temp[3], 
+						temp[2].equals("1"),
+						temp[1],
+						temp[3].equals("") ? null : temp[3],
 						temp[4].equals("") ? null : DATE_TIME_PARSER.parse(temp[4])
 				));
 				break;
 			case "E":
 				taskData.add(new Event(
-						temp[2].equals("1"), 
+						temp[2].equals("1"),
 						temp[1],
 						temp[3].equals("") ? null : temp[3],
 						temp[4].equals("") ? null : DATE_TIME_PARSER.parse(temp[4])

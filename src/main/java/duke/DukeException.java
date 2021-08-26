@@ -5,7 +5,7 @@ import java.lang.Exception;
 /**
  * A class representing errors specific to Duke.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /**
      * A constructor for the exception.
