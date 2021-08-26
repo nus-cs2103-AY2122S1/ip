@@ -55,26 +55,23 @@ public class Duke {
                             // (case when only a whitespace follows a command)
                             throw new DukeException("the description of a " + temp[0] + " cannot be empty");
                         } else {
-                            System.out.println(line);
-                            System.out.println("noted! ive added this task:");
-
                             // Separate into cases
                             switch (temp[0]) {
                             case "todo":
                                 cmdList.add(new Todo(temp[1]));
-                                System.out.println("  " + cmdList.get(count));
                                 break;
                             case "deadline":
                                 String[] temp_deadline = temp[1].split(" /by ", 2);
                                 cmdList.add(new Deadline(temp_deadline[0], temp_deadline[1]));
-                                System.out.println("  " + cmdList.get(count));
                                 break;
                             case "event":
                                 String[] temp_event = temp[1].split(" /at ", 2);
                                 cmdList.add(new Event(temp_event[0], temp_event[1]));
-                                System.out.println("  " + cmdList.get(count));
                                 break;
                             }
+                            System.out.println(line);
+                            System.out.println("noted! ive added this task:");
+                            System.out.println("  " + cmdList.get(count));
                             count++;
                             System.out.println("now you have " + cmdList.getLength() + " tasks in your list");
                             System.out.println(line);

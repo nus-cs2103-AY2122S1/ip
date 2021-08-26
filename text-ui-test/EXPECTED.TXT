@@ -24,29 +24,32 @@ now you have 1 tasks in your list
 1.[T][ ] borrow book
 ===========================
 ===========================
+ ☹ oops..time has to be in the format yyyy-mm-dd HHmm instead of Sunday
+===========================
+===========================
 noted! ive added this task:
-  [D][ ] return book (by: Sunday)
+  [D][ ] return book (by: Dec 25 2021 12:00 AM)
 now you have 2 tasks in your list
 ===========================
 ===========================
 noted! ive added this task:
-  [E][ ] project meeting (at: Mon 2-4pm)
+  [E][ ] project meeting (at: Dec 31 2021 12:34 PM)
 now you have 3 tasks in your list
 ===========================
 ===========================
 noted! ive added this task:
-  [D][ ] do homework (by: no idea :-p)
+  [D][ ] do homework (by: Dec 31 2021 11:59 PM)
 now you have 4 tasks in your list
 ===========================
 ===========================
 1.[T][ ] borrow book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] project meeting (at: Mon 2-4pm)
-4.[D][ ] do homework (by: no idea :-p)
+2.[D][ ] return book (by: Dec 25 2021 12:00 AM)
+3.[E][ ] project meeting (at: Dec 31 2021 12:34 PM)
+4.[D][ ] do homework (by: Dec 31 2021 11:59 PM)
 ===========================
 ===========================
 congrats on completing this task! :
-  [D][X] return book (by: Sunday)
+  [D][X] return book (by: Dec 25 2021 12:00 AM)
 ===========================
 ===========================
  ☹ oops..i cant seem to find the task you're looking for
@@ -62,9 +65,9 @@ congrats on completing this task! :
 ===========================
 ===========================
 1.[T][ ] borrow book
-2.[D][X] return book (by: Sunday)
-3.[E][ ] project meeting (at: Mon 2-4pm)
-4.[D][ ] do homework (by: no idea :-p)
+2.[D][X] return book (by: Dec 25 2021 12:00 AM)
+3.[E][ ] project meeting (at: Dec 31 2021 12:34 PM)
+4.[D][ ] do homework (by: Dec 31 2021 11:59 PM)
 ===========================
 ===========================
  ☹ oops..im sorry, but i dont know what that means :(
@@ -86,9 +89,9 @@ congrats on completing this task! :
 ===========================
 ===========================
 1.[T][ ] borrow book
-2.[D][X] return book (by: Sunday)
-3.[E][ ] project meeting (at: Mon 2-4pm)
-4.[D][ ] do homework (by: no idea :-p)
+2.[D][X] return book (by: Dec 25 2021 12:00 AM)
+3.[E][ ] project meeting (at: Dec 31 2021 12:34 PM)
+4.[D][ ] do homework (by: Dec 31 2021 11:59 PM)
 ===========================
 ===========================
  ☹ oops..im sorry, but i dont know what that means :(
@@ -99,9 +102,9 @@ ok, ive deleted this task :
 now you have 3 tasks in your list
 ===========================
 ===========================
-1.[D][X] return book (by: Sunday)
-2.[E][ ] project meeting (at: Mon 2-4pm)
-3.[D][ ] do homework (by: no idea :-p)
+1.[D][X] return book (by: Dec 25 2021 12:00 AM)
+2.[E][ ] project meeting (at: Dec 31 2021 12:34 PM)
+3.[D][ ] do homework (by: Dec 31 2021 11:59 PM)
 ===========================
 ===========================
 bye friend!
