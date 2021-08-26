@@ -28,6 +28,9 @@ public class Task {
         }
     }
 
+    /**
+     * Marks the task as done
+     */
     public void markAsDone() {
         this.isDone = true;
     }
@@ -38,12 +41,24 @@ public class Task {
 
     private String getDoneString() { return isDone ? "1" : "0"; }
 
+    /**
+     * Formats the task data for saving in tasks.txt
+     */
     public String toFileData() { return String.format("%s,%s", getDoneString(), description); }
 
+    /**
+     * Gets the date of the task in the format of DD Month-Name YYYY
+     * e.g. 1 January 2021
+     *
+     * @return String representation of the date in the format
+     */
     public String getDateString() {
         return this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
+    /**
+     * @return String of the date in the format of YYYY-MM-DD
+     */
     public String dateToString() {
         return this.date.toString();
     }
