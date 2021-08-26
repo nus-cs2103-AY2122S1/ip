@@ -3,8 +3,9 @@ second task
 todo borrow book
 list
 deadline return book /by Sunday
-event project meeting /at Mon 2-4pm
-deadline do homework /by no idea :-p
+deadline return book /by 2021-12-25 0000
+event project meeting /at 2021-12-31 1234
+deadline do homework /by 2021-12-31 2359
 list
 done 2
 done 5
