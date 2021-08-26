@@ -2,6 +2,11 @@ package Duke.Ui;
 
 import java.util.Objects;
 
+/**
+ * The UserInput class encapsulates the components of a user's input, namely the keyword and the arguments.
+ *
+ * @author cai
+ */
 public class UserInput {
     private final String raw, keyword, args;
 

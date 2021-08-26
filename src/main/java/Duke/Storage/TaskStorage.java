@@ -14,17 +14,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A storage of tasks on the hard disk.
+ *
+ * @author cai
+ */
 public class TaskStorage implements Storage<Task> {
+    /** The path to the file storing the tasks */
     private final String path;
 
+    /**
+     * Constructs a new TaskStorage with the specified path.
+     * Creates the directories and file if they don't already exist.
+     *
+     * @param path The path to the file storing the tasks.
+     * @throws IOException If an IOException is thrown when creating the directories or file.
+     */
     public TaskStorage(String path) throws IOException {
         this.path = path;
-
-        // Create directories and file if they don't already exist
         Files.createDirectories(Paths.get(path).getParent());
         createFileIfNotExist(path);
     }
 
+    /**
+     * Returns the list of tasks stored on the file.
+     *
+     * @return The list of tasks stored.
+     * @throws IOException If an IOException is thrown when creating or reading from the file.
+     */
     public List<Task> load() throws IOException {
         List<Task> list = new ArrayList<>();
         File file = new File(this.path);
@@ -44,6 +61,12 @@ public class TaskStorage implements Storage<Task> {
         return list;
     }
 
+    /**
+     * Saves the specified list of tasks to the file, overwriting the previous contents on the file.
+     *
+     * @param list The list of elements to save.
+     * @throws IOException If an IOException is thrown when writing to the file.
+     */
     public void save(List<Task> list) throws IOException {
         FileWriter writer = new FileWriter(this.path);
         StringBuilder builder = new StringBuilder();
@@ -55,6 +78,12 @@ public class TaskStorage implements Storage<Task> {
         writer.close();
     }
 
+    /**
+     * Creates the specified file if it does not exist.
+     *
+     * @param path The file to create.
+     * @throws IOException If an IOException is thrown when creating the file.
+     */
     private static void createFileIfNotExist(String path) throws IOException {
         File file = new File(path);
         file.createNewFile();
@@ -65,9 +94,9 @@ public class TaskStorage implements Storage<Task> {
      * The string is expected to be in the format "[T|D|E],[0|1],<description>,<date>",
      * where `[T|D|E]` represents the type of task and `[0|1]` represents the completion status.
      *
-     * @param data the string to be parsed
-     * @return the Task object
-     * @throws FileFormatException if the string is not in the specified format
+     * @param data The string to be parsed.
+     * @return The Task object.
+     * @throws FileFormatException If the string is not in the specified format.
      */
     private static Task parseTask(String data) throws FileFormatException {
         String[] splitData = data.split(",", -1);
@@ -109,6 +138,14 @@ public class TaskStorage implements Storage<Task> {
         throw new FileFormatException(String.format("Unrecognized task type \"%s\"", type));
     }
 
+    /**
+     * Returns the specified task as a string.
+     * The string is in the format "[T|D|E],[0|1],<description>,<date>",
+     * where `[T|D|E]` represents the type of task and `[0|1]` represents the completion status.
+     *
+     * @param task The task to encode.
+     * @return The string representing the task.
+     */
     private static String encodeTask(Task task) {
         String type = task.getTaskTypeIcon(), completionStatus = task.isDone() ? "1" : "0",
                 description = task.getDescription(), date = "";
