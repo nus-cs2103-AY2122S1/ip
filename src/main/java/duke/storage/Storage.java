@@ -10,6 +10,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+
+/**
+ * Class to handle all about storage. This includes creating, reading, and writing to file.
+ */
 public class Storage {
 
     private static final Path DIRECTORY = Paths.get("data");
@@ -17,6 +21,9 @@ public class Storage {
 
     private final TaskList tasks = new TaskList();
 
+    /**
+     * Tries to create the data directory if it does not exist.
+     */
     private static void directoryCreator() {
         try {
             Files.createDirectories(DIRECTORY);
@@ -27,6 +34,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Tries to create the data file if it does not exist.
+     */
     private static void fileCreator() {
         try {
             Files.createFile(FILE_PATH);
@@ -37,6 +47,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Opens the file and import the data into the current TaskList.
+     */
     public void open() {
         directoryCreator();
         fileCreator();
@@ -51,6 +64,12 @@ public class Storage {
 
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Writes the current tasklisk data into the file.
+     */
+>>>>>>> branch-A-JavaDoc
     public void save() {
         try {
             Files.write(FILE_PATH, tasks.exportToText().getBytes());
@@ -59,26 +78,58 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns string representation of the current task list.
+     *
+     * @return String of the current list.
+     */
     public String getList() {
         return tasks.toString();
     }
 
+    /**
+     * Adds the task to the current list.
+     *
+     * @param task Task to be added to the list.
+     */
     public void addToList(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Deletes the task in the specified index.
+     *
+     * @param index Index of task to be deleted from the list.
+     */
     public void deleteFromList(int index) {
         tasks.remove(index);
     }
 
+    /**
+     * Marks specified task as finished.
+     *
+     * @param index Index of task to be marked as finished from the list.
+     * @throws DukeExceptions if the task is already marked as finished.
+     */
     public void markAsFinished(int index) throws DukeExceptions {
         tasks.markAsFinished(index);
     }
 
+    /**
+     * Returns the task in the specified index.
+     *
+     * @param index Index of task to be marked pulled.
+     * @return Task in the index.
+     */
     public Task getTask(int index) {
         return tasks.get(index);
     }
 
+    /**
+     * Returns the tsize of the list.
+     *
+     * @return Size of the TaskList.
+     */
     public int getSize() {
         return tasks.size();
     }

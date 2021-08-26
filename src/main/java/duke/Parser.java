@@ -17,6 +17,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Main function to breakdown the input of the user
+ */
 public class Parser {
 
     private static final String TIME_PARSE_ERROR = "Hmm.. Seems like the time format is foreign to me. \n"
@@ -24,7 +27,15 @@ public class Parser {
             + "yyyy-MM-dd HH:MM (e.g 2020-05-19 15:30)";
 
     /**
-     * Returns full command in shape of a list of strings
+     * Interprets user input and returns the appropriate command
+     *
+     * @param userInput The string which the user typed in.
+     * @return Appropriate command the input represents for the main function to execute.
+     * @throws DukeExceptions if the input is lacking argument.
+     * @throws DukeExceptions if the input has too much argument.
+     * @throws DukeExceptions if the input is not properly formatted.
+     * @throws DukeExceptions if the input is empty.
+     * @throws DukeExceptions if the first word of the input is not a recognisable command.
      */
     public Command parse(String userInput) throws DukeExceptions {
         String[] splitUserInput = userInput.split(" ", 2);
