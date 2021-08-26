@@ -1,9 +1,9 @@
 package duke;
 
 public class Ui {
-    public static void print(String input) {
-        System.out.println("\t" + input);
-    }
+//    public static void print(String input) {
+//        System.out.println("\t" + input);
+//    }
 
     public static void printAll(String[] results) {
         for (int i = 0; i < results.length; i++) {

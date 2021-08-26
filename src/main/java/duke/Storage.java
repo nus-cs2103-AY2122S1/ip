@@ -9,15 +9,15 @@ import java.util.Scanner;
 
 
 public class Storage {
-    private final String fileName;
-    private final TaskList tasks = new TaskList(new ArrayList<Task>());
+    private final String FILENAME;
+    private final TaskList TASKS = new TaskList(new ArrayList<>());
 
-    Storage(String fileName) {
-        this.fileName = fileName;
+    Storage(String FILENAME) {
+        this.FILENAME = FILENAME;
     }
 
     void write(String line) throws IOException {
-        FileWriter writer = new FileWriter(this.fileName, true);
+        FileWriter writer = new FileWriter(this.FILENAME, true);
         writer.write(line + "\n");
         writer.close();
     }
@@ -30,13 +30,13 @@ public class Storage {
      */
     public void loadTasks() throws IOException{
         Scanner scanner;
-        File file = new File(fileName);
+        File file = new File(FILENAME);
         file.createNewFile();
         scanner = new Scanner(file);
         while (scanner.hasNext()) {
             Task task = parseTask(scanner.nextLine());
             if (task != null) {
-                tasks.add(task);
+                TASKS.add(task);
             }
         }
     }
@@ -74,7 +74,7 @@ public class Storage {
      * @return Tasks loaded from file
      */
     public TaskList getTasks() {
-        return tasks;
+        return TASKS;
     }
 
     /**
@@ -83,8 +83,8 @@ public class Storage {
      * @throws IOException If unable to create write to file
      */
     public void writeEntireFile() throws IOException {
-        FileWriter writer = new FileWriter(this.fileName);
-        for (Task task : tasks) {
+        FileWriter writer = new FileWriter(this.FILENAME);
+        for (Task task : TASKS) {
             writer.write(task.save() + "\n");
         }
         writer.close();
