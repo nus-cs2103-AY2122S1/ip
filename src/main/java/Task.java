@@ -11,6 +11,14 @@ public class Task {
         this.completed = true;
     }
 
+    public boolean getCompleted() {
+        return this.completed;
+    }
+
+    public String getTaskName() {
+        return this.taskname;
+    }
+
     @Override
     public String toString() {
         return this.taskname + " " + (this.completed ? "[X]" : "[ ]");
