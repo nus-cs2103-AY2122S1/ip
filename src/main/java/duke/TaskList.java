@@ -27,6 +27,7 @@ public class TaskList {
 
     /**
      * Constructor for TaskList with initial tasks.
+     * 
      * @param tasks Initial tasks.
      */
 	public TaskList(ArrayList<Task> tasks) {
@@ -39,7 +40,7 @@ public class TaskList {
 
 	
     /**
-     * Mark a task as done.
+     * Marks a task as done.
      * 
      * @param taskNum the task number to mark as done
      */
@@ -50,7 +51,7 @@ public class TaskList {
     }
 
 	/**
-     * Delete a task from the ArrayList of tasks.
+     * Deletes a task from the ArrayList of tasks.
      * 
      * @param num the task number to delete
      */
@@ -64,30 +65,27 @@ public class TaskList {
     } 
 
     /**
-     * Get the task number in the list.
+     * Gets the task number in the list.
+     * 
      * @param command Command to extract task number from.
      * @return Task number.
      * @throws DukeException Task number not valid
      */
     public int getTaskNum(String command) throws DukeException {
-        int taskNum;
-
         try {
-            taskNum = Integer.parseInt(command.split(" ")[1]);
+            return Integer.parseInt(command.split(" ")[1]);
         } catch (NumberFormatException err) {
             throw new DukeException("Please use the task number instead of task name!\n");
         } catch (IndexOutOfBoundsException err) {
             throw new DukeException("I'm sorry, but that task number is out of range.\n");
         }
-
-        return taskNum;
     }
 
 	/**
-     * Handle task deletion.
+     * Handles task deletion.
      * 
      * @param command user input to parse
-     * @throws DukeException Task not specified
+     * @throws DukeException task not specified
      */
     public void handleDelete(String command) throws DukeException {
         if (command.equals("delete")) {
@@ -99,10 +97,10 @@ public class TaskList {
     }
 
     /**
-     * Handle task completion.
+     * Handles task completion.
      * 
      * @param command user input to parse
-     * @throws DukeException Task not specified
+     * @throws DukeException task not specified
      */
     public void handleDone(String command) throws DukeException {
         if (command.equals("done")) {
@@ -114,7 +112,7 @@ public class TaskList {
     }
 
     /**
-     * Add a task to the ArrayList of tasks.
+     * Adds a task to the ArrayList of tasks.
      * 
      * @param t the task to add
      */
@@ -126,7 +124,7 @@ public class TaskList {
     } 
 
     /**
-     * Add ToDo task to the ArrayList of tasks.
+     * Adds ToDo task to the ArrayList of tasks.
      * 
      * @param command user input to extract task
      * @throws DukeException Task not specified
@@ -141,7 +139,7 @@ public class TaskList {
     }
 
     /**
-     * Add event task with datetime.
+     * Adds event task with datetime.
      * 
      * @param command User input to extract task and datetime
      * @throws DukeException Task not specified
@@ -159,7 +157,7 @@ public class TaskList {
     }
 
     /**
-     * Add deadline task with date/time.
+     * Adds deadline task with date/time.
      * 
      * @param command User input to extract task and datetime
      * @throws DukeException Task not specified
@@ -183,6 +181,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Splits the command into task and datetime.
+     * 
+     * @param command User input to extract task and dateTime
+     * @param by The string to split the command by
+     * @return The task and dateTime in a String array
+     */
     public String[] splitCommand(String command, String by) throws DukeException {
         String[] commandSplit = command.split(by);
         
@@ -193,8 +198,11 @@ public class TaskList {
         return commandSplit;
     }
 
+    /**
+     * Gets the task from the split original command.
+     */
     public String getTask(String[] commandSplit) throws DukeException {
-        String task = commandSplit[0].trim();
+        String task = commandSplit[0].trim();   // Trim the first part of the original command
 
         if (task.isEmpty()) {
             throw new DukeException("You need to provide a task!" + "\n");
@@ -203,12 +211,18 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Gets the datetime from the split original command.
+     * 
+     * @param commandSplit the original command split into 2 parts
+     * @return the datetime in String format
+     */
     public String getDateTime(String[] commandSplit) {
-        return commandSplit[1].trim(); 
+        return commandSplit[1].trim();  // Get the 2nd part of the command
     }
 
 	/**
-     * Print all the tasks in the ArrayList of tasks.
+     * Prints all the tasks in the ArrayList of tasks.
      */
     public void printTasks() {
         if (tasks.isEmpty()) {

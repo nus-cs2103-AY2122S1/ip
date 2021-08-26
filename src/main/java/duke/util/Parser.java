@@ -7,6 +7,13 @@ import duke.exception.DukeException;
  * Represents a parser for making sense of the user input.
  */
 public class Parser {
+	/**
+	 * Determines whether Parser should continue parsing based on the user input.
+	 * 
+	 * @param command the user input
+	 * @return true if Parser should continue parsing, false otherwise
+	 * @throws DukeException if the user input is invalid
+	 */
 	public static boolean parse(String command) throws DukeException {
 		if (command.startsWith("bye")) {
 			Ui.printFormattedMessage("Bye. Hope to see you again soon!\n");

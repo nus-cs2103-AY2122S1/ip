@@ -19,12 +19,15 @@ import duke.task.ToDo;
 public class Storage {
 	private final String filePath;
 	
+	/**
+	 * Constructs a new Storage object with the specified file path.
+	 */
 	public Storage(String filePath) {
 		this.filePath = filePath;
 	}
 
 	/**
-	 * Load the data from the hard disk.
+	 * Loads the data from the hard disk.
 	 * 
 	 * @return ArrayList of tasks
 	 * @throws DukeException File cannot be found
@@ -78,7 +81,7 @@ public class Storage {
 	}
 	
 	/**
-	 * 	Save the tasks to the data file.
+	 * Saves the tasks to the data file.
 	 * 
 	 * @param tasks ArrayList of tasks to be saved
 	 */

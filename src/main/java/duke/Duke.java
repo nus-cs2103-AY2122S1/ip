@@ -25,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Personal Assistant Chatbot.
+     */
     public void run() {
         ui.greetUser();
         Scanner sc = new Scanner(System.in);
@@ -36,9 +39,6 @@ public class Duke {
                 System.out.println("What's your next command?\n");
                 command = sc.nextLine();  
                 isExit = Parser.parse(command);
-                // ui.showLine(); // show the divider line ("_______")
-                // c.execute(tasks, ui, storage);
-                // isExit = c.isExit();
             } catch (DukeException e) {
                 Ui.printFormattedMessage(e.getMessage());
             }

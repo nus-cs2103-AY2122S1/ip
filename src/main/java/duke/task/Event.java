@@ -6,6 +6,9 @@ package duke.task;
 public class Event extends Task {
 	private String dateTime;
 
+	/**
+	 * Constructs an event task with a name and datetime.
+	 */
 	public Event (String name, String dateTime) {
 		super(name);
 		this.dateTime = dateTime;

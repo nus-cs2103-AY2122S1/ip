@@ -1,10 +1,13 @@
 package duke.util;
 
+/**
+ * Represents a user interface which deals with interactions with the user.
+ */
 public class Ui {
 	private final static String LINE = "\t----------------------------------------------------\n";
 	
     /**
-     * Print a welcome message to the user.
+     * Prints a welcome message to the user.
      */
     public void greetUser() {
         String LOGO = " ____        _        \n"
