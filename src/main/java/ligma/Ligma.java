@@ -45,4 +45,8 @@ public class Ligma {
         }
     }
 
+    public static void main(String[] args) {
+        new Ligma("data/ligma.txt").run();
+    }
+
 }

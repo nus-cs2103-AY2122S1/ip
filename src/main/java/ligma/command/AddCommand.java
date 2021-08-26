@@ -14,13 +14,11 @@ public class AddCommand implements Command {
 
     private Task task;
 
-    public AddCommand(Task.TaskType type,
-                      String desc) {
+    public AddCommand(Task.TaskType type, String desc) {
         this.task = createTask(type, desc);
     }
 
-    private Task createTask(Task.TaskType type,
-                            String desc) {
+    private Task createTask(Task.TaskType type, String desc) {
         switch (type) {
         case TODO:
             return new Todo(desc);
@@ -47,6 +45,14 @@ public class AddCommand implements Command {
 
     @Override
     public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AddCommand) {
+            return this.task.equals(((AddCommand) obj).task);
+        }
         return false;
     }
 

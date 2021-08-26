@@ -31,4 +31,12 @@ public class Task {
         String check = isDone ? "[X] " : "[ ] ";
         return check + description;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            return description.equals(((Task) obj).description);
+        }
+        return false;
+    }
 }
