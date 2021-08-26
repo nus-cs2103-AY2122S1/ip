@@ -78,7 +78,7 @@ public class Storage {
     }
 
     /**
-     * Rewrite the entire file based with tasks.
+     * Rewrites the entire file based with tasks.
      *
      * @throws IOException If unable to create write to file
      */
