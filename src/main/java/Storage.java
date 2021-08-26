@@ -3,20 +3,31 @@ import java.io.*;
 public class Storage {
 
     //path of file containing stored data
-    private static final String FILE_PATH = "data/test.txt";
+    private String filePath;
     //path of folder containing data file
-    private  static final String DIR_PATH = "data";
+    private String directoryPath;
     //FIle containing stored data
-    private static File dataFile;
+    private File dataFile;
+    //the instance of Duke that this instance of Storage is operating under
+    private Duke dukeInstance;
+    //instance of taskList used to store tasks
+    private TaskList taskList;
 
 
-    public static void start() {
+    public Storage(String filePath, String directoryPath, Duke dukeInstance, TaskList taskList) {
+        this.filePath = filePath;
+        this.directoryPath = directoryPath;
+        this.dukeInstance = dukeInstance;
+        this.taskList = taskList;
+    }
+
+    public void start() {
         //set up the file
-        dataFile = new File(FILE_PATH);
+        dataFile = new File(filePath);
         //file does not exist: attempt to create a new file.
         if (!dataFile.canRead()) {
             try {
-                new File(DIR_PATH).mkdir();
+                new File(directoryPath).mkdir();
                 if (dataFile.createNewFile()) {
                     System.out.println("A new save file has been created in root/data.");
                 }
@@ -28,17 +39,15 @@ public class Storage {
             }
         }
 
-        loadData();
+        loadData(dukeInstance);
     }
 
-    private static void loadData() {
+    private void loadData(Duke dukeInstance) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(dataFile));
             String nextLine;
             while ((nextLine = reader.readLine()) != null) {
-                Duke.taskArray.add(DataParser.readData(nextLine));
-                Duke.listIndex += 1;
-
+                taskList.addTask((DataParser.readData(nextLine)));
             }
         } catch (Exception e) {
             if (e instanceof FileNotFoundException) {
@@ -52,11 +61,12 @@ public class Storage {
 
     }
 
-    public static void saveData() {
+    public void saveData(Duke dukeInstance) {
         try {
             FileWriter writer = new FileWriter(dataFile);
             StringBuilder str = new StringBuilder();
-            for (Task task: Duke.taskArray) {
+            for (int i = 0; i < taskList.getTaskNumber(); i++) {
+                Task task = taskList.getTask(i);
                 str.append(task.toDataString()).append("\n");
             }
             writer.write(str.toString());

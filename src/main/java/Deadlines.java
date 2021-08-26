@@ -31,9 +31,9 @@ public class Deadlines extends Task {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         if (isDone) {
-            return ("[E] [X] " + name  + " (at: " + deadline.format(formatter).toString() + ")");
+            return ("[D] [X] " + name  + " (at: " + deadline.format(formatter).toString() + ")");
         } else {
-            return ("[E] [ ] " + name  + " (at: " + deadline.format(formatter).toString() + ")");
+            return ("[D] [ ] " + name  + " (at: " + deadline.format(formatter).toString() + ")");
         }
     }
 

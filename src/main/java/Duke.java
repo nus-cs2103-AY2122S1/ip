@@ -14,19 +14,21 @@ public class Duke {
      */
     private enum Tasks {DEADLINE, EVENT, TODO}
 
-    //ArrayList containing tasks stored by Duke
-    public static ArrayList<Task> taskArray = new ArrayList<>();
-    //Integer that stores the number of tasks currently stored by Duke.
-    public static int listIndex = 0;
+    //path of file containing stored data
+    private static final String FILE_PATH = "data/test.txt";
+    //path of folder containing data file
+    private static final String DIRECTORY_PATH = "data";
+
+    public Duke() {
+    }
+
+    private void run() {
+        //initialise required classes
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH, this, taskList);
 
 
-    /**
-     * Starts the main process, activating the chatbot.
-     *
-     * @param args The default parameter for the main function.
-     */
-    public static void main(String[] args) {
-        Storage.start();
+        storage.start();
 
         Scanner scan = new Scanner(System.in);
 
@@ -56,13 +58,13 @@ public class Duke {
 
             //cases for specified keywords
             if (firstString.equals("list")) {
-                if (listIndex == 0) {
+                if (taskList.getTaskNumber() == 0) {
                     System.out.println("There are currently no tasks! Stop being so lazy and start adding your tasks!");
                     continue;
                 }
-                for (int i = 0; i < listIndex; i++) {
+                for (int i = 0; i < taskList.getTaskNumber(); i++) {
                     int listNumber = i + 1;
-                    System.out.println(listNumber + ". " + taskArray.get(i).toString());
+                    System.out.println(listNumber + ". " + taskList.getTask(i).toString());
                 }
                 continue;
             }
@@ -74,26 +76,26 @@ public class Duke {
                     continue;
                 }
                 try {
+
                     int index = Integer.parseInt(inputArray[1]);
                     int arrayIndex = index - 1;
                     //case if entered index does not correspond to a task
-                    if (index > listIndex || index < 1) {
+                    if (index > taskList.getTaskNumber() || index < 1) {
                         System.out.println("That task does not exist! Don't try to trick me!");
                         continue;
                     }
-                    Task currentTask = taskArray.get(arrayIndex);
+                    Task currentTask = taskList.getTask(arrayIndex);
                     if (firstString.equals("done")) {
                         //case to complete a task
                         currentTask.setCompleted();
                         System.out.println("Ok, very nice. I have set the following task as completed.\n" + currentTask.toString());
                     } else {
                         //remaining case is to delete the task.
-                        taskArray.remove(currentTask);
-                        listIndex -= 1;
+                        taskList.deleteTask(currentTask);
                         System.out.println("Ok, very nice. I have deleted the following task.\n" + currentTask.toString());
                     }
-                    System.out.println("Now you have " + listIndex + " tasks remaining. Get to work!");
-                    Storage.saveData();
+                    System.out.println("Now you have " + taskList.getTaskNumber() + " tasks remaining. Get to work!");
+                    storage.saveData(this);
 
                 } catch (NumberFormatException exception) {
                     System.out.println("Enter a valid number! Or do you not know basic math?");
@@ -104,17 +106,17 @@ public class Duke {
 
             //cases for the 3 task types
             if (firstString.equals("todo")) {
-                createTask(Tasks.TODO, inputArray);
+                createTask(Tasks.TODO, inputArray, storage, taskList);
                 continue;
             }
 
             if (firstString.equals("deadline")) {
-                createTask(Tasks.DEADLINE, inputArray);
+                createTask(Tasks.DEADLINE, inputArray, storage, taskList);
                 continue;
             }
 
             if (firstString.equals("event")) {
-                createTask(Tasks.EVENT, inputArray);
+                createTask(Tasks.EVENT, inputArray, storage, taskList);
                 continue;
             }
 
@@ -128,12 +130,22 @@ public class Duke {
     }
 
     /**
+     * Starts the main process, activating the chatbot.
+     *
+     * @param args The default parameter for the main function.
+     */
+    public static void main(String[] args) {
+        Duke dukeInstance = new Duke();
+        dukeInstance.run();
+    }
+
+    /**
      * Creates a Task as specified by the parameters.
      *
      * @param taskType The type of task to be created.
      * @param array The array of strings used to create the task.
      */
-    private static void createTask(Tasks taskType, String[] array) {
+    private void createTask(Tasks taskType, String[] array, Storage storage, TaskList taskList) {
         //preliminary check if more than 1 string was entered
         if (array.length < 2) {
             //case if no name is entered for the task
@@ -219,14 +231,13 @@ public class Duke {
             }
             break;
         }
+        taskList.addTask(tempTask);
 
-        taskArray.add(tempTask);
-        listIndex += 1;
 
         System.out.println("Ok can, sure. I have added this task as you wanted.");
         System.out.println(tempTask.toString());
-        System.out.println("Now you have only " + listIndex + " tasks in the list. Try being more hardworking!");
-        Storage.saveData();
+        System.out.println("Now you have only " + taskList.getTaskNumber() + " tasks in the list. Try being more hardworking!");
+        storage.saveData(this);
 
     }
 
