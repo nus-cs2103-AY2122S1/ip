@@ -1,7 +1,7 @@
 public class Deadline extends Task{
     protected String by;
-    public Deadline(String name, String by) {
-        super(name);
+    public Deadline(String name, String by, Boolean isDone) {
+        super(name, 'D', isDone);
         this.by = by;
     }
 
@@ -15,7 +15,11 @@ public class Deadline extends Task{
         if (detailD.length == 1) {
             throw new TaskException("When is the deadline?");
         }
-        Deadline newD = new Deadline(detailD[0], detailD[1]);
+        Deadline newD = new Deadline(detailD[0], detailD[1],false);
         return newD;
+    }
+    @Override
+    public String getSavedAs() {
+        return (super.getSavedAs() + "|" + this.by);
     }
 }

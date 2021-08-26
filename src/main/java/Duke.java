@@ -1,10 +1,39 @@
+import java.io.IOException;
 import java.util.Scanner;
-import java.util.ArrayList;
+import java.io.File;
+
 
 public class Duke {
     private static TaskList list = new TaskList();
+    private static String filePath = "data/duke.txt";
 
     public static void main(String[] args) {
+        try {
+            File data = new File(filePath);
+            data.createNewFile();
+            Scanner s = new Scanner(data);
+            while (s.hasNext()) {
+//                System.out.println(s.nextLine());
+                String[] array = s.nextLine().split("\\|");
+                switch (array[0]) {
+                    case "T": {
+                        list.loadTask(new Todo(array[2], Boolean.parseBoolean(array[1])));
+                        break;
+                    }
+                    case "D": {
+                        list.addTask(new Deadline(array[2], array[3], Boolean.parseBoolean(array[1])));
+                        break;
+                    }
+                    case "E": {
+                        list.addTask(new Event(array[2], array[3], Boolean.parseBoolean(array[1])));
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
         Scanner scanner = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -31,14 +60,14 @@ public class Duke {
                         //Marks tasks as done
                         int index = Integer.valueOf(commandSplit[1]) - 1;
                         list.setDone(index);
-                        System.out.println("I've marked this task as done: \n" + list.get(index));
+                        list.saveTask(filePath);
                         break;
 
                     case "delete":
                         //Deletes tasks
                         int indexD = Integer.valueOf(commandSplit[1]) - 1;
-                        Task deleted = list.deleteTask(indexD);
-                        System.out.println("Noted. I have removed this task: \n" + deleted);
+                        list.deleteTask(indexD);
+                        list.saveTask(filePath);
                         break;
 
                     case "todo":
@@ -46,9 +75,9 @@ public class Duke {
                         if (commandSplit.length == 1) {
                             throw new TaskException("The description of a todo cannot be empty");
                         }
-                        Todo newT = new Todo(commandSplit[1]);
+                        Todo newT = new Todo(commandSplit[1], false);
                         list.addTask(newT);
-                        System.out.println("I have added this task: \n" + newT);
+                        list.saveTask(filePath);
                         break;
                     case "deadline":
                         if (commandSplit.length == 1) {
@@ -56,7 +85,7 @@ public class Duke {
                         }
                         Task newD = Deadline.parseCommand(commandSplit[1]);
                         list.addTask(newD);
-                        System.out.println("added: " + newD);
+                        list.saveTask(filePath);
                         break;
                     case "event":
                         if (commandSplit.length == 1) {
@@ -64,7 +93,7 @@ public class Duke {
                         }
                         Task newE = Event.parseCommand(commandSplit[1]);
                         list.addTask(newE);
-                        System.out.println("added: " + newE);
+                        list.saveTask(filePath);
                         break;
 
                     default:
@@ -75,6 +104,8 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             } catch (TaskException e){
+                System.out.println(e.getMessage());
+            } catch (IOException e) {
                 System.out.println(e.getMessage());
             }
             System.out.println("Now you have " + list.getNumTask() + " task" + (list.getNumTask() > 1 ? "s " : " ") + "in the list");
