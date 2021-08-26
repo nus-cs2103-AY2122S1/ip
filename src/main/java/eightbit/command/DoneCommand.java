@@ -5,6 +5,9 @@ import eightbit.util.Storage;
 import eightbit.util.TaskList;
 import eightbit.util.Ui;
 
+/**
+ * Represents a command to mark a task as done.
+ */
 public class DoneCommand extends Command {
 
     private final int index;

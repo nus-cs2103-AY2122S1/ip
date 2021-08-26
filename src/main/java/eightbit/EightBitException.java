@@ -6,6 +6,11 @@ package eightbit;
 public class EightBitException extends Exception {
     private String errorMessage;
 
+    /**
+     * Constructor.
+     *
+     * @param errorMessage Error message to be shown to user.
+     */
     public EightBitException(String errorMessage) {
         this.errorMessage = errorMessage;
     }

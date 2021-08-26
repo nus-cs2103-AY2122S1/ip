@@ -4,6 +4,9 @@ import eightbit.util.Storage;
 import eightbit.util.TaskList;
 import eightbit.util.Ui;
 
+/**
+ * Represents a command to show the list of tasks.
+ */
 public class ListCommand extends Command {
 
     @Override

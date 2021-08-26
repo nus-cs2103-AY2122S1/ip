@@ -14,12 +14,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Responsible for loading/writing data from/to a file.
+ */
 public class Storage {
 
     private String filepath;
 
     private Storage() {}
 
+    /**
+     * Constructor.
+     *
+     * @param filepath Path of the file.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
@@ -40,6 +48,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a file at the given filepath.
+     */
     public void createFile() {
         try {
             File f = new File(filepath);
@@ -50,6 +61,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends text to the end of the file.
+     *
+     * @param text Text to be added.
+     */
     public void appendToFile(String text) {
         try {
             FileWriter fw = new FileWriter(filepath, true);
@@ -60,10 +76,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts the Task to text and appends it to the file.
+     *
+     * @param task Task to be added.
+     */
     public void appendToFile(Task task) {
         appendToFile(parseTaskToFileFormat(task));
     }
 
+    /**
+     * Rewrites the file with the given list of tasks.
+     *
+     * @param taskList List of tasks to be written to the file.
+     */
     public void rewriteFileWithTasks(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(filepath);
@@ -79,6 +105,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a list of Task stored in the file.
+     * Reads the file contents and converts them into a list of Task.
+     *
+     * @return List of Task stored in the file.
+     */
     public List<Task> loadFileContents() {
         try {
             File f = new File(filepath);
