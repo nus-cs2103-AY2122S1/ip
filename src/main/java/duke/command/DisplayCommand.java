@@ -17,7 +17,7 @@ public class DisplayCommand extends Command {
      * @param storage The storage for the tasks.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.displayList();
+        tasks.displayList(ui);
     }
 
     /**

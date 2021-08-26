@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.DukeException;
+import duke.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +44,12 @@ public class TaskList {
     /**
      * Prints this todo list in order.
      */
-    public void displayList() {
-        System.out.println("Your task list:");
+    public void displayList(Ui ui) {
+        ui.showMessage("Your task list:");
         for (int i = 0; i < todoList.size(); i++) {
             Task task = todoList.get(i);
             int num = i + 1;
-            System.out.println(num + "." + task.toString());
+            ui.showMessage((num + "." + task.toString()));
         }
     }
 
