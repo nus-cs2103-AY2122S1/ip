@@ -7,7 +7,7 @@ import kermit.Storage;
 import kermit.tasks.Deadline;
 import kermit.tasks.Event;
 import kermit.tasks.Task;
-import kermit.tasks.ToDos;
+import kermit.tasks.ToDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -35,7 +35,7 @@ public class AddTaskCommand extends Command {
         }
 
         if (taskType.equals("todo")) {
-            this.task = new ToDos(description);
+            this.task = new ToDo(description);
         } else {
             try {
                 LocalDate date = parseDate(flag);

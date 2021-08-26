@@ -53,7 +53,7 @@ public class Storage {
                     // Create task based on line data
                     switch (taskShortForm) {
                     case "T":
-                        task = new ToDos(description, isCompleted);
+                        task = new ToDo(description, isCompleted);
                         taskList.add(task);
                         break;
                     case "D":
