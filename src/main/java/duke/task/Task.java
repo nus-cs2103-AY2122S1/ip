@@ -38,6 +38,12 @@ public abstract class Task {
     public void markAsDone() {
         isDone = true;
     }
+    
+    /** Check if task description contains a string */
+    public boolean contains(String keyword) {
+        // case insensitive
+        return toString().toLowerCase().contains(keyword.toLowerCase());
+    }
 
     /**
      * The string representation of this task with the status icon and description.

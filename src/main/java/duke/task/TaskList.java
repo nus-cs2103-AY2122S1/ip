@@ -121,6 +121,26 @@ public class TaskList {
     }
 
     /**
+     * Finds tasks in the task list that matches a given keyword.
+     * @param keyword The keyword that the user wants to search for.
+     * @return A list of tasks that match the keyword.
+     * @throws DukeException
+     */
+    public ArrayList<Task> findTask(String keyword) throws DukeException {
+        if (keyword == "") {
+            throw new DukeException("Looks like you forgot to enter a keyword.");
+        }
+
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : todoList) {
+            if (task.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+
+    /**
      * Convert this task list into data string format.
      *
      * @return A list of tasks in data string format.
