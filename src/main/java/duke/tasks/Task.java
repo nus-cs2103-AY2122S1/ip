@@ -25,6 +25,16 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * Checks if the task description contains the given keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @return true if the description contains the keyword, false otherwise.
+     */
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     public String formatForSave() {
         return String.format(" | %d | %s", isDone ? 1 : 0, description);
     }

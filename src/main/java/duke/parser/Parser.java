@@ -10,6 +10,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.InvalidCommand;
 import duke.commands.ListCommand;
 import duke.commands.ToDoCommand;
@@ -37,6 +38,8 @@ public class Parser {
             return handleDeadline(tokens);
         case "event":
             return handleEvent(tokens);
+        case "find":
+            return handleFind(tokens);
         default:
             return new InvalidCommand("Unknown command!");
         }
@@ -125,4 +128,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses tokens in the context of a find command.
+     *
+     * @param tokens The tokenized input array.
+     * @return The prepared command.
+     */
+    private Command handleFind(String[] tokens) {
+        if (tokens.length != 2) {
+            return new InvalidCommand("What would you like to find? I can search for exactly 1 keyword.");
+        }
+        return new FindCommand(tokens[1]);
+    }
 }

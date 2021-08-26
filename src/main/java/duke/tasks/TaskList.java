@@ -35,6 +35,16 @@ public class TaskList {
         return list.get(--taskNo).markAsDone();
     }
 
+    /**
+     * Finds all tasks whose descriptions contain the specified keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @return A list of resulting tasks.
+     */
+    public List<Task> find(String keyword) {
+        return list.stream().filter(t -> t.containsKeyword(keyword)).collect(Collectors.toList());
+    }
+
     public List<String> formatData() {
         return list.stream().map(Task::formatForSave).collect(Collectors.toList());
     }
