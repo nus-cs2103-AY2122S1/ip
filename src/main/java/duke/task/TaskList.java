@@ -62,6 +62,27 @@ public class TaskList {
     }
 
     /**
+     * Finds all the tasks that match the key word users take in.
+     *
+     * @param keyword String message that indicates the keyword users want to search.
+     */
+    public void findTasks(String keyword) {
+        int count = 0;
+
+        for (int i = 0; i < tasks.size(); i++) {
+            String Message = tasks.get(i).getTaskInfo();
+            if (Message.contains(keyword)) {
+                count++;
+                System.out.println(count + "." + Message);
+            }
+        }
+
+        if (count == 0) {
+            System.out.println("Sorry. There is no tasks matching the keyword you give me!! :(");
+        }
+    }
+
+    /**
      * Marks a specific task as done.
      *
      * @param index Integer indicates the index for the task
@@ -140,18 +161,18 @@ public class TaskList {
      * It also contains a method AssignTask Type to find the specific type of task to create.
      */
     public enum OperationType {
-        bye, done, delete, tell, list, todo, deadline, event;
+        bye, done, delete, tell, find, list, todo, deadline, event;
 
         public Task assignTaskType(OperationType type, String task, LocalDateTime time) {
             switch (type) {
-            case todo:
-                return new ToDos(false, task);
-            case deadline:
-                return new Deadlines(false, task, time);
-            case event:
-                return new Events(false, task, time);
-            default:
-                return null;
+                case todo:
+                    return new ToDos(false, task);
+                case deadline:
+                    return new Deadlines(false, task, time);
+                case event:
+                    return new Events(false, task, time);
+                default:
+                    return null;
             }
         }
     }

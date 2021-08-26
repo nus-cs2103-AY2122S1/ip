@@ -97,6 +97,13 @@ public class Ui {
     }
 
     /**
+     * Prints the Ui info for the FindTask method in Tasklists.
+     */
+    public void findTasks() {
+        System.out.println("Here are the matching tasks in your list:");
+    }
+
+    /**
      * Returns the line of input from users.
      *
      * @return Line of command input by users.
