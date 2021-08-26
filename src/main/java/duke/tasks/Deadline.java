@@ -33,8 +33,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String formatForSave() {
-        return "D" + super.formatForSave() + " | " + by;
+    public String toSaveFormat() {
+        return "D" + super.toSaveFormat() + " | " + by;
     }
 
     @Override

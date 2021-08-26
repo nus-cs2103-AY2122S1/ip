@@ -45,7 +45,7 @@ public abstract class Task {
      *
      * @return The string representation for file saving purposes.
      */
-    public String formatForSave() {
+    public String toSaveFormat() {
         return String.format(" | %d | %s", isDone ? 1 : 0, description);
     }
 

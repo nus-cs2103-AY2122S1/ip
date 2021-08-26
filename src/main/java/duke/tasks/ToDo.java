@@ -25,8 +25,8 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String formatForSave() {
-        return "T" + super.formatForSave();
+    public String toSaveFormat() {
+        return "T" + super.toSaveFormat();
     }
 
     @Override

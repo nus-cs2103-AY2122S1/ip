@@ -44,7 +44,7 @@ public class TaskListTest {
             list.add(new TaskStub(i));
             data[i-1] = String.format("S | 1 | Stub task %d", i);
         }
-        assertArrayEquals(data, list.formatData().toArray());
+        assertArrayEquals(data, list.toSaveFormat().toArray());
     }
 
     @Test

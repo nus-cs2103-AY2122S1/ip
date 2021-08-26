@@ -11,7 +11,7 @@ public class EventTest {
     @Test
     public void testFormatForSave() {
         Event e = new Event("JUnit test iP", LocalDateTime.of(2021, 8, 26, 22, 30), null);
-        assertEquals("E | 0 | JUnit test iP | 2021-08-26T22:30 | null", e.formatForSave());
+        assertEquals("E | 0 | JUnit test iP | 2021-08-26T22:30 | null", e.toSaveFormat());
     }
 
     @Test
