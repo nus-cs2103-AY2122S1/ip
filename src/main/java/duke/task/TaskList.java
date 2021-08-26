@@ -4,15 +4,15 @@ import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Ui;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import java.util.function.Consumer;
 
 import java.util.stream.Collectors;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class TaskList {
     private final List<Task> tasks;

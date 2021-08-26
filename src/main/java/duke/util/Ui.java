@@ -8,10 +8,10 @@ public class Ui {
     private final static String LINE = "______________________________________________________";
     private final static String LOGO =
             "\t ____        _        \n"
-            + "\t|  _ \\ _   _| | _____ \n"
-            + "\t| | | | | | | |/ / _ \\\n"
-            + "\t| |_| | |_| |   <  __/\n"
-            + "\t|____/ \\__,_|_|\\_\\___|\n";
+                    + "\t|  _ \\ _   _| | _____ \n"
+                    + "\t| | | | | | | |/ / _ \\\n"
+                    + "\t| |_| | |_| |   <  __/\n"
+                    + "\t|____/ \\__,_|_|\\_\\___|\n";
 
     private final Scanner scanner;
 
