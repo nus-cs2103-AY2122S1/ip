@@ -1,9 +1,17 @@
+package duke.storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.data.exception.DukeException;
+import duke.data.tasks.Deadlines;
+import duke.data.tasks.Events;
+import duke.data.tasks.Task;
+import duke.data.tasks.ToDos;
 
 public class Storage {
     private final File filePath;

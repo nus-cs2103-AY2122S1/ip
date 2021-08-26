@@ -1,3 +1,5 @@
+package duke.data.tasks;
+
 public class Events extends Task {
     private final String date;
 

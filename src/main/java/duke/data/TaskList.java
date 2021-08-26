@@ -1,4 +1,9 @@
+package duke.data;
+
 import java.util.ArrayList;
+
+import duke.data.exception.DukeException;
+import duke.data.tasks.Task;
 
 public class TaskList {
     private final ArrayList<Task> lst;
@@ -10,7 +15,7 @@ public class TaskList {
 
     public String addToList(Task t) {
         this.lst.add(t);
-        return String.format("Got it. I've added thsi task:\n    %s\n" +
+        return String.format("Got it. I've added this task:\n    %s\n" +
                 "You now have %d tasks in the list.", t, this.lst.size());
     }
 

@@ -1,7 +1,13 @@
-public class DeleteCommand extends Command {
+package duke.commands;
+
+import duke.data.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
+public class DoneCommand extends Command {
     private final int taskNumber;
 
-    public DeleteCommand(String userInput) {
+    public DoneCommand(String userInput) {
         this.taskNumber = Integer.parseInt(
                 userInput.replaceAll(
                         "[^0-9]",
@@ -10,7 +16,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMsg(tasks.deleteTask(this.taskNumber));
+        ui.printMsg(tasks.markAsDone(this.taskNumber));
         storage.write(tasks.getSaveData());
     }
 }

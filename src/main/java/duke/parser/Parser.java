@@ -1,4 +1,9 @@
+package duke.parser;
+
 import java.util.regex.Pattern;
+
+import duke.commands.*;
+import duke.data.exception.DukeException;
 
 public class Parser {
     private static final Pattern TODOS_FORMAT =

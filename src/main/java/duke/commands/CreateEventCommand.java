@@ -1,3 +1,10 @@
+package duke.commands;
+
+import duke.data.TaskList;
+import duke.data.tasks.Events;
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 public class CreateEventCommand extends Command {
     private final String name;
     private final String date;

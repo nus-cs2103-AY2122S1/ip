@@ -1,3 +1,5 @@
+package duke.data.tasks;
+
 public abstract class Task implements Comparable<Task> {
     private static int count = 0;
     private boolean completed;
