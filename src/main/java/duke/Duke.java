@@ -16,11 +16,11 @@ public class Duke {
 
     public void run() {
         String separator = "    ____________________________________________________________";
-        System.out.println(this.ui.WelcomeMessage());
+        System.out.println(Ui.WelcomeMessage());
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
         while(!Parser.parse(input).equals("bye")) {
-            Storage.save(this.ui.run(this.storage.load(), input), this.filePath);
+            Storage.save(this.ui.run(Storage.load(), input), this.filePath);
             input = in.nextLine();
         }
         System.out.println(separator);

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
 
-    Duke duke = new Duke("C:\\Users\\Rickie\\Documents\\University\\Year 2\\Semester 1\\CS2103T\\week 2\\ip\\Data\\taskList.txt");
+    Duke duke = new Duke("C:\\Users\\Rickie\\Documents\\University\\Year 2\\Semester 1\\CS2103T\\ip\\Data\\taskList.txt");
 
     @Test
     public void parserTest1() {
@@ -17,7 +17,7 @@ public class DukeTest {
 
     @Test
     public void storageTest() {
-        assertEquals(4, new Storage("C:\\Users\\Rickie\\Documents\\University\\Year 2\\Semester 1\\CS2103T\\week 2\\ip\\Data\\taskList.txt").load().size());
+        assertEquals(4, new Storage("C:\\Users\\Rickie\\Documents\\University\\Year 2\\Semester 1\\CS2103T\\ip\\Data\\taskList.txt").load().size());
     }
 
     @Test
