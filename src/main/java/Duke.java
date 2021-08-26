@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
+import java.time.LocalDate;
 
 
 /**
@@ -97,8 +98,10 @@ public class Duke {
             } else {
                 writeToFile(fileName, "");
             }
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+        } catch (IOException e1) {
+            System.out.println("Something went wrong: " + e1.getMessage());
+        } catch (InvalidDateFormat e2) {
+            System.out.println(e2.getMessage());
         }
     }
 

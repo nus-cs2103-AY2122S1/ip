@@ -1,4 +1,2 @@
-T | 0 | hehe | 
-T | 0 | haha | 
-E | 0 | lmao | lmaoaoao
-T | 0 | lmao | 
+E | 0 | idk | 2019-02-23 23:00
+D | 0 | cool | 1999-08-13 17:35

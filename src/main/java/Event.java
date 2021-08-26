@@ -1,15 +1,35 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
 
-    private String startTime;
+    private LocalDate date;
+    private LocalTime time;
 
-    public Event(String description, String date, boolean completed) {
+    DateTimeFormatter dayOutputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    DateTimeFormatter timeOutputFormatter = DateTimeFormatter.ofPattern("ha");
+
+    DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter timeInputFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+    public Event(String description, String deadline, boolean completed) throws InvalidDateFormat {
         super(description, completed);
-        this.startTime = date;
+        String date = deadline.split(" ")[0];
+        String time = deadline.split(" ")[1];
+        try {
+            this.date = LocalDate.parse(date,dayInputFormatter);
+            this.time = LocalTime.parse(time,timeInputFormatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateFormat();
+        }
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), startTime);
+        return String.format("[E]%s (at: %s %s)", super.toString(),
+                date.format(dayOutputFormatter), time.format(timeOutputFormatter));
     }
 
     @Override
@@ -19,6 +39,6 @@ public class Event extends Task {
 
     @Override
     public String getDeadline() {
-        return this.startTime;
+        return this.date.toString() + " " + this.time.toString();
     }
 }
