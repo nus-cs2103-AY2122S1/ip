@@ -20,8 +20,9 @@ public class Duke {
         ui.greeting();
 
         Scanner scanner = new Scanner(System.in);
+        boolean isExit = false;
 
-        while (scanner.hasNextLine()) {
+        while (!isExit && scanner.hasNextLine()) {
             try {
                 String fullCommand = scanner.nextLine().trim();
                 CommandType commandType = Parser.parse(fullCommand);
@@ -32,6 +33,7 @@ public class Duke {
                         break;
                     case BYE:
                         ui.bye();
+                        isExit = true;
                         break;
                     case DELETE:
                         tasks.delete(fullCommand.substring(7), storage, ui);
