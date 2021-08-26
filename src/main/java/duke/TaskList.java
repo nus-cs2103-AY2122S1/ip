@@ -105,4 +105,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns an ArrayList of Task objects matching the given search keyword.
+     * @param str Keyword used for searching.
+     * @return ArrayList of Task objects matching the keyword.
+     */
+    public ArrayList<Task> findTask(String str) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task t: this.taskList) {
+            if (t.getDescription().contains(str)) {
+                matchingTasks.add(t);
+            }
+        }
+        return matchingTasks;
+    }
+
 }

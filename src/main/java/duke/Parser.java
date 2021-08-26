@@ -22,6 +22,8 @@ public class Parser {
             return "delete";
         } else if (str.startsWith("todo") || str.startsWith("event") || str.startsWith("deadline")) {
             return "addTask";
+        } else if (str.startsWith("find")) {
+            return "find";
         } else if (str.equals("\n")){
             return "empty";
         } else {
@@ -111,6 +113,22 @@ public class Parser {
             return taskNumber;
         } catch  (NumberFormatException ex) {
             throw new DukeException("Task must be an integer!");
+        }
+    }
+
+    /**
+     * Returns String use as the keyword for finding matching tasks.
+     *
+     * @param str A command to find matching tasks.
+     * @return The string that is to be used as the keyword.
+     * @throws DukeException If the format of the find command is incorrect.
+     */
+    public String parseFindCommand(String str) throws DukeException {
+        if (str.length() < 6 || str.indexOf(" ") == -1) {
+            //check if str follows the find command format: find_keyword
+            throw new DukeException("Wrong input for finding task.");
+        } else {
+            return str.substring(5);
         }
     }
 
