@@ -56,27 +56,29 @@ public class Duke {
     }
 
     /**
-     * This method copies the contents of the file from filePath into an output file.
+     * This method copies the contents of the file from filePath and
+     * converts them into Task objects into the taskArrayList with the
+     * help of the parse() method.
      *
      * @param filePath the file path to the file from which to copy from
-     * @param target   the target string to which to copy the contents of the file
      * @throws IOException if filePath does not exist
      */
-    private static void copyFileContents(String filePath, String target) throws IOException {
+    private static void copyFileContents(String filePath) throws IOException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        StringBuilder targetBuilder = new StringBuilder(target);
+        StringBuilder targetBuilder = new StringBuilder();
         while (s.hasNext()) {
             targetBuilder.append(s.nextLine()).append("\n");
         }
         System.out.println("after while: \n" + targetBuilder);
         System.out.println("parse result: \n" + parse(targetBuilder.toString()));
         taskArrayList = parse(targetBuilder.toString());
+        System.out.println("tal in copy is: " + taskArrayList);
     }
 
     /**
      * This method parses the string copied from duke.txt and converts them into task objects
-     * into the taskArrayList/
+     * into the taskArrayList.
      *
      * @param toParse the string to parse
      * @return a taskArrayList made up of tasks
@@ -94,7 +96,7 @@ public class Duke {
             int strLength = nLine.length();
             switch (taskType) {
             case 'T':
-                String todoName = nLine.substring(ref + 6, strLength);
+                String todoName = nLine.substring(ref + 5, strLength);
                 Task newestTodo = new ToDo(todoName);
                 if (isDone) {
                     newestTodo.markAsDone();
@@ -102,7 +104,7 @@ public class Duke {
                 result.add(newestTodo);
                 break;
             case 'D':
-                String deadlineInfo = nLine.substring(ref + 6, strLength);
+                String deadlineInfo = nLine.substring(ref + 5, strLength);
                 String[] arrD = deadlineInfo.split("\\(by: ", 2);
                 String deadlineName = arrD[0];
                 String deadlineReminder = arrD[1].substring(0, arrD[1].length() - 1);
@@ -113,7 +115,7 @@ public class Duke {
                 }
                 break;
             case 'E':
-                String eventInfo = nLine.substring(ref + 6, strLength);
+                String eventInfo = nLine.substring(ref + 5, strLength);
                 String[] arrE = eventInfo.split("\\(at: ", 2);
                 String eventName = arrE[0];
                 String eventReminder = arrE[1].substring(0, arrE[1].length() - 1);
@@ -177,9 +179,9 @@ public class Duke {
 
         // parsing duke.txt
         String toParse = "";
-        copyFileContents(dukeFilePath, toParse);
-        taskArrayList = parse(toParse);
-        System.out.println("tal tstr: " + taskArrayList.toString());
+        copyFileContents(dukeFilePath);
+//        taskArrayList = parse(toParse);
+//        System.out.println("tal tstr: " + taskArrayList.toString());
 
         // Welcome message
         String welcome = "Hello! I'm Duke: Level " + lv + "\n"
