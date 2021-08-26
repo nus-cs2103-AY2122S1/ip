@@ -11,6 +11,6 @@ public class InvalidInputException extends DukeException {
      * @param message message describing the exception that will be displayed to users
      */
     public InvalidInputException() {
-        super("☹ OOPS!!! I'm sorry, but I don't know what that means\n*sad quack*");
+        super("☹ OOPS!!! I'm sorry, but I don't know what that means\n*sad quack*\n");
     }
 }

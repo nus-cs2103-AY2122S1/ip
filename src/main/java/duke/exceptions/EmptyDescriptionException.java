@@ -12,7 +12,7 @@ public class EmptyDescriptionException extends DukeException {
      * @param message message describing the exception that will be displayed to users
      */
     public EmptyDescriptionException() {
-        super("☹ OOPS!!! The description of a task cannot be empty.");
+        super("☹ OOPS!!! The description of a task cannot be empty.\n");
     }
 
 }
