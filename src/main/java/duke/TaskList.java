@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TaskList {
     List<Task> tasks;
@@ -141,7 +142,7 @@ public class TaskList {
         List<Task> tempList = new ArrayList<>();
 
         tasks.forEach(task -> {
-            if(task.toString().contains(keyWord)) {
+            if(task.toString().toLowerCase(Locale.ROOT).contains(keyWord.toLowerCase(Locale.ROOT))) {
                 tempList.add(task);
             };
         });
