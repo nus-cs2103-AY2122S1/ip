@@ -36,6 +36,11 @@ public class ToDo extends Task {
         return String.format("[T][%s] %s", this.getStatusIcon(), this.getDescription());
     }
 
+    /**
+     * Returns the string representation of this task that is suitable for storage.
+     *
+     * @return The string representation of the encoded string for storage.
+     */
     @Override
     public String encodeTaskForStorage() {
         int encodedIsDone = this.getIsDone() ? 1 : 0;

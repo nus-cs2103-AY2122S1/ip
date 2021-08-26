@@ -86,7 +86,12 @@ public class TaskList {
             return this.list.remove(index);
         }
     }
-    
+
+    /**
+     * Returns the string that should be printed when asked to print the current task list.
+     * 
+     * @return The string that should be printed when the print command is executed.
+     */
     public String generateMessage() {
         int listSize = this.list.size();
 
@@ -98,7 +103,12 @@ public class TaskList {
         }
         return message.toString();
     }
-    
+
+    /**
+     * Loads the data from storage and update the task list.
+     * 
+     * @param data The string data retrieved from storage.
+     */
     private void loadFromStorage(String data) {
         String[] lines = data.split("\n");
         if (lines[0].equals("")) {
@@ -128,7 +138,12 @@ public class TaskList {
             }
         }
     }
-    
+
+    /**
+     * Returns the string that is suitable for the storage of the entire task list in a txt file.
+     * 
+     * @return The string with each task encoded that is suitable for storage.
+     */
     public String convertToStorageString() {
         int size = list.size();
         StringBuilder finalMessage = new StringBuilder();

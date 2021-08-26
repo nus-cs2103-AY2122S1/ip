@@ -3,7 +3,19 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the parser that could interpret the user input.
+ * 
+ * @author Sherman Ng Wei Sheng
+ */
 public class Parser {
+
+    /**
+     * 
+     * @param input The input given by user in the console.
+     * @return A command corresponding to the interpreted intention of the user input.
+     * @throws DukeException If an error is encountered.
+     */
     public static Command parse(String input) throws DukeException {
         String[] splitWord = input.split(" ", 2);
         String firstWord = splitWord[0];
