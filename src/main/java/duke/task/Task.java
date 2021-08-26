@@ -40,16 +40,12 @@ public class Task {
      * @param done Integer representation of status.
      */
     public void setDone(int done) {
-        if (done == 1) {
-            isDone = true;
-        } else {
-            isDone = false;
-        }
+        isDone = done == 1;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), this.description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 
     /**
@@ -59,6 +55,6 @@ public class Task {
      * @return String representation of task in file format.
      */
     public String toFileFormat() {
-        return String.format("%d / %s", isDone ? 1 : 0, this.description);
+        return String.format("%d / %s", isDone ? 1 : 0, description);
     }
 }

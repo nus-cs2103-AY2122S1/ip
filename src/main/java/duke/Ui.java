@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static String template = "~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~";
+    private static String TEMPLATE = "~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~ * ~";
     private Scanner sc;
 
     /**
@@ -23,7 +23,7 @@ public class Ui {
      * @param message Message String to be printed.
      */
     public void printMessage(String message) {
-        System.out.println(template + "\n" + message + template);
+        System.out.println(TEMPLATE + "\n" + message + TEMPLATE);
     }
 
     /**

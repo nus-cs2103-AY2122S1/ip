@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+    protected static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
     protected LocalDate by;
 
     /**
@@ -28,7 +28,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(FORMATTER) + ")";
     }
 
     @Override
