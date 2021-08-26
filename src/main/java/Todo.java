@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class Todo extends Task {
 
     public Todo(String description, boolean isDone) {
@@ -14,6 +16,13 @@ public class Todo extends Task {
     public String formatChange() {
         String mark = isDone ? "1" : "0";
         return "T | " + mark + " | " + this.description;
+    }
+
+    @Override
+    public void excute(TaskList task, Ui ui, Storage storage) throws IOException {
+        task.add(this);
+        ui.showAddOnTask(task, (task.size() - 1));
+        storage.writeData(task.getTasks());
     }
 
     @Override
