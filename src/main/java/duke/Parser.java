@@ -1,6 +1,16 @@
 package duke;
 
+/**
+ * Deals with interpreting the user command.
+ */
 public class Parser {
+
+    /**
+     * Returns the type of command user has entered if valid, or throws an exception.
+     * @param command entered by user in the terminal.
+     * @return CommandType that denotes the type of command corresponding to the user input.
+     * @throws DukeException if there is an invalid command or an incomplete command.
+     */
 
     public static CommandType parse(String command) throws DukeException {
 
