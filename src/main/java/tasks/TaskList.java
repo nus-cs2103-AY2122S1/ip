@@ -88,4 +88,24 @@ public class TaskList {
     public int getSize() {
         return tasks.size();
     }
+
+    /**
+     * Returns a list of matching tasks with the input keyword.
+     *
+     * @param str keyword input by user.
+     * @return a list of matching tasks in the current list.
+     */
+    public String findTask(String str) {
+        String[] splitted = str.split(" ", 2);
+        String keyword = splitted[1].trim();
+        int count = 1;
+        String result = "Here are the matching tasks in your list:";
+        for (Task t : tasks) {
+            if (t.getTask().contains(keyword)) {
+                result += "\n" + count + "." + t.getTask();
+                count += 1;
+            }
+        }
+        return result;
+    }
 }
