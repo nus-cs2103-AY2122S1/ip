@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,7 +23,17 @@ public class Duke {
         System.out.println("\n ------------------------------------------- \n");
     }
 
-    public static void main(String[] args) throws DukeException {
+    private static void appendToFile (String fpath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(fpath, true);
+        fw.write(textToAppend);
+        fw.close();
+    }
+    
+    public static void main(String[] args) throws DukeException, IOException {
+        String fpath = "data/Duke.txt";
+        File f = new File(fpath);
+        f.getParentFile().mkdirs();
+        f.createNewFile();
         
         Scanner sc = new Scanner(System.in);
         List<Task> taskList = new ArrayList<>();
@@ -71,6 +84,12 @@ public class Duke {
                     taskList.add(addTodo);
                     printMessage("Ok! I have added this task to your list:", "[T][ ] " + splitStr[1],
                             "Now you have a total of " + taskList.size() + " task(s)!");
+                    try {
+                        appendToFile(fpath, addTodo + System.lineSeparator());
+                    }
+                    catch (IOException e){
+                        System.out.print("Something went wrong: " + e.getMessage());
+                    }
                 }
                 break;
             case DEADLINE:
@@ -85,6 +104,12 @@ public class Duke {
                     taskList.add(addDeadline);
                     printMessage("Oh no! A new deadline?! It's okay, you got this!", addDeadline.toString(),
                             "Now you have a total of " + taskList.size() + " task(s)!");
+                    try {
+                        appendToFile(fpath, addDeadline + System.lineSeparator());
+                    }
+                    catch (IOException e){
+                        System.out.print("Something went wrong: " + e.getMessage());
+                    }
                 }
                 break;
             case EVENT:
@@ -99,6 +124,12 @@ public class Duke {
                     taskList.add(addEvent);
                     printMessage("Ok! I have added this event to your list:", addEvent.toString(),
                             "Now you have a total of " + taskList.size() + " task(s)!");
+                    try {
+                        appendToFile(fpath, addEvent + System.lineSeparator());
+                    }
+                    catch (IOException e){
+                        System.out.print("Something went wrong: " + e.getMessage());
+                    }
                 }
                 break;
             case INVALID:
