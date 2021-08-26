@@ -12,6 +12,6 @@ public class Event extends Task{
 
     public String displayTask() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h.mma");
-        return "[E]" + super.displayTask() + " (at: " + duration.format(formatter) + ")";
+        return "E " + super.displayTask() + "| " + duration.format(formatter);
     }
 }

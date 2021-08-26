@@ -3,12 +3,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class DataManager {
+public class Storage {
+    private final String dukeData;
 
-    private final File dukeData;
-
-    public DataManager(File dukeData) {
+    public Storage(String dukeData) {
         this.dukeData = dukeData;
+    }
+
+    public ArrayList<Task> load() throws IOException {
+        File tempFile = new File("data/dukeData.txt");
+        if (tempFile.exists()) {
+            return txtToArrayList();
+        } else {
+            tempFile.createNewFile();
+            return new ArrayList<>();
+        }
     }
 
     public ArrayList<Task> txtToArrayList() throws IOException {
@@ -26,7 +35,7 @@ public class DataManager {
                 String temp = line.substring(5);
                 String task = line.substring(5, temp.indexOf("|") + 5);
                 String due = temp.substring(temp.indexOf("|") + 2);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h.mma");
                 LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
                 Task newTask = new Deadline(task, parsedDate, status.equals("1"));
                 list.add(newTask);
@@ -35,7 +44,7 @@ public class DataManager {
                 String temp = line.substring(5);
                 String task = line.substring(5, line.substring(5).indexOf("|") + 5);
                 String due = temp.substring(temp.indexOf("|") + 2);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h.mma");
                 LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
                 Task newTask = new Event(task, parsedDate, status.equals("1"));
                 list.add(newTask);

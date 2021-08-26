@@ -7,6 +7,10 @@ public class Task {
         this.status = status;
     }
 
+    public String getTaskName() {
+        return taskName;
+    }
+
     public String displayTask() {
         String display;
         if (status) {

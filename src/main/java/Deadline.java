@@ -12,6 +12,6 @@ public class Deadline extends Task{
 
     public String displayTask() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy h.mma");
-        return "[D]" + super.displayTask() + " (by: " + due.format(formatter) + ")";
+        return "D " + super.displayTask() + "| " + due.format(formatter);
     }
 }
