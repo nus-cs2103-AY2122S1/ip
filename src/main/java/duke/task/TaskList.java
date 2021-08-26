@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represent a task list object that performs operations on tasks.
+ */
 public class TaskList {
     private final String MESSAGE_DONE = "Nice! (ᵔ.ᵔ) Task done:";
     private final String MESSAGE_LIST = "Here's your tasks!";

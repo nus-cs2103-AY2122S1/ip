@@ -39,7 +39,7 @@ public class TaskTest {
         testTask.toggleDone();
         assertTrue(testTask.isDone());
         testTask.toggleDone();
-        assertFalse(testTask.isDone());
+        assertTrue(testTask.isDone());
     }
 
     /**

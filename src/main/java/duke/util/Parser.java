@@ -5,6 +5,9 @@ import duke.exception.UnknownCommandException;
 import duke.task.TaskList;
 import java.io.IOException;
 
+/**
+ * Represents a parser object that interprets commands.
+ */
 public class Parser {
     /**
      * Matches user input commands. 

@@ -1,11 +1,15 @@
 package duke.task;
 
+/**
+ * A {@code Task} class that creates a task with a task name
+ * and {@code boolean isDone} status.
+ */
 public class Task {
     private final String taskName;
     private boolean isDone;
 
     /**
-     * Initialise task constructor.
+     * Initialises the {@code Task} instance with its task name.
      *
      * @param taskName Description of task.
      */
@@ -15,14 +19,14 @@ public class Task {
     }
 
     /**
-     * Marks task as done.
+     * Toggles completion status of task.
      */
     public void toggleDone() {
-        this.isDone = !this.isDone;
+        this.isDone = true;
     }
 
     /**
-     * Returns a description of the task.
+     * Returns a {@code string} description of the task.
      * @return task name.
      */
     public String getTaskName() {

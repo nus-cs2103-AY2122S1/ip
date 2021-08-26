@@ -8,6 +8,10 @@ import duke.util.Ui;
 
 import java.io.IOException;
 
+/**
+ * The {@code Duke} class is the entry point of duke.
+ * To begin the program, it calls run() on an instance of this class.
+ */
 public class Duke {
     private final TaskList tasks;
     private final String pathName = "./data/duke.txt";
@@ -28,7 +32,7 @@ public class Duke {
     }
 
     /**
-     * Run duke
+     * Run main body of a {@code Duke} object.
      */
     public void run() {
         String input;
