@@ -1,13 +1,14 @@
 package duke.task;
 
-import duke.date.Date;
-import duke.exception.BadInputFormatException;
-import duke.exception.InvalidDateException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import duke.date.Date;
+import duke.exception.BadInputFormatException;
+import duke.exception.InvalidDateException;
 
 public class DeadlineTest {
     @Test
@@ -24,7 +25,7 @@ public class DeadlineTest {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testJSONConversion() throws BadInputFormatException, InvalidDateException {
+    public void testJsonConversion() throws BadInputFormatException, InvalidDateException {
         JSONObject object = new JSONObject();
         object.put("type", "deadline");
         object.put("isDone", false);
