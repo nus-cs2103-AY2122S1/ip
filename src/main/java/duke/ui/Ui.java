@@ -23,6 +23,11 @@ public class Ui {
             + INDENTATION + "|____/ \\__,_|_|\\_\\___|\n"
             + INDENTATION + "What can I do for you?";
 
+    /**
+     * Prints the argument with indentation and horizontal lines.
+     *
+     * @param msg The message to be printed on screen in between horizontal lines and with indentation.
+     */
     public static void printMessageWithFormat(String msg){
         System.out.println(INDENTATION + HORIZONTAL_LINE);
         System.out.println(INDENTATION + msg);

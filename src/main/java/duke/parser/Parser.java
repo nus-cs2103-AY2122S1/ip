@@ -20,16 +20,34 @@ public class Parser {
     private Storage storage;
     private Ui ui;
 
+    /** The list of commands that the parser can handle. */
     private enum Command {
         EXIT, LIST, DONE, TODO, DEADLINE, EVENT, UNKNOWN, DELETE
     }
 
+    /**
+     * Creates a Parser that handles user input and turn it into respective
+     * commands and execute the required functions that user demands.
+     *
+     * @param list The TaskList handler that is handling the list of task.
+     * @param storage The Storage handler that is in-charged of saving and loading files on local directory.
+     * @param ui The Ui handler that handles printing of output, if required.
+     */
     public Parser(TaskList list, Storage storage, Ui ui){
         this.list = list;
         this.storage = storage;
         this.ui = ui;
     }
 
+    /**
+     * Processes the user inputs into commands that duke can understand.
+     *
+     *
+     * @param cmd The user inputs in the form of String.
+     * @return Returns false if the command processed is to exit duke, else true.
+     * @throws DukeException If some error occurred in the processing of user input,
+     *                       like the user requires some function that duke does not support.
+     */
     public boolean process(String cmd) throws DukeException {
         switch (stringToCommand(cmd)){
         case EXIT:
@@ -93,6 +111,13 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Returns the respective Command that user want duke to do.
+     * Anything not in the list of commands will be treated as UNKNOWN.
+     *
+     * @param str User's ionput on what they want duke to do.
+     * @return The respective command to call the methods.
+     */
     private Command stringToCommand(String str){
         String cmdType = str.split(" ")[0];
         switch (cmdType){
@@ -122,6 +147,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Adds task to the task list and
+     * prints a message after adding,
+     * and update the local data file.
+     *
+     * @param task The task to be added.
+     */
     private void addTask(Task task){
         list.add(task);
         ui.addTaskMsg(list.size(), task);
