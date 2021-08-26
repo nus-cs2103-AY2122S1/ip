@@ -23,6 +23,7 @@ public class Ui {
                 + "How mayw Iw hewlp youw, Mastwer? Pwease type 'help' for a list of commandws uwu\n");
 
         Scanner in = new Scanner(System.in);
+        Parser parser = new Parser();
 
         System.out.println(linebreakend);
 
@@ -35,7 +36,8 @@ public class Ui {
             String[] strparse = str.split(" ");
             // splits input to parse for keywords.
 
-            if (strparse[0].equalsIgnoreCase("bye")) {
+            switch (parser.parseCommand(strparse[0])) {
+            case "bye":
                 // breaks loop, closes chatbot.
                 try {
                     if (strparse.length > 1) {
@@ -47,7 +49,8 @@ public class Ui {
                     System.out.println(e.getMessage());
                     System.out.println(linebreakend);
                 }
-            } else if (strparse[0].equalsIgnoreCase("help")) {
+                break;
+            case "help":
                 // lists command list
                 try {
                     if (strparse.length > 1) {
@@ -64,7 +67,8 @@ public class Ui {
                 }
 
 
-            } else if (strparse[0].equalsIgnoreCase("list")) {
+                break;
+            case "list":
                 // lists history of current tasks.
                 try {
                     if (strparse.length > 1) {
@@ -84,7 +88,8 @@ public class Ui {
                     System.out.println(e.getMessage());
                     System.out.println(linebreakend);
                 }
-            } else if (strparse[0].equalsIgnoreCase("todo")) {
+                break;
+            case "todo":
                 // adds a todo task to the list.
                 try {
                     tasklist.addTodo(strparse);
@@ -102,7 +107,8 @@ public class Ui {
                     System.out.println(e.getMessage());
                     System.out.println(linebreakend);
                 }
-            } else if (strparse[0].equalsIgnoreCase("deadline")) {
+                break;
+            case "deadline":
                 // adds a deadline task to the list.
                 try {
                     tasklist.addDeadline(strparse);
@@ -120,7 +126,8 @@ public class Ui {
                     System.out.println(e.getMessage());
                     System.out.println(linebreakend);
                 }
-            } else if (strparse[0].equalsIgnoreCase("event")) {
+                break;
+            case "event":
                 // adds an event to the list. pretty much like deadline.
                 try {
                     tasklist.addEvent(strparse);
@@ -133,12 +140,13 @@ public class Ui {
                             + (tasklist.getTaskCounter())
                             + " taskw(s) inw thew wist! uwu\n");
                     System.out.println(linebreakend);
-                } catch (DukeException e){
+                } catch (DukeException e) {
                     System.out.println(linebreakstart);
                     System.out.println(e.getMessage());
                     System.out.println(linebreakend);
                 }
-            } else if (strparse[0].equalsIgnoreCase("done")) {
+                break;
+            case "done":
                 // marks a task as done.
                 try {
                     int i = tasklist.markDone(strparse);
@@ -157,7 +165,8 @@ public class Ui {
                     System.out.println(e.getMessage());
                     System.out.println(linebreakend);
                 }
-            } else if (strparse[0].equalsIgnoreCase("delete")) {
+                break;
+            case "delete":
                 // deletes corresponding task on list.
                 try {
                     Task t = tasklist.delete(strparse);
@@ -177,7 +186,8 @@ public class Ui {
                     System.out.println(e.getMessage());
                     System.out.println(linebreakend);
                 }
-            } else {
+                break;
+            default:
                 try {
                     throw new InvalidInputException();
                 } catch (DukeException e) {
@@ -185,7 +195,8 @@ public class Ui {
                     System.out.println(e.getMessage());
                     System.out.println(linebreakend);
                 }
-            }
+                break;
+                }
         }
         System.out.println(linebreakstart
                 + "\nGoodbywe, Mastwer! Seew youw soown!\n\n"
