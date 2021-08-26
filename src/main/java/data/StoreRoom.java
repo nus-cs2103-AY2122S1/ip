@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class StoreRoom {
 	private ArrayList<Task> taskList;
-	private Path dir = Paths.get(System.getProperty("user.dir") + "/src/main/java/output");
+	private Path dir = Paths.get(System.getProperty("user.dir") + "/src/main/java/data");
 
 	public StoreRoom() {
 		this.taskList = new ArrayList<>();
