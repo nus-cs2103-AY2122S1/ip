@@ -14,6 +14,7 @@ public class FindCommand extends Command {
 
     /**
      * FindCommand Constructor
+     *
      * @param string is the string to be searched
      */
     public FindCommand(String string) throws DukeException {
@@ -27,6 +28,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes the Search Command to print the list of task with the given string to the user via the Ui
+     *
      * @param taskList The current list of tasks
      * @param ui       The current Ui
      * @param storage  The current storage class to handle the txt file

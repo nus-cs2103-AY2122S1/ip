@@ -27,6 +27,7 @@ public class Task { //Base Task Class
 
     /**
      * Checks if the task is already completed
+     *
      * @return if the task has been completed
      */
     public boolean isDone() {
@@ -34,7 +35,7 @@ public class Task { //Base Task Class
     }
 
     /**
-     * Returns the task as the txt format and is used by the other subclasses
+     * Returns the string to be written in the txt file
      *
      * @return txt format of the task
      */

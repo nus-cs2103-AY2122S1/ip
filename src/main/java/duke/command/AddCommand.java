@@ -17,14 +17,14 @@ public class AddCommand extends Command {
     /**
      * Constructor for AddCommand
      *
-     * @param eventType The type of task to be made
-     * @param details   The name/date/time of the task
+     * @param taskType Task type
+     * @param details The name/date/time of the task
      * @throws DukeException Throws this if there are anything wrong with the inputs
      */
-    public AddCommand(String eventType, String details) throws DukeException {
+    public AddCommand(String taskType, String details) throws DukeException {
         super(true);
         String[] split;
-        switch (eventType) {
+        switch (taskType) {
         case "todo":
             this.inputTask = new Todo(details);
             break;
@@ -57,7 +57,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Execute the AddCommand to update the list, update the txt, and print the returns to the user
+     * Executes the AddCommand to update the list, update the txt, and print the returns to the user
      *
      * @param taskList The current list of tasks
      * @param ui       The current Ui

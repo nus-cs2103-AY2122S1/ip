@@ -30,7 +30,7 @@ public class Command {
     }
 
     /**
-     * Base command for execute
+     * Executes the command
      *
      * @param taskList The current list of tasks
      * @param ui       The current Ui

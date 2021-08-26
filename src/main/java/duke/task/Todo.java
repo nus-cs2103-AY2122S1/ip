@@ -15,7 +15,7 @@ public class Todo extends Task {
     }
 
     /**
-     * To return the String for the txt file
+     * Returns the string to be written in the txt file
      */
     @Override
     public String write() {

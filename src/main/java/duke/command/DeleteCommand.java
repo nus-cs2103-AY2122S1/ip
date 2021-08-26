@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Execute the DeleteCommand to delete the task from the list,
+     * Executes the DeleteCommand to delete the task from the list,
      * update the respective list and txt file
      *
      * @param taskList The current list of tasks

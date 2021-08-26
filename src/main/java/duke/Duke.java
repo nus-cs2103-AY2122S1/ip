@@ -14,9 +14,9 @@ import java.time.format.DateTimeParseException;
  * Main Class to run the Duke ChatBot
  */
 public class Duke {
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
+    private final Storage storage;
+    private TaskList taskLists;
+    private final Ui ui;
 
     /**
      * Constructor for the duke class
@@ -26,10 +26,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            this.taskList = new TaskList(storage.load());
+            this.taskLists = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
             Ui.showLoadingError(); //Inform user that the existing file is of the wrong format
-            this.taskList = new TaskList(); //Creates a new empty list
+            this.taskLists = new TaskList(); //Creates a new empty list
         }
     }
 
@@ -44,7 +44,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line after each line
                 Command c = Parser.parse(fullCommand); //Converts the input to the proper commands
-                c.execute(taskList, ui, storage); //Run the given command
+                c.execute(taskLists, ui, storage); //Run the given command
                 isRunning = c.isRunning(); //Updates the status of the bot
             } catch (DukeException e) {
                 System.out.println(e.getMessage());

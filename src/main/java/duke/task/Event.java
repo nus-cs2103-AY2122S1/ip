@@ -18,7 +18,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the txt format of the task
+     * Returns the string to be written in the txt file
      *
      * @return txt format of the task
      */

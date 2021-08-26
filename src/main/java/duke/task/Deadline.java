@@ -18,7 +18,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * To return the String for the txt file
+     * Returns the string to be written in the txt file
      */
     @Override
     public String write() {
@@ -26,7 +26,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * To return the task for the list format
+     * Returns the task for the list format
      */
     @Override
     public String toString() {
