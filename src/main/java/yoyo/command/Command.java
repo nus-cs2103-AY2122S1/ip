@@ -32,6 +32,14 @@ public abstract class Command {
         return true;
     }
 
+    /**
+     * Executes actions depending on command type.
+     *
+     * @param tasks Tasks currently in the Yoyo program.
+     * @param storage Storage instance of the Yoyo program.
+     * @param ui Ui instance of Yoyo program.
+     * @throws YoyoException
+     */
     public abstract void execute(TaskList tasks, Storage storage, Ui ui)
             throws YoyoException;
 

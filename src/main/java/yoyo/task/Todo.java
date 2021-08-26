@@ -1,7 +1,7 @@
 package yoyo.task;
 
 /**
- * A subclass of duke.task.Task of todo type.
+ * A subclass of Task of todo type.
  */
 public class Todo extends Task {
     public Todo(String name) {
@@ -12,11 +12,21 @@ public class Todo extends Task {
         super(name, isDone);
     }
 
+    /**
+     * Returns a status string indicating type of task.
+     *
+     * @return An indicator string for the type of task.
+     */
     @Override
     public String printType() {
         return "[T]";
     }
 
+    /**
+     * Produces a string containing task's status.
+     *
+     * @return a string containing task's status.
+     */
     @Override
     public String showStatus() {
         return super.showStatus();
