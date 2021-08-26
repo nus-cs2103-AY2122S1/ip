@@ -11,10 +11,12 @@ public class Deadline extends DateDependentTask {
         super(description, by, isCompleted);
     }
 
+    @Override
     public String getShortForm() {
         return "D";
     }
 
+    @Override
     public String getFormattedDateString() {
         return super.getFormattedDateString();
     }
