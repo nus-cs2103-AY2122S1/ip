@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList taskList, Storage storage) {
         taskList.markAsDone(indexOfCompleted);
-        storage.addTasksToFile(taskList);
+        storage.saveTasksToFile(taskList);
     }
 
     @Override

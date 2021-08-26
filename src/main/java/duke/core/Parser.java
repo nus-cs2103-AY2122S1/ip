@@ -14,7 +14,10 @@ import duke.helpful_functions.HelpfulFunctions;
 public class Parser {
     public static Command parse(String input, TaskList taskList) {
         try {
+            // Check if the input is in a valid format, and throw a DukeException if it is not
             checkValiditiy(input, taskList);
+
+            // Return a Command based on the input type (determined by first word of input)
             String[] splittedInput = input.split(" ");
             switch (splittedInput[0]) {
             case "list":
@@ -47,6 +50,7 @@ public class Parser {
         if (input.length() == 0) {
             throw new DukeException("☹ OOPS!!! The input cannot be empty.");
         }
+
         switch (splittedInput[0]) {
         case "todo":
             checkValidityTodo(input);

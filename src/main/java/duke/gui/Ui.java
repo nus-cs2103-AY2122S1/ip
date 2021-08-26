@@ -5,10 +5,6 @@ import java.util.Scanner;
 public class Ui {
     private static Scanner sc = new Scanner(System.in);
 
-//    public Ui() {
-//        sc = new Scanner(System.in);
-//    }
-
     public static void greet() {
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         Ui.displayLine();

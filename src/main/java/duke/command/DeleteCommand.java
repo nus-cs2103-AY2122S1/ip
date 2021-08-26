@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, Storage storage) {
         taskList.delete(indexToDelete);
-        storage.addTasksToFile(taskList);
+        storage.saveTasksToFile(taskList);
     }
 
     @Override
@@ -21,23 +21,3 @@ public class DeleteCommand extends Command {
         return false;
     }
 }
-/*
-public class DoneCommand extends Command {
-    private int indexOfCompleted;
-
-    public DoneCommand(int indexOfCompleted) {
-        this.indexOfCompleted = indexOfCompleted;
-    }
-
-    @Override
-    public void execute(TaskList taskList) {
-        taskList.markAsDone(indexOfCompleted);
-    }
-
-    @Override
-    public boolean shouldExit() {
-        return false;
-    }
-}
-
- */

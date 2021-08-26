@@ -14,7 +14,7 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList taskList, Storage storage) {
         taskList.addTask(deadlineTask);
-        storage.addTasksToFile(taskList);
+        storage.saveTasksToFile(taskList);
     }
 
     @Override
