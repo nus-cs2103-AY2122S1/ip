@@ -1,7 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -13,7 +9,7 @@ public class TaskList {
     /**
      * This is the file name of our file that stores data on TaskList.
      */
-    private static final String TASK_LIST_FILE_NAME = "data/Virushade.txt";
+    private static final Storage TASK_LIST_STORAGE = new Storage("data/Virushade.txt");
 
     /**
      * This variable keeps track of the size of the TaskList.
@@ -21,25 +17,12 @@ public class TaskList {
     private static int listCount = 0;
 
     /**
-     * A function that writes an input string to a file.
+     * A function that writes an input string to TASK_LIST_STORAGE.
      *
-     * @param filePath The name of the file
      * @param text The input string to write into the file.
      */
-    private static void updateFile(String filePath, String text) {
-        try {
-            File f = new File(filePath);
-            if (!f.exists()) {
-                f.getParentFile().mkdirs();
-                f.createNewFile();
-            }
-
-            FileWriter fw = new FileWriter(f);
-            fw.write(text);
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Unable to update file.\n" + e);
-        }
+    private static void updateFile(String text) {
+        TASK_LIST_STORAGE.update(text);
     }
 
     /**
@@ -120,8 +103,7 @@ public class TaskList {
             listCount++;
             System.out.println("Added: " + addedTask.getTaskDescription());
             System.out.printf("Now you have %d tasks in the list.\n", listCount);
-            updateFile(TASK_LIST_FILE_NAME, generateList());
-
+            updateFile(generateList());
         } else {
             System.out.println("Sorry, Virushade cannot keep track of more than 100 tasks!!!");
         }
@@ -143,7 +125,7 @@ public class TaskList {
                 deletedTask.deleteMessage();
                 listCount--;
                 System.out.printf("You have %d tasks in the list.\n", listCount);
-                updateFile(TASK_LIST_FILE_NAME, generateList());
+                updateFile(generateList());
             } else {
                 System.out.println("Please check that you have entered the correct number!");
             }
@@ -169,7 +151,7 @@ public class TaskList {
             } else if (index <= listCount) {
                 Task doneTask = TASK_ARRAY_LIST.get(index - 1);
                 doneTask.completeTask();
-                updateFile(TASK_LIST_FILE_NAME, generateList());
+                updateFile(generateList());
             } else {
                 System.out.println("Please check that you have entered the correct number!");
             }
