@@ -11,6 +11,10 @@ public class Task {
         this.taskType = taskType;
     }
 
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     public String saveTaskFormat() {
         return String.format("|%s|%s", isDone? 1 : 0, description);
     }

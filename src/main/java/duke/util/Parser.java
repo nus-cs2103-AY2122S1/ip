@@ -7,6 +7,7 @@ import duke.exception.NoDescriptionException;
 import duke.exception.NoTimeException;
 import duke.exception.InvalidTaskDeletionException;
 import duke.exception.InvalidTaskDoneException;
+import duke.task.Task;
 import duke.task.TaskList;
 
 import java.text.ParseException;
@@ -35,6 +36,8 @@ public class Parser {
             return parseDelete(taskList, command);
         case "done":
             return parseDone(taskList, command);
+        case "find":
+            return hasParsedFind(taskList, command);
         default:
             throw new NoCommandException();
         }
@@ -59,6 +62,17 @@ public class Parser {
 
     public static boolean parseList(TaskList taskList) {
         taskList.printTasksInList();
+        return false;
+    }
+
+    public static boolean hasParsedFind(TaskList taskList, String[] details) throws DukeException {
+        if (details.length == 1) {
+            throw new DukeException("Please enter a keyword to find matching tasks...");
+        }
+
+        String keyword = details[1].trim();
+        taskList.findMatchingTasks(keyword);
+
         return false;
     }
 

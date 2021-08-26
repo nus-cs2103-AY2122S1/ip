@@ -32,7 +32,7 @@ public class Ui {
 
     public String showTaskAdded(Task task, int listLength) {
         String output = String.format("added: " + task.toString()
-                + "\nNow you have %s tasks in your list\n" , listLength);
+                + "\nNow you have %s tasks in your list" , listLength);
         System.out.println(output);
         return output;
     }
@@ -51,13 +51,16 @@ public class Ui {
         return output;
     }
 
+    public void showTask(Task task, int listPosition) {
+        System.out.printf("\t%s." + task.toString() + "%n", listPosition);
+    }
+
     public void showBye() {
         System.out.println("Bye! Hope to see you again soon!");
     }
 
-    public String printError(String message) {
+    public void printError(String message) {
         System.out.println(message);
-        return message;
     }
 
 

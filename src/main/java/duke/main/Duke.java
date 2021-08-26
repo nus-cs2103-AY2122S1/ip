@@ -41,7 +41,7 @@ public class Duke {
     }
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Duke("duke.txt").run();
     }
 }

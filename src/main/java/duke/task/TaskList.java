@@ -35,7 +35,18 @@ public class TaskList {
     public void printTasksInList() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("\t%s."+ taskList.get(i).toString() + "%n", i + 1);
+            ui.showTask(taskList.get(i), i + 1);
+        }
+    }
+
+    public void findMatchingTasks(String keyword) {
+        System.out.println("Here are the matching tasks in your list:");
+        int i = 1;
+        for (Task task : taskList) {
+            if (task.hasKeyword(keyword)) {
+                ui.showTask(task, i);
+                i++;
+            }
         }
     }
 
