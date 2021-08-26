@@ -53,6 +53,22 @@ public class TaskList {
         }
     }
 
+    public void findTask(String keyword) {
+        boolean canFindMatch = false;
+        Ui.printLine();
+        for (Task currentTask : tasks) {
+            if (currentTask.toString().substring(7).matches("(.*)" + keyword + "(.*)")) {
+                canFindMatch = true;
+                System.out.println(currentTask);
+            }
+        }
+
+        if (!canFindMatch) {
+            System.out.println("\tSorry!, I couldn't find any tasks with that keyword.");
+        }
+        Ui.printLine();
+    }
+
     public Task getTask(int taskNumber) {
         return tasks.get(taskNumber);
     }
