@@ -74,6 +74,18 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    public String find(String key) {
+        String taskList = "";
+        int count = 1;
+        for (Task t : tasks) {
+            if (t.description.contains(key)) {
+                taskList = taskList + count + "." + t + "\n";
+                count += 1;
+            }
+        }
+        return taskList;
+    }
+
     /**
      * Overrides toString method
      *

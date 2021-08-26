@@ -88,4 +88,9 @@ public class Ui {
     public void showError(String message) {
         System.out.println(message);
     }
+
+    public void showFindTask(String taskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(taskList);
+    }
 }

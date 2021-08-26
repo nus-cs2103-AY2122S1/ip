@@ -70,6 +70,8 @@ public class Duke {
                     String dataDescription = "E , 0 , " + command[1] + " , " + command[2];
                     storage.addData(dataDescription);
                     ui.showAddTask(task, tasks.size());
+                } else if (command[0].equals("find")) {
+                    ui.showFindTask(tasks.find(command[1]));
                 }
 
             } catch (IOException | DukeException e) {

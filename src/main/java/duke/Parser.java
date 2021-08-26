@@ -52,6 +52,11 @@ public class Parser {
             String time = split[1].split("/at ")[1];
             String[] fullCommand = new String[] { "event", description, time };
             return fullCommand;
+        } else if (command.startsWith("find")) {
+            String[] split = command.split("find ");
+            String key = split[1];
+            String[] fullCommand = new String[] { "find", key };
+            return fullCommand;
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
