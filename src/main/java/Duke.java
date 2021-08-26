@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class Duke {
 
-    private static final ArrayList<Task> taskList = new ArrayList<>();
+    private static ArrayList<Task> taskList = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -16,6 +16,8 @@ public class Duke {
             loadTasksFromFile();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+            taskList = new ArrayList<>();
+            // TODO: Create new file when cannot load tasks from current file
         }
 
         String logo = " ____        _        \n"
@@ -57,6 +59,7 @@ public class Duke {
 
                         Task doneTask = taskList.get(done);
                         doneTask.markAsDone();
+                        updateTaskFromFile(done, false);
 
                         System.out.printf("I've marked this task as done:\n" +
                                 "%s\n", doneTask.toString());
@@ -170,7 +173,10 @@ public class Duke {
         String taskType = taskArr[0];
         boolean taskDone = taskArr[1].equals("1");
         String taskDescription = taskArr[2];
-        String taskDate = taskArr[3];
+        String taskDate = "";
+        if (taskArr.length > 3) {
+            taskDate = taskArr[3];
+        }
         Task res = null;
         switch (taskType) {
             case("T"):
@@ -202,6 +208,10 @@ public class Duke {
     }
 
     private static void deleteTaskFromFile(int taskIndex) {
+        updateTaskFromFile(taskIndex, true);
+    }
+
+    private static void updateTaskFromFile(int taskIndex, boolean delete) {
         try {
             StringBuilder newTasks = new StringBuilder();
             File taskFile = new File("./data/tasks.txt");
@@ -210,6 +220,9 @@ public class Duke {
             while (fileReader.hasNextLine()) {
                 if (index != taskIndex) {
                     newTasks.append(fileReader.nextLine()).append("\n");
+                } else if (!delete) {
+                    newTasks.append(taskList.get(taskIndex).toFileData()).append("\n");
+                    fileReader.nextLine();
                 } else {
                     fileReader.nextLine();
                 }

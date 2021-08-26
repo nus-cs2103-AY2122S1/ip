@@ -6,7 +6,7 @@ public class Deadline extends Task {
 
     @Override
     public String toFileData() {
-        return "D," + super.toFileData();
+        return String.format("D,%s,%s", super.toFileData(), super.dateToString());
     }
 
     @Override

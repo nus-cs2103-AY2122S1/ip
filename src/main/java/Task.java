@@ -40,6 +40,10 @@ public class Task {
         return this.date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
     }
 
+    public String dateToString() {
+        return this.date.toString();
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getDoneSymbol(), description);
