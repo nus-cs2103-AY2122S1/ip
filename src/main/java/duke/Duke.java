@@ -12,6 +12,9 @@ import duke.util.Storage;
 
 import java.util.Scanner;
 
+/**
+ * The Duke program. The input loop is abstracted here.
+ */
 public class Duke {
 
     // Messages
@@ -28,6 +31,12 @@ public class Duke {
     private static final String MISSING_DELETE_NUMBER_MESSAGE = "Please input a number after the delete command";
     private static final String MISSING_DONE_NUMBER_MESSAGE = "Please input a number after the done command";
 
+    /**
+     * The input loop. Handles user input, creates tasks and outputs messages accordingly.
+     *
+     * @param taskList The TaskList object to read from and write to
+     * @param storage The Storage object to read from and write to
+     */
     private static void inputLoop(TaskList taskList, Storage storage) {
         Scanner sc = new Scanner(System.in);
         boolean canContinue = true;

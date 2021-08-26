@@ -6,6 +6,9 @@ import duke.util.Parser;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A TaskList which stores Tasks.
+ */
 public class TaskList {
 
     private final List<Task> taskArr;
@@ -17,24 +20,43 @@ public class TaskList {
     private static final String REMOVE_TASK_MESSAGE = "Noted. I've removed this task:\n %s\n" + NUMBER_OF_TASKS_MESSAGE;
     private static final String ERROR_SAVING_MESSAGE = "Error reading taskLst. Symbol not found.";
 
-    // Nouns
+    // Nouns for plural and singular
     private String taskWord() {
         return this.size() <= 1 ? "task" : "tasks";
     }
 
+    /**
+     * Constructor for TaskList
+     */
     public TaskList() {
         this.taskArr = new ArrayList<>();
     }
 
+    /**
+     * The size of the array storing the Tasks.
+     * @return The size of the array storing the Tasks.
+     */
     public int size() {
         return taskArr.size();
     }
 
+    /**
+     * Adds a task to the TaskList
+     * @param task The task to be added
+     * @return Message when task is added
+     */
     public String addTask(Task task) {
         this.taskArr.add(task);
         return String.format(ADD_TASK_MESSAGE, task, this.size(), taskWord());
     }
 
+    /**
+     * Adds a task from the format in taskList.txt
+     *
+     * @param input The format in taskList.txt
+     * @throws ArrayIndexOutOfBoundsException When
+     * @throws DukeException An exception thrown according to the message given
+     */
     public void addSavedTask(String input) throws ArrayIndexOutOfBoundsException, DukeException {
         String[] inputArr = input.split("\\|");
         String symbol = inputArr[0];
@@ -57,6 +79,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task as done according to the index
+     *
+     * @param taskIndex Index of task to be done
+     * @return Returns the String message when the task is done
+     * @throws DukeException An exception thrown according to the message given
+     */
     public String markTaskAsDone(int taskIndex) throws DukeException {
         // Task index starts from 1
         int index = taskIndex - 1;
@@ -69,6 +98,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the task from the tasklist
+     *
+     * @param taskIndex The index to delete
+     * @return Returns the String message when the task is done
+     * @throws DukeException An exception thrown according to the message given
+     */
     public String deleteTask(int taskIndex) throws DukeException {
         // Task index starts from 1
         int index = taskIndex - 1;
@@ -80,6 +116,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Gets all the tasks in the format for taskList.txt
+     *
+     * @return the tasks in the format for taskList.txt
+     */
     public String getSaveFormat() {
         StringBuilder printedList = new StringBuilder();
         for (Task task : taskArr) {
@@ -89,6 +130,11 @@ public class TaskList {
         return printedList.toString().trim();
     }
 
+    /**
+     * Gets all the tasks in the format for the console
+     *
+     * @return the tasks in the format for the console
+     */
     @Override
     public String toString() {
         StringBuilder printedList = new StringBuilder();
