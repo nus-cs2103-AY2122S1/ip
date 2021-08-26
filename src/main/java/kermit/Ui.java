@@ -17,6 +17,9 @@ public class Ui {
     private static final String loadingErrorText = "Could not read this file Nuuuuuuu!";
     private Scanner sc;
 
+    /**
+     * Constructor for Ui.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
@@ -35,14 +38,23 @@ public class Ui {
         System.out.println(formatText(text));
     }
 
+    /**
+     * Pretty format and print welcome message.
+     */
     public void showIntroMessage() {
         formatAndPrintText(introductionText);
     }
 
+    /**
+     * Pretty format and print exit message.
+     */
     public void showGoodbyeMessage() {
         formatAndPrintText(goodbyeText);
     }
 
+    /**
+     * Pretty format and print list items.
+     */
     public void showListItems(TaskList list) {
         formatAndPrintText(listText + "\n" + list);
     }
