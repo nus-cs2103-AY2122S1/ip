@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -109,7 +113,8 @@ public class Duke {
         int delimiter = input.indexOf(" /by ");
         String task = input.substring(9, delimiter);
         String date = input.substring(delimiter + 5);
-        Deadline newDeadline = new Deadline(task, date);
+        LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        Deadline newDeadline = new Deadline(task, parsedDate);
         this.list.add(newDeadline);
         String message =
                 "____________________________________________________________\n" +
@@ -129,7 +134,8 @@ public class Duke {
         int delimiter = input.indexOf(" /at ");
         String task = input.substring(6, delimiter);
         String time = input.substring(delimiter + 5);
-        Event newEvent = new Event(task, time);
+        LocalDateTime parsedTime = LocalDateTime.parse(time, DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        Event newEvent = new Event(task, parsedTime);
         this.list.add(newEvent);
         String message =
                 "____________________________________________________________\n" +
@@ -213,6 +219,13 @@ public class Duke {
             message =
                     "____________________________________________________________\n" +
                     " ☹ OOPS!!! The task number is invalid.\n" +
+                    "____________________________________________________________\n";
+        } else if (e instanceof DateTimeParseException) {
+            message =
+                    "____________________________________________________________\n" +
+                    " ☹ OOPS!!! The date is in the wrong format. Please use the following format\n" +
+                    " For event: dd-MM-yyyy HHmm\n" +
+                    " For deadline: dd-MM-yyyy\n" +
                     "____________________________________________________________\n";
         } else {
             message =
