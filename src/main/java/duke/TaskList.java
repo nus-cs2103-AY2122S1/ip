@@ -3,6 +3,8 @@ package duke;
 import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Creates TaskList objects and handles all task list operations.
@@ -19,9 +21,27 @@ public class TaskList {
         this.taskList = convertToTasks(taskListStrings);
     }
 
-
     public ArrayList<Task> getTaskList() {
         return this.taskList;
+    }
+
+    /** Finds tasks that match user's search term.
+     * @param searchTerm user wants to find all tasks that have descriptions matching user's search term.
+     * @param ui handles interactions with user by printing the appropriate messages.
+     * @throws DukeException if search term is not given alongside the find command in the following format: find searchterm.
+     */
+    public void find(String searchTerm, Ui ui) throws DukeException {
+        if (searchTerm.isEmpty()) {
+            throw new DukeException("Please provide a search term after the find command in the following format: find searchterm");
+        }
+        try {
+            List<Task> matchingTaskList = this.taskList.stream()
+                    .filter(task -> task.toString().contains(searchTerm))
+                    .collect(Collectors.toList());
+            ui.showMatchingTasks(new ArrayList<Task>(matchingTaskList));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("Please provide a search term after the find command in the following format: find searchterm");
+        }
     }
 
     /** Marks a task in the task list done.

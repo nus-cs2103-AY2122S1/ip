@@ -21,12 +21,10 @@ public class Duke {
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
-
-
+    
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
-
 
     /**
      * Continuously waits for input from user and executes the appropriate commands
@@ -51,6 +49,9 @@ public class Duke {
                     ui.printGoodbye();
                     isExit = true;
                     break;
+                case FIND:
+                    tasks.find(fullCommand.substring(5), ui);
+                    break;
                 case DELETE:
                     tasks.delete(fullCommand.substring(7), storage, ui);
                     break;
@@ -74,8 +75,6 @@ public class Duke {
 
         scanner.close();
     }
-
-
 }
 
 

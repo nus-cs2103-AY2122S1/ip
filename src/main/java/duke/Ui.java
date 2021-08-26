@@ -65,6 +65,23 @@ public class Ui {
     }
 
     /**
+     * Prints out all the tasks matching user's search term.
+     * @param matchingTaskList ArrayList of tasks that matches user's search term.
+     */
+    public void showMatchingTasks(ArrayList<Task> matchingTaskList) {
+        if (matchingTaskList.size() == 0) {
+            System.out.println("There are no tasks containing that term in your list!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int num = 1;
+            for (Task task : matchingTaskList) {
+                System.out.printf("%d.%s%n", num, task);
+                num++;
+            }
+        }
+    }
+
+    /**
      * Prints out all the tasks present in the task list.
      * @param taskList ArrayList of tasks user has.
      */
