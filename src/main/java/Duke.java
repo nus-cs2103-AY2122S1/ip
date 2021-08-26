@@ -302,11 +302,6 @@ public class Duke {
 
     public static void main(String[] args) {
 
-        System.out.println("  ---------------------------------------------");
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
-        System.out.println("  ---------------------------------------------");
-
         File taskFile = new File("data/Tasks.txt");
         if (!taskFile.exists()) {
             File dir = new File("data");
