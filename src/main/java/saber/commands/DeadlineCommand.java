@@ -5,6 +5,9 @@ import saber.exceptions.SaberTimeParserException;
 import saber.task.Deadline;
 import saber.ui.DeadlineUI;
 
+/**
+ * A class to encapsulate a Deadline Command
+ */
 public class DeadlineCommand extends SaberCommand {
     private Deadline deadline;
     private boolean isMissingDescription;
@@ -13,7 +16,14 @@ public class DeadlineCommand extends SaberCommand {
 
     private DeadlineUI deadlineUI = new DeadlineUI();
 
-    public DeadlineCommand (String deadlineTask,
+    /**
+     * A constructor for DeadlineCommand
+     * @param deadlineTask the description of the deadline task to be added
+     * @param deadlineTime the time the deadline task should be due by
+     * @param isMissingDescription whether the deadline task description is missing in the command
+     * @param isMissingTime whether the deadline task time is missing in the command
+     */
+    public DeadlineCommand(String deadlineTask,
                             String deadlineTime,
                             boolean isMissingDescription,
                             boolean isMissingTime) {
@@ -26,7 +36,11 @@ public class DeadlineCommand extends SaberCommand {
         this.isMissingTime = isMissingTime;
     }
 
-    public void execute (TaskList taskList) {
+    /**
+     * A function to execute the DeadlineCommand
+     * @param taskList the TaskList to which the newly created deadline task is added to
+     */
+    public void execute(TaskList taskList) {
         if (isMissingDescription) {
             deadlineUI.showMissingDescriptionError();
             return;
@@ -45,6 +59,10 @@ public class DeadlineCommand extends SaberCommand {
         deadlineUI.showSuccess();
     }
 
+    /**
+     * A function to determine whether the current command is a terminating command (a ByeCommand)
+     * @return false
+     */
     public boolean isExit() {
         return false;
     }

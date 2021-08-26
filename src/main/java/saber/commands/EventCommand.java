@@ -5,6 +5,9 @@ import saber.exceptions.SaberTimeParserException;
 import saber.TaskList;
 import saber.ui.EventUI;
 
+/**
+ * A class to encapsulate an EventCommand
+ */
 public class EventCommand extends SaberCommand {
     private Event event;
     private boolean isMissingDescription;
@@ -13,7 +16,14 @@ public class EventCommand extends SaberCommand {
 
     private EventUI eventUI = new EventUI();
 
-    public EventCommand (String eventTask,
+    /**
+     * A constructor for EventCommand
+     * @param eventTask the description of the event to be added
+     * @param eventTime the time of the event
+     * @param isMissingDescription whether the event description is missing in the command
+     * @param isMissingTime whether the event time is missing in the command
+     */
+    public EventCommand(String eventTask,
                             String eventTime,
                             boolean isMissingDescription,
                             boolean isMissingTime) {
@@ -26,7 +36,11 @@ public class EventCommand extends SaberCommand {
         this.isMissingTime = isMissingTime;
     }
 
-    public void execute (TaskList taskList) {
+    /**
+     * A function to execute the EventCommand
+     * @param taskList the TaskList to which the newly created event is added to
+     */
+    public void execute(TaskList taskList) {
         if (isMissingDescription) {
             eventUI.showMissingDescriptionError();
             return;
@@ -45,6 +59,10 @@ public class EventCommand extends SaberCommand {
         eventUI.showSuccess();
     }
 
+    /**
+     * A function to determine whether the current command is a terminating command (a ByeCommand)
+     * @return false
+     */
     public boolean isExit() {
         return false;
     }
