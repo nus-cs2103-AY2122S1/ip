@@ -63,8 +63,11 @@ public class Duke {
                         addEventTask(command, tasksList);
                         saveTasksToFile(dataFile, tasksList);
                         break;
+                    case "print":
+                        printTasksOnDate(command, tasksList);
+                        break;
                     default:
-                        throw new DukeException("Invalid command. Please try again!");
+                        throw new DukeException("INVALID COMMAND. Please try again!");
                     }
                 } catch (DukeException e) {
                     Print.printErrorMessage(e.getMessage());
@@ -83,24 +86,24 @@ public class Duke {
 
             while ((line = br.readLine()) != null) {
                 String[] task = line.trim().split("\\|");
-                String taskType = task[0].trim();
-                boolean isTaskDone = Boolean.parseBoolean(task[1].trim());
-                String taskDescription = task[2].trim();
-                String taskDateTime = "";
+                String type = task[0].trim();
+                boolean isdone = Boolean.parseBoolean(task[1].trim());
+                String description = task[2].trim();
+                String dateTime = "";
 
-                switch (taskType) {
+                switch (type) {
                 case "T":
-                    Task todoTask = readToDoTask(isTaskDone, taskDescription);
+                    Task todoTask = readToDoTask(isdone, description);
                     tasksList.add(todoTask);
                     break;
                 case "D":
-                    taskDateTime = task[3].trim();
-                    Task deadlineTask = readDeadlineTask(isTaskDone, taskDescription, taskDateTime);
+                    dateTime = task[3].trim();
+                    Task deadlineTask = readDeadlineTask(isdone, description, dateTime);
                     tasksList.add(deadlineTask);
                     break;
                 case "E":
-                    taskDateTime = task[3].trim();
-                    Task eventTask = readEventTask(isTaskDone, taskDescription, taskDateTime);
+                    dateTime = task[3].trim();
+                    Task eventTask = readEventTask(isdone, description, dateTime);
                     tasksList.add(eventTask);
                     break;
                 }
@@ -140,7 +143,7 @@ public class Duke {
                 if (type == TaskType.TODO) {
                     dateTime = "";
                 } else {
-                    dateTime = ((TaskWithDateTime) task).getDateTime();
+                    dateTime = ((TaskWithDateTime) task).getDateTimeInput();
                 }
 
                 taskDetails = taskDetailsSaveFormat(type, isDone, description, dateTime);
@@ -166,7 +169,7 @@ public class Duke {
             String response = ResponseMessage.tasksInYourListMessage(tasksList);
             Print.printResponse(response);
         } else {
-            throw new DukeException("There are no tasks in your list.");
+            throw new DukeException("There are no tasks in your list!");
         }
     }
 
@@ -184,13 +187,13 @@ public class Duke {
                     String response = ResponseMessage.taskDoneMessage(taskDone);
                     Print.printResponse(response);
                 } else {
-                    throw new DukeException("Please enter a valid task number to be marked as done.");
+                    throw new DukeException("Please enter a valid task number to be marked as done!");
                 }
             } catch (NumberFormatException e) {
-                throw new DukeException("Please enter a valid task number to be marked as done.");
+                throw new DukeException("Please enter a valid task number to be marked as done!");
             }
         } else {
-            throw new DukeException("Please enter a task number to be marked as done.");
+            throw new DukeException("Please enter a task number to be marked as done!");
         }
     }
 
@@ -209,13 +212,13 @@ public class Duke {
                             + System.lineSeparator() + ResponseMessage.numOfTasksInList(tasksList);
                     Print.printResponse(response);
                 } else {
-                    throw new DukeException("Please enter a valid task number to be deleted.");
+                    throw new DukeException("Please enter a valid task number to be deleted!");
                 }
             } catch (NumberFormatException e) {
-                throw new DukeException("Please enter a valid task number to be deleted.");
+                throw new DukeException("Please enter a valid task number to be deleted!");
             }
         } else {
-            throw new DukeException("Please enter a task number to be deleted.");
+            throw new DukeException("Please enter a task number to be deleted!");
         }
     }
 
@@ -230,7 +233,7 @@ public class Duke {
                     + System.lineSeparator() + ResponseMessage.numOfTasksInList(tasksList);
             Print.printResponse(response);
         } else {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new DukeException("The description of a todo cannot be empty!");
         }
     }
 
@@ -256,14 +259,16 @@ public class Duke {
                                     + System.lineSeparator() + ResponseMessage.numOfTasksInList(tasksList);
                             Print.printResponse(response);
                         } else {
-                            throw new DukeException("The date/time of a deadline cannot be empty."
+                            throw new DukeException("INCOMPLETE COMMAND"
+                                    + System.lineSeparator() + "\t"
+                                    + "The date/time of a deadline cannot be empty!"
                                     + System.lineSeparator() + "\t"
                                     + "[Note: Enter /by before specifying the date/time]");
                         }
                     } else {
-                        throw new DukeException("The date/time of a deadline is not valid."
+                        throw new DukeException("WRONG COMMAND"
                                 + System.lineSeparator() + "\t"
-                                + "[Note: Enter /by before specifying the date/time]");
+                                + "Enter /by before specifying the date!");
                     }
                 } else {
                     if (deadlineTaskDetails[1].trim().startsWith("by")) {
@@ -271,29 +276,39 @@ public class Duke {
                         String[] beforeDateTimeParts = beforeDateTime.split("\\s+", 2);
 
                         if (beforeDateTimeParts.length == 2) {
-                            throw new DukeException("The description of a deadline cannot be empty.");
-                        } else {
-                            throw new DukeException("The description of a deadline cannot be empty."
+                            throw new DukeException("INCOMPLETE COMMAND"
                                     + System.lineSeparator() + "\t"
-                                    + "☹ The date/time of a deadline cannot be empty."
+                                    + "The description of a deadline cannot be empty!");
+                        } else {
+                            throw new DukeException("INCOMPLETE COMMAND"
+                                    + System.lineSeparator() + "\t"
+                                    + "The description of a deadline cannot be empty!"
+                                    + System.lineSeparator() + "\t"
+                                    + "The date/time of a deadline cannot be empty!"
                                     + System.lineSeparator() + "\t"
                                     + "[Note: Enter /by before specifying the date/time]");
                         }
                     } else {
-                        throw new DukeException("The description of a deadline cannot be empty."
+                        throw new DukeException("INCOMPLETE & WRONG COMMAND"
                                 + System.lineSeparator() + "\t"
-                                + "☹ The date/time of a deadline is not valid."
+                                + "The description of a deadline cannot be empty!"
                                 + System.lineSeparator() + "\t"
-                                + "[Note: Enter /by before specifying the date/time]");
+                                + "Enter /by before specifying the date/time!");
                     }
                 }
             } else {
-                throw new DukeException("The date/time of a deadline cannot be empty."
+                throw new DukeException("INCOMPLETE COMMAND"
+                        + System.lineSeparator() + "\t"
+                        + "The date/time of a deadline cannot be empty!"
                         + System.lineSeparator() + "\t"
                         + "[Note: Enter /by before specifying the date/time]");
             }
         } else {
-            throw new DukeException("The description and date/time of a deadline cannot be empty.");
+            throw new DukeException("INCOMPLETE COMMAND"
+                    + System.lineSeparator() + "\t"
+                    + "The description and date/time of a deadline cannot be empty!"
+                    + System.lineSeparator() + "\t"
+                    + "[Note: Enter /by before specifying the date/time]");
         }
     }
 
@@ -319,14 +334,16 @@ public class Duke {
                                     + System.lineSeparator() + ResponseMessage.numOfTasksInList(tasksList);
                             Print.printResponse(response);
                         } else {
-                            throw new DukeException("The date/time of an event cannot be empty."
+                            throw new DukeException("INCOMPLETE COMMAND"
                                     + System.lineSeparator() + "\t"
-                                    + "[Note: Enter /at before specifying the date/time.]");
+                                    + "The date/time of an event cannot be empty!"
+                                    + System.lineSeparator() + "\t"
+                                    + "[Note: Enter /at before specifying the date/time]");
                         }
                     } else {
-                        throw new DukeException("The date/time of an event is not valid."
+                        throw new DukeException("WRONG COMMAND"
                                 + System.lineSeparator() + "\t"
-                                + "[Note: Enter /at before specifying the date/time]");
+                                + "Enter /at before specifying the date!");
                     }
                 } else {
                     if (eventTaskDetails[1].trim().startsWith("at")) {
@@ -334,29 +351,72 @@ public class Duke {
                         String[] startEndDateTimeParts = startEndDateTime.split("\\s+", 2);
 
                         if (startEndDateTimeParts.length == 2) {
-                            throw new DukeException("The description of an event cannot be empty.");
-                        } else {
-                            throw new DukeException("The description of an event cannot be empty."
+                            throw new DukeException("INCOMPLETE COMMAND"
                                     + System.lineSeparator() + "\t"
-                                    + "☹ The date/time of an event cannot be empty."
+                                    + "The description of an event cannot be empty!");
+                        } else {
+                            throw new DukeException("INCOMPLETE COMMAND"
+                                    + System.lineSeparator() + "\t"
+                                    + "The description of an event cannot be empty!"
+                                    + System.lineSeparator() + "\t"
+                                    + "The date/time of an event cannot be empty!"
                                     + System.lineSeparator() + "\t"
                                     + "[Note: Enter /at before specifying the date/time]");
                         }
                     } else {
-                        throw new DukeException("The description of an event cannot be empty."
+                        throw new DukeException("INCOMPLETE & WRONG COMMAND"
                                 + System.lineSeparator() + "\t"
-                                + "☹ The date/time of an event is not valid."
+                                + "The description of an event cannot be empty!"
                                 + System.lineSeparator() + "\t"
-                                + "[Note: Enter /at before specifying the date/time]");
+                                + "Enter /at before specifying the date/time!");
                     }
                 }
             } else {
-                throw new DukeException("The date/time of an event cannot be empty."
+                throw new DukeException("INCOMPLETE COMMAND"
+                        + System.lineSeparator() + "\t"
+                        + "The date/time of an event cannot be empty!"
                         + System.lineSeparator() + "\t"
                         + "[Note: Enter /at before specifying the date/time]");
             }
         } else {
-            throw new DukeException("The description and date/time of an event cannot be empty.");
+            throw new DukeException("INCOMPLETE COMMAND"
+                    + System.lineSeparator() + "\t"
+                    + "The description and date/time of an event cannot be empty!"
+                    + System.lineSeparator() + "\t"
+                    + "[Note: Enter /at before specifying the date/time]");
+        }
+    }
+
+    static void printTasksOnDate(Command command, List<Task> tasksList) throws DukeException {
+        if (tasksList.size() != 0) {
+            String commandDetails = command.getDetails();
+
+            if (commandDetails.trim().length() > 0) {
+                if (commandDetails.trim().startsWith("/on")) {
+                    String[] specificDateParts = commandDetails.split("\\s+", 2);
+
+                    if (specificDateParts.length == 2) {
+                        String response = ResponseMessage.tasksOnDateMessage(specificDateParts[1], tasksList);
+                        Print.printResponse(response);
+                    } else {
+                        throw new DukeException("INCOMPLETE COMMAND"
+                                + System.lineSeparator() + "\t"
+                                + "The date is not specified!"
+                                + System.lineSeparator() + "\t"
+                                + "[Note: Enter /on before specifying the date]");
+                    }
+                } else {
+                    throw new DukeException("WRONG COMMAND"
+                            + System.lineSeparator() + "\t"
+                            + "Enter /on before specifying the date!");
+                }
+            } else {
+                throw new DukeException("INCOMPLETE COMMAND"
+                        + System.lineSeparator() + "\t"
+                        + "Enter /on before specifying the date!");
+            }
+        } else {
+            throw new DukeException("There are no tasks in your list!");
         }
     }
 }

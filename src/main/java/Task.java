@@ -1,6 +1,8 @@
+import java.time.LocalDate;
+
 public abstract class Task {
-    private TaskType type;
-    private String description;
+    private final TaskType type;
+    private final String description;
     private boolean isDone;
 
     public Task(TaskType type, String description) {
@@ -31,6 +33,10 @@ public abstract class Task {
 
     public void setDone() {
         this.isDone = true;
+    }
+
+    public boolean isOnDate(String specificDateStr) {
+        return false;
     }
 
     @Override

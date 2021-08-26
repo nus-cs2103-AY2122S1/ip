@@ -55,8 +55,11 @@ public class Print {
         String menuOption6 = "\t" + "delete N:";
         String menuOption6Info = "Delete a task number, N, from your list";
 
-        String menuOption7 = "\t" + "bye:";
-        String menuOption7Info = "Exit the chatbot";
+        String menuOption7 = "\t" + "print /on yyyy-mm-dd:";
+        String menuOption7Info = "Print deadlines/events on a specific date";
+
+        String menuOption8 = "\t" + "bye:";
+        String menuOption8Info = "Exit the chatbot";
 
         System.out.printf(format, menuOption1, menuOption1Info);
         System.out.printf(format, menuOption2, menuOption2Info);
@@ -65,5 +68,6 @@ public class Print {
         System.out.printf(format, menuOption5, menuOption5Info);
         System.out.printf(format, menuOption6, menuOption6Info);
         System.out.printf(format, menuOption7, menuOption7Info);
+        System.out.printf(format, menuOption8, menuOption8Info);
     }
 }
