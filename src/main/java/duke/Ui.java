@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Ui {
     private Scanner sc;
-    
+
     public Ui() {
         sc = new Scanner(System.in);
     }
-    
+
     /** Error message shown on start up of Duke */
     public void showStartUpError(DukeException e) {
         System.out.println((new DukeException("Error starting up.").concat(e)));

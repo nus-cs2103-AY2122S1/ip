@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskList {
+
     private ArrayList<Task> todoList;
-    
+
     public enum TaskType {
         TODO,
         DEADLINE,
@@ -18,7 +19,7 @@ public class TaskList {
     public TaskList() {
         this.todoList = new ArrayList<>();
     }
-    
+
     public TaskList(ArrayList<Task> tasks) {
         this.todoList = tasks;
     }
@@ -28,7 +29,7 @@ public class TaskList {
         System.out.println("Your task list:");
         for (int i = 0; i < todoList.size(); i++) {
             Task task = todoList.get(i);
-            int num = i+1;
+            int num = i + 1;
             System.out.println(num + "." + task.toString());
         }
     }
@@ -63,7 +64,7 @@ public class TaskList {
             throw new DukeException("Invalid task type.");
         }
         todoList.add(task);
-        
+
         return task;
     }
 
@@ -81,14 +82,14 @@ public class TaskList {
 
         return task;
     }
-    
+
     /** Returns a list of tasks in data string format */
     public List<String> getListData() {
-         return todoList.stream().map(task -> task.toDataString("|")).collect(Collectors.toList());
+        return todoList.stream().map(task -> task.toDataString("|")).collect(Collectors.toList());
     }
 
     /** Returns the size of the list */
     public Integer getListSize() {
-        return todoList.size(); 
+        return todoList.size();
     }
 }

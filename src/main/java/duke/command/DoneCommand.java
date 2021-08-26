@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.task.TaskList;
 import duke.Ui;
 import duke.task.Storage;
 import duke.task.Task;
+import duke.task.TaskList;
 
 public class DoneCommand extends Command {
     private Integer taskNum;
@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
 
         ui.showMessage("Good work! I've marked this task as done:");
         ui.showMessage(task.toString());
-        
+
         storage.save(tasks.getListData());
     }
 

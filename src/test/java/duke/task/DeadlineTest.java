@@ -13,7 +13,8 @@ public class DeadlineTest {
             new Deadline("", "25-08-2021 14:30");
             fail();
         } catch (DukeException e) {
-            assertEquals("∑(O_O;) Oh no!! Looks like you forgot to include a description of the deadline.", e.toString());
+            assertEquals("∑(O_O;) Oh no!! Looks like you forgot to include a description of the deadline.",
+                    e.toString());
         }
     }
 
@@ -33,7 +34,8 @@ public class DeadlineTest {
             new Deadline("task", "2pm");
             fail();
         } catch (DukeException e) {
-            assertEquals("∑(O_O;) Oh no!! The deadline date is invalid. Please follow this format: dd-MM-yyyy HH:mm", e.toString());
+            assertEquals("∑(O_O;) Oh no!! The deadline date is invalid. Please follow this format: dd-MM-yyyy HH:mm",
+                    e.toString());
         }
     }
 
@@ -41,7 +43,7 @@ public class DeadlineTest {
     public void testToString() {
         try {
             Deadline deadline = new Deadline("task", "25-08-2021 14:30");
-            
+
             assertEquals("[D][ ] task (by: Aug 25 2021, 02:30 pm)", deadline.toString());
         } catch (DukeException e) {
             fail();

@@ -7,12 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class TaskListTest {
-    
+
     @Test
     public void addToDoTask_success() {
         try {
             TaskList tasks = new TaskList();
-            
+
             assertEquals(new ToDo("task").toString(), tasks.addTask(TaskList.TaskType.TODO, "task").toString());
             assertEquals(1, tasks.getListSize());
         } catch (DukeException e) {
@@ -25,7 +25,8 @@ public class TaskListTest {
         try {
             TaskList tasks = new TaskList();
 
-            assertEquals(new Deadline("task", "25-08-2021 14:30").toString(), tasks.addTask(TaskList.TaskType.DEADLINE, "task /by 25-08-2021 14:30").toString());
+            assertEquals(new Deadline("task", "25-08-2021 14:30").toString(),
+                    tasks.addTask(TaskList.TaskType.DEADLINE, "task /by 25-08-2021 14:30").toString());
             assertEquals(1, tasks.getListSize());
         } catch (DukeException e) {
             fail();
@@ -37,7 +38,8 @@ public class TaskListTest {
         try {
             TaskList tasks = new TaskList();
 
-            assertEquals(new Event("task", "1pm-2pm").toString(), tasks.addTask(TaskList.TaskType.EVENT, "task /at 1pm-2pm").toString());
+            assertEquals(new Event("task", "1pm-2pm").toString(),
+                    tasks.addTask(TaskList.TaskType.EVENT, "task /at 1pm-2pm").toString());
             assertEquals(1, tasks.getListSize());
         } catch (DukeException e) {
             fail();
@@ -50,7 +52,7 @@ public class TaskListTest {
             TaskList tasks = new TaskList();
             tasks.addTask(TaskList.TaskType.TODO, "task");
             assertEquals(1, tasks.getListSize());
-            
+
             tasks.deleteTask(1);
             assertEquals(0, tasks.getListSize());
         } catch (DukeException e) {
