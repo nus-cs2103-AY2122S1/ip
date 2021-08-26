@@ -51,4 +51,4 @@ Please enter a number after the command.
 1. [D][X] return book (by: 28 August 2021)
 2. [E][ ] volunteer work (at: 2 September 2021)
 Sorry I do not understand this directive.
-Good bye.
+Bye.
