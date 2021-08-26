@@ -34,9 +34,6 @@ public class TaskList {
         while (look.hasNext()){
             String[] formattedTask = look.next().split(" ", 3);
             boolean isDone = (formattedTask[1].equals("T"));
-            System.out.println(formattedTask[0]);
-            System.out.println(formattedTask[1]);
-            System.out.println(formattedTask[2]);
             Task temp = Task.empty();
             switch (formattedTask[0]) {
                 case "T" :
