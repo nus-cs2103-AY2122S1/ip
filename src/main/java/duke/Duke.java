@@ -13,15 +13,12 @@ public class Duke {
     /**
      * The variants of the Tasks handled by Duke
      */
-    private enum Tasks {DEADLINE, EVENT, TODO}
+    enum Tasks {DEADLINE, EVENT, TODO}
 
     //path of file containing stored data
     private static final String FILE_PATH = "data/test.txt";
     //path of folder containing data file
     private static final String DIRECTORY_PATH = "data";
-
-    public Duke() {
-    }
 
     private void run() {
         //initialise required classes
