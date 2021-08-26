@@ -35,16 +35,16 @@ public class Ui {
 
     public static void showError(String error) {
         switch (error) {
-            case "EmptyTodo":
-                System.out.println("OvO The description of a todo cannot be empty ~");
-            case "EmptyDeadline":
-                System.out.println("OvO The description of a deadline cannot be empty ~");
-            case "EmptyEvent":
-                System.out.println("OvO The description of a event cannot be empty ~");
-            case "IllegalInput":
-                System.out.println("My Melo cannot understand o^o ");
-            default:
-                System.out.println(error);
+        case "EmptyTodo":
+            System.out.println("OvO The description of a todo cannot be empty ~");
+        case "EmptyDeadline":
+            System.out.println("OvO The description of a deadline cannot be empty ~");
+        case "EmptyEvent":
+            System.out.println("OvO The description of a event cannot be empty ~");
+        case "IllegalInput":
+            System.out.println("My Melo cannot understand o^o ");
+        default:
+            System.out.println(error);
         }
     }
 

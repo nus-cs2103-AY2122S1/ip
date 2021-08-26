@@ -18,20 +18,20 @@ public class Parser {
         }
 
         switch (keyword) {
-            case (DeleteCommand.COMMAND_WORD):
-                return new DeleteCommand(msg);
-            case (DoneCommand.COMMAND_WORD):
-                return new DoneCommand(msg);
-            case (ExitCommand.COMMAND_WORD):
-                return new ExitCommand();
-            case (DisplayCommand.COMMAND_WORD):
-                return new DisplayCommand();
-            case ("event"):
-                return new AddCommand(msg, "event");
-            case ("deadline"):
-                return new AddCommand(msg, "deadline");
-            case ("todo"):
-                return new AddCommand(msg, "todo");
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommand(msg);
+        case (DoneCommand.COMMAND_WORD):
+            return new DoneCommand(msg);
+        case (ExitCommand.COMMAND_WORD):
+            return new ExitCommand();
+        case (DisplayCommand.COMMAND_WORD):
+            return new DisplayCommand();
+        case ("event"):
+            return new AddCommand(msg, "event");
+        case ("deadline"):
+            return new AddCommand(msg, "deadline");
+        case ("todo"):
+            return new AddCommand(msg, "todo");
         }
 
         return new IncorrectCommand();
