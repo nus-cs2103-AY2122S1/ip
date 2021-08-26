@@ -2,11 +2,24 @@ package bubbles.tasks;
 
 import bubbles.exceptions.EmptyTaskException;
 
+/**
+ * A child class of Task, representing the tasks without any
+ * date/time attached to it.
+ */
 public class ToDo extends Task {
     private ToDo(String description, boolean completed) {
         super(description, completed);
     }
 
+    /**
+     * Act as a public constructor of a ToDo Object, throw an EmptyTaskException
+     * if the input from the user is empty (after the "todo" command).
+     *
+     * @param input The description of the ToDo
+     * @param completed Whether the ToDo is done/completed
+     * @return The created ToDo Object
+     * @throws EmptyTaskException Exception thrown when the ToDo description is empty
+     */
     public static ToDo addToDo(String input, boolean completed) throws EmptyTaskException {
         if (input.equals("")) {
             throw new EmptyTaskException("todo");
@@ -17,6 +30,12 @@ public class ToDo extends Task {
         return item;
     }
 
+    /**
+     * Format the ToDo Object to store in the hard disk File.
+     *
+     * @return String representing the ToDo Object (different from the String representation
+     *          of the ToDo Task)
+     */
     @Override
     public String format() {
         String format = "T | ";
@@ -32,6 +51,11 @@ public class ToDo extends Task {
         return format;
     }
 
+    /**
+     * Return the String representation of the ToDo.
+     *
+     * @return The String representation of the ToDo.
+     */
     @Override
     public String toString() {
         String res = "[T] [" + this.getStatus() + "] " + this.description;
