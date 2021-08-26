@@ -1,5 +1,7 @@
 package Duke.Main;
 
+import Duke.DukeException.DukeException;
+
 import java.io.File;
 
 public class Duke {
@@ -29,7 +31,7 @@ public class Duke {
         String command = ui.readCommand();
         while (!Parser.isExit(command)) {
             try {
-                ui.respondWith(Parser.parse(command, taskList));
+                ui.respondWith(Parser.parse(command, taskList).reply());
             } catch (DukeException e) {
                 ui.respondWith(e.getMessage());
             } finally {

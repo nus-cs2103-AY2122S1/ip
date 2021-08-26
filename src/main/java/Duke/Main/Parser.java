@@ -1,11 +1,15 @@
 package Duke.Main;
 
+import Duke.Command.*;
+import Duke.DukeException.DukeIncompleteException;
+import Duke.DukeException.DukeSyntaxErrorException;
 import Duke.Task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
+
     /**
      * Convert YYYY-MM-DD format to MMM dd YYY format (for representing time in Duke)
      * @param date date in (yyyy-mm-dd) format
@@ -25,44 +29,29 @@ public class Parser {
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
-    /**
-     * Process incoming command from user and prompt an appropriate reply with task list
-     * @param command User command entered
-     * @param taskList Task List for interaction and action
-     * @return reply to user command
-     * @throws DukeException if command is not recognizable
-     */
-    public static String parse(String command, TaskList taskList) {
+    public static Command parse(String command, TaskList taskList) {
         String[] components = command.split(" ", 2);
         String type = components[0].toLowerCase().trim();
         String description = (components.length < 2) ? "" : components[1].trim();
         switch (type) {
-        case "help":
-            return Storage.processInstructions();
-        case "list":
-            return taskList.printList();
-        case "done":
-            if (description.trim().equalsIgnoreCase("all")) {
-                return taskList.doneAll();
-            } else {
-                return taskList.done(getNum(description));
-            }
-        case "todo":
-            return taskList.addTask(description, Task.Type.TODO);
-        case "deadline":
-            return taskList.addTask(description, Task.Type.DEADLINE);
-        case "event":
-            return taskList.addTask(description, Task.Type.EVENT);
-        case "delete":
-            if (description.trim().equalsIgnoreCase("all")) {
-                return taskList.deleteAll();
-            } else {
-                return taskList.delete(getNum(description));
-            }
-        case "find":
-            return taskList.find(description);
-        default:
-            throw new DukeException("Error: ", DukeException.Type.SYNTAX_ERROR);
+            case "help":
+                return new HelpCommand();
+            case "list":
+                return new ListCommand(taskList);
+            case "done":
+                return new DoneCommand(description, taskList);
+            case "todo":
+                return new TodoCommand(description, taskList);
+            case "deadline":
+                return new DeadlineCommand(description, taskList);
+            case "event":
+                return new EventCommand(description, taskList);
+            case "delete":
+                return new DeleteCommand(description, taskList);
+            case "find":
+                return new FindCommand(description, taskList);
+            default:
+                throw new DukeSyntaxErrorException(type);
         }
     }
 
@@ -73,22 +62,5 @@ public class Parser {
      */
     public static boolean isExit(String command) {
         return command.equalsIgnoreCase("bye");
-    }
-
-    /**
-     * Convert Numeric string to int value or throw syntax-error exception
-     * @param val a String that represents the index number in task
-     * @return int value of the String entered
-     * @throws DukeException if command is incomplete or invalid (not a number)
-     */
-    public static int getNum(String val) {
-        try {
-            if (val.equalsIgnoreCase("")) {
-                throw new DukeException("Error", DukeException.Type.INCOMPLETE);
-            }
-            return Integer.parseInt(val);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Error", DukeException.Type.SYNTAX_ERROR);
-        }
     }
 }

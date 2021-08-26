@@ -1,7 +1,7 @@
 package Duke.DukeException;
 
 public class DukeIncompleteException extends DukeException {
-    public DukeIncompleteException(String message, Type type) {
-        super(message, Type.INCOMPLETE);
+    public DukeIncompleteException() {
+        super("☹ Cannot lah! Your command is incomplete!\n", Type.INCOMPLETE);
     }
 }

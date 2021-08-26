@@ -1,6 +1,7 @@
 package Duke.Task;
 
-import Duke.Main.DukeException;
+import Duke.DukeException.DukeIncompleteException;
+import Duke.DukeException.DukeInvalidFormatException;
 import Duke.Main.Parser;
 
 import java.time.LocalDate;
@@ -15,13 +16,11 @@ public class Deadline extends Task {
      * Constructor for a Deadline Task
      * @param taskName description of the task, to be divided into the
      *                 name and the time of task
-     * @throws DukeException if there is no timing indicated or if the
-     *                       date format entered is incorrect
      */
     public Deadline(String taskName) {
         super(taskName.split("/by")[0].trim());
         if (!taskName.contains("/by")) {
-            throw new DukeException("", DukeException.Type.INCOMPLETE);
+            throw new DukeIncompleteException();
         }
         String[] divide = taskName.split("/by");
         this.taskDescription = divide[0].trim();
@@ -29,7 +28,7 @@ public class Deadline extends Task {
         try {
             this.date = Parser.convert(LocalDate.parse(taskTime));
         } catch (DateTimeParseException e) {
-            throw new DukeException("", DukeException.Type.INVALID_FORMAT);
+            throw new DukeInvalidFormatException();
         }
     }
 

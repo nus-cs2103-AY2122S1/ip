@@ -1,7 +1,7 @@
 package Duke.DukeException;
 
 public class DukeSyntaxErrorException extends DukeException {
-    public DukeSyntaxErrorException(String message, Type type) {
-        super(message, Type.SYNTAX_ERROR);
+    public DukeSyntaxErrorException(String command) {
+        super("Uh, what is that ah? I cannot recognize '" + command + "'", Type.SYNTAX_ERROR);
     }
 }
