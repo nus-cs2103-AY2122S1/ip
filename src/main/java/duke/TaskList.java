@@ -55,7 +55,7 @@ public class TaskList {
 
     /**
      * delete certain task
-     * 
+     *
      * @param taskNo the index of task to be deleted
      * @return displayed message to inform user that task has been deleted
      *
@@ -64,5 +64,22 @@ public class TaskList {
         String temp = tasks.get(taskNo).toString();
         tasks.remove(taskNo);
         return temp;
+    }
+
+    /**
+     * finds tasks that contains the keyword
+     *
+     * @param keyword keyword
+     * @return the collection of task that contains the keyword
+     * 
+     */
+    public ArrayList<Task> findKeyword(String keyword) {
+        ArrayList<Task> matched = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.findKeyword(keyword)) {
+                matched.add(task);
+            }
+        }
+        return matched;
     }
 }

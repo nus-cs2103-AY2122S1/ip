@@ -63,6 +63,14 @@ public class Parser {
         return LocalDateTime.parse(dateTime, formatter);
     }
 
+    private static String parseKeyword(String input) throws IllegalArgumentException {
+        String keyword = input.substring(4).strip().toLowerCase();
+        if (keyword.equals("")) {
+            throw new IllegalArgumentException();
+        }
+        return keyword;
+    }
+
     /**
      * Parses input line by line
      *
@@ -89,6 +97,8 @@ public class Parser {
             case DeadlineCommand.COMMAND:
                 String[] deadlineDetails = parseDeadlineTask(input);
                 return new EventCommand(deadlineDetails[0], parseDate(deadlineDetails[1]));
+            case FindCommand.COMMAND:
+                return new FindCommand(parseKeyword(input));
             default:
                 throw new DukeException("Ehhh... (￣ ￣|||) Sorry I do not understand.");
             }
