@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class DukeUnknownCommandException extends DukeException {
     private String command;
 
