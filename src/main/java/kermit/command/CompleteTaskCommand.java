@@ -19,7 +19,6 @@ public class CompleteTaskCommand extends Command {
      * @param taskNum Task number to mark as complete (one-indexed).
      * @throws KermitException if string is not a valid integer that cannot be parsed.
      */
-    // taskNum is number in task list, one indexed
     public CompleteTaskCommand(String taskNum) throws KermitException {
         try {
             this.taskNum = Integer.parseInt(taskNum) - 1;
