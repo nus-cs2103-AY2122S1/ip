@@ -33,7 +33,6 @@ public class Storage {
 				taskData.add(new Todo(temp[2].equals("1"), temp[1]));
 				break;
 			case "D":
-				System.out.println(temp[3]);
 				taskData.add(new Deadline(
 						temp[2].equals("1"), 
 						temp[1], 

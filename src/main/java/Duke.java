@@ -1,7 +1,5 @@
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -16,24 +14,34 @@ public class Duke {
                                                         + "Now you have %d %s in the list.\n";
     private static final String MARK_DONE_MSG_TEMPLATE = "Nice! I've marked this task as done: \n  %s\n";
     private static final String UNEXPECTED_ERROR_MSG = "Something went wrong";
-    private static final Scanner SCANNER = new Scanner(System.in);
-
-    private static Storage taskStorage;
-    private static TaskList tasks = new TaskList();
     private static final DateTimeParser dateTimeParser = new DateTimeParser(
             new String[] {"yyyy-MM-dd", "d/M/yyyy"});
-
-    private static void greet() {
-        System.out.println(GREETING_MSG);
+    
+    private final Scanner scanner;
+    private final Storage taskStorage;
+    private final TaskList tasks;
+    private final Ui ui;
+    private final CommandParser commandParser;
+    
+    private Duke(String path) throws IOException {
+        scanner = new Scanner(System.in);
+        taskStorage = new Storage(path);
+        tasks = new TaskList(taskStorage.load());
+        ui = new Ui();
+        commandParser = new CommandParser();
+    }
+    
+    private void greet() {
+        ui.show(GREETING_MSG);
     }
 
-    private static void exit() {
-        System.out.println(GOODBYE_MSG);
+    private void exit() {
+        ui.show(GOODBYE_MSG);
     }
 
 
-    private static void addTodo(Todo taskToAdd) throws IOException {
-        System.out.printf(
+    private void addTodo(Todo taskToAdd) throws IOException {
+        ui.showf(
                 ADD_TASK_MSG_TEMPLATE,
                 tasks.addTask(taskToAdd), 
                 tasks.getTaskCount(), 
@@ -42,8 +50,8 @@ public class Duke {
         taskStorage.backup(tasks);
     }
 
-    private static void addDeadline(Deadline taskToAdd) throws IOException {
-        System.out.printf(
+    private void addDeadline(Deadline taskToAdd) throws IOException {
+        ui.showf(
                 ADD_TASK_MSG_TEMPLATE,
                 tasks.addTask(taskToAdd),
                 tasks.getTaskCount(),
@@ -52,8 +60,8 @@ public class Duke {
         taskStorage.backup(tasks);
     }
 
-    private static void addEvent(Event taskToAdd) throws IOException {
-        System.out.printf(
+    private void addEvent(Event taskToAdd) throws IOException {
+        ui.showf(
                 ADD_TASK_MSG_TEMPLATE,
                 tasks.addTask(taskToAdd),
                 tasks.getTaskCount(),
@@ -62,19 +70,19 @@ public class Duke {
         taskStorage.backup(tasks);
     }
 
-    private static void listTasks() {
-        System.out.println(LIST_TASK_MSG);
-        System.out.print(tasks);
+    private void listTasks() {
+        ui.show(LIST_TASK_MSG);
+        ui.show(tasks);
     }
 
-    private static void doneTask(int index) throws IOException {
+    private void doneTask(int index) throws IOException {
         tasks.getTask(index).markAsDone();
-        System.out.printf(MARK_DONE_MSG_TEMPLATE, tasks.getTask(index));
+        ui.showf(MARK_DONE_MSG_TEMPLATE, tasks.getTask(index));
         taskStorage.backup(tasks);
     }
 
-    private static void deleteTask(int index) throws IOException {
-        System.out.printf(
+    private void deleteTask(int index) throws IOException {
+        ui.showf(
                 DELETE_TASK_MSG_TEMPLATE,
                 tasks.deleteTask(index),
                 tasks.getTaskCount(),
@@ -83,68 +91,57 @@ public class Duke {
         taskStorage.backup(tasks);
     }
 
-    private static void runCommand(String cmd) throws DukeException, IOException {
-        if (cmd.matches("^todo[ \\t]*$")) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-        } else if (cmd.matches("^deadline[ \\t]*$")) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-        } else if (cmd.matches("^event[ \\t]*$")) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-        } else if (cmd.matches("^todo[ \\t]+.+$")) {
-            addTodo(new Todo(cmd.split("[ \\t]+", 2)[1]));
-        } else if (cmd.matches("^deadline[ \\t]+.+[ \\t]+/by[ \\t]+.+$")) {
-            String[] bySplit = cmd.split("[ \\t]+/by[ \\t]+", 2);
-            LocalDate byDate = dateTimeParser.parse(bySplit[1].trim());
-            System.out.println(bySplit[1]);
-            if (byDate == null) {
-                addDeadline(new Deadline(bySplit[0].split("^deadline[ \\t]+")[1], bySplit[1]));
+    private void runCommand(String[] cmd) throws DukeException, IOException {
+        LocalDate temp;
+        switch (cmd[0]) {
+        case "todo":
+            addTodo(new Todo(cmd[1]));
+            break;
+        case "done":
+            doneTask(Integer.parseInt(cmd[1]));
+            break;
+        case "delete":
+            deleteTask(Integer.parseInt(cmd[1]));
+            break;
+        case "deadline":
+            temp = dateTimeParser.parse(cmd[2]);
+            if (temp == null) {
+                addDeadline(new Deadline(cmd[1], cmd[2]));
             } else {
-                addDeadline(new Deadline(bySplit[0].split("^deadline[ \\t]+")[1], byDate));
+                addDeadline(new Deadline(cmd[1], temp));
             }
-        } else if (cmd.matches("^event[ \\t]+.+[ \\t]+/at[ \\t]+.+$")) {
-            String[] atSplit = cmd.split("[ \\t]+/at[ \\t]+", 2);
-            LocalDate atDate = dateTimeParser.parse(atSplit[1].trim());
-            if (atDate == null) {
-                addEvent(new Event(atSplit[0].split("^event[ \\t]+")[1], atSplit[1]));
+            break;
+        case "event":
+            temp = dateTimeParser.parse(cmd[2]);
+            if (temp == null) {
+                addEvent(new Event(cmd[1], cmd[2]));
             } else {
-                addEvent(new Event(atSplit[0].split("^event[ \\t]+")[1], atDate));
+                addEvent(new Event(cmd[1], temp));
             }
-        } else if (cmd.matches("^list[ \\t]*$")) {
+            break;
+        case "list":
             listTasks();
-        } else if (cmd.matches("^done[ \\t]+[0-9]+$")) {
-            int i = Integer.parseInt(cmd.split("^done[ \\t]+")[1]) - 1;
-            if (i < 0 || i >= tasks.getTaskCount()) {
-                throw new DukeException(String.format("☹ OOPS!!! I'm sorry, but no task numbered %d", i + 1));
-            }
-            doneTask(i);
-        } else if (cmd.matches("^delete[ \\t]+[0-9]+$")) {
-            int i = Integer.parseInt(cmd.split("^delete[ \\t]+")[1]) - 1;
-            if (i < 0 || i >= tasks.getTaskCount()) {
-                throw new DukeException(String.format("☹ OOPS!!! I'm sorry, but no task numbered %d", i + 1));
-            }
-            deleteTask(i);
-        } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
 
     public static void main(String[] args) {
         try {
-            greet();
-            taskStorage = new Storage("data/duke.txt");
-            tasks = new TaskList(taskStorage.load());
-            for (String cmd = SCANNER.nextLine(); !cmd.equals("bye"); cmd = SCANNER.nextLine()) {
+            Duke duke = new Duke("data/duke.txt");
+            duke.greet();
+            String[] cmd = new String[] { "bye" };
+            do {
                 try {
-                    runCommand(cmd);
+                    cmd = duke.commandParser.parse(duke.scanner.nextLine());
+                    duke.runCommand(cmd);
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
+                    duke.ui.show(e.getMessage());
                 }
-            }
+            } while (!cmd[0].equals("bye"));
+            duke.exit();
         } catch (IOException e) {
+            // Because it's not a duke error, hence not using ui to show
             System.out.println(UNEXPECTED_ERROR_MSG);
-        } finally {
-            exit();
         }
     }
 }

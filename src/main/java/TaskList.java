@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
     
     public TaskList() {
-        
+        tasks = new ArrayList<>();
     }
     
     public TaskList(ArrayList<Task> taskData) {
@@ -17,11 +17,11 @@ public class TaskList {
     }
 
     public Task getTask(int index) {
-        return tasks.get(index);
+        return tasks.get(index - 1);
     }
 
     public Task deleteTask(int index) {
-        return tasks.remove(index);
+        return tasks.remove(index - 1);
     }
     
     public int getTaskCount() {
