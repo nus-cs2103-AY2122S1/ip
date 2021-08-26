@@ -2,6 +2,7 @@ public class ToDos extends Task{
 
     private boolean done = false;
     private String task = "";
+    private String taskType = "T";
 
     public ToDos(boolean done, String task) {
         super(done,task);
@@ -18,7 +19,7 @@ public class ToDos extends Task{
             done_str = "X";
         }
 
-        return "[" + "T" + "]" + "[" + done_str + "] "  + task;
+        return "[" + taskType + "]" + "[" + done_str + "] "  + task;
     }
 
     @Override
@@ -26,4 +27,8 @@ public class ToDos extends Task{
         this.done = true;
     }
 
+    @Override
+    public String GetDataInfo() {
+        return this.taskType + " | " + (this.done? 1 : 0) + " | " + task;
+    }
 }
