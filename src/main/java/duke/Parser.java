@@ -9,6 +9,7 @@ import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.ListCommand;
 import duke.commands.ToDoCommand;
+import duke.commands.FindCommand;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
@@ -87,8 +88,6 @@ public class Parser {
                 return new EventCommand(event);
             } catch (DateTimeParseException e) {
                 throw new DukeExceptions(TIME_PARSE_ERROR);
-            } catch (DukeExceptions e) {
-                throw e;
             }
 
         case "deadline":
@@ -114,8 +113,6 @@ public class Parser {
 
             } catch (DateTimeParseException e) {
                 throw new DukeExceptions(TIME_PARSE_ERROR);
-            } catch (Exception e) {
-                throw e;
             }
 
         case "todo":
@@ -125,6 +122,13 @@ public class Parser {
             }
             ToDo toDo = ToDo.create(splitUserInput[1]);
             return new ToDoCommand(toDo);
+
+        case "find":
+            if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
+                throw new DukeExceptions("Oops, " +
+                        "you need to tell me the keyword you are looking for");
+            }
+            return new FindCommand(splitUserInput[1]);
 
         case "":
             throw new DukeExceptions("Can you type louder .. I mean.. input anything? I got nothing");

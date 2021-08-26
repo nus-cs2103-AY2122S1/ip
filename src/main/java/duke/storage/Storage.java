@@ -82,4 +82,14 @@ public class Storage {
     public int getSize() {
         return tasks.size();
     }
+
+    /**
+     * Find task which has the keyword in the list.
+     *
+     * @param keyword The keyword to look for.
+     * @return String representation of a list of task that has the keyword in the description.
+     */
+    public String find(String keyword) {
+        return tasks.find(keyword);
+    }
 }
