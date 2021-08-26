@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -6,7 +10,7 @@ import java.time.format.FormatStyle;
 public class Task {
 
     private String description;
-    private boolean isDone = false;
+    private boolean isDone;
     private LocalDate date = null;
 
     public Task(String description, boolean done) {

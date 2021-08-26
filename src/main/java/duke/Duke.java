@@ -1,9 +1,13 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringJoiner;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class Duke {
 
@@ -49,7 +53,7 @@ public class Duke {
                         int done = getInputNumber(userArgument);
 
                         if (done >= tasks.numberOfTasks()|| done < 0) {
-                            ui.showMessage("Task does not exist!");
+                            ui.showMessage("duke.task.Task does not exist!");
                             continue;
                         }
 
@@ -65,7 +69,7 @@ public class Duke {
                     case("deadline"):
                     case("event"):
                         if (userArgument.equals("")) {
-                            throw new DukeException("The description of a Task cannot be empty.");
+                            throw new DukeException("The description of a duke.task.Task cannot be empty.");
                         }
 
                         if (userCommand.equals("todo")) {
@@ -82,7 +86,7 @@ public class Duke {
                     case("delete"):
                         int delete = getInputNumber(userArgument);
                         if (delete >= tasks.numberOfTasks() || delete < 0) {
-                            ui.showMessage("Task does not exist!");
+                            ui.showMessage("duke.task.Task does not exist!");
                             continue;
                         }
 

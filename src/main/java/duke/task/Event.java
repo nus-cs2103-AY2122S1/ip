@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.DukeException;
+
 public class Event extends Task {
 
     public Event(String description, String date, boolean done) throws DukeException {
