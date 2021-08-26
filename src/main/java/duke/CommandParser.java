@@ -51,7 +51,7 @@ public class CommandParser extends Parser<String[]> {
 				return new String[] { cmdSplit[0], deadlineArgs[0], deadlineArgs[1] };
 			}
 		case "event":
-			String[] eventArgs = cmdSplit[1].split("[ \\t]+/at[ \\t]", 2);
+			String[] eventArgs = cmdSplit[1].split("[ \\t]+/at[ \\t]+", 2);
 			if (eventArgs.length < 2) {
 				throw new DukeException(UNKNOWN_COMMAND_MSG);
 			} else {
