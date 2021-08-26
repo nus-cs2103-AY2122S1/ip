@@ -32,9 +32,9 @@ public class FindCommand extends Command {
         taskList.searchKeyword(this.getKeyword());
     }
 
-    public String getKeyword() throws InvalidInputException {
+    public String getKeyword() throws InvalidInputException{
         if (this.cmdString.length() < 6) throw new InvalidInputException();
         if (this.cmdString.substring(5).trim().length() == 0) throw new InvalidInputException();
-        else return this.cmdString.substring(5).trim();
+        return this.cmdString.substring(5).trim();
     }
 }

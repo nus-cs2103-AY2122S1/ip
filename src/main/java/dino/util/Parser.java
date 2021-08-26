@@ -51,6 +51,7 @@ public class Parser {
      * Returns the string itself if it contains only one word
      *
      * @param s the input string
+     * @return the first word of the input string
      */
     public static String getFirstWord(String s) {
         String firstWord;
