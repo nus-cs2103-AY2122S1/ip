@@ -1,14 +1,25 @@
-package duke;//duke.TaskList: contains the task list e.g., it has operations to add/delete tasks in the list
+package duke;
 
 import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Contains the task list e.g., it has operations to add/delete tasks in the list
+ *
+ * @author Erwin Quek
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class TaskList {
 
     private final ArrayList<Task> TASKLIST = new ArrayList<>();
 
+    /**
+     * TaskList constructor
+     * @param path takes in the path of the file
+     * @throws FileNotFoundException throws an error if file not found
+     */
     public TaskList(Path path) throws FileNotFoundException {
         File f = new File(String.valueOf(path));
         Scanner s = new Scanner(f);
@@ -20,10 +31,14 @@ public class TaskList {
         }
     }
 
-    public TaskList() {
+//    public TaskList() {
+//
+//    }
 
-    }
-
+    /**
+     * Method to update task list.
+     * @param arrOfInputs taking in an array of inputs
+     */
     private void updateList(String[] arrOfInputs) {
         //Check for T, D, E and update in the list
         if (arrOfInputs[0].equals("T")) {
@@ -47,25 +62,53 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to add a new task to the task list.
+     * @param t takes in a task object
+     */
     public void addNewTask(Task t) {
         this.TASKLIST.add(t);
     }
 
+    /**
+     * Method to get the size of the task list.
+     * @return size of task list
+     */
     public int getSize() {
         return TASKLIST.size();
     }
 
+    /**
+     * Method to get the ArrayList which contains all the tasks.
+     * @return an ArrayList containing all the task
+     */
     public ArrayList<Task> getTaskList() {
         return TASKLIST;
     }
+
+    /**
+     * Method to get a task at a specified index.
+     * @param i index of task to get
+     * @return task object
+     */
     public Task getTask(int i) {
         return TASKLIST.get(i);
     }
 
+    /**
+     * Method to delete task at given index.
+     * @param i index of task to delete
+     */
     public void deleteGivenTask(int i) {
         TASKLIST.remove(i-1);
     }
 
+    /**
+     * Method to update the storage file.
+     * @param filePath filepath to storage file
+     * @param taskList the tasklist object
+     * @throws DukeException throws an error
+     */
     public static void updateMemory(String filePath, TaskList taskList) throws DukeException {
         try {
             File file = new File(filePath);

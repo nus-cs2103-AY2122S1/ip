@@ -1,6 +1,11 @@
-package duke;//duke.Ui: deals with interactions with the user
-import java.util.Scanner;
+package duke;
 
+/**
+ * Deals with interactions with the user.
+ *
+ * @author Erwin Quek
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class Ui {
 
     private static final String DIVIDER = "____________________________________________________________";
@@ -10,21 +15,33 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    /**
+     * Method to get a message divider.
+     */
     public void showDivider() {
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Method to print the bot's welcome message.
+     */
     public void showWelcomeMessage() {
         String welcome = "Hello! I'm duke.Duke. A friendly chatbot!! :)\n"
                 + "What can I do for you?\n";
         System.out.println(DIVIDER + "\n" + LOGO + "\n" + welcome + DIVIDER);
     }
 
+    /**
+     * Method to print the bot's good bye message.
+     */
     public void showGoodbyeMessage() {
         String end_message = "Bye. I hope to talk to you again soon! :)";
         System.out.println(end_message + "\n" + DIVIDER);
     }
 
+    /**
+     * Method to read user input.
+     */
     public void readCommand() {
         //String prompt_message = "Add to-do list ({input})/ View list (list) / Complete task (done {input}) / End (bye) :";
         String prompt_message = "Please input your command: ";
