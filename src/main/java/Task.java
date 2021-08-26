@@ -1,10 +1,11 @@
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 public class Task {
 
@@ -62,6 +63,9 @@ public class Task {
         }
     }
 
-
+    public static String parseDateTime(String input) {
+        LocalDate dateTime = LocalDate.parse(input);
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+    }
 
 }

@@ -64,7 +64,7 @@ public class Duke {
                         break;
                     }
                     System.out.println("Got it. I've added this task:");
-                    aList.add(new Deadlines(Deadlines.getNameInput(input), false, Deadlines.getDeadlineInput(input)));
+                    aList.add(new Deadlines(Deadlines.getNameInput(input), false, Task.parseDateTime(Deadlines.getDeadlineInput(input))));
                     System.out.println(" " + aList.get(aList.size() - 1));
                     System.out.println(String.format("Now you have %d tasks in the list",aList.size()));
                     Task.saveTaskList(aList,filename);
@@ -77,7 +77,7 @@ public class Duke {
                         break;
                     }
                     System.out.println("Got it. I've added this task:");
-                    aList.add(new Events(Events.getNameInput(input), false, Events.getDeadlineInput(input)));
+                    aList.add(new Events(Events.getNameInput(input), false, Task.parseDateTime(Events.getDeadlineInput(input))));
                     System.out.println(" " + aList.get(aList.size() - 1));
                     System.out.println(String.format("Now you have %d tasks in the list",aList.size()));
                     Task.saveTaskList(aList,filename);
