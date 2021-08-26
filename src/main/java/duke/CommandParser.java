@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * A class representing a parser for commands from the CLI.
+ */
 public class CommandParser extends Parser<String[]> {
 	private final static String[] COMMANDS_WITH_ARGS = new String[] {"todo", "deadline", 
 			"event", "delete", "done", "find"};
@@ -10,8 +13,14 @@ public class CommandParser extends Parser<String[]> {
 			"Seems like there are missing argument(s) for %s";
 	private final static String NON_NUMBER_ARGUMENT_TEMPLATE = "☹ OOPS!!! " +
 			"Should have entered a number for %s, BOI";
-	
-	
+
+	/**
+	 * Parse the given line from the CLI and returns an array of commands and arguments.
+	 * 
+	 * @param cmd Line from the CLI.
+	 * @return An array representing the command and arguments.
+	 * @throws DukeException If the command is invalid or has invalid arguments.
+	 */
 	public String[] parse(String cmd) throws DukeException {
 		cmd = cmd.trim();
 		boolean isInvalidCommand = true;
