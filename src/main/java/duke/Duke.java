@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * The Duke chat bot app
  */
