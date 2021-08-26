@@ -24,8 +24,8 @@ public class Event extends Task{
     }
 
     /**
-     * A method to get event task info.
-     * @return a string of the deadline task details to be saved in data
+     * A method to get Event task info.
+     * @return a string of the Event task details to be saved in data
      */
     @Override
     public String getTaskInfo() {
@@ -34,7 +34,7 @@ public class Event extends Task{
 
     /**
      * A method to get a String representation of Event task.
-     * @return a string of the Deadline task.
+     * @return a string of the Event task.
      */
     @Override
     public String toString() {
