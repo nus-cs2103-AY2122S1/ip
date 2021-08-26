@@ -105,7 +105,7 @@ public class Deadline extends DatedTask {
         obj.put("type", "deadline");
         obj.put("description", description);
         obj.put("isDone", isDone);
-        obj.put("date", date.toJSONString());
+        obj.put("date", date.toJsonString());
         return obj;
     }
 }

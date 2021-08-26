@@ -18,7 +18,7 @@ public class DateTest {
 
     @Test
     public void testJSONConversion() {
-        assertEquals("2020-10-10", new Date(LocalDate.parse("2020-10-10")).toJSONString());
+        assertEquals("2020-10-10", new Date(LocalDate.parse("2020-10-10")).toJsonString());
     }
 
     @Test

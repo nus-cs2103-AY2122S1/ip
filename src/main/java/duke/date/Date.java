@@ -1,10 +1,10 @@
 package duke.date;
 
-import duke.exception.InvalidDateException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.InvalidDateException;
 
 /** A Date wrapper class. */
 public class Date {
@@ -40,7 +40,7 @@ public class Date {
      *
      * @return A JSON string representation of the Date.
      */
-    public String toJSONString() {
+    public String toJsonString() {
         return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
