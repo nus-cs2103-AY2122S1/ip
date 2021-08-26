@@ -1,6 +1,10 @@
 package duke.main;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 public class Parser {
     public static boolean parse(TaskList taskList, Storage storage, String input, Ui ui) {
