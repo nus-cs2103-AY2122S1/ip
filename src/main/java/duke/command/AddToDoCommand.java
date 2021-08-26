@@ -6,6 +6,9 @@ import duke.task.TaskManager;
 import duke.task.ToDo;
 import duke.ui.Ui;
 
+/**
+ * Represents a command for adding a new <code>ToDo</code>.
+ */
 public class AddToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
     public static final String USAGE_MESSAGE = "To add a new todo, use 'todo <name>'.";

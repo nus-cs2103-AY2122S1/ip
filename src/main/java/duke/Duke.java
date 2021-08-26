@@ -7,6 +7,9 @@ import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
 
+/**
+ * Represents the main Duke application.
+ */
 public class Duke {
     private final Storage storage;
     private TaskManager taskManager;
@@ -23,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program until termination.
+     */
     public void run() {
         ui.greet(taskManager);
         boolean isExit = false;

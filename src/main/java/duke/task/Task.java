@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+/**
+ * Represents a task.
+ */
 public abstract class Task {
     private String name;
     private boolean isDone;

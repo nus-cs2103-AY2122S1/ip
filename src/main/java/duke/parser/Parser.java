@@ -10,7 +10,15 @@ import duke.command.ExitCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
+    /**
+     * Parses the command as well as any arguments entered by the user.
+     * @param fullCommand the full command entered by the user
+     * @return the corresponding <code>Command</code>, or the <code>HelpCommand</code> if the command is not recognised
+     */
     public static Command parse(String fullCommand) {
         final String trimmedCommand = fullCommand.trim();
         final String commandWord = trimmedCommand.split("\\s+")[0];

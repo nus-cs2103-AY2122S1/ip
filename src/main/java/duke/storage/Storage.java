@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents the file used to store the user's task data.
+ */
 public class Storage {
     private final String filePath;
     private final File file;
@@ -30,6 +33,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the user's tasks from file.
+     * @return the list of tasks that were successfully loaded
+     * @throws DukeException if an <code>IOException</code> occurred while trying to read the file
+     */
     public List<Task> loadTasks() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -53,6 +61,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the tasks into the file.
+     * @param tasks tasks to be saved into the file
+     */
     public void saveTasks(String tasks) {
         try {
             FileWriter fileWriter = new FileWriter(file);
