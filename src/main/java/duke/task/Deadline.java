@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.exceptions.CommandParamException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.CommandParamException;
 
 /**
  * This is a Deadline class that extends Task.
