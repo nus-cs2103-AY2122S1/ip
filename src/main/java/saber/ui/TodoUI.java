@@ -10,7 +10,7 @@ public class TodoUI extends SaberCommandUI {
 
     protected final String missingDescriptionError = "      I'm sorry, Master.\n"
             + "      What ... exactly do you want me to add\n"
-            + "      to your saber.task.Todo list?\n";
+            + "      to your Todo list?\n";
 
     /**
      * A constructor for TodoUI which will initialize the success message to an empty string
@@ -28,7 +28,7 @@ public class TodoUI extends SaberCommandUI {
         String taskPlural = totalTask <= 1 ? " task" : " tasks";
 
         this.successMessage = "      Yes, Master.\n"
-                + "      I'll add the following to your saber.task.Todo list:\n"
+                + "      I'll add the following to your Todo list:\n"
                 + "\n        " + todo + "\n"
                 + "\n      Currently, Master has " + totalTask + taskPlural
                 + "\n      in the list." + "\n";
