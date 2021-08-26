@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class Ui {
     public static final String SPACE = "    ";
     public static final String LOGO =
-            SPACE + "██████   ██████  ██████   █████  ████████ \n" +
-            SPACE + "██   ██ ██    ██ ██   ██ ██   ██    ██    \n" +
-            SPACE + "██████  ██    ██ ██████  ███████    ██    \n" +
-            SPACE + "██   ██ ██    ██ ██   ██ ██   ██    ██    \n" +
-            SPACE + "██████   ██████  ██   ██ ██   ██    ██";
+        SPACE + "██████   ██████  ██████   █████  ████████ \n" +
+        SPACE + "██   ██ ██    ██ ██   ██ ██   ██    ██    \n" +
+        SPACE + "██████  ██    ██ ██████  ███████    ██    \n" +
+        SPACE + "██   ██ ██    ██ ██   ██ ██   ██    ██    \n" +
+        SPACE + "██████   ██████  ██   ██ ██   ██    ██";
     public static final String BOT_LINE = "============================================================";
     public static final String USER_LINE = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
     private Scanner sc = new Scanner(System.in);
