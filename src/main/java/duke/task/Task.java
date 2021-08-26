@@ -4,7 +4,7 @@ package duke.task;
  * Represents a Task the user wants to complete. 
  * A task object has a name, and can be done or not.
  */
-public class Task {
+public abstract class Task {
 	private String name;
 	private boolean done = false;
 

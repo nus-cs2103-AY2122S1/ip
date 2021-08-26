@@ -72,10 +72,22 @@ public class Storage {
 		return tasks;
 	}
 
+	/**
+	 * Extract the task name from  the task part of the command.
+	 * 
+	 * @param taskDetails the task part of the command
+	 * @return the task name
+	 */
 	public String getTask(String taskDetails) {
 		return taskDetails.substring(0, taskDetails.length() - 1).trim();
 	}
 
+	/**
+	 * Extract the String datetime from the datetime part of the command.
+	 * 
+	 * @param dateTimeDetails the datetime part of the command
+	 * @return the datetime
+	 */
 	public String getDateTime(String dateTimeDetails) {
 		return dateTimeDetails.substring(1, dateTimeDetails.length() - 1);
 	}
