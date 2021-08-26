@@ -1,84 +1,152 @@
-import com.sun.source.tree.DoWhileLoopTree;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+
+    private static final String line = "____________________________________________________________";
+    private static ArrayList<Task> tasks = new ArrayList<>();
+
+    private static void Greet() {
+        System.out.println("Hello I'm Duke\n" +
+                            line +
+                            "\nWhat can I do for you?\n" +
+                            line);
+    }
+
+    private static void printTasks() {
+        int index = 0;
+
+        System.out.println("Here are tasks in your list:");
+        for(Task t: tasks) {
+            index++;
+            System.out.println(index + "." + t.toString());
+        }
+    }
+
+    private static void makeTaskDone (int index) throws DukeException {
+        if (index <= 0 || index > tasks.size()) {
+            throw new DukeException ("I'm sorry the index is invalid :-(");
+        } else {
+            System.out.println("Nice! I've marked this task as done:");
+            tasks.get(index - 1).markDone();
+            System.out.println(tasks.get(index - 1).toString());
+        }
+    }
+
+    private static void delete(int index) throws DukeException{
+        if (index <= 0 || index > tasks.size()) {
+            throw new DukeException("I'm sorry the index is invalid :-(");
+        } else {
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(tasks.get(index - 1).toString());
+            tasks.remove(index - 1);
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        }
+    }
+
+    private static void DukeOperation(String input) throws DukeException {
+        // operation is always the first word of user input.
+        String[] allWords = input.split(" ");
+        String operation = allWords[0];
+
+        switch (operation) {
+            case "bye": {
+                System.out.println(" Bye. Hope to see you again soon!");
+                break;
+            }
+            case "list": {
+                printTasks();
+                break;
+            }
+            case "done": {
+                try {
+                    int index = Integer.valueOf(allWords[1]);
+                    makeTaskDone(index);
+                } catch (DukeException e) {
+                    System.out.println(e.toString());
+                }
+                break;
+            }
+            case "todo": {
+                if (allWords.length == 1) {
+                  throw new DukeException("The description of todo cannot be empty");
+                } else {
+                    String description = input.substring(input.indexOf(allWords[1]));
+                    Todo todo = new Todo(description);
+                    System.out.println("added: " + todo.toString());
+                    tasks.add(todo);
+                    System.out.println("Now you have " + tasks.size() + " tasks in your list");
+                }
+                break;
+            }
+            case "event": {
+                if (allWords.length == 1) {
+                    throw new DukeException("The description of event cannot be empty");
+                } else {
+                    if (input.contains("/at")) {
+                        String description = input.substring(input.indexOf(allWords[1]), input.indexOf("/at") - 1);
+                        String at = input.substring(input.indexOf("/at") + 4);
+                        Event event = new Event(description, at);
+                        System.out.println("added: " + event.toString());
+                        tasks.add(event);
+                        System.out.println("Now you have " + tasks.size() + " tasks in your list");
+                    } else {
+                        throw new DukeException("The format of event is wrong");
+                    }
+                }
+                break;
+            }
+            case "deadline": {
+                if (allWords.length == 1) {
+                    throw new DukeException("The description of deadline cannot be empty");
+                } else {
+                    if (input.contains("/by")) {
+                        String description = input.substring(input.indexOf(allWords[1]), input.indexOf("/by") - 1);
+                        String at = input.substring(input.indexOf("/by") + 4);
+                        Deadline deadline = new Deadline(description, at);
+                        System.out.println("added: " + deadline.toString());
+                        tasks.add(deadline);
+                        System.out.println("Now you have " + tasks.size() + " tasks in your list");
+                    } else {
+                        throw new DukeException("The format of deadline is wrong");
+                    }
+                }
+                break;
+            }
+            case "delete": {
+                try {
+                    int index = Integer.valueOf(allWords[1]);
+                    delete(index);
+                } catch (DukeException e) {
+                    System.out.println(e.toString());
+                }
+                break;
+            }
+            default: {
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String line = "____________________________________________________________";
-        ArrayList<Task> task = new ArrayList<>();
-        System.out.println("Hello from\n" + logo + line + "\nWhat can I do for you?\n" + line);
 
         String input;
-        Scanner s = new Scanner(System.in);
-        input = s.nextLine();
+        Scanner keyboardInput = new Scanner(System.in);
 
-        while(!input.equals("bye")) {
-            String[] parts = input.split(" ");
-            if(input.equals("list")) {
-                int i = 1;
+        Greet();
+        while (true) {
+            try {
+                input = keyboardInput.nextLine();
+
                 System.out.println(line);
-                System.out.println("Here are the tasks in your list:");
-                for(Task t: task) {
-                    System.out.println(i + "." + t.toString());
-                    i++;
-                }
+                DukeOperation(input);
                 System.out.println(line);
-            } else if (parts[0].equals("done")) {
-                int index = Integer.valueOf(parts[1]);
-                Task thisTask = task.get(index - 1);
-                thisTask.markDone();
-                System.out.println(line);
-                System.out.println("Nice! I've marked this task as done:\n" + thisTask.toString());
-                System.out.println(line);
-            } else if (parts[0].equals("delete")) {
-                int index = Integer.valueOf(parts[1]);
-                Task thisTask = task.remove(index - 1);
-                System.out.println(line);
-                System.out.println("Noted I've removed this task:\n" + thisTask.toString());
-                System.out.println("Now you have " + task.size() + " tasks in your list");
-                System.out.println(line);
-            } else if (parts.length == 1) {
-                System.out.println(line);
-                System.out.println("OOPS!!! The description of a " + parts[0] + " cannot be empty.");
-                System.out.println(line);
-            } else if (parts[0].equals("deadline")){
-                String[] part2 = input.split("/by ");
-                String description = part2[0].split("deadline ")[1];
-                Task deadline = new Deadline(description, part2[1]);
-                System.out.println(line + "\n" + "added: " + deadline.toString());
-                task.add(deadline);
-                System.out.println("Now you have " + task.size() + " tasks in your list");
-                System.out.println(line);
-            } else if (parts[0].equals("event")){
-                String[] part2 = input.split("/at ");
-                String description = part2[0].split("event ")[1];
-                Task event = new Event(description, part2[1]);
-                System.out.println(line + "\n" + "added: " + event.toString());
-                task.add(event);
-                System.out.println("Now you have " + task.size() + " tasks in your list");
-                System.out.println(line);
-            } else if (parts[0].equals("todo")){
-                String[] part2 = input.split("/");
-                String description = part2[0].split("todo ")[1];
-                Task todo = new Todo(description);
-                System.out.println(line + "\n" + "added: " + todo.toString());
-                task.add(todo);
-                System.out.println("Now you have " + task.size() + " tasks in your list");
-                System.out.println(line);
-            } else {
-                System.out.println(line);
-                System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                System.out.println(line);
+            } catch (DukeException e) {
+                System.out.println(e.toString());
             }
-            input = s.nextLine();
         }
-
-        System.out.println(line + "\nBye. Hope to see you again soon!\n" + line);
     }
+
 }
