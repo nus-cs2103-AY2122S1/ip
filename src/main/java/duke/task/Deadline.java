@@ -36,6 +36,8 @@ public class Deadline extends Task {
                 }
                 if (hasTime && 0 <= time && time <= 2359) { // 24 hr format
                     timeStr = dateTimeArr[1];
+                } else {
+                    hasTime = false;
                 }
             } else {
                 hasTime = false;
