@@ -6,13 +6,28 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
+    /** The date the task is due, in LocalDate format. */
     private LocalDate due;
+    /** Whether the task has a date it is due in a recognisable format. */
     private boolean hasDate = true;
+    /** The time the task is due, in Integer format. */
     private int timeInt;
+    /** The time the task is due, in String format. */
     private String timeStr;
+    /**  Whether the task has a time it is due in a recognisable, 24-hour format. */
     private boolean hasTime = true;
+    /** The information on when the task is due. */
     private String dueStr;
 
+    /**
+     * Constructs a new Deadline task.
+     * Takes in the name of the Deadline and information on when it's due. The information is checked to see if it
+     * contains a date in a recognisable format. If it does, the information is also checked if it contains a time
+     * in a recognisable, 24-hour format. It then stores those accordingly. The rest of the string is stored as is.
+     *
+     * @param name The name of the new Deadline task.
+     * @param dueStr The information on when the Deadline task is due.
+     */
     public Deadline(String name, String dueStr) {
         super(name);
         this.dueStr = dueStr;
@@ -75,10 +90,18 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Converts the Deadline task to the format used for saving in the storage file on the user's computer.
+     *
+     * @return The save format of the Deadline task.
+     */
     public String toSaveFormat() {
         return "D|" + super.toSaveFormat() + "|" + dueStr;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dueStr + ")";
