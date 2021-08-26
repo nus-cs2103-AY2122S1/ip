@@ -13,6 +13,7 @@ public class DeleteCommand extends Command {
     /**
      * A public constructor to initialise the command
      * to the given one.
+     *
      * @param command The command inputted by the user.
      */
     public DeleteCommand(String command) {

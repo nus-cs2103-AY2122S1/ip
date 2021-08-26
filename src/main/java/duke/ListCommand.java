@@ -9,6 +9,7 @@ public class ListCommand extends Command {
     /**
      * A public constructor which calls the parent
      * constructor with the command.
+     *
      * @param command The command inputted by the user.
      */
     public ListCommand(String command) {
@@ -18,8 +19,9 @@ public class ListCommand extends Command {
     /**
      * Executes the list command and lists all the tasks
      * stored.
-     * @param tasks The list of tasks stored so far.
-     * @param ui The Ui to deal with interactions with user.
+     *
+     * @param tasks   The list of tasks stored so far.
+     * @param ui      The Ui to deal with interactions with user.
      * @param storage The storage which saves and edits file content.
      */
     @Override

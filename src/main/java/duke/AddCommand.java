@@ -11,8 +11,10 @@ import java.time.format.DateTimeParseException;
  */
 
 public class AddCommand extends Command {
+
     /** String to represent the command */
     private String command;
+
     /** The type of the task */
     private String taskType;
 
@@ -20,6 +22,7 @@ public class AddCommand extends Command {
     /**
      * A public constructor to intialize the command
      * and task type to the given one.
+     *
      * @param command A string from the input of the user.
      * @param taskType The type of the task inputted by the user.
      */
@@ -33,6 +36,7 @@ public class AddCommand extends Command {
      * Checks if the command is written correctly and executes
      * the command. If the date and time is not indicated wrongly, a
      * DukeException is thrown.
+     *
      * @param tasks The list of tasks stored so far.
      * @param ui A Ui which deals with interactions with user.
      * @param storage The storage which saves and edits the file.

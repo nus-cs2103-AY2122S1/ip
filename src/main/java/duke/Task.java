@@ -9,21 +9,23 @@ public class Task {
         this.isDone = false;
     }
 
-    public void markAsDone(){
+    public void markAsDone() {
         isDone = true;
     }
 
     public String taskIndicator() {
+
         return " ";
     }
 
     public String getStatusIcon() {
+
         return (isDone ? "X" : " ");
     }
 
-    public String toString()
-    {
-        return "[" + getStatusIcon() +"] " + this.description;
+    public String toString() {
+
+        return "[" + getStatusIcon() + "] " + this.description;
     }
 
 }

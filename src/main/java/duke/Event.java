@@ -31,21 +31,25 @@ public class Event extends Task {
     /**
      * Returns the letter which indicates the type of the
      * task.
+     *
      * @return The letter E to represent event.
      */
     @Override
     public String taskIndicator() {
+
         return "E";
     }
 
     /**
      * Returns the string representation of the event.
+     *
      * @return The string representing the event.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                at.format(DateTimeFormatter.ofPattern("MMM d yyyy ',' HH:mm")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + at.format(DateTimeFormatter.ofPattern(
+                        "MMM d yyyy ',' HH:mm")) + ")";
     }
 
 }

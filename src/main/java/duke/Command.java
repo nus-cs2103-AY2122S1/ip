@@ -12,6 +12,7 @@ public abstract class Command {
     /**
      * A public constructor to initialise the command
      * to the given command.
+     *
      * @param command A string representing input from user.
      */
     public Command(String command) {
@@ -22,6 +23,7 @@ public abstract class Command {
     /**
      * Returns false as user is not exiting the
      * program yet.
+     *
      * @return The boolean value representing false.
      */
     public boolean isBye() {
@@ -30,11 +32,12 @@ public abstract class Command {
 
     /**
      * An abstract method for execution of commands.
+     *
      * @param tasks The list of tasks stored so far.
      * @param ui The Ui to deal with interactions with user.
      * @param storage The storage which saves and edits file content.
      * @throws DukeException
      */
     public abstract void execute(TaskList tasks,
-                                 Ui ui, Storage storage) throws DukeException;
+            Ui ui, Storage storage) throws DukeException;
 }

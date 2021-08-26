@@ -14,6 +14,7 @@ public class Duke {
 
     /**
      * Constructor for Duke
+     *
      * @param filePath
      */
     public Duke(String filePath) {
@@ -53,6 +54,7 @@ public class Duke {
 
     /**
      * Creates an instance of Duke and runs the program.
+     *
      * @param args Command line arguments
      */
 
