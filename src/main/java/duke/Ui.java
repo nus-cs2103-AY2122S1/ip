@@ -39,9 +39,20 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    public void showMatchingTasks(ArrayList<Task> matchingTaskList) {
+        if (matchingTaskList.size() == 0) {
+            System.out.println("There are no tasks containing that term in your list!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int num = 1;
+            for (Task task : matchingTaskList) {
+                System.out.printf("%d.%s%n", num, task);
+                num++;
+            }
+        }
+    }
+
     public void showTasks(ArrayList<Task> taskList) {
-
-
         if (taskList.size() == 0) {
             System.out.println("There are no tasks in your list!");
         } else {

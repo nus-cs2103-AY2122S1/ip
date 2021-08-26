@@ -8,6 +8,11 @@ public class Parser {
             return CommandType.LIST;
         } else if (command.equals("bye")) {
             return CommandType.BYE;
+        } else if (command.startsWith("find")) {
+            if(command.equals("find")) {
+                throw new DukeException("☹ OOPS!!! The find command needs a search term after it in the following format: find searchterm");
+            }
+            return CommandType.FIND;
         } else if (command.startsWith("delete")) {
             if (command.equals("delete")) {
                 throw new DukeException("☹ OOPS!!! The delete command needs a number after it in the following format: delete number");

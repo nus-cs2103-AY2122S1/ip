@@ -2,6 +2,8 @@ package duke;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
 
@@ -13,6 +15,20 @@ public class TaskList {
 
     public ArrayList<Task> getTaskList() {
         return this.taskList;
+    }
+
+    public void find(String searchTerm, Ui ui) throws DukeException {
+        if (searchTerm.isEmpty()) {
+            throw new DukeException("Please provide a search term after the find command in the following format: find searchterm");
+        }
+        try {
+            List<Task> matchingTaskList = this.taskList.stream()
+                    .filter(task -> task.toString().contains(searchTerm))
+                    .collect(Collectors.toList());
+            ui.showMatchingTasks(new ArrayList<Task>(matchingTaskList));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException("Please provide a search term after the find command in the following format: find searchterm");
+        }
     }
 
     public void done(String num, Storage storage, Ui ui) throws DukeException {

@@ -37,6 +37,9 @@ public class Duke {
                         ui.bye();
                         isExit = true;
                         break;
+                    case FIND:
+                        tasks.find(fullCommand.substring(5), ui);
+                        break;
                     case DELETE:
                         tasks.delete(fullCommand.substring(7), storage, ui);
                         break;
