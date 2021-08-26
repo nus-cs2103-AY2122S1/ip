@@ -1,9 +1,7 @@
 package duke.ui;
 
 public class Ui {
-    public Ui() {
-
-    }
+    public Ui() { }
 
     public void speak(String message) {
         System.out.println("\t_________________________________");

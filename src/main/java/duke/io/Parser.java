@@ -22,7 +22,7 @@ public class Parser {
             return COMMAND_MARK_TASK_STATUS;
         } else if (input.length() >= 6 && input.startsWith("delete")) {
             return COMMAND_DELETE_TASK;
-        } else if (input.startsWith("event") || input.startsWith("deadline") || input.startsWith("todo")){
+        } else if (input.startsWith("event") || input.startsWith("deadline") || input.startsWith("todo")) {
             return COMMAND_MAKE_TASK;
         } else {
             return COMMAND_UNKNOWN;

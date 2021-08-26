@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Augury {
-    static String VER     = "v0.8.6"; // Level-8 Dates and Times + A-MoreOOP, A-Packages, A-JUnit, A-Jar, A-CodingStandard
-    static String WELCOME =
+    private final String VER     = "v0.8.6"; // Level-8 Dates and Times + A-MoreOOP, A-Packages, A-JUnit, A-Jar, A-CodingStandard
+    private final String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
             "\t|   (`<       augury     *      |\n" +

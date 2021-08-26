@@ -53,7 +53,7 @@ public class TaskList {
     public String deleteTasks(ArrayList<Integer> listOfTasks) {
         StringBuilder res = new StringBuilder("I've removed these tasks: \n\t\t");
 
-        // reverse-sort the duke.tasks and remove duplicates
+        // reverse-sort the tasks and remove duplicates
         Set<Integer> s = new LinkedHashSet<>(listOfTasks);
         listOfTasks.clear();
         listOfTasks.addAll(s);
@@ -61,7 +61,7 @@ public class TaskList {
         Collections.reverse(listOfTasks);
 
         for (int i = 0; i < listOfTasks.size(); i++) {
-            // have to decrement by one since duke.tasks ArrayList is 0-indexed,
+            // have to decrement by one since tasks ArrayList is 0-indexed,
             // but the user-provided arguments uses a 1-indexed list
             int index = listOfTasks.get(i) - 1;
 
