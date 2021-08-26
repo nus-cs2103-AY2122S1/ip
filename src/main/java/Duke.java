@@ -7,18 +7,17 @@ import java.io.IOException;
 
 public class Duke {
 
-    private static ArrayList<Task> taskList = new ArrayList<>();
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         Storage storage = new Storage("./data/tasks.txt");
+        TaskList tasks;
 
         try {
-            taskList = storage.loadTasks();
+            tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            taskList = new ArrayList<>();
+            tasks = new TaskList(new ArrayList<>());
             // TODO: Create new file when cannot load tasks from current file
         }
 
@@ -41,11 +40,11 @@ public class Duke {
 
                 switch (userCommand) {
                     case "list":
-                        if (taskList.isEmpty()) {
+                        if (tasks.isEmpty()) {
                             System.out.println("Currently no tasks!");
                         }
-                        for (int i = 0; i < taskList.size(); i++) {
-                            System.out.printf("%d. %s%n", i + 1, taskList.get(i));
+                        for (int i = 0; i < tasks.numberOfTasks(); i++) {
+                            System.out.printf("%d. %s%n", i + 1, tasks.getTask(i));
                         }
                         break;
                     case "bye":
@@ -54,14 +53,14 @@ public class Duke {
                     case "done":
                         int done = getInputNumber(userInput);
 
-                        if (done >= taskList.size() || done < 0) {
+                        if (done >= tasks.numberOfTasks()|| done < 0) {
                             System.out.println("Task does not exist!");
                             continue;
                         }
 
-                        Task doneTask = taskList.get(done);
+                        Task doneTask = tasks.getTask(done);
                         doneTask.markAsDone();
-                        storage.editTaskFromFile(done, taskList);
+                        storage.editTaskFromFile(done, tasks);
 
                         System.out.printf("I've marked this task as done:\n" +
                                 "%s\n", doneTask.toString());
@@ -75,29 +74,29 @@ public class Duke {
                         }
 
                         if (userCommand.equals("todo")) {
-                            taskList.add(new Todo(userInput, false));
+                            tasks.addTask(new Todo(userInput, false));
                         } else if (userCommand.equals("deadline")) {
                             String[] deadlineInfo = splitBetween(userInput, "/by");
-                            taskList.add(new Deadline(deadlineInfo[0], deadlineInfo[1], false));
+                            tasks.addTask(new Deadline(deadlineInfo[0], deadlineInfo[1], false));
                         } else {
                             String[] eventInfo = splitBetween(userInput, "/at");
-                            taskList.add(new Event(eventInfo[0], eventInfo[1], false));
+                            tasks.addTask(new Event(eventInfo[0], eventInfo[1], false));
                         }
-                        addTask(taskList.get(taskList.size() - 1), storage);
+                        addTask(tasks.getTask(tasks.numberOfTasks() - 1), storage, tasks);
                         break;
                     case("delete"):
                         int delete = getInputNumber(userInput);
-                        if (delete >= taskList.size() || delete < 0) {
+                        if (delete >= tasks.numberOfTasks() || delete < 0) {
                             System.out.println("Task does not exist!");
                             continue;
                         }
 
-                        Task removedTask = taskList.get(delete);
-                        storage.deleteTaskFromFile(delete, taskList);
-                        taskList.remove(delete);
+                        Task removedTask = tasks.getTask(delete);
+                        storage.deleteTaskFromFile(delete, tasks);
+                        tasks.removeTask(delete);
 
                         System.out.printf("I've removed this task:\n%s\n", removedTask.toString());
-                        System.out.printf("Now you have %d tasks in your list.\n", taskList.size());
+                        System.out.printf("Now you have %d tasks in your list.\n", tasks.numberOfTasks());
                         break;
                     default:
                         throw new DukeException("Sorry I do not understand this directive.");
@@ -108,10 +107,10 @@ public class Duke {
         }
     }
 
-    private static void addTask(Task newTask, Storage storage) {
+    private static void addTask(Task newTask, Storage storage, TaskList tasks) {
         storage.saveTaskToFile(newTask);
         System.out.printf("Got it, I've added this task:\n %s\n", newTask.toString());
-        System.out.printf("Now you have %d tasks in your list.\n", taskList.size());
+        System.out.printf("Now you have %d tasks in your list.\n", tasks.numberOfTasks());
     }
 
     private static String[] splitBetween(String str, String separator) throws DukeException {

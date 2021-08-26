@@ -68,15 +68,15 @@ public class Storage {
         }
     }
 
-    public void deleteTaskFromFile(int taskIndex, ArrayList<Task> taskList) {
-        updateTaskFromFile(taskIndex, true, taskList);
+    public void deleteTaskFromFile(int taskIndex, TaskList tasks) {
+        updateTaskFromFile(taskIndex, true, tasks);
     }
 
-    public void editTaskFromFile(int taskIndex, ArrayList<Task> taskList) {
-        updateTaskFromFile(taskIndex, false, taskList);
+    public void editTaskFromFile(int taskIndex, TaskList tasks) {
+        updateTaskFromFile(taskIndex, false, tasks);
     }
 
-    private void updateTaskFromFile(int taskIndex, boolean delete, ArrayList<Task> taskList) {
+    private void updateTaskFromFile(int taskIndex, boolean delete, TaskList tasks) {
         try {
             StringBuilder newTasks = new StringBuilder();
             File taskFile = new File("./data/tasks.txt");
@@ -86,7 +86,7 @@ public class Storage {
                 if (index != taskIndex) {
                     newTasks.append(fileReader.nextLine()).append("\n");
                 } else if (!delete) {
-                    newTasks.append(taskList.get(taskIndex).toFileData()).append("\n");
+                    newTasks.append(tasks.getTask(taskIndex).toFileData()).append("\n");
                     fileReader.nextLine();
                 } else {
                     fileReader.nextLine();
