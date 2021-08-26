@@ -25,7 +25,7 @@ public class Ui {
     }
 
 
-    public void showExit() {
+    public void showFarewell() {
         System.out.println("\tBye, hope to see you again!");
     }
 

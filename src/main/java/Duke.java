@@ -22,46 +22,45 @@ public class Duke {
 
     private void run() {
         this.ui.showGreet();
+        running:
         while (true) {
             try {
                 String userInput = this.ui.readInput();
-                CommandType commandType = Parser.parseCommand(userInput);
-                String args = Parser.parseArgument(userInput);
-                switch (commandType) {
+                switch (Parser.parseCmd(userInput)) {
                 case BYE:
                     this.exit();
-                    this.ui.closeInput();
-                    return;
+                    break running;
                 case LIST:
                     this.ui.showList(this.taskList);
                     break;
                 case TODO:
-                    this.addTodo(args);
+                    this.addTodo(Parser.parseArgs(userInput));
                     break;
                 case EVENT:
-                    this.addEvent(args);
+                    this.addEvent(Parser.parseArgs(userInput));
                     break;
                 case DEADLINE:
-                    this.addDeadline(args);
+                    this.addDeadline(Parser.parseArgs(userInput));
                     break;
                 case DONE:
-                    this.markAsDone(args);
+                    this.markAsDone(Parser.parseArgs(userInput));
                     break;
                 case DELETE:
-                    this.delete(args);
+                    this.delete(Parser.parseArgs(userInput));
                     break;
                 }
             } catch (DukeException e) {
                 this.ui.showDukeException(e);
             }
         }
+        this.ui.showFarewell();
     }
 
 
     private void exit() {
         try {
+            this.ui.closeInput();
             this.storage.saveData(this.taskList);
-            this.ui.showExit();
         } catch (IOException e) {
             this.ui.showSavingError();
         }
