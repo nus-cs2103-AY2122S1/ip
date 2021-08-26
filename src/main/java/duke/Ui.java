@@ -10,10 +10,12 @@ public class Ui {
     private final static String INDENT_2 = "      ";
 
     public Ui() {
+
         scanner = new Scanner(System.in);
     }
 
     public void showLine() {
+
         System.out.println(DIVIDER);
     }
 

@@ -8,7 +8,7 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     public TaskList() {
-        taskList = null;
+        taskList = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> taskList) {
