@@ -69,6 +69,22 @@ public class TaskList {
     }
 
     /**
+     * Searches the TaskList for tasks containing keyword.
+     *
+     * @param keyword Provided by user.
+     * @return ArrayList Matched tasks.
+     */
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> matchedTasks = new ArrayList<>();
+        for (Task t : arrayList) {
+            if (t.getDescription().contains(keyword)) {
+                matchedTasks.add(t);
+            }
+        }
+        return matchedTasks;
+    }
+
+    /**
      * Gets the entire instance of the TaskList.
      *
      * TODO: Change this to toString (information hiding).

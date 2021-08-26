@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
 /**
  * Deals with making sense of the user command.
  *
@@ -161,10 +162,28 @@ public class Parser {
     }
 
     /**
+     * Validates a find command.
+     *
+     * Receives a string to match.
+     * @param req
+     * @throws NoDescriptionException If no keyword is appended after command.
+     */
+    public void validateFind(String req) throws NoDescriptionException {
+        if (req.equals("find")) {
+            throw new NoDescriptionException("Please specify a keyword to search up.");
+        }
+
+        String[] splitReq = req.split(" ", 2);
+        String keyword = splitReq[1];
+        ArrayList<Task> matchedTasks = tasks.findTasks(keyword);
+        ui.sendMatchedTasks(matchedTasks);
+    }
+
+    /**
      * Receives an invalid command and throws an exception.
      *
-     * @param req The full command
-     * @throws InvalidCommandException Always thrown
+     * @param req The full command.
+     * @throws InvalidCommandException Always thrown.
      */
     public static void invalidInput(String req) throws InvalidCommandException {
         throw new InvalidCommandException(
@@ -176,7 +195,7 @@ public class Parser {
      *
      * The only instance method in Parser class.
      *
-     * @param fullCommand
+     * @param fullCommand The full command.
      * @throws DukeException
      * @throws IOException
      */
@@ -230,6 +249,10 @@ public class Parser {
                 Task deletedTask = this.tasks.deleteTask(indexOfDeletedTask);
                 storage.rewriteFile(tasks);
                 ui.sendDeleted(deletedTask);
+                break;
+
+            case "find":
+                validateFind(fullCommand);
                 break;
 
             default:
