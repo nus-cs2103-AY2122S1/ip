@@ -1,4 +1,6 @@
-public class Event extends Task { //needs a start and end time, right now is just a string
+package duke;
+
+public class Event extends Task {
     public String time;
 
     public Event(String description, String time) {

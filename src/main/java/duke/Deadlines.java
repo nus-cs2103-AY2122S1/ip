@@ -1,4 +1,6 @@
-public class Deadlines extends Task { //we represent the deadline as a String
+package duke;
+
+public class Deadlines extends Task {
     protected String time;
 
     public Deadlines(String description, String time) {
