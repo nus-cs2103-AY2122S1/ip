@@ -34,7 +34,7 @@ public class Ui {
             e.printStackTrace();
         }
 
-        return input;
+        return input.trim();
     }
 
     public void printErrorMessage(String msg) {
