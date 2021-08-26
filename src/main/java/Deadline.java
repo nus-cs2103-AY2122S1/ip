@@ -1,24 +1,24 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents tasks with deadline.
  * 
  * @author Gordon Yit
- * @Since 23-08-21
+ * @Version CS2103T, Semester 1
  */
-
 public class Deadline extends Task {
-
-    protected String by;
     private final String TASK_MARKER = "D";
-
+    private DateDue dateDue;
     /**
      * Class constructor for Deadline class.
      * 
      * @param description the task description.
      * @param by the time by which the task must be completed.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DateTimeParseException {
         super(description);
-        this.by = by;
+        dateDue = new DateDue(by);
     }
 
     /**
@@ -29,7 +29,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("| %s | %s | %s", TASK_MARKER, super.toString(), by);
+        return String.format("| %s | %s | %s", TASK_MARKER, super.toString(), dateDue.toString());
     }
 
     /**
@@ -40,4 +40,16 @@ public class Deadline extends Task {
     public String getTaskMarker() {
         return TASK_MARKER;
     }
+
+    /**
+     * checks if given datetime matches the tasks date time.
+     *
+     * @param dateTime date time to compare with.
+     * @return true if the task date time matches the date time given.
+     */
+    @Override
+    public boolean isSameDate(Object dateTime) {
+        return this.dateDue.getLocalDate().equals(dateTime);
+    }
+    
 }

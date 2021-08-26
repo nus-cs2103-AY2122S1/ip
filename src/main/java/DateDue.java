@@ -1,5 +1,6 @@
-import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 
 /**
  * Represents the date time formating of date and time inputs.
@@ -7,18 +8,16 @@ import java.time.LocalDateTime;
  * @author Gordon Yit
  * @Version CS2103T Semester 1
  */
-public class DateTime {
-    protected LocalDateTime dateTime;
-    private int day, year, hour;
+public class DateDue {
+    protected LocalDate dateTime;
+    private int day, year;
     private String month;
-    private final int NOON = 12;
     
-    public DateTime(String deadlineDate) throws DateTimeParseException {
-        dateTime = LocalDateTime.parse(deadlineDate.replace(" ", "T"));
+    public DateDue(String deadlineDate) throws DateTimeParseException {
+        dateTime = LocalDate.parse(deadlineDate.replace(" ", "T"));
         day = dateTime.getDayOfMonth();
         month = dateTime.getMonth().toString().substring(0, 3);
         year = dateTime.getYear();
-        hour = dateTime.getHour();
     }
 
     /**
@@ -28,8 +27,16 @@ public class DateTime {
      */
     @Override
     public String toString() {
-        String timing = hour < NOON ? hour + "AM": hour - NOON + "PM";
-        String dueBy = String.format("%s %s %s %s", day, month, year, timing);
+        String dueBy = String.format("%s %s %s", day, month, year);
         return dueBy;
+    }
+
+    /**
+     * Retrieves the local date object.
+     * 
+     * return the local date of the date due.
+     */
+    public LocalDate getLocalDate() {
+        return this.dateTime;
     }
 }

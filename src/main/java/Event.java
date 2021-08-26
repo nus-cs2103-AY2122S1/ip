@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents tasks with specific timing.
  * 
@@ -7,7 +10,7 @@
 
 public class Event extends Task {
 
-    protected String timing;
+    private DateDue dateDue;
     private final String TASK_MARKER = "E";
     
     /**
@@ -16,9 +19,9 @@ public class Event extends Task {
      * @param description the task description.
      * @param timing the duration of the event.
      */
-    public Event(String description, String timing) {
+    public Event(String description, String timing) throws DateTimeParseException {
         super(description);
-        this.timing = timing;
+        this.dateDue = new DateDue(timing);
     }
 
     /**
@@ -29,7 +32,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("| %s | %s | %s", TASK_MARKER, super.toString(), timing);
+        return String.format("| %s | %s | %s", TASK_MARKER, super.toString(), dateDue.toString());
     }
 
     /**
@@ -39,5 +42,16 @@ public class Event extends Task {
      */
     public String getTaskMarker() {
         return TASK_MARKER;
+    }
+
+    /**
+     * checks if given datetime matches the tasks date time.
+     * 
+     * @param dateTime date time to compare with.
+     * @return true if the task date time matches the date time given.
+     */
+    @Override
+    public boolean isSameDate(Object dateTime) {
+        return this.dateDue.getLocalDate().equals(dateTime);
     }
 }
