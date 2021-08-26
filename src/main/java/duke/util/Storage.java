@@ -112,7 +112,7 @@ public class Storage {
 			}
 			fw.close();
 		} catch (IOException e) {
-			throw new DukeException("File not found!\n");
+			throw new DukeException("Note: results are not saved to disk)!\n");
 		}
 	}
 }

@@ -1,6 +1,4 @@
 [T][ ] work
 [D][X] ip (by: 2021-03-23)
-[E][X] meeting (at: tmr 9pm)
-[D][X] SLEEP (by: 2021-08-26)
 [D][X] drink (by: 2012-02-12)
-[E][ ] diveen (at: today 9pm)
+[E][X] diveen (at: today 9pm)
