@@ -22,7 +22,7 @@ public class Storage {
             t = new ToDo(desc, isDone);
             break;
         case ("E"):
-            t = new Event(desc, isDone, params[6]);
+            t = new Event(desc, isDone, params[6] + " " + params[7]);
             break;
         case ("D"):
             t = new Deadline(desc, isDone, params[6]);

@@ -3,19 +3,25 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
+    private String at;
     private LocalDate eventDate;
     private LocalTime eventTime;
 
     public Event(String description, String at) {
         super(description);
-        String[] dateTime = at.split(" ");
-        this.eventDate =  LocalDate.parse(dateTime[0].trim());
-        this.eventTime = LocalTime.parse(dateTime[1].trim());
+        setDateTime(at);
     }
 
     public Event(String description, boolean isDone, String at) {
         super(description, isDone);
+        setDateTime(at);
+    }
+
+    private void setDateTime(String at) {
         this.at = at;
+        String[] dateTime = at.split(" ");
+        this.eventDate =  LocalDate.parse(dateTime[0].trim());
+        this.eventTime = LocalTime.parse(dateTime[1].trim());
     }
 
     @Override
