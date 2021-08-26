@@ -17,18 +17,21 @@ public class Ui {
             + "How can I help you today?";
 
     private static final String GOODBYE = "Bye. Hope to see you again soon!";
-    private Scanner myScanner;
+    private final Scanner myScanner;
 
     public Ui() {
         myScanner = new Scanner(System.in);  // Create a Scanner object
     }
+
     private static void reply(String output) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(output);
         System.out.println(HORIZONTAL_LINE);
     }
 
-    /** Prints greetings & goodbyes **/
+    /**
+     * Prints greetings & goodbyes
+     **/
     public void greet(Boolean isGreeting) {
         String printMessage = isGreeting
                 ? GREETING
@@ -36,18 +39,24 @@ public class Ui {
         reply(printMessage);
     }
 
-    /** Returns the next line of user input **/
+    /**
+     * Returns the next line of user input
+     **/
     public String getInput() {
         String userInput = myScanner.nextLine();
         return userInput;
     }
 
-    /** Prints a string**/
+    /**
+     * Prints a string
+     **/
     public void print(String s) {
         reply(s);
     }
 
-    /** Prints error message of an exception **/
+    /**
+     * Prints error message of an exception
+     **/
     public void printException(Exception e) {
         reply(e.getMessage());
     }

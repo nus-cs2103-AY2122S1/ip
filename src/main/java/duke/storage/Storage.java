@@ -1,7 +1,7 @@
 package duke.storage;
 
-import duke.tasks.Task;
 import duke.DukeExceptions;
+import duke.tasks.Task;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -15,7 +15,7 @@ public class Storage {
     private static final Path DIRECTORY = Paths.get("data");
     private static final Path FILE_PATH = Paths.get("data", "duke.txt");
 
-    private TaskList tasks = new TaskList();
+    private final TaskList tasks = new TaskList();
 
     private static void directoryCreator() {
         try {
@@ -46,11 +46,11 @@ public class Storage {
         } catch (IOException io) {
             System.out.println(io.getMessage());
         }
-        
+
         tasks.importFromList(saveFile);
 
     }
-    
+
     public void save() {
         try {
             Files.write(FILE_PATH, tasks.exportToText().getBytes());
