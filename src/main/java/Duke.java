@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -23,6 +24,14 @@ public class Duke {
         fw.close();
     }
 
+//    private static void printFileContents(File file) throws FileNotFoundException {
+//        //File f = new File(filePath); // create a File for the given file path
+//        Scanner s = new Scanner(file); // create a Scanner using the File as the source
+//        while (s.hasNext()) {
+//            System.out.println(s.nextLine());
+//        }
+//    }
+
     public static void main(String[] args) {
         String end = "bye";
         String display = "list";
@@ -32,15 +41,19 @@ public class Duke {
         String taskTodo = "todo";
         String taskDdl = "deadline";
         String taskEve = "event";
-        ArrayList<Task> inputs = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy kk:mm", Locale.ENGLISH);
 
-//        String dtString = "26/08/2021 20:00";
-//        LocalDateTime datetime = LocalDateTime.parse(dtString, formatter);
-//        System.out.println(datetime.toString());
+        // a List to store all user-generated Tasks
+        ArrayList<Task> inputs = new ArrayList<>();
+
+        // a List to store all Tasks read from data.txt
+        ArrayList<String> dataRead = new ArrayList<>();
 
         // check and create folder and file to save data
         File data = new File("./data");
+        File dataFile = new File("./data/data.txt");
+
+        // if data folder does not exist, create folder and file
         if (!data.exists()) {
             data.mkdir();
             try {
@@ -55,19 +68,82 @@ public class Duke {
                 e.printStackTrace();
             }
         }
-        try {
-            File dataDirectory = new File("./data/data.txt");
-            if (dataDirectory.createNewFile()) {
-                System.out.println("Data file has been created.");
-            } else {
-                // System.out.println("Data folder is already present.");
+
+        // if data.txt does not exist, create file
+        if (!dataFile.exists()) {
+            try {
+                File dataDirectory = new File("./data/data.txt");
+                if (dataDirectory.createNewFile()) {
+                    System.out.println("Data file has been created.");
+                } else {
+                    // System.out.println("Data folder is already present.");
+                }
+            } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
         }
 
-        String dataFile = "./data/data.txt";
+        // if data.txt exists
+        try {
+            Scanner scanner = new Scanner(dataFile);
+            while (scanner.hasNextLine()) {
+                dataRead.add(scanner.nextLine());
+            }
+            for (int i = 0; i < dataRead.size(); i++) {
+                String toAdd = dataRead.get(i);
+                // case Todo
+                if (toAdd.charAt(1) == 'T') {
+                    String[] parts = toAdd.split("] ");
+                    String todoName = parts[1];
+                    Todo todoToAdd = new Todo(todoName);
+                    if (toAdd.charAt(4) == 'X') {
+                        todoToAdd.setDone();
+                    }
+                    inputs.add(todoToAdd);
+                }
+                // case Deadline
+                if (toAdd.charAt(1) == 'D') {
+                    String[] parts1 = toAdd.split("] ");
+                    String nameTime = parts1[1];
+                    String[] parts2 = nameTime.split(" \\(by: ");
+                    String ddlName = parts2[0];
+                    String ddlTimeStr = parts2[1].substring(0, parts2[1].length() - 1);
+                    DateTimeFormatter formatterDdl = DateTimeFormatter.ofPattern(
+                            "EEE, dd/MMM/yyyy hh:mm a");
+                    LocalDateTime dateTime = LocalDateTime.parse(ddlTimeStr, formatterDdl);
+                    Deadline ddlToAdd = new Deadline(ddlName, dateTime);
+                    if (toAdd.charAt(4) == 'X') {
+                        ddlToAdd.setDone();
+                    }
+                    inputs.add(ddlToAdd);
+                }
+                // case Event
+                if (toAdd.charAt(1) == 'E') {
+                    String[] parts1 = toAdd.split("] ");
+                    String nameTime = parts1[1];
+                    String[] parts2 = nameTime.split(" \\(at: ");
+                    String eveName = parts2[0];
+                    String eveTimeStr = parts2[1].substring(0, parts2[1].length() - 1);
+                    DateTimeFormatter formatterEve = DateTimeFormatter.ofPattern(
+                            "EEE, dd/MMM/yyyy hh:mm a");
+                    LocalDateTime dateTime = LocalDateTime.parse(eveTimeStr, formatterEve);
+                    Event eveToAdd = new Event(eveName, dateTime);
+                    if (toAdd.charAt(4) == 'X') {
+                        eveToAdd.setDone();
+                    }
+                    inputs.add(eveToAdd);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("data.txt is not found.");
+        }
+
+//        for (int i = 0; i < inputs.size(); i++) {
+//            System.out.println("test read todo and ddl\n" + dataRead.get(i));
+//        }
+
+        String dataFileStr = "./data/data.txt";
 
         // Welcome message
         System.out.println(lineBreak
@@ -99,14 +175,14 @@ public class Duke {
                     inputs.get(index).setDone();
 
                     try {
-                        writeToFile(dataFile, inputs.get(0).toString() + System.lineSeparator());
+                        writeToFile(dataFileStr, inputs.get(0).toString() + System.lineSeparator());
                     } catch (IOException e) {
                         System.out.println("Something is wrong... " + e.getMessage());
                     }
 
                     for (int i = 1; i < inputs.size(); i++) {
                         try {
-                            appendToFile(dataFile, inputs.get(i).toString() + System.lineSeparator());
+                            appendToFile(dataFileStr, inputs.get(i).toString() + System.lineSeparator());
                         } catch (IOException e) {
                             System.out.println("Something is wrong... " + e.getMessage());
                         }
@@ -132,14 +208,14 @@ public class Duke {
                     inputs.remove(index);
 
                     try {
-                        writeToFile(dataFile, inputs.get(0).toString() + System.lineSeparator());
+                        writeToFile(dataFileStr, inputs.get(0).toString() + System.lineSeparator());
                     } catch (IOException e) {
                         System.out.println("Something is wrong... " + e.getMessage());
                     }
 
                     for (int i = 1; i < inputs.size(); i++) {
                         try {
-                            appendToFile(dataFile, inputs.get(i).toString() + System.lineSeparator());
+                            appendToFile(dataFileStr, inputs.get(i).toString() + System.lineSeparator());
                         } catch (IOException e) {
                             System.out.println("Something is wrong... " + e.getMessage());
                         }
@@ -161,14 +237,14 @@ public class Duke {
                     inputs.add(newTodo);
 
                     try {
-                        writeToFile(dataFile, inputs.get(0).toString() + System.lineSeparator());
+                        writeToFile(dataFileStr, inputs.get(0).toString() + System.lineSeparator());
                     } catch (IOException e) {
                         System.out.println("Something is wrong... " + e.getMessage());
                     }
 
                     for (int i = 1; i < inputs.size(); i++) {
                         try {
-                            appendToFile(dataFile, inputs.get(i).toString() + System.lineSeparator());
+                            appendToFile(dataFileStr, inputs.get(i).toString() + System.lineSeparator());
                         } catch (IOException e) {
                             System.out.println("Something is wrong... " + e.getMessage());
                         }
@@ -196,14 +272,14 @@ public class Duke {
                     inputs.add(newDeadline);
 
                     try {
-                        writeToFile(dataFile, inputs.get(0).toString() + System.lineSeparator());
+                        writeToFile(dataFileStr, inputs.get(0).toString() + System.lineSeparator());
                     } catch (IOException e) {
                         System.out.println("Something is wrong... " + e.getMessage());
                     }
 
                     for (int i = 1; i < inputs.size(); i++) {
                         try {
-                            appendToFile(dataFile, inputs.get(i).toString() + System.lineSeparator());
+                            appendToFile(dataFileStr, inputs.get(i).toString() + System.lineSeparator());
                         } catch (IOException e) {
                             System.out.println("Something is wrong... " + e.getMessage());
                         }
@@ -226,14 +302,14 @@ public class Duke {
                     inputs.add(newEvent);
 
                     try {
-                        writeToFile(dataFile, inputs.get(0).toString() + System.lineSeparator());
+                        writeToFile(dataFileStr, inputs.get(0).toString() + System.lineSeparator());
                     } catch (IOException e) {
                         System.out.println("Something is wrong... " + e.getMessage());
                     }
 
                     for (int i = 1; i < inputs.size(); i++) {
                         try {
-                            appendToFile(dataFile, inputs.get(i).toString() + System.lineSeparator());
+                            appendToFile(dataFileStr, inputs.get(i).toString() + System.lineSeparator());
                         } catch (IOException e) {
                             System.out.println("Something is wrong... " + e.getMessage());
                         }
