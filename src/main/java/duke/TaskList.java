@@ -18,9 +18,16 @@ public class TaskList {
     public Task removeTask(int index) {
         return this.tasks.remove(index);
     }
-    
+
     public Task getTask(int index) {
         return this.tasks.get(index);
+    }
+
+    public TaskList filterTasks(String searchStr) {
+        ArrayList<Task> tasks = new ArrayList<>(this.tasks);
+        tasks.removeIf((task) -> !task.getDescription().toLowerCase().contains(searchStr.toLowerCase()));
+
+        return new TaskList(tasks);
     }
 
     public int size() {
