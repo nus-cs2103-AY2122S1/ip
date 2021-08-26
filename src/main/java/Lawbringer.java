@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import java.io.IOException;
@@ -8,16 +6,16 @@ public class Lawbringer {
 
     private final Storage storage;
     private final Ui ui;
-    private List<Task> tasks;
+    private TaskList taskList;
 
     public Lawbringer(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
         try {
-            tasks = storage.createTaskList();
+            taskList = new TaskList(storage.createTaskList());
         } catch (IOException e) {
             e.printStackTrace();
-            tasks = new ArrayList<>();
+            taskList = new TaskList();
         }
     }
 
@@ -32,14 +30,14 @@ public class Lawbringer {
 
         while (!userInput.equals("bye")) {
             try {
-                Parser.parse(userInput, tasks, ui);
+                Parser.parse(userInput, taskList, ui);
             } catch (LawbringerException e) {
                 e.printStackTrace();
             }
             userInput = scanner.nextLine();
         }
         try {
-            storage.rewriteFile(tasks);
+            storage.rewriteFile(taskList);
         } catch (IOException e) {
             e.printStackTrace();
         }

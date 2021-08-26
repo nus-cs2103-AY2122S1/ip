@@ -1,54 +1,28 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 
 public class Parser {
 
-    protected static void parse(String userInput, List<Task> tasks, Ui ui) throws LawbringerException {
+    protected static void parse(String userInput, TaskList taskList, Ui ui) throws LawbringerException {
         String commandType = userInput.split(" ")[0];
-        Task task;
         try {
             switch (commandType) {
             case "list":
-                int counter = 1;
-                for (Task t : tasks) {
-                    System.out.println(counter + "." + t.toString());
-                    counter++;
-                }
+                taskList.printTaskList();
                 break;
             case "done":
-                int doneIndex = Integer.parseInt(userInput.split(" ")[1]);
-                tasks.get(doneIndex - 1).markAsDone();
-                task = tasks.get(doneIndex - 1);
-                ui.showDoneMessage(task);
+                taskList.markTaskAsDone(userInput, ui);
                 break;
             case "delete":
-                int deleteIndex = Integer.parseInt(userInput.split(" ")[1]);
-                task = tasks.get(deleteIndex - 1);
-                tasks.remove(deleteIndex - 1);
-                ui.showDeleteMessage(task, tasks);
+                taskList.deleteTask(userInput, ui);
                 break;
             case "todo":
-                ToDo todo = new ToDo(userInput.substring(5));
-                tasks.add(todo);
-                ui.showTodoMessage(todo, tasks);
+                taskList.addTodoTask(userInput, ui);
                 break;
             case "deadline":
-                int deadlineIndex = userInput.indexOf('/');
-                String by = userInput.substring(deadlineIndex + 4);
-                LocalDate localDate = LocalDate.parse(by);
-                Deadline deadline = new Deadline(userInput.substring(9, deadlineIndex),
-                        localDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
-                tasks.add(deadline);
-                ui.showDeadlineMessage(deadline, tasks);
+                taskList.addDeadlineTask(userInput, ui);
                 break;
             case "event":
-                int eventIndex = userInput.indexOf('/');
-                String at = userInput.substring(eventIndex + 4);
-                Event event = new Event(userInput.substring(6, eventIndex), at);
-                tasks.add(event);
-                ui.showEventMessage(event, tasks);
+                taskList.addEventTask(userInput, ui);
                 break;
             default:
                 throw new LawbringerException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

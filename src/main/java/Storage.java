@@ -35,9 +35,9 @@ public class Storage {
         fw.close();
     }
 
-    protected void rewriteFile(List<Task> tasks) throws IOException {
+    protected void rewriteFile(TaskList taskList) throws IOException {
         StringBuilder newFileText = new StringBuilder();
-        for (Task task : tasks) {
+        for (Task task : taskList.getList()) {
             newFileText.append(task.toString()).append("\n");
         }
         FileWriter fw = new FileWriter(filePath);
