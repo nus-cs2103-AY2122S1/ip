@@ -8,16 +8,16 @@ import java.util.List;
 /**
  * kermit.command.ToDo list stores items
  */
-public class ToDo extends ArrayList<Task> {
+public class TaskList extends ArrayList<Task> {
 
     /**
      * kermit.command.ToDo constructor
      */
-    public ToDo() {
+    public TaskList() {
         super();
     }
 
-    public ToDo(List<Task> taskArr) {
+    public TaskList(List<Task> taskArr) {
         super(taskArr);
     }
 

@@ -36,7 +36,7 @@ public class Ui {
         formatAndPrintText(goodbyeText);
     }
 
-    public void showListItems(ToDo list) {
+    public void showListItems(TaskList list) {
         formatAndPrintText(listText + "\n" + list);
     }
 
@@ -46,12 +46,12 @@ public class Ui {
      * @param task kermit.command.Task that is added to list
      * @param list List that task was added to
      */
-    public void showAddTaskMessage(Task task, ToDo list) {
+    public void showAddTaskMessage(Task task, TaskList list) {
         formatAndPrintText("Got it. I've added this task:\n"
                 + task + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
-    public void showDeleteTaskMessage(Task task, ToDo list) {
+    public void showDeleteTaskMessage(Task task, TaskList list) {
         formatAndPrintText("Noted. I've removed this task:\n"
                 + task + "\nNow you have " + list.size() + " tasks in the list.");
     }

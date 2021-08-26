@@ -1,8 +1,8 @@
 package kermit.command;
 
 import kermit.KermitException;
+import kermit.TaskList;
 import kermit.Ui;
-import kermit.ToDo;
 import kermit.Storage;
 import kermit.tasks.Deadline;
 import kermit.tasks.Event;
@@ -56,7 +56,7 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
         taskList.add(task);
         ui.showAddTaskMessage(task, taskList);
         storage.save(taskList);

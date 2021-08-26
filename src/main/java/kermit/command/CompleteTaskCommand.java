@@ -2,7 +2,7 @@ package kermit.command;
 
 import kermit.KermitException;
 import kermit.Ui;
-import kermit.ToDo;
+import kermit.TaskList;
 import kermit.Storage;
 import kermit.tasks.Task;
 
@@ -21,7 +21,7 @@ public class CompleteTaskCommand extends Command {
     }
 
     @Override
-    public void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
         try {
             Task task = taskList.completeTask(taskNum);
             ui.showCompleteTaskMessage(task);

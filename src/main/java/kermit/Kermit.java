@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 
 public class Kermit {
     private Storage storage;
-    private ToDo taskList;
+    private TaskList taskList;
     private Ui ui;
 
     private static LocalDate formatUserDateFormat(String s) throws KermitException {
@@ -27,10 +27,10 @@ public class Kermit {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            taskList = new ToDo(storage.load());
+            taskList = new TaskList(storage.load());
         } catch (KermitException e) {
             ui.showLoadingError();
-            taskList = new ToDo();
+            taskList = new TaskList();
         }
     }
 

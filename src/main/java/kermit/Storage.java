@@ -87,7 +87,7 @@ public class Storage {
     }
 
     // Saves task list data to file, file is overwritten
-    public void save(ToDo todo) throws KermitException {
+    public void save(TaskList todo) throws KermitException {
         try {
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
