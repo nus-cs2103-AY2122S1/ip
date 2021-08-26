@@ -6,7 +6,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
 public class Parser {
-    
+
+    /**
+     * Returns a String array that contains the useful and necessary parts of a command to be executed.
+     *
+     * @param newCommand String version of a command.
+     * @return String array.
+     */
     public static String[] parse(String newCommand) {
         if (Pattern.compile("(?i)bye\\s*").matcher(newCommand).matches()) {
             return new String[]{"bye"};
@@ -26,7 +32,13 @@ public class Parser {
             return new String[]{"fail"};
         }
     }
-    
+
+    /**
+     * Returns a LocalDateTime object after parsing a string version of date and time.
+     *
+     * @param dateTime String version of date and time.
+     * @return LocalDateTime object.
+     */
     public static LocalDateTime parseDateTime(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd HHmm");
         LocalDateTime deadlineDT;
@@ -38,7 +50,13 @@ public class Parser {
                     + "Please try again.");
         }
     }
-    
+
+    /**
+     * Returns the integer version of a string number.
+     *
+     * @param intString String version of a number.
+     * @return integer version of the given number.
+     */
     public static int parseIndex(String intString) {
         return Integer.parseInt(intString.trim());    
     }

@@ -7,13 +7,22 @@ import java.util.Scanner;
 
 public class Ui {
 
+    /** Line divider for beautification of command line interface */
     private static final String H_LINE = "------------------------------\n";
+
+    /** Scanner to be used for taking in the user's commands */
     private Scanner commandInput;
 
+    /**
+     * Constructs a Ui object.
+     */
     public Ui() {
         
     }
 
+    /**
+     * Prints a welcome message.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -30,11 +39,21 @@ public class Ui {
     public void beginListen() {
         commandInput = new Scanner(System.in);
     }
-    
+
+    /**
+     * Returns the next line of user input from the command line interface.
+     *
+     * @return Next command.
+     */
     public String readCommand() {
         return commandInput.nextLine();
     }
-    
+
+    /**
+     * Prints out the string representation of the list of tasks.
+     *
+     * @param tasks ArrayList containing all the tasks.
+     */
     public void showList(ArrayList<Task> tasks) {
         System.out.print(H_LINE);
         if (tasks.size() > 0) {
@@ -47,7 +66,10 @@ public class Ui {
         }
         System.out.print(H_LINE);
     }
-    
+
+    /**
+     * Prints a message indicating that a user command has failied to be understood by the bot.
+     */
     public void showCommandFail() {
         System.out.print(H_LINE + "I didn't get that. Please try again.\n" + H_LINE);
     }
