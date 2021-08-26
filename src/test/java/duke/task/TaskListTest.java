@@ -1,13 +1,12 @@
 package duke.task;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
 
     @Test
-    void delete() {
+    void testDelete() {
         TaskList taskList = new TaskList();
         Todo test1 = new Todo("test1");
         Todo test2 = new Todo("test1");
@@ -20,7 +19,7 @@ public class TaskListTest {
     }
 
     @Test
-    void getLength() {
+    void testGetLength() {
         TaskList taskList = new TaskList();
         for (int i = 0; i < 10; i++) {
             taskList.add(new Todo("test"));
@@ -30,7 +29,7 @@ public class TaskListTest {
 
 
     @Test
-    void get() {
+    void testGet() {
         TaskList taskList = new TaskList();
         Todo todo = new Todo("todo");
         taskList.add(todo);
@@ -39,7 +38,7 @@ public class TaskListTest {
 
 
     @Test
-    void isEmpty() {
+    void testIsEmpty() {
         TaskList taskList = new TaskList();
         assertTrue(taskList.isEmpty(), "Empty list should return true for `isEmpty()`.");
     }
