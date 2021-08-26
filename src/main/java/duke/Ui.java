@@ -33,6 +33,7 @@ public class Ui {
 
     /**
      * scan the next line
+     *
      * @return the user's raw input
      *
      */
@@ -52,6 +53,7 @@ public class Ui {
 
     /**
      * Prints the current list formatted
+     *
      * @param taskList current list
      *
      */
@@ -71,6 +73,7 @@ public class Ui {
 
     /**
      * prints the task added to list formatted
+     *
      * @param task new task added
      * @param taskLength the new length of the list
      *
@@ -93,6 +96,7 @@ public class Ui {
 
     /**
      * prints the task that has been marked as complete formatted
+     *
      * @param completedTask the description field of the task that has been completed
      *
      */
@@ -105,6 +109,7 @@ public class Ui {
 
     /**
      * prints the specific task deleted by user formatted
+     *
      * @param deletedTask description field of the task that has been deleted
      * @param listLength current length of list after deletion
      *
@@ -125,6 +130,7 @@ public class Ui {
 
     /**
      * Print file error that has occurred during storage
+     *
      * @param e the error to getMessage()
      */
     public void printFileError(IOException e) {
@@ -135,6 +141,7 @@ public class Ui {
 
     /**
      * print type of error formatted
+     *
      * @param message error message to be understood
      * @param emoticon emoticon to add expressions and character to duke
      *
@@ -147,6 +154,7 @@ public class Ui {
 
     /**
      * print already formatted error messages
+     *
      * @param message formatted error message
      *
      */

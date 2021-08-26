@@ -22,6 +22,7 @@ public class ErrorCommand extends Command {
 
     /**
      * Constructor for Error command
+     *
      * @param error error message
      * @param emoticon emoticon to express dissatisfaction for the error committed
      *

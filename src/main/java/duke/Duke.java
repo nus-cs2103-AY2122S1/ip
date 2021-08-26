@@ -50,6 +50,7 @@ public class Duke {
 
     /**
      * Driver for duke
+     *
      * @param args arguments that user inputs
      */
     public static void main(String[] args) {
