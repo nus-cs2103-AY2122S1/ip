@@ -92,11 +92,11 @@ public class TaskList {
      */
     public void findTask(String keyword) {
         boolean canFindMatch = false;
-        Ui.printLine();
 
+        Ui.printLine();
         for (int i = 0; i < tasks.size(); i++) {
             String currentTask = tasks.get(i).toString();
-            if (currentTask.substring(7).matches("(.*)" + keyword + "(.*)")) {
+            if (currentTask.substring(7).matches("(?i)(.*)" + keyword + "(.*)")) {
                 if (!canFindMatch) {
                     canFindMatch = true;
                     System.out.println("\tHere are the matching tasks in your list:");
