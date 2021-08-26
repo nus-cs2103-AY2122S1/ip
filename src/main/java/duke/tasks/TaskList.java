@@ -122,9 +122,12 @@ public class TaskList {
         return res.toString();
     }
 
+    /**
+     * Returns an indented, newlined, 1-indexed {@code String} of the
+     * {@code Task}s contained in this {@code TaskList}.
+     */
     @Override
     public String toString() {
-        // returns an indented, newlined, 1-indexed, String of the Tasks in this duke.tasks.TaskList
         StringBuilder res = new StringBuilder("Here are your tasks:\n\t ");
         for (int i = 0; i < tasks.size(); i++) {
             res.append(i+1).append(". ").append(tasks.get(i));

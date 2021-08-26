@@ -96,7 +96,6 @@ public class TaskFactory {
         }
     }
 
-
     private void checkDetailsNonEmpty(String newTaskType, String details) throws AuguryException {
         int commandLength = newTaskType.length() + 1;
         if (details.length() <= commandLength ||

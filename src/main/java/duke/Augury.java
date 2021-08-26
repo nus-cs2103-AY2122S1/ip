@@ -74,7 +74,7 @@ public class Augury {
     }
 
     /**
-     * Main loop of {@code Augury}. Parses and execute commands in a loop.
+     * Runs main loop of {@code Augury}. Parses and execute commands in a loop.
      *
      * @throws InvalidActionException If action commands were malformed.
      * @throws InvalidTaskCreationException If invalid parameters were provided in task creation.
