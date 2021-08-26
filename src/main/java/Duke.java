@@ -3,7 +3,6 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -11,9 +10,8 @@ public class Duke {
     private static String FILENAME = "duke.txt";
     private static String DATAPATH = String.valueOf(Paths.get(Duke.DIR, Duke.FILENAME));
 
-    private Scanner input = new Scanner(System.in);
-//    private ArrayList<Task> list = new ArrayList<>();
-    private TaskList taskList = new TaskList();
+    private TaskList taskList;
+    private Ui ui;
 
     private enum CommandType {
         BYE, LIST,
@@ -22,15 +20,9 @@ public class Duke {
     }
 
 
-    private void greet() {
-        String logo = " ____        _\n"
-                    + "|  _ \\ _   _| | _____\n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        System.out.println("Welcome! I'm Duke.");
-        System.out.println("What can I do for you?\n");
+    public Duke() {
+        this.taskList = new TaskList();
+        this.ui = new Ui();
     }
 
 
@@ -46,7 +38,7 @@ public class Duke {
         } catch (FileNotFoundException e) {
             this.createDatabase();
         } catch (DukeException e) {
-            System.out.println("Error when reading entry!");
+            this.ui.showDatabaseError();
         }
     }
 
@@ -85,28 +77,27 @@ public class Duke {
         try {
             db.createNewFile();
         } catch (IOException e) {
-            System.out.println("Error when creating the database!");
+            this.ui.showLoadingError();
         }
     }
 
 
     private void run() {
-        this.greet();
+        this.ui.showGreet();
         this.loadData();
-
         while (true) {
             try {
-                String rawInput = this.input.nextLine();
+                String rawInput = this.ui.readInput();
                 String[] userInput = rawInput.split(" ", 2);
-                CommandType command = this.getCommand(userInput[0]);
+                CommandType commandType = this.getCommand(userInput[0]);
 
-                switch (command) {
+                switch (commandType) {
                 case BYE:
                     this.exit();
-                    this.input.close();
+                    this.ui.closeInput();
                     return;
                 case LIST:
-                    this.showList();
+                    this.ui.showList(this.taskList);
                     break;
                 case TODO:
                     this.addTodo(userInput);
@@ -125,7 +116,7 @@ public class Duke {
                     break;
                 }
             } catch (DukeException e) {
-                System.out.printf("\t%s\n\n", e);
+                this.ui.showDukeException(e);
             }
         }
     }
@@ -143,9 +134,9 @@ public class Duke {
     private void exit() {
         try {
             this.saveData();
-            System.out.println("\tBye, hope to see you again!");
+            this.ui.showExit();
         } catch (IOException e) {
-            System.out.println("Error when saving data!");
+            this.ui.showSavingError();
         }
     }
 
@@ -162,25 +153,13 @@ public class Duke {
     }
 
 
-    private void showList() {
-        if (this.taskList.isEmpty()) {
-            System.out.println("\tYou have no task in your list.\n");
-            return;
-        }
-        System.out.println("\tHere are the tasks in your list:");
-        for (int i = 1; i <= this.taskList.getLength(); i++) {
-            System.out.println("\t" + i + ". " + this.taskList.get(i));
-        }
-        System.out.println();
-    }
-
-
     private void addTodo(String[] userInput) throws DukeMissingArgumentException {
         try {
             String description = userInput[1];
-            this.taskList.add(new Todo(description));
-            System.out.printf("\tadded todo:\n\t\t%s\n", this.taskList.get(this.taskList.getLength()));
-            System.out.printf("\tYou have %d tasks in the list.\n\n", this.taskList.getLength());
+
+            Task todo = new Todo(description);
+            this.taskList.add(todo);
+            this.ui.showAdd(todo, this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         }
@@ -197,17 +176,17 @@ public class Duke {
             LocalDateTime startTime = LocalDateTime.parse(start, formatter);
             LocalDateTime endTime = LocalDateTime.parse(end, formatter);
             if (startTime.isAfter(endTime)) {
-                System.out.println("\tEnd time must be after the start time!\n");
+                this.ui.showInvalidDateRange();
                 return;
             }
 
-            this.taskList.add(new Event(splits[0], startTime, endTime));
-            System.out.printf("\tadded event:\n\t\t%s\n", this.taskList.get(this.taskList.getLength()));
-            System.out.printf("\tYou have %d tasks in the list.\n\n", this.taskList.getLength());
+            Task event = new Event(splits[0], startTime, endTime);
+            this.taskList.add(event);
+            this.ui.showAdd(event, this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         } catch (DateTimeParseException e) {
-            System.out.println("\tPlease enter the start/end time in the format of <DD/MM/YY HH:MM>!\n");
+            this.ui.showInvalidDateFormat();
         }
     }
 
@@ -217,13 +196,14 @@ public class Duke {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
             String[] splits = userInput[1].split(" /by ", 2);
             LocalDateTime time = LocalDateTime.parse(splits[1], formatter);
-            this.taskList.add(new Deadline(splits[0], time));
-            System.out.printf("\tadded deadline:\n\t\t%s\n", this.taskList.get(this.taskList.getLength()));
-            System.out.printf("\tYou have %d tasks in the list.\n\n", this.taskList.getLength());
+
+            Task deadline = new Deadline(splits[0], time);
+            this.taskList.add(deadline);
+            this.ui.showAdd(deadline, this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeMissingArgumentException();
         } catch (DateTimeParseException e) {
-            System.out.println("\tPlease enter the time in the format of <DD/MM/YY HH:MM>!\n");
+            this.ui.showInvalidDateFormat();
         }
     }
 
@@ -236,8 +216,7 @@ public class Duke {
                 throw new DukeNoTaskFoundException(taskNum);
             }
             this.taskList.get(taskNum).markAsDone();
-            System.out.println("\tI've marked this task as done!");
-            System.out.printf("\t\t%s\n\n", this.taskList.get(taskNum));
+            this.ui.showDone(this.taskList.get(taskNum));
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException();
         } catch (IndexOutOfBoundsException e) {
@@ -253,10 +232,9 @@ public class Duke {
             if (taskNum > this.taskList.getLength()) {
                 throw new DukeNoTaskFoundException(taskNum);
             }
-            System.out.println("\tI've deleted this task from the list!");
-            System.out.printf("\t\t%s\n", this.taskList.get(taskNum));
+            Task taskToDelete = this.taskList.get(taskNum);
+            this.ui.showDelete(taskToDelete, this.taskList.getLength());
             this.taskList.delete(taskNum);
-            System.out.printf("\tYou have %d tasks in the list.\n\n", this.taskList.getLength());
         } catch (NumberFormatException e) {
             throw new DukeInvalidArgumentException();
         } catch (IndexOutOfBoundsException e) {
