@@ -1,18 +1,18 @@
-package duke.commands;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Encapsulates the representation of a event.
+ * Encapsulates the representation of an event.
  * The event has a description of what is it about,
- * and when is the event occuring.
+ * and when is the event occurring.
  *
  * @author Zhi Bin
  * @version Duke Level 8
  */
 public class Event extends Task {
-    private LocalDateTime when;
+    private final LocalDateTime when;
 
     /**
      * Constructor of an Event task.

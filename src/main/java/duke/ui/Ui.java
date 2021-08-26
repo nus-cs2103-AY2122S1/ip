@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.commands.Task;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -94,11 +94,11 @@ public class Ui {
      * @param taskList The task list to be printed.
      */
     public void listTasks(ArrayList<Task> taskList) {
-        String s = "Here are the tasks in your list:";
+        StringBuilder s = new StringBuilder("Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); i++) {
-            s += String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i - 1).checkStatus());
+            s.append(String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i - 1).checkStatus()));
         }
-        printMessageWithFormat(s);
+        printMessageWithFormat(s.toString());
     }
 
     /**
@@ -108,11 +108,11 @@ public class Ui {
      */
     public void printRelatedTasks(ArrayList<Task> list) {
         if (list.size() > 0) {
-            String s = "Here are the matching tasks in your list:";
+            StringBuilder s = new StringBuilder("Here are the matching tasks in your list:");
             for (int i = 1; i <= list.size(); i++) {
-                s += String.format("\n%s%d. %s,", INDENTATION, i, list.get(i - 1).checkStatus());
+                s.append(String.format("\n%s%d. %s,", INDENTATION, i, list.get(i - 1).checkStatus()));
             }
-            printMessageWithFormat(s);
+            printMessageWithFormat(s.toString());
         } else {
             printMessageWithFormat("There are no matching task in your list.");
         }

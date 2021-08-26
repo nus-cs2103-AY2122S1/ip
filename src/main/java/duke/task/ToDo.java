@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.task;
 
 /**
  * Encapsulates the representation of a todo task.

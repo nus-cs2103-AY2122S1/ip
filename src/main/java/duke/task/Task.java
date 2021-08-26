@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.task;
 
 /**
  * Encapsulate the representation of a task.
@@ -54,8 +54,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String s = String.format("%s|%c|%s", representation, (isDone ? '1' : '0'), description);
-        return s;
+        return String.format("%s|%c|%s", representation, (isDone ? '1' : '0'), description);
     }
 
     /**

@@ -1,13 +1,13 @@
 package duke.parser;
 
-import duke.commands.Deadline;
-import duke.commands.Event;
-import duke.commands.Task;
-import duke.commands.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 import duke.data.DukeException;
 import duke.data.NoToDoDescriptionException;
-import duke.data.TaskList;
 import duke.data.UnknownCommandException;
 
 import duke.storage.Storage;
@@ -26,9 +26,9 @@ import java.util.ArrayList;
  * @version Duke Level 8
  */
 public class Parser {
-    private TaskList list;
-    private Storage storage;
-    private Ui ui;
+    private final TaskList list;
+    private final Storage storage;
+    private final Ui ui;
 
     /**
      * The list of commands that the parser can handle.
@@ -105,7 +105,6 @@ public class Parser {
             if (toDoDescription.isBlank() || spaceIndex == -1) {
                 throw new NoToDoDescriptionException();
             }
-            ;
             ToDo toDo = new ToDo(toDoDescription, false);
             addTask(toDo);
             break;
@@ -134,7 +133,7 @@ public class Parser {
      * Returns the respective Command that user want duke to do.
      * Anything not in the list of commands will be treated as UNKNOWN.
      *
-     * @param str User's ionput on what they want duke to do.
+     * @param str User's input on what they want duke to do.
      * @return The respective command to call the methods.
      */
     private Command stringToCommand(String str) {

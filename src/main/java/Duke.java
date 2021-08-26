@@ -1,17 +1,16 @@
 import duke.data.DukeException;
-import duke.data.TaskList;
 import duke.parser.Parser;
 import duke.storage.Storage;
+import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.util.Scanner;
 
 public class Duke {
-    private Storage storage;
-    private TaskList taskList;
-    private boolean isActive;
-    private Ui ui;
-    private Parser parser;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Ui ui;
+    private final Parser parser;
 
     public Duke() {
         ui = new Ui();
@@ -21,7 +20,7 @@ public class Duke {
     }
 
     private void start() {
-        isActive = true;
+        boolean isActive = true;
         taskList.loadFromList(storage.load());
 
         ui.greet();

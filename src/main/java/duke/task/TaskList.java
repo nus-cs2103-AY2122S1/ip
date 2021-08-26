@@ -1,9 +1,4 @@
-package duke.data;
-
-import duke.commands.Deadline;
-import duke.commands.Event;
-import duke.commands.Task;
-import duke.commands.ToDo;
+package duke.task;
 
 import java.time.LocalDateTime;
 
@@ -28,22 +23,19 @@ public class TaskList {
      */
     public static Task stringToTask(String str) {
         String[] taskData = str.split("\\|");
-        boolean isDone = (taskData[1].equals("1")) ? true : false;
+        boolean isDone = taskData[1].equals("1");
 
         switch (taskData[0]) {
         case "D":
             LocalDateTime by = LocalDateTime.parse(taskData[3]);
-            Deadline deadline = new Deadline(taskData[2], isDone, by);
-            return deadline;
+            return new Deadline(taskData[2], isDone, by);
 
         case "E":
             LocalDateTime at = LocalDateTime.parse(taskData[3]);
-            Event event = new Event(taskData[2], isDone, at);
-            return event;
+            return new Event(taskData[2], isDone, at);
 
         default:
-            ToDo toDo = new ToDo(taskData[2], isDone);
-            return toDo;
+            return new ToDo(taskData[2], isDone);
         }
     }
 
@@ -109,7 +101,7 @@ public class TaskList {
      * Returns an ArrayList containing task related to the keyword provided by the user.
      *
      * @param s The keyword to search for in the description of task.
-     * @return The list containg the related task.
+     * @return The list containing the related task.
      */
     public ArrayList<Task> findRelatedTask(String s) {
         ArrayList<Task> list = new ArrayList<>();

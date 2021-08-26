@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * @version Duke Level 8
  */
 public class Deadline extends Task {
-    protected LocalDateTime by;
+    protected final LocalDateTime by;
 
     /**
      * Constructor of a Deadline task.
