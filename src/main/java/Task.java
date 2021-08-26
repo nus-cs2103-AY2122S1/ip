@@ -1,10 +1,14 @@
+import java.io.IOException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected boolean isExit;
 
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+        this.isExit = false;
     }
 
     public String getStatusIcon() {
@@ -27,4 +31,8 @@ public class Task {
     public String toString() {
         return this.getStatusIcon()  + this.description;
     }
+
+
+    public void excute(TaskList task, Ui ui, Storage storage) throws IOException {};
+
 }
