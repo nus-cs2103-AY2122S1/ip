@@ -9,6 +9,7 @@ import eightbit.util.Ui;
  * Represents a user command. Contains implementation of the execution of the user command.
  */
 public abstract class Command {
+
     protected boolean isExit = false;
 
     /**
