@@ -12,8 +12,11 @@ public class Task {
     private String type;
 
     /**
-     * Construct a tasks.Task object with a given description.
-     * @param description The description of the task input by user.
+     * A constructor for the task.
+     *
+     * @param description user input task description.
+     * @param isDone status of the task.
+     * @param type type of task.
      */
     public Task(String description, Boolean isDone, String type) {
         this.description = description;
@@ -22,7 +25,8 @@ public class Task {
     }
 
     /**
-     * Get the status of the task.
+     * Returns the status of the task.
+     *
      * @return a status in string.
      */
     public String getStatusIcon() {
@@ -30,7 +34,8 @@ public class Task {
     }
 
     /**
-     * Print the status and description of the task.
+     * Returns the status and description of the task.
+     *
      * @return a string representation of the task.
      */
     public String getTask() {
@@ -38,14 +43,15 @@ public class Task {
     }
 
     /**
-     * Set the task to done by marking its status.
+     * Sets the task to done by marking its status.
      */
     public void done() {
         this.isDone = true;
     }
 
     /**
-     * Print the status and description of the task when marked done.
+     * Returns the status and description of the task when marked done.
+     *
      * @return a string representation of the done status.
      */
     public String markDone() {
@@ -54,21 +60,37 @@ public class Task {
     }
 
     /**
-     * Print the status and description of the task when deleted.
+     * Returns the status and description of the task when deleted.
+     *
      * @return a string representation of the deleted task.
      */
     public String delete() {
         return getTask();
     }
 
+    /**
+     * Returns the status of task.
+     *
+     * @return boolean status of task.
+     */
     public boolean isDone() {
         return isDone;
     }
 
+    /**
+     * Returns the description of task.
+     *
+     * @return string description of task.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns the type of task.
+     *
+     * @return string type of task.
+     */
     public String getType() {
         return type;
     }

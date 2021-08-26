@@ -15,10 +15,20 @@ public class Storage {
     private static String PATH;
     private static ArrayList<Task> tasks = new ArrayList<Task>();
 
+    /**
+     * A constructor for Storage.
+     *
+     * @param filePath input path for the data file
+     */
     public Storage(String filePath) {
         this.PATH = filePath;
     }
 
+    /**
+     * Create file path if input file does not exist.
+     *
+     * @throws IOException if an input or output exception occurred.
+     */
     public static void checkFile() throws IOException {
         final Path p = Paths.get(PATH);
         final String DIRECTORY = p.getParent().toString();
@@ -35,6 +45,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds old tasks in the saved file to an array list of Task.
+     *
+     * @return Array list of Task
+     * @throws IOException if an input or output exception occurred.
+     */
     public static ArrayList<Task> loadTask() throws IOException {
         try {
             checkFile();
@@ -68,6 +84,9 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes the tasks into the local data file.
+     */
     public static void saveList() {
         try {
             FileWriter fw = new FileWriter(PATH);

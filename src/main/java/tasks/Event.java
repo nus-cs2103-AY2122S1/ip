@@ -1,27 +1,26 @@
 package tasks;
 
-import tasks.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
-/**
- * tasks.Event class for tasks that start at a specific time and ends at a specific time
- *
- * @author: Chen Hsiao Ting
- */
 
 public class Event extends Task {
     private String description;
     private String time;
 
+    /**
+     * A constructor for the Event task.
+     *
+     * @param description user input task description.
+     * @param isDone status of the task.
+     */
     public Event(String description, Boolean isDone) {
         super(description, isDone, "E");
         this.description = description;
     }
 
     /**
-     * Print the status and description of the event task.
+     * Returns the status and description of the event task.
+     *
      * @return a string representation of the event task.
      */
     public String getTask() {
@@ -41,5 +40,4 @@ public class Event extends Task {
         return "[E]" + "[" + super.getStatusIcon() + "] " + text + " (from: " + startDateTime.format(formatter) +
                 " to " + endDateTime.format(formatter) + ")";
     }
-
 }

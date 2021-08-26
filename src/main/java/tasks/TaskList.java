@@ -6,13 +6,26 @@ import java.util.ArrayList;
 public class TaskList {
     private static ArrayList<Task> tasks = new ArrayList<Task>();
 
+    /**
+     * A constructor for TaskList specifying list of saved tasks.
+     *
+     * @param tasks array list of Task.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * A constructor for TaskList.
+     */
     public TaskList() {
     }
 
+    /**
+     * Returns a list of current tasks.
+     *
+     * @return a string of current tasks.
+     */
     public String list() {
         int count = 1;
         String str = "Here are the tasks in your list:";
@@ -23,11 +36,23 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Marks the task done and returns the task description.
+     *
+     * @param str user input to indicate a task is done.
+     * @return description of task that is marked done.
+     */
     public String done(String str) {
         int index = Integer.parseInt(str.substring(5)) - 1;
         return tasks.get(index).markDone();
     }
 
+    /**
+     * Deletes the task and returns the task description.
+     *
+     * @param str user input to indicate deletion of a task.
+     * @return description of task that is deleted.
+     */
     public String delete(String str) {
         int index = Integer.parseInt(str.substring(7)) - 1;
         String result = "Noted. I've removed this task: \n" + tasks.get(index).delete() +
@@ -36,12 +61,19 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Returns the task description if it is successfully added,
+     * or return error message if the user input is invalid.
+     *
+     * @param str user input to add task.
+     * @return description of task added or error message.
+     */
     public String addTask(String str) {
         String type = "";
         try {
             String[] words = str.split(" ");
             if (words.length == 1) {
-                return "☹ OOPS!!! The description of a todo cannot be empty.";
+                return "☹ OOPS!!! The description of a task cannot be empty.";
             } else {
                 words = str.split(" ", 2);
                 Task task;
@@ -69,9 +101,6 @@ public class TaskList {
         } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             String message = "";
             switch (type) {
-                case "todo":
-                    message = "☹ OOPS!!! Please use the format: todo <description>";
-                    break;
                 case "deadline":
                     message = "☹ OOPS!!! Please use the format: deadline <description> /by yyyy-mm-ddTHH:mm";
                     break;
@@ -85,6 +114,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the size of the current task list.
+     *
+     * @return an integer of task size.
+     */
     public int getSize() {
         return tasks.size();
     }

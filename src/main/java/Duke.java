@@ -1,5 +1,3 @@
-
-
 import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
@@ -9,10 +7,12 @@ import tasks.TaskList;
 import java.io.IOException;
 
 /**
- * Duke class encapsulate a chatbot service.
- * It supports queries such as creating, marking and deleting tasks.
+ * The Duke program implements a chatbot called Duke that
+ * supports queries such as creating, marking and deleting tasks.
  *
- * @author: Chen Hsiao Ting
+ * @author Chen Hsiao Ting
+ * @version 1.0
+ * @since 2021-08-13
  */
 
 public class Duke {
@@ -29,16 +29,24 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("ERROR: " + e.getMessage());
         }
     }
 
+    /**
+     * Runs the Duke chatbot program until user input the bye command.
+     */
     public void run() {
         Ui.welcome();
         Parser.startDuke(tasks);
         Storage.saveList();
     }
 
+    /**
+     * Starts the Duke chatbot program
+     *
+     * @param args input path for the data file
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

@@ -1,14 +1,17 @@
 package duke;
 
-import tasks.Task;
 import tasks.TaskList;
-
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
     private static String DIVIDER = "____________________________________________________________";
 
+    /**
+     * Parses user input and calls the respective methods, or
+     * throws error messages when input is invalid.
+     *
+     * @param tasks TaskList that is previously saved locally.
+     */
     public static void startDuke(TaskList tasks) {
         boolean exit = false;
 
