@@ -1,6 +1,10 @@
 package duke.main;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -50,7 +54,7 @@ public class Storage {
 
     public void updateStorage(TaskList tasklist) {
         try {
-            Files.write(filePath, tasklist.formatStorage(), StandardCharsets.UTF_8);
+            Files.write(filePath, tasklist.formatForStorage(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new DukeException("\t☹ OOPS!!! I can't store any changes you make. \n");
         }

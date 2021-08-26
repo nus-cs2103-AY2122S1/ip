@@ -5,6 +5,7 @@ import duke.main.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Objects;
 
 abstract public class Task {
@@ -41,6 +42,16 @@ abstract public class Task {
     }
 
     abstract public String storageString();
+
+    /**
+     * Checks if the task contains any keyword.
+     *
+     * @param keywords to match.
+     * @return true if a match is found, else false.
+     */
+    public boolean containsKeyword(String[] keywords) {
+        return Arrays.stream(keywords).anyMatch(keyword -> description.contains(keyword));
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,7 +1,9 @@
 package duke.main;
 
+import duke.task.Task;
 import duke.task.TaskList;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -29,20 +31,12 @@ public class Ui {
         inputScanner.close();
     }
 
-    public void showInvalidSelectionError() {
-        System.out.println("\tSorry, I can't seem to find that task\n");
-    }
-
-    public void showNumberFormatException() {
-        System.out.println("\tI'm Sorry, WHAT?!?!\n");
-    }
-
     public void showEmptyInputException() {
         System.out.println("\tTake your time :)\n");
     }
 
-    public void showUnknownCommandException() {
-        System.out.println("\tI don't understand that command (yet...)\n");
+    public void showUnknownCommandException(String command) {
+        System.out.println("\tI don't understand " + command + " (yet...)\n");
     }
 
     public void showDukeException(String message) {
@@ -54,6 +48,20 @@ public class Ui {
             System.out.println("\tYou haven't added any tasks yet\n");
         } else {
             System.out.println(tasks);
+        }
+    }
+
+    /**
+     * Displays matching tasks.
+     *
+     * @param matchingTasks to be displayed.
+     */
+    public void showMatchingTasks(List<Task> matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            System.out.println("\tNo matching tasks found!\n");
+        } else {
+            System.out.println("\tHere are the matching tasks from your list:\n");
+            System.out.println(TaskList.enumerateTasks(matchingTasks));
         }
     }
 
