@@ -21,9 +21,9 @@ public class TaskList {
      *
      * @param event event to be added to the TaskList
      */
-    public void add(Event event, boolean print) {
+    public void add(Event event, boolean shouldPrint) {
         this.tasks.add(event);
-        if (print) {
+        if (shouldPrint) {
             Ui.addTask(event);
             Ui.numberOfTasks(tasks);
         }
@@ -35,9 +35,9 @@ public class TaskList {
      *
      * @param deadline deadline to be added to the TaskList
      */
-    public void add(Deadline deadline, boolean print) {
+    public void add(Deadline deadline, boolean shouldPrint) {
         this.tasks.add(deadline);
-        if (print) {
+        if (shouldPrint) {
             Ui.addTask(deadline);
             Ui.numberOfTasks(tasks);
         }
@@ -48,9 +48,9 @@ public class TaskList {
      *
      * @param toDo deadline to be added to the TaskList
      */
-    public void add(ToDo toDo, boolean print) {
+    public void add(ToDo toDo, boolean shouldPrint) {
         this.tasks.add(toDo);
-        if (print) {
+        if (shouldPrint) {
             Ui.addTask(toDo);
             Ui.numberOfTasks(tasks);
         }
@@ -81,7 +81,7 @@ public class TaskList {
     public String save() {
         String output = "";
         for (Task task: tasks) {
-            output += task.type() + " | " + (task.getState() ? "1 | " : "0 | ") + task.getSaveInfo() + "\n";
+            output += task.getType() + " | " + (task.getDone() ? "1 | " : "0 | ") + task.getSaveInfo() + "\n";
         }
         return output;
     }
