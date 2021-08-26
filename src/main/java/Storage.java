@@ -5,7 +5,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.nio.file.Files;
 
 public class Storage {
     private Path folderPath;
@@ -20,15 +19,10 @@ public class Storage {
         if (!Files.exists(folderPath)) {
             folderPath = Files.createDirectory(folderPath);
             filePath = Files.createFile(filePath);
-            System.out.println("Directory and File Created!");
             return filePath;
         } else {
-            System.out.println("Folder found!");
             if (!Files.exists(filePath)) {
                 filePath = Files.createFile(filePath);
-                System.out.println("File Created!");
-            } else {
-                System.out.println("File found!");
             }
             return filePath;
         }
