@@ -9,7 +9,7 @@ import side.tasks.Event;
 import side.tasks.Deadline;
 
 /**
- * The TaskList class provides a wrapper around an ArrayList of Tasks to encapsulate the list of tasks given to
+ * Provides a wrapper around an ArrayList of Tasks to encapsulate the list of tasks given to
  * Side by its user. Supports operations on tasks in it.
  *
  * @author Lua Yi Da

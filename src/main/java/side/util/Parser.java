@@ -1,7 +1,7 @@
 package side.util;
 
 /**
- * Parser is used to encapsulate operations for parsing user input and translating it to corresponding commands.
+ * Encapsulates operations for parsing user input and translating it to corresponding commands.
  *
  * @author Lua Yi Da
  */

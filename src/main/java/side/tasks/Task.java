@@ -1,7 +1,7 @@
 package side.tasks;
 
 /**
- * The Task class represents a task that has to be done.
+ * Represents a task that has to be done.
  *
  * It encapsulates the following information:
  * - description

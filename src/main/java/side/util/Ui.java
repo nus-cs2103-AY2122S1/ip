@@ -8,7 +8,7 @@ import side.tasks.Task;
 import java.util.ArrayList;
 
 /**
- * Ui encapsulates user interactions, handling user input logic and formats responses to print for user.
+ * Encapsulates user interactions, handling user input logic and formats responses to print for user.
  *
  * @author Lua Yi Da
  */

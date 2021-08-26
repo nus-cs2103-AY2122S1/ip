@@ -3,7 +3,7 @@ package side.tasks;
 import side.util.DateTime;
 
 /**
- * The Deadline class represents a task that has to be done before a specified time.
+ * Represents a task that has to be done before a specified time.
  *
  * It encapsulates the following information:
  * - description

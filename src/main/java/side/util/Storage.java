@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Storage is used to model saving to hard disk using a .txt file. It contains logic for saving and retrieving from
+ * Models saving to hard disk using a .txt file. It contains logic for saving and retrieving from
  * the .txt file.
  *
  * @author Lua Yi Da

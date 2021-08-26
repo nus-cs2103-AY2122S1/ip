@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
 /**
- * DateTime is used to encapsulate the time and date for tasks, and corresponding conversion from string to
+ * Encapsulates the time and date for tasks, and corresponding conversion from string to
  * [yyyy-MM-dd] and [HHmm].
  *
  * It encapsulates the following information:

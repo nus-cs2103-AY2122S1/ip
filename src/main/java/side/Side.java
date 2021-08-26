@@ -9,7 +9,7 @@ import side.util.Parser;
 import side.exception.SideException;
 
 /**
- * Side contains logic for prompting user for input and directing flow of commands.
+ * Contains logic for prompting user for input and directing flow of commands.
  *
  * On running the program, Side greets the user and awaits for inputted commands:
  *   - 'todo x' -> adds a Task of x with no date/time attached
