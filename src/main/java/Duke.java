@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.io.File;
 
@@ -6,9 +7,14 @@ import java.io.File;
 public class Duke {
     private static TaskList list = new TaskList();
     private static String filePath = "data/duke.txt";
+    private static String directoryName = "data";
 
     public static void main(String[] args) {
         try {
+            File directory = new File(directoryName);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
             File data = new File(filePath);
             data.createNewFile();
             Scanner s = new Scanner(data);
@@ -21,11 +27,11 @@ public class Duke {
                         break;
                     }
                     case "D": {
-                        list.addTask(new Deadline(array[2], array[3], Boolean.parseBoolean(array[1])));
+                        list.addTask(new Deadline(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
                         break;
                     }
                     case "E": {
-                        list.addTask(new Event(array[2], array[3], Boolean.parseBoolean(array[1])));
+                        list.addTask(new Event(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
                         break;
                     }
                 }

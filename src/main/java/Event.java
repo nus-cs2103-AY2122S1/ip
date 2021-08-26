@@ -1,7 +1,10 @@
-public class Event extends Task {
-    protected String at;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String name, String at, Boolean isDone) {
+public class Event extends Task {
+    protected LocalDateTime at;
+
+    public Event(String name, LocalDateTime at, Boolean isDone) {
         super(name,'E', isDone);
         this.at = at;
     }
@@ -15,7 +18,9 @@ public class Event extends Task {
         if (detailE.length == 1) {
             throw new TaskException("When is the event?");
         }
-        Event newE = new Event(detailE[0], detailE[1], false);
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDateTime atTime = LocalDateTime.parse(detailE[1], formatter1);
+        Event newE = new Event(detailE[0], atTime, false);
         return newE;
     }
 
