@@ -7,6 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * This class contains inner methods for initializing and running the Duke bot.
+ */
 public class Duke {
     private Tasklist listOfItems;
     private final Storage storage;

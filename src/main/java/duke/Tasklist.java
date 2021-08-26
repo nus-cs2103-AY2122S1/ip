@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
 
+/**
+ * This class contains methods for manipulating items found in a Duke bot's tasklist.
+ */
 public class Tasklist {
     private final List<Task> tasks = new ArrayList<>();
     public Tasklist() {

@@ -4,6 +4,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+/**
+ * A class that extends the Task class, containing information about deadlines.
+ */
 public class Deadline extends Task {
 
     private LocalDate date;

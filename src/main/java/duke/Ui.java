@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ListIterator;
 
+/**
+ * This class contains methods for printing information from the Tasklist to the command line.
+ */
 public class Ui {
     private static final String SEPARATOR = "########################";
 

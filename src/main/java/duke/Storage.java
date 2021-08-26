@@ -5,8 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+
 import java.util.Scanner;
 
+/**
+ * This class encapsulates reading and writing of the savefile for the Duke bot.
+ */
 public class Storage {
     private final File saveFile;
     private final FileParser parser;

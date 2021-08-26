@@ -4,6 +4,9 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+/**
+ * This class extends the Task class, and contains information about events.
+ */
 public class Event extends Task {
 
     protected LocalDate date;

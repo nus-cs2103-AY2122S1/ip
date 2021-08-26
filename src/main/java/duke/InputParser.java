@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * This class parses user input from the command line.
+ */
 public class InputParser {
     public InputParser() {
 

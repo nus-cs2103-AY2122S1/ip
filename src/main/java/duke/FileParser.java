@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * This class parses the savefile for the Duke bot and returns a working Tasklist.
+ */
 public class FileParser {
     public FileParser() {
 

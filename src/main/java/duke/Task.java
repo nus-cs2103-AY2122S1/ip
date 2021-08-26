@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * This class contains methods for storing information about the various tasks found in a Tasklist.
+ */
 public class Task {
     protected boolean isDone;
     protected String item;
