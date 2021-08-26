@@ -15,9 +15,15 @@ public class Ui {
     }
 
     public void showWelcomeMessage() {
-        String welcome = "Hello! I'm duke.Duke. A friendly chatbot!! :)\n"
+        String welcome = "Hello! I'm Duke. A friendly chatbot!! :)\n"
                 + "What can I do for you?\n";
         System.out.println(DIVIDER + "\n" + LOGO + "\n" + welcome + DIVIDER);
+    }
+
+    public String getWelcomeMessage() {
+        String welcome = "Hello! I'm duke.Duke. A friendly chatbot!! :)\n"
+                + "What can I do for you?\n";
+        return (DIVIDER + "\n" + LOGO + "\n" + welcome + DIVIDER);
     }
 
     public void showGoodbyeMessage() {
@@ -29,6 +35,11 @@ public class Ui {
         //String prompt_message = "Add to-do list ({input})/ View list (list) / Complete task (done {input}) / End (bye) :";
         String prompt_message = "Please input your command: ";
         System.out.println(prompt_message);
+    }
+
+    public String testReadCommand() {
+        String prompt_message = "Please input your command: ";
+        return prompt_message;
     }
 }
 
