@@ -3,26 +3,23 @@ package duke;
 import java.util.Scanner;
 import java.util.ArrayList;
 /**
- * Ui class
- *
- * @author Timothy Wong Eu-Jin
- */
-
-
-/**
  * Deals with interactions with the user.
  */
 public class Ui {
 
-    boolean isExit;
+    private boolean isExit;
 
+    /**
+     * Constructs a Ui Object.
+     */
     public Ui() {
         isExit = false;
     }
 
     /**
      * Creates a scanner to read the input command.
-     * @return one command line
+     *
+     * @return One command line.
      */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
@@ -55,6 +52,7 @@ public class Ui {
 
     /**
      * Checks if program has exited.
+     * @return boolean isExit.
      */
     public boolean isExit() {
         return this.isExit;
@@ -62,17 +60,20 @@ public class Ui {
 
     /**
      * Prints goodbye statement.
+     *
+     * Changes isExit to true.
      */
     public void sendGoodbye() {
         showDivider();
         System.out.println("Bye. Hope to see you again soon!");
         showDivider();
-        isExit = true;
+        this.isExit = true;
     }
 
     /**
      * Prints response after successfully adding task.
-     * @param task
+     *
+     * @param task Added Task.
      */
     public void sendAddTask(Task task) {
         showDivider();
@@ -83,7 +84,8 @@ public class Ui {
 
     /**
      * Prints done task statement.
-     * @param task
+     *
+     * @param task Completed Task.
      */
     public void sendDone(Task task) {
         showDivider();
@@ -94,7 +96,8 @@ public class Ui {
 
     /**
      * Prints deleted task statement.
-     * @param task
+     *
+     * @param task Deleted Task.
      */
     public void sendDeleted(Task task) {
         showDivider();
@@ -104,6 +107,7 @@ public class Ui {
 
     /**
      * Prints all tasks statement.
+     *
      * @param tasks
      */
     public void enumTasks(ArrayList<Task> tasks) {
@@ -117,7 +121,8 @@ public class Ui {
     }
 
     /**
-     * Print error message.
+     * Prints error message.
+     *
      * @param s
      */
     public void showError(String s) {

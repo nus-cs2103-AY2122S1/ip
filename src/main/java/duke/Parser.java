@@ -4,7 +4,7 @@ import java.io.IOException;
 /**
  * Deals with making sense of the user command.
  *
- * @author Timothy Wong Eu-Jin
+ * Calls ui methods to send acknowledgements to user.
  */
 public class Parser {
 
@@ -12,6 +12,13 @@ public class Parser {
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Constructs a Parser object.
+     *
+     * @param tasks TaskList
+     * @param ui
+     * @param storage
+     */
     public Parser(TaskList tasks, Ui ui, Storage storage) {
         this.tasks = tasks;
         this.ui = ui;
@@ -19,11 +26,13 @@ public class Parser {
     }
 
     /**
-     * Validates a to do command.
+     * Validates a to-do command.
+     *
+     * Static class method.
      *
      * @param req The full command
-     * @return a ToDo object
-     * @throws NoDescriptionException
+     * @return To Do object
+     * @throws NoDescriptionException If no description is appended after command.
      * @throws IOException
      */
     public static ToDo validateToDo(String req) throws NoDescriptionException, IOException {
@@ -39,10 +48,13 @@ public class Parser {
 
     /**
      * Validates a Deadline command.
+     *
+     * Static class method.
+     *
      * @param req The full command
      * @return Deadline object
-     * @throws NoDescriptionException
-     * @throws MissingTimeCommandException
+     * @throws NoDescriptionException If no description is appended after command.
+     * @throws MissingTimeCommandException If "/by" is not in full command
      */
     public static Deadline validateDeadline(String req) throws NoDescriptionException, MissingTimeCommandException{
         if (req.equals("deadline")) {
@@ -61,10 +73,13 @@ public class Parser {
 
     /**
      * Validates a Event command.
+     *
+     * Static class method.
+     *
      * @param req The full command
      * @return Event object
-     * @throws NoDescriptionException
-     * @throws MissingTimeCommandException
+     * @throws NoDescriptionException If no description is appended after command.
+     * @throws MissingTimeCommandException If "/at" is not in full command
      */
     public static Event validateEvent(String req) throws NoDescriptionException, MissingTimeCommandException {
         if (req.equals("event")) {
@@ -83,13 +98,17 @@ public class Parser {
     }
 
     /**
-     * Receives an index to specify a task to mark as done.
-     * Converts string to integer.
+     * Validates a done command.
+     *
+     * Static class method.
+     *
+     * Receives an index to specify a task in the TaskList.
+     * Converts input string to integer.
      *
      * @param req The full command
      * @return Integer index of the task in the task list
-     * @throws NoDescriptionException
-     * @throws InvalidDescriptionException
+     * @throws NoDescriptionException If no description is appended after command.
+     * @throws InvalidDescriptionException If description after command is not a valid index.
      * @throws IOException
      */
     public static int validateDone(String req) throws NoDescriptionException, InvalidDescriptionException,
@@ -112,17 +131,18 @@ public class Parser {
     }
 
     /**
+     * Validates a delete command.
+     *
      * Receives an index to specify a task to delete.
-     * Converts string to integer.
+     * Converts input string to integer.
      *
      * @param req The full command
      * @return Integer index of the task in the task list
-     * @throws NoDescriptionException
-     * @throws InvalidDescriptionException
+     * @throws NoDescriptionException If no description is appended after command.
+     * @throws InvalidDescriptionException If description after command is not a valid index.
      * @throws IOException
      */
-    public Task validateDelete(String req) throws NoDescriptionException, InvalidDescriptionException,
-            IOException{
+    public static int validateDelete(String req) throws NoDescriptionException, InvalidDescriptionException {
         if (req.equals("delete")) {
             throw new NoDescriptionException("Please specify a task to delete.");
         }
@@ -137,23 +157,24 @@ public class Parser {
             throw new InvalidDescriptionException("Please append a task number after 'delete'.");
         }
 
-        Task deletedTask = this.tasks.deleteTask(index);
-        return deletedTask;
+        return index;
     }
 
     /**
-     * Receives an invalid command and throws and exception.
+     * Receives an invalid command and throws an exception.
      *
      * @param req The full command
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException Always thrown
      */
-    public void invalidInput(String req) throws InvalidCommandException {
+    public static void invalidInput(String req) throws InvalidCommandException {
         throw new InvalidCommandException(
                 "Sorry! I do not understand you? Try another command!");
     }
 
     /**
      * Passes the full command to various helper function to check validity.
+     *
+     * The only instance method in Parser class.
      *
      * @param fullCommand
      * @throws DukeException
@@ -181,37 +202,38 @@ public class Parser {
                 ToDo t = Parser.validateToDo(fullCommand);
                 tasks.add(t);
                 ui.sendAddTask(t);
-                storage.rewriteFile(tasks); //STORAGE!
+                storage.rewriteFile(tasks);
                 break;
 
             case "deadline":
                 Deadline d = Parser.validateDeadline(fullCommand);
                 tasks.add(d);
                 ui.sendAddTask(d);
-                storage.rewriteFile(tasks); //STORAGE!
+                storage.rewriteFile(tasks);
                 break;
 
             case "event":
                 Event e = Parser.validateEvent(fullCommand);
                 ui.sendAddTask(e);
-                storage.rewriteFile(tasks); //STORAGE !
+                storage.rewriteFile(tasks);
                 break;
 
             case "done":
-                int index = validateDone(fullCommand);
-                Task completedTask = this.tasks.markAsDone(index);
+                int indexOfDoneTask = Parser.validateDone(fullCommand);
+                Task completedTask = this.tasks.markAsDone(indexOfDoneTask);
                 storage.rewriteFile(tasks);
                 ui.sendDone(completedTask);
                 break;
 
             case "delete":
-                Task deletedTask = validateDelete(fullCommand);
+                int indexOfDeletedTask = Parser.validateDelete(fullCommand);
+                Task deletedTask = this.tasks.deleteTask(indexOfDeletedTask);
                 storage.rewriteFile(tasks);
                 ui.sendDeleted(deletedTask);
                 break;
 
             default:
-                this.invalidInput(req);
+                Parser.invalidInput(req);
         }
      }
 }
