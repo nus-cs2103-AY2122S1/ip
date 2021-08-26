@@ -14,7 +14,7 @@ public abstract class Task {
     public static int numOfTasks = 0;
 
     /**
-     * Initializes an instance of {@code Task} with a {@code String description}.
+     * Initializes an instance of {@code Task} with {@code String description}.
      *
      * @param description {@code String} that contains description of task.
      */
@@ -23,8 +23,8 @@ public abstract class Task {
     }
 
     /**
-     * Initializes an instance of {@code Task} with a {@code String description}
-     * and {@code boolean isDone}.
+     * Initializes an instance of {@code Task} with {@code String description}
+     * and {@code boolean isDone} status.
      *
      * @param description {@code String} that contains description of task.
      * @param isDone {@code boolean} that represents task completion status.
