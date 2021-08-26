@@ -17,10 +17,10 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private final Ui ui;
-    private final static String filePath = "data/duke.txt";
+    private final static String FILEPATH = "data/duke.txt";
 
     public static void main(String[] args) {
-        new Duke(filePath).run();
+        new Duke(FILEPATH).run();
     }
 
     /**
