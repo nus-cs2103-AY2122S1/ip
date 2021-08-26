@@ -41,6 +41,20 @@ public class TaskListTest {
   }
 
   @Test
+  public void filterTasks() {
+    Task todo1 = new Todo("TODO 1");
+    Task todo2 = new Todo("test 2");
+    List<Task> list = new ArrayList<Task>();
+    list.add(todo1);
+    list.add(todo2);
+    TaskList taskList = new TaskList(list);
+
+    TaskList filteredTaskList = taskList.filterTasks("todo");
+    assertEquals(1, filteredTaskList.size(), "Filtered tasklist should have one element");
+    assertEquals(todo1, filteredTaskList.getTask(0), "Filtered tasklist should have correct element");
+  }
+
+  @Test
   public void size() {
     TaskList taskList = new TaskList(new ArrayList<>());
     assertEquals(0, taskList.size(), "List should be empty at the start");

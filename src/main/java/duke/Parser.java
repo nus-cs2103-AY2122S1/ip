@@ -7,11 +7,12 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.CompleteTaskCommand;
 import duke.command.DeleteTaskCommand;
+import duke.command.FilterTasksCommand;
 import duke.command.ListTasksCommand;
 
 public class Parser {
     public enum CommandType {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT,
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND,
     }
 
     /**
@@ -46,6 +47,9 @@ public class Parser {
 
         case DELETE:
             return new DeleteTaskCommand(arguments);
+
+        case FIND:
+            return new FilterTasksCommand(arguments);
 
         case TODO:
             return new AddTodoCommand(arguments);
