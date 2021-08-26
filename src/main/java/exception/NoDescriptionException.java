@@ -1,4 +1,4 @@
-package dukeException;
+package exception;
 
 /**
  * Exception occurs when user does not input the necessary description

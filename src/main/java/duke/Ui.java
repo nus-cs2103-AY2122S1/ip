@@ -1,16 +1,16 @@
 package duke;
 
 import duke.task.Task;
-import dukeException.*;
+import exception.DukeException;
 
 /**
  * Deals with interaction with the user
  */
 public class Ui {
-
     /**
      * Greets the user
      */
+
     public void greet() {
         System.out.println("Hello! I'm Duke!\nWhat can I do for you?\n");
     }
@@ -31,18 +31,22 @@ public class Ui {
         System.out.println(e.getMessage());
     }
 
+
     /**
      * Informs the user that there are no tasks in the list
      */
+
     public void showNoTaskMessage() {
         System.out.println("There are no tasks!");
     }
+
 
     /**
      * Shows the user the current task list
      *
      * @param taskList the list of the tasks
      */
+
     public void showTaskList(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i < taskList.size() + 1; i++) {

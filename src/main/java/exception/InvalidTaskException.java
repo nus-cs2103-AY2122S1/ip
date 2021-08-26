@@ -1,4 +1,4 @@
-package dukeException;
+package exception;
 
 /**
  * Exception occurs when user inputs command not supported by Duke

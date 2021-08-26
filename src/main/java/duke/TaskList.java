@@ -8,15 +8,15 @@ import java.util.ArrayList;
  * Contains the task list
  */
 public class TaskList {
-    ArrayList<Task> taskList;
+    ArrayList<Task> tasks;
 
     /**
      * Class Constructor
      *
-     * @param taskList the task list
+     * @param tasks the task list
      */
-    public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -25,11 +25,11 @@ public class TaskList {
      * @return the number of tasks
      */
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
     public Task get(int taskNo) {
-        return this.taskList.get(taskNo - 1);
+        return this.tasks.get(taskNo - 1);
     }
 
     /**
@@ -38,7 +38,7 @@ public class TaskList {
      * @return whether the list is empty
      */
     public boolean isEmpty() {
-        return this.taskList.isEmpty();
+        return this.tasks.isEmpty();
     }
 
     /**
@@ -47,7 +47,7 @@ public class TaskList {
      * @param taskNo the specified task number
      */
     public void remove(int taskNo) {
-        this.taskList.remove(taskNo - 1);
+        this.tasks.remove(taskNo - 1);
     }
 
     /**
@@ -56,6 +56,6 @@ public class TaskList {
      * @param task the task to add
      */
     public void add(Task task) {
-        this.taskList.add(task);
+        this.tasks.add(task);
     }
 }

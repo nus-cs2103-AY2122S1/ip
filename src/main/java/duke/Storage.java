@@ -1,10 +1,21 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,14 +68,16 @@ public class Storage {
 
                     case 'D': {
                         int index = current.indexOf("by");
-                        LocalDateTime by = LocalDateTime.parse(current.substring(index + 4, current.length() - 1), formatter);
+                        LocalDateTime by = LocalDateTime.parse(current.substring(index + 4, current.length() - 1),
+                                                                 formatter);
                         currentTask = new Deadline(current.substring(7, index - 2), by);
                         break;
                     }
 
                     case 'E': {
                         int index = current.indexOf("at");
-                        LocalDateTime at = LocalDateTime.parse(current.substring(index + 4, current.length() - 1), formatter);
+                        LocalDateTime at = LocalDateTime.parse(current.substring(index + 4, current.length() - 1),
+                                                                 formatter);
                         currentTask = new Event(current.substring(7, index - 2), at);
                         break;
                     }
