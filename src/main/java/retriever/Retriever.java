@@ -14,6 +14,12 @@ public class Retriever {
     private Parser parser;
     private TaskList taskList;
 
+    /**
+     * Initializes various Objects, and also takes in the file path to
+     * read the tasks present in that file.
+     *
+     * @param filePath The file path in which tasks may be stored.
+     */
     public Retriever(String filePath) {
         taskStorage = new Storage(filePath);
         taskList = new TaskList(taskStorage);

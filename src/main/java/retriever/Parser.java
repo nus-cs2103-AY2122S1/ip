@@ -12,6 +12,11 @@ public class Parser {
     private TaskList taskList;
     private boolean isSessionDone;
 
+    /**
+     * Initializes the task list and marks the beginning of a session.
+     *
+     * @param taskList The Object through which various task operations can be performed.
+     */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
         this.isSessionDone = false;

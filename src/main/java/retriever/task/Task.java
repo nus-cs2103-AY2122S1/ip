@@ -4,10 +4,13 @@ package retriever.task;
  * This class would help to keep track of tasks.
  */
 public class Task {
-
+    /** Variables to hold values. */
     private String description;
     private boolean isDone;
 
+    /**
+     * Types of tasks present.
+     */
     public enum TaskType {
         DEADLINE,
         EVENT,
@@ -15,13 +18,11 @@ public class Task {
     }
 
     /**
-     * Constructor, to initialize a task.
+     * Initializes a task.
      *
      * @param description The task description entered by the user.
      */
     public Task(String description) {
-
-        /** Variables to hold values. */
         this.description = description;
         this.isDone = false;
     }
