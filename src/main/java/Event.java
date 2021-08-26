@@ -6,9 +6,9 @@ public class Event extends Task{
      * @param taskDescription The name of the task.
      * @param time The time of the task.
      */
-    public Event(String taskDescription, String time) {
-        super(taskDescription);
-        this.time = convert(time);
+    public Event(String taskDescription, String time, boolean isDone) {
+        super(taskDescription, isDone);
+        this.time = StringManipulator.convertDateAndTime(time);
     }
 
     /**
@@ -16,6 +16,6 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return "[E]" + super.toString() + " /at " + time;
     }
 }

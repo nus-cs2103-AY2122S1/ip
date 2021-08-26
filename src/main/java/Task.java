@@ -1,7 +1,3 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 public class Task {
 
     private boolean isDone;
@@ -11,9 +7,55 @@ public class Task {
      * Constructor for a task.
      * @param taskDescription The name of the task.
      */
-    public Task(String taskDescription) {
+    public Task(String taskDescription, boolean isDone) {
         this.taskDescription = taskDescription;
-        this.isDone = false;
+        this.isDone = isDone;
+    }
+
+    public static Task parse(String inputString) throws VirushadeException {
+        // Remove the numbering at the start of each line.
+        String text = StringManipulator.everythingAfterDot(inputString);
+
+        if (text.length() < 6) {
+            throw new VirushadeException("Error: File cannot be parsed.");
+        }
+
+        String taskCategory = text.substring(0,3);
+        String taskCompletionStatus = text.substring(3,6);
+        String taskDescription = text.substring(6).trim();
+        String[] strings = StringManipulator.slashPartition(taskDescription);
+
+        switch(taskCategory) {
+        case "[T]":
+            if (taskCompletionStatus.equals("[x]")) {
+                return new ToDo(taskDescription, true);
+            } else if (taskCompletionStatus.equals("[ ]")) {
+                return new ToDo(taskDescription, false);
+            } else {
+                throw new VirushadeException("Error: File cannot be parsed.");
+            }
+
+        case "[E]":
+            if (taskCompletionStatus.equals("[x]")) {
+                return new Event(strings[0], strings[1].substring(3), true);
+            } else if (taskCompletionStatus.equals("[ ]")) {
+                return new Event(strings[0], strings[1].substring(3), false);
+            } else {
+                throw new VirushadeException("Error: File cannot be parsed.");
+            }
+
+        case "[D]":
+            if (taskCompletionStatus.equals("[x]")) {
+                return new Deadline(strings[0], strings[1].substring(3), true);
+            } else if (taskCompletionStatus.equals("[ ]")) {
+                return new Deadline(strings[0], strings[1].substring(3), false);
+            } else {
+                throw new VirushadeException("Error: File cannot be parsed.");
+            }
+
+        default:
+            throw new VirushadeException("Error: File cannot be parsed.");
+        }
     }
 
     /**
@@ -41,58 +83,7 @@ public class Task {
         return taskDescription;
     }
 
-    /**
-     * Converts the input string from 24-hour time to 12-hour time representation.
-     * @param timeString The input string
-     * @return The converted string.
-     */
-    private String convertTime(String timeString) {
-        try {
-            int timeIn24hRepresentation = Integer.parseInt(timeString);
 
-            if (timeIn24hRepresentation < 0 || timeIn24hRepresentation > 2359
-                    || Integer.parseInt(timeString.substring(2,3)) > 5) {
-                return timeString;
-            } else {
-                int hours = timeIn24hRepresentation/100;
-                int minutes = timeIn24hRepresentation%100;
-
-                if (hours > 12) {
-                    hours -= 12;
-                    return hours + ":" + minutes + "PM";
-                } else {
-                    return hours + ":" + minutes + "AM";
-                }
-            }
-        } catch (NumberFormatException e) {
-            return timeString;
-        }
-    }
-
-    /**
-     * Converts the inputString into DD MMM YYYY format, or 12-hour time representation if applicable.
-     * @param inputString The input string.
-     * @return A string in DD MMM YYYY TIME format if inputString is in "YYYY-MM-DD TIME" format.
-     */
-    public String convert(String inputString) {
-        if (inputString.length() < 10) {
-            return convertTime(inputString);
-        }
-
-        String dateString = inputString.trim().substring(0, 10);
-        String timeString = inputString.trim().substring(10).trim();
-        try {
-            String date = LocalDate.parse(dateString).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
-
-            if (timeString.length() == 4) {
-                return date + " " + convertTime(timeString);
-            }
-
-            return date + timeString;
-        } catch (DateTimeParseException e) {
-            return inputString;
-        }
-    }
 
     /**
      * @return The string representation for the task.

@@ -1,6 +1,9 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Storage {
 
@@ -10,21 +13,43 @@ public class Storage {
         STORAGE_FILE = new File(filename);
     }
 
-    private void createFilePath(File f) {
+    public void load(ArrayList<Task> tasks) throws VirushadeException{
         try {
-            if (f.getParentFile().mkdirs()) {
-                System.out.println("Creating storage directory...");
+            // create a Scanner using the File as the source
+            Scanner s = new Scanner(STORAGE_FILE);
+
+            int i = 0;
+            if (s.hasNext()) {
+                // Do not parse the line "Here are the tasks in your list: "
+                s.nextLine();
             }
 
-            if (f.createNewFile()) {
-                System.out.println("Creating storage file...");
+            while (s.hasNext()) {
+                Task scannedTask = Task.parse(s.nextLine());
+                tasks.add(scannedTask);
+                i++;
             }
-        } catch (IOException e) {
-            System.out.println("Unable to create file.\n" + e);
+        } catch (FileNotFoundException e) {
+            UI.showCreatingFiles();
+            createFilePath(STORAGE_FILE);
         }
     }
 
-    public void update(String text) {
+    private void createFilePath(File f) throws VirushadeException {
+        try {
+            if (f.getParentFile().mkdirs()) {
+                UI.showCreatingDirectory();
+            }
+
+            if (f.createNewFile()) {
+                UI.showCreatingFiles();
+            }
+        } catch (IOException e) {
+            throw new VirushadeException("Unable to create file.");
+        }
+    }
+
+    public void update(String text) throws VirushadeException {
         if (!STORAGE_FILE.exists()) {
             createFilePath(STORAGE_FILE);
         }
@@ -34,7 +59,7 @@ public class Storage {
             fw.write(text);
             fw.close();
         } catch (IOException e) {
-            System.out.println("Unable to update file.\n" + e);
+            throw new VirushadeException("Unable to write to file.");
         }
     }
 }

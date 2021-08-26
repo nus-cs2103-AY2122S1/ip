@@ -3,8 +3,8 @@ public class ToDo extends Task{
      * The constructor for a Todos Task.
      * @param taskDescription The name of the task.
      */
-    public ToDo(String taskDescription) {
-        super(taskDescription);
+    public ToDo(String taskDescription, boolean isDone) {
+        super(taskDescription, isDone);
     }
 
     /**

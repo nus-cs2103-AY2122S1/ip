@@ -20,8 +20,10 @@ delete LOL THIS AIN'T NO INTEGER
 delete 1.5
 delete -10
 delete 2
-delete 4
+delete 10
 delete 3
+delete 1
+delete 1
 list
 bye
 Check if already Exit.
