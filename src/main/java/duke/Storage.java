@@ -18,7 +18,7 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    public File load() throws FileNotFoundException {
+    public File load() throws FileNotFoundException{
         File file = new File(filepath);
         if (!file.exists()) {
             throw new FileNotFoundException();
@@ -29,10 +29,8 @@ public class Storage {
 
     public void save(StorageList storageList) throws IOException {
         FileWriter fw = new FileWriter(filepath);
-
         String textToAdd = "";
-
-        for (int i = 0; i < storageList.size(); i++) {
+        for (int i = 0; i < storageList.size(); i++){
             Task task = storageList.get(i);
             String taskType = "";
             String status = task.isDone() ? "1 " : "0 ";
@@ -51,6 +49,7 @@ public class Storage {
                 }
                 textToAdd += taskType + "| " + status + "| " + taskDesc + " | " + taskTime + "\n";
             }
+
         }
 
         fw.write(textToAdd);

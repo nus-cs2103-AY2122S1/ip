@@ -25,18 +25,15 @@ public class Duke {
     public Duke(String filePath) throws FileNotFoundException {
         ui = new Ui();
         ui.greeting();
-
         parser = new Parser();
-
         storage = new Storage(filePath);
-
         SL = new StorageList(storage.load());
     }
 
     public static void main(String[] args) {
         try {
             new Duke("data/duketest.txt").result();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e){
             ui.fileNotFoundMsg();
         }
     }
