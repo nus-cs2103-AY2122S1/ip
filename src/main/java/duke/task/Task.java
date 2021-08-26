@@ -17,20 +17,20 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public Task markAsDone() {
-        return new Task(this.taskName, true);
-    }
-
-    public String toSaveData() {
-        return this.isDone + "|" + this.taskName;
-    }
-
     public boolean hasSameDate(LocalDate date) {
         return false;
     }
 
     public boolean isBeforeDate(LocalDateTime dateTime) {
         return false;
+    }
+
+    public String toSaveData() {
+        return this.isDone + "|" + this.taskName;
+    }
+
+    public Task markAsDone() {
+        return new Task(this.taskName, true);
     }
 
     @Override

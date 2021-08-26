@@ -24,11 +24,6 @@ public class Deadline extends Task {
     }
 
     @Override
-    public Task markAsDone() {
-        return new Deadline(this.taskName, true, this.date, this.time);
-    }
-
-    @Override
     public boolean hasSameDate(LocalDate date) {
         return this.date.equals(date);
     }
@@ -42,6 +37,11 @@ public class Deadline extends Task {
     @Override
     public String toSaveData() {
         return "D|" + super.toSaveData() + "|" + this.date + "|" + this.time;
+    }
+
+    @Override
+    public Task markAsDone() {
+        return new Deadline(this.taskName, true, this.date, this.time);
     }
 
     @Override
