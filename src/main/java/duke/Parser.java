@@ -50,7 +50,8 @@ public class Parser {
 //        if (splited.length != 2) {
 //            return false;
 //        } else {
-//            return splited[0].equals("done") && splited[1].matches("\\d+") && Integer.valueOf(splited[1]) <= listLength;
+//            return splited[0].equals("done") && splited[1]
+//                  .matches("\\d+") && Integer.valueOf(splited[1]) <= listLength;
 //        }
         return input.startsWith("done ");
     }
@@ -58,6 +59,7 @@ public class Parser {
     public static String[] splitInput(String input, String type) throws DukeException {
         if (type.equals("deadline") || type.equals("event")) {
             String[] str = input.split("/");
+
             if (str.length == 1) {
                 if (type.equals("deadline")) {
                     throw new IncompleteDeadlineException();
@@ -67,23 +69,28 @@ public class Parser {
             } else {
                 String[] first = str[0].split(" ");
                 String[] second = str[1].split(" ");
+
                 String description = "";
                 String deadline = "";
+
                 for (int i = 1; i < first.length; i++) {
                     description += first[i];
                     if (i != first.length - 1) {
                         description += " ";
                     }
                 }
+
                 for (int i = 1; i < second.length; i++) {
                     if (i == 1 && (second[i].equals("by") || second[i].equals("at"))) {
                         // handle the case where user formatted command wrongly (include a space after "/")
                         continue;
                     }
                     if (Parser.isValidDate(second[i], DateTimeFormatter.ISO_LOCAL_DATE)) {
-                        deadline += LocalDate.parse(second[i], DateTimeFormatter.ISO_LOCAL_DATE).format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                        deadline += LocalDate.parse(second[i], DateTimeFormatter.ISO_LOCAL_DATE)
+                                .format(DateTimeFormatter.ofPattern("MMM d yyyy"));
                     } else if (Parser.isValidTime(second[i], DateTimeFormatter.ISO_LOCAL_TIME)) {
-                        deadline += LocalTime.parse(second[i], DateTimeFormatter.ISO_LOCAL_TIME).format(DateTimeFormatter.ofPattern("hh:mm a"));
+                        deadline += LocalTime.parse(second[i], DateTimeFormatter.ISO_LOCAL_TIME)
+                                .format(DateTimeFormatter.ofPattern("hh:mm a"));
                     } else {
                         deadline += second[i];
                     }
@@ -92,10 +99,12 @@ public class Parser {
                         deadline += " ";
                     }
                 }
+
                 return new String[]{description, deadline};
             }
         } else {
             String[] str = input.split(" ");
+
             if (str.length == 1) {
                 throw new IncompleteToDoException();
             } else {
@@ -112,12 +121,14 @@ public class Parser {
     }
 
     //parses the given userInput and returns a string for the UI to show the user
-    public static Command parse(String userInput, Ui ui, TaskList taskList) throws DukeException{
+    public static Command parse(String userInput, Ui ui, TaskList tasks) throws DukeException{
         if (userInput.equals("list")) {
             return new ListCommand();
         } else if (Parser.isDone(userInput)) {
             String[] splited = userInput.split(" ");
-            if (splited.length < 2 || !splited[1].matches("\\d+") || Integer.valueOf(splited[1]) > taskList.getSize()) {
+
+            if (splited.length < 2 || !splited[1].matches("\\d+")
+                    || Integer.valueOf(splited[1]) > tasks.getSize()) {
                 throw new DukeException(ui.buildMessage("Please key in valid number to mark as done."));
             } else {
                 int index = Integer.valueOf(splited[1]) - 1;
@@ -125,7 +136,8 @@ public class Parser {
             }
         } else if (Parser.isRemove(userInput)) {
             String[] str = userInput.split(" ");
-            if (str.length < 2 || !str[1].matches("\\d+") || Integer.valueOf(str[1]) > taskList.getSize()) {
+
+            if (str.length < 2 || !str[1].matches("\\d+") || Integer.valueOf(str[1]) > tasks.getSize()) {
                 throw new DukeException(ui.buildMessage("Please key in valid number to remove."));
             } else {
                 return new RemoveCommand(Integer.valueOf(str[1]) - 1);
@@ -134,8 +146,10 @@ public class Parser {
             return new ExitCommand();
         } else {
             String[] splited = userInput.split(" ");
+
             if (splited[0].equals("todo") || splited[0].equals("deadline") || splited[0].equals("event")) {
                 String[] str = Parser.splitInput(userInput, splited[0]);
+
                 if (splited[0].equals("todo")) {
                     ToDo add = new ToDo(str[0]);
                     return new AddCommand(add);

@@ -19,15 +19,19 @@ public class Ui {
     }
 
     public void printAdd(Task toAdd, int size) {
-        String message = "Got it. I've added this task:\n" + "  " + toAdd + "\nNow you have " + size + " tasks in the list.";
+        String message = "Got it. I've added this task:\n" + "  " + toAdd
+                + "\nNow you have " + size + " tasks in the list.";
+
         print(message);
     }
 
-    public void print(TaskList ls) {
+    public void print(TaskList tasks) {
         System.out.println(LINE);
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < ls.getSize() ; i++) {
-            System.out.println((i + 1) + "." + ls.taskToString(i));
+
+        for (int i = 0; i < tasks.getSize(); i++) {
+            System.out.println((i + 1) + "." + tasks.taskToString(i));
+
         }
         System.out.println(LINE);
     }
@@ -53,6 +57,7 @@ public class Ui {
 
     public void exit() {
         print("Bye. Hope to see you again soon!");
+
         sc.close();
     }
 

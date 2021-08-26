@@ -17,8 +17,8 @@ public class AddCommand extends Command{
         return false;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.add(this.toAdd);
-        ui.printAdd(this.toAdd, taskList.getSize());
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        tasks.add(this.toAdd);
+        ui.printAdd(this.toAdd, tasks.getSize());
     }
 }

@@ -18,7 +18,7 @@ public class Task {
     }
 
     public String printStatusIcon() {
-        return (isDone ? "1" : "0");
+        return (isDone) ? "1" : "0";
     }
     public String convertToString() {
         return printStatusIcon() + "|" + description;

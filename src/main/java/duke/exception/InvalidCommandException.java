@@ -1,9 +1,9 @@
 package duke.exception;
 
 public class InvalidCommandException extends DukeException {
-    private static String line = "____________________________________________________________";
-    private static String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static String LINE = "____________________________________________________________";
+    private static String MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     public InvalidCommandException() {
-            super(line + "\n" + message + "\n" + line);
+            super(LINE + "\n" + MESSAGE + "\n" + LINE);
     }
 }

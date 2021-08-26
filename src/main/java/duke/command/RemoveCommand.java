@@ -17,10 +17,10 @@ public class RemoveCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Task toRemove = taskList.remove(this.indexToRemove);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        Task toRemove = tasks.remove(this.indexToRemove);
         String message = "Noted. I've removed this task:\n" + toRemove + "\nNow you have "
-                + taskList.getSize() + " tasks in the list";
+                + tasks.getSize() + " tasks in the list";
         ui.print(message);
     }
 }

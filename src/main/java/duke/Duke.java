@@ -6,12 +6,12 @@ import duke.exception.DukeException;
 public class Duke {
     private final Ui ui;
     private final Storage storage;
-    private final TaskList taskList;
+    private final TaskList tasks;
 
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.taskList = new TaskList(storage.initialise());
+        this.tasks = new TaskList(storage.initialise());
     }
 
     public void run() {
@@ -20,8 +20,8 @@ public class Duke {
         while (!isExit) {
             try {
                 String userInput = ui.readInput();
-                Command c = Parser.parse(userInput, ui, taskList);
-                c.execute(taskList, ui, storage);
+                Command c = Parser.parse(userInput, ui, tasks);
+                c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
