@@ -30,7 +30,7 @@ public class EventTest {
         object.put("isDone", false);
         object.put("description", "event 1");
         object.put("date", "2020-10-10");
-        assertEquals(object.toJSONString(), new Event("event 1 /at 2020-10-10").toJSONObject().toJSONString());
+        assertEquals(object.toJSONString(), new Event("event 1 /at 2020-10-10").toJsonObject().toJSONString());
     }
 
     @Test

@@ -70,7 +70,7 @@ public class Storage {
     @SuppressWarnings("unchecked")
     public void write(TaskList tasks) {
         JSONArray arr = new JSONArray();
-        tasks.forEach((task) -> arr.add(task.toJSONObject()));
+        tasks.forEach((task) -> arr.add(task.toJsonObject()));
         try {
             fileWriter = new FileWriter(filePath);
             fileWriter.write(arr.toJSONString());
@@ -101,7 +101,7 @@ public class Storage {
             JSONArray arr = (JSONArray) jsonParser.parse(reader);
             arr.forEach((task) -> {
                 try {
-                    tasks.add(Task.fromJSONObject((JSONObject) task));
+                    tasks.add(Task.fromJsonObject((JSONObject) task));
                 } catch (UnknownTaskTypeException | InvalidDateException e) {
                     e.printStackTrace();
                 }

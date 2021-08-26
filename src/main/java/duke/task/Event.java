@@ -95,7 +95,7 @@ public class Event extends DatedTask {
 
     @Override
     @SuppressWarnings("unchecked")
-    public JSONObject toJSONObject() {
+    public JSONObject toJsonObject() {
         JSONObject obj = new JSONObject();
         obj.put("type", "event");
         obj.put("description", description);

@@ -32,7 +32,7 @@ public class DeadlineTest {
         object.put("date", "2020-10-10");
         assertEquals(
                 object.toJSONString(),
-                new Deadline("deadline 1 /by 2020-10-10").toJSONObject().toJSONString());
+                new Deadline("deadline 1 /by 2020-10-10").toJsonObject().toJSONString());
     }
 
     @Test

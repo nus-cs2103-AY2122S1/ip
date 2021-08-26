@@ -18,7 +18,7 @@ public class TodoTest {
         object.put("type", "todo");
         object.put("isDone", false);
         object.put("description", "todo 1");
-        assertEquals(object.toJSONString(), new Todo("todo 1").toJSONObject().toJSONString());
+        assertEquals(object.toJSONString(), new Todo("todo 1").toJsonObject().toJSONString());
     }
 
     @Test
