@@ -32,7 +32,11 @@ public class Storage {
      */
     public Storage(String filePath) throws IOException {
         this.file = new File(filePath);
-        //if file does not exist create one, if exist then ignore
+        //if data directory doesn't exist create one
+        if (!this.file.getParentFile().exists()) {
+            this.file.getParentFile().mkdir();
+        }
+        //if file doesn't exist, create one. If it does, ignore.
         this.file.createNewFile();
     }
 

@@ -5,8 +5,6 @@ import duke.Ui;
 import duke.command.Command;
 import duke.exception.DukeException;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Represents a chat bot called Duke.
@@ -19,12 +17,10 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private final Ui ui;
+    private final static String filePath = "data/duke.txt";
 
     public static void main(String[] args) {
-        String home = System.getProperty("user.home");
-        //specify where the duke.txt file should be. In this case it is created in users' Desktop.
-        Path path = Paths.get(home, "Desktop", "duke.txt");
-        new Duke(path.toString()).run();
+        new Duke(filePath).run();
     }
 
     /**
