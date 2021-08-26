@@ -146,7 +146,8 @@ public class Parser {
                         throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable event timing!");
                     }
                     String eventDescription = getSecondWord(arr_event[0]);
-                    String eventTiming = getSecondWord(arr_event[1]).substring(0, getSecondWord(arr_event[1]).length() - 1);
+                    String eventTiming = getSecondWord(arr_event[1]).substring(0, getSecondWord(
+                            arr_event[1]).length() - 1);
                     addEvent(eventDescription, eventTiming);
                     break;
                 default:
