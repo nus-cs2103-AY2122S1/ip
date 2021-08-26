@@ -9,7 +9,7 @@ import duke.util.DukeDateTime;
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String USAGE_MESSAGE =
-            "To list all tasks, use 'list' or 'list <date>' (to show tasks on certain date).";
+            "To list all tasks, use 'list'.\nTo list all tasks on a certain date, use 'list <date>'.";
 
     private final String commandArguments;
 
