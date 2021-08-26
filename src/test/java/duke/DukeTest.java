@@ -9,7 +9,10 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
-    
+
+    /**
+     * Tests Duke's 'bye' function.
+     */
     @Test
     public void testBye() {
         
@@ -38,6 +41,9 @@ public class DukeTest {
         assertEquals(expected, newOut.toString());
     }
 
+    /**
+     * Tests Duke's 'list' function with an empty list.
+     */
     @Test
     public void testEmptyList() {
 
@@ -70,6 +76,9 @@ public class DukeTest {
         assertEquals(expected, newOut.toString());
     }
 
+    /**
+     * Tests Duke's handling of a missing deadline description.
+     */
     @Test
     public void testAddDeadline_invalidDesc_success() {
         

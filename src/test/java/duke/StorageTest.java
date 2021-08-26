@@ -11,12 +11,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
     Storage testStorage = new Storage("data", "duke.txt");
-    
+
+    /**
+     * Tests the Storage load function with an empty list.
+     */
     @Test
     public void testEmptyLoad() {
         assertEquals(new ArrayList<Task>(100), testStorage.load());
     }
 
+    /**
+     * Tests the handling of finding an entry in the hard disk that is in the incorrect format.
+     * @throws IOException If the hard disk is not properly set up and the file cannot be written to.
+     */
     @Test
     public void testLoad_faultyEntry() throws IOException {
 
