@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Duke {
@@ -5,6 +9,10 @@ public class Duke {
     //private Storage storage;
     //private TaskList tasks;
     List<Task> tasks = new ArrayList<>();
+    String dirPath = "." + File.separator + "data";
+    String filePath = dirPath + File.separator + "tasks.txt";
+    File stored;
+
 
     //private Ui ui;
     String horizontal = "_______________________";
@@ -18,7 +26,61 @@ public class Duke {
                     "                                          __/ |\n" +
                     "                                         |___/ ";
 
-    public Duke() {
+    public Duke()  {
+    }
+
+    public void loadFile() throws IOException {
+        File dataDir = new File(dirPath);
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+            System.out.println("make dir");
+        }
+        stored = new File(filePath);
+        if (stored.createNewFile()) {
+            tasks = new ArrayList<>();
+        } else {
+            Scanner readFile = new Scanner(stored);
+            while (readFile.hasNextLine()) {
+                String task = readFile.nextLine();
+                parseTask(task);
+            }
+            readFile.close();
+        }
+    }
+
+    public void parseTask(String str) {
+        Scanner sc = new Scanner(str);
+        String category = sc.next();
+        System.out.println("cAate:" + category);
+        sc.next();
+        System.out.println("next1");
+        sc.next();
+        System.out.println("next2");
+
+
+        String taskName = "";
+        String time = "";
+
+
+        while (sc.hasNext()) {
+            String temp = sc.next();
+            if (temp.equals("-")) {
+                time = sc.nextLine();
+            } else {
+                taskName += temp + " ";
+            }
+        }
+
+        if (category.equals("T")) {
+            tasks.add(new Todo(taskName));
+            System.out.println("todo");
+        } else if (category == "D") {
+            tasks.add(new Deadline(taskName, time));
+        } else {
+            tasks.add(new Event(taskName, time));
+        }
+
+
     }
 
     public void welcome() {
@@ -29,10 +91,20 @@ public class Duke {
         System.out.println("Byebye ~ nya");
     }
 
-    public void run() {
+    public void updateFile() throws IOException {
+        FileWriter myWriter = new FileWriter(filePath);
+        for (Task task: tasks) {
+            myWriter.write(task.toString() + "\n");
+        }
+        myWriter.close();
+    }
+
+    public void run() throws IOException {
+        loadFile();
         welcome();
         boolean running = true;
         Scanner sc = new Scanner(System.in);
+
 
         while(running) {
             try {
@@ -72,7 +144,7 @@ public class Duke {
                     String time = "";
                     while (s.hasNext()) {
                         String temp = s.next();
-                        if (temp.equals("/by")) {
+                        if (temp.equals("-")) {
                             time = s.nextLine();
                         } else {
                             ddlName += temp + " ";
@@ -92,7 +164,7 @@ public class Duke {
                     String time = "";
                     while (s.hasNext()) {
                         String temp = s.next();
-                        if (temp.equals("/at")) {
+                        if (temp.equals("-")) {
                             time = s.nextLine();
                         } else {
                             eventName += temp + " ";
@@ -129,9 +201,15 @@ public class Duke {
             }
         }
         sc.close();
+        updateFile();
+
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        try {
+            new Duke().run();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } ;
     }
 }
