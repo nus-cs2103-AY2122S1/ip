@@ -17,7 +17,7 @@ public class Event extends Task {
 
         return ("E "
                 + super.toString()
-                + " - "
+                + " / "
                 + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
         );
     }
@@ -26,7 +26,7 @@ public class Event extends Task {
     public String toStoredString() {
         return ("E "
                 + super.toString()
-                + " - "
+                + " / "
                 + time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         );
     }

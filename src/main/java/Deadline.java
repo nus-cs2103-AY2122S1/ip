@@ -14,7 +14,7 @@ public class Deadline extends Task {
     public String toString() {
         return ("D "
                 + super.toString()
-                + " - "
+                + " / "
                 + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
         );
     }
@@ -23,7 +23,7 @@ public class Deadline extends Task {
     public String toStoredString() {
         return ("D "
                 + super.toString()
-                + " - "
+                + " / "
                 + time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
         );
     }
