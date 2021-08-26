@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +15,38 @@ public class Duke {
     public static void main(String[] args) {
 
         System.out.println(formatString(WELCOME_MSG));
+        
+        File file = new File("./data/duke.txt");
+
+        try {
+            Scanner dataReader = new Scanner(file);
+
+            while (dataReader.hasNextLine()) {
+                String[] data = dataReader.nextLine().split("\\|");
+                String type = data[0];
+                boolean isDone = data[1] == "1" ? true : false;
+                String description = data[2];
+                System.out.println(description);
+                if (type.equals("T")) {
+                    tasks.add(new ToDo(description, isDone));
+                } else if (type.equals("D")) {
+                    String time = data[3].trim();
+                    tasks.add(new Deadline(description, time, isDone));
+                } else if (type.equals("E")) {
+                    String time = data[3].trim();
+                    tasks.add(new Event(description, time, isDone));
+                }
+            }
+
+            dataReader.close();
+        } catch (FileNotFoundException e) {
+            try {
+                file.createNewFile();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+                return;
+            }
+        }  
 
         Scanner sc  = new Scanner(System.in);
         String input = sc.next();
@@ -19,13 +55,20 @@ public class Duke {
         while (!input.equals("bye")) {
             try {
                 action(input, description);
+                writeTaskList();
             } catch (InvalidInputException e) {
                 System.out.println(formatString(e.getMessage()));
+            } catch (IOException e2) {
+                sc.close();
+                e2.printStackTrace();
+                return;
             }
+
             input = sc.next();
             description = sc.nextLine().trim();
         }
-
+        
+        sc.close();
         System.out.println(formatString(EXIT_MSG));
     }
 
@@ -86,6 +129,26 @@ public class Duke {
         taskString.append(len + ". " + tasks.get(len - 1).toString());
 
         return taskString.toString();
+    }
+
+    private static void writeTaskList() throws IOException {
+        try {
+            FileWriter writer = new FileWriter("./data/duke.txt");
+            StringBuilder data = new StringBuilder();
+
+            int len = tasks.size();
+
+            for (int i = 0; i < len - 1; i ++) {
+                data.append(tasks.get(i).getformmatedData() + "\n");
+            }
+
+            data.append(tasks.get(len - 1).getformmatedData());
+
+            writer.write(data.toString());
+            writer.close();
+        } catch (IOException e) {
+            throw e;
+        }
     }
 
     private static String getTaskCountString() {
