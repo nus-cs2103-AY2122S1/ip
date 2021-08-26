@@ -33,7 +33,7 @@ public class Duke {
      * based on command type.
      */
     public void run() {
-        ui.greeting();
+        ui.printGreeting();
 
         Scanner scanner = new Scanner(System.in);
         boolean isExit = false;
@@ -44,28 +44,28 @@ public class Duke {
                 CommandType commandType = Parser.parse(fullCommand);
 
                 switch (commandType) {
-                    case LIST:
-                        ui.showTasks(tasks.getTaskList());
-                        break;
-                    case BYE:
-                        ui.bye();
-                        isExit = true;
-                        break;
-                    case DELETE:
-                        tasks.delete(fullCommand.substring(7), storage, ui);
-                        break;
-                    case DONE:
-                        tasks.done(fullCommand.substring(5), storage, ui);
-                        break;
-                    case TODO:
-                        tasks.todo(fullCommand.substring(5), storage, ui);
-                        break;
-                    case DEADLINE:
-                        tasks.deadline(fullCommand.substring(9), storage, ui);
-                        break;
-                    case EVENT:
-                        tasks.event(fullCommand.substring(6), storage, ui);
-                        break;
+                case LIST:
+                    ui.showTasks(tasks.getTaskList());
+                    break;
+                case BYE:
+                    ui.printGoodbye();
+                    isExit = true;
+                    break;
+                case DELETE:
+                    tasks.delete(fullCommand.substring(7), storage, ui);
+                    break;
+                case DONE:
+                    tasks.done(fullCommand.substring(5), storage, ui);
+                    break;
+                case TODO:
+                    tasks.createTodo(fullCommand.substring(5), storage, ui);
+                    break;
+                case DEADLINE:
+                    tasks.createDeadline(fullCommand.substring(9), storage, ui);
+                    break;
+                case EVENT:
+                    tasks.createEvent(fullCommand.substring(6), storage, ui);
+                    break;
                 }
             } catch (DukeException e) {
                 ui.showError(e.getMessage());

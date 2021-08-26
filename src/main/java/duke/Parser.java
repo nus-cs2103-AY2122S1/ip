@@ -20,12 +20,14 @@ public class Parser {
             return CommandType.BYE;
         } else if (command.startsWith("delete")) {
             if (command.equals("delete")) {
-                throw new DukeException("☹ OOPS!!! The delete command needs a number after it in the following format: delete number");
+                throw new DukeException("☹ OOPS!!! The delete command needs a number after it in the following format:"
+                        + " delete number");
             }
             return CommandType.DELETE;
         } else if (command.startsWith("done")) {
             if (command.equals("done")) {
-                throw new DukeException("☹ OOPS!!! The done command needs a number after it in the following format: done number");
+                throw new DukeException("☹ OOPS!!! The done command needs a number after it in the following format:"
+                        + " done number");
             }
             return CommandType.DONE;
         } else if (command.startsWith("todo")) {

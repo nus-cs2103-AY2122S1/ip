@@ -1,11 +1,12 @@
 package duke;
+
 import java.util.ArrayList;
 
 /**
  * Handles interactions with user through message outputs.
  */
 public class Ui {
-
+    
     /**
      * Prints error message.
      * @param error message that is returned by an exception.
@@ -17,7 +18,7 @@ public class Ui {
     /**
      * Prints greeting to user when program starts.
      */
-    public void greeting() {
+    public void printGreeting() {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
@@ -25,22 +26,21 @@ public class Ui {
      * Prints the task that has been marked done.
      * @param doneTask task that has been marked done.
      */
-    public void doneMessage(Task doneTask) {
+    public void printDoneMessage(Task doneTask) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(doneTask);
-
     }
 
     /**
      * Prints the task that has been deleted from the task list.
      * @param deletedTask task that has been deleted from the task list.
      */
-    public void deleteMessage(Task deletedTask) {
+    public void printDeleteMessage(Task deletedTask) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(deletedTask);
     }
 
-    public void addMessage(Task addedTask) {
+    public void printAddMessage(Task addedTask) {
         System.out.println("Got it. I've added this task:");
         System.out.println(addedTask);
     }
@@ -49,7 +49,7 @@ public class Ui {
      * Prints the number of tasks in the task list.
      * @param size number of tasks in the task list.
      */
-    public void taskListSize(int size) {
+    public void printTaskListSize(int size) {
         if (size == 1) {
             System.out.println("Now you have 1 task in the list.");
         } else {
@@ -60,7 +60,7 @@ public class Ui {
     /**
      * Prints goodbye message to user when 'bye' command is entered.
      */
-    public void bye() {
+    public void printGoodbye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
@@ -80,6 +80,5 @@ public class Ui {
             }
         }
     }
-
 
 }

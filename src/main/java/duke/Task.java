@@ -17,8 +17,8 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public void setIsDone(boolean value) {
-        this.isDone = value;
+    public void setIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {

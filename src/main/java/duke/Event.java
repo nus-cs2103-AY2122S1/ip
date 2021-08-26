@@ -62,5 +62,4 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + getFormattedAt() + ")";
     }
 
-
 }

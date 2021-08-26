@@ -12,13 +12,13 @@ public class Deadline extends Task {
     protected String by;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-
+    
     /**
      * Creates a Deadline object from user command using the description and date and time.
      * @param description describes the nature of the task.
      * @param by is the date and time by which the task is due, converted to LocalDateTime object.
      */
-    public Deadline(String description, String by){
+    public Deadline(String description, String by) {
         super(description);
         this.by = by;
         this.dateTimeBy = LocalDateTime.parse(by, formatter);
