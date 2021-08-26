@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser {
     public static boolean parse(String input, Ui ui, Storage storage, TaskList tasks) {
         if (input.equals("bye")) {

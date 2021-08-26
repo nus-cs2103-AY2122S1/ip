@@ -1,10 +1,11 @@
+package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
     protected final LocalDateTime dateTime;
 
-    public Deadline(String description, String dateTime) {
+    public Event(String description, String dateTime) {
         super(description);
         this.dateTime = convert(dateTime);
     }
@@ -16,7 +17,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D][" + this.getStatusIcon() + "] " + this.getDescription() + " (by: "
+        return "[E][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: "
                 + this.dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yy HH:mm")) + ")";
     }
 }
