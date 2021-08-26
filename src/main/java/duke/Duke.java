@@ -131,7 +131,7 @@ public class Duke {
         try {
             Duke duke = new Duke("data/duke.txt");
             duke.greet();
-            String[] cmd = new String[] { "bye" };
+            String[] cmd = new String[] { "" };
             do {
                 try {
                     cmd = duke.commandParser.parse(duke.scanner.nextLine());
