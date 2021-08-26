@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Task class that encapsulates an action item to be done.
+ */
 public class Task {
 
     protected String description;
@@ -11,7 +14,8 @@ public class Task {
     }
 
     /**
-     * Get the status icon, either "X" or "".
+     * Returns the status icon, either "X" or "".
+     *
      * @return a String which represents the status of the task.
      */
     public String getStatusIcon() {
@@ -24,7 +28,7 @@ public class Task {
     }
 
     /**
-     * Update status as done.
+     * Updates status as done.
      */
     public void markAsDone() {
         this.isDone = true;

@@ -2,8 +2,17 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Parser class that encapsulates handling of user input.
+ */
 public class Parser {
 
+    /**
+     * Handles user input from scanner.
+     *
+     * @param userInput The commands that user entered in console.
+     * @return Command The action item to be executed by Duke.
+     */
     public static Command parse(String userInput) {
         String command = getCommand(userInput);
         switch (command) {

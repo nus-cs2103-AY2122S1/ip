@@ -1,10 +1,13 @@
 package duke;
 
 import duke.command.Command;
-import duke.task.*;
+import duke.task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Duke class which is the main entry point to run the application.
+ */
 public class Duke {
 
     private Storage storage;
@@ -17,12 +20,15 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Starts the Duke app.
+     */
     public void run() {
         ui.greet();
 
-       boolean isExit = false;
+        boolean isExit = false;
 
-       while (!isExit) {
+        while (!isExit) {
             String userInput = ui.readCommand();
             Command cmd = Parser.parse(userInput);
             cmd.execute(tasks, ui, storage);

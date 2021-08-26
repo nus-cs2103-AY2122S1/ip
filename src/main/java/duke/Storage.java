@@ -15,10 +15,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage class that encapsulates file creation and writing.
+ */
 public class Storage {
 
     String filePath;
 
+    /**
+     * Constructs a new Storage object.
+     *
+     * @param filePath The file location that the data is stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -34,6 +42,12 @@ public class Storage {
 
     }
 
+    /**
+     * Iterates through list of task items and
+     * store them in file in the hard disk.
+     *
+     * @param items List of Task objects.
+     */
     public void writeToFile(List<Task> items) {
         try {
             FileWriter myWriter = new FileWriter(this.filePath);
@@ -48,6 +62,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from file to a list of Task objects.
+     *
+     * @return A list of Task objects.
+     * @throws IOException IOException
+     */
     public List<Task> load() throws IOException {
 
         List<Task> tasksList = new ArrayList<>();
