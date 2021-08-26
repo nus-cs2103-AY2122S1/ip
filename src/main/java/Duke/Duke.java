@@ -1,3 +1,10 @@
+package Duke;
+
+import Duke.Tasks.Task;
+import Duke.Tool.Parser;
+import Duke.Tool.Storage;
+import Duke.Tool.TaskList;
+
 import java.io.IOException;
 import java.lang.String;
 

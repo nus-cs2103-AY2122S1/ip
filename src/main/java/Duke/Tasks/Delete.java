@@ -1,3 +1,9 @@
+package Duke.Tasks;
+
+import Duke.Tool.Storage;
+import Duke.Tool.TaskList;
+import Duke.Ui;
+
 import java.io.IOException;
 
 public class Delete extends Task {

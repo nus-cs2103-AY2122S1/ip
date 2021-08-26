@@ -1,9 +1,15 @@
+package Duke.Tasks;
+
+import Duke.Tool.Storage;
+import Duke.Tool.TaskList;
+import Duke.Ui;
+
 import java.io.IOException;
 
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected boolean isExit;
+    public boolean isExit;
 
     public Task(String description, boolean isDone) {
         this.description = description;

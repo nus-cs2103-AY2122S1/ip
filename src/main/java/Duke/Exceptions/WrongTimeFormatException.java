@@ -1,3 +1,5 @@
+package Duke.Exceptions;
+
 public class WrongTimeFormatException extends Exception{
 
     public WrongTimeFormatException(String message) {

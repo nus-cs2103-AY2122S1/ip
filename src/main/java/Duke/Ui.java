@@ -1,3 +1,8 @@
+package Duke;
+
+import Duke.Tasks.Task;
+import Duke.Tool.TaskList;
+
 import java.util.Scanner;
 import java.lang.String;
 
@@ -18,7 +23,7 @@ public class Ui {
 
     public static void showWelcome(){
         System.out.println(INDENTATION + UNDERLINE);
-        System.out.println(INDENTATION + "Hello! I'm Duke\n" +
+        System.out.println(INDENTATION + "Hello! I'm Duke.Duke\n" +
                 INDENTATION + "What can I do for you?");
         System.out.println(INDENTATION + UNDERLINE);
 

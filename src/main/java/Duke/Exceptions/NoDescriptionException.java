@@ -1,3 +1,5 @@
+package Duke.Exceptions;
+
 public class NoDescriptionException extends Exception{
 
     public NoDescriptionException(String message) {
