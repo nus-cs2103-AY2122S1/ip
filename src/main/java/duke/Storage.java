@@ -15,6 +15,11 @@ import duke.task.Todo;
 public class Storage {
     private File tasksFile;
 
+    /**
+     * Creates a Storage object to store data at the provided filepath.
+     * @param filePath The filepath to store data at.
+     * @throws An IO Exception if a file cannot be created at the provided filepath.
+     */
     public Storage(String filePath) throws IOException {
         File dataDirectory = new File("data");
         if (!dataDirectory.exists()) {
@@ -27,6 +32,10 @@ public class Storage {
         this.tasksFile = tasksFile;
     }
 
+    /**
+     * Loads tasks from the storage file and populates a {@link TaskList}.
+     * @throws Error if there is a problem with the file format of the stored file.
+     */
     public List<Task> loadTasks() throws Exception {
         List<Task> tasks = new ArrayList<>();
         Scanner s = new Scanner(this.tasksFile);
@@ -70,6 +79,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves tasks from the given tasklist to the storage file.
+     * @param taskList The tasklist to save.
+     * @throws IO Exception if file cannot be written to.
+     */
     public void saveTasks(TaskList taskList) throws IOException {
         FileWriter writer = new FileWriter(this.tasksFile);
 

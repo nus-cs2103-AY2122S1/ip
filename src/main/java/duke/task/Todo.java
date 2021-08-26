@@ -9,6 +9,10 @@ public class Todo extends Task {
         super(description, isCompleted);
     }
 
+    /**
+     * Constructs a new Todo object from an input string.
+     * @param input Input string used to create todo object.
+     */
     public static Todo fromInput(String input) throws Exception {
         String todoDescription = input.trim();
         if (todoDescription.length() == 0) {
