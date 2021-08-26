@@ -5,6 +5,10 @@ public class List {
 
     public List() {}
 
+    public List(List list) {
+        this.list = list.getList();
+    }
+
     public String add(Task task) {
         list.add(task);
         return task.description;
