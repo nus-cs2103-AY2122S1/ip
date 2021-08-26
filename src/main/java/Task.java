@@ -1,10 +1,7 @@
+//make abstract class?
 public class Task {
     private boolean isDone;
     private String taskSummary;
-
-    public static Task of(String taskSummary) {
-        return new Task(taskSummary);
-    }
 
     Task(String taskSummary) {
         this.taskSummary = taskSummary;
@@ -15,24 +12,28 @@ public class Task {
         this.isDone = true;
     }
 
-    private String completeStatus() {
+    public String completeStatus() {
         return this.isDone ? "x" : "";
     }
 
-    //getters
     public boolean isCompleted() {
         return this.isDone;
     }
+
     public String getTaskSummary() {
         return this.taskSummary;
     }
+
+    //only for purpose of polymorphism, change to abstract?
     public String toStorageFormat() {
-        return String.format("? | %d | %s ",
-                this.isCompleted() ? 1 : 0,this.getTaskSummary());
+        return String.format(
+            "? | %d | %s ",
+            this.isCompleted() ? 1 : 0,this.getTaskSummary()
+        );
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.completeStatus(),this.taskSummary);
+        return String.format("[GENERIC TASK] [%s] %s", this.completeStatus(),this.taskSummary);
     }
 }
