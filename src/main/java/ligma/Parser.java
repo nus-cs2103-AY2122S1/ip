@@ -9,8 +9,21 @@ import ligma.task.Todo;
 import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 
+/**
+ * This class contains functions that help parse strings into
+ * either Task or Command objects.
+ */
 public class Parser {
     //should handle incorrect command format exceptions
+
+    /**
+     * Parses user input to Command object.
+     *
+     * @return corresponding Command object
+     * @throws NoSuchMethodException if user input is an invalid command
+     * @throws InputMismatchException if description of task is improperly formatted
+     * @throws DateTimeParseException if time of task is improperly formatted
+     */
     public static Command parseCommand(String input)
             throws NoSuchMethodException, InputMismatchException, DateTimeParseException {
         if (input.equals("bye")) {
@@ -72,6 +85,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses file contents to Command object.
+     *
+     * @return corresponding Command object
+     * @throws NoSuchMethodException if user input is an invalid command
+     * @throws InputMismatchException if description of task is improperly formatted
+     * @throws DateTimeParseException if time of task is improperly formatted
+     */
     public static Task parseFileContent(String s) throws IllegalArgumentException {
         char taskType = s.charAt(1);
         String desc = s.substring(7);

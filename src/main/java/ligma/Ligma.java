@@ -5,16 +5,13 @@ import ligma.command.Command;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.io.IOException;
-//handle date time exception somewhere
-//System.out.println(PARTITION
-//                    +"\n Time must be in yyyy-mm-dd format.\n" + PARTITION);
-// String print = t == TaskType.DEADLINE
-//                            ? "for deadlines using '/by'"
-//                            : "for events using '/at'";
-//            System.out.println(PARTITION
-//                    + String.format("\n Time must be stipulated %s\n", print)
-//                    + PARTITION);
 
+/**
+ * This class represents a Ligma program that keeps track of your to-do list.
+ * Storage object corresponds to the persistent storage
+ * for the Ligma program executed and TaskList object corresponds
+ * to the existing tasks during execution.
+ */
 public class Ligma {
 
     private static Storage storage;
@@ -29,6 +26,9 @@ public class Ligma {
         }
     }
 
+    /**
+     * Executes Ligma program.
+     */
     public void run() {
         Ui.introduceSelf();
         Scanner sc = new Scanner(System.in);

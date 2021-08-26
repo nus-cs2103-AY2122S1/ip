@@ -5,10 +5,21 @@ import java.util.InputMismatchException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class represents an Event Task.
+ */
 public class Event extends Task {
 
     private LocalDate time;
 
+    /**
+     * Factory method that creates an Event object.
+     *
+     * @param desc                      the description of the event
+     * @return                          event created
+     * @throws InputMismatchException   if format of event description is wrong
+     * @throws DateTimeParseException   if format of time is wrong
+     */
     public static Event createEvent(String desc)
             throws InputMismatchException, DateTimeParseException {
         if (desc.contains("/at")) {
@@ -20,6 +31,15 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Factory method that creates an Event object.
+     *
+     * @param desc                      the description of the event
+     * @param isDone                    whether task has been completed
+     * @return                          event created
+     * @throws InputMismatchException   if format of event description is wrong
+     * @throws DateTimeParseException   if format of time is wrong
+     */
     public static Event createEvent(String desc, boolean isDone) throws InputMismatchException {
         if (desc.contains("at")) {
             int i = desc.indexOf('(');
