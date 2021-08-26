@@ -12,8 +12,10 @@ public class Duke {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        Storage storage = new Storage("./data/tasks.txt");
+
         try {
-            loadTasksFromFile();
+            taskList = storage.loadTasks();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             taskList = new ArrayList<>();
@@ -59,7 +61,7 @@ public class Duke {
 
                         Task doneTask = taskList.get(done);
                         doneTask.markAsDone();
-                        updateTaskFromFile(done, false);
+                        storage.editTaskFromFile(done, taskList);
 
                         System.out.printf("I've marked this task as done:\n" +
                                 "%s\n", doneTask.toString());
@@ -81,7 +83,7 @@ public class Duke {
                             String[] eventInfo = splitBetween(userInput, "/at");
                             taskList.add(new Event(eventInfo[0], eventInfo[1], false));
                         }
-                        addTask(taskList.get(taskList.size() - 1));
+                        addTask(taskList.get(taskList.size() - 1), storage);
                         break;
                     case("delete"):
                         int delete = getInputNumber(userInput);
@@ -91,7 +93,7 @@ public class Duke {
                         }
 
                         Task removedTask = taskList.get(delete);
-                        deleteTaskFromFile(delete);
+                        storage.deleteTaskFromFile(delete, taskList);
                         taskList.remove(delete);
 
                         System.out.printf("I've removed this task:\n%s\n", removedTask.toString());
@@ -106,8 +108,8 @@ public class Duke {
         }
     }
 
-    private static void addTask(Task newTask) {
-        saveTaskToFile(newTask);
+    private static void addTask(Task newTask, Storage storage) {
+        storage.saveTaskToFile(newTask);
         System.out.printf("Got it, I've added this task:\n %s\n", newTask.toString());
         System.out.printf("Now you have %d tasks in your list.\n", taskList.size());
     }
@@ -149,90 +151,6 @@ public class Duke {
            return Integer.parseInt(userInput) - 1;
         } catch (NumberFormatException exception) {
             throw new DukeException("Please enter a number after the command.");
-        }
-    }
-
-    private static File loadTasksFromFile() throws DukeException {
-        try {
-            File taskFile = new File("./data/tasks.txt");
-            if (!taskFile.createNewFile()) {
-                Scanner fileReader = new Scanner(taskFile);
-                while (fileReader.hasNextLine()) {
-                    String data = fileReader.nextLine();
-                    taskList.add(dataToTask(data));
-                }
-            }
-            return taskFile;
-        } catch (IOException | DukeException e) {
-            throw new DukeException("Unable to load tasks from file.");
-        }
-    }
-
-    private static Task dataToTask(String str) throws DukeException {
-        String[] taskArr = str.split(",");
-        String taskType = taskArr[0];
-        boolean taskDone = taskArr[1].equals("1");
-        String taskDescription = taskArr[2];
-        String taskDate = "";
-        if (taskArr.length > 3) {
-            taskDate = taskArr[3];
-        }
-        Task res = null;
-        switch (taskType) {
-            case("T"):
-                res = new Todo(taskDescription, taskDone);
-                break;
-            case("D"):
-                res = new Deadline(taskDescription, taskDate, taskDone);
-                break;
-            case("E"):
-                res = new Event(taskDescription, taskDate, taskDone);
-                break;
-        }
-        return res;
-    }
-
-    private static void saveTaskToFile(Task task) {
-        saveStringToFile(task.toFileData() + "\n", "./data/tasks.txt");
-    }
-
-    private static void saveStringToFile(String str, String filePath) {
-        try {
-            FileWriter fileWriter = new FileWriter(filePath, true);
-            fileWriter.write(str);
-            fileWriter.close();
-        }
-        catch (IOException e) {
-            System.out.println("An error occurred with file handling.");
-        }
-    }
-
-    private static void deleteTaskFromFile(int taskIndex) {
-        updateTaskFromFile(taskIndex, true);
-    }
-
-    private static void updateTaskFromFile(int taskIndex, boolean delete) {
-        try {
-            StringBuilder newTasks = new StringBuilder();
-            File taskFile = new File("./data/tasks.txt");
-            Scanner fileReader = new Scanner(taskFile);
-            int index = 0;
-            while (fileReader.hasNextLine()) {
-                if (index != taskIndex) {
-                    newTasks.append(fileReader.nextLine()).append("\n");
-                } else if (!delete) {
-                    newTasks.append(taskList.get(taskIndex).toFileData()).append("\n");
-                    fileReader.nextLine();
-                } else {
-                    fileReader.nextLine();
-                }
-                index += 1;
-            }
-            FileWriter fileWriter = new FileWriter("./data/tasks.txt", false);
-            fileWriter.write(String.valueOf(newTasks));
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred with file handling.");
         }
     }
 
