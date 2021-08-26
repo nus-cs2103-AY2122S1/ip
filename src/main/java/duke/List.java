@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class List {
@@ -9,9 +13,8 @@ public class List {
         this.list = list.getList();
     }
 
-    public String add(Task task) {
+    public void add(Task task) {
         list.add(task);
-        return task.description;
     }
 
     public ArrayList<Task> getList() {

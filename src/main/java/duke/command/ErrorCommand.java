@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.List;
+import duke.Storage;
+import duke.Ui;
+
 public class ErrorCommand extends Command {
     private String error;
     private String emoticon;

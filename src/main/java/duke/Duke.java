@@ -1,7 +1,11 @@
+package duke;
+
+import duke.command.Command;
+
 import java.io.IOException;
 
 public class Duke {
-    private static final String PATHNAME = "./data/duke.txt";
+    private static final String PATHNAME = "data/duke.txt";
 
     private Ui ui;
     private Storage storage;
