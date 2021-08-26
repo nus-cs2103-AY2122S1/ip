@@ -1,3 +1,14 @@
+package duke;
+
+import duke.command.Command;
+import duke.command.MalformedCommandException;
+import duke.command.UnsupportedCommandException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.storage.StorageException;
+import duke.task.TaskList;
+import duke.ui.Ui;
+
 public class Duke {
     private Ui ui;
     private Storage storage;

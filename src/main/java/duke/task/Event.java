@@ -1,8 +1,10 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
+public class Event extends Task {
     public static final String IDENTIFIER = "E";
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
     private static final DateTimeFormatter DISPLAY_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
@@ -26,7 +28,7 @@ public class Event extends Task{
     }
     @Override
     public String toStorageFormat() {
-        return IDENTIFIER + STORAGE_DELIMITER + super.toStorageFormat() + STORAGE_DELIMITER +
+        return IDENTIFIER + Task.STORAGE_DELIMITER + super.toStorageFormat() + Task.STORAGE_DELIMITER +
             at.format(INPUT_FORMAT);
     }
 }

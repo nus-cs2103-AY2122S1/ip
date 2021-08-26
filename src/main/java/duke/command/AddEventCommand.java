@@ -1,4 +1,8 @@
+package duke.command;
+
 import java.time.format.DateTimeParseException;
+import duke.task.Event;
+import duke.task.Task;
 
 public class AddEventCommand extends AddCommand {
     public static final String COMMAND_IDENTIFIER = "event";

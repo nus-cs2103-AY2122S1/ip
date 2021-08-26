@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.command.MalformedCommandException;
+
 public class Todo extends Task {
     public static final String IDENTIFIER = "T";
 
@@ -26,6 +30,6 @@ public class Todo extends Task {
 
     @Override
     public String toStorageFormat() {
-        return IDENTIFIER + STORAGE_DELIMITER + super.toStorageFormat();
+        return IDENTIFIER + Task.STORAGE_DELIMITER + super.toStorageFormat();
     }
 }

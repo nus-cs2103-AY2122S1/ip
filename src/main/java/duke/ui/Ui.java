@@ -1,7 +1,11 @@
+package duke.ui;
+
 import java.util.Scanner;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class Ui {
-    private final String WELCOME_MESSAGE = "Hello! I'm Duke. What can I do for you?";
+    private final String WELCOME_MESSAGE = "Hello! I'm duke.Duke. What can I do for you?";
     private final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private final int INDENT = 4;
     private final String BORDER = "-".repeat(150);

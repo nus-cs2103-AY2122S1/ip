@@ -1,3 +1,16 @@
+package duke.parser;
+
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MalformedCommandException;
+import duke.command.UnsupportedCommandException;
+
 public class Parser {
     public static Command parse(String userInput) throws UnsupportedCommandException, MalformedCommandException {
         String[] userInputSplit = userInput.split(" ", 2);

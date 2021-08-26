@@ -1,4 +1,8 @@
+package duke.command;
+
 import java.time.format.DateTimeParseException;
+import duke.task.Deadline;
+import duke.task.Task;
 
 public class AddDeadlineCommand extends AddCommand {
     public static final String COMMAND_IDENTIFIER = "deadline";

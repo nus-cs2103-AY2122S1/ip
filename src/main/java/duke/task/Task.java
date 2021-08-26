@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
     public final static String STORAGE_DELIMITER = "%";
 

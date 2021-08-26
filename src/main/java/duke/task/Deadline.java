@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -27,7 +29,7 @@ public class Deadline extends Task {
 
     @Override
     public String toStorageFormat() {
-        return IDENTIFIER + STORAGE_DELIMITER + super.toStorageFormat() + STORAGE_DELIMITER +
+        return IDENTIFIER + Task.STORAGE_DELIMITER + super.toStorageFormat() + Task.STORAGE_DELIMITER +
             by.format(INPUT_FORMAT);
     }
 }

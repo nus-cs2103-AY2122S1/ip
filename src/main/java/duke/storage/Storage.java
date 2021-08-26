@@ -1,8 +1,9 @@
+package duke.storage;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
+import duke.task.TaskList;
 
 public class Storage {
     private final static String DIR_PATH = "data";
@@ -13,7 +14,7 @@ public class Storage {
         return file;
     }
 
-    public static void saveTasks(TaskList tasks) throws StorageException {
+    public void saveTasks(TaskList tasks) throws StorageException {
         try {
             File base_dir = new File(DIR_PATH);
             if (!base_dir.exists()) {
