@@ -8,44 +8,50 @@ public class TaskHandler {
     }
 
     public void printList() {
-        System.out.println("    Here are the tasks in your list:");
-        for (int i = 0; i < list.size(); i++)
-        {
-            System.out.println("    " + (i + 1) + ". " + list.get(i).toString());
+        if (list.size() != 0) {
+            Ui.printList();
+            for (int i = 0; i < list.size(); i++) {
+                System.out.println("    " + (i + 1) + ". " + list.get(i).toString());
+            }
+        } else {
+            Ui.printEmptyList();
         }
     }
 
     public void printNoOfTasks() {
-        System.out.printf("    Now you have %d tasks in the list.\n", list.size());
+        Ui.printNoOfTasks(list.size());
     }
 
     public void markTaskAsDone(int taskNo) {
-        System.out.println("    Nice! I've marked this task as done: ");
+        Ui.markAsDone();
         Task task = list.get(taskNo - 1);
         task.markAsDone();
-        System.out.println("      " + task);
+        System.out.println(Ui.indentation() + task);
     }
 
     public void deleteTask(int taskNo) {
-        System.out.println("    Noted. I've removed this task: ");
+        Ui.deleteTask();
         Task task = list.get(taskNo - 1);
         list.remove(taskNo - 1);
-        System.out.println("      " + task);
+        System.out.println(Ui.indentation() + task);
     }
 
     public void addToDo(ToDo todo) {
         list.add(todo);
-        System.out.println("    Got it. I've added this task:\n      " + todo);
+        Ui.addTask();
+        System.out.println(todo);
     }
 
     public void addDeadline(Deadline deadline) {
         list.add(deadline);
-        System.out.println("    Got it. I've added this task:\n      " + deadline);
+        Ui.addTask();
+        System.out.println(deadline);
     }
 
     public void addEvent(Event event) {
         list.add(event);
-        System.out.println("    Got it. I've added this task:\n      " + event);
+        Ui.addTask();
+        System.out.println(event);
     }
 
     public String formatTaskToSave() {

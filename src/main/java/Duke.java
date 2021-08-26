@@ -2,8 +2,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
-    private static final String WELCOME_MESSAGE = "Hello! I'm Jacky\nWhat can I do for you?";
-    private static final String BYE_MESSAGE = "    Bye. Hope to see you again soon!";
     static boolean isTerminated = false;
     private TaskHandler taskHandler;
     private TaskSaver taskSaver;
@@ -26,7 +24,7 @@ public class Duke {
     }
 
     public void runDuke() {
-        System.out.println(WELCOME_MESSAGE);
+        Ui.welcome();
         Scanner sc = new Scanner(System.in);
         while(!isTerminated) {
             String cmd = sc.nextLine();
@@ -50,7 +48,7 @@ public class Duke {
 
                     case "TODO":
                         if (cmd.length() < 6) {
-                            throw new DukeException("    OOPS!!! The description of a todo cannot be empty.");
+                            throw new DukeException(Ui.emptyDescription("todo"));
                         } else {
                             ToDo toDo = new ToDo(cmd.substring(5));
                             taskHandler.addToDo(toDo);
@@ -61,35 +59,43 @@ public class Duke {
 
                     case "DEADLINE":
                         if (cmd.length() < 10) {
-                            throw new DukeException("    OOPS!!! The description of a deadline cannot be empty.");
+                            throw new DukeException(Ui.emptyDescription("deadline"));
                         } else {
                             String[] split = cmd.split("/by ");
-                            Deadline deadline = new Deadline(split[0].substring(9), split[1]);
-                            taskHandler.addDeadline(deadline);
-                            taskHandler.printNoOfTasks();
-                            taskSaver.updateFile(taskHandler.formatTaskToSave());
+                            if (split.length > 1) {
+                                Deadline deadline = new Deadline(split[0].substring(9), split[1]);
+                                taskHandler.addDeadline(deadline);
+                                taskHandler.printNoOfTasks();
+                                taskSaver.updateFile(taskHandler.formatTaskToSave());
+                            } else {
+                                throw new DukeException(Ui.dateMissing());
+                            }
                             break;
                         }
 
                     case "EVENT":
                         if (cmd.length() < 7) {
-                            throw new DukeException("    OOPS!!! The description of an event cannot be empty.");
+                            throw new DukeException(Ui.emptyDescription("event"));
                         } else {
                             String[] split = cmd.split("/at ");
-                            Event event = new Event(split[0].substring(6), split[1]);
-                            taskHandler.addEvent(event);
-                            taskHandler.printNoOfTasks();
-                            taskSaver.updateFile(taskHandler.formatTaskToSave());
+                            if (split.length > 1) {
+                                Event event = new Event(split[0].substring(6), split[1]);
+                                taskHandler.addEvent(event);
+                                taskHandler.printNoOfTasks();
+                                taskSaver.updateFile(taskHandler.formatTaskToSave());
+                            } else {
+                                throw new DukeException(Ui.dateMissing());
+                            }
                             break;
                         }
 
                     case "BYE":
-                        System.out.println(BYE_MESSAGE);
+                        Ui.bye();
                         isTerminated = true;
                         System.exit(0);
 
                     default:
-                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException(Ui.inputUnknown());
                 }
             } catch(DukeException e) {
                 System.out.println(e.getMessage());
