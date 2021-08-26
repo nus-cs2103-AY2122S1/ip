@@ -1,9 +1,11 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * A Task that needs to be done before a specific date/time.
+ * A duke.task.Task that needs to be done before a specific date/time.
  *
  * @author Lethicia
  */
@@ -12,7 +14,7 @@ public class Deadline extends Task{
     protected LocalDate by;
 
     /**
-     * Constructor for a Deadline task.
+     * Constructor for a duke.task.Deadline task.
      *
      * @param description the title or description for the task
      * @param by date/time by which task must be done.
@@ -28,7 +30,7 @@ public class Deadline extends Task{
     }
 
     /**
-     * Constructor for a Deadline task.
+     * Constructor for a duke.task.Deadline task.
      *
      * @param description the title or description for the task
      * @param by date/time by which task must be done.

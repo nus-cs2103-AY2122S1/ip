@@ -1,12 +1,14 @@
+package duke.tasks;
+
 /**
- * A Task without any date/time attached to it.
+ * A duke.task.Task without any date/time attached to it.
  *
  * @author Lethicia
  */
 public class ToDo extends Task{
 
     /**
-     * Constructor for a ToDo Task.
+     * Constructor for a duke.task.ToDo duke.task.Task.
      *
      * @param description the title or description of the task.
      */
@@ -15,7 +17,7 @@ public class ToDo extends Task{
     }
 
     /**
-     * Constructor for a ToDo Task.
+     * Constructor for a duke.task.ToDo duke.task.Task.
      *
      * @param description the title or description of the task.
      * @param status boolean indicating true if task is done, false otherwise.

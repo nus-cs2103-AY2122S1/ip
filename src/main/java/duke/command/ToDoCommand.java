@@ -1,4 +1,10 @@
-public class ToDoCommand extends Command{
+package duke.command;
+
+import duke.TaskList;
+import duke.ui.Ui;
+import duke.tasks.taskType;
+
+public class ToDoCommand extends Command {
     private String description;
 
     public ToDoCommand(String description) {

@@ -1,4 +1,9 @@
-public class ListCommand extends Command{
+package duke.command;
+
+import duke.TaskList;
+import duke.ui.Ui;
+
+public class ListCommand extends Command {
 
     public ListCommand() {
 

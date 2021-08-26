@@ -1,4 +1,10 @@
-public class EventCommand extends Command{
+package duke.command;
+
+import duke.TaskList;
+import duke.ui.Ui;
+import duke.tasks.taskType;
+
+public class EventCommand extends Command {
     private String[] fields;
 
     public EventCommand(String[] fields) {

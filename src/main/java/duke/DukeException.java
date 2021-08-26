@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * An Exception class for Duke specific Exceptions.
  *

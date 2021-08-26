@@ -1,3 +1,11 @@
+package duke;
+
+import duke.command.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.ui.Ui;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 

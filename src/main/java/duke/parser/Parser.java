@@ -1,3 +1,8 @@
+package duke.parser;
+
+import duke.DukeException;
+import duke.command.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -43,7 +48,7 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new DukeException("Please use format deadline <description> /by <yyyy-mm-dd>.");
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("The Deadline description cannot be empty. " +
+                throw new DukeException("The duke.task.Deadline description cannot be empty. " +
                         "Please use format deadline <description> /by <time>.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please use format deadline <description> /by <time>.");
@@ -56,7 +61,7 @@ public class Parser {
                 String time = fields[1];
                 return new EventCommand(fields);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("The Event description and time cannot be empty. " +
+                throw new DukeException("The duke.task.Event description and time cannot be empty. " +
                         "Please use format event <description> /at <time>.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please use format event <description> /at <time>.");

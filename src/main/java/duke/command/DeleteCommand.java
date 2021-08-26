@@ -1,4 +1,11 @@
-public class DeleteCommand extends Command{
+package duke.command;
+
+import duke.DukeException;
+import duke.tasks.Task;
+import duke.TaskList;
+import duke.ui.Ui;
+
+public class DeleteCommand extends Command {
     private int TaskNo;
 
     public DeleteCommand(int taskNo) {
@@ -6,7 +13,7 @@ public class DeleteCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList) throws DukeException{
+    public void execute(TaskList taskList) throws DukeException {
         Task deletedTask = taskList.deleteTask(TaskNo); //throws Duke Exception
         Ui.showDeletedTask(deletedTask);
         Ui.showTaskCount(taskList);

@@ -1,4 +1,10 @@
-public class DeadlineCommand extends Command{
+package duke.command;
+
+import duke.TaskList;
+import duke.ui.Ui;
+import duke.tasks.taskType;
+
+public class DeadlineCommand extends Command {
     private String[] fields;
 
     public DeadlineCommand(String[] fields) {

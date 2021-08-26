@@ -22,7 +22,7 @@ added: [E][ ] dinner (at: 7pm)
 Now you have 2 tasks in your list.
 _______________________
 _______________________
-The Event description cannot be empty. Please use format event <description> /at <time>.
+The duke.tasks.Event description cannot be empty. Please use format event <description> /at <time>.
 _______________________
 _______________________
 Please use format deadline <description> /by <time>.

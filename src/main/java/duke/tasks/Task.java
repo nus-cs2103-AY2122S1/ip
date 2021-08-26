@@ -1,5 +1,7 @@
+package duke.tasks;
+
 /**
- * A Task class encapsulates the data related to a task
+ * A duke.task.Task class encapsulates the data related to a task
  * ie task description and status.
  *
  * @author Lethicia
@@ -9,7 +11,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructor for a Task object.
+     * Constructor for a duke.task.Task object.
      *
      * @param description the title or description for the task
      */
