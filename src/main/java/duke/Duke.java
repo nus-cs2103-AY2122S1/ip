@@ -10,7 +10,7 @@ import duke.ui.Ui;
 import java.io.IOException;
 
 /**
- * The Duke class encapsulates the action of the chatbot Duke.
+ * The Duke class encapsulates the action of the Duke chatbot.
  */
 public class Duke {
     /** The path name to be converted to create a new File instance. */
@@ -24,9 +24,6 @@ public class Duke {
 
     /** The Ui for Duke to deal with all the interactions with the user. */
     private Ui ui;
-
-    /** The parser for Duke to handle
-
 
     /**
      * Constructor to initialise the Duke chatbot.

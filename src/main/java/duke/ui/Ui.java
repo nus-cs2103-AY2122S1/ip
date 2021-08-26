@@ -45,6 +45,10 @@ public class Ui {
         this.scan = new Scanner(System.in);
     }
 
+    /**
+     * Reads the inputs from the user.
+     * @return The input given by the user.
+     */
     public String readCommand() {
         return scan.nextLine();
     }

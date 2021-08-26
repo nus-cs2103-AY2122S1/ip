@@ -4,14 +4,14 @@ package duke.task;
  * The Task class encapsulates a task.
  */
 public class Task {
-    /** The task to do. */
+    /** The given task description. */
     protected String description;
     /** Boolean to represent if the task is done, true if done, false otherwise. */
     protected boolean isDone;
 
     /**
      * Constructor for initialising a Task.
-     * @param description The task to do.
+     * @param description The given task description.
      */
     public Task(String description) {
         this.description = description;
@@ -20,7 +20,7 @@ public class Task {
 
     /**
      * Returns the task description.
-     * @return Description of the task to do.
+     * @return Description of the task.
      */
     public String getTaskDescription() {
         return this.description;
