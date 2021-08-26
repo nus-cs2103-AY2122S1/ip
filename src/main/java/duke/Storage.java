@@ -11,8 +11,17 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.exceptions.DukeException1;
 
+/**
+ * Represents the hard disk/file that stores all the tasks in the application.
+ */
 public class Storage {
     private String path;
+
+    /**
+     * Creates an object of the Storage class to store all tasks on the hard disk.
+     *
+     * @param filePath Path of the file that stores all the tasks in the application.
+     */
     public Storage(String filePath) {
         this.path = filePath;
         /**try {
@@ -28,6 +37,12 @@ public class Storage {
     /**public ArrayList<duke.tasks.Task> load() {
 
     }*/
+
+    /**
+     * Loads the tasks on the hard drive into an ArrayList when the application restarts.
+     *
+     * @return Arraylist containing all the tasks in the hard disk.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -113,6 +128,14 @@ public class Storage {
 
     }
 
+    /**
+     * Gets all the tasks in the hard disk
+     *
+     * @param filePath Path of the file that contains all the tasks in the application.
+     * @param list Arraylist that stores all the tasks.
+     * @throws FileNotFoundException If file is not found.
+     * @throws DukeException1 If there is an error in creating a todo, event, deadline task.
+     */
     public void getContent(String filePath, ArrayList<Task> list) throws FileNotFoundException, DukeException1 {
         File file = new File(filePath);
         Scanner scanner = new Scanner(file);
@@ -149,6 +172,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Prints all tasks in the file when the application restarts.
+     *
+     * @param path Path of the file containing all the tasks.
+     * @throws FileNotFoundException If file is not found.
+     */
     public void printFile(String path) throws FileNotFoundException {
         File file = new File(path);
         Scanner scanner = new Scanner(file);
@@ -157,6 +186,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Appends a task to the end of the file storing all the tasks.
+     *
+     * @param task Task to be appended to the end of the file.
+     */
     public void appendToFile(Task task) {
         try {
             BufferedWriter write = new BufferedWriter(new FileWriter("data/duke.txt", true));
@@ -168,6 +202,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Rewrites the entire file from the start.
+     *
+     * @param tasks The Arraylist storing all the tasks.
+     */
     public void rewriteFile(ArrayList<Task> tasks) {
         try {
             PrintWriter writer = new PrintWriter("data/duke.txt");

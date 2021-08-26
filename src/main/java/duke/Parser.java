@@ -8,13 +8,19 @@ import duke.command.ListCommand;
 import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
 
+/**
+ * Parses the input given by the user for the task manager application to
+ * execute the necessary action.
+ */
 public class Parser {
     private String input;
 
-    public Parser() {
-        //this.input = input;
-    }
-
+    /**
+     * Returns the command to be executed in response to the user's command.
+     *
+     * @param command Input by the user.
+     * @return
+     */
     public Command parse(String command) {
         if(command.equals("bye")) {
             return new ExitCommand(command);
@@ -32,10 +38,5 @@ public class Parser {
             return new AddCommand(command);
         }
     }
-
-    //the parse method should return a command object
-    // this command object will be an instance of one of the subclasses of command --> so there will be polymorphism
-    // the command object will have an execute method which will be called (polymorphism)
-    // where do we create parser object?
 
 }
