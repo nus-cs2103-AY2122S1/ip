@@ -21,7 +21,7 @@ public class TaskList extends ArrayList<Task> {
         super(taskArr);
     }
 
-    public Task completeTask(int index) {
+    public Task markTaskAsComplete(int index) {
         Task task = super.get(index);
         task.markAsComplete();
         return task;
