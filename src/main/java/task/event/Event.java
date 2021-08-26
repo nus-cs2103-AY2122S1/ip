@@ -1,5 +1,8 @@
-package task;
-public class Event extends Task{
+package task.event;
+
+import task.Task;
+
+public class Event extends Task {
     public String type;
     public String date_time = "";
     public String task;

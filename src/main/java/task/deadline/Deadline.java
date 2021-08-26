@@ -1,9 +1,11 @@
-package task;
+package task.deadline;
+
+import task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     public String type;
     public String task = "";
     public LocalDate date_time;

@@ -1,5 +1,8 @@
-package task;
-public class Todo extends Task{
+package task.Todo;
+
+import task.Task;
+
+public class Todo extends Task {
     public String type;
     public String date_time;
     public String task;

@@ -1,8 +1,8 @@
 package main;
-import task.Deadline;
-import task.Event;
+import task.deadline.Deadline;
+import task.event.Event;
 import task.Task;
-import task.Todo;
+import task.Todo.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
