@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
 
@@ -73,6 +74,20 @@ public class TaskList {
 
     public List<Task> getAllTasks() {
         return this.tasksList;
+    }
+
+    /**
+     * Filters list of tasks by keyword matching in the description.
+     *
+     * @param keyword Keyword to be filtered.
+     * @return A filterd list of tasks.
+     */
+    public List<Task> filter(String keyword) {
+        String regex = ".*\\b" + keyword + "\\b.*";
+        return this.tasksList
+                .stream()
+                .filter(task -> task.getDescription().matches(regex))
+                .collect(Collectors.toList());
     }
 
 }

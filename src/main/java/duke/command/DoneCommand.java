@@ -20,6 +20,7 @@ public class DoneCommand extends Command {
             Task task = tasks.getTask(this.taskNumber - 1);
             task.markAsDone();
             ui.display("Nice! This task is marked as done: \n" + "      " + task);
+            storage.writeToFile(tasks.getAllTasks());
         } else {
             ui.display("This task does not exist! Please try again.");
         }
