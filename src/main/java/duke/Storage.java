@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +21,17 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
+    }
+
+    private void createDirIfNotExists() {
+        Path path = Paths.get("data/");
+
+        // check if data directory exists in the current working directory
+        // if doesn't, create the directory
+        if (!Files.exists(path)) {
+            new File("data/").mkdir();
+        }
+
     }
 
     public void writeToFile(List<Task> items) {
@@ -38,8 +52,11 @@ public class Storage {
 
         List<Task> tasksList = new ArrayList<>();
 
+        this.createDirIfNotExists();
+
         File file = new File(filePath);
 
+        // check if the duke.txt file is already created
         if (file.createNewFile()) {
             return tasksList;
         }

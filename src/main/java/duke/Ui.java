@@ -2,7 +2,13 @@ package duke;
 
 import duke.task.Task;
 
+import java.util.Scanner;
+
 public class Ui {
+
+    // initialize Scanner object
+    private Scanner scan = new Scanner(System.in);
+
 
     /**
      * Display formatted message.
@@ -23,11 +29,17 @@ public class Ui {
                 "Let me know how I can help?");
     }
 
+    public String readCommand() {
+        // read user input
+        return this.scan.nextLine();
+    }
+
     /**
      * Display exit message.
      */
     public void exit() {
         this.display("Goodbye. See you again soon!");
+        this.scan.close();
     }
 
     /**
