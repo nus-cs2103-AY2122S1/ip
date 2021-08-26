@@ -40,14 +40,14 @@ public class AddTaskCommand extends Command {
             try {
                 LocalDate date = parseDate(flag);
                 switch (taskType) {
-                    case "deadline":
-                        task = new Deadline(description, date);
-                        break;
-                    case "event":
-                        task = new Event(description, date);
-                        break;
-                    default:
-                        throw new KermitException("Invalid tasktype!");
+                case "deadline":
+                    task = new Deadline(description, date);
+                    break;
+                case "event":
+                    task = new Event(description, date);
+                    break;
+                default:
+                    throw new KermitException("Invalid task type!");
                 }
             } catch (DateTimeParseException e) {
                 throw new KermitException("That is an invalid date!");
