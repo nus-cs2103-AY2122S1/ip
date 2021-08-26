@@ -30,46 +30,46 @@ public class Ui {
         String taskIcon = taskType.getTaskIcon();
         String statusIcon = task.getStatusIcon();
         switch (taskType) {
-            case TODO:
-                return String.format(
-                    "[%s][%s] %s",
-                    taskIcon,
-                    statusIcon,
-                    task.getDescription()
-                );
-            case DEADLINE:
-                var deadline = (Deadline) task;
-                return String.format(
-                    "[%s][%s] %s (by: %s)",
-                    taskIcon,
-                    statusIcon,
-                    deadline.getDescription(),
-                    deadline.getDeadline()
-                        .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                );
-            case EVENT:
-                var event = (Event) task;
-                return String.format(
-                    "[%s][%s] %s (at: %s)",
-                    taskIcon,
-                    statusIcon,
-                    event.getDescription(),
-                    event.getTime()
-                        .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                );
-            default:
-                throw new UnsupportedOperationException(
-                    "task type is not a valid enum value"
-                );
+        case TODO:
+            return String.format(
+                "[%s][%s] %s",
+                taskIcon,
+                statusIcon,
+                task.getDescription()
+            );
+        case DEADLINE:
+            var deadline = (Deadline) task;
+            return String.format(
+                "[%s][%s] %s (by: %s)",
+                taskIcon,
+                statusIcon,
+                deadline.getDescription(),
+                deadline.getDeadline()
+                    .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+            );
+        case EVENT:
+            var event = (Event) task;
+            return String.format(
+                "[%s][%s] %s (at: %s)",
+                taskIcon,
+                statusIcon,
+                event.getDescription(),
+                event.getTime()
+                    .format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+            );
+        default:
+            throw new UnsupportedOperationException(
+                "task type is not a valid enum value"
+            );
         }
     }
 
     /**
      * Print a banner.
-     * 
+     *
      * Each string in the <code>lines</code> array is treated as a separate
      * line, and it is assumed that the string contains no newline characters.
-     * 
+     *
      * @param lines Array of strings corresponding to lines of a message.
      */
     public static void printBanner(String[] lines) {
