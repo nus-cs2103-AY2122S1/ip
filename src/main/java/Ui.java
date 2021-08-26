@@ -13,7 +13,7 @@ public class Ui {
     private Scanner sc = new Scanner(System.in);
 
     /**
-     * Show the Greetings
+     * Displays the Greetings
      */
     public void showGreetings() {
         System.out.println(SPACE + BOT_LINE);
@@ -22,6 +22,13 @@ public class Ui {
         System.out.println(SPACE + "Jak się masz? My name-a Borat. I like you.");
         System.out.println(SPACE + "What I do for you?");
         System.out.println(SPACE + BOT_LINE);
+    }
+
+    /**
+     * Displays the goodbye message
+     */
+    public void showGoodBye() {
+        this.showMessage("Bye. Have a good time!");
     }
 
     /**
