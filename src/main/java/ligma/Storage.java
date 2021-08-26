@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * This class represents the storage for a particular
+ * Ligma program. The file f is where all data is written to
+ * and read from during the execution of the Ligma program.
+ */
 public class Storage {
 
     private File f;
@@ -16,6 +21,12 @@ public class Storage {
         f = new File(pathname);
     }
 
+    /**
+     * Loads in tasks previously stored in the file.
+     *
+     * @return              arrayList of tasks as read from file
+     * @throws IOException  if there was an error in referencing files
+     */
     public ArrayList<Task> load() throws IOException {
         if (!f.exists()) {
             f.getParentFile().mkdirs();
@@ -32,6 +43,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasks to file.
+     *
+     * @param task          task to be saved to file
+     * @throws IOException  if there was an error in writing to file
+     */
     public void saveTask(Task task) throws IOException {
         FileWriter fw = new FileWriter(f, true);
         if (f.length() != 0) {
@@ -41,10 +58,22 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Delete task from file.
+     *
+     * @param task          task to be deleted from file
+     * @throws IOException  if there was an error in writing to file
+     */
     public void deleteTask(Task task) throws IOException {
         rewriteLine(task.toString(), "");
     }
 
+    /**
+     * Update completion status of task in file.
+     *
+     * @param task          task to be updated
+     * @throws IOException  if there was an error in writing to file
+     */
     public void markDone(Task task) throws IOException {
         rewriteLine(task.getTaskDesc(),
                 task.toString());

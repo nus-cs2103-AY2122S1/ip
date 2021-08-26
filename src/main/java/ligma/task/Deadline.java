@@ -5,9 +5,20 @@ import java.util.InputMismatchException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class represents a Deadline Task.
+ */
 public class Deadline extends Task {
     private LocalDate time;
 
+    /**
+     * Factory method that creates a Deadline object.
+     *
+     * @param desc                      the description of the deadline
+     * @return                          deadline created
+     * @throws InputMismatchException   if format of deadline description is wrong
+     * @throws DateTimeParseException   if format of time is wrong
+     */
     public static Deadline createDeadline(String desc)
             throws InputMismatchException, DateTimeParseException {
         if (desc.contains("/by")) {
@@ -19,6 +30,15 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Factory method that creates a Deadline object.
+     *
+     * @param desc                      the description of the deadline
+     * @param isDone                    whether task has been completed
+     * @return                          deadline created
+     * @throws InputMismatchException   if format of deadline description is wrong
+     * @throws DateTimeParseException   if format of time is wrong
+     */
     public static Deadline createDeadline(String desc, boolean isDone) throws InputMismatchException {
         if (desc.contains("by")) {
             int i = desc.indexOf('(');

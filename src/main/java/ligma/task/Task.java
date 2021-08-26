@@ -1,19 +1,35 @@
 package ligma.task;
 
+/**
+ * This class represents a task.
+ */
 public class Task {
     public enum TaskType {
         TODO, EVENT, DEADLINE
     }
-    private String description;
+    private String desc;
     private boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
+    /**
+     * Creates a Task object.
+     *
+     * @param desc                      the description of the task
+     * @return                          task created
+     */
+    public Task(String desc) {
+        this.desc = desc;
         this.isDone = false;
     }
 
-    public Task(String description, boolean isDone) {
-        this.description = description;
+    /**
+     * Creates a Task object.
+     *
+     * @param desc                      the description of the task
+     * @param isDone                    whether task has been completed
+     * @return                          task created
+     */
+    public Task(String desc, boolean isDone) {
+        this.desc = desc;
         this.isDone = isDone;
     }
 
@@ -23,19 +39,19 @@ public class Task {
     }
 
     public String getTaskDesc() {
-        return description;
+        return desc;
     }
 
     @Override
     public String toString() {
         String check = isDone ? "[X] " : "[ ] ";
-        return check + description;
+        return check + desc;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Task) {
-            return description.equals(((Task) obj).description);
+            return desc.equals(((Task) obj).desc);
         }
         return false;
     }

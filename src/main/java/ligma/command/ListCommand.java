@@ -4,6 +4,9 @@ import ligma.Storage;
 import ligma.TaskList;
 import ligma.Ui;
 
+/**
+ * This class represents a command to list all the tasks.
+ */
 public class ListCommand implements Command {
     @Override
     public void execute(TaskList tasks, Storage storage) {
@@ -15,6 +18,11 @@ public class ListCommand implements Command {
         Ui.printFormattedReply(tasksText);
     }
 
+    /**
+     * Returns true if command is an exit command.
+     *
+     * @return true if command is an exit command, false otherwise
+     */
     @Override
     public boolean isExit() {
         return false;
