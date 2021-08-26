@@ -29,7 +29,15 @@ public class Parser {
         boolean shouldContinue = true;
         while (shouldContinue) {//create loop for the chat
             try {
-                if (input.startsWith("done ")) {
+                if (input.startsWith("find ")) {
+                    String desc = input.replaceFirst("find ", "");//remove find from input
+                    if (desc.isBlank()) {//check for incomplete input
+                        throw new DukeException();
+                    }
+                    list.find(desc);
+                    input = sc.nextLine();
+                    continue;
+                } else if (input.startsWith("done ")) {
                     int numInt = extractInt(input);
                     list.setIndexDone(numInt);
                     input = sc.nextLine();

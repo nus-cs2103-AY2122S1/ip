@@ -22,6 +22,10 @@ public class Task implements Serializable {
         return (isDone ? "X" : " "); // mark done duke.task with X
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
 
     public void setDone() {
         this.isDone = true;

@@ -110,6 +110,30 @@ public class List {
     }
 
     /**
+     * Find Tasks with the input String in it.
+     *
+     * @param input Keyword to search Tasks with.
+     */
+    public void find(String input) {
+        int length = list.size();
+        ArrayList<Integer> listOfHits = new ArrayList<>();
+        for (int i = 0; i < length; i++) {// finding the index of task with keyword input
+            if (list.get(i).getDescription().contains(input)) {
+                listOfHits.add(i);
+            }
+        }
+        if (listOfHits.size() == 0) {//no matches
+            System.out.println("There are no matching tasks in your list");
+        } else {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < listOfHits.size(); i++) {//print out matches
+                System.out.println((i + 1) + "." + list.get(i).toString());
+            }
+        }
+
+    }
+
+    /**
      * Print out the entire list using the Tasks toString method.
      */
     public void show() {
