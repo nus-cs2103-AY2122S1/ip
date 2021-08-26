@@ -31,7 +31,7 @@ public class Duke {
                 ui.printResponse(e.getMessage());
             }
             try {
-                storage.rewriteData(tasks.toSaveFormat());
+                storage.rewriteData(tasks.convertToSaveFormat());
             } catch (DukeException e) {
                 ui.printResponse(e.getMessage());
             }

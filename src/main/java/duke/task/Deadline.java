@@ -1,9 +1,9 @@
 package duke.task;
 
-import java.time.format.DateTimeParseException;
-import java.lang.NumberFormatException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.lang.NumberFormatException;
 
 public class Deadline extends Task {
     private LocalDate due;
@@ -17,6 +17,7 @@ public class Deadline extends Task {
         super(name);
         this.dueStr = dueStr;
 
+        // Handle date and time representation, if any
         String[] dateTimeArr = dueStr.split(" ");
         try {
             due = LocalDate.parse(dateTimeArr[0]);
@@ -34,7 +35,7 @@ public class Deadline extends Task {
                 catch (NumberFormatException e) {
                     hasTime = false;
                 }
-                if (hasTime && 0 <= time && time <= 2359) { // 24 hr format
+                if (hasTime && 0 <= time && time <= 2359) {
                     timeStr = dateTimeArr[1];
                 } else {
                     hasTime = false;
@@ -44,6 +45,7 @@ public class Deadline extends Task {
             }
         }
 
+        // Handle representation of information based on whether there is a recognisable date and time
         int startIndex = hasTime ? 2 : hasDate ? 1 : 0;
         this.dueStr = "";
         for (int i = startIndex; i < dateTimeArr.length; i++) {
@@ -75,8 +77,8 @@ public class Deadline extends Task {
         }
     }
 
-    public String toSaveFormat() {
-        return "D|" + super.toSaveFormat() + "|" + dueStr;
+    public String convertToSaveFormat() {
+        return "D|" + super.convertToSaveFormat() + "|" + dueStr;
     }
 
     @Override

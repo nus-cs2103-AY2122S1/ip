@@ -13,6 +13,6 @@ public class EventTest {
     public void testToSaveFormat() {
         Event testTask = new Event("testEvent", "test time");
         testTask.markAsDone();
-        assertEquals("E|1|testEvent|test time", testTask.toSaveFormat());
+        assertEquals("E|1|testEvent|test time", testTask.convertToSaveFormat());
     }
 }

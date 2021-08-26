@@ -8,8 +8,8 @@ public class Event extends Task {
         this.time = time;
     }
 
-    public String toSaveFormat() {
-        return "E|" + super.toSaveFormat() + "|" + time;
+    public String convertToSaveFormat() {
+        return "E|" + super.convertToSaveFormat() + "|" + time;
     }
 
     @Override

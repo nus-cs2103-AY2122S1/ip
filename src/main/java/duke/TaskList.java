@@ -5,8 +5,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.util.stream.Stream;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class TaskList {
     private ArrayList<Task> userTasks;
@@ -59,13 +59,13 @@ public class TaskList {
         return "Now you have " + userTasks.size() + " tasks in the list.";
     }
 
-    public String toSaveFormat() {
+    public String convertToSaveFormat() {
         String dataStr = "";
         for (int i = 0; i < userTasks.size() - 1; i++) {
             Task data = userTasks.get(i);
-            dataStr += data.toSaveFormat() + "\n";
+            dataStr += data.convertToSaveFormat() + "\n";
         }
-        dataStr += userTasks.get(userTasks.size() - 1).toSaveFormat();
+        dataStr += userTasks.get(userTasks.size() - 1).convertToSaveFormat();
         return dataStr;
     }
 

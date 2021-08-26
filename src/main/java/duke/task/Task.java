@@ -2,25 +2,25 @@ package duke.task;
 
 public class Task {
     private String name;
-    private boolean completed;
+    private boolean isCompleted;
 
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public void markAsDone() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
-    public String toSaveFormat() {
-        String completedStr = completed ? "1" : "0";
+    public String convertToSaveFormat() {
+        String completedStr = isCompleted ? "1" : "0";
         return completedStr + "|" + name;
     }
 
     @Override
     public String toString() {
-        String symbol = completed ? "X" : " ";
+        String symbol = isCompleted ? "X" : " ";
         return "[" + symbol + "] " + name;
     }
 }

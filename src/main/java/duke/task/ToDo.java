@@ -5,8 +5,8 @@ public class ToDo extends Task {
         super(name);
     }
 
-    public String toSaveFormat() {
-        return "T|" + super.toSaveFormat();
+    public String convertToSaveFormat() {
+        return "T|" + super.convertToSaveFormat();
     }
 
     @Override

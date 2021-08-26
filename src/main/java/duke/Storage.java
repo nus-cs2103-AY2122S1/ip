@@ -3,9 +3,10 @@ package duke;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
-import java.util.stream.Stream;
-import java.nio.charset.StandardCharsets;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
+import java.util.stream.Stream;
 
 public class Storage {
     private String home;
