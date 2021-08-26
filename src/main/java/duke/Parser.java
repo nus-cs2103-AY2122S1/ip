@@ -13,7 +13,7 @@ public class Parser {
         return description_and_time[0].split(" ", 2)[1];
     }
 
-    public static String getTime (String[] description_and_time) {
+    public static String getTime(String[] description_and_time) {
         LocalDate localDate = LocalDate.parse(description_and_time[1].split(" ", 2)[1]);
         String time = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return time;
