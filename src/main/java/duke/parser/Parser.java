@@ -53,7 +53,8 @@ public class Parser {
 
         int spaceIndex = userInput.indexOf(" ");
         String commandDescription = userInput.substring(spaceIndex + 1);
-        if (!commandType.equals("list") && (commandDescription.isBlank() || spaceIndex == -1)) {
+        if (!(commandType.equals("list") || commandType.equals("bye"))
+                && (commandDescription.isBlank() || spaceIndex == -1)) {
             throw new NoCommandDescriptionException();
         }
 
