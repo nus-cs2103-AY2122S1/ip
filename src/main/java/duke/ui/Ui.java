@@ -100,4 +100,21 @@ public class Ui {
         }
         printMessageWithFormat(s);
     }
+
+    /**
+     * Prints the list of task containing the tasks related to the keyword provided by user.
+     *
+     * @param list The list of related tasks.
+     */
+    public void printRelatedTasks(ArrayList<Task> list) {
+        if (list.size() > 0) {
+            String s = "Here are the matching tasks in your list:";
+            for (int i = 1; i <= list.size(); i++) {
+                s += String.format("\n%s%d. %s,", INDENTATION, i, list.get(i - 1).checkStatus());
+            }
+            printMessageWithFormat(s);
+        } else {
+            printMessageWithFormat("There are no matching task in your list.");
+        }
+    }
 }
