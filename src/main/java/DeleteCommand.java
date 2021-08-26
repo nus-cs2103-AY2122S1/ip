@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
 
         ui.showLine();
         ui.removeTask(tasks.get(Integer.valueOf(command.split(" +")[1])-1));
-        ui.numberOfTasks();
-        storage.editFileAll();
+        ui.numberOfTasks(tasks);
+        storage.editFileAll(tasks);
     }
 }

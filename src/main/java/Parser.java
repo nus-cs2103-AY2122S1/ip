@@ -10,11 +10,13 @@ public class Parser {
     private TaskList taskList;
 
     public Parser(Ui ui, TaskList taskList) {
+
         this.ui = ui;
+        this.taskList = taskList;
     }
 
 
-    private Command parse(String command) throws DukeException {
+    public Command parse(String command) throws DukeException {
         String[] splitInput = command.trim().split(" +");
             switch (splitInput[0]) {
 

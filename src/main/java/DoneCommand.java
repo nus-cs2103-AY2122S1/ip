@@ -13,6 +13,6 @@ public class DoneCommand extends Command {
         ui.showLine();
         ui.doneTask(temp);
         ui.showLine();
-        storage.editFileAll();
+        storage.editFileAll(tasks);
     }
 }

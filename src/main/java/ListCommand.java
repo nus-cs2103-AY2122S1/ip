@@ -15,6 +15,6 @@ public class ListCommand extends Command {
             ui.listNumber(point, temp);
             point++;
         }
-        ui.numberOfTasks();
+        ui.numberOfTasks(tasks);
     }
 }

@@ -11,16 +11,13 @@ public class Storage {
 
     private String filePath;
     private File taskFile;
-    private TaskList taskList;
 
-    public Storage(String filePath, TaskList taskList) {
+    public Storage(String filePath) {
         this.filePath = filePath;
         this.taskFile = new File(filePath);
-        this.taskList = taskList;
-
     }
 
-    public void checkFile() {
+    public void checkFile() throws DukeException {
         if (!taskFile.exists()) {
             File dir = new File("data");
             if (!(dir.exists() && dir.isDirectory())) {
@@ -29,6 +26,7 @@ public class Storage {
             try {
                 taskFile.createNewFile();
             } catch (IOException e) {
+                throw new DukeException("");
 
             } catch (SecurityException e) {
 
@@ -37,12 +35,13 @@ public class Storage {
     }
 
     public ArrayList<Task> load() throws DukeException {
+
         ArrayList<Task> userInput = new ArrayList<>();
         try {
+            checkFile();
             Scanner s = new Scanner(taskFile);
             while (s.hasNextLine()) {
                 String taskString = s.nextLine();
-                System.out.println(taskString);
                 String[] splitString = taskString.split("  ");
 
                 switch (splitString[0]) {
@@ -67,7 +66,7 @@ public class Storage {
             return userInput;
 
         } catch (FileNotFoundException e) {
-            throw new DukeException("OH NO :( The file cannot be found...");
+            throw new DukeException("");
         }
     }
 
@@ -85,14 +84,14 @@ public class Storage {
         return toAdd;
     }
 
-    public void editFileAll() {
+    public void editFileAll(TaskList taskList) {
         for (int i = 0; i < taskList.size(); i++) {
             Task tempFile = taskList.get(i);
             String toAdd = fileString(tempFile);
             if (i == 0) {
                 editFile( toAdd);
             } else {
-                appendToFile("data/Tasks.txt", toAdd);
+                appendToFile( toAdd);
             }
         }
     }
@@ -107,9 +106,9 @@ public class Storage {
         }
     }
 
-    public void appendToFile(String fileName, String content) {
+    public void appendToFile(String content) {
         try {
-            FileWriter fw = new FileWriter(fileName, true);
+            FileWriter fw = new FileWriter(filePath, true);
             fw.append(System.lineSeparator() + content);
             fw.close();
         } catch (IOException e) {

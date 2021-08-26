@@ -6,7 +6,9 @@ public abstract class Command {
         this.command = command;
 
     }
-
+    public boolean isBye() {
+        return false;
+    }
     public abstract void execute(TaskList tasks,
                                  Ui ui, Storage storage) throws DukeException;
 }

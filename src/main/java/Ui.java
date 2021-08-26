@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Ui {
 
     private Scanner scanner;
-    private TaskList taskList;
     private final static String DIVIDER = "  ---------------------------------------------";
     private final static String INDENT_1 = "    ";
     private final static String INDENT_2 = "      ";
@@ -53,7 +52,7 @@ public class Ui {
         System.out.println(INDENT_2 + task.toString());
     }
 
-    public void numberOfTasks() {
+    public void numberOfTasks(TaskList taskList) {
         String numberOfTasks = INDENT_1 + "Now you have " + taskList.size() +
                 (taskList.size() == 1 ? " task" : " tasks") + " in the list.\n"
                         + DIVIDER;
@@ -120,8 +119,9 @@ public class Ui {
         return INDENT_1 + "☹ OOPS!!! The task to be marked done is not indicated!!";
     }
 
-
-
+    public String loadingError() {
+        return "OH NO :( The file cannot be found...";
+    }
 
 
 
