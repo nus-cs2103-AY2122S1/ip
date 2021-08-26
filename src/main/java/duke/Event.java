@@ -13,6 +13,18 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Event)) {
+            return false;
+        }
+        Event e = (Event) o;
+        return this.description.equals(e.description) && this.time.equals(e.time);
+    }
+
+    @Override
     public String toString() {
         return this.getTaskIcon() + "//" + this.getStatusIcon() + "//" + description + "//" + time;
     }
