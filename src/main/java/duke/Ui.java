@@ -4,6 +4,8 @@ import duke.exceptions.DukeEmptyTodoDescriptionException;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeUnknownCommandException;
 
+import java.util.ArrayList;
+
 public class Ui {
 
     void printLines() {
@@ -72,17 +74,23 @@ public class Ui {
                     Task taskToBeDeleted = Tasklist.dukeList.get(taskIndex);
                     System.out.println(taskToBeDeleted);
                     deleteTask(taskIndex);
+                } else if (command.equals("find")) {
+                    String keyword = description.substring(1);
+                    ArrayList<Task> foundTasks = Tasklist.find(keyword);
+                    displayFoundDukeList(foundTasks);
                 } else {
                     throw new DukeUnknownCommandException();
                 }
-                System.out.println("Now you have " + Tasklist.dukeList.size() + " tasks in the list.");
-                printLines();
+
+                if (!command.equals("find")) {
+                    System.out.println("Now you have " + Tasklist.dukeList.size() + " tasks in the list.");
+                    printLines();
+                }
             }
         } catch ( DukeEmptyTodoDescriptionException | DukeUnknownCommandException e) {
             printLines();
             System.out.println(e.getMessage());
             printLines();
-            throw e;
         }
 
     }
@@ -103,6 +111,15 @@ public class Ui {
         printLines();
         for (int i = 0;i < Tasklist.dukeList.size(); i++) {
             System.out.println((i+1) + ". " + Tasklist.dukeList.get(i));
+        }
+        printLines();
+    }
+
+    void displayFoundDukeList(ArrayList<Task> foundTasks) {
+        printLines();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0;i < foundTasks.size(); i++) {
+            System.out.println((i+1) + ". " + foundTasks.get(i));
         }
         printLines();
     }
