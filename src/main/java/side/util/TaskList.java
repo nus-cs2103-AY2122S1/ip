@@ -21,6 +21,9 @@ public class TaskList {
     private int taskLabel;
     private Storage storage;
 
+    /**
+     * Initialises a new TaskList instance with storage and Task arraylist.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.taskLabel = 0;
@@ -45,7 +48,6 @@ public class TaskList {
 
     /**
      * Helper method to save tasks for future use. Prints message if IOException occurs.
-     *
      */
     public void save() {
         try {
@@ -126,6 +128,11 @@ public class TaskList {
         return "Fine, I'll delete: " + taskToDelete.toString() + taskCount;
     }
 
+    /**
+     * Converts list to a string for use.
+     *
+     * @return String representing list.
+     */
     public String listToString() {
         StringBuilder tasksList = new StringBuilder();
 
@@ -159,6 +166,11 @@ public class TaskList {
         return matchedTaskList;
     }
 
+    /**
+     * Overrides toString to format tasklist into string.
+     *
+     * @return String representing list.
+     */
     @Override
     public String toString() {
         if (this.taskLabel == 0) {

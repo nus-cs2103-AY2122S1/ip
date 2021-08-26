@@ -22,6 +22,9 @@ public class Ui {
             + LINEBREAK;
     private Parser parser;
 
+    /**
+     * Initialises instance of UI with a parser.
+     */
     public Ui() {
         this.parser = new Parser();
     }
@@ -36,7 +39,6 @@ public class Ui {
 
     /**
      * Prints logo and greeting for user on launch.
-     *
      */
     public void greet() {
         this.printLogo();
@@ -45,7 +47,6 @@ public class Ui {
 
     /**
      * Prints closing message for user on end.
-     *
      */
     public void close() {
         System.out.println(GOODBYE);
@@ -65,7 +66,7 @@ public class Ui {
     }
 
     /**
-     * Generic print response.
+     * Prints response with linebreaks.
      *
      * @param input String representation of String to format.
      */
@@ -197,7 +198,7 @@ public class Ui {
     }
 
     /**
-     * Handle logic for find command.
+     * Handles logic for find command.
      *
      * @param input String representing user input.
      * @param taskList List to check against.

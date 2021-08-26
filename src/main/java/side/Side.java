@@ -31,6 +31,9 @@ public class Side {
     private TaskList tasks;
     private Scanner scanner;
 
+    /**
+     * Initialises a new instance of Side, with Ui, TaskList and Scanner.
+     */
     public Side() {
         this.ui = new Ui();
         this.tasks = new TaskList();

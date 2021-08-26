@@ -17,6 +17,13 @@ public class Event extends Task {
 
     private DateTime startDatetime, endDatetime;
 
+    /**
+     * Initialises a new Event.
+     *
+     * @param description String for description given.
+     * @param startInput String representing start datetime of event.
+     * @param endInput String representing end datetime of event.
+     */
     public Event(String description, String startInput, String endInput) {
         super(description);
         String[] startDatetimeArr = startInput.split("\\s+");
@@ -33,6 +40,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Initialises a new event.
+     *
+     * @param description String for description given.
+     * @param datetimeInputArr String array representing input datetimes to be converted.
+     * @param isDone boolean describing if Event is done or not.
+     */
     public Event(String description, String[] datetimeInputArr, Boolean isDone) {
         super(description, isDone);
 
@@ -48,14 +62,29 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Gets starting datetime for Event instance.
+     *
+     * @return Starting datetime for instance.
+     */
     public DateTime getStartDatetime() {
         return this.startDatetime;
     }
 
+    /**
+     * Gets end datetime for Event instance.
+     *
+     * @return End datetime for instance.
+     */
     public DateTime getEndDatetime() {
         return this.startDatetime;
     }
 
+    /**
+     * Overrides toString method to create string matching list format.
+     *
+     * @return String matching list format.
+     */
     @Override
     public String toString() {
         StringBuilder deadlineLine = new StringBuilder();

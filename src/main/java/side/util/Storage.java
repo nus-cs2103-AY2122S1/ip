@@ -24,6 +24,9 @@ public class Storage {
 
     private Parser parser;
 
+    /**
+     * Initialises new Storage instance with a parser.
+     */
     public Storage() {
         this.parser = new Parser();
     }

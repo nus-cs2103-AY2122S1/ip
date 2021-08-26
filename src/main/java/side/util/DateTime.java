@@ -27,6 +27,11 @@ public class DateTime {
     private LocalTime localTime;
     private LocalDateTime localDateTime;
 
+    /**
+     * Initialises a new DateTime.
+     *
+     * @param date String representing date to be converted.
+     */
     public DateTime(String date) {
         try {
             this.localDate = LocalDate.parse(date);
@@ -37,7 +42,12 @@ public class DateTime {
         this.localDateTime = null;
     }
 
-
+    /**
+     * Initialises a new Datetime.
+     *
+     * @param date String representing date to be converted.
+     * @param time String representing time to be converted.
+     */
     public DateTime(String date, String time) {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -51,6 +61,11 @@ public class DateTime {
         this.localDateTime = localDate.atTime(localTime);
     }
 
+    /**
+     * Gets string of datetime.
+     *
+     * @return String representing datetime.
+     */
     public String getDatetime() {
         if (localDateTime != null) {
             return DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(localDateTime);
@@ -59,6 +74,11 @@ public class DateTime {
         }
     }
 
+    /**
+     * Gets string of datetime formatted for saving.
+     *
+     * @return String representing datetime.
+     */
     public String saveDatetime() {
         if (localDateTime != null) {
             return DateTimeFormatter.ofPattern("yyyy-MM-dd, HHmm").format(localDateTime);
@@ -67,6 +87,11 @@ public class DateTime {
         }
     }
 
+    /**
+     * Overrides toString to format DateTime for list.
+     *
+     * @return String representing DateTime formatted.
+     */
     @Override
     public String toString() {
         return this.getDatetime();

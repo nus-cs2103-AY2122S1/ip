@@ -8,6 +8,9 @@ package side.util;
 
 public class Parser {
 
+    /**
+     * Initialises new instance of Parser.
+     */
     public Parser() {}
 
     public enum COMMAND { TODO, DEADLINE, EVENT, LIST, DONE, DELETE, INVALID, FIND }
@@ -33,6 +36,12 @@ public class Parser {
         return findDatetime(input, "/by");
     }
 
+    /**
+     * Helper method to find corresponding datetime for event commands.
+     *
+     * @param input String representing user input.
+     * @return String of datetime.
+     */
     public String[] findEventDatetime(String input) {
         String output = input;
 

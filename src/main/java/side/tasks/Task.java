@@ -16,20 +16,41 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Initialises a new Task.
+     *
+     * @param description String for description given.
+     */
     public Task(String description) {
         this.description = description.trim() + " ";
         this.isDone = false;
     }
 
+    /**
+     * Initialises a new Task.
+     *
+     * @param description String for description given.
+     * @param isDone boolean describing if Task is done or not.
+     */
     public Task(String description, boolean isDone) {
         this.description = description.trim() + " ";
         this.isDone = isDone;
     }
 
+    /**
+     * Gets description from Task instance.
+     *
+     * @return String for description of instance.
+     */
     public String getDescription() {
         return this.description;
     }
 
+    /**
+     * Gets isDone from Task instance.
+     *
+     * @return boolean for isDone of instance.
+     */
     public boolean getIsDone() {
         return this.isDone;
     }
@@ -48,6 +69,11 @@ public class Task {
         }
     }
 
+    /**
+     * Overrides toString method to create string matching list format.
+     *
+     * @return String matching list format.
+     */
     @Override
     public String toString() {
         StringBuilder taskLine = new StringBuilder();

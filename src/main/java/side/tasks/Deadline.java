@@ -17,6 +17,12 @@ public class Deadline extends Task {
 
     private DateTime datetime;
 
+    /**
+     * Initialises a new Deadline.
+     *
+     * @param description String for description given.
+     * @param datetimeInput String representing datetime to be converted.
+     */
     public Deadline(String description, String datetimeInput) {
         super(description);
 
@@ -28,10 +34,13 @@ public class Deadline extends Task {
         }
     }
 
-    public DateTime getDatetime() {
-        return this.datetime;
-    }
-
+    /**
+     * Initialises a new deadline.
+     *
+     * @param description String for description given.
+     * @param datetimeInput String representing datetime to be converted.
+     * @param isDone boolean describing if Deadline is done or not.
+     */
     public Deadline(String description, String datetimeInput, Boolean isDone) {
         super(description, isDone);
 
@@ -42,6 +51,20 @@ public class Deadline extends Task {
             this.datetime = new DateTime(datetime[0]);
     }
 
+    /**
+     * Gets datetime from Deadline instance.
+     *
+     * @return Datetime from instance.
+     */
+    public DateTime getDatetime() {
+        return this.datetime;
+    }
+
+    /**
+     * Overrides toString method to create string matching list format.
+     *
+     * @return String matching list format.
+     */
     @Override
     public String toString() {
         StringBuilder deadlineLine = new StringBuilder();
