@@ -24,9 +24,9 @@ public class Deadline extends Task {
 
 	private void setDate(String strDate, boolean create) throws HelpBotDateTimeFormatException {
 		if (create) {
-			this.pair = DateTimePair.parse(strDate);
+			pair = DateTimePair.parse(strDate);
 		} else {
-			this.pair.update(DateTimePair.parse(strDate));
+			pair.update(DateTimePair.parse(strDate));
 		}
 	}
 
@@ -47,23 +47,23 @@ public class Deadline extends Task {
 			return false;
 		}
 		Deadline deadline = (Deadline) o;
-		return super.equals(o) && this.pair.equals(deadline.pair);
+		return super.equals(o) && pair.equals(deadline.pair);
 	}
 
 	@Override
 	public String saveString() {
 		String save = "D:";
-		if (this.done) {
+		if (done) {
 			save += "T:";
 		} else {
 			save += "F:";
 		}
-		save += this.name + ":" + this.pair.toString();
-		return save;
+		save += name + ":" + pair.toString();
+		return save + super.saveString();
 	}
 
 	@Override
 	public String toString() {
-		return " [D]" + super.toString() + " (by: " + this.pair.toString() + ")";
+		return " [D]" + super.toString() + " (by: " + pair.toString() + ")";
 	}
 }

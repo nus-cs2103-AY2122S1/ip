@@ -28,29 +28,29 @@ public class AddCommand extends Command {
 	public void run() throws HelpBotIllegalArgumentException {
 		try {
 			Task task;
-			switch (this.type) {
+			switch (type) {
 			case TODO:
-				task = new ToDo(this.args[0]);
+				task = new ToDo(args[0]);
 				break;
 			case DEADLINE:
-				task = new Deadline(this.args[0], this.args[1]);
+				task = new Deadline(args[0], args[1]);
 				break;
 			case EVENT:
-				task = new Event(this.args[0], this.args[1]);
+				task = new Event(args[0], args[1]);
 				break;
 			default:
-				throw new HelpBotIllegalArgumentException(this.args[0]);
+				throw new HelpBotIllegalArgumentException(args[0]);
 			}
 			try {
 				DateTimePair dateTimePair = task.getDate();
-				this.taskList.addTask(task, dateTimePair);
+				taskList.addTask(task, dateTimePair);
 			} catch (HelpBotInvalidTaskTypeException e) {
-				this.taskList.addTask(task, null);
+				taskList.addTask(task, null);
 			}
-			this.ui.add(task);
-			this.storage.saveTask(task);
+			ui.add(task);
+			storage.saveTask(task);
 		} catch (HelpBotDateTimeFormatException e) {
-			this.ui.error(e);
+			ui.error(e);
 		}
 	}
 }

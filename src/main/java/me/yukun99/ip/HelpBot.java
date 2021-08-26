@@ -52,15 +52,15 @@ public class HelpBot {
 	 * Method to listen for user inputs.
 	 */
 	private void listen() {
-		while (this.scanner.hasNext()) {
+		while (scanner.hasNext()) {
 			try {
-				Command command = this.parser.parse();
+				Command command = parser.parse();
 				command.run();
 			} catch (HelpBotIllegalArgumentException | HelpBotInvalidCommandException
 					| HelpBotInvalidTaskTypeException | HelpBotDateTimeFormatException e) {
-				this.ui.error(e);
+				ui.error(e);
 			}
-			if (this.exit) {
+			if (exit) {
 				return;
 			}
 		}
@@ -70,8 +70,8 @@ public class HelpBot {
 	 * Method to exit the bot.
 	 */
 	public void exit() {
-		this.exit = true;
-		this.scanner.close();
-		this.ui.exit();
+		exit = true;
+		scanner.close();
+		ui.exit();
 	}
 }

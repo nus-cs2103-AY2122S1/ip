@@ -1,15 +1,23 @@
 package me.yukun99.ip.exceptions;
 
+/**
+ * Exception resulting from user sending an invalid command.
+ */
 public class HelpBotInvalidCommandException extends HelpBotException {
-	private final String message;
+	private final String command;
 
-	public HelpBotInvalidCommandException(String message) {
+	/**
+	 * Constructor for a HelpBotInvalidCommandException instance.
+	 *
+	 * @param command Erroneous command sent by the user.
+	 */
+	public HelpBotInvalidCommandException(String command) {
 		super();
-		this.message = message;
+		this.command = command;
 	}
 
 	public String toString() {
 		return super.toString()
-				+ "\nThe following is not a command: " + message;
+				+ "\nThe following is not a command: " + command;
 	}
 }

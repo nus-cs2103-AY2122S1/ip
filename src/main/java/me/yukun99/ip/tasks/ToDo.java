@@ -21,13 +21,13 @@ public class ToDo extends Task {
 	@Override
 	public String saveString() {
 		String save = "T:";
-		if (this.done) {
+		if (done) {
 			save += "T:";
 		} else {
 			save += "F:";
 		}
-		save += this.name;
-		return save;
+		save += name;
+		return save + super.saveString();
 	}
 
 	@Override

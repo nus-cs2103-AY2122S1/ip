@@ -5,7 +5,7 @@ package me.yukun99.ip.exceptions;
  */
 public class HelpBotException extends Exception {
 	/**
-	 * Constructor for a HelpBotException instance not caused by other errors.
+	 * Constructor for a HelpBotException instance not directly caused by other errors.
 	 */
 	public HelpBotException() {
 		super("Exception in Help Bot:");

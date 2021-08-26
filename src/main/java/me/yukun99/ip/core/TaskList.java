@@ -15,16 +15,19 @@ import java.util.Map;
  */
 public class TaskList {
 	// List of all tasks currently in the todo list.
-	private final List<Task> taskList;
+	private final List<Task> taskList = new ArrayList<>();
+	private final TaskFinder taskFinder;
+
+	// Maps to store tasks by date.
 	private final Map<DateTimePair, List<Task>> pairTaskMap = new HashMap<>();
 	private final Map<Task, DateTimePair> taskPairMap = new HashMap<>();
-	private final TaskFinder taskFinder;
 
 	/**
 	 * Constructor for a TaskList instance.
+	 *
+	 * @param taskFinder TaskFinder instance for this TaskList.
 	 */
 	public TaskList(TaskFinder taskFinder) {
-		this.taskList = new ArrayList<>();
 		this.taskFinder = taskFinder;
 	}
 
@@ -36,8 +39,8 @@ public class TaskList {
 	 * @param dateTimePair Updated DateTimePair to store with the Task.
 	 */
 	public void addTask(Task task, DateTimePair dateTimePair) {
-		this.taskList.add(task);
-		task.updateFinder(this.taskFinder, false);
+		taskList.add(task);
+		task.updateFinder(taskFinder, false);
 		if (dateTimePair != null) {
 			updateDateTime(task, dateTimePair);
 		}
@@ -52,7 +55,7 @@ public class TaskList {
 	public void doneTask(String strIndex, Ui ui) throws HelpBotInvalidTaskException {
 		try {
 			int index = Integer.parseInt(strIndex) - 1;
-			Task task = this.taskList.get(index);
+			Task task = taskList.get(index);
 			task.setDone(ui);
 		} catch (IndexOutOfBoundsException | NumberFormatException e) {
 			throw new HelpBotInvalidTaskException(e, "done", strIndex + "");
@@ -72,7 +75,7 @@ public class TaskList {
 			throws HelpBotInvalidTaskException, HelpBotInvalidTaskTypeException, HelpBotDateTimeFormatException {
 		try {
 			int index = Integer.parseInt(strIndex) - 1;
-			Task task = this.taskList.get(index);
+			Task task = taskList.get(index);
 			task.updateDate(date);
 			return task;
 		} catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -102,8 +105,8 @@ public class TaskList {
 			}
 			pairTaskMap.put(update, updateTasks);
 			updateTasks.add(task);
-			this.taskPairMap.remove(task);
-			this.taskPairMap.put(task, update);
+			taskPairMap.remove(task);
+			taskPairMap.put(task, update);
 		} catch (HelpBotInvalidTaskTypeException ignored) {}
 		// ignore error here because we will never want to call updateDateTime for ToDo tasks.
 	}
@@ -142,9 +145,9 @@ public class TaskList {
 	public Task deleteTask(String strIndex) throws HelpBotInvalidTaskException {
 		try {
 			int index = Integer.parseInt(strIndex) - 1;
-			Task deleted = this.taskList.get(index);
-			this.taskList.remove(index);
-			deleted.updateFinder(this.taskFinder, true);
+			Task deleted = taskList.get(index);
+			taskList.remove(index);
+			deleted.updateFinder(taskFinder, true);
 			return deleted;
 		} catch (IndexOutOfBoundsException | NumberFormatException e) {
 			throw new HelpBotInvalidTaskException(e, "delete", strIndex + "");
@@ -157,7 +160,7 @@ public class TaskList {
 	 * @return Number of tasks in the TaskList.
 	 */
 	public int getRemaining() {
-		return this.taskList.size();
+		return taskList.size();
 	}
 
 	/**
@@ -181,13 +184,13 @@ public class TaskList {
 	@Override
 	public String toString() {
 		StringBuilder message = new StringBuilder();
-		if (this.taskList.size() == 0) {
+		if (taskList.size() == 0) {
 			message
 					.append("\n  Oh I'm sorry, were you expecting ME to make you a todo list, you lazy sod?")
 					.append("\n  Do it yourself, idiot.");
 		}
-		for (int i = 0; i < this.taskList.size(); ++i) {
-			message.append("\n ").append(i + 1).append(".").append(this.taskList.get(i));
+		for (int i = 0; i < taskList.size(); ++i) {
+			message.append("\n ").append(i + 1).append(".").append(taskList.get(i));
 		}
 		return message.toString();
 	}

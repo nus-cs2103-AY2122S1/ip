@@ -117,7 +117,7 @@ public class Ui {
 	 * Sends user instructions and bot information on startup.
 	 */
 	public void start() {
-		sendMessage(ENABLE.replace(NAME_PLACEHOLDER, this.name));
+		sendMessage(ENABLE.replace(NAME_PLACEHOLDER, name));
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class Ui {
 	 * Sends user a list of all tasks.
 	 */
 	public void list() {
-		sendMessage(LIST + this.taskList.toString().replace("\n", NEW_LINE));
+		sendMessage(LIST + taskList.toString().replace("\n", NEW_LINE));
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class Ui {
 	 * @param pair Date/time pair to send tasks to user for.
 	 */
 	public void listByDate(DateTimePair pair) {
-		sendMessage(LIST_DATE + this.taskList.listByDate(pair).replace("\n", NEW_LINE));
+		sendMessage(LIST_DATE + taskList.listByDate(pair).replace("\n", NEW_LINE));
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class Ui {
 	 * @param word Word that has to be in all returned tasks.
 	 */
 	public void findByWord(String word) {
-		sendMessage(FIND + this.taskFinder.findTasksByWord(word).replace("\n", NEW_LINE));
+		sendMessage(FIND + taskFinder.findTasksByWord(word).replace("\n", NEW_LINE));
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class Ui {
 	 * @return Message containing information on number of tasks in the list.
 	 */
 	private String remaining() {
-		return REMAINING.replace(TASKNUM_PLACEHOLDER, this.taskList.getRemaining() + "");
+		return REMAINING.replace(TASKNUM_PLACEHOLDER, taskList.getRemaining() + "");
 	}
 
 	/**
@@ -247,7 +247,7 @@ public class Ui {
 				+ NEW_LINE;
 		System.out.print(reply);
 		try {
-			this.storage.saveMessage(reply);
+			storage.saveMessage(reply);
 		} catch (IOException ignored) {}
 	}
 }
