@@ -5,13 +5,26 @@ import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDirectoryException;
 import duke.exceptions.InvalidStorageFilePathException;
 
+/**
+ * Entry point for the Duke Application.
+ * Application is initialised here and user interaction starts.
+ */
 
 public class Duke {
 
-    private Storage storage;  // deals with loading tasks from the file and saving tasks in the file
-    private TaskList tasks;  // contains the task list: has operations to add/delete tasks in the list
-    private Ui ui;          // deals with interactions with the user
+    /** deals with loading tasks from the file and saving tasks in the file.  */
+    private Storage storage;
 
+    /** contains the task list: has operations to add/delete tasks in the list.  */
+    private TaskList tasks;
+
+    /** deals with interactions with the user.  */
+    private Ui ui;
+
+    /**
+     * Initialises the Duke object which will run the main program.
+     * @param filePath user specified file path to store/load saved data
+     */
     Duke(String filePath)  {
         this.ui = new Ui();
         try {
@@ -25,6 +38,7 @@ public class Duke {
         }
     }
 
+    /** Runs the program until termination condition is met upon parsing of Command.   */
     public void run() {
         this.ui.showWelcomeMessage();
         boolean isExit = false;

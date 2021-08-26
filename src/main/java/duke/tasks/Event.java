@@ -1,7 +1,11 @@
 package duke.tasks;
 
+/**
+ * Reflects a particular Event task
+ */
 public class Event extends Task{
 
+    /** Indicates the date that the event is held  */
     protected String at;
 
     public Event(String description, String at) {
@@ -9,15 +13,24 @@ public class Event extends Task{
         this.at = at;
     }
 
-    Event(String description, String at, Boolean isDone) {
+    /**
+     * Internal constructor called to indicate that the Event task is completed.
+     */
+    private Event(String description, String at, Boolean isDone) {
         super(description, isDone);
         this.at = at;
     }
 
+    /**
+     * Outputs the date of the Event.
+     */
     public String getAt() {
         return this.at;
     }
 
+    /**
+     * Indicates that the Event task is completed.
+     */
     public Event markAsDone() {
         return new Event(this.description, this.at, true);
     }

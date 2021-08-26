@@ -13,6 +13,9 @@ import duke.tasks.Todo;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Adds a task to the task list
+ */
 public class AddCommand extends Command{
     private final String taskType;
     private final String taskDescription;
@@ -30,7 +33,11 @@ public class AddCommand extends Command{
         return taskDescription;
     }
 
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
+    /**
+     * Adds the specified task to the tasklist and reflects the result via the Ui.
+     * @throws InvalidInputException if date is not indicated or it is in the incorrect format.
+     */
+    public void execute(TaskList task, Ui ui, Storage storage) throws InvalidInputException {
         if (taskDescription.equals("")) {
             throw new InvalidInputException(ui.printEmptyDescription(taskType));
         } else {
@@ -61,6 +68,9 @@ public class AddCommand extends Command{
         }
     }
 
+    /**
+     * Helper function to tell Duke to continue reading inputs
+     */
     public boolean isExit() {
         return false;
     }
