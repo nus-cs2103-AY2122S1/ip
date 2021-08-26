@@ -58,6 +58,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("/storage/save.txt").run();
+        new Duke("./storage/save.txt").run();
     }
 }
