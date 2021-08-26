@@ -9,11 +9,19 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Duke {
-    
+
+    /** Storage object that reads from and writes onto the hard disk  */
     private Storage storage;
+
+    /** TaskList object that maintains and updates the list of tasks */
     private TaskList taskList;
+
+    /** Ui object to be used to interact with the user via the command line interface */
     private Ui ui;
-    
+
+    /**
+     * Constructs a Duke object and initialises the class members.
+     */
     public Duke() {
         ui = new Ui();
         try {
@@ -25,7 +33,10 @@ public class Duke {
             taskList = new TaskList();
         }
     }
-    
+
+    /**
+     * Runs the bot and actively listens and executes the user commands until closed by the user.
+     */
     public void run() {
         ui.showWelcome();
         ui.beginListen();

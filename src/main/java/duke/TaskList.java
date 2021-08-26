@@ -15,7 +15,13 @@ public class TaskList {
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
-    
+
+    /**
+     * Returns a string message indicating success after adding a task to the list of tasks.
+     *
+     * @param newTask New task to be added.
+     * @return String success message.
+     */
     public String addTask(Task newTask) {
         tasks.add(newTask);
         return "Got it. I've added this task:\n" 

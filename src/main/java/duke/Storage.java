@@ -36,7 +36,12 @@ public class Storage {
                     + "Please exit the bot if you don't want to lose new tasks.");
         }
     }
-    
+
+    /**
+     * Returns a list containing all the tasks after reading through a text file saved on the hard disk.
+     *
+     * @return List containing all the saved tasks.
+     */
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
