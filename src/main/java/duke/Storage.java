@@ -56,7 +56,7 @@ public class Storage {
         return storedList;
 
     }
-    
+
     /**
      * Saves the given tasklist into a file
      * @param taskList
