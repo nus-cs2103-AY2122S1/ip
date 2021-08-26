@@ -29,13 +29,13 @@ public class Deadline extends Task implements Timestampable {
 
     @Override
     public String toText() {
-        String[] props = new String[]{"D", super.getStatusIcon(), super.getName(), this.dueDate.toISO()};
+        String[] props = new String[]{"D", super.getStatusIcon(), super.getName(), dueDate.toISO()};
         return String.join(" | ", props);
     }
 
     @Override
     public boolean onSameDayAs(DukeDateTime date) {
-        return DukeDateTime.onSameDay(this.dueDate, date);
+        return DukeDateTime.onSameDay(dueDate, date);
     }
 
     @Override

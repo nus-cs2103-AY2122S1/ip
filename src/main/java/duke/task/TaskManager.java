@@ -98,7 +98,7 @@ public class TaskManager {
 
     private List<Task> filterByDate(DukeDateTime dateTime) {
         List<Task> tasks = new ArrayList<>();
-        for (Task t : this.taskList) {
+        for (Task t : taskList) {
             if (!(t instanceof Timestampable)) {
                 continue;
             }
