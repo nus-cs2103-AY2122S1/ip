@@ -1,3 +1,5 @@
+package duke;
+
 public class ExitCommand extends Command {
     private final boolean isExit;
     

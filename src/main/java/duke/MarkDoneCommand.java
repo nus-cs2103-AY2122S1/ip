@@ -1,9 +1,11 @@
-public class DeleteCommand extends Command {
-    
+package duke;
+
+public class MarkDoneCommand extends Command {
+
     private boolean isExit;
     private int index;
-
-    public DeleteCommand(int index) {
+    
+    public MarkDoneCommand(int index) {
         this.isExit = false;
         this.index = index;
     }
@@ -15,12 +17,11 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
-        Task removed = list.deleteAtIndex(this.index);
-        if (removed != null) {
+        boolean markedDone = list.markDoneAtIndex(index);
+        if (markedDone) {
             String message =
-                    "Noted.I've removed this task:\n" +
-                    "  " + removed + "\n" +
-                    String.format("Now you have %d tasks in the list.", list.size());
+                    "Nice! I've marked this task as done:\n" +
+                            list.get(index);
             ui.printMessage(message);
             storage.save(list.convertToStorageString());
         } else {

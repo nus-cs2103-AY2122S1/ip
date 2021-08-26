@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents DukeException that contains all the Exceptions related to this program.
  * 

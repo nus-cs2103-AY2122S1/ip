@@ -1,3 +1,5 @@
+package duke;
+
 public class PrintCommand extends Command {
     
     private boolean isExit;
