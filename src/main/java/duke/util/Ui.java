@@ -1,65 +1,65 @@
-public class Speech {
+package duke.util;
 
-    private final boolean testing;
+import duke.taskTypes.Task;
+
+import java.util.Scanner;
+
+public class Ui {
+
     private int emoticonState;
     private final int baseBubbleLimit;
     private final String baseTemplate;
     private int currentBubbleLimit;
-    private final Writer writer;
+    private final Scanner scan;
 
 
-    public Speech(Writer writer, boolean testMode, int speechLimit){
-        this.testing = testMode;
+    public Ui(int speechLimit) {
+
         this.emoticonState = 0;
         this.baseBubbleLimit = speechLimit;
         this.baseTemplate = String.format("%"+(speechLimit+1)+"s"," ").replace(' ', '_');
         this.currentBubbleLimit = 0;
-        this.writer = writer;
+        this.scan = new Scanner(System.in);
     }
 
-    /**
-     * Welcome msg speech ( To be called only once at the start of DUKE
-     */
+    public String userInput() {
+        System.out.print("Say something to Duke: ");
+        return scan.nextLine();
+    }
+
     public void welcome() {
         String[] dukeWelcome = {"Hello! I'm Duke!" , "What can I do for you"};
         currentBubbleLimit = baseBubbleLimit;
         speak(dukeWelcome);
     }
 
-    public void listMsg(String[] msg, Storage storage) {
-        currentBubbleLimit = storage.listMaxLen();
+    public void listMsg(String[] msg, TaskList taskList) {
+        currentBubbleLimit = taskList.listMaxLen();
         speak(msg);
     }
 
-    /**
-     * Takes in a msg and formats it to the "done" success string
-     * @param msg string that contains details of the task
-     */
-    public void doneMsg(String msg) {
+
+    public void doneMsg(Task task) {
+        String msg = task.toString();
         String[] dukeAdded = {"Nice! I've marked this task as done:", msg};
         currentBubbleLimit = msg.length();
         speak(dukeAdded);
     }
 
-    /**
-     * Takes in a String and task and formats it to the task_added success msg
-     * @param msg string that contains details of the task
-     * @param storage takes in storage instance to check how many task left
-     */
-    public void taskAdded(String msg, Storage storage) {
-        int task_left = storage.task_left();
+
+    public void taskAdded(Task task, TaskList taskList) {
+        String msg = task.toString();
+        int task_left = taskList.taskLeft();
         String[] dukeAddedTask = {"Got it. I've added this task:", "  " + msg, "Now you have " + task_left + " tasks in the list."};
         currentBubbleLimit = msg.length() + 2;
         speak(dukeAddedTask);
     }
-    /**
-     * Takes in a String and task and formats it to the task_deleted success msg
-     * @param msg string that contains details of the task
-     * @param storage takes in storage instance to check how many task left
-     */
-    public void taskDeleted(String msg, Storage storage) {
-        int task_left = storage.task_left();
-        String[] dukeAddedTask = {"Noted. I've removed this task:", "  " + msg, "Now you have " + task_left + " tasks in the list."};
+
+    public void taskDeleted(Task task, TaskList taskList) {
+        String msg = task.toString();
+        int taskLeft = taskList.taskLeft();
+        String[] dukeAddedTask = {"Noted. I've removed this task:", "  " + msg, "Now you have " + taskLeft + " tasks " +
+                "in the list."};
         currentBubbleLimit = msg.length() + 2;
         speak(dukeAddedTask);
     }
@@ -84,7 +84,7 @@ public class Speech {
 
 
     /**
-     * Duke Speech Template
+     * Duke duke.util.Ui Template
      * @param in takes in a string array and cycle through and printing msg
      */
     public void speak(String[] in) {
@@ -102,7 +102,6 @@ public class Speech {
             for( String x : in){
                 msges.append(message_format(x, limit));
             }
-            writer.saveMsg(msges.toString());
             System.out.println( topBorder + msges + botBorder + emoticon);
     }
 

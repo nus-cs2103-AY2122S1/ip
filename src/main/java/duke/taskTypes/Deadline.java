@@ -1,3 +1,8 @@
+package duke.taskTypes;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidDeadlineFormatException;
+
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -7,8 +12,8 @@ public class Deadline extends Task{
      * Takes in a string and splits msg into based on /by pattern. Set the eventType and time of the instance
      * @param input string from the user
      */
-    public Deadline(String input) throws InvalidDeadlineFormatException {
-        super();
+    public Deadline(String input, boolean isDone) throws DukeException {
+        super(isDone);
         List<String> results = Pattern.compile("/by").splitAsStream(input).map(x->x.trim()).collect(Collectors.toList());
         String key;
 
@@ -25,7 +30,7 @@ public class Deadline extends Task{
 
         super.setEventType("D");
         super.setDescription(key);
-        super.setTime(results.get(1));
+        super.setDate(results.get(1));
     }
 
     /**
@@ -34,6 +39,11 @@ public class Deadline extends Task{
      */
     @Override
     public String toString(){
-        return super.toString() + " (by: " + super.getTime() + ")";
+        return super.toString() + " (by: " + super.getDate() + ")";
+    }
+
+    @Override
+    public String saveTask() {
+        return super.saveTask() + " /by " + super.getDate();
     }
 }

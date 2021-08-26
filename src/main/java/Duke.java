@@ -1,31 +1,42 @@
-import java.util.Scanner;
+import duke.command.Command;
+import duke.exceptions.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 public class Duke {
 
-    private final Brain brain;
+    private final Parser parser;
+    private final TaskList taskList;
+    private final Ui ui;
     private final Storage storage;
-    private final Speech speech;
-    private final Writer writer;
 
     public Duke() {
         storage = new Storage();
-        writer = new Writer();
-        speech = new Speech(writer, true, 48);
-        brain = new Brain(storage, speech, writer);
+        ui = new Ui(48);
+        taskList = new TaskList();
+        parser = new Parser(storage, taskList, ui);
+        parser.loadTask();
+
+
+
+
     }
 
     /**
      * Continuous scan loops until user input "bye"
      */
     public void  run(){
-        speech.welcome();
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.print("Say something to Duke: ");
-            String input = sc.nextLine();
-            boolean cont = brain.decide(input);
-            if (!cont) {
-                break;
+        ui.welcome();
+        boolean notBye = true;
+        while (notBye) {
+            String input = ui.userInput();
+            try {
+                Command c = parser.parse(input);
+                notBye = c.exec();
+            } catch (DukeException e) {
+                ui.error(e.toString());
             }
         }
     }
