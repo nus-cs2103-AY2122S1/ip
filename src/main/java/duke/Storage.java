@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,7 +57,8 @@ public class Storage {
                         userInput.add(new Deadline(splitString[2], date));
                         break;
                     case "E":
-                        LocalDateTime dateTime = LocalDateTime.parse(splitString[3]);
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+                        LocalDateTime dateTime = LocalDateTime.parse(splitString[3].trim(), dtf);
                         userInput.add(new Event(splitString[2], dateTime));
                         break;
                 }
@@ -78,7 +80,7 @@ public class Storage {
 
         if(task.taskIndicator().equals("D")) {
             Deadline temp = (Deadline) task;
-            toAdd += "  " + temp.getBy().trim();
+            toAdd += "  " + temp.changeDateFormat().trim();
         }  else if(task.taskIndicator().equals("E")) {
             Event temp = (Event) task;
             toAdd += "  " + temp.getAt().trim();

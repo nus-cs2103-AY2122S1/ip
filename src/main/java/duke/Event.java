@@ -13,7 +13,7 @@ public class Event extends Task {
     }
 
     public String getAt() {
-        return at.toString();
+        return at.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
     }
 
     @Override

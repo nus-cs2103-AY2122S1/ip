@@ -30,6 +30,11 @@ public class Parser {
                         throw new DukeException(ui.commandError());
                     }
                     return new ListCommand(command);
+            case "find":
+                if(splitInput.length == 1) {
+                    throw new DukeException(ui.commandError());
+                }
+                return new FindCommand(command);
 
                 case "done":
                     return checkDone(command);
@@ -41,7 +46,6 @@ public class Parser {
                 case "event":
                 case "deadline":
                     return checkInput(command.trim(), splitInput[0].trim());
-
                 default:
                     throw new DukeException(ui.commandError());
             }

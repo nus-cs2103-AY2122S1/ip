@@ -20,9 +20,6 @@ public class Deadline extends Task {
         return "D";
     }
 
-    public String getBy() {
-        return this.by.toString();
-    }
 
     @Override
     public String toString() {
