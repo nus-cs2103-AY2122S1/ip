@@ -13,6 +13,13 @@ public class Ui {
         return separator + "\n" + "     Hello! I'm Duke" + "\n" + "     What can I do for you?"  + "\n" + separator;
     }
 
+    /**
+     * Returns updated user task list and prints feedback to the user based on their input
+     * 
+     * @param taskList list of user's tasks
+     * @param input user input
+     * @return updated task list
+     */
     public ArrayList<Task> run(ArrayList<Task> taskList, String input) {
         ArrayList<Task> list = taskList;
         String separator = "    ____________________________________________________________";
