@@ -5,6 +5,6 @@ package duke;
  * 
  * @author Tianqi-Zhu
  */
-interface Executable {
-    public void execute(TaskList taskList); 
+public interface Executable {
+    public void execute(TaskList taskList);
 }
