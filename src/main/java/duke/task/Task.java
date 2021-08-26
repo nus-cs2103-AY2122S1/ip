@@ -6,12 +6,6 @@ public abstract class Task {
     public Task() {
         completed = false;
     }
-//    private String taskName;
-
-//    public Task(String taskName) {
-//        completed = false;
-//        this.taskName = taskName;
-//    }
 
     public void setCompleted() {
         completed = true;
@@ -26,11 +20,5 @@ public abstract class Task {
     }
 
     public abstract String toStorageFormat();
-
-//    @Override
-//    public String toString() {
-//        String statusIcon = completed ? "X" : " ";
-//        return String.format("[%s] %s", statusIcon, taskName);
-//    }
 
 }

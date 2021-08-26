@@ -29,14 +29,16 @@ public class Storage {
         }
     }
 
-    public void addTasksToFile(TaskList taskList) {
+    public void saveTasksToFile(TaskList taskList) {
         taskList.saveContents(file);
     }
 
     public ArrayList<Task> load() {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
+            // Could throw a FileNotFoundException if the file is missing
             Scanner sc = new Scanner(file);
+
             int lineNumber = 0;
             while (sc.hasNext()) {
                 lineNumber ++;

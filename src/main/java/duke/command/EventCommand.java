@@ -14,7 +14,7 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList taskList, Storage storage) {
         taskList.addTask(eventTask);
-        storage.addTasksToFile(taskList);
+        storage.saveTasksToFile(taskList);
     }
 
     @Override

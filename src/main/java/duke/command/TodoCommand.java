@@ -14,7 +14,7 @@ public class TodoCommand extends Command {
     @Override
     public void execute(TaskList taskList, Storage storage) {
         taskList.addTask(todoTask);
-        storage.addTasksToFile(taskList);
+        storage.saveTasksToFile(taskList);
     }
 
     @Override
