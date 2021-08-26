@@ -15,7 +15,8 @@ public class ListOfTasks {
             System.out.println("     Got it. I've added this task:");
             information = removeVal(information, "todo");
 //            xs[count] = new ToDo(information);
-            xs.add(count, new ToDo(information));
+            xs.add(count, new ToDo(information, "TODO"));
+            CompilationOfFiles.updateSavedFile(this.xs.get(count), "TODO");
             System.out.println("       " + this.xs.get(count).toString());
             count++;
             System.out.println("     Now you have " + count + " task" + ((count > 1) ? "s" : "") + " in the list.");
@@ -30,14 +31,15 @@ public class ListOfTasks {
         }
     }
 
-    public void done(String command) {
+    public void isDone(String command) {
         command = removeVal(command, "done");
         int a;
         a = Integer.parseInt(command);
         a = a - 1;
 
         if (a < count && a >= 0) {
-            this.xs.get(a).done();
+            this.xs.get(a).isDone();
+            CompilationOfFiles.updateFile(this.xs);
             System.out.println("     Nice! I've marked this task as done!");
             System.out.println("     " + this.xs.get(a).toString());
 
@@ -53,6 +55,7 @@ public class ListOfTasks {
 
         if (a < count && a >= 0) {
             Task deletedVal = this.xs.remove(a);
+            CompilationOfFiles.updateFile(this.xs);
             System.out.println("     Noted. I've removed this task:");
             System.out.println("       " + deletedVal.toString());
             count--;
@@ -82,7 +85,8 @@ public class ListOfTasks {
         information = removeVal(information, "event");
         String[] moreInformation = information.split("/at", 2);
 
-        this.xs.add(count,new Event(moreInformation[0],moreInformation[1].strip()) );
+        this.xs.add(count,new Event(moreInformation[0],moreInformation[1].strip(),"EVENT") );
+        CompilationOfFiles.updateSavedFile(this.xs.get(count),"EVENT");
         System.out.println("       " + this.xs.get(count).toString());
         count = count + 1;
         System.out.println("     Now you have "+ count + " task" + ((count > 1) ? "s" : "" ) +" in the list.");
@@ -99,7 +103,8 @@ public class ListOfTasks {
         information = removeVal(information, "deadline");
         String[] moreInformation2 = information.split("/by", 2);
 
-        this.xs.add(count,new Deadline(moreInformation2[0],moreInformation2[1].strip()) );
+        this.xs.add(count,new Deadline(moreInformation2[0],moreInformation2[1].strip(), "DEADLINE") );
+        CompilationOfFiles.updateSavedFile(this.xs.get(count), "DEADLINE");
         System.out.println("       " + this.xs.get(count).toString());
         count = count + 1;
         System.out.println("     Now you have "+ count + " task" + ((count > 1) ? "s" : "" ) +" in the list.");

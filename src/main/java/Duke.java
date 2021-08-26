@@ -4,6 +4,7 @@ public class Duke {
     public static void main (String[]args) {
         Scanner in = new Scanner(System.in);
         ListOfTasks xs = new ListOfTasks();
+        CompilationOfFiles.loadAndSaveFile(xs);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -26,7 +27,7 @@ public class Duke {
                         if (command.equals("done ") || command.equals("done")) {
                             throw new DukeException("    OOPS!!! The task number cannot be empty.");
                         } else {
-                            xs.done(command);
+                            xs.isDone(command);
                         }
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
