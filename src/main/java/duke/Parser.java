@@ -3,8 +3,20 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A class containing methods that parse relevant data from strings.
+ *
+ * @author Toh Wang Bin
+ */
 public class Parser {
 
+    /**
+     * Parses a string into a LocalDate object.
+     *
+     * @param str The string to be parsed.
+     * @return A LocalDate object created byb parsing the input string.
+     * @throws IllegalArgumentException When an invalid string is parsed.
+     */
     public static LocalDate parseDate(String str) throws IllegalArgumentException {
         LocalDate date;
         try {
@@ -15,6 +27,12 @@ public class Parser {
         return date;
     }
 
+    /**
+     * Parses a string into a Task object.
+     *
+     * @param str The string to be parsed.
+     * @return A task object created by parsing the input string.
+     */
     public static Task parseData(String str) {
         String[] splitArray = str.split("\\|");
         switch (splitArray[0]) {
