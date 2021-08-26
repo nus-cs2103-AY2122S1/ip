@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
     final private String INTRO = "Hello! I'm Duke\n" +
