@@ -16,126 +16,52 @@ public class Duke {
     /**
      * Global Variables
      */
-    public static final String SPACE = "    ";
-    public static final String LOGO =
-            SPACE + "██████   ██████  ██████   █████  ████████ \n" +
-            SPACE + "██   ██ ██    ██ ██   ██ ██   ██    ██    \n" +
-            SPACE + "██████  ██    ██ ██████  ███████    ██    \n" +
-            SPACE + "██   ██ ██    ██ ██   ██ ██   ██    ██    \n" +
-            SPACE + "██████   ██████  ██   ██ ██   ██    ██";
-    public static final String BOT_LINE = "============================================================";
-    public static final String USER_LINE = "_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _";
-
     private static final String DATA_DIRECTORY = "./data";
     private static final String DATA_FILE = "duke.txt";
     private static final String DATA_FILE_DIRECTORY = DATA_DIRECTORY + "/" + DATA_FILE;
+    private Ui ui;
+    private Constants constants;
 
-    /**
-     * Available commands
-     */
-    private enum Commands {
-        list        ("", "Lists all the tasks."),
-        todo        ("[description]", "Adds a todo task."),
-        deadline    ("[description] /by [dd-MM-yyyy] [*optional hh:mm]", "Adds a task with a deadline"),
-        event       ("[description] /at [dd-MM-yyyy] [*optional hh:mm]", "Adds an event to the task"),
-        delete      ("[index]", "Removes a task from the task list"),
-        done        ("[index]", "Marks a task as done"),
-        help        ("", "Shows all the commands available"),
-        dates       ("", "Shows all the available date and time type"),
-        bye         ("", "Quit the app");
-
-
-        private final String arguments;
-        private final String description;
-
-        Commands(String arguments, String description) {
-            this.arguments = arguments;
-            this.description = description;
-        }
-
-        @Override
-        public String toString() {
-            return this.name() + " " + arguments + "   -->   " + description;
-        }
+    public Duke() {
+        ui = new Ui();
+        constants = new Constants();
     }
 
-
-    /**
-     * Accepted Dates
-     */
-    private enum Dates {
-
-        today       ("today", "today"),
-        tomorrow    ("tomorrow", "tomorrow"),
-        ydash       ("yyyy-MM-dd", "2021-12-25"),
-        yslash      ("yyyy/MM/dd", "2021/12/25"),
-        ddash       ("dd-MM-yyyy", "25-12-2021"),
-        dslash      ("dd/MM/yyyy", "25/12/2021"),
-        dtimedot    ("[date] hh:mm", "[date] 18:00"),
-        dtimeblank    ("[date] hhmm", "[date] 1800");
-
-        private final String accepted;
-        private final String example;
-
-        Dates(String accepted, String example) {
-            this.accepted = accepted;
-            this.example = example;
-        }
-
-        @Override
-        public String toString() {
-            return accepted + "   -->   example: " + example;
-        }
+    public static void main(String[] args) {
+        new Duke().run();
     }
 
     /**
      * The main function of Borat
-     * @param args The command line arguments
      */
-    public static void main(String[] args) {
-        /**
-         * The Scanner to scan user input
-         */
-        Scanner sc = new Scanner(System.in);
-
-        /**
-         * The list of the Borat app
-         */
+    public void run() {
+        // The list of the Borat app
         Items list = new Items();
 
-        /**
-         * Read from saved file.
-         */
+        // Read from saved file.
         List<String> fileContent = readSaved(list);
         if (fileContent == null) {
             System.out.println("File read error");
             return;
         }
 
-        /**
-         * Borat's Greetings
-         */
-        System.out.println(SPACE + BOT_LINE);
-        System.out.println(LOGO);
-        System.out.println(SPACE + BOT_LINE);
-        System.out.println(SPACE + "Jak się masz? My name-a Borat. I like you.");
-        System.out.println(SPACE + "What I do for you?");
-        System.out.println(SPACE + BOT_LINE);
+        // Greetings
+        ui.showGreetings();
 
-        String rawInput = getInput(sc);
+        String rawInput = ui.getInput();
         String output = "";
         label:
         while (true) {
 
             try {
                 String[] input = parseInput(rawInput);
-                Commands command = Commands.valueOf(input[0]);
+                Constants.Commands command = Constants.Commands.valueOf(input[0]);
                 String task = "";
 
                 switch (command) {
                     case help:
                         // Show help
-                        output = showCommandMenu();
+                        output = ui.getCommandMenu();
 
                         break;
                     case bye:
@@ -189,24 +115,24 @@ public class Duke {
 
                         break;
                     case dates:
-                        output = showAllAcceptedDates();
+                        output = ui.getAllAcceptedDates();
                 }
                 Files.write(Paths.get(DATA_FILE_DIRECTORY), fileContent, StandardCharsets.UTF_8);
-                showMessage(output);
+                ui.showMessage(output);
             } catch (DukeException e) {
-                showMessage(e.getMessage());
+                ui.showMessage(e.getMessage());
             } catch (Exception e) {
-                showMessage(e.getMessage());
+                ui.showMessage(e.getMessage());
                 return;
             }
 
-            rawInput = getInput(sc);
+            rawInput = ui.getInput();
         }
 
         /**
          * Good bye message from Borat
          */
-        showMessage("Bye. Have a good time!");
+        ui.showMessage("Bye. Have a good time!");
     }
 
 
@@ -215,7 +141,7 @@ public class Duke {
      * @param list The list of tasks
      * @return Each line of the file in a list.
      */
-    private static List<String> readSaved(Items list) {
+    private List<String> readSaved(Items list) {
         // Make directory and/or file if they don't exist
         File dataDir = new File(DATA_DIRECTORY);
         dataDir.mkdirs();
@@ -260,10 +186,10 @@ public class Duke {
                 }
             }
         } catch (FileNotFoundException e) {
-            showMessage("No Saved data found");
+            ui.showMessage("No Saved data found");
             return null;
         } catch (DukeException e) {
-            showMessage("Loading Saved Data Fault: " + e.getMessage());
+            ui.showMessage("Loading Saved Data Fault: " + e.getMessage());
         }
         return fileContent;
     }
@@ -275,14 +201,14 @@ public class Duke {
      * @return Parsed input ready to be processed
      * @throws DukeException An invalid input will produce this exception
      */
-    private static String[] parseInput(String rawInput) throws DukeException {
+    private String[] parseInput(String rawInput) throws DukeException {
         String[] input = rawInput.split("\\s+");
         if (input.length < 1) {
             throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
         }
-        Commands command;
+        Constants.Commands command;
         try {
-            command = Commands.valueOf(input[0]);
+            command = Constants.Commands.valueOf(input[0]);
         } catch (Exception e) {
             throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
         }
@@ -514,29 +440,6 @@ public class Duke {
 
 
     /**
-     * Get the user input
-     * @param sc The scanner to get the input
-     * @return The string representation of the user input
-     */
-    private static String getInput(Scanner sc) {
-        return sc.nextLine();
-    }
-
-
-    /**
-     * Displays Borat's message to the user
-     * @param message The message content to be displayed
-     */
-    private static void showMessage(String message) {
-        message = SPACE + message.replace("\n", "\n" + SPACE);
-        System.out.println(SPACE + USER_LINE);
-        System.out.println(message);
-        System.out.println(" ");
-        System.out.println(SPACE + BOT_LINE);
-    }
-
-
-    /**
      * Combine an array of strings into a space separated sentence.
      * @param arr The string array
      * @param start The starting index to be combined (inclusive)
@@ -556,36 +459,5 @@ public class Duke {
             }
         }
         return tmp.toString();
-    }
-
-
-    /**
-     * Show the list of commands
-     * @return A String of all the commands and their description
-     */
-    private static String showCommandMenu() {
-        StringBuilder sb = new StringBuilder();
-        int i = 1;
-        for (Commands c : Commands.values()) {
-            sb.append("(" + i++ + ") ");
-            sb.append(c.toString());
-            sb.append("\n");
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Show the list of accepted dates type
-     * @return A String of all the dates and their description
-     */
-    private static String showAllAcceptedDates() {
-        StringBuilder sb = new StringBuilder();
-        int i = 1;
-        for (Dates c : Dates.values()) {
-            sb.append("(" + i++ + ") ");
-            sb.append(c.toString());
-            sb.append("\n");
-        }
-        return sb.toString();
     }
 }
