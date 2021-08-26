@@ -97,6 +97,15 @@ public class Duke {
                     ui.showMessage(String.format("I've removed this task:\n%s", removedTask.toString()));
                     ui.showMessage(String.format("Now you have %d tasks in your list.\n", tasks.numberOfTasks()));
                     break;
+                case("find"):
+                    TaskList searchedTasks = tasks.searchTasks(userArgument);
+                    if (searchedTasks.isEmpty()) {
+                        ui.showMessage("No matching tasks.");
+                        break;
+                    }
+                    ui.showMessage("Here are the matching tasks.");
+                    ui.showTasks(searchedTasks);
+                    break;
                 default:
                     throw new DukeException("Sorry I do not understand this directive.");
                 }

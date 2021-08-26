@@ -31,4 +31,14 @@ public class TaskList {
     public void removeTask (int delete) {
         taskList.remove(delete);
     }
+
+    public TaskList searchTasks(String searchQuery) {
+        ArrayList<Task> res = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.toString().contains(searchQuery)) {
+                res.add(task);
+            }
+        }
+        return new TaskList(res);
+    }
 }
