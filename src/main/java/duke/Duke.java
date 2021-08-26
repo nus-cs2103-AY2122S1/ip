@@ -1,3 +1,6 @@
+package duke;
+
+import duke.command.DukeCommand;
 import duke.data.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -37,9 +40,11 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (isActive) {
-            String command = sc.nextLine();
+            String input = sc.nextLine();
             try {
-                isActive = parser.process(command);
+                DukeCommand command = parser.processInput(input);
+                command.execute();
+                isActive = !command.isExit();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
