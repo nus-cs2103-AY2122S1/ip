@@ -54,8 +54,7 @@ public class Task {
     public void doneTask(boolean print) {
         this.state = true;
         if (print) {
-            System.out.println("     Nice! I've marked this task as done:");
-            System.out.println("       " + this);
+            Ui.finishTask(this);
         }
     }
 

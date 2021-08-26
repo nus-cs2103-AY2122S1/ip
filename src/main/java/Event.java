@@ -29,7 +29,7 @@ public class Event extends Task {
      */
     @Override
     public String getSaveInfo() {
-        return super.getSaveInfo() + "|" + this.time;
+        return super.getSaveInfo() + "| " + this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @Override

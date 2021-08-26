@@ -6,22 +6,10 @@ import java.util.ArrayList;
  */
 
 public class TaskList {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
-        this.list = new ArrayList<Task>();
-    }
-
-    /**
-     * Adds an item to the TaskList.
-     * This method is for Level-3, and is not longer used w.e.f Level-4
-     *
-     * @param input the item to be added to the TaskList
-     */
-    public void add(String input) {
-        Task task = new Task(input);
-        this.list.add(task);
-        System.out.println("    " + "added: " + input);
+        this.tasks = new ArrayList<Task>();
     }
 
     /**
@@ -30,11 +18,10 @@ public class TaskList {
      * @param event event to be added to the TaskList
      */
     public void add(Event event, boolean print) {
-        this.list.add(event);
+        this.tasks.add(event);
         if (print) {
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("       " + event);
-            System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+            Ui.addTask(event);
+            Ui.numberOfTasks(tasks);
         }
     }
 
@@ -45,11 +32,10 @@ public class TaskList {
      * @param deadline deadline to be added to the TaskList
      */
     public void add(Deadline deadline, boolean print) {
-        this.list.add(deadline);
+        this.tasks.add(deadline);
         if (print) {
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("       " + deadline);
-            System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+            Ui.addTask(deadline);
+            Ui.numberOfTasks(tasks);
         }
     }
 
@@ -59,11 +45,10 @@ public class TaskList {
      * @param toDo deadline to be added to the TaskList
      */
     public void add(ToDo toDo, boolean print) {
-        this.list.add(toDo);
+        this.tasks.add(toDo);
         if (print) {
-            System.out.println("     Got it. I've added this task:");
-            System.out.println("       " + toDo);
-            System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+            Ui.addTask(toDo);
+            Ui.numberOfTasks(tasks);
         }
     }
 
@@ -73,7 +58,7 @@ public class TaskList {
      * @param index index from 1 (i.e lowest index is 1, so subtract 1 to get real index)
      */
     public void finishTask(int index) {
-        Task task = this.list.get(index - 1);
+        Task task = this.tasks.get(index - 1);
         task.doneTask(true);
     }
 
@@ -81,15 +66,7 @@ public class TaskList {
      * Lists out the current items in the TaskList.
      */
     public void listOut() {
-        if (this.list.size() == 0) {
-            System.out.println("     You have no tasks in your list!");
-            System.out.println("     Try adding some tasks with todo, event or deadline");
-        } else {
-            System.out.println("     Here are the tasks in your list:");
-            for (int i = 0; i < this.list.size(); i++) {
-                System.out.println("     " + (i + 1) + "." + this.list.get(i));
-            }
-        }
+        Ui.listTasks(tasks);
     }
 
     /**
@@ -99,7 +76,7 @@ public class TaskList {
      */
     public String save() {
         String output = "";
-        for (Task task: list) {
+        for (Task task: tasks) {
             output += task.type() + " | " + (task.getState() ? "1 | " : "0 | ") + task.getSaveInfo() + "\n";
         }
         return output;
@@ -111,9 +88,8 @@ public class TaskList {
      * @param index index from 1 (i.e lowest index is 1, so subtract 1 to get real index)
      */
     public void deleteTask(int index) {
-        Task item = this.list.remove(index - 1);
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + item);
-        System.out.printf("     Now you have %d tasks in the list.%n", list.size());
+        Task item = this.tasks.remove(index - 1);
+        Ui.deleteTask(item);
+        Ui.remainingTasks(tasks);
     }
 }

@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -8,12 +12,34 @@ import java.time.format.DateTimeFormatter;
  * This class takes in a saved file and loads whatever tasks were saved in it.
  */
 
-public class FileLoader {
+public class Storage {
+    String filePath;
     Scanner saveFile;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public FileLoader(Scanner saveFile) {
+    public Storage(Scanner saveFile) {
         this.saveFile = saveFile;
+    }
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        File directory = new File(filePath);
+        try {
+            File dataFile = directory.getParentFile();
+            if (dataFile.mkdir()) {
+                Ui.createNewDirectory();
+            }
+            if (directory.createNewFile()) {
+                Ui.createNewFile();
+            }
+            File file = new File(filePath);
+            this.saveFile = new Scanner(file);
+
+        } catch (FileNotFoundException e) {
+            Ui.fileNotFoundError();
+        } catch (IOException e) {
+            System.out.println("Input error!");
+        }
     }
 
     /**
@@ -37,16 +63,15 @@ public class FileLoader {
             switch (task) {
             case "T":
                 ToDo eventTodo = new ToDo(taskName);
-                if (state.indexOf("1") >= 0) {
+                if (state.contains("1")) {
                     eventTodo.doneTask(false);
                 }
                 lst.add(eventTodo, false);
                 break;
             case "D":
                 String deadline = data[3].substring(1);
-                System.out.println(deadline);
                 Deadline eventDeadline = new Deadline(taskName, LocalDateTime.parse(deadline, formatter));
-                if (state.indexOf("1") >= 0) {
+                if (state.contains("1")) {
                     eventDeadline.doneTask(false);
                 }
                 lst.add(eventDeadline, false);
@@ -54,7 +79,7 @@ public class FileLoader {
             case "E":
                 String time = data[3].substring(1);
                 Event eventEvent = new Event(taskName, LocalDateTime.parse(time, formatter));
-                if (state.indexOf("1") >= 0) {
+                if (state.contains("1")) {
                     eventEvent.doneTask(false);
                 }
                 lst.add(eventEvent, false);
@@ -62,5 +87,15 @@ public class FileLoader {
             }
         }
         return lst;
+    }
+
+    public void save(String input) {
+        try {
+            PrintWriter newFile = new PrintWriter(this.filePath);
+            newFile.println(input);
+            newFile.close();
+        } catch (FileNotFoundException e) {
+            Ui.fileNotFoundError();
+        }
     }
 }
