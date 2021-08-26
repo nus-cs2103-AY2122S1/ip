@@ -8,8 +8,8 @@ package duke.data;
  * @author Zhi Bin
  * @version Duke Level 8
  */
-public class UnknownCommandException extends DukeException{
-    public UnknownCommandException(){
+public class UnknownCommandException extends DukeException {
+    public UnknownCommandException() {
         super();
     }
 
@@ -21,7 +21,7 @@ public class UnknownCommandException extends DukeException{
      * @return The formatted error message.
      */
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return super.formatMessage("I cannot understand what you want lah!!!");
     }
 }

@@ -9,8 +9,10 @@ package duke.data;
  * @author Zhi Bin
  * @version Duke Level 8
  */
-public class InvalidDateTimeException extends DukeException{
-    public InvalidDateTimeException(){ super(); }
+public class InvalidDateTimeException extends DukeException {
+    public InvalidDateTimeException() {
+        super();
+    }
 
     /**
      * Returns a formatted error message to indicate to the
@@ -20,7 +22,7 @@ public class InvalidDateTimeException extends DukeException{
      * @return The formatted error message.
      */
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return super.formatMessage("Entered DateTime format not supported. " +
                 "Please enter Date and Time in YYYY-MM-DD HH:MM.");
     }

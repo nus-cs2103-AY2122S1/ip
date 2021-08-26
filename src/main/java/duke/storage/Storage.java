@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,15 +26,15 @@ public class Storage {
      * Creates a data file named 'duke.txt' to store the task list on local directory under the folder data.
      * Prints different message when it is created successfully or failed due to an error or file existed.
      */
-    public void createFile(){
-        File file = new File(String.format("%s/%s",FOLDER_NAME, FILE_NAME));
+    public void createFile() {
+        File file = new File(String.format("%s/%s", FOLDER_NAME, FILE_NAME));
         boolean created = false;
         try {
             created = file.createNewFile();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         } finally {
-            if (created){
+            if (created) {
                 System.out.println("    New data file has been created.");
             } else {
                 System.out.println("Data file already exist.");
@@ -45,10 +46,10 @@ public class Storage {
      * Creates a folder named 'data' to contain the data file storing task list on local directory.
      * Prints message if the folder could not be created.
      */
-    public void createFolder(){
+    public void createFolder() {
         File folder = new File(FOLDER_NAME);
         boolean created = folder.mkdir();
-        if (!created){
+        if (!created) {
             System.out.println("Folder could not be created.");
         }
     }
@@ -60,13 +61,13 @@ public class Storage {
      *
      * @return The ArrayList of Task to be used by TaskList class to recreate the stored task list.
      */
-    public ArrayList<Task> load(){
+    public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(String.format("%s/%s", FOLDER_NAME, FILE_NAME));
         try {
             Scanner sc = new Scanner(file);
             Ui.printMessageWithFormat("I have found past data in your local storage, type 'list' to view the previous tasks.");
-            while (sc.hasNextLine()){
+            while (sc.hasNextLine()) {
                 String curr = sc.nextLine();
                 Task task = TaskList.stringToTask(curr);
                 taskList.add(task);
@@ -86,14 +87,14 @@ public class Storage {
      *
      * @param taskList The current task list to be saved to the data file.
      */
-    public void save(ArrayList<Task> taskList){
+    public void save(ArrayList<Task> taskList) {
         try {
             FileWriter writer = new FileWriter(String.format("%s/%s", FOLDER_NAME, FILE_NAME));
-            for (Task task: taskList){
+            for (Task task : taskList) {
                 writer.write(task.toString() + "\n");
             }
             writer.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
 

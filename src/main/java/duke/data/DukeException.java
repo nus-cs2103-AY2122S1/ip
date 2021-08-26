@@ -8,7 +8,7 @@ package duke.data;
  * @author Zhi Bin
  * @version Duke Level 8
  */
-public abstract class DukeException extends Exception{
+public abstract class DukeException extends Exception {
 
     /**
      * Returns a formatted message. Used by child
@@ -17,7 +17,7 @@ public abstract class DukeException extends Exception{
      * @param msg The message to be formatted.
      * @return The formatted error message.
      */
-    protected String formatMessage(String msg){
+    protected String formatMessage(String msg) {
         String HORIZONTAL_LINE = "____________________________________________________________";
         String INDENTATION = "    ";
         String finalMsg = INDENTATION + HORIZONTAL_LINE + "\n";
