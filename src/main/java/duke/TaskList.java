@@ -3,18 +3,33 @@ package duke;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Creates TaskList objects and handles all task list operations.
+ */
 public class TaskList {
 
     private ArrayList<Task> taskList;
 
+    /**
+     * Converts the ArrayList of task strings to Task objects stored in the ArrayList of tasks.
+     * @param taskListStrings ArrayList of task strings taken from the disk file representing Task objects.
+     */
     public TaskList(ArrayList<String> taskListStrings) {
         this.taskList = convertToTasks(taskListStrings);
     }
+
 
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
 
+    /** Marks a task in the task list done.
+     * Updates the task as done in the disk using storage and prints appropriate messages using ui.
+     * @param num denotes the position of the task in the task list (if counting from 1).
+     * @param storage handles updating the specified task from the disk as done.
+     * @param ui handles interactions with user by printing the appropriate messages.
+     * @throws DukeException if number given is not within the total number of tasks or done command does not follow the format: done number.
+     */
     public void done(String num, Storage storage, Ui ui) throws DukeException {
 
         try {
@@ -30,6 +45,13 @@ public class TaskList {
         }
     }
 
+    /** Deletes a task from the task list.
+     * Deletes task from disk using storage and prints appropriate messages using ui.
+     * @param num denotes the position of the task in the task list (if counting from 1).
+     * @param storage handles deleting the specified task from the disk.
+     * @param ui handles interactions with user by printing the appropriate messages.
+     * @throws DukeException if number given is not within the total number of tasks or delete command does not follow the format: delete number.
+     */
     public void delete(String num, Storage storage, Ui ui) throws DukeException {
         try {
             int listNum = Integer.parseInt(num);
@@ -44,6 +66,12 @@ public class TaskList {
         }
     }
 
+    /** Creates a Todo task with the appropriate description.
+     * Stores task in disk using storage and prints appropriate messages using ui.
+     * @param description describes the nature of the Deadline task.
+     * @param storage handles storing the new task in the disk.
+     * @param ui handles interactions with user by printing the appropriate messages.
+     */
     public void todo(String description, Storage storage, Ui ui) {
         Task addedTask = new Todo(description);
         this.taskList.add(addedTask);
@@ -52,7 +80,13 @@ public class TaskList {
         ui.taskListSize(this.taskList.size());
     }
 
-
+    /** Creates a Deadline task with the appropriate description.
+     * Stores task in disk using storage and prints appropriate messages using ui.
+     * @param description describes the nature of the Deadline task.
+     * @param storage handles storing the new task in the disk.
+     * @param ui handles interactions with user by printing the appropriate messages.
+     * @throws DukeException if description contains incorrectly formatted date/time or does not follow the format: deadline task /by datetime
+     */
     public void deadline(String description, Storage storage, Ui ui) throws DukeException {
         try {
             String newDescription = description.substring(0, description.indexOf(" /by "));
@@ -71,6 +105,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Creates an Event task with the appropriate description.
+     * Stores task in disk using storage and prints appropriate messages using ui.
+     * @param description describes the nature of the Event task.
+     * @param storage handles storing the new task in the disk.
+     * @param ui handles interactions with user by printing the appropriate messages.
+     * @throws DukeException if description contains incorrectly formatted date/time or does not follow the format: event task /at datetime
+     */
     public void event(String description, Storage storage, Ui ui) throws DukeException {
         try {
             String newDescription = description.substring(0, description.indexOf(" /at "));
@@ -90,6 +132,11 @@ public class TaskList {
     }
 
 
+    /**
+     * Converts ArrayList of strings representing Task objects to ArrayList of Task objects.
+     * @param taskListStrings ArrayList of strings representing Task objects.
+     * @return ArrayList of Task objects
+     */
     private ArrayList<Task> convertToTasks(ArrayList<String> taskListStrings) {
         ArrayList<Task> tasks = new ArrayList<>();
 

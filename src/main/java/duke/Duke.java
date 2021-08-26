@@ -2,22 +2,36 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Handles receiving input from user and starting/stopping the program.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates Ui and Storage instances.
+     * Loads data from fisk into TaskList object to create list of tasks user currently has.
+     * @param filePath denotes the relative file path of where the tasks will be saved in the disk.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
 
+
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 
+
+    /**
+     * Continuously waits for input from user and executes the appropriate commands
+     * based on command type.
+     */
     public void run() {
         ui.greeting();
 
