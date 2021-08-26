@@ -86,6 +86,32 @@ public class TaskList {
     }
 
     /**
+     * Prints all the Tasks in the taskList that contain the specified keyword.
+     *
+     * @param keyword The keyword specified by the user to search for.
+     */
+    public void findTask(String keyword) {
+        boolean canFindMatch = false;
+        Ui.printLine();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            String currentTask = tasks.get(i).toString();
+            if (currentTask.substring(7).matches("(.*)" + keyword + "(.*)")) {
+                if (!canFindMatch) {
+                    canFindMatch = true;
+                    System.out.println("\tHere are the matching tasks in your list:");
+                }
+                System.out.println("\t" + (i + 1) + ". " + currentTask);
+            }
+        }
+
+        if (!canFindMatch) {
+            System.out.println("\tSorry!, I couldn't find any tasks with that keyword.");
+        }
+        Ui.printLine();
+    }
+
+    /**
      * Retrieves a specified Task from the TaskList.
      *
      * @param taskNumber The task number of the specified Task.

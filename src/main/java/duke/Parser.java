@@ -105,6 +105,12 @@ public class Parser {
                 System.out.println("\tOOPS!!! Please input a task number instead.");
             }
             break;
+        case "find":
+            if (commandDesc.equals("")) {
+                throw new DukeException("\tOOPS!!! The description of a event cannot be empty.");
+            }
+            this.tasks.findTask(commandDesc.toLowerCase());
+            break;
         case "bye":
             return 1;
         default:
