@@ -1,6 +1,8 @@
+package duke;
+
 import java.util.ArrayList;
 /**
- * Task that can be completed. Falls under three main cats, Event, Todo and deadline.
+ * duke.Task that can be completed. Falls under three main cats, duke.Event, duke.Todo and deadline.
  */
 public class Task {
 
@@ -10,7 +12,7 @@ public class Task {
     private static int numberOfTask = 0;
 
     /**
-     * Task type enum
+     * duke.Task type enum
      */
     public enum TaskType {
         TODO,

@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 
 /**
@@ -11,7 +13,7 @@ public class Command {
 
     /**
      * Constructor for packaged command made by parser
-     * @param taskType Task type
+     * @param taskType duke.Task type
      * @param listOfCommandInputs The entire input entered by the user
      * @param log The logged statement. Used to update log since there are keywords that are not supposed to
      *            appear in the log statement
@@ -24,7 +26,7 @@ public class Command {
 
     /**
      * Returns tasktype
-     * @return Task type. Made task type into an enum for ease
+     * @return duke.Task type. Made task type into an enum for ease
      */
     public Task.TaskType getTaskType() {
         return this.taskType;

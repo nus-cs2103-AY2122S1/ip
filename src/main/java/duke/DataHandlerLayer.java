@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.ArrayList;
 
 /**
@@ -26,7 +28,7 @@ public class DataHandlerLayer {
     /**
      * Adds the command to the log.
      *
-     * @param task Command to be added to the log
+     * @param task duke.Command to be added to the log
      */
     public static void addToLog(Task task) {
         log.add(task);
@@ -36,14 +38,14 @@ public class DataHandlerLayer {
      * Returns the task at the specific log postion
      *
      * @param position
-     * @return Task
+     * @return duke.Task
      */
     public static Task getTask(int position) {
         return log.get(position);
     }
 
     /**
-     * Prints log of tasks. No parameters needed. To change task representation, see Task.
+     * Prints log of tasks. No parameters needed. To change task representation, see duke.Task.
      */
     public static void printLog() {
         System.out.println("Here are your tasks summoner. Please do complete them as fast as possible. I have" +

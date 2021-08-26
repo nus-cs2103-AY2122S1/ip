@@ -1,20 +1,20 @@
-import java.text.SimpleDateFormat;
+package duke;
+
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
- * Parser that handles all the string manipulation. The users input is taken in as a string and passed to parser
+ * duke.Parser that handles all the string manipulation. The users input is taken in as a string and passed to parser
  * for packaging into a command.
  */
 public class Parser {
 
     /**
-     * Function that handles all the parsing of the Parser system
+     * Function that handles all the parsing of the duke.Parser system
      *
      * @param command Refers to the entire line of strings the user entered. The line is then process here
-     *                and packaged into Command. See Command for more.
+     *                and packaged into duke.Command. See duke.Command for more.
      * @return A packaged command for ease of access of infomation
      */
     public static Command parse(String command) throws InvalidCommandException {

@@ -1,9 +1,11 @@
+package duke;
+
 /**
- * Empty Command exception
+ * Empty duke.Command exception
  */
 public class EmptyCommandException extends InvalidCommandException {
     /**
-     * Overridden method from InvalidCommandException. Constructor
+     * Overridden method from duke.InvalidCommandException. Constructor
      */
     public EmptyCommandException() {
         super("Input is empty! Please enter something into the chat");

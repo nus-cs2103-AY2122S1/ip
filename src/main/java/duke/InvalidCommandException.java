@@ -1,7 +1,9 @@
+package duke;
+
 public class InvalidCommandException extends Exception {
 
     /**
-     * Constructor for Invalid Command Exception
+     * Constructor for Invalid duke.Command Exception
      */
     public InvalidCommandException() {
         super("Invalid command input. Please enter another input");

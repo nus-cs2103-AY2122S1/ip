@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Deadline class that extends tasks. Should come with a name for the task as well as a deadline for the task
  */

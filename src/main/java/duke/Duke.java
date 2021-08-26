@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Main file of the duke folder. Runs the while loop to keep the bot going
  */
@@ -11,7 +13,7 @@ public class Duke {
         isRunning = true;
         Logic.preload();
         while (true) {
-            String command = Scanner.scan();
+            String command = UI.scan();
             try {
                 Logic.checkIfSpecialComand(command);
             } catch (InvalidCommandException exception) {

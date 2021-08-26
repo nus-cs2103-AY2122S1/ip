@@ -1,10 +1,11 @@
-/**
- * Event class that extends task. Events should have a dead and time as well as a name
+package duke; /**
+ * duke.Event class that extends task. Events should have a dead and time as well as a name
  */
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
 
     private LocalDateTime dateTime;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
