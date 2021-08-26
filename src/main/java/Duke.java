@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * This class encapsulates a Duke chat-bot.
+ *
+ */
 public class Duke {
     private static final int lv = 7;
     private static final String[] features = {
@@ -19,7 +22,7 @@ public class Duke {
     };
     private static boolean canExit = false;
     private static final ArrayList<Task> taskArrayList = new ArrayList<>();
-    private static final String dukeFilePath = "data/duke.txt";
+    private static final String dukeFilePath = "./data/duke.txt";
 
     /**
      * This method takes an input string and formats it by including horizontal lines above
@@ -54,6 +57,33 @@ public class Duke {
     }
 
     /**
+     * This method copies the contents of the file from filePath into an output file.
+     *
+     * @param filePath the file path to the file from which to copy from
+     * @param target the target string to which to copy the contents of the file
+     * @throws IOException if filePath does not exist
+     */
+    private static void copyFileContents(String filePath, String target) throws IOException {
+        File f = new File(filePath); // create a File for the given file path
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        StringBuilder targetBuilder = new StringBuilder(target);
+        while (s.hasNext()) {
+            targetBuilder.append(s.nextLine());
+        }
+    }
+
+    /**
+     * This method parses the string copied from duke.txt and converts them into task objects
+     * into the taskArrayList/
+     *
+     * @param
+     * @param
+     */
+    private static void parse() {
+
+    }
+
+    /**
      * This method appends to the file instead of overwrites.
      *
      * @param filePath the path to the file to append to
@@ -67,7 +97,6 @@ public class Duke {
         fw.close();
     }
 
-
     public static void main(String[] args) throws IOException {
         // commented out logo
 //        String logo = " ____        _        \n"
@@ -79,6 +108,7 @@ public class Duke {
 
         // populating featuresCombined so each level has all elements of levels before it
         StringBuilder featuresCombined = new StringBuilder();
+        // copyFileContents(dukeFilePath, temp);
         for (int count = 0; count <= lv; count++) {
             featuresCombined.append(features[count]);
         }
@@ -112,8 +142,10 @@ public class Duke {
         while (!canExit) {
             String userInput = scanner.next();
             try {
-                if (userInput.equals("bye")) { // user inputs "bye, set canExit to true and Exit
+                if (userInput.equals("bye")) { // user inputs "bye", set canExit to true and Exit
                     canExit = true;
+                    String temp = sandwich(listBeautify(taskArrayList));
+                    appendToFile(dukeFilePath, temp); // append temp.toString() to dukeFile
                     System.out.println(sandwich(goodbye));
                 } else { // check first input
                     switch (userInput) {
@@ -159,7 +191,6 @@ public class Duke {
                                 + taskArrayList.size()
                                 + " item(s) in your task list."));
                         break;
-
                     case "deadline":
                         String[] deadlineTokens = scanner.nextLine().split("\\s*/by\\s*");
                         if (deadlineTokens.length == 0) {
