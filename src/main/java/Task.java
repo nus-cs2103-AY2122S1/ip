@@ -1,5 +1,9 @@
 package duke.task;
 
+/**
+ * Task is the abstract base class of all the Tasks.
+ */
+
 public abstract class Task {
     private int done;
     private String toDo;
@@ -13,6 +17,10 @@ public abstract class Task {
         this.toDo = toDo;
     }
 
+    /**
+     * Changes the done variable stored in Task to 1, representing a completed task.
+     */
+
     public void complete(){
         this.done = 1;
     }
@@ -24,6 +32,11 @@ public abstract class Task {
     String getDone() {
         return String.valueOf(done);
     }
+
+    /**
+     * returns a String in the format "Completion Status | Task"
+     * @return a String in the format "Completion Status | Task"
+     */
 
     public String getToWrite() {
         return  this.getDone() + " | "  + this.getToDo();

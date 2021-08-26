@@ -16,12 +16,27 @@ import duke.task.ToDo;
 import duke.task.Event;
 import duke.task.Deadline;
 
+/**
+ * Represents a storage which stores the Task List.
+ * The storage is read at when the bot starts up and written into when the bot is terminated.
+ */
+
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates a Storage Object containing the file path of where the user wishes to store the TaskList.
+     * @param filePath file path of Storage.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
+    /**
+     * Reads and loads the storage into an ArrayList of Tasks.
+     * @return ArrayList of tasks stored in the storage.
+     * @throws FileNotFoundException if file path does not exist.
+     */
 
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<Task>();
@@ -63,6 +78,12 @@ public class Storage {
         }
         return list;
     }
+
+    /**
+     * Writes the TaskList into a text file that is then stored in the file path.
+     * @param tasks TaskList of tasks to be written into the text file
+     * @throws IOException On Output Error.
+     */
 
     public void write(TaskList tasks) throws IOException {
         File toWrite = new File("../../../data");

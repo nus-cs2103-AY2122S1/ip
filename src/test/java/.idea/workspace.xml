@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="java:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="8423f16e-2284-4e78-b85a-1ee736eaa834" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../data/tasks.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../data/tasks.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../main/java/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/AddCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/Command.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/Deadline.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/DeleteCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/DeleteCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/DoneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/DoneCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/ExitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/FolderNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/FolderNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/IllegalCommandException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/IllegalCommandException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/IllegalTaskException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/IllegalTaskException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/ListCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/Storage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../main/java/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../main/java/duke/command/AddCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/duke/command/AddCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/TaskList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/ToDo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/ToDo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../main/java/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/Ui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/duke/ParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/duke/ParserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,12 +69,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../main" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15666667" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
-  <component name="RunManager" selected="JUnit.TaskListTest">
+  <component name="RunManager" selected="JAR Application.Duke.jar">
     <configuration name="ParserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test" />
       <option name="PACKAGE_NAME" value="duke" />
@@ -77,8 +99,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Duke.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/../../main/out/artifacts/java_jar/Duke.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="main1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="main1" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JAR Application.Duke.jar" />
         <item itemvalue="JUnit.TaskListTest" />
         <item itemvalue="JUnit.ParserTest" />
       </list>
@@ -94,5 +134,17 @@
       <updated>1629862335791</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
