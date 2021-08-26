@@ -4,6 +4,7 @@ public class Event extends Task{
 
     public Event(String description, String by) {
         super(description);
+        this.label = "E";
         this.by = by;
     }
 
