@@ -248,7 +248,7 @@
 
       I'm sorry, Master.
       What ... exactly do you want me to add
-      to your saber.task.Todo list?
+      to your Todo list?
 
       |                                     |
 {o)xxx|===============- * -===============|xxx(o}
@@ -259,7 +259,7 @@
       |                                     |
 
       Yes, Master.
-      I'll add the following to your saber.task.Todo list:
+      I'll add the following to your Todo list:
 
         [T][ ] Sleep
 
@@ -275,7 +275,7 @@
       |                                     |
 
       Yes, Master.
-      I'll add the following to your saber.task.Todo list:
+      I'll add the following to your Todo list:
 
         [T][ ] Watch lectures backlog
 
