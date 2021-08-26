@@ -1,9 +1,11 @@
 package duke;
 
+import javax.swing.text.DateFormatter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -81,7 +83,8 @@ public class Storage {
                     userInput.add(new Todo(splitString[2]));
                     break;
                 case "D":
-                    LocalDate date = LocalDate.parse(splitString[3]);
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy");
+                    LocalDate date = LocalDate.parse(splitString[3], df);
                     userInput.add(new Deadline(splitString[2], date));
                     break;
                 case "E":
@@ -89,7 +92,7 @@ public class Storage {
                     LocalDateTime dateTime = LocalDateTime.parse(splitString[3].trim(), dtf);
                     userInput.add(new Event(splitString[2], dateTime));
                     break;
-                    
+
                 }
 
                 if (splitString.length > 2 && splitString[1].equals("Y")) {
