@@ -1,16 +1,54 @@
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
+    private Ui ui;
+    private Parser parser;
+    private TaskList taskList;
 
-        Scanner sc = new Scanner(System.in);
-        DukeBot bot = new DukeBot(sc);
-        bot.start();
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    private void run() {
+        start();
+        runCommandLoopUntilExitCommand();
+        exit();
+    }
+
+    private void start() {
+        ui = new Ui();
+        parser = new Parser();
+        try {
+            taskList = new TaskList(Storage.load());
+        } catch (IOException e) {
+            ui.showLoadingError();
+            taskList = new TaskList();
+        }
+        ui.showWelcome();
+    }
+
+    private void runCommandLoopUntilExitCommand() {
+        Command command;
+        do {
+            String userCommandText = ui.getUserCommand();
+            ui.showHorizontalLine();
+            command = parser.parse(userCommandText);
+            command.setTaskList(taskList);
+            CommandResult result = command.execute();
+            ui.showResultToUser(result);
+            ui.showHorizontalLine();
+            ui.showBlankLine();
+        } while (!(command instanceof ExitCommand));
+    }
+
+    private void exit() {
+        try {
+            Storage.save(taskList.formatData());
+        } catch (IOException e) {
+            ui.showSavingError(e.getMessage());
+        }
+        ui.showGoodbye();
+        ui.close();
+        System.exit(0);
     }
 }

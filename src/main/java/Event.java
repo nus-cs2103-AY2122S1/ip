@@ -5,26 +5,18 @@ class Event extends Task {
     private LocalDateTime at;
     private LocalDateTime end;
 
-    public Event(String description, boolean isDone, String at) {
+    public Event(String description, boolean isDone, LocalDateTime at, LocalDateTime end) {
         super(description, isDone);
-        String[] tokens = at.split(" to ");
-        this.at = LocalDateTime.parse(tokens[0], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-        if (tokens.length > 1) {
-            end = LocalDateTime.parse(tokens[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-        }
+        this.at = at;
+        this.end = end;
     }
 
-    public Event(String description, String at) {
-        super(description);
-        String[] tokens = at.split(" to ");
-        this.at = LocalDateTime.parse(tokens[0], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-        if (tokens.length > 1) {
-            end = LocalDateTime.parse(tokens[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
-        }
+    public Event(String description, LocalDateTime at, LocalDateTime end) {
+        this(description, false, at, end);
     }
 
     public String formatForSave() {
-        return "E" + super.formatForSave() + " | " + at;
+        return "E" + super.formatForSave() + " | " + at + " | " + end;
     }
 
     @Override

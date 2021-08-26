@@ -1,23 +1,21 @@
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+// to divide into
+// encoder
+// decoder
 
 class Storage {
     private static final String FILE_NAME = "./duke.txt";
     private static final Path FILE_PATH = Paths.get(FILE_NAME);
 
     public static List<Task> load() throws IOException {
-//        File f = new File(FILE_NAME); // create a File for the given file path
-//        boolean isFileCreated = f.createNewFile();
-//        if (isFileCreated) {
-//            return "";
-//        }
         if (!Files.exists(FILE_PATH)) {
             Files.createFile(FILE_PATH);
         }
@@ -32,10 +30,15 @@ class Storage {
                 t = new ToDo(tokens[2], isDone);
                 break;
             case "D":
-                t = new Deadline(tokens[2], isDone, tokens[3]);
+                LocalDateTime by = LocalDateTime.parse(tokens[3]);
+                t = new Deadline(tokens[2], isDone, by);
                 break;
             case "E":
-                t = new Event(tokens[2], isDone, tokens[3]);
+                LocalDateTime at = LocalDateTime.parse(tokens[3]);
+                LocalDateTime end = tokens[4].equals("null")
+                        ? null
+                        : LocalDateTime.parse(tokens[4]);
+                t = new Event(tokens[2], isDone, at, end);
                 break;
             }
             tasks.add(t);
