@@ -14,7 +14,6 @@ public class Duke {
         String taskDdl = "deadline";
         String taskEve = "event";
         ArrayList<Task> inputs = new ArrayList<>();
-        int rand = 0;
 
         // Welcome message
         System.out.println(lineBreak
