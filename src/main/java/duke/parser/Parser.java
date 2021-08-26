@@ -1,13 +1,10 @@
-package Duke.Parser;
+package duke.parser;
 
-import Duke.Commands.*;
-import Duke.Commands.Command.CommandType;
-import Duke.Errors.DukeError;
-import Duke.Parser.Cleaner;
-import Duke.Task.*;
+import duke.commands.*;
+import duke.commands.Command.CommandType;
+import duke.task.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Parser {
 
@@ -67,22 +64,22 @@ public class Parser {
     }
 
     public static Command markDoneParser(String input) {
-        int index = Integer.valueOf(input.substring(5));
+        int index = Integer.parseInt(input.substring(5));
         return new EditCommand(CommandType.DONE, index);
     }
 
     public static Command markUndoParser(String input) {
-        int index = Integer.valueOf(input.substring(5));
+        int index = Integer.parseInt(input.substring(5));
         return new EditCommand(CommandType.UNDO, index);
     }
 
     public static Command deleteParser(String input) {
-        int index = Integer.valueOf(input.substring(7));
+        int index = Integer.parseInt(input.substring(7));
         return new EditCommand(CommandType.DELETE, index);
     }
 
     public static Command errorParser(String input) {
-        int code = Integer.valueOf(input.substring((6)));
+        int code = Integer.parseInt(input.substring((6)));
         return new ErrorCommand(code);
     }
 

@@ -1,6 +1,7 @@
-package Duke.Task;
+package duke.task;
 
-import Duke.Commands.Command.CommandType;
+import duke.commands.Command.CommandType;
+
 import java.util.ArrayList;
 
 public class TaskList {

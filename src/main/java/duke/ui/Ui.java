@@ -1,9 +1,9 @@
-package Duke.Ui;
+package duke.ui;
 
-import Duke.Commands.Command.CommandType;
-import Duke.Errors.DukeError;
-import Duke.Task.Task;
-import Duke.Task.TaskList;
+import duke.commands.Command.CommandType;
+import duke.errors.DukeError;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.util.ArrayList;
 import java.util.Scanner;

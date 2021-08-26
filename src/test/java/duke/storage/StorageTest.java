@@ -1,13 +1,13 @@
-package Duke.Storage;
+package duke.storage;
 
-import Duke.Task.Deadline;
-import Duke.Task.Task;
+import duke.task.Deadline;
+import duke.task.Task;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import Duke.Task.ToDo;
+import duke.task.ToDo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

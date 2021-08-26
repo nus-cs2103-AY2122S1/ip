@@ -1,12 +1,10 @@
-package Duke.Parser;
+package duke.parser;
 //The code below was referenced from https://stackoverflow.com/questions/23488721/how-to-check-if-string-matches-date-pattern-using-time-api
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.Date;
 
 public class CustomDateFormatter {
     public final String[] patternsWithTime = new String[] {
@@ -67,7 +65,6 @@ public class CustomDateFormatter {
         CustomDateFormatter temp = new CustomDateFormatter();
         LocalDateTime dateTime = temp.formatWithTime("10 Oct 2014 01:00");
         LocalDate date = temp.formatWithoutTime("12-12-2019");
-
     }
 }
 
