@@ -21,6 +21,7 @@ public class DeleteCommand extends Command {
             tasks.deleteTask(this.taskNumber - 1);
             ui.display("Gotchu mate. I've removed this task: \n" + "      " + taskDel + "\n    Now you have "
                     + tasks.length() + (tasks.length() <= 1 ? " task" : " tasks") + " in the list.");
+            storage.writeToFile(tasks.getAllTasks());
         } else {
             ui.display("This task does not exist! Please try again.");
         }

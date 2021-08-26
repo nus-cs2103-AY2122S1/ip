@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.InvalidCommand;
+import duke.command.*;
 
 /**
  * Parser class that encapsulates handling of user input.
@@ -39,6 +33,8 @@ public class Parser {
                     getTime(userInput),
                     "event"
             );
+        case "find":
+            return new FindCommand(getSearchQuery(userInput));
         case "done":
             return new DoneCommand(getTaskNumber(userInput));
         case "delete":
@@ -78,6 +74,10 @@ public class Parser {
 
     private static int getTaskNumber(String userInput) {
         return Integer.parseInt(userInput.split(" ")[1]);
+    }
+
+    private static String getSearchQuery(String userInput) {
+        return userInput.split("find ")[1];
     }
 
 }

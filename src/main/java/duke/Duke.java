@@ -35,8 +35,6 @@ public class Duke {
             isExit = cmd.isExit();
         }
 
-        this.storage.writeToFile(tasks.getAllTasks());
-
         ui.exit();
     }
 
