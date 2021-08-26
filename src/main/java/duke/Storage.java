@@ -24,19 +24,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.path = filePath;
-        /**try {
-            this.file = new File(filePath);
-            this.file.getParentFile().mkdirs();
-            this.file.createNewFile();
-        } catch (FileNotFoundException e){
-            System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("error!");
-        }*/
     }
-    /**public ArrayList<duke.tasks.Task> load() {
-
-    }*/
 
     /**
      * Loads the tasks on the hard drive into an ArrayList when the application restarts.
@@ -73,59 +61,6 @@ public class Storage {
         } finally {
             return list;
         }
-
-        /**File file = new File(filePath);
-        ArrayList<duke.tasks.Task> list = new ArrayList<>();
-        boolean hasDirectory = Files.exists(Paths.get("data"));
-        boolean hasFile = Files.exists(Paths.get("data/duke.txt"));
-        if(hasDirectory) {
-            if(hasFile) {
-                Scanner scanner = new Scanner("data/duke.txt");
-                while (scanner.hasNext()) {
-                    String s = scanner.nextLine();
-            /*System.out.println(s);
-            String[] st = s.split(" ");
-            for (int i = 0; i < st.length; i++) {
-                System.out.println(st[i]);
-            }*/
-                    /**try {
-                        if(s.split("/")[0].equals("T")) {
-                            duke.tasks.ToDo todo = new duke.tasks.ToDo(s.split("/")[2]);
-                            list.add(todo);
-                            if(s.split("/")[1].equals("1")) {
-                                todo.setDone();
-                            }
-                        } else if(s.split("/")[0].equals("D")) {
-                            duke.tasks.Deadline deadline = new duke.tasks.Deadline(s.split("/", 4)[2], s.split("/", 4)[3]);
-                            list.add(deadline);
-                            if(s.split("/")[1].equals("1")) {
-                                deadline.setDone();
-                            }
-                        } else {
-                            duke.tasks.Event event = new duke.tasks.Event(s.split("/")[2], s.split("/")[3]);
-                            list.add(event);
-                            if(s.split("/")[1].equals("1")) {
-                                event.setDone();
-                            }
-                        }
-                    } catch (duke.exceptions.DukeException1 e) {
-                        System.out.println("error!");
-                    }
-                }
-            } else {
-                File file = new File(path);
-            }
-        } else {
-            try {
-                File file = new File(path);
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            } catch(IOException e) {
-                System.out.println("error occurred!");
-            }
-
-        }return list*/
-
     }
 
     /**

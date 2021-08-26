@@ -56,12 +56,6 @@ public class Deadline extends Task {
     public LocalDate getDate() {
         String date = by.split(" ")[0];
         this.date = LocalDate.parse(date.split("/")[2] + "-"+ date.split("/")[1] + "-" + date.split("/")[0]);
-        /*if(date.split("/").length != 0) {
-            return LocalDate.parse()
-        } else {
-            return LocalDate.parse(date);
-        }*/
-
         return this.date;
     }
 
@@ -93,7 +87,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        //return "[D]" + super.toString() + " (by: " + by + ")";
         return "[D]" + super.toString() + "(by: " + getDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + " " + getTime().format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
     }

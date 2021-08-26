@@ -14,9 +14,6 @@ public abstract class Task {
      * @param description Description of what the task is about.
      */
     public Task(String description) {
-        /*if(description.equals("blah")) {
-            throw new duke.exceptions.DukeException1();
-        }*/
         this.description = description;
         this.isDone = false;
         this.order = 0;

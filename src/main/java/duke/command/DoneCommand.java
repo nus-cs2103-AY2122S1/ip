@@ -16,7 +16,6 @@ public class DoneCommand extends Command {
         tasks.getTask(count - 1).markAsDone();
         ui.respondToDone(tasks.getTasks(), count);
         storage.rewriteFile(tasks.getTasks());
-        //System.out.println("hi");;
     }
 
     @Override
