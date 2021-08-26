@@ -1,3 +1,9 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -46,29 +52,30 @@ public class Duke {
 
     public static class Deadline extends Task {
 
-        private final String deadline;
+        private final LocalDateTime deadline;
 
-        public Deadline(String name, String deadline) throws NoNameException {
+        public Deadline(String name, LocalDateTime deadline) throws NoNameException {
             super(name, "#Deadline");
             this.deadline = deadline;
         }
 
         public String toString() {
-            return super.toString() + " (" + deadline + ")";
+            return super.toString() + " (" + deadline.toString().replace('T', ' ') + ")";
         }
     }
 
     public static class Event extends Task {
 
-        private final String time;
+        //private final LocalDate date;
+        private final LocalDateTime when;
 
-        public Event(String name, String time) throws NoNameException {
+        public Event(String name, LocalDateTime when) throws NoNameException {
             super(name, "#Event");
-            this.time = time;
+            this.when = when;
         }
 
         public String toString() {
-            return super.toString() + " (" + time + ")";
+            return super.toString() + " (" + when.toString().replace('T', ' ') + ")";
         }
     }
 
@@ -195,26 +202,33 @@ public class Duke {
     private static void addDeadline(String input) throws NoTimeSpecifiedException, NoNameException {
         try {
             Deadline newDeadline = new Deadline(input.substring(9).split(" /")[0],
-                    input.substring(9).split(" /")[1]);
+                    LocalDateTime.parse(input.substring(9).split(" /")[1],
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
             tasks.add(newDeadline);
             System.out.println("Duke says: I've added the task: ");
             System.out.println("     " + newDeadline.toString());
             System.out.println("You now have " + tasks.size() + " tasks, jiayouz!");
         } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
             throw new NoTimeSpecifiedException("Duke says: Please include a deadline");
+        } catch (DateTimeParseException e) {
+            System.out.println("Duke says: Please use the format YYYY-MM-DD HH:MM when entering deadline \n " +
+                    "E.g. 2021-08-28T18:30");
         }
     }
 
     private static void addEvent(String input) throws NoTimeSpecifiedException, NoNameException {
         try {
             Event newEvent = new Event(input.substring(6).split(" /")[0],
-                    input.substring(6).split(" /")[1]);
+                    LocalDateTime.parse(input.substring(6).split(" /")[1]));
             tasks.add(newEvent);
             System.out.println("Duke says: I've added the task: ");
             System.out.println("     " + newEvent.toString());
             System.out.println("You now have " + tasks.size() + " tasks, jiayouz!");
         } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
             throw new NoTimeSpecifiedException("Duke says: Please include a time");
+        } catch (DateTimeParseException e) {
+            System.out.println("Duke says: Please use the format <YYYY-MM-DD>T<HH:MM> when entering when the event is \n " +
+                    "E.g. 2021-08-28T18:30");
         }
     }
 
