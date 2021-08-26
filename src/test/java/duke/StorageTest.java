@@ -30,7 +30,7 @@ public class StorageTest {
     }
 
     @Test
-    public void readAndWriteFile() {
+    public void readAndWriteFile() throws DukeException, FileNotFoundException {
         Storage storage = new Storage("test.txt");
         ArrayList<Task> taskList = new ArrayList<>();
         storage.writeToFile(taskList);

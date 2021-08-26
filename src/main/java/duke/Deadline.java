@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task with a deadline.
+ */
 public class Deadline extends Task {
 
     protected String deadline;
@@ -31,6 +34,12 @@ public class Deadline extends Task {
         this.deadlineTime = setDeadlineTime(deadline);
     }
 
+    /**
+     * Returns the deadline of the Deadline object.
+     *
+     * @return The deadline of the Deadline object. If the original deadline
+     * is given in a YYYY-MM-DD format, the deadline will be returned in a MMM d yyyy format.
+     */
     public String getDeadline() {
         if (deadlineTime == null) {
             return this.deadline;
@@ -39,26 +48,40 @@ public class Deadline extends Task {
         }
     }
 
-    public LocalDate setDeadlineTime(String deadline) {
+    private LocalDate setDeadlineTime(String deadline) {
         try {
             LocalDate date = LocalDate.parse(deadline);
             return date;
         } catch (DateTimeParseException e) {
-            System.out.println("Wrong format of deadline. Deadline must be in the format of YYYY-MM-DD.");
             return null;
         }
     }
 
+    /**
+     * Returns the Deadline in a string format suitable for storing in file.
+     *
+     * @return String of the Deadline object in the correct format for storing in file.
+     */
     @Override
     public String saveTaskToFile() {
         return typeOfTask() + "||" + getStatusIcon() + "||" + this.getDescription() + "||" + this.getDeadline();
     }
 
+    /**
+     * Returns the type of task. Always return "D" which stands of the "D" in DeadLine.
+     *
+     * @return "D".
+     */
     @Override
     public String typeOfTask() {
         return "D";
     }
 
+    /**
+     * Returns the Deadline object in a string format.
+     *
+      * @return String in the format of "[D][marked as done?]_deadlineDescription_(by:_deadline)."
+     */
     @Override
     public String toString() {
         return String.format("[%s][%s] %s (by: %s)", this.typeOfTask(),

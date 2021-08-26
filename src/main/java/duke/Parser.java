@@ -1,7 +1,16 @@
 package duke;
 
+/**
+ * Parses different strings and acts as a helper for other classes.
+ */
 public class Parser {
 
+    /**
+     * Returns the type of command given a command from a user.
+     *
+     * @param str The original command from the user.
+     * @return Type of command.
+     */
     public String parseCommand(String str) {
         if (str.equals("bye")) {
             return "bye";
@@ -20,15 +29,22 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the correct Task object given a command to add a task from the user.
+     *
+     * @param str A command to add a task.
+     * @return A Task object that should be added to the user's TaskList.
+     * @throws DukeException If the format of the add task command is incorrect.
+     */
     public Task parseAddTask(String str) throws DukeException{
         if (str.startsWith("todo")) {
-            //todo format: todo_description
+            //checks if str follows the todo format: todo_description
             if ((str.charAt(4) != ' ') || str.length() < 6) {
                 throw new DukeException("The description of todo cannot be empty");
             }
             return new ToDo(str.substring(5));
         } else if (str.startsWith("event")) {
-            //event format: event_description_/at_time
+            //checks if str follows the event format: event_description_/at_time
             if (str.charAt(5) != ' ' || str.length() < 12) {
                 throw new DukeException("Wrong input for adding an event-task.");
             }
@@ -40,7 +56,7 @@ public class Parser {
             String time = str.substring(index + 4);
             return new Event(description, time);
         } else {
-            //deadline format: deadline_description_/by_time
+            //checks if str follows the deadline format: deadline_description_/by_time
             if (str.charAt(8) != ' ' || str.length() < 15) {
                 throw new DukeException("Wrong input for adding a deadline-task.");
             }
@@ -54,20 +70,48 @@ public class Parser {
         }
     }
 
-    public String parseDoneCommand(String str) throws DukeException {
-        int index = str.indexOf(" ");
-        if (index == -1 || str.length() < 6) {
-            throw new DukeException("Wrong input for marking task as done.");
+    /**
+     * Returns the task number of the task that should be marked as done given a command
+     * to mark a task as done from the user.
+     *
+     * @param str A command to mark a task as done.
+     * @return The task number of the task that should be marked as done.
+     * @throws DukeException If the format of the mark task as done command is incorrect.
+     */
+    public int parseDoneCommand(String str) throws DukeException {
+        try {
+            int index = str.indexOf(" ");
+            if (index == -1 || str.length() < 6) {
+                //check if str follows the mark as done command format: done_taskNumber
+                throw new DukeException("Wrong input for marking task as done.");
+            }
+            int taskNumber = Integer.parseInt(str.substring(index + 1));
+            return taskNumber;
+        } catch  (NumberFormatException ex) {
+           throw new DukeException("Task must be an integer!");
         }
-        return str.substring(index + 1);
     }
 
-    public String parseDeleteCommand(String str) throws DukeException {
-        int index = str.indexOf(" ");
-        if (index == -1 || str.length() < 8) {
-            throw new DukeException("Wrong input for deleting task.");
+    /**
+     * Returns the task number of the task that should be deleted given a command
+     * to delete a task from the user.
+     *
+     * @param str A command to delete a task.
+     * @return The task number of the task that should be deleted.
+     * @throws DukeException If the format of the delete command is incorrect.
+     */
+    public int parseDeleteCommand(String str) throws DukeException {
+        try {
+            int index = str.indexOf(" ");
+            if (index == -1 || str.length() < 8) {
+                //check if str follows the delete command format: delete_taskNumber
+                throw new DukeException("Wrong input for deleting task.");
+            }
+            int taskNumber = Integer.parseInt(str.substring(index + 1));
+            return taskNumber;
+        } catch  (NumberFormatException ex) {
+            throw new DukeException("Task must be an integer!");
         }
-        return str.substring(index + 1);
     }
 
 }
