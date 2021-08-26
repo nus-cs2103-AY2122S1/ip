@@ -33,6 +33,8 @@ public class Ui {
     private final String UNRECOGNISED_MESSAGE = "☹ I'm sorry boss! I'm not quite sure what you need me to do!";
     /** The standard list message Duke will print as it lists all the task. */
     private final String LIST_MESSAGE = "Here are the tasks in your list:";
+    /** The standard find message Duke will print as it finds all the matching tasks. */
+    private final String FIND_MESSAGE = "Here are the matching tasks in your list:";
 
 
     /** The scanner utilised to read inputs from the user. */
@@ -117,6 +119,24 @@ public class Ui {
         for (int i = 0; i < currPosition; i++) {
             int currTask = i + 1;
             System.out.println(currTask + "." + allTasks.get(i).toString());
+        }
+    }
+
+    /**
+     * Prints the full list of tasks that matches the description.
+     * @param taskList The tasklist to be searched in.
+     * @param description The keyword to be searched.
+     */
+    public void showFind(TaskList taskList, String description) {
+        int findPosition = 1;
+        int currPosition = taskList.getNextSpaceToStore();
+        System.out.println(FIND_MESSAGE);
+        for (int i = 0; i < currPosition; i++) {
+            String foundTask = taskList.getAllTasks().get(i).toString();
+            if (foundTask.contains(description)) {
+                System.out.println(findPosition + "." + foundTask);
+                findPosition++;
+            }
         }
     }
 
