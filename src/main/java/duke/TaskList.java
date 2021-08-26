@@ -1,8 +1,9 @@
 package duke;
 
-import duke.task.Task;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import duke.task.Task;
 
 public class TaskList {
     private List<Task> tasks;
@@ -18,7 +19,7 @@ public class TaskList {
     public Task removeTask(int index) {
         return this.tasks.remove(index);
     }
-    
+
     public Task getTask(int index) {
         return this.tasks.get(index);
     }
