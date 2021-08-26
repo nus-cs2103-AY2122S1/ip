@@ -70,7 +70,7 @@ public class Ui {
      * @param taskListLength The length of the task list, after adding the task.
      */
     public void printTaskAdded(Task task, int taskListLength) {
-        System.out.println("-> Where's My Treat? I Added: \n\t" + task);
+        System.out.println("-> Where's My Treat? I Added:\n\t" + task);
         // Add Task Size here.
         System.out.println("\nYou Owe Me " + taskListLength + " Treat(s), Master!");
     }

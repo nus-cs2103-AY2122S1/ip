@@ -1,4 +1,4 @@
-________________________________________
+_______________________________________________
 Hello, I am Retriever
 How Can I Help You Today?
   __      ^
@@ -6,100 +6,67 @@ o'')}____//
  `_'      )
 (_(_/-(_/
 
-________________________________________
+_______________________________________________
 Woof! Command Not Found! Can I Sleep?
-________________________________________
--> Where's My Treat? I Added: 
+_______________________________________________
+-> Where's My Treat? I Added:
 	[T][ ] fix bugs
 
 You Owe Me 1 Treat(s), Master!
-________________________________________
--> Where's My Treat? I Added: 
-	[D][ ] CS2103T week 1 ip (by: 19th Aug)
-
-You Owe Me 2 Treat(s), Master!
-________________________________________
--> Where's My Treat? I Added: 
-	[E][ ] Apple WWDC 2021 (at: 11PM)
-
-You Owe Me 3 Treat(s), Master!
-________________________________________
+_______________________________________________
+Please Follow The Date Format DD/MM/YYYY
+_______________________________________________
+Please Follow The Date Format DD/MM/YYYY
+_______________________________________________
 -> Your Tasks, My Master:
 	1. [T][ ] fix bugs
-	2. [D][ ] CS2103T week 1 ip (by: 19th Aug)
-	3. [E][ ] Apple WWDC 2021 (at: 11PM)
-________________________________________
+_______________________________________________
 Woof! Whose a Good Boy?
 Task Done!
 	[T][X] fix bugs
-________________________________________
-Woof! Whose a Good Boy?
-Task Done!
-	[E][X] Apple WWDC 2021 (at: 11PM)
-________________________________________
--> Where's My Treat? I Added: 
-	[E][ ] attend CS2100 lecture (at: 4PM)
-
-You Owe Me 4 Treat(s), Master!
-________________________________________
-Woof! Whose a Good Boy?
-Task Done!
-	[E][X] attend CS2100 lecture (at: 4PM)
-________________________________________
+_______________________________________________
+Sorry! The Task Number Entered Does Not Exist!
+_______________________________________________
+Please Follow The Date Format DD/MM/YYYY
+_______________________________________________
+Sorry! The Task Number Entered Does Not Exist!
+_______________________________________________
 -> Your Tasks, My Master:
 	1. [T][X] fix bugs
-	2. [D][ ] CS2103T week 1 ip (by: 19th Aug)
-	3. [E][X] Apple WWDC 2021 (at: 11PM)
-	4. [E][X] attend CS2100 lecture (at: 4PM)
-________________________________________
-Woof! Whose a Good Boy?
-Task Done!
-	[D][X] CS2103T week 1 ip (by: 19th Aug)
-________________________________________
--> Where's My Treat? I Added: 
-	[E][ ] ST2334 tut (at: 1PM)
-
-You Owe Me 5 Treat(s), Master!
-________________________________________
-Please Follow The Format For Adding An Event Task: 
+_______________________________________________
+Sorry! The Task Number Entered Does Not Exist!
+_______________________________________________
+Please Follow The Date Format DD/MM/YYYY
+_______________________________________________
+Please Follow The Format For Adding An Event Task:
 	event task_description /at time
-________________________________________
--> Where's My Treat? I Added: 
+_______________________________________________
+-> Where's My Treat? I Added:
 	[T][ ] code
 
-You Owe Me 6 Treat(s), Master!
-________________________________________
-Please Follow The Format For Adding A Deadline Task: 
-	deadline task_description /by date
-________________________________________
-Please Follow The Format For Adding A Todo Task: 
+You Owe Me 2 Treat(s), Master!
+_______________________________________________
+Please Follow The Format For Adding A Deadline Task:
+	deadline task_description /by DD/MM/YYYY
+_______________________________________________
+Please Follow The Format For Adding A Todo Task:
 	todo task_description
-________________________________________
+_______________________________________________
 Please Enter An Integer Value For Task Number
-________________________________________
-Woof! Whose a Good Boy?
-Task Done!
-	[T][X] code
-________________________________________
--> Where's My Treat? I Added: 
+_______________________________________________
+Sorry! The Task Number Entered Does Not Exist!
+_______________________________________________
+-> Where's My Treat? I Added:
 	[T][ ] clean room
 
-You Owe Me 7 Treat(s), Master!
-________________________________________
--> Where's My Treat? I Added: 
-	[E][ ] Watch Netflix (at: 12AM)
-
-You Owe Me 8 Treat(s), Master!
-________________________________________
-Woof! Whose a Bad Boy?
-Task Deleted!
-	[E][ ] Watch Netflix (at: 12AM)
-You Owe Me 7 Treat(s), Master!
-________________________________________
-Woof! Whose a Good Boy?
-Task Done!
-	[T][X] clean room
-________________________________________
-________________________________________
+You Owe Me 3 Treat(s), Master!
+_______________________________________________
+Please Follow The Date Format DD/MM/YYYY
+_______________________________________________
+Sorry! The Task Number Entered Does Not Exist!
+_______________________________________________
+Sorry! The Task Number Entered Does Not Exist!
+_______________________________________________
+_______________________________________________
 -> Sad To See You Go!
-________________________________________
+_______________________________________________

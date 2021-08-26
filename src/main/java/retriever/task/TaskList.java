@@ -37,7 +37,7 @@ public class TaskList {
         if(!userInput.toLowerCase().contains("/by")
                 || userInput.split(" ").length < 4
                 || userInput.substring(9).split(" /by ").length < 2) {
-            throw new IllegalDeadlineFormatException("Please Follow The Format For Adding A Deadline Task: \n"
+            throw new IllegalDeadlineFormatException("Please Follow The Format For Adding A Deadline Task:\n"
                     + "\tdeadline task_description /by DD/MM/YYYY");
         }
 
@@ -68,7 +68,7 @@ public class TaskList {
         if(!userInput.toLowerCase().contains("/at")
                 || userInput.split(" ").length < 4
                 || userInput.substring(5).split(" /at ").length < 2) {
-            throw new IllegalEventFormatException("Please Follow The Format For Adding An Event Task: \n"
+            throw new IllegalEventFormatException("Please Follow The Format For Adding An Event Task:\n"
                     + "\tevent task_description /at time");
         }
 
@@ -97,7 +97,7 @@ public class TaskList {
         // Making sure that a properly formatted todo task is entered.
         if(userInput.split(" ").length < 2
                 || userInput.substring(5).compareTo("") == 0) {
-            throw new IllegalTodoFormatException("Please Follow The Format For Adding A Todo Task: \n"
+            throw new IllegalTodoFormatException("Please Follow The Format For Adding A Todo Task:\n"
                     + "\ttodo task_description");
         }
 
