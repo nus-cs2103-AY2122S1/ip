@@ -33,6 +33,11 @@ public class Event extends Task {
     }
 
     @Override
+    public Task markAsDone() {
+        return new Event(this.taskName, true, this.date, this.startTime, this.endTime);
+    }
+
+    @Override
     public boolean hasSameDate(LocalDate date) {
         return this.date.equals(date);
     }

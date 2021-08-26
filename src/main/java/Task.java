@@ -2,8 +2,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Task {
-    private final String taskName;
-    private boolean isDone;
+    protected final String taskName;
+    protected boolean isDone;
 
     public Task(String taskName) {
         this.taskName = taskName;
@@ -15,8 +15,8 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public void markAsDone() {
-        this.isDone = true;
+    public Task markAsDone() {
+        return new Task(this.taskName, true);
     }
 
     public String toSaveData() {
