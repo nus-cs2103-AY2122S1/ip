@@ -4,12 +4,20 @@ import java.util.Scanner;
 
 import java.io.IOException;
 
+/**
+ * Lawbringer is a chat bot that help users to manage their to-dos, deadlines and events.
+ */
 public class Lawbringer {
 
     private final Storage storage;
     private final Ui ui;
     private TaskList taskList;
 
+    /**
+     * The constructor for Lawbringer.
+     *
+     * @param filePath The file path of the .txt file to read from.
+     */
     public Lawbringer(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
@@ -25,6 +33,9 @@ public class Lawbringer {
         new Lawbringer("src/main/java/data/Lawbringer.txt").run();
     }
 
+    /**
+     * Runs the bot.
+     */
     public void run() {
         ui.showWelcomeMessage();
         Scanner scanner = new Scanner(System.in);

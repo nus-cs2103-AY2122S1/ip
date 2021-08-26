@@ -2,8 +2,20 @@ package lawbringer;
 
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser parses the user input into a command and executes it.
+ */
 public class Parser {
 
+    /**
+     * This method parses the user input into a command and calls the appropriate method
+     * in taskList to execute the command.
+     *
+     * @param userInput The input of the user.
+     * @param taskList  The class that contains a list of tasks.
+     * @param ui        Ui class to print messages.
+     * @throws LawbringerException Throws this exception if the user inputs an invalid command.
+     */
     protected static void parse(String userInput, TaskList taskList, Ui ui) throws LawbringerException {
         String commandType = userInput.split(" ")[0];
         try {

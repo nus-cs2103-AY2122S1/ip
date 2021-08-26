@@ -8,13 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage handles the .txt file that stores the user's tasks.
+ */
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor for this class.
+     *
+     * @param filePath The file path to the .txt file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Rewrites the .txt file to save the tasks when the user exits the bot.
+     *
+     * @param taskList The class that contains the list of tasks.
+     * @throws IOException Throws an exception if the I/O operations failed or are interrupted.
+     */
     protected void rewriteFile(TaskList taskList) throws IOException {
         StringBuilder newFileText = new StringBuilder();
         for (Task task : taskList.getList()) {
@@ -25,6 +39,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Reads from the .txt file and returns a list of user tasks.
+     *
+     * @return List of tasks
+     * @throws IOException Throws an exception if the I/O operations failed or are interrupted.
+     */
     protected List<Task> createTaskList() throws IOException {
         List<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
