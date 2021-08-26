@@ -11,10 +11,10 @@ public class Ui {
      */
     public void greetUser() {
         String LOGO = " ____        _        \n"
-                                     + "|  _ \\ _   _| | _____ \n"
-                                     + "| | | | | | | |/ / _ \\\n"
-                                     + "| |_| | |_| |   <  __/\n"
-                                     + "|____/ \\__,_|_|\\_\\___|\n";
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
         String GREETING = "Greetings friend! I am your personal assistant,\n" 
                             + LOGO 
                             + "\nWhat can I do for you?\n";
