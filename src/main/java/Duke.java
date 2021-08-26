@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,6 +18,7 @@ public class Duke {
 
     private static Storage taskStorage;
     private static TaskList tasks = new TaskList();
+    private static final DateTimeParser dateTimeParser = new DateTimeParser();
 
     private static void greet() {
         System.out.println(GREETING_MSG);
@@ -27,8 +29,7 @@ public class Duke {
     }
 
 
-    private static void addTodo(String description) throws IOException {
-        Task taskToAdd = new Todo(description);
+    private static void addTodo(Todo taskToAdd) throws IOException {
         System.out.printf(
                 ADD_TASK_MSG_TEMPLATE,
                 tasks.addTask(taskToAdd), 
@@ -38,8 +39,7 @@ public class Duke {
         taskStorage.backup(tasks);
     }
 
-    private static void addDeadline(String description, String by) throws IOException {
-        Task taskToAdd = new Deadline(description, by);
+    private static void addDeadline(Deadline taskToAdd) throws IOException {
         System.out.printf(
                 ADD_TASK_MSG_TEMPLATE,
                 tasks.addTask(taskToAdd),
@@ -49,8 +49,7 @@ public class Duke {
         taskStorage.backup(tasks);
     }
 
-    private static void addEvent(String description, String at) throws IOException {
-        Task taskToAdd = new Event(description, at);
+    private static void addEvent(Event taskToAdd) throws IOException {
         System.out.printf(
                 ADD_TASK_MSG_TEMPLATE,
                 tasks.addTask(taskToAdd),
@@ -89,13 +88,24 @@ public class Duke {
         } else if (cmd.matches("^event[ \\t]*$")) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         } else if (cmd.matches("^todo[ \\t]+.+$")) {
-            addTodo(cmd.split("[ \\t]+", 2)[1]);
+            addTodo(new Todo(cmd.split("[ \\t]+", 2)[1]));
         } else if (cmd.matches("^deadline[ \\t]+.+[ \\t]+/by[ \\t]+.+$")) {
             String[] bySplit = cmd.split("[ \\t]+/by[ \\t]+", 2);
-            addDeadline(bySplit[0].split("^deadline[ \\t]+")[1], bySplit[1]);
+            LocalDate byDate = dateTimeParser.parse(bySplit[1].trim());
+            System.out.println(bySplit[1]);
+            if (byDate == null) {
+                addDeadline(new Deadline(bySplit[0].split("^deadline[ \\t]+")[1], bySplit[1]));
+            } else {
+                addDeadline(new Deadline(bySplit[0].split("^deadline[ \\t]+")[1], byDate));
+            }
         } else if (cmd.matches("^event[ \\t]+.+[ \\t]+/at[ \\t]+.+$")) {
             String[] atSplit = cmd.split("[ \\t]+/at[ \\t]+", 2);
-            addEvent(atSplit[0].split("^event[ \\t]+")[1], atSplit[1]);
+            LocalDate atDate = dateTimeParser.parse(atSplit[1].trim());
+            if (atDate == null) {
+                addEvent(new Event(atSplit[0].split("^event[ \\t]+")[1], atSplit[1]));
+            } else {
+                addEvent(new Event(atSplit[0].split("^event[ \\t]+")[1], atDate));
+            }
         } else if (cmd.matches("^list[ \\t]*$")) {
             listTasks();
         } else if (cmd.matches("^done[ \\t]+[0-9]+$")) {
