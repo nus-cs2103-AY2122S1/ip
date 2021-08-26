@@ -84,7 +84,7 @@ public class Duke {
                 String firstCommand = commandInput.split("/by", 2)[0];
                 String taskname = firstCommand.split(" ", 2)[1];
                 String dueDate = commandInput.split("/by", 2)[1];
-                Deadline deadline = new Deadline(taskname.trim(), dueDate);
+                Deadline deadline = new Deadline(taskname.trim(), dueDate.trim());
                 taskList.add(deadline);
                 System.out.println("A Deadline has been added\n");
                 System.out.println("Current List:");
@@ -107,7 +107,7 @@ public class Duke {
                 String firstCommand = commandInput.split("/at", 2)[0];
                 String taskname = firstCommand.split(" ", 2)[1];
                 String duration = commandInput.split("/at", 2)[1];
-                Event event = new Event(taskname.trim(), duration);
+                Event event = new Event(taskname.trim(), duration.trim());
                 taskList.add(event);
                 System.out.println("An Event has been added\n");
                 System.out.println("Current List:");
