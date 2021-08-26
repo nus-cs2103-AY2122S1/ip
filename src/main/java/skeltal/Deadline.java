@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private String time;
 
-    public Deadline(String rawTime) throws SkeltalException{
+    public Deadline(String rawTime) throws SkeltalException {
         super(rawTime.split("/", 2)[0]);
         String[] procTime = rawTime.split("/", 2);
         if (procTime.length == 1) {

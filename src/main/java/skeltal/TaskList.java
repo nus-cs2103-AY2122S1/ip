@@ -2,6 +2,7 @@ package skeltal;
 import java.util.ArrayList;
 
 public class TaskList {
+
     private static ArrayList<Task> tasks = new ArrayList<>();
     public static void addReply(Task assignment) {
         tasks.add(assignment);
@@ -47,3 +48,4 @@ public class TaskList {
         return toWrite;
     }
 }
+
