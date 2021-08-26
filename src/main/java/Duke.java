@@ -64,7 +64,7 @@ public class Duke {
                     int endingIndex = message.indexOf("/");
                     String taskName = message.substring(startingIndex + 1, endingIndex - 1);
 
-                    //todo deadline return book being invalid input rather than invalid date
+                    //todo deadline return book being invalid input rather than invalid date.
 
                     return new Deadline(taskName, deadline);
                 }
