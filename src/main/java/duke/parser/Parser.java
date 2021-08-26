@@ -89,12 +89,11 @@ public class Parser {
         if (taskDescription.isBlank() || spaceIndex == -1) {
             throw new NoTaskDescriptionException();
         }
-
-        switch (t){
+        switch (t) {
         case DEADLINE:
             try {
                 String deadlineDescription = taskDescription.substring(0, taskDescription.indexOf("/by") - 1);
-                if (deadlineDescription.isBlank()){
+                if (deadlineDescription.isBlank()) {
                     throw new NoTaskDescriptionException();
                 }
                 try {
@@ -104,15 +103,15 @@ public class Parser {
                 } catch (DateTimeParseException e) {
                     throw new InvalidDateTimeException();
                 }
-            } catch (StringIndexOutOfBoundsException e){
+            } catch (StringIndexOutOfBoundsException e) {
                 throw new NoTaskDescriptionException();
             }
 
 
         case EVENT:
-            try{
+            try {
                 String eventDescription = taskDescription.substring(0, taskDescription.indexOf("/at") - 1);
-                if (eventDescription.isBlank()){
+                if (eventDescription.isBlank()) {
                     throw new NoTaskDescriptionException();
                 }
                 try {
@@ -122,7 +121,7 @@ public class Parser {
                 } catch (DateTimeParseException e) {
                     throw new InvalidDateTimeException();
                 }
-            } catch (StringIndexOutOfBoundsException e){
+            } catch (StringIndexOutOfBoundsException e) {
                 throw new NoTaskDescriptionException();
             }
 
