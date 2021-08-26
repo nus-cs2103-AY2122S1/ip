@@ -9,11 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileIO {
+public class Storage {
 
-    public static String FILEPATH = "data/duke.txt";
+    private final String FILEPATH;
 
-    public ArrayList<String> loadTaskStrings() {
+    public Storage(String filePath) {
+        this.FILEPATH = filePath;
+    }
+
+    public ArrayList<String> load() {
 
         ArrayList<String> taskStrings = new ArrayList<>();
         File file = new File(FILEPATH);
@@ -24,7 +28,7 @@ public class FileIO {
                 }
                 file.createNewFile();
             } else {
-                Scanner s = new Scanner(file); // create a Scanner using the File as the source
+                Scanner s = new Scanner(file);
                 while (s.hasNext()) {
                     taskStrings.add(s.nextLine());
                 }

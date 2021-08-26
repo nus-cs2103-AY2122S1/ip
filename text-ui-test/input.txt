@@ -12,6 +12,8 @@ deadline
 event
 delete
 done
+delete 2
+done 2
 invalidcommand
 deadline return book /by 6-6-2021 1600
 deadline asdfgh
