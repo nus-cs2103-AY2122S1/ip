@@ -57,6 +57,9 @@ class TaskList {
             case "delete":
                 deleteTask(input);
                 break;
+            case "find":
+                findTask(input);
+                break;
             default:
                 throw new InvalidCommandException(input);
             }
@@ -254,6 +257,41 @@ class TaskList {
                     + e
                     + SEPARATOR);
         }
+    }
+
+    /**
+     * Find tasks with the corresponding keywords in the TaskList.
+     *
+     * @param input The user input that includes the "find" command and keyword(s) that the user
+     *              wants to search for within the tasks in TaskList
+     */
+    public void findTask(String input) {
+        ArrayList<Task> filtered = new ArrayList<>();
+
+        String[] arr = input.split(" ", 2);
+
+        for (Task t : tasks) {
+            if (t.toString().contains(arr[1])) {
+                filtered.add(t);
+            }
+        }
+
+        System.out.println(SEPARATOR);
+
+        if (filtered.size() == 0) {
+            System.out.println("There are no matching tasks in your list. ☹");
+        } else {
+            System.out.println("Here are the matching tasks in your list!");
+
+            int n = 1;
+            for (Task t : filtered) {
+                System.out.println((n) + ". " + t);
+
+                n++;
+            }
+        }
+
+        System.out.println(SEPARATOR);
     }
 
     /**
