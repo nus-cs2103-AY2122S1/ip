@@ -1,5 +1,6 @@
 todo watch a movie
 todo water plants
+todo read novel
 deadline read book /by 2021-12-31
 deadline return book /by 2022-01-01
 event watch movie /at 2021-12-31 2000
@@ -12,6 +13,9 @@ tasks_on 2021-12-31
 tasks_on 2022-01-01
 delete 5
 delete 2
+find novel
+find book
+find tree
 list
 bye
 

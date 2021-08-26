@@ -28,6 +28,8 @@ public class Parser {
                 return parseDelete(input, taskList);
             case "TASKS_ON":
                 return parseTasksOn(input, taskList);
+            case "FIND":
+                return parseFind(input, taskList);
             case "TODO":
             case "DEADLINE":
             case "EVENT":
@@ -35,6 +37,16 @@ public class Parser {
             default:
                 throw new InvalidKeywordException();
 
+        }
+    }
+
+    private static FindCommand parseFind(String input, TaskList taskList) {
+        try {
+            String[] parsedString = input.split("\\s", 2);
+            String word = parsedString[1].trim();
+            return new FindCommand(word);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            throw new EmptyDescriptionException("Please enter a word to search the list");
         }
     }
 

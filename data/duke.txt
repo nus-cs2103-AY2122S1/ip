@@ -1,0 +1,7 @@
+T | 0 | read book
+T | 0 | return novel
+T | 0 | borrow book
+T | 0 | something
+D | 0 | do something | Dec 22 2022
+E | 0 | to do something | Dec 19 2022 2222
+T | 0 | same

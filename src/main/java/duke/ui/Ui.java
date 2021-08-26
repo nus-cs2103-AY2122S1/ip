@@ -63,6 +63,15 @@ public class Ui {
         }
     }
 
+    public void displayFind(String word, TaskList list) {
+        if (!list.isEmpty()) {
+            System.out.println("Here are the matching tasks in your list:");
+            list.print();
+        } else {
+            System.out.printf("Sorry there are no tasks containing '%s' in the list\n", word);
+        }
+    }
+
     public void displayLoadingError(Exception ex) {
         System.out.println(ex.toString());
     }
