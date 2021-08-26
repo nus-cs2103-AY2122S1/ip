@@ -57,17 +57,29 @@ class MissingNoException extends DukeException {
     }
 }
 
-class ReadError extends DukeException {
+class LoadingFileError extends DukeException {
     /**
      * Occurs when Duke tries to read txt file for Task list, but comes up empty.
      */
-    ReadError() {
-        super("Uwu! File not found! Creating new file. . .");
+    LoadingFileError(String message) {
+        super(message);
     }
 }
 
 class TaskDoneError extends DukeException {
     TaskDoneError() {
         super ("Looksw wike thisw taskw is alweady done! That's gweat!\n");
+    }
+}
+
+class SaveFileError extends DukeException {
+    SaveFileError() {
+        super ("Canw't save to a filew that doesn't exist, sorry!");
+    }
+}
+
+class SaveDirectoryError extends DukeException {
+    SaveDirectoryError(){
+        super ("Oh now! I guess the diwectowwy doesn't exist.");
     }
 }

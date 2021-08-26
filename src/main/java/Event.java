@@ -17,6 +17,11 @@ public class Event extends Task {
         this.at = at;
     }
 
+    @Override
+    public String getTime() {
+        return this.at;
+    }
+
     /**
      * Returns string of Deadline (Task).
      * @return string of Deadline.

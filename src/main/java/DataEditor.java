@@ -8,18 +8,18 @@ import java.util.regex.Pattern;
 
 
 /**
- * Allows reading, editing, saving of tasks to a given txt file.
+ * Allows reading and saving of tasks to a given file.
  *
  */
 public class DataEditor {
-    private final String filepath;
+    private String filePath;
 
     /**
      * Constructor for DataEditor
-     * @param filepath
+     * @param filePath
      */
-    public DataEditor(String filepath) {
-        this.filepath = filepath;
+    public DataEditor(String filePath) {
+        this.filePath = filePath;
     }
 
     /**
@@ -27,9 +27,9 @@ public class DataEditor {
      * @return ArrayList of tasks.
      * @throws DukeException Exception if any when reading file.
      */
-    public TaskList load() throws DukeException {
-        String home = System.getProperty("user.dir");
-        Path path = Paths.get(home, this.filepath);
+    public TaskList loadData() throws DukeException {
+        String homeDir = System.getProperty("user.dir");
+        Path path = Paths.get(homeDir, this.filePath);
         boolean directoryExists = Files.exists(path);
 
         if (directoryExists) {
@@ -37,33 +37,56 @@ public class DataEditor {
                 TaskList tasklist = new TaskList();
                 List<String> lines = Files.readAllLines(path);
 
-                for (String str: lines) {
+                for (String str : lines) {
                     String[] strparse = str.split(Pattern.quote(" | "));
                     if (strparse.length < 3) {
                         continue;
                         // incorrect task listed for some reason
                     } else if (strparse[0].equals("T")) {
-                            tasklist.addReadTodo(strparse[2].split(" "));
-                        } else if (strparse[0].equals("D")) {
-                            tasklist.addReadDeadline(strparse[2].split(" "));
-                        } else if (strparse[0].equals("E")) {
-                        tasklist.addReadEvent(strparse[2].split(" "));
+                        tasklist.addReadTodo(strparse[2], Integer.parseInt(strparse[1]));
+                    } else if (strparse[0].equals("D")) {
+                        tasklist.addReadDeadline(strparse[2], Integer.parseInt(strparse[1]), strparse[3]);
+                    } else if (strparse[0].equals("E")) {
+                        tasklist.addReadEvent(strparse[2], Integer.parseInt(strparse[1]), strparse[3]);
                     }
                 }
                 return tasklist;
+            } catch (DukeException e) {
+                    throw e;
             } catch (IOException e) {
-                throw new ReadError();
+                throw new LoadingFileError("Uwu! There's something wrong withw the existing file! "
+                        + "Creating new file for you. . .");
             }
         } else {
-            throw new ReadError();
+            throw new LoadingFileError("Uwu! Pre-existing File not foundw! "
+                    + "Creating new file for you. . .");
         }
     }
 
-    public void save(TaskList tasklist) throws DukeException {
-        String home = System.getProperty("user.dir");
+    /**
+     * Saves tasklist in String form to txt file. If file does not exist, one is created.
+     * @param tasklist tasklist to be converted into txt file, then saved.
+     * @throws DukeException Exception if any when saving file.
+     */
+    public void saveData(TaskList tasklist) throws DukeException {
+        String textToSave = tasklist.saveString();
+        String homeDir = System.getProperty("user.dir");
+        Path path = Paths.get(homeDir, this.filePath);
+        boolean directoryExists = Files.exists(path);
 
-        String temp = tasklist.saveString();
+        if (!directoryExists) {
+            try {
+                Files.createDirectories(path.getParent());
+            } catch(IOException e){
+                throw new SaveDirectoryError();
+            }
+        }
 
+        try {
+            Files.write(Paths.get(homeDir, this.filePath), textToSave.getBytes());
+        } catch (IOException e){
+            throw new SaveFileError();
+        }
 
     }
 

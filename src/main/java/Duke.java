@@ -7,9 +7,7 @@ import java.util.Scanner;
 
 /**
  * Modified version of Duke (Personal Assistant Chatbot). Speaks owo language.
- *
  * @author Ruth Poh (Lab 10H)
- *
  */
 
 public class Duke {
@@ -26,24 +24,26 @@ public class Duke {
         System.out.println(linebreakstart
                 + "\nHewwo!! From:\n"
                 + logo
-                + "How mayw Iw hewlp youw, Mastwer? Pwease type 'help' for a list of commandws uwu\n\n"
-                + linebreakend);
+                + "How mayw Iw hewlp youw, Mastwer? Pwease type 'help' for a list of commandws uwu\n");
 
         Scanner in = new Scanner(System.in);
 
-        DataEditor dataeditor = new DataEditor("data/tasklist.txt");
+        DataEditor dataEditor = new DataEditor("data/tasklist.txt");
         TaskList tasklist;
         try {
-            tasklist = dataeditor.load();
+            tasklist = dataEditor.loadData();
+            System.out.println("Loadiwng file for you. . . Loaded!\n");
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            tasklist = new TaskList();
+            tasklist = new TaskList(); // creates new tasklist if one cannot be found.
         }
 
-        boolean continueloop = true;
+        System.out.println(linebreakend);
+
+        boolean continueLoop = true;
         // for checking loop
 
-        while (continueloop) {
+        while (continueLoop) {
             // initiates loop.
             String str = in.nextLine();
             String[] strparse = str.split(" ");
@@ -55,7 +55,7 @@ public class Duke {
                     if (strparse.length > 1) {
                         throw new IncorrectInputException("bye", "'bye'");
                     }
-                    continueloop = false;
+                    continueLoop = false;
                 } catch (DukeException e) {
                     System.out.println(linebreakstart);
                     System.out.println(e.getMessage());
@@ -69,7 +69,7 @@ public class Duke {
                     }
                     System.out.println(linebreakstart);
                     System.out.println("Commandws supported:\n");
-                    System.out.println("- bye\n- help\n- list\n- todo\n- even\n- deadline\n");
+                    System.out.println("- bye\n- help\n- list\n- todo\n- event\n- deadline\n");
                     System.out.println(linebreakend);
                 } catch (DukeException e) {
                     System.out.println(linebreakstart);
@@ -102,10 +102,11 @@ public class Duke {
                 // adds a todo task to the list.
                 try {
                     tasklist.addTodo(strparse);
+                    dataEditor.saveData(tasklist);
 
                     System.out.println(linebreakstart);
                     System.out.println("Uwu! Addewd yourw taskws:\n");
-                    System.out.println(tasklist.lastAddedTask());
+                    System.out.println(tasklist.lastAddedTask() + '\n');
                     System.out.println("Youw noww havew "
                             + (tasklist.getTaskCounter())
                             + " taskw(s) inw thew wist! uwu\n");
@@ -119,10 +120,11 @@ public class Duke {
                 // adds a deadline task to the list.
                 try {
                     tasklist.addDeadline(strparse);
+                    dataEditor.saveData(tasklist);
 
                     System.out.println(linebreakstart);
                     System.out.println("Uwu! Addewd yourw taskws:\n");
-                    System.out.println(tasklist.lastAddedTask());
+                    System.out.println(tasklist.lastAddedTask() + '\n');
                     System.out.println("Youw noww havew "
                             + (tasklist.getTaskCounter())
                             + " taskw(s) inw thew wist! uwu\n");
@@ -136,10 +138,11 @@ public class Duke {
                 // adds an event to the list. pretty much like deadline.
                 try {
                     tasklist.addEvent(strparse);
+                    dataEditor.saveData(tasklist);
 
                     System.out.println(linebreakstart);
                     System.out.println("Uwu! Addewd yourw taskws:\n");
-                    System.out.println(tasklist.lastAddedTask());
+                    System.out.println(tasklist.lastAddedTask() + '\n');
                     System.out.println("Youw noww havew "
                             + (tasklist.getTaskCounter())
                             + " taskw(s) inw thew wist! uwu\n");
@@ -153,11 +156,13 @@ public class Duke {
                 // marks a task as done.
                 try {
                     int i = tasklist.markDone(strparse);
+                    System.out.println("Task done is " + i);
+                    dataEditor.saveData(tasklist);
 
                     System.out.println(linebreakstart);
                     System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n");
                     System.out.println("   "
-                            + tasklist.getTask(i)
+                            + tasklist.getTaskDescr(i)
                             + '\n');
                     System.out.println(linebreakend);
 
@@ -170,6 +175,7 @@ public class Duke {
                 // deletes corresponding task on list.
                 try {
                     Task t = tasklist.delete(strparse);
+                    dataEditor.saveData(tasklist);
 
                     System.out.println(linebreakstart);
                     System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw hasw beenw deweted:\n");
