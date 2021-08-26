@@ -1,2 +1,2 @@
-T / 0 / read book
-D / 0 / return book / 4 AUG
+T / 1 / wash plates
+D / 0 / return book / 2021-12-10

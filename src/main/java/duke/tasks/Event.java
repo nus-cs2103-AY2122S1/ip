@@ -1,11 +1,7 @@
-<<<<<<< HEAD:src/main/java/tasks/Event.java
-package tasks;
+package duke.tasks;
 
-import tasks.Task;
-=======
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
->>>>>>> branch-Level-8:src/main/java/Event.java
 
 public class Event extends Task {
     protected LocalDate at;
@@ -17,7 +13,7 @@ public class Event extends Task {
 
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
-        this.at = at;
+        this.at = LocalDate.parse(at);
     }
 
     @Override

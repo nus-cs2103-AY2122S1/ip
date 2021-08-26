@@ -1,10 +1,10 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * Represents an exception due to the user using an invalid
  * word.
  */
-public class InvalidInputException extends UserInputException {
+public class InvalidInputException extends DukeException {
     /**
      * Constructor for <code>InvalidInputException</code>
      *

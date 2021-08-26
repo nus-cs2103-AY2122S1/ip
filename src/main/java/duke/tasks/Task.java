@@ -1,4 +1,4 @@
-package tasks;
+package duke.tasks;
 
 public class Task {
     private String description;
@@ -14,6 +14,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public boolean getCompletionStatus() {
+        return this.isDone;
+    }
+    
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }

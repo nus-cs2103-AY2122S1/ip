@@ -1,15 +1,15 @@
-package exceptions;
+package duke.exceptions;
 
 /**
  * Represents an exception due to user input to the chatbot.
  */
-public class UserInputException extends Exception {
+public class DukeException extends Exception {
 
     /**
-     * Constructor for <code>UserInputException</code>
+     * Constructor for <code>DukeException</code>
      * @param message message describing the exception that will be displayed to users
      */
-    public UserInputException(String message) {
+    public DukeException(String message) {
         super(message);
     }
 }
