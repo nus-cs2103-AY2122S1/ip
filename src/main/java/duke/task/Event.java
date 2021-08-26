@@ -38,13 +38,13 @@ public class Event extends Task implements Timestampable {
 
     @Override
     public String toText() {
-        String[] props = new String[]{"E", super.getStatusIcon(), super.getName(), this.timestamp.toISO()};
+        String[] props = new String[]{"E", super.getStatusIcon(), super.getName(), timestamp.toISO()};
         return String.join(" | ", props);
     }
 
     @Override
     public boolean onSameDayAs(DukeDateTime date) {
-        return DukeDateTime.onSameDay(this.timestamp, date);
+        return DukeDateTime.onSameDay(timestamp, date);
     }
 
     @Override

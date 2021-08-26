@@ -23,7 +23,7 @@ public class DukeDateTime {
     }
 
     public DukeDateTime(LocalDate date) {
-        this.dateTime = date.atStartOfDay();
+        dateTime = date.atStartOfDay();
     }
 
     /**
@@ -87,11 +87,11 @@ public class DukeDateTime {
      * Returns the datetime formatted in ISO.
      */
     public String toISO() {
-        return this.dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     @Override
     public String toString() {
-        return this.dateTime.format(DISPLAY_FORMATTER);
+        return dateTime.format(DISPLAY_FORMATTER);
     }
 }

@@ -21,11 +21,11 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.file = new File(filePath);
-        if (!this.file.isFile()) {
-            this.file.getParentFile().mkdirs();
+        file = new File(filePath);
+        if (!file.isFile()) {
+            file.getParentFile().mkdirs();
             try {
-                this.file.createNewFile();
+                file.createNewFile();
             } catch (IOException e) {
                 System.out.printf("An error occurred when trying to access file %s." +
                         "Changes to your task list will not be saved locally.\n", filePath);
