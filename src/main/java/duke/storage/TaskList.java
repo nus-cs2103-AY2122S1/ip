@@ -8,13 +8,16 @@ import duke.tasks.ToDo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-public class TaskList extends ArrayList<Task>{
+/**
+ * List class to hold the listed Tasks.
+ */
+public class TaskList extends ArrayList<Task> {
 
     private static final String DIVIDER = "%%";
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @Override
     public String toString() {
@@ -31,6 +34,11 @@ public class TaskList extends ArrayList<Task>{
         return (result.toString().stripTrailing());
     }
 
+    /**
+     * Add all of the task in the List of String.
+     *
+     * @param inputString The list of lines of string.
+     */
     public void importFromList(List<String> inputString) {
         this.clear();
         for (String line : inputString) {
@@ -51,6 +59,11 @@ public class TaskList extends ArrayList<Task>{
         }
     }
 
+    /**
+     * Exports the current list into a format to be written into a file.
+     *
+     * @return Formatted string using specified divider.
+     */
     public String exportToText() {
         StringBuilder result = new StringBuilder();
         for (Task currTask : this) {
@@ -68,11 +81,17 @@ public class TaskList extends ArrayList<Task>{
         return result.toString();
     }
 
+    /**
+     * Marks specified task as finished.
+     *
+     * @param index Index of task to be marked as finished from the list.
+     * @throws DukeExceptions if the task is already marked as finished.
+     */
     public void markAsFinished(int index) throws DukeExceptions {
         Task task = this.get(index);
         if (task.getStatusIcon().equals("X")) {
             throw new DukeExceptions("That task was already marked as done");
-        } else{
+        } else {
             task.markFinished(true);
         }
     }
