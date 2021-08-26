@@ -1,17 +1,20 @@
-public class Event extends Task{
-    private String time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String task, String time) {
+public class Event extends Task{
+    private LocalDateTime time;
+
+    public Event(String task, LocalDateTime time) {
         super(task, "E");
         this.time = time;
     }
 
     public String getTime() {
-        return this.time;
+        return this.time.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
     }
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (at: %s)", this.getTaskType(), this.getCompletedMarker(), this.getTask(), this.time);
+        return String.format("[%s][%s] %s (at: %s)", this.getTaskType(), this.getCompletedMarker(), this.getTask(), this.getTime());
     }
 }
