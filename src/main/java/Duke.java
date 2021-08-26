@@ -77,7 +77,7 @@ public class Duke {
     public static void insertTask(String input) {
         try {
             formatMessages(todolist.insertTask(input));
-        } catch (NoDescriptionException e) {
+        } catch (NoDescriptionException | WrongInputException e) {
             formatMessages(e.getMessage());
         }
     }

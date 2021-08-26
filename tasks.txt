@@ -1,1 +1,5 @@
 [T][ ] chicken
+[T][ ] homework
+[E][ ] eat food (at:) (at:)
+[E][ ] eat food /by 8pm (at:) (at:)
+[E][X] eat food (at: 02 Mar 2019, 17.00 pm)

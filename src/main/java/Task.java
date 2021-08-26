@@ -1,4 +1,4 @@
-public abstract class Task {
+public class Task {
     protected Boolean done;
     protected String name;
     protected char type;

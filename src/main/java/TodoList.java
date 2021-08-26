@@ -27,12 +27,11 @@ public class TodoList {
         return output.toString();
     }
 
-
     public void insertTask(Task task) {
         list.add(task);
     }
 
-    public String insertTask(String input) throws NoDescriptionException {
+    public String insertTask(String input) throws NoDescriptionException, WrongInputException {
         String first = input.split(" ",2)[0];
         if (first.equals(input)) {
             String message = "Oi, description of your " + first + " cannot be empty lah!";
@@ -40,16 +39,17 @@ public class TodoList {
         }
 
         String second = input.split(" ",2)[1];
-        Task task;
+        Task task =  new Task("");
         if (first.equalsIgnoreCase("deadline")) {
             if (second.contains("/by")) {
-                String name = second.split("/by", 2)[0];
-                String date = second.split("/by", 2)[1];
-                task = new Deadline(name, date);
+                    String name = second.split("/by", 2)[0];
+                    String date = second.split("/by", 2)[1];
+                    task = Deadline.createDeadline(name, date);
+                    task.type = 'D';
             } else {
-                task = new Deadline(second, "");
+                    task = Deadline.createDeadline(second, "");
+                    task.type = 'D';
             }
-            task.type = 'D';
 
         } else if (first.equalsIgnoreCase("todo")) {
             task = new Todo(second);
@@ -57,13 +57,14 @@ public class TodoList {
 
         } else {
             if (second.contains("/at")) {
-                String name = second.split("/at", 2)[0];
-                String date = second.split("/at", 2)[1];
-                task = new Event(name, date);
+                    String name = second.split("/at", 2)[0];
+                    String date = second.split("/at", 2)[1];
+                    task = Event.createEvent(name, date);
+                    task.type = 'E';
             } else {
-                task = new Event(second, "");
+                    task = Event.createEvent(second, "");
+                    task.type = 'E';
             }
-            task.type = 'E';
         }
 
         list.add(task);
