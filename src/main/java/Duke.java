@@ -4,27 +4,34 @@ import java.util.regex.Pattern;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Duke {
     private final static String DATA_FILEPATH = "./data/data.txt";
     public static Task createTask(String input) throws DukeException {
-        String[] inputList = input.split(" ");
-        if (inputList[0].equals("todo")){
-            String todoDescription = input.replaceFirst(Pattern.quote("todo"),"").trim();
-            if (todoDescription.equals("")) {
-                throw new DukeException("The description of a todo cannot be empty.");
+        try {
+            String[] inputList = input.split(" ");
+            if (inputList[0].equals("todo")){
+                String todoDescription = input.replaceFirst(Pattern.quote("todo"),"").trim();
+                if (todoDescription.equals("")) {
+                    throw new DukeException("The description of a todo cannot be empty.");
+                }
+                return new Todo(todoDescription);
+            } else if (inputList[0].equals("deadline")) {
+                String[] withoutAction = input.replaceFirst(Pattern.quote("deadline"),"").split("/by", 2);
+                return new Deadline(withoutAction[0].trim(), withoutAction[1].trim());
+            } else {
+                String[] withoutAction = input.replaceFirst(Pattern.quote("event"),"").split("/at", 2);
+                return new Event(withoutAction[0].trim(), withoutAction[1].trim());
             }
-            return new Todo(todoDescription);
-        } else if (inputList[0].equals("deadline")) {
-            String[] withoutAction = input.replaceFirst(Pattern.quote("deadline"),"").split("/by", 2);
-            return new Deadline(withoutAction[0].trim(), withoutAction[1].trim());
-        } else {
-            String[] withoutAction = input.replaceFirst(Pattern.quote("event"),"").split("/at", 2);
-            return new Event(withoutAction[0].trim(), withoutAction[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("date should be in YYYY-MM-DD format");
         }
     }
 
-    public static ArrayList<Task> loadTasksFromDataFile() throws IOException, DukeException {
+    public static ArrayList<Task> loadTasksFromDataFile() throws IOException, DukeException, DateTimeParseException {
         File directory = new File("./data");
         if (!directory.exists()) {
             directory.mkdir();
@@ -72,7 +79,7 @@ public class Duke {
         ArrayList<Task> tasks;
         try {
             tasks = loadTasksFromDataFile();
-        } catch (IOException e) {
+        } catch (IOException | DukeException | DateTimeParseException e) {
             System.out.println("Error loading data file:" + e.getMessage());
             return;
         }
@@ -133,6 +140,21 @@ public class Duke {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(newTask);
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                } else if (action.equals("occurring")) {
+                    LocalDate queryDate = LocalDate.parse(inputList[1]);
+                    System.out.println("Tasks occurring on "
+                            + queryDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":");
+                    int count = 1;
+                    for (Task task: tasks) {
+                        if ((task instanceof Deadline && ((Deadline) task).by.equals(queryDate))
+                                || (task instanceof Event  && ((Event) task).at.equals(queryDate))) {
+                            System.out.println(count + ". " + task);
+                            count++;
+                        }
+                    }
+                    if (count == 1) {
+                        System.out.println("No tasks.");
+                    }
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
