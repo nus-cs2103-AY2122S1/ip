@@ -36,38 +36,48 @@ public class Storage {
     public ArrayList<Task> initialise() {
         //read from the data/history.text and return an ArrayList of Tasks
         File file = new File(FILEPATH);
+
         try {
             Scanner s = new Scanner(file);
             ArrayList<Task> output = new ArrayList<>();
+
             while (s.hasNext()) {
                 String task = s.nextLine();
                 String[] splitTask = task.split("\\|");
+
                 if (splitTask.length == 3) {
                     // it is todotask
                     Task toAdd = new ToDo(splitTask[2]);
+
                     if (splitTask[1].equals("1")) {
                         toAdd.markAsDone();
                     }
+
                     output.add(toAdd);
                 } else {
                     // can be event or deadline
                     if (splitTask[0].equals("E")) {
                         // event
                         Task toAdd = new Event(splitTask[2], splitTask[3]);
+
                         if (splitTask[1].equals("1")) {
                             toAdd.markAsDone();
                         }
+
                         output.add(toAdd);
                     } else {
                         // deadline
                         Task toAdd = new Deadline(splitTask[2], splitTask[3]);
+
                         if (splitTask[1].equals("1")) {
                             toAdd.markAsDone();
                         }
+
                         output.add(toAdd);
                     }
                 }
             }
+
             return output;
         } catch (FileNotFoundException e) {
             return new ArrayList<>();
@@ -79,23 +89,27 @@ public class Storage {
      *
      * @param list taskList which is being saved into user's computer.
      */
-    public void saveFile(TaskList list) {
+    public void saveFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(FILEPATH);
+
             String textToAdd = "";
-            for (int i = 0; i < list.getSize(); i++) {
+
+            for (int i = 0; i < tasks.getSize(); i++) {
                 if (i == 0) {
-                    textToAdd += list.taskSaveToString(i);
+                    textToAdd += tasks.taskSaveToString(i);
                 } else {
-                    textToAdd += "\n" + list.taskSaveToString(i);
+                    textToAdd += "\n" + tasks.taskSaveToString(i);
                 }
             }
+
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
             File file = new File(DIRPATH);
+
             if (file.mkdir()) {
-                saveFile(list);
+                saveFile(tasks);
             } else {
                 System.out.println("Failed to create file");
             }

@@ -8,6 +8,6 @@ import duke.Ui;
  * Abstract class for Commands.
  */
 public abstract class Command {
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
     public abstract boolean isExit();
 }

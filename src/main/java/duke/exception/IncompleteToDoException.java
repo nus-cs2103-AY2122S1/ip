@@ -1,10 +1,11 @@
 package duke.exception;
 
+import static duke.Ui.LINE;
+
 /**
  * Representation for incomplete fields of ToDoObject exception.
  */
 public class IncompleteToDoException extends DukeException{
-    private static String LINE = "____________________________________________________________";
     private static String MESSAGE = "OOPS!!! The description of a todo cannot be empty.";
 
     /**

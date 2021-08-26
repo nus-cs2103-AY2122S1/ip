@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.command.Command;
 
 /**
  * Representation for the done command of Duke.
@@ -33,14 +32,15 @@ public class DoneCommand extends Command {
     /**
      * Executes the DoneCommand.
      *
-     * @param taskList TaskList to mark Task at index indexToMarkAsDone as Done.
+     * @param tasks TaskList to mark Task at index indexToMarkAsDone as Done.
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList for Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.markAsDone(this.indexToMarkAsDone);
-        String message = "Nice! I've marked this task as done:\n" + "  " + taskList.taskToString(this.indexToMarkAsDone);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        tasks.markAsDone(this.indexToMarkAsDone);
+        String message = "Nice! I've marked this task as done:\n" + "  "
+                + tasks.taskToString(this.indexToMarkAsDone);
         ui.print(message);
     }
 }

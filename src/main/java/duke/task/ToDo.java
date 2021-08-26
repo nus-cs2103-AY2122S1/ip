@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 /**
  * Type of Task which is an Event.
  */

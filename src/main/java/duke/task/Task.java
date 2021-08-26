@@ -39,7 +39,7 @@ public class Task {
      * @return "1" if done, else "0".
      */
     public String printStatusIcon() {
-        return (isDone ? "1" : "0");
+        return (isDone) ? "1" : "0";
     }
 
     /**
