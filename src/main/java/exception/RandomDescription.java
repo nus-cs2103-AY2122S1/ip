@@ -1,3 +1,5 @@
+package exception;
+
 public class RandomDescription extends DukeException{
 
     public RandomDescription(String message) {

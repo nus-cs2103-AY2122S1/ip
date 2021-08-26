@@ -1,9 +1,15 @@
+package main;
+
+import exception.DukeException;
+import exception.EmptyDescription;
+import exception.RandomDescription;
+
 import java.util.Scanner;
 
 public class Ui {
     Scanner scan;
 
-    Ui () {
+    public Ui() {
         this.scan = new Scanner(System.in);
     }
 

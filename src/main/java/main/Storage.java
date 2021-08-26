@@ -1,3 +1,9 @@
+package main;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,7 +17,7 @@ import java.util.Scanner;
 public class Storage {
     private File filepath;
 
-    Storage(File filepath) {
+    public Storage(File filepath) {
         this.filepath = filepath;
     }
 

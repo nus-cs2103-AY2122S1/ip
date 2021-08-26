@@ -1,4 +1,6 @@
-import java.lang.reflect.Array;
+package main;
+import task.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -6,7 +8,7 @@ public class TaskList {
     ArrayList<String> done_check;
     int task_number;
 
-    TaskList() {
+    public TaskList() {
         this.list = new ArrayList<Task>();
         this.done_check = new ArrayList<String>();
     }

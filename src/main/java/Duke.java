@@ -1,3 +1,8 @@
+import main.Parser;
+import main.Storage;
+import main.TaskList;
+import main.Ui;
+
 import java.io.File;
 
 
@@ -28,13 +33,9 @@ public class Duke{
 
 
     public static void main(String[] args) {
-        File file = new File("data/tasks.txt");
+        File file = new File("data/Duke.txt");
         new Duke(file).run();
     }
-
-
-
-
 
 
 
