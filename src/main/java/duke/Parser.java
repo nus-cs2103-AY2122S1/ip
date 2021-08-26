@@ -57,4 +57,14 @@ public class Parser {
         throw new DukeException("    I'm sorry :( I don't quite seem to understand, try again pls!");
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Parser)) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -20,4 +20,16 @@ public class EventAddCommand extends AddCommand {
         storage.addToText("E", description, time);
         ui.addingTask(totalTasks, description, time, "E");
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof EventAddCommand)) {
+            return false;
+        }
+        EventAddCommand other = (EventAddCommand) obj;
+        return this.description.equals(other.description) && this.time.equals(other.time);
+    }
 }

@@ -25,4 +25,16 @@ public class DeleteCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof DeleteCommand)) {
+            return false;
+        }
+        DeleteCommand other = (DeleteCommand) obj;
+        return startOfString == other.startOfString;
+    }
 }

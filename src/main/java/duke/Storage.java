@@ -147,4 +147,16 @@ public class Storage {
             throw new DukeException("oh oh! Something went wrong!");
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Storage)) {
+            return false;
+        }
+        Storage other = (Storage) obj;
+        return this.file.equals(other.file);
+    }
 }

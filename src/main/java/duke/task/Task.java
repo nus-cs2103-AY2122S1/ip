@@ -34,4 +34,16 @@ public class Task {
     public String toString() {
         return "[" + (isDone ? "X" : " ") + "] " + itemName;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Task)) {
+            return false;
+        }
+        Task other = (Task) obj;
+        return this.itemName.equals(other.itemName) && this.dateTime.equals(other.dateTime) && (this.isDone == other.isDone);
+    }
 }

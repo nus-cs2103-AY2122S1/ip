@@ -39,6 +39,10 @@ public class TaskList {
         }
     }
 
+    public TaskList(ArrayList<Task> xs) {
+        this.xs = xs;
+    }
+
     public LocalDateTime dateFormatting(String stringDate) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime localDate = LocalDateTime.parse(stringDate, dateTimeFormatter);
@@ -132,5 +136,17 @@ public class TaskList {
         } catch (DateTimeParseException e) {
             throw new DukeException("    Oh oh! Please follow the format strictly and key in a suitable date!");
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof TaskList)) {
+            return false;
+        }
+        TaskList other = (TaskList) obj;
+        return this.xs.equals(other.xs);
     }
 }

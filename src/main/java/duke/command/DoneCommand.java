@@ -25,4 +25,16 @@ public class DoneCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof DoneCommand)) {
+            return false;
+        }
+        DoneCommand other = (DoneCommand) obj;
+        return startOfString == other.startOfString;
+    }
 }

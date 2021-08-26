@@ -20,4 +20,16 @@ public class DeadlineAddCommand extends AddCommand {
         storage.addToText("D", description, time);
         ui.addingTask(totalTasks, description, time, "D");
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof DeadlineAddCommand)) {
+            return false;
+        }
+        DeadlineAddCommand other = (DeadlineAddCommand) obj;
+        return this.description.equals(other.description) && this.time.equals(other.time);
+    }
 }

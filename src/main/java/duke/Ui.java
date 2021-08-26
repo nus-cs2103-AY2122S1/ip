@@ -102,4 +102,15 @@ public class Ui {
                 "delete {number}:" + indentationAdder() + "deletes the task with that number off the list." + indentationAdder() +
                 "bye:" + indentationAdder() + "ends the program.");
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Ui)) {
+            return false;
+        }
+        return true;
+    }
 }
