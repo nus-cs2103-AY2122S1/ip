@@ -136,6 +136,10 @@ public class Duke {
         System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
     }
 
+    /**
+     * Method to find task using a search key.
+     * @param input search key
+     */
     public static void findTask(String input) {
         String searchKey = input.split("find ")[1];
         System.out.println("Here are the matching tasks in your list:");
@@ -150,6 +154,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method to run the bot.
+     * @param args Takes in user input
+     * @throws FileNotFoundException Throw errors
+     */
     public static void main(String[] args) throws FileNotFoundException {
         new Duke("data/duke.txt").run();
     }
