@@ -1,3 +1,5 @@
+	This appears to be your first time using Duke.
+	A save file will be created to save your tasks when you first add a task.
 	 ____        _        
 	|  _ \ _   _| | _____ 
 	| | | | | | | |/ / _ \
@@ -14,7 +16,6 @@
 	Uh-oh! Please type in a task number to mark as done.
 	______________________________________________________
 	______________________________________________________
-	______________________________________________________
 	Uh-oh! Please type in a valid task number to mark as done.
 	______________________________________________________
 	______________________________________________________
@@ -29,69 +30,111 @@
 	Uh-oh! Input contains |, which is an invalid character.
 	______________________________________________________
 	______________________________________________________
-	Uh-oh! Command must be in the format: [taskName] /by [date]
+	Uh-oh! Command must be in the format: [taskName] /by [date(YYYY-MM-DD)] [time(HH:MM)].
 	______________________________________________________
 	______________________________________________________
-	Uh-oh! Command must be in the format: [taskName] /by [date]
+	Uh-oh! Command must be in the format: [taskName] /by [date(YYYY-MM-DD)] [time(HH:MM)].
+	______________________________________________________
+	______________________________________________________
+	Uh-oh! Command must be in the format: [taskName] /by [date(YYYY-MM-DD)] [time(HH:MM)].
+	______________________________________________________
+	______________________________________________________
+	Uh-oh! Date must be of the form YYYY-MM-DD, and must be a real/valid date.
+	______________________________________________________
+	______________________________________________________
+	Uh-oh! Time must be of the form HH:MM. (HH from 00-23, MM from 00-59)
+	______________________________________________________
+	______________________________________________________
+	Uh-oh! Date must be of the form YYYY-MM-DD, and must be a real/valid date.
+	______________________________________________________
+	______________________________________________________
+	Uh-oh! Time must be of the form HH:MM. (HH from 00-23, MM from 00-59)
 	______________________________________________________
 	______________________________________________________
 	Got it. The following task has been added: 
-		[D][ ] Presentation Slides Due (by: Fri 5pm)
+		[D][ ] Presentation Slides Due (by: Aug 26 2021, 11:00 AM)
 	Now you have 2 tasks in the list.
 	______________________________________________________
 	______________________________________________________
-	Uh-oh! Command must be in the format: [taskName] /at [date]
+	Uh-oh! Command must be in the format: [taskName] /at [date(YYYY-MM-DD)] [start time(HH:MM)] [end time(HH:MM)].
 	______________________________________________________
 	______________________________________________________
-	Uh-oh! Command must be in the format: [taskName] /at [date]
+	Uh-oh! Command must be in the format: [taskName] /at [date(YYYY-MM-DD)] [start time(HH:MM)] [end time(HH:MM)].
+	______________________________________________________
+	______________________________________________________
+	Uh-oh! Date and times must be in the format: YYYY-MM-DD HH:MM HH:MM.
+	______________________________________________________
+	______________________________________________________
+	Uh-oh! Start time of event cannot be later or equal to end time.
 	______________________________________________________
 	______________________________________________________
 	Got it. The following task has been added: 
-		[E][ ] Project Meeting (at: Mon 2-4pm)
+		[E][ ] Project Meeting (at: Aug 26 2021, 06:00 PM - 08:00 PM)
 	Now you have 3 tasks in the list.
 	______________________________________________________
 	______________________________________________________
 	Here is your task list:
-	1.[T][ ] Buy bread
-	2.[D][ ] Presentation Slides Due (by: Fri 5pm)
-	3.[E][ ] Project Meeting (at: Mon 2-4pm)
+		1.[T][ ] Buy bread
+		2.[D][ ] Presentation Slides Due (by: Aug 26 2021, 11:00 AM)
+		3.[E][ ] Project Meeting (at: Aug 26 2021, 06:00 PM - 08:00 PM)
 	______________________________________________________
 	______________________________________________________
 	Good work! This task is now marked as done:
-		[D][X] Presentation Slides Due (by: Fri 5pm)
+		[D][ ] Presentation Slides Due (by: Aug 26 2021, 11:00 AM)
 	______________________________________________________
 	______________________________________________________
 	Here is your task list:
-	1.[T][ ] Buy bread
-	2.[D][X] Presentation Slides Due (by: Fri 5pm)
-	3.[E][ ] Project Meeting (at: Mon 2-4pm)
+		1.[T][ ] Buy bread
+		2.[D][X] Presentation Slides Due (by: Aug 26 2021, 11:00 AM)
+		3.[E][ ] Project Meeting (at: Aug 26 2021, 06:00 PM - 08:00 PM)
 	______________________________________________________
 	______________________________________________________
 	Good work! This task is now marked as done:
-		[E][X] Project Meeting (at: Mon 2-4pm)
+		[E][ ] Project Meeting (at: Aug 26 2021, 06:00 PM - 08:00 PM)
 	______________________________________________________
 	______________________________________________________
 	Here is your task list:
-	1.[T][ ] Buy bread
-	2.[D][X] Presentation Slides Due (by: Fri 5pm)
-	3.[E][X] Project Meeting (at: Mon 2-4pm)
+		1.[T][ ] Buy bread
+		2.[D][X] Presentation Slides Due (by: Aug 26 2021, 11:00 AM)
+		3.[E][X] Project Meeting (at: Aug 26 2021, 06:00 PM - 08:00 PM)
+	______________________________________________________
+	______________________________________________________
+	Here are the tasks occurring on this date:
+	Uh-oh! Date must be of the form YYYY-MM-DD, and must be a real/valid date.
+	______________________________________________________
+	______________________________________________________
+	Here are the tasks occurring on this date:
+		1.[D][X] Presentation Slides Due (by: Aug 26 2021, 11:00 AM)
+		2.[E][X] Project Meeting (at: Aug 26 2021, 06:00 PM - 08:00 PM)
+	______________________________________________________
+	______________________________________________________
+	Here are the tasks occurring within this time period:
+	Uh-oh! Command must be of the form: due [integer][h/d/m] (h = hours, d = days, m = months)
+	______________________________________________________
+	______________________________________________________
+	Here are the tasks occurring within this time period:
+	Uh-oh! Command must be of the form: due [integer][h/d/m] (h = hours, d = days, m = months)
+	______________________________________________________
+	______________________________________________________
+	Here are the tasks occurring within this time period:
+		1.[D][X] Presentation Slides Due (by: Aug 26 2021, 11:00 AM)
+		2.[E][X] Project Meeting (at: Aug 26 2021, 06:00 PM - 08:00 PM)
 	______________________________________________________
 	______________________________________________________
 	Uh-oh! Please type in a task number to delete.
-	______________________________________________________
 	______________________________________________________
 	______________________________________________________
 	Uh-oh! Please type in a valid task number to delete.
 	______________________________________________________
 	______________________________________________________
 	Got it. The following task has been removed:
-		[D][X] Presentation Slides Due (by: Fri 5pm)
+		[D][X] Presentation Slides Due (by: Aug 26 2021, 11:00 AM)
 	Now you have 2 tasks in the list.
 	______________________________________________________
 	______________________________________________________
 	Here is your task list:
-	1.[T][ ] Buy bread
-	2.[E][X] Project Meeting (at: Mon 2-4pm)
+		1.[T][ ] Buy bread
+		2.[E][X] Project Meeting (at: Aug 26 2021, 06:00 PM - 08:00 PM)
 	______________________________________________________
 	______________________________________________________
 	Goodbye. Have a nice day!

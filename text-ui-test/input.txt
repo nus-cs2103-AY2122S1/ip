@@ -5,16 +5,28 @@ todo
 todo Buy bread
 todo Buy|bread
 deadline   
-deadline Presentation Slides Due/byFri 5pm
-deadline Presentation Slides Due /by Fri 5pm
+deadline Presentation Slides Due/by
+deadline Presentation Slides Due /by
+deadline Presentation Slides Due /by 2021-08-2 11:00
+deadline Presentation Slides Due /by 2021-08-26 11:0
+deadline Presentation Slides Due /by 2021-13-26 11:00
+deadline Presentation Slides Due /by 2021-08-26 26:00
+deadline Presentation Slides Due /by 2021-08-26 11:00
 event
 event Project Meeting/atMon 2-4pm
-event Project Meeting /at Mon 2-4pm
+event Project Meeting /at 2021-08-26 20:00
+event Project Meeting /at 2021-08-26 20:00 18:00
+event Project Meeting /at 2021-08-26 18:00 20:00 
 list
 done 2
 list
 done 3
 list
+ondate
+ondate 2021-08-26
+due
+due 1y
+due 10d
 delete
 delete 4
 delete 2
