@@ -12,23 +12,23 @@ public enum Commands {
     FIND("find"),
     INVALID("");
 
-    private final String LABEL;
-
     private static final Map<String, Commands> BY_LABEL = new HashMap<>();
 
+    private final String label;
+
     Commands(String label) {
-        LABEL = label;
+        this.label = label;
     }
 
     static {
         for (Commands command : values()) {
-            BY_LABEL.put(command.LABEL, command);
+            BY_LABEL.put(command.label, command);
         }
     }
 
     @Override
     public String toString() {
-        return LABEL;
+        return label;
     }
 
     public static Commands valueOfLabel(String label) {
