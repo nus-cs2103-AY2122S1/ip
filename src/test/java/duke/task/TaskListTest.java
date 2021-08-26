@@ -3,6 +3,8 @@ package duke.task;
 import duke.DukeException;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -67,6 +69,23 @@ public class TaskListTest {
 
             tasks.markTaskDone(1);
             assertEquals("[T][X] task", task.toString());
+        } catch (DukeException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void findTask_success() {
+        try {
+            ArrayList<Task> existingTasks = new ArrayList<>();
+            existingTasks.add(new ToDo("dummy"));
+            existingTasks.add(new ToDo("monday practice"));
+            existingTasks.add(new Event("project meeting", "MON"));
+            existingTasks.add(new Deadline("send money", "25-08-2021 14:30"));
+            TaskList tasks = new TaskList(existingTasks);
+
+            ArrayList<Task> matches = tasks.findTask("mon");
+            assertEquals(3, matches.size());
         } catch (DukeException e) {
             fail();
         }

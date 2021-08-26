@@ -82,6 +82,20 @@ public class TaskList {
         return task;
     }
     
+    public ArrayList<Task> findTask(String keyword) throws DukeException {
+        if (keyword == "") {
+            throw new DukeException("Looks like you forgot to enter a keyword.");
+        }
+        
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : todoList) {
+            if (task.contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        return matchingTasks;
+    }
+    
     /** Returns a list of tasks in data string format */
     public List<String> getListData() {
          return todoList.stream().map(task -> task.toDataString("|")).collect(Collectors.toList());
