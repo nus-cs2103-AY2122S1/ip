@@ -23,10 +23,20 @@ public class Storage {
     Scanner saveFile;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    /**
+     * Constructor for Storage taking in a Scanner file
+     *
+     * @param saveFile scanner file
+     */
     public Storage(Scanner saveFile) {
         this.saveFile = saveFile;
     }
 
+    /**
+     * Constructor for Storage taking in a filePath
+     *
+     * @param filePath filePath to the save file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         File directory = new File(filePath);
@@ -53,6 +63,7 @@ public class Storage {
      * - Space out each detail with a "|'
      * - If empty line, assume end of file
      *
+     * @return a TaskList with all the saved details.
      */
     public TaskList load() {
         TaskList lst = new TaskList();
@@ -94,6 +105,11 @@ public class Storage {
         return lst;
     }
 
+    /**
+     * Saves the current storage file based on the input given.
+     *
+     * @param input input given, typically the full string of whatever tasks are on the task list.
+     */
     public void save(String input) {
         try {
             PrintWriter newFile = new PrintWriter(this.filePath);

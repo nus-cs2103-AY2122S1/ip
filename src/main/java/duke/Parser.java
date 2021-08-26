@@ -5,7 +5,17 @@ import duke.command.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class represents a Parser, which parses the input given by the user.
+ */
 public class Parser {
+
+    /**
+     * Parses the input given by the user and returns the necessary command to be executed.
+     *
+     * @param input input given by user.
+     * @return necessary command to be executed.
+     */
     public static Command parse(String input) {
         String[] splitText = input.trim().split("\\s+", 2);
         String command = splitText[0];

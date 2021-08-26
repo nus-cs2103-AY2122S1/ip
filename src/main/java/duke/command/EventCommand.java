@@ -6,15 +6,31 @@ import duke.task.Event;
 import duke.task.TaskList;
 import java.time.LocalDateTime;
 
+/**
+ * This class represents the Command when the user types "event" validly.
+ */
 public class EventCommand extends Command{
     private String task;
     private LocalDateTime time;
 
+    /**
+     * Constructor for EventCommand which takes in the task details and the time of the event.
+     *
+     * @param task task details.
+     * @param time time of the event.
+     */
     public EventCommand(String task, LocalDateTime time) {
         this.task = task;
         this.time = time;
     }
 
+    /**
+     * Adds an event to the list and saves the task list.
+     *
+     * @param tasks task list
+     * @param storage storage
+     * @param ui ui
+     */
     @Override
     public void execute(TaskList tasks, Storage storage, Ui ui) {
         Event event = new Event(task, time);
@@ -23,6 +39,11 @@ public class EventCommand extends Command{
         storage.save(saveFileString);
     }
 
+    /**
+     * Returns false as the program should not terminate.
+     *
+     * @return false.
+     */
     @Override
     public boolean isExit() {
         return false;

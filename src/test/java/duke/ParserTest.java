@@ -9,6 +9,9 @@ import java.time.format.DateTimeParseException;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
+    /**
+     * Tests when todo is not followed by a task name.
+     */
     @Test
     void testParse_incorrectInput_exceptionThrown() {
         try {
@@ -19,8 +22,11 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests when event is not proceeded with a /at keyword.
+     */
     @Test
-    void testParse_eventWithoutBy_exceptionThrown() {
+    void testParse_eventWithoutAt_exceptionThrown() {
         try {
             Command c = Parser.parse("event wrongInput 2021-10-19");
             Assertions.fail();
@@ -29,6 +35,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests when deadline is not given a deadline.
+     */
     @Test
     void testParse_deadlineWithoutDeadline_exceptionThrown() {
         try {
@@ -39,6 +48,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests when deadline is given an incorrect date format.
+     */
     @Test
     void testParse_deadlineIncorrectDateFormat_exceptionThrown() {
         try {
@@ -49,6 +61,9 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Tests when delete is not given a valid integer.
+     */
     @Test
     void testParse_deleteInvalidInput_exceptionThrown() {
         try {
@@ -58,6 +73,4 @@ public class ParserTest {
             assertTrue(true);
         }
     }
-
-
 }
