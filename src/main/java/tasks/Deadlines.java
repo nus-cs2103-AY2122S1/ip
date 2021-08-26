@@ -1,4 +1,8 @@
-public class Deadlines extends Task{
+package tasks;
+
+import viper.Instruction;
+
+public class Deadlines extends Task {
     protected String by;
 
     public Deadlines(String description, String by) {

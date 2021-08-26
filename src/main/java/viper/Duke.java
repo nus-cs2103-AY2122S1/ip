@@ -1,3 +1,8 @@
+package viper;
+
+import commands.Command;
+import exceptions.DukeException;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 

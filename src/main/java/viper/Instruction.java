@@ -1,3 +1,5 @@
+package viper;
+
 public enum Instruction {
     LIST("list"),
     DONE("done"),

@@ -1,3 +1,7 @@
+package viper;
+
+import tasks.Task;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -36,7 +40,7 @@ public class TaskList {
     
     public void doneTask(int index) {
         if (index < tasks.size()) {
-            tasks.get(index).isDone = true;
+            tasks.get(index).setDone();
         }
     }
 }

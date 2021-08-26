@@ -1,8 +1,12 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+package viper;
+
+import tasks.Deadlines;
+import tasks.Events;
+import tasks.Task;
+import tasks.Todos;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +43,7 @@ public class Storage {
             case "T":
                 Todos addTodo = new Todos(splitStr[2].trim());
                 if (!taskIsDone.isBlank()) {
-                    addTodo.isDone = true;
+                    addTodo.setDone();
                 }
                 taskList.add(addTodo);
                 break;
@@ -51,7 +55,7 @@ public class Storage {
                 String deadlineDate = taskDesc.substring(colonPos + 1, closeBracket).trim();
                 Deadlines addDeadline = new Deadlines(deadlineDesc, deadlineDate);
                 if (!taskIsDone.isBlank()) {
-                    addDeadline.isDone = true;
+                    addDeadline.setDone();
                 }
                 taskList.add(addDeadline);
                 break;
@@ -63,7 +67,7 @@ public class Storage {
                 String eventTime = taskDesc.substring(colonPos + 1, closeBracket).trim();
                 Events addEvent = new Events(eventDesc, eventTime);
                 if (!taskIsDone.isBlank()) {
-                    addEvent.isDone = true;
+                    addEvent.setDone();
                 }
                 taskList.add(addEvent);
                 break;
@@ -108,7 +112,7 @@ public class Storage {
         while(sc.hasNextLine()) {
             String currLine = sc.nextLine();
             if (currLine.equals(lineDone)) {
-                task.isDone = true;
+                task.setDone();
                 fw.write(task + System.lineSeparator());
             } else {
                 fw.write(currLine + System.lineSeparator());

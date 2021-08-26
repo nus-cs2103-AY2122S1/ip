@@ -1,6 +1,13 @@
+package commands;
+
+import viper.Storage;
+import viper.TaskList;
+import viper.Ui;
+import tasks.Task;
+
 import java.io.IOException;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     String t;
     String[] s;
     int index;

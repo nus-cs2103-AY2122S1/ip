@@ -1,3 +1,5 @@
+package viper;
+
 import java.util.Scanner;
 
 /**

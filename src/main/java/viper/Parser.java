@@ -1,3 +1,8 @@
+package viper;
+
+import commands.*;
+import exceptions.DukeException;
+
 /**
  * deals with making sense of the user command
  */

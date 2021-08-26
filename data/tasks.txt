@@ -1,4 +1,4 @@
-[T][X] homework x1
-[D][ ] submission (by: Sep 02 2021)
+[D][X] submission (by: Sep 02 2021)
 [T][X] homework x3
 [T][ ] homework x4
+[E][ ] bp concert (at: 3pm)

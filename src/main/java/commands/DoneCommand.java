@@ -1,6 +1,13 @@
+package commands;
+
+import tasks.Task;
+import viper.Storage;
+import viper.TaskList;
+import viper.Ui;
+
 import java.io.IOException;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     String t;
     String[] s;
     int index;
