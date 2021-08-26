@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TaskStorage {
+public class TaskStorage implements Storage<Task> {
     private final String path;
 
     public TaskStorage(String path) throws IOException {

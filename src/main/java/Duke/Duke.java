@@ -2,7 +2,9 @@ package Duke;
 
 import Duke.Commands.Command;
 import Duke.Storage.FileFormatException;
+import Duke.Storage.Storage;
 import Duke.Storage.TaskStorage;
+import Duke.Task.Task;
 import Duke.Task.TaskList;
 import Duke.Ui.Parser;
 import Duke.Ui.Ui;
@@ -17,7 +19,7 @@ public class Duke {
     private final TaskList taskList;
 
     public Duke(String todoStoragePath) throws IOException {
-        TaskStorage taskStorage = new TaskStorage(todoStoragePath);
+        Storage<Task> taskStorage = new TaskStorage(todoStoragePath);
         try {
             this.taskList = new TaskList(taskStorage);
         } catch (FileFormatException e) {

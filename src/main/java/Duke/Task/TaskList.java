@@ -1,6 +1,6 @@
 package Duke.Task;
 
-import Duke.Storage.TaskStorage;
+import Duke.Storage.Storage;
 
 import java.io.IOException;
 import java.util.List;
@@ -8,10 +8,10 @@ import java.util.List;
 public class TaskList {
     private static final String EMPTY_LIST_MESSAGE = "Hooray! You have no tasks currently.";
     private static final String CANNOT_FIND_TASK_MESSAGE = "Cannot find task with number %d.";
-    private final TaskStorage storage;
+    private final Storage<Task> storage;
     private final List<Task> list;
 
-    public TaskList(TaskStorage storage) throws IOException {
+    public TaskList(Storage<Task> storage) throws IOException {
         this.storage = storage;
         this.list = this.storage.load();
     }
