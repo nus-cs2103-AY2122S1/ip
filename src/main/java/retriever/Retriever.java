@@ -43,7 +43,7 @@ public class Retriever {
                 ui.printErrorMessage(e.getMessage());
             }
             ui.printDashedLine();
-        } while(!parser.isExit());
+        } while (!parser.isExit());
 
         // Printing the good-bye message.
         ui.printGoodByeMessage();

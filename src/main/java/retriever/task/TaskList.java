@@ -34,7 +34,7 @@ public class TaskList {
      */
     public void addDeadlineTask(String userInput) throws IllegalDeadlineFormatException, IllegalDateFormatException {
         // Making sure that a properly formatted deadline task is entered.
-        if(!userInput.toLowerCase().contains("/by")
+        if (!userInput.toLowerCase().contains("/by")
                 || userInput.split(" ").length < 4
                 || userInput.substring(9).split(" /by ").length < 2) {
             throw new IllegalDeadlineFormatException("Please Follow The Format For Adding A Deadline Task: \n"
@@ -65,7 +65,7 @@ public class TaskList {
      */
     public void addEventTask(String userInput) throws IllegalEventFormatException, IllegalDateFormatException {
         // Making sure that a properly formatted event task is entered.
-        if(!userInput.toLowerCase().contains("/at")
+        if (!userInput.toLowerCase().contains("/at")
                 || userInput.split(" ").length < 4
                 || userInput.substring(5).split(" /at ").length < 2) {
             throw new IllegalEventFormatException("Please Follow The Format For Adding An Event Task: \n"
@@ -95,7 +95,7 @@ public class TaskList {
      */
     public void addTodoTask(String userInput) throws IllegalTodoFormatException {
         // Making sure that a properly formatted todo task is entered.
-        if(userInput.split(" ").length < 2
+        if (userInput.split(" ").length < 2
                 || userInput.substring(5).compareTo("") == 0) {
             throw new IllegalTodoFormatException("Please Follow The Format For Adding A Todo Task: \n"
                     + "\ttodo task_description");
@@ -121,7 +121,7 @@ public class TaskList {
         String[] holder = parsedUserInput;
 
         // Checking if a task number is entered and is an integer.
-        if(holder.length <= 1 || holder[1].compareTo("") == 0
+        if (holder.length <= 1 || holder[1].compareTo("") == 0
                 || !Character.isDigit(holder[1].charAt(0))) {
             throw new IllegalTaskNumberException("Please Enter An Integer Value For Task Number");
         }
@@ -138,7 +138,6 @@ public class TaskList {
         } else {
             throw new TaskNotFoundException("Sorry! The Task Number Entered Does Not Exist!");
         }
-
     }
 
     /**
@@ -153,7 +152,7 @@ public class TaskList {
         String[] holder = parsedUserInput;
 
         // Checking if a task number is entered and is an integer.
-        if(holder.length <= 1 || holder[1].compareTo("") == 0
+        if (holder.length <= 1 || holder[1].compareTo("") == 0
                 || !Character.isDigit(holder[1].charAt(0))) {
             throw new IllegalTaskNumberException("Please Enter An Integer Value For Task Number");
         }
@@ -177,7 +176,7 @@ public class TaskList {
      */
     public void printTaskList() {
         // If the list is empty
-        if(userTaskList.size() == 0) {
+        if (userTaskList.size() == 0) {
             System.out.println("My Memory Is Empty, Please Feed Items!");
         } else {
             System.out.println("-> Your Tasks, My Master:");

@@ -47,30 +47,30 @@ public class Parser {
         String[] userInput = userCommand.split(" ");
         String commandEntered = userInput[0].toLowerCase();
 
-        switch(commandEntered) {
-            case "list":
-                taskList.printTaskList();
-                break;
-            case "delete":
-                taskList.deleteTask(userInput);
-                break;
-            case "done":
-                taskList.markTaskAsDone(userInput);
-                break;
-            case "deadline":
-                taskList.addDeadlineTask(userCommand);
-                break;
-            case "event":
-                taskList.addEventTask(userCommand);
-                break;
-            case "todo":
-                taskList.addTodoTask(userCommand);
-                break;
-            case "bye":
-                markSessionDone();
-                break;
-            default:
-                throw new IllegalCommandException("Woof! Command Not Found! Can I Sleep?");
+        switch (commandEntered) {
+        case "list":
+            taskList.printTaskList();
+            break;
+        case "delete":
+            taskList.deleteTask(userInput);
+            break;
+        case "done":
+            taskList.markTaskAsDone(userInput);
+            break;
+        case "deadline":
+            taskList.addDeadlineTask(userCommand);
+            break;
+        case "event":
+            taskList.addEventTask(userCommand);
+            break;
+        case "todo":
+            taskList.addTodoTask(userCommand);
+            break;
+        case "bye":
+            markSessionDone();
+            break;
+        default:
+            throw new IllegalCommandException("Woof! Command Not Found! Can I Sleep?");
         }
     }
 }

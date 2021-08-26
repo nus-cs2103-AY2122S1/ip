@@ -8,5 +8,4 @@ public class RetrieverException extends Exception {
     public RetrieverException(String errorMessage) {
         super(errorMessage);
     }
-
 }

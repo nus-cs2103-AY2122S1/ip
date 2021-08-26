@@ -4,7 +4,6 @@ package retriever.task;
  * This class keeps track of event type tasks.
  */
 public class Event extends Task {
-
     private TaskDateAndTime at;
 
     /**
@@ -13,7 +12,7 @@ public class Event extends Task {
      * @param description Description of the task.
      * @param at What time the event is at.
      */
-    public Event(String description, TaskDateAndTime at){
+    public Event(String description, TaskDateAndTime at) {
         super(description);
         this.at = at;
     }
