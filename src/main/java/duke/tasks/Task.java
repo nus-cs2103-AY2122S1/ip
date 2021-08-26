@@ -20,7 +20,9 @@ public class Task {
         return this.isDone;
     }
 
-    public int getIntStatus() { return (isDone ? 1 : 0); }
+    public int getIntStatus() {
+        return (isDone ? 1 : 0);
+    }
 
     public String getDetails() {
         return this.description;
@@ -34,7 +36,9 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getDateString() {return this.date.toString(); }
+    public String getDateString() {
+        return this.date.toString();
+    }
 
     @Override
     public String toString() {

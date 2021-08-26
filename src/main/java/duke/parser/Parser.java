@@ -170,5 +170,4 @@ public class Parser {
         return (taskArray[0].isBlank() || taskArray[0].isEmpty()) && (!taskArray[1].isBlank());
     }
 
-
 }

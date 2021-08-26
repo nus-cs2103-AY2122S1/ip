@@ -9,15 +9,15 @@ import java.io.*;
 import java.util.*;
 
 public class Storage {
-    private String filePath;
-    private String folderPath;
+    private final String filePath;
+    private final String folderPath;
 
     public Storage(String filePath, String folderPath) {
-         this.filePath = filePath;
+        this.filePath = filePath;
         this.folderPath = folderPath;
     }
 
-    public void readTasks(TaskList taskList) throws IOException {
+    public void readTasks(TaskList taskList) {
         try {
             Task task;
             File fol = new File(folderPath);
@@ -36,8 +36,7 @@ public class Storage {
                 }
             }
         } catch (IOException ex) {
-            ex.printStackTrace();
-           // throw new DukeException("The storage file could not be created");
+            throw new DukeException("The storage file could not be created");
         }
     }
 
@@ -94,10 +93,12 @@ public class Storage {
                 str = "T" + " | " + task.getIntStatus() + " | " + task.getDescription() + "\n";
                 break;
             case "[D]":
-                str = "D" + " | " + task.getIntStatus() + " | " + task.getDescription() + " | " + task.getDateString() + "\n";
+                str = "D" + " | " + task.getIntStatus() + " | " + task.getDescription() + " | "
+                        + task.getDateString() + "\n";
                 break;
             case "[E]":
-                str = "E" + " | " + task.getIntStatus() + " | " + task.getDescription() + " | " + task.getDateString() + "\n";
+                str = "E" + " | " + task.getIntStatus() + " | " + task.getDescription() + " | "
+                        + task.getDateString() + "\n";
                 break;
             default:
                 str = "";

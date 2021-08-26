@@ -7,7 +7,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import java.time.LocalDate;
 
-public class TasksOnCommand extends Command{
+public class TasksOnCommand extends Command {
     LocalDate date;
 
     public TasksOnCommand(LocalDate date) {

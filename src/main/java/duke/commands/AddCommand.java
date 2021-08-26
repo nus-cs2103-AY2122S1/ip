@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui){
+    public void execute(TaskList taskList, Ui ui) {
         if (taskList.containsTask(task)) {
             throw new RepeatedTaskException();
         } else {

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -57,7 +57,7 @@ public class TaskList {
     public boolean containsTask(Task task) {
         boolean ans = false;
         for (Task value : taskList) {
-            if (value.getDetails().trim().equals(task.getDetails().trim())){
+            if (value.getDetails().trim().equals(task.getDetails().trim())) {
                 ans = true;
                 break;
             }
