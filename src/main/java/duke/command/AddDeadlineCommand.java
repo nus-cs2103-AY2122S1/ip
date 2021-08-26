@@ -9,6 +9,10 @@ import duke.task.Deadline;
 public class AddDeadlineCommand extends Command {
     private String arguments;
 
+    /**
+     * Creates a command that adds a {@link Deadline} to the user's tasks.
+     * @param arguments Command arguments.
+     */
     public AddDeadlineCommand(String arguments) throws Exception {
         if (arguments.length() == 0) {
             throw new Exception("Command `deadline` requires arguments");
@@ -16,6 +20,12 @@ public class AddDeadlineCommand extends Command {
         this.arguments = arguments;
     }
 
+    /**
+     * Adds a deadline to the user's tasklist.
+     * @param taskList The tasklist.
+     * @param ui The instance of the {@link Ui} class.
+     * @param storage The instance of the {@link Storage} class.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
         Task deadline = Deadline.fromInput(arguments);
         taskList.addTask(deadline);

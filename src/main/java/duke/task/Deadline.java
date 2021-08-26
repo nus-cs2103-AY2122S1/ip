@@ -6,11 +6,22 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
     protected LocalDateTime time;
 
+    /**
+     * Constructs a new Deadline object.
+     * @param description Deadline description.
+     * @param time Deadline time.
+     */
     public Deadline(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
 
+    /**
+     * Constructs a new Deadline object.
+     * @param description Deadline description.
+     * @param time Deadline time.
+     * @param isCompleted Deadline completion status.
+     */
     public Deadline(String description, LocalDateTime time, boolean isCompleted) {
         super(description, isCompleted);
         this.time = time;
@@ -20,6 +31,10 @@ public class Deadline extends Task {
         return this.time;
     }
 
+    /**
+     * Constructs a new Deadline object from an input string.
+     * @param input Input string used to create Deadline object.
+     */
     public static Deadline fromInput(String input) throws Exception {
         String[] deadlineInputs = input.trim().split("\\s+/by\\s+", 2);
 

@@ -7,6 +7,11 @@ public class Parser {
         BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT,
     }
 
+    /**
+     * Parses the user's input string into a command.
+     * @param fullCommand The full command string input by the user.
+     * @throws An exception if the input is not a valid command.
+     */
     public static Command parse(String fullCommand) throws Exception {
         String[] commandArguments = fullCommand.split("\\s+", 2);
 

@@ -8,6 +8,10 @@ import duke.task.Task;
 public class DeleteTaskCommand extends Command {
     private String arguments;
 
+    /**
+     * Creates a command that deletes a task.
+     * @param arguments Command arguments.
+     */
     public DeleteTaskCommand(String arguments) throws Exception {
         if (arguments.length() == 0) {
             throw new Exception("Command `done` requires an arguments");
@@ -15,6 +19,12 @@ public class DeleteTaskCommand extends Command {
         this.arguments = arguments;
     }
 
+    /**
+     * Delete a task from the user's tasklist.
+     * @param taskList The tasklist.
+     * @param ui The instance of the {@link Ui} class.
+     * @param storage The instance of the {@link Storage} class.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
         Task task;
         try {

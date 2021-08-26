@@ -12,6 +12,9 @@ public class Ui {
         this.in = in;
     }
 
+    /**
+     * Reads a command input by the user.
+     */
     public String readCommand() {
         System.out.print("> ");
         return in.nextLine().trim();
@@ -25,6 +28,10 @@ public class Ui {
         printMessage(BYE_TEXT);
     }
 
+    /**
+     * Prints a formatted message to the user.
+     * @param string The message to print.
+     */
     public void printMessage(String string) {
         System.out.print("------------------------------------------------\n" + string + "\n"
                 + "------------------------------------------------\n\n");

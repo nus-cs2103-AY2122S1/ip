@@ -15,6 +15,9 @@ public class Duke {
         this.taskList = new TaskList(storage.loadTasks());
     }
 
+    /**
+     * Runs the instance of {@link Duke}.
+     */
     public void run() {
         ui.printGreeting();
 
@@ -34,6 +37,10 @@ public class Duke {
         ui.printGoodbye();
     }
 
+    /**
+     * Initializes an instance of the {@link Duke} class and runs the program.
+     * @param args The command-line arguments.
+     */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String filePath = "duke.txt";

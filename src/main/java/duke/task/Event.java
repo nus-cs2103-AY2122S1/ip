@@ -6,11 +6,22 @@ import java.time.LocalDateTime;
 public class Event extends Task {
     protected LocalDateTime time;
 
+    /**
+     * Constructs a new Event object.
+     * @param description Event description.
+     * @param time Event time.
+     */
     public Event(String description, LocalDateTime time) {
         super(description);
         this.time = time;
     }
 
+    /**
+     * Constructs a new Event object.
+     * @param description Event description.
+     * @param time Event time.
+     * @param isCompleted Event completion status.
+     */
     public Event(String description, LocalDateTime time, boolean isCompleted) {
         super(description, isCompleted);
         this.time = time;
@@ -20,6 +31,10 @@ public class Event extends Task {
         return this.time;
     }
 
+    /**
+     * Constructs a new Event object from an input string.
+     * @param input Input string used to create Event object.
+     */
     public static Event fromInput(String input) throws Exception {
         String[] eventInputs = input.trim().split("\\s+/at\\s+", 2);
 

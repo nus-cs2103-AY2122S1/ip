@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateTime {
+    /**
+     * Parses a string into a date.
+     * @param str The string containing a date.
+     */
     public static LocalDateTime parse(String str) throws Exception {
         try {
             return LocalDateTime.parse(str, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
