@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate deadline;
     protected String logo = "[E]";
 
@@ -22,6 +22,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.getStatusIcon() +  " " + super.description + " (at: " + dateFormat() + " " + ")";
+        return "[E]" + super.getStatusIcon() + " " + super.description + " (at: " + dateFormat() + " " + ")";
     }
 }

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    List<Task> listOfTask;
+    List<Task> listOfTasks;
     Storage storage = new Storage();
 
     TaskList() {
-        this.listOfTask = new ArrayList<Task>();
+        this.listOfTasks = new ArrayList<Task>();
 
         try {
             storage.createFile();
@@ -23,9 +23,9 @@ public class TaskList {
      * @param task
      */
     public void list(Task task) {
-        listOfTask.add(task);
-        int counter = listOfTask.size();
-        storage.save(listOfTask);
+        listOfTasks.add(task);
+        int counter = listOfTasks.size();
+        storage.save(listOfTasks);
         System.out.println("Got it. I've added this task:\n" + "  " + task.toString() + "\nNow you have " + counter + " tasks in the list.");
     }
 
@@ -35,20 +35,20 @@ public class TaskList {
      * @param index
      */
     public void deleteTask(int index) {
-        Task item = listOfTask.get(index - 1);
-        listOfTask.remove(index - 1);
-        storage.save(listOfTask);
-        System.out.println("Noted. I've removed this task:\n  " + item + "\nNow you have " + listOfTask.size() + " tasks left in the list");
+        Task item = listOfTasks.get(index - 1);
+        listOfTasks.remove(index - 1);
+        storage.save(listOfTasks);
+        System.out.println("Noted. I've removed this task:\n  " + item + "\nNow you have " + listOfTasks.size() + " tasks left in the list");
     }
 
     /**
      * Prints the task in the arraylist
      */
     public void printList() {
-        if (listOfTask.size() > 0) {
+        if (listOfTasks.size() > 0) {
             System.out.println("Here are the tasks in your list:");
-            for (int i = 0; i < listOfTask.size(); i++) {
-                System.out.println(i + 1 + "." + listOfTask.get(i));
+            for (int i = 0; i < listOfTasks.size(); i++) {
+                System.out.println(i + 1 + "." + listOfTasks.get(i));
             }
         } else {
             System.out.println("There are no tasks in your list");
@@ -61,10 +61,10 @@ public class TaskList {
      * @param number
      */
     public void changeStatus(int number) {
-        if (listOfTask.size() >= number) {
-            listOfTask.get(number - 1).markAsDone();
-            storage.save(listOfTask);
-            System.out.println("Nice! I've marked this task as done:\n  " + listOfTask.get(number - 1));
+        if (listOfTasks.size() >= number) {
+            listOfTasks.get(number - 1).markAsDone();
+            storage.save(listOfTasks);
+            System.out.println("Nice! I've marked this task as done:\n  " + listOfTasks.get(number - 1));
             return;
         }
     }
