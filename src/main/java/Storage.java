@@ -47,7 +47,7 @@ public class Storage {
             BufferedReader reader = new BufferedReader(new FileReader(dataFile));
             String nextLine;
             while ((nextLine = reader.readLine()) != null) {
-                taskList.addTask((DataParser.readData(nextLine)));
+                taskList.addTask((Parser.parseData(nextLine)));
             }
         } catch (Exception e) {
             if (e instanceof FileNotFoundException) {

@@ -190,7 +190,7 @@ public class Duke {
 
             //check if a valid time was entered
             try {
-                LocalDate date = LocalDateParser.parse(time);
+                LocalDate date = Parser.parseDate(time);
                 tempTask = new Deadlines(str.toString(), date);
             } catch (IllegalArgumentException exception) {
                 System.out.println("Enter a valid date format! (yyyy-mm-dd)");
@@ -223,7 +223,7 @@ public class Duke {
 
             //check if a valid time was entered
             try {
-                LocalDate date = LocalDateParser.parse(eventTime);
+                LocalDate date = Parser.parseDate(eventTime);
                 tempTask = new Events(str.toString(), date);
             } catch (IllegalArgumentException exception) {
                 System.out.println("Enter a valid date format! (yyyy-mm-dd)");
