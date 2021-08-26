@@ -39,6 +39,10 @@ public class Task {
      * @return False, since this class does not contain a date attribute.
      */
 
+    public boolean containsPhrase(String phrase) {
+        return taskName.contains(phrase);
+    }
+
     public boolean hasSameDate(LocalDate date) {
         return false;
     }

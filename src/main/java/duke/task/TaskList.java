@@ -173,13 +173,31 @@ public class TaskList {
     }
 
     /**
+     * Gets all tasks containing a certain keyphrase, depending on the user's input.
+     *
+     * @param input String containing user input.
+     * @return A new TaskList instance containing all tasks that contain the input phrase.
+     * @throws DukeException If input is in an invalid format.
+     */
+    public TaskList findTasks(String input) throws DukeException {
+        if (input.length() <= 4) {
+            throw new DukeException("Please type in a keyphrase to search your tasks with.");
+        }
+        String keyphrase = input.substring(5);
+        List<Task> foundTasks = tasks.stream()
+                .filter(task -> task.containsPhrase(keyphrase))
+                .collect(Collectors.toList());
+        return new TaskList(foundTasks);
+    }
+
+    /**
      * Gets all tasks due in x hours/days/months from now, depending on the user's input.
      *
      * @param input String containing user input.
      * @return A new TaskList instance containing all tasks due within the inputted period.
      * @throws DukeException If input is in an invalid format.
      */
-    public TaskList getDueTasks(String input) throws DukeException {
+    public TaskList getDueTasks(String input) {
         // Check if input is valid and input number is an integer
         if (input.length() <= 4 || !input.substring(4, input.length() - 1).matches("\\d+")) {
             throw new DukeException("Command must be of the form: due [integer][h/d/m] "
