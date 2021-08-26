@@ -1,8 +1,8 @@
 list
 todo borrow book
 todo read book
-deadline discuss book /by 23 Aug
-event team meeting /at Sat 8-9pm
+deadline discuss book /by 23-08-2021 1100
+event team meeting /at 27-08-2021 1700 to 27-08-2021 1900
 done 2
 list
 done 2
