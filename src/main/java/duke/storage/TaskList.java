@@ -8,13 +8,13 @@ import duke.tasks.ToDo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
-public class TaskList extends ArrayList<Task>{
+public class TaskList extends ArrayList<Task> {
 
     private static final String DIVIDER = "%%";
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @Override
     public String toString() {
@@ -72,7 +72,7 @@ public class TaskList extends ArrayList<Task>{
         Task task = this.get(index);
         if (task.getStatusIcon().equals("X")) {
             throw new DukeExceptions("That task was already marked as done");
-        } else{
+        } else {
             task.markFinished(true);
         }
     }

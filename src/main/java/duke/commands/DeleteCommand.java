@@ -3,10 +3,10 @@ package duke.commands;
 import duke.Ui;
 import duke.storage.Storage;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     int index;
 
-    public DeleteCommand (int input) {
+    public DeleteCommand(int input) {
         this.index = input - 1;
     }
 
@@ -16,7 +16,7 @@ public class DeleteCommand extends Command{
             ui.print("Okay! I have deleted this task from your list: \n" + storage.getTask(index));
             storage.deleteFromList(index);
             storage.save();
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             ui.print("Oops, the list is not that big!");
         }
         return false;

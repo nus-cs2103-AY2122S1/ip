@@ -1,7 +1,6 @@
 package duke;
 
 import duke.commands.ByeCommand;
-
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
@@ -22,10 +21,11 @@ public class Parser {
     private static final String TIME_PARSE_ERROR = "Hmm.. Seems like the time format is foreign to me. \n"
             + "Please use the following format:\n"
             + "yyyy-MM-dd HH:MM (e.g 2020-05-19 15:30)";
+
     /**
      * Returns full command in shape of a list of strings
      */
-    public Command parse(String userInput) throws DukeExceptions{
+    public Command parse(String userInput) throws DukeExceptions {
         String[] splitUserInput = userInput.split(" ", 2);
         String command = splitUserInput[0].strip();
 

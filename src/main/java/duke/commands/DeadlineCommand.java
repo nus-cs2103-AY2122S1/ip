@@ -4,8 +4,9 @@ import duke.Ui;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 
-public class DeadlineCommand extends Command{
+public class DeadlineCommand extends Command {
     Deadline deadline;
+
     public DeadlineCommand(Deadline deadline) {
         this.deadline = deadline;
     }
