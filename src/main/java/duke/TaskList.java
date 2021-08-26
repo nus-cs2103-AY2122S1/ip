@@ -41,9 +41,14 @@ public class TaskList {
      *
      * @param index The index of the task.
      * @return The task with given index.
+     * @throws IndexOutOfBoundException When the index is out of bound.
      */
-    public Task getTask(int index) {
-        return this.taskList.get(index);
+    public Task getTask(int index) throws IndexOutOfBoundException {
+        try {
+            return this.taskList.get(index - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundException();
+        }
     }
 
     /**
@@ -53,7 +58,6 @@ public class TaskList {
      */
     public void addTask(Task task) {
         this.taskList.add(task);
-        Ui.addTaskMessage(this, task);
     }
 
     /**
@@ -69,7 +73,6 @@ public class TaskList {
         if (index > this.size()) {
             throw new IndexOutOfBoundException();
         }
-        Ui.removeTaskMessage(this, index);
         this.taskList.remove(index - 1);
     }
 
@@ -86,11 +89,11 @@ public class TaskList {
         if (item > this.taskList.size()) {
             throw new IndexOutOfBoundException();
         }
-        if (this.taskList.get(item - 1).isDone()) {
+        Task task = this.taskList.get(item - 1);
+        if (task.isDone()) {
             throw new DukeException("☹ OOPS!!! The task is already done!");
         }
-        Ui.taskDoneMessage(this, item);
-        this.taskList.get(item - 1).setDone(true);
+        task.setDone(true);
     }
 
     /**

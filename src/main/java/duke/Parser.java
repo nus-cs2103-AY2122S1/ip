@@ -1,7 +1,7 @@
 package duke;
 
+import duke.command.*;
 import duke.exception.DukeException;
-import duke.exception.IndexMismatchException;
 import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -122,7 +122,7 @@ public class Parser {
                     throw new InvalidCommandException();
                 }
                 try {
-                    task = new Deadline(information[0], LocalDate.parse(information[1]));
+                    task = new Event(information[0], LocalDate.parse(information[1]));
                 } catch (DateTimeParseException e) {
                     throw new DukeException("\tPlease use the YYYY-MM-DD format for the time!");
                 }
@@ -138,8 +138,8 @@ public class Parser {
     }
 
     /**
-     * Parses the input command and perform actions to the specified {@code taskList} and {@code storage} according to
-     * the result. If the command is invalid, then raises a {@code DukeException}.
+     * Parses the input command and return the corresponding {@code Command}. If the command is invalid, then raises a
+     * {@code DukeException}.
      * <br>
      * The command can be in the following format. Each "()" means a non-empty input.
      * <ul>
@@ -149,16 +149,15 @@ public class Parser {
      *     <li>{@code done (item number)}: mark a certain task as done;</li>
      *     <li>{@code delete (item number)}: delete a certain task;</li>
      *     <li>{@code query (YYYY-MM-DD)}: query all tasks that will happen or due on a certain day;</li>
+     *     <li>{@code find (keyword)}: query all tasks that contain the keyword;</li>
      *     <li>{@code list}: list all the undeleted tasks;</li>
      *     <li>{@code bye}: terminate the bot.</li>
      * </ul>
      *
      * @param command  The command to perform certain action.
-     * @param taskList The task list to store the tasks.
-     * @param storage  The file to store the tasks.
      * @throws DukeException When the command is invalid.
      */
-    public static void parseCommand(String command, TaskList taskList, Storage storage) throws DukeException {
+    public static Command parseCommand(String command) throws DukeException {
         command = command.trim();
         if (command.contains(" ")) {
             String commandType = command.split(" ", 2)[0];
@@ -166,54 +165,25 @@ public class Parser {
 
             switch (commandType) {
             case "todo": {
-                Task task = descriptionToTask(Task.TaskType.TODO, description);
-                taskList.addTask(task);
-                storage.addTask(task);
-                return;
+                return new AddTaskCommand(Task.TaskType.TODO, description);
             }
             case "deadline": {
-                Task task = descriptionToTask(Task.TaskType.DEADLINE, description);
-                taskList.addTask(task);
-                storage.addTask(task);
-                return;
+                return new AddTaskCommand(Task.TaskType.DEADLINE, description);
             }
             case "event": {
-                Task task = descriptionToTask(Task.TaskType.EVENT, description);
-                taskList.addTask(task);
-                storage.addTask(task);
-                return;
+                return new AddTaskCommand(Task.TaskType.EVENT, description);
             }
             case "done": {
-                if (description.matches("\\d+")) {
-                    int item = Integer.parseInt(description);
-                    taskList.completeTask(item);
-                    storage.refreshTask(taskList);
-                } else {
-                    throw new IndexMismatchException();
-                }
-                return;
+                return new ModifyTaskCommand(ModifyTaskCommand.CommandType.DONE, description);
             }
             case "delete": {
-                if (description.matches("\\d+")) {
-                    int item = Integer.parseInt(description);
-                    taskList.removeTask(item);
-                    storage.refreshTask(taskList);
-                } else {
-                    throw new IndexMismatchException();
-                }
-                return;
+                return new ModifyTaskCommand(ModifyTaskCommand.CommandType.DELETE, description);
             }
             case "query": {
-                try {
-                    Ui.printMessage(taskList.printList(LocalDate.parse(description)));
-                } catch (DateTimeParseException e) {
-                    throw new InvalidCommandException();
-                }
-                return;
+                return new QueryCommand(QueryCommand.CommandType.QUERY, description);
             }
             case "find": {
-                Ui.printMessage(taskList.printList(description));
-                return;
+                return new QueryCommand(QueryCommand.CommandType.FIND, description);
             }
             default: {
                 throw new InvalidCommandException();
@@ -223,11 +193,9 @@ public class Parser {
 
         switch (command) {
         case "list":
-            Ui.printMessage(taskList.printList());
-            break;
+            return new QueryCommand(QueryCommand.CommandType.LIST, "");
         case "bye":
-            Ui.farewell();
-            break;
+            return new ExitCommand();
         default:
             throw new InvalidCommandException();
         }

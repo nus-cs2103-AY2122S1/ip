@@ -111,10 +111,10 @@ public class Storage {
                 return;
             }
             FileWriter fileWriter = new FileWriter(this.tasks);
-            for (int i = 0; i < numOfTask - 1; i++) {
+            for (int i = 1; i < numOfTask; i++) {
                 fileWriter.write(taskList.getTask(i).taskToLine() + "\n");
             }
-            fileWriter.write(taskList.getTask(numOfTask - 1).taskToLine());
+            fileWriter.write(taskList.getTask(numOfTask).taskToLine());
             fileWriter.close();
         } catch (IOException e) {
             Ui.reportError("☹ OOPS!!! Something wrong happened when modifying the file.");

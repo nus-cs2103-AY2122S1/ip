@@ -1,8 +1,7 @@
 package duke;
 
+import duke.command.Command;
 import duke.exception.DukeException;
-
-import java.util.Scanner;
 
 /**
  * A class that encapsulates Duke, a task management bot.
@@ -45,22 +44,17 @@ public class Duke {
      * Runs the Duke bot. Users may deal with tasks by entering command.
      */
     private void run() {
-        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
-
+        boolean isExit = false;
         Ui.greet();
 
-        String input = scanner.next();
-
-        while (true) {
+        while (!isExit) {
             try {
-                Parser.parseCommand(input, tasks, storage);
+                String input = Ui.readCommand();
+                Command command = Parser.parseCommand(input);
+                command.execute(this.tasks, this.storage);
+                isExit = command.isExit();
             } catch (DukeException e) {
                 Ui.reportError(e);
-            }
-            if (input.equals("bye".trim())) {
-                break;
-            } else {
-                input = scanner.next();
             }
         }
     }
