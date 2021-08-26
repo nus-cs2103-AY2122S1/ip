@@ -32,6 +32,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a given command
+     *
+     * @param command raw command string to parse
+     * @return Command object representing the action to be taken
+     * @throws IrisException if command is invalid
+     */
     public static Command parse(String command) throws IrisException {
         if (command.equals("list")) {
             return new ListCommand();

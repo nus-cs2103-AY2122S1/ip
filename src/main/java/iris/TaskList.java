@@ -27,7 +27,7 @@ public class TaskList {
      * Gets the Task from the TaskList at a given index
      *
      * @param index index of task to get
-     * @return
+     * @return Task at the given index
      */
     public Task get(int index) {
         return tasks.get(index);
@@ -47,7 +47,7 @@ public class TaskList {
      *
      * @param name name of the Deadline to be created
      * @param by   due date of the Deadline to be created
-     * @throws IrisException
+     * @throws IrisException for invalid Deadline
      */
     public void addDeadline(String name, String by) throws IrisException {
         tasks.add(new Deadline(name, by));
@@ -58,7 +58,7 @@ public class TaskList {
      *
      * @param name name of the Event to be created
      * @param at   date of the Event to be created
-     * @throws IrisException
+     * @throws IrisException for invalid Event
      */
     public void addEvent(String name, String at) throws IrisException {
         tasks.add(new Event(name, at));
@@ -99,7 +99,7 @@ public class TaskList {
      *
      * @param index index of Task to delete from TaskList
      * @return task object that was just deleted
-     * @throws IrisException
+     * @throws IrisException for invalid index given
      */
     public Task delete(int index) throws IrisException {
         validateTaskIndex(index);
