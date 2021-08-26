@@ -1,6 +1,9 @@
 import duke.*;
 import duke.command.Command;
 
+/**
+ * The main class where the program starts running in.
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
@@ -17,6 +20,9 @@ public class Duke {
         }
     }
 
+    /**
+     * The program will begin when this method is called.
+     */
     public void run() {
         ui.welcomeMessage();
         boolean isExit = false;

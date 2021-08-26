@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,13 +14,18 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * A list that is created when the program starts running. The list is generated
+ * at first from the local memory and later on can be modified while the program is
+ * running.
+ */
 public class TaskList {
     private ArrayList<Task> xs = new ArrayList<>();
 
     public TaskList(File file) throws DukeException {
         try {
             fileCopy(file);
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
             throw new DukeException("Error, file cannot be found, creating new destination");
         }
     }
@@ -49,8 +55,14 @@ public class TaskList {
         return localDate;
     }
 
-
-    public void fileCopy(File dukeData) throws IOException {
+    /**
+     * A method that copies the list that is stored in the local file when the program starts running
+     * so that it is stored in the list in TaskList.
+     *
+     * @param dukeData The file that resides in the user's local memory.
+     * @throws DukeException An exception thrown as Scanner requires a FileNotFoundException to be handled.
+     */
+    public void fileCopy(File dukeData) throws FileNotFoundException {
         Scanner fileScanner = new Scanner(dukeData);
         while (fileScanner.hasNextLine()) {
             String s = fileScanner.nextLine();
@@ -77,11 +89,16 @@ public class TaskList {
                 }
                 xs.add(e);
             }
-
         }
         fileScanner.close();
     }
 
+    /**
+     * A method that prints a list of tasks that the user currently has in his list.
+     *
+     * @return A boolean that states whether all tasks in the list have been completed.
+     * @throws DukeException A message thrown as there are no items that currently are in the list.
+     */
     public boolean printItems() throws DukeException {
         boolean allDone = true;
         if (xs.size() == 0) {
@@ -96,6 +113,14 @@ public class TaskList {
         return allDone;
     }
 
+    /**
+     * A method that changes the task completion status to 'done' while returning the task so Storage and
+     * Ui can perform other actions with regards to the task to be changed.
+     *
+     * @param startOfString An integer that tells us the item number to change in the list.
+     * @return The task that has been modified so that other parts can use it to change.
+     * @throws DukeException A thrown exception as the number exceeds the total number of tasks or is negative.
+     */
     public Task retrieveTask(int startOfString) throws DukeException {
         if (startOfString > xs.size() || startOfString < 0) {
             throw new DukeException("    Uh oh! Item " + startOfString + " does not seem to exist!");
@@ -105,6 +130,14 @@ public class TaskList {
         return taskToChange;
     }
 
+    /**
+     * A method that deletes the task from the current list of tasks while returning the task so Storage and
+     * Ui can perform other ractions with regards to the task to be changed.
+     *
+     * @param startOfString An integer that tells us the item number so we can delete it.
+     * @return The task that has been deleted so other functions can be done with regards to deleting the task.
+     * @throws DukeException A thrown exception as the number exceeds the total number of tasks or is negative.
+     */
     public Task deleteTask(int startOfString) throws DukeException {
         if (startOfString > xs.size() || startOfString < 0) {
             throw new DukeException("    Uh oh! Item " + startOfString + " does not seem to exist!");
@@ -114,6 +147,15 @@ public class TaskList {
         return taskToDelete;
     }
 
+    /**
+     * A method adds a task to the list of tasks the user currently has.
+     *
+     * @param type The type of task that is to be added (Deadline, Event or To do).
+     * @param description The description of the task the user gave.
+     * @param time The time which the task is to be completed(Deadline) or when the task will begin(Event).
+     * @return An integer that tells us how many items are currently on the list.
+     * @throws DukeException
+     */
     public int addToList(String type, String description, String time) throws DukeException {
         try {
             LocalDateTime ld = LocalDateTime.now();

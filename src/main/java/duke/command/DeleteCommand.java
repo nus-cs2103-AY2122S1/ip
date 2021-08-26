@@ -6,6 +6,9 @@ import duke.Ui;
 import duke.Storage;
 import duke.task.Task;
 
+/**
+ * A command that deletes a current task from the task list.
+ */
 public class DeleteCommand implements Command {
 
     private int startOfString;
@@ -14,6 +17,15 @@ public class DeleteCommand implements Command {
         this.startOfString = startOfString;
     }
 
+    /**
+     * Executes a command to the task list to delete the current task. Removes the task from the memory
+     * in storage, and outputs what task has been deleted from the list.
+     *
+     * @param taskList Tasklist that contains an Arraylist of agendas on the list.
+     * @param ui Ui that outputs something based on the command given.
+     * @param storage Storage that changes the list stored in data/duke.txt based on the command.
+     * @throws DukeException catches an error where someone inputs something wrong.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task taskToDelete = taskList.deleteTask(startOfString);
@@ -21,6 +33,11 @@ public class DeleteCommand implements Command {
         ui.markAsDeleted(taskToDelete);
     }
 
+    /**
+     * A method that checks whether the current command will cause the program to exit or not.
+     *
+     * @return a boolean that prompts the program whether to exit.
+     */
     @Override
     public boolean isExit() {
         return false;
