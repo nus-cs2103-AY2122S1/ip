@@ -16,7 +16,7 @@ public class TaskListTest {
         taskList.add(test2);
         taskList.add(test3);
         taskList.delete(2);
-        assertEquals(taskList.get(2), test3, "`delete()` should remove the task from the list");
+        assertEquals(test3, taskList.get(2), "`delete()` should remove the task from the list");
     }
 
     @Test
@@ -25,7 +25,7 @@ public class TaskListTest {
         for (int i = 0; i < 10; i++) {
             taskList.add(new Todo("test"));
         }
-        assertEquals(taskList.getLength(), 10, "`getLength()` should return the length of list.");
+        assertEquals(10, taskList.getLength(), "`getLength()` should return the length of list.");
     }
 
 
@@ -34,7 +34,7 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         Todo todo = new Todo("todo");
         taskList.add(todo);
-        assertEquals(taskList.get(1), todo, "`get()` should return the task inside the list.");
+        assertEquals(todo, taskList.get(1), "`get()` should return the task inside the list.");
     }
 
 
