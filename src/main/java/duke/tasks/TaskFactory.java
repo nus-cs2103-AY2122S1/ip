@@ -108,11 +108,11 @@ public class TaskFactory {
     private void checkTaskIncludesTime(String newTaskType, String details) throws AuguryException {
         if (newTaskType.equalsIgnoreCase(Task.TaskTypes.EVENT.toString())) {
             if (details.split("/at ").length < 2 || details.split("/at ")[1].length() <= 1) {
-                throw new InvalidTaskCreationException("Event task must include time! (using /at time)");
+                throw new InvalidTaskCreationException("Event task must include time! (use /at YYYY-MM-DD HHMM)");
             }
         } else if (newTaskType.equalsIgnoreCase(Task.TaskTypes.DEADLINE.toString())) {
             if (details.split("/by ").length < 2 || details.split("/by ")[1].length() <= 1) {
-                throw new InvalidTaskCreationException("Deadline task must include time! (using /by time)");
+                throw new InvalidTaskCreationException("Deadline task must include time! (use /by YYYY-MM-DD HHMM)");
             }
         }
     }
