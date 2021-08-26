@@ -157,24 +157,22 @@ public class Ui {
      */
     public String getReply(Command c, String input, ArrayList<Task> arListTask) throws BernException {
         switch (c) {
-            case DONE:
-                return new Ui().ifDone(input, arListTask);
-            case DEADLINE:
-                return ifDeadline(input, arListTask);
-            case EVENT:
-                return ifEvent(input, arListTask);
-            case TODO:
-                return ifToDo(input, arListTask);
-            case BYE:
-                return ifBye(input, arListTask);
-            case LIST:
-                return ifList(input, arListTask);
-            case DELETE:
-                return ifDelete(input, arListTask);
-            case FIND:
-                return ifFind(input, arListTask);
-            case INVALID:
-                throw new InvalidCommandException(input);
+        case DONE:
+            return new Ui().ifDone(input, arListTask);
+        case DEADLINE:
+            return ifDeadline(input, arListTask);
+        case EVENT:
+            return ifEvent(input, arListTask);
+        case TODO:
+            return ifToDo(input, arListTask);
+        case BYE:
+            return ifBye(input, arListTask);
+        case LIST:
+            return ifList(input, arListTask);
+        case DELETE:
+            return ifDelete(input, arListTask);
+        case INVALID:
+            throw new InvalidCommandException(input);
         }
         return "";
     }
