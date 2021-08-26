@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * ToDo class is a task that takes in description
+ */
 public class ToDo extends Task {
     protected String logo = "[T]";
 
@@ -7,6 +10,11 @@ public class ToDo extends Task {
         super(description);
     }
 
+    /**
+     * Returns logo corresponding to type
+     *
+     * @return the logo [T]
+     */
     public String logo() {
         return logo;
     }

@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages the arraylist of tasks
+ */
 public class TaskList {
     List<Task> listOfTask;
     Storage storage = new Storage();
