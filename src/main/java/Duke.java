@@ -1,4 +1,3 @@
-import java.sql.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -7,7 +6,6 @@ import java.io.IOException;
 
 /**
  * This class encapsulates a Duke chat-bot.
- *
  */
 public class Duke {
     private static final int lv = 7;
@@ -61,7 +59,7 @@ public class Duke {
      * This method copies the contents of the file from filePath into an output file.
      *
      * @param filePath the file path to the file from which to copy from
-     * @param target the target string to which to copy the contents of the file
+     * @param target   the target string to which to copy the contents of the file
      * @throws IOException if filePath does not exist
      */
     private static void copyFileContents(String filePath, String target) throws IOException {
@@ -69,8 +67,11 @@ public class Duke {
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         StringBuilder targetBuilder = new StringBuilder(target);
         while (s.hasNext()) {
-            targetBuilder.append(s.nextLine());
+            targetBuilder.append(s.nextLine()).append("\n");
         }
+        System.out.println("after while: \n" + targetBuilder);
+        System.out.println("parse result: \n" + parse(targetBuilder.toString()));
+        taskArrayList = parse(targetBuilder.toString());
     }
 
     /**
@@ -81,14 +82,74 @@ public class Duke {
      * @return a taskArrayList made up of tasks
      */
     private static ArrayList<Task> parse(String toParse) {
+        ArrayList<Task> result = new ArrayList<>();
+        Scanner ps = new Scanner(toParse); // passes whole file into the scanner
+//        [[T][ ] 1, [E][ ] 2 (at: 2), [D][ ] 3 (by: 3)]
+        while (ps.hasNextLine()) {
+            System.out.println("has nextline");
+            String nLine = ps.nextLine(); // parse one line at a time
+            int ref = 3; // reference point
+            char taskType = nLine.charAt(ref);
+            boolean isDone = nLine.charAt(ref + 3) == 'X';
+            int strLength = nLine.length();
+            switch (taskType) {
+            case 'T':
+                String todoName = nLine.substring(ref + 6, strLength);
+                Task newestTodo = new ToDo(todoName);
+                if (isDone) {
+                    newestTodo.markAsDone();
+                }
+                result.add(newestTodo);
+                break;
+            case 'D':
+                String deadlineInfo = nLine.substring(ref + 6, strLength);
+                String[] arrD = deadlineInfo.split("\\(by: ", 2);
+                String deadlineName = arrD[0];
+                String deadlineReminder = arrD[1].substring(0, arrD[1].length() - 1);
+                Task newestDeadline = new Deadline(deadlineName, deadlineReminder);
+                result.add(newestDeadline);
+                if (isDone) {
+                    newestDeadline.markAsDone();
+                }
+                break;
+            case 'E':
+                String eventInfo = nLine.substring(ref + 6, strLength);
+                String[] arrE = eventInfo.split("\\(at: ", 2);
+                String eventName = arrE[0];
+                String eventReminder = arrE[1].substring(0, arrE[1].length() - 1);
+                Task newestEvent = new Event(eventName, eventReminder);
+                result.add(newestEvent);
+                if (isDone) {
+                    newestEvent.markAsDone();
+                }
+                break;
+            default:
+                System.out.println("Unknown input");
+                break;
+            }
+        }
+        System.out.println("result is: " + result);
+        return result;
+    }
 
-        return new ArrayList<>();
+    /**
+     * This method overwrites the file.
+     *
+     * @param filePath     the path to the file to append to
+     * @param textToAppend the text to append
+     * @throws IOException if filePath does not exist
+     */
+
+    private static void overwriteFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, false); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
     }
 
     /**
      * This method appends to the file instead of overwrites.
      *
-     * @param filePath the path to the file to append to
+     * @param filePath     the path to the file to append to
      * @param textToAppend the text to append
      * @throws IOException if filePath does not exist
      */
@@ -110,17 +171,22 @@ public class Duke {
 
         // populating featuresCombined so each level has all elements of levels before it
         StringBuilder featuresCombined = new StringBuilder();
-        String toParse = "";
-        copyFileContents(dukeFilePath, toParse);
-        taskArrayList = parse(toParse);
         for (int count = 0; count <= lv; count++) {
             featuresCombined.append(features[count]);
         }
 
+        // parsing duke.txt
+        String toParse = "";
+        copyFileContents(dukeFilePath, toParse);
+        taskArrayList = parse(toParse);
+        System.out.println("tal tstr: " + taskArrayList.toString());
+
         // Welcome message
         String welcome = "Hello! I'm Duke: Level " + lv + "\n"
                 + "What would you like to do today?\n"
-                + "My current features are: " + featuresCombined;
+                + "My current features are: " + featuresCombined + "\n"
+                + "Here are your tasks: " + "\n"
+                + sandwich(listBeautify(taskArrayList));
 
         System.out.println(sandwich(welcome));
 
@@ -140,6 +206,11 @@ public class Duke {
         String goodbye = "Thank you for using Duke: Level " + lv + "\n"
                 + "See you soon!";
 
+        // TESTING DELETE BEFORE COMMIT!
+        // ArrayList<Task> test = new ArrayList<Task>(Integer.parseInt("
+        // [[T][ ] t1, [D][ ] t2 (by: tt2), [E][ ] t3 (at: now)]
+        // "));
+
         // Scanner to read user inputs
         Scanner scanner = new Scanner(System.in);
 
@@ -148,8 +219,10 @@ public class Duke {
             try {
                 if (userInput.equals("bye")) { // user inputs "bye", set canExit to true and Exit
                     canExit = true;
-                    String temp = sandwich(listBeautify(taskArrayList));
-                    appendToFile(dukeFilePath, temp); // append temp.toString() to dukeFile
+                    String temp = listBeautify(taskArrayList);
+                    String tal = taskArrayList.toString();
+                    // appendToFile(dukeFilePath, temp); // append temp.toString() to dukeFile
+                    overwriteFile(dukeFilePath, temp); // append temp.toString() to dukeFile
                     System.out.println(sandwich(goodbye));
                 } else { // check first input
                     switch (userInput) {
