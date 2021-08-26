@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
     private static final int lv = 6;
@@ -10,10 +13,12 @@ public class Duke {
             ", Mark as Done",
             ", ToDos, Events, Deadlines",
             ", Handle Errors",
-            ", Delete"
+            ", Delete",
+            ", Save"
     };
     private static boolean canExit = false;
     private static final ArrayList<Task> taskArrayList = new ArrayList<>();
+    private static final String dukeFilePath = "data/duke.txt";
 
     /**
      * This function takes an input string and formats it by including horizontal lines above
@@ -75,6 +80,9 @@ public class Duke {
 
         // Scanner to read user inputs
         Scanner scanner = new Scanner(System.in);
+
+        // File to store user's added tasks to the hard disk
+        File dukeFile = new File(dukeFilePath);
 
         while (!canExit) {
             String userInput = scanner.next();
