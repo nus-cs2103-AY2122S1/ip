@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 
 public class Duke {
@@ -61,12 +62,11 @@ public class Duke {
                         task = new Task.Todo(remaining);
 
                     } else if(first_word.equals("deadline")) {
-                        String[] temp = remaining.split("by", 2);
-                        System.out.println(temp[1]);
+                        String[] temp = remaining.split("by ", 2);
                         task = new Task.Deadline(temp[0], temp[1]);
 
                     } else if(first_word.equals("event")) {
-                        String[] temp = remaining.split("at", 2);
+                        String[] temp = remaining.split("at ", 2);
                         task = new Task.Event(temp[0], temp[1]);
                     } else {
                         throw new DukeException("Sorry, I don't understand what that means. :(");
