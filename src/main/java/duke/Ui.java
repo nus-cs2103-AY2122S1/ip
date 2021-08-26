@@ -48,5 +48,23 @@ public class Ui {
         System.out.println("Bye! See you next time!");
     }
 
+    /**
+     * Prints the result of finding matching tasks.
+     *
+     * @param taskList The result of finding matching tasks.
+     */
+    public void iterateMatchingTaskList(ArrayList<Task> taskList) {
+        if (taskList.size() == 0) {
+            System.out.println("No matching task!");
+            System.out.println();
+            return;
+        }
+        System.out.println("Here are the tasks that matches your search:");
+        for (int i = 0; i < taskList.size(); i++) {
+            Task temp = taskList.get(i);
+            System.out.printf("%s. %s\n", i + 1, temp);
+        }
+        System.out.println();
+    }
 
 }
