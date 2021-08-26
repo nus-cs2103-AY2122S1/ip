@@ -1,13 +1,13 @@
 package duke.util;
 
+import java.util.ArrayList;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 import duke.date.Date;
 import duke.exception.NoSuchTaskException;
 import duke.task.DatedTask;
 import duke.task.Task;
-
-import java.util.ArrayList;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 /** A wrapper class that holds the list of Tasks. */
 public class TaskList {

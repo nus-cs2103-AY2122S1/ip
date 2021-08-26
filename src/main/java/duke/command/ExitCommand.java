@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.BadInputFormatException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.io.IOException;
 
 /** Represents the "exit" command. */
 public class ExitCommand extends Command {

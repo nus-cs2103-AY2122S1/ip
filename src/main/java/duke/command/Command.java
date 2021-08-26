@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.NoSuchTaskException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.io.IOException;
 
 /** An abstract class representing the user's commands. */
 public abstract class Command {

@@ -1,19 +1,20 @@
 package duke.util;
 
-import duke.exception.FileNotFoundException;
-import duke.exception.InvalidDateException;
-import duke.exception.UnknownTaskTypeException;
-import duke.task.Task;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import duke.exception.FileNotFoundException;
+import duke.exception.InvalidDateException;
+import duke.exception.UnknownTaskTypeException;
+import duke.task.Task;
 
 /** Utility class that handles reading and writing from device storage. */
 public class Storage {
@@ -53,7 +54,7 @@ public class Storage {
             boolean directoryExists = !file.getParentFile().mkdir();
             boolean fileExists = !file.createNewFile();
             if (directoryExists && fileExists) {
-                return parseFromJSON(filePath);
+                return parseFromJson(filePath);
             }
             throw new FileNotFoundException();
         } catch (IOException e) {
@@ -69,7 +70,7 @@ public class Storage {
     @SuppressWarnings("unchecked")
     public void write(TaskList tasks) {
         JSONArray arr = new JSONArray();
-        tasks.forEach((task) -> arr.add(task.toJSONObject()));
+        tasks.forEach((task) -> arr.add(task.toJsonObject()));
         try {
             fileWriter = new FileWriter(filePath);
             fileWriter.write(arr.toJSONString());
@@ -93,14 +94,14 @@ public class Storage {
      * @return An ArrayList of Tasks.
      */
     @SuppressWarnings("unchecked")
-    public ArrayList<Task> parseFromJSON(String filePath) {
+    public ArrayList<Task> parseFromJson(String filePath) {
         ArrayList<Task> tasks = new ArrayList<>();
         jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(filePath)) {
             JSONArray arr = (JSONArray) jsonParser.parse(reader);
             arr.forEach((task) -> {
                 try {
-                    tasks.add(Task.fromJSONObject((JSONObject) task));
+                    tasks.add(Task.fromJsonObject((JSONObject) task));
                 } catch (UnknownTaskTypeException | InvalidDateException e) {
                     e.printStackTrace();
                 }

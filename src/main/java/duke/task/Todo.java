@@ -51,7 +51,7 @@ public class Todo extends Task {
 
     @Override
     @SuppressWarnings("unchecked")
-    public JSONObject toJSONObject() {
+    public JSONObject toJsonObject() {
         JSONObject obj = new JSONObject();
         obj.put("type", "todo");
         obj.put("description", description);

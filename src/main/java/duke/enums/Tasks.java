@@ -9,23 +9,23 @@ public enum Tasks {
     EVENT("event"),
     INVALID("");
 
-    private final String LABEL;
-
     private static final Map<String, Tasks> BY_LABEL = new HashMap<>();
 
+    private final String label;
+
     Tasks(String label) {
-        LABEL = label;
+        this.label = label;
     }
 
     static {
         for (Tasks t : values()) {
-            BY_LABEL.put(t.LABEL, t);
+            BY_LABEL.put(t.label, t);
         }
     }
 
     @Override
     public String toString() {
-        return LABEL;
+        return label;
     }
 
     public static Tasks valueOfLabel(String label) {

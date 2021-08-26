@@ -1,14 +1,14 @@
 package duke.date;
 
-import duke.exception.InvalidDateException;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.InvalidDateException;
 
 public class DateTest {
     @Test
@@ -17,8 +17,8 @@ public class DateTest {
     }
 
     @Test
-    public void testJSONConversion() {
-        assertEquals("2020-10-10", new Date(LocalDate.parse("2020-10-10")).toJSONString());
+    public void testJsonConversion() {
+        assertEquals("2020-10-10", new Date(LocalDate.parse("2020-10-10")).toJsonString());
     }
 
     @Test

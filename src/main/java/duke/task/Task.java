@@ -1,12 +1,13 @@
 package duke.task;
 
+import java.util.regex.Pattern;
+
+import org.json.simple.JSONObject;
+
 import duke.date.Date;
 import duke.enums.Tasks;
 import duke.exception.InvalidDateException;
 import duke.exception.UnknownTaskTypeException;
-
-import org.json.simple.JSONObject;
-import java.util.regex.Pattern;
 
 /** Represents a Task object. */
 public abstract class Task {
@@ -20,11 +21,11 @@ public abstract class Task {
     protected Task() {
         this("");
     }
-    
+
     /**
      * Task constructor.
      *
-     * @param description the description of the task
+     * @param description The description of the Task.
      */
     protected Task(String description) {
         this(description, false);
@@ -52,7 +53,7 @@ public abstract class Task {
      *
      * @return A JSON object.
      */
-    public abstract JSONObject toJSONObject();
+    public abstract JSONObject toJsonObject();
 
     /**
      * Returns a Task object or its subclass from a JSON object.
@@ -62,7 +63,7 @@ public abstract class Task {
      * @throws UnknownTaskTypeException If the Task type is not known.
      * @throws InvalidDateException If the given date is badly formatted.
      */
-    public static Task fromJSONObject(JSONObject obj) throws UnknownTaskTypeException, InvalidDateException {
+    public static Task fromJsonObject(JSONObject obj) throws UnknownTaskTypeException, InvalidDateException {
         Task task;
         String taskType = (String) obj.get("type");
         String description = (String) obj.get("description");
@@ -90,6 +91,6 @@ public abstract class Task {
      * @return True if the description matches the keyword, false otherwise.
      */
     public final boolean keywordMatcher(String keyword) {
-        return Pattern.compile(".*\\b" + keyword + "\\b.*").matcher( description ).find();
+        return Pattern.compile(".*\\b" + keyword + "\\b.*").matcher(description).find();
     }
 }
