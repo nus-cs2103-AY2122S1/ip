@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CompleteTaskCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.ListTasksCommand;
 
 public class Parser {
     public enum CommandType {
@@ -23,29 +30,29 @@ public class Parser {
 
         // TODO: shift parsing into parser instead of individual commands.
         switch (commandType) {
-            case BYE:
-                return new ByeCommand(arguments);
+        case BYE:
+            return new ByeCommand(arguments);
 
-            case LIST:
-                return new ListTasksCommand(arguments);
+        case LIST:
+            return new ListTasksCommand(arguments);
 
-            case DONE:
-                return new CompleteTaskCommand(arguments);
+        case DONE:
+            return new CompleteTaskCommand(arguments);
 
-            case DELETE:
-                return new DeleteTaskCommand(arguments);
+        case DELETE:
+            return new DeleteTaskCommand(arguments);
 
-            case TODO:
-                return new AddTodoCommand(arguments);
+        case TODO:
+            return new AddTodoCommand(arguments);
 
-            case DEADLINE:
-                return new AddDeadlineCommand(arguments);
+        case DEADLINE:
+            return new AddDeadlineCommand(arguments);
 
-            case EVENT:
-                return new AddEventCommand(arguments);
+        case EVENT:
+            return new AddEventCommand(arguments);
 
-            default:
-                throw new Exception("No command found");
+        default:
+            throw new Exception("No command found");
         }
     }
 }

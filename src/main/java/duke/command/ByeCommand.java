@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
 public class ByeCommand extends Command {
     public ByeCommand(String arguments) throws Exception {

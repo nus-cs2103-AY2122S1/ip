@@ -1,12 +1,16 @@
 package duke;
 
-import duke.task.*;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class Storage {
     private File tasksFile;
@@ -36,27 +40,27 @@ public class Storage {
                 boolean isCompleted = components[1].equals("1") ? true : false;
                 String description = unescapeString(components[2]);
                 switch (components[0]) {
-                    case "T": {
-                        tasks.add(new Todo(description, isCompleted));
-                        break;
-                    }
-                    case "E": {
-                        if (components.length != 4) {
-                            throw new Exception("Invalid format");
-                        }
-                        tasks.add(new Event(description, DateTime.parse(components[3]), isCompleted));
-                        break;
-                    }
-                    case "D": {
-                        if (components.length != 4) {
-                            throw new Exception("Invalid format");
-                        }
-                        tasks.add(new Deadline(description, DateTime.parse(components[3]), isCompleted));
-                        break;
-                    }
-                    default: {
+                case "T": {
+                    tasks.add(new Todo(description, isCompleted));
+                    break;
+                }
+                case "E": {
+                    if (components.length != 4) {
                         throw new Exception("Invalid format");
                     }
+                    tasks.add(new Event(description, DateTime.parse(components[3]), isCompleted));
+                    break;
+                }
+                case "D": {
+                    if (components.length != 4) {
+                        throw new Exception("Invalid format");
+                    }
+                    tasks.add(new Deadline(description, DateTime.parse(components[3]), isCompleted));
+                    break;
+                }
+                default: {
+                    throw new Exception("Invalid format");
+                }
                 }
             }
         } finally {
