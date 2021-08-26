@@ -41,8 +41,8 @@ public class Ui {
     public void printAddedTaskMessage(Task task, TaskList list) {
         String message =
                 "Got it. I've added this task:\n" +
-                        "  " + task + "\n" +
-                        String.format("Now you have %d tasks in the list.", list.size());
+                "  " + task + "\n" +
+                String.format("Now you have %d tasks in the list.", list.size());
         printMessage(message);
     }
     
@@ -54,8 +54,8 @@ public class Ui {
     public void printMessage(String content) {
         String format =
                 "        ____________________________________________________________\n" +
-                        "        %s\n" +
-                        "        ____________________________________________________________\n";
+                "        %s\n" +
+                "        ____________________________________________________________\n";
         System.out.printf(format, content.replaceAll("\n", "\n        "));
     }
 }

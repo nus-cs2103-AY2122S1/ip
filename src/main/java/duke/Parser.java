@@ -105,6 +105,16 @@ public class Parser {
             }
             int taskIndexToBeRemoved = Integer.parseInt(secondWord) - 1;
             return new DeleteCommand(taskIndexToBeRemoved);
+        } else if (firstWord.equals("find")) {
+            String[] splitCommand = input.split(" ");
+
+            if (splitCommand.length != 2) {
+                throw new IllegalFormatException("☹ OOPS!!! Please specify one keyword to be searched.");
+            }
+
+            String keyword = splitCommand[1];
+            
+            return new FindCommand(keyword);
         } else {
             throw new UnknownCommandException();
         }
