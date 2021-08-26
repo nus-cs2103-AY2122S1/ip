@@ -1,5 +1,7 @@
 package ligma.task;
 
+import java.util.function.Predicate;
+
 public class Task {
     public enum TaskType {
         TODO, EVENT, DEADLINE
@@ -24,6 +26,10 @@ public class Task {
 
     public String getTaskDesc() {
         return description;
+    }
+
+    public boolean match(String target) {
+        return description.contains(target);
     }
 
     @Override
