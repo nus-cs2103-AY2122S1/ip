@@ -2,7 +2,7 @@ public class Event extends Task{
     private String taskDate;
 
     public Event(String taskName, String taskDate, boolean isDone) {
-        super(taskName, TaskType.EVENT, false);
+        super(taskName, TaskType.EVENT, isDone);
         this.taskDate = taskDate;
     }
 

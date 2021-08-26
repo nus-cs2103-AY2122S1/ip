@@ -87,17 +87,17 @@ public class Duke {
         if (!userInputScanner.hasNext())
             throw new MissingInputException(taskType);
         else if (taskType == TaskType.TODO) {
-            Task newTask = new ToDo(userInputScanner.nextLine());
-            addNewTask(newTask);
+            addNewTask(new ToDo(userInputScanner.nextLine().trim()));
         }
         else {
-            if (taskType == TaskType.DEADLINE)
+            if (taskType == TaskType.DEADLINE) {
                 userInputScanner.useDelimiter(" /by ");
-            else
+                addNewTask(new Deadline(userInputScanner.next().trim(), userInputScanner.next().trim()));
+            }
+            else {
                 userInputScanner.useDelimiter(" /at ");
-
-            Task newTask = new Event(userInputScanner.next(), userInputScanner.next());
-            addNewTask(newTask);
+                addNewTask(new Event(userInputScanner.next().trim(), userInputScanner.next().trim()));
+            }
         }
     }
 
