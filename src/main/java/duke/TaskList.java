@@ -83,4 +83,23 @@ public class TaskList {
         System.out.println("Now you have " + list.size() + " tasks in the list");
     }
 
+    public void find(String string) throws DukeException {
+        if (string.isEmpty()) {
+            throw new DukeException("☹ OOPS!!! No input was detected!");
+        }
+        int counter = 0;
+        System.out.println("Here are the matching tasks in your list:");
+        for (Task task : list) {
+            String cur = task.toString();
+            if (cur.contains(string)) {
+                int label = counter + 1;
+                System.out.println(label + ". " + cur);
+                counter++;
+            }
+        }
+        if (counter == 0) {
+            System.out.println("☹ OOPS!!! No items found!");
+        }
+    }
+
 }
