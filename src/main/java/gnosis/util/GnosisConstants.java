@@ -21,6 +21,8 @@ public class GnosisConstants {
 
     public static final String COMMAND_NOT_FOUND_MESSAGE = "COMMAND NOT FOUND.";
 
+    public static final String LISTING_MATCH_KEYWORD_MESSAGE = "Listing all tasks with matching keyword: ";
+
     //STORAGE MESSAGE CONSTANTS
     public static final String DATA_TASK_FILE_FOUND_MESSAGE = "SAVED DATA FOUND -- " +
             "YOU CAN VIEW YOUR SAVED TASKS -- ";

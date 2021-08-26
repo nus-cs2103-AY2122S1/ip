@@ -1,10 +1,19 @@
-package gnosis;
+package gnosis.controller;
 
-import task.TaskCommandManager;
-import task.TaskStorageManager;
-import model.*;
-import util.GnosisConstants;
 
+
+import gnosis.model.Deadline;
+import gnosis.model.Event;
+import gnosis.model.Task;
+import gnosis.model.Todo;
+import gnosis.task.TaskCommandManager;
+import gnosis.task.TaskStorageManager;
+import gnosis.ui.GnosisUI;
+import gnosis.util.GnosisConstants;
+import gnosis.util.GnosisException;
+import model.Command;
+
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -96,6 +105,9 @@ public class GnosisController {
             case LIST:
                 view.displayAllTasksMessage(taskCommandManager.getTasks());
                 break;
+            case FIND:
+                List<Task> filteredTasks = taskCommandManager.findMatchingTasks(taskInput);
+                view.displayFoundTasksMessage(filteredTasks, taskInput);
             case DONE:
                 // only if "done" command is call, we retrieve task index from user
                 int taskIndex = Integer.parseInt(taskInput.trim()) - 1;
