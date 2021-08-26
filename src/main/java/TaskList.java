@@ -1,15 +1,14 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    protected ArrayList<Task> tasks;
-    protected Save save;
-    protected Load load;
+    private ArrayList<Task> tasks;
 
-    public TaskList() throws DukeException {
-        this.save = new Save();
-        this.load = new Load();
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
 
-        tasks = load.loadTasks();
+    public TaskList() {
+        this.tasks = new ArrayList<>();
     }
 
     public Task get(int i) {
@@ -20,19 +19,20 @@ public class TaskList {
         return tasks.size();
     }
 
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
+    }
+
     public void markDone(int i) throws DukeException {
         tasks.get(i).markDone();
-        save.saveTasks(tasks);
     }
 
     public void add(Task t) throws DukeException {
         tasks.add(t);
-        save.saveTasks(tasks);
     }
 
     public void remove(int i) throws DukeException {
         tasks.remove(i);
-        save.saveTasks(tasks);
     }
 
 }

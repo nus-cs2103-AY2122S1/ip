@@ -1,11 +1,38 @@
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Load extends FileAccess{
-    public Load() {
-        super();
+public class Storage {
+    protected String filePath = "data/duke.txt";
+    protected static File f;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        f = new File(this.filePath);
+        f.mkdirs(); // handle the folder-does-not-exist-yet case
+    }
+
+    public void saveTasks(ArrayList<Task> tasks) throws DukeException {
+        try {
+            // create a blank new file to write to
+            if (f.exists()) {
+                f.delete();
+            }
+            f.createNewFile();
+            FileWriter fw = new FileWriter(filePath);
+
+            // write to file
+            for (Task t : tasks) {
+                fw.write(t.getCat() + "," + t.getStatusIcon() + "," + t.getDesc() + "," + t.getDueTime());
+                fw.write(System.getProperty("line.separator"));
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
     public ArrayList<Task> loadTasks() throws DukeException {
@@ -55,6 +82,6 @@ public class Load extends FileAccess{
 
     @Override
     public String toString() {
-        return "loading file from " + this.filePath;
+        return "file path is " + filePath;
     }
 }
