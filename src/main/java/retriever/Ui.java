@@ -1,5 +1,6 @@
 package retriever;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import retriever.task.Task;
@@ -15,6 +16,8 @@ public class Ui {
     private String goodByeMessage = "-> Sad To See You Go!";
     private String emptyListMessage = "My Memory Is Empty, Please Feed Items!";
     private String printListMessage = "-> Your Tasks, My Master:";
+    private String goodBoyMessage = "Woof! Whose a Good Boy?";
+    private String badBoyMessage = "Woof! Whose a Bad Boy?";
     private String logo = "  __      ^\n"
             + "o'')}____//\n"
             + " `_'      )\n"
@@ -70,9 +73,9 @@ public class Ui {
      * @param taskListLength The length of the task list, after adding the task.
      */
     public void printTaskAdded(Task task, int taskListLength) {
-        System.out.println("-> Where's My Treat? I Added: \n\t" + task);
-        // Add Task Size here.
-        System.out.println("\nYou Owe Me " + taskListLength + " Treat(s), Master!");
+        System.out.println("-> Where's My Treat? I Added: \n"
+                        + "\t" + task + "\n"
+                        + "You Owe Me " + taskListLength + " Treat(s), Master!");
     }
 
     /**
@@ -82,7 +85,7 @@ public class Ui {
      * @param taskListLength The length of the task list, after deleting the task.
      */
     public void printTaskDeleted(Task task, int taskListLength) {
-        System.out.println("Woof! Whose a Bad Boy?\n"
+        System.out.println(badBoyMessage + "\n"
                 + "Task Deleted!\n"
                 + "\t" + task
                 // Add Task Size here.
@@ -96,9 +99,29 @@ public class Ui {
      * @param task The task that has been done.
      */
     public void printTaskMarkedAsDone(Task task) {
-        System.out.println("Woof! Whose a Good Boy?\n"
+        System.out.println(goodBoyMessage + "\n"
                 + "Task Done!\n"
                 + "\t" + task);
+    }
+
+    /**
+     * Prints the tasks with a matching keyword.
+     *
+     * @param taskList The ArrayList containing tasks with matching keyword.
+     */
+    public void printTaskFoundByKeyword(ArrayList<Task> taskList) {
+        if (taskList.size() == 0) {
+            System.out.println("Sorry Master, I Couldn't Smell And Find WHat You Asked For!");
+            return;
+        }
+
+        System.out.println("Woof! Look What I Found: ");
+
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println("\t" + (i + 1) + ". " + taskList.get(i));
+        }
+
+        System.out.println("You Owe Me " + taskList.size() + " Treat(s), Master!");
     }
 
     /**
