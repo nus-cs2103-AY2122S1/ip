@@ -18,4 +18,9 @@ public class Event extends Entry{
 
     @Override
     public boolean isEmpty() { return super.isEmpty() || event.length() < 1; }
+
+    @Override
+    public String saveString() {
+        return "E" + super.saveString() + "," + this.event;
+    }
 }

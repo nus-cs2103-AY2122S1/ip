@@ -1,3 +1,4 @@
+
 public class Deadline extends Entry {
 
     private String deadline;
@@ -9,6 +10,11 @@ public class Deadline extends Entry {
     Deadline(String task, String deadline) {
         super(task);
         this.deadline = deadline;
+    }
+
+    @Override
+    public String saveString() {
+        return "D" + super.saveString() + "," + this.deadline;
     }
 
     @Override

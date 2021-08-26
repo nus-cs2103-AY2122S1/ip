@@ -1,16 +1,15 @@
-public class Entry {
-
-    private String entry;
+public abstract class Entry {
+    private final String ENTRY;
 
     private boolean isDone;
 
     Entry() {
-        this.entry = "";
+        this.ENTRY = "";
         this.isDone = false;
     }
 
     Entry(String value) {
-        this.entry = value;
+        this.ENTRY = value;
         this.isDone = false;
     }
 
@@ -23,21 +22,29 @@ public class Entry {
             return false;
         } else {
             this.isDone = true;
-            return this.isDone;
+            return true;
         }
     }
 
     public boolean isEmpty() {
-        return entry.length() < 1;
+        return this.ENTRY.length() < 1;
     }
 
     public String getEntryOnly() {
-        return this.entry;
+        return this.ENTRY;
+    }
+
+    public String saveString() {
+        String isDoneString = "0";
+        if (this.isDone) {
+            isDoneString = "1";
+        }
+        return "," + isDoneString + "," + this.ENTRY;
     }
 
     @Override
     public String toString () {
         char isDoneDisplay = this.isDone ? 'X' : ' ';
-        return ("[" + isDoneDisplay + "] " + entry);
+        return ("[" + isDoneDisplay + "] " + this.ENTRY);
     }
 }

@@ -1,5 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.File;
 
 public class Duke {
 
@@ -9,13 +16,13 @@ public class Duke {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    private final static String PROJECT_ROOT = System.getProperty("user.dir");
+    private final static Path DATA_DIRECTORY_PATH = Paths.get(PROJECT_ROOT,"data");
+
     private final static String TERMINATION_COMMAND = "bye";
-
     private final static String LIST_ENTRIES_COMMAND = "list";
-
     private final static String MARK_ENTRY_DONE_COMMAND = "done";
     private final static String DELETE_ENTRY_COMMAND = "delete";
-
     private final static String TODO_COMMAND = "todo";
     private final static String EVENT_COMMAND = "event";
     private final static String DEADLINE_COMMAND = "deadline";
@@ -28,14 +35,32 @@ public class Duke {
         if (!entry.isEmpty()){
             entries.add(numberOfEntries++, entry);
             System.out.println("Awesome, Duke remembers this event:" + entry);
-            if (numberOfEntries < 2) {
-                System.out.println("We now have " + numberOfEntries + " task in our plan!");
+            if (numberOfEntries == 1) {
+                System.out.println("We now have " + (numberOfEntries) + " task in our plan!");
             } else {
-                System.out.println("We now have " + numberOfEntries + " tasks in our plan!");
+                System.out.println("We now have " + (numberOfEntries) + " tasks in our plan!");
             }
+            saveEntries();
         } else {
-//            System.out.println("Empty Entry/Timing! :( Try Again");
             throw new DukeException("The " + command + " description can't be empty!");
+        }
+    }
+
+    private static void saveEntries() throws DukeException {
+        Path dataPath = DATA_DIRECTORY_PATH.resolve("duke.txt");
+        File dukeData = new File(dataPath.toString());
+        try {
+            FileWriter fw = new FileWriter(dukeData);
+            BufferedWriter dukeWriter = new BufferedWriter(fw);
+            for (Entry entry : entries){
+                String nextEntry = entry.saveString();
+                dukeWriter.write(nextEntry);
+                dukeWriter.write("\n");
+            }
+            dukeWriter.close();
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Duke's data file is corrupted/missing! Can't be saved");
         }
     }
 
@@ -46,12 +71,18 @@ public class Duke {
             Entry deletedEntry = entries.remove(index - 1);
             numberOfEntries--;
             System.out.println("Removed entry\n" + deletedEntry);
+            saveEntries();
         }
     }
 
     private static void initialiseDuke() {
         entries = new ArrayList<>(100);
         numberOfEntries = 0;
+        try {
+            readData();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void listEntries() throws DukeException {
@@ -69,13 +100,62 @@ public class Duke {
             if (entries.get(entryNumber - 1).markEntryAsDone()) {
                 System.out.println("Nice! I've marked this entry as done:");
                 System.out.println("\t" + entries.get(entryNumber - 1));
+                saveEntries();
             } else {
                 System.out.println("Entry is already marked as done!");
             }
         } else {
-//            System.out.println("Invalid Entry Number");
             throw new DukeException("There's no Entry corresponding to that Number!");
         }
+    }
+
+    private static void readData() throws DukeException {
+        Path dataPath = DATA_DIRECTORY_PATH.resolve("duke.txt");
+        File dukeData = new File(dataPath.toString());
+        try {
+            Scanner fileScanner = new Scanner(dukeData);
+            fileScanner.useDelimiter("[,\n]");
+            while (fileScanner.hasNext()) {
+                String entryType = fileScanner.next();
+                boolean isDone = Integer.parseInt(fileScanner.next()) == 1;
+                String entryData = fileScanner.next();
+                Entry nextEntry = new Todo("");
+                boolean hasNextEntry = true;
+                switch (entryType) {
+                    case "T":
+                        nextEntry = new Todo(entryData);
+                        break;
+                    case "D":
+                        String deadlineTiming = fileScanner.next();
+                        nextEntry = new Deadline(entryData, deadlineTiming);
+                        break;
+                    case "E":
+                        String eventTiming = fileScanner.next();
+                        nextEntry = new Event(entryData, eventTiming);
+                        break;
+                    default:
+                        //Corrupted Entry Case
+                        hasNextEntry = false;
+                        break;
+                }
+                if (hasNextEntry) {
+                    if (isDone) {
+                        nextEntry.markEntryAsDone();
+                    }
+                    entries.add(nextEntry);
+                    numberOfEntries++;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            try {
+                if (!(dukeData.createNewFile())) {
+                    throw new DukeException("Uh-Oh! Your Data can't be stored!");
+                }
+            } catch (IOException err) {
+                throw new DukeException(err.getMessage());
+            }
+        }
+
     }
 
     private static String parseTiming(ArrayList<String> terms) {
@@ -100,18 +180,19 @@ public class Duke {
         if (!terms.isEmpty()) {
             StringBuilder entry = new StringBuilder();
             //Combine All Strings Until End of List or '/' character is found
-            int count = 0;
             ArrayList<String> termsCopy = new ArrayList<>(terms);
             for (String term : termsCopy) {
                 if (term.startsWith("/")) {
-                    terms.add(0, entry.toString());
+                    String entryDesc = entry.toString();
+                    terms.add(0, entryDesc.substring(0, entryDesc.length()-1));
                     return;
                 } else {
-                    entry.append(term);
-                    terms.remove(count++);
+                    entry.append(term).append(' ');
+                    terms.remove(0);
                 }
             }
-            terms.add(0, entry.toString());
+            String entryDesc = entry.toString();
+            terms.add(0, entryDesc.substring(0, entryDesc.length()-1));
         }
     }
 
@@ -136,7 +217,12 @@ public class Duke {
     private static void processInput (String input) throws DukeException {
         ArrayList<String> terms = new ArrayList<>();
         parseString(input, terms);
-        String command = terms.isEmpty() ? "" : terms.remove(0);
+        String command = "";
+        if (terms.isEmpty()) {
+            throw new DukeException("Duke can't find any commands :(");
+        } else {
+            command = terms.remove(0);
+        }
         parseEntry(terms);
         String entry = terms.isEmpty() ? "" : terms.remove(0);
         String timing = terms.isEmpty() ? "" : parseTiming(terms);
@@ -147,7 +233,8 @@ public class Duke {
                 break;
 
             case MARK_ENTRY_DONE_COMMAND:
-                markEntryAsDone(Integer.parseInt(entry));
+                int id = Integer.parseInt(entry);
+                markEntryAsDone(id);
                 break;
 
             case TODO_COMMAND:
