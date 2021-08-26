@@ -7,6 +7,7 @@ import duke.tasks.TaskList;
 import duke.storage.Storage;
 import duke.io.Parser;
 import duke.ui.Ui;
+import duke.util.StringCleaner;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.Scanner;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private final String VER     = "v0.8.6"; // Level-8 Dates and Times + A-MoreOOP, A-Packages, A-JUnit, A-Jar, A-CodingStandard
+    private final String VER     = "v0.9.1"; // Level-9 Find, A-CodingStandard + A-JavaDocs
     private final String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -150,7 +151,7 @@ public class Augury {
         }
 
         args = args.substring(5);
-        ArrayList<Integer> listOfTasks = convertCommaSeparatedStringToIntegerArrayList(args);
+        ArrayList<Integer> listOfTasks = StringCleaner.toArrayListInteger(args);
 
         for (Integer i : listOfTasks){
             if (i > taskList.size()) {
@@ -168,7 +169,7 @@ public class Augury {
         }
 
         args = args.substring(7);
-        ArrayList<Integer> listOfTasks = convertCommaSeparatedStringToIntegerArrayList(args);
+        ArrayList<Integer> listOfTasks = StringCleaner.toArrayListInteger(args);
 
         for (Integer i : listOfTasks){
             if (i > taskList.size()) {
@@ -187,20 +188,5 @@ public class Augury {
         args = args.substring(5);
         ui.speak(taskList.findAndAnnounce(args));
 
-    }
-
-    private ArrayList<Integer> convertCommaSeparatedStringToIntegerArrayList (String s) {
-        // split comma-separated string to String[]
-        String[] s_String = s.split(",");
-        for (int i = 0; i < s_String.length; i++) {
-            // trim whitespace on each item
-            s_String[i] = s_String[i].trim();
-        }
-        // convert String[] to ArrayList<Integer>
-        ArrayList<Integer> s_Integer = new ArrayList<>();
-        for (String ss : s_String) {
-            s_Integer.add(Integer.parseInt(ss));
-        }
-        return s_Integer;
     }
 }

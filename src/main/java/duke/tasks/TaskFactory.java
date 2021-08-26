@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import duke.exceptions.AuguryException;
 import duke.exceptions.InvalidTaskCreationException;
+import duke.util.StringCleaner;
 
 /**
  * The {@code TaskFactory} is a factory class responsible for creating {@code Task}s.
@@ -73,26 +74,17 @@ public class TaskFactory {
             checkTaskIncludesTime(newTaskType, newTaskDetails);
             String description = newTaskDetails.substring(6).split("/at ")[0].trim();
             String timeString = newTaskDetails.split("/at ")[1].trim();
-            LocalDateTime time = createDateTimeFromString(timeString);
+            LocalDateTime time = StringCleaner.toLocalDateTime(timeString);
             return new EventTask(description, time);
         } else if (newTaskType.equalsIgnoreCase(Task.TaskTypes.DEADLINE.toString())) {
             checkDetailsNonEmpty(newTaskType, newTaskDetails);
             checkTaskIncludesTime(newTaskType, newTaskDetails);
             String description = newTaskDetails.substring(9).split("/by ")[0].trim();
             String timeString = newTaskDetails.split("/by ")[1].trim();
-            LocalDateTime time = createDateTimeFromString(timeString);
+            LocalDateTime time = StringCleaner.toLocalDateTime(timeString);
             return new DeadlineTask(description, time);
         } else {
             return null;
-        }
-    }
-
-    private LocalDateTime createDateTimeFromString(String date) throws AuguryException {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            return LocalDateTime.parse(date, formatter);
-        } catch (Exception e) {
-            throw new InvalidTaskCreationException("Please use the YYYY-MM-DD HHMM format to specify time!");
         }
     }
 
