@@ -1,6 +1,7 @@
-package Duke.Errors;
+package duke.errors;
 
-public enum DukeError { // I prefered to keep the enum structure rather than extend Exceptions as I didn't want to interrupt the UI.
+public enum DukeError {
+    // I prefered to keep the enum structure rather than extend Exceptions as I didn't want to interrupt the UI.
     INVALID_COMMAND(-1, "Unrecognised command detected. Please try again."),
     ESCAPE_CHARACTER(0, "Please do not use the \\n in your input as it makes me sad. ):"),
     POLLUTED_LIST_COMMAND(1, "Please only type 'list' to view the task list."),
@@ -57,7 +58,7 @@ public enum DukeError { // I prefered to keep the enum structure rather than ext
         }
     }
 
-    private DukeError(int code, String description) {
+    DukeError(int code, String description) {
         this.code = code;
         this.description = description;
     }

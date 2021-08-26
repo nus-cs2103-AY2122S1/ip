@@ -1,10 +1,10 @@
-package Duke;
+package duke;
 
-import Duke.Commands.Command;
-import Duke.Parser.Parser;
-import Duke.Storage.Storage;
-import Duke.Task.TaskList;
-import Duke.Ui.Ui;
+import duke.commands.Command;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 

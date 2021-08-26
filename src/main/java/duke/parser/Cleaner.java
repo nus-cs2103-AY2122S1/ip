@@ -1,9 +1,6 @@
-package Duke.Parser;
-
-import Duke.Parser.CustomDateFormatter;
+package duke.parser;
 
 public class Cleaner {
-
 
     public String clean(String fullCommand, int currentCapacity) {
         if (fullCommand.length() < 1) {
@@ -15,7 +12,6 @@ public class Cleaner {
         }
         String[] stringArray = fullCommand.split(" ");
         String firstWord = stringArray[0];
-
         switch(firstWord) {
             case "list":
                 return listCleaner(fullCommand);
@@ -39,7 +35,7 @@ public class Cleaner {
     }
 
     private String listCleaner(String fullCommand) {
-        if (fullCommand.strip().length() > 4) {
+        if (fullCommand.strip().length() >= 5) {
             return "error 1";
         } else {
             return "list";
@@ -64,7 +60,9 @@ public class Cleaner {
     public static String deadlineCleaner(String input) {
         if (input.split("/by")[0].strip().length() == 8) {
             return "error 3";
-        } else if (!input.contains("/by") || input.split("/by").length < 2 || input.split("/by")[1].strip().length() < 1) {
+        } else if (!input.contains("/by")
+                || input.split("/by").length < 2
+                || input.split("/by")[1].strip().length() < 1) {
             return "error 4";
         } else {
             if (CustomDateFormatter.getLocalDateFromString(input.split("/by")[1].strip()) == null) {
@@ -77,7 +75,9 @@ public class Cleaner {
     public static String eventCleaner(String input) {
         if (input.split("/at")[0].strip().length() == 5) {
             return "error 5";
-        } else if (!input.contains("/at") || input.split("/at").length < 2 || input.split("/at")[1].strip().length() < 1) {
+        } else if (!input.contains("/at")
+                || input.split("/at").length < 2
+                || input.split("/at")[1].strip().length() < 1) {
             return "error 6";
         } else {
             if (CustomDateFormatter.getLocalDateFromString(input.split("/at")[1].strip()) == null) {
@@ -104,7 +104,8 @@ public class Cleaner {
                 }
             }
             Integer intToCheck = Integer.parseInt(sb.toString());
-            if (intToCheck > currentCapacity || intToCheck < 1) {
+            if (intToCheck > currentCapacity
+                    || intToCheck < 1) {
                 return "error 9";
             } else {
                 intToCheck -= 1;
@@ -130,7 +131,8 @@ public class Cleaner {
                 }
             }
             Integer intToCheck = Integer.parseInt(sb.toString());
-            if (intToCheck > currentCapacity || intToCheck < 1) {
+            if (intToCheck > currentCapacity
+                    || intToCheck < 1) {
                 return "error 9";
             } else {
                 intToCheck -= 1;
@@ -156,7 +158,8 @@ public class Cleaner {
                 }
             }
             Integer intToCheck = Integer.parseInt(sb.toString());
-            if (intToCheck > currentCapacity || intToCheck < 1) {
+            if (intToCheck > currentCapacity
+                    || intToCheck < 1) {
                 return "error 9";
             } else {
                 intToCheck -= 1;

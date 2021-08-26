@@ -1,13 +1,11 @@
-package Duke.Storage;
+package duke.storage;
 
-import Duke.Commands.Command;
-import Duke.Commands.Command.CommandType;
-import Duke.Commands.EditCommand;
-import Duke.Parser.CustomDateFormatter;
-import Duke.Task.Deadline;
-import Duke.Task.Event;
-import Duke.Task.Task;
-import Duke.Task.ToDo;
+import duke.commands.Command.CommandType;
+import duke.parser.CustomDateFormatter;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

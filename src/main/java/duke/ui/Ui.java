@@ -1,9 +1,9 @@
-package Duke.Ui;
+package duke.ui;
 
-import Duke.Commands.Command.CommandType;
-import Duke.Errors.DukeError;
-import Duke.Task.Task;
-import Duke.Task.TaskList;
+import duke.commands.Command.CommandType;
+import duke.errors.DukeError;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -24,14 +24,16 @@ public class Ui {
 
     public void showAddTaskMessage(Task task, TaskList taskList) {
         int size = taskList.getCapacity();
-        System.out.printf("Got it. I've added this task:\n    %s\nNow you have %d task%s in the list\n", task , size, pluralOrNo(size));
+        System.out.printf("Got it. I've added this task:\n    %s\n" +
+                "Now you have %d task%s in the list\n", task , size, pluralOrNo(size));
     }
 
     public void showEditTaskMessage(Task task, CommandType commandType, TaskList taskList) {
         switch(commandType) {
         case DELETE:
             int size = taskList.getCapacity();
-            System.out.printf("Noted. Ive removed this task:\n    %s\nNow you have %d task%s in the list\n", task, size, pluralOrNo(size));
+            System.out.printf("Noted. Ive removed this task:\n    %s\n" +
+                    "Now you have %d task%s in the list\n", task, size, pluralOrNo(size));
             break;
         case DONE:
             System.out.printf("Nice! I've marked this task as done:\n    %s\n", task);

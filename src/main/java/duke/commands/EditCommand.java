@@ -1,9 +1,9 @@
-package Duke.Commands;
+package duke.commands;
 
-import Duke.Storage.Storage;
-import Duke.Task.Task;
-import Duke.Task.TaskList;
-import Duke.Ui.Ui;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class EditCommand extends Command {
 
