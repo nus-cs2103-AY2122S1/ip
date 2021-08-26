@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -47,7 +54,7 @@ public class TaskList {
     public Pair<Boolean, Task> markTaskDone(int taskNo) {
         try {
             Task task = tasks.get(taskNo);
-            return new Pair<Boolean, Task>(task.markAsDone(), task);
+            return new Pair<Boolean, Task>(!task.markAsDone(), task);
         } catch (IndexOutOfBoundsException e) {
             if (tasks.isEmpty()) {
                 throw new DukeException("Nothing in the list!");

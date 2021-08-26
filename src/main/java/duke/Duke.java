@@ -1,3 +1,7 @@
+package duke;
+
+import duke.command.Command;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

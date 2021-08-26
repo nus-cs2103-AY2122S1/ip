@@ -1,4 +1,11 @@
+package duke.command;
 
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+import duke.Pair;
+
+import duke.task.Task;
 
 public class DoneCommand extends Command {
     public DoneCommand(String[] args) {
@@ -12,7 +19,7 @@ public class DoneCommand extends Command {
         Task task = statusTaskPair.getSecond();
 
         if (isTaskAlreadyDone) {
-            ui.showError(String.format("Task %s is already done!\n  %s", taskNo, task));
+            ui.showError(String.format("Task %s is already done!\n  %s", taskNo + 1, task));
         } else {
             ui.showDoneTask(task);
         }

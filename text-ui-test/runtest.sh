@@ -18,9 +18,23 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/*.java
+if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/duke/*.java
 then
     echo "********** BUILD FAILURE **********"
+    exit 1
+fi
+
+# compile the code into the bin folder, terminates if error occurred
+if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/duke/command/*.java
+then
+    echo "********** BUILD FAILURE (command) **********"
+    exit 1
+fi
+
+# compile the code into the bin folder, terminates if error occurred
+if ! javac -cp ../src/main/java -Xlint:none -d ../bin ../src/main/java/duke/task/*.java
+then
+    echo "********** BUILD FAILURE (task) **********"
     exit 1
 fi
 

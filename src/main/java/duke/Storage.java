@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -94,8 +101,7 @@ public class Storage {
             File file = new File(dir, "duke.txt");
             file.createNewFile();
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new DukeException("Unable to create new file!");
         }
     }
-
 }
