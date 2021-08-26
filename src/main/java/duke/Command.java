@@ -61,7 +61,7 @@ public class Command {
      * @return Duke operation
      */
     public String getOperation() {
-        return this.operation;
+        return operation;
     }
 
     /**
@@ -71,7 +71,7 @@ public class Command {
      * @return Index of task in task list
      */
     public int getIndex() {
-        return this.index;
+        return index;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Command {
      * @return Description of task specified by user
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
@@ -91,7 +91,7 @@ public class Command {
      * @return String representation of task time
      */
     public String getTime() {
-        return this.time;
+        return time;
     }
 }
 

@@ -1,6 +1,5 @@
 package duke;
 
-
 import java.io.EOFException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -12,8 +11,8 @@ import java.util.Scanner;
 public class Duke {
     private final Ui ui;
     private final Scanner sc = new Scanner(System.in);
-    private TaskList taskList = new TaskList();
     private final Storage storage;
+    private TaskList tasks = new TaskList();
 
     /**
      * Class constructor which takes the relative filepath where Duke's save-file
@@ -22,8 +21,17 @@ public class Duke {
      * @param filePath Path of the save-file
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        ui = new Ui();
+        storage = new Storage(filePath);
+    }
+
+    /**
+     * Point of entry through which Duke can be run.
+     *
+     * @param args The commandline arguments.
+     */
+    public static void main(String[] args) {
+        new Duke("duke.txt").run();
     }
 
     /**
@@ -31,7 +39,7 @@ public class Duke {
      */
     public void run() {
         try {
-            this.taskList = storage.readSave();
+            tasks = storage.readSave();
         } catch (EOFException e) {
             ui.showNewSave();
         } catch (IOException | ClassNotFoundException e) {
@@ -53,49 +61,40 @@ public class Duke {
             case "bye":
                 ui.showOutro();
                 try {
-                    storage.writeSave(this.taskList);
+                    storage.writeSave(tasks);
                 } catch (IOException e) {
                     ui.showWriteSaveError();
                 }
                 break outer;
             case "list":
-                ui.showTasks(taskList);
+                ui.showTasks(tasks);
                 break;
             case "done":
-                task = taskList.get(command.getIndex() - 1);
+                task = tasks.get(command.getIndex() - 1);
                 task.setDone(true);
                 ui.showDone(task);
                 break;
             case "todo":
                 task = new ToDo(command.getDescription());
-                taskList.add(task);
-                ui.showAdded(task, taskList.size());
+                tasks.add(task);
+                ui.showAdded(task, tasks.size());
                 break;
             case "deadline":
                 task = new Deadline(command.getDescription(), command.getTime());
-                taskList.add(task);
-                ui.showAdded(task, taskList.size());
+                tasks.add(task);
+                ui.showAdded(task, tasks.size());
                 break;
             case "event":
                 task = new Event(command.getDescription(), command.getTime());
-                taskList.add(task);
-                ui.showAdded(task, taskList.size());
+                tasks.add(task);
+                ui.showAdded(task, tasks.size());
                 break;
             case "delete":
-                task = taskList.get(command.getIndex() - 1);
-                taskList.delete(command.getIndex() - 1);
-                ui.showDeleted(task, taskList.size());
+                task = tasks.get(command.getIndex() - 1);
+                tasks.delete(command.getIndex() - 1);
+                ui.showDeleted(task, tasks.size());
                 break;
             }
         }
-    }
-
-    /**
-     * Point of entry through which Duke can be run.
-     *
-     * @param args The commandline arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
     }
 }

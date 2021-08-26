@@ -3,6 +3,7 @@ package dukeTest;
 import duke.Task;
 import duke.TaskList;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -24,13 +25,14 @@ public class TaskListTest {
         assertEquals(tasks.delete(0).toString(), new Task("Task").toString());
         assertEquals(tasks.size(), 0);
     }
+
     @Test
     public void testRemoveTask_invalid() {
         TaskList tasks = new TaskList();
         try {
             assertEquals(tasks.delete(0).toString(), new Task("Task").toString());
             fail();
-        } catch (Exception e){
+        } catch (Exception e) {
             assertEquals(e.getMessage(), "Index 0 out of bounds for length 0");
         }
     }

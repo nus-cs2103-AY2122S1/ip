@@ -18,7 +18,7 @@ public class Event extends Task {
      * created to represent this information.
      *
      * @param description Description of the event task
-     * @param at Time at which the event will take place
+     * @param at          Time at which the event will take place
      */
     public Event(String description, String at) {
         super(description);
@@ -32,7 +32,7 @@ public class Event extends Task {
 
     /**
      * Returns the LocalDate object which represents the date that the event will take place
-
+     *
      * @return Date of the event
      */
     public LocalDate getAtDate() {
@@ -57,7 +57,10 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + ((atDate == null) ? at : parseAtDate()) + ")";
+        return "[E]" + super.toString()
+                + " (at: "
+                + ((atDate == null) ? at : parseAtDate())
+                + ")";
     }
 }
 
