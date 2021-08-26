@@ -52,9 +52,10 @@ public class DataEditor {
                 }
                 return tasklist;
             } catch (DukeException e) {
-                    throw e;
-            } catch (IOException e) {
+                throw e;
+            } catch (Exception e) {
                 throw new LoadingFileError("Uwu! There's something wrong withw the existing file! "
+                        + "Did you meddle witwh it?\n"
                         + "Creating new file for you. . .");
             }
         } else {
@@ -69,7 +70,7 @@ public class DataEditor {
      * @throws DukeException Exception if any when saving file.
      */
     public void saveData(TaskList tasklist) throws DukeException {
-        String textToSave = tasklist.saveString();
+        String textToSave = tasklist.saveAsString();
         String homeDir = System.getProperty("user.dir");
         Path path = Paths.get(homeDir, this.filePath);
         boolean directoryExists = Files.exists(path);

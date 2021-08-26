@@ -26,6 +26,10 @@ public class Task {
         return "";
     }
 
+    public String getTimeStorage() {
+        return "";
+    }
+
     /**
      * Returns string of task.
      *

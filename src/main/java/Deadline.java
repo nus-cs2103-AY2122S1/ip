@@ -16,15 +16,20 @@ public class Deadline extends Task {
      * @param taskstr Task.
      * @param deadline Deadline of task.
      */
-    public Deadline(String taskstr, String deadline) {
+    public Deadline(String taskstr, LocalDate deadline) {
         super(taskstr);
-        this.by = deadline;
-        super.date = LocalDate.parse(deadline);
+        this.by = deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        super.date = deadline;
     }
 
     @Override
     public String getTime() {
         return this.by;
+    }
+
+    @Override
+    public String getTimeStorage() {
+        return this.date.toString();
     }
 
     /**
