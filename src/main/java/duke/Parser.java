@@ -10,7 +10,6 @@ import java.util.Date;
  * Deals with making sense of the user command to Duck Chatbot.
  */
 public class Parser {
-
     public static Command parse(String fullCommand) throws DukeException {
         String commandWord;
         String taskDescription = null;
