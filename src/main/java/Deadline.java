@@ -1,10 +1,12 @@
-public class Deadline extends Task {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    protected String by;
+public class Deadline extends Task {
+    private LocalDate by;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by.trim());
     }
 
     @Override
@@ -14,6 +16,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + by + ")";
+        return super.toString() + " (by: " +
+                by.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))+ ")";
     }
 }
