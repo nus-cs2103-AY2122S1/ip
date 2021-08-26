@@ -1,3 +1,7 @@
+package duke.taskTypes;
+
+import duke.exceptions.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -11,25 +15,16 @@ public class Task {
     /**
      * Basic constructor for task (used during subclass instance)
      */
-    public Task(){
-        setNotDone();
+    public Task(boolean isDone){
+        setState(isDone);
     }
 
-    /**
-     * Basic constructor for task, takes in a string that describes the task
-     * @param description contains details of the task description
-     */
-    public Task(String description){
-        setNotDone();
-        setDescription(description);
-    }
-
-    /**
-     * Basic constructor for an empty task
-     * @return Task that has an empty description
-     */
     public static Task empty(){
-        return new Task("");
+        return new Task(false);
+    }
+
+    private void setState(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -45,7 +40,7 @@ public class Task {
      * converts the time into LocalDate and sets the time of the task
      * @param input set time
      */
-    protected void setDate(String input) throws InvalidInputException {
+    protected void setDate(String input) throws DukeException {
         if (input == null){
             this.date = null;
             this.time = -1;
@@ -54,15 +49,15 @@ public class Task {
                 String[] timeFormat = input.trim().split(" ");
                 this.date = LocalDate.parse(timeFormat[0]);
                 int hoursMins = Integer.parseInt(timeFormat[1]);
-                if (hoursMins <2401 && hoursMins > 999) {
+                if (hoursMins <2401 && hoursMins > 999 && hoursMins%100 <60) {
                     this.time = hoursMins;
                 } else {
-                    throw new InvalidInputException("Invalid time format (use 24hr format)");
+                    throw new DukeException("Invalid time format (use 24hr format)");
                 }
             } catch (DateTimeParseException e) {
-                throw new InvalidInputException("Wrong date format(use YYYY-MM-DD)");
+                throw new DukeException("Wrong date format(use YYYY-MM-DD)");
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InvalidInputException("Missing time");
+                throw new DukeException("Missing time");
             }
         }
     }
@@ -72,24 +67,15 @@ public class Task {
      * @param input set event type
      */
     protected void setEventType(String input){
-        this.eventType = "[" + input + "]";
+        this.eventType = input;
     }
 
     /**
-     * Sets the Task state to true
-     * @return Task instance itself
+     * Sets the duke.taskTypes.Task state to true
+     * @return duke.taskTypes.Task instance itself
      */
     public Task setDone(){
         this.isDone = true;
-        return this;
-    }
-
-    /**
-     * Sets the Task state to false
-     * @return Task instance itself
-     */
-    public Task setNotDone(){
-        this.isDone = false;
         return this;
     }
 
@@ -114,9 +100,15 @@ public class Task {
      * @return String containing details of the task
      */
     @Override
-    public String toString(){
+    public String toString() {
         String state = isDone ? "[X] " : "[ ] ";
-        return this.eventType + state + this.description;
+        String eventType = "[" + this.eventType + "]";
+        return eventType + state + this.description;
+    }
+
+    public String saveTask() {
+        String state = isDone ? "T" : "F";
+        return eventType + " " + state + " " + description;
     }
 }
 

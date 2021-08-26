@@ -13,42 +13,42 @@ Say something to Duke:
 ( ＾◡＾)ノ
 Say something to Duke: 
            _________________________________________________________________________________
-          | InvalidDoneFormatException: Ensure that number inputted can be found in the list|
+          | duke.exceptions.InvalidDoneFormatException: Ensure that number inputted can be found in the list|
           | Please try again                                                                |
           |_________________________________________________________________________________|
           |/
 (*°▽°)ノ
 Say something to Duke: 
            _____________________________________________________
-          | InvalidInputException: User input an invalid action.|
+          | duke.exceptions.DukeException: User input an invalid action.|
           | Please try again                                    |
           |_____________________________________________________|
           |/
 (o^ω^)
 Say something to Duke: 
            ________________________________________________________________________
-          | InvalidDoneFormatException: Ensure that list position in NUMERICAL form|
+          | duke.exceptions.InvalidDoneFormatException: Ensure that list position in NUMERICAL form|
           | Please try again                                                       |
           |________________________________________________________________________|
           |/
 (✿˘▽˘)
 Say something to Duke: 
            _________________________________________________
-          | InvalidInputException: Missing info after action|
+          | duke.exceptions.DukeException: Missing info after action|
           | Please try again                                |
           |_________________________________________________|
           |/
 ( ﾟ◇ﾟ)/
 Say something to Duke: 
            _________________________________________________
-          | InvalidInputException: Missing info after action|
+          | duke.exceptions.DukeException: Missing info after action|
           | Please try again                                |
           |_________________________________________________|
           |/
 ( ＾◡＾)ノ
 Say something to Duke: 
            _____________________________________________________
-          | InvalidInputException: User input an invalid action.|
+          | duke.exceptions.DukeException: User input an invalid action.|
           | Please try again                                    |
           |_____________________________________________________|
           |/
@@ -135,7 +135,7 @@ Say something to Duke:
 (*°▽°)ノ
 Say something to Duke: 
            ______________________________________________________
-          | InvalidEventFormatException: Invalid timestamp format|
+          | duke.exceptions.InvalidEventFormatException: Invalid timestamp format|
           | Please try again                                     |
           |______________________________________________________|
           |/
@@ -152,7 +152,7 @@ Say something to Duke:
 (✿˘▽˘)
 Say something to Duke: 
            _________________________________________________________
-          | InvalidDeadlineFormatException: Invalid timestamp format|
+          | duke.exceptions.InvalidDeadlineFormatException: Invalid timestamp format|
           | Please try again                                        |
           |_________________________________________________________|
           |/

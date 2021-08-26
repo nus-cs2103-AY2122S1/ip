@@ -1,89 +1,66 @@
 package duke.util;
 
+import duke.commands.*;
 import duke.exceptions.*;
+
+import java.util.List;
+
+/**
+ * Parser deals with making sense of the user input. Creates and returns a command object
+ * with all the stored information
+ */
 
 public class Parser {
 
-    private final Storage storage;
-    private final Speech speech;
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
 
-    public Parser(Storage storage, Speech speech, Writer writer){
+    public Parser(Storage storage, TaskList taskList, Ui ui) {
         this.storage = storage;
-        this.speech = speech;
+        this.taskList = taskList;
+        this.ui = ui;
     }
 
-    /**
-     * Takes the first word and decides the next course of action.
-     * @param input takes in a string based on the scanner
-     * @return boolean value to indicate whether to continue running the program
-     */
-    public boolean decide(String input) {
-        String[] parsedInput = input.trim().split(" ", 2);
-        boolean cont = true;
-        String userReq ="";
+    public void loadTask() {
         try {
+            List<String> prevState = storage.loadSaved();
+            taskList.insertPast(prevState);
+        } catch (DukeException e) {
+            ui.error(e.toString());
+        }
+    }
+
+
+
+
+    /**
+     * Parses the input and returns command to be executed
+     */
+    public Command parse(String input) throws DukeException {
+        String[] parsedInput = input.trim().split(" ", 2);        try {
             switch (parsedInput[0]) {
             case "bye":
-                speech.goodbye();
-                cont = false;
-                break;
+                return new ByeCommand(storage, taskList, ui);
             case "list":
-                String[] listOutput = storage.getStorage();
-                speech.listMsg(listOutput, storage);
-                break;
+                return new ListCommand(storage, taskList, ui);
             case "done":
-                userReq = parsedInput[1];
-                try {
-                    String outputMsg = storage.done(userReq);
-                    speech.doneMsg(outputMsg);
-                } catch (InvalidDoneFormatException e){
-                    speech.error(e.toString());
-                }
-                break;
+                return new DoneCommand(storage, taskList, ui, parsedInput[1]);
             case "deadline":
-                userReq = parsedInput[1];
-                try{
-                    String deadlineSuccess = storage.deadline(userReq);
-                    speech.taskAdded(deadlineSuccess, storage);
-                } catch (InvalidDeadlineFormatException e) {
-                    speech.error(e.toString());
-                }
-                break;
+                return new AddCommand(storage, taskList, ui, parsedInput[1], "deadline");
             case "todo":
-                userReq = parsedInput[1];
-                String todoSuccess = storage.todo(userReq);
-                speech.taskAdded(todoSuccess, storage);
-                break;
+                return new AddCommand(storage, taskList, ui, parsedInput[1], "todo");
             case "event":
-                userReq = parsedInput[1];
-                try{
-                    String eventSuccess = storage.event(userReq);
-                    speech.taskAdded(eventSuccess, storage);
-                } catch (InvalidEventFormatException e) {
-                    speech.error(e.toString());
-                }
-                break;
+                return new AddCommand(storage, taskList, ui, parsedInput[1], "event");
             case "delete":
-                userReq = parsedInput[1];
-                try {
-                    String deleteSuccess = storage.delete(userReq);
-                    speech.taskDeleted(deleteSuccess, storage);
-                } catch (InvalidDeleteFormatException e) {
-                    speech.error(e.toString());
-                }
-                break;
+                return new DeleteCommand(storage, taskList, ui, parsedInput[1]);
             default:
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            speech.error(new InvalidInputException("User input an invalid action.").toString());
+            throw new DukeException("User input an invalid action.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            speech.error(new InvalidInputException("Missing info after action").toString());
-        } catch (InvalidInputException e) {
-            speech.error(e.toString());
+            throw new DukeException("Missing info after action");
         }
-        return cont;
-
     }
-
 }
