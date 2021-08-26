@@ -19,6 +19,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the specified filePath
+     *
+     * @return An ArrayList of Tasks loaded from the file.
+     * @throws DukeException throws exception when Tasks cannot be loaded
+     */
     public ArrayList<Task> loadTasks() throws DukeException {
         try {
             ArrayList<Task> res = new ArrayList<>();
