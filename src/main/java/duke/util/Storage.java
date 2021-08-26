@@ -19,16 +19,29 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-
+/**
+ * A class that handles all file related functionality, such as loading from
+ * and saving to a save file.
+ */
 public class Storage {
 
     private final Path filePath;
 
+    /**
+     * Creates an instance of the Storage class.
+     *
+     * @param filePath File path for the save file.
+     */
     public Storage(Path filePath) {
         this.filePath = filePath;
     }
 
-    // Loads tasks from the given file path. Called when duke.Duke starts.
+    /**
+     * Loads tasks from the file path given on instantiation. Called when Duke starts.
+     *
+     * @throws FileNotFoundException If file does not exist.
+     * @throws DukeException         If the file contains invalid task data.
+     */
     public List<Task> loadTasksFromFile() throws FileNotFoundException, DukeException {
         File saveFile = this.filePath.toFile();
         Scanner scanner = new Scanner(saveFile);
@@ -56,7 +69,11 @@ public class Storage {
         return tasks;
     }
 
-    // Saves tasks to the given file path. Called when list is modified.
+    /**
+     * Saves tasks to the file path given at instantiation. Called when list is modified.
+     *
+     * @throws IOException If the saving process fails.
+     */
     public void saveTasksToFile(TaskList tasks) throws IOException {
         Files.createDirectories(this.filePath.getParent()); // Create directories if they do not exist
         FileWriter fw = new FileWriter(this.filePath.toAbsolutePath().toString());
