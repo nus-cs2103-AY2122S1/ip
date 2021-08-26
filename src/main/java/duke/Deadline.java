@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class is a task that takes in description, deadline and time
+ */
 public class Deadline extends Task {
     protected LocalDate deadline;
     protected String logo = "[D]";
@@ -14,6 +17,11 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    /**
+     * Returns logo corresponding to type
+     *
+     * @return the logo [E]
+     */
     public String logo() {
         return logo;
     }

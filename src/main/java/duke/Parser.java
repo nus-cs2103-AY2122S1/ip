@@ -2,6 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 
+/**
+ * Takes in command from user and checks what to do with it
+ */
 public class Parser {
     TaskList taskList = new TaskList();
 
@@ -21,6 +24,11 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Take in input from user and checks what commands to run
+     *
+     * @param input from user
+     */
     public void commands(String input) {
         try {
             if (input.equals("list")) {

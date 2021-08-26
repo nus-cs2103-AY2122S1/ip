@@ -3,7 +3,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+/**
+ * Event class is a task that takes in description and deadline
+ */
+public class Event extends Task {
     protected LocalDate deadline;
     protected String logo = "[E]";
 
@@ -12,6 +15,11 @@ public class Event extends Task{
         this.deadline = deadline;
     }
 
+    /**
+     * Returns logo corresponding to type
+     *
+     * @return the logo [E]
+     */
     public String logo() {
         return logo;
     }
@@ -22,6 +30,6 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + super.getStatusIcon() +  " " + super.description + " (at: " + dateFormat() + " " + ")";
+        return "[E]" + super.getStatusIcon() + " " + super.description + " (at: " + dateFormat() + " " + ")";
     }
 }
