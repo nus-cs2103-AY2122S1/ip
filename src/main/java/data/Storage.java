@@ -1,15 +1,17 @@
 package data;
 
 import task.Deadline;
+import task.Event;
 import task.Task;
 import task.ToDo;
-import task.Event;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,7 +48,11 @@ public class Storage {
                 String[] newTaskArray = sc.nextLine().split("\\|");
                 String taskType = newTaskArray[0];
                 boolean isDone = newTaskArray[1].equals("1");
-                Task newTask = taskType.equals("D") ? new Deadline(newTaskArray[2], LocalDate.parse(newTaskArray[3]))
+                Task newTask = taskType.equals("D") ?
+                        newTaskArray[3].length() > 7 ? newTaskArray[3].length() > 10
+                                ? new Deadline(newTaskArray[2],LocalDateTime.parse(newTaskArray[3]))
+                                : new Deadline(newTaskArray[2],LocalDate.parse(newTaskArray[3]))
+                                : new Deadline(newTaskArray[2],YearMonth.parse(newTaskArray[3]))
                         : taskType.equals("E") ? new Event(newTaskArray[2], newTaskArray[3])
                         : new ToDo(newTaskArray[2]);
                 if (isDone) {

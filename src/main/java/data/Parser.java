@@ -6,12 +6,19 @@ import task.Event;
 import task.ToDo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
  * Class that parses a user's input.
  */
 public class Parser {
+    /** The different formats of date/time allowed as input */
+    private final static String DATE_AND_TIME_FORMAT[] = {
+        "M/y", "d/M/y", "d-M-y", "M/y HHmm", "d/M/y HHmm", "d-M-y HHmm"
+    };
 
     /**
      * Checks the keyword of the input and return the corresponding command.
@@ -64,8 +71,8 @@ public class Parser {
      * @return An AddCommand
      */
     private static Command prepareAddCommand(String keyword, String userInput, String[] userInputArray, String specialPhrase) {
-        //Checks if task is a todo
-        if (specialPhrase.isEmpty()) {
+        switch (keyword) {
+        case "todo":
             //checks if description is empty
             if (userInputArray.length > 1) {
                 ToDo newToDo = new ToDo(userInput.replace(keyword, "").replaceFirst(" ", ""));
@@ -73,34 +80,80 @@ public class Parser {
             } else {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
-        } else {
+
+        case "deadline":
             //Checks if there is a description
             if (userInputArray.length == 1 || userInput.endsWith(specialPhrase)) {
                 throw new DukeException("The description of a deadline cannot be empty.");
+            }
+            //Removes the keyword and splits the description using specialPhrase
+            String[] updatedDeadline = userInput.replace(keyword + " ", "").split(" " + specialPhrase + " ");
+            //Returns error if user enters less/more than one special phrase
+            if (updatedDeadline.length != 2) {
+                throw new DukeException("I'm sorry, please have ONE " + specialPhrase + " in your description!");
+            }
+            String deadlineDescription = updatedDeadline[0];
+            String deadlineDetail = updatedDeadline[1];
+            return new AddCommand(prepareDeadline(deadlineDescription, deadlineDetail));
+
+
+        case "event":
+            //Checks if there is a description
+            if (userInputArray.length == 1 || userInput.endsWith(specialPhrase)) {
+                throw new DukeException("The description of a deadline cannot be empty.");
+            }
+            //Removes the keyword and splits the description using specialPhrase
+            String[] updatedEvent = userInput.replace(keyword + " ", "").split(" " + specialPhrase + " ");
+            //Returns error if user enters less/more than one special phrase
+            if (updatedEvent.length != 2) {
+                throw new DukeException("I'm sorry, please have ONE " + specialPhrase + " in your description!");
             } else {
-                //Removes the keyword and splits the description using specialPhrase
-                String[] updatedTask = userInput.replace(keyword + " ", "").split(" " + specialPhrase +" ");
-                //Returns error if user enters less/more than one special phrase
-                if (updatedTask.length != 2) {
-                    throw new DukeException("I'm sorry, please have ONE "+ specialPhrase +" in your description!");
-                } else {
-                    String taskDescription = updatedTask[0];
-                    String taskDetail = updatedTask[1];
-                    if (keyword.equals("deadline")) {
-                        try {
-                            LocalDate.parse(taskDetail);
-                        } catch (DateTimeParseException e) {
-                            throw new DukeException("Please enter a valid date!");
-                        }
-                        Deadline newDeadline = new Deadline(taskDescription, LocalDate.parse(taskDetail));
-                        return new AddCommand(newDeadline);
-                    } else {
-                        Event newEvent = new Event(taskDescription, taskDetail);
-                        return new AddCommand(newEvent);
+                String eventDescription = updatedEvent[0];
+                String eventDetail = updatedEvent[1];
+                Event newEvent = new Event(eventDescription, eventDetail);
+                return new AddCommand(newEvent);
+            }
+
+        default:
+            throw new DukeException("This error should never occur!");
+        }
+    }
+
+    /**
+     * Checks if the date and time inputted by the user follows any of the formats allowed.
+     * To be used only in prepareAddCommand method.
+     *
+     * @param description Deadline description
+     * @param dateTime The date and time input as a string
+     * @return A deadline if input is valid, else throws a DukeException
+     */
+    private static Deadline prepareDeadline(String description, String dateTime) {
+        for (String dateTimeFormat : DATE_AND_TIME_FORMAT) {
+            try {
+                if (dateTimeFormat == "M/y") {
+                    YearMonth userInput = YearMonth.parse(dateTime, DateTimeFormatter.ofPattern(dateTimeFormat));
+                    if (userInput.getYear() < 2000) {
+                        userInput = userInput.plusYears(2000);
                     }
+                    return new Deadline(description, userInput);
                 }
+                if (dateTimeFormat.split(" ").length > 1) {
+                    LocalDateTime userInput = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(dateTimeFormat));
+                    if (userInput.getYear() < 2000) {
+                        userInput = userInput.plusYears(2000);
+                    }
+                    return new Deadline(description, userInput);
+                } else {
+                    LocalDate userInput = LocalDate.parse(dateTime, DateTimeFormatter.ofPattern(dateTimeFormat));
+                    if (userInput.getYear() < 2000) {
+                        userInput = userInput.plusYears(2000);
+                    }
+                    return new Deadline(description, userInput);
+                }
+            } catch (DateTimeParseException e) {
             }
         }
+        throw new DukeException("Please enter a valid date!");
     }
 
     /**
