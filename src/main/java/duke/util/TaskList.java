@@ -34,19 +34,19 @@ public class TaskList {
         while (look.hasNext()){
             String[] formattedTask = look.next().split(" ", 3);
             boolean isDone = (formattedTask[1].equals("T"));
-            Task temp = Task.empty();
+            Task pastTask = Task.empty();
             switch (formattedTask[0]) {
                 case "T" :
-                    temp = new Todo(formattedTask[2], isDone );
+                    pastTask = new Todo(formattedTask[2], isDone );
                     break;
                 case "E" :
-                    temp = new Event(formattedTask[2], isDone);
+                    pastTask = new Event(formattedTask[2], isDone);
                     break;
                 case "D" :
-                    temp = new Deadline(formattedTask[2], isDone);
+                    pastTask = new Deadline(formattedTask[2], isDone);
                     break;
             }
-            mapper.put(temp.getDescription(), temp);
+            mapper.put(pastTask.getDescription(), pastTask);
         }
     }
 
