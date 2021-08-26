@@ -5,9 +5,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class FileHandler {
+public class Storage {
     private static final Path DIRECTORY = Paths.get("data");
     private static final Path FILE_PATH = Paths.get("data", "duke.txt");
+    private TaskList tasks = new TaskList();
 
     private static void directoryCreator() {
         try {
@@ -29,7 +30,7 @@ public class FileHandler {
         }
     }
 
-    public static List<String> open() {
+    public void open() {
         directoryCreator();
         fileCreator();
         List<String> saveFile = null;
@@ -39,15 +40,39 @@ public class FileHandler {
             System.out.println(io.getMessage());
         }
         
-        return saveFile;
+        tasks.importFromList(saveFile);
 
     }
     
-    public static void save(String text) {
+    public void save() {
         try {
-            Files.write(FILE_PATH, text.getBytes());
+            Files.write(FILE_PATH, tasks.exportToText().getBytes());
         } catch (IOException ioe) {
             System.out.println(ioe.getMessage());
         }
+    }
+
+    public String getList() {
+        return tasks.toString();
+    }
+
+    public void addToList(Task task) {
+        tasks.add(task);
+    }
+
+    public void deleteFromList(int index) {
+        tasks.remove(index);
+    }
+
+    public void markAsFinished(int index) throws DukeExceptions {
+        tasks.markAsFinished(index);
+    }
+
+    public Task getTask(int index) {
+        return tasks.get(index);
+    }
+
+    public int getSize() {
+        return tasks.size();
     }
 }

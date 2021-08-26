@@ -3,12 +3,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 
-public class TaskArray extends ArrayList<Task>{
+public class TaskList extends ArrayList<Task>{
 
     private static final String DIVIDER = "%%";
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    public TaskArray() {
-    }
 
     @Override
     public String toString() {
@@ -62,5 +60,13 @@ public class TaskArray extends ArrayList<Task>{
         return result.toString();
     }
 
+    public void markAsFinished(int index) throws DukeExceptions{
+        Task task = this.get(index);
+        if (task.getStatusIcon().equals("X")) {
+            throw new DukeExceptions("That task was already marked as done");
+        } else{
+            task.markFinished(true);
+        }
+    }
 
 }

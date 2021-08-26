@@ -24,12 +24,10 @@ public class Task {
     }
 
     protected String getStatusIcon() {
-
         return (isDone? "X" : " ");
     }
 
     public void markFinished(boolean t){
-
         this.isDone = t;
     }
 
