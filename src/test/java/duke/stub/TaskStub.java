@@ -1,7 +1,8 @@
 package duke.stub;
 
-import duke.task.Task;
 import org.json.simple.JSONObject;
+
+import duke.task.Task;
 
 public class TaskStub extends Task {
     @Override
