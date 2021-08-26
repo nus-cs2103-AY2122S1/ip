@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -92,11 +93,13 @@ public class Duke {
         else {
             if (taskType == TaskType.DEADLINE) {
                 userInputScanner.useDelimiter(" /by ");
-                addNewTask(new Deadline(userInputScanner.next().trim(), userInputScanner.next().trim()));
+                addNewTask(new Deadline(userInputScanner.next().trim(),
+                        LocalDate.parse(userInputScanner.next().trim())));
             }
             else {
                 userInputScanner.useDelimiter(" /at ");
-                addNewTask(new Event(userInputScanner.next().trim(), userInputScanner.next().trim()));
+                addNewTask(new Event(userInputScanner.next().trim(),
+                        LocalDate.parse(userInputScanner.next().trim())));
             }
         }
     }
