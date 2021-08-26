@@ -4,7 +4,7 @@ import duke.CommandList;
 
 import java.time.LocalDate;
 
-public class Todo extends Task{
+public class Todo extends Task {
 
 
     public Todo(String value) {

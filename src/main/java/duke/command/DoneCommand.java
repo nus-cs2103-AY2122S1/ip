@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.*;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     public DoneCommand(String input) {
         super(input);

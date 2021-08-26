@@ -17,7 +17,7 @@ public class Parser {
      * @return A command object
      * @throws IncompleteCommandException if command is incomplete
      */
-    public static Command parse(String input) throws IncompleteCommandException{
+    public static Command parse(String input) throws IncompleteCommandException {
         if (input.toUpperCase().equals(CommandList.BYE.toString())) {
             return new ByeCommand(input);
         } else if (input.toUpperCase().equals(CommandList.LIST.toString())) {
