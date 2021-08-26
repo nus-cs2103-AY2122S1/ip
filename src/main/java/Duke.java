@@ -6,12 +6,21 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Encapsulate a bot which helps user to keep track of a list of task.
+ *
+ * @author Zhi Bin
+ * @version Duke Level 9
+ */
 public class Duke {
     private final Storage storage;
     private final TaskList taskList;
     private final Ui ui;
     private final Parser parser;
 
+    /**
+     * Constructor of Duke
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
