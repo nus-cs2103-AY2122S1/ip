@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
 
 /**
  * The EventCommand class encapsulates the execution of the event command from the user.

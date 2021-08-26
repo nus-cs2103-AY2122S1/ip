@@ -1,8 +1,8 @@
 package duke.tasklist;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * The TaskList class encapsulates a list of tasks.
@@ -53,7 +53,6 @@ public class TaskList {
      * @param taskNo The task to be deleted.
      */
     public void deleteTask(int taskNo) {
-        Task deleteTask = allTasks.get(taskNo - 1);
         allTasks.remove(taskNo - 1);
         nextSpaceToStore = nextSpaceToStore - 1;
     }
