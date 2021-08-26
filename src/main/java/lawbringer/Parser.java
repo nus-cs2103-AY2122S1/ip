@@ -38,6 +38,9 @@ public class Parser {
             case "event":
                 taskList.addEventTask(userInput, ui);
                 break;
+            case "find":
+                taskList.findTasks(userInput, ui);
+                break;
             default:
                 throw new LawbringerException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

@@ -89,4 +89,23 @@ public class Ui {
                 " task(s) in the list.";
         System.out.println(message);
     }
+
+    /**
+     * Prints the matching tasks based on the given keyword.
+     *
+     * @param tasks List of tasks.
+     */
+    protected void showMatchingTasks(List<Task> tasks) {
+        if (tasks.size() == 0) {
+            System.out.println("I can't find any matching tasks in your list! :(");
+            return;
+        }
+        StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
+        int counter = 1;
+        for (Task task : tasks) {
+            result.append(counter).append(".").append(task.toString()).append("\n");
+            counter++;
+        }
+        System.out.println(result);
+    }
 }

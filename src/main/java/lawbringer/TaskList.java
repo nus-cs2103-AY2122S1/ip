@@ -108,4 +108,23 @@ public class TaskList {
         Task task = tasks.get(index - 1);
         ui.showDoneMessage(task);
     }
+
+    /**
+     * Finds matching tasks based on a keyword.
+     *
+     * @param userInput The input of the user.
+     * @param ui        Ui class to print messages to the user.
+     */
+    protected void findTasks(String userInput, Ui ui) {
+        String keyword = userInput.split(" ")[1];
+        List<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            for (String s : task.title.split(" ")) {
+                if (keyword.equals(s)) {
+                    matchingTasks.add(task);
+                }
+            }
+        }
+        ui.showMatchingTasks(matchingTasks);
+    }
 }
