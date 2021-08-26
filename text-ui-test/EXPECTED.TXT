@@ -8,70 +8,51 @@ Hello from
 ~~~~~~~~ Hello! I'm Duke ~~~~~~~~
 ~~ What do you wanna do today? ~~
 
-Got it. I've added this task: 
-~~[T][ ] read book~~
-Now you have 1 task in the list.
+Here are the tasks in your list: 
+1.T | 1 | bake chocolate cake
+2.D | 0 | send proposal | Aug 16th
 
 Got it. I've added this task: 
-~~[D][ ] return book (by: June 6th)~~
-Now you have 2 tasks in the list.
-
-Got it. I've added this task: 
-~~[E][ ] project meeting (at: Aug 6th 2-4pm)~~
+~~T | 1 | create group chat~~
 Now you have 3 tasks in the list.
 
 Got it. I've added this task: 
-~~[T][ ] join sports club~~
+~~D | 1 | set up meeting date | Friday~~
 Now you have 4 tasks in the list.
 
-Here are the tasks in your list: 
-1.[T][ ] read book
-2.[D][ ] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
-4.[T][ ] join sports club
+Got it. I've added this task: 
+~~E | 1 | project meeting | Fri, 9 - 11~~
+Now you have 5 tasks in the list.
 
 Nice! I've marked this task as done: 
-~[D][X] return book (by: June 6th)~ 
+~T | 0 | bake chocolate cake~ 
 
 Here are the tasks in your list: 
-1.[T][ ] read book
-2.[D][X] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
-4.[T][ ] join sports club
+1.T | 0 | bake chocolate cake
+2.D | 0 | send proposal | Aug 16th
+3.T | 1 | create group chat
+4.D | 1 | set up meeting date | Friday
+5.E | 1 | project meeting | Fri, 9 - 11
 
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 
 Here are the tasks in your list: 
-1.[T][ ] read book
-2.[D][X] return book (by: June 6th)
-3.[E][ ] project meeting (at: Aug 6th 2-4pm)
-4.[T][ ] join sports club
+1.T | 0 | bake chocolate cake
+2.D | 0 | send proposal | Aug 16th
+3.T | 1 | create group chat
+4.D | 1 | set up meeting date | Friday
+5.E | 1 | project meeting | Fri, 9 - 11
 
-☹ OOPS!!! The task description or command is incomplete.
-
-☹ OOPS!!! The task description or command is incomplete.
-
-☹ OOPS!!! The task description or command is incomplete.
-
-Got it. I've added this task: 
-~~[D][ ] hang laundry (by: 12pm)~~
-Now you have 5 tasks in the list.
-
-Got it. I've added this task: 
-~~[E][ ] go for lesson (at: 12-2)~~
-Now you have 6 tasks in the list.
-
-Got it. I've added this task: 
-~~[T][ ] take notes~~
-Now you have 7 tasks in the list.
+☹ The task description or command is incomplete.:$
 
 Nice! I've marked this task as done: 
-~[D][X] return book (by: June 6th)~ 
+~T | 0 | create group chat~ 
 
 Alright. I've removed this task: 
-~~[D][X] return book (by: June 6th)~~
-Now you have 6 tasks in the list
+~~D | 0 | send proposal | Aug 16th~~
+Now you have 4 tasks in the list
 
-☹ OOPS!!! The task does not exist.
+☹ The task description or command is incomplete.:$
 
+C:\Users\gordo\Desktop\IP\data\duke.txt
 @@@@ See ya later, alligator @@@@

@@ -25,11 +25,11 @@ public class Event extends Task {
      * Print out the event task,
      * 
      * @return string format of the event task, 
-     * consisting of the task marker "[D]", task description and duration of the event.
+     * consisting of the task marker "E", task description and duration of the event.
      */
     @Override
     public String toString() {
-        return String.format("| %s | %s | %s", TASK_MARKER, super.toString(), timing);
+        return String.format("%s | %s | %s", TASK_MARKER, super.toString(), timing);
     }
 
     /**

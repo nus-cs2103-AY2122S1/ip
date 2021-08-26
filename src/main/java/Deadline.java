@@ -25,11 +25,11 @@ public class Deadline extends Task {
      * Print out the deadline task,
      * 
      * @return string format of the deadline task, 
-     * consisting of the task marker "[D]", task description and deadline of the task.
+     * consisting of the task marker "D", task description and deadline of the task.
      */
     @Override
     public String toString() {
-        return String.format("| %s | %s | %s", TASK_MARKER, super.toString(), by);
+        return String.format("%s | %s | %s", TASK_MARKER, super.toString(), by);
     }
 
     /**

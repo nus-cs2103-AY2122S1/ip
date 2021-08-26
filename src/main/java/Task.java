@@ -44,7 +44,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("| %s | %s", getStatusIcon() == " " ? 1 : 0, description);
+        return String.format("%s | %s", getStatusIcon() == " " ? 1 : 0, description);
     }
 
     /**

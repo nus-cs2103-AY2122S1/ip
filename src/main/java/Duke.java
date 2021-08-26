@@ -1,7 +1,11 @@
+import javax.swing.plaf.synth.SynthDesktopIconUI;
+import javax.swing.plaf.synth.SynthLookAndFeel;
 import javax.xml.stream.FactoryConfigurationError;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.DoubleToIntFunction;
+
 
 /**
  * Represents the duke chat bot, which has the ability to log and track and delete tasks.
@@ -11,16 +15,15 @@ import java.util.function.DoubleToIntFunction;
  */
 public class Duke {
     private ArrayList<Task> tasks = new ArrayList<>();
-    private int counter = 0;
     private int bufferLength = 5;
-    
+    private DataFile dataFile;
     public enum Command { done, list, delete, others};
     
     /**
      * Constructor for the Duke class.
      * Prints out a statement to greet user.
      */
-    public Duke() {
+    public Duke(String filepath, String fileName) {
         String c = "~";
         String line1 = " Hello! I'm Duke ";
         String line2 = " What do you wanna do today? ";
@@ -29,6 +32,14 @@ public class Duke {
         String buffer2 = c.repeat((limit - line2.length()) / 2);
         String str = buffer1 + line1 + buffer1 + "\n" + buffer2 + line2 + buffer2 + "\n"; 
         System.out.println(str);
+        try {
+            dataFile = new DataFile(filepath, fileName);
+            dataFile.load(tasks);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(new DukeException(e).getMessage());
+        }
+        
     }
 
     /**
@@ -43,13 +54,12 @@ public class Duke {
             Task task = setTask(input);
             if (task != null) {
                 tasks.add(task);
-                counter++;
             }
             return logger(task);
         } catch (StringIndexOutOfBoundsException se) {
-            return new DukeException(se).get_message();
+            return new DukeException(se).getMessage();
         } catch (NullPointerException ne) {
-            return new DukeException(ne).get_message();
+            return new DukeException(ne).getMessage();
         }
     }
     
@@ -60,7 +70,7 @@ public class Duke {
                     (tasks.size() > 1 ? " tasks" : " task") + " in the list.\n");
             return string;
         } catch (NullPointerException ne) {
-            return new DukeException(ne).get_message();
+            return new DukeException(ne).getMessage();
         }
     }
     
@@ -73,13 +83,13 @@ public class Duke {
         String string = "";
         try {
             string += "Here are the tasks in your list: \n";
-            for (int i = 0; i < counter; i++) {
+            for (int i = 0; i < tasks.size(); i++) {
                 string += String.format("%d.%s\n", i + 1, tasks.get(i).toString());
             }
             string += "";
             return string;
         } catch (NullPointerException ne) {
-            return new DukeException(ne).get_message();
+            return new DukeException(ne).getMessage();
         }
     }
     
@@ -92,9 +102,9 @@ public class Duke {
         try {
             String index = input.substring("done ".length());
             int taskNum = Integer.parseInt(index);
-            if(taskNum > counter || taskNum < 1) {
+            if(taskNum > tasks.size() || taskNum < 1) {
                 Exception ae = new ArrayIndexOutOfBoundsException();
-                return new DukeException(ae).get_message();
+                return new DukeException(ae).getMessage();
             }
             Task taskDone = tasks.get(taskNum - 1);
             taskDone.markAsDone();
@@ -102,9 +112,9 @@ public class Duke {
             string += "~" + taskDone.toString() + "~ \n";
             return string;
         } catch (NullPointerException ne) {
-            return new DukeException(ne).get_message();
+            return new DukeException(ne).getMessage();
         } catch (StringIndexOutOfBoundsException se) {
-            return new DukeException(se).get_message();
+            return new DukeException(se).getMessage();
         }
     }
 
@@ -172,25 +182,27 @@ public class Duke {
         try {
             String index = input.substring("delete ".length());
             int taskNum = Integer.parseInt(index);
-            if(taskNum > counter || taskNum < 1) {
-                Exception ae = new ArrayIndexOutOfBoundsException();
-                return new DukeException(ae).get_message();
+            try {
+                if (taskNum > tasks.size() || taskNum < 1) {
+                    throw new ArrayIndexOutOfBoundsException();
+                }
+            } catch (ArrayIndexOutOfBoundsException ae) {
+              return new DukeException(ae).getMessage();  
             }
             Task task = tasks.get(taskNum - 1);
             tasks.remove(taskNum - 1);
-            counter--;
             String string = "Alright. I've removed this task: \n";
             string += "~~" + task.toString() + "~~\n";
             string += String.format("Now you have %d %s in the list\n", tasks.size(), 
                                         (tasks.size() > 1 ? "tasks" : "task"));
             return string;
         } catch (NullPointerException ne) {
-            return new DukeException(ne).get_message();
+            return new DukeException(ne).getMessage();
         } catch (ArrayIndexOutOfBoundsException ae) {
-            return new DukeException(ae).get_message();
+            return new DukeException(ae).getMessage();
         } catch (StringIndexOutOfBoundsException se) {
             Exception ne = new NullPointerException();
-            return new DukeException(ne).get_message();
+            return new DukeException(ne).getMessage();
         }
     }
 
@@ -199,6 +211,11 @@ public class Duke {
      * @return a closing statement to user.
      */
     public String close() {
+        try {
+            dataFile.store(tasks);
+        } catch (IOException e) {
+            new DukeException(e).getMessage();
+        }
         String str = "@@@@ See ya later, alligator @@@@";
         return str;
     }
@@ -214,7 +231,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        Duke duke = new Duke();
+        Duke duke = new Duke("../data", "/duke.txt");
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
         while (!input.equals("bye")) {

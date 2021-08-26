@@ -22,11 +22,11 @@ public class Todo extends Task {
      * prints out the Todo task.
      * 
      * @return string format of the todo task, 
-     * consisting of the task marker "[T]" and task description.
+     * consisting of the task marker "T" and task description.
      */
     @Override
     public String toString() {
-        return String.format("| %s | %s", TASK_MARKER, super.toString());
+        return String.format("%s | %s", TASK_MARKER, super.toString());
     }
 
     /**
