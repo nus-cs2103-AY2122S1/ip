@@ -36,7 +36,6 @@ public class SaberParser {
                 slashIndex = unparsedCommand.indexOf(" /by ");
             }
             unparsedCommandWithoutTime = unparsedCommand.substring(0, slashIndex).trim();
-            System.out.println(unparsedCommandWithoutTime);
             try {
                 this.time = unparsedCommand.substring(slashIndex + 5);
             } catch (IndexOutOfBoundsException e) {
