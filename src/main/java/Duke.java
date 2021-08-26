@@ -53,11 +53,9 @@ public class Duke {
     public void parseTask(String str) {
         Scanner sc = new Scanner(str);
         String category = sc.next();
-        System.out.println("cAate:" + category);
+        System.out.println("cat:" + category);
         sc.next();
-        System.out.println("next1");
         sc.next();
-        System.out.println("next2");
 
 
         String taskName = "";
@@ -79,7 +77,7 @@ public class Duke {
         if (category.equals("T")) {
             tasks.add(new Todo(taskName));
             System.out.println("todo");
-        } else if (category == "D") {
+        } else if (category.equals("D")) {
             tasks.add(new Deadline(taskName, ld));
         } else {
             tasks.add(new Event(taskName, ld));
@@ -99,7 +97,8 @@ public class Duke {
     public void updateFile() throws IOException {
         FileWriter myWriter = new FileWriter(filePath);
         for (Task task: tasks) {
-            myWriter.write(task.toString() + "\n");
+            System.out.println(task.toStoredString());
+            myWriter.write(task.toStoredString() + "\n");
         }
         myWriter.close();
     }

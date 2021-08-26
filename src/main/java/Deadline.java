@@ -12,15 +12,16 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return ("[D]"
+        return ("D "
                 + super.toString()
                 + " - "
                 + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
         );
     }
 
+    @Override
     public String toStoredString() {
-        return ("[D]"
+        return ("D "
                 + super.toString()
                 + " - "
                 + time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))

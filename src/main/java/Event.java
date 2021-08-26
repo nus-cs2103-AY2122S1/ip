@@ -15,15 +15,16 @@ public class Event extends Task {
     public String toString() {
 
 
-        return ("[E]"
+        return ("E "
                 + super.toString()
                 + " - "
                 + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
         );
     }
 
+    @Override
     public String toStoredString() {
-        return ("[E]"
+        return ("E "
                 + super.toString()
                 + " - "
                 + time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
