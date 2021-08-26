@@ -16,17 +16,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Deals with loading duke.tasks from the file and saving duke.tasks in the file.
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     private String filepath;
     private String path;
-    
+
+    /**
+     * Constructor of Storage object.
+     * @param filepath filepath of duke.txt.
+     * @param path path of the folder to store the file.
+     */
     public Storage(String filepath, String path) {
         this.filepath = filepath;
         this.path = path;
     }
-    
+
+    /**
+     * Opens the file on hard disk where user's past tasks were saved.
+     * Loads the previous tasks saved in duke.txt upon start.
+     * @return list of tasks to be used to construct TaskList.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -44,6 +54,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Scans user's records and parses through lines of tasks to convert into Task form.
+     * @param taskRecord record of user's past tasks to be parsed.
+     * @return list of tasks to be used to construct TaskList.
+     */
     public static ArrayList<Task> readSaved (File taskRecord) {
         ArrayList<Task> savedTasks = new ArrayList<>();
         try {
@@ -75,6 +90,10 @@ public class Storage {
         return savedTasks;
     }
 
+    /**
+     * Appends task to the end of the file when new task is added.
+     * @param task task to be added to file.
+     */
     public static void appendTask(Task task) {
         try {
             File taskRecord = new File("data/duke.txt");
@@ -86,6 +105,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Rewrite the entire file whenever a task is deleted or marked as done.
+     * @param tasks user's TaskList to be stored.
+     */
     public static void rewriteTaskRecord(TaskList tasks) {
         try {
             File taskRecord = new File("data/duke.txt");
