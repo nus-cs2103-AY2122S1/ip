@@ -28,7 +28,6 @@ public class FindCommand extends Command {
      * @param tasks The list that stores all the tasks to be added/deleted.
      * @param ui The ui that deals with interactions with the user.
      * @param storage The storage that deals with loading tasks from the file and saving tasks in the file.
-     * @throws DukeException
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
