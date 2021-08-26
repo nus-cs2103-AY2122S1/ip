@@ -18,3 +18,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 text-ui-test/runtest.bat
 text-ui-test/EXPECTED.TXT
 text-ui-test/input.txt
+src/main/java/META-INF/MANIFEST.MF
