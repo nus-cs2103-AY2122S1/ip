@@ -3,20 +3,32 @@ package ligma.command;
 import ligma.Storage;
 import ligma.TaskList;
 import ligma.Ui;
+import ligma.task.Task;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
- * This class represents a command to list all the tasks.
+ * This class represents a command to find
+ * tasks containing a specific target string.
  */
-public class ListCommand implements Command {
+public class FindCommand implements Command {
+    private String target;
+
+    public FindCommand(String target) {
+        this.target = target;
+    }
+
     /**
-     * Displays all tasks on UI.
+     * Displays tasks with specified string on UI.
      *
      * @param tasks     all tasks belonging to current Ligma program
      * @param storage   storage of current Ligma program
      */
     @Override
     public void execute(TaskList tasks, Storage storage) {
-        Ui.printTaskList(tasks);
+        Task[] results = tasks.find(target);
+        Ui.printFoundTasks(results);
     }
 
     /**

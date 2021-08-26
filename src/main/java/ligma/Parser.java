@@ -58,6 +58,8 @@ public class Parser {
                     return new DoneCommand(itemIndex);
                 case "delete":
                     return new DeleteCommand(itemIndex);
+                case "find" :
+                    return new FindCommand(description.trim());
                 default:
                     throw new NoSuchMethodException("Sorry, command does not exist.");
                 }
@@ -78,6 +80,8 @@ public class Parser {
             throw new InputMismatchException("Indicate index of item to be marked as done.");
         case "delete":
             throw new InputMismatchException("Indicate index of item to be deleted.");
+        case "find":
+            throw new InputMismatchException("Indicate term you wish to search for.");
         default:
             throw new NoSuchMethodException("Sorry, command does not exist.");
         }

@@ -42,6 +42,10 @@ public class Task {
         return desc;
     }
 
+    public boolean match(String target) {
+        return desc.contains(target);
+    }
+
     @Override
     public String toString() {
         String check = isDone ? "[X] " : "[ ] ";

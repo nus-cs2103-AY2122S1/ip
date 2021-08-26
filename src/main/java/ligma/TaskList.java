@@ -36,4 +36,8 @@ public class TaskList {
                 .map(Task::toString)
                 .toArray(String[]::new);
     }
+
+    public Task[] find(String target) {
+        return tasks.stream().filter(task -> task.match(target)).toArray(Task[]::new);
+    }
 }
