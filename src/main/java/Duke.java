@@ -1,11 +1,11 @@
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.io.IOException;
 
 public class Duke {
     /** Hardcoded file path to save location. */
@@ -60,6 +60,7 @@ public class Duke {
         }
     }
 
+    /** Driver method. */
     public static void main(String[] args) {
         try {
             new Duke(FILEPATH).run();
