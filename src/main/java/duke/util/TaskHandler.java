@@ -105,7 +105,7 @@ public class TaskHandler {
         Storage.updateData(taskList);
     }
 
-    public void printTasks() {
+    public void printTasks()  {
         StringBuilder allTasks = new StringBuilder(TASK_LIST);
         if (taskList.size() == 0) {
             Ui.prettify(NO_TASKS_FOUND);

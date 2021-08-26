@@ -43,6 +43,9 @@ public class Task {
         return isDone ? "X" :"";
     }
 
+    public String getTaskName() {
+        return taskName;
+    }
     /**
      *
      *

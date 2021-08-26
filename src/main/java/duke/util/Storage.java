@@ -40,7 +40,6 @@ public class Storage {
         if (!file.exists()) {
             newFile();
         }
-
         try {
             FileWriter fw = new FileWriter(FILE_NAME, true);
             fw.write(task.formatToSave() + System.lineSeparator());

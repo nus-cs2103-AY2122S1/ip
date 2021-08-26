@@ -7,6 +7,7 @@ package duke.task;
  * @version CS2103T AY21/22 Semester 1
  */
 public class Todo extends Task {
+
     /**
      * Instantiates a new Todo.
      *
@@ -29,5 +30,16 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return String.format("[T]%s", super.toString());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof Todo) {
+            return ((Todo) o).getTaskName().equals(this.getTaskName());
+        }
+        return false;
     }
 }

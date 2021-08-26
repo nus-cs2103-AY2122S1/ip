@@ -28,12 +28,14 @@ public class Parser {
             case "deadline":
                 String[] deadlineDetails = parseDeadlineDetails(input);
                 String dueDate = parseDateToString(deadlineDetails[1]);
-                Deadline deadline = new Deadline(deadlineDetails[0], dueDate);
+                String deadlineName = deadlineDetails[0].replace("deadline", "").trim();
+                Deadline deadline = new Deadline(deadlineName, dueDate);
                 return new AddTaskCommand(deadline);
             case "event":
                 String[] eventDetails = parseEventDetails(input);
                 String eventDate = parseDateToString(eventDetails[1]);
-                Event event = new Event(eventDetails[0], eventDate);
+                String eventName = eventDetails[0].replace("event", "").trim();
+                Event event = new Event(eventName, eventDate);
                 return new AddTaskCommand(event);
             case "bye":
                 return new ExitCommand();
@@ -56,10 +58,12 @@ public class Parser {
 
     private static String parseTodoDetails(String input) throws DukeException {
         String[] splitInput = input.split("\\s+");
+        String todoDetails;
         if (splitInput.length < 2) {
             throw new DukeMissingDescriptionException(splitInput[0]);
         }
-        return splitInput[1].trim();
+        todoDetails = input.replace(splitInput[0], "");
+        return todoDetails.trim();
     }
 
     private static String[] parseDeadlineDetails(String input) throws DukeException {
@@ -72,7 +76,6 @@ public class Parser {
             throw new DukeDeadlineMissingDateException();
         } else {
             return deadlineDetails;
-
         }
     }
 

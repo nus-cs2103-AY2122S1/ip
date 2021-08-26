@@ -18,4 +18,15 @@ public class AddTaskCommand extends Command {
         taskHandler.addTask(task);
         storage.writeToFile(task);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof AddTaskCommand) {
+            return ((AddTaskCommand) o).task.equals(this.task);
+        }
+        return false;
+    }
 }

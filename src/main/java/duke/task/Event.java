@@ -35,4 +35,16 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), time);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof Event) {
+            Event e = (Event) o;
+            return e.getTaskName().equals(this.getTaskName()) && e.time.equals(this.time);
+        }
+        return false;
+    }
 }
