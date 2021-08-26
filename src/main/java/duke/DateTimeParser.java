@@ -7,13 +7,13 @@ import java.util.ArrayList;
 
 public class DateTimeParser extends Parser<LocalDate> {
 	private final ArrayList<DateTimeFormatter> dateTimeFormatters = new ArrayList<>();
-	
+
 	public DateTimeParser(String[] dateFormats) {
 		for (String format : dateFormats) {
 			dateTimeFormatters.add(DateTimeFormatter.ofPattern(format));
 		}
 	}
-	
+
 	public LocalDate parse(String s) {
 		for (DateTimeFormatter formatter : dateTimeFormatters) {
 			try {

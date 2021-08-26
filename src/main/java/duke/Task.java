@@ -1,36 +1,36 @@
 package duke;
 
 public class Task {
-    protected String description;
-    protected boolean isDone;
+	protected String description;
+	protected boolean isDone;
 
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-    
-    public Task(boolean isDone, String description) {
-        this.description = description;
-        this.isDone = isDone;
-    }
+	public Task(String description) {
+		this.description = description;
+		this.isDone = false;
+	}
 
-    protected String getStatusIcon() {
-        return (isDone ? "X" : " ");
-    }
+	public Task(boolean isDone, String description) {
+		this.description = description;
+		this.isDone = isDone;
+	}
 
-    public void markAsDone() {
-        isDone = true;
-    }
+	protected String getStatusIcon() {
+		return (isDone ? "X" : " ");
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void markAsDone() {
+		isDone = true;
+	}
 
-    public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
-    }
-    
-    public String toBackupFormat() {
-        return String.format("%s | %d", description, isDone ? 1 : 0);
-    }
+	public String getDescription() {
+		return description;
+	}
+
+	public String toString() {
+		return String.format("[%s] %s", getStatusIcon(), description);
+	}
+
+	public String toBackupFormat() {
+		return String.format("%s | %d", description, isDone ? 1 : 0);
+	}
 }
