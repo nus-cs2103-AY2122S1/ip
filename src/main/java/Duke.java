@@ -4,8 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 public class Duke {
-    private static final int lv = 6;
+    private static final int lv = 7;
     private static final String[] features = {
             "",
             "Greet, Echo, Exit",
@@ -21,7 +22,7 @@ public class Duke {
     private static final String dukeFilePath = "data/duke.txt";
 
     /**
-     * This function takes an input string and formats it by including horizontal lines above
+     * This method takes an input string and formats it by including horizontal lines above
      * and below the input string
      *
      * @param str input string to be sandwiched
@@ -34,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * This function takes the user's input list and beautifies it for display.
+     * This method takes the user's input list and beautifies it for display.
      *
      * @param taskArrayList the user's input list to be beautified
      * @return the beautified string to display
@@ -52,7 +53,22 @@ public class Duke {
         return listBeautified.toString();
     }
 
-    public static void main(String[] args) {
+    /**
+     * This method appends to the file instead of overwrites.
+     *
+     * @param filePath the path to the file to append to
+     * @param textToAppend the text to append
+     * @throws IOException if filePath does not exist
+     */
+
+    private static void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
+        fw.write(textToAppend);
+        fw.close();
+    }
+
+
+    public static void main(String[] args) throws IOException {
         // commented out logo
 //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -74,15 +90,24 @@ public class Duke {
 
         System.out.println(sandwich(welcome));
 
+        // load the data from the hard disk for dukeFile
+        File dukeFile = new File(dukeFilePath);
+
+        // creates directory if it does not exist
+        if (dukeFile.mkdir()) {
+            System.out.println("folder: 'data/' has been created");
+        }
+        // creates file if it does not exist
+        if (dukeFile.createNewFile()) {
+            System.out.println("'duke.txt' has been created in the 'data/' folder ");
+        }
+
         // Goodbye message
         String goodbye = "Thank you for using Duke: Level " + lv + "\n"
                 + "See you soon!";
 
         // Scanner to read user inputs
         Scanner scanner = new Scanner(System.in);
-
-        // File to store user's added tasks to the hard disk
-        File dukeFile = new File(dukeFilePath);
 
         while (!canExit) {
             String userInput = scanner.next();
