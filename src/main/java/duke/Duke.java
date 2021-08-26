@@ -15,6 +15,10 @@ public class Duke {
     private TaskManager taskManager;
     private final Ui ui;
 
+    /**
+     * Constructor for a Duke object.
+     * @param filePath the path to the file where tasks should be stored.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

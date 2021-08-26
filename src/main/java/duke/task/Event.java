@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.util.DukeDateTime;
-import duke.exception.DukeException;
 
 /**
  * Represents a <code>Task</code> that occurs on a specific date and time.
@@ -9,11 +8,17 @@ import duke.exception.DukeException;
 public class Event extends Task implements Timestampable {
     private final DukeDateTime timestamp;
 
+    /**
+     * Constructor for an Event object.
+     */
     public Event(String name, DukeDateTime timestamp) {
         super(name);
         this.timestamp = timestamp;
     }
 
+    /**
+     * Constructor for an Event object with completion status.
+     */
     public Event(String name, boolean isDone, DukeDateTime timestamp) {
         super(name, isDone);
         this.timestamp = timestamp;
@@ -21,7 +26,7 @@ public class Event extends Task implements Timestampable {
 
     @Override
     public String toText() {
-        String[] props = new String[]{"E", super.getStatusIcon(), super.getName(), timestamp.toISO()};
+        String[] props = new String[]{"E", super.getStatusIcon(), super.getName(), timestamp.toIso()};
         return String.join(" | ", props);
     }
 

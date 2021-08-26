@@ -1,19 +1,17 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.parser.TaskParser;
-import duke.task.Task;
-import duke.task.TaskManager;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.exception.DukeException;
+import duke.parser.TaskParser;
+import duke.task.Task;
+import duke.task.TaskManager;
 /**
  * Represents the file used to store the user's task data.
  */
@@ -21,6 +19,10 @@ public class Storage {
     private final String filePath;
     private final File file;
 
+    /**
+     * Constructor for a Storage object.
+     * @param filePath path to the stored file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
@@ -29,8 +31,8 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.printf("An error occurred when trying to access file %s." +
-                        "Changes to your task list will not be saved locally.\n", filePath);
+                System.out.printf("An error occurred when trying to access file %s."
+                        + "Changes to your task list will not be saved locally.\n", filePath);
             }
         }
     }

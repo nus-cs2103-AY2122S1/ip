@@ -1,20 +1,20 @@
 package duke.util;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.exception.DukeException;
+
 /**
  * Represents a wrapper around a <code>LocalDateTime</code>.
  */
 public class DukeDateTime {
-    private final static DateTimeFormatter USER_INPUT_DATE_TIME_FORMATTER =
+    private static final DateTimeFormatter USER_INPUT_DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-    private final static DateTimeFormatter USER_INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private final static DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy hh.mma");
+    private static final DateTimeFormatter USER_INPUT_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy hh.mma");
 
     private final LocalDateTime dateTime;
 
@@ -37,8 +37,8 @@ public class DukeDateTime {
         try {
             dt = LocalDateTime.parse(str, USER_INPUT_DATE_TIME_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Unable to parse datetime. Please use the `YYYY-MM-DD HHMM` format " +
-                    "(e.g. 2021-08-24 2130).");
+            throw new DukeException("Unable to parse datetime. Please use the `YYYY-MM-DD HHMM` format "
+                    + "(e.g. 2021-08-24 2130).");
         }
         return new DukeDateTime(dt);
     }
@@ -54,8 +54,8 @@ public class DukeDateTime {
         try {
             dt = LocalDate.parse(str, USER_INPUT_DATE_FORMATTER);
         } catch (DateTimeParseException e) {
-            throw new DukeException("Unable to parse date. Please use the `YYYY-MM-DD` format " +
-                    "(e.g. 2021-08-24).");
+            throw new DukeException("Unable to parse date. Please use the `YYYY-MM-DD` format "
+                    + "(e.g. 2021-08-24).");
         }
         return new DukeDateTime(dt);
     }
@@ -66,7 +66,7 @@ public class DukeDateTime {
      * @return the corresponding <code>DukeDateTime</code> object
      * @throws DukeException if the date cannot be parsed with the ISO format
      */
-    public static DukeDateTime parseISO(String str) throws DukeException {
+    public static DukeDateTime parseIso(String str) throws DukeException {
         LocalDateTime dt;
         try {
             dt = LocalDateTime.parse(str, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
@@ -86,7 +86,7 @@ public class DukeDateTime {
     /**
      * Returns the datetime formatted in ISO.
      */
-    public String toISO() {
+    public String toIso() {
         return dateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 

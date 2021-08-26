@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.util.DukeDateTime;
-import duke.exception.DukeException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exception.DukeException;
+import duke.util.DukeDateTime;
 
 /**
  * Represents the interface that deals with user's tasks
@@ -14,8 +14,8 @@ public class TaskManager {
     private static final String TASKS_COUNT_MESSAGE = "Now you have %d %s in the list.";
     private static final String UNDONE_TASKS_COUNT_MESSAGE = "You have %d incomplete %s remaining.";
     private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:\n  %s\n\n" + TASKS_COUNT_MESSAGE;
-    private static final String MARKED_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n  %s\n\n" +
-            UNDONE_TASKS_COUNT_MESSAGE;
+    private static final String MARKED_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done:\n  %s\n\n"
+            + UNDONE_TASKS_COUNT_MESSAGE;
     private static final String DELETED_TASK_MESSAGE = "Noted. I've removed this task:\n  %s\n\n" + TASKS_COUNT_MESSAGE;
 
     // Error Messages

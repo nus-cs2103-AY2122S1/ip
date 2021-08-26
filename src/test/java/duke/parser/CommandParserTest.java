@@ -1,5 +1,9 @@
 package duke.parser;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
@@ -8,9 +12,6 @@ import duke.command.DeleteTaskCommand;
 import duke.command.ExitCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CommandParserTest {
     @Test

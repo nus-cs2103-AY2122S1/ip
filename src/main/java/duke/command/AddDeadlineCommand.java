@@ -27,7 +27,7 @@ public class AddDeadlineCommand extends Command {
             throw new DukeException("Invalid use of the 'deadline' command.\n\n" + USAGE_MESSAGE);
         }
         String deadlineName = deadlineDetails[0];
-        DukeDateTime deadlineDueDate=  DukeDateTime.parseUserInputDateTime(deadlineDetails[1]);
+        DukeDateTime deadlineDueDate = DukeDateTime.parseUserInputDateTime(deadlineDetails[1]);
         Deadline deadline = new Deadline(deadlineName, deadlineDueDate);
         ui.print(taskManager.addTask(deadline));
         storage.saveTasks(taskManager);

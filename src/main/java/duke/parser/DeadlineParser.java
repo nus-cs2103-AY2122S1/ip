@@ -18,7 +18,7 @@ public class DeadlineParser {
         }
         boolean isDone = deadlineDetails[1].equals("X");
         String name = deadlineDetails[2];
-        DukeDateTime dueDate = DukeDateTime.parseISO(deadlineDetails[3]);
+        DukeDateTime dueDate = DukeDateTime.parseIso(deadlineDetails[3]);
         return new Deadline(name, isDone, dueDate);
     }
 }

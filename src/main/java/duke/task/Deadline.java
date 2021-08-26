@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.util.DukeDateTime;
-import duke.exception.DukeException;
 
 /**
  * Represents a <code>Task</code> with a due date.
@@ -9,11 +8,17 @@ import duke.exception.DukeException;
 public class Deadline extends Task implements Timestampable {
     private final DukeDateTime dueDate;
 
+    /**
+     * Constructor for a Deadline object.
+     */
     public Deadline(String name, DukeDateTime dueDate) {
         super(name);
         this.dueDate = dueDate;
     }
 
+    /**
+     * Constructor for a Deadline object with completion status.
+     */
     public Deadline(String name, boolean isDone, DukeDateTime dueDate) {
         super(name, isDone);
         this.dueDate = dueDate;
@@ -21,7 +26,7 @@ public class Deadline extends Task implements Timestampable {
 
     @Override
     public String toText() {
-        String[] props = new String[]{"D", super.getStatusIcon(), super.getName(), dueDate.toISO()};
+        String[] props = new String[]{"D", super.getStatusIcon(), super.getName(), dueDate.toIso()};
         return String.join(" | ", props);
     }
 

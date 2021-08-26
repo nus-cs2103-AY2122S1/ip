@@ -18,7 +18,7 @@ public class EventParser {
         }
         boolean isDone = eventDetails[1].equals("X");
         String name = eventDetails[2];
-        DukeDateTime timestamp = DukeDateTime.parseISO(eventDetails[3]);
+        DukeDateTime timestamp = DukeDateTime.parseIso(eventDetails[3]);
         return new Event(name, isDone, timestamp);
     }
 }

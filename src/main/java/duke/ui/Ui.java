@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.task.TaskManager;
-
 import java.util.Scanner;
+
+import duke.task.TaskManager;
 
 /**
  * UI of the application.
@@ -16,6 +16,9 @@ public class Ui {
     private final String indent;
     private final String separator;
 
+    /**
+     * Constructor for a Ui object, with the indent and separator set to default settings.
+     */
     public Ui() {
         indent = " ".repeat(DEFAULT_INDENTATION_LEVEL);
         separator = DEFAULT_SEPARATOR.repeat(DEFAULT_SEPARATOR_LENGTH);
