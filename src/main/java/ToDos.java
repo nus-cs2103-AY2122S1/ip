@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+
 public class ToDos extends Task{
 
     private boolean done = false;
@@ -5,7 +7,6 @@ public class ToDos extends Task{
     private String taskType = "T";
 
     public ToDos(boolean done, String task) {
-        super(done,task);
         this.done = done;
         this.task = task;
     }
@@ -20,6 +21,16 @@ public class ToDos extends Task{
         }
 
         return "[" + taskType + "]" + "[" + done_str + "] "  + task;
+    }
+
+    @Override
+    public String ParsedTime() {
+        return null;
+    }
+
+    @Override
+    public String GetTime() {
+        return null;
     }
 
     @Override
