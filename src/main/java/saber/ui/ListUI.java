@@ -3,11 +3,17 @@ package saber.ui;
 import saber.task.Task;
 import saber.TaskList;
 
+/**
+ * A class to encapsulate the UI corresponding to ListCommand
+ */
 public class ListUI extends SaberCommandUI {
     private final String successMessage;
-    protected final String missingDescriptionError = "      I'm sorry, Master.\n"
-            + "      What ... exactly do you want me to add?\n";
 
+    /**
+     * A constructor for ListUI, this constructor will take in the TaskList to be listed
+     * and will set the success message according to the TaskList given
+     * @param taskList the TaskList containing the tasks to be listed
+     */
     public ListUI(TaskList taskList) {
         int totalTask = taskList.size();
         StringBuilder successTemp = new StringBuilder("      Would you like to know what you\n" +
@@ -22,15 +28,13 @@ public class ListUI extends SaberCommandUI {
         if (totalTask == 0) {
             successTemp.append("\n      Ah, currently Master has no task.\n");
         }
-
         this.successMessage = successTemp.toString();
     }
 
+    /**
+     * Print out the success message
+     */
     public void showSuccess() {
         System.out.println(successMessage);
-    }
-
-    public void showMissingDescriptionError() {
-        System.out.println(missingDescriptionError);
     }
 }

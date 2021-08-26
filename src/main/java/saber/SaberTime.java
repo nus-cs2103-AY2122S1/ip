@@ -7,11 +7,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A class that encapsulates a time.
+ */
 public class SaberTime {
     private static final DateTimeFormatter DATE_FORMAT_WITH_HOURS_FOR_DISPLAY =
             DateTimeFormatter.ofPattern("E, MMM d yyyy HH:mm");
     private static final DateTimeFormatter DATE_FORMAT_WITHOUT_HOURS_FOR_DISPLAY =
             DateTimeFormatter.ofPattern("E, MMM d yyyy");
+
+    /** A list of accepted date formats (with hours) so Saber can understand more
+     * than one date format
+     */
     private static final DateTimeFormatter[] DATE_FORMATTERS_WITH_HOURS = {
             DATE_FORMAT_WITH_HOURS_FOR_DISPLAY,
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
@@ -24,6 +31,9 @@ public class SaberTime {
             DateTimeFormatter.ofPattern("d MMM yyyy HH:mm"),
     };
 
+    /** A list of accepted date formats (without hours) so Saber can understand more
+     * than one date format
+     */
     private static final DateTimeFormatter[] DATE_FORMATTERS_WITHOUT_HOURS = {
             DATE_FORMAT_WITHOUT_HOURS_FOR_DISPLAY,
             DateTimeFormatter.ofPattern("yyyy-MM-dd"),
@@ -39,6 +49,12 @@ public class SaberTime {
     protected LocalDate localDate;
     protected LocalDateTime localDateTime;
 
+    /**
+     * A constructor for SaberTime. This constructor also parse the time to Java's LocalDate or LocalDateTime
+     * to ensure that the date passed are in recognizable date formats
+     * @param time the raw unparsed time
+     * @throws SaberTimeParserException if an error occurs during the parsing of the time
+     */
     public SaberTime (String time) throws SaberTimeParserException {
         for (DateTimeFormatter df : DATE_FORMATTERS_WITH_HOURS) {
             try {
@@ -62,6 +78,10 @@ public class SaberTime {
         }
     }
 
+    /**
+     * A function to return the string representation of time
+     * @return String representation of time
+     */
     @Override
     public String toString() {
         String time;

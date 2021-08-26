@@ -1,28 +1,43 @@
 package saber;
 
+/** Import all saber commands as the parse function require all of them */
 import saber.commands.*;
+
 import saber.exceptions.MissingArgumentException;
 import saber.exceptions.MissingTimeException;
 import saber.exceptions.SaberCommandNotFoundException;
 
+/** A class that encapsulates a parser for the Saber application (to parse user commands) */
 public class SaberParser {
     private String[] parsedCommand;
     private String time;
 
+    /**
+     * The constructor for the SaberParser class, this constructor will also parse the command
+     * passed in the parameters
+     * @param unparsedCommand the raw unparsed command (from the user)
+     */
     public SaberParser(String unparsedCommand) {
         String unparsedCommandWithoutTime;
         String[] parsedCommandTemp = unparsedCommand.split(" ", 2);
+
+        // To check whether the unparsed command has a time component to it and is a deadline or event command
+        // Because we do not want to unintentionally parse /at or /by as time when the command is not of type
+        // deadline or event
         boolean isDeadlineCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.deadline.name());
         boolean isEventCommandType = parsedCommandTemp[0].equals(Saber.InputCommand.event.name());
-        boolean hasTime = unparsedCommand.contains("/at ") || unparsedCommand.contains("/by ");
-        if (hasTime && isDeadlineCommandType && isEventCommandType) {
-            int slashIndex = unparsedCommand.indexOf("/at ");
+        boolean hasTime = unparsedCommand.contains(" /at ") || unparsedCommand.contains(" /by ");
+
+        // Only parse /at and /by as time when the command is of type deadline or event
+        if (hasTime && (isDeadlineCommandType || isEventCommandType)) {
+            int slashIndex = unparsedCommand.indexOf(" /at ");
             if (slashIndex == -1) {
-                slashIndex = unparsedCommand.indexOf("/by ");
+                slashIndex = unparsedCommand.indexOf(" /by ");
             }
             unparsedCommandWithoutTime = unparsedCommand.substring(0, slashIndex).trim();
+            System.out.println(unparsedCommandWithoutTime);
             try {
-                this.time = unparsedCommand.substring(slashIndex + 4);
+                this.time = unparsedCommand.substring(slashIndex + 5);
             } catch (IndexOutOfBoundsException e) {
                 this.time = "";
             }
@@ -33,6 +48,11 @@ public class SaberParser {
         this.parsedCommand = unparsedCommandWithoutTime.split(" ", 2);
     }
 
+    /**
+     * Get Command Type of the command
+     * @return Command Type as Saber.InputCommand enums
+     * @throws SaberCommandNotFoundException if the command is not recognisable by Saber application
+     */
     public Saber.InputCommand getCommandType() throws SaberCommandNotFoundException {
         Saber.InputCommand commandType;
 
@@ -45,6 +65,11 @@ public class SaberParser {
         return commandType;
     }
 
+    /**
+     * Get Time from the command
+     * @return the time parsed from the command as a String
+     * @throws MissingTimeException if the command does not have a time component
+     */
     public String getTime() throws MissingTimeException {
         if (this.time.equals("")) {
             throw new MissingTimeException("Time not found");
@@ -52,6 +77,11 @@ public class SaberParser {
         return this.time;
     }
 
+    /**
+     * Get argument from the command
+     * @return the argument parsed from the command as a String
+     * @throws MissingArgumentException if the command does not have an argument component
+     */
     public String getArgument() throws MissingArgumentException {
         if (parsedCommand.length == 1) {
            throw new MissingArgumentException("Argument not found");
@@ -59,6 +89,11 @@ public class SaberParser {
         return this.parsedCommand[1];
     }
 
+    /**
+     * Get a SaberCommand object from the command
+     * @return a SaberCommand object that the caller can use to execute the command
+     * @throws SaberCommandNotFoundException if the command is not recognisable by Saber application
+     */
     public SaberCommand parse() throws SaberCommandNotFoundException {
         Saber.InputCommand commandType = getCommandType();
         SaberCommand command;
