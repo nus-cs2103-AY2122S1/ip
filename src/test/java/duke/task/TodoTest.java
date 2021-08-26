@@ -1,9 +1,9 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {
     @Test
@@ -13,7 +13,7 @@ public class TodoTest {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void testJSONConversion() {
+    public void testJsonConversion() {
         JSONObject object = new JSONObject();
         object.put("type", "todo");
         object.put("isDone", false);
