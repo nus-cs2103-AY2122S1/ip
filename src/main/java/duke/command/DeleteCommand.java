@@ -1,11 +1,11 @@
-package command;
+package duke.command;
 
-import storage.Storage;
+import duke.storage.Storage;
 
-import task.Task;
-import task.TaskList;
+import duke.task.Task;
+import duke.task.TaskList;
 
-import ui.Ui;
+import duke.ui.Ui;
 
 import java.io.IOException;
 

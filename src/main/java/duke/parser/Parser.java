@@ -1,17 +1,17 @@
-package parser;
+package duke.parser;
 
-import command.AddCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.ExitCommand;
-import command.ListCommand;
-import command.MarkCommand;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkCommand;
 
-import exception.DukeException;
+import duke.exception.DukeException;
 
-import task.Deadline;
-import task.Event;
-import task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 public class Parser {
     // TODO: Simplify program and exceptions
@@ -31,7 +31,7 @@ public class Parser {
             return new AddCommand(new Todo(description));
         } else if (input.startsWith("deadline ")) {
             if (!input.contains(" /by ")) {
-                throw new DukeException("Invalid format for `deadline` command. '/by' keyword is needed");
+                throw new DukeException("Invalid format for `deadline` duke.command. '/by' keyword is needed");
             }
             String[] params = input.substring(9).split(" /by ");
             String description = params[0];
@@ -39,7 +39,7 @@ public class Parser {
             return new AddCommand(new Deadline(description, by));
         } else if (input.startsWith("event ")) {
             if (!input.contains(" /at ")) {
-                throw new DukeException("Invalid format for `event` command. '/at' keyword is needed");
+                throw new DukeException("Invalid format for `event` duke.command. '/at' keyword is needed");
             }
             String[] params = input.substring(6).split(" /at ");
             String description = params[0];
@@ -47,7 +47,7 @@ public class Parser {
 
             return new AddCommand(new Event(description, at));
         } else {
-            throw new DukeException("Invalid command: " + input);
+            throw new DukeException("Invalid duke.command: " + input);
         }
     }
 }

@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.time.format.DateTimeParseException;
 
@@ -43,15 +43,15 @@ public class Task {
             String description = params[2];
 
             if (taskType.equals("T")) {
-                // To-do task
+                // To-do duke.task
                 return new Todo(description, done);
             } else if (taskType.equals("D")) {
-                // Deadline task
+                // Deadline duke.task
                 String by = params[3];
 
                 return new Deadline(description, by, done);
             } else if (taskType.equals("E")) {
-                // Event task
+                // Event duke.task
                 String at = params[3];
 
                 return new Event(description, at, done);

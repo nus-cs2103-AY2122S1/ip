@@ -1,13 +1,15 @@
+package duke;
+
 import java.io.IOException;
 
 import java.time.format.DateTimeParseException;
 
-import command.Command;
-import exception.DukeException;
-import parser.Parser;
-import storage.Storage;
-import task.TaskList;
-import ui.Ui;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 public class Duke {
     private Ui ui;
