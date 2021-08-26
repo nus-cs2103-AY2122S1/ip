@@ -11,14 +11,14 @@ import java.util.regex.Pattern;
  * Allows reading and saving of tasks to a given file.
  *
  */
-public class DataEditor {
+public class Storage {
     private String filePath;
 
     /**
      * Constructor for DataEditor
      * @param filePath
      */
-    public DataEditor(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
