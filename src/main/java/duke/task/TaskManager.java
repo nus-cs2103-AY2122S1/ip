@@ -158,6 +158,32 @@ public class TaskManager {
         return String.join("\n", filteredTasksStrings);
     }
 
+    private List<Task> filterByName(String searchString) {
+        List<Task> tasks = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.getName().contains(searchString)) {
+                tasks.add(t);
+            }
+        }
+        return tasks;
+    }
+
+    /**
+     * Displays the user's tasks which have names that contain the specified search string.
+     * @param searchString the target search string
+     * @return the string representation of the filtered tasks
+     */
+    public String list(String searchString) {
+        List<Task> filteredTasks = filterByName(searchString);
+        String[] filteredTasksStrings = new String[filteredTasks.size()];
+        for (int i = 0; i < filteredTasksStrings.length; i++) {
+            Task task = filteredTasks.get(i);
+            int taskNumber = i + 1;
+            filteredTasksStrings[i] = prependNumberToTask(taskNumber, task);
+        }
+        return String.join("\n", filteredTasksStrings);
+    }
+
     private String prependNumberToTask(int taskNumber, Task task) {
         return String.format("%d. %s", taskNumber, task.toString());
     }

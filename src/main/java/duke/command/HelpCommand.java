@@ -14,6 +14,7 @@ public class HelpCommand extends Command {
             AddDeadlineCommand.USAGE_MESSAGE,
             AddEventCommand.USAGE_MESSAGE,
             ListCommand.USAGE_MESSAGE,
+            FindCommand.USAGE_MESSAGE,
             CompleteTaskCommand.USAGE_MESSAGE,
             DeleteTaskCommand.USAGE_MESSAGE,
             ExitCommand.USAGE_MESSAGE

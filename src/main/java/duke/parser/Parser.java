@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.command.CompleteTaskCommand;
 import duke.command.DeleteTaskCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 
@@ -27,6 +28,8 @@ public class Parser {
         switch (commandWord) {
         case ListCommand.COMMAND_WORD:
             return new ListCommand(commandArguments);
+        case FindCommand.COMMAND_WORD:
+            return new FindCommand(commandArguments);
         case AddToDoCommand.COMMAND_WORD:
             return new AddToDoCommand(commandArguments);
         case AddDeadlineCommand.COMMAND_WORD:
