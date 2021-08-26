@@ -8,7 +8,7 @@ import kermit.tasks.Task;
 
 public class DeleteTaskCommand extends Command {
     // zero-indexed
-    int taskNum;
+    private int taskNum;
 
     // taskNum is number in task list, one indexed
     public DeleteTaskCommand(String taskNum) throws KermitException {
