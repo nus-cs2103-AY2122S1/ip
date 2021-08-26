@@ -2,7 +2,20 @@ package duke;//duke.Parser: deals with making sense of the user command
 
 import java.io.IOException;
 
+/**
+ * Parser is used to handle user inputs.
+ *
+ * @author Erwin Quek
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class Parser {
+    /**
+     * Method to handle the user inputs.
+     * @param command Takes in a command from the user
+     * @return A boolean value  to check if user terminated the bot
+     * @throws DukeException Handles Duke Exception
+     * @throws IOException Handles file errors
+     */
     public static boolean parse(String command) throws DukeException, IOException {
         if (command.contains("bye")) {
             return true;
