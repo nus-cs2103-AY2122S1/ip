@@ -7,7 +7,7 @@ package duke.exception;
 public class DukeException extends RuntimeException {
     /**
      * Constructs a Duke exception with a specified message.
-     *
+     * 
      * @param message The message containing information on the exception.
      */
     public DukeException(String message) {
@@ -16,7 +16,7 @@ public class DukeException extends RuntimeException {
 
     /**
      * Returns a string representation of the Duke exception.
-     *
+     * 
      * @return String representing the Duke exception.
      */
     @Override

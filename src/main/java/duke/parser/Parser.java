@@ -20,7 +20,7 @@ public class Parser {
     /**
      * Parses a list of strings representing the contents of a save file and
      * transforms it into a list of task objects.
-     *
+     * 
      * @param saveFileContents A list of strings, each representing a task.
      * @return A list of task objects.
      * @throws DukeException If strings passed to the parser are not in the expected format.
@@ -51,7 +51,7 @@ public class Parser {
     /**
      * Parses a string representing the user's input and creates a
      * command object with relevant data extracted from the user input.
-     *
+     * 
      * @param userInput The user's input.
      * @return A command object with relevant data.
      * @throws DukeException If the string passed to the parser does not contain information in the

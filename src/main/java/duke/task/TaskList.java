@@ -23,7 +23,7 @@ public class TaskList {
 
     /**
      * Constructs a task list object with a specified list of tasks.
-     *
+     * 
      * @param taskList The list of tasks in the task list.
      */
     public TaskList(List<Task> taskList) {
@@ -33,7 +33,7 @@ public class TaskList {
 
     /**
      * Returns the current number of tasks in the task list object.
-     *
+     * 
      * @return The current number of tasks in the task list.
      */
     public int getNumberOfTasks() {
@@ -42,7 +42,7 @@ public class TaskList {
 
     /**
      * Returns a task object at a specified index in the task list.
-     *
+     * 
      * @param taskIndex The index of the task to be retrieved.
      * @return The task object located at the index specified.
      */
@@ -52,7 +52,7 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
-     *
+     * 
      * @param task The task to be added.
      */
     public void add(Task task) {
@@ -62,7 +62,7 @@ public class TaskList {
 
     /**
      * Deletes a task at a specified index in the task list.
-     *
+     * 
      * @param taskIndex The index of the task to be deleted.
      * @return The task object representing the task deleted.
      */
@@ -74,7 +74,7 @@ public class TaskList {
 
     /**
      * Completes a task at a specified index in the task list.
-     *
+     * 
      * @param taskIndex The index of the task to be completed.
      * @return The task object representing the task completed.
      */
@@ -85,7 +85,7 @@ public class TaskList {
 
     /**
      * Returns the format in which the task list is stored in the save file.
-     *
+     * 
      * @return A string representing how the task list is saved.
      */
     public String getSaveFormat() {
@@ -98,7 +98,7 @@ public class TaskList {
 
     /**
      * Returns the string representation of the task list.
-     *
+     * 
      * @return A string representing the task list.
      */
     @Override
@@ -112,7 +112,7 @@ public class TaskList {
 
     /**
      * Retrieves all matching tasks in the task list that match a specified keyword.
-     *
+     * 
      * @param keyword The keyword being searched.
      * @return A task list object containing all of the tasks that match the keyword specified.
      */

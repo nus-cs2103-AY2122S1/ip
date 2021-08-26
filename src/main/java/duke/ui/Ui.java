@@ -56,7 +56,7 @@ public class Ui {
 
     /**
      * Displays a task list to the user.
-     *
+     * 
      * @param taskList The task list to be displayed.
      */
     public void printTaskList(TaskList taskList) {
@@ -69,7 +69,7 @@ public class Ui {
 
     /**
      * Displays the tasks matching the keyword searched by the user, if any.
-     *
+     * 
      * @param taskList The task list containing the tasks that match the keyword searched.
      */
     public void printMatchingTasks(TaskList taskList) {
@@ -90,7 +90,7 @@ public class Ui {
     /**
      * Displays a task that has been edited to the user. If the task was deleted,
      * the number of remaining tasks on the task list is displayed as well.
-     *
+     * 
      * @param editedTask The task that has been edited.
      * @param numberOfTasks The number of tasks in the user's task list.
      * @param editType The edit done to the task.
@@ -120,7 +120,7 @@ public class Ui {
 
     /**
      * Displays a newly added task to the user, along with the number of tasks in the user's task list.
-     *
+     * 
      * @param newTask The recently added task.
      * @param numberOfTasks The number of tasks in the user's task list.
      */
@@ -136,7 +136,7 @@ public class Ui {
 
     /**
      * Displays an error message to the user if Duke encounters one.
-     *
+     * 
      * @param e The Duke exception encountered.
      */
     public void printErrorMessage(DukeException e) {
@@ -148,7 +148,7 @@ public class Ui {
 
     /**
      * Reads in user input from the command line.
-     *
+     * 
      * @return A string representing the user's input in the command line.
      */
     public String readUserInput() {

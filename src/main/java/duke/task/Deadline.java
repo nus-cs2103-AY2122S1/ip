@@ -15,7 +15,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline object that is not completed yet.
-     *
+     * 
      * @param description The description of the task.
      * @param by The deadline of the task.
      * @throws DukeException If the deadline of the task is not in YYYY-MM-DD format.
@@ -31,7 +31,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline object with a specifiable completion status.
-     *
+     * 
      * @param description The description of the task.
      * @param isDone A boolean indicating whether the task has been completed.
      * @param by The deadline of the task.
@@ -48,7 +48,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation of the task.
-     *
+     * 
      * @return A string representing the deadline task.
      */
     @Override
@@ -59,7 +59,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the format in which the task is stored in the save file.
-     *
+     * 
      * @return A string representing how the task is saved.
      */
     @Override
@@ -69,7 +69,7 @@ public class Deadline extends Task {
 
     /**
      * Checks whether another object is equal with this deadline task.
-     *
+     * 
      * @param other The object being compared to.
      * @return true if both are deadline tasks and share the same date, false otherwise.
      */

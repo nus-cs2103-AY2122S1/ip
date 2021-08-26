@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
     /**
      * Executes the instructions for exiting Duke.
-     *
+     * 
      * @param taskList Task list of the user loaded on Duke.
      * @param ui The object representing Duke's UI.
      * @param storage The object representing Duke's data and storage.
@@ -22,7 +22,7 @@ public class ExitCommand extends Command {
 
     /**
      * Checks whether the command exits Duke.
-     *
+     * 
      * @return true.
      */
     @Override
@@ -32,7 +32,7 @@ public class ExitCommand extends Command {
 
     /**
      * Checks whether another object is equal with this exit command.
-     *
+     * 
      * @param other The object being compared to.
      * @return true if both are exit commands, false otherwise.
      */

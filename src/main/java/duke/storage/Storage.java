@@ -28,7 +28,7 @@ public class Storage {
     /**
      * Constructs a storage object that initializes a data directory and save file
      * if not already present, and loads the save file.
-     *
+     * 
      * @throws DukeException If there is an error initializing the data directory or save file.
      */
     public Storage() throws DukeException {
@@ -48,7 +48,7 @@ public class Storage {
     /**
      * Gets all of the saved files contents and returns them a list of strings,
      * with each string representing each line in the save file.
-     *
+     * 
      * @return A list of strings, where each string is a line in the save file,
      * and each line is separated by a new line character.
      * @throws DukeException If there is an error accessing the save file.
@@ -63,7 +63,7 @@ public class Storage {
 
     /**
      * Appends a new task to the save file.
-     *
+     * 
      * @param task The task object to be added to the save file.
      * @throws DukeException If there is an error accessing the save file.
      */
@@ -79,7 +79,7 @@ public class Storage {
 
     /**
      * Overwrites the save file with a new task list.
-     *
+     * 
      * @param taskList The task list whose contents are to be written to the save file.
      * @throws DukeException If there is an error accessing the save file.
      */
