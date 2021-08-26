@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+        loadTasks();
         System.out.println("Hello...\nWhat do you want?\n");
         Scanner myScanner = new Scanner(System.in);
         String answer = myScanner.nextLine();
@@ -42,6 +44,7 @@ public class Duke {
             answer = myScanner.nextLine();
         }
         myScanner.close();
+        saveTasks();
         System.out.println("Whatever...");
     }
 
@@ -49,16 +52,42 @@ public class Duke {
         Command command = checkValidTaskType(taskType);
         switch (command) {
             case DONE:
-                markTaskAsDone(answer);
+                int taskIndex = getValidTaskIndex(answer);
+                markTaskAsDone(taskIndex);
                 break;
             case DELETE:
-                deleteTask(answer);
+                taskIndex = getValidTaskIndex(answer);
+                deleteTask(taskIndex);
                 break;
             case LIST:
                 printTaskList();
                 break;
             default:
                 addNewTask(command, answer);
+        }
+    }
+    
+    private static Task parseTask(String fileLine, int lineNo) throws DukeException {
+        try {
+            String[] parts = fileLine.split(" \\| ");
+            String taskType = parts[0];
+            int isDoneInt = Integer.parseInt(parts[1]);
+            boolean isDone = (isDoneInt == 1);
+            String description = parts[2];
+            switch(taskType) {
+                case "T":
+                    return new Todo(description, isDone);
+                case "D":
+                    String date = parts[3];
+                    return new Deadline(description, date, isDone);
+                case "E":
+                    date = parts[3];
+                    return new Event(description, date, isDone);
+                default:
+                    throw new DukeException("Could not parse task type on file line " + lineNo);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Task details are missing on file line " + lineNo);
         }
     }
 
@@ -96,7 +125,7 @@ public class Duke {
     }
 
     private static void addTodo(String taskDetails) {
-        tasks.add(new Todo(taskDetails));
+        tasks.add(new Todo(taskDetails, false));
     }
 
     private static void addEvent(String taskDetails) throws DukeException {
@@ -106,7 +135,7 @@ public class Duke {
         }
         String description = parts[0];
         String at = parts[1];
-        tasks.add(new Event(description, at));
+        tasks.add(new Event(description, at, false));
     }
 
     private static void addDeadline(String taskDetails) throws DukeException {
@@ -116,20 +145,18 @@ public class Duke {
         }
         String description = parts[0];
         String by = parts[1];
-        tasks.add(new Deadline(description, by));
+        tasks.add(new Deadline(description, by, false));
     }
 
-    private static void markTaskAsDone(String answer) throws DukeException {
-        int taskIndex = getValidTaskIndex(answer);
+    private static void markTaskAsDone(int taskIndex) throws DukeException {
         tasks.get(taskIndex).markAsDone();
         System.out.println("I've marked this task as done:");
         System.out.println("\t" + tasks.get(taskIndex));
     }
 
-    private static void deleteTask(String answer) throws DukeException {
-        int taskIndex = getValidTaskIndex(answer);
+    private static void deleteTask(int taskIndex) throws DukeException {
         Task deletedTask = tasks.get(taskIndex);
-        tasks.remove(taskIndex);
+        tasks.remove(deletedTask);
         System.out.println("Noted. I've removed this task:\n\t" + deletedTask);
         printTasksCount();
     }
@@ -161,5 +188,51 @@ public class Duke {
 
     private static void printTasksCount() {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    }
+    
+    private static File getStoreFile() throws IOException {
+        String filePath = "./data/duke.txt";
+        File store = new File(filePath);
+        String dirPath = store.getParent();
+        File directory = new File(dirPath);
+        // creates parent directories if they do not exist
+        directory.mkdirs();
+        // creates file if it does not exist
+        store.createNewFile();
+        return store;
+    }
+    
+    private static void loadTasks() {
+        try {
+            File store = getStoreFile();
+            BufferedReader reader = new BufferedReader(new FileReader(store));
+            String fileLine = reader.readLine();
+            int lineNo = 1;
+            while (fileLine != null) {
+                Task task = parseTask(fileLine, lineNo);
+                tasks.add(task);
+                lineNo++;
+                fileLine = reader.readLine();
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    private static void saveTasks() {
+        try {
+            File store = getStoreFile();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(store));
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+                writer.write(task.toFileString());
+                writer.newLine();
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
