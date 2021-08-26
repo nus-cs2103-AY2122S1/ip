@@ -3,17 +3,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-
-    private enum CommandType {
-        BYE, LIST,
-        TODO, EVENT, DEADLINE,
-        DONE, DELETE,
-    }
 
 
     public Duke(String filePath) {
@@ -31,10 +24,9 @@ public class Duke {
         this.ui.showGreet();
         while (true) {
             try {
-                String rawInput = this.ui.readInput();
-                String[] userInput = rawInput.split(" ", 2);
-                CommandType commandType = this.getCommand(userInput[0]);
-
+                String userInput = this.ui.readInput();
+                CommandType commandType = Parser.parseCommand(userInput);
+                String args = Parser.parseArgument(userInput);
                 switch (commandType) {
                 case BYE:
                     this.exit();
@@ -44,33 +36,24 @@ public class Duke {
                     this.ui.showList(this.taskList);
                     break;
                 case TODO:
-                    this.addTodo(userInput);
+                    this.addTodo(args);
                     break;
                 case EVENT:
-                    this.addEvent(userInput);
+                    this.addEvent(args);
                     break;
                 case DEADLINE:
-                    this.addDeadline(userInput);
+                    this.addDeadline(args);
                     break;
                 case DONE:
-                    this.markAsDone(userInput);
+                    this.markAsDone(args);
                     break;
                 case DELETE:
-                    this.delete(userInput);
+                    this.delete(args);
                     break;
                 }
             } catch (DukeException e) {
                 this.ui.showDukeException(e);
             }
-        }
-    }
-
-
-    private CommandType getCommand(String command) throws DukeUnknownCommandException {
-        try {
-            return Duke.CommandType.valueOf(command.toUpperCase());
-        } catch (IllegalArgumentException e){
-            throw new DukeUnknownCommandException(command);
         }
     }
 
@@ -85,11 +68,9 @@ public class Duke {
     }
 
 
-    private void addTodo(String[] userInput) throws DukeMissingArgumentException {
+    private void addTodo(String args) throws DukeMissingArgumentException {
         try {
-            String description = userInput[1];
-
-            Task todo = new Todo(description);
+            Task todo = new Todo(args);
             this.taskList.add(todo);
             this.ui.showAdd(todo, this.taskList.getLength());
         } catch (IndexOutOfBoundsException e) {
@@ -98,10 +79,10 @@ public class Duke {
     }
 
 
-    private void addEvent(String[] userInput) throws DukeMissingArgumentException {
+    private void addEvent(String args) throws DukeMissingArgumentException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-            String[] splits = userInput[1].split(" /from ", 2);
+            String[] splits = args.split(" /from ", 2);
             String[] timestamps = splits[1].split(" /to ", 2);
             String start = timestamps[0];
             String end = timestamps[1];
@@ -123,10 +104,10 @@ public class Duke {
     }
 
 
-    private void addDeadline(String[] userInput) throws DukeMissingArgumentException {
+    private void addDeadline(String args) throws DukeMissingArgumentException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
-            String[] splits = userInput[1].split(" /by ", 2);
+            String[] splits = args.split(" /by ", 2);
             LocalDateTime time = LocalDateTime.parse(splits[1], formatter);
 
             Task deadline = new Deadline(splits[0], time);
@@ -140,10 +121,10 @@ public class Duke {
     }
 
 
-    private void markAsDone(String[] userInput)
+    private void markAsDone(String args)
             throws DukeNoTaskFoundException, DukeMissingArgumentException, DukeInvalidArgumentException {
         try {
-            int taskNum = Integer.parseInt(userInput[1]);
+            int taskNum = Integer.parseInt(args);
             if (taskNum > this.taskList.getLength()) {
                 throw new DukeNoTaskFoundException(taskNum);
             }
@@ -157,10 +138,10 @@ public class Duke {
     }
 
 
-    private void delete(String[] userInput)
+    private void delete(String args)
             throws DukeNoTaskFoundException, DukeMissingArgumentException, DukeInvalidArgumentException {
         try {
-            int taskNum = Integer.parseInt(userInput[1]);
+            int taskNum = Integer.parseInt(args);
             if (taskNum > this.taskList.getLength()) {
                 throw new DukeNoTaskFoundException(taskNum);
             }

@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Ui {
     private Scanner input = new Scanner(System.in);
 
-
     public String readInput() {
         return this.input.nextLine();
     }
@@ -81,5 +80,4 @@ public class Ui {
     public void showDukeException(DukeException e) {
         System.out.printf("\t%s\n\n", e);
     }
-
 }
