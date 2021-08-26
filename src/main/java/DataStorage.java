@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
@@ -34,17 +36,18 @@ public class DataStorage {
                 String[] arr = s.split("/");
                 boolean done = (arr[1].equals("1"));
                 String name = arr[2];
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                 if (s.contains("T")) {
                     ToDo todo = new ToDo(name, done);
                     list.add(todo);
                 }
                 if (s.contains("D")) {
-                    String by = arr[3];
+                    LocalDateTime by = LocalDateTime.parse(arr[3], formatter);
                     Deadline deadline = new Deadline(name, by, done);
                     list.add(deadline);
                 }
                 if (s.contains("E")) {
-                    String at = arr[3];
+                    LocalDateTime at = LocalDateTime.parse(arr[3], formatter);
                     Event event = new Event(name, at, done);
                     list.add(event);
                 }
