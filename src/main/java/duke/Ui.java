@@ -18,32 +18,8 @@ public class Ui {
         System.out.println(e.getMessage());
     }
 
-    public void createFileErrorMessage() {
-        System.out.println("Error has occurred when creating file!");
-    }
-
-    public void editFileErrorMessage() {
-        System.out.println("Error has occurred when editing file!");
-    }
-
-    public void writeFileErrorMessage() {
-        System.out.println("Error has occurred when writing to file!");
-    }
-
-    public void dukeNotFoundMessage() {
-        System.out.println("duke.txt not found!");
-    }
-
     public void showNoTaskMessage() {
         System.out.println("There are no tasks!");
-    }
-
-    public void createDirMessage() {
-        System.out.println("Directory for file created.");
-    }
-
-    public void createFileMessage() {
-        System.out.println("File created: duke.txt");
     }
 
     public void showTaskList(TaskList taskList) {
@@ -65,5 +41,16 @@ public class Ui {
 
     public void showDoneMessage(Task doneTask) {
         System.out.println("Nice! I've marked this task as done:\n  " + doneTask);
+    }
+
+    public void showMatchMessage(String keyword, TaskList taskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        int currentNo = 1;
+        for (int i = 1; i < taskList.size() + 1; i++) {
+            if (taskList.get(i).toString().contains(keyword)) {
+                System.out.printf("  %d.%s%n", currentNo, taskList.get(i));
+                currentNo++;
+            }
+        }
     }
 }

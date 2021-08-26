@@ -1,8 +1,8 @@
 package duke;
 
 public enum Command {
-    LIST("list"), DONE("done"), TODO("todo"),
-    DEADLINE("deadline"), EVENT("event"), DELETE("delete");
+    LIST("list"), DONE("done"), DELETE("delete"), FIND("find"),
+    TODO("todo"), DEADLINE("deadline"), EVENT("event");
 
     public final String command;
 
