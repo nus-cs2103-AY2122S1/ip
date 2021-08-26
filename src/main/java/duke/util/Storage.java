@@ -114,15 +114,17 @@ public class Storage {
         return tasks;
     }
     
-    private Task newEvent(String input) throws DataIntegrityException {
+    private Task newEvent(String command) throws DataIntegrityException {
         // [E][ ] project meeting (at: Aug 6 2021, 2:00 PM - 6:00 PM)
         
-        int index = input.lastIndexOf(" (at: ");
-        String description = input.substring(7, index);
-        String time = input.substring(index + 6, input.length() - 1);
+        int index = command.lastIndexOf(" (at: ");
+        String description = command.substring(7, index);
+        String time = command.substring(index + 6, command.length() - 1);
         
         String[] info = time.split("[,-]");
-        info = Arrays.stream(info).map(String::trim).toArray(String[]::new);
+        info = Arrays.stream(info)
+                     .map(String::trim)
+                     .toArray(String[]::new);
         
         LocalDate date;
         LocalTime startTime, endTime;
@@ -140,12 +142,12 @@ public class Storage {
         return new Event(description, date, startTime, endTime);
     }
     
-    private Task newDeadline(String input) throws DataIntegrityException {
+    private Task newDeadline(String command) throws DataIntegrityException {
         // [D][ ] return book (by: Jun 6 2021, 5:12 PM)
         
-        int index = input.lastIndexOf(" (by: ");
-        String description = input.substring(7, index);
-        String time = input.substring(index + 6, input.length() - 1);
+        int index = command.lastIndexOf(" (by: ");
+        String description = command.substring(7, index);
+        String time = command.substring(index + 6, command.length() - 1);
         
         LocalDateTime dateTime;
         

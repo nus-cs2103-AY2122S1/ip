@@ -10,7 +10,7 @@ import duke.util.Ui;
 
 public class Duke {
     private final Storage storage;
-    private TaskList tasks;
+    private TaskList taskList;
     private final Ui ui;
     
     /**
@@ -24,10 +24,10 @@ public class Duke {
         storage = new Storage(filePath);
         
         try {
-            tasks = new TaskList(storage.load());
+            taskList = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
             ui.printMessage(e.getMessage());
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
     }
     
@@ -41,11 +41,11 @@ public class Duke {
         while (!(input = ui.readCommand()).equals("bye")) {
             try {
                 // Interpret and execute the command input by user
-                String message = Parser.interpretCommand(input).execute(tasks);
+                String message = Parser.interpretCommand(input).execute(taskList);
                 ui.printMessage(message);
                 
                 // Update storage file
-                storage.save(tasks.getTasks());
+                storage.save(taskList.getTasks());
             } catch (DukeException | IOException e) {
                 ui.printMessage(e.getMessage());
             }

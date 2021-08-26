@@ -130,7 +130,9 @@ public class TaskList {
         
         // Separate info and trim each of them
         String[] info = command.substring(6).split("/at|/from|/to");
-        info = Arrays.stream(info).map(String::trim).toArray(String[]::new);
+        info = Arrays.stream(info)
+                     .map(String::trim)
+                     .toArray(String[]::new);
         
         LocalDate date;
         LocalTime startTime, endTime;
@@ -173,7 +175,9 @@ public class TaskList {
         
         // Separate info and trim each of them
         String[] info = command.substring(9).split("/by");
-        info = Arrays.stream(info).map(String::trim).toArray(String[]::new);
+        info = Arrays.stream(info)
+                     .map(String::trim)
+                     .toArray(String[]::new);
         
         LocalDateTime dateTime;
         

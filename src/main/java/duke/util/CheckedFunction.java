@@ -8,5 +8,5 @@ import duke.task.TaskList;
  * This is able to handle DukeException.
  */
 public interface CheckedFunction {
-    String execute(TaskList t) throws DukeException;
+    String execute(TaskList taskList) throws DukeException;
 }
