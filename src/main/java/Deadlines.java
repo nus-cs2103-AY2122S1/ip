@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 public class Deadlines extends Task {
-    private LocalDate date;
+    private final LocalDate date;
 
     public Deadlines(String name, LocalDate date) {
         super(name);

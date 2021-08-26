@@ -1,0 +1,22 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+public class CreateDeadlineCommand extends Command {
+    private final String name;
+    private final LocalDate date;
+
+    public CreateDeadlineCommand(String userInput) {
+        this.name = userInput.split(" /by ", 2)[0].substring(9);
+        try {
+            this.date = LocalDate.parse(userInput.split(" /by ", 2)[1]);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Use the following date format: yyyy-mm-dd");
+        }
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.printMsg(tasks.addToList(new Deadlines(this.name, this.date)));
+        storage.write(tasks.getSaveData());
+    }
+}

@@ -1,9 +1,9 @@
 public class Events extends Task {
     private final String date;
 
-    public Events(String input) {
-        super(input.split(" /at ", 2)[0].substring(6));
-        this.date = input.split(" /at ", 2)[1];
+    public Events(String name, String date) {
+        super(name);
+        this.date = date;
     }
 
     public Events(boolean completed, String name, String deadline) {

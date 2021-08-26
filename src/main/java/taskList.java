@@ -1,53 +1,17 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
-public class taskList {
-    private static final Pattern TODOS = Pattern.compile("^todo\\s.+");
-    private static final Pattern DEADLINES = Pattern.compile("^deadline\\s.+\\s/by\\s.+");
-    private static final Pattern EVENTS = Pattern.compile("^event\\s.+\\s/at\\s.+");
-
+public class TaskList {
     private final ArrayList<Task> lst;
 
-    public taskList() {
-        this.lst = new ArrayList<>();
+    public TaskList(ArrayList<Task> loadedTasks) {
+        this.lst = loadedTasks;
     }
 
-    public String addTask(String input) {
-        Task newTask;
 
-        if (input.startsWith("todo")) {
-            if (!TODOS.matcher(input).matches()) {
-                throw new DukeException("ToDos format: todo [desc]");
-            }
-            newTask = new ToDos(input);
-        } else if (input.startsWith("deadline")) {
-            if (!DEADLINES.matcher(input).matches()) {
-                throw new DukeException("Deadline format: deadline [desc] /by [date]");
-            }
-            try {
-                String name = input.split(" /by ", 2)[0].substring(9);
-                LocalDate deadline = LocalDate.parse(input.split(" /by ", 2)[1]);
-                newTask = new Deadlines(name, deadline);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Use the following date format: yyyy-mm-dd");
-            }
-        } else if (input.startsWith("event")) {
-            if (!EVENTS.matcher(input).matches()) {
-                throw new DukeException("Event format: event [desc] /at [time]");
-            }
-            newTask = new Events(input);
-        } else {
-            throw new DukeException("Wrong format: please use todo, deadline or event");
-        }
-
-        this.lst.add(newTask);
-        return String.format("Got it. I've added this task:\n    %s\nYou now have %d tasks tasks in the list.", newTask, this.lst.size());
-    }
-
-    public void addToList(Task t) {
+    public String addToList(Task t) {
         this.lst.add(t);
+        return String.format("Got it. I've added thsi task:\n    %s\n" +
+                "You now have %d tasks in the list.", t, this.lst.size());
     }
 
     public String deleteTask(int n) {
@@ -60,7 +24,7 @@ public class taskList {
         }
     }
 
-    public String[] getList() {
+    public String[] getListContent() {
         if (this.lst.isEmpty()) {
             throw new DukeException("The list is empty");
         }
