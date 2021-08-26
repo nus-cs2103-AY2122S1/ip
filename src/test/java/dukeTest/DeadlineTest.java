@@ -1,3 +1,5 @@
+package dukeTest;
+
 import duke.Deadline;
 
 import org.junit.jupiter.api.Test;
