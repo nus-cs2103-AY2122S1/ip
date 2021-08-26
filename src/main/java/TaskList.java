@@ -1,22 +1,24 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 // immutable principles?
 public final class TaskList {
-    private final ArrayList<Task> tasks;
+    private final ArrayList<Task> TASKS;
+    private Storage storageFile;
 
+    //DELETE CLASS?
     //only objects of class Task go into array
     //@SafeVarargs
-    public static TaskList of(ArrayList<Task> tasks) {
-        return new TaskList(tasks);
-    }
+//    public static TaskList of(ArrayList<Task> tasks) {
+//        return new TaskList(tasks);
+//    }
 
     //parse in Files containing Strings (line) of task representation
-    public static TaskList of(File tasksStorageFile) {
+    public static TaskList of(Storage storageFile) {
+        File tasksStorageFile = storageFile.getFile();
+
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             Scanner sc = new Scanner(tasksStorageFile);
@@ -28,47 +30,48 @@ public final class TaskList {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return TaskList.of(tasks);
+        return new TaskList(tasks, storageFile);
     }
 
-
-
-    private TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    private TaskList(ArrayList<Task> tasks, Storage storageFile) {
+        this.storageFile = storageFile;
+        this.TASKS = tasks;
     }
 
     public void addTask(Task task) {
-        this.tasks.add(task);
+        this.TASKS.add(task);
         //TEST
-
+        this.updateStore();
     }
 
     public Task get(int idx) {
-        return this.tasks.get(idx);
+        return this.TASKS.get(idx);
     }
 
     public int length() {
-        return tasks.size();
+        return TASKS.size();
     }
 
     public void toggleDone(int idx) {
         if (isValidIdx(idx)) {
-            this.tasks.get(idx).markCompleted();
+            this.TASKS.get(idx).markCompleted();
         }
     }
 
     public void removeTask(int idx) {
         if (isValidIdx(idx)) {
-            this.tasks.remove(idx);
+            this.TASKS.remove(idx);
         }
+        //TEST
+        this.updateStore();
     }
 
-    private updateStore() {
-        Storage.write()
+    private void updateStore() {
+        this.storageFile.write(this.TASKS);
     }
 
     private boolean isValidIdx(int idx) {
-        if (idx < 0 || idx >= this.tasks.size()) {
+        if (idx < 0 || idx >= this.TASKS.size()) {
             throw new IllegalArgumentException("task index passed in out of range");
         } else {
             return true;
@@ -78,9 +81,9 @@ public final class TaskList {
     @Override
     public String toString() {
         String result = "";
-        int numOfTasks = this.tasks.size();
+        int numOfTasks = this.TASKS.size();
         for (int i = 0; i < numOfTasks; i++) {
-            result += String.format("%d: %s\n", i+1, this.tasks.get(i).toString());
+            result += String.format("%d: %s\n", i+1, this.TASKS.get(i).toString());
         };
 //        //add final task without \n
 //        result += String.format("%d: %s", numOfTasks, this.tasks[numOfTasks - 1].toString());

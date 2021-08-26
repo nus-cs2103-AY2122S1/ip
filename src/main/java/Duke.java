@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,13 +12,13 @@ public class Duke {
 
     //test run with predefined filepath
     public static void main(String[] args) {
-        String filePath = "data/duke-storage.txt";
+        String filePath = "data" + File.separatorChar + "duke-storage.txt";
         new Duke(filePath).run();
     }
 
     public Duke(String filePathToStorage) {
         this.dukeStore = new Storage(filePathToStorage);
-        this.taskList = TaskList.of(dukeStore.getFile());
+        this.taskList = TaskList.of(this.dukeStore);
 //        this.taskList = TaskList.of(new ArrayList<Task>());
     }
 
@@ -148,11 +149,10 @@ public class Duke {
         }
     }
 
-
-    public static String defaultReplyToInvalidInput() {
-        return "Invalid input o(>~<)O!\n" +
-                "Checkout the available commands by typing them in the cmdline!\n"+
-                "Available commands: [todo, deadline, event]";
-    }
+//    public static String defaultReplyToInvalidInput() {
+//        return "Invalid input o(>~<)O!\n" +
+//                "Checkout the available commands by typing them in the cmdline!\n"+
+//                "Available commands: [todo, deadline, event]";
+//    }
 }
 

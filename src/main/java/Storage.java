@@ -56,12 +56,13 @@ public class Storage {
         }
     }
 
-    public void write(ArrayList<Task> tasks) throws IOException {
+    public void write(ArrayList<Task> tasks) {
         String text = tasks
                 .stream()
+                .map(Task::toStorageFormat)
                 .reduce("",
-                    (stringRes, task) -> stringRes + task.toStorageFormat(),
-                    (stringRes1, stringRes2) -> stringRes1 + stringRes2); //FIX accumulator
+                    (stringRes, stringTask) ->
+                            stringRes + stringTask + System.getProperty("line.separator"));
         this.write(text);
     }
 
