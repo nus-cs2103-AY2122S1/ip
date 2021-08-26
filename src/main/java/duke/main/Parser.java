@@ -19,6 +19,12 @@ public class Parser {
         this.taskList = taskList;
     }
 
+    /**
+     * Parses user inputs.
+     *
+     * @param input    String from user.
+     * @return true if input is not "bye", else false.
+     */
     public boolean parse(String input) {
         String[] commandAndDesc = input.split(" ", 2);
         String command = commandAndDesc[0];
@@ -36,7 +42,7 @@ public class Parser {
                 taskList.clearTasks();
                 break;
             case "list":
-                ui.printTaskList(taskList);
+                ui.displayTaskList(taskList);
                 break;
             case "deadline":
                 taskList.addTask(new Deadline(description));
@@ -63,7 +69,7 @@ public class Parser {
                 }
                 break;
         }
-        storage.updateStorage(taskList);
+        storage.write(taskList);
         return true;
     }
 
@@ -79,5 +85,4 @@ public class Parser {
             throw new DukeException("\tI'm Sorry, WHAT?!?!\n");
         }
     }
-
 }

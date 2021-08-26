@@ -14,6 +14,11 @@ public class Duke {
     private TaskList taskList;
     private Parser parser;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath for storing tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -32,6 +37,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the assistant.
+     */
     public void run() {
         String input = ui.getNextInput();
 
