@@ -8,7 +8,6 @@ import ligma.task.Task;
 import java.io.IOException;
 
 public class DeleteCommand implements Command {
-
     private int index;
 
     public DeleteCommand(int index) {

@@ -1,7 +1,6 @@
 package ligma;
 
 public class Ui {
-
     private static final String PARTITION = "______________________";
 
     private static void printFormattedReply(String line) {
@@ -39,7 +38,6 @@ public class Ui {
     public static void printErrorMessage(String errMsg) {
         printFormattedReply(errMsg);
     }
-
 
     public static void printSuccessMessage(String commandDesc) {
         printFormattedReply("Successfully " + commandDesc);

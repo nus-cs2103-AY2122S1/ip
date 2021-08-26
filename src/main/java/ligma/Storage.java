@@ -9,7 +9,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Storage {
-
     private File f;
 
     public Storage(String pathname) {

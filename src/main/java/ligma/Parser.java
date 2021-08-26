@@ -10,7 +10,6 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 
 public class Parser {
-    //should handle incorrect command format exceptions
     public static Command parseCommand(String input)
             throws NoSuchMethodException, InputMismatchException, DateTimeParseException {
         if (input.equals("bye")) {

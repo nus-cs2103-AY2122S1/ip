@@ -16,7 +16,6 @@ import java.io.IOException;
 //                    + PARTITION);
 
 public class Ligma {
-
     private static Storage storage;
     private TaskList tasks;
 

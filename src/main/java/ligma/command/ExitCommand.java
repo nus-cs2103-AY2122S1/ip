@@ -5,7 +5,6 @@ import ligma.TaskList;
 import ligma.Ui;
 
 public class ExitCommand implements Command {
-
     @Override
     public void execute(TaskList tasks, Storage storage) {
         Ui.sayGoodbye();

@@ -5,7 +5,6 @@ import ligma.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {
-
     private ArrayList<Task> tasks;
     private int noOfTasks;
 
@@ -18,6 +17,7 @@ public class TaskList {
         tasks.add(t);
         noOfTasks++;
     }
+
     public Task deleteTask(int index) {
         noOfTasks--;
         return tasks.remove(index);

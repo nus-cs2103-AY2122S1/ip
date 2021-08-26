@@ -11,7 +11,6 @@ import ligma.task.Todo;
 import java.io.IOException;
 
 public class AddCommand implements Command {
-
     private Task task;
 
     public AddCommand(Task.TaskType type, String desc) {
@@ -55,5 +54,4 @@ public class AddCommand implements Command {
         }
         return false;
     }
-
 }

@@ -8,7 +8,6 @@ import ligma.task.Task;
 import java.io.IOException;
 
 public class DoneCommand implements Command {
-
     private int index;
 
     public DoneCommand(int index) {
