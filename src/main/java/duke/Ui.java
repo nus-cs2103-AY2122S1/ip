@@ -2,6 +2,7 @@ package duke;
 
 import duke.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -88,7 +89,19 @@ public class Ui {
                 System.out.println(i + ". " + task.toString());
                 i++;
             }
-            System.out.println("*quack*");
+            System.out.println("*quack*\n");
+        }
+    }
+
+    public void showFindResults(ArrayList<Task> results) {
+        if (results.isEmpty()) {
+            System.out.println("Sorry, I did not find any task that matches your search *sad quack*\n");
+        } else {
+            System.out.println("Here are the tasks I found:");
+            for (Task task : results) {
+                System.out.println(task.toString());
+            }
+            System.out.println("*quack*\n");
         }
     }
 }

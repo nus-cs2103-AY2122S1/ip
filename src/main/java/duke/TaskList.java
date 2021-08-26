@@ -19,7 +19,7 @@ public class TaskList {
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
-    
+
     public Task getTask(int index) {
         return this.taskList.get(index);
     }
@@ -27,11 +27,11 @@ public class TaskList {
     public int getLength() {
         return this.taskList.size();
     }
-
+    
     public void addTask(Task task) {
         taskList.add(task);
     }
-
+    
     public void deleteTask(int taskNo) throws TaskOutOfRangeException {
         if (taskNo < 1 || taskNo > taskList.size()) {
             throw new TaskOutOfRangeException(taskList.size());
@@ -39,21 +39,24 @@ public class TaskList {
             taskList.remove(taskNo - 1);
         }
     }
-
-    public boolean taskDone(int taskNo) throws TaskOutOfRangeException {
+    
+    public void taskDone(int taskNo) throws TaskOutOfRangeException {
         if (taskNo < 1 || taskNo > taskList.size()) {
             throw new TaskOutOfRangeException(taskList.size());
         } else {
             Task task = this.taskList.get(taskNo - 1);
-            if (task.getCompletionStatus()) {
-                return true;
-            } else {
-                task.taskDone();
-                taskList.set(taskNo - 1, task);
-                return false;
-            }
+            task.taskDone();
+            taskList.set(taskNo - 1, task);
         }
-
     }
 
+    public ArrayList<Task> findTask(String searchDescription) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (searchDescription.equals(task.getDescription())) {
+                results.add(task);
+            }
+        }
+        return results;
+    }
 }
