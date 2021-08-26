@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.ArrayList;
 
-public class SaveHelper{
+public class Storage {
     private static String fileDirectory = "./data";
     private static String filePath = "./data/duke.txt";
 
@@ -32,7 +32,7 @@ public class SaveHelper{
     }
 
     public static List<Task> readData() {
-        SaveHelper.createFile();
+        Storage.createFile();
         List<Task> list = new ArrayList<>();
         try {
             Scanner sc = new Scanner(new File(filePath));
@@ -60,7 +60,7 @@ public class SaveHelper{
     }
 
     public static void writeData(List<Task> list) {
-        SaveHelper.createFile();
+        Storage.createFile();
         try {
             FileWriter fw = new FileWriter(filePath);
             for (int i = 0; i < list.size(); i++) {
