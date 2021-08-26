@@ -168,10 +168,12 @@ public class Duke {
                         tasks.add(new ToDo(taskDesc, isTaskDone));
                         break;
                     case "D":
-                        tasks.add(new Deadline(taskDesc, saveDataScanner.next(), isTaskDone));
+                        tasks.add(new Deadline(taskDesc,
+                                LocalDate.parse(saveDataScanner.next()), isTaskDone));
                         break;
                     case "E":
-                        tasks.add(new Event(taskDesc, saveDataScanner.next(), isTaskDone));
+                        tasks.add(new Event(taskDesc,
+                                LocalDate.parse(saveDataScanner.next()), isTaskDone));
                         break;
                 }
                 saveDataScanner.close();
