@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor for TaskList, which creates a new array of Tasks.
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
     }

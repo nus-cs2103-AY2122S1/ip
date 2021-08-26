@@ -4,6 +4,11 @@ package duke.task;
  * Represents a ToDo, which is the simplest of Tasks.
  */
 public class ToDo extends Task {
+    /**
+     * Constructor for ToDo, which takes in a task name.
+     *
+     * @param taskName name of task.
+     */
     public ToDo(String taskName) {
         super(taskName);
     }
@@ -28,6 +33,11 @@ public class ToDo extends Task {
         return super.getSaveInfo();
     }
 
+    /**
+     * Overriden toString method.
+     *
+     * @return string representation of the task.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
