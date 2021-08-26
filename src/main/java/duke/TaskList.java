@@ -74,7 +74,7 @@ public class TaskList {
     }
 
     /**
-     * Cnverts Task of a given index in tasks to its String representation to save.
+     * Converts Task of a given index in tasks to its String representation to save.
      *
      * @param index Index of Task to get the String representation to save.
      * @return String representation of Task in tasks with given index.
@@ -84,7 +84,7 @@ public class TaskList {
     }
 
     /**
-     * Mark Task at given index in tasks as done.
+     * Marks Task at given index in tasks as done.
      *
      * @param index Index of Task to mark as done.
      */
@@ -93,7 +93,25 @@ public class TaskList {
     }
 
     /**
-     * String representation of TaskList object.
+     * Finds tasks with given keyword in tasks.
+     *
+     * @param keyword Keyword of tasks we want to find.
+     * @return TaskList of Tasks with given keyword.
+     */
+    public TaskList findTasksWithKeyword(String keyword) {
+        ArrayList<Task> tasksWithKeyword = new ArrayList<>();
+
+        for (int i = 0; i < this.tasks.size(); i++) {
+            if (this.tasks.get(i).hasKeyword(keyword)) {
+                tasksWithKeyword.add(this.tasks.get(i));
+            }
+        }
+
+        return new TaskList(tasksWithKeyword);
+    }
+
+    /**
+     * Converts TaskList object into its String representation.
      *
      * @return String representation of TaskList object.
      */

@@ -1,16 +1,7 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.RemoveCommand;
-import duke.exception.DukeException;
-import duke.exception.IncompleteDeadlineException;
-import duke.exception.IncompleteEventException;
-import duke.exception.IncompleteToDoException;
-import duke.exception.InvalidCommandException;
+import duke.command.*;
+import duke.exception.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -82,6 +73,16 @@ public class Parser {
 //                  .matches("\\d+") && Integer.valueOf(splited[1]) <= listLength;
 //        }
         return input.startsWith("done ");
+    }
+
+    /**
+     * Checks if user input is a find command.
+     *
+     * @param input User input to check if it is a find command.
+     * @return true if it is a find command, else false.
+     */
+    public static boolean isFind(String input) {
+        return input.startsWith("find ");
     }
 
     /**
@@ -161,7 +162,7 @@ public class Parser {
      *
      * @param userInput Input which needs to be parsed.
      * @param ui Ui object from Duke class.
-     * @param taskList TaskList object from Duke class.
+     * @param tasks TaskList object from Duke class.
      * @return Command to execute.
      * @throws DukeException If incorrect values are passed for remove or done commands.
      */
@@ -188,6 +189,16 @@ public class Parser {
             }
         } else if (userInput.equals("bye")) {
             return new ExitCommand();
+        } else if (Parser.isFind(userInput)) {
+            String[] splitInput = userInput.split(" ");
+
+            if (splitInput.length == 1) {
+                throw new IncompleteFindException();
+            }
+
+            String keyword = splitInput[1];
+
+            return new FindCommand(keyword);
         } else {
             String[] splited = userInput.split(" ");
 

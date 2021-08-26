@@ -87,7 +87,7 @@ public class Storage {
     /**
      * Saves the taskList given by Duke into user's computer.
      *
-     * @param list taskList which is being saved into user's computer.
+     * @param tasks taskList which is being saved into user's computer.
      */
     public void saveFile(TaskList tasks) {
         try {

@@ -47,7 +47,7 @@ public class Ui {
     /**
      * Prints out TaskList in a form of a list for users to see.
      *
-     * @param ls TaskList to be printed.
+     * @param tasks TaskList to be printed.
      */
     public void print(TaskList tasks) {
         System.out.println(LINE);
@@ -91,6 +91,25 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n"
                 + "What can I do for you?");
+    }
+
+    /**
+     * Prints out TaskList of tasks with given keyword for users to see.
+     *
+     * @param tasksWithKeyword TaskList of tasks with given keyword.
+     * @param keyword Keyword which tasks in tasksWithKeyword contains.
+     */
+    public void printKeywordTasks(TaskList tasksWithKeyword, String keyword) {
+        if (tasksWithKeyword.getSize() > 0) {
+            System.out.println(LINE);
+            System.out.println("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasksWithKeyword.getSize(); i++) {
+                System.out.println((i + 1) + "." + tasksWithKeyword.taskToString(i));
+            }
+            System.out.println(LINE);
+        } else {
+            print("You do not have any tasks with keyword: " + keyword + ".");
+        }
     }
 
     /**

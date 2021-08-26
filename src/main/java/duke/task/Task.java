@@ -52,6 +52,24 @@ public class Task {
     }
 
     /**
+     * Checks if description of Task has given keyword.
+     *
+     * @param keyword Keyword to check if description of Task contains.
+     * @return true if Task contains keyword, else false.
+     */
+    public boolean hasKeyword(String keyword) {
+        String[] deconstructedDescription = description.split(" ");
+
+        for (int i = 0; i < deconstructedDescription.length; i++) {
+            if (deconstructedDescription[i].equals(keyword)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Converts Task object into its String representation.
      *
      * @return String representation of Task object.
