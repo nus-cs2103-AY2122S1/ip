@@ -21,6 +21,7 @@ public class Ui {
 
     /**
      * Returns the next user inputted line.
+     *
      * @return The user inputted line as a string.
      */
     public String readCommand() {
@@ -29,6 +30,7 @@ public class Ui {
 
     /**
      * Prints the message to the screen.
+     *
      * @param msg The message to be printed.
      */
     public static void printMessage(String msg) {

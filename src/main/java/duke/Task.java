@@ -9,6 +9,7 @@ public abstract class Task {
 
     /**
      * Constructor for a new Task, to be called by its subclasses.
+     *
      * @param description The task description.
      */
     public Task(String description) {
@@ -18,8 +19,9 @@ public abstract class Task {
 
     /**
      * Constructor for a new Task, to be called by its subclasses.
+     *
      * @param description The task description.
-     * @param isDone Whether this task is marked as done.
+     * @param isDone      Whether this task is marked as done.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -49,6 +51,7 @@ public abstract class Task {
 
     /**
      * Converts the task to the save format.
+     *
      * @return Task in the save format as a string.
      */
     public String toSaveFormat() {

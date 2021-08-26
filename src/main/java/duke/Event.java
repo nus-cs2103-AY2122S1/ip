@@ -4,13 +4,13 @@ package duke;
  * This class encapsulates an event task in the Duke Application.
  */
 public class Event extends Task {
-    private String at;
+    private final String at;
 
     /**
      * Constructor for a new Event task.
      *
      * @param description The task description.
-     * @param at The time of this task.
+     * @param at          The time of this task.
      */
     public Event(String description, String at) {
         super(description);
@@ -21,8 +21,8 @@ public class Event extends Task {
      * Constructor for a new Event task.
      *
      * @param description The task description.
-     * @param at The time of this task.
-     * @param isDone Whether this task is marked as done.
+     * @param at          The time of this task.
+     * @param isDone      Whether this task is marked as done.
      */
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);

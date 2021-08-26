@@ -17,6 +17,7 @@ public class Storage {
 
     /**
      * Constructor for a new Storage object.
+     *
      * @param filePath The filepath to the save file for the application.
      */
     public Storage(String filePath) {
@@ -54,7 +55,6 @@ public class Storage {
      * @throws FileNotFoundException When file is not found at the specified path
      */
     public List<String> load() throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get(this.filePath), Charset.defaultCharset());
-        return lines;
+        return Files.readAllLines(Paths.get(this.filePath), Charset.defaultCharset());
     }
 }

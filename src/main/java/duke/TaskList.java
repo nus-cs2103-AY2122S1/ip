@@ -20,6 +20,7 @@ public class TaskList {
 
     /**
      * Constructor which takes in a List of strings.
+     *
      * @param lines The lines from the application save file.
      */
     public TaskList(List<String> lines) {

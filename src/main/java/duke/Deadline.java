@@ -7,13 +7,13 @@ import java.time.LocalDate;
  * This class encapsulates a deadline task in the Duke Application.
  */
 public class Deadline extends Task {
-    private LocalDate by;
+    private final LocalDate by;
 
     /**
      * Constructor for a new Deadline task.
      *
      * @param description The task description.
-     * @param by The duedate of this task.
+     * @param by          The duedate of this task.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -24,8 +24,8 @@ public class Deadline extends Task {
      * Constructor for a new Deadline task.
      *
      * @param description The task description.
-     * @param by The duedate of this task.
-     * @param isDone Whether this task is marked as done.
+     * @param by          The duedate of this task.
+     * @param isDone      Whether this task is marked as done.
      */
     public Deadline(String description, LocalDate by, boolean isDone) {
         super(description, isDone);
