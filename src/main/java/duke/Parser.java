@@ -52,13 +52,13 @@ public class Parser {
                     command = new DeleteCommand(taskNo);
                     break;
                 case "todo":
-                    if (taskDescription.isEmpty()) {
+                    if (taskDescription == null) {
                         throw new EmptyDescriptionException();
                     }
                     command = new AddCommand(Duke.TaskType.TODO, new String[]{taskDescription});
                     break;
                 case "deadline":
-                    if (taskDescription.isEmpty()) {
+                    if (taskDescription == null) {
                         throw new EmptyDescriptionException();
                     }
                     String[] descriptionDate;
@@ -70,7 +70,7 @@ public class Parser {
                     command = new AddCommand(Duke.TaskType.DEADLINE, descriptionDate);
                     break;
                 case "event":
-                    if (taskDescription.isEmpty()) {
+                    if (taskDescription == null) {
                         throw new EmptyDescriptionException();
                     }
                     if (taskDescription.contains("/")) {
@@ -79,6 +79,12 @@ public class Parser {
                         throw new MissingDateException();
                     }
                     command = new AddCommand(Duke.TaskType.EVENT, descriptionDate);
+                    break;
+                case "find":
+                    if (taskDescription == null) {
+                        throw new EmptyDescriptionException();
+                    }
+                    command = new FindCommand(taskDescription);
                     break;
                 default:
                     throw new InvalidInputException();

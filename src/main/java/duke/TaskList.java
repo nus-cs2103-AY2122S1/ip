@@ -65,4 +65,14 @@ public class TaskList {
             taskList.set(taskNo - 1, task);
         }
     }
+
+    public ArrayList<Task> findTask(String searchDescription) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (searchDescription.equals(task.getDescription())) {
+                results.add(task);
+            }
+        }
+        return results;
+    }
 }
