@@ -2,10 +2,10 @@
  * @author Hang Zelin
  * @description a JUnit class that tests some methods in Parser.
  */
-package Duke.JUnitTests;
+package duke.junittests;
 
-import Duke.Command.Parser;
-import Duke.Excpetions.DukeException;
+import duke.command.Parser;
+import duke.excpetions.DukeException;
 import org.junit.Test;
 
 import java.time.LocalDate;

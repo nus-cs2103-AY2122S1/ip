@@ -5,7 +5,7 @@
  *
  */
 
-package Duke.Excpetions;
+package duke.excpetions;
 
 public class DukeException extends Exception {
 

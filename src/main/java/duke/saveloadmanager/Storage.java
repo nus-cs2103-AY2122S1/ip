@@ -4,12 +4,12 @@
  * In other words, programme allows Duke to save and read data from a file.
  */
 
-package Duke.SaveLoadManager;
+package duke.saveloadmanager;
 
-import Duke.Command.Parser;
-import Duke.Excpetions.DukeException;
-import Duke.Task.Task;
-import Duke.Task.TaskList;
+import duke.command.Parser;
+import duke.excpetions.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;

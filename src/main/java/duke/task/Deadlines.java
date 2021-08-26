@@ -3,7 +3,7 @@
  * @description Deadlines class that extends Task class. It is one of the types in 3 tasks.
  * Will contain a time in the form of "/by"
  */
-package Duke.Task;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

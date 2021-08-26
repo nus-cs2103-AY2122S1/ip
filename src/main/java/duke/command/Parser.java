@@ -10,10 +10,10 @@
  * Some invalid input Messages may cause throwing DukeException.
  */
 
-package Duke.Command;
+package duke.command;
 
-import Duke.Excpetions.DukeException;
-import Duke.Task.TaskList;
+import duke.excpetions.DukeException;
+import duke.task.TaskList;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

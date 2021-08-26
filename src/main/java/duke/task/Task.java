@@ -2,7 +2,7 @@
  * @author Hang Zelin
  * @description Task is an abstract class that encapsulates the info basic for a task
  */
-package Duke.Task;
+package duke.task;
 
 public abstract class Task {
 

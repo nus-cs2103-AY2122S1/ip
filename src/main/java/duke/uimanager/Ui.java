@@ -4,11 +4,11 @@
  * It will print out the information for each type of operation execution. And it will also accept users'
  * input for each round of task execution.
  */
-package Duke.UiManager;
+package duke.uimanager;
 
-import Duke.Command.Parser;
-import Duke.Excpetions.DukeException;
-import Duke.Task.TaskList;
+import duke.command.Parser;
+import duke.excpetions.DukeException;
+import duke.task.TaskList;
 
 import java.util.ArrayList;
 import java.util.Scanner;

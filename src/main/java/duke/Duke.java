@@ -9,12 +9,12 @@
  * <p>
  * You can also search a specific task by its date, keyword.
  */
-package Duke;
+package duke;
 
-import Duke.Excpetions.DukeException;
-import Duke.SaveLoadManager.Storage;
-import Duke.Task.*;
-import Duke.UiManager.Ui;
+import duke.excpetions.DukeException;
+import duke.saveloadmanager.Storage;
+import duke.task.TaskList;
+import duke.uimanager.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;

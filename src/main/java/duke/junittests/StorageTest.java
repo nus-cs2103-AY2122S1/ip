@@ -2,10 +2,10 @@
  * @author Hang Zelin
  * @description a JUnit class that tests some methods in Storage.
  */
-package Duke.JUnitTests;
+package duke.junittests;
 
-import Duke.Excpetions.DukeException;
-import Duke.SaveLoadManager.Storage;
+import duke.excpetions.DukeException;
+import duke.saveloadmanager.Storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

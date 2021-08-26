@@ -3,14 +3,10 @@
  * @description Stores all the tasks for the Duke. Duke can refer to this tasklist to see a specific task
  * or make use of the methods in it to execute an operation.
  */
-package Duke.Task;
+package duke.task;
 
-import Duke.Command.Parser;
-import Duke.Excpetions.DukeException;
-import Duke.Task.Deadlines;
-import Duke.Task.Events;
-import Duke.Task.Task;
-import Duke.Task.ToDos;
+import duke.command.Parser;
+import duke.excpetions.DukeException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
