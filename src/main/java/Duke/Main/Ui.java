@@ -34,6 +34,10 @@ public class Ui {
         System.out.println("\nProgram exiting... \nBye. Hope to see you again soon!\n");
     }
 
+    public void showHelp() {
+        respondWith(Storage.processInstructions());
+    }
+
 
     /**
      * Reply template for each command-reply cycle

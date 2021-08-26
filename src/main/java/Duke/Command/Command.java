@@ -1,26 +1,15 @@
 package Duke.Command;
 
+import Duke.Main.TaskList;
+
 public abstract class Command {
-    public enum Type {
-        LIST, DONE, DELETE, ADD, FIND
-    }
-
     private String description;
-    private Type type;
-    public Command(String description, Type type) {
+    private TaskList taskList;
+
+    public Command(String description, TaskList taskList) {
         this.description = description;
-        this.type = type;
+        this.taskList = taskList;
     }
 
-//    public void execute() {
-//        switch (type) {
-//            case ADD:
-//            case DELETE:
-//            case DONE:
-//            case FIND:
-//            case LIST:
-//            default:
-//        }
-//    }
-    public abstract Command execute();
+    public abstract String reply();
 }

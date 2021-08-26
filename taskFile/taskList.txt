@@ -1,3 +1,4 @@
-[T][ ] walk 10k steps
 [D][X] cs2100 (by 2021-08-24)
 [E][ ] cs2103t meeting (at 2021-08-26)
+[T][ ] walk 10000 steps
+[D][ ] IP project (by 2021-09-08)

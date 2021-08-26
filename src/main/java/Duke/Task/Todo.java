@@ -1,20 +1,16 @@
 package Duke.Task;
 
-import Duke.Main.DukeException;
+import Duke.DukeException.DukeIncompleteException;
 
 public class Todo extends Task {
-
-    private String taskDescription;
-
     /**
      * Constructor of a TODO task
      * @param taskName name of the task
-     * @throws DukeException if the description is incompleted
      */
     public Todo(String taskName) {
         super(taskName);
         if (taskName.length() == 0) {
-            throw new DukeException("Error: ", DukeException.Type.INCOMPLETE);
+            throw new DukeIncompleteException();
         }
     }
 

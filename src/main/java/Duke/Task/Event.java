@@ -1,6 +1,7 @@
 package Duke.Task;
 
-import Duke.Main.DukeException;
+import Duke.DukeException.DukeIncompleteException;
+import Duke.DukeException.DukeInvalidFormatException;
 import Duke.Main.Parser;
 
 import java.time.LocalDate;
@@ -15,13 +16,11 @@ public class Event extends Task {
      * Constructor of an Event Task
      * @param taskName contains the task description and task time that
      *                 is to be divided
-     * @throws DukeException if there is no timing indicated or if the
-     *                       date entered is in the incorrect format
      */
     public Event(String taskName) {
         super(taskName.split("/at")[0].trim());
         if (!taskName.contains("/at")) {
-            throw new DukeException("", DukeException.Type.INCOMPLETE);
+            throw new DukeIncompleteException();
         }
         String[] divide = taskName.split("/at");
         this.taskDescription = divide[0];
@@ -29,7 +28,7 @@ public class Event extends Task {
         try {
             this.date = Parser.convert(LocalDate.parse(taskTime));
         } catch (DateTimeParseException e) {
-            throw new DukeException("", DukeException.Type.INVALID_FORMAT);
+            throw new DukeInvalidFormatException();
         }
     }
 
