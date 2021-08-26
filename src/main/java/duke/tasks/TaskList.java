@@ -123,6 +123,28 @@ public class TaskList {
     }
 
     /**
+     * Returns a {@code String} containing the {@code Task}s that match the given
+     * {@code String query}.
+     *
+     * @param query {@code String} search query of the user.
+     * @returns {@code String} - Newlined list of {@code Task}s.
+     */
+    public String findAndAnnounce(String query) {
+        StringBuilder res = new StringBuilder("Your search matched these tasks:\n\t ");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getDescription().contains(query)) {
+                res.append(i+1).append(". ").append(tasks.get(i));
+                if (i != tasks.size() - 1) {
+                    // do not append a newline to the last item
+                    res.append("\n\t ");
+                }
+            }
+        }
+        return res.toString();
+
+    }
+
+    /**
      * Returns an indented, newlined, 1-indexed {@code String} of the
      * {@code Task}s contained in this {@code TaskList}.
      */

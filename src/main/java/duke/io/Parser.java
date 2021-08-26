@@ -6,6 +6,7 @@ package duke.io;
 public class Parser {
     private final String COMMAND_MAKE_TASK = "COMMAND_MAKE_TASK";
     private final String COMMAND_LIST_TASKS = "COMMAND_LIST_TASKS";
+    private final String COMMAND_FIND_TASKS = "COMMAND_FIND_TASKS";
     private final String COMMAND_QUIT = "COMMAND_QUIT";
     private final String COMMAND_MARK_TASK_STATUS = "COMMAND_MARK_TASK_STATUS";
     private final String COMMAND_DELETE_TASK = "COMMAND_DELETE_TASK";
@@ -31,6 +32,8 @@ public class Parser {
             return COMMAND_DELETE_TASK;
         } else if (input.startsWith("event") || input.startsWith("deadline") || input.startsWith("todo")) {
             return COMMAND_MAKE_TASK;
+        } else if (input.startsWith("find")) {
+            return COMMAND_FIND_TASKS;
         } else {
             return COMMAND_UNKNOWN;
         }
