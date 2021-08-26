@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.List;
 
 public class Duke {
     static void drawLine() {
@@ -17,7 +16,8 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         Storage storage = new Storage();
-        List<Task> list = storage.load(storage.getFilePath());
+        TaskList list = new TaskList(storage.load(storage.getFilePath()));
+        //List<Task> list = storage.load(storage.getFilePath());
 
         System.out.println(logo);
         drawLine();
@@ -32,15 +32,15 @@ public class Duke {
 
                 if (s.startsWith("bye")) {
                     drawLine();
-                    storage.write(list, storage.getFilePath());
+                    storage.write(list.getTaskList(), storage.getFilePath());
                     System.out.println("\tBye. Hope to see you again soon!");
                     drawLine();
                     break;
                 } else if (s.equals("list")) {
                     drawLine();
                     System.out.println("\tHere are the tasks in your list:");
-                    for (int i = 0; i < list.size(); i++) {
-                        System.out.println("\t" + (i + 1) + ". " + list.get(i).toString());
+                    for (int i = 0; i < list.length(); i++) {
+                        System.out.println("\t" + (i + 1) + ". " + list.getTask(i).toString());
                     }
                     drawLine();
                     continue;
@@ -51,9 +51,9 @@ public class Duke {
                     drawLine();
                     System.out.println("\tNice! I've marked this task as done:");
                     taskNumber = Integer.parseInt(s.substring(s.indexOf(" ") + 1)) - 1;
-                    list.get(taskNumber).markAsDone();
-                    System.out.println("\t\t[" + list.get(taskNumber).getStatusIcon() + "] "
-                            + list.get(taskNumber).getDescription());
+                    list.getTask(taskNumber).markAsDone();
+                    System.out.println("\t\t[" + list.getTask(taskNumber).getStatusIcon() + "] "
+                            + list.getTask(taskNumber).getDescription());
                     drawLine();
                     continue;
                 } else if (s.startsWith("todo")) {
@@ -61,29 +61,29 @@ public class Duke {
                         throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
                     }
                     Todo todo = new Todo(s.substring(s.indexOf(" ") + 1));
-                    list.add(todo);
+                    list.addTask(todo);
                     drawLine();
                     System.out.println("\tGot it. I've added this task:");
                     System.out.println("\t\t" + todo);
-                    System.out.println("\tNow you have " + list.size() + " tasks in the list.");
+                    System.out.println("\tNow you have " + list.length() + " tasks in the list.");
                     drawLine();
                 } else if (s.startsWith("deadline")) {
                     Deadline deadline = new Deadline(s.substring(s.indexOf(" ") + 1, s.indexOf(" /by")),
                             s.substring(s.indexOf("/by") + 4));
-                    list.add(deadline);
+                    list.addTask(deadline);
                     drawLine();
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + deadline);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    System.out.println("Now you have " + list.length() + " tasks in the list.");
                     drawLine();
                 } else if (s.startsWith("event")) {
                     Event event = new Event(s.substring(s.indexOf(" ") + 1, s.indexOf(" /at")),
                             s.substring(s.indexOf("/at") + 4));
-                    list.add(event);
+                    list.addTask(event);
                     drawLine();
                     System.out.println("Got it. I've added this task:");
                     System.out.println("\t" + event);
-                    System.out.println("Now you have " + list.size() + " tasks in the list.");
+                    System.out.println("Now you have " + list.length() + " tasks in the list.");
                     drawLine();
                 } else if (s.startsWith("delete")) {
                     if (s.length() == 6 || s.length() == 7) {
@@ -92,9 +92,9 @@ public class Duke {
                     drawLine();
                     System.out.println("\tNoted. I've removed this task:");
                     taskNumber = Integer.parseInt(s.substring(s.indexOf(" ") + 1)) - 1;
-                    System.out.println("\t\t" + list.get(taskNumber));
-                    list.remove(taskNumber);
-                    System.out.println("\tNow you have " + list.size() + " in the list.");
+                    System.out.println("\t\t" + list.getTask(taskNumber));
+                    list.deleteTask(taskNumber);
+                    System.out.println("\tNow you have " + list.length() + " in the list.");
                     drawLine();
                     continue;
                 } else {
