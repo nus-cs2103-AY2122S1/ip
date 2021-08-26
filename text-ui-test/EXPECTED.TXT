@@ -25,6 +25,7 @@ Here are the tasks in your list:
 3.[E][ ] project meeting (at: Aug 6th 2-4pm)
 4.[T][X] join sports club
 5.[T][ ] borrow book
+
 Got it. I've added this task: 
   [D][ ] return book (by: Sunday)
 Now you have 6 tasks in the list.
@@ -36,11 +37,11 @@ Got it. I've added this task:
 Now you have 8 tasks in the list.
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
-☹ OOPS!!! The description of a deadline cannot be empty.
+☹ OOPS!!! Seems like there are missing argument(s) for deadline
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
-☹ OOPS!!! The description of a todo cannot be empty.
+☹ OOPS!!! Seems like there are missing argument(s) for todo
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
-☹ OOPS!!! The description of an event cannot be empty.
+☹ OOPS!!! Seems like there are missing argument(s) for event
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 Noted. I've removed this task: 
   [T][X] read book
@@ -49,6 +50,4 @@ Noted. I've removed this task:
   [D][ ] return book (by: June 6th)
 Now you have 6 tasks in the list.
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
-☹ OOPS!!! I'm sorry, but no task numbered 10000
-☹ OOPS!!! I'm sorry, but no task numbered 10000
 Bye. Hope to see you again soon!

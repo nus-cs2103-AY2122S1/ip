@@ -20,6 +20,4 @@ blah
 delete 1
 delete 1
 deletelol
-done 10000
-delete 10000
 bye
