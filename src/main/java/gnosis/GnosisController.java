@@ -5,6 +5,7 @@ import task.TaskStorageManager;
 import model.*;
 import util.GnosisConstants;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class GnosisController {
@@ -59,6 +60,10 @@ public class GnosisController {
                 break;
             case LIST:
                 view.displayAllTasksMessage(taskCommandManager.getTasks());
+                break;
+            case FIND:
+                List<Task> filteredTasks = taskCommandManager.findMatchingTasks(taskInput);
+                view.displayFoundTasksMessage(filteredTasks, taskInput);
                 break;
             case DONE:
                 // only if "done" command is call, we retrieve task index from user

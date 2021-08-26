@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskCommandManager {
 
@@ -77,6 +78,12 @@ public class TaskCommandManager {
         Task t = tasks.get(taskIndex);
         tasks.remove(taskIndex);
         return t;
+    }
+
+    public List<Task> findMatchingTasks(String taskKeyword){
+        return this.tasks.stream()
+                .filter(task -> task.getTaskName().contains(taskKeyword))
+                .collect(Collectors.toList());
     }
 
     public List<Task> getTasks() {

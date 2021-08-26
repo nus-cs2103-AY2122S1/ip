@@ -34,6 +34,14 @@ public class GnosisUI {
         this.isListeningInput = false;
     }
 
+    public void displayFoundTasksMessage(List<Task> foundTasks, String keyword) {
+        System.out.println(GnosisConstants.LISTING_MATCH_KEYWORD_MESSAGE + keyword);
+        for (Task task: foundTasks) {
+            System.out.println(task.toString());
+        }
+        displayBottomDivider();
+    }
+
     public void displayGreetMessage(boolean isDataAvailable) {
         displayTopDivider();
         System.out.println(GnosisConstants.GREET_MESSAGE);
@@ -43,7 +51,7 @@ public class GnosisUI {
     }
 
     public void updateTaskManagementViewMessage(String action, Task task, int numOfTasks) {
-        System.out.println("model.Task " + action + ":");
+        System.out.println("Task " + action + ":");
         System.out.println(task);
         System.out.println("Total tasks in the list: " + numOfTasks);
         displayBottomDivider();
