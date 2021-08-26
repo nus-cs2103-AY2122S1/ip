@@ -1,9 +1,10 @@
 package duke.task;
 
+import org.json.simple.JSONObject;
+
 import duke.date.Date;
 import duke.exception.BadInputFormatException;
 import duke.exception.InvalidDateException;
-import org.json.simple.JSONObject;
 
 /** Represents an Event object. */
 public class Event extends DatedTask {
