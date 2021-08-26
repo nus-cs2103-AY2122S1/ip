@@ -183,7 +183,27 @@ public class TaskList {
     }
 
     /**
-     * To print the tasks stored in the list.
+     * Finds tasks with the given keyword and prints them.
+     *
+     * @param parsedUserInput The parsed command, entered by the user with the "find" keyword.
+     */
+    public void findTaskWithKeyword(String[] parsedUserInput) {
+        String taskDescription;
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+
+        for (int i = 0; i < taskListLength(); i++) {
+            taskDescription = userTaskList.get(i).toString().toLowerCase();
+
+            if (taskDescription.contains(parsedUserInput[1].toLowerCase())) {
+                matchingTasks.add(userTaskList.get(i));
+            }
+        }
+
+        ui.printTaskFoundByKeyword(matchingTasks);
+    }
+
+    /**
+     * Prints the tasks stored in the list.
      */
     public void printTaskList() {
         // If the list is empty

@@ -71,6 +71,9 @@ public class Parser {
         case "todo":
             taskList.addTodoTask(userCommand);
             break;
+        case "find":
+            taskList.findTaskWithKeyword(userInput);
+            break;
         case "bye":
             markSessionDone();
             break;
