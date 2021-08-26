@@ -82,7 +82,7 @@ TaskList taskList;
 
     public void listResponse() {
         System.out.println(line);
-        for(int i = 0; i < taskList.size();i++){
+        for(int i = 0; i < taskList.size(); i++){
             System.out.println("     " + String.valueOf(i+1) + ". " + taskList.get(i).toString());
         }
         System.out.println(line);
