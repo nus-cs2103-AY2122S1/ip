@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +14,6 @@ public class Duke {
         System.out.println("Hello from\n" + logo);*/
         startBot();
 
-        //level 4
         List<Task> toDoList = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
@@ -52,7 +53,9 @@ public class Duke {
                             String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
                             String temp = message.substring(message.indexOf("/") + 1);
                             String due = temp.substring(temp.indexOf(" ") + 1);
-                            Task newTask = new Deadline(taskName, due);
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                            LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
+                            Task newTask = new Deadline(taskName, parsedDate);
                             toDoList.add(newTask);
                             System.out.println(add(newTask.displayTask(), toDoList.size()));
 
@@ -62,7 +65,9 @@ public class Duke {
                             String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
                             String temp = message.substring(message.indexOf("/") + 1);
                             String due = temp.substring(temp.indexOf(" ") + 1);
-                            Task newTask = new Event(taskName, due);
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                            LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
+                            Task newTask = new Event(taskName, parsedDate);
                             toDoList.add(newTask);
                             System.out.println(add(newTask.displayTask(), toDoList.size()));
 
@@ -151,14 +156,18 @@ public class Duke {
         }
     }
 
+    //make the exception for when the input time and date is in the wrong format
     public static void isFormatCorrect(String message, String type) throws IncorrectFormatException {
-        if (type.equals("deadline") && !message.contains("/by")) {
-            throw new IncorrectFormatException("Input format is incorrect. Please input again in this format : \n" +
-                    " <task name> /by <deadline>");
-        } else {
+        if (type.equals("deadline")) {
+            if (!message.contains("/by")) {
+                throw new IncorrectFormatException("Input format is incorrect. Please input again in this format : \n" +
+                        " <task name> /by yyyy-MM-dd HH:mm");
+            }
+        }else {
             if (type.equals("event") && !message.contains("/at")) {
                 throw new IncorrectFormatException("Input format is incorrect. Please input again in this format : \n" +
-                        " <event name> /at <event duration>");
+                        " <event name> /at yyyy-MM-dd HH:mm");
+                //change the /at to duration instead of just start time
             }
         }
     }
