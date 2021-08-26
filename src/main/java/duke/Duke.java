@@ -9,6 +9,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke class
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to run entire programme flow
+     */
     public void run() {
         ui.showWelcome();
         boolean end = false;
@@ -71,6 +79,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Duke class main method
+     *
+     * @param args
+     */
     public static void main (String[] args) {
         new Duke("./data/duke.txt").run();
     }

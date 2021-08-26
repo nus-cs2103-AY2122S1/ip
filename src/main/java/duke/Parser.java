@@ -2,6 +2,13 @@ package duke;
 
 public class Parser {
 
+    /**
+     * Makes sense of user input command
+     *
+     * @param command
+     * @return String list to make sense of user input
+     * @throws DukeException
+     */
     public static String[] parse(String command) throws DukeException {
         if (command.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
