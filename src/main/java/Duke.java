@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Duke {
 
@@ -45,6 +48,21 @@ public class Duke {
         }
     }
 
+    private static boolean isValidDate(String date) {
+        try{
+            String year = date.substring(0, 3);
+            String month = date.substring(5, 6);
+            String day = date.substring(8, 9);
+            Integer.parseInt(year);
+            Integer.parseInt(month);
+            Integer.parseInt(day);
+            return date.charAt(4) == '-' && date.charAt(7) == '-';
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     private static void DukeOperation(String input) throws DukeException {
         // operation is always the first word of user input.
         String[] allWords = input.split(" ");
@@ -86,7 +104,14 @@ public class Duke {
                 } else {
                     if (input.contains("/at")) {
                         String description = input.substring(input.indexOf(allWords[1]), input.indexOf("/at") - 1);
-                        String at = input.substring(input.indexOf("/at") + 4);
+                        String time = input.substring(input.indexOf("/at") + 4);
+                        LocalDate at;
+
+                        if (isValidDate(time)) {
+                            at = LocalDate.parse(time);
+                        } else {
+                            throw new DukeException("Date format is wrong");
+                        }
                         Event event = new Event(description, at);
                         System.out.println("added: " + event.toString());
                         tasks.add(event);
@@ -103,8 +128,15 @@ public class Duke {
                 } else {
                     if (input.contains("/by")) {
                         String description = input.substring(input.indexOf(allWords[1]), input.indexOf("/by") - 1);
-                        String at = input.substring(input.indexOf("/by") + 4);
-                        Deadline deadline = new Deadline(description, at);
+                        String time = input.substring(input.indexOf("/by") + 4);
+                        LocalDate by;
+
+                        if (isValidDate(time)) {
+                            by = LocalDate.parse(time);
+                        } else {
+                            throw new DukeException("Date format is wrong");
+                        }
+                        Deadline deadline = new Deadline(description, by);
                         System.out.println("added: " + deadline.toString());
                         tasks.add(deadline);
                         System.out.println("Now you have " + tasks.size() + " tasks in your list");
