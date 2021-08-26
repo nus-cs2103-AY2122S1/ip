@@ -40,19 +40,19 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        switch(this.type) {
-            case "todo":
-                Todo todo = tasks.createTodo(this.description);
-                ui.displaySuccessMessage(todo, tasks.length());
-                break;
-            case "deadline":
-                Deadline dl = tasks.createDeadline(this.description, this.date);
-                ui.displaySuccessMessage(dl, tasks.length());
-                break;
-            case "event":
-                Event event = tasks.createEvent(this.description, this.date, this.time);
-                ui.displaySuccessMessage(event, tasks.length());
-                break;
+        switch (this.type) {
+        case "todo":
+            Todo todo = tasks.createTodo(this.description);
+            ui.displaySuccessMessage(todo, tasks.length());
+            break;
+        case "deadline":
+            Deadline dl = tasks.createDeadline(this.description, this.date);
+            ui.displaySuccessMessage(dl, tasks.length());
+            break;
+        case "event":
+            Event event = tasks.createEvent(this.description, this.date, this.time);
+            ui.displaySuccessMessage(event, tasks.length());
+            break;
         }
 
     }

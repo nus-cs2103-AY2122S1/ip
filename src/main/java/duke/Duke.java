@@ -1,7 +1,7 @@
 package duke;
 
 import duke.command.Command;
-import duke.task.*;
+import duke.task.TaskList;
 
 import java.io.IOException;
 
@@ -20,9 +20,9 @@ public class Duke {
     public void run() {
         ui.greet();
 
-       boolean isExit = false;
+        boolean isExit = false;
 
-       while (!isExit) {
+        while (!isExit) {
             String userInput = ui.readCommand();
             Command cmd = Parser.parse(userInput);
             cmd.execute(tasks, ui, storage);

@@ -17,7 +17,7 @@ public class TaskList {
         System.out.println("    * * * * * * * * * * * * * * * * * * * *");
         System.out.println("    Here are the tasks in your list: ");
         for (int i = 0; i < this.tasksList.size(); i++) {
-            String item = "    " + (i + 1) + "." +  this.tasksList.get(i);
+            String item = "    " + (i + 1) + "." + this.tasksList.get(i);
             System.out.println(item);
         }
         System.out.println("    * * * * * * * * * * * * * * * * * * * *\n");
@@ -59,6 +59,7 @@ public class TaskList {
 
     /**
      * Checks if description is given for Todo, Deadline and Event tasks.
+     *
      * @param userInput the user input provided by scanner.
      * @return true if description is provided; false otherwise.
      */

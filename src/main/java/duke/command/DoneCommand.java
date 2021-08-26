@@ -23,7 +23,6 @@ public class DoneCommand extends Command {
         } else {
             ui.display("This task does not exist! Please try again.");
         }
-
     }
 
 }

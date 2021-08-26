@@ -12,6 +12,7 @@ public class Task {
 
     /**
      * Get the status icon, either "X" or "".
+     *
      * @return a String which represents the status of the task.
      */
     public String getStatusIcon() {

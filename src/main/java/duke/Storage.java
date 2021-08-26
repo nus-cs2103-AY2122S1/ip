@@ -5,13 +5,20 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,17 +75,17 @@ public class Storage {
             Task currentTask;
 
             switch (taskText.charAt(1)) {
-                case 'T':
-                    currentTask = this.addTodo(taskText.substring(7));
-                    break;
-                case 'D':
-                    currentTask = this.addDeadline(taskText);
-                    break;
-                case 'E':
-                    currentTask = this.addEvent(taskText);
-                    break;
-                default:
-                    throw new IllegalArgumentException();
+            case 'T':
+                currentTask = this.addTodo(taskText.substring(7));
+                break;
+            case 'D':
+                currentTask = this.addDeadline(taskText);
+                break;
+            case 'E':
+                currentTask = this.addEvent(taskText);
+                break;
+            default:
+                throw new IllegalArgumentException();
             }
 
             if (taskText.charAt(4) == 'X') {

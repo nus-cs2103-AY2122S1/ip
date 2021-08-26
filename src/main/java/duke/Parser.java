@@ -1,39 +1,45 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.InvalidCommand;
 
 public class Parser {
 
     public static Command parse(String userInput) {
         String command = getCommand(userInput);
         switch (command) {
-            case "todo":
-                return new AddCommand(
-                        getDescription(userInput, "todo", "ignore"),
-                        "todo");
-            case "deadline":
-                return new AddCommand(
-                        getDescription(userInput, "deadline ", "/by "),
-                        getDate(userInput,"/by "),
-                        "deadline"
-                );
-            case "event":
-                return new AddCommand(
-                        getDescription(userInput, "event ", "/at "),
-                        getDate(userInput,"/at "),
-                        getTime(userInput),
-                        "event"
-                );
-            case "done":
-                return new DoneCommand(getTaskNumber(userInput));
-            case "delete":
-                return new DeleteCommand(getTaskNumber(userInput));
-            case "list":
-                return new ListCommand();
-            case "bye":
-                return new ExitCommand();
-            default:
-                return new InvalidCommand();
+        case "todo":
+            return new AddCommand(
+                    getDescription(userInput, "todo", "ignore"),
+                    "todo");
+        case "deadline":
+            return new AddCommand(
+                    getDescription(userInput, "deadline ", "/by "),
+                    getDate(userInput, "/by "),
+                    "deadline"
+            );
+        case "event":
+            return new AddCommand(
+                    getDescription(userInput, "event ", "/at "),
+                    getDate(userInput, "/at "),
+                    getTime(userInput),
+                    "event"
+            );
+        case "done":
+            return new DoneCommand(getTaskNumber(userInput));
+        case "delete":
+            return new DeleteCommand(getTaskNumber(userInput));
+        case "list":
+            return new ListCommand();
+        case "bye":
+            return new ExitCommand();
+        default:
+            return new InvalidCommand();
         }
     }
 
@@ -58,7 +64,7 @@ public class Parser {
     private static String getTime(String userInput) {
         String[] splitInput = userInput.split(" ");
         String time = splitInput[splitInput.length - 1];
-        return time.substring(0,2) + ":" + time.substring(2);
+        return time.substring(0, 2) + ":" + time.substring(2);
     }
 
     private static int getTaskNumber(String userInput) {

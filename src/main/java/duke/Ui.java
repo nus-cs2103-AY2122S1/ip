@@ -9,9 +9,9 @@ public class Ui {
     // initialize Scanner object
     private Scanner scan = new Scanner(System.in);
 
-
     /**
      * Display formatted message.
+     *
      * @param message Message to be printed in console.
      */
     public void display(String message) {
@@ -44,7 +44,8 @@ public class Ui {
 
     /**
      * Display success message for adding task.
-     * @param task The individual task which can be Todo, Deadline or Event.
+     *
+     * @param task     The individual task which can be Todo, Deadline or Event.
      * @param numTasks The number of tasks in the list.
      */
     public void displaySuccessMessage(Task task, int numTasks) {
