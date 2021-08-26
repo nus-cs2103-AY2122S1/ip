@@ -83,6 +83,12 @@ public class TaskList {
         System.out.println("Now you have " + list.size() + " tasks in the list");
     }
 
+    /**
+     * Finds entries in the list with the provided keyword
+     *
+     * @param string keyword to search the list with.
+     * @throws DukeException when no input is detected.
+     */
     public void find(String string) throws DukeException {
         if (string.isEmpty()) {
             throw new DukeException("☹ OOPS!!! No input was detected!");
