@@ -1,3 +1,4 @@
+package skeltal;
 import java.util.Scanner;
 
 public class Skeltal {

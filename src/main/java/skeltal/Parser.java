@@ -1,3 +1,4 @@
+package skeltal;
 public class Parser {
     public static void response(String userReply) {
         try {

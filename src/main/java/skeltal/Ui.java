@@ -1,3 +1,4 @@
+package skeltal;
 public class Ui {
 
     public static String line = "---------------------------------------------";
