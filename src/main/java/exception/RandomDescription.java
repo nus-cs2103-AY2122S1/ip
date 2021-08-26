@@ -1,6 +1,14 @@
 package exception;
 
+<<<<<<< HEAD
 public class RandomDescription extends DukeException{
+=======
+/**
+ * Handle exception of random unrelated descriptions
+ * Allows users to output error message
+ */
+public class RandomDescription extends DukeException {
+>>>>>>> 7f3ded1 (Follow Coding Standard)
 
     public RandomDescription(String message) {
         super(message);
