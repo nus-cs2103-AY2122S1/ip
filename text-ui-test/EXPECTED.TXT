@@ -19,6 +19,9 @@ Here are the tasks in your list:
 1.[T][X] borrow book
 2.[D][X] return book (by: Jun 06 2021 4:00 pm)
 3.[E][X] project meeting (at: Aug 06 2021 2:00 pm)
+Here are the matching tasks in your list:
+1.[T][X] borrow book
+2.[D][X] return book (by: Jun 06 2021 4:00 pm)
 Noted. I've removed this task:
 [E][X] project meeting (at: Aug 06 2021 2:00 pm)
 Now you have 2 tasks in the list.
@@ -35,3 +38,4 @@ Please provide a number after the done command that is within the total number o
 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
 Please write your date and time in the following format: D/MM/YYYY HHMM
 Please write your deadline command in the following format: deadline task /by datetime
+There are no tasks containing that term in your list!

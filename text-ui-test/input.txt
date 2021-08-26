@@ -5,6 +5,7 @@ done 1
 done 2
 done 3
 list
+find book
 delete 3
 delete 2
 todo
@@ -17,3 +18,4 @@ done 2
 invalidcommand
 deadline return book /by 6-6-2021 1600
 deadline asdfgh
+find cat
