@@ -62,11 +62,11 @@ public class Storage {
         }
     }
 
-    public void saveTasks(ArrayList<Task> tasks, Path savePath) {
+    public void saveTasks(TaskList tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(savePath);
-            for (Task t: tasks) {
-                writer.write(t.toSaveFormat() + "\n");
+            for (int i = 1; i <= tasks.getSize(); i++) {
+                writer.write(tasks.getTask(i).toSaveFormat() + "\n");
             }
             writer.close();
         } catch(IOException ex){

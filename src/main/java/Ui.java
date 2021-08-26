@@ -25,15 +25,15 @@ public class Ui {
         System.out.print(USER);
     }
 
-    public void printListTasks(ArrayList<Task> tasks) {
-        for (int i = 0; i < tasks.size(); i++)
-            System.out.printf("\t\t%d.%s\n", i + 1, tasks.get(i));
-        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+    public void printListTasks(TaskList tasks) {
+        for (int i = 1; i <= tasks.getSize(); i++)
+            System.out.printf("\t\t%d.%s\n", i, tasks.getTask(i));
+        System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
     }
 
-    public void printAddTask(ArrayList<Task> tasks, Task newTask) {
+    public void printAddTask(TaskList tasks, Task newTask) {
         System.out.println(DUKE + "\n\tAdded:\n\t\t" + newTask);
-        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+        System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
     }
 
     public void printCompleteTask(Task completedTask) {
@@ -41,13 +41,13 @@ public class Ui {
         System.out.printf("\t\t%s\n", completedTask);
     }
 
-    public void printDeleteTask(ArrayList<Task> tasks, Task deletedTask) {
+    public void printDeleteTask(TaskList tasks, Task deletedTask) {
         System.out.println(DUKE + "\n\tRemoving task:");
         System.out.printf("\t\t%s\n", deletedTask);
-        System.out.println("\tNow you have " + tasks.size() + " tasks in the list.");
+        System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
     }
 
-    public void printLoadTasks(ArrayList<Task> tasks) {
+    public void printLoadTasks(TaskList tasks) {
         System.out.println(DUKE + "I have loaded your past tasks list!");
         printListTasks(tasks);
     }
