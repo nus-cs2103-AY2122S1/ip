@@ -24,14 +24,6 @@ public class Duke {
         fw.close();
     }
 
-//    private static void printFileContents(File file) throws FileNotFoundException {
-//        //File f = new File(filePath); // create a File for the given file path
-//        Scanner s = new Scanner(file); // create a Scanner using the File as the source
-//        while (s.hasNext()) {
-//            System.out.println(s.nextLine());
-//        }
-//    }
-
     public static void main(String[] args) {
         String end = "bye";
         String display = "list";
