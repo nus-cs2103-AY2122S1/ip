@@ -10,9 +10,21 @@ import duke.tasklist.TaskList;
 import duke.utils.Constants;
 import java.time.LocalDate;
 
+/**
+ * The Parser class encapsulates the parsing, interpretation and validation of the user's input commands
+ *
+ */
 
 public class Parser {
 
+    /**
+     * The parse method interprets the keyword of the user's input and accordingly calls the other task-specific
+     * parse functions
+     *
+     * @param input user's string input
+     * @param taskList the list of tasks to be operated upon
+     * @return a command returned by the respective task-specific parse function
+     */
     public static Command parse(String input, TaskList taskList) {
         String[] parsedInput = input.trim().split("\\s", 2);
         String command = parsedInput[0];
@@ -38,15 +50,35 @@ public class Parser {
         }
     }
 
-
+    /**
+     * The parseBye method is a task-specific parse function which is called when the user uses the
+     * bye keyword
+     *
+     * @return a Bye Command which will execute the task corresponding to the bye keyword
+     */
     private static ByeCommand parseBye() {
         return new ByeCommand();
     }
 
+    /**
+     * The parseList method is a task-specific parse function which is called when the user uses the
+     * list keyword
+     *
+     * @param taskList the list of tasks which is to be parsed
+     * @return a List Command which will execute the task corresponding to the list keyword
+     */
     private static ListCommand parseList(TaskList taskList) {
         return new ListCommand();
     }
 
+    /**
+     * The parseTask method is a task-specific parse function which is called when the user uses the
+     * todo, deadline or event keyword. Throws an exception if the tasks are formatted incorrectly
+     *
+     * @param input the user's task input
+     * @param taskList the list of tasks which is to be operated on
+     * @return a Add Command which will execute the task corresponding to the todo, deadline or event keyword
+     */
     private static AddCommand parseTask(String input, TaskList taskList) {
         Task task;
         String[] splitTasks = input.split("\\s", 2);
@@ -121,6 +153,14 @@ public class Parser {
         }
     }
 
+    /**
+     * The parseDone method is a task-specific parse function which is called when the user uses the
+     * done keyword
+     *
+     * @param input the user's string input
+     * @param taskList the list to be operated on
+     * @return a Done Command to execute the done operation
+     */
     private static DoneCommand parseDone(String input, TaskList taskList) {
         try {
             String[] parsedTask = input.split("\\s", 2);
@@ -136,6 +176,14 @@ public class Parser {
         }
     }
 
+    /**
+     * The parseDelete method is a task-specific parse function which is called when the user uses the
+     * delete keyword
+     *
+     * @param input the user's string input
+     * @param taskList the list to be operated on
+     * @return a Delete Command to execute the delete operation
+     */
     private static DeleteCommand parseDelete(String input, TaskList taskList) {
         try {
             String[] parsedTask = input.split("\\s", 2);
@@ -151,6 +199,14 @@ public class Parser {
         }
     }
 
+    /**
+     * The parseTasksOn method is a task-specific parse function which is called when the user uses the
+     * tasks_on keyword
+     *
+     * @param input the user's string input
+     * @param taskList the list to be operated on
+     * @return a TasksOn Command to execute the tasks_on operation
+     */
     private static TasksOnCommand parseTasksOn(String input, TaskList taskList) {
         try {
             String[] parsedString = input.split("\\s", 2);
@@ -161,11 +217,22 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Returns a boolean value which checks if a task has an empty description
+     *
+     * @param taskArray parsed string array
+     * @return boolean value of whether a task has an empty description
+     */
     private static boolean hasEmptyDesc(String[] taskArray) {
         return taskArray.length == 1 || taskArray[1].isBlank() || taskArray[1].isEmpty();
     }
 
+    /**
+     * Returns a boolean value which checks if a task has a date but an empty description
+     *
+     * @param taskArray parsed string array
+     * @return boolean value of whether a task has a date but an empty description
+     */
     private static boolean hasDateButEmptyDesc(String[] taskArray) {
         return (taskArray[0].isBlank() || taskArray[0].isEmpty()) && (!taskArray[1].isBlank());
     }

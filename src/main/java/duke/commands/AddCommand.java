@@ -5,8 +5,18 @@ import duke.tasks.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The AddCommand task is a Command that adds a task to a list of tasks.
+ */
+
 public class AddCommand extends Command {
     Task task;
+
+    /**
+     * Constructor - Initialises the task to be added.
+     *
+     * @param task input task
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
@@ -16,6 +26,13 @@ public class AddCommand extends Command {
         return false;
     }
 
+    /**
+     * Takes in a list of tasks and the ui. Checks whether the task is already present in the list of tasks
+     * and if it is, it throws a RepeatedTaskException. Else it adds the task to the list of tasks.
+     *
+     * @param taskList list of tasks to which the new input task is added
+     * @param ui ui of the chatbot where the user receives a message of the succesful addition of a task to a list
+     */
     @Override
     public void execute(TaskList taskList, Ui ui){
         if (taskList.containsTask(task)) {

@@ -2,11 +2,18 @@ package duke.tasks;
 
 import java.time.LocalDateTime;
 
+/**
+ *  The task class is an abstraction of a task
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
     protected LocalDateTime date;
 
+    /**
+     * public constructor which initialises the description of a task
+     * @param description description of a task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

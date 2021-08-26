@@ -6,8 +6,10 @@ import duke.parser.*;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-import java.io.IOException;
 
+/**
+ * The Duke class is the main class which starts the running of the chatbot
+ */
 public class Duke {
 
     private TaskList taskList;
@@ -16,18 +18,24 @@ public class Duke {
     private String filePath = "./data/duke.txt";
     private String folderPath = "./data";
 
+    /**
+     * A public constructor which initialises the ui, storage and tasklist before the chatbot runs
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(filePath, folderPath);
         taskList = new TaskList();
         try {
             storage.readTasks(taskList);
-        } catch (DukeException | IOException ex) {
+        } catch (DukeException ex) {
             ui.displayLoadingError(ex);
             taskList = new TaskList();
         }
     }
 
+    /**
+     * The run method starts the reading of the commands and the execution of the instructions
+     */
     public void run() {
         ui.init();
         boolean isExit = false;
