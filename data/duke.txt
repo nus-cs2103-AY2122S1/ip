@@ -1,3 +1,2 @@
-todo | 1 | sweep
-event | 1 | project meeting  |  8
-deadline | 0 | test test  |  7pm
+todo | 0 | borrow book
+event | 0 | dinner with friends  | 2021-12-03

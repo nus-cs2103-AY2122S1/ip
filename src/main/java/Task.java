@@ -49,15 +49,10 @@ public class Task {
     protected static class Deadline extends Task{
         private LocalDate by;
 
-<<<<<<< HEAD
+
         public Deadline(String description, boolean status, String by) {
             super(description, status);
-            this.by = by;
-=======
-        public Deadline(String description, String by) {
-            super(description);
             this.by = LocalDate.parse(by, DateTimeFormatter.ISO_LOCAL_DATE);
->>>>>>> branch-Level-8
         }
 
         @Override
@@ -81,15 +76,9 @@ public class Task {
     protected static class Event extends Task{
         private LocalDate at;
 
-<<<<<<< HEAD
         public Event(String description, boolean status, String at) {
             super(description, status);
-            this.at = at;
-=======
-        public Event(String description, String at) {
-            super(description);
             this.at = LocalDate.parse(at, DateTimeFormatter.ISO_LOCAL_DATE);
->>>>>>> branch-Level-8
         }
 
         @Override
