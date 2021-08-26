@@ -17,7 +17,7 @@ public class StorageList {
 
     public StorageList() {};
 
-    public StorageList(File file) throws FileNotFoundException{
+    public StorageList(File file) throws FileNotFoundException {
         this.file = file;
         readFile(new Scanner(file));
     }
@@ -68,7 +68,7 @@ public class StorageList {
         return storageList.size();
     }
 
-    public void delete(int idx){
+    public void delete(int idx) {
         String desc = storageList.get(idx).getDescription();
         storageList.remove(idx);
         ui.taskDeleteMsg(desc, storageList.size());
