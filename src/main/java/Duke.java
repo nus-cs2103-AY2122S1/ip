@@ -5,20 +5,16 @@ import java.util.ArrayList;
 public class Duke {
     private final static ArrayList<Task> list = new ArrayList<>();
     private final static Scanner scanner = new Scanner(System.in);
+    private static Storage storage;
 
     public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+        storage = new Storage("data/TaskList.txt");
         reply("Hello i is Duke\nWhat u want?");
         manageInput();
         scanner.close();
     }
 
-    private static void manageInput() {
+    public static void manageInput() {
         if (scanner.hasNext()) {
             String input = scanner.nextLine();
             if (input.equals("bye")) {
@@ -59,13 +55,9 @@ public class Duke {
         reply("i zao first");
     }
 
-//    private static void echo(String input) {
-//        reply(input);
-//        manageInput();
-//    }
-
     private static void add(Task task) {
         list.add(task);
+        storage.saveTask(list);
         reply("one more thing: " + task.toString() + "\nNow you got " + list.size() + " thing(s). sian");
     }
 
@@ -108,7 +100,7 @@ public class Duke {
     private static void deadline(String input) throws DukeException {
         try {
             int split = input.indexOf("/");
-            Deadline deadline = new Deadline(input.substring(9, split - 1), input.substring(split + 3));
+            Deadline deadline = new Deadline(input.substring(9, split - 1), input.substring(split + 4));
             add(deadline);
             manageInput();
         } catch(StringIndexOutOfBoundsException err) {
@@ -119,7 +111,7 @@ public class Duke {
     private static void event(String input) throws DukeException {
         try {
             int split = input.indexOf("/");
-            Event event = new Event(input.substring(6, split - 1), input.substring(split + 3));
+            Event event = new Event(input.substring(6, split - 1), input.substring(split + 4));
             add(event);
             manageInput();
         } catch(StringIndexOutOfBoundsException err) {
@@ -133,6 +125,7 @@ public class Duke {
             reply("this one no more liao ah :\n" + list.get(taskNumber).toString()
                 + "\nNow you got " + (list.size() - 1) + " thing(s). sian");
             list.remove(taskNumber);
+            storage.saveTask(list);
             manageInput();
         } catch(StringIndexOutOfBoundsException err) {
             throw new DukeException("what u wan delete?");
