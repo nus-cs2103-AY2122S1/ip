@@ -29,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * runs Duke.
+     */
     public void run() {
         Ui.showWelcomeMessage();
         Scanner scan = new Scanner(System.in);

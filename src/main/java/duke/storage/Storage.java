@@ -11,9 +11,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the file used to store tasks.
+ */
 public class Storage {
     public final String filePath;
 
+    /**
+     * Initialises the file.
+     *
+     * @param filePath the filepath string to be used
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         File f = new File(filePath);
@@ -22,6 +30,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the TaskList from the storage file to Duke's TaskList and returns it.
+     *
+     * @return ArrayList containing the tasks saved in the file
+     * @throws DukeException if the file cannot be found
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             File f = new File(filePath);
@@ -50,6 +64,11 @@ public class Storage {
 
     }
 
+    /**
+     * Saves the TaskList data into the storage file.
+     *
+     * @param tasks the TaskList to be saved into file.
+     */
     public void write(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);

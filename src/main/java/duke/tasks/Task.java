@@ -1,7 +1,7 @@
 package duke.tasks;
 
 /**
- * A duke.task.Task class encapsulates the data related to a task
+ * A Task class encapsulates the data related to a task
  * ie task description and status.
  *
  * @author Lethicia
