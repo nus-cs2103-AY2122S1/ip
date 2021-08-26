@@ -8,15 +8,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents the storage of tasks to the hard disk.
+ */
 public class Storage {
+    /**
+     * The file path where the data file is.
+     */
     private java.nio.file.Path filePath;
-    
+
+    /**
+     * Constructs a storage at the given path.
+     * @param path The file path where the data file is.
+     * @throws DukeException
+     */
     public Storage(String path) throws DukeException {
         this.filePath = java.nio.file.Paths.get(path);
         initStorage();
     }
 
-    /** Creates a data file */
+    /**
+     * Initialises storage by creating a data file if it does not exist.
+     *
+     * @throws DukeException
+     */
     private void initStorage() throws DukeException {
         try {
             Files.createDirectories(filePath.getParent());
@@ -28,7 +43,12 @@ public class Storage {
         }
     }
 
-    /** Writes over data file to save current todoList contents */
+    /**
+     * Writes over data file to save todo list contents to the hard disk.
+     *
+     * @param dataStrings
+     * @throws DukeException
+     */
     public void save(List<String> dataStrings) throws DukeException {
         try {
             // task saved as e.g. E|0|meeting|2pm
@@ -38,7 +58,11 @@ public class Storage {
         }
     }
 
-    /** Loads database into todoList */
+    /**
+     * Loads data file contents into a list of tasks.
+     * @return A list of Tasks stored in data.
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         try {
             ArrayList<Task> todoList = new ArrayList<>();

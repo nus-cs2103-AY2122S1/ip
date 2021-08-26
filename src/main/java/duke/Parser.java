@@ -8,7 +8,18 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.task.TaskList;
 
+/**
+ * Represents a parser that makes sense of user input commands.
+ */
 public class Parser {
+    /**
+     * Parses the user's input command.
+     *
+     * @param fullCommand The user's input command.
+     * @param tasks The user's task list.
+     * @return A Command corresponding to the user's input.
+     * @throws DukeException
+     */
     public static Command parse(String fullCommand, TaskList tasks) throws DukeException {
         String[] cmdWordDetails = fullCommand.split(" ", 2); // split into command and details
         String cmdWord = cmdWordDetails[0]; // get first word as command
@@ -34,7 +45,15 @@ public class Parser {
         }
     }
 
-    /** checks if input is a valid task number and returns task number if valid */
+    /**
+     * Checks if input is a valid task number and returns task number if valid.
+     * If valid the task number is returned. Else a DukeException is thrown.
+     *
+     * @param input The user's input string.
+     * @param tasks The user's list of tasks.
+     * @return The task number as Integer if valid.
+     * @throws DukeException
+     */
     private static Integer validateTaskNumber(String input, TaskList tasks) throws DukeException {
         Integer taskNum;
         try {

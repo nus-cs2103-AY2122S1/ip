@@ -6,15 +6,32 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Task need to be done before a specific date/time.
+ */
 public class Deadline extends Task {
 
-    /** The accepted format of date and time for the deadline */
+    /**
+     * The accepted format of date and time for the deadline
+     */
     private final String INPUT_PATTERN = "dd-MM-yyyy HH:mm";
-    /** The format of date and time to be displayed */
+
+    /**
+     * The accepted format of date and time for the deadline
+     */
     private final String OUTPUT_PATTERN = "MMM dd yyyy, hh:mm a";
-    /** The deadline date and time of this task */
+
+    /**
+     * The deadline date and time of this task.
+     */
     protected LocalDateTime by;
 
+    /**
+     * Constructs a Deadline task with task description and deadline.
+     * @param description The description of this deadline.
+     * @param by The deadline of this task.
+     * @throws DukeException
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         if (description == "") {
@@ -31,16 +48,30 @@ public class Deadline extends Task {
         }
     }
 
-    /** Returns the deadline date and time as a string to be displayed */
+    /**
+     * Returns the deadline date and time as a string to be displayed.
+     *
+     * @return String representation of the DateTime.
+     */
     private String getDateString() {
         return by.format(DateTimeFormatter.ofPattern(OUTPUT_PATTERN)).replace("AM", "am").replace("PM", "pm");
     }
 
+    /**
+     * Returns a string representation of this task to be displayed.
+     * @return The string representation of this task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + getDateString() + ")";
     }
 
+    /**
+     * Returns a string representation of this task to be written into data storage.
+     *
+     * @param delimiter The delimiter used by the storage to parse data fields.
+     * @return The data string representation of this task.
+     */
     @Override
     public String toDataString(String delimiter) {
         String tag = "D";

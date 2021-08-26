@@ -2,19 +2,31 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Represents a User Interface that handles interactions with the user.
+ */
 public class Ui {
     private Scanner sc;
 
+    /**
+     * Constructs a User Interface.
+     */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
-    /** Error message shown on start up of Duke */
+    /**
+     * Shows the message of an error on start up of Duke.
+     *
+     * @param e The exception thrown on start up.
+     */
     public void showStartUpError(DukeException e) {
         System.out.println((new DukeException("Error starting up.").concat(e)));
     }
 
-    /** Welcome message shown on start up of Duke */
+    /**
+     * Shows a welcome message.
+     */
     public void showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -27,18 +39,28 @@ public class Ui {
         showLine();
     }
 
-    /** Show divider line */
+    /**
+     * Shows a divider line.
+     */
     public void showLine() {
         String separator = "------------------------------------------------------------------";
         System.out.println(separator);
     }
 
-    /** Takes in input from user and returns it */
+    /**
+     * Reads the user's input command and returns it.
+     *
+     * @return The user's input command.
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
-    /** Displays a message to the user */
+    /**
+     * Shows a message to the user.
+     *
+     * @param message The message to be shown.
+     */
     public void showMessage(String message) {
         System.out.println(message);
     }
