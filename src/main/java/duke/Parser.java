@@ -1,6 +1,19 @@
 package duke;
 
+/**
+ * Encapsulates the methods needed to parse the input given to Duke and convert
+ * it into a Command that Duke understands.
+ */
 public class Parser {
+
+    /**
+     * Returns a Command that Duke understands from a string passed to Duke by
+     * the user.
+     *
+     * @param input String that user passed to Duke
+     * @return Command that Duke is able to execute
+     * @throws DukeException If invalid or insufficient arguments are provided
+     */
     public static Command parseUserInput(String input) throws DukeException {
         String[] strings = input.split(" ");
         String operation = strings[0];

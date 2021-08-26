@@ -1,19 +1,34 @@
 package duke;
 
-import java.io.*;
+
+import java.io.EOFException;
+import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Main class of the Duke chat-bot. When the main class is run, it creates an
+ * instance of Duke which allows text-based user interaction.
+ */
 public class Duke {
     private final Ui ui;
     private final Scanner sc = new Scanner(System.in);
     private TaskList taskList = new TaskList();
     private final Storage storage;
 
+    /**
+     * Class constructor which takes the relative filepath where Duke's save-file
+     * is stored.
+     *
+     * @param filePath Path of the save-file
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
     }
 
+    /**
+     * Loads the save file and begins to accept user input.
+     */
     public void run() {
         try {
             this.taskList = storage.readSave();
@@ -75,6 +90,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Point of entry through which Duke can be run.
+     *
+     * @param args The commandline arguments.
+     */
     public static void main(String[] args) {
         new Duke("duke.txt").run();
     }
