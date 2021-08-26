@@ -64,7 +64,7 @@ public class TaskList {
      * @return A boolean value, true if successfully marked as done and false if invalid index given.
      */
     public boolean markDoneAtIndex(int index) {
-        if (index > this.size()-1 || index < 0) {
+        if (index > this.size() - 1 || index < 0) {
             return false;
         } else {
             Task taskToBeMarkDone = this.get(index);
@@ -80,7 +80,7 @@ public class TaskList {
      * @return The task that is removed.
      */
     public Task deleteAtIndex(int index) {
-        if (index > this.size()-1 || index < 0) {
+        if (index > this.size() - 1 || index < 0) {
             return null;
         } else {
             return this.list.remove(index);

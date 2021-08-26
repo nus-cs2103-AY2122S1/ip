@@ -44,7 +44,7 @@ public class MarkDoneCommand extends Command {
         if (markedDone) {
             String message =
                     "Nice! I've marked this task as done:\n" +
-                            list.get(index);
+                    list.get(index);
             ui.printMessage(message);
             storage.save(list.convertToStorageString());
         } else {
