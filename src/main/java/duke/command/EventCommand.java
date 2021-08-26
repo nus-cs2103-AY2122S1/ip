@@ -1,38 +1,29 @@
-package duke.command;
+package Duke.Command;
 
-import duke.Duke;
-import duke.DukeException;
-import duke.Parser;
-import duke.Ui;
-import duke.task.Event;
-import duke.task.Task;
+import Duke.Duke;
+import Duke.DukeException;
+import Duke.Parser;
+import Duke.Task.Event;
+import Duke.Task.Task;
 
-public class EventCommand extends Command {
+public class EventCommand extends Command{
     private static final String COMMAND_WORD = "event";
 
-    /**
-     * Returns the command word for an event.
-     *
-     * @return "event" command representing an event.
-     */
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
     }
 
-    /**
-     * Creates an event task and adds it to the task list.
-     *
-     * @param duke   Duke instance that the command is called from.
-     * @param parser Parser with the user's input
-     * @throws DukeException If input is invalid.
-     */
     @Override
     public void run(Duke duke, Parser parser) throws DukeException {
         parser.parseTask();
         parser.parseDate();
         Task task = new Event(parser.getTaskName(), parser.getDate());
         duke.getList().add(task);
-        Ui.addTaskMessage(task, duke.getList().size());
+        Duke.formatAndPrint(String.format("Got it. I've added this task:\n%s\nNow you have %d %s in your list.",
+                task,
+                duke.getList().size(),
+                duke.getList().size() == 1 ? "task" : "tasks"));
+
     }
 }
