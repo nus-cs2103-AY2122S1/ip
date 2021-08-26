@@ -7,11 +7,12 @@ public class Event extends Task {
 
     private LocalDate date;
     private LocalTime time;
+
     DateTimeFormatter dayOutputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     DateTimeFormatter timeOutputFormatter = DateTimeFormatter.ofPattern("ha");
 
-    DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    DateTimeFormatter timeInputFormatter = DateTimeFormatter.ofPattern("HHmm");
+    DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter timeInputFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
     public Event(String description, String deadline, boolean completed) throws InvalidDateFormat {
         super(description, completed);
@@ -38,6 +39,6 @@ public class Event extends Task {
 
     @Override
     public String getDeadline() {
-        return this.date.toString() + this.time.toString();
+        return this.date.toString() + " " + this.time.toString();
     }
 }
