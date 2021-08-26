@@ -1,3 +1,13 @@
+package virushade.tasks;
+
+import virushade.Storage;
+import virushade.StringManipulator;
+import virushade.VirushadeException;
+import virushade.tasks.Task;
+import virushade.tasks.Deadline;
+import virushade.tasks.Event;
+import virushade.tasks.ToDo;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -9,7 +19,7 @@ public class TaskList {
     /**
      * This is the file name of our file that stores data on TaskList.
      */
-    private static final Storage TASK_LIST_STORAGE = new Storage("data/Virushade.txt");
+    private static Storage TASK_LIST_STORAGE;
 
     /**
      * This variable keeps track of the size of the TaskList.
@@ -17,6 +27,7 @@ public class TaskList {
     private static int listCount = 0;
 
     public TaskList(Storage storage) throws VirushadeException {
+        TASK_LIST_STORAGE = storage;
         storage.load(tasks);
         listCount = tasks.size();
     }

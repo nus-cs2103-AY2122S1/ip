@@ -1,3 +1,9 @@
+package virushade.tasks;
+
+import virushade.StringManipulator;
+import virushade.VirushadeException;
+
+
 public class Task {
 
     private boolean isDone;

@@ -1,3 +1,7 @@
+package virushade.tasks;
+
+import virushade.StringManipulator;
+
 public class Deadline extends Task{
 
     private final String deadline;

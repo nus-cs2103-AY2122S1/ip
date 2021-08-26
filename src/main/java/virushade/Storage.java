@@ -1,9 +1,12 @@
+package virushade;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import virushade.tasks.Task;
 
 public class Storage {
 
@@ -18,7 +21,6 @@ public class Storage {
             // create a Scanner using the File as the source
             Scanner s = new Scanner(STORAGE_FILE);
 
-            int i = 0;
             if (s.hasNext()) {
                 // Do not parse the line "Here are the tasks in your list: "
                 s.nextLine();
@@ -27,7 +29,6 @@ public class Storage {
             while (s.hasNext()) {
                 Task scannedTask = Task.parse(s.nextLine());
                 tasks.add(scannedTask);
-                i++;
             }
         } catch (FileNotFoundException e) {
             UI.showCreatingFiles();
