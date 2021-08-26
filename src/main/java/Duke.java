@@ -52,6 +52,7 @@ public class Duke {
                 list.printList();
                 continue;
             }
+            System.out.println("test");
             String[] commandSplit = command.split("\\s", 2);
 
             try {
