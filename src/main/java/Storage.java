@@ -1,17 +1,16 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-//import java.nio.file.Paths;
-import java.nio.file.*;
 import java.util.ArrayList;
-import java.util.stream.Stream;
+//import java.nio.file.Files;
+//import java.nio.file.Path;
+////import java.nio.file.Paths;
+//import java.nio.file.*;
+//import java.util.ArrayList;
+//import java.util.stream.Stream;
 
 
 public class Storage {
-//    private Path filePath;
-//    private Path dirPath;
     private String filePath;
     private File dir;
     private File file;
@@ -19,10 +18,10 @@ public class Storage {
 
 
     public Storage(String filePathToStorageFile) {
-
         this.filePath = filePathToStorageFile;
         this.file = new File(this.filePath);
         this.dir = this.file.getParentFile(); //may be null
+        //create directory and file if doesnt exist
         if (!this.dir.exists()) {
             createDir(this.dir);
         }
@@ -43,6 +42,9 @@ public class Storage {
         }
     }
 
+    public File getFile() {
+        return this.file;
+    }
 
     public void write(String text)  {
         try {
@@ -54,12 +56,13 @@ public class Storage {
         }
     }
 
-//    public void write(ArrayList<Task> tasks) throws IOException {
-//        String text = tasks
-//                .stream()
-//                .reduce("", (res, task) -> res + task.toStorageFormat()); //FIX accumulator
-//        this.write(text);
-//
-//    }
+    public void write(ArrayList<Task> tasks) throws IOException {
+        String text = tasks
+                .stream()
+                .reduce("",
+                    (stringRes, task) -> stringRes + task.toStorageFormat(),
+                    (stringRes1, stringRes2) -> stringRes1 + stringRes2); //FIX accumulator
+        this.write(text);
+    }
 
 }

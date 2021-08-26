@@ -1,3 +1,4 @@
 T | 0 | potato
 E | 0 | party | house
+E | 1 | work | night
 D | 0 | project | tonight

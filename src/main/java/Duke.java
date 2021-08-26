@@ -4,32 +4,40 @@ import java.util.Scanner;
 
 
 public class Duke {
-    private TaskList taskList;
-    private Storage dukeStore;
+    private TaskList taskList; //composite data type
+    private Storage dukeStore; //composite data type
 
-//    public enum tasks {
-//        TODO, EVENT, DEADLINE
-//    }
 
+
+    //test run with predefined filepath
     public static void main(String[] args) {
         String filePath = "data/duke-storage.txt";
-        new Duke().run(filePath);
+        new Duke(filePath).run();
     }
 
-    public Duke() {
-        this.taskList = TaskList.of(new ArrayList<Task>());
+    public Duke(String filePathToStorage) {
+        this.dukeStore = new Storage(filePathToStorage);
+        this.taskList = TaskList.of(dukeStore.getFile());
+//        this.taskList = TaskList.of(new ArrayList<Task>());
     }
 
-    public void run(String filePathToStorage) {
+    public void run() {
         Scanner sc = new Scanner(System.in);
 
-        this.dukeStore = new Storage(filePathToStorage);
-        dukeStore.write(
-        ToDo.of("potato").toStorageFormat()+"\n"
-            +Event.of("party", "house").toStorageFormat()+"\n"
-            +Deadline.of("project","tonight").toStorageFormat()
-        );
+//        Event someEvent = Event.of("work", "night");
+//        someEvent.markCompleted();
+//        dukeStore.write(
+//        ToDo.of("potato").toStorageFormat()+"\n"
+//            +Event.of("party", "house").toStorageFormat()+"\n"
+//            +someEvent.toStorageFormat()+"\n"
+//            +Deadline.of("project","tonight").toStorageFormat()
+//        );
 
+
+//            +Event.of("party", "house").toStorageFormat()+"\n"
+//            +someEvent.toStorageFormat()+"\n"
+//            +Deadline.of("project","tonight").toStorageFormat()
+//        );
 
         printFormatted(beginScript()); //display welcome msg
 
@@ -140,10 +148,6 @@ public class Duke {
         }
     }
 
-    //checks if input = "keyword" || input = "keyword <body>"
-    public static boolean hasKeywordAndBody(String input, String keyword) {
-        return input.matches(String.format("%s\\s\\S+.*",keyword));
-    }
 
     public static String defaultReplyToInvalidInput() {
         return "Invalid input o(>~<)O!\n" +
