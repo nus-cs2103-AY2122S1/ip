@@ -249,7 +249,7 @@ public class BotCommandResponderUnit {
         // 7. Not empty -> print proper message
         //      i) create opening message in static memory
         //      ii) format way to print
-        //      iii) create summary message in static meory
+        //      iii) create summary message in static memory
         checkFindTaskFormat(input);
 
         // fun joy happy
