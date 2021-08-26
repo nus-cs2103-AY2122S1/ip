@@ -1,6 +1,5 @@
 package iris.command;
 
-import iris.IrisException;
 import iris.TaskList;
 
 public class ToDoCommand extends AddCommand {

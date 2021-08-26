@@ -1,6 +1,5 @@
 package iris;
 
-import iris.command.ByeCommand;
 import iris.command.Command;
 import iris.command.ListCommand;
 import iris.command.ToDoCommand;
@@ -9,6 +8,7 @@ import iris.command.EventCommand;
 import iris.command.DoneCommand;
 import iris.command.DeleteCommand;
 import iris.command.FindCommand;
+import iris.command.ByeCommand;
 
 /**
  * Encapsulates the parsing-related functionality of Iris

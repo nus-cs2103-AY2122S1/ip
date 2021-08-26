@@ -1,9 +1,6 @@
 package iris;
 
-import java.util.List;
 import java.util.Scanner;
-
-import iris.task.Task;
 
 /**
  * Encapsulates UI-related functionality of Iris

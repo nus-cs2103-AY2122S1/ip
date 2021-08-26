@@ -6,8 +6,6 @@ import iris.command.Command;
  * Represents an Iris object
  */
 public class Iris {
-    private static final String ENDING_COMMAND = "bye";
-
     private final Storage storage;
     private final TaskList tasks = new TaskList();
     private final Ui ui;
