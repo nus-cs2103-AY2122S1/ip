@@ -1,62 +1,50 @@
 package commands;
 import assignment.AssignmentType;
-import status.Status;
+import date.Date;
+import java.util.Optional;
 
 public class EventCommand extends NonExecutableCommand {
     private static final String taskDirectivePoint = "at";
     private static final String assignmentType = AssignmentType.EVENT.getStatus();
+    private static final boolean hasDateTime = true;
 
     public EventCommand(String desc) {
-        super(desc);
+        super(desc, hasDateTime, taskDirectivePoint);
     }
 
-    public EventCommand(String desc, String newStatus, String newStoredStatus, boolean flag) {
-        super(desc, newStatus, newStoredStatus, flag);
-    }
-
-    public EventCommand(String desc, String newStatus, String newStoredStatus) {
-        super(desc, newStatus, newStoredStatus);
+    public EventCommand(String desc, String newStatus, String newStoredStatus, Optional<Date> date) {
+        super(desc, newStatus, newStoredStatus, date);
     }
 
     @Override
     public EventCommand updateStatus(String newStatus,  String newStoredStatus) {
-        return new EventCommand(this.command_description, newStatus, newStoredStatus);
+        return new EventCommand(this.command_description, newStatus, newStoredStatus, this.date);
     }
 
     @Override
-    public EventCommand isListed() {
-        boolean flag = true;
-        return new EventCommand(this.command_description, this.status, this.storedStatus, flag);
+    public String getOriginalFormatForStorage() {
+        return assignmentType + this.status + 
+        " " + this.getOutputMessage(this.date.get().getOriginalFormat());
     }
-
-
+    
     @Override
     public String toString() {
-        String outputString = this.getOutputMessage();
+        String outputString = this.getOutputMessage(this.date.get().toString());
         String assignmentProg = assignmentType + this.status + " " + outputString;
-        if (!this.isListed && this.status.equals(Status.NOT_COMPLETED.getStatus())) {
-            String completionMsg = "Got it. I've added this task:";
-            return completionMsg + "\n" + assignmentProg;
-        }
         return assignmentProg;
     }
 
-    private String getOutputMessage() {
+    private String getOutputMessage(String dateExpression) {
         StringBuilder sb = new StringBuilder("");
-        String[] updatedDesc = this.command_description.split("/");
-        sb.append(updatedDesc[0] + "(");
-        String[] formattedDesc = updatedDesc[1].split(" ");
-        for (int i = 0; i < formattedDesc.length; i++) {
-            String c = formattedDesc[i];
-            if (c.equals(taskDirectivePoint)) {
-                sb.append(c + ": ");
-            } else if (i == formattedDesc.length - 1) {
-                sb.append(c);
-            } else {
-                sb.append(c + " ");
+        String[] updatedDesc = this.command_description.split(" ");
+        for (int i = 0; i < updatedDesc.length; i++) {
+            String item = updatedDesc[i];
+            if (item.contains("/" + taskDirectivePoint)) {
+                break;
             }
+            sb.append(item + " ");
         }
-        sb.append(")");
-        return sb.toString();
+        return sb.toString() + "(" + taskDirectivePoint +
+                ": " + dateExpression + ")";
     }
 }

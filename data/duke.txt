@@ -1,5 +1,0 @@
-T | 1 | join sports club
-T | 1 | read book
-D | 0 | return book June 6th
-T | 1 | sleep today
-E | 0 | project meeting Aug 6th 2-4pm

@@ -15,6 +15,7 @@ public class TasksHandler {
         if (newCommand.isForStorage() && !newCommand.isExecutable()) {
             NonExecutableCommand comm = (NonExecutableCommand) newCommand;
             Command commandStored = comm.updateStatus(Status.NOT_COMPLETED.getStatus(), Status.STORED.getStatus());
+            System.out.println("Got it. I've added this task:");
             System.out.println(commandStored);
             this.allTasks.add(commandStored);
             System.out.println("Now you have " + this.allTasks.size() + " tasks in the list.");
@@ -32,10 +33,9 @@ public class TasksHandler {
             exeCommand.execute(this.allTasks);
             return false;
         }
-        NonExecutableCommand nonExeCommand = (NonExecutableCommand) newCommand;
-        boolean exit = !nonExeCommand.isForStorage();
+        boolean exit = !newCommand.isForStorage();
         if (exit) {
-            System.out.println(nonExeCommand);
+            System.out.println(newCommand);
         }
         return exit;
     }

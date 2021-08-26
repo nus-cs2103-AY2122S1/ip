@@ -1,8 +1,6 @@
 import exceptions.NoSuchCommandException;
 import commands.Command;
 import commands.DeleteCommand;
-import commands.ReadCommand;
-import commands.ReturnCommand;
 import commands.ToDoCommand;
 import commands.EventCommand;
 import commands.ByeCommand;
@@ -14,8 +12,6 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class CommandConverter {
-    private static final String READ_COMMAND = "read";
-    private static final String RETURN_COMMAND = "return";
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
@@ -66,12 +62,8 @@ public class CommandConverter {
 
     
     private Command extractNormalCommand(String commandName, String fullCommandInput) throws NoSuchCommandException {
-        if (commandName.equals(READ_COMMAND)) {
-            return new ReadCommand(fullCommandInput);
-        } else if (commandName.equals(DELETE_COMMAND)) {
+        if (commandName.equals(DELETE_COMMAND)) {
             return new DeleteCommand(fullCommandInput);
-        } else if (commandName.equals(RETURN_COMMAND)) {
-            return new ReturnCommand(fullCommandInput);
         } else if (commandName.equals(LIST_COMMAND)) {
             return new ListCommand(fullCommandInput);
         } else if (commandName.equals(BYE_COMMAND)) {

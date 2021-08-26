@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import commands.Command;
+import commands.NonExecutableCommand;
 
 public class Storage {
     private static final String TODO_IDENTIFIER = "T";
@@ -41,7 +42,8 @@ public class Storage {
         FileWriter fw = new FileWriter(FILE_SOURCE);
         StringBuilder sb = new StringBuilder("");
         for (int i = 0; i < updatesList.size(); i++) {
-            String fullInstr = updatesList.get(i).toString();
+            NonExecutableCommand com = (NonExecutableCommand) updatesList.get(i);
+            String fullInstr = com.getOriginalFormatForStorage();
             String[] instr = fullInstr.split(" ");
             String indicator = instr[0];
             if (i == updatesList.size() - 1) {
@@ -54,7 +56,7 @@ public class Storage {
             fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
-            System.out.println("WError occured while updating file storage");
+            System.out.println("Error occured while updating file storage");
         }
     }
 
@@ -92,7 +94,7 @@ public class Storage {
         String[] stringParts = input.split(" ");
         for (int i = 0; i < stringParts.length; i++) {
             String str = stringParts[i];
-            if (str.matches("[a-zA-Z0-9]+") && i != stringParts.length - 1) {
+            if (str.matches("[/|(a-zA-Z0-9)|-]+") && i != stringParts.length - 1) {
                 sb.append(str + " ");
             } else if (i == stringParts.length - 1) {
                 sb.append(str.substring(0, str.length() - 1));

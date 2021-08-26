@@ -1,30 +1,38 @@
 package commands;
 import status.Status;
+import java.util.Optional;
+import date.Date;
+
 public abstract class NonExecutableCommand extends Command {
     protected final String status;
     protected final String storedStatus;
-    protected final boolean isListed;
+    protected final Optional<Date> date;
 
-    public NonExecutableCommand(String desc) {
+    public NonExecutableCommand(String desc, boolean hasDateTime, String taskDirective) {
         super(desc);
         this.status = Status.NOT_COMPLETED.getStatus();
         this.storedStatus = Status.NOTSTORED.getStatus();
-        this.isListed = false;
+        this.date = this.getDateAndTime(desc, hasDateTime, taskDirective);
     }
 
-    public NonExecutableCommand(String desc, String newStatus, String newStoredStatus, boolean flag) {
+    private Optional<Date> getDateAndTime(String desc, boolean hasDateTime, String taskDirective) {
+        if (hasDateTime) {
+            String[] descArray = desc.split("/" + taskDirective);
+            String dateAndTime = descArray[1].trim();
+            Date outputDate = new Date(dateAndTime);
+            return Optional.ofNullable(outputDate);
+        }
+        return Optional.empty();
+    }
+
+    public NonExecutableCommand(String desc, String newStatus, String newStoredStatus, Optional<Date> date) {
         super(desc);
         this.status = newStatus;
         this.storedStatus = newStoredStatus;
-        this.isListed = flag;
+        this.date = date;
     }
 
-    public NonExecutableCommand(String desc, String newStatus, String newStoredStatus) {
-        super(desc);
-        this.status = newStatus;
-        this.storedStatus = newStoredStatus;
-        this.isListed = false;
-    }
+    public abstract String getOriginalFormatForStorage();
     
     @Override
     public boolean isExecutable() {
@@ -38,6 +46,5 @@ public abstract class NonExecutableCommand extends Command {
 
     public abstract NonExecutableCommand updateStatus(String newStatus,  String newStoredStatus);
 
-    public abstract NonExecutableCommand isListed();
 
 }
