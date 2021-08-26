@@ -1,8 +1,9 @@
 package gnosis.main;
+
 import gnosis.controller.GnosisController;
 import gnosis.ui.GnosisUI;
-
 import java.util.Scanner;
+
 /**
  *
  * gnosis.main.Gnosis class is the gnosis.main programme to execute chat-bot assistant.
@@ -23,17 +24,17 @@ public class Gnosis {
 
     public Gnosis() {
         gnosisView = new GnosisUI();
-        this.gnosisController = new GnosisController(gnosisView);
     }
 
     private void run(Scanner sc) {
-        gnosisController.startGnosis(sc);
+        this.gnosisController = new GnosisController(gnosisView);
+        this.gnosisController.startGnosis(sc);
     }
 
     public static void main(String[] args) {
-            Gnosis gnosis = new Gnosis();
-            Scanner sc = new Scanner(System.in);
-            gnosis.run(sc);
-            sc.close();
+        Gnosis gnosis = new Gnosis();
+        Scanner sc = new Scanner(System.in);
+        gnosis.run(sc);
+        sc.close();
     }
 }

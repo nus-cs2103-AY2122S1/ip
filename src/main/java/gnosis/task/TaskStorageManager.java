@@ -1,8 +1,6 @@
 package gnosis.task;
 
-
 import gnosis.model.*;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,7 +20,7 @@ public class TaskStorageManager {
     public static List<Task> loadGnosisTasks() {
         //check if user has folder:
         // if no folder -> means no data found -> create one from scratch
-        // if have -> load to arraylist tasks
+        // if folder found -> load to arraylist tasks
         if (TaskStorageManager.isDataFileAvail()) {
             return TaskStorageManager.getTasksFromFile();
         } else {
@@ -49,10 +47,12 @@ public class TaskStorageManager {
                 } else if (taskType == TaskType.EVENT) {
                     String schedule = tokens[3];
                     LocalDateTime dt = LocalDateTime.parse(schedule);
+
                     return new Event(taskName,isTaskDone, dt);
                 } else if (taskType == TaskType.DEADLINE) {
                     String deadline = tokens[3];
                     LocalDateTime dt = LocalDateTime.parse(deadline);
+
                     return new Deadline(taskName,isTaskDone, dt);
                 }
                 return new Task(taskName,taskType,null,isTaskDone);
@@ -61,13 +61,14 @@ public class TaskStorageManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return tasks;
     }
 
     public static void writeTasksToFile(List<Task> tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH));
-            writer.write("gnosis.main.model.Task Type,is gnosis.task completed?,gnosis.main.model.Task name,DateTime");
+            writer.write("Task Type,is task completed?,Task name,DateTime");
             writer.newLine();
 
             for (Task record: tasks) {
@@ -77,6 +78,7 @@ public class TaskStorageManager {
                         taskDone + DELIMITER +
                         record.getTaskName() + DELIMITER +
                         record.getDatetime().toString();
+
                 writer.write(oneLine);
                 writer.newLine();
             }

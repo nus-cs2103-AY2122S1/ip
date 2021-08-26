@@ -16,6 +16,7 @@ public class GnosisUI {
 
     public void listenForInput(GnosisController gc, Scanner sc) {
         this.isListeningInput = true;
+
         try {
             String command = sc.next();
             String input = sc.nextLine();
@@ -38,9 +39,13 @@ public class GnosisUI {
 
     public void displayGreetMessage(boolean isDataAvailable) {
         displayTopDivider();
+
         System.out.println(GnosisConstants.GREET_MESSAGE);
-        System.out.println(isDataAvailable ? GnosisConstants.DATA_TASK_FILE_FOUND_MESSAGE
+        System.out.println(
+                isDataAvailable
+                ? GnosisConstants.DATA_TASK_FILE_FOUND_MESSAGE
                 : GnosisConstants.DATA_TASK_FILE_NOT_FOUND_MESSAGE);
+
         displayBottomDivider();
     }
 

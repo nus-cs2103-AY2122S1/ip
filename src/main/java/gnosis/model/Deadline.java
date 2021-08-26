@@ -21,10 +21,10 @@ public class Deadline extends Task{
         super(task, TaskType.DEADLINE, deadline, isTaskDone);
     }
 
-
     @Override
     public String toString() {
         return super.toString()
-                + "(by:"+ this.getDatetime().format(DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mma"))  +")";
+                + "(by:" + this.getDatetime().format(
+                        DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mma")) + ")";
     }
 }
