@@ -17,7 +17,7 @@ public class Todos extends Task {
     }
 
     /**
-     * Return the String representation of the Task instance.
+     * Returns the String representation of the Task instance.
      *
      * @return A String representing the Task instance.
      */
@@ -30,14 +30,20 @@ public class Todos extends Task {
         }
     }
 
+    /**
+     * Returns a string representation of the Task instance optimised for
+     * saving in the file.
+     *
+     * @return A String representing the Task instance.
+     */
     public String toDataString() {
-        StringBuilder str = new StringBuilder();
+        StringBuilder string = new StringBuilder();
         if (isDone) {
-            str.append("T|1|").append(super.name);
-            return str.toString();
+            string.append("T|1|").append(super.name);
+            return string.toString();
         } else {
-            str.append("T|0|").append(super.name);
-            return str.toString();
+            string.append("T|0|").append(super.name);
+            return string.toString();
         }
     }
 }

@@ -17,7 +17,7 @@ public class Events extends Task {
      * Constructor for a Event instance.
      *
      * @param name A String describing the Task.
-     * @oaram time A String describing the duration of the Task.
+     * @oaram time A LocalDate instance describing the duration of the Task.
      */
     public Events(String name,LocalDate time) {
         super(name);
@@ -25,7 +25,7 @@ public class Events extends Task {
     }
 
     /**
-     * Return the String representation of the Task instance.
+     * Returns the String representation of the Task instance.
      *
      * @return A String representing the Task instance.
      */
@@ -39,14 +39,20 @@ public class Events extends Task {
         }
     }
 
+    /**
+     * Returns a string representation of the Task instance optimised for
+     * saving in the file.
+     *
+     * @return A String representing the Task instance.
+     */
     public String toDataString() {
-        StringBuilder str = new StringBuilder();
+        StringBuilder string = new StringBuilder();
         if (isDone) {
-            str.append("E|1|").append(super.name).append("|").append(time);
-            return str.toString();
+            string.append("E|1|").append(super.name).append("|").append(time);
+            return string.toString();
         } else {
-            str.append("E|0|").append(super.name).append("|").append(time);
-            return str.toString();
+            string.append("E|0|").append(super.name).append("|").append(time);
+            return string.toString();
         }
     }
 }

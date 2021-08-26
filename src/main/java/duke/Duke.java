@@ -25,11 +25,9 @@ public class Duke {
         TaskList taskList = new TaskList();
         Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH, taskList);
 
-
+        //activate storage and start reading user input
         storage.start();
-
         Scanner scan = new Scanner(System.in);
-
         Ui.printWelcomeMessage();
 
         while(true) {
@@ -152,6 +150,8 @@ public class Duke {
      *
      * @param taskType The type of task to be created.
      * @param array The array of strings used to create the task.
+     * @param storage The instance of Storage that will save the task in the file.
+     * @param taskList The instance of TaskList that will store the task.
      */
     public void createTask(Tasks taskType, String[] array, Storage storage, TaskList taskList) {
         //preliminary check if more than 1 string was entered

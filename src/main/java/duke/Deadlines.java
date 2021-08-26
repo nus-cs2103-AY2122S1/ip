@@ -25,7 +25,7 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Return the String representation of the Task instance.
+     * Returns the String representation of the Task instance.
      *
      * @return A String representing the Task instance.
      */
@@ -39,14 +39,20 @@ public class Deadlines extends Task {
         }
     }
 
+    /**
+     * Returns a string representation of the Task instance optimised for
+     * saving in the file.
+     *
+     * @return A String representing the Task instance.
+     */
     public String toDataString() {
-        StringBuilder str = new StringBuilder();
+        StringBuilder string = new StringBuilder();
         if (isDone) {
-            str.append("D|1|").append(super.name).append("|").append(deadline);
-            return str.toString();
+            string.append("D|1|").append(super.name).append("|").append(deadline);
+            return string.toString();
         } else {
-            str.append("D|0|").append(super.name).append("|").append(deadline);
-            return str.toString();
+            string.append("D|0|").append(super.name).append("|").append(deadline);
+            return string.toString();
         }
     }
 }
