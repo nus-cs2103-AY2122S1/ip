@@ -2,6 +2,9 @@ package task;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a task that a user can add to, delete from, find, or set to done in a task list.
+ */
 public abstract class Task {
     private final String taskName;
     private boolean done;

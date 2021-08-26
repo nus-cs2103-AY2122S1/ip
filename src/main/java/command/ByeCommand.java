@@ -3,6 +3,9 @@ package command;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Represents the command that closes the program.
+ */
 public class ByeCommand extends Command {
     private Ui ui;
     

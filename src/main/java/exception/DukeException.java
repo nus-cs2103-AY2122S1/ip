@@ -1,5 +1,8 @@
 package exception;
 
+/**
+ * Handles error messages whenever the Duke program throws an exception.
+ */
 public class DukeException extends Exception {
     private final String customMessage;
 

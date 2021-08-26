@@ -2,6 +2,9 @@ package command;
 
 import duke.TaskList;
 
+/**
+ * Represents the command that sets a task on the task list to done.
+ */
 public class DoneCommand extends Command {
     private final int index;
 

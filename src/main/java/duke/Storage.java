@@ -18,6 +18,9 @@ import java.time.LocalTime;
 
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from, saving tasks to and making changes to tasks on the hard disk.
+ */
 public class Storage {
     private final String filePath;
     private final File direc;

@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with user interactions, mostly printing messages to the console following user commands.
+ */
 public class Ui {
 
     /**

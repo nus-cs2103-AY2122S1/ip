@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task that takes place over a period of time. The event can take place between dates, on one date 
+ * between two times, or date-time to date-time.
+ */
 public class Event extends Task {
     private final LocalDate startDate;
     private LocalDate endDate;

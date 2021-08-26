@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the functionality of the Storage class.
+ */
 public class StorageTest {
     Storage testStorage = new Storage("data", "duke.txt");
 

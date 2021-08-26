@@ -2,6 +2,9 @@ package command;
 
 import duke.TaskList;
 
+/**
+ * Represents the command that lists all the tasks on the task list.
+ */
 public class ListCommand extends Command {
     
     public ListCommand() {

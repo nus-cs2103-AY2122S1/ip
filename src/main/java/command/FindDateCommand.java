@@ -4,6 +4,9 @@ import duke.TaskList;
 
 import java.time.LocalDate;
 
+/**
+ * Represents the command that finds tasks on the task list that take place on a specific date.
+ */
 public class FindDateCommand extends Command {
     private final LocalDate desiredDate;
 

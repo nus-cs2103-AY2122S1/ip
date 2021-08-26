@@ -2,6 +2,9 @@ package command;
 
 import duke.TaskList;
 
+/**
+ * Represents a command to be executed on the task list.
+ */
 public abstract class Command {
     private boolean isBye;
 

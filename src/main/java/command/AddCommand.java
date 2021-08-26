@@ -3,6 +3,9 @@ package command;
 import duke.TaskList;
 import task.Task;
 
+/**
+ * Represents the command that adds a task to the task list.
+ */
 public class AddCommand extends Command {
     private final Task newTask;
 

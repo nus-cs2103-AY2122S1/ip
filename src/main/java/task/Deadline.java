@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a task with a user-given deadline. The deadline can be a date, or a date and time.
+ */
 public class Deadline extends Task {
     private final LocalDate deadlineDate;
     private LocalTime deadlineTime;

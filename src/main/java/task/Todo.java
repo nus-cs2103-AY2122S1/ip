@@ -2,6 +2,9 @@ package task;
 
 import java.time.LocalDate;
 
+/**
+ * Represents a general task to be done. Does not have a deadline or event period.
+ */
 public class Todo extends Task {
 
     public Todo(String taskName) {

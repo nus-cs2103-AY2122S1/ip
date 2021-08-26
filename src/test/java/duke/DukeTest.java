@@ -8,6 +8,9 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests the functionality of the Duke class.
+ */
 public class DukeTest {
 
     /**

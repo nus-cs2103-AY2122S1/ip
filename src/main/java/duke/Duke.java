@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Represents the main Duke program. Running this class's main function executes the program.
+ */
 public class Duke {
     
     private final Ui ui;

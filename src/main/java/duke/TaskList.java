@@ -5,6 +5,9 @@ import task.Task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Contains the task list and handles logic related to the task list, eg. adding, deleting, setting tasks to done.
+ */
 public class TaskList {
     private final Storage storage;
     private final ArrayList<Task> list;

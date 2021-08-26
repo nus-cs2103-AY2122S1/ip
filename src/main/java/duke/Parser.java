@@ -19,6 +19,10 @@ import task.Todo;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Deals with making sense of the user command. Static method parse parses the user command and returns a Command 
+ * object.
+ */
 public class Parser {
     
     /**
