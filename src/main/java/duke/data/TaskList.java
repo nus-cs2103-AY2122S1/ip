@@ -1,7 +1,12 @@
 package duke.data;
 
-import duke.commands.*;
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.Task;
+import duke.commands.ToDo;
+
 import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 
 
@@ -21,11 +26,11 @@ public class TaskList {
      * @param str The string with a task description.
      * @return The created task.
      */
-    public static Task stringToTask(String str){
+    public static Task stringToTask(String str) {
         String[] taskData = str.split("\\|");
         boolean isDone = (taskData[1].equals("1")) ? true : false;
 
-        switch (taskData[0]){
+        switch (taskData[0]) {
         case "D":
             LocalDateTime by = LocalDateTime.parse(taskData[3]);
             Deadline deadline = new Deadline(taskData[2], isDone, by);
@@ -47,7 +52,7 @@ public class TaskList {
      *
      * @param task The task to be added.
      */
-    public void add(Task task){
+    public void add(Task task) {
         list.add(task);
     }
 
@@ -57,8 +62,8 @@ public class TaskList {
      * @param taskNum The task number.
      * @return The task deleted.
      */
-    public Task delete(int taskNum){
-        return list.remove(taskNum-1);
+    public Task delete(int taskNum) {
+        return list.remove(taskNum - 1);
     }
 
     /**
@@ -67,8 +72,8 @@ public class TaskList {
      * @param taskNum The task number.
      * @return The task that was marked as done.
      */
-    public Task mark(int taskNum){
-        Task task = list.get(taskNum-1);
+    public Task mark(int taskNum) {
+        Task task = list.get(taskNum - 1);
         task.markDone();
         return task;
     }
@@ -78,7 +83,7 @@ public class TaskList {
      *
      * @return The number of task in the list.
      */
-    public int size(){
+    public int size() {
         return list.size();
     }
 
@@ -87,7 +92,7 @@ public class TaskList {
      *
      * @return Returns an ArrayList consisting of all the Task stored.
      */
-    public ArrayList<Task> getList(){
+    public ArrayList<Task> getList() {
         return list;
     }
 
@@ -96,7 +101,7 @@ public class TaskList {
      *
      * @param list The task list to be stored to the current list.
      */
-    public void loadFromList(ArrayList<Task> list){
+    public void loadFromList(ArrayList<Task> list) {
         this.list = list;
     }
 }

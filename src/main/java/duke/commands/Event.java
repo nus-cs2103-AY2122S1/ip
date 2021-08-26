@@ -11,15 +11,15 @@ import java.time.format.DateTimeFormatter;
  * @author Zhi Bin
  * @version Duke Level 8
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDateTime when;
 
     /**
      * Constructor of an Event task.
      *
      * @param description The description of event.
-     * @param isDone Boolean representing if user went for the event.
-     * @param when The datetime of the event occurring.
+     * @param isDone      Boolean representing if user went for the event.
+     * @param when        The datetime of the event occurring.
      */
     public Event(String description, boolean isDone, LocalDateTime when) {
         super(description, isDone, 'E');
@@ -35,7 +35,7 @@ public class Event extends Task{
      */
     @Override
     public String checkStatus() {
-        return super.checkStatus() + " " + this.showWhen();
+        return super.checkStatus() + " " + showWhen();
     }
 
     /**
@@ -44,7 +44,7 @@ public class Event extends Task{
      *
      * @return The string containing the information on when the event is happening.
      */
-    public String showWhen(){
+    public String showWhen() {
         return String.format("(at: %s)", when.format(DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")));
     }
 
@@ -55,7 +55,7 @@ public class Event extends Task{
      * @return The string representation of the event task.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return super.toString() + String.format("|%s", when);
     }
 }

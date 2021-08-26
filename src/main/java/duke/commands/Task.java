@@ -11,17 +11,19 @@ package duke.commands;
 public abstract class Task {
     protected final String description;
     protected boolean isDone;
-    /** A one letter character to represent the type of task. */
+    /**
+     * A one letter character to represent the type of task.
+     */
     protected final char representation;
 
     /**
      * Constructor for a task.
      *
-     * @param description The description of the task.
-     * @param isDone Boolean representing if task is done.
+     * @param description    The description of the task.
+     * @param isDone         Boolean representing if task is done.
      * @param representation The type of task.
      */
-    public Task(String description, boolean isDone, char representation){
+    public Task(String description, boolean isDone, char representation) {
         this.description = description;
         this.isDone = isDone;
         this.representation = representation;
@@ -33,14 +35,14 @@ public abstract class Task {
      *
      * @return The string containing the information of the task.
      */
-    public String checkStatus(){
+    public String checkStatus() {
         return String.format("[%s][%s] %s", representation, (isDone ? 'X' : ' '), description);
     }
 
     /**
      * Marks this task as done.
      */
-    public void markDone(){
+    public void markDone() {
         isDone = true;
     }
 
@@ -51,7 +53,7 @@ public abstract class Task {
      * @return The string representation of the task.
      */
     @Override
-    public String toString(){
+    public String toString() {
         String str = String.format("%s|%c|%s", representation, (isDone ? '1' : '0'), description);
         return str;
     }

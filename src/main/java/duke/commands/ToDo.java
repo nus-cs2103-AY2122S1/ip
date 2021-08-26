@@ -7,15 +7,15 @@ package duke.commands;
  * @author Zhi Bin
  * @version Duke Level 8
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Constructor of a ToDo task.
      *
      * @param description The description of the task to be done.
-     * @param isDone Boolean representing if task is done.
+     * @param isDone      Boolean representing if task is done.
      */
-    public ToDo(String description, boolean isDone){
+    public ToDo(String description, boolean isDone) {
         super(description, isDone, 'T');
     }
 

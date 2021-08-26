@@ -6,8 +6,8 @@ package duke.data;
  * @author Zhi Bin
  * @version Duke Level 8
  */
-public class NoToDoDescriptionException extends DukeException{
-    public NoToDoDescriptionException(){
+public class NoToDoDescriptionException extends DukeException {
+    public NoToDoDescriptionException() {
         super();
     }
 
@@ -18,7 +18,7 @@ public class NoToDoDescriptionException extends DukeException{
      * @return The formatted error message.
      */
     @Override
-    public String getMessage(){
+    public String getMessage() {
         return super.formatMessage("Hello??? What you want me to do???");
     }
 }

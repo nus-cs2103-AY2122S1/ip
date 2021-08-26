@@ -1,8 +1,17 @@
 package duke.parser;
 
-import duke.commands.*;
-import duke.data.*;
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.Task;
+import duke.commands.ToDo;
+
+import duke.data.DukeException;
+import duke.data.NoToDoDescriptionException;
+import duke.data.TaskList;
+import duke.data.UnknownCommandException;
+
 import duke.storage.Storage;
+
 import duke.ui.Ui;
 
 import java.time.LocalDateTime;
@@ -20,7 +29,9 @@ public class Parser {
     private Storage storage;
     private Ui ui;
 
-    /** The list of commands that the parser can handle. */
+    /**
+     * The list of commands that the parser can handle.
+     */
     private enum Command {
         EXIT, LIST, DONE, TODO, DEADLINE, EVENT, UNKNOWN, DELETE
     }
@@ -29,11 +40,11 @@ public class Parser {
      * Creates a Parser that handles user input and turn it into respective
      * commands and execute the required functions that user demands.
      *
-     * @param list The TaskList handler that is handling the list of task.
+     * @param list    The TaskList handler that is handling the list of task.
      * @param storage The Storage handler that is in-charged of saving and loading files on local directory.
-     * @param ui The Ui handler that handles printing of output, if required.
+     * @param ui      The Ui handler that handles printing of output, if required.
      */
-    public Parser(TaskList list, Storage storage, Ui ui){
+    public Parser(TaskList list, Storage storage, Ui ui) {
         this.list = list;
         this.storage = storage;
         this.ui = ui;
@@ -42,16 +53,15 @@ public class Parser {
     /**
      * Processes the user inputs into commands that duke can understand.
      *
-     *
      * @param cmd The user inputs in the form of String.
      * @return Returns false if the command processed is to exit duke, else true.
      * @throws DukeException If some error occurred in the processing of user input,
      *                       like the user requires some function that duke does not support.
      */
     public boolean process(String cmd) throws DukeException {
-        switch (stringToCommand(cmd)){
+        switch (stringToCommand(cmd)) {
         case EXIT:
-            ui.farewellMsg();
+            ui.farewellMessage();
             return false;
 
         case LIST:
@@ -60,52 +70,54 @@ public class Parser {
 
         case DONE:
             int taskNumber = Integer.parseInt(cmd.split(" ")[1]);
-            ui.markDoneMsg(list.mark(taskNumber));
+            ui.markDoneMessage(list.mark(taskNumber));
             storage.save(list.getList());
             break;
 
         case EVENT:
-            String eventDescription = cmd.substring(cmd.indexOf(" ")+1, cmd.indexOf("/at")-1);
+            String eventDescription = cmd.substring(cmd.indexOf(" ") + 1, cmd.indexOf("/at") - 1);
             try {
-                LocalDateTime at = LocalDateTime.parse(cmd.substring(cmd.indexOf("at")+3),
+                LocalDateTime at = LocalDateTime.parse(cmd.substring(cmd.indexOf("at") + 3),
                         DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
                 Event event = new Event(eventDescription, false, at);
                 addTask(event);
-            } catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 System.out.println("Please enter Date and Time in YYYY-MM-DD HH:MM.");
             }
             break;
 
         case DEADLINE:
-            String deadlineDescription = cmd.substring(cmd.indexOf(" ")+1, cmd.indexOf("/by")-1);
+            String deadlineDescription = cmd.substring(cmd.indexOf(" ") + 1, cmd.indexOf("/by") - 1);
             try {
-                LocalDateTime by = LocalDateTime.parse(cmd.substring(cmd.indexOf("by")+3),
+                LocalDateTime by = LocalDateTime.parse(cmd.substring(cmd.indexOf("by") + 3),
                         DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
                 Deadline deadline = new Deadline(deadlineDescription, false, by);
                 addTask(deadline);
-            } catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 System.out.println("Please enter Date and Time in YYYY-MM-DD HH:MM.");
             }
             break;
 
         case TODO:
             int spaceIndex = cmd.indexOf(" ");
-            String toDoDescription = cmd.substring(spaceIndex+1);
-            if (toDoDescription.isBlank() || spaceIndex == -1){
+            String toDoDescription = cmd.substring(spaceIndex + 1);
+            if (toDoDescription.isBlank() || spaceIndex == -1) {
                 throw new NoToDoDescriptionException();
-            };
-            Task toDo = new ToDo(toDoDescription, false);
+            }
+            ;
+            ToDo toDo = new ToDo(toDoDescription, false);
             addTask(toDo);
             break;
 
         case DELETE:
-            int taskNum = Integer.parseInt(cmd.substring(cmd.indexOf(" ")+1));
+            int taskNum = Integer.parseInt(cmd.substring(cmd.indexOf(" ") + 1));
             Task task = list.delete(taskNum);
-            ui.deleteTaskMsg(list.size(), task);
+            ui.deleteTaskMessage(list.size(), task);
             storage.save(list.getList());
             break;
 
-        case UNKNOWN: default:
+        case UNKNOWN:
+        default:
             throw new UnknownCommandException();
         }
         return true;
@@ -118,9 +130,9 @@ public class Parser {
      * @param str User's ionput on what they want duke to do.
      * @return The respective command to call the methods.
      */
-    private Command stringToCommand(String str){
+    private Command stringToCommand(String str) {
         String cmdType = str.split(" ")[0];
-        switch (cmdType){
+        switch (cmdType) {
         case "list":
             return Command.LIST;
 
@@ -154,9 +166,9 @@ public class Parser {
      *
      * @param task The task to be added.
      */
-    private void addTask(Task task){
+    private void addTask(Task task) {
         list.add(task);
-        ui.addTaskMsg(list.size(), task);
+        ui.addTaskMessage(list.size(), task);
         storage.save(list.getList());
     }
 }

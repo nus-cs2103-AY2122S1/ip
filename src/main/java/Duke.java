@@ -13,14 +13,14 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    public Duke(){
-        this.ui = new Ui();
-        this.storage = new Storage();
-        this.taskList = new TaskList();
-        this.parser = new Parser(taskList, storage, ui);
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage();
+        taskList = new TaskList();
+        parser = new Parser(taskList, storage, ui);
     }
 
-    private void start(){
+    private void start() {
         isActive = true;
         taskList.loadFromList(storage.load());
 
@@ -28,11 +28,11 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
 
-        while (isActive){
+        while (isActive) {
             String command = sc.nextLine();
             try {
                 isActive = parser.process(command);
-            } catch (DukeException e){
+            } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
         }
