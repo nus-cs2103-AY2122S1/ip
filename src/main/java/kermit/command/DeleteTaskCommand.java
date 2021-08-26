@@ -6,11 +6,19 @@ import kermit.ToDo;
 import kermit.Storage;
 import kermit.tasks.Task;
 
+/**
+ * Command used to delete a task.
+ */
 public class DeleteTaskCommand extends Command {
     // zero-indexed
     int taskNum;
 
-    // taskNum is number in task list, one indexed
+    /**
+     * Delete task command constructor.
+     *
+     * @param taskNum Task number to delete (one-indexed).
+     * @throws KermitException if string is not a valid integer that cannot be parsed.
+     */
     public DeleteTaskCommand(String taskNum) throws KermitException {
         try {
             this.taskNum = Integer.parseInt(taskNum) - 1;
@@ -20,6 +28,15 @@ public class DeleteTaskCommand extends Command {
 
     }
 
+    /**
+     * Execute delete task command.
+     * Tries to delete task, notifies user and saves the task list.
+     *
+     * @param taskList Instance of task list used.
+     * @param ui       Instance of Ui used.
+     * @param storage  Instance of storage class used.
+     * @throws KermitException if error deleting task or saving task list.
+     */
     @Override
     public void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
         try {
@@ -31,6 +48,11 @@ public class DeleteTaskCommand extends Command {
         }
     }
 
+    /**
+     * Returns if command is the exit command.
+     *
+     * @return Always returns false.
+     */
     @Override
     public boolean isExit() {
         return false;
