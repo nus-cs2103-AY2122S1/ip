@@ -1,6 +1,15 @@
 package duke.task;
 
+/**
+ * Represents a task with a deadline.
+ */
 public class Deadline extends TimedTask {
+    /**
+     * Constructor for a task with a deadline.
+     *
+     * @param description The description of the task.
+     * @param deadline    The deadline of the task.
+     */
     public Deadline(String description, String deadline) {
         super(description, 'D', deadline);
     }

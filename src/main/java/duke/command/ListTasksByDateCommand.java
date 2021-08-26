@@ -7,9 +7,18 @@ import duke.task.LocalDateTimeOrString;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a command to list all tasks which match a specified date.
+ */
 public class ListTasksByDateCommand extends ListTasksCommand {
-    private LocalDateTimeOrString dateTimeOrString;
+    private final LocalDateTimeOrString dateTimeOrString;
 
+    /**
+     * Constructor for a command to list all tasks which match a specified date.
+     *
+     * @param input The string input containing the date to be matched.
+     * @throws MissingArgumentException if missing arguments are found.
+     */
     public ListTasksByDateCommand(String input) throws MissingArgumentException {
         String[] inputs = input.split("/date ", 2);
         Parser.checkMissingArguments(inputs, "Please specify a date & time.");

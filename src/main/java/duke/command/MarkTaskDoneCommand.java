@@ -4,9 +4,17 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a command to mark a task as done.
+ */
 public class MarkTaskDoneCommand extends Command {
-    private int indexToMarkDone;
+    private final int indexToMarkDone;
 
+    /**
+     * Constructor for a command to mark a task as done.
+     *
+     * @param indexToMarkDone The index of the task to be mark done.
+     */
     public MarkTaskDoneCommand(int indexToMarkDone) {
         this.indexToMarkDone = indexToMarkDone;
     }
