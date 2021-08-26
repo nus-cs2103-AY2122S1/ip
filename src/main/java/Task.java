@@ -2,9 +2,9 @@ public class Task {
     protected String description;
     protected boolean status;
 
-    private Task(String description) {
+    private Task(String description, boolean status) {
         this.description = description;
-        this.status = false;
+        this.status = status;
     }
 
     public String getStatusIcon() {
@@ -25,8 +25,8 @@ public class Task {
 
     protected static class Todo extends Task{
 
-        public Todo(String description) {
-            super(description);
+        public Todo(String description, boolean status) {
+            super(description, status);
         }
 
         @Override
@@ -34,13 +34,18 @@ public class Task {
             return "[T]";
         }
 
+        @Override
+        public String toString() {
+            return "todo" + " | " + (this.status ? "1" : "0") + " | " + this.description;
+        }
+
     }
 
     protected static class Deadline extends Task{
         private String by;
 
-        public Deadline(String description, String by) {
-            super(description);
+        public Deadline(String description, boolean status, String by) {
+            super(description, status);
             this.by = by;
         }
 
@@ -54,13 +59,18 @@ public class Task {
             return super.getDescription() + "(by:" + this.by + ")";
         }
 
+        @Override
+        public String toString() {
+            return "deadline" + " | " + (this.status ? "1" : "0") + " | " + this.description + " | " + this.by;
+        }
+
     }
 
     protected static class Event extends Task{
         private String at;
 
-        public Event(String description, String at) {
-            super(description);
+        public Event(String description, boolean status, String at) {
+            super(description, status);
             this.at = at;
         }
 
@@ -72,6 +82,11 @@ public class Task {
         @Override
         public String getDescription() {
             return super.getDescription() + "(at:" + this.at + ")";
+        }
+
+        @Override
+        public String toString() {
+            return "event" + " | " + (this.status ? "1" : "0") + " | " + this.description + " | " + this.at;
         }
 
     }
