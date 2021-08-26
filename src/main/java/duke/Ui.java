@@ -32,6 +32,7 @@ public class Ui {
     }
 
     public void listNumber(int num, Task temp) {
+
         System.out.println(INDENT_2 + (num + 1) + ". " + temp.toString());
     }
 
@@ -58,8 +59,7 @@ public class Ui {
 
     public void numberOfTasks(TaskList taskList) {
         String numberOfTasks = INDENT_1 + "Now you have " + taskList.size() +
-                (taskList.size() == 1 ? " task" : " tasks") + " in the list.\n"
-                        + DIVIDER;
+                (taskList.size() == 1 ? " task" : " tasks") + " in the list.\n";
         System.out.println(numberOfTasks);
     }
 

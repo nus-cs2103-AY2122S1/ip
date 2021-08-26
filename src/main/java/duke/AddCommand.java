@@ -42,10 +42,8 @@ public class AddCommand extends Command {
         }
 
         tasks.add(task);
-        ui.showLine();
         ui.addTask(task);
         ui.numberOfTasks(tasks);
-        ui.showLine();
         storage.appendToFile(storage.fileString(task));
     }
 }

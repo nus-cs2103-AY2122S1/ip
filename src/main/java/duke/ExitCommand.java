@@ -7,7 +7,7 @@ public class ExitCommand extends Command{
 
     @Override
     public boolean isBye() {
-        return false;
+        return true;
     }
 
     @Override
