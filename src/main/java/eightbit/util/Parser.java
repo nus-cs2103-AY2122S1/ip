@@ -28,6 +28,8 @@ public class Parser {
             return parseEventCommand(command);
         case DELETE:
             return parseDeleteCommand(command);
+        case FIND:
+            return parseFindCommand(command);
         case BYE:
             return parseByeCommand(command);
         default:
@@ -144,6 +146,15 @@ public class Parser {
         }
 
         return new DeleteCommand(index);
+    }
+
+    private static FindCommand parseFindCommand(String command) throws EightBitException {
+        if (command.split(" ").length < 2) { // missing search keyword
+            throw new EightBitException("OOPS!!! Please enter the search keywords after find.");
+        }
+
+        String keyword = command.substring(5);
+        return new FindCommand(keyword);
     }
 
     private static ByeCommand parseByeCommand(String command) {
