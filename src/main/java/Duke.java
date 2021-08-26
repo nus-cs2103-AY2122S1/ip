@@ -1,3 +1,4 @@
+import java.sql.Array;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -21,7 +22,7 @@ public class Duke {
             ", Save"
     };
     private static boolean canExit = false;
-    private static final ArrayList<Task> taskArrayList = new ArrayList<>();
+    private static ArrayList<Task> taskArrayList = new ArrayList<>();
     private static final String dukeFilePath = "./data/duke.txt";
 
     /**
@@ -76,11 +77,12 @@ public class Duke {
      * This method parses the string copied from duke.txt and converts them into task objects
      * into the taskArrayList/
      *
-     * @param
-     * @param
+     * @param toParse the string to parse
+     * @return a taskArrayList made up of tasks
      */
-    private static void parse() {
+    private static ArrayList<Task> parse(String toParse) {
 
+        return new ArrayList<>();
     }
 
     /**
@@ -108,7 +110,9 @@ public class Duke {
 
         // populating featuresCombined so each level has all elements of levels before it
         StringBuilder featuresCombined = new StringBuilder();
-        // copyFileContents(dukeFilePath, temp);
+        String toParse = "";
+        copyFileContents(dukeFilePath, toParse);
+        taskArrayList = parse(toParse);
         for (int count = 0; count <= lv; count++) {
             featuresCombined.append(features[count]);
         }
@@ -151,6 +155,9 @@ public class Duke {
                     switch (userInput) {
                     case "list":  // user inputs 'list', return all text stored
                         System.out.println(sandwich(listBeautify(taskArrayList)));
+                        break;
+                    case "tal":  // user inputs 'list', return taskArrayList as it is
+                        System.out.println(taskArrayList);
                         break;
                     case "done":  // first input is done, check second input for integer
                         if (scanner.hasNextInt()) {
