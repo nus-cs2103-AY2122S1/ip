@@ -8,6 +8,7 @@ import duke.command.Exit;
 import duke.command.Find;
 import duke.command.List;
 import duke.data.DukeException;
+import duke.data.InvalidDateTimeException;
 import duke.data.NoToDoDescriptionException;
 import duke.data.UnknownCommandException;
 import duke.storage.Storage;
@@ -82,7 +83,7 @@ public class Parser {
                         DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
                 return new Add(ui, storage, list, new Deadline(deadlineDescription, false, by));
             } catch (DateTimeParseException e) {
-                System.out.println("Please enter Date and Time in YYYY-MM-DD HH:MM.");
+                throw new InvalidDateTimeException();
             }
 
         case "event":
@@ -92,7 +93,7 @@ public class Parser {
                         DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
                 return new Add(ui, storage, list, new Event(eventDescription, false, at));
             } catch (DateTimeParseException e) {
-                System.out.println("Please enter Date and Time in YYYY-MM-DD HH:MM.");
+                throw new InvalidDateTimeException();
             }
 
         case "delete":
