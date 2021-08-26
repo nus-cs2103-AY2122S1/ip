@@ -1,7 +1,7 @@
-package task;
+package gnosis.task;
 
 
-import model.*;
+import gnosis.model.*;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -67,7 +67,7 @@ public class TaskStorageManager {
     public static void writeTasksToFile(List<Task> tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(Paths.get(FILE_PATH));
-            writer.write("model.Task Type,is task completed?,model.Task name,DateTime");
+            writer.write("gnosis.main.model.Task Type,is gnosis.task completed?,gnosis.main.model.Task name,DateTime");
             writer.newLine();
 
             for (Task record: tasks) {

@@ -1,4 +1,4 @@
-package model;
+package gnosis.model;
 
 public enum TaskType {
     TODO, DEADLINE, EVENT;

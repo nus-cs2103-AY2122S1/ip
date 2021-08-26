@@ -1,8 +1,8 @@
-package model;
+package gnosis.model;
 
 /**
  * This enum specifies the different commands
- * gnosis.Gnosis presents.
+ * gnosis.main.Gnosis presents.
  *
  * @author Pawandeep Singh
  * @version A-Enums

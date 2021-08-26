@@ -1,10 +1,10 @@
-package model;
+package gnosis.model;
 
 import java.time.LocalDateTime;
 
 /**
  *
- * This class encapsulates a todo task.
+ * This class encapsulates a todo gnosis.task.
  *
  * @author Pawandeep Singh
  * @version Level-4

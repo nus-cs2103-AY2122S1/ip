@@ -1,11 +1,11 @@
-package model;
+package gnosis.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * This class encapsulates a
- * deadline task with a specified deadline.
+ * deadline gnosis.task with a specified deadline.
  *
  * @author Pawandeep Singh
  * @version Level-4

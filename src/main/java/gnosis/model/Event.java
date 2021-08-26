@@ -1,11 +1,11 @@
-package model;
+package gnosis.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * This class encapsulates a
- * event task with a specified schedule.
+ * event gnosis.task with a specified schedule.
  *
  * @author Pawandeep Singh
  * @version Level-4

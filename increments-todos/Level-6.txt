@@ -16,7 +16,7 @@ list
 
 delete 3
     ____________________________________________________________
-     Noted. I've removed this task:
+     Noted. I've removed this gnosis.task:
        [E][ ] project meeting (at: Aug 6th 2-4pm)
      Now you have 4 tasks in the list.
     ____________________________________________________________
@@ -27,13 +27,13 @@ Extension: A-Collections
 A-Collections
 ↳ Use Java Collections classes
 
-Use Java Collections classes for storing data. For example, you can use an ArrayList<model.task> to store the tasks.
+Use Java Collections classes for storing data. For example, you can use an ArrayList<gnosis.main.model.gnosis.task> to store the tasks.
 
 Tasks to achieve level-6:
 
-1. gnosis.Gnosis Class: - Done
+1. Gnosis Class: - Done
     - Add "delete" command:
     - new deleteTask method
-        - retrieve task to display before removing from list
-    - add exception for task index out of bounds for delete command
+        - retrieve gnosis.task to display before removing from list
+    - add exception for gnosis.task index out of bounds for delete command
 

@@ -1,7 +1,4 @@
-package util;
-
-import javax.swing.plaf.PanelUI;
-import java.security.PublicKey;
+package gnosis.util;
 
 /**
  * This Class represents all public String constants
@@ -39,7 +36,7 @@ public class GnosisConstants {
             "use /at to denote event schedule";
 
     public static final String TASK_INDEX_OUT_OF_BOUNDS_EXCEPT_MESSAGE = "You can only use Task index" +
-            " from the task number from the list command";
+            " from the gnosis.task number from the list command";
 
     public static final String DONE_COMMAND_NUM_INPUT_EXCEPT_MESSAGE = "Please enter only numbers after done command";
 

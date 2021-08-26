@@ -1,9 +1,11 @@
-package gnosis;
+package gnosis.controller;
 
-import task.TaskCommandManager;
-import task.TaskStorageManager;
-import model.*;
-import util.GnosisConstants;
+import gnosis.model.*;
+import gnosis.ui.GnosisUI;
+import gnosis.task.TaskCommandManager;
+import gnosis.task.TaskStorageManager;
+import gnosis.util.GnosisConstants;
+import gnosis.util.GnosisException;
 
 import java.util.Scanner;
 
@@ -38,7 +40,7 @@ public class GnosisController {
             view.displayByeMessage();
             view.stopListeningInput();
         } else {
-            // default is only task Manager, but future can include cases of other gnosis feautres, e.g phonebook
+            // default is only gnosis.task Manager, but future can include cases of other gnosis feautres, e.g phonebook
             this.executeTaskCommand(gc, commandInput);
         }
     }
@@ -61,7 +63,7 @@ public class GnosisController {
                 view.displayAllTasksMessage(taskCommandManager.getTasks());
                 break;
             case DONE:
-                // only if "done" command is call, we retrieve task index from user
+                // only if "done" command is call, we retrieve gnosis.task index from user
                 int taskIndex = Integer.parseInt(taskInput.trim()) - 1;
                 view.displayMarkedTaskMessage(taskCommandManager.markTaskAsDone(taskIndex), taskIndex + 1);
                 break;

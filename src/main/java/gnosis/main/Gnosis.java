@@ -1,13 +1,16 @@
-package gnosis;
+package gnosis.main;
+import gnosis.controller.GnosisController;
+import gnosis.ui.GnosisUI;
+
 import java.util.Scanner;
 /**
  *
- * gnosis.Gnosis class is the main programme to execute chat-bot assistant.
- * Commands gnosis.Gnosis can provide a task tracker to user:
+ * gnosis.main.Gnosis class is the gnosis.main programme to execute chat-bot assistant.
+ * Commands gnosis.main.Gnosis can provide a gnosis.task tracker to user:
  * "list" - displays all tasks
- * "done (task number)" - marks specified task as done
+ * "done (gnosis.task number)" - marks specified gnosis.task as done
  * "bye" - exits program
- * default - adds user input as task
+ * default - adds user input as gnosis.task
  *
  * @author Pawandeep Singh
  * @version A-Enums

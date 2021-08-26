@@ -1,5 +1,5 @@
 -- 	============	 --
-Welcome, I am gnosis.Gnosis.
+Welcome, I am Gnosis.
 The spark to meet your needs.
 How can I assist you ?
 -- 	============	 --
@@ -16,13 +16,13 @@ Listing all tasks in your list:
 -- 	============	 --
 
 -- 	============	 --
-model.Deadline added:
+Deadline added:
 [D][ ]  buy book  (by:  tuesday)
 Total tasks in the list: 2
 -- 	============	 --
 
 -- 	============	 --
-model.Event added:
+Event added:
 [E][ ]  cs2103  (at:  Friday 4-6pm)
 Total tasks in the list: 3
 -- 	============	 --
@@ -34,12 +34,12 @@ Total tasks in the list: 4
 -- 	============	 --
 
 -- 	============	 --
-task 1 marked as done:
+gnosis.task 1 marked as done:
 	[T][X]  read book
 -- 	============	 --
 
 -- 	============	 --
-task 3 marked as done:
+gnosis.task 3 marked as done:
 	[E][X]  cs2103  (at:  Friday 4-6pm)
 -- 	============	 --
 

@@ -1,7 +1,7 @@
 Level 8. Dates and Times
 Teach Duke how to understand dates and times. For example, if the command is deadline return book /by 2/12/2019 1800, Duke should understand 2/12/2019 1800 as 2nd of December 2019, 6pm, instead of treating it as just a String.
 
-Minimal: Store deadline dates as a java.time.LocalDate in your task objects.
+Minimal: Store deadline dates as a java.time.LocalDate in your gnosis.task objects.
 Accept dates in a format such as yyyy-mm-dd format (e.g., 2019-10-15) and print in a different format such as MMM dd yyyy e.g., (Oct 15 2019).
 
 
@@ -18,6 +18,6 @@ What I need to do to achieve level-8:
     -> ERROR MESSAGE: "ERROR, ENTER DATE FORMAT AS SUCH <day>/<month>/<year> <24HR format time>, e.g: 14/08/2021 1600"
 
 -- provide command for user to search for event/deadline on a specified date: - Coming soon
-    -> e,g user input: find task /on <date>
+    -> e,g user input: find gnosis.task /on <date>
     -> handle error -> for wrong format
-    -> find task /on <date>
+    -> find gnosis.task /on <date>

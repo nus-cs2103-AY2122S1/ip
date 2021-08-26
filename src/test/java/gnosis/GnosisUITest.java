@@ -1,8 +1,7 @@
 package gnosis;
 
 import org.junit.jupiter.api.Test;
-
-import java.util.Scanner;
+import gnosis.ui.GnosisUI;
 
 import static org.junit.jupiter.api.Assertions.*;
 
