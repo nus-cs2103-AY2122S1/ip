@@ -6,12 +6,22 @@ import task.event.Event;
 import task.Task;
 import task.Todo.Todo;
 
+/**
+ * Handle flow of user command
+ */
 public class Parser {
 
     public Parser() {
 
     }
 
+    /**
+     * Read the user inputs and respond accordingly
+     *
+     * @param ui Ui to scan in lines
+     * @param next_line the next line being read
+     * @param task TaskList the task used to access ArrayList of task n done_check
+     */
     public void read_command(Ui ui, String next_line, TaskList task) {
         int first_time = 0;
         while (true) {
@@ -27,7 +37,7 @@ public class Parser {
 
             // outputting the list
             else if (next_line.equals("list")) {
-                task.output_list(next_line);
+                task.output_list();
                 first_time = 1;
             }
 
@@ -71,6 +81,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Prints bye statement when user quit the bot
+     */
     public void bye() {
         System.out.println("Bye bye! Hope to see you again soon!");
     }

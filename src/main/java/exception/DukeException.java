@@ -1,5 +1,9 @@
 package exception;
 
+/**
+ * Template for an exception: EmptyDescroption and RandomDescription
+ * Allows users to output error message
+ */
 public class DukeException extends Exception {
     private String message;
 

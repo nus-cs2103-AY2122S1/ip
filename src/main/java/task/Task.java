@@ -1,8 +1,9 @@
 package task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+/**
+ * Template for a task: event, deadline, todo
+ * Allows users to get_type and get_task
+ */
 
 public class Task {
     public String type;

@@ -6,6 +6,9 @@ import exception.RandomDescription;
 
 import java.util.Scanner;
 
+/**
+ * Handle errors and scanning for interaction with user
+ */
 public class Ui {
     Scanner scan;
 
@@ -23,6 +26,12 @@ public class Ui {
         return next_line;
     }
 
+    /**
+     * Check whether the user input is a empty description
+     * if yes, print out error statement
+     *
+     * @param next_line String input to be checked
+     */
     public void Empty_Description_exception(String next_line) {
         int caught = 0;
 
@@ -56,6 +65,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Check whether the user input is a random unrelated description
+     * if yes, print out error statement
+     *
+     * @param next_line String input to be checked
+     */
     public void Random_Description_exception(String next_line) {
         while (true) {
             try {

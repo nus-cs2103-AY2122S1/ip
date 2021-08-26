@@ -2,12 +2,22 @@ package task.Todo;
 
 import task.Task;
 
+/**
+ * Represents a todo under Task class
+ * Allows users to get_type and get_task
+ */
 public class Todo extends Task {
     public String type;
     public String date_time;
     public String task;
 
 
+    /**
+     * Constructor to create a todo task for newly inputed messages
+     * Sieve out the task and date separately
+     *
+     * @param message String the user input message
+     */
     public Todo (String message) {
         super(message);
         this.set_date_time();
@@ -15,6 +25,13 @@ public class Todo extends Task {
         this.set_type();
     }
 
+    /**
+     * Constructor to create a todo task for Duke.txt lines
+     * Sieve out the task and date separately
+     *
+     * @param message String the lines in Duke.txt file
+     * @param b Boolean to differentiate between 2 constructors, always true
+     */
     public Todo (String message, Boolean b) {
         super(message);
         this.set_date_time();
@@ -32,6 +49,11 @@ public class Todo extends Task {
         this.type = "T";
     }
 
+    /**
+     * Sieve out the task + date portion of the message
+     * Only for newly inputed messages
+     *
+     */
     @Override
     public void set_task() {
         int start_index = 0;
@@ -44,6 +66,11 @@ public class Todo extends Task {
         this.task = " " + message.substring(start_index,this.message.length());
     }
 
+    /**
+     * Sieve out the task + date portion of the message
+     * Only for lines in Duke.txt
+     *
+     */
     @Override
     public void set_task2() {
         int start_index = 0;

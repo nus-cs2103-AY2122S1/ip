@@ -14,6 +14,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handle all hard disk related operations
+ * Writes and Loads file
+ */
 public class Storage {
     private File filepath;
 
@@ -21,6 +25,14 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Read the task list in Duke.txt
+     * Input the task into the ArrayList list and update done_check;
+     *
+     * @param done_check ArrayList for checking whether task is completed.
+     * @param list ArrayList for the list of tasks.
+     * @param file File Duke.txt file.
+     */
     public void load_text_file(ArrayList done_check, ArrayList list, File file) {
         String added = "";
         try {
@@ -55,6 +67,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Check whether the relevant files for ./data/Duke.txt is created
+     * If not, create the folders
+     */
     public void check_file_creation() {
         try {
             this.check_file();
@@ -78,6 +94,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Write the task list into Duke.txt
+     *
+     * @param list ArrayList<Task> list of tasks
+     * @param done_check ArrayList<String> to keep track of completion of tasks
+     */
     public void writing_to_file(ArrayList<Task> list, ArrayList<String> done_check) {
         try {
             String task = "Do these soon!!" + "\n";

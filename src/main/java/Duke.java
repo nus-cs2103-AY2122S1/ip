@@ -5,7 +5,9 @@ import main.Ui;
 
 import java.io.File;
 
-
+/**
+ * Contains main and supports the whole bot system
+ */
 public class Duke{
     Ui ui;
     Storage storage;

@@ -2,12 +2,22 @@ package task.event;
 
 import task.Task;
 
+
+/**
+ * Represents an event under Task class
+ * Allows users to get_type and get_task
+ */
 public class Event extends Task {
     public String type;
     public String date_time = "";
     public String task;
 
-
+    /**
+     * Constructor to create an event task for newly inputed messages
+     * Sieve out the task and date separately
+     *
+     * @param message String the user input message
+     */
     public Event (String message) {
         super(message);
         this.set_date_time();
@@ -16,7 +26,13 @@ public class Event extends Task {
     }
 
 
-    //constructor for Duke.txt
+    /**
+     * Constructor to create an event task for Duke.txt lines
+     * Sieve out the task and date separately
+     *
+     * @param message String the lines in Duke.txt file
+     * @param b Boolean to differentiate between 2 constructors, always true
+     */
     public Event (String message, boolean b) {
         super(message);
         this.set_date_time2();
@@ -29,6 +45,11 @@ public class Event extends Task {
         return this.type;
     }
 
+    /**
+     * Sieve out the task + date portion of the message
+     * Only for newly inputed messages
+     *
+     */
     @Override
     public void set_task() {
         int start_index = 0;
@@ -48,7 +69,11 @@ public class Event extends Task {
         this.task = " " + message.substring(start_index,end_index) + this.getDate_time();
     }
 
-    //set task for Duke.txt
+    /**
+     * Sieve out the task + date portion of the message
+     * Only for Duke.txt lines
+     *
+     */
     @Override
     public void set_task2() {
         int start_index = 0;
@@ -79,6 +104,11 @@ public class Event extends Task {
         this.type = "E";
     }
 
+    /**
+     * Sieve out the date portion of the message
+     * Only for newly inputed message
+     *
+     */
     @Override
     public void set_date_time() {
         int start_index = 0;
@@ -91,6 +121,11 @@ public class Event extends Task {
         this.date_time = " (at " + message.substring(start_index,message.length()) + ")";
     }
 
+    /**
+     * Sieve out the date portion of the message
+     * Only for Duke.txt lines
+     *
+     */
     public void set_date_time2() {
         int start_index = 0;
         for (int i = 0; i < this.message.length(); i++) {

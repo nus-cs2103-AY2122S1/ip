@@ -5,6 +5,10 @@ import task.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline under Task class with date-time format
+ * Allows users to get_type and get_task
+ */
 public class Deadline extends Task {
     public String type;
     public String task = "";
@@ -12,6 +16,12 @@ public class Deadline extends Task {
     public String date_time2;
 
 
+    /**
+     * Constructor to create a deadline task for newly inputed messages
+     * Sieve out the task and date separately
+     *
+     * @param message String the user input message
+     */
     public Deadline (String message) {
         super(message);
         this.set_date_time();
@@ -19,7 +29,13 @@ public class Deadline extends Task {
         this.set_type();
     }
 
-
+    /**
+     * Constructor to create a deadline task for Duke.txt lines
+     * Sieve out the task and date separately
+     *
+     * @param message String the lines in Duke.txt file
+     * @param b Boolean to differentiate between 2 constructors, always true
+     */
     public Deadline (String message, boolean b) {
         super(message);
         this.set_date_time2();
@@ -37,6 +53,11 @@ public class Deadline extends Task {
         this.type = "D";
     }
 
+    /**
+     * Sieve out the task + date portion of the message
+     * Only for newly inputed messages
+     *
+     */
     @Override
     public void set_task() {
         int start_index = 0;
@@ -56,6 +77,11 @@ public class Deadline extends Task {
         this.task = message.substring(start_index,end_index) + " (by " + this.get_date_time() + ")";
     }
 
+    /**
+     * Sieve out the task + date portion of the message
+     * Only for lines in Duke.txt
+     *
+     */
     @Override
     public void set_task2() {
         int start_index = 0;
@@ -80,6 +106,11 @@ public class Deadline extends Task {
         return this.task;
     }
 
+    /**
+     * Sieve out the date portion of the message as LocalDate object
+     * Only for newly inputed message
+     *
+     */
     @Override
     public void set_date_time() {
         int start_index = 0;
@@ -93,11 +124,23 @@ public class Deadline extends Task {
         this.date_time = LocalDate.parse(date_timing);
     }
 
+    /**
+     * Sieve out the date portion of the message
+     * Only for Duke.txt messages
+     *
+     */
     public void set_date_time2() {
         int length = this.message.length();
         this.date_time2 = "(" + message.substring(length - 15);
     }
 
+    /**
+     * Print out the LocalDate object as month date year format
+     * Only for newly inputed messages
+     *
+     * @return date string
+     *
+     */
     public String get_date_time() {
         return this.date_time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }

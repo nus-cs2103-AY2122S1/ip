@@ -3,6 +3,10 @@ import task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Handle all list related operations: Add and Delete
+ * Handle list and done_check
+ */
 public class TaskList {
     ArrayList<Task> list;
     ArrayList<String> done_check;
@@ -21,7 +25,10 @@ public class TaskList {
         return this.done_check;
     }
 
-    public void output_list(String next_line) {
+    /**
+     * output the current task list when user calls "list"
+     */
+    public void output_list() {
         int count = 1;
         System.out.println("Do these soon:" + "\n");
         for (int i = 0; i < this.list.size(); i++) {
