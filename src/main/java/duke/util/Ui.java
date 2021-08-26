@@ -1,3 +1,5 @@
+package duke.util;
+
 public class Speech {
 
     private final boolean testing;
@@ -84,7 +86,7 @@ public class Speech {
 
 
     /**
-     * Duke Speech Template
+     * Duke duke.util.Speech Template
      * @param in takes in a string array and cycle through and printing msg
      */
     public void speak(String[] in) {

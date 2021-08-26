@@ -1,6 +1,0 @@
-          | Hello! I'm Duke!                                |
-          | What can I do for you                           |
-
-          | InvalidInputException: User input an invalid action.|
-          | Please try again                                    |
-

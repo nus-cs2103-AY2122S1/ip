@@ -1,3 +1,13 @@
+package duke.util;
+
+import duke.exceptions.InvalidDeleteFormatException;
+import duke.exceptions.InvalidDoneFormatException;
+import duke.exceptions.InvalidInputException;
+import duke.taskTypes.Deadline;
+import duke.taskTypes.Event;
+import duke.taskTypes.Task;
+import duke.taskTypes.Todo;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -92,7 +102,7 @@ public class Storage {
      * @param input tajes in the input from user
      * @return String that contains the success msg
      */
-    public String event (String input) throws InvalidInputException  {
+    public String event (String input) throws InvalidInputException {
         Event event = new Event(input);
         mapper.put(event.getDescription(), event);
         return event.toString();

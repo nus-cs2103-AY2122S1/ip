@@ -1,9 +1,13 @@
-public class Brain {
+package duke.util;
+
+import duke.exceptions.*;
+
+public class Parser {
 
     private final Storage storage;
     private final Speech speech;
 
-    public Brain(Storage storage, Speech speech, Writer writer){
+    public Parser(Storage storage, Speech speech, Writer writer){
         this.storage = storage;
         this.speech = speech;
     }
