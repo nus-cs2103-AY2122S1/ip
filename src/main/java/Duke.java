@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringJoiner;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Duke {
 
@@ -8,6 +11,8 @@ public class Duke {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        File taskFile = loadTasksFromFile();
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -79,6 +84,7 @@ public class Duke {
                         }
 
                         Task removedTask = taskList.get(delete);
+                        deleteTaskFromFile(delete);
                         taskList.remove(delete);
 
                         System.out.printf("I've removed this task:\n%s\n", removedTask.toString());
@@ -94,6 +100,7 @@ public class Duke {
     }
 
     private static void addTask(Task newTask) {
+        saveTaskToFile(newTask);
         System.out.printf("Got it, I've added this task:\n %s\n", newTask.toString());
         System.out.printf("Now you have %d tasks in your list.\n", taskList.size());
     }
@@ -141,4 +148,80 @@ public class Duke {
             throw new DukeException("Please enter a number after the command.");
         }
     }
+
+    private static File loadTasksFromFile() {
+        try {
+            File taskFile = new File("./data/tasks.txt");
+            if (!taskFile.createNewFile()) {
+                Scanner fileReader = new Scanner(taskFile);
+                while (fileReader.hasNextLine()) {
+                    String data = fileReader.nextLine();
+                    taskList.add(dataToTask(data));
+                }
+            }
+            return taskFile;
+        } catch (IOException e) {
+            System.out.println("An error occurred with File handling.");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static Task dataToTask(String str) {
+        String[] taskArr = str.split(",");
+        String taskType = taskArr[0];
+        boolean taskDone = taskArr[1].equals("1");
+        String taskDescription = taskArr[2];
+        Task res = null;
+        switch (taskType) {
+            case("T"):
+                res = new Todo(taskDescription, taskDone);
+                break;
+            case("D"):
+                res = new Deadline(taskDescription, taskDone);
+                break;
+            case("E"):
+                res = new Event(taskDescription, taskDone);
+                break;
+        }
+        return res;
+    }
+
+    private static void saveTaskToFile(Task task) {
+        saveStringToFile(task.toFileData() + "\n", "./data/tasks.txt");
+    }
+
+    private static void saveStringToFile(String str, String filePath) {
+        try {
+            FileWriter fileWriter = new FileWriter(filePath, true);
+            fileWriter.write(str);
+            fileWriter.close();
+        }
+        catch (IOException e) {
+            System.out.println("An error occurred with file handling.");
+        }
+    }
+
+    private static void deleteTaskFromFile(int taskIndex) {
+        try {
+            StringBuilder newTasks = new StringBuilder();
+            File taskFile = new File("./data/tasks.txt");
+            Scanner fileReader = new Scanner(taskFile);
+            int index = 0;
+            while (fileReader.hasNextLine()) {
+                if (index != taskIndex) {
+                    newTasks.append(fileReader.nextLine()).append("\n");
+                } else {
+                    fileReader.nextLine();
+                }
+                index += 1;
+            }
+            FileWriter fileWriter = new FileWriter("./data/tasks.txt", false);
+            fileWriter.write(String.valueOf(newTasks));
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred with file handling.");
+        }
+    }
+
 }
