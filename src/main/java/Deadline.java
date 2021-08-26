@@ -17,6 +17,11 @@ public class Deadline extends Task {
         this.by = deadline;
     }
 
+    @Override
+    public String getTime() {
+        return this.by;
+    }
+
     /**
      * Returns string of Deadline (Task).
      * @return string of Deadline.

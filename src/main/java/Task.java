@@ -4,17 +4,21 @@
  * @author Ruth Poh (Lab 10H)
  */
 public class Task {
-    protected String taskstr;
+    protected String taskString;
     protected boolean isDone;
 
     /**
      * Constructor to initialize Deadline.
      *
-     * @param taskstr Task.
+     * @param taskString Task.
      */
-    public Task(String taskstr) {
-        this.taskstr = taskstr;
+    public Task(String taskString) {
+        this.taskString = taskString;
         this.isDone = false;
+    }
+
+    public String getTime() {
+        return "";
     }
 
     /**
@@ -23,8 +27,14 @@ public class Task {
      * @return string of task.
      */
     public String toString() {
-        return "[" + (isDone ? "X" : " ") + "] " + taskstr;
+        return "[" + (isDone ? "X" : " ") + "] " + taskString;
     }
+
+    public String getTaskStr() {
+        return taskString;
+    }
+
+
 
     /**
      * Returns string 'X' if task is done, ' ' if task is not.
