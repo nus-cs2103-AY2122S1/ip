@@ -20,7 +20,17 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a parser which parses the input given by users of Duke.
+ */
 public class Parser {
+    /**
+     * Checks if dateString is in a valid date form depicted by dateFormatter.
+     *
+     * @param dateString String which contains a date.
+     * @param dateFormatter Format which you want to check if dateString is in.
+     * @return true if dateString is in valid form, else otherwise.
+     */
     public static boolean isValidDate(String dateString, DateTimeFormatter dateFormatter) {
         try {
             LocalDate.parse(dateString, dateFormatter);
@@ -30,6 +40,13 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Checks if timeString is in a valid date form depicted by timeFormatter.
+     *
+     * @param timeString String which contains a time.
+     * @param timeFormatter Format which you want to check if timeString is in.
+     * @return true if timeString is in valid form, else otherwise.
+     */
     public static boolean isValidTime(String timeString, DateTimeFormatter timeFormatter) {
         try {
             LocalTime.parse(timeString, timeFormatter);
@@ -39,11 +56,22 @@ public class Parser {
         return true;
     }
 
-
+    /**
+     * Checks if input is a remove command.
+     *
+     * @param input Input which is being checked.
+     * @return true if input is a remove command.
+     */
     public static boolean isRemove(String input){
         return input.startsWith("remove ");
     }
 
+    /**
+     * Checks if input is a done command.
+     *
+     * @param input Input which is being checked.
+     * @return true if input is a done command.
+     */
     public static boolean isDone(String input) {
 //        String[] splited = phrase.split(" ");
 ////        System.out.println(splited);
@@ -55,6 +83,14 @@ public class Parser {
         return input.startsWith("done ");
     }
 
+    /**
+     * Splits string which contains a description and possibly a deadline of Task Objects.
+     *
+     * @param input Input which contains a description and possibly a deadline.
+     * @param type Type of Task information the input contains.
+     * @return String[] containing the description at index 0 and the deadline (if any) at index 1.
+     * @throws DukeException If no deadline or description for respective Task objects.
+     */
     public static String[] splitInput(String input, String type) throws DukeException {
         if (type.equals("deadline") || type.equals("event")) {
             String[] str = input.split("/");
@@ -111,7 +147,15 @@ public class Parser {
         }
     }
 
-    //parses the given userInput and returns a string for the UI to show the user
+    /**
+     * Parses the input string and returns a command for Duke to execute.
+     *
+     * @param userInput Input which needs to be parsed.
+     * @param ui Ui object from Duke class.
+     * @param taskList TaskList object from Duke class.
+     * @return Command to execute.
+     * @throws DukeException If incorrect values are passed for remove or done commands.
+     */
     public static Command parse(String userInput, Ui ui, TaskList taskList) throws DukeException{
         if (userInput.equals("list")) {
             return new ListCommand();

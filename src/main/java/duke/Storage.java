@@ -12,16 +12,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Stores and retrieves information of the tasklist for Duke.
+ */
 public class Storage {
     private ArrayList<Task> toStore;
     private final String FILEPATH;
     private final String DIRPATH;
 
+    /**
+     * Constructor for Storage.
+     */
     public Storage() {
         this.FILEPATH = "data" + File.separator + "history.txt";
         this.DIRPATH = "data";
     }
 
+    /**
+     * Initialises the initial ArrayList for Duke.
+     *
+     * @return ArrayList to be passed into TaskList for Duke.
+     */
     public ArrayList<Task> initialise() {
         //read from the data/history.text and return an ArrayList of Tasks
         File file = new File(FILEPATH);
@@ -63,6 +74,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the taskList given by Duke into user's computer.
+     *
+     * @param list taskList which is being saved into user's computer.
+     */
     public void saveFile(TaskList list) {
         try {
             FileWriter fw = new FileWriter(FILEPATH);
