@@ -1,13 +1,14 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.BadInputFormatException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidDateException;
 import duke.exception.UnknownTaskTypeException;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class AddCommandTest {
