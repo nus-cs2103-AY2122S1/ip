@@ -4,6 +4,9 @@ import duke.exceptions.InvalidNumberInputException;
 import duke.tasks.Task;
 import java.util.ArrayList;
 
+/**
+ * The TaskList is an abstraction for a list of tasks
+ */
 public class TaskList {
 
     private final ArrayList<Task> taskList;
@@ -20,6 +23,9 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Prints the list of tasks
+     */
     public void print() {
         boolean allTasksDone = true;
         for(int i = 0; i < this.size(); i++) {
@@ -54,6 +60,12 @@ public class TaskList {
         return taskList.isEmpty();
     }
 
+    /**
+     * Checks if a list of tasks contains the given task
+     *
+     * @param task task to be checked
+     * @return boolean value of whether the task is contained in the list
+     */
     public boolean containsTask(Task task) {
         boolean ans = false;
         for (Task value : taskList) {

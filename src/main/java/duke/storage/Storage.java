@@ -8,15 +8,29 @@ import duke.tasklist.TaskList;
 import java.io.*;
 import java.util.*;
 
+/**
+ * The Storage Class handles the reading and writing of tasks onto the disk
+ */
 public class Storage {
     private final String filePath;
     private final String folderPath;
 
+    /**
+     * public constructor to initialise the filepath and folderpath of a storage object
+     * @param filePath filePath of the storage file
+     * @param folderPath path of the folder in which the file is stored
+     */
     public Storage(String filePath, String folderPath) {
         this.filePath = filePath;
         this.folderPath = folderPath;
     }
 
+
+    /**
+     * Reads all the existing tasks in the file and appends them to the task list
+     *
+     * @param taskList the task list to be operated on
+     */
     public void readTasks(TaskList taskList) {
         try {
             Task task;
@@ -40,6 +54,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves all the tasks in a list to the file
+     *
+     * @param taskList the input task list whose tasks will be saved locally
+     */
     public void saveTasks(TaskList taskList) {
         try {
             FileWriter f = new FileWriter(filePath);
@@ -53,6 +72,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts a string into a task to be stored in the task list
+     *
+     * @param str task string to be converted
+     * @return the output task
+     */
     public Task stringToTask(String str) {
         String[] parsed = str.split("\\|");
         String taskType = parsed[0].trim();
@@ -83,6 +108,12 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Converts a task into a string to be stored in the file
+     *
+     * @param task task to be converted into a string
+     * @return the output string which is the format in which the task is stored locally
+     */
     public String taskToString(Task task) {
         String[] parsedTask = task.toString().split("\\s");
         String taskType = parsedTask[0];

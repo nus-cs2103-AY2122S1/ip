@@ -7,10 +7,17 @@ import duke.utils.Constants;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * The Ui class deals with all the interactions with the user. Most of the methods prefixed with 'display' print out
+ * the output obtained from their respective Command functions
+ */
 public class Ui {
 
     private final Scanner sc;
 
+    /**
+     * Public constructor which initialises the scanner
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
@@ -19,6 +26,10 @@ public class Ui {
         System.out.println(Constants.LOGO + Constants.HELLO + Constants.LINE);
     }
 
+    /**
+     * Returns a string with the contents of the scanner. Throws an exception if the input is missing.
+     * @return string with contents of the scanner.
+     */
     public String read() {
         try {
             if (sc.hasNext()) {

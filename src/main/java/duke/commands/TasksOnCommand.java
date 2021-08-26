@@ -7,9 +7,18 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import java.time.LocalDate;
 
+/**
+ * The TasksOnCommand class is a Command that returns the tasks which have deadlines/end dates on the input date
+ */
 public class TasksOnCommand extends Command {
+
     LocalDate date;
 
+    /**
+     * Public constructor which is used to initialise the input date
+     *
+     * @param date input date which is used to retrieve the tasks
+     */
     public TasksOnCommand(LocalDate date) {
         this.date = date;
     }
@@ -19,6 +28,13 @@ public class TasksOnCommand extends Command {
         return false;
     }
 
+    /**
+     * Checks whether the list contains a deadline or event with the input date as a deadline/end date and
+     * appends it to a temporary list
+     *
+     * @param taskList the list of tasks upon which the operations need to be performed
+     * @param ui the ui in which the result message of the command execution is displayed to the user
+     */
     @Override
     public void execute(TaskList taskList, Ui ui) {
         TaskList list = new TaskList();

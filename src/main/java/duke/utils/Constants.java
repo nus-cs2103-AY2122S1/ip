@@ -1,5 +1,8 @@
 package duke.utils;
 
+/**
+ * The Constants class contains all the constants which are used in the UI and Parser classes.
+ */
 public class Constants {
     private Constants() {
     }

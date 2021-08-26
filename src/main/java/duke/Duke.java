@@ -7,6 +7,9 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The Duke class is the main class which starts the chatbot
+ */
 public class Duke {
 
     private TaskList taskList;
@@ -15,6 +18,9 @@ public class Duke {
     private final String FILEPATH = "./data/duke.txt";
     private final String FOLDERPATH = "./data";
 
+    /**
+     * Public constructor which initialises the ui, storage and tasklist before the chatbot runs
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILEPATH, FOLDERPATH);
@@ -27,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the reading of the commands and the execution of the instructions
+     */
     public void run() {
         ui.init();
         boolean isExit = false;
