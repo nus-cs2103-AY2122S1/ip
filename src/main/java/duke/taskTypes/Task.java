@@ -3,6 +3,7 @@ package duke.taskTypes;
 import duke.exceptions.DukeException;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Task {
@@ -93,6 +94,10 @@ public class Task {
      */
     public String getDate() {
         return this.date.toString() + " " + this.time;
+    }
+
+    public String getFormatDate() {
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time;
     }
 
     /**

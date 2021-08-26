@@ -5,6 +5,7 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+
 public class Duke {
 
     private final Parser parser;
@@ -18,10 +19,6 @@ public class Duke {
         taskList = new TaskList();
         parser = new Parser(storage, taskList, ui);
         parser.loadTask();
-
-
-
-
     }
 
     /**

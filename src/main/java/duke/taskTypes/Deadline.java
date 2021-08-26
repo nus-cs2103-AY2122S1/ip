@@ -39,7 +39,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString(){
-        return super.toString() + " (by: " + super.getDate() + ")";
+        return super.toString() + " (by: " + super.getFormatDate() + ")";
     }
 
     @Override
