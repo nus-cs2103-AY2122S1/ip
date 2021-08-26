@@ -1,5 +1,9 @@
+package duke.exceptions;
+
+import duke.exceptions.DukeException1;
+
 public class DeadlineException extends DukeException1 {
-    DeadlineException() {
+    public DeadlineException() {
         super();
     }
 

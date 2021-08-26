@@ -1,3 +1,6 @@
+package duke.tasks;
+
+import duke.exceptions.TodoException;
 public class ToDo extends Task {
     public ToDo(String description) throws TodoException {
         super(description);

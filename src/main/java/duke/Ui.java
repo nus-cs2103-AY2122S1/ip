@@ -1,3 +1,11 @@
+package duke;
+
+import duke.tasks.TaskList;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+import duke.tasks.Event;
+import duke.tasks.Deadline;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -49,11 +57,11 @@ public class Ui {
 
     public void respondToDone(ArrayList<Task> tasks, Integer taskNumber) {
         System.out.println("\tNice! I've marked this task as done: \n \t \t" +
-                " [" + tasks.get(taskNumber - 1).getStatusIcon() + "] " + tasks.get(taskNumber - 1).description);
+                " [" + tasks.get(taskNumber - 1).getStatusIcon() + "] " + tasks.get(taskNumber - 1).getDescription());
     }
 
     public void respondToDelete(ArrayList<Task> tasks, Integer taskNumber) {
-        System.out.println("\tNoted. I've removed this task: \n\t\t" + tasks.get(taskNumber - 1).toString() +
+        System.out.println("\tNoted. I've removed this task: \n\t\t" + tasks.get(taskNumber).toString() +
                 "\n\tNow you have " + Integer.toString(tasks.size() - 1) + " tasks in the list.");
     }
 

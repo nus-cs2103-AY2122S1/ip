@@ -1,8 +1,15 @@
+package duke;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.exceptions.DukeException1;
 
 public class Storage {
     private String path;
@@ -18,7 +25,7 @@ public class Storage {
             System.out.println("error!");
         }*/
     }
-    /**public ArrayList<Task> load() {
+    /**public ArrayList<duke.tasks.Task> load() {
 
     }*/
     public ArrayList<Task> load() {
@@ -33,7 +40,7 @@ public class Storage {
                     if(list.size() == 0) {
                         System.out.println("There are no tasks");
                     } else {
-                        System.out.println("im here!!");
+                        //System.out.println("im here!!");
                         printFile("data/duke.txt");
                     }
                 } else {
@@ -53,7 +60,7 @@ public class Storage {
         }
 
         /**File file = new File(filePath);
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<duke.tasks.Task> list = new ArrayList<>();
         boolean hasDirectory = Files.exists(Paths.get("data"));
         boolean hasFile = Files.exists(Paths.get("data/duke.txt"));
         if(hasDirectory) {
@@ -68,25 +75,25 @@ public class Storage {
             }*/
                     /**try {
                         if(s.split("/")[0].equals("T")) {
-                            ToDo todo = new ToDo(s.split("/")[2]);
+                            duke.tasks.ToDo todo = new duke.tasks.ToDo(s.split("/")[2]);
                             list.add(todo);
                             if(s.split("/")[1].equals("1")) {
                                 todo.setDone();
                             }
                         } else if(s.split("/")[0].equals("D")) {
-                            Deadline deadline = new Deadline(s.split("/", 4)[2], s.split("/", 4)[3]);
+                            duke.tasks.Deadline deadline = new duke.tasks.Deadline(s.split("/", 4)[2], s.split("/", 4)[3]);
                             list.add(deadline);
                             if(s.split("/")[1].equals("1")) {
                                 deadline.setDone();
                             }
                         } else {
-                            Event event = new Event(s.split("/")[2], s.split("/")[3]);
+                            duke.tasks.Event event = new duke.tasks.Event(s.split("/")[2], s.split("/")[3]);
                             list.add(event);
                             if(s.split("/")[1].equals("1")) {
                                 event.setDone();
                             }
                         }
-                    } catch (DukeException1 e) {
+                    } catch (duke.exceptions.DukeException1 e) {
                         System.out.println("error!");
                     }
                 }

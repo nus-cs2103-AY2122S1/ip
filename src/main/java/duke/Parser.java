@@ -1,3 +1,13 @@
+package duke;
+
+import duke.command.BlahCommand;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+
 public class Parser {
     private String input;
 

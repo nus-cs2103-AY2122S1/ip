@@ -1,5 +1,9 @@
+package duke.exceptions;
+
+import duke.exceptions.DukeException1;
+
 public class EventException extends DukeException1 {
-    EventException() {
+    public EventException() {
         super();
     }
 

@@ -1,11 +1,13 @@
+package duke.tasks;
+
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
     protected Integer order;
 
     public Task(String description) {
         /*if(description.equals("blah")) {
-            throw new DukeException1();
+            throw new duke.exceptions.DukeException1();
         }*/
         this.description = description;
         this.isDone = false;

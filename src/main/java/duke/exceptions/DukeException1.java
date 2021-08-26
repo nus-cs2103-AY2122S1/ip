@@ -1,3 +1,5 @@
+package duke.exceptions;
+
 import java.lang.Exception;
 public class DukeException1 extends Exception {
     DukeException1() {

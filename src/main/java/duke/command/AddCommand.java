@@ -1,5 +1,14 @@
+package duke.command;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import duke.Ui;
+import duke.Storage;
+import duke.tasks.TaskList;
+import duke.tasks.ToDo;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.exceptions.DukeException1;
 
 public class AddCommand extends Command {
     String command;
@@ -13,7 +22,7 @@ public class AddCommand extends Command {
                 if(command.split(" ", 2).length == 1) {
                     ToDo todo = new ToDo(command.split(" ", 2)[0]);
                 } else {
-                    ToDo todo = new ToDo (command.split(" ", 2)[1]);
+                    ToDo todo = new ToDo(command.split(" ", 2)[1]);
                     tasks.addTask(todo);
                     ui.respondToTodo(tasks.getTasks(), todo);
                     storage.appendToFile(todo);
