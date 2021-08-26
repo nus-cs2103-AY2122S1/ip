@@ -22,6 +22,8 @@ public class Parser {
             return deadlineParser(newCommand);
         } else if (Pattern.compile("(?i)event.*").matcher(newCommand).matches()) {
             return eventParser(newCommand);
+        } else if (Pattern.compile("(?i)find.*").matcher(newCommand).matches()) {
+            return parseFind(newCommand);
         } else {
             return new String[]{"fail"};
         }
@@ -79,6 +81,20 @@ public class Parser {
             throw new DukeException("There appears to be a typo in your EVENT command.\n"
                     + "The command should be of the form:\n"
                     + "  event 'description' /from 'yyyy mm dd hhmm' to 'yyyy mm dd hhmm'\n"
+                    + "Please try again.");
+        }
+    }
+
+    private static String[] parseFind(String newCommand) {
+        String[] strArr = Pattern.compile("(?i)find\\s+").split(newCommand, 2);
+        if (strArr.length == 2 && strArr[1].length() > 0) {
+            return new String[]{"find", strArr[1].trim()};
+        } else if (strArr.length == 2 || strArr[0].length() == 4) {
+            throw new DukeException("The contents of a FIND command cannot be empty.\nPlease try again.");
+        } else {
+            throw new DukeException("There appears to be a typo in your FIND command.\n"
+                    + "The command should be of the form:\n"
+                    + "  find 'content'\n"
                     + "Please try again.");
         }
     }

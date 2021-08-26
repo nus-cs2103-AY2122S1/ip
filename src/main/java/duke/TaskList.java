@@ -49,6 +49,18 @@ public class TaskList {
     public boolean isIndexValid(int taskIndex) {
         return ((taskIndex - 1) < tasks.size() && (taskIndex - 1) > -1);
     }
+
+    public ArrayList<Task> findTasks(String content) {
+        ArrayList<Task> findTasksResult = new ArrayList<>();
+
+        for (Task currTask: tasks) {
+            if (currTask.contains(content)) {
+                findTasksResult.add(currTask);
+            }
+        }
+
+        return findTasksResult;
+    }
     
     private String numOfTasks() {
         if (tasks.size() > 0) {

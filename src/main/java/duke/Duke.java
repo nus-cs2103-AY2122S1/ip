@@ -51,6 +51,9 @@ public class Duke {
                 case "delete":
                     delete(parsedCommand);
                     break;
+                case "find":
+                    ui.showFindList(taskList.findTasks(parsedCommand[1]));
+                    break;
                 case "fail":
                     ui.showCommandFail();
                     break;
