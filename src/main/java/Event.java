@@ -6,8 +6,8 @@ public class Event extends Task{
     private final LocalDateTime dt;
 
     public Event(String description) {
-        super(description.substring(0, description.indexOf("/at ")));
-        this.dateTime = description.substring(description.indexOf("/at ") + 4);
+        super(description.substring(0, description.indexOf("/at ")).trim());
+        this.dateTime = description.substring(description.indexOf("/at ") + 4).trim();
         this.dt = LocalDateTime.parse(this.dateTime);
     }
 

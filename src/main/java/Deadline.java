@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,8 +6,9 @@ public class Deadline extends Task{
     private final LocalDateTime dt;
 
     public Deadline(String description) {
-        super(description.substring(0, description.indexOf("/by ")));
-        this.dateTime = description.substring(description.indexOf("/by ") + 4);
+        super(description.substring(0, description.indexOf("/by ")).trim());
+        this.dateTime = description.substring(description.indexOf("/by ") + 4).trim();
+        System.out.println(description);
         this.dt = LocalDateTime.parse(this.dateTime);  //eg LocalDateTime.parse("2015-02-20T06:30");
     }
 
