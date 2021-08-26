@@ -66,6 +66,31 @@ public class TaskList {
     }
 
     /**
+     * Search and display item matching the query.
+     *
+     * @param searchItem The query.
+     */
+    public void findAndDisplay(String searchItem) {
+        List<Task> searchList = new ArrayList<>();
+
+        for (Task task : taskList) {
+            if (task.getValue().contains(searchItem)) {
+                searchList.add(task);
+            }
+        }
+
+        if (searchList.size() > 0) {
+            System.out.println("Here are the matching tasks in your list: ");
+            for (int i = 0; i < searchList.size(); i++) {
+                int index = i + 1;
+                System.out.println(index + "." + searchList.get(i));
+            }
+        } else {
+            System.out.println("Sorry there are no items that match your query!");
+        }
+    }
+
+    /**
      * Remove task by the given index.
      *
      * @param id Index of the task given in the list of Tasks.

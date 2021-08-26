@@ -48,7 +48,7 @@ public class Ui {
             e.printStackTrace();
         }
 
-        return input;
+        return input.trim();
     }
 
     /**

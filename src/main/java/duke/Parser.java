@@ -26,6 +26,15 @@ public class Parser {
             return new DeleteCommand(input);
         } else if (isDone(input)) {
             return new DoneCommand(input);
+        } else if (input.toUpperCase().contains(CommandList.FIND.toString())) {
+            if (input.length() > 5) {
+                String taskMessage = input.substring(5);
+                return new FindCommand(taskMessage.strip());
+            } else {
+                throw new IncompleteCommandException("OOPS incomplete command! Your find command " +
+                        "should have a text after the find like: find book");
+            }
+
         } else {
             //ADD duke.command.Command
             Task newTask = null;
