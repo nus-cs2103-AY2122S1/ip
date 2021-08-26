@@ -2,13 +2,13 @@ package kermit.command;
 
 import kermit.KermitException;
 import kermit.Ui;
-import kermit.ToDo;
+import kermit.TaskList;
 import kermit.Storage;
 import kermit.tasks.Task;
 
 public class DeleteTaskCommand extends Command {
     // zero-indexed
-    int taskNum;
+    private int taskNum;
 
     // taskNum is number in task list, one indexed
     public DeleteTaskCommand(String taskNum) throws KermitException {
@@ -21,7 +21,7 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
         try {
             Task deletedTask = taskList.deleteTask(taskNum);
             ui.showDeleteTaskMessage(deletedTask, taskList);

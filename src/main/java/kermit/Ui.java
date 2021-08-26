@@ -5,14 +5,18 @@ import kermit.tasks.Task;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String introductionText = "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
+    private static final String introductionText =
+            "Hello I am Kermit ( *・∀・)ノ゛, eaten any flies today?\nWhat can I do for you?";
     private static final String listText = "Here are the tasks in your list:";
     private static final String completeTaskText = "Ribbit Ribbit! Good job, task has been marked as complete:";
     private static final String goodbyeText = "Bye. Hope to see you again soon!";
     private static final String errorText = "Burp burp! Something went wrong!";
     private static final String loadingErrorText = "Could not read this file Nuuuuuuu!";
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc;
 
+    public Ui() {
+        sc = new Scanner(System.in);
+    }
     /**
      * Adds a top and bottom horizontal line to text
      *
@@ -36,7 +40,7 @@ public class Ui {
         formatAndPrintText(goodbyeText);
     }
 
-    public void showListItems(ToDo list) {
+    public void showListItems(TaskList list) {
         formatAndPrintText(listText + "\n" + list);
     }
 
@@ -46,12 +50,12 @@ public class Ui {
      * @param task kermit.command.Task that is added to list
      * @param list List that task was added to
      */
-    public void showAddTaskMessage(Task task, ToDo list) {
+    public void showAddTaskMessage(Task task, TaskList list) {
         formatAndPrintText("Got it. I've added this task:\n"
                 + task + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
-    public void showDeleteTaskMessage(Task task, ToDo list) {
+    public void showDeleteTaskMessage(Task task, TaskList list) {
         formatAndPrintText("Noted. I've removed this task:\n"
                 + task + "\nNow you have " + list.size() + " tasks in the list.");
     }

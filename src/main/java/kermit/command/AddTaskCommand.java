@@ -1,19 +1,19 @@
 package kermit.command;
 
 import kermit.KermitException;
+import kermit.TaskList;
 import kermit.Ui;
-import kermit.ToDo;
 import kermit.Storage;
 import kermit.tasks.Deadline;
 import kermit.tasks.Event;
 import kermit.tasks.Task;
-import kermit.tasks.ToDos;
+import kermit.tasks.ToDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class AddTaskCommand extends Command {
-    Task task;
+    private Task task;
 
     // parses dates in form dd-mm-yyyy to localdate
     private static LocalDate parseDate(String dateString) throws KermitException {
@@ -35,19 +35,19 @@ public class AddTaskCommand extends Command {
         }
 
         if (taskType.equals("todo")) {
-            this.task = new ToDos(description);
+            this.task = new ToDo(description);
         } else {
             try {
                 LocalDate date = parseDate(flag);
                 switch (taskType) {
-                    case "deadline":
-                        task = new Deadline(description, date);
-                        break;
-                    case "event":
-                        task = new Event(description, date);
-                        break;
-                    default:
-                        throw new KermitException("Invalid tasktype!");
+                case "deadline":
+                    task = new Deadline(description, date);
+                    break;
+                case "event":
+                    task = new Event(description, date);
+                    break;
+                default:
+                    throw new KermitException("Invalid task type!");
                 }
             } catch (DateTimeParseException e) {
                 throw new KermitException("That is an invalid date!");
@@ -56,7 +56,7 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(ToDo taskList, Ui ui, Storage storage) throws KermitException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
         taskList.add(task);
         ui.showAddTaskMessage(task, taskList);
         storage.save(taskList);

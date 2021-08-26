@@ -52,18 +52,18 @@ public class Storage {
 
                     // Create task based on line data
                     switch (taskShortForm) {
-                        case "T":
-                            task = new ToDos(description, isCompleted);
-                            taskList.add(task);
-                            break;
-                        case "D":
-                            task = new Deadline(description, date, isCompleted);
-                            taskList.add(task);
-                            break;
-                        case "E":
-                            task = new Event(description, date, isCompleted);
-                            taskList.add(task);
-                            break;
+                    case "T":
+                        task = new ToDo(description, isCompleted);
+                        taskList.add(task);
+                        break;
+                    case "D":
+                        task = new Deadline(description, date, isCompleted);
+                        taskList.add(task);
+                        break;
+                    case "E":
+                        task = new Event(description, date, isCompleted);
+                        taskList.add(task);
+                        break;
                     }
                 }
             }
@@ -81,13 +81,13 @@ public class Storage {
 
         if (task instanceof DateDependentTask) {
             DateDependentTask dateTask = (DateDependentTask) task;
-            formattedString = String.join(delimiter, formattedString, dateTask.getDate());
+            formattedString = String.join(delimiter, formattedString, dateTask.getDateString());
         }
         return formattedString;
     }
 
     // Saves task list data to file, file is overwritten
-    public void save(ToDo todo) throws KermitException {
+    public void save(TaskList todo) throws KermitException {
         try {
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);

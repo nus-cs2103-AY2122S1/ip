@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public abstract class DateDependentTask extends Task {
-    LocalDate date;
+    private LocalDate date;
 
     public DateDependentTask(String description, LocalDate date) {
         super(description);
@@ -16,11 +16,12 @@ public abstract class DateDependentTask extends Task {
         this.date = date;
     }
 
-    public String getDate() {
+    
+    public String getDateString() {
         return this.date.toString();
     }
 
-    protected String getDateString() {
+    protected String getFormattedDateString() {
         return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }

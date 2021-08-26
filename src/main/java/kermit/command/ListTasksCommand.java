@@ -1,7 +1,7 @@
 package kermit.command;
 
 import kermit.Storage;
-import kermit.ToDo;
+import kermit.TaskList;
 import kermit.Ui;
 
 public class ListTasksCommand extends Command {
@@ -9,7 +9,7 @@ public class ListTasksCommand extends Command {
     public ListTasksCommand() {}
 
     @Override
-    public void execute(ToDo taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showListItems(taskList);
     }
 
