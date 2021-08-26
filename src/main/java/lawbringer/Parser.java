@@ -1,3 +1,5 @@
+package lawbringer;
+
 import java.time.format.DateTimeParseException;
 
 public class Parser {

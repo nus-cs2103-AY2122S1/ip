@@ -1,3 +1,5 @@
+package lawbringer;
+
 import java.util.Scanner;
 
 import java.io.IOException;

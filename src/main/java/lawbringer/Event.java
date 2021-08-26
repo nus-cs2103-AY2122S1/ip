@@ -1,3 +1,5 @@
+package lawbringer;
+
 public class Event extends Task {
 
     protected String at;

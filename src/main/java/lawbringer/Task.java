@@ -1,3 +1,5 @@
+package lawbringer;
+
 public abstract class Task {
 
     protected String title;

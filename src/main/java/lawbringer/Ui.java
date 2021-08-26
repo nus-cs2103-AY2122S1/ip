@@ -1,8 +1,11 @@
+package lawbringer;
+
 import java.util.List;
 
 public class Ui {
 
-    public Ui() {}
+    public Ui() {
+    }
 
     protected void showWelcomeMessage() {
         String message = "Hello! I'm Lawbringer!\n" +
