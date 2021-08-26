@@ -22,3 +22,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+## Acknowledgments
+This project uses the following libraries:
+1. [JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple)
