@@ -1,8 +1,6 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
+package duke;
+
+import duke.command.*;
 
 public class Parser {
     public static Command parse(String str) throws DukeException {

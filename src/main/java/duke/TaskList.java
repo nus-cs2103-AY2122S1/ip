@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -105,8 +112,11 @@ public class TaskList {
 
     public int addToList(String type, String description, String time) throws DukeException {
         try {
-            LocalDateTime ld = dateFormatting(time);
-            if (ld.compareTo(LocalDateTime.now()) < 0) {
+            LocalDateTime ld = LocalDateTime.now();
+            if (!(time.equals("NA"))) {
+                ld = dateFormatting(time);
+            }
+            if (ld.compareTo(LocalDateTime.now()) < 0 && (type.equals("D") || type.equals("E"))) {
                 throw new DukeException("    Please key in a date that's not in the past!");
             }
             Task toAdd;
