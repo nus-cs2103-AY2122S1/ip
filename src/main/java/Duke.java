@@ -1,15 +1,11 @@
-import java.io.*;
-import java.nio.file.Paths;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+
 
 public class Duke {
-    private static String DIR = "./data";
-    private static String FILENAME = "duke.txt";
-    private static String DATAPATH = String.valueOf(Paths.get(Duke.DIR, Duke.FILENAME));
-
+    private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
@@ -20,71 +16,19 @@ public class Duke {
     }
 
 
-    public Duke() {
-        this.taskList = new TaskList();
+    public Duke(String filePath) {
+        this.storage = new Storage(filePath);
         this.ui = new Ui();
-    }
-
-
-    private void loadData() {
-        File db = new File(Duke.DATAPATH);
         try {
-            Scanner fileReader = new Scanner(db);
-            while (fileReader.hasNextLine()) {
-                String entry = fileReader.nextLine();
-                readEntry(entry);
-            }
-            fileReader.close();
-        } catch (FileNotFoundException e) {
-            this.createDatabase();
+            this.taskList = new TaskList(this.storage.loadData());
         } catch (DukeException e) {
-            this.ui.showDatabaseError();
-        }
-    }
-
-
-    private void readEntry(String entry) throws DukeDatabaseException {
-        String[] fields = entry.split("\\|");
-        Task taskToAdd;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
-        switch (fields[0]) {
-        case "T":
-            taskToAdd = new Todo(fields[2]);
-            break;
-        case "E":
-            taskToAdd = new Event(fields[2],
-                    LocalDateTime.parse(fields[3], formatter),
-                    LocalDateTime.parse(fields[4], formatter));
-            break;
-        case "D":
-            taskToAdd = new Deadline(fields[2], LocalDateTime.parse(fields[3], formatter));
-            break;
-        default:
-            throw new DukeDatabaseException();
-        }
-        if (Integer.parseInt(fields[1]) == 1) {
-            taskToAdd.markAsDone();
-        }
-        this.taskList.add(taskToAdd);
-    }
-
-
-    private void createDatabase() {
-        File db = new File(Duke.DATAPATH);
-        File dir = new File(Duke.DIR);
-        dir.mkdir();
-        try {
-            db.createNewFile();
-        } catch (IOException e) {
-            this.ui.showLoadingError();
+            this.ui.showDukeException(e);
         }
     }
 
 
     private void run() {
         this.ui.showGreet();
-        this.loadData();
         while (true) {
             try {
                 String rawInput = this.ui.readInput();
@@ -133,23 +77,11 @@ public class Duke {
 
     private void exit() {
         try {
-            this.saveData();
+            this.storage.saveData(this.taskList);
             this.ui.showExit();
         } catch (IOException e) {
             this.ui.showSavingError();
         }
-    }
-
-
-    private void saveData() throws IOException {
-        FileWriter fw = new FileWriter(Duke.DATAPATH, false);
-        BufferedWriter bw = new BufferedWriter(fw);
-        for (int i = 1; i <= this.taskList.getLength(); i++) {
-            bw.write(this.taskList.get(i).stringifyTask());
-            bw.newLine();
-        }
-        bw.close();
-        fw.close();
     }
 
 
@@ -244,6 +176,6 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("./data/duke.txt").run();
     }
 }
