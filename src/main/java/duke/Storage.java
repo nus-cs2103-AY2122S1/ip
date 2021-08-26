@@ -11,10 +11,22 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Stores a file and its lines.
+ *
+ * @author botr99
+ */
 public class Storage {
     private Path filePath;
     private ArrayList<String> lines;
 
+    /**
+     * Constructs a storage that reads in lines from the specified
+     * file location.
+     *
+     * @param fileLocation The file location to read the lines from.
+     * @throws IOException When an error occurs when reading to the file.
+     */
     public Storage(String fileLocation) throws IOException {
         Path filePath = Path.of(fileLocation);
         Files.createDirectories(filePath.getParent());
@@ -35,20 +47,45 @@ public class Storage {
         Files.write(filePath, lines);
     }
 
+    /**
+     * Returns the lines stored in the file.
+     *
+     * @return The lines as an ArrayList of strings.
+     */
     public ArrayList<String> getLines() {
         return lines;
     }
 
+    /**
+     * Saves the added task and updates the storage.
+     *
+     * @param task The task to be added.
+     * @throws IOException When an error occurs when writing to the file.
+     */
     public void addLine(Task task) throws IOException {
         lines.add(task.toStorageString());
         saveLinesToStorage();
     }
 
+    /**
+     * Removes a line specified by the line number and updates the storage.
+     *
+     * @param lineNumber The line number to remove the line.
+     * @throws IOException When an error occurs when writing to the file.
+     */
     public void removeLine(int lineNumber) throws IOException {
         lines.remove(lineNumber - 1);
         saveLinesToStorage();
     }
 
+    /**
+     * Modifies a line specified by the line number that represents a task,
+     * and updates the storage.
+     *
+     * @param lineNumber The line number to modify the task stored in the line.
+     * @param task The task to be modified.
+     * @throws IOException When an error occurs when writing to the file.
+     */
     public void editLine(int lineNumber, Task task) throws IOException {
         lines.set(lineNumber - 1, task.toStorageString());
         saveLinesToStorage();
