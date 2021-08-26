@@ -1,6 +1,8 @@
 package gnosis;
 
+import gnosis.controller.GnosisController;
 import org.junit.jupiter.api.Test;
+import gnosis.ui.GnosisUI;
 
 import java.util.Scanner;
 

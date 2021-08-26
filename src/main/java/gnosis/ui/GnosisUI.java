@@ -1,7 +1,9 @@
-package gnosis;
+package gnosis.ui;
 
-import model.Task;
-import util.GnosisConstants;
+import gnosis.controller.GnosisController;
+import gnosis.model.Task;
+import gnosis.util.GnosisConstants;
+import gnosis.util.GnosisException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,6 +16,7 @@ public class GnosisUI {
 
     public void listenForInput(GnosisController gc, Scanner sc) {
         this.isListeningInput = true;
+
         try {
             String command = sc.next();
             String input = sc.nextLine();
@@ -36,14 +39,18 @@ public class GnosisUI {
 
     public void displayGreetMessage(boolean isDataAvailable) {
         displayTopDivider();
+
         System.out.println(GnosisConstants.GREET_MESSAGE);
-        System.out.println(isDataAvailable ? GnosisConstants.DATA_TASK_FILE_FOUND_MESSAGE
+        System.out.println(
+                isDataAvailable
+                ? GnosisConstants.DATA_TASK_FILE_FOUND_MESSAGE
                 : GnosisConstants.DATA_TASK_FILE_NOT_FOUND_MESSAGE);
+
         displayBottomDivider();
     }
 
     public void updateTaskManagementViewMessage(String action, Task task, int numOfTasks) {
-        System.out.println("model.Task " + action + ":");
+        System.out.println("gnosis.main.model.Task " + action + ":");
         System.out.println(task);
         System.out.println("Total tasks in the list: " + numOfTasks);
         displayBottomDivider();
@@ -52,7 +59,7 @@ public class GnosisUI {
     public void displayAllTasksMessage(List<Task> tasks) {
         int len = tasks.size();
         if (len == 0) {
-            System.out.println("There is no task in the list.");
+            System.out.println("There is no gnosis.task in the list.");
         } else {
             System.out.println("Listing all tasks in list:");
             for (int i = 0; i < len; i++) {
@@ -63,7 +70,7 @@ public class GnosisUI {
     }
 
     public void displayMarkedTaskMessage(Task task, int taskIndex) {
-        System.out.println("model.Task " + (taskIndex) +" marked as done:" );
+        System.out.println("gnosis.main.model.Task " + (taskIndex) +" marked as done:" );
         System.out.println("\t" + task);
         displayBottomDivider();
     }

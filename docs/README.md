@@ -1,19 +1,19 @@
 
 # User Guide
 
-## gnosis.Gnosis Feature(s)
+## Gnosis Feature(s)
 
-### model.task Manager
+### gnosis.main.model.gnosis.task Manager
 
-gnosis.Gnosis provides the ability to create, retrieve and delete different variety of tasks
+Gnosis provides the ability to create, retrieve and delete different variety of tasks
 to manage.</br>
 Different types of tasks includes: todos, deadlines and events.
 
 ## Usage
 
-### `todo` - Creates a todo task
+### `todo` - Creates a todo gnosis.task
 
-Creates a todo task without any date/time.
+Creates a todo gnosis.task without any date/time.
 
 Example of usage: 
 
@@ -21,17 +21,17 @@ Example of usage:
 
 Expected outcome:
 
-Displays todo task added.<br/>
-[T] - denotes as a model.Todo task.<br/>
+Displays todo gnosis.task added.<br/>
+[T] - denotes as a Todo gnosis.task.<br/>
 [&nbsp;&nbsp;] - denotes a todo that is not marked done.
 ```
-model.Todo added:
+Todo added:
 [T][ ] read book
 ```
 ***
-### `deadline` - Creates a deadline task
+### `deadline` - Creates a deadline gnosis.task
 
-Creates a deadline task with a specified date/time.
+Creates a deadline gnosis.task with a specified date/time.
 
 Example of usage:
 
@@ -39,17 +39,17 @@ Example of usage:
 
 Expected outcome:
 
-Displays deadline task added.<br/>
-[D] - denotes as a deadline task.<br/>
+Displays deadline gnosis.task added.<br/>
+[D] - denotes as a deadline gnosis.task.<br/>
 [&nbsp;&nbsp;] - denotes a deadline that is not marked done.
 ```
-model.Deadline added:
+Deadline added:
 [D][ ] return book  (by:  Sunday)
 ```
 ***
-### `event` - Creates an event task
+### `event` - Creates an event gnosis.task
 
-Creates an event task with a specified schedule.
+Creates an event gnosis.task with a specified schedule.
 
 Example of usage:
 
@@ -57,11 +57,11 @@ Example of usage:
 
 Expected outcome:
 
-Displays event task added.<br/>
-[E] - denotes as an event task.<br/>
+Displays event gnosis.task added.<br/>
+[E] - denotes as an event gnosis.task.<br/>
 [&nbsp;&nbsp;] - denotes an event that is not marked done.
 ```
-model.Event added:
+Event added:
 [E][ ] project meeting  (at: Mon 2-4pm)
 ```
 ***
@@ -75,11 +75,11 @@ Example of usage:
 
 Expected outcome:
 
-Displays all task with task number added.<br/>
-[T] - denotes as a todo task.<br/>
-[D] - denotes as a deadline task.<br/>
-[E] - denotes as an event task.<br/>
-[&nbsp;&nbsp;] - denotes a task that is not marked done.
+Displays all gnosis.task with gnosis.task number added.<br/>
+[T] - denotes as a todo gnosis.task.<br/>
+[D] - denotes as a deadline gnosis.task.<br/>
+[E] - denotes as an event gnosis.task.<br/>
+[&nbsp;&nbsp;] - denotes a gnosis.task that is not marked done.
 ```
 Listing all tasks in your list:
 1. [T][ ] read book
@@ -87,9 +87,9 @@ Listing all tasks in your list:
 3. [E][ ] project meeting  (at: Mon 2-4pm)
 ```
 ***
-### `done` - Mark specified task done
+### `done` - Mark specified gnosis.task done
 
-Marks specified task has done.
+Marks specified gnosis.task has done.
 
 Example of usage:
 
@@ -97,16 +97,16 @@ Example of usage:
 
 Expected outcome:
 
-Marks specified task done.<br/>
-[X] - denotes a task that is marked has done<br/>
+Marks specified gnosis.task done.<br/>
+[X] - denotes a gnosis.task that is marked has done<br/>
 ```
-model.task 2 marked as done:
+gnosis.main.model.gnosis.task 2 marked as done:
 [D][X] return book  (by: Sunday)
 ```
 ***
-### `delete` - Deletes task from list
+### `delete` - Deletes gnosis.task from list
 
-Deletes task from task task list.
+Deletes gnosis.task from gnosis.task gnosis.task list.
 
 Example of usage:
 
@@ -114,15 +114,15 @@ Example of usage:
 
 Expected outcome:
 
-Displays deleted task.<br/>
+Displays deleted gnosis.task.<br/>
 ```
-Understood. model.task has been deleted:
+Understood. gnosis.main.model.gnosis.task has been deleted:
 3. [E][ ] project meeting  (at: Mon 2-4pm)
 ```
 ***
-### `bye` - Exits gnosis.Gnosis
+### `bye` - Exits Gnosis
 
-Terminates gnosis.Gnosis program.
+Terminates Gnosis program.
 
 Example of usage:
 

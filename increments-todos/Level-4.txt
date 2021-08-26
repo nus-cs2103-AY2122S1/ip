@@ -9,7 +9,7 @@ Example:
 
 t0do borrow book
     ____________________________________________________________
-     Got it. I've added this task:
+     Got it. I've added this gnosis.task:
        [T][ ] borrow book
      Now you have 5 tasks in the list.
     ____________________________________________________________
@@ -26,14 +26,14 @@ list
 
 deadline return book /by Sunday
     ____________________________________________________________
-     Got it. I've added this task:
+     Got it. I've added this gnosis.task:
        [D][ ] return book (by: Sunday)
      Now you have 6 tasks in the list.
     ____________________________________________________________
 
 event project meeting /at Mon 2-4pm
     ____________________________________________________________
-     Got it. I've added this task:
+     Got it. I've added this gnosis.task:
        [E][ ] project meeting (at: Mon 2-4pm)
      Now you have 7 tasks in the list.
     ____________________________________________________________
@@ -44,7 +44,7 @@ Example:
 
 deadline do homework /by no idea :-p
     ____________________________________________________________
-     Got it. I've added this task:
+     Got it. I've added this gnosis.task:
        [D][ ] do homework (by: no idea :-p)
      Now you have 6 tasks in the list.
     ____________________________________________________________
@@ -52,11 +52,11 @@ deadline do homework /by no idea :-p
 Extension: A-Inheritance
 
 A-Inheritance
-↳ Use Inheritance to support multiple task types
+↳ Use Inheritance to support multiple gnosis.task types
 
-As there are multiple types of tasks that have some similarity between them, you can implement classes T0do, model.Deadline and model.Event classes to inherit from a model.task class.
+As there are multiple types of tasks that have some similarity between them, you can implement classes T0do, Deadline and Event classes to inherit from a gnosis.main.model.gnosis.task class.
 
-Furthermore, use polymorphism to store all tasks in a data structure containing model.task objects e.g., model.task[100].
+Furthermore, use polymorphism to store all tasks in a data structure containing gnosis.main.model.gnosis.task objects e.g., gnosis.main.model.gnosis.task[100].
 
 Tasks to achieve level-4:
 
@@ -64,24 +64,24 @@ Tasks to achieve level-4:
     - [T] denotes a tdo
     - no date/time attached to it
 
-2. model.Deadline Class - DONE
-    - [D] denotes an model.Event
+2. Deadline Class - DONE
+    - [D] denotes an Event
     - need to be done before a specific date/time
 
-3. model.Event Class - DONE
+3. Event Class - DONE
     - [E] denotes a deadline
     - has date
     - starts at a specific time
     - ends at specific time
 
-4. in gnosis.Gnosis Class: - DONE
+4. in Gnosis Class: - DONE
     - 3 commands:
         - tdo
             - e.g: tdo borrow book
         - deadline
-            - e.g: (task name) /by sunday
+            - e.g: (gnosis.task name) /by sunday
         - event
-            - e.g: (task name)/at Mon 2-4pm
+            - e.g: (gnosis.task name)/at Mon 2-4pm
 
     - Update list command: - DONE
         - display total number of list

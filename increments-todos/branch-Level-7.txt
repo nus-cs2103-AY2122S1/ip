@@ -1,5 +1,5 @@
 Level 7. Save
-Save the tasks in the hard disk automatically whenever the task list changes. Load the data from the hard disk when Duke starts up. You may hard-code the file name and location e.g., [project_root]/data/duke.txt
+Save the tasks in the hard disk automatically whenever the gnosis.task list changes. Load the data from the hard disk when Duke starts up. You may hard-code the file name and location e.g., [project_root]/data/duke.txt
 
 The format of the file is up to you. Example:
 
@@ -22,16 +22,16 @@ File format to save -> .csv
 
 save in file under: [project_root]/gnosisData/gnosis.txt folder
 
-1. Create a task.TaskStorageManager to read/write CSV files - DONE
+1. Create a gnosis.task.TaskStorageManager to read/write CSV files - DONE
     --> use relative path
     --> handle case -> where file data doesn't exits -> create default file for them
     --> handle case -> folder does not exist -> create folder + file alongside
 
-    --> able to read csv file and convert to list of model.task - Done
-    --> able to write to csv file from list of model.task - Done
+    --> able to read csv file and convert to list of gnosis.main.model.gnosis.task - Done
+    --> able to write to csv file from list of gnosis.main.model.gnosis.task - Done
 
-2. Update model.task classes: - DONE
-    --> to include char variable to store type of task
+2. Update gnosis.main.model.gnosis.task classes: - DONE
+    --> to include char variable to store type of gnosis.task
     --> getter and setters
     --> update classes
 

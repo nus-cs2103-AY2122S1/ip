@@ -27,10 +27,10 @@ Stretch goal: handle all possible errors in the current version. As you evolve D
 
 Tasks to achieve level-5:
 
-1. Create gnosis.GnosisException Class: - Done
+1. Create gnosis.util.GnosisException Class: - Done
     - possible exceptions:
-        - no task specified - Done
+        - no gnosis.task specified - Done
         - no specified command found - Done
-        - task index not found (-1, or more than list size) - Done
+        - gnosis.task index not found (-1, or more than list size) - Done
         - for deadline -> deadline not specified - done
         - for event -> schedule not specified - done

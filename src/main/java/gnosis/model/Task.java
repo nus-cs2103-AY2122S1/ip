@@ -1,10 +1,10 @@
-package model;
+package gnosis.model;
 
 import java.time.LocalDateTime;
 
 /**
- * The model.Task class encapsulates a task with a String and
- * whether the task is done or not.
+ * The gnosis.main.model.Task class encapsulates a gnosis.task with a String and
+ * whether the gnosis.task is done or not.
  *
  * @author Pawandeep Singh
  * @version Level-3

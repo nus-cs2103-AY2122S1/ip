@@ -1,7 +1,7 @@
-package task;
+package gnosis.task;
 
-import gnosis.GnosisException;
-import model.Todo;
+import gnosis.util.GnosisException;
+import gnosis.model.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

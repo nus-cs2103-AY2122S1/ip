@@ -1,11 +1,11 @@
-package model;
+package gnosis.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * This class encapsulates a
- * deadline task with a specified deadline.
+ * deadline gnosis.task with a specified deadline.
  *
  * @author Pawandeep Singh
  * @version Level-4
@@ -21,10 +21,10 @@ public class Deadline extends Task{
         super(task, TaskType.DEADLINE, deadline, isTaskDone);
     }
 
-
     @Override
     public String toString() {
         return super.toString()
-                + "(by:"+ this.getDatetime().format(DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mma"))  +")";
+                + "(by:" + this.getDatetime().format(
+                        DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mma")) + ")";
     }
 }
