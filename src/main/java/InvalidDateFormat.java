@@ -1,2 +1,7 @@
-package PACKAGE_NAME;public class InvalidDateFormat {
+public class InvalidDateFormat extends DukeException{
+
+    @Override
+    public String toString() {
+        return "Invalid format, please use dd/MM/yyyy for date and HHmm for time";
+    }
 }

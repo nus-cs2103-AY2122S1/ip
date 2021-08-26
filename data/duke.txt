@@ -1,4 +1,1 @@
-T | 0 | hehe | 
-T | 0 | haha | 
-E | 0 | lmao | lmaoaoao
-T | 0 | lmao | 
+E | 0 | idk | 2019-02-0223:00
