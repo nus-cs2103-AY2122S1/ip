@@ -5,7 +5,9 @@ public enum Instruction {
     EVENT("event"),
     DEADLINE("deadline"),
     DELETE("delete"),
-    INVALID("invalid")
+    BYE("bye"),
+    INVALID("invalid"),
+    EMPTY("empty"),
     ;
 
     private final String s;

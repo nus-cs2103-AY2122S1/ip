@@ -2,7 +2,7 @@ public class Events extends Task {
     protected String at;
 
     public Events(String description, String at) {
-        super(description);
+        super(description, Instruction.EVENT);
         this.at = at;
     }
 
