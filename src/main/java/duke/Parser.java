@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -54,6 +55,8 @@ public class Parser {
                 taskList.addTask(new Deadline(scan.nextLine()), printMsg);
             } catch (DukeException e) {
                 e.printMsg();
+            } catch (DateTimeParseException e) {
+                System.out.println("Wrong date time format! Please use DD-MM-YYYY HHHH");
             }
             return true;
 

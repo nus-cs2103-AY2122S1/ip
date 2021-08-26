@@ -13,6 +13,9 @@ public class Event extends Task {
             throw new DukeException("Your Event cannot be empty :(");
         }
         int index = description.indexOf("/at");
+        if (index == -1) {
+            throw new DukeException("Please use the correct format! event <name> /at <text>");
+        }
         timing = description.substring(index + 3);
         this.description = description.substring(0, index - 1);
 

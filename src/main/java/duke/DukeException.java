@@ -9,4 +9,9 @@ public class DukeException extends RuntimeException {
     public void printMsg() {
         System.out.println(msg);
     }
+
+    @Override
+    public String getMessage() {
+        return msg;
+    }
 }

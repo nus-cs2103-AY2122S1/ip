@@ -15,7 +15,9 @@ public class Deadline extends Task {
         }
 
         int index = description.indexOf("/by");
-
+        if (index == -1) {
+            throw new DukeException("Please use the correct format! deadline <name> /by <date-time>");
+        }
         timing = LocalDateTime.parse(description.substring(index + 3).strip(),
                     DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
         this.description = description.substring(0, index);
