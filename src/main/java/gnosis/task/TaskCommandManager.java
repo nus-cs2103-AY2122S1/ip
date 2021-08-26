@@ -90,7 +90,7 @@ public class TaskCommandManager {
 
     public List<Task> findMatchingTasks(String taskKeyword){
         return this.tasks.stream()
-                .filter(task -> task.getTaskName().contains(taskKeyword))
+                .filter(task -> task.getTaskName().toLowerCase().contains(taskKeyword.toLowerCase()))
                 .collect(Collectors.toList());
     }
 

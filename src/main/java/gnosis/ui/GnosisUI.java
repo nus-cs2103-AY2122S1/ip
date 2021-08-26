@@ -75,6 +75,20 @@ public class GnosisUI {
 
         displayBottomDivider();
     }
+    
+    /**
+     * Displays found tasks based on keyword.
+     *
+     * @param foundTasks filtered tasks that have matching keyword.
+     * @param keyword keyword used to filter tasks.
+     */
+    public void displayFoundTasksMessage(List<Task> foundTasks, String keyword) {
+        System.out.println(GnosisConstants.LISTING_MATCH_KEYWORD_MESSAGE + keyword);
+        for (Task task: foundTasks) {
+            System.out.println(task.toString());
+        }
+        displayBottomDivider();
+    }
 
 
     /**

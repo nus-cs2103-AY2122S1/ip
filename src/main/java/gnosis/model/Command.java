@@ -1,4 +1,4 @@
-package model;
+package gnosis.model;
 
 /**
  * This enum specifies the different commands

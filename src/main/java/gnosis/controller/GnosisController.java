@@ -2,16 +2,12 @@ package gnosis.controller;
 
 
 
-import gnosis.model.Deadline;
-import gnosis.model.Event;
-import gnosis.model.Task;
-import gnosis.model.Todo;
+import gnosis.model.*;
 import gnosis.task.TaskCommandManager;
 import gnosis.task.TaskStorageManager;
 import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
-import model.Command;
 
 import java.util.List;
 import java.util.Scanner;

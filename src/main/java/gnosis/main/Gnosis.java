@@ -1,5 +1,6 @@
-package gnosis;
+package gnosis.main;
 import gnosis.controller.GnosisController;
+import gnosis.ui.GnosisUI;
 
 import java.util.Scanner;
 
