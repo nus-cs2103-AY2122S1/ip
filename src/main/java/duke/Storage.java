@@ -1,8 +1,5 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidDirectoryException;
-import duke.exceptions.InvalidStorageFilePathException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -16,6 +13,10 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidDirectoryException;
+import duke.exceptions.InvalidStorageFilePathException;
 
 public class Storage {
     private final String givenFilePath;
@@ -31,7 +32,8 @@ public class Storage {
             throw new InvalidStorageFilePathException("   Storage filepath should end with '.txt'");
         }
         if (!isValidDirectory(givenFilePath)) {
-            throw new InvalidDirectoryException("   1 or more directories in the specified file path does not exist");
+            throw new InvalidDirectoryException("   1 or more directories "
+                    + "in the specified file path does not exist");
         }
     }
 
@@ -60,7 +62,8 @@ public class Storage {
             for (String s: lines) {
                 lt.add(convertToTask(s));
             }
-            System.out.println("   Autosave feature detected. Please type 'list' to view previously saved tasks...");
+            System.out.println("   Autosave feature detected. "
+                    + "Please type 'list' to view previously saved tasks...");
             return lt;
         } catch (IOException e) {
             System.out.println("   FILE NOT FOUND ERROR: Creating empty tasklist...");
@@ -69,7 +72,8 @@ public class Storage {
             System.out.println(tempfile.getAbsolutePath());
             try {
                 tempfile.createNewFile();
-                System.out.println("   Succesfully created 'tasklist.txt' within ./src/main/java/" + givenFilePath);
+                System.out.println("   Succesfully created 'tasklist.txt' "
+                        + "within ./src/main/java/" + givenFilePath);
                 return lt;
             } catch (IOException x) {
                 throw new DukeException("   UNEXPECTED ERROR: Unable to create file...");
@@ -80,7 +84,9 @@ public class Storage {
     public void save(TaskList listOfTasks) {
         String outputText = Storage.printListForSave(listOfTasks);
         try {
-            Files.write(p, "".getBytes()); // clears the file
+            // clears the file
+            Files.write(p, "".getBytes());
+
             Files.write(p, outputText.getBytes(), StandardOpenOption.APPEND);
             System.out.println("   Saved tasks to file...");
         } catch (IOException e) {
@@ -120,7 +126,6 @@ public class Storage {
         return outputText;
     }
 
-    // not sure what is the date specified thing (recheck)
     public Task convertToTask(String input) {
         List<String> words = List.of(input.split(" \\| "));
         Task output = null;

@@ -4,12 +4,14 @@ import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidInputException;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidInputException;
 
 import java.time.format.DateTimeParseException;
 
@@ -44,7 +46,8 @@ public class AddCommand extends Command{
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new InvalidInputException("   INVALID INPUT: Please specify the date for the deadline");
                 } catch (DateTimeParseException e) {
-                    throw new InvalidInputException("   INVALID INPUT: Please specify date in 'YYYY-MM-DD TIME' format");
+                    throw new InvalidInputException("   INVALID INPUT: Please specify date in "
+                            + "'YYYY-MM-DD TIME' format");
                 }
             } else {
                 try {
@@ -53,7 +56,8 @@ public class AddCommand extends Command{
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new InvalidInputException("   INVALID INPUT: Please specify the date for the event");
                 }  catch (DateTimeParseException e) {
-                    throw new InvalidInputException("   INVALID INPUT: Please specify date in 'YYYY-MM-DD TIME' format");
+                    throw new InvalidInputException("   INVALID INPUT: Please specify date in "
+                            + "'YYYY-MM-DD TIME' format");
                 }
             }
             task.addTask(t);

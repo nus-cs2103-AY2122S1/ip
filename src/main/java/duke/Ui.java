@@ -7,7 +7,8 @@ public class Ui {
     private final Scanner sc;
 
     Ui() {
-        this.line = "   ----------------------------------------------------------------------------------------------";
+        this.line = "   --------------------------------------------------------------"
+                + "--------------------------------";
         sc = new Scanner(System.in);
     }
 
@@ -44,14 +45,14 @@ public class Ui {
     }
 
     public void showAddTaskMessage(String taskDescription, int currentListSize) {
-        String output = String.format("   Got it. I've added this task: \n      %s\n   Now you have %d tasks in the list.",
-                taskDescription, currentListSize);
+        String output = String.format("   Got it. I've added this task: \n      %s"
+                + "\n   Now you have %d tasks in the list.", taskDescription, currentListSize);
         System.out.println(output);
     }
 
     public void showDeletedTask(String taskDescription, int currentListSize) {
-        String output = String.format("   Noted. I've deleted this task: \n      %s\n   Now you have %d tasks in the list.",
-                taskDescription, currentListSize);
+        String output = String.format("   Noted. I've deleted this task: \n      %s"
+                + "\n   Now you have %d tasks in the list.", taskDescription, currentListSize);
         System.out.println(output);
     }
 
@@ -61,7 +62,8 @@ public class Ui {
     }
 
     public void showInvalidCommand() {
-        System.out.println("   INVALID INPUT: Start the sentence with either 'todo'/'deadline'/'event'/'list'/'done'/'delete'/'bye'");
+        System.out.println("   INVALID INPUT: Start the sentence with either "
+                + "'todo'/'deadline'/'event'/'list'/'done'/'delete'/'bye'");
     }
 
     public void printList(TaskList lst) {
