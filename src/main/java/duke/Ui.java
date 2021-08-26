@@ -70,4 +70,15 @@ public class Ui {
         System.out.println("\tNow you have " + list.length() + " tasks in the list.");
         drawLine();
     }
+
+    public void findTasks(String s) {
+        drawLine();
+        System.out.println("\tHere are the matching tasks in your list:");
+        for (int i = 0; i < list.length(); i++) {
+            if (list.getTask(i).getDescription().contains(s)) {
+                System.out.println("\t" + (i + 1) + ". " + list.getTask(i).toString());
+            }
+        }
+        drawLine();
+    }
 }

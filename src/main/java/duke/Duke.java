@@ -56,6 +56,11 @@ public class Duke {
                     taskNumber = Integer.parseInt(s.substring(s.indexOf(" ") + 1)) - 1;
                     ui.delete(taskNumber);
                     continue;
+                } else if (s.startsWith("find")) {
+                    if (s.length() == 4 || s.length() == 5) {
+                        throw new DukeException("\t☹ OOPS!!! You did not put which task you want me to find.");
+                    }
+                    ui.findTasks(s.substring(s.indexOf(" ") + 1));
                 } else {
                     throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
