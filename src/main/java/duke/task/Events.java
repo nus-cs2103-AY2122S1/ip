@@ -1,22 +1,23 @@
 /**
  * @author Hang Zelin
- * @description Deadlines class that extends Task class. It is one of the types in 3 tasks.
+ * <p>
+ * Events class that extends Task class. It is one of the types in 3 tasks.
  * Will contain a time in the form of "/by"
  */
-package Duke.Task;
+package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Deadlines extends Task {
+public class Events extends Task {
 
-    private boolean done = false;
-    private String task = "";
-    private LocalDateTime time = null;
-    private String taskType = "D";
+    private boolean done;
+    private String task;
+    private LocalDateTime time;
+    private String taskType = "E";
 
-    public Deadlines(boolean done, String task, LocalDateTime time) {
+    public Events(boolean done, String task, LocalDateTime time) {
         this.done = done;
         this.task = task;
         this.time = time;
@@ -31,16 +32,16 @@ public class Deadlines extends Task {
             done_str = "X";
         }
 
-        return "[" + taskType + "]" + "[" + done_str + "] " + task + " (by: " + ParsedTime() + ")";
+        return "[" + taskType + "]" + "[" + done_str + "] " + task + " (at: " + parsedTime() + ")";
     }
 
     @Override
-    public void MarkDone() {
+    public void markDone() {
         this.done = true;
     }
 
     @Override
-    public String ParsedTime() {
+    public String parsedTime() {
         String parsedTime = "";
         if (this.time != null) {
             parsedTime = this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH));
@@ -68,4 +69,6 @@ public class Deadlines extends Task {
     public String getSaveDataInfo() {
         return this.taskType + " | " + (this.done ? 1 : 0) + " | " + task + " | " + getTime();
     }
+
+
 }

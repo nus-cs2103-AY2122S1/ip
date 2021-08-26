@@ -1,11 +1,12 @@
 /**
  * @author Hang Zelin
- * @description a JUnit class that tests some methods in Parser.
+ *
+ * A JUnit class that tests some methods in Parser.
  */
-package Duke.JUnitTests;
+package duke.junittests;
 
-import Duke.Command.Parser;
-import Duke.Excpetions.DukeException;
+import duke.command.Parser;
+import duke.excpetions.DukeException;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -17,10 +18,10 @@ public class ParserTest {
 
     @Test
     public void testParserTime() {
-        assertEquals(LocalDate.of(2019, 12, 2).atTime(18, 0), new Parser("").ParseTime("2/12/2019 1800"));
-        assertEquals(LocalDate.of(2020, 9, 23).atTime(15, 25), new Parser("").ParseTime("23/9/2020 1525"));
-        assertEquals(LocalDate.of(2019, 10, 15).atTime(0, 0), new Parser("").ParseTime("2019-10-15"));
-        assertEquals(null, new Parser("").ParseTime("ukpkmkk"));
+        assertEquals(LocalDate.of(2019, 12, 2).atTime(18, 0), new Parser("").parseTime("2/12/2019 1800"));
+        assertEquals(LocalDate.of(2020, 9, 23).atTime(15, 25), new Parser("").parseTime("23/9/2020 1525"));
+        assertEquals(LocalDate.of(2019, 10, 15).atTime(0, 0), new Parser("").parseTime("2019-10-15"));
+        assertEquals(null, new Parser("").parseTime("ukpkmkk"));
     }
 
     @Test

@@ -2,12 +2,12 @@
  * @author Hang Zelin
  * @description ToDos class that extends Task class. It is one of the types in 3 tasks.
  */
-package Duke.Task;
+package duke.task;
 
 public class ToDos extends Task {
 
-    private boolean done = false;
-    private String task = "";
+    private boolean done;
+    private String task;
     private String taskType = "T";
 
     public ToDos(boolean done, String task) {
@@ -28,7 +28,7 @@ public class ToDos extends Task {
     }
 
     @Override
-    public String ParsedTime() {
+    public String parsedTime() {
         return null;
     }
 
@@ -38,7 +38,7 @@ public class ToDos extends Task {
     }
 
     @Override
-    public void MarkDone() {
+    public void markDone() {
         this.done = true;
     }
 
