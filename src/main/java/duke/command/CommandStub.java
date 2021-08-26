@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * A stub class which simulates a command for testing.
+ */
 public class CommandStub extends Command {
 
     @Override

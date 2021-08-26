@@ -7,22 +7,26 @@ import duke.command.ExitCommand;
 import duke.command.ListTasksByDateCommand;
 import duke.command.ListTasksCommand;
 import duke.command.MarkTaskDoneCommand;
-import duke.exception.DukeException;
+import duke.exception.BruhException;
 import duke.exception.InvalidArgumentException;
 import duke.exception.MissingArgumentException;
 import duke.task.Task;
 
+/**
+ * Parses strings into commands & performs validation of
+ * the arguments provided.
+ */
 public class Parser {
     private static final String STOP_SIGNAL = "bye";
 
     /**
-     * Parses the user's input and returns the appropriate command to be run by the
-     * bot.
-     * 
+     * Parses string input and returns the appropriate command
+     * to be run by the chatbot.
+     *
      * @param input The input entered by the user.
-     * @return The response to be displayed.
+     * @return The command to be run by the chatbot.
      */
-    public static Command parseInputToCommand(String input) throws DukeException {
+    public static Command parseInputToCommand(String input) throws BruhException {
         if (input.isEmpty()) {
             throw new InvalidArgumentException();
         } else if (input.equals(STOP_SIGNAL)) {
@@ -63,6 +67,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks for missing arguments & throws an exception, if found.
+     *
+     * @param sections     An array consisting of the input, split into the first word and the rest of the input
+     * @param errorMessage The error message to be displayed, if an exception is thrown.
+     * @throws MissingArgumentException if a missing argument is found.
+     */
     public static void checkMissingArguments(String[] sections, String errorMessage) throws MissingArgumentException {
         if (sections.length != 2 || sections[1].isEmpty()) {
             throw new MissingArgumentException(errorMessage);

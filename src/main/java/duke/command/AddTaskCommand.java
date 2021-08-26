@@ -5,9 +5,17 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Represents a command which adds a task to the task list.
+ */
 public class AddTaskCommand extends Command {
-    private Task taskToAdd;
+    private final Task taskToAdd;
 
+    /**
+     * Constructor for a command to add a task to the task list.
+     *
+     * @param taskToAdd The task to be added to the task list.
+     */
     public AddTaskCommand(Task taskToAdd) {
         this.taskToAdd = taskToAdd;
     }
