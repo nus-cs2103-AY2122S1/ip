@@ -20,6 +20,10 @@ public class Task {
         System.out.println(toString());
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     @Override
     public String toString() {
         return ( "|" + getStatusIcon() + "| "+ this.description);
