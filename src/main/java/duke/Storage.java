@@ -1,15 +1,25 @@
-package duke;//duke.Storage: deals with loading tasks from the file and saving tasks in the file
+package duke;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
-
-//deals with loading tasks from the file and saving tasks in the file
+/**
+ * deals with loading tasks from the file and saving tasks in the file
+ *
+ * @author Erwin Quek
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class Storage {
     private final Path path;
     private final String stringPath;
 
+    /**
+     * Constructor for Storage.
+     * @param filePath Takes in a file path
+     * @throws InvalidPathException Throws an invalid path error
+     */
     public Storage(String filePath) throws InvalidPathException {
         this.path = Path.of(filePath);
         this.stringPath = filePath;
@@ -18,6 +28,11 @@ public class Storage {
 //        }
     }
 
+    /**
+     * A method to check if path is valid.
+     * @param path
+     * @return
+     */
     private boolean isValidPath(Path path) {
         return path.toString().endsWith(".txt");
     }
