@@ -1,13 +1,14 @@
 package duke;
 
 import duke.exceptions.DukeException;
-import duke.exceptions.DukeUnknownCommandException;
-import duke.exceptions.DukeEmptyTodoDescriptionException;
-import java.util.ArrayList;
 
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Representing the Duke project. Used to store Tasks and can be marked complete
+ * when done
+ */
 
 public class Duke {
     private Scanner sc = new Scanner(System.in);
@@ -25,6 +26,7 @@ public class Duke {
         Duke duke = new Duke();
         duke.runDuke();
     }
+
 
     public void runDuke() throws DukeException, IOException {
         storage.fetchData();

@@ -4,18 +4,30 @@ import duke.exceptions.DukeEmptyTodoDescriptionException;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeUnknownCommandException;
 
+/**
+ * duke.Ui represents the Implementation of the interface of Duke.
+ * Ui handles the displaying of messages and executing commands for
+ * various tasks
+ */
+
 public class Ui {
 
     void printLines() {
         System.out.println("------------------------------------------------------------------");
     }
 
+    /**
+     * Displays the welcome message to the user
+     */
     void displayWelcomeMessage() {
         printLines();
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
         printLines();
     }
 
+    /**
+     * Displays the farewell message to user when they enter bye.
+     */
     void displayByeMessage() {
         printLines();
         System.out.println("Bye. Hope to see you again soon!");
@@ -28,6 +40,12 @@ public class Ui {
         printLines();
     }
 
+    /**
+     * Executes the commands entered by the user.
+     * @param command        valid command entered by the user
+     * @param description    description for the Task
+     * @throws DukeException if the command is invalid or event has an empty description
+     */
     void executeCommand(String command, String description)  throws DukeException {
         try {
             if (command.equals("list")) {
@@ -87,10 +105,18 @@ public class Ui {
 
     }
 
+    /**
+     * Remove a Task from the list
+     * @param taskIndex the index of the Task to be removed
+     */
     void deleteTask(int taskIndex) {
         Tasklist.delete(taskIndex);
     }
 
+    /**
+     * Display the completion message for the Task marked done
+     * @param toBeCompleted the Task which is to be marked done
+     */
     void displayTaskCompletion(Task toBeCompleted) {
         printLines();
         System.out.println("Nice! I've marked this task as done:");
@@ -98,7 +124,9 @@ public class Ui {
         printLines();
     }
 
-
+    /**
+     * Display the tasks in the DukeList
+     */
     void displayDukeList() {
         printLines();
         for (int i = 0;i < Tasklist.dukeList.size(); i++) {

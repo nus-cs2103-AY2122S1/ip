@@ -5,6 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * duke.Storage class allows to save and load data on the hard disk on the file saved-tasks.txt
+ * under directory ./data.
+ */
 public class Storage {
 
     public String path;
@@ -13,6 +17,10 @@ public class Storage {
         this.path = path;
     }
 
+
+    /**
+     * Stores the current task List on the hard disk.
+     */
     public void saveData() {
         try {
             File file = new File("./data/saved-tasks.txt");
@@ -38,7 +46,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Fetches the task list stored on the hard disk
+     */
     public void fetchData() throws IOException {
+
         File savedFile = new File("./data/saved-tasks.txt");
         if(!savedFile.exists()) {
             savedFile.getParentFile().mkdirs();

@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * duke.Event class to create Events for the duke list
+ */
+
 public class Event extends Task {
     protected String time;
 
@@ -8,6 +12,10 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * To get the time of the event stored in the list
+     * @return
+     */
     public String getTime() {
         return time;
     }
