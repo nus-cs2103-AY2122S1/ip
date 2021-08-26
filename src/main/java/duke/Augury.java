@@ -24,7 +24,7 @@ import java.util.Scanner;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    static String VER     = "v0.8.0"; // Level-8 Dates and Times + A-MoreOOP, A-Packages, A-JUnit, A-Jar, A-JavaDoc
+    static String VER     = "v0.8.0"; // Level-9 Find
     static String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -107,8 +107,11 @@ public class Augury {
                 case "COMMAND_MAKE_TASK":
                     handleAddTask(input);
                     break;
+                case "COMMAND_FIND_TASKS":
+                    handleFindTasks(input);
+                    break;
                 case "COMMAND_UNKNOWN":
-                    throw new AuguryException("Unknown command.");
+                    throw new UnknownCommandException("Unknown command.");
                 default:
                     throw new AuguryException("Something went wrong.");
                 }
@@ -169,11 +172,21 @@ public class Augury {
 
         for (Integer i : listOfTasks){
             if (i > taskList.size()) {
-                throw new InvalidActionException("Task " + i + " does not exist, please try again");
+                throw new InvalidActionException("Task " + i + " does not exist, please try again.");
             }
         }
         ui.speak(taskList.deleteTasksAndAnnounce(listOfTasks));
         storage.saveTaskListToStorage(taskList);
+    }
+
+    private void handleFindTasks(String args) throws AuguryException {
+        if (args.length() <= 5) {
+            throw new InvalidActionException("Please enter the search string which you want to find.");
+        }
+
+        args = args.substring(5);
+        ui.speak(taskList.findAndAnnounce(args));
+
     }
 
     private ArrayList<Integer> convertCommaSeparatedStringToIntegerArrayList (String s) {

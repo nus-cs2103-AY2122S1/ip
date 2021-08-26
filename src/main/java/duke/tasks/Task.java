@@ -35,10 +35,17 @@ public abstract class Task {
     }
 
     /**
-     * Marks the current task to be done.
+     * Marks the current {@code Task} to be done.
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Returns description of {@code Task}.
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     @Override
