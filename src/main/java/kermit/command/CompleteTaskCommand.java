@@ -51,7 +51,7 @@ public class CompleteTaskCommand extends Command {
     /**
      * Returns if command is the exit command.
      *
-     * @return false
+     * @return Always returns false.
      */
     @Override
     public boolean isExit() {
