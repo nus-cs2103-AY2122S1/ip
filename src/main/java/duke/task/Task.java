@@ -11,7 +11,8 @@ public abstract class Task {
     private String value = null;
     private boolean done = false;
     private LocalDate time = null;
-    public Task(String value){
+
+    public Task(String value) {
         this.value = value;
         this.done = false;
     }
@@ -26,6 +27,7 @@ public abstract class Task {
 
     /**
      * Getting the information of the task.
+     *
      * @return Information of the task.
      */
     public String getValue() {
@@ -48,6 +50,7 @@ public abstract class Task {
 
     /**
      * Get the status icon for this task.
+     *
      * @return A string representing the state of the task.
      */
     public String getStatusIcon() {

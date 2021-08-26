@@ -104,15 +104,14 @@ public class Storage {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
         String dirPath = System.getProperty("user.dir") + "\\src\\main\\data";
-        try (FileReader reader = new FileReader(dirPath + "\\" + fileName))
-        {
+        try (FileReader reader = new FileReader(dirPath + "\\" + fileName)) {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
 
             JSONArray taskArr = (JSONArray) obj;
 
             //Iterate over task array
-            taskArr.forEach( task -> taskList.add(parseTaskObject( (JSONObject) task ) ) );
+            taskArr.forEach(task -> taskList.add(parseTaskObject((JSONObject) task)));
 
         } catch (IOException | ParseException e) {
             e.printStackTrace();
