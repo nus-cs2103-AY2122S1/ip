@@ -25,20 +25,14 @@ public class Duke {
     private void run() {
         //initialise required classes
         TaskList taskList = new TaskList();
-        Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH, this, taskList);
+        Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH, taskList);
 
 
         storage.start();
 
         Scanner scan = new Scanner(System.in);
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-
-        System.out.println("Hello from\n" + logo + "\nWhat can I do for you today?");
+        Ui.printWelcomeMessage();
 
         while(true) {
             String input = scan.nextLine();
@@ -47,7 +41,7 @@ public class Duke {
 
             //case if nothing is entered
             if (firstString.equals("")) {
-                System.out.println("...why so quiet? Come on, say something to me!");
+                Ui.printEmptyInputError();
                 continue;
             }
 
@@ -59,7 +53,7 @@ public class Duke {
             //cases for specified keywords
             if (firstString.equals("list")) {
                 if (taskList.getTaskNumber() == 0) {
-                    System.out.println("There are currently no tasks! Stop being so lazy and start adding your tasks!");
+                    Ui.printNoTaskError();
                     continue;
                 }
                 for (int i = 0; i < taskList.getTaskNumber(); i++) {
@@ -72,7 +66,7 @@ public class Duke {
             if (firstString.equals("done") || firstString.equals("delete")) {
                 if (inputArray.length < 2) {
                     //case if no number is entered
-                    System.out.println("Please enter the index of the task to complete after the keyword done!");
+                    Ui.printNumberError();
                     continue;
                 }
                 try {
@@ -81,24 +75,26 @@ public class Duke {
                     int arrayIndex = index - 1;
                     //case if entered index does not correspond to a task
                     if (index > taskList.getTaskNumber() || index < 1) {
-                        System.out.println("That task does not exist! Don't try to trick me!");
+                        Ui.printTaskError();
                         continue;
                     }
                     Task currentTask = taskList.getTask(arrayIndex);
                     if (firstString.equals("done")) {
                         //case to complete a task
                         currentTask.setCompleted();
-                        System.out.println("Ok, very nice. I have set the following task as completed.\n" + currentTask.toString());
+                        Ui.printTaskCompleted();
+                        System.out.println(currentTask.toString());
                     } else {
                         //remaining case is to delete the task.
                         taskList.deleteTask(currentTask);
-                        System.out.println("Ok, very nice. I have deleted the following task.\n" + currentTask.toString());
+                        Ui.printTaskCompleted();
+                        System.out.println(currentTask.toString());
                     }
-                    System.out.println("Now you have " + taskList.getTaskNumber() + " tasks remaining. Get to work!");
-                    storage.saveData(this);
+                    Ui.printTaskNumberReminder(taskList.getTaskNumber());
+                    storage.saveData();
 
                 } catch (NumberFormatException exception) {
-                    System.out.println("Enter a valid number! Or do you not know basic math?");
+                    Ui.printNumberError();
                 } finally {
                     continue;
                 }
@@ -121,12 +117,12 @@ public class Duke {
             }
 
             //case if first string input is not a keyword
-            System.out.println("I could not understand your input. Please stop speaking gibberish to me!");
+            Ui.printBadInputError();
         }
 
         //exit from the program
         scan.close();
-        System.out.println("kthxbye");
+        Ui.printEndMessage();
     }
 
     /**
@@ -145,11 +141,11 @@ public class Duke {
      * @param taskType The type of task to be created.
      * @param array The array of strings used to create the task.
      */
-    private void createTask(Tasks taskType, String[] array, Storage storage, TaskList taskList) {
+    public void createTask(Tasks taskType, String[] array, Storage storage, TaskList taskList) {
         //preliminary check if more than 1 string was entered
         if (array.length < 2) {
             //case if no name is entered for the task
-            System.out.println("Hey, I'm gonna need a name for your Task!");
+            Ui.printBadInputError();
             return;
         }
 
@@ -184,7 +180,7 @@ public class Duke {
             }
             //check if a time was entered
             if (!stringHasEnded) {
-                System.out.println("Do you not have a deadline? If you do, you might as well enter it right?");
+                Ui.printBadDateFormatError();
                 return;
             }
 
@@ -193,7 +189,7 @@ public class Duke {
                 LocalDate date = Parser.parseDate(time);
                 tempTask = new Deadlines(str.toString(), date);
             } catch (IllegalArgumentException exception) {
-                System.out.println("Enter a valid date format! (yyyy-mm-dd)");
+                Ui.printBadDateFormatError();
                 return;
             }
             break;
@@ -217,7 +213,7 @@ public class Duke {
             }
             //check if a duration was entered
             if (!stringHasTerminated) {
-                System.out.println("So you have an event, but not a time period when it is happening?");
+                Ui.printBadDateFormatError();
                 return;
             }
 
@@ -226,18 +222,17 @@ public class Duke {
                 LocalDate date = Parser.parseDate(eventTime);
                 tempTask = new Events(str.toString(), date);
             } catch (IllegalArgumentException exception) {
-                System.out.println("Enter a valid date format! (yyyy-mm-dd)");
+                Ui.printBadDateFormatError();
                 return;
             }
             break;
         }
         taskList.addTask(tempTask);
 
-
-        System.out.println("Ok can, sure. I have added this task as you wanted.");
+        Ui.printAddTaskCompletionMessage();
         System.out.println(tempTask.toString());
-        System.out.println("Now you have only " + taskList.getTaskNumber() + " tasks in the list. Try being more hardworking!");
-        storage.saveData(this);
+        Ui.printTaskNumberReminder(taskList.getTaskNumber());
+        storage.saveData();
 
     }
 
