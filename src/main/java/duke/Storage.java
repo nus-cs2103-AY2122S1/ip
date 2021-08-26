@@ -83,11 +83,14 @@ public class Storage {
     public void storeDone(int index, String taskStorage) throws IOException {
         BufferedReader taskDataReader = new BufferedReader(new FileReader(taskDataFile));
         StringBuilder newTaskData = new StringBuilder();
+        
         for (int i = 0; i < index - 1; i++) {
             newTaskData.append(taskDataReader.readLine() + "\n");
         }
+        
         taskDataReader.readLine();
         newTaskData.append(taskStorage);
+        
         while (true) {
             String nextLine = taskDataReader.readLine();
             if (nextLine == null) {
@@ -96,6 +99,7 @@ public class Storage {
                 newTaskData.append(nextLine + "\n");
             }
         }
+        
         FileWriter taskDataWriter = new FileWriter(taskDataFile);
         taskDataWriter.write(newTaskData.toString());
         taskDataWriter.close();
@@ -105,10 +109,13 @@ public class Storage {
     public void storeDelete(int index) throws IOException {
         BufferedReader taskDataReader = new BufferedReader(new FileReader(taskDataFile));
         StringBuilder newTaskData = new StringBuilder();
+        
         for (int i = 0; i < index - 1; i++) {
             newTaskData.append(taskDataReader.readLine() + "\n");
         }
+        
         taskDataReader.readLine();
+        
         while (true) {
             String nextLine = taskDataReader.readLine();
             if (nextLine == null) {
@@ -117,6 +124,7 @@ public class Storage {
                 newTaskData.append(nextLine + "\n");
             }
         }
+        
         FileWriter taskDataWriter = new FileWriter(taskDataFile);
         taskDataWriter.write(newTaskData.toString());
         taskDataWriter.close();

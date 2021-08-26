@@ -42,6 +42,7 @@ public class Parser {
     public static LocalDateTime parseDateTime(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd HHmm");
         LocalDateTime deadlineDT;
+        
         try {
             deadlineDT = LocalDateTime.parse(dateTime, formatter);
             return deadlineDT;
@@ -63,6 +64,7 @@ public class Parser {
     
     private static String[] todoParser(String newCommand) {
         String[] strArr = Pattern.compile("(?i)todo\\s+").split(newCommand, 2);
+        
         if (strArr.length == 2 && strArr[1].length() > 0) {
             return new String[]{"add", "todo", strArr[1]};
         } else if (strArr.length == 2 || strArr[0].length() == 4) {

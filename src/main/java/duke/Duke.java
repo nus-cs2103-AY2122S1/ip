@@ -41,6 +41,7 @@ public class Duke {
         ui.showWelcome();
         ui.beginListen();
         boolean isExit = false;
+        
         while (!isExit) {
             try {
                 String newCommand = ui.readCommand();
@@ -54,13 +55,13 @@ public class Duke {
                     ui.showList(taskList.getList());
                     break;
                 case "add":
-                    add(parsedCommand);
+                    addTask(parsedCommand);
                     break;
                 case "done":
-                    done(parsedCommand);
+                    markTaskDone(parsedCommand);
                     break;
                 case "delete":
-                    delete(parsedCommand);
+                    deleteTask(parsedCommand);
                     break;
                 case "fail":
                     ui.showCommandFail();
@@ -72,10 +73,11 @@ public class Duke {
                 ui.showError(ex.getMessage());
             }
         }
+        
         ui.stopListen();
     }
 
-    private void add(String[] parsedCommand) throws IOException {
+    private void addTask(String[] parsedCommand) throws IOException {
         Task newTask = null;
         switch (parsedCommand[1]) {
         case "todo":
@@ -100,7 +102,7 @@ public class Duke {
         }
     }
     
-    private void done(String[] parsedCommand) throws IOException {
+    private void markTaskDone(String[] parsedCommand) throws IOException {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
         if (taskList.isIndexValid(taskIndex)) {
             String message = taskList.markDone(taskIndex);
@@ -112,7 +114,7 @@ public class Duke {
         }
     }
 
-    private void delete(String[] parsedCommand) throws IOException {
+    private void deleteTask(String[] parsedCommand) throws IOException {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
         if (taskList.isIndexValid(taskIndex)) {
             String message = taskList.deleteTask(taskIndex);
