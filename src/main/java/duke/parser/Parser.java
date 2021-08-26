@@ -17,6 +17,7 @@ import duke.ui.Ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * Encapsulates the processing of user inputs to duke.
@@ -33,7 +34,7 @@ public class Parser {
      * The list of commands that the parser can handle.
      */
     private enum Command {
-        EXIT, LIST, DONE, TODO, DEADLINE, EVENT, UNKNOWN, DELETE
+        EXIT, LIST, DONE, TODO, DEADLINE, EVENT, UNKNOWN, DELETE, FIND
     }
 
     /**
@@ -53,13 +54,13 @@ public class Parser {
     /**
      * Processes the user inputs into commands that duke can understand.
      *
-     * @param cmd The user inputs in the form of String.
+     * @param command The user inputs in the form of String.
      * @return Returns false if the command processed is to exit duke, else true.
      * @throws DukeException If some error occurred in the processing of user input,
      *                       like the user requires some function that duke does not support.
      */
-    public boolean process(String cmd) throws DukeException {
-        switch (stringToCommand(cmd)) {
+    public boolean process(String command) throws DukeException {
+        switch (stringToCommand(command)) {
         case EXIT:
             ui.farewellMessage();
             return false;
@@ -69,15 +70,15 @@ public class Parser {
             break;
 
         case DONE:
-            int taskNumber = Integer.parseInt(cmd.split(" ")[1]);
+            int taskNumber = Integer.parseInt(command.split(" ")[1]);
             ui.markDoneMessage(list.mark(taskNumber));
             storage.save(list.getList());
             break;
 
         case EVENT:
-            String eventDescription = cmd.substring(cmd.indexOf(" ") + 1, cmd.indexOf("/at") - 1);
+            String eventDescription = command.substring(command.indexOf(" ") + 1, command.indexOf("/at") - 1);
             try {
-                LocalDateTime at = LocalDateTime.parse(cmd.substring(cmd.indexOf("at") + 3),
+                LocalDateTime at = LocalDateTime.parse(command.substring(command.indexOf("at") + 3),
                         DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
                 Event event = new Event(eventDescription, false, at);
                 addTask(event);
@@ -87,9 +88,9 @@ public class Parser {
             break;
 
         case DEADLINE:
-            String deadlineDescription = cmd.substring(cmd.indexOf(" ") + 1, cmd.indexOf("/by") - 1);
+            String deadlineDescription = command.substring(command.indexOf(" ") + 1, command.indexOf("/by") - 1);
             try {
-                LocalDateTime by = LocalDateTime.parse(cmd.substring(cmd.indexOf("by") + 3),
+                LocalDateTime by = LocalDateTime.parse(command.substring(command.indexOf("by") + 3),
                         DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
                 Deadline deadline = new Deadline(deadlineDescription, false, by);
                 addTask(deadline);
@@ -99,8 +100,8 @@ public class Parser {
             break;
 
         case TODO:
-            int spaceIndex = cmd.indexOf(" ");
-            String toDoDescription = cmd.substring(spaceIndex + 1);
+            int spaceIndex = command.indexOf(" ");
+            String toDoDescription = command.substring(spaceIndex + 1);
             if (toDoDescription.isBlank() || spaceIndex == -1) {
                 throw new NoToDoDescriptionException();
             }
@@ -110,10 +111,16 @@ public class Parser {
             break;
 
         case DELETE:
-            int taskNum = Integer.parseInt(cmd.substring(cmd.indexOf(" ") + 1));
+            int taskNum = Integer.parseInt(command.substring(command.indexOf(" ") + 1));
             Task task = list.delete(taskNum);
             ui.deleteTaskMessage(list.size(), task);
             storage.save(list.getList());
+            break;
+
+        case FIND:
+            String keyword = command.substring(command.indexOf(" ") + 1);
+            ArrayList<Task> list = this.list.findRelatedTask(keyword);
+            ui.printRelatedTasks(list);
             break;
 
         case UNKNOWN:
@@ -153,6 +160,9 @@ public class Parser {
 
         case "delete":
             return Command.DELETE;
+
+        case "find":
+            return Command.FIND;
 
         default:
             return Command.UNKNOWN;

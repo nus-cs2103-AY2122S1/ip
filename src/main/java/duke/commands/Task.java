@@ -54,8 +54,17 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String str = String.format("%s|%c|%s", representation, (isDone ? '1' : '0'), description);
-        return str;
+        String s = String.format("%s|%c|%s", representation, (isDone ? '1' : '0'), description);
+        return s;
     }
 
+    /**
+     * Returns true if the task description contains the keyword provided by the user.
+     *
+     * @param s The keyword to search for in the description.
+     * @return True if the description contains the keyword, else false.
+     */
+    public boolean findKeyword(String s) {
+        return description.contains(s);
+    }
 }

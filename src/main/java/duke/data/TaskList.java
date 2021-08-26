@@ -59,11 +59,11 @@ public class TaskList {
     /**
      * Deletes a specific task corresponding to the number in the list.
      *
-     * @param taskNum The task number.
+     * @param taskNumber The task number.
      * @return The task deleted.
      */
-    public Task delete(int taskNum) {
-        return list.remove(taskNum - 1);
+    public Task delete(int taskNumber) {
+        return list.remove(taskNumber - 1);
     }
 
     /**
@@ -103,5 +103,21 @@ public class TaskList {
      */
     public void loadFromList(ArrayList<Task> list) {
         this.list = list;
+    }
+
+    /**
+     * Returns an ArrayList containing task related to the keyword provided by the user.
+     *
+     * @param s The keyword to search for in the description of task.
+     * @return The list containg the related task.
+     */
+    public ArrayList<Task> findRelatedTask(String s) {
+        ArrayList<Task> list = new ArrayList<>();
+        for (Task t : this.list) {
+            if (t.findKeyword(s)) {
+                list.add(t);
+            }
+        }
+        return list;
     }
 }
