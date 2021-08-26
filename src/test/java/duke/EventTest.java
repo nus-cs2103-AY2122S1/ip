@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class DeadlineTest {
+public class EventTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[D][ ] submission (by: Oct 2 2020)",
-                new Deadline(submission, 2020-10-02).toString());
+        assertEquals("[E][ ] zoom meeting (at: Oct 2 2020)",
+                new Event("zoom meeting",
+                        "2020-10-02").toString());
     }
 }

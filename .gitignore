@@ -4,6 +4,7 @@
 /*.jar
 /*.iml
 /*.class
+/lib/
 
 # Gradle build files
 /.gradle/

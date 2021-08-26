@@ -12,7 +12,7 @@ public class ParserTest {
         try {
             assertEquals(3, Parser.validateDone("done"));
             fail();
-        } catch {
+        } catch (Exception e) {
             assertEquals("Please specify the task number.", e.getMessage());
         }
     }
