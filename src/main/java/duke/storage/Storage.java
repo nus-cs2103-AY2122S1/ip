@@ -18,10 +18,19 @@ import duke.tasks.ToDo;
 // encoder
 // decoder
 
+/**
+ * Loads data from file upon start and saves data to file upon exit.
+ */
 public class Storage {
     private static final String FILE_NAME = "./duke.txt";
     private static final Path FILE_PATH = Paths.get(FILE_NAME);
 
+    /**
+     * Loads data from file and formats it into a list of tasks.
+     *
+     * @return The list of tasks read from the file.
+     * @throws IOException If an I/O error occurs.
+     */
     public static List<Task> load() throws IOException {
         if (!Files.exists(FILE_PATH)) {
             Files.createFile(FILE_PATH);
@@ -53,6 +62,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves data of the current task list to file.
+     *
+     * @param data The data of the current task list.
+     * @throws IOException If an I/O error occurs during writing.
+     */
     public static void save(List<String> data) throws IOException {
         Files.write(FILE_PATH, data, StandardOpenOption.WRITE);
     }
