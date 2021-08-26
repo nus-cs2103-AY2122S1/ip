@@ -1,23 +1,34 @@
-public class Event extends Task{
-    String time;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Event(String description, String time) {
+public class Event extends Task{
+    LocalDate startTime;
+    LocalDate endTime;
+
+    public Event(String description, LocalDate startTime, LocalDate endTime) {
         super(description, "[E]", false);
-        this.time = time;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
-    public Event(String description, String time, boolean status) {
+    public Event(String description, LocalDate startTime, LocalDate endTime, boolean status) {
         super(description, "[E]", status);
-        this.time = time;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public String getformmatedData() {
         String formmatedStatus = super.isDone() ? "1|" : "0|";
-        return "E|" + formmatedStatus + super.getDescription() + "|" + time;
+        return "E|" + formmatedStatus + super.getDescription() 
+                + "|" + this.startTime.toString() 
+                + "|" + this.endTime.toString();
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + this.time + ")";
+        return super.toString() + " (from " 
+                + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+                + " to " + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ")";
     }
 }

@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Duke {
     private static final String WELCOME_MSG = "Hello! I'm Mr House";
@@ -26,15 +27,16 @@ public class Duke {
                 String type = data[0];
                 boolean isDone = data[1] == "1" ? true : false;
                 String description = data[2];
-                System.out.println(description);
+                
                 if (type.equals("T")) {
                     tasks.add(new ToDo(description, isDone));
                 } else if (type.equals("D")) {
-                    String time = data[3].trim();
+                    LocalDate time = LocalDate.parse(data[3].trim());
                     tasks.add(new Deadline(description, time, isDone));
                 } else if (type.equals("E")) {
-                    String time = data[3].trim();
-                    tasks.add(new Event(description, time, isDone));
+                    LocalDate startTime = LocalDate.parse(data[3].trim());
+                    LocalDate endTime = LocalDate.parse(data[3].trim());
+                    tasks.add(new Event(description, startTime, endTime, isDone));
                 }
             }
 
@@ -67,7 +69,6 @@ public class Duke {
             input = sc.next();
             description = sc.nextLine().trim();
         }
-        
         sc.close();
         System.out.println(formatString(EXIT_MSG));
     }
@@ -89,13 +90,13 @@ public class Duke {
                 tasks.add(newTask);
                 System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
             }
-        } else if (action.equals("deadline")){
+        } else if (action.equals("deadline")) {
             if (description.isBlank()) {
                 throw new InvalidInputException("deadline's description cannot be empty!");
             } else {
                 String[] split = description.split("/by", 2);
-                description = split[0];
-                String time = split[1].trim();
+                description = split[0].trim();
+                LocalDate time = LocalDate.parse(split[1].trim());
 
                 Task newTask = new Deadline(description, time);
                 tasks.add(newTask);
@@ -105,11 +106,14 @@ public class Duke {
             if (description.isBlank()) {
                 throw new InvalidInputException("event's description cannot be empty!");
             } else {
-                String[] split = description.split("/at", 2);
-                description = split[0];
-                String time = split[1].trim();
+                String[] split = description.split("/from", 2);
+                description = split[0].trim();
+                String[] time = split[1].split("/to", 2);
+                LocalDate startTime = LocalDate.parse(time[0].trim());
+                LocalDate endTime = LocalDate.parse(time[1].trim());
 
-                Task newTask = new Event(description, time);
+
+                Task newTask = new Event(description, startTime, endTime);
                 tasks.add(newTask);
                 System.out.println(formatString(newTask.actionString() + "\n" + getTaskCountString()));
             }
