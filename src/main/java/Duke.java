@@ -8,12 +8,18 @@ public class Duke {
     private List list;
     private Parser parser;
 
+    /**
+     * Constructor of Duke.
+     */
     public Duke() {
         this.ui = new Ui();
         this.list = new List();
         this.parser = new Parser(this.list);
     }
 
+    /**
+     * Run the Duke program, prints out welcome statement and starts accepting input.
+     */
     public void run() {
         ui.welcome();
         parser.execute();

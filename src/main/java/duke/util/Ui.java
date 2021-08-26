@@ -1,6 +1,7 @@
 package duke.util;
 
 public class Ui {
+    //Duke logo
     private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -10,6 +11,9 @@ public class Ui {
     public Ui() {
     }
 
+    /**
+     * Welcome statement for new user.
+     */
     public void welcome() {
         System.out.println("Hello from\n" + logo);
     }

@@ -12,12 +12,23 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Storage {
+    //File name of file to be used to write and load list of task.
     private String fileName;
 
+    /**
+     * Constructor of Storage.
+     *
+     * @param fileName File name of file to write to or load from.
+     */
     public Storage(String fileName) {
         this.fileName = fileName;
     }
 
+    /**
+     * Write the inputted list onto the specified file.
+     *
+     * @param list ArrayList to be written onto the file.
+     */
     public void writeToFile(ArrayList<Task> list) {
         try {
             FileOutputStream writeData = new FileOutputStream(fileName);
@@ -32,6 +43,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Return an ArrayList that is loaded from the file.
+     *
+     * @return ArrayList from file, if nothing is written on file, return new ArrayList list.
+     */
     public ArrayList<Task> loadFromFile() {
         try {
             FileInputStream readData = new FileInputStream(fileName);
