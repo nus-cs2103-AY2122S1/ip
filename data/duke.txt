@@ -1,0 +1,4 @@
+T,1,get up
+T,0,sit up
+T,0,yawn
+T,0,walk

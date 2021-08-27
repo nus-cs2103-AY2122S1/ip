@@ -30,10 +30,6 @@ public abstract class Entry {
         return this.ENTRY.length() < 1;
     }
 
-    public String getEntryOnly() {
-        return this.ENTRY;
-    }
-
     public String saveString() {
         String isDoneString = "0";
         if (this.isDone) {
