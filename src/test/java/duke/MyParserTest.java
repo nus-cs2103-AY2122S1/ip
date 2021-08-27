@@ -1,5 +1,8 @@
-package duke.command;
+package duke;
 
+import duke.command.Duke;
+import duke.command.DukeException;
+import duke.command.MyParser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
