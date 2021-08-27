@@ -5,6 +5,7 @@ import duke.task.*;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidDescriptionException;
 import duke.exception.InvalidTimeException;
+import duke.ui.Ui;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -62,8 +63,8 @@ public class Parser {
 
     private void addComplete(Task t) {
         tasks.add(t);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(t.toString());
+        Ui.printMessage("Got it. I've added this task:");
+        Ui.printMessage(t.toString());
         tasks.printTaskNumber(tasks);
         storage.saveData(tasks);
     }
@@ -141,9 +142,8 @@ public class Parser {
     public boolean parseCommand() {
 
         String input;
-        String lineBreak = "========================================================================";
         Scanner sc = new Scanner(System.in);
-        System.out.println(lineBreak);
+        Ui.printLineBreak();
 
         try {
             while (sc.hasNextLine()) {
@@ -152,7 +152,7 @@ public class Parser {
 
                 switch (keyword) {
                 case BYE:
-                    System.out.println("Bye. Hope to see you again soon!");
+                    Ui.printMessage("Bye. Hope to see you again soon!");
                     return false;
                 case LIST:
                     tasks.printItemList(tasks);
@@ -198,14 +198,14 @@ public class Parser {
                 default:
                     throw new InvalidInputException("Please check your input!");
                 }
-                System.out.println(lineBreak);
+                Ui.printLineBreak();
             }
         } catch (InvalidTimeException | InvalidDescriptionException e) {
-            System.out.println(e.getMessage());
+            Ui.printMessage(e.getMessage());
         } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException | InvalidInputException e) {
-            System.out.println("☹ OOPS!!! Please include an appropriate description/time!");
+            Ui.printMessage("☹ OOPS!!! Please include an appropriate description/time!");
         } catch (IllegalArgumentException e) {
-            System.out.println("☹ OOPS!!! Unable to recognise command, please try again!");
+            Ui.printMessage("☹ OOPS!!! Unable to recognise command, please try again!");
         }
         return true;
     }

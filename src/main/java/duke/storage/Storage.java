@@ -6,6 +6,7 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.exception.InvalidInputException;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileReader;
@@ -48,7 +49,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("An error occurred when saving tasks!");
+            Ui.printMessage("An error occurred when saving tasks!");
         }
     }
 
@@ -61,14 +62,14 @@ public class Storage {
     public ArrayList<Task> loadData() {
         File folder = new File("./data/");
         if (folder.mkdir()) {
-            System.out.println("New data folder is created");
+            Ui.printMessage("New data folder is created");
         }
 
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filePath);
             if (file.createNewFile()) {
-                System.out.println("New data file is created");
+                Ui.printMessage("New data file is created");
             } else {
                 BufferedReader reader = new BufferedReader(new FileReader(filePath));
                 String line;
@@ -76,10 +77,10 @@ public class Storage {
                 while ((line = reader.readLine()) != null) {
                     tasks.add(convertInputToTask(line));
                 }
-                System.out.println("Successfully loaded files!");
+                Ui.printMessage("Successfully loaded files!");
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Error! Cannot load file");
+            Ui.printMessage("Error! Cannot load file");
         } catch (IOException | InvalidInputException | SecurityException e) {
             e.printStackTrace();
         }

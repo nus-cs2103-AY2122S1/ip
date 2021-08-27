@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.storage.Storage;
+import duke.ui.Ui;
+
 import java.util.ArrayList;
 
 /**
@@ -47,10 +49,10 @@ public class TaskList {
             int taskDoneNum = getTaskNumber(input);
             Task taskDone = tasks.get(taskDoneNum - 1);
             taskDone.markAsDone();
-            System.out.println("Nice! I've marked this task as done:" + '\n' + taskDone.toString());
+            Ui.printMessage("Nice! I've marked this task as done:" + '\n' + taskDone.toString());
             Storage.saveData(this);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("☹ OOPS!!! No such task can be marked as done!");
+            Ui.printMessage("☹ OOPS!!! No such task can be marked as done!");
         }
     }
 
@@ -64,12 +66,12 @@ public class TaskList {
             int taskDeleteNum = getTaskNumber(input);
             Task taskToDelete = tasks.get(taskDeleteNum - 1);
             taskToDelete.markUndone();
-            System.out.println("Noted. I've removed this task:" + '\n' + taskToDelete.toString());
+            Ui.printMessage("Noted. I've removed this task:" + '\n' + taskToDelete.toString());
             tasks.remove(taskDeleteNum - 1);
             printTaskNumber(this);
             Storage.saveData(this);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("☹ OOPS!!! No such task can be deleted!");
+            Ui.printMessage("☹ OOPS!!! No such task can be deleted!");
         }
     }
 
@@ -116,9 +118,9 @@ public class TaskList {
      * @param tasks a Tasklist object containing the tasks.
      */
     public static void printItemList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
+        Ui.printMessage("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + "." + tasks.get(i).toString());
+            Ui.printMessage(i + 1 + "." + tasks.get(i).toString());
         }
     }
 
@@ -128,7 +130,7 @@ public class TaskList {
      * @param tasks a TaskList object containing the tasks.
      */
     public void printTaskNumber(TaskList tasks) {
-        System.out.println("Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks")
+        Ui.printMessage("Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks")
                 + " in the list.");
     }
 

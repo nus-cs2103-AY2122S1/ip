@@ -34,21 +34,30 @@ public class Ui {
     /**
      * Outputs a linebreak for easier formatting.
      */
-    public void printLineBreak() {
+    public static void printLineBreak() {
         System.out.println(lineBreak);
     }
 
     /**
      * Greets the user.
      */
-    public void greet() {
+    public static void greet() {
         System.out.println("Hello! I'm Duke" + '\n' + "What can I do for you?");
     }
 
     /**
      * Says goodbye to the user.
      */
-    public void exit() {
+    public static void exit() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    /**
+     * Prints the messages.
+     *
+     * @param message Message to be printed.
+     */
+    public static void printMessage(String message) {
+        System.out.println(message);
     }
 }
