@@ -17,19 +17,31 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Deals with making sense of user command
+ */
 public class Parser {
 
-    TaskList list;
-    Ui ui;
-    Storage storage;
+    private TaskList list;
+    private Ui ui;
+    private Storage storage;
 
+    /**
+     * Constructs Parser object
+     *
+     * @param list list of tasks
+     * @param ui to deal with interactions with users
+     * @param storage to update file
+     */
     public Parser(TaskList list, Ui ui, Storage storage) {
         this.list = list;
         this.ui = ui;
         this.storage = storage;
     }
 
-    // parse: read commands
+    /**
+     * Deals with interpreting user commands
+     */
     public void parse() {
            Scanner sc = new Scanner(System.in);
            while (sc.hasNextLine()) {

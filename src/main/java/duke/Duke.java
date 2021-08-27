@@ -2,12 +2,20 @@ package duke;
 
 import java.io.IOException;
 
-public  class Duke {
+/**
+ * A Personal Assistant Chat bot that helps to keep track of tasks
+ */
+public class Duke {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Constructs Duke object
+     *
+     * @param filepath file location
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -20,6 +28,9 @@ public  class Duke {
         }
     }
 
+    /**
+     * Activates programme
+     */
     public void run() {
         ui.welcome();
         Parser parser = new Parser(this.taskList, this.ui, this.storage);
