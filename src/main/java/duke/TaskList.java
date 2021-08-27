@@ -20,6 +20,7 @@ import java.util.Scanner;
  * running.
  */
 public class TaskList {
+
     private ArrayList<Task> xs = new ArrayList<>();
 
     public TaskList(File file) throws DukeException {

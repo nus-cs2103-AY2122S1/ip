@@ -33,7 +33,6 @@ public class Storage {
         File temp = new File("data/temp.txt");
         FileWriter fw = new FileWriter(temp, true);
         BufferedWriter bw = new BufferedWriter(fw);
-
         while (sc.hasNextLine()) {
             String nextLine = sc.nextLine();
             if (!nextLine.equals("")) {
@@ -100,9 +99,7 @@ public class Storage {
         File temp = new File("data/temp.txt");
         FileWriter fw = new FileWriter(temp, true);
         BufferedWriter bw = new BufferedWriter(fw);
-
         while (sc.hasNextLine()) {
-
             String nextLine = sc.nextLine();
             if (!nextLine.equals("")) {
                 String parts[] = nextLine.split("\\|", 10);

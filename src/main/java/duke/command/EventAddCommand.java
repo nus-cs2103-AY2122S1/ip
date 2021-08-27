@@ -9,6 +9,7 @@ import duke.Ui;
  * A command that adds Event to the task list.
  */
 public class EventAddCommand extends AddCommand {
+
     private String description;
     private String time;
 

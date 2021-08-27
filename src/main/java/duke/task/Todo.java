@@ -4,6 +4,7 @@ package duke.task;
  * To do is an extension of Task which allows it to have it's own unique toString method.
  */
 public class Todo extends Task {
+
     public Todo(String str) {
         super(str);
     }
