@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime at;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy - HH:mm");
 
     public Event(String description, String at) {
         super(description);
@@ -19,11 +20,11 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return ("[E]" + super.toString() + " (at: " + this.at.format(formatter) + ")");
+        return ("[E]" + super.toString() + " (at: " + this.at.format(displayFormatter) + ")");
     }
 
     public String toStorageString() {
         return ("E|" + super.getStatusNumber() + "|" + super.getDescription()
-                + "|" + this.at.format(formatter));
+                + "|" + this.at.format(displayFormatter));
     }
 }

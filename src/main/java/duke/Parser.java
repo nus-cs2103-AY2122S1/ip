@@ -53,7 +53,7 @@ public class Parser {
             if (description.equals("")) {
                 return new ListCommand();
             } else {
-                throw new DukeException("duke.command.Command 'list' does not need additional arguments");
+                throw new DukeException("Command 'list' does not need additional arguments");
             }
         case ("done"):
             try {
@@ -98,7 +98,7 @@ public class Parser {
                 throw new DukeException("Type 'bye' only to exit");
             }
         default:
-            throw new DukeException("duke.command.Command not recognised!");
+            throw new DukeException("Command not recognised!");
         }
     }
 }
