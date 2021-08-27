@@ -22,3 +22,4 @@ text-ui-test/sources.txt
 text-ui-test/runtest.sh
 text-ui-test/runtest.bat
 data/Virushade.txt
+src/main/java/META-INF/MANIFEST.MF
