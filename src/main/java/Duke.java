@@ -1,4 +1,9 @@
-import utils.*;
+import utils.exceptions.DukeException;
+import utils.storage.Storage;
+import utils.task.Deadline;
+import utils.task.Event;
+import utils.task.Task;
+import utils.task.Todo;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -42,7 +47,7 @@ public class Duke {
     enum Field { DESCRIPTION, DATETIME }
 
     /**
-     * Declare mappings from enum types to their respective string representatives.
+     * Declares mappings from enum types to their respective string representatives.
      */
     private static final Map<TaskType, String> taskTypeStringMap = Map.of(
             TaskType.TODO, "todo",
@@ -58,9 +63,18 @@ public class Duke {
     /**
      * Declares the ArrayList to hold the list of tasks.
      */
-    private static final ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> tasks = new ArrayList<>();
 
     public static void main(String[] args) {
+
+        // Loads the existing data from Storage, else start with an empty tasks list
+        Storage storage = new Storage("data/tasks.txt");
+        try {
+            tasks = storage.load();
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+            System.out.println(DukeException.NOT_LOADED_WARNING);
+        }
 
         // Introduces the program.
         System.out.println(formatMessage(introMessage));

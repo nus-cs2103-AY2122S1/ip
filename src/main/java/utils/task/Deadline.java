@@ -1,4 +1,4 @@
-package utils;
+package utils.task;
 
 /**
  * The Deadline class encapsulates a task that need to be done before a specific date/time.
