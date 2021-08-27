@@ -41,6 +41,6 @@ public class DukeException extends IllegalArgumentException {
 
     @Override
     public String toString() {
-        return "duke.Duke is confused! duke.Duke says that " + getMessage();
+        return "Duke is confused! Duke says that " + getMessage();
     }
 }

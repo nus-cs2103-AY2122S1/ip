@@ -29,18 +29,14 @@ test {
 }
 
 application {
-    mainClassName = "src.main.java.duke.Duke"
-}
-
-shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
+    mainClassName = "src/main/java/duke/Duke.java"
 }
 
 checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+run {
+    enableAssertions = true
     standardInput = System.in
 }
