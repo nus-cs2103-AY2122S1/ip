@@ -1,6 +1,5 @@
 package tasks;
-import exceptions.DukeException;
-import utils.StorageElement;
+import storage.StorageElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +8,11 @@ public class TaskList {
     protected ArrayList<Task> taskList;
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
 
-    public TaskList(List<StorageElement> storageList) throws DukeException {
+    public TaskList(List<StorageElement> storageList) {
+        taskList = new ArrayList<>();
         for (StorageElement storageElement : storageList) {
             this.addTask(Task.of(storageElement));
         }
@@ -22,20 +22,17 @@ public class TaskList {
         this.taskList.add(task);
     }
 
-    public Task getTask(int index) {
-        return this.taskList.get(index);
-    }
-
-    public void markAsDone(int index) {
+    public Task markAsDone(int index) {
         this.taskList.get(index).markAsDone();
+        return this.taskList.get(index);
     }
 
     public int getNumTask() {
         return this.taskList.size();
     }
 
-    public void deleteTask(int index) {
-        this.taskList.remove(index);
+    public Task deleteTask(int index) {
+        return this.taskList.remove(index);
     }
 
     public String toString() {
