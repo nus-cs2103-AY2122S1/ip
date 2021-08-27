@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Class to handle list of all tasks currently in the todo list.
@@ -174,6 +175,24 @@ public class TaskList {
 			result.append(task.saveString()).append(System.lineSeparator());
 		}
 		return result.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		TaskList taskList1 = (TaskList) o;
+		return taskList.equals(taskList1.taskList) && taskFinder.equals(taskList1.taskFinder) &&
+				pairTaskMap.equals(taskList1.pairTaskMap) && taskPairMap.equals(taskList1.taskPairMap);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(taskList, taskFinder, pairTaskMap, taskPairMap);
 	}
 
 	/**

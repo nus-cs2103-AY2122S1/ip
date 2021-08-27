@@ -16,7 +16,7 @@ import static me.yukun99.ip.tasks.Task.Type;
 
 public class AddCommand extends Command {
 	private final Type type;
-	private Storage storage;
+	private final Storage storage;
 
 	public AddCommand(String[] args, TaskList taskList, Ui ui, Type type, Storage storage) {
 		super(args, taskList, ui);

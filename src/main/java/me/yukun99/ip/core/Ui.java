@@ -3,6 +3,7 @@ package me.yukun99.ip.core;
 import me.yukun99.ip.tasks.Task;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Class used to handle message the Ui and responses from the HelpBot.
@@ -249,5 +250,23 @@ public class Ui {
 		try {
 			storage.saveMessage(reply);
 		} catch (IOException ignored) {}
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Ui ui = (Ui) o;
+		return name.equals(ui.name) && taskList.equals(ui.taskList) && storage.equals(ui.storage) &&
+				taskFinder.equals(ui.taskFinder);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, taskList, storage, taskFinder);
 	}
 }

@@ -56,8 +56,13 @@ public class Parser {
 	 * @throws HelpBotIllegalArgumentException If arguments provided for the commands are missing or wrong.
 	 * @throws HelpBotInvalidCommandException If command sent by the user is invalid.
 	 */
-	public final Command parse() throws HelpBotIllegalArgumentException, HelpBotInvalidCommandException {
+	public final Command parseCommand() throws HelpBotIllegalArgumentException, HelpBotInvalidCommandException {
 		String message = scanner.nextLine();
+		return parseCommand(message);
+	}
+
+	private Command parseCommand(String message)
+			throws HelpBotInvalidCommandException, HelpBotIllegalArgumentException {
 		Command command = null;
 		if (message.equals("list")) {
 			command = new ListCommand(null, taskList, ui);

@@ -54,7 +54,7 @@ public class HelpBot {
 	private void listen() {
 		while (scanner.hasNext()) {
 			try {
-				Command command = parser.parse();
+				Command command = parser.parseCommand();
 				command.run();
 			} catch (HelpBotIllegalArgumentException | HelpBotInvalidCommandException
 					| HelpBotInvalidTaskTypeException | HelpBotDateTimeFormatException e) {

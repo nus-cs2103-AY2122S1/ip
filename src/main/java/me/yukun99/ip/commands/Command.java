@@ -6,6 +6,9 @@ import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotIllegalArgumentException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
  * Commands sent to the HelpBot.
  */
@@ -28,6 +31,26 @@ public abstract class Command {
 		this.args = args;
 		this.taskList = taskList;
 		this.ui = ui;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Command command = (Command) o;
+		return Arrays.equals(args, command.args) && Objects.equals(taskList, command.taskList) &&
+				ui.equals(command.ui);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = Objects.hash(taskList, ui);
+		result = 31 * result + Arrays.hashCode(args);
+		return result;
 	}
 
 	/**

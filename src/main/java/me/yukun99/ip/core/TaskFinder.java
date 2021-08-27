@@ -1,11 +1,15 @@
 package me.yukun99.ip.core;
 
 import me.yukun99.ip.tasks.Task;
+import me.yukun99.ip.tasks.ToDo;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Handles searching of tasks by keyword.
@@ -79,5 +83,71 @@ public class TaskFinder {
 					.append("', idiot.");
 		}
 		return message.toString();
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		TaskFinder that = (TaskFinder) o;
+		return wordTaskMap.equals(that.wordTaskMap);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(wordTaskMap);
+	}
+
+	/**
+	 * Tests if storing of new tasks works.
+	 */
+	@Test
+	public void testTaskStorage() {
+		List<Task> tasks = makeTestTaskList();
+		Assert.assertEquals(tasks, wordTaskMap.get("Task"));
+	}
+
+	/**
+	 * Tests if finding tasks by keyword works.
+	 * 2 types of requests tested - successful finding and unsuccessful.
+	 */
+	@Test
+	public void testTaskFinding() {
+		List<Task> tasks = makeTestTaskList();
+		String word = "Task";
+		StringBuilder message = new StringBuilder("\nHere are your tasks that contain the word '" + word + "'.");
+		for (int i = 0; i < tasks.size(); ++i) {
+			message.append("\n ").append(i + 1).append(".").append(tasks.get(i));
+		}
+		if (tasks.size() == 0) {
+			message
+					.append("\n  Is this a joke? You have no tasks containing the word '")
+					.append(word)
+					.append("', idiot.");
+		}
+		// test 1: tasks found.
+		Assert.assertEquals(message.toString(), findTasksByWord(word));
+		String expected = "\nHere are your tasks that contain the word '" + word + "'." +
+				"\n  Is this a joke? You have no tasks containing the word '" + word + "', idiot.";
+		wordTaskMap.remove("Task");
+		// test 2: no tasks found.
+		Assert.assertEquals(expected, findTasksByWord("Task"));
+	}
+
+	private List<Task> makeTestTaskList() {
+		String name = "New Task";
+		Task task = new ToDo(name);
+		addTask(task, name);
+		String name2 = "Task 2";
+		Task task2 = new ToDo("Task 2");
+		addTask(task2, name2);
+		List<Task> tasks = new ArrayList<>();
+		tasks.add(task);
+		tasks.add(task2);
+		return tasks;
 	}
 }
