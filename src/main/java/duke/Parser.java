@@ -1,9 +1,27 @@
 package duke;
 
+import java.io.IOException;
+
 /**
  * This class parses the user input into a command understood by Duke.
  */
 public class Parser {
+    private final Storage storage;
+    private TaskList tasks;
+
+    /**
+     * Constructor for Parser class. Initializes Storage and TaskList classes.
+     *
+     * @param filePath file URL where task information will be stored.
+     */
+    public Parser(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * This method returns the first word of raw user input.
@@ -12,6 +30,104 @@ public class Parser {
      * @return The first word which is the command for Duke to understand.
      */
     public String parse(String input) {
-        return input.split(" ")[0];
+        String command = input.split(" ")[0];
+        return handleQuery(command, input);
+    }
+
+    /**
+     * Method that allows Duke to handle the query by the user.
+     * Error controls to tackle EmptyDescriptionError and UnknownCommandError.
+     * Command parsed by parse() method will be used to identify the query type.
+     * "bye" command will store taskList as a duke.txt file, then return null
+     * which is picked up by the Ui class to shut down the window.
+     *
+     * @param command used to classify the query type from the user.
+     * @param input contains the overall user input.
+     */
+    private String handleQuery(String command, String input) {
+        switch (command) {
+            case "bye":
+                try {
+                    storage.store(tasks);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            case "todo":
+                try {
+                    Task t = new Todo(input);
+                    tasks.add(t);
+                    return add(t, tasks.size());
+                } catch (IndexOutOfBoundsException e) {
+                    return new EmptyDescriptionError("todo").getMessage();
+                }
+            case "event":
+                try {
+                    Task t = new Event(input);
+                    tasks.add(t);
+                    return add(t, tasks.size());
+                } catch (IndexOutOfBoundsException e) {
+                    return new EmptyDescriptionError("event").getMessage();
+                }
+            case "deadline":
+                try {
+                    Task t = new Deadline(input);
+                    tasks.add(t);
+                    return add(t, tasks.size());
+                } catch (IndexOutOfBoundsException e) {
+                    return new EmptyDescriptionError("event").getMessage();
+                }
+            case "list":
+                return tasks.list();
+            case "done":
+                Task t = tasks.done(Integer.parseInt(input.substring(5)) - 1);
+                return done(t);
+            case "delete":
+                t = tasks.delete(Integer.parseInt(input.substring(7)) - 1);
+                return delete(t, tasks.size());
+            case "find":
+                String keyword = input.substring(5);
+                return tasks.find(keyword);
+            default:
+                try {
+                    throw new UnknownCommandError("");
+                } catch (UnknownCommandError e) {
+                    return e.getMessage();
+                }
+        }
+    }
+
+    /**
+     * This method will show users that the task has been added successfully to taskList.
+     *
+     * @param t The task being added.
+     * @param size The current size of taskList.
+     */
+    public String add(Task t, int size) {
+        return "     Got it. I've added this task: \n"
+                + String.format("       %s\n", t)
+                + String.format("     Now you have %d tasks in the list.\n", size);
+    }
+
+    /**
+     * This method will show users that the task has been successfully marked as completed.
+     *
+     * @param t The taks that is marked as completed.
+     */
+    public String done(Task t) {
+        return "     Nice! I've marked this task as done: \n"
+                + String.format("       %s\n", t);
+    }
+
+    /**
+     * This method will show users that the task has been deleted successfully from the taskList.
+     *
+     * @param t The task being deleted.
+     * @param size The current size of the taskList.
+     */
+    public String delete(Task t, int size) {
+        return "     Noted. I've removed this task: \n"
+                + String.format("       %s\n", t)
+                + String.format("     Now you have %d tasks in the list.\n", size);
     }
 }
