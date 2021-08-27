@@ -24,7 +24,7 @@ public class Parser {
         }
     }
 
-    public Command parse(String taskDescription) throws DukeException {
+    public Command parse(String taskDescription) {
         if (taskDescription == null || taskDescription.equals("")) {
             return new Command(Command.Commands.UNKNOWN, "");
         } else {

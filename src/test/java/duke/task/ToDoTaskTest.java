@@ -1,4 +1,4 @@
-package duke.Task;
+package duke.task;
 import org.junit.Test;
 import org.junit.Assert;
 

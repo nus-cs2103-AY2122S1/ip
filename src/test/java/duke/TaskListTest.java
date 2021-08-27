@@ -1,6 +1,5 @@
 package duke;
-import duke.Task.Task;
-import duke.Task.ToDoTask;
+import duke.task.ToDoTask;
 import org.junit.Test;
 import org.junit.Assert;
 import java.util.ArrayList;
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 public class TaskListTest {
     @Test
     public void addTaskTest() {
-        TaskList temp = new TaskList(new ArrayList<Task>());
+        TaskList temp = new TaskList(new ArrayList<>());
         temp.addTask(new ToDoTask("read a book"));
         Assert.assertEquals(new ToDoTask("read a book").toString() , temp.getTask(0).toString());
     }

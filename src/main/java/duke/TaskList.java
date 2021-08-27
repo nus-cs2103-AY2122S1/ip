@@ -2,7 +2,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.Task.Task;
+import duke.task.Task;
 
 public class TaskList {
 

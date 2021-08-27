@@ -1,6 +1,6 @@
-package duke.Task;
+package duke.task;
 public class Task {
-    private String description;
+    private final String description;
     private boolean isCompleted;
 
     public Task(String description) {
