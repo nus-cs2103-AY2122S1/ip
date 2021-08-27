@@ -46,7 +46,7 @@ test {
 
 application {
     // Change to your main class
-    mainClassName = "lifeline.Main"
+    mainClassName = "lifeline.Launcher"
 }
 
 shadowJar {
