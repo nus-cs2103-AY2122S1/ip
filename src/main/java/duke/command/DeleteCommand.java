@@ -1,33 +1,45 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
 
-import java.util.Arrays;
-
+/**
+ * This class represents a {@code DeleteCommand}. User input for a
+ * {@code DeleteCommand} starts with "delete".
+ * 
+ * @author Elizabeth Chow
+ */
 public class DeleteCommand extends Command {
+    /**
+     * Constructor for a {@code DeleteCommand}
+     * 
+     * @param args {@code String} array with length 1. {@code args[0]} contains the
+     *             task number to be deleted.
+     */
     public DeleteCommand(String[] args) {
         super(args);
     }
 
+    /**
+     * {@inheritDoc} Deletes a task with the given task number in the args. Writes
+     * to storage after deletion.
+     */
+    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.deleteTask(Integer.valueOf(args[0]));
         storage.writeToFile(tasks);
         ui.showDeletedTask(task, tasks.size());
     }
 
-    public boolean isExit() {
-        return false;
-    }
-
+    /**
+     * Returns {@code false}. Program should not terminate after {@code DeleteCommand}.
+     * 
+     * @return {@code false}
+     */
     @Override
-    public boolean equals(Object other) {
-        if (other instanceof DeleteCommand) {
-            DeleteCommand otherCommand = (DeleteCommand) other;
-            return Arrays.equals(this.args, otherCommand.args);
-        }
+    public boolean isExit() {
         return false;
     }
 }

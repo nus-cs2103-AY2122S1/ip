@@ -1,15 +1,25 @@
 package duke;
 
-import duke.command.Command;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.command.Command;
+
+/**
+ * This class represents a {@code Duke} object. {@code Duke} responds to
+ * predefined user inputs and outputs various messages in response to the user
+ * input.
+ * 
+ * @author Elizabeth Chow
+ */
 public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Constructs a {@code Duke} object.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("./data/duke.txt");
@@ -21,6 +31,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Shows a welcome message when {@code Duke} starts running. Continuously takes
+     * in user inputs until "bye" is entered.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
