@@ -1,3 +1,5 @@
+package src.main.java.duke;
+
 /**
  * Class to represent a task with String task name and
  * current progress of the task

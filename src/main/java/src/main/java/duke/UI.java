@@ -1,12 +1,14 @@
+package src.main.java.duke;
+
 /**
- * Represents the UI part of the chat bot and contains all operations relating to the
+ * Represents the src.main.java.duke.UI part of the chat bot and contains all operations relating to the
  * interactions with the user
  */
 
 public class UI {
 
     /**
-     * intance of TaskList to manipulate the list
+     * intance of src.main.java.duke.TaskList to manipulate the list
      */
     private TaskList list;
     /**

@@ -1,3 +1,5 @@
+package src.main.java.duke;
+
 import java.util.Scanner;
 
 /**

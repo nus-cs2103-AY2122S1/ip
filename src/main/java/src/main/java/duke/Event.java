@@ -1,17 +1,21 @@
+package src.main.java.duke;
+
 /**
- * Class to represent a Todo task
+ * Class to represent an event as a task
  */
 
 
-public class Todo extends Task {
+public class Event extends Task {
 
     private String task;
     private boolean isDone;
+    private String time;
 
-    Todo(String T, boolean D) {
+    Event(String T, boolean D, String time) {
         super(T, D);
         task = T;
         isDone = D;
+        this.time = time;
     }
 
     /**
@@ -29,6 +33,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return ("T | " + (this.isDone ? "1" : "0") + " | " + this.task);
+        return ("E | " + (isDone ? "1" : "0") + " | " + this.task + " | " + this.time);
     }
 }

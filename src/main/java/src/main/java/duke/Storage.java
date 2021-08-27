@@ -1,3 +1,5 @@
+package src.main.java.duke;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

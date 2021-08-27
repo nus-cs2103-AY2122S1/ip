@@ -1,3 +1,5 @@
+package src.main.java.duke;
+
 /**
  * Created by Shivam Tiwari
  * Chat bot to echo everything we input.

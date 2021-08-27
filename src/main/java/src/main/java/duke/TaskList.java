@@ -1,3 +1,5 @@
+package src.main.java.duke;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,7 +8,7 @@ public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
 
     /**
-     * method to add the task to the list in TaskList
+     * method to add the task to the list in src.main.java.duke.TaskList
      *
      * @param task
      */
