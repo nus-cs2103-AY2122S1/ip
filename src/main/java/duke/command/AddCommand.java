@@ -42,6 +42,8 @@ public class AddCommand extends Command {
         case "deadline":
             handleDeadline(input);
             break;
+        default:
+            break;
         }
     }
 

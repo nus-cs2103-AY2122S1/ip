@@ -1,10 +1,10 @@
 package duke.util;
 
-import duke.exception.DukeIOException;
-import duke.task.Task;
 import duke.exception.DukeException;
+import duke.exception.DukeIoException;
 import duke.exception.DukeNegativeIndexException;
 import duke.exception.InvalidIndexException;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -84,7 +84,7 @@ public class ToDoList {
     /**
      * Updates the persisted storage with the current state of the list.
      *
-     * @throws DukeIOException if there is error writing to the storage file.
+     * @throws DukeIoException if there is error writing to the storage file.
      */
     public void updateData() throws DukeException {
         dataManager.updateData(list);
@@ -93,8 +93,8 @@ public class ToDoList {
     /**
      * Returns an ArrayList with tasks that matches date and time specified by user.
      *
-     * @return ArrayList containing task that matches the date and time specified.
      * @param dateTime the date and time to filter the tasks with.
+     * @return ArrayList containing task that matches the date and time specified.
      */
     public ArrayList<Task> filterList(String dateTime) {
         ArrayList<Task> filteredList = new ArrayList<>();
