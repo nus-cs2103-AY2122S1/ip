@@ -1,14 +1,14 @@
-package duke.commands;
+package main.java.duke.commands;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.Ui;
-import duke.tasks.Task;
-import duke.TaskList;
+import main.java.duke.DukeException;
+import main.java.duke.Storage;
+import main.java.duke.Ui;
+import main.java.duke.tasks.Task;
+import main.java.duke.TaskList;
 
 public class DeleteCommand extends Command {
     private int taskNum;

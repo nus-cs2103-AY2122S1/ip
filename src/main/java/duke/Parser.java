@@ -1,16 +1,16 @@
-package duke;
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.OnDateCommand;
-import duke.commands.UnknownCommand;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Todo;
+package main.java.duke;
+import main.java.duke.commands.AddCommand;
+import main.java.duke.commands.Command;
+import main.java.duke.commands.DeleteCommand;
+import main.java.duke.commands.DoneCommand;
+import main.java.duke.commands.ExitCommand;
+import main.java.duke.commands.FindCommand;
+import main.java.duke.commands.ListCommand;
+import main.java.duke.commands.OnDateCommand;
+import main.java.duke.commands.UnknownCommand;
+import main.java.duke.tasks.Deadline;
+import main.java.duke.tasks.Event;
+import main.java.duke.tasks.Todo;
 
 public class Parser {
 

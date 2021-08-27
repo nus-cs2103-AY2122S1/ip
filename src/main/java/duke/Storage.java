@@ -1,14 +1,14 @@
-package duke;
+package main.java.duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import main.java.duke.tasks.Deadline;
+import main.java.duke.tasks.Event;
+import main.java.duke.tasks.Task;
+import main.java.duke.tasks.Todo;
 
 public class Storage {
     protected String filePath;

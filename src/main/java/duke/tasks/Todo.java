@@ -1,4 +1,4 @@
-package duke.tasks;
+package main.java.duke.tasks;
 public class Todo extends Task{
     protected String prefix;
 

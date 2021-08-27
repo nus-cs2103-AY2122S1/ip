@@ -1,4 +1,4 @@
-package duke.tasks;
+package main.java.duke.tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,7 +12,7 @@ public class Event extends Task{
      * Constructs a new event task.
      * 
      * @param name name of the task
-     * @param date date of the task
+     * @param time date of the task
      */
     public Event(String name, String time) {
         super(name);

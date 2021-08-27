@@ -1,7 +1,7 @@
-package duke;
-import java.io.IOException;
+package main.java.duke;
+import main.java.duke.commands.Command;
 
-import duke.commands.Command;
+import java.io.IOException;
 
 public class Duke {
     private Storage storage;

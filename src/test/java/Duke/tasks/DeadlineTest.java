@@ -1,17 +1,18 @@
 package duke.tasks;
 
-import org.junit.jupiter.api.Test;
+import main.java.duke.tasks.Deadline;
+import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class DeadlineTest {
     @Test
     public void fromStringToDate_correct_success() {
         Deadline actual = new Deadline("complete 2105 assignment", " 2021/08/28");
-        LocalDate actualDate = actual.dateFormatted;
+        LocalDate actualDate = actual.getDateFormatted();
         LocalDate expectedDate = LocalDate.parse("2021/08/28", DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         assertEquals(actualDate, expectedDate);
     }
