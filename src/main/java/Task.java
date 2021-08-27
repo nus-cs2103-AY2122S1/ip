@@ -12,9 +12,9 @@ public class Task {
         return (done ? "X" : " ");
     }
 
-    public String completeTask() {
+    public Task completeTask() {
         this.done = true;
-        return "Swee la! You completed this task:\n      " + name;
+        return this;
     }
 
     public String getName() {

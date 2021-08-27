@@ -1,3 +1,5 @@
+import Exceptions.WrongInputException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +13,7 @@ public class Event extends Task{
         this.at = at;
     }
 
-    public static Event createEvent(String name, String at) throws WrongInputException{
+    public static Event createEvent(String name, String at) throws WrongInputException {
         if (at.equals("")) {
             return new Event(name, at);
         } else {
