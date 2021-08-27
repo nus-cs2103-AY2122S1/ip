@@ -49,48 +49,48 @@ public class Duke {
                 String[] parsedCommand = Parser.parseCommand(command);
 
                 switch (parsedCommand[0]) {
-                    case "done":
-                        //Marks tasks as done
-                        int index = Integer.valueOf(parsedCommand[1]) - 1;
-                        tasks.setDone(index);
-                        storage.saveTask(tasks);
-                        break;
+                case "done":
+                    //Marks tasks as done
+                    int index = Integer.valueOf(parsedCommand[1]) - 1;
+                    tasks.setDone(index);
+                    storage.saveTask(tasks);
+                    break;
 
-                    case "delete":
-                        //Deletes tasks
-                        int indexD = Integer.valueOf(parsedCommand[1]) - 1;
-                        tasks.deleteTask(indexD);
-                        storage.saveTask(tasks);
-                        break;
+                case "delete":
+                    //Deletes tasks
+                    int indexD = Integer.valueOf(parsedCommand[1]) - 1;
+                    tasks.deleteTask(indexD);
+                    storage.saveTask(tasks);
+                    break;
 
-                    case "todo":
-                        //Adds a new Todo to the list
-                        if (parsedCommand.length == 1) {
-                            throw new TaskException("The description of a todo cannot be empty");
-                        }
-                        Todo newT = new Todo(parsedCommand[1], false);
-                        tasks.addTask(newT);
-                        storage.saveTask(tasks);
-                        break;
-                    case "deadline":
-                        if (parsedCommand.length == 1) {
-                            throw new TaskException("The description of a deadline cannot be empty");
-                        }
-                        Task newD = Deadline.parseCommand(parsedCommand[1]);
-                        tasks.addTask(newD);
-                        storage.saveTask(tasks);
-                        break;
-                    case "event":
-                        if (parsedCommand.length == 1) {
-                            throw new TaskException("The description of an event cannot be empty");
-                        }
-                        Task newE = Event.parseCommand(parsedCommand[1]);
-                        tasks.addTask(newE);
-                        storage.saveTask(tasks);
-                        break;
+                case "todo":
+                    //Adds a new Todo to the list
+                    if (parsedCommand.length == 1) {
+                        throw new TaskException("The description of a todo cannot be empty");
+                    }
+                    Todo newT = new Todo(parsedCommand[1], false);
+                    tasks.addTask(newT);
+                    storage.saveTask(tasks);
+                    break;
+                case "deadline":
+                    if (parsedCommand.length == 1) {
+                        throw new TaskException("The description of a deadline cannot be empty");
+                    }
+                    Task newD = Deadline.parseCommand(parsedCommand[1]);
+                    tasks.addTask(newD);
+                    storage.saveTask(tasks);
+                    break;
+                case "event":
+                    if (parsedCommand.length == 1) {
+                        throw new TaskException("The description of an event cannot be empty");
+                    }
+                    Task newE = Event.parseCommand(parsedCommand[1]);
+                    tasks.addTask(newE);
+                    storage.saveTask(tasks);
+                    break;
 
-                    default:
-                        throw new DukeException();
+                default:
+                    throw new DukeException();
                 }
             } catch (DukeException | TaskException | IOException e) {
                 System.out.println(e.getMessage());
