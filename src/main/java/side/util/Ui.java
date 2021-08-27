@@ -1,11 +1,15 @@
 package side.util;
 
-import side.exception.*;
+import java.util.ArrayList;
+
+import side.exception.DeleteIndexException;
+import side.exception.NoIndexException;
+import side.exception.TaskIndexException;
+import side.exception.TooManyIndexesException;
+import side.exception.WrongFormatException;
 import side.tasks.Deadline;
 import side.tasks.Event;
 import side.tasks.Task;
-
-import java.util.ArrayList;
 
 /**
  * Encapsulates user interactions, handling user input logic and formats responses to print for user.
@@ -16,8 +20,8 @@ import java.util.ArrayList;
 public class Ui {
 
     private static final String LINEBREAK = "---------------------------------------------------------------------";
-    private static final String GREETING = LINEBREAK + "" + "\nI'm Side, your unpaid personal assistant. " +
-            "Please do less...\n" + LINEBREAK;
+    private static final String GREETING = LINEBREAK + "" + "\nI'm Side, your unpaid personal assistant. "
+            + "Please do less...\n" + LINEBREAK;
     private static final String GOODBYE = LINEBREAK + "\nOh, you have to go? What a pity...\n"
             + LINEBREAK;
     private Parser parser;
@@ -90,8 +94,8 @@ public class Ui {
             taskList.addDeadline(description, datetime);
             Ui.echo(new Deadline(description, datetime).toString(), taskList);
         } else {
-            throw new WrongFormatException("deadline [task name] /by [YYYY-MM-DD], [HHMM]\n" +
-                    "deadline [task name] /by [YYYY-MM-DD]");
+            throw new WrongFormatException("deadline [task name] /by [YYYY-MM-DD], [HHMM]\n"
+                    + "deadline [task name] /by [YYYY-MM-DD]");
         }
     }
 
@@ -107,16 +111,16 @@ public class Ui {
             String[] datetimeArr = this.parser.findEventDatetime(input);
             String description = this.parser.findDescription(input);
             if (datetimeArr.length < 2) {
-                throw new WrongFormatException("event [task name] /at [YYYY-MM-DD], [HHMM] /to [YYYY-MM-DD], [HHMM]\n" +
-                        "event [task name] /at [YYYY-MM-DD] /to [YYYY-MM-DD]");
+                throw new WrongFormatException("event [task name] /at [YYYY-MM-DD], [HHMM] /to [YYYY-MM-DD], [HHMM]\n"
+                        + "event [task name] /at [YYYY-MM-DD] /to [YYYY-MM-DD]");
             }
             if (datetimeArr != null && datetimeArr[0] != null && datetimeArr[1] != null) {
                 taskList.addEvent(description, datetimeArr[0], datetimeArr[1]);
                 Ui.echo(new Event(description, datetimeArr[0], datetimeArr[1]).toString(), taskList);
             }
         } else {
-            throw new WrongFormatException("event [task name] /at [YYYY-MM-DD], [HHMM] /to [YYYY-MM-DD], [HHMM]\n" +
-                    "event [task name] /at [YYYY-MM-DD] /to [YYYY-MM-DD]");
+            throw new WrongFormatException("event [task name] /at [YYYY-MM-DD], [HHMM] /to [YYYY-MM-DD], [HHMM]\n"
+                    + "event [task name] /at [YYYY-MM-DD] /to [YYYY-MM-DD]");
         }
     }
 

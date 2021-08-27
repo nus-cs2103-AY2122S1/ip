@@ -1,9 +1,10 @@
 package tasks;
 
-import org.junit.jupiter.api.Test;
-import side.tasks.Event;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import side.tasks.Event;
 
 public class EventTest {
     @Test

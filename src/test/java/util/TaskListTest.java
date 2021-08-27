@@ -1,9 +1,11 @@
 package util;
 
-import org.junit.jupiter.api.Test;
-import side.util.TaskList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import side.util.TaskList;
 
 public class TaskListTest {
     @Test
@@ -47,8 +49,8 @@ public class TaskListTest {
     public void deleteTaskTest() {
         TaskList t = new TaskList();
         t.addTask("Test");
-        assertEquals(t.delete(0), "Fine, I'll delete: [T][ ]Test \n" +
-                "You now have 0 tasks...");
+        assertEquals(t.delete(0), "Fine, I'll delete: [T][ ]Test \n"
+                + "You now have 0 tasks...");
     }
 
     @Test
@@ -57,7 +59,7 @@ public class TaskListTest {
         assertEquals(t1.toString(), "No tasks yet, stop checking...");
         TaskList t2 = new TaskList();
         t2.addTask("Test");
-        assertEquals(t2.toString(), "Fine, here are your tasks: \n" +
-                "1. [T][ ]Test \n");
+        assertEquals(t2.toString(), "Fine, here are your tasks: \n"
+                + "1. [T][ ]Test \n");
     }
 }

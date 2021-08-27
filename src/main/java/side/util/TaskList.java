@@ -3,10 +3,10 @@ package side.util;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import side.util.Storage;
-import side.tasks.Task;
-import side.tasks.Event;
+
 import side.tasks.Deadline;
+import side.tasks.Event;
+import side.tasks.Task;
 
 /**
  * Provides a wrapper around an ArrayList of Tasks to encapsulate the list of tasks given to
@@ -35,7 +35,7 @@ public class TaskList {
      *
      * @return String of retrieved tasks.
      */
-    public String retrieve()  {
+    public String retrieve() {
         try {
             String filepath = "./data";
             this.tasks = this.storage.retrieve(filepath);

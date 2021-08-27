@@ -71,11 +71,9 @@ public class Parser {
 
         if (cmd.contains("/by")) {
             return cmd.split("/by")[0];
-        }
-        else if (cmd.contains("/at")) {
+        } else if (cmd.contains("/at")) {
             return cmd.split("/at")[0];
-        }
-        else {
+        } else {
             return null;
         }
     }
