@@ -14,15 +14,15 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String MESSAGE_GREETING = "Hello from\n" + LOGO;
     public static final String MESSAGE_HELP = "How can I help you?";
-    public static final String MESSAGE_ADD_TASK = "Added the following duke.task:\n"
+    public static final String MESSAGE_ADD_TASK = "Added the following task:\n"
             + "  %1$s\n"
-            + "You have %2$d duke.task(s) in the list";
-    public static final String MESSAGE_DELETE_TASK = "Deleted the following duke.task:\n"
+            + "You have %2$d task(s) in the list";
+    public static final String MESSAGE_DELETE_TASK = "Deleted the following task:\n"
             + "  %1$s\n"
-            + "You have %2$d duke.task(s) in the list";
-    public static final String MESSAGE_LIST_TASK = "Your current duke.task(s):\n"
+            + "You have %2$d task(s) in the list";
+    public static final String MESSAGE_LIST_TASK = "Your current task(s):\n"
             + "%1$s";
-    public static final String MESSAGE_MARK_TASK = "Marked duke.task %1$d as done";
+    public static final String MESSAGE_MARK_TASK = "Marked task %1$d as done";
     public static final String MESSAGE_LOADING_SUCCESS = "Data loaded";
     public static final String MESSAGE_LOADING_FAIL = "Failed to load data";
     public static final String MESSAGE_GOODBYE = "Good bye!";
@@ -75,7 +75,7 @@ public class Ui {
         this.say(MESSAGE_GOODBYE);
     }
 
-    /** Prints what duke.Duke says */
+    /** Prints what Duke says */
     public void say(String... s) {
         this.out.print("Duke: ");
 
