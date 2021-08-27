@@ -63,14 +63,14 @@ public abstract class Database {
 
     /**
      * Adds a task to the database.
-     * 
+     *
      * @param task to be added
      */
     public abstract void addTask(Task task);
 
     /**
      * Removes a task from the database.
-     * 
+     *
      * @param index index of the task, {@code 1} for the first task, {@code 2} for
      *              the second task etc.
      * @return {@code null} if there are no tasks at the specified index
@@ -79,7 +79,7 @@ public abstract class Database {
 
     /**
      * Marks a task as completed in the database.
-     * 
+     *
      * @param index index of the task, {@code 1} for the first task, {@code 2} for
      *              the second task etc.
      * @return task that is marked completed, {@code null} if there are no tasks at
@@ -89,7 +89,7 @@ public abstract class Database {
 
     /**
      * Finds tasks by searching for a keyword/phrase.
-     * 
+     *
      * @param pattern keyword/phrase to be searched
      * @return a list of tasks satisfying the condition mentioned above
      */
@@ -98,7 +98,7 @@ public abstract class Database {
     /**
      * Recreates a task based on provided information. Used when retrieving task
      * from SQL database.
-     * 
+     *
      * @param type      type of task
      * @param name      name of task
      * @param completed {@code true} if the task has been completed
@@ -164,7 +164,7 @@ public abstract class Database {
 
     /**
      * Gets directory for which the database will be saved into.
-     * 
+     *
      * @return database directory
      */
     private File getDataFolder() {
