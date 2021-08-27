@@ -13,11 +13,7 @@ public class Storage {
         try {
             myTask = new File(fileName);
             myTask.getParentFile().mkdir();
-            if (myTask.createNewFile()) {
-//                myTask.setWritable(true, false);
-//                myTask.setReadable(true, false);
-                System.out.println("File created: " + myTask.getName());
-            }
+            myTask.createNewFile();
         } catch(IOException e) {
             System.out.println("cannot create file leh");
             e.printStackTrace();

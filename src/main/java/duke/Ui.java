@@ -24,7 +24,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        return scanner.nextLine();
+        return scanner.hasNext() ? scanner.nextLine() : "bye";
     }
 
     public void exit() {

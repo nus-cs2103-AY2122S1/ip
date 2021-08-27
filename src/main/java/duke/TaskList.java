@@ -77,7 +77,6 @@ public class TaskList {
             ui.delete(tasks.get(taskNumber), tasks.size() - 1);
             tasks.remove(taskNumber);
             storage.saveTask(tasks);
-            System.out.println(taskNumber);
         } catch(StringIndexOutOfBoundsException err) {
             throw new DukeException("what u wan delete?");
         } catch(NumberFormatException err) {
