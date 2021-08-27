@@ -2,9 +2,15 @@ package duke;
 
 import java.util.List;
 
+/**
+ * Represents a list that store tasks
+ */
 public class TaskList {
     private final List<Task> list;
 
+    /**
+     * Class constructor.
+     */
     public TaskList() {
         this.list = Storage.readData();
     }
@@ -21,11 +27,19 @@ public class TaskList {
         return this.list.remove(index);
     }
 
+    /**
+     * Marks a task as complete
+     * @param index Index of the task in the TaskList
+     * @return Completed Task
+     */
     public Task setComplete(int index) {
         this.list.get(index).setCompleted();
         return this.list.get(index);
     }
 
+    /**
+     * Saves the TaskList to storage
+     */
     public void saveList() {
         Storage.writeData(this.list);
     }
@@ -34,6 +48,10 @@ public class TaskList {
         return this.list.size();
     }
 
+    /**
+     * Returns a String indicating the number of tasks in the TaskList
+     * @return String representation of the number of tasks
+     */
     public String getListSizeString() {
         return String.format("\n Now you have %d tasks in the list.\n",
                 list.size());

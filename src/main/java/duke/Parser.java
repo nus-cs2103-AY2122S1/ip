@@ -4,11 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a parser that parses user input and commands.
+ */
 public class Parser {
 
     public enum Command {BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CLEAR}
     boolean toTerminate = false;
 
+    /**
+     * Class constructor.
+     */
     public Parser() {
     }
 
@@ -16,6 +22,13 @@ public class Parser {
         return this.toTerminate;
     }
 
+    /**
+     * Parses and executes the command that the user input.
+     * @param ui UI object to render output to user.
+     * @param tasks TaskList object that contains the tasks.
+     * @param input Input that user entered.
+     * @throws DukeException If an error occurs.
+     */
     public void executeCommand(Ui ui, TaskList tasks, String input) throws DukeException {
         String[] parsedInput = input.split(" ");
         Parser.Command command;
@@ -61,16 +74,32 @@ public class Parser {
         tasks.saveList();
     }
 
+    /**
+     * Terminates the Duke Personal Assistant Chatbot.
+     * @param ui UI object to render output to user.
+     */
     public void terminate(Ui ui) {
         this.toTerminate = true;
         ui.terminateMessage();
     }
 
+    /**
+     * Clears all tasks in the TaskList.
+     * @param tasks TaskList object that contains the tasks.
+     * @param ui UI object to render output to user.
+     */
     public void clear(TaskList tasks, Ui ui) {
         tasks.clear();
         ui.clearMessage();
     }
 
+    /**
+     * Adds a ToDo task to the TaskList.
+     * @param tasks TaskList object that contains the tasks.
+     * @param ui UI object to render output to user.
+     * @param input Input that user entered.
+     * @throws ToDoDescriptionNotFoundException If user did not enter a task description.
+     */
     public void addTodo(TaskList tasks, Ui ui, String input) throws ToDoDescriptionNotFoundException {
         if (input.length() <= 5 || input.substring(5).stripLeading().length() <= 0) {
             throw new ToDoDescriptionNotFoundException("Missing Description!");
@@ -81,6 +110,14 @@ public class Parser {
         ui.addMessage(newToDo, tasks);
     }
 
+    /**
+     * Adds a Deadline task to the TaskList.
+     * @param tasks TaskList object that contains the tasks.
+     * @param ui UI object to render output to user.
+     * @param input Input that user entered.
+     * @throws DeadlineDescriptionNotFoundException If user did not enter a task description.
+     * @throws DeadlineNotFoundException If user did not enter a deadline.
+     */
     public void addDeadline(TaskList tasks, Ui ui, String input) throws DeadlineDescriptionNotFoundException,
             DeadlineNotFoundException{
         if (input.length() <= 9 || input.substring(9).stripLeading().length() <= 0) {
@@ -97,6 +134,14 @@ public class Parser {
         ui.addMessage(newDeadline, tasks);
     }
 
+    /**
+     * Adds a Event task to the TaskList.
+     * @param tasks TaskList object that contains the tasks.
+     * @param ui UI object to render output to user.
+     * @param input Input that user entered.
+     * @throws EventDescriptionNotFoundException If user did not enter a task description.
+     * @throws EventTimeNotFoundException If user did not enter date and time of event.
+     */
     public void addEvent(TaskList tasks, Ui ui, String input) throws EventDescriptionNotFoundException,
             EventTimeNotFoundException {
         if (input.length() <= 6 || input.substring(6).stripLeading().length() <= 0) {
@@ -113,6 +158,13 @@ public class Parser {
         ui.addMessage(newEvent, tasks);
     }
 
+    /**
+     * Marks a task as done.
+     * @param tasks TaskList object that contains the tasks.
+     * @param ui UI object to render output to user.
+     * @param index Index of the task to be marked as done.
+     * @throws TaskIndexOutOfBoundException If no task bears the index.
+     */
     public void markDone(TaskList tasks, Ui ui, int index) throws TaskIndexOutOfBoundException{
         if (index >= tasks.getListSize()) {
             throw new TaskIndexOutOfBoundException("Task index is invalid!");
@@ -121,6 +173,13 @@ public class Parser {
         ui.doneMessage(task);
     }
 
+    /**
+     * Deletes a task.
+     * @param tasks TaskList object that contains the tasks.
+     * @param ui UI object to render output to user.
+     * @param index Index of the task to be deleted.
+     * @throws TaskIndexOutOfBoundException If no task bears the index.
+     */
     public void delete(TaskList tasks, Ui ui, int index) throws TaskIndexOutOfBoundException{
         if (index >= tasks.getListSize()) {
             throw new TaskIndexOutOfBoundException("Task index is invalid!");
