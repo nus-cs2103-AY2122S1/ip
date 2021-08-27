@@ -12,8 +12,19 @@ public class Items {
      */
     private ArrayList<Task> list;
 
+    /**
+     * Constructor for Items
+     */
     public Items() {
         list = new ArrayList<>();
+    }
+
+    /**
+     * Constructor for Items
+     * @param tasks An ArrayList of Tasks
+     */
+    public  Items(ArrayList<Task> tasks) {
+        list = tasks;
     }
 
     /**
@@ -24,7 +35,11 @@ public class Items {
     public String addItem(Task task) {
         list.add(task);
         String output = "Got it, I've added this task:\n" + task.toString();
-        output += "\nNow you have " + list.size() + " tasks in the list.";
+        if (list.size() == 1) {
+            output += "\nNow you have 1 task in the list.";
+        } else {
+            output += "\nNow you have " + list.size() + " tasks in the list.";
+        }
         return output;
     }
 
