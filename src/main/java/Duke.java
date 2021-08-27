@@ -8,7 +8,7 @@ import java.io.IOException;
  * This class encapsulates a Duke chat-bot.
  */
 public class Duke {
-    private static final int lv = 7;
+    private static final int lv = 8;
     private static final String[] features = {
             "",
             "Greet, Echo, Exit",
@@ -17,7 +17,8 @@ public class Duke {
             ", ToDos, Events, Deadlines",
             ", Handle Errors",
             ", Delete",
-            ", Save"
+            ", Save",
+            ", Dates and Times"
     };
     private static boolean canExit = false;
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
