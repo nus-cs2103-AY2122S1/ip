@@ -6,6 +6,12 @@ package ui.message;
 public class ListChangeMessage extends Message {
     private int itemsInList;
 
+    /**
+     * Instantiates a message describing a list change.
+     *
+     * @param message Message describing the list change.
+     * @param itemsInList Number of items in the list.
+     */
     public ListChangeMessage(String message, int itemsInList) {
         super(message, "(＾＾)b");
         this.itemsInList = itemsInList;

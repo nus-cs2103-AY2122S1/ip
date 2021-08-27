@@ -1,13 +1,13 @@
 package command;
 
-import tasklist.Task;
-import tasklist.TaskList;
-import ui.message.DeleteMessage;
 import exception.ErrorAccessingFile;
 import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
 import exception.NonExistentTaskNumberException;
+import tasklist.Task;
+import tasklist.TaskList;
 import type.DukeCommandTypeEnum;
+import ui.message.DeleteMessage;
 
 /**
  * Encapsulates a delete command after it is parsed from the user input.

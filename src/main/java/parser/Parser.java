@@ -1,6 +1,11 @@
 package parser;
 
-import command.*;
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.FindCommand;
+import command.ListCommand;
 import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
 import exception.NonExistentCommandTypeException;
@@ -10,7 +15,7 @@ import type.DukeCommandTypeEnum;
  * Encapsulates a `Parser` that parses string inputs to commands or throws exceptions if they are invalid.
  */
 public class Parser {
-    private final static String EXIT_COMMAND = "bye";
+    private static final String EXIT_COMMAND = "bye";
 
     /**
      * Detects if an input is the exit command.

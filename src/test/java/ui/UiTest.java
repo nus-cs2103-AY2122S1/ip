@@ -1,15 +1,16 @@
 package ui;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import stub.message.MessageStub;
+import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import stub.message.MessageStub;
 
 public class UiTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -33,22 +34,20 @@ public class UiTest {
     public void testShowWelcome() {
         new Ui().showWelcome();
 
-        assertEquals(
-                "\t_________________________________________________\n" +
-                "\tHello! I'm Duke, what shall we do today? ٩(｡•́‿•̀｡)۶\n" +
-                "\t_________________________________________________\n",
+        assertEquals("\t_________________________________________________\n"
+                        + "\tHello! I'm Duke, what shall we do today? ٩(｡•́‿•̀｡)۶\n"
+                        + "\t_________________________________________________\n",
                 outContent.toString()
-                );
+        );
     }
 
     @Test
     public void testShowGoodbye() {
         new Ui().showGoodbye();
 
-        assertEquals(
-                "\t_________________________________________________\n" +
-                        "\tBye, see you again ヾ(=´･∀･｀=)\n" +
-                        "\t_________________________________________________\n",
+        assertEquals("\t_________________________________________________\n"
+                        + "\tBye, see you again ヾ(=´･∀･｀=)\n"
+                        + "\t_________________________________________________\n",
                 outContent.toString()
         );
     }
@@ -57,11 +56,11 @@ public class UiTest {
     public void testShowMessage() {
         new Ui().showMessage(new MessageStub());
 
-        assertEquals("\t_________________________________________________\n" +
-                "\thello :)\n" +
-                "\t_________________________________________________\n",
+        assertEquals("\t_________________________________________________\n"
+                        + "\thello :)\n"
+                        + "\t_________________________________________________\n",
                 outContent.toString()
-                );
+        );
     }
 
     @Test

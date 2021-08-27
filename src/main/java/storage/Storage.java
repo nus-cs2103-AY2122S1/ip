@@ -1,18 +1,18 @@
 package storage;
 
-import tasklist.TaskList;
-import ui.message.ErrorMessage;
-import ui.message.Message;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import tasklist.TaskList;
+import ui.message.ErrorMessage;
+import ui.message.Message;
 
 /**
  * Encapsulates the object handling data that is stored in the hard disk.
  */
 public class Storage {
-    private final static String storageDirectoryPath = "./storage";
+    private static final String storageDirectoryPath = "./storage";
 
     /**
      * Loads storage file containing the list.

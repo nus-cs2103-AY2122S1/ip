@@ -1,23 +1,23 @@
 package tasklist;
 
-import exception.InvalidTaskTimeFormatException;
-import exception.InvalidDateTimeException;
-import type.DukeCommandTypeEnum;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import exception.InvalidDateTimeException;
+import exception.InvalidTaskTimeFormatException;
+import type.DukeCommandTypeEnum;
 
 /**
  * Encapsulates a task with a deadline.
  * It inherits from `entity.list.DukeTask`.
  */
 public class DeadlineTask extends Task {
-    private static String TIME_SPLITTER_INPUT = "/by";
-    private static String TIME_SPLITTER_DATA = "\\(by:";
-    private static String DEADLINE_INPUT_FORMAT = "dd-MM-yyyy HHmm";
-    private static String DEADLINE_OUTPUT_FORMAT = "MMM d yyyy HHmm";
-    private LocalDateTime deadline;
+    private static final String TIME_SPLITTER_INPUT = "/by";
+    private static final String TIME_SPLITTER_DATA = "\\(by:";
+    private static final String DEADLINE_INPUT_FORMAT = "dd-MM-yyyy HHmm";
+    private static final String DEADLINE_OUTPUT_FORMAT = "MMM d yyyy HHmm";
+    private final LocalDateTime deadline;
 
     private DeadlineTask(String description, boolean isDone, LocalDateTime deadline) {
         super(description, isDone);

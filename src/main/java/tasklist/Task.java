@@ -1,18 +1,18 @@
 package tasklist;
 
+import exception.InvalidDateTimeException;
 import exception.InvalidTaskTimeFormatException;
 import exception.InvalidTaskTypeException;
-import exception.InvalidDateTimeException;
 import type.DukeCommandTypeEnum;
 
 /**
  * Encapsulates a task containing a description and status.
  */
 public class Task {
+    protected static final String STATUS_ICON_DONE = "X";
+    protected static final String STATUS_ICON_NOT_DONE = " ";
     private String description;
     private boolean isDone;
-    protected static String STATUS_ICON_DONE = "X";
-    protected static String STATUS_ICON_NOT_DONE = " ";
 
     /**
      * Constructor to instantiate a `entity.list.DukeTask`.

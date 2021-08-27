@@ -1,11 +1,11 @@
 package tasklist;
 
-import storage.StorageFile;
-import exception.ErrorAccessingFile;
-import exception.NonExistentTaskNumberException;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import exception.ErrorAccessingFile;
+import exception.NonExistentTaskNumberException;
+import storage.StorageFile;
 
 /**
  * Encapsulates a task list storing the users input tasks.
@@ -36,7 +36,7 @@ public class TaskList {
         try {
             this.listFile.add(task.toString());
             this.list.add(task);
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new ErrorAccessingFile("add");
         }
     }
@@ -55,7 +55,7 @@ public class TaskList {
             this.listFile.rewriteFile(this.list);
 
             return task;
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new ErrorAccessingFile("delete");
         }
     }

@@ -1,11 +1,11 @@
 package command;
 
-import tasklist.TaskList;
-import ui.message.Message;
 import exception.DukeException;
 import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
+import tasklist.TaskList;
 import type.DukeCommandTypeEnum;
+import ui.message.Message;
 
 /**
  * Encapsulates a command after it is parsed from the user input.

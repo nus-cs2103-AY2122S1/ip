@@ -1,8 +1,6 @@
 package tasklist;
 
 public class TodoTask extends Task {
-    private static String TASK_TYPE = "todo";
-
     private TodoTask(String description, boolean isDone) {
         super(description, isDone);
     }

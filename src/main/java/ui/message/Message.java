@@ -5,10 +5,16 @@ package ui.message;
  * It includes methods to format the output message.
  */
 public class Message {
-    private final static String FORMATTED_LINE = "_________________________________________________";
+    private static final String FORMATTED_LINE = "_________________________________________________";
     private final String message;
     private final String face;
 
+    /**
+     * Instantiates a message to be returned to the user.
+     *
+     * @param message Message content.
+     * @param face Kaomoji.
+     */
     public Message(String message, String face) {
         this.message = message;
         this.face = face;

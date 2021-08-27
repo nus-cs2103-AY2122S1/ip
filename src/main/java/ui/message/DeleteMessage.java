@@ -4,7 +4,7 @@ package ui.message;
  * Encapsulates a deleted message used to inform a user that a message has been deleted from a list.
  */
 public class DeleteMessage extends ListChangeMessage {
-    private static String PREFIX_DELETE = "Noted. I've removed this task:";
+    private static final String PREFIX_DELETE = "Noted. I've removed this task:";
 
     public DeleteMessage(String message, int itemsInList) {
         super(message, itemsInList);

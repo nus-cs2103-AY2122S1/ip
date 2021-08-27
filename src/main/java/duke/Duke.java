@@ -1,14 +1,13 @@
 package duke;
 
 import command.Command;
+import exception.DukeException;
+import parser.Parser;
+import storage.Storage;
 import storage.StorageFile;
 import tasklist.TaskList;
-import parser.Parser;
 import ui.Ui;
 import ui.message.Message;
-
-import storage.Storage;
-import exception.DukeException;
 
 /**
  * Encapsulates a chatbot that greets the user,
@@ -22,6 +21,9 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Instantiates a `Duke` chat bot.
+     */
     public Duke() {
         // Load data
         StorageFile storageFile = Storage.loadListFile();

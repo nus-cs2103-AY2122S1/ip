@@ -1,16 +1,16 @@
 package ui;
 
+import java.util.Scanner;
+
 import ui.message.ExitMessage;
 import ui.message.GreetMessage;
 import ui.message.Message;
-
-import java.util.Scanner;
 
 /**
  * Encapsulates the object that interacts with the user through inputs and outputs.
  */
 public class Ui {
-    Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     /**
      * Shows a message to greet the user when the program starts.
