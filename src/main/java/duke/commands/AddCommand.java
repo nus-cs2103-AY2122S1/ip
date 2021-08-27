@@ -1,14 +1,13 @@
-package commands;
+package duke.commands;
 
 import java.time.format.DateTimeParseException;
 
-import ui.Ui;
-import storage.Storage;
-import task.TaskList;
-import task.ToDo;
-import task.Deadline;
-import task.Event;
-import commands.TaskType;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.DukeException;
 
 public class AddCommand extends Command {

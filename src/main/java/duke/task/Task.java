@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.time.LocalDate;
 public class Task {
@@ -6,7 +6,7 @@ public class Task {
     private boolean completed;
 
     public Task(String input) {
-        this.title = input;
+        this.title = input.trim();
         this.completed = false;
     }
 
@@ -27,6 +27,6 @@ public class Task {
     @Override
     public String toString() {
         String complete = this.completed ? "[X]" : "[ ]";
-        return complete + " " + this.title;
+        return complete + " " + this.title + " ";
     }
 }

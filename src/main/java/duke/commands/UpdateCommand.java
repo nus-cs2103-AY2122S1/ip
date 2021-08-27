@@ -1,10 +1,10 @@
-package commands;
+package duke.commands;
 
-import task.TaskList;
-import ui.Ui;
+import duke.task.TaskList;
+import duke.ui.Ui;
 import duke.DukeException;
-import storage.Storage;
-import task.Task;
+import duke.storage.Storage;
+import duke.task.Task;
 
 public class UpdateCommand extends Command {
     private String commands;

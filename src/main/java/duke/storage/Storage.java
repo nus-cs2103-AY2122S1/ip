@@ -1,4 +1,4 @@
-package storage;
+package duke.storage;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -7,11 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import task.Task;
-import task.ToDo;
-import task.Deadline;
-import task.Event;
-import task.TaskList;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
 import duke.DukeException;
 
 public class Storage {

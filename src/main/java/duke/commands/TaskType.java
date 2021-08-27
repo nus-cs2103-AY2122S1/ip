@@ -1,4 +1,4 @@
-package commands;
+package duke.commands;
 
 public enum TaskType {
     TO_DO,

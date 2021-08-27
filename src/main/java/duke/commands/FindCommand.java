@@ -1,10 +1,10 @@
-package commands;
+package duke.commands;
 
-import ui.Ui;
-import storage.Storage;
-import task.Task;
-import task.TaskList;
-import commands.TaskType;
+import duke.ui.Ui;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.commands.TaskType;
 import duke.DukeException;
 
 public class FindCommand extends Command{

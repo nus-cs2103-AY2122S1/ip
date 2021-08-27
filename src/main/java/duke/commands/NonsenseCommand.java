@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
-import ui.Ui;
+import duke.ui.Ui;
 import duke.DukeException;
-import storage.Storage;
-import task.TaskList;
+import duke.storage.Storage;
+import duke.task.TaskList;
 
 public class NonsenseCommand extends Command{
     // empty as the string input is invalid

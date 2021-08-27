@@ -1,9 +1,9 @@
-import commands.Command;
 import duke.DukeException;
-import parser.Parser;
-import task.TaskList;
-import ui.Ui;
-import storage.Storage;
+import duke.commands.Command;
+import duke.parser.Parser;
+import duke.task.TaskList;
+import duke.ui.Ui;
+import duke.storage.Storage;
 
 public class Duke {
 
@@ -12,8 +12,9 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
-        ui = new Ui();
+
         storage = new Storage(filePath);
+        ui = new Ui();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -22,7 +23,7 @@ public class Duke {
         }
     }
     public static void main(String[] args) {
-        new Duke("../../../data/duke.txt").run(); 
+        new Duke("../../../../../data/duke.txt").run();
     }
 
 
