@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * Event Task class that sets description of task, date, time
+ */
 public class Event extends Task{
 
     /**
