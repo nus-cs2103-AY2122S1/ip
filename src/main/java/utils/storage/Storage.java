@@ -5,16 +5,19 @@ import utils.task.Event;
 import utils.task.Task;
 import utils.task.Todo;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.Arrays;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Array;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class Storage {
-    private static final String delimiter = "\\|";
+    private static final String delimiter = "|";
     private static final int delimiterLimit = 4;
 
     private static final String IDENTIFIER_TODO = "T";
@@ -25,6 +28,7 @@ public class Storage {
     private static final String NOT_DONE = "0";
 
     private static final String noPermissionsException = "User does not have permissions to create directories/file.";
+    private static final String failedSaveException = "Error: Failed to write tasks to file.";
 
     private final String filepath;
 
@@ -32,8 +36,61 @@ public class Storage {
         this.filepath = filepath;
     }
 
-
+    /**
+     * Loads all the task in the indicated filepath with the correct format.
+     * @return the ArrayList of Task objects.
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
+        // Creates the file and folders for filepath, else throw DukeException
+        createsFileAndFoldersForPath();
+
+        // Parse the file and get the tasks list
+        File file = new File(filepath);
+        ArrayList<Task> tasks = new ArrayList<>();
+        try {
+            Scanner myReader = new Scanner(file);
+            while (myReader.hasNextLine()) {
+                String line = myReader.nextLine();
+                Task task = createTaskFromString(line);
+                tasks.add(task);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            throw new DukeException(e.getMessage());
+        }
+
+        return tasks;
+    }
+
+    /**
+     * Writes the ArrayList of tasks into the file.
+     * @param tasks ArrayList of Task objects.
+     * @throws DukeException
+     */
+    public void writeTasksToFile(ArrayList<Task> tasks) throws DukeException {
+        // Creates the file and folders for filepath, else throw DukeException
+        createsFileAndFoldersForPath();
+        try {
+            FileWriter writer = new FileWriter(filepath);
+            StringBuilder fileString = new StringBuilder();
+            for (Task task : tasks) {
+                String appendedString = task.getTaskFileString(delimiter, DONE, NOT_DONE) + "\n";
+                fileString.append(appendedString);
+            }
+            writer.write(fileString.toString());
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException(failedSaveException);
+        }
+    }
+
+    /**
+     * Creates the files and folders required.
+     * @throws DukeException if there are issues with creating file or the filepath is not formatted properly.
+     */
+    private void createsFileAndFoldersForPath() throws DukeException {
         File file = new File(filepath);
 
         // handle the folder does not exist
@@ -56,22 +113,6 @@ public class Storage {
                 throw new DukeException(e.getMessage());
             }
         }
-
-        // Parse the file and get the tasks list
-        ArrayList<Task> tasks = new ArrayList<>();
-        try {
-            Scanner myReader = new Scanner(file);
-            while (myReader.hasNextLine()) {
-                String line = myReader.nextLine();
-                Task task = createTaskFromString(line);
-                tasks.add(task);
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            throw new DukeException(e.getMessage());
-        }
-
-        return tasks;
     }
 
     /**
@@ -80,7 +121,7 @@ public class Storage {
      * @return Task object
      */
     private Task createTaskFromString(String line) {
-        String[] split = line.split(delimiter, delimiterLimit);
+        String[] split = line.split("\\" + delimiter, delimiterLimit);
         String taskType = split[0];
         switch (taskType) {
             case (IDENTIFIER_TODO):

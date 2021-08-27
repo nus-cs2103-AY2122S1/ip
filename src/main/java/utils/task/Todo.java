@@ -10,6 +10,11 @@ public class Todo extends Task {
     }
 
     @Override
+    public String getTaskFileString(String delimiter, String done, String notDone) {
+        return "T" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description;
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

@@ -13,6 +13,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getTaskFileString(String delimiter, String done, String notDone) {
+        return "D" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description + delimiter + this.by;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }
