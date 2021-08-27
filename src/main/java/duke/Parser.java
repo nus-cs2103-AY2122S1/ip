@@ -48,17 +48,16 @@ public class Parser {
         boolean flag = true;
         int i=1;
         for (int j = 0; j < ob.numberOfTasks(); j++) {
-            if(ob.getTaskFromList(j).getDescription().contains(trimmedFind)){
-                flag = false;
-                if (!ob.getTaskFromList(j).getPreExisting()) {
+            if(!ob.getTaskFromList(j).getPreExisting()) {
+                if(ob.getTaskFromList(j).toString().contains(trimmedFind)){
+                    flag = false;
                     System.out.println("    " + (i++) + ". " + ob.getTaskFromList(j).toString());
                 }
-                else {
+            } else {
+                if(ob.getTaskFromList(j).getDescription().contains(trimmedFind)) {
+                    flag = false;
                     System.out.println("    " + (i++) + ". " + ob.getTaskFromList(j).getDescription());
                 }
-            }
-            else{
-
             }
         }
         if(flag) {

@@ -1,6 +1,9 @@
 package duke;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,6 +18,18 @@ public class Ui {
 
     /** Stores the path of the text file */
     String file = "data/duke.txt";
+
+    /** Stores the path of the data directory in the project folder */
+    Path dirPath = Paths.get("data");
+
+    /** Stores the path of the data file in the project folder */
+    Path filePath = Paths.get("data/duke.txt");
+
+    /** Stores if the path of the data directory in the project folder exists */
+    boolean existsDirPath = Files.exists(dirPath);
+
+    /** Stores if the path of the data file in the data directory in the project folder exists */
+    boolean existsFilePath = Files.exists(filePath);
 
     /** Scanner object */
     Scanner sc = new Scanner(System.in);
@@ -45,13 +60,30 @@ public class Ui {
         System.out.println(initGreeting());
         ArrayList<String> preExistingTasks = new ArrayList<>();
 
-        try {
-            Scanner s = storage.readFile(file);
-            while (s.hasNext()) {
-                preExistingTasks.add(s.nextLine());
+        if(existsDirPath) {
+            if(existsFilePath) {
+                try {
+                    Scanner s = storage.readFile(file);
+                    while (s.hasNext()) {
+                        preExistingTasks.add(s.nextLine());
+                    }
+                } catch (Exception e) {
+                    System.out.println("Something went wrong: " + e.getMessage());
+                }
+            } else{
+                try {
+                    Files.createFile(filePath);
+                } catch (IOException e) {
+                    System.out.println("Sorry! Data storage file couldn't be created.");
+                }
             }
-        } catch (Exception e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+        } else {
+            try {
+                Files.createDirectories(dirPath);
+                Files.createFile(filePath);
+            } catch (IOException e) {
+                System.out.println("Sorry! Data directory couldn't be created.");
+            }
         }
 
         for(int j=0; j< preExistingTasks.size();j++){
