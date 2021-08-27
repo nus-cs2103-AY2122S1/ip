@@ -41,8 +41,11 @@ public class Parser {
             return new AddDeadlineCommand(input);
 
         // Add event task
-        } else if (input.split(" ")[0].equals("event")){
+        } else if (input.split(" ")[0].equals("event")) {
             return new AddEventCommand(input);
+
+        } else if (input.split(" ")[0].equals("find")) {
+            return new FindTasksCommand(input);
 
         // Unknown command
         } else {
