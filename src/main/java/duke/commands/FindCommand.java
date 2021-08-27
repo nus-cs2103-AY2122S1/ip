@@ -19,16 +19,25 @@ public class FindCommand extends Command{
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         switch (type) {
-            case FIND_BY_DATE: {
-                Task[] tasksOnDate = tasks.tasksOnDate(commands);
-                for (Task task : tasksOnDate) {
-                    System.out.println(task);
-                }
-                break;
+        case FIND_BY_DATE: {
+
+            Task[] tasksOnDate = tasks.tasksOnDate(commands);
+            for (Task task : tasksOnDate) {
+                System.out.println(task);
             }
-            default: {
-                break;
-            }
+            break;
         }
+        case FIND: {
+            Task[] searchResults = tasks.findByKeyword(commands);
+            for (Task task : searchResults) {
+                System.out.println(task);
+            }
+            break;
+        }
+        default: {
+            break;
+        }
+        }
+
     }
 }
