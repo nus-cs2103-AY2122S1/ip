@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Contains logic and methods relating to parsing user input from CLI.
+ */
 public class Parser {
     private final Scanner scanner;
     private String currentCommand;
@@ -12,6 +15,11 @@ public class Parser {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Matches first word of line of input with current available commands.
+     *
+     * @return CommandType The command type of the next line of input
+     */
     public CommandType nextCommand() {
         currentCommand = scanner.nextLine();
         String command = currentCommand.split(" ")[0];
@@ -44,6 +52,12 @@ public class Parser {
         return currentCommand.split(" ")[1];
     }
 
+    /**
+     * Uses current command type to decide how to parse the description of task.
+     *
+     * @return Task Either ToDo/Deadline/Event task based on command.
+     * @throws DukeException
+     */
     public Task generateTask() throws DukeException {
         if (currentType == CommandType.AddToDo) {
             String description = currentCommand.split("/by ")[0].substring(5);
@@ -72,6 +86,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Only called in event of Delete/Done.
+     *
+     * @return int Index of task to be deleted/marked as complete.
+     */
     public int getIndex() {
         return Integer.parseInt(currentCommand.split(" ")[1]) - 1;
     }

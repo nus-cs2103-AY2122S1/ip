@@ -12,6 +12,11 @@ public class Storage {
     private final File dataFile;
     private final TaskList taskList;
 
+    /**
+     * Constructor for storage, includes hardcoded file path for duke.txt.
+     *
+     * @param taskList
+     */
     public Storage(TaskList taskList) {
         this.taskList = taskList;
         String DIR_NAME = "data";
@@ -69,6 +74,11 @@ public class Storage {
         return dataFile;
     }
 
+    /**
+     * Writes data down into duke.txt on 'bye' command.
+     *
+     * @throws IOException
+     */
     public void writeData() throws IOException {
         FileWriter writer = new FileWriter(dataFile.getPath());
         for (Task task: taskList.getTasks()) {
