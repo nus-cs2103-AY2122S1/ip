@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.regex.Pattern;
+import java.util.List;
 
 public class Parser {
     private String DONE_REGEX = "done [0-9]+";
@@ -8,6 +9,8 @@ public class Parser {
     private String TODO_REGEX = "todo [\\w\\s-]+";
     private String DEADLINE_REGEX = "deadline [\\w\\s-]+ \\/by [\\w\\s-]+";
     private String EVENT_REGEX = "event [\\w\\s-]+ \\/at [\\w\\s-]+";
+    /** Regex for a Find command. */
+    private String REGEX_FIND = "find [\\w\\s-]+";
 
     public boolean parse(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.equals("list")) {
@@ -49,6 +52,16 @@ public class Parser {
             String taskAdded = tasks.addEvent(name, time);
             String numTasksLeft = tasks.numTasks();
             ui.printResponse("Got it. I've added this task:", taskAdded, numTasksLeft);
+        } else if (Pattern.matches(REGEX_FIND, command)) {
+            String textToSearch = command.substring(5);
+            List<String> tasksFoundList = tasks.searchTasks(textToSearch);
+            String[] tasksFoundArr = new String[tasksFoundList.size() + 1];
+            tasksFoundArr[0] = "Here are the matching tasks in your list:";
+            for (int i = 0; i < tasksFoundList.size(); i++) {
+                int tempIndex = i + 1;
+                tasksFoundArr[tempIndex] = tempIndex + ". " + tasksFoundList.get(i);
+            }
+            ui.printResponse(tasksFoundArr);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means ):");
         }

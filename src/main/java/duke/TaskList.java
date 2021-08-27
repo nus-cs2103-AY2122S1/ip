@@ -5,6 +5,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.ArrayList;
 
@@ -57,6 +59,18 @@ public class TaskList {
 
     public String numTasks() {
         return "Now you have " + userTasks.size() + " tasks in the list.";
+    }
+
+    /**
+     * Finds a list of tasks which contain the specified search string.
+     * Converts the ArrayList to a stream to perform filtering and mapping operations.
+     *
+     * @param textToSearch The text which to search for in the names of the tasks.
+     * @return A list containing the string representations of tasks which contain the specified search string.
+     */
+    public List<String> searchTasks(String textToSearch) {
+        return userTasks.stream().filter(task -> task.getName().contains(textToSearch))
+                .map(task -> task.toString()).collect(Collectors.toList());
     }
 
     public String toSaveFormat() {

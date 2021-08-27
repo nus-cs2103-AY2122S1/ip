@@ -18,6 +18,15 @@ public class Task {
         return completedStr + "|" + name;
     }
 
+    /**
+     * Gets the name of the task.
+     *
+     * @return The name of the task.
+     */
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         String symbol = completed ? "X" : " ";
