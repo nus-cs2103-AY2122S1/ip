@@ -5,9 +5,9 @@ public class Event extends Task {
 
     protected LocalDate at;
 
-    public Event(String description, String at) {
+    public Event(String description, LocalDate at) {
         super(description);
-        this.at = LocalDate.parse(at);
+        this.at = at;
     }
 
     @Override
