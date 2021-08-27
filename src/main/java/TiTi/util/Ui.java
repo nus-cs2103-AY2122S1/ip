@@ -101,7 +101,6 @@ public class Ui {
         }
     }
 
-
     static String printTaskCount(TaskList taskList) {
         if (taskList.size() == 1) {
             return "We now have " + taskList.size() + " task on our list.";
@@ -109,6 +108,5 @@ public class Ui {
             return "We now have " + taskList.size() + " tasks on our list.";
         }
     }
-
 
 }
