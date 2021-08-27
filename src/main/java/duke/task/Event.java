@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,11 +20,21 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Returns the String representation of the Event.
+     *
+     * @return String representation of the Event.
+     */
     @Override
     public String toString() {
         return ("[E]" + super.toString() + " (at: " + this.at.format(displayFormatter) + ")");
     }
 
+    /**
+     * Returns the String representation of the Event as used in the storage.
+     *
+     * @return String representation of the Event in the storage format.
+     */
     public String toStorageString() {
         return ("E|" + super.getStatusNumber() + "|" + super.getDescription()
                 + "|" + this.at.format(displayFormatter));

@@ -18,6 +18,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the chat-bot
+     */
     public void run() {
         ui.showWelcomeMessage();
         boolean isExit = false;

@@ -12,6 +12,13 @@ import java.time.format.DateTimeParseException;
 public class Parser {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    /**
+     * Reads the input given and returns the appropriate Command to execute.
+     *
+     * @param input User input string to parse.
+     * @return Command object.
+     * @throws DukeException If input is not recognised or does not follow format.
+     */
     public static Command parse(String input) throws DukeException {
         String[] wordArray = input.split(" ");
         String type = "";
