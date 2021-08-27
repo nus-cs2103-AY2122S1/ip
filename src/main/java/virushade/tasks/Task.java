@@ -3,7 +3,9 @@ package virushade.tasks;
 import virushade.StringManipulator;
 import virushade.VirushadeException;
 
-
+/**
+ * The Task class represents the tasks created by Virushade.
+ */
 public class Task {
 
     private boolean isDone;
@@ -18,6 +20,15 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Parses the input string to create Tasks.
+     * Tasks are to be written in the following format:
+     * Index. [Task Type][is done] Task name /extra commands (/by for Deadline, /at for Events).
+     *
+     * @param inputString The input string.
+     * @return The tasks that are created from the input string.
+     * @throws VirushadeException Thrown when the input string is not of acceptable format.
+     */
     public static Task parse(String inputString) throws VirushadeException {
         // Remove the numbering at the start of each line.
         String text = StringManipulator.everythingAfterDot(inputString);

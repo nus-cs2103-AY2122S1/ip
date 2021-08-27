@@ -4,6 +4,9 @@ import virushade.tasks.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * A utility class that deals with interactions with the user.
+ */
 public class Ui {
     /**
      * Prints a line break. Used after every interaction with Virushade.
@@ -44,7 +47,9 @@ public class Ui {
     }
 
     /**
-     * Handles unexpected inputs to Virushade.
+     * Handles unexpected inputs to Virushade
+     * @param str The input.
+     * @throws VirushadeException The response error message for the user.
      */
     private static void handleUnexpectedInputs(String str) throws VirushadeException {
         if (str.startsWith("todo")) {
@@ -90,6 +95,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Scans the input by the user, and determines what task to carry out.
+     */
     private static void scanInput() {
         Scanner sc = new Scanner(System.in);
 
@@ -106,20 +114,34 @@ public class Ui {
         }
     }
 
+    /**
+     * Virushade interacts with the user through this method.
+     * Virushade firstly greets the user, then receive inputs from the user, before exiting.
+     */
     public static void interact() {
         greet();
         scanInput();
         exit();
     }
 
+    /**
+     * Notifies the user that Virushade is creating files.
+     */
     public static void showCreatingFiles() {
         System.out.println("Creating data files...");
     }
 
+    /**
+     * Notifies the user that Virushade is creating directories.
+     */
     public static void showCreatingDirectory() {
         System.out.println("Creating data directory...");
     }
 
+    /**
+     * Handles mostly incorrect inputs by the user.
+     * @param e The error message.
+     */
     public static void handleVirushadeException(VirushadeException e) {
         System.out.println(e.getMessage());
     }

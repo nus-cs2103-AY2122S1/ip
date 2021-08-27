@@ -3,10 +3,6 @@ package virushade.tasks;
 import virushade.Storage;
 import virushade.StringManipulator;
 import virushade.VirushadeException;
-import virushade.tasks.Task;
-import virushade.tasks.Deadline;
-import virushade.tasks.Event;
-import virushade.tasks.ToDo;
 
 import java.util.ArrayList;
 
@@ -14,7 +10,7 @@ public class TaskList {
     /**
      * This is the array that Virushade keeps the tasks in.
      */
-    private static ArrayList<Task> tasks = new ArrayList<>();
+    private static final ArrayList<Task> TASKS = new ArrayList<>();
 
     /**
      * This is the file name of our file that stores data on TaskList.
@@ -26,10 +22,15 @@ public class TaskList {
      */
     private static int listCount = 0;
 
+    /**
+     * Constructor for the TaskList class.
+     * @param storage The storage for classList to load data from.
+     * @throws VirushadeException Thrown when there is trouble parsing the data file in storage.
+     */
     public TaskList(Storage storage) throws VirushadeException {
         TASK_LIST_STORAGE = storage;
-        storage.load(tasks);
-        listCount = tasks.size();
+        storage.load(TASKS);
+        listCount = TASKS.size();
     }
 
     /**
@@ -44,6 +45,8 @@ public class TaskList {
     /**
      * Adds a Task to taskList.
      * @param addedTaskDescription Name of the added Task.
+     * @param taskType The type of task to be added.
+     * @throws VirushadeException Thrown when there is trouble adding the task.
      */
     public static void add(String addedTaskDescription, String taskType) throws VirushadeException {
         if (listCount < 100) {
@@ -85,7 +88,7 @@ public class TaskList {
                 addedTask = new Task(addedTaskDescription, false);
             }
 
-            tasks.add(addedTask);
+            TASKS.add(addedTask);
             listCount++;
             System.out.println("Added: " + addedTask.getTaskDescription());
             System.out.printf("Now you have %d tasks in the list.\n", listCount);
@@ -98,6 +101,7 @@ public class TaskList {
     /**
      * Deletes the specified task.
      * @param str Input string, determines which task to delete.
+     * @throws VirushadeException Thrown when there is trouble deleting the task.
      */
     public static void delete(String str) throws VirushadeException {
         try {
@@ -107,7 +111,7 @@ public class TaskList {
             if (index <= 0) {
                 throw new VirushadeException("Please enter an integer greater than 0.");
             } else if (index <= listCount) {
-                Task deletedTask = tasks.get(index - 1);
+                Task deletedTask = TASKS.get(index - 1);
                 deletedTask.deleteMessage();
                 listCount--;
                 System.out.printf("You have %d tasks in the list.\n", listCount);
@@ -125,6 +129,7 @@ public class TaskList {
     /**
      * Marks a task as complete.
      * @param str Input string, determines which task to mark as complete.
+     * @throws VirushadeException Thrown when there is something wrong with the user input.
      */
     public static void completeTask(String str) throws VirushadeException {
 
@@ -133,13 +138,13 @@ public class TaskList {
             int index = Integer.parseInt(str);
 
             if (index <= 0) {
-                System.out.println("Please enter an integer greater than 0.");
+                throw new VirushadeException("Please enter an integer greater than 0.");
             } else if (index <= listCount) {
-                Task doneTask = tasks.get(index - 1);
+                Task doneTask = TASKS.get(index - 1);
                 doneTask.completeTask();
                 updateFile(generateList());
             } else {
-                System.out.println("Please check that you have entered the correct number!");
+                throw new VirushadeException("Please check that you have entered the correct number!");
             }
         } catch (NumberFormatException e) {
             // Tells the user that he did not enter a number.
@@ -166,7 +171,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
 
         while (index < listCount) {
-            String taskName = (index + 1) + "." + tasks.get(index).toString();
+            String taskName = (index + 1) + "." + TASKS.get(index).toString();
             sb.append(System.lineSeparator()).append(taskName);
             index++;
         }
