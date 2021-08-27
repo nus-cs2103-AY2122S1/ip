@@ -1,12 +1,10 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
-    private LocalDate date;
     /**
      * combine an array of strings into a space seperated sentence.
      * @param input the string array.
@@ -44,6 +42,7 @@ public class Parser {
         case "event":
             String[] output1 = result.toString().split(" /at ");
             if (output1.length < 2) {
+
                 throw new DukeException("Please provide both description and time. Use '/at'. "
                         + "(eg. event fix hair /at 1pm)");
             }
@@ -95,7 +94,7 @@ public class Parser {
 
         default:
             throw new DukeException("I don't recognise this command\n"
-                        + "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
+                    + "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");
         }
     }
 
@@ -107,7 +106,7 @@ public class Parser {
      */
     private String parseDate(String input) throws DukeException {
         try {
-            this.date = LocalDate.parse(input);
+            LocalDate date = LocalDate.parse(input);
             return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (DateTimeParseException error) {
             throw new DukeException("Please enter a valid date in this format 'YYYY-MM-dd'");
