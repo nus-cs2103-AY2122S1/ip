@@ -16,15 +16,15 @@ public class Storage {
     private static final String DIRECTORY_PATH = "../../../../../data";
     private static final String FILE_PATH = DIRECTORY_PATH + "/duke.txt";
 
-    private boolean isDirectoryExists;
-    private boolean isFileExists;
+    private boolean doesDirectoryExists;
+    private boolean doesFileExists;
 
     public Storage() {
         File directory = new File(DIRECTORY_PATH);
         File file = new File(FILE_PATH);
 
-        this.isDirectoryExists = directory.exists();
-        this.isFileExists = file.exists();
+        this.doesDirectoryExists = directory.exists();
+        this.doesFileExists = file.exists();
     }
 
     /**
@@ -33,17 +33,17 @@ public class Storage {
      * @return Tasks from the saved file in an ArrayList of String
      */
     public ArrayList<String> retrieveData() {
-        if (isFileExists) {
+        if (doesFileExists) {
             try {
                 File f = new File(FILE_PATH);
                 Scanner sc = new Scanner(f);
-                ArrayList<String> tasksList = new ArrayList<>();
+                ArrayList<String> tasks = new ArrayList<>();
 
                 while (sc.hasNextLine()) {
-                    tasksList.add(sc.nextLine());
+                    tasks.add(sc.nextLine());
                 }
 
-                return tasksList;
+                return tasks;
 
             } catch (FileNotFoundException e) {
                 System.out.println("Something went wrong:  " + e.getMessage());
@@ -57,11 +57,11 @@ public class Storage {
     /**
      * Saves tasks into the save file from a given String of Tasks.
      *
-     * @param allTasks String containing all the tasks to save.
+     * @param tasks String containing all the tasks to save.
      */
-    public void writeToFile(String allTasks) {
+    public void writeToFile(String tasks) {
         // Checks if directory exists, creates if it doesn't
-        if (!isDirectoryExists) {
+        if (!doesDirectoryExists) {
             File directory = new File(DIRECTORY_PATH);
             directory.mkdir();
         }
@@ -69,7 +69,7 @@ public class Storage {
         // Write to file
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
-            fw.write(allTasks);
+            fw.write(tasks);
             fw.close();
         } catch (IOException e) {
             System.out.println("Something went wrong:  " + e.getMessage());

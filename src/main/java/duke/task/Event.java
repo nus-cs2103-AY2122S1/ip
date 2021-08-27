@@ -74,7 +74,7 @@ public class Event extends Task {
     }
 
     @Override
-    public boolean onDate(String date) {
+    public boolean isOnDate(String date) {
         return this.eventDate.equals(Parser.parseDate(date));
     }
 

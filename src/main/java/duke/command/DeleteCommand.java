@@ -9,16 +9,16 @@ import duke.util.Ui;
  * @author Benedict Chua
  */
 public class DeleteCommand extends Command {
-    private TaskList taskList;
+    private TaskList tasks;
     private int index;
 
     public DeleteCommand(TaskList taskList, int index) {
-        this.taskList = taskList;
+        this.tasks = taskList;
         this.index = index;
     }
 
     @Override
     public void execute() {
-        Ui.displayMessage(this.taskList.deleteTask(this.index));
+        Ui.displayMessage(this.tasks.deleteTask(this.index));
     }
 }

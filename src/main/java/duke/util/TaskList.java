@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private static final String INDENTATION = "     ";
-    private ArrayList<Task> tasksList;
+    private ArrayList<Task> tasks;
     private Storage storage;
 
     /**
@@ -26,25 +26,25 @@ public class TaskList {
      * If existing task is empty, creates an empty ArrayList of task.
      * Otherwise, parses the Tasks from the saved file and adds it to the ArrayList of task.
      *
-     * @param existingTask Tasks in the formatted into a String from the saved file.
+     * @param existingTasks Tasks in the formatted into a String from the saved file.
      * @param storage Storage object to use to save state of TaskList.
      */
-    public TaskList(ArrayList<String> existingTask, Storage storage) {
+    public TaskList(ArrayList<String> existingTasks, Storage storage) {
         this.storage = storage;
-        if (existingTask != null) {
-            tasksList = new ArrayList<>();
+        if (existingTasks != null) {
+            tasks = new ArrayList<>();
 
-            for (String taskString : existingTask) {
+            for (String taskString : existingTasks) {
                 String[] taskDetails = taskString.split(" \\| ");
                 switch (taskDetails[0]) {
                 case "T":
-                    tasksList.add(new ToDo(taskDetails[1], taskDetails[2]));
+                    tasks.add(new ToDo(taskDetails[1], taskDetails[2]));
                     break;
                 case "D":
-                    tasksList.add(new Deadline(taskDetails[1], taskDetails[2], taskDetails[3]));
+                    tasks.add(new Deadline(taskDetails[1], taskDetails[2], taskDetails[3]));
                     break;
                 case "E":
-                    tasksList.add(new Event(taskDetails[1], taskDetails[2], taskDetails[3]));
+                    tasks.add(new Event(taskDetails[1], taskDetails[2], taskDetails[3]));
                     break;
                 default:
                     // Unrecognised string -> do something next time?
@@ -53,7 +53,7 @@ public class TaskList {
                 }
             }
         } else {
-            tasksList = new ArrayList<>();
+            tasks = new ArrayList<>();
         }
     }
 
@@ -63,11 +63,11 @@ public class TaskList {
      * @return Formatted TaskList in the form of a String.
      */
     private String convertListToString() {
-        String allTasks = "";
-        for (Task task : tasksList) {
-            allTasks = allTasks + task.saveAsString() + "\n";
+        String tasksString = "";
+        for (Task task : this.tasks) {
+            tasksString = tasksString + task.saveAsString() + "\n";
         }
-        return allTasks;
+        return tasksString;
     }
 
     /**
@@ -80,15 +80,15 @@ public class TaskList {
     public String[] addToList(String task, String typeOfTask) throws MissingArgumentException {
         switch (typeOfTask) {
         case "ToDo":
-            tasksList.add(new ToDo(task));
+            tasks.add(new ToDo(task));
             break;
         case "Deadline":
             String[] deadlineDetails = Parser.parseDeadlineDate(task);
-            tasksList.add(new Deadline(deadlineDetails[0], deadlineDetails[1]));
+            tasks.add(new Deadline(deadlineDetails[0], deadlineDetails[1]));
             break;
         case "Event":
             String[] eventDetails = Parser.parseEventDate(task);
-            tasksList.add(new Event(eventDetails[0], eventDetails[1]));
+            tasks.add(new Event(eventDetails[0], eventDetails[1]));
             break;
         default:
             // will NOT execute as Duke calls this function to add a task and it only calls them based on
@@ -100,9 +100,9 @@ public class TaskList {
 
         return new String[] {
                 "I've added this task but it's not like I did it for you or anything!",
-                String.format("  %s", tasksList.get(tasksList.size() - 1)),
+                String.format("  %s", tasks.get(tasks.size() - 1)),
                 String.format("Now you have %d %s in the list. Do your best doing them okay?",
-                        tasksList.size(), tasksList.size() == 1 ? "task" : "tasks")
+                        tasks.size(), tasks.size() == 1 ? "task" : "tasks")
         };
     }
 
@@ -111,23 +111,23 @@ public class TaskList {
      * If dateString is not null, prints tasks that are due on that date.
      * Otherwise, prints all tasks.
      *
-     * @param type the type of filtering to be done when displaying list
+     * @param filterType the type of filtering to be done when displaying list
      * @param filterCondition String containing the respective filtering condition (expects date or keyword).
      */
-    public void printList(String type, String filterCondition) {
-        switch (type) {
+    public void printList(String filterType, String filterCondition) {
+        switch (filterType) {
         case "all":
-            for (int i = 0; i < tasksList.size(); i++) {
-                Task currTask = tasksList.get(i);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task currTask = tasks.get(i);
                 System.out.println(INDENTATION + String.format("%d:%s", i + 1, currTask));
             }
             break;
         case "date":
             int dateIndex = 1;
 
-            for (int i = 0; i < tasksList.size(); i++) {
-                Task currTask = tasksList.get(i);
-                if (currTask.onDate(filterCondition)) {
+            for (int i = 0; i < tasks.size(); i++) {
+                Task currTask = tasks.get(i);
+                if (currTask.isOnDate(filterCondition)) {
                     System.out.println(INDENTATION + String.format("%d:%s", dateIndex, currTask));
                     dateIndex++;
                 }
@@ -136,8 +136,8 @@ public class TaskList {
         case "keyword":
             int keywordIndex = 1;
 
-            for (int i = 0; i < tasksList.size(); i++) {
-                Task currTask = tasksList.get(i);
+            for (int i = 0; i < tasks.size(); i++) {
+                Task currTask = tasks.get(i);
                 if (currTask.containsKeyword(filterCondition)) {
                     System.out.println(INDENTATION + String.format("%d:%s", keywordIndex, currTask));
                     keywordIndex++;
@@ -154,12 +154,12 @@ public class TaskList {
      * @throws InvalidIndexException if index given does not exist in the TaskList.
      */
     public String[] markTaskAsDone(int index) throws InvalidIndexException {
-        if (index <= 0 || index > tasksList.size()) {
-            throw new InvalidIndexException(tasksList.size());
+        if (index <= 0 || index > tasks.size()) {
+            throw new InvalidIndexException(tasks.size());
         }
         String[] message = {
                 "You completed a task! Maybe you aren't so incompetent after all.",
-                tasksList.get(index - 1).markTaskAsDone()
+                tasks.get(index - 1).markTaskAsDone()
         };
 
         storage.writeToFile(convertListToString());
@@ -176,16 +176,16 @@ public class TaskList {
      * @throws InvalidIndexException if index given does not exist in the TaskList.
      */
     public String[] deleteTask(int index) throws InvalidIndexException {
-        if (index <= 0 || index > tasksList.size()) {
-            throw new InvalidIndexException(tasksList.size());
+        if (index <= 0 || index > tasks.size()) {
+            throw new InvalidIndexException(tasks.size());
         }
 
-        Task deletedTask = tasksList.remove(index - 1);
+        Task deletedTask = tasks.remove(index - 1);
         String[] message = {
                 "I've deleted this task so show me some gratitude!",
                 String.format("  %s", deletedTask),
                 String.format("Now you have %d %s in the list. Do your best doing them okay?",
-                        tasksList.size(), tasksList.size() == 1 ? "task" : "tasks")
+                        tasks.size(), tasks.size() == 1 ? "task" : "tasks")
         };
 
         storage.writeToFile(convertListToString());

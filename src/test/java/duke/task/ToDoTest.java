@@ -33,6 +33,6 @@ public class ToDoTest {
     @Test
     public void testOnDate() {
         ToDo task = new ToDo("read book");
-        assertEquals(false, task.onDate("2021-08-23"));
+        assertEquals(false, task.isOnDate("2021-08-23"));
     }
 }

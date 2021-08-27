@@ -26,10 +26,10 @@ import static java.lang.Integer.parseInt;
  * @author Benedict Chua
  */
 public class Parser {
-    private TaskList taskList;
+    private TaskList tasks;
 
     public Parser(TaskList taskList) {
-        this.taskList = taskList;
+        this.tasks = taskList;
     }
 
     /**
@@ -44,21 +44,21 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "list":
-            return new ListCommand(this.taskList, "all",null);
+            return new ListCommand(this.tasks, "all",null);
         case "check":
-            return new ListCommand(this.taskList, "date", filterTaskDescription(input));
+            return new ListCommand(this.tasks, "date", filterTaskDescription(input));
         case "find":
-            return new ListCommand(this.taskList, "keyword", filterTaskDescription(input));
+            return new ListCommand(this.tasks, "keyword", filterTaskDescription(input));
         case "done":
-            return new DoneCommand(this.taskList, filterTaskIndex(input));
+            return new DoneCommand(this.tasks, filterTaskIndex(input));
         case "todo":
-            return new AddCommand(this.taskList, filterTaskDescription(input), "ToDo");
+            return new AddCommand(this.tasks, filterTaskDescription(input), "ToDo");
         case "deadline":
-            return new AddCommand(this.taskList, filterTaskDescription(input), "Deadline");
+            return new AddCommand(this.tasks, filterTaskDescription(input), "Deadline");
         case "event":
-            return new AddCommand(this.taskList, filterTaskDescription(input), "Event");
+            return new AddCommand(this.tasks, filterTaskDescription(input), "Event");
         case "delete":
-            return new DeleteCommand(this.taskList, filterTaskIndex(input));
+            return new DeleteCommand(this.tasks, filterTaskIndex(input));
         default:
             return new InvalidCommand(input);
         }

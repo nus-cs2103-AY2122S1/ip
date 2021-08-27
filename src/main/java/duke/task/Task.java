@@ -80,7 +80,7 @@ public abstract class Task {
      * @param date String containing the date in the form dd/mm/yyyy, dd-mm-yyyy or yyyy-mm-dd.
      * @return boolean of the result.
      */
-    public boolean onDate(String date) {
+    public boolean isOnDate(String date) {
         return false;
     }
 

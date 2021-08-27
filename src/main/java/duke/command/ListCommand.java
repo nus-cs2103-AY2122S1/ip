@@ -8,18 +8,18 @@ import duke.util.TaskList;
  * @author Benedict Chua
  */
 public class ListCommand extends Command {
-    private TaskList taskList;
-    private String type;
+    private TaskList tasks;
+    private String filterType;
     private String filterCondition;
 
-    public ListCommand(TaskList taskList, String type, String filterCondition) {
-        this.taskList = taskList;
-        this.type = type;
+    public ListCommand(TaskList taskList, String filterType, String filterCondition) {
+        this.tasks = taskList;
+        this.filterType = filterType;
         this.filterCondition = filterCondition;
     }
 
     @Override
     public void execute() {
-        taskList.printList(this.type, this.filterCondition);
+        tasks.printList(this.filterType, this.filterCondition);
     }
 }

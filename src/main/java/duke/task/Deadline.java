@@ -72,7 +72,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public boolean onDate(String date) {
+    public boolean isOnDate(String date) {
         return this.dueDate.equals(Parser.parseDate(date));
     }
 

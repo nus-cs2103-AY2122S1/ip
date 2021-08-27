@@ -33,12 +33,12 @@ public class EventTest {
     @Test
     public void testOnDate_sameDate() {
         Event task = new Event("project meeting","23/08/2021 2000 2200");
-        assertEquals(true, task.onDate("2021-08-23"));
+        assertEquals(true, task.isOnDate("2021-08-23"));
     }
 
     @Test
     public void testOnDate_differentDate() {
         Event task = new Event("project meeting","23/08/2021 2000 2200");
-        assertEquals(false, task.onDate("2021-08-21"));
+        assertEquals(false, task.isOnDate("2021-08-21"));
     }
 }

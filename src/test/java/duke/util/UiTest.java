@@ -33,14 +33,14 @@ public class UiTest {
 
     @Test
     public void testShowLine() {
-        Ui.showLine();
+        Ui.printLineSeparator();
         assertEquals("    ____________________________________________________________\n",
                 outContent.toString());
     }
 
     @Test
     public void testNewLine() {
-        Ui.newLine();
+        Ui.printEmptyLine();
         assertEquals("\n", outContent.toString());
     }
 

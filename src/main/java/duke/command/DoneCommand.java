@@ -9,16 +9,16 @@ import duke.util.Ui;
  * @author Benedict Chua
  */
 public class DoneCommand extends Command {
-    private TaskList taskList;
+    private TaskList tasks;
     private int index;
 
     public DoneCommand(TaskList taskList, int index) {
-        this.taskList = taskList;
+        this.tasks = taskList;
         this.index = index;
     }
 
     @Override
     public void execute() {
-        Ui.displayMessage(this.taskList.markTaskAsDone(this.index));
+        Ui.displayMessage(this.tasks.markTaskAsDone(this.index));
     }
 }

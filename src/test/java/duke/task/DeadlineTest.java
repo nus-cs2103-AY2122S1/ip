@@ -33,12 +33,12 @@ public class DeadlineTest {
     @Test
     public void testOnDate_sameDate() {
         Deadline task = new Deadline("return book","23/08/2021 2000");
-        assertEquals(true, task.onDate("2021-08-23"));
+        assertEquals(true, task.isOnDate("2021-08-23"));
     }
 
     @Test
     public void testOnDate_differentDate() {
         Deadline task = new Deadline("return book","23/08/2021 2000");
-        assertEquals(false, task.onDate("2021-08-21"));
+        assertEquals(false, task.isOnDate("2021-08-21"));
     }
 }

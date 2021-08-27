@@ -9,18 +9,18 @@ import duke.util.Ui;
  * @author Benedict Chua
  */
 public class AddCommand extends Command {
-    private TaskList taskList;
+    private TaskList tasks;
     private String task;
-    private String type;
+    private String taskType;
 
-    public AddCommand(TaskList taskList, String task, String type) {
-        this.taskList = taskList;
+    public AddCommand(TaskList taskList, String task, String taskType) {
+        this.tasks = taskList;
         this.task = task;
-        this.type = type;
+        this.taskType = taskType;
     }
 
     @Override
     public void execute() {
-        Ui.displayMessage(this.taskList.addToList(this.task, this.type));
+        Ui.displayMessage(this.tasks.addToList(this.task, this.taskType));
     }
 }

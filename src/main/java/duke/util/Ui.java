@@ -28,14 +28,14 @@ public class Ui {
     /**
      * Prints line separator.
      */
-    public static void showLine() {
+    public static void printLineSeparator() {
         System.out.println(LINE_SEPARATOR);
     }
 
     /**
      * Prints empty line.
      */
-    public static void newLine() {
+    public static void printEmptyLine() {
         System.out.println();
     }
 
