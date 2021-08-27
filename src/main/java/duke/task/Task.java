@@ -2,24 +2,20 @@ package duke.task;
 
 public class Task {
     private String taskName;
-    private boolean status;
+    private boolean isDone;
 
-    Task(String taskName, boolean status) {
+    Task(String taskName, boolean isDone) {
         this.taskName = taskName;
-        this.status = status;
-    }
-
-    public String getTaskName() {
-        return taskName;
+        this.isDone = isDone;
     }
 
     public String getStatus() {
-        return status ? "1" : "0";
+        return isDone ? "1" : "0";
     }
 
     public String displayTask() {
         String display;
-        if (status) {
+        if (isDone) {
             display = "|1|" + taskName;
         } else {
             display = "|0|" + taskName;
@@ -28,6 +24,6 @@ public class Task {
     }
 
     public void checkOffTask() {
-        status = true;
+        isDone = true;
     }
 }

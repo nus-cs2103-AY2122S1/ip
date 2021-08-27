@@ -7,8 +7,8 @@ public class Event extends Task{
 
     private LocalDateTime duration;
 
-    public Event(String taskName, LocalDateTime duration, boolean status) {
-        super(taskName, status);
+    public Event(String taskName, LocalDateTime duration, boolean isDone) {
+        super(taskName, isDone);
         this.duration = duration;
     }
 

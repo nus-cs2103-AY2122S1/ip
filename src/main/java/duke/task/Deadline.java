@@ -7,8 +7,8 @@ public class Deadline extends Task{
 
     private LocalDateTime due;
 
-    public Deadline(String taskName, LocalDateTime due, boolean status) {
-        super(taskName, status);
+    public Deadline(String taskName, LocalDateTime due, boolean isDone) {
+        super(taskName, isDone);
         this.due = due;
     }
 
