@@ -1,8 +1,7 @@
 package duke.util;
 
 import duke.exceptions.DukeException;
-import duke.exceptions.InvalidDeleteFormatException;
-import duke.exceptions.InvalidDoneFormatException;
+import duke.exceptions.InvalidFormatException;
 import duke.taskTypes.Deadline;
 import duke.taskTypes.Event;
 import duke.taskTypes.Task;
@@ -59,7 +58,7 @@ public class TaskList {
      * @throws NumberFormatException if character after "done" is not an integer
      * @throws NullPointerException if the number provided by user is not found in the getStorage printed msg
      */
-    public Task done (String input) throws InvalidDoneFormatException {
+    public Task done (String input) throws DukeException {
         try {
             int list_no = Integer.parseInt(input.trim()); //possible NumberFormatException
             Collection<Task> values = mapper.values();
@@ -68,13 +67,13 @@ public class TaskList {
             mapper.put(key, mapper.get(key).setDone());
             return mapper.get(key);
         } catch (NumberFormatException e) {
-            throw new InvalidDoneFormatException("Ensure that list position in NUMERICAL form");
+            throw new InvalidFormatException("Ensure that list position in NUMERICAL form");
         } catch (NullPointerException e) {
-            throw new InvalidDoneFormatException("Ensure that number inputted can be found in the list");
+            throw new InvalidFormatException("Ensure that number inputted can be found in the list");
         }
     }
 
-    public Task delete(String input) throws InvalidDeleteFormatException {
+    public Task delete(String input) throws DukeException {
         try {
             int list_no = Integer.parseInt(input.trim());
             Collection<Task> values = mapper.values();
@@ -83,9 +82,9 @@ public class TaskList {
             mapper.remove(key);
             return deleted;
         } catch (NumberFormatException e) {
-            throw new InvalidDeleteFormatException("Ensure that list position in NUMERICAL form");
+            throw new InvalidFormatException("Ensure that list position in NUMERICAL form");
         } catch (NullPointerException e) {
-            throw new InvalidDeleteFormatException("Ensure that number inputted can be found in the list");
+            throw new InvalidFormatException("Ensure that number inputted can be found in the list");
         }
     }
 

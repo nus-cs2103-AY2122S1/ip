@@ -1,6 +1,9 @@
 package duke.taskTypes;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.EmptyTimeException;
+import duke.exceptions.InvalidDateException;
+import duke.exceptions.InvalidTimeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -53,12 +56,12 @@ public class Task {
                 if (hoursMins <2401 && hoursMins > 999 && hoursMins%100 <60) {
                     this.time = hoursMins;
                 } else {
-                    throw new DukeException("Invalid time format (use 24hr format)");
+                    throw new InvalidTimeException("Invalid time format (use 24hr format)");
                 }
             } catch (DateTimeParseException e) {
-                throw new DukeException("Wrong date format(use YYYY-MM-DD)");
+                throw new InvalidDateException("Wrong date format(use YYYY-MM-DD)");
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Missing time");
+                throw new EmptyTimeException("Missing time");
             }
         }
     }

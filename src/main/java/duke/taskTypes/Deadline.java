@@ -1,7 +1,9 @@
 package duke.taskTypes;
 
 import duke.exceptions.DukeException;
-import duke.exceptions.InvalidDeadlineFormatException;
+import duke.exceptions.EmptyTimeException;
+import duke.exceptions.InvalidFormatException;
+import duke.exceptions.EmptyDescriptionException;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -18,14 +20,14 @@ public class Deadline extends Task{
         String key;
 
         if (results.size() == 0){
-            throw new InvalidDeadlineFormatException("Missing description and timestamp");
+            throw new InvalidFormatException("Missing description and timestamp");
         } else if (results.size() == 1){
-            throw new InvalidDeadlineFormatException("Invalid timestamp format");
+            throw new EmptyTimeException("Invalid timestamp format");
         }
 
         key = results.get(0);
         if (key.equals("")){
-            throw new InvalidDeadlineFormatException("Missing description ");
+            throw new EmptyDescriptionException("Missing description");
         }
 
         super.setEventType("D");

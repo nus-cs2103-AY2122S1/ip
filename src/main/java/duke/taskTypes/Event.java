@@ -1,7 +1,9 @@
 package duke.taskTypes;
 
-import duke.exceptions.InvalidEventFormatException;
 import duke.exceptions.DukeException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.EmptyTimeException;
+import duke.exceptions.InvalidFormatException;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -18,13 +20,13 @@ public class Event extends Task{
         List<String> results = Pattern.compile("/at").splitAsStream(input).map(x->x.trim()).collect(Collectors.toList());
 
         if (results.size() == 0) {
-            throw new InvalidEventFormatException("Missing description and empty");
+            throw new InvalidFormatException("Missing description and empty");
         } else if (results.size() == 1) {
-            throw new InvalidEventFormatException("Invalid timestamp format");
+            throw new EmptyTimeException("Invalid timestamp format");
         }
         String key = results.get(0);
         if (key.equals("")) {
-            throw new InvalidEventFormatException(" Missing description");
+            throw new EmptyDescriptionException(" Missing description");
         }
         super.setEventType("E");
         super.setDescription(key);

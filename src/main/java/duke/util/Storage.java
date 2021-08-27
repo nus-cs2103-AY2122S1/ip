@@ -1,5 +1,7 @@
 package duke.util;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.FileNotFoundException;
 import duke.taskTypes.Task;
 
 import java.io.File;
@@ -15,21 +17,17 @@ public class Storage {
 
     private File savedOutput;
 
-    public Storage(String filePath) {
-        try {
-            File dir = new File(filePath);
-            dir.mkdirs();
-            File savedOutput = new File(filePath + "/savedOutput.txt");
-            if (!savedOutput.exists()) {
-                savedOutput.createNewFile();
-            }
-            this.savedOutput = savedOutput;
-        } catch (IOException e) {
-            System.out.println("file not found");
+    public Storage(String filePath) throws DukeException {
+        File dir = new File(filePath);
+        dir.mkdirs();
+        File savedOutput = new File(filePath + "/savedOutput.txt");
+        if (!savedOutput.exists()) {
+            throw new FileNotFoundException("Invalid FilePath");
         }
+        this.savedOutput = savedOutput;
     }
 
-    public List<String> loadSaved() {
+    public List<String> loadSaved() throws DukeException {
         List<String> pastCommand = new ArrayList<>();
         try {
             Scanner scan = new Scanner(savedOutput);
@@ -37,12 +35,12 @@ public class Storage {
                 pastCommand.add(scan.nextLine());
             }
         } catch (IOException e) {
-            System.out.println("file not found");
+            throw new FileNotFoundException("Invalid FilePath");
         }
         return pastCommand;
     }
 
-    public void saveAdded(Task task) {
+    public void saveAdded(Task task) throws DukeException {
         String msg = task.saveTask();
         try {
             FileWriter fileWriter = new FileWriter(savedOutput, true);
@@ -50,11 +48,11 @@ public class Storage {
             fileWriter.write(System.lineSeparator());
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("file not found");
+            throw new FileNotFoundException("Invalid FilePath");
         }
     }
 
-    public void saveUpdate(TaskList taskList) {
+    public void saveUpdate(TaskList taskList) throws DukeException {
         String[] currentState = taskList.saveState();
         try {
             // Reset the file
@@ -70,7 +68,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("file not found");
+            throw new FileNotFoundException("Invalid FilePath");
         }
     }
 

@@ -13,7 +13,7 @@ public class Duke {
     private final Ui ui;
     private final Storage storage;
 
-    public Duke(String filePath) {
+    public Duke(String filePath) throws DukeException{
         storage = new Storage(filePath);
         ui = new Ui(48);
         taskList = new TaskList();
@@ -43,6 +43,11 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        new Duke("tmp/storedMsg").run();
+        try {
+            new Duke("src/main/storedMsg").run();
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+
     }
 }
