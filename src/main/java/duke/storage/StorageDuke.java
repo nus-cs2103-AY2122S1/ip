@@ -1,9 +1,9 @@
-package main.java.duke.storage;
+package duke.storage;
 
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,7 +76,7 @@ public class StorageDuke implements Storage {
     }
 
     /**
-     * Changes the string in the storage file to indicate that the task is done.
+     * Changes the string in the storage file to indicate that the duke.task is done.
      *
      * @param index the position of the item
      * @throws IOException if there is an error writing to the file
@@ -89,11 +89,11 @@ public class StorageDuke implements Storage {
     }
 
     /**
-     * Adds a new task to the storage file.
+     * Adds a new duke.task to the storage file.
      *
-     * @param type        the type of the task
-     * @param description the description of the task
-     * @param date        the date of the task (if deadline or event)
+     * @param type        the type of the duke.task
+     * @param description the description of the duke.task
+     * @param date        the date of the duke.task (if deadline or event)
      * @throws IOException if there is an error writing to the file
      */
     @Override
@@ -103,9 +103,9 @@ public class StorageDuke implements Storage {
     }
 
     /**
-     * Deletes the task from the storage file.
+     * Deletes the duke.task from the storage file.
      *
-     * @param index the position of the task in the list
+     * @param index the position of the duke.task in the list
      * @throws IOException if there is an error writing to the file
      */
     @Override

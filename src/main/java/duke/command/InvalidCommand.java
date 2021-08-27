@@ -1,12 +1,12 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.DukeException;
-import main.java.duke.storage.Storage;
-import main.java.duke.tasklist.TaskList;
-import main.java.duke.Ui;
+import duke.DukeException;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.Ui;
 
 /**
- * InvalidCommand is a command that is invalid.
+ * InvalidCommand is a duke.command that is invalid.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S1
@@ -25,13 +25,13 @@ public class InvalidCommand extends Command {
     /**
      * Throws an exception.
      *
-     * @param tasks   the task list
+     * @param tasks   the duke.task list
      * @param ui      the ui
-     * @param storage the storage for the saved task list
-     * @throws DukeException since the command given is wrong
+     * @param storage the storage for the saved duke.task list
+     * @throws DukeException since the duke.command given is wrong
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException("Invalid command.");
+        throw new DukeException("Invalid duke.command.");
     }
 }

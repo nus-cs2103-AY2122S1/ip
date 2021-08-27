@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * DukeException encapsulates all the exceptions that could occur from Duke.

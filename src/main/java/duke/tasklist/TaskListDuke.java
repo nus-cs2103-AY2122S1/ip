@@ -1,7 +1,7 @@
-package main.java.duke.tasklist;
+package duke.tasklist;
 
-import main.java.duke.Ui;
-import main.java.duke.task.Task;
+import duke.Ui;
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,10 +14,10 @@ import java.util.ArrayList;
  * @version CS2103T AY21/22 S1
  */
 public class TaskListDuke implements TaskList {
-    private static final String ADD = "\t Got it. I've added this task:";
+    private static final String ADD = "\t Got it. I've added this duke.task:";
     private static final String LIST_INTRO = "\t Here are the tasks in your list:";
-    private static final String DONE = "\t Nice! I've marked this task as done:\n\t   ";
-    private static final String DELETE = "\t Noted. I've removed this task:\n\t   ";
+    private static final String DONE = "\t Nice! I've marked this duke.task as done:\n\t   ";
+    private static final String DELETE = "\t Noted. I've removed this duke.task:\n\t   ";
     private final ArrayList<Task> LIST;
     private final Ui UI;
 
@@ -30,9 +30,9 @@ public class TaskListDuke implements TaskList {
     }
 
     /**
-     * Adds the task into the list.
+     * Adds the duke.task into the list.
      *
-     * @param task the task to be added into the list
+     * @param task the duke.task to be added into the list
      */
     @Override
     public void addTask(Task task) {
@@ -40,16 +40,16 @@ public class TaskListDuke implements TaskList {
         UI.print(ADD);
         UI.print("\t   " + task);
         if (this.LIST.size() == 1) {
-            UI.print("\t Now you have 1 task in the list.");
+            UI.print("\t Now you have 1 duke.task in the list.");
         } else {
             UI.print("\t Now you have " + this.LIST.size() + " tasks in the list.");
         }
     }
 
     /**
-     * Changes the done status of the task.
+     * Changes the done status of the duke.task.
      *
-     * @param index the position of the task to be marked done
+     * @param index the position of the duke.task to be marked done
      */
     @Override
     public void setDone(int index) {
@@ -59,9 +59,9 @@ public class TaskListDuke implements TaskList {
     }
 
     /**
-     * Deletes the task at a specified index.
+     * Deletes the duke.task at a specified index.
      *
-     * @param index the position of the task to be deleted
+     * @param index the position of the duke.task to be deleted
      */
     public void delete(int index) {
         Task task = this.LIST.get(index);

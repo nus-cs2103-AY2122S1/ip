@@ -1,6 +1,6 @@
-package main.java.duke.storage;
+package duke.storage;
 
-import main.java.duke.task.Task;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class StorageStub implements Storage {
     }
 
     /**
-     * Marks the task with the given index as done.
+     * Marks the duke.task with the given index as done.
      *
      * @param index the position of the item
      */
@@ -36,11 +36,11 @@ public class StorageStub implements Storage {
     }
 
     /**
-     * Adds the task with the given type, description and date.
+     * Adds the duke.task with the given type, description and date.
      *
-     * @param type        the type of the task
-     * @param description the description of the task
-     * @param date        the date of the task (if deadline or event)
+     * @param type        the type of the duke.task
+     * @param description the description of the duke.task
+     * @param date        the date of the duke.task (if deadline or event)
      */
     @Override
     public void add(String type, String description, String date) {
@@ -48,9 +48,9 @@ public class StorageStub implements Storage {
     }
 
     /**
-     * Deletes the task with the given index.
+     * Deletes the duke.task with the given index.
      *
-     * @param index the position of the task in the list
+     * @param index the position of the duke.task in the list
      */
     @Override
     public void delete(int index) {
@@ -58,10 +58,10 @@ public class StorageStub implements Storage {
     }
 
     /**
-     * Returns the string representation of the task at the given index for testing.
+     * Returns the string representation of the duke.task at the given index for testing.
      *
-     * @param index the position of the task in the list
-     * @return the string representation of the task at the given index
+     * @param index the position of the duke.task in the list
+     * @return the string representation of the duke.task at the given index
      */
     public String getString(int index) {
         return fileContent.get(index);

@@ -1,16 +1,16 @@
-package main.java.duke.task;
+package duke.task;
 
 import java.time.LocalDate;
 
 /**
- * ToDo is a task that doesnt have any dates tied to it.
+ * ToDo is a duke.task that doesnt have any dates tied to it.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S1
  */
 public class ToDo extends Task {
     /**
-     * Constructor for ToDo task.
+     * Constructor for ToDo duke.task.
      *
      * @param description the description
      */
@@ -19,9 +19,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns the string representation of the ToDo task.
+     * Returns the string representation of the ToDo duke.task.
      *
-     * @return the string representation of the ToDO task
+     * @return the string representation of the ToDO duke.task
      */
     @Override
     public String toString() {
@@ -29,7 +29,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns if the task date is equal to the date provided.
+     * Returns if the duke.task date is equal to the date provided.
      *
      * @param date the date provided
      * @return true if they are both equal

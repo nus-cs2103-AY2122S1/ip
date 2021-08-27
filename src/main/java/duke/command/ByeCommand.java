@@ -1,11 +1,11 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.storage.Storage;
-import main.java.duke.tasklist.TaskList;
-import main.java.duke.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.Ui;
 
 /**
- * ByeCommand is a command which closes the Duke bot and its readers.
+ * ByeCommand is a duke.command which closes the Duke bot and its readers.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S1
@@ -24,9 +24,9 @@ public class ByeCommand extends Command {
     /**
      * Closes the Ui and all its readers.
      *
-     * @param tasks   the task list
+     * @param tasks   the duke.task list
      * @param ui      the ui
-     * @param storage the storage for the saved task list
+     * @param storage the storage for the saved duke.task list
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -34,7 +34,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Returns true if this command is executed.
+     * Returns true if this duke.command is executed.
      *
      * @return true
      */

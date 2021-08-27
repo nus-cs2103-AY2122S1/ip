@@ -1,6 +1,4 @@
-package task;
-
-import main.java.duke.task.Event;
+package duke.task;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
