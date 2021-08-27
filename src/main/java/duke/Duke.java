@@ -53,7 +53,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
+        String filePath = args.length == 0 ? "data/duke.txt" : args[0];
+
+        Duke duke = new Duke(filePath);
 
         duke.run();
     }

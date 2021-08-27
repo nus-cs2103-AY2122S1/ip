@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -17,6 +18,17 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = Paths.get(filePath);
+
+        try {
+            if (Files.notExists(this.filePath)) {
+                if (this.filePath.getParent() != null) {
+                    Files.createDirectories(this.filePath.getParent());
+                }
+                Files.createFile(this.filePath);
+            }
+        } catch (IOException e) {
+            // Do nothing
+        }
     }
 
     public List<String> load() throws IOException {
