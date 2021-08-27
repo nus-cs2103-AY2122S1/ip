@@ -40,6 +40,10 @@ public class Parser {
         }
     }
 
+    public String getSearchTerm() {
+        return currentCommand.split(" ")[1];
+    }
+
     public Task generateTask() throws DukeException {
         if (currentType == CommandType.AddToDo) {
             String description = currentCommand.split("/by ")[0].substring(5);
