@@ -1,12 +1,11 @@
 package duke;
 
-import java.util.ArrayList;
 /**
  * duke.Task that can be completed. Falls under three main cats, duke.Event, duke.Todo and deadline.
  */
 public class Task {
 
-    private boolean completedStatus = false;
+    private boolean isCompleteStatus = false;
     private String name;
     private int taskNumber;
     private static int numberOfTask = 0;
@@ -35,7 +34,7 @@ public class Task {
      *  Function used to make a task complete
      */
     public void completeTask() {
-        this.completedStatus = true;
+        this.isCompleteStatus = true;
     }
 
     /**
@@ -44,7 +43,7 @@ public class Task {
      */
     public String toString() {
         String status;
-        if (completedStatus) {
+        if (isCompleteStatus) {
             status = "[✓] ";
         } else {
             status = "[X] ";
@@ -56,8 +55,8 @@ public class Task {
      * Getter for the completion status of a task
      * @return
      */
-    public boolean getCompletedStatus() {
-        return this.completedStatus;
+    public boolean getCompleteStatus() {
+        return this.isCompleteStatus;
     }
 
     /**

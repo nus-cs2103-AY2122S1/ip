@@ -100,7 +100,7 @@ public class PersistentStorageHandler {
      * Clears the entire history of the log
      */
     //I see what youre doing yes. Why are you clearing history?
-    public void clear_history() {
+    public void clearHistory() {
         //Code to clear history
         this.all_lines.clear();
         try {

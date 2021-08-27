@@ -114,9 +114,6 @@ public class Logic {
             for (int i = 0; i < indicatorEvent; i++) {
                 temp = temp + listOfCommandInputs.get(i);
             }
-            System.out.println("=====================");
-            System.out.println(dateTime);
-            System.out.println("=====================");
             Event tempEvent = new Event(temp, Parser.convertToDateTime(dateTime));
             DataHandlerLayer.addToLog(tempEvent);
             if (isWrittenToHistory) {
