@@ -3,13 +3,22 @@ package duke;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Represents the User Interface which interacts with the user.
+ */
 public class Ui {
     Scanner sc;
 
+    /**
+     * Class constructor specifying the Scanner object to read user input.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Prints welcome message.
+     */
     public void welcome() {
         String message =
                 "____________________________________________________________\n" +
@@ -23,6 +32,10 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Prints a list of all the tasks
+     * @param tasks TaskList containing the tasks.
+     */
     public void listTasks(TaskList tasks) {
         System.out.println("____________________________________________________________");
         System.out.println(" Here are the tasks in your list:");
@@ -30,6 +43,9 @@ public class Ui {
         System.out.println("____________________________________________________________\n");
     }
 
+    /**
+     * Prints terminating message.
+     */
     public void terminateMessage() {
         String message =
                 "____________________________________________________________\n" +
@@ -38,6 +54,9 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Prints message to confirm all tasks has been cleared.
+     */
     public void clearMessage() {
         String message =
                 "____________________________________________________________\n" +
@@ -46,16 +65,25 @@ public class Ui {
         System.out.println(message);
     }
 
-    public void addMessage(Task newToDo, TaskList tasks) {
+    /**
+     * Prints message indicating task has been added successfully.
+     * @param task Task that was added
+     * @param tasks TaskList
+     */
+    public void addMessage(Task task, TaskList tasks) {
         String message =
                 "____________________________________________________________\n" +
                         " Got it. I've added this task:\n   " +
-                        newToDo.toString() +
+                        task.toString() +
                         tasks.getListSizeString() +
                         "____________________________________________________________\n";
         System.out.println(message);
     }
 
+    /**
+     * Prints message indicating that task has been marked as done.
+     * @param task Task to be marked as done.
+     */
     public void doneMessage(Task task) {
         String message =
                 "____________________________________________________________\n" +
@@ -65,6 +93,11 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Prints message indicating that task has been completed.
+     * @param task Task to be deleted.
+     * @param tasks TaskList.
+     */
     public void deleteMessage(Task task, TaskList tasks) {
         String message =
                 "____________________________________________________________\n" +
@@ -75,6 +108,10 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Prints the appropriate error handling message.
+     * @param e Exception caught.
+     */
     public void handleException(Exception e) {
         String message;
         if (e instanceof InvalidCommandException) {

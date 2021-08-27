@@ -14,10 +14,16 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Stores the TaskList to a local file
+ */
 public class Storage {
     private static String fileDirectory = "./data";
     private static String filePath = "./data/duke.txt";
 
+    /**
+     * Creates directory and file to store the TaskList if it is not found.
+     */
     public static void createFile() {
         try {
             Path path = Paths.get(fileDirectory);
@@ -33,6 +39,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads the TaskList from local storage.
+     * @return List containing the tasks.
+     */
     public static List<Task> readData() {
         Storage.createFile();
         List<Task> list = new ArrayList<>();
@@ -61,6 +71,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Writes the TaskList into local storage.
+     * @param list List of tasks.
+     */
     public static void writeData(List<Task> list) {
         Storage.createFile();
         try {

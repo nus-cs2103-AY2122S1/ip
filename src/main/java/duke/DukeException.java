@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents exceptions thrown by Duke Personal Assistant Chatbot.
+ */
 public class DukeException extends Exception{
 
     DukeException(String message) {
@@ -12,6 +15,9 @@ public class DukeException extends Exception{
     }
 }
 
+/**
+ * Represents exception where task description is not found.
+ */
 class DescriptionNotFoundException extends DukeException{
 
     DescriptionNotFoundException(String message) {
@@ -24,6 +30,9 @@ class DescriptionNotFoundException extends DukeException{
     }
 }
 
+/**
+ * Represents exception where ToDo task description is not found.
+ */
 class ToDoDescriptionNotFoundException extends DescriptionNotFoundException{
 
     ToDoDescriptionNotFoundException(String message) {
@@ -36,6 +45,9 @@ class ToDoDescriptionNotFoundException extends DescriptionNotFoundException{
     }
 }
 
+/**
+ * Represents exception where Deadline task description is not found.
+ */
 class DeadlineDescriptionNotFoundException extends DescriptionNotFoundException{
 
     DeadlineDescriptionNotFoundException(String message) {
@@ -48,6 +60,9 @@ class DeadlineDescriptionNotFoundException extends DescriptionNotFoundException{
     }
 }
 
+/**
+ * Represents exception where Event task description is not found.
+ */
 class EventDescriptionNotFoundException extends DescriptionNotFoundException{
 
     EventDescriptionNotFoundException(String message) {
@@ -60,6 +75,9 @@ class EventDescriptionNotFoundException extends DescriptionNotFoundException{
     }
 }
 
+/**
+ * Represents exception where an invalid command is entered.
+ */
 class InvalidCommandException extends DukeException {
 
     InvalidCommandException(String message) {
@@ -72,6 +90,9 @@ class InvalidCommandException extends DukeException {
     }
 }
 
+/**
+ * Represents exception where Deadline was not entered.
+ */
 class DeadlineNotFoundException extends DukeException {
 
     DeadlineNotFoundException(String message) {
@@ -84,6 +105,9 @@ class DeadlineNotFoundException extends DukeException {
     }
 }
 
+/**
+ * Represents exception where Event date and time was not entered.
+ */
 class EventTimeNotFoundException extends DukeException {
 
     EventTimeNotFoundException(String message) {
@@ -96,6 +120,9 @@ class EventTimeNotFoundException extends DukeException {
     }
 }
 
+/**
+ * Represents exception where task index is out of range.
+ */
 class TaskIndexOutOfBoundException extends DukeException {
 
     TaskIndexOutOfBoundException(String message) {
