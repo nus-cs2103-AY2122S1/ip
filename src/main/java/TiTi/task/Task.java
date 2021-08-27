@@ -18,6 +18,16 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Determine if the task description contain the string in question.
+     *
+     * @param str string to search for
+     * @return boolean value of whether the substring is found
+     */
+    public boolean checkString(String str) {
+        return description.contains(str);
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

@@ -13,6 +13,10 @@ public class TaskList {
         this.list = list;
     }
 
+    public TaskList() {
+        this.list = new ArrayList<>();
+    }
+
     public Task get(int taskNumber) {
         return list.get(taskNumber);
     }
@@ -28,7 +32,5 @@ public class TaskList {
     public void remove(int taskNumber) {
         list.remove(taskNumber);
     }
-
-
 
 }
