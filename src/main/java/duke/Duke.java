@@ -9,13 +9,13 @@ import duke.command.Command;
  * This class represents a {@code Duke} object. {@code Duke} responds to
  * predefined user inputs and outputs various messages in response to the user
  * input.
- * 
+ *
  * @author Elizabeth Chow
  */
 public class Duke {
-    private TaskList tasks;
     private final Ui ui;
     private final Storage storage;
+    private TaskList tasks;
 
     /**
      * Constructs a {@code Duke} object.

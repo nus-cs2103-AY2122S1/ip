@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * This class represents a {@code ListCommand}. User input for a
  * {@code ListCommand} starts with "list".
- * 
+ *
  * @author Elizabeth Chow
  */
 public class ListCommand extends Command {
@@ -28,7 +28,7 @@ public class ListCommand extends Command {
 
     /**
      * Returns {@code false}. Program should not terminate after {@code ListCommand}.
-     * 
+     *
      * @return {@code false}
      */
     @Override

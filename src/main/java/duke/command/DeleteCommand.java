@@ -8,13 +8,13 @@ import duke.task.Task;
 /**
  * This class represents a {@code DeleteCommand}. User input for a
  * {@code DeleteCommand} starts with "delete".
- * 
+ *
  * @author Elizabeth Chow
  */
 public class DeleteCommand extends Command {
     /**
      * Constructor for a {@code DeleteCommand}
-     * 
+     *
      * @param args {@code String} array with length 1. {@code args[0]} contains the
      *             task number to be deleted.
      */
@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Returns {@code false}. Program should not terminate after {@code DeleteCommand}.
-     * 
+     *
      * @return {@code false}
      */
     @Override

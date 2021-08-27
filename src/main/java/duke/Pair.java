@@ -3,7 +3,7 @@ package duke;
 /**
  * This class represents a {@code Pair}. A {@code Pair} is made up of 2 items.
  * It is mostly used when there is a need to return 2 items.
- * 
+ *
  * @author Elizabeth Chow
  */
 public class Pair<S, T> {
@@ -12,7 +12,7 @@ public class Pair<S, T> {
 
     /**
      * Constructs a new Pair with the given first and second arguments.
-     * 
+     *
      * @param first  First generic item.
      * @param second Second generic item.
      */
@@ -23,7 +23,7 @@ public class Pair<S, T> {
 
     /**
      * Returns the first item.
-     * 
+     *
      * @return The first item.
      */
     public S getFirst() {
@@ -32,7 +32,7 @@ public class Pair<S, T> {
 
     /**
      * Returns the second item.
-     * 
+     *
      * @return The second item.
      */
     public T getSecond() {

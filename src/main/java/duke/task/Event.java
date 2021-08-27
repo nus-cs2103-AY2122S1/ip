@@ -2,7 +2,7 @@ package duke.task;
 
 /**
  * This class represents a {@code Event}.
- * 
+ *
  * @author Eizabeth Chow
  */
 public class Event extends Task {
@@ -22,7 +22,7 @@ public class Event extends Task {
 
     /**
      * Constructs a {@code Event} object with the givem title, deadline and status.
-     * 
+     *
      * @param title    Title of {@code Event}.
      * @param deadline Deadline of {@code Event}.
      * @param isDone   Status of {@code Event}.

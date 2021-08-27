@@ -8,7 +8,7 @@ package duke;
 public class DukeException extends RuntimeException {
     /**
      * Constructs a new {@code DukeException} with the given error message.
-     * 
+     *
      * @param errMessage Error message to be displayed.
      */
     public DukeException(String errMessage) {

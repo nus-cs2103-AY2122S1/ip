@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * This class represents a {@code ExitCommand}. User input for a
  * {@code ExitCommand} starts with "bye".
- * 
+ *
  * @author Elizabeth Chow
  */
 public class ExitCommand extends Command {
@@ -29,7 +29,7 @@ public class ExitCommand extends Command {
 
     /**
      * Returns {@code true}. Program should terminate after this {@code ExitCommand}.
-     * 
+     *
      * @return {@code true}
      */
     @Override

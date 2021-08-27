@@ -16,7 +16,7 @@ public class TaskList {
 
     /**
      * Constructs a new {@code TaskList} with the given tasks.
-     * 
+     *
      * @param tasks An ArrayList of {@code Task}.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -25,7 +25,7 @@ public class TaskList {
 
     /**
      * Returns all the tasks in the list.
-     * 
+     *
      * @return All tasks.
      */
     public ArrayList<Task> getTasks() {
@@ -34,7 +34,7 @@ public class TaskList {
 
     /**
      * Returns the size of the tasks in the list.
-     * 
+     *
      * @return Integer representing the size of the list.
      */
     public int size() {
@@ -43,7 +43,7 @@ public class TaskList {
 
     /**
      * Returns the last task in the list.
-     * 
+     *
      * @return A {@code Task}.
      */
     public Task lastTask() {
@@ -52,7 +52,7 @@ public class TaskList {
 
     /**
      * Adds a {@code Todo} task into tasks.
-     * 
+     *
      * @param title Title of new {@code Todo}.
      */
     public void addTodoTask(String title) {
@@ -61,7 +61,7 @@ public class TaskList {
 
     /**
      * Adds a {@code Deadline} task into tasks.
-     * 
+     *
      * @param title    Title of new {@code Deadline}.
      * @param deadline Deadline of new {@code Deadline}.
      */
@@ -71,7 +71,7 @@ public class TaskList {
 
     /**
      * Adds a {@code Event} task into tasks.
-     * 
+     *
      * @param title    Title of new {@code Event}.
      * @param deadline Deadline of new {@code Event}.
      */
@@ -81,11 +81,10 @@ public class TaskList {
 
     /**
      * Deletes a task at the given taskNo, starting at index 0.
-     * 
+     *
      * @param taskNo Index of task to be deleted.
-     * 
+     *
      * @return The deleted {@code Task}.
-     * 
      * @throws DukeException Nothing in the list to be deleted, or task number out
      *                       of valid range.
      */
@@ -104,9 +103,9 @@ public class TaskList {
 
     /**
      * Marks a {@code Task} as done in the given task number, starting with index 0.
-     * 
+     *
      * @param taskNo Index of {@code Task} to be marked as done.
-     * 
+     *
      * @return A {@code Pair} containing the previous status of {@code Task} and the
      *         {@code Task} at the given index.
      * @throws DukeException Nothing in the list to be marked, or task number out
@@ -128,6 +127,7 @@ public class TaskList {
      * Filters tasks with title containing the given query keyword.
      *
      * @param query filter term.
+     *
      * @return An arraylist of tasks with title containing the query keyword.
      */
     public ArrayList<Task> searchTasks(String query) {
@@ -139,6 +139,7 @@ public class TaskList {
         }
         return result;
     }
+
     /**
      * {@inheritDoc}
      */

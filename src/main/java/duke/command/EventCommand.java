@@ -7,13 +7,13 @@ import duke.Ui;
 /**
  * This class represents a {@code EventCommand}. User input for a
  * {@code EventCommand} starts with "event".
- * 
+ *
  * @author Elizabeth Chow
  */
 public class EventCommand extends Command {
     /**
      * Constructor for a {@code EventCommand}
-     * 
+     *
      * @param args {@code String} array with length 2. {@code args[0]} contains the
      *             title, {@code args[1]} contains the deadline for a {@code Event}.
      */
@@ -34,7 +34,7 @@ public class EventCommand extends Command {
     /**
      * Returns {@code false}. Program should not terminate after
      * {@code EventCommand}.
-     * 
+     *
      * @return {@code false}
      */
     @Override

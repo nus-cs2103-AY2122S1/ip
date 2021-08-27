@@ -12,17 +12,16 @@ import duke.command.TodoCommand;
 
 /**
  * This class represents a {@code Parser}. It parses user inputs.
- * 
+ *
  * @author Elizabeth Chow
  */
 public class Parser {
     /**
      * Returns a {@code Command} that contains parsed and trimmed inputs.
-     * 
+     *
      * @param input Raw user input.
-     * 
+     *
      * @return A {@code Command} containing parsed inputs.
-     * 
      * @throws DukeException User input not in the list of predefined keywords.
      */
     public static Command parse(String input) throws DukeException {

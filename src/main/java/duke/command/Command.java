@@ -8,7 +8,7 @@ import duke.Ui;
 
 /**
  * The {@code Command} class represents a user input command.
- * 
+ *
  * @author Elizabeth Chow
  */
 public abstract class Command {
@@ -23,7 +23,7 @@ public abstract class Command {
 
     /**
      * Constructs a new {@code Command} class with the specified args.
-     * 
+     *
      * @param args An array of {@code String} required to construct a {@code Task}
      *             object.
      */
@@ -34,7 +34,7 @@ public abstract class Command {
     /**
      * Prints to the terminal of the status of operations performed by the
      * {@code Command}. Writes to the storage if tasks is modified.
-     * 
+     *
      * @param tasks   the tasklist to be modified.
      * @param ui      responsible for printing to the terminal.
      * @param storage stores all the tasks.
@@ -43,7 +43,7 @@ public abstract class Command {
 
     /**
      * Indicates whether the program should exit after this {@code Command}.
-     * 
+     *
      * @return {@code true} if the program should exit, {@code false} otherwise.
      */
     public abstract boolean isExit();

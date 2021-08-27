@@ -2,7 +2,7 @@ package duke.task;
 
 /**
  * This class represents a {@code Task}.
- * 
+ *
  * @author Eizabeth Chow
  */
 public class Task {
@@ -40,7 +40,7 @@ public class Task {
 
     /**
      * Converts boolean isDone to int.
-     * 
+     *
      * @return 1 if task is done, 0 otherwise.
      */
     private int convertIsDoneToInt() {
@@ -58,7 +58,7 @@ public class Task {
 
     /**
      * Marks the {@code Task} as done.
-     * 
+     *
      * @return {@code false} if {@code Task} is done, {@code true} otherwise.
      */
     public boolean markAsDone() {
@@ -74,6 +74,7 @@ public class Task {
      * Returns {@code true} if title contains the query keyword, {@code false} otherwise.
      *
      * @param query filter keyword.
+     *
      * @return {@code true} if the title contains the query string, {@code false} otherwise.
      */
     public boolean contains(String query) {
@@ -83,7 +84,7 @@ public class Task {
     /**
      * Returns a {@code String} containing the description of the {@code Task} to be
      * saved to storage.
-     * 
+     *
      * @return a {@code String} representation of {@code Task} for file storage.
      */
     public String toFileString() {

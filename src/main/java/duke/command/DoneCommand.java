@@ -9,13 +9,13 @@ import duke.task.Task;
 /**
  * This class represents a {@code DoneCommand}. User input for a
  * {@code DoneCommand} starts with "done".
- * 
+ *
  * @author Elizabeth Chow
  */
 public class DoneCommand extends Command {
     /**
      * Constructor for a {@code DeleteCommand}
-     * 
+     *
      * @param args {@code String} array with length 1. {@code args[0]} contains the
      *             task number to be marked as done.
      */
@@ -45,7 +45,7 @@ public class DoneCommand extends Command {
     /**
      * Returns {@code false}. Program should not terminate after
      * {@code DoneCommand}.
-     * 
+     *
      * @return {@code false}
      */
     @Override

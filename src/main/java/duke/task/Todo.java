@@ -2,7 +2,7 @@ package duke.task;
 
 /**
  * This class represents a {@code Todo} task.
- * 
+ *
  * @author Eizabeth Chow
  */
 public class Todo extends Task {
@@ -17,7 +17,7 @@ public class Todo extends Task {
 
     /**
      * Constructs a {@code Todo} task with the given title and status.
-     * 
+     *
      * @param title  Title of {@code Todo}.
      * @param isDone Status of {@code Todo}.
      */

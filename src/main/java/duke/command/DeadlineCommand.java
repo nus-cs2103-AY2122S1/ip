@@ -7,13 +7,13 @@ import duke.Ui;
 /**
  * This class represents a {@code DeadlineCommand}. User input for a
  * {@code DeadlineCommand} starts with "deadline".
- * 
+ *
  * @author Elizabeth Chow
  */
 public class DeadlineCommand extends Command {
     /**
      * Constructor for a {@code DeadlineCommand}
-     * 
+     *
      * @param args {@code String} array with length 2. {@code args[0]} contains the
      *             title, {@code args[1]} contains the endDate for a
      *             {@code Deadline}.
@@ -34,7 +34,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Returns {@code false}. Program should not terminate after {@code DeadlineCommand}.
-     * 
+     *
      * @return {@code false}
      */
     @Override

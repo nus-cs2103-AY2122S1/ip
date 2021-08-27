@@ -7,13 +7,13 @@ import duke.Ui;
 /**
  * This class represents a {@code TodoCommand}. User input for a
  * {@code TodoCommand} starts with "todo".
- * 
+ *
  * @author Elizabeth Chow
  */
 public class TodoCommand extends Command {
     /**
      * Constructor for a {@code DeleteCommand}
-     * 
+     *
      * @param args {@code String} array with length 1. {@code args[0]} contains the
      *             task title.
      */
@@ -33,7 +33,7 @@ public class TodoCommand extends Command {
     /**
      * Returns {@code false}. Program should not terminate after
      * {@code ListCommand}.
-     * 
+     *
      * @return {@code false}
      */
     public boolean isExit() {

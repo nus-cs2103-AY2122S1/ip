@@ -8,7 +8,7 @@ import duke.DukeException;
 
 /**
  * This class represents a {@code Deadline} task.
- * 
+ *
  * @author Eizabeth Chow
  */
 public class Deadline extends Task {
@@ -31,7 +31,7 @@ public class Deadline extends Task {
     /**
      * Constructs a {@code Deadline} object with the given title, end date and
      * status.
-     * 
+     *
      * @param title   Title of {@code Deadline}.
      * @param endDate End date of {@code Deadline}.
      * @param isDone  Status of {@code Deadline}.

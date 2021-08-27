@@ -1,4 +1,5 @@
 package duke;
+
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 /**
  * This class represents a {@code Ui} and handles all the interactions with the
  * user.
- * 
+ *
  * @author Elizabeth Chow
  */
 public class Ui {
@@ -33,7 +34,7 @@ public class Ui {
 
     /**
      * Displays a nicely formatted error message with the given message.
-     * 
+     *
      * @param message Error message to be displayed.
      */
     public void showError(String message) {
@@ -43,7 +44,7 @@ public class Ui {
     /**
      * Displays a nicely formatted message of the new task and the current task
      * count.
-     * 
+     *
      * @param task       {@code Task} to be displayed.
      * @param taskLength Number of tasks.
      */
@@ -53,8 +54,8 @@ public class Ui {
 
     /**
      * Displays a nicely formatted message of the deleted task and the task count.
-     * 
-     * @param task {@code Task} to be displayed.
+     *
+     * @param task       {@code Task} to be displayed.
      * @param taskLength Number of tasks.
      */
     public void showDeletedTask(Task task, int taskLength) {
@@ -63,7 +64,7 @@ public class Ui {
 
     /**
      * Displays a nicely formatted message of the done task.
-     * 
+     *
      * @param task {@code Task} to be displayed.
      */
     public void showDoneTask(Task task) {
@@ -79,7 +80,7 @@ public class Ui {
 
     /**
      * Displays the given tasks in a nicely formatted manner.
-     * 
+     *
      * @param tasks An ArrayList of {@code Task} to be displayed.
      */
     public void showTasks(ArrayList<Task> tasks) {
@@ -96,6 +97,7 @@ public class Ui {
 
     /**
      * Displays the filtered tasks.
+     *
      * @param tasks Tasks to be displayed.
      */
     public void showFilteredTasks(ArrayList<Task> tasks) {
