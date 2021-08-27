@@ -1,8 +1,8 @@
 package duke;
 
-public class UI {
+public class Ui {
 
-    UI() {}
+    Ui() {}
 
     private final static String LOGO = " ____        _        \n"
                                     + "|  _ \\ _   _| | _____ \n"

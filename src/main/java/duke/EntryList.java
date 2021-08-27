@@ -11,7 +11,7 @@ public class EntryList extends ArrayList<Entry> {
         this.numberOfEntries = super.size();
     }
 
-    public void displayEntries(UI ui) throws DukeException {
+    public void displayEntries(Ui ui) throws DukeException {
         if (numberOfEntries > 0) {
             for (int i = 0; i < numberOfEntries; i++) {
                 ui.printEntry(super.get(i), i + 1);
@@ -39,7 +39,7 @@ public class EntryList extends ArrayList<Entry> {
         super.add(numberOfEntries++, entry);
     }
 
-    public void addEntry(Entry entry, String command, UI ui) throws DukeException {
+    public void addEntry(Entry entry, String command, Ui ui) throws DukeException {
         if (!entry.isEmpty()){
             super.add(numberOfEntries++, entry);
             ui.addEntry(entry, numberOfEntries);
@@ -48,7 +48,7 @@ public class EntryList extends ArrayList<Entry> {
         }
     }
 
-    public void deleteEntry(int index, UI ui) throws DukeException {
+    public void deleteEntry(int index, Ui ui) throws DukeException {
         if (super.isEmpty() || index < 1 || index > numberOfEntries) {
             throw new DukeException("Duke can't find anything to delete!");
         } else {

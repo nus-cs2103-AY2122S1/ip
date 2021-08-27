@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private final UI dukeUi;
+    private final Ui dukeUi;
     private final Parser dukeParser;
     private final Storage dukeStorage;
     private EntryList entries;
@@ -19,7 +19,7 @@ public class Duke {
     private final String DEADLINE_COMMAND = "deadline";
 
     Duke() {
-        this.dukeUi = new UI();
+        this.dukeUi = new Ui();
         this.dukeParser = new Parser();
         this.dukeStorage = new Storage();
         try {
@@ -89,5 +89,10 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke().run();
+    }
+
+    @Override
+    public String toString() {
+        return "I'm a Duke, a simple chatbot to help you remember tasks!";
     }
 }
