@@ -52,7 +52,7 @@ public class StorageTest {
     @BeforeEach
     public void setUp() {
         storage = new Storage();
-        storage.setFilePathAndDirectory(FILE_PATH);
+        storage.setDirectoryAndFilePath(FILE_PATH);
     }
     
     @AfterEach
@@ -82,7 +82,7 @@ public class StorageTest {
         newTasks.add(new Todo("test 1"));
         newTasks.add(new Todo("test 2"));
         
-        storage.save(newTasks);
+        storage.saveTasks(newTasks);
         Path filePath = Paths.get(FILE_PATH);
         List<String> saved = Files.readAllLines(filePath);
         assertEquals(newTasks.size(), saved.size());
@@ -98,7 +98,7 @@ public class StorageTest {
     public void load_formatIncorrect_throwsException() {
         String newFilePath = RESOURCE_PATH + "/storage_test_incorrect.txt";
         String problematicLine = "T # 1 ? test this program";
-        storage.setFilePathAndDirectory(newFilePath);
+        storage.setDirectoryAndFilePath(newFilePath);
         try {
             storage.load();
             fail();

@@ -42,7 +42,7 @@ public class FindCommand extends Command {
             throw new DukeException(String.format(ERROR_EMPTY_PARAMS, COMMAND_WORD));
         }
 
-        Map<Integer, Task> taskMap = taskList.findMatchingTasks(keyword);
+        Map<Integer, Task> taskMap = taskList.findTasksByDescriptionKeyword(keyword);
         if (taskMap.isEmpty()) {
             return String.format(MESSAGE_NO_MATCHING_CONTENTS, keyword);
         }

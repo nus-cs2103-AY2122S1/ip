@@ -20,7 +20,7 @@ import kayu.commands.TodoCommand;
  */
 public class Parser {
 
-    private final DateTimeFormat dateTimeFormat = DateTimeFormat.generate();
+    private final DateTimeFormat dateTimeFormat = DateTimeFormat.generateInstance();
 
     /**
      * Parses user input into executable {@link kayu.commands.Command}s.

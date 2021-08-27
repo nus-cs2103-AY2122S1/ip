@@ -12,51 +12,51 @@ import java.util.List;
  */
 public class DateTimeFormat {
     
-    private final List<DateTimeFormatter> dateFormatterList = new ArrayList<>();
+    private final List<DateTimeFormatter> dateFormats = new ArrayList<>();
     
-    private final List<DateTimeFormatter> timeFormatterList = new ArrayList<>();
+    private final List<DateTimeFormatter> timeFormats = new ArrayList<>();
 
     /**
      * Generates an instance of this class, as well as initialise its fields.
      * 
      * @return A DateTimeFormat class with initialised fields.
      */
-    public static DateTimeFormat generate() {
+    public static DateTimeFormat generateInstance() {
         DateTimeFormat dateTimeFormat = new DateTimeFormat();
-        dateTimeFormat.init();
+        dateTimeFormat.initializeFormats();
         return dateTimeFormat;
     }
     
     // private to allow construction through public static method
     private DateTimeFormat() {}
     
-    private void init() {
-        initialiseDateFormats();
-        initialiseTimeFormats();
+    private void initializeFormats() {
+        initializeDateFormats();
+        initializeTimeFormats();
     }
 
-    private void initialiseDateFormats() {
-        dateFormatterList.clear();
+    private void initializeDateFormats() {
+        dateFormats.clear();
         
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy-M-dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd-M-yyyy"));
+        dateFormats.add(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        dateFormats.add(DateTimeFormatter.ofPattern("yyyy-M-dd"));
+        dateFormats.add(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        dateFormats.add(DateTimeFormatter.ofPattern("dd-M-yyyy"));
         
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("yyyy/M/dd"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        dateFormatterList.add(DateTimeFormatter.ofPattern("dd/M/yyyy"));
+        dateFormats.add(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+        dateFormats.add(DateTimeFormatter.ofPattern("yyyy/M/dd"));
+        dateFormats.add(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        dateFormats.add(DateTimeFormatter.ofPattern("dd/M/yyyy"));
     }
 
-    private void initialiseTimeFormats() {
-        timeFormatterList.clear();
+    private void initializeTimeFormats() {
+        timeFormats.clear();
         
-        timeFormatterList.add(DateTimeFormatter.ofPattern("HH:mm"));
-        timeFormatterList.add(DateTimeFormatter.ofPattern("HHmm"));
+        timeFormats.add(DateTimeFormatter.ofPattern("HH:mm"));
+        timeFormats.add(DateTimeFormatter.ofPattern("HHmm"));
 
-        timeFormatterList.add(DateTimeFormatter.ofPattern("hh:mm a"));
-        timeFormatterList.add(DateTimeFormatter.ofPattern("hhmm a"));
+        timeFormats.add(DateTimeFormatter.ofPattern("hh:mm a"));
+        timeFormats.add(DateTimeFormatter.ofPattern("hhmm a"));
     }
 
     /**
@@ -64,8 +64,8 @@ public class DateTimeFormat {
      * 
      * @return A list of date formats as {@link DateTimeFormatter}.
      */
-    public List<DateTimeFormatter> getDateFormatterList() {
-        return dateFormatterList;
+    public List<DateTimeFormatter> getDateFormats() {
+        return dateFormats;
     }
 
     /**
@@ -73,7 +73,7 @@ public class DateTimeFormat {
      *
      * @return A list of time formats as {@link DateTimeFormatter}.
      */
-    public List<DateTimeFormatter> getTimeFormatterList() {
-        return timeFormatterList;
+    public List<DateTimeFormatter> getTimeFormats() {
+        return timeFormats;
     }
 }

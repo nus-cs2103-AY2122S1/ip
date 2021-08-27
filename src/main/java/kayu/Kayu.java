@@ -38,27 +38,27 @@ public class Kayu {
      * Runs the whole program process. Greets user, loads data, 
      * reads commands, and terminates upon {@link kayu.commands.ByeCommand#COMMAND_WORD}.
      */
-    public void run() {
-        chatBot.logo();
-        init();
-        chatBot.greet();
+    public void runProgram() {
+        chatBot.printLogo();
+        initializeData();
+        chatBot.printGreetingMessage();
         
-        readCommandsUntilBye();
+        readCommandsAndExecute();
         
-        chatBot.exit();
+        chatBot.printExitMessage();
     }
 
     /**
-     * Initialises the data stored in file to taskList.
+     * Initializes the data stored in file to taskList.
      */
-    public void init() {
+    public void initializeData() {
         try {
             List<Task> tasks = storage.load();
-            taskList.init(tasks);
+            taskList.initializeTasks(tasks);
             
         } catch (StorageException exception) {
-            chatBot.error(exception.getMessage());
-            errorExit();
+            chatBot.printError(exception.getMessage());
+            terminate();
         }
     }
 
@@ -67,7 +67,7 @@ public class Kayu {
      * and executes them. {@link kayu.service.ChatBot} helps output the responses from such
      * executions.
      */
-    public void readCommandsUntilBye() {
+    public void readCommandsAndExecute() {
         Command command;
         do {
             String userInput = scanner.nextLine().trim();
@@ -75,15 +75,15 @@ public class Kayu {
             try {
                 String feedback = command.execute(taskList);
                 List<Task> tasks = taskList.getTasks();
-                storage.save(tasks);
-                chatBot.info(feedback);
+                storage.saveTasks(tasks);
+                chatBot.printMessage(feedback);
 
             } catch (DukeException exception) {
-                chatBot.error(exception.getMessage());
+                chatBot.printError(exception.getMessage());
 
             } catch (StorageException exception) {
-                chatBot.errorOnSave();
-                errorExit();
+                chatBot.printErrorOnSave();
+                terminate();
             }
         } while (!command.isBye());
         scanner.close();
@@ -92,8 +92,8 @@ public class Kayu {
     /**
      * Terminates the program, based on {@link kayu.exception.StorageException}.
      */
-    public void errorExit() {
-        chatBot.exitOnError();
+    public void terminate() {
+        chatBot.printTerminateMessage();
         scanner.close();
         System.exit(1); // exit with error status
     }

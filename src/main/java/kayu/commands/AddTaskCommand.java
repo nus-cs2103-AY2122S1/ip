@@ -67,7 +67,7 @@ public abstract class AddTaskCommand extends Command {
         assert (paramArray.length == 3);
         
         String dateString = paramArray[1].trim();
-        List<DateTimeFormatter> dateFormatterList = dateTimeFormat.getDateFormatterList();
+        List<DateTimeFormatter> dateFormatterList = dateTimeFormat.getDateFormats();
         
         for (DateTimeFormatter formatter: dateFormatterList) {
             try {
@@ -83,7 +83,7 @@ public abstract class AddTaskCommand extends Command {
         assert (paramArray.length == 3);
         
         String timeString = paramArray[2].trim().toUpperCase();
-        List<DateTimeFormatter> timeFormatterList = dateTimeFormat.getTimeFormatterList();
+        List<DateTimeFormatter> timeFormatterList = dateTimeFormat.getTimeFormats();
         
         for (DateTimeFormatter formatter: timeFormatterList) {
             try {

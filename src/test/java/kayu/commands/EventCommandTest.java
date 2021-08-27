@@ -53,7 +53,7 @@ public class EventCommandTest {
     @BeforeEach
     public void setUp() {
         taskList = new TaskList();
-        dateTimeFormat = DateTimeFormat.generate();
+        dateTimeFormat = DateTimeFormat.generateInstance();
     }
     
     @Test

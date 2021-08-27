@@ -14,7 +14,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Kayu kayu = new Kayu();
-        kayu.run();
+        kayu.runProgram();
         System.exit(0);
     }
 }

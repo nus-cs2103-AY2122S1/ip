@@ -40,7 +40,7 @@ public class Storage {
      * 
      * @param taskFilePath File path for reading/writing of data.
      */
-    public void setFilePathAndDirectory(String taskFilePath) {
+    public void setDirectoryAndFilePath(String taskFilePath) {
         setTaskFilePath(taskFilePath);
         
         int splitIdx = taskFilePath.lastIndexOf('/'); // mac/unix
@@ -66,12 +66,12 @@ public class Storage {
      * @throws StorageException If unable to read/write to file.
      */
     public List<Task> load() throws StorageException {
-        initialiseFilePath();
-        List<String> taskLines = readLines();
-        return decode(taskLines);
+        initializeFilePath();
+        List<String> taskLines = readFile();
+        return decodeAll(taskLines);
     }
 
-    protected void initialiseFilePath() throws StorageException {
+    protected void initializeFilePath() throws StorageException {
         try {
             File directory = new File(taskDirectoryPath);
             if (!directory.exists() && !directory.mkdir()) {
@@ -87,7 +87,7 @@ public class Storage {
         }
     }
 
-    protected List<String> readLines() throws StorageException {
+    protected List<String> readFile() throws StorageException {
         try {
             Path filePath = Paths.get(taskFilePath);
             return Files.readAllLines(filePath);
@@ -97,17 +97,17 @@ public class Storage {
         }
     }
 
-    protected List<Task> decode(List<String> taskLines) throws StorageException {
+    protected List<Task> decodeAll(List<String> taskLines) throws StorageException {
         List<Task> savedTaskList = new ArrayList<>();
         
         for (String stringTask : taskLines) {
-            Task task = decodeSingleTask(stringTask);
+            Task task = decodeToTask(stringTask);
             savedTaskList.add(task);
         }
         return savedTaskList;
     }
 
-    protected Task decodeSingleTask(String stringTask) throws StorageException {
+    protected Task decodeToTask(String stringTask) throws StorageException {
         String[] taskAsArray = stringTask.split(Task.SPLIT_TEMPLATE);
         
         try {
@@ -145,7 +145,7 @@ public class Storage {
      * @param taskList List of {@link kayu.task.Task} to write to file.
      * @throws StorageException If unable to read/write to file.
      */
-    public void save(List<Task> taskList) throws StorageException {
+    public void saveTasks(List<Task> taskList) throws StorageException {
         try {
             Path filePath = Paths.get(taskFilePath);
             List<String> taskLines = taskList.stream()

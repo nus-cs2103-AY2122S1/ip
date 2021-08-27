@@ -31,7 +31,7 @@ public class TaskListTest {
                 .boxed()
                 .map(num -> new Todo("mock " + num))
                 .collect(Collectors.toList());
-        taskList.init(tasks);
+        taskList.initializeTasks(tasks);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class TaskListTest {
                 .boxed()
                 .map(num -> new Todo("mock " + num))
                 .collect(Collectors.toList());
-        taskList.init(tasks);
+        taskList.initializeTasks(tasks);
         
         try {
             Task newTask = new Todo("new todo here");
@@ -114,7 +114,7 @@ public class TaskListTest {
     @Test
     public void deleteTask_taskListIsEmpty_exceptionThrown() throws StorageException {
         int taskNumber = 12;
-        taskList.init(new ArrayList<>());
+        taskList.initializeTasks(new ArrayList<>());
         try {
             taskList.deleteTask(taskNumber);
             fail();

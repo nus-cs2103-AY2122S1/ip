@@ -35,12 +35,12 @@ public class TaskList {
     }
 
     /**
-     * Initialises the {@link #tasks} list with the specified {@link kayu.task.Task} list.
+     * Initializes the {@link #tasks} list with the specified {@link kayu.task.Task} list.
      * 
      * @param taskList List of {@link kayu.task.Task} to initialise {@link #tasks} with.
      * @throws StorageException If size of <code>#taskList</code> is larger than {@link #MAX_STORAGE}.
      */
-    public void init(List<Task> taskList) throws StorageException {
+    public void initializeTasks(List<Task> taskList) throws StorageException {
         if (taskList.size() > MAX_STORAGE) {
             throw new StorageException(FULL_CAPACITY_ERROR_MESSAGE);
         }
@@ -125,7 +125,7 @@ public class TaskList {
      * @param keyword Keyword String to find in {@link kayu.task.Task}s.
      * @return A Map of {@link kayu.task.Task} that has similar description to <code>keyword</code>.
      */
-    public Map<Integer, Task> findMatchingTasks(String keyword) {
+    public Map<Integer, Task> findTasksByDescriptionKeyword(String keyword) {
         Map<Integer, Task> taskMap = new HashMap<>();
         
         for (int idx = 0; idx < tasks.size(); idx ++) {

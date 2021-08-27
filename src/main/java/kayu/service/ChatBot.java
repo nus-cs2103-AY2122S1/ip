@@ -33,22 +33,22 @@ public class ChatBot {
     /**
      * Prints logo.
      */
-    public void logo() {
+    public void printLogo() {
         print(LOGO);
     }
 
     /**
      * Prints greeting message.
      */
-    public void greet() {
-        info(GREETING);
+    public void printGreetingMessage() {
+        printMessage(GREETING);
     }
 
     /**
      * Prints a closing statement before program terminates.
      */
-    public void exit() {
-        info(BYE);
+    public void printExitMessage() {
+        printMessage(BYE);
     }
 
     /**
@@ -56,7 +56,7 @@ public class ChatBot {
      *
      * @param message Message to display within {@link #LINE_SPLIT}.
      */
-    public void info(String message) {
+    public void printMessage(String message) {
         if (!message.isBlank()) {
             print(LINE_SPLIT + '\n' + message + '\n' + LINE_SPLIT + '\n');
         }
@@ -65,15 +65,15 @@ public class ChatBot {
     /**
      * Generates an error on save message.
      */
-    public void errorOnSave() {
-        error(ERROR_ON_SAVE);
+    public void printErrorOnSave() {
+        printError(ERROR_ON_SAVE);
     }
 
     /**
      * Generates an exit error message.
      */
-    public void exitOnError() {
-        info(ERROR_EXIT);
+    public void printTerminateMessage() {
+        printMessage(ERROR_EXIT);
     }
 
     /**
@@ -90,7 +90,7 @@ public class ChatBot {
      *
      * @param errorMessage Error message to display.
      */
-    public void error(String errorMessage) {
-        info("=( Error: " + errorMessage);
+    public void printError(String errorMessage) {
+        printMessage("=( Error: " + errorMessage);
     }
 }
