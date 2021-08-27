@@ -1,4 +1,4 @@
-package utils;
+package utils.task;
 
 /**
  * The Task class encapsulates a task.
