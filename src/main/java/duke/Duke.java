@@ -1,8 +1,12 @@
 package duke;
 
-import duke.util.*;
-import duke.command.*;
-import duke.exception.*;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
+import duke.util.TaskHandler;
+import duke.command.Command;
+import duke.exception.DukeException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,11 +35,13 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs Duke
-     **/
+    public static void main (String[] args) {
+        Duke duke = new Duke();
+        duke.start();
+    }
+
+    /** Runs Duke **/
     public void start() {
-        // Welcome message
         ui.printIntroMessage();
         Scanner sc = new Scanner(System.in);
         storage = new Storage();
@@ -51,10 +57,5 @@ public class Duke {
                 ui.prettify(e.getMessage());
             }
         }
-    }
-
-    public static void main (String[] args) {
-        Duke duke = new Duke();
-        duke.start();
     }
 }

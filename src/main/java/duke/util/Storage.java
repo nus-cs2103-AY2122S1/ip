@@ -1,18 +1,37 @@
 package duke.util;
 
-import duke.task.*;
-import duke.exception.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.task.Task;
+import duke.exception.DukeException;
+import duke.exception.DukeIOException;
+import duke.exception.DukeUnexpectedCharacterException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 import java.io.FileWriter;
+
+import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * This class encapsulates the storage used for loading and saving data.
+ *
+ * @author Teo Sin Yee
+ */
 public class Storage {
     private static final String FILE_NAME = "./data/tasks.txt";
     private static final File file = new File(FILE_NAME);
 
+    /**
+     * Reads data from file.
+     * Returns an ArrayList containing all the data in the file.
+     *
+     * @return ArrayList containing all tasks.
+     * @throws DukeException If there is an I/O exception.
+     */
     public ArrayList<Task> loadTasks() throws DukeException {
         try {
             Scanner sc = new Scanner(file);
@@ -27,7 +46,8 @@ public class Storage {
         }
     }
 
-    private static void newFile() throws DukeException {
+    /** Creates a new file to store data **/
+    private static void newFile() throws DukeIOException {
         try {
             file.getParentFile().mkdirs();
             file.createNewFile();
@@ -36,7 +56,13 @@ public class Storage {
         }
     }
 
-    public static void writeToFile(Task task) throws DukeException {
+    /**
+     * Writes data to storage file.
+     *
+     * @param task Task to be saved to the storage file.
+     * @throws DukeIOException If there is error writing to the storage file.
+     */
+    public static void writeToFile(Task task) throws DukeIOException {
         if (!file.exists()) {
             newFile();
         }
@@ -49,7 +75,13 @@ public class Storage {
         }
     }
 
-    public static void updateData(ArrayList<Task> tasks) throws DukeException {
+    /**
+     * Updates storage file after changes are made to the task list.
+     *
+     * @param tasks Edited task list.
+     * @throws DukeIOException If there is an error writing to the storage file.
+     */
+    public static void updateData(ArrayList<Task> tasks) throws DukeIOException {
         try {
             FileWriter fw = new FileWriter(FILE_NAME);
             for (Task t: tasks) {
@@ -61,7 +93,14 @@ public class Storage {
         }
     }
 
-    private static Task formatToTaskList(String s) throws DukeException {
+    /**
+     * Formats the data saved in the storage file back to a Task object.
+     *
+     * @param s Text format of the Task in the storage file.
+     * @return Task object of data in the storage file.
+     * @throws DukeUnexpectedCharacterException If the file is corrupted.
+     */
+    private static Task formatToTaskList(String s) throws DukeUnexpectedCharacterException {
         String[] details = s.split(" \\| ");
         Task task;
 

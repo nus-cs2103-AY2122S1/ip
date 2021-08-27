@@ -5,6 +5,11 @@ import duke.util.Storage;
 import duke.util.TaskHandler;
 import duke.util.Ui;
 
+/**
+ * This class encapsulates the delete command.
+ *
+ * @author Teo Sin Yee
+ */
 public class DeleteCommand extends Command {
     private final int taskId;
 

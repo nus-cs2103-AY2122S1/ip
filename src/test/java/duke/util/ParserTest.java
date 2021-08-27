@@ -28,7 +28,8 @@ public class ParserTest {
         try {
             Parser parser = new Parser();
             String testInput = "todo ip tasks";
-            assertEquals(new AddTaskCommand(new Todo("ip tasks")), parser.parseRawInput(testInput));
+            assertEquals(new AddTaskCommand(new Todo("ip tasks")),
+                    parser.parseRawInput(testInput));
         } catch (DukeException e) {
             fail();
         }
@@ -39,7 +40,8 @@ public class ParserTest {
         try {
             Parser parser = new Parser();
             String testInput = "deadline ip tasks /by 2021-12-26 2359";
-            assertEquals(new AddTaskCommand(new Deadline("ip tasks", "26 Dec 2021, 11.59 pm")), parser.parseRawInput(testInput));
+            assertEquals(new AddTaskCommand(new Deadline("ip tasks", "26 Dec 2021, 11.59 pm")),
+                    parser.parseRawInput(testInput));
         } catch (DukeException e) {
             fail();
         }
@@ -50,7 +52,8 @@ public class ParserTest {
         try {
             Parser parser = new Parser();
             String testInput = "event volleyball training /at wed 6pm";
-            assertEquals(new AddTaskCommand(new Event("volleyball training", "wed 6pm")), parser.parseRawInput(testInput));
+            assertEquals(new AddTaskCommand(new Event("volleyball training", "wed 6pm")),
+                    parser.parseRawInput(testInput));
         } catch (DukeException e) {
             fail();
         }

@@ -6,6 +6,11 @@ import duke.util.TaskHandler;
 import duke.util.Storage;
 import duke.util.Ui;
 
+/**
+ * This class encapsulates commands that add tasks to the list.
+ *
+ * @author Teo Sin Yee
+ */
 public class AddTaskCommand extends Command {
     private final Task task;
 

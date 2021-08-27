@@ -6,7 +6,7 @@ import duke.util.TaskHandler;
 import duke.util.Ui;
 
 /**
- * All commands that Duke can handle
+ * This class encapsulates all commands that Duke can handle.
  *
  * @author Teo Sin Yee
  * @version CS2103T AY21/22 Semester 1

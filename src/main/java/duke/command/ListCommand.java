@@ -1,13 +1,17 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.util.Storage;
 import duke.util.TaskHandler;
 import duke.util.Ui;
 
+/**
+ * This class encapsulates the list command.
+ *
+ * @author Teo Sin Yee
+ */
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException {
+    public void execute(TaskHandler taskHandler, Storage storage, Ui ui) {
         taskHandler.printTasks();
     }
 
