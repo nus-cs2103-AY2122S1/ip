@@ -8,8 +8,6 @@ public class CommandHandler {
 
     protected ArrayList<Task> list;
 
-    protected int index = 0;
-
     enum CommandStart {
         LIST,
         DONE,
@@ -65,32 +63,33 @@ public class CommandHandler {
         if (start != null) {
             switch(start) {
                 case LIST:
-                    command = new ListCommand(input, index, this.list);
+                    command = new ListCommand(input, this.list);
                     System.out.println(command.reply());
                     break;
                 case DONE:
                     command = new DoneCommand(input, this.list);
                     System.out.println(command.reply());
+                    Storage.save(this.list);
                     break;
                 case DELETE:
                     command = new DeleteCommand(input, this.list);
                     System.out.println(command.reply());
-                    index--;
+                    Storage.save(this.list);
                     break;
                 case TODO:
-                    command = new TodoCommand(input, index, this.list);
+                    command = new TodoCommand(input, this.list);
                     System.out.println(command.reply());
-                    index++;
+                    Storage.save(this.list);
                     break;
                 case DEADLINE:
-                    command = new DeadlineCommand(input, index, this.list);
+                    command = new DeadlineCommand(input, this.list);
                     System.out.println(command.reply());
-                    index++;
+                    Storage.save(this.list);
                     break;
                 case EVENT:
-                    command = new EventCommand(input, index, this.list);
+                    command = new EventCommand(input, this.list);
                     System.out.println(command.reply());
-                    index++;
+                    Storage.save(this.list);
                     break;
             }
         }

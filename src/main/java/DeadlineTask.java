@@ -19,6 +19,14 @@ public class DeadlineTask extends Task {
     }
 
     /**
+     * Constructor for the Deadline class
+     */
+    DeadlineTask(String task, String by, boolean done) {
+        super(task, done);
+        this.by = by;
+    }
+
+    /**
      * Retrieves the completion state of the task, followed by the task input.
      *
      * @return The String representation of the task completion state and the task input.
@@ -26,5 +34,14 @@ public class DeadlineTask extends Task {
     @Override
     public String getTaskState() {
         return "[D]" + super.getTaskState() + "(By: " + this.by + ")";
+    }
+
+    @Override
+    public String convertFormat() {
+        return "D,"
+                + (done ? "1," : "0,")
+                + task
+                + ","
+                + by;
     }
 }

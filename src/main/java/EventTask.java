@@ -19,6 +19,14 @@ public class EventTask extends Task {
     }
 
     /**
+     * Constructor for the Event class
+     */
+    EventTask(String task, String at, boolean done) {
+        super(task, done);
+        this.at = at;
+    }
+
+    /**
      * Retrieves the completion state of the task, followed by the task input.
      *
      * @return The String representation of the task completion state and the task input.
@@ -26,5 +34,14 @@ public class EventTask extends Task {
     @Override
     public String getTaskState() {
         return "[E]" + super.getTaskState() + "(At: " + this.at + ")";
+    }
+
+    @Override
+    public String convertFormat() {
+        return "E,"
+                + (done ? "1," : "0,")
+                + task
+                + ","
+                + at;
     }
 }
