@@ -16,7 +16,7 @@ public class Duke {
         boolean isExit = false;
         ui.greet();
         taskList.printTask();
-        while(!isExit) {
+        while (!isExit) {
             String input = ui.readLine();
             ui.handleInput(input);
             ui.showLine();

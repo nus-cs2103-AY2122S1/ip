@@ -17,13 +17,13 @@ public class Storage {
     }
     public String convertTaskToText(Task task) {
         String result = task.getType() + "|";
-        if(task.isCompleted()) {
+        if (task.isCompleted()) {
             result += "1|";
-        }else {
+        } else {
             result += "0|";
         }
         result += task.getTaskContent();
-        if(task.getType().equals("D") || task.getType().equals("E")) {
+        if (task.getType().equals("D") || task.getType().equals("E")) {
             result += "|" + task.getTiming();
         }
         return result;
@@ -31,21 +31,21 @@ public class Storage {
     public Task convertTextToTask(String text) {
         String[] str = text.split("\\|");
         Task newTask;
-        if(str[0].equals("T")) {
+        if (str[0].equals("T")) {
             newTask = new ToDo(str[2]);
-        }else if(str[0].equals("D")) {
+        } else if(str[0].equals("D")) {
             newTask = new Deadline(str[2], str[3]);
-        }else {
+        } else {
             newTask = new Event(str[2], str[3]);
         }
-        if(str[1].equals("1")) {
+        if (str[1].equals("1")) {
             newTask.markCompleted();
         }
         return newTask;
     }
     public void writeToFile(TaskList taskList) {
         StringBuilder combinedTask = new StringBuilder();
-        for(int i = 0; i < taskList.length(); i++) {
+        for (int i = 0; i < taskList.length(); i++) {
             combinedTask.append(convertTaskToText(taskList.get(i))).append("\n");
         }
         try {
@@ -69,7 +69,7 @@ public class Storage {
     }
     public void saveTask(TaskList taskList) {
         boolean directoryExists = java.nio.file.Files.exists(filePath);
-        if(!directoryExists) {
+        if (!directoryExists) {
             createFile();
         }
         writeToFile(taskList);
