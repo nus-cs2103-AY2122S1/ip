@@ -1,9 +1,11 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.InvalidCommandException;
+import duke.exception.OutOfBoundsException;
 import duke.task.Task;
 
 /**
@@ -11,11 +13,11 @@ import duke.task.Task;
  */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
-    private String cmd;
+    private final String cmd;
 
     /**
      * Constructor for DoneCommand.
-     * @param input
+     * @param input Reference to the task done.
      */
     public DoneCommand(String input) {
         this.cmd = input;
@@ -31,12 +33,18 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        int id;
         try {
-            int id = Integer.parseInt(cmd.strip());
+            id = Integer.parseInt(cmd.strip()) - 1;
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException();
+        }
+
+        try {
             Task task = tasks.get(id);
             task.markAsDone();
-        } catch (Exception e) {
-            throw new DukeException(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            throw new OutOfBoundsException();
         }
     }
 }

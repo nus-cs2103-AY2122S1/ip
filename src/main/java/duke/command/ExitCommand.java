@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -33,9 +32,8 @@ public class ExitCommand extends Command {
      * @param tasks The list of tasks in the current programme.
      * @param ui The user interface.
      * @param storage Handles interaction with the file.
-     * @throws DukeException All exceptions related to Duke.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.exit();
         storage.save(tasks.getList());
     }

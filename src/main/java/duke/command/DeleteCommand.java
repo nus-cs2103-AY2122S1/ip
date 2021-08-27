@@ -1,15 +1,17 @@
 package duke.command;
 import duke.TaskList;
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.InvalidCommandException;
+import duke.exception.OutOfBoundsException;
 
 /**
  * This class handles command that deletes task from list.
  */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
-    private String cmd;
+    private final String cmd;
 
     /**
      * Constructor for command that deletes tasks.
@@ -30,11 +32,17 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        int id;
         try {
-            int id = Integer.parseInt(cmd.strip());
+            id = Integer.parseInt(cmd.strip());
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException();
+        }
+
+        try {
             taskList.delete(id);
-        } catch (Exception e) {
-            throw new DukeException(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            throw new OutOfBoundsException();
         }
     }
 }

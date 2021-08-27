@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.command.IncorrectCommand;
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.Todo;
 import org.junit.jupiter.api.Test;

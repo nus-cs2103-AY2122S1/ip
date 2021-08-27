@@ -1,21 +1,26 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.EmptyValueException;
+import duke.exception.NoTimeException;
 import duke.task.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * This class handles command that add task to list.
  */
 public class AddCommand extends Command {
 
-    private String description;
-    private String time;
-    private String category;
+    private final String cmd;
+    private final String category;
+    public static final String ADD_EVENT = "event";
+    public static final String ADD_DEADLINE = "deadline";
+    public static final String ADD_TODO = "todo";
 
     /**
      * Constructor for AddCommand.
@@ -26,11 +31,7 @@ public class AddCommand extends Command {
     public AddCommand(String input, String category) {
         super();
         this.category = category;
-        String[] info = input.split("/");
-        this.description = info[0].strip();
-        if (!category.equals("todo")) {
-            this.time = info[1].strip();
-        }
+        this.cmd = input;
     }
 
     /**
@@ -43,19 +44,33 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showLine();
-        if ("todo".equals(category)) {
-            tasks.add(new Todo(description));
-        } else if ("deadline".equals(category)) {
-            LocalDate ld = LocalDate.parse(time);
-            tasks.add(new Deadline(description, ld));
-        } else if ("event".equals(category)) {
-            LocalDate ld = LocalDate.parse(time);
-            tasks.add(new Event(description, ld));
-        } else {
-            throw new DukeException("Wrong format of info");
+        String time = "";
+        String[] info = cmd.split("/");
+        String description = info[0].strip();
+        if (description.equals("")) {
+            throw new EmptyValueException();
         }
-        ui.showLine();
+        if (!category.equals("todo")) {
+            if (info.length < 2) {
+                throw new NoTimeException();
+            } else {
+                time = info[1].strip();
+            }
+        }
+
+        try {
+            if ("todo".equals(category)) {
+                tasks.add(new Todo(description));
+            } else if ("deadline".equals(category)) {
+                LocalDate ld = LocalDate.parse(time);
+                tasks.add(new Deadline(description, ld));
+            } else if ("event".equals(category)) {
+                LocalDate ld = LocalDate.parse(time);
+                tasks.add(new Event(description, ld));
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Wrong date time format! Please use yyyy-MM-dd.");
+        }
     }
 
 

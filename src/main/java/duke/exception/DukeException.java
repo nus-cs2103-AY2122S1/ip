@@ -1,11 +1,11 @@
-package duke;
+package duke.exception;
 
 /**
  * All errors related to Duke can be changed to DukeException.
  */
 public class DukeException extends Exception {
     /**
-     * Constructor of Duke.
+     * Constructor of DukeException.
      *
      * @param s Error message.
      */

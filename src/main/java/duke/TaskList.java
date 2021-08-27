@@ -51,7 +51,7 @@ public class TaskList {
      *
      * @param index Index of the task to be deleted
      */
-    public void delete(int index) {
+    public void delete(int index) throws IndexOutOfBoundsException{
         Task deleted = tasks.get(index);
         tasks.remove(index);
         System.out.println("Ok~ I've deleted the task:\n" + deleted.toString());
@@ -73,7 +73,7 @@ public class TaskList {
      * @param index Index of the task.
      * @return Task object with that index.
      */
-    public Task get(int index) {
+    public Task get(int index) throws IndexOutOfBoundsException {
         return tasks.get(index);
     }
 }

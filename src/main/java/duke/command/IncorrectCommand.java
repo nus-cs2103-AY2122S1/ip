@@ -1,8 +1,9 @@
 package duke.command;
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.InvalidCommandException;
 
 /**
  * This class handles all commands that are not formatted correctly.
@@ -15,15 +16,15 @@ public class IncorrectCommand extends Command {
     public IncorrectCommand() {
     }
 
-    /**
-     * When user input incorrect command, the programme will quit.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExist() {
-        return false;
-    }
+//    /**
+//     * When user input incorrect command, the programme will quit.
+//     *
+//     * @return False.
+//     */
+//    @Override
+//    public boolean isExist() {
+//        return false;
+//    }
 
     /**
      * Method to execute command.
@@ -35,6 +36,7 @@ public class IncorrectCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        throw new InvalidCommandException();
     }
 
     /**

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.exception.EmptyValueException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -17,7 +19,7 @@ import java.util.Scanner;
  * Deals with loading tasks from the file and saving tasks in the file
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
     private File storage;
 
     /**
@@ -62,7 +64,7 @@ public class Storage {
                     parseTask(task, tasks);
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | DukeException e) {
             Ui.showError(e.getMessage());
         }
         return tasks;
@@ -74,24 +76,33 @@ public class Storage {
      * @param str Line of the file.
      * @param tasks Target list of tasks.
      */
-    public void parseTask(String str, List<Task> tasks) {
+    public void parseTask(String str, List<Task> tasks) throws DukeException {
         Scanner sc = new Scanner(str);
         String category = sc.next();
-        String input[] = sc.nextLine().substring(5).split("/");
+        String[] input = sc.nextLine().substring(5).split("/");
         String des = input[0].strip();
         String time = "";
-        if (!category.equals("T") ) {
+        if (!category.equals("T")) {
             time = input[1].strip();
-        };
+        }
+        if (des.equals("")) {
+            throw new EmptyValueException();
+        }
 
-        if ("T".equals(category)) {
+        switch (category) {
+        case "T":
             tasks.add(new Todo(des));
-        } else if ("D".equals(category)) {
+            break;
+        case "D": {
             LocalDate ld = LocalDate.parse(time);
             tasks.add(new Deadline(des, ld));
-        } else if ("E".equals(category)) {
+            break;
+        }
+        case "E": {
             LocalDate ld = LocalDate.parse(time);
             tasks.add(new Event(des, ld));
+            break;
+        }
         }
     }
 

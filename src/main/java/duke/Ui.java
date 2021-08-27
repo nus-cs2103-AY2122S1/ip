@@ -36,8 +36,8 @@ public class Ui {
      *
      * @return Horizontal divider line.
      */
-    public String showLine() {
-        return horizontal;
+    public void showLine() {
+        System.out.println(horizontal);
     }
 
     /**
@@ -63,18 +63,7 @@ public class Ui {
      * @param error Error name.
      */
     public static void showError(String error) {
-        switch (error) {
-        case "EmptyTodo":
-            System.out.println("OvO The description of a todo cannot be empty ~");
-        case "EmptyDeadline":
-            System.out.println("OvO The description of a deadline cannot be empty ~");
-        case "EmptyEvent":
-            System.out.println("OvO The description of a event cannot be empty ~");
-        case "IllegalInput":
-            System.out.println("My Melo cannot understand o^o ");
-        default:
-            System.out.println(error);
-        }
+        System.out.println("OvO I found the following errors! " + error);
     }
 
 

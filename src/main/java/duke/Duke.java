@@ -1,15 +1,15 @@
 package duke;
-import java.io.IOException;
 import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * Duke is a chatbot that can read and respond to user input.
  */
 public class Duke {
 
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Ui ui;
 
     /**
      * Constructor of Duke.
@@ -24,9 +24,8 @@ public class Duke {
     /**
      * Runs the programme.
      *
-     * @throws IOException Handles exception with input and output to target file.
      */
-    public void run() throws IOException {
+    public void run() {
         ui.welcome();
         boolean isExist = true;
 
@@ -38,7 +37,7 @@ public class Duke {
                 c.execute(taskList, ui, storage);
                 isExist = c.isExist();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                Ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }
@@ -47,10 +46,7 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        try {
-            new Duke("./data/tasks.txt").run();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } ;
+        new Duke("./data/tasks.txt").run();
     }
+
 }

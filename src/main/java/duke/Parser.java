@@ -30,11 +30,11 @@ public class Parser {
             return new ExitCommand();
         case (DisplayCommand.COMMAND_WORD):
             return new DisplayCommand();
-        case ("event"):
+        case (AddCommand.ADD_EVENT):
             return new AddCommand(msg, "event");
-        case ("deadline"):
+        case (AddCommand.ADD_DEADLINE):
             return new AddCommand(msg, "deadline");
-        case ("todo"):
+        case (AddCommand.ADD_TODO):
             return new AddCommand(msg, "todo");
         }
         return new IncorrectCommand();
