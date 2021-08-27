@@ -45,27 +45,6 @@ public class Lifeline {
         }
     }
 
-    private void getInput() {
-        boolean exit = false;
-        while (!exit) {
-            try {
-                String fullCommand = ui.readCommand();
-                if (fullCommand.equals("")) {
-                    continue;
-                }
-                System.out.println();
-                Command c = Parser.parse(fullCommand);
-                String response = c.getExecute().apply(fullCommand, storage, taskList, ui);
-                ui.printToConsole(response);
-                if (c == Command.BYE) {
-                    exit = true;
-                }
-            } catch (LifelineException e) {
-                ui.printToConsole(ui.showError(e.getMessage()));
-            }
-        }
-    }
-
     /**
      * Gets the appropriate response from Lifeline if user inputs a valid command
      * Method is used only for GUI
@@ -89,5 +68,26 @@ public class Lifeline {
     public void start() {
         ui.printToConsole(ui.greet());
         this.getInput();
+    }
+
+    private void getInput() {
+        boolean exit = false;
+        while (!exit) {
+            try {
+                String fullCommand = ui.readCommand();
+                if (fullCommand.equals("")) {
+                    continue;
+                }
+                System.out.println();
+                Command c = Parser.parse(fullCommand);
+                String response = c.getExecute().apply(fullCommand, storage, taskList, ui);
+                ui.printToConsole(response);
+                if (c == Command.BYE) {
+                    exit = true;
+                }
+            } catch (LifelineException e) {
+                ui.printToConsole(ui.showError(e.getMessage()));
+            }
+        }
     }
 }

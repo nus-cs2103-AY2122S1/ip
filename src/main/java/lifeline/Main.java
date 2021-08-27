@@ -1,6 +1,5 @@
 package lifeline;
 
-import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -31,15 +30,5 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Starts the console program
-     *
-     * @param args Does not accept any arguments
-     */
-    public static void main(String[] args) {
-        Lifeline lifeline = new Lifeline("save" + File.separator + "tasks.json");
-        lifeline.start();
     }
 }
