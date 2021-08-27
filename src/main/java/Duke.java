@@ -8,10 +8,8 @@ import java.util.Scanner;
 public class Duke {
     private TaskList taskList; //composite data type
     private Storage dukeStore; //composite data type
+    private Ui ui;
 
-
-
-    //test run with predefined filepath
     public static void main(String[] args) {
         String filePath = "data" + File.separatorChar + "duke-storage.txt";
         new Duke(filePath).run();
@@ -20,13 +18,14 @@ public class Duke {
     public Duke(String filePathToStorage) {
         this.dukeStore = new Storage(filePathToStorage);
         this.taskList = TaskList.of(this.dukeStore);
+        this.ui = new Ui();
     }
 
     public void run() {
         Scanner sc = new Scanner(System.in);
-        printFormatted(beginScript()); //display welcome msg
 
-        while (sc.hasNext()) {
+//        while (sc.hasNext()) {
+        while (ui.isRunning()) {
             int numOfTasks = taskList.length();
             String userInput = sc.nextLine();
             String msgOutput = "";
@@ -37,7 +36,8 @@ public class Duke {
                             "Here are the tasks in your list:\n%s", taskList.toString()
                     );
                 } else if (userInput.equals("bye")) {
-                    msgOutput = endScript();
+                    sc.close();
+                    this.ui.close();
                 } else if (userInput.matches("done\s[0-9]{1,2}")) {
                     //eg. done 12
                     //limiting tasks from 0-99
@@ -105,35 +105,37 @@ public class Duke {
             } catch (Exception e) { //should be here i think...
                 e.printStackTrace();
             } finally {
-                printFormatted(msgOutput); //output msg to user
+                if (!msgOutput.equals("")) {
+                    Ui.printFormatted(msgOutput); //output msg to user
+                }
             }
         }
 
     }
 
-    public static String beginScript() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return ("Hello from\n" + logo);
-    }
-
-    public static String endScript() {
-        String exitStatment = "Bye, hope to see you again! :)";
-        return exitStatment;
-    }
-    public static void printFormatted(String text) {
-        String indent = "    ";
-        String topBorder    = "____________________________________\n";
-        String bottomBorder = "------------------------------------\n";
-        String textWithBorders = topBorder +  text + "\n" + bottomBorder;
-        String[] lines = textWithBorders.split("\n");
-        for (String line : lines) {
-            System.out.println(indent + line);
-        }
-    }
+//    public static String beginScript() {
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        return ("Hello from\n" + logo);
+//    }
+//
+//    public static String endScript() {
+//        String exitStatment = "Bye, hope to see you again! :)";
+//        return exitStatment;
+//    }
+//    public static void printFormatted(String text) {
+//        String indent = "    ";
+//        String topBorder    = "____________________________________\n";
+//        String bottomBorder = "------------------------------------\n";
+//        String textWithBorders = topBorder +  text + "\n" + bottomBorder;
+//        String[] lines = textWithBorders.split("\n");
+//        for (String line : lines) {
+//            System.out.println(indent + line);
+//        }
+//    }
 
 //    public static String defaultReplyToInvalidInput() {
 //        return "Invalid input o(>~<)O!\n" +

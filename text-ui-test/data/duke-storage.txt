@@ -1,3 +1,6 @@
 T | 1 | readme
 E | 0 | zoomMeeting | tonight
 T | 0 | readme
+E | 0 | zoomMeeting | tonight
+T | 0 | readme
+E | 0 | zoomMeeting | tonight
