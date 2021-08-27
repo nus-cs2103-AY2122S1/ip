@@ -7,13 +7,13 @@ import duke.task.Task;
  * Stores list of Task objects
  */
 public class TaskList {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructs TaskList object
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -22,7 +22,7 @@ public class TaskList {
      * @param task task to be added
      */
     public void addTask(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -31,7 +31,7 @@ public class TaskList {
      * @param task task to be deleted
      */
     public void deleteTask(Task task) {
-        list.remove(task);
+        tasks.remove(task);
     }
 
     /**
@@ -40,7 +40,7 @@ public class TaskList {
      * @return number of tasks in list
      */
     public int getSize() {
-        return list.size();
+        return tasks.size();
     }
 
     /**
@@ -50,7 +50,7 @@ public class TaskList {
      * @return task requested
      */
     public Task getTask(int i) {
-        return list.get(i);
+        return tasks.get(i);
     }
 
     /**
@@ -59,6 +59,6 @@ public class TaskList {
      * @return ArrayList of Task objects
      */
     public ArrayList<Task> getList() {
-        return list;
+        return tasks;
     }
 }

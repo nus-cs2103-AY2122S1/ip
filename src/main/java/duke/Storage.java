@@ -17,7 +17,7 @@ import java.io.IOException;
 public class Storage {
 
     final private String path;
-    private TaskList list;
+    private TaskList tasks;
 
     /**
      * Constructs Storage object
@@ -26,7 +26,7 @@ public class Storage {
      */
     public Storage(String path) {
         this.path = path;
-        this.list = new TaskList();
+        this.tasks = new TaskList();
     }
 
     /**
@@ -54,37 +54,37 @@ public class Storage {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                     if (s.contains("T")) {
                         ToDo todo = new ToDo(name, done);
-                        list.addTask(todo);
+                        tasks.addTask(todo);
                     }
                     if (s.contains("D")) {
                         LocalDateTime by = LocalDateTime.parse(arr[3], formatter);
                         Deadline deadline = new Deadline(name, by, done);
-                        list.addTask(deadline);
+                        tasks.addTask(deadline);
                     }
                     if (s.contains("E")) {
                         LocalDateTime at = LocalDateTime.parse(arr[3], formatter);
                         Event event = new Event(name, at, done);
-                        list.addTask(event);
+                        tasks.addTask(event);
                     }
                 }
                 System.out.println(System.lineSeparator());
                 sc.close();
             }
-            return list;
+            return tasks;
     }
 
     /**
      * Updates file when tasks are added or deleted
      *
-     * @param list current list of tasks
+     * @param tasks current list of tasks
      */
-    public void updateData(TaskList list) {
+    public void updateData(TaskList tasks) {
        try {
-           this.list = list;
+           this.tasks = tasks;
            File file = new File(path);
            FileWriter fw = new FileWriter(file);
-           for (int i = 0; i < list.getSize(); i++) {
-               Task task = list.getTask(i);
+           for (int i = 0; i < tasks.getSize(); i++) {
+               Task task = tasks.getTask(i);
                fw.write(task.toStringInStorage() + "\n");
            }
            fw.close();

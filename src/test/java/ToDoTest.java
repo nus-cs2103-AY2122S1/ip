@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ToDoTest {
     @Test
-    public void test_todo_done() {
+    public void test_markTodoAsDone() {
         ToDo toDo = new ToDo("test", false);
         toDo.markAsDone();
         assertEquals("X", toDo.getStatusIcon());

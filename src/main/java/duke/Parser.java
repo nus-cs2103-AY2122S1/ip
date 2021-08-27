@@ -22,19 +22,20 @@ import java.util.Scanner;
  */
 public class Parser {
 
-    private TaskList list;
-    private Ui ui;
-    private Storage storage;
+    TaskList tasks;
+    Ui ui;
+    Storage storage;
 
     /**
      * Constructs Parser object
      *
-     * @param list list of tasks
+     * @param tasks list of tasks
      * @param ui to deal with interactions with users
      * @param storage to update file
      */
-    public Parser(TaskList list, Ui ui, Storage storage) {
-        this.list = list;
+
+    public Parser(TaskList tasks, Ui ui, Storage storage) {
+        this.tasks = tasks;
         this.ui = ui;
         this.storage = storage;
     }
@@ -50,22 +51,22 @@ public class Parser {
                    ui.bye();
                    break;
                } else if (s.equals("list")) {
-                   ui.showTaskList(this.list);
+                   ui.showTaskList(this.tasks);
                } else if (s.contains("done")) {
                    int taskNum = getNum(s);
                    if (taskNum != -1) {
-                       Task task = list.getTask(taskNum);
+                       Task task = tasks.getTask(taskNum);
                        task.markAsDone();
                        ui.showTaskDone(task);
-                       storage.updateData(list);
+                       storage.updateData(tasks);
                    }
                } else if (s.contains("todo")) {
                    String name = getName(s);
                    if (!name.equals("")) {
                        ToDo toDo = new ToDo(name);
-                       list.addTask(toDo);
-                       ui.showTaskAdded(toDo, list.getSize());
-                       storage.updateData(list);
+                       tasks.addTask(toDo);
+                       ui.showTaskAdded(toDo, tasks.getSize());
+                       storage.updateData(tasks);
                    }
                } else if (s.contains("deadline")) {
                    String description = getName(s);
@@ -76,9 +77,9 @@ public class Parser {
                            LocalDateTime by = getDateTime(parts[1]);
                            if (by != null) {
                                Deadline deadline = new Deadline(name, by);
-                               ui.showTaskAdded(deadline, list.getSize());
-                               list.addTask(deadline);
-                               storage.updateData(list);
+                               ui.showTaskAdded(deadline, tasks.getSize());
+                               tasks.addTask(deadline);
+                               storage.updateData(tasks);
                            }
                        }
                    }
@@ -91,19 +92,19 @@ public class Parser {
                            LocalDateTime at = getDateTime(parts[1]);
                            if (at != null) {
                                Event event = new Event(name, at);
-                               ui.showTaskAdded(event, list.getSize());
-                               list.addTask(event);
-                               storage.updateData(list);
+                               ui.showTaskAdded(event, tasks.getSize());
+                               tasks.addTask(event);
+                               storage.updateData(tasks);
                            }
                        }
                    }
                } else if (s.contains("delete")) {
                    int taskNum = getNum(s);
                    if (taskNum != -1) {
-                       Task task = list.getTask(taskNum);
-                       list.deleteTask(task);
-                       ui.showTaskDeleted(task, list.getSize());
-                       storage.updateData(list);
+                       Task task = tasks.getTask(taskNum);
+                       tasks.deleteTask(task);
+                       ui.showTaskDeleted(task, tasks.getSize());
+                       storage.updateData(tasks);
                    }
                } else {
                    invalidEntry();
@@ -124,7 +125,7 @@ public class Parser {
             if (!s.equals("done") && !s.equals("delete")) {
                 String[] parts = s.split(" ", 2);
                 int num = Integer.parseInt(parts[1]);
-                if (num <= 0 || num > this.list.getSize()) {
+                if (num <= 0 || num > this.tasks.getSize()) {
                     throw new TaskNotFoundException("error");
                 }
                 return num - 1;
