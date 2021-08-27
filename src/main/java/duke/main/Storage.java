@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents as class that handles saving/loading tasks to/from hard disk
+ */
 public class Storage {
     private String filePath;
     private static String delimiter = " | ";
@@ -64,6 +67,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads task list from disk
+     *
+     * @return A list of storage element that can be passed to Task object
+     * @throws DukeException
+     */
     public List<StorageElement> load() throws DukeException {
         ArrayList<StorageElement> storageList = new ArrayList<>();
         File f = new File(this.filePath); // create a File for the given file path
@@ -86,6 +95,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves tasklist to disk
+     * @param taskList Task list to be saved
+     */
     public void save(TaskList taskList) {
         List<StorageElement> storageList = taskList.getStorageList();
 

@@ -7,6 +7,9 @@ import duke.exceptions.InvalidCommandException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a class that handles reading all user input
+ */
 public class Parser {
     private enum ValidCommand {
         DONE,
@@ -23,6 +26,13 @@ public class Parser {
         return input == input.toLowerCase();
     }
 
+    /**
+     * Creates Command object from user input in String format
+     *
+     * @param userInput user input in string format
+     * @return Command object to be executed
+     * @throws DukeException If user enters empty description/time
+     */
     public static Command parse(String userInput) throws DukeException {
         List<String> userInputList = Arrays.asList(userInput.split(" "));
         String userCommandString = userInputList.get(0);
