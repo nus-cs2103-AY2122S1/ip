@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 public class Duke {
     private final static List<Task> items = new ArrayList<>(100);
+    // TaskList = new TaskList();
+    private Ui ui;
     enum RequestType {
         DEFAULT,
         DONE,
@@ -16,16 +18,20 @@ public class Duke {
     }
     
     public static void main(String[] args) {
+        new Duke().run();
+    }
+    
+    public void run() {
         Storage.loadIntoDuke(items);
         Scanner userSc = new Scanner(System.in);
-        String name = "JARVIS";
-        System.out.println("Hello I am " + name +".\nIs there anything I can do for you Sir?\n");
+        ui = new Ui();
+        ui.dukeGreeting();
         String userInput = userSc.nextLine();
         RequestType userRequest;
         while(!userInput.equals("bye")){
             if(userInput.equals("list")){
                 userRequest = RequestType.DEFAULT;
-                list();
+                ui.list(items);
             } else if(userInput.startsWith("done")){
                 userRequest = RequestType.DONE;
             } else if(userInput.startsWith("delete")){
@@ -44,7 +50,7 @@ public class Duke {
                 case DEFAULT:
                     break;
                 case UNUSUAL:
-                    System.out.println("That is a rather unusual looking request sir.\nPerhaps you might want to specify the kind of task you would like to add.\n");
+                    ui.unusualRequest();
                     break;
                 case DONE:
                     done(userInput);
@@ -66,20 +72,14 @@ public class Duke {
             userInput = userSc.nextLine();
         }
 
-        System.out.println("Goodbye Sir! Will take good care of your garden in the meantime.");
+        ui.farewellMessage();
         Storage.writeToFile(items);
     }
 
     public static void echo(String userInput, String actionType){
         System.out.println("Got it sir, I have "+ actionType + " this task:\n " + userInput + "\nNow you have " + items.size() + " tasks in the list.\n");
     }
-
-    public static void list(){
-        for(int i = 1; i <= items.size(); i++){
-            System.out.println(i + ". " + items.get(i-1).toString());
-        }
-        System.out.println("");
-    }
+    
     
     private static void done(String userInput){
         try{
@@ -93,7 +93,7 @@ public class Duke {
             }
         } catch (NumberFormatException e){
             System.out.println("Task number formatted incorrectly. Try again\n");
-        } 
+        }
         
     }
     

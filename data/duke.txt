@@ -1,3 +1,0 @@
-T | 1 | task 1
-D | 1 | task | tomorrow
-E | 1 | task | sunday

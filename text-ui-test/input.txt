@@ -1,4 +1,4 @@
-deadline reading /by 530
+deadline reading /by 2021-12-01
 event marathon /at Saturday 2-5
 todo send email to mom
 list
