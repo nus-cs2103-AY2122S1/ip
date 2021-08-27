@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import retriever.task.*;
+import retriever.task.Deadline;
+import retriever.task.Event;
+import retriever.task.Task;
+import retriever.task.TaskDateAndTime;
+import retriever.task.Todo;
 
 /**
  * This class helps to read, write, update and delete
@@ -163,7 +167,7 @@ public class Storage {
 
             while ((currentLine = reader.readLine()) != null) {
                 if (counter == taskNumber) {
-
+                    // Do not write the task into new file.
                 } else {
                     writer.write(currentLine + System.getProperty("line.separator"));
                 }

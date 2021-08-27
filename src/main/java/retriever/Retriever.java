@@ -28,6 +28,7 @@ public class Retriever {
     }
 
     /**
+     * Runs the Chatbot engine.
      * Main body of the Retriever Chatbot.
      */
     public void run() {

@@ -42,14 +42,14 @@ public class Task {
      * @return The description.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**
      * Sets the task to done by updating the isDone variable.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -60,6 +60,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + (this.isDone ? "X" : " ") + "] " + this.description;
+        return "[" + (isDone ? "X" : " ") + "] " + description;
     }
 }

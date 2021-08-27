@@ -4,7 +4,13 @@ import java.util.ArrayList;
 
 import retriever.Storage;
 import retriever.Ui;
-import retriever.exception.*;
+
+import retriever.exception.IllegalDeadlineFormatException;
+import retriever.exception.IllegalDateFormatException;
+import retriever.exception.IllegalEventFormatException;
+import retriever.exception.IllegalTaskNumberException;
+import retriever.exception.IllegalTodoFormatException;
+import retriever.exception.TaskNotFoundException;
 
 /**
  * This class handles the task list and various
@@ -37,7 +43,7 @@ public class TaskList {
     }
 
     /**
-     * To add a deadline type task to the task list and storage.
+     * Adds a deadline type task to the task list and storage.
      *
      * @param userInput The task details input by the user.
      * @throws IllegalDeadlineFormatException If the format for adding a deadline task is not followed.
@@ -68,7 +74,7 @@ public class TaskList {
     }
 
     /**
-     * To add an event type task to the task list and storage.
+     * Adds an event type task to the task list and storage.
      *
      * @param userInput The task details input by the user.
      * @throws IllegalEventFormatException If the format for adding an event task is not followed.
@@ -99,7 +105,7 @@ public class TaskList {
     }
 
     /**
-     * To add a todo type task to the task list and storage.
+     * Adds a todo type task to the task list and storage.
      *
      * @param userInput The task details input by the user.
      * @throws IllegalTodoFormatException If the format for adding a todo task is not followed.
