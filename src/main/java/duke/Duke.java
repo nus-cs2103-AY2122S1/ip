@@ -8,12 +8,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the Duke chatbot object.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath the path to an existing txt database file or the path to save the new txt database file
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
