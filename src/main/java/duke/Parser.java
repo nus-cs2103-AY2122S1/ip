@@ -1,6 +1,17 @@
 package duke;
 
+/**
+ * Implements Parser object that deals with making sense of the user command.
+ */
 public class Parser {
+    /**
+     * Handles the logic of the user command.
+     * @param input The user input.
+     * @param ui The Ui object.
+     * @param storage The Storage object.
+     * @param tasks The list of tasks.
+     * @return A boolean deciding whether to exit Duke.
+     */
     public static boolean parse(String input, Ui ui, Storage storage, TaskList tasks) {
         if (input.equals("bye")) {
             ui.exit();

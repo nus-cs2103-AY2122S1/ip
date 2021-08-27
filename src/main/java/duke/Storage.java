@@ -6,9 +6,16 @@ import java.io.FileWriter;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Implements a Storage object that deals with loading and saving tasks from a file.
+ */
 public class Storage {
     private File myTask;
 
+    /**
+     * Constructs a Storage object.
+     * @param fileName Name of the file to be created.
+     */
     public Storage(String fileName) {
         try {
             myTask = new File(fileName);
@@ -21,6 +28,10 @@ public class Storage {
 
     }
 
+    /**
+     * Writes the task list from Duke to a file.
+     * @param list The list of task.
+     */
     public void saveTask(ArrayList<Task> list) {
         try {
             FileWriter writer = new FileWriter(this.myTask, false);
@@ -33,6 +44,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the task list from a file to Duke.
+     * @return The list of tasks.
+     * @throws DukeException Thrown in the event the file cannot be found.
+     */
     public ArrayList<Task> loadTask() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         try {
