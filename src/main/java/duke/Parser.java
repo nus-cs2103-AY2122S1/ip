@@ -13,6 +13,7 @@ public class Parser {
             put("deadline", (tasks, input) -> addDeadline(tasks, input));
             put("event", (tasks, input) -> addEvent(tasks, input));
             put("delete", (tasks, input) -> deleteTask(tasks, input));
+            put("find", (tasks, input) -> findTasks(tasks, input));
         }
     };
 
@@ -53,6 +54,13 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("DO YOU NOT KNOW WHAT A NUMBER IS, FOOLISH HUMAN?");
         }
+    }
+
+    private String findTasks(TaskList tasks, String input) throws DukeException {
+        if (tasks.isEmpty()) {
+            throw new DukeException("YOU HAVE NO TASKS YOU FOOL.");
+        }
+        return tasks.findTasks(input);
     }
 
     private String deleteTask(TaskList tasks, String input) throws DukeException {
