@@ -57,6 +57,11 @@ public abstract class Task {
         return this.taskType;
     }
 
+    /**
+     * Checks if task description contains keyword.
+     * @param keyword Keyward to be found.
+     * @return true if task description contains keyword, else false.
+     */
     public boolean containsKeyword(String keyword) {
         return task.contains(keyword);
     }

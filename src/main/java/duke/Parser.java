@@ -191,6 +191,12 @@ public class Parser {
         ui.deleteMessage(task, tasks);
     }
 
+    /**
+     * Finds tasks that contains keyword.
+     * @param tasks TaskList object that contains the tasks.
+     * @param ui UI object to render output to user.
+     * @param keyword Keyword to be searched.
+     */
     public void findTasks(TaskList tasks, Ui ui, String keyword) {
         ui.findMessage(tasks.findTasks(keyword));
     }

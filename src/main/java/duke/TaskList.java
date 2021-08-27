@@ -66,6 +66,11 @@ public class TaskList {
         this.list.clear();
     }
 
+    /**
+     * Finds tasks that contains the keyword.
+     * @param keyword Keyword to be found.
+     * @return TaskList containing filtered tasks.
+     */
     public TaskList findTasks(String keyword) {
         return new TaskList(list.stream().filter(task -> task.containsKeyword(keyword))
                 .collect(Collectors.toList()));

@@ -108,6 +108,10 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Prints tasks containing specified keyword.
+     * @param tasks TaskList containing filtered tasks.
+     */
     public void findMessage(TaskList tasks) {
         System.out.println("____________________________________________________________");
         System.out.println(" Here are the matching tasks in your list:");
