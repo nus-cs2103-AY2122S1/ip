@@ -38,7 +38,7 @@ public class Parser {
                    ui.bye();
                    break;
                } else if (s.equals("list")) {
-                   ui.showTaskList(this.list);
+                   ui.showTaskList(this.list, "list");
                } else if (s.contains("done")) {
                    int taskNum = getNum(s);
                    if (taskNum != -1) {
@@ -93,6 +93,12 @@ public class Parser {
                        ui.showTaskDeleted(task, list.getSize());
                        storage.updateData(list);
                    }
+               } else if (s.contains("find")) {
+                   String keyword = getName(s);
+                   if (!keyword.equals("")) {
+                       TaskList t = list.matchTasks(keyword);
+                       ui.showTaskList(t, "find");
+                   }
                } else {
                    invalidEntry();
                }
@@ -131,7 +137,8 @@ public class Parser {
         try {
             if (s.contains(" ")) {
                 String[] parts = s.split(" ", 2);
-                if (parts[0].equals("todo") || parts[0].equals("deadline") || parts[0].equals("event")) {
+                if (parts[0].equals("todo") || parts[0].equals("deadline")
+                        || parts[0].equals("event") || parts[0].equals("find")) {
                     if (parts[1].equals("")) {
                         throw new EmptyDescriptionException("error", parts[0]);
                     }

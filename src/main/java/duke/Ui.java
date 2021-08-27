@@ -40,9 +40,12 @@ public class Ui {
         System.out.printf("Noted.I've removed this task:\n%s\nNow you have %d %s in the list\n", task, size, t);
     }
 
-    // list task
-    public void showTaskList(TaskList list) {
-        System.out.println("Here are the tasks in your list:");
+    // list tasks
+    public void showTaskList(TaskList list, String cmd) {
+        String msg = cmd.equals("list")
+                ? "Here are the tasks in your list:"
+                : "Here are the matching tasks in your list:";
+        System.out.println(msg);
         for (int i = 0; i < list.getSize(); i++) {
             Task s = list.getTask(i);
             System.out.printf("%d.%s%n", i + 1, s);

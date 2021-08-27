@@ -30,6 +30,17 @@ public class TaskList {
         return list.get(i);
     }
 
+    public TaskList matchTasks(String keyword) {
+        TaskList matches = new TaskList();
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            if (task.toString().contains(keyword)) {
+                matches.addTask(task);
+            }
+        }
+        return matches;
+    }
+
     public ArrayList<Task> getList() {
         return list;
     }
