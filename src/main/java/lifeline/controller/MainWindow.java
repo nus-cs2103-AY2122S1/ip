@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane {
     private Lifeline lifeline;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image lifelineImage = new Image(this.getClass().getResourceAsStream("/images/DaLifeline.png"));
 
     /**
      * Initializes an instance of Lifeline to respond to user input and forces ScrollPane to automatically scroll down
@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
         String response = lifeline.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, lifelineImage)
         );
         userInput.clear();
         if (input.toLowerCase().trim().equals("bye")) {
