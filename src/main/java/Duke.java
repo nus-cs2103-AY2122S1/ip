@@ -3,7 +3,6 @@
  */
 
 import java.io.IOException;
-
 import duke.DukeException;
 import duke.Ui;
 import duke.Storage;
@@ -21,9 +20,9 @@ public class Duke {
     private static final String DATA_FOLDER = "./data";
     private static final String DATA_FILE = "duke.txt";
 
-    private Ui ui;
-    private Storage storage;
-    private Parser parser;
+    private final Ui ui;
+    private final Storage storage;
+    private final Parser parser;
     private Items items;
 
     public Duke() throws DukeException {
@@ -60,7 +59,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
         while(flag) {
-            input = ui.getInput(sc).split("\\s+");
+            input = Ui.getInput(sc).split("\\s+");
             String command = input[0];
             String str;
             String output = "";
@@ -72,11 +71,11 @@ public class Duke {
 
                     break;
                 case "done":
-                    output = items.markDone(Integer.parseInt(input[1]));
                     int idx = Integer.parseInt(input[1]);
-                    str = storage.getFileLine(idx - 1);
+                    output = items.markDone(idx);
+                    str = storage.getFileLine(idx);
                     str = str.substring(0, 4) + "1" + str.substring(5);
-                    storage.updateListTask(idx - 1, str);
+                    storage.updateListTask(idx, str);
 
                     break;
                 case "bye":
@@ -91,19 +90,20 @@ public class Duke {
                     break;
                 case "event":
                     output = items.addItem(new Event(task[0], task[1]));
-                    str = "T | 0 | " + task[0] + " | "+ task[1];
+                    str = "E | 0 | " + task[0] + " | "+ task[1];
                     storage.addToFile(str);
 
                     break;
                 case "deadline":
                     output = items.addItem(new Deadline(task[0], task[1]));
-                    str = "E | 0 | " + task[0] + " | "+ task[1];
+                    str = "D | 0 | " + task[0] + " | "+ task[1];
                     storage.addToFile(str);
 
                     break;
                 case "delete":
-                    output = items.deleteItem(Integer.parseInt(input[1]));
-                    storage.deleteFromFile(Integer.parseInt(input[1]) - 1);
+                    int id = Integer.parseInt(input[1]);
+                    output = items.deleteItem(id);
+                    storage.deleteFromFile(id);
 
                     break;
                 default:

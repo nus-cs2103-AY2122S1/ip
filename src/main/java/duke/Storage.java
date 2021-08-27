@@ -11,7 +11,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
@@ -23,7 +22,7 @@ public class Storage {
     private final String file;
 
     // The contents of the file as a List of Strings
-    private final List<String> fileContent;
+    private ArrayList<String> fileContent;
 
     /**
      * Constructor
@@ -52,9 +51,11 @@ public class Storage {
             return null;
         }
 
+        // list to contain all tasks ass understood by bot.
         ArrayList<Task> fileList = new ArrayList<>();
         try {
             Scanner fileReader = new Scanner(dataFile);
+            fileContent.clear();
             while (fileReader.hasNextLine()) {
                 String rawData = fileReader.nextLine();
                 fileContent.add(rawData);
@@ -76,6 +77,7 @@ public class Storage {
                     case "E":
                         // Add an event task.
                         task = new Event(data[2], data[3]);
+                        break;
                 }
                 if (task != null) {
                     if (isDone) {
@@ -95,7 +97,7 @@ public class Storage {
      * @param task The task as a String
      * @throws DukeException When saving the file fails
      */
-    public void addToFile(String task) throws DukeException {
+    public void addToFile(String task) throws DukeException, IOException {
         fileContent.add(task);
         saveToFile();
     }
@@ -105,8 +107,8 @@ public class Storage {
      * @param id The line to be removed
      * @throws DukeException When saving the file fails
      */
-    public void deleteFromFile(int id) throws DukeException {
-        fileContent.remove(id);
+    public void deleteFromFile(int id) throws DukeException, IOException {
+        fileContent.remove(id - 1);
         saveToFile();
     }
 
@@ -116,8 +118,8 @@ public class Storage {
      * @param task new task to be updated
      * @throws DukeException when saving file fails
      */
-    public void updateListTask(int id, String task) throws DukeException {
-        fileContent.set(id, task);
+    public void updateListTask(int id, String task) throws DukeException, IOException {
+        fileContent.set(id - 1, task);
         saveToFile();
     }
 
@@ -131,9 +133,11 @@ public class Storage {
         try {
             return fileContent.get(index - 1);
         } catch (Exception e) {
-            throw new DukeException("Task doesn't exist");
+            throw new DukeException("Task doesn't exist" +
+                    "\nAre you sure you have entered the correct index?");
         }
     }
+
 
     /**
      * Saving the file content to the hard drive

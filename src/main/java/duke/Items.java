@@ -53,8 +53,8 @@ public class Items {
      * @return error message if index is greater than the length of list, else completion message.
      */
     public String markDone(int index) throws DukeException {
-        if (index < 0) {
-            throw new DukeException("Invalid index. Only positive values are accepted.");
+        if (index <= 0) {
+            throw new DukeException("Invalid index. Only non-negative values are accepted.");
         }
         if (list.size() == 0) {
             throw new DukeException("You have 0 tasks. Add some tasks first.");
@@ -78,9 +78,8 @@ public class Items {
         }
         Task task = list.get(index - 1);
         list.remove(index - 1);
-        String output = "Noted. I have removed this task:\n" + task.toString()
+        return "Noted. I have removed this task:\n" + task.toString()
                 + "\n Number of tasks remaining: " + list.size();
-        return output;
 
     }
 
