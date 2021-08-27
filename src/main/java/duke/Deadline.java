@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
     private LocalDate deadline;
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
      * Creates the deadline.
@@ -23,13 +23,13 @@ public class Deadline extends Task {
             this.deadline = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             e.printStackTrace();
-            throw new IllegalArgumentException("Bad date format. Please input as yyyy-mm-dd.");
+            throw new DukeException("Bad date format. Please input as yyyy-mm-dd.");
         }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + deadline.format(formatter) + ")";
+        return "[D]" + super.toString() + " (by: " + deadline.format(FORMATTER) + ")";
     }
 
     /**

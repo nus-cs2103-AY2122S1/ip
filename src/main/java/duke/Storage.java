@@ -11,7 +11,7 @@ import java.io.IOException;
  * Reads and writes to a specified file path.
  */
 public class Storage {
-    private String filePath;
+    private final String FILE_PATH;
 
     /**
      * Create an instance to handle and writing to a specific file.
@@ -19,7 +19,7 @@ public class Storage {
      * @param filePath the path to the file to be read from and written to.
      */
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.FILE_PATH = filePath;
     }
 
     /**
@@ -30,7 +30,7 @@ public class Storage {
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> savedTasks = new ArrayList<>();
-            File file = new File(filePath);
+            File file = new File(FILE_PATH);
             file.getParentFile().mkdirs();
 
             if (file.createNewFile()) return new ArrayList<Task>();
@@ -70,7 +70,7 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         try {
-            FileWriter writer = new FileWriter(this.filePath, false);
+            FileWriter writer = new FileWriter(this.FILE_PATH, false);
             tasks.forEach(task -> {
                 try {
                     writer.write(task.saveData() + "\n");
