@@ -1,6 +1,7 @@
+package storage;
+
 import exceptions.DukeException;
 import tasks.TaskList;
-import utils.StorageElement;
 
 import java.io.File;
 import java.io.FileNotFoundException;

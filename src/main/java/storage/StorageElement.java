@@ -1,4 +1,4 @@
-package utils;
+package storage;
 import java.time.LocalDate;
 
 public class StorageElement {
