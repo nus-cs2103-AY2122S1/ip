@@ -4,6 +4,8 @@ import duke.DukeException;
 import duke.tasks.Task;
 import duke.TaskList;
 
+import java.util.ArrayList;
+
 /**
  * Text UI of the application.
  */
@@ -95,5 +97,23 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-
+    /**
+     * Shows the search results by displaying the matching tasks in
+     * an indexed list.
+     *
+     * @param results ArrayList of matching tasks
+     */
+    public static void showFindResults(ArrayList<Task> results) {
+        System.out.println(DIVIDER);
+        if (results.isEmpty()) {
+            System.out.println("Sorry, no matches found :(");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+            int index = 1;
+            for (Task item : results) {
+                System.out.println(index + ". " + item);
+            }
+        }
+        System.out.println(DIVIDER);
+    }
 }
