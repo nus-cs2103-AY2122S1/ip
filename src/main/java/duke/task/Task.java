@@ -13,6 +13,10 @@ public class Task {
         return taskName;
     }
 
+    public String getStatus() {
+        return status ? "1" : "0";
+    }
+
     public String displayTask() {
         String display;
         if (status) {
