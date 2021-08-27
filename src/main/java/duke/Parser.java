@@ -6,7 +6,7 @@ import main.java.duke.command.*;
  * Parser reads the input by the user and returns the relevant command.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public class Parser {
 

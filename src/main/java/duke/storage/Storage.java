@@ -22,7 +22,7 @@ public interface Storage {
     ArrayList<Task> load() throws IOException;
 
     /**
-     * Change the string in the storage file to indicate that the task is done.
+     * Changea the string in the storage file to indicate that the task is done.
      *
      * @param index the position of the item
      * @throws IOException if there is an error writing to the file

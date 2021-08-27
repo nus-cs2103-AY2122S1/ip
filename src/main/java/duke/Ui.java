@@ -28,7 +28,7 @@ public class Ui {
     }
 
     /**
-     * Print the given string.
+     * Prints the given string.
      *
      * @param str the String to be printed
      */
@@ -48,14 +48,14 @@ public class Ui {
     }
 
     /**
-     * Print welcome message.
+     * Prints welcome message.
      */
     protected void showWelcome() {
         reply(MESSAGE_INTRO);
     }
 
     /**
-     * Print bye message.
+     * Prints bye message.
      */
     protected void showBye() {
         print(MESSAGE_BYE);
@@ -63,7 +63,7 @@ public class Ui {
     }
 
     /**
-     * Read the user input.
+     * Reads the user input.
      */
     protected String readCommand() throws IOException {
         return BUFFERED_READER.readLine();
@@ -84,14 +84,14 @@ public class Ui {
     }
 
     /**
-     * Show the divider line.
+     * Shows the divider line.
      */
     protected void showLine() {
         print(MESSAGE_LINE);
     }
 
     /**
-     * Show error.
+     * Shows error message.
      */
     protected void showError(String message) {
         print(message);

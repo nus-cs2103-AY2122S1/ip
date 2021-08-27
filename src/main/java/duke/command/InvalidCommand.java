@@ -23,7 +23,7 @@ public class InvalidCommand extends Command {
     }
 
     /**
-     * Simply throws an exception.
+     * Throws an exception.
      *
      * @param tasks   the task list
      * @param ui      the ui

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * TaskList stores the list of tasks.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public interface TaskList {
 
@@ -50,7 +50,7 @@ public interface TaskList {
     int count();
 
     /**
-     * Print Tasks containing the specified searchString.
+     * Prints Tasks containing the specified searchString.
      * @param searchString the string to be used for searching
      */
     void printListSearch(String searchString);

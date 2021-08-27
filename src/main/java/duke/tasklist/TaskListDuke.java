@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * TaskList stores the list of tasks.
  *
  * @author Zhen Xuan (Tutorial Group W12)
- * @version CS2103T AY21/22 S2
+ * @version CS2103T AY21/22 S1
  */
 public class TaskListDuke implements TaskList {
     private static final String ADD = "\t Got it. I've added this task:";
@@ -47,7 +47,9 @@ public class TaskListDuke implements TaskList {
     }
 
     /**
-     * Setter to change the done status of the task.
+     * Changes the done status of the task.
+     *
+     * @param index the position of the task to be marked done
      */
     @Override
     public void setDone(int index) {
@@ -57,7 +59,9 @@ public class TaskListDuke implements TaskList {
     }
 
     /**
-     * Delete the task at a specified index.
+     * Deletes the task at a specified index.
+     *
+     * @param index the position of the task to be deleted
      */
     public void delete(int index) {
         Task task = this.LIST.get(index);
@@ -82,6 +86,8 @@ public class TaskListDuke implements TaskList {
 
     /**
      * Prints Tasks on the specified date.
+     *
+     * @param date the specified date
      */
     public void printListDate(String date) {
         LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -101,6 +107,8 @@ public class TaskListDuke implements TaskList {
 
     /**
      * Prints Tasks with containing the specific substring.
+     *
+     * @param str the specified substring
      */
     public void printListSearch(String str) {
         UI.print(LIST_INTRO);

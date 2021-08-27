@@ -76,7 +76,7 @@ public class StorageDuke implements Storage {
     }
 
     /**
-     * Change the string in the storage file to indicate that the task is done.
+     * Changes the string in the storage file to indicate that the task is done.
      *
      * @param index the position of the item
      * @throws IOException if there is an error writing to the file

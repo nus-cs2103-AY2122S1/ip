@@ -25,7 +25,7 @@ public class StorageStub implements Storage {
     }
 
     /**
-     * Mark the task with the given index as done.
+     * Marks the task with the given index as done.
      *
      * @param index the position of the item
      */
@@ -36,7 +36,7 @@ public class StorageStub implements Storage {
     }
 
     /**
-     * Add the task with the given type, description and date.
+     * Adds the task with the given type, description and date.
      *
      * @param type        the type of the task
      * @param description the description of the task
@@ -48,7 +48,7 @@ public class StorageStub implements Storage {
     }
 
     /**
-     * Delete the task with the given index.
+     * Deletes the task with the given index.
      *
      * @param index the position of the task in the list
      */
@@ -58,7 +58,7 @@ public class StorageStub implements Storage {
     }
 
     /**
-     * String representation of the task at the given index for testing.
+     * Returns the string representation of the task at the given index for testing.
      *
      * @param index the position of the task in the list
      * @return the string representation of the task at the given index
