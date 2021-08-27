@@ -83,9 +83,8 @@ public class Event extends Task {
     public String toString() {
         if (time != null) {
             return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern(
-                    "MMM dd yyyy"))
-                    + ", " + time + ")";
-        } else if (time != null) {
+                    "MMM dd yyyy")) + ", " + time + ")";
+        } else if (date != null) {
             return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern(
                     "MMM dd yyyy")) + ")";
         } else {
