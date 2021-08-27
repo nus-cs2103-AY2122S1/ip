@@ -16,7 +16,7 @@ public class Todo extends Task {
 
     @Override
     public String printFormat() {
-        String[] info = {"T", this.isDone ? "1" : "0", this.description};
+        String[] info = {"T", isDone ? "1" : "0", description};
         return String.join(" | ", info);
     }
 }

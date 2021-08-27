@@ -29,7 +29,7 @@ public class Ui {
     }
 
     public void listCountMsg() {
-        int len = this.tasks.count();
+        int len = tasks.count();
         if (len == 1) {
             System.out.println(String.format("Now you have %d task in the list.", len));
         } else {

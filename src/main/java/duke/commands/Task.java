@@ -1,11 +1,12 @@
 package duke.commands;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     public Task(String description, boolean isDone) {
@@ -18,7 +19,7 @@ public abstract class Task {
     }
 
     public void completeTask() {
-        this.isDone = true;
+        isDone = true;
     }
 
     @Override
