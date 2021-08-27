@@ -29,4 +29,8 @@ public class TaskList {
     public int size() {
         return taskList.size();
     }
+
+    public boolean isEmpty() {
+        return taskList.isEmpty();
+    }
 }
