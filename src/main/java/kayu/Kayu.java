@@ -1,7 +1,6 @@
 package kayu;
 
 import kayu.commands.Command;
-import kayu.commands.HelpCommand;
 import kayu.exception.DukeException;
 import kayu.exception.StorageException;
 import kayu.service.ChatBot;
