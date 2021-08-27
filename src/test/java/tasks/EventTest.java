@@ -15,6 +15,6 @@ public class EventTest {
     @Test
     public void toStringTestTime() {
         Event d = new Event("Test", "2020-11-11, 1800", "2020-11-12, 1800");
-        assertEquals(d.toString(), "[E][ ] Test (at: 11 Nov 2020, 6:00:00 pm to 12 Nov 2020, 6:00:00 pm)");
+        assertEquals(d.toString(), "[E][ ] Test (at: 11 Nov 2020, 6:00:00 PM to 12 Nov 2020, 6:00:00 PM)");
     }
 }
