@@ -31,7 +31,7 @@ public final class DueCommand extends Command{
     @Override
     public void execute(TaskList lst, Ui ui, Storage storage) {
         try {
-            lst.anyItemsDue(getInput().get(1));
+            lst.anyTaskDue(getInput().get(1));
         } catch (IndexOutOfBoundsException e) {
             Ui.showInput("Invalid input :(");
             Ui.helperMessage();

@@ -30,7 +30,7 @@ public class Task{
     }
 
     /**
-     * Marks a task as complete by changing
+     * Sets a task as complete by changing
      * the String representation and display a confirmation message.
      */
     public void setIsDone() {
@@ -45,7 +45,7 @@ public class Task{
     }
 
     /**
-     * To mark a task as complete by changing
+     * Marks a task as complete by changing
      * the String representation without displaying confirmation message.
      */
     public void markAsDone() {

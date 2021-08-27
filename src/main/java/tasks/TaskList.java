@@ -16,7 +16,7 @@ public final class TaskList{
     }
 
     /**
-     * To get the String representation of the date/deadline as input by user
+     * Gets the String representation of the date/deadline as input by user
      *
      * @param words the String array representation of the input by user
      * @return the concatenated String that is the date specified by user
@@ -35,7 +35,7 @@ public final class TaskList{
     }
 
     /**
-     * To identify the start of String representation of date of Event
+     * Identifies the start of String representation of date of Event
      * by finding the "/at" expression
      *
      * @param args the String array representation of the input by user
@@ -58,7 +58,7 @@ public final class TaskList{
     }
 
     /**
-     * To identify the start of String representation of date for Deadline
+     * Identifies the start of String representation of date for Deadline
      * by finding the "/by" expression
      *
      * @param arg the String array representation of the input by user
@@ -81,7 +81,7 @@ public final class TaskList{
     }
 
     /**
-     * To create a String representation of date by
+     * Creates a String representation of date by
      * concatenating a String from the starting index to the last index
      *
      * @param s the String array representation of the input by user
@@ -101,7 +101,7 @@ public final class TaskList{
     }
 
     /**
-     * To add things to the stored list of tasks
+     * Adds tasks to the stored list of tasks.
      *
      * @param t the task to be added/e
      */
@@ -114,7 +114,7 @@ public final class TaskList{
     }
 
     /**
-     * To display the entire list of tasks sequentially
+     * Displays the entire list of tasks sequentially
      */
     public void getList() {
         if (tasks != null && !tasks.isEmpty()) {
@@ -130,7 +130,7 @@ public final class TaskList{
     }
 
     /**
-     * To delete a task from the list
+     * Deletes a task from the list
      *
      * @param ind the index of task to be deleted
      */
@@ -144,10 +144,34 @@ public final class TaskList{
     /**
      * Checks if any tasks are due on a particular day.
      *
+     * @param s the date which user wants to check
+     */
+    public void anyTaskDue(String s) {
+        ArrayList<Task> dueItems = new ArrayList<>();
+        if (tasks.isEmpty()) {
+            Ui.showInput("No tasks yet!");
+        } else {
+            String[] date = s.split("/");
+            LocalDate ref = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
+            for (Task t : tasks) {
+                if (!(t instanceof ToDoTask)) {
+                    LocalDate temp = t.getLocalDate();
+                    if (temp != null) {
+                        if (temp.equals(ref)) {
+                            dueItems.add(t);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Finds tasks according to keywords.
+     *
      * @param target the keywords as per input by user
      * @return list containing all tasks that match input keywords
      */
-
     public ArrayList<Task> findTask(String target) {
         ArrayList<Task> matched = new ArrayList<>();
         if (!target.equals("")) {
