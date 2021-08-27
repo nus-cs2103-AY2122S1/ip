@@ -1,6 +1,5 @@
 package aisu.command;
 
-import aisu.AisuException;
 import aisu.Storage;
 import aisu.TaskList;
 import aisu.Ui;
@@ -29,7 +28,7 @@ public class FindCommand extends Command {
         String result = tasklist.findTasksWith(this.input);
         ui.showToUser("Here's what I found:", result);
     }
-    
+
     /**
      * Checks if the command is an Exit command.
      *
