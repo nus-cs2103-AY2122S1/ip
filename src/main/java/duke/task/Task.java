@@ -62,6 +62,17 @@ public class Task {
         }
     }
 
+    /**
+     * Returns whether the name contains the keyword. Note this matches the keyword with anything infront
+     * and behind it. (e.g. four in fourteen will return true)
+     *
+     * @param keyword to be searched in the task name.
+     * @return true if the task name contains the keyword, false if not.
+     */
+    public boolean doesNameContain(String keyword) {
+        return taskName.matches("(.*)" + keyword + "(.*)");
+    }
+
     @Override
     public String toString() {
         return (state ? "[X] " : "[ ] ") +  this.taskName;

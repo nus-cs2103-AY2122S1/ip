@@ -16,46 +16,53 @@ public class TaskList {
         this.tasks = new ArrayList<Task>();
     }
 
-    /**
-     * Adds an Event to the TaskList.
-     *
-     * @param event event to be added to the TaskList
-     */
-    public void add(Event event, boolean print) {
-        this.tasks.add(event);
+//    /**
+//     * Adds an Event to the TaskList.
+//     *
+//     * @param event event to be added to the TaskList
+//     */
+//    public void add(Event event, boolean print) {
+//        this.tasks.add(event);
+//        if (print) {
+//            Ui.addTask(event);
+//            Ui.numberOfTasks(tasks);
+//        }
+//    }
+//
+//
+//    /**
+//     * Adds a deadline to the TaskList.
+//     *
+//     * @param deadline deadline to be added to the TaskList
+//     */
+//    public void add(Deadline deadline, boolean print) {
+//        this.tasks.add(deadline);
+//        if (print) {
+//            Ui.addTask(deadline);
+//            Ui.numberOfTasks(tasks);
+//        }
+//    }
+//
+//    /**
+//     * Adds a toDo to the TaskList.
+//     *
+//     * @param toDo deadline to be added to the TaskList
+//     */
+//    public void add(ToDo toDo, boolean print) {
+//        this.tasks.add(toDo);
+//        if (print) {
+//            Ui.addTask(toDo);
+//            Ui.numberOfTasks(tasks);
+//        }
+//    }
+
+    public void add(Task task, boolean print) {
+        this.tasks.add(task);
         if (print) {
-            Ui.addTask(event);
+            Ui.addTask(task);
             Ui.numberOfTasks(tasks);
         }
     }
-
-
-    /**
-     * Adds a deadline to the TaskList.
-     *
-     * @param deadline deadline to be added to the TaskList
-     */
-    public void add(Deadline deadline, boolean print) {
-        this.tasks.add(deadline);
-        if (print) {
-            Ui.addTask(deadline);
-            Ui.numberOfTasks(tasks);
-        }
-    }
-
-    /**
-     * Adds a toDo to the TaskList.
-     *
-     * @param toDo deadline to be added to the TaskList
-     */
-    public void add(ToDo toDo, boolean print) {
-        this.tasks.add(toDo);
-        if (print) {
-            Ui.addTask(toDo);
-            Ui.numberOfTasks(tasks);
-        }
-    }
-
     /**
      * Finishes a task at a given index.
      *
@@ -95,5 +102,34 @@ public class TaskList {
         Task item = this.tasks.remove(index - 1);
         Ui.deleteTask(item);
         Ui.remainingTasks(tasks);
+    }
+
+    /**
+     * Searches for a task given a keyword.
+     */
+    public void searchTask(String keyword) {
+        TaskList matches = new TaskList();
+        for (Task t : tasks) {
+            if (t.doesNameContain(keyword)) {
+                matches.add(t, false);
+            }
+        }
+        matches.displaySearchResults();
+    }
+
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return number of tasks in the list.
+     */
+    private int numTasks() {
+        return tasks.size();
+    }
+
+    /**
+     * Displays search results.
+     */
+    public void displaySearchResults() {
+        Ui.listTasksSearchResults(tasks);
     }
 }

@@ -114,4 +114,27 @@ public class Ui {
     public static void showLine() {
         System.out.println("    ____________________________________________________________");
     }
+
+    /**
+     * Given a task list which is the result of a search operation, prints out the results.
+     *
+     * @param taskList task list comprising matching search terms.
+     */
+    public static void listTasksSearchResults(ArrayList<Task> taskList) {
+        if (taskList.size() == 0) {
+            System.out.println(DEFAULT_SPACES + "There were no search results. Try another keyword!");
+        } else {
+            System.out.println(DEFAULT_SPACES + "Here are the matching tasks in your list:");
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println(INDENTED_SPACES + (i + 1) + "." + taskList.get(i));
+            }
+        }
+    }
+
+    /**
+     * Provides the hint for users when they use the find command.
+     */
+    public static void findHint() {
+        System.out.println(DEFAULT_SPACES + "Add the keyword at the back of find!");
+    }
 }
