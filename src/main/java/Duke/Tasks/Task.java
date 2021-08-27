@@ -43,6 +43,14 @@ public class Task {
     }
 
     /**
+     * The method of getDescription
+     * @return String
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * The formatChange method for change the done x -> 1 in Writing record tasks.txt version
      * @return String
      */

@@ -51,7 +51,7 @@ public class TaskList {
     }
 
     /**
-     * The method of get task
+     * The method of get
      * @param i
      * @return Task object
      */
