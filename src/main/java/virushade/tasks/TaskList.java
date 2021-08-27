@@ -112,6 +112,7 @@ public class TaskList {
                 throw new VirushadeException("Please enter an integer greater than 0.");
             } else if (index <= listCount) {
                 Task deletedTask = TASKS.get(index - 1);
+                TASKS.remove(index - 1);
                 deletedTask.deleteMessage();
                 listCount--;
                 System.out.printf("You have %d tasks in the list.\n", listCount);
@@ -179,6 +180,10 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Prints out all the tasks that have input text as a substring.
+     * @param text The input search text.
+     */
     public static void find(String text) {
         System.out.println(findFromList(text));
     }
@@ -187,7 +192,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
         int counter = 1;
         for(int i = 0; i < listCount; i++) {
-            String taskName = tasks.get(i).toString();
+            String taskName = TASKS.get(i).toString();
             if (taskName.contains(text)) {
                 String foundTaskName = counter + "." + taskName;
                 counter++;
