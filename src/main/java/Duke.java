@@ -1,6 +1,17 @@
 import java.util.*;
 
 public class Duke {
+
+    // List to store all user inputs
+    private TaskList taskList;
+    private final Storage storage;
+
+    public Duke(){
+        storage = new Storage();
+        taskList = new TaskList();
+        taskList.loadFromStorage(storage.load());
+    }
+    private static final String LINE = "    ____________________________________________________________";
     public static void main(String[] args) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -10,15 +21,15 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
 
         // Greetings
-        System.out.println("    ____________________________________________________________");
+        System.out.println(LINE);
         System.out.println("     Hello! I'm Duke");
         System.out.println("     What can I do for you?");
-        System.out.println("    ____________________________________________________________");
+        System.out.println(LINE);
 
-        // List to store all user inputs
-        List<Task> list = new ArrayList<>();
 
         // Take in user input
+        Duke duke = new Duke();
+        TaskList taskList = duke.taskList;
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String str = sc.nextLine();
@@ -26,12 +37,12 @@ public class Duke {
             if (!str.equals("list") && !str.contains("done")) {
                 if (str.contains("todo")) {
                     if (str.length() == 4) {
-                        System.out.println("    ____________________________________________________________");
+                        System.out.println(LINE);
                         System.out.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
-                        System.out.println("    ____________________________________________________________");
+                        System.out.println(LINE);
                         continue;
                     }
-                    list.add(new ToDo(str.substring(5)));
+                    taskList.addTask(new ToDo(str.substring(5), false));
                     taskAdded = true;
                 } else if (str.contains("deadline")) {
                     String description = "";
@@ -48,17 +59,17 @@ public class Duke {
                         else by += s + " ";
                     }
                     if (description.equals("")) {
-                        System.out.println("    ____________________________________________________________");
+                        System.out.println(LINE);
                         System.out.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
-                        System.out.println("    ____________________________________________________________");
+                        System.out.println(LINE);
                     } else if (by.equals("")) {
-                        System.out.println("    ____________________________________________________________");
+                        System.out.println(LINE);
                         System.out.println("     ☹ OOPS!!! The by of a deadline cannot be empty.");
-                        System.out.println("    ____________________________________________________________");
+                        System.out.println(LINE);
                     }
                     description = description.substring(0, description.length() - 1);
                     by = by.substring(0, by.length() - 1);
-                    list.add(new Deadline(description, by));
+                    taskList.addTask(new Deadline(description, false, by));
                     taskAdded = true;
                 } else if (str.contains("event")) {
                     String description = "";
@@ -75,63 +86,61 @@ public class Duke {
                         else at += s + " ";
                     }
                     if (description.equals("")) {
-                        System.out.println("    ____________________________________________________________");
+                        System.out.println(LINE);
                         System.out.println("     ☹ OOPS!!! The description of a event cannot be empty.");
-                        System.out.println("    ____________________________________________________________");
+                        System.out.println(LINE);
                     } else if (at.equals("")) {
-                        System.out.println("    ____________________________________________________________");
+                        System.out.println(LINE);
                         System.out.println("     ☹ OOPS!!! The at of a event cannot be empty.");
-                        System.out.println("    ____________________________________________________________");
+                        System.out.println(LINE);
                     }
                     description = description.substring(0, description.length() - 1);
                     at = at.substring(0, at.length() - 1);
-                    list.add(new Event(description, at));
+                    taskList.addTask(new Event(description, false, at));
                     taskAdded = true;
                 }
                 if (taskAdded) {
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println(LINE);
                     System.out.println("     Got it. I've added this task:");
-                    System.out.println("       " + list.get(list.size() - 1));
-                    System.out.println("     Now you have " + list.size() + " tasks in the list.");
-                    System.out.println("    ____________________________________________________________");
+                    System.out.println("       " + taskList.getTask(taskList.size()).getStatus());
+                    System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
+                    System.out.println(LINE);
                     continue;
                 }
             }
             if (str.equals("bye")) {
-                System.out.println("    ____________________________________________________________");
+                System.out.println(LINE);
                 System.out.println("     Bye. Hope to see you again soon!");
-                System.out.println("    ____________________________________________________________");
+                System.out.println(LINE);
                 break;
             } else if (str.equals("list")) {
-                System.out.println("    ____________________________________________________________");
-                for (int i = 0; i < list.size(); i++) {
-                    System.out.println("     " + (i+1) + "." + list.get(i));
+                System.out.println(LINE);
+                for (int i = 1; i <= taskList.size(); i++) {
+                    System.out.println("     " + i + "." + taskList.getTask(i).getStatus());
                 }
-                System.out.println("    ____________________________________________________________");
-                continue;
-            }
-            else if (str.contains("done")){
+                System.out.println(LINE);
+                //continue;
+            } else if (str.contains("done")){
                 int taskNumber = Integer.valueOf(str.substring(5));
-                list.get(taskNumber-1).setIsDone(true);
-                System.out.println("    ____________________________________________________________");
+                taskList.markAsDone(taskNumber);
+                System.out.println(LINE);
                 System.out.println("     Nice! I've marked this task as done: ");
-                System.out.println("       " + list.get(taskNumber-1));
-                System.out.println("    ____________________________________________________________");
-                continue;
+                System.out.println("       " + taskList.getTask(taskNumber).getStatus());
+                System.out.println(LINE);
+                //continue;
             } else if (str.contains("delete")){
                 int taskNumber = Integer.valueOf(str.substring(7));
-                System.out.println("    ____________________________________________________________");
+                System.out.println(LINE);
                 System.out.println("     Noted. I've removed this task: ");
-                System.out.println("       " + list.get(taskNumber-1));
-                System.out.println("     Now you have 4 tasks in the list.");
-                System.out.println("    ____________________________________________________________");
-                list.remove(taskNumber-1);
-                continue;
+                System.out.println("       " + taskList.deleteTask(taskNumber).getStatus());
+                System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
+                System.out.println(LINE);
+                //continue;
             }
             else {
-                System.out.println("    ____________________________________________________________");
+                System.out.println(LINE);
                 System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                System.out.println("    ____________________________________________________________");
+                System.out.println(LINE);
             }
         }
     }
