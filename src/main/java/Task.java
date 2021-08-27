@@ -1,32 +1,54 @@
+//make abstract class?
 public class Task {
     private boolean isDone;
     private String taskSummary;
-
-    public static Task of(String taskSummary) {
-        return new Task(taskSummary);
-    }
 
     Task(String taskSummary) {
         this.taskSummary = taskSummary;
         this.isDone = false;
     }
 
+    public static Task parseLine(String line) {
+        String taskSymbol = Character.toString(line.charAt(0));
+        switch (taskSymbol) {
+            case "T":
+                System.out.println("T entered");
+                return ToDo.parse(line);
+            case "E":
+                return Event.parse(line);
+            case "D":
+                System.out.println("D entered");
+                return Deadline.parse(line);
+            default:
+                throw new IllegalArgumentException("Should not enter here");
+        }
+    }
     public void markCompleted() {
         this.isDone = true;
     }
 
-    //getters
+    public String completeStatus() {
+        return this.isDone ? "x" : "";
+    }
+
     public boolean isCompleted() {
         return this.isDone;
     }
+
     public String getTaskSummary() {
         return this.taskSummary;
     }
 
-//    public abstract String giveTaskCategory();
+    //only for purpose of polymorphism, change to abstract?
+    public String toStorageFormat() {
+        return String.format(
+            "? | %d | %s ",
+            this.isCompleted() ? 1 : 0,this.getTaskSummary()
+        );
+    }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.isDone ? "x" : "",this.taskSummary);
+        return String.format("[GENERIC TASK] [%s] %s", this.completeStatus(),this.taskSummary);
     }
 }

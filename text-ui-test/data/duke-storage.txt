@@ -1,0 +1,2 @@
+E | 0 | party | house
+E | 0 | work | night
