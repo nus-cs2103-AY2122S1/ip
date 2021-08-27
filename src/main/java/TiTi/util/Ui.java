@@ -2,6 +2,10 @@ package TiTi.util;
 
 import TiTi.task.Task;
 
+/**
+ * Control the interaction with the user.
+ * Prints to the user interface.
+ */
 public class Ui {
     private static final String STARTER_NORMAL =   "   (=^ ･ｪ･^=) < ";
     private static final String STARTER_BUFFER =   "                ";
@@ -14,7 +18,12 @@ public class Ui {
     private Parser parser;
     private boolean isContinue;
 
-    
+    /**
+     * Constructor for Ui class.
+     *
+     * @param savedHistory loads and writes to the saved data
+     * @param taskList list of current tasks
+     */
     public Ui(SavedHistory savedHistory, TaskList taskList) {
         this.savedHistory = savedHistory;
         this.taskList = taskList;
@@ -22,18 +31,26 @@ public class Ui {
         isContinue = true;
     }
 
-
+    /**
+     * Prints Welcome message when user first run programme.
+     */
     public void welcome() {
         System.out.println(STARTER_NORMAL + "Hello! I'm TiTi~ ");
         System.out.println(STARTER_BUFFER + "What would you like to do nya? ");
     }
 
-
+    /**
+     * Return false if programme has terminated. True if otherwise.
+     *
+     * @return if continue with programme
+     */
     public boolean isContinue() {
         return isContinue;
     }
 
-
+    /**
+     * Prints the response for the user command onto the user interface.
+     */
     public void userCommand() {
         Response response = parser.cue();
         Task task = response.task;
@@ -102,7 +119,7 @@ public class Ui {
     }
 
 
-    static String printTaskCount(TaskList taskList) {
+    private String printTaskCount(TaskList taskList) {
         if (taskList.size() == 1) {
             return "We now have " + taskList.size() + " task on our list.";
         } else {

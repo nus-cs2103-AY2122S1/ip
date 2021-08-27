@@ -10,13 +10,20 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-
+/**
+ * Loads and tasks from the file when programme starts
+ * and save tasks to the file when programme terminates.
+ */
 public class SavedHistory {
 
     protected static File DATA_FOLDER = new File("./src/main/data");
     protected static File TXT_FILE = new File("./src/main/data/TiTi.txt");
     protected ArrayList<Task> savedTasks = new ArrayList<>();
 
+    /**
+     * Constructor for SavedHistory class.
+     * Load tasks from data file.
+     */
     public SavedHistory() {
         checkFile();
         try {
@@ -92,11 +99,21 @@ public class SavedHistory {
     }
 
 
+    /**
+     * Produce the list of tasks loaded from the data file.
+     *
+     * @return list of tasks
+     */
     public ArrayList<Task> readHistory() {
         return savedTasks;
     }
 
 
+    /**
+     * Write the new list of tasks into data history file.
+     *
+     * @param newTasks list of tasks to be recorded
+     */
     public void saveHistory(TaskList newTasks) {
         try {
             FileWriter fileWriter = new FileWriter(TXT_FILE);

@@ -7,18 +7,32 @@ import TiTi.task.ToDo;
 
 import java.util.Scanner;
 
-
+/**
+ * Make sense of user command, and return Response
+ * to tell Ui how to interact with user.
+ */
 public class Parser {
     private SavedHistory savedHistory;
     private TaskList taskList;
     private Scanner sc;
 
+    /**
+     * Constructor for Parser class.
+     *
+     * @param savedHistory loads and writes to the saved data
+     * @param taskList list of current tasks
+     */
     public Parser(SavedHistory savedHistory, TaskList taskList) {
         this.savedHistory = savedHistory;
         this.taskList = taskList;
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Ask and interpret user command, and update list as required.
+     *
+     * @return Response object to tell Ui how to respons to user command
+     */
     public Response cue() {
         String input = sc.nextLine();
         String cue = input.split(" ", 2)[0];
@@ -89,6 +103,5 @@ public class Parser {
             return new Response(Response.Cue.UNRECOGNISED, null);
         }
     }
-
 
 }
