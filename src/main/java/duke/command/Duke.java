@@ -1,15 +1,14 @@
 package duke.command;
 
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Storage;
-
 import java.io.IOException;
-
 import java.util.Calendar;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Storage;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * This class is an implementation of Duke customised to be named LOTTERY-A
@@ -62,7 +61,7 @@ public class Duke {
     }
 
     /** Saves task to file then exits. */
-    protected void dukeBye() throws DukeException{
+    protected void dukeBye() throws DukeException {
         Ui.showByeMessage();
         try {
             storage.save(tasks);
@@ -114,7 +113,7 @@ public class Duke {
      * @param desc Description of Deadline Object.
      * @param cal Calendar set to dueBy date of Deadline.
      */
-    protected void dukeDeadline(String desc, Calendar cal){
+    protected void dukeDeadline(String desc, Calendar cal) {
         Deadline deadline = new Deadline(desc, cal);
         tasks.add(deadline);
         Ui.showAddTaskMessage(deadline.toString(), tasks.size());
@@ -126,13 +125,13 @@ public class Duke {
      * @param desc Description of Event Object.
      * @param cal Calendar set to time of Event.
      */
-    protected void dukeEvent(String desc, Calendar cal){
+    protected void dukeEvent(String desc, Calendar cal) {
         Event event = new Event(desc, cal);
         tasks.add(event);
         Ui.showAddTaskMessage(event.toString(), tasks.size());
     }
 
-    protected void dukeFind(String desc){
+    protected void dukeFind(String desc) {
         tasks.find(desc);
     }
 

@@ -1,16 +1,14 @@
 package duke.task;
 
-import java.io.File;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.ArrayList;
 
 /**
@@ -34,8 +32,8 @@ public class Storage {
     public Storage(String txtFile) throws IOException {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "duke", "dir");
-        txtPath = new StringBuilder().append(home).append("\\duke").
-                append("\\dir").append("\\" + txtFile).toString();
+        txtPath = new StringBuilder().append(home).append("\\duke")
+                .append("\\dir").append("\\" + txtFile).toString();
         boolean directoryExists = Files.exists(path);
 
         if (!directoryExists) {
@@ -54,11 +52,11 @@ public class Storage {
      *
      * @throws IOException if file cannot be read from.
      */
-    public ArrayList<String> load() throws IOException{
+    public ArrayList<String> load() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(txtPath));
         ArrayList<String> loadedTasks = new ArrayList<>();
         String s;
-        while((s = reader.readLine()) != null) {
+        while ((s = reader.readLine()) != null) {
             loadedTasks.add(s);
         }
         reader.close();

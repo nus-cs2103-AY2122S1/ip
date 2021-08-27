@@ -2,7 +2,6 @@ package duke.command;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -24,7 +23,7 @@ public class MyParser {
      * @param duke Duke instance referred to.
      * @throws DukeException if line inputted by the user is formatted incorrectly.
      */
-    public void parse(String command,String description,Duke duke) throws DukeException {
+    public void parse(String command, String description, Duke duke) throws DukeException {
         String userDescription = description.trim();
         switch (command) {
         case "bye":

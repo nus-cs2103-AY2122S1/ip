@@ -11,10 +11,11 @@ import java.util.Calendar;
  *
  * @author Kishendran Vendar Kon (Group G05)
  */
-public class Event extends Task{
+public class Event extends Task {
     /** String representing time of Event. */
-    protected Calendar atCalendar;
     protected static SimpleDateFormat formatter = new SimpleDateFormat("MMM dd yyyy hh:mm aaa");
+    protected Calendar atCalendar;
+
 
     /** Default constructor. */
     public Event(String description, Calendar atCalendar) {

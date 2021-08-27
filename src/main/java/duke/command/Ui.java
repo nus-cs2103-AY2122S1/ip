@@ -10,7 +10,7 @@ package duke.command;
  */
 public class Ui {
 
-    private static String DOTTED_LINES = "-".repeat(80);
+    private static final String DOTTED_LINES = "-".repeat(80);
 
     /** Shows welcome message. */
     public static void showWelcomeMessage() {
