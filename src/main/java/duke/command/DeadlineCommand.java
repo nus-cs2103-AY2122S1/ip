@@ -48,6 +48,6 @@ public class DeadlineCommand extends Command {
         }
 
         Deadline deadline = new Deadline(name, date);
-        Duke.taskList.addTask(deadline);
+        Duke.getTaskList().addTask(deadline);
     }
 }

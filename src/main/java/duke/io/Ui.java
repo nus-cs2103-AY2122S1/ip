@@ -76,7 +76,7 @@ public class Ui {
     public void greetReturningUser() {
         addMessage("Welcome back! How may I help you?\n", TextColor.DEFAULT);
         addMessage("Tasks in list:\n", TextColor.DEFAULT);
-        Duke.taskList.list();
+        Duke.getTaskList().list();
         print();
         prompt();
     }

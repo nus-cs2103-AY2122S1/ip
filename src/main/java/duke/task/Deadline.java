@@ -5,6 +5,11 @@ import java.time.LocalDate;
 public class Deadline extends Task {
     private LocalDate date;
 
+    /**
+     * Constructor for deadline, setting its name and date, and marking it not done.
+     * @param name name of the deadline
+     * @param date date the deadline is by
+     */
     public Deadline(String name, LocalDate date) {
         super(name);
         this.date = date;

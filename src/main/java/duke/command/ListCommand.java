@@ -14,6 +14,6 @@ public class ListCommand extends Command {
      */
     @Override
     public void parse(String input) {
-        Duke.taskList.list();
+        Duke.getTaskList().list();
     }
 }

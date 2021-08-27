@@ -6,6 +6,11 @@ public abstract class Task {
     protected boolean isDone;
     protected String name;
 
+    /**
+     * Constructor for a Task that sets its name and sets it to not done.
+     *
+     * @param name name of the task
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
@@ -86,6 +91,6 @@ public abstract class Task {
      * @return String to be saved as a line in save.csv
      */
     public String getSaveString() {
-        return (isDone ? "o," : "x,") +  name;
+        return (isDone ? "o," : "x,") + name;
     }
 }

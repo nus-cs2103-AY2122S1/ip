@@ -27,6 +27,6 @@ public class FindCommand extends Command {
             throw new DukeException("Please input a search string.");
         }
 
-        Duke.taskList.find(data);
+        Duke.getTaskList().find(data);
     }
 }

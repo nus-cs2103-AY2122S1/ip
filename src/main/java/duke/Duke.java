@@ -2,18 +2,39 @@ package duke;
 
 import java.util.Scanner;
 
-import duke.task.TaskList;
+import duke.exception.DukeException;
 import duke.io.Parser;
 import duke.io.Storage;
-import duke.io.Ui;
 import duke.io.TextColor;
-import duke.exception.DukeException;
+import duke.io.Ui;
+import duke.task.TaskList;
+
 
 public class Duke {
-    public static TaskList taskList = new TaskList();
-    public static Parser parser = new Parser();
-    public static Storage storage = new Storage("save.csv");
-    public static Ui ui = new Ui();
+    private static TaskList taskList = new TaskList();
+    private static Parser parser = new Parser();
+    private static Storage storage = new Storage("save.csv");
+    private static Ui ui = new Ui();
+
+    public static TaskList getTaskList() {
+        return taskList;
+    }
+
+    public static void setTaskList(TaskList taskList) {
+        Duke.taskList = taskList;
+    }
+
+    public static Parser getParser() {
+        return parser;
+    }
+
+    public static Storage getStorage() {
+        return storage;
+    }
+
+    public static Ui getUi() {
+        return ui;
+    }
 
     /**
      * The main logic of the program. Handles initialising and user input.

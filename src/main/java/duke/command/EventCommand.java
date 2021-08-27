@@ -49,6 +49,6 @@ public class EventCommand extends Command {
         }
 
         Event event = new Event(name, date);
-        Duke.taskList.addTask(event);
+        Duke.getTaskList().addTask(event);
     }
 }

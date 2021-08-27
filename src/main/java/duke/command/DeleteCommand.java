@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Duke;
+import duke.exception.DukeException;
 
 public class DeleteCommand extends Command {
     public DeleteCommand() {
@@ -24,12 +24,12 @@ public class DeleteCommand extends Command {
         String data = input.substring(getCommandLength()).strip();
 
         if (data.equals("done")) {
-            Duke.taskList.deleteDone();
+            Duke.getTaskList().deleteDone();
             return;
         }
 
         if (data.equals("expired")) {
-            Duke.taskList.deleteExpired();
+            Duke.getTaskList().deleteExpired();
             return;
         }
 
@@ -40,6 +40,6 @@ public class DeleteCommand extends Command {
             throw new DukeException("Please input a number");
         }
 
-        Duke.taskList.deleteTask(idx);
+        Duke.getTaskList().deleteTask(idx);
     }
 }

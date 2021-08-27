@@ -1,7 +1,7 @@
 package duke.io;
 
-import duke.exception.DukeException;
 import duke.command.Commands;
+import duke.exception.DukeException;
 
 public class Parser {
     /**

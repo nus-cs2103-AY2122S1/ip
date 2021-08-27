@@ -4,17 +4,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.Duke;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.task.TaskList;
 import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 public class Storage {
     private final File saveFile;
@@ -35,20 +34,20 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String[] datas = sc.nextLine().split(",");
                 switch (datas[0]) {
-                    case "t":
-                        tasks.add(ToDo.load(datas));
-                        break;
-                    case "d":
-                        tasks.add(Deadline.load(datas));
-                        break;
-                    case "e":
-                        tasks.add(Event.load(datas));
-                        break;
-                    default:
-                        break;
+                case "t":
+                    tasks.add(ToDo.load(datas));
+                    break;
+                case "d":
+                    tasks.add(Deadline.load(datas));
+                    break;
+                case "e":
+                    tasks.add(Event.load(datas));
+                    break;
+                default:
+                    break;
                 }
             }
-            Duke.taskList = new TaskList(tasks);
+            Duke.setTaskList(new TaskList(tasks));
             return true;
         } catch (FileNotFoundException e) {
             return false;

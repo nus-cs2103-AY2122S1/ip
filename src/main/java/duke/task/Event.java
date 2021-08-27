@@ -5,6 +5,11 @@ import java.time.LocalDate;
 public class Event extends Task {
     private LocalDate date;
 
+    /**
+     * Constructor for event, setting its name and date, and marking it not done.
+     * @param name name of the event
+     * @param date date the event is at
+     */
     public Event(String name, LocalDate date) {
         super(name);
         this.date = date;

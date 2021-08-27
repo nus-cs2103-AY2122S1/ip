@@ -30,6 +30,6 @@ public class DoneCommand extends Command {
             throw new DukeException("Please input a number");
         }
 
-        Duke.taskList.doTask(idx);
+        Duke.getTaskList().doTask(idx);
     }
 }

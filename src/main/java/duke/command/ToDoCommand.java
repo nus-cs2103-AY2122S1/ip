@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.Duke;
-import duke.task.ToDo;
 import duke.exception.DukeException;
+import duke.task.ToDo;
 
 public class ToDoCommand extends Command {
     public ToDoCommand() {
@@ -29,6 +29,6 @@ public class ToDoCommand extends Command {
         }
 
         ToDo toDo = new ToDo(name);
-        Duke.taskList.addTask(toDo);
+        Duke.getTaskList().addTask(toDo);
     }
 }

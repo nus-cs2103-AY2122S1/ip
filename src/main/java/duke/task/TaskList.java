@@ -30,7 +30,7 @@ public class TaskList {
         tasks.add(task);
         save();
 
-        Duke.ui.addMessage("Got it. I've added this task:\n  "
+        Duke.getUi().addMessage("Got it. I've added this task:\n  "
                 + task.toString() + "\n" + getTaskLengthReport(), TextColor.DEFAULT);
     }
 
@@ -47,7 +47,7 @@ public class TaskList {
         task.doTask();
         save();
 
-        Duke.ui.addMessage("Nice! I've marked this task as done:\n  "
+        Duke.getUi().addMessage("Nice! I've marked this task as done:\n  "
                 + task.toString(), TextColor.DEFAULT);
     }
 
@@ -65,7 +65,7 @@ public class TaskList {
         tasks.remove(idx);
         save();
 
-        Duke.ui.addMessage("Noted! I've removed this task:\n  "
+        Duke.getUi().addMessage("Noted! I've removed this task:\n  "
                 + task.toString() + "\n" + getTaskLengthReport(), TextColor.DEFAULT);
     }
 
@@ -78,7 +78,7 @@ public class TaskList {
     public void deleteDone() throws DukeException {
         tasks.removeIf(Task::isDone);
         save();
-        Duke.ui.addMessage("Noted! I've removed all completed tasks.\n"
+        Duke.getUi().addMessage("Noted! I've removed all completed tasks.\n"
                 + getTaskLengthReport(), TextColor.DEFAULT);
     }
 
@@ -91,7 +91,7 @@ public class TaskList {
     public void deleteExpired() throws DukeException {
         tasks.removeIf(Task::isExpired);
         save();
-        Duke.ui.addMessage("Noted! I've removed all expired tasks.\n"
+        Duke.getUi().addMessage("Noted! I've removed all expired tasks.\n"
                 + getTaskLengthReport(), TextColor.DEFAULT);
     }
 
@@ -101,11 +101,11 @@ public class TaskList {
     public void list() {
         int size = tasks.size();
         if (size == 0) {
-            Duke.ui.addMessage("No tasks yet!", TextColor.DEFAULT);
+            Duke.getUi().addMessage("No tasks yet!", TextColor.DEFAULT);
         } else {
             for (int i = 0; i < size; i++) {
                 Task task = tasks.get(i);
-                Duke.ui.addMessage((i + 1) + ". " + task.toString()
+                Duke.getUi().addMessage((i + 1) + ". " + task.toString()
                         + (i == size - 1 ? "" : "\n"), task.getListColor());
             }
         }
@@ -120,21 +120,21 @@ public class TaskList {
     public void find(String searchString) {
         int size = tasks.size();
         int foundCount = 0;
-        Duke.ui.addMessage("Here are the matching tasks in your list:", TextColor.DEFAULT);
+        Duke.getUi().addMessage("Here are the matching tasks in your list:", TextColor.DEFAULT);
 
         for (int i = 0; i < size; i++) {
             Task task = tasks.get(i);
             // case insensitive search
             if (task.getName().toLowerCase().contains(searchString.toLowerCase())) {
                 // print each task indented, in a new line
-                Duke.ui.addMessage("\n  " + (i + 1) + ". " + task.toString(), task.getListColor());
+                Duke.getUi().addMessage("\n  " + (i + 1) + ". " + task.toString(), task.getListColor());
                 foundCount++;
             }
         }
 
         if (foundCount == 0) {
-            Duke.ui.resetMessage();
-            Duke.ui.addMessage("No matching tasks!", TextColor.DEFAULT);
+            Duke.getUi().resetMessage();
+            Duke.getUi().addMessage("No matching tasks!", TextColor.DEFAULT);
         }
     }
 
@@ -170,7 +170,7 @@ public class TaskList {
      * @throws DukeException I/O exception from saving
      */
     private void save() throws DukeException {
-        Duke.storage.save(convertToSaveString());
+        Duke.getStorage().save(convertToSaveString());
     }
 
     /**
