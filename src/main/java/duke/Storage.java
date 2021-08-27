@@ -9,13 +9,31 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage is the class that deals with loading tasks from the file
+ * on the hard drive and saving tasks to the file on the hard drive.
+ */
 public class Storage {
     private Path savePath;
 
+    /**
+     * Class constructor.
+     *
+     * @param filepath  filepath to the save file.
+     */
     public Storage(String filepath) {
         savePath = Path.of(System.getProperty("user.dir"), filepath);
     }
 
+    /**
+     * Loads save data from the save file, if it exists.
+     * If a save file does not exist, then a new save file
+     * will be created.
+     *
+     * @return ArrayList of saved Tasks.
+     * @throws LoadingException  if an IOException occurs while loading
+     *                the save file.
+     */
     public ArrayList<Task> load() throws LoadingException {
         if (Files.exists(savePath))
             return loadTasks(savePath);
@@ -66,6 +84,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves all the tasks and their information onto the save file.
+     *
+     * @param tasks  TaskList containing the tasks to be saved.
+     */
     public void saveTasks(TaskList tasks) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(savePath);

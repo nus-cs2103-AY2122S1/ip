@@ -3,8 +3,19 @@ package duke;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * Parser is the class that deals with making sense of the user commands.
+ */
 public class Parser {
 
+    /**
+     * Returns type of command given in the specified user input.
+     *
+     * @param userInput the whole line of command from the user.
+     * @return the type of command requested.
+     * @throws UnsupportedOperationException  if the user entered a
+     *                command that is not recognized.
+     */
     public static CommandType parseCommandType(String userInput)
             throws UnsupportedOperationException {
 
@@ -31,6 +42,16 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates a new task based on the user's inputs.
+     * The user command given is expected to be "todo", "deadline"
+     * or "event".
+     *
+     * @param userInput the whole line of command from the user.
+     * @return the new task that was requested.
+     * @throws MissingInputException  if the user did not enter any
+     *                other task details after the command word.
+     */
     public static Task parseNewTask(String userInput) throws MissingInputException {
         Scanner userInputScanner = new Scanner((userInput));
         TaskType taskType = null;
@@ -65,6 +86,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the task number specified in the user command.
+     * The user command given is expected to be "done" or "delete".
+     *
+     * @param userInput the whole line of command from the user.
+     * @return the number of the task to execute the command on.
+     */
     public static int parseTaskNum(String userInput) {
         Scanner userInputScanner = new Scanner(userInput);
         userInputScanner.next();
