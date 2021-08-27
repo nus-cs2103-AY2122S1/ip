@@ -1,10 +1,9 @@
-package duke;
+package duke.io;
 
-import duke.tasks.Task;
+import duke.data.TaskList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class Ui {
     public Ui() {

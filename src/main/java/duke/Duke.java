@@ -1,6 +1,10 @@
 package duke;
 
-import duke.tasks.Command;
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.io.Command;
+import duke.io.Parser;
+import duke.io.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;

@@ -1,7 +1,7 @@
-package duke;
+package duke.io;
 
-import duke.tasks.Command;
-import duke.tasks.Command.CommandName;
+import duke.io.Command.CommandName;
+import duke.DukeException;
 
 import java.util.Scanner;
 

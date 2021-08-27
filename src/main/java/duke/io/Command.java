@@ -1,4 +1,4 @@
-package duke.tasks;
+package duke.io;
 
 public class Command {
     public enum CommandName {
