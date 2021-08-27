@@ -15,16 +15,16 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Storage {
-    private static String fileDirectory = "./data";
-    private static String filePath = "./data/duke.txt";
+    private static String FILE_DIRECTORY = "./data";
+    private static String FILE_PATH = "./data/duke.txt";
 
     public static void createFile() {
         try {
-            Path path = Paths.get(fileDirectory);
+            Path path = Paths.get(FILE_DIRECTORY);
             if (!Files.isDirectory(path)) {
                 Files.createDirectory(path);
             }
-            Path file = Paths.get(filePath);
+            Path file = Paths.get(FILE_PATH);
             if (!Files.exists(file)) {
                 Files.createFile(file);
             }
@@ -37,7 +37,7 @@ public class Storage {
         Storage.createFile();
         List<Task> list = new ArrayList<>();
         try {
-            Scanner sc = new Scanner(new File(filePath));
+            Scanner sc = new Scanner(new File(FILE_PATH));
             while (sc.hasNext()) {
                 String task = sc.nextLine();
                 String[] values = task.split(" \\| ");
@@ -46,7 +46,8 @@ public class Storage {
                     list.add(new ToDo(values[2], values[1].equals("1")));
                     break;
                 case "E":
-                    LocalDateTime dateTime = LocalDateTime.parse(values[3], DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+                    LocalDateTime dateTime = LocalDateTime.parse(values[3], DateTimeFormatter
+                            .ofPattern("dd MMM yyyy HH:mm"));
                     list.add(new Event(values[2], values[1].equals("1"), dateTime));
                     break;
                 case "D":
@@ -64,7 +65,7 @@ public class Storage {
     public static void writeData(List<Task> list) {
         Storage.createFile();
         try {
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(FILE_PATH);
             for (int i = 0; i < list.size(); i++) {
                 Task task = list.get(i);
                 String parsedTask = task.parseForStorage();

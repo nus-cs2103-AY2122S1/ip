@@ -17,6 +17,6 @@ public class ToDo extends Task{
 
     @Override
     public String parseForStorage() {
-        return String.format("%s | %d | %s", this.getTaskType(), this.getCompleted() ? 1 : 0, this.getTask());
+        return String.format("%s | %d | %s", this.getTaskType(), this.getIsCompleted() ? 1 : 0, this.getTask());
     }
 }

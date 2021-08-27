@@ -7,13 +7,13 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
 
     public enum Command {BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CLEAR}
-    boolean isTerminate = false;
+    boolean toTerminate = false;
 
     public Parser() {
     }
 
-    public boolean getIsTerminate() {
-        return this.isTerminate;
+    public boolean getToTerminate() {
+        return this.toTerminate;
     }
 
     public void executeCommand(Ui ui, TaskList tasks, String input) throws DukeException {
@@ -35,7 +35,7 @@ public class Parser {
             if (parsedInput.length <= 1) {
                 throw new TaskIndexOutOfBoundException("Missing Task Number!");
             }
-            this.done(tasks, ui, Integer.parseInt(parsedInput[1]) - 1);
+            this.markDone(tasks, ui, Integer.parseInt(parsedInput[1]) - 1);
             break;
         case TODO:
             this.addTodo(tasks, ui, input);
@@ -62,7 +62,7 @@ public class Parser {
     }
 
     public void terminate(Ui ui) {
-        this.isTerminate = true;
+        this.toTerminate = true;
         ui.terminateMessage();
     }
 
@@ -81,7 +81,8 @@ public class Parser {
         ui.addMessage(newToDo, tasks);
     }
 
-    public void addDeadline(TaskList tasks, Ui ui, String input) throws DeadlineDescriptionNotFoundException ,DeadlineNotFoundException{
+    public void addDeadline(TaskList tasks, Ui ui, String input) throws DeadlineDescriptionNotFoundException,
+            DeadlineNotFoundException{
         if (input.length() <= 9 || input.substring(9).stripLeading().length() <= 0) {
             throw new DeadlineDescriptionNotFoundException("Missing Description!");
         } else if (!input.contains(" /by ")) {
@@ -96,7 +97,8 @@ public class Parser {
         ui.addMessage(newDeadline, tasks);
     }
 
-    public void addEvent(TaskList tasks, Ui ui, String input) throws EventDescriptionNotFoundException , EventTimeNotFoundException {
+    public void addEvent(TaskList tasks, Ui ui, String input) throws EventDescriptionNotFoundException,
+            EventTimeNotFoundException {
         if (input.length() <= 6 || input.substring(6).stripLeading().length() <= 0) {
             throw new EventDescriptionNotFoundException("Missing Description!");
         } else if (!input.contains(" /at ")) {
@@ -111,7 +113,7 @@ public class Parser {
         ui.addMessage(newEvent, tasks);
     }
 
-    public void done(TaskList tasks, Ui ui, int index) throws TaskIndexOutOfBoundException{
+    public void markDone(TaskList tasks, Ui ui, int index) throws TaskIndexOutOfBoundException{
         if (index >= tasks.getListSize()) {
             throw new TaskIndexOutOfBoundException("Task index is invalid!");
         }
