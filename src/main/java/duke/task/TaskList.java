@@ -9,20 +9,41 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor of a list of tasks
+     *
+     * @param tasks ArrayList containing all task input
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Gets the list of tasks
+     *
+     * @return ArrayList of all the tasks
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Adds task to the list
+     *
+     * @param task new input task
+     */
     public void addTask(Task task) {
         tasks.add(task);
         System.out.println("Got it. I've added this task:\n "+ task.displayTask()
                 + "\n Now you have " + tasks.size() +  " tasks in the list.");
     }
 
+    /**
+     * Deletes current task from list
+     *
+     * @param item the list index of the task to be deleted
+     * @throws TaskNotFoundException if the input index is not valid
+     */
     public void deleteTask(int item) throws TaskNotFoundException {
         if (item > tasks.size() || item <= 0) {
             throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
@@ -34,6 +55,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Gets the index of the Task to check
+     *
+     * @param message the input command to check a task
+     * @return the list index for the task to be checked
+     */
     public int taskToCheck(String message) {
         StringBuilder number;
         if (message.length() > 5) {
@@ -53,6 +80,12 @@ public class TaskList {
         return 0;
     }
 
+    /**
+     * Mark the task as completed
+     *
+     * @param item the list index of the task to be mark as done
+     * @throws TaskNotFoundException if the list index is not valid
+     */
     public void markAsCheckedTask(int item) throws TaskNotFoundException {
         if (item > tasks.size()) {
             throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
@@ -64,6 +97,12 @@ public class TaskList {
         }
     }
 
+    /**
+     *  Gets the index of the Task to delete
+     *
+     * @param message the input command to delete a task
+     * @return the list index for the task to be checked
+     */
     public int taskToDelete(String message) {
         StringBuilder number;
         if (message.length() > 6) {
@@ -83,6 +122,9 @@ public class TaskList {
         return 0;
     }
 
+    /**
+     * Prints all the tasks that are in the ArrayList
+     */
     public void listTasks() {
         if (this.tasks.size() == 0) {
             System.out.println("You have no tasks.");

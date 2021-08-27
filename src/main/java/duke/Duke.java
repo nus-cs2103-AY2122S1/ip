@@ -12,6 +12,9 @@ public class Duke {
     private Ui ui;
     private static final String FILE_PATH = "data/dukeData.txt";
 
+    /**
+     * Initialise the components of the program
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILE_PATH);
@@ -22,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs program
+     */
     public void run() {
         ui.startBot();
         Parser p = new Parser(tasks, storage);
@@ -29,6 +35,11 @@ public class Duke {
         ui.endBot();
     }
 
+    /**
+     * Initialise and start program
+     *
+     * @param args arguments passed by the command line
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

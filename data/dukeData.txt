@@ -1,1 +1,2 @@
-D |1| return book | 02 Dec 2019 6.00PM
+D |0| return book | 02 Dec 2019 6.00PM
+T |0| read book

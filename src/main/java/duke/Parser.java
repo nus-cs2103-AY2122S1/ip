@@ -20,11 +20,20 @@ public class Parser {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Constructor for Parser
+     *
+     * @param taskList the input TaskList
+     * @param storage the input storage to update changes
+     */
     public Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
     }
 
+    /**
+     * Interprets the command by users and updates the system accordingly
+     */
     public void parse() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
