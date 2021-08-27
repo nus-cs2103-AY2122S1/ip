@@ -7,12 +7,9 @@ public class TodoCommand extends Command {
 
     protected ArrayList<Task> list;
 
-    protected int index;
-
-    TodoCommand(String input, int index, ArrayList<Task> list) {
+    TodoCommand(String input, ArrayList<Task> list) {
         this.input = input;
         this.list = list;
-        this.index = index;
     }
 
     public String reply() throws DukeException {
@@ -22,7 +19,7 @@ public class TodoCommand extends Command {
             throw new DukeException("The description of a todo cannot be empty. Please try again!");
         } else {
             list.add(new TodoTask(newTask));
-            return addTask(newTask, 1, index, "");
+            return addTask(newTask, 1, list.size() - 1, "");
         }
     }
 }

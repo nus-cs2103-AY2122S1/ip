@@ -7,18 +7,15 @@ public class ListCommand extends Command {
 
     protected ArrayList<Task> list;
 
-    protected int index;
-
-    ListCommand(String input, int index, ArrayList<Task> list) {
+    ListCommand(String input, ArrayList<Task> list) {
         this.input = input;
         this.list = list;
-        this.index = index;
     }
 
     public String reply() {
 
         String tasks = "";
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < list.size(); i++) {
             tasks = tasks
                     + String.valueOf(i + 1)
                     + ". "

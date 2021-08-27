@@ -1,21 +1,23 @@
 package main.java;
 
+import java.time.LocalDateTime;
+
 /**
  * Task subclass that encapsulates the individual "Deadline" task passed into the bot.
  */
 public class DeadlineTask extends Task {
 
     /**
-     * Variable that holds the deadline time as String
+     * Variable that holds the deadline time as a LocalDateTime object
      */
-    protected String by;
+    protected LocalDateTime time;
 
     /**
      * Constructor for the Deadline class
      */
-    DeadlineTask(String task, String by) {
+    DeadlineTask(String task, LocalDateTime time) {
         super(task);
-        this.by = by;
+        this.time = time;
     }
 
     /**
@@ -25,6 +27,6 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[D]" + super.getTaskState() + "(By: " + this.by + ")";
+        return "[D]" + super.getTaskState() + "(By: " + time.format(outputFormatter) + ")";
     }
 }

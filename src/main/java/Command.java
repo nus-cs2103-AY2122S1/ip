@@ -1,6 +1,13 @@
 package main.java;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public abstract class Command {
+
+    protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
+
+    protected DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy, hh:mm a");
 
     /**
      * Displays the task added message according to the task input given.
@@ -8,10 +15,10 @@ public abstract class Command {
      * @param input The task input to be added to the list.
      * @param type  The type id. Todo: 1, Deadline: 2, Event: 3.
      * @param index The current index of the list.
-     * @param info  The information regarding the task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
+     * @param time  The information regarding the task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
      * @return The String sequence showing that the task has been added to the list.
      */
-    public String addTask(String input, int type, int index, String info) {
+    public String addTask(String input, int type, int index, String time) {
 
         // Determine the string that displays the type of task
         String taskType;
@@ -38,7 +45,11 @@ public abstract class Command {
                 + prefix
                 + " "
                 + input
-                + (type == 2 ? "(By: " + info + ")" : type == 3 ? "(At: " + info + ")" : "")
+                + (type == 2
+                    ? "(By: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
+                    : type == 3
+                        ? "(At: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
+                        : "")
                 + "\n\n"
                 + "You currently have "
                 + (index + 1)
