@@ -2,11 +2,8 @@ package duke.commands;
 
 import java.util.ArrayList;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.tasks.ToDo;
 
 /**
  * ListCommand class used to represent a List Command.

@@ -52,7 +52,11 @@ public abstract class Task {
         this.isDone = done;
         return;
     }
-    
+
+    /**
+     * Formats the String returned by toString() in a more readable manner.
+     * @return String object that represents formatted toString() output for ease of reading.
+     */
     public abstract String formatString();
 
     /**

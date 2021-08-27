@@ -7,10 +7,19 @@ package duke.tasks;
  * as well as status and description.
  */
 public class ToDo extends Task {
+    /**
+     * Default constructor for ToDo.
+     * @param description String object representing the task being input into ToDo.
+     */
     public ToDo(String description) {
         super(description);
     }
 
+    /**
+     * Default constructor for ToDo.
+     * @param done String object representing whether the task is completed.
+     * @param description String object representing the task being input into ToDo.
+     */
     public ToDo(String done, String description) {
         super(description);
         if ((done.equals("X"))) {

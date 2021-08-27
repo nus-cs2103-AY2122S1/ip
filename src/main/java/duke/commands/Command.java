@@ -26,6 +26,7 @@ public abstract class Command {
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
+     * @throws DukeException on task-specific errors.
      */
     public abstract void execute(String des, TaskList tList) throws DukeException;
 

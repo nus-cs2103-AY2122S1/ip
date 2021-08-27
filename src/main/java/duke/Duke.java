@@ -9,6 +9,10 @@ import duke.ui.Ui;
  */
 public class Duke {
 
+    /**
+     * Initialises the chatBot and runs the Duke chatBot.
+     * @param args arguments for main method.
+     */
     public static void main(String[] args) {
         Ui chatBot = new Ui();
         chatBot.run();
