@@ -17,14 +17,14 @@ public class EventTask extends Task {
         this.date = LocalDate.parse(date);
     }
 
-    public EventTask(String name, String time) throws DateTimeException {
+    public EventTask(String name, String date) throws DateTimeException {
         super(name);
         this.date = LocalDate.parse(date);
     }
 
     @Override
     public String formatForFile() {
-        return "E" + super.formatForFile() + SAVE_DATA_MARKER + this.time + "\n";
+        return "E" + super.formatForFile() + SAVE_DATA_MARKER + this.date + "\n";
     }
 
     @Override

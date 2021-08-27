@@ -1,3 +1,2 @@
 T|0|xxx
-D|0|this stupid thing|tonight
 T|1|level-7
