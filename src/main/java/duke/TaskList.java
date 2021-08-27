@@ -138,6 +138,20 @@ public class TaskList {
         }
     }
 
+    public void findSimilarTasks(String keyWords) {
+        System.out.println("    Here are the matching tasks in your list:");
+        int count = 0;
+        for (Task task : xs) {
+            if (task.getItemName().contains(keyWords)) {
+                System.out.println("    " + task);
+                count++;
+            }
+        }
+        if (count == 0) {
+            System.out.println("    Sorry! There does not seem to be any matching tasks!");
+        }
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
