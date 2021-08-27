@@ -5,18 +5,31 @@
  * @version: 19 August 2021
  */
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import  java.util.Scanner;
 
 public class Duke {
 
     private final ArrayList<Task> commandList;
+    private final String DIR_NAME = "data";
+    private final String FILE_NAME = "duke.txt";
+    private File dataFile = null;
 
     private Duke() {
         commandList = new ArrayList<>(100);
+        dataFile = retrieveFile(DIR_NAME, FILE_NAME);
+       try {
+           loadData();
+       } catch (IOException e) {
+           System.out.println("Error loading duke.txt");
+       }
     }
 
     public static void main(String[] args) {
+        //System.out.println("Working Directory = " + System.getProperty("user.dir"));
         Duke instance = new Duke();
         instance.begin();
     }
@@ -31,7 +44,6 @@ public class Duke {
         //Echo
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            System.out.println();
             String command = scanner.nextLine();
 
             if (command.equals("bye")) {
@@ -39,6 +51,11 @@ public class Duke {
                 printBreakLine();
                 System.out.println(" Bye. Hope to see you again soon!");
                 printBreakLine();
+                try {
+                    writeData();
+                } catch (IOException e) {
+                    System.out.println("Error saving file");
+                }
                 break;
 
             } else  if (command.equals("list")) {
@@ -70,7 +87,7 @@ public class Duke {
                     printBreakLine();
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
-                Task newTask = new ToDo(description);
+                Task newTask = new ToDo(description, false);
                 commandList.add(newTask);
                 addTaskMsg(newTask);
 
@@ -84,7 +101,7 @@ public class Duke {
                     throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                 }
 
-                Task newTask = new Deadline(description, by);
+                Task newTask = new Deadline(description, by, false);
                 commandList.add(newTask);
                 addTaskMsg(newTask);
 
@@ -97,7 +114,7 @@ public class Duke {
                     throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                 }
 
-                Task newTask = new Event(description, by);
+                Task newTask = new Event(description, by, false);
                 commandList.add(newTask);
                 addTaskMsg(newTask);
 
@@ -108,11 +125,54 @@ public class Duke {
         }
     }
 
-    private void printBreakLine() {
-        for (int i = 0; i < 12; i++) {
-            System.out.print("==");
+    private File retrieveFile(String directory, String filename) {
+        File dir = new File(directory);
+        if (!dir.exists()) dir.mkdirs();
+        File dataFile = new File(directory + "/" + filename);
+        try {
+            dataFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        System.out.println();
+        return dataFile;
+    }
+
+    private void loadData() throws IOException, DukeException{
+        Scanner scanner = new Scanner(dataFile);
+        while (scanner.hasNext()) {
+            String taskString = scanner.nextLine();
+            boolean isDone = taskString.charAt(4) == ' ' ? false : true;
+            String description = null;
+            String dateTime = null;
+            int timeStart;
+            switch (taskString.charAt(1)) {
+            case 'T':
+                description = taskString.substring(7) + " ";
+                commandList.add(new ToDo(description, isDone));
+                break;
+            case 'E':
+                timeStart = taskString.indexOf("at: ");
+                description = taskString.substring(7, timeStart - 2) + " ";
+                dateTime = taskString.substring(timeStart + 4, taskString.length() - 1);
+                commandList.add(new Event(description, dateTime, isDone));
+                break;
+            case 'D':
+                timeStart = taskString.indexOf("by: ");
+                description = taskString.substring(7, timeStart - 2) + " ";
+                dateTime = taskString.substring(timeStart + 4, taskString.length() - 1);
+                commandList.add(new Deadline(description, dateTime, isDone));
+            default:
+                break;
+            }
+        }
+    }
+
+    private void writeData() throws IOException {
+        FileWriter writer = new FileWriter(dataFile.getPath());
+        for (Task task: commandList) {
+            writer.write(task.toString() + System.lineSeparator());
+        }
+        writer.close();
     }
 
     private void addTaskMsg(Task newTask) {
@@ -135,5 +195,12 @@ public class Duke {
         System.out.println("  Hello! I'm Duke");
         System.out.println("  What can I do for you?");
         printBreakLine();
+    }
+
+    private void printBreakLine() {
+        for (int i = 0; i < 12; i++) {
+            System.out.print("===");
+        }
+        System.out.println();
     }
 }
