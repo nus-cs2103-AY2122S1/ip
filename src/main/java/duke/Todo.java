@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * Todo (Task). Can be added to list in Duke.
  *
- * @author Ruth Poh (Lab 10H)
+ * @author Ruth Poh
  */
 public class Todo extends Task {
 

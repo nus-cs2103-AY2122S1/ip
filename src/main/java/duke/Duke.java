@@ -8,9 +8,8 @@ import java.util.Scanner;
 
 /**
  * Modified version of Duke (Personal Assistant Chatbot). Speaks owo language.
- * @author Ruth Poh (Lab 10H)
+ * @author Ruth Poh
  */
-
 public class Duke {
     private Storage storage;
     private TaskList tasklist;

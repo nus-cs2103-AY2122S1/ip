@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * Parent class. Inherited by a bunch of classes like Event and Deadline.
  *
- * @author Ruth Poh (Lab 10H)
+ * @author Ruth Poh
  */
 public class Task {
     protected String taskString;

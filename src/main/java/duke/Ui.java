@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * User interface. Handles text for user interface.
+ *
+ * @author Ruth Poh
+ */
 public class Ui {
     Ui() {
     }

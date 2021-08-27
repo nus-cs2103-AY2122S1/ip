@@ -3,7 +3,7 @@ package duke;
 /**
  * Class that handles all exceptions specific to Duke.
  *
- * @author Ruth Poh (Lab 10H)
+ * @author Ruth Poh
  */
 public class DukeException extends Exception {
     protected String linebreak = "~~*********___\\(owo)/___\\(owo)/___*********~~";

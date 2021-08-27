@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 /**
  * Allows reading and saving of tasks to a given file.
- *
+ * @author Ruth Poh
  */
 public class Storage {
     private String filePath;

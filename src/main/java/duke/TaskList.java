@@ -10,6 +10,7 @@ import java.time.temporal.ChronoUnit;
 
 /**
  * Stores list of Tasks in an array for reference.
+ * @author Ruth Poh
  */
 public class TaskList {
     ArrayList<Task> taskArr;
