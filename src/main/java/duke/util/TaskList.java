@@ -150,6 +150,10 @@ public class TaskList {
         return check;
     }
 
+    public LinkedHashMap getMapper() {
+        return this.mapper;
+    }
+
     public String[] saveState() {
         if (mapper.size() == 0) {
             return new String[]{};

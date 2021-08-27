@@ -54,6 +54,8 @@ public class Parser {
                 return new AddCommand(storage, taskList, ui, parsedInput[1], "event");
             case "delete":
                 return new DeleteCommand(storage, taskList, ui, parsedInput[1]);
+            case "find":
+                return new FindCommand(storage, taskList, ui, parsedInput[1]);
             default:
                 throw new IllegalArgumentException();
             }
