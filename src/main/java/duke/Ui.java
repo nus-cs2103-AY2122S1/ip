@@ -11,23 +11,23 @@ public class Ui {
         AT("at"),
         BY("by");
 
-        private final String DESCRIPTOR;
+        private final String descriptor;
+
+        Descriptors(String descriptor) {
+            this.descriptor = descriptor;
+        }
 
         public String getDescriptor() {
-            return this.DESCRIPTOR;
+            return this.descriptor;
         }
 
         public int getLength() {
-            return this.DESCRIPTOR.length();
-        }
-
-        Descriptors(String descriptor) {
-            this.DESCRIPTOR = descriptor;
+            return this.descriptor.length();
         }
 
         @Override
         public String toString() {
-            return this.DESCRIPTOR;
+            return this.descriptor;
         }
     }
 
@@ -43,23 +43,23 @@ public class Ui {
         FIND("find"),
         BYE("bye");
 
-        private final String COMMAND;
+        private final String command;
+
+        Commands(String command) {
+            this.command = command;
+        }
 
         public String getCommand() {
-            return this.COMMAND;
+            return this.command;
         }
 
         public int getLength() {
-            return this.COMMAND.length();
-        }
-
-        Commands(String command) {
-            this.COMMAND = command;
+            return this.command.length();
         }
 
         @Override
         public String toString() {
-            return this.COMMAND;
+            return this.command;
         }
     }
 
@@ -138,8 +138,8 @@ public class Ui {
      * @param events Total count of Events found to fall on date being searched for.
      */
     public void showDateListSummary(String formattedDateString, int counter, int deadlines, int events) {
-        System.out.println("A total of " + counter + " events (" + deadlines + " deadlines and " +
-                events + " events) fall on " + formattedDateString);
+        System.out.println("A total of " + counter + " events (" + deadlines + " deadlines and "
+                + events + " events) fall on " + formattedDateString);
     }
 
     /**
@@ -265,8 +265,8 @@ public class Ui {
      * @return Standard error message for missing descriptor.
      */
     public static String exceptionMissingDescriptor(Descriptors descriptor, Commands command) {
-        return "/" + descriptor.getDescriptor() +
-                " must be provided and not empty for " + command.getCommand() + ".";
+        return "/" + descriptor.getDescriptor()
+                + " must be provided and not empty for " + command.getCommand() + ".";
     }
 
     /**

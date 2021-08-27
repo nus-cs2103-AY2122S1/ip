@@ -1,9 +1,9 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.Ui.Commands;
 import duke.command.Command;
-
-import java.util.Scanner;
 
 /**
  * Handles initialization of storage and tasks and running of Duke chatbot.

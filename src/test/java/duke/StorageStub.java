@@ -1,6 +1,6 @@
 package duke;
 
-public class StorageStub implements Storable{
+public class StorageStub implements Storable {
 
     // Initial tasks.
     private final TaskList tasks;

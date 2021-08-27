@@ -1,11 +1,11 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import org.junit.jupiter.api.Test;
 
 class EventTest {
 
@@ -14,10 +14,10 @@ class EventTest {
     // yyyy-mm-dd format.
     private static final LocalDate TIME = LocalDate.parse("2020-01-01");
 
-    Event event = new Event(DESCRIPTION, TIME);
+    private final Event event = new Event(DESCRIPTION, TIME);
 
     @Test
-    void getTaskType_event_E() {
+    void getTaskType_event_stringE() {
         assertEquals("E", event.getTaskType());
     }
 

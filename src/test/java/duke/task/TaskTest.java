@@ -1,18 +1,18 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.Test;
+
 class TaskTest {
 
     private static final String DESCRIPTION = "task description";
 
-    Task undoneTask = new Task("task description");
+    private final Task undoneTask = new Task("task description");
 
     // Creates a done task. Ensures markAsDone is working before creating.
     private Task getDoneTask() {
@@ -45,7 +45,7 @@ class TaskTest {
     }
 
     @Test
-    void getStatusIcon_doneTask_X() {
+    void getStatusIcon_doneTask_stringX() {
         Task doneTask = getDoneTask();
         assertEquals("X", doneTask.getStatusIcon());
     }

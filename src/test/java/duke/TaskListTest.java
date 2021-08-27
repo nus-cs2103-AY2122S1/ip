@@ -1,13 +1,14 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import duke.task.Task;
+import duke.task.Todo;
 
 class TaskListTest {
 
@@ -22,7 +23,7 @@ class TaskListTest {
     }
 
     @Test
-    void size_taskListOfThreeTodos_3() {
+    void size_taskList_threeTodo() {
         assertEquals(3, getTaskListThreeTodos().size());
     }
 

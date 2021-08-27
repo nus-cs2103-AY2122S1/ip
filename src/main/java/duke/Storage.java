@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,13 +10,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * Deals with loading tasks from save file and saving tasks in the file.
  */
 public class Storage implements Storable {
 
+    /** Tasks saved are separated by SAVE_SEPARATOR */
+    private static final String SAVE_SEPARATOR = " ~ ";
+
     /** Filename of file to be saved to */
-    private final String SAVE_FILENAME;
+    private final String saveFileName;
 
     /**
      * Constructor for Storage.
@@ -30,11 +33,8 @@ public class Storage implements Storable {
      * @param fileName filename of file to be saved to and read from.
      */
     public Storage(String fileName) {
-        this.SAVE_FILENAME = fileName;
+        this.saveFileName = fileName;
     }
-
-    /** Tasks saved are separated by SAVE_SEPARATOR */
-    private static final String SAVE_SEPARATOR = " ~ ";
 
     /**
      * Converts LocalDate into "dd/MM/yyyy" string format for saving.
@@ -153,7 +153,7 @@ public class Storage implements Storable {
 
         // Get absolute path to save file.
         String cwd = System.getProperty("user.dir");
-        Path absolutePathToSaveFile = Paths.get(cwd, "data", this.SAVE_FILENAME);
+        Path absolutePathToSaveFile = Paths.get(cwd, "data", this.saveFileName);
 
         // Check if save file exists.
         boolean isSaveFileExist = Files.exists(absolutePathToSaveFile);
@@ -205,7 +205,7 @@ public class Storage implements Storable {
             }
 
             // Get absolute path to save file.
-            Path absolutePathToSaveFile = Paths.get(absolutePathToDataDir.toString(), this.SAVE_FILENAME);
+            Path absolutePathToSaveFile = Paths.get(absolutePathToDataDir.toString(), this.saveFileName);
 
             // Check if file exists.
             boolean isSaveFileExist = Files.exists(absolutePathToSaveFile);

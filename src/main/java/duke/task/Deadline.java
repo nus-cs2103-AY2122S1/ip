@@ -1,9 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 import duke.DukeException;
 import duke.Parser;
-
-import java.time.LocalDate;
 
 /**
  * Represents a deadline with a description and a date that it is due by.
