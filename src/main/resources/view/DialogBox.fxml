@@ -15,9 +15,15 @@
         xmlns:fx="http://javafx.com/fxml/1"
 >
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
+        <Label fx:id="dialog" text="Label" wrapText="true" minHeight="-Infinity" maxHeight="Infinity" prefWidth="260"/>
 
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView
+                fx:id="displayPicture"
+                fitHeight="99.0"
+                fitWidth="99.0"
+                pickOnBounds="true"
+                preserveRatio="true"
+        />
     </children>
 
     <padding>

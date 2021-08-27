@@ -10,15 +10,23 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Ellipse;
 
 import java.io.IOException;
 import java.util.Collections;
 
 public class DialogBox extends HBox {
+    private String userDialogStyle =
+            "-fx-background-color: #74D9CA; -fx-padding: 8 16 8 16; -fx-background-radius: 5;";
+    private String dukeDialogStyle =
+            "-fx-background-color: #F7EFC1; -fx-padding: 8 16 8 16; -fx-background-radius: 5;";
+    private Ellipse displayPictureClip = new Ellipse(50, 50, 40, 40);
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+
 
     private DialogBox(String text, Image img) {
         try {
@@ -32,6 +40,12 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+    }
+
+    @FXML
+    private void initialize() {
+        dialog.setStyle(userDialogStyle);
+        displayPicture.setClip(displayPictureClip);
     }
 
     private void flip() {
@@ -48,6 +62,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.setStyle(db.dukeDialogStyle);
         return db;
     }
 }

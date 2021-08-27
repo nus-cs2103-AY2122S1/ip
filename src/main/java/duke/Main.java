@@ -12,7 +12,11 @@ public class Main extends Application {
     public void start(Stage stage) {
         MainWindow mainWindow = new MainWindow(duke);
         Scene scene = new Scene(mainWindow);
+
         stage.setScene(scene);
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+
         stage.show();
     }
 }
