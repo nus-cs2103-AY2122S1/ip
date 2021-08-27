@@ -23,13 +23,14 @@ public class Parser {
     void parse() throws DukeException {
         Scanner sc = new Scanner(System.in);
         String input = "";
+
         //loop to check if next input is available
         while (sc.hasNext()) {
             input = sc.nextLine();
             String[] split = input.split(" ", 2);
+
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
-
                 //exit command for when entered exit code
                 System.exit(1);
             } else if (input.equals("list")) {
@@ -38,7 +39,7 @@ public class Parser {
                 if (split.length < 2 || split[1].isEmpty()) {
                     throw new NoNumberException("☹ OOPS!!! No task number was given in the input");
                 }
-                ui.doneTask(Integer.parseInt(split[1]));
+                ui.markAsDone(Integer.parseInt(split[1]));
             } else if (split[0].equals("delete")) {
                 if (split.length < 2 || split[1].isEmpty()) {
                     throw new NoNumberException("☹ OOPS!!! No task number was given in the input");

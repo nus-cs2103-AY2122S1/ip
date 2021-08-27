@@ -26,8 +26,8 @@ public class UI {
      *
      * @param n the task number entered by the user
      */
-    void doneTask(int n) throws DukeException {
-        list.doneTask(n);
+    void markAsDone(int n) throws DukeException {
+        list.markAsDone(n);
         storage.writeToFile();
         System.out.println("Nice! I have marked this task as done:");
         System.out.println(list.get(n - 1).toString());
@@ -43,7 +43,7 @@ public class UI {
         storage.writeToFile();
         System.out.println("Noted. I've removed this task:");
         System.out.println(deletedTask);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println("Now you have " + list.getSize() + " tasks in the list.");
     }
 
 
@@ -58,7 +58,7 @@ public class UI {
         storage.writeToFile();
         System.out.println("Got it. I've added this task:");
         System.out.println(input.toString());
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+        System.out.println("Now you have " + list.getSize() + " tasks in the list.");
     }
 
     /**

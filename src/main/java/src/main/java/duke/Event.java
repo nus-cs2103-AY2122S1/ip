@@ -29,7 +29,7 @@ public class Event extends Task {
     /**
      * overridden method to give the String representation of the task
      *
-     * @return
+     * @return String representation of Event
      */
     @Override
     public String toString() {
