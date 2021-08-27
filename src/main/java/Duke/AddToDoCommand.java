@@ -1,3 +1,5 @@
+package Duke;
+
 public class AddToDoCommand implements ICommand {
 
     private final String input;

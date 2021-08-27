@@ -1,3 +1,5 @@
+package Duke;
+
 public class AddEventCommand implements ICommand {
 
     private final String input;
@@ -8,7 +10,7 @@ public class AddEventCommand implements ICommand {
 
     public void execute(TaskManager tm, Ui ui, Storage storage) {
         try {
-            Task addedEvent = tm.addDeadline(input);
+            Task addedEvent = tm.addEvent(input);
             if (addedEvent != null) {
                 ui.printTaskAddition(addedEvent, tm.getTasks().size());
                 storage.updateSave(tm.getTasks());

@@ -1,3 +1,5 @@
+package Duke;
+
 import java.time.LocalDateTime;
 
 public class Task {
@@ -10,7 +12,7 @@ public class Task {
 
     public Task(String name, String taskType) throws DukeException.NoNameException {
         if (name.replaceAll(" ", "").equals("")) {
-            throw new DukeException.NoNameException("Duke says: Task cannot have no name");
+            throw new DukeException.NoNameException("Duke.Duke says: Duke.Task cannot have no name");
         }
         this.name = name;
         done = false;
@@ -19,7 +21,7 @@ public class Task {
 
     public Task(String name, String taskType, boolean done) throws DukeException.NoNameException {
         if (name.replaceAll(" ", "").equals("")) {
-            throw new DukeException.NoNameException("Duke says: Task cannot have no name");
+            throw new DukeException.NoNameException("Duke.Duke says: Duke.Task cannot have no name");
         }
         this.name = name;
         this.done = done;

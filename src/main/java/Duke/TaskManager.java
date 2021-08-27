@@ -1,3 +1,5 @@
+package Duke;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -17,7 +19,7 @@ public class TaskManager {
 
     public Task addToDo(String input) throws DukeException.EmptyTaskException, DukeException.NoNameException {
         if (input.length() < 5) {
-            throw new DukeException.EmptyTaskException("Duke says: You can't add a task with no name");
+            throw new DukeException.EmptyTaskException("Duke.Duke says: You can't add a task with no name");
         }
         Task.ToDo newToDo = new Task.ToDo(input.substring(5));
         tasks.add(newToDo);
@@ -33,9 +35,9 @@ public class TaskManager {
             tasks.add(newDeadline);
             addedDeadline = newDeadline;
         } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
-            throw new DukeException.NoTimeSpecifiedException("Duke says: Please include a deadline");
+            throw new DukeException.NoTimeSpecifiedException("Duke.Duke says: Please include a deadline");
         } catch (DateTimeParseException e) {
-            System.out.println("Duke says: Please use the format YYYY-MM-DD HH:MM when entering deadline \n " +
+            System.out.println("Duke.Duke says: Please use the format YYYY-MM-DD HH:MM when entering deadline \n " +
                     "E.g. 2021-08-28 18:30");
         }
         return addedDeadline;
@@ -45,13 +47,14 @@ public class TaskManager {
         Task addedEvent = null;
         try {
             Task.Event newEvent = new Task.Event(input.substring(6).split(" /")[0],
-                    LocalDateTime.parse(input.substring(6).split(" /")[1]));
+                    LocalDateTime.parse(input.substring(6).split(" /")[1],
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
             tasks.add(newEvent);
             addedEvent = newEvent;
         } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
-            throw new DukeException.NoTimeSpecifiedException("Duke says: Please include a time");
+            throw new DukeException.NoTimeSpecifiedException("Duke.Duke says: Please include a time");
         } catch (DateTimeParseException e) {
-            System.out.println("Duke says: Please use the format <YYYY-MM-DD>T<HH:MM> when entering when the event is \n " +
+            System.out.println("Duke.Duke says: Please use the format YYYY-MM-DD HH:MM when entering when the event is \n " +
                     "E.g. 2021-08-28T18:30");
         }
         return addedEvent;
@@ -66,7 +69,7 @@ public class TaskManager {
                 completedTask.completeTask();
             }
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
-            throw new DukeException.InvalidInputException("Duke says: Please enter the index of the completed task");
+            throw new DukeException.InvalidInputException("Duke.Duke says: Please enter the index of the completed task");
         }
         return completedTask;
     }
@@ -77,12 +80,12 @@ public class TaskManager {
             int taskIndex = Integer.parseInt(String.valueOf(input.charAt(7)));
 
             if (!(taskIndex > tasks.size())) {
-                System.out.println("Duke says: You have deleted the task " +
+                System.out.println("Duke.Duke says: You have deleted the task " +
                         tasks.get(taskIndex - 1).getName());
                 deletedTask = tasks.remove(taskIndex - 1);
             }
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
-            throw new DukeException.InvalidInputException("Duke says: Please enter the index of the task you want to delete");
+            throw new DukeException.InvalidInputException("Duke.Duke says: Please enter the index of the task you want to delete");
         }
         return deletedTask;
     }

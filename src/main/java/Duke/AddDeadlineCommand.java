@@ -1,3 +1,5 @@
+package Duke;
+
 public class AddDeadlineCommand implements ICommand {
 
     private final String input;

@@ -1,23 +1,24 @@
-public class DoneCommand implements ICommand {
+package Duke;
+
+public class DeleteCommand implements ICommand {
 
     String taskIndex;
 
-    public DoneCommand(String taskIndex) {
+    public DeleteCommand(String taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     public void execute(TaskManager tm, Ui ui, Storage storage) {
         try {
-            Task completedTask = tm.completeTask(taskIndex);
-            if (completedTask == null) {
+            Task deletedTask = tm.deleteTask(taskIndex);
+            if (deletedTask == null) {
                 ui.printInvalidIndexMessage();
             } else {
-                ui.printTaskCompletion(completedTask, tm.getTasks().size());
+                ui.printTaskDeletion(deletedTask, tm.getTasks().size());
                 storage.updateSave(tm.getTasks());
             }
         } catch (DukeException.InvalidInputException e) {
             ui.printErrorMessage(e);
         }
     }
-
 }

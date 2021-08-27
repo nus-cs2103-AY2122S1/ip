@@ -1,3 +1,5 @@
+package Duke;
+
 public class DukeException extends Exception {
 
     public static class EmptyTaskException extends Exception {

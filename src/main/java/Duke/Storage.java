@@ -1,4 +1,4 @@
-import jdk.jfr.Event;
+package Duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -56,7 +56,7 @@ public class Storage {
                         newTask = new Task.Event(name, LocalDateTime.parse(taskDetails[3]), done);
                         break;
                     default:
-                        throw new DukeException.NoNameException("Task type invalid");
+                        throw new DukeException.NoNameException("Duke.Task type invalid");
                 }
                 tasks.add(newTask);
             }
