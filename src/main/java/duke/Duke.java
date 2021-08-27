@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Contains skeleton of Duke chatbot for IP of CS2103 2021
+ * Contains skeleton of duke.Duke chatbot for IP of CS2103 2021
  *
  * @author: Ren Weilin
  * @version: 19 August 2021

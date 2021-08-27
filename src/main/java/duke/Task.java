@@ -1,5 +1,7 @@
+package duke;
+
 /**
- * Task list logic abstracted from Duke.
+ * duke.Task list logic abstracted from duke.Duke.
  *
  * @author Ren Weilin
  * @version 19 August 2021
