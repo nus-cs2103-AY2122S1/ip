@@ -60,6 +60,12 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Returns a new Tasklist with tasks matching keyword.
+     *
+     * @param keyword word to filter tasklist by.
+     * @return Tasklist containing the word.
+     */
     public TaskList findMatchingTasks(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
         for(int i = 0; i < tasks.size(); i++) {

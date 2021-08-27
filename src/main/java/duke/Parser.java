@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class to represent parsing the commands
+ */
 public class Parser {
     private enum Commands {list, done, todo, event, deadline, delete, find }
 
