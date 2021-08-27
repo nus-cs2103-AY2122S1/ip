@@ -1,9 +1,6 @@
 package duke.util;
 
 public class Parser {
-    public Parser() {
-
-    }
 
     public static int parseDoneCmd(String cmd) {
         String[] a = cmd.split(" ");
