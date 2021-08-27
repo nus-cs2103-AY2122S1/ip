@@ -1,7 +1,6 @@
 package duke;
 
 import duke.task.Task;
-
 import java.util.ArrayList;
 
 /**
@@ -66,6 +65,12 @@ public class Items {
         return task.doneTask();
     }
 
+    /**
+     * deletes the item at the specified index
+     * @param index index at which item is to be deleted
+     * @return output message stating item has been deleted
+     * @throws DukeException thrown in case of a wrong input
+     */
     public String deleteItem(int index) throws DukeException {
         if (index < 0) {
             throw new DukeException("Invalid index. Only positive values are accepted.");
