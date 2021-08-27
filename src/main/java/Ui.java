@@ -1,6 +1,11 @@
+import java.util.Scanner;
+
 public class Ui {
     private boolean isRunning;
+    private Scanner sc;
     private static final String INDENT = "    ";
+    private static final String TOP_BORDER = "____________________________________";
+    private static final String BOTTOM_BORDER = "------------------------------------";
     private static final String LOGO = " ____        _        \n"
                                     + "|  _ \\ _   _| | _____ \n"
                                     + "| | | | | | | |/ / _ \\\n"
@@ -15,13 +20,22 @@ public class Ui {
     }
 
     public void start() {
-        //START SCANNER?
+        this.sc = new Scanner(System.in);
         this.isRunning = true;
     }
 
     public void close() {
+        sc.close();
         this.isRunning = false;
         printFormatted("Bye, hope to see you again! :)");
+    }
+
+    public String readCommand() {
+        return sc.nextLine();
+    }
+
+    public boolean isPendingReply() {
+        return sc.hasNext();
     }
 
     public boolean isRunning() {
@@ -29,9 +43,7 @@ public class Ui {
     }
 
     public static void printFormatted(String text) {
-        String topBorder = "____________________________________";
-        String bottomBorder = "------------------------------------";
-        String textWithBorders = topBorder + "\n"+  text + "\n" + bottomBorder + "\n";
+        String textWithBorders = TOP_BORDER + "\n"+  text + "\n" + BOTTOM_BORDER + "\n";
         String[] lines = textWithBorders.split("\n");
         for (String line : lines) {
             System.out.println(Ui.INDENT + line);

@@ -53,14 +53,14 @@ public final class TaskList {
     }
 
     public void toggleDone(int idx) {
-        if (isValidIdx(idx)) {
-            this.TASKS.get(idx).markCompleted();
+        if (isValidIndex(idx, TASKS.size())) {
+            TASKS.get(idx).markCompleted();
         }
     }
 
     public void removeTask(int idx) {
-        if (isValidIdx(idx)) {
-            this.TASKS.remove(idx);
+        if (isValidIndex(idx, TASKS.size())) {
+            TASKS.remove(idx);
         }
         //TEST
         this.updateStore();
@@ -70,12 +70,11 @@ public final class TaskList {
         this.storageFile.write(this.TASKS);
     }
 
-    private boolean isValidIdx(int idx) {
-        if (idx < 0 || idx >= this.TASKS.size()) {
+    public static boolean isValidIndex(int idxFrom0, int numOfTasks) {
+        if (idxFrom0 < 0 || idxFrom0 >= numOfTasks) {
             throw new IllegalArgumentException("task index passed in out of range");
-        } else {
-            return true;
         }
+        return true;
     }
 
     @Override
