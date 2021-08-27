@@ -52,6 +52,10 @@ public class Task {
         }
     }
 
+    public boolean contains(String query) {
+        return title.contains(query);
+    }
+
     public String toFileString() {
         return String.format("%d | %s", convertIsDoneToInt(), title);
     }

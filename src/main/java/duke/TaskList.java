@@ -63,6 +63,16 @@ public class TaskList {
         }
     }
 
+    public ArrayList<Task> searchTasks(String query) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.contains(query)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other instanceof TaskList) {

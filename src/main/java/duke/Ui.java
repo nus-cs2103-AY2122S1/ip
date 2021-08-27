@@ -57,6 +57,19 @@ public class Ui {
         printMessage(String.format("Reading tasks from %s...", filePath));
     }
 
+    public void showFilteredTasks(ArrayList<Task> tasks) {
+        if (tasks.isEmpty()) {
+            printMessage("No matching tasks found in the list.");
+        } else {
+            printLine();
+            printWithTabIndent("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                printWithTabIndent(String.format("%d. %s", i + 1, tasks.get(i).toString()));
+            }
+            printLine();
+        }
+    }
+
     /**
      * Print with 4 spaces infront of param str.
      *

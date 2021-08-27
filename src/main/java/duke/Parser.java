@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
@@ -25,6 +26,8 @@ public class Parser {
                 return parseDoneInput(parsedMessage);
             case "event":
                 return parseEventInput(parsedMessage);
+            case "find":
+                return parseFindInput(parsedMessage);
             case "list":
                 return parseListInput();
             case "todo":
@@ -78,6 +81,11 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The start and end time of a event cannot be empty.");
         }
+    }
+
+    private static Command parseFindInput(String input) {
+        validateDescription(input, "find");
+        return new FindCommand(new String[] { input });
     }
 
     private static Command parseListInput() {
