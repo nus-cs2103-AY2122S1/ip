@@ -29,7 +29,7 @@ public class StorageTest {
     }
 
     @Test
-    public void getLines_tempFile_correctLinesAndSize() throws IOException {
+    public void constructor_correctLinesAndSize() throws IOException {
         Storage storage = new Storage("resources/temp.txt");
         ArrayList<String> lines = storage.getLines();
 
@@ -44,6 +44,4 @@ public class StorageTest {
         assertEquals(thirdLine, lines.get(2));
         assertEquals(fourthLine, lines.get(3));
     }
-
-
 }
