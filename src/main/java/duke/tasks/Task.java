@@ -1,13 +1,13 @@
-package tasks;
+package duke.tasks;
 
-import main.StorageElement;
+import duke.main.StorageElement;
 
 public abstract class Task {
     protected String taskIcon;
     protected String description;
     protected boolean isDone;
 
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -32,7 +32,7 @@ public abstract class Task {
 
     abstract public StorageElement getStorageElement();
 
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
@@ -42,6 +42,10 @@ public abstract class Task {
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public String getDescription() {

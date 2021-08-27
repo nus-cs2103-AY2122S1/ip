@@ -1,13 +1,13 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
-import exceptions.EmptyDescriptionException;
-import exceptions.EmptyTimeException;
-import main.Ui;
-import main.Storage;
-import tasks.Event;
-import tasks.Task;
-import main.TaskList;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.EmptyTimeException;
+import duke.main.Ui;
+import duke.main.Storage;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.main.TaskList;
 
 public class EventCommand extends Command {
     private int byIndex;

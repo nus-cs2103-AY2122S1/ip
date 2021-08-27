@@ -1,12 +1,12 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
-import exceptions.EmptyDescriptionException;
-import main.Ui;
-import main.Storage;
-import tasks.Task;
-import main.TaskList;
-import tasks.Todo;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.main.Ui;
+import duke.main.Storage;
+import duke.tasks.Task;
+import duke.main.TaskList;
+import duke.tasks.Todo;
 
 
 public class TodoCommand extends Command {

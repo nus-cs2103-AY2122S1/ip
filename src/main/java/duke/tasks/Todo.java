@@ -1,6 +1,6 @@
-package tasks;
+package duke.tasks;
 
-import main.StorageElement;
+import duke.main.StorageElement;
 
 public class Todo extends Task {
     public Todo(String description) {

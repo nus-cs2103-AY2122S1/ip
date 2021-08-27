@@ -1,6 +1,6 @@
-package tasks;
+package duke.tasks;
 
-import main.StorageElement;
+import duke.main.StorageElement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

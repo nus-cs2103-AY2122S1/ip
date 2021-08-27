@@ -1,6 +1,6 @@
-package main;
+package duke.main;
 
-import exceptions.DukeException;
+import duke.exceptions.DukeException;
 
 import java.io.File;
 import java.io.FileNotFoundException;

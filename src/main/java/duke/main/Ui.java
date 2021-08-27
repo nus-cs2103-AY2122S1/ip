@@ -1,8 +1,6 @@
-package main;
+package duke.main;
 
-import commands.Command;
-import exceptions.DukeException;
-import tasks.Task;
+import duke.tasks.Task;
 
 import java.util.Scanner;
 

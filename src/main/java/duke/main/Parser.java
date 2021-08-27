@@ -1,9 +1,9 @@
-package main;
+package duke.main;
 
-import commands.*;
-import exceptions.EmptyDescriptionException;
-import exceptions.EmptyTimeException;
-import exceptions.InvalidCommandException;
+import duke.commands.*;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.EmptyTimeException;
+import duke.exceptions.InvalidCommandException;
 
 import java.util.Arrays;
 import java.util.List;

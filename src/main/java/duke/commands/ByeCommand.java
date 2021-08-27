@@ -1,9 +1,9 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
-import main.Ui;
-import main.Storage;
-import main.TaskList;
+import duke.exceptions.DukeException;
+import duke.main.Ui;
+import duke.main.Storage;
+import duke.main.TaskList;
 
 public class ByeCommand extends Command {
     public ByeCommand() {

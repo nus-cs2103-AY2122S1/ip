@@ -1,13 +1,13 @@
-package commands;
+package duke.commands;
 
-import exceptions.DukeException;
-import exceptions.EmptyDescriptionException;
-import exceptions.EmptyTimeException;
-import main.Ui;
-import main.Storage;
-import tasks.Deadline;
-import tasks.Task;
-import main.TaskList;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.EmptyTimeException;
+import duke.main.Ui;
+import duke.main.Storage;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.main.TaskList;
 
 public class DeadlineCommand extends Command {
     private int byIndex;
