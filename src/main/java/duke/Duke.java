@@ -1,11 +1,15 @@
 package duke;
 
 /**
- * Main file of the duke folder. Runs the while loop to keep the bot going
+ * Main file for the duke bot. The duke bot keeps track of all your task and allows you to mark as complete.
+ * Call list to see the list of task. Each task can be completed. When a task is completed, it will still appear
+ * when you call list this time, but will be deleted from history for storage purposes the next time it is ran.
+ * Use dukebot to mark down tasks today!
  */
 public class Duke {
 
     private static boolean isRunning = false;
+
     /**
      * Function starts the process of the dukebot, closes when the "Bye command is issued"
      */

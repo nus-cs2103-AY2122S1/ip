@@ -54,6 +54,13 @@ public class Parser {
         return packagedCommand;
     }
 
+    /**
+     * Used to parse a different kind of string format and package into and arraylist of task. Only for strings
+     * found in the history, aka persistent storage
+     * @param previousHistory ArrayList of strings in previous history
+     * @return
+     * @throws InvalidCommandException
+     */
     public static ArrayList<Command> parsePreloadedTasks(ArrayList<String> previousHistory) throws InvalidCommandException {
         int eventTypeIndex = 1;
         int isCompletedIndex = 4;

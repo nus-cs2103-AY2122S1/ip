@@ -1,18 +1,12 @@
 package duke;
 
-import duke.*;
-
 import java.util.ArrayList;
-
-import static duke.Task.TaskType.*;
-
 
 /**
  * This is the logic layer where most of the commands are processed and errors are handled.
  * Please refer to the structure of the diagram in the docs for more information
  */
 public class Logic {
-
 
     /**
      * This is to check if any special command or empty command is given
@@ -21,7 +15,6 @@ public class Logic {
      * @throws InvalidCommandException is throwed when there is an invalid command in the form of a string
      */
     public static void checkIfSpecialComand(String command) throws InvalidCommandException {
-
         //duke.Logic to check each individual commands, checks for special commands first, then checks for other input
         //Use duke.Parser to package command into a packaged command
         Command packagedCommand = Parser.parse(command);

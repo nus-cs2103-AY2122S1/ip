@@ -26,6 +26,13 @@ public class Command {
         this.log = log;
     }
 
+    /**
+     * Overloaded constructor for Command class that includes local dateTime
+     * @param taskType See above
+     * @param listOfCommandInputs See above
+     * @param log See above
+     * @param localDateTime Includes the localDateTime for command
+     */
     public Command(Task.TaskType taskType, ArrayList<String> listOfCommandInputs, String log, LocalDateTime localDateTime) {
         this.taskType = taskType;
         this.listOfCommandInputs = listOfCommandInputs;
@@ -58,6 +65,10 @@ public class Command {
         return this.log;
     }
 
+    /**
+     * Returns local dateTime
+     * @return localdatetime.
+     */
     public LocalDateTime getLocalDateTime() {
         return this.localDateTime;
     }

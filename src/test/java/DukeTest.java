@@ -7,7 +7,14 @@ import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Class to handle testing for the dukeBot.
+ */
 public class DukeTest {
+
+    /**
+     * To test the creation and writing of the todo class. Checks if to string is correct
+     */
     @Test
     public void TodoTest() {
         Todo todoDummy = new Todo("Test dummy");
@@ -22,7 +29,9 @@ public class DukeTest {
         assertEquals(completedTodoDummyString, todoDummy.toString());
     }
 
-
+    /**
+     * To test the creation and string representation of deadline class
+     */
     @Test
     public void DeadlineTest() {
         LocalDateTime testDeadlineDateTime = LocalDateTime.of(2020, 2, 28, 23, 00);

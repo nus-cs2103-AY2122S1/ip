@@ -70,6 +70,12 @@ public class DataHandlerLayer {
         }
     }
 
+    /**
+     * Deletes any task in the specified postion of log
+     * @param position in the log which is based on index.
+     * @throws IndexOutOfBoundsException If the player specifies a postion outside the length of the log
+     * this error is thrown
+     */
     public static void delete(int position) throws IndexOutOfBoundsException {
         if (position == 0) {
             throw new IndexOutOfBoundsException();
@@ -85,18 +91,35 @@ public class DataHandlerLayer {
         history.printAllLines();
     }
 
+    /**
+     * Closes the printer
+     */
     public static void stopWriting() {
         history.stopWriting();
     }
 
+    /**
+     * Packages the data(in string) into Commands in the persistent storage using
+     * this commands. The data is packaged as
+     * Command classes. To be passed to Logic for processing
+     * @return An arraylist of packaged commands
+     * @throws InvalidCommandException thrown when any of the commands in string cannot be packaged as a command class.
+     */
     public static ArrayList<Command> loadPreset() throws InvalidCommandException {
         return Parser.parsePreloadedTasks(history.getAll_lines());
     }
 
+    /**
+     * Appends any task written to history.
+     * @param task
+     */
     public static void appendToHistory(Task task) {
         history.write(task.toString());
     }
 
+    /**
+     * Updates history and writes stuff down. Will auto clear all the tasks that is not done.
+     */
     public static void updateHistory() {
         history.clear_history();
         for (Task task : log) {
