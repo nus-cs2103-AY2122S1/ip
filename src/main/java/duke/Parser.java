@@ -4,9 +4,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Parser {
+
+    /**
+     * Constructor for Parser Object.
+     */
     Parser() {}
 
-    public ArrayList<String> parseInput (String input) throws DukeException {
+    /**
+     * Returns parsed input in an Arraylist.
+     *
+     * @param input String input from user.
+     * @return ArrayList of command, entry, timing (if present).
+     * @throws DukeException Error is thrown if Command is invalid.
+     */
+    public ArrayList<String> parseInput(String input) throws DukeException {
         ArrayList<String> terms = new ArrayList<>();
         this.parseString(input, terms);
         String command = "";
@@ -21,7 +32,7 @@ public class Parser {
         return new ArrayList<>(Arrays.asList(command, entry, timing));
     }
 
-    private void parseString (String input, ArrayList<String> terms) {
+    private void parseString(String input, ArrayList<String> terms) {
         //Function to store all terms in input as separate Strings (separated by space in the input)
         int length = input.length();
         if (length >= 1) {
