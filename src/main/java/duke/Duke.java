@@ -2,6 +2,8 @@ package duke;
 
 import command.Command;
 import exception.DukeException;
+import javafx.application.Platform;
+import message.Message;
 import parser.Parser;
 import storage.Storage;
 import storage.StorageFile;
@@ -33,6 +35,10 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
+            if (this.parser.detectExitCommand(input)) {
+                Platform.exit();
+            }
+
             Command command = this.parser.makeCommand(input);
             command.execute(this.list);
             return command.getOutputMessage().toString();
