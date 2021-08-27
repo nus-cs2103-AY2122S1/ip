@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -13,7 +12,6 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String taskType;
-    protected String by;
     protected LocalDate date;
 
     public Task(String description, String taskType) {
@@ -40,7 +38,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     public void markAsDone() {
