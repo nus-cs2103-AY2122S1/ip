@@ -1,3 +1,4 @@
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -69,6 +70,8 @@ public class Duke {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error: Description for Event cannot be empty.\nexample:\nevent meeting /at Tuesday 12pm");
+        } catch (DateTimeException e) {
+            System.out.println("Error: Unsupported date format, must be in format yyyy-mm-dd.");
         }
     }
 
@@ -88,6 +91,8 @@ public class Duke {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error: Description for deadline cannot be empty." +
                     "\nexample:\ndeadline return book /by Sunday");
+        } catch (DateTimeException e) {
+            System.out.println("Error: Unsupported date format, must be in format yyyy-mm-dd.");
         }
 
     }

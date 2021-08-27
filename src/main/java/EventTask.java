@@ -1,19 +1,23 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class EventTask extends Task {
 
-    private String time;
+    private LocalDate date;
 
     /**
      * Constructor for EventTask object.
      * @param name name of task.
-     * @param time time of event.
+     * @param date date of event.
      */
-    public EventTask(String name, String time) {
+    public EventTask(String name, String date) throws DateTimeException {
         super(name);
-        this.time = time;
+        this.date = LocalDate.parse(date);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.time + ")";
+        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
     }
 }
