@@ -9,14 +9,29 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * Represents the storage that loads data from and saves data to the database file.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath the path to the txt database file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
 
+    /**
+     * Load data from the txt database file.
+     *
+     * @return an array of tasks as represented by the database
+     * @throws DukeDatabaseException if database could not be created due to unknown error
+     */
     public Task[] loadData() throws DukeDatabaseException {
         File db = new File(this.filePath);
         ArrayList<Task> taskList = new ArrayList<>();
@@ -70,6 +85,12 @@ public class Storage {
     }
 
 
+    /**
+     * Save data in the CLI to the txt database file.
+     *
+     * @param taskList the list of tasks to be written to the file, which will overwrite the database
+     * @throws IOException if unknown error is thrown while writing to the database
+     */
     public void saveData(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.filePath, false);
         BufferedWriter bw = new BufferedWriter(fw);
