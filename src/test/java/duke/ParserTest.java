@@ -13,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ParserTest {
     @Test
     public void testGetAction() {
-        assertEquals(Parser.Action.LIST, Parser.getAction("list"));
-        assertEquals(Parser.Action.DEADLINE, Parser.getAction("deadline"));
-        assertEquals(Parser.Action.UNKNOWN, Parser.getAction("blah"));
+        assertEquals(Action.LIST, Parser.getAction("list"));
+        assertEquals(Action.DEADLINE, Parser.getAction("deadline"));
+        assertEquals(Action.UNKNOWN, Parser.getAction("blah"));
     }
 
     @Test

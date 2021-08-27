@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -8,15 +9,13 @@ import duke.task.Todo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * The Parser class handles all actions from users' input.
  */
 public class Parser {
-    /** The Action enum enumerates all possible actions. */
-    public enum Action {
-        BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, FIND, UNKNOWN
-    }
+
 
     /** The spliter for the date time. */
     public static final String SPLITER = ",";
@@ -100,6 +99,69 @@ public class Parser {
             return ldt;
         } catch (DateTimeParseException e) {
             throw new DukeException("time should be in the format: DD/MM/YYYY HH:MM");
+        }
+    }
+
+    /**
+     * Returns a command based on the given input.
+     *
+     * @param input The given input.
+     * @return A command.
+     * @throws DukeException When parse exception happens.
+     */
+    public static Command parseCommand(String input) {
+        int firstWordIndex = input.indexOf(" ");
+        String actionText = firstWordIndex == -1 ? input : input.substring(0, firstWordIndex);
+        Action action = Parser.getAction(actionText);
+        String rest = input.substring(firstWordIndex + 1);
+        switch (action) {
+        case BYE: {
+            return new ExitCommand(Action.BYE);
+        }
+        case LIST: {
+            return new ShowCommand(Action.LIST);
+        }
+        case DONE: {
+            try {
+                int taskNumber = Integer.parseInt(rest);
+                return new SetCommand(Action.DONE, taskNumber - 1);
+            } catch (NumberFormatException e) {
+                throw new DukeException("A number must be given to specified the task.");
+            }
+        }
+        case TODO: {
+            if (firstWordIndex == -1) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
+            return new AddCommand(Action.TODO, rest);
+        }
+        case DEADLINE: {
+            if (firstWordIndex == -1) {
+                throw new DukeException("The description of a deadline cannot be empty.");
+            }
+            return new AddCommand(Action.DEADLINE, rest);
+        }
+        case EVENT: {
+            if (firstWordIndex == -1) {
+                throw new DukeException("The description of an event cannot be empty.");
+            }
+            return new AddCommand(Action.DEADLINE, rest);
+        }
+        case DELETE: {
+            try {
+                int taskNumber = Integer.parseInt(rest);
+                return new DeleteCommand(Action.DELETE, taskNumber - 1);
+            } catch (NumberFormatException e) {
+                throw new DukeException("A number must be given to specified the task.");
+            }
+        }
+        case FIND: {
+            return new FindCommand(Action.FIND, rest);
+        }
+        case UNKNOWN:
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        default:
+            return null;
         }
     }
 }
