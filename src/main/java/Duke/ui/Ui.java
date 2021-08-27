@@ -4,14 +4,11 @@ import duke.exception.InvalidInputException;
 import duke.exception.InvalidInstructionException;
 import duke.task.Task;
 
-<<<<<<< HEAD
+import java.util.ArrayList;
+
 /**
  * Represents the user interface of Duke. Deals with Duke's interaction with the user.
  */
-=======
-import java.util.ArrayList;
-
->>>>>>> branch-Level-9
 public class Ui {
 
     private static final String line =

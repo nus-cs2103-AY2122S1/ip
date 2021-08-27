@@ -29,9 +29,9 @@ public class StorageTest {
     public void testWriteAndReadFromFile() {
         Storage storage = new Storage("testFile.txt");
         try {
-            storage.writeToStorage("hi", false);
+            storage.writeToStorage("Coming from storage test.", false);
             ArrayList<String> results = storage.getStorageContents();
-            assertEquals("hi", results.get(0));
+            assertEquals("Coming from storage test.", results.get(0));
         } catch (IOException e) {
             Assertions.fail();
         }
