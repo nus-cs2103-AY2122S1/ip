@@ -62,6 +62,8 @@ public class Ui {
             throw new VirushadeException("OOPS!!! Please enter an integer after 'done'.");
         } else if (str.startsWith("delete")) {
             throw new VirushadeException("OOPS!!! Please enter an integer after 'delete'.");
+        } else if (str.startsWith("find")) {
+            throw new VirushadeException("OOPS!!! Please tell me what to find.");
         } else {
             throw new VirushadeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -77,6 +79,8 @@ public class Ui {
         try {
             if (str.equals("list")) {
                 TaskList.list();
+            } else if (str.startsWith("find ")) {
+                TaskList.find(str.substring(5));
             } else if (str.startsWith("done ")) {
                 TaskList.completeTask(str.substring(5));
             } else if (str.startsWith("todo ")) {
