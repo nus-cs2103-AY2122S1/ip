@@ -1,3 +1,5 @@
+package duke.data.exceptions;
+
 public class InvalidInputException extends DukeException {
     private String errorMessage;
 

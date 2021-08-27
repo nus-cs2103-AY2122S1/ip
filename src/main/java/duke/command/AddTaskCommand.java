@@ -1,4 +1,14 @@
-import java.util.List;
+package duke.command;
+
+import duke.data.exceptions.DukeException;
+import duke.data.exceptions.InvalidInputException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 public class AddTaskCommand extends Command {
     private static final String TODO = "todo";
@@ -40,7 +50,7 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task addedTask = addTask(taskList);
         storage.update(taskList);
         ui.showAddTaskMessage(addedTask, taskList);

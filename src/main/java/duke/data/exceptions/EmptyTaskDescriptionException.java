@@ -1,3 +1,5 @@
+package duke.data.exceptions;
+
 public class EmptyTaskDescriptionException extends DukeException {
     private String taskType;
 
@@ -16,7 +18,7 @@ public class EmptyTaskDescriptionException extends DukeException {
         case "event":
             return "☹ OOPS!!! The description of a event cannot be empty.";
         default:
-            return "Error: EmptyTaskDescriptionException";
+            return "Error: duke.data.exceptions.EmptyTaskDescriptionException";
         }
     }
 }

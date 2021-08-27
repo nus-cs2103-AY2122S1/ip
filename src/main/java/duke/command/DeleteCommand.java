@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.data.exceptions.DukeException;
+import duke.data.exceptions.InvalidInputException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+
 public class DeleteCommand extends Command {
     private int taskNumber;
 
@@ -17,7 +26,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task removedTask = deleteTask(taskList);
         storage.update(taskList);
         ui.showDeleteTask(removedTask, taskList);

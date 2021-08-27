@@ -1,3 +1,5 @@
+package duke.data.exceptions;
+
 public class InvalidDateAndTimeException extends DukeException {
     private static final String MISSING_DEADLINE = "missing deadline";
     private static final String MISSING_EVENT_TIME = "missing event time";
@@ -26,7 +28,7 @@ public class InvalidDateAndTimeException extends DukeException {
         case INVALID_DATE_AND_TIME:
             return "☹ OOPS!!! Please provide a valid date and time in the format dd/mm/yyyy hh:mm.";
         default:
-            return "Error: InvalidDateAndTimeException";
+            return "Error: duke.data.exceptions.InvalidDateAndTimeException";
         }
     }
     //todo message for date or time being optional?

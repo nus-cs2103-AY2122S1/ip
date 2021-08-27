@@ -1,6 +1,12 @@
+package duke.command;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentMap;
+
+import duke.data.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.task.TaskList;
 
 public abstract class Command {
     private static List<String> commandTypes = new ArrayList<>();
@@ -8,7 +14,7 @@ public abstract class Command {
 
     public Command() {}
 
-    abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return this.isExit;

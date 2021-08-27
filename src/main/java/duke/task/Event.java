@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Task;
+
 public class Event extends Task {
     private String taskType = "[E]";
     private String taskName;
@@ -15,7 +19,6 @@ public class Event extends Task {
         this.taskName = taskName;
         this.eventTime = eventTime;
         if (isDone) {
-            System.out.println("marked");
             this.markAsDone();
         }
     }

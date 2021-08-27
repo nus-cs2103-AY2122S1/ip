@@ -1,4 +1,18 @@
+package duke.parser;
+
 import java.util.List;
+
+import duke.command.AddTaskCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.data.DateAndTime;
+import duke.data.exceptions.DukeException;
+import duke.data.exceptions.EmptyTaskDescriptionException;
+import duke.data.exceptions.InvalidDateAndTimeException;
+import duke.data.exceptions.InvalidInputException;
 
 public class Parser {
     private static final String TODO = "todo";
@@ -70,7 +84,7 @@ public class Parser {
     private String getTaskName(String command, String commandType) throws InvalidInputException, EmptyTaskDescriptionException {
         if (commandType.equals(TODO)) {
             if (command.equals(TODO)) {
-                throw new EmptyTaskDescriptionException("Empty Todo Description", TODO);
+                throw new EmptyTaskDescriptionException("Empty duke.task.Todo Description", TODO);
             } else {
                 if (!Character.isWhitespace(command.charAt(TODO.length()))) {
                     throw new InvalidInputException("invalid input");
@@ -81,7 +95,7 @@ public class Parser {
             }
         } else {
             if (command.equals(DEADLINE)) {
-                throw new EmptyTaskDescriptionException("Empty Deadline Description", DEADLINE);
+                throw new EmptyTaskDescriptionException("Empty duke.task.Deadline Description", DEADLINE);
             } else {
                 int startingIndex = command.indexOf(" ");
                 int endingIndex = command.indexOf("/");

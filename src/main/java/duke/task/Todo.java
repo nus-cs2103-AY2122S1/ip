@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Task;
+
 public class Todo extends Task {
     private String taskType = "[T]";
     private String taskName;

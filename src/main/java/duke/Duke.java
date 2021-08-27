@@ -1,8 +1,15 @@
+package duke;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.data.exceptions.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 //todo command to print deadlines/events occuring on specific date
 
@@ -34,9 +41,9 @@ public class Duke {
         }
     }
 
-//    private static List<Task> initialiseBot() {
-//        List<Task> taskList = new ArrayList<>();
-//        Storage dataManager = new Storage();
+//    private static List<duke.task.Task> initialiseBot() {
+//        List<duke.task.Task> taskList = new ArrayList<>();
+//        duke.storage.Storage dataManager = new duke.storage.Storage();
 //
 //        try {
 //            boolean isFileCreated = DATA_FILE.createNewFile();
@@ -47,7 +54,7 @@ public class Duke {
 //            e.printStackTrace();
 //        }
 //
-//        String message = "Hello! I'm Duke\n"
+//        String message = "Hello! I'm duke.Duke\n"
 //                + "What can I do for you?";
 //        System.out.println(message);
 //
@@ -59,23 +66,23 @@ public class Duke {
 //        System.out.println(message);
 //    }
 //
-//    private static Task getTask(String message, String taskType) throws EmptyTaskDescriptionException, InvalidDateAndTimeException, InvalidInputException {
+//    private static duke.task.Task getTask(String message, String taskType) throws duke.data.exceptions.EmptyTaskDescriptionException, duke.data.exceptions.InvalidDateAndTimeException, duke.data.exceptions.InvalidInputException {
 //
 //        switch (taskType) {
 //            case TODO:
 //                if (message.trim().equals(TODO)) {
-//                    throw new EmptyTaskDescriptionException("Empty Todo Description", TODO);
+//                    throw new duke.data.exceptions.EmptyTaskDescriptionException("Empty duke.task.Todo Description", TODO);
 //                } else {
 //                    if (!Character.isWhitespace(message.charAt(4))) {
-//                        throw new InvalidInputException("invalid input");
+//                        throw new duke.data.exceptions.InvalidInputException("invalid input");
 //                    } else {
 //                        String taskName = message.substring(TODO.length() + 1);
-//                        return new Todo(taskName);
+//                        return new duke.task.Todo(taskName);
 //                    }
 //                }
 //            case DEADLINE:
 //                if (message.trim().equals(DEADLINE)) {
-//                    throw new EmptyTaskDescriptionException("Empty Deadline Description", DEADLINE);
+//                    throw new duke.data.exceptions.EmptyTaskDescriptionException("Empty duke.task.Deadline Description", DEADLINE);
 //                } else {
 //                    String deadline = getDateAndTime(message, DEADLINE);
 //
@@ -85,11 +92,11 @@ public class Duke {
 //
 //                    //todo deadline return book being invalid input rather than invalid date.
 //
-//                    return new Deadline(taskName, deadline);
+//                    return new duke.task.Deadline(taskName, deadline);
 //                }
 //            case EVENT:
 //                if (message.trim().equals(EVENT)) {
-//                    throw new EmptyTaskDescriptionException("Empty Event Description", EVENT);
+//                    throw new duke.data.exceptions.EmptyTaskDescriptionException("Empty duke.task.Event Description", EVENT);
 //                } else {
 //                    String eventTime = getDateAndTime(message, EVENT);
 //
@@ -97,11 +104,11 @@ public class Duke {
 //                    int endingIndex = message.indexOf("/");
 //                    String taskName = message.substring(startingIndex + 1, endingIndex - 1);
 //
-//                    return new Event(taskName, eventTime);
+//                    return new duke.task.Event(taskName, eventTime);
 //                }
 //        }
 //
-//        return new Task();
+//        return new duke.task.Task();
 //    }
 
     public void run() {
@@ -133,7 +140,7 @@ public class Duke {
     }
 
 //        boolean status = true;
-//        List<Task> tasks = initialiseBot();
+//        List<duke.task.Task> tasks = initialiseBot();
 //
 //        Scanner sc = new Scanner(System.in);
 //
@@ -157,8 +164,8 @@ public class Duke {
 //                addTaskFromCommand(tasks, message, EVENT);
 //            } else {
 //                try {
-//                    throw new InvalidInputException("invalid input");
-//                } catch (DukeException e) {
+//                    throw new duke.data.exceptions.InvalidInputException("invalid input");
+//                } catch (duke.data.DukeException e) {
 //                    System.out.println(e.getMessage());
 //                }
 //            }
@@ -168,30 +175,30 @@ public class Duke {
 //        sc.close();
 //    }
 //
-//    private static void addTaskFromCommand(List<Task> tasks, String message, String taskType) {
-//        Task task = null;
+//    private static void addTaskFromCommand(List<duke.task.Task> tasks, String message, String taskType) {
+//        duke.task.Task task = null;
 //        try {
 //            task = getTask(message, taskType);
 //            if (task.isEmpty()) {
-//                throw new InvalidInputException("error");
+//                throw new duke.data.exceptions.InvalidInputException("error");
 //            }
 //            addTask(task, tasks);
-//        } catch (DukeException e) {
+//        } catch (duke.data.DukeException e) {
 //            System.out.println(e.getMessage());
 //        }
 //    }
 //
-//    private static void deleteTask(String message, List<Task> tasks) {
+//    private static void deleteTask(String message, List<duke.task.Task> tasks) {
 //        try {
 //            int taskPosition = getTaskNumber(message) - 1;
 //            if (taskPosition >= tasks.size()) {
-//                throw new InvalidInputException("invalid task number entered");
+//                throw new duke.data.exceptions.InvalidInputException("invalid task number entered");
 //            } else {
-//                Task removedTask = tasks.get(taskPosition);
+//                duke.task.Task removedTask = tasks.get(taskPosition);
 //                tasks.remove(taskPosition);
 //
 //                //TODO make better
-//                Storage dataManager = new Storage(tasks);
+//                duke.storage.Storage dataManager = new duke.storage.Storage(tasks);
 //                dataManager.update(tasks);
 //
 //                String displayedMessage = "Noted. I've removed this task:\n"
@@ -199,27 +206,27 @@ public class Duke {
 //                        + getTotalTaskString(tasks);
 //                System.out.println(displayedMessage);
 //            }
-//        } catch (DukeException e) {
+//        } catch (duke.data.DukeException e) {
 //            System.out.println(e.getMessage());
 //        }
 //    }
 //
-//    private static void addTask(Task task, List<Task> tasks) {
+//    private static void addTask(duke.task.Task task, List<duke.task.Task> tasks) {
 //        tasks.add(task);
 //
 //        //TODO make better
-//        Storage storage = new Storage(tasks);
+//        duke.storage.Storage storage = new duke.storage.Storage(tasks);
 //        storage.update(tasks);
 //
 //        String displayedMessage = getAddedSuccessMessage(task, tasks);
 //        System.out.println(displayedMessage);
 //    }
 //
-//    private static String getTotalTaskString(List<Task> tasks) {
+//    private static String getTotalTaskString(List<duke.task.Task> tasks) {
 //        return String.format("Now you have %d tasks in the list.", getTotalTaskNumber(tasks));
 //    }
 //
-//    private static String getAddedSuccessMessage(Task task, List<Task> tasks) {
+//    private static String getAddedSuccessMessage(duke.task.Task task, List<duke.task.Task> tasks) {
 //        String successMessage = "Got it. I've added this task:";
 //        String taskString = task.toString();
 //        String result = successMessage + "\n"
@@ -228,20 +235,20 @@ public class Duke {
 //        return result;
 //    }
 //
-//    private static int getTotalTaskNumber(List<Task> tasks) {
+//    private static int getTotalTaskNumber(List<duke.task.Task> tasks) {
 //        return tasks.size();
 //    }
 //
-//    private static void checkValidTaskName(String message) throws InvalidInputException {
+//    private static void checkValidTaskName(String message) throws duke.data.exceptions.InvalidInputException {
 //        int startingIndex = message.indexOf(" ");
 //        int endingIndex = message.indexOf("/");
 //
 //        if (startingIndex < 0 || endingIndex - startingIndex <= 1) {
-//            throw new InvalidInputException("invalid input");
+//            throw new duke.data.exceptions.InvalidInputException("invalid input");
 //        }
 //    }
 //
-//    private static String getDateAndTime(String message, String taskType) throws InvalidDateAndTimeException, InvalidInputException {
+//    private static String getDateAndTime(String message, String taskType) throws duke.data.exceptions.InvalidDateAndTimeException, duke.data.exceptions.InvalidInputException {
 //        int startingIndex;
 //
 //        checkValidTaskName(message);  //todo move to better slot?
@@ -251,25 +258,25 @@ public class Duke {
 //                startingIndex = message.indexOf("/by ");
 //
 //                if (startingIndex < 0 || startingIndex + 3 == message.length() - 1) {
-//                    throw new InvalidDateAndTimeException("missing deadline");
+//                    throw new duke.data.exceptions.InvalidDateAndTimeException("missing deadline");
 //                }
 //
-//                DateAndTime dateAndTime1 = new DateAndTime(message);
+//                duke.data.DateAndTime dateAndTime1 = new duke.data.DateAndTime(message);
 //                return dateAndTime1.getReformattedDateAndTime();
 //            case EVENT:
 //                startingIndex = message.indexOf("/at ");
 //
 //                if (startingIndex < 0 || startingIndex + 3 == message.length() - 1) {
-//                    throw new InvalidDateAndTimeException("missing event time");
+//                    throw new duke.data.exceptions.InvalidDateAndTimeException("missing event time");
 //                }
 //
-//                DateAndTime dateAndTime2 = new DateAndTime(message);
+//                duke.data.DateAndTime dateAndTime2 = new duke.data.DateAndTime(message);
 //                return dateAndTime2.getReformattedDateAndTime();
 //            }
 //        return "";
 //    }
 //
-//    private static int getTaskNumber (String message) throws InvalidInputException {
+//    private static int getTaskNumber (String message) throws duke.data.exceptions.InvalidInputException {
 //        String numberString = "";
 //        for (int i = 0; i < message.length(); i++) {
 //            char currentChar = message.charAt(i);
@@ -282,24 +289,24 @@ public class Duke {
 //
 //        int number;
 //        if (numberString.isEmpty()) {
-//            throw new InvalidInputException("invalid task number entered");
+//            throw new duke.data.exceptions.InvalidInputException("invalid task number entered");
 //        } else {
 //            number = Integer.parseInt(numberString);
 //        }
 //        return number;
 //    }
 //
-//    private static void markTaskAsDone(String message, List<Task> tasks) {
+//    private static void markTaskAsDone(String message, List<duke.task.Task> tasks) {
 //        try {
 //            int taskPosition = getTaskNumber(message) - 1;
 //            if (taskPosition >= tasks.size()) {
-//                throw new InvalidInputException("invalid task number entered");
+//                throw new duke.data.exceptions.InvalidInputException("invalid task number entered");
 //            } else {
-//                Task taskMarked = tasks.get(taskPosition);
+//                duke.task.Task taskMarked = tasks.get(taskPosition);
 //                taskMarked.markAsDone();
 //
 //                //TODO make better
-//                Storage storage = new Storage(tasks);
+//                duke.storage.Storage storage = new duke.storage.Storage(tasks);
 //                storage.update(tasks);
 //
 //                String displayedMessage = "Nice! I've marked this task as done:\n"
@@ -307,16 +314,16 @@ public class Duke {
 //                        + taskMarked.toString();
 //                System.out.println(displayedMessage);
 //            }
-//        } catch (DukeException e) {
+//        } catch (duke.data.DukeException e) {
 //            System.out.println(e.getMessage());
 //        }
 //    }
 //
-//    private static void printTasks(List<Task> tasks) {
+//    private static void printTasks(List<duke.task.Task> tasks) {
 //        String message = "Here are the tasks in your list:";
 //        System.out.println(message);
 //        for (int i = 1; i <= tasks.size(); i++) {
-//            Task currentTask = tasks.get(i - 1);
+//            duke.task.Task currentTask = tasks.get(i - 1);
 //            String displayedTask = i + "." + currentTask.toString();
 //            System.out.println(displayedTask);
 //        }

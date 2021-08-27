@@ -1,6 +1,14 @@
+package duke.storage;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 public class Storage {
     //TODO create file method
