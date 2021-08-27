@@ -35,7 +35,7 @@ public class Lifeline {
      *
      * @param filepath Path to load or save tasks
      */
-    Lifeline(String filepath) {
+    public Lifeline(String filepath) {
         this.storage = new Storage(filepath);
         this.ui = new Ui();
         try {
@@ -43,6 +43,31 @@ public class Lifeline {
         } catch (LifelineException e) {
             this.taskList = new TaskList(new ArrayList<>());
         }
+    }
+
+    /**
+     * Gets the appropriate response from Lifeline if user inputs a valid command
+     * Method is used only for GUI
+     *
+     * @param command User input
+     * @return Response from Lifeline if user inputs a valid command. If user inputs invalid command, error
+     * message is returned instead.
+     */
+    public String getResponse(String command) {
+        try {
+            Command c = Parser.parse(command);
+            return c.getExecute().apply(command, storage, taskList, ui);
+        } catch (LifelineException e) {
+            return ui.showError(e.getMessage());
+        }
+    }
+
+    /**
+     * Starts the console program
+     */
+    public void start() {
+        ui.printToConsole(ui.greet());
+        this.getInput();
     }
 
     private void getInput() {
@@ -64,13 +89,5 @@ public class Lifeline {
                 ui.printToConsole(ui.showError(e.getMessage()));
             }
         }
-    }
-
-    /**
-     * Starts the program
-     */
-    public void start() {
-        ui.printToConsole(ui.greet());
-        this.getInput();
     }
 }
