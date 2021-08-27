@@ -19,7 +19,7 @@ public class Duke {
 
     private static final String DATA_FOLDER = "./data";
     private static final String DATA_FILE = "duke.txt";
-
+    
     // All UI functionality
     private final Ui ui;
 
