@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
-
-
+/**
+ * Class of chatbot
+ */
 public class Duke {
 
     public enum Command {
