@@ -10,12 +10,25 @@ import java.util.Scanner;
 public class Storage {
     private Path filePath = null;
     private Path directoryPath = null;
+
+    /**
+     * Constructor for a new Storage object.
+     *
+     * @param path Path for the new storage object.
+     */
     public Storage(String path) {
         String home = System.getProperty("user.home");
         //        java.nio.file.Path directoryPath = java.nio.file.Paths.get(home, "iP", "data");
         this.filePath = java.nio.file.Paths.get(home, "iP", path.split("/")[0], path.split("/")[1]);
         this.directoryPath = java.nio.file.Paths.get(home, "iP", path.split("/")[0]);
     }
+
+    /**
+     * Converts Task object to a text format suitable for saving in a storage.
+     *
+     * @param task Task object to be converted to text.
+     * @return String representation of the given task.
+     */
     public String convertTaskToText(Task task) {
         String result = task.type + "|";
         if(task.isCompleted()) {
@@ -29,6 +42,13 @@ public class Storage {
         }
         return result;
     }
+
+    /**
+     * Converts text version of a task to an actual Task object.
+     *
+     * @param text Text representation of a task to be converted to actual Task object.
+     * @return Task object corresponding to the given text.
+     */
     public Task convertTextToTask(String text) {
         String[] str = text.split("\\|");
         Task newTask;
@@ -44,6 +64,12 @@ public class Storage {
         }
         return newTask;
     }
+
+    /**
+     * Writes data to the storage.
+     *
+     * @param taskList List of task to be written to the storage.
+     */
     public void writeToFile(TaskList taskList) {
         StringBuilder combinedTask = new StringBuilder();
         for(int i = 0; i < taskList.length(); i++) {
@@ -57,6 +83,10 @@ public class Storage {
             System.out.println("error occurred 2");
         }
     }
+
+    /**
+     * Creates a new storage file if it is not present.
+     */
     public void createFile() {
         File newDirectory = new File(String.valueOf(directoryPath));
         File newFile = new File(String.valueOf(filePath));
@@ -68,6 +98,12 @@ public class Storage {
             System.out.println("error occurred 1");
         }
     }
+
+    /**
+     * Writes new data to the storage file if it exists, if not create the file before writing.
+     *
+     * @param taskList List of task to be saved.
+     */
     public void saveTask(TaskList taskList) {
         boolean directoryExists = java.nio.file.Files.exists(filePath);
         if(!directoryExists) {
@@ -75,6 +111,12 @@ public class Storage {
         }
         writeToFile(taskList);
     }
+
+    /**
+     * Returns tasks stored in the storage.
+     *
+     * @return TaskList containing all the work stored in the storage.
+     */
     public TaskList loadTask() {
         TaskList taskList = new TaskList();
         try {
