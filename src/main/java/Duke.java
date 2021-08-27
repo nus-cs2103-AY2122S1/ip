@@ -71,7 +71,7 @@ public class Duke {
                     }
                     description = description.substring(0, description.length() - 1);
                     by = by.substring(0, by.length() - 1);
-                    LocalDateTime byLocalDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    LocalDateTime byLocalDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     taskList.addTask(new Deadline(description, false, byLocalDateTime));
                     taskAdded = true;
                 } else if (str.contains("event")) {
@@ -99,7 +99,7 @@ public class Duke {
                     }
                     description = description.substring(0, description.length() - 1);
                     at = at.substring(0, at.length() - 1);
-                    LocalDateTime atLocalDateTime = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    LocalDateTime atLocalDateTime = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                     taskList.addTask(new Event(description, false, atLocalDateTime));
                     taskAdded = true;
                 }
