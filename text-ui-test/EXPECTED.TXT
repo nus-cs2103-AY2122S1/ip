@@ -100,4 +100,13 @@ Error: Whoops... I do not know which task you are referring to. Please provide a
 Error: Whoops... I do not know which task you are referring to. Please provide a number.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
+Here are the matching tasks that I found:
+1. [T][X] read book
+2. [D][X] return book  (deadline: Dec 1 2021)
+3. [T][ ] borrow book
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+No tasks found.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 Goodbye human. See you soon!

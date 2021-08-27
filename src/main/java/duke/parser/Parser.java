@@ -41,6 +41,8 @@ public class Parser {
                 markAsDone(input);
             } else if (input.contains("delete")) {
                 deleteItem(input);
+            } else if (input.contains("find")) {
+                findItem(input);
             } else {
                 addItem(input);
             }
@@ -121,6 +123,16 @@ public class Parser {
     private void deleteItem(String input) throws DukeException {
         int index = getIndexFromInput(input);
         taskList.delete(index);
+    }
+
+    private void findItem(String input) throws DukeException {
+        String[] parsedInput = input.split(" ");
+        if (isIncomplete(parsedInput)) {
+            throw new DukeException("I'm sorry, but I do not quite understand what that means :(");
+        }
+
+        String keyword = parsedInput[1];
+        taskList.find(keyword);
     }
 
     /**
