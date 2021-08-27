@@ -1,8 +1,9 @@
 package duke;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.io.IOException;
+import java.io.FileNotFoundException;
 
 public class TaskList {
     private List<Task> tasks;
@@ -59,5 +60,28 @@ public class TaskList {
     public void remove(int idx) throws DukeException {
         this.tasks.remove(idx);
         this.storage.saveToFile(tasks);
+    }
+
+    /**
+     * Returns String of filtered tasks that match the input query.
+     * @param input Query to be searched.
+     * @return String result of filtered tasks to be printed.
+     * @throws DukeException If the input string is empty.
+     */
+    public String findTasks(String input) throws DukeException {
+        if (input.equals("")) {
+            throw new DukeException("HOW AM I SUPPOSED TO FIND AN EMPTY STRING YOU FOOL.");
+        }
+        List<Task> filteredTasks = this.tasks.stream().filter(task -> task.toString().contains(input.trim()))
+                .collect(Collectors.toList());
+        if (filteredTasks.isEmpty()) {
+            throw new DukeException("THERE ARE NO MATCHES");
+        }
+
+        StringBuilder output = new StringBuilder("THESE ARE THE TASKS THAT MATCH YOUR PLEA:\n");
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            output.append(String.format(" %s. %s\n", i + 1, filteredTasks.get(i)));
+        }
+        return output.toString();
     }
 }
