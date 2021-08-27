@@ -9,16 +9,16 @@ import java.io.IOException;
 
 
 public class Storage {
-    private String filePath;
+    private final String FILE_PATH;
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.FILE_PATH = filePath;
     }
 
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> savedTasks = new ArrayList<>();
-            File file = new File(filePath);
+            File file = new File(FILE_PATH);
             file.getParentFile().mkdirs();
 
             if (file.createNewFile()) return new ArrayList<Task>();
@@ -53,7 +53,7 @@ public class Storage {
 
     public void save(TaskList tasks) {
         try {
-            FileWriter writer = new FileWriter(this.filePath, false);
+            FileWriter writer = new FileWriter(this.FILE_PATH, false);
             tasks.forEach(task -> {
                 try {
                     writer.write(task.saveData() + "\n");
