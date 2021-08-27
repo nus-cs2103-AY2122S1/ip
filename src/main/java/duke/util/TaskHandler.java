@@ -11,13 +11,10 @@ import java.util.ArrayList;
  * @version CS2103T AY21/22 Semester 1
  */
 public class TaskHandler {
-    // Initialising error messages, to create more specific exception classes soon
     private static final String NO_TASKS_FOUND = "Nothing in the list... :( Type todo/event/deadline to add something first! :^)";
     private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n\t  %s\n\tYou currently have %d task(s) in the list.";
     private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\n\t  %s\n\tYou currently have %d undone task(s) in the list.";
     private static final String TASK_DELETED_MESSAGE = "Voila! ^_^ I've deleted this task:\n\t  %s\n\tYou currently have %d task(s) in the list.";
-    private static final String NO_SUCH_TASK_ID = "Awwww, I can't seem to find this task index. Try again? U_U";
-    private static final String NEGATIVE_TASK_ID = "Please enter a number starting from 1! V_V";
     private static final String TASK_LIST = "Here are the task(s) in your list! n_n\n\t";
 
     private final ArrayList<Task> taskList;
@@ -70,11 +67,11 @@ public class TaskHandler {
      */
     public void markTaskAsDone(int taskNumber) throws DukeException {
         if (taskNumber < 1) {
-            throw new DukeException(NEGATIVE_TASK_ID);
+            throw new DukeInvalidIndexException();
         } else if (taskList.size() == 0) {
             throw new DukeException(NO_TASKS_FOUND);
         } else if (taskNumber > taskList.size()) {
-            throw new DukeException(NO_SUCH_TASK_ID);
+            throw new DukeNoSuchTaskException();
         }
         int index = taskNumber - 1;
         Task t = taskList.get(index);
@@ -90,11 +87,11 @@ public class TaskHandler {
      */
     public void deleteTask(int taskNumber) throws DukeException {
         if (taskNumber < 1) {
-            throw new DukeException(NEGATIVE_TASK_ID);
+            throw new DukeInvalidIndexException();
         } else if (taskList.size() == 0) {
             throw new DukeException(NO_TASKS_FOUND);
         } else if (taskNumber > taskList.size()) {
-            throw new DukeException(NO_SUCH_TASK_ID);
+            throw new DukeNoSuchTaskException();
         }
         int index = taskNumber - 1;
         Task t = taskList.remove(index);
