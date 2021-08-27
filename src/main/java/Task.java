@@ -15,13 +15,12 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public boolean markAsDone() {
+    public void markAsDone() {
         if (!isDone) {
             isDone = true;
             System.out.println("  Nice! I've marked this task as done:");
-            System.out.println("    " + this.toString());
+            System.out.println("    " + this);
         }
-        return isDone;
     }
 
     public String getStatusIcon() {

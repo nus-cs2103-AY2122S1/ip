@@ -3,5 +3,9 @@ public enum CommandType {
     List,
     MarkAsDone,
     DeleteTask,
-    Search
+    Find,
+    Error,
+    AddToDo,
+    AddDeadline,
+    AddEvent
 }
