@@ -5,6 +5,9 @@ import duke.data.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * This class abstracts the done command that the user wants to execute.
+ */
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     private final int taskNum;

@@ -1,7 +1,9 @@
 package duke.data.task;
 
+/**
+ * This class abstracts a ToDo task.
+ */
 public class ToDo extends Task {
-
     /**
      * Constructs a ToDo task with the given description.
      *

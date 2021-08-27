@@ -5,6 +5,9 @@ import duke.data.task.Event;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * This class abstracts the event command that the user wants to execute.
+ */
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "event";
     private final Event newTask;

@@ -1,5 +1,8 @@
 package duke.data.task;
 
+/**
+ * This class abstracts a task.
+ */
 public abstract class Task {
     protected final String description;
     protected boolean isDone;

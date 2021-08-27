@@ -4,6 +4,9 @@ import duke.data.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * This class abstracts the exit command that the user wants to execute.
+ */
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
 

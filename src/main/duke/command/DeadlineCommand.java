@@ -5,6 +5,9 @@ import duke.data.task.Deadline;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * This class abstracts the deadline command that the user wants to execute.
+ */
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
     private final Deadline newTask;

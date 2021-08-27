@@ -5,8 +5,10 @@ import duke.data.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * This class abstracts the Command that the user wants to execute.
+ */
 public abstract class Command {
-
     /**
      * Execute the command.
      *

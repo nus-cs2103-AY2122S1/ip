@@ -5,6 +5,9 @@ import duke.data.exception.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * This class abstracts the delete command that the user wants to execute.
+ */
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     private final int taskNum;

@@ -5,6 +5,9 @@ import duke.data.task.ToDo;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * This class abstracts the ToDo command that the user wants to execute.
+ */
 public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
     protected final ToDo newTask;
