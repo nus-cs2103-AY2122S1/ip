@@ -1,5 +1,14 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 import duke.StorageStub;
 import duke.TaskList;
 import duke.Ui;
@@ -7,18 +16,13 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddCommandTest {
 
     private static final LocalDate localDate = LocalDate.parse("2020-01-01");
+
+    // Ui returns largely constants. No need for stub;
+    private final Ui ui = new Ui();
 
     private static TaskList getTaskListTodo() {
         ArrayList<Task> taskArrList = new ArrayList<>();
@@ -37,9 +41,6 @@ class AddCommandTest {
         taskArrList.add(new Deadline("task description", localDate));
         return new TaskList(taskArrList);
     }
-
-    // Ui returns largely constants. No need for stub;
-    private final Ui ui = new Ui();
 
     @Test
     void execute_todoInput_todoAdded() {

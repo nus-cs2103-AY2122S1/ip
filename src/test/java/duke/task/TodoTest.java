@@ -1,18 +1,18 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import org.junit.jupiter.api.Test;
 
 class TodoTest {
 
     private static final String DESCRIPTION = "task description";
 
-    Todo todo = new Todo(DESCRIPTION);
+    private final Todo todo = new Todo(DESCRIPTION);
 
     @Test
-    void getTaskType_todo_T() {
+    void getTaskType_todo_stringT() {
         assertEquals("T", todo.getTaskType());
     }
 

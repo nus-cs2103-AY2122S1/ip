@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.DukeException;
 import duke.Parser;
 import duke.Storable;
@@ -10,8 +12,6 @@ import duke.Ui.Descriptors;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-
-import java.time.LocalDate;
 
 /**
  * Represents a command that can be executed to add a task based on user input,

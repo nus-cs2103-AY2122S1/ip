@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.DukeException;
 import duke.Parser;
 import duke.Storable;
@@ -9,8 +11,6 @@ import duke.Ui.Commands;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-
-import java.time.LocalDate;
 
 /**
  * Represents a command that can be executed to print tasks falling on user specified date.

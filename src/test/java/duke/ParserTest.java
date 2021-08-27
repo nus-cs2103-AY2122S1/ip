@@ -1,16 +1,17 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.AddCommand;
 import duke.command.DateCommand;
 import duke.command.DeleteCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParserTest {
 
@@ -24,7 +25,7 @@ class ParserTest {
     }
 
     @Test
-    void parse_listExtra_AddCommand() {
+    void parse_listExtra_addCommand() {
         AddCommand addCommand = new AddCommand("listExtra");
 
         assertEquals(addCommand, Parser.parse("listExtra"));
@@ -91,18 +92,21 @@ class ParserTest {
         String invalidInput2Command = Ui.Commands.DONE.getCommand();
         String invalidInput2ExceptionMessage = Ui.exceptionMissingIndexForMarking();
 
-        DukeException dukeException = assertThrows(DukeException.class,
-                () -> Parser.checkInputValidity(invalidInput, invalidInputCommand, invalidInputExceptionMessage));
+        DukeException dukeException = assertThrows(DukeException.class, () -> {
+            Parser.checkInputValidity(invalidInput, invalidInputCommand, invalidInputExceptionMessage);
+        });
 
         assertEquals(invalidInputExceptionMessage, dukeException.getErrorMessage());
 
-        DukeException dukeException1 = assertThrows(DukeException.class,
-                () -> Parser.checkInputValidity(invalidInput1, invalidInput1Command, invalidInput1ExceptionMessage));
+        DukeException dukeException1 = assertThrows(DukeException.class, () -> {
+            Parser.checkInputValidity(invalidInput1, invalidInput1Command, invalidInput1ExceptionMessage);
+        });
 
         assertEquals(invalidInput1ExceptionMessage, dukeException1.getErrorMessage());
 
-        DukeException dukeException2 = assertThrows(DukeException.class,
-                () -> Parser.checkInputValidity(invalidInput2, invalidInput2Command, invalidInput2ExceptionMessage));
+        DukeException dukeException2 = assertThrows(DukeException.class, () -> {
+            Parser.checkInputValidity(invalidInput2, invalidInput2Command, invalidInput2ExceptionMessage);
+        });
 
         assertEquals(invalidInput2ExceptionMessage, dukeException2.getErrorMessage());
     }
@@ -123,13 +127,15 @@ class ParserTest {
         String invalidDateString = "100/100/100";
         String invalidDateString1 = "100/100";
 
-        DukeException dukeException = assertThrows(DukeException.class,
-                () -> Parser.toLocalDate(invalidDateString));
+        DukeException dukeException = assertThrows(DukeException.class, () -> {
+            Parser.toLocalDate(invalidDateString);
+        });
 
         assertEquals(Ui.exceptionInvalidDateTimeFormat(), dukeException.getErrorMessage());
 
-        DukeException dukeException1 = assertThrows(DukeException.class,
-                () -> Parser.toLocalDate(invalidDateString1));
+        DukeException dukeException1 = assertThrows(DukeException.class, () -> {
+            Parser.toLocalDate(invalidDateString1);
+        });
 
         assertEquals(Ui.exceptionInvalidDateTimeFormat(), dukeException1.getErrorMessage());
     }
@@ -148,8 +154,9 @@ class ParserTest {
         Ui.Commands invalidNumInputCommand = Ui.Commands.DONE;
         String invalidNumInputExceptionMessage = Ui.exceptionInvalidNumberInput(invalidNumInputCommand);
 
-        DukeException dukeException = assertThrows(DukeException.class,
-                () -> Parser.parseUserNumInput(invalidNumInput, invalidNumInputCommand));
+        DukeException dukeException = assertThrows(DukeException.class, () -> {
+            Parser.parseUserNumInput(invalidNumInput, invalidNumInputCommand);
+        });
 
         assertEquals(invalidNumInputExceptionMessage, dukeException.getErrorMessage());
     }
@@ -196,33 +203,39 @@ class ParserTest {
         String invalidDescriptionInput5 = "task description /at";
         String exceptionMessage5 = Ui.exceptionMissingDescriptor(descriptor, command);
 
-        DukeException dukeException = assertThrows(DukeException.class,
-                () -> Parser.parseUserDescriptionInput(invalidDescriptionInput, descriptor, separator, command));
+        DukeException dukeException = assertThrows(DukeException.class, () -> {
+            Parser.parseUserDescriptionInput(invalidDescriptionInput, descriptor, separator, command);
+        });
 
         assertEquals(exceptionMessage, dukeException.getErrorMessage());
 
-        DukeException dukeException1 = assertThrows(DukeException.class,
-                () -> Parser.parseUserDescriptionInput(invalidDescriptionInput1, descriptor, separator, command));
+        DukeException dukeException1 = assertThrows(DukeException.class, () -> {
+            Parser.parseUserDescriptionInput(invalidDescriptionInput1, descriptor, separator, command);
+        });
 
         assertEquals(exceptionMessage1, dukeException1.getErrorMessage());
 
-        DukeException dukeException2 = assertThrows(DukeException.class,
-                () -> Parser.parseUserDescriptionInput(invalidDescriptionInput2, descriptor, separator, command));
+        DukeException dukeException2 = assertThrows(DukeException.class, () -> {
+            Parser.parseUserDescriptionInput(invalidDescriptionInput2, descriptor, separator, command);
+        });
 
         assertEquals(exceptionMessage2, dukeException2.getErrorMessage());
 
-        DukeException dukeException3 = assertThrows(DukeException.class,
-                () -> Parser.parseUserDescriptionInput(invalidDescriptionInput3, descriptor, separator, command));
+        DukeException dukeException3 = assertThrows(DukeException.class, () -> {
+            Parser.parseUserDescriptionInput(invalidDescriptionInput3, descriptor, separator, command);
+        });
 
         assertEquals(exceptionMessage3, dukeException3.getErrorMessage());
 
-        DukeException dukeException4 = assertThrows(DukeException.class,
-                () -> Parser.parseUserDescriptionInput(invalidDescriptionInput4, descriptor, separator, command));
+        DukeException dukeException4 = assertThrows(DukeException.class, () -> {
+            Parser.parseUserDescriptionInput(invalidDescriptionInput4, descriptor, separator, command);
+        });
 
         assertEquals(exceptionMessage4, dukeException4.getErrorMessage());
 
-        DukeException dukeException5 = assertThrows(DukeException.class,
-                () -> Parser.parseUserDescriptionInput(invalidDescriptionInput5, descriptor, separator, command));
+        DukeException dukeException5 = assertThrows(DukeException.class, () -> {
+            Parser.parseUserDescriptionInput(invalidDescriptionInput5, descriptor, separator, command);
+        });
 
         assertEquals(exceptionMessage5, dukeException5.getErrorMessage());
     }

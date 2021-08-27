@@ -1,11 +1,11 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import org.junit.jupiter.api.Test;
 
 class DeadlineTest {
 
@@ -14,10 +14,10 @@ class DeadlineTest {
     // yyyy-mm-dd format.
     private static final LocalDate TIME = LocalDate.parse("2020-01-01");
 
-    Deadline deadline = new Deadline(DESCRIPTION, TIME);
+    private final Deadline deadline = new Deadline(DESCRIPTION, TIME);
 
     @Test
-    void getTaskType_deadline_D() {
+    void getTaskType_deadline_stringD() {
         assertEquals("D", deadline.getTaskType());
     }
 
