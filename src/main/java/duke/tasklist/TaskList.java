@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 import duke.storage.Storage;
 import duke.task.Task;
@@ -86,6 +87,22 @@ public class TaskList {
         saveData();
     }
 
+    /**
+     * Finds a task whose name matches a given keyword.
+     *
+     * @param keyword Keyword of task that wants to be found.
+     */
+    public void find(String keyword) {
+        List<Task> filteredList = list.stream().filter(task -> task.getName().contains(keyword))
+                .collect(Collectors.toList());
+        if (filteredList.size() > 0) {
+            ui.print("Here are the matching tasks that I found:");
+            printItems(filteredList);
+        } else {
+            ui.print("No tasks found.");
+        }
+    }
+
     void printSize() {
         ui.print("Total tasks: %d%n", list.size());
     }
@@ -95,6 +112,13 @@ public class TaskList {
      */
     public void printItems() {
         ui.print("Here are the tasks in your list:");
+        printItems(this.list);
+    }
+
+    /**
+     * Prints the current list of tasks.
+     */
+    public void printItems(List<Task> list) {
         for (int i = 0; i < list.size(); i++) {
             ui.print("%d. %s%n", (i + 1), list.get(i));
         }

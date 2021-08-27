@@ -19,4 +19,6 @@ delete 3
 list
 done
 delete
+find book
+find zzz
 bye
