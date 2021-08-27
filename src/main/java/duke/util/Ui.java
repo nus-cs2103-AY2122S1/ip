@@ -1,3 +1,9 @@
+package duke.util;
+
+// import duke packages
+import duke.DukeException;
+import duke.task.TaskList;
+
 public class Ui {
     private String logo;
     private String line;

@@ -1,3 +1,13 @@
+package duke.util;
+
+// import duke packages
+import duke.DukeException;
+import duke.command.Deadline;
+import duke.command.Event;
+import duke.command.Todo;
+import duke.task.Task;
+
+// import java packages
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
