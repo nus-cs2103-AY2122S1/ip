@@ -19,7 +19,7 @@ public class DeadlineTask extends BaseTask {
     private LocalDate byWhenDate;
 
     /** Activates or deactivates Debug mode. */
-    private boolean debugMode = true;
+    private boolean debugMode = false;
 
 
 
@@ -152,5 +152,5 @@ public class DeadlineTask extends BaseTask {
         return this.getByWhenStr();
     }
 
-    
+
 }
