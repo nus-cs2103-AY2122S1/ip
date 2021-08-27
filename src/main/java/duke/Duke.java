@@ -1,8 +1,8 @@
+package duke;
+
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.io.File;
 
 
 public class Duke {
@@ -97,7 +97,7 @@ public class Duke {
             } catch (DateTimeParseException e) {
                 System.out.println("The format of the date should be entered in the form dd-MM-yyyy HH:mm");
             }
-            System.out.println("Now you have " + tasks.getNumTask() + " task" + (tasks.getNumTask() > 1 ? "s " : " ") + "in the list");
+            System.out.println("Now you have " + tasks.getNumTask() + "duke" + (tasks.getNumTask() > 1 ? "s " : " ") + "in the list");
         }
     }
 

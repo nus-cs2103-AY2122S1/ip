@@ -1,3 +1,5 @@
+package duke;
+
 public class Ui {
     public Ui() {
 
@@ -9,7 +11,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n" + logo);
+        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?\n" + logo);
     }
 
     public void showLine() {

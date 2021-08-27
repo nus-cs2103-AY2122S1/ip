@@ -1,3 +1,5 @@
+package duke;
+
 public class Todo extends Task{
     public Todo(String name, Boolean isDone) {
         super(name, 'T', isDone);

@@ -1,6 +1,10 @@
+package duke;
+
+import duke.Deadline;
+import duke.Event;
+import duke.Task;
+
 import java.util.ArrayList;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class TaskList {
