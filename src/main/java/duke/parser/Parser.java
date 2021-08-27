@@ -77,7 +77,13 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please use format event <description> /at <time>.");
             }
-
+        } else if (input.matches("find(.*)")) {
+            try {
+                String keyword = input.trim().substring(5);
+                return new FindCommand(keyword);
+            } catch(StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please use the format find <keyword>");
+            }
         } else {
             throw new DukeException("I'm sorry, but I don't understand what that means :(");
         }
