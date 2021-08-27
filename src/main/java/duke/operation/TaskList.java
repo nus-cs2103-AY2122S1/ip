@@ -12,7 +12,7 @@ import java.util.List;
 public class TaskList {
 	protected ArrayList<Task> taskList;
 
-	public TaskList(){
+	public TaskList() {
 		this.taskList = new ArrayList<>();
 	}
 
@@ -20,7 +20,7 @@ public class TaskList {
 		this.taskList = list;
 	}
 
-	public ArrayList<Task> getTaskList(){
+	public ArrayList<Task> getTaskList() {
 		return taskList;
 	}
 
@@ -47,7 +47,7 @@ public class TaskList {
 			}
 			task = new ToDo(inputLine.substring(5));
 			this.taskList.add(task);
-			printAddTask(taskList.size(),task);
+			printAddTask(taskList.size(), task);
 			break;
 		}
 		case DEADLINE: {
@@ -144,9 +144,10 @@ public class TaskList {
 
 	/**
 	 * Prints the message when a task is added.
+	 *
 	 * @param size current size of the storeroom
 	 */
-	public void printAddTask(int size,Task task) {
+	public void printAddTask(int size, Task task) {
 		System.out.println("____________________________________________________________\n"
 				+ "Got it. I've added this task:\n  "
 				+ task
@@ -160,6 +161,7 @@ public class TaskList {
 
 	/**
 	 * Prints the message when a task is deleted.
+	 *
 	 * @param size current size of the storeroom
 	 */
 	public void printDeleteTask(int size, Task task) {

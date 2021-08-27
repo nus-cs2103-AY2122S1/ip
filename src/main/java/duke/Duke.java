@@ -46,7 +46,7 @@ public class Duke {
 				} else {
 					Parser.invalidTask();
 				}
-			} catch (DukeException e){
+			} catch (DukeException e) {
 				System.out.println(e);
 			}
 			nextLine = in.nextLine();

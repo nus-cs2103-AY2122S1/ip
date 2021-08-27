@@ -17,7 +17,8 @@ public class Parser {
 
 	/**
 	 * Checks if the first word of a input string is valid.
-	 * @param input input string
+	 *
+	 * @param input            input string
 	 * @param expectedTaskName expected name of a task
 	 */
 	public static void checkIfFirstWordValid(String input, String expectedTaskName) {
@@ -36,6 +37,7 @@ public class Parser {
 
 	/**
 	 * Returns whether the description of a task is empty.
+	 *
 	 * @param input input string
 	 * @return boolean value of whether the description is empty
 	 */
