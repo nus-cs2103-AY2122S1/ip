@@ -9,6 +9,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Task class that sets description of task, date, time
+ */
 public class Task {
     protected String eventType;
     protected boolean isDone;
@@ -19,10 +22,14 @@ public class Task {
     /**
      * Basic constructor for task (used during subclass instance)
      */
-    public Task(boolean isDone){
+    public Task(boolean isDone) {
         setState(isDone);
     }
 
+    /**
+     * Empty task constructor
+     * @return Task empty task
+     */
     public static Task empty(){
         return new Task(false);
     }
@@ -31,19 +38,10 @@ public class Task {
         this.isDone = isDone;
     }
 
-    /**
-     * Sets the description of the task
-     * @param input set task description
-     */
     protected void setDescription(String input){
         this.description = input;
     }
 
-    /**
-     * Takes in a string that describes the time,
-     * converts the time into LocalDate and sets the time of the task
-     * @param input set time
-     */
     protected void setDate(String input) throws DukeException {
         if (input == null){
             this.date = null;
@@ -66,45 +64,31 @@ public class Task {
         }
     }
 
-    /**
-     * Takes a string that indicates event type
-     * @param input set event type
-     */
+
     protected void setEventType(String input){
         this.eventType = input;
     }
 
-    /**
-     * Sets the duke.taskTypes.Task state to true
-     * @return duke.taskTypes.Task instance itself
-     */
     public Task setDone(){
         this.isDone = true;
         return this;
     }
 
-    /**
-     * Returns task description
-     * @return String
-     */
+    protected String getDate() {
+        return this.date.toString() + " " + this.time;
+    }
+
+    protected String getFormatDate() {
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time;
+    }
+
     public String getDescription(){
         return this.description;
     }
 
     /**
-     * Returns the time attached to task
-     * @return time
-     */
-    public String getDate() {
-        return this.date.toString() + " " + this.time;
-    }
-
-    public String getFormatDate() {
-        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + this.time;
-    }
-
-    /**
-     * Returns a string that describes the instance
+     * Returns a string that describes the instance for display
+     *
      * @return String containing details of the task
      */
     @Override
@@ -114,6 +98,10 @@ public class Task {
         return eventType + state + this.description;
     }
 
+    /**
+     * Returns a string that describes the instance for saving
+     * @return String containing details of the task
+     */
     public String saveTask() {
         String state = isDone ? "T" : "F";
         return eventType + " " + state + " " + description;

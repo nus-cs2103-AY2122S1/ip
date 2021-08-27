@@ -1,7 +1,8 @@
 package duke.util;
 
 import duke.command.*;
-import duke.exception.*;
+
+import duke.exception.DukeException;
 
 import java.util.List;
 
@@ -9,19 +10,28 @@ import java.util.List;
  * Parser deals with making sense of the user input. Creates and returns a command object
  * with all the stored information
  */
-
 public class Parser {
 
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Basic constructor for Parser
+     *
+     * @param storage storage object
+     * @param taskList tasklist object
+     * @param ui Ui object
+     */
     public Parser(Storage storage, TaskList taskList, Ui ui) {
         this.storage = storage;
         this.taskList = taskList;
         this.ui = ui;
     }
 
+    /**
+     * Loads the previous state stored in the storage into tasklist
+     */
     public void loadTask() {
         try {
             List<String> prevState = storage.loadSaved();
@@ -31,31 +41,41 @@ public class Parser {
         }
     }
 
-
-
-
     /**
-     * Parses the input and returns command to be executed
+     * Interprets the input and returns the appropriate command
+     *
+     * @param input user input
+     * @return command returns command based on the user input
+     * @throws DukeException for any errors caused
      */
     public Command parse(String input) throws DukeException {
-        String[] parsedInput = input.trim().split(" ", 2);        try {
+        String[] parsedInput = input.trim().split(" ", 2);
+        try {
             switch (parsedInput[0]) {
             case "bye":
                 return new ByeCommand(storage, taskList, ui);
+                // collection of commands to be executed when "bye" is detected
             case "list":
                 return new ListCommand(storage, taskList, ui);
+                // collection of commands to be executed when "list" is detected
             case "done":
                 return new DoneCommand(storage, taskList, ui, parsedInput[1]);
+                // collection of commands to be executed when "done" is detected
             case "deadline":
                 return new AddCommand(storage, taskList, ui, parsedInput[1], "deadline");
+                // collection of commands to be executed when "deadline" is detected
             case "todo":
                 return new AddCommand(storage, taskList, ui, parsedInput[1], "todo");
+                // collection of commands to be executed
             case "event":
                 return new AddCommand(storage, taskList, ui, parsedInput[1], "event");
+                // collection of commands to be executed when "event" is detected
             case "delete":
                 return new DeleteCommand(storage, taskList, ui, parsedInput[1]);
+                // collection of commands to be executed when "delete" is detected
             case "find":
                 return new FindCommand(storage, taskList, ui, parsedInput[1]);
+                // collection of commands to be executed when "find" is detected
             default:
                 throw new IllegalArgumentException();
             }
