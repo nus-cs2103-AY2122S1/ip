@@ -1,12 +1,11 @@
 package duke.parser;
 
 import duke.commands.Deadline;
+import duke.commands.Event;
 import duke.commands.Task;
 import duke.commands.Todo;
-import duke.commands.Event;
 import duke.data.TaskList;
 import duke.exceptions.DukeException;
-import duke.storage.Storage;
 import duke.ui.Ui;
 
 import java.time.LocalDateTime;
@@ -16,16 +15,15 @@ import java.util.Arrays;
 
 public class Parser {
     private TaskList tasks;
-    private Storage storage;
     private Ui ui;
 
     public enum Keyword {
+        //TODO ALLCAPS
         todo, list, deadline, event, done, delete
     }
 
-    public Parser(TaskList tasks, Storage storage, Ui ui) {
+    public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
-        this.storage = storage;
         this.ui = ui;
     }
 

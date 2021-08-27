@@ -25,7 +25,7 @@ public class Ui {
     }
 
     public void deleteTaskMsg(Task text) {
-        System.out.println("Noted! I've removed this task:\n" + text);
+        System.out.println("Noted! I've removed this task:\n  " + text);
     }
 
     public void listCountMsg() {
