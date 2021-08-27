@@ -33,19 +33,16 @@ public class TaskList {
         }
     }
 
-    public String[] getListContent() {
-        if (this.lst.isEmpty()) {
-            throw new DukeException("The list is empty");
-        }
+    public boolean isEmpty() {
+        return this.lst.isEmpty();
+    }
 
-        String[] temp = new String[this.lst.size() + 1];
-        temp[0] = "Here are the tasks in your list:";
+    public int size() {
+        return this.lst.size();
+    }
 
-        for (int i = 1; i < this.lst.size() + 1; ++i) {
-            temp[i] = i + "." + this.lst.get(i - 1).toString();
-        }
-
-        return temp;
+    public Task get(int n) {
+        return this.lst.get(n);
     }
 
     public String getSaveData() {
