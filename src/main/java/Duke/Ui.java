@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-    final static String lineBreak = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    private final String LINEBREAK = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
     /**
      * Introduction method shown when program is first run.
@@ -19,16 +19,16 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello I'm\n" + logo + "What can I do for you?");
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
     }
 
     /**
      * Goodbye message when the user enters the "bye" command.
      */
     public void printByeMessage() {
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
         System.out.println("Duke says: Bye. Hope to see you again soon!");
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
     }
 
     /**
@@ -37,7 +37,7 @@ public class Ui {
      * @param tasks The current list of tasks.
      */
     public void printTasks(ArrayList<Task> tasks) {
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
         System.out.println("Duke says: Here is your list of tasks :)");
         if (tasks.size() == 0) {
             System.out.println("Looks like you don't have any pending tasks! Must be nice (-_-;)");
@@ -47,7 +47,7 @@ public class Ui {
                         + tasks.get(i).toString());
             }
         }
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
     }
 
     /**
@@ -57,11 +57,11 @@ public class Ui {
      * @param numTasks The new total number of tasks.
      */
     public void printTaskAddition(Task task, int numTasks) {
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
         System.out.println("Duke says: I've added the task: ");
         System.out.println("     " + task.toString());
         System.out.println("You now have " + numTasks + " tasks, jiayouz!");
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
     }
 
     /**
@@ -71,11 +71,11 @@ public class Ui {
      * @param numTasks The new total number of tasks.
      */
     public void printTaskDeletion(Task task, int numTasks) {
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
         System.out.println("Duke says: I've deleted the task: ");
         System.out.println("     " + task.toString());
         System.out.println("You now have " + numTasks + " tasks, jiayouz!");
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
     }
 
     /**
@@ -85,11 +85,11 @@ public class Ui {
      * @param numTasks The current total number of tasks.
      */
     public void printTaskCompletion(Task task, int numTasks) {
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
         System.out.println("Duke says: You've completed the task: ");
         System.out.println("     " + task.toString() + "Well done!");
         System.out.println("You now have " + numTasks + " tasks, jiayouz!");
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
     }
 
     /**
@@ -98,26 +98,26 @@ public class Ui {
      * @param msg The error that was thrown.
      */
     public void printErrorMessage(Exception msg) {
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
         System.out.println(msg.getMessage());
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
     }
 
     /**
      * Prints a message to tell the user that Duke does not undertand their input.
      */
     public void printUnknownCommandMessage() {
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
         System.out.println("Duke says: Sorry I don't understand what that means");
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
     }
 
     /**
      * Prints a message to tell the user that the task number they are trying to complete/delete does not exist.
      */
     public void printInvalidIndexMessage() {
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
         System.out.println("Duke says: You don't have that many tasks!");
-        System.out.println(lineBreak);
+        System.out.println(LINEBREAK);
     }
 }

@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class Parser {
 
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     /**
      * Gets the user's input and return the relevant command to execute.

@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private final String saveFileLocation;
+    private final String SAVE_FILE_LOCATION;
 
     /**
      * Constructor for Storage object, requires the path to
@@ -23,7 +23,7 @@ public class Storage {
      * @param saveFileLocation
      */
     public Storage(String saveFileLocation) {
-        this.saveFileLocation = saveFileLocation;
+        this.SAVE_FILE_LOCATION = saveFileLocation;
     }
 
     /**
@@ -38,7 +38,7 @@ public class Storage {
             data += tasks.get(i).toStringSave() + "\n";
         }
         try {
-            FileOutputStream fos = new FileOutputStream(saveFileLocation, false);
+            FileOutputStream fos = new FileOutputStream(SAVE_FILE_LOCATION, false);
             byte[] b = data.getBytes();
             fos.write(b);
             fos.close();
@@ -56,17 +56,14 @@ public class Storage {
      */
     public ArrayList<Task> loadSave() {
         try {
-
-            File saveFile = new File(saveFileLocation);
+            File saveFile = new File(SAVE_FILE_LOCATION);
             Scanner sc = new Scanner(saveFile);
             ArrayList<Task> tasks = new ArrayList<>();
-
             while (sc.hasNextLine()) {
                 Task newTask;
                 String[] taskDetails = sc.nextLine().split(">");
                 String name = taskDetails[2];
                 boolean done = taskDetails[1].equals("1");
-
                 switch (taskDetails[0]) {
                     case "T":
                         newTask = new Task.ToDo(name, done);

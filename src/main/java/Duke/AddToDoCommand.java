@@ -6,14 +6,14 @@ package Duke;
  */
 public class AddToDoCommand implements ICommand {
 
-    private final String input;
+    private final String INPUT;
 
     /**
      * Constructor for the command.
      * @param input The user's input which triggered the creation of this command.
      */
     public AddToDoCommand(String input) {
-        this.input = input;
+        this.INPUT = input;
     }
 
     /**
@@ -24,7 +24,7 @@ public class AddToDoCommand implements ICommand {
      */
     public void execute(TaskManager tm, Ui ui, Storage storage) {
         try {
-            Task addedTask = tm.addToDo(input);
+            Task addedTask = tm.addToDo(INPUT);
             ui.printTaskAddition(addedTask, tm.getTasks().size());
             storage.updateSave(tm.getTasks());
         } catch (DukeException.NoNameException e) {
