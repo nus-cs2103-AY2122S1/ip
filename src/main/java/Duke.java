@@ -170,7 +170,8 @@ public class Duke {
                             System.out.println(task.toString());
                             System.out.println("Now you have " + userList.size() + " tasks in the list.");
                         } catch (DateTimeParseException e) {
-                            DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be deadline/by <yyyy-mm-dd HHmm>");
+                            DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be deadline/by " + 
+                                    "<yyyy-mm-dd HHmm>");
                             System.out.println(exp);
                         }
                     }
@@ -188,7 +189,8 @@ public class Duke {
                             System.out.println(task.toString());
                             System.out.println("Now you have " + userList.size() + " tasks in the list.");
                         } catch (DateTimeParseException e) {
-                            DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be event/at <yyyy-mm-dd HHmm>");
+                            DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be event/at " +
+                                    "<yyyy-mm-dd HHmm>");
                             System.out.println(exp);
                         }
                     }
