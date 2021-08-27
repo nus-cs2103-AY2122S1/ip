@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.data.TaskHandler;
+import duke.data.task.ToDo;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.data.exception.DukeException;
+
 public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "TODO";
     public static final String MESSAGE_USAGE = COMMAND_WORD

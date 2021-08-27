@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.data.TaskHandler;
+import duke.storage.Storage;
+
 public abstract class Command {
     protected TaskHandler taskHandler;
     protected Storage storage;

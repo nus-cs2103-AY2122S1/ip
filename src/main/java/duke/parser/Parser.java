@@ -1,3 +1,13 @@
+package duke.parser;
+
+import duke.data.task.Deadline;
+import duke.data.TaskHandler;
+import duke.storage.Storage;
+import duke.data.task.Task;
+import duke.data.exception.DukeException;
+import duke.ui.Ui;
+import duke.command.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

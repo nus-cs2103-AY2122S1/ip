@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.data.TaskHandler;
+import duke.data.task.Event;
+import duke.storage.Storage;
+import duke.ui.Ui;
+import duke.data.exception.DukeException;
+
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "EVENT";
     public static final String MESSAGE_USAGE = COMMAND_WORD

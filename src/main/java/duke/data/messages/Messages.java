@@ -1,3 +1,4 @@
+package duke.data.messages;
 public class Messages {
     private static final String INDENTATION = "    ";
     private static final String WELCOME_MESSAGE = "Hello! I'm Jacky\nWhat can I do for you?";

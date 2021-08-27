@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.data.TaskHandler;
+import duke.storage.Storage;
+import duke.data.exception.DukeException;
+
 public class DoneCommand extends Command {
     public static final String COMMAND_WORD = "DONE";
     public static final String MESSAGE_USAGE = COMMAND_WORD
