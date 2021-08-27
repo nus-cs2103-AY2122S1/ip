@@ -11,19 +11,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * duke.Duke class that initialises the duke.Duke chat bot.
+ * Duke class that initialises the duke.Duke chat bot.
  * The Duke class supports operators including
  * (i) run: runs the chat bot
- * (ii) greet: prints out a greeting when the chat bot runs
- * (iii) exit: ends the execution of the chat bot
- * (iv) addToList: adds a Task to the list of Tasks
- * (v) displayList: prints out the current list of Tasks
- * (vi) markDone: marks a Task as done
- * (vii) addDeadline: adds a Deadline to the list of Tasks
- * (viii) addTodo: adds a Todo to the list of Tasks
- * (ix) addEvent: adds an duke.tasks.Event to the list of Tasks
- * (x) handleCommands: main logic for processing and executing various commands
- * like "list", "done", "deadline", "todo", "event" and other invalid commands
  */
 
 public class Duke {
