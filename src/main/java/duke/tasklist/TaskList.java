@@ -46,8 +46,10 @@ public class TaskList {
     public void markTaskAsDone(int index) {
         Task doneTask = getTask(index).markAsDone();
         list.set(index - 1, doneTask);
+
         ui.print("Nice! I've marked this task as done:");
         ui.print("    %s%n", doneTask.toString());
+
         saveData();
     }
 
@@ -58,6 +60,7 @@ public class TaskList {
      */
     public void add(Task item) {
         addWithoutPrinting(item);
+
         ui.print("Noted! I've added the following task:");
         ui.print("    %s%n", item.toString());
         printSize();
@@ -75,9 +78,11 @@ public class TaskList {
      */
     public void delete(int index) {
         Task removedItem = list.remove(index - 1);
+
         ui.print("Got it. I've removed the following task:");
         ui.print("    %s%n", removedItem.toString());
         printSize();
+
         saveData();
     }
 
@@ -106,7 +111,7 @@ public class TaskList {
     void saveData() {
         String fileName = "list.txt";
         try {
-            boolean fileAlreadyExists = !storage.createFileIfNotExists(fileName);
+            storage.createFileIfNotExists(fileName);
             Path path = Paths.get(Storage.directory + "/" + fileName);
             Files.write(path, listItems(), StandardCharsets.UTF_8);
         } catch (IOException e) {
