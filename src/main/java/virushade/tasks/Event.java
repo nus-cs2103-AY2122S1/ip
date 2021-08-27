@@ -2,7 +2,7 @@ package virushade.tasks;
 
 import virushade.StringManipulator;
 
-public class Event extends Task{
+public class Event extends Task {
     private final String time;
 
     /**
