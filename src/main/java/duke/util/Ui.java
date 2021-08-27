@@ -1,19 +1,17 @@
 package duke.util;
 
-/**
- * This class encapsulates the UI used for interactions with the user.
- *
- * @author Teo Sin Yee
- */
+import duke.task.*;
+import java.util.ArrayList;
+
 public class Ui {
     private static final String EXIT_MESSAGE = "Goodbyeeee! Hope to see you again soon! :>";
     private static final String SEPARATOR = "\t-------------------------------------------------------";
     private static final String INPUT_PROMPT = "Enter a command ^_^";
 
     /**
-     * Formats the input message and prints it in a formatted version.
+     * Formats the input and prints it in a formatted version.
      *
-     * @param message Message to be printed.
+     * @param message message to be printed.
      */
     public static void prettify(String message) {
         System.out.printf("%s\n\t%s\n%s\n", SEPARATOR, message, SEPARATOR);
@@ -40,12 +38,10 @@ public class Ui {
 
     }
 
-    /** Prints exit message when user commands 'bye' **/
     public void printExitMessage() {
         prettify(EXIT_MESSAGE);
     }
 
-    /** Prints prompt for user to enter command **/
     public void prompt() {
         prettify(INPUT_PROMPT);
     }
