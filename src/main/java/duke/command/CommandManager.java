@@ -6,15 +6,15 @@ import java.util.Map;
 import duke.exception.InvalidCommandException;
 
 /**
- * Manager of all Duke's commands. All commands has to registered/added to its
- * registry to take effect.
+ * Manager of all Duke's commands. All commands have to be registered/added to
+ * its registry to take effect.
  */
 public class CommandManager {
     private final Map<String, Command> registry;
 
     /**
-     * Creates a command manager that manages a collection of commands predeclared
-     * commands. All registered command must have a unique label for it to be a
+     * Creates a command manager that manages a collection of predeclared commands.
+     * All registered commands must have a unique label for it to be a
      * distinguishable callable.
      */
     public CommandManager() {
