@@ -9,12 +9,20 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
+        TaskList userList;
+        try {
+            userList = TaskList.load();
+        } catch (Exception exception) {
+            System.out.println(exception);
+            System.out.println("Task list not found.");
+            userList = new TaskList();
+            System.out.println("New task list created");
+        }
+
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-
-        TaskList userList = new TaskList();
 
         while (true) {
             String inp = sc.nextLine();
