@@ -9,11 +9,22 @@ public class EventTask extends Task {
     /**
      * Constructor for EventTask object.
      * @param name name of task.
+     * @param isDone whether or not task is done.
      * @param date date of event.
      */
-    public EventTask(String name, String date) throws DateTimeException {
+    public EventTask(String name, boolean isDone, String date) throws DateTimeException {
+        super(name, isDone);
+        this.date = LocalDate.parse(date);
+    }
+
+    public EventTask(String name, String time) throws DateTimeException {
         super(name);
         this.date = LocalDate.parse(date);
+    }
+
+    @Override
+    public String formatForFile() {
+        return "E" + super.formatForFile() + SAVE_DATA_MARKER + this.time + "\n";
     }
 
     @Override

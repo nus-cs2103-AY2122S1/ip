@@ -1,9 +1,16 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.time.DateTimeException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
+    private static final String FILE_PATH = "task-list.txt";
     private static ArrayList<Task> itemList = new ArrayList<>();
 
     /**
@@ -16,34 +23,35 @@ public class Duke {
         String[] splitInput = input.split(" ", 2);
 
         switch (splitInput[0]) {
-            case "bye":
-                System.out.println("Seeya!");
-                return true;
-            case "list":
-                readList();
-                break;
-            case "done":
-                setTaskDone(splitInput);
-                break;
-            case "todo":
-                addTodo(splitInput);
-                break;
-            case "event":
-                addEvent(splitInput);
-                break;
-            case "deadline":
-                addDeadline(splitInput);
-                break;
-            case "delete":
-                deleteFromList(splitInput);
-                break;
-            default:
-                System.out.println("Command not recognised, sorry.");
-                break;
+        case "bye":
+            System.out.println("Seeya!");
+            return true;
+        case "list":
+            readList();
+            break;
+        case "done":
+            setTaskDone(splitInput);
+            break;
+        case "todo":
+            addTodo(splitInput);
+            break;
+        case "event":
+            addEvent(splitInput);
+            break;
+        case "deadline":
+            addDeadline(splitInput);
+            break;
+        case "delete":
+            deleteFromList(splitInput);
+            break;
+        default:
+            System.out.println("Command not recognised, sorry.");
+            break;
         }
 
         return false;
     }
+
 
     private static void addTodo(String[] input) {
         try {
@@ -125,6 +133,7 @@ public class Duke {
             }
         }
 
+        saveToFile();
     }
 
     /**
@@ -134,6 +143,7 @@ public class Duke {
     private static void add(Task task) {
         itemList.add(task);
         System.out.println("Sure thing. Added to list:\n" + task + "\nNumber of tasks in list: " + itemList.size());
+        saveToFile();
     }
 
     /**
@@ -173,6 +183,7 @@ public class Duke {
             }
         }
 
+        saveToFile();
     }
 
     /**
@@ -184,10 +195,63 @@ public class Duke {
     }
 
     /**
+     * Saves itemList to file.
+     */
+    private static void saveToFile() {
+        String saveData = "";
+        FileWriter fw;
+        for (Task t: itemList) {
+            saveData += t.formatForFile();
+        }
+
+        try {
+            File file = new File(FILE_PATH);
+            file.createNewFile();
+            fw = new FileWriter(FILE_PATH);
+            fw.write(saveData);
+            fw.close();
+
+        } catch (IOException e) {
+            System.out.println("Error with saving: " + e.getMessage());
+        }
+
+    }
+
+    private static void readFromFile(String filePath) {
+        File file = new File(FILE_PATH);
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String[] line = sc.nextLine().split("\\" + Task.SAVE_DATA_MARKER);
+                String taskType = line[0];
+                boolean isDone = (Integer.parseInt(line[1]) != 0);
+                String taskName = line[2];
+                switch (taskType) {
+                case "T":
+                    itemList.add(new TodoTask(taskName, isDone));
+                    break;
+                case "E":
+                    itemList.add(new EventTask(taskName, isDone, line[3]));
+                    break;
+                case "D":
+                    itemList.add(new DeadlineTask(taskName, isDone, line[3]));
+                    break;
+                default:
+                    break;
+                }
+            }
+        } catch (FileNotFoundException e) {
+
+        }
+    }
+    /**
      * Main function.
      * @param args
      */
     public static void main(String[] args) {
+
+        readFromFile(FILE_PATH);
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -198,7 +262,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         while (!parseInput(sc.nextLine())) {
-            continue;
+
         }
 
         sc.close();

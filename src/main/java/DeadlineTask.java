@@ -9,11 +9,22 @@ public class DeadlineTask extends Task {
     /**
      * Constructor for a DeadlineTask object.
      * @param name name of the task.
+     * @param isDone whether or not task is done.
      * @param deadline deadline for the task.
      */
+    public DeadlineTask(String name, boolean isDone, String deadline) throws DateTimeException {
+        super(name, isDone);
+        this.deadline = LocalDate.parse(deadline);
+    }
+
     public DeadlineTask(String name, String deadline) throws DateTimeException {
         super(name);
         this.deadline = LocalDate.parse(deadline);
+    }
+
+    @Override
+    public String formatForFile() {
+        return "D" + super.formatForFile() + SAVE_DATA_MARKER + this.deadline + "\n";
     }
 
     @Override
