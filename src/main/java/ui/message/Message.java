@@ -31,7 +31,7 @@ public class Message {
         return this.message;
     }
 
-    private String getMessageWithFace() {
+    public String getMessageWithFace() {
         char lastCharacter = this.getMessage().charAt(this.getMessage().length() - 1);
 
         if (Character.isWhitespace(lastCharacter)) {
