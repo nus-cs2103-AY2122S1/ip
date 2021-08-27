@@ -18,7 +18,7 @@ public class StorageTest {
     Path tempDirectory;
 
     @Test
-    public void writeToFile_String_success() throws IOException {
+    public void writeToFile_string_success() throws IOException {
         Path path = tempDirectory.resolve("tasks.txt");
         Storage storage = new Storage(path.toString());
         try {

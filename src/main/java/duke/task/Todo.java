@@ -20,10 +20,10 @@ public class Todo extends TaskList {
         super(description);
         if (!isExisting) {
             try {
-                file.saveTask(this); // Saves task to hard disk
-                userInterface.taskAdded(this);
+                FILE.saveTask(this); // Saves task to hard disk
+                USER_INTERFACE.taskAdded(this);
             } catch (IOException e) {
-                userInterface.fileNotFoundWarning();
+                USER_INTERFACE.fileNotFoundWarning();
             }
         }
     }

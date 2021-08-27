@@ -29,12 +29,14 @@ public class Deadline extends TaskList {
         if (!isExisting) {
             localDate = Parser.findDate(time);
             deadLineTiming = Parser.findTime(time);
-            if (deadLineTiming != null) deadLineTiming = Parser.convertTime(deadLineTiming);
+            if (deadLineTiming != null) {
+                deadLineTiming = Parser.convertTime(deadLineTiming);
+            }
             try {
-                file.saveTask(this); // Saves task to hard disk
-                userInterface.taskAdded(this);
+                FILE.saveTask(this); // Saves task to hard disk
+                USER_INTERFACE.taskAdded(this);
             } catch (IOException e) {
-                userInterface.fileNotFoundWarning();
+                USER_INTERFACE.fileNotFoundWarning();
             }
         } else {
             Parser.parseDeadlineTime(time, localDate, deadLineTiming);
@@ -50,10 +52,9 @@ public class Deadline extends TaskList {
     public String toString() {
         String status = this.getStatusIcon();
         if (localDate == null) {
-            return "[D]" + "[" + status + "] " + this.description
-                    + "(" + time + ")";
+            return "[D]" + "[" + status + "] " + this.description + "(" + time + ")";
         } else {
-            String endTime = deadLineTiming == null ? "" : " "+ deadLineTiming;
+            String endTime = deadLineTiming == null ? "" : " " + deadLineTiming;
             return "[D]" + "[" + status + "] " + this.description
                     + "(" + localDate.getDayOfMonth() + " " + localDate.getMonth()
                     + " " + localDate.getYear() + endTime + ")";

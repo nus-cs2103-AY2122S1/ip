@@ -37,10 +37,10 @@ public class Event extends TaskList {
                 endTime = Parser.convertTime(timeRange[1]);
             }
             try {
-                file.saveTask(this); // Saves task to hard disk
-                userInterface.taskAdded(this);
+                FILE.saveTask(this); // Saves task to hard disk
+                USER_INTERFACE.taskAdded(this);
             } catch (IOException e) {
-                userInterface.fileNotFoundWarning();
+                USER_INTERFACE.fileNotFoundWarning();
             }
         } else {
             Parser.parseEventTime(time, localDate, startTime, endTime);

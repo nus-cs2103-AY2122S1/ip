@@ -8,7 +8,7 @@ public class EventTest {
     @Test
     public void eventInstanceCreation_createGeneralInstance_success() {
         String expected = "[E][ ] test sentence(23 AUGUST 2021 7.30 PM - 9.00 PM)";
-        Event event = new Event("test sentence", "2021-08-23 1930-2100",false);
+        Event event = new Event("test sentence", "2021-08-23 1930-2100", false);
         assertEquals(expected, event.toString());
     }
 

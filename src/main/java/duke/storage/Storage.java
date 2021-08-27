@@ -19,7 +19,7 @@ public class Storage {
 
     private final File file;
     private final String filePath;
-    private final static UserInterface userInterface = new UserInterface();
+    private final static UserInterface USER_INTERFACE = new UserInterface();
 
     /**
      * Creates an instance of the Storage class.
@@ -35,7 +35,7 @@ public class Storage {
      * Prints the content of the task file. Prints a notification to alert the user if the
      * file is empty or a warning if the file is not found.
      */
-    public void printTaskFile()  {
+    public void printTaskFile() {
         try {
             Scanner sc = new Scanner(file);
             boolean isEmpty = !sc.hasNext();
@@ -46,10 +46,12 @@ public class Storage {
                 index++;
             }
 
-            if (isEmpty) userInterface.emptyListWarning();
+            if (isEmpty) {
+                USER_INTERFACE.emptyListWarning();
+            }
 
         } catch (FileNotFoundException e) {
-            userInterface.fileNotFoundWarning();
+            USER_INTERFACE.fileNotFoundWarning();
         }
     }
 
@@ -79,7 +81,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            userInterface.generalErrorWarning(e.getMessage());
+            USER_INTERFACE.generalErrorWarning(e.getMessage());
         }
     }
 
@@ -95,7 +97,7 @@ public class Storage {
                 Parser.parseFromFile(line);
             }
         } catch (FileNotFoundException e) {
-            userInterface.fileNotFoundWarning();
+            USER_INTERFACE.fileNotFoundWarning();
         }
     }
 }

@@ -14,9 +14,9 @@ public class TaskList {
 
     protected String description;
     private boolean isDone;
-    protected static final Storage file = new Storage("data/tasks.txt");
-    protected static final ArrayList<TaskList> tasks = new ArrayList<>();
-    protected static final UserInterface userInterface = new UserInterface();
+    protected static final Storage FILE = new Storage("data/tasks.txt");
+    protected static final ArrayList<TaskList> TASKS = new ArrayList<>();
+    protected static final UserInterface USER_INTERFACE = new UserInterface();
 
     /**
      * Creates an instance of a TaskList class. This is the parent task class which
@@ -27,7 +27,7 @@ public class TaskList {
     protected TaskList(String description) {
         this.description = description;
         this.isDone = false;
-        tasks.add(this);
+        TASKS.add(this);
     }
 
     /**
@@ -40,7 +40,7 @@ public class TaskList {
      */
     private void setDone() {
         this.isDone = true;
-        file.overwriteList(tasks);
+        FILE.overwriteList(TASKS);
     }
 
     /**
@@ -54,11 +54,11 @@ public class TaskList {
      * @return true if task is successfully marked done; false otherwise
      */
     public boolean markDone(int index) {
-        if (index < 0 || index >= tasks.size()) {
-            userInterface.invalidIntegerWarning();
+        if (index < 0 || index >= TASKS.size()) {
+            USER_INTERFACE.invalidIntegerWarning();
             return false;
         } else {
-            tasks.get(index).setDone();
+            TASKS.get(index).setDone();
             return true;
         }
     }
@@ -70,8 +70,8 @@ public class TaskList {
      * @param index the index of the task on the task list to be deleted
      */
     public void delete(int index) {
-        tasks.remove(index);
-        file.overwriteList(tasks);
+        TASKS.remove(index);
+        FILE.overwriteList(TASKS);
     }
 
     /**
@@ -172,8 +172,8 @@ public class TaskList {
      * with the contents of the storage file at the start.
      */
     public void loadArrayList() {
-        file.loadFile();
-        file.overwriteList(tasks);
+        FILE.loadFile();
+        FILE.overwriteList(TASKS);
     }
 
     /**
@@ -183,23 +183,30 @@ public class TaskList {
      * @return the specified task retrieved from the task list
      */
     public static TaskList getTask(int index) {
-        if (index < 0 || index >= tasks.size()) {
-            userInterface.invalidIntegerWarning();
+        if (index < 0 || index >= TASKS.size()) {
+            USER_INTERFACE.invalidIntegerWarning();
             return null;
         } else {
-            return tasks.get(index);
+            return TASKS.get(index);
         }
     }
 
+    /**
+     * This method finds the tasks that matches the input keyword and subsequently
+     * returns a collection of all tasks that matches the keyword.
+     *
+     * @param searchWord the provided keyword to match to the tasks
+     * @return a collection of all tasks that matches the keyword
+     */
     public static ArrayList<TaskList> findMatching(String searchWord) {
         ArrayList<TaskList> matchingTasks = new ArrayList<>();
-        for (TaskList t : tasks) {
+        for (TaskList t : TASKS) {
             String description = t.getDescription();
             if (description.contains(searchWord)) {
                 matchingTasks.add(t);
             }
         }
-        userInterface.matchingTaskListHeader(searchWord);
+        USER_INTERFACE.matchingTaskListHeader(searchWord);
         return matchingTasks;
     }
 
@@ -224,14 +231,14 @@ public class TaskList {
      * @return length of task list
      */
     public static int listLength() {
-        return tasks.size();
+        return TASKS.size();
     }
 
     /**
      * Prints the contents of the task list onto the command line.
      */
     public static void displayList() {
-        userInterface.taskListHeader();
-        file.printTaskFile();
+        USER_INTERFACE.taskListHeader();
+        FILE.printTaskFile();
     }
 }

@@ -15,9 +15,9 @@ import java.util.regex.Pattern;
  */
 public class Parser {
 
-    private static final String[] months = new String[]{"JANUARY", "FEBRUARY", "MARCH", "APRIL",
-            "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER",
-            "OCTOBER", "NOVEMBER", "DECEMBER"};
+    private static final String[] months = new String[] { "JANUARY", "FEBRUARY", "MARCH",
+        "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER",
+        "DECEMBER" };
     private static final int OFFSET = 7;
 
     /**
@@ -25,7 +25,7 @@ public class Parser {
      */
     public Parser() {}
 
-    private final static UserInterface userInterface = new UserInterface();
+    private final static UserInterface USER_INTERFACE = new UserInterface();
 
     /**
      * This method is responsible for detecting what the user wants. It allows the
@@ -40,18 +40,18 @@ public class Parser {
 
         switch (command) {
         case "bye":
-            userInterface.exit();
+            USER_INTERFACE.exit();
             return true;
         case "done":
             String stringIndex = scanner.next();
             try {
                 int index = Integer.parseInt(stringIndex) - 1;
                 if (task.markDone(index)) {
-                    userInterface.taskComplete(TaskList.getTask(index));
+                    USER_INTERFACE.taskComplete(TaskList.getTask(index));
                 }
                 break;
             } catch (NumberFormatException e) {
-                userInterface.integerInputWarning();
+                USER_INTERFACE.integerInputWarning();
                 break;
             }
         case "list":
@@ -62,17 +62,19 @@ public class Parser {
                 String stringIndex2 = scanner.next();
                 int index2 = Integer.parseInt(stringIndex2) - 1;
                 TaskList deletedTask = TaskList.getTask(index2);
-                if (deletedTask == null) break;
+                if (deletedTask == null) {
+                    break;
+                }
                 task.delete(index2);
-                userInterface.taskDeleted(deletedTask);
+                USER_INTERFACE.taskDeleted(deletedTask);
                 break;
             } catch (NumberFormatException e) {
-                userInterface.integerInputWarning();
+                USER_INTERFACE.integerInputWarning();
                 break;
             }
         case "find":
             String searchWord = scanner.next();
-            userInterface.printArrayList(TaskList.findMatching(searchWord));
+            USER_INTERFACE.printArrayList(TaskList.findMatching(searchWord));
             break;
         default:
             String remaining = command.concat(" " + scanner.nextLine());
@@ -198,7 +200,7 @@ public class Parser {
             }
             ld = LocalDate.parse(timeFormat);
         } catch (ArrayIndexOutOfBoundsException e) {
-            userInterface.nullFunction();
+            USER_INTERFACE.nullFunction();
         }
     }
 
@@ -230,7 +232,7 @@ public class Parser {
             }
             ld = LocalDate.parse(timeFormat);
         } catch (ArrayIndexOutOfBoundsException e) {
-            userInterface.nullFunction();
+            USER_INTERFACE.nullFunction();
         }
     }
 
@@ -291,7 +293,8 @@ public class Parser {
                 }
             }
             stringBuilder.reverse();
-            return task.addExisting(taskChar, taskStatus, description.substring(0, startIndex), stringBuilder.toString().trim());
+            return task.addExisting(taskChar, taskStatus, description.substring(0, startIndex),
+                    stringBuilder.toString().trim());
         }
     }
 }
