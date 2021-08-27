@@ -3,6 +3,13 @@ package duke;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Duke class.
+ * Uses storage class to load existing data.
+ * If there is not existing file, it will create one.
+ * It takes in user input and create the task object.
+ * It will save the final list into the file when programmes end.
+ */
 public class Duke {
     static void drawLine() {
         System.out.println("___________________________________________");

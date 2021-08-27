@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+/**
+ * Class that deals with loading and saving of file.
+ */
 public class Storage {
     private Path folderPath;
     private Path filePath;
@@ -18,6 +21,12 @@ public class Storage {
         filePath = Paths.get("data/duke.txt");
     }
 
+    /**
+     * Gets the file path of the file if it already exists and create the file if not.
+     *
+     * @return Path of the file.
+     * @throw IOException.
+     */
     public Path getFilePath() throws IOException {
         if (!Files.exists(folderPath)) {
             folderPath = Files.createDirectory(folderPath);
@@ -31,6 +40,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the file and produce it as list.
+     *
+     * @param p Path of the file.
+     * @return List of task.
+     * @throw IOException.
+     */
     public List<Task> load(Path p) throws IOException {
         String currContent;
         String[] parts;
@@ -62,6 +78,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Loads the file and produce it as list.
+     *
+     * @param tasks List of tasks.
+     * @param path Path of the file.
+     * @throw IOException.
+     */
     public void write(List<Task> tasks, Path path) throws IOException {
         String stringToInsert;
         Task t;
