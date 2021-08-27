@@ -1,21 +1,23 @@
 package main.java;
 
+import java.time.LocalDateTime;
+
 /**
  * Task subclass that encapsulates the individual "Event" task passed into the bot.
  */
 public class EventTask extends Task {
 
     /**
-     * Variable that holds the event time as String
+     * Variable that holds the deadline time as a LocalDateTime object
      */
-    protected String at;
+    protected LocalDateTime time;
 
     /**
      * Constructor for the Event class
      */
-    EventTask(String task, String at) {
+    EventTask(String task, LocalDateTime time) {
         super(task);
-        this.at = at;
+        this.time = time;
     }
 
     /**
@@ -33,7 +35,7 @@ public class EventTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[E]" + super.getTaskState() + "(At: " + this.at + ")";
+        return "[E]" + super.getTaskState() + "(At: " + time.format(outputFormatter) + ")";
     }
 
     @Override

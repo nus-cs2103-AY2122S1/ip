@@ -1,6 +1,6 @@
 package main.java;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class CommandHandler {
 
@@ -9,12 +9,7 @@ public class CommandHandler {
     protected ArrayList<Task> list;
 
     enum CommandStart {
-        LIST,
-        DONE,
-        DELETE,
-        TODO,
-        DEADLINE,
-        EVENT
+        LIST, DONE, DELETE, TODO, DEADLINE, EVENT
     }
 
     CommandHandler(ArrayList<Task> list) {
@@ -33,7 +28,8 @@ public class CommandHandler {
 
         } else if (input.startsWith("done ")) {
 
-            // If the user types "done X" where X is a non-zero integer, mark the task as complete
+            // If the user types "done X" where X is a non-zero integer, mark the task as
+            // complete
             start = CommandStart.DONE;
 
         } else if (input.startsWith("delete ")) {
@@ -43,17 +39,14 @@ public class CommandHandler {
 
         } else if (input.startsWith("todo ")) {
 
-            // If the user types "todo [XXX]" where [XXX] is a substring, store substring as a Todo object
             start = CommandStart.TODO;
 
         } else if (input.startsWith("deadline ") && input.contains("/by ")) {
 
-            // If the user types "deadline [XXX]" where [XXX] is a substring, store substring as a Deadline object
             start = CommandStart.DEADLINE;
 
         } else if (input.startsWith("event ") && input.contains("/at ")) {
 
-            // If the user types "event [XXX]" where [XXX] is a substring, store substring as an Event object
             start = CommandStart.EVENT;
 
         } else if (!input.equals("bye")) {
@@ -61,7 +54,7 @@ public class CommandHandler {
         }
 
         if (start != null) {
-            switch(start) {
+            switch (start) {
                 case LIST:
                     command = new ListCommand(input, this.list);
                     System.out.println(command.reply());

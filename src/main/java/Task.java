@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Task class that encapsulates the individual task passed into the bot.
  */
@@ -14,6 +16,10 @@ public class Task {
      * Variable that holds the task completion state as boolean
      */
     protected boolean done;
+
+    protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
+
+    protected DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy, hh:mm a");
 
     /**
      * Constructor for the Task class
