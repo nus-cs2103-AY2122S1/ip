@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Reads and Writes data to the tasks' database
+ */
 public class Storage {
     private String filePath;
 

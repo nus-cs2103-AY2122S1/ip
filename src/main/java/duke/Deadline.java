@@ -2,6 +2,9 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A Deadline task that needs to be done by a specified time
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
     public Deadline(String name, LocalDateTime by, Boolean isDone) {
