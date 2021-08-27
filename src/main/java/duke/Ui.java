@@ -15,6 +15,7 @@ public class Ui {
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
     private static  final String ADD_TASK_MESSAGE = "Got it. I've added this task:";
     private static final String DELETE_TASK_MESSAGE = "Noted. I've removed this task:";
+    private static final String FIND_TAKS_MESSAGE = "Here are the matching tasks in your list:";
 
     /**
      * Prints a message indicating file loading error.
@@ -82,7 +83,7 @@ public class Ui {
 
     
     public void findTaskMessage (TaskList tasks) {
-        System.out.println(findTaskMessage);
+        System.out.println(FIND_TAKS_MESSAGE);
         for(int i = 0; i < tasks.getSize(); i++) {
             System.out.println(String.valueOf(i+1) + "." + tasks.get(i).toString());
         }
