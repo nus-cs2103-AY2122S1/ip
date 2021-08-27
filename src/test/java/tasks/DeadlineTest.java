@@ -15,6 +15,6 @@ public class DeadlineTest {
     @Test
     public void toStringTestTime() {
         Deadline d = new Deadline("Test", "2020-11-11, 1800");
-        assertEquals(d.toString(), "[D][ ] Test (by: 11 Nov 2020, 6:00:00 pm)");
+        assertEquals(d.toString(), "[D][ ] Test (by: 11 Nov 2020, 6:00:00 PM)");
     }
 }
