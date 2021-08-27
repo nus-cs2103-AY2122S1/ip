@@ -15,12 +15,25 @@ public class Deadline extends Task {
     private LocalDate date;
     private LocalTime time;
 
+    /**
+     * Default constructor for Deadline.
+     * @param description String object representing the task being input into Duke.
+     * @param date LocalDate object representing the date the Deadline task is due by.
+     * @param time LocalTime object representing the time that the Deadline task is due by.
+     */
     public Deadline(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
         this.time = time;
     }
 
+    /**
+     * Overloaded constructor for Deadline.
+     * @param done String object representing whether the task is completed.
+     * @param description String object representing the task being input into Duke.
+     * @param date LocalDate object representing the date the Deadline task is due by.
+     * @param time LocalTime object representing the time that the Deadline task is due by.
+     */
     public Deadline(String done, String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;

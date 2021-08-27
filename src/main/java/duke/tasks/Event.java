@@ -16,6 +16,13 @@ public class Event extends Task {
     private final LocalTime start;
     private final LocalTime end;
 
+    /**
+     * Default constructor for Event.
+     * @param description String object representing the task being input into Duke.
+     * @param date LocalDate object representing the date the Event task is on.
+     * @param start LocalTime object representing the start time of the Event task.
+     * @param end LocalTime object representing the end time of the Event task.
+     */
     public Event(String description, LocalDate date, LocalTime start, LocalTime end) {
         super(description);
         this.date = date;
@@ -23,6 +30,14 @@ public class Event extends Task {
         this.end = end;
     }
 
+    /**
+     * Overloaded constructor for Event.
+     * @param done String object representing whether the task is completed.
+     * @param description String object representing the task being input into Duke.
+     * @param date LocalDate object representing the date the Event task is on.
+     * @param start LocalTime object representing the start time of the Event task.
+     * @param end LocalTime object representing the end time of the Event task.
+     */
     public Event(String done, String description, LocalDate date, LocalTime start, LocalTime end) {
         super(description);
         this.date = date;

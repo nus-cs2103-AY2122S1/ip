@@ -107,6 +107,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints a line for separation purposes.
+     */
     public static void printLine() {
         System.out.println("____________________________________________________"
                 + "_________________________________________________________");
