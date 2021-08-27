@@ -121,9 +121,13 @@ public class Duke {
                     storage.deleteFromFile(id);
 
                     break;
+                case "find":
+                    output = items.findTask(task[0]);
+
+                    break;
                 default:
                     output = "I don't recognise this command\n"
-                            + "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'";
+                            + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
 
                     break;
                 }
