@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,21 +20,10 @@ public class Duke {
     public Duke(String filePathToStorage) {
         this.dukeStore = new Storage(filePathToStorage);
         this.taskList = TaskList.of(this.dukeStore);
-//        this.taskList = TaskList.of(new ArrayList<Task>());
     }
 
     public void run() {
         Scanner sc = new Scanner(System.in);
-
-//        Event someEvent = Event.of("work", "night");
-//        someEvent.markCompleted();
-//        dukeStore.write(
-//        ToDo.of("potato").toStorageFormat()+"\n"
-//            +Event.of("party", "house").toStorageFormat()+"\n"
-//            +someEvent.toStorageFormat()+"\n"
-//            +Deadline.of("project","tonight").toStorageFormat()
-//        );
-
 
 //            +Event.of("party", "house").toStorageFormat()+"\n"
 //            +someEvent.toStorageFormat()+"\n"
@@ -78,7 +68,7 @@ public class Duke {
                         );
                         taskList.removeTask(idxFrom0);
                     }
-                }else if (userInput.matches("todo\\s\\w+.*")) {
+                } else if (userInput.matches("todo\\s\\w+.*")) {
                     //eg. todo read book
                     String inputBody = userInput.split(" ", 2)[1];
                     Task newTask = ToDo.of(inputBody);
@@ -88,7 +78,7 @@ public class Duke {
                     );
                     taskList.addTask(newTask);
                 } else if (userInput.matches("deadline\s.+\s\\/by\s.+")) {
-                    //eg. deadline xxx /by xxx
+                    //eg. deadline xxx /by dd-MM-uuuu HHmm
                     String inputBody = userInput.split(" ", 2)[1];
                     String[] deadlineDetails = inputBody.split("\s/by\s", 2);
                     String deadlineTask = deadlineDetails[0];
@@ -113,11 +103,13 @@ public class Duke {
                             newTask.toString(), numOfTasks + 1
                     );
                     taskList.addTask(newTask);
-                }  else {
-                        throw new DukeException(userInput);
+                } else {
+                    throw DukeException.of(userInput);
                 }
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 msgOutput = e.toString();
+            } catch (Exception e) { //should be here i think...
+                e.printStackTrace();
             } finally {
                 printFormatted(msgOutput); //output msg to user
             }

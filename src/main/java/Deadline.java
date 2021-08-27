@@ -1,16 +1,16 @@
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 //    public static final String TYPE = "Deadline";
     public static final String SYMBOL = "D";
-    private String userInputByDate;
+    private String userInputDeadline;
     private LocalDateTime dateTimeDeadline;
     private LocalDateTime dateTimeTaskCreation;
     private static DateTimeFormatter DATE_TIME_FORMATTER =
-        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm");
 
 
     public static Deadline of(String taskSummary, String byDate) {
@@ -18,7 +18,7 @@ public class Deadline extends Task {
     }
 
     public static Deadline parse(String storageLine) {
-        //example line: "D | 0 | work | 01-01-2020 14:30"
+        //example line: "D | 0 | work | 01-06-2020 1430"
         String[] args = storageLine.split(" \\| ");
         if (args.length != 4) {
             throw new IllegalArgumentException("storage line passed in doesnt have enough arguments");
@@ -33,17 +33,26 @@ public class Deadline extends Task {
 
     public Deadline(String taskSummary, String byDate) {
         super(taskSummary);
-        this.userInputByDate = byDate;
+        this.userInputDeadline = byDate;
         this.dateTimeTaskCreation = LocalDateTime.now();
         this.updateDateTimeDeadline(byDate);
+
     }
 
     private void updateDateTimeDeadline(String byDate) {
-        LocalDateTime parsedDateTime = Deadline.stringToLocalDateTime(byDate);
-        if (parsedDateTime.isBefore(dateTimeTaskCreation)) {
-            throw new IllegalArgumentException("Date passed as deadline is in the past: " + this.userInputByDate);
+        try {
+            LocalDateTime parsedDateTime = Deadline.stringToLocalDateTime(byDate);
+            if (parsedDateTime.isBefore(dateTimeTaskCreation)) {
+                throw new IllegalArgumentException("Time of deadline is in the past!");
+            }
+            this.dateTimeDeadline = parsedDateTime;
+        } catch (DateTimeParseException e) {
+            throw DukeException.of("date",
+    String.format("Invalid date & time passed (\'%s\')\n\n", byDate) + Deadline.syntax());
+        } catch (IllegalArgumentException e) {
+            throw DukeException.of("date",
+    String.format("Invalid date & time passed (\'%s\')\n\n", byDate) + e.getMessage());
         }
-        this.dateTimeDeadline = stringToLocalDateTime(byDate);
     }
 
     private static LocalDateTime stringToLocalDateTime(String text) {
@@ -55,14 +64,16 @@ public class Deadline extends Task {
     }
 
     public static String syntax() {
-        return "deadline command syntax: \'deadline <task> /by <deadlineTime>\'";
+        return "deadline command syntax: \n" +
+                "    \'deadline <task> /by dd-MM-yyyy HHmm\'\n"+
+                "Eg. \'deadline project /by 01-01-2020 2359\'";
     }
 
     @Override
     public String toStorageFormat() {
         return String.format(
             "%s | %d | %s | %s",
-            Deadline.SYMBOL, this.isCompleted() ? 1 : 0,this.getTaskSummary(), this.userInputByDate
+            Deadline.SYMBOL, this.isCompleted() ? 1 : 0,this.getTaskSummary(), this.userInputDeadline
         );
     }
 

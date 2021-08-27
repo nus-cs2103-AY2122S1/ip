@@ -1,13 +1,23 @@
 public class DukeException extends IllegalArgumentException {
-    private boolean isKeyword;
-    private String msg;
+//    private boolean isKeyword;
+    private String messageReply;
 
-    public DukeException(String userInput) {
-        super(userInput);
-        this.msg = replyInput(userInput);
+    //package private
+    static DukeException of(String invalidInput, String messageReply) {
+        return new DukeException(invalidInput, messageReply);
     }
 
-    private String replyInput(String userInput) {
+    static DukeException of(String userInput) {
+        String reply = DukeException.replyInput(userInput);
+        return new DukeException(userInput, reply);
+    }
+
+    private DukeException(String invalidInput, String messageReply) {
+        super(invalidInput);
+        this.messageReply = messageReply;
+    }
+
+    private static String replyInput(String userInput) {
         String defaultReply = "Invalid input!\n" +
             "    Available commands: [todo, deadline, event, list, bye]";
 
@@ -30,7 +40,7 @@ public class DukeException extends IllegalArgumentException {
 
     @Override
     public String toString() {
-            return this.msg;
+        return this.messageReply;
     }
 }
 

@@ -12,12 +12,10 @@ public class Task {
         String taskSymbol = Character.toString(line.charAt(0));
         switch (taskSymbol) {
             case "T":
-                System.out.println("T entered");
                 return ToDo.parse(line);
             case "E":
                 return Event.parse(line);
             case "D":
-                System.out.println("D entered");
                 return Deadline.parse(line);
             default:
                 throw new IllegalArgumentException("Should not enter here");

@@ -9,6 +9,8 @@
     ------------------------------------
     ____________________________________
     Here are the tasks in your list:
+    1: [E][] party (at: house)
+    2: [E][] work (at: night)
 
     ------------------------------------
     ____________________________________
@@ -21,17 +23,21 @@
     ____________________________________
     Got it! I've added this task:
      [T][] readme
-    Now you have 1 tasks in the list.
+    Now you have 3 tasks in the list.
     ------------------------------------
     ____________________________________
     Here are the tasks in your list:
-    1: [T][] readme
+    1: [E][] party (at: house)
+    2: [E][] work (at: night)
+    3: [T][] readme
 
     ------------------------------------
     ____________________________________
-    Got it! I've added this task:
-     [D][] projSubmission (by: yesterday)
-    Now you have 2 tasks in the list.
+    Invalid date & time passed ('yesterday')
+
+    deadline command syntax:
+        'deadline <task> /by dd-MM-yyyy HHmm'
+    Eg. 'deadline project /by 01-01-2020 2359'
     ------------------------------------
     ____________________________________
     Invalid input!
@@ -40,23 +46,37 @@
     ____________________________________
     Got it! I've added this task:
      [E][] zoomMeeting (at: tonight)
-    Now you have 3 tasks in the list.
+    Now you have 4 tasks in the list.
     ------------------------------------
     ____________________________________
     Here are the tasks in your list:
-    1: [T][] readme
-    2: [D][] projSubmission (by: yesterday)
-    3: [E][] zoomMeeting (at: tonight)
+    1: [E][] party (at: house)
+    2: [E][] work (at: night)
+    3: [T][] readme
+    4: [E][] zoomMeeting (at: tonight)
 
     ------------------------------------
     ____________________________________
     Nice! I've marked this task as done:
-        [D][X] projSubmission (by: yesterday)
+        [E][X] work (at: night)
     ------------------------------------
     ____________________________________
     Here are the tasks in your list:
-    1: [T][] readme
-    2: [D][X] projSubmission (by: yesterday)
+    1: [E][] party (at: house)
+    2: [E][X] work (at: night)
+    3: [T][] readme
+    4: [E][] zoomMeeting (at: tonight)
+
+    ------------------------------------
+    ____________________________________
+    Noted. I've removed this task:
+        [E][] party (at: house)
+    Now you have 3 tasks in the list.
+    ------------------------------------
+    ____________________________________
+    Here are the tasks in your list:
+    1: [E][X] work (at: night)
+    2: [T][] readme
     3: [E][] zoomMeeting (at: tonight)
 
     ------------------------------------

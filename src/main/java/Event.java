@@ -16,7 +16,6 @@ public class Event extends Task {
         if (args.length != 4) {
             throw new IllegalArgumentException("storage line passed in doesnt have enough arguments");
         }
-        System.out.println(Arrays.toString(args));
         Event loadedEvent = new Event(args[2], args[3]);
         Boolean completed = args[1].equals("1");
         if (completed) {

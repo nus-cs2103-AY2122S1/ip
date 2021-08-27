@@ -15,7 +15,6 @@ public class ToDo extends Task {
         if (args.length != 3) {
             throw new IllegalArgumentException("storage line passed in doesnt have enough arguments");
         }
-        System.out.println(Arrays.toString(args));
         ToDo loadedToDo = new ToDo(args[2]);
         Boolean completed = args[1].equals("1");
         if (completed) {
