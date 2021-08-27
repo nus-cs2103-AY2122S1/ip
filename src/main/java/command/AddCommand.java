@@ -8,7 +8,7 @@ import exception.MissingCommandDescriptionException;
 import tasklist.Task;
 import tasklist.TaskList;
 import type.DukeCommandTypeEnum;
-import ui.message.AddMessage;
+import message.Message;
 
 /**
  * Encapsulates an add command after it is parsed from the user input.
@@ -63,9 +63,13 @@ public class AddCommand extends Command {
     /**
      * Gets the output message representing the command is executed.
      *
-     * @return `AddMessage`.
+     * @return `Message`.
      */
-    public AddMessage getOutputMessage() {
-        return new AddMessage(task.toString(), list.getNumberOfTasks());
+    public Message getOutputMessage() {
+        String prefix = "Got it. I've added this task:";
+        int numOfTasks = list.getNumberOfTasks();
+        String taskWord = numOfTasks == 1 ? "task" : "tasks";
+        String suffix = String.format("Now you have %d %s in the list", list.getNumberOfTasks(), taskWord);
+        return new Message(prefix, task.toString(), suffix, "(＾＾)b");
     }
 }

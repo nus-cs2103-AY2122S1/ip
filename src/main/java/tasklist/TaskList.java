@@ -107,7 +107,7 @@ public class TaskList {
 
         for (int i = 0; i < this.list.size(); i++) {
             Task task = this.list.get(i);
-            String listItem = String.format("%d. %s\n\t", i + 1, task.toString());
+            String listItem = String.format("%d. %s\n", i + 1, task.toString());
             stringBuilderList.append(listItem);
         }
 

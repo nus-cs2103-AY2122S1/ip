@@ -1,4 +1,4 @@
-package ui.message;
+package message;
 
 /**
  * Encapsulates an error message for any errors that the user should be informed about.

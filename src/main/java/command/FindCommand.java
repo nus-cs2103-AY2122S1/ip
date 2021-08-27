@@ -3,7 +3,7 @@ package command;
 import exception.MissingCommandDescriptionException;
 import tasklist.TaskList;
 import type.DukeCommandTypeEnum;
-import ui.message.ListMessage;
+import message.Message;
 
 /**
  * Encapsulates a done command after it is parsed from user input.
@@ -42,9 +42,9 @@ public class FindCommand extends Command {
     /**
      * Gets the output message representing the command is executed.
      *
-     * @return `ListMessage`.
+     * @return `Message`.
      */
-    public ListMessage getOutputMessage() {
-        return new ListMessage("Here are the matching tasks in your list:", this.list.toString());
+    public Message getOutputMessage() {
+        return new Message("Here are the matching tasks in your list:", this.list.toString(), "ヽ(°〇°)ﾉ");
     }
 }

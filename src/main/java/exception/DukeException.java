@@ -1,6 +1,6 @@
 package exception;
 
-import ui.message.ErrorMessage;
+import message.ErrorMessage;
 
 /**
  * Encapsulates an exception that contains a method to get an `ErrorMessage`.

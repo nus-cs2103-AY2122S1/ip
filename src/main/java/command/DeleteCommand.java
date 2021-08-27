@@ -7,7 +7,7 @@ import exception.NonExistentTaskNumberException;
 import tasklist.Task;
 import tasklist.TaskList;
 import type.DukeCommandTypeEnum;
-import ui.message.DeleteMessage;
+import message.Message;
 
 /**
  * Encapsulates a delete command after it is parsed from the user input.
@@ -53,9 +53,13 @@ public class DeleteCommand extends Command {
     /**
      * Gets the output message representing the command is executed.
      *
-     * @return `DeleteMessage`.
+     * @return `Message`.
      */
-    public DeleteMessage getOutputMessage() {
-        return new DeleteMessage(task.toString(), list.getNumberOfTasks());
+    public Message getOutputMessage() {
+        String prefix = "Noted. I've removed this task:";
+        int numOfTasks = list.getNumberOfTasks();
+        String taskWord = numOfTasks == 1 ? "task" : "tasks";
+        String suffix = String.format("Now you have %d %s in the list", list.getNumberOfTasks(), taskWord);
+        return new Message(prefix, task.toString(), suffix, "(＾＾)b");
     }
 }

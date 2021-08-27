@@ -7,7 +7,7 @@ import exception.NonExistentTaskNumberException;
 import tasklist.Task;
 import tasklist.TaskList;
 import type.DukeCommandTypeEnum;
-import ui.message.DoneMessage;
+import message.Message;
 
 /**
  * Encapsulates a done command after it is parsed from the user input.
@@ -50,9 +50,10 @@ public class DoneCommand extends Command {
     /**
      * Gets the output message representing the command is executed.
      *
-     * @return `DoneMessage`.
+     * @return `Message`.
      */
-    public DoneMessage getOutputMessage() {
-        return new DoneMessage(task.toString());
+    public Message getOutputMessage() {
+        String prefix = "Nice! I've marked this task as done:";
+        return new Message(prefix, task.toString(), "≧(´▽｀)≦");
     }
 }

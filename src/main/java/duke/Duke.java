@@ -35,9 +35,9 @@ public class Duke {
         try {
             Command command = this.parser.makeCommand(input);
             command.execute(this.list);
-            return command.getOutputMessage().getMessageWithFace();
+            return command.getOutputMessage().toString();
         } catch (DukeException e) {
-            return e.getOutputMessage().getMessageWithFace();
+            return e.getOutputMessage().toString();
         }
     }
 }
