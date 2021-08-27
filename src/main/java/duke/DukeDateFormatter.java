@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 public class DukeDateFormatter {
     // DateTimeFormatter is immutable and thread-safe, and thus the recommended
-    // approach is to store it in a static constant
+    // approach is to store it in a static constant.
     private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private static final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
