@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UI {
     private final Parser parser;
@@ -23,6 +24,7 @@ public class UI {
             CommandType command = parser.nextCommand();
 
             int taskIndex;
+            String searchTerm;
             Task newTask;
 
             switch (command) {
@@ -61,7 +63,14 @@ public class UI {
                 }
                 break;
             case Find:
-                //TODO
+                searchTerm = parser.getSearchTerm();
+                ArrayList<Task> matchingTasks = new ArrayList<>();
+                for (Task task : taskList.getTaskList()) {
+                    if (task.description.indexOf(searchTerm) >= 0) {
+                        matchingTasks.add(task);
+                    }
+                }
+                findMsg(matchingTasks);
                 break;
             case Error:
                 printBreakLine();
@@ -105,6 +114,15 @@ public class UI {
         System.out.println("  Here are the tasks in your list:");
         for (int i = 1; i < taskList.getListSize() + 1; i++) {
             System.out.printf("  %d. %s%n", i, taskList.getTaskString(i - 1));
+        }
+        printBreakLine();
+    }
+
+    private void findMsg(ArrayList<Task> tasks) {
+        printBreakLine();
+        System.out.println("  Here are the matching tasks in your list:");
+        for (int i = 1; i < tasks.size() + 1; i++) {
+            System.out.printf("  %d. %s%n", i, tasks.get(i - 1).toString());
         }
         printBreakLine();
     }
