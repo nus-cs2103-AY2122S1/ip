@@ -4,8 +4,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-//    public static final String TYPE = "Deadline";
     public static final String SYMBOL = "D";
+    public static final String COMMAND_REGEX = "deadline \\w[\\w, ]+\\w \\/by \\w[\\w,\\-, ]*";
+//            "deadline\\s.+\\s\\\\/by\\s.+";
+
     private String userInputDeadline;
     private LocalDateTime dateTimeDeadline;
     private LocalDateTime dateTimeTaskCreation;
@@ -85,7 +87,6 @@ public class Deadline extends Task {
             this.isCompleted() ? "X" : "",
             this.getTaskSummary(),
             Deadline.localDateTimeToString(this.dateTimeDeadline)
-//                this.userInputByDate
         );
     }
 }

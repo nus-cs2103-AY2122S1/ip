@@ -24,12 +24,6 @@ public class Duke {
 
     public void run() {
         Scanner sc = new Scanner(System.in);
-
-//            +Event.of("party", "house").toStorageFormat()+"\n"
-//            +someEvent.toStorageFormat()+"\n"
-//            +Deadline.of("project","tonight").toStorageFormat()
-//        );
-
         printFormatted(beginScript()); //display welcome msg
 
         while (sc.hasNext()) {
@@ -68,7 +62,7 @@ public class Duke {
                         );
                         taskList.removeTask(idxFrom0);
                     }
-                } else if (userInput.matches("todo\\s\\w+.*")) {
+                } else if (userInput.matches(ToDo.COMMAND_REGEX)) {
                     //eg. todo read book
                     String inputBody = userInput.split(" ", 2)[1];
                     Task newTask = ToDo.of(inputBody);
@@ -77,7 +71,7 @@ public class Duke {
                             newTask.toString(), numOfTasks + 1
                     );
                     taskList.addTask(newTask);
-                } else if (userInput.matches("deadline\s.+\s\\/by\s.+")) {
+                } else if (userInput.matches(Deadline.COMMAND_REGEX)) {
                     //eg. deadline xxx /by dd-MM-uuuu HHmm
                     String inputBody = userInput.split(" ", 2)[1];
                     String[] deadlineDetails = inputBody.split("\s/by\s", 2);
@@ -90,8 +84,8 @@ public class Duke {
                             newTask.toString(), numOfTasks + 1
                     );
                     taskList.addTask(newTask);
-                } else if (userInput.matches("event\s.+\s\\/at\s.+")) {
-                    //eg. deadline xxx /by xxx
+                } else if (userInput.matches(Event.COMMAND_REGEX)) {
+                    //eg. event xxx /by xxx
                     String inputBody = userInput.split(" ", 2)[1];
                     String[] eventDetails = inputBody.split("\s/at\s", 2);
                     String eventTask = eventDetails[0];

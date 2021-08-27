@@ -2,3 +2,4 @@ E | 1 | party | town
 T | 0 | partymore
 T | 0 | fren
 D | 0 | project | 02-02-2022 2359
+D | 0 | eat | 02-12-2022 0600

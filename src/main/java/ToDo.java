@@ -3,6 +3,7 @@ import java.util.Arrays;
 public class ToDo extends Task {
     public static String TYPE = "Todo";
     public static final String SYMBOL = "T";
+    public static final String COMMAND_REGEX = "todo \\w+.*";
 
 
     public static ToDo of(String taskSummary) {
@@ -10,13 +11,13 @@ public class ToDo extends Task {
     }
 
     public static ToDo parse(String storageLine) {
-        //example line: "T | 0 | eat"
+        //eg. "T | 0 | eat"
         String[] args = storageLine.split(" \\| ");
         if (args.length != 3) {
             throw new IllegalArgumentException("storage line passed in doesnt have enough arguments");
         }
         ToDo loadedToDo = new ToDo(args[2]);
-        Boolean completed = args[1].equals("1");
+        boolean completed = args[1].equals("1");
         if (completed) {
             loadedToDo.markCompleted();
         }
@@ -26,10 +27,6 @@ public class ToDo extends Task {
     public ToDo(String taskSummary) {
         super(taskSummary);
     }
-
-//    private String taskTypeSymbol() {
-//        return Character.toString(ToDo.TYPE.charAt(0));
-//    }
 
     public static String syntax() {
         return "todo command syntax: \'todo <task>\'";

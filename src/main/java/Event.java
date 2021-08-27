@@ -1,8 +1,9 @@
 import java.util.Arrays;
 
 public class Event extends Task {
-    public static final String TYPE = "Event";
     public static final String SYMBOL = "E";
+    public static final String COMMAND_REGEX = "event \\w[\\w, ]+\\w \\/at \\w[\\w, ]*";
+
     private String eventTime;
 
 
