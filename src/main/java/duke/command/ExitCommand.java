@@ -5,7 +5,6 @@ import java.io.IOException;
 import duke.exception.BadInputFormatException;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /** Represents the "exit" command. */
 public class ExitCommand extends Command {
@@ -27,17 +26,20 @@ public class ExitCommand extends Command {
      * Cleans up the UI and writes to disk.
      *
      * @param tasks The list of tasks in the program.
-     * @param ui The UI object.
      * @param storage The storage utility.
      * @throws IOException If the storage encounters and IO exception.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        ui.print("Bye. See ya l8er allig8er!", "\033[3m*shutting down......*\033[0m");
-        ui.cleanup();
+    public String execute(TaskList tasks, Storage storage) throws IOException {
         storage.write(tasks);
+        return outputFormatter("Bye. See ya l8er allig8er!", "*shutting down......*");
     }
 
+    /**
+     * Tests if a command is exit.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return true;

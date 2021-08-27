@@ -1,6 +1,7 @@
 import java.util.Objects;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -30,9 +31,12 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/ainsley.png")));
 
+    /** Initialises the window*/
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("*booting up......*" + "\n" + "I'm the AinsleyBot v3.0!", dukeImage));
     }
 
     public void setDuke(Duke duke) {
@@ -42,11 +46,24 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String[] response = duke.process(input);
+        String response = duke.process(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+                DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
+
+        if (duke.isExit()) {
+            exit();
+        }
+    }
+
+    private void exit() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            Platform.exit();
+        }
     }
 }

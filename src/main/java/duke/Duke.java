@@ -7,7 +7,6 @@ import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 public class Duke {
     /** Hardcoded file path to save location. */
@@ -19,55 +18,39 @@ public class Duke {
     /** The list of tasks. */
     private TaskList tasks;
 
-    /** The program ui. */
-    private Ui ui;
+    private boolean isExit;
 
-    /**
-     * Duke constructor.
-     *
-     * @param filePath The file path to save location.
-     */
-    private Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    /** Default Duke constructor. */
+    public Duke() {
+        storage = new Storage(FILEPATH);
         try {
             tasks = new TaskList(storage.load());
-            ui.showLoadSuccess();
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
     /**
-     * Entry point for the program.
+     * Feeds user's command to the program logic and returns a response.
      *
-     * @throws IOException If the ui encounters error while reading user input.
+     * @param input The user's input.
+     * @return The response from executing the command.
      */
-    private void run() throws IOException {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    /** Driver method. */
-    public static void main(String[] args) {
+    public String process(String input) {
+        String output = "";
         try {
-            new Duke(FILEPATH).run();
+            Command c = Parser.parse(input);
+            output = c.execute(tasks, storage);
+            isExit = c.isExit();
+        } catch (DukeException e) {
+            output = e.getMessage();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return output;
+    }
+
+    public boolean isExit() {
+        return isExit;
     }
 }

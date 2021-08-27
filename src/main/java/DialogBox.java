@@ -8,9 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     @FXML
@@ -30,7 +33,12 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+
+        Circle circle = new Circle(20, 15, 50);
+        displayPicture.setClip(circle);
         displayPicture.setImage(img);
+
     }
 
     /** Flips the dialog box such that the ImageView is on the left and text on the right.*/
@@ -46,7 +54,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }

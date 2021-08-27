@@ -4,7 +4,6 @@ import duke.exception.BadInputFormatException;
 import duke.exception.NoSuchTaskException;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /** Represents the "delete" command. */
 public class DeleteCommand extends Command {
@@ -39,14 +38,13 @@ public class DeleteCommand extends Command {
      * Removes the Task from the specified index in storage.
      *
      * @param tasks The list of tasks in the program.
-     * @param ui The UI object.
      * @param storage The storage utility.
      * @throws NoSuchTaskException If the task does not exist at the specified index.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException {
-        ui.print("Noted. I've removed this task:",
-                tasks.deleteTask(index - 1).toString(),
+    public String execute(TaskList tasks, Storage storage) throws NoSuchTaskException {
+        return outputFormatter("Give your tasks a good ol' rub, I've removed this task:",
+                tasks.deleteTask(index).toString(),
                 String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks"));
     }
 

@@ -4,7 +4,6 @@ import duke.exception.BadInputFormatException;
 import duke.exception.NoSuchTaskException;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /** Represents the "done" command. */
 public class DoneCommand extends Command {
@@ -39,13 +38,13 @@ public class DoneCommand extends Command {
      * Marks the Task at the specified index as done.
      *
      * @param tasks The list of tasks in the program.
-     * @param ui The UI object.
      * @param storage The storage utility.
      * @throws NoSuchTaskException If the task does not exist at the specified index.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoSuchTaskException {
-        ui.print("Nice! I've marked this task as done:", tasks.getTask(index).markTaskAsDone().toString());
+    public String execute(TaskList tasks, Storage storage) throws NoSuchTaskException {
+        return outputFormatter("Nice and spicy, I've marked this task as done:",
+                tasks.getTask(index).markTaskAsDone().toString());
     }
 
     @Override
