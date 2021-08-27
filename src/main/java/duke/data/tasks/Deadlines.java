@@ -4,14 +4,28 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Represents a Deadline, a Task that a due date of type LocalDate.
+ */
 public class Deadlines extends Task {
     private final LocalDate date;
 
+    /**
+     * Constructs a deadline task.
+     * @param name The description of the deadline
+     * @param date The date which the deadline is due
+     */
     public Deadlines(String name, LocalDate date) {
         super(name);
         this.date = date;
     }
 
+    /**
+     * Constructs a deadline task with the given completion status.
+     * @param completed Whether the deadline is completed
+     * @param name The description of the deadline
+     * @param deadline The date which the deadline is due
+     */
     public Deadlines(boolean completed, String name, String deadline) {
         super(completed, name);
         this.date = LocalDate.parse(deadline);

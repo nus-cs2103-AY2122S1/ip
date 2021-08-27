@@ -4,6 +4,9 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * Text UI of the application.
+ */
 public class Ui {
     private static final String SEPARATOR =
             "-------------------------------------------------------";
@@ -20,6 +23,11 @@ public class Ui {
         this.out = out;
     }
 
+    /**
+     * Prompts for the command and reads the text entered by the user.
+     *
+     * @return The full command entered by the user
+     */
     public String getUserInput() {
         out.print(">>> ");
         String input = in.nextLine();
@@ -42,6 +50,10 @@ public class Ui {
         printMsg(e.getMessage());
     }
 
+    /**
+     * Shows message(s) to the user.
+     * @param msgs Array of message(s)
+     */
     public void printMsg(String... msgs) {
         out.println(SEPARATOR);
         for (String msg:msgs) {

@@ -13,6 +13,9 @@ import duke.data.tasks.Events;
 import duke.data.tasks.Task;
 import duke.data.tasks.ToDos;
 
+/**
+ * Represents the file used to store the list of tasks.
+ */
 public class Storage {
     private final File filePath;
 
@@ -24,6 +27,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads data from the storage file.
+     * @return The list of tasks in the storage file
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> loadedTasks = new ArrayList<>();
 
@@ -69,6 +76,10 @@ public class Storage {
         return loadedTasks;
     }
 
+    /**
+     * Writes data to the storage file.
+     * @param data The data to be written to the storage file
+     */
     public void write(String data) {
         try {
             FileWriter fw = new FileWriter(filePath);

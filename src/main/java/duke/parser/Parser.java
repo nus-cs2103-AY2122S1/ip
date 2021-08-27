@@ -2,9 +2,19 @@ package duke.parser;
 
 import java.util.regex.Pattern;
 
-import duke.commands.*;
+import duke.commands.Command;
+import duke.commands.CreateDeadlineCommand;
+import duke.commands.CreateEventCommand;
+import duke.commands.CreateTodoCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
 import duke.data.exception.DukeException;
 
+/**
+ * Parsers user input.
+ */
 public class Parser {
     private static final Pattern TODOS_FORMAT =
             Pattern.compile("^todo\\s.+");
@@ -15,6 +25,12 @@ public class Parser {
     private static final Pattern EVENTS_FORMAT =
             Pattern.compile("^event\\s.+\\s/at\\s.+");
 
+    /**
+     * Parsers user input into command for execution.
+     *
+     * @param userInput Full user input string
+     * @return The command based on the user input
+     */
     public Command parseCommand(String userInput) {
         if (userInput.length() == 0) {
             throw new DukeException("Input cannot be blank");

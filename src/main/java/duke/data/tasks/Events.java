@@ -1,13 +1,27 @@
 package duke.data.tasks;
 
+/**
+ * Represents an Event, a Task with a date of type String.
+ */
 public class Events extends Task {
     private final String date;
 
+    /**
+     * Constructs an Event task.
+     * @param name The description of the event
+     * @param date The date which the event falls on
+     */
     public Events(String name, String date) {
         super(name);
         this.date = date;
     }
 
+    /**
+     * Constructs an Event task with the given completion status.
+     * @param completed Whether the event is completed
+     * @param name The description of the eventhe
+     * @param deadline The date which the event falls on
+     */
     public Events(boolean completed, String name, String deadline) {
         super(completed, name);
         this.date = deadline;

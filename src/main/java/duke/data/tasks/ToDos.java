@@ -1,5 +1,8 @@
 package duke.data.tasks;
 
+/**
+ * Represents a ToDoTask.
+ */
 public class ToDos extends Task {
     public ToDos(String name) {
         super(name);
