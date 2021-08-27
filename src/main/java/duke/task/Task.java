@@ -7,7 +7,7 @@ import duke.Ui;
  */
 public class Task {
     private String taskName;
-    private boolean state;
+    private boolean isDone;
 
     /**
      * Constructor for a task, which takes in a task name.
@@ -16,7 +16,7 @@ public class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
-        this.state = false;
+        this.isDone = false;
     }
 
     /**
@@ -24,7 +24,7 @@ public class Task {
      *
      * @return empty string
      */
-    public String type() {
+    public String getType() {
         return "";
     }
 
@@ -42,8 +42,8 @@ public class Task {
      *
      * @return the state of the task
      */
-    public boolean getState() {
-        return this.state;
+    public boolean getDone() {
+        return this.isDone;
     }
 
     /**
@@ -58,11 +58,11 @@ public class Task {
     /**
      * Marks the task as done.
      *
-     * @param print determines if the task being marked as done should be printed.
+     * @param shouldPrint determines if the task being marked as done should be printed.
      */
-    public void doneTask(boolean print) {
-        this.state = true;
-        if (print) {
+    public void doneTask(boolean shouldPrint) {
+        this.isDone = true;
+        if (shouldPrint) {
             Ui.finishTask(this);
         }
     }
@@ -74,6 +74,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return (state ? "[X] " : "[ ] ") +  this.taskName;
+        return (isDone ? "[X] " : "[ ] ") +  this.taskName;
     }
 }
