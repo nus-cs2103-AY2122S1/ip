@@ -1,8 +1,8 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.Command;
-import main.java.duke.storage.StorageDuke;
-import main.java.duke.tasklist.TaskListDuke;
+import duke.storage.StorageDuke;
+import duke.command.Command;
+import duke.tasklist.TaskListDuke;
 
 import java.io.IOException;
 import java.util.ArrayList;
