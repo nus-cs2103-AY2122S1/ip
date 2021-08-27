@@ -17,7 +17,7 @@ public class Duke {
     private final static String PATH = "data/tasks.txt";
 
     /** Stores a list of tasks */
-    private static ArrayList<Task> lst = new ArrayList<>();
+    private static TaskList taskList = new TaskList();
 
     /** Enum type to differentiate and parse user inputs */
     private enum Command {
@@ -78,7 +78,7 @@ public class Duke {
                     // Makes sure that key phrase is a valid int and within range of task list
                     try {
                         int index = Integer.parseInt(input_split[1]) - 1;
-                        lst.get(index);
+                        taskList.getTask(index);
                         return Command.DONE;
                     }
                     catch (NumberFormatException e) {
@@ -96,7 +96,7 @@ public class Duke {
                     // Makes sure that key phrase is a valid int and within range of task list
                     try {
                         int index = Integer.parseInt(input_split[1]) - 1;
-                        lst.get(index);
+                        taskList.getTask(index);
                         return Command.DELETE;
                     }
                     catch (NumberFormatException e) {
@@ -180,7 +180,7 @@ public class Duke {
      * @return String of reply for adding task
      */
     private static String showTasksReply(Command c, String t) {
-        String show_task = "\nYou have " + lst.size() +" task(s) now so get off that crack rock!";
+        String show_task = "\nYou have " + taskList.size() +" task(s) now so get off that crack rock!";
         // If adding new task reply with add task message
         for (Command taskCommand : Command.taskCommands) {
             if (c == taskCommand) {
@@ -188,7 +188,7 @@ public class Duke {
             }
         }
         // Else reply with custom message
-        return reply( t + "\nYou have " + lst.size() +
+        return reply( t + "\nYou have " + taskList.size() +
                 " task(s) now so get off that crack rock!");
     }
 
@@ -221,8 +221,8 @@ public class Duke {
                             // Show list
                             String lst_display = "\n";
 
-                            for (int i = 0; i < lst.size(); i++) {
-                                lst_display = lst_display + String.format("\t%d. %s\n", i + 1, lst.get(i));
+                            for (int i = 0; i < taskList.size(); i++) {
+                                lst_display = lst_display + String.format("\t%d. %s\n", i + 1, taskList.getTask(i));
                             }
                             System.out.print(reply(lst_display));
                             break;
@@ -231,7 +231,7 @@ public class Duke {
                             // Mark task as done
                             String desc = user_input.split(" ", 2)[1];
                             int index = Integer.parseInt(desc) - 1;
-                            Task t = lst.get(index);
+                            Task t = taskList.getTask(index);
                             t.setDone();
                             System.out.print(reply("Noice! Pepper Jack marked this task as done:\n\t" + t));
                             break;
@@ -240,7 +240,7 @@ public class Duke {
                             // Delete task
                             String desc = user_input.split(" ", 2)[1];
                             int index = Integer.parseInt(desc) - 1;
-                            Task t = lst.remove(index);
+                            Task t = taskList.removeTask(index);
                             System.out.print(showTasksReply(c, "Aights! Pepper Jack deleted this task:\n\t" + t));
                             break;
                         }
@@ -248,7 +248,7 @@ public class Duke {
                             // Add new to do
                             String desc = user_input.split(" ", 2)[1];
                             Task t = new Todo(desc);
-                            lst.add(t);
+                            taskList.addTask(t);
                             System.out.print(showTasksReply(c, t.toString()));
                             break;
                         }
@@ -256,7 +256,7 @@ public class Duke {
                             // Add new deadline
                             String desc_date = user_input.split(" ", 2)[1];
                             Task t = Deadline.build(desc_date);
-                            lst.add(t);
+                            taskList.addTask(t);
                             System.out.print(showTasksReply(c, t.toString()));
                             break;
                         }
@@ -264,7 +264,7 @@ public class Duke {
                             // Add new event
                             String desc_date = user_input.split(" ", 2)[1];
                             Task t = Event.build(desc_date);
-                            lst.add(t);
+                            taskList.addTask(t);
                             System.out.print(showTasksReply(c, t.toString()));
                             break;
                         }
@@ -314,7 +314,7 @@ public class Duke {
                     if (matcher.group("status").equals("X")) {
                         toAdd.setDone();
                     }
-                    lst.add(toAdd);
+                    taskList.addTask(toAdd);
                 }
             }
         }
@@ -331,7 +331,7 @@ public class Duke {
             FileWriter fw = new FileWriter(PATH);
 
             // Write current task list into file
-            for (Task t : lst) {
+            for (Task t : taskList.getTaskList()) {
                 fw.write(t.toString());
                 fw.write(System.lineSeparator());
             }
