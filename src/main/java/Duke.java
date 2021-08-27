@@ -112,7 +112,7 @@ public class Duke {
                         String dDescription = input.substring(("deadline ").length(), input.indexOf("/"));
                         String by = input.substring(input.indexOf("/by ") + "/by ".length());
                         list.addTask(new Deadline(dDescription, by));
-                    } catch (DialogException | EmptyDescriptionException | EmptyTaggerException e) {
+                    } catch (DialogException | EmptyDescriptionException | EmptyTaggerException | InvalidTimeFormatException e) {
                       Duke.printError(e);
                     }
                     break;
@@ -127,7 +127,7 @@ public class Duke {
                         String eDescription = input.substring(("event ").length(), input.indexOf("/"));
                         String at = input.substring(input.indexOf("/at ") + "/at ".length());
                         list.addTask(new Event(eDescription, at));
-                    } catch (DialogException | EmptyDescriptionException | EmptyTaggerException e) {
+                    } catch (DialogException | EmptyDescriptionException | EmptyTaggerException | InvalidTimeFormatException e) {
                         Duke.printError(e);
                     }
                     break;
