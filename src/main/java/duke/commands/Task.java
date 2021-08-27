@@ -26,5 +26,9 @@ public abstract class Task {
         return getStatusIcon() + " " + description;
     }
 
+    public boolean findKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     public abstract String printFormat();
 }
