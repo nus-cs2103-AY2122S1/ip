@@ -75,17 +75,17 @@ public class Storage {
             Scanner s = new Scanner(taskFile);
             while (s.hasNextLine()) {
                 String taskString = s.nextLine();
-                String[] splitString = taskString.split("  ");
+                String[] splitString = taskString.split(" \\| ");
 
-                switch (splitString[0]) {
+                switch (splitString[0].trim()) {
 
                 case "T":
                     userInput.add(new Todo(splitString[2]));
                     break;
                 case "D":
                     DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy");
-                    LocalDate date = LocalDate.parse(splitString[3], df);
-                    userInput.add(new Deadline(splitString[2], date));
+                    LocalDate date = LocalDate.parse(splitString[3].trim(), df);
+                    userInput.add(new Deadline(splitString[2].trim(), date));
                     break;
                 case "E":
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
@@ -114,17 +114,17 @@ public class Storage {
      * @return The string representing the task.
      */
     public String fileString(Task task) {
-        String toAdd = task.taskIndicator() + "  " +
+        String toAdd = task.taskIndicator() + " | " +
                 (task.getStatusIcon().equals("X")
-                        ? "Y" : "N") + "  " + task.description.trim();
+                        ? "Y" : "N") + " | " + task.description.trim();
 
         if (task.taskIndicator().equals("D")) {
             Deadline temp = (Deadline) task;
-            toAdd += "  " + temp.changeDateFormat().trim();
+            toAdd += " | " + temp.changeDateFormat().trim();
         }  else if(task.taskIndicator().equals("E")) {
 
             Event temp = (Event) task;
-            toAdd += "  " + temp.getAt().trim();
+            toAdd += " | " + temp.getAt().trim();
         }
         return toAdd;
     }

@@ -20,7 +20,7 @@ public class AddCommand extends Command {
 
 
     /**
-     * A public constructor to intialize the command
+     * A public constructor to initialize the command
      * and task type to the given one.
      *
      * @param command A string from the input of the user.
