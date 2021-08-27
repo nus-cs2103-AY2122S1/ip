@@ -3,15 +3,17 @@ package Duke.Tool;
 import Duke.Exceptions.*;
 import Duke.Tasks.*;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.lang.String;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents Parser class:  deals with making sense of the user command
+ */
 public class Parser {
 
     private final static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    public static enum Operation {
+    private static enum Operation {
         BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT
     }
 
@@ -33,7 +35,16 @@ public class Parser {
         }
     }
 
-    public static Task done(String cmd, TaskList task) throws EmptyTaskListException, NoDescriptionException, NoCommandException, IOException {
+    /**
+     * The method for done command task process
+     * @param cmd
+     * @param task
+     * @return Task object
+     * @throws EmptyTaskListException
+     * @throws NoDescriptionException
+     * @throws NoCommandException
+     */
+    public static Task done(String cmd, TaskList task) throws EmptyTaskListException, NoDescriptionException, NoCommandException {
 
         int order = task.size();
         if (cmd.split(" ").length == 1) {
@@ -53,7 +64,16 @@ public class Parser {
 
     }
 
-    public static Task delete(String cmd, TaskList task) throws DeleteWrongIndexException, NoDescriptionException, NoCommandException, IOException {
+    /**
+     * The method for delete command task process
+     * @param cmd
+     * @param task
+     * @return Task object
+     * @throws DeleteWrongIndexException
+     * @throws NoDescriptionException
+     * @throws NoCommandException
+     */
+    public static Task delete(String cmd, TaskList task) throws DeleteWrongIndexException, NoDescriptionException, NoCommandException {
 
         int order = task.size();
         if (cmd.split(" ").length == 1)  {
@@ -73,55 +93,64 @@ public class Parser {
 
     }
 
-
+    /**
+     * The method for Todo, Deadline, Event command task process
+     * @param cmd
+     * @param task
+     * @return Task object
+     * @throws NoDescriptionException
+     * @throws NoTimeException
+     * @throws NoCommandException
+     * @throws WrongTimeFormatException
+     */
     public static Task addTask(String cmd, TaskList task) throws NoDescriptionException, NoTimeException,
-            NoCommandException, IOException, WrongTimeFormatException {
+            NoCommandException, WrongTimeFormatException {
 
         Parser.Operation instruction = Parser.Operation.valueOf(cmd.toUpperCase().split(" ")[0]);
         int order = task.size();
         if (cmd.split(" ").length != 1) {
             switch (instruction) {
-                case TODO:
+            case TODO:
 
-                    if (cmd.split(" ").length == 1) {
-                        throw new NoDescriptionException(instruction.name());
+                if (cmd.split(" ").length == 1) {
+                    throw new NoDescriptionException(instruction.name());
 
-                    } else {
-                        return new Todo(cmd.substring(5), false);
+                } else {
+                    return new Todo(cmd.substring(5), false);
+                }
+
+            case DEADLINE:
+                String subString_deadline = cmd.substring(9);
+                if (subString_deadline.split(" /by ").length == 1) {
+                    throw new NoTimeException(instruction.name());
+
+                } else {
+                    try {
+                        return new Deadline(subString_deadline.split(" /by ")[0],
+                                LocalDateTime.parse(subString_deadline.split(" /by ")[1], timeFormat), false);
+                    } catch (Exception e ) {
+                        throw new WrongTimeFormatException(subString_deadline.split(" /by ")[1]);
                     }
 
-                case DEADLINE:
-                    String subString_deadline = cmd.substring(9);
-                    if (subString_deadline.split(" /by ").length == 1) {
-                        throw new NoTimeException(instruction.name());
+                }
 
-                    } else {
-                        try {
-                            return new Deadline(subString_deadline.split(" /by ")[0],
-                                    LocalDateTime.parse(subString_deadline.split(" /by ")[1], timeFormat), false);
-                        } catch (Exception e ) {
-                            throw new WrongTimeFormatException(subString_deadline.split(" /by ")[1]);
-                        }
+            case EVENT:
+                String subString_event = cmd.substring(6);
+                if (subString_event.split(" /at ").length == 1) {
+                    throw new NoTimeException(instruction.name());
 
+                } else {
+                    try{
+                        return new Event(subString_event.split(" /at ")[0],
+                                LocalDateTime.parse(subString_event.split(" /at ")[1], timeFormat), false);
+                    } catch (Exception e) {
+                        throw new WrongTimeFormatException(subString_event.split(" /at ")[1]);
                     }
 
-                case EVENT:
-                    String subString_event = cmd.substring(6);
-                    if (subString_event.split(" /at ").length == 1) {
-                        throw new NoTimeException(instruction.name());
+                }
 
-                    } else {
-                        try{
-                            return new Event(subString_event.split(" /at ")[0],
-                                    LocalDateTime.parse(subString_event.split(" /at ")[1], timeFormat), false);
-                        } catch (Exception e) {
-                            throw new WrongTimeFormatException(subString_event.split(" /at ")[1]);
-                        }
-
-                    }
-
-                default:
-                    throw new NoCommandException(instruction.name());
+            default:
+                throw new NoCommandException(instruction.name());
             }
         }
 
@@ -139,6 +168,12 @@ public class Parser {
         }
     }
 
+    /**
+     * The method for parse
+     * @param cmd
+     * @param task
+     * @return Task object
+     */
     public static Task parse(String cmd, TaskList task) {
 
         Operation operation;
@@ -179,7 +214,7 @@ public class Parser {
             }
 
         } catch (NoDescriptionException | EmptyTaskListException | NoCommandException | NoTimeException |
-                DeleteWrongIndexException | IOException | WrongTimeFormatException e) {
+                DeleteWrongIndexException | WrongTimeFormatException e) {
 
             e.printStackTrace();
             return null;

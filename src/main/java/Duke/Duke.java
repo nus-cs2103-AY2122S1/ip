@@ -10,6 +10,7 @@ import java.lang.String;
 
 /**
  * @author  Zhang Zhiyao
+ * @version 1.0
  */
 
 /**
@@ -22,7 +23,11 @@ public class Duke {
     private TaskList task;
     private Ui ui;
 
-    public Duke(String filePath) throws IOException {
+    /**
+     * The constructor of Duke
+     * @param filePath
+     */
+    public Duke(String filePath)  {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -33,7 +38,10 @@ public class Duke {
         }
     }
 
-    public void run() throws IOException {
+    /**
+     * The method of run
+     */
+    public void run() {
         ui.showLogo();
         ui.showWelcome();
         boolean isProcess = true;
@@ -41,7 +49,7 @@ public class Duke {
             try {
                 String cmd = ui.getCommand();
                 Task comingCmdTask = Parser.parse(cmd, task);
-                comingCmdTask.excute(task, ui, storage);
+                comingCmdTask.execute(task, ui, storage);
                 isProcess = !comingCmdTask.isExit;
             } catch (NullPointerException e) {
                 continue;
@@ -51,7 +59,11 @@ public class Duke {
         ui.exit();
     }
 
-    public static void main(String[] args) throws IOException{
+    /**
+     * the main method
+     * @param args
+     */
+    public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
 
