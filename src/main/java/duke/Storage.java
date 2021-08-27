@@ -1,5 +1,17 @@
-import java.io.*;
+package duke;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class Storage {
     private final String filePath;
@@ -74,7 +86,7 @@ public class Storage {
                     throw new DukeException("Could not parse task type on file line " + lineNo);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Task details are missing on file line " + lineNo);
+            throw new DukeException("Duke.Task details are missing on file line " + lineNo);
         }
     }
 }

@@ -1,3 +1,7 @@
+package duke;
+
+import duke.tasks.Task;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -29,7 +33,7 @@ public class TaskList {
         return tasks.size();
     }
     
-    protected void addNewTask(Task task) {
+    public void addNewTask(Task task) {
         tasks.add(task);
     }
     

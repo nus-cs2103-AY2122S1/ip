@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.Storage;
+
 public class ByeCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveTasks(tasks);

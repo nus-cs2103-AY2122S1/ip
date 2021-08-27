@@ -1,3 +1,10 @@
+package duke;
+
+import duke.commands.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Todo;
+
 public class Parser {
     public static Command parse(String answer) throws DukeException {
         String[] parts = answer.split(" ");
@@ -69,7 +76,7 @@ public class Parser {
         try {
             int taskIndex = Integer.parseInt(taskNo) - 1;
             if (taskIndex < 0) {
-                throw new DukeException("Invalid task number. Task number should be positive");
+                throw new DukeException("Invalid task number. Duke.Task number should be positive");
             }
             return taskIndex;
         } catch (NumberFormatException e) {

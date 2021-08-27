@@ -1,16 +1,21 @@
+package duke.tasks;
+
+import duke.tasks.Task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
+public class Event extends Task {
+
     private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-uuuu H:mm");
     private static DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("d MMM uuuu hh:mm a");
     protected LocalDateTime date;
 
-    public Deadline(String description, String by, boolean isDone) {
+    public Event(String description, String at, boolean isDone) {
         super(description, isDone);
-        this.date = parseDateTime(by);
+        this.date = parseDateTime(at);
     }
-
+    
     private LocalDateTime parseDateTime(String at) {
         // TODO: need to catch exception
         return LocalDateTime.parse(at, FORMATTER);
@@ -18,11 +23,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(DISPLAY_FORMATTER) + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DISPLAY_FORMATTER) + ")";
     }
 
     @Override
     public String toFileString() {
-        return "D" + super.toFileString() + " | " + date.format(FORMATTER);
+        return "E" + super.toFileString() + " | " + date.format(FORMATTER);
     }
 }
