@@ -27,6 +27,7 @@ public class TaskList {
         if (n > list.size()) {
             throw new TaskNotFoundException("list has only " + list.size() + "tasks. Enter a valid task");
         }
+
         String deletedTask = list.get(n - 1).toString();
         list.remove(n - 1);
         return deletedTask;
@@ -48,10 +49,11 @@ public class TaskList {
      * @param n index of the task
      * @throws DukeException
      */
-    void doneTask(int n) throws DukeException {
+    void markAsDone(int n) throws DukeException {
         if (n > list.size()) {
             throw new TaskNotFoundException("list has only " + list.size() + " tasks. Enter a valid task");
         }
+
         list.get(n - 1).markAsDone();
     }
 
@@ -64,7 +66,7 @@ public class TaskList {
         ArrayList<String> content = new ArrayList<>();
         list.forEach((elem) -> {
             if (elem instanceof Deadline) {
-                content.add(((Deadline) elem).storageString());
+                content.add(((Deadline) elem).makeStorageString());
             } else {
                 content.add(elem.toString());
             }
@@ -85,7 +87,7 @@ public class TaskList {
         }
     }
 
-    int size() {
+    int getSize() {
         return list.size();
     }
 }

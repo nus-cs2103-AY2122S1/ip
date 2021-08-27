@@ -19,6 +19,7 @@ public class Deadline extends Task {
         super(T, D);
         task = T;
         isDone = D;
+
         try {
             this.time = LocalDate.parse(time);
         } catch (DateTimeParseException error) {
@@ -39,14 +40,14 @@ public class Deadline extends Task {
     /**
      * method to convert deadline to a string with time interpreted by the chat bot
      */
-    String storageString() {
+    String makeStorageString() {
         return ("D | " + (isDone ? "1" : "0") + " | " + this.task + " | " + this.time.toString());
     }
 
     /**
      * overridden method to give the String representation of the task
      *
-     * @return
+     * @return String representation of the deadline to be printed on screen
      */
     @Override
     public String toString() {

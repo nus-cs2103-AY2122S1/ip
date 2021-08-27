@@ -49,10 +49,12 @@ public class Storage {
         File file = new File(this.path);
         try {
             Scanner sc = new Scanner(file);
+
             while (sc.hasNextLine()) {
                 String task = sc.nextLine();
                 String[] data = task.split(" \\| ");
                 boolean isDone = data[1].equals("1");
+
                 if (data[0].equals("T")) {
                     System.out.println(data[2]);
                     Todo todo = new Todo(data[2], isDone);
