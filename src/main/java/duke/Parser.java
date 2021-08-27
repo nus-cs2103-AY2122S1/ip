@@ -73,9 +73,6 @@ public class Parser {
 
             Task.TaskType eventType = Task.TaskType.NOTAPPLICABLE;
             char temp = packaged_history.get(0).charAt(eventTypeIndex);
-            System.out.println("=========================");
-            System.out.println(temp);
-            System.out.println("=========================");
             switch (packaged_history.get(0).charAt(eventTypeIndex)) {
             case 'T':
                 eventType = Task.TaskType.TODO;

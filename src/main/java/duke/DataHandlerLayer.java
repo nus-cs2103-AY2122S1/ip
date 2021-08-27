@@ -63,7 +63,7 @@ public class DataHandlerLayer {
     public static void print_filtered_log(boolean cond) {
         int taskNumber = 1;
         for (Task temp : log) {
-            if (temp.getCompletedStatus() == cond) {
+            if (temp.getCompleteStatus() == cond) {
                 System.out.println(taskNumber + ". " + temp.toString());
                 taskNumber++;
             }
@@ -121,9 +121,9 @@ public class DataHandlerLayer {
      * Updates history and writes stuff down. Will auto clear all the tasks that is not done.
      */
     public static void updateHistory() {
-        history.clear_history();
+        history.clearHistory();
         for (Task task : log) {
-            if (!task.getCompletedStatus()) {
+            if (!task.getCompleteStatus()) {
                 appendToHistory(task);
             }
         }
