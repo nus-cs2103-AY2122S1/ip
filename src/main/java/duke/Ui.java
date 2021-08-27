@@ -159,14 +159,15 @@ public class Ui {
 
     /**
      * Displays entries in the task list that contain the search query.
-     * @param list The list of strings representing tasks.
+     *
+     * @param list        The list of strings representing tasks.
      * @param searchQuery The search query entered by the user.
      */
     void showSearchResults(List<String> list, String searchQuery) {
-        int c=1;
-        System.out.println("Here are the search results for \"" + searchQuery + "\":" );
-        for(String task : list){
-            if (task.contains(searchQuery)){
+        int c = 1;
+        System.out.println("Here are the search results for \"" + searchQuery + "\":");
+        for (String task : list) {
+            if (task.contains(searchQuery)) {
                 System.out.println(c + ". " + task);
             }
             c++;
