@@ -4,7 +4,7 @@ public class Task {
     /** The name of the Task. */
     private String name;
     /** Whether the Task has been completed. */
-    private boolean completed;
+    private boolean isCompleted;
 
     /**
      * Constructs a new Task.
@@ -13,14 +13,14 @@ public class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
      * Marks the Task as done.
      */
     public void markAsDone() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
@@ -28,8 +28,8 @@ public class Task {
      *
      * @return The save format of the Task.
      */
-    public String toSaveFormat() {
-        String completedStr = completed ? "1" : "0";
+    public String convertToSaveFormat() {
+        String completedStr = isCompleted ? "1" : "0";
         return completedStr + "|" + name;
     }
 
@@ -40,7 +40,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String symbol = completed ? "X" : " ";
+        String symbol = isCompleted ? "X" : " ";
         return "[" + symbol + "] " + name;
     }
 }

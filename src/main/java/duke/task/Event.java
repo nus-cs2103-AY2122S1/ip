@@ -20,8 +20,8 @@ public class Event extends Task {
      *
      * @return The save format of the Event task.
      */
-    public String toSaveFormat() {
-        return "E|" + super.toSaveFormat() + "|" + time;
+    public String convertToSaveFormat() {
+        return "E|" + super.convertToSaveFormat() + "|" + time;
     }
 
     /**

@@ -15,8 +15,8 @@ public class ToDo extends Task {
      *
      * @return The save format of the ToDo task.
      */
-    public String toSaveFormat() {
-        return "T|" + super.toSaveFormat();
+    public String convertToSaveFormat() {
+        return "T|" + super.convertToSaveFormat();
     }
 
     /**

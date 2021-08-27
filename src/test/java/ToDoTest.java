@@ -13,6 +13,6 @@ public class ToDoTest {
     public void testToSaveFormat() {
         ToDo testTask = new ToDo("testToDo");
         testTask.markAsDone();
-        assertEquals("T|1|testToDo", testTask.toSaveFormat());
+        assertEquals("T|1|testToDo", testTask.convertToSaveFormat());
     }
 }

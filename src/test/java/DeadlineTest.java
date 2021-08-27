@@ -26,19 +26,19 @@ public class DeadlineTest {
     public void testToSaveFormat_testInvalidDateInvalidTimeHaveText() {
         Deadline testTask = new Deadline("testDeadline", "2022-04-31 2400 test text");
         testTask.markAsDone();
-        assertEquals("D|1|testDeadline|2022-04-31 2400 test text", testTask.toSaveFormat());
+        assertEquals("D|1|testDeadline|2022-04-31 2400 test text", testTask.convertToSaveFormat());
     }
 
     @Test
     public void testToSaveFormat_testHaveDateHaveTimeNoText() {
         Deadline testTask = new Deadline("testDeadline", "2022-04-30 2359");
-        assertEquals("D|0|testDeadline|Apr 30 2022 11:59pm", testTask.toSaveFormat());
+        assertEquals("D|0|testDeadline|Apr 30 2022 11:59pm", testTask.convertToSaveFormat());
     }
 
     @Test
     public void testToSaveFormat_testHaveDateHaveTimeHaveText() {
         Deadline testTask = new Deadline("testDeadline", "2022-04-30 0000 test text");
         testTask.markAsDone();
-        assertEquals("D|1|testDeadline|Apr 30 2022 12:00am test text", testTask.toSaveFormat());
+        assertEquals("D|1|testDeadline|Apr 30 2022 12:00am test text", testTask.convertToSaveFormat());
     }
 }
