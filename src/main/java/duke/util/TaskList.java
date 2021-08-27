@@ -1,13 +1,13 @@
 package duke.util;
 
+import java.util.ArrayList;
+
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingArgumentException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.ArrayList;
 
 /**
  * The TaskList Class is a representation of a list of tasks that Duke is keeping track of.
@@ -92,17 +92,17 @@ public class TaskList {
             break;
         default:
             // will NOT execute as Duke calls this function to add a task and it only calls them based on
-            // the same switch cases.
+            // the same switch cases above.
             break;
         }
 
         storage.writeToFile(convertListToString());
 
         return new String[] {
-                "I've added this task but it's not like I did it for you or anything!",
-                String.format("  %s", tasks.get(tasks.size() - 1)),
-                String.format("Now you have %d %s in the list. Do your best doing them okay?",
-                        tasks.size(), tasks.size() == 1 ? "task" : "tasks")
+            "I've added this task but it's not like I did it for you or anything!",
+            String.format("  %s", tasks.get(tasks.size() - 1)),
+            String.format("Now you have %d %s in the list. Do your best doing them okay?",
+                tasks.size(), tasks.size() == 1 ? "task" : "tasks")
         };
     }
 
@@ -143,6 +143,11 @@ public class TaskList {
                     keywordIndex++;
                 }
             }
+            break;
+        default:
+            // will NOT execute as Duke calls this function to list the task list and it only calls them based on
+            // the same switch cases above.
+            break;
         }
     }
 
@@ -158,8 +163,8 @@ public class TaskList {
             throw new InvalidIndexException(tasks.size());
         }
         String[] message = {
-                "You completed a task! Maybe you aren't so incompetent after all.",
-                tasks.get(index - 1).markTaskAsDone()
+            "You completed a task! Maybe you aren't so incompetent after all.",
+            tasks.get(index - 1).markTaskAsDone()
         };
 
         storage.writeToFile(convertListToString());
@@ -182,10 +187,10 @@ public class TaskList {
 
         Task deletedTask = tasks.remove(index - 1);
         String[] message = {
-                "I've deleted this task so show me some gratitude!",
-                String.format("  %s", deletedTask),
-                String.format("Now you have %d %s in the list. Do your best doing them okay?",
-                        tasks.size(), tasks.size() == 1 ? "task" : "tasks")
+            "I've deleted this task so show me some gratitude!",
+            String.format("  %s", deletedTask),
+            String.format("Now you have %d %s in the list. Do your best doing them okay?",
+                tasks.size(), tasks.size() == 1 ? "task" : "tasks")
         };
 
         storage.writeToFile(convertListToString());

@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.exception.MissingArgumentException;
-import duke.util.Parser;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.exception.MissingArgumentException;
+import duke.util.Parser;
 
 /**
  * The Deadline Class represents a task that needs to be done before a specific date/time.

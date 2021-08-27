@@ -1,13 +1,13 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.util.Scanner;
 
 /**
  * Project Duke: Incrementally building a Chatbot.
@@ -43,6 +43,12 @@ import java.util.Scanner;
  * @author Benedict Chua
  */
 public class Duke {
+    /**
+     * Main method for Duke.
+     * Initialises Duke and starts taking in commands from the user.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         // Initialise program
         Storage storage = new Storage();

@@ -1,5 +1,11 @@
 package duke.util;
 
+import static java.lang.Integer.parseInt;
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -7,18 +13,11 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
-
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidDateInputException;
 import duke.exception.InvalidTimeInputException;
 import duke.exception.MissingArgumentException;
 import duke.exception.MissingIndexException;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-import static java.lang.Integer.parseInt;
 
 /**
  * Class to deal with making sense of the user's inputted command.
@@ -44,7 +43,7 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "list":
-            return new ListCommand(this.tasks, "all",null);
+            return new ListCommand(this.tasks, "all", null);
         case "check":
             return new ListCommand(this.tasks, "date", filterTaskDescription(input));
         case "find":
@@ -78,7 +77,7 @@ public class Parser {
             throw new EmptyDescriptionException();
         }
 
-        String filteredDescription  = command.split(" ", 2)[1];
+        String filteredDescription = command.split(" ", 2)[1];
         if (filteredDescription.trim().isEmpty()) {
             throw new EmptyDescriptionException();
         }
@@ -100,7 +99,7 @@ public class Parser {
             throw new MissingIndexException();
         }
 
-        String indexString  = command.split(" ", 2)[1];
+        String indexString = command.split(" ", 2)[1];
         if (indexString.trim().isEmpty()) {
             throw new MissingIndexException();
         }
@@ -147,11 +146,11 @@ public class Parser {
      */
     public static LocalTime parseTime(String timeString) throws InvalidTimeInputException {
         try {
-            if (timeString.indexOf(':')  == -1 && timeString.length() == 4) {
+            if (timeString.indexOf(':') == -1 && timeString.length() == 4) {
                 // in the form hhmm
                 String[] t = {timeString.substring(0, 2), timeString.substring(2)};
                 return LocalTime.parse(String.format("%s:%s", t[0], t[1]));
-            } else if (timeString.indexOf(':')  == 2 && timeString.length() == 5) {
+            } else if (timeString.indexOf(':') == 2 && timeString.length() == 5) {
                 //in the form hh:mm
                 return LocalTime.parse(timeString);
             } else {

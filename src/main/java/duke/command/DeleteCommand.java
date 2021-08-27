@@ -12,8 +12,14 @@ public class DeleteCommand extends Command {
     private TaskList tasks;
     private int index;
 
-    public DeleteCommand(TaskList taskList, int index) {
-        this.tasks = taskList;
+    /**
+     * Constructor for DeleteCommand.
+     *
+     * @param tasks TaskList containing current tasks.
+     * @param index The index pointing to the Task in TaskList to operate on, starting from 1.
+     */
+    public DeleteCommand(TaskList tasks, int index) {
+        this.tasks = tasks;
         this.index = index;
     }
 

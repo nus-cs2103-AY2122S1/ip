@@ -6,6 +6,11 @@ package duke.exception;
  * @author Benedict Chua
  */
 public class InvalidTimeInputException extends DukeException {
+    /**
+     * Constructor for InvalidTimeInputException.
+     *
+     * @param timeString String containing the time inputted in a wrong format by the user.
+     */
     public InvalidTimeInputException(String timeString) {
         super("BAKA! I don't understand this Time input!\n"
                 + String.format("     Time: %s\n", timeString)

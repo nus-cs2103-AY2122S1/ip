@@ -13,8 +13,15 @@ public class AddCommand extends Command {
     private String task;
     private String taskType;
 
-    public AddCommand(TaskList taskList, String task, String taskType) {
-        this.tasks = taskList;
+    /**
+     * Constructor for AddCommand.
+     *
+     * @param tasks TaskList containing current tasks.
+     * @param task The Task to be added to the TaskList.
+     * @param taskType Type of Task to be added (ToDo, Deadline, Event).
+     */
+    public AddCommand(TaskList tasks, String task, String taskType) {
+        this.tasks = tasks;
         this.task = task;
         this.taskType = taskType;
     }

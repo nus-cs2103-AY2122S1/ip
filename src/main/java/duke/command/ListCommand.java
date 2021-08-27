@@ -12,8 +12,15 @@ public class ListCommand extends Command {
     private String filterType;
     private String filterCondition;
 
-    public ListCommand(TaskList taskList, String filterType, String filterCondition) {
-        this.tasks = taskList;
+    /**
+     * Constructor for ListCommand.
+     *
+     * @param tasks TaskList containing current tasks.
+     * @param filterType Type of filtering to do when listing tasks.
+     * @param filterCondition Condition to filter tasks before listing.
+     */
+    public ListCommand(TaskList tasks, String filterType, String filterCondition) {
+        this.tasks = tasks;
         this.filterType = filterType;
         this.filterCondition = filterCondition;
     }

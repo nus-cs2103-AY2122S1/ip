@@ -14,14 +14,6 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Convert the Task into a suitable String for saving into file.
-     * To be overridden by child classes to call formatString in a suitable way.
-     *
-     * @return String of the formatted Task.
-     */
-    public abstract String saveAsString();
-
-    /**
      * Constructor for a Task.
      *
      * @param description The name of the task.
@@ -30,6 +22,14 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    /**
+     * Convert the Task into a suitable String for saving into file.
+     * To be overridden by child classes to call formatString in a suitable way.
+     *
+     * @return String of the formatted Task.
+     */
+    public abstract String saveAsString();
 
     /**
      * Returns the status of whether the task has been completed.

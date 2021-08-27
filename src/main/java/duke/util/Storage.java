@@ -19,6 +19,10 @@ public class Storage {
     private boolean doesDirectoryExists;
     private boolean doesFileExists;
 
+    /**
+     * Constructor for Storage.
+     * Checks if directory and file exists when created.
+     */
     public Storage() {
         File directory = new File(DIRECTORY_PATH);
         File file = new File(FILE_PATH);

@@ -6,6 +6,11 @@ package duke.exception;
  * @author Benedict Chua
  */
 public class InvalidDateInputException extends DukeException {
+    /**
+     * Constructor for InvalidDateInputException.
+     *
+     * @param dateString String containing the date inputted in an incorrect format by the user.
+     */
     public InvalidDateInputException(String dateString) {
         super("BAKA! I don't understand this Date input!\n"
                 + String.format("     Date: %s\n", dateString)

@@ -9,8 +9,8 @@ public class Ui {
     private static final String INDENTATION = "     ";
     private static final String LINE_SEPARATOR = "    ____________________________________________________________";
     private static final String[] GREETING = {
-            "Hey! I'm Duke (Tsun)!", "What do you want?",
-            "...It's not like I want to help you or anything!"
+        "Hey! I'm Duke (Tsun)!", "What do you want?",
+        "...It's not like I want to help you or anything!"
     };
     private static final String[] GOODBYE = {"Hmph! It's not like I want to see you again or anything!"};
 

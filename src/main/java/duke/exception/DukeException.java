@@ -8,8 +8,13 @@ package duke.exception;
  * @author Benedict Chua
  */
 public class DukeException extends RuntimeException {
-    String message;
+    private String message;
 
+    /**
+     * Creates for DukeException.
+     *
+     * @param message String containing the error message to be shown to the user.
+     */
     public DukeException(String message) {
         super(message);
         this.message = message;
