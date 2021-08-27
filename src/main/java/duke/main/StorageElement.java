@@ -1,6 +1,9 @@
 package duke.main;
 import java.time.LocalDate;
 
+/**
+ * Represents intermediary class to bridge between Storage and Task class
+ */
 public class StorageElement {
     String taskIcon;
     Boolean isDone;

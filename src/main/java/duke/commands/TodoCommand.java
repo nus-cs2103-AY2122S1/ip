@@ -8,17 +8,25 @@ import duke.tasks.Task;
 import duke.main.TaskList;
 import duke.tasks.Todo;
 
-
+/**
+ * Represents command to create todo
+ */
 public class TodoCommand extends Command {
     private String description;
 
-    public TodoCommand(String userInput) throws EmptyDescriptionException {
+    /**
+     * {@inheritDoc}
+     */
+    public TodoCommand(String userInput) throws DukeException {
         super(userInput);
         this.description = this.getDescription();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         //TaskList
         Task task = new Todo(this.description);
         taskList.addTask(task);
@@ -31,6 +39,9 @@ public class TodoCommand extends Command {
         ui.showNumTask(taskList.getNumTask());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;

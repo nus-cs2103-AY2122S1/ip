@@ -5,13 +5,22 @@ import duke.main.Ui;
 import duke.main.Storage;
 import duke.main.TaskList;
 
+/**
+ * Represents exit command
+ */
 public class ByeCommand extends Command {
-    public ByeCommand() {
+    /**
+     * {@inheritDoc}
+     */
+    public ByeCommand() throws DukeException {
         super("");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         //Storage
         storage.save(taskList);
 
@@ -19,6 +28,9 @@ public class ByeCommand extends Command {
         ui.showBye();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return true;
