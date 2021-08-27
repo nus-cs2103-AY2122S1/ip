@@ -31,6 +31,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return ("[E][" + (isDone ? "X" : " ") + "] " + task + " (at: " + this.time + ")");
+        return ("E | " + (isDone ? "1" : "0") + " | " + this.task + " | " + this.time);
     }
 }

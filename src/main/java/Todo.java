@@ -29,6 +29,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return ("[T][" + (this.isDone ? "X" : " ") + "] " + this.task);
+        return ("T | " + (this.isDone ? "1" : "0") + " | " + this.task);
     }
 }

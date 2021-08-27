@@ -31,6 +31,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return ("[D][" + (isDone ? "X" : " ") + "] " + task + " (by: " + this.time + ")");
+        return ("D | " + (isDone ? "1" : "0") + " | " + this.task + " | " + this.time);
     }
 }

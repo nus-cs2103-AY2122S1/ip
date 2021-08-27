@@ -45,6 +45,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + (isDone ? "X" : " ") + "] " + task;
+        return "| " + (isDone ? "1" : "0") + " | " + task;
     }
 }
