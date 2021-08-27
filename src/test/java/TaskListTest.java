@@ -13,6 +13,6 @@ public class TaskListTest {
         Task newTask = new ToDo("TEST ADD TASK", false);
         taskList.addTask(newTask);
 
-        assertEquals("[T][ ] TEST ADD TASK", taskList.getTaskList().get(0).toString());
+        assertEquals("[T][ ] TEST ADD TASK", taskList.getTasks().get(0).toString());
     }
 }
