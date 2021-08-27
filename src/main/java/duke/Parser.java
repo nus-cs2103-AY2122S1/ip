@@ -10,15 +10,15 @@ public class Parser {
                 if (input.equals("list")) {
                     ui.displayList(tasks);
                 } else if (input.contains("done")) {
-                    tasks.done(input, storage, ui);
+                    tasks.handleDone(input, storage, ui);
                 } else if (input.contains("todo")) {
-                    tasks.todo(input, storage, ui);
+                    tasks.handleTodo(input, storage, ui);
                 } else if (input.contains("deadline")) {
-                    tasks.deadline(input, storage, ui);
+                    tasks.handleDeadline(input, storage, ui);
                 } else if (input.contains("event")) {
-                    tasks.event(input, storage, ui);
+                    tasks.handleEvent(input, storage, ui);
                 } else if (input.contains("delete")) {
-                    tasks.delete(input, storage, ui);
+                    tasks.handleDelete(input, storage, ui);
                 } else {
                     System.out.println("can type properly pls");
                 }
