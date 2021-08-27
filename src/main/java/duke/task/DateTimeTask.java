@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDateTime;
 
-public abstract class DateTimeTask extends Task{
+import duke.DukeException;
+
+public abstract class DateTimeTask extends Task {
 
     /**
      * Constructor for a timed task

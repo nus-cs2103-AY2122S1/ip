@@ -1,13 +1,13 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+
 import duke.data.Storage;
 import duke.data.TaskList;
 import duke.io.Parser;
 import duke.io.Ui;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
 
 class Duke {
 

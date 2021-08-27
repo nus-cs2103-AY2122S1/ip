@@ -1,6 +1,6 @@
 package duke;
 
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /** String with details on the exception */
     private String errorMessage;
@@ -27,10 +27,12 @@ public class DukeException extends Exception{
                     + "     Type help to get a list of available commands!";
             break;
         case DEADLINE:
-            this.errorMessage =  "☹ OOPS!!! Usage of deadline does not match 'description' /by 'deadline'";
+            this.errorMessage = "☹ OOPS!!! Usage of deadline does not match 'description' /by 'deadline'";
             break;
         case EVENT:
             this.errorMessage = "☹ OOPS!!! Usage of event does not match 'description' /at 'timeframe'";
+            break;
+        default:
             break;
         }
     }

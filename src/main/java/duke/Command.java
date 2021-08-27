@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+
 import duke.data.Storage;
 import duke.data.TaskList;
 import duke.io.Ui;
@@ -7,9 +10,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
 
 public class Command {
 
@@ -34,6 +34,8 @@ public class Command {
     /**
      * Returns a new Command.
      * Used to initializing SINGLE_INPUT commands
+     *
+     * @param command Command type to be instantiated.
      */
     public Command(Commands command) {
         this.command = command;
@@ -43,6 +45,9 @@ public class Command {
     /**
      * Returns a new Command.
      * Used to initializing INT_INPUT commands
+     *
+     * @param command Command type to be instantiated.
+     * @param index Index to be used in the command.
      */
     public Command(Commands command, int index) {
         this.command = command;
@@ -53,6 +58,9 @@ public class Command {
     /**
      * Returns a new Command.
      * Used to initializing STR_INPUT commands
+     *
+     * @param command Command type to be instantiated.
+     * @param description description to be used in the command.
      */
     public Command(Commands command, String description) {
         this.command = command;
@@ -63,6 +71,9 @@ public class Command {
     /**
      * Returns a new Command.
      * Used to initializing STR_ARR_INPUT commands
+     *
+     * @param command Command type to be instantiated.
+     * @param subitems Array of strings to be used in the command.
      */
     public Command(Commands command, String[] subitems) {
         this.command = command;
@@ -73,6 +84,9 @@ public class Command {
     /**
      * Returns a new Command.
      * Used to initializing DATETIME_INPUT commands
+     *
+     * @param command Command type to be instantiated.
+     * @param dateTime Date and time to be used in the commnad.
      */
     public Command(Commands command, LocalDateTime dateTime) {
         this.command = command;
@@ -138,6 +152,8 @@ public class Command {
             break;
         case DATETIME_INPUT:
             ui.displayCommand(this.command, tasks, this.dateTime);
+            break;
+        default:
             break;
         }
     }

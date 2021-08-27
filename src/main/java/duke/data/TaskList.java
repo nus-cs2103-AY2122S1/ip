@@ -1,13 +1,17 @@
 package duke.data;
 
-import duke.DukeException;
-import duke.task.*;
-
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import duke.DukeException;
+import duke.task.DateTimeTask;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class TaskList {
 
@@ -49,6 +53,8 @@ public class TaskList {
             case "D":
                 t = new Deadline(Arrays.copyOfRange(taskElements, 2, taskElements.length));
                 calendar.add((DateTimeTask) t);
+                break;
+            default:
                 break;
             }
             if (t != null) {
@@ -110,7 +116,7 @@ public class TaskList {
      * @return Task that was modified.
      * @throws DukeException If index is invalid.
      */
-    public Task markDone(int index, Storage storage) throws DukeException{
+    public Task markDone(int index, Storage storage) throws DukeException {
         if (index > this.items.size() || index < 1) {
             throw new DukeException(DukeException.Type.INDEX);
         }
@@ -147,7 +153,7 @@ public class TaskList {
      * @return Task that was removed.
      * @throws DukeException If index is invalid.
      */
-    public Task removeTask(int index, Storage storage) throws DukeException{
+    public Task removeTask(int index, Storage storage) throws DukeException {
         if (index > this.items.size() || index < 1) {
             throw new DukeException(DukeException.Type.INDEX);
         }
@@ -159,7 +165,7 @@ public class TaskList {
      * Returns String array of formatted String representations of all events occurring before a given date and time.
      *
      * @param dt Date and time limit of events returned.
-     * @return String array of String, with each String representing an event.
+     * @return String array with each String representing an event.
      */
     public String[] getEventsAt(LocalDateTime dt) {
         ArrayList<DateTimeTask> tasks = calendar.getEventsAt(dt);
@@ -177,7 +183,7 @@ public class TaskList {
      * Returns String array of formatted String representations of all deadlines due by given date and time.
      *
      * @param dt Date and time limit of deadlines returned.
-     * @return String array of String, with each String representing deadline.
+     * @return String array with each String representing deadline.
      */
     public String[] getDeadlinesBy(LocalDateTime dt) {
         ArrayList<DateTimeTask> tasks = calendar.getDeadlinesBy(dt);
@@ -195,7 +201,7 @@ public class TaskList {
      * Returns String array of all events and deadlines formatted as Strings occurring before a given date and time.
      *
      * @param dt Date and time limit of events and deadlines returned.
-     * @return String array of String, with each String representing an event or deadline.
+     * @return String array with each String representing an event or deadline.
      */
     public String[] getAllBy(LocalDateTime dt) {
         ArrayList<DateTimeTask> tasks = calendar.getAllBy(dt);
@@ -209,6 +215,12 @@ public class TaskList {
         return strArr;
     }
 
+    /**
+     * Returns String array of all tasks formatted as Strings that completely or partially match the toFind argument.
+     *
+     * @param toFind Substring to be found in tasks.
+     * @return String array with each String representing a task that matches toFind.
+     */
     public String[] returnFoundItem(String toFind) {
         ArrayList<String > strArr = new ArrayList<>();
         strArr.add("Here are the matching tasks in your list:");

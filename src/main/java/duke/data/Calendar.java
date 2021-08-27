@@ -1,11 +1,11 @@
 package duke.data;
 
-import duke.task.DateTimeTask;
-import duke.task.Event;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.TreeMap;
+
+import duke.task.DateTimeTask;
+import duke.task.Event;
 
 class Calendar {
 

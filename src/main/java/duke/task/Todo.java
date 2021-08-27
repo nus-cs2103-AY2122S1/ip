@@ -2,7 +2,7 @@ package duke.task;
 
 import duke.DukeException;
 
-public class Todo extends Task{
+public class Todo extends Task {
 
     /** Code representing a todo task */
     public final String code = "T";

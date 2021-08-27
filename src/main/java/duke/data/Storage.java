@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Storage {
 
     /** File to read and write saved data */
-    private  File f;
+    private File f;
     /** Scanner to read saved data from file */
     private Scanner s;
     /** Intermediate data structure to modify saved data */
@@ -34,7 +34,7 @@ public class Storage {
      * @return ArrayList of String arrays representing Tasks.
      * @throws FileNotFoundException  If file specified in filePath does not exists.
      */
-    public ArrayList<String[]> load() throws FileNotFoundException{
+    public ArrayList<String[]> load() throws FileNotFoundException {
         ArrayList<String[]> taskList = new ArrayList<>();
         s = new Scanner(f);
         while (s.hasNext()) {

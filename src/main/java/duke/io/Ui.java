@@ -1,12 +1,12 @@
 package duke.io;
 
+import java.time.LocalDateTime;
+import java.util.Scanner;
+
 import duke.Command;
 import duke.DukeException;
 import duke.data.TaskList;
 import duke.task.Task;
-
-import java.time.LocalDateTime;
-import java.util.Scanner;
 
 public class Ui {
 
@@ -55,6 +55,8 @@ public class Ui {
 
     /**
      * Prints the content of a DukeException as an error message.
+     *
+     * @param e DukeException to be printed.
      */
     public void showDukeException(DukeException e) {
         System.err.println(format(e.toString()));
@@ -71,7 +73,7 @@ public class Ui {
      * Prints an error statement to screen if the user inputs the date and time in a wrong format.
      */
     public void showDateTimeException() {
-        System.err.println(format("Date'T'time inputted is not of valid format: YYYY-MM-DDThh:mm" ));
+        System.err.println(format("Date'T'time inputted is not of valid format: YYYY-MM-DDThh:mm"));
     }
 
     /**
@@ -118,6 +120,8 @@ public class Ui {
             System.out.println(format("Got it. I've added this task:",
                     "  " + list.returnLastTask(), list.returnItemCount(0)));
             break;
+        default:
+            break;
         }
     }
 
@@ -140,6 +144,8 @@ public class Ui {
         case ALL:
             System.out.println(format(list.getAllBy(dt)));
             break;
+        default:
+            break;
         }
     }
 
@@ -161,6 +167,8 @@ public class Ui {
         case DELETE:
             System.out.println(format("Noted. I've removed this task:",
                     "  " + t, list.returnItemCount(1)));
+            break;
+        default:
             break;
         }
     }
