@@ -11,6 +11,7 @@ public class Command {
         DELETE,
         DONE,
         EVENT,
+        FIND,
         LIST,
         TODO,
         UNKNOWN
@@ -36,6 +37,9 @@ public class Command {
                 break;
             case EVENT:
                 this.typeOfCommand = Commands.EVENT;
+                break;
+            case FIND:
+                this.typeOfCommand = Commands.FIND;
                 break;
             case LIST:
                 this.typeOfCommand = Commands.LIST;
@@ -140,6 +144,14 @@ public class Command {
         }
     }
 
+    private void searchAndDisplayTaskList(String taskDetails, UI ui, TaskList tasks) throws DukeException {
+        if (taskDetails != null && !taskDetails.equals("")) {
+            ui.printTaskList(tasks.searchTaskList(taskDetails));
+        } else {
+            throw new DukeException("OOPS! I'm sorry, but I don't know that command");
+        }
+    }
+
     private void displayTaskList(String taskDetails, UI ui, TaskList tasks) throws DukeException {
         if (taskDetails != null && taskDetails.equals("")) {
             ui.printTaskList(tasks);
@@ -178,6 +190,9 @@ public class Command {
             break;
         case EVENT:
             addEvent(taskDetails, ui, tasks);
+            break;
+        case FIND:
+            searchAndDisplayTaskList(taskDetails, ui, tasks);
             break;
         case LIST:
             displayTaskList(taskDetails, ui, tasks);

@@ -8,6 +8,9 @@ public class TaskList {
 
     private final List<Task> taskList;
 
+    public TaskList() {
+        taskList = new ArrayList<>();
+    }
     public TaskList(List<Task> storedTasks) {
         this.taskList = new ArrayList<>();
         taskList.addAll(storedTasks);
@@ -31,5 +34,15 @@ public class TaskList {
 
     public void completeTask(int index) {
         taskList.get(index).markAsCompleted();
+    }
+
+    public TaskList searchTaskList(String description) {
+        TaskList matchingTasks = new TaskList();
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).getDescription().contains(description)) {
+                matchingTasks.addTask(taskList.get(i));
+            }
+        }
+        return matchingTasks;
     }
 }

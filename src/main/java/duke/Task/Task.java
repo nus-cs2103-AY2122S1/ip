@@ -10,7 +10,9 @@ public class Task {
 
     public Task(String isCompleted, String description) {
         this.description = description;
-        this.isCompleted = isCompleted.equals("1");
+        if (isCompleted != null) {
+            this.isCompleted = isCompleted.equals("1");
+        }
     }
 
     public String getDescription() {

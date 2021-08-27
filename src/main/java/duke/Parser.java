@@ -7,6 +7,7 @@ public class Parser {
         DELETE,
         DONE,
         EVENT,
+        FIND,
         LIST,
         TODO,
         UNKNOWN
@@ -43,6 +44,8 @@ public class Parser {
                 return new Command(Command.Commands.DONE, taskDetails);
             case EVENT:
                 return new Command(Command.Commands.EVENT, taskDetails);
+            case FIND:
+                return new Command(Command.Commands.FIND, taskDetails);
             case LIST:
                 return new Command(Command.Commands.LIST, taskDetails);
             case TODO:
