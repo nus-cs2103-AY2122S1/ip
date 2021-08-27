@@ -13,11 +13,19 @@ import java.util.List;
 import java.util.Scanner;
 
 
-
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
 
     private File savedOutput;
 
+    /**
+     * Constructor for Storage and sets the file that contains previous state
+     *
+     * @param filePath File location that contains text file containing previous state
+     * @throws DukeException Thrown when file does not exist
+     */
     public Storage(String filePath) throws DukeException {
         File dir = new File(filePath);
         dir.mkdirs();
@@ -28,6 +36,12 @@ public class Storage {
         this.savedOutput = savedOutput;
     }
 
+    /**
+     * Reads and returns a list of previous task
+     *
+     * @return List of String read from the file
+     * @throws DukeException
+     */
     public List<String> loadSaved() throws DukeException {
         List<String> pastCommand = new ArrayList<>();
         try {
@@ -41,6 +55,11 @@ public class Storage {
         return pastCommand;
     }
 
+    /**
+     * Saves newly added task into storage
+     * @param task Newly added task
+     * @throws DukeException Thrown when file does not exist
+     */
     public void saveAdded(Task task) throws DukeException {
         String msg = task.saveTask();
         try {
@@ -53,6 +72,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates and saves the state of the changed task
+     * @param taskList current state
+     * @throws DukeException Thrown when file does not exist
+     */
     public void saveUpdate(TaskList taskList) throws DukeException {
         String[] currentState = taskList.saveState();
         try {

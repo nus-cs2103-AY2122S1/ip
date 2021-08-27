@@ -7,7 +7,9 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-
+/**
+ * Main Duke class
+ */
 public class Duke {
 
     private final Parser parser;
@@ -15,7 +17,13 @@ public class Duke {
     private final Ui ui;
     private final Storage storage;
 
-    public Duke(String filePath) throws DukeException {
+    /**
+     * Basic Constructor
+     *
+     * @param filePath the path where file savedOutput.txt. which contains past state is located
+     * @throws DukeException
+     */
+    public Duke(String filePath) throws DukeException{
         storage = new Storage(filePath);
         ui = new Ui(48);
         taskList = new TaskList();
