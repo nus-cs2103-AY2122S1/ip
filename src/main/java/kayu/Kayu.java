@@ -1,6 +1,7 @@
 package kayu;
 
 import kayu.commands.Command;
+import kayu.commands.HelpCommand;
 import kayu.exception.DukeException;
 import kayu.exception.StorageException;
 import kayu.service.ChatBot;
@@ -36,7 +37,7 @@ public class Kayu {
 
     /**
      * Runs the whole program process. Greets user, loads data, 
-     * reads commands, and terminates upon 'bye'.
+     * reads commands, and terminates upon {@link kayu.commands.ByeCommand#COMMAND_WORD}.
      */
     public void run() {
         chatBot.logo();
@@ -72,7 +73,6 @@ public class Kayu {
         do {
             String userInput = scanner.nextLine().trim();
             command = parser.parseToCommand(userInput);
-            
             try {
                 String feedback = command.execute(taskList);
                 List<Task> tasks = taskList.getTasks();

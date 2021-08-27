@@ -8,13 +8,14 @@ package kayu.commands;
  */
 public enum CommandType {
     BYE,
-    LIST,
-    DONE,
-    DELETE,
-    FIND,
-    TODO,
-    EVENT,
     DEADLINE,
+    DELETE,
+    DONE,   
+    EMPTY,
+    EVENT,
+    FIND,
+    HELP,
     INVALID,
-    EMPTY;
+    LIST,
+    TODO;
 }

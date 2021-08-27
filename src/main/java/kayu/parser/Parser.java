@@ -8,6 +8,7 @@ import kayu.commands.DoneCommand;
 import kayu.commands.EmptyCommand;
 import kayu.commands.EventCommand;
 import kayu.commands.FindCommand;
+import kayu.commands.HelpCommand;
 import kayu.commands.InvalidCommand;
 import kayu.commands.ListCommand;
 import kayu.commands.TodoCommand;
@@ -38,6 +39,9 @@ public class Parser {
                 
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
+            
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
                 
             case DoneCommand.COMMAND_WORD:
                 return new DoneCommand(inputs[1]);
