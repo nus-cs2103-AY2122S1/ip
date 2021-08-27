@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class Duke {
     private TaskList tasks;
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
 
     public Duke() {
         this.ui = new Ui();
@@ -19,6 +19,10 @@ public class Duke {
             ui.showError(e.getMessage());
             tasks = new TaskList(new ArrayList<>());
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 
     public void run() {
@@ -36,9 +40,5 @@ public class Duke {
             }
         }
         scanner.close();
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }

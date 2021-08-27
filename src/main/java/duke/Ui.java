@@ -1,6 +1,7 @@
 package duke;
 
 import duke.task.Task;
+
 import java.util.ArrayList;
 
 public class Ui {
@@ -26,7 +27,7 @@ public class Ui {
     }
 
     public void showNewTask(Task task, int taskLength) {
-        printMessageWithTaskCount(ADD_FORMAT, task, taskLength);;
+        printMessageWithTaskCount(ADD_FORMAT, task, taskLength);
     }
 
     public void showDeletedTask(Task task, int taskLength) {

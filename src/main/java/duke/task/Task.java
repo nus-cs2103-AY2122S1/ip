@@ -1,8 +1,8 @@
 package duke.task;
 
 public class Task {
-    private boolean isDone = false;
     private final String title;
+    private boolean isDone = false;
 
     /**
      * Constructor of Task. Create a new task with the given title.

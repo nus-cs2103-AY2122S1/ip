@@ -1,20 +1,20 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -47,17 +47,17 @@ public class Storage {
             boolean isDone = convertIsDoneStrToBool(input.split(fileSplitRegex)[1]);
             String title = input.split(fileSplitRegex)[2];
             switch (action) {
-                case "T":
-                    return new Todo(title, isDone);
-                case "D":
-                    String endDate = input.split(fileSplitRegex)[3];
-                    return new Deadline(title, endDate, isDone);
-                case "E":
-                    String deadline = input.split(fileSplitRegex)[3];
-                    return new Event(title, deadline, isDone);
-                default:
-                    throw new DukeException(String.format(
-                            "Unknown action type at line %d. " + "Only \"T\", \"D\", \"E\" are accepted.", lineNo));
+            case "T":
+                return new Todo(title, isDone);
+            case "D":
+                String endDate = input.split(fileSplitRegex)[3];
+                return new Deadline(title, endDate, isDone);
+            case "E":
+                String deadline = input.split(fileSplitRegex)[3];
+                return new Event(title, deadline, isDone);
+            default:
+                throw new DukeException(String.format(
+                        "Unknown action type at line %d. " + "Only \"T\", \"D\", \"E\" are accepted.", lineNo));
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(String.format("Line %d is missing input values!", lineNo));

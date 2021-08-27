@@ -1,14 +1,12 @@
 package duke.command;
 
+import duke.Pair;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+import duke.task.Task;
 
 import java.util.Arrays;
-
-import duke.Pair;
-
-import duke.task.Task;
 
 public class DoneCommand extends Command {
     public DoneCommand(String[] args) {
@@ -16,7 +14,7 @@ public class DoneCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        int taskNo = Integer.valueOf(args[0]);
+        int taskNo = Integer.parseInt(args[0]);
         Pair<Boolean, Task> statusTaskPair = tasks.markTaskDone(taskNo);
         boolean isTaskAlreadyDone = statusTaskPair.getFirst();
         Task task = statusTaskPair.getSecond();
@@ -35,8 +33,7 @@ public class DoneCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof DoneCommand) {
-            DoneCommand otherCommand = (DoneCommand) other;
+        if (other instanceof DoneCommand otherCommand) {
             return Arrays.equals(this.args, otherCommand.args);
         }
         return false;

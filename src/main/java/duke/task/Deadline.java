@@ -7,10 +7,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
-    // End date of the Deadline object
-    private LocalDateTime endDate;
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy H:mm");
     private final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
+    // End date of the Deadline object
+    private final LocalDateTime endDate;
 
     /**
      * Constructor of a Deadline object.

@@ -1,15 +1,15 @@
 package duke;
 
 public class Pair<S, T> {
-    private S first;
-    private T second;
+    private final S first;
+    private final T second;
 
     public Pair(S first, T second) {
         this.first = first;
         this.second = second;
     }
 
-    public S getFirst(){
+    public S getFirst() {
         return first;
     }
 
