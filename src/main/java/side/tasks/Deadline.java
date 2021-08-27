@@ -45,10 +45,11 @@ public class Deadline extends Task {
         super(description, isDone);
 
         String[] datetime = datetimeInput.split(", ", 2);
-        if (datetime.length == 2)
+        if (datetime.length == 2) {
             this.datetime = new DateTime(datetime[0], datetime[1]);
-        else
+        } else {
             this.datetime = new DateTime(datetime[0]);
+        }
     }
 
     /**
@@ -73,8 +74,8 @@ public class Deadline extends Task {
         } else {
             deadlineLine.append("[D][ ] ");
         }
-        String deadlineDetails = this.description.replaceFirst("deadline", "") +
-                "(by: " + this.datetime + ")";
+        String deadlineDetails = this.description.replaceFirst("deadline", "")
+                + "(by: " + this.datetime + ")";
         deadlineLine.append(deadlineDetails);
         return deadlineLine.toString();
     }

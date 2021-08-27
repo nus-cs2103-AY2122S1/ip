@@ -15,7 +15,8 @@ import side.util.DateTime;
 
 public class Event extends Task {
 
-    private DateTime startDatetime, endDatetime;
+    private DateTime startDatetime;
+    private DateTime endDatetime;
 
     /**
      * Initialises a new Event.
@@ -30,10 +31,10 @@ public class Event extends Task {
         String[] endDatetimeArr = endInput.split("\\s+");
 
         if (startDatetimeArr.length == 2 && endDatetimeArr.length == 2) {
-            this.startDatetime = new DateTime(startDatetimeArr[0].replace(",","")
-                    , startDatetimeArr[1].replace(",",""));
-            this.endDatetime = new DateTime(endDatetimeArr[0].replace(",","")
-                    , endDatetimeArr[1].replace(",",""));
+            this.startDatetime = new DateTime(startDatetimeArr[0].replace(",", ""),
+                    startDatetimeArr[1].replace(",", ""));
+            this.endDatetime = new DateTime(endDatetimeArr[0].replace(",", ""),
+                    endDatetimeArr[1].replace(",", ""));
         } else {
             this.startDatetime = new DateTime(startDatetimeArr[0]);
             this.endDatetime = new DateTime(endDatetimeArr[0]);
@@ -93,8 +94,8 @@ public class Event extends Task {
         } else {
             deadlineLine.append("[E][ ] ");
         }
-        String deadlineDetails = this.description.replaceFirst("event", "") +
-                "(at: " + this.startDatetime + " to " + this.endDatetime + ")";
+        String deadlineDetails = this.description.replaceFirst("event", "")
+                + "(at: " + this.startDatetime + " to " + this.endDatetime + ")";
         deadlineLine.append(deadlineDetails);
         return deadlineLine.toString();
     }

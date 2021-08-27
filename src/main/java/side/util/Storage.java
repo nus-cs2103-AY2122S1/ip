@@ -1,8 +1,5 @@
 package side.util;
 
-import side.tasks.Deadline;
-import side.tasks.Event;
-import side.tasks.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import side.tasks.Deadline;
+import side.tasks.Event;
+import side.tasks.Task;
 
 /**
  * Models saving to hard disk using a .txt file. It contains logic for saving and retrieving from
@@ -105,6 +106,8 @@ public class Storage {
                     break;
                 case "T ":
                     savedList.add(new Task(taskDescription, isTaskDone));
+                    break;
+                default:
                     break;
                 }
             }

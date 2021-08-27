@@ -2,11 +2,11 @@ package side;
 
 import java.util.Scanner;
 
-import side.exception.UnknownCommandException;
-import side.util.Ui;
-import side.util.TaskList;
-import side.util.Parser;
 import side.exception.SideException;
+import side.exception.UnknownCommandException;
+import side.util.Parser;
+import side.util.TaskList;
+import side.util.Ui;
 
 /**
  * Contains logic for prompting user for input and directing flow of commands.

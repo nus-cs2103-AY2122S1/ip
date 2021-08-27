@@ -1,10 +1,12 @@
 package util;
 
-import org.junit.jupiter.api.Test;
-import side.util.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import side.util.Parser;
 
 public class ParserTest {
     @Test

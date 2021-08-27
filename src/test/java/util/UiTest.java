@@ -1,11 +1,16 @@
 package util;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
-import side.exception.*;
+
+import side.exception.DeleteIndexException;
+import side.exception.NoIndexException;
+import side.exception.TaskIndexException;
+import side.exception.TooManyIndexesException;
+import side.exception.WrongFormatException;
 import side.util.TaskList;
 import side.util.Ui;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UiTest {
     @Test

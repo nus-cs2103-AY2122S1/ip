@@ -10,8 +10,13 @@ package side.exception;
 
 public class SideException extends RuntimeException {
 
-    String message;
+    private String message;
 
+    /**
+     * Initialises a SideException.
+     *
+     * @param message String to be displayed.
+     */
     public SideException(String message) {
         super(message);
         this.message = message;
