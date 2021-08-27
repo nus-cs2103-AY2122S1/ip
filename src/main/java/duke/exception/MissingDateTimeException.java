@@ -9,7 +9,7 @@ package duke.exception;
 
 public class MissingDateTimeException extends DukeException {
     public MissingDateTimeException(String format) {
-        super(String.format("MissingDateTimeException: Command issued requires you to specify a date/time using " +
-                "%s", format));
+        super(String.format("MissingDateTimeException: Command issued requires you to specify a date/time using "
+                + "%s", format));
     }
 }

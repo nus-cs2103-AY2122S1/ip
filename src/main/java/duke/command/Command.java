@@ -14,11 +14,4 @@ public abstract class Command {
     }
 
     public abstract void execute() throws DukeException;
-
-    /**
-     * Convert input command.
-     *
-     * @param input Command issued by user in String format.
-     * @return Corresponding command.
-     */
 }

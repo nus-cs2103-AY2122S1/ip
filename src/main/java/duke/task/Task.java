@@ -44,7 +44,7 @@ public abstract class Task {
         return String.format("%d | %s", isDone ? 1 : 0, this.description);
     }
 
-    abstract public boolean isSameDateTime(String dateTime);
+    public abstract boolean isSameDateTime(String dateTime);
 
     /**
      * String representation of a task.

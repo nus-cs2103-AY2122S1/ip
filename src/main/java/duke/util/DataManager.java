@@ -1,7 +1,7 @@
 package duke.util;
 
 import duke.exception.DukeException;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 /**
  * This class encapsulates the data manager used for persisting tasks.
@@ -33,7 +34,7 @@ public class DataManager {
 
     /**
      * Reads data from storage file.
-     * Returns an ArrayList<Task> containing all tasks persisted in storage.
+     * Returns an ArrayList of tasks containing all tasks persisted in storage.
      *
      * @return ArrayList of tasks persisted in storage.
      */
@@ -67,7 +68,7 @@ public class DataManager {
             fw.write(task.convertToTxt() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
-            throw new DukeIOException();
+            throw new DukeIoException();
         }
     }
 
@@ -76,7 +77,7 @@ public class DataManager {
      * Runs after an edit is made to the ToDoList.
      *
      * @param tasks Updated state of task list after edit is made.
-     * @throws DukeIOException if there is error writing to the storage file.
+     * @throws DukeIoException if there is error writing to the storage file.
      */
     public void updateData(ArrayList<Task> tasks) throws DukeException {
         try {
@@ -86,7 +87,7 @@ public class DataManager {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeIOException();
+            throw new DukeIoException();
         }
     }
 
