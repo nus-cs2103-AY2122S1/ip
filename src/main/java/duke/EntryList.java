@@ -22,6 +22,22 @@ public class EntryList extends ArrayList<Entry> {
         }
     }
 
+    public void findEntry(String keyword, Ui ui) {
+        int len = super.size();
+        int count = 1;
+        ui.listMatches();
+        for (int i = 0; i < len; i++) {
+            Entry currentEntry = super.get(i);
+            if (currentEntry.contains(keyword)) {
+                if (count == 1) {
+                    ui.foundMatches();
+                }
+                ui.printEntry(currentEntry, count++);
+            }
+        }
+        ui.end();
+    }
+
     public void markEntryAsDone(int entryNumber) throws DukeException {
         if (entryNumber > 0 && entryNumber <= numberOfEntries) {
             if (super.get(entryNumber - 1).markEntryAsDone()) {

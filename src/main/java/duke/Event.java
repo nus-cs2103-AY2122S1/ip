@@ -34,5 +34,5 @@ public class Event extends Entry{
     }
 
     @Override
-    public boolean isEmpty() { return super.isEmpty() && event.isAfter(LocalDate.now()); }
+    public boolean isEmpty() { return super.isEmpty() || !event.isAfter(LocalDate.now()); }
 }

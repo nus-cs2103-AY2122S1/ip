@@ -34,5 +34,5 @@ public class Deadline extends Entry {
     }
 
     @Override
-    public boolean isEmpty() { return super.isEmpty() || deadline.isAfter(LocalDate.now()); }
+    public boolean isEmpty() { return super.isEmpty() && !deadline.isAfter(LocalDate.now()); }
 }

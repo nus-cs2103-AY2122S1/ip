@@ -29,7 +29,8 @@ public abstract class Entry {
     }
 
     public boolean isEmpty() {
-        return this.ENTRY.length() < 1;
+        boolean check = this.ENTRY.isEmpty() || this.ENTRY.isBlank();
+        return this.ENTRY.isEmpty() || this.ENTRY.isBlank();
     }
 
     public String saveString() {
@@ -38,6 +39,10 @@ public abstract class Entry {
             isDoneString = "1";
         }
         return "," + isDoneString + "," + this.ENTRY;
+    }
+
+    public boolean contains(String keyword) {
+        return this.ENTRY.contains(keyword);
     }
 
     @Override

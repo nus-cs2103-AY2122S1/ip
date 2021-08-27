@@ -28,6 +28,14 @@ public class Ui {
         System.out.println(HORIZONTAL_DIVIDE);
     }
 
+    public void listMatches() {
+        System.out.println("Looking for matching tasks in your list..");
+    }
+
+    public void foundMatches() {
+        System.out.println("Here are the matching tasks in your list..");
+    }
+
     public void printEntry(Entry entry, int ID) {
         System.out.println("\t" + ID + "." + entry);
     }

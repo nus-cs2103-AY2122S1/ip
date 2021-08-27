@@ -2,3 +2,6 @@ T,1,get up
 T,0,sit up
 T,0,yawn
 T,0,walk
+T,1,hello
+D,0,walking,2021-08-10
+E,0,wheeck,2021-10-08

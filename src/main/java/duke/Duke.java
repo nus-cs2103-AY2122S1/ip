@@ -17,6 +17,7 @@ public class Duke {
     private final String TODO_COMMAND = "todo";
     private final String EVENT_COMMAND = "event";
     private final String DEADLINE_COMMAND = "deadline";
+    private final String FIND_COMMAND = "find";
 
     Duke() {
         this.dukeUi = new Ui();
@@ -40,32 +41,36 @@ public class Duke {
         String timing = parsedTerms.get(2);
         //Process Command
         switch(command) {
-            case LIST_ENTRIES_COMMAND:
-                entries.displayEntries(this.dukeUi);
-                break;
+        case LIST_ENTRIES_COMMAND:
+            entries.displayEntries(this.dukeUi);
+            break;
 
-            case MARK_ENTRY_DONE_COMMAND:
-                entries.markEntryAsDone(Integer.parseInt(entry));
-                break;
+        case MARK_ENTRY_DONE_COMMAND:
+            entries.markEntryAsDone(Integer.parseInt(entry));
+            break;
 
-            case TODO_COMMAND:
-                entries.addEntry(new Todo(entry), command, this.dukeUi);
-                break;
+        case TODO_COMMAND:
+            entries.addEntry(new Todo(entry), command, this.dukeUi);
+            break;
 
-            case EVENT_COMMAND:
-                entries.addEntry(new Event(entry, timing), command, this.dukeUi);
-                break;
+        case EVENT_COMMAND:
+            entries.addEntry(new Event(entry, timing), command, this.dukeUi);
+            break;
 
-            case DEADLINE_COMMAND:
-                entries.addEntry(new Deadline(entry, timing), command, this.dukeUi);
-                break;
+        case DEADLINE_COMMAND:
+            entries.addEntry(new Deadline(entry, timing), command, this.dukeUi);
+            break;
 
-            case DELETE_ENTRY_COMMAND:
-                entries.deleteEntry(Integer.parseInt(entry), this.dukeUi);
-                break;
+        case DELETE_ENTRY_COMMAND:
+            entries.deleteEntry(Integer.parseInt(entry), this.dukeUi);
+            break;
 
-            default:
-                throw new DukeException("Sorry! Duke can't understand what that means");
+        case FIND_COMMAND:
+            entries.findEntry(entry, this.dukeUi);
+            break;
+
+        default:
+            throw new DukeException("Sorry! Duke can't understand what that means");
         }
     }
 
