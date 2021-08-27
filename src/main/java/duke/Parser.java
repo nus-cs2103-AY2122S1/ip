@@ -99,6 +99,12 @@ public class Parser {
         return preloadedList;
     }
 
+    /**
+     * Converts a string to local date time
+     * @param datetimeString string in date and time format
+     * @return A local dateTime to show what time it is
+     * @throws InvalidCommandException when the string is not in the right format
+     */
     public static LocalDateTime convertToDateTime(String datetimeString) throws InvalidCommandException {
         try {
             System.out.println(datetimeString);

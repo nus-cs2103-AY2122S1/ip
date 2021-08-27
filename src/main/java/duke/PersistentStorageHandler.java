@@ -21,6 +21,10 @@ public class PersistentStorageHandler {
     private boolean hasStorageTextFile = false;
     private ArrayList<String> all_lines = new ArrayList<>();
 
+    /**
+     * Constructor for persistent storage handler
+     * @param fileName name that the storage handler will read and write to.
+     */
     public PersistentStorageHandler(String fileName) {
         //Name the file
         this.fileName = fileName;
@@ -58,6 +62,10 @@ public class PersistentStorageHandler {
 
     }
 
+    /**
+     * Write to the persistent storage
+     * @param text string to be written
+     */
     public void write(String text)  {
         //Count the number of lines in the string
         String[] tempStringArray = text.split("\r\n|\r|\n");
@@ -79,6 +87,9 @@ public class PersistentStorageHandler {
         all_lines.add(text);
     }
 
+    /**
+     * Print all the lines in the storage
+     */
     public void printAllLines() {
         for (String line: all_lines) {
             System.out.println(line);
@@ -101,6 +112,9 @@ public class PersistentStorageHandler {
 
     }
 
+    /**
+     * Closes the buffer writer
+     */
     public void stopWriting() {
         try {
             this.bufferedWriter.close();
