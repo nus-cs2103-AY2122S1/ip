@@ -1,5 +1,11 @@
+package Duke;
 
-import Exceptions.DukeException;
+import Duke.Command.Command;
+import Duke.Exceptions.DukeException;
+import Duke.Parser.Parser;
+import Duke.Storage.Storage;
+import Duke.Tasks.TaskList;
+import Duke.Ui.Ui;
 
 public class Duke {
     private Storage storage;

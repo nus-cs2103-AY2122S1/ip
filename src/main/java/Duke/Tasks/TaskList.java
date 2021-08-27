@@ -1,4 +1,7 @@
-import Exceptions.IndexNotInListException;
+package Duke.Tasks;
+
+import Duke.Exceptions.IndexNotInListException;
+import Duke.Tasks.Task;
 
 import java.util.ArrayList;
 
@@ -34,6 +37,10 @@ public class TaskList {
 
     public ArrayList<Task> getTaskList() {
         return taskList;
+    }
+
+    public void deleteAll() {
+        taskList.clear();
     }
 
     public int getSize() {

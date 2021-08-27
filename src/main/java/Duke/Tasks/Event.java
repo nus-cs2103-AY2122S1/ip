@@ -1,4 +1,6 @@
-import Exceptions.WrongInputException;
+package Duke.Tasks;
+
+import Duke.Exceptions.WrongInputException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

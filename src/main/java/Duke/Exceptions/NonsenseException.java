@@ -1,6 +1,4 @@
-package Exceptions;
-
-import Exceptions.DukeException;
+package Duke.Exceptions;
 
 public class NonsenseException extends DukeException {
     public NonsenseException(String message) {

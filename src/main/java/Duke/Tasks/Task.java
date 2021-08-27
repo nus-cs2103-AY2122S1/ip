@@ -1,3 +1,5 @@
+package Duke.Tasks;
+
 public class Task {
     protected Boolean done;
     protected String name;
@@ -17,8 +19,16 @@ public class Task {
         return this;
     }
 
-    public String getName() {
-        return this.name;
+    public void setType(char type) {
+        this.type = type;
+    }
+
+    public void setDone() {
+        this.done = true;
+    }
+
+    public char getType() {
+        return this.type;
     }
 
     @Override

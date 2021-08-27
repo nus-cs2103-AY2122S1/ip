@@ -1,6 +1,4 @@
-package Exceptions;
-
-import Exceptions.DukeException;
+package Duke.Exceptions;
 
 public class WrongInputException extends DukeException {
     public WrongInputException(String message) {

@@ -1,5 +1,8 @@
-import Exceptions.DukeException;
-import Exceptions.NoPreviousFileException;
+package Duke.Storage;
+
+import Duke.Exceptions.DukeException;
+import Duke.Exceptions.NoPreviousFileException;
+import Duke.Tasks.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -68,12 +71,31 @@ public class Storage {
                 task = new Event(taskAndDate, "");
             }
         }
-        task.type = type;
-        task.done = done == 'X';
+        task.setType(type);
+        if (done == 'X') {
+            task.setDone();
+        }
         return task;
     }
 
     public void updateTxtFile(TaskList tasklist) {
-
+        BufferedWriter bw;
+        try {
+            bw = new BufferedWriter(new FileWriter("./tasks.txt"));
+            for (Task t : tasklist.getTaskList()) {
+                if (t.getType() == 'D') {
+                    Deadline dl = (Deadline) t;
+                    bw.write(dl + "\n");
+                } else if (t.getType() == 'E') {
+                    Event e = (Event) t;
+                    bw.write(e + "\n");
+                } else {
+                    bw.write(t + "\n");
+                }
+            }
+            bw.close();
+        } catch (IOException e) {
+            System.out.println("Error reading and writing file.");
+        }
     }
 }

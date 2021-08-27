@@ -1,7 +1,17 @@
-import Exceptions.DukeException;
-import Exceptions.IndexNotInListException;
-import Exceptions.NoDescriptionException;
-import Exceptions.WrongInputException;
+package Duke.Command;
+
+import Duke.Exceptions.DukeException;
+import Duke.Exceptions.IndexNotInListException;
+import Duke.Exceptions.NoDescriptionException;
+import Duke.Exceptions.WrongInputException;
+
+import Duke.Storage.Storage;
+import Duke.Tasks.Task;
+import Duke.Tasks.TaskList;
+import Duke.Tasks.Todo;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Ui.Ui;
 
 public abstract class Command {
     private static boolean exit;
@@ -15,6 +25,16 @@ public abstract class Command {
             ui.showTasklist(tasklist);
         }
 
+    }
+
+    public static class ClearCommand extends Command {
+
+        @Override
+        public void execute(TaskList tasklist, Ui ui, Storage storage) {
+            tasklist.deleteAll();
+            ui.showTasklistDeleted();
+            storage.updateTxtFile(tasklist);
+        }
     }
 
     public static class DoneCommand extends Command {
@@ -58,7 +78,7 @@ public abstract class Command {
             } else {
                 String description = input.split(" ", 2)[1];
                 Task todo = Todo.createTodo(description);
-                todo.type = 'T';
+                todo.setType('T');
                 tasklist.insert(todo);
                 storage.updateTxtFile(tasklist);
                 ui.showTaskAdded(todo, tasklist);
@@ -85,10 +105,10 @@ public abstract class Command {
                     String name = description.split("/by", 2)[0];
                     String date = description.split("/by", 2)[1];
                     deadline = Deadline.createDeadline(name, date);
-                    deadline.type = 'D';
+                    deadline.setType('D');
                 } else {
                     deadline = Deadline.createDeadline(description, "");
-                    deadline.type = 'D';
+                    deadline.setType('D');
                 }
                 tasklist.insert(deadline);
                 storage.updateTxtFile(tasklist);
@@ -116,11 +136,10 @@ public abstract class Command {
                     String name = description.split("/at", 2)[0];
                     String date = description.split("/at", 2)[1];
                     event = Event.createEvent(name, date);
-                    event.type = 'E';
                 } else {
                     event = Event.createEvent(description, "");
-                    event.type = 'E';
                 }
+                event.setType('E');
                 tasklist.insert(event);
                 storage.updateTxtFile(tasklist);
                 ui.showTaskAdded(event, tasklist);

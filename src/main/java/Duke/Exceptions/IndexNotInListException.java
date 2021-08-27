@@ -1,6 +1,4 @@
-package Exceptions;
-
-import Exceptions.DukeException;
+package Duke.Exceptions;
 
 public class IndexNotInListException extends DukeException {
     public IndexNotInListException(String message) {

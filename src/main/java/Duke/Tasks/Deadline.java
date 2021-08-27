@@ -1,4 +1,6 @@
-import Exceptions.WrongInputException;
+package Duke.Tasks;
+
+import Duke.Exceptions.WrongInputException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,11 +15,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public static Deadline createDeadline(String name, String at) throws WrongInputException {
-        if (at.equals("")) {
-            return new Deadline(name, at);
+    public static Deadline createDeadline(String name, String by) throws WrongInputException {
+        if (by.equals("")) {
+            return new Deadline(name, by);
         } else {
-            return new Deadline(name, processDateAndTime(at));
+            return new Deadline(name, processDateAndTime(by));
         }
     }
 

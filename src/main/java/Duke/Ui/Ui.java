@@ -1,3 +1,8 @@
+package Duke.Ui;
+
+import Duke.Tasks.Task;
+import Duke.Tasks.TaskList;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -69,5 +74,10 @@ public class Ui {
         }
 
         formatMessages(output.toString());
+    }
+
+    public void showTasklistDeleted() {
+        String msg = "Ok la, Uncle get rid of all your tasks already.";
+        formatMessages(msg);
     }
 }

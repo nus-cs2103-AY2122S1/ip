@@ -1,3 +1,7 @@
+package Duke.Parser;
+
+import Duke.Command.Command;
+
 public class Parser {
 
     public static Command parse(String stringCommand) {
@@ -5,6 +9,8 @@ public class Parser {
         switch (keyword) {
             case "list":
                 return new Command.ListCommand();
+            case "clear":
+                return new Command.ClearCommand();
             case "done":
                 return new Command.DoneCommand(stringCommand);
             case "todo":
