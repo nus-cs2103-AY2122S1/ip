@@ -10,7 +10,7 @@ public class Event extends Task {
     protected LocalDate at;
 
     /**
-     * Constructor for event.
+     * Constructs an event.
      *
      * @param description Description of the event.
      * @param at Date of event.

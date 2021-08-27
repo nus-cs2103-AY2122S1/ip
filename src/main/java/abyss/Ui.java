@@ -1,10 +1,7 @@
 package abyss;
 
-import abyss.exception.LoadTaskException;
 import abyss.task.Task;
 import abyss.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * Represents a storage file which stores and updates user tasks.

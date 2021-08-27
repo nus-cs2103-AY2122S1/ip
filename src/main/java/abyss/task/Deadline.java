@@ -10,7 +10,7 @@ public class Deadline extends Task {
     protected LocalDate by;
 
     /**
-     * Constructor for deadline.
+     * Constructs a deadline.
      *
      * @param description Description of the deadline.
      * @param by Date of deadline.
