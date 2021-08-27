@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println("Error loading data file, starting with empty TaskList.");
+        System.out.println("Error loading data file, starting with empty duke.TaskList.");
     }
 
     public void showError(String errorMessage) {

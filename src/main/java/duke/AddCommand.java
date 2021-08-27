@@ -1,6 +1,7 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.regex.Pattern;
 
 public class AddCommand extends Command {
     private String taskType;

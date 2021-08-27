@@ -1,3 +1,5 @@
+package duke;
+
 public class SetDoneCommand extends Command {
     private int taskIndex;
 

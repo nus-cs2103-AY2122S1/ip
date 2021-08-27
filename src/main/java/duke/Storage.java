@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -51,7 +53,7 @@ public class Storage {
                     tasks.add(new Event(TaskEntry[2], LocalDate.parse(TaskEntry[3])));
                     break;
                 default:
-                    throw new DukeException("Invalid Task Type stored in Data File");
+                    throw new DukeException("Invalid duke.Task Type stored in Data File");
             }
             if (TaskEntry[1].equals("X")) {
                 tasks.get(tasks.size() - 1).markAsDone();
