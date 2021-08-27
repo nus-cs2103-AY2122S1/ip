@@ -171,6 +171,10 @@ public class TaskList {
         return check;
     }
 
+    public LinkedHashMap getMapper() {
+        return this.mapper;
+    }
+
     /**
      * Returns the details on the current state as a string array
      *

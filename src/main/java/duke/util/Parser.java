@@ -1,11 +1,6 @@
 package duke.util;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 
 import duke.exception.DukeException;
 
@@ -78,6 +73,9 @@ public class Parser {
             case "delete":
                 return new DeleteCommand(storage, taskList, ui, parsedInput[1]);
                 // collection of commands to be executed when "delete" is detected
+            case "find":
+                return new FindCommand(storage, taskList, ui, parsedInput[1]);
+                // collection of commands to be executed when "find" is detected
             default:
                 throw new IllegalArgumentException();
             }
