@@ -1,7 +1,7 @@
-package duke.tasklist;
+package main.java.duke.tasklist;
 
-import duke.Ui;
-import duke.task.Task;
+import main.java.duke.Ui;
+import main.java.duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,19 +16,19 @@ import java.util.ArrayList;
 public interface TaskList {
 
     /**
-     * Adds the duke.task into the list.
+     * Adds the task into the list.
      *
-     * @param task the duke.task to be added into the list
+     * @param task the task to be added into the list
      */
     void addTask(Task task);
 
     /**
-     * Setter to change the done status of the duke.task.
+     * Setter to change the done status of the task.
      */
     void setDone(int index);
 
     /**
-     * Delete the duke.task at a specified index.
+     * Delete the task at a specified index.
      */
     void delete(int index);
 

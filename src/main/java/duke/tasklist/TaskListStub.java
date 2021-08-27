@@ -1,7 +1,7 @@
-package duke.tasklist;
+package main.java.duke.tasklist;
 
-import duke.Ui;
-import duke.task.Task;
+import main.java.duke.Ui;
+import main.java.duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,9 +27,9 @@ public class TaskListStub implements TaskList {
     }
 
     /**
-     * Adds the duke.task into the list.
+     * Adds the task into the list.
      *
-     * @param task the duke.task to be added into the list
+     * @param task the task to be added into the list
      */
     @Override
     public void addTask(Task task) {
@@ -37,9 +37,9 @@ public class TaskListStub implements TaskList {
     }
 
     /**
-     * Changes the done status of the duke.task.
+     * Changes the done status of the task.
      *
-     * @param index the position of the duke.task to be marked done
+     * @param index the position of the task to be marked done
      */
     @Override
     public void setDone(int index) {
@@ -48,9 +48,9 @@ public class TaskListStub implements TaskList {
     }
 
     /**
-     * Deletes the duke.task at a specified index.
+     * Deletes the task at a specified index.
      *
-     * @param index the position of the duke.task to be deleted
+     * @param index the position of the task to be deleted
      */
     @Override
     public void delete(int index) {

@@ -1,12 +1,13 @@
-package duke.command;
+package command;
 
-import duke.Ui;
-import duke.storage.StorageStub;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.tasklist.TaskListStub;
+import main.java.duke.Ui;
+import main.java.duke.command.DeleteCommand;
+import main.java.duke.storage.StorageStub;
+import main.java.duke.task.Deadline;
+import main.java.duke.task.Event;
+import main.java.duke.task.Task;
+import main.java.duke.task.ToDo;
+import main.java.duke.tasklist.TaskListStub;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -14,16 +15,16 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Tests the functions in DoneCommand
+ * Tests the functions in DeleteCommand
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S1
  */
-public class DoneCommandTest {
+public class DeleteCommandTest {
 
-    private final DoneCommand c1 = new DoneCommand("1");
-    private final DoneCommand c2 = new DoneCommand("2");
-    private final DoneCommand c3 = new DoneCommand("3");
+    private final DeleteCommand c1 = new DeleteCommand("1");
+    private final DeleteCommand c2 = new DeleteCommand("1");
+    private final DeleteCommand c3 = new DeleteCommand("1");
     private final StorageStub s = new StorageStub();
     private final Ui u = new Ui();
     private TaskListStub t;
@@ -53,17 +54,22 @@ public class DoneCommandTest {
         assertEquals("D|0|assignment|2021-08-23 2010", s.getString(1));
         assertEquals("E|0|test|2021-08-21 1530", s.getString(2));
 
-        //Mark all three tasks as done
+        //Deletes first task and check
         c1.execute(t, u, s);
-        c2.execute(t, u, s);
-        c3.execute(t, u, s);
+        assertEquals(t.output().size(), 2);
+        assertEquals("[D][ ] assignment (by: 23 Aug 2021 8.10pm)", t.output().get(0).toString());
+        assertEquals("[E][ ] test (at: 21 Aug 2021 3.30pm)", t.output().get(1).toString());
+        assertEquals("D|0|assignment|2021-08-23 2010", s.getString(0));
+        assertEquals("E|0|test|2021-08-21 1530", s.getString(1));
 
-        //Check whether all three tasks are done
-        assertEquals("[T][X] tutorial", t.output().get(0).toString());
-        assertEquals("[D][X] assignment (by: 23 Aug 2021 8.10pm)", t.output().get(1).toString());
-        assertEquals("[E][X] test (at: 21 Aug 2021 3.30pm)", t.output().get(2).toString());
-        assertEquals("T|1|tutorial|", s.getString(0));
-        assertEquals("D|1|assignment|2021-08-23 2010", s.getString(1));
-        assertEquals("E|1|test|2021-08-21 1530", s.getString(2));
+        //Deletes second task and check
+        c2.execute(t, u, s);
+        assertEquals(t.output().size(), 1);
+        assertEquals("[E][ ] test (at: 21 Aug 2021 3.30pm)", t.output().get(0).toString());
+        assertEquals("E|0|test|2021-08-21 1530", s.getString(0));
+
+        //Deletes third task and check
+        c3.execute(t, u, s);
+        assertEquals(t.output().size(), 0);
     }
 }

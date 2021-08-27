@@ -1,14 +1,14 @@
-package duke.command;
+package main.java.duke.command;
 
-import duke.DukeException;
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.Ui;
+import main.java.duke.DukeException;
+import main.java.duke.storage.Storage;
+import main.java.duke.tasklist.TaskList;
+import main.java.duke.Ui;
 
 import java.time.DateTimeException;
 
 /**
- * ListCommand is a duke.command which prints out all the Tasks in the list, and even
+ * ListCommand is a command which prints out all the Tasks in the list, and even
  * prints only tasks of a specific date if the date is specified.
  *
  * @author Zhen Xuan (Tutorial Group W12)
@@ -28,9 +28,9 @@ public class ListCommand extends Command {
     /**
      * Lists down all the tasks (of the specified date).
      *
-     * @param tasks   the duke.task list
+     * @param tasks   the task list
      * @param ui      the ui
-     * @param storage the storage for the saved duke.task list
+     * @param storage the storage for the saved task list
      * @throws DukeException if the date/time format is wrong
      */
     @Override

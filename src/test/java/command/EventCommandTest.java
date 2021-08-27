@@ -1,8 +1,9 @@
-package duke.command;
+package command;
 
-import duke.Ui;
-import duke.storage.StorageStub;
-import duke.tasklist.TaskListStub;
+import main.java.duke.Ui;
+import main.java.duke.command.EventCommand;
+import main.java.duke.storage.StorageStub;
+import main.java.duke.tasklist.TaskListStub;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

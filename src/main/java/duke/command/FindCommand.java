@@ -1,11 +1,11 @@
-package duke.command;
+package main.java.duke.command;
 
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
-import duke.Ui;
+import main.java.duke.storage.Storage;
+import main.java.duke.tasklist.TaskList;
+import main.java.duke.Ui;
 
 /**
- * FindCommand is a duke.command which prints out the Tasks in the TaskList which
+ * FindCommand is a command which prints out the Tasks in the TaskList which
  * contains the keyword provided.
  *
  * @author Zhen Xuan (Tutorial Group W12)
@@ -25,9 +25,9 @@ public class FindCommand extends Command {
     /**
      * Lists down all the tasks (of the specified date).
      *
-     * @param tasks   the duke.task list
+     * @param tasks   the task list
      * @param ui      the ui
-     * @param storage the storage for the saved duke.task list
+     * @param storage the storage for the saved task list
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

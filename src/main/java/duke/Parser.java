@@ -1,18 +1,9 @@
-package duke;
+package main.java.duke;
 
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.ByeCommand;
-import duke.command.EventCommand;
-import duke.command.DeadlineCommand;
-import duke.command.FindCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
+import main.java.duke.command.*;
 
 /**
- * Parser reads the input by the user and returns the relevant duke.command.
+ * Parser reads the input by the user and returns the relevant command.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S1
@@ -20,10 +11,10 @@ import duke.command.ToDoCommand;
 public class Parser {
 
     /**
-     * Reads the fullCommand and return the relevant duke.command.
+     * Reads the fullCommand and return the relevant command.
      *
      * @param fullCommand the fullCommand
-     * @return the relevant duke.command
+     * @return the relevant command
      */
     protected static Command parse(String fullCommand) {
         String[] commandPair = fullCommand.split(" ", 2);

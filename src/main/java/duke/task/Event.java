@@ -1,11 +1,11 @@
-package duke.task;
+package main.java.duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event is a duke.task that has a date in which it is happening.
+ * Event is a task that has a date in which it is happening.
  *
  * @author Zhen Xuan (Tutorial Group W12)
  * @version CS2103T AY21/22 S1
@@ -15,9 +15,9 @@ public class Event extends Task {
     private final LocalDateTime date;
 
     /**
-     * Constructor for Deadline duke.task.
+     * Constructor for Deadline task.
      *
-     * @param isDone      true if the duke.task is done
+     * @param isDone      true if the task is done
      * @param description the description
      * @param date        the date for which the event is occurring
      */
@@ -28,9 +28,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of the Deadline duke.task.
+     * Returns the string representation of the Deadline task.
      *
-     * @return the string representation of the Deadline duke.task
+     * @return the string representation of the Deadline task
      */
     @Override
     public String toString() {
@@ -39,7 +39,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns if the duke.task date is equal to the date provided.
+     * Returns if the task date is equal to the date provided.
      *
      * @param date the date provided
      * @return true if they are both equal
