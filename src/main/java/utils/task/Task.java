@@ -3,9 +3,9 @@ package utils.task;
 /**
  * The Task class encapsulates a task.
  */
-public class Task {
-    private String description;
-    private boolean isDone;
+abstract public class Task {
+    protected String description;
+    protected boolean isDone;
 
     /**
      * Constructor to create a new components.Task object.
@@ -31,6 +31,12 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    /**
+     * Get task string to be inputted into file.
+     * @return string in the format <task><delimiter><done><delimiter><datetime>
+     */
+    abstract public String getTaskFileString(String delimiter, String done, String notDone);
 
     @Override
     public String toString() {

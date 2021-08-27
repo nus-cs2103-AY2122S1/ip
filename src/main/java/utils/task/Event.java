@@ -24,6 +24,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getTaskFileString(String delimiter, String done, String notDone) {
+        return "E" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description + delimiter + this.at;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(dateFormatter) + " " + time.format(timeFormatter) + ")";
     }

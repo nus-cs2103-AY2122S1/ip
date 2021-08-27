@@ -65,10 +65,11 @@ public class Duke {
      */
     private static ArrayList<Task> tasks = new ArrayList<>();
 
+    private static Storage storage = new Storage("data/tasks.txt");
+
     public static void main(String[] args) {
 
         // Loads the existing data from Storage, else start with an empty tasks list
-        Storage storage = new Storage("data/tasks.txt");
         try {
             tasks = storage.load();
         } catch (DukeException e) {
@@ -122,6 +123,11 @@ public class Duke {
             if (index < tasks.size()) {
                 Task task = tasks.get(index);
                 task.markAsDone();
+                try {
+                    Duke.storage.writeTasksToFile(tasks);
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
                 return formatTaskMessage(doneMessage, task);
             }
             // Error: task out of list.
@@ -134,6 +140,11 @@ public class Duke {
             if (index < tasks.size()) {
                 Task task = tasks.get(index);
                 tasks.remove(index);
+                try {
+                    Duke.storage.writeTasksToFile(tasks);
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
                 return formatTaskMessage(deleteMessage, task);
             }
             // Error: task out of list.
@@ -150,6 +161,11 @@ public class Duke {
                 }
                 Todo todo = new Todo(split[1]);
                 tasks.add(todo);
+                try {
+                    Duke.storage.writeTasksToFile(tasks);
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
                 return formatTaskMessage(addedMessage, todo);
             case (deadlineString):
                 if (split.length == 1 || split[1].equals("")) {
@@ -163,6 +179,11 @@ public class Duke {
                 }
                 Deadline deadline = new Deadline(deadlineSplit[0], deadlineSplit[1]);
                 tasks.add(deadline);
+                try {
+                    Duke.storage.writeTasksToFile(tasks);
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
                 return formatTaskMessage(addedMessage, deadline);
             case (eventString):
                 if (split.length == 1 || split[1].equals("")) {
@@ -175,6 +196,11 @@ public class Duke {
                     return formatTaskErrorMessage(TaskType.EVENT, Field.DATETIME);
                 }
                 Event event = new Event(eventSplit[0], eventSplit[1]);
+                try {
+                    Duke.storage.writeTasksToFile(tasks);
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
                 tasks.add(event);
                 return formatTaskMessage(addedMessage, event);
             default:
