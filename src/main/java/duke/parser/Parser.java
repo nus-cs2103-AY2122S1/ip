@@ -18,7 +18,7 @@ public class Parser {
     private Ui ui;
 
     public enum Keyword {
-        TODO, LIST, DEADLINE, EVENT, DONE, DELETE
+        TODO, LIST, DEADLINE, EVENT, DONE, DELETE, FIND
     }
 
     public Parser(TaskList tasks, Ui ui) {
@@ -28,7 +28,7 @@ public class Parser {
 
     public void parse(String cmd) throws DukeException {
         String[] tokens = cmd.split(" ");
-        Keyword keyword = validifyCommand(tokens);
+        Keyword command = validifyCommand(tokens);
         int middle;
         int index;
         String description;
@@ -37,7 +37,7 @@ public class Parser {
         LocalDateTime by;
         Task task;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        switch (keyword) {
+        switch (command) {
             case LIST:
                 this.tasks.iterList();
                 break;
@@ -90,6 +90,11 @@ public class Parser {
                 this.tasks.delete(index);
                 ui.deleteTaskMsg(task);
                 ui.listCountMsg();
+                break;
+            case FIND:
+                String keyword = cmd.substring(5);
+                tasks.searchKeyword(keyword);
+                break;
         }
     }
 
@@ -101,8 +106,9 @@ public class Parser {
                     && cmd.length < 2) {
                 throw new DukeException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", keyword));
             }
-            if ((keyword.equals(Keyword.DONE) || keyword.equals(Keyword.DELETE)) && (cmd.length < 2)) {
-                throw new DukeException("☹ OOPS!!! Missing task number");
+            if ((keyword.equals(Keyword.DONE) || keyword.equals(Keyword.DELETE) || keyword.equals(Keyword.FIND))
+                    && (cmd.length < 2)) {
+                throw new DukeException("☹ OOPS!!! Missing arguments.");
             }
         } catch (IllegalArgumentException e) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

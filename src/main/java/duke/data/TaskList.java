@@ -58,4 +58,23 @@ public class TaskList {
         Task task = this.lst.get(index);
         return task;
     }
+
+    public void searchKeyword(String keyword) {
+        TaskList relatedTasks = new TaskList();
+        for (Task task : lst) {
+            if (task.findKeyword(keyword)) {
+                relatedTasks.add(task);
+            }
+        }
+
+        System.out.println("Here are the matching tasks in your list:");
+        if (this.lst.size() == 0) {
+            System.out.println("---- No related tasks found ----");
+        }
+        int i = 1;
+        for (Task s : this.lst) {
+            System.out.println(i + "." + s);
+            i++;
+        }
+    }
 }
