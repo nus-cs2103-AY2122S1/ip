@@ -14,6 +14,18 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
+        File dukeFile = new File(filePath);
+        File directory = dukeFile.getParentFile();
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        try {
+            if (!dukeFile.exists()) {
+                dukeFile.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
