@@ -104,6 +104,7 @@ public class GnosisController {
             case FIND:
                 List<Task> filteredTasks = taskCommandManager.findMatchingTasks(taskInput);
                 view.displayFoundTasksMessage(filteredTasks, taskInput);
+                break;
             case DONE:
                 // only if "done" command is call, we retrieve task index from user
                 int taskIndex = Integer.parseInt(taskInput.trim()) - 1;

@@ -75,7 +75,7 @@ public class GnosisUI {
 
         displayBottomDivider();
     }
-    
+
     /**
      * Displays found tasks based on keyword.
      *
@@ -130,7 +130,7 @@ public class GnosisUI {
      * @param taskIndex - task number from task list
      */
     public void displayMarkedTaskMessage(Task task, int taskIndex) {
-        System.out.println("gnosis.main.model.Task " + (taskIndex) +" marked as done:" );
+        System.out.println("Task " + (taskIndex) +" marked as done:" );
         System.out.println("\t" + task);
         displayBottomDivider();
     }
