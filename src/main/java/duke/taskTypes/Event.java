@@ -16,6 +16,7 @@ public class Event extends Task{
 
     /**
      * Takes in a string and splits msg into based on /at pattern. Set the eventType and time of the instance
+     *
      * @param input string from the user
      */
     public Event(String input, boolean isDone) throws DukeException {
@@ -37,6 +38,7 @@ public class Event extends Task{
     }
     /**
      * Returns a string that describes the instance
+     *
      * @return String containing details of the task
      */
     @Override

@@ -9,6 +9,7 @@ public class Todo extends Task{
 
     /**
      * Takes in a string Set the eventType and description of the instance
+     *
      * @param input
      */
     public Todo(String input, boolean isDone) throws DukeException {
@@ -21,6 +22,7 @@ public class Todo extends Task{
 
     /**
      * Returns a string that describes the instance for display
+     *
      * @return String containing details of the task
      */
     @Override

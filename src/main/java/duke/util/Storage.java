@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * Constructor for Storage and sets the file that contains previous state
+     *
      * @param filePath File location that contains text file containing previous state
      * @throws DukeException Thrown when file does not exist
      */
@@ -36,7 +37,8 @@ public class Storage {
 
     /**
      * Reads and returns a list of previous task
-     * @return
+     *
+     * @return List of String read from the file
      * @throws DukeException
      */
     public List<String> loadSaved() throws DukeException {

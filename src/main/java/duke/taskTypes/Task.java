@@ -87,6 +87,7 @@ public class Task {
 
     /**
      * Returns a string that describes the instance for display
+     *
      * @return String containing details of the task
      */
     @Override

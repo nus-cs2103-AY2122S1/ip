@@ -17,6 +17,7 @@ public class Ui {
 
     /**
      * Basic Constructor
+     *
      * @param speechLimit
      */
     public Ui(int speechLimit) {
@@ -30,6 +31,7 @@ public class Ui {
 
     /**
      * Takes in the user input
+     *
      * @return String User input
      */
     public String userInput() {
@@ -48,6 +50,7 @@ public class Ui {
 
     /**
      * Formats list message
+     *
      * @param msg
      * @param taskList
      */
@@ -58,6 +61,7 @@ public class Ui {
 
     /**
      * Formats done message
+     *
      * @param task
      */
     public void doneMsg(Task task) {
@@ -69,6 +73,7 @@ public class Ui {
 
     /**
      * Formats task added message
+     *
      * @param task
      * @param taskList
      */
@@ -82,6 +87,7 @@ public class Ui {
 
     /**
      * Formats task deleted message
+     *
      * @param task
      * @param taskList
      */
@@ -96,6 +102,7 @@ public class Ui {
 
     /**
      * Formats error found msg
+     *
      * @param error_msg string that contains details of the error
      */
     public void error(String error_msg) {
@@ -115,6 +122,7 @@ public class Ui {
 
     /**
      * Outputs message in Duke Template msg
+     *
      * @param in takes in a string array and cycle through and printing msg
      */
     public void speak(String[] in) {
@@ -137,6 +145,7 @@ public class Ui {
 
     /**
      * Outputs Message in Duke Template
+     *
      * @param in takes in a string and coverts it to a string array to be used on speak(String[])
      */
     public void speak(String in) {
@@ -147,6 +156,7 @@ public class Ui {
 
     /**
      * Formats the msg to be printed so it fits within duke's speech bubble
+     *
      * @param input input to be formatted
      * @param longest maximum spaces
      * @return String that is reformated to fit duke's speech bubble
@@ -158,6 +168,7 @@ public class Ui {
 
     /**
      * Adds a simple emoticon to add variety/ personality to the response printed (basically program glitter)
+     *
      * @return String containing the emoticon
      */
     private String emoticonRand() {

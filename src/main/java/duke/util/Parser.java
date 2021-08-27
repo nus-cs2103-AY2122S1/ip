@@ -23,6 +23,7 @@ public class Parser {
 
     /**
      * Basic constructor for Parser
+     *
      * @param storage storage object
      * @param taskList tasklist object
      * @param ui Ui object
@@ -47,6 +48,7 @@ public class Parser {
 
     /**
      * Interprets the input and returns the appropriate command
+     *
      * @param input user input
      * @return command returns command based on the user input
      * @throws DukeException for any errors caused

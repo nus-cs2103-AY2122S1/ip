@@ -30,6 +30,7 @@ public class TaskList {
 
     /**
      * Insert Past state from storage into current tasklist
+     *
      * @param pastTaskLists List of past task details found in the storage
      * @throws DukeException
      */
@@ -60,6 +61,7 @@ public class TaskList {
 
     /**
      * Identify, Search and Modify the isDone status of task based on the getStorage printed msg
+     *
      * @param input tajes in the input from user
      * @return String that contains the done success msg
      * @throws InvalidFormatException when user input does not conform to the standard
@@ -81,6 +83,7 @@ public class TaskList {
 
     /**
      * Identify, Search and Delete task from task list based on the position of list
+     *
      * @param input contains the position of which task to delete
      * @return Task returns deleted task
      * @throws DukeException
@@ -102,6 +105,7 @@ public class TaskList {
 
     /**
      * Creates a task instance, adds to storage and prints a success msg
+     *
      * @param input takes in the input from user
      * @return Task returns newly created task
      */
@@ -113,6 +117,7 @@ public class TaskList {
 
     /**
      * Creates a task instance, adds to storage and prints a success msg
+     *
      * @param input tajes in the input from user
      * @return Task returns newly created task
      */
@@ -123,6 +128,7 @@ public class TaskList {
     }
     /**
      * Creates a task instance, adds to storage and prints a success msg
+     *
      * @param input tajes in the input from user
      * @return Task returns newly created task
      */
@@ -134,6 +140,7 @@ public class TaskList {
 
     /**
      * Returns the number of task in the list ( does not matter if its done or not )
+     *
      * @return int returns the current list size
      */
     public int taskLeft() {
@@ -142,6 +149,7 @@ public class TaskList {
 
     /**
      * Details of the task and list them in insertion order
+     *
      * @return String array that contains the details
      */
     public String[] getList() {
@@ -165,6 +173,7 @@ public class TaskList {
 
     /**
      * Returns the details on the current state as a string array
+     *
      * @return String[] Array of sring that contains descrptions of state
      */
     public String[] saveState() {
@@ -182,6 +191,7 @@ public class TaskList {
 
     /**
      * Retyrns the number of task currently in the list
+     *
      * @return int
      */
     public int listMaxLen(){

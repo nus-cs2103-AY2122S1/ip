@@ -14,7 +14,9 @@ import duke.exception.InvalidTimeException;
 import org.junit.jupiter.api.Test;
 
 
-
+/**
+ * Deadline test class
+ */
 class DeadlineTest {
 
     @Test
