@@ -1,16 +1,17 @@
 package duke;
 
-import duke.command.Duke;
-import duke.command.DukeException;
-import duke.command.MyParser;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
+import duke.command.Duke;
+import duke.command.DukeException;
+import duke.command.MyParser;
+
 public class MyParserTest {
-    MyParser parser = new MyParser();
-    Duke d = new Duke("test.file");
+    private MyParser parser = new MyParser();
+    private Duke d = new Duke("test.file");
 
     @Test
     void delete_noDescription_exceptionThrown() {
@@ -108,8 +109,8 @@ public class MyParserTest {
             parser.parse("event", "assignment", d);
             fail();
         } catch (DukeException e) {
-            assertEquals("OOPS!!! No event time has been set. " +
-                    "Input with '/at dd/mm/yyyy 0000'", e.getMessage());
+            assertEquals("OOPS!!! No event time has been set. "
+                    + "Input with '/at dd/mm/yyyy 0000'", e.getMessage());
         }
     }
 

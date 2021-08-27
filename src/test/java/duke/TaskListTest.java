@@ -1,14 +1,16 @@
 package duke;
 
-import duke.task.TaskList;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.task.TaskList;
+
 
 public class TaskListTest {
-    public static ArrayList<String> simulatedStorageLoad;
+    private static ArrayList<String> simulatedStorageLoad;
 
     @Test void testLoadTodo() {
         simulatedStorageLoad = new ArrayList<>();

@@ -11,10 +11,11 @@ import java.util.Calendar;
  *
  * @author Kishendran Vendar Kon (Group G05)
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     /** String representing dueBy date/time of Deadline. */
-    protected Calendar dueByCalendar;
     protected static SimpleDateFormat formatter = new SimpleDateFormat("MMM dd yyyy hh:mm aaa");
+    protected Calendar dueByCalendar;
+
 
     /** Default constructor. */
     public Deadline(String description, Calendar dueByCalendar) {

@@ -8,7 +8,7 @@ package duke.task;
  *
  * @author Kishendran Vendar Kon (Group G05)
  */
-public class Todo extends Task{
+public class Todo extends Task {
     /** Default constructor. */
     public Todo(String description) {
         super(description);
