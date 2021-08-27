@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends TimeTask {
-
     public Event(String description) {
         super(description);
     }
@@ -21,8 +20,6 @@ public class Event extends TimeTask {
     public Event(String description, boolean isDone, String at) {
         super(description, isDone, at);
     }
-
-
 
     @Override
     public String toString() {

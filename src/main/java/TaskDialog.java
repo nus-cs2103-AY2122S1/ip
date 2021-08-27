@@ -1,5 +1,13 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import java.io.IOException;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,6 +15,39 @@ import java.util.stream.Collectors;
 public class TaskDialog extends Dialog {
     // This class is a child of dialog class which allow the user to interact with the task
     private final ArrayList<Task> tasks;
+
+    public void saveTasks(String filePath) throws IOException {
+        Path path = Paths.get(Duke.FILE_PATHNAME);
+        List<String> fileContent = tasks.stream().map(this::taskToSaveFormat).collect(Collectors.toList());
+        Files.write(path, fileContent, StandardCharsets.UTF_8);
+    }
+
+    private String taskToSaveFormat(Task task) {
+
+        Duke.TaskType type = Duke.classNameToTaskType(task.getClass().getName());
+        String s = Duke.taskTypeToString(type) + " | " + (task.isDone ? 1 : 0) + " | " + task.description;
+        switch (type) {
+            case TODO:
+                break;
+            case EVENT:
+                Event ev = (Event) task;
+                s += " | " + ev.getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                break;
+            case DEADLINE:
+                Deadline dl = (Deadline) task;
+                s += " | " + dl.getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                break;
+            default:
+                break;
+        }
+        return s;
+    }
+
+    public void silentAddTask(Task task) throws DialogException {
+        tasks.add(task);
+    }
+
+
 
     private TaskDialog(ArrayList<String> sentences, ArrayList<Task> tasks) {
         super(sentences);
