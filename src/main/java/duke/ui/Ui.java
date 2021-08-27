@@ -77,7 +77,7 @@ public class Ui {
 
     /** Prints what duke.Duke says */
     public void say(String... s) {
-        this.out.print("duke.Duke: ");
+        this.out.print("Duke: ");
 
         for (String line : s) {
             this.out.println(line);

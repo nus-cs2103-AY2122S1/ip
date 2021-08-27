@@ -31,7 +31,7 @@ public class Parser {
             return new AddCommand(new Todo(description));
         } else if (input.startsWith("deadline ")) {
             if (!input.contains(" /by ")) {
-                throw new DukeException("Invalid format for `deadline` duke.command. '/by' keyword is needed");
+                throw new DukeException("Invalid format for `deadline` command. '/by' keyword is needed");
             }
             String[] params = input.substring(9).split(" /by ");
             String description = params[0];
@@ -39,7 +39,7 @@ public class Parser {
             return new AddCommand(new Deadline(description, by));
         } else if (input.startsWith("event ")) {
             if (!input.contains(" /at ")) {
-                throw new DukeException("Invalid format for `event` duke.command. '/at' keyword is needed");
+                throw new DukeException("Invalid format for `event` command. '/at' keyword is needed");
             }
             String[] params = input.substring(6).split(" /at ");
             String description = params[0];
@@ -47,7 +47,7 @@ public class Parser {
 
             return new AddCommand(new Event(description, at));
         } else {
-            throw new DukeException("Invalid duke.command: " + input);
+            throw new DukeException("Invalid command: " + input);
         }
     }
 }
