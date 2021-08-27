@@ -18,7 +18,7 @@ public class Duke {
 
         ui.greet();
         Scanner input = new Scanner(System.in);
-        while(true) {
+        while (true) {
             try {
                 s = input.nextLine();
 
@@ -30,7 +30,8 @@ public class Duke {
                     continue;
                 } else if (s.startsWith("done")) {
                     if (s.length() == 4 || s.length() == 5) {
-                        throw new DukeException("☹ OOPS!!! You did not put which task you want me to mark it complete.");
+                        throw new DukeException("☹ OOPS!!! You did not put which task"
+                                + "you want me to mark it complete.");
                     }
                     taskNumber = Integer.parseInt(s.substring(s.indexOf(" ") + 1)) - 1;
                     ui.markDone(taskNumber);
@@ -59,8 +60,7 @@ public class Duke {
                 } else {
                     throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-            }
-            catch (DukeException e) {
+            } catch (DukeException e) {
                 drawLine();
                 System.out.println(e.getMessage());
                 drawLine();
