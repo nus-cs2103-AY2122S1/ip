@@ -1,4 +1,6 @@
-import java.util.Scanner;
+package TiTi.util;
+
+import TiTi.task.Task;
 
 public class Ui {
     private static final String STARTER_NORMAL =   "   (=^ ･ｪ･^=) < ";

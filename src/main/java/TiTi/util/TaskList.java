@@ -1,4 +1,9 @@
+package TiTi.util;
+
+import TiTi.task.Task;
+
 import java.util.ArrayList;
+
 
 public class TaskList {
 

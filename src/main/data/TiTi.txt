@@ -1,6 +1,6 @@
 [D][ ] project work (by: 10 Aug)
 [T][X] running
 [E][X] concert (at: 8pm)
-[D][ ] homework (by: Jan 22 2020)
 [E][ ] birthday (at: Jan 22 2022)
 [T][ ] buy groceries
+[D][X] homework (by: Jul 24 1930)

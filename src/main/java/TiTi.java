@@ -1,3 +1,6 @@
+import TiTi.util.SavedHistory;
+import TiTi.util.TaskList;
+import TiTi.util.Ui;
 
 public class TiTi {
     private SavedHistory savedHistory;
