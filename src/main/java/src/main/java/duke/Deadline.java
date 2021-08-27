@@ -23,6 +23,7 @@ public class Deadline extends Task {
             this.time = LocalDate.parse(time);
         } catch (DateTimeParseException error) {
             System.out.println("Please Enter date in this format 'YYYY-MM-dd'");
+            return;
         }
 
     }
