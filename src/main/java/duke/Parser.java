@@ -3,12 +3,28 @@ package duke;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private String DONE_REGEX = "done [0-9]+";
-    private String DELETE_REGEX = "delete [0-9]+";
-    private String TODO_REGEX = "todo [\\w\\s-]+";
-    private String DEADLINE_REGEX = "deadline [\\w\\s-]+ \\/by [\\w\\s-]+";
-    private String EVENT_REGEX = "event [\\w\\s-]+ \\/at [\\w\\s-]+";
+    /** Regex for a Done command. */
+    private final String DONE_REGEX = "done [0-9]+";
+    /** Regex for a Delete command. */
+    private final String DELETE_REGEX = "delete [0-9]+";
+    /** Regex for a ToDo command specifying a new ToDo task. */
+    private final String TODO_REGEX = "todo [\\w\\s-]+";
+    /** Regex for a Deadline command specifying a new Deadline task. */
+    private final String DEADLINE_REGEX = "deadline [\\w\\s-]+ \\/by [\\w\\s-]+";
+    /** Regex for a Event command specifying a new Event task. */
+    private final String EVENT_REGEX = "event [\\w\\s-]+ \\/at [\\w\\s-]+";
 
+    /**
+     * Handles all user commands.
+     * Takes in a user command and checks which command it is. Upon determining the command, performs the
+     * necessary action.
+     *
+     * @param command The user command to be handled.
+     * @param tasks The TaskList object containing the list of tasks and operations.
+     * @param ui The UI object that handles messages to the user.
+     * @return Whether or not the Duke program should exit or continue running.
+     * @throws DukeException If the command does not match the Regex for the accepted list of commands.
+     */
     public boolean parse(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.equals("list")) {
             String[] response = tasks.getStringArr();
