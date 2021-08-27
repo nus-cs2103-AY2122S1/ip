@@ -125,6 +125,21 @@ public class TaskList {
     }
 
     /**
+     * Filters tasks with title containing the given query keyword.
+     *
+     * @param query filter term.
+     * @return An arraylist of tasks with title containing the query keyword.
+     */
+    public ArrayList<Task> searchTasks(String query) {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.contains(query)) {
+                result.add(task);
+            }
+        }
+        return result;
+    }
+    /**
      * {@inheritDoc}
      */
     @Override

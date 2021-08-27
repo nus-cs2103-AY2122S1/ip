@@ -71,6 +71,16 @@ public class Task {
     }
 
     /**
+     * Returns {@code true} if title contains the query keyword, {@code false} otherwise.
+     *
+     * @param query filter keyword.
+     * @return {@code true} if the title contains the query string, {@code false} otherwise.
+     */
+    public boolean contains(String query) {
+        return title.contains(query);
+    }
+
+    /**
      * Returns a {@code String} containing the description of the {@code Task} to be
      * saved to storage.
      * 
