@@ -57,6 +57,10 @@ public abstract class Task {
         return this.taskType;
     }
 
+    public boolean containsKeyword(String keyword) {
+        return task.contains(keyword);
+    }
+
     public boolean setCompleted() {
         this.isCompleted = true;
         return this.isCompleted;

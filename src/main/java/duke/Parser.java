@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
-    public enum Command {BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CLEAR}
+    public enum Command {BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CLEAR, FIND}
     boolean toTerminate = false;
 
     /**
@@ -67,6 +67,9 @@ public class Parser {
             break;
         case CLEAR:
             this.clear(tasks, ui);
+            break;
+        case FIND:
+            this.findTasks(tasks, ui, parsedInput[1]);
             break;
         default:
             throw new InvalidCommandException("Invalid Command");
@@ -135,7 +138,7 @@ public class Parser {
     }
 
     /**
-     * Adds a Event task to the TaskList.
+     * Adds an Event task to the TaskList.
      * @param tasks TaskList object that contains the tasks.
      * @param ui UI object to render output to user.
      * @param input Input that user entered.
@@ -186,5 +189,9 @@ public class Parser {
         }
         Task task = tasks.deleteTask(index);
         ui.deleteMessage(task, tasks);
+    }
+
+    public void findTasks(TaskList tasks, Ui ui, String keyword) {
+        ui.findMessage(tasks.findTasks(keyword));
     }
 }
