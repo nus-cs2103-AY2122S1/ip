@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        int taskNo = Integer.valueOf(args[0]);
+        int taskNo = Integer.parseInt(args[0]);
         Pair<Boolean, Task> statusTaskPair = tasks.markTaskDone(taskNo);
         boolean isTaskAlreadyDone = statusTaskPair.getFirst();
         Task task = statusTaskPair.getSecond();

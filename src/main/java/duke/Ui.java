@@ -1,8 +1,8 @@
 package duke;
+import duke.task.Task;
 
 import java.util.ArrayList;
 
-import duke.task.Task;
 
 /**
  * This class represents a {@code Ui} and handles all the interactions with the
@@ -22,8 +22,11 @@ public class Ui {
      * Displays the welcome message when the app starts running.
      */
     public void showWelcome() {
-        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         printMessage("Hello! I'm Duke\nWhat can I do for you?");
     }
@@ -46,7 +49,6 @@ public class Ui {
      */
     public void showNewTask(Task task, int taskLength) {
         printMessageWithTaskCount(ADD_FORMAT, task, taskLength);
-        ;
     }
 
     /**
@@ -90,15 +92,6 @@ public class Ui {
             }
             printLine();
         }
-    }
-
-    /**
-     * Shows that file reading is occuring at the given file path.
-     * 
-     * @param filePath {@code String} representation of the file path.
-     */
-    public void showReadFile(String filePath) {
-        printMessage(String.format("Reading tasks from %s...", filePath));
     }
 
     /**

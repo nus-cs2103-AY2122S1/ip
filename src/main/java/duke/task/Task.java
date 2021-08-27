@@ -6,8 +6,8 @@ package duke.task;
  * @author Eizabeth Chow
  */
 public class Task {
-    private boolean isDone = false;
     private final String title;
+    private boolean isDone = false;
 
     /**
      * Constructs a new {@code Task} with the given title.

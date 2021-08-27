@@ -7,8 +7,8 @@ package duke;
  * @author Elizabeth Chow
  */
 public class Pair<S, T> {
-    private S first;
-    private T second;
+    private final S first;
+    private final T second;
 
     /**
      * Constructs a new Pair with the given first and second arguments.

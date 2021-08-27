@@ -14,8 +14,8 @@ import duke.command.Command;
  */
 public class Duke {
     private TaskList tasks;
-    private Ui ui;
-    private Storage storage;
+    private final Ui ui;
+    private final Storage storage;
 
     /**
      * Constructs a {@code Duke} object.
@@ -29,6 +29,10 @@ public class Duke {
             ui.showError(e.getMessage());
             tasks = new TaskList(new ArrayList<>());
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
     }
 
     /**
@@ -50,9 +54,5 @@ public class Duke {
             }
         }
         scanner.close();
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }

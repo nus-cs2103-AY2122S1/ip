@@ -22,7 +22,7 @@ public abstract class Command {
     }
 
     /**
-     * Constucts a new {@code Command} class with the specified args.
+     * Constructs a new {@code Command} class with the specified args.
      * 
      * @param args An array of {@code String} required to construct a {@code Task}
      *             object.

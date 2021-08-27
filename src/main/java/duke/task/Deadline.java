@@ -12,10 +12,10 @@ import duke.DukeException;
  * @author Eizabeth Chow
  */
 public class Deadline extends Task {
-    // End date of the Deadline object
-    private LocalDateTime endDate;
     private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy H:mm");
     private final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
+    // End date of the Deadline object
+    private final LocalDateTime endDate;
 
     /**
      * Constructs a {@code Deadline} object with the given title and end date.

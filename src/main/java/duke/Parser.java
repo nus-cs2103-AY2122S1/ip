@@ -29,22 +29,22 @@ public class Parser {
         String parsedMessage = input.replace(inputCommand, "").trim();
 
         switch (inputCommand) {
-            case "bye":
-                return parseByeInput();
-            case "deadline":
-                return parseDeadlineInput(parsedMessage);
-            case "delete":
-                return parseDeleteInput(parsedMessage);
-            case "done":
-                return parseDoneInput(parsedMessage);
-            case "event":
-                return parseEventInput(parsedMessage);
-            case "list":
-                return parseListInput();
-            case "todo":
-                return parseTodoInput(parsedMessage);
-            default:
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+        case "bye":
+            return parseByeInput();
+        case "deadline":
+            return parseDeadlineInput(parsedMessage);
+        case "delete":
+            return parseDeleteInput(parsedMessage);
+        case "done":
+            return parseDoneInput(parsedMessage);
+        case "event":
+            return parseEventInput(parsedMessage);
+        case "list":
+            return parseListInput();
+        case "todo":
+            return parseTodoInput(parsedMessage);
+        default:
+            throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
