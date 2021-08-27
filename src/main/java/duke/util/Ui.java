@@ -4,6 +4,9 @@ import duke.taskTypes.Task;
 
 import java.util.Scanner;
 
+/**
+ * Interacts with the user through input and output methods
+ */
 public class Ui {
 
     private int emoticonState;
@@ -12,7 +15,11 @@ public class Ui {
     private int currentBubbleLimit;
     private final Scanner scan;
 
-
+    /**
+     * Basic Constructor
+     *
+     * @param speechLimit
+     */
     public Ui(int speechLimit) {
 
         this.emoticonState = 0;
@@ -22,23 +29,41 @@ public class Ui {
         this.scan = new Scanner(System.in);
     }
 
+    /**
+     * Takes in the user input
+     *
+     * @return String User input
+     */
     public String userInput() {
         System.out.print("Say something to Duke: ");
         return scan.nextLine();
     }
 
+    /**
+     * Formats the welcome message
+     */
     public void welcome() {
         String[] dukeWelcome = {"Hello! I'm Duke!" , "What can I do for you"};
         currentBubbleLimit = baseBubbleLimit;
         speak(dukeWelcome);
     }
 
+    /**
+     * Formats list message
+     *
+     * @param msg
+     * @param taskList
+     */
     public void listMsg(String[] msg, TaskList taskList) {
         currentBubbleLimit = taskList.listMaxLen();
         speak(msg);
     }
 
-
+    /**
+     * Formats done message
+     *
+     * @param task
+     */
     public void doneMsg(Task task) {
         String msg = task.toString();
         String[] dukeAdded = {"Nice! I've marked this task as done:", msg};
@@ -46,7 +71,12 @@ public class Ui {
         speak(dukeAdded);
     }
 
-
+    /**
+     * Formats task added message
+     *
+     * @param task
+     * @param taskList
+     */
     public void taskAdded(Task task, TaskList taskList) {
         String msg = task.toString();
         int task_left = taskList.taskLeft();
@@ -55,6 +85,12 @@ public class Ui {
         speak(dukeAddedTask);
     }
 
+    /**
+     * Formats task deleted message
+     *
+     * @param task
+     * @param taskList
+     */
     public void taskDeleted(Task task, TaskList taskList) {
         String msg = task.toString();
         int taskLeft = taskList.taskLeft();
@@ -65,7 +101,8 @@ public class Ui {
     }
 
     /**
-     * takes in a string and formats it to the error found msg
+     * Formats error found msg
+     *
      * @param error_msg string that contains details of the error
      */
     public void error(String error_msg) {
@@ -75,7 +112,7 @@ public class Ui {
     }
 
     /**
-     * Goodbye msg ( to be called when user inputs "bye"
+     * Formats Goodbye msg
      */
     public void goodbye() {
         currentBubbleLimit = baseBubbleLimit;
@@ -84,7 +121,8 @@ public class Ui {
 
 
     /**
-     * Duke duke.util.Ui Template
+     * Outputs message in Duke Template msg
+     *
      * @param in takes in a string array and cycle through and printing msg
      */
     public void speak(String[] in) {
@@ -106,7 +144,8 @@ public class Ui {
     }
 
     /**
-     * Duke speech template
+     * Outputs Message in Duke Template
+     *
      * @param in takes in a string and coverts it to a string array to be used on speak(String[])
      */
     public void speak(String in) {
@@ -117,6 +156,7 @@ public class Ui {
 
     /**
      * Formats the msg to be printed so it fits within duke's speech bubble
+     *
      * @param input input to be formatted
      * @param longest maximum spaces
      * @return String that is reformated to fit duke's speech bubble
@@ -128,6 +168,7 @@ public class Ui {
 
     /**
      * Adds a simple emoticon to add variety/ personality to the response printed (basically program glitter)
+     *
      * @return String containing the emoticon
      */
     private String emoticonRand() {
@@ -136,6 +177,4 @@ public class Ui {
         emoticonState = (emoticonState+1) % emoticon.length;
         return emoticon[state];
     }
-
-
 }

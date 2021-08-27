@@ -9,9 +9,14 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * Deadline Task class that sets description of task, date, time
+ */
 public class Deadline extends Task{
+
     /**
      * Takes in a string and splits msg into based on /by pattern. Set the eventType and time of the instance
+     *
      * @param input string from the user
      */
     public Deadline(String input, boolean isDone) throws DukeException {
@@ -36,7 +41,8 @@ public class Deadline extends Task{
     }
 
     /**
-     * Returns a string that describes the instance
+     * Returns a string that describes the instance for display
+     *
      * @return String containing details of the task
      */
     @Override
@@ -44,6 +50,11 @@ public class Deadline extends Task{
         return super.toString() + " (by: " + super.getFormatDate() + ")";
     }
 
+    /**
+     * Returns a string that describes the instance for saving
+     *
+     * @return String containing details of the task
+     */
     @Override
     public String saveTask() {
         return super.saveTask() + " /by " + super.getDate();
