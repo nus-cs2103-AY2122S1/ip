@@ -18,8 +18,7 @@ public class Parser {
     private Ui ui;
 
     public enum Keyword {
-        //TODO ALLCAPS
-        todo, list, deadline, event, done, delete
+        TODO, LIST, DEADLINE, EVENT, DONE, DELETE
     }
 
     public Parser(TaskList tasks, Ui ui) {
@@ -39,15 +38,15 @@ public class Parser {
         Task task;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         switch (keyword) {
-            case list:
+            case LIST:
                 this.tasks.iterList();
                 break;
-            case todo:
+            case TODO:
                 task = new Todo(cmd.substring(5));
                 this.tasks.add(task);
                 ui.addTaskMsg(task);
                 break;
-            case deadline:
+            case DEADLINE:
                 middle = Arrays.asList(tokens).indexOf("/by");
                 if (middle == -1) {
                     throw new DukeException("Missing deadline.");
@@ -63,7 +62,7 @@ public class Parser {
                     System.out.println("Please enter a date in the following format: dd/MM/yyyy HHmm");
                 }
                 break;
-            case event:
+            case EVENT:
                 middle = Arrays.asList(tokens).indexOf("/at");
                 if (middle == -1) {
                     throw new DukeException("Missing time of event.");
@@ -79,13 +78,13 @@ public class Parser {
                     System.out.println("Please enter a date in the following format: dd/MM/yyyy HHmm");
                 }
                 break;
-            case done:
+            case DONE:
                 index = Integer.parseInt(tokens[1]) - 1;
                 task = this.tasks.get(index);
                 this.tasks.complete(index);
                 ui.completeTaskMsg(task);
                 break;
-            case delete:
+            case DELETE:
                 index = Integer.parseInt(tokens[1]) - 1;
                 task = this.tasks.get(index);
                 this.tasks.delete(index);
@@ -98,11 +97,11 @@ public class Parser {
         Keyword keyword;
         try {
             keyword = Keyword.valueOf(cmd[0]);
-            if ((keyword.equals(Keyword.todo) || keyword.equals(Keyword.deadline) || keyword.equals(Keyword.event))
+            if ((keyword.equals(Keyword.TODO) || keyword.equals(Keyword.DEADLINE) || keyword.equals(Keyword.EVENT))
                     && cmd.length < 2) {
                 throw new DukeException(String.format("☹ OOPS!!! The description of a %s cannot be empty.", keyword));
             }
-            if ((keyword.equals(Keyword.done) || keyword.equals(Keyword.delete)) && (cmd.length < 2)) {
+            if ((keyword.equals(Keyword.DONE) || keyword.equals(Keyword.DELETE)) && (cmd.length < 2)) {
                 throw new DukeException("☹ OOPS!!! Missing task number");
             }
         } catch (IllegalArgumentException e) {
