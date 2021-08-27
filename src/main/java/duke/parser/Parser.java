@@ -43,6 +43,9 @@ public class Parser {
         case "date" : {
             return new FindCommand(TaskType.FIND_BY_DATE, rest);
         }
+        case "find": {
+            return new FindCommand(TaskType.FIND, rest);
+        }
         case "delete": {
             return new DeleteCommand(rest);
         }

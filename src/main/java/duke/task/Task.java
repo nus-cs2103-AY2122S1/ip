@@ -24,6 +24,10 @@ public class Task {
         return false;
     }
 
+    public boolean compareKeyword(String keyword) {
+        return this.title.contains(keyword);
+    }
+
     @Override
     public String toString() {
         String complete = this.completed ? "[X]" : "[ ]";

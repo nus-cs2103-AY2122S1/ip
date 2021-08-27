@@ -1,4 +1,7 @@
 package duke.task;
+import duke.DukeException;
+
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -41,9 +44,18 @@ public class TaskList {
         return x;
     }
 
-    public Task[] tasksOnDate(String date) {
-        LocalDate search = LocalDate.parse(date.trim(), DateTimeFormatter.ofPattern("d/MM/yyyy"));
-        Task[] filtered = this.list.stream().filter(task -> task.compareDate(search)).toArray(Task[]::new);
+    public Task[] tasksOnDate(String date) throws DukeException {
+        try {
+            LocalDate search = LocalDate.parse(date.trim(), DateTimeFormatter.ofPattern("d/MM/yyyy"));
+            Task[] filtered = this.list.stream().filter(task -> task.compareDate(search)).toArray(Task[]::new);
+            return filtered;
+        } catch (DateTimeParseException e) {
+            throw new DukeException("☹ OOPS!!! Invalid date");
+        }
+    }
+
+    public Task[] findByKeyword(String search) {
+        Task[] filtered = this.list.stream().filter(task -> task.compareKeyword(search)).toArray(Task[]::new);
         return filtered;
     }
 
