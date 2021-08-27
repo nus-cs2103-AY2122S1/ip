@@ -6,6 +6,7 @@ public class Parser {
         if (input.equals("list")) return new ListCommand();
         if (input.startsWith("done ")) return parseDone(input);
         if (input.startsWith("delete ")) return parseDelete(input);
+        if (input.startsWith("find ")) return parseFind(input);
         return comprehendTask(input);
     }
 
@@ -48,5 +49,9 @@ public class Parser {
         }
 
         return new AddCommand(newTask);
+    }
+
+    private static FindCommand parseFind(String input) {
+        return new FindCommand(input.substring(5));
     }
 }

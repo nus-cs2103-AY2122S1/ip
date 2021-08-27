@@ -1,7 +1,10 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TaskList {
     private ArrayList<Task> list;
@@ -33,5 +36,19 @@ public class TaskList {
 
     public Task get(int index) {
         return list.get(index);
+    }
+
+    /**
+     * Get all tasks that contains the given string.
+     *
+     * @param query the string to be matched.
+     * @return ArrayList of tasks that matches the query.
+     */
+    public ArrayList<Task> findMatches(String query) {
+        List<Task> tasks = this.list.stream()
+                .filter(task -> task.description.contains(query))
+                .collect(Collectors.toList());
+
+        return new ArrayList<>(tasks);
     }
 }

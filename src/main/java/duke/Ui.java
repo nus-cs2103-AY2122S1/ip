@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -57,5 +58,12 @@ public class Ui {
 
     public void closeScanner() {
         this.scanner.close();
+    }
+
+    public void displayMatches(ArrayList<Task> taskList) {
+        System.out.println("Here are the matching tasks in your list:");
+        IntStream.range(0, taskList.size()).forEach(i -> {
+            System.out.println((i + 1) + "." + taskList.get(i));
+        });
     }
 }
