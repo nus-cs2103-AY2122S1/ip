@@ -1,3 +1,5 @@
+package tasks;
+
 public abstract class Task {
     private static final String DONE_MSG = "Well done.";
     private static final String NEW_TASK_MSG = "New task added:";

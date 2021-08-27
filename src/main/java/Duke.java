@@ -1,4 +1,12 @@
-    public class Duke {
+import commands.Command;
+
+import exceptions.InvalidInputException;
+import tasks.TaskList;
+import utils.Parser;
+import utils.Storage;
+import utils.Ui;
+
+public class Duke {
 
     private Storage storage;
     private TaskList taskList;
