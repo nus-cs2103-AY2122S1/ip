@@ -16,6 +16,7 @@ public class Parser {
         DEADLINE,
         TODO,
         EVENT,
+        FIND,
         INVALID,
         BYE
     }
@@ -56,6 +57,8 @@ public class Parser {
             throw new InvalidCommandException();
         } else if (command == ValidCommand.BYE) {
             return new ByeCommand();
+        } else if (command == ValidCommand.FIND) {
+        return new FindCommand(userInput);
         }
         return null;
     }

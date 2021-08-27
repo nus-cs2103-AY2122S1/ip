@@ -35,6 +35,26 @@ public class TaskList {
         return this.taskList.remove(index);
     }
 
+    public String findTaskByKeyWord(String keyWord) {
+        boolean canFind = false;
+        String description = "";
+        for (int i = 0; i < this.taskList.size(); i += 1) {
+            String taskDescription = this.taskList.get(i).getDescription();
+            if (taskDescription.contains(keyWord)) {
+                description += (i + 1) + "." + this.taskList.get(i) + "\n";
+                canFind = true;
+            }
+        }
+
+        if (!canFind) {
+            return "No tasks found with this keyword";
+        }
+
+        //To remove last new line
+        description = description.substring(0, description.length() - 1);
+        return description;
+    }
+
     public Task getTask(int index) {
         return this.taskList.get(index);
     }

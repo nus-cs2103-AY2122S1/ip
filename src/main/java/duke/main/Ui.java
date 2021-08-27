@@ -40,6 +40,11 @@ public class Ui {
         System.out.println("───────────────────────────");
     }
 
+    public void showFoundTask(String foundTask) {
+        System.out.println("Here are the matching tasks in your list");
+        System.out.println(foundTask);
+    }
+
     public String readCommand() {
         return this.sc.nextLine();
     }
