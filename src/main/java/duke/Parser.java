@@ -147,6 +147,10 @@ public class Parser {
                     e.printStackTrace();
                 }
 
+            } else if (command.contains("find")) {
+                String searchQuery=command.substring(5);
+                ui.showSearchResults(TaskList.lines,searchQuery);
+
             } else if (command.equals("WIPE")) {
                 System.out.println("ARE YOU SURE? SAY Y IF YOU ARE AND LITERALLY ANYTHING ELSE IF YOU AREN'T");
                 if (sc.nextLine().equals("Y")) {

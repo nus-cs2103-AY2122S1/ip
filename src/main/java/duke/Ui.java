@@ -109,7 +109,7 @@ public class Ui {
      * Displays the error message for when the user adds a task with no name.
      */
     void showNoNameError() {
-        System.err.println("I NEED A NAME SIR");
+        System.err.println("I NEED A NAME SIR!!!");
     }
 
     /**
@@ -155,5 +155,21 @@ public class Ui {
      */
     void showBadDateError() {
         System.err.println("hello sir I only understand YYYY-MM-DD format");
+    }
+
+    /**
+     * Displays entries in the task list that contain the search query.
+     * @param list The list of strings representing tasks.
+     * @param searchQuery The search query entered by the user.
+     */
+    void showSearchResults(List<String> list, String searchQuery) {
+        int c=1;
+        System.out.println("Here are the search results for \"" + searchQuery + "\":" );
+        for(String task : list){
+            if (task.contains(searchQuery)){
+                System.out.println(c + ". " + task);
+            }
+            c++;
+        }
     }
 }
