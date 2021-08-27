@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.Map;
+
 import duke.Storage;
 import duke.Ui;
 import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
-
-import java.util.Map;
 
 @FunctionalInterface
 interface DukeCommandAction {

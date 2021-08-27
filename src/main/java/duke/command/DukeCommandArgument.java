@@ -23,6 +23,7 @@ public class DukeCommandArgument {
 
     /**
      * Returns the argument formatted for use in the {@link DukeCommand#HELP} command.
+     *
      * @return the formatted string
      */
     public String toDetailedString() {
@@ -32,6 +33,7 @@ public class DukeCommandArgument {
     /**
      * Asserts that the argument type can be fulfilled by the given argument value. Otherwise, throws an
      * {@link InvalidCommandException}
+     *
      * @param argValue the argument value
      * @throws InvalidCommandException if the argument value is incompatible with the argument type
      */

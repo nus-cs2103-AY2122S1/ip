@@ -4,7 +4,7 @@ import duke.exception.TaskParseException;
 
 public abstract class DukeTask {
     public final String name;
-    public boolean done;
+    protected boolean isDone;
 
     public DukeTask(String name) {
         this(name, false);
@@ -12,30 +12,32 @@ public abstract class DukeTask {
 
     DukeTask(String name, boolean isDone) {
         this.name = name;
-        this.done = isDone;
+        this.isDone = isDone;
     }
 
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     public void markAsDone() {
-        done = true;
+        isDone = true;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", done ? "X" : " ", name);
+        return String.format("[%s] %s", isDone ? "X" : " ", name);
     }
 
     /**
      * Returns the task as a serialized string. Used by {@link duke.Storage} to store tasks.
+     *
      * @return a serialized string representing the task
      */
     public abstract String toSerializedString();
 
     /**
      * Creates a task from the given string. Used by {@link duke.Storage} to read stored tasks.
+     *
      * @param str the serialized task
      * @return the task
      * @throws TaskParseException if the given string is in the wrong format

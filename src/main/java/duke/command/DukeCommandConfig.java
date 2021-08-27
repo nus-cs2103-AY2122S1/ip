@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.exception.InvalidCommandException;
-
 import java.util.Map;
+
+import duke.exception.InvalidCommandException;
 
 class DukeCommandConfig {
     static final DukeCommandConfig NO_ARGUMENTS = new DukeCommandConfig(DukeCommandArgument.NONE, Map.of());
@@ -17,6 +17,7 @@ class DukeCommandConfig {
 
     /**
      * Returns the positional argument.
+     *
      * @return the positional argument
      */
     public DukeCommandArgument getPositionalArg() {
@@ -25,6 +26,7 @@ class DukeCommandConfig {
 
     /**
      * Returns the named arguments that were accepted for this command.
+     *
      * @return the named arguments that were accepted for this command
      */
     public Map<String, DukeCommandArgument> getAcceptedNamedArgs() {
@@ -33,7 +35,8 @@ class DukeCommandConfig {
 
     /**
      * Asserts that the given positional and named arguments are compatible with the configuration.
-     * @param arg the positional argument
+     *
+     * @param arg       the positional argument
      * @param namedArgs the named arguments
      * @throws InvalidCommandException if given arguments are incompatible
      */

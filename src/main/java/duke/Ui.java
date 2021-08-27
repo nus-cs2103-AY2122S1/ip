@@ -1,18 +1,18 @@
 package duke;
 
-import duke.command.DukeCommand;
-import duke.exception.InvalidCommandException;
-import duke.task.DukeDeadlineTask;
-import duke.task.DukeEvent;
-import duke.task.DukeTask;
-import duke.task.TaskList;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+
+import duke.command.DukeCommand;
+import duke.exception.InvalidCommandException;
+import duke.task.DukeDeadlineTask;
+import duke.task.DukeEvent;
+import duke.task.DukeTask;
+import duke.task.TaskList;
 
 /**
  * Represents the UI interactions in the program.
@@ -27,6 +27,11 @@ public class Ui {
     private final PrintStream outputStream;
     private boolean exit;
 
+    /**
+     * Creates a new user interface with the given input and output streams.
+     * @param inputStream The stream containing user command input
+     * @param outputStream The stream to output Duke's response to
+     */
     public Ui(InputStream inputStream, PrintStream outputStream) {
         this.scanner = new Scanner(inputStream);
         this.outputStream = outputStream;
@@ -35,6 +40,7 @@ public class Ui {
 
     /**
      * Prints a prompt for the next command, and returns the submitted user input.
+     *
      * @return the raw command input by the user
      */
     public String nextCommand() {
@@ -44,6 +50,7 @@ public class Ui {
 
     /**
      * Outputs the given string with a newline.
+     *
      * @param output the string to output
      */
     public void outputLine(String output) {
@@ -84,12 +91,17 @@ public class Ui {
 
     /**
      * Returns if Duke should continue accepting commands.
+     *
      * @return if Duke should continue accepting commands.
      */
     public boolean shouldContinue() {
         return !exit;
     }
 
+    /**
+     * Prints the given task list to the output stream in a neat format.
+     * @param taskList The task list to print
+     */
     public void printTaskList(TaskList taskList) {
         taskList.getTasks().stream()
                 .collect(Collectors.groupingBy(t -> {
@@ -103,7 +115,7 @@ public class Ui {
                 }))
                 .forEach((String group, List<DukeTask> tasks) -> {
                     outputLine(group);
-                    for (DukeTask task: tasks) {
+                    for (DukeTask task : tasks) {
                         int index = taskList.indexOf(task);
                         outputLine(String.format("%d. %s", index + 1, task));
                     }

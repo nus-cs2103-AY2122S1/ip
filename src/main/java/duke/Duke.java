@@ -12,11 +12,9 @@ public class Duke {
     private final Storage storage;
     private final Parser parser;
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
-    }
-
+    /**
+     * Duke constructor
+     */
     public Duke() {
         this.ui = new Ui(System.in, System.out);
         this.storage = new Storage(SAVE_FILE_LOCATION);
@@ -29,6 +27,15 @@ public class Duke {
         }
         this.taskList = taskList;
         this.parser = new Parser();
+    }
+
+    /**
+     * Runs Duke.
+     * @param args The arguments passed in from the command line
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.start();
     }
 
     /**

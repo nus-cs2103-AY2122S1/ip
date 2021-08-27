@@ -3,11 +3,22 @@ package duke.task;
 public class DukeEvent extends DukeTask {
     private final DukeDate date;
 
+    /**
+     * Creates an event with a name and a date. The event is marked as not done.
+     * @param name The name of the event
+     * @param date The date of the event
+     */
     public DukeEvent(String name, String date) {
         super(name);
         this.date = DukeDate.of(date);
     }
 
+    /**
+     * Creates an event with a name, date and whether or not it is marked as done.
+     * @param name THe name of the event
+     * @param isDone If the event is marked as done
+     * @param date The date of the event
+     */
     public DukeEvent(String name, boolean isDone, String date) {
         super(name, isDone);
         this.date = DukeDate.of(date);

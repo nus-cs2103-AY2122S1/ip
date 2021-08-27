@@ -1,11 +1,11 @@
 package duke;
 
-import duke.command.DukeCommand;
-import duke.command.DukeCommandWithArgs;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import duke.command.DukeCommand;
+import duke.command.DukeCommandWithArgs;
 
 /**
  * Parses the raw commands (in string form) to objects representing them.
@@ -13,6 +13,7 @@ import java.util.Optional;
 public class Parser {
     /**
      * Parses the command given as a raw text input, and returns a {@link DukeCommandWithArgs} representing it
+     *
      * @param command the command as a string
      * @return a {@link DukeCommandWithArgs} representing the full command
      */
