@@ -6,6 +6,30 @@ package util.tasks;
 
 public abstract class Task {
 
+    protected static final String DELIMITER = "/ghx-124";
+    protected static final String DONE = "DONETASKe123111";
+    protected static final String NOTDONE = "NOTDONETASK454e-e";
+    private static final String NOT_FINISHED = "[ ]";
+    private static final String FINISHED = "[X]";
+    protected String name;
+    private boolean isDone;
+
+    protected enum Label {
+        T, E, D;
+    }
+
+
+    /**
+     * Constructor of task.
+     *
+     * @param s Name of the task.
+     */
+    protected Task(String s) {
+        this.name = s;
+        this.isDone = false;
+    }
+
+
     /**
      * The method to check if the Task is
      * dated or not.
@@ -27,29 +51,10 @@ public abstract class Task {
 
 
 
-    protected static enum Label {
-        T, E, D;
-    }
-
-    protected String name;
-    private boolean isDone;
-    //what is a better choice for a delimiter
-    protected static String DELIMITER = "/ghx-124";
-    protected static String DONE = "DONETASKe123111";
-    protected static String NOTDONE = "NOTDONETASK454e-e";
-    private static String notDone = "[ ]";
-    private static String done = "[X]";
 
 
-    /**
-     * Constructor of task.
-     *
-     * @param s Name of the task.
-     */
-    protected Task(String s) {
-        this.name = s;
-        this.isDone = false;
-    }
+
+
 
 
 
@@ -72,18 +77,17 @@ public abstract class Task {
         boolean done = ssplit[1].equals(Task.DONE);
         Task t;
         switch (currentType) {
-            //For todo
-            case T:
-                t = ToDo.of(ssplit[2]);
-                break;
-            case E:
-                t = Event.of(ssplit[2], ssplit[3]);
-                break;
-            case D:
-                t = Deadline.of(ssplit[2], ssplit[3]);
-                break;
-            default:
-                throw new DukeException("Not a valid text document");
+        case T:
+            t = ToDo.of(ssplit[2]);
+            break;
+        case E:
+            t = Event.of(ssplit[2], ssplit[3]);
+            break;
+        case D:
+            t = Deadline.of(ssplit[2], ssplit[3]);
+            break;
+        default:
+            throw new DukeException("Not a valid text document");
         }
         if (done) {
             t.done();
@@ -121,8 +125,8 @@ public abstract class Task {
     @Override
     public String toString() {
         String checkBox = this.isDone
-                ? Task.done
-                : Task.notDone;
+                ? Task.FINISHED
+                : Task.NOT_FINISHED;
         return checkBox + " " + this.name;
     }
 

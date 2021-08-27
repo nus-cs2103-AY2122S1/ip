@@ -1,4 +1,5 @@
-
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 import util.commands.CommandList;
 import util.commands.ExitCommand;
@@ -10,9 +11,6 @@ import util.tasks.DukeException;
 import util.tasks.TaskList;
 import util.ui.Ui;
 
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
-
 
 /**
  * The class representing the Duke.
@@ -20,14 +18,14 @@ import java.time.format.DateTimeParseException;
  *
  */
 public class Duke {
+    private static final String saveDirectory = "data/";
+    private static final String saveFilePath = "save.txt";
+    private static final String tempFilePath = "temp.txt";
 
     private final Parser parser;
     private final Ui ui = new Ui();
     private final Storage stg;
     private final TaskList tasks;
-    private static final String saveDirectory = "data/";
-    private static final String saveFilePath = "save.txt";
-    private static final String tempFilePath = "temp.txt";
     private final DateTaskTable dateTaskTable;
 
 
@@ -35,15 +33,15 @@ public class Duke {
      * Constructor for duke.
      *
      * @param filename The file to save at.
-     * @param tempfilepath The tempfile name to use.
+     * @param tempFilePath The tempfile name to use.
      */
-    public Duke(String filename, String tempfilepath) {
+    public Duke(String filename, String tempFilePath) {
         this.tasks = new TaskList();
         this.dateTaskTable = new DateTaskTable();
         this.parser = new Parser(this.ui, this.tasks, this.dateTaskTable);
-        this.stg = new Storage(saveDirectory + filename
-                , saveDirectory + tempfilepath
-                , this.dateTaskTable);
+        this.stg = new Storage(saveDirectory + filename,
+                saveDirectory + tempFilePath,
+                this.dateTaskTable);
         try {
             this.tasks.addAll(this.stg.read());
         } catch (IOException | DukeException ex) {
@@ -67,7 +65,7 @@ public class Duke {
         //via greetings
         ui.print(Messages.GREETINGS);
 
-        while(!ExitCommand.isExit) {
+        while (!ExitCommand.isExit()) {
             String inpt = ui.getInput();
             try {
                 CommandList cmds = parser.inputsParser(inpt);
@@ -86,7 +84,11 @@ public class Duke {
     }
 
 
-
+    /**
+     * The main function of Duke.
+     *
+     * @param args The arguments for duke.
+     */
     public static void main(String[] args) {
         Duke d = new Duke(saveFilePath, tempFilePath);
         d.run();

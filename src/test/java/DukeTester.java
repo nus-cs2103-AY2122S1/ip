@@ -1,21 +1,30 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
+
 import util.commands.DelCommand;
 import util.commands.ExitCommand;
 import util.parser.Parser;
 import util.tasks.DateTaskTable;
+import util.tasks.DatedTask;
 import util.tasks.Deadline;
 import util.tasks.DukeException;
-import util.tasks.DatedTask;
 import util.tasks.TaskList;
 import util.ui.Ui;
 
-import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 
 
 public class DukeTester {
 
+    /**
+     * Function to test the dated task table.
+     *
+     */
     @Test
     public void testDatedTaskTable() {
         try {
@@ -32,7 +41,7 @@ public class DukeTester {
 
 
             ArrayList<DatedTask> ls = t.get(Parser.dateParse("2020-08-20"));
-            assertEquals( 3, ls.size());
+            assertEquals(3, ls.size());
             for (int i = 0; i < ls.size(); i++) {
                 assertEquals(arr[i], t.get(Parser.dateParse("2020-08-20")).get(i));
             }
@@ -42,6 +51,11 @@ public class DukeTester {
         }
     }
 
+
+    /**
+     * Method to test the delete command.
+     *
+     */
     @Test
     public void testDeleteCommand() {
         try {
@@ -62,6 +76,10 @@ public class DukeTester {
         }
     }
 
+    /**
+     * A method to test the parser.
+     *
+     */
     @Test
     public void testParser() {
         DateTaskTable t = new DateTaskTable();
@@ -71,9 +89,9 @@ public class DukeTester {
             p.inputsParser("deadline fly a car /by 2020-08-01").executeAll();
             p.inputsParser("todo Build the empire states building").executeAll();
             assertEquals(2, tasklist.size());
-            assertEquals( t.get(Parser.dateParse("2020-08-01")).get(0), tasklist.get(0));
+            assertEquals(t.get(Parser.dateParse("2020-08-01")).get(0), tasklist.get(0));
             p.inputsParser("bye").executeAll();
-            assertEquals(true, ExitCommand.isExit);
+            assertEquals(true, ExitCommand.isExit());
 
 
         } catch (DukeException e) {

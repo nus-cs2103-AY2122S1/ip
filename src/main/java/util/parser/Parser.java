@@ -1,27 +1,26 @@
 package util.parser;
 
-import util.commands.AddCommand;
-import util.commands.DelCommand;
-import util.commands.DoneCommand;
-import util.commands.ExitCommand;
-import util.commands.CommandList;
-import util.commons.Messages;
-
-import util.tasks.Task;
-import util.tasks.DateTaskTable;
-import util.tasks.DukeException;
-import util.tasks.TaskList;
-import util.tasks.DatedTask;
-import util.tasks.Deadline;
-import util.tasks.Event;
-import util.tasks.ToDo;
-
-
-import util.ui.Ui;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import util.commands.AddCommand;
+import util.commands.CommandList;
+import util.commands.DelCommand;
+import util.commands.DoneCommand;
+import util.commands.ExitCommand;
+import util.commons.Messages;
+import util.tasks.DateTaskTable;
+import util.tasks.DatedTask;
+import util.tasks.Deadline;
+import util.tasks.DukeException;
+import util.tasks.Event;
+import util.tasks.Task;
+import util.tasks.TaskList;
+import util.tasks.ToDo;
+import util.ui.Ui;
+
+
 
 /**
  * The class representing the parser that interprets the input.
@@ -110,7 +109,9 @@ public class Parser {
                 break;
             case DONE:
                 int i = Integer.parseInt(description) - 1;
-                if (i > taskList.size() || i < 0) throw new DukeException(Messages.INVALID_DONE_INPUT);
+                if (i > taskList.size() || i < 0) {
+                    throw new DukeException(Messages.INVALID_DONE_INPUT);
+                }
                 Task b = taskList.get(i);
                 cmds.add(new DoneCommand(b, this.ui));
                 break;
@@ -119,7 +120,9 @@ public class Parser {
                 //to implement such a filter in tasklist
                 ArrayList<DatedTask> ls = dateTaskList.get(dateParse(description.trim()));
                 cmds.add(() -> {
-                    if (ls != null) ui.list(ls);
+                    if (ls != null) {
+                        ui.list(ls);
+                    }
                 });
                 break;
             case DELETE:

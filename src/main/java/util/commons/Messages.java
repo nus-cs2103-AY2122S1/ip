@@ -17,21 +17,21 @@ public class Messages {
 
     //Messages that have to be formatted to include tasks
     public static final String TASK_ADDED =
-            "Roger! I have added this task.\n\t" +
-            "%s\n\t" +
-            "Now you have %d tasks in the list.\n\t";
+            "Roger! I have added this task.\n\t"
+                    + "%s\n\t"
+                    + "Now you have %d tasks in the list.\n\t";
     public static final String TASK_DELETED =
-            "The following task has been removed\n\t" +
-            "%s\n\t" +
-            "Now you have %d tasks remaining";
+            "The following task has been removed\n\t"
+                    + "%s\n\t"
+                    + "Now you have %d tasks remaining";
     public static final String TASK_NO_DESCRIPTOR_ERROR = "☹ OOPS!!! The description of a %s cannot be empty.";
 
     public static final String TASK_NOT_UNDERSTOOD_ERROR = "☹ OOPS!!! I do no know what to do";
 
     public static final String TASK_ALREADY_ADDED = "Task already added: %s";
     public static final String TASK_COMPLETE =
-            "Nice, I've marked this task as done\n\t" +
-                    "%s";
+            "Nice, I've marked this task as done\n\t"
+                    + "%s";
 
 
     //Error messages

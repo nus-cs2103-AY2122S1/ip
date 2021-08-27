@@ -1,11 +1,13 @@
 package util.tasks;
 
-import util.parser.Parser;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import util.parser.Parser;
+
+
 
 public abstract class DatedTask extends Task {
     protected LocalDate lDate;
@@ -64,7 +66,9 @@ public abstract class DatedTask extends Task {
      */
     public void removeFromTable(DateTaskTable table) {
         ArrayList<DatedTask> ls = table.get(this.lDate);
-        if (ls != null) ls.remove(this);
+        if (ls != null) {
+            ls.remove(this);
+        }
 
     }
 

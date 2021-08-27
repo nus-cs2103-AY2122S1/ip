@@ -8,16 +8,23 @@ package util.commands;
 public class ExitCommand implements Command {
 
 
-    public static boolean isExit = false;
+    private static boolean isClosed = false;
 
     /**
      * The constructor of the ExitCommand.
      *
      */
-    public ExitCommand() {}
+    public ExitCommand() {
+    }
 
     @Override
-    public void execute() {this.isExit = true;}
+    public void execute() {
+        this.isClosed = true;
+    }
+
+    public static boolean isExit() {
+        return ExitCommand.isClosed;
+    }
 
 
 }

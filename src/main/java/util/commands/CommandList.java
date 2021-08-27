@@ -1,8 +1,10 @@
 package util.commands;
 
+import java.util.ArrayList;
+
 import util.tasks.DukeException;
 
-import java.util.ArrayList;
+
 
 /**
  * The class representing a list of commands.

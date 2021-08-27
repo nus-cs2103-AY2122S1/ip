@@ -1,11 +1,13 @@
 package util.ui;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import util.commons.Messages;
 import util.tasks.DukeException;
 import util.tasks.Task;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+
 
 /**
  * Deals with the interactions of the user.
@@ -58,7 +60,9 @@ public class Ui {
      */
     public void list(ArrayList<? extends Task> ls) throws DukeException {
         String output = "";
-        if (ls.size() == 0) return;
+        if (ls.size() == 0) {
+            return;
+        }
         output += "1." + ls.get(0);
         for (int i = 1; i < ls.size(); i++) {
             int indi = i + 1;

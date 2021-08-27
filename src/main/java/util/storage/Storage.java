@@ -1,16 +1,19 @@
 package util.storage;
 
-import util.tasks.Task;
-import util.tasks.DateTaskTable;
-import util.tasks.DukeException;
-import util.tasks.TaskList;
-import util.tasks.DatedTask;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import util.tasks.DateTaskTable;
+import util.tasks.DatedTask;
+import util.tasks.DukeException;
+import util.tasks.Task;
+import util.tasks.TaskList;
+
+
+
 
 /**
  * The storage class is the class representing the stored
@@ -49,7 +52,9 @@ public class Storage {
     public void write(ArrayList<? extends Task> inputs) throws IOException {
 
         File dir = new File("./data");
-        if (!dir.exists()) dir.mkdirs();
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         //creating the files
         File saveFile = new File(saveFilePath);
         File tempfile = new File(tempFilePath);
@@ -99,7 +104,9 @@ public class Storage {
         TaskList inputs = new TaskList();
         File f = new File(saveFilePath);
         //when the file does not exist, returns an empty arraylist.
-        if (!f.exists()) return inputs;
+        if (!f.exists()) {
+            return inputs;
+        }
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
             Task t = Task.decode(sc.nextLine());
