@@ -1,4 +1,5 @@
 package skeltal;
+
 import java.util.Scanner;
 
 /**

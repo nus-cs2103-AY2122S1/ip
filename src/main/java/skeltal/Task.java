@@ -1,4 +1,5 @@
 package skeltal;
+
 public class Task {
 
     private boolean completed;
