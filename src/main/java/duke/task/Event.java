@@ -37,6 +37,6 @@ public class Event extends Task {
      */
     public String toStorageString() {
         return ("E|" + super.getStatusNumber() + "|" + super.getDescription()
-                + "|" + this.at.format(displayFormatter));
+                + "|" + this.at.format(formatter));
     }
 }

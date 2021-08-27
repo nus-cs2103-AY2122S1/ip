@@ -97,6 +97,12 @@ public class Parser {
             } catch (NumberFormatException nfe) {
                 throw new DukeException("Please follow command 'delete' with an integer!");
             }
+        case ("find"):
+            if (!description.equals("")) {
+                return new FindCommand(description);
+            } else {
+                throw new DukeException("Please indicate your search words after 'find'");
+            }
         case ("bye"):
             description += timeString;
             if (description.equals("")) {
