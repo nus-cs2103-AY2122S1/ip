@@ -7,14 +7,14 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static String LOGO = "      ____        _        \n"
+    public static final String LOGO = "      ____        _        \n"
             + "     |  _ \\ _   _| | _____ \n"
             + "     | | | | | | | |/ / _ \\\n"
             + "     | |_| | |_| |   <  __/\n"
             + "     |____/ \\__,_|_|\\_\\___|\n";
-    public static String DIVIDER = "    ____________________________________________________________";
-    public static String SPACE = "     ";
-    public static String INVALID_INPUT = SPACE + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static final String DIVIDER = "    ____________________________________________________________";
+    public static final String SPACE = "     ";
+    public static final String INVALID_INPUT = SPACE + "OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private final Scanner scanner;
 

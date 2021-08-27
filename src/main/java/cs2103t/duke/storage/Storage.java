@@ -1,9 +1,5 @@
 package cs2103t.duke.storage;
 
-import cs2103t.duke.exception.DukeException;
-import cs2103t.duke.task.*;
-import cs2103t.duke.ui.Ui;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,6 +8,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
+
+import cs2103t.duke.exception.DukeException;
+import cs2103t.duke.task.Deadline;
+import cs2103t.duke.task.Event;
+import cs2103t.duke.task.Task;
+import cs2103t.duke.task.TaskList;
+import cs2103t.duke.task.Todo;
+import cs2103t.duke.ui.Ui;
 
 /**
  * Represents a storage manager for Duke to manage the back-end data storage.

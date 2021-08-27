@@ -49,7 +49,7 @@ public class Duke {
                 String input = ui.readLine();
                 Command command = parser.parseCommand(input);
                 command.execute(tasks, ui);
-                storage.saveTaskList(tasks);  // save the latest task list no matter what command it is
+                storage.saveTaskList(tasks); // save the latest task list no matter what command it is
                 isExit = ExitCommand.isExit(command);
             } catch (DukeException e) {
                 ui.showError(e.getMessage());

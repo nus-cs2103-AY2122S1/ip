@@ -33,7 +33,8 @@ public class Deadline extends Task {
      */
     @Override
     public String getDescriptionWithStatus() {
-        return "[D]" + super.getDescriptionWithStatus() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH)) + ")";
+        return "[D]" + super.getDescriptionWithStatus() + " (by: "
+                + deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH)) + ")";
     }
 
 }

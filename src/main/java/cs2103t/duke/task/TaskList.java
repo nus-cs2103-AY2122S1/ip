@@ -1,8 +1,8 @@
 package cs2103t.duke.task;
 
-import cs2103t.duke.ui.Ui;
-
 import java.util.ArrayList;
+
+import cs2103t.duke.ui.Ui;
 
 /**
  * Represents a list of task.

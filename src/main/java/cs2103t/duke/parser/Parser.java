@@ -1,6 +1,15 @@
 package cs2103t.duke.parser;
 
-import cs2103t.duke.command.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import cs2103t.duke.command.AddCommand;
+import cs2103t.duke.command.Command;
+import cs2103t.duke.command.DeleteCommand;
+import cs2103t.duke.command.DoneCommand;
+import cs2103t.duke.command.ExitCommand;
+import cs2103t.duke.command.FindCommand;
+import cs2103t.duke.command.ListCommand;
 import cs2103t.duke.exception.DukeException;
 import cs2103t.duke.task.Deadline;
 import cs2103t.duke.task.Event;
@@ -8,16 +17,13 @@ import cs2103t.duke.task.Task;
 import cs2103t.duke.task.Todo;
 import cs2103t.duke.ui.Ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 /**
  * Represents a parser for Duke to parse input from users.
  */
 public class Parser {
 
-    String INVALID_INPUT = Ui.INVALID_INPUT;
-    String space = Ui.SPACE;
+    private static final String INVALID_INPUT = Ui.INVALID_INPUT;
+    private static final String SPACE = Ui.SPACE;
 
     /**
      * Parses the specified input from users.
@@ -28,7 +34,7 @@ public class Parser {
      * @throws DukeException if the specified input cannot be interpreted as any existing Duke's command.
      */
     public Command parseCommand(String input) throws DukeException {
-        input = input.trim();  // to remove all leading and trailing space of user's input
+        input = input.trim(); // to remove all leading and trailing space of user's input
         if (input.equals("bye")) {
             return new ExitCommand();
         } else if (input.equals("list")) {
@@ -42,7 +48,7 @@ public class Parser {
                 if (errorMessage.equals("wrong input format")) {
                     throw new DukeException(INVALID_INPUT);
                 } else if (errorMessage.equals("empty todo description")) {
-                    throw new DukeException(space + "☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException(SPACE + "OOPS!!! The description of a todo cannot be empty.");
                 }
             }
         } else if (input.startsWith("deadline")) {
@@ -55,11 +61,12 @@ public class Parser {
                 case "wrong input format":
                     throw new DukeException(INVALID_INPUT);
                 case "empty deadline description":
-                    throw new DukeException(space + "☹ OOPS!!! The description of a deadline cannot be empty.");
+                    throw new DukeException(SPACE + "OOPS!!! The description of a deadline cannot be empty.");
                 case "empty deadline by":
-                    throw new DukeException(space + "☹ OOPS!!! The deadline of a deadline cannot be empty.");
+                    throw new DukeException(SPACE + "OOPS!!! The deadline of a deadline cannot be empty.");
                 case "wrong deadline format":
-                    throw new DukeException(space + "☹ OOPS!!! The deadline is in the wrong format.");
+                    throw new DukeException(SPACE + "OOPS!!! The deadline is in the wrong format.");
+                default:
                 }
             }
         } else if (input.startsWith("event")) {
@@ -72,14 +79,15 @@ public class Parser {
                 case "wrong input format":
                     throw new DukeException(INVALID_INPUT);
                 case "empty event description":
-                    throw new DukeException(space + "☹ OOPS!!! The description of an event cannot be empty.");
+                    throw new DukeException(SPACE + "OOPS!!! The description of an event cannot be empty.");
                 case "empty event at":
-                    throw new DukeException(space + "☹ OOPS!!! The start/end time of an event cannot be empty.");
+                    throw new DukeException(SPACE + "OOPS!!! The start/end time of an event cannot be empty.");
+                default:
                 }
             }
         } else if (input.startsWith("done")) {
             if (input.equals("done")) {
-                throw new DukeException(space + "☹ OOPS!!! Please tell me which task you have done.");
+                throw new DukeException(SPACE + "OOPS!!! Please tell me which task you have done.");
             }
             if (input.charAt(4) == ' ' && isValidNum(input.substring(5))) {
                 return new DoneCommand(Integer.parseInt(input.substring(5).trim()));
@@ -88,7 +96,7 @@ public class Parser {
             }
         } else if (input.startsWith("delete")) {
             if (input.equals("delete")) {
-                throw new DukeException(space + "☹ OOPS!!! Please tell me which task you want to delete.");
+                throw new DukeException(SPACE + "OOPS!!! Please tell me which task you want to delete.");
             }
             if (input.charAt(6) == ' ' && isValidNum(input.substring(7))) {
                 return new DeleteCommand(Integer.parseInt(input.substring(7).trim()));
@@ -97,7 +105,7 @@ public class Parser {
             }
         } else if (input.startsWith("find")) {
             if (input.equals("find")) {
-                throw new DukeException(space + "☹ OOPS!!! The search query cannot be empty.");
+                throw new DukeException(SPACE + "OOPS!!! The search query cannot be empty.");
             }
             if (input.charAt(4) == ' ') {
                 return new FindCommand(input.substring(5).trim());
