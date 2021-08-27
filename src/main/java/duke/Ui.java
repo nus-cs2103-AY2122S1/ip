@@ -75,6 +75,13 @@ public class Ui {
         System.out.println(message);
     }
 
+    public void findMessage(TaskList tasks) {
+        System.out.println("____________________________________________________________");
+        System.out.println(" Here are the matching tasks in your list:");
+        System.out.println(tasks.toString());
+        System.out.println("____________________________________________________________\n");
+    }
+
     public void handleException(Exception e) {
         String message;
         if (e instanceof InvalidCommandException) {

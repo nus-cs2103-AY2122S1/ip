@@ -1,12 +1,17 @@
 package duke;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final List<Task> list;
 
     public TaskList() {
         this.list = Storage.readData();
+    }
+
+    public TaskList(List<Task> list) {
+        this.list = list;
     }
 
     public List<Task> getList() {
@@ -40,6 +45,11 @@ public class TaskList {
 
     public void clear() {
         this.list.clear();
+    }
+
+    public TaskList findTasks(String keyword) {
+        return new TaskList(list.stream().filter(task -> task.containsKeyword(keyword))
+                .collect(Collectors.toList()));
     }
 
     @Override
