@@ -5,10 +5,16 @@ import duke.data.tasks.Events;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * Creates and adds an Event task.
+ */
 public class CreateEventCommand extends Command {
     private final String name;
     private final String date;
 
+    /**
+     * @param userInput The raw input string from the user
+     */
     public CreateEventCommand(String userInput) {
         this.name = userInput.split(" /at ", 2)[0].substring(6);
         this.date = userInput.split(" /at ", 2)[1];

@@ -9,10 +9,16 @@ import duke.data.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * Creates and adds a Deadline task.
+ */
 public class CreateDeadlineCommand extends Command {
     private final String name;
     private final LocalDate date;
 
+    /**
+     * @param userInput The raw input string from the user
+     */
     public CreateDeadlineCommand(String userInput) {
         this.name = userInput.split(" /by ", 2)[0].substring(9);
         try {

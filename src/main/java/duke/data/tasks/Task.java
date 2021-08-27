@@ -1,5 +1,8 @@
 package duke.data.tasks;
 
+/**
+ * Represents a task, which has a description, a completion status and an ID.
+ */
 public abstract class Task implements Comparable<Task> {
     private static int count = 0;
     private boolean completed;

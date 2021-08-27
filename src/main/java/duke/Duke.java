@@ -9,6 +9,10 @@ import duke.parser.Parser;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * Entry point of the Duke application.
+ * Initializes the application and starts the interaction with the user.
+ */
 public class Duke {
     private final Ui ui;
     private final Storage storage;
@@ -22,6 +26,9 @@ public class Duke {
         parser = new Parser();
     }
 
+    /**
+     * Runs the program until termination.
+     */
     public void run() {
         ui.showWelcomeMessage();
 

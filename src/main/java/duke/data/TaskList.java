@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import duke.data.exception.DukeException;
 import duke.data.tasks.Task;
 
+/**
+ * Represents the list of tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> lst;
 
@@ -16,13 +19,22 @@ public class TaskList {
         this.lst = loadedTasks;
     }
 
-
+    /**
+     * Adds a Task to the list.
+     * @param t The task to be added
+     * @return Notification of the task that was added
+     */
     public String addToList(Task t) {
         this.lst.add(t);
         return String.format("Got it. I've added this task:\n    %s\n" +
                 "You now have %d tasks in the list.", t, this.lst.size());
     }
 
+    /**
+     * Deletes the specified task.
+     * @param n The position of the task to be deleted
+     * @return Notification of the task that was deleted
+     */
     public String deleteTask(int n) {
         if (n < 1 || n > this.lst.size()) {
             throw new DukeException("There is no task " + n);
@@ -45,6 +57,10 @@ public class TaskList {
         return this.lst.get(n);
     }
 
+    /**
+     * Formats the data to be saved to file.
+     * @return
+     */
     public String getSaveData() {
         StringBuilder output = new StringBuilder();
         for (Task task : this.lst) {
@@ -53,6 +69,11 @@ public class TaskList {
         return output.toString();
     }
 
+    /**
+     * Marks the specified task as done.
+     * @param n The index of the task that is to be marked as done
+     * @return Notification of the task that was marked as done
+     */
     public String markAsDone(int n) {
         if (n < 1 || n > this.lst.size()) {
             throw new DukeException("There is no task " + n);
