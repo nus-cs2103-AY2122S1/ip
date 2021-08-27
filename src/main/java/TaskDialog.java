@@ -1,21 +1,12 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskDialog extends Dialog {
     // This class is a child of dialog class which allow the user to interact with the task
     private final ArrayList<Task> tasks;
-
-    public void addTask(Task task) throws DialogException {
-        Dialog addDialog = Dialog.generate(task.toString());
-        tasks.add(task);
-        addDialog.add("Got it. I've added this task:");
-        addDialog.add("  " + task);
-        addDialog.add("Now you have " + this.tasks.size() + " tasks in the list.");
-        System.out.println(addDialog);
-    }
-
-    public Task getTaskByIndex(int index) throws IndexOutOfBoundsException{
-        return tasks.get(index);
-    }
 
     private TaskDialog(ArrayList<String> sentences, ArrayList<Task> tasks) {
         super(sentences);
@@ -30,6 +21,33 @@ public class TaskDialog extends Dialog {
             archive.put(id, newDialog);
             return newDialog;
         }
+    }
+
+    public void addTask(Task task) throws DialogException {
+        Dialog addDialog = Dialog.generate(task.toString());
+        tasks.add(task);
+        addDialog.add("Got it. I've added this task:");
+        addDialog.add("  " + task);
+        addDialog.add("Now you have " + this.tasks.size() + " tasks in the list.");
+        System.out.println(addDialog);
+    }
+
+    public Task getTaskByIndex(int index) throws IndexOutOfBoundsException{
+        return tasks.get(index);
+    }
+
+    public TaskDialog by(String deadline) throws InvalidTimeFormatException {
+        LocalDate dlDate = TimeTask.parseTimeString(deadline);
+        return new TaskDialog(new ArrayList<>(List.of("Deadline: " + dlDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))),
+                new ArrayList<>(tasks.stream().filter((task) -> {
+            if (!task.getClass().getSuperclass().getName().equals("TimeTask")) {
+                // return any task without time associated with it
+                return true;
+            } else {
+                TimeTask timetask = (TimeTask) task;
+                return timetask.getTime().isBefore(dlDate) || timetask.getTime().isEqual(dlDate);
+            }
+        }).collect(Collectors.toList())));
     }
 
     public int taskLength() {

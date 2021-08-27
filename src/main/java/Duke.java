@@ -5,13 +5,15 @@ import java.util.Scanner;
 public class Duke {
 
     public enum Command {
-        TODO, DEADLINE, EVENT, LIST, DONE, DELETE, COMMANDS, BYE
+        TODO, DEADLINE, EVENT, LIST, DATE, DONE, DELETE, COMMANDS, BYE
     }
 
     public static Command stringToCommand(String s) throws DukeException {
         switch(s) {
             case "list":
                 return Command.LIST;
+            case "date":
+                return Command.DATE;
             case "todo":
                 return Command.TODO;
             case "deadline":
@@ -65,11 +67,12 @@ public class Duke {
         commandsList.add("1. 'todo <task description>' - add a todo task to the list");
         commandsList.add("2. 'deadline <task description> /by <by when>' - add a deadline task with specific deadline");
         commandsList.add("3. 'event <task description> /at <at when>' - add an event task with specific time");
-        commandsList.add("4. 'list' - show the current task list");
-        commandsList.add("5. 'done <task index>' - mark that task as done");
-        commandsList.add("6. 'delete <task index>' - delete that task from the list");
-        commandsList.add("7. 'commands' - show this current command window");
-        commandsList.add("8. 'bye' - end session");
+        commandsList.add("4. 'date <yyyy-mm-dd>' - list all todos and all the deadlines and events before specified time");
+        commandsList.add("5. 'list' - show the current task list");
+        commandsList.add("6. 'done <task index>' - mark that task as done");
+        commandsList.add("7. 'delete <task index>' - delete that task from the list");
+        commandsList.add("8. 'commands' - show this current command window");
+        commandsList.add("9. 'bye' - end session");
         System.out.println(greeting);
         System.out.println(commandsList);
         Command command;
@@ -90,6 +93,17 @@ public class Duke {
             switch(command) {
                 case LIST:
                     System.out.println(list);
+                    break;
+                case DATE:
+                    try {
+                        if (input.split(" ").length == 1) {
+                            throw new EmptyDescriptionException("The date of deadline cannot be empty.");
+                        }
+                        String dlString = input.substring(("date ").length());
+                        System.out.println(list.by(dlString));
+                    } catch (EmptyDescriptionException | EmptyTaggerException | InvalidTimeFormatException e) {
+                        Duke.printError(e);
+                    }
                     break;
                 case TODO: {
                     try {
