@@ -7,6 +7,7 @@
 
 import java.util.ArrayList;
 import  java.util.Scanner;
+import  java.time.LocalDate;
 
 public class Duke {
 
@@ -78,26 +79,26 @@ public class Duke {
 
                 String description = command.split("/by ")[0].substring(9);
                 String by = command.split("/by ")[1];
-
+                LocalDate deadline  = LocalDate.parse(by);
                 if (description.isBlank()) {
                     printBreakLine();
                     throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                 }
 
-                Task newTask = new Deadline(description, by);
+                Task newTask = new Deadline(description, deadline);
                 commandList.add(newTask);
                 addTaskMsg(newTask);
 
             } else if(command.contains("event")) {
                 String description = command.split("/at ")[0].substring(6);
                 String by = command.split("/at ")[1];
-
+                LocalDate eventDate  = LocalDate.parse(by);
                 if (description.isBlank()) {
                     printBreakLine();
                     throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                 }
 
-                Task newTask = new Event(description, by);
+                Task newTask = new Event(description, eventDate);
                 commandList.add(newTask);
                 addTaskMsg(newTask);
 
