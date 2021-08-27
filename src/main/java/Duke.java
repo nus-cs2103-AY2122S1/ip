@@ -1,4 +1,13 @@
-import duke.*;
+import duke.Deadline;
+import duke.EmptyDescriptionError;
+import duke.Event;
+import duke.Parser;
+import duke.Storage;
+import duke.Task;
+import duke.TaskList;
+import duke.Todo;
+import duke.Ui;
+import duke.UnknownCommandError;
 
 import java.io.IOException;
 import java.util.Scanner;
