@@ -1,6 +1,6 @@
 package duke.taskTypes;
 
-import duke.exceptions.DukeException;
+import duke.exception.DukeException;
 
 public class Todo extends Task{
 

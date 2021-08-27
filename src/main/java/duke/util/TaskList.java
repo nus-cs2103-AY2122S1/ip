@@ -1,7 +1,7 @@
 package duke.util;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidFormatException;
+import duke.exception.DukeException;
+import duke.exception.InvalidFormatException;
 import duke.taskTypes.Deadline;
 import duke.taskTypes.Event;
 import duke.taskTypes.Task;

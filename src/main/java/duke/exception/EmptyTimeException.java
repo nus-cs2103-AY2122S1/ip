@@ -1,4 +1,4 @@
-package duke.exceptions;
+package duke.exception;
 
 public class EmptyTimeException extends DukeException{
     public EmptyTimeException (String msg) {

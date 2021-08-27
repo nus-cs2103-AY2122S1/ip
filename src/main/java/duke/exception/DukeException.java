@@ -1,4 +1,4 @@
-package duke.exceptions;
+package duke.exception;
 
 /**
  * Exception that is thrown when user inputs something invalid in general

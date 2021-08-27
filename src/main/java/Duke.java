@@ -1,5 +1,5 @@
 import duke.command.Command;
-import duke.exceptions.DukeException;
+import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;

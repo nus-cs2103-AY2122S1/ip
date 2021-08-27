@@ -1,7 +1,7 @@
 package duke.util;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.FileNotFoundException;
+import duke.exception.DukeException;
+import duke.exception.FileNotFoundException;
 import duke.taskTypes.Task;
 
 import java.io.File;

@@ -1,9 +1,9 @@
 package duke.taskTypes;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.EmptyTimeException;
-import duke.exceptions.InvalidDateException;
-import duke.exceptions.InvalidTimeException;
+import duke.exception.DukeException;
+import duke.exception.EmptyTimeException;
+import duke.exception.InvalidDateException;
+import duke.exception.InvalidTimeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

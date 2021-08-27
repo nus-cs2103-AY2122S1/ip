@@ -1,7 +1,7 @@
 package duke.util;
 
 import duke.command.*;
-import duke.exceptions.*;
+import duke.exception.*;
 
 import java.util.List;
 

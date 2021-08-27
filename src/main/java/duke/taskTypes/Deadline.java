@@ -1,9 +1,9 @@
 package duke.taskTypes;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.EmptyTimeException;
-import duke.exceptions.InvalidFormatException;
-import duke.exceptions.EmptyDescriptionException;
+import duke.exception.DukeException;
+import duke.exception.EmptyTimeException;
+import duke.exception.InvalidFormatException;
+import duke.exception.EmptyDescriptionException;
 
 import java.util.List;
 import java.util.regex.Pattern;
