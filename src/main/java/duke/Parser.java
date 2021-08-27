@@ -89,6 +89,16 @@ public class Parser {
                 Ui.arrayIndexOutOfBoundsExceptionMessage();
                 throw e;
             }
+        case "find":
+            try {
+                String keyword = splitText[1];
+                output = new FindCommand(keyword);
+                break;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                Ui.arrayIndexOutOfBoundsExceptionMessage();
+                Ui.findHint();
+                throw e;
+            }
         case "bye":
             output = new ByeCommand();
             break;

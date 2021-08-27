@@ -20,41 +20,15 @@ public class TaskList {
     }
 
     /**
-     * Adds an Event to the TaskList.
+     * Adds a task to the task list.
      *
-     * @param event event to be added to the TaskList
+     * @param task task to be added.
+     * @param shouldPrint true if should print, false if should not print
      */
-    public void add(Event event, boolean shouldPrint) {
-        this.tasks.add(event);
+    public void add(Task task, boolean shouldPrint) {
+        this.tasks.add(task);
         if (shouldPrint) {
-            Ui.addTask(event);
-            Ui.numberOfTasks(tasks);
-        }
-    }
-
-
-    /**
-     * Adds a deadline to the TaskList.
-     *
-     * @param deadline deadline to be added to the TaskList
-     */
-    public void add(Deadline deadline, boolean shouldPrint) {
-        this.tasks.add(deadline);
-        if (shouldPrint) {
-            Ui.addTask(deadline);
-            Ui.numberOfTasks(tasks);
-        }
-    }
-
-    /**
-     * Adds a toDo to the TaskList.
-     *
-     * @param toDo deadline to be added to the TaskList
-     */
-    public void add(ToDo toDo, boolean shouldPrint) {
-        this.tasks.add(toDo);
-        if (shouldPrint) {
-            Ui.addTask(toDo);
+            Ui.addTask(task);
             Ui.numberOfTasks(tasks);
         }
     }
@@ -98,5 +72,34 @@ public class TaskList {
         Task item = this.tasks.remove(index - 1);
         Ui.deleteTask(item);
         Ui.remainingTasks(tasks);
+    }
+
+    /**
+     * Searches for a task given a keyword.
+     */
+    public void searchTask(String keyword) {
+        TaskList matches = new TaskList();
+        for (Task t : tasks) {
+            if (t.doesNameContain(keyword)) {
+                matches.add(t, false);
+            }
+        }
+        matches.displaySearchResults();
+    }
+
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return number of tasks in the list.
+     */
+    private int numTasks() {
+        return tasks.size();
+    }
+
+    /**
+     * Displays search results.
+     */
+    public void displaySearchResults() {
+        Ui.listTasksSearchResults(tasks);
     }
 }
