@@ -31,7 +31,7 @@ public class FindCommand implements Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            taskList.tasksWithKeyword(input);
+            taskList.findTaskWithKeyword(input);
         } catch (InvalidInputException e) {
             ui.output(e.getMessage());
         }

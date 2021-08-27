@@ -37,7 +37,7 @@ public class TaskCommand implements Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            taskList.handleTasks(type, input);
+            taskList.handleTask(type, input);
         } catch (EmptyDescException | InvalidInputException e) {
             ui.output(e.getMessage());
             ui.output(Responses.REQUIRED_FORMAT);

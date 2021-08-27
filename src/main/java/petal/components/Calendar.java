@@ -16,13 +16,13 @@ import java.util.Optional;
  */
 public class Calendar {
 
-    private HashMap<LocalDate, ArrayList<Timeable>> calendar;
+    private HashMap<LocalDate, ArrayList<Timeable>> dateAndTimeable;
 
     /**
      * Constructor for the Calender class
      */
     public Calendar() {
-        calendar = new HashMap<>();
+        dateAndTimeable = new HashMap<>();
     }
 
     /**
@@ -32,13 +32,13 @@ public class Calendar {
      */
     public void addToCalendar(Timeable timeable) {
         LocalDate date = timeable.getDate();
-        Optional<ArrayList<Timeable>> current = Optional.ofNullable(calendar.get(date));
+        Optional<ArrayList<Timeable>> current = Optional.ofNullable(dateAndTimeable.get(date));
         if (current.isPresent()) {
             current.get().add(timeable);
         } else {
             ArrayList<Timeable> firstList = new ArrayList<>();
             firstList.add(timeable);
-            calendar.put(date, firstList);
+            dateAndTimeable.put(date, firstList);
         }
     }
 
@@ -47,9 +47,9 @@ public class Calendar {
      *
      * @param date date to be used
      */
-    public String tasksOnThisDate(LocalDate date) throws InvalidInputException {
+    public String showTasksOnDate(LocalDate date) throws InvalidInputException {
         int count = 1;
-        Optional<ArrayList<Timeable>> current = Optional.ofNullable(calendar.get(date));
+        Optional<ArrayList<Timeable>> current = Optional.ofNullable(dateAndTimeable.get(date));
         if (current.isPresent()) {
             StringBuilder result = new StringBuilder("Here are the tasks on this date: ");
             for (Timeable d: current.get()) {
@@ -67,7 +67,7 @@ public class Calendar {
      * @param newList The new arraylist of Tasks, which will be used to update the calendar
      */
     public void updateCalendar(List<Task> newList) {
-        calendar = new HashMap<>();
+        dateAndTimeable = new HashMap<>();
         for (Task t: newList) {
             if (t.isTimeable()) {
                 addToCalendar((Timeable) t);

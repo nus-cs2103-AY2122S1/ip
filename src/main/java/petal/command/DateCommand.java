@@ -32,7 +32,7 @@ public class DateCommand implements Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            taskList.tasksOnThisDay(input);
+            taskList.showTaskOnDate(input);
         } catch (InvalidInputException e) {
             ui.output(e.getMessage());
         }

@@ -37,7 +37,7 @@ public class Event extends Task implements Timeable {
     }
 
     @Override
-    public String strForSaving() {
+    public String formatStrForSaving() {
         return "E|" + this.getStatusIcon() + "|" + this.description + "|" + this.dateTime;
     }
 

@@ -35,7 +35,7 @@ public class Deadline extends Task implements Timeable {
     }
 
     @Override
-    public String strForSaving() {
+    public String formatStrForSaving() {
         return "D|" + this.getStatusIcon() + "|" + this.description + "|" + dateTime;
     }
 

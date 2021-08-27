@@ -20,7 +20,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String strForSaving() {
+    public String formatStrForSaving() {
         return "T|" + this.getStatusIcon() + "|" + this.description;
     }
 

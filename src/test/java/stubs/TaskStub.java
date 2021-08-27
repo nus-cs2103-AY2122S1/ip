@@ -17,7 +17,7 @@ public class TaskStub extends Task {
     }
 
     @Override
-    public String strForSaving() {
+    public String formatStrForSaving() {
         return "This task was saved!";
     }
 

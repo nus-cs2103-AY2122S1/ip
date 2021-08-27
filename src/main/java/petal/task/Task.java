@@ -2,7 +2,6 @@ package petal.task;
 
 import petal.components.Responses;
 import java.time.LocalDate;
-import java.util.Locale;
 
 /**
  * The Task class that encapsulates a directive given
@@ -20,7 +19,7 @@ public abstract class Task {
      *
      * @return Formatted string representation
      */
-    public abstract String strForSaving();
+    public abstract String formatStrForSaving();
 
     /**
      * Returns whether the Task is a Timeable
@@ -37,7 +36,7 @@ public abstract class Task {
      * @param localDate The date of the Task
      */
     public Task(String description, boolean isDone, LocalDate localDate) {
-        this.description = firstLetter(description);
+        this.description = capsFirstLetter(description);
         this.isDone = isDone;
     }
 
@@ -48,7 +47,7 @@ public abstract class Task {
      * @param isDone The boolean isDone, representing if the Task is done
      */
     public Task(String description, boolean isDone) {
-        this.description = firstLetter(description);
+        this.description = capsFirstLetter(description);
         this.isDone = isDone;
     }
 
@@ -78,7 +77,7 @@ public abstract class Task {
      * @param str The string
      * @return String but with first letter capitalized
      */
-    public String firstLetter(String str) {
+    public String capsFirstLetter(String str) {
         str = str.substring(0, 1).toUpperCase() + str.substring(1);
         return str;
     }

@@ -83,7 +83,7 @@ public class TaskList {
      * @throws EmptyDescException Thrown when the task lacks a description
      * @throws InvalidInputException Thrown when an invalid format is given or when a time is not given
      */
-    public void handleTasks(String type, String message) throws EmptyDescException, InvalidInputException {
+    public void handleTask(String type, String message) throws EmptyDescException, InvalidInputException {
         Task task;
         String[] deadlineEvent = type.equals("deadline") ? message.split("/by")
                 : message.split("/at");
@@ -160,8 +160,8 @@ public class TaskList {
      * @param date The date given
      * @throws InvalidInputException Thrown if the parameter has an invalid format/input
      */
-    public void tasksOnThisDay(String date) throws InvalidInputException {
-        ui.output(calendar.tasksOnThisDate(Parser.parseDate(date)));
+    public void showTaskOnDate(String date) throws InvalidInputException {
+        ui.output(calendar.showTasksOnDate(Parser.parseDate(date)));
     }
 
     /**
@@ -169,7 +169,7 @@ public class TaskList {
      *
      * @param keyword The keyword
      */
-    public void tasksWithKeyword(String keyword) throws InvalidInputException {
+    public void findTaskWithKeyword(String keyword) throws InvalidInputException {
         keyword = keyword.trim();
         if (keyword.equals("")) {
             throw new InvalidInputException(Responses.INVALID_FORMAT);
@@ -202,9 +202,9 @@ public class TaskList {
         StringBuilder result = new StringBuilder();
         for (Task m : tasks) {
             if (count == 1) {
-                result.append(m.strForSaving());
+                result.append(m.formatStrForSaving());
             } else {
-                result.append("\n").append(m.strForSaving());
+                result.append("\n").append(m.formatStrForSaving());
             }
             count++;
         }

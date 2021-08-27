@@ -34,7 +34,7 @@ public class Ui {
     /**
      * Terminates the Petal instance
      */
-    public void goodBye() {
+    public void sayGoodbye() {
         output(Responses.GOODBYE);
         scanner.close();
         petal.stop();

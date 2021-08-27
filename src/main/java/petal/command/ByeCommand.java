@@ -26,7 +26,7 @@ public class ByeCommand implements Command {
         } catch (IOException e) {
             ui.output("Sorry, the task couldn't be saved :/");
         } finally {
-            ui.goodBye();
+            ui.sayGoodbye();
         }
     }
 
