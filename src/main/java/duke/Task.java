@@ -24,27 +24,39 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Returns date stored in Task in String form.
+     * Is blank because Todo doesn't have a Time. Is Overwritten in Event and Deadline.
+     * @return ""
+     */
     public String getTime() {
         return "";
     }
 
+    /**
+     * Returns date stored in Task in String form.
+     * Occurs when wanting to convert date to simplified form for saving in file.
+     * @return ""
+     */
     public String getTimeStorage() {
         return "";
     }
 
     /**
-     * Returns string of task.
-     *
+     * Returns the descriptive String of task. Used in displayList.
      * @return string of task.
      */
     public String toString() {
         return "[" + (isDone ? "X" : " ") + "] " + taskString;
     }
 
+    /**
+     * Returns the pure String of task.
+     * @return Pure String of task.
+     */
     public String getTaskStr() {
         return taskString;
     }
-
 
 
     /**

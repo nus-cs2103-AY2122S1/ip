@@ -24,11 +24,19 @@ public class Event extends Task {
         super.date = at;
     }
 
+    /**
+     * Returns time Event occurs at, in String form.
+     * @return Time Event occurs at.
+     */
     @Override
     public String getTime() {
         return this.at;
     }
 
+    /**
+     * Returns simplified time Event occurs at, in String form.
+     * @return Simplified time Event occurs at.
+     */
     @Override
     public String getTimeStorage() {
         return this.date.toString();

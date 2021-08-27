@@ -1,9 +1,18 @@
 package duke;
 
+/**
+ * Class for parsing keywords.
+ */
 public class Parser {
     Parser() {
     }
 
+    /**
+     * Parses keywords.
+     * @param str String to be parsed.
+     * @return String of keyword.
+     * @throws DukeException Occurs when anything goes wrong during method.
+     */
     public String parseCommand(String str) throws DukeException {
         if (str.equalsIgnoreCase("bye")) {
             return "bye";

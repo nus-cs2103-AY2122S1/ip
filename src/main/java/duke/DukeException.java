@@ -27,7 +27,6 @@ class InvalidInputException extends DukeException {
     }
 }
 
-
 class IncorrectInputException extends DukeException {
     /**
      * Occurs when Duke recognises keyword, but input after it is invalid.
@@ -38,6 +37,7 @@ class IncorrectInputException extends DukeException {
         super ("Ohw no! Youw cawn't use " + keyword + " likw that! Twy " + suggestion + " inswead!");
     }
 }
+
 
 class MissingInputException extends DukeException {
     /**
@@ -59,28 +59,37 @@ class MissingNoException extends DukeException {
     }
 }
 
+/**
+ * Occurs when Duke tries to read txt file for Task list, but comes up empty.
+ */
 class LoadingFileError extends DukeException {
-    /**
-     * Occurs when Duke tries to read txt file for Task list, but comes up empty.
-     */
     LoadingFileError(String message) {
         super(message);
     }
 }
 
 class TaskDoneError extends DukeException {
+    /**
+     * Occurs when user tries to mark a task that's done but it's already done.
+     */
     TaskDoneError() {
         super ("Looksw wike thisw taskw is alweady done! That's gweat!\n");
     }
 }
 
 class SaveFileError extends DukeException {
+    /**
+     * Occurs when there's an error with saving the file.
+     */
     SaveFileError() {
         super ("Canw't save to a filew that doesn't exist, sorry!");
     }
 }
 
 class LoadFileError extends DukeException {
+    /**
+     * Occurs when there's an error in loading and reading file.
+     */
     LoadFileError() {
         super ("Oops! Somethingw's wrong with the text in thew saved file! "
                 + "You may have to dewete itw!");
@@ -88,6 +97,9 @@ class LoadFileError extends DukeException {
 }
 
 class SaveDirectoryError extends DukeException {
+    /**
+     * Occurs when directory to save file in doesn't exist.
+     */
     SaveDirectoryError(){
         super ("Oh now! I guess the diwectowwy doesn't exist.");
     }

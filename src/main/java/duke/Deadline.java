@@ -24,11 +24,19 @@ public class Deadline extends Task {
         super.date = deadline;
     }
 
+    /**
+     * Returns time Deadline occurs at, in String form.
+     * @return
+     */
     @Override
     public String getTime() {
         return this.by;
     }
 
+    /**
+     * Returns simplified time Event occurs at, in String form.
+     * @return
+     */
     @Override
     public String getTimeStorage() {
         return this.date.toString();
