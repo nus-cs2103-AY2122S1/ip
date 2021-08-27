@@ -1,8 +1,8 @@
 package util.commands;
 
-import util.tasks.*;
-import util.ui.*;
-import util.commons.*;
+import util.tasks.Task;
+import util.ui.Ui;
+import util.commons.Messages;
 
 /**
  * Class representing the Done command.

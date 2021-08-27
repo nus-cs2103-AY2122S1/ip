@@ -1,7 +1,10 @@
 package util.commands;
 
-import util.tasks.*;
-import util.ui.*;
+import util.tasks.TaskList;
+import util.tasks.DateTaskTable;
+import util.tasks.Task;
+import util.tasks.DatedTask;
+import util.ui.Ui;
 
 /**
  * The class representing the delete command.

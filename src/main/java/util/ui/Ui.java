@@ -1,11 +1,11 @@
 package util.ui;
 
+import util.commons.Messages;
 import util.tasks.DukeException;
 import util.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import util.commons.*;
 
 /**
  * Deals with the interactions of the user.
