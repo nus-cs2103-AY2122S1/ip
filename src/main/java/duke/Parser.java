@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /**
  * The class that Parses the command line from user.
  *
@@ -57,7 +60,13 @@ public class Parser {
                     throw new DukeException("Please enter a deadline.");
                 }
                 String by = input.substring(input.indexOf("/by") + 4);
-                task = new Deadline(content, by);
+                try{
+                    task = new Deadline(content, by);
+                } catch(DateTimeParseException e){
+                    throw new DukeException("Invalid date, " +
+                            "please enter a valid date in the format: " +
+                            "yyyy/MM/dd HH:mm");
+                }
             } else if (words[0].equals("event")) {
                 if (words.length <= 1 || words[1].equals("/at")) {
                     throw new DukeException("The description of event " +
@@ -71,7 +80,13 @@ public class Parser {
                     throw new DukeException("Please provide the event time.");
                 }
                 String at = input.substring(input.indexOf("/at") + 4);
-                task = new Event(content, at);
+                try{
+                    task = new Event(content, at);
+                } catch(DateTimeParseException | ArrayIndexOutOfBoundsException e){
+                    throw new DukeException("Invalid date, " +
+                            "please enter a valid time period in the format: " +
+                            "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm");
+                }
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }

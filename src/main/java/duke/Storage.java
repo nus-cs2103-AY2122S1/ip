@@ -51,13 +51,17 @@ public class Storage {
      * @return Task object.
      * @throws DukeException Exception that duke bot can throw.
      */
-    public static Task convertTaskStringToTask(String taskString) throws DukeException {
+    public static Task convertTaskStringToTask(String taskString) throws Exception {
         Task task = new Task();
+        int pointer = 0;
         String[] newTask = taskString.split("&&");
         String taskType = newTask[0];
+        pointer += taskType.length() + 2;
         String status = newTask[1];
+        pointer += status.length() + 2;
         String taskDescription = newTask[2];
-        String taskTime = newTask.length > 3 ? newTask[3] : "";
+        pointer += taskDescription.length() + 2;
+        String taskTime = taskString.substring(pointer);
         switch(taskType) {
         case "T":
             task = new ToDo(taskDescription);
@@ -69,7 +73,7 @@ public class Storage {
             task = new Event(taskDescription, taskTime);
             break;
         default:
-            throw new DukeException("can't understand this icon");
+            throw new DukeException("Can't understand the task icon '" + taskType + "'");
         }
         if (status.equals("1")) {
             task.done();
@@ -82,7 +86,7 @@ public class Storage {
      *
      * @return TaskList that includes all tasks in the file.
      */
-    public TaskList convertFileToTaskList() {
+    public TaskList convertFileToTaskList() throws Exception{
         TaskList taskList = new TaskList(new ArrayList<Task>());
         File dukeFile = new File(filePath);
         try {
@@ -92,10 +96,10 @@ public class Storage {
                 Task task = convertTaskStringToTask(taskString);
                 taskList.add(task);
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (DukeException dukeException) {
-            System.out.println(dukeException.getMessage());
+        } catch (Exception e) {
+            throw new Exception("Can't understand data in the duke file. " +
+                    "Detail information: "
+                    + e.getMessage());
         }
         return taskList;
     }

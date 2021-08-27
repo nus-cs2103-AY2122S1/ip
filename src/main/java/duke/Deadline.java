@@ -1,20 +1,22 @@
 package duke;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDateTime by;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDate.parse(by);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        this.by = LocalDateTime.parse(by, formatter);
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + by.format(DateTimeFormatter.ofPattern("MMM-d-yyyy HH:mm"))
+                + ")";
     }
 
     @Override
@@ -24,7 +26,7 @@ public class Deadline extends Task {
 
     @Override
     public String getTaskTime() {
-        return this.by.toString();
+        return by.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
     }
 
     @Override

@@ -12,7 +12,7 @@ class StorageTest {
         task.done();
         try {
             assertEquals(task, Storage.convertTaskStringToTask("T&&1&&hello world!&&"));
-        } catch(DukeException e){
+        } catch(Exception e){
             System.out.println(e.getMessage());
         }
     }

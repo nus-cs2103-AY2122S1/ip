@@ -1,2 +1,7 @@
-package duke;public class TaskCreationException {
+package duke;
+
+public class TaskCreationException extends DukeException{
+    public TaskCreationException(String errMessage) {
+        super(errMessage);
+    }
 }

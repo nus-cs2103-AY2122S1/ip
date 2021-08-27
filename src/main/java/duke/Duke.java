@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * The Duke bot.
  *
@@ -11,15 +13,20 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
-        this.storage = new Storage(filePath);
-        this.tasks = storage.convertFileToTaskList();
-        this.ui = new Ui();
+        storage = new Storage(filePath);
+        ui = new Ui();
     }
 
     /**
      * Runs the duke bot.
      */
     public void run() {
+        try {
+            tasks = storage.convertFileToTaskList();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
         ui.greet();
         boolean isExit = false;
         Parser parser = new Parser(" ");

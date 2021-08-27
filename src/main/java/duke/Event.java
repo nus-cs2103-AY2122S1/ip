@@ -1,26 +1,31 @@
 package duke;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
-    protected LocalDate at;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
 
     public Event(String description, String at) {
         super(description);
-        try {
-            this.at = LocalDate.parse(at);
-
-        } catch (DateTimeParseException e) {
-            System.out.println("please enter a valid date");
-        }
+        String[] fromTo = at.split("--");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        String from = fromTo[0];
+        String to = fromTo[1];
+        System.out.println(from);
+        System.out.println(to);
+        this.from = LocalDateTime.parse(from,formatter);
+        this.to = LocalDateTime.parse(to,formatter);
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at:"
-                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + from.format(DateTimeFormatter.ofPattern("MMM-d-yyyy HH:mm"))
+                +" -- "
+                + to.format(DateTimeFormatter.ofPattern("MMM-d-yyyy HH:mm")) + ")";
     }
 
     @Override
@@ -30,7 +35,9 @@ public class Event extends Task {
 
     @Override
     public String getTaskTime() {
-        return this.at.toString();
+        return from.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
+                + "--"
+                + to.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
     }
 
     @Override
