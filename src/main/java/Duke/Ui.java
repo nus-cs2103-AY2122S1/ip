@@ -2,10 +2,16 @@ package Duke;
 
 import java.util.ArrayList;
 
+/**
+ * This class encapsulated the management of the user interface.
+ */
 public class Ui {
 
     final static String lineBreak = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
+    /**
+     * Introduction method shown when program is first run.
+     */
     public void introduceYourself() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -16,12 +22,20 @@ public class Ui {
         System.out.println(lineBreak);
     }
 
+    /**
+     * Goodbye message when the user enters the "bye" command.
+     */
     public void printByeMessage() {
         System.out.println(lineBreak);
         System.out.println("Duke says: Bye. Hope to see you again soon!");
         System.out.println(lineBreak);
     }
 
+    /**
+     * Prints out the list of tasks.
+     *
+     * @param tasks The current list of tasks.
+     */
     public void printTasks(ArrayList<Task> tasks) {
         System.out.println(lineBreak);
         System.out.println("Duke says: Here is your list of tasks :)");
@@ -36,6 +50,12 @@ public class Ui {
         System.out.println(lineBreak);
     }
 
+    /**
+     * Prints confirmation that a task was added successfully.
+     *
+     * @param task The task that was added.
+     * @param numTasks The new total number of tasks.
+     */
     public void printTaskAddition(Task task, int numTasks) {
         System.out.println(lineBreak);
         System.out.println("Duke says: I've added the task: ");
@@ -44,6 +64,12 @@ public class Ui {
         System.out.println(lineBreak);
     }
 
+    /**
+     * Prints confirmation that a task was successfully deleted.
+     *
+     * @param task The task that was deleted.
+     * @param numTasks The new total number of tasks.
+     */
     public void printTaskDeletion(Task task, int numTasks) {
         System.out.println(lineBreak);
         System.out.println("Duke says: I've deleted the task: ");
@@ -52,6 +78,12 @@ public class Ui {
         System.out.println(lineBreak);
     }
 
+    /**
+     * Prints confirmation that a task was successfully completed.
+     *
+     * @param task The task that was completed.
+     * @param numTasks The current total number of tasks.
+     */
     public void printTaskCompletion(Task task, int numTasks) {
         System.out.println(lineBreak);
         System.out.println("Duke says: You've completed the task: ");
@@ -60,18 +92,29 @@ public class Ui {
         System.out.println(lineBreak);
     }
 
+    /**
+     * Prints an error message to the user.
+     *
+     * @param msg The error that was thrown.
+     */
     public void printErrorMessage(Exception msg) {
         System.out.println(lineBreak);
         System.out.println(msg.getMessage());
         System.out.println(lineBreak);
     }
 
+    /**
+     * Prints a message to tell the user that Duke does not undertand their input.
+     */
     public void printUnknownCommandMessage() {
         System.out.println(lineBreak);
         System.out.println("Duke says: Sorry I don't understand what that means");
         System.out.println(lineBreak);
     }
 
+    /**
+     * Prints a message to tell the user that the task number they are trying to complete/delete does not exist.
+     */
     public void printInvalidIndexMessage() {
         System.out.println(lineBreak);
         System.out.println("Duke says: You don't have that many tasks!");

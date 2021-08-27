@@ -1,5 +1,8 @@
 package Duke;
 
+/**
+ * The main class for Duke.
+ */
 public class Duke {
 
     private Ui ui;
@@ -8,6 +11,11 @@ public class Duke {
     private boolean isRunning = true;
     private Parser parser = new Parser();
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param saveFileLocation The path to where the save file is to be stored.
+     */
     public Duke(String saveFileLocation) {
         ui = new Ui();
         storage = new Storage(saveFileLocation);
@@ -18,6 +26,9 @@ public class Duke {
         new Duke("docs\\save.txt").run();
     }
 
+    /**
+     * Runs the program until the bye command is used to end it.
+     */
     private void run() {
         ui.introduceYourself();
 

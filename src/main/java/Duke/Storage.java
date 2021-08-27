@@ -9,14 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This class encapsulated the management of local storage for Duke.
+ */
 public class Storage {
 
     private final String saveFileLocation;
 
+    /**
+     * Constructor for Storage object, requires the path to
+     * where the save file should be located.
+     *
+     * @param saveFileLocation
+     */
     public Storage(String saveFileLocation) {
         this.saveFileLocation = saveFileLocation;
     }
 
+    /**
+     * This method updates the local save file with the latest
+     * list of tasks. It is called whenever a task is added/deleted/completed.
+     *
+     * @param tasks The latest list of tasks.
+     */
     public void updateSave(List<Task> tasks) {
         String data = "";
         for (int i = 0; i < tasks.size(); i++) {
@@ -32,6 +47,13 @@ public class Storage {
         }
     }
 
+    /**
+     * This method is run once whenever the program is started up.
+     * It loads the previous save or creates a new save file if it is
+     * the first time the program is run.
+     *
+     * @return The array list from the previous save.
+     */
     public ArrayList<Task> loadSave() {
         try {
 

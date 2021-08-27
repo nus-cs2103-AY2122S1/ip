@@ -2,10 +2,18 @@ package Duke;
 
 import java.util.Scanner;
 
+/**
+ * This class encapsulates the understanding of commands.
+ * It calls the relevant command depending on the user's input.
+ */
 public class Parser {
 
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Gets the user's input and return the relevant command to execute.
+     * @return A command which determines how the program should react.
+     */
     public ICommand getInput() {
         String input = sc.nextLine();
 
