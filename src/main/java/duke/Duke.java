@@ -57,13 +57,7 @@ public class Duke {
     }
 
     /**
-     * Runs the duke.Duke chat bot.
-     * It takes in user inputs and responds accordingly.
-     * If a command is issued, the bot will execute the command if the appropriate message
-     * follows the command.
-     * Any invalid inputs are caught via custom Exceptions, thrown and printed for the user to see.
-     * Invalid inputs include empty inputs, incorrect formats, invalid index, empty messages and
-     * attempting to amend the list of Tasks when it is currently empty.
+     * Runs the Duke chat bot.
      */
 
     private void run() {
