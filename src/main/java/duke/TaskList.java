@@ -12,6 +12,13 @@ public class TaskList {
 
     /**
      * Constructor to initialize the Task List
+     */
+    public TaskList() {
+        taskList = new ArrayList<>();
+    }
+
+    /**
+     * Constructor to initialize the Task List
      *
      * @param storedTasks The Tasks initially Stored in the Duke
      */
@@ -65,5 +72,15 @@ public class TaskList {
      */
     public void completeTask(int index) {
         taskList.get(index).markAsCompleted();
+    }
+
+    public TaskList searchTaskList(String description) {
+        TaskList matchingTasks = new TaskList();
+        for (Task task : taskList) {
+            if (task.getDescription().contains(description)) {
+                matchingTasks.addTask(task);
+            }
+        }
+        return matchingTasks;
     }
 }

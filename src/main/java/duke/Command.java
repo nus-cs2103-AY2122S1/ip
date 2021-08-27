@@ -17,6 +17,7 @@ public class Command {
         DELETE,
         DONE,
         EVENT,
+        FIND,
         LIST,
         TODO,
         UNKNOWN
@@ -48,6 +49,9 @@ public class Command {
                 break;
             case EVENT:
                 this.typeOfCommand = Commands.EVENT;
+                break;
+            case FIND:
+                this.typeOfCommand = Commands.FIND;
                 break;
             case LIST:
                 this.typeOfCommand = Commands.LIST;
@@ -189,6 +193,21 @@ public class Command {
     }
 
     /**
+     * Method to check for the Task with the given String in the Task List
+     *
+     * @param searchDetails The String to be Searched in the Task List
+     * @param ui The Object to render the UI
+     * @param tasks The Object to contain the List of the Tasks
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
+    private void searchAndDisplayTaskList(String searchDetails, UI ui, TaskList tasks) throws DukeException {
+        if (searchDetails != null && !searchDetails.equals("")) {
+            ui.printTaskList(tasks.searchTaskList(searchDetails));
+        } else {
+            throw new DukeException("OOPS! I'm sorry, but I don't know that command");
+        }
+    }
+    /**
      * Method to check for the List Command and render the UI
      *
      * @param taskDetails The String describing the various attributes for the command
@@ -250,6 +269,9 @@ public class Command {
             break;
         case EVENT:
             addEvent(taskDetails, ui, tasks);
+            break;
+        case FIND:
+            searchAndDisplayTaskList(taskDetails, ui, tasks);
             break;
         case LIST:
             displayTaskList(taskDetails, ui, tasks);
