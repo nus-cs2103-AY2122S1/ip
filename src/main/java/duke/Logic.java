@@ -45,6 +45,9 @@ public class Logic {
             currentTask.completeTask();
             DataHandlerLayer.updateHistory();
             System.out.println("Ohhhh myyyy. I have been waiting for this quest to complete for ages.");
+        } else if (listOfCommandInputs.contains("find")) {
+            String temp = listOfCommandInputs.get(listOfCommandInputs.indexOf("find") + 1);
+            DataHandlerLayer.filterLog(temp);
         } else {
             processTask(packagedCommand, true);
         }

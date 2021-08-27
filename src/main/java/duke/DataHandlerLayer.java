@@ -58,6 +58,32 @@ public class DataHandlerLayer {
     }
 
     /**
+     * Prints a log of tasks that are filtered. True for completed and False for not completed
+     */
+    public static void printFilteredLog(boolean cond) {
+        int taskNumber = 1;
+        for (Task temp : log) {
+            if (temp.getCompleteStatus() == cond) {
+                System.out.println(taskNumber + ". " + temp.toString());
+                taskNumber++;
+            }
+        }
+    }
+
+
+    public static void filterLog(String keyword) {
+        for (int i = 0; i < log.size(); i++) {
+            Task temp = log.get(i);
+            if (temp.toString().contains(keyword)) {
+                Task currentTask = log.get(i);
+                int taskNumber = i + 1;
+                System.out.println(taskNumber + ". " + currentTask.toString());
+            }
+        }
+    }
+
+
+    /**
      * Deletes any task in the specified postion of log
      * @param position in the log which is based on index.
      * @throws IndexOutOfBoundsException If the player specifies a postion outside the length of the log
