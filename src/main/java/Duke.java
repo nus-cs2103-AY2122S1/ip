@@ -1,64 +1,51 @@
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.io.File;
 
 
 public class Duke {
-    private static TaskList list = new TaskList();
-    private static String filePath = "data/duke.txt";
-    private static String directoryName = "data";
+    private TaskList tasks;
+//    private String filePath = "data/tasks.txt";
+//    private String directoryName = "data";
 
-    public static void main(String[] args) {
+    private Storage storage;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            File directory = new File(directoryName);
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-            File data = new File(filePath);
-            data.createNewFile();
-            Scanner s = new Scanner(data);
-            while (s.hasNext()) {
-//                System.out.println(s.nextLine());
-                String[] array = s.nextLine().split("\\|");
-                switch (array[0]) {
-                    case "T": {
-                        list.loadTask(new Todo(array[2], Boolean.parseBoolean(array[1])));
-                        break;
-                    }
-                    case "D": {
-                        list.addTask(new Deadline(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
-                        break;
-                    }
-                    case "E": {
-                        list.addTask(new Event(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
-                        break;
-                    }
-                }
-            }
+            tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            tasks = new TaskList();
+        }
+    }
+
+    public void run() {
+        try {
+            storage.load();
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
         Scanner scanner = new Scanner(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?\n" + logo);
+        ui.showWelcome();
+
         while(true) {
-            System.out.println("____________________________________________________________");
+            ui.showLine();
             String command = scanner.nextLine();
             if (command.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                ui.showBye();
                 break;
             }
             if (command.equals("list")) {
-                list.printList();
+                tasks.printList();
                 continue;
             }
-            System.out.println("test");
             String[] commandSplit = command.split("\\s", 2);
 
             try {
@@ -66,15 +53,15 @@ public class Duke {
                     case "done":
                         //Marks tasks as done
                         int index = Integer.valueOf(commandSplit[1]) - 1;
-                        list.setDone(index);
-                        list.saveTask(filePath);
+                        tasks.setDone(index);
+                        storage.saveTask(tasks);
                         break;
 
                     case "delete":
                         //Deletes tasks
                         int indexD = Integer.valueOf(commandSplit[1]) - 1;
-                        list.deleteTask(indexD);
-                        list.saveTask(filePath);
+                        tasks.deleteTask(indexD);
+                        storage.saveTask(tasks);
                         break;
 
                     case "todo":
@@ -83,49 +70,43 @@ public class Duke {
                             throw new TaskException("The description of a todo cannot be empty");
                         }
                         Todo newT = new Todo(commandSplit[1], false);
-                        list.addTask(newT);
-                        list.saveTask(filePath);
+                        tasks.addTask(newT);
+                        storage.saveTask(tasks);
                         break;
                     case "deadline":
                         if (commandSplit.length == 1) {
                             throw new TaskException("The description of a deadline cannot be empty");
                         }
                         Task newD = Deadline.parseCommand(commandSplit[1]);
-                        list.addTask(newD);
-                        list.saveTask(filePath);
+                        tasks.addTask(newD);
+                        storage.saveTask(tasks);
                         break;
                     case "event":
                         if (commandSplit.length == 1) {
                             throw new TaskException("The description of an event cannot be empty");
                         }
                         Task newE = Event.parseCommand(commandSplit[1]);
-                        list.addTask(newE);
-                        list.saveTask(filePath);
+                        tasks.addTask(newE);
+                        storage.saveTask(tasks);
                         break;
 
                     default:
                         throw new DukeException();
-
-
                 }
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            } catch (TaskException e){
-                System.out.println(e.getMessage());
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
+            } catch (DukeException | TaskException | IOException e) {
+//                System.out.println(e.getMessage());
+//            } catch (TaskException e){
+//                System.out.println(e.getMessage());
+//            } catch (IOException e) {
+//                System.out.println(e.getMessage());
+            } catch (DateTimeParseException e) {
+                System.out.println("The format of the date should be entered in the form dd-MM-yyyy HH:mm");
             }
-            System.out.println("Now you have " + list.getNumTask() + " task" + (list.getNumTask() > 1 ? "s " : " ") + "in the list");
-
-//            if (commandSplit[0].equals("todo")) {
-//                Todo newTask = new Todo(commandSplit[1]);
-//                list.add(newTask);
-//
-//            }
-//            Task newTask = new Task(command);
-
-//            list.add(newTask);
-
+            System.out.println("Now you have " + tasks.getNumTask() + " task" + (tasks.getNumTask() > 1 ? "s " : " ") + "in the list");
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

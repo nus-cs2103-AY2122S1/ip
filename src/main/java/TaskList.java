@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class TaskList {
     private ArrayList<Task> list;
@@ -8,6 +9,30 @@ public class TaskList {
 
     public TaskList() {
         list = new ArrayList<>();
+    }
+
+    public TaskList(ArrayList<String> tasks) {
+        this.list = new ArrayList<>();
+        for (String s: tasks) {
+            numTask++;
+            String[] array = s.split("\\|");
+
+            switch (array[0]) {
+                case "T": {
+                    this.loadTask(new Todo(array[2], Boolean.parseBoolean(array[1])));
+                    break;
+                }
+                case "D": {
+                    this.loadTask(new Deadline(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
+                    break;
+                }
+                case "E": {
+                    this.loadTask(new Event(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
+                    break;
+                }
+            }
+        }
+
     }
 
     public void addTask(Task t) {
@@ -39,8 +64,8 @@ public class TaskList {
         System.out.println("I've marked this task as done: \n" + list.get(i));
     }
 
-    public Task get(int i) {
-        return this.list.get(i);
+    public ArrayList<Task> getList() {
+        return this.list;
     }
 
     public int getNumTask() {
@@ -51,14 +76,6 @@ public class TaskList {
 //        fw.write(text);
 //        fw.close();
 //    }
-
-    public void saveTask(String filePath) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (Task t : list) {
-            fw.write(t.getSavedAs() + System.lineSeparator());
-        }
-        fw.close();
-    }
 
 
 
