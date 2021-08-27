@@ -5,10 +5,10 @@ import exception.InvalidDateTimeException;
 import exception.InvalidTaskTimeFormatException;
 import exception.InvalidTaskTypeException;
 import exception.MissingCommandDescriptionException;
+import message.Message;
 import tasklist.Task;
 import tasklist.TaskList;
 import type.DukeCommandTypeEnum;
-import message.Message;
 
 /**
  * Encapsulates an add command after it is parsed from the user input.

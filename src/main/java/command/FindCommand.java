@@ -1,9 +1,9 @@
 package command;
 
 import exception.MissingCommandDescriptionException;
+import message.Message;
 import tasklist.TaskList;
 import type.DukeCommandTypeEnum;
-import message.Message;
 
 /**
  * Encapsulates a done command after it is parsed from user input.

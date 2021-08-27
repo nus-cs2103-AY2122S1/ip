@@ -4,10 +4,10 @@ import exception.ErrorAccessingFile;
 import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
 import exception.NonExistentTaskNumberException;
+import message.Message;
 import tasklist.Task;
 import tasklist.TaskList;
 import type.DukeCommandTypeEnum;
-import message.Message;
 
 /**
  * Encapsulates a done command after it is parsed from the user input.

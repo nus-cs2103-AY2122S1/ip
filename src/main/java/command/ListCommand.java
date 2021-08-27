@@ -1,7 +1,7 @@
 package command;
 
-import tasklist.TaskList;
 import message.Message;
+import tasklist.TaskList;
 
 /**
  * Encapsulates a list command after it is parsed from the user input.

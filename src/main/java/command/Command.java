@@ -3,9 +3,9 @@ package command;
 import exception.DukeException;
 import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
+import message.Message;
 import tasklist.TaskList;
 import type.DukeCommandTypeEnum;
-import message.Message;
 
 /**
  * Encapsulates a command after it is parsed from the user input.

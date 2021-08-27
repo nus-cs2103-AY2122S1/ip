@@ -3,7 +3,6 @@ package duke;
 import command.Command;
 import exception.DukeException;
 import javafx.application.Platform;
-import message.Message;
 import parser.Parser;
 import storage.Storage;
 import storage.StorageFile;

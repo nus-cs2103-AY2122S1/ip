@@ -1,7 +1,8 @@
 package controller;
 
+import java.io.IOException;
+
 import duke.Duke;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -11,8 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import message.Message;
-
-import java.io.IOException;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -29,6 +28,11 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
+    /**
+     * Instantiates the controller to render the main chat window with scrollbar and user input.
+     *
+     * @param duke Duke to process inputs.
+     */
     public MainWindow(Duke duke) {
         try {
             this.duke = duke;
@@ -42,6 +46,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Initializes the main window after variables are set.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

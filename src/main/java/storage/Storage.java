@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import tasklist.TaskList;
 import message.ErrorMessage;
 import message.Message;
+import tasklist.TaskList;
 
 /**
  * Encapsulates the object handling data that is stored in the hard disk.
