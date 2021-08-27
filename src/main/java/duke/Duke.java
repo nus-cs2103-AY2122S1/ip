@@ -8,6 +8,7 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 
+/** Encapsulates the logic unit of the application. */
 public class Duke {
     /** Hardcoded file path to save location. */
     private static final String FILEPATH = "./data/tasks.json";
@@ -31,7 +32,7 @@ public class Duke {
     }
 
     /**
-     * Feeds user's command to the program logic and returns a response.
+     * Feeds user's command to the program logic and returns a response as a string.
      *
      * @param input The user's input.
      * @return The response from executing the command.
@@ -50,6 +51,11 @@ public class Duke {
         return output;
     }
 
+    /**
+     * Checks if the last user command is an exit command.
+     *
+     * @return True if the last user command is an exit command, false otherwise.
+     */
     public boolean isExit() {
         return isExit;
     }

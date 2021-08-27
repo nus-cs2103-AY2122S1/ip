@@ -94,11 +94,21 @@ public class Deadline extends DatedTask {
         return tokens[0];
     }
 
+    /**
+     * Returns a string representation of the Deadline object.
+     *
+     * @return A string representation of the Deadline object.
+     */
     @Override
     public String toString() {
         return String.format("[D]%s %s (by: %s)", isDone ? "[X]" : "[ ]", description, date);
     }
 
+    /**
+     * Returns a JSON representation of the Deadline object.
+     *
+     * @return A JSON representation of the Deadline object.
+     */
     @Override
     @SuppressWarnings("unchecked")
     public JSONObject toJsonObject() {

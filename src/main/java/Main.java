@@ -7,9 +7,16 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+/** The application's driver class. */
 public class Main extends Application {
+    /** The Duke instance. */
     private Duke duke = new Duke();
 
+    /**
+     * Sets up application GUI.
+     *
+     * @param stage The program stage.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -26,10 +33,5 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void stop() {
-
     }
 }

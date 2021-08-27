@@ -49,9 +49,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns the Task as a JSON object.
+     * Returns a JSON representation of the Task.
      *
-     * @return A JSON object.
+     * @return A JSON representation of the Task.
      */
     public abstract JSONObject toJsonObject();
 

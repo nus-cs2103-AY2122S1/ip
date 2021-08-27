@@ -57,6 +57,11 @@ public class ListCommand extends Command {
         return outputFormatter("Here are the tasks happening on " + date + ":", tasks.toStringArray(date));
     }
 
+    /**
+     * Tests if a command is exit.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;

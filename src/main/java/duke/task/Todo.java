@@ -44,11 +44,21 @@ public class Todo extends Task {
         return new Todo(description, isDone);
     }
 
+    /**
+     * Returns a string representation of the Todo object.
+     *
+     * @return A string representation of the Todo object.
+     */
     @Override
     public String toString() {
         return String.format("[T]%s %s", isDone ? "[X]" : "[ ]", description);
     }
 
+    /**
+     * Returns a JSON representation of the Todo object.
+     *
+     * @return A JSON representation of the Todo object.
+     */
     @Override
     @SuppressWarnings("unchecked")
     public JSONObject toJsonObject() {

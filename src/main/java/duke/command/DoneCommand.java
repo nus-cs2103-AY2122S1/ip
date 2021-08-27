@@ -47,6 +47,11 @@ public class DoneCommand extends Command {
                 tasks.getTask(index).markTaskAsDone().toString());
     }
 
+    /**
+     * Tests if a command is exit.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;

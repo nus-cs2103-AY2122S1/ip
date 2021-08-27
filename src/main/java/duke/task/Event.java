@@ -88,11 +88,21 @@ public class Event extends DatedTask {
         return tokens[0];
     }
 
+    /**
+     * Returns a string representation of the Event object.
+     *
+     * @return A string representation of the Event object.
+     */
     @Override
     public String toString() {
         return String.format("[E]%s %s (at: %s)", isDone ? "[X]" : "[ ]", description, date);
     }
 
+    /**
+     * Returns a JSON representation of the Todo object.
+     *
+     * @return A JSON representation of the Todo object.
+     */
     @Override
     @SuppressWarnings("unchecked")
     public JSONObject toJsonObject() {

@@ -48,6 +48,11 @@ public class DeleteCommand extends Command {
                 String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks"));
     }
 
+    /**
+     * Tests if a command is exit.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;

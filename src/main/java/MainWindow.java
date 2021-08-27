@@ -5,13 +5,13 @@ import java.util.concurrent.TimeUnit;
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/** The main window controller. */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -22,18 +22,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
 
-    @FXML
-    private Button sendButton;
-
+    /** The Duke object. */
     private Duke duke;
 
-    private Image userImage = new Image(
+    /** The user's avatar. */
+    private final Image userImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/user.png")));
 
-    private Image dukeImage = new Image(
+    /** The bot's avatar. */
+    private final Image dukeImage = new Image(
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/ainsley.png")));
 
-    /** Initialises the window */
+    /** Initialises the window. */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -41,10 +41,12 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog("*booting up......*" + "\n" + "I'm the AinsleyBot v3.0!", dukeImage));
     }
 
+    /** Mounts Duke. */
     public void setDuke(Duke duke) {
         this.duke = duke;
     }
 
+    /** Handles the user's input. */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
@@ -55,8 +57,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (duke.isExit()) {
-            CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS)
-                    .execute(Platform::exit);
+            CompletableFuture.delayedExecutor(2, TimeUnit.SECONDS).execute(Platform::exit);
         }
     }
 }

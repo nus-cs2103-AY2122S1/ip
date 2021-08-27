@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
+/** Represents the dialog bubble of the user and the bot. */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -20,6 +21,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * DialogBox constructor.
+     *
+     * @param text The text to be inserted in the dialog box.
+     * @param img The avatar of the dialog box.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -29,7 +36,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
@@ -43,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox from the user.
+     *
+     * @param text The text to be inserted in the dialog box.
+     * @param img The avatar of the dialog box.
+     * @return A DialogBox from the user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox from the bot.
+     *
+     * @param text The text to be inserted in the dialog box.
+     * @param img The avatar of the dialog box.
+     * @return A DialogBox from the bot.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();

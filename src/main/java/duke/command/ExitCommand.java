@@ -35,7 +35,7 @@ public class ExitCommand extends Command {
     /**
      * Tests if a command is exit.
      *
-     * @return False.
+     * @return True.
      */
     @Override
     public boolean isExit() {

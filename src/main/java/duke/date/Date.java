@@ -49,6 +49,12 @@ public class Date {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Checks for date equality.
+     *
+     * @param other The object to be compared with.
+     * @return True if the other object is an instance of Date and contains the same string representation.
+     */
     @Override
     public boolean equals(Object other) {
         if (other instanceof Date) {

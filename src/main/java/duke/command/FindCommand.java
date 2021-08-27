@@ -39,6 +39,11 @@ public class FindCommand extends Command {
                 tasks.filter((task) -> task.keywordMatcher(keyword)).toStringArray());
     }
 
+    /**
+     * Tests if a command is exit.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;
