@@ -127,6 +127,33 @@ public class Parser {
         }
     }
 
+    public void find_execute() {
+        String keyword = userInput.split(" ")[1];
+        String taskString = "";
+        boolean hasTask = false;
+        for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
+            Task task = tasks.get(i);
+            String description = task.getDescription();
+            if (description.contains(keyword)) {
+                taskString += tasks.get(i).toString() + "\n";
+                hasTask = true;
+            }
+        }
+        if (hasTask) {
+            String messageTrue = "    ----------------------------\n"
+                    + "Here are your tasks: \n"
+                    + taskString
+                    + "    ----------------------------";
+            System.out.println(messageTrue);
+        } else {
+            String messageFalse = "    ----------------------------\n"
+                    + "There are no tasks with this keyword!\n"
+                    + "    ----------------------------";
+            System.out.println(messageFalse);
+        }
+
+    }
+
     public String generateTasks() {
         String taskString = "";
         int i = 0;

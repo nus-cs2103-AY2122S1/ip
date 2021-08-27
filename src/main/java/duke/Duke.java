@@ -54,7 +54,10 @@ public class Duke {
                     c.deadline_execute();
                 } else if (splitInput[0].equals("delete")) {
                     c.delete_execute();
+                } else if (splitInput[0].equals("find")) {
+                    c.find_execute();
                 } else {
+                    System.out.println("split input: " + splitInput[0]);
                     System.out.println("sorry! i'm not taught that command yet :<");
                 }
             } catch (IndexOutOfBoundsException e) {
