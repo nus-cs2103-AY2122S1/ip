@@ -25,7 +25,7 @@ public abstract class Task {
         return DELETE_MSG + "\n" + this.toString();
     }
 
-    public String actionString() {
+    public String commandString() {
         return NEW_TASK_MSG + "\n"
             + this.toString();
     }
