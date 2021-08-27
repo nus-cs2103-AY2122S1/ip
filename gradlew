@@ -72,7 +72,11 @@ case "`uname`" in
   Darwin* )
     darwin=true
     ;;
+<<<<<<< HEAD
   MSYS* | MINGW* )
+=======
+  MINGW* )
+>>>>>>> d8398594b7bc43da5eb865321c5a50cec4b3923d
     msys=true
     ;;
   NONSTOP* )
@@ -82,8 +86,12 @@ esac
 
 CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 
+<<<<<<< HEAD
 
 # Determine the Java duke.command to use to start the JVM.
+=======
+# Determine the Java command to use to start the JVM.
+>>>>>>> d8398594b7bc43da5eb865321c5a50cec4b3923d
 if [ -n "$JAVA_HOME" ] ; then
     if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
         # IBM's JDK on AIX uses strange locations for the executables
@@ -130,7 +138,10 @@ fi
 if [ "$cygwin" = "true" -o "$msys" = "true" ] ; then
     APP_HOME=`cygpath --path --mixed "$APP_HOME"`
     CLASSPATH=`cygpath --path --mixed "$CLASSPATH"`
+<<<<<<< HEAD
 
+=======
+>>>>>>> d8398594b7bc43da5eb865321c5a50cec4b3923d
     JAVACMD=`cygpath --unix "$JAVACMD"`
 
     # We build the pattern for arguments to be converted via cygpath
@@ -179,7 +190,11 @@ save () {
 }
 APP_ARGS=`save "$@"`
 
+<<<<<<< HEAD
 # Collect all arguments for the java duke.command, following the shell quoting and substitution rules
+=======
+# Collect all arguments for the java command, following the shell quoting and substitution rules
+>>>>>>> d8398594b7bc43da5eb865321c5a50cec4b3923d
 eval set -- $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS "\"-Dorg.gradle.appname=$APP_BASE_NAME\"" -classpath "\"$CLASSPATH\"" org.gradle.wrapper.GradleWrapperMain "$APP_ARGS"
 
 exec "$JAVACMD" "$@"
