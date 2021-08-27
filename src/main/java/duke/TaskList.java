@@ -22,18 +22,18 @@ public class TaskList {
             String[] array = s.split("\\|");
 
             switch (array[0]) {
-                case "T": {
-                    this.loadTask(new Todo(array[2], Boolean.parseBoolean(array[1])));
-                    break;
-                }
-                case "D": {
-                    this.loadTask(new Deadline(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
-                    break;
-                }
-                case "E": {
-                    this.loadTask(new Event(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
-                    break;
-                }
+            case "T": {
+                this.loadTask(new Todo(array[2], Boolean.parseBoolean(array[1])));
+                break;
+            }
+            case "D": {
+                this.loadTask(new Deadline(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
+                break;
+            }
+            case "E": {
+                this.loadTask(new Event(array[2], LocalDateTime.parse(array[3]), Boolean.parseBoolean(array[1])));
+                break;
+            }
             }
         }
 
