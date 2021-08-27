@@ -92,7 +92,7 @@ public class TaskList {
         }
         if ((type.equals("deadline") || type.equals("event")) && deadlineEvent.length < 2) {
             //No time given or the command /by or /at wasn't given by the user
-            throw new InvalidInputException(Responses.INVALID_TASK_NUMBER);
+            throw new InvalidInputException(Responses.INVALID_FORMAT);
         }
         switch (type) {
         case "todo":
