@@ -20,6 +20,12 @@ public class TaskList {
         this.counter = 0;
     }
 
+    TaskList(ArrayList<Task> taskArr) {
+        this.taskArr = taskArr;
+        this.counter = 0;
+
+    }
+
     public void addTodo(String[] strparse) throws DukeException {
         StringBuilder taskb = new StringBuilder();
         if (strparse.length == 1) {
