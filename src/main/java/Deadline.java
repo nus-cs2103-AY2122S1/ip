@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Class to represent a task as a with a deadline
  */
@@ -7,13 +11,18 @@ public class Deadline extends Task {
 
     private String task;
     private boolean isDone;
-    private String time;
+    private LocalDate time;
 
     Deadline(String T, boolean D, String time) {
         super(T, D);
         task = T;
         isDone = D;
-        this.time = time;
+        try {
+            this.time = LocalDate.parse(time);
+        } catch (DateTimeParseException error) {
+            System.out.println("Please Enter date in this format 'YYYY-MM-dd'");
+        }
+
     }
 
     /**
@@ -31,6 +40,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return ("[D][" + (isDone ? "X" : " ") + "] " + task + " (by: " + this.time + ")");
+        return ("[D][" + (isDone ? "X" : " ") + "] " + task + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")");
     }
 }
