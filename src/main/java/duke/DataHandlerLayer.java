@@ -70,6 +70,19 @@ public class DataHandlerLayer {
         }
     }
 
+
+    public static void filterLog(String keyword) {
+        for (int i = 0; i < log.size(); i++) {
+            Task temp = log.get(i);
+            if (temp.toString().contains(keyword)) {
+                Task currentTask = log.get(i);
+                int taskNumber = i + 1;
+                System.out.println(taskNumber + ". " + currentTask.toString());
+            }
+        }
+    }
+
+
     /**
      * Deletes any task in the specified postion of log
      * @param position in the log which is based on index.
