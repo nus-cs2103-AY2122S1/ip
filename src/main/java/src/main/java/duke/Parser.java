@@ -45,6 +45,8 @@ public class Parser {
                     throw new NoNumberException("☹ OOPS!!! No task number was given in the input");
                 }
                 ui.deleteTask(Integer.parseInt(split[1]));
+            } else if (split[0].equals("find")) {
+                ui.find(split[1]);
             } else if (split[0].equals("todo")) {
                 if (split.length < 2) {
                     throw new NoDescriptionException("☹ OOPS!!! The description of a " + split[0] + " cannot be empty.");
