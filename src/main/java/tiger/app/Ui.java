@@ -30,8 +30,6 @@ public class Ui {
     /**
      * Attempts to initialise the {@code Ui} class until successful. Actions that should be done when the Ui is
      * starting up, such as loading saved tasks, should go here.
-     *
-     * @return a new {@code Ui} class that is properly initialised.
      */
 
     public void start() {

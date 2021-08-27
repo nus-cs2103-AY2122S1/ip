@@ -21,9 +21,9 @@ public class CustomDate {
     /**
      * Constructor for the {@code CustomDate} class.
      *
-     * @code param localDate Date to be added.
-     * @code param localTime Time to be added.
-     * @code param hasTime Whether the user wants to have a specified time.
+     * @param localDate Date to be added.
+     * @param localTime Time to be added.
+     * @param hasTime Whether the user wants to have a specified time.
      */
 
     public CustomDate(LocalDate localDate, LocalTime localTime, boolean hasTime) {
