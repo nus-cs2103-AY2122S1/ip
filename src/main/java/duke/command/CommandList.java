@@ -26,7 +26,7 @@ public class CommandList extends Command {
      */
     public CommandList(TaskList taskList, String args) {
         this.commandName = "list /name <name> /date DD/MM/YYYY";
-        this.description = "Displays a list of task";
+        this.description = "Toggles completion of task";
         this.arguments = new String[]{
                 "/name Optional argument to search for particular name",
                 "/date Optional date argument in DAY/MONTH/YEAR, " +

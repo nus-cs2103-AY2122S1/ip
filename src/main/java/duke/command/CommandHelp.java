@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.Ui;
+
 /**
  * Command to display the help window
  */

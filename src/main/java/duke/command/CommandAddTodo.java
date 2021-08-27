@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Ui;
 import task.TaskList;
 import task.TaskTodo;
 
