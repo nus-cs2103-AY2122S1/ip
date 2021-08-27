@@ -24,7 +24,7 @@ public class MyParser {
      * @param duke Duke instance referred to.
      * @throws DukeException if line inputted by the user is formatted incorrectly.
      */
-    protected void parse(String command,String description,Duke duke) throws DukeException {
+    public void parse(String command,String description,Duke duke) throws DukeException {
         String userDescription = description.trim();
         switch (command) {
         case "bye":
