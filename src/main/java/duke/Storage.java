@@ -12,19 +12,18 @@ public class Storage {
     private Path directoryPath = null;
     public Storage(String path) {
         String home = System.getProperty("user.home");
-        //        java.nio.file.Path directoryPath = java.nio.file.Paths.get(home, "iP", "data");
         this.filePath = java.nio.file.Paths.get(home, "iP", path.split("/")[0], path.split("/")[1]);
         this.directoryPath = java.nio.file.Paths.get(home, "iP", path.split("/")[0]);
     }
     public String convertTaskToText(Task task) {
-        String result = task.type + "|";
+        String result = task.getType() + "|";
         if(task.isCompleted()) {
             result += "1|";
         }else {
             result += "0|";
         }
         result += task.getTaskContent();
-        if(task.type.equals("D") || task.type.equals("E")) {
+        if(task.getType().equals("D") || task.getType().equals("E")) {
             result += "|" + task.getTiming();
         }
         return result;

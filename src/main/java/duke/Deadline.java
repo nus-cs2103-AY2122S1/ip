@@ -4,7 +4,7 @@ public class Deadline extends Task {
     private String deadline;
     public Deadline(String taskContent) {
         super(taskContent.split(" /by ")[0], "D");
-        this.deadline = Parser.parseTiming(taskContent.split(" /by ")[1]);
+        deadline = Parser.parseTiming(taskContent.split(" /by ")[1]);
     }
     public Deadline(String taskContent, String deadline) {
         super(taskContent, "D");
@@ -12,14 +12,14 @@ public class Deadline extends Task {
     }
     @Override
     public String getTiming() {
-        return this.deadline;
+        return deadline;
     }
     @Override
     public String toString() {
         if(super.isCompleted()) {
-            return "[D][X] " + super.getTaskContent() + " " + "(by: " + this.deadline + ")";
+            return "[D][X] " + super.getTaskContent() + " " + "(by: " + deadline + ")";
         }else {
-            return "[D][ ] " + super.getTaskContent() + " " + "(by: " + this.deadline + ")";
+            return "[D][ ] " + super.getTaskContent() + " " + "(by: " + deadline + ")";
         }
     }
 }

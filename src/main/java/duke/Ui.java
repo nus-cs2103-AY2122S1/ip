@@ -1,12 +1,10 @@
 package duke;
 
-import duke.*;
-
 import java.util.Scanner;
 
 public class Ui {
-    Storage storage;
-    TaskList taskList;
+    private Storage storage;
+    private TaskList taskList;
     boolean isExit = false;
     public Ui(Storage storage, TaskList taskList) {
         this.storage = storage;

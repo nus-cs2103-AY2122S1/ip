@@ -2,5 +2,5 @@ T|1|hello
 T|0|hi
 T|0|hello
 E|0|hellllo|Sep 30 2020 6pm
-D|1|do homework|Sep 30 2020 7pm
 E|0|party|Oct 10 2010 9pm
+T|1|procrastinate
