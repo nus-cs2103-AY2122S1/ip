@@ -4,21 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Event class.
- *
- * This class is a {@link kayu.task.Task} that has an {@link #KEYWORD} 
- * for its DateTime field.
+ * Represents a {@link kayu.task.Task} that has an {@link #KEYWORD} for its DateTime field.
  */
 public class Event extends Task {
 
     /** Keyword for Event {@link kayu.task.Task} class. */
-    public final static String KEYWORD = "E";
+    public static final String KEYWORD = "E";
 
     /** Split word used for command parsing. */
-    public final static String SPLIT_WORD = "at";
+    public static final String SPLIT_WORD = "at";
 
     private final LocalDate atDate;
-    
     private final LocalTime atTime;
 
     /**
@@ -73,10 +69,10 @@ public class Event extends Task {
      * @return Formatted String for field {@link #KEYWORD}.
      */
     private String getFormattedAt() {
-        return "(" 
-                + SPLIT_WORD 
-                + ": " 
-                + atDate 
+        return "("
+                + SPLIT_WORD
+                + ": "
+                + atDate
                 + " " + atTime
                 + ")";
     }
@@ -86,12 +82,12 @@ public class Event extends Task {
      */
     @Override
     public String toEncodedString() {
-        return KEYWORD 
+        return KEYWORD
                 + SPLIT_TEMPLATE
-                + super.toEncodedString() 
+                + super.toEncodedString()
                 + SPLIT_TEMPLATE
                 + atDate
-                + SPLIT_TEMPLATE 
+                + SPLIT_TEMPLATE
                 + atTime;
     }
 

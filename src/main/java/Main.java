@@ -1,9 +1,7 @@
 import kayu.Kayu;
 
 /**
- * Main class.
- * 
- * This class drives the whole program.
+ * Drives the whole program.
  */
 public class Main {
 

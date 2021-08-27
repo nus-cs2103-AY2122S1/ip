@@ -1,34 +1,27 @@
 package kayu.service;
 
 /**
- * ChatBot class.
- *
- * This class acts as a communicator to the user on the command line through {@link kayu.Kayu}.
+ * Communicates to the user on the command line through {@link kayu.Kayu}.
  */
 public class ChatBot {
 
-    private final static String LOGO = "\n" +
-            " /$$   /$$  /$$$$$$  /$$     /$$ /$$   /$$\n" +
-            "| $$  /$$/ /$$__  $$|  $$   /$$/| $$  | $$\n" +
-            "| $$ /$$/ | $$  \\ $$ \\  $$ /$$/ | $$  | $$\n" +
-            "| $$$$$/  | $$$$$$$$  \\  $$$$/  | $$  | $$\n" +
-            "| $$  $$  | $$__  $$   \\  $$/   | $$  | $$\n" +
-            "| $$\\  $$ | $$  | $$    | $$    | $$  | $$\n" +
-            "| $$ \\  $$| $$  | $$    | $$    |  $$$$$$/\n" +
-            "|__/  \\__/|__/  |__/    |__/     \\______/ \n";
-
-    private final static String LINE_SPLIT =
-            "___________________________________________________________________________";
-
-    private final static String GREETING = "Hello!\n" +
-            "I'm Kayu, your alternative personal task management to Duke!\n" +
-            "What can I do for you?";
-
-    private final static String BYE = "Bye. Hope to see you again soon!";
-    
-    private final static String ERROR_ON_SAVE = "Error updating task file.";
-
-    private final static String ERROR_EXIT = "Please check your saved file, exiting program...";
+    private static final String LOGO = "\n"
+            + " /$$   /$$  /$$$$$$  /$$     /$$ /$$   /$$\n"
+            + "| $$  /$$/ /$$__  $$|  $$   /$$/| $$  | $$\n"
+            + "| $$ /$$/ | $$  \\ $$ \\  $$ /$$/ | $$  | $$\n"
+            + "| $$$$$/  | $$$$$$$$  \\  $$$$/  | $$  | $$\n"
+            + "| $$  $$  | $$__  $$   \\  $$/   | $$  | $$\n"
+            + "| $$\\  $$ | $$  | $$    | $$    | $$  | $$\n"
+            + "| $$ \\  $$| $$  | $$    | $$    |  $$$$$$/\n"
+            + "|__/  \\__/|__/  |__/    |__/     \\______/ \n";
+    private static final String LINE_SPLIT = "____________________________________"
+            + "_______________________________________";
+    private static final String GREETING = "Hello!\n"
+            + "I'm Kayu, your alternative personal task management to Duke!\n"
+            + "What can I do for you?";
+    private static final String BYE = "Bye. Hope to see you again soon!";
+    private static final String ERROR_ON_SAVE = "Error updating task file.";
+    private static final String ERROR_EXIT = "Please check your saved file, exiting program...";
 
     /**
      * Prints logo.

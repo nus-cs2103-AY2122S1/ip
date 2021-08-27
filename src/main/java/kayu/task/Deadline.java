@@ -4,21 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Deadline class.
- *
- * This class is a {@link kayu.task.Task} that has a {@link #KEYWORD} 
- * for its DateTime field.
+ * Represents a {@link kayu.task.Task} that has a {@link #KEYWORD} for its DateTime field.
  */
 public class Deadline extends Task {
 
     /** Keyword for Deadline {@link kayu.task.Task} class. */
-    public final static String KEYWORD = "D";
+    public static final String KEYWORD = "D";
 
     /** Split word used for command parsing. */
-    public final static String SPLIT_WORD = "by";
+    public static final String SPLIT_WORD = "by";
 
     private final LocalDate byDate;
-
     private final LocalTime byTime;
 
     /**
@@ -36,7 +32,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Initializes the Deadline {@link kayu.task.Task}. Overloaded constructor that sets 
+     * Initializes the Deadline {@link kayu.task.Task}. Overloaded constructor that sets
      * <code>isDone</code> field to false.
      * 
      * @param description String description of Task.
@@ -86,12 +82,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toEncodedString() {
-        return KEYWORD 
+        return KEYWORD
                 + SPLIT_TEMPLATE
-                + super.toEncodedString() 
+                + super.toEncodedString()
                 + SPLIT_TEMPLATE
                 + byDate
-                + SPLIT_TEMPLATE 
+                + SPLIT_TEMPLATE
                 + byTime;
     }
 

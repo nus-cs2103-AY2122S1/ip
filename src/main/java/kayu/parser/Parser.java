@@ -14,9 +14,7 @@ import kayu.commands.ListCommand;
 import kayu.commands.TodoCommand;
 
 /**
- * Parser class.
- *
- * This class helps parse user input into {@link kayu.commands.Command} to execute.
+ * Parses user input into {@link kayu.commands.Command} to execute.
  */
 public class Parser {
 

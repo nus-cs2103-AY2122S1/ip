@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * DateTimeFormat class.
- * 
- * This class helps as a utility for {@link kayu.parser.Parser} 
- * and {@link kayu.commands.Command} in parsing DateTime String representations.
+ * Contains DateTime formats for {@link kayu.parser.Parser} and {@link kayu.commands.Command}.
  */
 public class DateTimeFormat {
-    
+    // Lists containing formats.
     private final List<DateTimeFormatter> dateFormats = new ArrayList<>();
-    
     private final List<DateTimeFormatter> timeFormats = new ArrayList<>();
 
+    // Private to allow construction through public static method.
+    private DateTimeFormat() {}
+    
     /**
      * Generates an instance of this class, as well as initialise its fields.
      * 
@@ -26,9 +25,6 @@ public class DateTimeFormat {
         dateTimeFormat.initializeFormats();
         return dateTimeFormat;
     }
-    
-    // private to allow construction through public static method
-    private DateTimeFormat() {}
     
     private void initializeFormats() {
         initializeDateFormats();

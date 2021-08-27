@@ -1,23 +1,20 @@
 package kayu.task;
 
 /**
- * Task class.
- *
- * This abstract class acts as a base for all tasks handled by {@link kayu.Kayu}.
+ * Represents the abstract class that acts as a base for all tasks handled by {@link kayu.Kayu}.
  */
 public abstract class Task {
 
     /** Template used for encoding storage. */
-    public static String SPLIT_TEMPLATE = " # ";
+    public static final String SPLIT_TEMPLATE = " # ";
 
     /** Done state for encoding/decoding. */
-    public static String DONE = "1";
+    public static final String DONE = "1";
 
     /** Not done state for encoding/decoding. */
-    public static String NOT_DONE = "0";
+    public static final String NOT_DONE = "0";
     
     private final String description;
-
     private boolean isDone;
 
     /**
@@ -32,7 +29,7 @@ public abstract class Task {
     }
 
     /**
-     * Initializes a new Task instance. Overloaded constructor that sets 
+     * Initializes a new Task instance. Overloaded constructor that sets
      * {@link #isDone} field to false.
      * 
      * @param description String description of Task.

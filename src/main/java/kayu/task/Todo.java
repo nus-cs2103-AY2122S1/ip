@@ -1,14 +1,12 @@
 package kayu.task;
 
 /**
- * Todo class.
- *
- * This class is the simplest {@link kayu.task.Task} which only has a description.
+ * Represents the simplest {@link kayu.task.Task} which only has a description.
  */
 public class Todo extends Task {
     
     /** Keyword for Todo {@link kayu.task.Task} class. */
-    public final static String KEYWORD = "T";
+    public static final String KEYWORD = "T";
 
     /**
      * Initializes the Todo {@link kayu.task.Task}.
@@ -21,7 +19,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Initializes the Todo {@link kayu.task.Task}. Overloaded constructor that sets 
+     * Initializes the Todo {@link kayu.task.Task}. Overloaded constructor that sets
      * <code>isDone</code> field to false.
      *
      * @param description String description of Task.

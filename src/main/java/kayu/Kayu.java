@@ -1,50 +1,41 @@
 package kayu;
 
+import java.util.List;
+import java.util.Scanner;
+
 import kayu.commands.Command;
 import kayu.exception.DukeException;
 import kayu.exception.StorageException;
-import kayu.service.ChatBot;
 import kayu.parser.Parser;
+import kayu.service.ChatBot;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
 import kayu.task.Task;
 
-import java.util.List;
-import java.util.Scanner;
-
 /**
- * Kayu class.
- *
- * This class holds the main logic for Kayu project (CS2103T's iP).
+ * Holds the main logic for Kayu project (CS2103T's iP).
  * Kayu is a task manager for users that love the command line interface.
  * Code structure inspiration from <code>se-edu</code>'s addressbook-level2 code on GitHub.
- * 
- * @see <a href="https://github.com/se-edu/addressbook-level2">addressbook-level2</a>
  * @author muhammad-khair, damithc, j-lum
+ * @see <a href="https://github.com/se-edu/addressbook-level2">addressbook-level2</a>
  */
 public class Kayu {
 
     private final Parser parser = new Parser();
-
     private final TaskList taskList = new TaskList();
-    
     private final Storage storage = new Storage();
-
     private final ChatBot chatBot = new ChatBot();
-    
     private final Scanner scanner = new Scanner(System.in);
 
     /**
-     * Runs the whole program process. Greets user, loads data, 
+     * Runs the whole program process. Greets user, loads data,
      * reads commands, and terminates upon {@link kayu.commands.ByeCommand#COMMAND_WORD}.
      */
     public void runProgram() {
         chatBot.printLogo();
         initializeData();
         chatBot.printGreetingMessage();
-        
         readCommandsAndExecute();
-        
         chatBot.printExitMessage();
     }
 
@@ -55,7 +46,6 @@ public class Kayu {
         try {
             List<Task> tasks = storage.load();
             taskList.initializeTasks(tasks);
-            
         } catch (StorageException exception) {
             chatBot.printError(exception.getMessage());
             terminate();
@@ -63,7 +53,7 @@ public class Kayu {
     }
 
     /**
-     * Reads the commands inputted by user, parses them into {@link kayu.commands.Command} 
+     * Reads the commands inputted by user, parses them into {@link kayu.commands.Command}
      * and executes them. {@link kayu.service.ChatBot} helps output the responses from such
      * executions.
      */

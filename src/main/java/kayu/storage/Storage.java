@@ -1,11 +1,5 @@
 package kayu.storage;
 
-import kayu.exception.StorageException;
-import kayu.task.Deadline;
-import kayu.task.Event;
-import kayu.task.Task;
-import kayu.task.Todo;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,10 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import kayu.exception.StorageException;
+import kayu.task.Deadline;
+import kayu.task.Event;
+import kayu.task.Task;
+import kayu.task.Todo;
+
 /**
- * Storage class.
- * 
- * This class handles the reading and writing of {@link kayu.task.Task} into files.
+ * Handles the reading and writing of {@link kayu.task.Task} into files.
  */
 public class Storage {
 
