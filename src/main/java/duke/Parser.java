@@ -19,6 +19,8 @@ public class Parser {
                     tasks.event(input, storage, ui);
                 } else if (input.contains("delete")) {
                     tasks.delete(input, storage, ui);
+                } else if (input.contains("find")) {
+                    tasks.handleFind(input, ui);
                 } else {
                     System.out.println("can type properly pls");
                 }

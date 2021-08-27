@@ -54,4 +54,12 @@ public class Ui {
         System.out.println("this one no more liao ah :\n" + task.toString()
                 + "\nNow you got " + length + " thing(s). sian");
     }
+
+    public void displayMatchingList(TaskList tasks) {
+        System.out.println("all these similar one:");
+        for (int i = 0; i < tasks.length(); i++) {
+            Task task = tasks.get(i);
+            System.out.println((i + 1) + "." + task.toString());
+        }
+    }
 }

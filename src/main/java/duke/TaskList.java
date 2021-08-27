@@ -1,4 +1,5 @@
 package duke;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -84,5 +85,16 @@ public class TaskList {
         } catch(ArrayIndexOutOfBoundsException err) {
             throw new DukeException("you where got so many tasks?");
         }
+    }
+
+    public void handleFind(String input, Ui ui) {
+        String keyword = input.substring(5);
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(keyword)) {
+                matchingTasks.add(task);
+            }
+        }
+        ui.displayMatchingList(new TaskList(matchingTasks));
     }
 }
