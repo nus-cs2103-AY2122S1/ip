@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * A class to encapsulate the command of

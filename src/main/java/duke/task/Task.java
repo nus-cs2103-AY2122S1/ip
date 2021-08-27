@@ -1,9 +1,10 @@
-package duke;
+package duke.task;
 
 /** A class to encapsulate the tasks
  * which user inputs.
  */
 public class Task {
+
     /** The description of the task */
     protected String description;
 
@@ -19,6 +20,10 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     /**

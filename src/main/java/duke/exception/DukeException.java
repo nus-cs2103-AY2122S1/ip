@@ -1,4 +1,4 @@
-package duke;
+package duke.exception;
 
 /**
  * A class to represent exceptions specific to Duke.

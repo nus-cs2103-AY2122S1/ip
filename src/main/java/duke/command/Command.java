@@ -1,5 +1,9 @@
-package duke;
+package duke.command;
 
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
 /**
  * An abstract class to represent the command
  * of the user.

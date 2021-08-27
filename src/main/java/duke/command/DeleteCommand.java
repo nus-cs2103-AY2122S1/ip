@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * A class which encapsulates the command of

@@ -1,5 +1,8 @@
 package duke;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+
 /**
  * Represents a Duke bot that can interact with users
  * and keep track of different tasks.

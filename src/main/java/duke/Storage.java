@@ -1,11 +1,15 @@
 package duke;
 
-import javax.swing.text.DateFormatter;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -116,7 +120,7 @@ public class Storage {
     public String fileString(Task task) {
         String toAdd = task.taskIndicator() + " | " +
                 (task.getStatusIcon().equals("X")
-                        ? "Y" : "N") + " | " + task.description.trim();
+                        ? "Y" : "N") + " | " + task.getDescription().trim();
 
         if (task.taskIndicator().equals("D")) {
             Deadline temp = (Deadline) task;

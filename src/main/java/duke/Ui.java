@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.Scanner;
 
 /**
@@ -15,10 +17,10 @@ public class Ui {
     private final static String DIVIDER = "  ---------------------------------------------";
 
     /** The indentation for 4 spaces */
-    protected final static String INDENT_1 = "    ";
+    public final static String INDENT_1 = "    ";
 
     /** The indentation for 6 spaces */
-    protected final static String INDENT_2 = "      ";
+    public final static String INDENT_2 = "      ";
 
     /**
      * A public constructor to initialize the scanner.

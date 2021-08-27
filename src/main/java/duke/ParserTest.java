@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+import duke.task.Todo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
