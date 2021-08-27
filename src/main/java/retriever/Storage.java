@@ -23,6 +23,7 @@ import retriever.task.Todo;
  */
 public class Storage {
     private String filePath;
+    private Ui ui;
 
     /**
      * Sets the file path, so that operations such as read and write may be
@@ -32,6 +33,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+        this.ui = new Ui();
     }
 
     /**
@@ -42,12 +44,12 @@ public class Storage {
             File myFile = new File(filePath);
 
             if (myFile.createNewFile()) {
-                System.out.println("Woof! File is Created!");
+                ui.printMessage("Woof! File is Created!");
             } else {
-                System.out.println("File Already Exists Master.");
+                ui.printMessage("File Already Exists Master.");
             }
         } catch (IOException e) {
-            System.out.println("Master, Your Computer Has Issues!");
+            ui.printErrorMessage("Master, Your Computer Has Issues!");
         }
     }
 
@@ -105,7 +107,7 @@ public class Storage {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Master, File Does Not Exist, Give Me A Treat, And\n"
+            ui.printErrorMessage("Master, File Does Not Exist, Give Me A Treat, And\n"
                     + "I Shall Create One For You! :)");
             // In case the file doesn't exist, one is created.
             createNewFile();
@@ -145,7 +147,7 @@ public class Storage {
             fw.write(taskAsText);
             fw.close();
         } catch (IOException e) {
-            System.out.println("Master, Sorry! I Ate The File!");
+            ui.printErrorMessage("Master, Sorry! I Ate The File!");
         }
     }
 
@@ -179,7 +181,7 @@ public class Storage {
 
             boolean isNameChangeSuccessful = tempFile.renameTo(inputFile);
         } catch (IOException e) {
-            System.out.println("Master! Error Reading File. Gimme Treats, And I Help You!");
+            ui.printErrorMessage("Master! Error Reading File. Gimme Treats, And I Help You!");
         }
     }
 
@@ -221,7 +223,7 @@ public class Storage {
 
             boolean isNameChangeSuccessful = tempFile.renameTo(inputFile);
         } catch (IOException e) {
-            System.out.println("Master! Error Reading File. Gimme Treats, And I Help You!");
+            ui.printErrorMessage("Master! Error Reading File. Gimme Treats, And I Help You!");
         }
     }
 }

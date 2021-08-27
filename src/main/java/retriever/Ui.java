@@ -33,6 +33,15 @@ public class Ui {
     }
 
     /**
+     * Prints the message received as an argument.
+     *
+     * @param message The message user would like to print.
+     */
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+
+    /**
      * Prints the welcome message.
      */
     public void printWelcomeMessage() {
