@@ -7,6 +7,9 @@ import duke.exceptions.InvalidTaskIDException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The TaskList class encapsulates a list of user's tasks.
+ */
 public class TaskList {
     private List<Task> taskList;
 
@@ -14,10 +17,21 @@ public class TaskList {
         this.taskList = new ArrayList<Task>();
     }
 
+    /**
+     * Adds a Task object to the current TaskList.
+     *
+     * @param t The Task object to be added.
+     */
     public void add(Task t) {
         this.taskList.add(t);
     }
 
+    /**
+     * Deletes a Task object from the TaskList.
+     *
+     * @param index Index of the Task object to be deleted.
+     * @throws InvalidTaskIDException If the index provided does not correspond to a Task in the TaskList.
+     */
     public void delete(int index) throws InvalidTaskIDException {
         if (index >= 0 && index < this.taskList.size()) {
             this.taskList.remove(index);
@@ -26,6 +40,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns a Task object by its index in the TaskList.
+     *
+     * @param index The index of the Task object.
+     * @return Task object corresponding to the index provided.
+     * @throws InvalidTaskIDException If the index provided does not correspond to a Task in the TaskList.
+     */
     public Task get(int index) throws InvalidTaskIDException {
         if (index >= 0 && index < this.taskList.size()) {
             return this.taskList.get(index);
@@ -34,6 +55,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a Task object in the TaskList as completed.
+     *
+     * @param index The index of the Task object.
+     * @throws InvalidTaskIDException If the index provided does not correspond to a Task in the TaskList.
+     */
     public void markAsCompleted(int index) throws InvalidTaskIDException {
         if (index >= 0 && index < this.taskList.size()) {
             this.taskList.get(index).markAsCompleted();
@@ -42,6 +69,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the number of Task objects in the TaskList.
+     *
+     * @return The size of the Task List.
+     */
     public int getSize() {
         return this.taskList.size();
     }

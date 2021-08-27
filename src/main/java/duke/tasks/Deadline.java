@@ -3,7 +3,11 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Deadline class encapsulates a deadline with a deadline timing.
+ */
 public class Deadline extends Task {
+    /** Deadline stored as a LocalDate object */
     private LocalDate deadline;
 
     public Deadline(String taskname, String deadline) {
@@ -11,6 +15,11 @@ public class Deadline extends Task {
         this.deadline = LocalDate.parse(deadline);
     }
 
+    /**
+     * Returns a formatted deadline time.
+     *
+     * @return A string of the deadline time.
+     */
     public String getDeadline() {
         return this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
