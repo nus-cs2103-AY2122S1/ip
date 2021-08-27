@@ -12,8 +12,8 @@ delete
 done 1
 delete 1
 todo Implement Automated Text UI Testing
-event Run away from problems /at 18 Aug 2021
-deadline Submit IP /by 19 Aug 2021 2359
+event Run away from problems /at 18-08-2021 01:00
+deadline Submit IP /by 19-8-2021 23:59
 list
 done 2
 list
