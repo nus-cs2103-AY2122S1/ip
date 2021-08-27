@@ -6,7 +6,14 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * A class to handle the loading and storage of the list of tasks.
+ */
 public class Storage {
+    /**
+     * Loads the txt file of the list of tasks from the specified path.
+     * @return An ArrayList of Tasks representative of the file.
+     */
     public static ArrayList<Task> loadFile() {
         ArrayList<Task> arrayList = new ArrayList<>();
         try {
@@ -47,7 +54,7 @@ public class Storage {
             try {
                 taskFile.createNewFile();
             } catch (IOException ioException) {
-                System.out.println("task could not be created :(");
+                System.out.println("List could not be created :(");
             }
 
         } catch (SkeltalException e) {
@@ -57,6 +64,10 @@ public class Storage {
         return arrayList;
     }
 
+    /**
+     * Writes the current list of tasks to the txt file at the specified filepath.
+     * @throws Exception If the file does not exist.
+     */
     public static void store() throws Exception {
         FileWriter fw = new FileWriter("src/main/Data/skeltal.txt", false);
         fw.write(TaskList.storeTasks());
