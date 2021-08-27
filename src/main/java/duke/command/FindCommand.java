@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /** Represents the "find" command. */
 public class FindCommand extends Command {
@@ -32,13 +31,12 @@ public class FindCommand extends Command {
      * Prints the tasks matching the keyword.
      *
      * @param tasks The list of tasks.
-     * @param ui The UI object.
      * @param storage The storage utility.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print("Here are the tasks containing \"" + keyword + "\":");
-        ui.print(tasks.filter((task) -> task.keywordMatcher(keyword)).toStringArray());
+    public String execute(TaskList tasks, Storage storage) {
+        return outputFormatter("Here are the tasks containing \"" + keyword + "\":",
+                tasks.filter((task) -> task.keywordMatcher(keyword)).toStringArray());
     }
 
     @Override

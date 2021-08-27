@@ -5,7 +5,6 @@ import duke.exception.BadInputFormatException;
 import duke.exception.InvalidDateException;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /** Represents the "list" command. */
 public class ListCommand extends Command {
@@ -45,22 +44,17 @@ public class ListCommand extends Command {
      * Prints the user's Tasks.
      *
      * @param tasks The list of tasks in the program.
-     * @param ui The UI object.
      * @param storage The storage utility.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         if (tasks.size() < 1) {
-            ui.print("No tasks yet!");
-            return;
+            return outputFormatter("No tasks yet!");
         }
         if (date == null) {
-            ui.print("Here are the tasks in your list:");
-            ui.print(tasks.toStringArray());
-            return;
+            return outputFormatter("Here are the tasks in your list:", tasks.toStringArray());
         }
-        ui.print("Here are the tasks happening on " + date + ":");
-        ui.print(tasks.toStringArray(date));
+        return outputFormatter("Here are the tasks happening on " + date + ":", tasks.toStringArray(date));
     }
 
     @Override

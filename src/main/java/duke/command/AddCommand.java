@@ -11,7 +11,6 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /** Represents an "add" command */
 public class AddCommand extends Command {
@@ -63,13 +62,12 @@ public class AddCommand extends Command {
      * Adds the Task into the TaskList.
      *
      * @param tasks The list of tasks in the program.
-     * @param ui The UI object.
      * @param storage The storage utility.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         tasks.add(task);
-        ui.print("Got it. I've added this task:",
+        return outputFormatter("Hehe buoi, I've added this task:",
                 task.toString(),
                 String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks"));
     }
