@@ -34,6 +34,13 @@ public class Deadline extends Task {
     }
 
     /**
+     * method to convert deadline to a string with time interpreted by the chat bot
+     */
+    String storageString() {
+        return ("D | " + (isDone ? "1" : "0") + " | " + this.task + " | " + this.time.toString());
+    }
+
+    /**
      * overridden method to give the String representation of the task
      *
      * @return

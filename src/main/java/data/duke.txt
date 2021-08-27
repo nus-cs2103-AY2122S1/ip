@@ -1,3 +1,2 @@
-T | 1 | read book
-E | 1 | concert | 5pm
-D | 0 | 2103T | 4pm
+E | 0 | concert | 2pm
+D | 0 | read book | 2019-12-01
