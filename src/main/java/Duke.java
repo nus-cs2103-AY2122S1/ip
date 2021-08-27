@@ -8,8 +8,11 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import  java.util.Scanner;
+import  java.time.LocalDate;
 
 public class Duke {
 
@@ -95,26 +98,24 @@ public class Duke {
 
                 String description = command.split("/by ")[0].substring(9);
                 String by = command.split("/by ")[1];
-
+                LocalDate deadline  = LocalDate.parse(by);
                 if (description.isBlank()) {
                     printBreakLine();
                     throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                 }
-
-                Task newTask = new Deadline(description, by, false);
+                Task newTask = new Deadline(description, deadline, false);
                 commandList.add(newTask);
                 addTaskMsg(newTask);
 
             } else if(command.contains("event")) {
                 String description = command.split("/at ")[0].substring(6);
                 String by = command.split("/at ")[1];
-
+                LocalDate eventDate  = LocalDate.parse(by);
                 if (description.isBlank()) {
                     printBreakLine();
                     throw new DukeException("OOPS!!! The description of an event cannot be empty.");
                 }
-
-                Task newTask = new Event(description, by, false);
+                Task newTask = new Event(description, eventDate, false);
                 commandList.add(newTask);
                 addTaskMsg(newTask);
 
@@ -145,6 +146,7 @@ public class Duke {
             String description = null;
             String dateTime = null;
             int timeStart;
+            LocalDate date;
             switch (taskString.charAt(1)) {
             case 'T':
                 description = taskString.substring(7) + " ";
@@ -154,13 +156,15 @@ public class Duke {
                 timeStart = taskString.indexOf("at: ");
                 description = taskString.substring(7, timeStart - 2) + " ";
                 dateTime = taskString.substring(timeStart + 4, taskString.length() - 1);
-                commandList.add(new Event(description, dateTime, isDone));
+                date = LocalDate.parse(dateTime, DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+                commandList.add(new Event(description, date, isDone));
                 break;
             case 'D':
                 timeStart = taskString.indexOf("by: ");
                 description = taskString.substring(7, timeStart - 2) + " ";
                 dateTime = taskString.substring(timeStart + 4, taskString.length() - 1);
-                commandList.add(new Deadline(description, dateTime, isDone));
+                date = LocalDate.parse(dateTime, DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+                commandList.add(new Deadline(description, date, isDone));
             default:
                 break;
             }

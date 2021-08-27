@@ -1,12 +1,21 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 public class Deadline extends Task{
-    protected String by;
-    public Deadline(String description, String by, boolean isDone) {
+
+    protected LocalDate deadline;
+    public Deadline(String description, LocalDate deadline, boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        this.deadline = deadline;
+    }
+
+    private String formatDate() {
+        return deadline.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by + ")";
+        return "[D]" + super.toString() + "(by: " + formatDate() + ")";
     }
 }
