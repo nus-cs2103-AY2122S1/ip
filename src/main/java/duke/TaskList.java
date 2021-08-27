@@ -120,7 +120,7 @@ public class TaskList {
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> results = new ArrayList<Task>();
         for (Task item : TaskList) {
-            if (item.toString().contains(keyword)) {
+            if ((item.toString().toLowerCase()).contains(keyword.toLowerCase())) {
                 results.add(item);
             }
         }
