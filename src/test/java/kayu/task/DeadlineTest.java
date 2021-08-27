@@ -2,15 +2,15 @@ package kayu.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 public class DeadlineTest {
 
-    private static Deadline deadline;
+    private Deadline deadline;
 
     @BeforeEach
     public void setUp() {

@@ -66,9 +66,7 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    /**
-     * Sets isDone field to true.
-     */
+    /** Sets isDone field to true. */
     public void markAsDone() {
         setDone(true);
     }

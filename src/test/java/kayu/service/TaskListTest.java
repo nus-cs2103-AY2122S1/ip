@@ -1,24 +1,26 @@
 package kayu.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static kayu.service.TaskList.EMPTY_LIST_ERROR_MESSAGE;
 import static kayu.service.TaskList.FULL_CAPACITY_ERROR_MESSAGE;
 import static kayu.service.TaskList.INVALID_TASK_ERROR_MESSAGE;
 import static kayu.service.TaskList.MAX_STORAGE;
-
-import kayu.exception.DukeException;
-import kayu.exception.StorageException;
-import kayu.task.Task;
-import kayu.task.Todo;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import kayu.exception.DukeException;
+import kayu.exception.StorageException;
+import kayu.task.Task;
+import kayu.task.Todo;
+
 
 public class TaskListTest {
 

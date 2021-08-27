@@ -1,7 +1,5 @@
 package kayu.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static kayu.commands.CommandType.BYE;
 import static kayu.commands.CommandType.DEADLINE;
 import static kayu.commands.CommandType.DELETE;
@@ -12,6 +10,10 @@ import static kayu.commands.CommandType.FIND;
 import static kayu.commands.CommandType.INVALID;
 import static kayu.commands.CommandType.LIST;
 import static kayu.commands.CommandType.TODO;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 import kayu.commands.ByeCommand;
 import kayu.commands.Command;
@@ -22,7 +24,6 @@ import kayu.commands.EventCommand;
 import kayu.commands.FindCommand;
 import kayu.commands.ListCommand;
 import kayu.commands.TodoCommand;
-import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     

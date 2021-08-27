@@ -4,15 +4,12 @@ import kayu.exception.DukeException;
 import kayu.service.TaskList;
 
 /**
- * Command class.
- * 
- * This class holds the base logic required for other Command classes to utilise.
+ * Holds the base logic required for other Command classes to utilise.
  */
 public abstract class Command {
-    
-    private final CommandType commandType;
-    
+
     protected final String commandParams;
+    private final CommandType commandType;
 
     /**
      * Initializes the Command instance.
@@ -26,7 +23,7 @@ public abstract class Command {
     }
 
     /**
-     * Initializes the Command instance. 
+     * Initializes the Command instance.
      * Overloads the {@link #commandParams} as an empty String.
      * 
      * @param commandType {@link kayu.commands.CommandType} for Command instance.
@@ -37,7 +34,7 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command based on the implemented child instances 
+     * Executes the command based on the implemented child instances
      * and returns the outcome as a String.
      * 
      * @param taskList TaskList instance to execute on.
@@ -65,7 +62,7 @@ public abstract class Command {
     }
 
     /**
-     * Checks if the Command instance is a {@link kayu.commands.ByeCommand} 
+     * Checks if the Command instance is a {@link kayu.commands.ByeCommand}
      * using its {@link #commandType}.
      * 
      * @return Boolean true if is {@link kayu.commands.ByeCommand}, else false.

@@ -7,10 +7,7 @@ import kayu.exception.DukeException;
 import kayu.service.TaskList;
 
 /**
- * EmptyCommand class.
- * 
- * This class is an instance of {@link kayu.commands.Command} that 
- * is used when the user has inputted an empty command.
+ * Represents a {@link kayu.commands.Command} that indicates that the user has inputted an empty command.
  */
 public class EmptyCommand extends Command {
 

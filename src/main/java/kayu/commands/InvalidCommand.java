@@ -7,10 +7,7 @@ import kayu.exception.DukeException;
 import kayu.service.TaskList;
 
 /**
- * InvalidCommand class.
- *
- * This class is an instance of {@link kayu.commands.Command} that 
- * is used when the user has inputted an invalid command.
+ * Represents a {@link kayu.commands.Command} that indicates that the user has inputted an invalid command.
  */
 public class InvalidCommand extends Command {
 

@@ -23,23 +23,17 @@ public class ChatBot {
     private static final String ERROR_ON_SAVE = "Error updating task file.";
     private static final String ERROR_EXIT = "Please check your saved file, exiting program...";
 
-    /**
-     * Prints logo.
-     */
+    /** Prints logo. */
     public void printLogo() {
         print(LOGO);
     }
 
-    /**
-     * Prints greeting message.
-     */
+    /** Prints greeting message. */
     public void printGreetingMessage() {
         printMessage(GREETING);
     }
 
-    /**
-     * Prints a closing statement before program terminates.
-     */
+    /** Prints a closing statement before program terminates. */
     public void printExitMessage() {
         printMessage(BYE);
     }
@@ -55,16 +49,12 @@ public class ChatBot {
         }
     }
 
-    /**
-     * Generates an error on save message.
-     */
+    /** Generates an error on save message. */
     public void printErrorOnSave() {
         printError(ERROR_ON_SAVE);
     }
 
-    /**
-     * Generates an exit error message.
-     */
+    /** Generates an exit error message. */
     public void printTerminateMessage() {
         printMessage(ERROR_EXIT);
     }

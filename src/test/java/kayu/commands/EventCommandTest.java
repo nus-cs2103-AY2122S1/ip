@@ -1,37 +1,35 @@
 package kayu.commands;
 
+import static kayu.commands.CommandMessage.ERROR_IMPROPER_FORMATTING;
+import static kayu.commands.CommandMessage.MESSAGE_CREATED_EVENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static kayu.commands.CommandMessage.MESSAGE_CREATED_EVENT;
-import static kayu.commands.CommandMessage.ERROR_IMPROPER_FORMATTING;
-
-import kayu.exception.DukeException;
-import kayu.parser.DateTimeFormat;
-import kayu.service.TaskList;
-import kayu.task.Event;
-import kayu.task.Task;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventCommandTest {
-    
-    private TaskList taskList;
-    
-    private DateTimeFormat dateTimeFormat;
-    
-    private static List<String> DATE_LIST;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-    private static List<String> TIME_LIST;
+import kayu.exception.DukeException;
+import kayu.parser.DateTimeFormat;
+import kayu.service.TaskList;
+import kayu.task.Event;
+import kayu.task.Task;
+
+public class EventCommandTest {
+
+    private static final List<String> DATE_LIST = new ArrayList<>();
+    private static final List<String> TIME_LIST = new ArrayList<>();
+    private TaskList taskList;
+    private DateTimeFormat dateTimeFormat;
     
     @BeforeAll
     public static void setFormats() {
-        DATE_LIST = new ArrayList<>();
+        DATE_LIST.clear();
         DATE_LIST.add("2021-08-20"); // default format
         DATE_LIST.add("2021-8-20");
         DATE_LIST.add("20-08-2021");
@@ -41,7 +39,7 @@ public class EventCommandTest {
         DATE_LIST.add("20/08/2021");
         DATE_LIST.add("20/8/2021");
         
-        TIME_LIST = new ArrayList<>();
+        TIME_LIST.clear();
         TIME_LIST.add("22:30"); // default format
         TIME_LIST.add("2230");
         TIME_LIST.add("10:30 PM");
@@ -64,8 +62,8 @@ public class EventCommandTest {
         String parameters = desc + " /at " + date + ' ' + time;
         Command eventCommand = new EventCommand(parameters, dateTimeFormat);
         Task expectedTask = new Event(
-                "meeting with friends", 
-                LocalDate.parse(DATE_LIST.get(0)), 
+                "meeting with friends",
+                LocalDate.parse(DATE_LIST.get(0)),
                 LocalTime.parse(TIME_LIST.get(0)));
         String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, 1);
         
@@ -89,7 +87,7 @@ public class EventCommandTest {
                 LocalDate.parse(DATE_LIST.get(0)),
                 LocalTime.parse(TIME_LIST.get(0)));
     
-        for (int idx = 0; idx < DATE_LIST.size(); idx ++) {
+        for (int idx = 0; idx < DATE_LIST.size(); idx++) {
             try {
                 String parameters = String.format(paramFormat, DATE_LIST.get(idx));
                 Command eventCommand = new EventCommand(parameters, dateTimeFormat);
@@ -115,7 +113,7 @@ public class EventCommandTest {
                 LocalDate.parse(DATE_LIST.get(0)),
                 LocalTime.parse(TIME_LIST.get(0)));
 
-        for (int idx = 0; idx < TIME_LIST.size(); idx ++) {
+        for (int idx = 0; idx < TIME_LIST.size(); idx++) {
             try {
                 String parameters = String.format(paramFormat, TIME_LIST.get(idx));
                 Command eventCommand = new EventCommand(parameters, dateTimeFormat);
@@ -157,7 +155,7 @@ public class EventCommandTest {
         } catch (DukeException exception) {
             String expected = String.format(
                     ERROR_IMPROPER_FORMATTING,
-                    EventCommand.COMMAND_WORD, 
+                    EventCommand.COMMAND_WORD,
                     Event.SPLIT_WORD);
             assertEquals(expected, exception.getMessage());
         }

@@ -5,18 +5,15 @@ import static kayu.commands.CommandMessage.MESSAGE_MATCHING_CONTENTS;
 import static kayu.commands.CommandMessage.MESSAGE_NO_MATCHING_CONTENTS;
 import static kayu.commands.CommandType.FIND;
 
+import java.util.Map;
+
 import kayu.exception.DukeException;
 import kayu.service.TaskList;
 import kayu.task.Task;
 
-import java.util.Map;
-
 /**
- * FindCommand class.
- * 
- * This class is an instance of {@link kayu.commands.Command} that uses the 
- * keyword {@link #COMMAND_WORD}. It is used to help the user find the relevant 
- * {@link kayu.task.Task} whose description matches with the keyword parameters specified.
+ * Represents a {@link kayu.commands.Command} that finds the relevant {@link kayu.task.Task}s
+ * whose description matches with the keyword specified.
  */
 public class FindCommand extends Command {
 

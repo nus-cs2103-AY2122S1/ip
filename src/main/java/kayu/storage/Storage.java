@@ -23,15 +23,15 @@ import kayu.task.Todo;
  */
 public class Storage {
 
-    // Default task file directory.
-    private String taskDirectoryPath = "data";
-    private String taskFilePath = taskDirectoryPath + "/task_list.txt";
-    
     // Error message templates.
     protected static final String UNABLE_TO_CREATE_DIRECTORY = "Load/save directory ./%s cannot be created.";
     protected static final String UNABLE_TO_CREATE_FILE = "Load/save file ./%s cannot be created.";
     protected static final String UNABLE_TO_LOAD_PATH = "Path ./%s cannot be accessed/loaded.";
     protected static final String INVALID_TASK_FORMAT = "'%s' is an invalid Task entry.";
+    
+    // Default task file directory.
+    private String taskDirectoryPath = "data";
+    private String taskFilePath = taskDirectoryPath + "/task_list.txt";
 
     /**
      * Sets the desired file path of {@link kayu.task.Task} storage.

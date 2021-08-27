@@ -5,28 +5,25 @@ import static kayu.commands.CommandMessage.ERROR_IMPROPER_DATE;
 import static kayu.commands.CommandMessage.ERROR_IMPROPER_FORMATTING;
 import static kayu.commands.CommandMessage.ERROR_IMPROPER_TIME;
 
-import kayu.exception.DukeException;
-import kayu.parser.DateTimeFormat;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import kayu.exception.DukeException;
+import kayu.parser.DateTimeFormat;
+
 /**
- * AddTaskCommand class.
- * 
- * This class is an instance of {@link kayu.commands.Command} and adds on methods that 
- * are used by {@link kayu.commands.Command}s that requires some additional parsing.
- * Some such parsing requirements are extracting the String description or {@link java.time.LocalDate}.
+ * Holds shared methods that are used by {@link kayu.commands.Command}s that adds {@link kayu.task.Task}s
+ * such as extracting the String description or {@link java.time.LocalDate} from String parameters.
  */
 public abstract class AddTaskCommand extends Command {
 
     private final DateTimeFormat dateTimeFormat;
 
     /**
-     * Initializes an AddTaskCommand instance
+     * Initializes an AddTaskCommand instance.
      *
      * @param commandType {@link kayu.commands.CommandType} for Command instance.
      * @param commandParams String parameters fed into the command by user.
@@ -37,7 +34,7 @@ public abstract class AddTaskCommand extends Command {
         this.dateTimeFormat = dateTimeFormat;
     }
     
-    protected String[] splitUserParams(String userParams, String commandName, String splitKey) 
+    protected String[] splitUserParams(String userParams, String commandName, String splitKey)
             throws DukeException {
         
         try {
@@ -47,8 +44,8 @@ public abstract class AddTaskCommand extends Command {
             
         } catch (ArrayIndexOutOfBoundsException exception) {
             throw new DukeException(String.format(
-                    ERROR_IMPROPER_FORMATTING, 
-                    commandName, 
+                    ERROR_IMPROPER_FORMATTING,
+                    commandName,
                     splitKey));
         }
     }

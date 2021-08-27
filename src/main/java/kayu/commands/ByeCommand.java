@@ -6,10 +6,7 @@ import kayu.exception.DukeException;
 import kayu.service.TaskList;
 
 /**
- * ByeCommand class.
- *
- * This class is an instance of {@link kayu.commands.Command} that uses 
- * the keyword {@link #COMMAND_WORD}. It indicates the termination of the program.
+ * Represents a {@link kayu.commands.Command} that indicates the termination of the program.
  */
 public class ByeCommand extends Command {
 

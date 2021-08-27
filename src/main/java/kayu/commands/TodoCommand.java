@@ -4,16 +4,14 @@ import static kayu.commands.CommandMessage.MESSAGE_CREATED_TODO;
 import static kayu.commands.CommandType.TODO;
 
 import kayu.exception.DukeException;
+import kayu.parser.DateTimeFormat;
 import kayu.service.TaskList;
 import kayu.task.Task;
 import kayu.task.Todo;
-import kayu.parser.DateTimeFormat;
 
 /**
- * TodoCommand class.
- * 
- * This class is an instance of {@link kayu.commands.AddTaskCommand} that uses the 
- * keyword {@link #COMMAND_WORD}. It creates a {@link kayu.task.Todo} and saves it.
+ * Represents an {@link kayu.commands.AddTaskCommand} that creates a {@link kayu.task.Todo}
+ * and saves it in {@link kayu.service.TaskList}.
  */
 public class TodoCommand extends AddTaskCommand {
 

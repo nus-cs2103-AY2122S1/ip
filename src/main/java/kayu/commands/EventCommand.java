@@ -3,20 +3,18 @@ package kayu.commands;
 import static kayu.commands.CommandMessage.MESSAGE_CREATED_EVENT;
 import static kayu.commands.CommandType.EVENT;
 
-import kayu.exception.DukeException;
-import kayu.service.TaskList;
-import kayu.task.Event;
-import kayu.task.Task;
-import kayu.parser.DateTimeFormat;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import kayu.exception.DukeException;
+import kayu.parser.DateTimeFormat;
+import kayu.service.TaskList;
+import kayu.task.Event;
+import kayu.task.Task;
+
 /**
- * EventCommand class.
- *
- * This class is an instance of {@link kayu.commands.AddTaskCommand} that uses the keyword 
- * {@link #COMMAND_WORD}. It creates a {@link kayu.task.Event} and saves it.
+ * Represents an {@link kayu.commands.AddTaskCommand} that creates a {@link kayu.task.Event}
+ * and saves it in {@link kayu.service.TaskList}.
  */
 public class EventCommand extends AddTaskCommand {
 

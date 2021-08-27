@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     
-    private static Todo todo;
+    private Todo todo;
 
     @BeforeEach
     public void setUp() {

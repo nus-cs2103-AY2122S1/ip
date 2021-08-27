@@ -9,17 +9,14 @@ import kayu.service.TaskList;
 import kayu.task.Task;
 
 /**
- * EmptyCommand class.
- *
- * This class is an instance of {@link kayu.commands.Command} that uses the keyword {@link #COMMAND_WORD}. 
- * It is used when the user wants a certain {@link kayu.task.Task} to be deleted.
+ * Represents a {@link kayu.commands.Command} that deletes a certain {@link kayu.task.Task}
+ * in {@link kayu.service.TaskList}.
  */
 public class DeleteCommand extends Command {
 
     /** Key word for command. */
     public static final String COMMAND_WORD = "delete";
-
-
+    
     /**
      * Initializes a Delete- {@link kayu.commands.Command}.
      *
@@ -37,7 +34,6 @@ public class DeleteCommand extends Command {
         try {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.deleteTask(taskNumber);
-            
             return String.format(MESSAGE_DELETED_TASK, selectedTask, taskList.getCapacity());
             
         } catch (NumberFormatException exception) {

@@ -1,18 +1,8 @@
 package kayu.storage;
 
+import static kayu.storage.Storage.INVALID_TASK_FORMAT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static kayu.storage.Storage.INVALID_TASK_FORMAT;
-
-import kayu.exception.StorageException;
-import kayu.task.Deadline;
-import kayu.task.Event;
-import kayu.task.Task;
-import kayu.task.Todo;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,25 +14,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import kayu.exception.StorageException;
+import kayu.task.Deadline;
+import kayu.task.Event;
+import kayu.task.Task;
+import kayu.task.Todo;
+
 public class StorageTest {
     
     private static final String RESOURCE_PATH = "src/test/resources";
-
     private static final String FILE_PATH = RESOURCE_PATH + "/storage_test_default.txt";
-    
-    private static List<Task> TASK_LIST;
-    
+    private static final List<Task> TASKS = new ArrayList<>();
     private Storage storage;
     
     @BeforeAll
     public static void setTaskList() {
-        TASK_LIST = new ArrayList<>();
-        TASK_LIST.add(new Todo("test this program", true));
-        TASK_LIST.add(new Deadline(
+        TASKS.clear();
+        TASKS.add(new Todo("test this program", true));
+        TASKS.add(new Deadline(
                 "do this",
                 LocalDate.parse("2020-10-10"),
                 LocalTime.parse("10:30")));
-        TASK_LIST.add(new Event(
+        TASKS.add(new Event(
                 "run there",
                 true,
                 LocalDate.parse("2020-10-16"),
@@ -58,7 +56,7 @@ public class StorageTest {
     @AfterEach
     public void reset() throws IOException {
         Path filePath = Paths.get(FILE_PATH);
-        List<String> taskLines = TASK_LIST.stream()
+        List<String> taskLines = TASKS.stream()
                 .map(Task::toEncodedString)
                 .collect(Collectors.toList());
         Files.write(filePath, taskLines);
@@ -69,9 +67,9 @@ public class StorageTest {
         List<Task> tasks = storage.load();
         assertEquals(3, tasks.size());
 
-        for (int idx = 0; idx < tasks.size(); idx ++) {
+        for (int idx = 0; idx < tasks.size(); idx++) {
             Task loadedTask = tasks.get(idx);
-            Task expectedTask = TASK_LIST.get(idx);
+            Task expectedTask = TASKS.get(idx);
             assertEquals(expectedTask.toString(), loadedTask.toString());
         }
     }
@@ -87,7 +85,7 @@ public class StorageTest {
         List<String> saved = Files.readAllLines(filePath);
         assertEquals(newTasks.size(), saved.size());
         
-        for (int idx = 0; idx < newTasks.size(); idx ++) {
+        for (int idx = 0; idx < newTasks.size(); idx++) {
             Task task = newTasks.get(idx);
             String encoded = saved.get(idx);
             assertEquals(task.toEncodedString(), encoded);
