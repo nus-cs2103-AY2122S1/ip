@@ -17,6 +17,11 @@ public class Storage {
     private static String delimiter = " | ";
     private static String delimiter_regex = " \\| ";
 
+    /**
+     * Creates Storage class based on file path
+     *
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
