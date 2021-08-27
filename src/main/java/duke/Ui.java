@@ -59,13 +59,18 @@ public class Ui {
         System.out.printf("Noted.I've removed this task:\n%s\nNow you have %d %s in the list\n", task, size, t);
     }
 
+
     /**
-     * Lists all tasks in the list
+     * Lists required tasks in the list
      *
      * @param list  list of tasks
+     * @param cmd determine which message to be shown
      */
-    public void showTaskList(TaskList list) {
-        System.out.println("Here are the tasks in your list:");
+    public void showTaskList(TaskList list, String cmd) {
+        String msg = cmd.equals("list")
+                ? "Here are the tasks in your list:"
+                : "Here are the matching tasks in your list:";
+        System.out.println(msg);
         for (int i = 0; i < list.getSize(); i++) {
             Task s = list.getTask(i);
             System.out.printf("%d.%s%n", i + 1, s);
