@@ -2,7 +2,19 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * An interpreter that evaluates the user input and produces a Command based on
+ * what the user has requested for.
+ */
 public class Parser {
+    /**
+     * This method evaluates a string given to it by the program and produces a Command
+     * that does whatever the user has requested for.
+     *
+     * @param str String that is inputted by the user when prompted and passed into this method.
+     * @return A Command that makes the Ui, Storage and TaskList perform various actions.
+     * @throws DukeException An error thrown due to user input error.
+     */
     public static Command parse(String str) throws DukeException {
         if (str.equals("bye")) {
             return new ExitCommand();

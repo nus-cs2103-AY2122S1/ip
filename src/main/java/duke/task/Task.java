@@ -3,6 +3,10 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * A task is an item written by the user and consists of the name of the task,
+ * whether it is done or not and the time in which it needs to be done by(when applicable).
+ */
 public class Task {
 
     private String itemName;
@@ -18,14 +22,29 @@ public class Task {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Returns the task title when needed.
+     *
+     * @return the task title.
+     */
     public String getItemName() {
         return itemName;
     }
 
+    /**
+     * Checks whether the task is completed.
+     *
+     * @return the task completion status.
+     */
     public boolean getIsDone() {
         return isDone;
     }
 
+    /**
+     * Changes the completion status of the task.
+     *
+     * @param bool Changes the completion status to the param bool.
+     */
     public void changeIsDone(boolean bool) {
         isDone = bool;
     }

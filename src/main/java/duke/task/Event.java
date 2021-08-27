@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event is an extension of Task, and includes a start time for the event when the user specifies it.
+ */
 public class Event extends Task {
 
     private String startTime;

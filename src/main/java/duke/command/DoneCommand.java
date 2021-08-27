@@ -6,6 +6,9 @@ import duke.Ui;
 import duke.Storage;
 import duke.task.Task;
 
+/**
+ * A command that changes the selected task status to 'done'.
+ */
 public class DoneCommand implements Command {
 
     private int startOfString;
@@ -14,6 +17,15 @@ public class DoneCommand implements Command {
         this.startOfString = startOfString;
     }
 
+    /**
+     * Executes a command that changes the task in the list to done as well as change the item status to
+     * 'done' in storage. Ui will output the task that has been changed to done afterwards.
+     *
+     * @param taskList Tasklist that contains an Arraylist of agendas on the list.
+     * @param ui Ui that outputs something based on the command given.
+     * @param storage Storage that changes the list stored in data/duke.txt based on the command.
+     * @throws DukeException catches an error when there is an error in input.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task taskToChange = taskList.retrieveTask(startOfString);
@@ -21,6 +33,11 @@ public class DoneCommand implements Command {
         ui.markAsDone(taskToChange);
     }
 
+    /**
+     * A method that checks whether the current command will cause the program to exit or not.
+     *
+     * @return a boolean that prompts the program whether to exit.
+     */
     @Override
     public boolean isExit() {
         return false;

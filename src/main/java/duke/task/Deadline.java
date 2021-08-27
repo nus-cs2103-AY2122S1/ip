@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline is an extension of task, which includes an endTime specified by the user.
+ */
 public class Deadline extends Task {
 
     private String endTime;
