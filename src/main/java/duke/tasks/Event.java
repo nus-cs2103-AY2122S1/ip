@@ -1,19 +1,21 @@
+package duke.tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
     protected LocalDate dateTime;
 
-    public Event(String description, String dateTime) {
+    public Event(String description, LocalDate dateTime) {
         super(description);
-        this.dateTime = LocalDate.parse(dateTime);
+        this.dateTime = dateTime;
     }
     @Override
     public boolean hasDueDate(LocalDate dueDate) {
         return dueDate.isEqual(this.dateTime);
     }
 
-    public Event(String description, String dateTime, boolean isDone) {
+    public Event(String description, LocalDate dateTime, boolean isDone) {
         super(description, isDone);
         this.dateTime = dateTime;
     }
