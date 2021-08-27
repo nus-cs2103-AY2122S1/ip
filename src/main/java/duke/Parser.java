@@ -58,14 +58,16 @@ public class Parser {
                 throw new DukeExcpetion("Not a valid event. Please enter a valid name of the event.");
             } else if (newInput.length() > timeIndex + 16) {
                 try {
-                    return new Event(newInput.substring(6, timeIndex - 1), LocalDate.parse(newInput.substring(timeIndex + 4, timeIndex + 14)),
-                            parseTime(newInput.substring(timeIndex + 15)));
+                    return new Event(newInput.substring(6, timeIndex - 1),
+                            LocalDate.parse(newInput.substring(timeIndex + 4, timeIndex + 14)),
+                                    parseTime(newInput.substring(timeIndex + 15)));
                 } catch (DukeExcpetion e) {
                     return new Event(newInput.substring(6, timeIndex - 1), newInput.substring(timeIndex + 4));
                 }
             } else {
                 try {
-                    return new Event(newInput.substring(6, timeIndex - 1), LocalDate.parse(newInput.substring(timeIndex + 4)));
+                    return new Event(newInput.substring(6, timeIndex - 1),
+                            LocalDate.parse(newInput.substring(timeIndex + 4)));
                 } catch (DateTimeParseException e) {
                     return new Event(newInput.substring(6, timeIndex - 1), newInput.substring(timeIndex + 4));
                 }
@@ -78,14 +80,16 @@ public class Parser {
                 throw new DukeExcpetion("Not a valid deadline. Please enter a name of the deadline.");
             } else if (newInput.length() > timeIndex + 16) {
                 try {
-                    return new Deadline(newInput.substring(9, timeIndex - 1), LocalDate.parse(newInput.substring(timeIndex + 4, timeIndex + 14)),
-                            parseTime(newInput.substring(timeIndex + 15)));
+                    return new Deadline(newInput.substring(9, timeIndex - 1),
+                            LocalDate.parse(newInput.substring(timeIndex + 4, timeIndex + 14)),
+                                    parseTime(newInput.substring(timeIndex + 15)));
                 } catch (DukeExcpetion e) {
                     return new Deadline(newInput.substring(9, timeIndex - 1), newInput.substring(timeIndex + 4));
                 }
             } else {
                 try {
-                    return new Deadline(newInput.substring(9, timeIndex - 1), LocalDate.parse(newInput.substring(timeIndex + 4)));
+                    return new Deadline(newInput.substring(9, timeIndex - 1),
+                            LocalDate.parse(newInput.substring(timeIndex + 4)));
                 } catch (DateTimeParseException e) {
                     return new Deadline(newInput.substring(9, timeIndex - 1), newInput.substring(timeIndex + 4));
                 }
