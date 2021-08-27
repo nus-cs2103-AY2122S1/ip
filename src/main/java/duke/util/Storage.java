@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author Benedict Chua
  */
 public class Storage {
-    private static final String DIRECTORY_PATH = "../../../../../data";
+    private static final String DIRECTORY_PATH = "./data";
     private static final String FILE_PATH = DIRECTORY_PATH + "/duke.txt";
 
     private boolean doesDirectoryExists;
@@ -61,9 +61,22 @@ public class Storage {
      */
     public void writeToFile(String tasks) {
         // Checks if directory exists, creates if it doesn't
-        if (!doesDirectoryExists) {
+        if (!this.doesDirectoryExists) {
             File directory = new File(DIRECTORY_PATH);
             directory.mkdir();
+            this.doesDirectoryExists = directory.exists();
+        }
+
+        // Checks if file exists, creates if it doesn't
+        if (!this.doesFileExists) {
+            File file = new File(FILE_PATH);
+            boolean result;
+            try {
+                result = file.createNewFile();
+                this.doesFileExists = result;
+            } catch (IOException e) {
+                System.out.println("Something went wrong:  " + e.getMessage());
+            }
         }
 
         // Write to file
