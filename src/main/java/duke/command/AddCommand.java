@@ -16,6 +16,7 @@ public class AddCommand extends Command {
     private final String taskDetails;
     private final String addType;
 
+
     /**
      * Basic Constructor
      *

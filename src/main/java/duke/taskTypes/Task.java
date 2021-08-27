@@ -22,7 +22,7 @@ public class Task {
     /**
      * Basic constructor for task (used during subclass instance)
      */
-    public Task(boolean isDone){
+    public Task(boolean isDone) {
         setState(isDone);
     }
 
@@ -63,6 +63,7 @@ public class Task {
             }
         }
     }
+
 
     protected void setEventType(String input){
         this.eventType = input;

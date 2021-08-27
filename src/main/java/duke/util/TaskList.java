@@ -194,7 +194,7 @@ public class TaskList {
      *
      * @return int
      */
-    public int listMaxLen(){
+    public int listMaxLen() {
         return listLen;
     }
 

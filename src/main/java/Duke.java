@@ -1,5 +1,7 @@
 import duke.command.Command;
+
 import duke.exception.DukeException;
+
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
@@ -32,7 +34,7 @@ public class Duke {
     /**
      * Continuous scan loops until user input "bye"
      */
-    public void  run(){
+    public void  run() {
         ui.welcome();
         boolean notBye = true;
         while (notBye) {

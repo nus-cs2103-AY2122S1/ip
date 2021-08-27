@@ -1,12 +1,14 @@
 package duke.command;
 
 import duke.exception.DukeException;
+
 import duke.taskTypes.Task;
+
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     private final String chosenList;
 

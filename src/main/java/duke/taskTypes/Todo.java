@@ -26,7 +26,7 @@ public class Todo extends Task{
      * @return String containing details of the task
      */
     @Override
-    public String toString(){
+    public String toString() {
         return super.toString();
     }
 

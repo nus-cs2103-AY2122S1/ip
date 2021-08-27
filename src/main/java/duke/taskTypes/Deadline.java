@@ -1,6 +1,7 @@
 package duke.taskTypes;
 
 import duke.exception.DukeException;
+
 import duke.exception.EmptyTimeException;
 import duke.exception.InvalidFormatException;
 import duke.exception.EmptyDescriptionException;
@@ -34,7 +35,6 @@ public class Deadline extends Task{
         if (key.equals("")){
             throw new EmptyDescriptionException("Missing description");
         }
-
         super.setEventType("D");
         super.setDescription(key);
         super.setDate(results.get(1));
@@ -46,7 +46,7 @@ public class Deadline extends Task{
      * @return String containing details of the task
      */
     @Override
-    public String toString(){
+    public String toString() {
         return super.toString() + " (by: " + super.getFormatDate() + ")";
     }
 
