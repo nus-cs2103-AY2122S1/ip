@@ -6,6 +6,7 @@ public class Ui {
     private Storage storage;
     private TaskList taskList;
     boolean isExit = false;
+    private final Scanner scanner = new Scanner(System.in);
     public Ui(Storage storage, TaskList taskList) {
         this.storage = storage;
         this.taskList = taskList;
@@ -36,6 +37,14 @@ public class Ui {
             System.out.println("Here are the tasks in your list:");
             for (int i = 0; i < taskList.length(); i++) {
                 System.out.println((i + 1) + ". " + taskList.get(i).toString());
+            }
+        } else if (input.split(" ")[0].equals("find")) {
+            String wordToFind = input.split(" ")[1];
+            System.out.println("Here are the matching tasks in your list:");
+            for(int i = 0; i < taskList.length(); i++) {
+                if(taskList.get(i).getTaskContent().contains(wordToFind)) {
+                    System.out.println((i + 1) + ". " +taskList.get(i).toString());
+                }
             }
         } else if (input.split(" ")[0].equals("done")){
             int taskIndex = Parser.parseDone(input);
