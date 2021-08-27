@@ -3,10 +3,6 @@ package virushade.tasks;
 import virushade.Storage;
 import virushade.StringManipulator;
 import virushade.VirushadeException;
-import virushade.tasks.Task;
-import virushade.tasks.Deadline;
-import virushade.tasks.Event;
-import virushade.tasks.ToDo;
 
 import java.util.ArrayList;
 
@@ -172,5 +168,29 @@ public class TaskList {
         }
 
         return sb.toString();
+    }
+
+    public static void find(String text) {
+        System.out.println(findFromList(text));
+    }
+
+    private static String findFromList(String text) {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
+        int counter = 1;
+        for(int i = 0; i < listCount; i++) {
+            String taskName = tasks.get(i).toString();
+            if (taskName.contains(text)) {
+                String foundTaskName = counter + "." + taskName;
+                counter++;
+                sb.append(System.lineSeparator()).append(foundTaskName);
+            }
+        }
+
+        if (counter == 1) {
+            // Found nothing.
+            return "There are no matching results";
+        } else {
+            return sb.toString();
+        }
     }
 }
