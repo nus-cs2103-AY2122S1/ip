@@ -16,7 +16,7 @@ public class EntryList extends ArrayList<Entry> {
             for (int i = 0; i < numberOfEntries; i++) {
                 ui.printEntry(super.get(i), i + 1);
             }
-            ui.end();
+            ui.endCommand();
         } else {
             throw new DukeException("No entries to display!");
         }
@@ -24,7 +24,7 @@ public class EntryList extends ArrayList<Entry> {
 
     public void markEntryAsDone(int entryNumber) throws DukeException {
         if (entryNumber > 0 && entryNumber <= numberOfEntries) {
-            if (super.get(entryNumber - 1).markEntryAsDone()) {
+            if (super.get(entryNumber - 1).setDone()) {
                 System.out.println("Nice! I've marked this entry as done:");
                 System.out.println("\t" + super.get(entryNumber - 1));
             } else {

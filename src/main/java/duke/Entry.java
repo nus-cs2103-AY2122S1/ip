@@ -15,11 +15,11 @@ public abstract class Entry {
         this.isDone = false;
     }
 
-    public void revertEntry() {
+    public void revertDone() {
         this.isDone = !this.isDone;
     }
 
-    public boolean markEntryAsDone() {
+    public boolean setDone() {
         if (this.isDone) {
             return false;
         } else {
@@ -41,7 +41,7 @@ public abstract class Entry {
     }
 
     @Override
-    public String toString () {
+    public String toString() {
         char isDoneDisplay = this.isDone ? 'X' : ' ';
         return ("[" + isDoneDisplay + "] " + this.ENTRY);
     }
