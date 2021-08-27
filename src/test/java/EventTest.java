@@ -1,14 +1,17 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import task.Task;
+import org.junit.jupiter.api.Test;
+
 import task.Event;
+import task.Task;
 
 public class EventTest {
+    /**
+     * Test for toString method.
+     */
     @Test
     public void toStringTest() {
         Task testEvent = new Event("birthday", LocalDate.parse("2021-06-29"), LocalTime.parse("12:00"));

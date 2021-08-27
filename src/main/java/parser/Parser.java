@@ -177,7 +177,8 @@ public class Parser {
             } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
                 throw new IllegalArgumentException(" Date and Time must be specified by YYYY-MM-DD HH:MM");
             }
-            storage.newTaskToData(userInput.substring(9, timeIndex - 1), Duke.Type.DEADLINE, userInput.substring(timeIndex + 4));
+            storage.newTaskToData(userInput.substring(9, timeIndex - 1), Duke.Type.DEADLINE,
+                    userInput.substring(timeIndex + 4));
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + tasks.getTask(tasks.size() - 1).toString());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -197,7 +198,8 @@ public class Parser {
                 throw new IllegalArgumentException(" Date and Time must be specified by YYYY-MM-DD HH:MM");
             }
 
-            storage.newTaskToData(userInput.substring(6, timeIndex - 1), Duke.Type.EVENT, userInput.substring(timeIndex + 4));
+            storage.newTaskToData(userInput.substring(6, timeIndex - 1), Duke.Type.EVENT,
+                    userInput.substring(timeIndex + 4));
             System.out.println("Got it. I've added this task:");
             System.out.println("  " + tasks.getTask(tasks.size() - 1).toString());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");

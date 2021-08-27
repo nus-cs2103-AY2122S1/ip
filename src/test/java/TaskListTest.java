@@ -1,17 +1,20 @@
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import task.Deadline;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import task.TaskList;
-import task.Task;
-import task.Todo;
-
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Test;
+
+import task.Deadline;
+import task.Task;
+import task.TaskList;
+import task.Todo;
+
 public class TaskListTest {
+    /**
+     * Test whether addTask method successfully adds a task to the TaskList.
+     */
     @Test
     public void addTaskTest() {
         Task task1 = new Todo("run");
@@ -21,6 +24,9 @@ public class TaskListTest {
         assertEquals("[T][ ] run", tasks.getTask(0).toString());
     }
 
+    /**
+     * Test whether removeTask method successfully removes a task to the TaskList.
+     */
     @Test
     public void removeTaskTest() {
         Task task1 = new Todo("run");
