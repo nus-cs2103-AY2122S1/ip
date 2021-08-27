@@ -1,7 +1,12 @@
 package main.java.task;
 
-import main.java.task.Task;
-
+/**
+ * The Event class is a child class of Task.
+ * Contains additional "at" string parameter.
+ * @author  Hoon Darren
+ * @version 1.0
+ * @since   2021-08-21
+ */
 public class Event extends Task {
 
     protected String at;

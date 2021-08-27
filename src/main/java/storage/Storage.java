@@ -21,6 +21,13 @@ import java.util.Base64;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * The Storage class provides dependency injection for classes that require access to the device's local storage.
+ * Data is stored locally in the form of a text (.txt) file.
+ * @author  Hoon Darren
+ * @version 1.0
+ * @since   2021-08-21
+ */
 public class Storage {
 
 

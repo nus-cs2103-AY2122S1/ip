@@ -1,6 +1,5 @@
 import main.java.Duke;
 import main.java.parser.Parser;
-import main.java.storage.Storage;
 import main.java.task.Deadline;
 import main.java.task.Event;
 import main.java.task.Todo;

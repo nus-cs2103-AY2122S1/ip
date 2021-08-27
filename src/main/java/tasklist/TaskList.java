@@ -21,7 +21,13 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-
+/**
+ * The TaskList class provides dependency injection for the classes that require access to the functionality of
+ * editing the tasks list.
+ * @author  Hoon Darren
+ * @version 1.0
+ * @since   2021-08-21
+ */
 public class TaskList {
     private final Ui messages = new Ui();
     private final Storage databaseEngine = new Storage();

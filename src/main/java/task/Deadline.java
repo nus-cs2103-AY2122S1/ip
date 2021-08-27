@@ -2,6 +2,13 @@ package main.java.task;
 
 import java.time.LocalDate;
 
+/**
+ * The Deadline class is a child class of Task.
+ * Contains additional "by" parameter that strictly requires input to be of LocalDate type.
+ * @author  Hoon Darren
+ * @version 1.0
+ * @since   2021-08-21
+ */
 public class Deadline extends Task {
 
     protected LocalDate by;

@@ -4,10 +4,16 @@ import main.java.task.Task;
 
 import java.util.List;
 
+/**
+ * The Ui class provides dependency injection for the classes to show the response from a user's command line input.
+ * @author  Hoon Darren
+ * @version 1.0
+ * @since   2021-08-21
+ */
 public class Ui {
-    private final String welcomeMessage = "Hello! I'm Duke\n" + "What can I do for you?";
-    private final String borderLine = "\n____________________________________________________________\n";
-    private final String goodbyeMessage = "Bye. Hope to see you again soon!";
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke\n" + "What can I do for you?";
+    private static final String BORDERLINE = "\n____________________________________________________________\n";
+    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
 
 
     /**
@@ -15,21 +21,21 @@ public class Ui {
      * @param input String message to be displayed to user
      */
     public void displayText(String input) {
-        System.out.println(borderLine + input + borderLine);
+        System.out.println(BORDERLINE + input + BORDERLINE);
     }
 
     /**
      * Displays welcome message when Duke program starts.
      */
     public void welcomeMessage() {
-        this.displayText(welcomeMessage);
+        this.displayText(WELCOME_MESSAGE);
     }
 
     /**
      * Displays goodbye message when user inputs "bye".
      */
     public void goodbyeMessage() {
-        this.displayText(goodbyeMessage);
+        this.displayText(GOODBYE_MESSAGE);
     }
 
     /**
@@ -82,7 +88,7 @@ public class Ui {
             return;
         }
 
-        System.out.println(borderLine);
+        System.out.println(BORDERLINE);
 
         for (int i = 0; i < taskList.size(); i++) {
 
@@ -91,7 +97,7 @@ public class Ui {
             System.out.println(inputMessage);
         }
 
-        System.out.println(borderLine);
+        System.out.println(BORDERLINE);
     }
 
     /**
@@ -113,7 +119,7 @@ public class Ui {
             return;
         }
 
-        System.out.println(borderLine);
+        System.out.println(BORDERLINE);
         System.out.println("Here are the matching tasks in your list:");
 
         for (int i = 0; i < taskList.size(); i++) {
@@ -123,7 +129,7 @@ public class Ui {
             System.out.println(inputMessage);
         }
 
-        System.out.println(borderLine);
+        System.out.println(BORDERLINE);
     }
 
 

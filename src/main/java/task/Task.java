@@ -1,6 +1,12 @@
 package main.java.task;
 
-
+/**
+ * Task is the superclass of classes to be stored in the database.
+ * All subclasses require a description field and have an isDone field that indicates completion status.
+ * @author  Hoon Darren
+ * @version 1.0
+ * @since   2021-08-21
+ */
 public class Task {
 
     protected String description;

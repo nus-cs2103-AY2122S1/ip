@@ -1,5 +1,11 @@
 package main.java.exception;
 
+/**
+ * The TaskNumberException Exception is thrown when a task number referenced is not in the task list.
+ * @author  Hoon Darren
+ * @version 1.0
+ * @since   2021-08-21
+ */
 public class TaskNumberException extends DukeException {
 
     /**
