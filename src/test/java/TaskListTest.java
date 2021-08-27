@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 class TaskListTest {
     @Test
-    public void test_add_task() {
+    public void test_addTask() {
         ToDo todo = new ToDo("read book");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Deadline deadline = new Deadline("return book", LocalDateTime.parse("2021-09-03 18:00", formatter));
@@ -32,7 +32,7 @@ class TaskListTest {
     }
 
     @Test
-    public void test_delete_task() {
+    public void test_deleteTask() {
         ToDo todo = new ToDo("read book");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Deadline deadline = new Deadline("return book", LocalDateTime.parse("2021-09-03 18:00", formatter));

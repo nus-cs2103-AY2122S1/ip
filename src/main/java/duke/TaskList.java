@@ -4,33 +4,33 @@ import java.util.ArrayList;
 import duke.task.Task;
 
 public class TaskList {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     // add
     public void addTask(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     // delete
     public void deleteTask(Task task) {
-        list.remove(task);
+        tasks.remove(task);
     }
 
     // getSize()
     public int getSize() {
-        return list.size();
+        return tasks.size();
     }
 
     // getTask()
     public Task getTask(int i) {
-        return list.get(i);
+        return tasks.get(i);
     }
 
     public ArrayList<Task> getList() {
-        return list;
+        return tasks;
     }
 }
