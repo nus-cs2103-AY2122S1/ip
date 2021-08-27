@@ -1,5 +1,5 @@
-public class TaskDoesNotExistException extends DukeException{
-    public TaskDoesNotExistException(String msg) {
+public class TaskNotFoundException extends DukeException{
+    public TaskNotFoundException(String msg) {
         super(msg);
     }
 

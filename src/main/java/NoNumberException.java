@@ -1,5 +1,5 @@
-public class DoneEmptyException extends DukeException {
-    public DoneEmptyException(String msg) {
+public class NoNumberException extends DukeException {
+    public NoNumberException(String msg) {
         super(msg);
     }
 

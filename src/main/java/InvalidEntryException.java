@@ -1,5 +1,5 @@
-public class DukeInvalidException extends DukeException {
-    public DukeInvalidException(String msg) {
+public class InvalidEntryException extends DukeException {
+    public InvalidEntryException(String msg) {
         super(msg);
     }
 

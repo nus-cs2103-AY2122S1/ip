@@ -1,6 +1,6 @@
-public class DukeEmptyException extends DukeException {
+public class EmptyDescriptionException extends DukeException {
     private String task;
-    public DukeEmptyException(String msg, String task) {
+    public EmptyDescriptionException(String msg, String task) {
         super(msg);
         this.task = task;
     }
