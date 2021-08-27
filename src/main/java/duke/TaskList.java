@@ -1,7 +1,7 @@
 package duke;
 import java.util.ArrayList;
 import java.util.List;
-import duke.Task.Task;
+import duke.task.Task;
 
 /**
  * Class to abstract the List of the Tasks

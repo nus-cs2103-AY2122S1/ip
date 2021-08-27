@@ -28,7 +28,7 @@ public class UI {
 
     /**
      * Method to display all the Tasks in the Task List
-     * @param taskList
+     * @param taskList The List of Tasks in Duke
      */
     public void printTaskList(TaskList taskList) {
         if ((taskList != null) && (taskList.getTaskListLength() > 0)) {

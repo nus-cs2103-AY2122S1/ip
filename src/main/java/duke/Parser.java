@@ -35,9 +35,8 @@ public class Parser {
      *
      * @param taskDescription The Command inputted as a String
      * @return The specific Command in the given Command String
-     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
      */
-    public Command parse(String taskDescription) throws DukeException {
+    public Command parse(String taskDescription) {
         if (taskDescription == null || taskDescription.equals("")) {
             return new Command(Command.Commands.UNKNOWN, "");
         } else {

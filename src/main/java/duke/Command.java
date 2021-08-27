@@ -1,7 +1,7 @@
 package duke;
-import duke.Task.DeadlineTask;
-import duke.Task.EventTask;
-import duke.Task.ToDoTask;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.ToDoTask;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -54,9 +54,6 @@ public class Command {
                 break;
             case TODO:
                 this.typeOfCommand = Commands.TODO;
-                break;
-            case UNKNOWN:
-                this.typeOfCommand = Commands.UNKNOWN;
                 break;
             default:
                 this.typeOfCommand = Commands.UNKNOWN;

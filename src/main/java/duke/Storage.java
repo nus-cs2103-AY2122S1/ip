@@ -7,10 +7,10 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import duke.Task.ToDoTask;
-import duke.Task.Task;
-import duke.Task.EventTask;
-import duke.Task.DeadlineTask;
+import duke.task.ToDoTask;
+import duke.task.Task;
+import duke.task.EventTask;
+import duke.task.DeadlineTask;
 
 /**
  * Class to abstract the storing of commands
@@ -39,38 +39,48 @@ public class Storage {
         UI ui = new UI();
         try {
             File dir = new File("data");
-            dir.mkdirs();
+            boolean isDeleted = false, isCreated = false, isDirectory = dir.mkdirs();
             File data = new File(dir, "duke.txt");
-            if (data.exists()) {
-                data.delete();
+            if (isDirectory && data.exists()) {
+                isDeleted = data.delete();
             }
-            data.createNewFile();
-            FileWriter storeData = new FileWriter(data);
-            Task task;
-            for(int i = 0; i < tasks.getTaskListLength(); i++) {
-                task = tasks.getTask(i);
-                if (task instanceof DeadlineTask) {
-                    DeadlineTask deadline = (DeadlineTask) task;
-                    storeData.write(deadline.writeToFile());
-                } else if (task instanceof EventTask) {
-                    EventTask event = (EventTask) task;
-                    storeData.write(event.writeToFile());
-                } else if (task instanceof ToDoTask) {
-                    ToDoTask todo = (ToDoTask) task;
-                    storeData.write(todo.writeToFile());
-                } else {
-                    ui.showLine();
-                    ui.showError("Error Occurred While Storing Data");
-                    ui.showLine();
+            if(isDeleted) {
+                isCreated = data.createNewFile();
+            }
+            if (isCreated) {
+                FileWriter storeData = new FileWriter(data);
+                Task task;
+                for (int i = 0; i < tasks.getTaskListLength(); i++) {
+                    task = tasks.getTask(i);
+                    if (task instanceof DeadlineTask) {
+                        DeadlineTask deadline = (DeadlineTask) task;
+                        storeData.write(deadline.writeToFile());
+                    } else if (task instanceof EventTask) {
+                        EventTask event = (EventTask) task;
+                        storeData.write(event.writeToFile());
+                    } else if (task instanceof ToDoTask) {
+                        ToDoTask todo = (ToDoTask) task;
+                        storeData.write(todo.writeToFile());
+                    } else {
+                        ui.showLine();
+                        ui.showError("Error Occurred While Storing Data");
+                        ui.showLine();
+                    }
                 }
+                storeData.close();
             }
-            storeData.close();
         } catch (IOException e) {
-            ui.showLine();
-            ui.showError("Error Occurred While Storing Data");
-            ui.showLine();
-            File deletedFile = new File("../../../data/duke.txt");
-            deletedFile.delete();
+            File deletedFile = new File("data/duke.txt");
+            boolean isDeleted = deletedFile.delete(), shouldShow = false;
+            if (isDeleted) {
+                shouldShow = deletedFile.exists();
+            }
+
+            if (shouldShow) {
+                ui.showLine();
+                ui.showError("Error Occurred While Storing Data");
+                ui.showLine();
+            }
         }
     }
 
