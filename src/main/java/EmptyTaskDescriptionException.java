@@ -9,11 +9,11 @@ public class EmptyTaskDescriptionException extends DukeException {
     @Override
     public String getMessage() {
         switch (taskType) {
-        case Duke.TODO:
+        case "todo":
             return "☹ OOPS!!! The description of a todo cannot be empty.";
-        case Duke.DEADLINE:
+        case "deadline":
             return "☹ OOPS!!! The description of a deadline cannot be empty.";
-        case Duke.EVENT:
+        case "event":
             return "☹ OOPS!!! The description of a event cannot be empty.";
         default:
             return "Error: EmptyTaskDescriptionException";

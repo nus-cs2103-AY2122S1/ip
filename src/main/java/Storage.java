@@ -2,23 +2,31 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataManager {
+public class Storage {
     //TODO create file method
     //TODO error when tasklist is null for empty constructor
     private static final String STORAGE_PATH = "data/duke.txt";
     private static final File DATA_FILE = new File(STORAGE_PATH);
 
-    private List<Task> taskList = new ArrayList<>();
+    private String storagePath;
+    private File dataFile;
 
-    public DataManager() {}
+    private TaskList taskList = new TaskList();
 
-    public DataManager(List<Task> taskList) {
-        this.taskList = taskList;
+    public Storage() {}
+
+    public Storage(String storagePath) {
+        this.storagePath = storagePath;
+        dataFile = new File(storagePath);
+    }
+
+    public List<Task> load() throws IOException {
+        return txtToList(dataFile);
     }
 
     public void listToTxt(FileWriter fileWriter) throws IOException {
         for (int i = 0; i < taskList.size(); i++) {
-            String currentTask = taskList.get(i).toString() + "\n";
+            String currentTask = taskList.getTask(i).toString() + "\n";
             fileWriter.write(currentTask);
         }
         fileWriter.close();
@@ -110,7 +118,7 @@ public class DataManager {
         }
     }
 
-    public void update(List<Task> newTaskList) {
+    public void update(TaskList newTaskList) {
         this.taskList = newTaskList;
         saveData();
     }

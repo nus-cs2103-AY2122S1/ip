@@ -29,6 +29,7 @@ public class InvalidDateAndTimeException extends DukeException {
             return "Error: InvalidDateAndTimeException";
         }
     }
+    //todo message for date or time being optional?
 
 }
 
