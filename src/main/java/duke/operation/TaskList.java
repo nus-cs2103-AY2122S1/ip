@@ -4,7 +4,6 @@ import duke.Parser.Parser;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is the TaskList class to contain task list and handle operations.
@@ -81,6 +80,7 @@ public class TaskList {
 			break;
 		}
 		default: {
+			System.out.println("TaskList");
 			message = "____________________________________________________________\n"
 					+ "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
 					+ "____________________________________________________________\n";
@@ -109,6 +109,22 @@ public class TaskList {
 	public void printList() {
 		System.out.println("____________________________________________________________\n"
 				+ "Here are the tasks in your list:");
+		int counter = 1;
+		for (Task taskForLoop : taskList) {
+			System.out.println(counter
+					+ "."
+					+ taskForLoop);
+			counter++;
+		}
+		System.out.println("____________________________________________________________\n");
+	}
+
+	/**
+	 * Prints filtered task list after FIND command.
+	 */
+	public void printFilteredList() {
+		System.out.println("____________________________________________________________\n"
+				+ "Here are the tasks found by your keyword in your list:");
 		int counter = 1;
 		for (Task taskForLoop : taskList) {
 			System.out.println(counter
@@ -174,5 +190,25 @@ public class TaskList {
 				+ " tasks in the list."
 				+ "\n"
 				+ "____________________________________________________________\n");
+	}
+
+	/**
+	 * Find tasks by keyword in the task list.
+	 *
+	 * @param nextLine input String
+	 */
+	public void findTask(String nextLine) throws DukeException {
+		ArrayList<Task> filteredArrayList = new ArrayList<>();
+		String keyword = nextLine.substring(5);
+		if (taskList.size() == 0) {
+			throw new DukeException("OOP!!! List is empty right now.");
+		}
+		for (Task task : taskList) {
+			if (task.description.contains(keyword)) {
+				filteredArrayList.add(task);
+			}
+		}
+		TaskList filteredTaskList = new TaskList(filteredArrayList);
+		filteredTaskList.printFilteredList();
 	}
 }

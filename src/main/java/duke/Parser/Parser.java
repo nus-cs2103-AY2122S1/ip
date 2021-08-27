@@ -25,6 +25,7 @@ public class Parser {
 		String firstWord = input.split(" ", 2)[0];
 		try {
 			if (!firstWord.equals(expectedTaskName)) {
+				System.out.println("Parser");
 				String message = "____________________________________________________________\n"
 						+ "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
 						+ "____________________________________________________________\n";

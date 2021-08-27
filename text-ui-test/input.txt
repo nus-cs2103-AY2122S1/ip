@@ -1,15 +1,5 @@
-todo 111
-todo 222
-deadline 333 /by 2012-12-10 12:10
-event 444 /at 2030-10-28 13:12
-list
-done 1
-done 3
-done 4
-list
-delete 4
-list
-todo
-todoo
-todoo 1111
+todo buy book
+todo eat book again
+todo eat book again and again
+find book
 bye

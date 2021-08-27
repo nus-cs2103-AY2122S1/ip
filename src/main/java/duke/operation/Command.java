@@ -11,7 +11,6 @@ public enum Command {
 	LIST("list"),
 	DONE("done"),
 	DELETE("delete"),
-	CLEAR("clear"),
 	FIND("find"),
 	BYE("bye"),
 	INVALID_COMMAND("");
@@ -48,6 +47,9 @@ public enum Command {
 		}
 		case "delete": {
 			return DELETE;
+		}
+		case "find": {
+			return FIND;
 		}
 		case "bye": {
 			return BYE;

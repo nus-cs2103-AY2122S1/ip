@@ -24,25 +24,27 @@ public class Duke {
 		Command nextCommand = Command.getCommandWordFromString(nextLine);
 		Storage storage = new Storage();
 		storage.createFile();
-		TaskList storeRoom = new TaskList();
+		TaskList taskList = new TaskList();
 
 		while (true) {
 			try {
 				if (nextCommand == Command.BYE) {
 					Ui.showByeMessage();
 					break;
+				} else if (nextCommand == Command.FIND) {
+					taskList.findTask(nextLine);
 				} else if (nextCommand == Command.TODO) {
-					storeRoom.addTask(nextCommand, nextLine);
+					taskList.addTask(nextCommand, nextLine);
 				} else if (nextCommand == Command.DEADLINE) {
-					storeRoom.addTask(nextCommand, nextLine);
+					taskList.addTask(nextCommand, nextLine);
 				} else if (nextCommand == Command.EVENT) {
-					storeRoom.addTask(nextCommand, nextLine);
+					taskList.addTask(nextCommand, nextLine);
 				} else if (nextCommand == Command.LIST) {
-					storeRoom.printList();
+					taskList.printList();
 				} else if (nextCommand == Command.DONE) {
-					storeRoom.finishTask(nextLine);
+					taskList.finishTask(nextLine);
 				} else if (nextCommand == Command.DELETE) {
-					storeRoom.deleteTask(nextLine);
+					taskList.deleteTask(nextLine);
 				} else {
 					Parser.invalidTask();
 				}
@@ -51,7 +53,7 @@ public class Duke {
 			}
 			nextLine = in.nextLine();
 			nextCommand = Command.getCommandWordFromString(nextLine);
-			storage.updateFile(storeRoom);
+			storage.updateFile(taskList);
 		}
 		in.close();
 	}
