@@ -6,7 +6,7 @@ package duke;
 public class Duke {
     private boolean isRunning = true;
     private enum Commands {list, done, todo, event, deadline, delete, find }
-    Storage storage;
+    private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
