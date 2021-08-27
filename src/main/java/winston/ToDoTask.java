@@ -11,12 +11,12 @@ public class ToDoTask extends winston.Task {
      * @param description is the string of the description of the given task
      */
     public ToDoTask(String description, boolean isCompleted) {
-        super(description, "todo", isCompleted);
+        super(description, isCompleted);
         this.type = "T";
     }
     
     public ToDoTask(String description) {
-        super(description, "todo", false);
+        super(description, false);
         this.type = "T";
     }
 

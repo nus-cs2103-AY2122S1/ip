@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * A class that manages user commands
  */
 public class Parser {
-    private TaskList taskList;
+    private final TaskList taskList;
 
     /**
      * Constructor for class Parser

@@ -4,7 +4,7 @@ package winston;
  * Represents the tasks that the user input
  */
 public class Task {
-    private String description;
+    private final String description;
     private boolean done;
 
     /**
@@ -12,7 +12,7 @@ public class Task {
      *
      * @param description is the string of the description of the given task
      */
-    public Task(String description, String type, boolean isCompleted) {
+    public Task(String description, boolean isCompleted) {
         this.description = description;
         this.done = isCompleted;
     }

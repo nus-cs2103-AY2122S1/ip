@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Event extends Task {
     private final String type;
-    private LocalDate dateAndTime;
+    private final LocalDate dateAndTime;
     
     /**
      * Constructor for Event
@@ -15,13 +15,13 @@ public class Event extends Task {
      * @param description is the string of the description of the given task
      */
     public Event(String description, String dateAndTime, boolean isCompleted) {
-        super(description, "event", isCompleted);
+        super(description, isCompleted);
         this.dateAndTime = DateHandler.readDate(dateAndTime);
         this.type = "E";
     }
 
     public Event(String description, String dateAndTime) {
-        super(description, "event", false);
+        super(description, false);
         this.type = "E";
         this.dateAndTime = DateHandler.readDate(dateAndTime);
     }

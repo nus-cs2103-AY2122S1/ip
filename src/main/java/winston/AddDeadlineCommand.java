@@ -4,8 +4,8 @@ package winston;
  *  Represents the deadline command from the parent abstract class Command.
  */
 public class AddDeadlineCommand extends Command{
-    private String description;
-    private String dueDate;
+    private final String description;
+    private final String dueDate;
     
     public AddDeadlineCommand(TaskList taskList, String description, String dueDate) {
         super(taskList);

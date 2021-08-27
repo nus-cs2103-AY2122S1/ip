@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class DeadLine extends Task {
     private final String type;
-    private LocalDate dueDate;
+    private final LocalDate dueDate;
     
     /**
      * Constructor for DeadLine
@@ -17,13 +17,13 @@ public class DeadLine extends Task {
      * @param dueDate is the due date of the task in String format
      */
     public DeadLine(String description, String dueDate, boolean isCompleted) {
-        super(description, "deadline", isCompleted);
+        super(description, isCompleted);
         this.dueDate = DateHandler.readDate(dueDate);
         this.type = "D";
     }
 
     public DeadLine(String description, String dueDate) {
-        super(description, "deadline", false);
+        super(description, false);
         this.type = "D";
         this.dueDate = DateHandler.readDate(dueDate);
     }
