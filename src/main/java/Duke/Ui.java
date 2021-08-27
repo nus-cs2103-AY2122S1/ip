@@ -116,4 +116,20 @@ public class Ui {
         System.out.println(INDENTATION + UNDERLINE);
     }
 
+    /**
+     * The method of showFindDetails
+     * @param task
+     * @param findTarget
+     */
+    public void showFindDetails(TaskList task, String findTarget) {
+        System.out.println(INDENTATION + UNDERLINE);
+        System.out.println(INDENTATION + "Here are the matching tasks in your list:");
+        for (int i = 0; i < task.size(); i++) {
+            if(task.getTasks().get(i).getDescription().contains(findTarget)) {
+                System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + task.get(i));
+            }
+        }
+        System.out.println(INDENTATION + UNDERLINE);
+    }
+
 }

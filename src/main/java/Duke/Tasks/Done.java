@@ -4,8 +4,6 @@ import Duke.Tool.Storage;
 import Duke.Tool.TaskList;
 import Duke.Ui;
 
-import java.io.IOException;
-
 /**
  * Represents the Done task class
  */

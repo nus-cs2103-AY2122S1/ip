@@ -1,7 +1,20 @@
 package Duke.Tool;
 
-import Duke.Exceptions.*;
-import Duke.Tasks.*;
+import Duke.Exceptions.DeleteWrongIndexException;
+import Duke.Exceptions.EmptyTaskListException;
+import Duke.Exceptions.NoDescriptionException;
+import Duke.Exceptions.NoCommandException;
+import Duke.Exceptions.NoTimeException;
+import Duke.Exceptions.WrongTimeFormatException;
+import Duke.Tasks.Find;
+import Duke.Tasks.Task;
+import Duke.Tasks.Done;
+import Duke.Tasks.Delete;
+import Duke.Tasks.Todo;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.List;
+import Duke.Tasks.Exit;
 
 import java.time.LocalDateTime;
 import java.lang.String;
@@ -14,7 +27,7 @@ public class Parser {
 
     private final static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private static enum Operation {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND
     }
 
     /**
@@ -169,6 +182,23 @@ public class Parser {
     }
 
     /**
+     * The method of find: give users a way to find a task by searching for a keyword.
+     * @param cmd
+     * @param task
+     * @return Find Object
+     * @throws NoDescriptionException
+     * @throws NoCommandException
+     */
+    public static Find find(String cmd, TaskList task) throws NoDescriptionException {
+        int order = task.size();
+        if (cmd.split(" ").length == 1) {
+            throw new NoDescriptionException("Find");
+        } else {
+            return new Find(cmd.substring(5));
+        }
+    }
+
+    /**
      * The method for parse
      * @param cmd
      * @param task
@@ -207,6 +237,9 @@ public class Parser {
 
             case EVENT:
                 return addTask(cmd, task);
+
+            case FIND:
+                return find(cmd, task);
 
             default:
                 throw new NoCommandException(cmd);
