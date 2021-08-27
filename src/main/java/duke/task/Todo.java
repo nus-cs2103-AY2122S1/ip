@@ -6,10 +6,10 @@ public class Todo extends Task{
      * Constructor for Todo.
      *
      * @param taskName the name of the input task
-     * @param status the current status of the task
+     * @param isDone the current status of the task
      */
-    public Todo(String taskName, boolean status) {
-        super(taskName, status);
+    public Todo(String taskName, boolean isDone) {
+        super(taskName, isDone);
     }
 
     /**

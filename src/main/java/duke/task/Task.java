@@ -2,17 +2,17 @@ package duke.task;
 
 public class Task {
     private String taskName;
-    private boolean status;
+    private boolean isDone;
 
     /**
      * Constructor for Task
      *
      * @param taskName name of the input task
-     * @param status current status of task
+     * @param isDone current status of task
      */
-    Task(String taskName, boolean status) {
+    Task(String taskName, boolean isDone) {
         this.taskName = taskName;
-        this.status = status;
+        this.isDone = isDone;
     }
 
     /**
@@ -21,7 +21,7 @@ public class Task {
      * @return the current status of task
      */
     public String getStatus() {
-        return status ? "1" : "0";
+        return isDone ? "1" : "0";
     }
 
     /**
@@ -31,7 +31,7 @@ public class Task {
      */
     public String displayTask() {
         String display;
-        if (status) {
+        if (isDone) {
             display = "|1|" + taskName;
         } else {
             display = "|0|" + taskName;
@@ -43,6 +43,6 @@ public class Task {
      * Marks the task as completed
      */
     public void checkOffTask() {
-        status = true;
+        isDone = true;
     }
 }

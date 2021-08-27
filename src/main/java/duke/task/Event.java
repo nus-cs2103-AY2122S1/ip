@@ -12,10 +12,10 @@ public class Event extends Task{
      *
      * @param taskName the name of the input task
      * @param duration the time input for the task
-     * @param status the current status of the task
+     * @param isDone the current status of the task
      */
-    public Event(String taskName, LocalDateTime duration, boolean status) {
-        super(taskName, status);
+    public Event(String taskName, LocalDateTime duration, boolean isDone) {
+        super(taskName, isDone);
         this.duration = duration;
     }
 

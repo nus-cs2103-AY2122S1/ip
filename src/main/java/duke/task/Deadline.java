@@ -12,10 +12,10 @@ public class Deadline extends Task{
      *
      * @param taskName the name of the task input
      * @param due the time input for the task
-     * @param status the current status for the task
+     * @param isDone the current status for the task
      */
-    public Deadline(String taskName, LocalDateTime due, boolean status) {
-        super(taskName, status);
+    public Deadline(String taskName, LocalDateTime due, boolean isDone) {
+        super(taskName, isDone);
         this.due = due;
     }
 

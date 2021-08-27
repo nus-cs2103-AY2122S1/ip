@@ -86,7 +86,7 @@ public class Storage {
      */
     public void updateFile(ArrayList<Task> list) throws IOException {
         FileWriter fileWriter = new FileWriter(dukeData);
-        for (Task t : list ) {
+        for (Task t : list) {
             fileWriter.write(t.displayTask() + "\n");
         }
         fileWriter.close();
