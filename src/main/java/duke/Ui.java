@@ -1,15 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.List;
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -20,6 +10,11 @@ public class Ui {
     private static final String SPACE = "    ";
     private static final String LINE = SPACE + "______________________________________________________________________";
     private static final String END_LINE = SPACE + "======================================================================\n";
+    private static final String LOGO = "\n" +
+            "███████████████████████████████\n" +
+            "█▄─▄─▀█─█─█▄─██─▄█─▄─▄─█▄─██─▄█\n" +
+            "██─▄─▀█─▄─██─██─████─████─██─██\n" +
+            "▀▄▄▄▄▀▀▄▀▄▀▀▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▄▄▀▀";
     private Items items;
 
     public Ui() {
@@ -30,6 +25,7 @@ public class Ui {
      * method to greet the user
      */
     public void greet() {
+        System.out.println(LOGO);
         printMessage("Hello! I'm Bhutu, your personal chatbot!\nWhat can I do for you?");
     }
 

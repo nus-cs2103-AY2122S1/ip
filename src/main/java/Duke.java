@@ -3,6 +3,16 @@
  */
 
 import java.io.IOException;
+
+import duke.DukeException;
+import duke.Ui;
+import duke.Storage;
+import duke.Parser;
+import duke.Items;
+import duke.task.Task;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.Todo;
 import java.util.List;
 import java.util.Scanner;
 
@@ -120,13 +130,6 @@ public class Duke {
      * @param args The command line arguments
      */
     public static void main(String[] args) throws IOException, DukeException {
-        String logo = "\n" +
-                "███████████████████████████████\n" +
-                "█▄─▄─▀█─█─█▄─██─▄█─▄─▄─█▄─██─▄█\n" +
-                "██─▄─▀█─▄─██─██─████─████─██─██\n" +
-                "▀▄▄▄▄▀▀▄▀▄▀▀▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▄▄▀▀";
-
-        System.out.println(logo);
         new Duke().run();
     }
 }
