@@ -2,11 +2,21 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Main logic of Duke chatbot on responding to commands and showing output to user.
+ */
 public class UI {
     private final Parser parser;
     private final Storage storage;
     private final TaskList taskList;
 
+    /**
+     * Necessary fields for commands to be executed.
+     *
+     * @param parser
+     * @param storage
+     * @param taskList
+     */
     public UI(Parser parser, Storage storage, TaskList taskList) {
         //Greet
         this.parser = parser;
@@ -14,7 +24,11 @@ public class UI {
         this.taskList = taskList;
     }
 
-
+    /**
+     * Main method to be constantly taking in commands until "bye".
+     * 
+     * @throws DukeException
+     */
     public void start() throws DukeException{
         welcomeMsg();
 

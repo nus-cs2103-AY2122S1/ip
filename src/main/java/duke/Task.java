@@ -1,13 +1,10 @@
 package duke;
 
 /**
- * duke.Task list logic abstracted from duke.Duke.
+ * Parent task class as abstraction for ToDo, Deadline, Event.
  *
  * @author Ren Weilin
- * @version 19 August 2021
  */
-
-
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -16,7 +13,9 @@ public class Task {
         this.description = description;
         this.isDone = isDone;
     }
-
+    /**
+     * Marks this tasks as completed.
+     */
     public void markAsDone() {
         if (!isDone) {
             isDone = true;
@@ -25,6 +24,11 @@ public class Task {
         }
     }
 
+    /**
+     * Helper method for toString(), returns X or Space depending on completion status.
+     *
+     * @return String "X" or " " for complete or incomplete task.
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
