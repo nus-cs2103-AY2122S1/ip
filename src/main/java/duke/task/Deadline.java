@@ -18,11 +18,21 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Returns the String representation of the Deadline.
+     *
+     * @return String representation of the Deadline.
+     */
     @Override
     public String toString() {
         return ("[D]" + super.toString() + " (by: " + this.by.format(displayFormatter) + ")");
     }
 
+    /**
+     * Returns the String representation of the Deadline as used in the storage.
+     *
+     * @return String representation of the Deadline in the storage format.
+     */
     public String toStorageString() {
         return ("D|" + super.getStatusNumber() + "|" + super.getDescription()
                 + "|" + this.by.format(displayFormatter));

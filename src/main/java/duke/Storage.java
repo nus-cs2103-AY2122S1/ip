@@ -21,6 +21,12 @@ public class Storage {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Reads from the storage file and return an ArrayList of tasks.
+     *
+     * @return An ArrayList of Task objects from the storage file.
+     * @throws DukeException If there is an error in creating the storage file.
+     */
     public ArrayList<Task> load() throws DukeException {
         taskList.clear();
 
@@ -66,6 +72,12 @@ public class Storage {
         return this.taskList;
     }
 
+    /**
+     * Writes a task to the storage file.
+     *
+     * @param task Task object to add to the storage file.
+     * @throws DukeException If the file path is invalid.
+     */
     public void add(Task task) throws DukeException {
         String newString = "\n" + task.toStorageString();
         try {
@@ -77,6 +89,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Rewrite the storage file to match the content of the given TaskList.
+     *
+     * @param tl TaskList object to read from.
+     * @throws DukeException If the file path is invalid.
+     */
     public void rewrite(TaskList tl) {
         try {
             FileWriter writer = new FileWriter(filePath);
@@ -87,16 +105,16 @@ public class Storage {
         }
     }
 
-    @Override
-    public String toString() {
-        String result = "";
-
-        for (int i = 0; i < taskList.size(); i++) {
-            Task nextTask = taskList.get(i);
-            result += "\n" + nextTask.toStorageString();
-        }
-
-        result = result.trim();
-        return result;
-    }
+//    @Override
+//    public String toString() {
+//        String result = "";
+//
+//        for (int i = 0; i < taskList.size(); i++) {
+//            Task nextTask = taskList.get(i);
+//            result += "\n" + nextTask.toStorageString();
+//        }
+//
+//        result = result.trim();
+//        return result;
+//    }
 }

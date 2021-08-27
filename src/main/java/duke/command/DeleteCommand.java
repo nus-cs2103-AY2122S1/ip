@@ -11,6 +11,14 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int index) {
         this.index = index;
     }
+
+    /**
+     * Executes the command.
+     *
+     * @param taskList the TaskList used during execution.
+     * @param storage the Storage used during execution.
+     * @param ui the Ui used during execution.
+     */
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) {
         try {
@@ -22,6 +30,11 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Checks whether the command is the exit command.
+     *
+     * @return Whether the command is the exit command.
+     */
     @Override
     public boolean isExit() {
         return false;
