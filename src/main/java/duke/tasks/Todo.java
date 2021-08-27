@@ -1,6 +1,6 @@
 package tasks;
 
-import utils.StorageElement;
+import main.StorageElement;
 
 public class Todo extends Task {
     public Todo(String description) {

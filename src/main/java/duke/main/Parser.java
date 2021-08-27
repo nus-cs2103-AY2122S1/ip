@@ -1,8 +1,9 @@
+package main;
+
 import commands.*;
 import exceptions.EmptyDescriptionException;
 import exceptions.EmptyTimeException;
 import exceptions.InvalidCommandException;
-import utils.Util;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +20,10 @@ public class Parser {
         BYE
     }
 
+    private static boolean isLowerCase(String input) {
+        return input == input.toLowerCase();
+    }
+
     public static Command parse(String userInput) throws EmptyDescriptionException, EmptyTimeException, InvalidCommandException {
         List<String> userInputList = Arrays.asList(userInput.split(" "));
         String userCommandString = userInputList.get(0);
@@ -26,7 +31,7 @@ public class Parser {
         ValidCommand command;
 
         try {
-            if (Util.isLowerCase(userCommandString)) {
+            if (Parser.isLowerCase(userCommandString)) {
                 command = ValidCommand.valueOf(userCommandString.toUpperCase());
             } else {
                 command = ValidCommand.INVALID;

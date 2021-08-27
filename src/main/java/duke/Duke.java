@@ -1,7 +1,7 @@
-package main;
+package duke.main;
 
-import commands.Command;
-import exceptions.DukeException;
+import duke.commands.Command;
+import duke.exceptions.DukeException;
 
 public class Duke {
 

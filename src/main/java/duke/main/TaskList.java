@@ -1,5 +1,5 @@
-package tasks;
-import storage.StorageElement;
+package main;
+import tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;

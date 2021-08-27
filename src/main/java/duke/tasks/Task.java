@@ -1,6 +1,6 @@
 package tasks;
 
-import utils.StorageElement;
+import main.StorageElement;
 
 public abstract class Task {
     protected String taskIcon;
