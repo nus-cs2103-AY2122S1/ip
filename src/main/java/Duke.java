@@ -18,7 +18,7 @@ public class Duke {
         System.out.println(start);
 
         // Array of String to store user inputs
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> list = Storage.load();
 
         // Define the scanner to read user inputs
         Scanner reader = new Scanner(System.in);

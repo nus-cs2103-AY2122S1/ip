@@ -7,12 +7,9 @@ public class DeadlineCommand extends Command {
 
     protected ArrayList<Task> list;
 
-    protected int index;
-
-    DeadlineCommand(String input, int index, ArrayList<Task> list) {
+    DeadlineCommand(String input, ArrayList<Task> list) {
         this.input = input;
         this.list = list;
-        this.index = index;
     }
 
     public String reply() throws DukeException {
@@ -26,7 +23,7 @@ public class DeadlineCommand extends Command {
             throw new DukeException("The date of a deadline cannot be empty. Please try again!");
         } else {
             list.add(new DeadlineTask(newTask, newInfo));
-            return addTask(newTask, 2, index, newInfo);
+            return addTask(newTask, 2, list.size() - 1, newInfo);
         }
     }
 }
