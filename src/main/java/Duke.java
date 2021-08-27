@@ -1,18 +1,25 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
+
 
 public class Duke {
     private Parser parser;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke() throws FileNotFoundException, IOException, DukeException {
+    /**
+     * Constructor for Duke class.
+     * @throws IOException If there is an input error for the commands/Tasklist.
+     * @throws DukeException If there is a generic Duke Exception.
+     */
+    public Duke() throws IOException, DukeException {
         this.ui = new Ui();
         this.parser = new Parser();
         this.tasks = new TaskList(new Storage());
@@ -38,10 +45,15 @@ public class Duke {
         input.close();
     }
 
+    /**
+     * Executes Duke program.
+     * @param args Input arguments for the Duke program.
+     * @throws DukeException If there is a generic Duke Exception.
+     */
     public static void main(String[] args) throws DukeException {
         try {
-            Duke Squirtle = new Duke();
-            Squirtle.serve();
+            Duke squirtle = new Duke();
+            squirtle.serve();
         } catch (FileNotFoundException e) {
             throw new DukeException("FILE ERROR YOU FOOL");
         } catch (IOException e) {

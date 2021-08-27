@@ -4,11 +4,20 @@ public class Task {
     private final String taskName;
     private boolean isDone;
 
+    /**
+     * Constructor for Task class.
+     * @param taskName Name of task.
+     */
     public Task(String taskName) {
         this.taskName = taskName.trim();
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task class.
+     * @param taskName Name of task.
+     * @param isDone True implies task has been done.
+     */
     public Task(String taskName, boolean isDone) {
         this.taskName = taskName.trim();
         this.isDone = isDone;

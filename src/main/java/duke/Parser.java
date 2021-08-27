@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Parser {
-    private final Map<String, ThrowingBiFunction<TaskList, String, String>> FUNCTIONS = new HashMap<>() {
+    private final Map<String, ThrowingBiFunction<TaskList, String, String>> functions = new HashMap<>() {
         {
             put("list", (tasks, input) -> list(tasks));
             put("done", (tasks, input) -> markDone(tasks, input));
@@ -17,13 +17,14 @@ public class Parser {
     };
 
     /**
-     * @param tasks
-     * @param input
-     * @return String
+     * Parse the user input string and execute the respective command given in the functions Map.
+     * @param tasks Current Tasklist being used by the program.
+     * @param input Input String for the command.
+     * @return String Result to be printed by the UI class.
      */
     public String dispatch(TaskList tasks, String input) {
         String[] cmd = input.split(" ", 2);
-        return FUNCTIONS.getOrDefault(cmd[0], (a, b) -> "FOOLISH MORTAL, I CAN'T EXECUTE THAT COMMAND. TRY AGAIN:")
+        return functions.getOrDefault(cmd[0], (a, b) -> "FOOLISH MORTAL, I CAN'T EXECUTE THAT COMMAND. TRY AGAIN:")
                 .apply(tasks, cmd.length > 1 ? cmd[1] : "");
     }
 

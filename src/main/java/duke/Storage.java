@@ -11,7 +11,11 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Storage {
-
+    /**
+     * Loads List of tasks from the file in [project_root]/data/duke.txt
+     * @return List of Tasks to be processed by the TaskList class.
+     * @throws DukeException If there is a FileNotFoundException, DateTimeParseException or generic Exception.
+     */
     public List<Task> getTasksFromFile() throws DukeException {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -22,27 +26,27 @@ public class Storage {
                 String[] args = data.split(Pattern.quote("|"));
                 boolean isDone = args[1].trim().equals("1");
                 switch (args[0].trim()) {
-                    case "T":
-                        tasks.add(new ToDo(args[2], isDone));
-                        break;
-                    case "E":
-                        tasks.add(new Event(args[2], isDone, args[3]));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(args[2], isDone, args[3]));
-                        break;
-                    default:
-                        myReader.close();
-                        throw new IllegalArgumentException(
-                                "COULDN'T PARSE YOUR STUPID FILE. FORMAT THE INPUT PROPERLY.");
+                case "T":
+                    tasks.add(new ToDo(args[2], isDone));
+                    break;
+                case "E":
+                    tasks.add(new Event(args[2], isDone, args[3]));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(args[2], isDone, args[3]));
+                    break;
+                default:
+                    myReader.close();
+                    throw new IllegalArgumentException(
+                            "COULDN'T PARSE YOUR STUPID FILE. FORMAT THE INPUT PROPERLY.");
                 }
             }
             myReader.close();
         } catch (FileNotFoundException e) {
-            // Init file and directory if they do not exist
+            // Initialise file and directory if they do not exist
             saveToFile(tasks);
         } catch (DateTimeParseException e) {
-            throw new RuntimeException("FORMAT YOUR FILE DATETIMEs PROPERLY YOU FOOL.");
+            throw new RuntimeException("FORMAT YOUR FILE DATETIMES PROPERLY YOU FOOL.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new DukeException("COULDN'T GET YOUR MISERABLE FILE. TRY AGAIN.");
@@ -50,6 +54,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves List of tasks from the file in [project_root]/data/duke.txt
+     * @param tasks List of Tasks to be saved.
+     * @throws DukeException If there is a generic Duke Exception.
+     */
     public void saveToFile(List<Task> tasks) throws DukeException {
         try {
             // create directory if it does not exist
@@ -57,11 +66,11 @@ public class Storage {
             directory.mkdirs();
 
             File myFile = new File("../../../data", "duke.txt");
-            FileWriter DukeWriter = new FileWriter(myFile);
+            FileWriter dukeWriter = new FileWriter(myFile);
             for (Task task : tasks) {
-                DukeWriter.write(String.format("%s\n", task.getFileString()));
+                dukeWriter.write(String.format("%s\n", task.getFileString()));
             }
-            DukeWriter.close();
+            dukeWriter.close();
         } catch (IOException e) {
             throw new DukeException("SAVING THE FILE FAILED YOU IDIOT. JUST GIVE UP.");
         }

@@ -7,6 +7,9 @@ public class Ui {
         System.out.printf("%s\n%s\n%s\n", LINEBREAK, s, LINEBREAK);
     }
 
+    /**
+     * Prints greeting message for the Duke program.
+     */
     public void greet() {
         System.out.print("               _,........__\n");
         System.out.print("            ,-'            \"`-.\n");
@@ -42,7 +45,8 @@ public class Ui {
         System.out.print("                7____,,..--'      /          |\n");
         System.out.print("                                  `---.__,--.'\n");
         System.out.println(
-                " BOW BEFORE ME, FOR I AM SQUIRTLE, DESTROYER OF MEN, TAKER OF LIVES.\n THE GODS FEARED MY EXISTENCE, SO THEY BANISHED ME TO YOUR MORTAL REALM TO SAVE YOUR MISERABLE LIFE.");
+                " BOW BEFORE ME, FOR I AM SQUIRTLE, DESTROYER OF MEN, TAKER OF LIVES.\n THE GODS FEARED MY EXISTENCE,"
+                        + " SO THEY BANISHED ME TO YOUR MORTAL REALM TO SAVE YOUR MISERABLE LIFE.");
         System.out.println(LINEBREAK);
         System.out.print("SO WHAT DO YOU WANT DO, INSECT?\n ");
     }
