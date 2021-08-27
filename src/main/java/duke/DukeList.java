@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import duke.database.Database;
-import duke.database.Sql;
+import duke.database.Sqlite;
 import duke.exception.InvalidArgumentException;
 import duke.task.Task;
 
@@ -16,7 +16,7 @@ public class DukeList {
     private final Database database;
 
     public DukeList() {
-        this.database = new Sql();
+        this.database = new Sqlite();
         this.database.load();
     }
 
