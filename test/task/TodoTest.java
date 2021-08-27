@@ -1,4 +1,4 @@
-package task;
+package Pix.task;
 
 import org.junit.jupiter.api.Test;
 

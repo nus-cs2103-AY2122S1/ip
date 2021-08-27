@@ -1,5 +1,5 @@
 T|0|borrow book
 D|0|read book|2020-01-01
 E|0|return book|2021-01-01
-T|0|highfive myself
+T|0|high five myself
 T|0|hide book
