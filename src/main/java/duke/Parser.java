@@ -41,45 +41,42 @@ public class Parser {
                     taskList.deleteTask(taskList.taskToDelete(message));
                     storage.updateFile(taskList.getTasks());
 
-                } else
-                if (message.startsWith("done")) {
+                } else if (message.startsWith("done")) {
                     taskList.markAsCheckedTask(taskList.taskToCheck(message));
                     storage.updateFile(taskList.getTasks());
+                } else if (message.startsWith("find")) {
+                    String keyword = message.substring(5);
+                    taskList.findTask(keyword);
+                }else if (message.startsWith("todo")) {
+                    isValidEntry(message, "todo");
+                    String taskName = message.substring(message.indexOf(" "));
+                    taskList.addTask(new Todo(taskName, false));
+                    storage.updateFile(taskList.getTasks());
 
-                } else {
-                    if (message.startsWith("todo")) {
-                        isValidEntry(message, "todo");
-                        String taskName = message.substring(message.indexOf(" "));
-                        taskList.addTask(new Todo(taskName, false));
-                        storage.updateFile(taskList.getTasks());
+                }else if (message.startsWith("deadline")) {
+                    isValidEntry(message, "deadline");
+                    isFormatCorrect(message, "deadline");
+                    String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
+                    String temp = message.substring(message.indexOf("/") + 1);
+                    String due = temp.substring(temp.indexOf(" ") + 1);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
+                    taskList.addTask(new Deadline(taskName, parsedDate, false));
+                    storage.updateFile(taskList.getTasks());
 
-                    } else {
-                        if (message.startsWith("deadline")) {
-                            isValidEntry(message, "deadline");
-                            isFormatCorrect(message, "deadline");
-                            String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
-                            String temp = message.substring(message.indexOf("/") + 1);
-                            String due = temp.substring(temp.indexOf(" ") + 1);
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                            LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
-                            taskList.addTask(new Deadline(taskName, parsedDate, false));
-                            storage.updateFile(taskList.getTasks());
+                }else if (message.startsWith("event")) {
+                    isValidEntry(message, "event");
+                    isFormatCorrect(message, "event");
+                    String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
+                    String temp = message.substring(message.indexOf("/") + 1);
+                    String due = temp.substring(temp.indexOf(" ") + 1);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
+                    taskList.addTask(new Event(taskName, parsedDate, false));
+                    storage.updateFile(taskList.getTasks());
 
-                        } else if (message.startsWith("event")) {
-                            isValidEntry(message, "event");
-                            isFormatCorrect(message, "event");
-                            String taskName = message.substring(message.indexOf(" "), message.indexOf("/"));
-                            String temp = message.substring(message.indexOf("/") + 1);
-                            String due = temp.substring(temp.indexOf(" ") + 1);
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                            LocalDateTime parsedDate = LocalDateTime.parse(due, formatter);
-                            taskList.addTask(new Event(taskName, parsedDate, false));
-                            storage.updateFile(taskList.getTasks());
-
-                        } else {
-                            notValid();
-                        }
-                    }
+                }else {
+                    notValid();
                 }
             } catch (DukeException | IOException e) {
                 System.out.println(e.getMessage());

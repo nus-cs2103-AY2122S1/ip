@@ -34,6 +34,28 @@ public class TaskList {
         }
     }
 
+    public void findTask(String keyword) {
+        int order = 1;
+        int numOfMatchingTasks = 0;
+        String tasksToPrint = "Here are the matching tasks in your list: \n";
+        if (tasks.size() == 0) {
+            System.out.println("No tasks in your list.");
+        } else {
+            for (Task t : tasks) {
+                if (t.getTaskName().contains(keyword)) {
+                    String matchingTask = order++ +"." + t.displayTask() + "\n";
+                    tasksToPrint = tasksToPrint + matchingTask;
+                    numOfMatchingTasks++;
+                }
+            }
+            if (numOfMatchingTasks == 0) {
+                System.out.println("No matching tasks found.");
+            } else {
+                System.out.print(tasksToPrint);
+            }
+        }
+    }
+
     public int taskToCheck(String message) {
         StringBuilder number;
         if (message.length() > 5) {
