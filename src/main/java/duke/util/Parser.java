@@ -46,6 +46,9 @@ public class Parser {
         case "done":
             int doneIndex = parseIndex(input);
             return new DoneCommand(doneIndex);
+        case "find":
+            String keyword = parseFindKeyword(input);
+            return new FindCommand(keyword);
         case "delete":
             int deleteIndex = parseIndex(input);
             return new DeleteCommand(deleteIndex);
@@ -53,9 +56,6 @@ public class Parser {
             String todoDetails = parseTodoDetails(input);
             Todo todo = new Todo(todoDetails);
             return new AddTaskCommand(todo);
-        case "find":
-            String keyword = parseFindKeyword(input);
-            return new FindCommand(keyword);
         case "deadline":
             String[] deadlineDetails = parseDeadlineDetails(input);
             String dueDate = parseDateToString(deadlineDetails[1]);
