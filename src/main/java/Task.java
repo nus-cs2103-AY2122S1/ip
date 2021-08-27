@@ -1,5 +1,7 @@
 
-public class Task {
+public abstract class Task {
+
+    public static final String SAVE_DATA_MARKER = "|";
 
     private String name;
     private boolean isDone = false;
@@ -7,7 +9,13 @@ public class Task {
     /**
      * Constructor for a Task object.
      * @param name Task name.
+     * @param isDone Whether or not task is done.
      */
+    public Task(String name, boolean isDone) {
+        this.name = name;
+        this.isDone = isDone;
+    }
+
     public Task(String name) {
         this.name = name;
     }
@@ -25,6 +33,15 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Returns a string representation of the Task when saved to a file.
+     * @return String to be written into file when task list is saved.
+     */
+    public String formatForFile() {
+        char doneStatus = this.isDone ? '1' : '0';
+        return SAVE_DATA_MARKER + doneStatus + SAVE_DATA_MARKER + this.name;
     }
 
     /**
