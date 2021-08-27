@@ -75,6 +75,28 @@ public class TaskList {
     }
 
     /**
+     * method to find all tasks in the list that match the given text
+     *
+     * @param text Keyword to be searched
+     * @return list of all matching tasks
+     */
+    List<Task> find(String text) {
+        ArrayList<Task> content = new ArrayList<>();
+
+        list.forEach((elem) -> {
+            String[] split = elem.getTask().split(" ");
+
+            for (int i = 0; i < split.length; i++) {
+                if (split[i].equals(text)) {
+                    content.add(elem);
+                    break;
+                }
+            }
+        });
+        return content;
+    }
+
+    /**
      * method to print task list on command
      */
     void printList() {

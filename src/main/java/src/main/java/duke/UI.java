@@ -1,5 +1,7 @@
 package src.main.java.duke;
 
+import java.util.List;
+
 /**
  * Represents the src.main.java.duke.UI part of the chat bot and contains all operations relating to the
  * interactions with the user
@@ -104,6 +106,19 @@ public class UI {
         System.out.println("Hello, I'm Duke");
         printList();
         System.out.println("What can I do for you");
+    }
+
+    /**
+     * method to find the specified and print the result to the user screen
+     *
+     * @param text the keyword to be searched
+     */
+    void find(String text) {
+        List<Task> content = list.find(text);
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < content.size(); i++) {
+            System.out.println((i + 1) + ". " + content.get(i).toString());
+        }
     }
 
     /**
