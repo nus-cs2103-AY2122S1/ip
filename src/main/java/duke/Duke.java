@@ -1,9 +1,7 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.nio.file.Path;
-import java.io.File;
 
 public class Duke {
 
