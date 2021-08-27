@@ -9,6 +9,11 @@ public class Task {
     private String taskName;
     private boolean state;
 
+    /**
+     * Constructor for a task, which takes in a task name.
+     *
+     * @param taskName name of task.
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.state = false;
@@ -62,6 +67,11 @@ public class Task {
         }
     }
 
+    /**
+     * Overriden toString method.
+     *
+     * @return string representation of the task.
+     */
     @Override
     public String toString() {
         return (state ? "[X] " : "[ ] ") +  this.taskName;

@@ -9,6 +9,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     LocalDateTime deadline;
 
+    /**
+     * Constructor for Deadline, which takes in a task name and a deadline.
+     *
+     * @param taskName name of task.
+     * @param deadline deadline of the task.
+     */
     public Deadline(String taskName, LocalDateTime deadline) {
         super(taskName);
         this.deadline = deadline;
@@ -35,6 +41,11 @@ public class Deadline extends Task {
                 + this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
+    /**
+     * Overriden toString method.
+     *
+     * @return string representation of the task.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString()
