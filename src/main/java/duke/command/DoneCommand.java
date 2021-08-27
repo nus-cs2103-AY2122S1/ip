@@ -1,20 +1,27 @@
-public class DeleteCommand extends Command {
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
+public class DoneCommand extends Command {
     private int index;
 
-    public DeleteCommand(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
+
     @Override
     public void execute(TaskList taskList, Storage storage, Ui ui) {
         try {
-            String taskString = taskList.deleteTask(index);
+            String doneString = taskList.markAsDone(index);
             storage.rewrite(taskList);
-            ui.showDeleteMessage(taskString, taskList);
+            ui.showDoneMessage(doneString);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number!");
         }
     }
-
     @Override
     public boolean isExit() {
         return false;
