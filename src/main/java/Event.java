@@ -1,5 +1,9 @@
+import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+
 public class Event extends Task {
     String at;
+    LocalDate date;
     public Event(String desc, String at) throws DukeException.EmptyDescriptionException {
         super(desc);
         this.at = at;
