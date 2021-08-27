@@ -9,10 +9,6 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files
 
@@ -39,7 +35,7 @@ public class Storage {
     /**
      * Loads all the task in the indicated filepath with the correct format.
      * @return the ArrayList of Task objects.
-     * @throws DukeException
+     * @throws DukeException throws exceptions for when file and folders cannot be created or filepath is corrupted.
      */
     public ArrayList<Task> load() throws DukeException {
         // Creates the file and folders for filepath, else throw DukeException
@@ -66,7 +62,7 @@ public class Storage {
     /**
      * Writes the ArrayList of tasks into the file.
      * @param tasks ArrayList of Task objects.
-     * @throws DukeException
+     * @throws DukeException throws exceptions for when file and folders cannot be created or filepath is corrupted.
      */
     public void writeTasksToFile(ArrayList<Task> tasks) throws DukeException {
         // Creates the file and folders for filepath, else throw DukeException
@@ -88,7 +84,7 @@ public class Storage {
 
     /**
      * Creates the files and folders required.
-     * @throws DukeException if there are issues with creating file or the filepath is not formatted properly.
+     * @throws DukeException throws exceptions for when file and folders cannot be created or filepath is corrupted.
      */
     private void createsFileAndFoldersForPath() throws DukeException {
         File file = new File(filepath);
@@ -117,7 +113,7 @@ public class Storage {
 
     /**
      * Returns a task from a line of String.
-     * @param line
+     * @param line the String for a task in the correct format
      * @return Task object
      */
     private Task createTaskFromString(String line) {

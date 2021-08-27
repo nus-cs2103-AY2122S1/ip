@@ -11,8 +11,11 @@ public class Event extends Task {
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
 
-    private LocalDate date;
-    private LocalTime time = LocalTime.parse("00:00:00");
+    private static final DateTimeFormatter SAVE_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter SAVE_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
+    private final LocalDate date;
+    private LocalTime time = LocalTime.parse("00:00");
 
     public Event(String description, String at) {
         super(description);
@@ -25,7 +28,7 @@ public class Event extends Task {
 
     @Override
     public String getTaskFileString(String delimiter, String done, String notDone) {
-        return "E" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description + delimiter + this.at;
+        return "E" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description + delimiter + date.format(SAVE_DATE_FORMATTER) + " " + time.format(SAVE_TIME_FORMATTER);
     }
 
     @Override

@@ -11,6 +11,9 @@ public class Deadline extends Task {
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
 
+    private static final DateTimeFormatter SAVE_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter SAVE_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+
     private LocalDate date;
     private LocalTime time = LocalTime.parse("00:00");
 
@@ -25,7 +28,7 @@ public class Deadline extends Task {
 
     @Override
     public String getTaskFileString(String delimiter, String done, String notDone) {
-        return "D" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description + delimiter + this.by;
+        return "D" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description + delimiter + date.format(SAVE_DATE_FORMATTER) + " " + time.format(SAVE_TIME_FORMATTER);
     }
 
     @Override

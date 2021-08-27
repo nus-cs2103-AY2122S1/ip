@@ -196,12 +196,12 @@ public class Duke {
                     return formatTaskErrorMessage(TaskType.EVENT, Field.DATETIME);
                 }
                 Event event = new Event(eventSplit[0], eventSplit[1]);
+                tasks.add(event);
                 try {
                     Duke.storage.writeTasksToFile(tasks);
                 } catch (DukeException e) {
                     return e.getMessage();
                 }
-                tasks.add(event);
                 return formatTaskMessage(addedMessage, event);
             default:
                 // Error: Unrecognized command.
