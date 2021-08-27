@@ -58,19 +58,6 @@ public class DataHandlerLayer {
     }
 
     /**
-     * Prints a log of tasks that are filtered. True for completed and False for not completed
-     */
-    public static void print_filtered_log(boolean cond) {
-        int taskNumber = 1;
-        for (Task temp : log) {
-            if (temp.getCompleteStatus() == cond) {
-                System.out.println(taskNumber + ". " + temp.toString());
-                taskNumber++;
-            }
-        }
-    }
-
-    /**
      * Deletes any task in the specified postion of log
      * @param position in the log which is based on index.
      * @throws IndexOutOfBoundsException If the player specifies a postion outside the length of the log
