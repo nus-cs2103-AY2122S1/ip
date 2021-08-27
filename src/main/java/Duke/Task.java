@@ -2,6 +2,9 @@ package Duke;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class encapsulates the tasks: To-do, Deadline, and Event.
+ */
 public class Task {
 
     private final String name;
@@ -10,6 +13,12 @@ public class Task {
 
     private String taskType;
 
+    /**
+     * Constructor for newly added tasks.
+     * @param name The name of the task.
+     * @param taskType The type of the task.
+     * @throws DukeException.NoNameException Throws then the task name passed in is empty.
+     */
     public Task(String name, String taskType) throws DukeException.NoNameException {
         if (name.replaceAll(" ", "").equals("")) {
             throw new DukeException.NoNameException("Duke.Duke says: Duke.Task cannot have no name");
@@ -19,6 +28,13 @@ public class Task {
         this.taskType = taskType;
     }
 
+    /**
+     * Constructor for tasks created from storage.
+     * @param name The name of the task.
+     * @param taskType The type of the task.
+     * @param done Whether the task has been completed or not.
+     * @throws DukeException.NoNameException Throws then the task name passed in is empty.
+     */
     public Task(String name, String taskType, boolean done) throws DukeException.NoNameException {
         if (name.replaceAll(" ", "").equals("")) {
             throw new DukeException.NoNameException("Duke.Duke says: Duke.Task cannot have no name");
