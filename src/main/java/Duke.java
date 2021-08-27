@@ -192,10 +192,10 @@ public class Duke {
                 usage += String.format("%s <task>", todoString);
                 break;
             case DEADLINE:
-                usage += String.format("%s <task>%s<datetime>", deadlineString, deadlineDelimiter);
+                usage += String.format("%s <task>%s<date> <time (optional)>", deadlineString, deadlineDelimiter);
                 break;
             case EVENT:
-                usage += String.format("%s <task>%s<datetime>", eventString, eventDelimiter);
+                usage += String.format("%s <task>%s<date> <time (optional)>", eventString, eventDelimiter);
                 break;
         }
         return usage;

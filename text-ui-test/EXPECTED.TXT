@@ -11,13 +11,13 @@ _____________________________________
 
 _____________________________________
 Got it. I've added this task:
-[D][ ] return book (by: June 6th)
+[D][ ] return book (by: Oct 15 2019 06:00 pm)
 Now you have 2 tasks in the list
 _____________________________________
 
 _____________________________________
 Got it. I've added this task:
-[E][ ] project meeting (at: Aug 6th 2-4pm)
+[E][ ] project meeting (at: Oct 15 2019 06:00 pm)
 Now you have 3 tasks in the list
 _____________________________________
 
@@ -47,25 +47,25 @@ _____________________________________
 
 _____________________________________
 Got it. I've added this task:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: Oct 15 2019 06:00 pm)
 Now you have 6 tasks in the list
 _____________________________________
 
 _____________________________________
 Got it. I've added this task:
-[E][ ] project meeting (at: Mon 2-4pm)
+[E][ ] project meeting (at: Oct 15 2019 06:00 pm)
 Now you have 7 tasks in the list
 _____________________________________
 
 _____________________________________
 Noted. I've removed this task:
-[E][ ] project meeting (at: Mon 2-4pm)
+[E][ ] project meeting (at: Oct 15 2019 06:00 pm)
 Now you have 6 tasks in the list
 _____________________________________
 
 _____________________________________
 Noted. I've removed this task:
-[D][ ] return book (by: Sunday)
+[D][ ] return book (by: Oct 15 2019 06:00 pm)
 Now you have 5 tasks in the list
 _____________________________________
 
@@ -100,22 +100,22 @@ _____________________________________
 
 _____________________________________
 Oops! The description of a deadline cannot be empty.
-Usage: deadline <task> /by <datetime>
+Usage: deadline <task> /by <date> <time (optional)>
 _____________________________________
 
 _____________________________________
 Oops! The description of a event cannot be empty.
-Usage: event <task> /at <datetime>
+Usage: event <task> /at <date> <time (optional)>
 _____________________________________
 
 _____________________________________
 Oops! The date of a deadline cannot be empty.
-Usage: deadline <task> /by <datetime>
+Usage: deadline <task> /by <date> <time (optional)>
 _____________________________________
 
 _____________________________________
 Oops! The date of a event cannot be empty.
-Usage: event <task> /at <datetime>
+Usage: event <task> /at <date> <time (optional)>
 _____________________________________
 
 _____________________________________
