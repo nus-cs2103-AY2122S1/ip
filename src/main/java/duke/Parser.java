@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Class for parsing keywords.
+ * Class for parsing keywords, and handling unparsed Strings.
  */
 public class Parser {
     Parser() {
@@ -30,8 +30,23 @@ public class Parser {
             return "done";
         } else if (str.equalsIgnoreCase("delete")) {
             return "delete";
+        } else if (str.equalsIgnoreCase("find")) {
+            return "find";
         } else {
             throw new InvalidInputException();
         }
+    }
+
+    /**
+     * Joins together String for find keyword.
+     * @param strparse Array of Strings to be joined together.
+     * @return Keyword to be found.
+     */
+    public String parseFind(String[] strparse) {
+        StringBuilder strb = new StringBuilder();
+        for (int i = 1; i < strparse.length; i ++) {
+            strb.append(strparse[i]);
+        }
+        return strb.toString();
     }
 }

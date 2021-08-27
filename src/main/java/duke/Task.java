@@ -58,7 +58,6 @@ public class Task {
         return taskString;
     }
 
-
     /**
      * Returns string 'X' if task is done, ' ' if task is not.
      * @return string 'X' or 'x'.

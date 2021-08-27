@@ -158,7 +158,6 @@ public class Ui {
                     // marks a task as done.
                     try {
                         int i = tasklist.markDone(strparse);
-                        System.out.println("Task done is " + i);
                         storage.saveData(tasklist);
 
                         System.out.println(linebreakstart);
@@ -188,6 +187,20 @@ public class Ui {
                         System.out.println("Youw noww havew "
                                 + (tasklist.getTaskCounter())
                                 + " taskw(s) inw thew wist! uwu\n");
+                        System.out.println(linebreakend);
+                    } catch (DukeException e) {
+                        System.out.println(linebreakstart);
+                        System.out.println(e.getMessage());
+                        System.out.println(linebreakend);
+                    }
+                    break;
+                case "find":
+                    try {
+                        String temp = tasklist.find(parser.parseFind(strparse));
+
+                        System.out.println(linebreakstart);
+                        System.out.println("Foundw! Here are the matching tasks:\n");
+                        System.out.println(temp + '\n');
                         System.out.println(linebreakend);
                     } catch (DukeException e) {
                         System.out.println(linebreakstart);

@@ -311,4 +311,31 @@ public class TaskList {
         }
         return strb.toString();
     }
+
+    /**
+     * Finds Tasks that has the keyword for find.
+     * @param keyword keyword to find.
+     * @return String of Tasks found with the keyword.
+     */
+    public String find(String keyword) throws DukeException {
+        boolean isFound = false;
+        StringBuilder strb = new StringBuilder();
+
+        for (int i = 0; i < counter; i++) {
+            Task temp = taskArr.get(i);
+            if (temp.getTaskStr().toLowerCase().contains(keyword.toLowerCase())) {
+                isFound = true;
+                strb.append(i).append(". ").append(temp.toString());
+                if (i < counter - 1) {
+                    strb.append('\n');
+                }
+            }
+        }
+        if (isFound) {
+            return strb.toString();
+        } else {
+            throw new KeywordNotFoundError(keyword);
+        }
+    }
+
 }

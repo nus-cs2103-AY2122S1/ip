@@ -59,6 +59,12 @@ class MissingNoException extends DukeException {
     }
 }
 
+class KeywordNotFoundError extends DukeException {
+    KeywordNotFoundError(String keyword) {
+        super ("Sowwy! I can'tw findw anyw taskws containing " + keyword + " ! >_<");
+    }
+}
+
 /**
  * Occurs when Duke tries to read txt file for Task list, but comes up empty.
  */
@@ -104,6 +110,7 @@ class SaveDirectoryError extends DukeException {
         super ("Oh now! I guess the diwectowwy doesn't exist.");
     }
 }
+
 
 
 
