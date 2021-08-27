@@ -9,6 +9,7 @@ public class Ui {
     
     /**
      * Prints error message.
+     *
      * @param error message that is returned by an exception.
      */
     public void showError(String error) {
@@ -24,6 +25,7 @@ public class Ui {
 
     /**
      * Prints the task that has been marked done.
+     *
      * @param doneTask task that has been marked done.
      */
     public void printDoneMessage(Task doneTask) {
@@ -33,6 +35,7 @@ public class Ui {
 
     /**
      * Prints the task that has been deleted from the task list.
+     *
      * @param deletedTask task that has been deleted from the task list.
      */
     public void printDeleteMessage(Task deletedTask) {
@@ -47,6 +50,7 @@ public class Ui {
 
     /**
      * Prints the number of tasks in the task list.
+     *
      * @param size number of tasks in the task list.
      */
     public void printTaskListSize(int size) {
@@ -66,6 +70,7 @@ public class Ui {
 
     /**
      * Prints out all the tasks matching user's search term.
+     *
      * @param matchingTaskList ArrayList of tasks that matches user's search term.
      */
     public void showMatchingTasks(ArrayList<Task> matchingTaskList) {
@@ -83,6 +88,7 @@ public class Ui {
 
     /**
      * Prints out all the tasks present in the task list.
+     *
      * @param taskList ArrayList of tasks user has.
      */
     public void showTasks(ArrayList<Task> taskList) {

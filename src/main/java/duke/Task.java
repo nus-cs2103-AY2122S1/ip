@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Abstract Task class that creates generic tasks with description.
+ * Abstract class for generic tasks with description.
  */
 public abstract class Task {
 
@@ -9,7 +9,8 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Creates a Task object with a description and default undone status.
+     * Initialises Task object with a description and default undone status.
+     *
      * @param description describes the nature of the task.
      */
     public Task(String description) {
@@ -29,6 +30,7 @@ public abstract class Task {
 
     /**
      * Returns a string in the form of "(done status) (description)" when task is printed.
+     *
      * @return string that is displayed when task is printed.
      */
     @Override

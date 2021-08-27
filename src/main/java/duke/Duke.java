@@ -14,6 +14,7 @@ public class Duke {
     /**
      * Creates Ui and Storage instances.
      * Loads data from fisk into TaskList object to create list of tasks user currently has.
+     *
      * @param filePath denotes the relative file path of where the tasks will be saved in the disk.
      */
     public Duke(String filePath) {
@@ -27,7 +28,7 @@ public class Duke {
     }
 
     /**
-     * Continuously waits for input from user and executes the appropriate commands
+     * Waits continuously for input from user and executes the appropriate commands
      * based on command type.
      */
     public void run() {

@@ -15,6 +15,7 @@ public class TaskList {
 
     /**
      * Converts the ArrayList of task strings to Task objects stored in the ArrayList of tasks.
+     *
      * @param taskListStrings ArrayList of task strings taken from the disk file representing Task objects.
      */
     public TaskList(ArrayList<String> taskListStrings) {
@@ -25,7 +26,9 @@ public class TaskList {
         return this.taskList;
     }
 
-    /** Finds tasks that match user's search term.
+    /**
+     * Finds tasks that match user's search term.
+     *
      * @param searchTerm user wants to find all tasks that have descriptions matching user's search term.
      * @param ui handles interactions with user by printing the appropriate messages.
      * @throws DukeException if search term is not given alongside the find command in the following format: find searchterm.
@@ -44,8 +47,10 @@ public class TaskList {
         }
     }
 
-    /** Marks a task in the task list done.
+    /**
+     * Marks a task in the task list done.
      * Updates the task as done in the disk using storage and prints appropriate messages using ui.
+     *
      * @param num denotes the position of the task in the task list (if counting from 1).
      * @param storage handles updating the specified task from the disk as done.
      * @param ui handles interactions with user by printing the appropriate messages.
@@ -68,12 +73,15 @@ public class TaskList {
         }
     }
 
-    /** Deletes a task from the task list.
+    /**
+     * Deletes a task from the task list.
      * Deletes task from disk using storage and prints appropriate messages using ui.
+     *
      * @param num denotes the position of the task in the task list (if counting from 1).
      * @param storage handles deleting the specified task from the disk.
      * @param ui handles interactions with user by printing the appropriate messages.
-     * @throws DukeException if number given is not within the total number of tasks or delete command does not follow the format: delete number.
+     * @throws DukeException if number given is not within the total number of tasks or delete command
+     * does not follow the format: delete number.
      */
     public void delete(String num, Storage storage, Ui ui) throws DukeException {
         try {
@@ -91,8 +99,10 @@ public class TaskList {
         }
     }
 
-    /** Creates a Todo task with the appropriate description.
+    /**
+     * Creates a Todo task with the appropriate description.
      * Stores task in disk using storage and prints appropriate messages using ui.
+     *
      * @param description describes the nature of the Deadline task.
      * @param storage handles storing the new task in the disk.
      * @param ui handles interactions with user by printing the appropriate messages.
@@ -105,12 +115,15 @@ public class TaskList {
         ui.printTaskListSize(this.taskList.size());
     }
 
-    /** Creates a Deadline task with the appropriate description.
+    /**
+     * Creates a Deadline task with the appropriate description.
      * Stores task in disk using storage and prints appropriate messages using ui.
+     *
      * @param description describes the nature of the Deadline task.
      * @param storage handles storing the new task in the disk.
      * @param ui handles interactions with user by printing the appropriate messages.
-     * @throws DukeException if description contains incorrectly formatted date/time or does not follow the format: deadline task /by datetime
+     * @throws DukeException if description contains incorrectly formatted date/time or does not follow the format:
+     * deadline task /by datetime
      */
     public void createDeadline(String description, Storage storage, Ui ui) throws DukeException {
         try {
@@ -133,10 +146,12 @@ public class TaskList {
     /**
      * Creates an Event task with the appropriate description.
      * Stores task in disk using storage and prints appropriate messages using ui.
+     *
      * @param description describes the nature of the Event task.
      * @param storage handles storing the new task in the disk.
      * @param ui handles interactions with user by printing the appropriate messages.
-     * @throws DukeException if description contains incorrectly formatted date/time or does not follow the format: event task /at datetime
+     * @throws DukeException if description contains incorrectly formatted date/time or does not follow the format:
+     * event task /at datetime
      */
     public void createEvent(String description, Storage storage, Ui ui) throws DukeException {
         try {
@@ -158,6 +173,7 @@ public class TaskList {
 
     /**
      * Converts ArrayList of strings representing Task objects to ArrayList of Task objects.
+     *
      * @param taskListStrings ArrayList of strings representing Task objects.
      * @return ArrayList of Task objects
      */

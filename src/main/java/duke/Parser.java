@@ -7,6 +7,7 @@ public class Parser {
 
     /**
      * Returns the type of command user has entered if valid, or throws an exception.
+     *
      * @param command entered by user in the terminal.
      * @return CommandType that denotes the type of command corresponding to the user input.
      * @throws DukeException if there is an invalid command or an incomplete command.
@@ -20,7 +21,8 @@ public class Parser {
             return CommandType.BYE;
         } else if (command.startsWith("find")) {
             if(command.equals("find")) {
-                throw new DukeException("☹ OOPS!!! The find command needs a search term after it in the following format: find searchterm");
+                throw new DukeException("☹ OOPS!!! The find command needs a search term after it in the following format: "
+                        + "find searchterm");
             }
             return CommandType.FIND;
         } else if (command.startsWith("delete")) {

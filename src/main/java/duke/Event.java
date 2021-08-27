@@ -15,6 +15,7 @@ public class Event extends Task {
 
     /**
      * Creates an Event object from user command using the description and date and time.
+     *
      * @param description describes the nature of the task.
      * @param at is the date and time at which the task is ocurring, converted to LocalDateTime object.
      */
@@ -26,6 +27,7 @@ public class Event extends Task {
 
     /**
      * Creates an Event object from a disk task string using the description, number representing done status and date and time.
+     *
      * @param num number retrieved from the drive that determines if the task is done or not.
      * @param description describes the nature of the task.
      * @param at is the date and time at which the task is ocurring, converted to LocalDateTime object.
@@ -38,6 +40,7 @@ public class Event extends Task {
 
     /**
      * Returns a formatted date and time from the LocalDateTime object.
+     *
      * @return date and time following the format: MMM dd yyyy h:mm a.
      */
     public String getFormattedAt() {
@@ -46,6 +49,7 @@ public class Event extends Task {
 
     /**
      * Returns the string format in which to store the task to the disk, which is E | 1 or 0 | description | datetime.
+     *
      * @return new string format in which to store the task to the disk which is different from toString.
      */
     @Override
@@ -55,6 +59,7 @@ public class Event extends Task {
 
     /**
      * Returns a string in the form of "[E] (done status) (description) (at: datetime)" when task is printed.
+     *
      * @return string that is displayed when task is printed.
      */
     @Override
