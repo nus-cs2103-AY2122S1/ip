@@ -2,7 +2,14 @@ package duke.parser;
 
 import java.util.regex.Pattern;
 
-import duke.commands.*;
+import duke.commands.Command;
+import duke.commands.CreateDeadlineCommand;
+import duke.commands.CreateEventCommand;
+import duke.commands.CreateTodoCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
 import duke.data.exception.DukeException;
 
 public class Parser {
