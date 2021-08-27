@@ -23,7 +23,4 @@ public class TaskList {
     public Task get(int taskIndex) {
         return taskList.get(taskIndex);
     }
-    public void forEach(Consumer<Task> consumer) {
-        taskList.forEach(consumer);
-    }
 }

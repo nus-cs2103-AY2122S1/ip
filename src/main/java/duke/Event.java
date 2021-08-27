@@ -9,7 +9,7 @@ public class Event extends Task{
      */
     public Event(String taskContent) {
         super(taskContent.split(" /at ")[0], "E");
-        this.eventTime = Parser.parseTiming(taskContent.split(" /at ")[1]);
+        eventTime = Parser.parseTiming(taskContent.split(" /at ")[1]);
     }
 
     /**
@@ -31,7 +31,7 @@ public class Event extends Task{
      */
     @Override
     public String getTiming() {
-        return this.eventTime;
+        return eventTime;
     }
 
     /**
@@ -42,9 +42,9 @@ public class Event extends Task{
     @Override
     public String toString() {
         if(super.isCompleted()) {
-            return "[E][X] " + super.getTaskContent() + " " + "(at: " + this.eventTime + ")";
+            return "[E][X] " + super.getTaskContent() + " " + "(at: " + eventTime + ")";
         }else {
-            return "[E][ ] " + super.getTaskContent() + " " + "(at: " + this.eventTime + ")";
+            return "[E][ ] " + super.getTaskContent() + " " + "(at: " + eventTime + ")";
         }
     }
 }
