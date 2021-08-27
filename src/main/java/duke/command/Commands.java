@@ -10,9 +10,6 @@ public enum Commands {
     DELETE (new DeleteCommand()),
     FIND (new FindCommand());
 
-    // make an abstract command class,
-    // this enum is just a way to iterate through all the commands
-    // not sure if good practice lmao but sounds cool
     private final Command command;
     Commands(Command command) {
         this.command = command;

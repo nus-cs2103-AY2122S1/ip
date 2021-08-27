@@ -1,8 +1,9 @@
 package duke.task;
 
 import java.util.ArrayList;
-import duke.exception.DukeException;
+
 import duke.Duke;
+import duke.exception.DukeException;
 import duke.io.TextColor;
 
 public class TaskList {
@@ -30,7 +31,7 @@ public class TaskList {
         save();
 
         Duke.ui.addMessage("Got it. I've added this task:\n  "
-                + task.toString() + "\n" + taskLengthReport(), TextColor.DEFAULT);
+                + task.toString() + "\n" + getTaskLengthReport(), TextColor.DEFAULT);
     }
 
     /**
@@ -65,7 +66,7 @@ public class TaskList {
         save();
 
         Duke.ui.addMessage("Noted! I've removed this task:\n  "
-                + task.toString() + "\n" + taskLengthReport(), TextColor.DEFAULT);
+                + task.toString() + "\n" + getTaskLengthReport(), TextColor.DEFAULT);
     }
 
     /**
@@ -78,7 +79,7 @@ public class TaskList {
         tasks.removeIf(Task::isDone);
         save();
         Duke.ui.addMessage("Noted! I've removed all completed tasks.\n"
-                + taskLengthReport(), TextColor.DEFAULT);
+                + getTaskLengthReport(), TextColor.DEFAULT);
     }
 
     /**
@@ -91,7 +92,7 @@ public class TaskList {
         tasks.removeIf(Task::isExpired);
         save();
         Duke.ui.addMessage("Noted! I've removed all expired tasks.\n"
-                + taskLengthReport(), TextColor.DEFAULT);
+                + getTaskLengthReport(), TextColor.DEFAULT);
     }
 
     /**
@@ -158,7 +159,7 @@ public class TaskList {
      *
      * @return string telling the user how many tasks are in the list
      */
-    private String taskLengthReport() {
+    private String getTaskLengthReport() {
         return "Now you have " + tasks.size()
                 + (tasks.size() != 1 ? " tasks" : " task") + " in the list.";
     }

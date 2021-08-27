@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Duke;
 import duke.task.ToDo;
 import duke.exception.DukeException;
-import duke.Duke;
 
 public class ToDoCommand extends Command {
     public ToDoCommand() {

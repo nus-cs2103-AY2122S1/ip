@@ -1,7 +1,7 @@
 package duke.io;
 
-import duke.command.Commands;
 import duke.Duke;
+import duke.command.Commands;
 
 public class Ui {
     private StringBuilder message = new StringBuilder();

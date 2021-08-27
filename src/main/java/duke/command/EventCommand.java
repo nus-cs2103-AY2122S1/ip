@@ -2,8 +2,9 @@ package duke.command;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import duke.exception.DukeException;
+
 import duke.Duke;
+import duke.exception.DukeException;
 import duke.task.Event;
 
 public class EventCommand extends Command {

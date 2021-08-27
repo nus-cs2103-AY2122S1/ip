@@ -14,8 +14,6 @@ public abstract class Command {
         this.commandString = commandString;
     }
 
-    // returns the length of the command string +1 to account for the whitespace
-
     /**
      * Returns the length of the command string + 1 to account for the whitespace
      *

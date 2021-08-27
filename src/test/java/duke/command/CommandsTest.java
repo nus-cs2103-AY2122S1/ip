@@ -1,20 +1,20 @@
 package duke.command;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class CommandsTest {
 
     @Test
     void isCommand() {
-        Commands.DEADLINE.isCommand("deadline");
-        Commands.DELETE.isCommand("delete");
-        Commands.DONE.isCommand("done");
-        Commands.EVENT.isCommand("event");
-        Commands.EXIT.isCommand("bye");
-        Commands.LIST.isCommand("list");
-        Commands.TODO.isCommand("todo");
+        assertTrue(Commands.DEADLINE.isCommand("deadline"));
+        assertTrue(Commands.DELETE.isCommand("delete"));
+        assertTrue(Commands.DONE.isCommand("done"));
+        assertTrue(Commands.EVENT.isCommand("event"));
+        assertTrue(Commands.EXIT.isCommand("bye"));
+        assertTrue(Commands.LIST.isCommand("list"));
+        assertTrue(Commands.TODO.isCommand("todo"));
     }
 
     @Test

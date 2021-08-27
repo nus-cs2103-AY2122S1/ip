@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+
 import duke.task.TaskList;
 import duke.io.Parser;
 import duke.io.Storage;

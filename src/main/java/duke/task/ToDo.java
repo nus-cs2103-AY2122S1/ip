@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.io.TextColor;
-
 public class ToDo extends Task {
     public ToDo(String name) {
         super(name);

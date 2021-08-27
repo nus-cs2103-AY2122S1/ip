@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Duke;
-import duke.exception.DukeException;
 
 public class ListCommand extends Command {
     public ListCommand() {
