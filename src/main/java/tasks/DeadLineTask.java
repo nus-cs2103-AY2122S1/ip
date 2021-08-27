@@ -107,7 +107,7 @@ public final class DeadLineTask extends Task{
      *
      * @return the simple description of the task
      */
-    public String getActualTask() {
+    public String getSimpleTaskDescription() {
         return super.getTask();
     }
 
@@ -119,9 +119,9 @@ public final class DeadLineTask extends Task{
     @Override
     public String getSaveFormat() {
         if (super.getStatus().equals("[ ]")) {
-            return "D" + "|" + this.getActualTask().strip() + "|" + this.dueDate + "|" + 0;
+            return "D" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 0;
         } else {
-            return "D" + "|" + this.getActualTask().strip() + "|" + this.dueDate + "|" + 1;
+            return "D" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 1;
         }
     }
 }

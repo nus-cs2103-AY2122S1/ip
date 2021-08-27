@@ -25,7 +25,7 @@ public final class Parser{
             for (String ss : arr) {
                 if (!ss.equals("")) words.add(ss);
             }
-            c = chat(words);
+            c = generateCommand(words);
         } catch (DukeException e) {
             Ui.helperMessage();
         }
@@ -39,7 +39,7 @@ public final class Parser{
      * @return created executable command
      * @throws DukeException if user's input does not contain correct keywords
      */
-    public Command chat(ArrayList<String> s) throws DukeException {
+    public Command generateCommand(ArrayList<String> s) throws DukeException {
         if (s == null || s.isEmpty()) {
             throw new DukeException("Please chek your input!");
         } else if (s.get(0).equalsIgnoreCase("bye")) {

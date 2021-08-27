@@ -10,7 +10,7 @@ import ui.Ui;
  */
 public abstract class Command{
 
-    private final ArrayList<String> input  ;
+    private final ArrayList<String> input;
 
     /**
      * Constructs the Command object.

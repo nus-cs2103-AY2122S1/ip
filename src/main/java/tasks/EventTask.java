@@ -109,7 +109,7 @@ public final class EventTask extends Task{
      *
      * @return the simple description of the task
      */
-    public String getActualTask() {
+    public String getSimpleTaskDescription() {
         return super.getTask();
     }
 
@@ -121,9 +121,9 @@ public final class EventTask extends Task{
     @Override
     public String getSaveFormat() {
         if (super.getStatus().equals("[ ]")) {
-            return "E" + "|" + this.getActualTask().strip() + "|" + this.date + "|" + 0;
+            return "E" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.date + "|" + 0;
         } else {
-            return "E" + "|" + this.getActualTask().strip() + "|" + this.date + "|" + 1;
+            return "E" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.date + "|" + 1;
         }
     }
 }

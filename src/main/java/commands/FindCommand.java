@@ -28,18 +28,18 @@ public class FindCommand extends Command{
                 target += getInput().get(i);
             }
         }
-        ArrayList<Task> found = lst.findItems(target);
-        if (found.isEmpty()) {
-            Ui.showInput("No task found!");
+        ArrayList<Task> tasksFound = lst.findTask(target);
+        if (tasksFound.isEmpty()) {
+            Ui.showInput("No task tasksFound!");
         } else {
-            String temp = "The items found are: \n";
-            for (int i = 0; i < found.size(); i++) {
-                if (i + 1 < found.size()) {
-                    temp += "     " + (i + 1) + "." + found.get(i).getType()
-                            + found.get(i).getStatus() + " " + found.get(i).getTask() + "\n";
+            String temp = "The items tasksFound are: \n";
+            for (int i = 0; i < tasksFound.size(); i++) {
+                if (i + 1 < tasksFound.size()) {
+                    temp += "     " + (i + 1) + "." + tasksFound.get(i).getType()
+                            + tasksFound.get(i).getStatus() + " " + tasksFound.get(i).getTask() + "\n";
                 } else {
-                    temp += "     " + (i + 1) + "." + found.get(i).getType()
-                            + found.get(i).getStatus() + " " + found.get(i).getTask();
+                    temp += "     " + (i + 1) + "." + tasksFound.get(i).getType()
+                            + tasksFound.get(i).getStatus() + " " + tasksFound.get(i).getTask();
                 }
             }
             Ui.showInput(temp);

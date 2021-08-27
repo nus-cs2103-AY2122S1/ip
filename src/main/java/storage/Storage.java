@@ -25,15 +25,15 @@ public final class Storage{
      * @throws DukeException if there were unexpected errors
      * while creating or checking files
      */
-    public void checkFiles() throws DukeException {
-        File data = new File("./data");
+    public void createFiles() throws DukeException {
+        File folder = new File("./data");
         File saves = new File(FILE_PATH);
         try {
-            if (!data.exists() || !data.isDirectory()) {
-              boolean dir = data.mkdir();
+            if (!folder.exists() || !folder.isDirectory()) {
+              boolean isFolderCreated = folder.mkdir();
             }
             if (!saves.exists()) {
-              boolean save = saves.createNewFile();
+              boolean isSavesCreated = saves.createNewFile();
             }
         } catch (IOException e) {
             Ui.showInput(e.getMessage());
@@ -52,7 +52,7 @@ public final class Storage{
             Ui.showInput("something went wrong");
         }
         try {
-            boolean other = file.createNewFile();
+            boolean isFileCreated = file.createNewFile();
             FileWriter writer = new FileWriter(FILE_PATH, true);
             for (Task t : currTasks) {
                 writer.write(t.getSaveFormat() + "\n");
@@ -73,9 +73,9 @@ public final class Storage{
         ArrayList<Task> tasksLoaded = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH));
-            String s = reader.readLine();
-            while (s != null) {
-                String[] words = s.split("\\|");
+            String line = reader.readLine();
+            while (line != null) {
+                String[] words = line.split("\\|");
                 if (words[0].equals("T")) {
                     ToDoTask t = new ToDoTask(words[1]);
                     if (words[words.length - 1].equals("1")) {
@@ -97,7 +97,7 @@ public final class Storage{
                     }
                     tasksLoaded.add(e);
                 }
-                s = reader.readLine();
+                line = reader.readLine();
             }
             reader.close();
         } catch (FileNotFoundException e) {

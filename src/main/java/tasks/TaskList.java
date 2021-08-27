@@ -44,7 +44,7 @@ public final class TaskList{
      * @throws IllegalArgumentException thrown when encountering a String Array without
      * the presence of "/at" expression, which is not a valid input for Event
      */
-    public String searchForEventDay (ArrayList<String> args) throws IllegalArgumentException {
+    public String searchForEventDay(ArrayList<String> args) throws IllegalArgumentException {
         for (int i = 2; i < args.size(); i++) {
             if (args.get(i).equals("/at")) {
                 if (i + 1 >= args.size()) {
@@ -67,7 +67,7 @@ public final class TaskList{
      * @throws IllegalArgumentException thrown when encountering a String Array without
      * the presence of "/by" expression, which is not a valid input for Deadline
      */
-    public String lookForDeadline (ArrayList<String> arg) throws IllegalArgumentException {
+    public String lookForDeadline(ArrayList<String> arg) throws IllegalArgumentException {
         for (int i = 2; i < arg.size(); i++) {
             if (arg.get(i).equals("/by")) {
                 if (i + 1 >= arg.size()) {
@@ -144,29 +144,11 @@ public final class TaskList{
     /**
      * Checks if any tasks are due on a particular day.
      *
-     * @param s the date which user wants to check
+     * @param target the keywords as per input by user
+     * @return list containing all tasks that match input keywords
      */
-    public void anyItemsDue(String s) {
-        ArrayList<Task> dueItems = new ArrayList<>();
-        if (tasks.isEmpty()) {
-            Ui.showInput("No tasks yet!");
-        } else {
-            String[] date = s.split("/");
-            LocalDate ref = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
-            for (Task t : tasks) {
-                if (!(t instanceof ToDoTask)) {
-                    LocalDate temp = t.getLocalDate();
-                    if (temp != null) {
-                        if (temp.equals(ref)) {
-                            dueItems.add(t);
-                        }
-                    }
-                }
-            }
-        }
-    }
 
-    public ArrayList<Task> findItems(String target) {
+    public ArrayList<Task> findTask(String target) {
         ArrayList<Task> matched = new ArrayList<>();
         if (!target.equals("")) {
             for (Task t : tasks) {

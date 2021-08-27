@@ -15,7 +15,7 @@ public class Duke{
     private static TaskList tasks;
     private final Parser parser;
     private final Ui ui;
-    private final Storage unit;
+    private final Storage storage;
 
 
     /**
@@ -24,15 +24,15 @@ public class Duke{
     public Duke() {
         Ui.welcomeMessage();
         this.ui = new Ui();
-        this.unit = new Storage();
+        this.storage = new Storage();
         try {
-            unit.checkFiles();
+            storage.createFiles();
         } catch (DukeException e) {
             Ui.showInput("something went wrong: " + e.getMessage() + "\n"
                     + "     exiting program...");
             terminate();
         }
-        tasks = new TaskList(unit.loadSaves());
+        tasks = new TaskList(storage.loadSaves());
         parser = new Parser();
     }
 
@@ -41,14 +41,14 @@ public class Duke{
      * detected by parser as per user input.
      */
     public void run() {
-        boolean exit = false;
-        while (!exit) {
+        boolean isExit = false;
+        while (!isExit) {
             String next = ui.readLine();
             Ui.showAsUserInput(next);
             Command command = parser.parse(next);
             if (command != null) {
-                command.execute(tasks, ui, unit);
-                exit = command.isExit();
+                command.execute(tasks, ui, storage);
+                isExit = command.isExit();
             }
         }
     }
