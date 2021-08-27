@@ -1,13 +1,11 @@
 package duke;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * Implements a ChatBot named Duke that helps to create and maintain a task list.
  */
 public class Duke {
-    private final static ArrayList<Task> list = new ArrayList<>();
     private final static Scanner scanner = new Scanner(System.in);
     private final Storage storage;
     private final Ui ui;

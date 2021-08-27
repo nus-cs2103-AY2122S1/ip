@@ -1,4 +1,5 @@
 package duke;
+
 import java.util.ArrayList;
 
 /**
@@ -39,6 +40,7 @@ public class TaskList {
         return tasks.get(index);
     }
 
+
     /**
      * Marks the Task in the ArrayList as completed.
      * @param input The user input.
@@ -46,7 +48,7 @@ public class TaskList {
      * @param ui The Ui object.
      * @throws DukeException Thrown in the event the Task cannot be accessed.
      */
-    public void done(String input, Storage storage, Ui ui) throws DukeException {
+    public void handleDone(String input, Storage storage, Ui ui) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(input.substring(5));
             Task currTask = tasks.get(taskNumber - 1);
@@ -75,7 +77,7 @@ public class TaskList {
      * @param ui The Ui object.
      * @throws DukeException Thrown in the event the user input is wrong.
      */
-    public void todo(String input, Storage storage, Ui ui) throws DukeException {
+    public void handleTodo(String input, Storage storage, Ui ui) throws DukeException {
         try {
             Todo todo = new Todo(input.substring(5));
             add(todo, storage, ui);
@@ -84,6 +86,7 @@ public class TaskList {
         }
     }
 
+
     /**
      * Adds a Deadline object into the ArrayList.
      * @param input The user input.
@@ -91,7 +94,7 @@ public class TaskList {
      * @param ui The Ui object.
      * @throws DukeException Thrown in the event the user input is wrong.
      */
-    public void deadline(String input, Storage storage, Ui ui) throws DukeException {
+    public void handleDeadline(String input, Storage storage, Ui ui) throws DukeException {
         try {
             int split = input.indexOf("/");
             Deadline deadline = new Deadline(input.substring(9, split - 1), input.substring(split + 4));
@@ -101,6 +104,7 @@ public class TaskList {
         }
     }
 
+
     /**
      * Adds an Event object into the ArrayList.
      * @param input The user input.
@@ -108,7 +112,7 @@ public class TaskList {
      * @param ui The Ui object.
      * @throws DukeException Thrown in the event the user input is wrong.
      */
-    public void event(String input, Storage storage, Ui ui) throws DukeException {
+    public void handleEvent(String input, Storage storage, Ui ui) throws DukeException {
         try {
             int split = input.indexOf("/");
             Event event = new Event(input.substring(6, split - 1), input.substring(split + 4));
@@ -118,6 +122,7 @@ public class TaskList {
         }
     }
 
+
     /**
      * Deletes a Task object from the ArrayList.
      * @param input The user input.
@@ -125,7 +130,7 @@ public class TaskList {
      * @param ui The Ui object.
      * @throws DukeException Thrown in the event the Task cannot be accessed.
      */
-    public void delete(String input, Storage storage, Ui ui) throws DukeException {
+    public void handleDelete(String input, Storage storage, Ui ui) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(input.substring(7)) - 1;
             ui.delete(tasks.get(taskNumber), tasks.size() - 1);
