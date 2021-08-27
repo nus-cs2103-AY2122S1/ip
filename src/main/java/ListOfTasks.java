@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class ListOfTasks {
     private static int count;
-    //private Task[] = xs
     private ArrayList<Task> xs;
 
     public ListOfTasks() {
