@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task{
     private LocalDate by;
 
-    public Deadline(String input, String by) throws DateTimeParseException{
+    public Deadline(String input, String by) throws DateTimeParseException {
         super(input);
         int space = by.indexOf(" ");
         String format = space > 0 ? "d/MM/yyyy HHmm" : "d/MM/yyyy"; 
