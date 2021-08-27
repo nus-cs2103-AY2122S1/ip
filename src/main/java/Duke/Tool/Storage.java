@@ -15,15 +15,27 @@ import java.util.Scanner;
 import java.lang.String;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents Storage class：deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private final String filePath;
     private final DateTimeFormatter  timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
 
+    /**
+     * The constructor for Storage
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * The method readdata for reading data from input file path
+     * @return ArrayList
+     * @throws IOException
+     */
     public ArrayList<Task> readData() throws IOException {
         ArrayList<Task> task = new ArrayList<>();
 
@@ -53,7 +65,11 @@ public class Storage {
         return task;
     }
 
-    public void writeData(ArrayList<Task> task) throws IOException {
+    /**
+     * The method of write data to input file path
+     * @param task
+     */
+    public void writeData(ArrayList<Task> task) {
         try {
             FileWriter fw = new FileWriter(filePath, false);
             for (Task t : task) {
