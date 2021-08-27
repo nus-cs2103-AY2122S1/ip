@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Represent storage for tasks.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList.

@@ -164,7 +164,7 @@ public class Parser {
      * @param userInput User's input into Duke chatbot.
      * @param command The identifying command in user input.
      * @return An int representing an index.
-     * @throws DukeException
+     * @throws DukeException If user input for index cannot be parsed into Integer.
      */
     public static int parseUserNumInput(String userInput, Commands command) throws DukeException {
         // Parses integer in user input. Invalid user input could throw NumberFormatException.

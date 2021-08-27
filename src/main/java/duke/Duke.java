@@ -10,9 +10,9 @@ import java.util.Scanner;
  */
 public class Duke {
     private static final String SAVE_FILENAME = "dukeSave.txt";
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Constructor for Duke.
@@ -23,12 +23,12 @@ public class Duke {
      * @param fileName Filename that Storage will save tasks to and read tasks from.
      */
     public Duke(String fileName) {
-        storage = new Storage(fileName);
-        ui = new Ui();
+        this.storage = new Storage(fileName);
+        this.ui = new Ui();
 
         // Read tasks from save file.
         try {
-            tasks = storage.readTasksFromData();
+            tasks = this.storage.readTasksFromData();
         } catch (DukeException dukeException) {
             System.out.println(dukeException);
 

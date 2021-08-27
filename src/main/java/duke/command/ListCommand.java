@@ -8,7 +8,7 @@ import duke.Ui;
  * Represents a command that can be executed to print all existing tasks.
  */
 public class ListCommand extends Command {
-    private String userInput;
+    private final String userInput;
 
     /**
      * Constructor for ListCommand.
