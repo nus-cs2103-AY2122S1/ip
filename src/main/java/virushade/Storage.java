@@ -8,15 +8,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import virushade.tasks.Task;
 
+/**
+ * Our storage class deals with writing data to the text file passed into Virushade.
+ */
 public class Storage {
 
     private final File STORAGE_FILE;
 
+    /**
+     * The constructor for our Storage class.
+     * @param filename The file path to be written to.
+     */
     public Storage(String filename) {
         STORAGE_FILE = new File(filename);
     }
 
-    public void load(ArrayList<Task> tasks) throws VirushadeException{
+    /**
+     * Reads from STORAGE_FILE and updates the given ArrayList input according to the lines in STORAGE_FILE.
+     * @param tasks The ArrayList input to update information from STORAGE_FILE to.
+     * @throws VirushadeException Thrown when STORAGE_FILE file is not parsed correctly.
+     */
+    public void load(ArrayList<Task> tasks) throws VirushadeException {
         try {
             // create a Scanner using the File as the source
             Scanner s = new Scanner(STORAGE_FILE);
@@ -36,6 +48,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a file path according to the input file path.
+     * @param f The input file path
+     * @throws VirushadeException Thrown when unable to create file.
+     */
     private void createFilePath(File f) throws VirushadeException {
         try {
             if (f.getParentFile().mkdirs()) {
@@ -50,6 +67,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates STORAGE_FILE according to the input text.
+     * @param text The input string to update STORAGE_FILE.
+     * @throws VirushadeException Thrown when unable to create/ write to STORAGE_FILE.
+     */
     public void update(String text) throws VirushadeException {
         if (!STORAGE_FILE.exists()) {
             createFilePath(STORAGE_FILE);

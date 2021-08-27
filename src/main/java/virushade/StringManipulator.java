@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A utility class that helps with string manipulation.
+ */
 public class StringManipulator {
     /**
      * Partitions the string into 2, seperated by the first '/'.
@@ -27,6 +30,11 @@ public class StringManipulator {
         return pair;
     }
 
+    /**
+     * A function that returns everything after the first instance of '.'.
+     * @param str The input string.
+     * @return The substring of str after the first '.'.
+     */
     public static String everythingAfterDot(String str) {
         int index = str.indexOf('.');
 
