@@ -59,10 +59,20 @@ public class DateTimeFormat {
         timeFormatterList.add(DateTimeFormatter.ofPattern("hhmm a"));
     }
 
+    /**
+     * Returns a List of date formats as {@link DateTimeFormatter}.
+     * 
+     * @return A list of date formats as {@link DateTimeFormatter}.
+     */
     public List<DateTimeFormatter> getDateFormatterList() {
         return dateFormatterList;
     }
 
+    /**
+     * Returns a List of time formats as {@link DateTimeFormatter}.
+     *
+     * @return A list of time formats as {@link DateTimeFormatter}.
+     */
     public List<DateTimeFormatter> getTimeFormatterList() {
         return timeFormatterList;
     }

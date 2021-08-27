@@ -7,24 +7,40 @@ package kayu.task;
  */
 public class Todo extends Task {
     
+    /** Keyword for Todo {@link kayu.task.Task} class. */
     public final static String KEYWORD = "T";
 
+    /**
+     * Initializes the Todo {@link kayu.task.Task}.
+     *
+     * @param description String description of Task.
+     * @param isDone Boolean true if complete, else false.
+     */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
+    /**
+     * Initializes the Todo {@link kayu.task.Task}. Overloaded constructor that sets 
+     * <code>isDone</code> field to false.
+     *
+     * @param description String description of Task.
+     */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * See {@link kayu.task.Task#toEncodedString}.
+     * {@inheritDoc}
      */
     @Override
     public String toEncodedString() {
         return KEYWORD + SPLIT_TEMPLATE + super.toEncodedString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

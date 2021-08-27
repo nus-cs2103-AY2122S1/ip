@@ -13,14 +13,18 @@ import kayu.service.TaskList;
  */
 public class ByeCommand extends Command {
 
+    /** Key word for command. */
     public static final String COMMAND_WORD = "bye";
 
+    /**
+     * Initializes a Bye- {@link kayu.commands.Command}.
+     */
     public ByeCommand() {
         super(BYE);
     }
 
     /**
-     * See {@link kayu.commands.Command#execute(TaskList)}.
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {

@@ -15,15 +15,22 @@ import kayu.task.Task;
  * It is used when the user wants a certain {@link kayu.task.Task} to be deleted.
  */
 public class DeleteCommand extends Command {
-        
+
+    /** Key word for command. */
     public static final String COMMAND_WORD = "delete";
 
+
+    /**
+     * Initializes a Delete- {@link kayu.commands.Command}.
+     *
+     * @param commandParams String parameters fed into the command by user.
+     */
     public DeleteCommand(String commandParams) {
         super(DELETE, commandParams);
     }
 
     /**
-     * See {@link kayu.commands.Command#execute(TaskList)}.
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {

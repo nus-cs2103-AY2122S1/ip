@@ -11,30 +11,58 @@ import java.time.LocalTime;
  */
 public class Event extends Task {
 
+    /** Keyword for Event {@link kayu.task.Task} class. */
     public final static String KEYWORD = "E";
 
+    /** Split word used for command parsing. */
     public final static String SPLIT_WORD = "at";
 
     private final LocalDate atDate;
     
     private final LocalTime atTime;
 
+    /**
+     * Initializes the Event {@link kayu.task.Task}.
+     *
+     * @param description String description of Task.
+     * @param isDone Boolean true if complete, else false.
+     * @param atDate {@link LocalDate} of Event instance.
+     * @param atTime {@link LocalTime} of Event instance.
+     */
     public Event(String description, boolean isDone, LocalDate atDate, LocalTime atTime) {
         super(description, isDone);
         this.atDate = atDate;
         this.atTime = atTime;
     }
 
+    /**
+     * Initializes the Event {@link kayu.task.Task}. Overloaded constructor that sets 
+     * <code>isDone</code> field to false.
+     *
+     * @param description String description of Task.
+     * @param atDate {@link LocalDate} of Event instance.
+     * @param atTime {@link LocalTime} of Event instance.
+     */
     public Event(String description, LocalDate atDate, LocalTime atTime) {
         super(description);
         this.atDate = atDate;
         this.atTime = atTime;
     }
 
+    /**
+     * Returns the {@link LocalDate} of Event instance.
+     * 
+     * @return {@link LocalDate} of Event instance.
+     */
     public LocalDate getAtDate() {
         return atDate;
     }
 
+    /**
+     * Returns the {@link LocalTime} of Event instance.
+     * 
+     * @return {@link LocalTime} of Event instance.
+     */
     public LocalTime getAtTime() {
         return atTime;
     }
@@ -54,7 +82,7 @@ public class Event extends Task {
     }
 
     /**
-     * See {@link kayu.task.Task#toEncodedString}.
+     * {@inheritDoc}
      */
     @Override
     public String toEncodedString() {
@@ -66,7 +94,10 @@ public class Event extends Task {
                 + SPLIT_TEMPLATE 
                 + atTime;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + ' ' + getFormattedAt();

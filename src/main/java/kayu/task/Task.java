@@ -7,37 +7,64 @@ package kayu.task;
  */
 public abstract class Task {
 
-    // Encoding variables.
+    /** Template used for encoding storage. */
     public static String SPLIT_TEMPLATE = " # ";
+
+    /** Done state for encoding/decoding. */
     public static String DONE = "1";
+
+    /** Not done state for encoding/decoding. */
     public static String NOT_DONE = "0";
     
-    private String description;
+    private final String description;
 
     private boolean isDone;
 
+    /**
+     * Initializes a new Task instance.
+     * 
+     * @param description String description of Task.
+     * @param isDone Boolean true if complete, else false.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
+    /**
+     * Initializes a new Task instance. Overloaded constructor that sets 
+     * {@link #isDone} field to false.
+     * 
+     * @param description String description of Task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Returns the description of the Task instance.
+     * 
+     * @return Description of the Task as a String.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns the completion state of the Task.
+     * 
+     * @return Boolean isDone, true if complete else false.
+     */
     public boolean isDone() {
         return isDone;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    /**
+     * Updates the completion state of the Task instance.
+     * 
+     * @param isDone New boolean state.
+     */
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
@@ -65,8 +92,11 @@ public abstract class Task {
      */
     public String toEncodedString() {
         return ((isDone) ? DONE : NOT_DONE) + SPLIT_TEMPLATE + description;
-    }    
-    
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return getStatusIcon() + description;

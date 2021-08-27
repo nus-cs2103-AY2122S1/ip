@@ -13,13 +13,16 @@ import kayu.service.TaskList;
  * is used when the user has inputted an invalid command.
  */
 public class InvalidCommand extends Command {
-    
+
+    /**
+     * Initializes a InvalidCommand- {@link kayu.commands.Command}.
+     */
     public InvalidCommand() {
         super(INVALID);
     }
 
     /**
-     * See {@link kayu.commands.Command#execute(TaskList)}.
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {

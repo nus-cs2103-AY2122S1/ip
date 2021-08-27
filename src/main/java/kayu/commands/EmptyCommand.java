@@ -14,12 +14,15 @@ import kayu.service.TaskList;
  */
 public class EmptyCommand extends Command {
 
+    /**
+     * Initializes a EmptyCommand- {@link kayu.commands.Command}.
+     */
     public EmptyCommand() {
         super(EMPTY);
     }
 
     /**
-     * See {@link kayu.commands.Command#execute(TaskList)}.
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {

@@ -15,15 +15,21 @@ import kayu.task.Task;
  * It is used when the user wants a certain {@link kayu.task.Task} to be marked as done.
  */
 public class DoneCommand extends Command {
-    
+
+    /** Key word for command. */
     public static final String COMMAND_WORD = "done";
 
+    /**
+     * Initializes a Done- {@link kayu.commands.Command}.
+     *
+     * @param commandParams String parameters fed into the command by user.
+     */
     public DoneCommand(String commandParams) {
         super(DONE, commandParams);
     }
 
     /**
-     * See {@link kayu.commands.Command#execute(TaskList)}.
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {

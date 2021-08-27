@@ -20,14 +20,21 @@ import java.time.LocalTime;
  */
 public class DeadlineCommand extends AddTaskCommand {
 
+    /** Key word for command. */
     public static final String COMMAND_WORD = "deadline";
 
+    /**
+     * Initializes a Deadline- {@link kayu.commands.AddTaskCommand}.
+     *
+     * @param commandParams String parameters fed into the command by user.
+     * @param dateTimeFormat {@link kayu.parser.DateTimeFormat} used in parsing, if required.
+     */
     public DeadlineCommand(String commandParams, DateTimeFormat dateTimeFormat) {
         super(DEADLINE, commandParams, dateTimeFormat);
     }
 
     /**
-     * See {@link kayu.commands.Command#execute(TaskList)}.
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {

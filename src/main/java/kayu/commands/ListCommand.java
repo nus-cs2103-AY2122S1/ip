@@ -17,15 +17,19 @@ import java.util.List;
  * It returns the {@link kayu.task.Task} that are present in {@link kayu.service.TaskList}.
  */
 public class ListCommand extends Command {
-        
+    
+    /** Key word for command. */
     public static final String COMMAND_WORD = "list";
 
+    /**
+     * Initializes a List- {@link kayu.commands.Command}.
+     */
     public ListCommand() {
         super(LIST);
     }
 
     /**
-     * See {@link kayu.commands.Command#execute(TaskList)}.
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {

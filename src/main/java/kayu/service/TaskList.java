@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * TaskManager class.
@@ -26,6 +25,11 @@ public class TaskList {
       
     private final List<Task> tasks = new ArrayList<>();
 
+    /**
+     * Returns the List of {@link kayu.task.Task}s.
+     * 
+     * @return A list of {@link kayu.task.Task}s.
+     */
     public List<Task> getTasks() {
         return tasks;
     }

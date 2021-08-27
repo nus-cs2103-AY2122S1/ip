@@ -25,6 +25,13 @@ public abstract class AddTaskCommand extends Command {
 
     private final DateTimeFormat dateTimeFormat;
 
+    /**
+     * Initializes an AddTaskCommand instance
+     *
+     * @param commandType {@link kayu.commands.CommandType} for Command instance.
+     * @param commandParams String parameters fed into the command by user.
+     * @param dateTimeFormat {@link kayu.parser.DateTimeFormat} used in parsing, if required.
+     */
     public AddTaskCommand(CommandType commandType, String commandParams, DateTimeFormat dateTimeFormat) {
         super(commandType, commandParams);
         this.dateTimeFormat = dateTimeFormat;

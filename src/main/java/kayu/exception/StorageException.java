@@ -8,6 +8,11 @@ package kayu.exception;
  */
 public class StorageException extends Exception {
 
+    /**
+     * Initializes a StorageException instance for use in module.
+     *
+     * @param message String message to describe error faced.
+     */
     public StorageException(String message) {
         super(message);
     }

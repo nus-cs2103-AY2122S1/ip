@@ -17,7 +17,10 @@ import java.util.Scanner;
  *
  * This class holds the main logic for Kayu project (CS2103T's iP).
  * Kayu is a task manager for users that love the command line interface.
- * @author muhammad-khair, damithc
+ * Code structure inspiration from <code>se-edu</code>'s addressbook-level2 code on GitHub.
+ * 
+ * @see <a href="https://github.com/se-edu/addressbook-level2">addressbook-level2</a>
+ * @author muhammad-khair, damithc, j-lum
  */
 public class Kayu {
 

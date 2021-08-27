@@ -20,14 +20,20 @@ import java.util.Map;
  */
 public class FindCommand extends Command {
 
+    /** Key word for command. */
     public static final String COMMAND_WORD = "find";
 
+    /**
+     * Initializes a Find- {@link kayu.commands.Command}.
+     *
+     * @param commandParams String parameters fed into the command by user.
+     */
     public FindCommand(String commandParams) {
         super(FIND, commandParams);
     }
 
     /**
-     * See {@link kayu.commands.Command#execute(TaskList)}.
+     * {@inheritDoc}
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
