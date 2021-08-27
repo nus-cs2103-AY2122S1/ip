@@ -4,9 +4,15 @@ import duke.data.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * Marks a task as complete.
+ */
 public class DoneCommand extends Command {
     private final int taskNumber;
 
+    /**
+     * @param userInput The raw input from the user
+     */
     public DoneCommand(String userInput) {
         this.taskNumber = Integer.parseInt(
                 userInput.replaceAll(

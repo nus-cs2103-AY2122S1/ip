@@ -4,9 +4,15 @@ import duke.data.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
 
+/**
+ * Deletes the specified task.
+ */
 public class DeleteCommand extends Command {
     private final int taskNumber;
 
+    /**
+     * @param userInput The raw input from the user
+     */
     public DeleteCommand(String userInput) {
         this.taskNumber = Integer.parseInt(
                 userInput.replaceAll(
