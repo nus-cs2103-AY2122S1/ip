@@ -6,7 +6,6 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

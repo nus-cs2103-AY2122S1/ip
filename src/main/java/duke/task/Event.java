@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     private LocalDate at;
 
+<<<<<<< HEAD
     /**
      * Constructor for Event.
      *
@@ -14,6 +15,9 @@ public class Event extends Task {
      * @throws DateTimeParseException
      */
     public Event(String input, String at) throws DateTimeParseException{
+=======
+    public Event(String input, String at) throws DateTimeParseException {
+>>>>>>> branch-A-CodingStandard
         super(input);
         int space = at.indexOf(" ");
         String format = space > 0 ? "d/MM/yyyy HHmm" : "d/MM/yyyy"; 

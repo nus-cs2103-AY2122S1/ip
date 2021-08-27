@@ -45,22 +45,22 @@ public class Storage {
                 String[] vars = task.split("\\|");
                 Task t;
                 switch (vars[0].trim()) {
-                    case "T": {
-                        t = new ToDo(vars[2].trim());
-                        break;
-                    }
-                    case "D": {
-                        t = new Deadline(vars[2].trim(), vars[3].trim());
-                        break;
-                    }
-                    case "E": {
-                        t = new Event(vars[2].trim(), vars[3].trim());
-                        break;
-                    }
-                    default: {
-                        t = new ToDo("");
-                        break;
-                    }
+                case "T": {
+                    t = new ToDo(vars[2].trim());
+                    break;
+                }
+                case "D": {
+                    t = new Deadline(vars[2].trim(), vars[3].trim());
+                    break;
+                }
+                case "E": {
+                    t = new Event(vars[2].trim(), vars[3].trim());
+                    break;
+                }
+                default: {
+                    t = new ToDo("");
+                    break;
+                }
                 }
                 if (Integer.parseInt(vars[1].trim()) == 1) {
                     t.completeItem();
