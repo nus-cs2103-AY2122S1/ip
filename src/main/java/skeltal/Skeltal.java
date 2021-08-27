@@ -1,9 +1,15 @@
 package skeltal;
 import java.util.Scanner;
 
+/**
+ * Represents the main class of the Skeltal chatbot app.
+ */
 public class Skeltal {
 
-    private static void run() {
+    /**
+     * A method that scans for user input and prints a response.
+     */
+    public static void run() {
         TaskList.loadTaskList(Storage.loadFile());
         Ui.introduction();
         Scanner sc = new Scanner(System.in);
@@ -18,8 +24,5 @@ public class Skeltal {
                 Parser.response(userReply);
             }
         }
-    }
-    public static void main(String[] args) {
-        run();
     }
 }

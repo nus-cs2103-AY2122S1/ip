@@ -1,9 +1,19 @@
 package skeltal;
+
+/**
+ * A Parser class that handles the parsing of userInputs, to determine Skeltal's response.
+ */
 public class Parser {
+
+    /**
+     * This method parses the user's input and determines skeltal's response accordingly.
+     * userInput should be in the form "command arg1 arg2".
+     * @param userReply A String of the userInput.
+     */
     public static void response(String userReply) {
         try {
             String[] arrReply = processReply(userReply);
-            System.out.println(Ui.line);
+            System.out.println(Ui.line());
             switch(arrReply[0]) {
                 case "list":
                     TaskList.listReply();
@@ -44,11 +54,7 @@ public class Parser {
         } catch (Exception spook) {
             System.out.println(spook.getMessage());
         }
-
-        System.out.println(Ui.line);
-
-
-
+        System.out.println(Ui.line());
     }
 
     private static String[] processReply(String userReply) {

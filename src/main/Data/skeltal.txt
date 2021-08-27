@@ -1,6 +1,6 @@
 D | 1 | return book | June 6th
 T | 1 | get book
-E | 1 | get ripped | tonight
 E | 1 | date time | 12-2-1999
 D | 0 | date | 12 Feb 29
 E | 1 | cool cats | 12 Dec 20
+E | 0 | Get ripped | tonight
