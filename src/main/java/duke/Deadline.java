@@ -4,10 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates a deadline in the task list.
+ */
 public class Deadline extends Task {
     private LocalDate deadline;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
+    /**
+     * Creates the deadline.
+     *
+     * @param description the description of this task.
+     * @param by the time that this deadline task is due by.
+     */
     public Deadline(String description, String by) {
         super(description);
         try {
@@ -23,6 +32,11 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + deadline.format(formatter) + ")";
     }
 
+    /**
+     * Formats the task into a string that is compliant with the save file format.
+     *
+     * @return a string representing the task to be saved in save file
+     */
     public String saveData() {
         return "D | " + this.getStatusIcon() + " | " + description + " | " + deadline;
     }

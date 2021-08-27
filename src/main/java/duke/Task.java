@@ -1,14 +1,27 @@
 package duke;
 
+/**
+ * Encapsulates a general task.
+ */
 abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a new task.
+     *
+     * @param description the description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Identifies whether the task is completed or not.
+     *
+     * @return "X" if it is done, otherwise " ".
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
@@ -22,5 +35,10 @@ abstract class Task {
         return "[" + this.getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Formats the task into a string that is compliant with the save file format.
+     *
+     * @return a string representing the task to be saved in save file
+     */
     abstract public String saveData();
 }

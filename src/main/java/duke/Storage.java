@@ -7,14 +7,26 @@ import java.util.Scanner; // Import the Scanner class to read text files
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Reads and writes to a specified file path.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Create an instance to handle and writing to a specific file.
+     *
+     * @param filePath the path to the file to be read from and written to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads saved tasks from save file into an ArrayList.
+     *
+     * @return an ArrayList of tasks that are saved in the file.
+     */
     public ArrayList<Task> load() {
         try {
             ArrayList<Task> savedTasks = new ArrayList<>();
@@ -51,6 +63,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the list of tasks into the save file.
+     *
+     * @param tasks the list of tasks.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter writer = new FileWriter(this.filePath, false);

@@ -3,9 +3,17 @@ package duke;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
+/**
+ * Encapsulates a list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> list;
 
+    /**
+     * Creates the list.
+     *
+     * @param prevTasks the list of saved tasks from save file if any.
+     */
     public TaskList(ArrayList<Task> prevTasks) {
         this.list = prevTasks;
     }
@@ -27,6 +35,11 @@ public class TaskList {
         return list.get(index);
     }
 
+    /**
+     * Provides the number of tasks on this list.
+     *
+     * @return size of the list.
+     */
     public int size() {
         return list.size();
     }

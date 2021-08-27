@@ -1,5 +1,8 @@
 import duke.*;
 
+/**
+ * Encapsulates the entire application.
+ */
 public class Duke {
 
     private Storage storage;
@@ -17,6 +20,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the duke program.
+     */
     public void run() {
         ui.displayWelcome();
         boolean isExit = false;
@@ -37,6 +43,11 @@ public class Duke {
         ui.closeScanner();
     }
 
+    /**
+     * Creates a new instance of duke with a hardcoded filepath then runs it.
+     *
+     * @param args not relevant to Duke.
+     */
     public static void main(String[] args) {
         new Duke("./data/tasks.txt").run();
     }

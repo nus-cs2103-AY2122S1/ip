@@ -1,6 +1,16 @@
 package duke;
 
+/**
+ * Translates the user input string into a command object.
+ */
 public class Parser {
+
+    /**
+     * Takes in the user input and converts it into a command.
+     *
+     * @param input the user input string.
+     * @return the command object that represents the action that the user intends to make.
+     */
     public static Command parse(String input) {
         if (input.equals("bye")) return new ExitCommand();
         if (input.equals("list")) return new ListCommand();
@@ -9,7 +19,7 @@ public class Parser {
         return comprehendTask(input);
     }
 
-    public static DeleteCommand parseDelete(String input) {
+    private static DeleteCommand parseDelete(String input) {
         int deletedTaskNumber;
         try {
             deletedTaskNumber = Integer.parseInt(input.substring(7)) - 1;
@@ -20,7 +30,7 @@ public class Parser {
         return new DeleteCommand(deletedTaskNumber);
     }
 
-    public static DoneCommand parseDone(String input) {
+    private static DoneCommand parseDone(String input) {
         int completedTaskNumber;
         try {
             completedTaskNumber = Integer.parseInt(input.substring(5)) - 1;
@@ -31,7 +41,7 @@ public class Parser {
         return new DoneCommand(completedTaskNumber);
     }
 
-    public static AddCommand comprehendTask(String input) {
+    private static AddCommand comprehendTask(String input) {
         Task newTask;
         if (input.startsWith("todo ")) {
             newTask = new Todo(input.substring(5));
