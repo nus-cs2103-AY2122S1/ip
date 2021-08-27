@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -27,7 +29,7 @@ public class Ui {
     public void close() {
         sc.close();
         this.isRunning = false;
-        printFormatted("Bye, hope to see you again! :)");
+        printFormatted(CLOSING_STATEMENT);
     }
 
     public String readCommand() {

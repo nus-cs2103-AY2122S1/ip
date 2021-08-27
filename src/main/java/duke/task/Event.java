@@ -1,9 +1,8 @@
-import java.util.Arrays;
+package duke.task;
 
 public class Event extends Task {
     public static final String SYMBOL = "E";
     public static final String COMMAND_REGEX = "event \\w[\\w, ]+\\w \\/at \\w[\\w, ]*";
-
     private String eventTime;
 
 
@@ -18,7 +17,7 @@ public class Event extends Task {
             throw new IllegalArgumentException("storage line passed in doesnt have enough arguments");
         }
         Event loadedEvent = new Event(args[2], args[3]);
-        Boolean completed = args[1].equals("1");
+        boolean completed = args[1].equals("1");
         if (completed) {
             loadedEvent.markCompleted();
         }
@@ -31,7 +30,7 @@ public class Event extends Task {
     }
 
     public static String syntax() {
-        return "event command syntax: \'event <task> /at <eventTime>\'";
+        return "event command syntax: 'event <duke.task> /at <eventTime>'";
     }
 
     public String toStorageFormat() {
@@ -40,10 +39,6 @@ public class Event extends Task {
             Event.SYMBOL, this.isCompleted() ? 1 : 0, this.getTaskSummary(), this.eventTime
         );
     }
-
-//    private String taskTypeSymbol() {
-//        return Character.toString(Event.TYPE.charAt(0));
-//    }
 
     @Override
     public String toString() {

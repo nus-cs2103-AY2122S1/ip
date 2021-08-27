@@ -1,7 +1,6 @@
-import java.util.Arrays;
+package duke.task;
 
 public class ToDo extends Task {
-    public static String TYPE = "Todo";
     public static final String SYMBOL = "T";
     public static final String COMMAND_REGEX = "todo \\w+.*";
 
@@ -29,7 +28,7 @@ public class ToDo extends Task {
     }
 
     public static String syntax() {
-        return "todo command syntax: \'todo <task>\'";
+        return "todo command syntax: 'todo <duke.task>'";
     }
 
     @Override

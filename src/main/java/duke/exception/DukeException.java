@@ -1,20 +1,26 @@
+package duke.exception;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 public class DukeException extends IllegalArgumentException {
 //    private boolean isKeyword;
-    private String messageReply;
+    private final String MESSAGE_REPLY;
 
     //package private
-    static DukeException of(String invalidInput, String messageReply) {
+    public static DukeException of(String invalidInput, String messageReply) {
         return new DukeException(invalidInput, messageReply);
     }
 
-    static DukeException of(String userInput) {
+    public static DukeException of(String userInput) {
         String reply = DukeException.replyInput(userInput);
         return new DukeException(userInput, reply);
     }
 
     private DukeException(String invalidInput, String messageReply) {
         super(invalidInput);
-        this.messageReply = messageReply;
+        this.MESSAGE_REPLY = messageReply;
     }
 
     private static String replyInput(String userInput) {
@@ -23,16 +29,12 @@ public class DukeException extends IllegalArgumentException {
 
         if (userInput.matches("\\w+\\s*")) {
             String inputWord = userInput.split(" ", 2)[0].toLowerCase();
-            switch (inputWord) {
-                case "todo":
-                    return ToDo.syntax();
-                case "deadline":
-                    return Deadline.syntax();
-                case "event":
-                    return Event.syntax();
-                default:
-                    return defaultReply;
-            }
+            return switch (inputWord) {
+                case "todo" -> ToDo.syntax();
+                case "deadline" -> Deadline.syntax();
+                case "event" -> Event.syntax();
+                default -> defaultReply;
+            };
         } else {
             return defaultReply;
         }
@@ -40,7 +42,7 @@ public class DukeException extends IllegalArgumentException {
 
     @Override
     public String toString() {
-        return this.messageReply;
+        return this.MESSAGE_REPLY;
     }
 }
 

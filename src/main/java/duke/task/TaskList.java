@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.util.Storage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -6,16 +10,9 @@ import java.util.Scanner;
 // immutable principles?
 public final class TaskList {
     private final ArrayList<Task> TASKS;
-    private Storage storageFile;
+    private final Storage STORAGE_FILE;
 
-    //DELETE CLASS?
-    //only objects of class Task go into array
-    //@SafeVarargs
-//    public static TaskList of(ArrayList<Task> tasks) {
-//        return new TaskList(tasks);
-//    }
-
-    //parse in Files containing Strings (line) of task representation
+    //parse in Files containing Strings (line) of duke.task representation
     public static TaskList of(Storage storageFile) {
         File tasksStorageFile = storageFile.getFile();
 
@@ -34,7 +31,7 @@ public final class TaskList {
     }
 
     private TaskList(ArrayList<Task> tasks, Storage storageFile) {
-        this.storageFile = storageFile;
+        this.STORAGE_FILE = storageFile;
         this.TASKS = tasks;
     }
 
@@ -67,26 +64,26 @@ public final class TaskList {
     }
 
     private void updateStore() {
-        this.storageFile.write(this.TASKS);
+        this.STORAGE_FILE.write(this.TASKS);
     }
 
     public static boolean isValidIndex(int idxFrom0, int numOfTasks) {
         if (idxFrom0 < 0 || idxFrom0 >= numOfTasks) {
-            throw new IllegalArgumentException("task index passed in out of range");
+            throw new IllegalArgumentException("duke.task index passed in out of range");
         }
         return true;
     }
 
     @Override
     public String toString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int numOfTasks = this.TASKS.size();
         for (int i = 0; i < numOfTasks; i++) {
-            result += String.format("%d: %s\n", i+1, this.TASKS.get(i).toString());
-        };
-//        //add final task without \n
+            result.append(String.format("%d: %s\n", i + 1, this.TASKS.get(i).toString()));
+        }
+//        //add final duke.task without \n
 //        result += String.format("%d: %s", numOfTasks, this.tasks[numOfTasks - 1].toString());
-        return result;
+        return result.toString();
     }
 
 

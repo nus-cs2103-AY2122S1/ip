@@ -1,3 +1,5 @@
+package duke.task;
+
 //make abstract class?
 public class Task {
     private boolean isDone;
@@ -10,16 +12,12 @@ public class Task {
 
     public static Task parseLine(String line) {
         String taskSymbol = Character.toString(line.charAt(0));
-        switch (taskSymbol) {
-            case "T":
-                return ToDo.parse(line);
-            case "E":
-                return Event.parse(line);
-            case "D":
-                return Deadline.parse(line);
-            default:
-                throw new IllegalArgumentException("Should not enter here");
-        }
+        return switch (taskSymbol) {
+            case "T" -> ToDo.parse(line);
+            case "E" -> Event.parse(line);
+            case "D" -> Deadline.parse(line);
+            default -> throw new IllegalArgumentException("Should not enter here");
+        };
     }
     public void markCompleted() {
         this.isDone = true;

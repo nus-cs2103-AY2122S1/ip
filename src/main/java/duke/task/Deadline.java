@@ -1,4 +1,7 @@
-import java.sql.Date;
+package duke.task;
+
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -11,7 +14,7 @@ public class Deadline extends Task {
     private String userInputDeadline;
     private LocalDateTime dateTimeDeadline;
     private LocalDateTime dateTimeTaskCreation;
-    private static DateTimeFormatter DATE_TIME_FORMATTER =
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
         DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm");
 
 
@@ -50,10 +53,10 @@ public class Deadline extends Task {
             this.dateTimeDeadline = parsedDateTime;
         } catch (DateTimeParseException e) {
             throw DukeException.of("date",
-    String.format("Invalid date & time passed (\'%s\')\n\n", byDate) + Deadline.syntax());
+    String.format("Invalid date & time passed ('%s')\n\n", byDate) + Deadline.syntax());
         } catch (IllegalArgumentException e) {
             throw DukeException.of("date",
-    String.format("Invalid date & time passed (\'%s\')\n\n", byDate) + e.getMessage());
+    String.format("Invalid date & time passed ('%s')\n\n", byDate) + e.getMessage());
         }
     }
 
@@ -67,8 +70,8 @@ public class Deadline extends Task {
 
     public static String syntax() {
         return "deadline command syntax: \n" +
-                "    \'deadline <task> /by dd-MM-yyyy HHmm\'\n"+
-                "Eg. \'deadline project /by 01-01-2020 2359\'";
+                "    'deadline <duke.task> /by dd-MM-yyyy HHmm'\n" +
+                "Eg. 'deadline project /by 01-01-2020 2359'";
     }
 
     @Override

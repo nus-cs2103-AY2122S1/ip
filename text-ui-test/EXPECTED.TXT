@@ -18,10 +18,10 @@
         Available commands: [todo, deadline, event, list, bye]
     ------------------------------------
     ____________________________________
-    todo command syntax: 'todo <task>'
+    todo command syntax: 'todo <duke.task>'
     ------------------------------------
     ____________________________________
-    Got it! I've added this task:
+    Got it! I've added this duke.task:
      [T][] readme
     Now you have 3 tasks in the list.
     ------------------------------------
@@ -36,7 +36,7 @@
     Invalid date & time passed ('yesterday')
 
     deadline command syntax:
-        'deadline <task> /by dd-MM-yyyy HHmm'
+        'deadline <duke.task> /by dd-MM-yyyy HHmm'
     Eg. 'deadline project /by 01-01-2020 2359'
     ------------------------------------
     ____________________________________
@@ -44,7 +44,7 @@
         Available commands: [todo, deadline, event, list, bye]
     ------------------------------------
     ____________________________________
-    Got it! I've added this task:
+    Got it! I've added this duke.task:
      [E][] zoomMeeting (at: tonight)
     Now you have 4 tasks in the list.
     ------------------------------------
@@ -57,7 +57,7 @@
 
     ------------------------------------
     ____________________________________
-    Nice! I've marked this task as done:
+    Nice! I've marked this duke.task as done:
         [E][X] work (at: night)
     ------------------------------------
     ____________________________________
@@ -69,7 +69,7 @@
 
     ------------------------------------
     ____________________________________
-    Noted. I've removed this task:
+    Noted. I've removed this duke.task:
         [E][] party (at: house)
     Now you have 3 tasks in the list.
     ------------------------------------
