@@ -33,6 +33,11 @@ public class Event extends Task {
         this.end = end;
     }
 
+    /**
+     * toString method of Event.
+     *
+     * @return toString description of Event.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
