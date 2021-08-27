@@ -5,6 +5,9 @@ import duke.main.Ui;
 import duke.main.Storage;
 import duke.main.TaskList;
 
+/**
+ * Represents command to list all tasks
+ */
 public class ListCommand extends Command {
     /**
      * {@inheritDoc}

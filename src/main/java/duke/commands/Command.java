@@ -8,6 +8,9 @@ import duke.main.Ui;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents abstract class for all user command
+ */
 public abstract class Command {
     protected List<String> userInputList;
 

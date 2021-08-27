@@ -8,7 +8,9 @@ import duke.tasks.Task;
 import duke.main.TaskList;
 import duke.tasks.Todo;
 
-
+/**
+ * Represents command to create todo
+ */
 public class TodoCommand extends Command {
     private String description;
 

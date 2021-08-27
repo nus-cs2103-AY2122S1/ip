@@ -9,6 +9,9 @@ import duke.tasks.Deadline;
 import duke.tasks.Task;
 import duke.main.TaskList;
 
+/**
+ * Represents command to create deadline
+ */
 public class DeadlineCommand extends Command {
     private int byIndex;
     private String time;

@@ -5,6 +5,9 @@ import duke.main.Ui;
 import duke.main.Storage;
 import duke.main.TaskList;
 
+/**
+ * Represents exit command
+ */
 public class ByeCommand extends Command {
     /**
      * {@inheritDoc}

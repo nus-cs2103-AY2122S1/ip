@@ -9,6 +9,9 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.main.TaskList;
 
+/**
+ * Represents command to create event
+ */
 public class EventCommand extends Command {
     private int byIndex;
     private String time;
