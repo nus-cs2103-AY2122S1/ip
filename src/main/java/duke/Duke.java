@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class to encapsulate Duke Chatbot.
+ */
 public class Duke {
 
     private final Ui dukeUi;
@@ -19,6 +22,9 @@ public class Duke {
     private final String DEADLINE_COMMAND = "deadline";
     private final String FIND_COMMAND = "find";
 
+    /**
+     * Constructor for Duke Chatbot.
+     */
     Duke() {
         this.dukeUi = new Ui();
         this.dukeParser = new Parser();
@@ -32,6 +38,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Method containing Logic for processed Input.
+     *
+     * @param parsedTerms ArrayList containing the command, entry and timing (in that order).
+     * @throws DukeException If ProcessedInput is invalid/incoherent.
+     */
     private void processInput(ArrayList<String> parsedTerms) throws DukeException {
         if (parsedTerms.size() < 3) {
             throw new DukeException("Duke Cannot Understand Your Entry!");
@@ -74,13 +86,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to perform initialise Duke operations.
+     */
     private void run() {
         this.dukeUi.welcomeUser();
         Scanner inputScanner = new Scanner(System.in);
         String input = inputScanner.nextLine();
         while (!(input.equals(TERMINATION_COMMAND))) {
             try {
-                //Parser class
                 ArrayList<String> parsedTerms = this.dukeParser.parseInput(input);
                 this.processInput(parsedTerms);
                 this.dukeStorage.saveEntries(this.entries);
@@ -92,10 +106,20 @@ public class Duke {
         this.dukeUi.goodByeUser();
     }
 
+    /**
+     * Main method that starts Duke.
+     *
+     * @param args Arguments passed when Duke is started.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }
 
+    /**
+     * Overrides the Object's toString method.
+     *
+     * @return String description of Duke.
+     */
     @Override
     public String toString() {
         return "I'm a Duke, a simple chatbot to help you remember tasks!";

@@ -4,8 +4,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Parser {
+
+    /**
+     * Constructor for Parser Object.
+     */
     Parser() {}
 
+    /**
+     * Returns parsed input in an Arraylist.
+     *
+     * @param input String input from user.
+     * @return ArrayList of command, entry, timing (if present).
+     * @throws DukeException Error is thrown if Command is invalid.
+     */
     public ArrayList<String> parseInput(String input) throws DukeException {
         ArrayList<String> terms = new ArrayList<>();
         this.parseString(input, terms);
