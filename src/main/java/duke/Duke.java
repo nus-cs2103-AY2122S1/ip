@@ -9,6 +9,7 @@ import java.io.IOException;
  */
 public class Duke {
     private static final String STORAGE_LOCATION = "data/duke.txt";
+    private TaskStorage taskStorage;
     private TaskList tasks;
 
     /**
@@ -19,15 +20,15 @@ public class Duke {
      * @throws FileParseException When the file is not of the right format.
      */
     public Duke(String fileLocation) throws IOException, FileParseException {
-        Storage storage = new Storage(fileLocation);
-        tasks = new TaskList(storage);
+        taskStorage = new TaskStorage(fileLocation);
+        tasks = new TaskList(taskStorage.loadTasks());
     }
 
     /**
      * Starts the Duke application.
      */
     public void run() {
-        new Ui(tasks).start();
+        new Ui(taskStorage, tasks).start();
     }
 
     public static void main(String[] args) {

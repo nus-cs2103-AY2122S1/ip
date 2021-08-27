@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
 
 import java.nio.file.Files;
@@ -57,13 +55,13 @@ public class Storage {
     }
 
     /**
-     * Saves the added task and updates the storage.
+     * Saves the added line and updates the storage.
      *
-     * @param task The task to be added.
+     * @param line The string to be added at the last line.
      * @throws IOException When an error occurs when writing to the file.
      */
-    public void addLine(Task task) throws IOException {
-        lines.add(task.toStorageString());
+    public void addLine(String line) throws IOException {
+        lines.add(line);
         saveLinesToStorage();
     }
 
@@ -79,15 +77,14 @@ public class Storage {
     }
 
     /**
-     * Modifies a line specified by the line number that represents a task,
-     * and updates the storage.
+     * Modifies a line specified by the line number and updates the storage.
      *
-     * @param lineNumber The line number to modify the task stored in the line.
-     * @param task The task to be modified.
+     * @param lineNumber The line number to be modified in the file.
+     * @param line The string to be replaced with at that line.
      * @throws IOException When an error occurs when writing to the file.
      */
-    public void editLine(int lineNumber, Task task) throws IOException {
-        lines.set(lineNumber - 1, task.toStorageString());
+    public void editLine(int lineNumber, String line) throws IOException {
+        lines.set(lineNumber - 1, line);
         saveLinesToStorage();
     }
 

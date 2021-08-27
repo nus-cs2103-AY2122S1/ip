@@ -13,17 +13,20 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner scanner;
+    private TaskStorage taskStorage;
     private TaskList tasks;
     private boolean isRunning;
 
     /**
-     * Constructs an ui with the user's tasks,
+     * Constructs an ui with the user's storage and tasks,
      * initialising a scanner to deal with user input.
      *
+     * @param taskStorage The user's storage of tasks in the hard disk.
      * @param tasks The user's list of tasks.
      */
-    public Ui(TaskList tasks) {
+    public Ui(TaskStorage taskStorage, TaskList tasks) {
         scanner = new Scanner(System.in);
+        this.taskStorage = taskStorage;
         this.tasks = tasks;
         isRunning = true;
     }
@@ -41,8 +44,9 @@ public class Ui {
         if (description == null || description.equals("")) {
             throw new DukeException("Oops!!! The description of a todo cannot be empty.");
         }
-        Task addedTask = tasks.addTask(new Todo(description));
-        Message.printAddTaskMessage(addedTask, tasks.getSize());
+        Task task = tasks.addTask(new Todo(description));
+        taskStorage.addTaskToStorage(task);
+        Message.printAddTaskMessage(task, tasks.getSize());
     }
 
     /**
@@ -64,6 +68,7 @@ public class Ui {
             return;
         }
         tasks.addTask(task);
+        taskStorage.addTaskToStorage(task);
         Message.printAddTaskMessage(task, tasks.getSize());
     }
 
@@ -78,6 +83,7 @@ public class Ui {
     private void handleMarkTask(String taskNumberString) throws DukeException, IOException {
         int taskNumber = retrieveTaskNumber(taskNumberString);
         Task markedTask = tasks.markTask(taskNumber);
+        taskStorage.editTaskFromStorage(taskNumber, markedTask);
         Message.printMarkTaskDoneMessage(markedTask);
     }
 
@@ -92,6 +98,7 @@ public class Ui {
     private void handleDeleteTask(String taskNumberString) throws DukeException, IOException {
         int taskNumber = retrieveTaskNumber(taskNumberString);
         Task removedTask = tasks.deleteTask(taskNumber);
+        taskStorage.removeTaskFromStorage(taskNumber);
         Message.printDeleteTaskMessage(removedTask, tasks.getSize());
     }
 
@@ -102,8 +109,8 @@ public class Ui {
      * @param query The keyword(s) to find the tasks in the task list.
      */
     private void handleFindTask(String query) {
-        String filteredTasksString = tasks.getFilteredTasksString(query);
-        Message.printFindTasksMessage(filteredTasksString);
+        TaskList filteredTasks = tasks.getFilteredTasks(query);
+        Message.printTasksMessage(filteredTasks);
     }
 
     /**
