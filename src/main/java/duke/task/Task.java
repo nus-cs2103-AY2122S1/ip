@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Collection;
+
 public class Task {
     private String taskName;
     private boolean isDone;
@@ -13,6 +15,15 @@ public class Task {
     Task(String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;
+    }
+
+    /**
+     * Gets the name of task
+     *
+     * @return the input name of the task
+     */
+    public String getTaskName() {
+        return taskName;
     }
 
     /**

@@ -54,6 +54,10 @@ public class Parser {
                     taskList.markAsCheckedTask(taskList.taskToCheck(message));
                     storage.updateFile(taskList.getTasks());
 
+                } else if (message.startsWith("find")) {
+                    String keyword = message.substring(5);
+                    taskList.findTask(keyword);
+
                 }else if (message.startsWith("todo")) {
                     isValidEntry(message, "todo");
                     String taskName = message.substring(message.indexOf(" "));

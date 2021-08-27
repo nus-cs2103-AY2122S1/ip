@@ -56,6 +56,33 @@ public class TaskList {
     }
 
     /**
+     * Finds all tasks that contains the input keyword
+     *
+     * @param keyword the input String to search for
+     */
+    public void findTask(String keyword) {
+        int order = 1;
+        int numOfMatchingTasks = 0;
+        String tasksToPrint = "Here are the matching tasks in your list: \n";
+        if (tasks.size() == 0) {
+            System.out.println("No tasks in your list.");
+        } else {
+            for (Task t : tasks) {
+                if (t.getTaskName().contains(keyword)) {
+                    String matchingTask = order++ +"." + t.displayTask() + "\n";
+                    tasksToPrint = tasksToPrint + matchingTask;
+                    numOfMatchingTasks++;
+                }
+            }
+            if (numOfMatchingTasks == 0) {
+                System.out.println("No matching tasks found.");
+            } else {
+                System.out.print(tasksToPrint);
+            }
+        }
+    }
+
+    /**
      * Gets the index of the Task to check
      *
      * @param message the input command to check a task
