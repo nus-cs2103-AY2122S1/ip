@@ -14,7 +14,7 @@ public class Storage {
     private final String PROJECT_ROOT = System.getProperty("user.dir");
     private final Path DATA_DIRECTORY_PATH = Paths.get(PROJECT_ROOT,"data");
 
-    Storage () {}
+    Storage() {}
 
     public void saveEntries(EntryList entries) throws DukeException {
         Path dataPath = DATA_DIRECTORY_PATH.resolve("duke.txt");
@@ -48,25 +48,25 @@ public class Storage {
                 Entry nextEntry = new Todo("");
                 boolean hasNextEntry = true;
                 switch (entryType) {
-                    case "T":
-                        nextEntry = new Todo(entryData);
-                        break;
-                    case "D":
-                        String deadlineTiming = fileScanner.next();
-                        nextEntry = new Deadline(entryData, deadlineTiming);
-                        break;
-                    case "E":
-                        String eventTiming = fileScanner.next();
-                        nextEntry = new Event(entryData, eventTiming);
-                        break;
-                    default:
-                        //Corrupted Entry Case
-                        hasNextEntry = false;
-                        break;
+                case "T":
+                    nextEntry = new Todo(entryData);
+                    break;
+                case "D":
+                    String deadlineTiming = fileScanner.next();
+                    nextEntry = new Deadline(entryData, deadlineTiming);
+                    break;
+                case "E":
+                    String eventTiming = fileScanner.next();
+                    nextEntry = new Event(entryData, eventTiming);
+                    break;
+                default:
+                    //Corrupted Entry Case
+                    hasNextEntry = false;
+                    break;
                 }
                 if (hasNextEntry) {
                     if (isDone) {
-                        nextEntry.markEntryAsDone();
+                        nextEntry.setDone();
                     }
                     entries.addEntry(nextEntry);
                 }
@@ -84,6 +84,4 @@ public class Storage {
             }
         }
     }
-
-
 }

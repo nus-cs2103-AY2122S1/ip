@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Parser {
     Parser() {}
 
-    public ArrayList<String> parseInput (String input) throws DukeException {
+    public ArrayList<String> parseInput(String input) throws DukeException {
         ArrayList<String> terms = new ArrayList<>();
         this.parseString(input, terms);
         String command = "";
@@ -21,7 +21,7 @@ public class Parser {
         return new ArrayList<>(Arrays.asList(command, entry, timing));
     }
 
-    private void parseString (String input, ArrayList<String> terms) {
+    private void parseString(String input, ArrayList<String> terms) {
         //Function to store all terms in input as separate Strings (separated by space in the input)
         int length = input.length();
         if (length >= 1) {

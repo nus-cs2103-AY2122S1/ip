@@ -10,7 +10,8 @@ public class Ui {
                                     + "| |_| | |_| |   <  __/\n"
                                     + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private final static String HORIZONTAL_DIVIDE = "___________________________________________________________________";
+    private final static String HORIZONTAL_DIVIDE =
+        "___________________________________________________________________";
 
     public void welcomeUser() {
         System.out.println("Hello from\n" + LOGO);
@@ -18,13 +19,13 @@ public class Ui {
         System.out.println(HORIZONTAL_DIVIDE);
     }
 
-    public void addEntry (Entry entry, int ID) {
+    public void addEntry(Entry entry, int ID) {
         System.out.println("I've added entry to your list!");
         this.printEntry(entry, ID);
         System.out.println(HORIZONTAL_DIVIDE);
     }
 
-    public void end () {
+    public void endCommand() {
         System.out.println(HORIZONTAL_DIVIDE);
     }
 

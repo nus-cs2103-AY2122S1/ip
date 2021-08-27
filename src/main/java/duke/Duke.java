@@ -69,8 +69,8 @@ public class Duke {
             entries.findEntry(entry, this.dukeUi);
             break;
 
-        default:
-            throw new DukeException("Sorry! Duke can't understand what that means");
+            default:
+                throw new DukeException("Sorry! Duke can't understand what that means");
         }
     }
 
