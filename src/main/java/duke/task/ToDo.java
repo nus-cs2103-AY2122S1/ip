@@ -1,5 +1,10 @@
 package duke.task;
 public class ToDo extends Task {
+    /**
+     * Constructor for ToDo class.
+     *
+     * @param input title of Task
+     */
     public ToDo(String input) {
         super(input);
     }

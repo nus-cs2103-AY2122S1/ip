@@ -6,6 +6,13 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task{
     private LocalDate by;
 
+    /**
+     * Constructor for Deadline.
+     *
+     * @param input deadline title.
+     * @param by date/time of deadline.
+     * @throws DateTimeParseException
+     */
     public Deadline(String input, String by) throws DateTimeParseException{
         super(input);
         int space = by.indexOf(" ");

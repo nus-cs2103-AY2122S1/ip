@@ -16,11 +16,22 @@ import duke.DukeException;
 
 public class Storage {
     private String filepath;
-    
+
+    /**
+     * Constructor for Storage object.
+     *
+     * @param filepath path of file to be loaded or modified
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads the tasklist stored in text format in the user's hard drive when Duke is run.
+     *
+     * @return Arraylist of task objects loaded from the file stored on the hard drive.
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
@@ -66,6 +77,11 @@ public class Storage {
         return listOfTasks;
     }
 
+    /**
+     * Updates the txt file containing the list of tasks.
+     *
+     * @param l current tasklist that would be saved in the txt file.
+     */
     public static void updateFile(TaskList l) {
         try {
             FileWriter writer = new FileWriter("../../../data/duke.txt", false);

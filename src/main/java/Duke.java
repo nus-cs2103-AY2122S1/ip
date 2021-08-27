@@ -11,10 +11,15 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
-
-        storage = new Storage(filePath);
         ui = new Ui();
+        storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -22,11 +27,16 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
+
     public static void main(String[] args) {
         new Duke("../../../../../data/duke.txt").run();
     }
 
 
+    /**
+     * Runs the program
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

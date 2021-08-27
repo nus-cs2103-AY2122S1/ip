@@ -6,6 +6,13 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
     private LocalDate at;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param input event title.
+     * @param at date/time of event.
+     * @throws DateTimeParseException
+     */
     public Event(String input, String at) throws DateTimeParseException{
         super(input);
         int space = at.indexOf(" ");

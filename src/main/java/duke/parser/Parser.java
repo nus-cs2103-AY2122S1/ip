@@ -12,10 +12,12 @@ import duke.commands.UpdateCommand;
 
 public class Parser {
 
-    private Parser() {
-
-    }
-
+    /**
+     * Parses the user's command and returns a command object
+     *
+     * @param fullCommand Command inputted by user.
+     * @return Command type object that will be used to execute the command inputted by the user.
+     */
     public static Command parseCommand(String fullCommand) {
         String[] commands = fullCommand.split(" ");
         String first = commands[0];
