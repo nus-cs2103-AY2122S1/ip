@@ -1,8 +1,13 @@
+package duke;
+
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Deadline;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
 

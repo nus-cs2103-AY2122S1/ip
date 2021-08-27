@@ -1,3 +1,4 @@
+package duke.exception;
 public class InvalidEntryException extends DukeException {
     public InvalidEntryException(String msg) {
         super(msg);

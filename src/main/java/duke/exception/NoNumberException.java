@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class NoNumberException extends DukeException {
     public NoNumberException(String msg) {
         super(msg);

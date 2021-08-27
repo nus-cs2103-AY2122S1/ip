@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class TaskNoDateTimeException extends DukeException {
     private String task;
     public TaskNoDateTimeException(String msg, String task) {

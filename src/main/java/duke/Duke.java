@@ -1,9 +1,6 @@
+package duke;
+
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public  class Duke {
 
@@ -20,7 +17,6 @@ public  class Duke {
         } catch (IOException e) {
             ui.showLoadingError();
             taskList = new TaskList();
-            // show error message
         }
     }
 

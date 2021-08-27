@@ -1,3 +1,4 @@
+package duke.exception;
 public class MissingPreException extends DukeException {
     private String pre;
     public MissingPreException(String msg, String pre) {

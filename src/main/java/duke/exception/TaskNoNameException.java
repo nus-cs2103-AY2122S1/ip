@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class TaskNoNameException extends DukeException {
     private String task;
     public TaskNoNameException(String msg, String task) {
