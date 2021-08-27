@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -20,6 +21,8 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    @FXML
+    private HBox speechBubble;
     @FXML
     private Label dialog;
     @FXML
@@ -34,6 +37,9 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        dialog.setMinHeight(Label.USE_PREF_SIZE);
+        displayPicture.setClip(new Circle(displayPicture.getFitWidth() / 2,
+                displayPicture.getFitHeight() / 2, displayPicture.getFitWidth() / 2));
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -50,6 +56,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialog = new DialogBox(text, img);
+        userDialog.speechBubble.getStyleClass().add("user-speech-bubble");
         return userDialog;
     }
 
