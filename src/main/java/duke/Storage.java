@@ -11,17 +11,30 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.io.IOException;
 
+/**
+ * Deals with loading tasks from file and saving tasks in file
+ */
 public class Storage {
 
     final private String path;
     private TaskList list;
 
+    /**
+     * Constructs Storage object
+     *
+     * @param path file location
+     */
     public Storage(String path) {
         this.path = path;
         this.list = new TaskList();
     }
 
-    // load data: check if file exists, check if directory exists
+    /**
+     * Loads data from file
+     *
+     * @return list of tasks
+     * @throws IOException
+     */
     public TaskList loadData() throws IOException {
             File file = new File(path);
             if (!file.getParentFile().exists()) {
@@ -60,6 +73,11 @@ public class Storage {
             return list;
     }
 
+    /**
+     * Updates file when tasks are added or deleted
+     *
+     * @param list current list of tasks
+     */
     public void updateData(TaskList list) {
        try {
            this.list = list;
