@@ -1,15 +1,30 @@
+import java.io.*;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
-
-
+/**
+ * Class of the ChatBot
+ */
 public class Duke {
+
+    final static String DIRECTORY_PATHNAME = "./data";
+    final static String FILE_PATHNAME = DIRECTORY_PATHNAME + "/task_list.txt";
+
+    public static BufferedWriter WRITER;
+    public static BufferedReader READER;
 
     public enum Command {
         TODO, DEADLINE, EVENT, LIST, DONE, DELETE, COMMANDS, BYE
     }
 
+    public enum TaskType {
+        TODO, DEADLINE, EVENT
+    }
+
     public static Command stringToCommand(String s) throws DukeException {
-        switch(s) {
+        switch (s) {
             case "list":
                 return Command.LIST;
             case "todo":
@@ -31,6 +46,45 @@ public class Duke {
         }
     }
 
+    public static TaskType stringToTaskType(String s) throws DukeException {
+        switch (s) {
+            case "TD":
+                return TaskType.TODO;
+            case "DL":
+                return TaskType.DEADLINE;
+            case "EV":
+                return TaskType.EVENT;
+            default:
+                throw new DukeException("Invalid TaskType detected: " + s);
+        }
+    }
+
+    public static TaskType classNameToTaskType(String cn) throws DukeException {
+        switch (cn) {
+            case "Todo":
+                return TaskType.TODO;
+            case "Deadline":
+                return TaskType.DEADLINE;
+            case "Event":
+                return TaskType.EVENT;
+            default:
+                throw new DukeException("Invalid ClassName detected: " + cn);
+        }
+    }
+
+    public static String taskTypeToString(TaskType t) throws DukeException {
+        switch(t) {
+            case TODO:
+                return "TD";
+            case DEADLINE:
+                return "DL";
+            case EVENT:
+                return "EV";
+            default:
+                throw new DukeException("Invalid TaskType detected: " + t);
+        }
+    }
+
     public static void printError(Exception e) throws DialogException {
         if (Dialog.have(e.toString())) {
             System.out.println(Dialog.getDialog(e.toString()));
@@ -40,6 +94,27 @@ public class Duke {
             System.out.println(errorMessage);
         }
     }
+
+    public static void addTaskByType(TaskDialog list, TaskType type, boolean isDone, String description, String time) {
+        try {
+            switch (type) {
+                case TODO:
+                    list.silentAddTask(new Todo(description, isDone));
+                    break;
+                case EVENT:
+                    list.silentAddTask(new Event(description, time, isDone));
+                    break;
+                case DEADLINE:
+                    list.silentAddTask(new Deadline(description, time, isDone));
+                    break;
+                default:
+                    throw new DukeException("addTask Unsuccessful");
+            }
+        } catch (DialogException e) {
+            System.out.println("Internal Conflict: addTaskByType - " + e);
+        }
+    }
+
 
 
     public static void main(String[] args) throws DialogException {
@@ -51,11 +126,11 @@ public class Duke {
         // not sure if we are allowed to change the file name
         String logo =
                 "     ___       __       __    ______  _______\n" +
-                "        /   \\     |  |     |  |  /      ||   ____|\n" +
-                "       /  ^  \\    |  |     |  | |  ,----'|  |__\n" +
-                "      /  /_\\  \\   |  |     |  | |  |     |   __|\n" +
-                "     /  _____  \\  |  `----.|  | |  `----.|  |____\n" +
-                "    /__/     \\__\\ |_______||__|  \\______||_______|\n";
+                        "        /   \\     |  |     |  |  /      ||   ____|\n" +
+                        "       /  ^  \\    |  |     |  | |  ,----'|  |__\n" +
+                        "      /  /_\\  \\   |  |     |  | |  |     |   __|\n" +
+                        "     /  _____  \\  |  `----.|  | |  `----.|  |____\n" +
+                        "    /__/     \\__\\ |_______||__|  \\______||_______|\n";
 
         greeting.add(logo);
         greeting.add("Hello! I'm Alice, your personal assistant");
@@ -74,6 +149,39 @@ public class Duke {
         System.out.println(commandsList);
         Command command;
         String input;
+        boolean directoryExists = java.nio.file.Files.exists(Paths.get(DIRECTORY_PATHNAME));
+
+        try {
+            if (!directoryExists) {
+                Files.createDirectory(Paths.get(DIRECTORY_PATHNAME));
+            }
+            WRITER = new BufferedWriter(new FileWriter(FILE_PATHNAME, true));
+            READER = new BufferedReader(new FileReader(FILE_PATHNAME));
+        } catch (Exception e) {
+            printError(e);
+        }
+
+        TaskDialog list = (TaskDialog) TaskDialog.generate("list");
+
+        READER.lines().forEach((line) -> {
+            TaskType type = stringToTaskType(line.substring(0, 2));
+            int index1 = line.indexOf("|");
+            String isDoneString = line.substring(index1 + 2, index1 + 3);
+            int index2 = line.indexOf("|", index1 + 1);
+            String description;
+            String time = "";
+            if (type == TaskType.DEADLINE || type == TaskType.EVENT) {
+                int index3 = line.indexOf("|", index2 + 1);
+                description = line.substring(index2 + 2, index3 - 1);
+                time = line.substring(index3 + 2);
+            } else {
+                description = line.substring(index2 + 2);
+            }
+            addTaskByType(list, type, isDoneString.equals("1"), description, time);
+        });
+
+        System.out.println(list);
+
         while (true) {
             try {
                 System.out.print("> ");
@@ -81,13 +189,13 @@ public class Duke {
                 command = stringToCommand(input.split(" ")[0]);
                 break;
             } catch (DukeException e) {
-                printError(e);
+                Duke.printError(e);
             }
         }
 
-        TaskDialog list = (TaskDialog) TaskDialog.generate("list");
+
         while (command != Command.BYE) {
-            switch(command) {
+            switch (command) {
                 case LIST:
                     System.out.println(list);
                     break;
@@ -113,7 +221,7 @@ public class Duke {
                         String by = input.substring(input.indexOf("/by ") + "/by ".length());
                         list.addTask(new Deadline(dDescription, by));
                     } catch (DialogException | EmptyDescriptionException | EmptyTaggerException e) {
-                      Duke.printError(e);
+                        Duke.printError(e);
                     }
                     break;
                 }
@@ -192,5 +300,15 @@ public class Duke {
         Dialog bye = Dialog.generate("bye");
         bye.add("Bye. Hope to see you again soon!");
         System.out.println(bye);
+
+
+        try {
+            list.saveTasks(FILE_PATHNAME);
+            READER.close();
+            WRITER.close();
+        } catch (Exception e) {
+            printError(e);
+        }
+
     }
 }
