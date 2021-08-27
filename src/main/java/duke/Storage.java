@@ -7,16 +7,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a Storage class for storing the tasks into hard disk
+ */
 public class Storage {
 
     String filePath;
     File file;
 
+    /**
+     * Constructor for the Storage object
+     *
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);
     }
 
+    /**
+     * Method to parse and load the tasks from hard disk
+     *
+     * @return The list of tasks stored on hard disk
+     */
     public List<Task> loadTasks() {
         try {
             Scanner s = new Scanner(file);

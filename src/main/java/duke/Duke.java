@@ -5,6 +5,12 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileWriter;
 
+/**
+ * Duke is an application to help store and track tasks.
+ * Users are able to add and delete various types of tasks such as deadlines, events, and things to do.
+ * Duke can also list the existing tasks and mark tasks as done.
+ */
+
 public class Duke {
 
     static int index = 0;
@@ -12,12 +18,24 @@ public class Duke {
     private final TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for the Duke object.
+     *
+     * @param filePath
+     */
+
     public Duke(String filePath) {
         this.filePath = filePath;
         Storage store = new Storage(filePath);
         tasks = new TaskList(store.loadTasks());
         this.ui = new Ui();
     }
+
+    /**
+     * Main function that does the main flow of the application
+     *
+     * @param args
+     */
 
     public static void main(String[] args) {
 
