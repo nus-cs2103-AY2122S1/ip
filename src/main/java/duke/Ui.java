@@ -2,6 +2,11 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * Class deals with the Ui.
+ * Does the different action depend on what the use types.
+ * It deals with the design (e.g. the logo and the divider line).
+ */
 public class Ui {
     String logo;
     Storage storage;
@@ -17,10 +22,16 @@ public class Ui {
                 + "|____/ \\__,_|_|\\_\\___|\n";
     }
 
+    /**
+     * Draws line.
+     */
     public void drawLine() {
         System.out.println("___________________________________________");
     }
 
+    /**
+     * Greets the user.
+     */
     public void greet() {
         System.out.println(logo);
         drawLine();
@@ -28,6 +39,9 @@ public class Ui {
         drawLine();
     }
 
+    /**
+     * Save the final list to the file and bid user farewell.
+     */
     public void goodbye() throws IOException {
         drawLine();
         storage.write(list.getTaskList(), storage.getFilePath());
@@ -35,6 +49,9 @@ public class Ui {
         drawLine();
     }
 
+    /**
+     * Displays the all the information about task in the list.
+     */
     public void listTasks() {
         drawLine();
         System.out.println("\tHere are the tasks in your list:");
@@ -44,6 +61,11 @@ public class Ui {
         drawLine();
     }
 
+    /**
+     * Mark the task at specific index as done.
+     *
+     * @param taskNumber Index of the task you want to mark as done.
+     */
     public void markDone(int taskNumber) {
         drawLine();
         System.out.println("\tNice! I've marked this task as done:");
@@ -53,6 +75,11 @@ public class Ui {
         drawLine();
     }
 
+    /**
+     * Deletes the task at specific index.
+     *
+     * @param taskNumber Index of the task you want to delete.
+     */
     public void delete(int taskNumber) {
         drawLine();
         System.out.println("\tNoted. I've removed this task:");
@@ -62,6 +89,11 @@ public class Ui {
         drawLine();
     }
 
+    /**
+     * Adds task to the list.
+     *
+     * @param task Task that you want to add.
+     */
     public void add(Task task) {
         drawLine();
         list.addTask(task);

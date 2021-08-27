@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task class that is used by duke class to create tasks.
+ * Stores information like description, task type and whether if it is done.
+ * Stores date if the task is a deadline or event.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

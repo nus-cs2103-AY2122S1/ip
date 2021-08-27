@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class that extends task.
+ * Allow users to add description.
+ * Stores the date which task should be done by.
+ */
 public class Deadline extends Task{
     protected LocalDate date;
 

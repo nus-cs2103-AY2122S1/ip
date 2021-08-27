@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class that extends task.
+ * Allow users to add description.
+ * Stores the date of when the event is on.
+ */
 public class Event extends Task {
     protected LocalDate date;
 
