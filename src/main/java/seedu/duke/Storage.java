@@ -22,7 +22,7 @@ import java.util.HashMap;
  * loads data from the file according to the filepath given
  * and handles any updates to the file.
  */
-class Storage {
+public class Storage {
     private String filePath;
 
     /**

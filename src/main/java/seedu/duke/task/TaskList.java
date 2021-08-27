@@ -112,6 +112,10 @@ public class TaskList {
                 this.length, t);
     }
 
+    public boolean isEmpty() {
+        return length <= 0;
+    }
+
     /**
      * Returns the String representation of the task list.
      *

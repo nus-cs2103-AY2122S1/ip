@@ -1,11 +1,17 @@
 package seedu.duke;
 
+import seedu.duke.command.Command;
+import seedu.duke.command.DeadlineCommand;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.DoneCommand;
+import seedu.duke.command.EventCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.FindCommand;
+import seedu.duke.command.GetCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.ToDoCommand;
 import seedu.duke.task.Task;
-import seedu.duke.task.ToDo;
-import seedu.duke.task.Event;
-import seedu.duke.task.Deadline;
 import seedu.duke.task.TaskList;
-import seedu.duke.command.Commands;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -14,7 +20,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 /**
  * Represents a chatbot for organising user tasks and to do list.
@@ -40,13 +45,13 @@ class Duke {
         private int taskIndex = -1;
         private LocalDate date = LocalDate.now();
 
-        private UserCommands parseString(String userInput) throws DukeException {
+        private Command parseString(String userInput) throws DukeException {
             this.userInput = userInput;
 
             if (userInput.equals("bye")) {
-                return UserCommands.BYE;
+                return new ExitCommand(ui, taskList);
             } else if (userInput.equals("list")) {
-                return UserCommands.LIST;
+                return new ListCommand(ui, taskList);
             }
 
             // Separate them with space
@@ -60,13 +65,16 @@ class Duke {
             String commandWord = arrOfCommandWords[0];
             switch (commandWord) {
             case "todo":
-                return UserCommands.TODO;
+                return new ToDoCommand(ui, taskList,
+                        arrOfCommandWords[1], storage);
             case "deadline":
                 parseDescription(userInput, "/by ");
-                return UserCommands.DEADLINE;
+                return new DeadlineCommand(ui, taskList, list_of_words[1],
+                        date, storage);
             case "event":
                 parseDescription(userInput, "/at ");
-                return UserCommands.EVENT;
+                return new EventCommand(ui, taskList, list_of_words[1],
+                        date, storage);
             case "done":
                 try {
                     int index = Integer.parseInt(arrOfCommandWords[1]) - 1;
@@ -74,13 +82,13 @@ class Duke {
                 } catch (NumberFormatException e) {
                     throw new DukeException("Invalid task number");
                 }
-                return UserCommands.DONE;
+                return new DoneCommand(ui, taskList, taskIndex, storage);
             case "find":
-                return UserCommands.FIND;
+                return new FindCommand(ui, taskList, list_of_words[1]);
             case "get":
                 try {
                     manager.parseDateTime(arrOfCommandWords[1]);
-                    return UserCommands.GET;
+                    return new GetCommand(ui, taskList, list_of_words[1], dateTasks);
                 } catch (DateTimeParseException e) {
                     throw new DukeException("Invalid date format.");
                 }
@@ -91,7 +99,7 @@ class Duke {
                 } catch (NumberFormatException e) {
                     throw new DukeException("Invalid task number");
                 }
-                return UserCommands.DELETE;
+                return new DeleteCommand(ui, taskList, taskIndex, storage);
             default:
                 throw new DukeException("Sorry, I don't know what that means.");
             }
@@ -147,42 +155,16 @@ class Duke {
             }
         }
 
-
         /**
          * Execute program per the user input parsed.
          *
-         * @param type The type of UserCommands specifying the task to
+         * @param type The type of Command specifying the action to
          *             be executed.
          */
-        private void executeTasks(UserCommands type) {
-            switch (type) {
-            case BYE:
-                exit();
-                break;
-            case LIST:
-                returnTaskList();
-                break;
-            case FIND:
-                findTasks(list_of_words[1]);
-                break;
-            case GET:
-                returnTasksOnDate(list_of_words[1]);
-                break;
-            case TODO:
-                updateTasks(new ToDo(list_of_words[1]));
-                break;
-            case DEADLINE:
-                updateTasks(new Deadline(list_of_words[1], this.date));
-                break;
-            case EVENT:
-                updateTasks(new Event(list_of_words[1], this.date));
-                break;
-            case DELETE:
-                deleteTask(this.taskIndex);
-                break;
-            case DONE:
-                markTaskAsCompleted(this.taskIndex);
-                break;
+        private void executeTasks(Command type) throws DukeException {
+            type.execute();
+            if (type.updatesTaskList()) {
+                taskList = type.getTaskList();
             }
         }
 
@@ -210,153 +192,21 @@ class Duke {
     }
 
     /**
-     * Dividing line for formatting Duke's replies.
-     */
-    private void divide() {
-        StringBuilder builder = new StringBuilder(100);
-        Stream.generate(() -> '-').limit(60).forEach(e -> builder.append(e));
-        String line = String.format("%4s+%s+\n", " ", builder.toString());
-        System.out.println(line);
-    }
-
-    /**
      * Prints Duke's greetings.
      */
     private void greet() {
-        divide();
-        ui.outputMessage(Commands.GREET);
-        divide();
+        ui.divide();
+        ui.outputMessage(
+                String.format("Hello! I'm Duke\n%4sWhat can I do for you?",
+                        " "));
+        ui.divide();
     }
-
-    /**
-     * Prints Duke's exit message.
-     */
-    private void exit() {
-        divide();
-        ui.outputMessage(Commands.EXIT);
-        divide();
-    }
-
-    /**
-     * Prints the current tasks in the task list.
-     */
-    private void returnTaskList() {
-        divide();
-        ui.outputMessage(Commands.LIST);
-        System.out.println(taskList);
-        divide();
-    }
-
-    /**
-     * Returns the tasks on a given date.
-     *
-     * @param dateTime The desired date.
-     */
-    private void returnTasksOnDate(String dateTime) {
-        String customPattern ="dd/MM/yyyy";
-        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern(customPattern);
-        DateTimeManager dateTimeManager = new DateTimeManager(customFormatter);
-
-        try {
-            LocalDate date = dateTimeManager.parseDateTime(dateTime);
-            System.out.println(dateTasks.getOrDefault(date, new ArrayList<>()));
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void findTasks(String keyword) {
-        // Run through the tasks in the current list
-        TaskList matchingTasks = this.taskList.findTasksByKeyword(keyword);
-
-        divide();
-        ui.outputMessage(Commands.FIND);
-        System.out.println(matchingTasks.toString());
-        divide();
-    }
-
-
-    /**
-     * Update the list and files with added task.
-     * @param task
-     */
-    private void updateTasks(Task task) {
-        this.taskList = this.taskList.add(task);
-        divide();
-        ui.outputMessage(Commands.ADD);
-        System.out.println(
-                String.format("%5s%s\n%4s%s", " ", task,
-                        " ", this.taskList.status())
-        );
-        divide();
-        storage.addTaskToFile(task);
-    }
-
-
-    /**
-     * Mark the respective tasks as completed.
-     *
-     * @param index Index of the task to be deleted.
-     */
-    private void markTaskAsCompleted(int index) {
-        try {
-            divide();
-
-            boolean isValid = this.taskList.isValidTaskIndex(index);
-            if (isValid) {
-                String toUpdate = this.taskList.getTask(index).toString();
-                Task task = this.taskList.markTaskAsCompleted(index);
-
-                ui.outputMessage(Commands.DONE);
-                System.out.println(
-                        String.format("%6s%s\n%4s%s", " ", task,
-                                " ", this.taskList.status())
-                );
-                storage.markTaskAsCompleted(task.toString(), toUpdate);
-            } else {
-                throw new DukeException("There is no such task.");
-            }
-            divide();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Delete the corresponding task.
-     *
-     * @param index Index of the task to be deleted.
-     */
-    private void deleteTask(int index) {
-        try {
-            divide();
-
-            boolean isValid = taskList.isValidTaskIndex(index);
-            if (isValid) {
-                Task task = taskList.getTask(index);
-                this.taskList = this.taskList.deleteTask(index);
-
-                ui.outputMessage(Commands.DELETE);
-                System.out.println(
-                        String.format("%6s%s\n%4s%s", " ", task,
-                                " ", taskList.status())
-                );
-                storage.deleteTaskFromFile(this.taskList);
-            } else {
-                throw new DukeException("There is no such task.");
-            }
-            divide();
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
 
     /**
      * Runs the Duke chatbot.
      */
     private void run() {
-        this.taskList = storage.loadData(this.dateTasks, this.taskList);
+        taskList = storage.loadData(dateTasks, taskList);
 
         // Greeting the user
         greet();
@@ -367,9 +217,9 @@ class Duke {
         while (true) {
             String command = sc.nextLine().strip();
             try {
-                UserCommands type = parser.parseString(command);
+                Command type = parser.parseString(command);
                 parser.executeTasks(type);
-                if (type.equals(UserCommands.BYE)) {
+                if (type.isExit()) {
                     break;
                 }
             } catch (DukeException e) {

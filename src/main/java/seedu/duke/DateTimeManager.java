@@ -14,7 +14,7 @@ import java.util.HashMap;
  * handles the parsing of DateTime strings in the given format, as well
  * track and updates tasks that occur on specific days.
  */
-class DateTimeManager {
+public class DateTimeManager {
     DateTimeFormatter formatter;
 
     public DateTimeManager(DateTimeFormatter formatter) {
