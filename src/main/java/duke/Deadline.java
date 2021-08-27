@@ -22,11 +22,13 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s (by: %s)", this.getTaskType(), this.getCompletedMarker(), this.getTask(), this.getDate());
+        return String.format("[%s][%s] %s (by: %s)", this.getTaskType(), this.getCompletedMarker(),
+                this.getTask(), this.getDate());
     }
 
     @Override
     public String parseForStorage() {
-        return String.format("%s | %d | %s | %s", this.getTaskType(), this.getCompleted() ? 1 : 0, this.getTask(), this.getDate());
+        return String.format("%s | %d | %s | %s", this.getTaskType(), this.getIsCompleted() ? 1 : 0,
+                this.getTask(), this.getDate());
     }
 }

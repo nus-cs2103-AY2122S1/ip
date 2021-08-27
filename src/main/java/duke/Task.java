@@ -2,34 +2,34 @@ package duke;
 
 public abstract class Task {
     private String task;
-    private boolean completed;
+    private boolean isCompleted;
     private String taskType;
 
     public Task(String task) {
         this.task = task;
-        this.completed = false;
+        this.isCompleted = false;
         this.taskType = " ";
     }
 
     public Task(String task, String taskType) {
         this.task = task;
-        this.completed = false;
+        this.isCompleted = false;
         this.taskType = taskType;
     }
 
-    public Task(String task, boolean completed, String taskType) {
+    public Task(String task, boolean isCompleted, String taskType) {
         this.task = task;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
         this.taskType = taskType;
     }
 
 
-    public boolean getCompleted() {
-        return this.completed;
+    public boolean getIsCompleted() {
+        return this.isCompleted;
     }
 
     public String getCompletedMarker() {
-        return (this.completed? "X" : " ");
+        return (this.isCompleted ? "X" : " ");
     }
 
     public String getTaskType() {
@@ -37,8 +37,8 @@ public abstract class Task {
     }
 
     public boolean setCompleted() {
-        this.completed = true;
-        return this.completed;
+        this.isCompleted = true;
+        return this.isCompleted;
     }
 
     public String getTask() {

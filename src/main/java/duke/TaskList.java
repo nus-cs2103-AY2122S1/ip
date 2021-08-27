@@ -35,7 +35,8 @@ public class TaskList {
     }
 
     public String getListSizeString() {
-        return String.format("\n Now you have %d tasks in the list.\n", list.size());
+        return String.format("\n Now you have %d tasks in the list.\n",
+                list.size());
     }
 
     public void clear() {

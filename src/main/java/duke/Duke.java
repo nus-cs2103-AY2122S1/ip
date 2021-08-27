@@ -20,7 +20,7 @@ public class Duke {
             try {
                 String input = ui.readInput();
                 parser.executeCommand(ui, tasks, input);
-                terminate = parser.getIsTerminate();
+                terminate = parser.getToTerminate();
             } catch (Exception e) {
                 ui.handleException(e);
             }
