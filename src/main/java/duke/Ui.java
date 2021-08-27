@@ -109,7 +109,7 @@ public class Ui {
      * Displays the error message for when the user adds a task with no name.
      */
     void showNoNameError() {
-        System.err.println("I NEED A NAME SIR");
+        System.err.println("I NEED A NAME SIR!!!");
     }
 
     /**
