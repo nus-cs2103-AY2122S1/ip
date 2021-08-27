@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Deals with commands that do not follow format.
+ * Deals with adding certain tasks without time.
  */
 public class NoTimeException extends DukeException {
     /**

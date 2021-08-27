@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import duke.task.Task;
 
@@ -75,5 +76,17 @@ public class TaskList {
      */
     public Task get(int index) throws IndexOutOfBoundsException {
         return tasks.get(index);
+    }
+
+    public TaskList filterByKeyword(String keyword) {
+        List<Task> filtered = new ArrayList<>();
+        for (Task curr : tasks) {
+            String des = curr.getDescription();
+            String[] words = des.split("\\s");
+            if (Arrays.asList(words).contains(keyword)) {
+                filtered.add(curr);
+            }
+        }
+        return new TaskList(filtered);
     }
 }

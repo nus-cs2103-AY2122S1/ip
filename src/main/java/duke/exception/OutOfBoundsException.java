@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Deals with commands that do not follow format.
+ * Deals with out of bounds exception.
  */
 public class OutOfBoundsException extends DukeException {
     /**

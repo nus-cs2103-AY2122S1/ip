@@ -36,6 +36,8 @@ public class Parser {
             return new AddCommand(msg, "deadline");
         case (AddCommand.ADD_TODO):
             return new AddCommand(msg, "todo");
+        case (FindCommand.COMMAND_WORD):
+            return new FindCommand(msg);
         }
         return new IncorrectCommand();
     }
