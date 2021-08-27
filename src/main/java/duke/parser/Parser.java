@@ -9,6 +9,7 @@ import duke.commands.CreateTodoCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.data.exception.DukeException;
 
@@ -16,6 +17,15 @@ import duke.data.exception.DukeException;
  * Parsers user input.
  */
 public class Parser {
+    private static final Pattern DONE_FORMAT =
+            Pattern.compile("^done\\s\\d+");
+
+    private static final Pattern DELETE_FORMAT =
+            Pattern.compile("^delete\\s\\d+");
+
+    private static final Pattern FIND_FORMAT =
+            Pattern.compile("^find\\s.+");
+
     private static final Pattern TODOS_FORMAT =
             Pattern.compile("^todo\\s.+");
 
@@ -38,10 +48,12 @@ public class Parser {
             return new ExitCommand();
         } else if (userInput.equals("list")) {
             return new ListCommand();
-        } else if (userInput.matches("done (\\d+)")) {
+        } else if (DONE_FORMAT.matcher(userInput).matches()) {
             return new DoneCommand(userInput);
-        } else if (userInput.matches("delete (\\d+)")) {
+        } else if (DELETE_FORMAT.matcher(userInput).matches()) {
             return new DeleteCommand(userInput);
+        } else if (FIND_FORMAT.matcher(userInput).matches()) {
+            return new FindCommand(userInput);
         } else if (userInput.startsWith("todo")) {
             if (!TODOS_FORMAT.matcher(userInput).matches()) {
                 throw new DukeException("ToDos format: todo [desc]");

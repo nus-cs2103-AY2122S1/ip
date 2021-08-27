@@ -21,7 +21,7 @@ public abstract class Task implements Comparable<Task> {
         this.completed = completed;
     }
 
-    protected String getName() {
+    public String getName() {
         return this.name;
     }
 
