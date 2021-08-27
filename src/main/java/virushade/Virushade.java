@@ -4,12 +4,12 @@ import virushade.tasks.TaskList;
 
 public class Virushade {
     private Storage storageFile;
-    private TaskList tasks;
+    private TaskList taskList;
 
     public Virushade(String fileName) {
         storageFile = new Storage(fileName);
         try {
-            TaskList tasks = new TaskList(storageFile);
+            TaskList taskList = new TaskList(storageFile);
         } catch (VirushadeException e) {
             Ui.handleVirushadeException(e);
         }

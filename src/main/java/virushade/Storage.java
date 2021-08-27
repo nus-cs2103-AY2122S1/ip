@@ -16,7 +16,7 @@ public class Storage {
         STORAGE_FILE = new File(filename);
     }
 
-    public void load(ArrayList<Task> tasks) throws VirushadeException{
+    public void load(ArrayList<Task> tasks) throws VirushadeException {
         try {
             // create a Scanner using the File as the source
             Scanner s = new Scanner(STORAGE_FILE);
