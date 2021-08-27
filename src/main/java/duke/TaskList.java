@@ -29,4 +29,8 @@ public class TaskList {
     public Task getTask(int i) {
         return list.get(i);
     }
+
+    public ArrayList<Task> getList() {
+        return list;
+    }
 }
