@@ -25,6 +25,6 @@ public class Deadline extends Task {
 
     public String toStorageString() {
         return ("D|" + super.getStatusNumber() + "|" + super.getDescription()
-                + "|" + this.by.format(displayFormatter));
+                + "|" + this.by.format(formatter));
     }
 }

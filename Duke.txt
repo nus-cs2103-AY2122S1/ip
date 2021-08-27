@@ -1,4 +1,4 @@
 T|0|Test todo
-D|1|Test deadline|21 Dec 2021 - 12:21
-E|0|Test event|24 Aug 2021 - 12:35
+D|1|Test deadline|2021-12-21 12:21
+E|0|Test event|2021-12-21 12:35
 T|1|Test second todo

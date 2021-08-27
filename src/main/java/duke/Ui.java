@@ -40,6 +40,11 @@ public class Ui {
         System.out.println(taskList.toString());
     }
 
+    public void showFindMessage(String foundTasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        System.out.println(foundTasks);
+    }
+
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
     }

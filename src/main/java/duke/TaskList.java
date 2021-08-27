@@ -3,6 +3,7 @@ package duke;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -43,6 +44,20 @@ public class TaskList {
 
     public int getSize() {
         return this.taskList.size();
+    }
+
+    public String searchTask(String searchWord) {
+        String result = "";
+        int counter = 1;
+        for (int i = 0; i < taskList.size(); i++) {
+            Task nextTask = taskList.get(i);
+            if (nextTask.getDescription().toLowerCase().contains(searchWord.toLowerCase())) {
+                result += counter + "." + nextTask.toString() + "\n";
+                counter++;
+            }
+        }
+        result = result.trim();
+        return result;
     }
 
     @Override
