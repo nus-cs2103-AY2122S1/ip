@@ -34,8 +34,17 @@ public class Task {
     }
 
     /**
+     * Gets the name of the task.
+     *
+     * @return The name of the task.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Converts the Task to its string representation.
-     * 
+     *
      * @return The string representation of the Task.
      */
     @Override
