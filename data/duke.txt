@@ -1,4 +1,4 @@
-T | 1 | read me
-E | 1 | project meeting | 24th July 6pm
-D | 0 | cs2103t | 29 Aug 2359
-T | 0 | eat noodles
+T | 0 | run
+D | 0 | work | 1999-02-02T01:01
+D | 0 | how how | 2021-08-29T23:59
+E | 1 | project meeting | 2021-08-31T15:00

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class TaskList {
 
@@ -11,10 +12,12 @@ public class TaskList {
 
         switch (taskStr[0]) {
         case "D":
-            return new Deadline(taskStr[2], isDone, taskStr[3]);
+            LocalDateTime by = LocalDateTime.parse(taskStr[3]);
+            return new Deadline(taskStr[2], isDone, by);
 
         case "E":
-            return new Event(taskStr[2], isDone, taskStr[3]);
+            LocalDateTime at = LocalDateTime.parse(taskStr[3]);
+            return new Event(taskStr[2], isDone, at);
 
         default:
             return new ToDo(taskStr[2], isDone);

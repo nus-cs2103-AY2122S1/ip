@@ -58,7 +58,6 @@ public class Storage {
         try {
             FileWriter fileWriter = new FileWriter(FOLDER + "/" + FILE);
             for (Task task: taskList) {
-                System.out.println(task.toString());
                 fileWriter.write(task.toString() + "\n");
             }
             fileWriter.close();

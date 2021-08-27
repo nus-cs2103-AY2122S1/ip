@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -69,7 +71,8 @@ public class Duke {
                     }
                     description = description.substring(0, description.length() - 1);
                     by = by.substring(0, by.length() - 1);
-                    taskList.addTask(new Deadline(description, false, by));
+                    LocalDateTime byLocalDateTime = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    taskList.addTask(new Deadline(description, false, byLocalDateTime));
                     taskAdded = true;
                 } else if (str.contains("event")) {
                     String description = "";
@@ -96,7 +99,8 @@ public class Duke {
                     }
                     description = description.substring(0, description.length() - 1);
                     at = at.substring(0, at.length() - 1);
-                    taskList.addTask(new Event(description, false, at));
+                    LocalDateTime atLocalDateTime = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+                    taskList.addTask(new Event(description, false, atLocalDateTime));
                     taskAdded = true;
                 }
                 if (taskAdded) {
