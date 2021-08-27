@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 public class Task {
 
-    private final String name;
+    private final String NAME;
 
-    private boolean done;
+    private boolean isDone;
 
     private String taskType;
 
@@ -14,8 +14,8 @@ public class Task {
         if (name.replaceAll(" ", "").equals("")) {
             throw new DukeException.NoNameException("Duke.Duke says: Duke.Task cannot have no name");
         }
-        this.name = name;
-        done = false;
+        this.NAME = name;
+        isDone = false;
         this.taskType = taskType;
     }
 
@@ -23,31 +23,31 @@ public class Task {
         if (name.replaceAll(" ", "").equals("")) {
             throw new DukeException.NoNameException("Duke.Duke says: Duke.Task cannot have no name");
         }
-        this.name = name;
-        this.done = done;
+        this.NAME = name;
+        this.isDone = done;
         this.taskType = taskType;
     }
 
     public String getName() {
-        return name;
+        return NAME;
     }
 
     public void completeTask() {
-        done = true;
+        isDone = true;
     }
 
     public String toString() {
-        return (taskType + (done ? " (done) " : " (not done) ") + name);
+        return (taskType + (isDone ? " (done) " : " (not done) ") + NAME);
     }
 
     public String toStringSave() {
-        int doneData = done ? 1 : 0;
+        int doneData = isDone ? 1 : 0;
         char taskTypeData = taskType.equals("#ToDo")
                 ? 'T'
                 : taskType.equals("#Deadline")
                 ? 'D'
                 : 'E';
-        return taskTypeData + ">" + doneData + ">" + name;
+        return taskTypeData + ">" + doneData + ">" + NAME;
     }
 
     public static class ToDo extends Task {

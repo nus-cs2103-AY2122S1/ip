@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Parser {
 
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     public ICommand getInput() {
         String input = sc.nextLine();

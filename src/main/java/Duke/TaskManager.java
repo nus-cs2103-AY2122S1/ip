@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class TaskManager {
 
-    private ArrayList<Task> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks;
 
     public TaskManager(ArrayList<Task> tasks) {
         this.tasks = tasks;
