@@ -1,29 +1,42 @@
 package duke;
+
+/**
+ * Class to abstract the Parsing of the Messages taken as input from the Duke
+ */
 public class Parser {
 
-    private enum TaskObjectives {
-        BYE,
-        DEADLINE,
-        DELETE,
-        DONE,
-        EVENT,
-        LIST,
-        TODO,
-        UNKNOWN
+    /**
+     * Default Constructor for the Parse Class
+     */
+    public Parser() {
+
     }
 
-    private TaskObjectives getCommand(String command) {
+    /**
+     * Method to return the Type of Command parsed
+     *
+     * @param command The Command Passed for comparing to the different types of Commands
+     * @return The Type of Command Received
+     */
+    private Command.Commands getCommand(String command) {
         try {
             if (command != null) {
-                return TaskObjectives.valueOf(command.toUpperCase());
+                return Command.Commands.valueOf(command.toUpperCase());
             } else {
-                return TaskObjectives.UNKNOWN;
+                return Command.Commands.UNKNOWN;
             }
         } catch (IllegalArgumentException e) {
-            return TaskObjectives.UNKNOWN;
+            return Command.Commands.UNKNOWN;
         }
     }
 
+    /**
+     * Method to return the specific Command processed from the given from the Command String
+     *
+     * @param taskDescription The Command inputted as a String
+     * @return The specific Command in the given Command String
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
     public Command parse(String taskDescription) throws DukeException {
         if (taskDescription == null || taskDescription.equals("")) {
             return new Command(Command.Commands.UNKNOWN, "");
@@ -32,25 +45,7 @@ public class Parser {
             String[] task = taskDescription.split(" ", 2);
             taskObjective = task[0];
             taskDetails = task.length > 1 ? task[1].trim() : "";
-            switch (getCommand(taskObjective)) {
-            case BYE:
-                return new Command(Command.Commands.BYE, taskDetails);
-            case DEADLINE:
-                return new Command(Command.Commands.DEADLINE, taskDetails);
-            case DELETE:
-                return new Command(Command.Commands.DELETE, taskDetails);
-            case DONE:
-                return new Command(Command.Commands.DONE, taskDetails);
-            case EVENT:
-                return new Command(Command.Commands.EVENT, taskDetails);
-            case LIST:
-                return new Command(Command.Commands.LIST, taskDetails);
-            case TODO:
-                return new Command(Command.Commands.TODO, taskDetails);
-            case UNKNOWN:
-                return new Command(Command.Commands.UNKNOWN, taskDetails);
-            }
-            return new Command(Command.Commands.UNKNOWN, taskDetails);
+            return new Command(getCommand(taskObjective), taskDetails);
         }
     }
 }

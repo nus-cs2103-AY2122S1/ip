@@ -4,7 +4,13 @@ import duke.Task.EventTask;
 import duke.Task.ToDoTask;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class to abstract the type and execution of a command
+ */
 public class Command {
+    /**
+     * Enum to encapsulate the type of Commands
+     */
     public enum Commands {
         BYE,
         DEADLINE,
@@ -19,6 +25,12 @@ public class Command {
     private final Commands typeOfCommand;
     private final String taskDetails;
 
+    /**
+     * Constructor for the Class Command
+     *
+     * @param type The type of Command
+     * @param taskDetails The String describing the various attributes for the command
+     */
     public Command(Commands type, String taskDetails) {
         if (type != null) {
             switch (type) {
@@ -55,6 +67,13 @@ public class Command {
         this.taskDetails = taskDetails;
     }
 
+    /**
+     * Method to check for the Bye Command and render the UI
+     *
+     * @param taskDetails The String describing the various attributes for the command
+     * @param ui The Object to render the UI
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
     private void goodbye(String taskDetails, UI ui) throws DukeException {
         if ((taskDetails != null) && (taskDetails.equals(""))) {
             ui.display("Bye. Hope to see you again soon! \\_(\"v\")_/");
@@ -63,6 +82,14 @@ public class Command {
         }
     }
 
+    /**
+     * Method to check for the Deadline Command and render the UI
+     *
+     * @param taskDetails The String describing the various attributes for the command
+     * @param ui The Object to render the UI
+     * @param tasks The Object to contain the List of the Tasks
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
     private void addDeadline(String taskDetails, UI ui, TaskList tasks) throws DukeException {
         if ((taskDetails == null) || !(taskDetails.contains(" /by "))) {
             throw new DukeException("Incorrect Format of the Deadline Command!!, Correct Format --> " +
@@ -82,6 +109,14 @@ public class Command {
         }
     }
 
+    /**
+     * Method to check for the Delete Command and render the UI
+     *
+     * @param taskDetails The String describing the various attributes for the command
+     * @param ui The Object to render the UI
+     * @param tasks The Object to contain the List of the Tasks
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
     private void deleteTask(String taskDetails, UI ui, TaskList tasks) throws DukeException {
         try {
             int index = Integer.parseInt(taskDetails) - 1;
@@ -101,6 +136,14 @@ public class Command {
         }
     }
 
+    /**
+     * Method to check for the Done Command and render the UI
+     *
+     * @param taskDetails The String describing the various attributes for the command
+     * @param ui The Object to render the UI
+     * @param tasks The Object to contain the List of the Tasks
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
     private void markTaskAsCompleted(String taskDetails, UI ui, TaskList tasks) throws DukeException {
         try {
             int index = Integer.parseInt(taskDetails) - 1;
@@ -121,6 +164,14 @@ public class Command {
         }
     }
 
+    /**
+     * Method to check for the Event Command and render the UI
+     *
+     * @param taskDetails The String describing the various attributes for the command
+     * @param ui The Object to render the UI
+     * @param tasks The Object to contain the List of the Tasks
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
     private void addEvent(String taskDetails, UI ui, TaskList tasks) throws DukeException {
         if ((taskDetails == null) || !(taskDetails.contains(" /at "))) {
             throw new DukeException("Incorrect Format of the Event Command!!, " +
@@ -140,6 +191,14 @@ public class Command {
         }
     }
 
+    /**
+     * Method to check for the List Command and render the UI
+     *
+     * @param taskDetails The String describing the various attributes for the command
+     * @param ui The Object to render the UI
+     * @param tasks The Object to contain the List of the Tasks
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
     private void displayTaskList(String taskDetails, UI ui, TaskList tasks) throws DukeException {
         if (taskDetails != null && taskDetails.equals("")) {
             ui.printTaskList(tasks);
@@ -148,6 +207,14 @@ public class Command {
         }
     }
 
+    /**
+     * Method to check for the ToDO Command and render the UI
+     *
+     * @param taskDetails The String describing the various attributes for the command
+     * @param ui The Object to render the UI
+     * @param tasks The Object to contain the List of the Tasks
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
     private void addTodo(String taskDetails, UI ui, TaskList tasks) throws DukeException {
         if ((taskDetails == null) || (taskDetails.equals(""))) {
             throw new DukeException("Incorrect Format of the ToDo Command!!, Correct Format --> todo <Description>");
@@ -160,6 +227,14 @@ public class Command {
         }
     }
 
+    /**
+     * Method to check the type of the Command and distribute to the specific type of Command Handler.
+     *
+     * @param ui The Object to render the UI
+     * @param tasks The Object to contain the List of the Tasks
+     * @param storage The Object to save the List of the Tasks
+     * @throws DukeException An Exception class to be thrown if the command taskDetails is not valid
+     */
     public void execute(UI ui, TaskList tasks, Storage storage) throws DukeException {
         switch (typeOfCommand) {
         case BYE:
@@ -190,6 +265,11 @@ public class Command {
         }
     }
 
+    /**
+     * Method to check if the Command prompts an exit
+     *
+     * @return Return boolean if the program should exit
+     */
     public boolean isExit() {
         return typeOfCommand == Commands.BYE;
     }

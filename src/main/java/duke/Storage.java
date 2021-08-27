@@ -12,22 +12,29 @@ import duke.Task.Task;
 import duke.Task.EventTask;
 import duke.Task.DeadlineTask;
 
+/**
+ * Class to abstract the storing of commands
+ */
 public class Storage {
-    public enum Commands {
-        DEADLINE,
-        EVENT,
-        TODO,
-        UNKNOWN
-    }
 
     File storageFile;
 
+    /**
+     * Constructor for the Storage Class
+     *
+     * @param filePath The path of the file
+     */
     public Storage(String filePath) {
         if (filePath != null) {
             storageFile = new File(filePath);
         }
     }
 
+    /**
+     * Method to save the Task List in the File
+     *
+     * @param tasks The Task List of the Duke
+     */
     public void saveTaskList(TaskList tasks) {
         UI ui = new UI();
         try {
@@ -67,18 +74,29 @@ public class Storage {
         }
     }
 
-    public Commands getCommand(String command) {
+    /**
+     * Method to return the Type of Command to be stored
+     *
+     * @param command The Command Passed for comparing to the different types of Commands
+     * @return The Type of Command Received
+     */
+    public Command.Commands getCommand(String command) {
         try {
             if (command != null) {
-                return Commands.valueOf(command.toUpperCase());
+                return Command.Commands.valueOf(command.toUpperCase());
             } else {
-                return Commands.UNKNOWN;
+                return Command.Commands.UNKNOWN;
             }
         } catch (IllegalArgumentException e) {
-            return Commands.UNKNOWN;
+            return Command.Commands.UNKNOWN;
         }
     }
 
+    /**
+     * Method to get the List of Tasks stored in the file
+     *
+     * @return A list of Tasks which are stored in the file
+     */
     public List<Task> load() {
         List<Task> taskList = new ArrayList<>();
         UI ui = new UI();
@@ -137,6 +155,4 @@ public class Storage {
         }
         return taskList;
     }
-
-
 }
