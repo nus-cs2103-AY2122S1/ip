@@ -27,65 +27,64 @@ public class Duke {
     public void run() {
         try {
             storage.load();
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
-        Scanner scanner = new Scanner(System.in);
-        ui.showWelcome();
 
+        ui.showWelcome();
+        Scanner scanner = new Scanner(System.in);
         while(true) {
             ui.showLine();
             String command = scanner.nextLine();
-            if (command.equals("bye")) {
-                ui.showBye();
-                break;
-            }
-            if (command.equals("list")) {
-                tasks.printList();
-                continue;
-            }
-            String[] commandSplit = command.split("\\s", 2);
-
             try {
-                switch (commandSplit[0]) {
+                if (command.equals("bye")) {
+                    ui.showBye();
+                    break;
+                }
+                if (command.equals("list")) {
+                    tasks.printList();
+                    continue;
+                }
+                String[] parsedCommand = Parser.parseCommand(command);
+
+                switch (parsedCommand[0]) {
                     case "done":
                         //Marks tasks as done
-                        int index = Integer.valueOf(commandSplit[1]) - 1;
+                        int index = Integer.valueOf(parsedCommand[1]) - 1;
                         tasks.setDone(index);
                         storage.saveTask(tasks);
                         break;
 
                     case "delete":
                         //Deletes tasks
-                        int indexD = Integer.valueOf(commandSplit[1]) - 1;
+                        int indexD = Integer.valueOf(parsedCommand[1]) - 1;
                         tasks.deleteTask(indexD);
                         storage.saveTask(tasks);
                         break;
 
                     case "todo":
                         //Adds a new Todo to the list
-                        if (commandSplit.length == 1) {
+                        if (parsedCommand.length == 1) {
                             throw new TaskException("The description of a todo cannot be empty");
                         }
-                        Todo newT = new Todo(commandSplit[1], false);
+                        Todo newT = new Todo(parsedCommand[1], false);
                         tasks.addTask(newT);
                         storage.saveTask(tasks);
                         break;
                     case "deadline":
-                        if (commandSplit.length == 1) {
+                        if (parsedCommand.length == 1) {
                             throw new TaskException("The description of a deadline cannot be empty");
                         }
-                        Task newD = Deadline.parseCommand(commandSplit[1]);
+                        Task newD = Deadline.parseCommand(parsedCommand[1]);
                         tasks.addTask(newD);
                         storage.saveTask(tasks);
                         break;
                     case "event":
-                        if (commandSplit.length == 1) {
+                        if (parsedCommand.length == 1) {
                             throw new TaskException("The description of an event cannot be empty");
                         }
-                        Task newE = Event.parseCommand(commandSplit[1]);
+                        Task newE = Event.parseCommand(parsedCommand[1]);
                         tasks.addTask(newE);
                         storage.saveTask(tasks);
                         break;
@@ -94,11 +93,7 @@ public class Duke {
                         throw new DukeException();
                 }
             } catch (DukeException | TaskException | IOException e) {
-//                System.out.println(e.getMessage());
-//            } catch (TaskException e){
-//                System.out.println(e.getMessage());
-//            } catch (IOException e) {
-//                System.out.println(e.getMessage());
+                System.out.println(e.getMessage());
             } catch (DateTimeParseException e) {
                 System.out.println("The format of the date should be entered in the form dd-MM-yyyy HH:mm");
             }
