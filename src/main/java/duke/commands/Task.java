@@ -1,4 +1,11 @@
 package duke.commands;
+
+/**
+ * Encapsulates a Task that has a description and a completion state isDone
+ *
+ * @author Owen Tan
+ * @version %I%, %G%
+ */
 public abstract class Task {
     protected String description;
     protected boolean isDone;
