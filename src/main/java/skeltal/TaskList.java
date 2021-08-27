@@ -67,6 +67,15 @@ public class TaskList {
         tasks = arrayList;
     }
 
+    public static void findMatchingTasks(String str) {
+        System.out.println("Here are the matching tasks in your list.");
+        for (Task task : tasks) {
+            if (task.getTask().contains(str)) {
+                System.out.println(task);
+            }
+        }
+    }
+
     /**
      * Returns a String that represents the loadable form of the TaskList.
      * @return A String representation of the TaskList

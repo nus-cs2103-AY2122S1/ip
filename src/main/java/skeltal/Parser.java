@@ -48,6 +48,9 @@ public class Parser {
                 case "store":
                     Storage.store();
                     break;
+                case "find":
+                    TaskList.findMatchingTasks(arrReply[1]);
+                    break;
                 default:
                     throw new SkeltalException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
