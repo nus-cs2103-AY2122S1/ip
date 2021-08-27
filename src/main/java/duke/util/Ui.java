@@ -1,8 +1,5 @@
 package duke.util;
 
-import duke.task.*;
-import java.util.ArrayList;
-
 public class Ui {
     private static final String EXIT_MESSAGE = "Goodbyeeee! Hope to see you again soon! :>";
     private static final String SEPARATOR = "\t-------------------------------------------------------";
