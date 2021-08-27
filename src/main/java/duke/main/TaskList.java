@@ -4,6 +4,9 @@ import duke.tasks.Task;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a class to hold all tasks
+ */
 public class TaskList {
     protected ArrayList<Task> taskList;
 
@@ -18,19 +21,37 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds task to list of tasks
+     * @param task
+     */
     public void addTask(Task task) {
         this.taskList.add(task);
     }
 
+    /**
+     * Marks task as done
+     * @param index Index of tasks starting from 0
+     * @return Done task
+     */
     public Task markAsDone(int index) {
         this.taskList.get(index).markAsDone();
         return this.taskList.get(index);
     }
 
+    /**
+     * Gets number of tasks in list
+     * @return Number of task in list
+     */
     public int getNumTask() {
         return this.taskList.size();
     }
 
+    /**
+     * Deletes task at a specific index
+     * @param index Index of task to be deleted starting from 0
+     * @return Deleted task
+     */
     public Task deleteTask(int index) {
         return this.taskList.remove(index);
     }
