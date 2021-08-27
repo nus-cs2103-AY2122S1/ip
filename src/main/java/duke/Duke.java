@@ -9,10 +9,12 @@ package duke;
 
 public class Duke {
     private final UI userInterface;
+    private final TaskList taskList;
 
     public Duke() {
+
         Parser parser = new Parser();
-        TaskList taskList = new TaskList();
+        taskList = new TaskList();
         Storage storage = new Storage(taskList);
         userInterface = new UI(parser, storage, taskList);
     }

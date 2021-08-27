@@ -9,7 +9,6 @@ public class UI {
 
     public UI(Parser parser, Storage storage, TaskList taskList) {
         //Greet
-        welcomeMsg();
         this.parser = parser;
         this.storage = storage;
         this.taskList = taskList;
@@ -17,6 +16,8 @@ public class UI {
 
 
     public void start() throws DukeException{
+        welcomeMsg();
+
         boolean isExit = false;
         while (!isExit) {
             CommandType command = parser.nextCommand();
