@@ -44,7 +44,9 @@ public class Parser {
 
         } else if (input.matches("todo(.*)")) {
             try {
-                String taskDesc = input.trim().substring(5);
+                int start = input.indexOf("todo ");
+                String validInput = input.substring(start);
+                String taskDesc = validInput.trim().substring(5);
                 return new ToDoCommand(taskDesc);
             } catch(StringIndexOutOfBoundsException e) {
                 throw new DukeException("The todo task description cannot be empty. "
@@ -52,34 +54,42 @@ public class Parser {
             }
         } else if (input.matches("deadline(.*)")) {
             try {
-                String taskDesc = input.substring(9);
+                int start = input.indexOf("deadline ");
+                String validInput = input.substring(start);
+                String taskDesc = validInput.substring(9);
                 String[] fields = taskDesc.split(" /by ", 2);
                 LocalDate date = LocalDate.parse(fields[1]);
                 return new DeadlineCommand(fields);
             } catch (DateTimeParseException e) {
                 throw new DukeException("Please use format deadline <description> /by <yyyy-mm-dd>.");
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("The duke.task.Deadline description cannot be empty. "
+                throw new DukeException("The Deadline description cannot be empty. "
                         + "Please use format deadline <description> /by <time>.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please use format deadline <description> /by <time>.");
             }
         } else if (input.matches("event(.*)")) {
             try {
-                String taskDesc = input.substring(6);
+                int start = input.indexOf("event ");
+                String validInput = input.substring(start);
+                String taskDesc = validInput.substring(6);
                 String[] fields = taskDesc.split(" /at ", 2);
                 //make sure not empty
                 String time = fields[1];
                 return new EventCommand(fields);
             } catch (StringIndexOutOfBoundsException e) {
-                throw new DukeException("The duke.task.Event description and time cannot be empty. "
+                throw new DukeException("The Event description and time cannot be empty. "
                         + "Please use format event <description> /at <time>.");
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please use format event <description> /at <time>.");
             }
         } else if (input.matches("find(.*)")) {
             try {
-                String keyword = input.trim().substring(5);
+                //check if input is in the correct format
+                int start = input.indexOf("find ");
+                String validInput = input.substring(start);
+
+                String keyword = validInput.trim().substring(5);
                 return new FindCommand(keyword);
             } catch(StringIndexOutOfBoundsException e) {
                 throw new DukeException("Please use the format find <keyword>");
