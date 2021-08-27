@@ -19,11 +19,11 @@ public class Task {
     /**
      * Basic constructor for task (used during subclass instance)
      */
-    public Task(boolean isDone){
+    public Task(boolean isDone) {
         setState(isDone);
     }
 
-    public static Task empty(){
+    public static Task empty() {
         return new Task(false);
     }
 
@@ -35,7 +35,7 @@ public class Task {
      * Sets the description of the task
      * @param input set task description
      */
-    protected void setDescription(String input){
+    protected void setDescription(String input) {
         this.description = input;
     }
 
@@ -70,7 +70,7 @@ public class Task {
      * Takes a string that indicates event type
      * @param input set event type
      */
-    protected void setEventType(String input){
+    protected void setEventType(String input) {
         this.eventType = input;
     }
 
@@ -78,7 +78,7 @@ public class Task {
      * Sets the duke.taskTypes.Task state to true
      * @return duke.taskTypes.Task instance itself
      */
-    public Task setDone(){
+    public Task setDone() {
         this.isDone = true;
         return this;
     }
@@ -87,7 +87,7 @@ public class Task {
      * Returns task description
      * @return String
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 

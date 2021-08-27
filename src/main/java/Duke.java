@@ -1,5 +1,7 @@
 import duke.command.Command;
+
 import duke.exception.DukeException;
+
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
@@ -13,7 +15,7 @@ public class Duke {
     private final Ui ui;
     private final Storage storage;
 
-    public Duke(String filePath) throws DukeException{
+    public Duke(String filePath) throws DukeException {
         storage = new Storage(filePath);
         ui = new Ui(48);
         taskList = new TaskList();
@@ -24,7 +26,7 @@ public class Duke {
     /**
      * Continuous scan loops until user input "bye"
      */
-    public void  run(){
+    public void  run() {
         ui.welcome();
         boolean notBye = true;
         while (notBye) {
@@ -40,6 +42,7 @@ public class Duke {
 
     /**
      * Main program
+     *
      * @param args
      */
     public static void main(String[] args) {

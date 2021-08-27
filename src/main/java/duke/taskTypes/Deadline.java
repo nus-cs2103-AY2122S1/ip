@@ -1,6 +1,7 @@
 package duke.taskTypes;
 
 import duke.exception.DukeException;
+
 import duke.exception.EmptyTimeException;
 import duke.exception.InvalidFormatException;
 import duke.exception.EmptyDescriptionException;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     /**
      * Takes in a string and splits msg into based on /by pattern. Set the eventType and time of the instance
      * @param input string from the user
@@ -40,7 +41,7 @@ public class Deadline extends Task{
      * @return String containing details of the task
      */
     @Override
-    public String toString(){
+    public String toString() {
         return super.toString() + " (by: " + super.getFormatDate() + ")";
     }
 

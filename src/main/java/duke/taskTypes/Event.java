@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class Event extends Task{
+public class Event extends Task {
 
     /**
      * Takes in a string and splits msg into based on /at pattern. Set the eventType and time of the instance
@@ -37,7 +37,7 @@ public class Event extends Task{
      * @return String containing details of the task
      */
     @Override
-    public String toString(){
+    public String toString() {
         return super.toString() + " (at: " + super.getFormatDate() + ")";
     }
 

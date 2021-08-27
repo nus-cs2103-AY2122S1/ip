@@ -167,7 +167,7 @@ public class TaskList {
      * Retyrns the number of task in the list
      * @return int
      */
-    public int listMaxLen(){
+    public int listMaxLen() {
         return listLen;
     }
 

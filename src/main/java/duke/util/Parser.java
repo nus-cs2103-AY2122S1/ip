@@ -38,7 +38,8 @@ public class Parser {
      * Parses the input and returns command to be executed
      */
     public Command parse(String input) throws DukeException {
-        String[] parsedInput = input.trim().split(" ", 2);        try {
+        String[] parsedInput = input.trim().split(" ", 2);
+        try {
             switch (parsedInput[0]) {
             case "bye":
                 return new ByeCommand(storage, taskList, ui);
