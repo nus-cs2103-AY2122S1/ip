@@ -17,7 +17,7 @@ import duke.task.TaskType;
 /**
  * SQLite implementation of accessing the task database.
  */
-public class SQLite extends Database {
+public class Sql extends Database {
     private static final String SQLITE_CREATE_TASK_TABLE_STATEMENT = "CREATE TABLE IF NOT EXISTS " + TASK_TABLE_NAME
             + " (`type` STRING NOT NULL, `name` TEXT NOT NULL, `completed` INTEGER NOT NULL, `date` TEXT);";
 
