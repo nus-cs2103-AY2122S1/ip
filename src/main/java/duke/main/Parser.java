@@ -1,8 +1,7 @@
 package duke.main;
 
 import duke.commands.*;
-import duke.exceptions.EmptyDescriptionException;
-import duke.exceptions.EmptyTimeException;
+import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
 
 import java.util.Arrays;
@@ -24,7 +23,7 @@ public class Parser {
         return input == input.toLowerCase();
     }
 
-    public static Command parse(String userInput) throws EmptyDescriptionException, EmptyTimeException, InvalidCommandException {
+    public static Command parse(String userInput) throws DukeException {
         List<String> userInputList = Arrays.asList(userInput.split(" "));
         String userCommandString = userInputList.get(0);
 

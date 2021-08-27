@@ -14,16 +14,21 @@ public class EventCommand extends Command {
     private String time;
     private String description;
 
-
-    public EventCommand(String userInput) throws EmptyDescriptionException, EmptyTimeException {
+    /**
+     * {@inheritDoc}
+     */
+    public EventCommand(String userInput) throws DukeException {
         super(userInput);
         this.byIndex = this.getAtIndex();
         this.time = this.getTime();
         this.description = this.getDescription();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         //TaskList
         Task task = new Event(this.description, this.time);
         taskList.addTask(task);
@@ -36,6 +41,9 @@ public class EventCommand extends Command {
         ui.showNumTask(taskList.getNumTask());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;

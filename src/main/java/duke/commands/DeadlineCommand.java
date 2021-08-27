@@ -14,15 +14,21 @@ public class DeadlineCommand extends Command {
     private String time;
     private String description;
 
-    public DeadlineCommand(String userInput) throws EmptyDescriptionException, EmptyTimeException {
+    /**
+     * {@inheritDoc}
+     */
+    public DeadlineCommand(String userInput) throws DukeException {
         super(userInput);
         this.byIndex = this.getByIndex();
         this.time = this.getTime();
         this.description = this.getDescription();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         //TaskList
         Task newTask = new Deadline(this.description, this.time);
         taskList.addTask(newTask);
@@ -35,6 +41,9 @@ public class DeadlineCommand extends Command {
         ui.showNumTask(taskList.getNumTask());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;

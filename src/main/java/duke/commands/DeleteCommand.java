@@ -9,13 +9,19 @@ import duke.main.TaskList;
 public class DeleteCommand extends Command {
     private int index;
 
-    public DeleteCommand(String userInput) {
+    /**
+     * {@inheritDoc}
+     */
+    public DeleteCommand(String userInput) throws DukeException {
         super(userInput);
         this.index = this.getIndex();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         //TaskList
         Task deletedTask = taskList.deleteTask(this.index);
 
@@ -27,6 +33,9 @@ public class DeleteCommand extends Command {
         ui.showNumTask(taskList.getNumTask());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;
