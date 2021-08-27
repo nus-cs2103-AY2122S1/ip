@@ -1,4 +1,5 @@
 package skeltal;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -47,7 +48,7 @@ public class Storage {
             try {
                 taskFile.createNewFile();
             } catch (IOException ioException) {
-                System.out.println("task could not be created :(");
+                System.out.println("File could not be created :(");
             }
 
         } catch (SkeltalException e) {
