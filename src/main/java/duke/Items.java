@@ -107,4 +107,23 @@ public class Items {
         }
         return str.toString();
     }
+
+    public String findTask(String keyword) throws DukeException {
+        StringBuilder output = new StringBuilder();
+        output.append("Here are the matching tasks in your list: ");
+        int ctr = 0;
+        for (Task task : list) {
+            String[] splitString = task.toString().split("\\s");
+            for (String word : splitString) {
+                if (word.equals(keyword)) {
+                    output.append("\n").append(ctr + 1).append(". ").append(task.toString());
+                    ctr++;
+                }
+            }
+        }
+        if (ctr == 0) {
+            throw new DukeException("Sorry, seems like your keyword didn't match anything :/");
+        }
+        return output.toString();
+    }
 }
