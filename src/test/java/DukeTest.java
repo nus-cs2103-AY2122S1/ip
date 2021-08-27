@@ -18,7 +18,7 @@ public class DukeTest {
 
         Field arrayField = ArrayList.class.getDeclaredField("elementData");
         arrayField.setAccessible(true);
-        Object[] internalArray = (Object[])arrayField.get(taskList.getTaskList());
+        Object[] internalArray = (Object[])arrayField.get(taskList.getTasks());
 
 
         assertEquals(100, internalArray.length);

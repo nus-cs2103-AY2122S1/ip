@@ -3,33 +3,33 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> taskList;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
-        taskList = new ArrayList<>(100);
+        tasks = new ArrayList<>(100);
     }
 
     public void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     public void deleteTask(int index) {
-        taskList.remove(index);
+        tasks.remove(index);
     }
 
     public void markAsDone(int index) {
-        taskList.get(index).markAsDone();
+        tasks.get(index).markAsDone();
     }
 
     public int getListSize() {
-        return taskList.size();
+        return tasks.size();
     }
 
     public String getTaskString(int index) {
-        return taskList.get(index).toString();
+        return tasks.get(index).toString();
     }
 
-    public ArrayList<Task> getTaskList() {
-        return taskList;
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 }

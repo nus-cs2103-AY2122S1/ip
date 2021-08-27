@@ -71,7 +71,7 @@ public class Storage {
 
     public void writeData() throws IOException {
         FileWriter writer = new FileWriter(dataFile.getPath());
-        for (Task task: taskList.getTaskList()) {
+        for (Task task: taskList.getTasks()) {
             writer.write(task.toString() + System.lineSeparator());
         }
         writer.close();
