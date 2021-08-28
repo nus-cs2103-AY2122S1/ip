@@ -19,3 +19,7 @@ text-ui-test/EXPECTED-UNIX.TXT
 # Project files
 *.class
 dump/
+.settings/
+.classpath
+.project
+
