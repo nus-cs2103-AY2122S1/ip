@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #424141;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
+    <children>
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="322.0" style="-fx-background-color: azure; -fx-border-color: aquamarine; -fx-border-radius: 7px; -fx-background-radius: 7px;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="760.0">
+         <font>
+            <Font name="Victor Mono Medium" size="14.0" />
+         </font></TextField>
+        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: aquamarine; -fx-background-radius: 7px;" text="Send" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="485.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="759.0">
+         <font>
+            <Font name="Victor Mono Medium" size="14.0" />
+         </font></Button>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" style="-fx-background-color: #424141;" vvalue="1.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <content>
+                <VBox fx:id="dialogContainer" prefHeight="750.0" prefWidth="583.0" style="-fx-background-color: #424141;" />
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>
