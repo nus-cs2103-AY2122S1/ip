@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Represents the exceptions unique to Duke chat bot.
  *

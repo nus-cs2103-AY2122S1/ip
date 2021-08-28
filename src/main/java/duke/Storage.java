@@ -1,8 +1,9 @@
+package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,26 +23,27 @@ public class Storage {
      * Writes the list of tasks to a text file.
      * @throws IOException The exception is thrown if an error occurred while writing to the text file.
      */
-    public void saveTasks(ArrayList<Task> tasks) throws IOException {
+    public void saveTasks(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        for (Task t : tasks) {
+        ArrayList<Task> taskList = tasks.getTaskList();
+        for (Task t : taskList) {
             String taskDetails;
             String done = t.isDone ? "1" : "0";
-            TaskManager.Command c = Command(t.getClass().getName().toLowerCase());
-            switch (c) {
-            case TODO:
+            String command = "todo";
+            switch (command) {
+            case "todo":
                 taskDetails = "T" + " uwu " + done + " uwu " + t.description + "\n";
                 break;
-            case DEADLINE:
+            case "deadline":
                 Deadline d = (Deadline) t;
                 taskDetails = "D" + " uwu " + done + " uwu " + d.description + " uwu " + d.by + "\n";
                 break;
-            case EVENT:
+            case "event":
                 Event e = (Event) t;
                 taskDetails = "E" + " uwu " + done + " uwu " + e.description + " uwu " + e.at + "\n";
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + c);
+                throw new IllegalStateException("Unexpected value: " + command);
             }
             fw.write(taskDetails);
         }

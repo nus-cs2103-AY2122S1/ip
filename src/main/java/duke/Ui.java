@@ -1,5 +1,5 @@
-import javax.sound.sampled.Line;
-import java.util.ArrayList;
+package duke;
+
 import java.util.Scanner;
 
 /**
@@ -32,20 +32,31 @@ public class Ui {
                 + DIVIDER);
     }
 
-    public static void add(Task task) {
+    public void showAddTask(Task task) {
         System.out.println("    ____________________________________________________________");
         System.out.println("    Got it. I've added this task: \n      " + task);
-        System.out.println("    Now you have " + TaskManager.listOfTasks.size() + " in the list.");
+        System.out.println("    Now you have " + "testsize" + " in the list.");
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void list(ArrayList<Task> tasks) {
+    public void showDeleteTask(Task task) {
         System.out.println("    ____________________________________________________________");
-        for (Task task : tasks) {
-            System.out.println("    " + (tasks.indexOf(task) + 1) + "." + task);
-        }
+        System.out.println("    Noted. I've removed this task: \n      " + task);
+        System.out.println("    Now you have " + "testsize" + " in the list.");
         System.out.println("    ____________________________________________________________");
     }
+
+    public void showLoadingError() {
+        System.out.println(DIVIDER + "TEST LOADING ERROR" + DIVIDER);
+    }
+
+//    public static void list(ArrayList<Task> tasks) {
+//        System.out.println("    ____________________________________________________________");
+//        for (Task task : tasks) {
+//            System.out.println("    " + (tasks.indexOf(task) + 1) + "." + task);
+//        }
+//        System.out.println("    ____________________________________________________________");
+//    }
 
     public static void done(Task task) {
         System.out.println("    ____________________________________________________________");
@@ -53,16 +64,9 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void error(String errorMessage) {
+    public void showError(String errorMessage) {
         System.out.println("    ____________________________________________________________");
         System.out.println("    " + errorMessage);
-        System.out.println("    ____________________________________________________________");
-    }
-
-    public static void delete(Task task) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Noted. I've removed this task: \n      " + task);
-        System.out.println("    Now you have " + TaskManager.listOfTasks.size() + " in the list.");
         System.out.println("    ____________________________________________________________");
     }
 }

@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.Serializable;
 
 /**
@@ -5,7 +7,7 @@ import java.io.Serializable;
  *
  * @author Adam Ho
  */
-public class Task implements Serializable {
+public class Task {
     protected String description;
     protected boolean isDone;
     protected static int totalTasks = 0;
