@@ -52,6 +52,11 @@ public class Ui {
         wrapMessageInLines(Message.TASK_DONE_MSG.msg + task);
     }
 
+    /**
+     * Displays the contents in the list when the user asked for it.
+     *
+     * @param taskList The list containing the tasks
+     */
     public static void displayList(TaskList taskList) {
         displayListStart();
 
@@ -69,12 +74,24 @@ public class Ui {
         wrapMessageInLines(Message.NONE_MATCH_MSG.msg);
     }
 
+    /**
+     * Prints the message to be shown when the user deletes a task from the list.
+     *
+     * @param task The task to be deleted
+     * @param count Number of task in the list.
+     */
     public static void printDeleteTaskMessage(Task task, int count) {
         String deletedTaskInfo = Message.TASK_DELETED_MSG.msg + task;
         String updatedListInfo = String.format("%d %s", count, Message.CHECK_TASK_COUNT_MSG.msg);
         wrapMessageInLines(deletedTaskInfo + "\n\t " + updatedListInfo);
     }
 
+    /**
+     * Prints the message to be shown when the user adds a task to the list.
+     *
+     * @param task The task to be deleted
+     * @param count Number of task in the list.
+     */
     public static void printAddTaskMessage(Task task, int count) {
         String addedTaskInfo = Message.TASK_ADDED_MSG.msg + task;
         String updatedListInfo = String.format("%d %s", count, Message.CHECK_TASK_COUNT_MSG.msg);

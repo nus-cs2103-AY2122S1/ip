@@ -29,6 +29,7 @@ public class Duke {
 
     /**
      * Initialises and runs the program.
+     *
      * @param args The command line arguments
      */
     public static void main(String[] args) {
