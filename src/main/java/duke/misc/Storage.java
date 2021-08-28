@@ -3,6 +3,9 @@ package duke.misc;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,7 +18,10 @@ import duke.task.Todo;
  * Storage class to retrieve and store tasks in Duke.
  */
 public class Storage {
-    private final String filePath = "data\\duke.txt";
+    private final String currentDirectory = System.getProperty("user.dir");
+    private final Path filePath = Paths.get(currentDirectory, "Data", "duke.txt");
+    private final boolean filePathExists = Files.exists(filePath);
+    private final boolean fileDirExists = Files.exists(filePath.getParent());
 
     /**
      * Reads data from duke.txt file.
@@ -25,13 +31,12 @@ public class Storage {
      */
     public ArrayList<Task> readData() throws IOException {
         ArrayList<Task> al = new ArrayList<>();
-        File fd = new File("data");
-        if (!fd.exists()) {
-            fd.mkdirs();
+
+        if (!filePathExists) {
+            return al;
         }
-        File f = new File(filePath);
-        f.createNewFile();
-        Scanner sc = new Scanner(f);
+        File file = new File(filePath.toString());
+        Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
             String[] args = data.split(" // ");
@@ -60,8 +65,10 @@ public class Storage {
      * @throws IOException In case directory is invalid or file does not exist.
      */
     public void writeData(ArrayList<Task> al) throws IOException {
-        File f = new File(filePath);
-        FileWriter fw = new FileWriter(filePath);
+        if (!fileDirExists) {
+            filePath.getParent().toFile().mkdir();
+        }
+        FileWriter fw = new FileWriter(filePath.toFile());
         for (int i = 1; i <= al.size(); i++) {
             fw.write(al.get(i - 1).getData() + "\n");
         }

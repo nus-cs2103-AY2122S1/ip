@@ -1,5 +1,7 @@
 package duke.misc;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateException;
@@ -24,34 +26,34 @@ public class Parser {
      */
     public Task makeTask(String input) throws DukeException {
         int idx = input.indexOf(' ');
-        String name = "";
-        String[] args = {};
+        String commandType = "";
+        String[] arguments = {};
         if (idx >= 0) {
-            name = input.substring(0, idx).trim();
-            args = input.substring(idx + 1).split("/");
-            for (int i = 0; i < args.length; i++) {
-                args[i] = args[i].trim();
+            commandType = input.substring(0, idx).trim();
+            arguments = input.substring(idx + 1).split("/");
+            for (int i = 0; i < arguments.length; i++) {
+                arguments[i] = arguments[i].trim();
             }
         }
-        switch(name) {
+        switch(commandType) {
         case "todo":
-            return new Todo(args[0]);
+            return new Todo(arguments[0]);
         case "event":
             if (!input.matches("event [\\s\\S]+/[\\s\\S]+")) {
                 throw new InvalidFormatException();
             }
-            if (DateTime.isInvalidDate(args[1])) {
+            if (DateTime.isInvalidDate(arguments[1])) {
                 throw new InvalidDateException();
             }
-            return new Event(args[0], args[1]);
+            return new Event(arguments[0], arguments[1]);
         case "deadline":
             if (!input.matches("deadline [\\s\\S]+/[\\s\\S]+")) {
                 throw new InvalidFormatException();
             }
-            if (DateTime.isInvalidDate(args[1])) {
+            if (DateTime.isInvalidDate(arguments[1])) {
                 throw new InvalidDateException();
             }
-            return new Deadline(args[0], args[1]);
+            return new Deadline(arguments[0], arguments[1]);
         default:
             throw new InvalidCommandException();
         }
@@ -64,8 +66,9 @@ public class Parser {
      * @param tl TaskList which action is executed on.
      * @return Message according to what action is executed.
      * @throws DukeException In case of errors.
+     * @throws IOException In case of Invalid directory.
      */
-    public String execute(String input, TaskList tl) throws DukeException {
+    public String execute(String input, TaskList tl) throws DukeException, IOException {
         String prefix = input;
         String suffix = "";
         int idx = input.indexOf(' ');
@@ -75,12 +78,13 @@ public class Parser {
         }
         switch (prefix) {
         case "bye":
-            if (!suffix.equals("")) {
+            if (!suffix.isEmpty()) {
                 throw new InvalidCommandException();
             }
+            tl.saveData();
             return Ui.GOODBYE_MSG;
         case "list":
-            if (!suffix.equals("")) {
+            if (!suffix.isEmpty()) {
                 throw new InvalidCommandException();
             }
             return Ui.LIST_MSG + tl.displayList();
