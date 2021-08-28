@@ -11,6 +11,8 @@ import aisu.Ui;
  * @author Liaw Xin Yan
  */
 public abstract class Command {
+    protected String uiText = "";
+
     /**
      * Does the command.
      *
@@ -20,6 +22,14 @@ public abstract class Command {
      * @throws AisuException If command fails to be executed.
      */
     public abstract void execute(TaskList tasklist, Storage storage, Ui ui) throws AisuException;
+
+    /**
+     * Returns the text Aisu responds with for that command. Used with GUI.
+     * @return Aisu's response.
+     */
+    public String showUiText() {
+        return this.uiText;
+    }
 
     /**
      * Checks if the command is an Exit command.

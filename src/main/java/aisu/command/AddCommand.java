@@ -44,7 +44,7 @@ public class AddCommand extends Command {
             break;
         }
         storage.save(tasklist);
-        ui.showToUser(" Got it! I've added this task:",
+        this.uiText = ui.formatText(" Got it! I've added this task:",
                 " - " + newTask,
                 " Now you have " + tasklist.getListSize() + " task(s) in the list.\n");
     }

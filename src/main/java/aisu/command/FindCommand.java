@@ -26,7 +26,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList tasklist, Storage storage, Ui ui) {
         String result = tasklist.findTasksWith(this.input);
-        ui.showToUser("Here's what I found:", result);
+        this.uiText = ui.formatText("Here's what I found:", result);
     }
 
     /**

@@ -20,8 +20,7 @@ public class ShowListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasklist, Storage storage, Ui ui) {
-        ui.showToUser("Here's what you have in your list:");
-        System.out.println(tasklist);
+        this.uiText = ui.formatText("Here's what you have in your list:", tasklist.toString());
     }
 
     /**

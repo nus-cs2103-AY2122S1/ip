@@ -57,7 +57,16 @@ public class Aisu {
                 ui.showDivider();
             }
         }
-        ui.showGoodbyeMessage();
+//        ui.showGoodbyeMessage();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.showUiText();
+        } catch (AisuException e) {
+            return e.getMessage();
+        }
     }
 
     /**

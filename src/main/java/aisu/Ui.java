@@ -21,6 +21,7 @@ public class Ui {
             "`--' `--' `--'             `-----'  `-----'   \n";
     private static final int PADDING_LENGTH = 48;
     private static String formattedInstructions;
+    private static final String GOODBYE_MESSAGE = LOGO + DIVIDER + " See you next time! :D\n" + DIVIDER;
 
     private final Scanner in;
     private final PrintStream out;
@@ -65,6 +66,10 @@ public class Ui {
         return this.in.nextLine();
     }
 
+    public String getGoodbyeMessage() {
+        return GOODBYE_MESSAGE;
+    }
+
     /**
      * Displays the ASCII divider.
      */
@@ -85,7 +90,7 @@ public class Ui {
      * Displays the goodbye message.
      */
     public void showGoodbyeMessage() {
-        this.out.println(LOGO + DIVIDER + " See you next time! :D\n" + DIVIDER);
+        this.out.println(GOODBYE_MESSAGE);
     }
 
     /**
@@ -125,5 +130,18 @@ public class Ui {
         for (String m : message) {
             this.out.println(m);
         }
+    }
+
+    /**
+     * Formats messages neatly to be displayed in GUI.
+     * @param message Message to be shown.
+     * @return String format of the messages.
+     */
+    public String formatText(String... message) {
+        StringBuilder result = new StringBuilder();
+        for (String m: message) {
+            result.append(message).append("\n");
+        }
+        return result.toString();
     }
 }
