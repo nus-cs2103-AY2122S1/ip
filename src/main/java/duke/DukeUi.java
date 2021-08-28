@@ -8,14 +8,14 @@ import java.util.Scanner;
 public class DukeUi extends Ui {
 
     /**
-     * Present a farewell message to the user.
+     * Presents a farewell message to the user.
      */
-    public void exit() {
+    public void printExitMessage() {
         System.out.println(formatMessage("Bye. Hope to see you again soon!\n"));
     }
 
     /**
-     * Scan the user inputs for parser to act upon the user's command.
+     * Scans the user inputs for parser to act upon the user's command.
      *
      * @param parser the parser that interprets user's input.
      */
@@ -26,9 +26,9 @@ public class DukeUi extends Ui {
     }
 
     /**
-     * Present an welcome message to the user.
+     * Presents an welcome message to the user.
      */
-    public void welcome() {
+    public void printWelcomeMessage() {
         System.out.println(formatMessage("Hello! I'm Peoduo\n" + getIndentation() + "Can I help you?\n"));
     }
 }

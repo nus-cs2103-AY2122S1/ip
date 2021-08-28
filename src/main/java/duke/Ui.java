@@ -16,7 +16,7 @@ public class Ui {
     }
 
     /**
-     * Standardise the format of an input message.
+     * Standardises the format of an input message.
      *
      * @param message the string to be shown to the user.
      */

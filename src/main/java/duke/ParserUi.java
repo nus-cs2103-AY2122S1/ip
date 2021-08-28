@@ -8,14 +8,14 @@ import java.util.ArrayList;
 public class ParserUi extends Ui {
 
     /**
-     * Remind the user that the parser cannot interpret the input command.
+     * Reminds the user that the parser cannot interpret the input command.
      */
-    public void cannotInterpretMessage() {
+    public void printCannotInterpretMessage() {
         System.out.println(formatMessage("OOPS!!! I'm sorry, but I don't know what that means :-(\n"));
     }
 
     /**
-     * Show the list of events saved at .../data/record.
+     * Shows the list of events saved at .../data/record.
      */
     public void printUserInputRecord(ArrayList<Task> userInputRecords) {
         if (userInputRecords.isEmpty()) {

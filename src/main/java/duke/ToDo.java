@@ -5,12 +5,15 @@ package duke;
  */
 public class ToDo extends Task {
 
+    /**
+     * The constructor for a Todo Object.
+     */
     public ToDo(String taskTitle) {
         super(taskTitle);
     }
 
     /**
-     * Customize the string representation of a todo object.
+     * Customizes the string representation of a todo object.
      *
      * @return string representation of a deadline in the form [T][{X}] {description}
      */

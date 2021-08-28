@@ -8,13 +8,16 @@ import java.time.LocalDate;
 public class Deadline extends Task {
     private LocalDate ddl;
 
+    /**
+     * The constructor for a Deadline Object.
+     */
     public Deadline(String taskTitle, LocalDate ddl) {
         super(taskTitle);
         this.ddl = ddl;
     }
 
     /**
-     * Customize the string representation of a deadline object.
+     * Customizes the string representation of a deadline object.
      *
      * @return string representation of a deadline in the form [D][{X}] {description} (by: {ddl})
      */

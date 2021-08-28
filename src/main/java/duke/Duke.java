@@ -9,6 +9,9 @@ public class Duke {
     private Storage storage;
     private DukeUi ui;
 
+    /**
+     * The constructor for a Duke Object.
+     */
     public Duke() {
         ui = new DukeUi();
         storage = new Storage();
@@ -24,8 +27,8 @@ public class Duke {
      * This method starts and ends the program, and pass the user input to the parser.
      */
     public void run() {
-        ui.welcome();
+        ui.printWelcomeMessage();
         ui.readUserInput(parser);
-        ui.exit();
+        ui.printExitMessage();
     }
 }

@@ -12,13 +12,16 @@ public class TaskList {
     private Storage storage;
     private TaskListUi ui;
 
+    /**
+     * The constructor for a TaskList Object.
+     */
     public TaskList(Storage storage) {
         this.storage = storage;
         this.ui = new TaskListUi();
     }
 
     /**
-     * Add the user's input to the saved record only if the user's input is of a specific form.
+     * Adds the user's input to the saved record only if the user's input is of a specific form.
      *
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
@@ -28,7 +31,7 @@ public class TaskList {
         if (userInput.startsWith("todo")) {
             String description = userInput.substring(5);
             if (description.trim().isEmpty()) {
-                ui.nonEmptyDescriptionMessage("todo");
+                ui.printNonEmptyDescriptionMessage("todo");
                 return;
             }
             task = new ToDo(description);
@@ -39,10 +42,10 @@ public class TaskList {
                 LocalDate ddl = LocalDate.parse(userInput.substring(byPosition + 4));
                 task = new Deadline(description, ddl);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.nonEmptyDescriptionMessage("deadline");
+                ui.printNonEmptyDescriptionMessage("deadline");
                 return;
             } catch (DateTimeParseException e) {
-                ui.invalidDateFormMessage();
+                ui.printInvalidDateFormMessage();
                 return;
             }
         } else if (userInput.startsWith("event")) {
@@ -52,23 +55,23 @@ public class TaskList {
                 LocalDate time = LocalDate.parse(userInput.substring(atPosition + 4));
                 task = new Event(description, time);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.nonEmptyDescriptionMessage("event");
+                ui.printNonEmptyDescriptionMessage("event");
                 return;
             } catch (DateTimeParseException e) {
-                ui.invalidDateFormMessage();
+                ui.printInvalidDateFormMessage();
                 return;
             }
         } else {
-            ui.cannotInterpretMessage();
+            ui.printCannotInterpretMessage();
             return;
         }
         userInputRecords.add(task);
         storage.autoSave();
-        ui.addMessage(userInputRecords, task);
+        ui.printAddMessage(userInputRecords, task);
     }
 
     /**
-     * Delete the user-specified event, according to the task index.
+     * Deletes the user-specified event, according to the task index.
      *
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
@@ -79,20 +82,21 @@ public class TaskList {
             Task itemDeleted = userInputRecords.get(itemToDelete);
             userInputRecords.remove(itemToDelete);
             storage.autoSave();
-            ui.deleteMessage(userInputRecords, itemDeleted);
+            ui.printDeleteMessage(userInputRecords, itemDeleted);
         } catch (IndexOutOfBoundsException e) {
-            ui.absentIdMessage();
+            ui.printAbsentIdMessage();
         } catch (NumberFormatException e) {
-            ui.invalidIdMessage();
+            ui.printInvalidIdMessage();
         }
     }
 
     /**
-     * Delete all tasks saved in the record.
+     * Deletes all tasks saved in the record.
      */
     public void deleteAll(ArrayList<Task> userInputRecords) {
+
         userInputRecords.clear();
-        ui.deleteAllMessage();
+        ui.printDeleteAllMessage();
     }
 
     public Storage getStorage() {
@@ -100,7 +104,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the user-specified event as done, according to the task index.
+     * Marks the user-specified event as done, according to the task index.
      *
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
@@ -111,23 +115,22 @@ public class TaskList {
             Task taskDone = userInputRecords.get(itemToComplete);
             taskDone.setDone(true);
             userInputRecords.set(itemToComplete, taskDone);
-            ui.markAsDoneMessage(userInputRecords, itemToComplete);
+            ui.printMarkAsDoneMessage(userInputRecords, itemToComplete);
             storage.autoSave();
         } catch (IndexOutOfBoundsException e) {
-            ui.absentIdMessage();
+            ui.printAbsentIdMessage();
         } catch (NumberFormatException e) {
-            ui.invalidIdMessage();
+            ui.printInvalidIdMessage();
         }
     }
 
     /**
-     * Search for the events according to the user-specified keyword.
+     * Searches for the events according to the user-specified keyword.
      *
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
-     * @return Search result (for testing purposes)
      */
-    public ArrayList<Task> search(String userInput, ArrayList<Task> userInputRecords) {
+    public void search(String userInput, ArrayList<Task> userInputRecords) {
         String keyword = userInput.replace("find", "").trim();
         ArrayList<Task> searchResult = new ArrayList<>();
         for (Task userInputRecord : userInputRecords) {
@@ -137,6 +140,5 @@ public class TaskList {
             }
         }
         ui.printSearchResult(searchResult, keyword);
-        return searchResult;
     }
 }

@@ -8,13 +8,16 @@ import java.time.LocalDate;
 public class Event extends Task {
     private LocalDate time;
 
+    /**
+     * The constructor for an Event Object.
+     */
     public Event(String taskTitle, LocalDate time) {
         super(taskTitle);
         this.time = time;
     }
 
     /**
-     * Customize the string representation of an event object.
+     * Customizes the string representation of an event object.
      *
      * @return string representation of an event in the form [E][{X}] {description} (at: {time})
      */

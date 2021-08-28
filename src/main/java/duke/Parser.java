@@ -10,6 +10,9 @@ public class Parser {
     private final TaskList tasks;
     private final ParserUi ui;
 
+    /**
+     * The constructor for a Parser Object.
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
         this.ui = new ParserUi();
@@ -52,7 +55,7 @@ public class Parser {
     }
 
     /**
-     * Parse the user's command and calls relevant method to execute the command.
+     * Parses the user's command and calls relevant method to execute the command.
      *
      * @param scanner the scanner from ParserUi that reads the user's input.
      */
@@ -65,7 +68,7 @@ public class Parser {
                 if (checkDoneCommand(userInput)) {
                     tasks.markAsDone(userInput, tasks.getStorage().getUserInputRecords());
                 } else {
-                    ui.cannotInterpretMessage();
+                    ui.printCannotInterpretMessage();
                 }
             } else if (userInput.equals("deleteAll")) {
                 tasks.deleteAll(tasks.getStorage().getUserInputRecords());
@@ -73,7 +76,7 @@ public class Parser {
                 if (checkDeleteCommand(userInput)) {
                     tasks.delete(userInput, tasks.getStorage().getUserInputRecords());
                 } else {
-                    ui.cannotInterpretMessage();
+                    ui.printCannotInterpretMessage();
                 }
             } else if (userInput.startsWith("save ")) {
                 tasks.getStorage().save(userInput);

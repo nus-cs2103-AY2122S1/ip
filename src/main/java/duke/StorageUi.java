@@ -12,7 +12,7 @@ public class StorageUi extends Ui {
     };
 
     /**
-     * Convert a input string time to a LocalDate object.
+     * Converts a input string time to a LocalDate object.
      *
      * @param time the input time in String format.
      * @return a LocalDate object whose time field is from the input time string.
@@ -36,51 +36,51 @@ public class StorageUi extends Ui {
     }
 
     /**
-     * Remind the user that a directory already exists.
+     * Reminds the user that a directory already exists.
      */
-    public void directoryAlreadyExistMessage() {
+    public void printDirectoryAlreadyExistMessage() {
         System.out.println(formatMessage("This directory already exists!\n"));
     }
 
     /**
-     * Remind the user that a file already exists.
+     * Reminds the user that a file already exists.
      */
-    public void fileAlreadyExistMessage() {
+    public void printFileAlreadyExistMessage() {
         System.out.println(formatMessage("This file already exists!\n"));
     }
 
     /**
-     * Warn the user that the input file path is invalid.
+     * Warns the user that the input file path is invalid.
      */
-    public void invalidFilePathMessage() {
+    public void printInvalidFilePathMessage() {
         System.out.println(formatMessage("Invalid file path detected, please try again.\n"));
     }
 
     /**
-     * Tell the user that the task list is loaded from the specified file successfully.
+     * Tells the user that the task list is loaded from the specified file successfully.
      */
-    public void loadSuccessfulMessage() {
+    public void printLoadSuccessfulMessage() {
         System.out.println(formatMessage("Load successfully.\n"));
     }
 
     /**
-     * Warn the user that the autosave record is missing and a new data file is created.
+     * Warns the user that the autosave record is missing and a new data file is created.
      */
-    public void saveNotFoundMessage() {
+    public void printSaveNotFoundMessage() {
         System.out.println(formatMessage("Saved data not found, a new data file created.\n"));
     }
 
     /**
-     * Tell the user that the task list is saved into the specified file successfully.
+     * Tells the user that the task list is saved into the specified file successfully.
      */
-    public void saveSuccessfulMessage() {
+    public void printSaveSuccessfulMessage() {
         System.out.println(formatMessage("Save successfully.\n"));
     }
 
     /**
-     * Remind the user that an unexpected error has occurred.
+     * Reminds the user that an unexpected error has occurred.
      */
-    public void unexpectedErrorMessage() {
+    public void printUnexpectedErrorMessage() {
         System.out.println(formatMessage("An unknown error has occurred.\n"));
     }
 }

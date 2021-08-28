@@ -18,13 +18,16 @@ public class Storage {
     private ArrayList<Task> userInputRecords;
     private StorageUi ui;
 
+    /**
+     * The constructor for a Storage Object.
+     */
     public Storage() {
         this.userInputRecords = new ArrayList<>();
         this.ui = new StorageUi();
     }
 
     /**
-     * Automatically(without any user command) load the users inputs from ../data/record when the program is restarted.
+     * Automatically(without any user command) loads the users inputs from ../data/record when the program is restarted.
      */
     public void autoLoad() {
         try {
@@ -57,12 +60,12 @@ public class Storage {
             }
             scanner.close();
         } catch (IOException e) {
-            ui.saveNotFoundMessage();
+            ui.printSaveNotFoundMessage();
         }
     }
 
     /**
-     * Automatically(without any user command) save the users inputs to ../data/record.
+     * Automatically(without any user command) saves the users inputs to ../data/record.
      */
     public void autoSave() {
         boolean directoryExists = Files.exists(Paths.get("data"));
@@ -71,13 +74,13 @@ public class Storage {
             try {
                 Files.createDirectory(Path.of("data"));
             } catch (IOException e) {
-                ui.directoryAlreadyExistMessage();
+                ui.printDirectoryAlreadyExistMessage();
             }
         } else if (!fileExists) {
             try {
                 Files.createFile(Path.of("data", "record"));
             } catch (IOException e) {
-                ui.fileAlreadyExistMessage();
+                ui.printFileAlreadyExistMessage();
             }
         }
         try {
@@ -88,7 +91,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            ui.unexpectedErrorMessage();
+            ui.printUnexpectedErrorMessage();
         }
     }
 
@@ -97,7 +100,7 @@ public class Storage {
     }
 
     /**
-     * Load the current task list from a user-specified file, upon receiving a load command.
+     * Loads the current task list from a user-specified file, upon receiving a load command.
      * Texts not recorded in the standard format wll be ignored.
      *
      * @param filePath the filepath indicated by the user.
@@ -133,14 +136,14 @@ public class Storage {
                 }
             }
             scanner.close();
-            ui.loadSuccessfulMessage();
+            ui.printLoadSuccessfulMessage();
         } catch (IOException e) {
-            ui.invalidFilePathMessage();
+            ui.printInvalidFilePathMessage();
         }
     }
 
     /**
-     * Save the current task list to a user-specified file, upon receiving a save command.
+     * Saves the current task list to a user-specified file, upon receiving a save command.
      *
      * @param filePath the filepath indicated by the user.
      */
@@ -156,9 +159,9 @@ public class Storage {
             }
             writer.close();
             autoSave();
-            ui.saveSuccessfulMessage();
+            ui.printSaveSuccessfulMessage();
         } catch (IOException | InvalidPathException e) {
-            ui.invalidFilePathMessage();
+            ui.printInvalidFilePathMessage();
         }
     }
 }

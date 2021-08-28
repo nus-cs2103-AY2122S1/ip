@@ -7,6 +7,9 @@ public class Task {
     private final String taskTitle;
     private boolean isDone;
 
+    /**
+     * The constructor for a Task Object.
+     */
     public Task(String taskTitle) {
         this.taskTitle = taskTitle;
         //When a task is first created, it is by default not completed.
@@ -22,7 +25,7 @@ public class Task {
     }
 
     /**
-     * Customize the string representation of a task object.
+     * Customizes the string representation of a task object.
      *
      * @return string representation of a task in the form [][{X}] {description}
      */
