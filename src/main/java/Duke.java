@@ -1,6 +1,10 @@
+import java.util.*;
+
 public class Duke {
-        private void greet() {
-            String line = "__________________________________\n";
+
+    private String line = "__________________________________\n";
+
+    private void greet() {
             System.out.println(line);
             String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -13,15 +17,33 @@ public class Duke {
             System.out.println(line);
         }
 
-        private void bye() {
-            String line = "__________________________________\n";
-            System.out.println("Bye. Hope to see you again soon!");
-            System.out.println(line);
-        }
+    private void bye() {
+        String line = "__________________________________";
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(line);
+    }
 
-        public static void main(String[] args) {
+    private boolean echo() {
+        Scanner user = new Scanner(System.in);
+        String input = user.nextLine();
+        if (input.equals("bye")) {
+            bye();
+            return false;
+        } else {
+            System.out.println(line);
+            System.out.println(input);
+            System.out.println(line);
+            return true;
+        }
+    }
+
+
+    public static void main(String[] args) {
             Duke bot = new Duke();
             bot.greet();
-            bot.bye();
+            boolean end = true;
+            while (end) {
+                end = bot.echo();
+            }
         }
     }
