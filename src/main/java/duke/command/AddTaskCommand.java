@@ -14,16 +14,33 @@ import duke.util.Ui;
 public class AddTaskCommand extends Command {
     private final Task task;
 
+    /**
+     * Instantiates a new AddTaskCommand
+     *
+     * @param task Task to be added to task list.
+     */
     public AddTaskCommand(Task task) {
         this.task = task;
     }
 
+    /**
+     * Adds the task to the task list.
+     * Writes task data to storage file.
+     *
+     * @param taskHandler TaskHandler of Duke.
+     * @param storage Storage for Duke.
+     * @param ui User interface.
+     * @throws DukeException If there is error adding the task or saving data.
+     */
     @Override
     public void execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException {
         taskHandler.addTask(task);
         storage.writeToFile(task);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {

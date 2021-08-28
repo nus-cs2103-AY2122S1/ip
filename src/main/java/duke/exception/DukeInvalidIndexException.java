@@ -6,6 +6,9 @@ package duke.exception;
  * @author Teo Sin Yee
  */
 public class DukeInvalidIndexException extends DukeException {
+    /**
+     * Constructor for DukeInvalidIndexException.
+     */
     public DukeInvalidIndexException() {
         super("Please enter a positive number starting from 1!");
     }

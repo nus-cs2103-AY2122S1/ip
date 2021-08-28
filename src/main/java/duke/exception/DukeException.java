@@ -8,7 +8,7 @@ package duke.exception;
  */
 public class DukeException extends Exception {
     /**
-     * Instantiates a new Duke exception
+     * Constructor for DukeException.
      *
      * @param message error message.
      */

@@ -43,13 +43,19 @@ public class Task {
         return isDone ? "X" :"";
     }
 
+    /**
+     * Gets the name of the task
+     *
+     * @return String representation of the task name.
+     */
     public String getTaskName() {
         return taskName;
     }
 
     /**
+     * Converts task to the suitable format to be saved in storage file.
      *
-     *
+     * @return Reformatted string representation of a task in the storage file.
      */
     public String formatToSave() {
         return String.format("%d | %s", isDone ? 1 : 0, taskName);

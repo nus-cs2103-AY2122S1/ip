@@ -25,6 +25,7 @@ public class Deadline extends Task {
     public String formatToSave() {
         return String.format("D | %s | %s", super.formatToSave(), dueDate);
     }
+
     /**
      * String representation of a deadline.
      *

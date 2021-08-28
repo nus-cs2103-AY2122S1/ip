@@ -10,11 +10,21 @@ import duke.util.Ui;
  * @author Teo Sin Yee
  */
 public class ListCommand extends Command {
+    /**
+     * Prints the task list.
+     *
+     * @param taskHandler TaskHandler of Duke.
+     * @param ui User interface.
+     * @param storage Storage for Duke.
+     */
     @Override
     public void execute(TaskHandler taskHandler, Storage storage, Ui ui) {
         taskHandler.printTasks();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         return o instanceof ListCommand;
