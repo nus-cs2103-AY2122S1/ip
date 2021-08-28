@@ -1,22 +1,35 @@
+import javax.sound.sampled.Line;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
- * Manages the adding, deleting, and marking completion of tasks.
+ * Deals with interactions with the user.
  *
  * @author Adam Ho
  */
-public class Message {
-    public static void greet() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Hello! I'm Jani, your personal chat bot.\n" +
-                "    How may I assist you today?");
-        System.out.println("    ____________________________________________________________");
+public class Ui {
+    private final String DIVIDER = "    ____________________________________________________________\n";
+    private Scanner sc = new Scanner(System.in);
+
+    public String readCommand() {
+        return sc.nextLine();
     }
 
-    public static void exit() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Goodbye! Please visit me again soon :(");
-        System.out.println("    ____________________________________________________________");
+    public void showLine() {
+        System.out.println(DIVIDER);
+    }
+
+    public void showWelcome() {
+        System.out.println(DIVIDER
+                + "    Hello! I'm Adam, your personal chat bot.\n"
+                + "    How may I assist you today?"
+                + DIVIDER);
+    }
+
+    public void showExit() {
+        System.out.println(DIVIDER
+                + "    Goodbye! Please visit me again soon :("
+                + DIVIDER);
     }
 
     public static void add(Task task) {
