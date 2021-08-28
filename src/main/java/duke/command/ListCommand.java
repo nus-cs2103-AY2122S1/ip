@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.time.DateTimeException;
+
 import duke.DukeException;
+import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.Ui;
-
-import java.time.DateTimeException;
 
 /**
  * ListCommand is a duke.command which prints out all the Tasks in the list, and even
@@ -43,8 +43,8 @@ public class ListCommand extends Command {
                 tasks.printListDate(date);
             }
         } catch (DateTimeException e) {
-            throw new DukeException("Your date (YYYY-MM-DD) / date & time (YYYY-MM-DD HHMM) (24h) " +
-                    "is given in the wrong format!");
+            throw new DukeException("Your date (YYYY-MM-DD) / date & time (YYYY-MM-DD HHMM) (24h) "
+                    + "is given in the wrong format!");
         }
     }
 }

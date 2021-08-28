@@ -1,11 +1,11 @@
 package duke;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.command.Command;
 import duke.storage.StorageDuke;
 import duke.tasklist.TaskListDuke;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a person
@@ -15,8 +15,8 @@ import java.util.ArrayList;
  * @version CS2103T AY21/22 S1
  */
 public class Duke {
-    private final StorageDuke STORAGE;
-    private final Ui UI;
+    private StorageDuke storage;
+    private Ui ui;
     private TaskListDuke tasks;
 
     /**
@@ -25,13 +25,13 @@ public class Duke {
      * @param filePath the filePath for the saved data
      */
     public Duke(String filePath) {
-        this.UI = new Ui();
-        this.STORAGE = new StorageDuke(filePath);
+        this.ui = new Ui();
+        this.storage = new StorageDuke(filePath);
         try {
-            tasks = new TaskListDuke(this.STORAGE.load(), UI);
+            tasks = new TaskListDuke(this.storage.load(), ui);
         } catch (IOException e) {
-            UI.reply("☹ OOPS!!! Cannot create file!");
-            tasks = new TaskListDuke(new ArrayList<>(), UI);
+            ui.reply("☹ OOPS!!! Cannot create file!");
+            tasks = new TaskListDuke(new ArrayList<>(), ui);
         }
     }
 
@@ -39,21 +39,21 @@ public class Duke {
      * Executes the Duke application.
      */
     public void run() {
-        UI.showWelcome();
+        ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = UI.readCommand();
-                UI.showLine(); // show the divider line ("_______")
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, UI, STORAGE);
+                c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                UI.showError(e.getMessage());
+                ui.showError(e.getMessage());
             } catch (IOException e) {
-                UI.showError(new DukeException("Error reading commands.").getMessage());
+                ui.showError(new DukeException("Error reading commands.").getMessage());
             } finally {
-                UI.showLine();
+                ui.showLine();
             }
         }
     }

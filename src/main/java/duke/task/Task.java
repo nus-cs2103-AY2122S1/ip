@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * @version CS2103T AY21/22 S1
  */
 public abstract class Task {
-    protected final String DESCRIPTION;
+    protected final String description;
     private boolean isDone;
 
     /**
@@ -18,7 +18,7 @@ public abstract class Task {
      * @param description the description
      */
     public Task(String description, boolean isDone) {
-        this.DESCRIPTION = description;
+        this.description = description;
         this.isDone = isDone;
     }
 
@@ -45,7 +45,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.DESCRIPTION;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
     /**
@@ -62,6 +62,6 @@ public abstract class Task {
      * @return true if the duke.task's description contains the string
      */
     public boolean containString(String str) {
-        return DESCRIPTION.contains(str);
+        return description.contains(str);
     }
 }

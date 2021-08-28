@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.Ui;
 
 /**
  * FindCommand is a duke.command which prints out the Tasks in the TaskList which

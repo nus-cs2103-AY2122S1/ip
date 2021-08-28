@@ -1,11 +1,6 @@
 package duke.tasklist;
 
-import duke.Ui;
 import duke.task.Task;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 /**
  * TaskList stores the list of tasks.
@@ -40,7 +35,7 @@ public interface TaskList {
     /**
      * Prints Tasks on the specified date.
      */
-     void printListDate(String date);
+    void printListDate(String date);
 
     /**
      * Return the number of items in the TaskList.

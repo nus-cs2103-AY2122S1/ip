@@ -1,16 +1,16 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * StorageDuke is in-charge of loading the saved taskList, and updating it.
@@ -19,16 +19,16 @@ import java.util.ArrayList;
  * @version CS2103T AY21/22 S1
  */
 public class StorageDuke implements Storage {
-    private final String FILEPATH;
+    private String filepath;
     private ArrayList<String> fileContent = new ArrayList<>();
 
     /**
      * Constructor.
      *
-     * @param filePath the specified path of the file.
+     * @param filepath the specified path of the file.
      */
-    public StorageDuke(String filePath) {
-        this.FILEPATH = filePath;
+    public StorageDuke(String filepath) {
+        this.filepath = filepath;
     }
 
     /**
@@ -41,22 +41,21 @@ public class StorageDuke implements Storage {
     public ArrayList<Task> load() throws IOException {
 
         //Check if the directory is present, else, create it.
-        File directory = new File(this.FILEPATH.split("/")[0]);
+        File directory = new File(this.filepath.split("/")[0]);
         if (!directory.exists()) {
             directory.mkdir();
         }
 
         //Check if the file is present, else, create it.
         ArrayList<Task> tl = new ArrayList<>();
-        File savedList = new File(this.FILEPATH);
+        File savedList = new File(this.filepath);
         if (!savedList.exists()) {
             savedList.createNewFile();
             return tl;
         }
-        fileContent = new ArrayList<>(Files.readAllLines(Paths.get(this.FILEPATH), StandardCharsets.UTF_8));
+        fileContent = new ArrayList<>(Files.readAllLines(Paths.get(this.filepath), StandardCharsets.UTF_8));
 
-        fileContent.forEach(str ->
-        {
+        fileContent.forEach(str -> {
             String[] command = str.split("\\|");
             switch (command[0]) {
             case "T":
@@ -85,7 +84,7 @@ public class StorageDuke implements Storage {
     public void setDone(int index) throws IOException {
         String str = fileContent.get(index);
         fileContent.set(index, str.replace("|0|", "|1|"));
-        Files.write(Paths.get(this.FILEPATH), fileContent, StandardCharsets.UTF_8);
+        Files.write(Paths.get(this.filepath), fileContent, StandardCharsets.UTF_8);
     }
 
     /**
@@ -99,7 +98,7 @@ public class StorageDuke implements Storage {
     @Override
     public void add(String type, String description, String date) throws IOException {
         fileContent.add(type + "|0|" + description + "|" + date);
-        Files.write(Paths.get(this.FILEPATH), fileContent, StandardCharsets.UTF_8);
+        Files.write(Paths.get(this.filepath), fileContent, StandardCharsets.UTF_8);
     }
 
     /**
@@ -111,6 +110,6 @@ public class StorageDuke implements Storage {
     @Override
     public void delete(int index) throws IOException {
         fileContent.remove(index);
-        Files.write(Paths.get(this.FILEPATH), fileContent, StandardCharsets.UTF_8);
+        Files.write(Paths.get(this.filepath), fileContent, StandardCharsets.UTF_8);
     }
 }

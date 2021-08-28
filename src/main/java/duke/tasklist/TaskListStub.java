@@ -1,11 +1,11 @@
 package duke.tasklist;
 
-import duke.Ui;
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * TaskList stores the list of tasks.
@@ -14,16 +14,16 @@ import java.util.ArrayList;
  * @version CS2103T AY21/22 S1
  */
 public class TaskListStub implements TaskList {
-    private final ArrayList<Task> LIST;
-    private final Ui UI;
+    private ArrayList<Task> list;
+    private Ui ui;
     private ArrayList<Task> output;
 
     /**
      * Constructor for TaskList.
      */
     public TaskListStub(ArrayList<Task> list, Ui ui) {
-        this.LIST = list;
-        this.UI = ui;
+        this.list = list;
+        this.ui = ui;
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskListStub implements TaskList {
      */
     @Override
     public void addTask(Task task) {
-        this.LIST.add(task);
+        this.list.add(task);
     }
 
     /**
@@ -43,7 +43,7 @@ public class TaskListStub implements TaskList {
      */
     @Override
     public void setDone(int index) {
-        Task task = this.LIST.get(index);
+        Task task = this.list.get(index);
         task.setDone();
     }
 
@@ -54,8 +54,8 @@ public class TaskListStub implements TaskList {
      */
     @Override
     public void delete(int index) {
-        Task task = this.LIST.get(index);
-        this.LIST.remove(index);
+        Task task = this.list.get(index);
+        this.list.remove(index);
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskListStub implements TaskList {
      */
     @Override
     public void printList() {
-        this.output = this.LIST;
+        this.output = this.list;
     }
 
     /**
@@ -74,7 +74,7 @@ public class TaskListStub implements TaskList {
     public void printListDate(String date) {
         LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.output = new ArrayList<>();
-        for (Task t : this.LIST) {
+        for (Task t : this.list) {
             if (t.onDate(localDate)) {
                 this.output.add(t);
             }
@@ -87,7 +87,7 @@ public class TaskListStub implements TaskList {
      * @return listCount
      */
     public int count() {
-        return this.LIST.size();
+        return this.list.size();
     }
 
     /**

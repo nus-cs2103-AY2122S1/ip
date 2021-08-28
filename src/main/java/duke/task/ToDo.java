@@ -9,6 +9,7 @@ import java.time.LocalDate;
  * @version CS2103T AY21/22 S1
  */
 public class ToDo extends Task {
+
     /**
      * Constructor for ToDo duke.task.
      *

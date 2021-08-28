@@ -1,11 +1,11 @@
 package duke.tasklist;
 
-import duke.Ui;
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import duke.Ui;
+import duke.task.Task;
 
 /**
  * TaskList stores the list of tasks.
@@ -18,15 +18,15 @@ public class TaskListDuke implements TaskList {
     private static final String LIST_INTRO = "\t Here are the tasks in your list:";
     private static final String DONE = "\t Nice! I've marked this duke.task as done:\n\t   ";
     private static final String DELETE = "\t Noted. I've removed this duke.task:\n\t   ";
-    private final ArrayList<Task> LIST;
-    private final Ui UI;
+    private ArrayList<Task> list;
+    private Ui ui;
 
     /**
      * Constructor for TaskList.
      */
     public TaskListDuke(ArrayList<Task> list, Ui ui) {
-        this.LIST = list;
-        this.UI = ui;
+        this.list = list;
+        this.ui = ui;
     }
 
     /**
@@ -36,13 +36,13 @@ public class TaskListDuke implements TaskList {
      */
     @Override
     public void addTask(Task task) {
-        this.LIST.add(task);
-        UI.print(ADD);
-        UI.print("\t   " + task);
-        if (this.LIST.size() == 1) {
-            UI.print("\t Now you have 1 duke.task in the list.");
+        this.list.add(task);
+        ui.print(ADD);
+        ui.print("\t   " + task);
+        if (this.list.size() == 1) {
+            ui.print("\t Now you have 1 duke.task in the list.");
         } else {
-            UI.print("\t Now you have " + this.LIST.size() + " tasks in the list.");
+            ui.print("\t Now you have " + this.list.size() + " tasks in the list.");
         }
     }
 
@@ -53,9 +53,9 @@ public class TaskListDuke implements TaskList {
      */
     @Override
     public void setDone(int index) {
-        Task task = this.LIST.get(index);
+        Task task = this.list.get(index);
         task.setDone();
-        UI.print(DONE + task);
+        ui.print(DONE + task);
     }
 
     /**
@@ -64,9 +64,9 @@ public class TaskListDuke implements TaskList {
      * @param index the position of the duke.task to be deleted
      */
     public void delete(int index) {
-        Task task = this.LIST.get(index);
-        this.LIST.remove(index);
-        UI.print(DELETE + task);
+        Task task = this.list.get(index);
+        this.list.remove(index);
+        ui.print(DELETE + task);
 
     }
 
@@ -74,12 +74,12 @@ public class TaskListDuke implements TaskList {
      * Prints the list.
      */
     public void printList() {
-        UI.print(LIST_INTRO);
-        if (this.LIST.size() == 0) {
-            UI.print("\t List is empty");
+        ui.print(LIST_INTRO);
+        if (this.list.size() == 0) {
+            ui.print("\t List is empty");
         } else {
-            for (int i = 0; i < this.LIST.size(); i++) {
-                UI.print("\t " + (i + 1) + "." + this.LIST.get(i));
+            for (int i = 0; i < this.list.size(); i++) {
+                ui.print("\t " + (i + 1) + "." + this.list.get(i));
             }
         }
     }
@@ -91,17 +91,19 @@ public class TaskListDuke implements TaskList {
      */
     public void printListDate(String date) {
         LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        UI.print(LIST_INTRO);
-        if (this.LIST.size() == 0) {
-            UI.print("\t List is empty.");
+        ui.print(LIST_INTRO);
+        if (this.list.size() == 0) {
+            ui.print("\t List is empty.");
         } else {
             int count = 0;
-            for (Task t : this.LIST) {
+            for (Task t : this.list) {
                 if (t.onDate(localDate)) {
-                    UI.print("\t " + (++count) + "." + t);
+                    ui.print("\t " + (++count) + "." + t);
                 }
             }
-            if (count == 0) UI.print("There are no tasks pertaining to the specified date.");
+            if (count == 0) {
+                ui.print("There are no tasks pertaining to the specified date.");
+            }
         }
     }
 
@@ -111,17 +113,19 @@ public class TaskListDuke implements TaskList {
      * @param str the specified substring
      */
     public void printListSearch(String str) {
-        UI.print(LIST_INTRO);
-        if (this.LIST.size() == 0) {
-            UI.print("\t List is empty.");
+        ui.print(LIST_INTRO);
+        if (this.list.size() == 0) {
+            ui.print("\t List is empty.");
         } else {
             int count = 0;
-            for (Task t : this.LIST) {
+            for (Task t : this.list) {
                 if (t.containString(str)) {
-                    UI.print("\t " + (++count) + "." + t);
+                    ui.print("\t " + (++count) + "." + t);
                 }
             }
-            if (count == 0) UI.print("\t Oh no! There are no tasks containing the specified string.");
+            if (count == 0) {
+                ui.print("\t Oh no! There are no tasks containing the specified string.");
+            }
         }
     }
 
@@ -131,6 +135,6 @@ public class TaskListDuke implements TaskList {
      * @return listCount
      */
     public int count() {
-        return this.LIST.size();
+        return this.list.size();
     }
 }

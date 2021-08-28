@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.DukeException;
+import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.Ui;
-
-import java.io.IOException;
 
 /**
  * DeleteCommand is a duke.command which deletes a specific Task from the TaskList.

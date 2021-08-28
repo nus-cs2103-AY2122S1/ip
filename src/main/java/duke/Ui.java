@@ -17,14 +17,17 @@ public class Ui {
     protected static final String MESSAGE_INTRO = "Hello! I'm Duke\n\t What can I do for you?";
     protected static final String MESSAGE_LINE = "\t____________________________________________________________";
 
-    private final InputStreamReader INPUT_STREAM_READER;
-    private final BufferedReader BUFFERED_READER;
-    private final PrintWriter PRINT_WRITER;
+    private InputStreamReader inputStreamReader;
+    private BufferedReader bufferedReader;
+    private PrintWriter printWriter;
 
+    /**
+     * Constructor for Ui.
+     */
     public Ui() {
-        INPUT_STREAM_READER = new InputStreamReader(System.in);
-        BUFFERED_READER = new BufferedReader(INPUT_STREAM_READER);
-        PRINT_WRITER = new PrintWriter(System.out, true);
+        inputStreamReader = new InputStreamReader(System.in);
+        bufferedReader = new BufferedReader(inputStreamReader);
+        printWriter = new PrintWriter(System.out, true);
     }
 
     /**
@@ -33,7 +36,7 @@ public class Ui {
      * @param str the String to be printed
      */
     public void print(String str) {
-        PRINT_WRITER.println(str);
+        printWriter.println(str);
     }
 
     /**
@@ -66,7 +69,7 @@ public class Ui {
      * Reads the user input.
      */
     protected String readCommand() throws IOException {
-        return BUFFERED_READER.readLine();
+        return bufferedReader.readLine();
     }
 
     /**
@@ -75,9 +78,9 @@ public class Ui {
     public void close() throws DukeException {
         try {
             showBye();
-            INPUT_STREAM_READER.close();
-            BUFFERED_READER.close();
-            PRINT_WRITER.close();
+            inputStreamReader.close();
+            bufferedReader.close();
+            printWriter.close();
         } catch (IOException e) {
             throw new DukeException("Unable to close the parser.");
         }

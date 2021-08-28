@@ -1,8 +1,8 @@
 package duke.storage;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * StorageStub is in-charge of loading the saved taskList, and updating it (for testing).
@@ -17,7 +17,7 @@ public class StorageStub implements Storage {
     /**
      * Gives an empty ArrayList for testing.
      *
-     * @return empty ArrayList<Task> for testing
+     * @return empty ArrayList for testing
      */
     @Override
     public ArrayList<Task> load() {

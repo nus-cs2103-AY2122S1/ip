@@ -1,5 +1,11 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 import duke.Ui;
 import duke.storage.StorageStub;
 import duke.task.Deadline;
@@ -7,11 +13,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskListStub;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests the functions in DeleteCommand

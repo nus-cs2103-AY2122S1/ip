@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.Ui;
 
 /**
  * InvalidCommand is a duke.command that is invalid.

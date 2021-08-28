@@ -1,11 +1,12 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.Ui;
 import duke.storage.StorageStub;
 import duke.tasklist.TaskListStub;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests the functions in EventCommand

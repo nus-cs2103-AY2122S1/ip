@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.Ui;
 
 /**
  * This is an abstract class of all the Commands that Duke can perform.

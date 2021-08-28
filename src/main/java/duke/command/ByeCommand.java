@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.Ui;
 
 /**
  * ByeCommand is a duke.command which closes the Duke bot and its readers.

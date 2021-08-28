@@ -1,9 +1,9 @@
 package duke.storage;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Storage is in-charge of loading the saved taskList, and updating it.
