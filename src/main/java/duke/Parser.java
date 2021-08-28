@@ -26,6 +26,8 @@ public class Parser {
             return new DoneCommand(Integer.parseInt(userDescription));
         case "delete":
             return new DeleteCommand(Integer.parseInt(userDescription));
+        case "find":
+            return new FindCommand(userDescription);
         case "exit":
             return new ExitCommand();
         default:
