@@ -26,6 +26,6 @@ public class ExitCommand extends Command {
      * @throws DukeException if the input given is not of the correct format.
      */
     public void execute(TaskList list, UserInterface ui) {
-        ui.showBye();
+        ui.showExitMessage();
     }
 }

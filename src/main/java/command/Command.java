@@ -1,10 +1,9 @@
 package main.java.command;
 
+import java.time.format.DateTimeFormatter;
 import main.java.bot.DukeException;
 import main.java.bot.TaskList;
 import main.java.bot.UserInterface;
-
-import java.time.format.DateTimeFormatter;
 
 /**
  * A class that encapsulates a general Command given to Duke.

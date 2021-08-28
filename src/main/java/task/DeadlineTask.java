@@ -27,10 +27,10 @@ public class DeadlineTask extends Task {
      *
      * @param task The task to be stored within this DeadlineTask object.
      * @param storedTime The String representation of the Deadline "by".
-     * @param done The state of the DeadlineTask object.
+     * @param state The state of the DeadlineTask object.
      */
-    public DeadlineTask(String task, String storedTime, boolean done) {
-        super(task, done);
+    public DeadlineTask(String task, String storedTime, boolean state) {
+        super(task, state);
         this.storedTime = storedTime;
     }
 
@@ -54,7 +54,7 @@ public class DeadlineTask extends Task {
     @Override
     public String convertToStorageFormat() {
         return "D,"
-                + (done ? "1," : "0,")
+                + (state ? "1," : "0,")
                 + task
                 + ","
                 + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime);

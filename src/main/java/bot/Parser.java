@@ -1,20 +1,18 @@
 package main.java.bot;
 
 import main.java.command.Command;
-import main.java.command.ListCommand;
-import main.java.command.DoneCommand;
-import main.java.command.DeleteCommand;
-import main.java.command.TodoCommand;
 import main.java.command.DeadlineCommand;
+import main.java.command.DeleteCommand;
+import main.java.command.DoneCommand;
 import main.java.command.EventCommand;
 import main.java.command.ExitCommand;
+import main.java.command.ListCommand;
+import main.java.command.TodoCommand;
 
 /**
  * A class that handles the parsing of various inputs given to Duke by the user.
  */
 public class Parser {
-
-    private Command command;
 
     /**
      * Returns a Command object according to the input given by the user.

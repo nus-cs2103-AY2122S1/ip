@@ -27,10 +27,10 @@ public class EventTask extends Task {
      *
      * @param task The task to be stored within this EventTask object.
      * @param storedTime The String representation of the Event "at".
-     * @param done The state of the EventTask object.
+     * @param state The state of the EventTask object.
      */
-    public EventTask(String task, String storedTime, boolean done) {
-        super(task, done);
+    public EventTask(String task, String storedTime, boolean state) {
+        super(task, state);
         this.storedTime = storedTime;
     }
 
@@ -54,7 +54,7 @@ public class EventTask extends Task {
     @Override
     public String convertToStorageFormat() {
         return "E,"
-                + (done ? "1," : "0,")
+                + (state ? "1," : "0,")
                 + task
                 + ","
                 + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime);
