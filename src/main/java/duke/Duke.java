@@ -1,6 +1,8 @@
 package duke;
 
 import duke.commands.Command;
+import duke.gui.Main;
+import javafx.application.Application;
 
 /**
  * Encapsulates the main Duke class which contains the main function to run the chat bot
@@ -18,39 +20,36 @@ public class Duke {
         storage = new Storage();
         dth = new DateTimeHandler();
         parser = new Parser();
+        initialize();
     }
 
-    /**
-     * Runs the duke chat bot
-     */
-    public void run() {
+    public void initialize() {
         try {
             storage.loadFile();
             storage.readFromFile(taskList);
         } catch (Exception e) {
-            ui.print("The file could not be created");
+            System.out.println("The file could not be created");
         }
-        ui.welcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            String input = ui.readCommand();
-            Command command = parser.parse(input);
-            if (command == null) {
-                ui.unrecognisedCommand();
-                continue;
-            }
-            command.execute(taskList, storage, ui, dth);
-            isExit = command.isExit();
-            try {
-                storage.writeToFile(taskList);
-            } catch (Exception e) {
-                ui.print("Write Error");
-            }
+    }
+
+    public String getResponse(String input) {
+        Command command = parser.parse(input);
+        if (command == null) {
+            return ui.unrecognisedCommand();
         }
-        ui.goodByeMessage();
+        String returnString = command.execute(taskList, storage, ui, dth);
+        try {
+            storage.writeToFile(taskList);
+        } catch (Exception e) {
+            System.out.println("Write error");
+        }
+        if (command.isExit()) {
+            System.exit(0);
+        }
+        return returnString;
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        Application.launch(Main.class, args);
     }
 }

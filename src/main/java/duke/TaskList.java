@@ -32,15 +32,12 @@ public class TaskList {
      *
      * @return The String containing all the tasks in the task list
      */
-    public String printList() {
-        StringBuilder res = new StringBuilder();
+    public String[] printList() {
+        String[] res = new String[list.size()];
         for (int counter = 1; counter<=list.size(); counter++) {
-            res.append(counter).append(". ").append(list.get(counter - 1));
-            if (counter != list.size()) {
-                res.append("\n     ");
-            }
+            res[counter-1] = counter + ". " + list.get(counter-1);
         }
-        return res.toString();
+        return res;
     }
 
     /**
