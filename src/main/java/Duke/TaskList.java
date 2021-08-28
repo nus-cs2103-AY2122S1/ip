@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.util.List;
 
 public class TaskList {
@@ -12,9 +11,8 @@ public class TaskList {
      * exist and is unable to be created.
      *
      * @param storage Storage object used to read and write tasks from file
-     * @throws IOException if file does not exist and cannot be created
      */
-    public TaskList(Storage storage) throws IOException {
+    public TaskList(Storage storage) {
         this.storage = storage;
         this.tasks = storage.load();
     }
