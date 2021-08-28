@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.tasks.TaskList;
+
 /**
  * Deletes a task from the task list.
  */
@@ -25,6 +27,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public CommandResult execute() {
+        TaskList taskList = getTaskList();
         if (taskNo > taskList.size() || taskNo <= 0) {
             String msg = taskList.size() == 0
                     ? "You don't have any tasks!"

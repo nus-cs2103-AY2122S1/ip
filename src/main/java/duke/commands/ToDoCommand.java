@@ -24,7 +24,7 @@ public class ToDoCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        taskList.add(toDo);
+        getTaskList().add(toDo);
         return new CommandResult("I've added:\n  " + toDo);
     }
 }

@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.tasks.TaskList;
+
 /**
  * Marks a task as done.
  */
@@ -26,6 +28,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public CommandResult execute() {
+        TaskList taskList = getTaskList();
         if (taskNo > taskList.size() || taskNo <= 0) {
             String msg = taskList.size() == 0
                     ? "You don't have any tasks!"

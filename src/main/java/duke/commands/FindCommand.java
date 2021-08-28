@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        List<Task> matches = taskList.find(keyword);
+        List<Task> matches = getTaskList().find(keyword);
         List<String> results = new ArrayList<>();
         results.add("Here are the matching tasks in your list:");
         for (int i = 0; i < matches.size(); i++) {

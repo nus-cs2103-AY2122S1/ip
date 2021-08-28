@@ -27,7 +27,7 @@ public class Parser {
      * @return The command based on the user input.
      */
     public Command parse(String text) {
-        String[] tokens = text.split(" ", 2);   // split at the first white space
+        String[] tokens = text.split(" ", 2); // split at the first white space
         Command command = parseTokens(tokens);
         return command;
     }
@@ -155,7 +155,7 @@ public class Parser {
             LocalDateTime by = LocalDateTime.parse(args[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
             return new DeadlineCommand(args[0], by);
         } catch (DateTimeParseException e) {
-            return new InvalidCommand("I cannot understand the date :( Please format it as DD-MM-YYYY hhmm (24hr time)");
+            return new InvalidCommand("I can't understand the date :( Please format it as DD-MM-YYYY hhmm (24hr time)");
         }
     }
 
@@ -182,8 +182,8 @@ public class Parser {
             }
             return new EventCommand(args[0], at, end);
         } catch (DateTimeParseException e) {
-            return new InvalidCommand("I cannot understand the date :( " +
-                    "Please format it as DD-MM-YYYY hhmm[ to DD-MM-YYY hhmm] (Time in 24hr format)");
+            return new InvalidCommand("I cannot understand the date :( "
+                    + "Please format it as DD-MM-YYYY hhmm[ to DD-MM-YYY hhmm] (Time in 24hr format)");
         }
     }
 

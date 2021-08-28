@@ -28,7 +28,7 @@ public class EventCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        taskList.add(event);
+        getTaskList().add(event);
         return new CommandResult("I've added:\n  " + event);
     }
 }

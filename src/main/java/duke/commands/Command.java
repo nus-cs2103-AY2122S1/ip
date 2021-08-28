@@ -8,7 +8,11 @@ import duke.tasks.TaskList;
 public abstract class Command {
 
     /** The task list to be operated on. */
-    TaskList taskList;
+    private TaskList taskList;
+
+    TaskList getTaskList() {
+        return taskList;
+    }
 
     /**
      * Sets the task list that this command operates on.
