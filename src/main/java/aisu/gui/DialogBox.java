@@ -10,9 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -23,7 +27,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayIcon;
 
     private DialogBox(String text, Image img) {
         try {
@@ -36,7 +40,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setImage(img);
+        displayIcon.setFill(new ImagePattern(img));
+        displayIcon.setEffect(new DropShadow(+8d, 0d, 0d, Color.GRAY));
     }
 
     /**
@@ -49,10 +54,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialogue based on user's input.
+     * @param text The user's input.
+     * @param img The profile photo of the user.
+     * @return The DialogBox.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a dialogue for Aisu's response.
+     * @param text Aisu's response.
+     * @param img The profile photo of Aisu.
+     * @return The DialogBox.
+     */
     public static DialogBox getAisuDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
