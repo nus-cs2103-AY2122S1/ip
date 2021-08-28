@@ -6,11 +6,12 @@ public abstract class Command {
         }
 
         String command = output[0];
-        Command commandType;
+        Command commandType = null;
 
         switch (command) {
             case "bye":
                 commandType = new ExitCommand();
+                break;
             case "done":
                 commandType = new DoneCommand(Integer.parseInt(output[1]) - 1);
                 break;
@@ -23,6 +24,7 @@ public abstract class Command {
 
             case "event":
                 commandType = new AddCommand(input);
+                break;
             default:
                 throw new InvalidCommand();
         }
