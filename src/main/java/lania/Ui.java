@@ -12,14 +12,14 @@ public class Ui {
     /**
      * Displays a message when the user adds a task.
      *
-     * @param taskList The resulting TaskList.
-     * @param t Task that has been added.
+     * @param tasks The resulting TaskList.
+     * @param t The ask that has been added.
      */
-    public void showUpdateMessage(TaskList taskList, Task t) {
+    public void showUpdateMessage(TaskList tasks, Task t) {
         System.out.println("Lania has added: ");
         System.out.println(t);
         System.out.println("Great! Now you have "
-                + taskList.size() + (taskList.size() == 1 ? " task" : " tasks") + " in your list.");
+                + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in your list.");
     }
 
     public void showGreetingMessage() {
@@ -34,37 +34,37 @@ public class Ui {
     /**
      * Message that displays all tasks by the user.
      *
-     * @param taskList Contains the user's task list.
+     * @param tasks The user's list of tasks.
      */
-    public void showListMessage(TaskList taskList) {
+    public void showListMessage(TaskList tasks) {
         System.out.println("You have the following task(s):");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(i + 1 + "." + taskList.get(i));
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println(i + 1 + "." + tasks.get(i));
         }
     }
 
     /**
      * Message that shows after the user completes a task.
      *
-     * @param taskList Contains the user's task list.
-     * @param i Index of the task the user has completed.
+     * @param tasks The user's list of tasks.
+     * @param i The index of the task the user has completed.
      */
-    public void showCompleteMessage(TaskList taskList, int i) {
+    public void showCompleteMessage(TaskList tasks, int i) {
         System.out.println("Good job! Lania has marked this task as done:");
-        System.out.println(taskList.get(i));
+        System.out.println(tasks.get(i));
     }
 
     /**
      * Message that shows after the user deletes a task.
      *
-     * @param taskList taskList Contains the user's task list.
-     * @param t Index of the task the user has deleted.
+     * @param tasks taskList Contains the user's task list.
+     * @param task Index of the task the user has deleted.
      */
-    public void showRemoveMessage(TaskList taskList, Task t) {
+    public void showRemoveMessage(TaskList tasks, Task task) {
         System.out.println("Ok, Lania has removed this task:");
-        System.out.println(t);
+        System.out.println(task);
         System.out.println("Great! Now you have "
-                + taskList.size() + (taskList.size() == 1 ? " task" : " tasks") + " in your list.");
+                + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in your list.");
     }
 
     public void showDateTimeException() {

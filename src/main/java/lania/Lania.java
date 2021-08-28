@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Lania {
 
     /** Contains the task list */
-    private TaskList taskList;
+    private TaskList tasks;
     /**  Deals with interactions with the user */
     private Ui ui;
     /** Deals with loading tasks from the file and saving tasks in the file */
@@ -22,7 +22,7 @@ public class Lania {
     /**
      * Constructor for the Lania object.
      *
-     * @param filePath location of the file in which data is stored
+     * @param filePath The location of the file in which data is stored
      */
     public Lania(String filePath) {
         ui = new Ui();
@@ -32,16 +32,16 @@ public class Lania {
     /**
      * Store user input in the task list and display a message.
      *
-     * @param t Task provided by the user.
+     * @param t The task provided by the user.
      */
     public void update(Task t) {
-        taskList.update(t);
+        tasks.update(t);
         try {
-            storage.save(taskList);
+            storage.save(tasks);
         } catch (IOException e) {
             ui.showError();
         }
-        ui.showUpdateMessage(taskList, t);
+        ui.showUpdateMessage(tasks, t);
     }
 
     /**
@@ -50,13 +50,13 @@ public class Lania {
      * @param i The task number to be completed.
      */
     public void complete(int i) {
-        taskList.complete(i);
+        tasks.complete(i);
         try {
-            storage.save(taskList);
+            storage.save(tasks);
         } catch (IOException e) {
             ui.showError();
         }
-        ui.showCompleteMessage(taskList, i);
+        ui.showCompleteMessage(tasks, i);
     }
 
     /**
@@ -65,9 +65,9 @@ public class Lania {
      * @param i The task number to be completed.
      */
     public void remove(int i) {
-        ui.showRemoveMessage(taskList, taskList.remove(i));
+        ui.showRemoveMessage(tasks, tasks.remove(i));
         try {
-            storage.save(taskList);
+            storage.save(tasks);
         } catch (IOException e) {
             ui.showError();
         }
@@ -79,7 +79,7 @@ public class Lania {
      * @param s The keyword to match.
      */
     public void find(String s) {
-        TaskList temp = taskList.find(s);
+        TaskList temp = tasks.find(s);
         ui.showListMessage(temp);
     }
 
@@ -95,12 +95,12 @@ public class Lania {
      */
     public void run() {
         try {
-            taskList = storage.load();
+            tasks = storage.load();
         } catch (IOException e) {
             ui.showError();
             e.printStackTrace();
         }
-        ui.showListMessage(taskList);
+        ui.showListMessage(tasks);
         ui.showGreetingMessage();
         Scanner s = new Scanner(System.in);
         String input = s.nextLine();
@@ -108,7 +108,7 @@ public class Lania {
         while(!command.equals("bye")) {
             try {
                 if (command.equals("list")) {
-                    ui.showListMessage(taskList);
+                    ui.showListMessage(tasks);
                 } else if (command.equals("find")) {
                     find(new Parser().parseTaskDescription(input));
                 } else if (command.equals("done")) {

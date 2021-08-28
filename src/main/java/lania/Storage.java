@@ -24,7 +24,7 @@ public class Storage {
     /**
      * Constructor for the storage class.
      *
-     * @param filePath path of the file to write or read from.
+     * @param filePath The path of the file to write or read from.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -43,7 +43,7 @@ public class Storage {
         if (f.createNewFile()) {
             return new TaskList();
         } else {
-            TaskList taskList = new TaskList();
+            TaskList tasks = new TaskList();
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String next = s.nextLine();
@@ -59,23 +59,23 @@ public class Storage {
                 if (split[1].equals("X")) {
                     t.markAsDone();
                 }
-                taskList.update(t);
+                tasks.update(t);
             }
             s.close();
-            return taskList;
+            return tasks;
         }
     }
 
     /**
-     * This method rewrites the entire file given a
-     * TaskList line by line using the appendToFile method.
+     * Rewrites the entire file with given tasks,
+     * line by line using the appendToFile method.
      *
-     * @param taskList The user's TaskList.
+     * @param tasks The user's TaskList.
      * @throws IOException If unable to append to file.
      */
-    public void save(TaskList taskList) throws IOException{
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
+    public void save(TaskList tasks) throws IOException {
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
             appendToFile(filePath, task.getStringFormat(), i);
         }
     }
@@ -84,8 +84,8 @@ public class Storage {
      * Writes if it is the first task, and appends if otherwise
      * so that the entire file can be rewritten.
      *
-     * @param filePath Location of the file to write to.
-     * @param textToAppend Text that needs to be added.
+     * @param filePath The location of the file to write to.
+     * @param textToAppend The text that needs to be added.
      * @param i Checks whether it is the first task.
      * @throws IOException If the program cannot create or write to the file indicated.
      */

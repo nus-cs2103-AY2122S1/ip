@@ -8,34 +8,34 @@ import java.util.ArrayList;
 public class TaskList {
 
     /** ArrayList collection used to contain task list */
-    private ArrayList<Task> taskArrayList;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList. Initialises an empty
      * ArrayList of tasks.
      */
     public TaskList() {
-        this.taskArrayList = new ArrayList<Task>();
+        this.tasks = new ArrayList<Task>();
     }
 
     /**
      * Adds a task to the task list.
      *
-     * @param t The task to be added.
+     * @param task The task to be added.
      */
-    public void update(Task t) {
-        taskArrayList.add(t);
+    public void update(Task task) {
+        tasks.add(task);
     }
 
     /**
      * Marks a task in the task list as done
      * with the given index.
      *
-     * @param i Index of the task to be completed.
+     * @param i The index of the task to be completed.
      */
     public void complete(int i) {
         i--;
-        taskArrayList.get(i).markAsDone();
+        tasks.get(i).markAsDone();
     }
 
     /**
@@ -46,28 +46,28 @@ public class TaskList {
      */
     public Task remove(int i) {
         i--;
-        Task t = taskArrayList.get(i);
-        taskArrayList.remove(i);
-        return t;
+        Task task = tasks.get(i);
+        tasks.remove(i);
+        return task;
     }
 
     /**
      * Gets the size of the task list.
      *
-     * @return Size of task list.
+     * @return The size of task list.
      */
     public int size() {
-        return taskArrayList.size();
+        return tasks.size();
     }
 
     /**
      * Gets the task specified by the index.
      *
      * @param i Index of task.
-     * @return Task at index i.
+     * @return The task at index i.
      */
     public Task get(int i) {
-        return taskArrayList.get(i);
+        return tasks.get(i);
     }
 
     /**
@@ -76,15 +76,15 @@ public class TaskList {
      * current list.
      *
      * @param s The keyword to match.
-     * @return TaskList with only matching tasks.
+     * @return The new task list with only matching tasks.
      */
     public TaskList find(String s) {
-        TaskList temp = new TaskList();
-        for (int i = 0; i < taskArrayList.size(); i++) {
-            if (taskArrayList.get(i).toString().contains(s)) {
-                temp.update(taskArrayList.get(i));
+        TaskList tempTasks = new TaskList();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(s)) {
+                tempTasks.update(tasks.get(i));
             }
         }
-        return temp;
+        return tempTasks;
     }
 }

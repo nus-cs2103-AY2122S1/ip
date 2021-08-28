@@ -11,7 +11,7 @@ public class Parser {
     /**
      * Checks the first word of the given input.
      *
-     * @param command
+     * @param command The command given to the Lania.
      * @return The first word of the given input.
      */
     public String parseCommand(String command) {
@@ -23,8 +23,8 @@ public class Parser {
      * Checks the description of the given task,
      * provided that the type of task is specified.
      *
-     * @param command
-     * @return The description of the given task
+     * @param command The command given to the Lania.
+     * @return The description of the given task.
      * @throws LaniaEmptyDescriptionException If the task description is not given.
      */
     public String parseTaskDescription(String command) throws LaniaEmptyDescriptionException {
@@ -39,7 +39,7 @@ public class Parser {
     /**
      * Checks if the user input deadline is accompanied with the date and time.
      *
-     * @param command
+     * @param command The command given to the Lania.
      * @return An array of strings containing the task description and its date and time.
      * @throws LaniaEmptyDescriptionException If the date and time is not provided.
      */
@@ -55,7 +55,7 @@ public class Parser {
     /**
      * Similar to parseDeadline, except it works for Event tasks.
      *
-     * @param command
+     * @param command The command given to the Lania.
      * @return An array of strings containing the task description and its date and time.
      * @throws LaniaEmptyDescriptionException If the date and time is not provided.
      */
@@ -72,7 +72,7 @@ public class Parser {
      * Gets the index of the task that the user wants to
      * perform an operation on.
      *
-     * @param command
+     * @param command The command given to the Lania.
      * @return The index of a task.
      */
     public int getIndex(String command) {
