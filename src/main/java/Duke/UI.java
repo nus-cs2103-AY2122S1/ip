@@ -6,13 +6,15 @@ import java.util.Scanner;
  * UI for Duke.
  */
 public class UI {
-
-    private final static String ROBOT_ICON = "[~o_o~]";
-    private final static String BYE = "bye";
-    private final static String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-    private final static String ROBOT_TEXT_SPACE = "         ";
+    private static final String ROBOT_ICON = "[~o_o~]";
+    private static final String LINE = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            + "~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    private static final String ROBOT_TEXT_SPACE = "         ";
     private final Scanner myScanner;
 
+    public UI() {
+        this.myScanner = new Scanner(System.in);
+    }
     /**
      * Prints greeting text of the robotFriend.
      */
@@ -91,10 +93,6 @@ public class UI {
     /**
      * Constructs a UI.
      */
-    public UI() {
-        this.myScanner = new Scanner(System.in);
-    }
-
     public String readInput() {
         return myScanner.nextLine();
     }
