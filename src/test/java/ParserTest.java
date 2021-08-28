@@ -12,7 +12,7 @@ public class ParserTest {
 
     @Test
     public void testIfValidDateTrue() {
-        Parser parser = new Parser(new Duke("src/main/java/data/list.txt"));
+        Parser parser = new Parser(new Duke());
         boolean isValidDate = parser.isValid("2019-01-01");
         assertTrue(isValidDate);
     }

@@ -11,10 +11,10 @@ public class Ui {
 
     protected static final String FRIENDGREETING = "(*^_^*) Friend says: \n";
     private static final String LOGO =
-         " _____       _                    _        \n"
-        + "|  ___|  __  _  ___   _,____     | |       \n"
-        + "| |_  |/  _|| |/ _ \\ |  __  |____| |       \n"
-        + "| __| | /   | |  __/ | / \\  |  __  |       \n"
+         " _____     _                          _        \n"
+        + "|  ___|  __  _  ___   _,___       | |       \n"
+        + "| |_  |/  _|| |/ _ \\  |  __  |_____| |       \n"
+        + "| __| | /   | |  __/  | / \\  |   __   |       \n"
         + "|_|   |_|   |_|\\____ |_|  |_|______|       \n";
 
     private final Scanner sc;
@@ -33,39 +33,46 @@ public class Ui {
     /**
      * Prints on user interface the output for Welcome Message.
      */
-    public void showWelcomeMessage() {
-        System.out.println("Hi there! Start chatting with your new \n" + LOGO);
-        System.out.println(FRIENDGREETING + "What would you like to do today?");
+    public String showWelcomeMessage() {
+        return "Hi there! Start chatting with your new \n" + LOGO
+            + FRIENDGREETING + "What would you like to do today?";
     }
 
     /**
      * Prints on user interface the output for Goodbye Message.
      */
-    public void showGoodbyeMessage() {
-        System.out.println(FRIENDGREETING + "See you again, my friend!");
+    public String showGoodbyeMessage() {
+        return FRIENDGREETING + "See you again, my friend!";
     }
 
     /**
      * Prints on user interface the output for Loading Error.
      */
-    public void showLoadingError() {
-        System.out.println(FRIENDGREETING + "File not found");
+    public String showLoadingError() {
+        return FRIENDGREETING + "File not found";
+    }
+
+    /**
+     * Prints on user interface the output for corresponding Duke Error.
+     */
+    public String showDukeError(DukeException error) {
+        return error.toString();
     }
 
     /**
      * Prints on user interface the output for loaded list from .txt file.
      */
-    public void showListLoad() {
-        System.out.println(FRIENDGREETING + "These are your existing tasks!");
-        System.out.println(duke.getTasks().printList());
+    public String showListLoad() {
+        return FRIENDGREETING + "These are your existing tasks!\n"
+            + duke.getTasks().printList();
     }
 
     /**
      * Prints on user interface the output for list updated.
      */
-    public void showList() {
-        System.out.println(FRIENDGREETING + "Your to-do list has the following tasks: \n");
-        System.out.println(duke.getTasks().printList());
+    public String showList() {
+        return FRIENDGREETING + "Your to-do list has the following tasks: \n"
+            + duke.getTasks().printList();
     }
 
     /**
@@ -73,19 +80,18 @@ public class Ui {
      *
      * @param removed String description of removed task.
      */
-    public void showRemoveTask(String removed) {
-        System.out.println(FRIENDGREETING + "removed the following task from your to-do list: \n" + removed);
-        System.out.println("Now you have " + duke.getTasks().getList().size() + " tasks in the list.");
+    public String showRemoveTask(String removed) {
+        return FRIENDGREETING + "removed the following task from your to-do list: \n" + removed
+            + "\nNow you have " + duke.getTasks().getList().size() + " tasks in the list.";
     }
 
     /**
      * Prints on user interface the output for Task Added.
      */
-    public void showAddTask() {
+    public String showAddTask() {
         int listSize = duke.getTasks().getList().size();
-        System.out.println(FRIENDGREETING + "added: " + duke.getTasks().getList().get(listSize - 1).toString()
-            + " to your to-do list!");
-        System.out.println("Now you have " + listSize + " tasks in the list.");
+        return FRIENDGREETING + "added: " + duke.getTasks().getList().get(listSize - 1).toString()
+            + " to your to-do list!\n" + "Now you have " + listSize + " tasks in the list.";
     }
 
     /**
@@ -93,8 +99,8 @@ public class Ui {
      *
      * @param description String description of done task.
      */
-    public void showDoneTask(String description) {
-        System.out.println(FRIENDGREETING + "Hooray! You've completed task \n[X] " + description);
+    public String showDoneTask(String description) {
+        return FRIENDGREETING + "Hooray! You've completed task \n[X] " + description;
     }
 
     /**
@@ -102,8 +108,8 @@ public class Ui {
      *
      * @param description String description of already done task.
      */
-    public void showAlreadyDoneTask(String description) {
-        System.out.println(FRIENDGREETING + description + " has already been done! :)");
+    public String showAlreadyDoneTask(String description) {
+        return FRIENDGREETING + description + " has already been done! :)";
     }
 
     /**
@@ -111,29 +117,29 @@ public class Ui {
      *
      * @param resultsArray ArrayList of <code>Task</code> results from search.
      */
-    public void showSearchResults(ArrayList<Task> resultsArray) {
-        System.out.println(FRIENDGREETING + "Here are the matching tasks in your list:");
+    public String showSearchResults(ArrayList<Task> resultsArray) {
+        String result = FRIENDGREETING + "Here are the matching tasks in your list:\n";
         int listSize = resultsArray.size();
         for (int i = 0; i < listSize; i++) {
             Task currTask = resultsArray.get(i);
             int index = i + 1;
-            System.out.println(index + "." + currTask.toString());
+            result = result + index + "." + currTask.toString() + "\n";
         }
+        return result;
     }
 
     /**
      * Prints on user interface the output for No Search Results.
      */
-    public void showNoSearchResults() {
-        System.out.println(FRIENDGREETING + "There are no tasks that match your search.");
-
+    public String showNoSearchResults() {
+        return FRIENDGREETING + "There are no tasks that match your search.";
     }
 
     /**
      * Prints on user interface the output for list saved to .txt file.
      */
-    public void saveList() {
-        System.out.println("Saving file");
+    public String saveList() {
+        return "Saving file";
     }
 
     /**

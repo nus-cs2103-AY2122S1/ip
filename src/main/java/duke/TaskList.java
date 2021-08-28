@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import duke.Task.Category;
+
 /**
  * Represents a list that keeps track of the <code>Task</code>s that the user has.
  */
@@ -42,15 +44,16 @@ public class TaskList {
 
     /**
      * Adds a <code>Task</code> to the <code>TaskList</code>.
-     *
-     * @param description of the Task.
+     *  @param description of the Task.
      * @param time        of the Task if it is a Deadline or Event.
      * @param category    in the <code>Task.CATEGORY</code> enumeration. Either ToDo, Deadline or Event.
      * @param isDone      boolean indicating if <code>Task</code> has been completed yet.
      * @param hasNotif    boolean indicating if <code>Task</code> addition should be printed to <code>Ui</code>.
+     * @return
      */
-    public void createTask(String description, String time, Task.Category category,
-            boolean isDone, boolean hasNotif) {
+    public String createTask(String description, String time, Category category,
+                             boolean isDone, boolean hasNotif) {
+        String response = "";
         switch (category) {
         case TODO:
             list.add(new ToDo(description, isDone, hasNotif));
@@ -64,13 +67,14 @@ public class TaskList {
         default:
         }
         if (hasNotif) {
-            duke.getUi().showAddTask();
+            response = response + "\n" + duke.getUi().showAddTask();
             try {
-                duke.getStorage().saveListToFile();
+                response = response + "\n" + duke.getStorage().saveListToFile();
             } catch (IOException e) {
-                duke.getUi().showLoadingError();
+                response = response + "\n" + duke.getUi().showLoadingError();
             }
         }
+        return response;
     }
 
     /**
@@ -82,8 +86,9 @@ public class TaskList {
      * @param isDone      boolean indicating if <code>Task</code> has been completed yet.
      * @param hasNotif    boolean indicating if <code>Task</code> addition should be printed to <code>Ui</code>.
      */
-    public void createTaskDate(String description, LocalDate time, Task.Category category,
+    public String createTaskDate(String description, LocalDate time, Task.Category category,
             boolean isDone, boolean hasNotif) {
+        String response = "";
         switch (category) {
         case DEADLINE:
             list.add(new Deadline(description, time, isDone, hasNotif));
@@ -94,12 +99,13 @@ public class TaskList {
         default:
         }
         if (hasNotif) {
-            duke.getUi().showAddTask();
+            response = response + "\n" + duke.getUi().showAddTask();
             try {
-                duke.getStorage().saveListToFile();
+                response = response + "\n" + duke.getStorage().saveListToFile();
             } catch (IOException e) {
-                duke.getUi().showLoadingError();
+                response = response + "\n" + duke.getUi().showLoadingError();
             }
         }
+        return response;
     }
 }
