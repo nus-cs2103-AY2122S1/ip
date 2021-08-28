@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Main class. Starts the program.
+ */
 public class Duke {
 
     private Storage storage;
@@ -22,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to start running the program and start taking user input.
+     */
     public void run() {
         Scanner scan = new Scanner(System.in);
         Parser myParser = new Parser();
@@ -38,6 +44,10 @@ public class Duke {
         Ui.showTasksSaved();
     }
 
+    /**
+     * Main method, pretty self-explanatory.
+     * @param args arguments
+     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

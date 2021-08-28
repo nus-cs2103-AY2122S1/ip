@@ -3,6 +3,10 @@ package duke;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
+/**
+ * This class represents a task that is a todo.
+ */
 public class Todo extends Task {
     public Todo(String description) throws DukeException {
         super(description);
@@ -11,12 +15,18 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Writes to a file using a FileWriter.
+     *
+     * @param myWriter the given FileWriter
+     * @throws IOException ...
+     */
+    public void writeToFile(FileWriter myWriter) throws IOException {
+        myWriter.write("todo" + description);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();
-    }
-
-    public void writeToFile(FileWriter myWriter) throws IOException {
-        myWriter.write("todo" + description);
     }
 }
