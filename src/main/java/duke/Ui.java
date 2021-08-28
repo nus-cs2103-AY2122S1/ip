@@ -113,7 +113,7 @@ public class Ui {
 
     /**
      * Shows an error message when description of task is empty
-     * @return
+     * @return a String describing the error
      */
     public String emptyDescriptionError(){
         return "\n" + line + "\n☹ OOPS!!! The description cannot be empty.\n" + line;
