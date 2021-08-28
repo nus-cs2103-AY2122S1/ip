@@ -1,8 +1,9 @@
 package yoyo.task;
 
+import java.time.LocalDateTime;
+
 import yoyo.utility.Separator;
 
-import java.time.LocalDateTime;
 
 /**
  * A subclass of duke.task.Task of deadline type.
@@ -10,11 +11,23 @@ import java.time.LocalDateTime;
 public class Deadline extends Task {
     private LocalDateTime datetime;
 
+    /**
+     * Constructor for the Deadline class with name and datetime parameters.
+     *
+     * @param name Name of Deadline.
+     * @param datetime Datetime of Deadline.
+     */
     public Deadline(String name, LocalDateTime datetime) {
         super(name);
         this.datetime = datetime;
     }
 
+    /**
+     * Constructor for the Deadline class with name, datetime and isDone parameters.
+     *
+     * @param name Name of Deadline.
+     * @param datetime Datetime of Deadline.
+     */
     public Deadline(String name, LocalDateTime datetime, boolean isDone) {
         super(name, isDone);
         this.datetime = datetime;

@@ -1,9 +1,9 @@
 package yoyo.core;
 
+import java.util.Scanner;
+
 import yoyo.task.Task;
 import yoyo.task.TaskList;
-
-import java.util.Scanner;
 
 public class Ui {
     private final Scanner scanner;
