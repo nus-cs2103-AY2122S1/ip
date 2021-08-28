@@ -20,7 +20,9 @@ public class Ui {
     public static final String MESSAGE_DELETE_TASK = "Deleted the following task:\n"
             + "  %1$s\n"
             + "You have %2$d task(s) in the list";
-    public static final String MESSAGE_LIST_TASK = "Your current task(s):\n"
+    public static final String MESSAGE_LIST_TASKS = "Your current task(s):\n"
+            + "%1$s";
+    public static final String MESSAGE_FOUND_TASKS = "Found the following task(s):\n"
             + "%1$s";
     public static final String MESSAGE_MARK_TASK = "Marked task %1$d as done";
     public static final String MESSAGE_LOADING_SUCCESS = "Data loaded";
@@ -60,7 +62,11 @@ public class Ui {
     }
 
     public void sayList(TaskList tl) {
-        this.say(String.format(MESSAGE_LIST_TASK, tl.toString()));
+        this.say(String.format(MESSAGE_LIST_TASKS, tl.toString()));
+    }
+
+    public void sayFound(TaskList tl) {
+        this.say(String.format(MESSAGE_FOUND_TASKS, tl.toString()));
     }
 
     public void sayLoadingSuccess() {

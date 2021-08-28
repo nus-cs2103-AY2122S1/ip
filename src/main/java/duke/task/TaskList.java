@@ -3,12 +3,17 @@ package duke.task;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     public String serialize() {
@@ -41,6 +46,14 @@ public class TaskList {
 
     public Task getTask(int index) {
         return this.taskList.get(index);
+    }
+
+    public TaskList filter(String keyword) {
+        List<Task> filteredTasks = this.taskList.stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .collect(Collectors.toList());
+
+        return new TaskList(filteredTasks);
     }
 
     public int size() {

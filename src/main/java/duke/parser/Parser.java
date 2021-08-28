@@ -4,9 +4,9 @@ import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
-
 import duke.exception.DukeException;
 
 import duke.task.Deadline;
@@ -20,6 +20,9 @@ public class Parser {
             return new ListCommand();
         } else if (input.equals("bye")) {
             return new ExitCommand();
+        } else if (input.startsWith("find ")) {
+            String keyword = input.substring(5);
+            return new FindCommand(keyword);
         } else if (input.startsWith("done ")) {
             int index = Integer.parseInt(input.substring(5));
             return new MarkCommand(index);
