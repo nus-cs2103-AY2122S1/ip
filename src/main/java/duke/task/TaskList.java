@@ -31,7 +31,7 @@ public class TaskList {
     public void loadTasks(File file) throws StorageException {
         try {
             Scanner sc = new Scanner(file);
-            while(sc.hasNext()) {
+            while (sc.hasNext()) {
                 String taskString = sc.nextLine();
                 String[] splitTaskString = taskString.split(Task.STORAGE_DELIMITER);
                 Task task = null;
@@ -49,7 +49,7 @@ public class TaskList {
                     break;
                 }
 
-                if(task != null) {
+                if (task != null) {
                     tasks.add(task);
                 }
             }
@@ -81,9 +81,9 @@ public class TaskList {
             Task task = tasks.get(taskIndex);
             task.markDone();
             return task;
-        } catch(IndexOutOfBoundsException e) {
-            throw new MalformedCommandException("You only have " + numTasks() + " tasks currently. "
-                    + "Please provide a task index from that list");
+        } catch (IndexOutOfBoundsException e) {
+            throw new MalformedCommandException("You only have " + numTasks() + " tasks currently. " +
+                "Please provide a task index from that list");
         }
     }
 
@@ -96,9 +96,9 @@ public class TaskList {
     public Task delete(int taskIndex) throws MalformedCommandException {
         try {
             return tasks.remove(taskIndex);
-        } catch(IndexOutOfBoundsException e) {
-            throw new MalformedCommandException("You only have " + numTasks() + " tasks currently. "
-                    + "Please provide a task index from that list");
+        } catch (IndexOutOfBoundsException e) {
+            throw new MalformedCommandException("You only have " + numTasks() + " tasks currently. " +
+                "Please provide a task index from that list");
         }
     }
 
@@ -114,7 +114,7 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder taskListStringRepresentation = new StringBuilder();
-        for(int i = 0; i < numTasks(); i++) {
+        for (int i = 0; i < numTasks(); i++) {
             taskListStringRepresentation.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
         return taskListStringRepresentation.toString();
@@ -127,7 +127,7 @@ public class TaskList {
      */
     public String toStorageFormat() {
         StringBuilder taskStorageRepresentation = new StringBuilder();
-        for(int i = 0; i < numTasks(); i++) {
+        for (int i = 0; i < numTasks(); i++) {
             taskStorageRepresentation.append(tasks.get(i).toStorageFormat()).append("\n");
         }
         return taskStorageRepresentation.toString();

@@ -98,9 +98,9 @@ public class Ui {
      */
     private void display(String... messages) {
         printWithIndent(BORDER);
-        for(String message : messages){
+        for (String message : messages){
             String[] newLineSeparated = message.split("\n");
-            for(String line : newLineSeparated) {
+            for (String line: newLineSeparated) {
                 printWithIndent(line);
             }
         }

@@ -21,9 +21,9 @@ public class AddTodoCommand extends AddCommand {
             String description = userInput.split(" ", 2)[1];
             Task task = new Todo(description);
             return new AddTodoCommand(task);
-        } catch(NullPointerException | ArrayIndexOutOfBoundsException e) {
-            throw new MalformedCommandException("Creating an todo needs to follow the following format: "
-                    + "todo [description]");
+        } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+            throw new MalformedCommandException("Creating an todo needs to follow the following format: " +
+                "todo [description]");
         }
     }
 
