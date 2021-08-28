@@ -14,7 +14,7 @@ public class Parser {
      * @throws NoDescriptionError If user inputs nothing after a task command.
      * @throws UnknownCommandError If user inputs a command that is outside the scope of the chatbot
      */
-    public static void parse(String instruction, Ui ui, TaskList tasks) throws NoDescriptionError, UnknownCommandError {
+    public static String parse(String instruction, Ui ui, TaskList tasks) throws NoDescriptionError, UnknownCommandError {
         ui.printLineBreak();
         String[] splitInstructions = instruction.split(" ", 2);
         String operative = splitInstructions[0];
@@ -37,25 +37,21 @@ public class Parser {
         }
         switch (command) {
         case list:
-            ui.printArrayList(tasks);
-            break;
+            return ui.printArrayList(tasks);
         case find:
             keyword = splitInstructions[1];
             TaskList filtered = tasks.findMatchingTasks(keyword);
-            ui.findTaskMessage(filtered);
-            break;
+            return ui.findTaskMessage(filtered);
         case done:
             item = splitInstructions[1];
             taskPointer = Integer.parseInt(item) - 1;
             tasks.get(taskPointer).markAsDone();
-            ui.completeTaskMessage(tasks.get(taskPointer));
-            break;
+            return ui.completeTaskMessage(tasks.get(taskPointer));
         case todo:
             item = splitInstructions[1];
             toAdd = new Todo(item);
             tasks.addTask(toAdd);
-            ui.addedTaskMessage(toAdd, tasks.getSize());
-            break;
+            return ui.addedTaskMessage(toAdd, tasks.getSize());
         case event:
             item = splitInstructions[1];
             temp = item.split("/at ");
@@ -63,14 +59,12 @@ public class Parser {
             description = temp[0];
             toAdd = new Event(description, date);
             tasks.addTask(toAdd);
-            ui.addedTaskMessage(toAdd, tasks.getSize());
-            break;
+            return ui.addedTaskMessage(toAdd, tasks.getSize());
         case delete:
             item = splitInstructions[1];
             taskPointer = Integer.parseInt(item) - 1;
             Task deleted = tasks.delete(taskPointer);
-            ui.deleteTaskMessage(deleted, tasks.getSize());
-            break;
+            return ui.deleteTaskMessage(deleted, tasks.getSize());
         case deadline:
             item = splitInstructions[1];
             temp = item.split("/by ");
@@ -78,10 +72,10 @@ public class Parser {
             description = temp[0];
             toAdd = new Deadline(description, date);
             tasks.addTask(toAdd);
-            ui.addedTaskMessage(toAdd, tasks.getSize());
-            break;
+            return ui.addedTaskMessage(toAdd, tasks.getSize());
         default:
             break;
         }
+        return "";
     }
 }

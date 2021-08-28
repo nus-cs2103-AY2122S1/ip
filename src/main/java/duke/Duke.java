@@ -1,5 +1,20 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+
 /**
  * Class that is a chat bot that can store tasks.
  */
@@ -9,6 +24,14 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    public Duke() {
+    }
 
     /**
      * Class Constructor based on where the storage file path.
@@ -66,4 +89,26 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            if (checkBye(input)) {
+                return ui.sayFarewell();
+            }
+            try {
+                return Parser.parse(input, this.ui, this.tasks);
+            } catch (DukeException e) {
+                return ui.printErrorMessage(e);
+            }
+        } catch (Exception e) {
+            System.out.println("something wrong here");
+        }
+        return "";
+    }
 }
+

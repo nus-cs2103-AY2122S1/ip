@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final Scanner USER_INPUT = new Scanner(System.in);
-    private static final String LINE_BREAKER = "____________________________________________________________";
+    private static final String LINE_BREAKER = "______________________________________________________";
     private static final String GREETING = "Hello! I'm Duke\n" + "What can I do for you?";
     private static final String FAREWELL = "Bye. Hope to see you again soon!";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:";
@@ -19,8 +19,8 @@ public class Ui {
     /**
      * Prints a message indicating file loading error.
      */
-    public void showLoadingError() {
-        System.out.println("Can't load saved file");
+    public String showLoadingError() {
+        return "Can't load saved file";
     }
 
     /**
@@ -35,8 +35,8 @@ public class Ui {
     /**
      * Prints a line for separation.
      */
-    public void printLineBreak () {
-        System.out.println(LINE_BREAKER);
+    public String printLineBreak () {
+        return LINE_BREAKER;
     }
 
     /**
@@ -44,29 +44,30 @@ public class Ui {
      *
      * @param taskList task list to be printed.
      */
-    public void printArrayList (TaskList taskList) {
-        System.out.println(LIST_MESSAGE);
+    public String printArrayList (TaskList taskList) {
+        String toReturn = LIST_MESSAGE + "\n";
         for (int i = 0; i < taskList.getSize(); i++) {
-            System.out.println(String.valueOf(i + 1) + "." + taskList.get(i).toString());
+            toReturn += String.valueOf(i + 1) + "." + taskList.get(i).toString() + "\n";
         }
-        printLineBreak();
+        toReturn += printLineBreak();
+        return toReturn;
     }
 
     /**
      * Prints a greeting for the user on startup.
      */
-    public void greet() {
-        System.out.println(GREETING);
-        printLineBreak();
+    public String greet() {
+        String toReturn = GREETING + "\n";
+        toReturn += printLineBreak();
+        return toReturn;
     }
 
     /**
      * Prints a farewell message for the user when 'bye' command is inputted.
      */
-    public void sayFarewell() {
-        printLineBreak();
-        System.out.println(FAREWELL);
-        printLineBreak();
+    public String sayFarewell() {
+        String toReturn = printLineBreak() + "\n" + FAREWELL + "\n" + printLineBreak();
+        return toReturn;
     }
 
     /**
@@ -75,9 +76,9 @@ public class Ui {
      *
      * @param task task that is completed.
      */
-    public void completeTaskMessage (Task task) {
-        System.out.println(DONE_MESSAGE + "\n" + task.toString());
-        printLineBreak();
+    public String completeTaskMessage (Task task) {
+        String toReturn = DONE_MESSAGE + "\n" + task.toString() + "\n" + printLineBreak();
+        return toReturn;
     }
 
     /**
@@ -86,12 +87,13 @@ public class Ui {
      *
      * @param tasks
      */
-    public void findTaskMessage (TaskList tasks) {
-        System.out.println(FIND_TAKS_MESSAGE);
+    public String findTaskMessage (TaskList tasks) {
+        String toReturn = FIND_TAKS_MESSAGE + "\n";
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println(String.valueOf(i + 1) + "." + tasks.get(i).toString());
+            toReturn += String.valueOf(i + 1) + "." + tasks.get(i).toString() + "\n";
         }
-        printLineBreak();
+        toReturn += printLineBreak();
+        return toReturn;
     }
 
     /**
@@ -101,11 +103,12 @@ public class Ui {
      * @param task task that is deleted.
      * @param size size of the task list.
      */
-    public void deleteTaskMessage (Task task, int size) {
-        System.out.println(DELETE_TASK_MESSAGE);
-        System.out.println("  " + task.toString());
-        taskCounterMessage(size);
-        printLineBreak();
+    public String deleteTaskMessage (Task task, int size) {
+        String toReturn = DELETE_TASK_MESSAGE + "\n";
+        toReturn += "   " + task.toString() + "\n";
+        toReturn += taskCounterMessage(size) + "\n";
+        toReturn += printLineBreak();
+        return toReturn;
     }
 
     /**
@@ -115,11 +118,12 @@ public class Ui {
      * @param task task that is added.
      * @param size size of the task list.
      */
-    public void addedTaskMessage (Task task, int size) {
-        System.out.println(ADD_TASK_MESSAGE);
-        System.out.println("  " + task.toString());
-        taskCounterMessage(size);
-        printLineBreak();
+    public String addedTaskMessage (Task task, int size) {
+        String toReturn = ADD_TASK_MESSAGE + "\n";
+        toReturn += "  " + task.toString() + "\n";
+        toReturn += taskCounterMessage(size) + "\n";
+        toReturn += printLineBreak();
+        return toReturn;
     }
 
     /**
@@ -127,8 +131,8 @@ public class Ui {
      *
      * @param size size of task list.
      */
-    void taskCounterMessage (int size) {
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String taskCounterMessage (int size) {
+        return "Now you have " + size + " tasks in the list.";
     }
 
     /**
@@ -137,8 +141,7 @@ public class Ui {
      *
      * @param e Duke Exception that has occurred.
      */
-    void printErrorMessage(DukeException e) {
-        System.out.println(e.toString());
-        printLineBreak();
+    public String printErrorMessage(DukeException e) {
+        return e.toString() + "\n" + printLineBreak();
     }
 }
