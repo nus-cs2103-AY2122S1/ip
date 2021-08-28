@@ -1,5 +1,8 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'org.example'
@@ -16,6 +19,21 @@ sourceSets {
     }
 }
 dependencies {
-    implementation 'org.testng:testng:7.1.0'
-    compile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
+    implementation 'junit:junit:4.12'
 }
+test {
+    useJUnit()
+
+    maxHeapSize = '1G'
+}
+
+checkstyle {
+    toolVersion = '8.29'
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+}
+//checkstyle {
+//    ignoreFailures = true
+//    configFile file("${project.rootDir}/config/checkstyle.xml")
+//    toolVersion "7.6.1"
+//}
