@@ -10,7 +10,7 @@ public class TaskList {
     /**
      * The tasks contained within the task list
      **/
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Empty constructor for a task list

@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * The find command.
@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     /**
      * The arguments associated with the command
      **/
-    public String arguments;
+    private String arguments;
 
     /**
      * Constructs the find command.

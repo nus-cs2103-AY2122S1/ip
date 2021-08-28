@@ -14,7 +14,7 @@ public class TodoCommand extends Command {
     /**
      * The arguments associated with the command
      **/
-    public String arguments;
+    private String arguments;
 
     /**
      * Constructs the todo command.
@@ -38,15 +38,15 @@ public class TodoCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isEmpty()) {
             throw new DukeException(String.format("The description of a %s cannot be left empty. "
-                    + "Please try again.", command));
+                    + "Please try again.", this.getCommand()));
         }
 
         Todo newTask = new Todo(arguments);
         tasks.add(newTask);
         ui.printToUser("Got it. I've added this task:");
         ui.printToUser("  " + newTask);
-        ui.printToUser("Now you have " + tasks.size() +
-                (tasks.size() == 1 ? " task" : " tasks")
+        ui.printToUser("Now you have " + tasks.size()
+                + (tasks.size() == 1 ? " task" : " tasks")
                 + " in your list.");
     }
 

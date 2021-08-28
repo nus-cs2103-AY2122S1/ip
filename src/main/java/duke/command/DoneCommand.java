@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
     /**
      * The arguments associated with the command
      **/
-    public String arguments;
+    private String arguments;
 
     /**
      * Constructs the done command.

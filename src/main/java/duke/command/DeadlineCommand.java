@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
 
 /**
  * The deadline command.
@@ -17,7 +17,7 @@ public class DeadlineCommand extends Command {
     /**
      * The arguments associated with the command
      **/
-    public String arguments;
+    private String arguments;
 
     /**
      * Constructs the deadline command.
@@ -41,7 +41,7 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isEmpty()) {
             throw new DukeException(String.format("The description of a %s cannot be left empty. "
-                    + "Please try again.", command));
+                    + "Please try again.", this.getCommand()));
         }
 
         String[] argArr = arguments.split("/by");
@@ -54,8 +54,8 @@ public class DeadlineCommand extends Command {
         tasks.add(newTask);
         ui.printToUser("Got it. I've added this task:");
         ui.printToUser("  " + newTask);
-        ui.printToUser("Now you have " + tasks.size() +
-                (tasks.size() == 1 ? " task" : " tasks")
+        ui.printToUser("Now you have " + tasks.size()
+                + (tasks.size() == 1 ? " task" : " tasks")
                 + " in your list.");
     }
 

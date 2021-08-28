@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
     /**
      * The arguments associated with the command.
      **/
-    public String arguments;
+    private String arguments;
 
     /**
      * Constructs the delete command.
@@ -48,8 +48,8 @@ public class DeleteCommand extends Command {
         Task taskDeleted = tasks.remove(index - 1);
         ui.printToUser("Noted! I've removed this task:");
         ui.printToUser("  " + taskDeleted);
-        ui.printToUser("Now you have " + tasks.size() +
-                (tasks.size() == 1 ? " task" : " tasks")
+        ui.printToUser("Now you have " + tasks.size()
+                + (tasks.size() == 1 ? " task" : " tasks")
                 + " in your list.");
     }
 

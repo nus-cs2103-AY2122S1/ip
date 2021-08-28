@@ -1,5 +1,7 @@
 package duke.parser;
 
+import java.time.LocalDate;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -10,8 +12,6 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
-
-import java.time.LocalDate;
 
 /**
  * Parses user input.

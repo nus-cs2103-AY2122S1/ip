@@ -13,7 +13,7 @@ public abstract class Command {
     /**
      * The command keyword associated with the command
      **/
-    public String command;
+    private String command;
 
     /**
      * Constructs the command with the user input.
@@ -40,5 +40,14 @@ public abstract class Command {
      * @return true if command is the bye command; else false.
      */
     public abstract boolean isExit();
+
+    /**
+     * Returns the given command keyword.
+     *
+     * @return The string representing the command keyword.
+     */
+    public String getCommand() {
+        return command;
+    }
 
 }
