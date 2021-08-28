@@ -36,7 +36,6 @@ public class Duke {
             } else {
                 try {
                     parser.parseInput(taskList, input);
-                    ui.printTasks(taskList);
                     storage.saveData(taskList);
                 } catch (DukeException | IOException e) {
                     ui.displayError(e);

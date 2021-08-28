@@ -17,7 +17,7 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         Task todo = new ToDo("brush teeth");
         taskList.add(todo);
-        String expected = "Current List:\n" + "---------------\n" + "ToDo: brush teeth [ ]";
+        String expected = "List:\n" + "---------------\n" + "ToDo: brush teeth [ ]";
         assertEquals(expected, taskList.toString());
     }
 
@@ -27,7 +27,7 @@ public class TaskListTest {
         Task todo = new ToDo("brush teeth");
         taskList.add(todo);
         taskList.markAsCompleted(0);
-        String expected = "Current List:\n" + "---------------\n" +
+        String expected = "List:\n" + "---------------\n" +
                 "ToDo: brush teeth [X]";
         assertEquals(expected, taskList.toString());
     }
