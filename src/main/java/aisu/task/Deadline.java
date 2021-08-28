@@ -30,7 +30,7 @@ public class Deadline extends Task {
      * @return Parsed data.
      */
     @Override
-    public String ParseData() {
+    public String parseData() {
         return "D;;" + (this.isDone ? "1" : "0") + ";;" + this.description + ";;" + this.deadline;
     }
 

@@ -5,7 +5,6 @@ import aisu.Storage;
 import aisu.TaskList;
 import aisu.Ui;
 import aisu.task.Task;
-import aisu.task.Todo;
 
 /**
  * Command to add a task to the tasklist.
@@ -31,7 +30,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasklist, Storage storage, Ui ui) throws AisuException {
-        Task newTask = new Todo("dummy");
+        Task newTask;
         switch (this.taskType) {
         case T:
             newTask = tasklist.addTask(this.input, TaskList.TaskTypes.T);
@@ -42,6 +41,8 @@ public class AddCommand extends Command {
         case E:
             newTask = tasklist.addTask(this.input, TaskList.TaskTypes.E);
             break;
+        default:
+            throw new AisuException("Invalid input!");
         }
         storage.save(tasklist);
         this.uiText = ui.formatText(" Got it! I've added this task:",

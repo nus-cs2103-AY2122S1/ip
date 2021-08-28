@@ -42,7 +42,7 @@ public abstract class Task {
      *
      * @return Parsed data.
      */
-    public abstract String ParseData();
+    public abstract String parseData();
 
     /**
      * Returns a string representation of the object.
