@@ -41,18 +41,17 @@ public class UserInterface {
      * @param error The error message to be shown to the user.
      */
     public void showError(String error) {
-        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                + error
+        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n" + error
                 + "\n-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }
 
     /**
-     * Shows the error message to the user, specifically when local data is not found.
+     * Shows the error message to the user, specifically when local data is not
+     * found.
      */
     public void showLoadingError() {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                + "Creating a new storage for the user..."
-                + "\n-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+                + "Creating a new storage for the user..." + "\n-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }
 
     /**
@@ -62,10 +61,10 @@ public class UserInterface {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
                 + "Hello! My name is Duke!\n\n"
                 + " ____        _        \n"
-                + "|  _ \\ _   _| |  ____ \n"
-                + "| | | | | | | |_/ _  \\\n"
-                + "| |_| | |_| |  <   __/\n"
-                + "|____/ \\____|_|\\_\\___|\n\n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n\n"
                 + "What can I do for you today?\n"
                 + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }
@@ -74,19 +73,20 @@ public class UserInterface {
      * Shows the exit message to the user.
      */
     public void showExitMessage() {
-        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                + "Bye... Hope to see you again soon!\n"
+        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n" + "Bye... Hope to see you again soon!\n"
                 + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
         Bot.stop();
     }
 
     /**
-     * Shows the message for a task being added, according to the type of task given.
+     * Shows the message for a task being added, according to the type of task
+     * given.
      *
-     * @param input The task to be added to the list.
-     * @param type  The type id. Todo: 1, Deadline: 2, Event: 3.
+     * @param input  The task to be added to the list.
+     * @param type   The type id. Todo: 1, Deadline: 2, Event: 3.
      * @param length The current length of the list.
-     * @param time  The information regarding the task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
+     * @param time   The information regarding the task (In the format of "(By:
+     *               ...)" or "(At: ...)", or "" for Todos)
      */
     public static void showTaskAdded(String input, int type, int length, String time) {
 
@@ -113,23 +113,12 @@ public class UserInterface {
         }
 
         // Return the message accordingly
-        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                + "Alright. I've added the following "
-                + taskType
-                + ":\n--> "
-                + prefix
-                + " "
-                + input
-                + (type == 2
-                ? "(By: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
-                : type == 3
-                ? "(At: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
-                : "")
-                + "\n\n"
-                + "You now have "
-                + (length + 1)
-                + (length == 0 ? "main/java/task" : " tasks")
-                + " in the list.\n"
-                + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n" + "Alright. I've added the following "
+                + taskType + ":\n--> " + prefix + " " + input
+                + (type == 2 ? "(By: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
+                        : type == 3 ? "(At: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
+                                : "")
+                + "\n\n" + "You now have " + (length + 1) + (length == 0 ? "main/java/task" : " tasks")
+                + " in the list.\n" + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }
 }
