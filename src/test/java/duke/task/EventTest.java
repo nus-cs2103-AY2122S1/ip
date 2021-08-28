@@ -13,7 +13,7 @@ public class EventTest {
             assertEquals(0, new Event(new String[]{"test"}));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Usage of event does not match 'description' /at 'timeframe'", e.toString());
+            assertEquals("Usage of event does not match 'description' /at 'timeframe'", e.toString());
         }
     }
 }

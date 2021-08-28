@@ -9,7 +9,8 @@ import duke.data.TaskList;
 import duke.io.Parser;
 import duke.io.Ui;
 
-class Duke {
+
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;
@@ -34,29 +35,24 @@ class Duke {
     }
 
     /**
-     * Runs the bot Duke.
+     * Returns a String that corresponds to a user input command.
+     *
+     * @param input Path to the file storing saved data and to save new data to.
+     * @return String to be used as Duke output that corresponds to a user input command.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                Command c = Parser.parse(ui.readCommand());
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (NumberFormatException numExcep) {
-                ui.showIntError();
-            } catch (DukeException dukeExcep) {
-                ui.showDukeException(dukeExcep);
-            } catch (DateTimeParseException dtExcep) {
-                ui.showDateTimeException();
-            } catch (IOException ioExcep) {
-                ui.showSavingError();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException dukeException) {
+            return ui.showDukeException(dukeException);
+        } catch (IOException ioException) {
+            return ui.showSavingError();
+        } catch (DateTimeParseException dateTimeParseException) {
+            return ui.showDateTimeException();
+        } catch (NumberFormatException numberFormatException) {
+            return ui.showIntError();
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
-    }
 }

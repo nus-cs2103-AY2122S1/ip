@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 import duke.data.Storage;
 import duke.data.TaskList;
@@ -15,7 +16,7 @@ public class Command {
 
     /** Enumeration of valid commands */
     public enum Commands {
-        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, BY, AT, ALL, HELP, FIND
+        LIST, DONE, DELETE, TODO, DEADLINE, EVENT, BY, AT, ALL, HELP, FIND
     }
 
     /** Types of commands */
@@ -104,22 +105,20 @@ public class Command {
     }
 
     /**
-     * Executes a command.
+     * Executes a command and returns a String that signifies proper execution.
      *
      * @param tasks Lists of tasks to be executed on.
      * @param ui Ui object used to print to screen.
      * @param storage Storage object used to save any modifications
+     * @return String that shows the command has been executed.
      * @throws DukeException If there is missing information or the declaration of the task is of the wrong format.
      * @throws IOException  If data file cannot be saved to.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException,
+            DateTimeParseException, NumberFormatException {
         switch (this.type) {
         case SINGLE_INPUT:
-            ui.displayCommand(this.command, tasks);
-            if (this.command.equals(Commands.BYE)) {
-                this.isExit = true;
-            }
-            break;
+            return ui.displayCommand(this.command, tasks);
         case INT_INPUT:
             Task t;
             if (this.command.equals(Commands.DONE)) {
@@ -127,18 +126,15 @@ public class Command {
             } else {
                 t = tasks.removeTask(this.index, storage);
             }
-            ui.displayCommand(this.command, this.index, t, tasks);
             storage.save();
-            break;
+            return ui.displayCommand(this.command, this.index, t, tasks);
         case STR_INPUT:
             if (this.command.equals(Commands.TODO)) {
                 tasks.addItem(new Todo(this.description), storage);
-                ui.displayCommand(this.command, tasks);
                 storage.save();
-            } else {
-                ui.displayCommand(this.command, this.description, tasks);
+                return ui.displayCommand(this.command, tasks);
             }
-            break;
+            return ui.displayCommand(this.command, this.description, tasks);
         case STR_ARR_INPUT:
             Task task;
             if (this.command.equals(Commands.DEADLINE)) {
@@ -147,14 +143,12 @@ public class Command {
                 task = new Event(subInputs);
             }
             tasks.addItem(task, storage);
-            ui.displayCommand(this.command, tasks);
             storage.save();
-            break;
+            return ui.displayCommand(this.command, tasks);
         case DATETIME_INPUT:
-            ui.displayCommand(this.command, tasks, this.dateTime);
-            break;
+            return ui.displayCommand(this.command, tasks, this.dateTime);
         default:
-            break;
+            return "Oops there is an error";
         }
     }
 }

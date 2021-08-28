@@ -29,8 +29,6 @@ public class Parser {
         switch (main) {
         case "find":
             return new Command(Command.Commands.FIND, aux);
-        case "bye":
-            return new Command(Command.Commands.BYE);
         case "list":
             return new Command(Command.Commands.LIST);
         case "help":
