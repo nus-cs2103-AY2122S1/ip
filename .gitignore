@@ -18,4 +18,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 
 # Ignore local save file
-/src/main/java/dukeDocs/listSave1.xml
+dukeDocs/listSave1.xml
