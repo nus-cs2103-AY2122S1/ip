@@ -4,8 +4,11 @@ import bob.exception.DirectoryNotFoundException;
 import bob.exception.FileNotFoundException;
 
 import java.io.File;
+import java.util.Objects;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,9 +20,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
- * Represents a chatbot that stores, displays and alters the user's task list based on the user input.
+ * A chatbot that stores, displays and alters the user's task list based on the user input.
  */
 public class Bob extends Application{
     /** Storage object that deals with loading tasks from the file and saving tasks in the file */
@@ -31,64 +35,73 @@ public class Bob extends Application{
     /** Ui object that deals with interactions with the user */
     private Ui ui;
 
+    /** Parser object that deals with making sense of the user commands */
+    private Parser parser;
+
+    /** Whether the data directory is already present in the user computer */
+    boolean isDirectoryPresent = true;
+
+    /** Whether the bob.txt file is already present within the data directory in the user computer */
+    boolean isBobFilePresent = true;
+
+    /** UI element that allows users to scroll up and down the stage to view more content */
     private ScrollPane scrollPane;
+
+    /** UI element that lays out its children in a single vertical column */
     private VBox dialogContainer;
+
+    /** UI element that allows users to type in their input */
     private TextField userInput;
+
+    /** UI element that allows Bob to take in the user input when the user clicks on it */
     private Button sendButton;
+
+    /** UI element that contains all the nodes to be shown in the GUI */
     private Scene scene;
 
+    /** Image representing the user in the chat */
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+
+    /** Image representing Bob in the chat */
     private Image bob = new Image(this.getClass().getResourceAsStream("/images/DaBob.jpeg"));
 
     /**
-     * Constructor for creating a new Bob instance.
-     *
-     * @param filePath Pathname to bob.txt file that will be used to store the list of tasks.
+     * Constructor for a new Bob instance.
      */
-    public Bob(String filePath) {
+    public Bob() {
         ui = new Ui();
-        storage = new Storage(filePath);
-        ui.showStart();
+        storage = new Storage(new File("").getAbsolutePath() + "/data");
+        parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
         } catch (DirectoryNotFoundException e) {
-            ui.showDirectoryLoadingError();
+            isDirectoryPresent = false;
             tasks = new TaskList();
             storage.makeDataDirectory();
             storage.makeBobFile();
         } catch (FileNotFoundException e) {
-            ui.showFileLoadingError();
+            isBobFilePresent = false;
             tasks = new TaskList();
             storage.makeBobFile();
         }
     }
 
     /**
-     * Runs the Bob instance to begin the chat.
-     */
-    public void run() {
-        ui.showGreeting();
-        Parser parser = new Parser();
-        parser.run(ui, tasks, storage);
-        ui.showGoodbye();
-    }
-
-    /**
-     * Main method that finds the pathname to the storage bob.txt file and creates and runs a new Bob instance.
+     * Does not do anything.
      *
      * @param args String array that acts as the argument to the main method.
      */
     public static void main(String[] args) {
-        String currDirectory = new File("").getAbsolutePath();
-        String dataDirectory = currDirectory + "/data";
-        new Bob(dataDirectory).run();
     }
 
+    /**
+     * Sets up the GUI for Bob.
+     *
+     * @param stage The primary stage provided by JavaFX for the GUI.
+     */
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
+        // Step 1. Setting up required components.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -104,7 +117,7 @@ public class Bob extends Application{
         stage.setScene(scene);
         stage.show();
 
-        //Step 2. Formatting the window to look as expected
+        // Step 2. Formatting the window to look as expected.
         stage.setTitle("Bob");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -119,7 +132,6 @@ public class Bob extends Application{
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -134,7 +146,28 @@ public class Bob extends Application{
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Part 3. Add functionality to handle user input.
+        // Displaying the initial message when Bob first starts up.
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBobDialog(new Label(ui.getStartMessage()), new ImageView(bob))
+        );
+
+        // Displaying the appropriate Bob messages if the data directory or bob.txt file do not exist yet.
+        if (!isDirectoryPresent) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getBobDialog(new Label(ui.getDirectoryLoadingErrorMessage()), new ImageView(bob))
+            );
+        } else if (!isBobFilePresent) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getBobDialog(new Label(ui.getFileLoadingErrorMessage()), new ImageView(bob))
+            );
+        }
+
+        // Displaying Bob's greeting message once initialisation is completed.
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBobDialog(new Label(ui.getGreetingMessage()), new ImageView(bob))
+        );
+
+        // Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -143,27 +176,34 @@ public class Bob extends Application{
             handleUserInput();
         });
 
-        //Scroll down to the end every time dialogContainer's height changes.
+        // Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    public Bob() {};
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Takes in the user input and displays both the user input and Bob's response in the GUI.
      */
-    private String getResponse(String input) {
-        return "Bob heard: " + input;
-    }
-
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getBobDialog(dukeText, new ImageView(bob))
-        );
-        userInput.clear();
+        if (Objects.equals(userInput.getText(), "bye")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getBobDialog(new Label(ui.getGoodbyeMessage()), new ImageView(bob))
+            );
+            userInput.clear();
+
+            // Leave a short pause of 2 seconds after the user inputs "bye" to display Bob's goodbye message
+            // before automatically closing the window and terminating the program.
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished( event -> Platform.exit() );
+            delay.play();
+        } else {
+            Label dukeText = new Label(parser.getResponse(userInput.getText(), ui, tasks, storage));
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getBobDialog(dukeText, new ImageView(bob))
+            );
+            userInput.clear();
+        }
     }
 }

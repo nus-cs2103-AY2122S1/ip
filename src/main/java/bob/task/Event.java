@@ -1,7 +1,10 @@
 package bob.task;
 
+import bob.exception.InvalidDateException;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a special type of task with a specific date, meaning the task will occur or be completed at that date.
@@ -16,10 +19,15 @@ public class Event extends Task {
      *
      * @param description Description of the Event task.
      * @param date Date of the event.
+     * @throws InvalidDateException If the user inputs an invalid date for the timing.
      */
-    public Event(String description, String date) {
+    public Event(String description, String date) throws InvalidDateException {
         super(description);
-        this.date = LocalDate.parse(date);
+        try {
+            this.date = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
      }
 
     /**

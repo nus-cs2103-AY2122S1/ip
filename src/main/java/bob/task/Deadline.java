@@ -1,7 +1,10 @@
 package bob.task;
 
+import bob.exception.InvalidDateException;
+
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a special type of task with a deadline, meaning the task must be completed before the specified date.
@@ -16,10 +19,15 @@ public class Deadline extends Task {
      *
      * @param description Description of the Deadline task.
      * @param deadline Deadline of the Deadline task (when the task must be completed by).
+     * @throws InvalidDateException If the user inputs an invalid date for the deadline.
      */
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, String deadline) throws InvalidDateException {
         super(description);
-        this.deadline = LocalDate.parse(deadline);
+        try {
+            this.deadline = LocalDate.parse(deadline);
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateException();
+        }
      }
 
     /**

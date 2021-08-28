@@ -3,6 +3,7 @@ package bob;
 import bob.exception.DirectoryNotFoundException;
 import bob.exception.FileNotFoundException;
 
+import bob.exception.InvalidDateException;
 import bob.task.Deadline;
 import bob.task.Event;
 import bob.task.Task;
@@ -83,7 +84,7 @@ public class Storage {
                     newTask.markCompleted();
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | InvalidDateException e) {
             System.out.println(e.getMessage());
         }
         return tasks;
