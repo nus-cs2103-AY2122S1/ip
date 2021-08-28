@@ -69,6 +69,36 @@ public class Ui {
         System.out.println(displayedMessage);
     }
 
+    public void showTasksWithSearchTerm(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            String emptyTaskList = "  " + "No task matched the search term!";
+            System.out.println(emptyTaskList);
+        } else {
+            String message = "Here are the matching tasks in your list:";
+            System.out.println(message);
+            for (int i = 1; i <= tasks.size(); i++) {
+                Task currentTask = tasks.getTask(i - 1);
+                String displayedTask = i + "." + currentTask.toString();
+                System.out.println(displayedTask);
+            }
+        }
+    }
+
+    public void showAllTasks(TaskList tasks) {
+        if (tasks.isEmpty()) {
+            String emptyTaskList = "There are currently no tasks yet!";
+            System.out.println(emptyTaskList);
+        } else {
+            String message = "Here are the tasks in your list:";
+            System.out.println(message);
+            for (int i = 1; i <= tasks.size(); i++) {
+                Task currentTask = tasks.getTask(i - 1);
+                String displayedTask = i + "." + currentTask.toString();
+                System.out.println(displayedTask);
+            }
+        }
+    }
+
     private int getTotalTaskNumber(TaskList tasks) {
         return tasks.size();
     }

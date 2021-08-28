@@ -32,6 +32,7 @@ public abstract class Command {
         commandTypes.add("list");
         commandTypes.add("done");
         commandTypes.add("delete");
+        commandTypes.add("find");
     }
 
     public static List<String> getCommandTypes() {

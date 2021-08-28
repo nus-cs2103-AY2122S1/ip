@@ -19,6 +19,10 @@ public class Task {
 
     public boolean isEmpty() { return isEmpty; }
 
+    public String getTaskName() {
+        return taskName;
+    }
+
     public String getCheckBox() {
         if (isDone) {
             return "[X]";
