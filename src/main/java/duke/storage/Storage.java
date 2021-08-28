@@ -63,17 +63,16 @@ public class Storage {
         boolean taskStatus = getTaskStatusFromString(taskString);
 
         switch (taskType) {
-            case "todo":
-                return new Todo(taskName, taskStatus);
-            case "deadline":
-                String deadline = getDateAndTimeFromString(taskString);
-                return new Deadline(taskName, deadline, taskStatus);
-            case "event":
-                String eventTime = getDateAndTimeFromString(taskString);
-                return new Event(taskName, eventTime, taskStatus);
-            default:
-                return new Task(); //todo error
-
+        case "todo":
+            return new Todo(taskName, taskStatus);
+        case "deadline":
+            String deadline = getDateAndTimeFromString(taskString);
+            return new Deadline(taskName, deadline, taskStatus);
+        case "event":
+            String eventTime = getDateAndTimeFromString(taskString);
+            return new Event(taskName, eventTime, taskStatus);
+        default:
+            return new Task(); //todo error
         }
     }
 
@@ -103,14 +102,14 @@ public class Storage {
     private String getTaskTypeFromString(String taskString) {
         Character taskType = taskString.charAt(1);
         switch (taskType) {
-            case 'T':
-                return "todo";
-            case 'D':
-                return "deadline";
-            case 'E':
-                return "event";
-            default:
-                return ""; //todo error
+        case 'T':
+            return "todo";
+        case 'D':
+            return "deadline";
+        case 'E':
+            return "event";
+        default:
+            return ""; //todo error
         }
 
 
