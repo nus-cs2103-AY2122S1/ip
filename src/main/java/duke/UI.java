@@ -20,8 +20,8 @@ public class UI {
     /**
      * This method is to print the exiting message of Duke.
      */
-    public void showExitMessage() {
-        System.out.println(LINE + "bye! for now...\n" + LINE);
+    public String showExitMessage() {
+        return (LINE + "bye! for now...\n" + LINE);
     }
 
     /**
@@ -30,8 +30,8 @@ public class UI {
      * @param t The task that was added.
      * @param size The total number of tasks.
      */
-    public void showAddTaskMessage(Task t, int size) {
-        System.out.println(LINE + "I've added this task:\n" + t
+    public String showAddTaskMessage(Task t, int size) {
+        return (LINE + "I've added this task:\n" + t
                 + "\n" + "You have " + size + " tasks left!\n" + LINE);
     }
 
@@ -40,8 +40,8 @@ public class UI {
      *
      * @param t The task that was completed.
      */
-    public void showCompleteTaskMessage(Task t) {
-        System.out.println(LINE + "Well done! You finally completed " + t.getName() + "!\n" + LINE);
+    public String showCompleteTaskMessage(Task t) {
+        return (LINE + "Well done! You finally completed " + t.getName() + "!\n" + LINE);
     }
 
     /**
@@ -50,8 +50,8 @@ public class UI {
      * @param t The task that was added.
      * @param size The total number of tasks.
      */
-    public void showDeleteTaskMessage(Task t, int size) {
-        System.out.println(LINE + "The task has been removed:\n" + t
+    public String showDeleteTaskMessage(Task t, int size) {
+        return (LINE + "The task has been removed:\n" + t
                 + "\n" + "You have " + size + " tasks left!\n" + LINE);
     }
 
@@ -60,17 +60,17 @@ public class UI {
      *
      * @param tasklist The TaskList object where all the tasks are stored.
      */
-    public void getListMessage(TaskList tasklist) {
+    public String getListMessage(TaskList tasklist) {
         String message = "Here are your tasks... if you choose to do it...\n";
         String listMessage = tasklist.getAllTasks();
-        System.out.println(LINE + message + listMessage + LINE);
+        return LINE + message + listMessage + LINE;
     }
 
     /**
      * This method is to print the the list of all commands available to Duke.
      */
-    public void showListOfCommands() {
-        System.out.println(LINE + "Unknown Command!\n" + LINE);
+    public String showListOfCommands() {
+        return LINE + "Unknown Command!\n" + LINE;
     }
 
     /**
@@ -78,16 +78,16 @@ public class UI {
      *
      * @param errorMessage The error message of the exception thrown.
      */
-    public void showErrorMessage(String errorMessage) {
-        System.out.println(LINE + errorMessage + "\n" + LINE);
+    public String showErrorMessage(String errorMessage) {
+        return LINE + errorMessage + "\n" + LINE;
     }
 
     /**
      * Prints out the task that matched with the keyword with formatting.
      * @param tasks String input of the tasks found.
      */
-    public void showFoundTask(String tasks) {
-        System.out.println(LINE + "Here are the matching tasks in your list:");
-        System.out.println(tasks + LINE);
+    public String showFoundTask(String tasks) {
+        return LINE + "Here are the matching tasks in your list:"
+                + tasks + LINE;
     }
 }

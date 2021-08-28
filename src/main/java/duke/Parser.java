@@ -20,19 +20,17 @@ public class Parser {
      * @param bot
      * @throws DukeException
      */
-    public void parse (String input, ChatBot bot) throws DukeException {
+    public String parse (String input, ChatBot bot) throws DukeException {
         String[] inputs = input.split(" ", 2);
         String key = inputs[0];
         int run = 1;
 
         switch (key) {
         case "bye":
-            bot.handleExit();
-            run = 0;
-            break;
+            return bot.handleExit();
+//            run = 0;
         case "list":
-            bot.handleList();
-            break;
+            return bot.handleList();
         case "done":
             // check if a number is specified
             if (inputs.length == 1) {
@@ -44,8 +42,7 @@ public class Parser {
             if (index <= 0 || index > bot.getTotalTasks()) {
                 throw new DukeException("Please enter a valid number");
             }
-            bot.handleDone(index);
-            break;
+            return bot.handleDone(index);
         case "deadline":
             if (inputs.length == 1) {
                 throw new DukeException("Please specify the deadline description");
@@ -56,17 +53,16 @@ public class Parser {
             }
             try {
                 LocalDateTime parsedDate = LocalDateTime.parse(info[1].trim(), formatter);
-                bot.handleDeadline(info[0].trim(), parsedDate);
+                return bot.handleDeadline(info[0].trim(), parsedDate);
             } catch (DateTimeParseException e) {
                 throw new DukeException("The format of date & time is wrong. Please use {dd/mm/yyyy hhmm}");
             }
-            break;
         case "todo":
             if (inputs.length == 1) {
                 throw new DukeException("Please specify the todo description");
             }
-            bot.handleTodo(inputs[1]);
-            break;
+            return bot.handleTodo(inputs[1]);
+//            break;
         case "event":
             if (inputs.length == 1) {
                 throw new DukeException("Please specify the event description");
@@ -77,11 +73,11 @@ public class Parser {
             }
             try {
                 LocalDateTime parsedDate = LocalDateTime.parse(info[1].trim(), formatter);
-                bot.handleEvent(info[0].trim(), parsedDate);
+                return bot.handleEvent(info[0].trim(), parsedDate);
             } catch (DateTimeParseException e) {
                 throw new DukeException("The format of date & time is wrong. Please use {dd/mm/yyyy hhmm}");
             }
-            break;
+//            break;
         case "delete":
             if (inputs.length == 1) {
                 throw new DukeException("The task number to delete cannot be empty you dum dum");
@@ -92,17 +88,17 @@ public class Parser {
             if (index <= 0 || index > bot.getTotalTasks()) {
                 throw new DukeException("Please enter a valid number");
             }
-            bot.handleDelete(index);
-            break;
+            return bot.handleDelete(index);
+//            break;
         case "find":
             if (inputs.length == 1) {
                 throw new DukeException("The task to find cannot be empty!");
             }
-            bot.handleFind(inputs[1].trim());
-            break;
+            return bot.handleFind(inputs[1].trim());
+//            break;
         default:
-            bot.handleWrongCommand();
-            break;
+            return bot.handleWrongCommand();
+//            break;
         }
     }
 }

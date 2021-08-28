@@ -39,23 +39,23 @@ public class ChatBot {
         s.checkFile();
         this.temp = s.loadTasks();
         tasklist = new TaskList(temp);
-        ui.showStartMessage();
+//        ui.showStartMessage();
     }
 
     /**
      * This method is to stop the program from running and prints
      * out the exit message.
      */
-    public void handleExit() {
+    public String handleExit() {
         exitStatus = 0;
-        ui.showExitMessage();
+        return ui.showExitMessage();
     }
 
     /**
      * This method is to call the UI to print all the tasks that is stored.
      */
-    public void handleList() {
-        ui.getListMessage(tasklist);
+    public String handleList() {
+        return ui.getListMessage(tasklist);
     }
 
     /**
@@ -64,10 +64,10 @@ public class ChatBot {
      *
      * @param index Index of the task.
      */
-    public void handleDone(int index) {
+    public String handleDone(int index) {
         Task t = tasklist.completeTask(index);
-        ui.showCompleteTaskMessage(t);
         s.saveTasks(tasklist);
+        return ui.showCompleteTaskMessage(t);
     }
 
     /**
@@ -77,10 +77,10 @@ public class ChatBot {
      * @param name Name of the deadline.
      * @param deadline The date and time of the deadline.
      */
-    public void handleDeadline(String name, LocalDateTime deadline) {
+    public String handleDeadline(String name, LocalDateTime deadline) {
         Task t = tasklist.addDeadline(name, deadline, false);
-        ui.showAddTaskMessage(t, tasklist.getTotalTasksNumber());
         s.saveTasks(tasklist);
+        return ui.showAddTaskMessage(t, tasklist.getTotalTasksNumber());
     }
 
     /**
@@ -88,10 +88,10 @@ public class ChatBot {
      * print out the add message when the task is added successfully.
      * @param name Name of the task.
      */
-    public void handleTodo(String name) {
+    public String handleTodo(String name) {
         Task t = tasklist.addTodo(name, false);
-        ui.showAddTaskMessage(t, tasklist.getTotalTasksNumber());
         s.saveTasks(tasklist);
+        return ui.showAddTaskMessage(t, tasklist.getTotalTasksNumber());
     }
 
     /**
@@ -101,10 +101,11 @@ public class ChatBot {
      * @param name Name of the deadline.
      * @param time The date and time of the event.
      */
-    public void handleEvent(String name, LocalDateTime time) {
+    public String handleEvent(String name, LocalDateTime time) {
         Task t = tasklist.addEvent(name, time, false);
-        ui.showAddTaskMessage(t, tasklist.getTotalTasksNumber());
         s.saveTasks(tasklist);
+        return ui.showAddTaskMessage(t, tasklist.getTotalTasksNumber());
+
     }
 
     /**
@@ -113,10 +114,10 @@ public class ChatBot {
      *
      * @param index Index of the task specified by the user.
      */
-    public void handleDelete(int index) {
+    public String handleDelete(int index) {
         Task t = tasklist.deleteTask(index);
-        ui.showDeleteTaskMessage(t, tasklist.getTotalTasksNumber());
         s.saveTasks(tasklist);
+        return ui.showDeleteTaskMessage(t, tasklist.getTotalTasksNumber());
     }
 
     /**
@@ -124,24 +125,24 @@ public class ChatBot {
      * input by the user and calls UI to display them.
      * @param name User input task to find.
      */
-    public void handleFind(String name) {
+    public String handleFind(String name) {
         String findTask = tasklist.findTask(name);
-        ui.showFoundTask(findTask);
+        return ui.showFoundTask(findTask);
     }
 
     /**
      * This method prints the list of all commands.
      */
-    public void handleWrongCommand() {
-        ui.showListOfCommands();
+    public String handleWrongCommand() {
+        return ui.showListOfCommands();
     }
 
     /**
      * This method prints the error message thrown by the program.
      * @param message The error message.
      */
-    public void handleErrorMessage(String message) {
-        ui.showErrorMessage(message);
+    public String handleErrorMessage(String message) {
+        return ui.showErrorMessage(message);
     }
 
     /**
