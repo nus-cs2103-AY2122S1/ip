@@ -22,7 +22,7 @@ public class Event extends Task {
      * @return Parsed data.
      */
     @Override
-    public String ParseData() {
+    public String parseData() {
         return "E;;" + (this.isDone ? "1" : "0") + ";;" + this.description + ";;" + this.eventPeriod;
     }
 

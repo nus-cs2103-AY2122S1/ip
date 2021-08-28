@@ -1,6 +1,12 @@
 package aisu;
 
-import aisu.command.*;
+import aisu.command.AddCommand;
+import aisu.command.Command;
+import aisu.command.DeleteCommand;
+import aisu.command.ExitCommand;
+import aisu.command.FindCommand;
+import aisu.command.MarkDoneCommand;
+import aisu.command.ShowListCommand;
 
 /**
  * A Parser for text inputs.

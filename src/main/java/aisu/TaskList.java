@@ -27,10 +27,18 @@ public class TaskList {
         this.list = currList;
     }
 
+    /**
+     * Retrieves the list data.
+     * @return The list object.
+     */
     public List<Task> getListData() {
         return this.list;
     }
 
+    /**
+     * Retrieves the list size.
+     * @return Size of list.
+     */
     public int getListSize() {
         return this.list.size();
     }
@@ -47,6 +55,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Retrieves a task specified in the list.
+     * @param n The index of the task.
+     * @return The task.
+     * @throws AisuException if index is out of bounds.
+     */
     private Task getTaskAt(int n) throws AisuException {
         checkError(n);
         return this.list.get(n - 1);
@@ -61,7 +75,7 @@ public class TaskList {
      * @throws AisuException If task formatting is invalid.
      */
     public Task addTask(String line, TaskTypes type) throws AisuException { // adds new task to taskList
-        Task newTask = new Todo("dummy");
+        Task newTask;
         switch(type) {
         case T:
             newTask = new Todo(line);
@@ -82,11 +96,19 @@ public class TaskList {
                 throw new AisuException("Your formatting is wrong! Write as: event (task) /at (date range)");
             }
             break;
+        default:
+            throw new AisuException("Invalid input!");
         }
         this.list.add(newTask);
         return newTask;
     }
 
+    /**
+     * Deletes a specific task indicated by the index.
+     * @param n Index of the task to be deleted.
+     * @return The deleted task.
+     * @throws AisuException if index is out of range.
+     */
     public Task deleteTask(int n) throws AisuException {
         checkError(n);
         Task deletedTask = this.list.get(n - 1);
@@ -94,6 +116,12 @@ public class TaskList {
         return deletedTask;
     }
 
+    /**
+     * Marks task as completed.
+     * @param n Index of the task to be marked as completed.
+     * @return The completed task.
+     * @throws AisuException if index is out of range.
+     */
     public Task markDone(int n) throws AisuException {
         checkError(n);
         this.list.get(n - 1).markAsDone();
@@ -110,6 +138,10 @@ public class TaskList {
         return result.toString();
     }
 
+    /**
+     * Returns the string formatting of the task list.
+     * @return The string version of the list.
+     */
     @Override
     public String toString() {
         if (this.list.isEmpty()) {

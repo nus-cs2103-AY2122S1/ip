@@ -45,7 +45,9 @@ public class Storage {
         try {
             this.file = new File(this.dirPath + "/" + this.fileName);
             System.out.println("Checking for existing file: " + this.fileName + "...");
-            System.out.println(this.file.createNewFile() ? "New " + this.fileName + " created." : this.fileName + " already exists.");
+            System.out.println(this.file.createNewFile()
+                    ? "New " + this.fileName + " created."
+                    : this.fileName + " already exists.");
             return true;
         } catch (IOException e) {
             System.out.println("Error: File cannot be created.");
@@ -101,7 +103,7 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(this.dirPath + "/" + this.fileName);
             for (Task t : list) {
-                fw.write(t.ParseData() + System.lineSeparator());
+                fw.write(t.parseData() + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {

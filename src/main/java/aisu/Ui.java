@@ -11,14 +11,14 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final String DIVIDER = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=\n";
-    private static final String LOGO = " (`-')  _   _               (`-').->           \n" +
-            "(OO ).-/  (_)              ( OO)_       .->\n" +
-            "/ ,---.   ,-(`-') (`-')   (_)--\\_) ,--.(,--.\n" +
-            "| \\ /`.\\  | ( OO) ( OO).->/    _ / |  | |(`-')\n" +
-            "'-'|_.' | |  |  )(,------.\\_..`--. |  | |(OO )\n" +
-            "(|  .-. |(|  |_/  `------'.-._)   \\|  | | |  \\ \n" +
-            "|  | |  | |  |'->         \\      / \\  '-'(_ .'\n" +
-            "`--' `--' `--'             `-----'  `-----'   \n";
+    private static final String LOGO = " (`-')  _   _               (`-').->           \n"
+            + "(OO ).-/  (_)              ( OO)_       .->\n"
+            + "/ ,---.   ,-(`-') (`-')   (_)--\\_) ,--.(,--.\n"
+            + "| \\ /`.\\  | ( OO) ( OO).->/    _ / |  | |(`-')\n"
+            + "'-'|_.' | |  |  )(,------.\\_..`--. |  | |(OO )\n"
+            + "(|  .-. |(|  |_/  `------'.-._)   \\|  | | |  \\ \n"
+            + "|  | |  | |  |'->         \\      / \\  '-'(_ .'\n"
+            + "`--' `--' `--'             `-----'  `-----'   \n";
     private static final int PADDING_LENGTH = 48;
     private static String formattedInstructions;
     private static final String GOODBYE_MESSAGE = "See you next time! :D";
