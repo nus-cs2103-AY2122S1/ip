@@ -10,6 +10,7 @@ import duke.ui.Ui;
  */
 public class ExitCommand extends Command {
 
+    private static final boolean MUST_EXIT = false;
     private static final CommandType COMMAND_TYPE = CommandType.EXIT;
 
     /**
@@ -19,7 +20,6 @@ public class ExitCommand extends Command {
      */
     public ExitCommand(String command) {
         super(command);
-        this.mustExit = true;
     }
 
     @Override
@@ -35,5 +35,10 @@ public class ExitCommand extends Command {
     @Override
     CommandType getCommandType() {
         return COMMAND_TYPE;
+    }
+
+    @Override
+    public boolean mustExit() {
+        return MUST_EXIT;
     }
 }

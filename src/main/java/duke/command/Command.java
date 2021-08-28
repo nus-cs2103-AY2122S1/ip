@@ -10,7 +10,7 @@ import duke.ui.Ui;
  */
 public abstract class Command {
 
-    boolean mustExit;
+    private static final boolean MUST_EXIT = false;
 
     /**
      * Creates a Command instance.
@@ -18,7 +18,6 @@ public abstract class Command {
      * @param command The command represented by the instance.
      */
     public Command(String command) throws DukeInvalidCommandException {
-        this.mustExit = false;
         String[] tokens = command.strip().split(" ");
         if (tokens.length == 0 || tokens[0].length() == 0) {
             throw new DukeInvalidCommandException("This command is empty.");
@@ -57,6 +56,6 @@ public abstract class Command {
      * @return True if Duke must exit, false otherwise.
      */
     public boolean mustExit() {
-        return mustExit;
+        return MUST_EXIT;
     }
 }

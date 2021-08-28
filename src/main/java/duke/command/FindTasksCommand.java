@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.List;
+import java.util.Map;
+
 import duke.task.Task;
 import duke.task.TaskHandler;
 import duke.ui.Ui;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Represents a "Find Tasks" command.
