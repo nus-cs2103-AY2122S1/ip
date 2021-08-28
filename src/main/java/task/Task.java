@@ -42,6 +42,17 @@ abstract public class Task {
 
     /**
      * Returns task string to be written into file.
+     * Checks if the description contains input String.
+     *
+     * @param string Input String.
+     * @return true if description contains input String, else false.
+     */
+    public boolean checkDescriptionContains(String string) {
+        return description.contains(string);
+    }
+
+    /**
+     * Get task string to be inputted into file.
      *
      * @return string in the respective task format.
      */

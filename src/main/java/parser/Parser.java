@@ -5,6 +5,7 @@ import command.Command;
 import command.DeleteCommand;
 import command.DoneCommand;
 import command.ExitCommand;
+import command.FindCommand;
 import command.ListCommand;
 
 import exceptions.DukeException;
@@ -20,6 +21,7 @@ public class Parser {
     public static final String COMMAND_EVENT = "event";
     public static final String COMMAND_DONE = "done";
     public static final String COMMAND_DELETE = "delete";
+    public static final String COMMAND_FIND = "find";
 
     private static final String DELIMITER = " ";
 
@@ -72,6 +74,8 @@ public class Parser {
         case COMMAND_DELETE:
             command = new DeleteCommand(fullCommand, DELIMITER);
             break;
+        case COMMAND_FIND:
+            command = new FindCommand(fullCommand, DELIMITER);
         default:
             break;
         }

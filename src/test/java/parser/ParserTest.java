@@ -26,6 +26,7 @@ public class ParserTest {
                 "done 3",
                 "delete 5",
                 "list",
+                "find book",
                 "bye"
         };
 
@@ -52,6 +53,7 @@ public class ParserTest {
                 "deadline return book /by 2021-18-06",
                 "event book fest /at 2021-18-06",
                 "done2",
+                "find",
                 "delete3"
         };
 
