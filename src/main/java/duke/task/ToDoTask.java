@@ -9,8 +9,8 @@ public class ToDoTask extends Task {
         super(name);
     }
 
-    public ToDoTask(String name, boolean completed) {
-        super(name, completed);
+    public ToDoTask(String name, boolean isCompleted) {
+        super(name, isCompleted);
     }
 
     @Override

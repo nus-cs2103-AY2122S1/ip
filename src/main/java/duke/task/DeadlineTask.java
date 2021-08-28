@@ -22,12 +22,12 @@ public class DeadlineTask extends Task {
      * Creates a task with a deadline. Normally used when recreating tasks from the
      * database.
      *
-     * @param name      of the task
-     * @param completed whether the task is completed
-     * @param date      deadline
+     * @param name        of the task
+     * @param isCompleted whether the task is completed
+     * @param date        deadline
      */
-    public DeadlineTask(String name, boolean completed, LocalDate date) {
-        super(name, completed);
+    public DeadlineTask(String name, boolean isCompleted, LocalDate date) {
+        super(name, isCompleted);
         this.date = date;
     }
 

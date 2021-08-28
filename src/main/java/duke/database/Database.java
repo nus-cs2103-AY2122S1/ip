@@ -99,22 +99,22 @@ public abstract class Database {
      * Recreates a task based on provided information. Used when retrieving task
      * from SQL database.
      *
-     * @param type      type of task
-     * @param name      name of task
-     * @param completed {@code true} if the task has been completed
-     * @param date      date of the task, nullable
+     * @param type        type of task
+     * @param name        name of task
+     * @param isCompleted {@code true} if the task has been completed
+     * @param date        date of the task, nullable
      * @return
      */
-    protected Task createTask(TaskType type, String name, boolean completed, String date) {
+    protected Task createTask(TaskType type, String name, boolean isCompleted, String date) {
         LocalDate localDate = Optional.ofNullable(date).filter(str -> !str.equals("null"))
                 .map(str -> LocalDate.parse(str)).orElse(null);
         switch (type) {
         case TODO:
-            return new ToDoTask(name, completed);
+            return new ToDoTask(name, isCompleted);
         case DEADLINE:
-            return new DeadlineTask(name, completed, localDate);
+            return new DeadlineTask(name, isCompleted, localDate);
         case EVENT:
-            return new EventTask(name, completed, localDate);
+            return new EventTask(name, isCompleted, localDate);
         default:
             return null;
         }

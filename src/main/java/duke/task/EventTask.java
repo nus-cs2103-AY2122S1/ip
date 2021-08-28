@@ -20,12 +20,12 @@ public class EventTask extends Task {
     /**
      * Creates a task with an event date.
      *
-     * @param name      of the task
-     * @param completed whether the task is completed
-     * @param date      of event
+     * @param name        of the task
+     * @param isCompleted whether the task is completed
+     * @param date        of event
      */
-    public EventTask(String name, boolean completed, LocalDate date) {
-        super(name, completed, date);
+    public EventTask(String name, boolean isCompleted, LocalDate date) {
+        super(name, isCompleted, date);
     }
 
     @Override

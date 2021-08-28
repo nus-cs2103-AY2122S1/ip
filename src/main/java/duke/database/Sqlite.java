@@ -61,9 +61,9 @@ public class Sqlite extends Database {
             while (rs.next()) {
                 TaskType type = TaskType.valueOf(rs.getString("type"));
                 String name = rs.getString("name");
-                boolean completed = rs.getBoolean("completed");
+                boolean isCompleted = rs.getBoolean("completed");
                 String date = rs.getString("date");
-                list.add(this.createTask(type, name, completed, date));
+                list.add(this.createTask(type, name, isCompleted, date));
             }
             close(ps);
         } catch (SQLException ex) {
@@ -76,13 +76,13 @@ public class Sqlite extends Database {
     public void addTask(Task task) {
         TaskType type = task.getType();
         String name = task.getName();
-        int completed = task.isCompleted() ? 1 : 0;
+        int isCompleted = task.isCompleted() ? 1 : 0;
         String date = task.getDate() == null ? null : task.getDate().toString();
         try {
             connection = getSqlConnection();
             PreparedStatement ps = connection
                     .prepareStatement("INSERT INTO " + TASK_TABLE_NAME + " (type, name, completed, date) VALUES('"
-                            + type + "', '" + name + "', " + completed + ", '" + date + "')");
+                            + type + "', '" + name + "', " + isCompleted + ", '" + date + "')");
             ps.executeUpdate();
             close(ps);
         } catch (SQLException ex) {
@@ -104,9 +104,9 @@ public class Sqlite extends Database {
                 if (++row == index) {
                     TaskType type = TaskType.valueOf(rs.getString("type"));
                     String name = rs.getString("name");
-                    boolean completed = rs.getBoolean("completed");
+                    boolean isCompleted = rs.getBoolean("completed");
                     String date = rs.getString("date");
-                    result = this.createTask(type, name, completed, date);
+                    result = this.createTask(type, name, isCompleted, date);
 
                     int rowid = rs.getInt("rowid");
                     ps = connection
@@ -161,9 +161,9 @@ public class Sqlite extends Database {
             while (rs.next()) {
                 TaskType type = TaskType.valueOf(rs.getString("type"));
                 String name = rs.getString("name");
-                boolean completed = rs.getBoolean("completed");
+                boolean isCompleted = rs.getBoolean("completed");
                 String date = rs.getString("date");
-                list.add(this.createTask(type, name, completed, date));
+                list.add(this.createTask(type, name, isCompleted, date));
             }
             close(ps);
         } catch (SQLException ex) {
