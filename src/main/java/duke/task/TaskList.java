@@ -1,9 +1,9 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 import duke.exception.TaskAlreadyDoneException;
 import duke.exception.TaskIndexOutOfBoundsException;
-
-import java.util.ArrayList;
 
 /**
  * This TaskList class implements a task list.

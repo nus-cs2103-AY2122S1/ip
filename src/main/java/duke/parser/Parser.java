@@ -1,5 +1,8 @@
 package duke.parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -12,9 +15,6 @@ import duke.exception.MissingKeywordException;
 import duke.exception.MissingTaskIndexException;
 import duke.exception.TimeNotSpecifiedException;
 import duke.exception.UnrecognisedCommandException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Parses user input.
