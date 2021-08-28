@@ -1,15 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.ByeCommand;
-import duke.command.EventCommand;
-import duke.command.DeadlineCommand;
-import duke.command.FindCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
+import duke.command.*;
 
 /**
  * Parser reads the input by the user and returns the relevant duke.command.
