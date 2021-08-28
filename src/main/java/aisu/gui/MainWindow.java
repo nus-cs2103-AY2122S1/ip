@@ -28,9 +28,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private final Storage storage;
-    private TaskList tasklist;
-    private final Ui ui;
+    private Aisu aisu;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/you.png"));
     private Image aisuImage = new Image(this.getClass().getResourceAsStream("/images/bot.gif"));
