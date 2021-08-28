@@ -1,3 +1,7 @@
+/**
+ * List refers to a task list that is used in the Duke program.
+ */
+
 import java.util.ArrayList;
 
 public class List {
@@ -52,6 +56,14 @@ public class List {
         taskList.add(task);
         System.out.println("Got it. I've added this task:");
         System.out.println(task.printName());
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+    }
+
+    public void removeTask(int userInput) {
+        Task task = taskList.get(userInput);
+        System.out.println("Noted. I've removed the task:");
+        System.out.println(task.printName());
+        taskList.remove(userInput);
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 }
