@@ -23,7 +23,7 @@ public class Duke {
         ret.put("todo", (x) -> taskBank.addTask(x, ToDo::create));
         ret.put("done", (x) -> taskBank.markTask(x));
         ret.put("delete", (x) -> taskBank.deleteTask(x));
-        ret.put("find", (x) -> UI.printTasks(taskBank.searchTasks(x)));
+        ret.put("find", (x) -> Ui.printTasks(taskBank.searchTasks(x)));
 
         return ret;
     }
