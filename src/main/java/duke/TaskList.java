@@ -2,7 +2,6 @@ package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ public class TaskList {
     private Storage storage;
 
     /**
-     * Initializes a new TaskList with the given filepath
+     * Initializes a new TaskList with the given file path
      * Filepath is used to initialize a Storage instance
      *
      * @param filePath Path to storage file
@@ -69,7 +68,7 @@ public class TaskList {
      */
     public void list() {
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i+1 + "." + tasks.get(i).toString());
+            System.out.println(i + 1 + "." + tasks.get(i).toString());
         }
         System.out.println();
     }
@@ -111,6 +110,8 @@ public class TaskList {
                 LocalDate eventDate = LocalDate.parse(commandArr[3]);
                 add(new Event(commandArr[2], eventDate, isDone));
                 break;
+            default:
+                continue;
             }
         }
         sc.close();
@@ -141,12 +142,16 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds and prints a list of tasks with matching task name
+     * @param taskName Name of task entered by user
+     */
     public void find(String taskName) {
         List<Task> matchingTasks = tasks.stream()
                 .filter(task -> task.getName().contains(taskName))
                 .collect(Collectors.toList());
         for (int i = 0; i < matchingTasks.size(); i++) {
-            System.out.println(i+1 + "." + matchingTasks.get(i).toString());
+            System.out.println(i + 1 + "." + matchingTasks.get(i).toString());
         }
         System.out.println();
     }

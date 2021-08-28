@@ -57,7 +57,7 @@ public class Storage {
 
     /**
      * Gets the user task file and appends a string to it
-     * 
+     *
      * @param string String to be appended
      */
     public void appendToDataFile(String string) {

@@ -2,13 +2,13 @@ package duke;
 
 import java.time.format.DateTimeParseException;
 
+import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
-import duke.exceptions.MissingTaskNameException;
-import duke.exceptions.MissingTaskNumberException;
 import duke.exceptions.InvalidTaskNumberException;
 import duke.exceptions.MissingDeadlineException;
 import duke.exceptions.MissingEventTimeException;
-import duke.exceptions.DukeException;
+import duke.exceptions.MissingTaskNameException;
+import duke.exceptions.MissingTaskNumberException;
 
 /**
  * Duke is a Personal Assistant Chatbot that keeps track of various tasks.
@@ -31,7 +31,7 @@ public class Duke {
     /**
      * Entry point of Duke
      *
-     * @param args
+     * @param args Command line arguments
      */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
@@ -50,7 +50,7 @@ public class Duke {
             String command = UI.readCommand();
             try {
                 Parser.handle(command, taskList);
-                running = Parser.isRunning;
+                running = Parser.isRunning();
             } catch (InvalidCommandException e) {
                 System.out.println("I'm afraid I don't recognise that, please try again!");
             } catch (MissingTaskNameException e) {
