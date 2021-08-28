@@ -75,7 +75,6 @@ public class TaskList {
                 by = byBuilder.toString();
 
                 list.add(new Deadline(desc, by, taskDone));
-
                 break;
 
             case "E":
@@ -106,6 +105,7 @@ public class TaskList {
 
                 list.add(new Event(desc, at, taskDone));
                 break;
+
             default:
             }
         }
