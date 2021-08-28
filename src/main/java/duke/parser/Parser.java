@@ -6,11 +6,18 @@ import duke.task.*;
 
 import java.util.regex.Pattern;
 
-// Makes sense of the user's commands
+/**
+ * A class that will make sense of the user's commands through string parsing
+ */
 public class Parser {
-    private static boolean isStop = false;
-    private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private static final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
+    /**
+     * The main method to decide which parsing is needed for the user input
+     * @param input the input keyed in by user
+     * @return the type of command the input is
+     * @throws DukeException if the users enter a wrong input
+     */
     public static Command parse(String input) throws DukeException{
         Task currTask;
         if (input.equals("list")) {
@@ -41,6 +48,12 @@ public class Parser {
         }
     }
 
+    /**
+     * A method that parses users inputs that wishes to mark a task as done
+     * @param input the user's input
+     * @return the index of the task user wishes to mark as done
+     * @throws DukeException if the user's input is in an wrong format
+     */
     public static int parseDone(String input) throws DukeException {
         String numberString = String.valueOf(input.charAt(5));
         if (!pattern.matcher(numberString).matches()) {
@@ -57,6 +70,12 @@ public class Parser {
         return number - 1;
     }
 
+    /**
+     * A method that parses users inputs that wishes to delete a task
+     * @param input the user's input
+     * @return the index of the task user wishes to delete
+     * @throws DukeException if the user's input is in an wrong format
+     */
     public static int parseDelete(String input) throws DukeException {
         // int number = Integer.parseInt(String.valueOf(input.charAt(7)));
         String numberString = String.valueOf(input.charAt(7));
@@ -70,6 +89,12 @@ public class Parser {
         return number - 1;
     }
 
+    /**
+     * A method that parses users inputs that wishes to add a todo task
+     * @param input the user's input
+     * @return the task that the user added
+     * @throws DukeException if the user's input is in an wrong format
+     */
     public static Task parseTodo(String input) throws DukeException {
         if (input.length() == 4) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -79,6 +104,12 @@ public class Parser {
 
     }
 
+    /**
+     * A method that parses users inputs that wishes to add a deadline task
+     * @param input the user's input
+     * @return the task that the user added
+     * @throws DukeException if the user's input is in an wrong format
+     */
     public static Task parseDeadline(String input) throws DukeException {
         if (input.length() == 8) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
@@ -89,6 +120,12 @@ public class Parser {
         return new Deadline(taskDesc, by);
     }
 
+    /**
+     * A method that parses users inputs that wishes to add a event task
+     * @param input the user's input
+     * @return the task that the user added
+     * @throws DukeException if the user's input is in an wrong format
+     */
     public static Task parseEvent(String input) throws DukeException {
         if (input.length() == 5) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
@@ -98,5 +135,4 @@ public class Parser {
         String taskDesc = input.substring(6, byIndex-1);
         return new Event(taskDesc,by);
     }
-
 }
