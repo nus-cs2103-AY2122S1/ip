@@ -12,9 +12,8 @@ public class TaskList {
      * exist and is unable to be created.
      *
      * @param storage Storage object used to read and write tasks from file
-     * @throws IOException if file does not exist and cannot be created
      */
-    public TaskList(Storage storage) throws IOException {
+    public TaskList(Storage storage) {
         this.storage = storage;
         this.tasks = storage.load();
     }

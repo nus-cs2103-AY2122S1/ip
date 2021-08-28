@@ -24,20 +24,22 @@ public class Storage {
      * If local file not provided, this function creates one.
      *
      * @return new list of tasks obtained from local file (if any).
-     * @throws FileNotFoundException if file is not found
-     * @throws IOException if file cannot be created
      */
-    public List<Task> load() throws IOException {
-        File file = new File(filePath);
-        file.createNewFile();
-        FileInputStream fstream = new FileInputStream(file);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+    public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
-        String line;
-        while ((line = br.readLine()) != null) {
-            tasks.add(Task.strToObj(line));
+        try {
+            File file = new File(filePath);
+            file.createNewFile();
+            FileInputStream fstream = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+            String line;
+            while ((line = br.readLine()) != null) {
+                tasks.add(Task.strToObj(line));
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        br.close();
         return tasks;
     }
 
