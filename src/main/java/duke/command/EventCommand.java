@@ -19,7 +19,7 @@ public class EventCommand implements Command {
     /**
      * Creates a command that creates an event in the given dukelist and provide its
      * response to the given ui.
-     * 
+     *
      * @param dukeList list of tasks for the task to be added into
      * @param ui       user interface for displaying responses
      */
@@ -30,14 +30,16 @@ public class EventCommand implements Command {
 
     @Override
     public void exec(String args) {
-        if (args == null || args.isEmpty())
+        if (args == null || args.isEmpty()) {
             throw new InvalidArgumentException("☹ OOPS!!! The description of an event cannot be empty.");
+        }
         String[] arr = args.split(" /at ", 2);
         LocalDate date = null;
         if (arr.length >= 2) {
             try {
                 date = LocalDate.parse(arr[1]);
             } catch (DateTimeException e) {
+                throw new InvalidArgumentException("Invalid date format: yyyy-mm-dd");
             }
         }
         Task task = new EventTask(arr[0], date);

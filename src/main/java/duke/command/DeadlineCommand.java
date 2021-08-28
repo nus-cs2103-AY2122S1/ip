@@ -19,7 +19,7 @@ public class DeadlineCommand implements Command {
     /**
      * Creates a command that creates a deadline task in the given list and provides
      * the corresponding response to the specified ui.
-     * 
+     *
      * @param dukeList list of tasks for the task to be added into
      * @param ui       user interface for displaying responses
      */
@@ -30,8 +30,9 @@ public class DeadlineCommand implements Command {
 
     @Override
     public void exec(String args) {
-        if (args == null || args.isEmpty())
+        if (args == null || args.isEmpty()) {
             throw new InvalidArgumentException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
         String[] arr = args.split(" /by ", 2);
         LocalDate date = null;
         if (arr.length >= 2) {

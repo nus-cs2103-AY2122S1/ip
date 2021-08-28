@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import duke.exception.DatabaseAccessException;
-import duke.exception.DatabaseIOException;
+import duke.exception.DatabaseFileException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -22,10 +22,10 @@ import duke.task.ToDoTask;
  * Encapsulates a database access and necessary methods for Duke's list.
  */
 public abstract class Database {
-    protected Connection connection;
     /** Name of database table. */
     protected static final String DATABASE_NAME = "tasks_data";
     protected static final String TASK_TABLE_NAME = "tasks";
+    protected Connection connection;
 
     /**
      * Returns connection established by the database loader.
@@ -99,22 +99,22 @@ public abstract class Database {
      * Recreates a task based on provided information. Used when retrieving task
      * from SQL database.
      *
-     * @param type      type of task
-     * @param name      name of task
-     * @param completed {@code true} if the task has been completed
-     * @param date      date of the task, nullable
+     * @param type        type of task
+     * @param name        name of task
+     * @param isCompleted {@code true} if the task has been completed
+     * @param date        date of the task, nullable
      * @return
      */
-    protected Task createTask(TaskType type, String name, boolean completed, String date) {
+    protected Task createTask(TaskType type, String name, boolean isCompleted, String date) {
         LocalDate localDate = Optional.ofNullable(date).filter(str -> !str.equals("null"))
                 .map(str -> LocalDate.parse(str)).orElse(null);
         switch (type) {
         case TODO:
-            return new ToDoTask(name, completed);
+            return new ToDoTask(name, isCompleted);
         case DEADLINE:
-            return new DeadlineTask(name, completed, localDate);
+            return new DeadlineTask(name, isCompleted, localDate);
         case EVENT:
-            return new EventTask(name, completed, localDate);
+            return new EventTask(name, isCompleted, localDate);
         default:
             return null;
         }
@@ -179,7 +179,7 @@ public abstract class Database {
             try {
                 dataFolder.createNewFile();
             } catch (IOException e) {
-                throw new DatabaseIOException("Unable to create data file!");
+                throw new DatabaseFileException("Unable to create data file!");
             }
         }
         return dataFolder;

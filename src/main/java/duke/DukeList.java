@@ -15,6 +15,9 @@ import duke.task.Task;
 public class DukeList {
     private final Database database;
 
+    /**
+     * Creates a list interface for Duke bot.
+     */
     public DukeList() {
         this.database = new Sqlite();
         this.database.load();
@@ -22,9 +25,8 @@ public class DukeList {
 
     /**
      * Adds a task to the list and return a response on the added task.
-     * 
+     *
      * @param task to be added to the list
-     * @return response to the addition
      */
     public void addTask(Task task) {
         this.database.addTask(task);
@@ -33,7 +35,7 @@ public class DukeList {
     /**
      * Marks the given task (by index) as completed, and returns a response on
      * whether the operation is successful.
-     * 
+     *
      * @param i index of task to be marked as completed
      * @return response on whether it is succcessful
      */
@@ -48,7 +50,7 @@ public class DukeList {
     /**
      * Removes the task in the given index from the list, and returns a response on
      * whether the operation is successful.
-     * 
+     *
      * @param i index of task to be removed
      * @return response on whether it is succcessful
      */
@@ -62,7 +64,7 @@ public class DukeList {
 
     /**
      * Finds tasks by searching for a keyword/phrase in the name.
-     * 
+     *
      * @param pattern keyword/phrase to search
      * @return list of tasks
      */
@@ -71,6 +73,11 @@ public class DukeList {
     }
 
     // TODO Change to get size instead
+    /**
+     * Returns a message regarding the current size of the list.
+     *
+     * @return message on the current list size
+     */
     public String currentSizeMessage() {
         int size = this.database.getTasksList().size();
         String unit = size == 1 ? "task" : "tasks";

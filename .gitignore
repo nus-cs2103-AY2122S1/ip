@@ -16,3 +16,4 @@ bin/
 # Generated via ./gradew run
 data
 target
+build

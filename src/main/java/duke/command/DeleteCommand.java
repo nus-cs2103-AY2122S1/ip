@@ -15,7 +15,7 @@ public class DeleteCommand implements Command {
     /**
      * Creates a command that deletes a task from the given dukelist, and provide
      * its response to the given ui.
-     * 
+     *
      * @param dukeList list of tasks from which the task will be deleted from
      * @param ui       user interface for displaying responses
      */

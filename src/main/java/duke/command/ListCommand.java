@@ -13,7 +13,7 @@ public class ListCommand implements Command {
     /**
      * Creates a command that lists tasks in the given dukelist onto the specified
      * ui.
-     * 
+     *
      * @param dukeList of which tasks
      * @param ui       to display the tasks onto
      */
