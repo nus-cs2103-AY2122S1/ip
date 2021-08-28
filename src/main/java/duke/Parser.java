@@ -28,11 +28,11 @@ public class Parser {
         switch (data.toLowerCase()) {
         case "bye":
             scan.close();
-            Ui.goodbyeMessage();
+            Ui.showGoodbyeMessage();
             return false;
         case "list":
             if (taskList.getSize() == 0) {
-                Ui.noTasksMessage();
+                Ui.showNoTasksMessage();
             } else {
                 taskList.printTaskList();
             }
