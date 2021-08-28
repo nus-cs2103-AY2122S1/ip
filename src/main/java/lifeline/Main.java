@@ -29,6 +29,7 @@ public class Main extends Application {
             Image icon = new Image(this.getClass().getResourceAsStream("/images/Apex.png"));
             stage.getIcons().add(icon);
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setTitle("Lifeline");
             stage.show();
         } catch (IOException e) {
