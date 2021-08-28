@@ -10,7 +10,7 @@ public class Parser {
 
     public static Command parse(String fullCommand) throws DukeException {
         String[] words = fullCommand.split(" ", 2);
-        String command = words[0], userDescription = words.length > 1 ? words[1] : "";
+        String command = words[0], userDescription = words.length > 1 ? words[1] : null;
         String[] taskDescriptions;
 
         switch (command) {
@@ -28,6 +28,8 @@ public class Parser {
             return new DoneCommand(Integer.parseInt(userDescription));
         case "delete":
             return new DeleteCommand(Integer.parseInt(userDescription));
+        case "find":
+            return new FindCommand(userDescription);
         case "exit":
             return new ExitCommand();
         default:
