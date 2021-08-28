@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     private final LocalDateTime dateTime;
-    
+
     /**
      * Constructor for deadline.
      *
@@ -16,10 +16,10 @@ public class Deadline extends Task {
         super(description);
         this.dateTime = dateTime;
     }
-    
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")) + ")";
     }
 }
