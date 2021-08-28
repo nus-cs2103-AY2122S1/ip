@@ -11,7 +11,7 @@ public class Deadline extends Task {
     
     @Override
     public String taskList() {
-        return "Deadline " + super.taskList() + "(by: " + by + ")";
+        return "Deadline " + super.taskList() + " (by: " + by + ")";
     }
     
     @Override

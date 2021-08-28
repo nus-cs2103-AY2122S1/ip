@@ -11,7 +11,7 @@ public class Event extends Task {
     
     @Override
     public String taskList() {
-        return "Event " + super.taskList() + "(at: " + at + ")";
+        return "Event " + super.taskList() + " (at: " + at + ")";
     }
     
     @Override

@@ -18,29 +18,8 @@ public class Duke {
         System.out.println("Hello from Duke!");
         System.out.println("");
         User user1 = new User();
-        try {
-            File file = new File("./duke.txt");
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
-        try {
-            File f = new File("./duke.txt"); // create a File for the given file path
-            Scanner s = new Scanner(f); // create a Scanner using the File as the source
-            if (!s.hasNext()) {
-                System.out.println("There are no items in your task list!");
-            } else {
-                System.out.println("Here is your current task list: ");
-                while (s.hasNext()) {
-                    System.out.println(s.nextLine());
-                }
-                System.out.println("End of task list");
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
-        }
+        Storage storage = new Storage("./duke.txt");
+        storage.loadTaskListData();
         System.out.println("");
         System.out.println("Hope you are doing well. How can I help you?");
         TaskList taskList = new TaskList();
@@ -65,7 +44,7 @@ public class Duke {
                     t.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(t.toString());
-                    writeToFile("./duke.txt", taskList);
+                    storage.writeToFile("./duke.txt", taskList);
                 }
             } else {
                 if (command.startsWith("todo")) {
@@ -77,7 +56,7 @@ public class Duke {
                         System.out.println("Got it. I've added this task:");
                         System.out.println(task.toString());
                         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-                        writeToFile("./duke.txt", taskList);
+                        storage.writeToFile("./duke.txt", taskList);
                     }
                 } else if (command.startsWith("deadline")) {
                     if (command.length() <= 9) {
@@ -124,7 +103,7 @@ public class Duke {
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(task);
                     System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-                    writeToFile("./duke.txt", taskList);
+                    storage.writeToFile("./duke.txt", taskList);
                 } else {
                     DukeException exp = new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println(exp);
@@ -138,16 +117,5 @@ public class Duke {
         System.out.println(exp);
     }
 
-    private static void writeToFile(String filePath, TaskList tl) {
-        try {
-            FileWriter fw = new FileWriter(filePath);
-            for (int i = 0; i < tl.size(); i++) {
-                int num = i + 1;
-                fw.write(num + ". " + tl.getTask(i).taskList() + "\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
-    }
+    
 }
