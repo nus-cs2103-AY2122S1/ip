@@ -155,6 +155,8 @@ public class Duke {
             this.deleteTaskInTDL(lastInput);
         } else if (cmdType == DukeCommandParser.CommandType.ADD_TASK) {
             this.addToTDL(lastInput, currTaskType);
+        } else if (cmdType == DukeCommandParser.CommandType.FIND) {
+            this.findTaskInTDL(lastInput);
 
         } else {
             unknownCommandEntered();
@@ -238,6 +240,17 @@ public class Duke {
 
         }
         String dukeOutput = this.currDukeList.deleteTask(taskNo);
+        dukeSays(dukeOutput);
+    }
+
+    private void findTaskInTDL(String command) throws DukeExceptionBase {
+        if (command.length() < 6) {
+            throw new DukeExceptionBase("You need to specify a keyword to find.");
+        }
+
+        String keywordStr = command.substring(5);
+
+        String dukeOutput = this.currDukeList.findMatchingTaskInList(keywordStr);
         dukeSays(dukeOutput);
     }
 

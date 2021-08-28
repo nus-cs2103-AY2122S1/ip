@@ -18,7 +18,8 @@ public class DukeCommandParser {
         LIST,
         MARK_TASK_DONE,
         DEL_TASK,
-        UNKNOWN
+        UNKNOWN,
+        FIND
     }
 
 
@@ -47,6 +48,8 @@ public class DukeCommandParser {
             return CommandType.MARK_TASK_DONE;
         } else if (cmd.length() >= 6 && cmd.substring(0, 6).equals("delete")) {
             return CommandType.DEL_TASK;
+        } else if (cmd.startsWith("find")) {
+            return CommandType.FIND;
         } else if (currTaskType != BaseTask.TaskType.NONE) {
             return CommandType.ADD_TASK;
         } else {

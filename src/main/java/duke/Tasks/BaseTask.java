@@ -122,6 +122,16 @@ public class BaseTask {
     }
 
     /**
+     * Searches task to see if it matches provided keywords.
+     *
+     * @param keywords The keywords to use during the search.
+     * @return true if the task matches, false otherwise.
+     */
+    public boolean searchForKeywords(String keywords) {
+        return this.taskName.contains(keywords);
+    }
+
+    /**
      * Check the type of task represented by the current command.
      * @param command The command inputted by the user.
      * @return the task type. Returns NONE if it is not a task.
