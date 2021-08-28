@@ -22,10 +22,10 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
         Task t = tasks.get(index - 1);
         storage.saveData(tasks.delete(index - 1));
-        ui.print(String.format(
+        return ui.print(String.format(
                 "Noted. I've removed this task:\n %s\nNow you have %d task(s) in the list",
                 t.toString(),
                 tasks.getCount()));
