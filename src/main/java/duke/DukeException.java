@@ -5,6 +5,7 @@ package duke;
  * object.
  */
 public class DukeException extends Exception {
+    
     private String message;
     public DukeException(String message) {
         super("Oops, " + message);

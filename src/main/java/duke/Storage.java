@@ -16,6 +16,7 @@ import java.util.Scanner;
  * Handles loading and saving to-do lists to and from the system.
  */
 public class Storage {
+    static final String SEPARATOR = "###";
     private File file;
 
     public Storage(String filePath) throws DukeException {
@@ -48,16 +49,16 @@ public class Storage {
                 while (iterator.hasNext()) {
                     Item currItem = iterator.next();
                     if (currItem instanceof ToDo) {
-                        s.append("T###");
+                        s.append("T" + SEPARATOR);
                     } else if (currItem instanceof Event) {
-                        s.append("E###");
+                        s.append("E" + SEPARATOR);
                     } else if (currItem instanceof Deadline) {
-                        s.append("D###");
+                        s.append("D" + SEPARATOR);
                     } else {
                         throw new DukeException("storage error");
                     }
                     
-                    s.append(currItem.getDone() + "###");
+                    s.append(currItem.getDone() + SEPARATOR);
                     s.append(currItem.getPickle() + "\n");
                 }
             }
@@ -80,7 +81,7 @@ public class Storage {
             Scanner fileReader = new Scanner(this.file);
             while (fileReader.hasNextLine()) {
                 String currLine = fileReader.nextLine();
-                String[] currArgs = currLine.split("###");
+                String[] currArgs = currLine.split(SEPARATOR);
                 Item toAdd = null;
 
                 switch (currArgs[0]) {
@@ -93,6 +94,8 @@ public class Storage {
                 case "E":
                     toAdd = new Event(currArgs[2], currArgs[3]);
                     break;
+                default:
+                    throw new DukeException("Storage error");
                 }
 
                 if (currArgs[1].equals("X")) {

@@ -7,13 +7,17 @@ import java.util.ArrayList;
  * a <code>Duke</code> object.
  */
 public class Ui {
+    static final String STYLE_LINE = "--------------------\n";
+    static final String STYLE_INDENT = "     ";
+
     /**
      * Prints to output. Styles the input before printing.
      * 
      * @param inputString Input String to be printed.
      */
     public void println(String inputString) {
-        System.out.println("     --------------------\n     " + inputString + "\n     --------------------");
+        System.out.print(STYLE_INDENT + STYLE_LINE +
+                inputString + "\n" + STYLE_INDENT + STYLE_LINE);
     }
 
     /**
@@ -22,10 +26,10 @@ public class Ui {
      * @param inputStrings ArrayList of Strings to be printed.
      */
     public void println(ArrayList<String> inputStrings) {
-        String returnBuffer = "     --------------------\n";
+        String returnBuffer = STYLE_INDENT + STYLE_LINE;
         for (String line : inputStrings) {
             returnBuffer = returnBuffer.concat("     " + line + "\n");
         }
-        System.out.println(returnBuffer + "     --------------------");
+        System.out.print(returnBuffer + STYLE_INDENT + STYLE_LINE);
     }
 }
