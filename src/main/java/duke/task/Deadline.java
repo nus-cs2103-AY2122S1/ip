@@ -8,6 +8,13 @@ public class Deadline extends Task {
 
     private LocalDate deadline;
 
+    /**
+     * Creates a new Task object with a deadline attached to it.
+     *
+     * @param description The description of the task.
+     * @param deadline The deadline of the task.
+     * @throws DateTimeParseException If the deadline input is not a valid date
+     */
     public Deadline(String description, String deadline) throws DateTimeParseException {
         super(description);
         this.deadline = LocalDate.parse(deadline);

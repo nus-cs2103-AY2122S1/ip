@@ -1,12 +1,12 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
 
-    Event event = new Event("sell book", "2020-04-21");
+    private Event event = new Event("sell book", "2020-04-21");
 
     @Test
     public void getTime_eventInitialized_localDateReturned() {

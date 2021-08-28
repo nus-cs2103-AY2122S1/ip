@@ -1,8 +1,17 @@
 package duke;
 
-import duke.command.*;
-
 import static java.lang.Integer.parseInt;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DateCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 public class Parser {
 
