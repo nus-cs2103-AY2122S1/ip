@@ -16,7 +16,7 @@ public class TaskTest {
 
     @Test
     public void markAsDone_alreadyDone_throwException() {
-        Task task = new ToDo(Task.TYPE.T, true, "");
+        Task task = new ToDo(Task.Type.T, true, "");
         try {
             assertEquals(true, task.markAsDone());
             fail();
@@ -27,7 +27,7 @@ public class TaskTest {
 
     @Test
     public void markAsDone_markDone_writtenCorrectly(){
-        Task task = new ToDo(Task.TYPE.T, false, "");
+        Task task = new ToDo(Task.Type.T, false, "");
         try {
             assertEquals(true, task.markAsDone());
         } catch (DukeException e) {

@@ -22,7 +22,7 @@ public class Event extends Task {
      * @param type Task type: Event.
      * @param by Event timeline.
      */
-    public Event(String description, Task.TYPE type, String by) {
+    public Event(String description, Type type, String by) {
         super(description, type);
         try {
             LocalDate d1 = LocalDate.parse(by);
@@ -41,7 +41,7 @@ public class Event extends Task {
      * @param description Task description.
      * @param at Event timeline.
      */
-    public Event(TYPE type, boolean isDone, String description, String at) {
+    public Event(Type type, boolean isDone, String description, String at) {
         super(type, isDone, description);
         this.at = at;
     }

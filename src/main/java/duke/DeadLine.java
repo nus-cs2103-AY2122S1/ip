@@ -22,7 +22,7 @@ public class DeadLine extends Task {
      * @param type Task type: Deadline.
      * @param by Deadline due date.
      */
-    public DeadLine(String description, Task.TYPE type, String by) {
+    public DeadLine(String description, Type type, String by) {
         super(description, type);
         try {
             LocalDate d1 = LocalDate.parse(by);
@@ -41,7 +41,7 @@ public class DeadLine extends Task {
      * @param description Task description.
      * @param by Deadline due date.
      */
-    public DeadLine(Task.TYPE type, boolean isDone, String description, String by) {
+    public DeadLine(Type type, boolean isDone, String description, String by) {
         super(type, isDone, description);
         this.by = by;
     }

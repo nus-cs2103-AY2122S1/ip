@@ -6,47 +6,48 @@ package duke;
  * @author Ryan Tian Jun.
  */
 public class Ui {
-    private String currentCommand;
     private static TaskList commands = new TaskList();
+    private String currentCommand;
     private Parser parsedCommand;
+
 
     public Ui(String command) {
         try {
             Parser parser = new Parser(command);
             this.parsedCommand = parser;
             this.currentCommand = command;
-            Parser.COMMAND commandType = parser.getCommandType();
+            Parser.Command commandType = parser.getCommandType();
             executeCommand(commandType);
         } catch (DukeException dukeException) {
             System.out.println(dukeException + "\n");
         }
     }
 
-    private void executeCommand(Parser.COMMAND commandType) {
+    private void executeCommand(Parser.Command commandType) {
         try {
-            if (commandType == Parser.COMMAND.LIST) {
+            if (commandType == Parser.Command.LIST) {
                 TaskList.userCommands();
-            } else if (commandType == Parser.COMMAND.DONE) {
+            } else if (commandType == Parser.Command.DONE) {
                 int taskNumberDone = parsedCommand.getTaskNumber();
                 commands.markDone(taskNumberDone);
-            } else if (commandType == Parser.COMMAND.TODO) {
-                Task taskTodo = new ToDo(currentCommand.substring(5).trim(), Task.TYPE.T);
+            } else if (commandType == Parser.Command.TODO) {
+                Task taskTodo = new ToDo(currentCommand.substring(5).trim(), Task.Type.T);
                 Ui.commands.add(taskTodo);
                 printTask(taskTodo);
-            } else if (commandType == Parser.COMMAND.DEADLINE) {
+            } else if (commandType == Parser.Command.DEADLINE) {
                 Task taskDeadline = new DeadLine(currentCommand.substring(9).trim(),
-                        Task.TYPE.D, returnDeadline(currentCommand).trim());
+                        Task.Type.D, returnDeadline(currentCommand).trim());
                 Ui.commands.add(taskDeadline);
                 printTask(taskDeadline);
-            } else if (commandType == Parser.COMMAND.EVENT) {
+            } else if (commandType == Parser.Command.EVENT) {
                 Task taskEvent = new Event(currentCommand.substring(6).trim(),
-                        Task.TYPE.E, returnTimeline(currentCommand).trim());
+                        Task.Type.E, returnTimeline(currentCommand).trim());
                 Ui.commands.add(taskEvent);
                 printTask(taskEvent);
-            } else if (commandType == Parser.COMMAND.DELETE) {
+            } else if (commandType == Parser.Command.DELETE) {
                 int taskNumberDelete = parsedCommand.getTaskNumber();
                 commands.deleteTask(taskNumberDelete);
-            } else if (commandType == Parser.COMMAND.FIND){
+            } else if (commandType == Parser.Command.FIND) {
                 String query = parsedCommand.getQuery();
                 commands.search(query);
             } else {

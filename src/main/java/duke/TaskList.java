@@ -49,8 +49,7 @@ public class TaskList {
         return results;
     }
 
-
-   /**
+    /**
      * Prints past commands.
      *
      * @return returns a printout of all the past user commands.
@@ -62,7 +61,7 @@ public class TaskList {
             System.out.println("List is empty!");
         }
         for (Task item : taskList) {
-            System.out.println(count + ". "  + item);
+            System.out.println(count + ". " + item);
             count++;
         }
         newLine();
@@ -72,8 +71,8 @@ public class TaskList {
     /**
      * Marks tasks as done.
      *
-     * @throws DukeException Handles out of range errors.
      * @return returns a String message.
+     * @throws DukeException Handles out of range errors.
      */
     public String markDone(int taskNumber) throws DukeException {
         if (taskNumber <= 0) {
@@ -97,8 +96,8 @@ public class TaskList {
     /**
      * Deletes Tasks from the list.
      *
-     * @throws DukeException Handles out of range errors.
      * @return returns a String message.
+     * @throws DukeException Handles out of range errors.
      */
     public String deleteTask(int taskNumber) throws DukeException {
         if (taskNumber <= 0) {

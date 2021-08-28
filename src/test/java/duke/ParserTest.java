@@ -17,7 +17,7 @@ public class ParserTest {
     public void getCommandType_returnCommandType_ReturnEnum() {
         try {
             Parser parser = new Parser("todo testing");
-            assertEquals(Parser.COMMAND.TODO, parser.getCommandType());
+            assertEquals(Parser.Command.TODO, parser.getCommandType());
         } catch (DukeException e) {
             fail();
         }

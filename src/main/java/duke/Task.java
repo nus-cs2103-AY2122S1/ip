@@ -9,10 +9,10 @@ package duke;
 public class Task {
     private String description;
     private boolean isDone;
-    private TYPE type;
+    private Type type;
 
     // ToDos, DeadLines, Events, Others(Placeholder)
-    protected enum TYPE {
+    protected enum Type {
         T, D, E, O
     }
 
@@ -22,23 +22,23 @@ public class Task {
      * @param description Task description.
      * @param type Task type, refer to enum TYPE.
      */
-    public Task(String description, TYPE type) {
+    public Task(String description, Type type) {
         this.description = description;
         this.isDone = false;
-        if (type == TYPE.T) {
-            this.type = TYPE.T;
-        } else if (type == TYPE.D) {
+        if (type == Type.T) {
+            this.type = Type.T;
+        } else if (type == Type.D) {
             if (description.contains("/by")) {
                 this.description = description.substring(0, description.indexOf("/by"));
             }
-            this.type = TYPE.D;
-        } else if (type == TYPE.E) {
+            this.type = Type.D;
+        } else if (type == Type.E) {
             if (description.contains("/at")) {
                 this.description = description.substring(0, description.indexOf("/at"));
             }
-            this.type = TYPE.E;
+            this.type = Type.E;
         } else {
-            this.type = TYPE.O;
+            this.type = Type.O;
         }
     }
 
@@ -49,7 +49,7 @@ public class Task {
      * @param isDone Whether the task has been done.
      * @param description Task description.
      */
-    public Task(TYPE type, boolean isDone, String description) {
+    public Task(Type type, boolean isDone, String description) {
         this.type = type;
         this.isDone = isDone;
         this.description = description;
@@ -65,7 +65,7 @@ public class Task {
             isDone = true;
             return true;
         } else {
-           throw new DukeException("Task has already been marked as done!");
+            throw new DukeException("Task has already been marked as done!");
         }
     }
 
@@ -93,7 +93,7 @@ public class Task {
      *
      * @return Returns Type of the task.
      */
-    public TYPE getType() {
+    public Type getType() {
         return this.type;
     }
 

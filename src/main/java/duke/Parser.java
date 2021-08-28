@@ -10,31 +10,31 @@ public class Parser {
     private String currentCommand;
     private int taskNumber;
     private String query;
-    private COMMAND commandType;
+    private Command commandType;
 
-    protected enum COMMAND {
+    protected enum Command {
         TODO, EVENT, DEADLINE, DELETE, DONE, LIST, FIND, OTHER
     }
 
     public Parser(String command) throws DukeException {
         this.currentCommand = command;
         if (isList(command)) {
-            this.commandType = COMMAND.LIST;
+            this.commandType = Command.LIST;
         } else if (isDone(command)) {
-            this.commandType = COMMAND.DONE;
+            this.commandType = Command.DONE;
             taskNumber = Integer.parseInt(command.substring(5));
         } else if (isToDo(command)) {
-            this.commandType = COMMAND.TODO;
+            this.commandType = Command.TODO;
         } else if (isDeadLine(command)) {
-            this.commandType = COMMAND.DEADLINE;
+            this.commandType = Command.DEADLINE;
         } else if (isEvent(command)) {
-            this.commandType = COMMAND.EVENT;
+            this.commandType = Command.EVENT;
         } else if (isDelete(command)) {
-            this.commandType = COMMAND.DELETE;
-        } else if (isFind(command)){
-            this.commandType = COMMAND.FIND;
+            this.commandType = Command.DELETE;
+        } else if (isFind(command)) {
+            this.commandType = Command.FIND;
         } else {
-            this.commandType = COMMAND.OTHER;
+            this.commandType = Command.OTHER;
         }
     }
 
@@ -44,7 +44,7 @@ public class Parser {
      *
      * @return returns CommandType.
      */
-    public COMMAND getCommandType() {
+    public Command getCommandType() {
         return commandType;
     }
 
@@ -71,12 +71,12 @@ public class Parser {
      * Checks if it is a 'Done' command.
      *
      * @param command Takes in command line input to process.
-     * @throws DukeException Either a syntax error or lack of number provided.
      * @return returns true if it is said command.
+     * @throws DukeException Either a syntax error or lack of number provided.
      */
     private boolean isDone(String command) throws DukeException {
         if (command.length() >= 4 && command.startsWith("done")) {
-            if (command.length() == 4)  {
+            if (command.length() == 4) {
                 throw new DukeException("The Done command must be followed by a number!");
             } else {
                 if (isNumeric(command.substring(5))) {
@@ -94,8 +94,8 @@ public class Parser {
      * Checks if it is a 'Todo' command.
      *
      * @param command Takes in command line input to process.
-     * @throws DukeException Either a syntax error or lack of description.
      * @return returns true if it is said command.
+     * @throws DukeException Either a syntax error or lack of description.
      */
     private boolean isToDo(String command) throws DukeException {
         if (command.length() >= 4 && command.startsWith("todo")) {
@@ -115,10 +115,10 @@ public class Parser {
      * Checks if it is a 'Deadline' command.
      *
      * @param command Takes in command line input to process.
-     * @throws DukeException Either a syntax error or lack of description.
      * @return returns true if it is said command.
+     * @throws DukeException Either a syntax error or lack of description.
      */
-    private boolean isDeadLine(String command) throws DukeException{
+    private boolean isDeadLine(String command) throws DukeException {
         if (command.length() >= 8 && command.startsWith("deadline")) {
             if (command.length() == 8) {
                 throw new DukeException("Deadline", 1);
@@ -136,14 +136,14 @@ public class Parser {
      * Checks if it is an 'Event' command.
      *
      * @param command Takes in command line input to process.
-     * @throws DukeException Either a syntax error or lack of description.
      * @return returns true if it is said command.
+     * @throws DukeException Either a syntax error or lack of description.
      */
     private boolean isEvent(String command) throws DukeException {
         if (command.length() >= 5 && command.startsWith("event")) {
             if (command.length() == 5) {
                 throw new DukeException("Event", 1);
-            } else if (command.charAt(5) != ' '){
+            } else if (command.charAt(5) != ' ') {
                 throw new DukeException("Event", 0);
             } else {
                 return true;
@@ -157,12 +157,12 @@ public class Parser {
      * Checks if it is a 'Delete' command.
      *
      * @param command Takes in command line input to process.
-     * @throws DukeException Syntax errors, spacing.
      * @return returns true if it is said command.
+     * @throws DukeException Syntax errors, spacing.
      */
     private boolean isDelete(String command) throws DukeException {
         if (command.length() >= 6 && command.startsWith("delete")) {
-            if (command.length() == 6)  {
+            if (command.length() == 6) {
                 throw new DukeException("The Delete command must be followed by a number!");
             } else {
                 if (command.charAt(6) != ' ') {
@@ -200,7 +200,7 @@ public class Parser {
         try {
             Integer.parseInt(str);
             return true;
-        } catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }

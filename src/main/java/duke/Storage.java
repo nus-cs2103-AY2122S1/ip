@@ -58,25 +58,25 @@ public class Storage {
      * @param fileLine String from save file containing data
      */
     private void createTask(String fileLine) {
-        Task.TYPE type = Task.TYPE.valueOf(fileLine.substring(0, 1));
+        Task.Type type = Task.Type.valueOf(fileLine.substring(0, 1));
         boolean isDone = Integer.parseInt(fileLine.substring(4, 5)) == 1;
         Task task;
 
-        if (type == Task.TYPE.T) {
+        if (type == Task.Type.T) {
             String description = fileLine.substring(8);
             task = new ToDo(type, isDone, description);
-        } else if (type == Task.TYPE.D) {
+        } else if (type == Task.Type.D) {
             int deadTimeLineLocation = fileLine.indexOf("|", 7);
             String description = fileLine.substring(8, deadTimeLineLocation - 1);
             String by = fileLine.substring(deadTimeLineLocation + 2);
             task = new DeadLine(type, isDone, description, by);
-        } else if (type == Task.TYPE.E) {
+        } else if (type == Task.Type.E) {
             int deadTimeLineLocation = fileLine.indexOf("|", 7);
             String description = fileLine.substring(8, deadTimeLineLocation - 1);
             String at = fileLine.substring(deadTimeLineLocation + 2);
             task = new Event(type, isDone, description, at);
         } else {
-            task = new Task("", Task.TYPE.O);
+            task = new Task("", Task.Type.O);
         }
         Ui.setList(task);
     }
@@ -90,20 +90,20 @@ public class Storage {
         String isDone = task.isDone() ? "1" : "0";
         String toSave = type + " | " + isDone + " | ";
 
-       if (task.getType() == Task.TYPE.T) {
-           String description = task.getDescription();
-           toSave += description;
-       } else if (task.getType() == Task.TYPE.D) {
-           String description = task.getDescription();
-           String by = task.getTime();
-           toSave += description + " | " + by;
-       } else if (task.getType() == Task.TYPE.E) {
-           String description = task.getDescription();
-           String at = task.getTime();
-           toSave += description + " | " + at;
-       } else {
+        if (task.getType() == Task.Type.T) {
+            String description = task.getDescription();
+            toSave += description;
+        } else if (task.getType() == Task.Type.D) {
+            String description = task.getDescription();
+            String by = task.getTime();
+            toSave += description + " | " + by;
+        } else if (task.getType() == Task.Type.E) {
+            String description = task.getDescription();
+            String at = task.getTime();
+            toSave += description + " | " + at;
+        } else {
 
-       }
+        }
 
         String directoryName = "data";
         String fileName = "duke.txt";

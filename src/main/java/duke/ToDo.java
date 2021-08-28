@@ -14,7 +14,7 @@ public class ToDo extends Task {
      * @param description Task description.
      * @param type Task type: Todo.
      */
-    public ToDo(String description, TYPE type) {
+    public ToDo(String description, Type type) {
         super(description, type);
     }
 
@@ -25,12 +25,12 @@ public class ToDo extends Task {
      * @param isDone Whether the task has been done or not.
      * @param description Task description.
      */
-    public ToDo(TYPE type, boolean isDone, String description) {
+    public ToDo(Type type, boolean isDone, String description) {
         super(type, isDone, description);
     }
 
     @Override
     public String toString() {
-        return super.toString() ;
+        return super.toString();
     }
 }

@@ -6,8 +6,8 @@ package duke;
  * @author Ryan Tian Jun.
  */
 public class Intro {
-    private String intro = "Hello! I'm Duke!\n" +
-            "What can I do for you? Type something to get started!";
+    private String intro = "Hello! I'm Duke!\n"
+            + "What can I do for you? Type something to get started!";
     private final Logo logo = new Logo();
 
     public Intro() {
