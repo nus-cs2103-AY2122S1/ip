@@ -24,26 +24,23 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
-            ui.print("Please enter the name of the task after event");
-            return;
+            return "Please enter the name of the task after event";
+
         }
         if (!args.contains("/at")) {
-            ui.print("Please enter the start date of the task after /at");
-            return;
+            return "Please enter the start date of the task after /at";
         }
         String[] parts = args.split(" /at ");
         LocalDateTime startDate = dth.parseDate(parts[1]);
         if (startDate == null) {
-            ui.print(dth.invalidFormat());
-            return;
+            return dth.invalidFormat();
         }
         Event e = new Event(parts[0], false, startDate);
         tl.addToList(e);
-        ui.print(tl.taskAddedMessage(e));
-
+        return ui.formatMessage(tl.taskAddedMessage(e));
     }
 
     @Override

@@ -17,14 +17,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
-            ui.print("Please enter a search term after find");
-            return;
+            return "Please enter a search term after find";
+
         }
         String[] results = tl.findInTasks(args);
-        ui.print(results);
+        return ui.formatMessage(results);
     }
 
     @Override

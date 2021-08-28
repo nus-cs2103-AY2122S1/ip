@@ -24,14 +24,15 @@ public abstract class Command {
     public abstract Command of(String arguments);
 
     /**
-     * Executes the command
+     * Executes the command and returns a String to be printed by Duke
      *
      * @param tl The TaskList object to interact with the list of tasks
      * @param s The Storage object to interact with the output file
      * @param ui The UI object to interact with the user interface
      * @param dth The DateTimeHandler object to interact with date-times.
+     * @return The String to be printed
      */
-    public abstract void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth);
+    public abstract String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth);
 
     /**
      * Returns the prefix of the command

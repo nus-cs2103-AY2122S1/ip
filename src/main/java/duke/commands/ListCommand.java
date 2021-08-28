@@ -15,8 +15,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
-        ui.print(tl.printList());
+    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+        return ui.formatMessage(tl.printList());
     }
 
     @Override

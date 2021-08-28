@@ -21,27 +21,24 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
-            ui.print("Please enter a number after done");
-            return;
+            return "Please enter a number after done";
         }
         try {
             int index = Integer.parseInt(args);
             if (index > tl.size()) {
-                ui.print("There are only " + tl.size() + " tasks");
-                return;
+                return "There are only " + tl.size() + " tasks";
             } else if (index == 0) {
-                ui.print("There is no task 0");
-                return;
+                return "There is no task 0";
             }
             Task t = tl.getTask(index - 1);
             t.completeTask();
-            ui.print(tl.taskCompletedMessage(t));
+            return ui.formatMessage(tl.taskCompletedMessage(t));
 
         } catch (NumberFormatException e) {
-            ui.print("Please enter a number after done");
+            return "Please enter a number after done";
         }
     }
 

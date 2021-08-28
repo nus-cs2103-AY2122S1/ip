@@ -20,8 +20,8 @@ public class FormatsCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
-        ui.print(dth.getFormatList());
+    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+        return ui.formatMessage(dth.getFormatList());
     }
 
     @Override

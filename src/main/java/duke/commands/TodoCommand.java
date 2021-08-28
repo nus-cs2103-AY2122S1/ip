@@ -21,15 +21,14 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
-            ui.print("Please enter the name of the task after todo");
-            return;
+            return "Please enter the name of the task after todo";
         }
         Todo t = new Todo(args, false);
         tl.addToList(t);
-        ui.print(tl.taskAddedMessage(t));
+        return ui.formatMessage(tl.taskAddedMessage(t));
     }
 
     @Override

@@ -20,8 +20,8 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
-
+    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+        return "";
     }
 
     @Override

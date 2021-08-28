@@ -21,27 +21,24 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
-            ui.print("Please enter a number after delete");
-            return;
+            return "Please enter a number after delete";
         }
         try {
             int index = Integer.parseInt(args);
             if (index > tl.size()) {
-                ui.print("There are only " + tl.size() + " tasks");
-                return;
+                return "There are only " + tl.size() + " tasks";
             } else if (index == 0) {
-                ui.print("There is no task 0");
-                return;
+                return "There is no task 0";
             }
             Task t = tl.getTask(index - 1);
             tl.removeTask(index - 1);
-            ui.print(tl.taskDeletedMessage(t));
+            return ui.formatMessage(tl.taskDeletedMessage(t));
 
         } catch (NumberFormatException e) {
-            ui.print("Please enter a number after delete");
+            return "Please enter a number after delete";
         }
     }
 

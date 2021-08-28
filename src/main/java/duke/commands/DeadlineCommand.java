@@ -23,25 +23,23 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
-            ui.print("Please enter the name of the task after deadline");
-            return;
+            return "Please enter the name of the task after deadline";
+
         }
         if (!args.contains("/by")) {
-            ui.print("Please enter the deadline of the task after /by");
-            return;
+            return "Please enter the deadline of the task after /by";
         }
         String[] parts = args.split(" /by ");
         LocalDateTime deadlineDate = dth.parseDate(parts[1]);
         if (deadlineDate == null) {
-            ui.print(dth.invalidFormat());
-            return;
+            return dth.invalidFormat();
         }
         Deadline d = new Deadline(parts[0], false, deadlineDate);
         tl.addToList(d);
-        ui.print(tl.taskAddedMessage(d));
+        return ui.formatMessage(tl.taskAddedMessage(d));
     }
 
     @Override
