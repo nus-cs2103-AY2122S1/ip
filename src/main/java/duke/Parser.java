@@ -23,22 +23,22 @@ public class Parser {
         String operation = userInputScanner.next();
 
         switch (operation.toLowerCase()) {
-            case "bye":
-                return CommandType.EXIT;
-            case "list":
-                return CommandType.LIST;
-            case "done":
-                return CommandType.COMPLETE_TASK;
-            case "todo":
-                // Fallthrough
-            case "deadline":
-                // Fallthrough
-            case "event":
-                return CommandType.ADD_TASK;
-            case "delete":
-                return CommandType.DELETE_TASK;
-            default:
-                throw new UnsupportedOperationException();
+        case "bye":
+            return CommandType.EXIT;
+        case "list":
+            return CommandType.LIST;
+        case "done":
+            return CommandType.COMPLETE_TASK;
+        case "todo":
+            // Fallthrough
+        case "deadline":
+            // Fallthrough
+        case "event":
+            return CommandType.ADD_TASK;
+        case "delete":
+            return CommandType.DELETE_TASK;
+        default:
+            throw new UnsupportedOperationException();
         }
     }
 
@@ -56,33 +56,34 @@ public class Parser {
         Scanner userInputScanner = new Scanner((userInput));
         TaskType taskType = null;
         switch (userInputScanner.next().toLowerCase()) {
-            case "todo":
-                taskType = TaskType.TODO;
-                break;
-            case "deadline":
-                taskType = TaskType.DEADLINE;
-                break;
-            case "event":
-                taskType = TaskType.EVENT;
-                break;
+        case "todo":
+            taskType = TaskType.TODO;
+            break;
+        case "deadline":
+            taskType = TaskType.DEADLINE;
+            break;
+        case "event":
+            taskType = TaskType.EVENT;
+            break;
         }
 
-        if (!userInputScanner.hasNext())
+        if (!userInputScanner.hasNext()) {
             throw new MissingInputException(taskType);
+        }
 
         switch (taskType) {
-            case TODO:
-                return new ToDo(userInputScanner.nextLine().trim());
-            case DEADLINE:
-                userInputScanner.useDelimiter(" /by ");
-                return new Deadline(userInputScanner.next().trim(),
-                        LocalDate.parse(userInputScanner.next().trim()));
-            case EVENT:
-                userInputScanner.useDelimiter(" /at ");
-                return new Event(userInputScanner.next().trim(),
-                        LocalDate.parse(userInputScanner.next().trim()));
-            default:
-                return null;    // Error
+        case TODO:
+            return new ToDo(userInputScanner.nextLine().trim());
+        case DEADLINE:
+            userInputScanner.useDelimiter(" /by ");
+            return new Deadline(userInputScanner.next().trim(),
+                    LocalDate.parse(userInputScanner.next().trim()));
+        case EVENT:
+            userInputScanner.useDelimiter(" /at ");
+            return new Event(userInputScanner.next().trim(),
+                    LocalDate.parse(userInputScanner.next().trim()));
+        default:
+            return null;    // Error
         }
     }
 

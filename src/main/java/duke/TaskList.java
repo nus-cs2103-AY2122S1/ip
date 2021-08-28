@@ -23,10 +23,12 @@ public class TaskList {
      * @param tasks the list of tasks to initialise with.
      */
     public TaskList(ArrayList<Task> tasks) {
-        if (tasks != null)
+        if (tasks != null) {
             this.tasks = tasks;
-        else
+        }
+        else {
             this.tasks = new ArrayList<>();
+        }
     }
 
     public int getSize() {

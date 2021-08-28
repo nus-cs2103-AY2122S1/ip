@@ -4,7 +4,7 @@ package duke;
  * Ui is the class that deals with all output to the user.
  */
 public class Ui {
-    private final String logo = " ____        _        \n"
+    private final String LOGO = " ____        _        \n"
                               + "|  _ \\ _   _| | _____ \n"
                               + "| | | | | | | |/ / _ \\\n"
                               + "| |_| | |_| |   <  __/\n"
@@ -16,27 +16,27 @@ public class Ui {
      * Class constructor.
      */
     public Ui() {
-        startUpMessage();
+        printStartUpMessage();
     }
 
     /**
      * Prints the message when starting up the program.
      */
-    public void startUpMessage() {
-        System.out.println("Hello from\n" + logo);
+    public void printStartUpMessage() {
+        System.out.println("Hello from\n" + LOGO);
     }
 
     /**
      * Prints the message when the program is ready to accept user commands.
      */
-    public void startInteractionsMessage() {
+    public void printStartInteractionsMessage() {
         System.out.println(DUKE + "Hi, what do you want from me?");
     }
 
     /**
      * Prints the message when waiting for the user's next command.
      */
-    public void waitUserInput() {
+    public void printWaitingUserInput() {
         System.out.print(USER);
     }
 
@@ -45,9 +45,10 @@ public class Ui {
      *
      * @param tasks the TaskList containing all the current tasks.
      */
-    public void printListTasks(TaskList tasks) {
-        for (int i = 1; i <= tasks.getSize(); i++)
+    public void printTaskList(TaskList tasks) {
+        for (int i = 1; i <= tasks.getSize(); i++) {
             System.out.printf("\t\t%d.%s\n", i, tasks.getTask(i));
+        }
         System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
     }
 
@@ -93,7 +94,7 @@ public class Ui {
      */
     public void printLoadTasks(TaskList tasks) {
         System.out.println(DUKE + "I have loaded your past tasks list!");
-        printListTasks(tasks);
+        printTaskList(tasks);
     }
 
     /**
@@ -109,7 +110,7 @@ public class Ui {
     /**
      * Prints the message when the program is being exited.
      */
-    public void exitMessage() {
+    public void printExitMessage() {
         System.out.println(DUKE + "Bye. Have a nice day.");
     }
 }

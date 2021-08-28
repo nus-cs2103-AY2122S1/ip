@@ -35,8 +35,9 @@ public class Storage {
      *                the save file.
      */
     public ArrayList<Task> load() throws LoadingException {
-        if (Files.exists(savePath))
+        if (Files.exists(savePath)) {
             return loadTasks(savePath);
+        }
         else {
             try {
                 Files.createDirectories(savePath.getParent());
@@ -63,17 +64,17 @@ public class Storage {
                 String taskDesc = saveDataScanner.next();
 
                 switch (taskType) {
-                    case "T":
-                        tasks.add(new ToDo(taskDesc, isTaskDone));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(taskDesc,
-                                LocalDate.parse(saveDataScanner.next()), isTaskDone));
-                        break;
-                    case "E":
-                        tasks.add(new Event(taskDesc,
-                                LocalDate.parse(saveDataScanner.next()), isTaskDone));
-                        break;
+                case "T":
+                    tasks.add(new ToDo(taskDesc, isTaskDone));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(taskDesc,
+                            LocalDate.parse(saveDataScanner.next()), isTaskDone));
+                    break;
+                case "E":
+                    tasks.add(new Event(taskDesc,
+                            LocalDate.parse(saveDataScanner.next()), isTaskDone));
+                    break;
                 }
                 saveDataScanner.close();
             }

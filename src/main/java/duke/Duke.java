@@ -4,17 +4,19 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private Ui ui = new Ui();
-    private Storage storage = null;
-    private TaskList tasks = null;
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
 
     public Duke(String filepath) {
+        ui = new Ui();
         storage = new Storage(filepath);
 
         try {
             tasks = new TaskList(storage.load());
-            if (tasks.getSize() > 0)
+            if (tasks.getSize() > 0) {
                 ui.printLoadTasks(tasks);
+            }
         } catch (DukeException e) {
             ui.printErrorMessage(e.getMessage());
             tasks = new TaskList();
@@ -22,13 +24,13 @@ public class Duke {
     }
 
     public void run() {
-        ui.startInteractionsMessage();
+        ui.printStartInteractionsMessage();
 
         Scanner scanner = new Scanner(System.in);
         String userInput;
 
         do {
-            ui.waitUserInput();
+            ui.printWaitingUserInput();
             userInput = scanner.nextLine();
 
             try {
@@ -43,25 +45,24 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
-    private void executeCommand(String userInput)
-            throws DukeException {
+    private void executeCommand(String userInput) throws DukeException {
         CommandType commandType = Parser.parseCommandType(userInput);
         switch (commandType) {
-            case EXIT:
-                ui.exitMessage();
-                System.exit(0);
-            case LIST:
-                ui.printListTasks(tasks);
-                break;
-            case ADD_TASK:
-                addNewTask(Parser.parseNewTask(userInput));
-                break;
-            case COMPLETE_TASK:
-                completeTask(Parser.parseTaskNum(userInput));
-                break;
-            case DELETE_TASK:
-                deleteTask(Parser.parseTaskNum(userInput));
-                break;
+        case EXIT:
+            ui.printExitMessage();
+            System.exit(0);
+        case LIST:
+            ui.printTaskList(tasks);
+            break;
+        case ADD_TASK:
+            addNewTask(Parser.parseNewTask(userInput));
+            break;
+        case COMPLETE_TASK:
+            completeTask(Parser.parseTaskNum(userInput));
+            break;
+        case DELETE_TASK:
+            deleteTask(Parser.parseTaskNum(userInput));
+            break;
         }
     }
 
