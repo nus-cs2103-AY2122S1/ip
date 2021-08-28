@@ -1,6 +1,5 @@
 package duke;
 
-import duke.DukeException.InvalidInputException;
 import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -30,7 +29,7 @@ public class Parser {
         case "exit":
             return new ExitCommand();
         default:
-            throw new InvalidInputException();
+            throw new DukeException.InvalidInputException();
         }
     }
 

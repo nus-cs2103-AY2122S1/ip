@@ -1,7 +1,9 @@
 package duke.task;
 
 import java.util.ArrayList;
-import duke.DukeException.MissingTaskException;
+
+import duke.DukeException;
+
 /**
  * Contains the task list.
  *
@@ -25,9 +27,9 @@ public class TaskList {
         return taskList.size();
     }
 
-    public Task getTaskFromId(int taskId) throws MissingTaskException {
+    public Task getTaskFromId(int taskId) throws DukeException.MissingTaskException {
         if (taskId < 1 || taskId > taskList.size()) {
-            throw new MissingTaskException();
+            throw new DukeException.MissingTaskException();
         }
         return taskList.get(taskId - 1);
     }
@@ -42,7 +44,7 @@ public class TaskList {
     /**
      * Deletes a task from the list of tasks.
 
-     * @throws MissingTaskException The exception is thrown when the user tries to delete a non-existing task.
+     * @throws DukeException.MissingTaskException The exception is thrown when the user tries to delete a non-existing task.
      */
     public void deleteTask(Task task) {
         taskList.remove(task);
