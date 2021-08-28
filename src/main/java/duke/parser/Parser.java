@@ -1,6 +1,5 @@
 package duke.parser;
 
-import duke.data.task.Deadline;
 import duke.data.TaskHandler;
 import duke.storage.Storage;
 import duke.data.task.Task;
