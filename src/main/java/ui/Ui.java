@@ -35,8 +35,8 @@ public class Ui {
     }
 
     public static void printError(Exception e) throws DialogException {
-        if (Dialog.have(e.toString())) {
-            System.out.println(Dialog.getDialog(e.toString()));
+        if (Dialog.containsId(e.toString())) {
+            System.out.println(Dialog.get(e.toString()));
         } else {
             Dialog errorMessage = Dialog.generate(e.toString());
             errorMessage.add("☹ OOPS!!! " + e.getMessage());

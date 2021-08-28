@@ -19,10 +19,6 @@ public class Dialog {
         return sentences.size();
     }
 
-    public static boolean have(String id) {
-        return archive.containsKey(id);
-    }
-
     public static Dialog generate(String id) throws DialogException {
         if (archive.containsKey(id)) {
             throw new DialogException(id + " already exists");
@@ -37,13 +33,7 @@ public class Dialog {
         return archive.containsKey(id);
     }
 
-    public static Dialog get(String key) {
-        return archive.get(key);
-    }
-
-
-
-    public static Dialog getDialog(String id) {
+    public static Dialog get(String id) {
         return archive.get(id);
     }
 
