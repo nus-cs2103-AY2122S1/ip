@@ -1,6 +1,11 @@
 plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion = '8.29'
 }
 
 group 'org.example'
@@ -16,7 +21,7 @@ sourceSets {
         }
     }
 }
-
+I
 jar {
     manifest {
         attributes(
@@ -29,7 +34,6 @@ dependencies {
     String javaFxVersion = '11'
 
     testImplementation 'junit:junit:5.4'
-//    implementation 'junit:junit:5.3'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
