@@ -3,9 +3,8 @@ package duke;
 import duke.tasktypes.Deadlines;
 import duke.tasktypes.Events;
 import duke.tasktypes.Task;
-import duke.tasktypes.ToDos;
 import duke.tasktypes.TaskList;
-
+import duke.tasktypes.ToDos;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -101,7 +100,7 @@ public class Storage {
             for (int i = 0; i < taskArrayList.size(); i++) {
                 String fullLine = taskList.get(i).hardDiskSave();
                 bw.write(fullLine);
-                bw.newLine() ;
+                bw.newLine();
             }
             bw.close();
         } catch (IOException e) {

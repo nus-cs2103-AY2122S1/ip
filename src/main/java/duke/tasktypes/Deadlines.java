@@ -11,6 +11,11 @@ public class Deadlines extends Task {
     protected String by;
     protected LocalDate date;
 
+    /**
+     * Constructor for Deadlines.
+     * @param description
+     * @param finishBy
+     */
     public Deadlines(String description, String finishBy) {
         super(description, "D");
         this.by = finishBy;
