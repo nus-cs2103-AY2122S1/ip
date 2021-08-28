@@ -31,6 +31,7 @@ public class Ui {
                         + "    where 'hhmm' represents the 24 hour clock.\n\t\t"
                         + "    e.g. event dinner /at 2021-12-26 1830\n\t"
                         + "- To see all your tasks, enter 'list'.\n\t"
+                        + "- To filter task list by keyword, enter 'find <keyword>' e.g. 'find quiz'.\n\t"
                         + "- To delete a task, enter 'delete <task-id>' e.g. 'delete 2'.\n\t"
                         + "- You can also mark tasks as done by typing 'done <task-id>' e.g. 'done 2'.\n\t"
                         + "- Once you are done, just enter 'bye' to quit the program.\n\t"
