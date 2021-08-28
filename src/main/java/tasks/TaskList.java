@@ -10,16 +10,16 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public String getformmatedData() {
+    public String getFormattedData() {
         StringBuilder data = new StringBuilder();
 
         int len = tasks.size();
 
         for (int i = 0; i < len - 1; i ++) {
-            data.append(tasks.get(i).getformmatedData() + "\n");
+            data.append(tasks.get(i).getFormattedData() + "\n");
         }
 
-        data.append(tasks.get(len - 1).getformmatedData());
+        data.append(tasks.get(len - 1).getFormattedData());
 
         return data.toString();
     }

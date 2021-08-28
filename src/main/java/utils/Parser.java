@@ -28,15 +28,18 @@ public class Parser {
             return new ListCommand();
         } else if (command.equals("done")) {
             int index = Integer.valueOf(description) - 1;
+
             return new DoneCommand(index);
         } else if (command.equals("delete")) {
             int index = Integer.valueOf(description) - 1;
+
             return new DeleteCommand(index);
         } else if (command.equals("todo")){
             if (description.isBlank()) {
                 throw new InvalidInputException("todo's description cannot be empty!");
             } else {
                 Task newTask = new ToDo(description);
+
                 return new AddCommand(newTask);
             }
         } else if (command.equals("deadline")) {
@@ -48,6 +51,7 @@ public class Parser {
                 LocalDate time = LocalDate.parse(split[1].trim());
 
                 Task newTask = new Deadline(description, time);
+
                 return new AddCommand(newTask);
             }
         } else if (command.equals("event")){
@@ -61,6 +65,7 @@ public class Parser {
                 LocalDate endTime = LocalDate.parse(time[1].trim());
 
                 Task newTask = new Event(description, startTime, endTime);
+
                 return new AddCommand(newTask);
             }
         } else {

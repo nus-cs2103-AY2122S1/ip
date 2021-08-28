@@ -1,6 +1,7 @@
 package tasks;
 
 public class ToDo extends Task{
+
     public ToDo(String description) {
         super(description, "[T]", false);
     }
@@ -9,8 +10,8 @@ public class ToDo extends Task{
         super(description, "[T]", status);
     }
 
-    public String getformmatedData() {
-        String formmatedStatus = super.isDone() ? "1|" : "0|";
-        return "T|" + formmatedStatus + super.getDescription();
+    public String getFormattedData() {
+        String formattedStatus = super.isDone() ? "1|" : "0|";
+        return "T|" + formattedStatus + super.getDescription();
     }
 }
