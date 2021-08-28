@@ -13,13 +13,11 @@ import duke.exception.DukeException;
 public class UI {
     private final String tab;
     private final String horizontalLine;
-    private List<String> list;
+    private final List<String> list;
     private final Scanner sc;
 
     /**
      * Creates and initalizes a new UI instance.
-     *
-     * @return A new UI object.
      */
     public UI() {
         this.tab = " ".repeat(4);

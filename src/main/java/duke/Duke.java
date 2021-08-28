@@ -9,15 +9,15 @@ import duke.command.Command;
 import duke.exception.DukeException;
 
 /**
- * Duke, a Personal Assistant Chatbot.
+ * Duke, a Personal Assistant ChatBot.
  *
  * @author Frederick Pek
  * @version CS2103 AY21/22 Sem 1 iP
  */
 public class Duke {
-    private TaskList taskList;
-    private Storage storage;
-    private UI ui;
+    private final TaskList taskList;
+    private final Storage storage;
+    private final UI ui;
 
     /**
      * Constructs an instance of Duke.
@@ -27,7 +27,6 @@ public class Duke {
      *
      * @param dirName the specified directory name to store Duke's data.
      * @param fileName the specified file name to store Duke's data.
-     * @return A new Duke object.
      */
     public Duke(String dirName, String fileName) {
         this.storage = new Storage(dirName, fileName);

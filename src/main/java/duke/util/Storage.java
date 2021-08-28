@@ -27,7 +27,6 @@ public class Storage {
      *
      * @param dirName the specified directory name to store Duke's data.
      * @param fileName the specified file name to store Duke's data.
-     * @return A new Storage object.
      */
     public Storage(String dirName, String fileName) {
         try {

@@ -29,7 +29,6 @@ public class Parser {
      * A static method to parse the command for creating ToDo tasks.
      *
      * @param line the input command to be parsed.
-     * @return A new ToDo object.
      * @throws TaskException When failed to parse.
      */
     public static ToDo parseToDo(String line) {
