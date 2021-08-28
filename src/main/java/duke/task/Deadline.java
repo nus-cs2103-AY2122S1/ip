@@ -8,10 +8,11 @@ import java.time.format.FormatStyle;
  * A class representing a task that need to be completed by a certain time.
  */
 public class Deadline extends Task {
+    /** The symbol that represents a deadline */
+    private static String symbol = "[D]";
     /** The deadline of the task */
     private final LocalDateTime deadline;
-    /** The symbol that represents a deadline */
-    private static final String symbol = "[D]";
+
 
     /**
      * The constructor of a deadline task.

@@ -1,16 +1,21 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.exception.NoActionException;
+import duke.task.Task;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-import duke.task.Task;
-
-import java.util.ArrayList;
 
 public class FindCommand extends Command {
-    private String searchTerms;
+    private final String searchTerms;
 
+    /**
+     * Constructor for the find command.
+     *
+     * @param searchTerms Word to search for.
+     */
     public FindCommand(String searchTerms) {
         super(false);
         this.searchTerms = searchTerms;

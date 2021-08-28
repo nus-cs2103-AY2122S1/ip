@@ -18,11 +18,28 @@ import duke.util.Ui;
  */
 public class EventCommand extends Command {
     private String action;
+
+    /**
+     * Constructor of the EventCommand
+     *
+     * @param action Text input of the EventCommand
+     */
     public EventCommand(String action) {
         super(false);
         this.action = action;
     }
 
+    /**
+     * Instantiates an Event task and adds it to the tasklist
+     *
+     * @param tasks List of existing tasks
+     * @param ui User interface current interacting with the user
+     * @param storage Storage class handling the persistence of the tasks
+     * @throws InvalidInputException if invalid datetime is provided
+     * @throws NoTimeException if no event time is provided
+     * @throws NoActionException if no event name is provided
+     * @throws SaveFileException if save file errors occur
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException,
         NoTimeException, NoActionException, SaveFileException {

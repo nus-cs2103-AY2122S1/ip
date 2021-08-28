@@ -18,6 +18,12 @@ import duke.util.Ui;
  */
 public class DeadlineCommand extends Command {
     private String action;
+
+    /**
+     * Constructor for the Deadline Command.
+     *
+     * @param action String input for the deadline task
+     */
     public DeadlineCommand(String action) {
         super(false);
         this.action = action;

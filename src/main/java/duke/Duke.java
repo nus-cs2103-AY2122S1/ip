@@ -7,11 +7,19 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Duke class to encapsulate the high level logic of Duke
+ */
 public class Duke {
     private final Ui ui;
     private TaskList tasks;
     private final Storage storage;
 
+    /**
+     * Constructor of Duke
+     *
+     * @param filePath path of the save file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -23,6 +31,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Function that causes Duke to start listening for user input
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -38,6 +49,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function that instatiates a Duke and runs it.
+     *
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
         new Duke("./data/saveFile.txt").run();
     }
