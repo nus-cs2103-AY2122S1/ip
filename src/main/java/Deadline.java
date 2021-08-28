@@ -22,7 +22,7 @@ public class Deadline extends Task {
     public String formatToWrite() {
         return String.format("D | %s | %s", super.formatToWrite(), this.by);
     }
-    
+
     public String parseStringToDate(String dateTime){
         DateTimeFormatter sourceFormat;
         DateTimeFormatter targetFormat;
@@ -40,7 +40,7 @@ public class Deadline extends Task {
                         .format(targetFormat);
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Ui.prettify(e.getMessage());
             return dateTime;
         }
         return convertedTime;
