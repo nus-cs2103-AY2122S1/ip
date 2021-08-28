@@ -47,6 +47,27 @@ public class Ui {
         System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
     }
 
+    public void printTasksWithSubject(TaskList tasks, String subject) {
+        int nResults = 0;
+        System.out.println("\tTasks with \"" + subject + "\":");
+        for (int i = 1; i <= tasks.getSize(); i++) {
+            if (tasks.getTask(i).getTaskName().contains(subject)) {
+                nResults++;
+                System.out.printf("\t\t%d.%s\n", i, tasks.getTask(i));
+            }
+        }
+
+        if (nResults == 0) {
+            System.out.println("\n\tNo results found.");
+        }
+        else if (nResults == 1) {
+            System.out.println("\tTotal of 1 result found.");
+        }
+        else {
+            System.out.println("\tTotal of " + nResults + " results found.");
+        }
+    }
+
     public void printLoadTasks(TaskList tasks) {
         System.out.println(DUKE + "I have loaded your past tasks list!");
         printListTasks(tasks);

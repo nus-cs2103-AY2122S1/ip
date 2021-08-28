@@ -26,6 +26,8 @@ public class Parser {
                 return CommandType.ADD_TASK;
             case "delete":
                 return CommandType.DELETE_TASK;
+            case "find":
+                return CommandType.FIND_TASK;
             default:
                 throw new UnsupportedOperationException();
         }
@@ -69,5 +71,11 @@ public class Parser {
         Scanner userInputScanner = new Scanner(userInput);
         userInputScanner.next();
         return userInputScanner.nextInt();
+    }
+
+    public static String parseSearchSubject(String userInput) {
+        Scanner userInputScanner = new Scanner(userInput);
+        userInputScanner.next();
+        return userInputScanner.nextLine().trim();
     }
 }
