@@ -1,12 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.util.Parser;
 import duke.util.ToDoList;
-import duke.util.Ui;
-
-import java.util.ArrayList;
 
 /**
  * This class encapsulates the command dealing with finding tasks matching a keyword.
@@ -16,24 +15,27 @@ import java.util.ArrayList;
  */
 public class FindCommand extends Command {
     private final ToDoList list;
-    private final String input;
 
-    public FindCommand(ToDoList list, String input) {
+    public FindCommand(ToDoList list) {
         this.list = list;
-        this.input = input;
     }
 
     @Override
-    public void execute() throws DukeException {
-        String keyword = Parser.extractKeyword(input);
+    public String getResponse(String input) {
+        String keyword;
+        try {
+            keyword = Parser.extractKeyword(input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
         ArrayList<Task> matchingTasks = list.searchList(keyword);
         String output = "Here are the matching tasks in your list:" + System.lineSeparator();
 
         for (int i = 1; i <= matchingTasks.size(); i++) {
-            output = output.concat(String.format("\t%d. %s", i, matchingTasks.get(i - 1)));
+            output = output.concat(String.format("  %d. %s", i, matchingTasks.get(i - 1)));
             output = output.concat(System.lineSeparator());
         }
 
-        Ui.prettyPrint(output);
+        return output;
     }
 }

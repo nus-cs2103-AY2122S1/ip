@@ -1,5 +1,10 @@
 package duke.util;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -14,11 +19,6 @@ import duke.exception.IndexFormatException;
 import duke.exception.MissingIndexException;
 import duke.exception.MissingKeywordException;
 import duke.exception.MultipleKeywordsException;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * This class encapsulates the parser which deals with making sense of user inputs.
@@ -112,23 +112,23 @@ public class Parser {
         case "list":
             return new ListCommand(list);
         case "done":
-            return new DoneCommand(list, input);
+            return new DoneCommand(list);
         case "todo":
             // Fallthrough
         case "deadline":
             // Fallthrough
         case "event":
-            return new AddCommand(list, dataManager, lowerCaseInput, input);
+            return new AddCommand(list, dataManager, lowerCaseInput);
         case "exit":
             return new ExitCommand();
         case "delete":
-            return new DeleteCommand(input, list);
+            return new DeleteCommand(list);
         case "filter":
-            return new FilterCommand(input, list);
+            return new FilterCommand(list);
         case "find":
-            return new FindCommand(list, input);
+            return new FindCommand(list);
         default:
-            return new UnrecognisedCommand(input);
+            return new UnrecognisedCommand();
         }
     }
 }

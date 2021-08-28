@@ -12,20 +12,21 @@ import duke.util.ToDoList;
  */
 public class DoneCommand extends Command {
     private final ToDoList list;
-    private final String input;
 
-    public DoneCommand(ToDoList list, String input) {
+    public DoneCommand(ToDoList list) {
         this.list = list;
-        this.input = input;
     }
 
-    /** Extracts index from user input and marks corresponding task from the list and persisted storage as
-     * done.
-     */
     @Override
-    public void execute() throws DukeException {
-        int index = Parser.extractIndex(input);
-        list.markTaskAsDone(index);
-        list.updateData();
+    public String getResponse(String input) {
+        int index = 0;
+        try {
+            index = Parser.extractIndex(input);
+            String response = list.markTaskAsDone(index);
+            list.updateData();
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

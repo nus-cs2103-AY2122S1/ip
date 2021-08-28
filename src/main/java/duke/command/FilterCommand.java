@@ -1,12 +1,10 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.exception.MultipleDateTimeException;
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.util.ToDoList;
 import duke.util.Ui;
-
-import java.util.ArrayList;
 
 /**
  * This class encapsulates the command dealing with filtering the tasks list using a date/time specified.
@@ -15,47 +13,34 @@ import java.util.ArrayList;
  * @version CS2103T AY21/22 Semester 1
  */
 public class FilterCommand extends Command {
-    private final String input;
     private final ToDoList list;
 
-    public FilterCommand(String input, ToDoList list) {
-        this.input = input;
+    public FilterCommand(ToDoList list) {
         this.list = list;
     }
 
     @Override
-    public void execute() throws DukeException {
-        handleFilter(input);
-    }
-
-    /**
-     * Handles Filter command logic.
-     *
-     * @param input Raw user's input.
-     * @throws DukeException if no date/time is entered by the user.
-     * @throws MultipleDateTimeException if multiple date/time is detected.
-     */
-    public void handleFilter(String input) throws DukeException {
+    public String getResponse(String input) {
         if (input.split(" ").length < 2) {
-            throw new DukeException("MissingDateTimeException: Enter a date/time after your command!");
+            return "Please include a date/time for me to search after the filter command!";
         } else if (input.split(" ").length > 2) {
-            throw new MultipleDateTimeException();
+            return "Sorry, I can only search using one date/time.";
         }
 
         String[] extracted = input.split(" ", 2);
         ArrayList<Task> extractedTask = list.filterList(extracted[1]);
 
         if (extractedTask.size() == 0) {
-            Ui.prettyPrint("There are no tasks on this day.");
+            return "There are no tasks on this day.";
         } else {
-            String output = String.format("Here are your tasks for this day:%s", Ui.LINE_SEPARATOR + "\t\t");
+            String output = String.format("Here are your tasks for this day:%s", Ui.LINE_SEPARATOR);
 
             int count = 1;
             for (Task t : extractedTask) {
                 output = output.concat(String.format("[%d]. %s", count++, t + Ui.LINE_SEPARATOR + "\t\t"));
             }
 
-            Ui.prettyPrint(output);
+            return output;
         }
     }
 }
