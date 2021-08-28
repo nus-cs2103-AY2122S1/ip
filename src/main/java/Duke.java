@@ -1,14 +1,17 @@
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         boolean check = true;
-//        Task[] tasks = new Task[100];
         ArrayList<Task> tasks = new ArrayList<Task>();
         int counter = 0;
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
         System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
 
@@ -52,21 +55,22 @@ public class Duke {
                     for (int i = 1; i < strArray.length; i++) {
                         if (strArray[i].equals("/by")) {
                             i++;
-                            while (i < strArray.length) {
-                                date = " " + date + strArray[i];
-                                i++;
+                            if (i + 2 < strArray.length) {
+                                throw new DukeException("OOPS!!! Invalid date input.");
                             }
+                            date = strArray[i] + " " + strArray[i + 1];
                             break;
                         }
                         description = description + strArray[i] + " ";
                     }
 
+                    LocalDateTime dateTime = LocalDateTime.parse(date, inputFormatter);
                     if (description.equals("")) {
                         throw new DukeException("OOPS!!! Deadline description cannot be empty :-(");
                     } else if (date.equals("")) {
                         throw new DukeException("OOPS!!! Deadline date cannot be empty :-(");
                     } else {
-                        tasks.add(new Deadline(description, date));
+                        tasks.add(new Deadline(description, dateTime.format(outputFormatter)));
                         System.out.println("Got it. I've added this task:\n" + "\t" + tasks.get(counter).toString());
                         counter++;
                         System.out.println("Now you have " + counter + " tasks in your list.");
@@ -77,21 +81,22 @@ public class Duke {
                     for (int i = 1; i < strArray.length; i++) {
                         if (strArray[i].equals("/at")) {
                             i++;
-                            while (i < strArray.length) {
-                                date = " " + date + strArray[i];
-                                i++;
+                            if (i + 2 < strArray.length) {
+                                throw new DukeException("OOPS!!! Invalid date input.");
                             }
+                            date = strArray[i] + " " + strArray[i + 1];
                             break;
                         }
                         description = description + strArray[i] + " ";
                     }
 
+                    LocalDateTime dateTime = LocalDateTime.parse(date, inputFormatter);
                     if (description.equals("")) {
                         throw new DukeException("OOPS!!! Event description cannot be empty :-(");
                     } else if (date.equals("")) {
                         throw new DukeException("OOPS!!! Event date cannot be empty :-(");
                     } else {
-                        tasks.add(new Event(description, date));
+                        tasks.add(new Event(description, dateTime.format(outputFormatter)));
                         System.out.println("Got it. I've added this task:\n" + "\t" + tasks.get(counter).toString());
                         counter++;
                         System.out.println("Now you have " + counter + " tasks in your list.");
