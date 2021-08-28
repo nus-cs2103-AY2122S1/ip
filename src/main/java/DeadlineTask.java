@@ -12,6 +12,8 @@ public class DeadlineTask extends Task {
      */
     protected LocalDateTime time;
 
+    protected String storedTime = "";
+
     /**
      * Constructor for the Deadline class
      */
@@ -23,9 +25,9 @@ public class DeadlineTask extends Task {
     /**
      * Constructor for the Deadline class
      */
-    DeadlineTask(String task, String by, boolean done) {
+    DeadlineTask(String task, String storedTime, boolean done) {
         super(task, done);
-        this.by = by;
+        this.storedTime = storedTime;
     }
 
     /**
@@ -35,15 +37,15 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[D]" + super.getTaskState() + "(By: " + time.format(outputFormatter) + ")";
+        return "[D]" + super.getTaskState() + "(By: " + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime) + ")";
     }
 
     @Override
-    public String convertFormat() {
+    public String convertToStorageFormat() {
         return "D,"
                 + (done ? "1," : "0,")
                 + task
                 + ","
-                + by;
+                + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime);
     }
 }

@@ -19,7 +19,7 @@ public class Task {
 
     protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
 
-    protected DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy, hh:mm a");
+    protected DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy - hh:mm a");
 
     /**
      * Constructor for the Task class
@@ -71,7 +71,7 @@ public class Task {
         }
     }
 
-    public String convertFormat() {
+    public String convertToStorageFormat() {
         return "";
     }
 }

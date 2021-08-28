@@ -31,7 +31,7 @@ public class TodoTask extends Task {
     }
 
     @Override
-    public String convertFormat() {
+    public String convertToStorageFormat() {
         return "T,"
                 + (done ? "1," : "0,")
                 + task;

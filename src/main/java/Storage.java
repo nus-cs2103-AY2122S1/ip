@@ -49,7 +49,7 @@ public class Storage {
 
             // Write the lines from the list into the file
             for (Task task : list) {
-                writer.write(task.convertFormat());
+                writer.write(task.convertToStorageFormat());
                 writer.newLine();
             }
             writer.close();

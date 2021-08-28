@@ -12,6 +12,8 @@ public class EventTask extends Task {
      */
     protected LocalDateTime time;
 
+    protected String storedTime = "";
+
     /**
      * Constructor for the Event class
      */
@@ -23,9 +25,9 @@ public class EventTask extends Task {
     /**
      * Constructor for the Event class
      */
-    EventTask(String task, String at, boolean done) {
+    EventTask(String task, String storedTime, boolean done) {
         super(task, done);
-        this.at = at;
+        this.storedTime = storedTime;
     }
 
     /**
@@ -35,15 +37,15 @@ public class EventTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[E]" + super.getTaskState() + "(At: " + time.format(outputFormatter) + ")";
+        return "[E]" + super.getTaskState() + "(At: " + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime) + ")";
     }
 
     @Override
-    public String convertFormat() {
+    public String convertToStorageFormat() {
         return "E,"
                 + (done ? "1," : "0,")
                 + task
                 + ","
-                + at;
+                + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime);
     }
 }
