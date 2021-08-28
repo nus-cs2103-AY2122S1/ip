@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 public class Deadline extends Task {
     private String taskType = "[D]";
     private String taskName;
