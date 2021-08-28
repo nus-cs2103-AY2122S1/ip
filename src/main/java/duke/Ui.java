@@ -26,6 +26,6 @@ public class Ui {
         builder.append(INDENTATION);
         builder.append(message);
         builder.append("    ____________________________________________________________");
-        return  builder.toString();
+        return builder.toString();
     }
 }

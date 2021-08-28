@@ -7,8 +7,8 @@ import java.time.LocalDate;
  */
 public class StorageUi extends Ui {
     private static final String[] MONTHS = new String[]{
-            "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY",
-            "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+        "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY",
+        "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
     };
 
     /**
