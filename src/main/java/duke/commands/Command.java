@@ -15,7 +15,7 @@ public abstract class Command {
     /**
      * Executes the given command
      * @param tasks the list of tasks
-     * @param ui the user interface 
+     * @param ui the user interface
      * @param storage the location of saved data
      * @throws DukeException
      */

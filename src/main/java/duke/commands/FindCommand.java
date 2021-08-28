@@ -3,11 +3,8 @@ package duke.commands;
 import duke.data.TaskList;
 import duke.data.exception.DukeException;
 import duke.data.exception.EmptyDescriptionException;
-import duke.data.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Encapsulates Find command's operation
@@ -21,7 +18,9 @@ public class FindCommand extends Command {
      * @throws EmptyDescriptionException if input is empty
      */
     public FindCommand(String rest) throws EmptyDescriptionException {
-        if (rest.isEmpty()) throw new EmptyDescriptionException();
+        if (rest.isEmpty()) {
+            throw new EmptyDescriptionException();
+        }
         this.filter = rest;
     }
 

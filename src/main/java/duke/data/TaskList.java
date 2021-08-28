@@ -16,7 +16,7 @@ public class TaskList {
     protected int count;
 
     /**
-     * Constructor for TaskList 
+     * Constructor for TaskList
      * @param tasks the list of tasks
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -42,7 +42,9 @@ public class TaskList {
      * @throws InvalidIndexException if given index is out of bounds
      */
     public ArrayList<Task> delete(int index) throws InvalidIndexException {
-        if (index >= this.count || index < 0) throw new InvalidIndexException();
+        if (index >= this.count || index < 0) {
+            throw new InvalidIndexException();
+        }
         this.tasks.remove(index);
         this.count--;
         return this.tasks;
@@ -55,7 +57,9 @@ public class TaskList {
      * @throws InvalidIndexException if given index is out of bounds
      */
     public Task get(int index) throws InvalidIndexException {
-        if (index >= this.count || index < 0) throw new InvalidIndexException();
+        if (index >= this.count || index < 0) {
+            throw new InvalidIndexException();
+        }
         return this.tasks.get(index);
     }
 
@@ -80,7 +84,9 @@ public class TaskList {
      * @throws InvalidIndexException if given index is out of bounds
      */
     public ArrayList<Task> markDone(int index) throws InvalidIndexException {
-        if (index >= this.count || index < 0) throw new InvalidIndexException();
+        if (index >= this.count || index < 0) {
+            throw new InvalidIndexException();
+        }
         this.tasks.get(index).setDone();
         return this.tasks;
     }

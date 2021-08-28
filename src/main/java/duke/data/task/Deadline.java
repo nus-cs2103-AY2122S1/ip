@@ -23,7 +23,9 @@ public class Deadline extends Task {
      */
     public Deadline(String[] input) throws DukeException {
         super(input[0]);
-        if (input.length < 2) throw new EmptyTimeException();
+        if (input.length < 2) {
+            throw new EmptyTimeException();
+        }
         try {
             this.by = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
         } catch (DateTimeParseException e) {
@@ -52,6 +54,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by.format(DateTimeFormatter.ofPattern("d MMM yyyy h:mma")) + ")";
+        return "[D]" + super.toString() + " (by: " 
+                + this.by.format(DateTimeFormatter.ofPattern("d MMM yyyy h:mma")) + ")";
     }
 }
