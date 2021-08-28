@@ -44,7 +44,6 @@ public class Duke {
                 ui.showLine();
             }
         }
-        ui.showExit();
     }
 
     public static void main(String[] args) {

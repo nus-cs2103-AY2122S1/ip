@@ -26,7 +26,7 @@ public class Ui {
         System.out.println("\tHello! I'm Adam, your personal chat bot.\n\tHow may I assist you today?");
     }
 
-    public void showExit() {
+    public void showGoodbye() {
         System.out.println("\tGoodbye! Please visit me again soon :(");
     }
 

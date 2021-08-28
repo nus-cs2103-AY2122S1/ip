@@ -27,6 +27,8 @@ public class Parser {
             return new DoneCommand(Integer.parseInt(userDescription));
         case "delete":
             return new DeleteCommand(Integer.parseInt(userDescription));
+        case "exit":
+            return new ExitCommand();
         default:
             throw new InvalidInputException();
         }
