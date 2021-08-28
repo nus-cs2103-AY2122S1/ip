@@ -1,8 +1,8 @@
 package yoyo.task;
 
-import yoyo.utility.Separator;
-
 import java.time.LocalDateTime;
+
+import yoyo.utility.Separator;
 
 /**
  * A subclass of Task of event type.
@@ -10,11 +10,23 @@ import java.time.LocalDateTime;
 public class Event extends Task {
     private LocalDateTime datetime;
 
+    /**
+     * Constructor for the Event class with name and datetime parameters.
+     *
+     * @param name Name of Event.
+     * @param datetime Datetime of Event.
+     */
     public Event(String name, LocalDateTime datetime) {
         super(name);
         this.datetime = datetime;
     }
 
+    /**
+     * Constructor for the Event class with name, datetime and isDone parameters.
+     *
+     * @param name Name of Event.
+     * @param datetime Datetime of Event.
+     */
     public Event(String name, LocalDateTime datetime, boolean isDone) {
         super(name, isDone);
         this.datetime = datetime;

@@ -1,11 +1,12 @@
 package yoyo.command;
 
+import java.util.Arrays;
+
 import yoyo.core.Storage;
 import yoyo.core.Ui;
 import yoyo.exception.YoyoException;
 import yoyo.task.TaskList;
 
-import java.util.Arrays;
 
 public abstract class Command {
     protected String[] inputTokens;

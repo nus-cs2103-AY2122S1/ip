@@ -1,11 +1,5 @@
 package yoyo.core;
 
-import yoyo.exception.YoyoException;
-import yoyo.task.Deadline;
-import yoyo.task.Event;
-import yoyo.task.TaskList;
-import yoyo.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,14 +7,27 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+import yoyo.exception.YoyoException;
+import yoyo.task.Deadline;
+import yoyo.task.Event;
+import yoyo.task.TaskList;
+import yoyo.task.Todo;
+
+
+
 public class Storage {
     private static final int TYPE_STR_INDEX = 1;
     private static final int ISDONE_STR_INDEX = 4;
-    private final String DATA_PATH;
-    private File file;
+    private final String dataPath;
+    private final File file;
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param dataPath Main data path of storage.
+     */
     public Storage(String dataPath) {
-        this.DATA_PATH = dataPath;
+        this.dataPath = dataPath;
         this.file = new File(dataPath);
         try {
             if (!this.file.exists()) {
@@ -60,9 +67,7 @@ public class Storage {
 
             while (s.hasNext()) {
                 currLine = s.nextLine();
-                isCurrTaskComplete = currLine.charAt(ISDONE_STR_INDEX) == 'X'
-                        ? true
-                        : false;
+                isCurrTaskComplete = currLine.charAt(ISDONE_STR_INDEX) == 'X';
                 char typeChar = currLine.charAt(TYPE_STR_INDEX);
                 currType = typeChar == 'T'
                         ? TaskType.TODO
@@ -96,7 +101,7 @@ public class Storage {
      */
     public void deposit(TaskList tasks) {
         try {
-            FileWriter fw = new FileWriter(this.DATA_PATH);
+            FileWriter fw = new FileWriter(this.dataPath);
             String textOutput = "";
             for (int i = 0; i < tasks.size(); i++) {
                 textOutput += tasks.get(i).showStatusWrite();
