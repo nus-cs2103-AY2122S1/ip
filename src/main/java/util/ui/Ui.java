@@ -66,7 +66,7 @@ public class Ui {
         output += "1." + ls.get(0);
         for (int i = 1; i < ls.size(); i++) {
             int indi = i + 1;
-            output += "\n\t" + indi + "." + ls.get(i);
+            output += "\n" + indi + "." + ls.get(i);
         }
         return output;
     }

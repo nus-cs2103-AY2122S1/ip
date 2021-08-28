@@ -1,16 +1,28 @@
-
+package util.windows;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import util.controller.Duke;
+
+import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -19,6 +31,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Text taskDisplay;
 
     private Duke duke;
 
@@ -49,4 +63,33 @@ public class MainWindow extends AnchorPane {
 
         userInput.clear();
     }
+
+    /**
+     * Handle the addition of tasks.
+     *
+     */
+    @FXML
+    private void addTask() {
+        duke.setOut(this.taskDisplay);
+        try {
+            Stage stage = new Stage();
+            TaskInputWindow.setStage(stage);
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/TaskInputWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+
+        }
+
+
+    }
+
+
+
+
 }
