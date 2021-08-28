@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level-9. Find
  *
  * Description:
  * Encapsulates the DukeDate Class where it stores the duration/dates

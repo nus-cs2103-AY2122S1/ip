@@ -20,7 +20,6 @@ import duke.exception.TooManyArgumentsException;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level-9. Find
  *
  * Description:
  * Encapsulates the parser where it parses the inputted command from the user and runs

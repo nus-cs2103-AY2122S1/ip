@@ -9,7 +9,6 @@ import duke.util.Ui;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-CodingStandard. Modify the code to comply with a given coding standard
  *
  * Description:
  * Class that encapsulates the delete task command inputted by the user

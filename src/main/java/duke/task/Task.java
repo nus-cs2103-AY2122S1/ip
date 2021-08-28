@@ -4,7 +4,6 @@ package duke.task;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level-9. Find
  *
  * Description:
  * Encapsulates the Task Class which contains a task description

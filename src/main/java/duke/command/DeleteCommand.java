@@ -10,7 +10,6 @@ import duke.util.Store;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level-9. Find
  *
  * Description:
  * Class that encapsulates the delete task command inputted by the user

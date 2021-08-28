@@ -4,7 +4,6 @@ package duke.exception;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level-9. Find
  *
  * Description:
  * Class that encapsulates a missing argument exception that might be
