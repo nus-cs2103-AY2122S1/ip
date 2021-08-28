@@ -72,16 +72,16 @@ public class TaskList {
         return sb.toString();
     }
 
-    public void print(Ui ui) {
-        print(ui, "");
+    public String print() {
+        return print("");
     }
 
     /**
      * Prints out the task list formatted and indented.
      *
-     * @param ui The Ui object which is used to print to output.
+     * @return
      */
-    public void print(Ui ui, String message) {
+    public String print(String message) {
         StringBuilder tasksString = new StringBuilder();
         if (!message.isEmpty()) {
             tasksString.append(message).append(System.lineSeparator());
@@ -92,7 +92,7 @@ public class TaskList {
                     : String.format("%d.%s\n", i + 1, taskList.get(i));
             tasksString.append(taskAsString);
         }
-        ui.print(tasksString.toString());
+        return Ui.print(tasksString.toString());
     }
 
     /**
