@@ -20,7 +20,7 @@ public class Storage {
     /**
      * Loads tasks from task text file if exists, otherwise start new text file
      */
-    public TaskList load() {
+    public TaskList load() throws DukeException {
         File tasks = new File(filePath);
         TaskList taskList = TaskList.emptyTaskList();
         if (tasks.exists()) {
@@ -29,7 +29,7 @@ public class Storage {
             try {
                 s = new Scanner(tasks);
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                throw new DukeException("File not found!");
             }
             while (s.hasNext()) {
                 // Parse string to get task type, status, and description
@@ -64,7 +64,7 @@ public class Storage {
     /**
      * Saves tasks into a text file
      */
-    public void save(TaskList taskList) {
+    public void save(TaskList taskList) throws DukeException {
         File file = new File(filePath);
         try {
             // Create file if not already existing
@@ -78,7 +78,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new DukeException("There was an error! Try again!");
         }
     }
 }
