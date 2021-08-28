@@ -1,7 +1,7 @@
-package command;
+package main.java.command;
 
-import bot.TaskList;
-import bot.UserInterface;
+import main.java.bot.TaskList;
+import main.java.bot.UserInterface;
 
 public class ExitCommand extends Command {
 

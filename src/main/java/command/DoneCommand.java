@@ -1,10 +1,10 @@
-package command;
+package main.java.command;
 
-import bot.DukeException;
-import bot.Storage;
-import bot.TaskList;
-import bot.UserInterface;
-import task.Task;
+import main.java.bot.DukeException;
+import main.java.bot.Storage;
+import main.java.bot.TaskList;
+import main.java.bot.UserInterface;
+import main.java.task.Task;
 
 public class DoneCommand extends Command {
 
@@ -22,13 +22,13 @@ public class DoneCommand extends Command {
             Storage.save(list);
 
             System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                    + "Great! I've marked the following task as done:\n"
+                    + "Great! I've marked the following main.java.task as done:\n"
                     + list.getTask(index).getTaskState()
                     + "\n"
                     + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
 
         } catch (NumberFormatException e) {
-            throw new DukeException("It looks like you did not enter a valid integer for the \"done\" command. Please try again!");
+            throw new DukeException("It looks like you did not enter a valid integer for the \"done\" main.java.command. Please try again!");
         }
     }
 }

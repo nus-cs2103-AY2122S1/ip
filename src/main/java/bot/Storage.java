@@ -1,6 +1,6 @@
-package bot;
+package main.java.bot;
 
-import task.Task;
+import main.java.task.Task;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
 
 public class Storage {
 

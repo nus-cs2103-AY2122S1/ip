@@ -1,9 +1,9 @@
-package task;
+package main.java.task;
 
 import java.time.LocalDateTime;
 
 /**
- * Task subclass that encapsulates the individual "Event" task passed into the bot.
+ * Task subclass that encapsulates the individual "Event" main.java.task passed into the main.java.bot.
  */
 public class EventTask extends Task {
 
@@ -31,9 +31,9 @@ public class EventTask extends Task {
     }
 
     /**
-     * Retrieves the completion state of the task, followed by the task input.
+     * Retrieves the completion state of the main.java.task, followed by the main.java.task input.
      *
-     * @return The String representation of the task completion state and the task input.
+     * @return The String representation of the main.java.task completion state and the main.java.task input.
      */
     @Override
     public String getTaskState() {

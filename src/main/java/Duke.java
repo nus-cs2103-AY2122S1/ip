@@ -1,4 +1,6 @@
-import bot.Bot;
+package main.java;
+
+import main.java.bot.Bot;
 
 public class Duke {
 

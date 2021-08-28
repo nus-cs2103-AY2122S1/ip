@@ -1,6 +1,6 @@
-package bot;
+package main.java.bot;
 
-import task.Task;
+import main.java.task.Task;
 
 import java.util.ArrayList;
 

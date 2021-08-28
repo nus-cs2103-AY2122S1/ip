@@ -1,10 +1,10 @@
-package command;
+package main.java.command;
 
-import bot.DukeException;
-import bot.Storage;
-import bot.TaskList;
-import bot.UserInterface;
-import task.Task;
+import main.java.bot.DukeException;
+import main.java.bot.Storage;
+import main.java.bot.TaskList;
+import main.java.bot.UserInterface;
+import main.java.task.Task;
 
 public class DeleteCommand extends Command {
 
@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
             Storage.save(list);
 
             System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                    + "Noted. I've removed the following task:\n"
+                    + "Noted. I've removed the following main.java.task:\n"
                     + (index + 1)
                     + ". "
                     + removedTask.getTaskState()
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
                     + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
 
         } catch (NumberFormatException e) {
-            throw new DukeException("It looks like you did not enter a valid integer for the \"delete\" command. Please try again!");
+            throw new DukeException("It looks like you did not enter a valid integer for the \"delete\" main.java.command. Please try again!");
         }
     }
 }

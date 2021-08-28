@@ -1,7 +1,7 @@
-package task;
+package main.java.task;
 
 /**
- * Task subclass that encapsulates the individual "Todo" task passed into the bot.
+ * Task subclass that encapsulates the individual "Todo" main.java.task passed into the main.java.bot.
  */
 public class TodoTask extends Task {
 
@@ -21,9 +21,9 @@ public class TodoTask extends Task {
     }
 
     /**
-     * Retrieves the completion state of the task, followed by the task input.
+     * Retrieves the completion state of the main.java.task, followed by the main.java.task input.
      *
-     * @return The String representation of the task completion state and the task input.
+     * @return The String representation of the main.java.task completion state and the main.java.task input.
      */
     @Override
     public String getTaskState() {

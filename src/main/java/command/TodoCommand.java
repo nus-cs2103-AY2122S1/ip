@@ -1,10 +1,10 @@
-package command;
+package main.java.command;
 
-import bot.DukeException;
-import bot.Storage;
-import bot.TaskList;
-import bot.UserInterface;
-import task.TodoTask;
+import main.java.bot.DukeException;
+import main.java.bot.Storage;
+import main.java.bot.TaskList;
+import main.java.bot.UserInterface;
+import main.java.task.TodoTask;
 
 public class TodoCommand extends Command {
 

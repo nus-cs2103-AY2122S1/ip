@@ -1,13 +1,13 @@
-package bot;
+package main.java.bot;
 
-import command.Command;
-import command.ListCommand;
-import command.DoneCommand;
-import command.DeleteCommand;
-import command.TodoCommand;
-import command.DeadlineCommand;
-import command.EventCommand;
-import command.ExitCommand;
+import main.java.command.Command;
+import main.java.command.ListCommand;
+import main.java.command.DoneCommand;
+import main.java.command.DeleteCommand;
+import main.java.command.TodoCommand;
+import main.java.command.DeadlineCommand;
+import main.java.command.EventCommand;
+import main.java.command.ExitCommand;
 
 public class Parser {
 
@@ -45,7 +45,7 @@ public class Parser {
 
         } else {
 
-            throw new DukeException("You've entered an unknown request... The bot doesn't know what that means!");
+            throw new DukeException("You've entered an unknown request... The main.java.bot doesn't know what that means!");
 
         }
     }

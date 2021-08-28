@@ -1,19 +1,19 @@
-package task;
+package main.java.task;
 
 import java.time.format.DateTimeFormatter;
 
 /**
- * Task class that encapsulates the individual task passed into the bot.
+ * Task class that encapsulates the individual main.java.task passed into the main.java.bot.
  */
 public class Task {
 
     /**
-     * Variable that holds the task input as String
+     * Variable that holds the main.java.task input as String
      */
     protected String task;
 
     /**
-     * Variable that holds the task completion state as boolean
+     * Variable that holds the main.java.task completion state as boolean
      */
     protected boolean done;
 
@@ -40,9 +40,9 @@ public class Task {
     }
 
     /**
-     * Retrieves the completion state of the task, followed by the task input.
+     * Retrieves the completion state of the main.java.task, followed by the main.java.task input.
      *
-     * @return The String representation of the task completion state and the task input.
+     * @return The String representation of the main.java.task completion state and the main.java.task input.
      */
     public String getTaskState() {
         return this.done ? "[X] " + this.task : "[ ] " + this.task;

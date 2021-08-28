@@ -16,10 +16,10 @@ OOPS! Sorry, I don't know what that means...
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Alright. I've added the following task (Todo):
+Alright. I've added the following main.java.task (Todo):
 --> [T][ ] todo #1
 
-You currently have 1 task in the list.
+You currently have 1 main.java.task in the list.
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
@@ -31,7 +31,7 @@ You currently have 1 task in the list.
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Alright. I've added the following task (Todo):
+Alright. I've added the following main.java.task (Todo):
 --> [T][ ] todo #2
 
 You currently have 2 tasks in the list.
@@ -67,7 +67,7 @@ OOPS! Sorry, I don't know what that means...
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Alright. I've added the following task (Deadline):
+Alright. I've added the following main.java.task (Deadline):
 --> [D][ ] deadline #1 (By: 1234)
 
 You currently have 3 tasks in the list.
@@ -96,7 +96,7 @@ OOPS! Sorry, I don't know what that means...
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Alright. I've added the following task (Event):
+Alright. I've added the following main.java.task (Event):
 --> [E][ ] event #1 (At: 4321)
 
 You currently have 4 tasks in the list.
@@ -110,7 +110,7 @@ You currently have 4 tasks in the list.
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Great! I've marked the following task as done:
+Great! I've marked the following main.java.task as done:
 [T][X] todo #1
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
@@ -122,7 +122,7 @@ Great! I've marked the following task as done:
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Great! I've marked the following task as done:
+Great! I've marked the following main.java.task as done:
 [T][X] todo #2
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
@@ -145,7 +145,7 @@ OOPS! Sorry, I don't know what that means...
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Alright. I've added the following task (Todo):
+Alright. I've added the following main.java.task (Todo):
 --> [T][ ] todo #3
 
 You currently have 5 tasks in the list.
@@ -160,12 +160,12 @@ You currently have 5 tasks in the list.
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Great! I've marked the following task as done:
+Great! I've marked the following main.java.task as done:
 [D][X] deadline #1 (By: 1234)
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
-Great! I've marked the following task as done:
+Great! I've marked the following main.java.task as done:
 [E][X] event #1 (At: 4321)
 -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
 

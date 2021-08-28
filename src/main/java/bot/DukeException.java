@@ -1,4 +1,4 @@
-package bot;
+package main.java.bot;
 
 /**
  * A class that handles exceptions for the Chatbot.

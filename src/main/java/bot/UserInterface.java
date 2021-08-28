@@ -1,4 +1,4 @@
-package bot;
+package main.java.bot;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,7 +34,7 @@ public class UserInterface {
 
     public void showWelcome() {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                + "Hello! My name is Duke!\n\n"
+                + "Hello! My name is main.java.Duke!\n\n"
                 + " ____        _        \n"
                 + "|  _ \\\\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\\\n"
@@ -52,31 +52,31 @@ public class UserInterface {
     }
 
     /**
-     * Shows the message for a task being added, according to the type of the task given.
+     * Shows the message for a main.java.task being added, according to the type of the main.java.task given.
      *
-     * @param input The task to be added to the list.
+     * @param input The main.java.task to be added to the list.
      * @param type  The type id. Todo: 1, Deadline: 2, Event: 3.
      * @param length The current length of the list.
-     * @param time  The information regarding the task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
-     * @return The String sequence showing that the task has been added to the list.
+     * @param time  The information regarding the main.java.task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
+     * @return The String sequence showing that the main.java.task has been added to the list.
      */
     public static void showTaskAdded(String input, int type, int length, String time) {
 
-        // Determine the string that displays the type of task
+        // Determine the string that displays the type of main.java.task
         String taskType;
         String prefix;
 
         switch (type) {
             case 1:
-                taskType = "task (Todo)";
+                taskType = "main.java.task (Todo)";
                 prefix = "[T][ ]";
                 break;
             case 2:
-                taskType = "task (Deadline)";
+                taskType = "main.java.task (Deadline)";
                 prefix = "[D][ ]";
                 break;
             case 3:
-                taskType = "task (Event)";
+                taskType = "main.java.task (Event)";
                 prefix = "[E][ ]";
                 break;
             default:
@@ -100,7 +100,7 @@ public class UserInterface {
                 + "\n\n"
                 + "You now have "
                 + (length + 1)
-                + (length == 0 ? " task" : " tasks")
+                + (length == 0 ? "main/java/task" : " tasks")
                 + " in the list.\n"
                 + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }

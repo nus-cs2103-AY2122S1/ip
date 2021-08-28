@@ -1,6 +1,6 @@
-package bot;
+package main.java.bot;
 
-import command.Command;
+import main.java.command.Command;
 
 public class Bot {
 
