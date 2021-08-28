@@ -121,8 +121,8 @@ public class Storage {
 
         String[] info = time.split("[,-]");
         info = Arrays.stream(info)
-                .map(String::trim)
-                .toArray(String[]::new);
+            .map(String::trim)
+            .toArray(String[]::new);
 
         LocalDate date;
         LocalTime startTime, endTime;

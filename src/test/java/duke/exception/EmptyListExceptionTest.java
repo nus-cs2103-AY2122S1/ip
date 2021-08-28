@@ -8,6 +8,6 @@ class EmptyListExceptionTest {
     @Test
     public void constructor_success() {
         assertEquals("Your list is empty! Maybe add some tasks into it?",
-                new EmptyListException().getMessage());
+            new EmptyListException().getMessage());
     }
 }

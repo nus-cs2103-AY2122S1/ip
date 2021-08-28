@@ -8,6 +8,6 @@ public class DataIntegrityExceptionTest {
     @Test
     public void constructor_success() {
         assertEquals("Storage file integrity compromised :(",
-                new DataIntegrityException().getMessage());
+            new DataIntegrityException().getMessage());
     }
 }

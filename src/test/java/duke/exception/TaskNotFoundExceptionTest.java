@@ -8,6 +8,6 @@ class TaskNotFoundExceptionTest {
     @Test
     public void constructor_success() {
         assertEquals("There is no such tasks with this task number!",
-                new TaskNotFoundException().getMessage());
+            new TaskNotFoundException().getMessage());
     }
 }

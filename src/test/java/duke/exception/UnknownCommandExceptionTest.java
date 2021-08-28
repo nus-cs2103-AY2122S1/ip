@@ -8,6 +8,6 @@ class UnknownCommandExceptionTest {
     @Test
     public void constructor_success() {
         assertEquals("Sorry but my database does not have such command.",
-                new UnknownCommandException().getMessage());
+            new UnknownCommandException().getMessage());
     }
 }

@@ -29,8 +29,8 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
         return "[E]" + super.toString() + " (at: "
-                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
-                + startTime.format(timeFormatter) + " - "
-                + endTime.format(timeFormatter) + ")";
+            + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+            + startTime.format(timeFormatter) + " - "
+            + endTime.format(timeFormatter) + ")";
     }
 }

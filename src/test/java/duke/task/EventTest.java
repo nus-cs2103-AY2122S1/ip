@@ -21,7 +21,7 @@ class EventTest {
         Event event = new Event("test event", date, startTime, endTime);
 
         String expected = "[E][ ] test event (at: " + date.format(dateFormatter) + ", "
-                + startTime.format(timeFormatter) + " - " + endTime.format(timeFormatter) + ")";
+            + startTime.format(timeFormatter) + " - " + endTime.format(timeFormatter) + ")";
         assertEquals(expected, event.toString());
     }
 
