@@ -45,48 +45,11 @@ public class Duke extends Application {
     public Duke() {
         this.list = new DukeList();
         this.commandManager = new CommandManager();
-        this.ui = new UserInterface();
-    }
-
-    public static void main(String[] args) {
-        new Duke().initialize();
-    }
-
-    private void initialize() {
-        this.ui.greet();
-
-        // Duke commands work with a registry so that add-ons can be developed with
-        // commands simply registered like so
+        this.ui = new UserInterface(this);
         this.commandManager.registerCommands(new ListCommand(this.list, this.ui), new DoneCommand(this.list, this.ui),
                 new ToDoCommand(this.list, this.ui), new EventCommand(this.list, this.ui),
                 new DeadlineCommand(this.list, this.ui), new DeleteCommand(this.list, this.ui),
                 new FindCommand(this.list, this.ui));
-
-        this.run();
-    }
-
-    private void run() {
-        String input = "";
-        try {
-            input = this.ui.getInput();
-        } catch (DukeException e) {
-            this.ui.showError(e);
-        }
-        if (input.equals("bye")) {
-            terminate();
-            return;
-        } else {
-            try {
-                this.commandManager.parseInput(input);
-            } catch (DukeException e) {
-                this.ui.showError(e);
-            }
-        }
-        run();
-    }
-
-    private void terminate() {
-        this.ui.farewell();
     }
 
     @Override
@@ -105,7 +68,6 @@ public class Duke extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.show();
-        // F
         primaryStage.setTitle("Duke");
         primaryStage.setResizable(false);
         primaryStage.setMinHeight(600.0);
@@ -119,7 +81,7 @@ public class Duke extends Application {
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        // F
+
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -153,6 +115,18 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+        ui.greet();
+    }
+
+    /**
+     * Prints a given response by other classes onto dialog container.
+     *
+     * @param response of the bot
+     */
+    public void printResponse(String response) {
+        Label dukeText = new Label(response);
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
     }
 
     private Label getDialogLabel(String text) {
@@ -168,19 +142,16 @@ public class Duke extends Application {
      * the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+        String input = userInput.getText();
+        Label userText = new Label(input);
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(userText, new ImageView(user)));
         userInput.clear();
-    }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            this.commandManager.parseInput(input);
+        } catch (DukeException e) {
+            this.ui.showError(e);
+        }
     }
 
 }
