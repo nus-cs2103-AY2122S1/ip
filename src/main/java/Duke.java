@@ -44,8 +44,6 @@ public class Duke {
             }
         } else {
 
-
-
             File updated = new File("src/main/updated.txt");
             BufferedReader reader = new BufferedReader(new FileReader("src/main/memory.txt"));
             BufferedWriter writer = new BufferedWriter(new FileWriter(updated));
@@ -78,12 +76,12 @@ public class Duke {
                         String[] seperateAgaining = seperate2[1].split(" \\(at: ", 2);
                         String event = seperateAgaining[0];
                         String timeline = seperateAgaining[1].split(" ", 2)[0];
-                        taskList.addDeadline(event, timeline, false);
+                        taskList.addEvent(event, timeline, false);
                         break;
                 }
 
                 if (isCompleted){
-                    taskList.updateTaskStatus(numberAdded);
+                    taskList.updateTaskStatus(numberAdded, false);
                 }
                 numberAdded++;
             }
@@ -120,7 +118,7 @@ public class Duke {
                 taskList.printList();
             } else if (parsedInput[0].equals("done")) {
                 int itemRank = Integer.parseInt(parsedInput[1]);
-                taskList.updateTaskStatus(itemRank);
+                taskList.updateTaskStatus(itemRank, true);
 
             } else if (parsedInput[0].equals("remove")){
                 int itemRank = Integer.parseInt(parsedInput[1]);
