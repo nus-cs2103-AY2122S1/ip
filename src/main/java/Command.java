@@ -1,5 +1,5 @@
 public abstract class Command {
-    public static Command parse(String input) throws InvalidCommand {
+    public static Command parse(String input) throws InvalidCommand, NullDescription {
         String[] output = input.split(" ");
         if (output.length == 0 || output[0].isEmpty() || output[0].equals(" ")) {
             throw new InvalidCommand();

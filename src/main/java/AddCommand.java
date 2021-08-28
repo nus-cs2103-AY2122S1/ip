@@ -4,18 +4,27 @@ public class AddCommand extends Command {
     private String taskType;
     private String taskInfo;
 
+    private void checkDescription(String description, String type) throws NullDescription {
+        int numOfCharacters =  type.length();
+        if (description.length() <= numOfCharacters) {
+            throw new NullDescription(type);
+        }
+    }
 
-    public AddCommand(String input) {
+    public AddCommand(String input) throws NullDescription {
         this.taskType = input.split(" ")[0];
 
         switch (input.split(" ")[0]) {
             case "todo":
+                checkDescription(input, "todo");
                 this.taskInfo = input.substring(5);
                 break;
             case "deadline":
+                checkDescription(input, "deadline");
                 this.taskInfo = input.substring(9);
                 break;
             case "event":
+                checkDescription(input, "event");
                 this.taskInfo = input.substring(6);
                 break;
             default:
@@ -24,7 +33,7 @@ public class AddCommand extends Command {
         }
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormat {
         Task newTask = null;
 
         switch(taskType) {
