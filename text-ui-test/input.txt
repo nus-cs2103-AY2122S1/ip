@@ -1,3 +1,5 @@
+task_list
+yes
 todo read book
 deadline return book /by 2020-06-06
 event project meeting /at 2020-08-06

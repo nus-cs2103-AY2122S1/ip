@@ -10,19 +10,14 @@
     What can I do for you?
     ____________________________________________________________
     ____________________________________________________________
-    This is the following commands, I can perform:
+    Select your save file:
 
-    1. 'todo <task description>' - add a todo task to the list
-    2. 'deadline <task description> /by <by when>' - add a deadline task with specific deadline
-    3. 'event <task description> /at <at when>' - add an event task with specific time
-    4. 'date <yyyy-mm-dd>' - list all todos and all the deadlines and events before specified time
-    5. 'list' - show the current task list
-    6. 'done <task index>' - mark that task as done
-    7. 'delete <task index>' - delete that task from the list
-    8. 'commands' - show this current command window
-    9. 'bye' - end session
+    (input <new_file_name> to create new save file)
     ____________________________________________________________
+>     ____________________________________________________________
+    Are you sure you want to create new file task_list [y/N]?
     ____________________________________________________________
+>     ____________________________________________________________
     Here are the tasks in your list:
     ____________________________________________________________
 >     ____________________________________________________________
@@ -41,31 +36,34 @@
     Now you have 3 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
-    ☹ OOPS!!! [E][ ] project meeting (at: Aug 6 2020) already exists
-    ____________________________________________________________
->     ____________________________________________________________
     Got it. I've added this task:
-      [D][ ] commit (by: Aug 24 2020)
+      [E][ ] project meeting (at: Aug 6 2020)
     Now you have 4 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
     Got it. I've added this task:
-      [T][ ] join sports club
+      [D][ ] commit (by: Aug 24 2020)
     Now you have 5 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
     Got it. I've added this task:
-      [T][ ] borrow book
+      [T][ ] join sports club
     Now you have 6 tasks in the list.
+    ____________________________________________________________
+>     ____________________________________________________________
+    Got it. I've added this task:
+      [T][ ] borrow book
+    Now you have 7 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
     Here are the tasks in your list:
     1.[T][ ] read book
     2.[D][ ] return book (by: Jun 6 2020)
     3.[E][ ] project meeting (at: Aug 6 2020)
-    4.[D][ ] commit (by: Aug 24 2020)
-    5.[T][ ] join sports club
-    6.[T][ ] borrow book
+    4.[E][ ] project meeting (at: Aug 6 2020)
+    5.[D][ ] commit (by: Aug 24 2020)
+    6.[T][ ] join sports club
+    7.[T][ ] borrow book
     ____________________________________________________________
 >     ____________________________________________________________
     Nice! I've marked this task as done:
@@ -77,16 +75,17 @@
     ____________________________________________________________
 >     ____________________________________________________________
     Nice! I've marked this task as done:
-      [D][X] commit (by: Aug 24 2020)
+      [E][X] project meeting (at: Aug 6 2020)
     ____________________________________________________________
 >     ____________________________________________________________
     Here are the tasks in your list:
     1.[T][X] read book
     2.[D][X] return book (by: Jun 6 2020)
     3.[E][ ] project meeting (at: Aug 6 2020)
-    4.[D][X] commit (by: Aug 24 2020)
-    5.[T][ ] join sports club
-    6.[T][ ] borrow book
+    4.[E][X] project meeting (at: Aug 6 2020)
+    5.[D][ ] commit (by: Aug 24 2020)
+    6.[T][ ] join sports club
+    7.[T][ ] borrow book
     ____________________________________________________________
 >     ____________________________________________________________
     Deadline: Aug 6 2020
@@ -94,8 +93,9 @@
     1.[T][X] read book
     2.[D][X] return book (by: Jun 6 2020)
     3.[E][ ] project meeting (at: Aug 6 2020)
-    4.[T][ ] join sports club
-    5.[T][ ] borrow book
+    4.[E][X] project meeting (at: Aug 6 2020)
+    5.[T][ ] join sports club
+    6.[T][ ] borrow book
     ____________________________________________________________
 >     ____________________________________________________________
     Deadline: Jun 6 2020
@@ -106,20 +106,21 @@
     4.[T][ ] borrow book
     ____________________________________________________________
 >     ____________________________________________________________
-    ☹ OOPS!!! Your list index can only be from 1 to 6.
+    ☹ OOPS!!! Your list index can only be from 1 to 7.
     ____________________________________________________________
 >     ____________________________________________________________
     Noted. I've removed this task:
       [E][ ] project meeting (at: Aug 6 2020)
-    Now you have 5 tasks in the list.
+    Now you have 6 tasks in the list.
     ____________________________________________________________
 >     ____________________________________________________________
     Here are the tasks in your list:
     1.[T][X] read book
     2.[D][X] return book (by: Jun 6 2020)
-    3.[D][X] commit (by: Aug 24 2020)
-    4.[T][ ] join sports club
-    5.[T][ ] borrow book
+    3.[E][X] project meeting (at: Aug 6 2020)
+    4.[D][ ] commit (by: Aug 24 2020)
+    5.[T][ ] join sports club
+    6.[T][ ] borrow book
     ____________________________________________________________
 >     ____________________________________________________________
     Bye. Hope to see you again soon!
