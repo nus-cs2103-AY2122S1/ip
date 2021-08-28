@@ -24,7 +24,7 @@ public class TaskList {
 
     /**
      * Returns the List of {@link kayu.task.Task}s.
-     * 
+     *
      * @return A list of {@link kayu.task.Task}s.
      */
     public List<Task> getTasks() {
@@ -33,7 +33,7 @@ public class TaskList {
 
     /**
      * Initializes the {@link #tasks} list with the specified {@link kayu.task.Task} list.
-     * 
+     *
      * @param taskList List of {@link kayu.task.Task} to initialise {@link #tasks} with.
      * @throws StorageException If size of <code>#taskList</code> is larger than {@link #MAX_STORAGE}.
      */
@@ -118,7 +118,7 @@ public class TaskList {
     /**
      * Returns a Map of {@link kayu.task.Task} and their numberings based on
      * the <code>keyword</code> parameter.
-     * 
+     *
      * @param keyword Keyword String to find in {@link kayu.task.Task}s.
      * @return A Map of {@link kayu.task.Task} that has similar description to <code>keyword</code>.
      */

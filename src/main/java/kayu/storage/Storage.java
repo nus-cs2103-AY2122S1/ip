@@ -35,7 +35,7 @@ public class Storage {
 
     /**
      * Sets the desired file path of {@link kayu.task.Task} storage.
-     * 
+     *
      * @param taskFilePath File path for reading/writing of data.
      */
     public void setDirectoryAndFilePath(String taskFilePath) {
@@ -59,7 +59,7 @@ public class Storage {
     /**
      * Loads the file based on specified directory, extracts and decodes the
      * {@link kayu.task.Task} instances for return.
-     * 
+     *
      * @return List of {@link kayu.task.Task}.
      * @throws StorageException If unable to read/write to file.
      */
@@ -139,7 +139,7 @@ public class Storage {
 
     /**
      * Saves the current list of {@link kayu.task.Task} into file memory.
-     * 
+     *
      * @param taskList List of {@link kayu.task.Task} to write to file.
      * @throws StorageException If unable to read/write to file.
      */

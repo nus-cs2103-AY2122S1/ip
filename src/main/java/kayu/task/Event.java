@@ -32,7 +32,7 @@ public class Event extends Task {
     }
 
     /**
-     * Initializes the Event {@link kayu.task.Task}. Overloaded constructor that sets 
+     * Initializes the Event {@link kayu.task.Task}. Overloaded constructor that sets
      * <code>isDone</code> field to false.
      *
      * @param description String description of Task.
@@ -47,7 +47,7 @@ public class Event extends Task {
 
     /**
      * Returns the {@link LocalDate} of Event instance.
-     * 
+     *
      * @return {@link LocalDate} of Event instance.
      */
     public LocalDate getAtDate() {
@@ -56,7 +56,7 @@ public class Event extends Task {
 
     /**
      * Returns the {@link LocalTime} of Event instance.
-     * 
+     *
      * @return {@link LocalTime} of Event instance.
      */
     public LocalTime getAtTime() {

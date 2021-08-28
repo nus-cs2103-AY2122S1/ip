@@ -7,7 +7,7 @@ public class DukeException extends Exception {
 
     /**
      * Initializes a DukeException instance for use in module.
-     * 
+     *
      * @param message String message to describe error faced.
      */
     public DukeException(String message) {

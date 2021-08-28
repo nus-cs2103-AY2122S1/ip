@@ -17,7 +17,7 @@ public class DateTimeFormat {
     
     /**
      * Generates an instance of this class, as well as initialise its fields.
-     * 
+     *
      * @return A DateTimeFormat class with initialised fields.
      */
     public static DateTimeFormat generateInstance() {
@@ -57,7 +57,7 @@ public class DateTimeFormat {
 
     /**
      * Returns a List of date formats as {@link DateTimeFormatter}.
-     * 
+     *
      * @return A list of date formats as {@link DateTimeFormatter}.
      */
     public List<DateTimeFormatter> getDateFormats() {

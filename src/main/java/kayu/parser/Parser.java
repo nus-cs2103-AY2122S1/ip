@@ -22,7 +22,7 @@ public class Parser {
 
     /**
      * Parses user input into executable {@link kayu.commands.Command}s.
-     * 
+     *
      * @param userInput User input as String.
      * @return Associated {@link kayu.commands.Command}.
      */

@@ -19,7 +19,7 @@ public abstract class Task {
 
     /**
      * Initializes a new Task instance.
-     * 
+     *
      * @param description String description of Task.
      * @param isDone Boolean true if complete, else false.
      */
@@ -31,7 +31,7 @@ public abstract class Task {
     /**
      * Initializes a new Task instance. Overloaded constructor that sets
      * {@link #isDone} field to false.
-     * 
+     *
      * @param description String description of Task.
      */
     public Task(String description) {
@@ -41,7 +41,7 @@ public abstract class Task {
 
     /**
      * Returns the description of the Task instance.
-     * 
+     *
      * @return Description of the Task as a String.
      */
     public String getDescription() {
@@ -50,7 +50,7 @@ public abstract class Task {
 
     /**
      * Returns the completion state of the Task.
-     * 
+     *
      * @return Boolean isDone, true if complete else false.
      */
     public boolean isDone() {
@@ -59,7 +59,7 @@ public abstract class Task {
 
     /**
      * Updates the completion state of the Task instance.
-     * 
+     *
      * @param isDone New boolean state.
      */
     public void setDone(boolean isDone) {
@@ -82,7 +82,7 @@ public abstract class Task {
 
     /**
      * Provides the encoded string representation of this Task instance.
-     * 
+     *
      * @return Encoded String representation of instance.
      */
     public String toEncodedString() {

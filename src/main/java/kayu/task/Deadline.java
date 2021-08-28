@@ -34,7 +34,7 @@ public class Deadline extends Task {
     /**
      * Initializes the Deadline {@link kayu.task.Task}. Overloaded constructor that sets
      * <code>isDone</code> field to false.
-     * 
+     *
      * @param description String description of Task.
      * @param byDate {@link LocalDate} of Deadline instance.
      * @param byTime {@link LocalTime} of Deadline instance.
