@@ -27,9 +27,9 @@ public class Storage {
         try {
             Scanner s = new Scanner(this.file); // create a Scanner using the File as the source
             if (!s.hasNext()) {
-                System.out.println("There are no items in your task list!");
+                Ui.printMessage("There are no items in your task list!");
             } else {
-                System.out.println("Here is your current task list: ");
+                Ui.printMessage("Here is your current task list: ");
                 while (s.hasNext()) {
                     String str = s.nextLine();
                     System.out.println(str);
@@ -59,7 +59,7 @@ public class Storage {
                         taskList.addTask(task);
                     } 
                 }
-                System.out.println("End of task list");
+                Ui.printMessage("End of task list");
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
@@ -78,6 +78,4 @@ public class Storage {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
-    
-    
 }

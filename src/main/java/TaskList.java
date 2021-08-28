@@ -9,7 +9,7 @@ public class TaskList {
     
     public void getList() {
         if (userList.isEmpty()) {
-            System.out.println("You don't have any tasks in the list!");
+            Ui.printMessage("You don't have any tasks in the list!");
         } else {
             int count = 1;
             for (int i = 0; i < userList.size(); i++) {

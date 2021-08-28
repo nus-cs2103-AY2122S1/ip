@@ -13,9 +13,7 @@ public class todoCommand extends Command {
         } else {
             Task task = new Todo(command.substring(5));
             taskList.addTask(task);
-            System.out.println("Got it. I've added this task:");
-            System.out.println(task);
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            Ui.taskResponse(task);
             storage.writeToFile("./duke.txt", taskList);
         } 
     }

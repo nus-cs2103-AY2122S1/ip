@@ -29,14 +29,13 @@ public class Parser {
     
     public boolean isExit() {
         if (command.equals("bye")) {
-            System.out.println("Bye. Have a great day!");
+            Ui.bye();
+            Ui.showLine();
             return true;
         }
-        
         if (command.equals("")) {
             return true;
         }
-        
         return false;
     }
     

@@ -10,9 +10,7 @@ public class deleteCommand extends Command {
         int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
         Task task = taskList.getTask(value-1);
         taskList.removeTask(value-1);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        Ui.deleteResponse(task);
         storage.writeToFile("./duke.txt", taskList);
     }
 }

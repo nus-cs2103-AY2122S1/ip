@@ -21,9 +21,7 @@ public class deadlineCommand extends Command {
                 LocalDateTime dateTime = LocalDateTime.parse(parts[1].substring(3).trim(), dtf);
                 Task task = new Deadline(parts[0].substring(9), dateTime);
                 taskList.addTask(task);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(task);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                Ui.taskResponse(task);
                 storage.writeToFile("./duke.txt", taskList);
             } catch (DateTimeParseException e) {
                 DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be deadline/by " +

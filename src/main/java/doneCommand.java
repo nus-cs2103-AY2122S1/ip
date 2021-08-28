@@ -13,9 +13,7 @@ public class doneCommand extends Command {
         } else {
             Task t = taskList.getTask(value - 1);
             t.markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(t.toString());
-            storage.writeToFile("./duke.txt", taskList);
+            Ui.doneResponse(t);
         }
     }
 }

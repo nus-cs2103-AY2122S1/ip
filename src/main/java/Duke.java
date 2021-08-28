@@ -1,16 +1,20 @@
 public class Duke {
-    public static void main(String[] args) {
-        System.out.println("Hello from Duke!");
-        System.out.println("");
-        User user1 = new User();
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage("./duke.txt");
-        storage.loadTaskListData(taskList);
-        System.out.println("");
-        System.out.println("Hope you are doing well. How can I help you?");
+    private Storage storage;
+    private TaskList taskList;
+    private Ui ui;
+    
+    public Duke(String filePath) {
+        taskList = new TaskList();
+        storage = new Storage(filePath);
+        ui = new Ui(taskList, storage);
+    }
+    
+    public void run() {
+        ui.showWelcome();
+        ui.showLine();
         boolean isExit = false;
         while (!isExit) {
-            String command = user1.command();
+            String command = ui.command();
             Parser parser = new Parser(command);
             if (parser.isExit()) {
                 break;
@@ -19,5 +23,9 @@ public class Duke {
             c.execute(taskList, storage);
             isExit = parser.isExit();
         }
+    }
+    
+    public static void main(String[] args) {
+        new Duke("./duke.txt").run();
     }
 }
