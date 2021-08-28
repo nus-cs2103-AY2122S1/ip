@@ -2,6 +2,11 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import duke.command.Command;
 
@@ -12,7 +17,7 @@ import duke.command.Command;
  *
  * @author Elizabeth Chow
  */
-public class Duke {
+public class Duke extends Application {
     private final Ui ui;
     private final Storage storage;
     private TaskList tasks;
@@ -54,5 +59,15 @@ public class Duke {
             }
         }
         scanner.close();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello world!");
+        helloWorld.setFont(new Font("Arial", 50));
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
     }
 }
