@@ -6,9 +6,6 @@ import java.io.*;
 import java.util.*;
 
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
     private final static String LINE = "-----------------------------------------";
 
     public static void main(String[] args) throws IOException {

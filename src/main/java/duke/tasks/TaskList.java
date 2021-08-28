@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public final class TaskList {
-    private static List<String> taskString = new ArrayList<>();
-    private static List<Tasks> taskList = new ArrayList<>();
+    private final static List<String> taskString = new ArrayList<>();
+    private final static List<Tasks> taskList = new ArrayList<>();
     private static int taskNumber = 1;
     private final static String LINE = "-----------------------------------------";
 
@@ -55,7 +55,6 @@ public final class TaskList {
         for (int counter = 0; counter < taskString.size(); counter++) {
             if (counter == num - 1) {
                 taskList.get(num - 1).markAsDone();
-//                System.out.println(taskString.get(counter) + taskList.get(counter).toString());
             }
         }
         System.out.println(LINE);
@@ -83,14 +82,15 @@ public final class TaskList {
         Tasks deletedTasks = taskList.get(i - 1);
         taskList.remove(i - 1);
         taskString.remove(i - 1);
-        System.out.println("Noted. I've removed this task: \n" + deletedTasks + "\nNow you have " + taskString.size() + " tasks in the list.");
+        System.out.println("Noted. I've removed this task: \n" + deletedTasks + "\nNow you have "
+                + taskString.size() + " tasks in the list.");
     }
 
     public static String overwrite() {
         String str = "";
         for (Tasks task : taskList) {
             str = task.toString() + "\n";
-            System.out.println(task.toString());
+            System.out.println(task);
         }
         return str;
     }
