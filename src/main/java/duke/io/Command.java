@@ -25,4 +25,31 @@ public class Command {
     public String[] getArgs() {
         return this.args;
     }
+
+    @Override
+    public boolean equals(Object otherObj) {
+        if (!(otherObj instanceof Command)) {
+            return false;
+        } else {
+            final Command otherCommand = (Command) otherObj;
+
+            if (!this.command.equals(otherCommand.command)) {
+                return false;
+            } else if (this.args == null && otherCommand.args == null) {
+                return true;
+            } else if (this.args == null || otherCommand.args == null) {
+                return false;
+            } else if (this.args.length != otherCommand.args.length) {
+                return false;
+            } else {
+                for (int i = 0; i < this.args.length; ++i) {
+                    if (!this.args[i].equals(otherCommand.args[i])) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+    }
 }

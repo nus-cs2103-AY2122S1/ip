@@ -57,14 +57,16 @@ public class Duke {
                             ui.printTaskList(taskList);
                             break;
                         case DONE:
-                            int index = Integer.parseInt(command.getArgs()[0]);
+                            // -1 to account for zero-indexing
+                            int index = Integer.parseInt(command.getArgs()[0]) - 1;
                             taskList.get(index).markAsDone();
                             isTaskListUpdated = true;
 
                             ui.printMessage("Nice! I've marked this task as done:\n  " + taskList.get(index));
                             break;
                         case DELETE:
-                            Task removedTask = taskList.remove(Integer.parseInt(command.getArgs()[0]));
+                            // -1 to account for zero-indexing
+                            Task removedTask = taskList.remove(Integer.parseInt(command.getArgs()[0]) - 1);
                             isTaskListUpdated = true;
 
                             ui.printMessage("Noted. I've removed this task:\n  " + removedTask + "\nNow you have "

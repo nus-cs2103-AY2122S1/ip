@@ -34,4 +34,20 @@ public class Event extends Task{
     public String toString() {
         return "[E][" + getStatusIcon() + "] " + this.description + " (at: " + this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
+
+    @Override
+    public boolean equals(Object otherObj) {
+        if (!(otherObj instanceof Event)) {
+            return false;
+        } else {
+            final Event otherEvent = (Event) otherObj;
+
+            if (this.isDone != otherEvent.isDone) {
+                return false;
+            } else if (!this.description.equals(otherEvent.description)) {
+                return false;
+            } else return this.dateTime.equals(otherEvent.dateTime);
+        }
+    }
 }

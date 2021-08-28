@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.data.TaskList;
+
 import java.time.LocalDate;
 
 public abstract class Task {
@@ -41,6 +43,19 @@ public abstract class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;
+    }
+
+    @Override
+    public boolean equals(Object otherObj) {
+        if (!(otherObj instanceof Task)) {
+            return false;
+        } else {
+            final Task otherTask = (Task) otherObj;
+
+            if (this.isDone != otherTask.isDone) {
+                return false;
+            } else return this.description.equals(otherTask.description);
+        }
     }
 
 }

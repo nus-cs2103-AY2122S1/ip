@@ -6,11 +6,9 @@ import duke.DukeException;
 import java.util.Scanner;
 
 public class Parser {
-
     public static String getInput(Scanner sc) {
         return sc.nextLine().trim();
     }
-
 
     public static Command parse(String userInput) throws DukeException {
         if (userInput.equals("bye")) {
@@ -21,11 +19,11 @@ public class Parser {
             return new Command(CommandName.LIST);
         } else if (userInput.startsWith("done")) {
             // DONE command
-            int index = Integer.parseInt(userInput.substring(5)) - 1;
+            int index = Integer.parseInt(userInput.substring(5));
             return new Command(CommandName.DONE, new String[]{String.valueOf(index)});
         } else if (userInput.startsWith("delete")) {
             // DELETE command
-            int index = Integer.parseInt(userInput.substring(7)) - 1;
+            int index = Integer.parseInt(userInput.substring(7));
             return new Command(CommandName.DELETE, new String[]{String.valueOf(index)});
         } else if (userInput.startsWith("todo")) {
             // TODO command

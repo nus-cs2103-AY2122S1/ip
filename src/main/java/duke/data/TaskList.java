@@ -1,5 +1,6 @@
 package duke.data;
 
+import duke.io.Command;
 import duke.tasks.Task;
 
 import java.time.LocalDate;
@@ -43,4 +44,20 @@ public class TaskList {
                 .collect(Collectors.toList()));
     }
 
+    @Override
+    public boolean equals(Object otherObj) {
+        if (!(otherObj instanceof TaskList)) {
+            return false;
+        } else {
+            final TaskList otherTaskList = (TaskList) otherObj;
+
+            if (this.taskData == null && otherTaskList.taskData == null) {
+                return true;
+            } else if (this.taskData == null || otherTaskList.taskData == null) {
+                return false;
+            } else {
+                return this.taskData.equals(otherTaskList.taskData);
+            }
+        }
+    }
 }

@@ -35,4 +35,19 @@ public class Deadline extends Task{
     public String toString() {
         return "[D][" + getStatusIcon() + "] " + this.description + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
+
+    @Override
+    public boolean equals(Object otherObj) {
+        if (!(otherObj instanceof Deadline)) {
+            return false;
+        } else {
+            final Deadline otherDeadline = (Deadline) otherObj;
+
+            if (this.isDone != otherDeadline.isDone) {
+                return false;
+            } else if (!this.description.equals(otherDeadline.description)) {
+                return false;
+            } else return this.deadline.equals(otherDeadline.deadline);
+        }
+    }
 }
