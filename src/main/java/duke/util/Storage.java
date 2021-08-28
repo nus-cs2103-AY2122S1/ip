@@ -105,17 +105,17 @@ public class Storage {
         Task task;
 
         switch (details[0]) {
-            case "T":
-                task = new Todo(details[2]);
-                break;
-            case "D":
-                task = new Deadline(details[2], details[3]);
-                break;
-            case "E":
-                task = new Event(details[2], details[3]);
-                break;
-            default:
-                throw new DukeUnexpectedCharacterException(details[0]);
+        case "T":
+            task = new Todo(details[2]);
+            break;
+        case "D":
+            task = new Deadline(details[2], details[3]);
+            break;
+        case "E":
+            task = new Event(details[2], details[3]);
+            break;
+        default:
+            throw new DukeUnexpectedCharacterException(details[0]);
         }
         if (details[1].equals("1")) {
             task.markAsDone();
