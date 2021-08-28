@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,7 @@ public class UiTest {
     /**
      * Set the output stream back to System.out after testing.
      */
-    @After
+    @AfterEach
     public void restoreInitialStreams() {
         System.setOut(originalOut);
     }
