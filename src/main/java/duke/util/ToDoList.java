@@ -1,12 +1,12 @@
 package duke.util;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.exception.DukeIoException;
 import duke.exception.DukeNegativeIndexException;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * This class encapsulates a List used by Duke to keep track of tasks.
@@ -24,38 +24,38 @@ public class ToDoList {
         this.dataManager = dataManager;
     }
 
-    /** Prints the list of items that the user entered. */
-    public void printList() {
-        Ui.printList(list);
+    /** Gets the list of items that the user entered. */
+    public String printList() {
+        return Ui.printList(list);
     }
 
     /**
      * Adds user input to list and pretty prints a visual feedback.
      *
      * @param task Task to be stored into the list.
+     * @return string to be printed out.
      */
-    public void addToList(Task task) {
+    public String addToList(Task task) {
         list.add(task);
-        Ui.prettyPrint(
-                String.format(
-                        "Got it. I've added this task:" + Ui.LINE_SEPARATOR
-                                + "\t\t%s\tNow you have %s tasks in the list.",
-                        task + Ui.LINE_SEPARATOR, list.size()));
+        return String.format("Got it. I've added this task:" + Ui.LINE_SEPARATOR
+                        + "  %sNow you have %s tasks in the list.",
+                        task + Ui.LINE_SEPARATOR, list.size());
     }
 
     /**
      * Marks the task at index specified to be done.
      *
      * @param index Index of task to be marked as done.
+     * @return string to be printed out.
      * @throws InvalidIndexException if user inputs a number larger than number of tasks currently in list.
      */
-    public void markTaskAsDone(int index) throws DukeException {
+    public String markTaskAsDone(int index) throws DukeException {
         if (index > list.size()) {
             throw new InvalidIndexException(list.size());
         } else {
             Task task = list.get(index - 1);
             task.markAsDone();
-            Ui.prettyPrint(String.format("Good job on completing this task!\r\n\t\t%s", task));
+            return String.format("Good job on completing this task!\n  %s", task);
         }
     }
 
@@ -66,18 +66,16 @@ public class ToDoList {
      * @throws InvalidIndexException if user inputs a number larger than number of tasks currently in list.
      * @throws DukeNegativeIndexException if user inputs a negative number.
      */
-    public void removeFromList(int index) throws DukeException {
+    public String removeFromList(int index) throws DukeException {
         if (index > list.size()) {
             throw new InvalidIndexException(list.size());
         } else if (index < 0) {
             throw new DukeNegativeIndexException();
         } else {
             Task task = list.get(index - 1);
-            Ui.prettyPrint(
-                    String.format(
-                            "Noted. I've removed this task:\r\n\t\t%s\tNow you have %s tasks in the list.",
-                            task + Ui.LINE_SEPARATOR, list.size() - 1));
             list.remove(index - 1);
+            return String.format("Noted. I've removed this task:\n  %sNow you have %s tasks in the list.",
+                            task + Ui.LINE_SEPARATOR, list.size());
         }
     }
 

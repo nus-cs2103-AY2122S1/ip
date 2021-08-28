@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.util.Parser;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import duke.util.Parser;
 
 /**
  * This class encapsulates a Deadline.

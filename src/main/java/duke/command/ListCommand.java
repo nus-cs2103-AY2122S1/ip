@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.util.ToDoList;
 
 /**
@@ -10,14 +9,14 @@ import duke.util.ToDoList;
  * @version CS2103T AY21/22 Semester 1
  */
 public class ListCommand extends Command {
-    private ToDoList list;
+    private final ToDoList list;
 
     public ListCommand(ToDoList list) {
         this.list = list;
     }
 
     @Override
-    public void execute() throws DukeException {
-        list.printList();
+    public String getResponse(String input) {
+        return list.printList();
     }
 }

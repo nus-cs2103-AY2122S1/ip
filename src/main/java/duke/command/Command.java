@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
-
 /**
  * This class acts as a base class for all commands of Duke.
  *
@@ -13,5 +11,5 @@ public abstract class Command {
         return false;
     }
 
-    public abstract void execute() throws DukeException;
+    public abstract String getResponse(String input);
 }

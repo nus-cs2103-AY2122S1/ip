@@ -18,7 +18,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        Ui.printExitMessage();
+    public String getResponse(String input) {
+        return Ui.getExitMessage();
     }
 }

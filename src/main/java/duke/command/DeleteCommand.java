@@ -12,18 +12,21 @@ import duke.util.ToDoList;
  */
 public class DeleteCommand extends Command {
     private final ToDoList list;
-    private final String input;
 
-    public DeleteCommand(String input, ToDoList list) {
-        this.input = input;
+    public DeleteCommand(ToDoList list) {
         this.list = list;
     }
 
-    /** Extracts index from user input and removes task from the list and persisted storage. */
     @Override
-    public void execute() throws DukeException {
-        int index = Parser.extractIndex(input);
-        list.removeFromList(index);
-        list.updateData();
+    public String getResponse(String input) {
+        int index = 0;
+        try {
+            index = Parser.extractIndex(input);
+            String response = list.removeFromList(index);
+            list.updateData();
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
