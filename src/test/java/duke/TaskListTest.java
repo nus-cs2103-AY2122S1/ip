@@ -1,10 +1,6 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.tasks.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +9,11 @@ import java.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 public class TaskListTest {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
@@ -35,8 +34,8 @@ public class TaskListTest {
     @Test
     public void addDeadline_oneDeadline_success() {
         TaskList tl = new TaskList(new ArrayList<Task>());
-        tl.addDeadline("homework", testDate,false);
-        Task expected = new Deadline("homework", testDate,false);
+        tl.addDeadline("homework", testDate, false);
+        Task expected = new Deadline("homework", testDate, false);
 
         assertEquals(1, tl.getTotalTasksNumber());
         assertEquals(expected.toString(), tl.getTask(0).toString());
@@ -45,8 +44,8 @@ public class TaskListTest {
     @Test
     public void addEvent_oneEvent_success() {
         TaskList tl = new TaskList(new ArrayList<Task>());
-        tl.addEvent("meeting", testDate,false);
-        Task expected = new Event("meeting", testDate,false);
+        tl.addEvent("meeting", testDate, false);
+        Task expected = new Event("meeting", testDate, false);
 
         assertEquals(1, tl.getTotalTasksNumber());
         assertEquals(expected.toString(), tl.getTask(0).toString());

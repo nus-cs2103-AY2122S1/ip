@@ -1,10 +1,10 @@
 package duke;
 
-import duke.exception.DukeException;
-
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.LocalDateTime;
+
+import duke.exception.DukeException;
 
 /**
  * This is the class that handles user input.
@@ -104,6 +104,5 @@ public class Parser {
             bot.handleWrongCommand();
             break;
         }
-//        return run;
     }
 }

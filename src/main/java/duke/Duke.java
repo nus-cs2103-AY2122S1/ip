@@ -1,8 +1,8 @@
 package duke;
 
-import duke.exception.DukeException;
-
 import java.util.Scanner;
+
+import duke.exception.DukeException;
 
 /**
  * The Duke program implements an application that reads the user input
@@ -26,7 +26,7 @@ public class Duke {
         boolean running = true;
 
         while (running) {
-            try{
+            try {
                 parser.parse(input, bot);
                 int temp = bot.getExitStatus();
                 if (temp == 0) {

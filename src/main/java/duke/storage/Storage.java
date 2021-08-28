@@ -1,11 +1,5 @@
 package duke.storage;
 
-import duke.tasks.TaskList;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,13 +12,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+
 /**
  * Storage reads and writes to a .txt file to save and load the tasks.
  */
 public class Storage {
 
-    final String TERMINATOR = "/@";
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    final String STRING_TERMINATOR = "/@";
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
      * This method makes a directory at a hardcoded location for the data to be stored.
@@ -113,11 +113,11 @@ public class Storage {
                 StringBuilder s = new StringBuilder();
                 Task current = tasklist.getTask(i);
                 s.append(current.getMarker());
-                s.append(TERMINATOR);
+                s.append(STRING_TERMINATOR);
                 s.append(current.getDone());
-                s.append(TERMINATOR);
+                s.append(STRING_TERMINATOR);
                 s.append(current.getName());
-                s.append(TERMINATOR);
+                s.append(STRING_TERMINATOR);
                 s.append(current.getTime());
 
                 String temp = s.toString();

@@ -113,15 +113,18 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Finds all tasks that has user input keyword in their description.
+     * @param name User input keyword.
+     * @return String representation of all task that match keyword.
+     */
     public String findTask(String name) {
         String foundTask = "";
         int index = 1;
-
         for (int i = 0; i < tasks.size(); i++) {
             Task find = tasks.get(i);
             String taskName = find.getName();
             String[] splitName = taskName.split(" ", 0);
-            
             for (int j = 0; j < splitName.length; j++) {
                 if (splitName[j].equals(name)) {
                     foundTask = foundTask + index + "." + find + "\n";

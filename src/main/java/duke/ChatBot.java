@@ -1,13 +1,11 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-
-
-import java.time.LocalDateTime;
-
-import java.util.ArrayList;
 
 /**
  * ChatBot is a class that encapsulates what a chat bot has.
@@ -121,6 +119,11 @@ public class ChatBot {
         s.saveTasks(tasklist);
     }
 
+    /**
+     * This method calls TaskList to find tasks related to the
+     * input by the user and calls UI to display them.
+     * @param name User input task to find.
+     */
     public void handleFind(String name) {
         String findTask = tasklist.findTask(name);
         ui.showFoundTask(findTask);

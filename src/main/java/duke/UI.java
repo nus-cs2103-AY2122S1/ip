@@ -31,7 +31,8 @@ public class UI {
      * @param size The total number of tasks.
      */
     public void showAddTaskMessage(Task t, int size) {
-        System.out.println(LINE + "I've added this task:\n" + t +"\n" + "You have " + size + " tasks left!\n" + LINE);
+        System.out.println(LINE + "I've added this task:\n" + t
+                + "\n" + "You have " + size + " tasks left!\n" + LINE);
     }
 
     /**
@@ -50,8 +51,8 @@ public class UI {
      * @param size The total number of tasks.
      */
     public void showDeleteTaskMessage(Task t, int size) {
-        System.out.println(LINE + "The task has been removed:\n" + t +
-                "\n" + "You have " + size + " tasks left!\n" + LINE);
+        System.out.println(LINE + "The task has been removed:\n" + t
+                + "\n" + "You have " + size + " tasks left!\n" + LINE);
     }
 
     /**
@@ -81,6 +82,10 @@ public class UI {
         System.out.println(LINE + errorMessage + "\n" + LINE);
     }
 
+    /**
+     * Prints out the task that matched with the keyword with formatting.
+     * @param tasks String input of the tasks found.
+     */
     public void showFoundTask(String tasks) {
         System.out.println(LINE + "Here are the matching tasks in your list:");
         System.out.println(tasks + LINE);
