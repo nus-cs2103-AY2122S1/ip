@@ -12,7 +12,6 @@ import duke.tasktypes.TaskList;
 import duke.tasktypes.ToDos;
 
 
-
 /**
  * Command that adds task to the list.
  */

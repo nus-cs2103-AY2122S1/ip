@@ -1,9 +1,8 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.commands.Command;
 import duke.tasktypes.TaskList;
+import java.util.Scanner;
 
 /**
  * Represents the chat bot.
