@@ -31,6 +31,7 @@ public class Storage {
      */
     public void autoLoad() {
         try {
+            System.out.println(Paths.get("data", "record"));
             Scanner scanner = new Scanner(Paths.get("data", "record"));
             while (scanner.hasNextLine()) {
                 String itemInfo = scanner.nextLine();

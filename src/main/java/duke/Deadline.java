@@ -16,6 +16,10 @@ public class Deadline extends Task {
         this.ddl = ddl;
     }
 
+    public LocalDate getDdl() {
+        return ddl;
+    }
+
     /**
      * Customizes the string representation of a deadline object.
      *
@@ -23,7 +27,20 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + ddl.getMonth().toString() + " " +
-                ddl.getDayOfMonth() + " " + ddl.getYear() + ")";
+        return "[D]" + super.toString() + "(by: " + ddl.getMonth().toString() + " "
+                + ddl.getDayOfMonth() + " " + ddl.getYear() + ")";
+    }
+
+
+    /**
+     * Two deadline objects are equal iff they are equal tasks and they have the same ddl.
+     * */
+    @Override
+    public boolean equals(Object another) {
+        if (another instanceof Deadline) {
+            Deadline anotherTask = (Deadline) another;
+            return super.equals(another) && ddl.equals(anotherTask.getDdl());
+        }
+        return false;
     }
 }

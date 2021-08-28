@@ -51,7 +51,7 @@ public class TaskList {
         } else if (userInput.startsWith("event")) {
             try {
                 int atPosition = userInput.lastIndexOf("/at");
-                String description = userInput.substring(6, atPosition);//Length of "event " = 6
+                String description = userInput.substring(6, atPosition); //Length of "event " = 6
                 LocalDate time = LocalDate.parse(userInput.substring(atPosition + 4));
                 task = new Event(description, time);
             } catch (StringIndexOutOfBoundsException e) {

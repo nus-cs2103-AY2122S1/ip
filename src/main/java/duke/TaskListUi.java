@@ -21,9 +21,9 @@ public class TaskListUi extends Ui {
      * @param task             the added task.
      */
     public void printAddMessage(ArrayList<Task> userInputRecords, Task task) {
-        System.out.println(formatMessage("Got it. I've added this task:\n" +
-                getSubIndentation() + task + "\n" + getIndentation() +
-                "Now you have " + userInputRecords.size() + " tasks in the list.\n"));
+        System.out.println(formatMessage("Got it. I've added this task:\n"
+                + getSubIndentation() + task + "\n" + getIndentation()
+                + "Now you have " + userInputRecords.size() + " tasks in the list.\n"));
     }
 
     /**
@@ -47,9 +47,9 @@ public class TaskListUi extends Ui {
      * @param itemDeleted      the task deleted, by index.
      */
     public void printDeleteMessage(ArrayList<Task> userInputRecords, Task itemDeleted) {
-        System.out.println(formatMessage("Noted. I've removed this task:\n" +
-                getSubIndentation() + itemDeleted + "\n" + getIndentation() +
-                "Now you have " + userInputRecords.size() + " tasks in the list.\n"));
+        System.out.println(formatMessage("Noted. I've removed this task:\n"
+                + getSubIndentation() + itemDeleted + "\n" + getIndentation()
+                + "Now you have " + userInputRecords.size() + " tasks in the list.\n"));
     }
 
     /**
@@ -58,8 +58,8 @@ public class TaskListUi extends Ui {
      * @param taskType the type of task specified by the user.
      */
     public void printNonEmptyDescriptionMessage(String taskType) {
-        if (taskType.startsWith("a") || taskType.startsWith("e") || taskType.startsWith("i") ||
-                taskType.startsWith("o") || taskType.startsWith("u")) {
+        if (taskType.startsWith("a") || taskType.startsWith("e") || taskType.startsWith("i")
+                || taskType.startsWith("o") || taskType.startsWith("u")) {
             System.out.println(formatMessage("OOPS!!! The description of an " + taskType + " cannot be empty.\n"));
         } else {
             System.out.println(formatMessage("OOPS!!! The description of a " + taskType + " cannot be empty.\n"));
@@ -87,8 +87,8 @@ public class TaskListUi extends Ui {
      * @param itemToComplete   the task marked done, by index.
      */
     public void printMarkAsDoneMessage(ArrayList<Task> userInputRecords, int itemToComplete) {
-        System.out.println(formatMessage("Nice! I've marked this task as done:\n" +
-                getSubIndentation() + userInputRecords.get(itemToComplete) + "\n"));
+        System.out.println(formatMessage("Nice! I've marked this task as done:\n"
+                + getSubIndentation() + userInputRecords.get(itemToComplete) + "\n"));
     }
 
     /**

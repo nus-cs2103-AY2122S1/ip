@@ -16,6 +16,10 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public LocalDate getTime() {
+        return time;
+    }
+
     /**
      * Customizes the string representation of an event object.
      *
@@ -23,7 +27,19 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + time.getMonth().toString() + " " +
-                time.getDayOfMonth() + " " + time.getYear() + ")";
+        return "[E]" + super.toString() + "(at: " + time.getMonth().toString() + " "
+                + time.getDayOfMonth() + " " + time.getYear() + ")";
+    }
+
+    /**
+     * Two event objects are equal iff they are equal tasks and they have the same time.
+     * */
+    @Override
+    public boolean equals(Object another) {
+        if (another instanceof Event) {
+            Event anotherTask = (Event) another;
+            return super.equals(another) && time.equals(anotherTask.getTime());
+        }
+        return false;
     }
 }

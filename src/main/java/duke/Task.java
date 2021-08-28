@@ -24,6 +24,10 @@ public class Task {
         return taskTitle;
     }
 
+    public boolean getIsDone() {
+        return isDone;
+    }
+
     /**
      * Customizes the string representation of a task object.
      *
@@ -36,5 +40,17 @@ public class Task {
         } else {
             return "[ ] " + taskTitle;
         }
+    }
+
+    /**
+     * Two task objects are equal iff they have the same task title and same isDone value.
+     * */
+    @Override
+    public boolean equals(Object another) {
+        if(another instanceof Task) {
+            Task anotherTask = (Task) another;
+            return isDone == anotherTask.getIsDone() && taskTitle.equals(anotherTask.getTaskTitle());
+        }
+        return false;
     }
 }

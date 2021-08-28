@@ -21,4 +21,15 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * Two todo objects are equal iff they are equal tasks and they are both ToDo objects.
+     * */
+    @Override
+    public boolean equals(Object another) {
+        if (another instanceof ToDo) {
+            return super.equals(another);
+        }
+        return false;
+    }
 }
