@@ -49,15 +49,15 @@ public class Command {
             }
             switch (Parser.getCommandKeyword(command)) {
             case "y":
-                newApplicationState = new AppState(false, applicationState.getTaskList(),
+                newApplicationState = new AppState(applicationState.getTaskList(),
                         Flag.STORAGE_PARTIAL_LOAD);
                 return new StorageLoadAction(newApplicationState);
             case "n":
-                newApplicationState = new AppState(false, applicationState.getTaskList(),
+                newApplicationState = new AppState(applicationState.getTaskList(),
                         Flag.STORAGE_WIPE);
                 return new StorageLoadAction(newApplicationState);
             default:
-                newApplicationState = new AppState(false, applicationState.getTaskList(),
+                newApplicationState = new AppState(applicationState.getTaskList(),
                         Flag.STORAGE_FAILED);
                 return new StorageLoadAction(newApplicationState);
             }

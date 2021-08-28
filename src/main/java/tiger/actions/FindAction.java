@@ -33,7 +33,7 @@ public class FindAction extends Action {
     public AppState run() {
         TaskList newTaskList = this.applicationState.getTaskList().findRelevantTasks(this.findDescription);
         String response = newTaskList.toString();
-        return new AppState(false, this.applicationState.getTaskList(), response);
+        return new AppState(this.applicationState.getTaskList(), response);
     }
 
 

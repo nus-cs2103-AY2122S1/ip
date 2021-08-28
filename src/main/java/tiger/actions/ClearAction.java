@@ -30,6 +30,6 @@ public class ClearAction extends Action {
     @Override
     public AppState run() {
         String response = "I've cleared all your tasks!";
-        return new AppState(false, new TaskList(), response);
+        return new AppState(new TaskList(), response);
     }
 }

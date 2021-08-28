@@ -37,6 +37,6 @@ public class MarkDoneAction extends Action {
         TaskList newTaskList = taskList.markTaskDone(index);
         String response = String.format("Nice! I've marked this task as done:\n%s",
                 newTaskList.showTask(index));
-        return new AppState(false, newTaskList, response);
+        return new AppState(newTaskList, response);
     }
 }

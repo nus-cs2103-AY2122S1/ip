@@ -29,6 +29,6 @@ public class ListAction extends Action {
     @Override
     public AppState run() {
         String response = this.applicationState.getTaskList().toString();
-        return new AppState(false, this.applicationState.getTaskList(), response);
+        return new AppState(this.applicationState.getTaskList(), response);
     }
 }

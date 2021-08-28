@@ -36,6 +36,6 @@ public class DeleteAction extends Action {
         String response = String.format("Feeling lazy today? I've deleted:\n%s",
                 taskList.showTask(index));
         TaskList newTaskList = taskList.deleteTask(index);
-        return new AppState(false, newTaskList, response);
+        return new AppState(newTaskList, response);
     }
 }

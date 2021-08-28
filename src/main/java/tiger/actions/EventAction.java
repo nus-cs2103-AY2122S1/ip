@@ -44,6 +44,6 @@ public class EventAction extends Action {
         TaskList newTaskList = taskList.addTask(new Event(this.todo, false, this.date, this.priority));
         String response = String.format("Excellent! I've added this event:\n%s",
                 taskList.showTask(taskList.size() - 1));
-        return new AppState(false, newTaskList, response);
+        return new AppState(newTaskList, response);
     }
 }

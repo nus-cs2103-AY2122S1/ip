@@ -11,8 +11,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Tiger tiger = new Tiger();
-
     @Override
     public void start(Stage stage) {
         try {
@@ -21,7 +19,6 @@ public class Main extends Application {
             stage.setTitle("Tiger Helper Bot");
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setTiger(tiger);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

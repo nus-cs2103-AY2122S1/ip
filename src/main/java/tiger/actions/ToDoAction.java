@@ -40,7 +40,7 @@ public class ToDoAction extends Action {
         TaskList newTaskList = taskList.addTask(new ToDo(this.todo, false, priority));
         String response = String.format("Excellent! I've added this task:\n%s",
                 taskList.showTask(taskList.size() - 1));
-        return new AppState(false, newTaskList, response);
+        return new AppState(newTaskList, response);
     }
 
 

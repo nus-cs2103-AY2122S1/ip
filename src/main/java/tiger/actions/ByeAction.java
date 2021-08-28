@@ -2,6 +2,7 @@ package tiger.actions;
 
 
 import tiger.app.AppState;
+import tiger.constants.Flag;
 
 /**
  * Represents the action of the user leaving the app.
@@ -30,6 +31,6 @@ public class ByeAction extends Action {
     @Override
     public AppState run() {
         String response = "Bye. Hope to see you again soon!";
-        return new AppState(true, this.applicationState.getTaskList(), response);
+        return new AppState(this.applicationState.getTaskList(), response, Flag.IS_EXITED);
     }
 }

@@ -15,18 +15,14 @@ public class AppState {
     /** Flag in case some tasks failed to execute properly, or require subsequent follow-ups. Used to indicate other
      * context info about the app. */
     private Flag flag;
-    /** Whether the user has exited the program*/
-    private boolean userExit;
 
     /**
      * Public constructor for the {@code AppState} class.
      *
-     * @param userExit whether the user has exited the program.
      * @param taskList a {@code TaskList} to store user tasks.
      */
 
-    public AppState(boolean userExit, TaskList taskList) {
-        this.userExit = userExit;
+    public AppState(TaskList taskList) {
         this.taskList = taskList;
         this.response = "";
         this.flag = Flag.DEFAULT;
@@ -35,14 +31,12 @@ public class AppState {
     /**
      * Public constructor for the {@code AppState} class.
      *
-     * @param userExit whether the user has exited the program.
      * @param taskList a {@code TaskList} to store user tasks.
      * @param response Response from the application, to be printed to the GUI.
      * @throws AssertionError if the response is empty.
      */
 
-    public AppState(boolean userExit, TaskList taskList, String response) throws AssertionError {
-        this.userExit = userExit;
+    public AppState(TaskList taskList, String response) throws AssertionError {
         this.taskList = taskList;
         assert (!response.equals(""));
         this.response = response;
@@ -52,15 +46,13 @@ public class AppState {
     /**
      * Public constructor for the {@code AppState} class.
      *
-     * @param userExit whether the user has exited the program.
      * @param taskList a {@code TaskList} to store user tasks.
      * @param response Response from the application, to be printed to the GUI.
      * @param flag Flag to indicate other context information about the application.
      * @throws AssertionError if the response is empty.
      */
 
-    public AppState(boolean userExit, TaskList taskList, String response, Flag flag) throws AssertionError {
-        this.userExit = userExit;
+    public AppState(TaskList taskList, String response, Flag flag) throws AssertionError {
         this.taskList = taskList;
         assert (!response.equals(""));
         this.response = response;
@@ -70,13 +62,11 @@ public class AppState {
     /**
      * Public constructor for the {@code AppState} class.
      *
-     * @param userExit whether the user has exited the program.
      * @param taskList a {@code TaskList} to store user tasks.
      * @param flag Flag to indicate other context information about the application.
      */
 
-    public AppState(boolean userExit, TaskList taskList, Flag flag) {
-        this.userExit = userExit;
+    public AppState(TaskList taskList, Flag flag) {
         this.taskList = taskList;
         this.response = "";
         this.flag = flag;
@@ -91,16 +81,6 @@ public class AppState {
 
     public int numTasks() {
         return this.taskList.size();
-    }
-
-    /**
-     * Checks if the user has exited the program.
-     *
-     * @return a boolean to indicate if the user has exited the program.
-     */
-
-    public boolean isExited() {
-        return this.userExit;
     }
 
     /**

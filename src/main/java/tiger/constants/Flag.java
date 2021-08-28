@@ -5,5 +5,6 @@ public enum Flag {
     STORAGE_FAILED,
     STORAGE_NOT_YET_INIT,
     STORAGE_PARTIAL_LOAD,
-    STORAGE_WIPE;
+    STORAGE_WIPE,
+    IS_EXITED;
 }
