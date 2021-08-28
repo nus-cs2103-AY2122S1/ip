@@ -40,6 +40,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         lifeline = new Lifeline("save" + File.separator + "tasks.json");
+        String greetingMessage = lifeline.getGreetingMessage();
+        dialogContainer.getChildren().add(DialogBox.getLifelineDialog(greetingMessage, lifelineImage));
     }
 
     /**
@@ -52,7 +54,7 @@ public class MainWindow extends AnchorPane {
         String response = lifeline.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, lifelineImage)
+                DialogBox.getLifelineDialog(response, lifelineImage)
         );
         userInput.clear();
         if (input.toLowerCase().trim().equals("bye")) {

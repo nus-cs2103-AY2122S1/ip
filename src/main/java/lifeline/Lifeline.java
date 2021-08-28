@@ -66,8 +66,17 @@ public class Lifeline {
      * Starts the console program
      */
     public void start() {
-        ui.printToConsole(ui.greet());
+        ui.printToConsole(ui.consoleGreet());
         this.getInput();
+    }
+
+    /**
+     * Greets user when user starts GUI
+     *
+     * @return Greeting message when user starts GUI
+     */
+    public String getGreetingMessage() {
+        return ui.guiGreet();
     }
 
     private void getInput() {

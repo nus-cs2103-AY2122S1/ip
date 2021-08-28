@@ -138,7 +138,7 @@ public class Ui {
      *
      * @return Welcome message
      */
-    public String greet() {
+    public String consoleGreet() {
         String lifeline = " _      _____ ______ ______ _      _____ _   _ ______\n"
                 + "| |    |_   _|  ____|  ____| |    |_   _| \\ | |  ____|\n"
                 + "| |      | | | |__  | |__  | |      | | |  \\| | |__\n"
@@ -149,6 +149,10 @@ public class Ui {
         stringBuilder.append("Hello! I am\n" + lifeline);
         stringBuilder.append("What can I help you with today?\n");
         return stringBuilder.toString();
+    }
+
+    public String guiGreet() {
+        return "Hello I am Lifeline. What can I help you with today?";
     }
 
     /**
