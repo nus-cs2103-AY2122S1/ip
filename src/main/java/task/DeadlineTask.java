@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The Deadline class encapsulates a task that need to be done before a specific date/time.
+ * The DeadlineTask class encapsulates a task that need to be done before a specific date/time.
  */
 public class DeadlineTask extends Task {
     private static final LocalTime DEFAULT_TIME = LocalTime.parse("00:00");
