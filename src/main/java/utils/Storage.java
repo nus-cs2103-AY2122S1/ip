@@ -14,6 +14,7 @@ import tasks.Task;
 import tasks.ToDo;
 
 public class Storage {
+
     private String filePath;
     private File file;
 
@@ -68,7 +69,6 @@ public class Storage {
             FileWriter writer = new FileWriter(filePath);
             writer.write(formattedTaskList);
             writer.close();
-
         } catch (IOException e) {
             return;
         }

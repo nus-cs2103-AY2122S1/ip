@@ -16,13 +16,9 @@ public abstract class Task {
         this.type = type;
     }
 
-    /**
-     * Marks task as done
-     */
     public String markAsDone() {
         this.isDone = true;
         this.statusSymbol = "[X]";
-        return DONE_MSG + "\n" + this.toString();
     }
 
     /**
