@@ -1,6 +1,7 @@
 package duke.data.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class that represents a Deadline task.
@@ -30,9 +31,13 @@ public class Deadline extends Task {
      * @param by Input date format.
      * @return A string representing the date in the desirable format.
      */
-    public String dateFormatter(String by) {
-        LocalDateTime date = LocalDateTime.parse(by, input);
-        return date.format(output);
+    public String dateFormatter(String by) throws DateTimeParseException {
+        try {
+            LocalDateTime date = LocalDateTime.parse(by, input);
+            return date.format(output);
+        } catch (DateTimeParseException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -43,5 +48,9 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dateFormatter(by) + ")";
+    }
+
+    public String toSave() {
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }

@@ -46,43 +46,49 @@ public class Parser {
             String commandWord = cmd.split(" ")[0].toUpperCase();
             try {
                 switch (commandWord) {
-                    case ListCommand.COMMAND_WORD:
-                        ListCommand lc = new ListCommand(taskHandler, storage);
-                        lc.execute(cmd);
-                        break;
+                case ListCommand.COMMAND_WORD:
+                    ListCommand lc = new ListCommand(taskHandler, storage);
+                    lc.execute(cmd);
+                    break;
 
-                    case DoneCommand.COMMAND_WORD:
-                        DoneCommand dc = new DoneCommand(taskHandler, storage);
-                        dc.execute(cmd);
-                        break;
+                case DoneCommand.COMMAND_WORD:
+                    DoneCommand dc = new DoneCommand(taskHandler, storage);
+                    dc.execute(cmd);
+                    break;
 
-                    case DeleteCommand.COMMAND_WORD:
-                        DeleteCommand dlc = new DeleteCommand(taskHandler, storage);
-                        dlc.execute(cmd);
-                        break;
+                case DeleteCommand.COMMAND_WORD:
+                    DeleteCommand dlc = new DeleteCommand(taskHandler, storage);
+                    dlc.execute(cmd);
+                    break;
 
-                    case ToDoCommand.COMMAND_WORD:
-                        ToDoCommand tc = new ToDoCommand(taskHandler, storage);
-                        tc.execute(cmd);
-                        break;
+                case ToDoCommand.COMMAND_WORD:
+                    ToDoCommand tc = new ToDoCommand(taskHandler, storage);
+                    tc.execute(cmd);
+                    break;
 
-                    case DeadlineCommand.COMMAND_WORD:
-                        DeadlineCommand deadlinec = new DeadlineCommand(taskHandler, storage);
-                        deadlinec.execute(cmd);
-                        break;
+                case DeadlineCommand.COMMAND_WORD:
+                    DeadlineCommand deadlinec = new DeadlineCommand(taskHandler, storage);
+                    deadlinec.execute(cmd);
+                    break;
 
-                    case EventCommand.COMMAND_WORD:
-                        EventCommand ec = new EventCommand(taskHandler, storage);
-                        ec.execute(cmd);
-                        break;
+                case EventCommand.COMMAND_WORD:
+                    EventCommand ec = new EventCommand(taskHandler, storage);
+                    ec.execute(cmd);
+                    break;
 
-                    case ByeCommand.COMMAND_WORD:
-                        isTerminated = true;
-                        ByeCommand bc = new ByeCommand(taskHandler, storage);
-                        bc.execute(cmd);
+                case FindCommand.COMMAND_WORD:
+                    FindCommand fc = new FindCommand(taskHandler, storage);
+                    fc.execute(cmd);
+                    break;
 
-                    default:
-                        throw new DukeException(Ui.inputUnknown());
+                case ByeCommand.COMMAND_WORD:
+                    isTerminated = true;
+                    ByeCommand bc = new ByeCommand(taskHandler, storage);
+                    bc.execute(cmd);
+                    break;
+
+                default:
+                    throw new DukeException(Ui.inputUnknown());
                 }
             } catch(DukeException e) {
                 System.out.println(e.getMessage());

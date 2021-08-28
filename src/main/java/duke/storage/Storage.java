@@ -84,24 +84,24 @@ public class Storage {
         String doneStatus = task.substring(4, 5);
         Task t;
         switch (type) {
-            case "D":
-                String d = task.substring(7, task.length() - 1);
-                String[] descD = d.split("by: ");
-                String firstD = descD[0].substring(0, descD[0].length() - 2);
-                t = new Deadline(firstD, descD[1]);
-                break;
-            case "E":
-                String e = task.substring(7, task.length() - 1);
-                String[] descE = e.split("at: ");
-                String firstE = descE[0].substring(0, descE[0].length() - 2);
-                t = new Event(firstE, descE[1]);
-                break;
-            case "T":
-                String descT = task.substring(7);
-                t = new ToDo(descT);
-                break;
-            default:
-                throw new DukeException("Unknown task");
+        case "D":
+            String d = task.substring(7, task.length() - 1);
+            String[] descD = d.split("by: ");
+            String firstD = descD[0].substring(0, descD[0].length() - 2);
+            t = new Deadline(firstD, descD[1]);
+            break;
+        case "E":
+            String e = task.substring(7, task.length() - 1);
+            String[] descE = e.split("at: ");
+            String firstE = descE[0].substring(0, descE[0].length() - 2);
+            t = new Event(firstE, descE[1]);
+            break;
+        case "T":
+            String descT = task.substring(7);
+            t = new ToDo(descT);
+            break;
+        default:
+            throw new DukeException("Unknown task");
         }
         if (doneStatus.equals("X")) {
             t.markAsDone();

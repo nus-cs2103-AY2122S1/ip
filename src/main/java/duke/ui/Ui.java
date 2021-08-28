@@ -31,15 +31,18 @@ public class Ui {
     public static String emptyDescription(String s) {
         String error = "OOPS!!!";
         switch(s) {
-            case "todo":
-                error = Messages.INDENTATION + "OOPS!!! The description of a todo cannot be empty.";
-                break;
-            case "deadline":
-                error = Messages.INDENTATION + "OOPS!!! The description of a deadline cannot be empty.";
-                break;
-            case "event":
-                error = Messages.INDENTATION + "OOPS!!! The description of an event cannot be empty.";
-                break;
+        case "todo":
+            error = Messages.INDENTATION + "OOPS!!! The description of a todo cannot be empty.";
+            break;
+        case "deadline":
+            error = Messages.INDENTATION + "OOPS!!! The description of a deadline cannot be empty.";
+            break;
+        case "event":
+            error = Messages.INDENTATION + "OOPS!!! The description of an event cannot be empty.";
+            break;
+        case "find":
+            error = Messages.INDENTATION + "OOPS!!! The description of a find command cannot be empty.";
+            break;
         }
         return error;
     }
@@ -103,6 +106,20 @@ public class Ui {
      */
     public static void printEmptyList() {
         System.out.println(Messages.INDENTATION + Messages.EMPTY_LIST);
+    }
+
+    /**
+     * Prints tasks found message.
+     */
+    public static void printFoundTasks() {
+        System.out.println(Messages.INDENTATION + Messages.MATCHING_TASK_FOUND);
+    }
+
+     /**
+      *  Prints no tasks found message.
+      */
+    public static void noSuchTasksFound() {
+        System.out.println(Messages.INDENTATION + Messages.NO_MATCHING_TASK_FOUND);
     }
 
     /**

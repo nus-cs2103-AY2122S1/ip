@@ -29,7 +29,7 @@ public class TaskHandler {
         if (list.size() != 0) {
             Ui.printList();
             for (int i = 0; i < list.size(); i++) {
-                System.out.println("    " + (i + 1) + ". " + list.get(i).toString());
+                System.out.println(Ui.indentation() + (i + 1) + ". " + list.get(i).toString());
             }
         } else {
             Ui.printEmptyList();
@@ -75,7 +75,7 @@ public class TaskHandler {
     public void addToDo(ToDo todo) {
         list.add(todo);
         Ui.addTask();
-        System.out.println(todo);
+        System.out.println(Ui.indentation() + Ui.indentation() + todo);
     }
 
     /**
@@ -86,7 +86,7 @@ public class TaskHandler {
     public void addDeadline(Deadline deadline) {
         list.add(deadline);
         Ui.addTask();
-        System.out.println(deadline);
+        System.out.println(Ui.indentation() + Ui.indentation() + deadline);
     }
 
     /**
@@ -97,7 +97,31 @@ public class TaskHandler {
     public void addEvent(Event event) {
         list.add(event);
         Ui.addTask();
-        System.out.println(event);
+        System.out.println(Ui.indentation() + Ui.indentation() + event);
+    }
+
+    /**
+     * Finds tasks with the keyword from tasklist.
+     *
+     * @param keyword Keyword user wants to find.
+     */
+    public void findTasks(String keyword) {
+        ArrayList<String> tasks = new ArrayList<>();
+        int j = 1;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).toString().contains(keyword)) {
+                tasks.add(Ui.indentation() + j + ". " + list.get(i).toString());
+                j++;
+            }
+        }
+        if (tasks.size() == 0) {
+            Ui.noSuchTasksFound();
+        } else {
+            Ui.printFoundTasks();
+            for (int k = 0; k < tasks.size(); k++) {
+                System.out.println(tasks.get(k));
+            }
+        }
     }
 
     /**
@@ -108,7 +132,7 @@ public class TaskHandler {
     public String formatTasksToSave() {
         String[] tasksToSave = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
-            tasksToSave[i] = list.get(i).toString();
+            tasksToSave[i] = list.get(i).toSave();
         }
         return String.join("\n", tasksToSave);
     }

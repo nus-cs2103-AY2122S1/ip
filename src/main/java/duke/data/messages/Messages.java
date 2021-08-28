@@ -14,7 +14,9 @@ public class Messages {
     public static final String PRINT_LIST_MESSAGE = "Here are the tasks in your list:";
     public static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d tasks in the list.\n";
     public static final String MARK_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done: ";
-    public static final String ADD_TASK = "Got it. I've added this task:\n" + INDENTATION + INDENTATION;
+    public static final String ADD_TASK = "Got it. I've added this task:";
     public static final String DELETE_TASK = "Noted. I've removed this task: ";
     public static final String EMPTY_LIST = "You haven't added anything to your list!";
+    public static final String MATCHING_TASK_FOUND = "Here are the matching tasks in your list:";
+    public static final String NO_MATCHING_TASK_FOUND = "OOPS!!! There are no tasks with that keyword! :-(";
 }
