@@ -1,5 +1,7 @@
 package duke.Tasks;
 
+import duke.DukeExceptionBase;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -12,15 +14,11 @@ import java.time.format.DateTimeParseException;
 public class DeadlineTask extends BaseTask {
 
 
-    /** By default the 'by when' data will be stored in String form unless it is a date. */
-    private String byWhenStr;
-
     /** If 'by when' data is given in date form, it will be stored here. */
     private LocalDate byWhenDate;
 
-    /** Activates or deactivates Debug mode. */
-    private boolean debugMode = false;
-
+//    /** Activates or deactivates Debug mode. */
+//    private boolean debugMode = false;
 
 
     /**
@@ -29,7 +27,7 @@ public class DeadlineTask extends BaseTask {
      * @param taskName the name or description of the task.
      * @param byWhen describes when the task should be completed by.
      */
-    public DeadlineTask(String taskName, String byWhen) {
+    public DeadlineTask(String taskName, String byWhen) throws DukeExceptionBase {
         super(taskName, false);
         this.parseByWhenInput(byWhen);
     }
@@ -41,69 +39,67 @@ public class DeadlineTask extends BaseTask {
      * @param byWhen describes when the task should be completed by.
      * @param isCompleted true if task was already complete, false if incomplete.
      */
-    public DeadlineTask(String taskName, String byWhen, boolean isCompleted) {
+    public DeadlineTask(String taskName, String byWhen, boolean isCompleted) throws DukeExceptionBase {
         super(taskName, isCompleted);
         this.parseByWhenInput(byWhen);
     }
 
     /**
-     * Stores the byWhen data of this Deadline Task, either in String form or LocalDate form.
+     * Stores the byWhen data of this Deadline Task, in LocalDate form.
      * @param byWhen the time the task is upposed to be done by.
      */
-    private void parseByWhenInput(String byWhen) {
-        try {
-            DateTimeFormatter usualStyleFormat = DateTimeFormatter.ofPattern("d/M/yy");
-            LocalDate byDate = LocalDate.parse(byWhen, usualStyleFormat);
+    private void parseByWhenInput(String byWhen) throws DukeExceptionBase {
+        if (byWhen.length() <= 5) {
+            throw new DukeExceptionBase("DeadlineTask must contain a Date in 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY' formats.");
+        }
+        // Check if year is in YY or YYYY form
+        String last4Char = byWhen.substring(byWhen.length() - 4);
+        boolean hasSlash = last4Char.contains("/");
 
+        String first3Char = byWhen.substring(0, 3);
+        boolean hasSpaceAtFront = first3Char.contains(" ");
+
+        DateTimeFormatter formatterToUse = null;
+
+        if (hasSlash) {
+//            System.out.println("USING yy FORMATTER");
+            formatterToUse = DateTimeFormatter.ofPattern("d/M/yy");
+        } else if (hasSpaceAtFront) {
+//            System.out.println("USING LONG DATE FORMATTER");
+            formatterToUse = DateTimeFormatter.ofPattern("d MMMM yyyy");
+        } else {
+//            System.out.println("USING yyyy FORMATTER");
+            formatterToUse = DateTimeFormatter.ofPattern("d/M/yyyy");
+        }
+
+        // Tries parsing the date string.
+        try {
+            LocalDate byDate = LocalDate.parse(byWhen, formatterToUse);
             this.byWhenDate = byDate;
-            this.byWhenStr = null;
 
         } catch (DateTimeParseException e) {
-            debugPrint("Date Time Parse Exception!");
-
-            try {
-                // Try a different format instead. (4 digits for year)
-                DateTimeFormatter usualStyleFormat = DateTimeFormatter.ofPattern("d/M/yyyy");
-                LocalDate byDate = LocalDate.parse(byWhen, usualStyleFormat);
-
-                this.byWhenDate = byDate;
-                this.byWhenStr = null;
-            } catch (DateTimeParseException e2) {
-                debugPrint("DTE 2");
-
-                try {
-                    // Try a third format since the last one failed. (And this is the format stored in save file)
-                    DateTimeFormatter longDateFormat = DateTimeFormatter.ofPattern("d MMM uuuu");
-                    LocalDate byDate = LocalDate.parse(byWhen, longDateFormat);
-
-                    this.byWhenDate = byDate;
-                    this.byWhenStr = null;
-                } catch (DateTimeParseException e3) {
-                    debugPrint("DTE 3");
-                    this.byWhenStr = byWhen;
-                    this.byWhenDate = null;
-                }
-            }
+            throw new DukeExceptionBase("Deadline Date does not follow the format required. " +
+                    "DeadlineTask must contain a Date in 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY' formats");
         }
     }
 
-    /**
-     * Prints String if debug mode is activated.
-     * @param str the String to print.
-     */
-    private void debugPrint(String str) {
-        if (debugMode) {
-            System.out.println(str);
-        }
-    }
+//    /**
+//     * Prints String if debug mode is activated.
+//     * @param str the String to print.
+//     */
+//    private void debugPrint(String str) {
+//        if (debugMode) {
+//            System.out.println(str);
+//        }
+//    }
 
     /**
      * Gets the String representation of the by when.
-     * @return String representation of the LocalDate or just the plain String, whichever is relevant.
+     * @return String representation of the LocalDate or an empty String if the Date field is empty.
      */
     private String getByWhenStr() {
         if (this.byWhenDate == null) {
-            return this.byWhenStr;
+            return "";
         } else {
             DateTimeFormatter longDateFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
 

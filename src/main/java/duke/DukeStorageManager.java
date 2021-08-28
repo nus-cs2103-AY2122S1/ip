@@ -10,7 +10,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -111,14 +110,14 @@ public class DukeStorageManager {
      */
     public void reloadSaveFromXMLDoc() {
         if (this.xmlSaveFileDoc == null) {
-            System.out.println("Loading of Save File from Storage Manager not done.");
+            System.out.println("No save file to load from.");
             return;
         }
 
         Element xmlRoot = xmlSaveFileDoc.getDocumentElement();
         NodeList taskList = xmlRoot.getElementsByTagName("taskList");
 
-        // There should be only 1 taskList node=
+        // There should be only 1 taskList node
         if (taskList.getLength() > 1) {
             System.out.println("Loaded XML file contains more than 1 task list. Only first one will be loaded.");
         }
@@ -143,23 +142,24 @@ public class DukeStorageManager {
      */
     private void processTaskNode(Node currTaskAsset) {
         if (currTaskAsset.getNodeName().equals("taskAsset")) {
-            NodeList taskAssetChildren = currTaskAsset.getChildNodes();
             // Confirms that this taskAsset has contents
             if (currTaskAsset.getNodeType() == Node.ELEMENT_NODE) {
                 // Convert to DOM Element so that we can get elements by Tag Name
                 Element currTaskAssetElement = (Element) currTaskAsset;
 
+                // Gets various contents common to all task types
                 Node taskTypeNode = getFirstNodeByTagName(currTaskAssetElement, "taskType");
                 Node taskDataNode = getFirstNodeByTagName(currTaskAssetElement, "taskData");
                 Node taskCompletedNode = getFirstNodeByTagName(currTaskAssetElement, "taskCompleted");
 
                 boolean isCurrTaskCompleted = taskCompletedNode.getTextContent().equals("true");
 
+                // Initialise Variables or Switch Statement
                 BaseTask createdTask = null;
                 Node taskExtraInfoNode;
 
+                // Get extra info for task if needed and create task
                 BaseTask.TaskType currTaskType = BaseTask.convertTaskLetterToEnum(taskTypeNode.getTextContent());
-
                 switch (currTaskType) {
                 case TODO:
                     createdTask = new ToDosTask(taskDataNode.getTextContent(), isCurrTaskCompleted);
@@ -167,7 +167,12 @@ public class DukeStorageManager {
                 case DEADLINE:
                     taskExtraInfoNode = getFirstNodeByTagName(currTaskAssetElement, "taskExtraInfo");
 
-                    createdTask = new DeadlineTask(taskDataNode.getTextContent(), taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
+                    try {
+                        createdTask = new DeadlineTask(taskDataNode.getTextContent(), taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
+                    } catch (DukeExceptionBase e) {
+                        // If date format of this Deadline Task is wrong, then don't load it.
+                        createdTask = null;
+                    }
                     break;
                 case EVENT:
                     taskExtraInfoNode = getFirstNodeByTagName(currTaskAssetElement, "taskExtraInfo");
@@ -176,10 +181,13 @@ public class DukeStorageManager {
                     break;
                 case NONE:
                     System.out.println("Unknown Task Type Loaded: " + currTaskType + " with data: " + taskDataNode.getTextContent());
-                    return;
+                    createdTask = null;
                 }
 
-                this.loadedTasks.add(createdTask);
+                // In case of error while creating task - Don't add it to the list
+                if (createdTask != null) {
+                    this.loadedTasks.add(createdTask);
+                }
 
 
             } else {

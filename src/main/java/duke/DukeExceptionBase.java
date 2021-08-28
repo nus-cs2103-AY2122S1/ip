@@ -2,7 +2,7 @@ package duke;
 
 public class DukeExceptionBase extends Exception {
 
-    public String exceptionMsg;
+    private String exceptionMsg;
 
     public DukeExceptionBase(String msg) {
         this.exceptionMsg = msg;
