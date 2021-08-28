@@ -20,8 +20,10 @@ public class Ui {
     public void greet() {
 
         System.out.println(
-                "------------------------------------------------------------------------------\n" +
-                        "Meow: Hi human, I'm your cat Meow~ What can I do for you?\n" +
+                "------------------------------------------------------------------------------\n"
+                        +
+                        "Meow: Hi human, I'm your cat Meow~ What can I do for you?\n"
+                        +
                         "------------------------------------------------------------------------------"
         );
     }
@@ -32,8 +34,10 @@ public class Ui {
     public void exit() {
 
         System.out.println(
-                "------------------------------------------------------------------------------\n" +
-                        "Meow: Bye human, see you soon! Your cat Meow is going to sleep now~\n" +
+                "------------------------------------------------------------------------------\n"
+                        +
+                        "Meow: Bye human, see you soon! Your cat Meow is going to sleep now~\n"
+                        +
                         "------------------------------------------------------------------------------"
         );
     }
