@@ -1,4 +1,14 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 class Client {
     Scanner scan = new Scanner(System.in);
@@ -22,6 +32,39 @@ public class Duke {
         System.out.println("What can I help you with ?");
         Client client = new Client();
         ArrayList<Task> list = new ArrayList<Task>();
+
+        try {
+            String filePath = "./data/duke.txt";
+            File savedData = new File(filePath);
+            Scanner r = new Scanner(savedData);
+            while (r.hasNextLine()) {
+                String userInput = r.nextLine();
+                String[] split = userInput.split(" ");
+                String description = "";
+                for (int i = 2; i < split.length - 2; i++) {
+                    description = description + split[i] + " ";
+                }
+                String day = split[split.length - 1].substring(0, split[split.length - 1].length() - 1);
+                if (userInput.substring(0,3).equals("[X]")) {
+                    list.add(new Todo(description));
+                } else if (userInput.substring(0,3).equals("[D]")) {
+                    list.add(new Deadline(description, day));
+                } else if (userInput.substring(0,3).equals("[E]")) {
+                    list.add(new Event(description, day));
+                }
+            }
+            r.close();
+        } catch (FileNotFoundException e) {
+            try {
+                String path = "data/";
+                File makeFile = new File("data/duke.txt");
+                Files.createDirectories(Paths.get(path));
+                makeFile.createNewFile();
+            } catch (IOException a) {
+                System.out.println("Error encountered");
+            }
+        }
+
         while (true) {
             String input = client.input();
             if (input.equals("")) {
@@ -41,6 +84,7 @@ public class Duke {
                 list.get(value - 1).markAsDone();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println("[X] " + list.get(value-1).description);
+                appendListToFile(list);
             } else if (input.startsWith("todo")) {
                 if (input.length() < 6) {
                     System.out.println(new NullTaskError().getMsg("todo"));
@@ -51,6 +95,7 @@ public class Duke {
                     System.out.println(new Todo(firstTodo));
                     System.out.println("Now you have " + list.size() + " tasks in the list");
                 }
+                appendListToFile(list);
             } else if (input.startsWith("deadline")) {
                 if (input.length() < 10) {
                     System.out.println(new NullTaskError().getMsg("deadline"));
@@ -58,23 +103,27 @@ public class Duke {
                     String[] temp = input.split("/");
                     String firstDeadline = temp[0].substring(9);
                     String secondDeadline = temp[1].substring(3);
+                    String[] splitDate = temp[1].split(" ");
                     list.add(new Deadline(firstDeadline, secondDeadline));
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(new Deadline(firstDeadline, secondDeadline));
                     System.out.println("Now you have " + list.size() + " tasks in the list");
                 }
+                appendListToFile(list);
             } else if (input.startsWith("event")) {
                 if (input.length() < 7) {
                     System.out.println(new NullTaskError().getMsg("event"));
                 } else {
-                    String[] tempEvent = input.split("/");
+                    String[] tempEvent = input.split("/at");
                     String firstEvent = tempEvent[0].substring(6);
                     String secondEvent = tempEvent[1].substring(3);
+                    String[] splitDate = tempEvent[1].split(" ");
                     list.add(new Event(firstEvent, secondEvent));
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(new Event(firstEvent, secondEvent));
                     System.out.println("Now you have " + list.size() + " tasks in the list");
                 }
+                appendListToFile(list);
             } else if (input.startsWith("delete") && input.length() < 11) {
                 int value = Integer.parseInt(input.replaceAll("[^0-9]", ""));
                 Task removedTask = list.get(value - 1);
@@ -82,10 +131,26 @@ public class Duke {
                 System.out.println("Noted. I've removed this task:");
                 System.out.println(removedTask.toString());
                 System.out.println("Now you have " + list.size() + " tasks in the list.");
+                appendListToFile(list);
             } else {
                 DukeException e = new NonExistentKeyword();
                 System.out.println(e.getMsg());
             }
+            appendListToFile(list);
+        }
+    }
+    public static void appendListToFile(ArrayList<Task> listOfTasks) {
+        try {
+            File fileStorage = new File("data/duke.txt");
+            FileWriter w = new FileWriter(fileStorage);
+            String str = "";
+            for (Task t : listOfTasks) {
+                str += t.toString() + "\n";
+            }
+            w.write(str);
+            w.close();
+        } catch (IOException e) {
+            System.out.println("File does not exist");
         }
     }
 }
