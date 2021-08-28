@@ -7,7 +7,7 @@ import duke.command.Command;
  * and let user manage the tasks through various commands.
  */
 public class Duke {
-
+    //Added Gradle support in master branch
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
