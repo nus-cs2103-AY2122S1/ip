@@ -7,17 +7,28 @@ import ui.Ui;
 
 import java.util.ArrayList;
 
-public class FindCommand extends Command{
+/**
+ * The FindCommand Class inherits Command and is
+ * a specific type of executable command.
+ */
+public final class FindCommand extends Command{
 
+    /**
+     * Constructs the FindCommand object.
+     *
+     * @param s the entire line of user input
+     */
     public FindCommand(ArrayList<String> s) {
         super(s);
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
+    /**
+     * Executes the command.
+     *
+     * @param lst the TaskList object that stores the list of tasks
+     * @param ui the Ui object that interacts with the user
+     * @param storage the Storage object that saves changes to stored tasks, if any
+     */
     @Override
     public void execute(TaskList lst, Ui ui, Storage storage) {
         String target = "";
