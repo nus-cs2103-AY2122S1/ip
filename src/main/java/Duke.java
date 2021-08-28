@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.PrintWriter;
@@ -6,214 +8,55 @@ import java.nio.file.Paths;
 import java.nio.file.Files;
 
 public class Duke {
-    static private ArrayList<Task> storage = new ArrayList<Task>();
-    static private File dir;
-    static private File tmp;
 
-    public static void main(String[] args) {
-        print("Hello! My name is Alexa \nHow can I help you today?");
-        run();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private static Parser parser = new Parser();
+
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage (filePath);
+        try {
+            Ui.print("Hello! My name is Alexa \nHow can I help you today?");
+            tasks = new TaskList(Storage.load());
+        } catch (DukeException e) {
+            tasks = new TaskList();
+        }
     }
 
-    public static void print(String text) {
-        System.out.println("=======================================");
-        text.lines().map(x -> "    " + x).forEach(x -> System.out.println(x));
-        System.out.println("=======================================");
+    public static void main(String[] args) {
+        new Duke("data/alexa.txt").run();
     }
 
     public static void run() {
         Scanner newInput = new Scanner(System.in);
-        dir = new File("data");
-        dir.mkdirs();
-        tmp = new File(dir, "alexa.txt");
-        readTasks();
-        try {
-            boolean successfulCreate = tmp.createNewFile();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-        }
         while(newInput.hasNextLine()) {
             String input = newInput.nextLine();
             Task currentTask = new Task(input);
             try {
                 if (input.equals("bye")) {
-                    print("Bye. Hope to see you again soon!");
+                    Ui.print("Bye. Hope to see you again soon!");
                     break;
                 } else if (input.equals("list")) {
-                    list();
-                } else if (input.length() >= 5 && input.substring(0, 5).equals("done ")) {
-                    done(input);
-                } else if (input.length() >= 5 && input.substring(0, 5).equals("todo ")) {
-                    todo(input);
-                } else if (input.length() >= 9 && input.substring(0, 9).equals("deadline ")) {
-                    deadline(input);
-                } else if (input.length() >= 6 && input.substring(0, 6).equals("event ")) {
-                    event(input);
-                } else if (input.length() >= 6 && input.substring(0, 7).equals("delete ")) {
-                    delete(input);
+                    Ui.list();
+                } else if (parser.parseDone(input)) {
+                    Ui.done(input);
+                } else if (parser.parseToDo(input)) {
+                    TaskList.todo(input);
+                } else if (parser.parseDeadline(input)) {
+                    TaskList.deadline(input);
+                } else if (parser.parseEvent(input)) {
+                    TaskList.event(input);
+                } else if (parser.parseDelete(input)) {
+                    TaskList.delete(input);
                 } else {
-                    invalidInput();
+                    Ui.invalidInput();
                 }
-                writeTasks();
+                Storage.writeTasks();
             } catch (DukeException err){
-                print(err.getMessage());
+                Ui.print(err.getMessage());
             }
         }
     }
-
-    public static void readTasks() {
-        try {
-            Scanner myReader = new Scanner(tmp);
-            boolean hasNoTask = true;
-            while (myReader.hasNextLine()) {
-                if (hasNoTask) {
-                    System.out.println("Welcome Back! Here are your last saved tasks!\n");
-                }
-                hasNoTask = false;
-                String data = myReader.nextLine();
-                String taskType = data.substring(3, 4);
-                switch (taskType) {
-                    case "T":
-                        Todo newToDo = new Todo(data.substring(9));
-                        storage.add(newToDo);
-                        break;
-                    case "D":
-                        int indexOfOpenBracketD = data.indexOf("(");
-                        int indexOfCloseBracketD = data.indexOf(")");
-                        String deadlineDate = data.substring(indexOfOpenBracketD + 4, indexOfCloseBracketD);
-                        String deadlineTitle = data.substring(9, indexOfOpenBracketD);
-                        Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
-                        storage.add(newDeadline);
-                        break;
-                    case "E":
-                        int indexOfOpenBracketE = data.indexOf("(");
-                        int indexOfCloseBracketE = data.indexOf(")");
-                        String eventDate = data.substring(indexOfOpenBracketE + 4, indexOfCloseBracketE);
-                        String eventTitle = data.substring(9, indexOfOpenBracketE);
-                        Event newEvent = new Event(eventTitle, eventDate);
-                        storage.add(newEvent);
-                        break;
-                    default:
-                        break;
-                }
-                System.out.println("    " + data);
-            }
-            if (hasNoTask) {
-                System.out.println("    Nice! You have no pending tasks!");
-            }
-            myReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-
-    public static void list() {
-        int len = storage.size();
-        String sentence = "";
-        for (int i = 1; i < len + 1; i++) {
-            Task currentTask = storage.get(i - 1);
-            sentence = sentence + i + "." + currentTask.toString() + "\n";
-        }
-        print(sentence);
-    }
-
-    public static void writeTasks() {
-        int len = storage.size();
-        String sentence = "";
-        for (int i = 1; i < len + 1; i++) {
-            Task currentTask = storage.get(i - 1);
-            sentence = sentence + i + "." + currentTask.toString() + "\n";
-        }
-        try {
-            PrintWriter writer = new PrintWriter(tmp.getAbsolutePath());
-            writer.print("");
-            writer.print(sentence);
-            writer.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void done(String doneEntry) throws DukeException {
-        int taskNumber = Integer.parseInt(doneEntry.substring(5,6));
-        if (taskNumber > storage.size()) {
-            throw new DukeException("Sorry ☹, please enter a valid task to complete!");
-        }
-        Task doneTask = storage.get(taskNumber - 1);
-        doneTask.markAsDone();
-        print("Congratulations on finishing this task!\n [X] " + doneTask.getDescription());
-    }
-
-    public static void todo(String todoEntry) throws DukeException {
-        if (todoEntry.length() == 5) {
-            throw new DukeException("Sorry ☹, please enter a description!");
-        }
-        String todoTitle = todoEntry.substring(5);
-        Todo newToDo = new Todo(todoTitle);
-        storage.add(newToDo);
-        print("Alright. I'm adding this task:\n  " + newToDo.toString() + "\nNow there are " + storage.size()
-                + " tasks in the list" );
-    }
-
-    public static void deadline(String deadlineEntry) throws DukeException {
-        if (deadlineEntry.length() == 9) {
-            throw new DukeException("Sorry ☹, please enter a description!");
-        }
-        int indexOfSlash = deadlineEntry.indexOf("/");
-        if (indexOfSlash == -1) {
-            throw new DukeException("Sorry ☹, please enter a deadline!");
-        }
-        String deadlineDate = deadlineEntry.substring(indexOfSlash + 4);
-
-        if (Time.validateJavaDate(deadlineDate)) {
-            String deadlineTitle = deadlineEntry.substring(9, indexOfSlash);
-            System.out.println(deadlineDate);
-            deadlineDate = Time.changeDateFormat(deadlineDate);
-            Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
-            storage.add(newDeadline);
-            print("Alright. I'm adding this task:\n  " + newDeadline.toString() + "\nNow there are " + storage.size()
-                    + " tasks in the list" );
-        } else {
-            throw new DukeException("Sorry ☹, please enter the deadline in the correct format! (DD-MM-YYYY)");
-        }
-
-    }
-
-    public static void event(String eventEntry) throws DukeException {
-        if (eventEntry.length() == 6) {
-            throw new DukeException("Sorry ☹, please enter a description!");
-        }
-        int indexOfSlash = eventEntry.indexOf("/");
-        if (indexOfSlash == -1) {
-            throw new DukeException("Sorry ☹, please enter an event time!");
-        }
-
-        String eventDate = eventEntry.substring(indexOfSlash + 4);
-
-        if (Time.validateJavaDate(eventDate)) {
-            String eventTitle = eventEntry.substring(6, indexOfSlash);
-            Event newEvent = new Event(eventTitle, eventDate);
-            storage.add(newEvent);
-            print("Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are " + storage.size()
-                    + " tasks in the list" );
-        } else {
-            throw new DukeException("Sorry ☹, please enter the event in the correct format! (DD-MM-YYYY)");
-        }
-    }
-
-    public static void invalidInput() throws DukeException {
-        throw new DukeException("Sorry ☹, please enter a valid command!");
-    }
-
-    public static void delete(String deleteInput) throws DukeException {
-        int taskNumber = Integer.parseInt(deleteInput.substring(7,8));
-        if (taskNumber > storage.size()) {
-            throw new DukeException("Sorry ☹, please enter a valid task to delete!");
-        }
-        Task deletedTask = storage.remove(taskNumber - 1);
-        print("Okay! I have deleted the task for you.\n  " + deletedTask.toString()
-                + "\nNow there are " + storage.size() + " tasks in the list");
-    }
-
 }
