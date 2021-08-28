@@ -1,3 +1,4 @@
+package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -13,6 +14,10 @@ public class Deadline extends Task {
         this.by = by;
         this.byDate = LocalDate.parse(by, formatter);
     }
+
+    public boolean getIsDone() { return this.isDone;}
+    public String getDescription() { return this.description; }
+    public String getBy() {return this.by;}
 
     @Override
     public String toString() {

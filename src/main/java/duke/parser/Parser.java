@@ -1,3 +1,9 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.*;
+import duke.task.*;
+
 import java.util.regex.Pattern;
 
 // Makes sense of the user's commands

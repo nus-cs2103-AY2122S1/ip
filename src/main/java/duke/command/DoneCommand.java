@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.task.Task;
+
+import duke.ui.Ui;
+import duke.storage.Storage;
+
 public class DoneCommand extends Command{
     int index;
 
@@ -12,7 +20,7 @@ public class DoneCommand extends Command{
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Task currTask = taskList.get(index);
+        Task currTask = TaskList.get(index);
         currTask.markAsDone();
         ui.doneTask(currTask);
     }

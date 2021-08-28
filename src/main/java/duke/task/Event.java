@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -13,6 +15,9 @@ public class Event extends Task {
         this.atDate = LocalDate.parse(at, formatter);
     }
 
+    public boolean getIsDone() { return this.isDone;}
+    public String getDescription() { return this.description; }
+    public String getAt() {return this.at;}
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + monthArray[atDate.getMonthValue()] + " " + atDate.getDayOfMonth() + " " + atDate.getYear() + ")";

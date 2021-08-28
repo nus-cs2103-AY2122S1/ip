@@ -1,3 +1,9 @@
+package duke.ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.exception.DukeException;
+
 import java.util.Scanner;
 import java.util.regex.Pattern;
 

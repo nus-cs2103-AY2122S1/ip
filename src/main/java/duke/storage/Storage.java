@@ -1,3 +1,11 @@
+package duke.storage;
+
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -66,22 +74,22 @@ public class Storage {
             }
 
             // Checking if the task is done
-            if (t.isDone) {
+            if (t.getIsDone()) {
                 currLine += "1 | ";
             } else {
                 currLine += "0 | ";
             }
 
             // Add in the task description
-            currLine += t.description;
+            currLine += t.getDescription();
 
             // Add in the task deadline / time
             if (t instanceof Deadline) {
                 currLine += " | ";
-                currLine += ((Deadline)t).by;
+                currLine += ((Deadline)t).getBy();
             } else if (t instanceof Event) {
                 currLine += " | ";
-                currLine += ((Event)t).at;
+                currLine += ((Event)t).getAt();
             }
             allLines += currLine;
             allLines += System.lineSeparator();
