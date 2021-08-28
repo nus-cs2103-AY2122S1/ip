@@ -66,7 +66,7 @@ class Parser {
         switch (type) {
         case "todo":
             if (parts.length == 1) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             return new Todo(parts[1]);
         case "deadline": {
@@ -78,7 +78,7 @@ class Parser {
             return new Event(subparts[0], LocalDateTime.parse(subparts[1], formatter));
         }
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
