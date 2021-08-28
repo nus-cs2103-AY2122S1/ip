@@ -3,7 +3,7 @@ package duke.tasks;
 /**
  * The Task class encapsulates a task.
  */
-public class Task {
+public abstract class Task {
     /** Name of the task */
     private String taskname;
 
