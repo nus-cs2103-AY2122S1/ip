@@ -1,14 +1,14 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
     public void testToString1() throws DukeException {
-        Deadline deadline = new Deadline("finish ip", "2021-03-21"); 
+        Deadline deadline = new Deadline("finish ip", "2021-03-21");
         assertEquals("[D][ ] finish ip (by: Mar 21 2021)", deadline.toString());
     }
 
@@ -20,14 +20,12 @@ public class DeadlineTest {
 
     @Test
     public void testInvalidInput1() {
-        assertThrows(DukeException.class, 
-                () -> new Deadline("return library book", "Sunday"));
+        assertThrows(DukeException.class, () -> new Deadline("return library book", "Sunday"));
     }
 
     @Test
     public void testInvalidInput2() {
-        assertThrows(DukeException.class, 
-                () -> new Deadline("return library book", "2021-93-10"));
+        assertThrows(DukeException.class, () -> new Deadline("return library book", "2021-93-10"));
     }
 
     @Test
@@ -35,7 +33,7 @@ public class DeadlineTest {
         Deadline deadline = new Deadline("finish ip", "2021-03-21");
         assertEquals("D~S~0~S~finish ip~S~2021-03-21", deadline.toData());
     }
-    
+
     @Test
     public void testToData2() throws DukeException {
         Deadline deadline = new Deadline("return library book", "2021-10-27");
