@@ -1,16 +1,18 @@
 package tiger.storage;
 
-import tiger.components.TaskList;
-import tiger.exceptions.storage.TigerStorageInitException;
-import tiger.exceptions.storage.TigerStorageLoadException;
-import tiger.exceptions.storage.TigerStorageSaveException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import tiger.components.TaskList;
+import tiger.exceptions.storage.TigerStorageInitException;
+import tiger.exceptions.storage.TigerStorageLoadException;
+import tiger.exceptions.storage.TigerStorageSaveException;
+
+
 
 public class Storage {
 
@@ -37,7 +39,7 @@ public class Storage {
     }
 
     private static void writeToFile(String filePath, String textToAdd) throws TigerStorageSaveException {
-        // adapted from: https://nus-cs2103-ay2122s1.github.io/website/schedule/week3/topics.html#c-to-java-miscellaneous-topics-file-access
+        // adapted from: https://nus-cs2103-ay2122s1.github.io/website/schedule/week3/
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(textToAdd);

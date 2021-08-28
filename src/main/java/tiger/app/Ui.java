@@ -1,11 +1,12 @@
 package tiger.app;
 
+import java.util.Scanner;
+
 import tiger.actions.StorageLoadAction;
 import tiger.command.Command;
 import tiger.components.TaskList;
 import tiger.constants.Flag;
 
-import java.util.Scanner;
 
 /**
  * {@code Ui} is responsible for handling interactions with users. This includes

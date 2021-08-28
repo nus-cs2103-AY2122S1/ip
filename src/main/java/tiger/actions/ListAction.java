@@ -2,8 +2,19 @@ package tiger.actions;
 
 import tiger.app.AppState;
 
+/**
+ * Represents the action of the user listing all tasks.
+ */
+
 public class ListAction extends Action {
-    AppState applicationState;
+
+    private AppState applicationState;
+
+    /**
+     * Constructor for the {@code ListAction class}
+     *
+     * @param applicationState Context of application from which to run the task from.
+     */
 
     public ListAction(AppState applicationState) {
         this.applicationState = applicationState;
@@ -17,7 +28,7 @@ public class ListAction extends Action {
 
     @Override
     public AppState run() {
-        String response = this.applicationState.taskList.toString();
-        return new AppState(false, this.applicationState.taskList, response);
+        String response = this.applicationState.getTaskList().toString();
+        return new AppState(false, this.applicationState.getTaskList(), response);
     }
 }

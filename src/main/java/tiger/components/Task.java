@@ -7,7 +7,7 @@ import tiger.exceptions.storage.TigerStorageLoadException;
  * The abstract {@code Task} class encapsulates a user Task.
  */
 
-abstract public class Task {
+public abstract class Task {
 
     /** The description of the task */
     protected String taskDescription;
@@ -16,11 +16,13 @@ abstract public class Task {
     /** Priority of the task */
     protected Priority priority;
 
-    protected Task(String taskDescription, boolean done) {
-        this.taskDescription = taskDescription;
-        this.done = done;
-        this.priority = Priority.MEDIUM;
-    }
+    /**
+     * Constructor for the {@code Task} class.
+     *
+     * @param taskDescription Description of the users task.
+     * @param done Whether the task has been completed or not.
+     * @param priority The priority of the task, specified by the user (if any).
+     */
 
     protected Task(String taskDescription, boolean done, Priority priority) {
         this.taskDescription = taskDescription;
@@ -28,11 +30,7 @@ abstract public class Task {
         this.priority = priority;
     }
 
-    /**
-     * Mark a task as done.
-     */
-
-    abstract public Task markDone();
+    public abstract Task markDone();
 
     public Priority getPriority() {
         return this.priority;
@@ -45,7 +43,7 @@ abstract public class Task {
      * @return the String to be written to storage.
      */
 
-    abstract protected String getStorageRepresentation();
+    protected abstract String getStorageRepresentation();
 
     /**
      * Get the task description.
@@ -73,8 +71,9 @@ abstract public class Task {
             return Event.getTaskFromStringRepresentation(s);
         case "D":
             return DeadLine.getTaskFromStringRepresentation(s);
+        default:
+            throw new TigerStorageLoadException("");
         }
-        throw new TigerStorageLoadException("");
     }
 
 }

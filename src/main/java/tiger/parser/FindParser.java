@@ -1,25 +1,31 @@
 package tiger.parser;
 
 import tiger.exceptions.inputs.TigerEmptyStringException;
+import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.utils.StringUtils;
+
+/**
+ * The {@code FindParser} parser takes in an input String and parses it, so that the {@code FindAction} class
+ * can access the class fields and understand user input.
+ */
 
 public class FindParser extends Parser {
 
     private String toSearchFor = "";
-
-    public FindParser(String input) {
-        super(input);
-    }
+    private String input;
 
     /**
-     * The {@code FindParser} parser class takes in an input String and
-     * parses it, so that the {@code FindAction} class can access the
-     * class fields and understand user input.
+     * Constructor for the {@code FindParser} class.
      *
-     * @throws TigerEmptyStringException If input is invalid.
+     * @param input String to be parsed.
      */
 
-    public void parse() throws TigerEmptyStringException {
+    public FindParser(String input) {
+        this.input = input;
+    }
+
+    @Override
+    public void parse() throws TigerInvalidInputException {
         StringUtils removeSpaces = new StringUtils();
         try {
             String[] array =

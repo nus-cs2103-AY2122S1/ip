@@ -1,5 +1,8 @@
 package tiger.parser;
 
+import java.util.Arrays;
+import java.util.List;
+
 import tiger.constants.Priority;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
@@ -8,8 +11,11 @@ import tiger.utils.CustomDate;
 import tiger.utils.DateStringConverter;
 import tiger.utils.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
+/**
+ * The {@code DeadLineParser} parser takes in an input String and parses it, so that the {@code DeadLineAction} class
+ * can access the class fields and understand user input.
+ */
+
 
 public class DeadLineParser extends Parser {
 
@@ -18,11 +24,19 @@ public class DeadLineParser extends Parser {
     private String dateString = "";
     // if the user doesn't specify the priority, by default, we set it to MEDIUM.
     private Priority priority = Priority.MEDIUM;
+    private String input;
+
+    /**
+     * Constructor of the {@code DeadLineParser class}
+     *
+     * @param input Input of the user.
+     */
 
     public DeadLineParser(String input) {
-        super(input);
+        this.input = input;
     }
 
+    @Override
     public void parse() throws TigerInvalidInputException {
         StringUtils stringUtils = new StringUtils();
         String regex = "^(deadline|dateline|Dateline|Deadline|DEADLINE|DATELINE)|(/by)|(/priority)";
@@ -67,13 +81,31 @@ public class DeadLineParser extends Parser {
         this.date = new DateStringConverter().getDateFromString(this.dateString);
     }
 
+    /**
+     * Gets the task description.
+     *
+     * @return the task description.
+     */
+
     public String getTodo() {
         return this.todo;
     }
 
+    /**
+     * Gets the task date.
+     *
+     * @return the task date.
+     */
+
     public CustomDate getDate() {
         return this.date;
     }
+
+    /**
+     * Gets the priority of the task.
+     *
+     * @return the priority of the task.
+     */
 
     public Priority getPriority() {
         return this.priority;

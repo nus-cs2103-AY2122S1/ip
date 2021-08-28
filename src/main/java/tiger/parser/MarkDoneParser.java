@@ -6,22 +6,27 @@ import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.exceptions.inputs.TigerTooManyInputsException;
 import tiger.utils.StringUtils;
 
+/**
+ * The {@code MarkDoneParser} parser takes in an input String and parses it, so that the {@code MarkDoneAction} class
+ * can access the class fields and understand user input.
+ */
+
 public class MarkDoneParser extends Parser {
 
     private int index;
-
-    public MarkDoneParser(String input) {
-        super(input);
-    }
+    private String input;
 
     /**
-     * The {@code MarkDoneParser} parser class takes in an input String and
-     * parses it, so that the {@code MarkDoneAction} class can access the
-     * class fields and understand user input.
+     * Constructor for the {@code MarkDoneParser} class.
      *
-     * @throws TigerInvalidInputException If input is invalid.
+     * @param input String to be parsed.
      */
 
+    public MarkDoneParser(String input) {
+        this.input = input;
+    }
+
+    @Override
     public void parse() throws TigerInvalidInputException {
         StringUtils removeSpaces = new StringUtils();
         String[] array = removeSpaces.removeBackAndFrontSpaces(input).split(
@@ -40,6 +45,12 @@ public class MarkDoneParser extends Parser {
             throw new TigerInvalidArgumentException(array[1], "Done");
         }
     }
+
+    /**
+     * Gets the index of the task to mark done.
+     *
+     * @return the index of the task to mark done.
+     */
 
     public int getIndex() {
         return this.index;

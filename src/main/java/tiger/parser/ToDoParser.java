@@ -1,31 +1,31 @@
 package tiger.parser;
 
+import java.util.Arrays;
+import java.util.List;
+
 import tiger.constants.Priority;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
 import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.utils.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
+
+/**
+ * The {@code ToDoParser} parser takes in an input String and parses it, so that the {@code ToDoAction} class
+ * can access the class fields and understand user input.
+ */
 
 public class ToDoParser extends Parser {
 
     private String todo = "";
     private Priority priority = Priority.MEDIUM;
+    private String input;
 
     public ToDoParser(String input) {
-        super(input);
+        this.input = input;
     }
 
-    /**
-     * The {@code ToDoParser} parser class takes in an input String and
-     * parses it, so that the {@code ToDoAction} class can access the
-     * class fields and understand user input.
-     *
-     * @throws TigerEmptyStringException If input is invalid.
-     */
-
+    @Override
     public void parse() throws TigerInvalidInputException {
 
         StringUtils stringUtils = new StringUtils();
@@ -60,9 +60,21 @@ public class ToDoParser extends Parser {
         this.todo = stringUtils.capitaliseFirstLetter(this.todo);
     }
 
+    /**
+     * Gets the task description.
+     *
+     * @return the task description.
+     */
+
     public String getTodo() {
         return this.todo;
     }
+
+    /**
+     * Gets the priority of the task.
+     *
+     * @return the priority of the task.
+     */
 
     public Priority getPriority() {
         return this.priority;

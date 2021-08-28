@@ -14,9 +14,9 @@ import java.time.LocalTime;
 
 public class CustomDate {
 
-    private final LocalDate localDate;
-    private final LocalTime localTime;
-    boolean hasTime;
+    private LocalDate localDate;
+    private LocalTime localTime;
+    private boolean hasTime;
 
     /**
      * Constructor for the {@code CustomDate} class.

@@ -6,22 +6,27 @@ import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.exceptions.inputs.TigerTooManyInputsException;
 import tiger.utils.StringUtils;
 
+/**
+ * The {@code DeleteParser} parser class takes in an input String and parses it, so that the {@code DeleteAction}
+ * class can access the class fields and understand user input.
+ */
+
 public class DeleteParser extends Parser {
 
     private int index;
-
-    public DeleteParser(String input) {
-        super(input);
-    }
+    private String input;
 
     /**
-     * The {@code DeleteParser} parser class takes in an input String and
-     * parses it, so that the {@code DeleteAction} class can access the
-     * class fields and understand user input.
+     * Constructor of the {@code DeleteParser class}
      *
-     * @throws TigerInvalidInputException If input is invalid.
+     * @param input Input of the user.
      */
 
+    public DeleteParser(String input) {
+        this.input = input;
+    }
+
+    @Override
     public void parse() throws TigerInvalidInputException {
         String[] array =
                 new StringUtils().removeBackAndFrontSpaces(this.input).split(" ");
@@ -39,6 +44,12 @@ public class DeleteParser extends Parser {
             throw new TigerInvalidArgumentException(array[1], "Delete");
         }
     }
+
+    /**
+     * Gets the index of the task to delete.
+     *
+     * @return the index of the task to delete.
+     */
 
     public int getIndex() {
         return this.index;

@@ -1,14 +1,20 @@
 package tiger.parser;
 
+import java.util.Arrays;
+import java.util.List;
+
 import tiger.constants.Priority;
 import tiger.exceptions.inputs.TigerEmptyStringException;
 import tiger.exceptions.inputs.TigerInvalidArgumentException;
+import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.utils.CustomDate;
 import tiger.utils.DateStringConverter;
 import tiger.utils.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
+/**
+ * The {@code EventParser} parser takes in an input String and parses it, so that the {@code EventAction} class
+ * can access the class fields and understand user input.
+ */
 
 public class EventParser extends Parser {
 
@@ -16,21 +22,21 @@ public class EventParser extends Parser {
     private CustomDate date;
     private String dateString = "";
     private Priority priority = Priority.MEDIUM;
+    private String input;
 
     /**
-     * The {@code EventParser} parser class takes in an input String and
-     * parses it, so that the {@code EventAction} class can access the
-     * class fields and understand user input.
+     * Constructor for the {@code EventParser} class.
      *
      * @param  input String to be parsed.
      * @throws TigerEmptyStringException If input is invalid.
      */
 
     public EventParser(String input) {
-        super(input);
+        this.input = input;
     }
 
-    public void parse() throws TigerEmptyStringException {
+    @Override
+    public void parse() throws TigerInvalidInputException {
         StringUtils stringUtils = new StringUtils();
         String regex = "^(event|Event|EVENT)|(/at)|(/priority)";
         List<String> array =
@@ -74,13 +80,31 @@ public class EventParser extends Parser {
         this.date = new DateStringConverter().getDateFromString(this.dateString);
     }
 
+    /**
+     * Gets the task description.
+     *
+     * @return the task description.
+     */
+
     public String getTodo() {
         return this.todo;
     }
 
+    /**
+     * Gets the task date.
+     *
+     * @return the task date.
+     */
+
     public CustomDate getDate() {
         return this.date;
     }
+
+    /**
+     * Gets the priority of the task.
+     *
+     * @return the priority of the task.
+     */
 
     public Priority getPriority() {
         return this.priority;

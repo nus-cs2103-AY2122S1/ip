@@ -3,7 +3,15 @@ package tiger.components;
 import tiger.constants.Priority;
 import tiger.exceptions.storage.TigerStorageLoadException;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
+
+    /**
+     * Constructor for the {@code ToDo} class.
+     *
+     * @param taskDescription Description of the users task.
+     * @param done Whether the task has been completed or not.
+     * @param priority The priority of the task, specified by the user (if any).
+     */
 
     public ToDo(String taskDescription, boolean done, Priority priority) {
         super(taskDescription, done, priority);

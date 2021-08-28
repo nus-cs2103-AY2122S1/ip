@@ -25,8 +25,9 @@ public enum Priority {
             return Priority.MEDIUM;
         case "H":
             return Priority.HIGH;
+        default:
+            return Priority.INVALID;
         }
-        return Priority.INVALID;
     }
 }
 

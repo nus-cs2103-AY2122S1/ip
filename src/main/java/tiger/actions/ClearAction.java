@@ -3,8 +3,19 @@ package tiger.actions;
 import tiger.app.AppState;
 import tiger.components.TaskList;
 
+/**
+ * Represents the action of clearing the task list.
+ */
+
 public class ClearAction extends Action {
-    AppState applicationState;
+
+    private AppState applicationState;
+
+    /**
+     * Constructor for the {@code ClearAction}
+     *
+     * @param applicationState Context of application from which to run the task from.
+     */
 
     public ClearAction(AppState applicationState) {
         this.applicationState = applicationState;

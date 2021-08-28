@@ -8,13 +8,29 @@ import tiger.exceptions.storage.TigerStorageLoadException;
 import tiger.exceptions.storage.TigerStorageSaveException;
 import tiger.storage.Storage;
 
+/**
+ * Represents the action of loading the data saved at the start of the app.
+ */
+
 public class StorageLoadAction extends Action {
 
     private AppState applicationState;
 
+    /**
+     * Constructor for the {@code StorageLoadAction class}
+     *
+     * @param applicationState Context of application from which to run the task from.
+     */
+
     public StorageLoadAction(AppState applicationState) {
         this.applicationState = applicationState;
     }
+
+    /**
+     * Runs the {@code StorageLoadAction} action.
+     *
+     * @return an updated {@code AppState}.
+     */
 
     @Override
     public AppState run() {
@@ -24,7 +40,8 @@ public class StorageLoadAction extends Action {
         case STORAGE_FAILED:
             /* This case will happen when we tried and failed to init the storage, and after prompting the user
             whether to wipe or do partial loading, the user responds with an invalid input. */
-            return new AppState(false, new TaskList(), "Please enter Y or N only", Flag.STORAGE_FAILED);
+            return new AppState(false, new TaskList(), "Please enter Y or N only",
+                    Flag.STORAGE_FAILED);
         case STORAGE_WIPE:
             /* Check if the user wants to wipe the storage */
             response = "Hello, I am Tiger, your personal assistant. I have fetched 0 tasks from my memory.";
@@ -39,13 +56,14 @@ public class StorageLoadAction extends Action {
         case STORAGE_PARTIAL_LOAD:
             /* Checks if the user wants to do partial loading. */
             taskList = Storage.partialLoad();
-            response = String.format("Hello, I am Tiger, your personal assistant. I have fetched %d tasks from" +
-                    " my memory.", taskList.size());
+            response = String.format("Hello, I am Tiger, your personal assistant. I have fetched %d tasks from my "
+                    + "memory.", taskList.size());
             return new AppState(false, taskList, response);
         case STORAGE_NOT_YET_INIT:
             /* Else, load the storage normally for the user. If the file isn't there and we fail creating it, send a
             message asking user to try again. If the file is there and we fail loading the file, send a message back
-            asking if the user wants to do partial loading. The user should either respond with {@code Flag.STORAGE_WIPE}
+            asking if the user wants to do partial loading. The user should either respond with {@code Flag
+            .STORAGE_WIPE}
             or {@code Flag.STORAGE_PARTIAL_LOAD} */
             try {
                 Storage.makeFileIfNotPresent();
@@ -54,8 +72,8 @@ public class StorageLoadAction extends Action {
             }
             try {
                 taskList = Storage.load();
-                response = String.format("Hello, I am Tiger, your personal assistant. I have fetched %d tasks from" +
-                        " my memory.", taskList.size());
+                response = String.format("Hello, I am Tiger, your personal assistant. I have fetched %d tasks from my "
+                        + "memory.", taskList.size());
                 return new AppState(false, taskList, response);
             } catch (TigerStorageLoadException e) {
                 return new AppState(false, new TaskList(), e.toString(), Flag.STORAGE_FAILED);

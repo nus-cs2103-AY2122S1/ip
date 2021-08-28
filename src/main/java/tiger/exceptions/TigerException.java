@@ -2,7 +2,7 @@ package tiger.exceptions;
 
 public class TigerException extends RuntimeException {
 
-    String error;
+    private String error;
 
     public TigerException(String error) {
         this.error = error;

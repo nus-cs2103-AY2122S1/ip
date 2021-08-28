@@ -1,16 +1,18 @@
 package tiger.components;
 
+import java.util.ArrayList;
+import java.util.Locale;
+
 import tiger.exceptions.actions.TigerIndexOutOfBoundsException;
 import tiger.exceptions.storage.TigerStorageLoadException;
 
-import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * A list to storage the {@code Tasks}.
  */
 
 public class TaskList {
+
     private final ArrayList<Task> taskList;
 
     /**
@@ -134,13 +136,13 @@ public class TaskList {
         }
         String returnString = "";
         for (int i = 1; i < this.taskList.size() + 1; i++) {
-            String row = String.format("%d.\t %s", i, this.taskList.get(i-1).toString());
+            String row = String.format("%d.\t %s", i, this.taskList.get(i - 1).toString());
             if (i != this.taskList.size()) {
                 row += "\n";
             }
             returnString += row;
         }
-        return  returnString;
+        return returnString;
     }
 
     /**
@@ -160,7 +162,8 @@ public class TaskList {
     }
 
     /**
-     * Given a String loaded from storage, interpret it and return its corresponding {@code TaskList}
+     * Given a String loaded from storage, interpret it and return its corresponding {@code TaskList}.
+     *
      * @param s String loaded from storage.
      * @return the corresponding {@code TaskList} object.
      * @throws TigerStorageLoadException if the loaded string is corrupted, or if there is so {@code IOException}.
@@ -177,16 +180,19 @@ public class TaskList {
         return new TaskList(newTaskList);
     }
 
+    /**
+     * Given a String loaded from storage, do a partial load and return its corresponding {@code TaskList}.
+     *
+     * @param s String loaded from storage.
+     * @return the corresponding {@code TaskList} object.
+     */
+
     public static TaskList getPartialTaskListFromStringRepresentation(String s) {
         String[] stringArray = s.split("\n");
         ArrayList<Task> newTaskList = new ArrayList<>();
         for (String line: stringArray) {
             if (line.length() != 0) {
-                try {
-                    newTaskList.add(Task.getTaskFromStringRepresentation(line));
-                } catch (TigerStorageLoadException e) {
-
-                }
+                newTaskList.add(Task.getTaskFromStringRepresentation(line));
             }
         }
         return new TaskList(newTaskList);

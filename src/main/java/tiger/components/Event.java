@@ -11,9 +11,17 @@ public class Event extends Task {
     /** Date event is at. */
     private final CustomDate date;
 
+    /**
+     * Constructor for the {@code Event} class.
+     *
+     * @param taskDescription Description of the users task.
+     * @param done Whether the task has been completed or not.
+     * @param date Date of the task.
+     * @param priority The priority of the task, specified by the user (if any).
+     */
+
     public Event(String taskDescription, boolean done, CustomDate date, Priority priority) {
-        super(taskDescription, done);
-        this.priority = priority;
+        super(taskDescription, done, priority);
         this.date = date;
     }
 

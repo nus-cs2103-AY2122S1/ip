@@ -1,8 +1,8 @@
 package tiger.parser;
 
-import tiger.exceptions.inputs.TigerSemiColonException;
-
 import java.util.Locale;
+
+import tiger.exceptions.inputs.TigerInvalidInputException;
 
 /**
  * The {@code Parser} class takes in the user input String, and parses
@@ -10,36 +10,39 @@ import java.util.Locale;
  * can use these substrings to create {@code Tasks}.
  */
 
-public class Parser {
-
-    String input;
-
-    /**
-     * Constructor for the Parser class.
-     *
-     * @param input User input input.
-     */
-
-    public Parser(String input) throws TigerSemiColonException {
-        if (input.contains(";")) {
-            throw new TigerSemiColonException("");
-        }
-        this.input = input;
-    }
-
-    // TODO: rewrite parsing functionality with regrex
+public abstract class Parser {
 
     /**
      * Get the first word of user command.
-     * Example Input: event Make stuff /by 18:00.
-     * Example Output: event.
      *
+     * @param input Input string.
      * @return String representing user command.
      */
 
-    public String getCommandKeyword() {
-        String[] array = this.input.split(" ");
+    public static String getCommandKeyword(String input) {
+        String[] array = input.split(" ");
         return array[0].toLowerCase(Locale.ENGLISH);
+    }
+
+    /**
+     * Parses the user input.
+     *
+     * @throws TigerInvalidInputException if the input is invalid.
+     */
+    public abstract void parse() throws TigerInvalidInputException;
+
+    /**
+     * Checks if entered user string contains a semicolon.
+     *
+     * @param input User input.
+     * @return Boolean indicating if string contains semicolon
+     */
+    public static boolean isValid(String input) {
+        if (input.contains(";")) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

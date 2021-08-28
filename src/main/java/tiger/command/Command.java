@@ -1,8 +1,6 @@
 package tiger.command;
 
 import tiger.actions.Action;
-import tiger.actions.StorageLoadAction;
-import tiger.app.AppState;
 import tiger.actions.ByeAction;
 import tiger.actions.ClearAction;
 import tiger.actions.DeadLineAction;
@@ -12,9 +10,12 @@ import tiger.actions.FindAction;
 import tiger.actions.InvalidAction;
 import tiger.actions.ListAction;
 import tiger.actions.MarkDoneAction;
+import tiger.actions.StorageLoadAction;
 import tiger.actions.ToDoAction;
+import tiger.app.AppState;
 import tiger.constants.Flag;
 import tiger.exceptions.inputs.TigerInvalidInputException;
+import tiger.exceptions.inputs.TigerSemiColonException;
 import tiger.parser.DeadLineParser;
 import tiger.parser.DeleteParser;
 import tiger.parser.EventParser;
@@ -39,23 +40,29 @@ public class Command {
      * @throws TigerInvalidInputException if the user input is invalid.
      */
 
-    public static Action getActionFromCommand(String command, AppState applicationState) throws TigerInvalidInputException {
-        Parser parser = new Parser(command);
+    public static Action getActionFromCommand(String command, AppState applicationState) throws
+            TigerInvalidInputException {
         if (applicationState.checkFlag().equals(Flag.STORAGE_FAILED)) {
             AppState newApplicationState;
-            switch (parser.getCommandKeyword()) {
+            if (!Parser.isValid(command)) {
+                throw new TigerSemiColonException("");
+            }
+            switch (Parser.getCommandKeyword(command)) {
             case "y":
-                newApplicationState = new AppState(false, applicationState.taskList, Flag.STORAGE_PARTIAL_LOAD);
+                newApplicationState = new AppState(false, applicationState.getTaskList(),
+                        Flag.STORAGE_PARTIAL_LOAD);
                 return new StorageLoadAction(newApplicationState);
             case "n":
-                newApplicationState = new AppState(false, applicationState.taskList, Flag.STORAGE_WIPE);
+                newApplicationState = new AppState(false, applicationState.getTaskList(),
+                        Flag.STORAGE_WIPE);
                 return new StorageLoadAction(newApplicationState);
             default:
-                newApplicationState = new AppState(false, applicationState.taskList, Flag.STORAGE_FAILED);
+                newApplicationState = new AppState(false, applicationState.getTaskList(),
+                        Flag.STORAGE_FAILED);
                 return new StorageLoadAction(newApplicationState);
             }
         }
-        switch (parser.getCommandKeyword()) {
+        switch (Parser.getCommandKeyword(command)) {
         case "exit":
             // Fallthrough
         case "quit":
@@ -92,7 +99,8 @@ public class Command {
         case "event":
             EventParser eventCommand = new EventParser(command);
             eventCommand.parse();
-            return new EventAction(applicationState, eventCommand.getTodo(), eventCommand.getDate(), eventCommand.getPriority());
+            return new EventAction(applicationState, eventCommand.getTodo(), eventCommand.getDate(),
+                    eventCommand.getPriority());
         case "search":
             // Fallthrough
         case "find":
