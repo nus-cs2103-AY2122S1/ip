@@ -9,8 +9,19 @@ import duke.exceptions.InvalidTaskIDException;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.InvalidCommandException;
 
+/**
+ * The Parser class is responsible for handling the user input and to perform
+ * the necessary operations on the TaskList.
+ */
 public class Parser {
 
+    /**
+     * Reads the user input and performs the corresponding action to the TaskList.
+     *
+     * @param taskList A TaskList object storing tasks.
+     * @param commandInput Input provided by the user.
+     * @throws DukeException If the user input is an invalid command.
+     */
     public static void parseInput(TaskList taskList, String commandInput) throws DukeException {
         if (commandInput.equals("list")) {
             Ui ui = new Ui();

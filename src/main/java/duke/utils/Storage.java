@@ -14,6 +14,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Storage class handles the loading and saving of TaskList
+ * information to the user's hard disk with a text file.
+ */
 public class Storage {
     private Path filePath;
 
@@ -21,6 +25,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns a TaskList object containing information about tasks
+     * that were saved in the user's hard disk.
+     *
+     * @return TaskList object containing the user's saved tasks.
+     * @throws IOException If any problem occurs when reading the text file from the hard disk.
+     */
     public TaskList loadData() throws IOException {
         List<String> contents = Files.readAllLines(filePath);
         TaskList taskList = new TaskList();
@@ -50,6 +61,13 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves information from a TaskList object, by writing to a text file
+     * in the user's hard disk.
+     *
+     * @param taskList TaskList object containing the tasks to be saved.
+     * @throws IOException If any problem occurs when writing the text file to the hard disk.
+     */
     public void saveData(TaskList taskList) throws IOException {
         List<String> lines = new ArrayList<>();
         Ui ui = new Ui();
