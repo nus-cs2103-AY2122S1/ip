@@ -1,6 +1,0 @@
-D|return book|2/12/2019 1800|1
-T|test|1
-D|return book|2/12/2019 1800|1
-T|\at|0
-D|return book|2/12/2019 1800|0
-T|\at|0
