@@ -6,7 +6,7 @@ public class NullDescription extends DukeException {
         this.type = type;
     }
     @Override
-    public String toString() {
-        return "☹ OOPS!!! The description of a " + type + " cannot be empty.";
+    public String getMessage() {
+        return "\t☹ OOPS!!! The description of a " + type + " cannot be empty.";
     }
 }
