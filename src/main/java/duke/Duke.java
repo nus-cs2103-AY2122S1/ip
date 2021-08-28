@@ -3,7 +3,6 @@ package duke;
 import duke.command.Command;
 import duke.task.*;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
