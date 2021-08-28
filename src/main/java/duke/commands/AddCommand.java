@@ -5,11 +5,12 @@ import duke.Ui;
 import duke.exceptions.DeadLineException;
 import duke.exceptions.DukeException;
 import duke.exceptions.EventException;
+import duke.exceptions.ToDoException;
 import duke.tasktypes.Deadlines;
 import duke.tasktypes.Events;
 import duke.tasktypes.TaskList;
 import duke.tasktypes.ToDos;
-import duke.exceptions.ToDoException;
+
 
 
 /**

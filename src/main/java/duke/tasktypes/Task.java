@@ -8,6 +8,11 @@ public class Task {
     private String taskType;
     private boolean isDone;
 
+    /**
+     * Constructor for Task class.
+     * @param description
+     * @param taskType
+     */
     public Task(String description, String taskType) {
         this.description = description;
         this.taskType = taskType;

@@ -1,8 +1,9 @@
 package duke;
 
 import java.util.Scanner;
-import duke.tasktypes.TaskList;
+
 import duke.commands.Command;
+import duke.tasktypes.TaskList;
 
 /**
  * Represents the chat bot.
@@ -12,6 +13,16 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+
+    /**
+     * Constructor for the class.
+     * @param filePath filePath for the data file.
+     */
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        taskList = new TaskList(storage.load());
+    }
 
     /**
      * Starts the Dory chat bot.
@@ -37,15 +48,9 @@ public class Duke {
     }
 
     /**
-     * Constructor for the class.
-     * @param filePath filePath for the data file.
+     * Main method.
+     * @param args
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        taskList = new TaskList(storage.load());
-    }
-
     public static void main(String[] args) {
         // start running the chat bot
         new Duke("data/dory.txt").run();

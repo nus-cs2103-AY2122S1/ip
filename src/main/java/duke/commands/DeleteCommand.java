@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
                 ui.displayDelete(removedTask, taskList);
             }
         } catch (Exception e) {
-                ui.showError(e);
+            ui.showError(e);
         }
     }
 }

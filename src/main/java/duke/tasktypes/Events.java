@@ -11,6 +11,11 @@ public class Events extends Task {
     protected String date;
     protected LocalDate at;
 
+    /**
+     * Constructor for Events class.
+     * @param description
+     * @param eventDate
+     */
     public Events(String description, String eventDate) {
         super(description, "E");
         this.date = eventDate;
