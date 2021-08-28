@@ -40,7 +40,7 @@ public class Duke {
             // If there was an error loading the save file, then create a new empty one.
             this.currStorageMgr = new DukeStorageManager();
         } catch (DukeExceptionBase e) {
-            //There is no Duke instance to print the error msg yet
+            // There is no Duke instance to print the error msg yet
             System.out.println(e);
             // If there was an error loading the save file, then create a new empty one.
             this.currStorageMgr = new DukeStorageManager();
