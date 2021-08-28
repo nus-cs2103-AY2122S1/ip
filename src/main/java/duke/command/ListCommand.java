@@ -1,12 +1,16 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.UI;
 import duke.exception.DukeException;
 import duke.task.Task;
-import java.util.ArrayList;
 
+/**
+ * ListCommand class which displays the current tasks in the list.
+ */
 public class ListCommand extends Command {
     private boolean isExit = false;
 

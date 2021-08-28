@@ -1,15 +1,16 @@
 package duke;
 
-import duke.exception.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import duke.exception.DukeException;
 
 public class ParserTest {
     @Test
     public void parseCompletetoDo() {
-        assertEquals(Parser.parse("todo borrow book").getTask().getTaskName()
-                , "borrow book");
+        assertEquals(Parser.parse("todo borrow book").getTask().getTaskName(),
+                 "borrow book");
     }
 
     @Test
@@ -38,7 +39,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCompleteDeadline_InvalidDay() {
+    public void parseCompleteDeadline_invalidDay() {
         try {
             Parser.parse("deadline PL1101E project /by 33/04/2021 1200");
         } catch (DukeException e) {

@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.UI;
-import duke.exception.DukeException;
 import duke.task.Task;
-import java.util.ArrayList;
 
 /**
  * FindCommand class which searches for tasks with matching keywords

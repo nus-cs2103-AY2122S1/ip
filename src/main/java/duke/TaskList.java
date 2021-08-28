@@ -1,8 +1,9 @@
 package duke;
 
-import duke.task.Task;
-import duke.exception.DukeException;
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * TaskList class handles the manipulation of the list
@@ -72,7 +73,7 @@ public class TaskList {
      * @throws DukeException This error is thrown if the id specified is invalid.
      * @returns The task object which was marked as done.
      */
-    public Task markDone(int id) throws DukeException{
+    public Task markDone(int id) throws DukeException {
         if (id - 1 > this.listLength) {
             throw new DukeException("The id you entered was invalid!");
         } else {

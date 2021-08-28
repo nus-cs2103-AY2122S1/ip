@@ -1,15 +1,22 @@
 package duke;
 
-import duke.command.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import java.time.LocalDateTime;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Parser class which handles the processing of the inputs detected
@@ -64,8 +71,8 @@ public class Parser {
                 dateTimeArr = details[1].split(" ");
                 date = LocalDate.parse(dateTimeArr[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 time = dateTimeArr.length == 1
-                        ? LocalTime.of(0, 0) :
-                        LocalTime.parse(dateTimeArr[1], DateTimeFormatter.ofPattern("HHmm"));
+                        ? LocalTime.of(0, 0)
+                        : LocalTime.parse(dateTimeArr[1], DateTimeFormatter.ofPattern("HHmm"));
                 dateTimeInfo = LocalDateTime.of(date, time);
                 return new AddCommand(new Event(description, dateTimeInfo));
             } catch (DateTimeParseException e) {
@@ -75,14 +82,15 @@ public class Parser {
             details = input.split(" /by ");
             description = details[0].replaceFirst("deadline ", "");
             if (details.length == 1 || description.equals("")) {
-                throw new DukeException("Input the following format: deadline *description* /at *DD/MM/YYYY* *24H-Time*");
+                throw new DukeException("Input the following format: "
+                        + "deadline *description* /at *DD/MM/YYYY* *24H-Time*");
             }
             try {
                 dateTimeArr = details[1].split(" ");
                 date = LocalDate.parse(dateTimeArr[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 time = dateTimeArr.length == 1
-                        ? LocalTime.of(0, 0) :
-                        LocalTime.parse(dateTimeArr[1], DateTimeFormatter.ofPattern("HHmm"));
+                        ? LocalTime.of(0, 0)
+                        : LocalTime.parse(dateTimeArr[1], DateTimeFormatter.ofPattern("HHmm"));
                 dateTimeInfo = LocalDateTime.of(date, time);
                 return new AddCommand(new Deadline(description, dateTimeInfo));
             } catch (DateTimeParseException e) {

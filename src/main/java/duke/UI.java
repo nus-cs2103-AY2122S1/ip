@@ -1,8 +1,9 @@
 package duke;
 
-import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * UI class which handles all the interactions with the user.
@@ -102,6 +103,11 @@ public class UI {
         }
     }
 
+    /**
+     * Updates the user of the tasks in the list, after adding the new task.
+     *
+     * @param taskArrList The ArrayList of tasks in the current list.
+     */
     public void notifyAdd(ArrayList<Task> taskArrList) {
         int listLength = taskArrList.size();
         Task newTask = taskArrList.get(listLength - 1);
@@ -119,8 +125,8 @@ public class UI {
             ArrayList<Task> taskArrList = tasks.getAllTasks();
             int listLength = taskArrList.size();
             if (listLength == 0) {
-                System.out.println("You have no outstanding tasks from the previous session." +
-                        " What a productivity master!");
+                System.out.println("You have no outstanding tasks from the previous session."
+                        + " What a productivity master!");
             } else {
                 System.out.println("These tasks are from the previous session:");
                 for (int i = 0; i < taskArrList.size(); i++) {
