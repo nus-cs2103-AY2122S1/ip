@@ -1,8 +1,7 @@
 package duke.utils;
 
+import duke.exceptions.InvalidTaskIdException;
 import duke.tasks.Task;
-
-import duke.exceptions.InvalidTaskIDException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,27 +17,27 @@ public class TaskList {
         this.taskList.add(t);
     }
 
-    public void delete(int index) throws InvalidTaskIDException {
+    public void delete(int index) throws InvalidTaskIdException {
         if (index >= 0 && index < this.taskList.size()) {
             this.taskList.remove(index);
         } else {
-            throw new InvalidTaskIDException();
+            throw new InvalidTaskIdException();
         }
     }
 
-    public Task get(int index) throws InvalidTaskIDException {
+    public Task get(int index) throws InvalidTaskIdException {
         if (index >= 0 && index < this.taskList.size()) {
             return this.taskList.get(index);
         } else {
-            throw new InvalidTaskIDException();
+            throw new InvalidTaskIdException();
         }
     }
 
-    public void markAsCompleted(int index) throws InvalidTaskIDException {
+    public void markAsCompleted(int index) throws InvalidTaskIdException {
         if (index >= 0 && index < this.taskList.size()) {
             this.taskList.get(index).markAsCompleted();
         } else {
-            throw new InvalidTaskIDException();
+            throw new InvalidTaskIdException();
         }
     }
 

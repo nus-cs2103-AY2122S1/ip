@@ -12,11 +12,13 @@ public class Deadline extends Task {
     }
 
     public String getDeadline() {
-        return this.deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return this.deadline
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     @Override
     public String toString() {
-        return "Deadline: " + super.toString() + " (by " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "Deadline: " + super.toString() + " (by "
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

@@ -1,11 +1,10 @@
 package duke;
 
-import duke.utils.Ui;
+import duke.exceptions.DukeException;
+import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Parser;
-
-import duke.exceptions.DukeException;
+import duke.utils.Ui;
 
 import java.io.IOException;
 import java.nio.file.Path;

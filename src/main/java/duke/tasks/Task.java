@@ -2,19 +2,19 @@ package duke.tasks;
 
 public class Task {
     private String taskname;
-    private boolean completed;
+    private boolean isCompleted;
 
     public Task(String taskname) {
         this.taskname = taskname;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     public void markAsCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     public boolean getCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     public String getTaskName() {
@@ -23,6 +23,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.taskname + " " + (this.completed ? "[X]" : "[ ]");
+        return this.taskname + " " + (this.isCompleted ? "[X]" : "[ ]");
     }
 }

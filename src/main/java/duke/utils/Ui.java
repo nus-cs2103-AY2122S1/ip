@@ -1,7 +1,6 @@
 package duke.utils;
 
 import java.util.Scanner;
-import java.util.List;
 
 public class Ui {
     private static final String GREETING = "Hi, I'm Duke, your personal assistant!\n";

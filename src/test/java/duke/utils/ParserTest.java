@@ -2,8 +2,10 @@ package duke.utils;
 
 import duke.exceptions.DukeException;
 import duke.tasks.ToDo;
-import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
