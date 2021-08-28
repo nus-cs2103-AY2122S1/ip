@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class Parser {
@@ -27,17 +28,22 @@ public class Parser {
                         input.replaceFirst(Pattern.quote("todo"),"").trim(),
                         null);
             case "deadline":
-                String[] deadlineInfo = input.replaceFirst(Pattern.quote("deadline"),"").split("/by", 2);
+                String[] deadlineInfo = input.replaceFirst(Pattern.quote("deadline"),
+                        "").split("/by", 2);
                 return new AddCommand("deadline",
                         deadlineInfo[0].trim(),
                         LocalDate.parse(deadlineInfo[1].trim()));
             case "event":
-                String[] eventInfo = input.replaceFirst(Pattern.quote("event"),"").split("/at", 2);
+                String[] eventInfo = input.replaceFirst(Pattern.quote("event"),
+                        "").split("/at", 2);
                 return new AddCommand("event",
                         eventInfo[0].trim(),
                         LocalDate.parse(eventInfo[1].trim()));
             case "occurring":
                 return new OccurringCommand(LocalDate.parse(inputList[1]));
+            case "find":
+                return new FindCommand(String.join(" ",
+                        Arrays.copyOfRange(inputList, 1, inputList.length)));
             case "bye":
                 return new ExitCommand();
             default:

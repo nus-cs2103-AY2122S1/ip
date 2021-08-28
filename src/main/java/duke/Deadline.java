@@ -25,4 +25,11 @@ public class Deadline extends Task {
     public String toStringData() {
         return "D" + super.toStringData() + "|" + by;
     }
+
+    @Override
+    public boolean matches(String query) {
+        return super.matches(query)
+                || by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")).toLowerCase().contains(query.toLowerCase())
+                || query.equalsIgnoreCase("deadline");
+    }
 }

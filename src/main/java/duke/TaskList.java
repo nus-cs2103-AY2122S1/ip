@@ -40,4 +40,10 @@ public class TaskList {
     public int getLength() {
         return tasks.size();
     }
+
+    public ArrayList<Task> getMatchingTasks(String query) {
+        ArrayList<Task> matchingTasks = new ArrayList<>(tasks);
+        matchingTasks.removeIf(task -> !task.matches(query));
+        return matchingTasks;
+    }
 }

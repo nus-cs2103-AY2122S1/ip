@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.format.DateTimeFormatter;
+
 public class Todo extends Task {
 
     public Todo(String description) {
@@ -14,5 +16,10 @@ public class Todo extends Task {
     @Override
     public String toStringData() {
         return "T" + super.toStringData();
+    }
+
+    @Override
+    public boolean matches(String query) {
+        return super.matches(query) || query.equalsIgnoreCase("todo");
     }
 }

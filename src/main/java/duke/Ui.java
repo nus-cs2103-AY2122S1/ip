@@ -64,18 +64,28 @@ public class Ui {
 
     public void showOccurringTasks(LocalDate date, TaskList tasks) {
         System.out.println("Tasks occurring on " + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ":");
-        int count = 0;
         ArrayList<Task> relevantTasks = tasks.getTasksOccurringOn(date);
-        for (Task task: relevantTasks) {
-                System.out.println((count + 1) + ". " + task);
-                count++;
-            }
-        if (relevantTasks.size() == 0) {
-            System.out.println("No tasks.");
-        }
+        showTasks(relevantTasks);
     }
 
     public void showGoodbye() {
         System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    private void showTasks(ArrayList<Task> tasks) {
+        int count = 0;
+        for (Task task: tasks) {
+            System.out.println((count + 1) + ". " + task);
+            count++;
+        }
+        if (tasks.size() == 0) {
+            System.out.println("No tasks.");
+        }
+    }
+
+    public void showMatchingTasks(String query, TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        ArrayList<Task> matchingTasks = tasks.getMatchingTasks(query);
+        showTasks(matchingTasks);
     }
 }

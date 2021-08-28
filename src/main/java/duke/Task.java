@@ -33,4 +33,8 @@ public class Task {
     public String toStringData() {
         return "|" + getStatusIcon() + "|" + description;
     }
+
+    public boolean matches(String query) {
+        return description.contains(query);
+    }
 }
