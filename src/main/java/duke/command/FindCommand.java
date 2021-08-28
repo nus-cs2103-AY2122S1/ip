@@ -1,0 +1,36 @@
+package duke.command;
+
+import duke.task.TaskList;
+import duke.ui.Ui;
+
+public class FindCommand implements Command {
+    public static final String COMMAND_IDENTIFIER = "find";
+
+    private String searchTerm;
+
+    /**
+     * Returns the Find command represented by the user input.
+     *
+     * @param userInput String input provided by the user.
+     * @return Find command.
+     */
+    public static Command create(String userInput)  {
+        String searchTerm = userInput.split(" ", 2)[1];
+        return new FindCommand(searchTerm);
+    }
+
+    private FindCommand(String searchTerm) {
+        this.searchTerm = searchTerm;
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui) {
+        TaskList filteredTasks = tasks.findTasks(searchTerm);
+        ui.showFilteredTaskList(filteredTasks);
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+}

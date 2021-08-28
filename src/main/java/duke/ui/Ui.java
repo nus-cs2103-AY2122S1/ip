@@ -46,6 +46,15 @@ public class Ui {
         display("Nice! this task has been marked done:\n  " + task + "\n");
     }
 
+    /**
+     * Prints list of filtered tasks
+     *
+     * @param tasks List of filtered tasks
+     */
+    public void showFilteredTaskList(TaskList tasks) {
+        display("Here are the matching tasks in your list:\n" + tasks);
+    }
+
     public void showErrorMessage(Exception e) {
         display(e.getMessage());
     }
