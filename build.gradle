@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+}
+
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "skipped", "failed"
+
+        showExceptions true
+        exceptionFormat "full"
+        showCauses true
+        showStackTraces true
+        showStandardStreams = false
+    }
+}
+
+application {
+    mainClassName = "duke.Duke"
+}
+
+shadowJar {
+    archiveBaseName = "sora"
+    archiveVersion = "1.0"
+    archiveClassifier = null
+}
+
+checkstyle {
+    toolVersion = '8.29'
+}
+
+run {
+    standardInput = System.in
+}
