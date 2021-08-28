@@ -72,7 +72,8 @@ public class Task {
      */
     @Override
     public boolean equals(Object object) {
-        if (object == null || !(object.getClass().equals(this.getClass()))) {        // getClass to inherit in subclasses of class
+        if (object == null || !(object.getClass().equals(this.getClass()))) {
+            // getClass to inherit in subclasses of class
             return false;
         } else {
             Task t = (Task) object;

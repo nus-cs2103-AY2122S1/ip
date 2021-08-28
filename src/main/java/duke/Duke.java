@@ -100,8 +100,9 @@ public class Duke {
                     break;
 
                 case FIND:
-                    ui.print(tasks.find(parser.searchKey).toString().replace("Here are the tasks in your list, meow:"
-                            , "Here are the matching tasks found, meow:"));
+                    ui.print(tasks.find(parser.searchKey).toString().replace(
+                            "Here are the tasks in your list, meow:",
+                            "Here are the matching tasks found, meow:"));
                     break;
 
                 case TODO:
@@ -123,7 +124,7 @@ public class Duke {
                     }
 
                     Task deadline;
-                    if (parser.by.trim().split("\\s+").length < 2) {          // no time given
+                    if (parser.by.trim().split("\\s+").length < 2) { // no time given
                         deadline = new Deadline(parser.description, Parser.parseDate(parser.by));
                     } else {
                         deadline = new Deadline(parser.description, Parser.parseDateTime(parser.by));
@@ -140,7 +141,7 @@ public class Duke {
                     }
 
                     Task event;
-                    if (parser.at.trim().split("\\s+").length < 2) {      // no time given
+                    if (parser.at.trim().split("\\s+").length < 2) { // no time given
                         event = new Event(parser.description, Parser.parseDate(parser.at));
                     } else {
                         event = new Event(parser.description, Parser.parseDateTime(parser.at));
@@ -156,7 +157,7 @@ public class Duke {
                     break;
 
                 default:
-                    throw new IllegalCommandException("");      // should be unreachable by design
+                    throw new IllegalCommandException(""); // should be unreachable by design
                 }
 
             } catch (DukeException e) {

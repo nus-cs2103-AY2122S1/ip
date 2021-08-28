@@ -11,7 +11,7 @@ import java.nio.file.Path;
  */
 public class Storage {
 
-    Path filePath;
+    private final Path filePath;
 
     /**
      * Constructor to create a storage.

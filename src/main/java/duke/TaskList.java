@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Mark task in tasklist as done via task description.
@@ -126,7 +126,7 @@ public class TaskList {
             i = taskList.indexOf(new Event(description));
             break;
         default:
-            i = -1;      // unreachable by design if all task cases are there
+            i = -1; // unreachable by design if all task cases are there
         }
         return i;
     }

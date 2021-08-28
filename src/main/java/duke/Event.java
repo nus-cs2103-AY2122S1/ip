@@ -19,6 +19,8 @@ public class Event extends Task {
     /**
      * Empty constructor for comparing event objects by description.
      * To find duplicate tasks.
+     *
+     * @param description Event description
      */
     public Event(String description) {
         super(description);
@@ -56,8 +58,8 @@ public class Event extends Task {
     public String saveString() {
         return "E | " + super.saveString() + " | "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH))
-                + " " + (time == null ? "All day" :
-                time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH)));
+                + " " + (time == null ? "All day"
+                : time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH)));
     }
 
     /**
@@ -69,7 +71,7 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH))
-                + " " + (time == null ? "All day" :
-                time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH))) + ")";
+                + " " + (time == null ? "All day"
+                : time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH))) + ")";
     }
 }

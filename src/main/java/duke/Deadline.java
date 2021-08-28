@@ -20,6 +20,8 @@ public class Deadline extends Task {
     /**
      * Empty constructor for comparing deadline objects by description.
      * To find duplicate tasks.
+     *
+     * @param description Deadline description
      */
     public Deadline(String description) {
         super(description);
@@ -58,8 +60,8 @@ public class Deadline extends Task {
     public String saveString() {
         return "D | " + super.saveString() + " | "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH))
-                + " " + (time == null ? "All day" :
-                time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH)));
+                + " " + (time == null ? "All day"
+                : time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH)));
     }
 
     /**
@@ -71,7 +73,7 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy", Locale.ENGLISH))
-                + " " + (time == null ? "All day" :
-                time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH))) + ")";
+                + " " + (time == null ? "All day"
+                : time.format(DateTimeFormatter.ofPattern("h.mma", Locale.ENGLISH))) + ")";
     }
 }
