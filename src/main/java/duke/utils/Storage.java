@@ -1,11 +1,10 @@
 package duke.utils;
 
+import duke.exceptions.InvalidTaskIdException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.ToDo;
 import duke.tasks.Task;
-
-import duke.exceptions.InvalidTaskIDException;
+import duke.tasks.ToDo;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -75,16 +74,20 @@ public class Storage {
             try {
                 Task task = taskList.get(i);
                 if (task instanceof ToDo) {
-                    String line = String.format("ToDo=%s=%s", String.valueOf(task.getCompleted()), task.getTaskName());
+                    String line = String.format("ToDo=%s=%s",
+                            String.valueOf(task.getCompleted()), task.getTaskName());
                     lines.add(line);
                 } else if (task instanceof Event) {
-                    String line = String.format("Event=%s=%s=%s", String.valueOf(task.getCompleted()), task.getTaskName(), ((Event) task).getTimePeriod());
+                    String line = String.format("Event=%s=%s=%s", String.valueOf(task.getCompleted()),
+                            task.getTaskName(), ((Event) task).getTimePeriod());
                     lines.add(line);
                 } else {
-                    String line = String.format("Deadline=%s=%s=%s", String.valueOf(task.getCompleted()), task.getTaskName(), ((Deadline) task).getDeadline());
+                    String line = String.format("Deadline=%s=%s=%s",
+                            String.valueOf(task.getCompleted()), task.getTaskName(),
+                            ((Deadline) task).getDeadline());
                     lines.add(line);
                 }
-            } catch (InvalidTaskIDException e) {
+            } catch (InvalidTaskIdException e) {
                 ui.displayError(e);
             }
         }

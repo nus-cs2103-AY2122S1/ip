@@ -1,11 +1,14 @@
 package duke.utils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import duke.exceptions.DukeException;
-import duke.exceptions.InvalidTaskIDException;
+import duke.exceptions.InvalidTaskIdException;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class TaskListTest {
 
@@ -34,7 +37,7 @@ public class TaskListTest {
         try {
             TaskList taskList = new TaskList();
             taskList.markAsCompleted(1);
-        } catch (InvalidTaskIDException e) {
+        } catch (InvalidTaskIdException e) {
             String expected = "I'm sorry! I couldn't find a task with that ID. Please check again!";
             assertEquals(expected, e.getMessage());
         }

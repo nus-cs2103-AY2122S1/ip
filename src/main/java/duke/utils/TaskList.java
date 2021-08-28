@@ -1,8 +1,7 @@
 package duke.utils;
 
+import duke.exceptions.InvalidTaskIdException;
 import duke.tasks.Task;
-
-import duke.exceptions.InvalidTaskIDException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,7 @@ public class TaskList {
         this.taskList.add(t);
     }
 
+<<<<<<< HEAD
     /**
      * Deletes a Task object from the TaskList.
      *
@@ -33,13 +33,17 @@ public class TaskList {
      * @throws InvalidTaskIDException If the index provided does not correspond to a Task in the TaskList.
      */
     public void delete(int index) throws InvalidTaskIDException {
+=======
+    public void delete(int index) throws InvalidTaskIdException {
+>>>>>>> branch-A-CodingStandard
         if (index >= 0 && index < this.taskList.size()) {
             this.taskList.remove(index);
         } else {
-            throw new InvalidTaskIDException();
+            throw new InvalidTaskIdException();
         }
     }
 
+<<<<<<< HEAD
     /**
      * Returns a Task object by its index in the TaskList.
      *
@@ -48,13 +52,17 @@ public class TaskList {
      * @throws InvalidTaskIDException If the index provided does not correspond to a Task in the TaskList.
      */
     public Task get(int index) throws InvalidTaskIDException {
+=======
+    public Task get(int index) throws InvalidTaskIdException {
+>>>>>>> branch-A-CodingStandard
         if (index >= 0 && index < this.taskList.size()) {
             return this.taskList.get(index);
         } else {
-            throw new InvalidTaskIDException();
+            throw new InvalidTaskIdException();
         }
     }
 
+<<<<<<< HEAD
     /**
      * Marks a Task object in the TaskList as completed.
      *
@@ -62,10 +70,13 @@ public class TaskList {
      * @throws InvalidTaskIDException If the index provided does not correspond to a Task in the TaskList.
      */
     public void markAsCompleted(int index) throws InvalidTaskIDException {
+=======
+    public void markAsCompleted(int index) throws InvalidTaskIdException {
+>>>>>>> branch-A-CodingStandard
         if (index >= 0 && index < this.taskList.size()) {
             this.taskList.get(index).markAsCompleted();
         } else {
-            throw new InvalidTaskIDException();
+            throw new InvalidTaskIdException();
         }
     }
 

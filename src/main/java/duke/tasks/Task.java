@@ -6,20 +6,24 @@ package duke.tasks;
 public class Task {
     /** Name of the task */
     private String taskname;
+<<<<<<< HEAD
 
     /** Whether the task is completed or not */
     private boolean completed;
+=======
+    private boolean isCompleted;
+>>>>>>> branch-A-CodingStandard
 
     public Task(String taskname) {
         this.taskname = taskname;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     /**
      * Mark the task as completed.
      */
     public void markAsCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
@@ -28,7 +32,7 @@ public class Task {
      * @return Boolean value of whether the task is completed.
      */
     public boolean getCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     /**
@@ -42,6 +46,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.taskname + " " + (this.completed ? "[X]" : "[ ]");
+        return this.taskname + " " + (this.isCompleted ? "[X]" : "[ ]");
     }
 }

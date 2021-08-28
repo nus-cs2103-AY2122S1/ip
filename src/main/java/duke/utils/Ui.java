@@ -1,7 +1,6 @@
 package duke.utils;
 
 import java.util.Scanner;
-import java.util.List;
 
 /**
  * The Ui class is responsible for methods that interact with the user.
