@@ -12,8 +12,8 @@ import java.util.Scanner;
  * Deals with loading tasks from the file and saving tasks in the file
  */
 public class Storage {
-    private final List<Task> TASKS = new ArrayList<>();
-    private final Parser PARSER = new Parser();
+    private final List<Task> tasks = new ArrayList<>();
+    private final Parser parser = new Parser();
 
     /**
      * Loads the task list information from the hard disk.
@@ -28,8 +28,8 @@ public class Storage {
                 Scanner scanner = new Scanner(file);
                 while (scanner.hasNext()) {
                     String taskString = scanner.nextLine();
-                    Task task = PARSER.taskStringToTask(taskString);
-                    this.TASKS.add(task);
+                    Task task = parser.taskStringToTask(taskString);
+                    this.tasks.add(task);
                 }
             } catch (FileNotFoundException e) {
                 //create the file if it does not exist.
@@ -40,7 +40,7 @@ public class Storage {
             createDataFolder();
             createFile();
         }
-        return TASKS;
+        return tasks;
     }
 
     /**
@@ -49,7 +49,7 @@ public class Storage {
     public void saveProgress() {
         try {
             FileWriter fw = new FileWriter("data/duke.txt");
-            for (Task task : TASKS) {
+            for (Task task : tasks) {
                 fw.write(task + "\n");
             }
             fw.close();

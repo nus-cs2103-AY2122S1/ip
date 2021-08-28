@@ -15,20 +15,20 @@ enum ActionType {
 public class Duke {
 
     private boolean isLive = true;
-    private final Storage STORAGE;
-    private final TaskList TASKLIST;
-    private final Ui UI;
-    private final Parser PARSER;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Ui ui;
+    private final Parser parser;
 
     /**
      * Constructor for a duke.
      */
     public Duke() {
-        PARSER = new Parser();
-        STORAGE = new Storage();
-        TASKLIST = new TaskList(STORAGE.loadFromDisk());
-        UI = new Ui(this.TASKLIST);
-        UI.greet();
+        parser = new Parser();
+        storage = new Storage();
+        taskList = new TaskList(storage.loadFromDisk());
+        ui = new Ui(this.taskList);
+        ui.greet();
     }
 
     /**
@@ -47,60 +47,60 @@ public class Duke {
      * @throws DukeException exceptions when processing the command
      */
     public void processCommand(String command) throws DukeException {
-        ActionType actionType = PARSER.parseActionType(command);
+        ActionType actionType = parser.parseActionType(command);
         switch (actionType) {
         case LIST:
-            UI.displayTasks();
+            ui.displayTasks();
             break;
         case TODO: {
-            String task = PARSER.parseTask(command);
-            ToDo toDo = TASKLIST.createTodo(task);
-            TASKLIST.addTask(toDo);
-            UI.showAddedTask(toDo);
-            STORAGE.saveProgress();
+            String task = parser.parseTask(command);
+            ToDo toDo = taskList.createTodo(task);
+            taskList.addTask(toDo);
+            ui.showAddedTask(toDo);
+            storage.saveProgress();
             break;
         }
         case DEADLINE: {
-            String task = PARSER.parseTask(command);
-            DeadLine ddl = TASKLIST.createDeadLine(task);
-            TASKLIST.addTask(ddl);
-            UI.showAddedTask(ddl);
-            STORAGE.saveProgress();
+            String task = parser.parseTask(command);
+            DeadLine ddl = taskList.createDeadLine(task);
+            taskList.addTask(ddl);
+            ui.showAddedTask(ddl);
+            storage.saveProgress();
             break;
         }
         case EVENT: {
-            String task = PARSER.parseTask(command);
-            Event event = TASKLIST.createEvent(task);
-            TASKLIST.addTask(event);
-            UI.showAddedTask(event);
-            STORAGE.saveProgress();
+            String task = parser.parseTask(command);
+            Event event = taskList.createEvent(task);
+            taskList.addTask(event);
+            ui.showAddedTask(event);
+            storage.saveProgress();
             break;
         }
         case DONE: {
-            int taskIdx = PARSER.getTaskIdx(command, TASKLIST.size());
-            Task toBeMarked = TASKLIST.get(taskIdx - 1);
-            TASKLIST.markTaskAsDone(taskIdx - 1);
-            UI.showMarkedAsDone(toBeMarked);
-            STORAGE.saveProgress();
+            int taskIdx = parser.getTaskIdx(command, taskList.size());
+            Task toBeMarked = taskList.get(taskIdx - 1);
+            taskList.markTaskAsDone(taskIdx - 1);
+            ui.showMarkedAsDone(toBeMarked);
+            storage.saveProgress();
             break;
         }
         case DELETE: {
-            int taskIdx = PARSER.getTaskIdx(command, TASKLIST.size());
-            Task toBeDeleted = TASKLIST.get(taskIdx - 1);
-            TASKLIST.deleteTask(toBeDeleted);
-            UI.showDeletedTask(toBeDeleted);
-            STORAGE.saveProgress();
+            int taskIdx = parser.getTaskIdx(command, taskList.size());
+            Task toBeDeleted = taskList.get(taskIdx - 1);
+            taskList.deleteTask(toBeDeleted);
+            ui.showDeletedTask(toBeDeleted);
+            storage.saveProgress();
             break;
         }
         case FIND: {
-            String keyword = PARSER.parseTask(command);
-            List<Task> matchedTasks = TASKLIST.findTask(keyword);
-            UI.showFoundTask(matchedTasks);
+            String keyword = parser.parseTask(command);
+            List<Task> matchedTasks = taskList.findTask(keyword);
+            ui.showFoundTask(matchedTasks);
             break;
         }
         case BYE: {
-            STORAGE.saveProgress();
-            UI.bye();
+            storage.saveProgress();
+            ui.bye();
             this.isLive = false;
             break;
         }

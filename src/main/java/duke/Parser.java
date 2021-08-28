@@ -102,9 +102,11 @@ public class Parser {
         String taskDescription = taskInfo[2];
         switch (taskType) {
         case "[D]":
-            return new DeadLine(taskDescription, LocalDate.parse(taskInfo[3], DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)), isDone);
+            return new DeadLine(taskDescription,
+                    LocalDate.parse(taskInfo[3], DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)), isDone);
         case "[E]":
-            return new Event(taskDescription, LocalDate.parse(taskInfo[3], DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)), isDone);
+            return new Event(taskDescription,
+                    LocalDate.parse(taskInfo[3], DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)), isDone);
         default:
             return new ToDo(taskDescription, isDone);
         }
@@ -120,7 +122,8 @@ public class Parser {
      * @throws NoSuchTaskException       If the task index is out of range of the listSize.
      * @throws EmptyDescriptionException If the task index is empty.
      */
-    public int getTaskIdx(String command, int listSize) throws InvalidTaskIndexException, NoSuchTaskException, EmptyDescriptionException {
+    public int getTaskIdx(String command, int listSize)
+            throws InvalidTaskIndexException, NoSuchTaskException, EmptyDescriptionException {
         String action = parseAction(command);
         String idxString = parseTask(command);
         int taskIdx;

@@ -9,16 +9,16 @@ import java.util.List;
  * Has operations to add/delete tasks in the list.
  */
 public class TaskList {
-    private final List<Task> TASKS;
-    private final Parser PARSER = new Parser();
+    private final List<Task> tasks;
+    private final Parser parser = new Parser();
 
     /**
      * Constructor for a task list.
      *
-     * @param TASKS A list of tasks.
+     * @param tasks A list of tasks.
      */
-    public TaskList(List<Task> TASKS) {
-        this.TASKS = TASKS;
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -27,7 +27,7 @@ public class TaskList {
      * @return The number of tasks in this list.
      */
     public int size() {
-        return TASKS.size();
+        return tasks.size();
     }
 
     /**
@@ -37,7 +37,7 @@ public class TaskList {
      * @return Returns the task at the specified position in this list.
      */
     public Task get(int idx) {
-        return this.TASKS.get(idx);
+        return this.tasks.get(idx);
     }
 
     /**
@@ -46,7 +46,7 @@ public class TaskList {
      * @param task Task to be appended to this list
      */
     public void addTask(Task task) {
-        this.TASKS.add(task);
+        this.tasks.add(task);
     }
 
     /**
@@ -55,7 +55,7 @@ public class TaskList {
      * @param toBeDeleted Task to be removed from this list, if present.
      */
     public void deleteTask(Task toBeDeleted) {
-        TASKS.remove(toBeDeleted);
+        tasks.remove(toBeDeleted);
     }
 
     /**
@@ -64,7 +64,7 @@ public class TaskList {
      * @param taskIdx The index of the task to be marked as done.
      */
     public void markTaskAsDone(int taskIdx) {
-        Task task = this.TASKS.get(taskIdx);
+        Task task = this.tasks.get(taskIdx);
         task.markAsDone();
     }
 
@@ -94,7 +94,7 @@ public class TaskList {
             String[] lst = task.split(" /by ");
             String description = lst[0];
             String ddl = lst[1];
-            LocalDate date = PARSER.stringToLocalDate(ddl);
+            LocalDate date = parser.stringToLocalDate(ddl);
             return new DeadLine(description, date, false);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new UnrecognizableCommandException();
@@ -118,7 +118,7 @@ public class TaskList {
             String[] lst = task.split(" /at ");
             String description = lst[0];
             String period = lst[1];
-            LocalDate date = PARSER.stringToLocalDate(period);
+            LocalDate date = parser.stringToLocalDate(period);
             return new Event(description, date, false);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new UnrecognizableCommandException();
@@ -133,7 +133,7 @@ public class TaskList {
      */
     public List<Task> findTask(String keyword) {
         List<Task> matchedTasks = new ArrayList<>();
-        this.TASKS.forEach((task) -> {
+        this.tasks.forEach((task) -> {
             if (task.getDescription().contains(keyword)) {
                 matchedTasks.add(task);
             }

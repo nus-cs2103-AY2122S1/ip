@@ -1,7 +1,5 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -10,11 +8,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * Tests the duke.
  */
 public class DukeTest {
-    List<Task> tasks = new ArrayList<>(Arrays.asList(new ToDo("return book", false),
+    private List<Task> tasks = new ArrayList<>(Arrays.asList(new ToDo("return book", false),
             new DeadLine("buy book", LocalDate.of(2020, 8, 23), false)));
 
     /**
@@ -43,16 +43,11 @@ public class DukeTest {
     @Test
     public void parseDate_invalidDate_invalidDateTimeException() {
         Parser parser = new Parser();
-        assertThrows(InvalidDateTimeException.class
-                , () -> parser.stringToLocalDate("2021-10-3"));
-        assertThrows(InvalidDateTimeException.class
-                , () -> parser.stringToLocalDate("2021-1-30"));
-        assertThrows(InvalidDateTimeException.class
-                , () -> parser.stringToLocalDate("2000-13-10"));
-        assertThrows(InvalidDateTimeException.class
-                , () -> parser.stringToLocalDate("20-10-29"));
-        assertThrows(InvalidDateTimeException.class
-                , () -> parser.stringToLocalDate("1999-1-3"));
+        assertThrows(InvalidDateTimeException.class, () -> parser.stringToLocalDate("2021-10-3"));
+        assertThrows(InvalidDateTimeException.class, () -> parser.stringToLocalDate("2021-1-30"));
+        assertThrows(InvalidDateTimeException.class, () -> parser.stringToLocalDate("2000-13-10"));
+        assertThrows(InvalidDateTimeException.class, () -> parser.stringToLocalDate("20-10-29"));
+        assertThrows(InvalidDateTimeException.class, () -> parser.stringToLocalDate("1999-1-3"));
     }
 
 
