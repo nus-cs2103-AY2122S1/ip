@@ -15,6 +15,11 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Constructor for a Duke object.
+     *
+     * @param filePath the path to store the taskList.txt file in.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
