@@ -6,12 +6,31 @@ public class AddCommand extends Command {
 
     private void checkDescription(String description, String type) throws NullDescription {
         int numOfCharacters =  type.length();
-        if (description.length() <= numOfCharacters) {
+        if (description.length() <= numOfCharacters || description.split(" ").length < 2) {
             throw new NullDescription(type);
         }
     }
 
-    public AddCommand(String input) throws NullDescription {
+    private void verifyDate(String dateInfo, String type) throws InvalidDateFormat {
+        switch(type) {
+            case "deadline":
+                if (dateInfo.split(" /by ").length != 2 ||
+                        dateInfo.split(" /by ")[1].split(" ").length != 2) {
+                    throw new InvalidDateFormat();
+                };
+                break;
+            case "event":
+                if (dateInfo.split(" /at ").length != 2 ||
+                        dateInfo.split(" /at ")[1].split(" ").length != 2) {
+                    throw new InvalidDateFormat();
+                };
+                break;
+            default:
+                break;
+        }
+    }
+
+    public AddCommand(String input) throws NullDescription, InvalidDateFormat {
         this.taskType = input.split(" ")[0];
 
         switch (input.split(" ")[0]) {
@@ -22,10 +41,12 @@ public class AddCommand extends Command {
             case "deadline":
                 checkDescription(input, "deadline");
                 this.taskInfo = input.substring(9);
+                verifyDate(taskInfo, "deadline");
                 break;
             case "event":
                 checkDescription(input, "event");
                 this.taskInfo = input.substring(6);
+                verifyDate(taskInfo, "event");
                 break;
             default:
                 System.out.println("Something went wrong...");
