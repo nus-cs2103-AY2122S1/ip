@@ -1,7 +1,7 @@
 package duke.domain;
 
-import java.util.List;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import duke.shared.DateHelpers;
 import duke.shared.DateRange;
@@ -15,7 +15,8 @@ public class Event extends Task {
 
     /**
      * Creates incomplete event with given name and date range over which the event takes place.
-     * @param name Name of event.
+     *
+     * @param name      Name of event.
      * @param dateRange Date range over which event takes place.
      */
     public Event(String name, String dateRange) {
@@ -26,8 +27,9 @@ public class Event extends Task {
 
     /**
      * Creates event with given name, completion status and date range over which the event takes place.
-     * @param name Name of event.
-     * @param isDone Whether event is to be marked complete upon creation.
+     *
+     * @param name      Name of event.
+     * @param isDone    Whether event is to be marked complete upon creation.
      * @param dateRange Date range over which event takes place.
      */
     public Event(String name, boolean isDone, String dateRange) {
@@ -37,14 +39,17 @@ public class Event extends Task {
 
     /**
      * Returns whether the given day falls within the date range of the event. Time component is ignored.
+     *
      * @param dateString String representing a day.
      * @return Whether the given day falls within the date range of the event.
      */
     public boolean isOccurringOnDay(String dateString) {
         return isOccurringOnDay(DateHelpers.parseDateString(dateString));
     }
+
     /**
      * Returns whether the given day falls within the date range of the event. Time component is ignored.
+     *
      * @param dateTime A day.
      * @return Whether the given day falls within the date range of the event.
      */
@@ -54,6 +59,7 @@ public class Event extends Task {
 
     /**
      * Returns whether the given datetime falls (non-strictly) within the date range.
+     *
      * @param dateTime Datetime.
      * @return Whether the given datetime falls (non-strictly) within the date range.
      */
@@ -63,6 +69,7 @@ public class Event extends Task {
 
     /**
      * Returns whether the given datetime falls strictly within the date range.
+     *
      * @param dateTime Datetime.
      * @return Whether the given datetime falls strictly within the date range.
      */
@@ -72,6 +79,7 @@ public class Event extends Task {
 
     /**
      * Returns an Event object from a given array of fields. Effectively the inverse of storageFields.
+     *
      * @return An Event object.
      */
     public static Task generateFromString(String[] fields) {

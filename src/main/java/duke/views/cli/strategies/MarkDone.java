@@ -12,6 +12,9 @@ import duke.domain.Task;
 public class MarkDone extends RespondWith {
     private List<Task> userTasks;
 
+    /**
+     * Creates a responder that responds to list and done commands.
+     */
     public MarkDone() {
         userTasks = new ArrayList<>();
         commands.put("list", (_query) -> listString());

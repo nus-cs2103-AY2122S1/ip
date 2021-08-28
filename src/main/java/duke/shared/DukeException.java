@@ -14,10 +14,14 @@ public class DukeException extends RuntimeException {
         FEWER_THAN_EXPECTED_ARGS("Too few arguments provided"), MORE_THAN_EXPECTED_ARGS("Too many arguments provided"),
         OUT_OF_BOUNDS("Out of bounds");
 
-        public String message;
+        private String message;
 
         private ExceptionCode(String message) {
             this.message = message;
+        }
+
+        public String getMessage() {
+            return message;
         }
     }
 
@@ -28,7 +32,7 @@ public class DukeException extends RuntimeException {
      * @param exceptionCode Code.
      */
     public DukeException(ExceptionCode exceptionCode) {
-        super(exceptionCode.message);
+        super(exceptionCode.getMessage());
         this.exceptionCode = exceptionCode;
     }
 
@@ -38,7 +42,7 @@ public class DukeException extends RuntimeException {
      * @param additionalMessage Message to supplement the exceptionCode's message.
      */
     public DukeException(ExceptionCode exceptionCode, String additionalMessage) {
-        super(exceptionCode.message + "; " + additionalMessage);
+        super(exceptionCode.getMessage() + "; " + additionalMessage);
         this.exceptionCode = exceptionCode;
     }
 
@@ -48,7 +52,7 @@ public class DukeException extends RuntimeException {
      * @param error Root cause of the DukeException.
      */
     public DukeException(ExceptionCode exceptionCode, Throwable error) {
-        super(exceptionCode.message, error);
+        super(exceptionCode.getMessage(), error);
         this.exceptionCode = exceptionCode;
     }
 
@@ -59,7 +63,7 @@ public class DukeException extends RuntimeException {
      * @param error Root cause of the DukeException.
      */
     public DukeException(ExceptionCode exceptionCode, String additionalMessage, Throwable error) {
-        super(exceptionCode.message + "; " + additionalMessage, error);
+        super(exceptionCode.getMessage() + "; " + additionalMessage, error);
         this.exceptionCode = exceptionCode;
     }
 

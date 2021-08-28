@@ -29,6 +29,9 @@ public class MultiType extends RespondWith {
 
     private final List<Task> userTasks;
 
+    /**
+     * Creates a responder that handles multiple types of tasks.
+     */
     public MultiType() {
         userTasks = new ArrayList<>();
         commands.put(list, this::listString);

@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeadlineTest {
-    Deadline deadline;
     static final String DEADLINE_NAME = "Some Deadline";
     static final String DATE_STRING = "3/5/2052 1700";
     static final String DAY = "3/5/2052";
+    Deadline deadline;
 
     @BeforeEach
     void setUp() {

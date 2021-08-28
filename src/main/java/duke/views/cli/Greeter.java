@@ -22,7 +22,7 @@ public class Greeter {
     /**
      * Generates greet response.
      */
-    public void greet() {
-        System.out.println(welcomeMessage);
+    public String greet() {
+        return welcomeMessage;
     }
 }

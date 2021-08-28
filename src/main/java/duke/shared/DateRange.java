@@ -9,12 +9,14 @@ import duke.constants.Constants;
  * Encapsulates a pair of start datetime and end datetime.
  */
 public class DateRange {
-    private LocalDateTime start, end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
     /**
      * Creates a DateRange object with the given start and end datetime.
+     *
      * @param start Start datetime.
-     * @param end End datetime.
+     * @param end   End datetime.
      * @throws DukeException When start datetime occurs after end datetime.
      */
     public DateRange(LocalDateTime start, LocalDateTime end) throws DukeException {
@@ -27,8 +29,9 @@ public class DateRange {
 
     /**
      * Creates a DateRange object with the given start and end datetime strings.
+     *
      * @param start String representing start datetime.
-     * @param end String representing end datetime.
+     * @param end   String representing end datetime.
      * @return DateRange object.
      * @throws DukeException When start datetime occurs after end datetime.
      */
@@ -42,9 +45,8 @@ public class DateRange {
      * datetime range. The string can of the following formats: dd/MM/yyyy
      * HHmm-dd/MM/yyyy HHmm or dd/MM/yyyy HHmm-HHmm The latter occurs on a single
      * day.
-     * 
+     *
      * @param range String representing a range of dates.
-     * 
      */
     public static DateRange createFromRange(String range) throws DukeException {
         String[] rangeArr = range.split(Constants.Input.DATE_RANGE_SEPARATOR);
@@ -61,6 +63,7 @@ public class DateRange {
 
     /**
      * Returns whether the date range is valid.
+     *
      * @return Whether the date range is valid.
      */
     public boolean isValid() {
@@ -69,6 +72,7 @@ public class DateRange {
 
     /**
      * Returns whether the date range is invalid.
+     *
      * @return Whether the date range is invalid.
      */
     public boolean isInvalid() {
@@ -77,6 +81,7 @@ public class DateRange {
 
     /**
      * Returns whether the given datetime occurs before the date range.
+     *
      * @param dateTime Datetime.
      * @return Whether the given datetime occurs before the date range.
      */
@@ -86,6 +91,7 @@ public class DateRange {
 
     /**
      * Returns whether the given date occurs in one of the days of the date range.
+     *
      * @param date Date.
      * @return Whether the given date occurs in one of the days of the date range
      */
@@ -95,6 +101,7 @@ public class DateRange {
 
     /**
      * Returns whether the given datetime occurs between (non-strictly) the date range.
+     *
      * @param dateTime Datetime.
      * @return Whether the given datetime occurs between (non-strictly) the date range.
      */
@@ -104,6 +111,7 @@ public class DateRange {
 
     /**
      * Returns whether the given datetime occurs between the date range.
+     *
      * @param dateTime Datetime.
      * @return Whether the given datetime occurs between the date range.
      */
@@ -113,6 +121,7 @@ public class DateRange {
 
     /**
      * Returns whether the given datetime occurs after the date range.
+     *
      * @param dateTime Datetime.
      * @return Whether the given datetime occurs after the date range.
      */
@@ -122,6 +131,7 @@ public class DateRange {
 
     /**
      * Returns a string that is the stored representation of a date range.
+     *
      * @return String representation of a date range to be stored.
      */
     public String toStorageString() {

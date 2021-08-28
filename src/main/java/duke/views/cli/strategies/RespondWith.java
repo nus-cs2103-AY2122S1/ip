@@ -19,14 +19,16 @@ public abstract class RespondWith {
      * when the given input matches the command.
      */
     protected Map<String, Function<String, String>> commands = new HashMap<>();
+    protected String endMessage = "bye";
 
     public RespondWith() {
         commands.put("bye", this::bye);
     }
 
+
     /**
      * Returns a string responding to an incoming input
-     * 
+     *
      * @param query Incoming input.
      * @return Response text.
      */
@@ -40,7 +42,6 @@ public abstract class RespondWith {
 
     }
 
-    protected String endMessage = "bye";
 
     private String bye(String _query) {
         return "See you again" + System.lineSeparator();
@@ -48,7 +49,7 @@ public abstract class RespondWith {
 
     /**
      * Returns a prettier formatted form of the given string.
-     * 
+     *
      * @param response Raw response text.
      * @return Formatted response text.
      */
@@ -60,7 +61,7 @@ public abstract class RespondWith {
 
     /**
      * Returns a boolean indicating if the chatbot program should terminate.
-     * 
+     *
      * @param query Incoming input.
      * @return Whether program should terminate.
      */
