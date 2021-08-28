@@ -12,7 +12,7 @@ public class Duke {
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
-    
+
     /**
      * Initialize each component of the program.
      * Loads any data available from filePath.
@@ -22,7 +22,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        
+
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
@@ -30,31 +30,31 @@ public class Duke {
             taskList = new TaskList();
         }
     }
-    
+
     /**
      * Run the program.
      */
     public void run() {
         String input;
-        
+
         // Program exits only if user inputs "bye"
         while (!(input = ui.readCommand()).equals("bye")) {
             try {
                 // Interpret and execute the command input by user
                 String message = Parser.interpretCommand(input).execute(taskList);
                 ui.printMessage(message);
-                
+
                 // Update storage file
                 storage.save(taskList.getTasks());
             } catch (DukeException | IOException e) {
                 ui.printMessage(e.getMessage());
             }
         }
-        
+
         // Exit Ui
         ui.exit();
     }
-    
+
     /**
      * Initialize and start the program.
      *
