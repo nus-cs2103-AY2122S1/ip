@@ -278,69 +278,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Loads tasks from task text file if exists, otherwise start new text file
-     */
-    private static void loadTasks() {
-        File tasks = new File(PATH);
-        if (tasks.exists()) {
-            // Read tasks from text file
-            Scanner s = null;
-            try {
-                s = new Scanner(tasks);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            while (s.hasNext()) {
-                // Parse string to get task type, status, and description
-                String regex = "\\[(?<type>[A-Z])\\]\\[(?<status>[X\\s])\\]\\s(?<desc>.*)";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(s.nextLine());
-
-                // Check task type, status, description
-                while (matcher.find()) {
-                    String type = matcher.group("type");
-                    String desc = matcher.group("desc");
-
-                    Task toAdd;
-                    if (type.equals("T")) {
-                        toAdd = new Todo(desc);
-                    } else if (type.equals("D")) {
-                        toAdd = Deadline.build(desc);
-                    } else {
-                        toAdd = Event.build(desc);
-                    }
-
-                    if (matcher.group("status").equals("X")) {
-                        toAdd.setDone();
-                    }
-                    taskList.addTask(toAdd);
-                }
-            }
-        }
-    }
-
-    /**
-     * Saves tasks into a text file
-     */
-    private static void saveTasks() {
-        File file = new File(PATH);
-        try {
-            // Create file if not already existing
-            file.createNewFile();
-            FileWriter fw = new FileWriter(PATH);
-
-            // Write current task list into file
-            for (Task t : taskList.getTaskList()) {
-                fw.write(t.toString());
-                fw.write(System.lineSeparator());
-            }
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) {
         String logo =
                 "$$$$$$$\\                                                             $$$$$\\                     $$\\       \n" +
@@ -358,12 +295,12 @@ public class Duke {
         System.out.print(reply("This Pepper Jack, wassup!"));
 
         // Load tasks from text file if exists
-        loadTasks();
+        Storage.loadTasks(taskList);
 
         // Start conversation with Pepper Jack
         startConvo();
 
         // Save tasks
-        saveTasks();
+        Storage.saveTasks(taskList);
     }
 }
