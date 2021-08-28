@@ -1,13 +1,13 @@
-package utils.command;
+package command;
 
-import utils.exceptions.DukeException;
-import utils.storage.Storage;
-import utils.task.*;
-import utils.ui.Ui;
+import exceptions.DukeException;
+import storage.Storage;
+import task.*;
+import ui.Ui;
 
 import java.util.Map;
 
-import static utils.ui.Parser.*;
+import static parser.Parser.*;
 
 public class AddCommand extends Command {
     public enum TaskType {

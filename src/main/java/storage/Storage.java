@@ -1,7 +1,7 @@
-package utils.storage;
+package storage;
 
-import utils.exceptions.DukeException;
-import utils.task.*;
+import exceptions.DukeException;
+import task.*;
 
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors

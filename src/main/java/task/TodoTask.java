@@ -1,6 +1,6 @@
-package utils.task;
+package task;
 
-import utils.exceptions.DukeException;
+import exceptions.DukeException;
 
 /**
  * The Deadline class encapsulates a task without any date/time attached to it.

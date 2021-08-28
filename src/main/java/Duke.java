@@ -1,9 +1,9 @@
-import utils.exceptions.DukeException;
-import utils.storage.Storage;
-import utils.task.*;
-import utils.command.Command;
-import utils.ui.Parser;
-import utils.ui.Ui;
+import exceptions.DukeException;
+import storage.Storage;
+import task.TaskList;
+import command.Command;
+import parser.Parser;
+import ui.Ui;
 
 public class Duke {
 

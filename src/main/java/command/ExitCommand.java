@@ -1,8 +1,8 @@
-package utils.command;
+package command;
 
-import utils.storage.Storage;
-import utils.task.TaskList;
-import utils.ui.Ui;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 
 public class ExitCommand extends Command {
 

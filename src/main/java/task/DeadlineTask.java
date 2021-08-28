@@ -1,6 +1,6 @@
-package utils.task;
+package task;
 
-import utils.exceptions.DukeException;
+import exceptions.DukeException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,44 +8,44 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The Deadline class encapsulates a task that start at a specific time and ends at a specific time.
+ * The Deadline class encapsulates a task that need to be done before a specific date/time.
  */
-public class EventTask extends Task {
+public class DeadlineTask extends Task {
     private static final LocalTime DEFAULT_TIME = LocalTime.parse("00:00");
 
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+    private static final DateTimeFormatter FORMATTER_DISPLAY_DATE = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter FORMATTER_DISPLAY_TIME = DateTimeFormatter.ofPattern("hh:mm a");
 
-    private static final DateTimeFormatter SAVE_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter SAVE_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+    private static final DateTimeFormatter FORMATTER_SAVE_DATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter FORMATTER_SAVE_TIME = DateTimeFormatter.ofPattern("HH:mm");
 
     private final LocalDate date;
     private final LocalTime time;
 
-    public static final String DELIMITER = " /at ";
+    public static final String DELIMITER = " /by ";
     private static final String DELIMITER_DATETIME = " ";
 
-    private EventTask(String description, LocalDate date, LocalTime time) {
+    private DeadlineTask(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
         this.time = time;
     }
 
-    private EventTask(String description, boolean isDone, LocalDate date, LocalTime time) {
+    private DeadlineTask(String description, boolean isDone, LocalDate date, LocalTime time) {
         super(description, isDone);
         this.date = date;
         this.time = time;
     }
 
     /**
-     * Returns a EventTask from String.
-     * E.g. If passed in ("return books /at 2021-10-15 18:00"),
-     * this function returns a EventTask Task with description "return books, and the correct date and time.
+     * Returns a DeadlineTask from String.
+     * E.g. If passed in ("return books /by 2021-10-15 18:00"),
+     * this function returns a Deadline Task with description "return books, and the correct date and time.
      *
      * @param command Format should follow the example.
-     * @return EventTask Object.
+     * @return DeadlineTask Object.
      */
-    public static EventTask getTaskFromCommandString(String command) throws DukeException {
+    public static DeadlineTask getTaskFromCommandString(String command) throws DukeException {
         try {
             String[] commandSplit = command.split(DELIMITER, 2);
             String[] dateTimeSplit = commandSplit[1].split(DELIMITER_DATETIME, 2);
@@ -53,30 +53,30 @@ public class EventTask extends Task {
             LocalDate date = LocalDate.parse(dateTimeSplit[0]);
             LocalTime time = dateTimeSplit.length < 2 ? DEFAULT_TIME : LocalTime.parse(dateTimeSplit[1]);
 
-            return new EventTask(commandSplit[0], date, time);
+            return new DeadlineTask(commandSplit[0], date, time);
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             throw new DukeException();
         }
     }
 
     /**
-     * Returns a EventTask from String.
+     * Returns a DeadlineTask from String.
      * E.g. If passed in ("1 | return books | 2021-10-12 | 13:20", " \\| ", "1"),
-     * this function returns a done EventTask with description "return books", and the correct date and time.
+     * this function returns a done DeadlineTask with description "return books", and the correct date and time.
      *
      * @param taskString Format should follow <done><delimiter><description><delimiter><date><delimiter><time>
      * @param delimiter  Delimiter separating the String into its formal parts.
      * @param done       Indicator for a done task.
-     * @return EventTask created from String.
+     * @return DeadlineTask created from String.
      * @throws DukeException if String is of the wrong format.
      */
-    public static EventTask getTaskFromStorageString(String taskString, String delimiter, String done) throws DukeException {
+    public static DeadlineTask getTaskFromStorageString(String taskString, String delimiter, String done) throws DukeException {
         try {
             String[] taskSplit = taskString.split(delimiter, 4);
             boolean isDone = taskSplit[0].equals(done);
             LocalDate date = LocalDate.parse(taskSplit[2]);
             LocalTime time = LocalTime.parse(taskSplit[3]);
-            return new EventTask(taskSplit[1], isDone, date, time);
+            return new DeadlineTask(taskSplit[1], isDone, date, time);
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             throw new DukeException();
         }
@@ -84,12 +84,12 @@ public class EventTask extends Task {
 
     @Override
     public String getTaskFileString(String delimiter, String done, String notDone) {
-        return "E" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description
-                + delimiter + date.format(SAVE_DATE_FORMATTER) + delimiter + time.format(SAVE_TIME_FORMATTER);
+        return "D" + delimiter + (this.isDone ? done : notDone) + delimiter + this.description
+                + delimiter + date.format(FORMATTER_SAVE_DATE) + delimiter + time.format(FORMATTER_SAVE_TIME);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date.format(dateFormatter) + " " + time.format(timeFormatter) + ")";
+        return "[D]" + super.toString() + " (by: " + date.format(FORMATTER_DISPLAY_DATE) + " " + time.format(FORMATTER_DISPLAY_TIME) + ")";
     }
 }

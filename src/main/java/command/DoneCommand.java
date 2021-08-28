@@ -1,12 +1,12 @@
-package utils.command;
+package command;
 
-import utils.exceptions.DukeException;
-import utils.helpers.helpers;
-import utils.storage.Storage;
-import utils.task.Task;
-import utils.task.TaskList;
-import utils.ui.Parser;
-import utils.ui.Ui;
+import exceptions.DukeException;
+import helpers.helpers;
+import storage.Storage;
+import task.Task;
+import task.TaskList;
+import parser.Parser;
+import ui.Ui;
 
 public class DoneCommand extends Command {
     private final String command;

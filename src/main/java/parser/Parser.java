@@ -1,7 +1,7 @@
-package utils.ui;
+package parser;
 
-import utils.command.*;
-import utils.exceptions.DukeException;
+import command.*;
+import exceptions.DukeException;
 
 public class Parser {
     /**
