@@ -51,10 +51,10 @@ public class Ui {
         } else {
             Dialog selectSaveFile = Dialog.generate("selectSaveFile");
             selectSaveFile.add("Select your save file:\n");
-            if (!java.nio.file.Files.exists(Paths.get(Storage.DIRECTORY_PATH))) {
-                Files.createDirectory(Paths.get(Storage.DIRECTORY_PATH));
+            if (!Storage.haveSaveLocation()) {
+                Storage.createSaveLocation();
             }
-            ArrayList<File> files = new ArrayList<>(Arrays.asList(Storage.getFilesFromDirectory(Storage.DIRECTORY_PATH)));
+            ArrayList<File> files = new ArrayList<>(Arrays.asList(Storage.getFilesFromDirectory(Storage.DIRECTORY_PATH + Storage.DATA_PATH)));
 
             int count = 1;
             for (int i = 0; i < files.size(); i++) {

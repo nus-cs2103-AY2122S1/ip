@@ -17,8 +17,9 @@ import java.util.stream.Collectors;
 
 public class Storage {
 
-    public static final String DIRECTORY_PATH = "./data";
-    private static final String DEFAULT_FILE_NAME = DIRECTORY_PATH + "/task_list.txt";
+    public static final String DIRECTORY_PATH = "./alice";
+    public static final String DATA_PATH = "/data";
+    private static final String DEFAULT_FILE_NAME = "task_list";
 
     private String filePath;
     private TaskList taskListRead;
@@ -33,13 +34,12 @@ public class Storage {
     }
 
     public Storage(String fileName) throws DialogException {
-        boolean directoryExists = java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH));
 
         try {
-            if (!directoryExists) {
-                Files.createDirectory(Paths.get(DIRECTORY_PATH));
+            if (!haveSaveLocation()) {
+                createSaveLocation();
             }
-            this.filePath = DIRECTORY_PATH + "/" + fileName + ".txt";
+            this.filePath = DIRECTORY_PATH + DATA_PATH +  "/" + fileName + ".txt";
             WRITER = new BufferedWriter(new FileWriter(filePath, true));
             READER = new BufferedReader(new FileReader(filePath));
         } catch (Exception e) {
@@ -50,10 +50,11 @@ public class Storage {
     public static boolean contains(String fileName) throws IOException {
         String full_file_name = fileName + ".txt";
 
-        if (!java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH))) {
-            Files.createDirectory(Paths.get(DIRECTORY_PATH));
+        if (!haveSaveLocation()) {
+            createSaveLocation();
         }
-        return new ArrayList<>(Arrays.stream(Storage.getFilesFromDirectory(Storage.DIRECTORY_PATH)).map(File::getName).collect(Collectors.toList())).contains(full_file_name);
+        return new ArrayList<>(Arrays.stream(Storage.getFilesFromDirectory(Storage.DIRECTORY_PATH + Storage.DATA_PATH))
+                    .map(File::getName).collect(Collectors.toList())).contains(full_file_name);
     }
 
     public TaskList load() {
@@ -87,6 +88,22 @@ public class Storage {
 
     public static File[] getFilesFromDirectory(String filePath) {
         return new File(filePath).listFiles();
+    }
+
+    public static boolean haveSaveLocation() {
+        return java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH)) && java.nio.file.Files.exists(Paths.get(DIRECTORY_PATH + DATA_PATH));
+    }
+
+
+    public static void createSaveLocation() throws IOException {
+        if (!haveSaveLocation()) {
+            if (!java.nio.file.Files.exists(Paths.get(Storage.DIRECTORY_PATH))) {
+                Files.createDirectory(Paths.get(Storage.DIRECTORY_PATH));
+            }
+            if (!java.nio.file.Files.exists(Paths.get(Storage.DIRECTORY_PATH + Storage.DATA_PATH))) {
+                Files.createDirectory(Paths.get(Storage.DIRECTORY_PATH + Storage.DATA_PATH));
+            }
+        }
     }
 
     public void save(TaskList taskList) throws IOException {

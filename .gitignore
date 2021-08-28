@@ -19,4 +19,5 @@ text-ui-test/EXPECTED-UNIX.TXT
 text-ui-test/EXPECTED-UNIX2.TXT
 text-ui-test/data
 data/*
+alice/*
 
