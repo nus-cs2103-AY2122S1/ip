@@ -75,7 +75,6 @@ public class Parser {
      * @throws Exception if the task does not have the correct Deadline format.
      */
     public static Task isValidDeadlineTask(String task) throws Exception {
-        //deadline 123 /by 2020-12-08 23:00
         if (!task.contains("deadline") || !task.contains("/by")) {
             throw new Exception("This is not a valid Deadline task.");
         }

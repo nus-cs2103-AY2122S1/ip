@@ -8,59 +8,25 @@ import duke.task.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
  * Dealing with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    private String path;
     private File src;
     private TaskList taskList;
-    private Ui ui;
 
-    public Storage(String path, TaskList taskList, Ui ui) {
-        this.path = path;
+    public Storage(String path, TaskList taskList) {
         try {
             this.src = new File(path);
+            this.taskList = taskList;
             if (this.src.createNewFile()) {
                 System.out.println("I have created a new file for you :)");
             }
         } catch (IOException e) {
             System.out.println("I cannot create a new file for you :(");
         }
-        this.taskList = taskList;
-        this.ui = ui;
-    }
-
-    public void addNewTodo(String task) throws Exception {
-        Task todoTask = Parser.isValidTodoTask(task);
-        taskList.add(todoTask);
-        this.ui.showAddNewTask();
-        saveNewTask(todoTask);
-    }
-
-    public void addNewDeadline(String task) throws Exception {
-        Task deadlineTask = Parser.isValidDeadlineTask(task);
-        taskList.add(deadlineTask);
-        ui.showAddNewTask();
-        saveNewTask(deadlineTask);
-    }
-
-    public void addNewEvent(String task) throws Exception {
-        Task eventTask = Parser.isValidEventTask(task);
-        taskList.add(eventTask);
-        ui.showAddNewTask();
-        saveNewTask(eventTask);
-    }
-
-    public void setTaskDone(String task) throws Exception {
-        int itemDone = Parser.findFinishedItem(task);
-        taskList.get(itemDone - 1).finished();
-        ui.showMarkTaskDone(itemDone);
-        modifyTasks();
     }
 
     public void modifyTasks() {
@@ -82,13 +48,6 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void deleteTask(String task) throws Exception {
-        int itemDeleted = Parser.findDeleteItem(task);
-        Task deletedTask = taskList.remove(itemDeleted - 1);
-        ui.showDeleteMessage(deletedTask);
-        modifyTasks();
     }
 
     public void readEvents(Scanner sc) {
@@ -145,17 +104,5 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void findTask(String task) {
-        String target = task.substring(5);
-        List<Integer> result = new ArrayList<>();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task cur = taskList.get(i);
-            if (cur.getTaskName().contains(target)) {
-                result.add(i);
-            }
-        }
-        ui.showFindingTasks(result);
     }
 }

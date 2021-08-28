@@ -1,6 +1,6 @@
 package duke;
 
-import duke.command.InputTypes;
+import duke.command.Command;
 import duke.command.Parser;
 import duke.command.Storage;
 import duke.command.TaskList;
@@ -12,10 +12,7 @@ import java.util.Scanner;
  * A robot that can respond to user's input, and help user store tasks
  */
 public class Duke {
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
-    private InputTypes t;
+    private Command command;
 
     /**
      * Constructor of Duke class.
@@ -23,9 +20,10 @@ public class Duke {
      * @param filePath The filePath of the file storing the data.
      */
     public Duke(String filePath) {
-        taskList = new TaskList();
-        ui = new Ui(taskList);
-        storage = new Storage(filePath, taskList, ui);
+        TaskList taskList = new TaskList();
+        Ui ui = new Ui(taskList);
+        Storage storage = new Storage(filePath, taskList);
+        this.command = new Command(taskList, ui, storage);
     }
 
     /**
@@ -33,9 +31,9 @@ public class Duke {
      */
     public void run() {
         //Read events stored in the input List
-        storage.loadSavedTasks();
+        command.loadSavedTasks();
 
-        ui.showLogo();
+        command.showLogo();
 
         Scanner inputScanner = new Scanner(System.in);
         String task = inputScanner.nextLine();
@@ -43,25 +41,25 @@ public class Duke {
             try {
                 switch (Parser.judgeType(task)) {
                 case TODO:
-                    storage.addNewTodo(task);
+                    command.addNewTodo(task);
                     break;
                 case EVENT:
-                    storage.addNewEvent(task);
+                    command.addNewEvent(task);
                     break;
                 case DEADLINE:
-                    storage.addNewDeadline(task);
+                    command.addNewDeadline(task);
                     break;
                 case DONE:
-                    storage.setTaskDone(task);
+                    command.setTaskDone(task);
                     break;
                 case LIST:
-                    ui.showList();
+                    command.showList();
                     break;
                 case DELETE:
-                    storage.deleteTask(task);
+                    command.deleteTask(task);
                     break;
                 case FIND:
-                    storage.findTask(task);
+                    command.findTask(task);
                     break;
                 case UNKNOWN:
                     throw new Exception("Cannot Understand");
@@ -77,7 +75,7 @@ public class Duke {
                 task = inputScanner.nextLine();
             }
         }
-        ui.showGoodBye();
+        command.showGoodBye();
     }
 
     public static void main(String[] args) {
