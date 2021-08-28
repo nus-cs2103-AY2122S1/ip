@@ -5,56 +5,37 @@ import java.io.IOException;
 import duke.exception.DukeException;
 import duke.misc.Parser;
 import duke.misc.TaskList;
-import duke.misc.Ui;
 
 /**
  * Driver class to simulate the 'Annie' chat bot program.
  */
 public class Duke {
-    private Ui ui;
-    private TaskList tl;
-    private Parser p;
+    private final TaskList tl;
+    private final Parser p;
 
     /**
      * Constructor for Duke class.
+     *
+     * @throws IOException In case of invalid directory.
      */
-    public Duke() {
-        ui = new Ui();
+    public Duke() throws IOException {
         tl = new TaskList();
+        tl.initialise();
         p = new Parser();
     }
 
     /**
-     * Method to simulate program.
+     * Returns an appropriate text reply for duke in the dialog box according
+     * to user's input message.
      *
-     * @throws IOException In case of invalid directory.
+     * @param input The user's input.
+     * @return A text that duke should reply with.
      */
-    public void run() throws IOException {
-        Ui.printBlock(Ui.WELCOME_MSG);
-        while (true) {
-            String command = ui.readCommand();
-            try {
-                Ui.printBlock(p.execute(command, tl));
-            } catch (DukeException e) {
-                Ui.printBlock(e.toString());
-            }
-            if (command.equals("bye")) {
-                tl.saveData();
-                break;
-            }
-        }
-    }
-
-    /**
-     * Driver method to start program.
-     *
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
+    public String getResponse(String input) {
         try {
-            new Duke().run();
-        } catch (IOException e) {
-            Ui.printBlock("No such directory!");
+            return p.execute(input, tl);
+        } catch (DukeException | IOException e) {
+            return e.toString();
         }
     }
 }

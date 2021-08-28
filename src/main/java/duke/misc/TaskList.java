@@ -19,12 +19,17 @@ public class TaskList {
      * Constructor for TaskList.
      */
     public TaskList() {
+        tasks = new ArrayList<>();
+    }
+
+    /**
+     * Initialises the TaskList using the stored data.
+     *
+     * @throws IOException In case of Invalid directory.
+     */
+    public void initialise() throws IOException {
         storage = new Storage();
-        try {
-            tasks = storage.readData();
-        } catch (IOException e) {
-            Ui.printBlock("No such directory!");
-        }
+        tasks = storage.readData();
     }
 
     /**
@@ -36,7 +41,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder("");
         int idx = 0;
         for (Task task : tasks) {
-            sb.append(String.format("%d.%s\n", ++idx, task.toString()));
+            sb.append(String.format("%d. %s", ++idx, task.toString()));
         }
         return sb.toString();
     }
