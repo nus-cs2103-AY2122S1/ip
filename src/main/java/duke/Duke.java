@@ -6,6 +6,12 @@ import duke.parser.CommandParser;
 import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
 /**
  * Represents the main Duke application.
@@ -46,6 +52,15 @@ public class Duke {
                 ui.print(e.getMessage());
             }
         }
+    }
+
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     public static void main(String[] args) {
