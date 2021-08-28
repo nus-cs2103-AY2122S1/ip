@@ -6,13 +6,9 @@ package duke.tasks;
 public class Task {
     /** Name of the task */
     private String taskname;
-<<<<<<< HEAD
 
     /** Whether the task is completed or not */
-    private boolean completed;
-=======
     private boolean isCompleted;
->>>>>>> branch-A-CodingStandard
 
     public Task(String taskname) {
         this.taskname = taskname;
