@@ -1,13 +1,19 @@
 package duke;
 
-import java.util.List;
 import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.util.List;
 
 public class TaskList {
     private List<Task> tasks;
     private Storage storage;
 
+    /**
+     * Returns a TaskList object. IOException is thrown if file does not
+     * exist and is unable to be created.
+     *
+     * @param storage Storage object used to read and write tasks from file
+     * @throws IOException if file does not exist and cannot be created
+     */
     public TaskList(Storage storage) throws IOException {
         this.storage = storage;
         this.tasks = storage.load();
