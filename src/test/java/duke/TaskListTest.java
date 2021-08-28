@@ -1,11 +1,9 @@
 package duke;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
-
-import org.junit.Test;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -20,7 +18,7 @@ public class TaskListTest {
         tasks.add(new Deadline("return book", "06-06-2021 18:00"));
         tasks.add(new Event("return book", "2-4pm"));
         TaskList taskList = new TaskList(tasks);
-        assertEquals(tasks, taskList.getTasks());
+        Assertions.assertEquals(tasks, taskList.getTasks());
     }
 
     @Test
@@ -30,7 +28,7 @@ public class TaskListTest {
         tasks.add(new Deadline("return book", "06-06-2021 18:00"));
         tasks.add(new Event("return book", "2-4pm"));
         TaskList taskList = new TaskList(tasks);
-        assertEquals(taskList.lastTask(), new Event("return book", "2-4pm"));
+        Assertions.assertEquals(taskList.lastTask(), new Event("return book", "2-4pm"));
     }
 
     @Test
@@ -41,7 +39,7 @@ public class TaskListTest {
         ArrayList<Task> expectedTasks = new ArrayList<>();
         expectedTasks.add(new Todo("return book"));
 
-        assertEquals(taskList, new TaskList(expectedTasks));
+        Assertions.assertEquals(taskList, new TaskList(expectedTasks));
     }
 
     @Test
@@ -52,7 +50,7 @@ public class TaskListTest {
         ArrayList<Task> expectedTasks = new ArrayList<>();
         expectedTasks.add(new Deadline("return book", "06-06-2021 18:00"));
 
-        assertEquals(taskList, new TaskList(expectedTasks));
+        Assertions.assertEquals(taskList, new TaskList(expectedTasks));
     }
 
     @Test
@@ -63,7 +61,7 @@ public class TaskListTest {
         ArrayList<Task> expectedTasks = new ArrayList<>();
         expectedTasks.add(new Event("return book", "06-06-2021 18:00"));
 
-        assertEquals(taskList, new TaskList(expectedTasks));
+        Assertions.assertEquals(taskList, new TaskList(expectedTasks));
     }
 
     @Test
@@ -79,7 +77,7 @@ public class TaskListTest {
         expectedTasks.add(new Todo("return book"));
         expectedTasks.add(new Deadline("return book", "06-06-2021 18:00"));
 
-        assertEquals(taskList, new TaskList(expectedTasks));
+        Assertions.assertEquals(taskList, new TaskList(expectedTasks));
     }
 
     @Test
@@ -87,7 +85,7 @@ public class TaskListTest {
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(new Todo("return book"));
         TaskList taskList = new TaskList(tasks);
-        assertThrows(DukeException.class, () -> taskList.deleteTask(2));
+        Assertions.assertThrows(DukeException.class, () -> taskList.deleteTask(2));
     }
 
     @Test
@@ -96,7 +94,7 @@ public class TaskListTest {
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(task);
         TaskList taskList = new TaskList(tasks);
-        assertEquals(taskList.markTaskDone(0), new Pair<Boolean, Task>(false, task));
+        Assertions.assertEquals(taskList.markTaskDone(0), new Pair<Boolean, Task>(false, task));
     }
 
     @Test
@@ -105,12 +103,12 @@ public class TaskListTest {
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(task);
         TaskList taskList = new TaskList(tasks);
-        assertEquals(taskList.markTaskDone(0), new Pair<Boolean, Task>(true, task));
+        Assertions.assertEquals(taskList.markTaskDone(0), new Pair<Boolean, Task>(true, task));
     }
 
     @Test
     public void testInvalidMarkTaskDone() {
         TaskList taskList = new TaskList(new ArrayList<Task>());
-        assertThrows(DukeException.class, () -> taskList.markTaskDone(2));
+        Assertions.assertThrows(DukeException.class, () -> taskList.markTaskDone(2));
     }
 }
