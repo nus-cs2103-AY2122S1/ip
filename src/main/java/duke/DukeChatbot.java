@@ -1,16 +1,15 @@
 package duke;
 
-import duke.command.Command;
-import duke.storage.StorageHandler;
-import duke.task.*;
-import duke.command.CommandParser;
-import duke.command.CommandType;
-import duke.command.DukeInvalidCommandException;
-import duke.ui.Ui;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import duke.command.Command;
+import duke.command.CommandParser;
+import duke.command.DukeInvalidCommandException;
+import duke.storage.StorageHandler;
+import duke.task.TaskHandler;
+import duke.ui.Ui;
 
 /**
  * Represents the Duke chatbot.

@@ -1,9 +1,5 @@
 package duke.storage;
 
-import duke.task.DeadlineTask;
-import duke.task.Task;
-import duke.task.ToDoTask;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -17,6 +13,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.DeadlineTask;
+import duke.task.Task;
+import duke.task.ToDoTask;
 
 /**
  * Helper class to handle loading and saving the list of tasks into storage.

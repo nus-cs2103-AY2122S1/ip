@@ -1,9 +1,9 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.List;
 import java.util.Map;
+
+import duke.task.Task;
 
 /**
  * Helper class to handle UI functionality.
