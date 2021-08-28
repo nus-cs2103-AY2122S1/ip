@@ -9,12 +9,27 @@ import main.java.task.DeadlineTask;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A class that encapsulates a Deadline Command given to Duke.
+ */
 public class DeadlineCommand extends Command {
 
+    /**
+     * Constructor for the DeadlineCommand class.
+     *
+     * @param input The input given by the user.
+     */
     public DeadlineCommand(String input) {
         super(input);
     }
 
+    /**
+     * Executes the deadline command with the given input.
+     *
+     * @param list The list of tasks to be modified by the command.
+     * @param ui The UI of Duke to be invoked by the command.
+     * @throws DukeException if the input given is not of the correct format.
+     */
     public void execute(TaskList list, UserInterface ui) throws DukeException {
 
         int position = input.indexOf("/by");

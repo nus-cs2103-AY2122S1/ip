@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * A class that encapsulates all UI components of Duke.
+ */
 public class UserInterface {
 
     private Scanner reader;
@@ -12,26 +15,49 @@ public class UserInterface {
 
     private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy - hh:mm a");
 
+    /**
+     * Constructor for the UserInterface class.
+     *
+     * Takes no parameters.
+     */
     UserInterface() {
         this.reader = new Scanner(System.in);
     }
 
+    /**
+     * Returns the String scanned from the user input.
+     *
+     * Takes no parameters.
+     *
+     * @return A String corresponding to the latest user input.
+     */
     public String readCommand() {
         return reader.nextLine();
     }
 
+    /**
+     * Shows the error message given to the user.
+     *
+     * @param error The error message to be shown to the user.
+     */
     public void showError(String error) {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
                 + error
                 + "\n-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }
 
+    /**
+     * Shows the error message to the user, specifically when local data is not found.
+     */
     public void showLoadingError() {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
                 + "Creating a new storage for the user..."
                 + "\n-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }
 
+    /**
+     * Shows the welcome message to the user.
+     */
     public void showWelcome() {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
                 + "Hello! My name is Duke!\n\n"
@@ -44,6 +70,9 @@ public class UserInterface {
                 + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }
 
+    /**
+     * Shows the exit message to the user.
+     */
     public void showBye() {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
                 + "Bye... Hope to see you again soon!\n"
@@ -52,13 +81,12 @@ public class UserInterface {
     }
 
     /**
-     * Shows the message for a main.java.task being added, according to the type of the main.java.task given.
+     * Shows the message for a task being added, according to the type of task given.
      *
-     * @param input The main.java.task to be added to the list.
+     * @param input The task to be added to the list.
      * @param type  The type id. Todo: 1, Deadline: 2, Event: 3.
      * @param length The current length of the list.
-     * @param time  The information regarding the main.java.task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
-     * @return The String sequence showing that the main.java.task has been added to the list.
+     * @param time  The information regarding the task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
      */
     public static void showTaskAdded(String input, int type, int length, String time) {
 

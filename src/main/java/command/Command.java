@@ -6,20 +6,30 @@ import main.java.bot.UserInterface;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A class that encapsulates a general Command given to Duke.
+ */
 public abstract class Command {
 
     protected String input;
-
     protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
 
+    /**
+     * Constructor for the Command class.
+     *
+     * @param input The input given by the user.
+     */
     public Command(String input) {
         this.input = input;
     }
 
     /**
-     * An abstract function that creates and returns the reply according to the user input.
+     * Executes the command with the given input.
+     * This is an abstract method.
      *
-     * @return A response corresponding to the user input / main.java.command.
+     * @param list The list of tasks to be modified by the command.
+     * @param ui The UI of Duke to be invoked by the command.
+     * @throws DukeException if the input given is not of the correct format.
      */
     public abstract void execute(TaskList list, UserInterface ui) throws DukeException;
 

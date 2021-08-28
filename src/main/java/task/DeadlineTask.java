@@ -3,19 +3,18 @@ package main.java.task;
 import java.time.LocalDateTime;
 
 /**
- * Task subclass that encapsulates the individual "Deadline" main.java.task passed into the main.java.bot.
+ * A class that encapsulates a Deadline Task stored by Duke.
  */
 public class DeadlineTask extends Task {
 
-    /**
-     * Variable that holds the deadline time as a LocalDateTime object
-     */
     protected LocalDateTime time;
-
     protected String storedTime = "";
 
     /**
-     * Constructor for the Deadline class
+     * Constructor for the DeadlineTask class.
+     *
+     * @param task The task to be stored within this DeadlineTask object.
+     * @param time The LocalDateTime object representation of the Deadline "by".
      */
     public DeadlineTask(String task, LocalDateTime time) {
         super(task);
@@ -23,7 +22,12 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Constructor for the Deadline class
+     * Constructor for the DeadlineTask class.
+     * This constructor is invoked when reading from the local data, in order to show the correct Task state.
+     *
+     * @param task The task to be stored within this DeadlineTask object.
+     * @param storedTime The String representation of the Deadline "by".
+     * @param done The state of the DeadlineTask object.
      */
     public DeadlineTask(String task, String storedTime, boolean done) {
         super(task, done);
@@ -31,15 +35,22 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Retrieves the completion state of the main.java.task, followed by the main.java.task input.
+     * Returns the String representation of the DeadlineTask object, showing the state and the task.
      *
-     * @return The String representation of the main.java.task completion state and the main.java.task input.
+     * Takes no parameters.
+     *
+     * @return A String enumerating this Task object.
      */
     @Override
     public String getTaskState() {
         return "[D]" + super.getTaskState() + "(By: " + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime) + ")";
     }
 
+    /**
+     * Returns the storage format of this DeadlineTask object.
+     *
+     * Takes no parameters.
+     */
     @Override
     public String convertToStorageFormat() {
         return "D,"

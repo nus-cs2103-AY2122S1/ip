@@ -1,35 +1,47 @@
 package main.java.task;
 
 /**
- * Task subclass that encapsulates the individual "Todo" main.java.task passed into the main.java.bot.
+ * A class that encapsulates a Todo Task stored by Duke.
  */
 public class TodoTask extends Task {
 
     /**
-     * Constructor for the Todo class
-     * Only takes in the string
+     * Constructor for the TodoTask class.
+     *
+     * @param task The task to be stored within this TodoTask object.
      */
     public TodoTask(String task) {
         super(task);
     }
 
     /**
-     * Constructor for the Todo class
+     * Constructor for the TodoTask class.
+     * This constructor is invoked when reading from the local data, in order to show the correct Task state.
+     *
+     * @param task The task to be stored within this TodoTask object.
+     * @param done The state of the TodoTask object.
      */
     public TodoTask(String task, boolean done) {
         super(task, done);
     }
 
     /**
-     * Retrieves the completion state of the main.java.task, followed by the main.java.task input.
+     * Returns the String representation of the TodoTask object, showing the state and the task.
      *
-     * @return The String representation of the main.java.task completion state and the main.java.task input.
+     * Takes no parameters.
+     *
+     * @return A String enumerating this Task object.
      */
     @Override
     public String getTaskState() {
         return "[T]" + super.getTaskState();
     }
 
+    /**
+     * Returns the storage format of this TodoTask object.
+     *
+     * Takes no parameters.
+     */
     @Override
     public String convertToStorageFormat() {
         return "T,"

@@ -9,12 +9,27 @@ import main.java.task.EventTask;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * A class that encapsulates an Event Command given to Duke.
+ */
 public class EventCommand extends Command {
 
+    /**
+     * Constructor for the EventCommand class.
+     *
+     * @param input The input given by the user.
+     */
     public EventCommand(String input) {
         super(input);
     }
 
+    /**
+     * Executes the event command with the given input.
+     *
+     * @param list The list of tasks to be modified by the command.
+     * @param ui The UI of Duke to be invoked by the command.
+     * @throws DukeException if the input given is not of the correct format.
+     */
     public void execute(TaskList list, UserInterface ui) throws DukeException {
 
         int position = input.indexOf("/at");

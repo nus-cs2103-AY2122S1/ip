@@ -9,10 +9,21 @@ import main.java.command.DeadlineCommand;
 import main.java.command.EventCommand;
 import main.java.command.ExitCommand;
 
+/**
+ * A class that handles the parsing of various inputs given to Duke by the user.
+ */
 public class Parser {
 
     private Command command;
 
+    /**
+     * Returns a Command object according to the input given by the user.
+     * Parses the user input using string matching.
+     *
+     * @param input The input given by the user.
+     * @return A Command object that corresponds to the input given.
+     * @throws DukeException if the input could not be parsed.
+     */
     public static Command parse(String input) throws DukeException {
 
         if (input.equals("list")) {

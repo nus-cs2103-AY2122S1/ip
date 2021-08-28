@@ -3,19 +3,18 @@ package main.java.task;
 import java.time.LocalDateTime;
 
 /**
- * Task subclass that encapsulates the individual "Event" main.java.task passed into the main.java.bot.
+ * A class that encapsulates an Event Task stored by Duke.
  */
 public class EventTask extends Task {
 
-    /**
-     * Variable that holds the deadline time as a LocalDateTime object
-     */
     protected LocalDateTime time;
-
     protected String storedTime = "";
 
     /**
-     * Constructor for the Event class
+     * Constructor for the EventTask class.
+     *
+     * @param task The task to be stored within this EventTask object.
+     * @param time The LocalDateTime object representation of the Event "at".
      */
     public EventTask(String task, LocalDateTime time) {
         super(task);
@@ -23,7 +22,12 @@ public class EventTask extends Task {
     }
 
     /**
-     * Constructor for the Event class
+     * Constructor for the EventTask class.
+     * This constructor is invoked when reading from the local data, in order to show the correct Task state.
+     *
+     * @param task The task to be stored within this EventTask object.
+     * @param storedTime The String representation of the Event "at".
+     * @param done The state of the EventTask object.
      */
     public EventTask(String task, String storedTime, boolean done) {
         super(task, done);
@@ -31,15 +35,22 @@ public class EventTask extends Task {
     }
 
     /**
-     * Retrieves the completion state of the main.java.task, followed by the main.java.task input.
+     * Returns the String representation of the EventTask object, showing the state and the task.
      *
-     * @return The String representation of the main.java.task completion state and the main.java.task input.
+     * Takes no parameters.
+     *
+     * @return A String enumerating this Task object.
      */
     @Override
     public String getTaskState() {
         return "[E]" + super.getTaskState() + "(At: " + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime) + ")";
     }
 
+    /**
+     * Returns the storage format of this EventTask object.
+     *
+     * Takes no parameters.
+     */
     @Override
     public String convertToStorageFormat() {
         return "E,"

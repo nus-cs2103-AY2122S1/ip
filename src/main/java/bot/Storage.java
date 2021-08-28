@@ -9,10 +9,23 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+/**
+ * A class that handles the storage of list data in a txt format.
+ * The data is stored in the local hard drive.
+ */
 public class Storage {
 
     private static final String FILE_PATH = "data/duke.txt";
 
+    /**
+     * Returns a TaskList object de-serialised from the local data.
+     * If no local data exists, returns an empty TaskList object.
+     *
+     * Takes no parameters.
+     *
+     * @return A TaskList object that will contain all the tasks given to Duke by the user.
+     * @throws DukeException if there is an error loading the local data.
+     */
     public static TaskList load() throws DukeException {
         try {
             // Set up the list of lines and the reader
@@ -34,6 +47,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current list as a local txt file.
+     *
+     * @param list The list to be saved into the local Data directory.
+     * @throws DukeException if there is an error saving the local data.
+     */
     public static void save(TaskList list) throws DukeException {
 
         // Set up the file

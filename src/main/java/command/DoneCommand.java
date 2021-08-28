@@ -6,12 +6,27 @@ import main.java.bot.TaskList;
 import main.java.bot.UserInterface;
 import main.java.task.Task;
 
+/**
+ * A class that encapsulates a Done Command given to Duke.
+ */
 public class DoneCommand extends Command {
 
+    /**
+     * Constructor for the DoneCommand class.
+     *
+     * @param input The input given by the user.
+     */
     public DoneCommand(String input) {
         super(input);
     }
 
+    /**
+     * Executes the done command with the given input.
+     *
+     * @param list The list of tasks to be modified by the command.
+     * @param ui The UI of Duke to be invoked by the command.
+     * @throws DukeException if the input given is not of the correct format.
+     */
     public void execute(TaskList list, UserInterface ui) throws DukeException {
         try {
 
