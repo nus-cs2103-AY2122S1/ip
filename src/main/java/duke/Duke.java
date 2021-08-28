@@ -18,6 +18,7 @@ public class Duke {
     private final TaskList taskList;
     private final Storage storage;
     private final UI ui;
+    private boolean isExit;
 
     /**
      * Constructs an instance of Duke.
@@ -32,8 +33,18 @@ public class Duke {
         this.storage = new Storage(dirName, fileName);
         this.taskList = new TaskList(storage.loadTasks());
         this.ui = new UI();
+        this.isExit = false;
     }
 
+    public boolean getExitStatus() {
+        return this.isExit;
+    }
+
+    public UI getUI() {
+        return this.ui;
+    }
+
+    /*
     private void run() {
         ui.printStartUpMessage();
         boolean isExit = false;
@@ -51,9 +62,22 @@ public class Duke {
             }
         }
     }
+    */
 
-    public static void main(String[] args) {
-        Duke duke = new Duke("data", "duke.txt");
-        duke.run();
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            command.execute(taskList, ui, storage);
+            isExit = command.isExit();
+            return command.getOutput();
+        } catch (DukeException ex) {
+            return ui.printErrorMessage(ex);
+        } catch (IOException ex) {
+            return ex.getMessage();
+        }
     }
 }
