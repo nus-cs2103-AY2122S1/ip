@@ -2,7 +2,10 @@ package duke.util;
 
 // import duke packages
 import duke.DukeException;
+import duke.task.Task;
 import duke.task.TaskList;
+
+import java.util.ArrayList;
 
 public class Ui {
     private String logo;
@@ -79,4 +82,26 @@ public class Ui {
         System.out.println(line);
     }
 
+    /**
+     * Displays successful query of matching tasks.
+     *
+     * @param results Successful matches.
+     */
+    public void showMatchingTasks(ArrayList<Task> results) {
+        System.out.println(line);
+        System.out.println("ive found some matches for your search query:");
+        for (int i = 0; i < results.size(); i++) {
+            System.out.println((i + 1) + "." + results.get(i));
+        }
+        System.out.println(line);
+    }
+
+    /**
+     * Displays no matches found
+     */
+    public void showNoMatch() {
+        System.out.println(line);
+        System.out.println("im sorry i couldn't find any matches :(");
+        System.out.println(line);
+    }
 }

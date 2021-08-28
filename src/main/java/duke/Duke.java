@@ -4,12 +4,14 @@ package duke;
 import duke.command.Deadline;
 import duke.command.Event;
 import duke.command.Todo;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
 // import java packages
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -90,6 +92,18 @@ public class Duke {
                         count--;
                     } else {    // throw exception when itemNo not within limit
                         throw new DukeException("i cant seem to find the task you're looking for");
+                    }
+                } else if (Parser.isFind(cmd)) {
+                    String desc = Parser.getDesc(cmd);
+                    if (Parser.isMissingArg(cmd)) {       // make sure desc is not empty
+                        // case when only a whitespace follows a command
+                        throw new DukeException("the description of a find cannot be empty");
+                    }
+                    ArrayList<Task> matchingTasks = cmdList.find(desc);
+                    if (matchingTasks.isEmpty()) {
+                        ui.showNoMatch();
+                    } else {
+                        ui.showMatchingTasks(matchingTasks);
                     }
                 } else {         // throw exception when command not found
                     // Error handling for todo, deadline & event

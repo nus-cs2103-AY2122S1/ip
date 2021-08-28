@@ -72,6 +72,17 @@ public class Parser {
     public static boolean isEmptyTask(String cmd) {
         return cmd.equals("todo")
                 || cmd.matches("deadline *")
-                || cmd.matches("event *");
+                || cmd.matches("event *")
+                || cmd.matches("find *");
+    }
+
+    /**
+     * Checks if command is find.
+     *
+     * @param cmd Command to check.
+     * @return Whether command is find.
+     */
+    public static boolean isFind(String cmd) {
+        return cmd.matches("^find .*$");
     }
 }
