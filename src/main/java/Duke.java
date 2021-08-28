@@ -154,7 +154,7 @@ public class Duke {
                 }else{
                     text = text.concat("0|");
                 }
-                text = text.concat(t.description + "|" + ((Deadline) t).by + "\n");
+                text = text.concat(t.description + "|" + ((Deadline) t).time + "\n");
             }
             if(t.label.equals("E")){
                 text =  text.concat("E|");
