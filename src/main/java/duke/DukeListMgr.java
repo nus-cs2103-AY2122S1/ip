@@ -151,7 +151,7 @@ public class DukeListMgr {
      */
     public String findMatchingTaskInList(String keyword) throws DukeExceptionBase {
         if (keyword.contains(" ")) {
-            throw new DukeExceptionBase("find only works with keywords. (Cannot contain spaces)");
+            throw new DukeExceptionBase("find only works with keywords. (A keyword cannot contain spaces)");
         }
 
         ArrayList<BaseTask> foundTaskList = new ArrayList<>();
