@@ -14,8 +14,8 @@ public class UI {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Stay on track with Duke!\n" +
-                "How can I help you?");
+        System.out.println("Stay on track with Duke!\n"
+                + "How can I help you?");
     }
 
     /** Prints goodbye message **/
@@ -32,8 +32,8 @@ public class UI {
 
     /** Prints a message for when there is an unknown DukeException **/
     public static void dukeException() {
-        System.out.println("There seems to be an error with Duke." +
-                "Please try again!");
+        System.out.println("There seems to be an error with Duke."
+                + "Please try again!");
     }
 
     /**

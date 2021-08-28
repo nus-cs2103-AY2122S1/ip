@@ -19,7 +19,7 @@ import duke.task.ToDo;
  */
 public class Parser {
     /** Whether Duke should continue running after handling **/
-    public static boolean isRunning = true;
+    private static boolean isRunning = true;
 
     /** TaskList object used by Duke **/
     private static TaskList taskList;
@@ -158,8 +158,8 @@ public class Parser {
     }
 
     /**
-     * Triggered when delete command is identified
      * Deletes the task with the task number provided
+     * Triggered when delete command is identified
      *
      * @throws DukeException If there is none or invalid task number provided
      */
@@ -178,10 +178,19 @@ public class Parser {
         taskList.list();
     }
 
-    public static void handleFind() throws DukeException {
+    /**
+     * Prints tasks that match the user string
+     * Triggered when find command is identified
+     * @throws MissingTaskNameException If no task name provided
+     */
+    public static void handleFind() throws MissingTaskNameException {
         if (words.length < 2) {
             throw new MissingTaskNameException("Missing task name");
         }
         taskList.find(words[1]);
+    }
+
+    public static boolean isRunning() {
+        return Parser.isRunning();
     }
 }
