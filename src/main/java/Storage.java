@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-public class DukeStorage {
+public class Storage {
     private static final String FILE_NAME = "./data/allTasks.txt";
     private static final File file = new File(FILE_NAME);
 
@@ -28,7 +28,7 @@ public class DukeStorage {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException e) {
-            System.err.println("IOException: ");
+            Ui.printCreateDirectoryErr();
         }
     }
 
@@ -38,7 +38,7 @@ public class DukeStorage {
             fileWriter.write(task.formatToWrite() + System.lineSeparator());
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException("IOException: ");
+            throw new DukeException(Ui.ioMsg());
         }
     }
 
@@ -50,7 +50,7 @@ public class DukeStorage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException("IOException: ");
+            throw new DukeException(Ui.ioMsg());
         }
     }
 
