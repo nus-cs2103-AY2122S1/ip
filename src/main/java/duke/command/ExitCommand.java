@@ -6,6 +6,7 @@ import duke.task.TaskList;
 
 import duke.ui.Ui;
 
+/** A class for exit command. */
 public class ExitCommand extends Command {
     public ExitCommand() {}
 

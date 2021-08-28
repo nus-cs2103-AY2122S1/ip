@@ -9,9 +9,15 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/** A class for add task command. */
 public class AddCommand extends Command {
     private Task task;
 
+    /**
+     * Constructs an add command class.
+     *
+     * @param task The task to be added.
+     */
     public AddCommand(Task task) {
         this.task = task;
     }

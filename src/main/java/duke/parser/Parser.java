@@ -13,8 +13,15 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
+/** A parser class that parses user's commands. */
 public class Parser {
-    // TODO: Simplify program and exceptions
+    /**
+     * Parses the input into its corresponding commands.
+     *
+     * @param input The string command.
+     * @return The corresponding Command object.
+     * @throws DukeException If the command is invalid.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("list")) {
             return new ListCommand();
