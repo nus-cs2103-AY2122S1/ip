@@ -1,3 +1,3 @@
-T | 0 | Read Lecture Notes | 
-E | 0 | attend class | 2019-08-28 11:00
+T | 1 | Read Lecture Notes | 
+E | 1 | attend class | 2019-08-28 11:00
 D | 0 | finish tutorial | 2019-08-28 15:00

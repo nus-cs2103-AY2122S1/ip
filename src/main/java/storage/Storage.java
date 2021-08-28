@@ -30,15 +30,15 @@ public class Storage {
                 String[] output = line.split("\\s\\|\\s");
                 switch (output[0]) {
                     case "T":
-                        Task newTodo = new Todo(output[2], output[1] == "1");
+                        Task newTodo = new Todo(output[2], output[1].equals("1"));
                         taskList.add(newTodo);
                         break;
                     case "D":
-                        Task newDeadline = new Deadline(output[2], output[3], output[1] == "1");
+                        Task newDeadline = new Deadline(output[2], output[3], output[1].equals("1"));
                         taskList.add(newDeadline);
                         break;
                     case "E":
-                        Task newEvent = new Event(output[2], output[3], output[1] == "1");
+                        Task newEvent = new Event(output[2], output[3], output[1].equals("1"));
                         taskList.add(newEvent);
                         break;
                     default:
