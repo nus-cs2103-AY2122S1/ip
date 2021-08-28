@@ -93,7 +93,7 @@ public class Parser {
      * @param userInput given by user.
      * @return string to inform user of successful command.
      */
-    private String addTodo(String[] userInput) throws DukeException {
+    private String addTodo(String... userInput) throws DukeException {
         try {
             return addTask(new Todo(userInput[1]));
         } catch (IndexOutOfBoundsException e) {
@@ -107,7 +107,7 @@ public class Parser {
      * @param userInput given by user.
      * @return string to inform user of successful command.
      */
-    private String addDeadline(String[] userInput) throws DukeException {
+    private String addDeadline(String... userInput) throws DukeException {
         try {
             String deadlineDescription = userInput[1].split(" /by ")[0];
             String by = userInput[1].split(" /by ")[1];
@@ -123,7 +123,7 @@ public class Parser {
      * @param userInput given by user.
      * @return string to inform user of successful command.
      */
-    private String addEvent(String[] userInput) throws DukeException {
+    private String addEvent(String... userInput) throws DukeException {
         try {
             String eventDescription = userInput[1].split(" /at ")[0];
             String by = userInput[1].split(" /at ")[1];
@@ -139,7 +139,7 @@ public class Parser {
      * @param userInput given by user.
      * @return string to inform user of successful command.
      */
-    private String deleteTask(String[] userInput) throws DukeException {
+    private String deleteTask(String... userInput) throws DukeException {
         try {
             int i = Integer.parseInt(userInput[1]);
             Task task = tasks.get(i - 1);
@@ -160,7 +160,7 @@ public class Parser {
      * @param userInput given by user.
      * @return string to inform user of successful command.
      */
-    private String findTask(String[] userInput) throws DukeException {
+    private String findTask(String... userInput) throws DukeException {
         try {
             return tasks.filter(userInput[1]).print("Here are the matching tasks in your list:");
         } catch (IndexOutOfBoundsException e) {
@@ -174,7 +174,7 @@ public class Parser {
      * @param userInput given by user.
      * @return string to inform user of successful command.
      */
-    private String setTaskDone(String[] userInput) throws DukeException {
+    private String setTaskDone(String... userInput) throws DukeException {
         try {
             int i = Integer.parseInt(userInput[1]);
             Task task = tasks.get(i - 1);
