@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.data.DateAndTime;
 import duke.data.exceptions.DukeException;
@@ -25,6 +26,7 @@ public class Parser {
     private static final String LIST = "list";
     private static final String DONE = "done";
     private static final String DELETE = "delete";
+    private static final String FIND = "find";
 
     public Parser() {}
 
@@ -83,6 +85,16 @@ public class Parser {
                 } else {
                     int taskNumber = getTaskNumber(command);
                     return new DeleteCommand(taskNumber);
+                }
+            }
+        case FIND:
+            if (command.equals(FIND)) {
+                throw new InvalidInputException("invalid find");
+            } else {
+                if (!Character.isWhitespace(command.charAt(FIND.length()))) {
+                    throw new InvalidInputException("invalid input");
+                } else {
+                    return new FindCommand(command);
                 }
             }
         default:

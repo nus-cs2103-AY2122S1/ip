@@ -25,6 +25,10 @@ public class Task {
 
     public boolean isEmpty() { return isEmpty; }
 
+    public String getTaskName() {
+        return taskName;
+    }
+
     /**
      * Returns a checkbox in a string, representing the status of the task.
      *
