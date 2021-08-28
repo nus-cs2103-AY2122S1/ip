@@ -34,19 +34,19 @@ public class TaskList {
         Task task = myTasks.get(index);
         boolean isDone = task.markAsDone();
         if (printMsg) {
-            Ui.taskDoneMessage(task, isDone);
+            Ui.showTaskDoneMessage(task, isDone);
         }
     }
 
     public void deleteTask(int index) {
         Task task = myTasks.remove(index);
-        Ui.removeTaskMsg(task, myTasks.size());
+        Ui.showRemoveTaskMsg(task, myTasks.size());
     }
 
     public void addTask(Task task, boolean printMsg) {
         myTasks.add(task);
         if (printMsg) {
-            Ui.addTaskMsg(task, myTasks.size());
+            Ui.showAddTaskMsg(task, myTasks.size());
         }
     }
 }

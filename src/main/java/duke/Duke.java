@@ -26,7 +26,7 @@ public class Duke {
         Scanner scan = new Scanner(System.in);
         Parser myParser = new Parser();
 
-        Ui.welcomeMessage();
+        Ui.showWelcomeMessage();
 
         boolean checker = true;
         while (checker) {
