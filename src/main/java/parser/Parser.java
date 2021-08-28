@@ -14,6 +14,7 @@ public class Parser {
     public static final String COMMAND_EVENT = "event";
     public static final String COMMAND_DONE = "done";
     public static final String COMMAND_DELETE = "delete";
+    public static final String COMMAND_FIND = "find";
 
     private static final String DELIMITER = " ";
 
@@ -66,6 +67,8 @@ public class Parser {
         case COMMAND_DELETE:
             command = new DeleteCommand(fullCommand, DELIMITER);
             break;
+        case COMMAND_FIND:
+            command = new FindCommand(fullCommand, DELIMITER);
         default:
             break;
         }
