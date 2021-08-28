@@ -12,7 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for a Deadline object.
-     * 
+     *
      * @param desc The description of the task.
      * @param by The deadline of the task.
      * @throws DukeException If the deadline is not in yyyy-mm-dd format.
@@ -22,20 +22,20 @@ public class Deadline extends Task {
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            throw new DukeException("duke.Deadline should be in the form yyyy-mm-dd" +
-                    "\ni.e. deadline read book /by 2021-06-18"); 
+            throw new DukeException("duke.Deadline should be in the form yyyy-mm-dd"
+                    + "\ni.e. deadline read book /by 2021-06-18");
         }
     }
 
     /**
      * A method that converts the task data into a suitable format to be saved in a save file.
-     * 
+     *
      * @return The formatted data as a string.
      */
     public String toData() {
         return super.toData() + "~S~" + by;
     }
-    
+
     @Override
     public String toString() {
         String byFormatted = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

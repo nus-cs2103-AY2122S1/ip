@@ -10,19 +10,19 @@ public abstract class Task {
 
     /**
      * Constructor for a Task object.
-     * 
+     *
      * @param description The description of the task.
      * @param icon Marker that indicates the type of task.
      */
     public Task(String description, String icon) {
         this.description = description;
-        this.icon = icon; 
+        this.icon = icon;
         this.isDone = false;
     }
 
     /**
      * A method that gets a marker that indicates if task is complete.
-     * 
+     *
      * @return A marker that indicates if task is complete.
      */
     public String getStatusIcon() {
@@ -30,19 +30,19 @@ public abstract class Task {
     }
 
     /**
-     * A method that marks the task as done. 
+     * A method that marks the task as done.
      */
     public void markAsDone() {
         isDone = true;
     }
-    
+
     /** A method that indicates whether the task description contains a keyword.
-     * 
+     *
      * @param keyword The keyword to be searched for in the description.
      * @return Boolean indicating whether the keyword is found in the description.
      */
     public boolean contains(String keyword) {
-        return description.toLowerCase().indexOf(keyword.toLowerCase()) != -1; 
+        return description.toLowerCase().indexOf(keyword.toLowerCase()) != -1;
     }
 
     /**
@@ -51,8 +51,8 @@ public abstract class Task {
      * @return The formatted data as a string.
      */
     public String toData() {
-        String isDoneNum = isDone ? "1" : "0"; 
-        return String.format("%s~S~%s~S~%s", icon, isDoneNum, description); 
+        String isDoneNum = isDone ? "1" : "0";
+        return String.format("%s~S~%s~S~%s", icon, isDoneNum, description);
     }
 
     @Override

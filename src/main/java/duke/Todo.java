@@ -6,7 +6,7 @@ package duke;
 public class Todo extends Task {
     /**
      * Constructor for a Todo object.
-     * 
+     *
      * @param desc The description of the task.
      */
     public Todo(String desc) {

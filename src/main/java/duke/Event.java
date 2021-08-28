@@ -8,7 +8,7 @@ public class Event extends Task {
 
     /**
      * Constructor for an Event object.
-     * 
+     *
      * @param desc The description of the task.
      * @param at Statement that indicates when the task starts.
      */
@@ -23,9 +23,9 @@ public class Event extends Task {
      * @return The formatted data as a string.
      */
     public String toData() {
-        return super.toData() + "~S~" + at; 
+        return super.toData() + "~S~" + at;
     }
-    
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
