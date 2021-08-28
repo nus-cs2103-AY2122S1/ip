@@ -3,7 +3,7 @@ import commands.AddEventCommand;
 import commands.AddToDoCommand;
 import commands.DeleteCommand;
 import exceptions.DukeException;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 import tasks.TaskList;
 import tasks.ToDoTask;
 
