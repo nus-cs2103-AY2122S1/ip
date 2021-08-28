@@ -43,7 +43,11 @@ public class Ui {
         out.println("Could not load your saved tasks. Creating a new task list...");
     }
 
-    /** Displays the error message when Duke cannot save current tasks to file. */
+    /**
+     * Displays the error message when Duke cannot save current tasks to file.
+     *
+     * @param msg The message of the error thrown.
+     */
     public void showSavingError(String msg) {
         out.println("Error while saving tasks: \n" + msg);
     }
@@ -58,12 +62,20 @@ public class Ui {
         out.println();
     }
 
-    /** Reads the next user command. */
+    /**
+     * Reads the next user command.
+     *
+     * @return The next user command, read as a whole line.
+     */
     public String getUserCommand() {
         return in.nextLine();
     }
 
-    /** Displays the command execution result. */
+    /**
+     * Displays the command execution result.
+     *
+     * @param result The result to show to the user.
+     */
     public void showResultToUser(CommandResult result) {
         out.println(result.getMessage());
     }
