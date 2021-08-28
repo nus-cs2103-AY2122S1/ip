@@ -11,5 +11,5 @@ public interface Command {
      *
      * @throws DukeException When the command activity throws the exception.
      */
-    public void execute() throws DukeException;
+    public String execute() throws DukeException;
 }

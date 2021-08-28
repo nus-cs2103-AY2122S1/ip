@@ -29,12 +29,12 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         if (TaskList.isAdded(task, tasks)) {
-            this.ui.print(String.format(Messages.TASK_ALREADY_ADDED, task.toString()));
+            return String.format(Messages.TASK_ALREADY_ADDED, task.toString());
         } else {
             tasks.add(task);
-            ui.printTaskAdded(task, tasks.size());
+            return ui.printTaskAdded(task, tasks.size());
         }
     }
 }

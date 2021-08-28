@@ -33,7 +33,7 @@ public class DelCommand implements Command {
 
 
     @Override
-    public void execute() {
+    public String execute() {
         //have to account for when it is a dated item.
         Task t = this.tasklist.remove(delPos - 1);
         //can use instanceof for this
@@ -41,7 +41,8 @@ public class DelCommand implements Command {
             DatedTask dt = (DatedTask) t;
             dt.removeFromTable(table);
         }
-        delUI.printTaskDel(t, tasklist.size());
+        return delUI.printTaskDel(t, tasklist.size());
+
     }
 
 

@@ -17,9 +17,12 @@ public class CommandList extends ArrayList<Command> {
      *
      * @throws DukeException When a class in the list has the exception.
      */
-    public void executeAll() throws DukeException {
+    public String executeAll() throws DukeException {
+        String output = "";
         for (int i = 0; i < this.size(); i++) {
-            this.get(i).execute();
+            output += this.get(i).execute();
+
         }
+        return output;
     }
 }

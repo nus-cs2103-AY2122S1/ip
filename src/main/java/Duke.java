@@ -53,7 +53,21 @@ public class Duke {
 
 
 
+    public String getResponse(String inpt) {
+        try {
+            CommandList cmds = parser.inputsParser(inpt);
+            String result = cmds.executeAll();
+            this.stg.write(this.tasks);
+            return result;
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "Expected date format YYYY MM DD";
+        } catch (IOException e) {
+            return e.getMessage();
+        }
 
+    }
 
 
     /**

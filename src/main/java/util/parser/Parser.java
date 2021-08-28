@@ -123,6 +123,7 @@ public class Parser {
                     if (ls != null) {
                         ui.list(ls);
                     }
+                    return "";
                 });
                 break;
             case DELETE:
@@ -135,12 +136,18 @@ public class Parser {
             case EVENT:
                 Event e = Event.of(description);
                 cmds.add(new AddCommand(taskList, e));
-                cmds.add(() -> dateTaskList.add(e));
+                cmds.add(() -> {
+                    dateTaskList.add(e);
+                    return "";
+                });
                 break;
             case DEADLINE:
                 Deadline d = Deadline.of(description);
                 cmds.add(new AddCommand(taskList, d));
-                cmds.add(() -> dateTaskList.add(d));
+                cmds.add(() -> {
+                    dateTaskList.add(d);
+                    return "";
+                });
                 break;
             default:
                 throw new DukeException(Messages.TASK_NOT_UNDERSTOOD_ERROR);

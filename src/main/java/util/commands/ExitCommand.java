@@ -18,8 +18,10 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
+
         this.isClosed = true;
+        return "";
     }
 
     public static boolean isExit() {

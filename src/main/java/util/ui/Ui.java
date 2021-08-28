@@ -34,12 +34,12 @@ public class Ui {
         System.out.println(Messages.HLINE);
     }
 
-    public void printTaskAdded(Task t, int i) {
-        this.print(String.format(Messages.TASK_ADDED, t.toString(), i));
+    public String printTaskAdded(Task t, int i) {
+        return String.format(Messages.TASK_ADDED, t.toString(), i);
     }
 
-    public void printTaskDel(Task t, int i) {
-        this.print(String.format(Messages.TASK_DELETED, t.toString(), i));
+    public String printTaskDel(Task t, int i) {
+        return String.format(Messages.TASK_DELETED, t.toString(), i);
     }
 
 
@@ -58,17 +58,17 @@ public class Ui {
     /**
      * Prints all the strings added.
      */
-    public void list(ArrayList<? extends Task> ls) throws DukeException {
+    public String list(ArrayList<? extends Task> ls) throws DukeException {
         String output = "";
         if (ls.size() == 0) {
-            return;
+            return output;
         }
         output += "1." + ls.get(0);
         for (int i = 1; i < ls.size(); i++) {
             int indi = i + 1;
             output += "\n\t" + indi + "." + ls.get(i);
         }
-        this.print(output);
+        return output;
     }
 
     /**

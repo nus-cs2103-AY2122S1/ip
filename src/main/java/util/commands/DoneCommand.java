@@ -28,9 +28,9 @@ public class DoneCommand implements Command {
 
 
     @Override
-    public void execute() {
+    public String execute() {
         t.done();
-        ui.print(String.format(Messages.TASK_COMPLETE, t.toString()));
+        return String.format(Messages.TASK_COMPLETE, t.toString());
 
     }
 }
