@@ -12,9 +12,9 @@ public class Deadline extends Task {
         String formattedDtf = this.by.format(dtf);
         this.formattedDtf = formattedDtf;
     }
-
+    
     public String taskListOnDisk() {
-        return "Deadline" + super.taskListOnDisk() + this.formattedDtf;
+        return "Deadline |" + super.getStatusIcon() + "| " + description + " | by: " + formattedDtf;
     }
     
     @Override

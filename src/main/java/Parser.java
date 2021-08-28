@@ -28,11 +28,12 @@ public class Parser {
     }    
     
     public boolean isExit() {
-        if (command.equals("")) {
-            return true;
-        }
         if (command.equals("bye")) {
             System.out.println("Bye. Have a great day!");
+            return true;
+        }
+        
+        if (command.equals("")) {
             return true;
         }
         

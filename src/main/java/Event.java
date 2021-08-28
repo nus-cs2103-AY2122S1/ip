@@ -14,7 +14,7 @@ public class Event extends Task {
     }
 
     public String taskListOnDisk() {
-        return "Event" + super.taskListOnDisk() + this.formattedDtf;
+        return "Event |" + super.getStatusIcon() + "| " + description + " | by: " + formattedDtf;
     }
     
     @Override

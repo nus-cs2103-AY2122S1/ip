@@ -4,9 +4,9 @@ public class Todo extends Task {
     }
 
     public String taskListOnDisk() {
-        return "Todo" + super.taskListOnDisk();
+        return "Todo |" + super.getStatusIcon() + "| " + description;
     }
-
+    
     @Override
     public String toString() {
         return "[T]" + super.toString();

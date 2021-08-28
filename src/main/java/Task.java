@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     
@@ -14,14 +14,8 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-    
-    public String taskListOnDisk() {
-        if (this.isDone) {
-            return " | X | ";
-        } else {
-            return " |  | ";
-        }
-    }
+
+    public abstract String taskListOnDisk();
     
     @Override
     public String toString() {

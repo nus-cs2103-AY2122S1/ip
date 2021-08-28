@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Storage {
@@ -21,7 +23,7 @@ public class Storage {
         }
     }
     
-    public void loadTaskListData() {
+    public void loadTaskListData(TaskList taskList) {
         try {
             Scanner s = new Scanner(this.file); // create a Scanner using the File as the source
             if (!s.hasNext()) {
@@ -29,7 +31,33 @@ public class Storage {
             } else {
                 System.out.println("Here is your current task list: ");
                 while (s.hasNext()) {
-                    System.out.println(s.nextLine());
+                    String str = s.nextLine();
+                    System.out.println(str);
+                    String[] parts = str.split("\\|", 4);
+                    String subStr = parts[0].substring(3).trim();
+                    if (subStr.equals("Todo") || subStr.equals("Todo")) {
+                        Task task = new Todo(parts[2].trim());
+                        if (parts[1].trim().equals("X")) {
+                            task.markAsDone();
+                        }
+                        taskList.addTask(task);
+                    } else if (subStr.equals("Deadline") || subStr.equals("Deadline")) {
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
+                        LocalDateTime dateTime = LocalDateTime.parse(parts[3].substring(5).trim(), dtf);
+                        Task task = new Deadline(parts[2].trim(), dateTime);
+                        if (parts[1].trim().equals("X")) {
+                            task.markAsDone();
+                        }
+                        taskList.addTask(task);
+                    } else {
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
+                        LocalDateTime dateTime = LocalDateTime.parse(parts[3].substring(5).trim(), dtf);
+                        Task task = new Event(parts[2].trim(), dateTime);
+                        if (parts[1].trim().equals("X")) {
+                            task.markAsDone();
+                        }
+                        taskList.addTask(task);
+                    } 
                 }
                 System.out.println("End of task list");
             }
