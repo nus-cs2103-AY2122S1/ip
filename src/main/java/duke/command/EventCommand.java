@@ -1,4 +1,11 @@
-public class EventCommand extends Command{
+package duke.command;
+
+import duke.data.TaskList;
+import duke.data.exception.DukeException;
+import duke.ui.Ui;
+import duke.data.task.Event;
+
+public class EventCommand extends Command {
     private String input;
 
     public EventCommand(TaskList tasklist, String input){

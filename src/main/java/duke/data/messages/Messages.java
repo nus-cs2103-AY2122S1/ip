@@ -1,4 +1,4 @@
-package data;
+package duke.data.messages;
 
 /**
  * Container for user visible messages.

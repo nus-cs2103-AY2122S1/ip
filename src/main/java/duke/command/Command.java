@@ -1,3 +1,7 @@
+package duke.command;
+
+import duke.data.TaskList;
+
 public abstract class Command {
     protected TaskList taskList;
 
@@ -5,5 +9,5 @@ public abstract class Command {
         this.taskList = tasklist;
     }
 
-    abstract void execute();
+    public abstract void execute();
 }

@@ -1,3 +1,12 @@
+package duke.parser;
+
+import duke.data.TaskList;
+import duke.storage.Storage;
+import duke.data.task.Task;
+import duke.data.exception.DukeException;
+import duke.ui.Ui;
+import duke.command.*;
+
 import java.util.ArrayList;
 
 public class Parser {

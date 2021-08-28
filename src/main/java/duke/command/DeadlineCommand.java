@@ -1,4 +1,11 @@
-public class DeadlineCommand extends Command{
+package duke.command;
+
+import duke.data.TaskList;
+import duke.data.exception.DukeException;
+import duke.ui.Ui;
+import duke.data.task.Deadline;
+
+public class DeadlineCommand extends Command {
     private String input;
     public DeadlineCommand(TaskList tasklist, String input){
         super(tasklist);

@@ -1,4 +1,7 @@
-import java.util.ArrayList;
+import duke.data.exception.DukeException;
+import duke.parser.Parser;
+import duke.ui.Ui;
+
 import java.util.Scanner;  // Import the Scanner class
 
 public class Duke {

@@ -1,4 +1,10 @@
-public class DeleteCommand extends Command{
+package duke.command;
+
+import duke.data.TaskList;
+import duke.data.exception.DukeException;
+import duke.ui.Ui;
+
+public class DeleteCommand extends Command {
     private String input;
 
     public DeleteCommand(TaskList tasklist, String input){

@@ -1,6 +1,6 @@
-import data.Messages;
+package duke.ui;
 
-import java.security.PublicKey;
+import duke.data.messages.Messages;
 
 public class Ui {
 
