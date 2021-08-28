@@ -113,7 +113,7 @@ public class Storage {
     }
 
     /**
-     * Check if path exists, else try to create the path.
+     * Checks if path exists, else try to create the path.
      * If failed to create path, return false.
      * Returns true if successful, else false.
      *

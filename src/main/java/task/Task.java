@@ -7,12 +7,6 @@ abstract public class Task {
     protected String description;
     protected boolean isDone;
 
-    /**
-     * Constructor to create a new components.Task object.
-     * By default created tasks are not done.
-     *
-     * @param description
-     */
     protected Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -47,7 +41,7 @@ abstract public class Task {
     }
 
     /**
-     * Get task string to be inputted into file.
+     * Returns task string to be written into file.
      *
      * @return string in the respective task format.
      */

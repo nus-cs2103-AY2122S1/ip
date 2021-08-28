@@ -3,7 +3,7 @@ package task;
 import exceptions.DukeException;
 
 /**
- * The Deadline class encapsulates a task without any date/time attached to it.
+ * The TodoTask class encapsulates a task without any date/time attached to it.
  */
 public class TodoTask extends Task {
     public TodoTask(String description) {

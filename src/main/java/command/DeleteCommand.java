@@ -15,6 +15,12 @@ public class DeleteCommand extends Command {
     private final String MESSAGE_USAGE = String.format("Usage: %s <number>", Parser.COMMAND_DELETE);
     private final String MESSAGE_SUCCESS = "This task has been removed:\n%s";
 
+    /**
+     * Constructor for Delete Command.
+     *
+     * @param command String command input by user.
+     * @param delimiter String delimiter between the commands in the command string input.
+     */
     public DeleteCommand(String command, String delimiter) {
         this.command = command;
         this.delimiter = delimiter;

@@ -15,6 +15,12 @@ public class DoneCommand extends Command {
     private final String MESSAGE_USAGE = String.format("Usage: %s <number>", Parser.COMMAND_DONE);
     private final String MESSAGE_SUCCESS = "This task is marked as done:\n%s";
 
+    /**
+     * Constructor for Done Command.
+     *
+     * @param command String command input by user.
+     * @param delimiter String delimiter between the commands in the command string input.
+     */
     public DoneCommand(String command, String delimiter) {
         this.command = command;
         this.delimiter = delimiter;

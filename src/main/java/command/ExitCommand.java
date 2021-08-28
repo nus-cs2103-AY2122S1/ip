@@ -11,6 +11,12 @@ public class ExitCommand extends Command {
         ui.showGoodbye();
     }
 
+    /**
+     * Returns true.
+     * Exit the program.
+     *
+     * @return true
+     */
     @Override
     public boolean isExit() {
         return true;

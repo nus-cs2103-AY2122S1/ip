@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * The Deadline class encapsulates a task that start at a specific time and ends at a specific time.
+ * The EventTask class encapsulates a task that start at a specific time and ends at a specific time.
  */
 public class EventTask extends Task {
     private static final LocalTime DEFAULT_TIME = LocalTime.parse("00:00");

@@ -41,7 +41,13 @@ public class AddCommand extends Command {
 
     private final String ERROR_INVALID_FORMAT = "Invalid Format.";
 
-
+    /**
+     * Constructor for AddCommand.
+     *
+     * @param command String command input by user.
+     * @param delimiter String delimiter between the commands in the command string input.
+     * @param taskType TaskType input.
+     */
     public AddCommand(String command, String delimiter, TaskType taskType) {
         this.command = command;
         this.delimiter = delimiter;
