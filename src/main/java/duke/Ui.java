@@ -42,6 +42,7 @@ public class Ui {
     }
 
     public void showTaskList(TaskList tasks) {
+        System.out.println("\tHere are the tasks in your list:");
         int id = 1;
         for (Task task : tasks.getTaskList()) {
             System.out.println("\t" + id++ + "." + task);
@@ -55,8 +56,7 @@ public class Ui {
     }
 
     public void showError(String errorMessage) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    " + errorMessage);
-        System.out.println("    ____________________________________________________________");
+        System.out.println("\t" + errorMessage);
+
     }
 }

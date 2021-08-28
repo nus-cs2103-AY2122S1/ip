@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 /**
  * Represents a chatbot to manage a list of tasks.
@@ -18,7 +16,7 @@ public class Duke {
         storage = new Storage(filepath);
         try {
             tasks = new TaskList(storage.loadTasks());
-        } catch (DukeException | FileNotFoundException e) {
+        } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -37,7 +35,7 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks,  ui, storage);
                 isExit = c.isExit();
-            } catch (DukeException | IOException e) {
+            } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();

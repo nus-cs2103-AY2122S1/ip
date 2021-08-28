@@ -5,9 +5,8 @@ package duke;
  *
  * @author Adam Ho
  */
-public class DukeException extends RuntimeException {
-    private final String errorMessage;
-
+public class DukeException extends Exception {
+    private String errorMessage;
     /**
      * Creates a duke exception with the specified error message.
      * @param errorMessage The error message to display when the error is encountered.
@@ -17,13 +16,11 @@ public class DukeException extends RuntimeException {
         this.errorMessage = errorMessage;
     }
 
-    /**
-     * Returns the string representation of the error.
-     * @return A string representation of the error message.
-     */
     @Override
     public String toString() {
-        return this.errorMessage;
+        return "DukeException{" +
+                "errorMessage='" + errorMessage + '\'' +
+                '}';
     }
 
     /**

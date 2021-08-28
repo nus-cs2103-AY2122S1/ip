@@ -50,24 +50,27 @@ public class Storage {
      * Reads the list of tasks from a text file.
      * @throws FileNotFoundException The exception is thrown if the text file does not exist in the directory.
      */
-    public ArrayList<Task> loadTasks() throws FileNotFoundException {
-        ArrayList<Task> tasks = new ArrayList<>();
-
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            String[] taskFormat = s.nextLine().split(" \\| ");
-            Task t;
-            if (taskFormat[0].equals("T")) {
-                t = new Todo(taskFormat[2]);
-            } else if (taskFormat[0].equals("D")) {
-                t = new Deadline(taskFormat[2], taskFormat[3]);
-            } else {
-                t = new Event(taskFormat[2], taskFormat[3]);
+    public ArrayList<Task> loadTasks() throws DukeException {
+        try {
+            ArrayList<Task> tasks = new ArrayList<>();
+            File f = new File(filePath);
+            Scanner s = new Scanner(f);
+            while (s.hasNext()) {
+                String[] taskFormat = s.nextLine().split(" \\| ");
+                Task t;
+                if (taskFormat[0].equals("T")) {
+                    t = new Todo(taskFormat[2]);
+                } else if (taskFormat[0].equals("D")) {
+                    t = new Deadline(taskFormat[2], taskFormat[3]);
+                } else {
+                    t = new Event(taskFormat[2], taskFormat[3]);
+                }
+                t.isDone = taskFormat[1].equals("1");
+                tasks.add(t);
             }
-            t.isDone = taskFormat[1].equals("1");
-            tasks.add(t);
+            return tasks;
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Oops something went wrong :(");
         }
-        return tasks;
     }
 }
