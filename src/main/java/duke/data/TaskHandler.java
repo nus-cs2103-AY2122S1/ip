@@ -22,6 +22,10 @@ public class TaskHandler {
         this.list = list;
     }
 
+    public ArrayList<Task> getList() {
+        return list;
+    }
+
     /**
      * Prints the tasklist.
      */

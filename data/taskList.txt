@@ -1,5 +1,6 @@
 [T][ ] read book
-[D][ ] buy book  (by: 21/03/21 1845)
-[T][ ] beuosok
-[T][ ] bsook
-[E][ ] bjsubook  (at: 18/12/21 1745)
+[D][X] return book  (by: 11/03/21 1235)
+[E][ ] project meeting  (at: 01/01/21 2120)
+[T][ ] join sports club
+[T][ ] borrow book
+[E][ ] orbital meeting  (at: 12/12/21 1523)
