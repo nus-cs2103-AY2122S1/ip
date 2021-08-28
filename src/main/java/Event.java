@@ -23,4 +23,14 @@ public class Event extends Task {
     public String toString() {
         return "\t[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    @Override
+    public String getType() {
+        return "event";
+    }
+
+    @Override
+    public String addOns() {
+        return this.at;
+    }
 }

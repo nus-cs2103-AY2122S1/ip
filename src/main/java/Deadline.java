@@ -17,11 +17,24 @@ public class Deadline extends Task {
         } else {
             this.by = by.substring(1);
         }
+    }
 
+    public String getDeadline() {
+        return this.by;
     }
 
     @Override
     public String toString() {
         return "\t[D]" + super.toString() + " (by: " + by + ")";
+    }
+
+    @Override
+    public String getType() {
+        return "deadline";
+    }
+
+    @Override
+    public String addOns() {
+        return this.by;
     }
 }

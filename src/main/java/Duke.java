@@ -17,6 +17,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = "";
         TaskList ls = new TaskList(new ArrayList<Task>());
+        SaveToDisk std = new SaveToDisk(ls);
 
         try {
             while (true) {
@@ -24,14 +25,7 @@ public class Duke {
                 if (input.equals("bye")) {
                     break;
                 } else if (input.equals("list")) {
-                    if (ls.getSize() == 0) {
-                        System.out.println("There are currently no tasks in your list.");
-                    } else {
-                        System.out.println("Here are the tasks in your list:");
-                        for (int i = 0; i < ls.getSize(); i++) {
-                            System.out.println((i + 1) + "." + ls.getTask(i).toString());
-                        }
-                    }
+                    ls.printTaskList();
                 } else if (input.startsWith("done")) {
                     if (input.equals("done") || input.equals("done ")) {
                         throw new DukeException("An index must follow after the command word 'done'.");
@@ -42,6 +36,7 @@ public class Duke {
                         } else {
                             Task task = ls.getTask(arrIndex);
                             task.markAsDone();
+                            std.rewriteFile(ls);
                             System.out.println(task.markedAsDoneToString());
                         }
                     }
@@ -55,6 +50,7 @@ public class Duke {
                         } else {
                             Task task = ls.getTask(arrIndex);
                             ls.removeTask(arrIndex);
+                            std.rewriteFile(ls);
                             System.out.println(ls.removeTaskToString(task));
                         }
                     }
@@ -63,6 +59,7 @@ public class Duke {
                         String taskDesc = input.replaceFirst("^todo", "");
                         Todo tTask = new Todo(taskDesc);
                         ls.addTask(tTask);
+                        std.rewriteFile(ls);
                         System.out.println(ls.addTaskToString(tTask));
                     } else if (input.startsWith("deadline")) {
                         String taskDesc = input.replaceFirst("^deadline", "").split(" /")[0];
@@ -72,6 +69,7 @@ public class Duke {
                         }
                         Deadline dTask = new Deadline(taskDesc, deadline);
                         ls.addTask(dTask);
+                        std.rewriteFile(ls);
                         System.out.println(ls.addTaskToString(dTask));
                     } else if (input.startsWith("event")) {
                         String taskDesc = input.replaceFirst("^event", "").split(" /")[0];
@@ -81,6 +79,7 @@ public class Duke {
                         }
                         Event eTask = new Event(taskDesc, eventTime);
                         ls.addTask(eTask);
+                        std.rewriteFile(ls);
                         System.out.println(ls.addTaskToString(eTask));
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -88,8 +87,7 @@ public class Duke {
                 }
             }
             System.out.println("Bye. Hope to see you again soon!");
-
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
     }
