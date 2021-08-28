@@ -42,10 +42,10 @@
 	 3.[E][X] project meeting (at: Sun, 22 Aug 2021 08:00AM)
 	____________________________________
 	____________________________________
-	 ☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+	 OOPS!!! I'm sorry, but I don't know what that means :-(
 	____________________________________
 	____________________________________
-	 ☹ OOPS!!! The description of a todo cannot be empty.
+	 OOPS!!! The description of a todo cannot be empty.
 	____________________________________
 	____________________________________
 	 Noted. I've removed this task:
