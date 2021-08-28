@@ -1,3 +1,10 @@
+package duke;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,12 +18,12 @@ public class DukeStorage {
         this.path = path;
     }
 
-    public ArrayList<Task> readTasks() throws DukeException {
+    public TaskList readTasks() throws DukeException {
         File file = new File(this.path);
         if (file.exists()) {
             try {
                 Scanner sc = new Scanner(file);
-                ArrayList<Task> taskList = new ArrayList<Task>();
+                TaskList taskList = new TaskList();
 
                 String data = "";
                 while(sc.hasNext()) {
@@ -25,7 +32,7 @@ public class DukeStorage {
 
                 if (data.equals("")){
                     sc.close();
-                    return new ArrayList<Task>();
+                    return new TaskList();
                 }
 
                 String[] strArray = data.split("\n");
@@ -39,13 +46,24 @@ public class DukeStorage {
 
                     if (taskType.equals("T")) {
                         Todo task = new Todo(taskDescr);
-                        if (done) task.setDone();
+                        if (done) {
+                            task.setDone();
+                        }
+
                         taskList.add(task);
                     } else if (taskType.equals("D")) {
                         Deadline task = new Deadline(taskDescr, parseTask[3]);
+                        if (done) {
+                            task.setDone();
+                        }
+
                         taskList.add(task);
                     } else {
                         Event task = new Event(taskDescr, parseTask[3]);
+                        if (done) {
+                            task.setDone();
+                        }
+
                         taskList.add(task);
                     }
                 }
@@ -57,14 +75,14 @@ public class DukeStorage {
         } else {
             try {
                 file.createNewFile();
-                return new ArrayList<Task>();
+                return new TaskList();
             } catch (IOException e) {
                 throw new DukeException("File error! Please try again.");
             }
         }
     }
 
-    public void writeTasks(ArrayList<Task> taskList) throws DukeException {
+    public void writeTasks(TaskList taskList) throws DukeException {
         File file = new File(this.path);
 
         try {

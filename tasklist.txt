@@ -1,2 +1,2 @@
-D | 0 | run  | Jan 12 2021 01:00
-E | 0 | gym  | Mar 12 2000 01:00
+T | 1 | read book
+D | 0 | return book | Sep 12 2021 12:00
