@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 abstract public class Task {
     private final String name;
@@ -39,7 +39,7 @@ abstract public class Task {
             throw new IllegalArgumentException();
         }
         String[] tmp =  s.split(" [|] ");
-        boolean isComplete = tmp[1].equals("1") ? true : false;
+        boolean isComplete = tmp[1].equals("1");
         switch (tmp[0]) {
         case "T":
             return new Todo(tmp[2], isComplete);

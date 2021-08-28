@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.Map;
 import java.util.stream.IntStream;
@@ -26,12 +26,12 @@ public class Parser {
     private final int MAX_TASKS = 100;
     private final Map<String, BiFunction<String, TaskList, String>> commandsMap = Map.of(
         "list", (args, tasks) -> listTasks(tasks),
-        "done", (args, tasks) -> completeTask(args, tasks),
-        "todo", (args, tasks) -> addTodo(args, tasks),
-        "deadline", (args, tasks) -> addDeadline(args, tasks),
-        "event", (args, tasks) -> addEvent(args, tasks),
-        "delete", (args, tasks) -> deleteTask(args, tasks),
-        "find", (args, tasks) -> findTasks(args, tasks)
+        "done", this::completeTask,
+        "todo", this::addTodo,
+        "deadline", this::addDeadline,
+        "event", this::addEvent,
+        "delete", this::deleteTask,
+        "find", this::findTasks
     );
 
     /**

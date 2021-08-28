@@ -1,10 +1,10 @@
 import java.util.Scanner;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import Duke.Ui;
-import Duke.Parser;
-import Duke.Storage;
-import Duke.TaskList;
+import duke.Ui;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
 
 public class Duke implements Runnable {
     private static final String ERR_CREATE_FILE = "Could not create empty file.";
@@ -13,7 +13,7 @@ public class Duke implements Runnable {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) throws FileNotFoundException, IOException {
+    public Duke(String filePath) throws IOException {
         this.ui = new Ui();
         this.parser = new Parser();
         this.tasks = new TaskList(new Storage(filePath));
@@ -22,7 +22,7 @@ public class Duke implements Runnable {
     public void run() {
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
-        String input = "";
+        String input;
         while (!(input = sc.nextLine().trim()).equals("bye")) {
             ui.showMessage(parser.execute(input, tasks));
         }
