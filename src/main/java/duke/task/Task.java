@@ -2,6 +2,9 @@ package duke.task;
 
 import java.io.Serializable;
 
+/**
+ * A serializable item that contains a description and a boolean isDone.
+ */
 public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
@@ -35,11 +38,13 @@ public class Task implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof Task))
-            return false;
+        }
 
+        if (!(o instanceof Task)) {
+            return false;
+        }
         Task task = (Task) o;
         return isDone == ((Task) o).isDone
                 && description.equals(task.description);

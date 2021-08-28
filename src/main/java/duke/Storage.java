@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -48,8 +47,9 @@ public class Storage {
      */
     public ArrayList<Task> readFromDisk() {
         // Return empty list if file is empty
-        if (DATA_FILE.length() == 0)
+        if (DATA_FILE.length() == 0) {
             return new ArrayList<>();
+        }
 
         // Else, deserialize data
         try {
@@ -58,11 +58,14 @@ public class Storage {
 
             return (ArrayList<Task>) (i.readObject());
         } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Task.Task list's save file missing.\n" + e.getMessage());
+            System.out.println("WARNING: Task.Task list's save file missing.\n"
+                    + e.getMessage());
         } catch (IOException e) {
-            System.out.println("WARNING: Task.Task List not properly retrieved.\n" + e.getMessage());
+            System.out.println("WARNING: Task.Task List not properly retrieved.\n"
+                    + e.getMessage());
         } catch (ClassNotFoundException e) {
-            System.out.println("WARNING: Missing Class ArrayList<Task.Task>.\n" + e.getMessage());
+            System.out.println("WARNING: Missing Class ArrayList<Task.Task>.\n"
+                    + e.getMessage());
         }
 
         return new ArrayList<>();

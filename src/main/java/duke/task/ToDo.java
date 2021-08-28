@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.util.DukeException;
 
+/**
+ * Task without a time tagged to it.
+ */
 public class ToDo extends Task {
 
     /**
@@ -16,10 +19,11 @@ public class ToDo extends Task {
     private static void checkFormat(String formattedString) throws DukeException {
         String keyword = formattedString.split(" ", 2)[0];
 
-        if (!keyword.equals("todo"))
+        if (!keyword.equals("todo")) {
             throw new DukeException("I can't seem to find the todo keyword");
-        else if (formattedString.length() <= 5 || formattedString.substring(5).isEmpty())
+        } else if (formattedString.length() <= 5 || formattedString.substring(5).isEmpty()) {
             throw new DukeException("the description of todo cannot be empty");
+        }
     }
 
     /**
@@ -43,10 +47,14 @@ public class ToDo extends Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (!(o instanceof ToDo))
+        }
+
+        if (!(o instanceof ToDo)) {
             return false;
+        }
+
 
         ToDo toDo = (ToDo) o;
         return isDone == ((ToDo) o).isDone

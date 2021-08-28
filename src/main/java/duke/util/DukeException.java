@@ -1,5 +1,8 @@
 package duke.util;
 
+/**
+ * Exception specific to Duke.
+ */
 public class DukeException extends RuntimeException {
 
     public DukeException(String message) {

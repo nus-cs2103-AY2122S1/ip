@@ -9,6 +9,9 @@ import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
+/**
+ * Main class which runs Duke's main loop.
+ */
 public class Duke {
 
     private static TaskBank taskBank = new TaskBank("data/duke.txt");
@@ -28,19 +31,25 @@ public class Duke {
         return ret;
     }
 
+    /**
+     * Duke's main loop.
+     *
+     * @param args Command line arguments
+     */
     public static void main(String[] args) {
 
         Ui.welcomeMessage();
         Ui.printDivider();
 
-        Scanner sc=new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         Hashtable<String, Consumer<String>> commandTable = initCommandTable();
 
         while (true) {
             String input = sc.nextLine();
-            if (input.equals("bye"))
+            if (input.equals("bye")) {
                 break;
+            }
 
             String keyword = input.split(" ", 2)[0];
             if (!commandTable.containsKey(keyword)) {

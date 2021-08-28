@@ -26,7 +26,7 @@ public class TaskBank {
     }
 
     /**
-     * Add a task to the list of tasks
+     * Add a task to the list of tasks.
      * Throws a Duke Exception if format is erroneous
      *
      * @param formattedString task to add represented as a formatted string
@@ -77,13 +77,19 @@ public class TaskBank {
         }
         this.storage.writeToDisk(this.taskList);
     }
-    
+
+    /**
+     * Searches for tasks that contain the given substring.
+     *
+     * @param query substring to search
+     * @return list of matching tasks
+     */
     public ArrayList<Task> searchTasks(String query) {
         query = query.split(" ", 2)[1].trim();
 
         ArrayList ret = new ArrayList<Task>();
 
-        for(Task t: this.taskList) {
+        for (Task t : this.taskList) {
             if (t.getDescription().contains(query)) {
                 ret.add(t);
             }
