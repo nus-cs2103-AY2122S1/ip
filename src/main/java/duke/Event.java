@@ -47,4 +47,11 @@ public class Event extends Task {
     public String toStringData() {
         return "E" + super.toStringData() + "|" + at;
     }
+
+    @Override
+    public boolean matches(String query) {
+        return super.matches(query)
+                || at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")).toLowerCase().contains(query.toLowerCase())
+                || query.equalsIgnoreCase("event");
+    }
 }
