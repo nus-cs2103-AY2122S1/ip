@@ -6,7 +6,7 @@ import duke.UI;
 import duke.exception.DukeException;
 import duke.task.Task;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     private boolean isExit = true;
 
     /**

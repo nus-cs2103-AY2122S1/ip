@@ -1,18 +1,19 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
-import java.util.Scanner;
 
 /**
  * Main class of project.
  */
 public class Duke {
+    private static Scanner sc = new Scanner(System.in);
     private Storage storage;
     private UI userInt;
     private TaskList tasks;
     private User user;
-    private static Scanner sc = new Scanner(System.in);
 
     /**
      * Constructor of Duke instance, which initalises the other
