@@ -1,11 +1,9 @@
 package duke;
 
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 
 /**
@@ -13,9 +11,9 @@ import java.util.ArrayList;
  */
 public class Parser {
 
-    private Duke duke;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private Duke duke;
 
     /**
      * Returns a Parser object.
@@ -58,9 +56,7 @@ public class Parser {
             // List tasks
             if (message.trim().equals("list")) {
                 duke.getUi().showList();
-            }
-            // Delete tasks
-            else if (message.startsWith("delete")) {
+            } else if (message.startsWith("delete")) { // Delete tasks
                 if (message.length() > 7 && message.substring(6, 7).equals(" ")
                     && message.substring(7).trim().chars().allMatch(Character::isDigit)) {
                     int taskIndex = Integer.parseInt(message.substring(7).trim()) - 1;
@@ -80,9 +76,7 @@ public class Parser {
                 } else {
                     throw new DukeException.DukeTaskFailException();
                 }
-            }
-            // Mark tasks as done
-            else if (message.startsWith("done")) {
+            } else if (message.startsWith("done")) { // Mark tasks as done
                 if (message.length() > 5 && message.substring(4, 5).equals(" ")
                     && message.substring(5).trim().chars().allMatch(Character::isDigit)) {
                     int taskIndex = Integer.parseInt(message.substring(5).trim()) - 1;
@@ -106,9 +100,7 @@ public class Parser {
                 } else {
                     throw new DukeException.DukeTaskFailException();
                 }
-            }
-            // Find
-            else if (message.startsWith("find ") || message.equals("find")) {
+            } else if (message.startsWith("find ") || message.equals("find")) { // Find
                 if (message.length() > 5 && !message.substring(5).isBlank()) {
                     String search = message.substring(5).trim();
                     ArrayList<Task> resultsArray = new ArrayList<>();
@@ -127,18 +119,14 @@ public class Parser {
                 } else {
                     throw new DukeException.DukeNoSearchFoundException();
                 }
-            }
-            // To Do
-            else if (message.startsWith("todo ") || message.equals("todo")) {
+            } else if (message.startsWith("todo ") || message.equals("todo")) { // To Do
                 if (message.length() > 5 && !message.substring(5).isBlank()) {
                     String description = message.substring(5).trim();
                     duke.getTasks().createTask(description, "", Task.Category.TODO, false, true);
                 } else {
                     throw new DukeException.DukeNoDescriptionException();
                 }
-            }
-            // deadline
-            else if (message.startsWith("deadline ") || message.equals("deadline")) {
+            } else if (message.startsWith("deadline ") || message.equals("deadline")) { // deadline
                 if (message.contains(" /by ")) {
                     String description = message.substring(9, message.indexOf("/by")).trim();
                     if (message.length() > message.indexOf("/by") + 3) {
@@ -178,9 +166,7 @@ public class Parser {
                         throw new DukeException.DukeNoTimeGivenException();
                     }
                 }
-            }
-            // event
-            else if (message.startsWith("event ") || message.equals("event")) {
+            } else if (message.startsWith("event ") || message.equals("event")) { // event
                 if (message.contains(" /at ")) {
                     String description = message.substring(6, message.indexOf("/at")).trim();
                     if (message.length() > message.indexOf("/at") + 3) {
@@ -219,9 +205,7 @@ public class Parser {
                         throw new DukeException.DukeNoTimeGivenException();
                     }
                 }
-            }
-            // invalid input
-            else {
+            } else { // invalid input
                 throw new DukeException.DukeInvalidInputException();
             }
         } catch (DukeException e) {
