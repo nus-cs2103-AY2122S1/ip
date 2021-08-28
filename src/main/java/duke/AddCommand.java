@@ -1,3 +1,5 @@
+package duke;
+
 public class AddCommand extends Command{
     private String type;
     private String description;
