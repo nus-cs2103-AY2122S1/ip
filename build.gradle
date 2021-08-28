@@ -43,12 +43,18 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'duke.Duke'
+    }
 }
 
 checkstyle {
