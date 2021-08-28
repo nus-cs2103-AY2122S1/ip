@@ -6,6 +6,7 @@ import duke.exceptions.InvalidTaskIDException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class TaskList {
     private List<Task> taskList;
@@ -46,6 +47,17 @@ public class TaskList {
         return this.taskList.size();
     }
 
+    public void search(String query) {
+        Ui ui = new Ui();
+        TaskList result = new TaskList();
+        for (Task task : taskList) {
+            if (task.getTaskName().toUpperCase().contains(query.toUpperCase())) {
+                result.add(task);
+            }
+        }
+        ui.printTasks(result);
+    }
+
     @Override
     public String toString() {
         List<String> stringsArray = new ArrayList<>();
@@ -53,6 +65,6 @@ public class TaskList {
             stringsArray.add(t.toString());
         }
         String tasks = String.join("\n", stringsArray);
-        return "Current List:\n" + "---------------\n" + tasks;
+        return "List:\n" + "---------------\n" + tasks;
     }
 }
