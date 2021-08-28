@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 public class Ui {
     private final String BORDER = "---------------------------------------------------";
@@ -6,7 +6,7 @@ public class Ui {
     private final String FAREWELL = "Bye. Hope to see you again soon!";
 
     private void printDuke(String str) {
-        System.out.printf(String.format("%s\n%s\n%s\n", BORDER, str, BORDER)
+        System.out.print(String.format("%s\n%s\n%s\n", BORDER, str, BORDER)
                 .replaceAll("(?m)^", "\t"));
     }
 

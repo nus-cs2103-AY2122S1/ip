@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.io.File;
 import java.util.List;
@@ -38,9 +38,7 @@ public class Storage {
         while ((line = br.readLine()) != null) {
             try {
                 tasks.add(Task.strToObj(line));
-            } catch (IllegalArgumentException | DateTimeException e) {
-                continue;
-            }
+            } catch (IllegalArgumentException | DateTimeException e) {}
         }
         br.close();
         return tasks;

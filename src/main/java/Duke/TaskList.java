@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.List;
 import java.io.IOException;
@@ -8,7 +8,7 @@ public class TaskList {
     private List<Task> tasks;
     private Storage storage;
 
-    public TaskList(Storage storage) throws FileNotFoundException, IOException {
+    public TaskList(Storage storage) throws IOException {
         this.storage = storage;
         this.tasks = storage.load();
     }
@@ -70,6 +70,6 @@ public class TaskList {
      */
     public String getMatches(String query) {
         return String.join("\n", tasks.stream().filter(task -> task.getName().contains(query))
-                .map(task -> task.toString()).toArray(String[]::new));
+                .map(Task::toString).toArray(String[]::new));
     }
 }
