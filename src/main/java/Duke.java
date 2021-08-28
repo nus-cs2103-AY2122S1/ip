@@ -1,5 +1,3 @@
-import jdk.jfr.Event;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -88,6 +86,7 @@ public class Duke {
             System.exit(0);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+            System.exit(0);
         }
 
         String command = sc.nextLine();
