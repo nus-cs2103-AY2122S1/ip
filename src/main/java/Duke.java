@@ -10,7 +10,6 @@ public class Duke {
     private static final String EXIT = "Bye. Hope to see you again soon!\n";
     private static final String PROMPT = "What would you like to do?";
     private static final String TASK_DONE = "Nice! I've marked this task as done:\n";
-    private static final String PRINT_LIST = "Here are the tasks in your list:";
     private static final String ADD_TASK_PREFIX = "Got it. I've added this task:\n";
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
@@ -21,6 +20,7 @@ public class Duke {
     private static final String DELETE_COMMAND = "delete ";
 
     public static void prompt() {
+        Save.readFile();
         String input = "";
 
         while (!input.equals(EXIT_COMMAND)) {
@@ -55,8 +55,6 @@ public class Duke {
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
-
-
         }
     }
 
@@ -64,12 +62,18 @@ public class Duke {
         System.out.print(SEPARATOR + EXIT + SEPARATOR);
     }
 
+    public static String saveList(List<Task> taskList) {
+        String lst = "";
+        for (int i = 1; i <= taskList.size(); i++) {
+            lst += i + ". " + taskList.get(i - 1).toString() + "\n";
+        }
+        return lst;
+    }
+
     public static void printList(List<Task> taskList) {
         System.out.print(SEPARATOR);
-        System.out.println(PRINT_LIST);
-        for (int i = 1; i <= taskList.size(); i++) {
-            System.out.println(i + ". " + taskList.get(i - 1).toString());
-        }
+        System.out.print("Here are the tasks in your list:\n" +
+                saveList(taskList));
         System.out.print(SEPARATOR);
     }
 
@@ -144,6 +148,10 @@ public class Duke {
 
     public static void main(String[] args) {
         System.out.print(SEPARATOR + GREETING + SEPARATOR);
+        Save.createFile();
+        taskList = Save.readFile();
         prompt();
+
+        Save.saveFile(saveList(taskList));
     }
 }
