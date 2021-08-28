@@ -1,11 +1,11 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
-
-import java.util.Scanner;
 
 /**
  * Represents a Personal Assistant Chatbot that helps a person to keep track of various things.

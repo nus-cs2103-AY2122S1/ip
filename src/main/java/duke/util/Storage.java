@@ -1,11 +1,11 @@
 package duke.util;
 
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -18,7 +18,7 @@ import duke.task.ToDo;
  */
 public class Storage {
 	private final String filePath;
-	
+
 	/**
 	 * Constructs a new Storage object with the specified file path.
 	 */
@@ -33,7 +33,7 @@ public class Storage {
 	 * @throws DukeException File cannot be found
 	 */
 	public ArrayList<Task> loadTasks() throws DukeException {
-		ArrayList<Task> tasks = new ArrayList<>();		// We will populate an ArrayList of tasks
+		ArrayList<Task> tasks = new ArrayList<>(); // We will populate an ArrayList of tasks
 
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(filePath));
@@ -43,7 +43,7 @@ public class Storage {
 			// Read lines from file
 			while ((line = reader.readLine()) != null) {
 				String lineWithoutBoxes = line.substring(7);
-					
+
 				// If the line contains by -> add a new Deadline
 				if (line.contains("[D]")) {
 					String[] details = lineWithoutBoxes.split("by:");
@@ -73,7 +73,7 @@ public class Storage {
 	}
 
 	/**
-	 * Extract the task name from  the task part of the command.
+	 * Extract the task name from the task part of the command.
 	 * 
 	 * @param taskDetails the task part of the command
 	 * @return the task name
@@ -91,7 +91,7 @@ public class Storage {
 	public String getDateTime(String dateTimeDetails) {
 		return dateTimeDetails.substring(1, dateTimeDetails.length() - 1);
 	}
-	
+
 	/**
 	 * Saves the tasks to the data file.
 	 * 

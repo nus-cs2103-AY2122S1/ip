@@ -1,15 +1,15 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.util.Ui;
-import duke.exception.DukeException;
-
-import java.util.ArrayList;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents the list of tasks a user has.

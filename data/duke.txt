@@ -1,4 +1,3 @@
-[T][ ] work
 [D][X] ip (by: 2021-03-23)
 [D][X] drink (by: 2012-02-12)
 [E][X] diveen (at: today 9pm)
