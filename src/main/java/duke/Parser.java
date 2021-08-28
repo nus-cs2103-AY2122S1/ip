@@ -8,6 +8,7 @@ import duke.commands.ClearCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 
 /**
@@ -50,6 +51,9 @@ public class Parser {
             break;
         case "clear":
             c = new ClearCommand();
+            break;
+        case "find":
+            c = new FindCommand();
             break;
         default:
             throw new DukeException("Command not understood");

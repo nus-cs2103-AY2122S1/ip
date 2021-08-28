@@ -36,6 +36,16 @@ public abstract class Item {
     public String getPickle() {
         return this.name;
     }
+    
+    /**
+     * Returns whether the name contains a substring pattern.
+     * 
+     * @param string Substring.
+     * @return The result.
+     */
+    public boolean queryString(String string) {
+        return this.name.contains(string);
+    }
 
     @Override
     public String toString() {
