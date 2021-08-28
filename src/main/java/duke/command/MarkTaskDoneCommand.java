@@ -16,6 +16,13 @@ import java.io.IOException;
  * @author kevin9foong
  */
 public class MarkTaskDoneCommand extends Command {
+
+    /**
+     * Constructs an instance of <code>MarkTaskDoneCommand</code> which when executed sets the task
+     * with the specified task number as done.
+     *
+     * @param userInputBody <code>String</code> which includes the task number of task to mark as done.
+     */
     public MarkTaskDoneCommand(String userInputBody) {
         super(userInputBody);
     }

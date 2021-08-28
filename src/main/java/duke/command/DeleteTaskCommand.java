@@ -16,8 +16,14 @@ import java.io.IOException;
  * @author kevin9foong
  */
 public class DeleteTaskCommand extends Command {
-    public DeleteTaskCommand(String getUserInputBody) {
-        super(getUserInputBody);
+    /**
+     * Constructs instance of <code>DeleteTaskCommand</code> which when executed deletes the task
+     * number specified by the user input.
+     *
+     * @param userInputBody <code>String</code> which includes task number to delete.
+     */
+    public DeleteTaskCommand(String userInputBody) {
+        super(userInputBody);
     }
 
     /**

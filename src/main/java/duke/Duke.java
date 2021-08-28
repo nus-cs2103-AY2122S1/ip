@@ -17,6 +17,13 @@ import java.io.IOException;
 public class Duke {
     private final FulfillmentHandler fulfillmentHandler;
 
+    /**
+     * Instantiates an instance of the Duke chat bot which is the main functionality
+     * used to fulfill user's commands.
+     *
+     * @throws IOException thrown when failure to read and write to input and outputs occur or
+     * when failures to retrieve persisted data occur.
+     */
     public Duke() throws IOException {
         ConsoleUserInputHandler consoleUserInputHandler = new ConsoleUserInputHandler();
         UserOutputHandler userOutputHandler = new ConsoleUserOutputHandler();

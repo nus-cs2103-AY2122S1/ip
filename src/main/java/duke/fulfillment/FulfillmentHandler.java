@@ -20,15 +20,23 @@ public class FulfillmentHandler {
     private final UserOutputHandler consoleUserOutputHandler;
     private final TaskList taskList;
 
-    public FulfillmentHandler(UserInputHandler consoleUserInputHandler,
-                              UserOutputHandler consoleUserOutputHandler, TaskList taskList) {
-        this.consoleUserInputHandler = consoleUserInputHandler;
-        this.consoleUserOutputHandler = consoleUserOutputHandler;
+    /**
+     * Constructs an instance of <code>FulfillmentHandler</code> which is in charge of
+     * fulfilling user's commands by running the Duke chat bot.
+     *
+     * @param userInputHandler handles input from the user.
+     * @param userOutputHandler handles displaying output to the user.
+     * @param taskList list of tasks currently persisted.
+     */
+    public FulfillmentHandler(UserInputHandler userInputHandler,
+                              UserOutputHandler userOutputHandler, TaskList taskList) {
+        this.consoleUserInputHandler = userInputHandler;
+        this.consoleUserOutputHandler = userOutputHandler;
         this.taskList = taskList;
     }
 
     /**
-     * Initializes the Chatbot.
+     * Initializes the Duke chat bot.
      *
      * @throws IOException thrown when an error connecting
      *                     to input/output stream occurs.

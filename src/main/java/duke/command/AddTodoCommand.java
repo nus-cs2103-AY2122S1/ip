@@ -16,8 +16,15 @@ import java.io.IOException;
  */
 public class AddTodoCommand extends Command {
 
-    public AddTodoCommand(String getUserInputBody) {
-        super(getUserInputBody);
+
+    /**
+     * Constructs instance of <code>AddTodoCommand</code> which adds a <code>ToDo</code> based
+     * on data provided within the given <code>userInputBody</code> <code>String</code>.
+     *
+     * @param userInputBody <code>String</code> containing description of <code>ToDo</code>.
+     */
+    public AddTodoCommand(String userInputBody) {
+        super(userInputBody);
     }
 
     /**

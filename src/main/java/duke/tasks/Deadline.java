@@ -41,6 +41,14 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Constructs an instance of <code>Deadline</code> with the provided description,
+     * completion status and deadline.
+     *
+     * @param description description of what the <code>Deadline</code> entails.
+     * @param isDone      completion status of <code>Deadline</code>.
+     * @param by          deadline which <code>Deadline</code> must be completed.
+     */
     public Deadline(String description, boolean isDone, LocalDate by) {
         super.setDescription(description);
         super.setIsDone(isDone);
@@ -52,6 +60,12 @@ public class Deadline extends Task {
         return TaskType.DEADLINE + "," + super.getTaskRepresentation() + this.by + ",";
     }
 
+    /**
+     * Returns the <code>String</code> representation representing the task type,
+     * completion status, description and deadline of this <code>Deadline</code>.
+     *
+     * @return <code>String</code> representation of this <code>Deadline</code>.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString()

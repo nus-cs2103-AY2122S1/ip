@@ -1,5 +1,10 @@
 package duke.command;
 
+/**
+ * Represents a fixed list of supported user commands.
+ *
+ * @author kevin9foong
+ */
 public enum CommandType {
     LIST, TODO, DEADLINE, EVENT, DELETE, DONE, FIND, BYE;
 

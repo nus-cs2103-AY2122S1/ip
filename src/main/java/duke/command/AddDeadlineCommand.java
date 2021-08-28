@@ -18,8 +18,14 @@ import java.io.IOException;
  */
 public class AddDeadlineCommand extends Command {
 
-    public AddDeadlineCommand(String getUserInputBody) {
-        super(getUserInputBody);
+    /**
+     * Constructs instance of <code>AddDeadlineCommand</code> which adds a <code>Deadline</code> based
+     * on data provided within the given <code>userInputBody</code> <code>String</code>.
+     *
+     * @param userInputBody <code>String</code> containing description of deadline and deadline <code>DateTime</code>.
+     */
+    public AddDeadlineCommand(String userInputBody) {
+        super(userInputBody);
     }
 
     /**

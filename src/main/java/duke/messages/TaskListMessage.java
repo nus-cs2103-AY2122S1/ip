@@ -11,6 +11,13 @@ import java.util.List;
  * @author kevin9foong
  */
 public class TaskListMessage extends Message {
+
+    /**
+     * Constructs an instance of <code>TaskListMessage</code> which generates a message as
+     * response to a list command and lists all tasks provided as argument.
+     *
+     * @param tasks tasks to include in output message.
+     */
     public TaskListMessage(List<Task> tasks) {
         super.setMessageText(MessageConstants.MESSAGE_TASK_LIST_HEADER
                 + generateListMessageText(tasks));

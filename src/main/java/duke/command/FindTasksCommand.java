@@ -16,6 +16,14 @@ import java.util.stream.Collectors;
  * @author kevin9foong
  */
 public class FindTasksCommand extends Command {
+
+    /**
+     * Constructs instance of <code>FindTasksCommand</code> which searches within the list of
+     * persisted tasks for tasks which contain the specified user input search query string within
+     * its description.
+     *
+     * @param userInputBody <code>String</code> which includes the desired task description search query.
+     */
     public FindTasksCommand(String userInputBody) {
         super(userInputBody);
     }

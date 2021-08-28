@@ -16,6 +16,13 @@ public class ToDo extends Task {
         }
     }
 
+    /**
+     * Constructs an instance of <code>ToDo</code> with the provided description
+     * and completion status.
+     *
+     * @param description description of what the <code>ToDo</code> entails.
+     * @param isDone completion status of <code>ToDo</code>.
+     */
     public ToDo(String description, boolean isDone) {
         super.setDescription(description);
         super.setIsDone(isDone);
@@ -26,6 +33,12 @@ public class ToDo extends Task {
         return TaskType.TODO + "," + super.getTaskRepresentation();
     }
 
+    /**
+     * Returns the <code>String</code> representation representing the task type,
+     * completion status, and description of this <code>ToDo</code>.
+     *
+     * @return <code>String</code> representation of this <code>ToDo</code>.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

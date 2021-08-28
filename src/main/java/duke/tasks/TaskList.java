@@ -17,6 +17,12 @@ public class TaskList {
     private final List<Task> tasks;
     private TaskStorage taskStorage;
 
+    /**
+     * Constructs an instance of <code>TaskList</code> which persists data using the
+     * provided <code>TaskStorage</code>.
+     *
+     * @param taskStorage provides functionality to persist task data.
+     */
     public TaskList(TaskStorage taskStorage) throws IOException {
         this.taskStorage = taskStorage;
         tasks = taskStorage.loadTasks();
