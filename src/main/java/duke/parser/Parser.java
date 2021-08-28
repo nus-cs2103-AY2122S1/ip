@@ -200,9 +200,9 @@ public class Parser {
                 }
                 Ui.printLineBreak();
             }
-        } catch (InvalidTimeException | InvalidDescriptionException e) {
+        } catch (InvalidTimeException | InvalidDescriptionException | InvalidInputException e) {
             Ui.printMessage(e.getMessage());
-        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException | InvalidInputException e) {
+        } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
             Ui.printMessage("☹ OOPS!!! Please include an appropriate description/time!");
         } catch (IllegalArgumentException e) {
             Ui.printMessage("☹ OOPS!!! Unable to recognise command, please try again!");

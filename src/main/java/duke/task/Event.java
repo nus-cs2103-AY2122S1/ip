@@ -71,7 +71,8 @@ public class Event extends Task {
     public String formatSave() {
         if (time != null) {
             return "E | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | "
-                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", " + time;
+                    + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", "
+                    + time.format(DateTimeFormatter.ofPattern("h:mma"));
         } else if (date != null) {
             return "E | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | "
                     + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
@@ -83,7 +84,7 @@ public class Event extends Task {
     public String toString() {
         if (time != null) {
             return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern(
-                    "MMM dd yyyy")) + ", " + time + ")";
+                    "MMM dd yyyy")) + ", " + time.format(DateTimeFormatter.ofPattern("h:mma")) + ")";
         } else if (date != null) {
             return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern(
                     "MMM dd yyyy")) + ")";

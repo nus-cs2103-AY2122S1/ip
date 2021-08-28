@@ -1,6 +1,4 @@
-T | 1 | read book
-D | 1 | return book | June 6th
-T | 1 | eat
-T | 1 | sleep
-T | 1 | sleep
-T | 0 | eat
+D | 1 | return book | Oct 15 2019, 6:00pm
+D | 0 | group project | May 07 2021
+E | 0 | project | Jan 01 2020, 6:00pm
+D | 0 | group project | May 07 2021, 4:00pm
