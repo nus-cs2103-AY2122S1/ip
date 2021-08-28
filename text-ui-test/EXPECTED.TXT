@@ -88,7 +88,7 @@
     7.[T][ ] borrow book
     ____________________________________________________________
 >     ____________________________________________________________
-    Deadline: Aug 6 2020
+    task.Deadline: Aug 6 2020
     Here are the tasks in your list:
     1.[T][X] read book
     2.[D][X] return book (by: Jun 6 2020)
@@ -98,7 +98,7 @@
     6.[T][ ] borrow book
     ____________________________________________________________
 >     ____________________________________________________________
-    Deadline: Jun 6 2020
+    task.Deadline: Jun 6 2020
     Here are the tasks in your list:
     1.[T][X] read book
     2.[D][X] return book (by: Jun 6 2020)

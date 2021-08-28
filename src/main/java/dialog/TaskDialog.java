@@ -1,9 +1,19 @@
+package dialog;
+
+import command.InvalidTimeFormatException;
+
+import parser.Parser;
+import task.Task;
+import task.TimeTask;
+import task.TaskList;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 public class TaskDialog extends Dialog {
     // This class is a child of dialog class which allow the user to interact with the task
@@ -44,10 +54,10 @@ public class TaskDialog extends Dialog {
     }
 
     public TaskDialog by(String deadline) throws InvalidTimeFormatException {
-        LocalDate dlDate = TimeTask.parseTimeString(deadline);
-        return new TaskDialog(new ArrayList<>(List.of("Deadline: " + dlDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))),
+        LocalDate dlDate = Parser.parseTimeString(deadline);
+        return new TaskDialog(new ArrayList<>(List.of("task.Deadline: " + dlDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))),
                 new TaskList(new ArrayList<>(this.taskList.getTasks().stream().filter((task) -> {
-            if (!task.getClass().getSuperclass().getName().equals("TimeTask")) {
+            if (!task.getClass().getSuperclass().getName().equals("task.TimeTask")) {
                 // return any task without time associated with it
                 return true;
             } else {

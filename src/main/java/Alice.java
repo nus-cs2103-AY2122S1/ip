@@ -1,3 +1,11 @@
+import alice.AliceException;
+import dialog.DialogException;
+import dialog.TaskDialog;
+import parser.Parser;
+import storage.Storage;
+import command.Command;
+import ui.Ui;
+
 import java.io.IOException;
 
 /**
@@ -24,7 +32,7 @@ public class Alice {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
                 c.execute(taskDialog, storage);
-                isExit = c.isExit;
+                isExit = c.isExit();
             } catch (AliceException | IOException e) {
                 Ui.printError(e);
             }

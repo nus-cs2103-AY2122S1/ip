@@ -1,7 +1,13 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+package task;
 
-public abstract class TimeTask extends Task{
+import parser.Parser;
+
+import command.InvalidTimeFormatException;
+import task.Task;
+
+import java.time.LocalDate;
+
+public abstract class TimeTask extends Task {
 
     private LocalDate time;
 
@@ -21,20 +27,12 @@ public abstract class TimeTask extends Task{
 
     public TimeTask(String description, String timeString) {
         super(description);
-        this.time = parseTimeString(timeString);
+        this.time = Parser.parseTimeString(timeString);
     }
 
     public TimeTask(String description, boolean isDone, String timeString) {
         super(description, isDone);
-        this.time = parseTimeString(timeString);
-    }
-
-    protected static LocalDate parseTimeString(String s) {
-        try {
-            return LocalDate.parse(s);
-        } catch (DateTimeParseException e) {
-            throw new InvalidTimeFormatException("the inputted time format is invalid, please enter as yyyy-mm-dd");
-        }
+        this.time = Parser.parseTimeString(timeString);
     }
 
     public LocalDate getTime() {

@@ -1,3 +1,10 @@
+package storage;
+
+import dialog.DialogException;
+import parser.Parser;
+import task.TaskList;
+import ui.Ui;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -10,8 +17,8 @@ import java.util.stream.Collectors;
 
 public class Storage {
 
-    final static String DIRECTORY_PATH = "./data";
-    final static String DEFAULT_FILE_NAME = DIRECTORY_PATH + "/task_list.txt";
+    public static final String DIRECTORY_PATH = "./data";
+    private static final String DEFAULT_FILE_NAME = DIRECTORY_PATH + "/task_list.txt";
 
     private String filePath;
     private TaskList taskListRead;

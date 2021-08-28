@@ -1,3 +1,20 @@
+package command;
+
+import alice.AliceException;
+import dialog.DialogException;
+import dialog.TaskDialog;
+
+import parser.Parser;
+
+import storage.Storage;
+
+import task.Deadline;
+import task.Event;
+import task.Todo;
+
+
+import ui.Ui;
+
 import java.io.IOException;
 
 public class Command {
@@ -5,14 +22,18 @@ public class Command {
         TODO, DEADLINE, EVENT, LIST, DATE, DONE, DELETE, COMMANDS, BYE
     }
 
-    String fullCommand;
-    CommandType commandType;
-    boolean isExit;
+    private String fullCommand;
+    private CommandType commandType;
+    private boolean isExit;
 
     public Command(String fullCommand) throws AliceException {
         this.fullCommand = fullCommand;
         commandType = Parser.stringToCommand(fullCommand.split(" ")[0]);
         isExit = commandType == CommandType.BYE;
+    }
+
+    public boolean isExit() {
+        return this.isExit;
     }
 
     public void execute(TaskDialog taskDialog, Storage storage) throws DialogException, IOException {

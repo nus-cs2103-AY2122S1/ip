@@ -1,4 +1,16 @@
+package parser;
+
+import alice.AliceException;
+import command.Command;
+import command.InvalidTimeFormatException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     public static Command.CommandType stringToCommand(String s) throws AliceException {
@@ -43,11 +55,11 @@ public class Parser {
 
     public static TaskList.TaskType classNameToTaskType(String cn) throws AliceException {
         switch (cn) {
-            case "Todo":
+            case "task.Todo":
                 return TaskList.TaskType.TODO;
-            case "Deadline":
+            case "task.Deadline":
                 return TaskList.TaskType.DEADLINE;
-            case "Event":
+            case "task.Event":
                 return TaskList.TaskType.EVENT;
             default:
                 throw new AliceException("Invalid ClassName detected: " + cn);
@@ -69,7 +81,7 @@ public class Parser {
 
     public static String taskToSaveFormat(Task task) {
         TaskList.TaskType type = classNameToTaskType(task.getClass().getName());
-        String s = taskTypeToString(type) + " | " + (task.isDone ? 1 : 0) + " | " + task.description;
+        String s = taskTypeToString(type) + " | " + (task.isDone() ? 1 : 0) + " | " + task.description();
         switch (type) {
             case EVENT:
                 Event ev = (Event) task;
@@ -93,6 +105,14 @@ public class Parser {
                 return true;
             default:
                 return false;
+        }
+    }
+
+    public static LocalDate parseTimeString(String s) {
+        try {
+            return LocalDate.parse(s);
+        } catch (DateTimeParseException e) {
+            throw new InvalidTimeFormatException("the inputted time format is invalid, please enter as yyyy-mm-dd");
         }
     }
 

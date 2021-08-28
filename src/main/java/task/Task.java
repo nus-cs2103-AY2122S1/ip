@@ -1,7 +1,9 @@
+package task;
+
 public abstract class Task {
 
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -11,6 +13,14 @@ public abstract class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    public String description() {
+        return this.description;
     }
 
     public String getStatusIcon() {

@@ -1,3 +1,5 @@
+package dialog;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,6 +32,16 @@ public class Dialog {
             return newDialog;
         }
     }
+
+    public static boolean containsId(String id) {
+        return archive.containsKey(id);
+    }
+
+    public static Dialog get(String key) {
+        return archive.get(key);
+    }
+
+
 
     public static Dialog getDialog(String id) {
         return archive.get(id);

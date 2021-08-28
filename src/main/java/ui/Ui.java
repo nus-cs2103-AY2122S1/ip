@@ -1,3 +1,12 @@
+package ui;
+
+import dialog.Dialog;
+import dialog.DialogException;
+import dialog.TaskDialog;
+import storage.Storage;
+
+import task.TaskList;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,8 +46,8 @@ public class Ui {
 
     public static void printSelectSaveFile() throws DialogException, IOException {
         String dialogId = "selectSaveFile";
-        if (Dialog.archive.containsKey(dialogId)) {
-            System.out.println(Dialog.archive.get(dialogId));
+        if (Dialog.containsId(dialogId)) {
+            System.out.println(Dialog.get(dialogId));
         } else {
             Dialog selectSaveFile = Dialog.generate("selectSaveFile");
             selectSaveFile.add("Select your save file:\n");
@@ -79,8 +88,8 @@ public class Ui {
 
     public static void showConfirmCreateNewFile(String fileName) throws DialogException {
         String dialogId = "confirmCreateNewFile" + fileName;
-        if (Dialog.archive.containsKey(dialogId)) {
-            System.out.println(Dialog.archive.get(dialogId));
+        if (Dialog.containsId(dialogId)) {
+            System.out.println(Dialog.get(dialogId));
         } else {
             Dialog confirmCreate = Dialog.generate(dialogId);
             confirmCreate.add("Are you sure you want to create new file " + fileName + " [y/N]?");
@@ -90,8 +99,8 @@ public class Ui {
 
     public static void showCommandList() throws DialogException {
         String dialogId ="commands";
-        if (Dialog.archive.containsKey(dialogId)) {
-            System.out.println(Dialog.archive.get(dialogId));
+        if (Dialog.containsId(dialogId)) {
+            System.out.println(Dialog.get(dialogId));
         } else {
             Dialog commandsList = Dialog.generate(dialogId);
             commandsList.add("This is the following commands, I can perform:\n");
