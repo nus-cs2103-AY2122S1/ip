@@ -15,8 +15,12 @@ public class Task {
         this.isDone = true;
     }
     
-    public String taskList() {
-        return "|" + " [" + this.getStatusIcon() + "]" + " | " + this.description;
+    public String taskListOnDisk() {
+        if (this.isDone) {
+            return " | X | ";
+        } else {
+            return " |  | ";
+        }
     }
     
     @Override

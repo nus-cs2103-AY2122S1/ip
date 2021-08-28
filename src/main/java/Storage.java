@@ -43,7 +43,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             for (int i = 0; i < tl.size(); i++) {
                 int num = i + 1;
-                fw.write(num + ". " + tl.getTask(i).taskList() + "\n");
+                fw.write(num + ". " + tl.getTask(i).taskListOnDisk() + "\n");
             }
             fw.close();
         } catch (IOException e) {

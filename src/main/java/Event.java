@@ -3,21 +3,22 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     protected LocalDateTime at;
+    private String formattedDtf;
     
     public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
+        String formattedDtf = this.at.format(dtf);
+        this.formattedDtf = formattedDtf;
     }
-    
-    @Override
-    public String taskList() {
-        return "Event " + super.taskList() + " (at: " + at + ")";
+
+    public String taskListOnDisk() {
+        return "Event" + super.taskListOnDisk() + this.formattedDtf;
     }
     
     @Override
     public String toString() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
-        String formattedDtf = this.at.format(dtf);
         return "[E]" + super.toString() + " (at: " + formattedDtf + ")";
     }
 }
