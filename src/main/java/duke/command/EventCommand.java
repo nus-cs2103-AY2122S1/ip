@@ -22,7 +22,11 @@ public class EventCommand extends Command {
     }
 
     /**
-     * {@inheritDoc} Adds a {@code Event} to tasks and writes to storage.
+     * Adds a {@code Event} to tasks and writes to storage. Displays the new task in the terminal.
+     *
+     * @param tasks   the tasklist to be modified.
+     * @param ui      responsible for printing to the terminal.
+     * @param storage stores all the tasks.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

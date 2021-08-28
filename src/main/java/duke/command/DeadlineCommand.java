@@ -23,7 +23,11 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * {@inheritDoc} Adds {@code Deadline} to tasks and writes to storage.
+     * Adds {@code Deadline} to tasks and writes to storage. Displays the new task in the terminal.
+     *
+     * @param tasks   the tasklist to be modified.
+     * @param ui      responsible for printing to the terminal.
+     * @param storage stores all the tasks.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

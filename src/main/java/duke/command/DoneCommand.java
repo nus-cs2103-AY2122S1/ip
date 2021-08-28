@@ -24,8 +24,12 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * {@inheritDoc} Marks a {@code Task} as done and writes to storage. If task is
+     * Marks a {@code Task} as done and writes to storage. If task is
      * already done, ui will display an error message.
+     *
+     * @param tasks   the tasklist to be modified.
+     * @param ui      responsible for printing to the terminal.
+     * @param storage stores all the tasks.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

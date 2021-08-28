@@ -23,8 +23,12 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * {@inheritDoc} Deletes a task with the given task number in the args. Writes
-     * to storage after deletion.
+     * Deletes a task with the given task number. Writes to storage after deletion.
+     * Displays the deleted task in the terminal.
+     *
+     * @param tasks   the tasklist to be modified.
+     * @param ui      responsible for printing to the terminal.
+     * @param storage stores all the tasks.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

@@ -20,6 +20,10 @@ public class ListCommand extends Command {
 
     /**
      * Shows all the tasks.
+     *
+     * @param tasks   the tasklist to be modified.
+     * @param ui      responsible for printing to the terminal.
+     * @param storage stores all the tasks.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

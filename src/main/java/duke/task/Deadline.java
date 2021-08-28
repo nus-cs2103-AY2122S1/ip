@@ -12,8 +12,8 @@ import duke.DukeException;
  * @author Eizabeth Chow
  */
 public class Deadline extends Task {
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy H:mm");
-    private final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-yyyy H:mm");
+    private static final DateTimeFormatter PRINT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy h:mma");
     // End date of the Deadline object
     private final LocalDateTime endDate;
 

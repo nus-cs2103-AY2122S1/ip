@@ -22,7 +22,11 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * {@inheritDoc} Adds a {@code Todo} to tasks and writes to storage.
+     * Adds a {@code Todo} to tasks and writes to storage. Displays the new task in the terminal.
+     *
+     * @param tasks   the tasklist to be modified.
+     * @param ui      responsible for printing to the terminal.
+     * @param storage stores all the tasks.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTodoTask(args[0]);
@@ -31,8 +35,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Returns {@code false}. Program should not terminate after
-     * {@code ListCommand}.
+     * Returns {@code false}. Program should not terminate after {@code ListCommand}.
      *
      * @return {@code false}
      */
