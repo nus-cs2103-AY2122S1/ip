@@ -1,24 +1,45 @@
-# Duke project template
+# Pilcrow - the future of task management
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+*Disclaimer: the claims below are made in jest (obviously). Do no take them seriously.*
 
-## Setting up in Intellij
+> Pilcrow is the future of task management. It is my magnum opus, my Mona Lisa, my piece de resistance. It combines function and form in such an elegant way that one who has laid eyes or ears upon it can scarcely fathom any possible state for it, besides sheer sublimity and ineffable perfection. In short, it is nothing but the culmination and precipitation of my life's work, the single point towards which all my efforts since birth have been directed. It is magnificence in its raw unfiltered form; we are all simlarly graced by its presence. -  Me
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩🤩
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+
+Welcome to Pilcrow, the most advanced task-keeping software you'll find anywhere!
+
+Here's a list of features that are already available in the current version of Pilcrow - you can:
+1. Add tasks!
+1. List your existing tasks out!
+1. Mark tasks as done!
+1. Delete tasks!
+1. And much, much, much more!
+
+You can even tinker around with it to improve it to your own liking too! Here's a snippet of Java code that I used:
+
+~~~java
+    public static void main(String[] args) {
+        Pilcrow pilcrow = new Pilcrow();
+        pilcrow.run();
+    }
+~~~
+
+Wow! Aren't you impressed?
+
+Here's a live demo of how Pilcrow works: [Pilcrow Demo](https://www.theraleighregister.com/wwwyoutubecomamazingpilcrowdemo.html)
+
+Isn't it great? Don't say I didn't warn you!
+
+How did you feel after watching the demo?
+- [x] Awestruck
+- [x] Dumbstruck
+- [x] I have glimpsed a fraction of the divine, a sliver of transcendence, a glimpse of God. I shall now download Pilcrow and use it for the remainder of my days.
+
+Still not convinced? Here's some reasons why Pilcrow is so great:
+- It's free.
+- It's cheap. In fact, it's so cheap it'll cost you nothing. It's free, really!
+- You can use it on a computer. Computers are cool, right? They're *in* now, aren't they?
+- You operate it by typing in words. Words allow you to say things and communicate information, otherwise we wouldn't be able to tell each other anything. Since words are important, Pilcrow is important too!
+
+This is just a fraction of what Pilcrow can do for you; there' lots more to come! Don't take my word for it, just try it!
