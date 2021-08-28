@@ -69,11 +69,16 @@ public class Duke {
         scanner.close();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input.trim());
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
+        }
+    }
+
+    public String getWelcomeMessage() {
+        return ui.showWelcome();
     }
 }

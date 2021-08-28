@@ -30,20 +30,23 @@ public class DoneCommand extends Command {
      * @param tasks   the tasklist to be modified.
      * @param ui      responsible for printing to the terminal.
      * @param storage stores all the tasks.
+     *
+     * @return String message to be displayed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int taskNo = Integer.parseInt(args[0]);
         Pair<Boolean, Task> statusTaskPair = tasks.markTaskDone(taskNo);
+        storage.writeToFile(tasks);
+
         boolean isTaskAlreadyDone = statusTaskPair.getFirst();
         Task task = statusTaskPair.getSecond();
 
         if (isTaskAlreadyDone) {
-            ui.showError(String.format("Task %s is already done!\n  %s", taskNo + 1, task));
+            return ui.showError(String.format("Task %s is already done!\n  %s", taskNo + 1, task));
         } else {
-            ui.showDoneTask(task);
+            return ui.showDoneTask(task);
         }
-        storage.writeToFile(tasks);
     }
 
     /**

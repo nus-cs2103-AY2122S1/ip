@@ -21,14 +21,13 @@ public class Ui {
     /**
      * Displays the welcome message when the app starts running.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        printMessage("Hello! I'm Duke\nWhat can I do for you?");
+        return printMessage("Hello from\n" + logo + "\nHello! I'm Duke\nWhat can I do for you?");
     }
 
     /**
@@ -36,8 +35,8 @@ public class Ui {
      *
      * @param message Error message to be displayed.
      */
-    public void showError(String message) {
-        printMessage(String.format(ERROR_FORMAT, message));
+    public String showError(String message) {
+        return printMessage(String.format(ERROR_FORMAT, message));
     }
 
     /**
@@ -47,8 +46,8 @@ public class Ui {
      * @param task       {@code Task} to be displayed.
      * @param taskLength Number of tasks.
      */
-    public void showNewTask(Task task, int taskLength) {
-        printMessageWithTaskCount(ADD_FORMAT, task, taskLength);
+    public String showNewTask(Task task, int taskLength) {
+        return printMessageWithTaskCount(ADD_FORMAT, task, taskLength);
     }
 
     /**
@@ -57,8 +56,8 @@ public class Ui {
      * @param task       {@code Task} to be displayed.
      * @param taskLength Number of tasks.
      */
-    public void showDeletedTask(Task task, int taskLength) {
-        printMessageWithTaskCount(DELETE_FORMAT, task, taskLength);
+    public String showDeletedTask(Task task, int taskLength) {
+        return printMessageWithTaskCount(DELETE_FORMAT, task, taskLength);
     }
 
     /**
@@ -66,15 +65,15 @@ public class Ui {
      *
      * @param task {@code Task} to be displayed.
      */
-    public void showDoneTask(Task task) {
-        printMessage(String.format(DONE_FORMAT, task));
+    public String showDoneTask(Task task) {
+        return printMessage(String.format(DONE_FORMAT, task));
     }
 
     /**
      * Shows the exit message.
      */
-    public void showExit() {
-        printMessage("Bye. Hope to see you again soon!");
+    public String showExit() {
+        return printMessage("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -82,16 +81,16 @@ public class Ui {
      *
      * @param tasks An ArrayList of {@code Task} to be displayed.
      */
-    public void showTasks(ArrayList<Task> tasks) {
+    public String showTasks(ArrayList<Task> tasks) {
+        ArrayList<String> message = new ArrayList<>();
         if (tasks.isEmpty()) {
-            printMessage("Nothing in the list!");
+            message.add("Nothing in the list!");
         } else {
-            printLine();
             for (int i = 0; i < tasks.size(); i++) {
-                printWithTabIndent(String.format("%d. %s", i + 1, tasks.get(i).toString()));
+                message.add(String.format("%d. %s", i + 1, tasks.get(i).toString()));
             }
-            printLine();
         }
+        return printMessage(message);
     }
 
     /**
@@ -99,17 +98,17 @@ public class Ui {
      *
      * @param tasks Tasks to be displayed.
      */
-    public void showFilteredTasks(ArrayList<Task> tasks) {
+    public String showFilteredTasks(ArrayList<Task> tasks) {
+        ArrayList<String> message = new ArrayList<>();
         if (tasks.isEmpty()) {
-            printMessage("No matching tasks found in the list.");
+            message.add("No matching tasks found in the list.");
         } else {
-            printLine();
-            printWithTabIndent("Here are the matching tasks in your list:");
+            message.add("Here are the matching tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                printWithTabIndent(String.format("%d. %s", i + 1, tasks.get(i).toString()));
+                message.add(String.format("%d. %s", i + 1, tasks.get(i).toString()));
             }
-            printLine();
         }
+        return printMessage(message);
     }
 
     private void printWithTabIndent(String str) {
@@ -120,14 +119,23 @@ public class Ui {
         printWithTabIndent(HORIZONTAL_LINE);
     }
 
-    private void printMessage(String message) {
+    private String printMessage(String message) {
         printLine();
         printWithTabIndent(message.replace("\n", "\n\t"));
         printLine();
+        return message;
     }
 
-    private void printMessageWithTaskCount(String format, Task task, int taskLength) {
-        printMessage(
+    private String printMessage(ArrayList<String> message) {
+        String joinedMessages = String.join("\n", message);
+        printLine();
+        printWithTabIndent(joinedMessages.replace("\n", "\n\t"));
+        printLine();
+        return joinedMessages;
+    }
+
+    private String printMessageWithTaskCount(String format, Task task, int taskLength) {
+        return printMessage(
                 String.format(format + "\n" + TASK_COUNT_FORMAT, task, taskLength, taskLength == 1 ? "task" : "tasks"));
     }
 }

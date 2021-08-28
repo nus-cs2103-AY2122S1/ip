@@ -24,11 +24,13 @@ public class ExitCommand extends Command {
      * @param tasks   the tasklist to be modified.
      * @param ui      responsible for printing to the terminal.
      * @param storage stores all the tasks.
+     *
+     * @return String message to be displayed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.writeToFile(tasks);
-        ui.showExit();
+        return ui.showExit();
     }
 
     /**

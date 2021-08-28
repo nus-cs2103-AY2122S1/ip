@@ -29,12 +29,14 @@ public class DeleteCommand extends Command {
      * @param tasks   the tasklist to be modified.
      * @param ui      responsible for printing to the terminal.
      * @param storage stores all the tasks.
+     *
+     * @return String message to be displayed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.deleteTask(Integer.parseInt(args[0]));
         storage.writeToFile(tasks);
-        ui.showDeletedTask(task, tasks.size());
+        return ui.showDeletedTask(task, tasks.size());
     }
 
     /**

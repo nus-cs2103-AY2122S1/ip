@@ -24,10 +24,12 @@ public class ListCommand extends Command {
      * @param tasks   the tasklist to be modified.
      * @param ui      responsible for printing to the terminal.
      * @param storage stores all the tasks.
+     *
+     * @return String message to be displayed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTasks(tasks.getTasks());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showTasks(tasks.getTasks());
     }
 
     /**

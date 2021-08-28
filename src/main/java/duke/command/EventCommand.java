@@ -27,12 +27,14 @@ public class EventCommand extends Command {
      * @param tasks   the tasklist to be modified.
      * @param ui      responsible for printing to the terminal.
      * @param storage stores all the tasks.
+     *
+     * @return String message to be displayed.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addEventTask(args[0], args[1]);
         storage.writeToFile(tasks);
-        ui.showNewTask(tasks.lastTask(), tasks.size());
+        return ui.showNewTask(tasks.lastTask(), tasks.size());
     }
 
     /**
