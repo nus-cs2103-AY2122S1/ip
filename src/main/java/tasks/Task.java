@@ -23,13 +23,8 @@ public abstract class Task {
         return DONE_MSG + "\n" + this.toString();
     }
 
-    public String delete() {
-        return DELETE_MSG + "\n" + this.toString();
-    }
-
-    public String commandString() {
-        return NEW_TASK_MSG + "\n"
-            + this.toString();
+    public boolean contains(String keyword) {
+        return this.description.contains(keyword);
     }
 
     public abstract String getformmatedData();
@@ -46,6 +41,7 @@ public abstract class Task {
     public String toString() {
         return this.type + this.statusSymbol + " " + this.description;
     }
+
 }
 
 
