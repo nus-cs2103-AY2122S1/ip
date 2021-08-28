@@ -1,8 +1,7 @@
-package test;
-
 import duke.Task;
-import org.junit.Assert;
-import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 /**
  * A class to test the methods in <code>Task</code>.
@@ -13,6 +12,6 @@ public class TaskTest {
     public void testGetStatusIcon() {
         Task task = new Task("description", true);
         String status = task.getStatusIcon();
-        Assert.assertEquals("X", status);
+        assertEquals("X", status);
     }
 }
