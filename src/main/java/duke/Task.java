@@ -13,6 +13,10 @@ public class Task {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    public boolean getDoneStatus() {
+        return isDone;
+    }
+
     public void markAsDone() {
         isDone = true;
     }
@@ -26,5 +30,7 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
-    public String toStringData() { return "|" + getStatusIcon() + "|" + description; }
+    public String toStringData() {
+        return "|" + getStatusIcon() + "|" + description;
+    }
 }

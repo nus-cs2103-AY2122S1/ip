@@ -17,6 +17,10 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 
+    public LocalDate getDueDate() {
+        return by;
+    }
+
     @Override
     public String toStringData() {
         return "D" + super.toStringData() + "|" + by;
