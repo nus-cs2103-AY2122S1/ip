@@ -6,7 +6,6 @@ package duke;
  * @author Adam Ho
  */
 public class Todo extends Task {
-
     /**
      * Creates a to-do task with the specified description.
      * @param description The task description.
@@ -23,4 +22,5 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
 }

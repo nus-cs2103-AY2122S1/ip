@@ -13,6 +13,7 @@ import java.util.Scanner;
  * @author Adam Ho
  */
 public class Storage {
+    private final String BAR = " | ";
     private String filePath;
 
     public Storage(String filePath) {
@@ -26,24 +27,19 @@ public class Storage {
     public void saveTasks(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         ArrayList<Task> taskList = tasks.getTaskList();
-        for (Task t : taskList) {
+        for (Task task : taskList) {
             String taskDetails;
-            String done = t.isDone ? "1" : "0";
-            String command = "todo";
-            switch (command) {
-            case "todo":
-                taskDetails = "T" + " uwu " + done + " uwu " + t.description + "\n";
-                break;
-            case "deadline":
-                Deadline d = (Deadline) t;
-                taskDetails = "D" + " uwu " + done + " uwu " + d.description + " uwu " + d.by + "\n";
-                break;
-            case "event":
-                Event e = (Event) t;
-                taskDetails = "E" + " uwu " + done + " uwu " + e.description + " uwu " + e.at + "\n";
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + command);
+            String done = task.isDone ? "1" : "0";
+            if (task instanceof Todo) {
+                taskDetails = "T" + BAR + done + BAR + task.description + "\n";
+            } else if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                taskDetails = "D" + BAR + done + BAR + deadline.description
+                        + BAR + deadline.by + "\n";
+            } else {
+                Event event = (Event) task;
+                taskDetails = "E" + BAR + done + BAR + event.description
+                        + BAR + event.at + "\n";
             }
             fw.write(taskDetails);
         }
@@ -60,7 +56,7 @@ public class Storage {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         while (s.hasNext()) {
-            String[] taskFormat = s.nextLine().split(" uwu ");
+            String[] taskFormat = s.nextLine().split(" \\| ");
             Task t;
             if (taskFormat[0].equals("T")) {
                 t = new Todo(taskFormat[2]);

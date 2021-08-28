@@ -10,7 +10,6 @@ import java.io.Serializable;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected static int totalTasks = 0;
 
     /**
      * Creates a task with the specified description.
@@ -19,7 +18,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        ++totalTasks;
     }
 
     /**

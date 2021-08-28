@@ -1,1 +1,4 @@
-T uwu 0 uwu go school
+T | 0 | go school
+D | 0 | ip | tmr
+T | 0 | go school
+D | 0 | ip | today

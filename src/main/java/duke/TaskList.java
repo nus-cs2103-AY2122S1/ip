@@ -20,6 +20,9 @@ public class TaskList {
         return taskList;
     }
 
+    public int getListSize() {
+        return taskList.size();
+    }
     /**
      * Adds a task to the list of tasks.
      * @param task The task to add.
@@ -37,7 +40,6 @@ public class TaskList {
         try {
             Task t = taskList.get(taskId-1);
             taskList.remove(t);
-            --Task.totalTasks;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException.MissingTaskException();
         }

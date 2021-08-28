@@ -12,12 +12,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         tasks.addTask(task);
-        ui.showAddTask(task);
+        ui.showAddTask(tasks, task);
         storage.saveTasks(tasks);
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

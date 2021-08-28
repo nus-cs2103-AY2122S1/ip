@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author Adam Ho
  */
 public class Ui {
-    private final String DIVIDER = "    ____________________________________________________________\n";
+    private final String DIVIDER = "\t____________________________________________________________";
     private Scanner sc = new Scanner(System.in);
 
     public String readCommand() {
@@ -20,43 +20,33 @@ public class Ui {
     }
 
     public void showWelcome() {
-        System.out.println(DIVIDER
-                + "    Hello! I'm Adam, your personal chat bot.\n"
-                + "    How may I assist you today?"
-                + DIVIDER);
+        System.out.println("\tHello! I'm Adam, your personal chat bot.\n\tHow may I assist you today?");
     }
 
     public void showExit() {
-        System.out.println(DIVIDER
-                + "    Goodbye! Please visit me again soon :("
-                + DIVIDER);
+        System.out.println("\tGoodbye! Please visit me again soon :(");
     }
 
-    public void showAddTask(Task task) {
-        System.out.println("    ____________________________________________________________");
+    public void showAddTask(TaskList tasks, Task task) {
         System.out.println("    Got it. I've added this task: \n      " + task);
-        System.out.println("    Now you have " + "testsize" + " in the list.");
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    Now you have " + tasks.getListSize() + " in the list.");
     }
 
-    public void showDeleteTask(Task task) {
-        System.out.println("    ____________________________________________________________");
+    public void showDeleteTask(TaskList tasks, Task task) {
         System.out.println("    Noted. I've removed this task: \n      " + task);
-        System.out.println("    Now you have " + "testsize" + " in the list.");
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    Now you have " + tasks.getListSize() + " in the list.");
     }
 
     public void showLoadingError() {
-        System.out.println(DIVIDER + "TEST LOADING ERROR" + DIVIDER);
+        System.out.println("TEST LOADING ERROR");
     }
 
-//    public static void list(ArrayList<Task> tasks) {
-//        System.out.println("    ____________________________________________________________");
-//        for (Task task : tasks) {
-//            System.out.println("    " + (tasks.indexOf(task) + 1) + "." + task);
-//        }
-//        System.out.println("    ____________________________________________________________");
-//    }
+    public void showTaskList(TaskList tasks) {
+        int id = 1;
+        for (Task task : tasks.getTaskList()) {
+            System.out.println("\t" + id++ + "." + task);
+        }
+    }
 
     public static void done(Task task) {
         System.out.println("    ____________________________________________________________");
