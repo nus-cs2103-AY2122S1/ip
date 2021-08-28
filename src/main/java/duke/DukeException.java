@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * A representation of exceptions that belong to a <code>Duke</code>
+ * object.
+ */
 public class DukeException extends Exception {
     private String message;
     public DukeException(String message) {

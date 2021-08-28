@@ -3,6 +3,14 @@ package duke;
 import duke.commands.Command;
 import java.util.Scanner;
 
+/**
+ * Represents an interactive to-do list bot that can be run
+ * to simulate making a to-do list.
+ * It interacts with a <code>Storage</code> object to save
+ * the state of the list across runtimes.
+ * It interacts with a <code>Ui</code> object by using it as
+ * I/O.
+ */
 public class Duke {
     private static final String LOGO = "Hello from\n____        _        \n"
         + "|  _ \\ _   _| | _____ \n"
@@ -32,6 +40,9 @@ public class Duke {
         this.run();
     }
 
+    /**
+     * Initializes the application to run the to-do list simulation.
+     */
     public void run() {
         Scanner sc = new Scanner(System.in);
         boolean isExit = false;

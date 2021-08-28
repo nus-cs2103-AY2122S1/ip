@@ -10,7 +10,19 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ListCommand;
 
+/**
+ * Represents a decoder for user inputs to initialize
+ * and execute respective <code>Command</code> objects.
+ */
 public class Parser {
+
+    /** 
+     * Reads a line taken from the user input.
+     * 
+     * @param line The input line.
+     * @returns The corresponding command.
+     * @throws DukeException If the input is not able to be decoded or parsed.
+     */
     public static Command parse(String line) throws DukeException {
         Command c;
         String[] lineSegments = line.split(" ");

@@ -12,6 +12,9 @@ import java.lang.StringBuilder;
 import java.util.ListIterator;
 import java.util.Scanner;
 
+/**
+ * Handles loading and saving to-do lists to and from the system.
+ */
 public class Storage {
     private File file;
 
@@ -28,6 +31,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves a to-do list to system storage.
+     * 
+     * @param itemList List to save.
+     * @throws DukeException If an <code>IOException</code> occurs.
+     */
     public void saveState(ItemList itemList) throws DukeException {
         StringBuilder s = new StringBuilder();
 
@@ -60,6 +69,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads a saved to-do list from file.
+     * 
+     * @return <code>ItemList</code> object containing the saved data.
+     */
     public ItemList loadState() {
         ItemList itemList = new ItemList();
         try {
