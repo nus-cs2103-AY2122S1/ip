@@ -42,7 +42,7 @@ public class MarkDoneCommand extends Command {
         taskList.markDone(index);
         ui.add("Nice! I've marked this task as done:");
         ui.add("  " + taskList.get(index));
-        ui.print();
+        this.setOutput(ui.print());
         storage.saveTasks(taskList.getTasks());
     }
 }

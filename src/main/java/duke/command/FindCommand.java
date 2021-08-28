@@ -57,7 +57,7 @@ public class FindCommand extends Command {
                 counter++;
             }
         }
-        ui.print();
+        this.setOutput(ui.print());
         storage.saveTasks(taskList.getTasks());
     }
 

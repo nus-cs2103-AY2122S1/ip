@@ -29,10 +29,10 @@ public class UI {
     /**
      * Prints a start-up message to standard output.
      */
-    public void printStartUpMessage() {
+    public String printStartUpMessage() {
         add("Hello! I'm Duke");
         add("What can I do for you?");
-        print();
+        return print();
     }
 
     /**
@@ -40,12 +40,12 @@ public class UI {
      *
      * @param ex The exception whose error messages will be printed.
      */
-    public void printErrorMessage(DukeException ex) {
+    public String printErrorMessage(DukeException ex) {
         add(ex.getMessage());
         for (String line : ex.getHelpMessages()) {
             add(line);
         }
-        print();
+        return print();
     }
 
     /**
@@ -77,13 +77,12 @@ public class UI {
      * Prints all lines in the list of lines to be printed,
      * then clears the list.
      */
-    public void print() {
-        System.out.println(tab + horizontalLine);
+    public String print() {
+        String output = "";
         for (String line : list) {
-            System.out.println(tab + " " + line);
+            output += tab + " " + line + "\n";
         }
-        System.out.println(tab + horizontalLine);
-        System.out.println();
         clear();
+        return output;
     }
 }

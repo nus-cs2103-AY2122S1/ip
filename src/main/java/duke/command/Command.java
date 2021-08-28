@@ -15,6 +15,16 @@ import duke.task.TaskList;
  * @version CS2103 AY21/22 Sem 1 iP
  */
 public abstract class Command {
+    private String output;
+
+    public String getOutput() {
+        return this.output;
+    }
+
+    public void setOutput(String string) {
+        this.output = string;
+    }
+
     /**
      * Executes this Command and prints appropriate responses.
      *
