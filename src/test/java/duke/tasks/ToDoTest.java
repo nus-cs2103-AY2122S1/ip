@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
-    ToDo t = new ToDo("JUnit test iP", true);
+    private ToDo t = new ToDo("JUnit test iP", true);
 
     @Test
     public void testContainsKeyword() {

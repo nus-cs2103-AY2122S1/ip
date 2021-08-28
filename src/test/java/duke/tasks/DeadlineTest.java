@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
-    Deadline dl = new Deadline("JUnit test iP", LocalDateTime.of(2021, 8, 26, 22, 30));
+    private Deadline dl = new Deadline("JUnit test iP", LocalDateTime.of(2021, 8, 26, 22, 30));
 
     @Test
     public void testFormatForSave() {

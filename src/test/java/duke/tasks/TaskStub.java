@@ -1,9 +1,9 @@
 package duke.tasks;
 
 public class TaskStub extends Task {
-    int stubNo;
+    private final int stubNo;
 
-    public TaskStub(int stubNo) {
+    TaskStub(int stubNo) {
         super("Stub task " + stubNo, true);
         this.stubNo = stubNo;
     }

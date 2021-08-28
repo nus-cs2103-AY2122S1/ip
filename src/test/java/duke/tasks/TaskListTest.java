@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
-    TaskList list = new TaskList();
+    private TaskList list = new TaskList();
 
     @Test
     public void testEmptyListToString() {
@@ -34,7 +34,7 @@ public class TaskListTest {
     @Test
     public void testMarkAsDone() {
         list.add(new TaskStub(1));
-        assertFalse(list.markAsDone(1));      // stub task is always already done
+        assertFalse(list.markAsDone(1)); // stub task is always already done
     }
 
     @Test
@@ -51,7 +51,7 @@ public class TaskListTest {
         String[] data = new String[4];
         for (int i = 1; i < 5; i++) {
             list.add(new TaskStub(i));
-            data[i-1] = String.format("S | 1 | Stub task %d", i);
+            data[i - 1] = String.format("S | 1 | Stub task %d", i);
         }
         assertArrayEquals(data, list.toSaveFormat().toArray());
     }
