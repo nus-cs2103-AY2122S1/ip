@@ -39,7 +39,6 @@ public class Duke {
                 ui.printError(e.getMessage());
             }          
         }
-
         ui.printExitMessage();
     }
 }
