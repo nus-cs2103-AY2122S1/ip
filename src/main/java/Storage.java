@@ -16,6 +16,7 @@ public class Storage {
     private static final String FILE_PATH = DIRECTORY_PATH + "/tasks.txt";
     private final StorageParser parser = new StorageParser();
     private final File file;
+    protected static final String DELIMITER = StorageParser.DELIMITER;
 
     /**
      * Constructor for Storage.

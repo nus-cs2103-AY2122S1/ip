@@ -74,7 +74,7 @@ public class StorageParser {
                 throw new DukeException("OOPS!!! Storage data has been tampered.");
             }
             dateTimeString = data[DATETIME_INDEX].trim();
-            task = new EventTask(description, dateTimeString);
+            task = new DeadlineTask(description, dateTimeString);
             break;
         default:
             task = new ToDoTask(description);

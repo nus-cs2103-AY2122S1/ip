@@ -20,7 +20,7 @@ public class InputParser {
         String[] words = trimmedUserInput.split(DELIMITER);
         String commandKeyword = words[COMMAND_INDEX].toLowerCase();
         if (userInput.contains(StorageParser.DELIMITER)) {
-            throw new DukeException("OOPS!!! Please avoid using the symbol \"¬\"");
+            throw new DukeException("OOPS!!! Please avoid using the symbol \"" + Storage.DELIMITER + "\".");
         }
         switch (commandKeyword) {
         case FindCommand.KEYWORD:
