@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * This represents a storage place where all the tasks are stored.
@@ -99,6 +98,8 @@ public class Storage {
                 taskEvent.setDone();
             }
             createdTask = taskEvent;
+            break;
+        default:
             break;
         }
 
