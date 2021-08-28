@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 [D][ ] meet Mark  (by: Tuesday)
 [D][ ] return book  (by: Monday)
+=======
+[E][ ] project meeting  (at: Oct 15 2015)
+[E][X] project call  (at: Nov 16 2015)
+>>>>>>> branch-Level-8
