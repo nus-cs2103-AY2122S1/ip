@@ -6,15 +6,15 @@ import java.util.List;
  * Deals with interactions with the user.
  */
 public class Ui {
-    private final TaskList TASKLIST;
+    private final TaskList taskList;
 
     /**
      * Constructor for Ui.
      *
-     * @param TASKLIST The task list to be displayed.
+     * @param taskList The task list to be displayed.
      */
-    public Ui(TaskList TASKLIST) {
-        this.TASKLIST = TASKLIST;
+    public Ui(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     /**
@@ -41,8 +41,8 @@ public class Ui {
     public void displayTasks() {
         System.out.println("___________________________________________________");
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < this.TASKLIST.size(); i++) {
-            System.out.println((i + 1) + ". " + TASKLIST.get(i).toString());
+        for (int i = 0; i < this.taskList.size(); i++) {
+            System.out.println((i + 1) + ". " + taskList.get(i).toString());
         }
         System.out.println("___________________________________________________\n");
     }
@@ -56,7 +56,8 @@ public class Ui {
         String output = "Added: " + task.toString();
         System.out.println("___________________________________________________");
         System.out.println(output);
-        System.out.println("Now you have " + this.TASKLIST.size() + " task" + ((this.TASKLIST.size() <= 1) ? "" : "s") + " in the list");
+        System.out.println("Now you have " + this.taskList.size() + " task"
+                + ((this.taskList.size() <= 1) ? "" : "s") + " in the list");
         System.out.println("___________________________________________________\n");
     }
 
@@ -69,7 +70,8 @@ public class Ui {
         System.out.println("___________________________________________________");
         System.out.println(" Noted. I've removed this task:");
         System.out.println(toBeDeleted);
-        System.out.println("Now you have " + this.TASKLIST.size() + " task" + ((this.TASKLIST.size() <= 1) ? "" : "s") + " in the list");
+        System.out.println("Now you have " + this.taskList.size()
+                + " task" + ((this.taskList.size() <= 1) ? "" : "s") + " in the list");
         System.out.println("___________________________________________________\n");
     }
 

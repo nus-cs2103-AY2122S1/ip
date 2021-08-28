@@ -10,17 +10,17 @@ abstract class DukeException extends Exception {
  * Throws when the description of a task is empty.
  */
 class EmptyDescriptionException extends DukeException {
-    private final String ACTION;
+    private final String action;
 
-    public EmptyDescriptionException(String ACTION) {
-        this.ACTION = ACTION;
+    public EmptyDescriptionException(String action) {
+        this.action = action;
     }
 
     @Override
     public String toString() {
         return "___________________________________________________\n"
-                + "☹ OOPS!!! The description of a " + this.ACTION + " cannot be empty.\n" +
-                "___________________________________________________\n";
+                + "☹ OOPS!!! The description of a " + this.action + " cannot be empty.\n"
+                + "___________________________________________________\n";
     }
 }
 
@@ -53,16 +53,16 @@ class NoSuchTaskException extends DukeException {
  * Throws when the task index given is out of bound.
  */
 class InvalidTaskIndexException extends DukeException {
-    private final String ACTION;
+    private final String action;
 
-    public InvalidTaskIndexException(String ACTION) {
-        this.ACTION = ACTION;
+    public InvalidTaskIndexException(String action) {
+        this.action = action;
     }
 
     @Override
     public String toString() {
         return "___________________________________________________\n"
-                + "Please enter the command " + ACTION + " with a valid number\n"
+                + "Please enter the command " + action + " with a valid number\n"
                 + "___________________________________________________\n";
     }
 }
