@@ -32,14 +32,24 @@ public class ToDoList {
     /**
      * Adds user input to list and pretty prints a visual feedback.
      *
-     * @param task Task to be stored into the list.
+     * @param tasks Tasks/task to be stored into the list.
      * @return string to be printed out.
      */
-    public String addToList(Task task) {
-        list.add(task);
-        return String.format("Got it. I've added this task:" + Ui.LINE_SEPARATOR
-                        + "  %sNow you have %s tasks in the list.",
-                        task + Ui.LINE_SEPARATOR, list.size());
+    public String addToList(Task... tasks) {
+        if (tasks.length == 1) {
+            list.add(tasks[0]);
+            return String.format("Got it. I've added this task:" + Ui.LINE_SEPARATOR
+                            + "  %sNow you have %s tasks in the list.",
+                    tasks[0] + Ui.LINE_SEPARATOR, list.size());
+        } else {
+            StringBuilder sb = new StringBuilder("Got it. I've added these tasks:\n");
+            for (Task t : tasks) {
+                list.add(t);
+                sb.append("  ").append(t).append("\n");
+            }
+            sb.append("Now you have ").append(list.size()).append(" tasks in the list.");
+            return sb.toString();
+        }
     }
 
     /**

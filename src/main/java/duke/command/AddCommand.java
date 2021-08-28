@@ -3,6 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 import duke.util.DataManager;
 import duke.util.ToDoList;
@@ -50,6 +51,22 @@ public class AddCommand extends Command {
         // Check whether description is entered
         if (extracted.length < 2) {
             return "Todo command has to be followed by a task description!";
+        }
+
+        if (input.split(", ").length >= 2) {
+            String[] inputTasks = extracted[1].split(", ");
+            Task[] tasks = new Task[inputTasks.length];
+            try {
+                for (int i = 0, inputTasksLength = inputTasks.length; i < inputTasksLength; i++) {
+                    String inputTask = inputTasks[i];
+                    ToDo task = new ToDo(inputTask);
+                    tasks[i] = task;
+                    dataManager.writeToFile(task);
+                }
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+            return list.addToList(tasks);
         }
 
         ToDo task = new ToDo(extracted[1]);
