@@ -13,7 +13,7 @@ public class ParserTest {
         TaskList taskList = new TaskList();
         Parser parser = new Parser();
         parser.parseInput(taskList, "todo make lunch");
-        String expected = "Current List:\n" + "---------------\n" +
+        String expected = "List:\n" + "---------------\n" +
                 "ToDo: make lunch [ ]";
         assertEquals(expected, taskList.toString());
     }
@@ -25,7 +25,7 @@ public class ParserTest {
         taskList.add(todo);
         Parser parser = new Parser();
         parser.parseInput(taskList, "delete 1");
-        String expected = "Current List:\n" + "---------------\n";
+        String expected = "List:\n" + "---------------\n";
         assertEquals(expected, taskList.toString());
     }
 }
