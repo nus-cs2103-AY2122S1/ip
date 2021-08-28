@@ -1,9 +1,7 @@
 package duke;
 
 import java.io.IOException;
-
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 
 /**
@@ -63,6 +61,7 @@ public class TaskList {
         case EVENT:
             list.add(new Event(description, time, isDone, hasNotif));
             break;
+        default:
         }
         if (hasNotif) {
             duke.getUi().showAddTask();
@@ -92,6 +91,7 @@ public class TaskList {
         case EVENT:
             list.add(new Event(description, time, isDone, hasNotif));
             break;
+        default:
         }
         if (hasNotif) {
             duke.getUi().showAddTask();

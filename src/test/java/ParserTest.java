@@ -1,8 +1,9 @@
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import duke.Duke;
 import duke.Parser;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Test;
 
 /**
  * A class to test the methods in <code>Parser</code>.

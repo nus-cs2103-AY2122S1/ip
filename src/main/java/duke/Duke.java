@@ -14,17 +14,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public TaskList getTasks() {
-        return this.tasks;
-    }
-
-    public Storage getStorage() {
-        return this.storage;
-    }
-    public Ui getUi() {
-        return this.ui;
-    }
-
     /**
      * Returns a Duke object
      *
@@ -34,6 +23,16 @@ public class Duke {
         ui = new Ui(this);
         storage = new Storage(filePath, this);
         tasks = new TaskList(this);
+    }
+
+    public TaskList getTasks() {
+        return this.tasks;
+    }
+    public Storage getStorage() {
+        return this.storage;
+    }
+    public Ui getUi() {
+        return this.ui;
     }
 
     /**

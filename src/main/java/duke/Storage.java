@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.Scanner;
 
 /**
@@ -59,7 +58,8 @@ public class Storage {
     }
 
     /**
-     * Saves the new <code>Task</code>s from the <code>TaskList</code> after changes are made to the <code>TaskList</code>.
+     * Saves the new <code>Task</code>s from the <code>TaskList</code>
+     * after changes are made to the <code>TaskList</code>.
      *
      * @throws IOException if <code>filePath</code> specified is invalid.
      */
@@ -85,6 +85,7 @@ public class Storage {
                 int done2 = event.isDone ? 1 : 0;
                 newInput = newInput + ("E | " + done2 + " | " + event.description + " | " + event.at + "\n");
                 break;
+            default:
             }
         }
 
