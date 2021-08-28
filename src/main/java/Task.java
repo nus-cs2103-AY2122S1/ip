@@ -22,4 +22,8 @@ public class Task {
     public String formatToWrite() {
         return String.format("%d | %s", (this.isDone ? 1 : 0), this.description);
     }
+
+    public boolean isDone() {
+        return isDone;
+    }
 }
