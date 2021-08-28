@@ -12,6 +12,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 //todo command to print deadlines/events occuring on specific date
+//todo bug of task name/date/time being deleted by one when the program reopens and list keyed in
 
 /**
  * The Duke programme implements a bot that help users to record the tasks they have.
