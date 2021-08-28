@@ -20,6 +20,9 @@ public class Duke {
         this.tasks = new TaskList();
     }
 
+    /**
+     * Reads user input and executes user commands.
+     */
     public void run() {
         ui.showWelcomeMessage();
 

@@ -11,7 +11,18 @@ import duke.command.ListCommand;
 import duke.command.MalformedCommandException;
 import duke.command.UnsupportedCommandException;
 
+/**
+ * Responsible for parsing of command line user input.
+ */
 public class Parser {
+    /**
+     * Parses and returns the command represented by the user input.
+     *
+     * @param userInput String input provided by user.
+     * @return user command
+     * @throws UnsupportedCommandException If user command is not supported.
+     * @throws MalformedCommandException If a supported user command has the wrong format.
+     */
     public static Command parse(String userInput) throws UnsupportedCommandException, MalformedCommandException {
         String[] userInputSplit = userInput.split(" ", 2);
         String userCommand = userInputSplit[0];

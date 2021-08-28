@@ -1,24 +1,25 @@
 package duke.task;
 
-import duke.command.MalformedCommandException;
-
+/**
+ * Represents a Todo task.
+ */
 public class Todo extends Task {
     public static final String IDENTIFIER = "T";
 
-    public static Task create(String userInput) throws MalformedCommandException {
-        try {
-            String description = userInput.split(" ", 2)[1];
-            return new Todo(description);
-        } catch(ArrayIndexOutOfBoundsException e){
-            throw new MalformedCommandException("Creating an todo needs to follow the following format: " +
-                "todo [description]");
-        }
-    }
-
+    /**
+     * Creates a todo task.
+     *
+     * @param description Task's description.
+     * @param isDone Status of task's completion.
+     */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 
+    /**
+     * Creates a todo task.
+     * @param description Task's description.
+     */
     public Todo(String description) {
         super(description);
     }
