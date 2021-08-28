@@ -13,14 +13,10 @@ import java.util.stream.Collectors;
 import duke.exception.EmptyListException;
 import duke.exception.IllegalFormatException;
 import duke.exception.TaskNotFoundException;
+import duke.util.Message;
 
 public class TaskList {
-    private final String MESSAGE_DONE = "Congrats! You have accomplished the following task:";
-    private final String MESSAGE_ADD = "Alright, new task added to the list:";
-    private final String MESSAGE_DELETE = "Sure, I've deleted this task:";
-    private final String MESSAGE_LIST = "Here are the tasks in your list:";
-
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for TaskList.
@@ -73,13 +69,13 @@ public class TaskList {
         int size = tasks.size();
 
         // Return confirmation message
-        return MESSAGE_DELETE + "\n  "
-                + task + "\n" + (
-                size == 0
-                ? "You have no more task in the list!"
-                : size == 1
-                  ? "You still have 1 task in the list."
-                  : "You still have " + tasks.size() + " tasks in the list.");
+        return Message.DELETE + "\n  "
+            + task + "\n" + (
+            size == 0
+            ? "You have no more task in the list!"
+            : size == 1
+              ? "You still have 1 task in the list."
+              : "You still have " + tasks.size() + " tasks in the list.");
     }
 
     /**
@@ -111,7 +107,7 @@ public class TaskList {
         task.markAsDone();
 
         // Return confirmation message
-        return MESSAGE_DONE + "\n  " + task;
+        return Message.DONE + "\n  " + task;
     }
 
     /**
@@ -130,8 +126,8 @@ public class TaskList {
         // Separate info and trim each of them
         String[] info = command.substring(6).split("/at|/from|/to");
         info = Arrays.stream(info)
-                .map(String::trim)
-                .toArray(String[]::new);
+            .map(String::trim)
+            .toArray(String[]::new);
 
         LocalDate date;
         LocalTime startTime, endTime;
@@ -175,8 +171,8 @@ public class TaskList {
         // Separate info and trim each of them
         String[] info = command.substring(9).split("/by");
         info = Arrays.stream(info)
-                .map(String::trim)
-                .toArray(String[]::new);
+            .map(String::trim)
+            .toArray(String[]::new);
 
         LocalDateTime dateTime;
 
@@ -215,9 +211,9 @@ public class TaskList {
     }
 
     private String formatAddMessage(Task task, int size) {
-        return MESSAGE_ADD + "\n  "
-                + task + "\n"
-                + "Now you have " + size + " task" + (size == 1 ? "" : "s") + " in the list.";
+        return Message.ADD + "\n  "
+            + task + "\n"
+            + "Now you have " + size + " task" + (size == 1 ? "" : "s") + " in the list.";
     }
 
     /**
@@ -234,8 +230,8 @@ public class TaskList {
 
         String keyword = command.substring(5).trim();
         List<Task> filteredTasks = tasks.stream()
-                .filter(task -> task.matchDescription(keyword))
-                .collect(Collectors.toList());
+            .filter(task -> task.matchDescription(keyword))
+            .collect(Collectors.toList());
 
         return printList(filteredTasks);
     }
@@ -262,18 +258,18 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size - 1; i++) {
             sb.append(i + 1)
-                    .append(". ")
-                    .append(tasks.get(i))
-                    .append("\n");
+                .append(". ")
+                .append(tasks.get(i))
+                .append("\n");
         }
 
         // Last task is special as it does not need the '\n'
         sb.append(size)
-                .append(". ")
-                .append(tasks.get(size - 1));
+            .append(". ")
+            .append(tasks.get(size - 1));
 
         // Return string representation of the list of tasks
-        return MESSAGE_LIST + "\n" + sb;
+        return Message.LIST + "\n" + sb;
     }
 
     private void validateCommand(String command, String regex, String format) throws IllegalFormatException {

@@ -3,10 +3,6 @@ package duke.util;
 import java.util.Scanner;
 
 public class Ui {
-    private final String HORIZONTAL_LINE = "\t____________________________________________________________\n";
-    private final String MESSAGE_WELCOME = "Hi! I'm Sora. How can I help you?";
-    private final String MESSAGE_EXIT = "Have a nice day! Good bye XD";
-
     private final Scanner sc;
 
     /**
@@ -15,7 +11,7 @@ public class Ui {
     public Ui() {
         // Initialize scanner and print welcome message
         sc = new Scanner(System.in);
-        printMessage(MESSAGE_WELCOME);
+        printMessage(Message.WELCOME);
     }
 
     /**
@@ -39,13 +35,32 @@ public class Ui {
      * <br>
      * -----------
      *
-     * @param msg message to be displayed
+     * @param message message to be displayed
      */
-    public void printMessage(String msg) {
-        String format = HORIZONTAL_LINE
-                + "\t%s\n"
-                + HORIZONTAL_LINE;
-        System.out.printf(format, msg.replaceAll("\n", "\n\t"));
+    public void printMessage(String message) {
+        String format = Message.HORIZONTAL_LINE
+            + "\t%s\n"
+            + Message.HORIZONTAL_LINE;
+        System.out.printf(format, message.replaceAll("\n", "\n\t"));
+    }
+
+    /**
+     * Overloading method for handling Message as input.
+     * Prints a horizontal line, followed by the message on a newline, then another horizontal line on a newline.
+     * Each newline will be prepended with a tab.
+     * <p></p>
+     * It looks like the following:
+     * <br>
+     * -----------
+     * <br>
+     * message
+     * <br>
+     * -----------
+     *
+     * @param message message to be displayed
+     */
+    public void printMessage(Message message) {
+        printMessage(message.toString());
     }
 
     /**
@@ -53,6 +68,6 @@ public class Ui {
      */
     public void exit() {
         sc.close();
-        printMessage(MESSAGE_EXIT);
+        printMessage(Message.EXIT);
     }
 }
