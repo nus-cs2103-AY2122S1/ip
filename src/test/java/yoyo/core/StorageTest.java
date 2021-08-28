@@ -8,6 +8,9 @@ import yoyo.task.Task;
 import yoyo.task.TaskList;
 import yoyo.task.Todo;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -18,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class StorageTest {
     @Test
     public void readTaskFromFile_normal_success() throws YoyoException {
-        Storage storage = new Storage("storage-test.txt");
+        Storage storage = new Storage("src/test/storage-test.txt");
 
         ArrayList<Task> taskArray = new ArrayList<>();
         taskArray.add(new Deadline("geq",
@@ -28,7 +31,7 @@ public class StorageTest {
         taskArray.add(new Todo("sleep", false));
 
         TaskList tasks = new TaskList(taskArray);
-
-        assertTrue(tasks.equals(storage.load()));
+        TaskList loaded = storage.load();
+        assertTrue(tasks.equals(loaded));
     }
 }
