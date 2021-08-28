@@ -1,8 +1,7 @@
-package test;
-
 import duke.Deadline;
-import org.junit.Assert;
-import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 /**
  * A class to test the methods in <code>Deadline</code>.
@@ -12,6 +11,6 @@ public class DeadlineTest {
     @Test
     public void testDeadlineToString(){
         Deadline deadline = new Deadline("description", "tomorrow", false, false);
-        Assert.assertEquals("[D][ ] description (by: tomorrow)", deadline.toString());
+        assertEquals("[D][ ] description (by: tomorrow)", deadline.toString());
     }
 }
