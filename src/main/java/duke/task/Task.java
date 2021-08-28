@@ -28,6 +28,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public boolean isDone() {
         return this.isDone;
     }

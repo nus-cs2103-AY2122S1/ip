@@ -3,16 +3,21 @@ package duke.task;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /** A class that represents a task list. */
 public class TaskList {
-    private ArrayList<Task> taskList;
+    private List<Task> taskList;
 
     /**
      * Constructs an empty task list.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
+    }
+
+    public TaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     /**
@@ -74,6 +79,14 @@ public class TaskList {
      */
     public Task getTask(int index) {
         return this.taskList.get(index);
+    }
+
+    public TaskList filter(String keyword) {
+        List<Task> filteredTasks = this.taskList.stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .collect(Collectors.toList());
+
+        return new TaskList(filteredTasks);
     }
 
     /**
