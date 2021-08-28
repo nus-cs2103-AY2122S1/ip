@@ -32,7 +32,6 @@ public class Duke {
      * Initializes the duke program with a given filePath.
      *
      * @param filePath The path of the file containing your list of tasks.
-     * @throws DukeException If file does not exist/cannot be found, create a new task list.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -46,7 +45,7 @@ public class Duke {
     }
 
     /**
-     * Runs the chat bot until the user inputs the bye command.
+     * Runs the chatbot until the user inputs the bye command.
      */
     public void run() {
         ui.welcome();
