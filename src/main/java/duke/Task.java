@@ -25,11 +25,21 @@ public class Task {
         return description;
     }
 
+    /**
+     * Returns the task's details in a String.
+     *
+     * @return Task's details in a String.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Returns task's details in a format that will be stored in the data file.
+     *
+     * @return Task's details in a format that will be stored in the data file.
+     */
     public String toStringData() {
         return "|" + getStatusIcon() + "|" + description;
     }

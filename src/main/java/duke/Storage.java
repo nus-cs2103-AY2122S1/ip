@@ -8,15 +8,32 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents the storage of the Duke application that deals with loading from and updating the tasks in the data file.
+ */
 public class Storage {
     private final String DATA_FOLDER_PATH;
     private final String DATA_FILE_PATH;
 
+    /**
+     * Constructor for Storage.
+     * Sets the data folder and file path.
+     *
+     * @param data_folder_path Path to the data folder.
+     * @param data_file_path Path to the data file.
+     */
     public Storage(String data_folder_path, String data_file_path) {
         this.DATA_FOLDER_PATH = data_folder_path;
         this.DATA_FILE_PATH = data_file_path;
     }
 
+    /**
+     * Loads data from the data file, if any.
+     *
+     * @return ArrayList of tasks loaded from the data file.
+     * @throws DukeException If IOException is thrown while creating a new datafile, data file is not found
+     * or there exists an invalid file type in the data file.
+     */
     public ArrayList<Task> load() throws DukeException{
         File directory = new File(DATA_FOLDER_PATH);
         if (!directory.exists()) {
@@ -62,6 +79,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Updates the data file with the updated task list.
+     *
+     * @param tasks Updated task list.
+     * @throws DukeException If there is an IOException while writing to the data file.
+     */
     public void updateTasks(TaskList tasks) throws DukeException{
         try {
             FileWriter fw = new FileWriter(DATA_FILE_PATH);
