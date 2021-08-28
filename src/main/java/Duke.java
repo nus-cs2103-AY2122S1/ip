@@ -4,6 +4,9 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 
 class User {
     Scanner sc = new Scanner(System.in);
@@ -37,8 +40,9 @@ class Task {
     }
 }
 class Deadline extends Task {
-    protected String by;
-    public Deadline(String description, String by) {
+    protected LocalDateTime by;
+    
+    public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;
     }
@@ -48,12 +52,14 @@ class Deadline extends Task {
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + by + ")";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
+        String formattedDtf = this.by.format(dtf);
+        return "[D]" + super.toString() + "(by: " + formattedDtf + ")";
     }
 }
 class Event extends Task {
-    protected String at;
-    public Event(String description, String at) {
+    protected LocalDateTime at;
+    public Event(String description, LocalDateTime at) {
         super(description);
         this.at = at;
     }
@@ -63,7 +69,9 @@ class Event extends Task {
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + at + ")";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
+        String formattedDtf = this.at.format(dtf);
+        return "[E]" + super.toString() + " (at: " + formattedDtf + ")";
     }
 }
 class Todo extends Task {
@@ -102,6 +110,15 @@ class EmptyDescriptionException extends DukeException {
 
 class InvalidCommandException extends DukeException {
     public InvalidCommandException(String message) {
+        super(message);
+    }
+    public String toString() {
+        return super.toString();
+    }
+}
+
+class InvalidDateTimeException extends DukeException {
+    public InvalidDateTimeException(String message) {
         super(message);
     }
     public String toString() {
@@ -193,25 +210,39 @@ public class Duke {
                     if (command.length() <= 9) {
                         displayError("deadline");
                     } else {
-                        String[] parts = command.split("/");
-                        Task task = new Deadline(parts[0].substring(9), parts[1].substring(3));
-                        userList.add(task);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(task.toString());
-                        System.out.println("Now you have " + userList.size() + " tasks in the list.");
-                        writeToFile("./duke.txt", userList);
+                        String[] parts = command.split("/",2);
+                        try {
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                            LocalDateTime dateTime = LocalDateTime.parse(parts[1].substring(3).trim(), dtf);
+                            Task task = new Deadline(parts[0].substring(9), dateTime);
+                            userList.add(task);
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println(task.toString());
+                            System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                        } catch (DateTimeParseException e) {
+                            DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be deadline/by " + 
+                                    "<yyyy-mm-dd HHmm>");
+                            System.out.println(exp);
+                        }
                     }
                 } else if (command.startsWith("event")) {
                     if (command.length() <= 6) {
                         displayError("event");
                     } else {
                         String[] parts = command.split("/");
-                        Task task = new Event(parts[0].substring(6), parts[1].substring(3));
-                        userList.add(task);
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(task.toString());
-                        System.out.println("Now you have " + userList.size() + " tasks in the list.");
-                        writeToFile("./duke.txt", userList);
+                        try {
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                            LocalDateTime dateTime = LocalDateTime.parse(parts[1].substring(3).trim(), dtf);
+                            Task task = new Event(parts[0].substring(6), dateTime);
+                            userList.add(task);
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println(task.toString());
+                            System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                        } catch (DateTimeParseException e) {
+                            DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be event/at " +
+                                    "<yyyy-mm-dd HHmm>");
+                            System.out.println(exp);
+                        }
                     }
                 } else if (command.startsWith("delete")) {
                     int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
