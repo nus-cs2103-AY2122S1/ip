@@ -30,7 +30,7 @@ public class MarkDoneCommand extends Command {
     public void execute(TaskList tasklist, Storage storage, Ui ui) throws AisuException {
         Task completedTask = tasklist.markDone(this.parseInt);
         storage.save(tasklist);
-        ui.showToUser(" Nice! I've marked this task as completed:\n" + completedTask);
+        this.uiText = ui.formatText(" Nice! I've marked this task as completed:", completedTask.toString());
     }
 
     /**
