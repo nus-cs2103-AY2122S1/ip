@@ -5,22 +5,22 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.ToDo;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UiTest {
     private Ui ui = new Ui();
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
-    @Before
+    @BeforeEach
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
     }
@@ -78,7 +78,7 @@ public class UiTest {
                 outContent.toString());
     }
 
-    @After
+    @AfterEach
     public void restoreStreams() {
         System.setOut(originalOut);
     }

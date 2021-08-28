@@ -11,13 +11,13 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
     @Test
@@ -32,14 +32,13 @@ public class ParserTest {
                         "T|0|Read book")));
     }
 
-    @Rule
-    public ExpectedException exceptionRule = ExpectedException.none();
-
     @Test
     public void parseSaveFileErrorTest() {
-        exceptionRule.expect(DukeException.class);
-        exceptionRule.expectMessage("Your save file is corrupted and has an invalid format.");
-        Parser.parseSaveFile(List.of("badly formatted task"));
+        Exception exception = assertThrows(DukeException.class,
+                () -> Parser.parseSaveFile(List.of("badly formatted task")));
+        String expectedMessage = "Your save file is corrupted and has an invalid format.";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
@@ -82,50 +81,62 @@ public class ParserTest {
 
     @Test
     public void parseUserInput_unknownCommand_exceptionThrown() {
-        exceptionRule.expect(DukeException.class);
-        exceptionRule.expectMessage("Invalid command. List of valid commands include:\n"
-                + "list|todo|deadline|event|done|delete|bye");
-        Parser.parseUserInput("blah");
+        Exception exception = assertThrows(DukeException.class,
+                () -> Parser.parseUserInput("blah"));
+        String expectedMessage = "Invalid command. List of valid commands include:\n"
+                + "list|todo|deadline|event|done|delete|find|bye";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void parseUserInput_illegalUseOfDelimiter_exceptionThrown() {
-        exceptionRule.expect(DukeException.class);
-        exceptionRule.expectMessage("The description of a task cannot contain this character: |");
-        Parser.parseUserInput("todo some|description");
+        Exception exception = assertThrows(DukeException.class,
+                () -> Parser.parseUserInput("todo some|description"));
+        String expectedMessage = "The description of a task cannot contain this character: |";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void parseUserInput_emptyTaskDescription_exceptionThrown() {
-        exceptionRule.expect(DukeException.class);
-        exceptionRule.expectMessage("The description of a task cannot be empty.\n"
+        Exception exception = assertThrows(DukeException.class,
+                () -> Parser.parseUserInput("todo"));
+        String expectedMessage = "The description of a task cannot be empty.\n"
                 + "Please input your task in the following manner:\n"
-                + "todo|deadline|event <task_description>");
-        Parser.parseUserInput("todo");
+                + "todo|deadline|event <task_description>";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void parseUserInput_invalidDeadline_exceptionThrown() {
-        exceptionRule.expect(DukeException.class);
-        exceptionRule.expectMessage("Invalid format for a deadline task.\n"
+        Exception exception = assertThrows(DukeException.class,
+                () -> Parser.parseUserInput("deadline no date provided"));
+        String expectedMessage = "Invalid format for a deadline task.\n"
                 + "Please input your deadline task in the following manner:\n"
-                + "deadline <task_description> /by <task_deadline>");
-        Parser.parseUserInput("deadline no date provided");
+                + "deadline <task_description> /by <task_deadline>";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void parseUserInput_invalidEvent_exceptionThrown() {
-        exceptionRule.expect(DukeException.class);
-        exceptionRule.expectMessage("Invalid format for an event.\n"
+        Exception exception = assertThrows(DukeException.class,
+                () -> Parser.parseUserInput("event no date provided"));
+        String expectedMessage = "Invalid format for an event.\n"
                 + "Please input your event in the following manner:\n"
-                + "event <event_description> /at <event_date>");
-        Parser.parseUserInput("event no date provided");
+                + "event <event_description> /at <event_date>";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
     public void parseUserInput_taskNumber_exceptionThrown() {
-        exceptionRule.expect(DukeException.class);
-        exceptionRule.expectMessage("Please enter a valid task number.");
-        Parser.parseUserInput("done f");
+        Exception exception = assertThrows(DukeException.class,
+                () -> Parser.parseUserInput("done f"));
+        String expectedMessage = "Please enter a valid task number.";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }
