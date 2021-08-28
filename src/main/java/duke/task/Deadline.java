@@ -20,8 +20,8 @@ public class Deadline extends Task {
         }
     }
 
-    public Deadline(String description, String by, boolean done) throws DukeException {
-        super(description, done);
+    public Deadline(String description, String by, boolean isDone) throws DukeException {
+        super(description, isDone);
 
         try {
             this.by = LocalDate.parse(by);
@@ -32,7 +32,7 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
-        return String.join(" | ", "D", this.done ? "1" : "0", this.description, this.by.toString());
+        return String.join(" | ", "D", this.isDone ? "1" : "0", this.description, this.by.toString());
     }
 
     @Override

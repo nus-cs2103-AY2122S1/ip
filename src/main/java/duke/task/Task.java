@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 /** A class that represents a task. */
 public class Task {
     protected String description;
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Constructs a task with description.
@@ -14,36 +14,36 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
      * Constructs a task with description and a state whether it has been done or not.
      *
      * @param description The description.
-     * @param done The state.
+     * @param isDone The state.
      */
-    public Task(String description, boolean done) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**
      * Marks the task as done.
      */
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * Marks the task as not done.
      */
     public void markAsNotDone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -96,7 +96,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String doneSymbol = this.done ? "[X]" : "[ ]";
+        String doneSymbol = this.isDone ? "[X]" : "[ ]";
 
         return doneSymbol + " " + this.description;
     }

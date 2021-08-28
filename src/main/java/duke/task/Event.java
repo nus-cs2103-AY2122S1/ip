@@ -19,8 +19,8 @@ public class Event extends Task {
         }
     }
 
-    public Event(String description, String at, boolean done) throws DukeException {
-        super(description, done);
+    public Event(String description, String at, boolean isDone) throws DukeException {
+        super(description, isDone);
 
         try {
             this.at = LocalDate.parse(at);
@@ -31,7 +31,7 @@ public class Event extends Task {
 
     @Override
     public String serialize() {
-        return String.join(" | ", "E", this.done ? "1" : "0", this.description, this.at.toString());
+        return String.join(" | ", "E", this.isDone ? "1" : "0", this.description, this.at.toString());
     }
 
     @Override

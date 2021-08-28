@@ -15,7 +15,7 @@ import java.util.List;
 
 /** A storage class serves as a database system. */
 public class Storage {
-    Path filePath;
+    private Path filePath;
 
     /**
      * Constructs a storage that uses the specified file to load and store data.
