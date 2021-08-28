@@ -67,6 +67,13 @@ public class Parser {
                 e.printMsg();
             }
             return true;
+        case "find":
+            try {
+                taskList.findTask(scan.nextLine());
+            } catch (DukeException e) {
+                e.printMsg();
+            }
+            return true;
         default:
             System.out.println("What are you even typing omg get it right...");
             scan.nextLine(); // Remove all other input to the scanner

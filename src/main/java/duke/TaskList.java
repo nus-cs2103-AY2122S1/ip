@@ -26,7 +26,7 @@ public class TaskList {
 
     public void printTaskList() {
         for (int i = 1; i <= myTasks.size(); i++) {
-            System.out.println(i + ". " + myTasks.get(i - 1).toString());
+            System.out.println(i + ". " + myTasks.get(i - 1));
         }
     }
 
@@ -47,6 +47,28 @@ public class TaskList {
         myTasks.add(task);
         if (printMsg) {
             Ui.addTaskMsg(task, myTasks.size());
+        }
+    }
+
+    /**
+     * Show tasks if there are any that match the search.
+     * Else tells user that search has yielded nothing.
+     *
+     * @param searchString the thing that user is searching for
+     */
+    public void findTask(String searchString) {
+        boolean hasMatches = false;
+        for (int i = 1; i <= myTasks.size(); i++) {
+            Task currTask = myTasks.get(i - 1);
+            if (currTask.description.contains(searchString)) {
+                hasMatches = true;
+                System.out.println(i + ". " + currTask);
+            }
+        }
+        if (!hasMatches) {
+            System.out.println("Nothing matched your search! Try something else.");
+        } else {
+            System.out.println("End of find.");
         }
     }
 }
