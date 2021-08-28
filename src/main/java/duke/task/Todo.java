@@ -5,13 +5,13 @@ public class Todo extends Task {
         super(description);
     }
 
-    public Todo(String description, boolean done) {
-        super(description, done);
+    public Todo(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     @Override
     public String serialize() {
-        return String.join(" | ", "T", this.done ? "1" : "0", this.description);
+        return String.join(" | ", "T", this.isDone ? "1" : "0", this.description);
     }
 
     @Override

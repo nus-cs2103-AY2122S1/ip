@@ -4,28 +4,28 @@ import java.time.format.DateTimeParseException;
 
 public class Task {
     protected String description;
-    protected boolean done;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
-    public Task(String description, boolean done) {
+    public Task(String description, boolean isDone) {
         this.description = description;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     public boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void markAsNotDone() {
-        this.done = false;
+        this.isDone = false;
     }
     
     public String serialize() {
@@ -65,7 +65,7 @@ public class Task {
 
     @Override
     public String toString() {
-        String doneSymbol = this.done ? "[X]" : "[ ]";
+        String doneSymbol = this.isDone ? "[X]" : "[ ]";
 
         return doneSymbol + " " + this.description;
     }
