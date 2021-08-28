@@ -83,6 +83,17 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline deadline = (Deadline) obj;
+            boolean isDescSame = deadline.getTaskSummary().equals(this.getTaskSummary());
+            boolean isDeadlineSame = deadline.dateTimeDeadline.equals(this.dateTimeDeadline);
+            return isDescSame && isDeadlineSame;
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return String.format(
             "[%s][%s] %s (by: %s)",

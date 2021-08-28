@@ -1,3 +1,4 @@
 E | 1 | party | town
 T | 0 | partymore
-T | 0 | duke.task
+T | 0 | smth
+E | 0 | smth | a time

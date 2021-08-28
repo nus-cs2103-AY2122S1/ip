@@ -41,6 +41,17 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Event) {
+            Event event = (Event) obj;
+            boolean isDescSame = event.getTaskSummary().equals(this.getTaskSummary());
+            boolean isTimeSame = event.eventTime.equals(this.eventTime);
+            return isDescSame && isTimeSame;
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return String.format(
             "[%s][%s] %s (at: %s)",

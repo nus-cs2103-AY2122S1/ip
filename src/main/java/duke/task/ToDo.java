@@ -40,6 +40,15 @@ public class ToDo extends Task {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ToDo) {
+            ToDo toDo = (ToDo) obj;
+            return toDo.getTaskSummary().equals(this.getTaskSummary());
+        }
+        return false;
+    }
+
+    @Override
     public String toString() {
         return String.format(
             "[%s][%s] %s",
