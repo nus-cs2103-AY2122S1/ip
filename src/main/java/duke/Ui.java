@@ -4,8 +4,8 @@ package duke;
  * A general user interface that identifies the format of messages displayed to the user.
  */
 public class Ui {
-    private static final String INDENTATION = "     ";
-    private static final String SUBINDENTATION = "       ";
+    protected static final String INDENTATION = "     ";
+    protected static final String SUBINDENTATION = "       ";
 
     public static String getIndentation() {
         return INDENTATION;
