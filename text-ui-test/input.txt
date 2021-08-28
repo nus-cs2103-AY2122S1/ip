@@ -1,7 +1,7 @@
 deadline return book /by Monday
 deadline meet Mark /by Tuesday
 list
-event project meeting /at Mon 2-4pm
+event project meeting /at 15/10/2015 1600
 event project call /at Tue 2-4pm
 list
 done 3
