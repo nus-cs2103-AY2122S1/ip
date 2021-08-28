@@ -1,25 +1,22 @@
 package bot.utility;
 
-import bot.tasks.Task;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import bot.tasks.Task;
+
+
 /**
- * Represents a list of Bot.tasks that can perform operations such as delete and add.
+ * Represents a list of tasks that can perform operations such as delete and add.
  */
 public class TaskList {
-    private List<Task> tasks;
-
-    protected TaskList() {
-        this.tasks = new ArrayList<>();
-    }
+    private final List<Task> tasks;
 
     protected TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
 
-    protected void addTask(Task task) {
+    /*
+    protected void addTask(Task) {
         this.tasks.add(task);
     }
 
@@ -29,7 +26,7 @@ public class TaskList {
 
     protected void updateTask(int index) {
         this.tasks.get(index).markAsDone();
-    }
+    }*/
 
     protected List<Task> showTasks() {
         return this.tasks;

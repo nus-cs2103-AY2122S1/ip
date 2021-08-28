@@ -1,9 +1,7 @@
 package bot.utility;
 
 import java.io.PrintStream;
-
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.Scanner;
 
@@ -11,10 +9,13 @@ import java.util.Scanner;
  * Represents a UI that the user interacts with.
  */
 public class Ui {
-    private PrintStream out;
-    private Scanner in;
     private static final String line = "\n\t_______________________________________________________________";
+    private final PrintStream out;
+    private final Scanner in;
 
+    /**
+     * Creates a UI object for the user to interact with.
+     */
     public Ui() {
         this.out = System.out;
         this.in = new Scanner(System.in);

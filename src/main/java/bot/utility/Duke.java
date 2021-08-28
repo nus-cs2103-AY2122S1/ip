@@ -1,7 +1,7 @@
 package bot.utility;
 
 /**
- * Simulates the Duke chatbot.
+ * Simulates the Duke chatBot.
  */
 public class Duke {
     private Parser parser;
@@ -10,7 +10,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Runs the Duke chatbot
+     * Runs the Duke chatBot
      */
     public void run() {
         start();
@@ -26,7 +26,7 @@ public class Duke {
     }
 
     /**
-     * Primary response function of the chatbot
+     * Primary response function of the chatBot
      */
     private void analyzeLog() {
         do {

@@ -3,7 +3,7 @@ package bot.tasks;
 /**
  * Represents a task without any date/time attached to it.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Creates a ToDo with a description.

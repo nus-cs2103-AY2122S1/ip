@@ -1,13 +1,12 @@
 package bot.utility;
 
-import bot.error.DukeException;
+import java.util.List;
 
+import bot.error.DukeException;
 import bot.tasks.Deadline;
 import bot.tasks.Event;
 import bot.tasks.Task;
 import bot.tasks.ToDo;
-
-import java.util.List;
 
 /**
  * Represents a parser that can read and understand what to do with an input String.
@@ -15,8 +14,6 @@ import java.util.List;
 public class Parser {
     protected byte flag = 1;
     private String input;
-    private String[] words;
-    private StringBuilder log;
 
     /**
      * Takes an input that parser parses.
@@ -28,15 +25,15 @@ public class Parser {
     }
 
     /**
-     * Allows the parser to interact with the ui, logger and the list of Bot.tasks when needed.
+     * Allows the parser to interact with the ui, logger and the list of tasks when needed.
      *
      * @param ui The Ui interacting with the user.
      * @param logger The logger that keeps track of the logs.
      * @param list A list of Tasks.
      */
     public void interactWith(Ui ui, Logger logger, TaskList list) {
-        log = new StringBuilder();
-        words = this.input.trim().split(" ", 2);
+        StringBuilder log = new StringBuilder();
+        String[] words = this.input.trim().split(" ", 2);
         List<Task> tasks = list.showTasks();
         try {
             checkInput(words);
@@ -108,20 +105,22 @@ public class Parser {
     }
 
     /**
-     * Handles DukeExceptions for the chatbot
+     * Handles DukeExceptions for the chatBot
      * @param log The separate words in a given line
      */
-    private static void checkInput(String[] log) throws DukeException{
+    private static void checkInput(String[] log) throws DukeException {
         if (log.length == 1) {
             switch (log[0]) {
             case "todo":
-                throw new DukeException("\n\t ☹ Oh dearie!. The description of a todo cannot be empty!");
+                throw new DukeException("\n\t ☹ Oh dear!. The description of a todo cannot be empty!");
             case "deadline":
                 throw new DukeException("\n\t ☹ Oh lord!. I need some description and a time limit!");
             case "event":
                 throw new DukeException("\n\t ☹ By the heavens!. I need some description and a timing!");
             case "find":
                 throw new DukeException("\n\t ☹ I need something to search for!");
+            default:
+                break;
             }
         } else if (log.length == 2) {
             switch (log[0]) {
@@ -134,6 +133,9 @@ public class Parser {
                 if (log[1].split(" /at ", 2).length != 2) {
                     throw new DukeException("\n\t ☹ Wait! Did you forget to type \"/at\" or a timing?");
                 }
+                break;
+            default:
+                break;
             }
         }
     }

@@ -3,20 +3,19 @@ package bot.tasks;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 import java.util.regex.Pattern;
 
 /**
  * Represents a task that starts at a specific time and ends at a specific time.
  */
-public class Event extends Task{
-    protected static String YMD_DATE_FORMAT = "yyyy/MM/dd";
-    protected static String DMY_DATE_FORMAT = "dd/MM/yyyy";
-    protected static String YMD_REGEX = "([0-9]{4})/([1-9]{1}|[0]{1}[1-9]{1}|[1]{1}[0-2]{1})/"
-            + "([1-9]{1}|[0]{1}[1-9]{1}|[1]{1}[0-9]{1}|[2]{1}[0-9]{1}|[3]{1}[0-1]{1})";
-    protected static String DMY_REGEX = "([1-9]{1}|[0]{1}[1-9]{1}|[1]{1}[0-9]{1}|[2]{1}[0-9]{1}|[3]{1}[0-1]{1})"
-            + "/([1-9]{1}|[0]{1}[1-9]{1}|[1]{1}[0-2]{1})/([0-9]{4})";
+public class Event extends Task {
+    protected static final String YMD_DATE_FORMAT = "yyyy/MM/dd";
+    protected static final String DMY_DATE_FORMAT = "dd/MM/yyyy";
+    protected static final String YMD_REGEX = "([0-9]{4})/([1-9]|[0][1-9]|[1][0-2])/"
+            + "([1-9]|[0][1-9]|[1][0-9]|[2][0-9]|[3][0-1])";
+    protected static final String DMY_REGEX = "([1-9]|[0][1-9]|[1][0-9]|[2][0-9]|[3][0-1])"
+            + "/([1-9]|[0][1-9]|[1][0-2])/([0-9]{4})";
     protected String timing;
 
     /**
@@ -35,7 +34,8 @@ public class Event extends Task{
                 Date date = format1.parse(dateAndTime[0]);
                 DateFormat format2 = new SimpleDateFormat("d MMMMM yyyy, ");
                 String dateString = format2.format(date);
-                if (Pattern.matches("%04d", dateAndTime[1]) && !dateAndTime[1].contains("pm") && !dateAndTime[1].contains("am")) {
+                if (Pattern.matches("%04d", dateAndTime[1]) && !dateAndTime[1].contains("pm")
+                        && !dateAndTime[1].contains("am")) {
                     int time = Integer.parseInt(dateAndTime[1]);
                     date = new SimpleDateFormat("hhmm").parse(String.format("%04d", time));
                     // Set format: print the hours and minutes of the date, with AM or PM at the end
@@ -53,7 +53,8 @@ public class Event extends Task{
                 Date date = format1.parse(dateAndTime[0]);
                 DateFormat format2 = new SimpleDateFormat("d MMMMM yyyy, ");
                 String dateString = format2.format(date);
-                if (Pattern.matches("%04d", dateAndTime[1]) && !dateAndTime[1].contains("pm") && !dateAndTime[1].contains("am")) {
+                if (Pattern.matches("%04d", dateAndTime[1]) && !dateAndTime[1].contains("pm")
+                        && !dateAndTime[1].contains("am")) {
                     int time = Integer.parseInt(dateAndTime[1]);
                     date = new SimpleDateFormat("hhmm").parse(String.format("%04d", time));
                     // Set format: print the hours and minutes of the date, with AM or PM at the end

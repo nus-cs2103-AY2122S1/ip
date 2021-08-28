@@ -1,8 +1,8 @@
 package bot.tasks;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     private final String description = "Finish A-Junit";
@@ -25,7 +25,9 @@ public class DeadlineTest {
 
     @Test
     public void toStringTest() {
-        assertEquals("[D]" + "[" + (d1.isDone ? "X" : " ") + "] " + "Finish A-Junit (by: 22 August 2021, 6pm)", d1.toString());
-        assertEquals("[D]" + "[" + (d1.isDone ? "X" : " ") + "] " + "Finish A-Junit (by: 22 August 2021, 6pm)", d1.toString());
+        assertEquals("[D]" + "[" + (d1.isDone ? "X" : " ") + "] " + "Finish A-Junit (by: 22 August 2021, 6pm)",
+                d1.toString());
+        assertEquals("[D]" + "[" + (d1.isDone ? "X" : " ") + "] " + "Finish A-Junit (by: 22 August 2021, 6pm)",
+                d1.toString());
     }
 }

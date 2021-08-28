@@ -3,7 +3,7 @@ package bot.error;
 /**
  * Represents the unique DukeException.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /**
      * Creates a DukeException with a specified message.

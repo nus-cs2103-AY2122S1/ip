@@ -1,30 +1,27 @@
 package bot.utility;
 
-import bot.tasks.Deadline;
-import bot.tasks.Event;
-import bot.tasks.Task;
-import bot.tasks.ToDo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.ArrayList;
-
 import java.util.List;
+
+import bot.tasks.Deadline;
+import bot.tasks.Event;
+import bot.tasks.Task;
+import bot.tasks.ToDo;
+
 /**
  * Represents a logger that can read logs and act according to logs provided.
  */
 public class Logger {
-    BufferedReader bufferedReader;
-    BufferedWriter writer;
+    private BufferedReader bufferedReader;
 
     /**
      * Creates a Logger with a specified filepath.
@@ -51,11 +48,10 @@ public class Logger {
      */
     public void write(List<Task> tasks) {
         try {
-            writer = new BufferedWriter(new FileWriter("tasks.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.txt"));
             StringBuilder builder = new StringBuilder();
 
-            for (int index = 0; index < tasks.size(); index++){
-                Task currentTask = tasks.get(index);
+            for (Task currentTask : tasks) {
                 int flag = currentTask.getStatusIcon().equals("X") ? 1 : 0;
                 if (currentTask instanceof ToDo) {
                     builder.append("T | ")
