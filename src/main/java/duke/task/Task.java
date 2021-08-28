@@ -9,6 +9,7 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected char category;
+    protected String name;
 
     /**
      * Initialises properties of a Task.
@@ -20,6 +21,7 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
         this.category = category;
+        this.name = "";
     }
 
     /**
@@ -64,6 +66,16 @@ public abstract class Task {
     public String getDueTime() {
         return "";
     }
+
+    /**
+     * Returns task name.
+     *
+     * @return Name of task.
+     */
+    public String getName() {
+        return this.name;
+    }
+
 
     /**
      * Converts Task to string format.

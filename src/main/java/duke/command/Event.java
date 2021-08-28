@@ -30,6 +30,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) throws DukeException {
         super(description, 'E');
+        this.name = "event";
         atOriginal = at;
 
         String[] temp = at.split(" ", 2);

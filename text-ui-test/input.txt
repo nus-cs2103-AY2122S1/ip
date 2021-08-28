@@ -23,4 +23,8 @@ list
 blah
 delete 1
 list
+find o
+find return
+find zmbowuinb123#@%
+find
 bye

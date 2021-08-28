@@ -107,5 +107,21 @@ now you have 3 tasks in your list
 3.[D][ ] do homework (by: Dec 31 2021 11:59 PM)
 ===========================
 ===========================
+ive found some matches for your search query:
+1.[D][X] return book (by: Dec 25 2021 12:00 AM)
+2.[E][ ] project meeting (at: Dec 31 2021 12:34 PM)
+3.[D][ ] do homework (by: Dec 31 2021 11:59 PM)
+===========================
+===========================
+ive found some matches for your search query:
+1.[D][X] return book (by: Dec 25 2021 12:00 AM)
+===========================
+===========================
+im sorry i couldn't find any matches :(
+===========================
+===========================
+ ☹ oops..the description of a find cannot be empty
+===========================
+===========================
 bye friend!
 ===========================

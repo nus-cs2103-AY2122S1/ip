@@ -30,6 +30,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DukeException {
         super(description, 'D');
+        this.name = "deadline";
         byOriginal = by;
 
         String[] temp = by.split(" ", 2);

@@ -64,6 +64,7 @@ public class Storage {
      * Load tasks from storage.
      *
      * @throws DukeException If unable to create a file for saving.
+     * @return ArrayList of tasks saved in file.
      */
     public ArrayList<Task> loadTasks() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();

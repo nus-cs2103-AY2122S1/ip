@@ -4,11 +4,11 @@ package duke.util;
  * Parses the commands given by a user.
  */
 public class Parser {
-
     /**
      * Parses a done command.
      *
      * @param cmd Command to be processed.
+     * @return Index of task to be marked done.
      */
     public static int parseDoneCmd(String cmd) {
         String[] a = cmd.split(" ");
@@ -19,6 +19,7 @@ public class Parser {
      * Checks if command is bye.
      *
      * @param cmd Command to be processed.
+     * @return Whether is bye command.
      */
     public static boolean isNotBye(String cmd) {
         return !cmd.equals("bye");
@@ -28,6 +29,7 @@ public class Parser {
      * Checks if command is list.
      *
      * @param cmd Command to be processed.
+     * @return Whether is list command.
      */
     public static boolean isList(String cmd) {
         return cmd.equals("list");
@@ -37,6 +39,7 @@ public class Parser {
      * Checks if command is done.
      *
      * @param cmd Command to be processed.
+     * @return Whether is done command.
      */
     public static boolean isDone(String cmd) {
         return cmd.matches("^done [0-9]+$");
@@ -46,6 +49,7 @@ public class Parser {
      * Checks if command is a valid task.
      *
      * @param cmd Command to be processed.
+     * @return Whether task is valid.
      */
     public static boolean isValidTask(String cmd) {
         return cmd.matches("^todo .*$")
@@ -57,6 +61,7 @@ public class Parser {
      * Checks if command is missing description.
      *
      * @param cmd Command to be processed.
+     * @return Whether command is missing argument.
      */
     public static boolean isMissingArg(String cmd) {
         String[] a = cmd.split(" ", 2);
@@ -67,6 +72,7 @@ public class Parser {
      * Gets the task name in a command.
      *
      * @param cmd Command to be processed.
+     * @return Name of task.
      */
     public static String getTaskName(String cmd) {
         String[] a = cmd.split(" ", 2);
@@ -77,6 +83,7 @@ public class Parser {
      * Gets the task description in a command.
      *
      * @param cmd Command to be processed.
+     * @return Description of task.
      */
     public static String getDesc(String cmd) {
         String[] a = cmd.split(" ", 2);
@@ -87,6 +94,7 @@ public class Parser {
      * Gets the deadline information in a deadline description.
      *
      * @param desc Command description to be processed.
+     * @return Deadline information.
      */
     public static String getDlInfo(String desc) {
         String[] a = desc.split(" /by ", 2);
@@ -97,6 +105,7 @@ public class Parser {
      * Gets the deadline due date in a deadline description.
      *
      * @param desc Command description to be processed.
+     * @return Deadline due date.
      */
     public static String getDlDue(String desc) {
         String[] a = desc.split(" /by ", 2);
@@ -107,6 +116,7 @@ public class Parser {
      * Gets the event information in a event description.
      *
      * @param desc Command description to be processed.
+     * @return Event information.
      */
     public static String getEvInfo(String desc) {
         String[] a = desc.split(" /at ", 2);
@@ -117,6 +127,7 @@ public class Parser {
      * Gets the event due date in a event description.
      *
      * @param desc Command description to be processed.
+     * @return Event due date.
      */
     public static String getEvDue(String desc) {
         String[] a = desc.split(" /at ", 2);
@@ -127,6 +138,7 @@ public class Parser {
      * Checks if command is delete.
      *
      * @param cmd Command to be processed.
+     * @return Whether task is a delete command.
      */
     public static boolean isDelete(String cmd) {
         return cmd.matches("^delete [0-9]+$");
@@ -136,6 +148,7 @@ public class Parser {
      * Parses a delete command.
      *
      * @param cmd Command to be processed.
+     * @return Task index to be deleted.
      */
     public static int parseDeleteCmd(String cmd) {
         String[] a = cmd.split(" ");
@@ -146,11 +159,23 @@ public class Parser {
      * Checks if command is empty.
      *
      * @param cmd Command to be processed.
+     * @return Whether task command is empty.
      */
     public static boolean isEmptyTask(String cmd) {
         return cmd.equals("todo")
                 || cmd.matches("deadline *")
-                || cmd.matches("event *");
+                || cmd.matches("event *")
+                || cmd.matches("find *");
+    }
+
+    /**
+     * Checks if command is find.
+     *
+     * @param cmd Command to check.
+     * @return Whether command is find.
+     */
+    public static boolean isFind(String cmd) {
+        return cmd.matches("^find .*$");
     }
 
     /**
