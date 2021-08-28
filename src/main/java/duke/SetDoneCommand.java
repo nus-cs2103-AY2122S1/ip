@@ -24,7 +24,7 @@ public class SetDoneCommand extends Command {
      * @throws DukeException If an invalid task index was provided.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException{
+    public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         if (tasks.getLength() <= taskIndex || 0 > taskIndex) {
             throw new DukeException("Invalid task index provided!");
         }
