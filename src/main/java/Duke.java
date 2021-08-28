@@ -43,7 +43,7 @@ public class Duke {
         }
         System.out.println("");
         System.out.println("Hope you are doing well. How can I help you?");
-        ArrayList<Task> userList = new ArrayList<>();
+        TaskList taskList = new TaskList();
         while (true) {
             String command = user1.command();
             if (command.equals("")) {
@@ -53,28 +53,19 @@ public class Duke {
                 System.out.println("Bye. Have a great day!");
                 break;
             } else if (command.equals("list")) {
-                if (userList.isEmpty()) {
-                    System.out.println("You don't have any tasks in the list!");
-                } else {
-                    int count = 1;
-                    for (int i = 0; i < userList.size(); i++) {
-                        Task t = userList.get(i);
-                        System.out.println(count + ". " + t.toString());
-                        count++;
-                    }
-                }
+                taskList.getList();
             } else if (command.startsWith("done") && Character.isDigit(command.charAt(command.length() - 1))
                     && command.length() <= 8 && !Character.isAlphabetic(command.charAt(command.length() - 2))
                     && Character.isDigit(command.charAt(5))) {
                 int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
-                if (value > userList.size()) {
+                if (value > taskList.size()) {
                     System.out.println("Sorry the task doesn't exist yet, please try again!");
                 } else {
-                    Task t = userList.get(value - 1);
+                    Task t = taskList.getTask(value - 1);
                     t.markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(t.toString());
-                    writeToFile("./duke.txt", userList);
+                    writeToFile("./duke.txt", taskList);
                 }
             } else {
                 if (command.startsWith("todo")) {
@@ -82,11 +73,11 @@ public class Duke {
                         displayError("todo");
                     } else {
                         Task task = new Todo(command.substring(5));
-                        userList.add(task);
+                        taskList.addTask(task);
                         System.out.println("Got it. I've added this task:");
                         System.out.println(task.toString());
-                        System.out.println("Now you have " + userList.size() + " tasks in the list.");
-                        writeToFile("./duke.txt", userList);
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                        writeToFile("./duke.txt", taskList);
                     }
                 } else if (command.startsWith("deadline")) {
                     if (command.length() <= 9) {
@@ -97,10 +88,10 @@ public class Duke {
                             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                             LocalDateTime dateTime = LocalDateTime.parse(parts[1].substring(3).trim(), dtf);
                             Task task = new Deadline(parts[0].substring(9), dateTime);
-                            userList.add(task);
+                            taskList.addTask(task);
                             System.out.println("Got it. I've added this task:");
                             System.out.println(task.toString());
-                            System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                         } catch (DateTimeParseException e) {
                             DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be deadline/by " + 
                                     "<yyyy-mm-dd HHmm>");
@@ -116,10 +107,10 @@ public class Duke {
                             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
                             LocalDateTime dateTime = LocalDateTime.parse(parts[1].substring(3).trim(), dtf);
                             Task task = new Event(parts[0].substring(6), dateTime);
-                            userList.add(task);
+                            taskList.addTask(task);
                             System.out.println("Got it. I've added this task:");
                             System.out.println(task.toString());
-                            System.out.println("Now you have " + userList.size() + " tasks in the list.");
+                            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                         } catch (DateTimeParseException e) {
                             DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be event/at " +
                                     "<yyyy-mm-dd HHmm>");
@@ -128,12 +119,12 @@ public class Duke {
                     }
                 } else if (command.startsWith("delete")) {
                     int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
-                    Task task = userList.get(value-1);
-                    userList.remove(value-1);
+                    Task task = taskList.getTask(value-1);
+                    taskList.removeTask(value-1);
                     System.out.println("Noted. I've removed this task:");
                     System.out.println(task);
-                    System.out.println("Now you have " + userList.size() + " tasks in the list.");
-                    writeToFile("./duke.txt", userList);
+                    System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    writeToFile("./duke.txt", taskList);
                 } else {
                     DukeException exp = new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                     System.out.println(exp);
@@ -147,12 +138,12 @@ public class Duke {
         System.out.println(exp);
     }
 
-    private static void writeToFile(String filePath, ArrayList<Task> al) {
+    private static void writeToFile(String filePath, TaskList tl) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (int i = 0; i < al.size(); i++) {
+            for (int i = 0; i < tl.size(); i++) {
                 int num = i + 1;
-                fw.write(num + ". " + al.get(i).taskList() + "\n");
+                fw.write(num + ". " + tl.getTask(i).taskList() + "\n");
             }
             fw.close();
         } catch (IOException e) {
