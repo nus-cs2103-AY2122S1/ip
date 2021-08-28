@@ -140,7 +140,7 @@ public class Ui {
     public String formatText(String... message) {
         StringBuilder result = new StringBuilder();
         for (String m: message) {
-            result.append(message).append("\n");
+            result.append(m).append("\n");
         }
         return result.toString();
     }

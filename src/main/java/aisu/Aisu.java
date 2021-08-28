@@ -64,6 +64,7 @@ public class Aisu {
         try {
             Command command = Parser.parse(input);
             command.execute(this.tasklist, this.storage, this.ui);
+            System.out.println(command.showUiText());
             return command.showUiText();
         } catch (AisuException e) {
             return e.getMessage();
