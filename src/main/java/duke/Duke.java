@@ -1,8 +1,6 @@
-import java.time.format.DateTimeParseException;
+package duke;
 
-import duke.TaskList;
-import duke.UI;
-import duke.Parser;
+import java.time.format.DateTimeParseException;
 
 import duke.exceptions.InvalidCommandException;
 import duke.exceptions.MissingTaskNameException;

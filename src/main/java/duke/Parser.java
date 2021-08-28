@@ -179,9 +179,9 @@ public class Parser {
     }
 
     public static void handleFind() throws DukeException {
-        if (commandArr.length < 2) {
+        if (words.length < 2) {
             throw new MissingTaskNameException("Missing task name");
         }
-        tasklist.find(commandArr[1]);
+        taskList.find(words[1]);
     }
 }

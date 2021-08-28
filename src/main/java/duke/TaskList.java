@@ -142,7 +142,7 @@ public class TaskList {
     }
 
     public void find(String taskName) {
-        List<Task> matchingTasks = taskArrayList.stream()
+        List<Task> matchingTasks = tasks.stream()
                 .filter(task -> task.getName().contains(taskName))
                 .collect(Collectors.toList());
         for (int i = 0; i < matchingTasks.size(); i++) {
