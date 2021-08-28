@@ -112,11 +112,13 @@ public class Duke {
             super(message);
         }
     }
+
     private class EventsException extends Exception {
         public EventsException(String message) {
             super(message);
         }
     }
+
     private class DeadlineException extends Exception {
         public DeadlineException(String message) {
             super(message);
@@ -188,6 +190,39 @@ public class Duke {
     }
 
     /**
+     * function adds a new Task into the taskList if valid.
+     * @param newTask
+     */
+    private void addTask(Task newTask) {
+        taskList.add(newTask);
+        System.out.println(line);
+        System.out.println("Got it. I've added this task: ");
+        System.out.println("    " + newTask);
+        System.out.format("Now you have %d tasks in the list.\n", taskList.size());
+    }
+
+    /**
+     * function removes the task located at the index of the task list.
+     * @param newInput
+     */
+    private void deleteTask(String[] newInput ) throws Exception{
+
+        if (newInput.length < 2) {
+            throw new Exception("invalid Syntax for delete instruction");
+        } else {
+            int index = Integer.parseInt(newInput[1]);
+            if (index > 0 && index <= taskList.size()) {
+                System.out.println("Noted. I've removed this task: ");
+                System.out.println("    " + taskList.get(index - 1).toString());
+                taskList.remove(index - 1);
+                System.out.format("Now you have %d tasks in the list.\n", taskList.size());
+            } else {
+                throw new Exception("index not within valid range");
+            }
+        }
+    }
+
+    /**
      * To decide base on the input what is the next action.
      * The decision on whether to show list, set existing task to
      * done, or to create and record new task.
@@ -200,21 +235,24 @@ public class Duke {
             return true;
         } else {
             String[] newInput = input.split(" ");
-            if (newInput[0].equals("done")) {
+            String instruction = newInput[0];
+            if (instruction.equals("done")) {
                 int index = Integer.parseInt(newInput[1]);
                 if (index <= taskList.size() && index > 0) {
                     taskList.get(index - 1).done();
-            } else {
-            System.out.println("invalid index");
-            }
-            } else {
+                } else {
+                    System.out.println("invalid index");
+                }
+            } else if (instruction.equals("delete")) {
+                try {
+                    deleteTask(newInput);
+                }catch (Exception e) {
+                    System.out.println(e);
+                }
+            }else {
                 try {
                     Task newTask = createTask(input);
-                    taskList.add(newTask);
-                    System.out.println(line);
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println("    " + newTask);
-                    System.out.format("Now you have %d tasks in the list.\n", taskList.size());
+                    addTask(newTask);
                 } catch (TodoException tx) {
                     System.out.println(tx);
                 }catch (DeadlineException dx) {
