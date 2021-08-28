@@ -46,6 +46,7 @@ public class Duke extends Application {
 
         dialogContainer.setStyle("-fx-background-color: #F6E9D7;");
         dialogContainer.setMinHeight(600.0);
+        dialogContainer.setSpacing(10.0);
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();

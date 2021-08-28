@@ -41,7 +41,7 @@ public class DialogBox extends HBox {
         DialogBox userDialog = new DialogBox(l, iv);
         userDialog.setAlignment(Pos.CENTER_RIGHT);
         userDialog.setStyle("-fx-background-color: #C2D2BD;");
-        userDialog.setPadding(new Insets(10));
+        userDialog.setPadding(new Insets(5));
         return userDialog;
     }
 
@@ -50,7 +50,7 @@ public class DialogBox extends HBox {
         dukeDialog.flip();
         dukeDialog.setAlignment(Pos.CENTER_LEFT);
         dukeDialog.setStyle("-fx-background-color: #C8D8E4;");
-        dukeDialog.setPadding(new Insets(10));
+        dukeDialog.setPadding(new Insets(5));
         return dukeDialog;
     }
 }
