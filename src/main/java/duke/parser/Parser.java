@@ -14,6 +14,9 @@ import duke.data.exceptions.EmptyTaskDescriptionException;
 import duke.data.exceptions.InvalidDateAndTimeException;
 import duke.data.exceptions.InvalidInputException;
 
+/**
+ * Represents a parser that makes sense of what the user input is.
+ */
 public class Parser {
     private static final String TODO = "todo";
     private static final String DEADLINE = "deadline";
@@ -25,6 +28,13 @@ public class Parser {
 
     public Parser() {}
 
+    /**
+     * Returns a Command corresponding to the user input.
+     *
+     * @param command user input
+     * @return a Command object
+     * @throws DukeException
+     */
     public Command parse(String command) throws DukeException {
         String commandType = checkCommandType(command);
 

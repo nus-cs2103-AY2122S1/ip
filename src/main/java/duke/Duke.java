@@ -13,6 +13,9 @@ import duke.ui.Ui;
 
 //todo command to print deadlines/events occuring on specific date
 
+/**
+ * The Duke programme implements a bot that help users to record the tasks they have.
+ */
 public class Duke {
 
     private Storage storage;
@@ -111,6 +114,9 @@ public class Duke {
 //        return new duke.task.Task();
 //    }
 
+    /**
+     * Executes a Duke object.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -9,6 +9,10 @@ import duke.data.exceptions.InvalidDateAndTimeException;
 
 //todo exception for range of values for mth, day, year, hr, min
 //should have /by or /at alr when initialising this class
+
+/**
+ * Represents a DateAndTime object that reformats the date and time provided by the user to a specified format.
+ */
 public class DateAndTime {
     private String dateAndTimeFromCommand;
     private boolean isDatePresent = false;
@@ -18,6 +22,12 @@ public class DateAndTime {
         this.dateAndTimeFromCommand = dateAndTimeFromCommand;
     }
 
+    /**
+     * Returns a string representing the reformatted date and time provided by the user.
+     *
+     * @return reformatted date and time
+     * @throws InvalidDateAndTimeException
+     */
     public String getReformattedDateAndTime() throws InvalidDateAndTimeException {
         if (isDateAndTimeValid()) {
             if (isDatePresent && isTimePresent) {
@@ -38,7 +48,7 @@ public class DateAndTime {
         }
     }
 
-    public boolean isDateAndTimeValid() {
+    private boolean isDateAndTimeValid() {
         int colonIndex = dateAndTimeFromCommand.indexOf(":");
         int lastSlashIndex = dateAndTimeFromCommand.lastIndexOf("/");
         int firstSlashIndex = dateAndTimeFromCommand.indexOf("/");
@@ -58,7 +68,7 @@ public class DateAndTime {
         }
     }
 
-    public String getTime() throws InvalidDateAndTimeException { //format of hh:mm
+    private String getTime() throws InvalidDateAndTimeException { //format of hh:mm
         int colonIndex = dateAndTimeFromCommand.indexOf(":");
 
         if (((dateAndTimeFromCommand.length() - (colonIndex + 2)) != 1) || (colonIndex - 3) < 0) {
@@ -80,7 +90,7 @@ public class DateAndTime {
     }
 
     //todo invalid date error has random dot printed?
-    public String getDate() throws InvalidDateAndTimeException { //format of dd/mm/yyyy
+    private String getDate() throws InvalidDateAndTimeException { //format of dd/mm/yyyy
         int lastSlashIndex = dateAndTimeFromCommand.lastIndexOf("/");
 
         if (((lastSlashIndex + 5) > dateAndTimeFromCommand.length()) || (lastSlashIndex - 6) < 0) {
@@ -104,7 +114,7 @@ public class DateAndTime {
 
     }
 
-    public boolean checkDate(int index, int formatLength) {
+    private boolean checkDate(int index, int formatLength) {
         boolean result = true;
         for (int i = 0; i < formatLength; i++) {
             result = result && Character.isDigit(dateAndTimeFromCommand.charAt(index + i));

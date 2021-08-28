@@ -10,6 +10,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
+/**
+ * Stores the tasks and data provided by the user, so that when the program re-opens data can be restored.
+ */
 public class Storage {
     //TODO create file method
     //TODO error when tasklist is null for empty constructor
@@ -21,17 +24,27 @@ public class Storage {
 
     private TaskList taskList = new TaskList();
 
-    public Storage() {}
-
     public Storage(String storagePath) {
         this.storagePath = storagePath;
         dataFile = new File(storagePath);
     }
 
+    /**
+     * Loads the stored data into the program when it restarts.
+     *
+     * @return a list of stored tasks
+     * @throws IOException
+     */
     public List<Task> load() throws IOException {
         return txtToList(dataFile);
     }
 
+    /**
+     * Converts a TaskList into a txt file to be stored.
+     *
+     * @param fileWriter
+     * @throws IOException
+     */
     public void listToTxt(FileWriter fileWriter) throws IOException {
         for (int i = 0; i < taskList.size(); i++) {
             String currentTask = taskList.getTask(i).toString() + "\n";
@@ -40,6 +53,13 @@ public class Storage {
         fileWriter.close();
     }
 
+    /**
+     * Converts a txt file into a list of tasks to be loaded when the program restarts.
+     *
+     * @param dataFile
+     * @return a list of stored tasks
+     * @throws IOException
+     */
     public List<Task> txtToList(File dataFile) throws IOException {
         List<Task> taskList = new ArrayList<>();
         String currentTaskString = "";
@@ -116,6 +136,9 @@ public class Storage {
 
     }
 
+    /**
+     * Saves the task list into the storage.
+     */
     public void saveData() {
         try {
             FileWriter fileWriter = new FileWriter(DATA_FILE);
@@ -126,6 +149,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the storage with the new task list.
+     *
+     * @param newTaskList
+     */
     public void update(TaskList newTaskList) {
         this.taskList = newTaskList;
         saveData();

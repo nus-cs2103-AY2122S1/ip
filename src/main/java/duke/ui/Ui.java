@@ -5,12 +5,18 @@ import java.util.Scanner;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Represents the user interface which includes methods that print information to the user.
+ */
 public class Ui {
 
     public Ui() {}
 
     //todo show loading error need?
 
+    /**
+     * Prints the welcome message of the programme.
+     */
     public void showWelcome() {
         //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
@@ -24,20 +30,37 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Prints the exit message of the programme.
+     */
     public void showExit() {
         String message = "Bye. Hope to see you again soon!";
         System.out.println(message);
     }
 
+    /**
+     * Prints a divider line.
+     */
     public void showLine() {
         String divider = "------------------------------------------------------";
         System.out.println(divider);
     }
 
+    /**
+     * Prints the error occurred in the programme.
+     *
+     * @param error
+     */
     public void showError(String error) {
         System.out.println(error);
     }
 
+    /**
+     * Prints a message when a Task is removed.
+     *
+     * @param removedTask
+     * @param tasks
+     */
     public void showDeleteTask(Task removedTask, TaskList tasks) {
         String displayedMessage = "Noted. I've removed this task:\n"
                 + "  " + removedTask.toString() + "\n"
@@ -45,6 +68,12 @@ public class Ui {
         System.out.println(displayedMessage);
     }
 
+    /**
+     * Reads the command from the user.
+     *
+     * @param sc
+     * @return a string representing the command provided
+     */
     public String readCommand(Scanner sc) {
         String command = "";
         //if (sc.hasNextLine()) {
@@ -53,6 +82,12 @@ public class Ui {
         return  command.trim();
     }
 
+    /**
+     * Prints a message when a Task is successfully added.
+     *
+     * @param task
+     * @param tasks
+     */
     public void showAddTaskMessage(Task task, TaskList tasks) {
         String successMessage = "Got it. I've added this task:";
         String taskString = task.toString();
@@ -62,6 +97,11 @@ public class Ui {
         System.out.println(result);
     }
 
+    /**
+     * Prints a message when a Task is marked as complete.
+     *
+     * @param task
+     */
     public void showMarkTaskMessage(Task task) {
         String displayedMessage = "Nice! I've marked this task as done:\n"
                 + "  "
