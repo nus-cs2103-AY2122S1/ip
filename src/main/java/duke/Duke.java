@@ -13,11 +13,8 @@ import java.time.format.DateTimeParseException;
 
 public class Duke {
 
-    /** Path string to data of tasks to load/save */
-    private final static String PATH = "data/tasks.txt";
-
     /** Stores a list of tasks */
-    private static TaskList taskList = new TaskList();
+    private static TaskList tasks;
 
     /** Enum type to differentiate and parse user inputs */
     private enum Command {
@@ -78,7 +75,7 @@ public class Duke {
                     // Makes sure that key phrase is a valid int and within range of task list
                     try {
                         int index = Integer.parseInt(input_split[1]) - 1;
-                        taskList.getTask(index);
+                        tasks.getTask(index);
                         return Command.DONE;
                     }
                     catch (NumberFormatException e) {
@@ -96,7 +93,7 @@ public class Duke {
                     // Makes sure that key phrase is a valid int and within range of task list
                     try {
                         int index = Integer.parseInt(input_split[1]) - 1;
-                        taskList.getTask(index);
+                        tasks.getTask(index);
                         return Command.DELETE;
                     }
                     catch (NumberFormatException e) {
@@ -180,7 +177,7 @@ public class Duke {
      * @return String of reply for adding task
      */
     private static String showTasksReply(Command c, String t) {
-        String show_task = "\nYou have " + taskList.size() +" task(s) now so get off that crack rock!";
+        String show_task = "\nYou have " + tasks.size() +" task(s) now so get off that crack rock!";
         // If adding new task reply with add task message
         for (Command taskCommand : Command.taskCommands) {
             if (c == taskCommand) {
@@ -188,7 +185,7 @@ public class Duke {
             }
         }
         // Else reply with custom message
-        return reply( t + "\nYou have " + taskList.size() +
+        return reply( t + "\nYou have " + tasks.size() +
                 " task(s) now so get off that crack rock!");
     }
 
@@ -221,8 +218,8 @@ public class Duke {
                             // Show list
                             String lst_display = "\n";
 
-                            for (int i = 0; i < taskList.size(); i++) {
-                                lst_display = lst_display + String.format("\t%d. %s\n", i + 1, taskList.getTask(i));
+                            for (int i = 0; i < tasks.size(); i++) {
+                                lst_display = lst_display + String.format("\t%d. %s\n", i + 1, tasks.getTask(i));
                             }
                             System.out.print(reply(lst_display));
                             break;
@@ -231,7 +228,7 @@ public class Duke {
                             // Mark task as done
                             String desc = user_input.split(" ", 2)[1];
                             int index = Integer.parseInt(desc) - 1;
-                            Task t = taskList.getTask(index);
+                            Task t = tasks.getTask(index);
                             t.setDone();
                             System.out.print(reply("Noice! Pepper Jack marked this task as done:\n\t" + t));
                             break;
@@ -240,7 +237,7 @@ public class Duke {
                             // Delete task
                             String desc = user_input.split(" ", 2)[1];
                             int index = Integer.parseInt(desc) - 1;
-                            Task t = taskList.removeTask(index);
+                            Task t = tasks.removeTask(index);
                             System.out.print(showTasksReply(c, "Aights! Pepper Jack deleted this task:\n\t" + t));
                             break;
                         }
@@ -248,7 +245,7 @@ public class Duke {
                             // Add new to do
                             String desc = user_input.split(" ", 2)[1];
                             Task t = new Todo(desc);
-                            taskList.addTask(t);
+                            tasks.addTask(t);
                             System.out.print(showTasksReply(c, t.toString()));
                             break;
                         }
@@ -256,7 +253,7 @@ public class Duke {
                             // Add new deadline
                             String desc_date = user_input.split(" ", 2)[1];
                             Task t = Deadline.build(desc_date);
-                            taskList.addTask(t);
+                            tasks.addTask(t);
                             System.out.print(showTasksReply(c, t.toString()));
                             break;
                         }
@@ -264,7 +261,7 @@ public class Duke {
                             // Add new event
                             String desc_date = user_input.split(" ", 2)[1];
                             Task t = Event.build(desc_date);
-                            taskList.addTask(t);
+                            tasks.addTask(t);
                             System.out.print(showTasksReply(c, t.toString()));
                             break;
                         }
@@ -295,12 +292,13 @@ public class Duke {
         System.out.print(reply("This Pepper Jack, wassup!"));
 
         // Load tasks from text file if exists
-        Storage.loadTasks(taskList);
+        Storage storage = new Storage("data/tasks.txt");
+        tasks = storage.load();
 
         // Start conversation with Pepper Jack
         startConvo();
 
         // Save tasks
-        Storage.saveTasks(taskList);
+        storage.save(tasks);
     }
 }

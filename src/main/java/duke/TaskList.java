@@ -5,29 +5,33 @@ import java.util.ArrayList;
 public class TaskList {
 
     /** Stores tasks in an array list */
-    private ArrayList<Task> lst;
+    private ArrayList<Task> tasks;
 
-    public TaskList() {
-        lst = new ArrayList<>();
+    public TaskList(ArrayList<Task> taskList) {
+        tasks = taskList;
+    }
+
+    public static TaskList emptyTaskList() {
+        return new TaskList(new ArrayList<Task>());
     }
 
     public boolean addTask(Task t) {
-        return lst.add(t);
+        return tasks.add(t);
     }
 
     public Task getTask(int index) {
-        return lst.get(index);
+        return tasks.get(index);
     }
 
     public Task removeTask(int index) {
-        return lst.remove(index);
+        return tasks.remove(index);
     }
 
     public int size() {
-        return lst.size();
+        return tasks.size();
     }
 
     public ArrayList<Task> getTaskList() {
-        return lst;
+        return tasks;
     }
 }
