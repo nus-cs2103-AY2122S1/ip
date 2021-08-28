@@ -4,6 +4,8 @@ import aisu.Aisu;
 import aisu.Storage;
 import aisu.TaskList;
 import aisu.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -56,7 +59,7 @@ public class MainWindow extends AnchorPane {
                 + "(|  .-. |(|  |_/  `------'.-._)   \\|  | | |  \\ \n"
                 + "|  | |  | |  |'->         \\      / \\  '-'(_ .'\n"
                 + "`--' `--' `--'             `-----'  `-----'   \n";
-        String output = logo + "\n Hello, I'm Ai-su! How may I help you today?\n";
+        String output = "Hello, I'm Ai-su! How may I help you today?\n";
         makeAisuSay(output);
 
     }
@@ -71,12 +74,25 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        boolean isExit = false;
         String input = userInput.getText();
         String response = aisu.getResponse(input);
+        if (response == "See you next time! :D") {
+            isExit = true;
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getAisuDialog(response, aisuImage)
         );
         userInput.clear();
+
+        // @@author CheyanneSim-reused
+        if (isExit) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+            pause.setOnFinished(event -> {
+                Platform.exit();
+            });
+            pause.play();
+        }
     }
 }

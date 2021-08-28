@@ -21,7 +21,7 @@ public class Ui {
             "`--' `--' `--'             `-----'  `-----'   \n";
     private static final int PADDING_LENGTH = 48;
     private static String formattedInstructions;
-    private static final String GOODBYE_MESSAGE = LOGO + DIVIDER + " See you next time! :D\n" + DIVIDER;
+    private static final String GOODBYE_MESSAGE = "See you next time! :D";
 
     private final Scanner in;
     private final PrintStream out;
