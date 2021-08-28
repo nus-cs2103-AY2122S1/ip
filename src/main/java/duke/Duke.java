@@ -9,10 +9,19 @@ import duke.command.Command;
  * Handles initialization of storage and tasks and running of Duke chatbot.
  */
 public class Duke {
+    /** Variables related to initializing Duke */
     private static final String SAVE_FILENAME = "dukeSave.txt";
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
+
+    /**
+     * Default constructor for Duke.
+     * Creates a Duke object with filename dukeSave.txt.
+     */
+    public Duke() {
+        this(SAVE_FILENAME);
+    }
 
     /**
      * Constructor for Duke.
@@ -64,6 +73,18 @@ public class Duke {
         // Closes scanner object.
         sc.close();
     }
+
+    /**
+     * Returns the specified string input with "Duke heard: " prepended to it.
+     *
+     * @param input String to which "Duke head: " is prepended to.
+     * @return The specified string with "Duke heard: " prepended to it.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+
 
     /**
      * The main method runs the duke.Duke chatbot.
