@@ -1,7 +1,5 @@
 package Duke;
 
-import Duke.Task;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -47,5 +45,15 @@ public class TaskList implements Serializable {
         tasks.remove(taskNumber - 1);
         this.numTask--;
         System.out.printf("Now you have %d %s in the list.\n", this.numTask, this.numTask == 1 ? "task" : "tasks");
+    }
+
+    public boolean isEmpty() throws Duke.DukeException {
+        if (this.numTask == 0) {
+            if (!this.tasks.isEmpty()) {
+                throw new Duke.DukeException("TaskList is empty without any items");
+            }
+            return true;
+        }
+        return false;
     }
 }
