@@ -22,10 +22,11 @@ public class DeleteCommand extends Command {
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
+     * @return String object to describe execution of DeleteCommand.
      * @throws DukeException if input for Delete command is not properly formatted.
      */
     @Override
-    public void execute(String des, TaskList tList) throws DukeException {
+    public String execute(String des, TaskList tList) throws DukeException {
         ArrayList<Task> tasks = tList.getTaskList();
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);
@@ -36,10 +37,10 @@ public class DeleteCommand extends Command {
             throw new DukeException("Too many arguments being provided to \"delete\" \n"
                     + "Please refer to proper usage of duke.commands with \"allCmd\"");
         } else {
+            Storage.createFile();
+            Storage.writeToFile(tList);
             tList.remove(num);
-            System.out.println("Successfully removed task " + num);
+            return "Successfully removed task " + num + "\n";
         }
-        Storage.createFile();
-        Storage.writeToFile(tList);
     }
 }

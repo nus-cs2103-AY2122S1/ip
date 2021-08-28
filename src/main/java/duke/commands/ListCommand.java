@@ -20,16 +20,17 @@ public class ListCommand extends Command {
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
+     * @return String object to describe execution of ListCommand.
      */
     @Override
-    public void execute(String des, TaskList tList) {
+    public String execute(String des, TaskList tList) {
+        String result = "Here are the tasks in your list:\n";
         ArrayList<Task> tasks = tList.getTaskList();
         int count = 1;
-        System.out.println("Here are the tasks in your list:");
         for (Task t : tasks) {
-            System.out.print(count + ". ");
-            System.out.println(t.formatString());
+            result = result + count + ". " + t.formatString() + "\n";
             count++;
         }
+        return result;
     }
 }

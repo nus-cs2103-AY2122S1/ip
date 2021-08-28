@@ -1,30 +1,38 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
 
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
-        text.setWrapText(true);
-        text.setPadding(new Insets(10));
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     /**
@@ -37,20 +45,19 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        DialogBox userDialog = new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String text, Image img) {
+        DialogBox userDialog = new DialogBox(text, img);
         userDialog.setAlignment(Pos.CENTER_RIGHT);
         userDialog.setStyle("-fx-background-color: #C2D2BD;");
-        userDialog.setPadding(new Insets(5));
         return userDialog;
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        DialogBox dukeDialog = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        DialogBox dukeDialog = new DialogBox(text, img);
         dukeDialog.flip();
         dukeDialog.setAlignment(Pos.CENTER_LEFT);
         dukeDialog.setStyle("-fx-background-color: #C8D8E4;");
-        dukeDialog.setPadding(new Insets(5));
+        dukeDialog.setFillHeight(true);
         return dukeDialog;
     }
 }

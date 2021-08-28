@@ -17,9 +17,10 @@ public class ByeCommand extends Command {
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
+     * @return String object to describe execution of ByeCommand.
      */
     @Override
-    public void execute(String des, TaskList tList) {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String execute(String des, TaskList tList) {
+        return "Bye. Hope to see you again soon!\n";
     }
 }

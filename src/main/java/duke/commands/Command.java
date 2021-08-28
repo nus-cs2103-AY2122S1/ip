@@ -28,19 +28,19 @@ public abstract class Command {
      * @param tList the TaskList object used to keep track of all tasks.
      * @throws DukeException on task-specific errors.
      */
-    public abstract void execute(String des, TaskList tList) throws DukeException;
+    public abstract String execute(String des, TaskList tList) throws DukeException;
 
     /**
      * The numberOfTasks() method informs the user of the total number of tasks.
      *
      * @param tList the TaskList object used to keep track of all tasks.
      */
-    public void numberOfTasks(TaskList tList) {
+    public String numberOfTasks(TaskList tList) {
         ArrayList<Task> tasks = tList.getTaskList();
         if (tasks.size() == 1) {
-            System.out.println("You now have " + tasks.size() + " task in the list");
+            return "You now have " + tasks.size() + " task in the list";
         } else {
-            System.out.println("You now have " + tasks.size() + " tasks in the list");
+            return "You now have " + tasks.size() + " tasks in the list";
         }
     }
 

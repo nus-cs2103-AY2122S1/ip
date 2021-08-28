@@ -54,12 +54,12 @@ public class Ui {
                 this.printLine();
                 if (command == null) {
                     throw new DukeException(des + " is not a recognised command\n"
-                            + "Please refer to the available commands using the \"allCmd\" command");
+                            + "Please refer to the available commands using the \"help\" command");
                 } else {
                     Command c = null;
                     if (command.equals("bye")) {
                         c = new ByeCommand();
-                        c.execute(des, tList);
+                        System.out.print(c.execute(des, tList));
                         printLine();
                         break;
                     }
@@ -96,7 +96,7 @@ public class Ui {
                         c = new FindCommand();
                     }
 
-                    c.execute(des, tList);
+                    System.out.print(c.execute(des, tList));
                     this.printLine();
                 }
             } catch (DukeException e) {
