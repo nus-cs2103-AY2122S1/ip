@@ -1,9 +1,7 @@
 package utils.storage;
+
 import utils.exceptions.DukeException;
-import utils.task.Deadline;
-import utils.task.Event;
-import utils.task.Task;
-import utils.task.Todo;
+import utils.task.*;
 
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
@@ -13,18 +11,19 @@ import java.util.ArrayList;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class Storage {
-    private static final String delimiter = "|";
-    private static final int delimiterLimit = 4;
+    private static final String DELIMITER = " | ";
+    private static final String DELIMITER_SPLIT = " \\| ";
 
     private static final String IDENTIFIER_TODO = "T";
     private static final String IDENTIFIER_DEADLINE = "D";
     private static final String IDENTIFIER_EVENT = "E";
 
-    private static final String DONE = "1";
-    private static final String NOT_DONE = "0";
+    private static final String IDENTIFIER_DONE = "1";
+    private static final String IDENTIFIER_NOT_DONE = "0";
 
-    private static final String noPermissionsException = "User does not have permissions to create directories/file.";
-    private static final String failedSaveException = "Error: Failed to write tasks to file.";
+    private static final String ERROR_FAILED_PATH_CREATION = "Error: Failed to find/create necessary directories and file. Check your filepath and permissions.";
+    private static final String ERROR_FAILED_LOAD_CORRUPTED_FILE = "Error: Failed to load tasks from file. Corrupted file or filepath.\nWarning: File will be rewritten on next command.";
+    private static final String ERROR_FAILED_WRITE_CORRUPTED_FILE = "Error: Failed to write tasks to file. Corrupted file or filepath.";
 
     private final String filepath;
 
@@ -34,26 +33,51 @@ public class Storage {
 
     /**
      * Loads all the task in the indicated filepath with the correct format.
+     *
      * @return the ArrayList of Task objects.
      * @throws DukeException throws exceptions for when file and folders cannot be created or filepath is corrupted.
      */
     public ArrayList<Task> load() throws DukeException {
-        // Creates the file and folders for filepath, else throw DukeException
-        createsFileAndFoldersForPath();
 
         // Parse the file and get the tasks list
         File file = new File(filepath);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
+
+            // Start scanning the file, throws FileNotFoundException if file not found.
             Scanner myReader = new Scanner(file);
+
+            // File exists, scan the text file and create tasks.
             while (myReader.hasNextLine()) {
+                // Grab the next line of String in the text file.
                 String line = myReader.nextLine();
-                Task task = createTaskFromString(line);
+
+                // While creating task from String, possibly corrupted file.
+                Task task;
+                try {
+                    task = createTaskFromString(line);
+                } catch (DukeException e) {
+                    throw new DukeException(ERROR_FAILED_LOAD_CORRUPTED_FILE);
+                }
+
+                // Add successfully created task to the list.
                 tasks.add(task);
             }
+
+            // Close the reader.
             myReader.close();
+
         } catch (FileNotFoundException e) {
-            throw new DukeException(e.getMessage());
+
+            // Failed to load file
+            // Check if path exists, else try to create the path.
+            // If failed to create path, return false.
+            boolean result = checkPathExistsElseCreate();
+
+            // If failed to create the necessary directories and file, throw DukeException.
+            if (!result) {
+                throw new DukeException(ERROR_FAILED_PATH_CREATION);
+            }
         }
 
         return tasks;
@@ -61,40 +85,53 @@ public class Storage {
 
     /**
      * Writes the ArrayList of tasks into the file.
+     *
      * @param tasks ArrayList of Task objects.
      * @throws DukeException throws exceptions for when file and folders cannot be created or filepath is corrupted.
      */
-    public void writeTasksToFile(ArrayList<Task> tasks) throws DukeException {
-        // Creates the file and folders for filepath, else throw DukeException
-        createsFileAndFoldersForPath();
+    public void writeTasksToFile(TaskList tasks) throws DukeException {
+
+        // Check if path exists, else try to create the path.
+        // If failed to create path, return false.
+        boolean result = checkPathExistsElseCreate();
+
+        // If failed to create the necessary directories and file, throw DukeException.
+        if (!result) {
+            throw new DukeException(ERROR_FAILED_PATH_CREATION);
+        }
+
         try {
             FileWriter writer = new FileWriter(filepath);
-            StringBuilder fileString = new StringBuilder();
-            for (Task task : tasks) {
-                String appendedString = task.getTaskFileString(delimiter, DONE, NOT_DONE) + "\n";
-                fileString.append(appendedString);
-            }
-            writer.write(fileString.toString());
+            String fileString = tasks.getFileString(DELIMITER, IDENTIFIER_DONE, IDENTIFIER_NOT_DONE);
+            writer.write(fileString);
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            throw new DukeException(failedSaveException);
+            throw new DukeException(ERROR_FAILED_WRITE_CORRUPTED_FILE);
         }
+
     }
 
     /**
-     * Creates the files and folders required.
-     * @throws DukeException throws exceptions for when file and folders cannot be created or filepath is corrupted.
+     * Check if path exists, else try to create the path.
+     * If failed to create path, return false.
+     * Returns true if successful, else false.
+     *
+     * @return true if all files and folders required for filepath are created, else false.
      */
-    private void createsFileAndFoldersForPath() throws DukeException {
+    private boolean checkPathExistsElseCreate() {
         File file = new File(filepath);
 
         // handle the folder does not exist
         File parent = file.getParentFile();
         if (!parent.exists()) {
-            boolean result = parent.mkdirs();
-            if (!result) {
-                throw new DukeException(noPermissionsException);
+            try {
+                boolean result = parent.mkdirs();
+                if (!result) {
+                    return false;
+                }
+            } catch (SecurityException e) {
+                return false;
             }
         }
 
@@ -103,43 +140,54 @@ public class Storage {
             try {
                 boolean result = file.createNewFile();
                 if (!result) {
-                    throw new DukeException(noPermissionsException);
+                    return false;
                 }
-            } catch (IOException e) {
-                throw new DukeException(e.getMessage());
+            } catch (IOException | SecurityException e) {
+                return false;
             }
         }
+
+        // Reached the end of function.
+        // Successfully created the directories and file required or
+        // directory and file exists from the beginning.
+        return true;
     }
 
     /**
      * Returns a task from a line of String.
-     * @param line the String for a task in the correct format
-     * @return Task object
+     *
+     * @param taskLine the String for a task in the correct format.
+     * @return Task object.
      */
-    private Task createTaskFromString(String line) {
-        String[] split = line.split("\\" + delimiter, delimiterLimit);
-        String taskType = split[0];
-        switch (taskType) {
-            case (IDENTIFIER_TODO):
-                Task todo = new Todo(split[2]);
-                if (split[1].equals(DONE)) {
-                    todo.markAsDone();
-                }
-                return todo;
-            case (IDENTIFIER_DEADLINE):
-                Deadline deadline = new Deadline(split[2], split[3]);
-                if (split[1].equals(DONE)) {
-                    deadline.markAsDone();
-                }
-                return deadline;
-            case (IDENTIFIER_EVENT):
-                Event event = new Event(split[2], split[3]);
-                if (split[1].equals(DONE)) {
-                    event.markAsDone();
-                }
-                return event;
+    private Task createTaskFromString(String taskLine) throws DukeException {
+        // Split the line String to get the first task type in the String.
+        String[] taskSplit = taskLine.split(DELIMITER_SPLIT, 2);
+
+        // Throws DukeException if task String is corrupted.
+        if (taskSplit.length < 2) {
+            throw new DukeException();
         }
-        return null;
+
+        String taskType = taskSplit[0];
+        Task task = null;
+
+        switch (taskType) {
+        case IDENTIFIER_TODO:
+            task = TodoTask.getTaskFromStorageString(taskSplit[1], DELIMITER_SPLIT, IDENTIFIER_DONE);
+            break;
+        case IDENTIFIER_DEADLINE:
+            task = DeadlineTask.getTaskFromStorageString(taskSplit[1], DELIMITER_SPLIT, IDENTIFIER_DONE);
+            break;
+        case IDENTIFIER_EVENT:
+            task = EventTask.getTaskFromStorageString(taskSplit[1], DELIMITER_SPLIT, IDENTIFIER_DONE);
+            break;
+        }
+
+        if (task == null) {
+            throw new DukeException();
+        }
+
+        return task;
     }
 
 }

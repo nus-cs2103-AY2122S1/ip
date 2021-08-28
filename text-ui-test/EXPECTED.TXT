@@ -1,124 +1,139 @@
-_____________________________________
 Hello! I'm Duke
 What can I do for you?
 _____________________________________
 
-_____________________________________
-Got it. I've added this task:
+Added task:
 [T][ ] read book
-Now you have 1 task in the list
+Now you have 1 task(s) in the list.
 _____________________________________
 
 _____________________________________
-Got it. I've added this task:
+
+Added task:
 [D][ ] return book (by: Oct 15 2019 06:00 pm)
-Now you have 2 tasks in the list
+Now you have 2 task(s) in the list.
 _____________________________________
 
 _____________________________________
-Got it. I've added this task:
+
+Added task:
 [E][ ] project meeting (at: Oct 15 2019 06:00 pm)
-Now you have 3 tasks in the list
+Now you have 3 task(s) in the list.
 _____________________________________
 
 _____________________________________
-Got it. I've added this task:
+
+Added task:
 [T][ ] join sports club
-Now you have 4 tasks in the list
+Now you have 4 task(s) in the list.
 _____________________________________
 
 _____________________________________
-Got it. I've added this task:
+
+Added task:
 [T][ ] borrow book
-Now you have 5 tasks in the list
+Now you have 5 task(s) in the list.
 _____________________________________
 
 _____________________________________
-Nice! I've marked this task as done:
+
+This task is marked as done:
 [T][X] read book
-Now you have 5 tasks in the list
 _____________________________________
 
 _____________________________________
-Nice! I've marked this task as done:
+
+This task is marked as done:
 [T][X] join sports club
-Now you have 5 tasks in the list
 _____________________________________
 
 _____________________________________
-Got it. I've added this task:
+
+Added task:
 [D][ ] return book (by: Oct 15 2019 06:00 pm)
-Now you have 6 tasks in the list
+Now you have 6 task(s) in the list.
 _____________________________________
 
 _____________________________________
-Got it. I've added this task:
+
+Added task:
 [E][ ] project meeting (at: Oct 15 2019 06:00 pm)
-Now you have 7 tasks in the list
+Now you have 7 task(s) in the list.
 _____________________________________
 
 _____________________________________
-Noted. I've removed this task:
+
+This task has been removed:
 [E][ ] project meeting (at: Oct 15 2019 06:00 pm)
-Now you have 6 tasks in the list
 _____________________________________
 
 _____________________________________
-Noted. I've removed this task:
+
+This task has been removed:
 [D][ ] return book (by: Oct 15 2019 06:00 pm)
-Now you have 5 tasks in the list
 _____________________________________
 
 _____________________________________
-Oops! You do not have such a task!
+
+Error: Task out of list. Use 'list' to check your task index.
+Usage: delete <number>
 _____________________________________
 
 _____________________________________
-Oops! You do not have such a task!
+
+Error: Task out of list. Use 'list' to check your task index.
+Usage: done <number>
 _____________________________________
 
 _____________________________________
-Oops! I'm sorry but I don't know what that means.
+
+Unknown Command. See README for full list of commands.
 _____________________________________
 
 _____________________________________
-Oops! I'm sorry but I don't know what that means.
+
+Unknown Command. See README for full list of commands.
 _____________________________________
 
 _____________________________________
-Oops! I'm sorry but I don't know what that means.
+
+Unknown Command. See README for full list of commands.
 _____________________________________
 
 _____________________________________
-Oops! I'm sorry but I don't know what that means.
+
+Usage: done <number>
 _____________________________________
 
 _____________________________________
-Oops! The description of a todo cannot be empty.
-Usage: todo <task>
+
+Usage: todo <description>
 _____________________________________
 
 _____________________________________
-Oops! The description of a deadline cannot be empty.
-Usage: deadline <task> /by <date> <time (optional)>
+
+Usage: deadline <description> /by <date> <time (optional)>
 _____________________________________
 
 _____________________________________
-Oops! The description of a event cannot be empty.
-Usage: event <task> /at <date> <time (optional)>
+
+Usage: event <description> /at <date> <time (optional)>
 _____________________________________
 
 _____________________________________
-Oops! The date of a deadline cannot be empty.
-Usage: deadline <task> /by <date> <time (optional)>
+
+Invalid Format.
+Usage: deadline <description> /by <date> <time (optional)>
 _____________________________________
 
 _____________________________________
-Oops! The date of a event cannot be empty.
-Usage: event <task> /at <date> <time (optional)>
+
+Invalid Format.
+Usage: event <description> /at <date> <time (optional)>
 _____________________________________
 
 _____________________________________
-Bye. Hope to see you again soon!
+
+Bye. Come back soon!
 _____________________________________
 

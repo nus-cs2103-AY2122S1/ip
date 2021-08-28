@@ -10,15 +10,22 @@ abstract public class Task {
     /**
      * Constructor to create a new components.Task object.
      * By default created tasks are not done.
+     *
      * @param description
      */
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    protected Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     /**
      * Gets the status of the task.
+     *
      * @return "X" for done or " " for not done.
      */
     public String getStatusIcon() {
@@ -33,8 +40,16 @@ abstract public class Task {
     }
 
     /**
+     * Marks the task as not done.
+     */
+    public void markAsNotDone() {
+        this.isDone = false;
+    }
+
+    /**
      * Get task string to be inputted into file.
-     * @return string in the format <task><delimiter><done><delimiter><datetime>
+     *
+     * @return string in the respective task format.
      */
     abstract public String getTaskFileString(String delimiter, String done, String notDone);
 
