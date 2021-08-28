@@ -1,0 +1,20 @@
+hello
+list
+todo
+todo do one thing
+deadline do 2 things
+deadline do 2 things by Monday
+deadline do 2 things by 2020-10-12
+event a birthday
+event a birthday at 21:00
+event a birthday at 2020-10-12
+find
+find a birthday
+find something that doesn't exist
+done 4
+delete 3
+done ife
+done 2
+list
+clear
+bye
