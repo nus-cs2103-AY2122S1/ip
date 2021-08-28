@@ -1,3 +1,4 @@
+package duke;
 public class Ui {
 
     public Ui() {
@@ -15,7 +16,7 @@ public class Ui {
         if (taskNumber > TaskList.noOfTasks()) {
             throw new DukeException("Sorry ☹, please enter a valid task to complete!");
         }
-        Task doneTask = TaskList.getCurrentTask(taskNumber - 1);
+        duke.Task doneTask = TaskList.getCurrentTask(taskNumber - 1);
         doneTask.markAsDone();
         print("Congratulations on finishing this task!\n [X] " + doneTask.getDescription());
     }
@@ -28,7 +29,7 @@ public class Ui {
         int len = TaskList.noOfTasks();
         String sentence = "";
         for (int i = 1; i < len + 1; i++) {
-            Task currentTask = TaskList.getCurrentTask(i - 1);
+            duke.Task currentTask = TaskList.getCurrentTask(i - 1);
             sentence = sentence + i + "." + currentTask.toString() + "\n";
         }
         print(sentence);

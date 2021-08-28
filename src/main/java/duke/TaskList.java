@@ -1,16 +1,16 @@
-import java.io.File;
+package duke;
 import java.util.ArrayList;
 
 public class TaskList {
 
-    static private ArrayList<Task> storage;
+    static private ArrayList<duke.Task> storage;
 
-    public TaskList (ArrayList<Task> filledStorage) {
+    public TaskList (ArrayList<duke.Task> filledStorage) {
         storage = filledStorage;
     }
 
     public TaskList () {
-        storage = new ArrayList<Task>();
+        storage = new ArrayList<duke.Task>();
     }
 
     public static int noOfTasks() {
@@ -24,7 +24,7 @@ public class TaskList {
         String todoTitle = todoEntry.substring(5);
         Todo newToDo = new Todo(todoTitle);
         storage.add(newToDo);
-        Ui.print("Alright. I'm adding this task:\n  " + newToDo.toString() + "\nNow there are " + storage.size()
+        duke.Ui.print("Alright. I'm adding this task:\n  " + newToDo.toString() + "\nNow there are " + storage.size()
                 + " tasks in the list" );
     }
 
@@ -44,7 +44,7 @@ public class TaskList {
             deadlineDate = Time.changeDateFormat(deadlineDate);
             Deadline newDeadline = new Deadline(deadlineTitle, deadlineDate);
             storage.add(newDeadline);
-            Ui.print("Alright. I'm adding this task:\n  " + newDeadline.toString() + "\nNow there are " + storage.size()
+            duke.Ui.print("Alright. I'm adding this task:\n  " + newDeadline.toString() + "\nNow there are " + storage.size()
                     + " tasks in the list" );
         } else {
             throw new DukeException("Sorry ☹, please enter the deadline in the correct format! (DD/MM/YYYY)");
@@ -67,7 +67,7 @@ public class TaskList {
             String eventTitle = eventEntry.substring(6, indexOfSlash);
             Event newEvent = new Event(eventTitle, eventDate);
             storage.add(newEvent);
-            Ui.print("Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are " + storage.size()
+            duke.Ui.print("Alright. I'm adding this task:\n  " + newEvent.toString() + "\nNow there are " + storage.size()
                     + " tasks in the list" );
         } else {
             throw new DukeException("Sorry ☹, please enter the event in the correct format! (DD/MM/YYYY)");
@@ -79,12 +79,12 @@ public class TaskList {
         if (taskNumber > storage.size()) {
             throw new DukeException("Sorry ☹, please enter a valid task to delete!");
         }
-        Task deletedTask = storage.remove(taskNumber - 1);
-        Ui.print("Okay! I have deleted the task for you.\n  " + deletedTask.toString()
+        duke.Task deletedTask = storage.remove(taskNumber - 1);
+        duke.Ui.print("Okay! I have deleted the task for you.\n  " + deletedTask.toString()
                 + "\nNow there are " + storage.size() + " tasks in the list");
     }
 
-    public static Task getCurrentTask(int taskNumber) {
+    public static duke.Task getCurrentTask(int taskNumber) {
         return storage.get(taskNumber);
     }
 

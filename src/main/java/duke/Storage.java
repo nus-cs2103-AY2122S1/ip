@@ -1,3 +1,4 @@
+package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,7 +16,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public static ArrayList<Task> load() throws DukeException {
+    public static ArrayList<duke.Task> load() throws DukeException {
         dir = new File("data");
         dir.mkdirs();
         tmp = new File(dir, "alexa.txt");
@@ -24,7 +25,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("An error occurred.");
         }
-        ArrayList<Task> newStorage = new ArrayList<>();
+        ArrayList<duke.Task> newStorage = new ArrayList<>();
         try {
             Scanner myReader = new Scanner(tmp);
             boolean hasNoTask = true;
@@ -69,13 +70,14 @@ public class Storage {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        System.out.println("=======================================");
         return newStorage;
     }
 
     public static void writeTasks() {
         String sentence = "";
         for (int i = 1; i < TaskList.noOfTasks() + 1; i++) {
-            Task currentTask = TaskList.getCurrentTask(i - 1);
+            duke.Task currentTask = TaskList.getCurrentTask(i - 1);
             sentence = sentence + i + "." + currentTask.toString() + "\n";
         }
         try {

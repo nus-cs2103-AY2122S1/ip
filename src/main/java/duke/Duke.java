@@ -1,25 +1,20 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+package duke;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.io.PrintWriter;
-import java.nio.file.Paths;
-import java.nio.file.Files;
+
 
 public class Duke {
 
-    private Storage storage;
+    private duke.Storage storage;
     private TaskList tasks;
     private Ui ui;
     private static Parser parser = new Parser();
 
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage (filePath);
+        storage = new duke.Storage(filePath);
         try {
             Ui.print("Hello! My name is Alexa \nHow can I help you today?");
-            tasks = new TaskList(Storage.load());
+            tasks = new TaskList(duke.Storage.load());
         } catch (DukeException e) {
             tasks = new TaskList();
         }
@@ -33,7 +28,7 @@ public class Duke {
         Scanner newInput = new Scanner(System.in);
         while(newInput.hasNextLine()) {
             String input = newInput.nextLine();
-            Task currentTask = new Task(input);
+            duke.Task currentTask = new duke.Task(input);
             try {
                 if (input.equals("bye")) {
                     Ui.print("Bye. Hope to see you again soon!");
@@ -53,7 +48,7 @@ public class Duke {
                 } else {
                     Ui.invalidInput();
                 }
-                Storage.writeTasks();
+                duke.Storage.writeTasks();
             } catch (DukeException err){
                 Ui.print(err.getMessage());
             }

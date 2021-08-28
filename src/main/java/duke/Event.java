@@ -1,8 +1,7 @@
-import java.time.LocalDate;
+package duke;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
-public class Event extends Task {
+public class Event extends duke.Task {
 
     private String date;
     private DateTimeFormatter test;

@@ -1,8 +1,6 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
+package duke;
 
-public class Deadline extends Task {
+public class Deadline extends duke.Task {
 
     private String by;
 
