@@ -14,7 +14,7 @@ public class FindCommand extends Command {
 
     /**
      * Constructs a find command object with the necessary information to execute a find operation.
-     * 
+     *
      * @param keyword The keyword to be matched.
      */
     public FindCommand(String keyword) {
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes the instructions for a find operation.
-     * 
+     *
      * @param taskList The task list currently loaded on Duke.
      * @param ui The object representing the UI of Duke.
      * @param storage The object representing the storage of the Duke program.
@@ -36,7 +36,7 @@ public class FindCommand extends Command {
 
     /**
      * Checks if the command exits Duke.
-     * 
+     *
      * @return false.
      */
     @Override

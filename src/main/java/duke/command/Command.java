@@ -10,7 +10,7 @@ import duke.ui.Ui;
 public abstract class Command {
     /**
      * Executes a set of instructions in Duke.
-     * 
+     *
      * @param taskList Task list of the user loaded on Duke.
      * @param ui The object representing Duke's UI.
      * @param storage The object representing Duke's data and storage.
@@ -19,7 +19,7 @@ public abstract class Command {
 
     /**
      * Checks whether the command exits Duke.
-     * 
+     *
      * @return Whether the command exits Duke.
      */
     public abstract boolean isExit();

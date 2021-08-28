@@ -1,6 +1,14 @@
 package duke.parser;
 
-import duke.command.*;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.EditCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.constant.EditType;
 import duke.constant.TaskType;
 import duke.exception.DukeException;
@@ -8,9 +16,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * The Parser class encapsulates parsing operations that involve reading in data and
@@ -20,7 +25,7 @@ public class Parser {
     /**
      * Parses a list of strings representing the contents of a save file and
      * transforms it into a list of task objects.
-     * 
+     *
      * @param saveFileContents A list of strings, each representing a task.
      * @return A list of task objects.
      * @throws DukeException If strings passed to the parser are not in the expected format.
@@ -51,7 +56,7 @@ public class Parser {
     /**
      * Parses a string representing the user's input and creates a
      * command object with relevant data extracted from the user input.
-     * 
+     *
      * @param userInput The user's input.
      * @return A command object with relevant data.
      * @throws DukeException If the string passed to the parser does not contain information in the

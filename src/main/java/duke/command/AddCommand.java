@@ -26,7 +26,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructs an add command with information on the task to be added.
-     * 
+     *
      * @param taskType The type of task to be added.
      * @param taskDescription The description of the task to be added.
      * @param date The date associated with the task to be added.
@@ -39,7 +39,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes the instructions for adding a task to the user's task list on Duke.
-     * 
+     *
      * @param taskList Task list of the user loaded on Duke.
      * @param ui The object representing Duke's UI.
      * @param storage The object representing Duke's data and storage.
@@ -67,7 +67,7 @@ public class AddCommand extends Command {
 
     /**
      * Checks whether the command exits Duke.
-     * 
+     *
      * @return false.
      */
     @Override
@@ -77,7 +77,7 @@ public class AddCommand extends Command {
 
     /**
      * Checks whether another object is equal with this add command.
-     * 
+     *
      * @param other The object being compared to.
      * @return true if both are add commands and share the same task type, description and date, false otherwise.
      */

@@ -6,7 +6,7 @@ package duke.task;
 public class ToDo extends Task {
     /**
      * Constructs a todo object that is not completed yet.
-     * 
+     *
      * @param description The description of the task.
      */
     public ToDo(String description) {
@@ -15,7 +15,7 @@ public class ToDo extends Task {
 
     /**
      * Constructs a todo object with a specifiable completion status.
-     * 
+     *
      * @param description The description of the task.
      * @param isDone A boolean indicating whether the task has been completed.
      */
@@ -25,7 +25,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the string representation of the task.
-     * 
+     *
      * @return A string representing the task.
      */
     @Override
@@ -35,7 +35,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the format in which the task is stored in the save file.
-     * 
+     *
      * @return A string representing how the task is saved.
      */
     @Override
@@ -45,7 +45,7 @@ public class ToDo extends Task {
 
     /**
      * Checks whether another object is equal with this task.
-     * 
+     *
      * @param other The object being compared to.
      * @return true if both are tasks and share the same description and completion status, false otherwise.
      */

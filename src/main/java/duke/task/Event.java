@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 
 /**
  * The Event class encapsulates a task that occurs at a specific date.
@@ -15,7 +15,7 @@ public class Event extends Task {
 
     /**
      * Constructs an event object that is not completed yet.
-     * 
+     *
      * @param description The description of the event.
      * @param at The date that the event occurs at.
      * @throws DukeException If the deadline of the task is not in YYYY-MM-DD format.
@@ -31,7 +31,7 @@ public class Event extends Task {
 
     /**
      * Constructs an event object with a specifiable completion status.
-     * 
+     *
      * @param description The description of the event.
      * @param isDone A boolean indicating whether the task has been completed.
      * @param at The date that the event occurs at.
@@ -48,7 +48,7 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of the event.
-     * 
+     *
      * @return A string representing the event.
      */
     @Override
@@ -59,7 +59,7 @@ public class Event extends Task {
 
     /**
      * Returns the format in which the event is stored in the save file.
-     * 
+     *
      * @return A string representing how the event is saved.
      */
     @Override
@@ -69,7 +69,7 @@ public class Event extends Task {
 
     /**
      * Checks whether another object is equal with this event.
-     * 
+     *
      * @param other The object being compared to.
      * @return true if both are events and share the same date, false otherwise.
      */

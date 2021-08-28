@@ -8,21 +8,21 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * The Duke class encapsulates the resources and interfaces 
+ * The Duke class encapsulates the resources and interfaces
  * needed for the Duke program to run.
  */
 public class Duke {
     /** Storage used by the Duke program. */
     private Storage storage;
-    
+
     /** The user's task list in Duke. */
     private TaskList tasks;
-    
+
     /** The user interface of Duke. */
     private Ui ui;
 
     /**
-     * Constructs the Duke program, initializing all 
+     * Constructs the Duke program, initializing all
      * the necessary resources for the program to run.
      */
     public Duke() {

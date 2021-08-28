@@ -21,7 +21,7 @@ public class EditCommand extends Command {
     /**
      * Constructs an edit command with information on the task to be edited
      * and the edit to be performed.
-     * 
+     *
      * @param editType The type of edit to be performed on the task.
      * @param taskIndex The index of the task to be edited in the task list.
      */
@@ -32,7 +32,7 @@ public class EditCommand extends Command {
 
     /**
      * Executes the instructions for editing a task on the user's task list on Duke.
-     * 
+     *
      * @param taskList Task list of the user loaded on Duke.
      * @param ui The object representing Duke's UI.
      * @param storage The object representing Duke's data and storage.
@@ -60,7 +60,7 @@ public class EditCommand extends Command {
 
     /**
      * Checks whether the command exits Duke.
-     * 
+     *
      * @return false.
      */
     @Override
@@ -70,7 +70,7 @@ public class EditCommand extends Command {
 
     /**
      * Checks whether another object is equal with this edit command.
-     * 
+     *
      * @param other The object being compared to.
      * @return true if both are edit commands and share the same edit type and task index, false otherwise.
      */

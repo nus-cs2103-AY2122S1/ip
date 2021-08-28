@@ -1,19 +1,20 @@
 package duke.ui;
 
-import duke.constant.EditType;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.ToDo;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import duke.constant.EditType;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 public class UiTest {
     private Ui ui = new Ui();
@@ -26,7 +27,7 @@ public class UiTest {
     }
 
     @Test
-    public void printTaskListTest(){
+    public void printTaskListTest() {
         TaskList taskList = new TaskList(List.of(
                 new ToDo("Read book"),
                 new Deadline("Math assignment", true, "2021-08-21"),
@@ -38,8 +39,8 @@ public class UiTest {
                 + "1.[T][ ] Read book\n"
                 + "2.[D][X] Math assignment (by: 21 August 2021)\n"
                 + "3.[E][ ] Team meeting (at: 2 September 2021)\n"
-                + "____________________________________________________________\n\r\n"
-                , outContent.toString());
+                + "____________________________________________________________\n\r\n",
+                outContent.toString());
     }
 
     @Test
