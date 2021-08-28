@@ -41,7 +41,8 @@ public class MessageFormatter {
      * @return The formatted message.
      */
     String getFormattedMessage(String message) {
-        return indent(surroundWithDividerLines(message));
+//        return indent(surroundWithDividerLines(message));
+        return message;
     }
 
     /**
