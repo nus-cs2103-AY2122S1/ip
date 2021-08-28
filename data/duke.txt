@@ -1,4 +1,0 @@
-D | 1 | return book  | sunday
-E | 0 | meeting tmr  | 2-4am sunday
-T | 1 | flying
-D | 0 | fly to space  | Aug 22 2021

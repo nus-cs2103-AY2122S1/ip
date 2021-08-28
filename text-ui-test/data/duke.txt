@@ -1,2 +1,0 @@
-T | 0 | fly
-E | 0 | meeting tmr  | 2-4am Sunday
