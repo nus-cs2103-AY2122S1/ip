@@ -46,6 +46,14 @@ public class DukeStorageManager {
         try {
             this.saveFile = savePath.toFile();
 
+            System.out.println("The save file: " + this.saveFile);
+
+            if (!this.saveFile.exists()) {
+                createBlankSaveFile();
+                this.xmlSaveFileDoc = null;
+                return;
+            }
+
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
@@ -98,9 +106,27 @@ public class DukeStorageManager {
     }
 
     /**
-     * Creates a new blank save file.
+     * Creates a new blank save file if there is no save file already present in local storage.
      */
     private void createBlankSaveFile() {
+        this.saveFile = new File("dukeDocs" + File.separator + "listSave1.xml");
+        if (this.saveFile.exists()) {
+            System.out.println("Unusable save file already exists at save file location.");
+        } else {
+            try {
+                // Create parent directory if it does not exist yet.
+                File dukeDocsFolder = this.saveFile.getParentFile();
+                if (!dukeDocsFolder.exists()) {
+                    dukeDocsFolder.mkdirs();
+                }
+
+                this.saveFile.createNewFile();
+            } catch (IOException e) {
+                System.out.println("UNABLE TO CREATE NEW SAVE FILE!! (IOException)");
+            }
+        }
+
+
 
     }
 
@@ -215,18 +241,6 @@ public class DukeStorageManager {
         }
     }
 
-    private void thingy(Node node) {
-        System.out.println(node.getNodeName());
-        System.out.println(node.getTextContent());
-
-        NodeList nl = node.getChildNodes();
-        for (int i = 0; i < nl.getLength(); i++) {
-            Node currNode = nl.item(i);
-            if (currNode.getNodeType() == Node.ELEMENT_NODE) {
-                thingy(currNode);
-            }
-        }
-    }
 
 
 

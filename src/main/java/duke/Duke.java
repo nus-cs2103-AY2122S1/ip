@@ -35,7 +35,7 @@ public class Duke {
 
         // Processes the path to use to access storage file
         try {
-            Path xmlPath = Paths.get("src", "main", "java", "dukeDocs", "listSave1.xml");
+            Path xmlPath = Paths.get("dukeDocs", "listSave1.xml");
             //System.out.println(xmlPath.getFileName());
             this.currStorageMgr = new DukeStorageManager(xmlPath);
         } catch (InvalidPathException e) {
@@ -98,6 +98,8 @@ public class Duke {
         Duke currDuke = getCurrDuke();
         // Load Save File only after Duke is created.
         currDuke.getCurrStorageMgr().reloadSaveFromXMLDoc();
+
+        System.out.println("Duke is running in the folder: " + System.getProperty("user.dir"));
 
         // Show Welcome Message
         currDuke.currUiCtrl.printWelcomeMessage();
