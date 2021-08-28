@@ -17,6 +17,7 @@ public class Event extends Tasks {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + startTime.format(formatted) + ")";
+        return "[E]" + super.toString()
+                + " (at: " + startTime.format(formatted) + ")";
     }
 }

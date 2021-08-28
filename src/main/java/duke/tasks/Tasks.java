@@ -1,8 +1,5 @@
 package duke.tasks;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  * Represents a Task item.
  */
@@ -20,7 +17,7 @@ public class Tasks {
      * @return the status of task
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     /**

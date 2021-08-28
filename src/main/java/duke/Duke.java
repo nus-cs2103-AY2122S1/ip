@@ -9,9 +9,6 @@ import java.util.*;
  * This is a Duke application, which allows for user interaction.
  */
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
     private final static String LINE = "-----------------------------------------";
 
     public static void main(String[] args) throws IOException {
