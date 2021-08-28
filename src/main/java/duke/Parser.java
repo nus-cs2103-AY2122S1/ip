@@ -1,6 +1,6 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
 
 /**
  * A class with method to interpret the commands from user input.
@@ -40,26 +40,26 @@ public class Parser {
             if (c.value.equals(commandHolder)) {
                 switch (c) {
                 case BYE: 
-                    return new ExitCommand();
+                    return new duke.command.ExitCommand();
                     
                 case LIST:
-                    return new ListCommand(command);
+                    return new duke.command.ListCommand(command);
                     
                 case DONE:
-                    return new DoneCommand(command);
+                    return new duke.command.DoneCommand(command);
                     
                 case DELETE:
-                    return new DeleteCommand(command);
+                    return new duke.command.DeleteCommand(command);
                     
                 case FIND:
-                    return new FindCommand(command);
+                    return new duke.command.FindCommand(command);
                     
                 case TODO:
 
                 case DEADLINE:
 
                 case EVENT:
-                    return new AddCommand(command);
+                    return new duke.command.AddCommand(command);
                 }
             }
         }
