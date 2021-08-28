@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
         try {
             tasks.completeTask(taskNumber);
             System.out.printf("\tNice! I've marked this task as done:\n" + "\t%s\n", tasks.getTask(taskNumber));
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new InvalidValue();
         }
     }
