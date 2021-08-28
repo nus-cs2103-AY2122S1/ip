@@ -4,14 +4,14 @@ import duke.exception.DukeException;
 import duke.task.*;
 
 public class Parser {
-    private final TaskList taskList;
+    private final TaskList TASKLIST;
 
     public static Parser initialize(TaskList taskList) {
         return new Parser(taskList);
     }
 
     private Parser(TaskList taskList) {
-        this.taskList = taskList;
+        this.TASKLIST = taskList;
     }
 
     /**
@@ -21,31 +21,49 @@ public class Parser {
         if (userInput.equals("list")) {
             return String.format(
                     "Here are the tasks in your list:\n%s",
-                    taskList.toString()
+                    TASKLIST.toString()
             );
-        } else if (userInput.matches("done\s[0-9]{1,2}")) {
+        } else if (userInput.matches(TaskList.FIND_COMMAND_REGEX)) {
+            //eg. find <word>
+            String keyword = userInput.split(" ", 2)[1];
+            Integer[] indexesFrom0 = TASKLIST.filter((task) -> task.isInTaskSummary(keyword));
+            String res = TASKLIST.selectedTasks(indexesFrom0);
+            return String.format("Here are the matching tasks in your list:\n%s", res);
+
+
+            //loop, check if isInTaskSummary
+            //store int[] indexes, return TaskList.selectedIndexes
+
+
+//            if (TaskList.isValidIndex(idxFrom0, TASKLIST.length())) { //valid argument indexes
+//                TASKLIST.toggleDone(idxFrom0);
+//                return String.format(
+//                        "Nice! I've marked this task as done:\n    %s",
+//                        TASKLIST.get(idxFrom0).toString()
+//                );
+        } else if (userInput.matches(TaskList.DONE_COMMAND_REGEX)) {
             //eg. done 12
             //limiting tasks from 0-99
             String inputBody = userInput.split(" ", 2)[1];
             int idxFrom0 = Integer.parseInt(inputBody) - 1;
-            if (TaskList.isValidIndex(idxFrom0, taskList.length())) { //valid argument indexes
-                taskList.toggleDone(idxFrom0);
+            if (TaskList.isValidIndex(idxFrom0, TASKLIST.length())) { //valid argument indexes
+                TASKLIST.toggleDone(idxFrom0);
                 return String.format(
                         "Nice! I've marked this task as done:\n    %s",
-                        taskList.get(idxFrom0).toString()
+                        TASKLIST.get(idxFrom0).toString()
                 );
             }
-        } else if (userInput.matches("delete\s[0-9]{1,2}")) {
+        } else if (userInput.matches(TaskList.DELETE_COMMAND_REGEX)) {
             //eg. delete 3
             String inputBody = userInput.split(" ", 2)[1];
             int idxFrom0 = Integer.parseInt(inputBody) - 1;
-            if (TaskList.isValidIndex(idxFrom0, taskList.length())) { //valid argument indexes
+            if (TaskList.isValidIndex(idxFrom0, TASKLIST.length())) { //valid argument indexes
                 String reply = String.format(
                         "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
-                        taskList.get(idxFrom0).toString(),
-                        taskList.length() - 1
+                        TASKLIST.get(idxFrom0).toString(),
+                        TASKLIST.length() - 1
                 );
-                taskList.removeTask(idxFrom0);
+                TASKLIST.removeTask(idxFrom0);
                 return reply;
             }
         } else if (userInput.matches(ToDo.COMMAND_REGEX)) {
@@ -55,9 +73,9 @@ public class Parser {
             String reply = String.format(
                     "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
                     newTask.toString(),
-                    taskList.length() + 1
+                    TASKLIST.length() + 1
             );
-            taskList.addTask(newTask);
+            TASKLIST.addTask(newTask);
             return reply;
         } else if (userInput.matches(Deadline.COMMAND_REGEX)) {
             //eg. deadline xxx /by dd-MM-uuuu HHmm
@@ -70,9 +88,9 @@ public class Parser {
             String reply = String.format(
                     "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
                     newTask.toString(),
-                    taskList.length()  + 1
+                    TASKLIST.length()  + 1
             );
-            taskList.addTask(newTask);
+            TASKLIST.addTask(newTask);
             return reply;
         } else if (userInput.matches(Event.COMMAND_REGEX)) {
             //eg. event xxx /by xxx
@@ -85,9 +103,9 @@ public class Parser {
             String reply = String.format(
                     "Got it! I've added this task:\n %s\nNow you have %d tasks in the list.",
                     newTask.toString(),
-                    taskList.length()  + 1
+                    TASKLIST.length()  + 1
             );
-            taskList.addTask(newTask);
+            TASKLIST.addTask(newTask);
             return reply;
         }
         throw DukeException.of(userInput);

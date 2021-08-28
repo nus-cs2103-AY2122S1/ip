@@ -2,3 +2,5 @@ E | 1 | party | town
 T | 0 | partymore
 T | 0 | smth
 E | 0 | smth | a time
+D | 0 | part all the way boiz | 30-08-2021 2300
+T | 0 | party even more
