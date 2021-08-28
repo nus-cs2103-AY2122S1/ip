@@ -24,7 +24,7 @@ public class Storage {
     }
 
     /**
-     * load previously recorded items if there is any
+     * loads previously recorded items if there is any
      * @throws IOException
      */
     public void load() throws IOException {
@@ -48,7 +48,7 @@ public class Storage {
 
 
     /**
-     * read the tasks if there is any from the saved file
+     * reads the tasks if there is any from the saved file
      * @param task_name name from the file
      */
     public void read_task(String task_name) {
@@ -69,6 +69,11 @@ public class Storage {
         }
     }
 
+    /**
+     * updates the records when programme ends
+     * @param tasks list of tasks that needs to be added
+     * @throws IOException
+     */
     public void update_records(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(this.filepath);
         for (Task t : tasks.getList_of_tasks()) {

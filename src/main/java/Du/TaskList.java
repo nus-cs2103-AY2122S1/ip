@@ -14,7 +14,7 @@ public class TaskList {
     }
 
     /**
-     * add a Task to the TaskList
+     * adds a Task to the TaskList
      * @param t Task added
      */
     public void addTask(Task t) {
@@ -23,7 +23,7 @@ public class TaskList {
 
 
     /**
-     * size of the TaskList
+     * finds size of the TaskList
      * @return int
      */
     public int size() {
@@ -39,7 +39,7 @@ public class TaskList {
     }
 
     /**
-     * remove task from the list
+     * removes task from the list
      * @param order the number the task is labelled as
      */
     public void remove_task(int order) {
@@ -53,7 +53,7 @@ public class TaskList {
 
 
     /**
-     * print list of task
+     * prints list of task
      */
     public void print_list_of_tasks() {
         System.out.println("____________________________________________________________\n"
@@ -72,7 +72,7 @@ public class TaskList {
 
 
     /**
-     * find the task in the list and mark it as done
+     * finds the task in the list and mark it as done
      * @param order the number the task is labelled as
      */
     public void find_finished_task(int order) {
@@ -82,9 +82,9 @@ public class TaskList {
 
 
     /**
-     *
-     * @param substring
-     * @return
+     * searches for Tasks that contain the substring
+     * @param substring the string that needs to be searched
+     * @return an ArrayList of Tasks that contain the substring
      */
     public ArrayList<Task> search(String substring) {
         ArrayList<Task> have_substring = new ArrayList<>();
@@ -96,6 +96,10 @@ public class TaskList {
         return have_substring;
     }
 
+    /**
+     * prints the Tasks that contain the substring from search function
+     * @param arraylist prints the Tasks in the arraylist
+     */
     public void print(ArrayList<Task> arraylist) {
         System.out.println("____________________________________________________________\n" +
                 "Here are the matching tasks in your list:");

@@ -1,5 +1,8 @@
 package Du;
 
+/**
+ * custom exception class for Du
+ */
 public class DuException extends Exception {
 
     /**

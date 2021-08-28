@@ -9,6 +9,10 @@ import java.util.Scanner;
 public class Parser {
     private TaskList tasks;
 
+    /**
+     * public constructor for Parser
+     * @param tasks
+     */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
     }

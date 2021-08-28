@@ -10,13 +10,13 @@ public class Todo extends Task {
 
 
     /**
-     * record the To do in a certain format to save to the file
+     * records the To do in a certain format to save to the file
      * @return String which the To do is formatted in
      */
     @Override
     public String log_record() {
         int state;
-        if (this.done) {
+        if (this.isDone) {
             state = 1;
         } else {
             state = 0;

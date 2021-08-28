@@ -5,7 +5,7 @@ package Du;
  */
 public class Task {
     protected String name;
-    protected boolean done;
+    protected boolean isDone;
     protected TaskList taskList;
 
     /**
@@ -14,7 +14,7 @@ public class Task {
      */
     public Task(String name, boolean done, TaskList tasklist) {
         this.name = name;
-        this.done = done;
+        this.isDone = done;
         this.taskList = tasklist;
         tasklist.addTask(this);
     }
@@ -24,7 +24,7 @@ public class Task {
     }
 
     /**
-     * print log for adding a task
+     * prints log for adding a task
      */
     public void log_add_task() {
         System.out.println("____________________________________________________________\n"
@@ -35,10 +35,10 @@ public class Task {
     }
 
     /**
-     * change task's done state to be true
+     * changes task's done state to be true
      */
     public void finish_task() {
-        this.done = true;
+        this.isDone = true;
         System.out.println("____________________________________________________________\n"
                 + "Nice! I've marked this task as done:\n"
                 + this + "\n"
@@ -49,17 +49,17 @@ public class Task {
      * @return state of task
      */
     public String getStatus() {
-        return (done ? "X" : " ");
+        return (isDone ? "X" : " ");
     }
 
 
     /**
-     * record the Task in a certain format to save to the file
+     * records the Task in a certain format to save to the file
      * @return String which the Task is formatted in
      */
     public String log_record() {
         int state;
-        if (this.done) {
+        if (this.isDone) {
             state = 1;
         } else {
             state = 0;

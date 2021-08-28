@@ -3,6 +3,9 @@ package Du;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class which is a Task
+ */
 public class Event extends Task {
     private LocalDateTime time;
 
@@ -20,14 +23,14 @@ public class Event extends Task {
 
 
     /**
-     * record the Event in a certain format to save to the file
+     * records the Event in a certain format to save to the file
      * @return String which the Event is formatted in
      */
     @Override
     public String log_record() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         int state;
-        if (this.done) {
+        if (this.isDone) {
             state = 1;
         } else {
             state = 0;

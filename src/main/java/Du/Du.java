@@ -2,6 +2,9 @@ package Du;
 
 import java.io.IOException;
 
+/**
+ * main Du class
+ */
 public class Du {
 
     private Storage storage;
@@ -25,7 +28,7 @@ public class Du {
 
 
     /**
-     * run Du itself
+     * runs Du itself
      * @throws IOException from p.parse()
      */
     public void run() throws IOException {

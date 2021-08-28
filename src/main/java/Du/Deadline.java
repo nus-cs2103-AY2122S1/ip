@@ -19,14 +19,14 @@ public class Deadline extends Task {
     }
 
     /**
-     * record the Deadline in a certain format to save to the file
+     * records the Deadline in a certain format to save to the file
      * @return String which the Deadline is formatted in
      */
     @Override
     public String log_record() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         int state;
-        if (this.done) {
+        if (this.isDone) {
             state = 1;
         } else {
             state = 0;
@@ -36,7 +36,6 @@ public class Deadline extends Task {
 
 
     /**
-     * toString method
      * @return String for printing
      */
     @Override

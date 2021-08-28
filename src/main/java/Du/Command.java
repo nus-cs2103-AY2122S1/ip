@@ -6,7 +6,7 @@ package Du;
 public class Command {
 
     /**
-     * repeat the command
+     * repeats the command
      * used in level 1
      * @param command command passed to bot
      */
