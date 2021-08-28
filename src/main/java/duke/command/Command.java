@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.io.FileNotFoundException;
+
 import duke.Storage;
 import duke.UI;
 import duke.task.TaskList;
-
-import java.io.FileNotFoundException;
 
 public abstract class Command {
 

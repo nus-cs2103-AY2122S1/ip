@@ -1,12 +1,10 @@
 package duke;
 
-import duke.command.Command;
-import duke.task.TaskList;
-
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 
-import static java.lang.Integer.parseInt;
+import duke.command.Command;
+import duke.task.TaskList;
 
 public class Duke {
 
@@ -14,6 +12,11 @@ public class Duke {
     private TaskList tasks;
     private UI ui;
 
+    /**
+     * The main Duke class that will be run.
+     *
+     * @param filePath The filepath of the saved file
+     */
     public Duke(String filePath) {
         ui = new UI();
         storage = new Storage(filePath);

@@ -7,6 +7,12 @@ public class Event extends Task {
 
     private LocalDate time;
 
+    /**
+     * Creates a new Task object with the time of the task.
+     *
+     * @param description The description of the task.
+     * @param time The time of the task.
+     */
     public Event(String description, String time) {
         super(description);
         this.time = LocalDate.parse(time);

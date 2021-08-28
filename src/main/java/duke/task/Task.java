@@ -4,6 +4,11 @@ public class Task {
     private String description;
     private boolean isDone;
 
+    /**
+     * Creates a new Task object.
+     *
+     * @param description The description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

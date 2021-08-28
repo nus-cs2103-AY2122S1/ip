@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -12,9 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class Storage {
 
-    String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -52,17 +52,23 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Updates the saved file with the latest tasks.
+     *
+     * @param taskList The most updated tasks.
+     * @throws FileNotFoundException If the file containing the tasks is not found.
+     */
     public void update(List<Task> taskList) throws FileNotFoundException {
         PrintWriter out = new PrintWriter(this.filePath);
         for (Task task : taskList) {
             if (task instanceof Todo) {
                 out.printf("T | %s | %s%n", task.getStatusIcon() == "X" ? 1 : 0, task.getDescription());
             } else if (task instanceof Deadline) {
-                out.printf("D | %s | %s | %s%n", task.getStatusIcon() == "X" ? 1 : 0, task.getDescription(),
-                        ((Deadline) task).getDeadline());
+                out.printf("D | %s | %s | %s%n", task.getStatusIcon() == "X" ? 1 : 0, task.getDescription(), (
+                        (Deadline) task).getDeadline());
             } else {
-                out.printf("E | %s | %s | %s%n", task.getStatusIcon() == "X" ? 1 : 0, task.getDescription(),
-                        ((Event) task).getTime());
+                out.printf("E | %s | %s | %s%n", task.getStatusIcon() == "X" ? 1 : 0, task.getDescription(), (
+                        (Event) task).getTime());
             }
         }
         out.close();
