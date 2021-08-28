@@ -6,6 +6,9 @@ package duke.exception;
  * @author Teo Sin Yee
  */
 public class DukeNoSuchTaskException extends DukeException {
+    /**
+     * Constructor for DukeNoSuchTaskException.
+     */
     public DukeNoSuchTaskException() {
         super("Task doesn't exist! :o Check your index input ~");
     }

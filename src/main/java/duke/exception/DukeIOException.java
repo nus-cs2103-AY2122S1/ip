@@ -6,6 +6,9 @@ package duke.exception;
  * @author Teo Sin Yee
  */
 public class DukeIOException extends DukeException {
+    /**
+     * Constructor for DukeIOException.
+     */
     public DukeIOException(String errorMessage) {
         super(errorMessage);
     }

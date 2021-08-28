@@ -11,6 +11,9 @@ import duke.util.Ui;
  */
 public class ExitCommand extends Command {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return true;

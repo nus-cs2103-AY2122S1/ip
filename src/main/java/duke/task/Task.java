@@ -43,6 +43,11 @@ public class Task {
         return isDone ? "X" :"";
     }
 
+    /**
+     * Gets the name of the task
+     *
+     * @return String representation of the task name.
+     */
     public String getTaskName() {
         return taskName;
     }

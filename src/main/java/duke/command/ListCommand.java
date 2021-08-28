@@ -23,10 +23,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Indicates whether some other object is equal to this one.
-     *
-     * @param o The reference object with which to compare.
-     * @return true if this object is the same as the obj argument; false otherwise.
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object o) {

@@ -22,10 +22,14 @@ public class Event extends Task {
         this.time = time;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String formatToSave() {
         return String.format("E | %s | %s", super.formatToSave(), time);
     }
+
     /**
      * String representation of the event.
      *
@@ -36,6 +40,9 @@ public class Event extends Task {
         return String.format("[E]%s (at: %s)", super.toString(), time);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -6,6 +6,9 @@ package duke.exception;
  * @author Teo Sin Yee
  */
 public class DukeNoSuchCommandException extends DukeException {
+    /**
+     * Constructor for DukeNoSuchCommandException.
+     */
     public DukeNoSuchCommandException() {
         super("I don't quite understand you. :-(");
     }
