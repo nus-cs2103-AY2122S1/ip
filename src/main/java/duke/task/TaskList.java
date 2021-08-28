@@ -1,13 +1,11 @@
 package duke.task;
 
 import duke.util.Storage;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// immutable principles?
 public final class TaskList {
     private final ArrayList<Task> TASKS;
     private final Storage STORAGE_FILE;
@@ -37,7 +35,6 @@ public final class TaskList {
 
     public void addTask(Task task) {
         this.TASKS.add(task);
-        //TEST
         this.updateStore();
     }
 
@@ -59,7 +56,6 @@ public final class TaskList {
         if (isValidIndex(idx, TASKS.size())) {
             TASKS.remove(idx);
         }
-        //TEST
         this.updateStore();
     }
 
@@ -81,8 +77,6 @@ public final class TaskList {
         for (int i = 0; i < numOfTasks; i++) {
             result.append(String.format("%d: %s\n", i + 1, this.TASKS.get(i).toString()));
         }
-//        //add final duke.task without \n
-//        result += String.format("%d: %s", numOfTasks, this.tasks[numOfTasks - 1].toString());
         return result.toString();
     }
 

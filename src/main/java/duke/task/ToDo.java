@@ -35,7 +35,8 @@ public class ToDo extends Task {
     public String toStorageFormat() {
         return String.format(
             "%s | %d | %s",
-            ToDo.SYMBOL, this.isCompleted() ? 1 : 0,this.getTaskSummary()
+            ToDo.SYMBOL, this.isCompleted() ? 1 : 0,
+            this.getTaskSummary()
         );
     }
 

@@ -1,7 +1,11 @@
 package duke.util;
 
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.task.Event;
 
 public class Parser {
     private final TaskList taskList;
@@ -28,7 +32,7 @@ public class Parser {
             //limiting tasks from 0-99
             String inputBody = userInput.split(" ", 2)[1];
             int idxFrom0 = Integer.parseInt(inputBody) - 1;
-            if (TaskList.isValidIndex(idxFrom0, taskList.length())) { //valid argument indexes
+            if (TaskList.isValidIndex(idxFrom0, taskList.length())) {
                 taskList.toggleDone(idxFrom0);
                 return String.format(
                         "Nice! I've marked this task as done:\n    %s",
@@ -39,7 +43,7 @@ public class Parser {
             //eg. delete 3
             String inputBody = userInput.split(" ", 2)[1];
             int idxFrom0 = Integer.parseInt(inputBody) - 1;
-            if (TaskList.isValidIndex(idxFrom0, taskList.length())) { //valid argument indexes
+            if (TaskList.isValidIndex(idxFrom0, taskList.length())) {
                 String reply = String.format(
                         "Noted. I've removed this task:\n    %s\nNow you have %d tasks in the list.",
                         taskList.get(idxFrom0).toString(),

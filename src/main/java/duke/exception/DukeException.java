@@ -5,10 +5,8 @@ import duke.task.Event;
 import duke.task.ToDo;
 
 public class DukeException extends IllegalArgumentException {
-//    private boolean isKeyword;
     private final String MESSAGE_REPLY;
 
-    //package private
     public static DukeException of(String invalidInput, String messageReply) {
         return new DukeException(invalidInput, messageReply);
     }
