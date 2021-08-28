@@ -13,12 +13,12 @@ public class AddDeadlineCommand extends AddCommand {
             String[] userParamsSplit = userParams.split(" /", 2);
             String description = userParamsSplit[0];
             String by = "";
-            if(userParamsSplit[1].startsWith("by")) {
+            if (userParamsSplit[1].startsWith("by")) {
                 by = userParamsSplit[1].replaceFirst("by", "").stripLeading();
             }
             Task task = new Deadline(description, by);
             return new AddDeadlineCommand(task);
-        } catch(ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             throw new MalformedCommandException("Creating an deadline needs to follow the following format: " +
                 "deadline [description] /by [d/MM/yyyy HHmm]");
         }

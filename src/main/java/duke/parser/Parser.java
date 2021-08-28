@@ -16,7 +16,7 @@ public class Parser {
         String[] userInputSplit = userInput.split(" ", 2);
         String userCommand = userInputSplit[0];
 
-        switch(userCommand){
+        switch (userCommand){
         case ListCommand.COMMAND_IDENTIFIER:
             return ListCommand.create();
         case DoneCommand.COMMAND_IDENTIFIER:

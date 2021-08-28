@@ -13,12 +13,12 @@ public class AddEventCommand extends AddCommand {
             String[] userParamsSplit = userParams.split(" /", 2);
             String description = userParamsSplit[0];
             String at = "";
-            if(userParamsSplit[1].startsWith("at")) {
+            if (userParamsSplit[1].startsWith("at")) {
                 at = userParamsSplit[1].replaceFirst("at", "").stripLeading();
             }
             Task task = new Event(description, at);
             return new AddEventCommand(task);
-        } catch(ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             throw new MalformedCommandException("Creating an event needs to follow the following format: " +
                 "event [description] /at [d/MM/yyyy HHmm]");
         }

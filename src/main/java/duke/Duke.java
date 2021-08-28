@@ -25,26 +25,26 @@ public class Duke {
 
         try {
             tasks.loadTasks(storage.load());
-        } catch(StorageException e) {
+        } catch (StorageException e) {
             ui.showErrorMessage(e);
         }
 
 
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String userInput = ui.getUserInput();
                 Command userCommand = Parser.parse(userInput);
                 userCommand.execute(tasks, ui);
                 isExit = userCommand.isExit();
-            } catch(UnsupportedCommandException | MalformedCommandException e) {
+            } catch (UnsupportedCommandException | MalformedCommandException e) {
                 ui.showErrorMessage(e);
             }
         }
 
         try {
             storage.saveTasks(tasks);
-        } catch(StorageException e) {
+        } catch (StorageException e) {
             ui.showErrorMessage(e);
         }
     }
