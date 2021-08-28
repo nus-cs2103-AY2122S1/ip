@@ -1,6 +1,8 @@
 package duke;
 
-import duke.command.Command;
+import duke.commands.Command;
+import duke.gui.Main;
+import javafx.application.Application;
 
 /**
  * This program is Duke bot who keeps track of tasks that user inputs
@@ -42,11 +44,16 @@ public class Duke {
         }
     }
 
+    public void getResponse(String input) {
+
+    }
+
     /**
      * This is the main method to run Duke.
      * @param args Main method arguments.
      */
     public static void main(String[] args) {
-        new Duke("./Duke.txt").run();
+        Application.launch(Main.class, args);
+//        new Duke("./Duke.txt").run();
     }
 }
