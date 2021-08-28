@@ -1,6 +1,6 @@
 package duke;
 
-abstract public class Task {
+public abstract class Task {
     private final String name;
     private boolean isComplete;
 
@@ -38,7 +38,7 @@ abstract public class Task {
                 && !s.matches("[DE] [|] [10] [|] [\\w\\s]+ [|] [0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{4}")) {
             throw new IllegalArgumentException();
         }
-        String[] tmp =  s.split(" [|] ");
+        String[] tmp = s.split(" [|] ");
         boolean isComplete = tmp[1].equals("1");
         switch (tmp[0]) {
         case "T":

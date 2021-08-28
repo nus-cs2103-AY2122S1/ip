@@ -1,29 +1,30 @@
 package duke;
 
-import java.util.Map;
-import java.util.stream.IntStream;
-import java.util.function.BiFunction;
 import java.time.format.DateTimeParseException;
+import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.stream.IntStream;
 
 public class Parser {
-    private final String MSG_LISTS = "Here are the tasks in your list:";
-    private final String MSG_TASK_COMPLETE = "Nice! I've marked this task as done:\n%s";
-    private final String MSG_TASK_ADDED = "Got it. I've added this task:";
-    private final String MSG_TASK_DELETED = "Noted. I've removed this task:";
-    private final String MSG_TASK_COUNT = "Now you have %d tasks in the list.";
-    private final String ERR_OUT_OF_BOUNDS = "Please enter a number between 1 and %d!";
-    private final String ERR_TASK_COMPLETE = "Task %s is already complete!";
-    private final String ERR_NOT_FOUND = "Sorry, I do not recognize that command.";
-    private final String ERR_NO_TASKS = "No tasks available!";
-    private final String ERR_TODO_FORMAT = "Error in command usage. Usage: todo <name>";
-    private final String ERR_DEADLINE_FORMAT = "Error in command usage. Usage: deadline <name> /by dd/MM/yyyy HHmm";
-    private final String ERR_EVENT_FORMAT = "Error in command usage. Usage: event <name> /at dd/MM/yyyy HHmm";
-    private final String ERR_DONE_FORMAT = "Please provide a valid number! Usage: done <num>";
-    private final String ERR_DELETE_FORMAT = "Please provide a valid number! Usage: delete <num>";
-    private final String ERR_FIND_FORMAT = "Please provide a query! Usage: find <query>";
-    private final String ERR_MAX_TASKS = "Sorry! You have reached maximum Task capacity.";
-    private final String ERR_NO_MATCHES = "No tasks match given query.";
-    private final int MAX_TASKS = 100;
+    private static final String MSG_LISTS = "Here are the tasks in your list:";
+    private static final String MSG_TASK_COMPLETE = "Nice! I've marked this task as done:\n%s";
+    private static final String MSG_TASK_ADDED = "Got it. I've added this task:";
+    private static final String MSG_TASK_DELETED = "Noted. I've removed this task:";
+    private static final String MSG_TASK_COUNT = "Now you have %d tasks in the list.";
+    private static final String ERR_OUT_OF_BOUNDS = "Please enter a number between 1 and %d!";
+    private static final String ERR_TASK_COMPLETE = "Task %s is already complete!";
+    private static final String ERR_NOT_FOUND = "Sorry, I do not recognize that command.";
+    private static final String ERR_NO_TASKS = "No tasks available!";
+    private static final String ERR_TODO_FORMAT = "Error in command usage. Usage: todo <name>";
+    private static final String ERR_DEADLINE_FORMAT = "Error in command usage. "
+            + "Usage: deadline <name> /by dd/MM/yyyy HHmm";
+    private static final String ERR_EVENT_FORMAT = "Error in command usage. Usage: event <name> /at dd/MM/yyyy HHmm";
+    private static final String ERR_DONE_FORMAT = "Please provide a valid number! Usage: done <num>";
+    private static final String ERR_DELETE_FORMAT = "Please provide a valid number! Usage: delete <num>";
+    private static final String ERR_FIND_FORMAT = "Please provide a query! Usage: find <query>";
+    private static final String ERR_MAX_TASKS = "Sorry! You have reached maximum Task capacity.";
+    private static final String ERR_NO_MATCHES = "No tasks match given query.";
+    private static final int MAX_TASKS = 100;
     private final Map<String, BiFunction<String, TaskList, String>> commandsMap = Map.of(
         "list", (args, tasks) -> listTasks(tasks),
         "done", this::completeTask,
@@ -42,7 +43,7 @@ public class Parser {
      * @return message to present to the user
      */
     public String execute(String input, TaskList tasks) {
-        String[] tmp =  input.split(" ", 2);
+        String[] tmp = input.split(" ", 2);
         String command = tmp[0];
         String args = tmp.length > 1 ? tmp[1] : "";
         return commandsMap.getOrDefault(command, (str, tasklist) -> notFound())

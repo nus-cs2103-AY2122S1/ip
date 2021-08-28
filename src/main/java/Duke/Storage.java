@@ -1,19 +1,18 @@
 package duke;
 
-import java.io.File;
-import java.util.List;
-import java.util.ArrayList;
-import java.io.PrintWriter;
-import java.time.DateTimeException;
-import java.io.IOException;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileInputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Storage {
-    private final String ERR_SAVE = "Unexpected error occured. Could not save Tasks to file.";
+    private static final String ERR_SAVE = "Unexpected error occured. Could not save Tasks to file.";
     private final String filePath;
 
     public Storage(String filePath) {
@@ -28,7 +27,7 @@ public class Storage {
      * @throws FileNotFoundException if file is not found
      * @throws IOException if file cannot be created
      */
-    public List<Task> load() throws FileNotFoundException, IOException {
+    public List<Task> load() throws IOException {
         File file = new File(filePath);
         file.createNewFile();
         FileInputStream fstream = new FileInputStream(file);
@@ -36,9 +35,7 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         String line;
         while ((line = br.readLine()) != null) {
-            try {
-                tasks.add(Task.strToObj(line));
-            } catch (IllegalArgumentException | DateTimeException e) {}
+            tasks.add(Task.strToObj(line));
         }
         br.close();
         return tasks;
@@ -46,7 +43,7 @@ public class Storage {
 
     /**
      * Adds a new task to the end of the file.
-     * 
+     *
      * @param task task to be added to the end of the file
      */
     public void appendToFile(Task task) {
@@ -62,7 +59,7 @@ public class Storage {
 
     /**
      * Rewrites the contents of the file with all tasks.
-     * 
+     *
      * @param tasks tasks to be written to the file
      */
     public void saveToFile(List<Task> tasks) {
