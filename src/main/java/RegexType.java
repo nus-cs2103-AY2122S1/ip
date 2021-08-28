@@ -6,12 +6,13 @@ public enum RegexType {
     START_LINE_REGEX("^"),
     DIGITS_REGEX("\\d+"),
     DEADLINE_REGEX(".+/by.+"),
+    TASK_ADDED_LINE("Got it. I've added this task:"),
     EVENT_REGEX(".+/at.+");
 
 
     public final String str;
 
-    private RegexType(String str) {
+    RegexType(String str) {
         this.str = str;
     }
 

@@ -5,11 +5,12 @@ public enum InputType {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
+    DELETE("done"),
     DONE("done");
 
     public final String str;
 
-    private InputType(String str) {
+    InputType(String str) {
         this.str = str;
     }
 
