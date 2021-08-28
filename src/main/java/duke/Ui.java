@@ -1,7 +1,7 @@
 package duke;
 
 public class Ui {
-    private final String logo = " ____        _        \n"
+    private final String LOGO = " ____        _        \n"
                               + "|  _ \\ _   _| | _____ \n"
                               + "| | | | | | | |/ / _ \\\n"
                               + "| |_| | |_| |   <  __/\n"
@@ -10,24 +10,25 @@ public class Ui {
     private final String USER = "\nUser:";
 
     public Ui() {
-        startUpMessage();
+        printStartUpMessage();
     }
 
-    public void startUpMessage() {
-        System.out.println("Hello from\n" + logo);
+    public void printStartUpMessage() {
+        System.out.println("Hello from\n" + LOGO);
     }
 
-    public void startInteractionsMessage() {
+    public void printStartInteractionsMessage() {
         System.out.println(DUKE + "Hi, what do you want from me?");
     }
 
-    public void waitUserInput() {
+    public void printWaitingUserInput() {
         System.out.print(USER);
     }
 
-    public void printListTasks(TaskList tasks) {
-        for (int i = 1; i <= tasks.getSize(); i++)
+    public void printTaskList(TaskList tasks) {
+        for (int i = 1; i <= tasks.getSize(); i++) {
             System.out.printf("\t\t%d.%s\n", i, tasks.getTask(i));
+        }
         System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
     }
 
@@ -49,7 +50,7 @@ public class Ui {
 
     public void printLoadTasks(TaskList tasks) {
         System.out.println(DUKE + "I have loaded your past tasks list!");
-        printListTasks(tasks);
+        printTaskList(tasks);
     }
 
     public void printErrorMessage(String message) {
@@ -57,7 +58,7 @@ public class Ui {
         System.out.println("\tError: " + message + ".");
     }
 
-    public void exitMessage() {
+    public void printExitMessage() {
         System.out.println(DUKE + "Bye. Have a nice day.");
     }
 }
