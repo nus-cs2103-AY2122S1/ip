@@ -1,26 +1,17 @@
 package duke;
 
 /**
- * Represents the exceptions unique to Duke chat bot.
+ * Represents the exceptions unique to Duke chatbot.
  *
  * @author Adam Ho
  */
 public class DukeException extends Exception {
-    private String errorMessage;
     /**
      * Creates a seedu.duke exception with the specified error message.
      * @param errorMessage The error message to display when the error is encountered.
      */
     public DukeException(String errorMessage) {
         super(errorMessage);
-        this.errorMessage = errorMessage;
-    }
-
-    @Override
-    public String toString() {
-        return "DukeException{" +
-                "errorMessage='" + errorMessage + '\'' +
-                '}';
     }
 
     /**

@@ -43,8 +43,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the list of tasks.
-
-     * @throws DukeException.MissingTaskException The exception is thrown when the user tries to delete a non-existing task.
+     * @param task The task to delete.
      */
     public void deleteTask(Task task) {
         taskList.remove(task);

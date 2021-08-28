@@ -4,12 +4,13 @@ import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
+import duke.DukeException.InvalidInputException;
 
 public class Parser {
 
     public static Command parse(String fullCommand) throws DukeException {
         String[] words = fullCommand.split(" ", 2);
-        String command = words[0], userDescription = words.length > 1 ? words[1] : "";
+        String command = words[0], userDescription = words.length > 1 ? words[1] : null;
         String[] taskDescription;
         switch (command) {
         case "list":
@@ -29,7 +30,7 @@ public class Parser {
         case "exit":
             return new ExitCommand();
         default:
-            throw new DukeException.InvalidInputException();
+            throw new InvalidInputException();
         }
     }
 

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException.MissingDescriptionException;
+
 /**
  * Represents an event with a date.
  *
@@ -13,7 +15,7 @@ public class Event extends Task {
      * @param description The task description.
      * @param at The date of event.
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws MissingDescriptionException {
         super(description);
         this.at = at;
     }

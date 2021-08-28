@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 public class AddCommandTest {
     @Test
     public void testExecute() {
-        Task task = new Todo("Buy pen");
-        Command addCommand = new AddCommand(task);
         try {
+            Task task = new Todo("Buy pen");
+            Command addCommand = new AddCommand(task);
             addCommand.execute(new TaskList(), new Ui(), new Storage("./data/duke.txt"));
         } catch (DukeException e) {
             e.printStackTrace();

@@ -13,6 +13,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke chatbot object with the specified
+     * text file to store existing task data.
+     *
+     * @param filepath The path of the file's location.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -25,7 +31,9 @@ public class Duke {
     }
 
     /**
-     * Runs the TaskManager object.
+     * Runs the Duke chatbot object and accepts input from users to
+     * manage a to-do task list. The chatbot stops running when the
+     * user inputs the exit command.
      */
     public void run() {
         ui.showWelcome();

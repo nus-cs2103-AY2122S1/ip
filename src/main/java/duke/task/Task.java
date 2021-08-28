@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException.MissingDescriptionException;
+
 /**
  * Encapsulates the details of a Task object.
  *
@@ -11,9 +13,12 @@ public class Task {
 
     /**
      * Creates a task with the specified description.
-     * @param description The task description
+     * @param description The task description.
      */
-    public Task(String description) {
+    public Task(String description) throws MissingDescriptionException {
+        if (description == null) {
+            throw new MissingDescriptionException();
+        }
         this.description = description;
         this.isDone = false;
     }

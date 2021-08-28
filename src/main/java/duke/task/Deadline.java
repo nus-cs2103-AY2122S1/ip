@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException.MissingDescriptionException;
+
 /**
  * Represents a task with deadline.
  *
@@ -13,7 +15,7 @@ public class Deadline extends Task {
      * @param description The task description.
      * @param by The deadline of the task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws MissingDescriptionException {
         super(description);
         this.by = by;
     }

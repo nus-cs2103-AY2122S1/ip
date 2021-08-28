@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException.MissingDescriptionException;
+
 /**
  * Represents a to-do task.
  *
@@ -10,7 +12,7 @@ public class Todo extends Task {
      * Creates a to-do task with the specified description.
      * @param description The task description.
      */
-    public Todo(String description) {
+    public Todo(String description) throws MissingDescriptionException {
         super(description);
     }
 
