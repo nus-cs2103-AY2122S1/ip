@@ -7,12 +7,26 @@ import duke.Ui;
 
 /**
  * A Class that extends the Command class.
- * It is specifically designed for a Command for marking done. 
+ * It is specifically designed for a Command for marking done.
  *
  * @author Gu Geng
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private int index;
+
+    /**
+     * Returns a DoneCommand object with the information provided.
+     *
+     * @param command A String containing information that can possibility be used to create an DoneCommand object.
+     * @throws duke.DukeException Will be thrown if information provided are insufficient/incorrect.
+     */
+    public DoneCommand(String command) throws DukeException {
+        if (isDoneOps(command)) {
+            index = Integer.parseInt(command.substring(5)) - 1;
+        } else {
+            throw new DukeException("☹ Would you specify the task for me my dear?");
+        }
+    }
 
     /**
      * Returns true if a valid done operation is entered.
@@ -35,27 +49,13 @@ public class DoneCommand extends Command{
     }
 
     /**
-     * Returns a DoneCommand object with the information provided.
-     *
-     * @param command A String containing information that can possibility be used to create an DoneCommand object.
-     * @throws duke.DukeException Will be thrown if information provided are insufficient/incorrect.
-     */
-    public DoneCommand(String command) throws DukeException {
-        if (isDoneOps(command)) {
-            index = Integer.parseInt(command.substring(5)) - 1;
-        } else {
-            throw new DukeException("☹ Would you specify the task for me my dear?");
-        }
-    }
-
-    /**
      * Implements the execute method from Command superclass.
      * Executes the given done command accordingly by updating taskList and storage, interacting with ui.
      *
      * @param taskList A duke.TaskList object that contains an ArrayList of duke.task.task object to be updated.
      * @param ui A duke.Ui object that helps to perform interaction when the command is executed.
-     * @param storage A duke.Storage object that helps to update the storage after the execution is done. 
-     * @throws duke.DukeException Will be thrown if unable to locate/update the storage file. 
+     * @param storage A duke.Storage object that helps to update the storage after the execution is done.
+     * @throws duke.DukeException Will be thrown if unable to locate/update the storage file.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index > taskList.size()) {
@@ -67,10 +67,10 @@ public class DoneCommand extends Command{
     }
 
     /**
-     * Implements the isExit method from Command superclass. 
-     * Returns a boolean indicating if the programme terminates after the done execution. 
+     * Implements the isExit method from Command superclass.
+     * Returns a boolean indicating if the programme terminates after the done execution.
      *
-     * @return A boolean indicating if the programme terminates after the done execution. 
+     * @return A boolean indicating if the programme terminates after the done execution.
      */
     public boolean isExit() {
         return false;

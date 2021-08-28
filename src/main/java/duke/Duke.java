@@ -1,25 +1,25 @@
 package duke;
 
-import duke.command.Command;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import duke.command.Command;
+
 /**
  * A chatbot programme that executes a series of commands from user input and helps keep track user's tasks.
- * 
+ *
  * @author Gu Geng
  */
 public class Duke {
-    
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
      * Returns an Duke instance with storage tasklist and ui initialised.
-     * 
+     *
      * @param filePath the directory to stored data as a Path.
      */
     public Duke(Path filePath) {
@@ -50,9 +50,9 @@ public class Duke {
             }
         }
     }
-    
+
     /**
-     * Drives the Duke programme. 
+     * Drives the Duke programme.
      *
      * @param args A String array from user input
      * @throws DukeException Exception that is specific to Duke where invalid input is detected

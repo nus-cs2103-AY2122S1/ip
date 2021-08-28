@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * A Class that extends the Task class.
- * It is specifically designed for a Task with time of occurrence. 
+ * It is specifically designed for a Task with time of occurrence.
  *
  * @author Gu Geng
  */
@@ -15,10 +15,10 @@ public class Event extends Task {
     private LocalDate localDate;
 
     /**
-     * Returns a Event object using a String. 
+     * Returns a Event object using a String.
      *
      * @param content A String containing information that is possibly enough to create a Event object.
-     * @throws duke.DukeException Will be thrown if the information in content is insufficient/incorrect. 
+     * @throws duke.DukeException Will be thrown if the information in content is insufficient/incorrect.
      */
     public Event(String content) throws duke.DukeException {
         super(content.substring(6, content.indexOf("/")).trim());
@@ -42,7 +42,7 @@ public class Event extends Task {
     /**
      * Overrides the toString method.
      *
-     * @return A String representation of the Event object in specified format. 
+     * @return A String representation of the Event object in specified format.
      */
     @Override
     public String toString() {

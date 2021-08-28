@@ -12,16 +12,15 @@ import java.util.Scanner;
 /**
  * A class that communicates and delivers the data between the running programme and database.
  * The database is specified through a Path object indicating its file directory.
- * 
+ *
  * @author Gu Geng
  */
 public class Storage {
-    
     private Path filePath;
 
     /**
      * Returns a Storage instance with the file directory in the form of Path.
-     * 
+     *
      * @param filePath A Path object specifying the file directory to the data storage.
      */
     public Storage(Path filePath) {
@@ -30,14 +29,14 @@ public class Storage {
 
     /**
      * Returns an ArrayList of Task objects created from data stored in the directory specified by the file path.
-     * 
+     *
      * @return An ArrayList of Task objects created from data stored in the directory specified by the file path.
      * @throws DukeException Will be thrown if directory specified cannot be located or Task objects failed to create.
      */
     public ArrayList<duke.task.Task> load() throws DukeException {
         try {
             ArrayList<duke.task.Task> result = new ArrayList<>();
-            Path folderPath = Paths.get(filePath.toString(),  "..");
+            Path folderPath = Paths.get(filePath.toString(), "..");
             if (!Files.exists(folderPath)) {
                 Files.createDirectories(folderPath);
             }
@@ -70,12 +69,16 @@ public class Storage {
                     break;
 
                 case "E":
-                    duke.task.Event event = new duke.task.Event("event " + content[2].trim() + " /" + content[3].trim());
+                    duke.task.Event event = new duke.task.Event(
+                            "event " + content[2].trim() + " /" + content[3].trim());
                     if (content[1].equals("1")) {
                         event.doneTask();
                     }
                     result.add(event);
                     break;
+
+                default:
+                    continue;
                 }
             }
             s.close();
@@ -87,14 +90,14 @@ public class Storage {
 
     /**
      * Updates the storage file specified by the this.filePath against the TaskList provided.
-     * 
+     *
      * @param taskList A TaskList object containing information to update the storage.
-     * @throws DukeException Will be thrown if the storage file cannot be located. 
+     * @throws DukeException Will be thrown if the storage file cannot be located.
      */
     public void updateStorage(TaskList taskList) throws DukeException {
         try {
-            Path temp = Files.createTempFile(Paths.get(filePath.toString(), "..")
-                    , "temp", ".txt");
+            Path temp = Files.createTempFile(Paths.get(filePath.toString(), ".."),
+                    "temp", ".txt");
             FileWriter fw = new FileWriter(temp.toString());
             File tempFile = new File(temp.toString());
             for (int i = 0; i < taskList.size(); i++) {

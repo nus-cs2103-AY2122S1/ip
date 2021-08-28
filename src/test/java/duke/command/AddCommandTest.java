@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.DukeException;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import duke.DukeException;
 
 public class AddCommandTest {
     @Test
