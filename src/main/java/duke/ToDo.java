@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents a type of task that contains just a description.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * This constructor creates a ToDo type task object.

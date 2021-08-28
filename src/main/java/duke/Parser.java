@@ -1,17 +1,18 @@
 package duke;
 
-import duke.command.Command;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.command.AddCommand;
+import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
-import duke.command.ListCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.ListCommand;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a translator that makes sense of user input commands.
@@ -21,30 +22,30 @@ public class Parser {
     private static LocalTime startTime;
     private static LocalTime endTime;
     private static final String[] dateTimeFormats = {
-            "dd/MM/yyyy HHmm",
-            "dd-MM-yyyy HHmm",
-            "dd/MM/yyyy hh:mm a",
-            "dd-MM-yyyy hh:mm a",
-            "dd/MM/yyyy HHmm",
-            "dd-MM-yyyy HHmm",
-            "yyyy/MM/dd HHmm",
-            "yyyy-MM-dd HHmm",
-            "yyyy/MM/dd hh:mm a",
-            "yyyy-MM-dd hh:mm a",
-            "yyyy/MM/dd HHmm",
-            "yyyy-MM-dd HHmm",
-            "dd MMM yyyy hh:mm a"
+        "dd/MM/yyyy HHmm",
+        "dd-MM-yyyy HHmm",
+        "dd/MM/yyyy hh:mm a",
+        "dd-MM-yyyy hh:mm a",
+        "dd/MM/yyyy HHmm",
+        "dd-MM-yyyy HHmm",
+        "yyyy/MM/dd HHmm",
+        "yyyy-MM-dd HHmm",
+        "yyyy/MM/dd hh:mm a",
+        "yyyy-MM-dd hh:mm a",
+        "yyyy/MM/dd HHmm",
+        "yyyy-MM-dd HHmm",
+        "dd MMM yyyy hh:mm a"
     };
     private static final String[] dateFormats = {
-            "dd/MM/yyyy",
-            "dd-MM-yyyy",
-            "yyyy/MM/dd",
-            "yyyy-MM-dd",
-            "dd MMM yyyy"
+        "dd/MM/yyyy",
+        "dd-MM-yyyy",
+        "yyyy/MM/dd",
+        "yyyy-MM-dd",
+        "dd MMM yyyy"
     };
     private static final String[] timeFormats = {
-            "HHmm",
-            "hh:mm a"
+        "HHmm",
+        "hh:mm a"
     };
 
     /**
@@ -156,7 +157,7 @@ public class Parser {
      */
     public static Task parseDeadlineFromFile(String input) {
         String description = input.split("\\(", 2)[0].trim();
-        String returnDate = input.substring(input.indexOf(":")+2,input.indexOf(")"));
+        String returnDate = input.substring(input.indexOf(":") + 2, input.indexOf(")"));
 
         if (isDateTime(returnDate)) {
             LocalDateTime dateTimeObj = LocalDateTime.parse(returnDate,
@@ -171,8 +172,8 @@ public class Parser {
 
     private static Command parseEvent(String input) throws DukeException {
         if (input.contains("/at")) {
-            String description = input.split("/at",2)[0].trim();
-            String dateAndTimeDuration = input.split("/at",2)[1].trim();
+            String description = input.split("/at", 2)[0].trim();
+            String dateAndTimeDuration = input.split("/at", 2)[1].trim();
 
             if (description.isEmpty()) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -190,8 +191,8 @@ public class Parser {
                     if (isDuration(timeDuration)) {
                         return new AddCommand(description, eventDate, startTime, endTime, "event");
                     } else {
-                        throw new DukeException("☹ OOPS!!! Please enter a valid time duration!" +
-                                " Valid formats are (HHmm-HHmm or hh:mm a-hh:mm a)");
+                        throw new DukeException("☹ OOPS!!! Please enter a valid time duration!"
+                            + " Valid formats are (HHmm-HHmm or hh:mm a-hh:mm a)");
                     }
                 } else {
                     throw new DukeException("☹ OOPS!!! Please enter a valid date in duration!");
@@ -212,7 +213,7 @@ public class Parser {
      */
     public static Task parseEventFromFile(String input) {
         String description = input.split("\\(", 2)[0].trim();
-        String dateTimeDuration = input.substring(input.indexOf(":")+2,input.indexOf(")"));
+        String dateTimeDuration = input.substring(input.indexOf(":") + 2, input.indexOf(")"));
         String date = dateTimeDuration.split(" from: ")[0];
         String timeDuration = dateTimeDuration.split(" from: ")[1];
 
@@ -231,6 +232,7 @@ public class Parser {
                 detectedFormat = i;
                 isDateAndTime = true;
             } catch (Exception e) {
+                String exception = e.getMessage();
             }
         }
         return isDateAndTime;
@@ -245,6 +247,7 @@ public class Parser {
                 detectedFormat = i;
                 isDate = true;
             } catch (Exception e) {
+                String exception = e.getMessage();
             }
         }
         return isDate;
@@ -261,6 +264,7 @@ public class Parser {
                     startTime = LocalTime.parse(start, DateTimeFormatter.ofPattern(i));
                     startIsTime = true;
                 } catch (Exception e) {
+                    String exception = e.getMessage();
                 }
             }
 
@@ -269,6 +273,7 @@ public class Parser {
                     endTime = LocalTime.parse(end, DateTimeFormatter.ofPattern(i));
                     endIsTime = true;
                 } catch (Exception e) {
+                    String exception = e.getMessage();
                 }
             }
 

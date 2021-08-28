@@ -1,16 +1,16 @@
 package duke.command;
 
-import duke.Ui;
-import duke.TaskList;
-import duke.Task;
-import duke.ToDo;
-import duke.Deadline;
-import duke.Event;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class AddCommand implements Command{
+import duke.Deadline;
+import duke.Event;
+import duke.Task;
+import duke.TaskList;
+import duke.ToDo;
+import duke.Ui;
+
+public class AddCommand implements Command {
 
     private String description;
     private LocalTime startTime;
@@ -59,7 +59,9 @@ public class AddCommand implements Command{
             Task event = new Event(description, localDate, startTime, endTime);
             output = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
                     taskList.addToList(event), taskList.taskCount());
-
+            break;
+        default:
+            break;
         }
 
         ui.stringWithDivider(output);

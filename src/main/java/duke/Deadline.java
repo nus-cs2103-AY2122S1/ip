@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a type of task that contains a due by deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     protected LocalDate date;
     protected LocalDateTime dateTime;
