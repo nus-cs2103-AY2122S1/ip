@@ -4,7 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a Parser that parses user input and returns corresponding command.
+ */
 public class Parser {
+
+    /**
+     * Parses user input and returns corresponding command.
+     *
+     * @param input User input in String.
+     * @return Parsed command.
+     * @throws DukeException If target task index not provided for deleting or marking task as done,
+     * if invalid action command is provided or if date provided is in an invalid format.
+     */
     public static Command parse(String input) throws DukeException {
         String[] inputList = input.split(" ");
         String action = inputList[0];
