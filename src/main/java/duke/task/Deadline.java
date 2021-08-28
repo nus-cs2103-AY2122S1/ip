@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents a task with deadline.
@@ -16,6 +16,10 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+    }
+
+    public String getBy() {
+        return by;
     }
 
     /**

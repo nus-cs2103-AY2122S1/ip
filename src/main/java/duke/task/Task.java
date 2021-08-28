@@ -1,6 +1,4 @@
-package duke;
-
-import java.io.Serializable;
+package duke.task;
 
 /**
  * Encapsulates the details of a Task object.
@@ -8,8 +6,8 @@ import java.io.Serializable;
  * @author Adam Ho
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Creates a task with the specified description.
@@ -18,6 +16,18 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public boolean checkStatus() {
+        return isDone;
+    }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     /**

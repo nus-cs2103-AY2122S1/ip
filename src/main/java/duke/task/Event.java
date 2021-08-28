@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * Represents an event with a date.
@@ -16,6 +16,10 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
+    }
+
+    public String getAt() {
+        return at;
     }
 
     /**

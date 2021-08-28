@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -29,17 +31,17 @@ public class Storage {
         ArrayList<Task> taskList = tasks.getTaskList();
         for (Task task : taskList) {
             String taskDetails;
-            String done = task.isDone ? "1" : "0";
+            String done = task.checkStatus() ? "1" : "0";
             if (task instanceof Todo) {
-                taskDetails = "T" + BAR + done + BAR + task.description + "\n";
+                taskDetails = "T" + BAR + done + BAR + task.getDescription() + "\n";
             } else if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
-                taskDetails = "D" + BAR + done + BAR + deadline.description
-                        + BAR + deadline.by + "\n";
+                taskDetails = "D" + BAR + done + BAR + deadline.getDescription()
+                        + BAR + deadline.getBy() + "\n";
             } else {
                 Event event = (Event) task;
-                taskDetails = "E" + BAR + done + BAR + event.description
-                        + BAR + event.at + "\n";
+                taskDetails = "E" + BAR + done + BAR + event.getDescription()
+                        + BAR + event.getAt() + "\n";
             }
             fw.write(taskDetails);
         }
@@ -65,7 +67,7 @@ public class Storage {
                 } else {
                     t = new Event(taskFormat[2], taskFormat[3]);
                 }
-                t.isDone = taskFormat[1].equals("1");
+                t.setDone(taskFormat[1].equals("1"));
                 tasks.add(t);
             }
             return tasks;

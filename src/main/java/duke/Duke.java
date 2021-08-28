@@ -1,6 +1,9 @@
 package duke;
 
 
+import duke.command.Command;
+import duke.task.TaskList;
+
 /**
  * Represents a chatbot to manage a list of tasks.
  *

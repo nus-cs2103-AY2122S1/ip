@@ -1,6 +1,11 @@
-package duke;
+package duke.command;
 
-import duke.DukeException.MissingTaskException;
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
