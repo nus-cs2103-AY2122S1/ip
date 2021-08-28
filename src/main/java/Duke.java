@@ -4,31 +4,80 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.BufferedReader;
 
 public class Duke {
     private static final ArrayList<Task> list = new ArrayList<>();
-    private static int listNumber = 0;
 
     private static void update(Task t) {
         System.out.println("Got it. I've added this task:\n  "
                 + t.toString()
-                + "\nNow you have " + listNumber + " tasks in the list.");
+                + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
     private static void delete(int number) {
         Task toDelete = list.get(number - 1);
         list.remove(number - 1);
-        listNumber -= 1;
         System.out.println("Noted. I've removed this task:\n  "
                 + toDelete.toString()
-                + "\nNow you have " + listNumber + " tasks in the list.");
+                + "\nNow you have " + list.size() + " tasks in the list.");
     }
 
-    private static void write() {
-        File f = new File("C:/Users/J/ip/src/main/Data/Duke.txt");
+    private static void readAll() {
+        File f = new File("./Data/");
+        File f2 = new File("./Data/Duke.txt");
+        if (!f.exists()) {
+            f.mkdir();
+        }
+
         try {
-            FileWriter w = new FileWriter(f);
-            w.write('v');
+            f2.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            BufferedReader b = new BufferedReader(new FileReader(f2));
+            String line = b.readLine();
+            while (line != null) {
+                String[] split = line.split("\\|");
+                switch(split[0]) {
+                case("T"):
+                    Todo t = new Todo(split[2]);
+                    if (!split[1].equals("0")) {
+                        t.markAsDone();
+                    }
+                    list.add(t);
+                    break;
+                case("E"):
+                    Event e = new Event(split[2], split[3]);
+                    if (!split[1].equals("0")) {
+                        e.markAsDone();
+                    }
+                    list.add(e);
+                    break;
+                case("D"):
+                    Deadline d = new Deadline(split[2], split[3]);
+                    if (!split[1].equals("0")) {
+                        d.markAsDone();
+                    }
+                    list.add(d);
+                    break;
+                }
+                line = b.readLine();
+            }
+            b.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeAll() {
+        try {
+            FileWriter w = new FileWriter("./Data/Duke.txt");
+            for (Task task : list) {
+                w.write(task.toWrite());
+            }
             w.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -38,13 +87,14 @@ public class Duke {
     public static void main(String[] args) {
         String logo = "DUKE\n";
         System.out.println("Hello from\n" + logo + "What can I do for you?");
+        readAll();
         Scanner s = new Scanner(System.in);
         String command = s.nextLine();
         while(!command.equals("bye")) {
             switch(command.split(" ")[0]) {
             case "list":
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < listNumber; i++) {
+                for (int i = 0; i < list.size(); i++) {
                     int num = i + 1;
                     if (list.get(i) != null) {
                         System.out.println(num + "." + list.get(i).toString());
@@ -65,7 +115,6 @@ public class Duke {
                     }
                     Todo toAdd = new Todo(command.split(" ", 2)[1]);
                     list.add(toAdd);
-                    listNumber += 1;
                     update(toAdd);
                 } catch (DukeException exception) {
                     System.out.println(exception.getMessage());
@@ -78,7 +127,6 @@ public class Duke {
                 String second = splitD[1];
                 Deadline toAdd2 = new Deadline(first, second);
                 list.add(toAdd2);
-                listNumber += 1;
                 update(toAdd2);
                 command = s.nextLine();
                 break;
@@ -88,7 +136,6 @@ public class Duke {
                 String two = splitE[1];
                 Event toAdd3 = new Event(one, two);
                 list.add(toAdd3);
-                listNumber += 1;
                 update(toAdd3);
                 command = s.nextLine();
                 break;
@@ -103,6 +150,6 @@ public class Duke {
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
-        write();
+        writeAll();
     }
 }
