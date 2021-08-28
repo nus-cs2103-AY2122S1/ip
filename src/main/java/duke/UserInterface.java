@@ -16,7 +16,7 @@ public class UserInterface {
 
     /**
      * Gets user's input from the console.
-     * 
+     *
      * @return user's input
      */
     public String getInput() {
@@ -49,7 +49,7 @@ public class UserInterface {
 
     /**
      * Shows the string representation of an object to the user.
-     * 
+     *
      * @param obj to be shown
      */
     public void showObject(Object obj) {
@@ -58,7 +58,7 @@ public class UserInterface {
 
     /**
      * Shows the message of a thrown exception to the user.
-     * 
+     *
      * @param exception to be shown
      */
     public void showError(DukeException exception) {
@@ -67,7 +67,7 @@ public class UserInterface {
 
     /**
      * Shows a given message to the user.
-     * 
+     *
      * @param message to be shown
      */
     public void showMessage(String message) {
@@ -76,7 +76,7 @@ public class UserInterface {
 
     /**
      * Shows a given list of tasks to the user.
-     * 
+     *
      * @param list of tasks to be shown
      */
     public void showTaskList(List<? extends Task> list) {

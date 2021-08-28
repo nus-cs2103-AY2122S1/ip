@@ -7,14 +7,23 @@ import java.time.LocalDate;
  */
 public class EventTask extends Task {
 
+    /**
+     * Creates a task with an event date.
+     *
+     * @param name of the task
+     * @param date of event
+     */
     public EventTask(String name, LocalDate date) {
         super(name, date);
     }
 
-    public EventTask(String name, boolean completed) {
-        super(name, completed);
-    }
-
+    /**
+     * Creates a task with an event date.
+     *
+     * @param name      of the task
+     * @param completed whether the task is completed
+     * @param date      of event
+     */
     public EventTask(String name, boolean completed, LocalDate date) {
         super(name, completed, date);
     }

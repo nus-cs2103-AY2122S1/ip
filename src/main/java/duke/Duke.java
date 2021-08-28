@@ -33,6 +33,9 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
+    /**
+     * Creates a duke application.
+     */
     public Duke() {
         this.list = new DukeList();
         this.commandManager = new CommandManager();

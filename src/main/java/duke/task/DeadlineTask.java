@@ -7,16 +7,25 @@ import java.time.LocalDate;
  */
 public class DeadlineTask extends Task {
 
+    /**
+     * Creates a task with a deadline.
+     *
+     * @param name of the task
+     * @param date deadline
+     */
     public DeadlineTask(String name, LocalDate date) {
         super(name);
         this.date = date;
     }
 
-    public DeadlineTask(String name, boolean completed) {
-        super(name, completed);
-        this.date = null;
-    }
-
+    /**
+     * Creates a task with a deadline. Normally used when recreating tasks from the
+     * database.
+     *
+     * @param name      of the task
+     * @param completed whether the task is completed
+     * @param date      deadline
+     */
     public DeadlineTask(String name, boolean completed, LocalDate date) {
         super(name, completed);
         this.date = date;

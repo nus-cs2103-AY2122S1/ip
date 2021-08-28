@@ -4,9 +4,9 @@ package duke.exception;
  * Thrown when there is an exception in file handling, creating or directory
  * access.
  */
-public class DatabaseIOException extends DukeException {
+public class DatabaseFileException extends DukeException {
 
-    public DatabaseIOException(String message) {
+    public DatabaseFileException(String message) {
         super(message);
     }
 

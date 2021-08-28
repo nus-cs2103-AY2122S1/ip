@@ -24,18 +24,19 @@ public class CommandManager {
     /**
      * Puts commands under its registry, mapped to its label. All registered command
      * must have a unique label for it to be a distinguishable callable.
-     * 
-     * @param command to be registered
+     *
+     * @param commands to be registered
      */
     public void registerCommands(Command... commands) {
-        for (Command command : commands)
+        for (Command command : commands) {
             this.registry.put(command.getLabel(), command);
+        }
     }
 
     /**
      * Processes the given input (user's input) and search for its corresponding
      * command to be executed with the given argument.
-     * 
+     *
      * @param input straight out from the command line
      */
     public void parseInput(String input) {
