@@ -23,10 +23,11 @@ public class DeadlineCommand extends Command {
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
+     * @return String object to describe execution of DeadlineCommand.
      * @throws DukeException if input for deadline command is not properly formatted.
      */
     @Override
-    public void execute(String des, TaskList tList) throws DukeException {
+    public String execute(String des, TaskList tList) throws DukeException {
         if (des.equals("deadline")) {
             throw new DukeException("\"deadline\" command not correctly formatted \n"
                     + "Please insert task and due date arguments");
@@ -45,13 +46,17 @@ public class DeadlineCommand extends Command {
             LocalTime time = Storage.extractTimeDeadline(des);
             Deadline atHand = new Deadline(description, date, time);
             tList.add(atHand);
-            System.out.println("Sure. The following task has been added: ");
-            System.out.println(atHand.formatString());
-            this.numberOfTasks(tList);
+            Storage.createFile();
+            Storage.writeToFile(tList);
+            return "Sure. The following task has been added: \n"
+                    + atHand.formatString()
+                    + "\n"
+                    + "\n"
+                    + numberOfTasks(tList)
+                    + "\n";
+
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("\"deadline\" command not correctly formatted");
         }
-        Storage.createFile();
-        Storage.writeToFile(tList);
     }
 }

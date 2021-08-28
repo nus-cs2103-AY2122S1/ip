@@ -20,20 +20,26 @@ public class ToDoCommand extends Command {
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
+     * @return String object to describe execution of ToDoCommand.
      * @throws DukeException if input for ToDo command is not properly formatted.
      */
-    public void execute(String des, TaskList tList) throws DukeException {
+    public String execute(String des, TaskList tList) throws DukeException {
         if (des.equals("todo")) {
             throw new DukeException("\"todo\" command not correctly formatted \nPlease insert task argument");
         }
         String description = des.substring(5);
         ToDo atHand = new ToDo(description);
         tList.add(atHand);
-        System.out.println("Sure. The following task has been added: ");
-        System.out.println(atHand);
-        this.numberOfTasks(tList);
+        String result = "Sure. The following task has been added: \n";
+        result = result
+                + atHand
+                + "\n"
+                + "\n"
+                + numberOfTasks(tList)
+                + "\n";
 
         Storage.createFile();
         Storage.writeToFile(tList);
+        return result;
     }
 }

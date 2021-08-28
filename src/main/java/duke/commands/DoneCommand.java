@@ -22,9 +22,10 @@ public class DoneCommand extends Command {
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
+     * @return String object to describe execution of DoneCommand.
      * @throws DukeException if input for Delete command is not properly formatted.
      */
-    public void execute(String des, TaskList tList) throws DukeException {
+    public String execute(String des, TaskList tList) throws DukeException {
         ArrayList<Task> tasks = tList.getTaskList();
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);
@@ -40,13 +41,15 @@ public class DoneCommand extends Command {
                 throw new DukeException("You have already completed this task.");
             } else {
                 atHand.markAsDone();
-                System.out.println("I see that you have completed a task. Keep up the good work!");
-                System.out.println();
-                System.out.println("This task has now been marked as completed");
-                System.out.println(atHand.getStatusIcon() + " " + atHand.getDescription());
+                Storage.createFile();
+                Storage.writeToFile(tList);
+                return "I see that you have completed a task. Keep up the good work!\n"
+                        + "\n"
+                        + "This task has now been marked as completed\n"
+                        + atHand.getStatusIcon()
+                        + " " + atHand.getDescription()
+                        + "\n";
             }
         }
-        Storage.createFile();
-        Storage.writeToFile(tList);
     }
 }
