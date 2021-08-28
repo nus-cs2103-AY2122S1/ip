@@ -1,9 +1,9 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
-
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import duke.task.Deadline;
 import duke.task.Event;

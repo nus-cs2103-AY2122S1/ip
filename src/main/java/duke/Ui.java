@@ -1,9 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
+import duke.task.Task;
 
 /**
  * This class represents a {@code Ui} and handles all the interactions with the
@@ -12,12 +11,12 @@ import java.util.ArrayList;
  * @author Elizabeth Chow
  */
 public class Ui {
-    private final String HORIZONTAL_LINE = "-------------------------------------------------------------";
-    private final String ADD_FORMAT = "Got it. I've  added this task:\n  %s";
-    private final String ERROR_FORMAT = "☹ OOPS!!! %s";
-    private final String TASK_COUNT_FORMAT = "Now you have %d %s in the list.";
-    private final String DONE_FORMAT = "Nice! I've marked this task as done:\n %s";
-    private final String DELETE_FORMAT = "Noted. I've removed this task:\n  %s";
+    private static final String HORIZONTAL_LINE = "-------------------------------------------------------------";
+    private static final String ADD_FORMAT = "Got it. I've  added this task:\n  %s";
+    private static final String ERROR_FORMAT = "☹ OOPS!!! %s";
+    private static final String TASK_COUNT_FORMAT = "Now you have %d %s in the list.";
+    private static final String DONE_FORMAT = "Nice! I've marked this task as done:\n %s";
+    private static final String DELETE_FORMAT = "Noted. I've removed this task:\n  %s";
 
     /**
      * Displays the welcome message when the app starts running.
@@ -113,18 +112,10 @@ public class Ui {
         }
     }
 
-    /**
-     * Print with 4 spaces infront of param str.
-     *
-     * @param str A String to be printed
-     */
     private void printWithTabIndent(String str) {
         System.out.println("\t" + str);
     }
 
-    /**
-     * Print horizontal line.
-     */
     private void printLine() {
         printWithTabIndent(HORIZONTAL_LINE);
     }

@@ -1,7 +1,7 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
