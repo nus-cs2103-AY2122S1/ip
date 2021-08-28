@@ -22,9 +22,9 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
         Task t = tasks.get(index - 1);
         storage.saveData(tasks.markDone(index - 1));
-        ui.print(String.format("Nice! I've marked this task as done:\n %s", t.toString()));
+        return ui.print(String.format("Nice! I've marked this task as done:\n %s", t.toString()));
     }
 }

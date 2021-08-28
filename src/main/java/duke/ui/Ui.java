@@ -2,72 +2,47 @@ package duke.ui;
 
 import duke.data.exception.DukeException;
 
-import java.util.Scanner;
-
 /**
  * Deals with interactions with the user
  */
 public class Ui {
-    private Scanner sc;
 
     /**
      * Constructor for Ui
      */
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
+    public Ui() {}
 
     /**
-     * Prints greeting message
+     * Returns greeting message
+     * @return greeting message
      */
-    public void greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(wrapText("Hello from\n" + logo + "\nWhat can I do for you?"));
+    public String greet() {
+        return "Hello, I'm Duke!\n" + "\nWhat can I do for you?";
     }
 
     /**
-     * Prints goodbye message
+     * Returns goodbye message
+     * @return goodbye message
      */
-    public void goodbye() {
-        this.sc.close();
-        System.out.println(wrapText("Bye. Hope to see you again soon!"));
+    public String goodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints error message
+     * Returns error message
      * @param e the exception to print
+     * @return error message
      */
-    public void showErrorMessage(DukeException e) {
-        System.out.println(wrapText(e.toString()));
+    public String showErrorMessage(DukeException e) {
+        return e.toString();
     }
 
     /**
-     * Reads a line of user input
-     * @return string of user input
-     */
-    public String readCommand() {
-        return this.sc.nextLine();
-    }
-
-    /**
-     * Prints given message
+     * Returns given message
      * @param msg the message to print
+     * @return given message
      */
-    public void print(String msg) {
-        System.out.println(wrapText(msg));
-    }
-
-    /**
-     * Wraps given text with line break
-     * @param input the text to wrap
-     * @return input wrapped with line breaks
-     */
-    private String wrapText(String input) {
-        String lineBreak = "\n____________________________________________________________\n";
-        return lineBreak + input + lineBreak;
+    public String print(String msg) {
+        return msg;
     }
 }

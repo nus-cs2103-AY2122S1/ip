@@ -8,7 +8,6 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Describes chatbot Duke
@@ -27,29 +26,22 @@ public class Duke {
         this.tasks = new TaskList(storage.loadData());
         this.ui = new Ui();
     }
-
-    /**
-     * Runs Duke
-     */
-    public void run() {
-        this.ui.greet();
-        boolean isExit = false;
-        
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            }
-        }
+    
+    protected String getWelcome() {
+        return ui.greet();
     }
 
-    public static void main(String[] args) {
-        String projectDir = System.getProperty("user.dir");
-        Path path = Paths.get(projectDir, "data", "duke.txt");
-        new Duke(path).run();
+    /**
+     * Returns Duke's response to a given input
+     * @param input the input given by user
+     * @return Duke's response
+     */
+    protected String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showErrorMessage(e);
+        }
     }
 }
