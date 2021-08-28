@@ -1,9 +1,9 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
-
-import java.io.IOException;
 
 /**
  * Command that deletes a task.

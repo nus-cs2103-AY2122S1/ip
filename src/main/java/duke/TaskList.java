@@ -1,14 +1,14 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /**
  * Class containing the task list.
@@ -105,7 +105,8 @@ public class TaskList {
                 at = atBuilder.toString();
 
                 list.add(new Event(desc, at, taskDone));
-
+                break;
+            default:
             }
         }
     }
@@ -147,6 +148,11 @@ public class TaskList {
         list.add(task);
     }
 
+    /**
+     * Returns a list of task whose description includes the keyword.
+     * @param keyword
+     * @return
+     */
     public ArrayList<Task> filter(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();
         for (Task task : list) {

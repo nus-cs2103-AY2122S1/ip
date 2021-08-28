@@ -1,10 +1,19 @@
 package duke;
 
-import duke.commands.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
+import duke.commands.AddTodoCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.UnknownCommand;
 
 /**
  * Represents the Parser class which makes sense of what the user typed.
@@ -57,8 +66,8 @@ public class Parser {
             boolean byFound = false;
 
             LocalDate deadlineDate = null;
-            DateTimeFormatter deadlineDateFormatter = DateTimeFormatter.
-                    ofPattern("[d/M/yyyy][d-MMM-yyyy][d-M-yyyy][d/MMM/yyyy]");
+            DateTimeFormatter deadlineDateFormatter = DateTimeFormatter
+                    .ofPattern("[d/M/yyyy][d-MMM-yyyy][d-M-yyyy][d/MMM/yyyy]");
 
             for (int i = 1; i < fullCommand.length; i++) {
                 if (byFound) {
@@ -100,8 +109,8 @@ public class Parser {
             boolean atFound = false;
 
             LocalDate eventDate = null;
-            DateTimeFormatter eventDateFormatter = DateTimeFormatter.
-                    ofPattern("[d/M/yyyy][d-MMM-yyyy][d-M-yyyy][d/MMM/yyyy]");
+            DateTimeFormatter eventDateFormatter = DateTimeFormatter
+                .ofPattern("[d/M/yyyy][d-MMM-yyyy][d-M-yyyy][d/MMM/yyyy]");
 
             for (int i = 1; i < fullCommand.length; i++) {
                 if (atFound) {
@@ -144,6 +153,8 @@ public class Parser {
                 keywordBuilder.append(fullCommand[i]);
             }
             return new FindCommand("find", keywordBuilder.toString());
+
+        default :
         }
         return new UnknownCommand("unknown");
     }

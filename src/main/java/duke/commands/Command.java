@@ -6,7 +6,7 @@ import duke.TaskList;
 /**
  * Abstract class for commands.
  */
-abstract public class Command {
+public abstract class Command {
     private String desc;
 
     /**

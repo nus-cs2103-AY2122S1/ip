@@ -24,6 +24,14 @@ public class Deadline extends Task {
         this.date = null;
     }
 
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description of the deadline.
+     * @param by          when the deadline is.
+     * @param isDone      if the task is done or not.
+     * @param date        date of deadline.
+     */
     public Deadline(String description, String by, boolean isDone, LocalDate date) {
         super(description, isDone);
         this.by = by;
@@ -48,3 +56,4 @@ public class Deadline extends Task {
         }
     }
 }
+

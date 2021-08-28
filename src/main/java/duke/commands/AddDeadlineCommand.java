@@ -1,12 +1,11 @@
 package duke.commands;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import duke.tasks.Deadline;
 import duke.Storage;
 import duke.TaskList;
+import duke.tasks.Deadline;
 
 /**
  * Command that adds deadline to task list.
@@ -27,6 +26,13 @@ public class AddDeadlineCommand extends Command {
         this.date = null;
     }
 
+    /**
+     * Constructor for AddDeadlineCommand.
+     *
+     * @param desc The description of the deadline.
+     * @param by   when the deadline is.
+     * @param date date of deadline.
+     */
     public AddDeadlineCommand(String desc, String by, LocalDate date) {
         super(desc);
         this.by = by;

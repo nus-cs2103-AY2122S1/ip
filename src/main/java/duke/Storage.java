@@ -1,10 +1,5 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-import duke.tasks.Event;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -90,7 +90,8 @@ public class Storage {
      * @throws IOException when an IO operation fails.
      */
     public void markAsDone(int doneIndex) throws IOException {
-        List<String> fileContent = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"), StandardCharsets.UTF_8));
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"),
+                        StandardCharsets.UTF_8));
 
         String oldLine = fileContent.get(doneIndex - 1);
         StringBuilder newLine = new StringBuilder(oldLine);

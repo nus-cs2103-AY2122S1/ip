@@ -1,11 +1,11 @@
 package duke.commands;
 
-import duke.tasks.Event;
-import duke.Storage;
-import duke.TaskList;
-
 import java.io.IOException;
 import java.time.LocalDate;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.tasks.Event;
 
 /**
  * Command that adds event to task list.
@@ -26,6 +26,13 @@ public class AddEventCommand extends Command {
         this.date = null;
     }
 
+    /**
+     * Constructor for AddEventCommand.
+     *
+     * @param desc description of event.
+     * @param at   when the event is.
+     * @param date date of event.
+     */
     public AddEventCommand(String desc, String at, LocalDate date) {
         super(desc);
         this.at = at;

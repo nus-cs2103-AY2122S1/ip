@@ -1,9 +1,9 @@
 package duke;
 
-import duke.commands.Command;
-
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.commands.Command;
 
 /**
  * Represents the chatbot Duke.
@@ -56,5 +56,4 @@ public class Duke {
     public static void main(String[] args) throws IOException {
         new Duke("data/tasks.txt", "data").run();
     }
-
 }

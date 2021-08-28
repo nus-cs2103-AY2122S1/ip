@@ -23,6 +23,14 @@ public class Event extends Task {
         this.at = at;
     }
 
+    /**
+     * Constructor for Event task.
+     *
+     * @param description of the event.
+     * @param at          when the event is.
+     * @param isDone      if the task is done or not.
+     * @param date        date of event.
+     */
     public Event(String description, String at, boolean isDone, LocalDate date) {
         super(description, isDone);
         this.at = at;

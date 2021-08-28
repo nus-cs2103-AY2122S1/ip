@@ -1,13 +1,13 @@
 package duke;
 
-import duke.commands.AddEventCommand;
-import duke.commands.Command;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.commands.AddEventCommand;
 
 public class ParserTest {
     @Test
