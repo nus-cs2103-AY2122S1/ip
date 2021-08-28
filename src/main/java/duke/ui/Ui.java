@@ -38,9 +38,13 @@ public class Ui {
         out.println(GOODBYE);
     }
 
-    /** Displays the error message when Duke cannot load existing tasks from file. */
-    public void showLoadingError() {
-        out.println("Could not load your saved tasks. Creating a new task list...");
+    /**
+     * Displays the error message when Duke cannot load existing tasks from file.
+     *
+     * @param msg The message of the error thrown.
+     */
+    public void showLoadingError(String msg) {
+        out.println(msg + "\n  ==> Could not load your saved tasks. Creating a new task list...");
     }
 
     /**

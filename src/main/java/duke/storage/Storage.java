@@ -39,7 +39,7 @@ public class Storage {
         List<Task> tasks = new ArrayList<>(lines.size());
         for (String s : lines) {
             String[] tokens = s.split(" \\| ");
-            Task t = null;
+            Task t;
             boolean isDone = tokens[1].equals("1");
             switch (tokens[0]) {
             case "T":
@@ -56,6 +56,8 @@ public class Storage {
                         : LocalDateTime.parse(tokens[4]);
                 t = new Event(tokens[2], isDone, at, end);
                 break;
+            default:
+                throw new IOException("Corrupt data found!");
             }
             tasks.add(t);
         }
