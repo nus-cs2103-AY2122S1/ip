@@ -1,3 +1,13 @@
+package command;
+
+import exception.DukeException;
+import exception.InvalidCommand;
+import exception.InvalidDateFormat;
+import exception.NullDescription;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
 public abstract class Command {
     public static Command parse(String input) throws InvalidCommand, NullDescription, InvalidDateFormat {
         String[] output = input.split(" ");
@@ -30,6 +40,6 @@ public abstract class Command {
         }
         return commandType;
     }
-    abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-    abstract boolean isExit();
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract boolean isExit();
 }

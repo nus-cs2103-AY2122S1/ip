@@ -1,12 +1,16 @@
+package task;
+
+import task.Task;
+
 /**
- * Todo is a subclass of a Task.
- * It has the same behaviour of a task except printing out the Task type when using
+ * task.Todo is a subclass of a task.Task.
+ * It has the same behaviour of a task except printing out the task.Task type when using
  * ToString method call.
  */
 
-public class Todo extends Task{
+public class Todo extends Task {
     /**
-     * Constructor for Todo object.
+     * Constructor for task.Todo object.
      *
      * @param description the task description
      */
@@ -15,9 +19,9 @@ public class Todo extends Task{
     }
 
     /**
-     * Returns out the Task description and the task type in String
+     * Returns out the task.Task description and the task type in String
      *
-     * @return the String representation of a Todo
+     * @return the String representation of a task.Todo
      */
     @Override
     public String toString() {

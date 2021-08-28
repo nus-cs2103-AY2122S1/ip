@@ -1,3 +1,5 @@
+package exception;
+
 public class NullDescription extends DukeException {
 
     private String type;

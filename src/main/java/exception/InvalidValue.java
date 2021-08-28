@@ -1,3 +1,5 @@
+package exception;
+
 public class InvalidValue extends DukeException {
 
     @Override

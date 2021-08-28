@@ -1,4 +1,6 @@
-public class InvalidCommand extends DukeException{
+package exception;
+
+public class InvalidCommand extends DukeException {
 
     @Override
     public String getMessage() {

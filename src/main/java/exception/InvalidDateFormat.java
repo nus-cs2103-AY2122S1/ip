@@ -1,4 +1,6 @@
-public class InvalidDateFormat extends DukeException{
+package exception;
+
+public class InvalidDateFormat extends DukeException {
 
     @Override
     public String getMessage() {
