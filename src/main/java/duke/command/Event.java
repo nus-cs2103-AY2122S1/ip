@@ -12,22 +12,23 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 
+/**
+ * Represents a task that is about to happen on an upcoming date.
+ * A <code>Event</code> consists of a description and a date.
+ */
 public class Event extends Task {
 
     protected String atOriginal;
     protected LocalDate at;
     protected Date time;
 
-    protected String dateToString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
-        return formatter.format(at);
-    }
-
-    protected String timeToString() {
-        SimpleDateFormat displayFormat = new SimpleDateFormat("hh:mm a");
-        return displayFormat.format(time);
-    }
-
+    /**
+     * Creates an Event task.
+     *
+     * @param description Description about the task.
+     * @param at Date of the task.
+     * @throws DukeException If time is not formatted properly.
+     */
     public Event(String description, String at) throws DukeException {
         super(description, 'E');
         atOriginal = at;
@@ -47,11 +48,41 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Converts due date to string format.
+     *
+     * @return Due date as a string.
+     */
+    protected String dateToString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        return formatter.format(at);
+    }
+
+    /**
+     * Converts due time to string format.
+     *
+     * @return Due timing as a string.
+     */
+    protected String timeToString() {
+        SimpleDateFormat displayFormat = new SimpleDateFormat("hh:mm a");
+        return displayFormat.format(time);
+    }
+
+    /**
+     * Gives due time in original format.
+     *
+     * @return Due timing in original form.
+     */
     @Override
     public String getDueTime() {
         return atOriginal;
     }
 
+    /**
+     * Converts Event task to string format.
+     *
+     * @return Event as a string.
+     */
     @Override
     public String toString() {
         return "[" + this.getCat() + "]" + super.toString() + " (at: " + dateToString() +  " " + timeToString() + ")";

@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * Unit test for Storage class.
+ */
 public class StorageTest {
     @Test
     public void saveTasks_invalidFile_success() {

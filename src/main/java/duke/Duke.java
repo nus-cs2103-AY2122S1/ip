@@ -12,11 +12,19 @@ import duke.util.Ui;
 // import java packages
 import java.util.Scanner;
 
+/**
+ * A chatbot that stores tasks given by a user.
+ */
 public class Duke {
     private Storage storage;
     private TaskList cmdList;
     private Ui ui;
 
+    /**
+     * Creates a Duke chatbot.
+     *
+     * @param filePath Filepath to save tasks and load tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -28,6 +36,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke chatbot.
+     */
     public void run() {
         ui.sayHello();
         int count = 0 + cmdList.getLength();
@@ -110,7 +121,22 @@ public class Duke {
         ui.sayGoodbye();
     }
 
+    /**
+     * Starts the Duke chatbot.
+     *
+     * @param args Arguments to be passed to main function.
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    /**
+     * Converts Duke to string format.
+     *
+     * @return Duke as a string.
+     */
+    @Override
+    public String toString() {
+        return "im a chatbot ☺ - calico";
     }
 }
