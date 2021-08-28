@@ -5,7 +5,7 @@ import duke.data.exception.EmptyDescriptionException;
 /**
  * Encapsulates Todo 
  */
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Constructor for Todo
      * @param description the description of the task

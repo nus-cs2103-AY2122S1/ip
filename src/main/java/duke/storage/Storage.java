@@ -54,7 +54,7 @@ public class Storage {
      */
     public ArrayList<Task> loadData() {
         try {
-            ArrayList<Task> lst= new ArrayList<>();
+            ArrayList<Task> lst = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader(this.filePath.toFile()));
             for (String line = br.readLine(); line != null; line = br.readLine()) {
                 String[] txt = line.split("/");
@@ -69,6 +69,8 @@ public class Storage {
                 case "D":
                     lst.add(new Deadline(Arrays.copyOfRange(txt, 2, 4), isDone));
                     break;
+                default:
+                    throw new IOException("Data file incorrectly formatted");
                 }
             }
             return lst;
