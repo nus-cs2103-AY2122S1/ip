@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.main.DukeException;
-import duke.main.Parser;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -18,7 +17,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.at = Parser.parseTime(at);
+        this.at = Task.parseTime(at);
     }
 
     /**

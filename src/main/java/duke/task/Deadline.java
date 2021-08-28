@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.main.DukeException;
-import duke.main.Parser;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -18,7 +17,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String before) {
         super(description);
-        this.by = Parser.parseTime(before);
+        this.by = Task.parseTime(before);
     }
 
     /**
