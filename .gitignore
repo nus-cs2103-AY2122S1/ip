@@ -18,3 +18,4 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 *.class
 /src/main/java/data/duke.txt
+data/duke.txt
