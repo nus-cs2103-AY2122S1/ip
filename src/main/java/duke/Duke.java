@@ -37,7 +37,7 @@ public class Duke {
         while (!isExit) {
             try {
                 System.out.println("What's your next command?\n");
-                command = sc.nextLine();  
+                command = sc.nextLine();
                 isExit = Parser.parse(command);
             } catch (DukeException e) {
                 Ui.printFormattedMessage(e.getMessage());

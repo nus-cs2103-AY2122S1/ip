@@ -12,11 +12,11 @@ import duke.task.ToDo;
 import duke.util.Ui;
 
 /**
- * Represents the list of tasks a user has.
- * Tasks can be added, deleted, completed or simply printed out.
+ * Represents the list of tasks a user has. Tasks can be added, deleted,
+ * completed or simply printed out.
  */
 public class TaskList {
-	protected ArrayList<Task> tasks;
+    protected ArrayList<Task> tasks;
 
     /**
      * Constructor for empty TaskList.
@@ -30,13 +30,13 @@ public class TaskList {
      * 
      * @param tasks Initial tasks.
      */
-	public TaskList(ArrayList<Task> tasks) {
-		this.tasks = tasks;
-	}
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
+    }
 
-	public ArrayList<Task> getTasks() {
-		return tasks;
-	}
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
 
     /**
      * Marks a task as done.
@@ -51,20 +51,19 @@ public class TaskList {
         Duke.storage.saveTasks(this.getTasks());
     }
 
-	/**
+    /**
      * Deletes a task from the ArrayList of tasks.
      * 
      * @param num the task number to delete
      */
-    protected void deleteTask(int num) throws DukeException{
+    protected void deleteTask(int num) throws DukeException {
         int taskIdx = num - 1;
         Task taskToDelete = tasks.get(taskIdx);
         tasks.remove(taskIdx);
-        Ui.printFormattedMessage("Noted. I've removed this task:\n\t" 
-                                + taskToDelete
-                                + "\n\tNow you have " + tasks.size() + " tasks in the list.\n");
+        Ui.printFormattedMessage("Noted. I've removed this task:\n\t" + taskToDelete + "\n\tNow you have "
+                + tasks.size() + " tasks in the list.\n");
         Duke.storage.saveTasks(this.getTasks());
-    } 
+    }
 
     /**
      * Gets the task number in the list.
@@ -83,7 +82,7 @@ public class TaskList {
         }
     }
 
-	/**
+    /**
      * Handles task deletion.
      * 
      * @param command user input to parse
@@ -119,12 +118,11 @@ public class TaskList {
      * @param t the task to add
      */
     private void addTask(Task t) throws DukeException {
-		this.tasks.add(t);
-        Ui.printFormattedMessage("Got it. I've added this task:\n\t" 
-                                + t 
-                                + "\n\tNow you have " + tasks.size() + " tasks in the list.\n"); 
+        this.tasks.add(t);
+        Ui.printFormattedMessage(
+                "Got it. I've added this task:\n\t" + t + "\n\tNow you have " + tasks.size() + " tasks in the list.\n");
         Duke.storage.saveTasks(this.getTasks());
-    } 
+    }
 
     /**
      * Adds ToDo task to the ArrayList of tasks.
@@ -153,9 +151,9 @@ public class TaskList {
         }
 
         String eventDetails = command.substring(6);
-        String[] commandSplit = splitCommand(eventDetails, "/at");  // "taskName /at datetime"
-        String task = getTask(commandSplit);              
-        String dateTime = getDateTime(commandSplit);    // dateTime is the 2nd part of the command
+        String[] commandSplit = splitCommand(eventDetails, "/at"); // "taskName /at datetime"
+        String task = getTask(commandSplit);
+        String dateTime = getDateTime(commandSplit); // dateTime is the 2nd part of the command
         addTask(new Event(task, dateTime));
     }
 
@@ -171,16 +169,16 @@ public class TaskList {
         }
 
         String taskDetails = command.substring(9);
-        String[] commandSplit = splitCommand(taskDetails, "/by");   
-        String task = getTask(commandSplit);                         
-        String dateTime = getDateTime(commandSplit);     
-       
-        // Check if the time is in the yyyy-mm-dd datetime format 
+        String[] commandSplit = splitCommand(taskDetails, "/by");
+        String task = getTask(commandSplit);
+        String dateTime = getDateTime(commandSplit);
+
+        // Check if the time is in the yyyy-mm-dd datetime format
         try {
             LocalDate date = LocalDate.parse(dateTime);
             addTask(new Deadline(task, date));
         } catch (DateTimeParseException err) {
-            throw new DukeException("Please use the yyyy-mm-dd format for deadline!\n");    
+            throw new DukeException("Please use the yyyy-mm-dd format for deadline!\n");
         }
     }
 
@@ -188,16 +186,17 @@ public class TaskList {
      * Splits the command into task and datetime.
      * 
      * @param command User input to extract task and dateTime
-     * @param by The string to split the command by
+     * @param by      The string to split the command by
      * @return The task and dateTime in a String array
      */
     public String[] splitCommand(String command, String by) throws DukeException {
         String[] commandSplit = command.split(by);
-        
+
         // If cannot split the command, throw an exception
         if (commandSplit.length <= 1) {
             throw new DukeException("You need to provide a date/time!" + "\n");
         }
+
         return commandSplit;
     }
 
@@ -205,7 +204,7 @@ public class TaskList {
      * Gets the task from the split original command.
      */
     public String getTask(String[] commandSplit) throws DukeException {
-        String task = commandSplit[0].trim();   // Trim the first part of the original command
+        String task = commandSplit[0].trim(); // Trim the first part of the original command
 
         if (task.isEmpty()) {
             throw new DukeException("You need to provide a task!" + "\n");
@@ -221,10 +220,10 @@ public class TaskList {
      * @return the datetime in String format
      */
     public String getDateTime(String[] commandSplit) {
-        return commandSplit[1].trim();  // Get the 2nd part of the command
+        return commandSplit[1].trim(); // Get the 2nd part of the command
     }
 
-	/**
+    /**
      * Prints all the tasks in the ArrayList of tasks.
      */
     public void printTasks(String keyword) {
@@ -232,8 +231,8 @@ public class TaskList {
             Ui.printFormattedMessage("You have no tasks!\n");
             return;
         }
-        
-		StringBuilder taskListMessage = new StringBuilder("I present to you, your collection of tasks!\n\n");
+
+        StringBuilder taskListMessage = new StringBuilder("I present to you, your collection of tasks!\n\n");
 
         for (int i = 0; i < tasks.size(); i++) {
             int taskNum = i + 1;
@@ -243,10 +242,10 @@ public class TaskList {
             }
         }
 
-		Ui.printFormattedMessage(taskListMessage.toString());
+        Ui.printFormattedMessage(taskListMessage.toString());
     }
 
-    public void findTasks(String command) throws DukeException{
+    public void findTasks(String command) throws DukeException {
         if (command.trim().equals("find")) {
             throw new DukeException("You need to specify a keyword!");
         }
