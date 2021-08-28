@@ -5,7 +5,7 @@ import duke.tasks.TaskList;
 
 public class Ui {
     // Lines used to indicate a block of message
-    private static final  String HORIZONTAL_LINE_HEAD = "\t____________________________________________________________";
+    private static final String HORIZONTAL_LINE_HEAD = "\t____________________________________________________________";
     private static final String HORIZONTAL_LINE_TAIL = String.format("\n%s\n", HORIZONTAL_LINE_HEAD);
 
     private enum Message {

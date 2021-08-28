@@ -1,14 +1,23 @@
 package duke;
 
-import duke.commands.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.TodoCommand;
 import duke.exceptions.IllegalFormatException;
 import duke.exceptions.UnknownTagException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+
 
 public class Parser {
     private final boolean DEFAULT_STATUS = false;
@@ -68,9 +77,9 @@ public class Parser {
         case DELETE_TAG:
             int deleteId = getTaskId(input);
             return new DeleteCommand(deleteId);
-            case FIND_TAG:
-                String keyword = getKeyword(input);
-                return new FindCommand(keyword);
+        case FIND_TAG:
+            String keyword = getKeyword(input);
+            return new FindCommand(keyword);
         default:
             throw new UnknownTagException();
         }
@@ -120,7 +129,7 @@ public class Parser {
      * @return A LocalDate representing the date.
      * @throws IllegalFormatException Wrong format used by user.
      */
-    private LocalDate getDeadlineDates(String input) throws IllegalFormatException{
+    private LocalDate getDeadlineDates(String input) throws IllegalFormatException {
         String[] details = input.split("/by ");
 
         if (details.length != 2) {
@@ -141,7 +150,7 @@ public class Parser {
      * @return A LocalDate representing the date.
      * @throws IllegalFormatException Wrong format used by user.
      */
-    private LocalDate getEventDates(String input) throws IllegalFormatException{
+    private LocalDate getEventDates(String input) throws IllegalFormatException {
         String[] details = input.split("/at ");
 
         if (details.length != 2) {
@@ -183,7 +192,7 @@ public class Parser {
      * @return A String representing the keyword to be used for the search.
      * @throws IllegalFormatException Wrong format used by user.
      */
-    private String getKeyword(String input) throws IllegalFormatException{
+    private String getKeyword(String input) throws IllegalFormatException {
         String[] details = input.split("find ");
 
         if (details.length < 2) {

@@ -1,12 +1,5 @@
 package duke;
 
-import duke.exceptions.NoSuchTaskException;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.tasks.Todo;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +9,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import duke.exceptions.NoSuchTaskException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 /**
  * Encapsulates the information for storing and accessing user's data.

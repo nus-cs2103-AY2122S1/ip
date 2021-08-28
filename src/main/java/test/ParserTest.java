@@ -1,11 +1,13 @@
 package test;
 
-import duke.Duke;
-import duke.Parser;
-import duke.exceptions.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.Parser;
+import duke.exceptions.DukeException;
+
 
 class ParserTest {
 
@@ -45,7 +47,8 @@ class ParserTest {
             assertEquals("", new Parser().checkCommandTag("deadline conference by 2021-09-18"));
             fail();
         } catch (DukeException e) {
-            assertEquals("Wrong format! Please follow the format: type description /xx yyyy-mm-dd\n\t Use /by for deadline, /at for event.", e.getMessage());
+            assertEquals("Wrong format! Please follow the format: type description /xx yyyy-mm-dd\n\t "
+                    + "Use /by for deadline, /at for event.", e.getMessage());
         }
     }
 }

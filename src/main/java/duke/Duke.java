@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.NoSuchTaskException;
 import duke.tasks.TaskList;
-
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Encapsulates the information for a Duke object that contains a Storage, Parser and TaskList object.
@@ -15,12 +15,6 @@ public class Duke {
     private TaskList items;
     private final Storage storage;
     private final Parser parser;
-
-
-    public static void main(String[] args) {
-        Duke chatBot = new Duke("data/duke.txt");
-        chatBot.start();
-    }
 
     /**
      * Constructs a Duke object with the specified file path for the data file.
@@ -31,6 +25,15 @@ public class Duke {
         this.items = new TaskList();
         this.storage = new Storage(filePath);
         this.parser = new Parser();
+    }
+
+    /**
+     * Initialises and runs the program.
+     * @param args The command line arguments
+     */
+    public static void main(String[] args) {
+        Duke chatBot = new Duke("data/duke.txt");
+        chatBot.start();
     }
 
     /**
@@ -51,7 +54,7 @@ public class Duke {
         String input = scanner.nextLine().trim();
 
         String exitTag = "bye";
-        while(!input.equalsIgnoreCase(exitTag)) {
+        while (!input.equalsIgnoreCase(exitTag)) {
             try {
                 Command action = this.parser.checkCommandTag(input);
                 action.executeCommand(this.items);
