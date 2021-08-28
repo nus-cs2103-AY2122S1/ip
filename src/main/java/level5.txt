@@ -1,0 +1,143 @@
+     */
+    private class Task {
+        private String done;
+        private String finalAction = "";
+
+        /**
+         * constructor for Task.
+         * @param type
+         * @param fullInfo
+         */
+        private Task(String type, String fullInfo) {
+            this.done = type;
+            this.finalAction = fullInfo;
+        }
+        }
+    }
+
+    ////////////exceptions////////////////////////////////////////////
+    private class TodoException extends Exception {
+        public TodoException() {
+            super();
+        }
+    }
+    private class EventsException extends Exception {
+        public EventsException() {
+            super();
+        }
+    }
+    private class DeadlineExceptions extends Exception {
+        public DeadlineExceptions() {
+            super();
+        }
+    }
+    ///////////////////////////////////////////////////////////////////
+
+    /**
+     * Method helps to check if all the inputs are valid before
+     * creating the task
+     * @param action
+     * @return
+     */
+    private Task createTask(String action) throws Exception {
+        // separate using the / as its the point of the date
+        String[] dataOfAction = action.split("/")[0].split(" ");
+        String finalAction = "";
+        String done;
+
+        String type = dataOfAction[0];
+        for (int i = 1; i < dataOfAction.length; i++) {
+            finalAction += dataOfAction[i] + " ";
+        }
+        //decide the correct header
+        if (type.equals("Todo")) {
+            done = "[T][] ";
+            if (finalAction.equals("")){
+                throw new TodoException();
+            }
+        } else {
+            String date;
+            if (type.equals("Deadline")) {
+                done = "[D][] ";
+                if (action.split("/").length < 2) {
+                    throw new DeadlineExceptions();
+                }
+                date = setDate(action.split("/")[1].split(" "));
+                checkDeadlineFormat(finalAction, date);
+            } else if  (type.equals("Events")) {
+                done = "[E][] ";
+                if (action.split("/").length < 2) {
+                    throw new EventsException();
+                }
+                date = setDate(action.split("/")[1].split(" "));
+                checkEventsFormat(finalAction, date);
+            } else {
+                System.out.println("Error type");
+                throw new Exception();
+            }
+            finalAction += date;
+        }
+
+        return new Task(done, finalAction);
+    }
+
+    private void checkDeadlineFormat(String action, String date) throws DeadlineExceptions {
+        if (!action.equals("")) {
+            String[] formatDate = date.split(":");
+            if ((!formatDate[0].equals(" (by")) || (formatDate.length < 2)){
+                throw new DeadlineExceptions();
+            }
+        } else {
+            throw new DeadlineExceptions();
+        }
+    }
+
+    private void checkEventsFormat(String action, String date) throws EventsException {
+        if (!action.equals("")) {
+            String[] formatDate = date.split(":");
+            if ((!formatDate[0].equals(" (at")) || (formatDate[1].split(" ").length < 2) ) {
+                throw new EventsException();
+            }
+        } else {
+            throw new EventsException();
+        }
+    }
+
+    /**
+     * Create a tail made up of the deadline.
+     * @param data
+     * @return String
+     */
+    private String setDate(String[] data) {
+        String output = " (" + data[0] + ": ";
+        for (int i = 1 ;i < data.length; i++) {
+            output += data[i] + " ";
+        }
+        return output + ")";
+    }
+
+    /**
+     * To decide base on the input what is the next action.
+     * The decision on whether to show list, set existing task to
+                    System.out.println("invalid index");
+                }
+            } else { 
+		try {
+                    Task newTask = createTask(input);
+                    taskList.add(newTask);
+                    System.out.println(line);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("    " + newTask);
+                    System.out.format("Now you have %d tasks in the list.\n", taskList.size());
+                } catch (EventsException ex) {
+                    System.out.println("OOPS!!! The description of a Events is inaccurate.");
+                } catch (DeadlineExceptions dx) {
+                    System.out.println("OOPS!!! The description of a Deadline is inaccurate.");
+                } catch (TodoException tx) {
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                } catch (Exception e) {
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            }
+            System.out.println(line);
+            return true;
