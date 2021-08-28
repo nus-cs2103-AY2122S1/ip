@@ -6,6 +6,11 @@ import duke.task.Deadline;
 public class DeadlineCommand extends DukeCommand {
     private final Deadline task;
 
+    /**
+     * Public constructor to create a DoneCommand.
+     *
+     * @param task Deadline to be added.
+     */
     public DeadlineCommand(Deadline task) {
         super();
         this.task = task;

@@ -32,7 +32,7 @@ public class Duke {
         try {
             Storage.saveFile(list);
             Ui.display("File saved");
-        } catch(CorruptedFileException e) {
+        } catch (CorruptedFileException e) {
             Ui.display("Error saving file");
         }
         Ui.bye();

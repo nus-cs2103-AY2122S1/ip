@@ -6,6 +6,11 @@ import duke.task.ToDo;
 public class TodoCommand extends DukeCommand {
     private final ToDo task;
 
+    /**
+     * Public constructor to create a TodoCommand.
+     *
+     * @param task Task to be added.
+     */
     public TodoCommand(ToDo task) {
         super();
         this.task = task;

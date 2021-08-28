@@ -7,6 +7,11 @@ import duke.task.Task;
 public class DoneCommand extends DukeCommand {
     private final int id;
 
+    /**
+     * Public constructor to create a DoneCommand.
+     *
+     * @param id Id of task.
+     */
     public DoneCommand(int id) {
         super();
         this.id = id;

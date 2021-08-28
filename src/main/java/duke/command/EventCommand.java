@@ -6,6 +6,11 @@ import duke.task.Event;
 public class EventCommand extends DukeCommand {
     private final Event task;
 
+    /**
+     * Public constructor to create an EventCommand.
+     *
+     * @param task Event to be added.
+     */
     public EventCommand(Event task) {
         super();
         this.task = task;

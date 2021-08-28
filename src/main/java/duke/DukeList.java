@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import duke.task.Task;
 
 /**
  * A list of tasks.

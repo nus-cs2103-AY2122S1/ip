@@ -7,6 +7,11 @@ import duke.task.Task;
 public class DeleteCommand extends DukeCommand {
     private final int id;
 
+    /**
+     * Public constructor to create a DeleteCommand.
+     *
+     * @param id Id of task.
+     */
     public DeleteCommand(int id) {
         super();
         this.id = id;

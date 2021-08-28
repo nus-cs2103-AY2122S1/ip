@@ -1,9 +1,5 @@
 package duke;
 
-import duke.exception.CorruptedFileException;
-import duke.exception.DukeException;
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,14 +8,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import duke.exception.CorruptedFileException;
+import duke.exception.DukeException;
+import duke.task.Task;
+
 /**
  * Class to loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     /** Save file path. */
-    private final static String SAVE_FILE = "data/tasks.txt";
+    private static final String SAVE_FILE = "data/tasks.txt";
     /** Save file location. */
-    private final static String SAVE_DIR = "data/";
+    private static final String SAVE_DIR = "data/";
 
     /**
      * Returns the Success/Error message after loading save file.

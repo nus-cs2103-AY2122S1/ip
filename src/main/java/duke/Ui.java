@@ -6,37 +6,37 @@ import java.util.Scanner;
  * Class to handle user interaction.
  */
 public class Ui {
-    private final static String LOGO =
-            "                 |`._         |\\\n" +
-                    "                 `   `.  .    | `.    |`.\n" +
-                    "                  .    `.|`-. |   `-..'  \\           _,.-'\n" +
-                    "                  '      `-. `.           \\ /|   _,-'   /\n" +
-                    "              .--..'        `._`           ` |.-'      /\n" +
-                    "               \\   |                                  /\n" +
-                    "            ,..'   '                                 /\n" +
-                    "            `.                                      /\n" +
-                    "            _`.---                                 /\n" +
-                    "        _,-'               `.                 ,-  /\"-._\n" +
-                    "      ,\"                   | `.             ,'|   `    `.\n" +
-                    "    .'                     |   `.         .'  |    .     `.\n" +
-                    "  ,'                       '   ()`.     ,'()  '    |       `.\n" +
-                    "'-.                    |`.  `.....-'    -----' _   |         .\n" +
-                    " / ,   ________..'     '  `-._              _.'/   |         :\n" +
-                    " ` '-\"\" _,.--\"'         \\   | `\"+--......-+' //   j `\"--.. , '\n" +
-                    "    `.'\"    .'           `. |   |     |   / //    .       ` '\n" +
-                    "      `.   /               `'   |    j   /,.'     '\n" +
-                    "        \\ /                  `-.|_   |_.-'       /\\\n" +
-                    "         /                        `\"\"          .'  \\\n" +
-                    "        j                                           .\n" +
-                    "        |                                 _,        |\n" +
-                    "        |             ,^._            _.-\"          '\n" +
-                    "        |          _.'    `'\"\"`----`\"'   `._       '\n" +
-                    "        j__     _,'                         `-.'-.\"`\n" +
-                    "          ',-.,' mh";
-    private final static String BOOT_MESSAGE = "Whats'up ma dawg?";
-    private final static String LOAD_MESSAGE = "Finding previous save file...";
-    private final static String BEGIN_MESSAGE = "What can I do for you ma dawg?";
-    private final static String BYE_MESSAGE = "Cya next time ma dawg";
+    private static final String LOGO =
+            "                 |`._         |\\\n"
+                    + "                 `   `.  .    | `.    |`.\n"
+                    + "                  .    `.|`-. |   `-..'  \\           _,.-'\n"
+                    + "                  '      `-. `.           \\ /|   _,-'   /\n"
+                    + "              .--..'        `._`           ` |.-'      /\n"
+                    + "               \\   |                                  /\n"
+                    + "            ,..'   '                                 /\n"
+                    + "            `.                                      /\n"
+                    + "            _`.---                                 /\n"
+                    + "        _,-'               `.                 ,-  /\"-._\n"
+                    + "      ,\"                   | `.             ,'|   `    `.\n"
+                    + "    .'                     |   `.         .'  |    .     `.\n"
+                    + "  ,'                       '   ()`.     ,'()  '    |       `.\n"
+                    + "'-.                    |`.  `.....-'    -----' _   |         .\n"
+                    + " / ,   ________..'     '  `-._              _.'/   |         :\n"
+                    + " ` '-\"\" _,.--\"'         \\   | `\"+--......-+' //   j `\"--.. , '\n"
+                    + "    `.'\"    .'           `. |   |     |   / //    .       ` '\n"
+                    + "      `.   /               `'   |    j   /,.'     '\n"
+                    + "        \\ /                  `-.|_   |_.-'       /\\\n"
+                    + "         /                        `\"\"          .'  \\\n"
+                    + "        j                                           .\n"
+                    + "        |                                 _,        |\n"
+                    + "        |             ,^._            _.-\"          '\n"
+                    + "        |          _.'    `'\"\"`----`\"'   `._       '\n"
+                    + "        j__     _,'                         `-.'-.\"`\n"
+                    + "          ',-.,' mh";
+    private static final String BOOT_MESSAGE = "Whats'up ma dawg?";
+    private static final String LOAD_MESSAGE = "Finding previous save file...";
+    private static final String BEGIN_MESSAGE = "What can I do for you ma dawg?";
+    private static final String BYE_MESSAGE = "Cya next time ma dawg";
 
     private static final Scanner sc = new Scanner(System.in);
 
@@ -79,6 +79,8 @@ public class Ui {
 
     /**
      * Reads user input.
+     *
+     * @return User input.
      */
     public static String readLine() {
         return sc.nextLine();

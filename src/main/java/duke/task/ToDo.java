@@ -28,7 +28,7 @@ public class ToDo extends Task {
      * Returns the formatted String representation
      * of the task to write into the save file.
      *
-     * @return
+     * @return Formatted String representation.
      */
     @Override
     public String formatSave() {
