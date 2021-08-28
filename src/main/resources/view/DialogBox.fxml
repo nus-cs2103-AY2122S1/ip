@@ -6,9 +6,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" fillHeight="false" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <Label fx:id="dialog" alignment="TOP_LEFT" prefWidth="294.0" scaleShape="false" text="Label" textAlignment="CENTER" textFill="#414141" wrapText="true">
+    <Label fx:id="dialog" alignment="TOP_LEFT" prefWidth="294.0" scaleShape="false" text="Label" textAlignment="CENTER" textFill="#414141" textOverrun="CLIP" wrapText="true">
          <font>
             <Font name="Consolas Bold" size="11.0" />
          </font>
