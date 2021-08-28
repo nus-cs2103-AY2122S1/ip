@@ -36,10 +36,33 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showWelcome();
     }
 
     public void setAisu(Aisu a) {
         aisu = a;
+    }
+
+    /**
+     * Shows welcome message when Aisu application starts.
+     */
+    @FXML
+    private void showWelcome() {
+        String logo = " (`-')  _   _               (`-').->           \n"
+                + "(OO ).-/  (_)              ( OO)_       .->\n"
+                + "/ ,---.   ,-(`-') (`-')   (_)--\\_) ,--.(,--.\n"
+                + "| \\ /`.\\  | ( OO) ( OO).->/    _ / |  | |(`-')\n"
+                + "'-'|_.' | |  |  )(,------.\\_..`--. |  | |(OO )\n"
+                + "(|  .-. |(|  |_/  `------'.-._)   \\|  | | |  \\ \n"
+                + "|  | |  | |  |'->         \\      / \\  '-'(_ .'\n"
+                + "`--' `--' `--'             `-----'  `-----'   \n";
+        String output = logo + "\n Hello, I'm Ai-su! How may I help you today?\n";
+        makeAisuSay(output);
+
+    }
+
+    private void makeAisuSay(String output) {
+        dialogContainer.getChildren().addAll(DialogBox.getAisuDialog(output, aisuImage));
     }
 
     /**
