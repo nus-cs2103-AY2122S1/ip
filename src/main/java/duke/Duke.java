@@ -19,7 +19,6 @@ public class Duke {
     }
 
     public Duke(String filePathToStorage) {
-        //composite data type
         Storage DUKE_STORE = new Storage(filePathToStorage);
         TaskList TASKLIST = TaskList.of(DUKE_STORE);
         this.PARSER = Parser.initialize(TASKLIST);

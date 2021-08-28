@@ -70,7 +70,7 @@ public class Deadline extends Task {
 
     public static String syntax() {
         return "deadline command syntax: \n" +
-                "    'deadline <duke.task> /by dd-MM-yyyy HHmm'\n" +
+                "    'deadline <task> /by dd-MM-yyyy HHmm'\n" +
                 "Eg. 'deadline project /by 01-01-2020 2359'";
     }
 

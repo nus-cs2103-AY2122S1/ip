@@ -28,7 +28,7 @@ public class ToDo extends Task {
     }
 
     public static String syntax() {
-        return "todo command syntax: 'todo <duke.task>'";
+        return "todo command syntax: 'todo <task>'";
     }
 
     @Override

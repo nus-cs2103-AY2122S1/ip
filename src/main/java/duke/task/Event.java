@@ -30,7 +30,7 @@ public class Event extends Task {
     }
 
     public static String syntax() {
-        return "event command syntax: 'event <duke.task> /at <eventTime>'";
+        return "event command syntax: 'event <task> /at <eventTime>'";
     }
 
     public String toStorageFormat() {

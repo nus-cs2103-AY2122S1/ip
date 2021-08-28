@@ -69,7 +69,7 @@ public final class TaskList {
 
     public static boolean isValidIndex(int idxFrom0, int numOfTasks) {
         if (idxFrom0 < 0 || idxFrom0 >= numOfTasks) {
-            throw new IllegalArgumentException("duke.task index passed in out of range");
+            throw new IllegalArgumentException("task index passed in out of range");
         }
         return true;
     }

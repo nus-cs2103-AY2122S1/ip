@@ -66,7 +66,7 @@ public class Storage {
                 .map(Task::toStorageFormat)
                 .reduce("",
                     (stringRes, stringTask) ->
-                            stringRes + stringTask + System.getProperty("line.separator"));
+                        stringRes + stringTask + System.getProperty("line.separator"));
         this.write(text);
     }
 
