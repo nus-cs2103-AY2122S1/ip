@@ -205,11 +205,11 @@ public class TaskList {
 
         String keyword = command.substring(5).trim();
 
-        List<Task> filteredTasks = tasks.stream()
-                                        .filter(str -> str.toString().contains(keyword))
-                                        .collect(Collectors.toList());
+        List<Task> filteredTaskList = tasks.stream()
+                                           .filter(str -> str.toString().contains(keyword))
+                                           .collect(Collectors.toList());
 
-        return printTaskList(filteredTasks);
+        return printTaskList(filteredTaskList);
     }
 
     /**
@@ -229,7 +229,7 @@ public class TaskList {
      * @throws EmptyListException if TaskList is empty
      */
     public String printTaskList(List<Task> tasks) throws EmptyListException {
-        String str = "";
+        String s = "";
         int size = tasks.size();
 
         if (size == 0) {
@@ -237,12 +237,12 @@ public class TaskList {
         }
 
         for (int i = 0; i < size; i++) {
-            str = str.concat(tasks.get(i).toString());
+            s = s.concat(tasks.get(i).toString());
             if (i < tasks.size() - 1) {
-                str = str.concat("\n");
+                s = s.concat("\n");
             }
         }
-        return str;
+        return s;
     }
 
     /**

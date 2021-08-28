@@ -81,14 +81,14 @@ public class Storage {
     /**
      * Loads todo data into a todo task.
      *
-     * @param input todo task data string
+     * @param command todo task data string
      * @return todo task
      */
-    private Task loadToDo(String input) {
+    private Task loadToDo(String command) {
         Task task;
         String description;
 
-        description = input.substring(7);
+        description = command.substring(7);
         task = new ToDo(description);
         return task;
     }
@@ -96,16 +96,16 @@ public class Storage {
     /**
      * Loads event data into an event task.
      *
-     * @param input event task data string
+     * @param command event task data string
      * @return event task
      * @throws CorruptedFileException if invalid event data format in loaded text file
      */
-    private Task loadEvent(String input) throws CorruptedFileException {
+    private Task loadEvent(String command) throws CorruptedFileException {
         Task task;
         String[] taskInfo;
         String description, dateString, startTimeString, endTimeString;
 
-        taskInfo = input.substring(7).split(" \\(at: ");
+        taskInfo = command.substring(7).split(" \\(at: ");
         description = taskInfo[0];
         taskInfo = taskInfo[1].split("[ -]");
         dateString = taskInfo[0];
@@ -132,16 +132,16 @@ public class Storage {
     /**
      * Loads deadline data into a deadline task.
      *
-     * @param input deadline task data string
+     * @param command deadline task data string
      * @return deadline task
      * @throws CorruptedFileException if invalid deadline data format in loaded text file
      */
-    private Task loadDeadline(String input) throws CorruptedFileException {
+    private Task loadDeadline(String command) throws CorruptedFileException {
         Task task;
         String[] taskInfo;
         String description, dateTimeString;
 
-        taskInfo = input.substring(7).split(" \\(by: ");
+        taskInfo = command.substring(7).split(" \\(by: ");
         description = taskInfo[0];
         dateTimeString = taskInfo[1].substring(0, taskInfo[1].indexOf(")"));
 
@@ -161,14 +161,14 @@ public class Storage {
     /**
      * Creates/Replaces text file with tasks' data in user's current directory.
      *
-     * @param tasks tasks with data to be loaded into text file
+     * @param taskList tasks with data to be loaded into text file
      * @throws IOException if given file path is a directory instead of a text file
      * @throws EmptyListException if TaskList is empty
      */
-    public void saveFile(TaskList tasks) throws IOException, EmptyListException {
+    public void saveFile(TaskList taskList) throws IOException, EmptyListException {
         String path = System.getProperty("user.dir") + filePath;
         FileWriter myWriter = new FileWriter(path);
-        myWriter.write(tasks.printFullTaskList());
+        myWriter.write(taskList.printFullTaskList());
         myWriter.close();
     }
 }

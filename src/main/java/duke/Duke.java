@@ -39,11 +39,11 @@ public class Duke {
      * Runs the duke bot.
      */
     public void run() {
-        String input;
+        String command;
 
-        while (!((input= ui.readCommand()).equals("bye"))) {
+        while (!((command = ui.readCommand()).equals("bye"))) {
             try {
-                String message = Parser.parse(input).execute(tasks);
+                String message = Parser.parse(command).execute(tasks);
                 ui.printMessage(message);
                 storage.saveFile(tasks);
             } catch (DukeException | IOException e) {

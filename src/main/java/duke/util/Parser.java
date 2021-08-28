@@ -15,19 +15,19 @@ public class Parser {
      */
     public static Command parse(String command) throws UnknownCommandException {
         if (command.contains("list")) {
-            return tasks -> tasks.printFullTaskList();
+            return taskList -> taskList.printFullTaskList();
         } else if (command.contains("todo")) {
-            return tasks -> tasks.addTodo(command);
+            return taskList -> taskList.addTodo(command);
         } else if (command.contains("event")) {
-            return tasks -> tasks.addEvent(command);
+            return taskList -> taskList.addEvent(command);
         } else if (command.contains("deadline")) {
-            return tasks -> tasks.addDeadline(command);
+            return taskList -> taskList.addDeadline(command);
         } else if (command.contains("delete")) {
-            return tasks -> tasks.deleteTask(command);
+            return taskList -> taskList.deleteTask(command);
         } else if (command.contains("done")) {
-            return tasks -> tasks.markTaskDone(command);
+            return taskList -> taskList.markTaskDone(command);
         } else if (command.contains("find")) {
-            return tasks -> tasks.findFromList(command);
+            return taskList -> taskList.findFromList(command);
         } else {
             throw new UnknownCommandException();
         }
