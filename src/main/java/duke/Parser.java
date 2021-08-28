@@ -10,8 +10,8 @@ import java.time.format.DateTimeParseException;
  * @author Kleon Ang
  */
 public class Parser {
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
     private final TaskList tasks;
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
     private boolean toRewriteData;
     private boolean isExit;
     private boolean isFind;

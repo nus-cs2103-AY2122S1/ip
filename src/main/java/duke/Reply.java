@@ -6,8 +6,8 @@ package duke;
  * @author Kleon Ang
  */
 public class Reply {
+    private static final String LINE = "\t____________________________________________________________";
     private final String content;
-    private final String LINE = "\t____________________________________________________________";
 
     /**
      * Constructor for a Reply.
@@ -25,6 +25,6 @@ public class Reply {
      */
     @Override
     public String toString() {
-        return this.LINE + "\n" + this.content + "\n" + this.LINE;
+        return LINE + "\n" + this.content + "\n" + LINE;
     }
 }
