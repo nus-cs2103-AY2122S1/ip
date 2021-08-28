@@ -4,8 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task{
-    LocalDate startTime;
-    LocalDate endTime;
+
+    private LocalDate startTime;
+    private LocalDate endTime;
 
     public Event(String description, LocalDate startTime, LocalDate endTime) {
         super(description, "[E]", false);
@@ -19,9 +20,10 @@ public class Event extends Task{
         this.endTime = endTime;
     }
 
-    public String getformmatedData() {
-        String formmatedStatus = super.isDone() ? "1|" : "0|";
-        return "E|" + formmatedStatus + super.getDescription() 
+    @Override
+    public String getFormattedData() {
+        String formattedStatus = super.isDone() ? "1|" : "0|";
+        return "E|" + formattedStatus + super.getDescription()
                 + "|" + this.startTime.toString() 
                 + "|" + this.endTime.toString();
     }

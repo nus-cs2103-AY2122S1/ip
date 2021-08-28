@@ -23,6 +23,9 @@ public class Duke {
         new Duke("./data/duke.txt").run();
     }
 
+    /**
+     * Run Duke ChatBot
+     */
     public void run() {
         ui.printWelcomeMessage();
 
@@ -33,7 +36,7 @@ public class Duke {
                 String userCommand = ui.readCommand();
                 Command command = Parser.parse(userCommand);
                 notExitCommand = command.execute(this.taskList, this.ui, this.storage);
-                this.storage.save(this.taskList.getformmatedData());
+                this.storage.save(this.taskList.getFormattedData());
 
             } catch (InvalidInputException e) {
                 ui.printError(e.getMessage());
