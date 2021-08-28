@@ -52,10 +52,8 @@ public class Ui {
         }
     }
 
-    public static void done(Task task) {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Nice! I've marked this task as done: \n      " + task);
-        System.out.println("    ____________________________________________________________");
+    public void showTaskDone(Task task) {
+        System.out.println("\tNice! I've marked this task as done:  \n\t" + task);
     }
 
     public void showError(String errorMessage) {

@@ -1,10 +1,7 @@
 package duke;
 
 import duke.DukeException.InvalidInputException;
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -26,6 +23,8 @@ public class Parser {
         case "event":
             taskDescription = getTaskDescription(userDescription, " /at ");
             return new AddCommand(new Event(taskDescription[0], taskDescription[1]));
+        case "done":
+            return new DoneCommand(Integer.parseInt(userDescription));
         case "delete":
             return new DeleteCommand(Integer.parseInt(userDescription));
         default:

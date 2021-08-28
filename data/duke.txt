@@ -1,0 +1,2 @@
+T | 0 | go school
+E | 0 | cycling | sunday
