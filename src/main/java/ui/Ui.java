@@ -5,71 +5,60 @@ import task.TaskList;
 
 public class Ui {
     /**
-     * Prints out a welcome message to the terminal.
+     * Returns a welcome message to the terminal.
      */
-    public static void welcomeMessage() {
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-        System.out.println("____________________________________________________________");
+    public static String welcomeMessage() {
+        return "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
     /**
-     * Prints out a farewell message to the terminal.
+     * Returns a farewell message to the terminal.
      */
-    public static void goodbyeMessage() {
-        System.out.println("____________________________________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
+    public static String goodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints out the list of tasks to the terminal.
+     * Returns the list of tasks to the terminal.
      */
-    public static void listMessage(TaskList tasks) {
-        System.out.println("____________________________________________________________");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.getTask(i).toString());
+    public static String listMessage(TaskList tasks) {
+        if (tasks.size() == 0) {
+            return "There are currently no tasks.";
+        } else {
+            String result = "";
+            for (int i = 0; i < tasks.size(); i++) {
+                result += (i + 1) + "." + tasks.getTask(i).toString() + "\n";
+            }
+            return result;
         }
-        System.out.println("____________________________________________________________");
     }
 
     /**
-     * Prints out an indication that a Task is marked as done to the terminal.
+     * Returns an indication that a Task is marked as done to the terminal.
      */
-    public static void doneMessage(Task task) {
-        System.out.println("____________________________________________________________");
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  " + task.toString());
-        System.out.println("____________________________________________________________");
+    public static String doneMessage(Task task) {
+        return "Nice! I've marked this task as done: \n" + "  " + task.toString();
     }
 
     /**
-     * Prints out a error message that there is no such task to the terminal.
+     * Returns a error message that there is no such task to the terminal.
      */
-    public static void noSuchTaskMessage() {
-        System.out.println("____________________________________________________________");
-        System.out.println("There is no such task.");
-        System.out.println("____________________________________________________________");
+    public static String noSuchTaskMessage() {
+        return "There is no such task.";
     }
 
     /**
-     * Prints out an indication that a Task is removed to the terminal.
+     * Returns an indication that a Task is removed to the terminal.
      */
-    public static void removeMessage(Task task, int num) {
-        System.out.println("____________________________________________________________");
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println("  " + task.toString());
-        System.out.println("Now you have " + num + " tasks in the list.");
-        System.out.println("____________________________________________________________");
+    public static String removeMessage(Task task, int num) {
+        return "Noted. I've removed this task: \n" + "  " + task.toString() + "\n"
+                + "Now you have " + num + " tasks in the list.";
     }
 
     /**
-     * Prints out a loading error message to the terminal.
+     * Returns a loading error message to the terminal.
      */
-    public static void showLoadingError() {
-        System.out.println("____________________________________________________________");
-        System.out.println("There was an error loading the data file.");
-        System.out.println("____________________________________________________________");
+    public static String showLoadingError() {
+        return "There was an error loading the data file.";
     }
 }

@@ -1,8 +1,5 @@
 package duke;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
@@ -24,38 +21,27 @@ public class Duke {
     }
 
     /**
-     * Constructor for Duke main class.
-     * @param filePath Relative file path to the folder containing the data file.
-     * @param fileName Name of data file.
+     * Constructor with no parameters for Launcher class.
      */
-    public Duke(String filePath, String fileName) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath, fileName);
+        storage = new Storage("/data", "/data.txt");
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException e) {
+        } catch (Exception e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
     /**
-     * Main method to start the Duke program.
+     * Feeds user input to the parser and returns String of Duke's response.
+     * @param input Input from user.
+     * @return Duke's generated response to user input.
      */
-    public void run() {
-        Scanner myObj = new Scanner(System.in);
-        boolean exit = false;
+    public String getResponse(String input) {
         Parser parser = new Parser(ui, tasks, storage);
-
-        ui.welcomeMessage();
-
-        while (!exit) {
-            String userInput = myObj.nextLine();
-            exit = parser.parse(userInput);
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("/data", "/data.txt").run();
+        return parser.parse(input);
     }
 }
+

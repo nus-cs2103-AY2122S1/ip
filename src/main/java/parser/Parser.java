@@ -38,65 +38,59 @@ public class Parser {
      * @param userInput String input from user.
      * @return True if user input is to exit the program, false otherwise.
      */
-    public boolean parse(String userInput) {
+    public String parse(String userInput) {
         if (userInput.equals("bye")) {
-            ui.goodbyeMessage();
-            return true;
+            return ui.goodbyeMessage();
         } else if (userInput.equals("list")) {
-            ui.listMessage(tasks);
+            return ui.listMessage(tasks);
         } else if (isDoneCall(userInput)) {
             int index = Integer.parseInt(userInput.substring(5));
 
-            if (tasks.getTask(index - 1) != null) {
+            if (tasks.size() >= index) {
                 tasks.getTask(index - 1).markAsDone();
                 storage.markAsDoneData(index - 1);
-                ui.doneMessage(tasks.getTask(index - 1));
+                return ui.doneMessage(tasks.getTask(index - 1));
             } else {
-                ui.noSuchTaskMessage();
+                return ui.noSuchTaskMessage();
             }
 
         } else if (isRemoveCall(userInput)) {
             int index = Integer.parseInt(userInput.substring(7));
-            if (tasks.getTask(index - 1) != null) {
-                ui.removeMessage(tasks.getTask(index - 1), tasks.size() - 1);
+            if (tasks.size() >= index) {
+                String result = ui.removeMessage(tasks.getTask(index - 1), tasks.size() - 1);
                 storage.removeData(index - 1);
                 tasks.removeTask(index - 1);
+                return result;
             } else {
-                ui.noSuchTaskMessage();
+                return ui.noSuchTaskMessage();
             }
         } else if (isFindCall(userInput)) {
-            System.out.println("____________________________________________________________");
             String keyword = userInput.substring(5);
             TaskList matchingTasks = tasks.find(keyword);
             if (matchingTasks.size() == 0) {
-                System.out.println("There are no tasks that include your keyword.");
+                return "There are no tasks that include your keyword.";
             } else {
-                System.out.println("Here are the matching tasks in your list:");
+                String result = "Here are the matching tasks in your list:\n";
                 for (int i = 0; i < matchingTasks.size(); i++) {
-                    System.out.println((i + 1) + "." + matchingTasks.getTask(i).toString());
+                    result += ((i + 1) + "." + matchingTasks.getTask(i).toString() + "\n");
                 }
+                return result;
             }
-            System.out.println("____________________________________________________________");
         } else {
-            System.out.println("____________________________________________________________");
             try {
                 if (userInput.startsWith("todo")) {
-                    parseAddTask(userInput, tasks, Duke.Type.TODO);
+                    return parseAddTask(userInput, tasks, Duke.Type.TODO);
                 } else if (userInput.startsWith("deadline")) {
-                    parseAddTask(userInput, tasks, Duke.Type.DEADLINE);
+                    return parseAddTask(userInput, tasks, Duke.Type.DEADLINE);
                 } else if (userInput.startsWith("event")) {
-                    parseAddTask(userInput, tasks, Duke.Type.EVENT);
+                    return parseAddTask(userInput, tasks, Duke.Type.EVENT);
                 } else {
-                    throw new IllegalArgumentException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    return " OOPS!!! I'm sorry, but I don't know what that means :-(";
                 }
-
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                return e.getMessage();
             }
-            System.out.println("____________________________________________________________");
         }
-
-        return false;
     }
 
     /**
@@ -150,59 +144,55 @@ public class Parser {
      * @param userInput String input from user.
      * @param tasks Current list of tasks to be edited.
      * @param type Type of Task added.
-     * @throws IllegalArgumentException
      */
-    public void parseAddTask(String userInput, TaskList tasks, Duke.Type type) throws IllegalArgumentException {
+    public String parseAddTask(String userInput, TaskList tasks, Duke.Type type) {
         if (type == Duke.Type.TODO) {
             if (userInput.substring(4).trim().isEmpty()) {
-                throw new IllegalArgumentException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                return " OOPS!!! The description of a todo cannot be empty.";
             }
             tasks.addTask(new Todo(userInput.substring(5)));
             storage.newTaskToData(userInput.substring(5), Duke.Type.TODO, "");
-            System.out.println("Got it. I've added this task:");
-            System.out.println("  " + tasks.getTask(tasks.size() - 1).toString());
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            return "Got it. I've added this task:\n" + "  " + tasks.getTask(tasks.size() - 1).toString() + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.";
         } else if (type == Duke.Type.DEADLINE) {
             if (userInput.substring(8).trim().isEmpty()) {
-                throw new IllegalArgumentException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                return " OOPS!!! The description of a deadline cannot be empty.";
             }
             int timeIndex = userInput.indexOf("/by");
             if (timeIndex == -1) {
-                throw new IllegalArgumentException(" Please set a deadline by adding /by");
+                return " Please set a deadline by adding /by";
             }
             try {
                 tasks.addTask(new Deadline(userInput.substring(9, timeIndex - 1),
                         LocalDate.parse(userInput.substring(timeIndex + 4, timeIndex + 14)),
                         LocalTime.parse(userInput.substring(timeIndex + 15))));
             } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
-                throw new IllegalArgumentException(" Date and Time must be specified by YYYY-MM-DD HH:MM");
+                return " Date and Time must be specified by YYYY-MM-DD HH:MM";
             }
             storage.newTaskToData(userInput.substring(9, timeIndex - 1), Duke.Type.DEADLINE,
                     userInput.substring(timeIndex + 4));
-            System.out.println("Got it. I've added this task:");
-            System.out.println("  " + tasks.getTask(tasks.size() - 1).toString());
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            return "Got it. I've added this task:\n" + "  " + tasks.getTask(tasks.size() - 1).toString() + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.";
         } else {
             if (userInput.substring(5).trim().isEmpty()) {
-                throw new IllegalArgumentException(" ☹ OOPS!!! The description of an event cannot be empty.");
+                return " OOPS!!! The description of an event cannot be empty.";
             }
             int timeIndex = userInput.indexOf("/at");
             if (timeIndex == -1) {
-                throw new IllegalArgumentException(" Please set a deadline by adding /at");
+                return " Please set a deadline by adding /at";
             }
             try {
                 tasks.addTask(new Event(userInput.substring(6, timeIndex - 1),
                         LocalDate.parse(userInput.substring(timeIndex + 4, timeIndex + 14)),
                         LocalTime.parse(userInput.substring(timeIndex + 15))));
             } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
-                throw new IllegalArgumentException(" Date and Time must be specified by YYYY-MM-DD HH:MM");
+                return " Date and Time must be specified by YYYY-MM-DD HH:MM";
             }
 
             storage.newTaskToData(userInput.substring(6, timeIndex - 1), Duke.Type.EVENT,
                     userInput.substring(timeIndex + 4));
-            System.out.println("Got it. I've added this task:");
-            System.out.println("  " + tasks.getTask(tasks.size() - 1).toString());
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            return "Got it. I've added this task:\n" + "  " + tasks.getTask(tasks.size() - 1).toString() + "\n"
+                    + "Now you have " + tasks.size() + " tasks in the list.";
         }
     }
 
