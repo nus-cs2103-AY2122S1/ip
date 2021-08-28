@@ -123,4 +123,23 @@ public class TaskList {
     public int size() {
         return tasks.size();
     }
+
+    /**
+     * Finds tasks from the TaskList whose description matches the given input
+     * @param input the given input.
+     * @return An ArrayList of tasks that match the given input.
+     */
+    public ArrayList<Task> find(String input) {
+        ArrayList<Task> res = new ArrayList<>();
+        String lowerInput = input.toLowerCase();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String lowerDescription = task.getDescription().toLowerCase();
+            if (lowerDescription.contains(lowerInput)) {
+                res.add(task);
+            }
+        }
+        return res;
+    }
+
 }

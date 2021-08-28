@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class Storage {
 
-    File savedTasksFile;
+    private File savedTasksFile;
 
     /**
      * Creates a new Storage object that has its file path set to that of the file used
@@ -77,13 +77,11 @@ public class Storage {
                 builder.append(task.getDateTimeString());
                 builder.append("\n");
                 writer.write(builder.toString());
-
             }
             writer.close();
         } catch (IOException e) {
             System.out.println("AN ERROR HAS OCCURRED WHILE SAVING");
             e.printStackTrace();
         }
-
     }
 }
