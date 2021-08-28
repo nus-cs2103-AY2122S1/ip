@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import duke.Ui;
 import duke.storage.StorageStub;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -26,7 +25,6 @@ public class DeleteCommandTest {
     private final DeleteCommand c2 = new DeleteCommand("1");
     private final DeleteCommand c3 = new DeleteCommand("1");
     private final StorageStub s = new StorageStub();
-    private final Ui u = new Ui();
     private TaskListStub t;
 
     @Test
@@ -40,7 +38,7 @@ public class DeleteCommandTest {
         list.add(new ToDo(false, "tutorial"));
         list.add(new Deadline(false, "assignment", "2021-08-23 2010"));
         list.add(new Event(false, "test", "2021-08-21 1530"));
-        t = new TaskListStub(list, u);
+        t = new TaskListStub(list);
         t.printList();
 
         //Check size of TaskList
@@ -55,7 +53,7 @@ public class DeleteCommandTest {
         assertEquals("E|0|test|2021-08-21 1530", s.getString(2));
 
         //Deletes first duke.task and check
-        c1.execute(t, u, s);
+        c1.execute(t, s);
         assertEquals(t.output().size(), 2);
         assertEquals("[D][ ] assignment (by: 23 Aug 2021 8.10pm)", t.output().get(0).toString());
         assertEquals("[E][ ] test (at: 21 Aug 2021 3.30pm)", t.output().get(1).toString());
@@ -63,13 +61,13 @@ public class DeleteCommandTest {
         assertEquals("E|0|test|2021-08-21 1530", s.getString(1));
 
         //Deletes second duke.task and check
-        c2.execute(t, u, s);
+        c2.execute(t, s);
         assertEquals(t.output().size(), 1);
         assertEquals("[E][ ] test (at: 21 Aug 2021 3.30pm)", t.output().get(0).toString());
         assertEquals("E|0|test|2021-08-21 1530", s.getString(0));
 
         //Deletes third duke.task and check
-        c3.execute(t, u, s);
+        c3.execute(t, s);
         assertEquals(t.output().size(), 0);
     }
 }

@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -15,55 +14,57 @@ import duke.task.Task;
  */
 public class TaskListStub implements TaskList {
     private ArrayList<Task> list;
-    private Ui ui;
     private ArrayList<Task> output;
 
     /**
      * Constructor for TaskList.
      */
-    public TaskListStub(ArrayList<Task> list, Ui ui) {
+    public TaskListStub(ArrayList<Task> list) {
         this.list = list;
-        this.ui = ui;
     }
 
     /**
-     * Adds the duke.task into the list.
+     * Adds the task into the list.
      *
-     * @param task the duke.task to be added into the list
+     * @param task the task to be added into the list
      */
     @Override
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.list.add(task);
+        return "";
     }
 
     /**
-     * Changes the done status of the duke.task.
+     * Changes the done status of the task.
      *
-     * @param index the position of the duke.task to be marked done
+     * @param index the position of the task to be marked done
      */
     @Override
-    public void setDone(int index) {
+    public String setDone(int index) {
         Task task = this.list.get(index);
         task.setDone();
+        return "";
     }
 
     /**
-     * Deletes the duke.task at a specified index.
+     * Deletes the task at a specified index.
      *
-     * @param index the position of the duke.task to be deleted
+     * @param index the position of the task to be deleted
      */
     @Override
-    public void delete(int index) {
+    public String delete(int index) {
         Task task = this.list.get(index);
         this.list.remove(index);
+        return "";
     }
 
     /**
      * Prints the list.
      */
     @Override
-    public void printList() {
+    public String printList() {
         this.output = this.list;
+        return "";
     }
 
     /**
@@ -71,7 +72,7 @@ public class TaskListStub implements TaskList {
      *
      * @param date the specified date
      */
-    public void printListDate(String date) {
+    public String printListDate(String date) {
         LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.output = new ArrayList<>();
         for (Task t : this.list) {
@@ -79,6 +80,7 @@ public class TaskListStub implements TaskList {
                 this.output.add(t);
             }
         }
+        return "";
     }
 
     /**
@@ -105,7 +107,7 @@ public class TaskListStub implements TaskList {
      * @param searchString the string to be searched
      */
     @Override
-    public void printListSearch(String searchString) {
-        return;
+    public String printListSearch(String searchString) {
+        return "";
     }
 }

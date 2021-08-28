@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import duke.Ui;
 import duke.storage.StorageStub;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -26,7 +25,6 @@ public class DoneCommandTest {
     private final DoneCommand c2 = new DoneCommand("2");
     private final DoneCommand c3 = new DoneCommand("3");
     private final StorageStub s = new StorageStub();
-    private final Ui u = new Ui();
     private TaskListStub t;
 
     @Test
@@ -40,7 +38,7 @@ public class DoneCommandTest {
         list.add(new ToDo(false, "tutorial"));
         list.add(new Deadline(false, "assignment", "2021-08-23 2010"));
         list.add(new Event(false, "test", "2021-08-21 1530"));
-        t = new TaskListStub(list, u);
+        t = new TaskListStub(list);
         t.printList();
 
         //Check size of TaskList
@@ -55,9 +53,9 @@ public class DoneCommandTest {
         assertEquals("E|0|test|2021-08-21 1530", s.getString(2));
 
         //Mark all three tasks as done
-        c1.execute(t, u, s);
-        c2.execute(t, u, s);
-        c3.execute(t, u, s);
+        c1.execute(t, s);
+        c2.execute(t, s);
+        c3.execute(t, s);
 
         //Check whether all three tasks are done
         assertEquals("[T][X] tutorial", t.output().get(0).toString());

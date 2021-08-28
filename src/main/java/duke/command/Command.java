@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
@@ -17,25 +16,24 @@ public abstract class Command {
     /**
      * Constructor.
      *
-     * @param description it should contain more instructions for the duke.command
+     * @param description it should contain more instructions for the command
      */
     public Command(String description) {
         this.description = description;
     }
 
     /**
-     * Adds the relevant actions pertaining to the duke.command.
+     * Adds the relevant actions pertaining to the command.
      *
-     * @param tasks   the duke.task list
-     * @param ui      the ui
-     * @param storage the storage for the saved duke.task list
+     * @param tasks   the task list
+     * @param storage the storage for the saved task list
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Storage storage);
 
     /**
-     * Returns true if it is a bye duke.command and returns false otherwise
+     * Returns true if it is a bye command and returns false otherwise
      *
-     * @return boolean of whether this is the last duke.command or not
+     * @return boolean of whether this is the last command or not
      */
     public boolean isExit() {
         return false;

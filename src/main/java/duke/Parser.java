@@ -23,7 +23,7 @@ public class Parser {
      * Reads the fullCommand and return the relevant duke.command.
      *
      * @param fullCommand the fullCommand
-     * @return the relevant duke.command
+     * @return the relevant command
      */
     protected static Command parse(String fullCommand) {
         String[] commandPair = fullCommand.split(" ", 2);

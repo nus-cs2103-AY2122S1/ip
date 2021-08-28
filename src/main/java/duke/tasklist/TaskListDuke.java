@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -14,74 +13,72 @@ import duke.task.Task;
  * @version CS2103T AY21/22 S1
  */
 public class TaskListDuke implements TaskList {
-    private static final String ADD = "\t Got it. I've added this duke.task:";
-    private static final String LIST_INTRO = "\t Here are the tasks in your list:";
-    private static final String DONE = "\t Nice! I've marked this duke.task as done:\n\t   ";
-    private static final String DELETE = "\t Noted. I've removed this duke.task:\n\t   ";
+    private static final String ADD = "Got it. I've added this task:\n";
+    private static final String LIST_INTRO = "Here are the tasks in your list:\n";
+    private static final String DONE = "Nice! I've marked this task as done:\n";
+    private static final String DELETE = "Noted. I've removed this task:\n";
     private ArrayList<Task> list;
-    private Ui ui;
 
     /**
      * Constructor for TaskList.
      */
-    public TaskListDuke(ArrayList<Task> list, Ui ui) {
+    public TaskListDuke(ArrayList<Task> list) {
         this.list = list;
-        this.ui = ui;
     }
 
     /**
-     * Adds the duke.task into the list.
+     * Adds the task into the list.
      *
-     * @param task the duke.task to be added into the list
+     * @param task the task to be added into the list
      */
     @Override
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.list.add(task);
-        ui.print(ADD);
-        ui.print("\t   " + task);
+        String str = ADD + task.toString();
         if (this.list.size() == 1) {
-            ui.print("\t Now you have 1 duke.task in the list.");
+            str += "\nNow you have 1 task in the list.";
         } else {
-            ui.print("\t Now you have " + this.list.size() + " tasks in the list.");
+            str += "\nNow you have " + this.list.size() + " tasks in the list.";
         }
+        return str;
     }
 
     /**
-     * Changes the done status of the duke.task.
+     * Changes the done status of the task.
      *
-     * @param index the position of the duke.task to be marked done
+     * @param index the position of the task to be marked done
      */
     @Override
-    public void setDone(int index) {
+    public String setDone(int index) {
         Task task = this.list.get(index);
         task.setDone();
-        ui.print(DONE + task);
+        return DONE + task;
     }
 
     /**
-     * Deletes the duke.task at a specified index.
+     * Deletes the task at a specified index.
      *
-     * @param index the position of the duke.task to be deleted
+     * @param index the position of the task to be deleted
      */
-    public void delete(int index) {
+    public String delete(int index) {
         Task task = this.list.get(index);
         this.list.remove(index);
-        ui.print(DELETE + task);
-
+        return DELETE + task.toString();
     }
 
     /**
      * Prints the list.
      */
-    public void printList() {
-        ui.print(LIST_INTRO);
+    public String printList() {
+        StringBuilder str = new StringBuilder(LIST_INTRO);
         if (this.list.size() == 0) {
-            ui.print("\t List is empty");
+            str.append("List is empty!");
         } else {
             for (int i = 0; i < this.list.size(); i++) {
-                ui.print("\t " + (i + 1) + "." + this.list.get(i));
+                str.append(i + 1).append(".").append(this.list.get(i).toString()).append("\n");
             }
         }
+        return str.toString();
     }
 
     /**
@@ -89,44 +86,46 @@ public class TaskListDuke implements TaskList {
      *
      * @param date the specified date
      */
-    public void printListDate(String date) {
+    public String printListDate(String date) {
         LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        ui.print(LIST_INTRO);
+        StringBuilder str = new StringBuilder(LIST_INTRO);
         if (this.list.size() == 0) {
-            ui.print("\t List is empty.");
+            str.append("List is empty!");
         } else {
             int count = 0;
             for (Task t : this.list) {
                 if (t.onDate(localDate)) {
-                    ui.print("\t " + (++count) + "." + t);
+                    str.append(++count).append(".").append(t).append("\n");
                 }
             }
             if (count == 0) {
-                ui.print("There are no tasks pertaining to the specified date.");
+                str.append("There are no tasks pertaining to the specified date.");
             }
         }
+        return str.toString();
     }
 
     /**
      * Prints Tasks with containing the specific substring.
      *
-     * @param str the specified substring
+     * @param searchStr the specified substring
      */
-    public void printListSearch(String str) {
-        ui.print(LIST_INTRO);
+    public String printListSearch(String searchStr) {
+        StringBuilder str = new StringBuilder(LIST_INTRO);
         if (this.list.size() == 0) {
-            ui.print("\t List is empty.");
+            str.append("List is empty!");
         } else {
             int count = 0;
             for (Task t : this.list) {
-                if (t.containString(str)) {
-                    ui.print("\t " + (++count) + "." + t);
+                if (t.containString(searchStr)) {
+                    str.append(++count).append(".").append(t).append("\n");
                 }
             }
             if (count == 0) {
-                ui.print("\t Oh no! There are no tasks containing the specified string.");
+                str.append("Oh no! There are no tasks containing the specified string.");
             }
         }
+        return str.toString();
     }
 
     /**

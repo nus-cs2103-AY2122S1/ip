@@ -11,31 +11,31 @@ import duke.task.Task;
 public interface TaskList {
 
     /**
-     * Adds the duke.task into the list.
+     * Adds the task into the list.
      *
-     * @param task the duke.task to be added into the list
+     * @param task the task to be added into the list
      */
-    void addTask(Task task);
+    String addTask(Task task);
 
     /**
-     * Setter to change the done status of the duke.task.
+     * Setter to change the done status of the task.
      */
-    void setDone(int index);
+    String setDone(int index);
 
     /**
-     * Delete the duke.task at a specified index.
+     * Delete the task at a specified index.
      */
-    void delete(int index);
+    String delete(int index);
 
     /**
      * Prints the list.
      */
-    void printList();
+    String printList();
 
     /**
      * Prints Tasks on the specified date.
      */
-    void printListDate(String date);
+    String printListDate(String date);
 
     /**
      * Return the number of items in the TaskList.
@@ -48,5 +48,5 @@ public interface TaskList {
      * Prints Tasks containing the specified searchString.
      * @param searchString the string to be used for searching
      */
-    void printListSearch(String searchString);
+    String printListSearch(String searchString);
 }

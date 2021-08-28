@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.Ui;
 import duke.storage.StorageStub;
 import duke.tasklist.TaskListStub;
 
@@ -19,13 +18,12 @@ public class DeadlineCommandTest {
     private final DeadlineCommand c1 = new DeadlineCommand("tutorial /by 2021-08-23 1643");
     private final DeadlineCommand c2 = new DeadlineCommand("assignment /by 2021-08-21 0401");
     private final StorageStub s = new StorageStub();
-    private final Ui u = new Ui();
-    private final TaskListStub t = new TaskListStub(s.load(), u);
+    private final TaskListStub t = new TaskListStub(s.load());
 
     @Test
     public void execute() {
-        c1.execute(t, u, s);
-        c2.execute(t, u, s);
+        c1.execute(t, s);
+        c2.execute(t, s);
         t.printList();
         assertEquals(t.output().size(), 2);
         assertEquals("[D][ ] tutorial (by: 23 Aug 2021 4.43pm)", t.output().get(0).toString());

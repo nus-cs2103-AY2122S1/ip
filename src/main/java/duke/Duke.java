@@ -16,49 +16,35 @@ import duke.tasklist.TaskListDuke;
  */
 public class Duke {
     private StorageDuke storage;
-    private Ui ui;
     private TaskListDuke tasks;
+    private final String filepath = "data/tasks.txt";
 
     /**
      * Constructor for Duke.
-     *
-     * @param filePath the filePath for the saved data
      */
-    public Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new StorageDuke(filePath);
+    public Duke() {
+        this.storage = new StorageDuke(filepath);
         try {
-            tasks = new TaskListDuke(this.storage.load(), ui);
+            tasks = new TaskListDuke(this.storage.load());
         } catch (IOException e) {
-            ui.reply("☹ OOPS!!! Cannot create file!");
-            tasks = new TaskListDuke(new ArrayList<>(), ui);
+            tasks = new TaskListDuke(new ArrayList<>());
         }
     }
 
     /**
-     * Executes the Duke application.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (IOException e) {
-                ui.showError(new DukeException("Error reading commands.").getMessage());
-            } finally {
-                ui.showLine();
-            }
+    protected String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    protected String getWelcome() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 }

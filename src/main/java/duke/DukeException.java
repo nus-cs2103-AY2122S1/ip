@@ -14,6 +14,6 @@ public class DukeException extends RuntimeException {
      * @param errorMessage indicates the error that has occurred
      */
     public DukeException(String errorMessage) {
-        super("\t ☹ OOPS!!! " + errorMessage);
+        super("☹ OOPS!!! " + errorMessage);
     }
 }
