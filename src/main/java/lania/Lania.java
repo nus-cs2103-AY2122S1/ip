@@ -18,6 +18,8 @@ public class Lania {
     private Ui ui;
     /** Deals with loading tasks from the file and saving tasks in the file */
     private Storage storage;
+    /** Deals with making sense of the user command */
+    private Parser parser;
 
     /**
      * Constructor for the Lania object.
@@ -27,60 +29,7 @@ public class Lania {
     public Lania(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-    }
-
-    /**
-     * Store user input in the task list and display a message.
-     *
-     * @param t The task provided by the user.
-     */
-    public void update(Task t) {
-        tasks.update(t);
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            ui.showError();
-        }
-        ui.showUpdateMessage(tasks, t);
-    }
-
-    /**
-     * Completes the given task number.
-     *
-     * @param i The task number to be completed.
-     */
-    public void complete(int i) {
-        tasks.complete(i);
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            ui.showError();
-        }
-        ui.showCompleteMessage(tasks, i);
-    }
-
-    /**
-     * Removes given task number.
-     *
-     * @param i The task number to be completed.
-     */
-    public void remove(int i) {
-        ui.showRemoveMessage(tasks, tasks.remove(i));
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            ui.showError();
-        }
-    }
-
-    /**
-     * Finds tasks that matches the keyword in the task list.
-     *
-     * @param s The keyword to match.
-     */
-    public void find(String s) {
-        TaskList temp = tasks.find(s);
-        ui.showListMessage(temp);
+        parser = new Parser();
     }
 
     /**
@@ -102,46 +51,21 @@ public class Lania {
         }
         ui.showListMessage(tasks);
         ui.showGreetingMessage();
+        boolean isExit = false;
         Scanner s = new Scanner(System.in);
-        String input = s.nextLine();
-        String command = new Parser().parseCommand(input);
-        while(!command.equals("bye")) {
+        while(!isExit) {
             try {
-                if (command.equals("list")) {
-                    ui.showListMessage(tasks);
-                } else if (command.equals("find")) {
-                    find(new Parser().parseTaskDescription(input));
-                } else if (command.equals("done")) {
-                    complete(new Parser().getIndex(input));
-                } else if (command.equals("delete")) {
-                    remove(new Parser().getIndex(input));
-                } else {
-                    if (command.equals("todo")) {
-                        String taskDescription = new Parser().parseTaskDescription(input);
-                        update(new Todo(taskDescription));
-                    } else if (command.equals("deadline")) {
-                        String taskDescription = new Parser().parseTaskDescription(input);
-                        String[] task = new Parser().parseDeadline(taskDescription);
-                        update(new Deadline(task[0], task[1]));
-                    } else if (command.equals("event")) {
-                        String taskDescription = new Parser().parseTaskDescription(input);
-                        String[] task = new Parser().parseEvent(taskDescription);
-                        update(new Event(task[0], task[1]));
-                    } else {
-                        throw new LaniaException("Sorry, but Lania does not know what that means.");
-                    }
-                }
+                String input = s.nextLine();
+                Command c = parser.parse(input);
+                c.execute(tasks, storage, ui);
+                isExit = c.isExit();
             } catch (LaniaException e) {
                 ui.showLaniaException(e);
             } catch (DateTimeParseException e) {
                 ui.showDateTimeException();
-            } finally {
-                input = s.nextLine();
-                command = new Parser().parseCommand(input);
             }
         }
         s.close();
-        ui.showExitMessage();
     }
 
     /**

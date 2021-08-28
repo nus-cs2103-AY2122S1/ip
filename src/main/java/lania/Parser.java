@@ -1,12 +1,43 @@
 package lania;
 
 import lania.exception.LaniaEmptyDescriptionException;
+import lania.exception.LaniaException;
+import lania.task.Deadline;
+import lania.task.Event;
+import lania.task.Todo;
 
 /**
  * This class deals with making sense of the user command
  * by parsing the given string.
  */
 public class Parser {
+
+    public Command parse(String fullCommand) {
+        String firstCommand = parseCommand(fullCommand);
+        if (firstCommand.equals("list")) {
+            return new ListCommand();
+        } else if (firstCommand.equals("find")) {
+            return new FindCommand(parseTaskDescription(fullCommand));
+        } else if (firstCommand.equals("done")) {
+            return new CompleteCommand(getIndex(fullCommand));
+        } else if (firstCommand.equals("delete")) {
+            return new DeleteCommand(getIndex(fullCommand));
+        } else {
+            if (firstCommand.equals("todo")) {
+                return new AddCommand(new Todo(parseTaskDescription(fullCommand)));
+            } else if (firstCommand.equals("deadline")) {
+                String taskDescription = parseTaskDescription(fullCommand);
+                String[] task = parseDeadline(taskDescription);
+                return new AddCommand(new Deadline(task[0], task[1]));
+            } else if (firstCommand.equals("event")) {
+                String taskDescription = parseTaskDescription(fullCommand);
+                String[] task = parseEvent(taskDescription);
+                return new AddCommand(new Event(task[0], task[1]));
+            } else {
+                throw new LaniaException("Sorry, but Lania does not know what that means.");
+            }
+        }
+    }
 
     /**
      * Checks the first word of the given input.
