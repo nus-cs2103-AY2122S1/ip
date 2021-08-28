@@ -38,8 +38,9 @@ class Duke {
     private static void loadStorage() {
         try {
             storage = new Storage("duke.txt");
-            for (String command : storage.readAllLines())
+            for (String command : storage.readAllLines()) {
                 parser.parse(command);
+            }
         } catch (IOException | DukeException e) {
             e.printStackTrace();
         }

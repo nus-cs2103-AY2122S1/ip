@@ -24,8 +24,9 @@ class Ui {
      */
     static void show(String... lines) {
         System.out.println("\t____________________________________");
-        for (String line : lines)
+        for (String line : lines) {
             System.out.println("\t " + line);
+        }
         System.out.println("\t____________________________________");
     }
 }
