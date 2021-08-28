@@ -13,6 +13,12 @@ import duke.util.Ui;
  */
 public class TodoCommand extends Command {
     private String action;
+
+    /**
+     * Constructor of the TodoCommand
+     *
+     * @param action String input of the tasks
+     */
     public TodoCommand(String action) {
         super(false);
         this.action = action;
