@@ -22,6 +22,9 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     * Returns ArrayList of Tasks loaded from filePath location
+     */
     public ArrayList<Task> load() {        
         ArrayList<Task> tasks = new ArrayList<>();
         
@@ -57,6 +60,9 @@ public class Storage {
         return tasks; 
     }
 
+    /**
+     * Writes formatted data into filePath location
+     */
     public void save(String formattedTaskList){
         try {
             FileWriter writer = new FileWriter(filePath);

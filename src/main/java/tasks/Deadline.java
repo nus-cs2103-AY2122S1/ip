@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task{
-    LocalDate time;
+
+    private LocalDate time;
 
     public Deadline(String description, LocalDate time) {
         super(description, "[D]", false);
@@ -16,9 +17,10 @@ public class Deadline extends Task{
         this.time = time;
     }
 
-    public String getformmatedData() {
-        String formmatedStatus = super.isDone() ? "1|" : "0|";
-        return "D|" + formmatedStatus + super.getDescription() 
+    @Override
+    public String getFormattedData() {
+        String formattedStatus = super.isDone() ? "1|" : "0|";
+        return "D|" + formattedStatus + super.getDescription()
             + "|" + this.time.toString();
     }
 

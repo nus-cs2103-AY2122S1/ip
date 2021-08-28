@@ -16,6 +16,9 @@ import tasks.ToDo;
 
 public class Parser {
 
+    /**
+     * Return command according to user input
+     */
     public static Command parse(String command) throws InvalidInputException {
         String[] commands = command.split(" ", 2);
         command = commands[0];
