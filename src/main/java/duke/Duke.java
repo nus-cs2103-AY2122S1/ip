@@ -33,14 +33,15 @@ public class Duke {
     // private static Path p = Paths.get("./Users/yinruoyan/Documents/GitHub/ip/data/src/duke.txt");
 //    private static Path p = Paths.get("./Users/yinruoyan/Documents/GitHub/ip/data/duke.txt");
 //    private static Path p = Paths.get("../../../data/duke.txt");
-    private static final String filePath = String.valueOf(Paths.get("/Users/yinruoyan/Documents/GitHub/ip/data/duke.txt"));
+//    private static final String filePath = String.valueOf(Paths.get(System.getProperty("user.home"), "data", "duke.txt"));
+//    private static final String filePath = "./src/main/data/duke.txt";
+    private static final String FILE_PATH = String.valueOf(Paths.get(System.getProperty("user.home"), "data", "dukeFile.txt"));
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-            System.out.print(tasks.toString());
         } catch (FileNotFoundException e) {
             File file = new File(filePath);
             tasks = new TaskList();
@@ -93,6 +94,7 @@ public class Duke {
      */
     public static void main(String[] args) {
 //        new Duke("data/tasks.txt").run();
-        new Duke(String.valueOf(Paths.get("/Users/yinruoyan/Documents/GitHub/ip/data/duke.txt"))).run();
+//        new Duke(String.valueOf(Paths.get(filePath))).run();
+        new Duke(FILE_PATH).run();
     }
 }
