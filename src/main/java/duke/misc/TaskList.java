@@ -1,11 +1,11 @@
 package duke.misc;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * TaskList class which encapsulates all tasks, as well as handle information and

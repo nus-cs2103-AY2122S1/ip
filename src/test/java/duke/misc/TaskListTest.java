@@ -10,7 +10,7 @@ import duke.task.Todo;
 
 class TaskListTest {
     @Test
-    void delete() {
+    void testDelete() {
         TaskList tl = new TaskList();
         Todo task = new Todo("bake cake");
         tl.add(task);
@@ -22,7 +22,7 @@ class TaskListTest {
     }
 
     @Test
-    void complete() {
+    void testComplete() {
         try {
             assertEquals("test", new TaskList().complete(1));
             fail();

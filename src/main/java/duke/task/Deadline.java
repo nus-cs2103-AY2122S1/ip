@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Deadline class which Encapsulates task's deadline.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private DateTime by;
 
     /**

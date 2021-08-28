@@ -5,7 +5,6 @@ import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidFormatException;
 import duke.exception.InvalidIndexException;
-
 import duke.task.DateTime;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -35,26 +34,26 @@ public class Parser {
             }
         }
         switch(name) {
-            case "todo":
-                return new Todo(args[0]);
-            case "event":
-                if (!input.matches("event [\\s\\S]+/[\\s\\S]+")) {
-                    throw new InvalidFormatException();
-                }
-                if (DateTime.isInvalidDate(args[1])) {
-                    throw new InvalidDateException();
-                }
-                return new Event(args[0], args[1]);
-            case "deadline":
-                if (!input.matches("deadline [\\s\\S]+/[\\s\\S]+")) {
-                    throw new InvalidFormatException();
-                }
-                if (DateTime.isInvalidDate(args[1])) {
-                    throw new InvalidDateException();
-                }
-                return new Deadline(args[0], args[1]);
-            default:
-                throw new InvalidCommandException();
+        case "todo":
+            return new Todo(args[0]);
+        case "event":
+            if (!input.matches("event [\\s\\S]+/[\\s\\S]+")) {
+                throw new InvalidFormatException();
+            }
+            if (DateTime.isInvalidDate(args[1])) {
+                throw new InvalidDateException();
+            }
+            return new Event(args[0], args[1]);
+        case "deadline":
+            if (!input.matches("deadline [\\s\\S]+/[\\s\\S]+")) {
+                throw new InvalidFormatException();
+            }
+            if (DateTime.isInvalidDate(args[1])) {
+                throw new InvalidDateException();
+            }
+            return new Deadline(args[0], args[1]);
+        default:
+            throw new InvalidCommandException();
         }
     }
 
@@ -75,35 +74,35 @@ public class Parser {
             suffix = input.substring(idx + 1);
         }
         switch (prefix) {
-            case "bye":
-                if (!suffix.equals("")) {
-                    throw new InvalidCommandException();
-                }
-                return Ui.GOODBYE_MSG;
-            case "list":
-                if (!suffix.equals("")) {
-                    throw new InvalidCommandException();
-                }
-                return Ui.LIST_MSG + tl.displayList();
-            case "done":
-                try {
-                    idx = Integer.parseInt(suffix);
-                } catch (NumberFormatException e) {
-                    throw new InvalidIndexException();
-                }
-                return Ui.DONE_MSG + tl.complete(idx);
-            case "delete":
-                try {
-                    idx = Integer.parseInt(suffix);
-                } catch (NumberFormatException e) {
-                    throw new InvalidIndexException();
-                }
-                return Ui.DELETE_MSG + tl.delete(idx);
-            case "find":
-                return Ui.FIND_MSG + tl.find(suffix);
-            default:
-                Task task = makeTask(input);
-                return Ui.ADD_MSG + tl.add(task);
+        case "bye":
+            if (!suffix.equals("")) {
+                throw new InvalidCommandException();
+            }
+            return Ui.GOODBYE_MSG;
+        case "list":
+            if (!suffix.equals("")) {
+                throw new InvalidCommandException();
+            }
+            return Ui.LIST_MSG + tl.displayList();
+        case "done":
+            try {
+                idx = Integer.parseInt(suffix);
+            } catch (NumberFormatException e) {
+                throw new InvalidIndexException();
+            }
+            return Ui.DONE_MSG + tl.complete(idx);
+        case "delete":
+            try {
+                idx = Integer.parseInt(suffix);
+            } catch (NumberFormatException e) {
+                throw new InvalidIndexException();
+            }
+            return Ui.DELETE_MSG + tl.delete(idx);
+        case "find":
+            return Ui.FIND_MSG + tl.find(suffix);
+        default:
+            Task task = makeTask(input);
+            return Ui.ADD_MSG + tl.add(task);
         }
-      }
+    }
 }

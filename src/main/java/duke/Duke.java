@@ -1,11 +1,11 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.misc.Parser;
 import duke.misc.TaskList;
 import duke.misc.Ui;
-
-import java.io.IOException;
 
 /**
  * Driver class to simulate the 'Annie' chat bot program.

@@ -6,8 +6,6 @@ import java.util.Scanner;
  * Ui class to encapsulate display messages and handle input/output of duke.
  */
 public class Ui {
-    private Scanner sc;
-
     /** Welcome message. */
     public static final String WELCOME_MSG = "Hi I am Annie!\nHow can I assist you?";
 
@@ -23,8 +21,10 @@ public class Ui {
     static final String DELETE_MSG = "I have deleted this task:\n";
     static final String FIND_MSG = "Here are what i found:\n";
 
+    private Scanner sc;
+
     /**
-     * Constructor for Ui class.
+     * * Constructor for Ui class.
      */
     public Ui() {
         sc = new Scanner(System.in);
