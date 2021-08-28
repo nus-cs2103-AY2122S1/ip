@@ -175,23 +175,23 @@ public class Duke {
 
         case DEADLINE:
             String time = "";
-            boolean stringHasEnded = false;
+            boolean hasEnded = false;
 
             for (int i = 1; i < array.length; i++) {
                 //repeatedly append strings in the array until the time is found
                 String currentArrayElement = array[i];
-                if (stringHasEnded) {
+                if (hasEnded) {
                     time = currentArrayElement;
                     break;
                 }
                 if (currentArrayElement.equals("/by")) {
-                    stringHasEnded = true;
+                    hasEnded = true;
                     continue;
                 }
                 str.append(currentArrayElement).append(" ");
             }
             //check if a time was entered
-            if (!stringHasEnded) {
+            if (!hasEnded) {
                 Ui.printBadDateFormatError();
                 return;
             }
@@ -209,22 +209,22 @@ public class Duke {
 
         case EVENT:
             String eventTime = "";
-            boolean stringHasTerminated = false;
+            boolean hasTerminated = false;
             for (int i = 1; i < array.length; i++) {
                 //repeatedly append strings in the array until the eventTime is found
                 String currentArrayElement = array[i];
-                if (stringHasTerminated) {
+                if (hasTerminated) {
                     eventTime = currentArrayElement;
                     break;
                 }
                 if (currentArrayElement.equals("/at")) {
-                    stringHasTerminated = true;
+                    hasTerminated = true;
                     continue;
                 }
                 str.append(currentArrayElement).append(" ");
             }
             //check if a duration was entered
-            if (!stringHasTerminated) {
+            if (!hasTerminated) {
                 Ui.printBadDateFormatError();
                 return;
             }
