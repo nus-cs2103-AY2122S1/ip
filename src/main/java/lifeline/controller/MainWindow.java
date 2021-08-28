@@ -35,6 +35,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Initializes an instance of Lifeline to respond to user input and forces ScrollPane to automatically scroll down
+     * Display DialogBox containing lifeline greeting message and image
      */
     @FXML
     public void initialize() {

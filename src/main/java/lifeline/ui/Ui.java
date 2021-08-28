@@ -151,6 +151,11 @@ public class Ui {
         return stringBuilder.toString();
     }
 
+    /**
+     * Returns greeting message for GUI when user starts program
+     *
+     * @return Greeting message
+     */
     public String guiGreet() {
         return "Hello I am Lifeline. What can I help you with today?";
     }

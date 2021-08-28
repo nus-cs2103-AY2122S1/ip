@@ -51,12 +51,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Displays DialogBox containing user message and user image
+     *
+     * @param text Text entered by user
+     * @param img User image
+     * @return DialogBox containing user message and user image
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialog = new DialogBox(text, img);
         userDialog.speechBubble.getStyleClass().add("user-speech-bubble");
         return userDialog;
     }
 
+    /**
+     * Displays DialogBox containing lifeline response and lifeline image
+     *
+     * @param text Response to user's input
+     * @param img Lifeline image
+     * @return DialogBox containing lifeline response and lifeline image
+     */
     public static DialogBox getLifelineDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
