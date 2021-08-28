@@ -41,7 +41,7 @@ public class Ui {
     }
 
     public void showLoadingError() {
-        System.out.println("TEST LOADING ERROR");
+        System.out.println("\tWe couldn't load your data file ><");
     }
 
     public void showTaskList(TaskList tasks) {
