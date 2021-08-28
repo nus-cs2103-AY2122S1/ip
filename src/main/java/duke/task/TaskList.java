@@ -1,9 +1,5 @@
 package duke.task;
 
-import duke.exceptions.EmptyListException;
-import duke.exceptions.IllegalFormatException;
-import duke.exceptions.TaskNotFoundException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -13,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.exceptions.EmptyListException;
+import duke.exceptions.IllegalFormatException;
+import duke.exceptions.TaskNotFoundException;
+
+
 /**
  * Encapsulates a TaskList containing tasks.
  */
@@ -20,12 +21,15 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Constructors for TaskList.
+     * Constructor for TaskList.
      */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Constructor for TaskList.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -77,12 +81,13 @@ public class TaskList {
 
         String[] eventInfo = command.substring(6).split("/at ");
         String eventDescription = eventInfo[0];
-        String dateString = eventInfo[1].substring(0,8);
-        String startTimeString = eventInfo[1].substring(9,13);
-        String endTimeString = eventInfo[1].substring(14,18);
+        String dateString = eventInfo[1].substring(0, 8);
+        String startTimeString = eventInfo[1].substring(9, 13);
+        String endTimeString = eventInfo[1].substring(14, 18);
 
         LocalDate date;
-        LocalTime startTime, endTime;
+        LocalTime startTime;
+        LocalTime endTime;
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
 
@@ -198,6 +203,14 @@ public class TaskList {
         return deleteMessage(task, size);
     }
 
+    /**
+     * Find and return tasks matching user keyword input.
+     *
+     * @param command user input command
+     * @return string representation of filtered TaskList stored
+     * @throws IllegalFormatException if user gives invalid command
+     * @throws EmptyListException if the TaskList is empty
+     */
     public String findFromList(String command) throws IllegalFormatException, EmptyListException {
         String regexToMatch = "^find .*";
         String correctFormat = "find <keyword to find>";
@@ -253,11 +266,11 @@ public class TaskList {
      * @return message for successful addition of task
      */
     private String addMessage(Task task, int size) {
-        return "Got it. I've added this task:\n" + task +
-                "\nNow you have " + size +
-                (size <= 1
-                ? " task "
-                : " tasks " + "in your list.");
+        return "Got it. I've added this task:\n" + task
+                + "\nNow you have " + size
+                + (size <= 1
+                  ? " task "
+                  : " tasks " + "in your list.");
     }
 
     /**
@@ -268,11 +281,11 @@ public class TaskList {
      * @return message for successful deletion of task
      */
     private String deleteMessage(Task task, int size) {
-        return "Noted. I've removed the following task:\n" + task +
-                "\nNow you have " + size +
-                (size <= 1
-                ? " task "
-                : " tasks " + "in your list.");
+        return "Noted. I've removed the following task:\n" + task
+                + "\nNow you have " + size
+                + (size <= 1
+                  ? " task "
+                  : " tasks " + "in your list.");
     }
 
     /**

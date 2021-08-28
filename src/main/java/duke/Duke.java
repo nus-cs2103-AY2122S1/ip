@@ -1,12 +1,13 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.exceptions.DukeException;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import java.io.IOException;
 
 /**
  * Encapsulates the Duke bot that has the ability to create, read, update and delete tasks

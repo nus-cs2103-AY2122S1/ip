@@ -1,13 +1,15 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+
 
 public class TaskTest {
     @Test
@@ -38,10 +40,10 @@ public class TaskTest {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
 
         Task task = new Event("event", date, startTime, endTime);
-        assertEquals("[E][ ] event (at: " +
-                        date.format(dateFormatter) + " " +
-                        startTime.format(timeFormatter) + "-" +
-                        endTime.format(timeFormatter) + ")",
+        assertEquals("[E][ ] event (at: "
+                        + date.format(dateFormatter) + " "
+                        + startTime.format(timeFormatter) + "-"
+                        + endTime.format(timeFormatter) + ")",
                         task.toString());
     }
 
@@ -51,9 +53,8 @@ public class TaskTest {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy h:mma");
 
         Task task = new Deadline("deadline", dateTime);
-        assertEquals("[D][ ] deadline (by: " +
-                        dateTime.format(dateTimeFormatter) + ")",
+        assertEquals("[D][ ] deadline (by: "
+                        + dateTime.format(dateTimeFormatter) + ")",
                 task.toString());
     }
-
 }

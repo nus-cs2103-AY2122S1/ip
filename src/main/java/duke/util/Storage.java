@@ -1,14 +1,5 @@
 package duke.util;
 
-import duke.exceptions.CorruptedFileException;
-import duke.exceptions.EmptyListException;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,6 +10,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exceptions.CorruptedFileException;
+import duke.exceptions.EmptyListException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Encapsulates Storage of Duke bot.
@@ -103,7 +102,10 @@ public class Storage {
     private Task loadEvent(String command) throws CorruptedFileException {
         Task task;
         String[] taskInfo;
-        String description, dateString, startTimeString, endTimeString;
+        String description;
+        String dateString;
+        String startTimeString;
+        String endTimeString;
 
         taskInfo = command.substring(7).split(" \\(at: ");
         description = taskInfo[0];
@@ -113,7 +115,8 @@ public class Storage {
         endTimeString = taskInfo[2];
 
         LocalDate date;
-        LocalTime startTime, endTime;
+        LocalTime startTime;
+        LocalTime endTime;
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
 
@@ -139,7 +142,8 @@ public class Storage {
     private Task loadDeadline(String command) throws CorruptedFileException {
         Task task;
         String[] taskInfo;
-        String description, dateTimeString;
+        String description;
+        String dateTimeString;
 
         taskInfo = command.substring(7).split(" \\(by: ");
         description = taskInfo[0];
