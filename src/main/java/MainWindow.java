@@ -6,6 +6,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -24,12 +32,17 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(this.tiger.start(), dukeImage)
         );
+        Font font = Font.loadFont(MainWindow.class.getResource("/fonts/VictorMono-Medium.ttf").toExternalForm(),
+                14);
+        sendButton.setFont(font);
+        userInput.setFont(font);
 
     }
 

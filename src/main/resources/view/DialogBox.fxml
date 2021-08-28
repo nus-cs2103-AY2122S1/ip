@@ -9,9 +9,9 @@
 <fx:root alignment="TOP_RIGHT" depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="299.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" minHeight="-Infinity" minWidth="270.0" style="-fx-background-color: aquamarine; -fx-background-radius: 7px;" text="Label" translateX="10.0" wrapText="true">
-             <font>
-                <Font name="Victor Mono Regular" size="14.0" />
-             </font>
+<!--             <font>-->
+<!--                <Font name="Victor Mono Regular" size="14.0" />-->
+<!--             </font>-->
              <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
              </padding>
