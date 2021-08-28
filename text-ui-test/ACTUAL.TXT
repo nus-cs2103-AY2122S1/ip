@@ -69,8 +69,8 @@ Please ensure you key in dates in the input specified.
 Please ensure you key in dates in the input specified.
 Excellent! I've added this deadline:
 [D] [M] H 	(by 1999-02-28)
-Input command cannot contain semicolons! (;)
-Input command cannot contain semicolons! (;)
+Please ensure you key in dates in the input specified.
+Please ensure you key in dates in the input specified.
 Excellent! I've added this deadline:
 [D] [M] G 	(by 2020-08-21 12:00)
 1.	 [T] [X] A
