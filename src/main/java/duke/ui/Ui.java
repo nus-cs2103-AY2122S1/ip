@@ -6,6 +6,7 @@ import duke.task.TaskList;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/** A class that manages the UI */
 public class Ui {
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -30,11 +31,19 @@ public class Ui {
     private Scanner in;
     private PrintStream out;
 
+    /**
+     * Constructs UI that takes input from stdin and prints to stdout.
+     */
     public Ui() {
         this.in = new Scanner(System.in);
         this.out = System.out;
     }
 
+    /**
+     * Returns the user command.
+     *
+     * @return The user command.
+     */
     public String getUserCommand() {
         return in.nextLine();
     }

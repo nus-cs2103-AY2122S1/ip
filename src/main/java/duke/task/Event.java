@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/** A class that represents an event task */
 public class Event extends Task {
     private LocalDate at;
 

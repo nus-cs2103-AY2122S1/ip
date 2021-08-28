@@ -13,9 +13,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/** A storage class serves as a database system. */
 public class Storage {
     Path filePath;
 
+    /**
+     * Constructs a storage that uses the specified file to load and store data.
+     *
+     * @param filePath The path of the file.
+     */
     public Storage(String filePath) {
         this.filePath = Paths.get(filePath);
 
@@ -31,6 +37,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads data from the file.
+     *
+     * @return A list of strings, where each line is stored as one element.
+     * @throws IOException If an I/O error occurs.
+     */
     public List<String> load() throws IOException {
         FileReader fin = new FileReader(filePath.toString());
         BufferedReader bin = new BufferedReader(fin);
@@ -51,6 +63,12 @@ public class Storage {
         return data;
     }
 
+    /**
+     * Stores data to the file.
+     *
+     * @param data The data to be stored.
+     * @throws IOException If an I/O error occurs.
+     */
     public void store(String data) throws IOException {
         FileWriter fout = new FileWriter(filePath.toString());
         BufferedWriter bout = new BufferedWriter(fout);

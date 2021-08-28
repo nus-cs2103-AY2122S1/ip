@@ -8,9 +8,15 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/** A class for mark command */
 public class MarkCommand extends Command {
     private int index;
 
+    /**
+     * Constructs a mark command.
+     *
+     * @param index The index of task to be marked.
+     */
     public MarkCommand(int index) {
         this.index = index;
     }
