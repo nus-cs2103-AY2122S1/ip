@@ -19,25 +19,15 @@ public class Duke {
          * constructor for Task.
          * @param action
          */
-        public Task(String action) {
-            // separate using the / as its the point of the date
+        public Task(String action, String done) {
+            this.done = done;
+
             dataOfAction = action.split("/")[0].split(" ");
-            String type = dataOfAction[0];
             for (int i = 1; i < dataOfAction.length; i++) {
                 finalAction += dataOfAction[i] + " ";
             }
-            //decide the correct header
-            if (type.equals("Todo")) {
-                done = "[T][] ";
-            } else {
-                String day =  setDate(action.split("/")[1].split(" "));
-                if (type.equals("Deadline")) {
-                    done = "[D][] ";
-                } else if  (type.equals("Events")) {
-                    done = "[E][] ";
-                } else {
-                    System.out.println("Error type");
-                }
+            if (action.split("/").length > 1) {
+                String day = setDate(action.split("/")[1].split(" "));
                 finalAction += day;
             }
         }
@@ -71,6 +61,55 @@ public class Duke {
         }
     }
 
+    private class TodoTasks extends Task {
+        /**
+         * constructor for Task.
+         *
+         * @param action
+         */
+        public TodoTasks(String action) {
+            super(action, "[T][] ");
+        }
+    }
+    private class DeadlineTask extends Task {
+        /**
+         * constructor for Task.
+         *
+         * @param action
+         */
+        public DeadlineTask(String action) {
+            super(action, "[D][] ");
+        }
+    }
+    private class EventsTask extends Task {
+        /**
+         * constructor for Task.
+         *
+         * @param action
+         */
+        public EventsTask(String action) {
+            super(action, "[E][] ");
+        }
+    }
+
+
+    private Task createTask(String action) throws Exception{
+        // separate using the / as its the point of the date
+        String[] dataOfAction = action.split("/")[0].split(" ");
+        String type = dataOfAction[0];
+        //decide the correct header
+        if (type.equals("Todo")) {
+            return new TodoTasks(action);
+        } else {
+            if (type.equals("Deadline")) {
+                return new DeadlineTask(action);
+            } else if  (type.equals("Events")) {
+                return new EventsTask(action);
+            } else {
+                throw new Exception("Error type");
+            }
+        }
+    }
     /**
      * Generate the initiate message.
      */
@@ -133,12 +172,16 @@ public class Duke {
             System.out.println("invalid index");
             }
             } else {
-                Task newTask = new Task(input);
-                taskList.add(newTask);
-                System.out.println(line);
-                System.out.println("Got it. I've added this task: ");
-                System.out.println("    " + newTask);
-                System.out.format("Now you have %d tasks in the list.\n", taskList.size());
+                try {
+                    Task newTask = createTask(input);
+                    taskList.add(newTask);
+                    System.out.println(line);
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println("    " + newTask);
+                    System.out.format("Now you have %d tasks in the list.\n", taskList.size());
+                }catch (Exception e) {
+                    System.out.println(e);
+                }
             }
             System.out.println(line);
             return true;
