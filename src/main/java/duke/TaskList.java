@@ -17,24 +17,24 @@ public class TaskList {
         list.add(task);
     }
 
-    public Task deleteTask(int index) throws DukeException{
-        Task t;
-        try {
-            t = list.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Sorry, there are only " + list.size() + " tasks.");
-        }
-        list.remove(index);
-        return t;
-    }
-
-    public Task doneTask(int index) throws DukeException{
+    public Task getTask(int index) throws DukeException {
         Task task;
         try {
             task = list.get(index);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Sorry, there are only " + list.size() + " tasks.");
         }
+        return task;
+    }
+
+    public Task deleteTask(int index) throws DukeException{
+        Task task = getTask(index);
+        list.remove(index);
+        return task;
+    }
+
+    public Task doneTask(int index) throws DukeException{
+        Task task = getTask(index);
         task.setStatus(true);
         return task;
     }

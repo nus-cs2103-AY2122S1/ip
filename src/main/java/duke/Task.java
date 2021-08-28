@@ -30,7 +30,7 @@ public class Task {
         this.status= status;
     }
 
-    protected static class Todo extends Task{
+    public static class Todo extends Task{
 
         public Todo(String description, boolean status) {
             super(description, status);
@@ -48,7 +48,7 @@ public class Task {
 
     }
 
-    protected static class Deadline extends Task{
+    public static class Deadline extends Task{
         private LocalDate by;
 
 
@@ -75,7 +75,7 @@ public class Task {
 
     }
 
-    protected static class Event extends Task{
+    public static class Event extends Task{
         private LocalDate at;
 
         public Event(String description, boolean status, String at) {

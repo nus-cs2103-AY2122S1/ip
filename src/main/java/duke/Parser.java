@@ -1,5 +1,7 @@
 package duke;
 
+import duke.Command.*;
+
 public class Parser {
 
     public static Command parse(String input) throws DukeException{
