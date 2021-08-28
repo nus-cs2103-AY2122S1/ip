@@ -6,11 +6,21 @@ import duke.Ui;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+/**
+ * Represents a command to display all <code>Item</code> objects
+ * in a <code>itemList</code> though an UI.
+ */
 public class ListCommand extends Command {
-    
     @Override
     public void parseLine(String line) {}
 
+    /**
+    * Displays all <code>Item</code> objects
+    * in the <code>itemList</code> though the UI.
+    * 
+    * @param itemList List to print.
+    * @param ui UI to update.
+    */
     @Override
     public void execute(ItemList itemList, Ui ui) {
         ListIterator<Item> iterator = itemList.listIterator();

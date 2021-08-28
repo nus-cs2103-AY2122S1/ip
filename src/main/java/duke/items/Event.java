@@ -6,6 +6,10 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a event entry in a to-do list. It has a occurance time and
+ * a name.
+ */
 public class Event extends Item {
     private LocalDate time;
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
@@ -21,6 +25,11 @@ public class Event extends Item {
         }
     }
 
+    /**
+     * Creates a encoding for the object to store in a database.
+     * 
+     * @returns A string encoding the object.
+     */
     @Override
     public String getPickle() {
         return super.getPickle() + "###" + this.time;
