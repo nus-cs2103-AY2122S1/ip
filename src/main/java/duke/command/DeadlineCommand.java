@@ -6,15 +6,31 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 import duke.data.exception.DukeException;
 
+/**
+ * Class that encapsulates the "Deadline" Command.
+ *
+ * @author Won Ye Ji
+ */
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "DEADLINE";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + "Adds a deadline task to the list";
 
+    /**
+     * Constructor for DeadlineCommand.
+     *
+     * @param th Task Handler that handles the operation.
+     * @param str Storage that holds the task information.
+     */
     public DeadlineCommand(TaskHandler th, Storage str) {
         super(th, str);
     }
 
+    /**
+     * Executes the "Deadline" Command.
+     *
+     * @param cmd Command string to be executed.
+     */
     @Override
     public void execute(String cmd) {
         try {

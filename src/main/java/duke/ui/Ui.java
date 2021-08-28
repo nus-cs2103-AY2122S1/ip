@@ -1,74 +1,116 @@
 package duke.ui;
+
+import duke.data.messages.Messages;
+
+/**
+ * Class that deals with interactions with the user of Duke.
+ *
+ * @author Won Ye Ji
+ */
 public class Ui {
-    private static final String INDENTATION = "    ";
-    private static final String WELCOME_MESSAGE = "Hello! I'm Jacky\nWhat can I do for you?";
-    private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
-    private static final String UNKNOWN_INPUT_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-    private static final String MISSING_DATE = "OOPS!!! Please add a valid date in the format dd/MM/yy HHmm.";
-    private static final String PRINT_LIST_MESSAGE = "Here are the tasks in your list:";
-    private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d tasks in the list.\n";
-    private static final String MARK_TASK_AS_DONE_MESSAGE = "Nice! I've marked this task as done: ";
-    private static final String ADD_TASK = "Got it. I've added this task:\n" + INDENTATION + INDENTATION;
-    private static final String DELETE_TASK = "Noted. I've removed this task: ";
-    private static final String EMPTY_LIST = "You haven't added anything to your list!";
 
+    /**
+     * Greets the user.
+     */
     public static void greet() {
-        System.out.println(WELCOME_MESSAGE);
+        System.out.println(Messages.WELCOME_MESSAGE);
     }
 
+    /**
+     * Farewell message to the user.
+     */
     public static void bye() {
-        System.out.println(INDENTATION + BYE_MESSAGE);
+        System.out.println(Messages.INDENTATION + Messages.BYE_MESSAGE);
     }
 
+    /**
+     * Informs the user that they have inputted an empty task.
+     * @param s Type of task input.
+     * @return The error message to the user.
+     */
     public static String emptyDescription(String s) {
         String error = "OOPS!!!";
         switch(s) {
             case "todo":
-                error = INDENTATION + "OOPS!!! The description of a todo cannot be empty.";
+                error = Messages.INDENTATION + "OOPS!!! The description of a todo cannot be empty.";
                 break;
             case "deadline":
-                error = INDENTATION + "OOPS!!! The description of a deadline cannot be empty.";
+                error = Messages.INDENTATION + "OOPS!!! The description of a deadline cannot be empty.";
                 break;
             case "event":
-                error = INDENTATION + "OOPS!!! The description of an event cannot be empty.";
+                error = Messages.INDENTATION + "OOPS!!! The description of an event cannot be empty.";
                 break;
         }
         return error;
     }
 
+    /**
+     * Informs the user that they have entered an unidentifiable command.
+     *
+     * @return Error message to the user.
+     */
     public static String inputUnknown() {
-       return INDENTATION + UNKNOWN_INPUT_MESSAGE;
+       return Messages.INDENTATION + Messages.UNKNOWN_INPUT_MESSAGE;
     }
 
+    /**
+     * Informs the user that they have not entered a valid date.
+     *
+     * @return Error message to the user.
+     */
     public static String dateMissing() {
-        return INDENTATION + MISSING_DATE;
+        return Messages.INDENTATION + Messages.MISSING_DATE;
     }
 
+    /**
+     * Informs the user that list has been printed.
+     */
     public static void printList() {
-        System.out.println(INDENTATION + PRINT_LIST_MESSAGE);
+        System.out.println(Messages.INDENTATION + Messages.PRINT_LIST_MESSAGE);
     }
 
+    /**
+     * Informs the user the number of tasks on their list.
+     * @param i Number of tasks.
+     */
     public static void printNoOfTasks(int i) {
-        System.out.printf(INDENTATION + NUMBER_OF_TASKS_MESSAGE, i);
+        System.out.printf(Messages.INDENTATION + Messages.NUMBER_OF_TASKS_MESSAGE, i);
     }
 
+    /**
+     * Informs the user that the task has been marked as done.
+     */
     public static void markAsDone() {
-        System.out.println(INDENTATION + MARK_TASK_AS_DONE_MESSAGE);
+        System.out.println(Messages.INDENTATION + Messages.MARK_TASK_AS_DONE_MESSAGE);
     }
 
+    /**
+     * Informs the user that the task has been added.
+     */
     public static void addTask() {
-        System.out.println(INDENTATION + ADD_TASK);
+        System.out.println(Messages.INDENTATION + Messages.ADD_TASK);
     }
 
+    /**
+     * Informs the user that the task has been deleted.
+     */
     public static void deleteTask() {
-        System.out.println(INDENTATION + DELETE_TASK);
+        System.out.println(Messages.INDENTATION + Messages.DELETE_TASK);
     }
 
+    /**
+     * Prints an empty list message.
+     */
     public static void printEmptyList() {
-        System.out.println(INDENTATION + EMPTY_LIST);
+        System.out.println(Messages.INDENTATION + Messages.EMPTY_LIST);
     }
 
+    /**
+     * Prints an indentation.
+     *
+     * @return an Indentation.
+     */
     public static String indentation() {
-        return INDENTATION;
+        return Messages.INDENTATION;
     }
 }

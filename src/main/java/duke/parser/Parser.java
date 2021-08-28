@@ -10,11 +10,19 @@ import duke.command.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that makes sense of the user commands to Duke.
+ *
+ * @author Won Ye Ji
+ */
 public class Parser {
     static boolean isTerminated = false;
     private TaskHandler taskHandler;
     private Storage storage;
 
+    /**
+     * Initialise variables to run Duke.
+     */
     public void initialiseDuke() {
         try {
             storage = new Storage("./data/taskList.txt");
@@ -26,6 +34,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Runs Duke.
+     */
     public void runDuke() {
         Ui.greet();
         Scanner sc = new Scanner(System.in);

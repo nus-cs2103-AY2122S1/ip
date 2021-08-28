@@ -10,10 +10,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that deals with loading tasks from the file and saving tasks in the file.
+ *
+ * @author Won Ye Ji
+ */
 public class Storage {
     private final String filePath;
     private final File file;
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param filePath The filepath of the stored file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
@@ -25,6 +35,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the tasks from the file.
+     *
+     * @return An arraylist of the tasks.
+     * @throws DukeException if the tasks cannot be loaded.
+     */
     public ArrayList<Task> loadTasks() throws DukeException {
         try {
             Scanner sc = new Scanner(file);
@@ -40,6 +56,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates the file according to the tasklist.
+     *
+     * @param tasks String representatio of all tasks.
+     * @throws DukeException if unexpected error is encountered.
+     */
     public void updateFile(String tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -50,6 +72,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns a task that corresponds with the string description of the task.
+     *
+     * @param task String representation of the task to be returned.
+     * @return A task that corresponds with the string description of the task.
+     * @throws DukeException if task cannot be identified.
+     */
     public Task taskFormatter(String task) throws DukeException {
         String type = task.substring(1, 2);
         String doneStatus = task.substring(4, 5);
