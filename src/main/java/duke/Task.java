@@ -33,11 +33,10 @@ public class Task {
         this.isDone = true;
     }
 
-    
     public boolean filterByKeyword(String keyword) {
         return this.description.contains(keyword);
     }
-    
+
     /**
      * Returns a String representation of the Task.
      *

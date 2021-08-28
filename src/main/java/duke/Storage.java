@@ -2,8 +2,8 @@ package duke;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -17,8 +17,8 @@ public class Storage {
      *
      * @param filePath where the storage file is at.
      */
-    public Storage (String filePath){
-        File temp =  new File(filePath);
+    public Storage (String filePath) {
+        File temp = new File(filePath);
         try {
             temp.getParentFile().mkdir();
             temp.createNewFile();
@@ -43,7 +43,7 @@ public class Storage {
                 Task temp = parseTask(currentLine);
                 history.add(temp);
             }
-        } catch (Exception e ) {
+        } catch (Exception e) {
             System.out.println("File is not found");
         }
         return history;
@@ -64,13 +64,13 @@ public class Storage {
             }
             return toReturn;
         } else if (temp[0].equalsIgnoreCase("E")) {
-            Event toReturn = new Event(temp[2],temp[3]);
+            Event toReturn = new Event(temp[2], temp[3]);
             if (temp[1].equalsIgnoreCase("1")) {
                 toReturn.markAsDone();
             }
             return toReturn;
         } else {
-            Deadline toReturn = new Deadline(temp[2],temp[3]);
+            Deadline toReturn = new Deadline(temp[2], temp[3]);
             if (temp[1].equalsIgnoreCase("1")) {
                 toReturn.markAsDone();
             }
@@ -86,7 +86,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(), false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.close();
-        } catch (Exception e ) {
+        } catch (Exception e) {
             System.out.println("Can't clear file.");
         }
     }
@@ -98,7 +98,7 @@ public class Storage {
      */
     public void writeToFile (String text) {
         try {
-            FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(),true);
+            FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(), true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(text);
             bufferedWriter.newLine();

@@ -4,7 +4,7 @@ package duke;
  * Class to represent parsing the commands
  */
 public class Parser {
-    private enum Commands {list, done, todo, event, deadline, delete, find }
+    private enum Commands { list, done, todo, event, deadline, delete, find }
 
 
     /**
@@ -14,13 +14,16 @@ public class Parser {
      * @throws NoDescriptionError If user inputs nothing after a task command.
      * @throws UnknownCommandError If user inputs a command that is outside the scope of the chatbot
      */
-    public static void parse(String instruction, Ui ui, TaskList tasks) throws NoDescriptionError, UnknownCommandError{
+    public static void parse(String instruction, Ui ui, TaskList tasks) throws NoDescriptionError, UnknownCommandError {
         ui.printLineBreak();
         String[] splitInstructions = instruction.split(" ", 2);
         String operative = splitInstructions[0];
         Commands command;
         String[] temp;
-        String item, date, description, keyword;
+        String item;
+        String date;
+        String description;
+        String keyword;
         Task toAdd;
         int taskPointer;
         try {
@@ -29,7 +32,7 @@ public class Parser {
             throw new UnknownCommandError();
         }
 
-        if(splitInstructions.length == 1 && !operative.equalsIgnoreCase("list")) {
+        if (splitInstructions.length == 1 && !operative.equalsIgnoreCase("list")) {
             throw new NoDescriptionError(operative);
         }
         switch (command) {
@@ -66,7 +69,7 @@ public class Parser {
             item = splitInstructions[1];
             taskPointer = Integer.parseInt(item) - 1;
             Task deleted = tasks.delete(taskPointer);
-            ui. deleteTaskMessage(deleted, tasks.getSize());
+            ui.deleteTaskMessage(deleted, tasks.getSize());
             break;
         case deadline:
             item = splitInstructions[1];
@@ -76,6 +79,8 @@ public class Parser {
             toAdd = new Deadline(description, date);
             tasks.addTask(toAdd);
             ui.addedTaskMessage(toAdd, tasks.getSize());
+            break;
+        default:
             break;
         }
     }

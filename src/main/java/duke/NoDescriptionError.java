@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents the error when there is missing information after a command.
  */
-public class NoDescriptionError extends DukeException{
+public class NoDescriptionError extends DukeException {
     private String command;
 
     /**

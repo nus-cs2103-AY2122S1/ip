@@ -5,7 +5,7 @@ package duke;
  */
 public class Duke {
     private boolean isRunning = true;
-    private enum Commands {list, done, todo, event, deadline, delete, find }
+    private enum Commands { list, done, todo, event, deadline, delete, find }
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -31,13 +31,13 @@ public class Duke {
      */
     public void run() {
         ui.greet();
-        while(isRunning) {
+        while (isRunning) {
             String instruction = ui.getInstruction();
-            if(checkBye(instruction)) {
+            if (checkBye(instruction)) {
                 break;
             }
             try {
-                Parser.parse(instruction,this.ui, this.tasks);
+                Parser.parse(instruction, this.ui, this.tasks);
             } catch (DukeException e) {
                 ui.printErrorMessage(e);
             }
@@ -51,19 +51,17 @@ public class Duke {
      * @param instruction instruction given by the user
      * @return a boolean on whether the program should terminate
      */
-    private boolean checkBye(String instruction){
-        if(instruction.equalsIgnoreCase("bye")) {
+    private boolean checkBye(String instruction) {
+        if (instruction.equalsIgnoreCase("bye")) {
             isRunning = false;
             storage.fileClear();
-            for(int i = 0; i < tasks.getSize(); i++) {
+            for (int i = 0; i < tasks.getSize(); i++) {
                 storage.writeToFile(tasks.get(i).toHistory());
             }
             return true;
         }
         return false;
     }
-
-
 
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();

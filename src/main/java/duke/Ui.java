@@ -1,5 +1,4 @@
 package duke;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -9,11 +8,11 @@ import java.util.Scanner;
 public class Ui {
     private static final Scanner USER_INPUT = new Scanner(System.in);
     private static final String LINE_BREAKER = "____________________________________________________________";
-    private static final  String GREETING = "Hello! I'm Duke\n" + "What can I do for you?";
+    private static final String GREETING = "Hello! I'm Duke\n" + "What can I do for you?";
     private static final String FAREWELL = "Bye. Hope to see you again soon!";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
-    private static  final String ADD_TASK_MESSAGE = "Got it. I've added this task:";
+    private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:";
     private static final String DELETE_TASK_MESSAGE = "Noted. I've removed this task:";
     private static final String FIND_TAKS_MESSAGE = "Here are the matching tasks in your list:";
 
@@ -36,7 +35,7 @@ public class Ui {
     /**
      * Prints a line for separation.
      */
-    public  void printLineBreak () {
+    public void printLineBreak () {
         System.out.println(LINE_BREAKER);
     }
 
@@ -47,8 +46,8 @@ public class Ui {
      */
     public void printArrayList (TaskList taskList) {
         System.out.println(LIST_MESSAGE);
-        for(int i = 0; i < taskList.getSize(); i++) {
-            System.out.println(String.valueOf(i+1) + "." + taskList.get(i).toString());
+        for (int i = 0; i < taskList.getSize(); i++) {
+            System.out.println(String.valueOf(i + 1) + "." + taskList.get(i).toString());
         }
         printLineBreak();
     }
@@ -56,7 +55,7 @@ public class Ui {
     /**
      * Prints a greeting for the user on startup.
      */
-    public void greet(){
+    public void greet() {
         System.out.println(GREETING);
         printLineBreak();
     }
@@ -81,17 +80,22 @@ public class Ui {
         printLineBreak();
     }
 
-    
+    /**
+     * Prints a notification to inform users
+     * on which task is found based on their keyword
+     *
+     * @param tasks
+     */
     public void findTaskMessage (TaskList tasks) {
         System.out.println(FIND_TAKS_MESSAGE);
-        for(int i = 0; i < tasks.getSize(); i++) {
-            System.out.println(String.valueOf(i+1) + "." + tasks.get(i).toString());
+        for (int i = 0; i < tasks.getSize(); i++) {
+            System.out.println(String.valueOf(i + 1) + "." + tasks.get(i).toString());
         }
         printLineBreak();
     }
 
     /**
-     * Prints a notifcation which informs the user
+     * Prints a notification which informs the user
      * on which task is deleted based on their command.
      *
      * @param task task that is deleted.
