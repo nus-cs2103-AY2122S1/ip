@@ -192,7 +192,11 @@ public class TaskList {
         ArrayList<Task> newTaskList = new ArrayList<>();
         for (String line: stringArray) {
             if (line.length() != 0) {
-                newTaskList.add(Task.getTaskFromStringRepresentation(line));
+                try {
+                    newTaskList.add(Task.getTaskFromStringRepresentation(line));
+                } catch (TigerStorageLoadException e) {
+                    continue;
+                }
             }
         }
         return new TaskList(newTaskList);

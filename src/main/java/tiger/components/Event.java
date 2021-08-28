@@ -86,6 +86,10 @@ public class Event extends Task {
             assert (!stringArray[3].equals(""));
             assert (stringArray[4].equals("L") || stringArray[4].equals("M") || stringArray[4].equals("H"));
             Priority p = Priority.getPriorityFromLetter(stringArray[4]);
+            if (p.equals(Priority.INVALID)) {
+                // this is not needed if we compile with assertions
+                throw new TigerStorageLoadException("");
+            }
             if (stringArray[1].equals("true")) {
                 // task description, done, timing
                 return new Event(stringArray[2], true, dateStringConverter.getDateFromString(stringArray[3]), p);

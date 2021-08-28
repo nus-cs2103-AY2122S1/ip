@@ -44,6 +44,7 @@ public class MainWindow extends AnchorPane {
 
     private void respondToUser() {
         String input = userInput.getText();
+        System.out.println(input);
         String response = this.tiger.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

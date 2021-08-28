@@ -73,6 +73,10 @@ public class ToDo extends Task {
             assert (!stringArray[2].equals(""));
             assert (stringArray[3].equals("L") || stringArray[3].equals("M") || stringArray[3].equals("H"));
             Priority p = Priority.getPriorityFromLetter(stringArray[3]);
+            if (p.equals(Priority.INVALID)) {
+                // this is not needed if we compile with assertions
+                throw new TigerStorageLoadException("");
+            }
             if (stringArray[1].equals("true")) {
                 return new ToDo(stringArray[2], true, p); // task description, done, priority
             } else {

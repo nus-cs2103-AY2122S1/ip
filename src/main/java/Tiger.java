@@ -20,6 +20,7 @@ public class Tiger {
     }
 
     public String getResponse(String input) {
+        System.out.println(input);
         ui.iterateOnce(input);
         return ui.getResponse();
     }
