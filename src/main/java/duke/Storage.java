@@ -4,11 +4,18 @@ import duke.tasks.TaskList;
 
 import java.io.*;
 
+/**
+ * Represents the file containing the list of tasks.
+ */
 public class Storage {
     private static final String text = "./data/duke.txt";
     private static BufferedWriter writer;
 
-    //takes in a task and adds it to the list while writing it to a file
+    /**
+     * Takes in a task and adds it to the tasklist, while writing it to the file
+     * @param task Task ot be added.
+     * @throws IOException if an error while reading has occurred.
+     */
     static void writeToFile(String task) throws IOException {
         try {
             Parser.parseTask(task);
@@ -26,6 +33,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the task list from the duke.txt file and returns void.
+     * @throws IOException if an error while reading has occurred.
+     */
     static void readFromFile() throws IOException {
         try {
             //create a BufferedReader which loads the data when duke.Duke starts up
@@ -66,12 +77,14 @@ public class Storage {
                 reader.close();
             }
         } catch (IOException e) {
-            File dir = new File(text);
             FileWriter fWriter = new FileWriter(text, true);
             writer = new BufferedWriter(fWriter);
         }
     }
 
+    /**
+     * Rewrites the duke.txt file with the new list of tasks.
+     */
     public static void overwrite() throws IOException {
         FileWriter fWriter = new FileWriter(text, false);
         writer = new BufferedWriter(fWriter);

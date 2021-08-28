@@ -5,6 +5,9 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a list of tasks.
+ */
 public final class TaskList {
     private static List<String> taskString = new ArrayList<>();
     private static List<Tasks> taskList = new ArrayList<>();
@@ -77,7 +80,7 @@ public final class TaskList {
 
     /**
      * Deletes an item from the taskList and taskString.
-     * @param i Number of task to be deleted
+     * @param i Index of task to be deleted
      */
     public static void deleteTask(int i) {
         Tasks deletedTasks = taskList.get(i - 1);
@@ -86,6 +89,10 @@ public final class TaskList {
         System.out.println("Noted. I've removed this task: \n" + deletedTasks + "\nNow you have " + taskString.size() + " tasks in the list.");
     }
 
+    /**
+     * Rewrites the duke.txt file with the new list of tasks.
+     * @return a String representation of the task list
+     */
     public static String overwrite() {
         String str = "";
         for (Tasks task : taskList) {
@@ -95,6 +102,10 @@ public final class TaskList {
         return str;
     }
 
+    /**
+     * Gets the most recent task.
+     * @return most recent Task
+     */
     public static Tasks getLast() {
         return taskList.get(taskList.size() - 1);
     }
