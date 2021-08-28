@@ -1,7 +1,6 @@
 package duke.io;
 
 import java.time.LocalDateTime;
-import java.util.Scanner;
 
 import duke.Command;
 import duke.DukeException;
@@ -10,170 +9,163 @@ import duke.task.Task;
 
 public class Ui {
 
-
-    private Scanner sc;
-
     /**
      * Returns a new Ui object.
      */
     public Ui() {
-        sc = new Scanner(System.in);
     }
 
     private static String format(String... inputs) {
         StringBuilder str = new StringBuilder();
-        String line = "    ____________________________________________________________\n";
-        String space = "     ";
-        str.append(line);
         for (String s : inputs) {
-            str.append(space).append(s).append("\n");
+            str.append(s).append("\n");
         }
-        str.append(line);
         return str.toString();
     }
 
     /**
-     * Prints an error statement to screen if a user fails to input an int when required.
-     */
-    public void showIntError() {
-        System.err.println(format("☹ OOPS!!! The index of a task must be specified."));
-    }
-
-    /**
-     * Prints a statement to screen if the saved file cannot be loaded.
-     */
-    public void showLoadingError() {
-        System.out.println(format("Task description cannot be found in database", "A new file will be created"));
-    }
-
-    /**
-     * Prints an error statement to screen if the data file cannot be saved.
-     */
-    public void showSavingError() {
-        System.err.println(format("File cannot be saved"));
-    }
-
-    /**
-     * Prints the content of a DukeException as an error message.
+     * Returns a formatted String that signifies Duke is launched.
      *
-     * @param e DukeException to be printed.
+     * @return String that shows a welcome message.
      */
-    public void showDukeException(DukeException e) {
-        System.err.println(format(e.toString()));
+    public static String showWelcome() {
+        return format("Hello! I'm Duke", "What can I do for you?");
     }
 
     /**
-     * Prints a welcome statement when Duke is launched.
-     */
-    public void showWelcome() {
-        System.out.println(format("Hello! I'm Duke", "What can I do for you?"));
-    }
-
-    /**
-     * Prints an error statement to screen if the user inputs the date and time in a wrong format.
-     */
-    public void showDateTimeException() {
-        System.err.println(format("Date'T'time inputted is not of valid format: YYYY-MM-DDThh:mm"));
-    }
-
-    /**
-     * Returns a line of user input.
+     * Returns a formatted String that signifies that a user fails to input an int when required.
      *
-     * @return String User input formatted as a String.
+     * @return String that shows a integer error.
      */
-    public String readCommand() {
-        return sc.nextLine();
+    public String showIntError() {
+        return format("OOPS!!! The index of a task must be specified.");
     }
 
     /**
-     * Prints a statement showing the outcome of a the command the user inputted.
+     * Returns a formatted String that signifies that the saved file cannot be loaded.
+     *
+     * @return String that shows a loading error.
+     */
+    public String showLoadingError() {
+        return format("Task description cannot be found in database", "A new file will be created");
+    }
+
+    /**
+     * Returns a formatted String that signifies that the data file cannot be saved.
+     *
+     * @return String that shows saving error.
+     */
+    public String showSavingError() {
+        return format("File cannot be saved");
+    }
+
+    /**
+     * Returns a formatted String containing the DukeException error message.
+     *
+     * @param e DukeException to whose error message will be returned.
+     * @return String that shows the DukeExeception error message.
+     */
+    public String showDukeException(DukeException e) {
+        return format(e.toString());
+    }
+
+    /**
+     * Returns a formatted String that signifies that the user inputs the date and time in a wrong format.
+     *
+     * @return String that shows a date time format error.
+     */
+    public String showDateTimeException() {
+        return format("Date'T'time inputted is not of valid format: YYYY-MM-DDThh:mm");
+    }
+
+    /**
+     * Returns a formatted String that shows the outcome of a the command the user inputted.
      * Used for commands involving a single word or for addition of tasks.
      *
      * @param c Type of command the user has inputted.
      * @param list Current TaskList used.
+     * @return String that shows the outcome of a the command the user inputted.
      */
-    public void displayCommand(Command.Commands c, TaskList list) {
+    public String displayCommand(Command.Commands c, TaskList list) {
         switch (c) {
-        case BYE:
-            System.out.println(format("Bye. Hope to see you again soon!"));
-            break;
         case HELP:
-            System.out.println(format("  bye : Closes Duke", "  list : Returns all tasks added",
-                    "  todo <description> : Adds a todo task",
-                    "  find <description> : Returns all tasks with <description> in their description",
-                    "  event <description> /at <time: YYYY-MM-DDThh:mm> : Adds an event at time <time>",
-                    "  deadline <description> /by <time: YYYY-MM-DDThh:mm> : Adds a task with deadline at time <time>",
-                    "  done <index> : Marks the task at <index> as done",
-                    "  delete <index> : deletes the task at <index>",
-                    "  at <time: YYYY-MM-DDThh:mm> : Returns all events up till <time>",
-                    "  by <time: YYYY-MM-DDThh:mm> : Returns all tasks with deadline due before or at <time>",
-                    "  all <time: YYYY-MM-DDThh:mm> : Returns all timed tasks with times up till <time>"));
-            break;
+            return format("list : Returns all tasks added\n",
+                    "todo <description> : Adds a todo task\n",
+                    "find <description> : Returns all tasks with <description> in their description\n",
+                    "event <description> /at <time: YYYY-MM-DDThh:mm> : Adds an event at time <time>\n",
+                    "deadline <description> /by <time: YYYY-MM-DDThh:mm> : Adds a task with deadline at time <time>\n",
+                    "done <index> : Marks the task at <index> as done\n",
+                    "delete <index> : deletes the task at <index>\n",
+                    "at <time: YYYY-MM-DDThh:mm> : Returns all events up till <time>\n",
+                    "by <time: YYYY-MM-DDThh:mm> : Returns all tasks with deadline due before or at <time>\n",
+                    "all <time: YYYY-MM-DDThh:mm> : Returns all timed tasks with times up till <time>");
         case LIST:
-            System.out.println(format(list.returnItems()));
-            break;
+            return format(list.returnItems());
         case TODO:
             //Fallthrough
         case EVENT:
             //Fallthrough
         case DEADLINE:
-            System.out.println(format("Got it. I've added this task:",
-                    "  " + list.returnLastTask(), list.returnItemCount(0)));
-            break;
+            return format("Got it. I've added this task:",
+                    "  " + list.returnLastTask(), list.returnItemCount(0));
         default:
-            break;
+            return "Oops an error has occurred";
         }
     }
 
     /**
-     * Prints a statement showing the outcome of a the command the user inputted.
+     * Returns a formatted String that that shows the outcome of a the command the user inputted.
      * Used for commands involving involving retrieval of tasks based on date and time.
      *
      * @param c Type of command the user has inputted.
      * @param list Current TaskList used.
      * @param dt Date and Time used by the command.
+     * @return String that shows the outcome of a the command the user inputted.
      */
-    public void displayCommand(Command.Commands c, TaskList list, LocalDateTime dt) {
+    public String displayCommand(Command.Commands c, TaskList list, LocalDateTime dt) {
         switch (c) {
         case AT:
-            System.out.println(format(list.getEventsAt(dt)));
-            break;
+            return format(list.getEventsAt(dt));
         case BY:
-            System.out.println(format(list.getDeadlinesBy(dt)));
-            break;
+            return format(list.getDeadlinesBy(dt));
         case ALL:
-            System.out.println(format(list.getAllBy(dt)));
-            break;
+            return format(list.getAllBy(dt));
         default:
-            break;
+            return "Oops an error has occurred";
         }
     }
 
     /**
-     * Prints a statement showing the outcome of a the command the user inputted.
+     * Returns a formatted String that shows the outcome of a the command the user inputted.
      * Used for commands involving modification of tasks.
      *
-     * @param c Type of command the user has inputted
+     * @param c Type of command the user has inputted.
      * @param index Index of task modified by the command.
      * @param t Task modified by the command.
      * @param list Current TaskList used.
+     * @return String that shows the outcome of a the command the user inputted.
      */
-    public void displayCommand(Command.Commands c, int index, Task t, TaskList list) {
+    public String displayCommand(Command.Commands c, int index, Task t, TaskList list) {
         switch (c) {
         case DONE:
-            System.out.println(format("Nice! I've marked this task as done:",
-                    "  " + t));
-            break;
+            return format("Nice! I've marked this task as done:", t.toString());
         case DELETE:
-            System.out.println(format("Noted. I've removed this task:",
-                    "  " + t, list.returnItemCount(1)));
-            break;
+            return format("Noted. I've removed this task:", t.toString(), list.returnItemCount(0));
         default:
-            break;
+            return "Oops an error has occurred";
         }
     }
 
-    public void displayCommand(Command.Commands c, String toFind, TaskList list) {
-        System.out.print(format(list.returnFoundItem(toFind)));
+    /**
+     * Returns a formatted String that shows the outcome of a the command the user inputted.
+     * Used for commands involving searching of tasks.
+     *
+     * @param c Type of command the user has inputted.
+     * @param toFind The String to search for among the tasks.
+     * @param list Current TaskList used.
+     * @return String that shows the outcome of a the command the user inputted.
+     */
+    public String displayCommand(Command.Commands c, String toFind, TaskList list) {
+        return format(list.returnFoundItem(toFind));
     }
 }

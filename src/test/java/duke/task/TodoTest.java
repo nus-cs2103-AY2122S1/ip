@@ -13,7 +13,7 @@ public class TodoTest {
             assertEquals(0, new Todo(""));
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! The description of a task cannot be empty.", e.toString());
+            assertEquals("The description of a task cannot be empty", e.toString());
         }
     }
 
