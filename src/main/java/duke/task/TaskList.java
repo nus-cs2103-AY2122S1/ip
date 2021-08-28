@@ -5,12 +5,18 @@ import duke.util.Storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.function.Function;
+import java.util.stream.IntStream;
 
-// immutable principles?
 public final class TaskList {
     private final ArrayList<Task> TASKS;
     private final Storage STORAGE_FILE;
+    public static final String DONE_COMMAND_REGEX = "done [0-9]{1,2}";
+    public static final String DELETE_COMMAND_REGEX = "delete [0-9]{1,2}";
+    public static final String FIND_COMMAND_REGEX = "find \\w+";
 
     //parse in Files containing Strings (line) of duke.task representation
     public static TaskList of(Storage storageFile) {
@@ -37,7 +43,6 @@ public final class TaskList {
 
     public void addTask(Task task) {
         this.TASKS.add(task);
-        //TEST
         this.updateStore();
     }
 
@@ -59,7 +64,6 @@ public final class TaskList {
         if (isValidIndex(idx, TASKS.size())) {
             TASKS.remove(idx);
         }
-        //TEST
         this.updateStore();
     }
 
@@ -74,17 +78,46 @@ public final class TaskList {
         return true;
     }
 
+    /**
+     * Filters the TaskList and returns all indexes of task which fulfil condition.
+     * Frequent use with selectedTasks() to print tasks.
+     *
+     * @param predicate Function condition which must be fulfilled by task for its index to be returned
+     * @return Array of integers (idx from 0) of tasks which fulfil predicate
+     */
+    public Integer[] filter(Function<Task, Boolean> predicate) {
+        List<Integer> result = new ArrayList<>();
+        int numOfTasks = this.TASKS.size();
+        for (int i = 0; i < numOfTasks; i++) {
+            Task currTask = this.TASKS.get(i);
+            if (predicate.apply(currTask)) {
+                result.add(i);
+            }
+        }
+        Integer[] res = result.toArray(new Integer[0]);
+        return res;
+    }
+
+    public String selectedTasks(Integer[] indexesFrom0) {
+        StringBuilder result = new StringBuilder();
+        int numOfTasks = this.TASKS.size();
+        for (int i = 0; i < numOfTasks; i++) {
+            List<Integer> listOfIndexesFrom1 = Arrays.asList(indexesFrom0);
+            if (listOfIndexesFrom1.contains(i)) {
+                result.append(String.format("%d: %s\n", i + 1, this.TASKS.get(i).toString()));
+            }
+        }
+        return result.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
         int numOfTasks = this.TASKS.size();
         for (int i = 0; i < numOfTasks; i++) {
-            result.append(String.format("%d: %s\n", i + 1, this.TASKS.get(i).toString()));
+            int idxFrom1 = i + 1;
+            result.append(String.format("%d: %s\n", idxFrom1, this.TASKS.get(i).toString()));
         }
-//        //add final duke.task without \n
-//        result += String.format("%d: %s", numOfTasks, this.tasks[numOfTasks - 1].toString());
         return result.toString();
     }
-
-
 }

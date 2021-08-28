@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.util.Arrays;
+import java.util.List;
+
 //make abstract class?
 public class Task {
     private boolean isDone;
@@ -52,6 +55,13 @@ public class Task {
 
     public String getTaskSummary() {
         return this.taskSummary;
+    }
+
+    //helper function
+    public boolean isInTaskSummary(String keyword) {
+        String[] keywords = this.taskSummary.split(" ");
+        List<String> keywordList = Arrays.asList(keywords);
+        return keywordList.contains(keyword);
     }
 
     //only for purpose of polymorphism, change to abstract?
