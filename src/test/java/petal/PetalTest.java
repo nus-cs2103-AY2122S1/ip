@@ -1,12 +1,14 @@
 package petal;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class PetalTest {
 
-    public Petal petal;
+    private Petal petal;
+
+    public PetalTest(Petal petal) {
+        this.petal = petal;
+    }
 
     @Test
     public void byeBoolean_noInput_false() {

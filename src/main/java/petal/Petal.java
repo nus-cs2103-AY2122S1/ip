@@ -53,6 +53,10 @@ public class Petal {
         }
     }
 
+    /**
+     * This is the main method for the Petal bot
+     * @param args
+     */
     public static void main(String[] args) {
         Petal petal = new Petal();
         petal.run();

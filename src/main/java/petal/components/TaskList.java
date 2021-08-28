@@ -1,16 +1,16 @@
 package petal.components;
 
-import petal.exception.InvalidInputException;
-import petal.exception.EmptyDescException;
-import petal.task.Task;
-import petal.task.ToDo;
-import petal.task.Deadline;
-import petal.task.Event;
-import petal.task.Timeable;
-
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import petal.exception.EmptyDescException;
+import petal.exception.InvalidInputException;
+import petal.task.Deadline;
+import petal.task.Event;
+import petal.task.Task;
+import petal.task.Timeable;
+import petal.task.ToDo;
 
 /**
  * The TaskList class represents the tasks, and handles the operations
@@ -66,9 +66,10 @@ public class TaskList {
         try {
             int indexOfTask = Integer.parseInt(index) - 1;
             Task toBeDeleted = tasks.remove(indexOfTask);
-            if (toBeDeleted.isTimeable())
+            if (toBeDeleted.isTimeable()) {
                 calendar.updateCalendar(tasks);
-            ui.output("Okay. I've deleted this task:\n" + toBeDeleted  + "\nYou now have " + tasks.size()
+            }
+            ui.output("Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have " + tasks.size()
                     + " task(s)!");
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException(Responses.INVALID_TASK_NUMBER, e);
@@ -113,8 +114,9 @@ public class TaskList {
             }
         }
         addTask(task);
-        if (task.isTimeable())
+        if (task.isTimeable()) {
             calendar.addToCalendar((Timeable) task);
+        }
     }
 
     /**
@@ -139,8 +141,9 @@ public class TaskList {
      * @return String containing the number, type, and description of tasks
      */
     public String printList() {
-        if (tasks.size() == 0)
+        if (tasks.size() == 0) {
             return "No items in list yet!";
+        }
         int count = 1;
         StringBuilder list = new StringBuilder();
         for (Task m : tasks) {

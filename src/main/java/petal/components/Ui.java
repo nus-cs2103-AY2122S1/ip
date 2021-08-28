@@ -1,8 +1,8 @@
 package petal.components;
 
-import petal.Petal;
-
 import java.util.Scanner;
+
+import petal.Petal;
 
 /**
  * The Ui is responsible for handling the output, and interactions

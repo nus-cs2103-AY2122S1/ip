@@ -1,10 +1,10 @@
 package petal.command;
 
+import java.io.IOException;
+
 import petal.components.Storage;
 import petal.components.TaskList;
 import petal.components.Ui;
-
-import java.io.IOException;
 
 /**
  * The ByeCommand class implements Command

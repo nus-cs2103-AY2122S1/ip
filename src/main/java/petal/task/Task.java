@@ -1,7 +1,8 @@
 package petal.task;
 
-import petal.components.Responses;
 import java.time.LocalDate;
+
+import petal.components.Responses;
 
 /**
  * The Task class that encapsulates a directive given
@@ -13,20 +14,6 @@ public abstract class Task {
     //Properties of a Task
     private final String description;
     private boolean isDone;
-
-    /**
-     * Formats string representation which is optimized for saving
-     *
-     * @return Formatted string representation
-     */
-    public abstract String formatStrForSaving();
-
-    /**
-     * Returns whether the Task is a Timeable
-     *
-     * @return boolean True if Timeable, false if not Timeable
-     */
-    public abstract boolean isTimeable();
 
     /**
      * Constructor for the Task class
@@ -50,6 +37,20 @@ public abstract class Task {
         this.description = capsFirstLetter(description);
         this.isDone = isDone;
     }
+
+    /**
+     * Formats string representation which is optimized for saving
+     *
+     * @return Formatted string representation
+     */
+    public abstract String formatStrForSaving();
+
+    /**
+     * Returns whether the Task is a Timeable
+     *
+     * @return boolean True if Timeable, false if not Timeable
+     */
+    public abstract boolean isTimeable();
 
     /**
      * Returns whether a task is done in string representation

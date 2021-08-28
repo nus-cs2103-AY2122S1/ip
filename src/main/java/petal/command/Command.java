@@ -9,13 +9,13 @@ import petal.components.Ui;
  */
 public interface Command {
 
-   /**
-    * Executes the given command
-    *
-    * @param taskList TaskList instance
-    * @param ui Ui instance
-    * @param storage Storage instance
-    */
-   void execute(TaskList taskList, Ui ui, Storage storage);
+    /**
+     * Executes the given command
+     *
+     * @param taskList TaskList instance
+     * @param ui Ui instance
+     * @param storage Storage instance
+     */
+    void execute(TaskList taskList, Ui ui, Storage storage);
 
 }

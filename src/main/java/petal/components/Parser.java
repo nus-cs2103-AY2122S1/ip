@@ -1,18 +1,18 @@
 package petal.components;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+
 import petal.command.ByeCommand;
-import petal.command.FindCommand;
 import petal.command.Command;
 import petal.command.DateCommand;
 import petal.command.DeleteCommand;
 import petal.command.DoneCommand;
+import petal.command.FindCommand;
 import petal.command.ListCommand;
 import petal.command.TaskCommand;
 import petal.command.UnintelligibleCommand;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * The Parser deals with comprehending the user's input
@@ -61,9 +61,9 @@ public class Parser {
      * @return LocalTime object
      * @throws DateTimeParseException Thrown if string cannot be represented as a time object
      */
-     public static LocalTime parseTime(String time) throws DateTimeParseException {
+    public static LocalTime parseTime(String time) throws DateTimeParseException {
         String formattedTime = time.indexOf(":") > 0 ? time
-                : time.substring(0, 2) + ":" + time.substring(2);
+               : time.substring(0, 2) + ":" + time.substring(2);
         return LocalTime.parse(formattedTime);
     }
 

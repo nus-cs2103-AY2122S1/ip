@@ -1,10 +1,5 @@
 package petal.components;
 
-import petal.task.Deadline;
-import petal.task.Event;
-import petal.task.Task;
-import petal.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,6 +11,11 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
+
+import petal.task.Deadline;
+import petal.task.Event;
+import petal.task.Task;
+import petal.task.ToDo;
 
 /**
  * The Storage that handles all the operation dealing with the creation of directories,
@@ -52,8 +52,9 @@ public class Storage {
      */
     public void createDirectory() {
         try {
-            if (retrieveTasks())
+            if (retrieveTasks()) {
                 return;
+            }
             Path path = Paths.get(folderPath);
             Files.createDirectories(path);
             File petalData = new File(filePath);
@@ -88,6 +89,8 @@ public class Storage {
                     break;
                 case "E":
                     toBeAdded.add(new Event(components[2], components[3], isDone));
+                    break;
+                default:
                     break;
                 }
             }

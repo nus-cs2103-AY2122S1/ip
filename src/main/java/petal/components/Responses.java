@@ -11,8 +11,9 @@ public enum Responses {
     LINE("===================================================================="
                 + "==========================================================="
                 + "============================================================"),
-    START_MESSAGE("Welcome to Petal (•◡•)/" + "\nI am the best chat bot you'll meet! Don't be shy, say something! :P"
-                + "\nPssss here's a disclaimer: use the 'bye' command to exit or else your tasks won't save properly!"),
+    START_MESSAGE("Welcome to Petal (•◡•)/" + "\nI am the best chat bot you'll meet! Don't be shy, "
+                + "say something! :P\nPssss here's a disclaimer: "
+                + "   use the 'bye' command to exit or else your tasks won't save properly!"),
     //Error responses
     INVALID_FORMAT("Invalid format given! Please try again :("),
     INVALID_TASK_NO("Invalid task number given! Please enter another value!"),

@@ -1,8 +1,8 @@
 package stubs;
 
-import petal.task.Task;
-
 import java.time.LocalDate;
+
+import petal.task.Task;
 
 public class TaskStub extends Task {
 

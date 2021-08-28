@@ -1,14 +1,14 @@
 package petal.components;
 
-import petal.exception.InvalidInputException;
-import petal.task.Task;
-import petal.task.Timeable;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+
+import petal.exception.InvalidInputException;
+import petal.task.Task;
+import petal.task.Timeable;
 
 /**
  * The Calendar class encapsulates a calender, where tasks

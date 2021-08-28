@@ -1,15 +1,19 @@
 package petal.components;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import petal.Petal;
 import petal.command.Command;
 import stubs.FormatTest;
 import stubs.StorageStub;
 import stubs.TaskListStub;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+
 
 public class ParserTest {
 
@@ -37,7 +41,8 @@ public class ParserTest {
     public void parseInput_bye_matchExpected() {
         Command command = parser.handleInput("bye");
         command.execute(taskListStub, ui, storageStub);
-        assertEquals(formatTest.formatForTest("You're leaving :( I hope you return soon!"), outputStream.toString().trim());
+        assertEquals(formatTest.formatForTest("You're leaving :( I hope you return soon!"),
+                outputStream.toString().trim());
 
     }
 
@@ -64,7 +69,7 @@ public class ParserTest {
     public void parseInput_delete_matchExpected() {
         Command command = parser.handleInput("delete 1");
         command.execute(taskListStub, ui, storageStub);
-        String expected = "Okay. I've deleted this task:\n[ ] " + "run"  + "\nYou now have 1 task(s)!";
+        String expected = "Okay. I've deleted this task:\n[ ] " + "run" + "\nYou now have 1 task(s)!";
         assertEquals(expected, outputStream.toString().trim());
     }
 

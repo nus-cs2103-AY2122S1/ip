@@ -1,17 +1,22 @@
 package stubs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import petal.components.Responses;
 import petal.components.TaskList;
 import petal.components.Ui;
 import petal.task.Task;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TaskListStub extends TaskList {
 
     private List<TaskStub> taskList = new ArrayList<>();
     private Ui ui;
 
+    /**
+     * Constructor for the TaskListStub class
+     * @param ui The Ui instance
+     */
     public TaskListStub(Ui ui) {
         super(ui);
         this.ui = ui;
@@ -36,7 +41,7 @@ public class TaskListStub extends TaskList {
     @Override
     public void deleteTask(String index) {
         TaskStub toBeDeleted = new TaskStub();
-        System.out.println("Okay. I've deleted this task:\n" + toBeDeleted  + "\nYou now have 1 task(s)!");
+        System.out.println("Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have 1 task(s)!");
     }
 
     @Override

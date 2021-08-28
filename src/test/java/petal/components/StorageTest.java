@@ -1,17 +1,19 @@
 package petal.components;
 
-import petal.Petal;
-import stubs.FormatTest;
-import stubs.TaskListStub;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import petal.Petal;
+import stubs.TaskListStub;
 
 public class StorageTest {
 

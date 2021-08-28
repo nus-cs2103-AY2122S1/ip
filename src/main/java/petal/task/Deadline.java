@@ -1,11 +1,11 @@
 package petal.task;
 
-import petal.components.Parser;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+
+import petal.components.Parser;
 
 /**
  * Deadline class, subclass of Task
@@ -53,6 +53,6 @@ public class Deadline extends Task implements Timeable {
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date)
-                +  " " + this.time + ")";
+                + " " + this.time + ")";
     }
 }
