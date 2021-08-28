@@ -1,8 +1,13 @@
-import exceptions.DukeException;
-import storage.Storage;
-import task.TaskList;
 import command.Command;
+
+import exceptions.DukeException;
+
 import parser.Parser;
+
+import storage.Storage;
+
+import task.TaskList;
+
 import ui.Ui;
 
 public class Duke {

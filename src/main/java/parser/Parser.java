@@ -1,6 +1,12 @@
 package parser;
 
-import command.*;
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.ExitCommand;
+import command.ListCommand;
+
 import exceptions.DukeException;
 
 public class Parser {

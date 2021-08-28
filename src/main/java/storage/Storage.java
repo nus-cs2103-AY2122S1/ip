@@ -1,7 +1,12 @@
 package storage;
 
 import exceptions.DukeException;
-import task.*;
+
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.TaskList;
+import task.TodoTask;
 
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
