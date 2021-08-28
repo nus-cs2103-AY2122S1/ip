@@ -45,17 +45,19 @@ public class Parser {
      *
      * @param message String command that is received from the Scanner in Ui.
      */
-    public void handleInput(String message) {
+    public String handleInput(String message) {
+
+        String response = "";
 
         if (message.trim().equals("bye")) {
-            duke.getUi().showGoodbyeMessage();
+            response = response + "\n" + duke.getUi().showGoodbyeMessage();
             System.exit(0);
         }
 
         try {
             // List tasks
             if (message.trim().equals("list")) {
-                duke.getUi().showList();
+                response = response + "\n" + duke.getUi().showList();
             } else if (message.startsWith("delete")) { // Delete tasks
                 if (message.length() > 7 && message.substring(6, 7).equals(" ")
                     && message.substring(7).trim().chars().allMatch(Character::isDigit)) {
@@ -64,11 +66,11 @@ public class Parser {
                     if (0 <= taskIndex && taskIndex < list.size()) {
                         String removed = list.get(taskIndex).toString();
                         list.remove(taskIndex);
-                        duke.getUi().showRemoveTask(removed);
+                        response = response + "\n" + duke.getUi().showRemoveTask(removed);
                         try {
-                            duke.getStorage().saveListToFile();
+                            response = response + "\n" + duke.getStorage().saveListToFile();
                         } catch (IOException e) {
-                            duke.getUi().showLoadingError();
+                            response = response + "\n" + duke.getUi().showLoadingError();
                         }
                     } else {
                         throw new DukeException.DukeTaskNotFoundException();
@@ -86,13 +88,13 @@ public class Parser {
                         if (!task.isDone) {
                             task.markAsDone();
                             try {
-                                duke.getStorage().saveListToFile();
+                                response = response + "\n" + duke.getStorage().saveListToFile();
                             } catch (IOException e) {
-                                duke.getUi().showLoadingError();
+                                response = response + "\n" + duke.getUi().showLoadingError();
                             }
-                            duke.getUi().showDoneTask(description);
+                            response = response + "\n" + duke.getUi().showDoneTask(description);
                         } else {
-                            duke.getUi().showAlreadyDoneTask(description);
+                            response = response + "\n" + duke.getUi().showAlreadyDoneTask(description);
                         }
                     } else {
                         throw new DukeException.DukeTaskNotFoundException();
@@ -112,9 +114,9 @@ public class Parser {
                         }
                     }
                     if (isFound) {
-                        duke.getUi().showSearchResults(resultsArray);
+                        response = response + "\n" + duke.getUi().showSearchResults(resultsArray);
                     } else {
-                        duke.getUi().showNoSearchResults();
+                        response = response + "\n" + duke.getUi().showNoSearchResults();
                     }
                 } else {
                     throw new DukeException.DukeNoSearchFoundException();
@@ -122,7 +124,8 @@ public class Parser {
             } else if (message.startsWith("todo ") || message.equals("todo")) { // To Do
                 if (message.length() > 5 && !message.substring(5).isBlank()) {
                     String description = message.substring(5).trim();
-                    duke.getTasks().createTask(description, "", Task.Category.TODO, false, true);
+                    response = response + "\n" + duke.getTasks().createTask(description, "",
+                        Task.Category.TODO, false, true);
                 } else {
                     throw new DukeException.DukeNoDescriptionException();
                 }
@@ -147,10 +150,12 @@ public class Parser {
                         } else {
                             // proper description and by
                             if (isValid(by)) {
-                                duke.getTasks().createTaskDate(description, d1, Task.Category.DEADLINE,
+                                response = response + "\n" + duke.getTasks().createTaskDate(description,
+                                    d1, Task.Category.DEADLINE,
                                     false, true);
                             } else {
-                                duke.getTasks().createTask(description, by, Task.Category.DEADLINE,
+                                response = response + "\n" + duke.getTasks().createTask(description,
+                                    by, Task.Category.DEADLINE,
                                     false, true);
                             }
                         }
@@ -186,10 +191,12 @@ public class Parser {
                         } else {
                             // proper description and by
                             if (isValid(at)) {
-                                duke.getTasks().createTaskDate(description, d1, Task.Category.EVENT,
+                                response = response + "\n" + duke.getTasks().createTaskDate(description,
+                                    d1, Task.Category.EVENT,
                                     false, true);
                             } else {
-                                duke.getTasks().createTask(description, at, Task.Category.EVENT,
+                                response = response + "\n" + duke.getTasks().createTask(description,
+                                    at, Task.Category.EVENT,
                                     false, true);
                             }
                         }
@@ -208,11 +215,13 @@ public class Parser {
             } else { // invalid input
                 throw new DukeException.DukeInvalidInputException();
             }
-        } catch (DukeException e) {
-            System.out.println(e);
-        } finally {
-            String nextMessage = duke.getUi().getUserCommand();
-            handleInput(nextMessage);
+        } catch (DukeException error) {
+            response = response + "\n" + duke.getUi().showDukeError(error);
         }
+        //        finally {
+        //            String nextMessage = duke.getUi().getUserCommand();
+        //            handleInput(nextMessage);
+        //        }
+        return response;
     }
 }

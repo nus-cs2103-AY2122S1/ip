@@ -31,7 +31,7 @@ public class Storage {
      *
      * @throws FileNotFoundException if <code>filePath</code> specified is invalid.
      */
-    protected void loadFileToList() throws FileNotFoundException {
+    protected String loadFileToList() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
@@ -54,7 +54,7 @@ public class Storage {
                 duke.getTasks().createTask(description, time, Task.Category.EVENT, isDone, false);
             }
         }
-        duke.getUi().showListLoad();
+        return duke.getUi().showListLoad();
     }
 
     /**
@@ -63,8 +63,8 @@ public class Storage {
      *
      * @throws IOException if <code>filePath</code> specified is invalid.
      */
-    protected void saveListToFile() throws IOException {
-        duke.getUi().saveList();
+    protected String saveListToFile() throws IOException {
+
         FileWriter fw = new FileWriter(filePath);
         String newInput = "";
 
@@ -91,5 +91,7 @@ public class Storage {
 
         fw.write(newInput);
         fw.close();
+
+        return duke.getUi().saveList();
     }
 }
