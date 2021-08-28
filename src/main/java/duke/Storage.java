@@ -54,7 +54,7 @@ public class Storage {
      */
     public ArrayList<Task> loadTasks() throws DukeException {
         try {
-            ArrayList<Task> tasks = new ArrayList<>();
+            ArrayList<Task> taskList = new ArrayList<>();
             File f = new File(filePath);
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
@@ -68,9 +68,9 @@ public class Storage {
                     t = new Event(taskFormat[2], taskFormat[3]);
                 }
                 t.setDone(taskFormat[1].equals("1"));
-                tasks.add(t);
+                taskList.add(t);
             }
-            return tasks;
+            return taskList;
         } catch (FileNotFoundException e) {
             throw new DukeException("Oops something went wrong :(");
         }

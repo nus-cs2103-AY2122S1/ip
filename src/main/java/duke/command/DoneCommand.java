@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task = tasks.getTaskFromId(taskId);
+        Task task = tasks.getTaskById(taskId);
         task.setDone(true);
         ui.showTaskDone(task);
     }
