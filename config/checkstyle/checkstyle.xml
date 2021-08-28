@@ -220,6 +220,7 @@
 
         <!-- Checks that Class variables should never be declared public. -->
         <module name="VisibilityModifier">
+            <property name="packageAllowed" value="true"/>
             <property name="protectedAllowed" value="true"/>
             <property name="allowPublicFinalFields" value="true"/>
             <property name="ignoreAnnotationCanonicalNames" value="RegisterExtension, TempDir"/>
@@ -337,6 +338,7 @@
 
         <module name="Indentation">
             <property name="caseIndent" value="0" />
+            <property name="arrayInitIndent" value="8" />
         </module>
 
         <module name="NoWhitespaceBefore">
