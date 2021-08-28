@@ -1,7 +1,9 @@
 package duke.data.messages;
 
 /**
- * Container for user visible messages.
+ * Class that encapsulates all user-visible messages.
+ *
+ * @author Wang Hong Yong
  */
 public class Messages {
 

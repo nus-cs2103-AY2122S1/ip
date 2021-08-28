@@ -7,20 +7,42 @@ import duke.data.exception.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Class that contains the tasklist and handles all tasklist operations.
+ *
+ * @author Wang Hong Yong
+ */
 public class TaskList {
     private ArrayList<Task> list;
     private final Storage storage;
 
+    /**
+     * Constructor for the TaskList class.
+     *
+     * @param list Tasklist.
+     * @param storage storage for duke.
+     */
     public TaskList(ArrayList<Task> list, Storage storage) {
         this.list = list;
         this.storage = storage;
     }
+
+    /**
+     * Adds a task to the tasklist.
+     *
+     * @param task Task to be added.
+     */
     public void addTask(Task task) {
         list.add(task);
         Ui.printAddMsg(task.toString(), getTotalTasks());
         this.writeFile(task);
     }
 
+    /**
+     * Deletes the task at the given task index.
+     *
+     * @param taskNum Task index of the task.
+     */
     public void removeTask(int taskNum) throws DukeException {
         if (taskNum < 1) {
             throw new DukeException("negative item");
@@ -35,6 +57,11 @@ public class TaskList {
         this.updateFile();
     }
 
+    /**
+     * Marks the task at the given task index as done.
+     *
+     * @param taskNum Task index of the task.
+     */
     public void markTaskAsDone(int taskNum) throws DukeException {
         if (taskNum < 1) {
             throw new DukeException("negative item");
@@ -50,6 +77,11 @@ public class TaskList {
         Ui.printTaskDone(item.toString());
     }
 
+    /**
+     * Returns number of undone task.
+     *
+     * @return A int representing total undone task.
+     */
     private int getUndoneTasks() {
         int count = 0;
         for (Task task : list) {
@@ -60,6 +92,11 @@ public class TaskList {
         return count;
     }
 
+    /**
+     * Returns number of total task.
+     *
+     * @return A int representing total task.
+     */
     private int getTotalTasks() {
         return list.size();
     }

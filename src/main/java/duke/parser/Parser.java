@@ -9,17 +9,30 @@ import duke.command.*;
 
 import java.util.ArrayList;
 
+/**
+ * Class that makes sense of the user commands to Duke.
+ *
+ * @author Wang Hong Yong
+ */
 public class Parser {
     private Storage storage;
     private ArrayList<Task> list;
     private TaskList taskList;
 
+    /**
+     * Constructor for the Parser class.
+     */
     public Parser() {
         this.storage = new Storage();
         this.list = storage.loadFile();
         this.taskList = new TaskList(list, storage);
     }
 
+    /**
+     * Parses command and runs.
+     *
+     * @param input String representing the command.
+     */
     public void parse(String input) throws DukeException {
         String commandInput = input.split("\\s+")[0];
         Command command;
@@ -53,7 +66,7 @@ public class Parser {
                 command.execute();
                 break;
             default:
-                throw new DukeException(Ui.unknownInputMsg());
+                throw new DukeException(Ui.getUnknownInputMsg());
         }
 
     }
