@@ -12,7 +12,7 @@ public class StorageTest {
 
     @Test
     public void loadTest() {
-        this.storage = new Storage("../../src/test/TestData/StorageTest.txt");
+        this.storage = new Storage("src/test/TestData/StorageTest.txt");
         ArrayList<String> testArray = storage.load();
         ArrayList<String> actualArray = new ArrayList<>();
         actualArray.add("T|0|hello|");
