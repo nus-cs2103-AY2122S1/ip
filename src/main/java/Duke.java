@@ -3,8 +3,6 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
-import java.time.LocalDate;
-
 
 /**
  * Project Duke is an educational software project.
@@ -12,97 +10,42 @@ import java.time.LocalDate;
  */
 
 public class Duke {
-    /**
-     * This is the scanner object used to get user input.
-     */
-    private static final Scanner sc = new Scanner(System.in);
 
-    /**
-     * Stores the array of todos
-     */
-    private static final ArrayList<Task> todos = new ArrayList<>();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
 
-    /**
-     * Prints out the initial greeting message.
-     */
-    private static void greet() {
-        System.out.println("\t____________________________________________________________\n" +
-                "\tHello! I'm Duke. \n\tWhat can I do for you?\n" +
-                "\t____________________________________________________________");
-    }
-
-    private static void writeToFile(String filePath, String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
-        fw.close();
-    }
-
-    private static void handleSaveText() {
-        String folderName = "./data";
-        String fileName = "./data/duke.txt";
-        File directory = new File(folderName);
-
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-
-        String output = "";
-        String separator = " | ";
-
-        for (Task t : todos) {
-            output = output + t.getType() + separator + ((t.checkDone()) ? 1 : 0) + separator +
-                    t.getDescription() + separator + t.getDeadline() + "\n";
-        }
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            writeToFile(fileName, output);
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            tasks = new TaskList();
         }
     }
 
-    private static void handleLoadText() {
-        String folderName = "./data";
-        String fileName = "./data/duke.txt";
-        File directory = new File(folderName);
-        File doc = new File(fileName);
+    public void run() {
+        ui.showWelcome();
+        boolean isExit = false;
 
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
-
-        try {
-            if (doc.exists()) {
-                Scanner scanner = new Scanner(new File(fileName));
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    // process the line
-                    String[] output = line.split("\\s\\|\\s");
-                    switch (output[0]) {
-                        case "T":
-                            Task newTodo = new Todo(output[2], output[1] == "1");
-                            todos.add(newTodo);
-                            break;
-                        case "D":
-                            Task newDeadline = new Deadline(output[2], output[3], output[1] == "1");
-                            todos.add(newDeadline);
-                            break;
-                        case "E":
-                            Task newEvent = new Event(output[2], output[3], output[1] == "1");
-                            todos.add(newEvent);
-                            break;
-                        default:
-                            System.out.println("Detected invalid task type. Please check...");
-                            break;
-                    }
-                }
-            } else {
-                writeToFile(fileName, "");
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
-        } catch (IOException e1) {
-            System.out.println("Something went wrong: " + e1.getMessage());
-        } catch (InvalidDateFormat e2) {
-            System.out.println(e2.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 
     /**
@@ -198,48 +141,43 @@ public class Duke {
      * Entering 'done' followed by an int will mark the task at that index as complete
      * Entering any other string will create a new todo.
      */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        // Initial greeting of user
-        greet();
-        handleLoadText();
-
-        // Starts to ask for string of instruction
-        // boolean flag to indicate if loop should be exited
-        boolean exit = false;
-
-        // if boolean is false, loop will be run
-        while (!exit) {
-            String response = sc.nextLine();
-
-            switch (response) {
-                case "list":
-                    System.out.println("\t____________________________________________________________");
-                    for (int i = 0; i < todos.size(); i++) {
-                        System.out.printf("\t%d.%s%n", (i + 1), todos.get(i).toString());
-                    }
-                    System.out.println("\t____________________________________________________________");
-                    break;
-                case "bye":
-                    System.out.println("\t____________________________________________________________\n\t" +
-                            "Bye. Hope to see you again soon!" +
-                            "\n\t____________________________________________________________");
-                    exit = true;
-                    break;
-                default:
-                    try {
-                        handleInput(response);
-                    } catch (DukeException e) {
-                        System.out.printf("\t____________________________________________________________\n" +
-                                "\t%s\n" +
-                                "\t____________________________________________________________%n", e);
-                    }
-                    break;
-            }
-        }
-    }
+//    public static void mainy(String[] args) {
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        ui.showWelcome();
+//        boolean exit = false;
+//
+//        // if boolean is false, loop will be run
+//        while (!exit) {
+//            String response = sc.nextLine();
+//
+//            switch (response) {
+//                case "list":
+//                    System.out.println("\t____________________________________________________________");
+//                    for (int i = 0; i < todos.size(); i++) {
+//                        System.out.printf("\t%d.%s%n", (i + 1), todos.get(i).toString());
+//                    }
+//                    System.out.println("\t____________________________________________________________");
+//                    break;
+//                case "bye":
+//                    System.out.println("\t____________________________________________________________\n\t" +
+//                            "Bye. Hope to see you again soon!" +
+//                            "\n\t____________________________________________________________");
+//                    exit = true;
+//                    break;
+//                default:
+//                    try {
+//                        handleInput(response);
+//                    } catch (DukeException e) {
+//                        System.out.printf("\t____________________________________________________________\n" +
+//                                "\t%s\n" +
+//                                "\t____________________________________________________________%n", e);
+//                    }
+//                    break;
+//            }
+//        }
+//    }
 }

@@ -11,4 +11,29 @@ public class TaskList {
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
+
+    public ArrayList<Task> getTaskList() {
+        return this.taskList;
+    }
+
+    public void addTask(Task taskToAdd) {
+        taskList.add(taskToAdd);
+    }
+
+    public Task deleteTask(int index) {
+        return taskList.remove(index);
+    }
+
+    public void completeTask(int index) {
+        Task taskToComplete = taskList.get(index);
+        taskToComplete.markIsDone();
+    }
+
+    public Task getTask(int index) {
+        return taskList.get(index);
+    }
+
+    public int size() {
+        return taskList.size();
+    }
 }

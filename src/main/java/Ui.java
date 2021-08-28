@@ -1,11 +1,16 @@
+import java.util.Scanner;
+
 public class Ui {
+
+    private final Scanner sc = new Scanner(System.in);
 
     public void showWelcome() {
         System.out.println("\tHello! I'm Duke. \n\tWhat can I do for you?\n");
     }
 
     public String readCommand() {
-        return "";
+        String input = sc.nextLine();
+        return input;
     }
 
     public void showError(String errorMessage) {

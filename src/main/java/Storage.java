@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,7 +12,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws InvalidDateFormat{
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(new File(filePath));
@@ -40,8 +41,30 @@ public class Storage {
         } catch (IOException e1) {
             System.out.println("Something went wrong: " + e1.getMessage());
         } catch (InvalidDateFormat e2) {
-            System.out.println(e2.getMessage());
+            throw new InvalidDateFormat();
         }
         return taskList;
+    }
+
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
+
+    public void write(ArrayList<Task> taskList) {
+
+        String output = "";
+        String separator = " | ";
+
+        for (Task t : taskList) {
+            output = output + t.getType() + separator + ((t.checkDone()) ? 1 : 0) + separator +
+                    t.getDescription() + separator + t.getDeadline() + "\n";
+        }
+        try {
+            writeToFile(this.filePath, output);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
     }
 }
