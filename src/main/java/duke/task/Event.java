@@ -10,6 +10,13 @@ public class Event extends Task {
         return new Event(taskSummary, eventTime);
     }
 
+    /**
+     * Factory method of Event class.
+     * Takes in a String, parses it and returns the Event instance it represented
+     *
+     * @param storageLine string representing task
+     * @return Event instance which the string represented
+     */
     public static Event parse(String storageLine) {
         //example line: "E | 0 | party | house"
         String[] args = storageLine.split(" \\| ");
@@ -29,10 +36,20 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
+    /**
+     * Returns a string detailing the syntax of the Event command
+     *
+     * @return helper text of correct syntax
+     */
     public static String syntax() {
         return "event command syntax: 'event <task> /at <eventTime>'";
     }
 
+    /**
+     * Converts an Task instance to a string to be stored.
+     *
+     * @return line of text detailing task details.
+     */
     public String toStorageFormat() {
         return String.format(
             "%s | %d | %s | %s",

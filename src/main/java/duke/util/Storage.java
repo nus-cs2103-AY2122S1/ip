@@ -13,24 +13,30 @@ public class Storage {
     private File file;
     private FileWriter fw;
 
-
+    /**
+     * Constructor for Storage class.
+     * Initializes storage file.
+     *
+     * @param filePathToStorageFile file path to the file used for storing details
+     */
     public Storage(String filePathToStorageFile) {
         this.filePath = filePathToStorageFile;
         this.file = new File(this.filePath);
         this.dir = this.file.getParentFile(); //may be null
         //create directory and file if doesnt exist
         if (!this.dir.exists()) {
-            createDir(this.dir);
+            dir.mkdirs();
         }
         if (!this.file.exists()) {
             createFile(this.file);
         }
     }
 
-    public void createDir(File dir) {
-        dir.mkdirs();
-    }
-
+    /**
+     * Creates file. Handles IO exception and prints stack trace.
+     *
+     * @param file storage file of type File
+     */
     public void createFile(File file) {
         try {
             file.createNewFile();
@@ -39,10 +45,16 @@ public class Storage {
         }
     }
 
+    //getter
     public File getFile() {
         return this.file;
     }
 
+    /**
+     * Writes text to the file initialized.
+     *
+     * @param text text to be written to file
+     */
     public void write(String text)  {
         try {
             this.fw = new FileWriter(this.filePath);
@@ -53,6 +65,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts tasks into text and writes it to the file initialized.
+     *
+     * @param tasks Tasks to be written to file
+     */
     public void write(ArrayList<Task> tasks) {
         String text = tasks
                 .stream()
@@ -62,5 +79,4 @@ public class Storage {
                         stringRes + stringTask + System.getProperty("line.separator"));
         this.write(text);
     }
-
 }

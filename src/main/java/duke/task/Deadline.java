@@ -9,19 +9,43 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     public static final String SYMBOL = "D";
     public static final String COMMAND_REGEX = "deadline \\w[\\w, ]+\\w \\/by \\w[\\w,\\-, ]*";
-//            "deadline\\s.+\\s\\\\/by\\s.+";
-
     private String userInputDeadline;
     private LocalDateTime dateTimeDeadline;
     private LocalDateTime dateTimeTaskCreation;
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
         DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm");
 
-
+    /**
+     * Factor method of Deadline class
+     *
+     * @param taskSummary task description
+     * @param byDate
+     * @return
+     */
     public static Deadline of(String taskSummary, String byDate) {
         return new Deadline(taskSummary, byDate);
     }
 
+    /**
+     * Constructor for Deadline class.
+     *
+     * @param taskSummary task description
+     * @param byDate String detailing date and time of event. Must follow syntax "dd-MM-uuuu HHmm"
+     */
+    public Deadline(String taskSummary, String byDate) {
+        super(taskSummary);
+        this.userInputDeadline = byDate;
+        this.dateTimeTaskCreation = LocalDateTime.now();
+        this.updateDateTimeDeadline(byDate);
+    }
+
+    /**
+     * Factory method of Deadline class.
+     * Takes in a String, parses it and returns the Deadline instance it represented
+     *
+     * @param storageLine string representing task
+     * @return Deadline instance which the string represented
+     */
     public static Deadline parse(String storageLine) {
         //example line: "D | 0 | work | 01-06-2020 1430"
         String[] args = storageLine.split(" \\| ");
@@ -34,14 +58,6 @@ public class Deadline extends Task {
             loadedTask.markCompleted();
         }
         return loadedTask;
-    }
-
-    public Deadline(String taskSummary, String byDate) {
-        super(taskSummary);
-        this.userInputDeadline = byDate;
-        this.dateTimeTaskCreation = LocalDateTime.now();
-        this.updateDateTimeDeadline(byDate);
-
     }
 
     private void updateDateTimeDeadline(String byDate) {
@@ -68,12 +84,22 @@ public class Deadline extends Task {
         return localDateTime.format(Deadline.DATE_TIME_FORMATTER);
     }
 
+    /**
+     * Returns a string detailing the syntax of the ToDo command
+     *
+     * @return helper text of correct syntax
+     */
     public static String syntax() {
         return "deadline command syntax: \n" +
                 "    'deadline <task> /by dd-MM-yyyy HHmm'\n" +
                 "Eg. 'deadline project /by 01-01-2020 2359'";
     }
 
+    /**
+     * Converts an Task instance to a string to be stored.
+     *
+     * @return line of text detailing task details.
+     */
     @Override
     public String toStorageFormat() {
         return String.format(

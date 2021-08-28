@@ -5,28 +5,47 @@ public class Task {
     private boolean isDone;
     private String taskSummary;
 
-    Task(String taskSummary) {
+    /**
+     * Constructor for Task class.
+     * Protected access modifier so that extending classes can call it.
+     *
+     * @param taskSummary description of task
+     */
+    protected Task(String taskSummary) {
         this.taskSummary = taskSummary;
         this.isDone = false;
     }
 
-    public static Task parseLine(String line) {
-        String taskSymbol = Character.toString(line.charAt(0));
+    /**
+     * Factory method of Task class.
+     * Takes in a String, parses it and returns the Task it represented
+     *
+     * @param storageLine string representing task
+     * @return Task which the string represented
+     */
+    public static Task parseLine(String storageLine) {
+        String taskSymbol = Character.toString(storageLine.charAt(0));
         return switch (taskSymbol) {
-            case "T" -> ToDo.parse(line);
-            case "E" -> Event.parse(line);
-            case "D" -> Deadline.parse(line);
+            case "T" -> ToDo.parse(storageLine);
+            case "E" -> Event.parse(storageLine);
+            case "D" -> Deadline.parse(storageLine);
             default -> throw new IllegalArgumentException("Should not enter here");
         };
     }
-    public void markCompleted() {
-        this.isDone = true;
-    }
 
+    /**
+     * @return "x" or "" depending on whether task is complete
+     */
     public String completeStatus() {
         return this.isDone ? "x" : "";
     }
 
+    //setter
+    public void markCompleted() {
+        this.isDone = true;
+    }
+
+    //getters
     public boolean isCompleted() {
         return this.isDone;
     }
@@ -39,7 +58,8 @@ public class Task {
     public String toStorageFormat() {
         return String.format(
             "? | %d | %s ",
-            this.isCompleted() ? 1 : 0,this.getTaskSummary()
+            this.isCompleted() ? 1 : 0,
+            this.getTaskSummary()
         );
     }
 

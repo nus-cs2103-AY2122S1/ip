@@ -6,16 +6,27 @@ import duke.task.*;
 public class Parser {
     private final TaskList taskList;
 
+    /**
+     * Factory method of Parser class. Initializes tasklist.
+     *
+     * @param taskList TaskList the commands will be working on
+     */
     public static Parser initialize(TaskList taskList) {
         return new Parser(taskList);
     }
 
+    /**
+     * Constructor for Parser class
+     * @param taskList TaskList the commands will be working on
+     */
     private Parser(TaskList taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Returns reply message
+     * Parses string command and returns system reply
+     *
+     * @return System's reply message to user input
      */
     public String parseCommand(String userInput) {
         if (userInput.equals("list")) {
