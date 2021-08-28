@@ -1,8 +1,8 @@
 package aisu.command;
 
-import aisu.Storage;
-import aisu.TaskList;
-import aisu.Ui;
+import aisu.storage.Storage;
+import aisu.tasklist.TaskList;
+import aisu.ui.Ui;
 
 /**
  * Command to find tasks with a keyword from the tasklist.

@@ -1,9 +1,9 @@
 package aisu.command;
 
-import aisu.AisuException;
-import aisu.Storage;
-import aisu.TaskList;
-import aisu.Ui;
+import aisu.exception.AisuException;
+import aisu.storage.Storage;
+import aisu.tasklist.TaskList;
+import aisu.ui.Ui;
 import aisu.task.Task;
 
 /**

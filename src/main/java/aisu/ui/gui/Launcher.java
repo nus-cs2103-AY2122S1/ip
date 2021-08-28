@@ -1,4 +1,4 @@
-package aisu.gui;
+package aisu.ui.gui;
 
 import javafx.application.Application;
 

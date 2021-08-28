@@ -1,6 +1,6 @@
 package aisu.task;
 
-import aisu.AisuException;
+import aisu.exception.AisuException;
 
 /**
  * A To-do task.

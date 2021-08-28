@@ -1,4 +1,4 @@
-package aisu;
+package aisu.exception;
 
 /**
  * A dedicated Exception class for Aisu.

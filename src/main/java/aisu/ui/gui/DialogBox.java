@@ -1,4 +1,4 @@
-package aisu.gui;
+package aisu.ui.gui;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

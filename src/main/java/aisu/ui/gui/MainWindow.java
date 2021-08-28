@@ -1,9 +1,6 @@
-package aisu.gui;
+package aisu.ui.gui;
 
 import aisu.Aisu;
-import aisu.Storage;
-import aisu.TaskList;
-import aisu.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

@@ -1,5 +1,6 @@
-package aisu;
+package aisu.tasklist;
 
+import aisu.exception.AisuException;
 import aisu.task.Deadline;
 import aisu.task.Event;
 import aisu.task.Task;

@@ -1,4 +1,4 @@
-package aisu;
+package aisu.ui;
 
 import java.io.PrintStream;
 
