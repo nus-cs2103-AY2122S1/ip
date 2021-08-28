@@ -47,7 +47,7 @@ public class Task {
      * */
     @Override
     public boolean equals(Object another) {
-        if(another instanceof Task) {
+        if (another instanceof Task) {
             Task anotherTask = (Task) another;
             return isDone == anotherTask.getIsDone() && taskTitle.equals(anotherTask.getTaskTitle());
         }

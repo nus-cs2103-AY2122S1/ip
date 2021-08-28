@@ -84,6 +84,8 @@ public class Parser {
                 tasks.getStorage().load(userInput);
             } else if (userInput.startsWith("find")) {
                 tasks.search(userInput, tasks.getStorage().getUserInputRecords());
+            } else if (userInput.equals("help")) {
+                ui.printHelpMessage();
             } else {
                 tasks.add(userInput, tasks.getStorage().getUserInputRecords());
             }
