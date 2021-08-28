@@ -17,7 +17,9 @@ public class Task {
     public String getType(){
         return this.type;
     }
-
+    public String getDetails() {
+        return null;
+    }
     public String toString() {
         return getStatusIcon() + this.information;
     }

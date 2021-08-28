@@ -13,6 +13,10 @@ public class Event extends Task{
         return "[E]" + super.toString() + "(at: " + time + ")";
     }
 
+    public String getDetails() {
+        return time;
+    }
+
     public String getType() {
         return type;
     }

@@ -1,10 +1,13 @@
 import java.util.Scanner;
+//import java.time.format.DateTimeParseException;
+
 
 public class Duke {
     public static void main (String[]args) {
         Scanner in = new Scanner(System.in);
         ListOfTasks xs = new ListOfTasks();
         CompilationOfFiles.loadAndSaveFile(xs);
+
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -37,7 +40,11 @@ public class Duke {
                         if (command.equals("deadline ") || command.equals("deadline")) {
                             throw new DukeException("    OOPS!!! The deadline cannot be empty.");
                         } else {
-                            xs.addDeadline(command);
+//                            try {
+                                xs.addDeadline(command);
+//                            } catch (DateTimeParseException e) {
+//                                throw new DukeException("    OOPS!!! The date for the deadline should be written in the form: yyyy-mm-dd.");
+//                            }
                         }
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
@@ -57,7 +64,7 @@ public class Duke {
                         if (command.equals("todo ") || command.equals("todo")) {
                             throw new DukeException();
                         } else {
-                            xs.add(command);
+                            xs.addTask(command);
                         }
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
