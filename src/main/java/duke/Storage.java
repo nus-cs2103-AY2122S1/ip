@@ -5,13 +5,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * This class encapsulates the mechanism of storing data for Duke.
@@ -19,10 +17,10 @@ import java.time.format.DateTimeFormatter;
  * @author Kleon Ang
  */
 public class Storage {
-    private final String fileName;
-    private static final String DATA_FILEPATH = System.getProperty("user.dir") + "/data/";
     private static final String DATA_DELIMITER = " \\| ";
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
+    private static final String DATA_FILEPATH = System.getProperty("user.dir") + "/data/";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
+    private final String fileName;
 
     /**
      * Constructor for a Storage class.
