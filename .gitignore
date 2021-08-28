@@ -4,6 +4,9 @@
 /*.iml
 
 # Gradle build files
+build.gradle
+gradlew
+gradlew.bat
 /.gradle/
 /build/
 src/main/resources/docs/
