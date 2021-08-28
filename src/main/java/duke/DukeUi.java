@@ -24,7 +24,10 @@ public class DukeUi {
     }
 
 
-
+    /**
+     * Adds a string into Duke's UI buffer for printing later.
+     * @param addThis the String to add into the buffer.
+     */
     public void addToDukeBuffer(String addThis) {
         dukeUiBuffer.add(addThis);
     }

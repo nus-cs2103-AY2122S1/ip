@@ -14,6 +14,9 @@ public class DukeListMgr {
 
     private ArrayList<BaseTask> toDoList = new ArrayList<>();
 
+    /**
+     * Constructor to create a new list manager.
+     */
     public DukeListMgr() {
 
     }

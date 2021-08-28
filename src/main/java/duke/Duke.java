@@ -8,12 +8,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * This class contains the main Duke class that runs the chat bot.
+ */
 public class Duke {
-
-//    /** Default line separator designs. */
-//    private static String sepLine = "===========================================";
-//    private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
-//    private static String sepLineClose = "\\\\\\<<<===================================>>>///";
 
     /** Tracks whether the exit command was used. */
     private boolean isExited;
@@ -53,6 +51,7 @@ public class Duke {
 
     /**
      * Use to get the current instance of Duke that is running.
+     * Creates a new instance of Duke if there is none running.
      * @return the Duke object that is running.
      */
     public static Duke getCurrDuke() {
@@ -90,10 +89,10 @@ public class Duke {
     }
 
 
-
-
-
-
+    /**
+     * The main method that starts the whole program.
+     * @param args Any arguments passed through the command-line when starting the program.
+     */
     public static void main(String[] args) {
         Duke currDuke = getCurrDuke();
         // Load Save File only after Duke is created.
@@ -137,6 +136,7 @@ public class Duke {
      * Runs to process the command input using the command parser.
      *
      * @param lastInput   The command to process.
+     * @throws DukeExceptionBase when an invalid command gets entered.
      */
     private void processCmdInput(String lastInput) throws DukeExceptionBase {
         // Get the type of command that this input represents
@@ -171,7 +171,7 @@ public class Duke {
 
     /**
      * Used when Duke is supposed to say something.
-     * This would print the message between 2 line separators.
+     * This would use the UI controller to print the message between 2 line separators.
      *
      * @param printThis The message to print inside Duke's text bubble
      */

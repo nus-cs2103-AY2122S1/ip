@@ -41,6 +41,7 @@ public class DukeStorageManager {
      * Loads storage file from the provided path.
      * If failed then calls the method to create a new blank file instead.
      * @param savePath the path to the save file.
+     * @throws DukeExceptionBase when there are errors while loading the save file.
      */
     public DukeStorageManager(Path savePath) throws DukeExceptionBase {
         try {
