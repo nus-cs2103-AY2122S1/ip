@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -28,7 +29,7 @@ public class Duke {
                 System.out.println("____________________________________________________________");
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < count; i++) {
-                    System.out.println(i + 1 + ".[" + arr[i].getStatusIcon() + "] " + arr[i].getDesription());
+                    System.out.println(i + 1 + "." + arr[i].toString());
                 }
                 System.out.println("____________________________________________________________");
             } else if (input.startsWith("done ")) {
@@ -36,13 +37,61 @@ public class Duke {
                 arr[task].markAsDone();
                 System.out.println("____________________________________________________________");
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println("    " + "[" + arr[task].getStatusIcon() + "] " + arr[task].getDesription());
+                System.out.println("    " + arr[task].toString());
                 System.out.println("____________________________________________________________");
+            } else if (input.startsWith("todo ")) {
+                String task = input.split(" ")[1];
+                arr[count] = new Todo(task);
+                count++;
+                String s = "";
+                if (count > 1) {
+                    s = "s";
+                }
+                String reply = "____________________________________________________________\n" +
+                        "Got it. I've added this task:\n  " +
+                        arr[count-1] + "\n" +
+                        "Now you have " + count + " task" + s + " in the list.\n" +
+                        "____________________________________________________________";
+                System.out.println(reply);
+            } else if (input.startsWith("deadline ")) {
+                String[] n = input.split(" ", 2)[1].split(" /by ");
+                arr[count] = new Deadline(n[0], n[1]);
+                count++;
+                String s = "";
+                if (count > 1) {
+                    s = "s";
+                }
+                String reply = "____________________________________________________________\n" +
+                        "Got it. I've added this task:\n  " +
+                        arr[count-1] + "\n" +
+                        "Now you have " + count + " task" + s + " in the list.\n" +
+                        "____________________________________________________________";
+                System.out.println(reply);
+            } else if (input.startsWith("event ")) {
+                String[] n = input.split(" ", 2)[1].split(" /at ");
+                arr[count] = new Event(n[0], n[1]);
+                count++;
+                String s = "";
+                if (count > 1) {
+                    s = "s";
+                }
+                String reply = "____________________________________________________________\n" +
+                        "Got it. I've added this task:\n  " +
+                        arr[count-1] + "\n" +
+                        "Now you have " + count + " task" + s + " in the list.\n" +
+                        "____________________________________________________________";
+                System.out.println(reply);
             } else {
                 arr[count] = new Task(input);
                 count++;
+                String s = "";
+                if (count > 1) {
+                    s = "s";
+                }
                 String reply = "____________________________________________________________\n" +
-                        "added: " + input + "\n" +
+                        "Got it. I've added this task:\n  " +
+                        arr[count-1] + "\n" +
+                        "Now you have " + count + " task" + s + " in the list.\n" +
                         "____________________________________________________________";
                 System.out.println(reply);
             }
