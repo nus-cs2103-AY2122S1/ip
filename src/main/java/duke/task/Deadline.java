@@ -12,6 +12,12 @@ public class Deadline extends Task {
     // Time of deadline
     protected String by;
 
+    /**
+     * Constructor for the deadline class.
+     *
+     * @param description the description of the deadline task.
+     * @param by the date of the deadline.
+     */
     public Deadline(String description, String by) {
         super(description);
         try {

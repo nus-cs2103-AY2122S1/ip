@@ -15,6 +15,12 @@ public class Parser {
     private final TaskList tasks;
     private final Ui ui;
 
+    /**
+     * Constructor for the parser class. Initialises tasks and ui.
+     *
+     * @param tasks the list the parser stores tasks into.
+     * @param ui the ui object used to print to the user.
+     */
     public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;

@@ -1,12 +1,12 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.io.Parser;
 import duke.io.Storage;
 import duke.io.Ui;
 import duke.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Main class for Duke app.
@@ -18,6 +18,11 @@ public class Duke {
     private final Parser parser;
     private final TaskList tasks;
 
+    /**
+     * Constructor for Duke class. Initialises the ui and storage.
+     *
+     * @param filePath the path to store the tasks.
+     */
     public Duke(String filePath) {
         TaskList tasks1;
         ui = new Ui();

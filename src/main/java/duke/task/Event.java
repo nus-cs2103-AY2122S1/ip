@@ -12,6 +12,12 @@ public class Event extends Task {
     // Time which event happen at
     protected String at;
 
+    /**
+     * Constructor for the event task.
+     *
+     * @param description the description of the event task.
+     * @param at the date where the event happens.
+     */
     public Event(String description, String at) {
         super(description);
         try {

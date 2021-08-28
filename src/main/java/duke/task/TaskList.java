@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.io.Ui;
-
 import java.util.ArrayList;
+
+import duke.io.Ui;
 
 /**
  * Encapsulates a list of tasks and support manipulation of the tasks.
@@ -95,6 +95,12 @@ public class TaskList {
         ui.print(tasksString.toString());
     }
 
+    /**
+     * Filters the tasks by a given keyword and checks if task contains keyword.
+     *
+     * @param keyword the keyword to filter the tasks by.
+     * @return the filtered tasks.
+     */
     public TaskList filter(String keyword) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task task : taskList) {

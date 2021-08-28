@@ -1,9 +1,10 @@
 package task;
 
-import duke.task.Task;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.task.Task;
 
 public class TaskTest {
     @Test
