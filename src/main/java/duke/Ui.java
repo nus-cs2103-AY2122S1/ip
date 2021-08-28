@@ -86,6 +86,33 @@ public class Ui {
     }
 
     /**
+     * Prints a list of tasks whose names contain the subject.
+     *
+     * @param tasks the TaskList containing all the current tasks.
+     * @param subject the keyword that is being searched for.
+     */
+    public void printTasksWithSubject(TaskList tasks, String subject) {
+        int nResults = 0;
+        System.out.println("\tTasks with \"" + subject + "\":");
+        for (int i = 1; i <= tasks.getSize(); i++) {
+            if (tasks.getTask(i).getTaskName().contains(subject)) {
+                nResults++;
+                System.out.printf("\t\t%d.%s\n", i, tasks.getTask(i));
+            }
+        }
+
+        if (nResults == 0) {
+            System.out.println("\n\tNo results found.");
+        }
+        else if (nResults == 1) {
+            System.out.println("\tTotal of 1 result found.");
+        }
+        else {
+            System.out.println("\tTotal of " + nResults + " results found.");
+        }
+    }
+
+    /**
      * Prints the message when the program has loaded the list of tasks
      * from a previous save file.
      *

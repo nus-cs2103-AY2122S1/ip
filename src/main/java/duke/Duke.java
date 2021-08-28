@@ -63,6 +63,9 @@ public class Duke {
         case DELETE_TASK:
             deleteTask(Parser.parseTaskNum(userInput));
             break;
+        case FIND_TASK:
+            findTask(Parser.parseSearchSubject(userInput));
+            break;
         }
     }
 
@@ -82,5 +85,9 @@ public class Duke {
         Task deletedTask = tasks.deleteTask(taskNum);
         storage.saveTasks(tasks);
         ui.printDeleteTask(tasks, deletedTask);
+    }
+
+    private void findTask(String subject) {
+        ui.printTasksWithSubject(tasks, subject);
     }
 }
