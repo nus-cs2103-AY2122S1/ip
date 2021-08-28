@@ -19,11 +19,9 @@ import side.tasks.Task;
 
 public class Ui {
 
-    private static final String LINEBREAK = "---------------------------------------------------------------------";
-    private static final String GREETING = LINEBREAK + "" + "\nI'm Side, your unpaid personal assistant. "
-            + "Please do less...\n" + LINEBREAK;
-    private static final String GOODBYE = LINEBREAK + "\nOh, you have to go? What a pity...\n"
-            + LINEBREAK;
+    private static final String GREETING = "\nI'm Side, your unpaid personal assistant. "
+            + "Please do less...\n";
+    private static final String GOODBYE = "\nOh, you have to go? What a pity...\n";
     private Parser parser;
 
     /**
@@ -33,27 +31,13 @@ public class Ui {
         this.parser = new Parser();
     }
 
-    private void printLogo() {
-        String logo = " ___  _____  _____   _____  \n"
-                + "|  _|  | |  | ___ \\  | |__\n"
-                + " \\ \\   | |  | |_| |  | |  \n"
-                + "|___| _|_|_ |____/   |_|__\n";
-        System.out.println(logo);
-    }
-
     /**
-     * Prints logo and greeting for user on launch.
+     * Gets greeting.
+     *
+     * @return String representing greeting.
      */
-    public void greet() {
-        this.printLogo();
-        System.out.println(GREETING);
-    }
-
-    /**
-     * Prints closing message for user on end.
-     */
-    public void close() {
-        System.out.println(GOODBYE);
+    public String getGreeting() {
+        return GREETING;
     }
 
     /**
@@ -61,23 +45,11 @@ public class Ui {
      *
      * @param input String representation of task to add.
      * @param tasks TaskList to be added to.
+     * @return String representing response.
      */
-    public static void echo(String input, TaskList tasks) {
-        System.out.println(LINEBREAK);
+    public static String echo(String input, TaskList tasks) {
         String taskQuantifier = tasks.length() == 1 ? "task..." : "tasks...";
-        System.out.println("Fine, I'll add: " + input + "\nYou now have " + tasks.length() + " " + taskQuantifier);
-        System.out.println(LINEBREAK);
-    }
-
-    /**
-     * Prints response with linebreaks.
-     *
-     * @param input String representation of String to format.
-     */
-    public void printResponse(String input) {
-        System.out.println(LINEBREAK);
-        System.out.println(input);
-        System.out.println(LINEBREAK);
+        return "Fine, I'll add: " + input + "\nYou now have " + tasks.length() + " " + taskQuantifier;
     }
 
     /**
@@ -85,14 +57,15 @@ public class Ui {
      *
      * @param input String representation of user input.
      * @param taskList TaskList to be added to.
+     * @return String representing response.
      * @throws WrongFormatException Catches incorrectly formatted input and returns error.
      */
-    public void addDeadline(String input, TaskList taskList) throws WrongFormatException {
+    public String addDeadline(String input, TaskList taskList) throws WrongFormatException {
         if (input.contains("/by") && (this.parser.findDeadlineDatetime(input) != null)) {
             String datetime = this.parser.findDeadlineDatetime(input);
             String description = this.parser.findDescription(input);
             taskList.addDeadline(description, datetime);
-            Ui.echo(new Deadline(description, datetime).toString(), taskList);
+            return Ui.echo(new Deadline(description, datetime).toString(), taskList);
         } else {
             throw new WrongFormatException("deadline [task name] /by [YYYY-MM-DD], [HHMM]\n"
                     + "deadline [task name] /by [YYYY-MM-DD]");
@@ -104,9 +77,10 @@ public class Ui {
      *
      * @param input String representation of user input.
      * @param taskList TaskList to be added to.
+     * @return String representing response.
      * @throws WrongFormatException Catches incorrectly formatted input and returns error.
      */
-    public void addEvent(String input, TaskList taskList) throws WrongFormatException {
+    public String addEvent(String input, TaskList taskList) throws WrongFormatException {
         if (input.contains("/at") && (this.parser.findEventDatetime(input) != null)) {
             String[] datetimeArr = this.parser.findEventDatetime(input);
             String description = this.parser.findDescription(input);
@@ -116,12 +90,13 @@ public class Ui {
             }
             if (datetimeArr != null && datetimeArr[0] != null && datetimeArr[1] != null) {
                 taskList.addEvent(description, datetimeArr[0], datetimeArr[1]);
-                Ui.echo(new Event(description, datetimeArr[0], datetimeArr[1]).toString(), taskList);
+                return Ui.echo(new Event(description, datetimeArr[0], datetimeArr[1]).toString(), taskList);
             }
         } else {
             throw new WrongFormatException("event [task name] /at [YYYY-MM-DD], [HHMM] /to [YYYY-MM-DD], [HHMM]\n"
                     + "event [task name] /at [YYYY-MM-DD] /to [YYYY-MM-DD]");
         }
+        return "";
     }
 
     /**
@@ -129,12 +104,13 @@ public class Ui {
      *
      * @param input String representation of user input.
      * @param taskList TaskList to be added to.
+     * @return String representing response.
      * @throws WrongFormatException Catches incorrectly formatted input and returns error.
      */
-    public void addTask(String input, TaskList taskList) throws WrongFormatException {
+    public String addTask(String input, TaskList taskList) throws WrongFormatException {
         if (input.replace("todo", "").replaceAll(" ", "").length() > 0) {
             taskList.addTask(input);
-            Ui.echo(new Task(input).toString(), taskList);
+            return Ui.echo(new Task(input).toString(), taskList);
         } else {
             throw new WrongFormatException("todo [task name]");
         }
@@ -145,18 +121,19 @@ public class Ui {
      *
      * @param input String representation of user input.
      * @param taskList TaskList in which task is to be marked.
+     * @return String representing response.
      * @throws TaskIndexException Catches out of bounds task indexes and returns error.
      * @throws NoIndexException Catches no index input from user and returns error.
      * @throws TooManyIndexesException Catches too many index input from user and returns error.
      */
-    public void handleDone(String input, TaskList taskList) throws TaskIndexException, NoIndexException,
+    public String handleDone(String input, TaskList taskList) throws TaskIndexException, NoIndexException,
             TooManyIndexesException {
         if (input.split("\\s+").length == 2) {
             int taskNum = this.parser.tryIntParsing(input.split("\\s+")[1]);
             if (taskNum > taskList.length() || taskNum <= 0) {
                 throw new TaskIndexException();
             } else {
-                printResponse(taskList.markTaskDone(taskNum - 1));
+                return taskList.markTaskDone(taskNum - 1);
             }
         } else if (input.split("\\s+").length == 1) {
             throw new NoIndexException();
@@ -170,18 +147,19 @@ public class Ui {
      *
      * @param input String representation of user input.
      * @param taskList TaskList in which task is to be marked.
+     * @return String representing response.
      * @throws DeleteIndexException Catches out of bounds task indexes and returns error.
      * @throws NoIndexException Catches no index input from user and returns error.
      * @throws TooManyIndexesException Catches too many index input from user and returns error.
      */
-    public void handleDelete(String input, TaskList taskList) throws DeleteIndexException, NoIndexException,
+    public String handleDelete(String input, TaskList taskList) throws DeleteIndexException, NoIndexException,
             TooManyIndexesException {
         if (input.split("\\s+").length == 2) {
             int taskNum = this.parser.tryIntParsing(input.split("\\s+")[1]);
             if (taskNum > taskList.length() || taskNum <= 0) {
                 throw new DeleteIndexException();
             } else {
-                printResponse(taskList.delete(taskNum - 1));
+                return taskList.delete(taskNum - 1);
             }
         } else if (input.split("\\s+").length == 1) {
             throw new NoIndexException();
@@ -206,8 +184,9 @@ public class Ui {
      *
      * @param input String representing user input.
      * @param taskList List to check against.
+     * @return String representing response.
      */
-    public void handleFind(String input, TaskList taskList) {
+    public String handleFind(String input, TaskList taskList) {
         if (input.split("\\s+").length == 1) {
             throw new NoIndexException();
         } else {
@@ -221,7 +200,11 @@ public class Ui {
                 listString.append(convertFindList(taskList.findTasks(matching)));
             }
 
-            printResponse(listString.toString());
+            return listString.toString();
         }
+    }
+
+    public String handleClose() {
+        return GOODBYE;
     }
 }

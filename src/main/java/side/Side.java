@@ -2,8 +2,10 @@ package side;
 
 import java.util.Scanner;
 
+import javafx.application.Application;
 import side.exception.SideException;
 import side.exception.UnknownCommandException;
+import side.gui.SideGui;
 import side.util.Parser;
 import side.util.TaskList;
 import side.util.Ui;
@@ -40,51 +42,47 @@ public class Side {
         this.scanner = new Scanner(System.in);
     }
 
-    private void run() {
-        ui.greet();
-        String history = tasks.retrieve();
-        ui.printResponse(history);
+    /**
+     * Crafts responses to user input.
+     *
+     * @param userInput String representing user input.
+     * @param tasks List of tasks.
+     * @return String corresponding to response to command.
+     */
+    public String replyToCommand(String userInput, TaskList tasks) {
+        Parser.COMMAND command = Parser.toCommand(userInput.split("\\s+")[0]);
 
-        String userInput = scanner.nextLine();
-        while (!userInput.equalsIgnoreCase("bye")) {
-            Parser.COMMAND command = Parser.toCommand(userInput.split("\\s+")[0]);
-
-            try {
-                switch (command) {
-                case TODO:
-                    ui.addTask(userInput, tasks);
-                    break;
-                case DEADLINE:
-                    ui.addDeadline(userInput, tasks);
-                    break;
-                case EVENT:
-                    ui.addEvent(userInput, tasks);
-                    break;
-                case LIST:
-                    ui.printResponse(tasks.toString());
-                    break;
-                case DONE:
-                    ui.handleDone(userInput, tasks);
-                    break;
-                case DELETE:
-                    ui.handleDelete(userInput, tasks);
-                    break;
-                case FIND:
-                    ui.handleFind(userInput, tasks);
-                    break;
-                default:
-                    throw new UnknownCommandException();
-                }
-            } catch (SideException e) {
-                ui.printResponse(e.getMessage());
+        try {
+            switch (command) {
+            case TODO:
+                return ui.addTask(userInput, tasks);
+            case DEADLINE:
+                return ui.addDeadline(userInput, tasks);
+            case EVENT:
+                return ui.addEvent(userInput, tasks);
+            case LIST:
+                return tasks.toString();
+            case DONE:
+                return ui.handleDone(userInput, tasks);
+            case DELETE:
+                return ui.handleDelete(userInput, tasks);
+            case FIND:
+                return ui.handleFind(userInput, tasks);
+            case BYE:
+                return ui.handleClose();
+            default:
+                throw new UnknownCommandException();
             }
-            userInput = scanner.nextLine();
+        } catch (SideException e) {
+            return e.getMessage();
         }
-        tasks.save();
-        ui.close();
     }
 
+    /**
+     * Launches GUI.
+     * @param args Standard main method args.
+     */
     public static void main(String[] args) {
-        new Side().run();
+        Application.launch(SideGui.class, args);
     }
 }

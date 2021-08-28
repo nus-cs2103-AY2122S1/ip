@@ -76,6 +76,7 @@ public class TaskList {
         Task task = new Task(description);
         this.tasks.add(task);
         taskLabel++;
+        this.save();
     }
 
     /**
@@ -89,6 +90,7 @@ public class TaskList {
         Event event = new Event(description, startDatetime, endDatetime);
         this.tasks.add(event);
         taskLabel++;
+        this.save();
     }
 
     /**
@@ -101,6 +103,7 @@ public class TaskList {
         Deadline event = new Deadline(description, time);
         this.tasks.add(event);
         taskLabel++;
+        this.save();
     }
 
     /**
@@ -110,7 +113,9 @@ public class TaskList {
      * @return String response of Side in response to marking task as done.
      */
     public String markTaskDone(int index) {
-        return tasks.get(index).markAsDone();
+        String response = tasks.get(index).markAsDone();
+        this.save();
+        return response;
     }
 
     /**
@@ -125,6 +130,7 @@ public class TaskList {
         taskLabel--;
         String taskQuantifier = this.tasks.size() == 1 ? "task..." : "tasks...";
         String taskCount = "\nYou now have " + tasks.size() + " " + taskQuantifier;
+        this.save();
         return "Fine, I'll delete: " + taskToDelete.toString() + taskCount;
     }
 
