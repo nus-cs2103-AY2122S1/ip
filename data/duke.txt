@@ -1,2 +1,6 @@
-[T][X] todo hi
-[E][ ] hi  (at: Jan 19 2020 1800)
+[E][X] hi  (at: Oct 10 2020 1800)
+[T][ ] hi
+[E][ ] jshen lim  (at: Oct 10 2020 1800)
+[T][ ] hi
+[T][ ] hi
+[T][ ] hfkuwrghaukh

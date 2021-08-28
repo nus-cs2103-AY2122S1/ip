@@ -34,15 +34,16 @@ public final class TaskList {
      */
     public static void addSpecificTask(String task){
         if (task.startsWith("deadline")) {
-            String[] input = task.split(" /by ");
+            String[] input = task.split(" /by ", 2);
             LocalDateTime dueTime = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
             TaskList.add(new Deadline(task, dueTime));
         } else if (task.startsWith("event") && task.contains("/at ")) {
-            String[] input = task.split(" /at ");
+            String[] input = task.split(" /at ", 2);
             LocalDateTime startTime = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
             TaskList.add(new Event(task, startTime));
         } else if (task.startsWith("todo")) {
-            TaskList.add(new Todo(task));
+            String[] input = task.split("todo ", 2);
+            TaskList.add(new Todo(input[1]));
         }
     }
 
@@ -108,5 +109,22 @@ public final class TaskList {
      */
     public static Tasks getLast() {
         return taskList.get(taskList.size() - 1);
+    }
+
+    /**
+     * Prints the tasks containing a keyword that the user has searched.
+     * @param key keyword being searched.
+     */
+    public static void find(String key) {
+        System.out.println(LINE);
+        System.out.println("Here are the matching tasks in your list:");
+        int count = 1;
+        for (Tasks task : taskList) {
+            if (task.toString().contains(key)) {
+                System.out.println(count + ". " + task.toString());
+                count++;
+            }
+        }
+        System.out.println(LINE);
     }
 }
