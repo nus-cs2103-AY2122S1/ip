@@ -28,18 +28,18 @@ public class UserInterface {
 
     public void showLoadingError() {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                + "Looks like there was a problem loading storage..."
+                + "Creating a new storage for the user..."
                 + "\n-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }
 
     public void showWelcome() {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                + "Hello! My name is main.java.Duke!\n\n"
+                + "Hello! My name is Duke!\n\n"
                 + " ____        _        \n"
-                + "|  _ \\\\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\\\__,_|_|\\\\_\\\\___|\n\n"
+                + "|  _ \\ _   _| |  ____ \n"
+                + "| | | | | | | |_/ _  \\\n"
+                + "| |_| | |_| |  <   __/\n"
+                + "|____/ \\____|_|\\_\\___|\n\n"
                 + "What can I do for you today?\n"
                 + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }

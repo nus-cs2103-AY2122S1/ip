@@ -19,3 +19,7 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Data Storage files
 /data/duke.txt
+
+# Artifact / JAR files
+
+/src/META-INF/
