@@ -17,7 +17,7 @@ public class Storage {
         this.DATA_FILE_PATH = data_file_path;
     }
 
-    public ArrayList<Task> load() throws DukeException{
+    public ArrayList<Task> load() throws DukeException {
         File directory = new File(DATA_FOLDER_PATH);
         if (!directory.exists()) {
             directory.mkdir();
@@ -62,7 +62,7 @@ public class Storage {
         return tasks;
     }
 
-    public void updateTasks(TaskList tasks) throws DukeException{
+    public void updateTasks(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(DATA_FILE_PATH);
             for (int i = 0; i < tasks.getLength(); i++) {

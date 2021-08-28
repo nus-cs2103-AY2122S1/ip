@@ -12,8 +12,8 @@ public class DeleteCommand extends Command {
         if (tasks.getLength() < taskIndex || 0 >= taskIndex) {
             throw new DukeException("Invalid task index provided!");
         }
-        Task removedTask = tasks.removeTask(taskIndex);
+        Task taskRemoved = tasks.removeTask(taskIndex);
         storage.updateTasks(tasks);
-        ui.showRemovedTask(removedTask, tasks);
+        ui.showRemovedTask(taskRemoved, tasks);
     }
 }
