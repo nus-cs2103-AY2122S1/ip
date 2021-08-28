@@ -7,6 +7,12 @@ public class EventCommand extends AddCommand {
     private String name;
     private String at;
 
+    /**
+     * Creates a new EventCommand
+     *
+     * @param name name of the event
+     * @param at   date for this event e.g. "2021-08-23"
+     */
     public EventCommand(String name, String at) {
         this.name = name;
         this.at = at;

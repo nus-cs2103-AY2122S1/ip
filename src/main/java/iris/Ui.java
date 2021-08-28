@@ -10,7 +10,7 @@ public class Ui {
 
     /**
      * Gets Iris to say a message
-     * 
+     *
      * @param message message to say
      */
     public void say(String message) {
