@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MalformedCommandException;
 import duke.command.UnsupportedCommandException;
@@ -40,6 +41,8 @@ public class Parser {
             return AddDeadlineCommand.create(userInput);
         case AddEventCommand.COMMAND_IDENTIFIER:
             return AddEventCommand.create(userInput);
+        case FindCommand.COMMAND_IDENTIFIER:
+            return FindCommand.create(userInput);
         case ExitCommand.COMMAND_IDENTIFIER:
             return ExitCommand.create();
         default:

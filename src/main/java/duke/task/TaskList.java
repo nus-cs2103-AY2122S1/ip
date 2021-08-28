@@ -13,7 +13,7 @@ import duke.storage.StorageException;
  * Represents a collection of all the user's tasks.
  */
 public class TaskList {
-    private final List<Task> tasks;
+    private List<Task> tasks;
 
     /**
      * Creates the task list.
@@ -111,6 +111,20 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Returns a TaskList with filtered tasks matching the search term.
+     *
+     * @param searchTerm Serch term to filter tasks.
+     * @return TaskList with filtered tasks matching the search term.
+     */
+    public TaskList findTasks(String searchTerm) {
+        TaskList filteredTaskList = new TaskList();
+        List<Task> filteredTasks = new ArrayList<>(tasks);
+        filteredTasks.removeIf(task -> !(task.toString()).contains(searchTerm));
+        filteredTaskList.setTasks(filteredTasks);
+        return filteredTaskList;
+    }
+
     @Override
     public String toString() {
         StringBuilder taskListStringRepresentation = new StringBuilder();
@@ -131,5 +145,9 @@ public class TaskList {
             taskStorageRepresentation.append(tasks.get(i).toStorageFormat()).append("\n");
         }
         return taskStorageRepresentation.toString();
+    }
+
+    private void setTasks(List<Task> newTasks) {
+        tasks = newTasks;
     }
 }

@@ -83,6 +83,15 @@ public class Ui {
     }
 
     /**
+     * Prints list of filtered tasks
+     *
+     * @param tasks List of filtered tasks
+     */
+    public void showFilteredTaskList(TaskList tasks) {
+        display("Here are the matching tasks in your list:\n" + tasks);
+    }
+
+    /**
      * Prints error message.
      *
      * @param e Exception object.
