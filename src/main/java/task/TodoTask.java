@@ -16,8 +16,8 @@ public class TodoTask extends Task {
     /**
      * Constructor for the Todo class
      */
-    public TodoTask(String task, boolean done) {
-        super(task, done);
+    public TodoTask(String task, boolean state) {
+        super(task, state);
     }
 
     /**
@@ -33,7 +33,7 @@ public class TodoTask extends Task {
     @Override
     public String convertToStorageFormat() {
         return "T,"
-                + (done ? "1," : "0,")
+                + (state ? "1," : "0,")
                 + task;
     }
 }

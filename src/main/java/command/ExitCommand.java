@@ -10,6 +10,6 @@ public class ExitCommand extends Command {
     }
 
     public void execute(TaskList list, UserInterface ui) {
-        ui.showBye();
+        ui.showExitMessage();
     }
 }

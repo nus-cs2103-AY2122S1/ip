@@ -32,7 +32,7 @@ public class UserInterface {
                 + "\n-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }
 
-    public void showWelcome() {
+    public void showWelcomeMessage() {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
                 + "Hello! My name is Duke!\n\n"
                 + " ____        _        \n"
@@ -44,7 +44,7 @@ public class UserInterface {
                 + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
     }
 
-    public void showBye() {
+    public void showExitMessage() {
         System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
                 + "Bye... Hope to see you again soon!\n"
                 + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");

@@ -22,7 +22,7 @@ public class Bot {
 
      public void start() {
 
-         ui.showWelcome();
+         ui.showWelcomeMessage();
          isRunning = false;
 
          while (!isRunning) {

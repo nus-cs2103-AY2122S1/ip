@@ -25,8 +25,8 @@ public class EventTask extends Task {
     /**
      * Constructor for the Event class
      */
-    public EventTask(String task, String storedTime, boolean done) {
-        super(task, done);
+    public EventTask(String task, String storedTime, boolean state) {
+        super(task, state);
         this.storedTime = storedTime;
     }
 
@@ -43,7 +43,7 @@ public class EventTask extends Task {
     @Override
     public String convertToStorageFormat() {
         return "E,"
-                + (done ? "1," : "0,")
+                + (state ? "1," : "0,")
                 + task
                 + ","
                 + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime);

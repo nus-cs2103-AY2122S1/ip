@@ -25,8 +25,8 @@ public class DeadlineTask extends Task {
     /**
      * Constructor for the Deadline class
      */
-    public DeadlineTask(String task, String storedTime, boolean done) {
-        super(task, done);
+    public DeadlineTask(String task, String storedTime, boolean state) {
+        super(task, state);
         this.storedTime = storedTime;
     }
 
@@ -43,7 +43,7 @@ public class DeadlineTask extends Task {
     @Override
     public String convertToStorageFormat() {
         return "D,"
-                + (done ? "1," : "0,")
+                + (state ? "1," : "0,")
                 + task
                 + ","
                 + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime);

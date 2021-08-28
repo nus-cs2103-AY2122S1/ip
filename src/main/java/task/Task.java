@@ -15,7 +15,7 @@ public class Task {
     /**
      * Variable that holds the main.java.task completion state as boolean
      */
-    protected boolean done;
+    protected boolean state;
 
     protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
 
@@ -27,16 +27,16 @@ public class Task {
      */
     public Task(String task) {
         this.task = task;
-        this.done = false;
+        this.state = false;
     }
 
     /**
      * Constructor for the Task class
      * According to specified state
      */
-    public Task(String task, boolean done) {
+    public Task(String task, boolean state) {
         this.task = task;
-        this.done = done;
+        this.state = state;
     }
 
     /**
@@ -45,14 +45,14 @@ public class Task {
      * @return The String representation of the main.java.task completion state and the main.java.task input.
      */
     public String getTaskState() {
-        return this.done ? "[X] " + this.task : "[ ] " + this.task;
+        return this.state ? "[X] " + this.task : "[ ] " + this.task;
     }
 
     /**
      * Toggles the current state by negating the boolean state value. (Done vs not done)
      */
     public void markAsDone() {
-        this.done = true;
+        this.state = true;
     }
 
     public static Task parseFromStorage(String task) {
