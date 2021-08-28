@@ -1,5 +1,5 @@
 import java.util.Scanner;
-//import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeParseException;
 
 
 public class Duke {
@@ -40,11 +40,11 @@ public class Duke {
                         if (command.equals("deadline ") || command.equals("deadline")) {
                             throw new DukeException("    OOPS!!! The deadline cannot be empty.");
                         } else {
-//                            try {
+                            try {
                                 xs.addDeadline(command);
-//                            } catch (DateTimeParseException e) {
-//                                throw new DukeException("    OOPS!!! The date for the deadline should be written in the form: yyyy-mm-dd.");
-//                            }
+                            } catch (DateTimeParseException e) {
+                                throw new DukeException("    OOPS!!! The date for the deadline should be written in the form: yyyy-mm-dd.");
+                            }
                         }
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
