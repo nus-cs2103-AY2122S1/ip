@@ -48,8 +48,9 @@ public class Task {
     }
 
     /**
+     * Converts task to the suitable format to be saved in storage file.
      *
-     *
+     * @return Reformatted string representation of a task in the storage file.
      */
     public String formatToSave() {
         return String.format("%d | %s", isDone ? 1 : 0, taskName);
