@@ -11,6 +11,9 @@ public class BaseTask {
     private String taskName;
     private boolean isDone;
 
+    /**
+     * This enum identifies the different types of tasks available.
+     */
     public enum TaskType {
         NONE,
         TODO,

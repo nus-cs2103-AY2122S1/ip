@@ -9,6 +9,9 @@ import duke.Tasks.BaseTask;
  */
 public class DukeCommandParser {
 
+    /**
+     * This enum identifies the different possible command types.
+     */
     public enum CommandType {
         ADD_TASK,
         BYE,
@@ -27,10 +30,14 @@ public class DukeCommandParser {
 
     }
 
+    /**
+     * Parses the given command input and return the command type.
+     * @param cmd The command input to parse.
+     * @return the type of the command.
+     */
     public CommandType parse(String cmd) {
 
         BaseTask.TaskType currTaskType = BaseTask.checkTaskType(cmd);
-
 
         if (cmd.equals("bye")) {
             return CommandType.BYE;
@@ -42,10 +49,8 @@ public class DukeCommandParser {
             return CommandType.DEL_TASK;
         } else if (currTaskType != BaseTask.TaskType.NONE) {
             return CommandType.ADD_TASK;
-
         } else {
             return CommandType.UNKNOWN;
         }
     }
-
 }

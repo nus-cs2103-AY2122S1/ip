@@ -10,11 +10,10 @@ import java.time.format.DateTimeParseException;
  *  This class encapsulates a Task element of Deadline type in Duke's TDList, and features
  *  various methods to manipulate the Task.
  */
-
 public class DeadlineTask extends BaseTask {
 
 
-    /** If 'by when' data is given in date form, it will be stored here. */
+    /** 'by when' data is given in date form and stored here. */
     private LocalDate byWhenDate;
 
 //    /** Activates or deactivates Debug mode. */
@@ -25,7 +24,8 @@ public class DeadlineTask extends BaseTask {
      * Used for creating a new Deadline Task.
      *
      * @param taskName the name or description of the task.
-     * @param byWhen describes when the task should be completed by.
+     * @param byWhen describes when the task should be completed by. (In the format: D/M/YY, DD/MM/YYYY or DD Month YYYY)
+     * @throws DukeExceptionBase when the byWhen field is not given in an acceptable format.
      */
     public DeadlineTask(String taskName, String byWhen) throws DukeExceptionBase {
         super(taskName, false);
@@ -38,6 +38,7 @@ public class DeadlineTask extends BaseTask {
      * @param taskName the name or description of the task.
      * @param byWhen describes when the task should be completed by.
      * @param isCompleted true if task was already complete, false if incomplete.
+     * @throws DukeExceptionBase when the byWhen field is not given in an acceptable format.
      */
     public DeadlineTask(String taskName, String byWhen, boolean isCompleted) throws DukeExceptionBase {
         super(taskName, isCompleted);
@@ -47,6 +48,7 @@ public class DeadlineTask extends BaseTask {
     /**
      * Stores the byWhen data of this Deadline Task, in LocalDate form.
      * @param byWhen the time the task is upposed to be done by.
+     * @throws DukeExceptionBase when the byWhen field is not given in an acceptable format.
      */
     private void parseByWhenInput(String byWhen) throws DukeExceptionBase {
         if (byWhen.length() <= 5) {
