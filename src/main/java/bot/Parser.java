@@ -6,6 +6,7 @@ import main.java.command.DeleteCommand;
 import main.java.command.DoneCommand;
 import main.java.command.EventCommand;
 import main.java.command.ExitCommand;
+import main.java.command.FindCommand;
 import main.java.command.ListCommand;
 import main.java.command.TodoCommand;
 
@@ -47,6 +48,10 @@ public class Parser {
         } else if (input.startsWith("event ") && input.contains("/at ")) {
 
             return new EventCommand(input);
+
+        } else if (input.startsWith("find ")) {
+
+            return new FindCommand(input);
 
         } else if (input.equals("bye")) {
 

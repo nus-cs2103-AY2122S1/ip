@@ -46,6 +46,15 @@ public class Task {
     }
 
     /**
+     * Returns the task currently stored within this Task object.
+     *
+     * @return A String corresponding to the task stored in this Task object.
+     */
+    public String getTask() {
+        return this.task;
+    }
+
+    /**
      * Sets the current task state as completed.
      *
      * Takes no parameters.
