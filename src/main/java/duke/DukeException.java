@@ -4,7 +4,6 @@ package duke;
  * Deals with exceptions thrown in the Duke chatbot.
  */
 public class DukeException extends Exception {
-
     /**
      * Creates a DukeException.
      *

@@ -17,7 +17,6 @@ import java.util.Date;
  * A <code>Event</code> consists of a description and a date.
  */
 public class Event extends Task {
-
     protected String atOriginal;
     protected LocalDate at;
     protected Date time;

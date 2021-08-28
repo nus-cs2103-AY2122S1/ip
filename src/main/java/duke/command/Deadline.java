@@ -17,7 +17,6 @@ import java.util.Date;
  * A <code>Deadline</code> consists of a description and a due date.
  */
 public class Deadline extends Task {
-
     protected String byOriginal;
     protected LocalDate by;
     protected Date time;

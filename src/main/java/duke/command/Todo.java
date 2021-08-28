@@ -9,7 +9,6 @@ import duke.task.Task;
  * A <code>Todo</code> consists of a description.
  */
 public class Todo extends Task {
-
     /**
      * Creates a Todo task.
      *
