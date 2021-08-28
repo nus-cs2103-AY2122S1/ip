@@ -1,4 +1,4 @@
-package main.java;
+package task;
 
 /**
  * Task subclass that encapsulates the individual "Todo" task passed into the bot.
@@ -9,14 +9,14 @@ public class TodoTask extends Task {
      * Constructor for the Todo class
      * Only takes in the string
      */
-    TodoTask(String task) {
+    public TodoTask(String task) {
         super(task);
     }
 
     /**
      * Constructor for the Todo class
      */
-    TodoTask(String task, boolean done) {
+    public TodoTask(String task, boolean done) {
         super(task, done);
     }
 

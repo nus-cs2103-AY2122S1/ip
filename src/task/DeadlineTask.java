@@ -1,4 +1,4 @@
-package main.java;
+package task;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +17,7 @@ public class DeadlineTask extends Task {
     /**
      * Constructor for the Deadline class
      */
-    DeadlineTask(String task, LocalDateTime time) {
+    public DeadlineTask(String task, LocalDateTime time) {
         super(task);
         this.time = time;
     }
@@ -25,7 +25,7 @@ public class DeadlineTask extends Task {
     /**
      * Constructor for the Deadline class
      */
-    DeadlineTask(String task, String storedTime, boolean done) {
+    public DeadlineTask(String task, String storedTime, boolean done) {
         super(task, done);
         this.storedTime = storedTime;
     }

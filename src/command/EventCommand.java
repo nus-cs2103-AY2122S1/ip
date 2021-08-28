@@ -1,21 +1,21 @@
-package main.java;
+package command;
+
+import bot.DukeException;
+import bot.Storage;
+import bot.TaskList;
+import bot.UserInterface;
+import task.EventTask;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class EventCommand extends Command {
 
-    protected String input;
-
-    protected ArrayList<Task> list;
-
-    EventCommand(String input, ArrayList<Task> list) {
-        this.input = input;
-        this.list = list;
+    public EventCommand(String input) {
+        super(input);
     }
 
-    public String reply() throws DukeException {
+    public void execute(TaskList list, UserInterface ui) throws DukeException {
 
         int position = input.indexOf("/at");
         String newTask = input.substring(6, position);
@@ -27,8 +27,9 @@ public class EventCommand extends Command {
         } else {
             try {
                 LocalDateTime time = LocalDateTime.parse(newTime.trim(), inputFormatter);
-                list.add(new EventTask(newTask, time));
-                return addTask(newTask, 3, list.size() - 1, newTime.trim());
+                list.addTask(new EventTask(newTask, time));
+                Storage.save(list);
+                UserInterface.showTaskAdded(newTask, 3, list.getSize() - 1, newTime.trim());
             } catch (DateTimeParseException e) {
                 throw new DukeException(
                         "Your time format is wrong. Please enter the time in the format DD/MM/YYYY HHMM and try again!");

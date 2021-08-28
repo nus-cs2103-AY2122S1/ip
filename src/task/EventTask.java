@@ -1,4 +1,4 @@
-package main.java;
+package task;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +17,7 @@ public class EventTask extends Task {
     /**
      * Constructor for the Event class
      */
-    EventTask(String task, LocalDateTime time) {
+    public EventTask(String task, LocalDateTime time) {
         super(task);
         this.time = time;
     }
@@ -25,7 +25,7 @@ public class EventTask extends Task {
     /**
      * Constructor for the Event class
      */
-    EventTask(String task, String storedTime, boolean done) {
+    public EventTask(String task, String storedTime, boolean done) {
         super(task, done);
         this.storedTime = storedTime;
     }

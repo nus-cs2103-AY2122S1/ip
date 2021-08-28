@@ -1,4 +1,4 @@
-package main.java;
+package task;
 
 import java.time.format.DateTimeFormatter;
 
@@ -25,7 +25,7 @@ public class Task {
      * Constructor for the Task class
      * Default: not done
      */
-    Task(String task) {
+    public Task(String task) {
         this.task = task;
         this.done = false;
     }
@@ -34,7 +34,7 @@ public class Task {
      * Constructor for the Task class
      * According to specified state
      */
-    Task(String task, boolean done) {
+    public Task(String task, boolean done) {
         this.task = task;
         this.done = done;
     }

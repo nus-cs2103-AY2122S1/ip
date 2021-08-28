@@ -1,4 +1,6 @@
-package main.java;
+package bot;
+
+import task.Task;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,30 +12,30 @@ import java.util.ArrayList;
 
 public class Storage {
 
-    protected static final String FILE_PATH = "data/duke.txt";
+    private static final String FILE_PATH = "data/duke.txt";
 
-    public static ArrayList<Task> load() {
+    public static TaskList load() throws DukeException {
         try {
             // Set up the list of lines and the reader
-            ArrayList<Task> list = new ArrayList<>();
+            TaskList list = new TaskList();
             BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH));
 
             // Read the lines from the file specified
             // FileNotFoundException <: IOException
             String line;
             while ((line = reader.readLine()) != null) {
-                list.add(Task.parseFromStorage(line));
+                list.addTask(Task.parseFromStorage(line));
             }
 
             // Return the parsed list of tasks
             return list;
 
         } catch (IOException e) {
-            return new ArrayList<>();
+            throw new DukeException(e.getMessage());
         }
     }
 
-    public static void save(ArrayList<Task> list) throws DukeException {
+    public static void save(TaskList list) throws DukeException {
 
         // Set up the file
         String absolutePath = new File(FILE_PATH).getAbsolutePath();
@@ -48,8 +50,8 @@ public class Storage {
             BufferedWriter writer = new BufferedWriter(new FileWriter(absolutePath));
 
             // Write the lines from the list into the file
-            for (Task task : list) {
-                writer.write(task.convertToStorageFormat());
+            for (int i = 0; i < list.getSize(); i++) {
+                writer.write(list.getTask(i).convertToStorageFormat());
                 writer.newLine();
             }
             writer.close();
