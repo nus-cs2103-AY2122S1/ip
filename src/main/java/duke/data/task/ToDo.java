@@ -13,7 +13,6 @@ public class ToDo extends Task {
      * @param description Description of the task.
      */
     public ToDo(String description) {
-
         super(description);
     }
 
@@ -27,5 +26,3 @@ public class ToDo extends Task {
         return "[T]" + super.toString();
     }
 }
-
-

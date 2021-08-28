@@ -1,8 +1,9 @@
 package duke.command;
 
 import duke.data.TaskHandler;
-import duke.storage.Storage;
 import duke.data.exception.DukeException;
+
+import duke.storage.Storage;
 
 /**
  * Class that encapsulates the "Delete" Command.
@@ -34,7 +35,7 @@ public class DeleteCommand extends Command {
         try {
             taskHandler.deleteTask(Integer.parseInt(cmd.substring(7)));
             taskHandler.printNoOfTasks();
-            storage.updateFile(taskHandler.formatTaskToSave());
+            storage.updateFile(taskHandler.formatTasksToSave());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

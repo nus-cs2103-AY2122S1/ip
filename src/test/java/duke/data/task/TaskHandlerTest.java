@@ -18,7 +18,7 @@ public class TaskHandlerTest {
         TaskHandler th = new TaskHandler(list);
         assertEquals("[T][ ] read book\n" +
                 "[D][ ] do assignment (by: Sep 21 12:30 PM)\n" +
-                "[E][ ] birthday party (at: Sep 22 5:30 PM)", th.formatTaskToSave());
+                "[E][ ] birthday party (at: Sep 22 5:30 PM)", th.formatTasksToSave());
 
     }
 }

@@ -2,9 +2,10 @@ package duke.command;
 
 import duke.data.TaskHandler;
 import duke.data.task.ToDo;
+import duke.data.exception.DukeException;
+
 import duke.storage.Storage;
 import duke.ui.Ui;
-import duke.data.exception.DukeException;
 
 /**
  * Class that encapsulates the "ToDo" Command.
@@ -40,7 +41,7 @@ public class ToDoCommand extends Command {
                 ToDo toDo = new ToDo(cmd.substring(5));
                 taskHandler.addToDo(toDo);
                 taskHandler.printNoOfTasks();
-                storage.updateFile(taskHandler.formatTaskToSave());
+                storage.updateFile(taskHandler.formatTasksToSave());
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());

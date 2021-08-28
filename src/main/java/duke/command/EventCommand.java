@@ -2,9 +2,11 @@ package duke.command;
 
 import duke.data.TaskHandler;
 import duke.data.task.Event;
+import duke.data.exception.DukeException;
+
 import duke.storage.Storage;
 import duke.ui.Ui;
-import duke.data.exception.DukeException;
+
 
 /**
  * Class that encapsulates the "Event" Command.
@@ -42,7 +44,7 @@ public class EventCommand extends Command {
                     Event event = new Event(split[0].substring(6), split[1]);
                     taskHandler.addEvent(event);
                     taskHandler.printNoOfTasks();
-                    storage.updateFile(taskHandler.formatTaskToSave());
+                    storage.updateFile(taskHandler.formatTasksToSave());
                 } else {
                     throw new DukeException(Ui.dateMissing());
                 }

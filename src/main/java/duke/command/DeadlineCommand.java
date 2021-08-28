@@ -2,9 +2,11 @@ package duke.command;
 
 import duke.data.TaskHandler;
 import duke.data.task.Deadline;
+import duke.data.exception.DukeException;
+
 import duke.storage.Storage;
 import duke.ui.Ui;
-import duke.data.exception.DukeException;
+
 
 /**
  * Class that encapsulates the "Deadline" Command.
@@ -42,7 +44,7 @@ public class DeadlineCommand extends Command {
                     Deadline deadline = new Deadline(split[0].substring(9), split[1]);
                     taskHandler.addDeadline(deadline);
                     taskHandler.printNoOfTasks();
-                    storage.updateFile(taskHandler.formatTaskToSave());
+                    storage.updateFile(taskHandler.formatTasksToSave());
                 } else {
                     throw new DukeException(Ui.dateMissing());
                 }
@@ -52,4 +54,3 @@ public class DeadlineCommand extends Command {
         }
     }
 }
-

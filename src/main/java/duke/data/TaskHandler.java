@@ -105,12 +105,11 @@ public class TaskHandler {
      *
      * @return A string of the formatted tasklist.
      */
-    public String formatTaskToSave() {
+    public String formatTasksToSave() {
         String[] tasksToSave = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             tasksToSave[i] = list.get(i).toString();
         }
         return String.join("\n", tasksToSave);
     }
-
 }

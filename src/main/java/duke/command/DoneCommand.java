@@ -1,8 +1,9 @@
 package duke.command;
 
 import duke.data.TaskHandler;
-import duke.storage.Storage;
 import duke.data.exception.DukeException;
+
+import duke.storage.Storage;
 
 /**
  * Class that encapsulates the "Done" Command.
@@ -33,7 +34,7 @@ public class DoneCommand extends Command {
     public void execute(String cmd) {
         try {
             taskHandler.markTaskAsDone(Integer.parseInt(cmd.substring(5)));
-            storage.updateFile(taskHandler.formatTaskToSave());
+            storage.updateFile(taskHandler.formatTasksToSave());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
