@@ -42,6 +42,8 @@ public abstract class Task {
         return  this.getDone() + " | "  + this.getToDo();
     }
 
+    //Print String
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Task)){
