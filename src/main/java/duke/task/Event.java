@@ -16,7 +16,7 @@ public class Event extends Task {
      */
     public Event(String taskName, String at) {
         super(taskName);
-        this.at=at;
+        this.at = at;
     }
 
     /**
@@ -35,7 +35,9 @@ public class Event extends Task {
      * @return "E" to denote event.
      */
     @Override
-    public String getTag() { return tag; }
+    public String getTag() {
+        return tag;
+    }
 
     /**
      * To String method for tasks.

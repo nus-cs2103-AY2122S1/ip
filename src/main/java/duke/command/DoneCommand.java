@@ -9,7 +9,7 @@ import duke.Ui;
  * A class the implements command. This class is responsible for marking a task in
  * the task list as completed/done.
  */
-public class DoneCommand implements Command{
+public class DoneCommand implements Command {
     private String indexString;
 
     /**
@@ -17,7 +17,7 @@ public class DoneCommand implements Command{
      *
      * @param indexString The index of the task in the task list to be marked as done.
      */
-    public DoneCommand(String indexString){
+    public DoneCommand(String indexString) {
         this.indexString = indexString;
     }
 
@@ -47,8 +47,8 @@ public class DoneCommand implements Command{
                 ui.errorFrame(" That task does not exist!");
             } else {
                 t.get(index).setDone();
-                ui.textFrame("Good job, I have marked the task as done!" + "\n" +
-                        t.get(index).toString());
+                ui.textFrame("Good job, I have marked the task as done!" + "\n"
+                        + t.get(index).toString());
             }
         } catch (NumberFormatException e) {
             ui.errorFrame("That is not a valid index!");

@@ -7,14 +7,14 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner scanner;
-    private final String welcome =  "                     ,,\n" +
-            "`7MM\"\"\"Yp,          *MM\n" +
-            "  MM    Yb           MM\n" +
-            "  MM    dP  ,pW\"Wq.  MM,dMMb.\n" +
-            "  MM\"\"\"bg. 6W'   `Wb MM    `Mb\n" +
-            "  MM    `Y 8M     M8 MM     M8\n" +
-            "  MM    ,9 YA.   ,A9 MM.   ,M9\n" +
-            ".JMMmmmd9   `Ybmd9'  P^YbmdP'"
+    private final String welcome = "                     ,,\n"
+            + "`7MM\"\"\"Yp,          *MM\n"
+            + "  MM    Yb           MM\n"
+            + "  MM    dP  ,pW\"Wq.  MM,dMMb.\n"
+            + "  MM\"\"\"bg. 6W'   `Wb MM    `Mb\n"
+            + "  MM    `Y 8M     M8 MM     M8\n"
+            + "  MM    ,9 YA.   ,A9 MM.   ,M9\n"
+            + ".JMMmmmd9   `Ybmd9'  P^YbmdP'"
             + "\n\n"
             + "      .--..--..--..--..--..--.\n"
             + "    .' \\  (`._   (_)     _   \\\n"

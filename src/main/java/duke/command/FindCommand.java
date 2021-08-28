@@ -9,7 +9,7 @@ import duke.task.Task;
  * Class implementing command. This class is responsible for finding all tasks in the list that
  * fits the user search term
  */
-public class FindCommand implements Command{
+public class FindCommand implements Command {
     private String searchTerm;
 
     /**
@@ -41,13 +41,13 @@ public class FindCommand implements Command{
     @Override
     public void execute(TaskList t, Ui ui, Storage storage) {
         String itemString = "";
-        for(int i = 0; i < t.getSize(); i++) {
+        for (int i = 0; i < t.getSize(); i++) {
             Task currTask = t.get(i);
-            if(currTask.getTaskName().toLowerCase().contains(searchTerm.toLowerCase())) {
+            if (currTask.getTaskName().toLowerCase().contains(searchTerm.toLowerCase())) {
                 itemString += currTask.toString() + "\n";
             }
         }
-        if(itemString.equals("")) {
+        if (itemString.equals("")) {
             itemString = "There are no matching tasks in your list for: " + searchTerm;
         } else {
             String temp = itemString.substring(0, itemString.length() - 1);

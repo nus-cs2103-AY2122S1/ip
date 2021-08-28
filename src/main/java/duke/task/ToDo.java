@@ -21,7 +21,9 @@ public class ToDo extends Task {
      * @return An empty string as there is no additional information.
      */
     @Override
-    public String getAdditionalInfo() { return "";}
+    public String getAdditionalInfo() {
+        return "";
+    }
 
     /**
      * Getter method to obtain the tag of the task.
@@ -29,7 +31,9 @@ public class ToDo extends Task {
      * @return "T" to denote ToDo.
      */
     @Override
-    public String getTag() { return tag; }
+    public String getTag() {
+        return tag;
+    }
 
     /**
      * To String method for tasks.

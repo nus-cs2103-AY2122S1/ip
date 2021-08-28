@@ -64,10 +64,10 @@ public abstract class Task {
     @Override
     public String toString() {
         String completedBox;
-        if(isDone) {
-            completedBox="[X]";
+        if (isDone) {
+            completedBox = "[X]";
         } else {
-            completedBox="[ ]";
+            completedBox = "[ ]";
         }
         return completedBox + " " + taskDetails;
     }

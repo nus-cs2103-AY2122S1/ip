@@ -10,7 +10,7 @@ import duke.task.Task;
  * A class that implements command. This class is responsible for any deletion
  * of tasks from the current task list.
  */
-public class DeleteCommand implements Command{
+public class DeleteCommand implements Command {
     private final String indexString;
 
     /**
@@ -48,9 +48,9 @@ public class DeleteCommand implements Command{
                 throw new DukeException("invalid task");
             } else {
                 Task deletedTask = t.remove(index);
-                ui.textFrame("Quitter! I have deleted that task for you" + "\n" +
-                        deletedTask + "\n" +
-                        "Now you have " + t.getSize() + " tasks left.");
+                ui.textFrame("Quitter! I have deleted that task for you" + "\n"
+                        + deletedTask + "\n"
+                        + "Now you have " + t.getSize() + " tasks left.");
             }
         } catch (NumberFormatException | DukeException e) {
             ui.errorFrame(e.getMessage());

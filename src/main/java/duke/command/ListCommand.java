@@ -9,7 +9,7 @@ import duke.Ui;
  * Class the implements command. This class is responsible for displaying the
  * current list of existing tasks.
  */
-public class ListCommand implements Command{
+public class ListCommand implements Command {
 
     /**
      * Method to execute the given command.
@@ -30,7 +30,7 @@ public class ListCommand implements Command{
                 listString += "\n " + count + ". " + t.get(i);
             }
         }
-        ui.textFrame(" This be ye list of things to do Sire:" + listString );
+        ui.textFrame(" This be ye list of things to do Sire:" + listString);
     }
 
     /**

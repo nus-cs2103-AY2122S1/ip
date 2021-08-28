@@ -8,7 +8,7 @@ import duke.Ui;
 /**
  * Class that implements command. This class is responsible for ending the application.
  */
-public class EndCommand implements Command{
+public class EndCommand implements Command {
 
     /**
      * Method to execute the given command.

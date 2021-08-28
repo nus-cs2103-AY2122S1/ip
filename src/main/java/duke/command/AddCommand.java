@@ -1,15 +1,17 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.task.*;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 /**
  * A class that implements Command. This class is responsible for all commands that
@@ -50,21 +52,21 @@ public class AddCommand implements Command {
      */
     @Override
     public void execute(TaskList t, Ui ui, Storage storage) throws DukeException {
-        try{
+        try {
             switch(taskType) {
             case "TODO":
                 t.add(new ToDo(taskString));
                 break;
             case "DEADLINE":
                 String[] deadlineArr = taskString.split(" /by ", 2);
-                if(deadlineArr.length == 1) {
+                if (deadlineArr.length == 1) {
                     throw new DukeException("deadline format");
                 } else {
-                    try{
+                    try {
                         DateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
                         DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
                         Date date = inputFormat.parse(deadlineArr[1]);
-                        String  outputDate = outputFormat.format(date);
+                        String outputDate = outputFormat.format(date);
                         t.add(new Deadline(deadlineArr[0], outputDate));
                     } catch (ParseException e) {
                         throw new DukeException("date parse");
@@ -74,7 +76,7 @@ public class AddCommand implements Command {
                 break;
             case "EVENT":
                 String[] eventArr = taskString.split(" /at ", 2);
-                if(eventArr.length == 1) {
+                if (eventArr.length == 1) {
                     throw new DukeException("event format");
                 } else {
                     t.add(new Event(eventArr[0], eventArr[1]));
@@ -84,7 +86,7 @@ public class AddCommand implements Command {
                 System.out.println("should never reach here");
             }
             ui.textFrame("Got it I've added this task:\n" + t.get(t.getSize() - 1));
-        } catch (DukeException e){
+        } catch (DukeException e) {
             ui.errorFrame(e.getMessage());
         }
     }

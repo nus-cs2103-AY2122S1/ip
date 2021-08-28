@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,6 +9,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * A Storage class that handles the loading and saving of list items in the program to the
@@ -53,11 +56,11 @@ public class Storage {
             Path path = Paths.get(".\\src\\main\\data");
             try {
                 Files.createDirectories(path);
-            } catch(IOException e) {
+            } catch (IOException e) {
                 System.out.println("Failed to create directory: " + e.getMessage());
             }
         }
-        try{
+        try {
             File fCurr = new File(filePath);
             Scanner reader = new Scanner(fCurr);
             while (reader.hasNextLine()) {
@@ -80,7 +83,7 @@ public class Storage {
                 initializeDone(t, strArr[1]);
                 taskArr.add(t);
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             throw new DukeException("file not found");
         }
 
@@ -100,7 +103,7 @@ public class Storage {
             fNew.createNewFile();
             FileWriter myWriter = new FileWriter(filePath);
             String savedString = "";
-            for(int i = 0; i < t.getSize(); i++) {
+            for (int i = 0; i < t.getSize(); i++) {
                 Task task = t.get(i);
                 String completionState = task.isDone() ? "1" : "0";
                 savedString += task.getTag() + " | " + completionState + " | "
@@ -108,7 +111,7 @@ public class Storage {
             }
             myWriter.write(savedString);
             myWriter.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("File creation error: " + e.getMessage());
         }
     }

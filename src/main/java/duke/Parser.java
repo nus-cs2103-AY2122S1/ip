@@ -1,6 +1,15 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EndCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+
+
+
 
 /**
  * A Parser class to parse the input given by the user to their respective commands.
@@ -47,7 +56,7 @@ public class Parser {
                     return new DoneCommand(inputArr[1]);
                 case "delete":
                     return new DeleteCommand(inputArr[1]);
-                    case "find":
+                case "find":
                     return new FindCommand(inputArr[1]);
                 default:
                     throw new DukeException("invalid input");

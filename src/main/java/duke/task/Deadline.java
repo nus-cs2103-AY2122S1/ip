@@ -35,7 +35,9 @@ public class Deadline extends Task {
      * @return "D" to denote deadline.
      */
     @Override
-    public String getTag() { return tag; }
+    public String getTag() {
+        return tag;
+    }
 
     /**
      * To String method for tasks.
