@@ -25,7 +25,7 @@ public class Duke {
                         System.out.println((i + 1) + "." + tasks.get(i).toString());
                     }
                 } else if (strArray[0].equals("done")) {
-                    if (strArray[1].equals(null)) {
+                    if (strArray.length == 1) {
                         throw new DukeException("OOPS!!! You haven't specified which task you've done :-(");
                     } else {
                         int idx = Integer.parseInt(strArray[1]) - 1;
