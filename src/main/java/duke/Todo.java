@@ -1,11 +1,17 @@
 package duke;
 
-import duke.Task;
-
+/**
+ * Todo class that extends from Task class
+ */
 public class Todo extends Task {
-    public Todo(String description,int number){
-        super(description,number);
+    /**
+     * Creates a Todo object
+     * @param description takes in a String representing the task
+     */
+    public Todo(String description){
+        super(description);
     }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

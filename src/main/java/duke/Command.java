@@ -20,7 +20,6 @@ public class Command {
         boolean hasExit = false;
         Scanner sc = new Scanner(System.in);
         String filePath = "data/duke.txt";
-        int count = tasks.size();
 
         while (!hasExit) {
             String command = Parser.parseCommand(sc.next());
@@ -42,7 +41,7 @@ public class Command {
                 int doneNum = sc.nextInt() - 1;
                 try {
                     tasks.get(doneNum).markAsDone();
-                    ui.Done(tasks,doneNum);
+                    ui.Done(tasks.get(doneNum));
                     break;
                 } catch (IndexOutOfBoundsException e) {
                     ui.showDoneError();
@@ -51,13 +50,12 @@ public class Command {
             case "todo":
                 try {
                     String todoDescription = sc.nextLine().trim();
-                    Task todo = new Todo(todoDescription, count);
+                    Task todo = new Todo(todoDescription);
                     if(todoDescription.isEmpty()){
                         throw new DukeException(ui.emptyDescriptionError());
                     }
                     tasks.add(todo);
-                    count++;
-                    ui.todo(todo,count);
+                    ui.todo(tasks,todo);
                     break;
                 } catch (DukeException e){
                     System.out.println(e.getMessage());
@@ -67,9 +65,8 @@ public class Command {
                 int delNum = sc.nextInt()-1;
                 try {
                     Task delete = tasks.get(delNum);
-                    count--;
-                    ui.Delete(delete,count);
                     tasks.remove(delNum);
+                    ui.Delete(tasks,delete);
                     break;
                 } catch (IndexOutOfBoundsException e){
                     ui.showDeleteError();
@@ -83,13 +80,12 @@ public class Command {
                     }
                     LocalDate d1 = LocalDate.parse(deadlineArr[1].trim());
                     Task deadline = new Deadline(deadlineArr[0].trim(),
-                            d1.format(DateTimeFormatter.ofPattern("MMM dd YYYY")), count);
+                            d1.format(DateTimeFormatter.ofPattern("MMM dd YYYY")));
                     tasks.add(deadline);
-                    count++;
-                    ui.deadline(deadline,count);
+                    ui.deadline(tasks,deadline);
                     break;
                 } catch (DateTimeParseException e){
-                    ui.showDeadlineError1();
+                    ui.showDeadlineError();
                     break;
                 } catch (DukeException e){
                     System.out.println(e.getMessage());
@@ -101,10 +97,9 @@ public class Command {
                     if(eventArr[0].strip().isEmpty()){
                         throw new DukeException(ui.emptyDescriptionError());
                     }
-                    Task event = new Event(eventArr[0].trim(),eventArr[1].trim(), count);
+                    Task event = new Event(eventArr[0].trim(),eventArr[1].trim());
                     tasks.add(event);
-                    count++;
-                    ui.event(event,count);
+                    ui.event(tasks,event);
                     break;
                 } catch (DukeException e){
                     System.out.println(e.getMessage());

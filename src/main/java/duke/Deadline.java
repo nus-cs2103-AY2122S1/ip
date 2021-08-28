@@ -11,15 +11,14 @@ public class Deadline extends Task {
      *
      * @param description takes in a String describing the task description
      * @param by takes in a String representing the deadline of the task
-     * @param number takes in a integer representing the task number
      */
-    public Deadline(String description,String by,int number) {
-        super(description,number);
+    public Deadline(String description,String by) {
+        super(description);
         this.by = by;
     }
 
     /**
-     * getter method to get task deadline
+     * gets task deadline
      * @return a String representing the deadline
      */
     public String getBy(){

@@ -12,7 +12,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     *
+     * Creates a Duke object
      * @param filePath takes in a String representing the directory of the file
      */
     public Duke(String filePath){
@@ -27,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * method to run the program
+     * runs the program
      */
     public void run(){
         Command c = new Command();

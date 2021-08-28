@@ -15,7 +15,7 @@ public class Storage {
     String filePath;
 
     /**
-     *
+     * creates a Storage object
      * @param filePath a String representing the directory of the file
      */
     Storage(String filePath){
@@ -34,7 +34,7 @@ public class Storage {
     }
 
     /**
-     * method to save tasks into a file
+     * saves tasks into a file
      * @param filePath a String representing the directory of the file
      * @param list list of tasks that will be written into the file
      */
@@ -54,7 +54,7 @@ public class Storage {
     }
 
     /**
-     * method to load tasks from a file
+     * loads tasks from a file
      * @param filePath a String representing the directory of the file
      * @return return a TaskList object containing the list of tasks that was in the file
      * @throws FileNotFoundException
@@ -63,43 +63,43 @@ public class Storage {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         ArrayList<Task> list = new ArrayList<>();
-        int count = 1;
         while (s.hasNext()) {
             String taskType = s.next();
             switch(taskType){
             case "T":
                 String[] todoArr = s.nextLine().trim().split("\\|");
-                Task todo = new Todo(todoArr[2].trim(),count);
+                Task todo = new Todo(todoArr[2].trim());
                 if (Integer.parseInt(todoArr[1].trim()) == 1) {
                     todo.markAsDone();
                 }
                 list.add(todo);
-                count++;
                 break;
             case "D":
                 String[] deadlineArr = s.nextLine().trim().split("\\|");
-                Task deadline = new Deadline(deadlineArr[2].trim(),deadlineArr[3].trim(),count);
+                Task deadline = new Deadline(deadlineArr[2].trim(),deadlineArr[3].trim());
                 if (Integer.parseInt(deadlineArr[1].trim()) == 1) {
                     deadline.markAsDone();
                 }
                 list.add(deadline);
-                count++;
                 break;
             case "E":
                 String[] eventArr = s.nextLine().trim().split("\\|");
-                Task event = new Event(eventArr[2].trim(),eventArr[3].trim(),count);
+                Task event = new Event(eventArr[2].trim(),eventArr[3].trim());
                 if (Integer.parseInt(eventArr[1].trim()) == 1) {
                     event.markAsDone();
                 }
                 list.add(event);
-                count++;
                 break;
             }
         }
         return list;
     }
 
-
+    /**
+     * returns text to add in save file
+     * @param t takes in a task to be added into save file
+     * @return a String representing text to be added
+     */
     private static String textToAdd(Task t) {
         String mes = "";
         if (t instanceof Todo) {
@@ -116,6 +116,11 @@ public class Storage {
         return mes;
     }
 
+    /**
+     * gets status icon for task
+     * @param t takes in a task to check its status
+     * @return a String representing the status
+     */
     private static String statusIcon(Task t){
         if (t.getStatusIcon() == "X") {
             return " | 1 | ";
