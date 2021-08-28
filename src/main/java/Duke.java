@@ -67,32 +67,68 @@ public class Duke {
          *
          * @param action
          */
-        public TodoTasks(String action) {
+        public TodoTasks(String action) throws TodoException{
             super(action, "[T][] ");
+            if (action.split(" ").length < 2){
+                throw new TodoException("OOPS!!! The description of a todo cannot be empty.");
+            }
         }
     }
+
     private class DeadlineTask extends Task {
         /**
          * constructor for Task.
          *
          * @param action
          */
-        public DeadlineTask(String action) {
+        public DeadlineTask(String action) throws DeadlineException {
             super(action, "[D][] ");
+            if (action.split("/").length < 2) {
+                throw new DeadlineException("incorrect format for deadline task");
+            } else if (action.split("/")[1].split(" ").length < 2) {
+                throw new DeadlineException("incorrect date format for Deadline task");
+            }
         }
     }
+
     private class EventsTask extends Task {
         /**
          * constructor for Task.
          *
          * @param action
          */
-        public EventsTask(String action) {
+        public EventsTask(String action) throws EventsException{
             super(action, "[E][] ");
+            if (action.split("/").length < 2){
+                throw new EventsException("incorrect format for Events task");
+            } else if (action.split("/")[1].split(" ").length < 3) {
+                throw new EventsException("incorrect date format for Events task");
+            }
         }
     }
-
-
+    ////////////exceptions////////////////////////////////////////////
+    private class TodoException extends Exception {
+        public TodoException(String message) {
+            super(message);
+        }
+    }
+    private class EventsException extends Exception {
+        public EventsException(String message) {
+            super(message);
+        }
+    }
+    private class DeadlineException extends Exception {
+        public DeadlineException(String message) {
+            super(message);
+        }
+    }
+    ///////////////////////////////////////////////////////////////////
+    /**
+     * Function able to read the input the judge which Task to use.
+     * @param action
+     * @return
+     * @throws Exception
+     */
     private Task createTask(String action) throws Exception{
         // separate using the / as its the point of the date
         String[] dataOfAction = action.split("/")[0].split(" ");
@@ -179,7 +215,13 @@ public class Duke {
                     System.out.println("Got it. I've added this task: ");
                     System.out.println("    " + newTask);
                     System.out.format("Now you have %d tasks in the list.\n", taskList.size());
-                }catch (Exception e) {
+                } catch (TodoException tx) {
+                    System.out.println(tx);
+                }catch (DeadlineException dx) {
+                    System.out.println(dx);
+                }catch (EventsException ex) {
+                    System.out.println(ex);
+                } catch (Exception e) {
                     System.out.println(e);
                 }
             }
