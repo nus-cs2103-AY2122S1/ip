@@ -1,7 +1,7 @@
 package command;
 
 import exceptions.DukeException;
-import helpers.helpers;
+import helpers.Helpers;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
         }
 
         // Check if second input is an integer
-        boolean isInteger = helpers.isInteger(commands[1]);
+        boolean isInteger = Helpers.isInteger(commands[1]);
         if (!isInteger) {
             throw new DukeException(MESSAGE_USAGE);
         }

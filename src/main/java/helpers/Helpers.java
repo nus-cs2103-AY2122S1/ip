@@ -1,6 +1,6 @@
 package helpers;
 
-public class helpers {
+public class Helpers {
 
     /**
      * Utility function to test whether input string is an integer.
@@ -8,7 +8,7 @@ public class helpers {
      * @param input input String.
      * @return returns true if input string can be parsed as an integer, else false.
      */
-    public static Boolean isInteger(String input) {
+    public static boolean isInteger(String input) {
         try {
             Integer.parseInt(input);
             return true;

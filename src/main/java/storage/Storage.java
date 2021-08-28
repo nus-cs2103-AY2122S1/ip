@@ -124,6 +124,10 @@ public class Storage {
 
         // handle the folder does not exist
         File parent = file.getParentFile();
+        if (parent == null) {
+            return false;
+        }
+
         if (!parent.exists()) {
             try {
                 boolean result = parent.mkdirs();

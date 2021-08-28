@@ -1,0 +1,4 @@
+T | 0 | read book
+D | 0 | return book | 2021-10-15 | 00:00
+D | 1 | return book | 2021-10-15 | 18:00
+E | 0 | book fest | 2021-10-15 | 00:00
