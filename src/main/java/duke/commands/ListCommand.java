@@ -24,13 +24,13 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(String des, TaskList tList) {
-        String result = "Here are the tasks in your list:\n";
+        String result = "Here are the tasks in your list:\n\n";
         ArrayList<Task> tasks = tList.getTaskList();
         int count = 1;
         for (Task t : tasks) {
-            result = result + count + ". " + t.formatString() + "\n";
+            result = result + count + ". " + t.formatString() + "\n\n";
             count++;
         }
-        return result;
+        return result + "\n";
     }
 }

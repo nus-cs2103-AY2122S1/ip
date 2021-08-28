@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -25,9 +26,22 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/chatbot.png"));
 
+    /**
+     * Initialises the mainWindow to display welcome message and handle userInput.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String logo = "Hello from \n"
+                + " ____           _        \n"
+                + "|   _  \\ __   _| |  _____ \n"
+                + "|  |  |  |  | |  |  |/  / _ \\\n"
+                + "|  |_|  |  |_|  |    <  __/\n"
+                + "|____/ \\__,_ |_|\\_\\___|\n\n"
+                + "What can I do for you today?\n";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(logo, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

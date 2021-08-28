@@ -37,9 +37,9 @@ public class DeleteCommand extends Command {
             throw new DukeException("Too many arguments being provided to \"delete\" \n"
                     + "Please refer to proper usage of duke.commands with \"allCmd\"");
         } else {
+            tList.remove(num);
             Storage.createFile();
             Storage.writeToFile(tList);
-            tList.remove(num);
             return "Successfully removed task " + num + "\n";
         }
     }
