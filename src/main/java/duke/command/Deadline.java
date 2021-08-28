@@ -13,7 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Deadline extends Task {
-
     protected String byOriginal;
     protected LocalDate by;
     protected Date time;

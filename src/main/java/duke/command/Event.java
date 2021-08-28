@@ -13,7 +13,6 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class Event extends Task {
-
     protected String atOriginal;
     protected LocalDate at;
     protected Date time;

@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ParserTest {
-
     @Test
     void isValidTask_invalidTasks_failure() {
         assertFalse(Parser.isValidTask("deadline /at 1999-12-03 0000"));
