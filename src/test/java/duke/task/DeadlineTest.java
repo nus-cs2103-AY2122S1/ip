@@ -1,19 +1,20 @@
 package duke.task;
 
-import duke.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.DukeException;
 
 public class DeadlineTest {
-    
     @Test
-    public void Deadline_invalidInput_exceptionThrown() {
-        assertThrows(DukeException.class
-                , () -> {new Deadline("deadline holder /");});
+    public void deadline_invalidInput_exceptionThrown() {
+        assertThrows(DukeException.class, () -> {
+            new Deadline("deadline holder /");
+        });
     }
-    
+
     @Test
     public void toString_normalInput_normalOutput() throws DukeException {
         assertEquals(String.format("[D][%s] %s (by: %s)",

@@ -2,17 +2,16 @@ package duke.task;
 
 /**
  * A Class that extends the Task class.
- * It is specifically designed for a Task with time of occurrence. 
+ * It is specifically designed for a Task with time of occurrence.
  *
  * @author Gu Geng
  */
-public class Todo extends Task{
-
+public class Todo extends Task {
     /**
-     * Returns a Todo object using a String. 
+     * Returns a Todo object using a String.
      *
      * @param content A String containing information that is possibly enough to create a Todo object.
-     * @throws duke.DukeException Will be thrown if the information in content is insufficient/incorrect. 
+     * @throws duke.DukeException Will be thrown if the information in content is insufficient/incorrect.
      */
     public Todo(String content) {
         super(content.substring(5).trim());
@@ -21,7 +20,7 @@ public class Todo extends Task{
     /**
      * Overrides the toString method.
      *
-     * @return A String representation of the Todo object in specified format. 
+     * @return A String representation of the Todo object in specified format.
      */
     @Override
     public String toString() {

@@ -4,12 +4,26 @@ import duke.DukeException;
 
 /**
  * A Class that extends the Command class.
- * It is specifically designed for a Command for deleting. 
+ * It is specifically designed for a Command for deleting.
  *
  * @author Gu Geng
  */
 public class DeleteCommand extends Command {
     private int index;
+
+    /**
+     * Returns a DeleteCommand object with the information provided.
+     *
+     * @param command A String containing information that can possibility be used to create an DeleteCommand object.
+     * @throws duke.DukeException Will be thrown if information provided are insufficient/incorrect.
+     */
+    public DeleteCommand(String command) throws DukeException {
+        if (isDeleteOps(command)) {
+            index = Integer.parseInt(command.substring(7)) - 1;
+        } else {
+            throw new DukeException("☹ Would you specify the task for me my dear?");
+        }
+    }
 
     /**
      * Returns true if a valid delete operation is entered.
@@ -32,28 +46,13 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Returns a DeleteCommand object with the information provided.
-     *
-     * @param command A String containing information that can possibility be used to create an DeleteCommand object.
-     * @throws duke.DukeException Will be thrown if information provided are insufficient/incorrect.
-     */
-    public DeleteCommand(String command) throws DukeException {
-        if (isDeleteOps(command)) {
-            index = Integer.parseInt(command.substring(7)) - 1;
-        } else {
-            throw new DukeException("☹ Would you specify the task for me my dear?");
-        }
-    }
-
-
-    /**
      * Implements the execute method from Command superclass.
      * Executes the given delete command accordingly by updating taskList and storage, interacting with ui.
      *
      * @param taskList A duke.TaskList object that contains an ArrayList of duke.task.task object to be updated.
      * @param ui A duke.Ui object that helps to perform interaction when the command is executed.
-     * @param storage A duke.Storage object that helps to update the storage after the execution is done. 
-     * @throws duke.DukeException Will be thrown if unable to locate/update the storage file. 
+     * @param storage A duke.Storage object that helps to update the storage after the execution is done.
+     * @throws duke.DukeException Will be thrown if unable to locate/update the storage file.
      */
     public void execute(duke.TaskList taskList, duke.Ui ui, duke.Storage storage) throws DukeException {
         if (index > taskList.size()) {
@@ -66,10 +65,10 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Implements the isExit method from Command superclass. 
-     * Returns a boolean indicating if the programme terminates after the delete execution. 
+     * Implements the isExit method from Command superclass.
+     * Returns a boolean indicating if the programme terminates after the delete execution.
      *
-     * @return A boolean indicating if the programme terminates after the delete execution. 
+     * @return A boolean indicating if the programme terminates after the delete execution.
      */
     public boolean isExit() {
         return false;

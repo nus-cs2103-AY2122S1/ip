@@ -2,7 +2,7 @@ package duke;
 
 /**
  * An Exception subclass that is specific to the misbehaviours of Duke programme.
- * 
+ *
  * @author Gu Geng
  */
 public class DukeException extends Exception {
