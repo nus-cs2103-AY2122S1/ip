@@ -66,6 +66,10 @@ public class Ui {
         return this.in.nextLine();
     }
 
+    /**
+     * Retrieves the goodbye message from the bot.
+     * @return Goodbye message.
+     */
     public String getGoodbyeMessage() {
         return GOODBYE_MESSAGE;
     }

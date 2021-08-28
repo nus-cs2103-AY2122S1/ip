@@ -36,12 +36,19 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/you.png"));
     private Image aisuImage = new Image(this.getClass().getResourceAsStream("/images/bot.gif"));
 
+    /**
+     * Initialises Storage and TaskList used by Duke. Shows welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         showWelcome();
     }
 
+    /**
+     * Set Aisu to an aisu object.
+     * @param a The Aisu object.
+     */
     public void setAisu(Aisu a) {
         aisu = a;
     }
@@ -64,6 +71,10 @@ public class MainWindow extends AnchorPane {
 
     }
 
+    /**
+     * Commands Aisu to display a text.
+     * @param output The text Aisu says.
+     */
     private void makeAisuSay(String output) {
         dialogContainer.getChildren().addAll(DialogBox.getAisuDialog(output, aisuImage));
     }

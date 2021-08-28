@@ -58,9 +58,13 @@ public class Aisu {
                 ui.showDivider();
             }
         }
-//        ui.showGoodbyeMessage();
     }
 
+    /**
+     * Gets a response from the user.
+     * @param input Input from the user.
+     * @return Reponse from Aisu.
+     */
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);

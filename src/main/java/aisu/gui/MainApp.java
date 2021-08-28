@@ -16,6 +16,11 @@ public class MainApp extends Application {
 
     private Aisu aisu = new Aisu("data", "testGUI.txt");
 
+    /**
+     * Starts the Aisu application.
+     *
+     * @param stage the primary stage for this application, onto which the application scene can be set.
+     */
     @Override
     public void start(Stage stage) {
         try {

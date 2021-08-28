@@ -128,6 +128,11 @@ public class TaskList {
         return this.getTaskAt(n);
     }
 
+    /**
+     * Finds tasks with a certain keyword in the tasklist.
+     * @param keyword Keyword used for searching.
+     * @return Tasklist with tasks containing that keyword.
+     */
     public String findTasksWith(String keyword) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < this.list.size(); i++) {
