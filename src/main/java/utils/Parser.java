@@ -2,12 +2,7 @@ package utils;
 
 import java.time.LocalDate;
 
-import commands.AddCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.ExitCommand;
-import commands.ListCommand;
+import commands.*;
 import exceptions.InvalidInputException;
 import tasks.Deadline;
 import tasks.Event;
@@ -37,6 +32,12 @@ public class Parser {
             int index = Integer.valueOf(description) - 1;
 
             return new DeleteCommand(index);
+        } else if (command.equals("find")){
+            if (description.isBlank()) {
+                throw new InvalidInputException("find's description cannot be empty!");
+            } else {
+                return new FindCommand(description);
+            }
         } else if (command.equals("todo")){
             if (description.isBlank()) {
                 throw new InvalidInputException("todo's description cannot be empty!");

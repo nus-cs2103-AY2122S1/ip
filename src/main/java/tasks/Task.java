@@ -2,8 +2,6 @@ package tasks;
 
 public abstract class Task {
 
-    private static final String DONE_MSG = "Well done.";
-
     private String type;
     private String description;
     private boolean isDone;
@@ -16,9 +14,16 @@ public abstract class Task {
         this.type = type;
     }
 
-    public String markAsDone() {
+    /**
+     * Marks task as done
+     */
+    public void markAsDone() {
         this.isDone = true;
         this.statusSymbol = "[X]";
+    }
+
+    public boolean contains(String keyword) {
+        return this.description.contains(keyword);
     }
 
     /**
@@ -38,6 +43,7 @@ public abstract class Task {
     public String toString() {
         return this.type + this.statusSymbol + " " + this.description;
     }
+
 }
 
 

@@ -52,4 +52,28 @@ public class TaskList {
 
         return taskString.toString();
     }
+
+    public String find(String keyword) {
+        StringBuilder taskString = new StringBuilder();
+        int len = tasks.size();
+        int count = 1;
+
+        for (int i = 0; i < len - 1; i ++) {
+            Task task = tasks.get(i);
+
+            if (task.contains(keyword)) {
+                taskString.append(count + ". " + task.toString() + "\n");
+                count++;
+            }
+
+        }
+
+        Task task = tasks.get(len - 1);
+
+        if (task.contains(keyword)) {
+            taskString.append(count + ". " + task.toString());
+        }
+
+        return taskString.toString();
+    }
 }
