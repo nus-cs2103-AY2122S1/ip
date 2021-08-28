@@ -13,30 +13,28 @@ import duke.task.TaskList;
  */
 public class Duke {
 
-    private final Ui ui;
     private final Storage storage;
     private final Parser parser;
     private final TaskList tasks;
 
     /**
-     * Constructor for Duke class. Initialises the ui and storage.
+     * Constructor for Duke class. Initializes the ui and storage.
      *
      * @param filePath the path to store the tasks.
      */
     public Duke(String filePath) {
         TaskList tasks1;
-        ui = new Ui();
         storage = new Storage(filePath);
 
         try {
             tasks1 = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            Ui.showLoadingError();
             tasks1 = new TaskList();
         }
 
         tasks = tasks1;
-        parser = new Parser(tasks, ui);
+        parser = new Parser(tasks);
     }
 
     /**
@@ -52,8 +50,8 @@ public class Duke {
      * Runs the duke app.
      */
     public void run() {
-        // start
-        start();
+        // initialize
+        initialize();
 
         // parse
         Scanner scanner = new Scanner(System.in);
@@ -63,7 +61,7 @@ public class Duke {
             try {
                 parser.parse(input);
             } catch (DukeException e) {
-                ui.print(e.getMessage());
+                Ui.print(e.getMessage());
             }
         }
 
@@ -73,21 +71,36 @@ public class Duke {
     }
 
     /**
-     * Starts up Duke.
+     * Initializes Duke.
+     *
+     * @return hi message.
      */
-    private void start() {
-        ui.sayHi();
+    public String initialize() {
+        return Ui.sayHi();
     }
 
     /**
      * Exits Duke.
      */
-    private void exit() {
+    public void exit() {
         try {
             storage.save(tasks);
         } catch (DukeException e) {
-            ui.print(e.getMessage());
+            Ui.print(e.getMessage());
         }
-        ui.sayBye();
+    }
+
+    /**
+     * Returns the response given user input.
+     *
+     * @param input user input.
+     * @return response from duke.
+     */
+    public String getResponse(String input) {
+        try {
+            return parser.parse(input);
+        } catch (DukeException e) {
+            return Ui.print(e.getMessage());
+        }
     }
 }

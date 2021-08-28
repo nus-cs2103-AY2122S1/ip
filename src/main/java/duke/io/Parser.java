@@ -13,17 +13,14 @@ import duke.task.Todo;
  */
 public class Parser {
     private final TaskList tasks;
-    private final Ui ui;
 
     /**
      * Constructor for the parser class. Initialises tasks and ui.
      *
      * @param tasks the list the parser stores tasks into.
-     * @param ui the ui object used to print to the user.
      */
-    public Parser(TaskList tasks, Ui ui) {
+    public Parser(TaskList tasks) {
         this.tasks = tasks;
-        this.ui = ui;
     }
 
     /**
@@ -32,7 +29,7 @@ public class Parser {
      * @param input command given by user input.
      * @throws DukeException exception thrown due to invalid command or file writing error.
      */
-    public void parse(String input) throws DukeException {
+    public String parse(String input) throws DukeException {
         Command command;
         String[] userInput = input.split(" ", 2);
 
@@ -46,42 +43,47 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
-
+        String message = "";
         switch (command) {
         case LIST:
-            tasks.print(ui);
+            message = tasks.print();
             break;
         case DONE:
-            setTaskDone(userInput);
+            message = setTaskDone(userInput);
             break;
         case TODO:
-            addTodo(userInput);
+            message = addTodo(userInput);
             break;
         case DEADLINE:
-            addDeadline(userInput);
+            message = addDeadline(userInput);
             break;
         case EVENT:
-            addEvent(userInput);
+            message = addEvent(userInput);
             break;
         case DELETE:
-            deleteTask(userInput);
+            message = deleteTask(userInput);
             break;
         case FIND:
-            findTask(userInput);
+            message = findTask(userInput);
+            break;
+        case BYE:
+            message = Ui.sayBye();
             break;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+        return message;
     }
 
     /**
      * Adds the input to the list of tasks and prints out the input.
      *
      * @param input to be added and printed.
+     * @return string to inform user of successful command.
      */
-    private void addTask(Task input) {
+    private String addTask(Task input) {
         tasks.add(input);
-        ui.print(String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
+        return Ui.print(String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
                 input, tasks.size(), tasks.size() == 1 ? "task" : "tasks"));
     }
 
@@ -89,12 +91,13 @@ public class Parser {
      * Adds a todo task to the list of tasks.
      *
      * @param userInput given by user.
+     * @return string to inform user of successful command.
      */
-    private void addTodo(String[] userInput) throws DukeException {
+    private String addTodo(String[] userInput) throws DukeException {
         try {
-            addTask(new Todo(userInput[1]));
+            return addTask(new Todo(userInput[1]));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("duke.task.Todo description cannot be empty");
+            throw new DukeException("Todo description cannot be empty");
         }
     }
 
@@ -102,12 +105,13 @@ public class Parser {
      * Adds a deadline task to the list of tasks.
      *
      * @param userInput given by user.
+     * @return string to inform user of successful command.
      */
-    private void addDeadline(String[] userInput) throws DukeException {
+    private String addDeadline(String[] userInput) throws DukeException {
         try {
             String deadlineDescription = userInput[1].split(" /by ")[0];
             String by = userInput[1].split(" /by ")[1];
-            addTask(new Deadline(deadlineDescription, by));
+            return addTask(new Deadline(deadlineDescription, by));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("duke.task.Deadline description and time by cannot be empty");
         }
@@ -117,12 +121,13 @@ public class Parser {
      * Adds a event task to the list of tasks.
      *
      * @param userInput given by user.
+     * @return string to inform user of successful command.
      */
-    private void addEvent(String[] userInput) throws DukeException {
+    private String addEvent(String[] userInput) throws DukeException {
         try {
             String eventDescription = userInput[1].split(" /at ")[0];
             String by = userInput[1].split(" /at ")[1];
-            addTask(new Event(eventDescription, by));
+            return addTask(new Event(eventDescription, by));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("duke.task.Event description and time at cannot be empty");
         }
@@ -132,8 +137,9 @@ public class Parser {
      * Deletes a task given it's index from the list of tasks.
      *
      * @param userInput given by user.
+     * @return string to inform user of successful command.
      */
-    private void deleteTask(String[] userInput) throws DukeException {
+    private String deleteTask(String[] userInput) throws DukeException {
         try {
             int i = Integer.parseInt(userInput[1]);
             Task task = tasks.get(i - 1);
@@ -141,7 +147,7 @@ public class Parser {
             String taskWord = tasks.size() == 1
                     ? "task"
                     : "tasks";
-            ui.print(String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.",
+            return Ui.print(String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.",
                     task, tasks.size(), taskWord));
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Please give a valid number!");
@@ -152,10 +158,11 @@ public class Parser {
      * Prints the tasks filtered by keyword.
      *
      * @param userInput given by user.
+     * @return string to inform user of successful command.
      */
-    private void findTask(String[] userInput) throws DukeException {
+    private String findTask(String[] userInput) throws DukeException {
         try {
-            tasks.filter(userInput[1]).print(ui, "Here are the matching tasks in your list:");
+            return tasks.filter(userInput[1]).print("Here are the matching tasks in your list:");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please enter something to find for!");
         }
@@ -165,13 +172,14 @@ public class Parser {
      * Set i-th task to be done and prints confirmation message.
      *
      * @param userInput given by user.
+     * @return string to inform user of successful command.
      */
-    private void setTaskDone(String[] userInput) throws DukeException {
+    private String setTaskDone(String[] userInput) throws DukeException {
         try {
             int i = Integer.parseInt(userInput[1]);
             Task task = tasks.get(i - 1);
             task.setDone();
-            ui.print(String.format("Nice! I've marked this task as done:\n  %s", task.toString()));
+            return Ui.print(String.format("Nice! I've marked this task as done:\n  %s", task.toString()));
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new DukeException("Please give a valid number!");
         }
