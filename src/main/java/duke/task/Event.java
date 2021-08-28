@@ -70,14 +70,15 @@ public class Event extends Task {
      */
     public String formatSave() {
         if (time != null) {
-            return "E | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | "
+            return "E | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | "
                     + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", "
                     + time.format(DateTimeFormatter.ofPattern("h:mma"));
         } else if (date != null) {
-            return "E | " + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | "
+            return "E | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | "
                     + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } else {
+            return "E | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | " + getTime();
         }
-        return "E | "  + ((super.isDone) ? "1 |" : "0 | ") + super.getDescription() + " | " + getTime();
     }
 
     @Override
@@ -89,7 +90,7 @@ public class Event extends Task {
             return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern(
                     "MMM dd yyyy")) + ")";
         } else {
-            return "[D]" + super.toString() + " (by: " + at + ")";
+            return "[E]" + super.toString() + " (at: " + at + ")";
         }
     }
 }
