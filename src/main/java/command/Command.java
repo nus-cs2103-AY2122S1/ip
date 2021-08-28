@@ -28,6 +28,9 @@ public abstract class Command {
             case "delete":
                 commandType = new DeleteCommand(Integer.parseInt(output[1]) - 1);
                 break;
+            case "list":
+                commandType = new ListCommand();
+                break;
             case "todo":
 
             case "deadline":
