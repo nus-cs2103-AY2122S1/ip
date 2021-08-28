@@ -15,22 +15,34 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ * Main program managing all main functions.
+ */
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private final Ui ui;
 
+    /**
+     * Constructs the main Duke object to run the program.
+     *
+     * @param filePath The path of the save file to be used/created
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            taskList = new TaskList(storage.loadTaskData());
+            taskList = storage.loadTaskData();
         } catch (IOException e) {
             ui.showLoadingError();
             taskList = new TaskList();
         }
     }
 
+    /**
+     * Runs the main program loop.
+     * Manages the main loop, handling all user input and saving data/etc.
+     */
     public void run() {
         String userInput;
         boolean isTaskListUpdated = false;

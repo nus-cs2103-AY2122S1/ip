@@ -5,12 +5,10 @@ import duke.io.Command;
 import duke.io.Parser;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.Task;
 import duke.tasks.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

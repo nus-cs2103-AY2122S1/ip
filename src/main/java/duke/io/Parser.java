@@ -5,11 +5,28 @@ import duke.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * Parser class intended to be used to parse user input to extract the correct command.
+ */
 public class Parser {
+
+    /**
+     * Retrieves the next line of input, disregarding extra whitespaces.
+     *
+     * @param sc The scanner object to retrieve the next line of input from
+     * @return The next line of input after trimming whitespace from both ends
+     */
     public static String getInput(Scanner sc) {
         return sc.nextLine().trim();
     }
 
+    /**
+     * Parses a line of given user input to extract the relevant/correct command.
+     *
+     * @param userInput A String containing a line of input to parse as a single command
+     * @return A Command object containing an identifier of the command and its arguments
+     * @throws DukeException When given input cannot be parsed successfully
+     */
     public static Command parse(String userInput) throws DukeException {
         if (userInput.equals("bye")) {
             // EXIT command

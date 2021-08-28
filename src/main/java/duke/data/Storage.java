@@ -16,15 +16,29 @@ import duke.tasks.Todo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 
+/**
+ * Encapsulates the saving and loading of task data from a save file.
+ */
 public class Storage {
     protected String pathName;
     protected File taskFile;
 
+    /**
+     * Initialises the object with a path to the save file.
+     *
+     * @param pathName A String containing a relative path to the save file
+     */
     public Storage(String pathName) {
         this.pathName = pathName;
         this.taskFile = new File(pathName);
     }
 
+    /**
+     * Saves a given TaskList to the file at the path given at initialisation.
+     *
+     * @param taskList The list of tasks to be saved to file
+     * @throws IOException Thrown in the case of an error while initialising the file writer
+     */
     public void saveTaskData(TaskList taskList) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathName));
         if (!taskList.isEmpty()) {
@@ -38,7 +52,13 @@ public class Storage {
         writer.close();
     }
 
-    public List<Task> loadTaskData() throws IOException {
+    /**
+     * Loads a TaskList from a save file at the path given at initialisation.
+     *
+     * @return The TaskList representing the tasks retrieved from the save file
+     * @throws IOException Thrown when there is an exception while creating the save file (if it doesn't already exist)
+     */
+    public TaskList loadTaskData() throws IOException {
         this.taskFile.getParentFile().mkdirs();
         if (!this.taskFile.createNewFile()) {
             // Save file exists, so load it
@@ -64,10 +84,10 @@ public class Storage {
             }
 
             sc.close();
-            return taskData;
+            return new TaskList(taskData);
         } else {
             // No save file exists, so a new one is created. Return empty list of tasks
-            return new ArrayList<>();
+            return new TaskList(new ArrayList<>());
         }
     }
 }
