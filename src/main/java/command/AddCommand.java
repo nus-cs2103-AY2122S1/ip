@@ -1,13 +1,22 @@
 package command;
 
+import static parser.Parser.COMMAND_TODO;
+import static parser.Parser.COMMAND_DEADLINE;
+import static parser.Parser.COMMAND_EVENT;
+
 import exceptions.DukeException;
-import storage.Storage;
-import task.*;
-import ui.Ui;
 
 import java.util.Map;
 
-import static parser.Parser.*;
+import storage.Storage;
+
+import task.DeadlineTask;
+import task.EventTask;
+import task.Task;
+import task.TaskList;
+import task.TodoTask;
+
+import ui.Ui;
 
 public class AddCommand extends Command {
     public enum TaskType {
