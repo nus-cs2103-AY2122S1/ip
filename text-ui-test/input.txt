@@ -1,0 +1,8 @@
+Todo read
+Deadline lab /by Mon
+Events exam /at Tues 2-4pm
+done 1
+done 3
+done 2
+list
+bye
