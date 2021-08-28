@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
     public static void main(String[] args) {
@@ -9,6 +11,8 @@ public class Duke {
             DukeStorage storage = new DukeStorage("tasklist.txt");
             ArrayList<Task> tasks = storage.readTasks();
             int counter = tasks.size();
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
             System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
 
@@ -38,7 +42,6 @@ public class Duke {
                         for (int i = 1; i < strArray.length; i++) {
                             description = description + strArray[i] + " ";
                         }
-
                         if (description.equals("")) {
                             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                         } else {
@@ -53,21 +56,22 @@ public class Duke {
                         for (int i = 1; i < strArray.length; i++) {
                             if (strArray[i].equals("/by")) {
                                 i++;
-                                while (i < strArray.length) {
-                                    date = " " + date + strArray[i];
-                                    i++;
+                                if (i + 2 < strArray.length) {
+                                    throw new DukeException("OOPS!!! Invalid date input.");
                                 }
+                                date = strArray[i] + " " + strArray[i + 1];
                                 break;
                             }
                             description = description + strArray[i] + " ";
                         }
 
+                        LocalDateTime dateTime = LocalDateTime.parse(date, inputFormatter);
                         if (description.equals("")) {
                             throw new DukeException("OOPS!!! Deadline description cannot be empty :-(");
                         } else if (date.equals("")) {
                             throw new DukeException("OOPS!!! Deadline date cannot be empty :-(");
                         } else {
-                            tasks.add(new Deadline(description, date));
+                            tasks.add(new Deadline(description, dateTime.format(outputFormatter)));
                             System.out.println("Got it. I've added this task:\n" + "\t" + tasks.get(counter).toString());
                             counter++;
                             System.out.println("Now you have " + counter + " tasks in your list.");
@@ -78,33 +82,35 @@ public class Duke {
                         for (int i = 1; i < strArray.length; i++) {
                             if (strArray[i].equals("/at")) {
                                 i++;
-                                while (i < strArray.length) {
-                                    date = " " + date + strArray[i];
-                                    i++;
+                                if (i + 2 < strArray.length) {
+                                    throw new DukeException("OOPS!!! Invalid date input.");
                                 }
+                                date = strArray[i] + " " + strArray[i + 1];
                                 break;
                             }
                             description = description + strArray[i] + " ";
                         }
 
+                        LocalDateTime dateTime = LocalDateTime.parse(date, inputFormatter);
                         if (description.equals("")) {
                             throw new DukeException("OOPS!!! Event description cannot be empty :-(");
                         } else if (date.equals("")) {
                             throw new DukeException("OOPS!!! Event date cannot be empty :-(");
                         } else {
-                            tasks.add(new Event(description, date));
+                            tasks.add(new Event(description, dateTime.format(outputFormatter)));
                             System.out.println("Got it. I've added this task:\n" + "\t" + tasks.get(counter).toString());
                             counter++;
                             System.out.println("Now you have " + counter + " tasks in your list.");
                         }
                     } else if (strArray[0].equals("delete")) {
-                        if (strArray[1].equals(null)) {
+                        if (strArray.length != 2) {
                             throw new DukeException("OOPS!!! You haven't specified which task you've done :-(");
                         } else {
                             int idx = Integer.parseInt(strArray[1]) - 1;
-                            System.out.println("Noted. I've removed this task: \n" + "\t" + tasks.remove(idx).toString());
+                            System.out.println("Noted. I've removed this task:\n" + "\t" + tasks.get(idx).toString());
+                            tasks.remove(idx);
                             counter--;
-                            System.out.println("Now you have " + counter + " tasks in the list");
+                            System.out.println("Now you have " + counter + " tasks in your list");
                         }
                     } else {
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
