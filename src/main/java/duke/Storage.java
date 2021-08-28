@@ -15,7 +15,7 @@ public class Storage {
         try {
             if (!file.exists()){
                 file.getParentFile().mkdir();
-                file.createNewFile();
+                file.createNewFile();System.out.println("hello");
             }
             this.memory = file;
         } catch (IOException e) {

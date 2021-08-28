@@ -1,6 +1,0 @@
-[T] [✕] homework
-[E] [✕] assignment (at: today )
-[D] [✕] homework (by: Jan 1 2021 )
-[T] [✕] homework
-[D] [✕] assignment (by: Jan 1 2021 )
-[E] [✕] carnival (at: Monday 4-5PM )
