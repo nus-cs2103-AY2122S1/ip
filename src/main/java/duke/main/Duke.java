@@ -17,9 +17,9 @@ public class Duke {
     /**
      * Constructor for the Duke.Duke class.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath, String fileName) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, fileName);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -54,6 +54,6 @@ public class Duke {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        new Duke("../data/duke.txt").run();
+        new Duke("data", "duke.txt").run();
     }
 }

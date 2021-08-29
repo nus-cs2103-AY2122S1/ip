@@ -8,7 +8,10 @@ import duke.task.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,7 +22,8 @@ import java.util.Scanner;
  * @Since 25/8/21
  */
 public class Storage {
-    private String filepath;
+    private String filePath;
+    private String fileName;
     private File file;
     private FileWriter fileWriter;
     
@@ -27,9 +31,11 @@ public class Storage {
      * Class constructor.
      * 
      * @param filePath the path from the project directory to the storage file.
+     * @param fileName the name of the file.
      */
-    public Storage(String filePath) {
-        this.filepath = filePath;
+    public Storage(String filePath, String fileName) {
+        this.filePath = filePath;
+        this.fileName = fileName;
     }
 
     /**
@@ -41,9 +47,11 @@ public class Storage {
     public  ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            File tempFile = new File(filepath);
-            filepath = tempFile.getCanonicalPath();
-            file = new File(filepath);
+            File fileDirectory = new File(filePath);
+            if(!fileDirectory.exists()) {
+                fileDirectory.mkdir();
+            }
+            file = new File(filePath + "/" + fileName);
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -82,7 +90,7 @@ public class Storage {
                 sc.close();
             }
         } catch (IOException e) {
-            file = new File(filepath);
+            file = new File(filePath);
             throw new DukeException(e);
         } catch (ParseException e) {
             throw new DukeException(e);
@@ -96,7 +104,7 @@ public class Storage {
      * @throws IOException
      */
     public void store(ArrayList<Task> tasks) throws IOException{
-        file = new File(filepath);
+        file.delete();
         file.createNewFile();
         fileWriter = new FileWriter(file, false);
         String data = "";
