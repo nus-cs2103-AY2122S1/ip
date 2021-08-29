@@ -8,7 +8,7 @@ public class Parser {
     protected String[] currentLine;
 
     /**
-     * Method to split the command into a <code>String</code> array.
+     * Method to split command into a <code>String</code> array.
      *
      * @param command The command to be split.
      */
