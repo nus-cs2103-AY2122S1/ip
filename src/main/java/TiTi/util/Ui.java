@@ -117,15 +117,14 @@ public class Ui {
             System.out.println(STARTER_CONFUSED + "Nya?... I can't find what you are looking for...");
         }
     }
-
-
+    
     private String printTaskCount(TaskList taskList) {
+
         if (taskList.size() == 1) {
             return "We now have " + taskList.size() + " task on our list.";
         } else {
             return "We now have " + taskList.size() + " tasks on our list.";
         }
     }
-
 
 }
