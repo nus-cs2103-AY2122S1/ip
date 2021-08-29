@@ -1,6 +1,9 @@
 package duke;
+
+
 import java.io.*;
 import java.util.LinkedList;
+
 
 /**
  * Class that deals with loading tasks from file and saving tasks in file
@@ -23,7 +26,7 @@ public class Storage {
      */
     @SuppressWarnings("unchecked")
     protected LinkedList<Task> loadData() throws DukeException {
-//         Create data folder if it does not exist.
+        // Create data folder if it does not exist.
         File dataFolder = new File("./data/");
         if (!dataFolder.exists()) {
             dataFolder.mkdir();
@@ -66,10 +69,13 @@ public class Storage {
                 throw new DukeException("Something went wrong when I tried to save your list :(");
             }
         }
-//
     }
 
-    public void deleteData() throws DukeException{
+    /**
+     * Delete a task from list.
+     * @throws DukeException an exception for duke.
+     */
+    public void deleteData() throws DukeException {
         try {
             File dataFile = new File("./data/list.txt");
             dataFile.delete();

@@ -1,14 +1,10 @@
 package duke;
+
+
+
 /**
  * Class that deals with reading user input
  */
-
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-
-
 public class Parser {
 
     /**

@@ -30,7 +30,7 @@ public class TaskList {
         }
         System.out.println("Here are the tasks in your list:");
         int counter = 0;
-        while(counter < myList.size()) {
+        while (counter < myList.size()) {
             System.out.println((counter + 1) + ". " + myList.get(counter).toString());
             counter += 1;
         }
@@ -57,8 +57,7 @@ public class TaskList {
             } else {
                 myList.get(taskNumber - 1).setDone(true);
             }
-        }
-        catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             throw new DukeException("Woah, enter the task number properly..");
         }
     }
@@ -84,8 +83,7 @@ public class TaskList {
                 myList.remove(taskNumber - 1);
                 System.out.println("Noted. I've removed this task:\n" + infoOfTask);
             }
-        }
-        catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             throw new DukeException("Woah, enter the task number properly..");
         }
     }
@@ -128,7 +126,8 @@ public class TaskList {
                 myList.add(nextTask);
                 System.out.println(nextTask.toString());
             } catch (DateTimeException | ArrayIndexOutOfBoundsException err) {
-                throw new DukeException("I think there's a problem with your input! Enter your task in this format! \"yyyy-MM-dd HHmm\"");
+                throw new DukeException("I think there's a problem with your input! "
+                        + "Enter your task in this format! \"yyyy-MM-dd HHmm\"");
             }
         }
     }
@@ -153,7 +152,8 @@ public class TaskList {
                 myList.add(nextTask);
                 System.out.println(nextTask.toString());
             } catch (DateTimeException | ArrayIndexOutOfBoundsException err) {
-                throw new DukeException("I think there's a problem with your input! Enter your task in this format! \"yyyy-MM-dd HHmm\"");
+                throw new DukeException("I think there's a problem with your input! "
+                        + "Enter your task in this format! \"yyyy-MM-dd HHmm\"");
             }
         }
     }
@@ -188,17 +188,17 @@ public class TaskList {
                 for (String word : taskWords) {
                     if (word.equals(keyword)) {
                         return false;
-                    } else {}
+                    } else { }
                 }
                 return true;
-//                !task.getTitle().contains(keyword)
+                // !task.getTitle().contains(keyword)
             });
             if (copyList.isEmpty()) {
                 throw new DukeException("Yo! I can't find this keyword in your list!");
             }
             System.out.println("Here are the matching tasks in your list:");
             int counter = 0;
-            while(counter < copyList.size()) {
+            while (counter < copyList.size()) {
                 System.out.println((counter + 1) + ". " + copyList.get(counter).toString());
                 counter += 1;
             }

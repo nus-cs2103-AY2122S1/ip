@@ -11,7 +11,7 @@ public class Todo extends Task {
      * Constructor for a Todo.
      * @param title takes in the title of the Task.
      */
-    public Todo(String title)  {
+    public Todo(String title) {
         super(title);
     }
 

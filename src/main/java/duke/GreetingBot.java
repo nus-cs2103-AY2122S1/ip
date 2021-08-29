@@ -1,18 +1,13 @@
 package duke;
+
+import java.util.LinkedList;
+import java.util.Scanner;
+
+
 /**
  * Code for the main skeleton of the Bot. When Duke is run, An instance of this class is created and used to run it.
  *
  */
-
-
-import java.io.*;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import java.util.LinkedList;
-
 public class GreetingBot {
 
     private Storage storage;
@@ -49,7 +44,7 @@ public class GreetingBot {
         if (tasks.getList().isEmpty()) {
             try {
                 storage.deleteData();
-                ui.goodbyeEmptyList();
+                ui.goodbye();
             } catch (DukeException err) {
                 System.out.println(err.toString());
             }
