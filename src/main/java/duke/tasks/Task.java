@@ -23,7 +23,7 @@ public abstract class Task {
      * Constructs a Task given both description and completion flag.
      *
      * @param description A description of the task to be done
-     * @param isDone Tracks whether the task is complete or not
+     * @param isDone      Tracks whether the task is complete or not
      */
     protected Task(String description, boolean isDone) {
         this.description = description;
@@ -82,6 +82,16 @@ public abstract class Task {
     }
 
     /**
+     * Returns true if the Task description contains the given keyword/String
+     *
+     * @param keyword A String to be checked if it is contained in the Task description field
+     * @return True iff this.description contains the given keyword String
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
+    /**
      * Returns a string representation of the Todo Task
      *
      * @return String representing the Todo Task
@@ -92,10 +102,10 @@ public abstract class Task {
     }
 
     /**
+     * Does a deep comparison of this object to another object.
      *
-     *
-     * @param otherObj
-     * @return
+     * @param otherObj The other object to be compared to
+     * @return Returns true iff the two objects are of same type and same value in every field
      */
     @Override
     public boolean equals(Object otherObj) {
@@ -106,7 +116,8 @@ public abstract class Task {
 
             if (this.isDone != otherTask.isDone) {
                 return false;
-            } else return this.description.equals(otherTask.description);
+            } else
+                return this.description.equals(otherTask.description);
         }
     }
 }

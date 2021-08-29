@@ -59,7 +59,9 @@ public class Duke {
 
                     Command command = Parser.parse(userInput);
                     String description;
+                    String keyword;
                     LocalDate dateTime;
+                    int index;
 
                     switch (command.getCommand()) {
                         case BYE:
@@ -70,7 +72,7 @@ public class Duke {
                             break;
                         case DONE:
                             // -1 to account for zero-indexing
-                            int index = Integer.parseInt(command.getArgs()[0]) - 1;
+                            index = Integer.parseInt(command.getArgs()[0]) - 1;
                             taskList.get(index).markAsDone();
                             isTaskListUpdated = true;
 
@@ -117,6 +119,12 @@ public class Duke {
                             TaskList dueTasks = taskList.filterByDate(queryDate);
 
                             ui.printTaskList(dueTasks, queryDate);
+                            break;
+                        case FIND:
+                            // -1 to account for zero-indexing
+                            keyword = command.getArgs()[0];
+
+                            ui.printTaskList(taskList.containsKeyword(keyword));
                             break;
                         default:
                             break;
