@@ -11,7 +11,7 @@ import duke.ui.Ui;
  */
 public class DeleteCommand extends Command {
 
-    int index;
+    private int index;
 
     /**
      * Creates a delete command where it has the index of the task in the TaskList to be deleted.

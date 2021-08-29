@@ -10,7 +10,7 @@ import duke.ui.Ui;
  * Represents a done command that has a index of the task in the TaskList that is to be marked as done.
  */
 public class DoneCommand extends Command {
-    int index;
+    private int index;
 
     /**
      * Creates a done command with the index of the task in the TaskList to be marked as done.

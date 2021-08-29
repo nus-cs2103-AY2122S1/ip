@@ -1,12 +1,8 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
 
 /**
  * Represents the ArrayList where the tasks of the program is stored.
@@ -31,32 +27,32 @@ public class TaskList {
             String type = taskStringArr[0];
             Task task;
             switch (type) {
-                case "T":
-                    if (taskStringArr.length != todoLength){
-                        throw new DukeException("ERROR READING FROM STORAGE");
-                    }
-                    task = new Todo(taskStringArr[2]);
-                    break;
-                case "D":
-                    if (taskStringArr.length != deadlineLength){
-                        throw new DukeException("ERROR READING FROM STORAGE");
-                    }
-                    String[] deadlineDateTimeArr = taskStringArr[3].split(" ");
-                    String deadlineDateString = deadlineDateTimeArr[0];
-                    String deadlineTimeString = deadlineDateTimeArr[1];
-                    task = new Deadline(taskStringArr[2], deadlineDateString, deadlineTimeString);
-                    break;
-                case "E":
-                    if (taskStringArr.length != eventLength){
-                        throw new DukeException("ERROR READING FROM STORAGE");
-                    }
-                    String[] eventDateTimeArr = taskStringArr[3].split(" ");
-                    String eventDateString = eventDateTimeArr[0];
-                    String eventTimeString = eventDateTimeArr[1];
-                    task = new Event(taskStringArr[2], eventDateString, eventTimeString);
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + type);
+            case "T":
+                if (taskStringArr.length != todoLength) {
+                    throw new DukeException("ERROR READING FROM STORAGE");
+                }
+                task = new Todo(taskStringArr[2]);
+                break;
+            case "D":
+                if (taskStringArr.length != deadlineLength) {
+                    throw new DukeException("ERROR READING FROM STORAGE");
+                }
+                String[] deadlineDateTimeArr = taskStringArr[3].split(" ");
+                String deadlineDateString = deadlineDateTimeArr[0];
+                String deadlineTimeString = deadlineDateTimeArr[1];
+                task = new Deadline(taskStringArr[2], deadlineDateString, deadlineTimeString);
+                break;
+            case "E":
+                if (taskStringArr.length != eventLength) {
+                    throw new DukeException("ERROR READING FROM STORAGE");
+                }
+                String[] eventDateTimeArr = taskStringArr[3].split(" ");
+                String eventDateString = eventDateTimeArr[0];
+                String eventTimeString = eventDateTimeArr[1];
+                task = new Event(taskStringArr[2], eventDateString, eventTimeString);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
             }
             if (taskStringArr[1].equals("1")) {
                 task.markAsDone();

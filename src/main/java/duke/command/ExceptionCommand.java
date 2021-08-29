@@ -10,7 +10,7 @@ import duke.ui.Ui;
  */
 
 public class ExceptionCommand extends Command {
-    DukeException e;
+    private DukeException e;
 
     /**
      * Creates an exception command to deal with exceptions that are thrown when parsing the users input.

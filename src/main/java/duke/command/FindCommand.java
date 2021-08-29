@@ -1,19 +1,19 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
-
 /**
  * Represents a command given to find tasks that match a given string.
  */
 
 public class FindCommand extends Command {
-    String input;
+    private String input;
 
     /**
      * Creates the FindCommand given the String input.

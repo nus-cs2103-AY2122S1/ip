@@ -11,7 +11,7 @@ import duke.ui.Ui;
  */
 
 public class AddCommand extends Command {
-    Task task;
+    private Task task;
 
     /**
      * Constructor to create an AddCommand with the task that it will add.

@@ -4,7 +4,7 @@ package duke.task;
  * Represents a task that has to be completed.
  */
 
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Creates the todo with the given description
      * @param description

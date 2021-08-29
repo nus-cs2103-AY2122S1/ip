@@ -45,16 +45,16 @@ public class Parser {
                 return new ListCommand();
             case "done":
                 if (words.length < 2) {
-                    throw new DukeException("☹ OOPS!!!" +
-                            " Please specify which task you wish to complete.");
+                    throw new DukeException("☹ OOPS!!!"
+                            + " Please specify which task you wish to complete.");
                 }
                 rest = words[1];
                 index = Integer.parseInt(rest) - 1;
                 return new DoneCommand(index);
             case "delete":
                 if (words.length < 2) {
-                    throw new DukeException("☹ OOPS!!!" +
-                            " Please specify which task you wish to complete.");
+                    throw new DukeException("☹ OOPS!!!"
+                            + " Please specify which task you wish to complete.");
                 }
                 rest = words[1];
                 index = Integer.parseInt(rest) - 1;

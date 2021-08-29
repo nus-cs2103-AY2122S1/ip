@@ -1,12 +1,12 @@
 package duke.storage;
 
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Represents the storage that interacts with the text file to retrieve and save tasks upon starting

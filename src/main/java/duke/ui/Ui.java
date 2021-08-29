@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Represents the user interface that the user uses to interact with the program.
@@ -11,12 +11,12 @@ import java.util.Scanner;
 public class Ui {
     private Scanner reader;
 
-    String logo = "┏━━┓╋╋╋┏━━┓╋╋╋┏┓\n" +
-            "┃┏┓┃╋╋╋┃┏┓┃╋╋┏┛┗┓\n" +
-            "┃┗┛┗┳━┳┫┗┛┗┳━┻┓┏┛\n" +
-            "┃┏━┓┃┏╋┫┏━┓┃┏┓┃┃\n" +
-            "┃┗━┛┃┃┃┃┗━┛┃┗┛┃┗┓\n" +
-            "┗━━━┻┛┗┻━━━┻━━┻━┛";
+    private String logo = "┏━━┓╋╋╋┏━━┓╋╋╋┏┓\n"
+            + "┃┏┓┃╋╋╋┃┏┓┃╋╋┏┛┗┓\n"
+            + "┃┗┛┗┳━┳┫┗┛┗┳━┻┓┏┛\n"
+            + "┃┏━┓┃┏╋┫┏━┓┃┏┓┃┃\n"
+            + "┃┗━┛┃┃┃┃┗━┛┃┗┛┃┗┓\n"
+            + "┗━━━┻┛┗┻━━━┻━━┻━┛";
 
     /**
      * Creates a new instance of Ui with a scanner to take in user input.
