@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandExit;
-import task.TaskList;
 
 import java.util.Scanner;
 

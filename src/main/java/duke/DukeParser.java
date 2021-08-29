@@ -1,6 +1,16 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CommandExit;
+import duke.command.CommandHelp;
+import duke.command.CommandDelete;
+import duke.command.CommandDone;
+import duke.command.CommandAddDeadline;
+import duke.command.CommandAddEvent;
+import duke.command.CommandAddTodo;
+import duke.command.CommandList;
+import duke.command.CommandInvalid;
+
 import task.TaskList;
 
 import java.util.regex.Matcher;

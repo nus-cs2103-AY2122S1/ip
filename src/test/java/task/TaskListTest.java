@@ -25,13 +25,6 @@ class TaskListTest {
         assertEquals(expectedOutput, outContent.toString());
     }
 
-//    @Test
-//    void add_emptyTaskList_arraylistContainsTask() {
-//        ArrayList<Task> list = new ArrayList<>();
-//        TaskList testList = new TaskList(list);
-//
-//    }
-
     @Test
     void toggleDone_nonemptyTaskList_taskIsCompleted() {
         ArrayList<Task> list = new ArrayList<>();
