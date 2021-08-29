@@ -7,6 +7,7 @@ public enum RegexType {
     DIGITS_REGEX("\\d+"),
     DEADLINE_REGEX(".+/by.+"),
     TASK_ADDED_LINE("Got it. I've added this task:"),
+    DUKE_TXT("data/duke.txt"),
     EVENT_REGEX(".+/at.+");
 
 

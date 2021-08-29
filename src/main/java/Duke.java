@@ -1,5 +1,12 @@
 import exceptions.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,33 +14,105 @@ public class Duke {
 
     public static ArrayList<Task> taskList = new ArrayList<>();
 
+    public static File file = new File(RegexType.DUKE_TXT.getRegexType());
+
+    public static void loadData() throws FileNotFoundException, FileFormatException {
+        Scanner in = new Scanner(file);
+        while (in.hasNext()) {
+            String entry = in.nextLine();
+            if (!entry.matches("\"T\\\\s\\\\|\\\\s[01]\\\\s\\\\|.+\"") && !entry.matches("[ED]\\\\s\\\\|\\\\s[01]\\\\s\\\\|.+\\\\|.+")) {
+                throw new FileFormatException();
+            }
+
+            String[] entrySplit = entry.split("\\s\\|\\s");
+            String taskType = entrySplit[0];
+            boolean isDone = entrySplit[1].equals("1");
+            String description = entrySplit[2];
+            String atBy = entrySplit.length >= 4 ? entrySplit[3] : "";
+
+            if(taskType.equals("T")) {
+                taskList.add(new Todo(description, isDone));
+            } else if (taskType.equals("D")) {
+                taskList.add(new Deadline(description, isDone, atBy));
+            } else {
+                taskList.add(new Event(description, isDone, atBy));
+            }
+
+        }
+
+    }
+
+    public static void createFile() throws IOException {
+        Path pathToFile = Paths.get(RegexType.DUKE_TXT.getRegexType());
+        Files.createDirectories(pathToFile.getParent());
+        file.createNewFile();
+
+    }
+    public static void initialiseTaskList(){
+        try {
+            loadData();
+        } catch (FileNotFoundException e){
+            System.out.println("File not found");
+            try {
+                createFile();
+
+            } catch (IOException e1){
+                System.out.println("Error creating new file");
+            }
+            System.out.println("New file data/duke.txt created");
+
+        } catch (FileFormatException e){
+            System.out.println("File formatting error");
+            taskList.clear();
+        }
+    }
+
+    private static void _writeToFile() throws IOException{
+        FileWriter fw = new FileWriter(RegexType.DUKE_TXT.getRegexType());
+        for (Task task : taskList){
+            fw.write(task.saveTask() + "\n");
+        }
+        fw.close();
+    }
+
+    public static void writeToFile(){
+        try {
+            _writeToFile();
+        } catch (IOException e) {
+            System.out.println("Error writing to file");
+        }
+    }
+
+
+
+
     // Prints a horizontal dash line
-    public static void printDashLine(){
+    public static void printDashLine() {
         System.out.println("--------------------------------"
                 + "---------------------------------------");
     }
 
-    public static void printOneLine(String line){
+    public static void printOneLine(String line) {
         printDashLine();
         System.out.println(line);
         printDashLine();
     }
 
-    public static void printMultiLine(String[] lines){
+    public static void printMultiLine(String[] lines) {
         printDashLine();
-        for (String line : lines){
+        for (String line : lines) {
             System.out.println(line);
         }
         printDashLine();
     }
 
     // Prints the prompt before every user input
-    public static void printPrompt(){
+    public static void printPrompt() {
         System.out.print("  > ");
     }
 
     // Prints the greet statement
-    public static void printGreeting(){
+    public static void printGreeting() {
         printOneLine(PrintType.GREETING_LINES.getPrintType());
     }
 
@@ -42,8 +121,75 @@ public class Duke {
         printOneLine(PrintType.BYE_LINE.getPrintType());
     }
 
+
+    //Print acknowledgement of input
+    public static void printAcknowledgement() {
+        String[] acknowledgeTaskLines = {
+                "Got it. I've added this task:",
+                taskList.get(taskList.size()-1).showTask(),
+                "Now you have " + taskList.size() + " tasks in the list"
+        };
+        printMultiLine(acknowledgeTaskLines);
+    }
+
+    // Adding a Todo to list of tasks
+    public static void addTodo(String userInput) throws TodoException {
+
+        if (userInput.equals("todo") || userInput.equals("")) {
+            throw new TodoException();
+        }
+        // Create new Todo instance an add it to end taskList
+        taskList.add(new Todo(userInput));
+
+        printAcknowledgement();
+        writeToFile();
+    }
+
+    // Adding a Deadline to list of tasks
+    public static void addDeadline(String userInput) throws DeadlineException {
+        // Check if line follows the format "<description> /by <time/date>"
+        if (!userInput.matches(RegexType.DEADLINE_REGEX.getRegexType())) {
+            throw new DeadlineException();
+        }
+
+        // get description and by from line
+        String description = userInput.replaceAll(RegexType.GET_DESCRIPTION_REGEX.getRegexType(), "");
+        String by = userInput.replaceAll(RegexType.GET_BY_REGEX.getRegexType(), "");
+
+        // Create new Deadline instance an add it to end taskList
+        taskList.add(new Deadline(description, by));
+
+        printAcknowledgement();
+        writeToFile();
+    }
+
+    // Adding an Event to list of tasks
+    public static void addEvent(String userInput) throws EventException {
+        // Check if userInput follows the format "<description> /at <time/date>"
+        if (!userInput.matches(RegexType.EVENT_REGEX.getRegexType())) {
+            throw new EventException();
+        }
+
+        // get description and by from userInput
+        String description = userInput.replaceAll(RegexType.GET_DESCRIPTION_REGEX.getRegexType(), "");
+        String at = userInput.replaceAll(RegexType.GET_AT_REGEX.getRegexType(), "");
+
+        // Create new Event instance an add it to end taskList
+        taskList.add(new Event(description, at));
+
+        printAcknowledgement();
+        writeToFile();
+    }
+
+    public static void addNothing() throws NothingException {
+        throw new NothingException();
+    }
+
     // Print list of task
-    public static void printList() {
+    public static void printList() throws EmptyListException{
+        if (taskList.size() == 0){
+            throw new EmptyListException();
+        }
         String[] listLines = new String[taskList.size()+1];
 
         listLines[0] = PrintType.LIST_INTRO_LINE.getPrintType();
@@ -56,112 +202,22 @@ public class Duke {
         printMultiLine(listLines);
     }
 
-    // Print number of tasks left
-    public static void printNumOfTask(){
-        printOneLine("Now you have " + taskList.size() + " tasks in the list");
-    }
-
-
-    // Print acknowledgement of task added/ deleted depending on line
-    public static void printAcknowledgement(String line, int index){
-        String[] acknowledgeTaskLines = {
-                line,
-                "  " + taskList.get(index).showTask(),
-        };
-        printMultiLine(acknowledgeTaskLines);
-    }
-
-    // Adding a Todo to list of tasks
-    public static void addTodo(String userInput) throws TodoException{
-
-        if (userInput.equals("todo") || userInput.equals("")){
-            throw new TodoException();
-        }
-        // Create new Todo instance an add it to end taskList
-        taskList.add(new Todo (userInput));
-
-        printAcknowledgement(RegexType.TASK_ADDED_LINE.getRegexType(), taskList.size()-1);
-        printNumOfTask();
-    }
-
-    // Adding a Deadline to list of tasks
-    public static void addDeadline(String userInput) throws DeadlineException {
-        // Check if line follows the format "<description> /by <time/date>"
-        if (!userInput.matches(RegexType.DEADLINE_REGEX.getRegexType())){
-            throw new DeadlineException();
-        }
-
-        // get description and by from line
-        String description = userInput.replaceAll(RegexType.GET_DESCRIPTION_REGEX.getRegexType(), "");
-        String by = userInput.replaceAll(RegexType.GET_BY_REGEX.getRegexType(), "");
-
-        // Create new Deadline instance an add it to end taskList
-        taskList.add(new Deadline (description, by));
-
-        printAcknowledgement(RegexType.TASK_ADDED_LINE.getRegexType(), taskList.size()-1);
-        printNumOfTask();
-    }
-
-    // Adding an Event to list of tasks
-    public static void addEvent(String userInput) throws EventException{
-        // Check if userInput follows the format "<description> /at <time/date>"
-        if (!userInput.matches(RegexType.EVENT_REGEX.getRegexType())){
-            throw new EventException();
-        }
-
-        // get description and by from userInput
-        String description = userInput.replaceAll(RegexType.GET_DESCRIPTION_REGEX.getRegexType(), "");
-        String at = userInput.replaceAll(RegexType.GET_AT_REGEX.getRegexType(), "");
-
-        // Create new Event instance an add it to end taskList
-        taskList.add(new Event (description, at));
-
-        printAcknowledgement(RegexType.TASK_ADDED_LINE.getRegexType(), taskList.size()-1);
-        printNumOfTask();
-    }
-
-    public static void addNothing() throws NothingException{
-        throw new NothingException();
-    }
-
-    // Delete line
-    public static void deleteTask(String userInput)
-            throws DeleteFormatException, DeleteRangeException {
-
-        // Check if the command is done and is followed by a number
-        // and if the index is within the range of number of tasks
-        if (!userInput.matches(RegexType.DIGITS_REGEX.getRegexType())){
-            throw new DeleteFormatException();
-        }
-
-        int index = Integer.parseInt(userInput) - 1;
-        if (index >= taskList.size()){
-            throw new DeleteRangeException();
-        }
-
-        printAcknowledgement(PrintType.TASK_DELETED_LINE.getPrintType(), index);
-
-        taskList.remove(index);
-
-        printNumOfTask();
-    }
-
     // Mark the task at the given index as done
     public static void markAsDone(String userInput)
-            throws DoneFormatException, DoneAlreadyException, DoneRangeException{
+            throws DoneFormatException, DoneAlreadyException, DoneRangeException {
 
         // Check if the command is done and is followed by a number
         // and if the index is within the range of number of tasks
-        if (!userInput.matches(RegexType.DIGITS_REGEX.getRegexType())){
+        if (!userInput.matches(RegexType.DIGITS_REGEX.getRegexType())) {
             throw new DoneFormatException();
         }
 
         int index = Integer.parseInt(userInput) - 1;
-        if (index >= taskList.size()){
+        if (index >= taskList.size()) {
             throw new DoneRangeException();
         }
         // Check if task is already done
-        if (taskList.get(index).isDone()){
+        if (taskList.get(index).isDone()) {
             throw new DoneAlreadyException();
         }
 
@@ -169,7 +225,11 @@ public class Duke {
         taskList.get(index).markAsDone();
 
         // Acknowledge task is done
-        printAcknowledgement(PrintType.TASK_DONE_LINE.getPrintType(), index);
+        printMultiLine(new String[]{
+                PrintType.TASK_DONE_LINE.getPrintType(),
+                taskList.get(index).showTask()
+        });
+        writeToFile();
     }
 
     // Reads the input of the line to determine the command and run it
@@ -180,11 +240,26 @@ public class Duke {
         String command = splitLine[0];
 
         // Remove command from userInput
-        userInput = userInput.replaceAll( RegexType.START_LINE_REGEX.getRegexType() + command + RegexType.SPACE_REGEX.getRegexType(), "");
+        userInput = userInput.replaceAll(RegexType.START_LINE_REGEX.getRegexType() + command + RegexType.SPACE_REGEX.getRegexType(), "");
 
         // Check the command type then execute the commands
         if(userInput.equals(InputType.LIST.getInputType())) {
-            printList();
+            try{
+                printList();
+            } catch (EmptyListException e){
+                printOneLine(PrintType.EMPTY_LIST_LINE.getPrintType());
+            }
+
+        } else if (command.equals(InputType.DONE.getInputType()) ){
+            try{
+                markAsDone(userInput);
+            } catch (DoneFormatException e) {
+                printOneLine(PrintType.DONE_FORMAT_LINE.getPrintType());
+            } catch (DoneRangeException e){
+                printOneLine(PrintType.OUT_OF_RANGE_LINE.getPrintType());
+            } catch (DoneAlreadyException e){
+                printOneLine(PrintType.COMPLETED_LINE.getPrintType());
+            }
 
         } else if (command.equals(InputType.TODO.getInputType())){
             try {
@@ -206,27 +281,6 @@ public class Duke {
             } catch (EventException e){
                 printOneLine(PrintType.EVENT_LINE.getPrintType());
             }
-
-        } else if (command.equals(InputType.DELETE.getInputType()) ){
-            try{
-                deleteTask(userInput);
-            } catch (DeleteFormatException e) {
-                printOneLine(PrintType.DELETED_FORMAT_LINE.getPrintType());
-            } catch (DeleteRangeException e){
-                printOneLine(PrintType.OUT_OF_RANGE_LINE.getPrintType());
-            }
-
-        } else if (command.equals(InputType.DONE.getInputType()) ){
-            try{
-                markAsDone(userInput);
-            } catch (DoneFormatException e) {
-                printOneLine(PrintType.DONE_FORMAT_LINE.getPrintType());
-            } catch (DoneRangeException e){
-                printOneLine(PrintType.OUT_OF_RANGE_LINE.getPrintType());
-            } catch (DoneAlreadyException e){
-                printOneLine(PrintType.COMPLETED_LINE.getPrintType());
-            }
-
         } else {
             try{
                 addNothing();
@@ -236,8 +290,10 @@ public class Duke {
         }
     }
 
+
+
     // Continuously take in input and running the commands until input is BYE then exit
-    public static void runDuke(){
+    public static void runDuke() {
         // Initialise variables to get input from user
         String userInput;
         Scanner in = new Scanner(System.in);
@@ -247,7 +303,7 @@ public class Duke {
         userInput = in.nextLine();
 
         // While the input is not "bye", add input to array of tasks and get another input
-        while (!userInput.equals(InputType.BYE.getInputType())){
+        while (!userInput.equals(InputType.BYE.getInputType())) {
 
             readInput(userInput);
 
@@ -258,6 +314,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
+
+        initialiseTaskList();
+
         // Greets user
         printGreeting();
 

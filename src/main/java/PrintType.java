@@ -1,6 +1,7 @@
 public enum PrintType {
     GREETING_LINES("Hello! I'm Duke\nWhat can I do for you?"),
     BYE_LINE("Bye. Hope to see you again soon!"),
+    EMPTY_LIST_LINE ("List is empty."),
     TASK_DONE_LINE("Nice! I've marked this task as done:\n "),
     TASK_DELETED_LINE("Noted. I've removed this task:"),
     LIST_INTRO_LINE("Here are the tasks in your list"),

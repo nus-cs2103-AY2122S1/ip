@@ -6,6 +6,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String description, boolean isDone, String by) {
+        super(description, isDone);
+        this.by = by;
+    }
+
     public String getBy(){
         return by;
     }
@@ -13,5 +18,10 @@ public class Deadline extends Task {
     @Override
     public String showTask(){
         return "[D][" + (isDone ? "✗" : " ") + "] " + description + "(by: " + by + ")";
+    }
+
+    @Override
+    public String saveTask() {
+        return "D | " + (isDone ? 1 : 0) + " | " + description + " | " + by;
     }
 }
