@@ -10,7 +10,7 @@ public class ListCommand extends Command {
     public ListCommand(){};
 
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
         ui.listTasks(taskList);
     }
 

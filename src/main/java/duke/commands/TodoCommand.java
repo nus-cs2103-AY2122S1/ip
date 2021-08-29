@@ -15,7 +15,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
         Todo todo = new Todo(this.description);
         taskList.add(todo);
         ui.addedMessage(taskList, todo);

@@ -21,7 +21,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         Deadline deadline = new Deadline(description, byDateTime.format(formatter));
         taskList.add(deadline);

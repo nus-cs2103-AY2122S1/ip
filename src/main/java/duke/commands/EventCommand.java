@@ -21,7 +21,7 @@ public class EventCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, DukeStorage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, DukeStorage storage) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         Event event = new Event(description, atDateTime.format(formatter));
         taskList.add(event);
