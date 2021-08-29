@@ -10,7 +10,7 @@ import duke.storage.Storage;
  * The class for a user command that marks a task as done
  */
 public class DoneCommand extends Command{
-    int index;
+    private final int index;
 
     public DoneCommand(int index) {
         this.index = index;

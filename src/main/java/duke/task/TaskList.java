@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * A class for the list of tasks
  */
 public class TaskList {
-    public static ArrayList<Task> taskList;
+    private static ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> tl) {
         taskList = tl;

@@ -15,8 +15,7 @@ import java.util.regex.Pattern;
  * to the user.
  */
 public class Ui {
-    private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-    private Scanner sc;
+    private final Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
