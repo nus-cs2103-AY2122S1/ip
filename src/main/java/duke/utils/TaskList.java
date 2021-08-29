@@ -1,14 +1,14 @@
 package duke.utils;
 
-import duke.tasks.Deadlines;
-import duke.tasks.Events;
-import duke.tasks.Task;
-import duke.tasks.ToDos;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
+
+import duke.tasks.Deadlines;
+import duke.tasks.Events;
+import duke.tasks.Task;
+import duke.tasks.ToDos;
 
 /**
  * Contains all the listed tasks in the list, and has multiple operations to operate
@@ -44,6 +44,15 @@ public class TaskList {
     };
 
     /**
+     * Constructor for TaskList.
+     *
+     * @param persistedData the persisted tasks that we loaded from the hard disk/text file.
+     */
+    public TaskList(Stream<String> persistedData) {
+        persistedData.forEach(LOAD_DATA_ACTION);
+    }
+
+    /**
      * Adds a new task to the TaskList.
      *
      * @param newTask the new task to add.
@@ -71,15 +80,6 @@ public class TaskList {
     public void markTaskAsDone(int taskNum) {
         Task currTask = tasks.get(taskNum);
         currTask.markAsDone();
-    }
-
-    /**
-     * Constructor for TaskList.
-     *
-     * @param persistedData the persisted tasks that we loaded from the hard disk/text file.
-     */
-    public TaskList(Stream<String> persistedData) {
-        persistedData.forEach(LOAD_DATA_ACTION);
     }
 
     /**

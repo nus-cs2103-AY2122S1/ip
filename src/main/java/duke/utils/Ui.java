@@ -1,10 +1,10 @@
 package duke.utils;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
-
 import java.util.HashMap;
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
 
 /**
  * Deals with all the user-facing commands such as reading user input, and printing results.
@@ -103,6 +103,13 @@ public class Ui {
         System.out.println(e.getMessage());
     }
 
+    /**
+     * Displays all the tasks that matches a certain keyword, where the matched tasks
+     * are already given as a parameter to this method.
+     *
+     * @param matchingTasks the tasks that matched the keyword. These tasks are to be printed.
+     * @param tasks the task list containing all the tasks.
+     */
     public void showMessagePrintingAllMatchingTasks(HashMap<String, Task> matchingTasks, TaskList tasks) {
         System.out.println("Here are all the matching tasks in your list:");
         for (int counter = 1; counter <= tasks.getSize(); counter++) {
