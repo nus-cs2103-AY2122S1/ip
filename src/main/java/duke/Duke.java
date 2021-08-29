@@ -18,7 +18,7 @@ public class Duke {
     private final TaskList tasks;
     private Ui ui;
     
-    enum RequestType {
+     public enum RequestType {
         DEFAULT,
         DONE,
         DELETE,
