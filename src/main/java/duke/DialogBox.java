@@ -38,8 +38,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+        DialogBox db = new DialogBox(l, iv);
         db.flip();
         return db;
     }
+
+
+
 }
