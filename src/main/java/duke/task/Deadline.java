@@ -25,6 +25,7 @@ public class Deadline extends Task {
      * @param description consisting of task description and deadline date.
      */
     public Deadline(String description) throws DateTimeParseException {
+        super();
         int startingIndex = description.indexOf(KEYWORD) + KEYWORD.length();
         int startOfTimingIndex = description.indexOf(BY);
         taskDescription = description.substring(startingIndex, startOfTimingIndex - 1);

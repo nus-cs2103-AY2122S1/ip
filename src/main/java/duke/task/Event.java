@@ -25,6 +25,7 @@ public class Event extends Task {
      * @param description consisting of task description and timing.
      */
     public Event(String description) throws DateTimeParseException {
+        super();
         int startingIndex = description.indexOf(KEYWORD) + KEYWORD.length();
         int startOfTimeIndex = description.indexOf(AT);
         taskDescription = description.substring(startingIndex, startOfTimeIndex - 1);   

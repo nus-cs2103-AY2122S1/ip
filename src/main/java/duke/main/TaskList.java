@@ -80,7 +80,7 @@ public class TaskList {
      * @param date the date of interest.
      * @return an arraylist of tasks which fall on that date.
      */
-    public ArrayList<Task> findTasksMatchingDate(duke.main.Date date) {
+    public ArrayList<Task> findTasksMatchingDate(Date date) {
         String dateString = date.toString();
         ArrayList<Task> tasksMatchingDate = new ArrayList<>();
         for (Task t: tasks) {
