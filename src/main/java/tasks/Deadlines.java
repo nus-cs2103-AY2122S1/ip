@@ -1,17 +1,22 @@
 package tasks;
 
+import exceptions.DukeException;
 import viper.Instruction;
 
-public class Deadlines extends Task {
-    protected String by;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadlines(String description, String by) {
+public class Deadlines extends Task {
+    protected LocalDate date;
+    
+    public Deadlines(String description, String date) {
         super(description, Instruction.DEADLINE);
-        this.by = by;
+        this.date = LocalDate.parse(date);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + 
+                this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

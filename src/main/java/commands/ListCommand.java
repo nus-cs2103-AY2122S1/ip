@@ -12,7 +12,7 @@ public class ListCommand extends Command {
         if (tasks.getSize() > 0) {
             String[] msg = {"Ok!! You wanna know what you have on your list?", "I got you covered!!",
                     "Here are all the task(s) in your list"};
-            ui.showMessage(msg);
+            ui.showListHeader(msg);
             for (int i = 0; i < tasks.getSize(); i++) {
                 int taskNo = i + 1;
                 Task curr = tasks.getTask(i);
@@ -29,4 +29,5 @@ public class ListCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 }

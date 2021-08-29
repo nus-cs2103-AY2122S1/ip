@@ -5,6 +5,7 @@ import exceptions.DukeException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class Duke {
     
@@ -17,7 +18,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadTasks());
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | DukeException | ParseException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -42,4 +43,5 @@ public class Duke {
         Duke duke = new Duke("data/tasks.txt");
         duke.run();
     }
+
 }

@@ -7,8 +7,6 @@ import tasks.Events;
 import tasks.Todos;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * for TODO, DEADLINE and EVENT commands
@@ -38,38 +36,29 @@ public class AddCommand extends Command {
                 ui.showMessage(msg);
                 break;
             case DEADLINE:
-                int posBy = splitLine[1].indexOf("by") + 3;
-                int posSlash = splitLine[1].indexOf("/") - 1;
-                String desc = splitLine[1].substring(0, posSlash).trim();
-                String date = splitLine[1].substring(posBy).trim();
-                try {
-                    String formattedDate = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-                    Deadlines addDeadline = new Deadlines(desc, formattedDate);
-                    tasks.addTask(addDeadline);
-                    storage.writeTask(addDeadline);
-                    msg = new String[]{"Oh no!! A new deadline?! It's okay, you got this!!!!", addDeadline.toString(), 
+                String[] descDateArray = splitLine[1].split("/by ");
+                
+                Deadlines addDeadline = new Deadlines(descDateArray[0].trim(), descDateArray[1]);
+                tasks.addTask(addDeadline);
+                storage.writeTask(addDeadline);
+                
+                msg = new String[]{"Oh no!! A new deadline?! It's okay, you got this!!!!", addDeadline.toString(),
                         "Now you have a total of " + tasks.getSize() + " task(s)!"};
-                    ui.showMessage(msg);
-                } catch (Exception e) {
-                    msg = new String[]{"Oh no! " + e.getMessage(),
-                            "Something went wrong......",
-                            "Please make sure that your date format is in yyyy-MM-dd"};
-                    ui.showMessage(msg);
-                }
+                ui.showMessage(msg);
                 break;
             case EVENT:
-                int posAt = splitLine[1].indexOf("at") + 3;
-                posSlash = splitLine[1].indexOf("/") - 1;
-                desc = splitLine[1].substring(0, posSlash);
-                String time = splitLine[1].substring(posAt);
-                Events addEvent = new Events(desc, time);
+                String[] descTimeArray = splitLine[1].split("/at ");
+                String[] dateTimeArray = descTimeArray[1].split(" ");
+                
+                Events addEvent = new Events(descTimeArray[0].trim(), dateTimeArray[0], dateTimeArray[1]);
                 tasks.addTask(addEvent);
                 storage.writeTask(addEvent);
+                
                 msg = new String[]{"Okie! I have added this event to your list:", addEvent.toString(),
                     "Now you have a total of " + tasks.getSize() + " task(s)!"};
                 ui.showMessage(msg);
                 break;
-            case INVALID:
+            default:
                 ui.showInvalidTypeError();
                 break;
             }

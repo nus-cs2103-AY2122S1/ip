@@ -57,4 +57,11 @@ public class Ui {
         String[] msg = {"Oh no, this index does not exist!", "Please make sure that index < size of tasks"};
         showMessage(msg);
     }
+
+    public void showListHeader (String[] strings) {
+        System.out.println(div);
+        for (String string : strings) {
+            System.out.println(indent + string);
+        }
+    }
 }

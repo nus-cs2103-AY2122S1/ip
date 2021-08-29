@@ -1,5 +1,6 @@
 package viper;
 
+import exceptions.DukeException;
 import tasks.Deadlines;
 import tasks.Events;
 import tasks.Task;
@@ -9,7 +10,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -28,49 +33,67 @@ public class Storage {
         file.createNewFile();
     }
     
-    public ArrayList<Task> loadTasks() throws FileNotFoundException {
+    public ArrayList<Task> loadTasks() throws FileNotFoundException, DukeException, ParseException {
         ArrayList<Task> taskList = new ArrayList<>();
         Scanner sc = new Scanner(file);
         
         while (sc.hasNextLine()) {
             String readStr = sc.nextLine();
-            String[] splitStr = readStr.split("]", 3);
-            String taskInstruction = splitStr[0].substring(1);
-            String taskIsDone = splitStr[1].substring(1);
-            String taskDesc = splitStr[2].trim();
+            String[] readLineArray = readStr.split("]", 3);
+            String taskInstruction = readLineArray[0].substring(1);
+            String taskIsDone = readLineArray[1].substring(1);
+            String taskDesc = readLineArray[2].trim();
             
+            if (taskDesc.isBlank()) {
+                throw new DukeException("Task description cannot be blank!!");
+            }
             switch (taskInstruction) {
             case "T":
-                Todos addTodo = new Todos(splitStr[2].trim());
+                Todos addTodo = new Todos(taskDesc);
                 if (!taskIsDone.isBlank()) {
                     addTodo.setDone();
                 }
                 taskList.add(addTodo);
                 break;
             case "D":
-                int bracketPos = taskDesc.indexOf("(");
-                int closeBracket = taskDesc.indexOf(")");
-                int colonPos = taskDesc.indexOf(":");
-                String deadlineDesc = taskDesc.substring(0, bracketPos - 1).trim();
-                String deadlineDate = taskDesc.substring(colonPos + 1, closeBracket).trim();
-                Deadlines addDeadline = new Deadlines(deadlineDesc, deadlineDate);
+                String[] descDateArray = taskDesc.split("\\(by: ");
+                
+                //convert date to the correct input format
+                DateFormat inputDeadlineDateFormat = new SimpleDateFormat("MMM dd yyyy");
+                Date inputDeadlineDate = inputDeadlineDateFormat.parse(descDateArray[1]);
+                DateFormat outputDeadlineDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String outputDeadlineDate = outputDeadlineDateFormat.format(inputDeadlineDate);
+                
+                Deadlines addDeadline = new Deadlines(descDateArray[0].trim(), outputDeadlineDate);
                 if (!taskIsDone.isBlank()) {
                     addDeadline.setDone();
                 }
                 taskList.add(addDeadline);
                 break;
             case "E":
-                bracketPos = taskDesc.indexOf("(");
-                closeBracket = taskDesc.indexOf(")");
-                colonPos = taskDesc.indexOf(":");
-                String eventDesc = taskDesc.substring(0, bracketPos - 1).trim();
-                String eventTime = taskDesc.substring(colonPos + 1, closeBracket).trim();
-                Events addEvent = new Events(eventDesc, eventTime);
+                String[] eventDescTimeArray = taskDesc.split(" \\(at: ");
+                int colonIndex = eventDescTimeArray[1].indexOf(":");
+                String dateStr = eventDescTimeArray[1].substring(0, colonIndex - 2);
+                String timeStr = eventDescTimeArray[1].substring(colonIndex - 2, colonIndex + 3);
+                
+                System.out.println("date: " + dateStr);
+                System.out.println("time: " + timeStr);
+                
+                //convert date to the correct input format
+                DateFormat inputEventDateFormat = new SimpleDateFormat("MMM dd yyyy");
+                Date inputEventDate = inputEventDateFormat.parse(dateStr.trim());
+                DateFormat outputEventDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String outputEventDate = outputEventDateFormat.format(inputEventDate);
+                
+                Events addEvent = new Events(eventDescTimeArray[0].trim(), outputEventDate, timeStr.trim());
+                
                 if (!taskIsDone.isBlank()) {
                     addEvent.setDone();
                 }
                 taskList.add(addEvent);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + taskInstruction);
             }
         }
         return taskList;

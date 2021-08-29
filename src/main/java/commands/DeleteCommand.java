@@ -11,6 +11,7 @@ public class DeleteCommand extends Command {
     String t;
     String[] s;
     int index;
+    Task deleteTask;
 
     public DeleteCommand(String t) {
         this.t = t;
@@ -21,7 +22,8 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (index < tasks.getSize() + 1) {
-            Task deleteTask = tasks.getTask(index - 1);
+            deleteTask = tasks.getTask(index - 1);
+            
             tasks.deleteTask(index - 1);
             storage.deleteTask(deleteTask);
             String[] msg = {"OK!! I have removed the following task from your list: " + deleteTask,

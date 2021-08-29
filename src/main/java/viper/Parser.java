@@ -1,6 +1,12 @@
 package viper;
 
-import commands.*;
+import commands.Command;
+import commands.AddCommand;
+import commands.ByeCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.ListCommand;
+
 import exceptions.DukeException;
 
 /**
