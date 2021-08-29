@@ -5,6 +5,7 @@ import static java.lang.Integer.parseInt;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -49,7 +50,7 @@ public class Parser {
         case "find":
             return new ListCommand(this.tasks, "keyword", filterTaskDescription(input));
         case "done":
-            return new DoneCommand(this.tasks, filterTaskIndex(input));
+            return new DoneCommand(this.tasks, filterMultipleTaskIndexes(input));
         case "todo":
             return new AddCommand(this.tasks, filterTaskDescription(input), "ToDo");
         case "deadline":
@@ -77,7 +78,7 @@ public class Parser {
             throw new EmptyDescriptionException();
         }
 
-        String filteredDescription = command.split(" ", 2)[1];
+        String filteredDescription = commandItems[1];
         if (filteredDescription.trim().isEmpty()) {
             throw new EmptyDescriptionException();
         }
@@ -99,12 +100,45 @@ public class Parser {
             throw new MissingIndexException();
         }
 
-        String indexString = command.split(" ", 2)[1];
+        String indexString = commandItems[1];
         if (indexString.trim().isEmpty()) {
             throw new MissingIndexException();
         }
 
         return parseInt(indexString);
+    }
+
+    /**
+     * Takes in the original inputted command and filters and parses it for the given integer index.
+     * The index is the full command string minus the first word which is the command itself.
+     *
+     * @param command the original command inputted by the user.
+     * @return the filtered and parsed int that refers to the index of the task.
+     * @throws MissingIndexException when index is missing (including if it contains only white space).
+     */
+    public static int[] filterMultipleTaskIndexes(String command) throws MissingIndexException {
+        ArrayList<Integer> indexes = new ArrayList<>();
+
+        // Do checks
+        String[] commandItems = command.split(" ", 2);
+        if (commandItems.length == 1) {
+            throw new MissingIndexException();
+        }
+        String indexString = commandItems[1];
+        if (indexString.trim().isEmpty()) {
+            throw new MissingIndexException();
+        }
+
+        // Store all valid indexes
+        String[] stringIndexes = command.split(" ");
+
+        for (int i = 1; i < stringIndexes.length; i++) {
+            if (!stringIndexes[i].isEmpty()) {
+                indexes.add(parseInt(stringIndexes[i]));
+            }
+        }
+
+        return indexes.stream().mapToInt(Integer::intValue).toArray();
     }
 
     /**

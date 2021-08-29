@@ -50,7 +50,9 @@ public abstract class Task {
             this.isDone = true;
             return "  " + this.toString();
         } else {
-            return "Wait...  You've already completed this task before you dummy!";
+            return String.format("...Wait.  You've already completed this task: '%s' before you dummy!",
+                this.description
+            );
         }
     }
 

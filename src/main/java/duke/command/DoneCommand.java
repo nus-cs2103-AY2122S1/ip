@@ -9,7 +9,7 @@ import duke.util.TaskList;
  */
 public class DoneCommand extends Command {
     private TaskList tasks;
-    private int index;
+    private int[] index;
 
     /**
      * Constructor for DoneCommand.
@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
      * @param tasks TaskList containing current tasks.
      * @param index The index pointing to the Task in TaskList to operate on, starting from 1.
      */
-    public DoneCommand(TaskList tasks, int index) {
+    public DoneCommand(TaskList tasks, int[] index) {
         this.tasks = tasks;
         this.index = index;
     }

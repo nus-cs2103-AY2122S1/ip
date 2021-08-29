@@ -74,11 +74,34 @@ public class TaskListTest {
     }
 
     @Test
-    public void testMarkTaskAsDone() {
+    public void testMarkTaskAsDone_singleUncompletedTask() {
         tasks.addToList("return book", "ToDo");
         assertEquals(
-            "You completed a task! Maybe you aren't so incompetent after all.\n  [T][X] return book",
+            "You completed a task! Maybe you aren't so incompetent after all.\n  [T][X] return book\n",
             tasks.markTaskAsDone(1)
+        );
+    }
+
+    @Test
+    public void testMarkTaskAsDone_singleCompletedTask() {
+        tasks.addToList("return book", "ToDo");
+        tasks.markTaskAsDone(1);
+        assertEquals(
+            "You completed a task! Maybe you aren't so incompetent after all.\n"
+                + "...Wait.  You've already completed this task: 'return book' before you dummy!\n",
+            tasks.markTaskAsDone(1)
+        );
+    }
+
+    @Test
+    public void testMarkTaskAsDone_multipleNewTasks() {
+        tasks.addToList("return book", "ToDo");
+        tasks.addToList("return book /by 23/08/2021 0000", "Deadline");
+
+        assertEquals(
+            "You completed some tasks! Maybe you aren't so incompetent after all.\n"
+                + "  [T][X] return book\n  [D][X] return book (by: Aug 23 2021 00:00)\n",
+            tasks.markTaskAsDone(1, 2)
         );
     }
 
@@ -94,7 +117,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testPrintList_noFiltering() {
+    public void testListTasks_noFiltering() {
         tasks.addToList("read book", "ToDo");
         tasks.addToList("return book /by 23/08/2021 0000", "Deadline");
         tasks.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
@@ -107,7 +130,15 @@ public class TaskListTest {
     }
 
     @Test
-    public void testPrintList_withDateFiltering() {
+    public void testListTasks_emptyList() {
+        assertEquals(
+            "You have no tasks currently.",
+            tasks.listTasks("all", null)
+        );
+    }
+
+    @Test
+    public void testListTasks_withDateFiltering() {
         tasks.addToList("read book", "ToDo");
         tasks.addToList("return book /by 23/08/2021 0000", "Deadline");
         tasks.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
@@ -120,7 +151,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testPrintList_withKeywordFiltering() {
+    public void testListTasks_withKeywordFiltering() {
         tasks.addToList("read book", "ToDo");
         tasks.addToList("return book /by 23/08/2021 0000", "Deadline");
         tasks.addToList("project meeting /at 2021-08-23 1400 1600", "Event");

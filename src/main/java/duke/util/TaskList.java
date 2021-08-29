@@ -157,16 +157,29 @@ public class TaskList {
     /**
      * Marks tasks based on index as done if it exists.
      *
-     * @param index index given by the User for Task in the TaskList starting from 1.
+     * @param indexes index(es) given by the User for Task in the TaskList starting from 1.
      * @return message of the completion of the Task.
      * @throws InvalidIndexException if index given does not exist in the TaskList.
      */
-    public String markTaskAsDone(int index) throws InvalidIndexException {
-        if (index <= 0 || index > tasks.size()) {
-            throw new InvalidIndexException(tasks.size());
+    public String markTaskAsDone(int... indexes) throws InvalidIndexException {
+        String message;
+        if (indexes.length == 1) {
+            if (indexes[0] <= 0 || indexes[0] > tasks.size()) {
+                throw new InvalidIndexException(tasks.size());
+            }
+            message = "You completed a task! Maybe you aren't so incompetent after all.\n"
+                + tasks.get(indexes[0] - 1).markTaskAsDone() + "\n";
+        } else {
+            message = "You completed some tasks! Maybe you aren't so incompetent after all.\n";
+
+            for (int index : indexes) {
+                if (index <= 0 || index > tasks.size()) {
+                    throw new InvalidIndexException(tasks.size());
+                }
+
+                message = message + tasks.get(index - 1).markTaskAsDone() + "\n";
+            }
         }
-        String message = "You completed a task! Maybe you aren't so incompetent after all.\n"
-            + tasks.get(index - 1).markTaskAsDone();
 
         storage.writeToFile(convertListToString());
 
