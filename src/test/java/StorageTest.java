@@ -1,6 +1,6 @@
-import Duke.Duke;
-import Duke.Storage;
-import Duke.TaskList;
+import duke.Duke;
+import duke.Storage;
+import duke.TaskList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
