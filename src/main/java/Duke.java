@@ -6,7 +6,7 @@ import ui.Ui;
 
 /**
  * Project Duke is an educational software project.
- * It is designed to take you through the steps of building a small software incrementally.
+ * It stores tasks entered by users locally and reloads then on every start-up.
  */
 
 public class Duke {
@@ -15,6 +15,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates the instance of Duke.
+     * The path to the local file and tasklist will be initialised.
+     *
+     * @param filePath the path to the local file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +31,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke program.
+     * Programme will ask for input until user enters the 'bye' command.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -44,6 +54,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates the initialization process and run the programme when completed.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }
