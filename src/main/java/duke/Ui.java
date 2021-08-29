@@ -2,6 +2,11 @@ package duke;
 
 import java.util.Scanner;
 
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+
 /**
  * User interface class for controlling user interaction.
  * Reads user inputs and displays outputs.
@@ -9,7 +14,10 @@ import java.util.Scanner;
  * @author Chang-CH
  */
 public class Ui {
-    private final Scanner inputReader;
+    private Scanner inputReader = null;
+    private VBox dialogContainer = null;
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/duk.jpg"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
 
     /**
      * Sole constructor for invocation by Duke.
@@ -17,6 +25,17 @@ public class Ui {
     protected Ui() {
         super();
         inputReader = new Scanner(System.in);
+    }
+
+    /**
+     * Constructor for printing to Duke
+     *
+     * @param dialogContainer Container to add components to.
+     */
+    protected Ui(VBox dialogContainer) {
+        super();
+        inputReader = new Scanner(System.in);
+        this.dialogContainer = dialogContainer;
     }
 
     /**
@@ -35,6 +54,35 @@ public class Ui {
      */
     protected void showLoadingError(String error) {
         System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        if (dialogContainer != null) {
+            printDialog("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    /**
+     * Displays a text in the GUI, if applicable.
+     *
+     * @param text Message to be displayed.
+     */
+    public void printDialog(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+        DialogBox dialogBox = DialogBox.getDukeDialog(textToAdd, new ImageView(duke));
+
+        dialogContainer.getChildren().add(dialogBox);
+    }
+
+    /**
+     * Prints out the user's input in the GUI
+     *
+     * @param input User input.
+     */
+    public void echoUser(String input) {
+        Label textToAdd = new Label(input);
+        textToAdd.setWrapText(true);
+        DialogBox dialogBox = DialogBox.getUserDialog(textToAdd, new ImageView(user));
+
+        dialogContainer.getChildren().add(dialogBox);
     }
 
     /**
@@ -58,6 +106,9 @@ public class Ui {
      */
     public void showMessage(String message) {
         System.out.println(message);
+        if (dialogContainer != null) {
+            printDialog(message);
+        }
     }
 
     /**
@@ -67,6 +118,9 @@ public class Ui {
      */
     public void showError(String message) {
         System.out.println(message);
+        if (dialogContainer != null) {
+            printDialog(message);
+        }
     }
 
     /**
@@ -74,16 +128,18 @@ public class Ui {
      */
     public void showWelcome() {
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+                + "|  _ \\ _   _| | _\n"
+                + "| | | | | | | |/ /\n"
+                + "| |_| | |_| |   <  \n"
+                + "|____/ \\__,_|_|\\_\\\n";
+        System.out.println(logo);
 
-        String greeting = "____________________________________________________________\n"
-                + "Hello! I'm Python>Java\n"
-                + "What must I do for you?\n"
-                + "____________________________________________________________";
+        String greeting = "Hello! I'm Duk\n"
+                + "What must I do for you?\n";
         System.out.println(greeting);
+
+        if (dialogContainer != null) {
+            printDialog(greeting);
+        }
     }
 }

@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
 /**
  * Abstract command class providing the skeleton of all commands
