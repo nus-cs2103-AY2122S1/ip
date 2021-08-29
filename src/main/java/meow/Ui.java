@@ -17,29 +17,15 @@ public class Ui {
     /**
      * Prints the greeting message from the chat bot cat Meow.
      */
-    public void greet() {
-
-        System.out.println(
-                "------------------------------------------------------------------------------\n"
-                        +
-                        "Meow: Hi human, I'm your cat Meow~ What can I do for you?\n"
-                        +
-                        "------------------------------------------------------------------------------"
-        );
+    public String greet() {
+        return "Meow: Hi human, I'm your cat Meow~ What can I do for you?";
     }
 
     /**
      * Prints the goodbye message from the chat bot cat Meow.
      */
-    public void exit() {
-
-        System.out.println(
-                "------------------------------------------------------------------------------\n"
-                        +
-                        "Meow: Bye human, see you soon! Your cat Meow is going to sleep now~\n"
-                        +
-                        "------------------------------------------------------------------------------"
-        );
+    public String exit() {
+        return "Meow: Bye human, see you soon! Your cat Meow is going to sleep now~";
     }
 
     /**
@@ -48,16 +34,16 @@ public class Ui {
      * @param tasksList The task list that stores the tasks input by the user.
      * @throws NoItemInTheListException If the tasksList is empty.
      */
-    public void displayList(List<Task> tasksList) throws NoItemInTheListException {
+    public String displayList(List<Task> tasksList) throws NoItemInTheListException {
         int len = tasksList.size();
         if (len > 0) {
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("Here are the tasks in your list:");
+            String list = "";
             for (int i = 0; i < len; i++) {
                 Task task = tasksList.get(i);
-                System.out.println(i + 1 + ". " + task.toString());
+                list = list + (i + 1 + ". " + task.toString() + "\n");
             }
-            System.out.println("------------------------------------------------------------------------------");
+
+            return "Here are the tasks in your list:\n" + list;
         } else {
             throw new NoItemInTheListException();
         }
@@ -69,16 +55,15 @@ public class Ui {
      * @param filteredList The task list that stores the tasks input by the user.
      * @throws NoSearchResultException If there is not matching result.
      */
-    public void displaySearchList(List<Task> filteredList) throws NoSearchResultException {
+    public String displaySearchList(List<Task> filteredList) throws NoSearchResultException {
         int len = filteredList.size();
         if (len > 0) {
-            System.out.println("------------------------------------------------------------------------------");
-            System.out.println("Here are the matching tasks in your list:");
+            String list = "";
             for (int i = 0; i < len; i++) {
                 Task task = filteredList.get(i);
-                System.out.println(i + 1 + ". " + task.toString());
+                list = list + (i + 1 + ". " + task.toString() + "\n");
             }
-            System.out.println("------------------------------------------------------------------------------");
+            return "Here are the matching tasks in your list:\n" + list;
         } else {
             throw new NoSearchResultException();
         }
@@ -91,14 +76,16 @@ public class Ui {
      * @param tasksList The task list that stores the tasks input by the user.
      * @param taskAdded The new task that has been added to the list.
      */
-    public void printTaskList(List<Task> tasksList, Task taskAdded) {
+    public String printTaskList(List<Task> tasksList, Task taskAdded) {
         int taskListLength = tasksList.size();
         String task = taskListLength <= 1 ? " task " : " tasks ";
-        System.out.println("------------------------------------------------------------------------------");
-        System.out.println("Got it. I've added this task:");
-        System.out.println(taskAdded.toString());
-        System.out.println("Now you have " + taskListLength + task + "in the list.");
-        System.out.println("------------------------------------------------------------------------------");
+        return "Got it. I've added this task:\n"
+                + taskAdded.toString() + "\n"
+                + "Now you have "
+                + taskListLength
+                + task
+                + "in the list.";
+
     }
 
 }

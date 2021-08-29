@@ -34,16 +34,13 @@ public class TaskList {
      * @param index The task number that the user wants to mark as done.
      * @throws MeowException If the index is out of range.
      */
-    public void completeTask(String index) throws MeowException {
+    public String completeTask(String index) throws MeowException {
         try {
             int taskNumber = Integer.parseInt(index);
             if (taskNumber <= tasksList.size() && taskNumber > 0) {
                 Task completedTask = tasksList.get(taskNumber - 1);
                 completedTask.markAsDone();
-                System.out.println("------------------------------------------------------------------------------");
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(completedTask.toString());
-                System.out.println("------------------------------------------------------------------------------");
+                return "Nice! I've marked this task as done:\n" + completedTask.toString();
             } else {
                 throw new InvalidTaskIndex();
             }
@@ -61,18 +58,16 @@ public class TaskList {
      * @param index The task number that the user wants to delete from the list.
      * @throws MeowException If the index is out of range.
      */
-    public void deleteTask(String index) throws MeowException {
+    public String deleteTask(String index) throws MeowException {
         try {
             int taskNumber = Integer.parseInt(index);
             if (taskNumber <= tasksList.size() && taskNumber > 0) {
                 Task removedTask = tasksList.remove(taskNumber - 1);
                 int taskListLength = tasksList.size();
                 String task = taskListLength <= 1 ? " task " : " tasks ";
-                System.out.println("------------------------------------------------------------------------------");
-                System.out.println("Noted. I've removed this task:");
-                System.out.println(removedTask.toString());
-                System.out.println("Now you have " + taskListLength + task + "in the list.");
-                System.out.println("------------------------------------------------------------------------------");
+                return "Noted. I've removed this task:\n"
+                        + removedTask.toString() +"\n"
+                        + "Now you have " + taskListLength + task + "in the list.";
             } else {
                 throw new InvalidTaskIndex();
             }
