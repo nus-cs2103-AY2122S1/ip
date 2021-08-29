@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class Command {
     public enum CommandType {
-        TODO, DEADLINE, EVENT, LIST, DATE, DONE, DELETE, COMMANDS, BYE
+        TODO, DEADLINE, EVENT, LIST, DATE, FIND, DONE, DELETE, COMMANDS, BYE
     }
 
     private String fullCommand;
@@ -49,6 +49,18 @@ public class Command {
                         }
                         String dlString = fullCommand.substring(("date ").length());
                         System.out.println(taskDialog.by(dlString));
+                    } catch (EmptyDescriptionException | EmptyTaggerException | InvalidTimeFormatException e) {
+                        Ui.printError(e);
+                    }
+                    break;
+                case FIND:
+                    try {
+                        if (fullCommand.split(" ").length == 1) {
+                            throw new EmptyDescriptionException("The keyword of find cannot be empty. Try using command " +
+                                    "'list' if you want to see the full list");
+                        }
+                        String kwString = fullCommand.substring(("find ").length());
+                        System.out.println(taskDialog.with(kwString));
                     } catch (EmptyDescriptionException | EmptyTaggerException | InvalidTimeFormatException e) {
                         Ui.printError(e);
                     }

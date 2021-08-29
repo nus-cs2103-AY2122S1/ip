@@ -19,6 +19,8 @@ public class Parser {
                 return Command.CommandType.LIST;
             case "date":
                 return Command.CommandType.DATE;
+            case "find":
+                return Command.CommandType.FIND;
             case "todo":
                 return Command.CommandType.TODO;
             case "deadline":
