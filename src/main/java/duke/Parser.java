@@ -66,6 +66,6 @@ public class Parser {
                 }
             }
         }
-        throw new DukeException("☹ oopsie!!! I'm sorry my dear but I can't do that for you");
+        throw new DukeException("D: oopsie!!! I'm sorry my dear but I can't do that for you");
     }
 }

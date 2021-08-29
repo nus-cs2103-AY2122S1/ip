@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
         if (isDeleteOps(command)) {
             index = Integer.parseInt(command.substring(7)) - 1;
         } else {
-            throw new DukeException("☹ Would you specify the task for me my dear?");
+            throw new DukeException("D: Would you specify the task for me my dear?");
         }
     }
 
@@ -48,20 +48,23 @@ public class DeleteCommand extends Command {
     /**
      * Implements the execute method from Command superclass.
      * Executes the given delete command accordingly by updating taskList and storage, interacting with ui.
+     * Returns a String of system reply when given certain input under execution.
      *
      * @param taskList A duke.TaskList object that contains an ArrayList of duke.task.task object to be updated.
      * @param ui A duke.Ui object that helps to perform interaction when the command is executed.
      * @param storage A duke.Storage object that helps to update the storage after the execution is done.
+     * @return a String of system reply when given certain input under execution.
      * @throws duke.DukeException Will be thrown if unable to locate/update the storage file.
      */
-    public void execute(duke.TaskList taskList, duke.Ui ui, duke.Storage storage) throws DukeException {
+    public String execute(duke.TaskList taskList, duke.Ui ui, duke.Storage storage) throws DukeException {
         if (index > taskList.size()) {
-            throw new DukeException("☹ oopsie!!! The specified task does not exit.");
+            throw new DukeException("D: oopsie!!! The specified task does not exit.");
         }
         duke.task.Task holder = taskList.getTask(index);
         taskList.deleteTask(index);
-        ui.showDelete(holder, taskList.size());
+        System.out.println(ui.showDelete(holder, taskList.size()));
         storage.updateStorage(taskList);
+        return ui.showDelete(holder, taskList.size());
     }
 
     /**

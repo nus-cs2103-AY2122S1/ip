@@ -28,7 +28,7 @@ public class Deadline extends Task {
         try {
             this.localDate = LocalDate.parse(time);
         } catch (DateTimeParseException e) {
-            throw new DukeException(" ☹ SORZ but I only understand date in yyyy-MM-dd format!");
+            throw new DukeException(" D: SORZ but I only understand date in yyyy-MM-dd format!");
         }
     }
 

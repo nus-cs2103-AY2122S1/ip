@@ -49,9 +49,7 @@ public class Ui {
      * Prints the loading error interface.
      */
     public void showLoadingError() {
-        showLine();
-        System.out.println("☹ OH NOOOOO! I cannot locate the file!!\n");
-        showLine();
+        System.out.println("D: OH NOOOOO! I cannot locate the file!!\n");
     }
 
     /**
@@ -60,113 +58,92 @@ public class Ui {
      * @param errMess A String containing the error message.
      */
     public void showError(String errMess) {
-        showLine();
         System.out.println(errMess);
-        showLine();
     }
 
     /**
-     * Prints complete task interface.
+     * Returns String complete task interface.
      *
      * @param task A duke.task.Task object that was marked done.
      */
-    public void showDone(duke.task.Task task) {
-        showLine();
-        System.out.println("Noice! I've marked this task as done: \n" + task + "\n");
-        showLine();
+    public String showDone(duke.task.Task task) {
+        return "Noice! I've marked this task as done: \n" + task + "\n";
     }
 
     /**
-     * Prints interface in case where List is to be shown but there is no tasks.
+     * Returns String in case where List is to be shown but there is no tasks.
      */
-    public void emptyList() {
-        showLine();
-        System.out.println("Darling, you have nothing in your list though \n");
-        showLine();
+    public String emptyList() {
+        return "Darling, you have nothing in your list though \n";
     }
 
     /**
-     * Prints the full TaskList.
+     * Returns String the full TaskList.
      *
      * @param taskList A TaskList that contains all the duke.task.Task objects' information.
      */
-    public void showFullList(TaskList taskList) {
-        showLine();
-        System.out.println("Darling, here are the tasks in your list:\n" + taskList);
-        showLine();
+    public String showFullList(TaskList taskList) {
+        return "Darling, here are the tasks in your list:\n" + taskList;
     }
 
     /**
-     * Prints the TaskList after being filtered by a date.
+     * Returns String the TaskList after being filtered by a date.
      *
      * @param taskList A TaskList that contains all the duke.task.Task objects' information.
      * @param dateFilter A LocalDate object that is used to filter the TaskList.
      */
-    public void showScheduleList(TaskList taskList, LocalDate dateFilter) {
-        showLine();
-        System.out.println(String.format("Darling, here are the tasks with a schedule of %s:\n",
-                dateFilter.toString()));
-        System.out.println(taskList.listSchedule(dateFilter));
-        showLine();
+    public String showScheduleList(TaskList taskList, LocalDate dateFilter) {
+        return String.format("Darling, here are the tasks with a schedule of %s:\n",
+                dateFilter.toString()) + taskList.listSchedule(dateFilter);
     }
 
     /**
-     * Prints the TaskList after being filtered by a String.
+     * Returns String the TaskList after being filtered by a String.
      *
      * @param taskList A TaskList that contains all the duke.task.Task objects' information.
      * @param searchFilter A String object that is used to filter the TaskList.
      */
-    public void showFindList(TaskList taskList, String searchFilter) {
-        showLine();
-        System.out.println(String.format("Darling, here are the matching tasks(with %s) in your list:\n",
-                searchFilter));
-        System.out.println(taskList.listFind(searchFilter));
-        showLine();
+    public String showFindList(TaskList taskList, String searchFilter) {
+        return String.format("Darling, here are the matching tasks(with %s) in your list:\n",
+                searchFilter) + taskList.listFind(searchFilter);
     }
 
     /**
-     * Prints the delete interface with information of the deleted task.
+     * Returns String the delete interface with information of the deleted task.
      *
      * @param task A duke.task.Task object that was deleted.
      * @param num A int object indicating number of objects left in the tasklist after deletion.
      */
-    public void showDelete(duke.task.Task task, int num) {
-        showLine();
-        System.out.println("okie! I've removed this annoying task: \n" + task + "\n");
-        showNumOfTask(num);
-        showLine();
+    public String showDelete(duke.task.Task task, int num) {
+        return "okie! I've removed this annoying task: \n" + task + "\n" + showNumOfTask(num);
     }
 
     /**
-     * Prints the interface containing the number of objects in the tasklist.
+     * Returns String the interface containing the number of objects in the tasklist.
      *
      * @param num A int object indicating number of objects in the current tasklist.
      */
-    public void showNumOfTask(int num) {
-        System.out.println("Now you have " + num + " tasks in the list.\n");
+    public String showNumOfTask(int num) {
+        return "Now you have " + num + " tasks in the list.\n";
     }
 
     /**
-     * Prints the interface when a task is added to the tasklist.
+     * Returns String the interface when a task is added to the tasklist.
      *
      * @param task A duke.task.Task object that is to be added.
      * @param num A int object indicating number of objects left in the tasklist after the addition.
      */
-    public void showAdd(duke.task.Task task, int num) {
-        showLine();
-        System.out.println("Gotcha my dear. I've added this task for you: \n" + task
-                + "\nNow you have " + num + " tasks in the list.\n");
-        showLine();
+    public String showAdd(duke.task.Task task, int num) {
+        return "Gotcha my dear. I've added this task for you: \n" + task
+                + "\nNow you have " + num + " tasks in the list.\n";
     }
 
     /**
-     * Prints the exit interface.
+     * Returns String the exit interface.
      */
-    public void showFarewell() {
-        showLine();
-        System.out.println("Bye bye. Love you\n");
-        showLine();
+    public String showFarewell() {
         scanner.close();
+        return "Bye bye. Love you\n";
     }
 
 

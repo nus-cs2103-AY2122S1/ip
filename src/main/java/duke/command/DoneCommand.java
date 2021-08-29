@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
         if (isDoneOps(command)) {
             index = Integer.parseInt(command.substring(5)) - 1;
         } else {
-            throw new DukeException("☹ Would you specify the task for me my dear?");
+            throw new DukeException("D: Would you specify the task for me my dear?");
         }
     }
 
@@ -51,19 +51,22 @@ public class DoneCommand extends Command {
     /**
      * Implements the execute method from Command superclass.
      * Executes the given done command accordingly by updating taskList and storage, interacting with ui.
+     * Returns a String of system reply when given certain input under execution.
      *
      * @param taskList A duke.TaskList object that contains an ArrayList of duke.task.task object to be updated.
      * @param ui A duke.Ui object that helps to perform interaction when the command is executed.
      * @param storage A duke.Storage object that helps to update the storage after the execution is done.
+     * @return a String of system reply when given certain input under execution.
      * @throws duke.DukeException Will be thrown if unable to locate/update the storage file.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index > taskList.size()) {
-            throw new DukeException("☹ oopsie!!! The specified task does not exit.");
+            throw new DukeException("D: oopsie!!! The specified task does not exit.");
         }
         taskList.doneTask(index);
-        ui.showDone(taskList.getTask(index));
+        System.out.println(ui.showDone(taskList.getTask(index)));
         storage.updateStorage(taskList);
+        return ui.showDone(taskList.getTask(index));
     }
 
     /**
@@ -75,4 +78,5 @@ public class DoneCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 }

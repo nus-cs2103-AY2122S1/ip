@@ -84,7 +84,7 @@ public class Storage {
             s.close();
             return result;
         } catch (IOException | DukeException e) {
-            throw new DukeException("☹ OH NOOOOO! I cannot locate the file!!" + e.getMessage());
+            throw new DukeException("D: OH NOOOOO! I cannot locate the file!!" + e.getMessage());
         }
     }
 
@@ -110,7 +110,7 @@ public class Storage {
             //noinspection ResultOfMethodCallIgnored
             tempFile.delete();
         } catch (IOException e) {
-            throw new DukeException("☹ OH NOOOOO! Something wrong with the file!!" + e.getMessage());
+            throw new DukeException("D: OH NOOOOO! Something wrong with the file!!" + e.getMessage());
         }
     }
 }
