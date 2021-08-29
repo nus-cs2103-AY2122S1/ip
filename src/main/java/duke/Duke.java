@@ -42,8 +42,8 @@ public class Duke {
     public void run() {
         String command;
         boolean stillRunning = true;
+        Scanner scanner = new Scanner(System.in);
         while (stillRunning) {
-            Scanner scanner = new Scanner(System.in);
             command = scanner.nextLine();
             parser.interpretCommand(command);
             String firstCommand = this.parser.getFirstCommand();

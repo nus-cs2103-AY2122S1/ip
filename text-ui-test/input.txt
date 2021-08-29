@@ -28,4 +28,8 @@ list
 delete 1
 list
 delete blah
+delete 1
+delete 1
+delete 1
+delete 1
 bye

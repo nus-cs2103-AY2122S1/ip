@@ -21,3 +21,6 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 /text-ui-test/EXPECTED-UNIX.TXT
+
+# Ignore database
+data/duke.txt
