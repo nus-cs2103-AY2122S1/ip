@@ -4,14 +4,17 @@ import duke.command.*;
 import duke.exception.*;
 import duke.task.*;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 // Makes sense of the user's commands
 public class Parser {
     private static boolean isStop = false;
     private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private static TaskList taskList;
 
-    public static Command parse(String input) throws DukeException{
+    public static Command parse(String input, TaskList tasks) throws DukeException{
+        taskList = tasks;
         Task currTask;
         if (input.equals("list")) {
             return new ListCommand();
@@ -23,6 +26,9 @@ public class Parser {
         } else if (input.startsWith("delete")) {
             int index = parseDelete(input);
             return new DeleteCommand(index);
+        } else if (input.startsWith("find")) {
+            String target = parseFind(input);
+            return new FindCommand(target);
         } else {
             if (!input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -47,10 +53,10 @@ public class Parser {
             throw new DukeException("Please enter \'done [index of item]\' to mark item as done.");
         }
         int number = Integer.parseInt(String.valueOf(numberString));
-        if (number > TaskList.getSize() || number < 0) {
+        if (number > taskList.getSize() || number < 0) {
             throw new DukeException("Item does not exist, we cannot mark it as done.");
         }
-        Task currTask = TaskList.get(number - 1);
+        Task currTask = taskList.get(number - 1);
         if (currTask.getStatusIcon().equals(String.valueOf('X'))) {
             throw new DukeException("Item is already marked as done, we cannot mark it as done again.");
         }
@@ -64,10 +70,17 @@ public class Parser {
             throw new DukeException("Please enter \'delete [index of item]\' to mark item as done.");
         }
         int number = Integer.parseInt(String.valueOf(numberString));
-        if (number > TaskList.getSize() || number < 0) {
+        if (number > taskList.getSize() || number < 0) {
             throw new DukeException("Item does not exist, we cannot delete it.");
         }
         return number - 1;
+    }
+
+    public static String parseFind(String input) throws DukeException {
+        if (input.length() == 4) {
+            throw new DukeException("OOPS!!! The word to find cannot be empty.");
+        }
+       return input.substring(5);
     }
 
     public static Task parseTodo(String input) throws DukeException {

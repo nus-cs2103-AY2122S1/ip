@@ -67,10 +67,10 @@ public class Storage {
         return new ArrayList<>();
     }
 
-    public void updateFile() {
+    public void updateFile(TaskList taskList) {
         String allLines = "";
 
-        for (Task t : TaskList.getTaskList()) {
+        for (Task t : taskList.getTaskList()) {
             String currLine = "";
 
             // Checking for the type of task

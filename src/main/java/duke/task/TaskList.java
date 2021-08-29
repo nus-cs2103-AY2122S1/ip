@@ -2,7 +2,7 @@ package duke.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    public static ArrayList<Task> taskList;
+    public ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> tl) {
         taskList = tl;
@@ -12,7 +12,7 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
-    public static void doneTask(int index) {
+    public void doneTask(int index) {
         taskList.get(index).markAsDone();
     }
 
@@ -24,15 +24,25 @@ public class TaskList {
         taskList.remove(index);
     }
 
-    public static ArrayList<Task> getTaskList() {
+    public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
-    public static int getSize() {
+    public int getSize() {
         return taskList.size();
     }
 
-    public static Task get(int index) {
+    public Task get(int index) {
         return taskList.get(index);
+    }
+
+    public TaskList searchList(String target) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.toString().contains(target)) {
+                foundTasks.add(t);
+            }
+        }
+        return new TaskList(foundTasks);
     }
 }

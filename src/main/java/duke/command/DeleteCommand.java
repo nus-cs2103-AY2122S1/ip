@@ -20,6 +20,6 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task task = taskList.get(this.index);
         taskList.deleteTask(this.index);
-        ui.deleteTask(task);
+        ui.deleteTask(task, taskList);
     }
 }
