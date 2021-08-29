@@ -3,8 +3,8 @@ package duke;
 
 import duke.command.Command;
 import duke.task.TaskList;
-
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,8 +13,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 /**
@@ -166,12 +170,48 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
+
+        userText.setPadding(new Insets(0, 10, 0, 0));
+        dukeText.setPadding(new Insets(0, 0, 0, 10));
+
+        System.out.println(user.getWidth());
+
+        ImageView userImage = new ImageView(user);
+        ImageView dukeImage = new ImageView(duke);
+
+        setClipViewport(userImage, 100);
+        setClipViewport(dukeImage, 100);
+
+        DialogBox userDialogBox = DialogBox.getUserDialog(userText, userImage);
+        DialogBox dukeDialogBox = DialogBox.getDukeDialog(dukeText, dukeImage);
+
+        userDialogBox.setPadding(new Insets(0, 0, 30, 0));
+        dukeDialogBox.setPadding(new Insets(0, 0, 30, 0));
+
+        setDialogBoxBackgroundColor(userDialogBox, "#1FDA12");
+        setDialogBoxBackgroundColor(dukeDialogBox, "#12B1DA");
+
+
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(userText, new ImageView(user)),
-            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            userDialogBox, dukeDialogBox
         );
         userInput.clear();
     }
+
+    private void setClipViewport(ImageView imageView, int length) {
+        imageView.setPreserveRatio(false);
+        imageView.setSmooth(true);
+
+        Circle circle = new Circle(length / 2, length / 2, Math.min(length, length) / 2);
+
+
+        imageView.setClip(circle);
+    }
+
+    private void setDialogBoxBackgroundColor(DialogBox dialogBox, String hexValue) {
+        dialogBox.setBackground(new Background(new BackgroundFill(Paint.valueOf(hexValue), null, null)));
+    }
+
 
     /**
      * You should have your own function to generate a response to user input.
