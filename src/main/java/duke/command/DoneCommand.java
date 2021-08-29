@@ -4,6 +4,8 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import java.util.ArrayList;
+
 public class DoneCommand extends Command{
     private final String fullCommand;
 
@@ -17,9 +19,9 @@ public class DoneCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public ArrayList<String> execute(TaskList taskList, Ui ui, Storage storage) {
         int doneId = Integer.parseInt(fullCommand.split(" ")[1]);
-        taskList.markAsDone(doneId);
+        return taskList.markAsDone(doneId);
     }
 
     @Override

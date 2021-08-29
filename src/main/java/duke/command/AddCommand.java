@@ -3,6 +3,7 @@ package duke.command;
 import duke.*;
 
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class AddCommand extends Command{
     private final String fullCommand;
@@ -19,7 +20,7 @@ public class AddCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public ArrayList<String> execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task newTask;
             if (taskType == TaskEnum.TODO) {
@@ -32,10 +33,11 @@ public class AddCommand extends Command{
             } else {    // i.e. EVENT
                 newTask = Event.parseNewCommand(fullCommand);
             }
-            taskList.addTask(newTask);
+            return taskList.addTask(newTask);
         } catch (IllegalArgumentException | DateTimeParseException | IndexOutOfBoundsException | DukeException e) {
             System.err.println("\tOops :( " + e);
         }
+        return null;
     }
 
     @Override

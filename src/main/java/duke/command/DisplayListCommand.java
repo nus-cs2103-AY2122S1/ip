@@ -4,6 +4,8 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import java.util.ArrayList;
+
 public class DisplayListCommand extends Command{
     public DisplayListCommand() {}
 
@@ -13,7 +15,7 @@ public class DisplayListCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.displayList();
+    public ArrayList<String> execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.displayList();
     }
 }

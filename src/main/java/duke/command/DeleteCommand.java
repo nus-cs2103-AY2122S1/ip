@@ -4,6 +4,8 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import java.util.ArrayList;
+
 public class DeleteCommand extends Command{
     private final String fullCommand;
 
@@ -17,9 +19,9 @@ public class DeleteCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public ArrayList<String> execute(TaskList taskList, Ui ui, Storage storage) {
         int delId = Integer.parseInt(fullCommand.split(" ")[1]);
-        taskList.deleteTask(delId);
+        return taskList.deleteTask(delId);
     }
 
     @Override

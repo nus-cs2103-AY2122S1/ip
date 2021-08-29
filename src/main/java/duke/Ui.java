@@ -25,30 +25,30 @@ public class Ui {
     /**
      * Displays greetings when the program first runs.
      */
-    public void displayGreetings() {
-        System.out.println("\tHello this is Yiyang-bot :D");
-        System.out.println("\tWhat can I do for you?");
+    public String displayGreetings() {
+        return "\tHello this is Yiyang-bot :D"
+                + "\n" + "\tWhat can I do for you?";
     }
 
     /**
      * Displays bye when the program ends.
      */
-    public void displayBye() {
-        System.out.println("\tBye. Hope to see you again.");
+    public String displayBye() {
+        return "\tBye. Hope to see you again.";
     }
 
     /**
      * Prints a line divider.
      */
-    public void showLine() {
-        System.out.println("\t--------------------------------------------------");
+    public String showLine() {
+        return "\t--------------------------------------------------";
     }
 
     /**
      * Displays error message.
      * @param errorMsg the error message to be displayed.
      */
-    public void showError(String errorMsg) {
-        System.err.println(errorMsg);
+    public String showError(String errorMsg) {
+        return errorMsg;
     }
 }

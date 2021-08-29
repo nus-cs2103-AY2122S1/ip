@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.graphics.DialogBox;
+import duke.graphics.ResponseMessage;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,8 +16,11 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class Duke extends Application {
+
+public class Duke {//} extends Application {
     // GUI componnents
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -67,7 +71,7 @@ public class Duke extends Application {
             }
         }
     }
-
+/*
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -134,12 +138,17 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+ */
+
+
+
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
+    /*
     private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
@@ -147,28 +156,37 @@ public class Duke extends Application {
 
         return textToAdd;
     }
+    */
 
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
 
-    public void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userInput.getText(), user),
-                DialogBox.getDukeDialog(userInput.getText(), duke)
-        );
-        userInput.clear();
-    }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public ResponseMessage getResponse(String input) {
+        List<String> linesOfOutput = new ArrayList<>();
+        boolean isExit = false;
+
+        try {
+            linesOfOutput.add(ui.showLine());
+            Command c = Parser.parse(input);
+            linesOfOutput.addAll(c.execute(tasks, ui, storage));
+            isExit = c.isExit();
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        } finally {
+            linesOfOutput.add(ui.showLine());
+        }
+
+
+        //if (isExit)
+
+        return new ResponseMessage(String.join("\n", linesOfOutput), isExit);
+        //return "Duke heard: " + input;
+    }
+
+    public String greetToGui() {
+        return ui.displayGreetings();
     }
 }
