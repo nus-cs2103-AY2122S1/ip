@@ -107,7 +107,7 @@ public class TaskList {
      * @param taskNo Index of {@code Task} to be marked as done.
      *
      * @return A {@code Pair} containing the previous status of {@code Task} and the
-     *         {@code Task} at the given index.
+     * {@code Task} at the given index.
      * @throws DukeException Nothing in the list to be marked, or task number out
      *                       of valid range.
      */
