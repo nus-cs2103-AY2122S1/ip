@@ -1,4 +1,12 @@
+package duke.command;
+
 import java.io.IOException;
+
+import duke.Storage;
+import duke.Ui;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * This class encapsulates a command to add a Task to a TaskList.

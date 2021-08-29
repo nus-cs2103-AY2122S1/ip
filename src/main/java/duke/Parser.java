@@ -1,3 +1,16 @@
+package duke;
+
+import duke.command.AddTaskCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.MarkDoneCommand;
+
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.TaskList;
+import duke.task.TodoTask;
+
 import java.time.DateTimeException;
 
 public class Parser {

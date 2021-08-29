@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.Duke;
+import duke.Storage;
+import duke.Ui;
+
+import duke.task.TaskList;
+
 /**
  * This class encapsulates an "Exit" command from Duke.
  * Extends Command class.

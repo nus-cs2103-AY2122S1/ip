@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.Storage;
+import duke.Ui;
+
+import duke.task.TaskList;
+
 /**
  * This class encapsulates an abstract Command class, to be implemented as specific commands for Duke.
  */
