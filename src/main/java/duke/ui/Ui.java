@@ -25,6 +25,7 @@ public class Ui {
 
     /**
      * Informs the user that they have inputted an empty task.
+     * 
      * @param s Type of task input.
      * @return The error message to the user.
      */
@@ -32,16 +33,16 @@ public class Ui {
         String error = "OOPS!!!";
         switch(s) {
         case "todo":
-            error = Messages.INDENTATION + "OOPS!!! The description of a todo cannot be empty.";
+            error = Messages.INDENTATION + Messages.EMPTY_TODO_DESC;
             break;
         case "deadline":
-            error = Messages.INDENTATION + "OOPS!!! The description of a deadline cannot be empty.";
+            error = Messages.INDENTATION + Messages.EMPTY_DEADLINE_DESC;
             break;
         case "event":
-            error = Messages.INDENTATION + "OOPS!!! The description of an event cannot be empty.";
+            error = Messages.INDENTATION + Messages.EMPTY_EVENT_DESC;
             break;
         case "find":
-            error = Messages.INDENTATION + "OOPS!!! The description of a find command cannot be empty.";
+            error = Messages.INDENTATION + Messages.EMPTY_FIND_CMD;
             break;
         }
         return error;
