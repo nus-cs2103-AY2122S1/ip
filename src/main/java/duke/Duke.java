@@ -121,6 +121,7 @@ public class Duke extends Application {
         Button findButton = new Button("Find Task");
         HBox searchFields = new HBox(searchQueryField, findButton);
 
+        // A-Varargs: usage of VarArgs here as the constructor of VBox and HBox uses VarArgs.
         VBox commandsLayout = new VBox(addTasksFields, listButton, markDoneFields, deleteFields, searchFields);
         commandsLayout.setAlignment(Pos.TOP_LEFT);
 
