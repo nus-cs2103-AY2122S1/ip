@@ -1,6 +1,6 @@
 package command;
 
-import duke.command.TaskList;
+import duke.TaskList;
 import duke.task.Task;
 import org.junit.jupiter.api.Test;
 

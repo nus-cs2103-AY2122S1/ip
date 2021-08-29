@@ -1,10 +1,7 @@
 package duke.command;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
+import duke.TaskList;
+import duke.task.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
