@@ -80,36 +80,40 @@ public class Storage {
 
         // Read the rest of data and add to list of tasks
         while ((input = br.readLine()) != null) {
-            Task newTask;
-
-            // Obtain relevant info based on type of task
-            switch (input.charAt(1)) {
-            case 'T': // todo, [T][ ] join sports club
-                newTask = new Todo(input.substring(7));
-                break;
-            case 'D': // deadline, [D][ ] return book (by: Jun 6 2021, 5:12 PM)
-                newTask = newDeadline(input);
-                break;
-            case 'E': // event, [E][ ] project meeting (at: Aug 6 2021, 2:00 PM - 6:00 PM)
-                newTask = newEvent(input);
-                break;
-            default: // gg someone messed with the save file
-                throw new DataIntegrityException();
-            }
-
-            // Check if task is alr done
-            if (input.charAt(4) == 'X') {
-                newTask.markAsDone();
-            }
-
             // Add task to list but do not show a confirmation msg
-            tasks.add(newTask);
+            tasks.add(newTask(input));
         }
 
         // Close reader
         br.close();
 
         return tasks;
+    }
+
+    private Task newTask(String command) throws DataIntegrityException {
+        Task newTask;
+
+        // Obtain relevant info based on type of task
+        switch (command.charAt(1)) {
+        case 'T': // todo, [T][ ] join sports club
+            newTask = new Todo(command.substring(7));
+            break;
+        case 'D': // deadline, [D][ ] return book (by: Jun 6 2021, 5:12 PM)
+            newTask = newDeadline(command);
+            break;
+        case 'E': // event, [E][ ] project meeting (at: Aug 6 2021, 2:00 PM - 6:00 PM)
+            newTask = newEvent(command);
+            break;
+        default: // gg someone messed with the save file
+            throw new DataIntegrityException();
+        }
+
+        // Check if task is alr done
+        if (command.charAt(4) == 'X') {
+            newTask.markAsDone();
+        }
+
+        return newTask;
     }
 
     private Task newEvent(String command) throws DataIntegrityException {
