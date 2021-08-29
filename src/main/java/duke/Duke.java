@@ -25,7 +25,7 @@ public class Duke extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             primaryStage.setScene(scene);
-            Ui dukeUi = new Ui();
+            Ui dukeUi = new Ui(primaryStage);
             dukeUi.startDuke();
             fxmlLoader.<MainWindow>getController().setDuke(dukeUi);
             fxmlLoader.<MainWindow>getController().displayStartMessage();

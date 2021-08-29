@@ -60,7 +60,7 @@ public class TaskList {
     public String removeTask(int index) {
         String message;
         if (index > this.taskArrayList.size() || index <= 0) {
-            message = "This entry does not exist.\n";
+            message = "A task could not be removed because it does not exist.\n";
             return message;
         }
         Task task = this.taskArrayList.get(index - 1);
@@ -69,7 +69,7 @@ public class TaskList {
             uncompletedTasks--;
         }
         totalTasks--;
-        message = "Understood. I've removed this task:\n" + task + "\n" + this.getTaskListStatus();
+        message = "Understood. I've removed this task:\n" + task + "\n";
         this.saveTaskList();
         return message;
     }
@@ -83,16 +83,16 @@ public class TaskList {
      */
     public String markTaskAsCompleted(int index) {
         if (index > this.taskArrayList.size() || index <= 0) {
-            return "This entry does not exist.\n";
+            return "Index " + index + " does not exist.\n";
         }
         if (this.taskArrayList.get(index - 1).isDone()) {
-            return "This task has already been completed.\n";
+            return "This task at index " + index + " has already been completed.\n";
         }
         String message;
         this.taskArrayList.get(index - 1).setAsFinished();
         this.uncompletedTasks--;
         message = "congratulations! This task has been completed:\n"
-                + this.taskArrayList.get(index - 1) + "\n" + this.getTaskListStatus();
+                + this.taskArrayList.get(index - 1) + "\n";
         this.saveTaskList();
         return message;
     }
@@ -137,7 +137,13 @@ public class TaskList {
         }
     }
 
-    private String getTaskListStatus() {
+    /**
+     * Returns a String describing the total number of tasks and uncompleted tasks in the
+     * taskList.
+     *
+     * @return The String describing the taskList status.
+     */
+    public String getTaskListStatus() {
         return "You currently have " + this.totalTasks + " tasks in your list with "
                 + this.uncompletedTasks + " uncompleted tasks remaining.\n";
     }

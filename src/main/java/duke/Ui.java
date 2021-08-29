@@ -1,6 +1,7 @@
 package duke;
 
 import commands.Command;
+import javafx.stage.Stage;
 import tasks.Task;
 
 import java.util.Scanner;
@@ -21,6 +22,11 @@ public class Ui {
     public static final String DATE_FORMAT = "dd/MM/yyyy or dd/MM/yyyy HHmm";
 
     private Parser parser;
+    private final Stage mainStage;
+
+    protected Ui(Stage mainStage) {
+        this.mainStage = mainStage;
+    }
 
     /**
      * Starts up the chat bot. It prints a welcome message for the user and then waits
@@ -44,6 +50,9 @@ public class Ui {
     public String readUserInput(String input) {
         Command command = this.parser.parseUserInput(input);
         command.execute();
+        if (command.isExit()) {
+            this.mainStage.close();
+        }
         return command.getExecutionMessage();
     }
 

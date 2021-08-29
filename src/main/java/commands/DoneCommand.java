@@ -5,9 +5,8 @@ import tasks.TaskList;
 /**
  * A command to marks a task in Duke's taskList as done.
  */
-public class DoneCommand extends Command {
+public class DoneCommand extends TaskListIndexCommand {
 
-    private final String input;
     private final TaskList taskList;
 
     /**
@@ -17,21 +16,17 @@ public class DoneCommand extends Command {
      * @param taskList The taskList that contains the task to be mark as done.
      */
     public DoneCommand(String input, TaskList taskList) {
-        this.input = input;
+        super(input);
         this.taskList = taskList;
     }
 
     @Override
-    public boolean execute() {
-        try {
-            // Checks if an argument is provided
-            int index = Integer.parseInt(input.split(" ", 2)[1].trim());
-            this.setExecutionMessage(this.taskList.markTaskAsCompleted(index));
-            return true;
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            this.setExecutionMessage(this.getInvalidArgumentsMessage());
-            return false;
+    protected String executeOnTaskList(int... listOfIndex) {
+        StringBuilder message = new StringBuilder();
+        for (int ofIndex : listOfIndex) {
+            message.append(this.taskList.markTaskAsCompleted(ofIndex)).append("\n");
         }
+        return message.append(this.taskList.getTaskListStatus()).toString();
     }
 
     @Override

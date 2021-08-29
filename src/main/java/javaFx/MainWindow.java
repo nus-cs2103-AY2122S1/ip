@@ -53,6 +53,6 @@ public class MainWindow extends AnchorPane {
     }
 
     private String getResponse(String input) {
-        return this.dukeUi.readUserInput(input);
+        return this.dukeUi.readUserInput(input.strip());
     }
 }
