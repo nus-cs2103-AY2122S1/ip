@@ -48,7 +48,7 @@ public class Parser {
     }
 
     public static Command parse(String fullCommand) throws DukeException {
-        String[] tokens = fullCommand.strip().split("\\s+", 2);
+        String[] tokens = fullCommand.split("\\s+", 2);
         String eventType = tokens[0];
         String remainder = tokens.length == 1 ? null : tokens[1];
         int index;
