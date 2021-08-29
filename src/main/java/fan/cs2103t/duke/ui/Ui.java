@@ -7,14 +7,13 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static final String LOGO = "      ____        _        \n"
-            + "     |  _ \\ _   _| | _____ \n"
-            + "     | | | | | | | |/ / _ \\\n"
-            + "     | |_| | |_| |   <  __/\n"
-            + "     |____/ \\__,_|_|\\_\\___|\n";
-    public static final String DIVIDER = "    ____________________________________________________________";
-    public static final String SPACE = "     ";
-    public static final String INVALID_INPUT = SPACE + "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static final String LOGO = "  ____        _        \n"
+            + " |  _ \\ _   _| | _____ \n"
+            + " | | | | | | | |/ / _ \\\n"
+            + " | |_| | |_| |   <  __/\n"
+            + " |____/ \\__,_|_|\\_\\___|\n";
+    public static final String DIVIDER = "____________________________________________________________";
+    public static final String INVALID_INPUT = "OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private final Scanner scanner;
 
@@ -26,20 +25,28 @@ public class Ui {
     }
 
     /**
-     * Displays a greeting message to the user through this UI.
+     * Displays a greeting message to the user through this UI and returns the greeting message.
+     *
+     * @return the greeting message
      */
-    public void greet() {
+    public String greet() {
+        String output = "Hello! I'm Duke\n" + "What can I do for you?";
         System.out.println(DIVIDER);
         System.out.println(LOGO);
-        System.out.println(SPACE + "Hello! I'm Duke\n" + SPACE + "What can I do for you?");
+        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
         System.out.println(DIVIDER + "\n");
+        return output;
     }
 
     /**
-     * Displays a goodbye message to the user through this UI.
+     * Displays a goodbye message to the user through this UI and returns the goodbye message.
+     *
+     * @return the goodbye message
      */
-    public void dismiss() {
-        displayText(SPACE + "Bye. Hope to see you again soon!");
+    public String dismiss() {
+        String byeMessage = "Bye. Hope to see you again soon!";
+        displayText(byeMessage);
+        return byeMessage;
     }
 
     /**

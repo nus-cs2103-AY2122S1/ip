@@ -24,23 +24,28 @@ public class AddCommand extends Command {
 
     /**
      * Executes this command. Adds the task to the specified task list.
-     * Displays a message to the user through the specified UI if the task is successfully added,
+     * Displays a status message to the user through the specified UI if the task is successfully added,
      * or exits the current program immediately if the process fails.
+     * Returns the status message as a string.
      *
      * @param taskList the task list for the task to be added into.
      * @param ui the UI for the message to be displayed through.
+     * @return a message to indicate the status of execution.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
+        String output = null;
         if (taskList.addTask(task)) {
-            ui.displayText(space + "Got it. I've added this task: \n"
-                    + space + "  " + task.getDescriptionWithStatus() + "\n"
-                    + space + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.");
+            output = "Got it. I've added this task: \n"
+                    + "  " + task.getDescriptionWithStatus() + "\n"
+                    + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.";
+            ui.displayText(output);
             // dataHandler.storeTaskList(taskList);
+            return output;
         } else {
-
             System.exit(1);
         }
+        return output;
     }
 
 }

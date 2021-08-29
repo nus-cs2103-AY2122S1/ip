@@ -26,26 +26,32 @@ public class DeleteCommand extends Command {
      * Executes this command. Deletes the task with the index from the specified task list.
      * Displays a message to the user through the specified UI if the task is successfully deleted,
      * or exits the current program immediately if the process fails.
+     * Returns the status message as a string.
      *
      * @param taskList the task list for the task to be deleted from.
      * @param ui the UI for the message to be displayed through.
+     * @return a message to indicate the status of execution.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
+        String output = null;
         try {
             Task t = taskList.getTasks().get(taskIndex - 1);
             String description = t.getDescriptionWithStatus();
             if (taskList.deleteTask(taskIndex - 1)) {
-                ui.displayText(space + "Noted. I've removed this task: \n"
-                        + space + "  " + description + "\n"
-                        + space + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.");
+                output = "Noted. I've removed this task: \n"
+                        + "  " + description + "\n"
+                        + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.";
+                ui.displayText(output);
                 // dataHandler.storeTaskList(taskList);
             } else {
                 System.exit(1);
             }
         } catch (IndexOutOfBoundsException ex) {
-            ui.displayText(space + "Oops, the task doesn't seem to exist.");
+            output = "Oops, the task doesn't seem to exist.";
+            ui.displayText(output);
         }
+        return output;
     }
 
 }
