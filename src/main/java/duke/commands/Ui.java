@@ -18,6 +18,12 @@ public class Ui {
     public final static String NO_TASK_MESSAGE = "Good day! You have no task in hand right now.";
     public final static String FIND_ZERO_SIZE = "We are not able to find anything with that keyword. Please try again.";
     public final static String FIND_LIST_MESSAGE = "Here are the matching tasks in your list:";
+    public final static String ERROR_MESSAGE_STORAGE_DELETE = "DukeStorageDeleteException: Unable to delete following task from the storage.";
+    public final static String ERROR_MESSAGE_STORAGE_UPDATE = "DukeStorageUpdateException: Unable to update data into the storage.";
+    public final static String ERROR_MESSAGE_STORAGE_SAVE = "DukeStorageSaveException: Unable to write data into storage.";
+    public final static String ERROR_MESSAGE_STORAGE_LOAD = "DukeStorageLoadException: Unable to locate and load the data from storage.";
+    public final static String ERROR_MESSAGE_STORAGE_LOAD_OUT_OF_BOUND = "DukeStorageLoadException: Data must have saved in a wrong format.";
+    public final static String ERROR_MESSAGE_ACTION_OUT_OF_BOUND = "DukeActionOutOfBoundException: There is no such index from the storage.";
 
     public static void printMessage(String message) {
         System.out.println(Ui.INDENTED_HORIZONTAL_LINE);

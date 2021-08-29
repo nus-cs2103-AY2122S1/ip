@@ -3,6 +3,7 @@ package duke.storage;
 import java.util.ArrayList;
 
 import duke.commands.Ui;
+import duke.exceptions.action.DukeActionOutOfBoundException;
 import duke.tasks.Task;
 
 public class TaskList {
@@ -43,12 +44,16 @@ public class TaskList {
      * @param number is the Task id.
      */
     public void doneItem(String number) {
-        int index = Integer.parseInt(number) - 1;
-        Task curr = this.taskList.get(index);
-        this.taskList.set(index, curr.markAsDone());
-        curr = this.taskList.get(index);
+        try {
+            int index = Integer.parseInt(number) - 1;
+            Task curr = this.taskList.get(index);
+            this.taskList.set(index, curr.markAsDone());
+            curr = this.taskList.get(index);
 
-        Ui.printMessage(Ui.DONE_MESSAGE + "\n" + Ui.INDENT + "  " + curr.toString());
+            Ui.printMessage(Ui.DONE_MESSAGE + "\n" + Ui.INDENT + "  " + curr.toString());
+        } catch (IndexOutOfBoundsException err) {
+            throw new DukeActionOutOfBoundException(Ui.ERROR_MESSAGE_ACTION_OUT_OF_BOUND);
+        }
     }
 
     /**
@@ -68,11 +73,15 @@ public class TaskList {
      * @param number is the Task id.
      */
     public void deleteItem(String number) {
-        int index = Integer.parseInt(number) - 1;
-        Task task = this.taskList.get(index);
-        this.taskList.remove(index);
-        Ui.printMessage("Noted. I've removed this task:\n" + Ui.INDENT + "  " + task.toString() + "\n" + Ui.INDENT
-                + "Now you have " + this.taskList.size() + " tasks in the list.");
+        try {
+            int index = Integer.parseInt(number) - 1;
+            Task task = this.taskList.get(index);
+            this.taskList.remove(index);
+            Ui.printMessage("Noted. I've removed this task:\n" + Ui.INDENT + "  " + task.toString() + "\n" + Ui.INDENT
+                    + "Now you have " + this.taskList.size() + " tasks in the list.");
+        } catch (IndexOutOfBoundsException err) {
+            throw new DukeActionOutOfBoundException(Ui.ERROR_MESSAGE_ACTION_OUT_OF_BOUND);
+        }
     }
 
     /**

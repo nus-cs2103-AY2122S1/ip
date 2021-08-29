@@ -18,12 +18,9 @@ public class Duke {
 
     /**
      * Class Constructor.
-     * 
-     * @param filePath path where the txt file, data base for this application, is
-     *                 being stored.
      */
-    public Duke(String filePath) {
-        this.storage = new Storage(filePath);
+    public Duke() {
+        this.storage = new Storage();
         this.taskList = new TaskList();
     }
 

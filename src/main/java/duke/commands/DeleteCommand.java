@@ -1,7 +1,6 @@
 package duke.commands;
 
-import java.io.IOException;
-
+import duke.exceptions.storage.DukeStorageDeleteException;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 
@@ -29,8 +28,8 @@ public class DeleteCommand extends Command {
         try {
             taskList.deleteItem(this.taskId);
             storage.deleteTaskFromData(this.taskId);
-        } catch (IOException e) {
-            System.out.println(e);
+        } catch (DukeStorageDeleteException err) {
+            throw new DukeStorageDeleteException(err.toString());
         }
     }
 

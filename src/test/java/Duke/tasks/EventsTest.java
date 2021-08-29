@@ -1,8 +1,10 @@
-package duke.tasks;
+package Duke.tasks;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import duke.tasks.Events;
 
 public class EventsTest {
     @Test
