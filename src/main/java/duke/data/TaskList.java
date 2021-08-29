@@ -64,6 +64,26 @@ public class TaskList {
         return list.size();
     }
 
+    public void findTask(String wordToFind) {
+        ArrayList<String> tasks = new ArrayList<>();
+        int index = 1;
+        for (Task t: list) {
+            if (t.toString().contains(wordToFind)) {
+                tasks.add(String.format("    %d.%s", (index), t.toString()) + System.lineSeparator());
+                index++;
+            }
+        }
+        if (tasks.size() == 0) {
+            Ui.printNoSuchTaskMsg();
+        } else {
+            String msg = "     Here are the matching tasks in your list:" + System.lineSeparator();
+            for (int i = 0; i < tasks.size(); i++) {
+                msg += String.format("    %d.%s", (i + 1), tasks.get(i).toString()) + System.lineSeparator();
+            }
+            Ui.prettify(msg);
+        }
+    }
+
 
 
 

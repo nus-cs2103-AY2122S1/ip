@@ -48,6 +48,9 @@ public class Parser {
                 command = new DeleteCommand(taskList, input);
                 command.execute();
                 break;
+            case "find":
+                command = new FindCommand(taskList, input);
+                command.execute();
             case "bye":
                 command = new ByeCommand(taskList);
                 command.execute();

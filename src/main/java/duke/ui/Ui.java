@@ -27,21 +27,25 @@ public class Ui {
     public static String emptyDescriptionMsg(String type) {
         String errorMsg = TAB + TAB + "☹ OOPS!!! ";
         switch(type) {
-            case "todo":
-                errorMsg += Messages.MESSAGE_EMPTY_TODO;
-                break;
-            case "deadline":
-                errorMsg += Messages.MESSAGE_EMPTY_DEADLINE;
+        case "todo":
+            errorMsg += Messages.MESSAGE_EMPTY_TODO;
+            break;
+        case "deadline":
+            errorMsg += Messages.MESSAGE_EMPTY_DEADLINE;
 
-                break;
-            case "event":
-                errorMsg += Messages.MESSAGE_EMPTY_EVENT;
-                break;
-            case "delete":
-                errorMsg += Messages.MESSAGE_EMPTY_DELETE;
-                break;
-            case "done":
-                errorMsg += Messages.MESSAGE_EMPTY_DONE;
+            break;
+        case "event":
+            errorMsg += Messages.MESSAGE_EMPTY_EVENT;
+            break;
+        case "delete":
+            errorMsg += Messages.MESSAGE_EMPTY_DELETE;
+            break;
+        case "done":
+            errorMsg += Messages.MESSAGE_EMPTY_DONE;
+            break;
+        case "find":
+            errorMsg += Messages.MESSAGE_EMPTY_FIND;
+            break;
         }
         return errorMsg;
     }
@@ -62,6 +66,10 @@ public class Ui {
         String msg = Messages.MESSAGE_ADD + LS + TAB + TAB + TAB + task + LS +
                 String.format(Messages.MESSAGE_TASKS_LEFT, num);
         prettify(msg);
+    }
+
+    public static void printNoSuchTaskMsg() {
+        prettify(Messages.MESSAGE_NO_TASKS_FOUND);
     }
 
     public static void printRemoveMsg(String task, Integer num) {
