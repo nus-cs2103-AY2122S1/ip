@@ -15,7 +15,6 @@ public class Parser {
      * @throws UnknownCommandError If user inputs a command that is outside the scope of the chatbot
      */
     public static String parse(String instruction, Ui ui, TaskList tasks) throws NoDescriptionError, UnknownCommandError {
-        ui.printLineBreak();
         String[] splitInstructions = instruction.split(" ", 2);
         String operative = splitInstructions[0];
         Commands command;

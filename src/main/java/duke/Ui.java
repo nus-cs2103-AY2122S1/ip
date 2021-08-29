@@ -7,7 +7,6 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final Scanner USER_INPUT = new Scanner(System.in);
-    private static final String LINE_BREAKER = "______________________________________________________";
     private static final String GREETING = "Hello! I'm Duke\n" + "What can I do for you?";
     private static final String FAREWELL = "Bye. Hope to see you again soon!";
     private static final String LIST_MESSAGE = "Here are the tasks in your list:";
@@ -32,12 +31,6 @@ public class Ui {
         return USER_INPUT.nextLine();
     }
 
-    /**
-     * Prints a line for separation.
-     */
-    public String printLineBreak () {
-        return LINE_BREAKER;
-    }
 
     /**
      * Prints the content of the task list in a form where users can see.
@@ -49,7 +42,6 @@ public class Ui {
         for (int i = 0; i < taskList.getSize(); i++) {
             toReturn += String.valueOf(i + 1) + "." + taskList.get(i).toString() + "\n";
         }
-        toReturn += printLineBreak();
         return toReturn;
     }
 
@@ -58,7 +50,6 @@ public class Ui {
      */
     public String greet() {
         String toReturn = GREETING + "\n";
-        toReturn += printLineBreak();
         return toReturn;
     }
 
@@ -66,7 +57,7 @@ public class Ui {
      * Prints a farewell message for the user when 'bye' command is inputted.
      */
     public String sayFarewell() {
-        String toReturn = printLineBreak() + "\n" + FAREWELL + "\n" + printLineBreak();
+        String toReturn = FAREWELL;
         return toReturn;
     }
 
@@ -77,7 +68,7 @@ public class Ui {
      * @param task task that is completed.
      */
     public String completeTaskMessage (Task task) {
-        String toReturn = DONE_MESSAGE + "\n" + task.toString() + "\n" + printLineBreak();
+        String toReturn = DONE_MESSAGE + "\n" + task.toString();
         return toReturn;
     }
 
@@ -92,7 +83,6 @@ public class Ui {
         for (int i = 0; i < tasks.getSize(); i++) {
             toReturn += String.valueOf(i + 1) + "." + tasks.get(i).toString() + "\n";
         }
-        toReturn += printLineBreak();
         return toReturn;
     }
 
@@ -107,7 +97,6 @@ public class Ui {
         String toReturn = DELETE_TASK_MESSAGE + "\n";
         toReturn += "   " + task.toString() + "\n";
         toReturn += taskCounterMessage(size) + "\n";
-        toReturn += printLineBreak();
         return toReturn;
     }
 
@@ -122,7 +111,6 @@ public class Ui {
         String toReturn = ADD_TASK_MESSAGE + "\n";
         toReturn += "  " + task.toString() + "\n";
         toReturn += taskCounterMessage(size) + "\n";
-        toReturn += printLineBreak();
         return toReturn;
     }
 
@@ -142,6 +130,6 @@ public class Ui {
      * @param e Duke Exception that has occurred.
      */
     public String printErrorMessage(DukeException e) {
-        return e.toString() + "\n" + printLineBreak();
+        return e.toString();
     }
 }
