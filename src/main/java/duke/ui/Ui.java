@@ -174,8 +174,9 @@ public class Ui extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Processes the user's input.
+     * Creates one dialog box echoing user input and then appends them to the dialog container.
+     * Adapted from https://se-education.org/guides/tutorials/javaFxPart4.html written by Jeffry Lum.
      */
     @FXML
     private void handleUserInput() {
