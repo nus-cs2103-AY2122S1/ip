@@ -18,7 +18,7 @@ public class Duke {
     }
 
     /**
-     * Main logic of program
+     * Runs the main logic of program
      *
      */
     public void run() {
