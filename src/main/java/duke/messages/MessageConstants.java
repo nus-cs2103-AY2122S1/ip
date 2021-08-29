@@ -18,19 +18,19 @@ public class MessageConstants {
     public static final String MESSAGE_EMPTY_TODO_BODY =
             "☹ OOPS!!! The description of a todo cannot be empty.";
     public static final String MESSAGE_EMPTY_EVENT_BODY =
-            "☹ The description & at fields of an event are not provided. Try eg. " +
-                    "\"event <description> /at <venue>\" instead.";
+            "☹ The description & at fields of an event are not provided. Try eg. "
+                    + "\"event <description> /at <venue>\" instead.";
     public static final String MESSAGE_EMPTY_DEADLINE_BODY =
-            "☹ The description & by fields of a deadline are not provided eg." +
-                    "\"deadline <description> /by <yyyy-mm-dd>\" instead";
+            "☹ The description & by fields of a deadline are not provided eg."
+                    + "\"deadline <description> /by <yyyy-mm-dd>\" instead";
     public static final String MESSAGE_EMPTY_TEXT_FILTER = "☹ No text filter provided. "
             + "Try \"find <text filter>\" instead.";
     public static final String MESSAGE_INVALID_EVENT_FORMAT =
-            "☹ The format of event provided is invalid. " +
-                    "Try \"event <description> /at <venue>\" instead.";
+            "☹ The format of event provided is invalid. "
+                    + "Try \"event <description> /at <venue>\" instead.";
     public static final String MESSAGE_INVALID_DEADLINE_FORMAT =
-            "☹ The format of deadline provided is invalid. " +
-                    "Try \"deadline <description> /by <yyyy-mm-dd>\" instead.";
+            "☹ The format of deadline provided is invalid. "
+                    + "Try \"deadline <description> /by <yyyy-mm-dd>\" instead.";
     public static final String MESSAGE_INVALID_DATETIME_FORMAT =
             "☹ The format of the date and time provided is invalid. "
                     + "Try \"yyyy-mm-dd\" instead.";
@@ -38,7 +38,8 @@ public class MessageConstants {
             "☹ Task number provided is invalid. Please try another number.";
     public static final String MESSAGE_INVALID_INTEGER = "☹ Task number must be valid integer. eg. \"done 1\"";
     public static final String MESSAGE_TASK_FILE_IO_FAILURE = "☹ OOPS!!! Unable to read/write from save file.";
-    public static final String MESSAGE_INVALID_TASK_DATA = "☹ OOPS!!! Saved task data is corrupted/invalid!\nTerminating Duke!";
+    public static final String MESSAGE_INVALID_TASK_DATA = "☹ OOPS!!! Saved task data is corrupted/invalid!"
+            + "\nTerminating Duke!";
 
 
     // hide constructor for utility class

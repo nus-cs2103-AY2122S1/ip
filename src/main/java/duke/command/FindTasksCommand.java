@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.exceptions.EmptyFindBodyException;
 import duke.io.UserOutputHandler;
 import duke.messages.TaskFindListMessage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Represents user command to find all tasks with contains specified text filter String

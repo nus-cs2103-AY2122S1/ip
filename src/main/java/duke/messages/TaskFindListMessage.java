@@ -1,8 +1,8 @@
 package duke.messages;
 
-import duke.tasks.Task;
-
 import java.util.List;
+
+import duke.tasks.Task;
 
 /**
  * Class is responsible for forming message which displays tasks which descriptions contains
@@ -20,7 +20,7 @@ public class TaskFindListMessage extends Message {
      */
     public TaskFindListMessage(List<Task> tasks) {
         super.setMessageText(MessageConstants.MESSAGE_FIND_TASK_LIST
-            + generateListMessageText(tasks));
+                + generateListMessageText(tasks));
     }
 
     private String generateListMessageText(List<Task> tasks) {

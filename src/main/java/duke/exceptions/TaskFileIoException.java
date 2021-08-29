@@ -7,8 +7,8 @@ import duke.messages.MessageConstants;
  *
  * @author kevin9foong
  */
-public class TaskFileIOException extends DukeException {
-    public TaskFileIOException() {
+public class TaskFileIoException extends DukeException {
+    public TaskFileIoException() {
         super(MessageConstants.MESSAGE_TASK_FILE_IO_FAILURE);
     }
 }

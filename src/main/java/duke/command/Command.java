@@ -4,8 +4,6 @@ import duke.exceptions.DukeException;
 import duke.io.UserOutputHandler;
 import duke.tasks.TaskList;
 
-import java.io.IOException;
-
 /**
  * Represents a user command.
  *

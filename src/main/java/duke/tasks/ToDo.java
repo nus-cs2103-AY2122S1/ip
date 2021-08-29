@@ -8,6 +8,12 @@ import duke.exceptions.EmptyTodoBodyException;
  * @author kevin9foong
  */
 public class ToDo extends Task {
+    /**
+     * Constructs an instance of <code>ToDo</code> which contains the given description.
+     *
+     * @param description used to define what the <code>ToDo</code> is regarding.
+     * @throws EmptyTodoBodyException thrown when no description is provided.
+     */
     public ToDo(String description) throws EmptyTodoBodyException {
         if (description == null || description.isEmpty()) {
             throw new EmptyTodoBodyException();
@@ -21,7 +27,7 @@ public class ToDo extends Task {
      * and completion status.
      *
      * @param description description of what the <code>ToDo</code> entails.
-     * @param isDone completion status of <code>ToDo</code>.
+     * @param isDone      completion status of <code>ToDo</code>.
      */
     public ToDo(String description, boolean isDone) {
         super.setDescription(description);

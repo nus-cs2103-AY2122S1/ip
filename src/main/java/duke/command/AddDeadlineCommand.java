@@ -3,7 +3,7 @@ package duke.command;
 import duke.exceptions.EmptyDeadlineBodyException;
 import duke.exceptions.InvalidDateTimeFormatException;
 import duke.exceptions.InvalidDeadlineBodyException;
-import duke.exceptions.TaskFileIOException;
+import duke.exceptions.TaskFileIoException;
 import duke.io.UserOutputHandler;
 import duke.messages.TaskAddMessage;
 import duke.tasks.Deadline;
@@ -32,7 +32,7 @@ public class AddDeadlineCommand extends Command {
      *
      * @param userOutputHandler handles outputting messages to the output destination.
      * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
-     * @throws TaskFileIOException            thrown when failure due to reading or writing to Task save file occurs.
+     * @throws TaskFileIoException            thrown when failure due to reading or writing to Task save file occurs.
      * @throws InvalidDateTimeFormatException thrown when String representing <code>DateTime</code> is invalid.
      * @throws InvalidDeadlineBodyException   thrown when the data String representing the
      *                                        <code>Deadline</code> is invalid.
@@ -42,7 +42,7 @@ public class AddDeadlineCommand extends Command {
     @Override
     public void execute(UserOutputHandler userOutputHandler, TaskList taskList)
             throws InvalidDateTimeFormatException,
-            InvalidDeadlineBodyException, EmptyDeadlineBodyException, TaskFileIOException {
+            InvalidDeadlineBodyException, EmptyDeadlineBodyException, TaskFileIoException {
         Task addedDeadline = taskList.addTask(new Deadline(super.getUserInputBody()));
         userOutputHandler.writeMessage(new TaskAddMessage(addedDeadline.toString(),
                 taskList.getNumOfTasks()));

@@ -1,8 +1,8 @@
 package duke.messages;
 
-import duke.tasks.Task;
-
 import java.util.List;
+
+import duke.tasks.Task;
 
 /**
  * Class is responsible for generating message to list all tasks

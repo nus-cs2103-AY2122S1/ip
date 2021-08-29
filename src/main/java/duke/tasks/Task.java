@@ -1,11 +1,9 @@
 package duke.tasks;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidTaskDataException;
-
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.exceptions.InvalidTaskDataException;
 
 /**
  * This class encapsulates a user-added task

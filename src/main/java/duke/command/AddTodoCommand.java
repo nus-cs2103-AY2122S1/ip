@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.exceptions.EmptyTodoBodyException;
-import duke.exceptions.TaskFileIOException;
+import duke.exceptions.TaskFileIoException;
 import duke.io.UserOutputHandler;
 import duke.messages.TaskAddMessage;
 import duke.tasks.Task;
@@ -31,13 +31,13 @@ public class AddTodoCommand extends Command {
      *
      * @param userOutputHandler handles outputting messages to the output destination.
      * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
-     * @throws TaskFileIOException    thrown when failure due to reading or writing to task save file occurs.
+     * @throws TaskFileIoException    thrown when failure due to reading or writing to task save file occurs.
      * @throws EmptyTodoBodyException thrown when the data String representing the
      *                                <code>ToDo</code> is missing.
      */
     @Override
     public void execute(UserOutputHandler userOutputHandler, TaskList taskList)
-            throws TaskFileIOException, EmptyTodoBodyException {
+            throws TaskFileIoException, EmptyTodoBodyException {
         Task addedToDo = taskList.addTask(new ToDo(super.getUserInputBody()));
         userOutputHandler.writeMessage(new TaskAddMessage(addedToDo.toString(),
                 taskList.getNumOfTasks()));

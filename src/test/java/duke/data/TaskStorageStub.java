@@ -1,9 +1,9 @@
 package duke.data;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.tasks.Task;
 
 public class TaskStorageStub implements TaskStorage {
     private List<Task> tasks = new ArrayList<>();

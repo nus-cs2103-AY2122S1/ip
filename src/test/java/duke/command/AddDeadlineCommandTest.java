@@ -1,22 +1,17 @@
 package duke.command;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+
 import duke.data.TaskStorageStub;
 import duke.exceptions.DukeException;
-import duke.exceptions.EmptyDeadlineBodyException;
-import duke.exceptions.InvalidDateTimeFormatException;
-import duke.exceptions.InvalidDeadlineBodyException;
-import duke.exceptions.InvalidTaskDataException;
-import duke.exceptions.InvalidTaskNumberException;
-import duke.exceptions.TaskFileIOException;
 import duke.io.UserOutputHandlerStub;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
-import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddDeadlineCommandTest {
     @Test
@@ -28,11 +23,12 @@ class AddDeadlineCommandTest {
         TaskList taskList = new TaskList(new TaskStorageStub());
         addDeadlineCommand.execute(userOutputHandlerStub, taskList);
 
-        assertEquals("____________________________________________________________\n" +
-                "Got it. I've added this task:\n" +
-                "\t[D][ ] x (by: DECEMBER 12 2021)\n" +
-                "Now you have 1 task in the list.\n" +
-                "____________________________________________________________", userOutputHandlerStub.getWrittenMessage());
+        assertEquals("____________________________________________________________\n"
+                        + "Got it. I've added this task:\n"
+                        + "\t[D][ ] x (by: DECEMBER 12 2021)\n"
+                        + "Now you have 1 task in the list.\n"
+                        + "____________________________________________________________",
+                userOutputHandlerStub.getWrittenMessage());
 
         assertEquals(1, taskList.getNumOfTasks());
         assertEquals(expectedDeadline.getTaskRepresentation(), taskList.getTask(0).getTaskRepresentation());

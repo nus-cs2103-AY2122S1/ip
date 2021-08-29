@@ -11,7 +11,7 @@ public class TaskDeleteMessage extends Message {
      * to inform user of which task has just been deleted.
      *
      * @param taskDescription <code>String</code> representation of deleted task.
-     * @param numOfTasks remaining total number of tasks.
+     * @param numOfTasks      remaining total number of tasks.
      */
     public TaskDeleteMessage(String taskDescription, int numOfTasks) {
         super(MessageConstants.MESSAGE_TASK_DELETE_HEADER

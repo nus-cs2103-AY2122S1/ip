@@ -1,5 +1,7 @@
 package duke.fulfillment;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exceptions.DukeException;
 import duke.io.UserInputHandler;
@@ -7,8 +9,6 @@ import duke.io.UserOutputHandler;
 import duke.messages.GreetingMessage;
 import duke.messages.Message;
 import duke.tasks.TaskList;
-
-import java.io.IOException;
 
 /**
  * This class handles user input and handles user's commands.
@@ -51,8 +51,8 @@ public class FulfillmentHandler {
             } catch (DukeException e) {
                 consoleUserOutputHandler.writeMessage(new Message(e.getMessage()));
             } catch (IOException ioe) {
-                consoleUserOutputHandler.writeMessage(new Message("OOPS!!! Unable to connect to " +
-                        "user input stream!"));
+                consoleUserOutputHandler.writeMessage(new Message("OOPS!!! Unable to connect to "
+                        + "user input stream!"));
             }
         }
     }
