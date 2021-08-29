@@ -2,6 +2,9 @@ package duke;
 
 import duke.commands.Command;
 
+/**
+ * The main class which runs the Duke chat bot.
+ */
 public class Duke {
 
     private Storage storage;
@@ -23,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

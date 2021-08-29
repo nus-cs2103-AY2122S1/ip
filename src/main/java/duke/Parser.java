@@ -1,9 +1,16 @@
 package duke;
 
-import duke.commands.*;
-
+import duke.commands.Command;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.ListCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.TodoCommand;
+import duke.commands.EventCommand;
+import duke.commands.DeadlineCommand;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 public class Parser {
     public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<command>\\S+)(?<arguments>.*)");
