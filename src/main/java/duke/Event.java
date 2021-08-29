@@ -1,4 +1,4 @@
-package duke.util;
+package duke;
 
 /**
  * This class simulates a special Task with a designated time
@@ -37,7 +37,9 @@ public class Event extends Task {
             temp = temp.replace(String.valueOf(tempChar), "(");
             return temp + ")";
         }
-        return "(" + temp + ")";
+        String afterDescription = temp.substring(temp.indexOf("at"));
+        String description = temp.substring(0, temp.indexOf("at"));
+        return description + "(" + afterDescription + ")";
     }
 
     /**

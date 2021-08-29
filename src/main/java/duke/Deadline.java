@@ -1,4 +1,4 @@
-package duke.util;
+package duke;
 
 /**
  * This class simulates a special type of Task which has a date
@@ -36,7 +36,9 @@ public class Deadline extends Task {
             temp = temp.replace(String.valueOf(tempChar), "(");
             return temp + ")";
         }
-        return "(" + temp + ")";
+        String afterDescription = temp.substring(temp.indexOf("by"));
+        String description = temp.substring(0, temp.indexOf("by"));
+        return description + "(" + afterDescription + ")";
     }
 
     /**

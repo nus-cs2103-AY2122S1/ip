@@ -1,4 +1,4 @@
-package duke.util;
+package duke;
 
 /**
  * This class simulates a unique type of Task which only has description

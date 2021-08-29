@@ -1,4 +1,4 @@
-package duke.util;
+package duke;
 
 /**
  * This class simulates a real life task to be completed and
