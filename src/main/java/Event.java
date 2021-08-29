@@ -1,17 +1,19 @@
-public class Event extends Task {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    private String time;
+public class Event extends Task {
+    public LocalDate eventDate;
 
     public Event(String eventName) {
         super(eventName.substring(6, eventName.indexOf("/at")));
         int start = eventName.indexOf("/at");
-        this.time = eventName.substring(start + 4);
+        this.eventDate = LocalDate.parse(eventName.substring(start + 4));
     }
 
     public Event(String eventName, boolean isDone) {
         super(eventName.substring(0, eventName.indexOf("(at:")), isDone);
-        this.time = eventName.substring(eventName.indexOf("(at:") + 5,
-                eventName.length() - 1);
+        int start = eventName.indexOf("(at:") + 5;
+        this.eventDate = LocalDate.parse(eventName.substring(start, start + 9));
     }
 
     @Override
@@ -19,7 +21,7 @@ public class Event extends Task {
         return "[E]"
                 + super.toString()
                 + "(at: "
-                + this.time
+                + this.eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
 }

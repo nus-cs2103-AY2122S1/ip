@@ -1,16 +1,19 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private String dueBy;
+    public LocalDate dueDate = null;
 
     public Deadline(String deadlineName) {
         super(deadlineName.substring(9, deadlineName.indexOf("/by ")));
         int start = deadlineName.indexOf("/by ");
-        this.dueBy = deadlineName.substring(start + 4);
+        this.dueDate = LocalDate.parse(deadlineName.substring(start + 4));
     }
 
     public Deadline(String deadlineName, boolean isDone) {
         super(deadlineName.substring(0, deadlineName.indexOf("(by:")), isDone);
-        this.dueBy = deadlineName.substring(deadlineName.indexOf("(by:") + 5,
-                deadlineName.length() - 1);
+        int start = deadlineName.indexOf("(by:") + 5;
+        this.dueDate = LocalDate.parse(deadlineName.substring(start, start + 9));
     }
 
     @Override
@@ -18,7 +21,7 @@ public class Deadline extends Task {
         return "[D]"
                 + super.toString()
                 + "(by: "
-                + this.dueBy
+                + this.dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
 }

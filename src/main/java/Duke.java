@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Duke {
@@ -36,19 +38,19 @@ public class Duke {
                     String taskNumber = input.substring(5);
                     taskDone(taskNumber);
                 } else if (input.startsWith(TODO_COMMAND) || input.startsWith(DEADLINE_COMMAND) || input.startsWith(EVENT_COMMAND)) {
-
                     switch (input) {
-                        case "deadline ":
-                            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                        case "event ":
-                            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-                        case "todo ":
-                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    case "deadline ":
+                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+                    case "event ":
+                        throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+                    case "todo ":
+                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                     }
-
                     addTask(input);
                 } else if (input.startsWith(DELETE_COMMAND)) {
                     deleteTask(input);
+                } else if (input.startsWith("occurring on")) {
+                    findTasksOnDate(LocalDate.parse(input.substring(13)));
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -143,6 +145,36 @@ public class Duke {
 
         } catch (Exception e) {
             System.out.println("OOPS!!! Please input a valid task number.");
+        }
+    }
+
+    public static void findTasksOnDate(LocalDate date) {
+        List<Task> tasks = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task instanceof Deadline) {
+                Deadline d = (Deadline) task;
+                if (d.dueDate.isEqual(date)) {
+                    tasks.add(d);
+                }
+            } else if (task instanceof Event) {
+                Event e = (Event) task;
+                if (e.eventDate.isEqual(date)) {
+                    tasks.add(e);
+                }
+            }
+        }
+
+        int num = tasks.size();
+        String d = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String s = num == 0
+                ? "You have 0 tasks occurring on " + d + "."
+                : num == 1
+                ? "You have 1 task occurring on " + d + ":"
+                : "You have " + num + " tasks occurring on " + d + ":";
+
+        System.out.println(s);
+        for (Task task : tasks) {
+            System.out.println(task);
         }
     }
 
