@@ -1,4 +1,5 @@
 package commands;
+import exceptions.MorganException;
 import tasks.TaskList;
 
 /**
@@ -9,6 +10,8 @@ import tasks.TaskList;
 public class FindCommand extends Command {
     public static final String KEYWORD = "find";
     private final String keyTerm;
+    private final String NOT_FOUND_ERROR_MESSAGE = "No matching task found. "
+            + "Please try another keyword.";
 
     /**
      * Constructor for command.
@@ -25,9 +28,11 @@ public class FindCommand extends Command {
      * @param taskList The existing list of tasks.
      * @return The list of tasks containing the specified keyword.
      */
-    public String execute(TaskList taskList) {
-        // If task list is empty, only a "\n" will be printed
+    public String execute(TaskList taskList) throws MorganException {
         TaskList foundTasks = taskList.findTasks(keyTerm);
+        if (foundTasks.isEmpty()) {
+            throw new MorganException(NOT_FOUND_ERROR_MESSAGE) ;
+        }
         String output = "Here are the matching tasks in your list:\n";
         output += foundTasks.toString();
         return output;

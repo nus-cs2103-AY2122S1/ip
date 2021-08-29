@@ -9,8 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class DeadlineTask extends Task {
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d-M-yyyy k:mm");
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy hh.mma");
-    public static final String KEYWORD = "[DEADLINE]";
-    public static final String TIMEDATE_DELIMITER = ("(by: ");
+    public static final String KEYWORD = "[Deadline]";
     private final LocalDateTime dateTime;
 
     /**
@@ -33,7 +32,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return KEYWORD + " " + super.toString() + " (by: "
+        return KEYWORD + " " + super.toString() + "\n\t(by: "
                 + this.dateTime.format(OUTPUT_FORMAT) + ")";
     }
 }

@@ -1,6 +1,6 @@
 package commands;
+import exceptions.MorganException;
 import tasks.TaskList;
-import exceptions.DukeException;
 
 /**
  * This is an abstract Command class. Sub-classes of Command class will have
@@ -11,7 +11,7 @@ public abstract class Command {
      * An abstract execute method to be inherited by sub-classes of Command.
      * @param taskList The existing list where the task.
      * @return The completion message after execution.
-     * @throws DukeException
+     * @throws MorganException
      */
-    public abstract String execute(TaskList taskList) throws DukeException;
+    public abstract String execute(TaskList taskList) throws MorganException;
 }

@@ -79,6 +79,14 @@ public class TaskList {
         return true;
     }
 
+    /**
+     * Returns true if the task list is empty.
+     * @return True if the task list is empty; false otherwise.
+     */
+    public boolean isEmpty() {
+        return this.tasks.isEmpty();
+    }
+
     @Override
     public String toString() {
         // Empty task list will print nothing
