@@ -1,12 +1,5 @@
 package duke.storage;
 
-import duke.parser.Parser;
-import duke.parser.UnableToParseException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,6 +10,14 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import duke.parser.Parser;
+import duke.parser.UnableToParseException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * This class manages the persistence layer of the Duke app.

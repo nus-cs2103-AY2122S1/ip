@@ -3,9 +3,11 @@ package duke.parser;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
 import duke.commands.Command;
 import duke.commands.ListCommand;
-import org.junit.jupiter.api.Test;
+
 
 public class ParserTest {
     @Test

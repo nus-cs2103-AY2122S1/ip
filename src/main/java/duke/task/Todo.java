@@ -1,9 +1,10 @@
 package duke.task;
 
-import duke.parser.Parser;
-import duke.storage.Storage;
 import java.util.Arrays;
 import java.util.List;
+
+import duke.parser.Parser;
+import duke.storage.Storage;
 
 /**
  * This class encapsulates a todo task.

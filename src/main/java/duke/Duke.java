@@ -1,12 +1,13 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.commands.Command;
 import duke.parser.Parser;
 import duke.parser.UnableToParseException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import java.io.IOException;
 
 /**
  * This class is the main driver of the Duke app.
@@ -31,6 +32,11 @@ public class Duke {
         ui.printAllTasks(this.tasks);
     }
 
+    /**
+     * Starts the duke app.
+     *
+     * @param args First argument can be specified the storage path.
+     */
     public static void main(String[] args) {
         String filePath = Storage.DEFAULT_FILE_PATH;
         if (args.length >= 1) {
@@ -40,7 +46,7 @@ public class Duke {
     }
 
     /**
-     * Solution adapted with minor modifications at 
+     * Solution adapted with minor modifications at
      * https://nus-cs2103-ay2122s1.github.io/website/schedule/week3/project.html#a-moreoop
      */
     private void run() {

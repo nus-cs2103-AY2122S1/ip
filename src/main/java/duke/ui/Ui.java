@@ -1,10 +1,11 @@
 package duke.ui;
 
-import duke.task.Task;
-import duke.task.TaskList;
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * This class encapsulates the UI of the Duke app.

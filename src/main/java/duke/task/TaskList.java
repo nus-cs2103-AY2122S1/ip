@@ -86,7 +86,6 @@ public class TaskList {
 
         return matches;
     }
-    
 
     private void validateTaskId(int id) throws InvalidTaskSelectedException {
         int index = id - 1;

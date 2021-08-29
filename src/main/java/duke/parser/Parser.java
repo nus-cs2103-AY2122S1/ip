@@ -1,5 +1,8 @@
 package duke.parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.commands.AddTaskCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
@@ -12,8 +15,6 @@ import duke.commands.UnknownCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * This class encapsulates the parsing of CLI commands and strings.
@@ -106,7 +107,8 @@ public class Parser {
      * @throws InvalidArgumentsException Thrown if arguments are invalid.
      */
     private static AddTaskCommand parseDeadline(String[] args) throws InvalidArgumentsException {
-        InvalidArgumentsException invalidArgsException = new InvalidArgumentsException("deadline [task] /by [YYYY-MM-DD]");
+        InvalidArgumentsException invalidArgsException =
+                new InvalidArgumentsException("deadline [task] /by [YYYY-MM-DD]");
         if (args.length != 2) {
             throw invalidArgsException;
         }
@@ -174,6 +176,12 @@ public class Parser {
         return isDone ? "1" : "0";
     }
 
+    /**
+     * Parses a 1 or 0 into true and false values respectively.
+     * @param s The string to be parsed.
+     * @return The boolean that correspond to the String.
+     * @throws UnableToParseException Thrown if the String to be parsed is invalid.
+     */
     public static boolean parseStringToIsDone(String s) throws UnableToParseException {
         switch (s) {
         case "1":
