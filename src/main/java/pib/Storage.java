@@ -27,10 +27,9 @@ public class Storage {
     public Storage(String filePath) throws PibException {
         this.filePath = filePath;
         this.file = new File(filePath);
+        new File("./data").mkdirs();
         try {
-            if (this.file.createNewFile()) {
-                Ui.printNoSavedDataFound();
-            }
+            file.createNewFile();
         } catch (IOException e) {
             throw new PibException("io-exception");
         }
