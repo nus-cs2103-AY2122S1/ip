@@ -6,6 +6,9 @@ public class ExitCommand implements Command {
         return "Ok bye, see you later.";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return true;

@@ -43,6 +43,9 @@ public class DeleteCommand implements Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;

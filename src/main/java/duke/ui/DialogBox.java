@@ -49,10 +49,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets the dialog of user message
+     * @param text user message
+     * @param img user profile picture
+     * @return dialog box of user message
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Gets the dialog of chat bot message
+     * @param text bot message
+     * @param img bot profile picture
+     * @return dialog box of bot message
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

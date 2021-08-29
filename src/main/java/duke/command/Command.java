@@ -14,5 +14,10 @@ public interface Command {
      */
     String run() throws DukeException;
 
+    /**
+     * Checks if the command is the exit command
+     *
+     * @return true if command is exit command, else false
+     */
     boolean isExit();
 }

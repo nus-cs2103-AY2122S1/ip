@@ -14,8 +14,7 @@ public class Ui {
      *
      * @param msgLines message lines
      */
-    @SafeVarargs
-    public final void print(String... msgLines) {
+    public void print(String... msgLines) {
         if (msgLines.length == 0) {
             return;
         }

@@ -18,9 +18,6 @@ public class Duke {
     private Button sendButton;
     private Scene scene;
 
-//    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/bot.jpg"));
-
     /**
      * Constructor for <code>Duke</code>
      */
@@ -47,6 +44,11 @@ public class Duke {
        }
     }
 
+    /**
+     * Gets the response by the input string
+     * @param input input string
+     * @return response message
+     */
     public String getResponse(String input) {
         try {
             String message = CommandParser.parse(input).run();
@@ -56,6 +58,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns the greeting message
+     * @return greeting message
+     */
     public String greet() {
         return "Yo, I'm Xiri.\nHow can I help you?";
     }

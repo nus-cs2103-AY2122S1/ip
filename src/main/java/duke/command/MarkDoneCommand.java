@@ -39,6 +39,9 @@ public class MarkDoneCommand implements Command {
         return resultString;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;

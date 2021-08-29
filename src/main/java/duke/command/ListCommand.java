@@ -29,6 +29,9 @@ public class ListCommand implements Command {
         return message;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;

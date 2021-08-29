@@ -40,6 +40,9 @@ public class FindCommand implements Command {
         return message;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return false;
