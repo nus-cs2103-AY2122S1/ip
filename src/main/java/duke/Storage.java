@@ -33,15 +33,20 @@ public class Storage {
                     } else if (taskComps[0].equals("E")) {
                         tasks.add(new Event(taskComps[2], taskComps[3], Boolean.parseBoolean(taskComps[1])));
                     } else {
-                        ui.toScreen("Tasks could not be fully added.");
+                        ui.toScreen("Tasks could not be loaded.");
                     }
                 }
                 taskReader.close();
             } else {
-                sf.createNewFile();
             }
         } catch (IOException | DukeException e) {
-            ui.toScreen("File could not be loaded.");
+            ui.toScreen("File could not be found.");
+            try {
+                File sf = new File(String.valueOf(saveFile));
+                sf.createNewFile();
+            } catch (IOException ioException) {
+                ui.toScreen("New file could not be created");
+            }
         }
     }
 
@@ -51,8 +56,7 @@ public class Storage {
             taskWriter.write(t.saveTask());
             taskWriter.close();
         } catch (IOException e) {
-            ui.toScreen("An error occurred.");
-            e.printStackTrace();
+            ui.toScreen("Tasks could not be added to file.");
         }
     }
 
@@ -63,8 +67,15 @@ public class Storage {
                 writeTask(t);
             }
         } catch (IOException e) {
-            ui.toScreen("An error occurred.");
-            e.printStackTrace();
+            ui.toScreen("File could not be updated.");
+        }
+    }
+
+    public void clearFile() {
+        try {
+            new PrintWriter(String.valueOf(saveFile)).close();
+        } catch (IOException e) {
+            ui.toScreen("File could not be cleared.");
         }
     }
 

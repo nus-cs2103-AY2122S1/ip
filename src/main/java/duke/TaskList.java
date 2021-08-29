@@ -15,6 +15,10 @@ public class TaskList {
         this.storage.initialiseTasks(tasks);
     }
 
+    public int sizeOf() {
+        return tasks.size();
+    }
+
     public void displayList() {
         String line = "____________________________________________________________";
         String indent = "    ";

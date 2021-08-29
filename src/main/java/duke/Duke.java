@@ -26,7 +26,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(Paths.get("data", "duke.txt")).run();
+        new Duke(Paths.get("data", "test.txt")).run();
     }
 
 
