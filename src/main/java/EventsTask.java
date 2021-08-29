@@ -1,8 +1,8 @@
-public class Events extends Task {
+public class EventsTask extends Task {
 
     private final String startend;
 
-    Events(String name, boolean done, String startend){
+    EventsTask(String name, boolean done, String startend){
         super(name, done);
         this.startend = startend;
     }
@@ -13,15 +13,15 @@ public class Events extends Task {
     }
 
     @Override
-    Task markDone() {
-        return new Events(getName(), true, this.startend);
+    public String toStringOutput() {
+        return String.format("%s | %s | %s | %s", "E", (getDone())? "X" : "O", getName(), this.startend);
     }
 
-    public static void isLegitInput(String input) throws NotEnoughInfoException {
+    public static void isLegitInput(String input) throws NoSuchCommandException {
         if (input.split("/at").length != 2) {
-            throw new NotEnoughInfoException("There should be exactly one '/at' in statement with start and end date/time after");
+            throw new NoSuchCommandException("There should be exactly one '/at' in statement with start and end date/time after");
         } else if (input.split("/at")[0].split("event")[1].strip() == ""){
-            throw new NotEnoughInfoException("Could not find name of Task");
+            throw new NoSuchCommandException("Could not find name of Task");
         }
     }
 

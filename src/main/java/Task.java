@@ -10,23 +10,27 @@ import java.io.File;
 public class Task {
 
     private final String name;
-    private final boolean done;
+    private boolean done;
 
     Task(String name, boolean done){
         this.name = name;
         this.done = done;
     }
 
-    Task markDone() {
-        return new Task(this.name, true);
+    public void markDone() {
+        this.done = true;
     }
 
-    Task markUndone() {
-        return new Task(this.name, false);
+    public void markUndone() {
+        this.done = false;
     }
 
     @Override
     public String toString() {
+        return String.format("[%s] %s", (this.done)? "X" : " ", this.name);
+    }
+
+    public String toStringOutput() {
         return String.format("[%s] %s", (this.done)? "X" : " ", this.name);
     }
 
@@ -49,7 +53,7 @@ public class Task {
             }
 
             for (int i = 1; i <= aList.size(); i++){
-                writer.write(String.valueOf(i) + ". " + aList.get(i - 1));
+                writer.write(aList.get(i - 1).toStringOutput());
                 writer.newLine();
             }
         } catch (IOException ioe) {

@@ -1,8 +1,8 @@
-public class Deadlines extends Task {
+public class DeadlinesTask extends Task {
 
     private final String end;
 
-    Deadlines(String name, boolean done, String end){
+    DeadlinesTask(String name, boolean done, String end){
         super(name, done);
         this.end = end;
     }
@@ -13,15 +13,15 @@ public class Deadlines extends Task {
     }
 
     @Override
-    Task markDone() {
-        return new Deadlines(getName(), true, this.end);
+    public String toStringOutput() {
+        return String.format("%s | %s | %s | %s", "D", (getDone())? "X" : "O", getName(), this.end);
     }
 
-    public static void isLegitInput(String input) throws NotEnoughInfoException {
+    public static void isLegitInput(String input) throws NoSuchCommandException {
         if (input.split("/by").length != 2) {
-            throw new NotEnoughInfoException("There should be exactly one '/by' in statement with end date/time after");
+            throw new NoSuchCommandException("There should be exactly one '/by' in statement with end date/time after");
         } else if (input.split("/by")[0].split("deadline")[1].strip() == ""){
-            throw new NotEnoughInfoException("Could not find name of Task");
+            throw new NoSuchCommandException("Could not find name of Task");
         }
     }
 
