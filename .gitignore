@@ -17,6 +17,7 @@ bin/
 text-ui-test/EXPECTED-UNIX.TXT
 
 out/
+data/
 *.class
 *.log
 *.jar

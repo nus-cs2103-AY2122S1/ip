@@ -37,7 +37,7 @@ public class Ui {
     }
 
     public static void printDataLoadSuccess() {
-        System.out.println("Saved data successfully loaded\n" + DIVIDER);
+        System.out.println("Saved data successfully loaded!\n" + DIVIDER);
     }
 
     public static void printDataLoading() {
