@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.main.DukeException;
+
 /**
  * a class to encapsulate tasks without any date/time attached.
  * 
@@ -11,7 +15,7 @@ public class Todo extends Task {
     private String taskDescription;
     private final String KEYWORD = "todo ";
     /**
-     * Class constructor for Todo class.
+     * Class constructor for Duke.Todo class.
      * 
      * @param description the task description.
      */
@@ -33,7 +37,7 @@ public class Todo extends Task {
     }
 
     /**
-     * prints out the Todo task.
+     * prints out the Duke.Todo task.
      * 
      * @return string format of the todo task, 
      * consisting of the task marker "T" and task description.

@@ -1,4 +1,10 @@
-import java.time.LocalDate;
+package duke.command;
+import duke.main.Date;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -7,7 +13,7 @@ import java.util.ArrayList;
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
-public class FilterCommand extends Command{
+public class FilterCommand extends Command {
     private Date date;
     private boolean isExitCommand;
     /**

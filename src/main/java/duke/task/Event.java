@@ -1,5 +1,8 @@
+package duke.task;
+
+import duke.main.Date;
+
 import java.text.ParseException;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -17,7 +20,7 @@ public class Event extends Task {
     private final String AT = "at ";
     
     /**
-     * Class constructor for Event class.
+     * Class constructor for Duke.Event class.
      * 
      * @param description consisting of task description and timing.
      */

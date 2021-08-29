@@ -1,10 +1,17 @@
+package duke.command;
+
+import duke.main.Storage;
+import duke.task.Task;
+import duke.main.TaskList;
+import duke.main.Ui;
+
 /**
  * Represents a command to mark a task as done.
  * 
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
-public class MarkDoneCommand extends Command{
+public class MarkDoneCommand extends Command {
     private boolean isExitCommand;
     private int taskNumber;
 
@@ -13,7 +20,7 @@ public class MarkDoneCommand extends Command{
      * 
      * @param taskNumber the serial number of the task.
      */
-    MarkDoneCommand(int taskNumber) {
+    public MarkDoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;
         isExitCommand = false;
     }

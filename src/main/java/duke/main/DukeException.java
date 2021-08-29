@@ -1,9 +1,11 @@
+package duke.main;
+
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 
 /**
- * Represents exceptions raised in Duke.
+ * Represents exceptions raised in Duke.Duke.
  * 
  * @author Gordon Yit
  * @Version CS2103T, Semester 2.

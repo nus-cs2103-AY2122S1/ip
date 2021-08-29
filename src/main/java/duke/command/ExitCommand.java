@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.main.DukeException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+
 import java.io.IOException;
 
 /**
@@ -6,7 +13,7 @@ import java.io.IOException;
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     private boolean isExitCommand;
 
     /**

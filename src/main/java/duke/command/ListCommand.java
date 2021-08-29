@@ -1,10 +1,16 @@
+package duke.command;
+
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+
 /**
- * Represents a command to list out the tasks Duke is keeping track of.
+ * Represents a command to list out the tasks Duke.Duke is keeping track of.
  * 
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     private boolean isExitCommand;
 
     /**
@@ -15,7 +21,7 @@ public class ListCommand extends Command{
     }
 
     /**
-     * Executes the command to list out all tasks Duke is keeping track of.
+     * Executes the command to list out all tasks Duke.Duke is keeping track of.
      * 
      * @param tasks lists of tasks
      * @param ui the user interface.

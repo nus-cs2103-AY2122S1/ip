@@ -1,9 +1,13 @@
+package duke.main;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -34,7 +38,7 @@ public class Storage {
      * @return an arraylist of tasks.
      * @throws IOException
      */
-    public  ArrayList<Task> load() throws DukeException{
+    public  ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File tempFile = new File(filepath);

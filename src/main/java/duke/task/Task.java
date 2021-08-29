@@ -1,3 +1,5 @@
+package duke.task;
+
 import javax.xml.stream.FactoryConfigurationError;
 import java.time.LocalDate;
 
@@ -12,7 +14,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Class constructor for Task class.
+     * Class constructor for Duke.Task class.
      * Sets isDone to false, meaning task is not done.
      *
      */

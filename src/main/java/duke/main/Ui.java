@@ -1,6 +1,8 @@
+package duke.main;
+
+import duke.task.Task;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.WeakHashMap;
 
 /**
  * Represents user interface abstraction.
@@ -15,7 +17,7 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     private String c = "~";
-    private String line1 = " Hello! I'm Duke ";
+    private String line1 = " Hello! I'm Duke.Duke ";
     private String line2 = " What do you wanna do today? ";
     private int bufferLength = 5;
     private int limit = Integer.max(line1.length(), line2.length()) + bufferLength;
@@ -28,7 +30,7 @@ public class Ui {
     private String command;
     
     /**
-     * Class constructor for Ui.
+     * Class constructor for Duke.Ui.
      */
     public Ui() {
         sc = new Scanner(System.in);
@@ -76,7 +78,7 @@ public class Ui {
     }
 
     /**
-     * Shows the error message from error contained in DukeException.
+     * Shows the error message from error contained in Duke.DukeException.
      *
      * @return the error message.
      */
@@ -129,7 +131,7 @@ public class Ui {
     }
 
     /**
-     * Lists out all the tasks Duke is keeping track of.
+     * Lists out all the tasks Duke.Duke is keeping track of.
      * 
      * @param taskArrayList current arraylist of tasks.
      */

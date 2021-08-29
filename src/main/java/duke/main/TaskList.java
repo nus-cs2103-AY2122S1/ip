@@ -1,9 +1,8 @@
-import com.sun.source.util.TaskEvent;
+package duke.main;
 
-import javax.management.openmbean.TabularDataSupport;
+import duke.task.Task;
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * Represents a list of tasks.
@@ -81,7 +80,7 @@ public class TaskList {
      * @param date the date of interest.
      * @return an arraylist of tasks which fall on that date.
      */
-    public ArrayList<Task> findTasksMatchingDate(Date date) {
+    public ArrayList<Task> findTasksMatchingDate(duke.main.Date date) {
         String dateString = date.toString();
         ArrayList<Task> tasksMatchingDate = new ArrayList<>();
         for (Task t: tasks) {

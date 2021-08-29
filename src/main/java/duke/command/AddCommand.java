@@ -1,3 +1,13 @@
+package duke.command;
+import duke.main.DukeException;
+import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.time.format.DateTimeParseException;
 
 /**
@@ -6,7 +16,7 @@ import java.time.format.DateTimeParseException;
  * @author Gordon Yit
  * @Version CS2103T, Semester 2
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private String addCommand;
     private boolean isExitCommand;
 
@@ -21,7 +31,7 @@ public class AddCommand extends Command{
     }
 
     /**
-     * Executes the command to add a task for Duke to keep track of.
+     * Executes the command to add a task for Duke.Duke to keep track of.
      * 
      * @param tasks lists of tasks
      * @param ui the user interface.

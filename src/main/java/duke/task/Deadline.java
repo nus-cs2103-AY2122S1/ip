@@ -1,9 +1,9 @@
+package duke.task;
+
+import duke.main.Date;
+
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
 
 /**
  * Represents tasks with deadline.
@@ -20,7 +20,7 @@ public class Deadline extends Task {
     private final String BY = "by ";
     
     /**
-     * Class constructor for Deadline class.
+     * Class constructor for Duke.Deadline class.
      * 
      * @param description consisting of task description and deadline date.
      */

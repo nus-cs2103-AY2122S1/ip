@@ -1,12 +1,6 @@
-import javax.swing.plaf.synth.SynthDesktopIconUI;
-import javax.swing.plaf.synth.SynthLookAndFeel;
-import javax.xml.stream.FactoryConfigurationError;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.function.DoubleToIntFunction;
+package duke.main;
+
+import duke.command.Command;
 
 
 /**
@@ -21,7 +15,7 @@ public class Duke {
     private Ui ui;
     
     /**
-     * Constructor for the Duke class.
+     * Constructor for the Duke.Duke class.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -56,7 +50,7 @@ public class Duke {
     }
     
     /**
-     * Runs the Duke chat bot.
+     * Runs the Duke.Duke chat bot.
      * @param args Unused.
      */
     public static void main(String[] args) {

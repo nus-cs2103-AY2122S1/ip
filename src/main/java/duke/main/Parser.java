@@ -1,4 +1,12 @@
-import java.util.Scanner;
+package duke.main;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FilterCommand;
+import duke.command.ListCommand;
+import duke.command.MarkDoneCommand;
 
 /**
  * Represents a abstraction to read user input.
