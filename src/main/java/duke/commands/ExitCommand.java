@@ -17,8 +17,8 @@ public class ExitCommand extends Command {
      * @param ui User Interface to deal with interactions with user.
      * @param storage Storage to store data of user.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.displayBye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.displayBye();
     }
 
 }

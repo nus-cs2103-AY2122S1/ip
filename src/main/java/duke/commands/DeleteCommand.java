@@ -22,17 +22,19 @@ public class DeleteCommand extends Command {
      * @param ui User Interface to deal with interactions with user.
      * @param storage Storage to store data of user.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             if (numToBeRemoved < 0 || numToBeRemoved > taskList.getSize()) {
                 ui.displayWrongCommand();
             } else {
                 Task removedTask = taskList.get(numToBeRemoved);
                 taskList.remove(numToBeRemoved);
-                ui.displayDelete(removedTask, taskList);
+                storage.updateHardDisk(taskList);
+                return ui.displayDelete(removedTask, taskList);
             }
         } catch (Exception e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
+        return "";
     }
 }
