@@ -1,12 +1,15 @@
 package duke.utils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyTaskDescriptionException;
 import duke.exceptions.UnknownInputException;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     @Test
@@ -108,5 +111,4 @@ public class ParserTest {
         }
 
     }
-
 }

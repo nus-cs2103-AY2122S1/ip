@@ -1,9 +1,9 @@
 package duke.tasks;
 
+import static java.time.format.DateTimeFormatter.ISO_DATE;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import static java.time.format.DateTimeFormatter.ISO_DATE;
 
 /**
  * Represents a deadline entry in the task list.
@@ -33,7 +33,8 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return String.format("[D]" + super.toString() + " (by: %s)", dateTimeBy.format(DateTimeFormatter.ofPattern("d MMM yyyy")));
+        return String.format("[D]" + super.toString() + " (by: %s)",
+                dateTimeBy.format(DateTimeFormatter.ofPattern("d MMM yyyy")));
     }
 
 }

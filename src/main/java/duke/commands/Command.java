@@ -1,5 +1,7 @@
 package duke.commands;
 
+import java.util.HashMap;
+
 import duke.tasks.Deadlines;
 import duke.tasks.Events;
 import duke.tasks.Task;
@@ -7,8 +9,6 @@ import duke.tasks.ToDos;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-
-import java.util.HashMap;
 
 /**
  * Contains all the static nested classes to represent various user commands to the chat-bot.
