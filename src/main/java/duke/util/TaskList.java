@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,14 +42,15 @@ public class TaskList {
     /**
      * Prints out the contents of all the tasks in the ArrayList of task.
      *
-     * @param ui
-     * @throws EmptyListException
+     * @param ui An Ui instance.
+     * @return A String representing all the task in the list.
+     * @throws EmptyListException An exception thrown when the list is empty.
      */
-    public void printTasks(Ui ui) throws EmptyListException {
+    public String printTasks(Ui ui) throws EmptyListException {
         if (this.tasks.size() <= 0) {
             throw new EmptyListException();
         }
-        ui.printList(this.tasks);
+        return ui.printList(this.tasks);
     }
 
 
@@ -58,9 +59,10 @@ public class TaskList {
      *
      * @param ui An Ui instance that prints the list of task containing the keyword.
      * @param keyword A String representing the keyword.
+     * @return A String representing all tasks found.
      * @throws EmptyListException An exception thrown when the ArrayList of Task is empty.
      */
-    public void printFindTasks(Ui ui, String keyword) throws EmptyListException, TaskNotFoundException {
+    public String printFindTasks(Ui ui, String keyword) throws EmptyListException, TaskNotFoundException {
         if (this.tasks.size() <= 0) {
             throw new EmptyListException();
         }
@@ -73,7 +75,7 @@ public class TaskList {
         if (listOfTaskWithKeyword.size() == 0) {
             throw new TaskNotFoundException();
         }
-        ui.printFindTask(listOfTaskWithKeyword);
+        return ui.printFindTask(listOfTaskWithKeyword);
     }
 
     /**
@@ -95,21 +97,21 @@ public class TaskList {
      *
      * @param index  An int representing the index of task to be marked.
      * @param store  A Storage instance to save this action into the text file.
-     * @param ui     An Ui instance that helps to print out the message of this action to the user.
+     * @return A Task instance that represents the task marked as done.
      * @throws TaskIsCompleteException An exception thrown when the task to be mark is already done.
      * @throws DukeFileException    An exception thrown when the store gets an error from storing the action.
      */
-    public void markTask(int index, Storage store, Ui ui)
+    public Task markTask(int index, Storage store)
             throws TaskIsCompleteException, DukeFileException {
         try {
-            Task t = tasks.get(index);
-            if (t.isDone()) {
+            Task taskDone = tasks.get(index);
+            if (taskDone.isDone()) {
                 throw new TaskIsCompleteException(index + 1);
             } else {
                 int indexOnList = index + 1;
                 store.appendCommand("done " + indexOnList);
-                t.markAsDone();
-                ui.printMarkTaskDone(t);
+                taskDone.markAsDone();
+                return taskDone;
             }
         } catch (IOException e) {
             throw new DukeFileException();
@@ -121,17 +123,17 @@ public class TaskList {
      *
      * @param index An int representing the index of the task to be deleted.
      * @param store A Storage instance to save this action into a text file.
-     * @param ui    An Ui instance to print the message of this action to the user.
+     * @return A Task instance that represents the deleted Task.
      * @throws DukeFileException  An exception thrown when the store gets an error from storing the action.
      */
-    public void deleteTask(int index, Storage store, Ui ui)
+    public Task deleteTask(int index, Storage store)
             throws DukeFileException {
         try {
-            Task t = tasks.get(index);
+            Task deletedTask = tasks.get(index);
             int indexOnList = index + 1;
             store.appendCommand("delete " + indexOnList);
             tasks.remove(index);
-            ui.printRemoveTask(t, tasks.size());
+            return deletedTask;
         } catch (IOException e) {
             throw new DukeFileException();
         }
