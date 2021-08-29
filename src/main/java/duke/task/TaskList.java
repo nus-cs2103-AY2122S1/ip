@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import duke.command.DukeException;
-import duke.command.Ui;
 
 /**
  * This class implements a TaskList object that contains the task list and its operations.
@@ -93,12 +92,12 @@ public class TaskList {
      *
      * @param i Index of tasks to be deleted.
      */
-    public void delete(int i) throws DukeException {
+    public Task delete(int i) throws DukeException {
         if (i > toDoList.size() || i < 1) {
             throw new DukeException("OOPS!!! Invalid task number");
         }
-        Ui.showDeleteTaskMessage(toDoList.get(i - 1).toString(), toDoList.size() - 1);
-        toDoList.remove(i - 1);
+
+        return toDoList.remove(i - 1);
 
     }
 
@@ -112,14 +111,16 @@ public class TaskList {
             throw new DukeException("OOPS!!! Invalid task number");
         }
         toDoList.get(i - 1).markAsDone();
-        Ui.showMarkAsDoneMessage(toDoList.get(i - 1).toString());
     }
 
     /** Lists tasks. */
-    public void list() {
+    public String list() {
+        String taskList = "";
         for (int i = 0; i < toDoList.size(); i++) {
-            System.out.println(i + 1 + "." + toDoList.get(i).toString());
+            String task = (i + 1) + ". " + toDoList.get(i).toString() + "\n";
+            taskList += task;
         }
+        return taskList;
     }
 
     /**
@@ -149,15 +150,18 @@ public class TaskList {
      *
      * @param s Inputted String.
      */
-    public void find(String s) {
+    public String find(String s) {
+        String taskList = "";
         int k = 1;
         for (int i = 0; i < toDoList.size(); i++) {
             String desc = toDoList.get(i).toString();
             if (desc.indexOf(s) >= 0) {
-                System.out.println(k + "." + toDoList.get(i).toString());
+                String task = k + ". " + desc + "\n";
+                taskList += task;
                 k++;
             }
         }
+        return taskList;
     }
 
 

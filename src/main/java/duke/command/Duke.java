@@ -4,11 +4,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Storage;
-import duke.task.TaskList;
-import duke.task.Todo;
+import duke.task.*;
 
 /**
  * This class is an implementation of Duke customised to be named LOTTERY-A
@@ -25,55 +21,37 @@ public class Duke {
     private TaskList tasks;
     /** Deals with loading and saving tasks from and to file. */
     private Storage storage;
-    /** Deals with making sense of user commands. */
-    private MyParser parser;
-    /** Reads user input. */
-    private Scanner keyboard;
-    private boolean isScannerOpen;
+
+    private MainWindow mainWindow;
 
     /** Default Constructor. */
     public Duke(String txtFile) {
-        parser = new MyParser();
         try {
             storage = new Storage(txtFile);
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
-            Ui.showLoadingError();
+            mainWindow.showLoadingError();
         }
-        keyboard = new Scanner(System.in);
-        isScannerOpen = true;
     }
 
-    /** Launches Duke */
-    public void runDuke() {
-        Ui.showWelcomeMessage();
-        while (isScannerOpen) {
-            String command = keyboard.next();
-            String description = keyboard.nextLine();
-
-            try {
-                parser.parse(command, description, this);
-            } catch (DukeException e) {
-                System.out.print(e);
-            }
-
-        }
+    public void setMainWindow(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+        mainWindow.showWelcomeMessage();
     }
 
     /** Saves task to file then exits. */
     protected void dukeBye() throws DukeException {
-        Ui.showByeMessage();
+        mainWindow.showByeMessage();
         try {
             storage.save(tasks);
         } catch (IOException e) {
-            Ui.showSavingError();
+            mainWindow.showSavingError();
         }
-        isScannerOpen = false;
     }
 
     /** Lists tasks. */
     protected void dukeList() {
-        tasks.list();
+        mainWindow.showListOfTasks(tasks.list());
     }
 
     /**
@@ -84,6 +62,7 @@ public class Duke {
      */
     protected void dukeDone(int i) throws DukeException {
         tasks.markAsDone(i);
+        mainWindow.showMarkAsDoneMessage(tasks.getStringDes(i));
     }
 
     /**
@@ -93,7 +72,8 @@ public class Duke {
      * @throws DukeException if no such tasks exist.
      */
     protected void dukeDelete(int i) throws DukeException {
-        tasks.delete(i);
+        Task t = tasks.delete(i);
+        mainWindow.showDeleteTaskMessage(t.toString(), tasks.size());
     }
 
     /**
@@ -104,7 +84,7 @@ public class Duke {
     protected void dukeTodo(String desc) {
         Todo todo = new Todo(desc);
         tasks.add(todo);
-        Ui.showAddTaskMessage(todo.toString(), tasks.size());
+        mainWindow.showAddTaskMessage(todo.toString(), tasks.size());
     }
 
     /**
@@ -116,7 +96,7 @@ public class Duke {
     protected void dukeDeadline(String desc, Calendar cal) {
         Deadline deadline = new Deadline(desc, cal);
         tasks.add(deadline);
-        Ui.showAddTaskMessage(deadline.toString(), tasks.size());
+        mainWindow.showAddTaskMessage(deadline.toString(), tasks.size());
     }
 
     /**
@@ -128,14 +108,11 @@ public class Duke {
     protected void dukeEvent(String desc, Calendar cal) {
         Event event = new Event(desc, cal);
         tasks.add(event);
-        Ui.showAddTaskMessage(event.toString(), tasks.size());
+        mainWindow.showAddTaskMessage(event.toString(), tasks.size());
     }
 
     protected void dukeFind(String desc) {
-        tasks.find(desc);
+        mainWindow.showListOfTasks(tasks.find(desc));
     }
 
-    public static void main(String[] args) {
-        new Duke("duke.txt").runDuke();
-    }
 }

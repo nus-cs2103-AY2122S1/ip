@@ -92,7 +92,6 @@ public class MyParser {
             } catch (ParseException e) {
                 throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yyyy 0000");
             }
-            System.out.println(desc + d);
             duke.dukeDeadline(desc, deadlineCal);
             break;
         }
