@@ -139,6 +139,4 @@ public class TaskList {
         int num = foundTasks.size();
         ui.showTasksOnDate(date, num, foundTasks);
     }
-
-
 }
