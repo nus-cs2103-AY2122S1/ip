@@ -28,7 +28,8 @@ public abstract class Task {
      * @return the associated string
      */
     public String getStatus() {
-        return (isDone ? String.format("[%s][X]", taskType) : String.format("[%s][ ]", taskType)); // mark done task with X
+        return (isDone ? String.format("[%s][X]", taskType) :
+            String.format("[%s][ ]", taskType)); // mark done task with X
     }
 
     public boolean isDone() {
@@ -65,8 +66,12 @@ public abstract class Task {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Task task = (Task) o;
         return isDone == task.isDone && description.equals(task.description);
     }

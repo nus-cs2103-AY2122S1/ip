@@ -1,15 +1,15 @@
 package duke;
 
+import static java.util.AbstractMap.SimpleImmutableEntry;
+
+import java.util.List;
+import java.util.Scanner;
+
 import duke.logic.LCommandParser;
 import duke.logic.LCommandsEnum;
 import duke.logic.LStorage;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.List;
-import java.util.Scanner;
-
-import static java.util.AbstractMap.SimpleImmutableEntry;
 
 /**
  * The user interface of Duke. Deals with printing messages to the console and reading user input.
@@ -27,10 +27,10 @@ public class Ui {
         String name = "";
         willExit = false;
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello, I am\n" + logo);
         System.out.println("Please enter your name:");
         while (name.equals("")) {
@@ -81,7 +81,7 @@ public class Ui {
         System.out.println("Got it, " + name + ". I have added this task:");
         System.out.println("    " + task);
         System.out.println("Now you have " + sizeOfList + " task"
-                + (sizeOfList <= 1 ? " in the list" : "s in the list"));
+            + (sizeOfList <= 1 ? " in the list" : "s in the list"));
     }
 
     /**
@@ -118,7 +118,7 @@ public class Ui {
      * Prints all tasks from a list of tasks and task numbers.
      *
      * @param tasksWithTaskNumbers the list of tasks and task numbers, each in a SimpleImmutableEntry
-     * @param maxTaskNumber the size of the task list. This will ensure proper padding of numbers.
+     * @param maxTaskNumber        the size of the task list. This will ensure proper padding of numbers.
      */
     public void printAllTasks(List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
                               int maxTaskNumber) {
@@ -130,7 +130,7 @@ public class Ui {
      * Prints all upcoming tasks from a list of tasks and task numbers.
      *
      * @param tasksWithTaskNumbers the list of tasks and task numbers, each in a SimpleImmutableEntry
-     * @param maxTaskNumber the size of the task list. This will ensure proper padding of numbers.
+     * @param maxTaskNumber        the size of the task list. This will ensure proper padding of numbers.
      */
     public void printUpcomingTasks(List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
                                    int maxTaskNumber) {
@@ -141,11 +141,12 @@ public class Ui {
     /**
      * Prints all tasks from a list of tasks and task numbers containing a pattern.
      *
-     * @param pattern the string pattern that the user is searching for
+     * @param pattern              the string pattern that the user is searching for
      * @param tasksWithTaskNumbers the list of tasks and task numbers, each in a SimpleImmutableEntry
-     * @param maxTaskNumber the size of the task list. This will ensure proper padding of numbers.
+     * @param maxTaskNumber        the size of the task list. This will ensure proper padding of numbers.
      */
-    public void printTasksContaining(String pattern, List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+    public void printTasksContaining(String pattern,
+                                     List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
                                      int maxTaskNumber) {
         System.out.println("Ok, " + name + ". I am getting all tasks containing " + pattern + ":");
         printMultipleTasks(tasksWithTaskNumbers, maxTaskNumber);
@@ -170,6 +171,6 @@ public class Ui {
 
     private void displayNumberOfTasks(int num) {
         System.out.println("Now you have " + num + " task"
-                + (num <= 1 ? " in the list" : "s in the list"));
+            + (num <= 1 ? " in the list" : "s in the list"));
     }
 }

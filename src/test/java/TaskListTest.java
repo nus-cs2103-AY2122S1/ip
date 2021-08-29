@@ -1,14 +1,14 @@
-package test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
 import duke.task.TaskList;
 import duke.task.TasksEnum;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 class TaskListTest {
-    TaskList taskList;
     private static final int LIMIT = 5;
+    private final TaskList taskList;
+
     TaskListTest() {
         taskList = new TaskList(LIMIT);
         for (int i = 0; i < 4; i++) {
@@ -22,7 +22,7 @@ class TaskListTest {
         Assertions.assertEquals(4, taskList.size());
         Assertions.assertTrue(taskList.addTask(TasksEnum.DEADLINE.getTask("get a gf /by 9/12/2023")));
         Assertions.assertFalse(taskList.addTask(TasksEnum.EVENT.getTask("hello /at 12:00")),
-                "Task list exceeded hard limit");
+            "Task list exceeded hard limit");
     }
 
     @Test

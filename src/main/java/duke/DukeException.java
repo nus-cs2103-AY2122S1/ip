@@ -19,7 +19,7 @@ public class DukeException extends RuntimeException {
      * This constructor takes in a formatted string as the message just like <code>String::format</code>.
      *
      * @param formattedMessage a format string
-     * @param args the arguments to String::format
+     * @param args             the arguments to String::format
      */
     public DukeException(String formattedMessage, Object... args) {
         this(String.format(formattedMessage, args));

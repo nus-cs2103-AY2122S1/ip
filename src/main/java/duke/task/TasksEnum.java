@@ -6,7 +6,7 @@ import duke.DukeException;
  * An enum of tasks that each have a method to create a new instance of the task.
  */
 public enum TasksEnum {
-    TODO () {
+    TODO() {
         @Override
         public Task getTask(String input) {
             if (input == null || input.equals("")) {
@@ -15,23 +15,23 @@ public enum TasksEnum {
             return new Todo(input);
         }
     },
-    EVENT () {
+    EVENT() {
         @Override
         public Task getTask(String input) {
             if (input == null || !input.contains(" /at ")) {
                 throw new DukeException("There should be a description followed by \"/at\" and" +
-                        " then the date and time of the event.");
+                    " then the date and time of the event.");
             }
             String[] splitOtherInput = input.split(" /at ", 2);
             return new Event(splitOtherInput[0], splitOtherInput[1]);
         }
     },
-    DEADLINE () {
+    DEADLINE() {
         @Override
         public Task getTask(String input) {
             if (input == null || !input.contains(" /by ")) {
                 throw new DukeException("There should be a description followed by \"/by\" and" +
-                        " then the date and time of the deadline.");
+                    " then the date and time of the deadline.");
             }
             String[] splitOtherInput = input.split(" /by ", 2);
             return new Deadline(splitOtherInput[0], splitOtherInput[1]);

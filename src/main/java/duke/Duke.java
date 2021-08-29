@@ -14,12 +14,21 @@ public class Duke {
     /**
      * Creates a new instance of a duke chat-bot.
      *
-     * @param filePath the path where the data of the tasks will be saved
+     * @param filePath  the path where the data of the tasks will be saved
      * @param listLimit the maximum size of the task list
      */
     public Duke(String filePath, int listLimit) {
         taskList = new TaskList(listLimit);
         lStorage = new LStorage(filePath, taskList);
+    }
+
+    /**
+     * Runs the duke chat-bot with default filepath and limit.
+     *
+     * @param args irrelevant for now
+     */
+    public static void main(String[] args) {
+        new Duke("./dukedata.txt", 100).run();
     }
 
     /**
@@ -30,14 +39,5 @@ public class Duke {
         while (!ui.willExit()) {
             ui.checkInput(taskList, lStorage);
         }
-    }
-
-    /**
-     * Runs the duke chat-bot with default filepath and limit.
-     *
-     * @param args irrelevant for now
-     */
-    public static void main(String[] args) {
-        new Duke("./dukedata.txt", 100).run();
     }
 }

@@ -1,12 +1,13 @@
 package duke.logic;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+
+import duke.DukeException;
+
 
 /**
  * Enables simpler parsing of date and time for events and deadlines.
@@ -22,7 +23,7 @@ public class LDateTimeParser {
      */
     public LDateTimeParser(String dateTime) {
         String[] dateAndTime = Arrays.stream(dateTime.split("[ |,]", 2))
-                .map(String::trim).toArray(String[]::new);
+            .map(String::trim).toArray(String[]::new);
         try {
             if (dateAndTime.length == 1) {
                 if (dateAndTime[0].contains("/")) { // User entered date
@@ -38,12 +39,13 @@ public class LDateTimeParser {
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date and time format. Please enter them in the format: d/M/YYYY H:m.\n" +
-                    "For example: 23/8/2021 14:00");
+                "For example: 23/8/2021 14:00");
         }
     }
 
     /**
      * Gets the date of this datetime.
+     *
      * @return the local date object.
      */
     public LocalDate getDate() {
@@ -52,6 +54,7 @@ public class LDateTimeParser {
 
     /**
      * Gets the time of this datetime.
+     *
      * @return the local time object.
      */
     public LocalTime getTime() {

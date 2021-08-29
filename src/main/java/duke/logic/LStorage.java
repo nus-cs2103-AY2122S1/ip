@@ -1,12 +1,12 @@
 package duke.logic;
 
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Deals with the logic of writing to the dukedata.txt file each time there is an update to the task list.

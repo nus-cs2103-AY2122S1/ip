@@ -10,20 +10,20 @@ import duke.task.TasksEnum;
  * The logic for parsing commands typed by the user.
  */
 public class LCommandParser {
-    private boolean willExit;
     private static final String INVALID_COMMAND = "Invalid input. Type \"help\" for more information.";
     private static final String EMPTY_INPUT_MESSAGE = "Input is empty. Type \"help\" for more information.";
     private static final String TOO_LITTLE_ARGUMENTS_MESSAGE = "Too little arguments. Type \"help\" " +
-            "followed by the command for more information.";
+        "followed by the command for more information.";
     private static final String FULL_TASKLIST_MESSAGE = "Unable to add task. List is full. Consider deleting" +
-            " some tasks";
+        " some tasks";
     private static final String INVALID_NUMBER_MESSAGE = "Please input a valid task number after the command.";
+    private boolean willExit;
 
     /**
      * Creates a new command parser for the input.
      *
-     * @param input The string input from the user.
-     * @param storage The storage logic that allows the command parser to write the task list data to it.
+     * @param input    The string input from the user.
+     * @param storage  The storage logic that allows the command parser to write the task list data to it.
      * @param taskList The list of tasks.
      */
     public LCommandParser(String input, TaskList taskList, LStorage storage, Ui ui) {
@@ -63,7 +63,7 @@ public class LCommandParser {
             switch (commandEnum) {
             case FIND:
                 ui.printTasksContaining(inputArr[1],
-                        taskList.getTasksContaining(inputArr[1]), taskList.size());
+                    taskList.getTasksContaining(inputArr[1]), taskList.size());
                 break;
             case TODO: // fallthrough intended
             case EVENT: // fallthrough intended
@@ -81,7 +81,7 @@ public class LCommandParser {
                 case DONE:
                     if (!taskList.markAsDone(taskNumber)) { // task already marked as done
                         throw new DukeException("You have already marked this task (%s) as done",
-                                taskList.getTask(taskNumber));
+                            taskList.getTask(taskNumber));
                     }
                     ui.markAsDoneMessage(taskList.getTask(taskNumber));
                     break;
@@ -98,20 +98,11 @@ public class LCommandParser {
     }
 
     /**
-     * Checks if the command given by the user is to exit.
-     *
-     * @return true if and only if the command is to exit
-     */
-    public boolean willExit() {
-        return willExit;
-    }
-
-    /**
      * Attempts to add the task to the tasklist based on the user command.
      *
-     * @param action the action of either todo, event or deadline
+     * @param action     the action of either todo, event or deadline
      * @param otherInput the rest of the string without the action
-     * @param taskList the list of task to be added to
+     * @param taskList   the list of task to be added to
      * @return the task that is added.
      */
     private static Task addTask(String action, String otherInput, TaskList taskList) {
@@ -121,6 +112,15 @@ public class LCommandParser {
             throw new DukeException(FULL_TASKLIST_MESSAGE);
         }
         return result;
+    }
+
+    /**
+     * Checks if the command given by the user is to exit.
+     *
+     * @return true if and only if the command is to exit
+     */
+    public boolean willExit() {
+        return willExit;
     }
 
 }

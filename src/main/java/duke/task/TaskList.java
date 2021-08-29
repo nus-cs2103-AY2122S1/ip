@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.DukeException;
+import static java.util.AbstractMap.SimpleImmutableEntry;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import static java.util.AbstractMap.SimpleImmutableEntry;
+import duke.DukeException;
 
 /**
  * Encapsulates a list of tasks that the user wants to keep track of.
@@ -95,23 +95,23 @@ public class TaskList {
             LocalDateTime dateTime2 = task2.getDateTime();
             // time can be null if task is to-do. By default, put all to-do to the last.
             return dateTime1 == null
-                    ? 1
-                    : dateTime2 == null
-                    ? -1
-                    : dateTime1.equals(dateTime2) // In this situation, we have to sort based on order in tasklist.
-                    ? Integer.compare(tasks.indexOf(task1), tasks.indexOf(task2))
-                    : dateTime1.compareTo(dateTime2);
+                ? 1
+                : dateTime2 == null
+                ? -1
+                : dateTime1.equals(dateTime2) // In this situation, we have to sort based on order in tasklist.
+                ? Integer.compare(tasks.indexOf(task1), tasks.indexOf(task2))
+                : dateTime1.compareTo(dateTime2);
         });
         for (int i = 1; i <= tasks.size(); i++) {
             Task task = tasks.get(i - 1);
             String type = task.getTaskType();
-            if (!task.isDone() && // Task is not done and it is either to-do or the date is later than now.
-                    (type.equals("T") || task.getDateTime().isAfter(LocalDateTime.now()))) {
+            if (!task.isDone() && (// Task is not done and it is either to-do or the date is later than now.
+                type.equals("T") || task.getDateTime().isAfter(LocalDateTime.now()))) {
                 upcomingTasks.put(task, i);
             }
         }
         return upcomingTasks.entrySet().stream().map(SimpleImmutableEntry::new)
-                .collect(Collectors.toUnmodifiableList());
+            .collect(Collectors.toUnmodifiableList());
     }
 
     /**
@@ -136,8 +136,8 @@ public class TaskList {
     public List<SimpleImmutableEntry<? extends Task, Integer>> getTasksContaining(String pattern) {
         return getAllTasks().stream().filter(taskAndNumber ->
                 taskAndNumber.getKey().getDescription().toUpperCase()
-                        .contains(pattern.toUpperCase()))
-                .collect(Collectors.toUnmodifiableList());
+                    .contains(pattern.toUpperCase()))
+            .collect(Collectors.toUnmodifiableList());
     }
 
 
@@ -164,10 +164,10 @@ public class TaskList {
     private class InvalidTaskNumberException extends DukeException {
         public InvalidTaskNumberException() {
             super(tasks.size() > 1
-                    ? "Please input a value between 1 and " + tasks.size()
-                    : tasks.size() == 1
-                    ? "You can only input the value 1"
-                    : "There are no tasks so far");
+                ? "Please input a value between 1 and " + tasks.size()
+                : tasks.size() == 1
+                ? "You can only input the value 1"
+                : "There are no tasks so far");
         }
     }
 }

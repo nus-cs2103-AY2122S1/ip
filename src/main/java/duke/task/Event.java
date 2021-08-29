@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.logic.LDateTimeParser;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import duke.logic.LDateTimeParser;
 
 /**
  * An event is a task that has a date attached.
