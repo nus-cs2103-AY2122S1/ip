@@ -1,11 +1,17 @@
-import duke.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.Deadline;
+import duke.DukeDeadlineException;
+import duke.DukeEventException;
+import duke.DukeTodoException;
+import duke.Event;
+import duke.Todo;
 
 public class DukeTest {
     @Test
-    public void TodoNormalTest(){
+    public void todoNormalTest() {
         try {
             Todo a = new Todo("a");
             assertEquals("a", a.getName());
@@ -15,17 +21,7 @@ public class DukeTest {
     }
 
     @Test
-    public void TodoExceptionTest(){
-        try {
-            Todo a = new Todo("");
-            assertEquals("", a.getName());
-        } catch (DukeTodoException e) {
-            assertEquals("OOPS!!! The description of a deadline cannot be empty.", e.getMessage());
-        }
-    }
-
-    @Test
-    public void EventNormalTest(){
+    public void eventNormalTest() {
         try {
             Event a = new Event("project meeting /at Mon 2-4pm");
             assertEquals("project meeting ", a.getName());
@@ -36,7 +32,7 @@ public class DukeTest {
     }
 
     @Test
-    public void DeadlineNormalTest(){
+    public void deadlineNormalTest() {
         try {
             Deadline a = new Deadline("return book /by 2019-10-15");
             assertEquals("return book ", a.getName());

@@ -48,8 +48,8 @@ public class Storage {
     public void writeToFile(List list) throws IOException {
         FileWriter myWriter = new FileWriter("filename.txt");
 
-        for (int i = 0; i < list.todos.size(); i++) {
-            myWriter.write(list.todos.get(i).toDataString());
+        for (int i = 0; i < list.getTodos().size(); i++) {
+            myWriter.write(list.getTodos().get(i).toDataString());
             myWriter.write(System.lineSeparator());
         }
         myWriter.close();

@@ -18,7 +18,7 @@ public class Event extends Task {
         super(name.substring(0, name.indexOf(" /at ") + 1));
         this.time = name.substring(name.indexOf(" /at ") + 5);
         if (name.equals("")) {
-            throw  new DukeEventException();
+            throw new DukeEventException();
         }
     }
 

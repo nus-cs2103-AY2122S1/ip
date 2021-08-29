@@ -2,15 +2,15 @@ package duke;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * Represent the Duke Bot.
  * Entry point to the programme.
  */
 public class Duke {
-    public List todoList;
+    private List todoList;
 
     /**
      * Greeting message from Duke.

@@ -15,7 +15,7 @@ public class Todo extends Task {
     public Todo(String name) throws DukeTodoException {
         super(name);
         if (name.equals("")) {
-            throw  new DukeTodoException();
+            throw new DukeTodoException();
         }
     }
 
@@ -26,7 +26,7 @@ public class Todo extends Task {
      * @param input Array of Strings with type of Task, name, done.
      */
     public Todo(String[] input) {
-        super(input[2], input[1].equals("T") ? true : false );
+        super(input[2], input[1].equals("T") ? true : false);
     }
 
     @Override

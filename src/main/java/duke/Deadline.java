@@ -1,8 +1,8 @@
 package duke;
 
 import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a subclass of Task that can be added to the List.
@@ -21,9 +21,9 @@ public class Deadline extends Task {
      */
     public Deadline(String name) throws DukeDeadlineException, DateTimeException {
         super(name.substring(0, name.indexOf(" /by ") + 1));
-            this.deadline = LocalDate.parse(name.substring(name.indexOf(" /by ") + 5));
+        this.deadline = LocalDate.parse(name.substring(name.indexOf(" /by ") + 5));
         if (name.equals("")) {
-            throw  new DukeDeadlineException();
+            throw new DukeDeadlineException();
         }
     }
 

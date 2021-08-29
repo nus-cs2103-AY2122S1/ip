@@ -27,7 +27,7 @@ public class Parser {
                 throw new DukeTodoException();
             }
             Task newItem = new Todo(split[1]);
-            list.todos.add(newItem);
+            list.getTodos().add(newItem);
             list.echo(newItem);
         } else if (split[0].equals("deadline")) {
             if (split.length == 1) {
@@ -35,7 +35,7 @@ public class Parser {
             }
             try {
                 Task newItem = new Deadline(split[1]);
-                list.todos.add(newItem);
+                list.getTodos().add(newItem);
                 list.echo(newItem);
             } catch (DateTimeException e) {
                 System.out.println("Please enter the date in yyyy-mm-dd format!");
@@ -45,7 +45,7 @@ public class Parser {
                 throw new DukeEventException();
             }
             Task newItem = new Event(split[1]);
-            list.todos.add(newItem);
+            list.getTodos().add(newItem);
             list.echo(newItem);
         } else {
             throw new DukeException();

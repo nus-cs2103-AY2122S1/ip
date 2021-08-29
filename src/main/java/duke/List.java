@@ -1,14 +1,15 @@
 package duke;
 
+import static java.lang.Integer.parseInt;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import static java.lang.Integer.parseInt;
 
 /**
  * Represents the Todo List for Duke.
  */
 public class List {
-    public ArrayList<Task> todos;
+    private ArrayList<Task> todos;
 
     /**
      * Constructor for List Class when there is no initial data.
@@ -27,6 +28,10 @@ public class List {
      */
     public List(ArrayList<Task> data) {
         this.todos = data;
+    }
+
+    public ArrayList<Task> getTodos() {
+        return this.todos;
     }
 
     /**
@@ -105,6 +110,11 @@ public class List {
                 + " in the list");
     }
 
+    /**
+     * Prints out the search result based on input.
+     *
+     * @param input The keyword to be searched.
+     */
     public void search(String input) {
         ArrayList<Task> result = new ArrayList<>();
         for (int i = 0; i < todos.size(); i++) {
