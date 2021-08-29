@@ -1,12 +1,12 @@
 package duke.util;
 
-import duke.exception.DukeIOException;
-import duke.task.Task;
-import duke.exception.DukeException;
-import duke.exception.DukeNoSuchTaskException;
-import duke.exception.DukeInvalidIndexException;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidIndexException;
+import duke.exception.DukeIoException;
+import duke.exception.DukeNoSuchTaskException;
+import duke.task.Task;
 
 /**
  * This class encapsulates a Task Handler that manages all the tasks Duke can handle.
@@ -15,10 +15,14 @@ import java.util.ArrayList;
  * @version CS2103T AY21/22 Semester 1
  */
 public class TaskHandler {
-    private static final String NO_TASKS_FOUND = "Nothing in the list... :( Type todo/event/deadline to add something first! :^)";
-    private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n\t  %s\n\tYou currently have %d task(s) in the list.";
-    private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\n\t  %s\n\tYou currently have %d undone task(s) in the list.";
-    private static final String TASK_DELETED_MESSAGE = "Voila! ^_^ I've deleted this task:\n\t  %s\n\tYou currently have %d task(s) in the list.";
+    private static final String NO_TASKS_FOUND = "Nothing in the list... :("
+            + "Type todo/event/deadline to add something first! :^)";
+    private static final String TASK_ADDED_MESSAGE = "Voila! ^_^ I've added this task:\n\t"
+            + "%s\n\tYou currently have %d task(s) in the list.";
+    private static final String TASK_DONE_MESSAGE = "Good Job! :D I've marked this task as done:\n\t"
+            + "  %s\n\tYou currently have %d undone task(s) in the list.";
+    private static final String TASK_DELETED_MESSAGE = "Voila! ^_^ I've deleted this task:\n\t"
+            + " %s\n\tYou currently have %d task(s) in the list.";
     private static final String TASK_LIST = "Here are the task(s) in your list! ^_^\n\t";
     private static final String MATCHING_TASK_LIST = "Here are the matching task(s) in your list! ^_^:\n\t";
     private static final String NO_MATCHING_TASKS = "No matching tasks found :<";
@@ -111,20 +115,20 @@ public class TaskHandler {
     /**
      * Updates the storage after changes to the list.
      *
-     * @throws DukeException If unable to update task list.
+     * @throws DukeIoException If unable to update task list.
      */
-    public void updateData() throws DukeIOException {
+    public void updateData() throws DukeIoException {
         Storage.updateData(taskList);
     }
 
     /** Prints the task list in a pretty format **/
-    public void printTasks()  {
+    public void printTasks() {
         StringBuilder allTasks = new StringBuilder(TASK_LIST);
         if (taskList.size() == 0) {
             Ui.prettify(NO_TASKS_FOUND);
         } else {
-            for (int i  = 0; i < taskList.size(); i++) {
-                int taskIndex =  i + 1;
+            for (int i = 0; i < taskList.size(); i++) {
+                int taskIndex = i + 1;
                 String task = taskList.get(i).toString();
                 allTasks.append(String.format("\t%d. %s\n\t", taskIndex, task));
             }

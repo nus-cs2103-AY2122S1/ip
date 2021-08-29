@@ -1,20 +1,19 @@
 package duke.util;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-import duke.task.Task;
-import duke.exception.DukeException;
-import duke.exception.DukeIOException;
-import duke.exception.DukeUnexpectedCharacterException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileWriter;
-
-import java.util.Scanner;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.exception.DukeIoException;
+import duke.exception.DukeUnexpectedCharacterException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * This class encapsulates the storage used for loading and saving data.
@@ -47,12 +46,12 @@ public class Storage {
     }
 
     /** Creates a new file to store data **/
-    private static void newFile() throws DukeIOException {
+    private static void newFile() throws DukeIoException {
         try {
             file.getParentFile().mkdirs();
             file.createNewFile();
         } catch (IOException e) {
-            throw new DukeIOException("Error creating directory/file. Your data were not saved. :_(");
+            throw new DukeIoException("Error creating directory/file. Your data were not saved. :_(");
         }
     }
 
@@ -60,9 +59,9 @@ public class Storage {
      * Writes data to storage file.
      *
      * @param task Task to be saved to the storage file.
-     * @throws DukeIOException If there is error writing to the storage file.
+     * @throws DukeIoException If there is error writing to the storage file.
      */
-    public static void writeToFile(Task task) throws DukeIOException {
+    public static void writeToFile(Task task) throws DukeIoException {
         if (!file.exists()) {
             newFile();
         }
@@ -71,7 +70,7 @@ public class Storage {
             fw.write(task.formatToSave() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
-            throw new DukeIOException("Unable to write to data file. Your data were not saved. :_(");
+            throw new DukeIoException("Unable to write to data file. Your data were not saved. :_(");
         }
     }
 
@@ -79,9 +78,9 @@ public class Storage {
      * Updates storage file after changes are made to the task list.
      *
      * @param tasks Edited task list.
-     * @throws DukeIOException If there is an error writing to the storage file.
+     * @throws DukeIoException If there is an error writing to the storage file.
      */
-    public static void updateData(ArrayList<Task> tasks) throws DukeIOException {
+    public static void updateData(ArrayList<Task> tasks) throws DukeIoException {
         try {
             FileWriter fw = new FileWriter(FILE_NAME);
             for (Task t: tasks) {
@@ -89,7 +88,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeIOException("Unable to write to data file. Your data were not saved. :_(");
+            throw new DukeIoException("Unable to write to data file. Your data were not saved. :_(");
         }
     }
 
@@ -105,17 +104,17 @@ public class Storage {
         Task task;
 
         switch (details[0]) {
-            case "T":
-                task = new Todo(details[2]);
-                break;
-            case "D":
-                task = new Deadline(details[2], details[3]);
-                break;
-            case "E":
-                task = new Event(details[2], details[3]);
-                break;
-            default:
-                throw new DukeUnexpectedCharacterException(details[0]);
+        case "T":
+            task = new Todo(details[2]);
+            break;
+        case "D":
+            task = new Deadline(details[2], details[3]);
+            break;
+        case "E":
+            task = new Event(details[2], details[3]);
+            break;
+        default:
+            throw new DukeUnexpectedCharacterException(details[0]);
         }
         if (details[1].equals("1")) {
             task.markAsDone();
