@@ -1,6 +1,6 @@
-#Welcome to ~~Duck~~ Duke, your very own task manager!
+# Welcome to Duke, your very own task manager!
 
-**Things you can do with Duke:**
+**Things you can do with ~~Duck~~ Duke:**
 1. Add different kinds of tasks
    * _Duke can keep track of tasks with specific deadlines._
    * _Having an event? Duke will keep track of your event periods as well._
