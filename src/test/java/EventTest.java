@@ -1,6 +1,6 @@
-package duke;
-
-import org.junit.jupiter.api.Test;
+import duke.Event;
+import duke.Task;
+import org.testng.annotations.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
