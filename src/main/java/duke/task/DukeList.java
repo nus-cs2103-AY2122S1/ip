@@ -1,9 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.DukeException;
+
 
 /**
  * Encapsulation of the list in Duke.
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class DukeList {
     /** The list in which Duke stores Tasks. */
 
-    private final ArrayList<Task> TASKS = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
 
 
     /**
@@ -26,7 +27,7 @@ public class DukeList {
      */
     private void displayTask(Task task) {
         String response = "Got it. I've added this task:\n";
-        String taskCount = "\nNow you have " + TASKS.size() + " tasks in the list.";
+        String taskCount = "\nNow you have " + tasks.size() + " tasks in the list.";
         System.out.println(response + task.toString() + taskCount);
     }
 
@@ -37,7 +38,7 @@ public class DukeList {
      */
     public void add(String text) {
 
-        TASKS.add(new Task(text));
+        tasks.add(new Task(text));
         System.out.println("added: " + text);
     }
 
@@ -73,7 +74,7 @@ public class DukeList {
             task.done();
         }
 
-        this.TASKS.add(task);
+        this.tasks.add(task);
     }
 
     /**
@@ -91,7 +92,7 @@ public class DukeList {
 
         ToDos input = new ToDos(message);
 
-        TASKS.add(input);
+        tasks.add(input);
 
         displayTask(input);
     }
@@ -108,7 +109,7 @@ public class DukeList {
         try {
             Deadlines input = new Deadlines(strings[0].trim(), limit);
 
-            TASKS.add(input);
+            tasks.add(input);
 
             displayTask(input);
         } catch (DateTimeParseException e) {
@@ -128,7 +129,7 @@ public class DukeList {
 
         Events input = new Events(strings[0].trim(), limit);
 
-        TASKS.add(input);
+        tasks.add(input);
 
 
         displayTask(input);
@@ -139,8 +140,8 @@ public class DukeList {
      */
     public void list() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < TASKS.size(); i++) {
-            System.out.println((i + 1) + "." + TASKS.get(i).toString());
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + "." + tasks.get(i).toString());
         }
     }
 
@@ -150,7 +151,7 @@ public class DukeList {
      * @param item Index of the task marked as done.
      */
     public void done(int item) {
-        Task task = TASKS.get(item - 1);
+        Task task = tasks.get(item - 1);
         task.done();
 
         String response = "Nice! I've marked this task as done:\n";
@@ -163,11 +164,11 @@ public class DukeList {
      * @param item Index of the task to be deleted.
      */
     public void delete(int item) {
-        Task task = TASKS.get(item - 1);
-        TASKS.remove(item - 1);
+        Task task = tasks.get(item - 1);
+        tasks.remove(item - 1);
 
         String response = "Noted. I've removed this task:\n";
-        String taskCount = "\nNow you have " + TASKS.size() + " tasks in the list.";
+        String taskCount = "\nNow you have " + tasks.size() + " tasks in the list.";
         System.out.println(response + task.toString() + taskCount);
     }
 
@@ -185,13 +186,13 @@ public class DukeList {
 
         boolean doesContain;
 
-        for (int i = 0; i < TASKS.size(); i++) {
-            msg = TASKS.get(i).toString();
+        for (int i = 0; i < tasks.size(); i++) {
+            msg = tasks.get(i).toString();
             doesContain = msg.contains(trimmedInput);
 
             if (doesContain) {
                 str += (i + 1 + "." + msg + "\n");
-                count ++;
+                count++;
             }
         }
 
@@ -212,8 +213,8 @@ public class DukeList {
     public String toString() {
         String str = "";
 
-        for (int i = 0; i < TASKS.size(); i++) {
-            str += TASKS.get(i).saveData() + "\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            str += tasks.get(i).saveData() + "\n";
         }
 
         return str;

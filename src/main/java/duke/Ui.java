@@ -1,16 +1,14 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.task.DukeList;
 
-import java.util.Scanner;
 
 /**
  * Encapsulates the user interaction from duke.
  */
 public class Ui {
-
-    /** Parser of user input. */
-    private final Parser PARSER;
 
     /** Duke's logo. */
     private static final String DUKE_LOGO = " ____        _        \n"
@@ -25,6 +23,8 @@ public class Ui {
     /** Duke's farewells. */
     private static final String DUKE_EXIT = "Bye. Hope to see you again soon!";
 
+    /** Parser of user input. */
+    private final Parser parser;
 
     /**
      * Constructs a Ui object.
@@ -33,7 +33,7 @@ public class Ui {
      * @param storage Duke's storage.
      */
     public Ui(DukeList list, Storage storage) {
-        this.PARSER = new Parser(list, storage);
+        this.parser = new Parser(list, storage);
     }
 
     /**
@@ -47,7 +47,7 @@ public class Ui {
         String input = scan.nextLine();
 
         while (!input.equals("bye")) {
-            this.PARSER.parse(input);
+            this.parser.parse(input);
 
             input = scan.nextLine();
         }

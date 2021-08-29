@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Task {
     /** The description of the task */
-    private final String DESCRIPTION;
+    private final String description;
 
     /** The state of whether the task has been done */
     private boolean isDone;
@@ -16,7 +16,7 @@ public class Task {
      * @param description Description of the task.
      */
     public Task(String description) {
-        this.DESCRIPTION = description;
+        this.description = description;
         this.isDone = false;
     }
 
@@ -44,7 +44,7 @@ public class Task {
     public String saveData() {
         String doneState = this.isDone ? "1" : "0";
 
-        return doneState + " " + this.DESCRIPTION;
+        return doneState + " " + this.description;
     }
 
     /**
@@ -54,6 +54,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] ", this.status()) + DESCRIPTION;
+        return String.format("[%s] ", this.status()) + description;
     }
 }

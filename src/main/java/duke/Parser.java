@@ -8,10 +8,10 @@ import duke.task.DukeList;
 public class Parser {
 
     /** List of duke. */
-    private final DukeList LIST;
+    private final DukeList list;
 
     /** Storage of duke. */
-    private final Storage STORAGE;
+    private final Storage storage;
 
 
     /**
@@ -21,8 +21,8 @@ public class Parser {
      * @param storage The storage of duke.
      */
     public Parser(DukeList list, Storage storage) {
-        this.LIST = list;
-        this.STORAGE = storage;
+        this.list = list;
+        this.storage = storage;
     }
 
     /**
@@ -35,24 +35,24 @@ public class Parser {
 
         try {
             if (input.equals("list")) {
-                LIST.list();
+                list.list();
             } else if (segment[0].equals("done") && segment.length == 2) {
-                LIST.done(Integer.parseInt(segment[1]));
-                STORAGE.save();
+                list.done(Integer.parseInt(segment[1]));
+                storage.save();
             } else if (segment[0].equals("delete") && segment.length == 2) {
-                LIST.delete(Integer.parseInt(segment[1]));
-                STORAGE.save();
+                list.delete(Integer.parseInt(segment[1]));
+                storage.save();
             } else if (segment[0].equals("todo")) {
-                LIST.addToDo(input.split("todo", 2)[1]);
-                STORAGE.save();
+                list.addToDo(input.split("todo", 2)[1]);
+                storage.save();
             } else if (segment[0].equals("deadline")) {
-                LIST.addDeadlines(input.split("deadline", 2)[1]);
-                STORAGE.save();
+                list.addDeadlines(input.split("deadline", 2)[1]);
+                storage.save();
             } else if (segment[0].equals("event")) {
-                LIST.addEvents(input.split("event", 2)[1]);
-                STORAGE.save();
+                list.addEvents(input.split("event", 2)[1]);
+                storage.save();
             } else if (segment[0].equals("find")) {
-                LIST.find(input.split("find", 2)[1]);
+                list.find(input.split("find", 2)[1]);
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry,"
                         + " but I don't know what that means :-(");

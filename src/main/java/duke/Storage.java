@@ -1,37 +1,37 @@
 package duke;
 
-import duke.task.DukeList;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import duke.task.DukeList;
+
+
 /**
- * Class managing storing and loading data into duke.Duke's list.
+ * Class managing storing and loading data into Duke's list.
  */
 public class Storage {
 
     /** PATH to save file. */
-    private final String PATH;
+    private final String path;
 
     /** List where data is loaded to and saved from. */
-    private final DukeList LIST;
+    private final DukeList list;
 
     /**
-     * Constructs a duke.Storage object.
+     * Constructs a Storage object.
      *
      * @param path PATH to the storage file.
      * @param list List where data is loaded to and saved from.
      */
     public Storage(String path, DukeList list) {
-        this.PATH = path;
-        this.LIST = list;
+        this.path = path;
+        this.list = list;
     }
 
     /**
@@ -39,8 +39,8 @@ public class Storage {
      */
     public void save() {
         try {
-            FileWriter fileWriter = new FileWriter(this.PATH + "\\data\\data.txt");
-            fileWriter.write(LIST.toString());
+            FileWriter fileWriter = new FileWriter(this.path + "\\data\\data.txt");
+            fileWriter.write(list.toString());
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(e.toString());
@@ -52,23 +52,23 @@ public class Storage {
      */
     public void load() {
         try {
-            Path folderPath = Paths.get(this.PATH + "\\data");
-            Path filePath = Paths.get(this.PATH + "\\data\\data.txt");
+            Path folderPath = Paths.get(this.path + "\\data");
+            Path filePath = Paths.get(this.path + "\\data\\data.txt");
             boolean hasDirectory = Files.exists(folderPath);
             boolean hasSaveFile = Files.exists(filePath);
 
             if (!hasDirectory) {
-                File folder = new File(this.PATH + "\\data");
-                File saveFile = new File(this.PATH + "\\data\\data.txt");
+                File folder = new File(this.path + "\\data");
+                File saveFile = new File(this.path + "\\data\\data.txt");
 
                 folder.mkdir();
                 saveFile.createNewFile();
             } else if (!hasSaveFile) {
-                File saveFile = new File(this.PATH + "\\data\\data.txt");
+                File saveFile = new File(this.path + "\\data\\data.txt");
                 saveFile.createNewFile();
             }
 
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(this.PATH
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(this.path
                     + "\\data\\data.txt"));
             String data = bufferedReader.readLine();
             String type;
@@ -84,7 +84,7 @@ public class Storage {
                 state = segregate[1];
                 body = segregate[2];
 
-                this.LIST.loadData(type, state, body);
+                this.list.loadData(type, state, body);
 
                 data = bufferedReader.readLine();
             }

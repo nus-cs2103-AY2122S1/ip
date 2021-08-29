@@ -8,10 +8,10 @@ import duke.task.DukeList;
 public class Duke {
 
     /** Duke's data storage. */
-    private final Storage STORAGE;
+    private final Storage storage;
 
     /** Duke's Ui. */
-    private final Ui UI;
+    private final Ui ui;
 
     /**
      * Constructs a Duke object.
@@ -19,17 +19,17 @@ public class Duke {
      * @param path PATH of where save file for saved data is placed.
      */
     public Duke(String path) {
-        DukeList LIST = new DukeList();
-        this.STORAGE = new Storage(path, LIST);
-        this.UI = new Ui(LIST, this.STORAGE);
+        DukeList list = new DukeList();
+        this.storage = new Storage(path, list);
+        this.ui = new Ui(list, this.storage);
     }
 
     /**
      * Runs Duke.
      */
     public void run() {
-        this.STORAGE.load();
-        this.UI.run();
+        this.storage.load();
+        this.ui.run();
     }
 
     /**
@@ -38,8 +38,8 @@ public class Duke {
      * @param args User input.
      */
     public static void main(String[] args) {
-        String PATH = System.getProperty("user.dir");
+        String path = System.getProperty("user.dir");
 
-        new Duke(PATH).run();
+        new Duke(path).run();
     }
 }
