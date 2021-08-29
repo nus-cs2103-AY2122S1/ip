@@ -1,5 +1,8 @@
 package duke.data;
 
+import duke.exceptions.DukeException;
+import duke.exceptions.InvalidTaskDataException;
+import duke.exceptions.TaskFileIOException;
 import duke.tasks.Task;
 
 import java.io.IOException;
@@ -11,7 +14,7 @@ import java.util.List;
  * @author kevin9foong
  */
 public interface TaskStorage {
-    void saveTasks(List<Task> taskList) throws IOException;
+    void saveTasks(List<Task> taskList) throws TaskFileIOException;
 
-    List<Task> loadTasks() throws IOException;
+    List<Task> loadTasks() throws TaskFileIOException, InvalidTaskDataException;
 }

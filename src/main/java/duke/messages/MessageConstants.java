@@ -37,6 +37,9 @@ public class MessageConstants {
     public static final String MESSAGE_INVALID_TASK_NUMBER =
             "☹ Task number provided is invalid. Please try another number.";
     public static final String MESSAGE_INVALID_INTEGER = "☹ Task number must be valid integer. eg. \"done 1\"";
+    public static final String MESSAGE_TASK_FILE_IO_FAILURE = "☹ OOPS!!! Unable to read/write from save file.";
+    public static final String MESSAGE_INVALID_TASK_DATA = "☹ OOPS!!! Saved task data is corrupted/invalid!\nTerminating Duke!";
+
 
     // hide constructor for utility class
     private MessageConstants() {

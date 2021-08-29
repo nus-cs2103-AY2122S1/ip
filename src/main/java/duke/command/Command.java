@@ -23,11 +23,10 @@ public abstract class Command {
      *
      * @param userOutputHandler handles outputting messages to the output destination.
      * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
-     * @throws IOException   thrown when failure reading/writing to the target storage occurs.
-     * @throws DukeException thrown when user input is invalid.
+     * @throws DukeException thrown when a failure occurs within the Duke chat bot.
      */
     public abstract void execute(UserOutputHandler userOutputHandler, TaskList taskList)
-            throws IOException, DukeException;
+            throws DukeException;
 
     /**
      * Checks if program should terminate after this command.

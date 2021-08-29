@@ -57,7 +57,7 @@ public class Deadline extends Task {
 
     @Override
     public String getTaskRepresentation() {
-        return TaskType.DEADLINE + "," + super.getTaskRepresentation() + this.by + ",";
+        return TaskType.DEADLINE + "|" + super.getTaskRepresentation() + this.by + "|";
     }
 
     /**

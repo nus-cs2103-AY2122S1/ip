@@ -24,9 +24,9 @@ public class FulfillmentHandler {
      * Constructs an instance of <code>FulfillmentHandler</code> which is in charge of
      * fulfilling user's commands by running the Duke chat bot.
      *
-     * @param userInputHandler handles input from the user.
+     * @param userInputHandler  handles input from the user.
      * @param userOutputHandler handles displaying output to the user.
-     * @param taskList list of tasks currently persisted.
+     * @param taskList          list of tasks currently persisted.
      */
     public FulfillmentHandler(UserInputHandler userInputHandler,
                               UserOutputHandler userOutputHandler, TaskList taskList) {
@@ -37,22 +37,22 @@ public class FulfillmentHandler {
 
     /**
      * Initializes the Duke chat bot.
-     *
-     * @throws IOException thrown when an error connecting
-     *                     to input/output stream occurs.
      */
-    public void runChatbot() throws IOException {
+    public void runChatBot() {
         handleGreeting();
         boolean isExit = false;
 
         while (!isExit) {
-            String userInput = consoleUserInputHandler.readInput();
             try {
+                String userInput = consoleUserInputHandler.readInput();
                 Command userCommand = Parser.parse(userInput);
                 userCommand.execute(consoleUserOutputHandler, taskList);
                 isExit = userCommand.isExit();
             } catch (DukeException e) {
                 consoleUserOutputHandler.writeMessage(new Message(e.getMessage()));
+            } catch (IOException ioe) {
+                consoleUserOutputHandler.writeMessage(new Message("OOPS!!! Unable to connect to " +
+                        "user input stream!"));
             }
         }
     }

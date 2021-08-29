@@ -1,5 +1,7 @@
 package duke.data;
 
+import duke.exceptions.InvalidTaskDataException;
+import duke.exceptions.TaskFileIOException;
 import duke.io.FileInputOutputHandler;
 import duke.tasks.Task;
 
@@ -22,14 +24,18 @@ public class TaskFileStorage implements TaskStorage {
      * Initializes a <code>TaskFileOutputHandler</code> which performs read and write
      * operations on file on specified file path.
      *
-     * @throws IOException thrown when failure to read or write occurs.
+     * @throws TaskFileIOException thrown when failure to read or write to Task save file occurs.
      */
-    public TaskFileStorage() throws IOException {
+    public TaskFileStorage() throws TaskFileIOException {
         String taskFilePath = "data/tasks.txt";
-        taskFileInputOutputHandler = new FileInputOutputHandler(taskFilePath);
+        try {
+            taskFileInputOutputHandler = new FileInputOutputHandler(taskFilePath);
+        } catch (IOException ioe) {
+            throw new TaskFileIOException();
+        }
     }
 
-    private static List<Task> convertRepresentationStringsToTaskList(List<String> taskRepresentations) {
+    private static List<Task> convertRepresentationStringsToTaskList(List<String> taskRepresentations) throws InvalidTaskDataException {
         List<Task> taskList = new ArrayList<>();
         for (String taskRep : taskRepresentations) {
             Task task = Task.getTaskFromRepresentation(taskRep);
@@ -53,19 +59,27 @@ public class TaskFileStorage implements TaskStorage {
      * Writes the string representation of each task in given task list into a text file.
      *
      * @param taskList list of tasks to be stored.
-     * @throws IOException thrown when failure to write to file occurs.
+     * @throws TaskFileIOException thrown when failure to write to specified save file occurs.
      */
-    public void saveTasks(List<Task> taskList) throws IOException {
-        taskFileInputOutputHandler.saveLinesToFile(convertTaskListToRepresentationStrings(taskList));
+    public void saveTasks(List<Task> taskList) throws TaskFileIOException {
+        try {
+            taskFileInputOutputHandler.saveLinesToFile(convertTaskListToRepresentationStrings(taskList));
+        } catch (IOException ioe) {
+            throw new TaskFileIOException();
+        }
     }
 
     /**
      * Reads the file containing string representations of tasks and returns the task list stored.
      *
      * @return list of tasks stored in text file.
-     * @throws IOException thrown when failure to read from file occurs.
+     * @throws TaskFileIOException thrown when failure to read from specified save file occurs.
      */
-    public List<Task> loadTasks() throws IOException {
-        return convertRepresentationStringsToTaskList(taskFileInputOutputHandler.readLinesFromFile());
+    public List<Task> loadTasks() throws TaskFileIOException, InvalidTaskDataException {
+        try {
+            return convertRepresentationStringsToTaskList(taskFileInputOutputHandler.readLinesFromFile());
+        } catch (IOException ioe) {
+            throw new TaskFileIOException();
+        }
     }
 }

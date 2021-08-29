@@ -1,10 +1,13 @@
 package duke.command;
 
 import duke.data.TaskStorageStub;
+import duke.exceptions.DukeException;
 import duke.exceptions.EmptyDeadlineBodyException;
 import duke.exceptions.InvalidDateTimeFormatException;
 import duke.exceptions.InvalidDeadlineBodyException;
+import duke.exceptions.InvalidTaskDataException;
 import duke.exceptions.InvalidTaskNumberException;
+import duke.exceptions.TaskFileIOException;
 import duke.io.UserOutputHandlerStub;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
@@ -17,8 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddDeadlineCommandTest {
     @Test
-    void executingCommandWorks_userInput_addsDeadlineToTaskList() throws IOException, InvalidDateTimeFormatException,
-            InvalidDeadlineBodyException, EmptyDeadlineBodyException, InvalidTaskNumberException {
+    void executingCommandWorks_userInput_addsDeadlineToTaskList() throws DukeException {
         AddDeadlineCommand addDeadlineCommand = new AddDeadlineCommand("x /by 2021-12-12");
         Deadline expectedDeadline = new Deadline("x", false, LocalDate.parse("2021-12-12"));
 

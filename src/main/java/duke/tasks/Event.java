@@ -48,7 +48,7 @@ public class Event extends Task {
 
     @Override
     public String getTaskRepresentation() {
-        return TaskType.EVENT + "," + super.getTaskRepresentation() + this.at + ",";
+        return TaskType.EVENT + "|" + super.getTaskRepresentation() + this.at + "|";
     }
 
     /**
