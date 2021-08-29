@@ -1,15 +1,16 @@
 package duke.command;
 
 import java.io.IOException;
+
 import duke.DukeException;
-import duke.task.Task;
 import duke.storage.TaskList;
+import duke.task.Task;
 
 /**
  * Represents a command to delete a task
  */
 public class DeleteCommand implements Command {
-    int index;
+    private int index;
 
     /**
      * Constructor for <code>DeleteCommand</code>

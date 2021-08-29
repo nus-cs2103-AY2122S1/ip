@@ -23,7 +23,7 @@ public class Duke {
        while (true) {
            commandString = ui.readCommand();
            try {
-               if(CommandParser.isExit(commandString)) {
+               if (CommandParser.isExit(commandString)) {
                    break;
                }
                String message = CommandParser.parse(commandString).run();

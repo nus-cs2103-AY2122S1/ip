@@ -1,15 +1,16 @@
 package duke.command;
 
 import java.io.IOException;
+
 import duke.DukeException;
-import duke.task.Task;
 import duke.storage.TaskList;
+import duke.task.Task;
 
 /**
  * Represents a command to add new task
  */
 public class AddCommand implements Command {
-    Task task;
+    private Task task;
 
     /**
      * Constructor of AddCommand

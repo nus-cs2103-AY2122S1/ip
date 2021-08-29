@@ -1,13 +1,14 @@
 package duke.command;
 
 import java.io.IOException;
+
 import duke.DukeException;
 import duke.storage.TaskList;
 
 /**
  * Command to mark a task as done
  */
-public class MarkDoneCommand implements Command{
+public class MarkDoneCommand implements Command {
     private int index;
 
     /**

@@ -18,9 +18,10 @@ import duke.task.TodoTask;
  * Responsible for reading and writing tasks to the memory
  */
 public class TaskStorage {
-    private File dataFile;
     static final String DATA_FILE_DIR = "./data";
     static final String DATA_FILE_PATH = "./data/tasks.txt";
+
+    private File dataFile;
 
     /**
      * Constructor of <code>TaskStorage</code>

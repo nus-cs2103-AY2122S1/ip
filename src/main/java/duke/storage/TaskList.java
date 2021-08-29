@@ -1,7 +1,7 @@
 package duke.storage;
 
-import java.util.ArrayList;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.DukeException;
 import duke.task.Task;
@@ -10,8 +10,9 @@ import duke.task.Task;
  * Represents a list of tasks
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
     private static TaskList instance = null;
+
+    private ArrayList<Task> tasks;
     private TaskStorage storage;
 
     private TaskList() throws DukeException {

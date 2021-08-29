@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.storage.TaskList;
 import duke.task.Task;
@@ -8,7 +9,7 @@ import duke.task.Task;
 /**
  * Command to list all tasks
  */
-public class ListCommand implements Command{
+public class ListCommand implements Command {
     /**
      * Runs the command
      *

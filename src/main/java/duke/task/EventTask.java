@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a task with the time it happens
  */
-public class EventTask extends Task{
-    LocalDateTime date;
+public class EventTask extends Task {
+    private LocalDateTime date;
 
     /**
      * Constructor for <code>EventTask</code>
