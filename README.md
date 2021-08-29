@@ -1,6 +1,12 @@
-# When 🕒 the 😍 Duke ඞ is 🧐 Sus 🧐 !!
+# There is 1️⃣ Imposter among us ඞ
+
+> When the Duke is Sus!!
 
 Duke Imposter is a management tool that tracks your tasks in an easily accessible and retrievable manner
+
+- [x] Electrical: Download Data
+- [x] Admin: Fix Wiring
+- [ ] Reactor Meltdown /by 31/12/2021
 
 ## Features
 
@@ -12,6 +18,8 @@ Duke Imposter is a management tool that tracks your tasks in an easily accessibl
 3. Find for a certain task by name or date (or both!)
 4. **Fun text-based UI!**
 
+*Best of all, it is FREE FOR USE! No subscription needed. **Donations are appreciated though** :) $50 or so wouldn't hurt*
+
 ## How to Use
 
 1. Download the latest release [here](https://github.com/koh-jx/ip/releases)
@@ -20,9 +28,19 @@ Duke Imposter is a management tool that tracks your tasks in an easily accessibl
    * Type help for the current list of commands
    * Type gubbai to terminate the program
 
+### For Java developers
 
-Best of all, it is FREE FOR USE! No subscription needed. Donations are appreciated though :) $50 or so wouldn't hurt now would it
+1. Download the source code.
+2. Navigate to root/src/main/java/duke/Duke.java
+3. Start the app via the main method
 
+```java
+// Duke.java
+public static void main(String[] args) {
+    Duke duke = new Duke();
+    duke.start();
+}
+```
                                                                   
    ```
                                                                     `:ossys/`            
