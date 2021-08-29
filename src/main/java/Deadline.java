@@ -13,7 +13,8 @@ public class Deadline extends Task {
     public Deadline(String deadlineName, boolean isDone) {
         super(deadlineName.substring(0, deadlineName.indexOf("(by:")), isDone);
         int start = deadlineName.indexOf("(by:") + 5;
-        this.dueDate = LocalDate.parse(deadlineName.substring(start, start + 9));
+        this.dueDate = LocalDate.parse(deadlineName.substring(start, start + 11),
+                DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override

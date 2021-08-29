@@ -13,7 +13,8 @@ public class Event extends Task {
     public Event(String eventName, boolean isDone) {
         super(eventName.substring(0, eventName.indexOf("(at:")), isDone);
         int start = eventName.indexOf("(at:") + 5;
-        this.eventDate = LocalDate.parse(eventName.substring(start, start + 9));
+        this.eventDate = LocalDate.parse(eventName.substring(start, start + 11),
+                DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     @Override

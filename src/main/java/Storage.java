@@ -7,17 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Save {
-    public static final String HOME = System.getProperty("user.home");
-    public static final String SAVE_LOCATION = String.valueOf(Paths.get(HOME, "Duke.txt"));
+public class Storage {
+    private static String saveLocation;
+    private static Ui ui = new Ui();
+
+    public Storage(String filePath) {
+        saveLocation = String.valueOf(Paths.get(System.getProperty("user.home"), filePath));
+    }
 
     public static void createFile() {
         try {
-            File file = new File(SAVE_LOCATION);
+            File file = new File(saveLocation);
             if (file.createNewFile()) {
-                System.out.println("New Duke file created: " + file.getName());
+                ui.showFileCreated(file.getName());
             } else {
-                System.out.println("YAY! Duke file already exists.");
+                ui.showFileExists();
             }
         } catch (IOException e) {
             System.out.println("OOPS! Error occurred while creating file.");
@@ -47,29 +51,32 @@ public class Save {
         return  newTask;
     }
 
-
-    public static List<Task> readFile() {
-        List<Task> taskList = new ArrayList<>();
-
+    public static List<Task> load() throws DukeException {
+        List<Task> tasks = new ArrayList<>();
         try {
-            File file = new File(SAVE_LOCATION);
-            Scanner reader = new Scanner(file);
-            while (reader.hasNextLine()) {
-                String data = reader.nextLine();
-                taskList.add(parseTask(data));
-            }
-            reader.close();
+            File file = new File(saveLocation);
 
-        } catch (FileNotFoundException e) {
-            System.out.println("OOPS! Error occurred while reading file.");
+            if (file.createNewFile()) {
+                ui.showFileCreated(file.getName());
+            } else {
+                ui.showFileExists();
+                Scanner reader = new Scanner(file);
+                while (reader.hasNextLine()) {
+                    String data = reader.nextLine();
+                    tasks.add(parseTask(data));
+                }
+                reader.close();
+            }
+        } catch (IOException e) {
+            throw new DukeException("OOPS! File not found.");
         }
 
-        return taskList;
+        return tasks;
     }
 
-    public static void saveFile(String input) {
+    public void saveFile(String input) {
         try {
-            FileWriter writer = new FileWriter(SAVE_LOCATION);
+            FileWriter writer = new FileWriter(saveLocation);
             writer.write(input);
             writer.close();
         } catch (IOException e) {
