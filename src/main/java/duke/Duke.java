@@ -114,7 +114,7 @@ public class Duke {
                             break;
                         case DATE:
                             LocalDate queryDate = LocalDate.parse(userInput.substring(5));
-                            TaskList dueTasks = taskList.filterDate(queryDate);
+                            TaskList dueTasks = taskList.filterByDate(queryDate);
 
                             ui.printTaskList(dueTasks, queryDate);
                             break;

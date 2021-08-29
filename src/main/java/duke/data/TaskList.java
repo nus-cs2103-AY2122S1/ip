@@ -78,21 +78,22 @@ public class TaskList {
     }
 
     /**
-     * Returns a new tasklist containing only the tasks that have a due date on the same date as the given date
+     * Returns a new tasklist containing only the tasks that have a due date on the
+     * same date as the given date
      *
      * @param queryDate The date that we want to retrieve tasks of
      * @return A new tasklist containing only tasks due on the given date
      */
-    public TaskList filterDate(LocalDate queryDate) {
-        return new TaskList(this.taskData.stream().filter(x -> x.isDue(queryDate))
-                .collect(Collectors.toList()));
+    public TaskList filterByDate(LocalDate queryDate) {
+        return new TaskList(this.taskData.stream().filter(x -> x.isDue(queryDate)).collect(Collectors.toList()));
     }
 
     /**
      * Does a deep comparison of this object to another object.
      *
      * @param otherObj The other object to be compared to
-     * @return Returns true iff the two objects are of same type and same value in every field
+     * @return Returns true iff the two objects are of same type and same value in
+     *         every field
      */
     @Override
     public boolean equals(Object otherObj) {
