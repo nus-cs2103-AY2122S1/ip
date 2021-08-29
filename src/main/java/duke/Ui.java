@@ -20,6 +20,8 @@ public class Ui {
 
     /**
      * Displays the welcome message when the app starts running.
+     *
+     * @return String representation of the welcome message.
      */
     public String showWelcome() {
         String logo = " ____        _        \n"
@@ -34,6 +36,8 @@ public class Ui {
      * Displays a nicely formatted error message with the given message.
      *
      * @param message Error message to be displayed.
+     *
+     * @return String representation of the error message.
      */
     public String showError(String message) {
         return printMessage(String.format(ERROR_FORMAT, message));
@@ -45,6 +49,8 @@ public class Ui {
      *
      * @param task       {@code Task} to be displayed.
      * @param taskLength Number of tasks.
+     *
+     * @return String representation of the task and the task count.
      */
     public String showNewTask(Task task, int taskLength) {
         return printMessageWithTaskCount(ADD_FORMAT, task, taskLength);
@@ -55,6 +61,8 @@ public class Ui {
      *
      * @param task       {@code Task} to be displayed.
      * @param taskLength Number of tasks.
+     *
+     * @return String representation of the task and the task count.
      */
     public String showDeletedTask(Task task, int taskLength) {
         return printMessageWithTaskCount(DELETE_FORMAT, task, taskLength);
@@ -64,6 +72,8 @@ public class Ui {
      * Displays a nicely formatted message of the done task.
      *
      * @param task {@code Task} to be displayed.
+     *
+     * @return String representation of the task.
      */
     public String showDoneTask(Task task) {
         return printMessage(String.format(DONE_FORMAT, task));
@@ -80,6 +90,8 @@ public class Ui {
      * Displays the given tasks in a nicely formatted manner.
      *
      * @param tasks An ArrayList of {@code Task} to be displayed.
+     *
+     * @return String representation of the tasks.
      */
     public String showTasks(ArrayList<Task> tasks) {
         ArrayList<String> message = new ArrayList<>();
@@ -97,6 +109,8 @@ public class Ui {
      * Displays the filtered tasks.
      *
      * @param tasks Tasks to be displayed.
+     *
+     * @return String representation of the tasks.
      */
     public String showFilteredTasks(ArrayList<Task> tasks) {
         ArrayList<String> message = new ArrayList<>();
