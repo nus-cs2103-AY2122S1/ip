@@ -10,6 +10,10 @@ public class listCommand extends Command {
        super(command); 
        this.command = command;
     }
+
+    public String toString() {
+        return "This is a list command";
+    }
     
     public void execute(TaskList taskList, Storage storage) {
         taskList.getList();

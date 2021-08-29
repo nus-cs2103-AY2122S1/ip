@@ -16,6 +16,10 @@ public class todoCommand extends Command {
         this.command = command;
     }
 
+    public String toString() {
+        return "This is a todo command";
+    }
+
     public void execute(TaskList taskList, Storage storage) {
         if (command.length() <= 5) {
             DukeException exp = new EmptyDescriptionException("OOPS!!! The description of a todo cannot be empty.");

@@ -19,6 +19,10 @@ public class eventCommand extends Command {
         super(command);
         this.command = command;
     }
+    
+    public String toString() {
+        return "This is an event command";
+    }
 
     public void execute(TaskList taskList, Storage storage) {
         if (command.length() <= 6) {

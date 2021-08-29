@@ -9,7 +9,7 @@ public class Parser {
         this.command = command;
     }
     
-    public Command parse(String command) {
+    public Command parse() {
         if (command.equals("list")) {
             return new listCommand(command);
         } else if (command.startsWith("done") && Character.isDigit(command.charAt(command.length() - 1))

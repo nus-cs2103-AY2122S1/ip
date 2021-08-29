@@ -13,6 +13,10 @@ public class doneCommand extends Command {
         this.command = command;
     }
 
+    public String toString() {
+        return "This is a done command";
+    }
+
     public void execute(TaskList taskList, Storage storage) {
         int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
         if (value > taskList.size()) {

@@ -25,7 +25,7 @@ public class Duke {
             if (parser.isExit()) {
                 break;
             }
-            Command c = parser.parse(command);
+            Command c = parser.parse();
             c.execute(taskList, storage);
             isExit = parser.isExit();
         }

@@ -20,6 +20,10 @@ public class deadlineCommand extends Command {
         this.command = command;
     }
 
+    public String toString() {
+        return "This is a deadline command";
+    }
+
     public void execute(TaskList taskList, Storage storage) {
         if (command.length() <= 9) {
             DukeException exp = new EmptyDescriptionException("OOPS!!! The description of a deadline cannot be empty.");

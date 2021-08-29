@@ -13,6 +13,10 @@ public class deleteCommand extends Command {
         this.command = command;
     }
 
+    public String toString() {
+        return "This is a delete command";
+    }
+
     public void execute(TaskList taskList, Storage storage) {
         int value = Integer.parseInt(command.replaceAll("[^0-9]", ""));
         Task task = taskList.getTask(value-1);
