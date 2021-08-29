@@ -7,6 +7,10 @@ public class Duke {
     private static Parser parser;
     private static Storage storage;
 
+    /**
+     * Creates Duke object
+     *
+     */
     public Duke(String fileName) {
         storage = new Storage(fileName);
         try {
@@ -40,6 +44,11 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Runs program
+     *
+     */
     public static void main(String[] args) {
         new Duke("duke.txt").run();
 
