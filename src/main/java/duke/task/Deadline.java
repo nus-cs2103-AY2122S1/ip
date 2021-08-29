@@ -12,6 +12,11 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private LocalDate date;
 
+    /**
+     * Creates Deadline object.
+     * @param name Name of Deadline object.
+     * @param date Date object should be completed by.
+     */
     public Deadline(String name, String date) {
         super(name);
         this.date = LocalDate.parse(date);

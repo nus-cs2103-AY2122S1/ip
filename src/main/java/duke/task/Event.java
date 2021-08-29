@@ -11,6 +11,11 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDate date;
 
+    /**
+     * Creates Event object.
+     * @param name Name of Event object.
+     * @param date Date Event is happening at.
+     */
     public Event(String name, String date) {
         super(name);
         this.date = LocalDate.parse(date);

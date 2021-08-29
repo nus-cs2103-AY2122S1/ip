@@ -9,6 +9,11 @@ public abstract class Task {
     private String name;
     private boolean isCompleted;
 
+    /**
+     * Creates new Task object.
+     *
+     * @param name Name of Task object.
+     */
     public Task(String name) {
         this.name = name;
         this.isCompleted = false;
@@ -29,8 +34,8 @@ public abstract class Task {
      */
     public String getStatusIcon() {
         return (this.isCompleted
-                ?"X"
-                :" ");
+                ? "X"
+                : " ");
     }
 
 

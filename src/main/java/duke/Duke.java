@@ -1,5 +1,9 @@
 package duke;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -7,21 +11,16 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 
-import java.io.IOException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 /**
  * Allows users to add 3 different types of tasks, mark them as done, and delete tasks.
  *
  * The commands for usage are as follows:
- * 1. "todo <name>" where name is what the user would like the todo to be called.
- * 2. "event <name> /at <YYYY-MM-DD>"
- * 3. "deadline <name> /by <YYYY-MM-DD>"
+ * 1. "todo name" where name is what the user would like the todo to be called.
+ * 2. "event name /at YYYY-MM-DD"
+ * 3. "deadline name /by YYYY-MM-DD"
  * 4. "list" to view current tasks added to the tasks list.
- * 5. "done <number>" to mark task as completed.
- * 6. "delete <number>"
+ * 5. "done taskNumber" to mark task as completed.
+ * 6. "delete taskNumber" to delete task.
  * 7. "bye" to leave the ChatBot.
  * Disclaimer: any other commands will not be recognised and user will be prompted to enter a valid command.
  *
@@ -35,6 +34,11 @@ public class Duke {
     private static TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke object.
+     *
+     * @param filePath Filepath to retrieve task history from.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -88,7 +92,7 @@ public class Duke {
      */
     public void addDeadline(String command, boolean printOutput) throws DukeException {
         String[] words = command.split(" ");
-        if (words.length <= 3 ) {
+        if (words.length <= 3) {
             throw new DukeException("invalidDeadline");
         } else if (!command.contains("/by")) {
             throw new DukeException("invalidDeadline");
@@ -98,7 +102,7 @@ public class Duke {
                 int position = command.indexOf("/by");
                 String name = command.substring(9, position);
                 String date = command.substring(position + 4);
-                Task task  = new Deadline(name, date);
+                Task task = new Deadline(name, date);
                 tasks.add(task);
                 if (printOutput) {
                     storage.appendToFile(fileAddress, "D - 0 - " + name + "- " + date);
@@ -120,7 +124,7 @@ public class Duke {
      */
     public void addEvent(String command, boolean printOutput) throws DukeException {
         String[] words = command.split(" ");
-        if (words.length <= 3 ) {
+        if (words.length <= 3) {
             throw new DukeException("invalidEvent");
         } else if (!command.contains("/at")) {
             throw new DukeException("invalidEvent");
@@ -130,7 +134,7 @@ public class Duke {
                 int position = command.indexOf("/at");
                 String name = command.substring(6, position);
                 String date = command.substring(position + 4);
-                Task task  = new Event(name, date);
+                Task task = new Event(name, date);
                 tasks.add(task);
                 if (printOutput) {
                     storage.appendToFile(fileAddress, "E - 0 - " + name + "- " + date);
@@ -152,7 +156,7 @@ public class Duke {
      */
     public void markCompleted(String command, boolean printOutput) throws DukeException {
         boolean numeric;
-        String restOfCommand ="";
+        String restOfCommand = "";
         try {
             restOfCommand = command.substring(5);
             int temp = Integer.parseInt(restOfCommand);
@@ -221,29 +225,29 @@ public class Duke {
             String parsed = Parser.process(command);
             try {
                 switch (parsed) {
-                    case ("list"):
-                        tasks.printList(command);
-                        break;
-                    case ("todo"):
-                        addToDo(command, true);
-                        break;
-                    case ("deadline"):
-                        addDeadline(command, true);
-                        break;
-                    case ("event"):
-                        addEvent(command, true);
-                        break;
-                    case ("done"):
-                        markCompleted(command, true);
-                        break;
-                    case ("delete"):
-                        deleteTask(command);
-                        break;
-                    case ("find"):
-                        findTasks(command);
-                        break;
-                    default:
-                        throw new DukeException("invalidCommand");
+                case ("list"):
+                    tasks.printList(command);
+                    break;
+                case ("todo"):
+                    addToDo(command, true);
+                    break;
+                case ("deadline"):
+                    addDeadline(command, true);
+                    break;
+                case ("event"):
+                    addEvent(command, true);
+                    break;
+                case ("done"):
+                    markCompleted(command, true);
+                    break;
+                case ("delete"):
+                    deleteTask(command);
+                    break;
+                case ("find"):
+                    findTasks(command);
+                    break;
+                default:
+                    throw new DukeException("invalidCommand");
                 }
             } catch (DukeException err) {
                 ui.printError(err);
@@ -256,7 +260,7 @@ public class Duke {
         Task[] result = new Task[tasks.size()];
         String[] words = command.split(" ");
         int count = 0;
-        if (words.length == 1 ) {
+        if (words.length == 1) {
             throw new DukeException("invalidFindTask");
         } else {
             String piece = command.substring(5);
