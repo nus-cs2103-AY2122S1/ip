@@ -1,24 +1,35 @@
-# duke.Duke project template
+#Welcome to ~~Duck~~ Duke, your very own task manager!
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+**Things you can do with Duke:**
+1. Add different kinds of tasks
+   * _Duke can keep track of tasks with specific deadlines._
+   * _Having an event? Duke will keep track of your event periods as well._
+   * _Just need a simple to-do list? Duke will do that too._
+2. Show that tasks are done
+   * _Once a task is done, mark it as so! Duke will keep track of the tasks you have completed._
+3. Delete tasks
+   * _Done with a task? Get rid of it. Typo? Just delete it and do it again._
+4. Find a specific task
+   * _Need to know what to get done today? Find tasks by date!_
+   * _You can also find tasks by keywords!_
 
-## Setting up in Intellij
+All you need to do is: 
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+- [ ] Head over to this application's [GitHub page](https://github.com/ntwbruce/ip)!
+- [ ] Download the JAR file of "Duke v0.1" under Releases
+- [ ] Run the JAR file, and you're good to go! :thumbsup:
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+If you're curious to play around and customise this app for yourself, 
+feel free to download the source code from the same [GitHub page](https://github.com/ntwbruce/ip)!
+
+You will find the main function in `src/main/java/duke/Duke`, as shown below.
+````java
+public class Duke {
+    // ...
+   public static void main(String[] args) {
+      new Duke("data", "duke.txt").run(System.in);
+   }
+}
+````
+
+> See Mumei-ter!
