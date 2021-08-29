@@ -1,17 +1,14 @@
+import exceptions.MorganException;
 import tasks.Task;
 import tasks.EventTask;
 import tasks.DeadlineTask;
 import tasks.ToDoTask;
-import exceptions.DukeException;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
- * This is a StorageParser class, which translates a task string
+ * This is a TaskParser class, which translates a task string
  * into a Task object and vise versa.
  */
-public class StorageParser {
+public class TaskParser {
     private final static int TASK_INDEX = 0; // Task type
     private final static int STATUS_INDEX = 1; // Task status
     private final static int DESCRIPTION_INDEX = 2; // Task description
@@ -48,12 +45,12 @@ public class StorageParser {
      * Translates a task in string format to a Task object.
      * @param string The string to be parsed.
      * @return The Task object based on the string.
-     * @throws DukeException
+     * @throws MorganException
      */
-    public Task decode(String string) throws DukeException {
+    public Task decode(String string) throws MorganException {
         String[] data = string.split(DELIMITER);
         if (data.length <= DESCRIPTION_INDEX) {
-            throw new DukeException("OOPS!!! Storage data has been tampered.");
+            throw new MorganException("OOPS!!! Storage data has been tampered.");
         }
         String taskType = data[TASK_INDEX].trim();
         boolean isDone = Boolean.parseBoolean(data[STATUS_INDEX].trim());
@@ -64,14 +61,14 @@ public class StorageParser {
         switch(taskType) {
         case (EventTask.KEYWORD):
             if (data.length <= DATETIME_INDEX) {
-                throw new DukeException("OOPS!!! Storage data has been tampered.");
+                throw new MorganException("OOPS!!! Storage data has been tampered.");
             }
             dateTimeString = data[DATETIME_INDEX].trim();
             task = new EventTask(description, dateTimeString);
             break;
         case (DeadlineTask.KEYWORD):
             if (data.length <= DATETIME_INDEX) {
-                throw new DukeException("OOPS!!! Storage data has been tampered.");
+                throw new MorganException("OOPS!!! Storage data has been tampered.");
             }
             dateTimeString = data[DATETIME_INDEX].trim();
             task = new DeadlineTask(description, dateTimeString);
