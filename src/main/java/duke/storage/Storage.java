@@ -78,10 +78,10 @@ public class Storage {
      * A method to update the file stored on the user's hard disk once
      * the user ends the usage of the bot.
      */
-    public void updateFile() {
+    public void updateFile(TaskList taskList) {
         String allLines = "";
 
-        for (Task t : TaskList.getTaskList()) {
+        for (Task t : taskList.getTaskList()) {
             String currLine = "";
 
             // Checking for the type of task
@@ -115,6 +115,7 @@ public class Storage {
             allLines += System.lineSeparator();
         }
         try {
+//        try (BBufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND)ufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND)) {
             tasksFile.createNewFile();
             FileWriter writer = new FileWriter(tasksFile, false);
             writer.write(allLines);

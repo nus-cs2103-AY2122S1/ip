@@ -32,8 +32,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Task task = TaskList.get(this.index);
+        Task task = taskList.get(this.index);
         taskList.deleteTask(this.index);
-        ui.deleteTask(task);
+        ui.deleteTask(task, taskList);
     }
 }
