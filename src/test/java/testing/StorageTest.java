@@ -1,4 +1,4 @@
-package test;
+package testing;
 
 import duke.Duke;
 import duke.MyList;
@@ -6,9 +6,9 @@ import duke.Storage;
 import duke.exception.WrongCommandFormatException;
 import duke.tasktype.Deadline;
 import duke.tasktype.Event;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
 
@@ -17,7 +17,7 @@ public class StorageTest {
         Duke duke = new Duke();
         Storage s = new Storage(new MyList(), "./Data.txt");
         try {
-            assertEquals(
+            Assertions.assertEquals(
                     s.getTaskFromString("[D][X]  run /by 2000-12-12 yyyy-MM-dd").toString(),
                     new Deadline("run /by 2000-12-12", true).toString()
             );
@@ -31,7 +31,7 @@ public class StorageTest {
         Duke duke = new Duke();
         Storage s = new Storage(new MyList(), "./Data.txt");
         try {
-            assertEquals(
+            Assertions.assertEquals(
                     s.getTaskFromString("[E][]  run /at lolololol").toString(),
                     new Event("run /at lolololol", false).toString()
             );
