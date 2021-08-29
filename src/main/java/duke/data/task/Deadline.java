@@ -50,6 +50,11 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + dateFormatter(by) + ")";
     }
 
+    /**
+     * Returns the string representation of the Deadline task to be saved in Storage.
+     *
+     * @return String representation of the task.
+     */
     public String toSave() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }

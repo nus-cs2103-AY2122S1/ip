@@ -45,6 +45,11 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + dateFormatter(at) + ")";
     }
 
+    /**
+     * Returns the string representation of the Event task to be saved in Storage.
+     *
+     * @return String representation of the task.
+     */
     public String toSave() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }

@@ -27,6 +27,11 @@ public class ToDo extends Task {
     }
 
 
+    /**
+     * Returns the string representation of the ToDo task to be saved in Storage.
+     *
+     * @return String representation of the task.
+     */
     public String toSave() {
         return toString();
     }
