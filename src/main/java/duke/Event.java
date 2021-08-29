@@ -13,49 +13,35 @@ public class Event extends Task {
     protected final String time;
 
     /**
-<<<<<<< HEAD
      * Returns a <code>Duke</code> object that can reply to
      * commands. Duke can save the tasks at the specified <code>filePath</code>.
      * @param description The description of the event task.
      * @param ld The <code>LocalDate</code> object to represent
      *           the date of the event.
      * @param time The time that the event is happening.
-=======
-     * Constructor for duke.Event object.
-     *
-     * @param description Description of duke.Event.
->>>>>>> branch-A-CodingStandard
      */
     public Event(String description, LocalDate ld, String time) {
-        super(description);
+        super(TaskType.EVENT, description);
         this.date = ld;
         this.time = time;
-        this.type = TaskType.EVENT;
     }
 
     /**
-<<<<<<< HEAD
      * Returns string representation of <code>Event</code> object.
-     * @return String representation of <code>Event</code> object.
-=======
-     * Returns string representation of duke.Event object.
      *
-     * @return String representation of duke.Event.
->>>>>>> branch-A-CodingStandard
+     * @return String representation of <code>Event</code> object.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy ")) + this.time + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy "))
+                + this.time + ")";
     }
 
     /**
      * Returns at property of duke.Event object.
-<<<<<<< HEAD
-     * @return The date and time of the event.
-=======
      *
-     * @return at of duke.Event.
->>>>>>> branch-A-CodingStandard
+     * @return The date and time of the event.
      */
     public String getAt() {
         return this.date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " + this.time;

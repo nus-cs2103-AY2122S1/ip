@@ -7,8 +7,7 @@ public class Todo extends Task {
      * @param description Description of duke.Todo.
      */
     public Todo(String description) {
-        super(description);
-        this.type = TaskType.TODO;
+        super(TaskType.TODO, description);
     }
 
     /**

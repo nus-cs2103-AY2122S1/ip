@@ -1,5 +1,5 @@
 package duke;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * Represents the DukeUI to interact with the user.
@@ -59,6 +59,10 @@ public class DukeUI {
         System.out.println("Now you have " + tasksLength + " tasks in the list.");
     }
 
+    /**
+     * Return the list of tasks.
+     * @param tasks The tasks.
+     */
     public void showTasksWithKeyword(ArrayList<Task> tasks) {
         System.out.println("Here are the matching tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {

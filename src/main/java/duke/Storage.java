@@ -48,6 +48,8 @@ public class Storage {
                 String[] dateAndTime = commands[3].split(" ");
                 tasks.addTask(commands[2], type, LocalDate.parse(dateAndTime[0]), dateAndTime[1]);
                 break;
+            default:
+                break;
             }
             if (commands[1].equals("[X]")) {
                 tasks.getTask(currentTask).markAsDone();
@@ -88,7 +90,7 @@ public class Storage {
             FileWriter fw = new FileWriter(this.filePath);
             for (int i = 1; i < tasks.getTasksLength() + 1; i++) {
                 Task task = tasks.getTask(i);
-                switch (task.type) {
+                switch (task.getType()) {
                 case DEADLINE:
                     Deadline dl = (Deadline) task;
                     fw.write("deadline," + task.getStatusIcon() + "," + task.getTaskDescription() + "," + dl.getBy());
@@ -99,6 +101,8 @@ public class Storage {
                 case EVENT:
                     Event e = (Event) task;
                     fw.write("event," + task.getStatusIcon() + "," + task.getTaskDescription() + "," + e.getAt());
+                    break;
+                default:
                     break;
                 }
                 fw.write(System.lineSeparator());
