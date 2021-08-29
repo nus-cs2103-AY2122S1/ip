@@ -24,9 +24,9 @@ public class ListCommand extends Command {
      * @param command A String containing information that can possibility be used to create an ListCommand object.
      * @throws duke.DukeException Will be thrown if information provided are insufficient/incorrect.
      */
-    public ListCommand(String command) throws DukeException {
+    public ListCommand(String... command) throws DukeException {
         if (isListOps(command)) {
-            this.localDate = LocalDate.parse(command.substring(5).trim());
+            this.localDate = LocalDate.parse(command[1]);
             isOps = true;
         } else {
             isOps = false;
@@ -40,13 +40,13 @@ public class ListCommand extends Command {
      * @param input User input of the commands.
      * @return If the input contains a valid listing operations.
      */
-    public static boolean isListOps(String input) throws DukeException {
-        int length = input.length();
-        if (length < 6) {
+    public static boolean isListOps(String... input) throws DukeException {
+        int length = input.length;
+        if (length < 2) {
             return false;
         }
         try {
-            LocalDate holder = LocalDate.parse(input.substring(5).trim());
+            LocalDate holder = LocalDate.parse(input[1]);
             return true;
         } catch (DateTimeParseException e) {
             throw new DukeException(" D: SORZ but I only understand date in yyyy-MM-dd format!");

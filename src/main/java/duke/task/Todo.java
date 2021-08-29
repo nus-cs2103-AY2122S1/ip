@@ -13,8 +13,8 @@ public class Todo extends Task {
      * @param content A String containing information that is possibly enough to create a Todo object.
      * @throws duke.DukeException Will be thrown if the information in content is insufficient/incorrect.
      */
-    public Todo(String content) {
-        super(content.substring(5).trim());
+    public Todo(String... content) {
+        super(content);
     }
 
     /**

@@ -20,12 +20,11 @@ public class FindCommand extends Command {
      * @param command A String containing information that can possibility be used to create an FindCommand object.
      * @throws duke.DukeException Will be thrown if information provided are insufficient/incorrect.
      */
-    public FindCommand(String command) throws DukeException {
-        String[] holder = command.trim().split(" ", 2);
-        if (holder.length == 1) {
+    public FindCommand(String... command) throws DukeException {
+        if (command.length == 1) {
             throw new duke.DukeException(" D: OOPS!!! The description of a search cannot be empty.");
         } else {
-            searchFilter = holder[1];
+            searchFilter = command[1];
         }
     }
 
