@@ -25,15 +25,17 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Extracts out a search keyword from user input, then finds and prints tasks that contain the search keyword.
+     * Extracts out a search keyword from user input, then finds tasks and
+     * returns String describing found tasks that contain the search keyword.
      * Search keyword is case-sensitive.
      *
      * @param tasks TaskList to perform search on.
      * @param ui Ui to get enums, response messages and exception messages from.
+     * @return String describing found tasks that contain the search keyword.
      * @throws DukeException If user input has missing spaces.
      * @throws DukeException If user input has no search keyword.
      */
-    private void printTaskMatchingSearch(TaskList tasks, Ui ui) throws DukeException {
+    private String getTaskMatchingSearch(TaskList tasks, Ui ui) throws DukeException {
         // Preliminary check for validity of user input.
         Parser.checkInputValidity(this.userInput, Commands.FIND.getCommand(), Ui.exceptionMissingSearchInput());
 
@@ -43,8 +45,8 @@ public class FindCommand extends Command {
         // Extract search keyword from 1 space after "find" command in user input.
         String keyword = this.userInput.substring(Commands.FIND.getLength() + 1);
 
-        // Print standard response for search begin to user.
-        ui.showFindBegin();
+        // String standard response for search begin.
+        String begin = ui.getFindBegin();
 
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -58,26 +60,28 @@ public class FindCommand extends Command {
             }
         }
 
-        // Print standard response for search success to user.
-        ui.showFindSuccess(counter, keyword);
+        // String standard response for search success.
+        String success = ui.getFindSuccess(counter, keyword);
 
+        return begin + "\n" + success;
     }
 
     /**
-     * Finds and prints tasks with descriptions that matches search keyword.
+     * Finds tasks and returns String describing found tasks with descriptions that matches search keyword.
      * Accepts user inputs of the form "find keyword" where keyword can be any search keyword.
      * Search keyword can also be just spaces or consisting of multiple words.
      *
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
+     * @return String describing found tasks with descriptions that matches search keyword.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storable storage) {
+    public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
-            printTaskMatchingSearch(tasks, ui);
+            return getTaskMatchingSearch(tasks, ui);
         } catch (DukeException dukeException) {
-            System.out.println(dukeException);
+            return dukeException.toString();
         }
     }
 

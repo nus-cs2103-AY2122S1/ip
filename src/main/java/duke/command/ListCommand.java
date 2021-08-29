@@ -21,35 +21,41 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Iterates through tasks and prints each task in a formatted string.
+     * Iterates through tasks and returns String describing each task in a formatted string.
      *
      * @param tasks TaskList from which tasks will be printed.
      * @param ui Ui to get enums, response messages and exception messages from.
+     * @return String describing each task in a formatted string.
      */
-    private void printTasks(TaskList tasks, Ui ui) {
-        ui.showListSuccess();
+    private String getTasks(TaskList tasks, Ui ui) {
+        String success = ui.getListSuccess();
+
+        StringBuilder output = new StringBuilder();
 
         for (int i = 0; i < tasks.size(); i++) {
             // Increment i by 1 so number matches display indexing which starts from 1.
             int idx = i + 1;
 
             // Format should be "?. taskDescription\n"
-            System.out.printf("%d.%s%n", idx, tasks.get(i).toString());
+            output.append(String.format("%d.%s%n", idx, tasks.get(i).toString()));
         }
+
+        return success + "\n" + output;
     }
 
     /**
-     * Prints all existing tasks.
+     * returns String describing all existing tasks.
      * Responds to user inputs of the format "list".
      *
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Not Used. Storage that command executes upon.
+     * @return String describing all existing tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storable storage) {
-        // Prints tasks in tasks.
-        this.printTasks(tasks, ui);
+    public String execute(TaskList tasks, Ui ui, Storable storage) {
+        // Returns tasks in tasks.
+        return this.getTasks(tasks, ui);
     }
 
     /**

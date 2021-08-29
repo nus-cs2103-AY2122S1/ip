@@ -9,10 +9,19 @@ import duke.command.Command;
  * Handles initialization of storage and tasks and running of Duke chatbot.
  */
 public class Duke {
+    /** Variables related to initializing Duke */
     private static final String SAVE_FILENAME = "dukeSave.txt";
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
+
+    /**
+     * Default constructor for Duke.
+     * Creates a Duke object with filename dukeSave.txt.
+     */
+    public Duke() {
+        this(SAVE_FILENAME);
+    }
 
     /**
      * Constructor for Duke.
@@ -47,22 +56,49 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         // Prints greeting to user.
-        this.ui.showWelcome();
+        System.out.println(this.ui.getWelcome());
 
         // Scans user inputs and prints corresponding outputs until a "Bye" input is received.
         String userInput = sc.nextLine();
+
         // Only exactly "bye" is read as exit command.
         while (!userInput.equals(Commands.BYE.getCommand())) {
             Command command = Parser.parse(userInput);
-            command.execute(this.tasks, this.ui, this.storage);
+            System.out.println(command.execute(this.tasks, this.ui, this.storage));
             userInput = sc.nextLine();
         }
 
         // Prints goodbye message to user.
-        this.ui.showGoodbye();
+        System.out.println(this.ui.getGoodbye());
 
         // Closes scanner object.
         sc.close();
+    }
+
+    /**
+     * Returns Duke's string output from executing input String.
+     *
+     * @param input User's input String.
+     * @return Duke's string output from executing input String.
+     */
+    public String getResponse(String input) {
+        // Check if input is "bye"
+        if (!input.equals(Commands.BYE.getCommand())) {
+            Command command = Parser.parse(input);
+            return command.execute(this.tasks, this.ui, this.storage);
+        }
+
+        // If input is "bye" return standard goodbye response.
+        return this.ui.getGoodbye();
+    }
+
+    /**
+     * Returns Ui object specific to this Duke.
+     *
+     * @return Ui object specific to this Duke.
+     */
+    public Ui getUi() {
+        return ui;
     }
 
     /**

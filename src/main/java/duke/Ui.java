@@ -64,100 +64,111 @@ public class Ui {
     }
 
     /**
-     * Prints the standard welcome response.
+     * Returns the standard welcome response.
+     *
+     * @return Standard welcome response.
      */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public String getWelcome() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
-     * Prints the standard goodbye response.
+     * Returns the standard goodbye response.
+     *
+     * @return Standard goodbye response.
      */
-    public void showGoodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String getGoodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints the standard response for mark success and the marked task.
+     * Returns the standard response for mark success and the marked task.
      *
      * @param task Task marked as done.
+     * @return Standard response for mark success and the marked task.
      */
-    public void showMarkSuccess(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task.toString());
+    public String getMarkSuccess(Task task) {
+        return "Nice! I've marked this task as done:" + "\n" + task.toString();
     }
 
     /**
-     * Prints the standard response for delete success, followed by the
+     * Returns the standard response for delete success, followed by the
      * deleted task and the new total count of tasks.
      *
      * @param task The deleted task.
      * @param size The new total count of tasks.
+     * @return Standard response for delete success, followed by the deleted task and the new total count of tasks.
      */
-    public void showDeleteSuccess(Task task, int size) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String getDeleteSuccess(Task task, int size) {
+        return "Noted. I've removed this task:" + "\n" + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /**
-     * Prints the standard response for add success, followed by the
+     * Returns the standard response for add success, followed by the
      * task added and the new total count of tasks.
      *
      * @param task The added task.
      * @param size The new total count of tasks.
+     * @return standard response for add success, followed by the task added and the new total count of tasks.
      */
-    public void showAddSuccess(Task task, int size) {
-        System.out.println("Got it. I have added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String getAddSuccess(Task task, int size) {
+        return "Got it. I have added this task:" + "\n" + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /**
-     * Prints the standard response for listing tasks.
+     * Returns the standard response for listing tasks.
+     *
+     * @return Standard response for listing tasks.
      */
-    public void showListSuccess() {
-        System.out.println("Here are the tasks in your list:");
+    public String getListSuccess() {
+        return "Here are the tasks in your list:";
     }
 
     /**
-     * Prints the standard response for finding tasks by date.
+     * Returns the standard response for finding tasks by date.
      *
      * @param formattedDateString Date being searched for.
+     * @return Standard response for finding tasks by date.
      */
-    public void showDateListSuccess(String formattedDateString) {
-        System.out.println("Here are the Deadlines or Events that fall on " + formattedDateString + ":");
+    public String getDateListSuccess(String formattedDateString) {
+        return "Here are the Deadlines or Events that fall on " + formattedDateString + ":";
     }
 
     /**
-     * Prints the standard response for success in finding tasks by date.
+     * Returns the standard response for success in finding tasks by date.
      *
      * @param formattedDateString Date being searched for.
      * @param counter Total count of tasks found to fall on date being searched for.
      * @param deadlines Total count of Deadlines found to fall on date being searched for.
      * @param events Total count of Events found to fall on date being searched for.
+     * @return Standard response for success in finding tasks by date.
      */
-    public void showDateListSummary(String formattedDateString, int counter, int deadlines, int events) {
-        System.out.println("A total of " + counter + " events (" + deadlines + " deadlines and "
-                + events + " events) fall on " + formattedDateString);
+    public String getDateListSummary(String formattedDateString, int counter, int deadlines, int events) {
+        return "A total of " + counter + " events (" + deadlines + " deadlines and "
+                + events + " events) fall on " + formattedDateString;
     }
 
     /**
-     * Prints the standard response for beginning search for tasks matching a keyword.
+     * Returns the standard response for beginning search for tasks matching a keyword.
+     *
+     * @return Standard response for beginning search for tasks matching a keyword.
      */
-    public void showFindBegin() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String getFindBegin() {
+        return "Here are the matching tasks in your list:";
     }
 
     /**
-     * Prints the standard response for success in finding tasks that match a search keyword.
+     * Returns the standard response for success in finding tasks that match a search keyword.
      *
      * @param counter Total count of tasks found to match the search keyword.
      * @param keyword Search keyword being searched for.
+     * @return Standard response for success in finding tasks that match a search keyword..
      */
-    public void showFindSuccess(int counter, String keyword) {
-        System.out.println("A total of " + counter
-                + " tasks in your list match your search keyword, " + keyword + ".");
+    public String getFindSuccess(int counter, String keyword) {
+        return "A total of " + counter
+                + " tasks in your list match your search keyword, " + keyword + ".";
     }
 
     /**

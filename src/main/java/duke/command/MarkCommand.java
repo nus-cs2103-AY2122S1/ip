@@ -25,17 +25,19 @@ public class MarkCommand extends Command {
     }
 
     /**
-     * Marks task at index specified by user input as done, then prints the marked task.
+     * Marks task at index specified by user input as done,
+     * then returns String describing the marked task.
      * Accepts user input of the form "done N", where N can be any valid index.
      * Index provided should be 1-based.
      *
      * @param tasks TaskList to mark a task in.
      * @param ui Ui to get enums, response messages and exception messages from.
+     * @return String describing the marked task.
      * @throws DukeException If user input is missing an index.
      * @throws DukeException If user input for index is not an integer.
      * @throws DukeException If user input for index is invalid.
      */
-    private void markTask(TaskList tasks, Ui ui) throws DukeException {
+    private String markTask(TaskList tasks, Ui ui) throws DukeException {
 
         // Preliminary check for any input following command.
         Parser.checkInputValidity(this.userInput, Commands.DONE.getCommand(),
@@ -55,30 +57,34 @@ public class MarkCommand extends Command {
         // Marks task at index as done.
         tasks.get(idx).markAsDone();
 
-        // Prints response to user after successfully marking task at index as done.
-        ui.showMarkSuccess(tasks.get(idx));
+        // Returns response to user after successfully marking task at index as done.
+        return ui.getMarkSuccess(tasks.get(idx));
 
     }
 
     /**
-     * Marks a task at index specified by user input as done, prints the marked task, then saves tasks to storage.
+     * Marks a task at index specified by user input as done, saves tasks to storage,
+     * then returns String describing the marked task.
      * Accepts user input of the form "done N", where N can be any valid index.
      * Index provided should be 1-based.
      *
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
+     * @return String describing the marked task.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storable storage) {
+    public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
             // Marks duke.task.Task at user specified index in duke.TaskList.
-            this.markTask(tasks, ui);
+            String output = this.markTask(tasks, ui);
 
             // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
+
+            return output;
         } catch (DukeException dukeException) {
-            System.out.println(dukeException);
+            return dukeException.toString();
         }
     }
 
