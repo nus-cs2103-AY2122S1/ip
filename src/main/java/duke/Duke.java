@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Application;
+
 /**
  * Main class of Duke
  *
@@ -13,7 +15,6 @@ public class Duke {
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
-        DukeChatbot dukeChatbot = new DukeChatbot();
-        dukeChatbot.run();
+        Application.launch(DukeChatbot.class, args);
     }
 }

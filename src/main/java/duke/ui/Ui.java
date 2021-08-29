@@ -3,14 +3,22 @@ package duke.ui;
 import java.util.List;
 import java.util.Map;
 
+import duke.DukeChatbot;
 import duke.task.Task;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 /**
  * Helper class to handle UI functionality.
  *
  * @author Jay Aljelo Saez Ting
  */
-public class Ui {
+public class Ui extends AnchorPane {
 
     /**
      * Builder class to help with creating messages to be printed in the UI.
@@ -89,17 +97,25 @@ public class Ui {
         }
     }
 
-    private static final String LOGO = " ____        _\n"
-            + "|  _ \\ _   _| | _____\n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|";
     private static final String GREETING_MESSAGE = "Hello! I'm Duke!\n"
             + "What can I do for you?";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private static final String UNEXPECTED_ERROR_MESSAGE = "An unexpected error has occurred.";
     private static final String INVALID_COMMAND_ERROR_TEMPLATE = "This command is invalid.\n%s\nPlease try again.";
 
+    @FXML
+    private ScrollPane scrollPane;
+    @FXML
+    private VBox dialogContainer;
+    @FXML
+    private TextField userInput;
+    @FXML
+    private Button sendButton;
+
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private DukeChatbot dukeChatbot;
     private MessageFormatter messageFormatter;
 
     /**
@@ -113,7 +129,7 @@ public class Ui {
      * Displays the greeting.
      */
     public void printGreeting() {
-        printFormattedMessage(LOGO + "\n" + GREETING_MESSAGE);
+        printFormattedMessage(GREETING_MESSAGE);
     }
 
     /**
@@ -148,6 +164,28 @@ public class Ui {
         return new MessageBuilder();
     }
 
+    public void setDukeChatbot(DukeChatbot dukeChatbot) {
+        this.dukeChatbot = dukeChatbot;
+    }
+
+    @FXML
+    public void initialize() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    /**
+     * Processes the user's input.
+     * Creates one dialog box echoing user input and then appends them to the dialog container.
+     * Adapted from https://se-education.org/guides/tutorials/javaFxPart4.html written by Jeffry Lum.
+     */
+    @FXML
+    private void handleUserInput() {
+        String input = userInput.getText();
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        userInput.clear();
+        dukeChatbot.readInput(input);
+    }
+
     private String getListLengthMessage(int listLength) {
         // Check whether singular or plural should be printed.
         if (listLength != 1) {
@@ -158,7 +196,7 @@ public class Ui {
     }
 
     private void printFormattedMessage(String message) {
-        System.out.println(messageFormatter.getFormattedMessage(message));
-        System.out.println();
+        String formattedMessage = messageFormatter.getFormattedMessage(message);
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(formattedMessage, dukeImage));
     }
 }

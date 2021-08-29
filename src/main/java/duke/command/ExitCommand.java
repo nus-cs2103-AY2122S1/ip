@@ -10,7 +10,7 @@ import duke.ui.Ui;
  */
 public class ExitCommand extends Command {
 
-    private static final boolean MUST_EXIT = false;
+    private static final boolean MUST_EXIT = true;
     private static final CommandType COMMAND_TYPE = CommandType.EXIT;
 
     /**
