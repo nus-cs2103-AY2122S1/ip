@@ -1,4 +1,4 @@
-import duke.*;
+package duke;
 
 /**
  * Encapsulates the entire application.
