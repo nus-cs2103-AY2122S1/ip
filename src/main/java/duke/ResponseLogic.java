@@ -79,7 +79,7 @@ public class ResponseLogic {
      * @param filePath The filepath of the data file.
      */
     public String loadingErrorResponse(String filePath) {
-        return String.format("Lollipop: %s is not found.%n", filePath);
+        return String.format("Lollipop: %s is not found.%nThe file has been automatically created.", filePath);
     }
 
     /**
