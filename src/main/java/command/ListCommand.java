@@ -12,9 +12,9 @@ public class ListCommand extends Command {
         private final boolean EXIT = false;
 
         public void execute(TaskList tasks, Ui ui, Storage storage) {
-            ArrayList<Task> tasklist = tasks.getTaskList();
-            for (int i = 0; i < tasklist.size(); i++) {
-                System.out.printf("\t%d.%s%n", (i + 1), tasklist.get(i));
+            ArrayList<Task> taskList = tasks.getTaskList();
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.printf("\t%d.%s%n", (i + 1), taskList.get(i));
             }
         }
 
