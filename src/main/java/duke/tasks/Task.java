@@ -23,8 +23,18 @@ public class Task {
     }
 
     /**
-     * Method that sets the respective task to be done
+     * Method to get task description
      *
+     * @return Task description string
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Method that returns whether the task has been done or not
+     *
+     * @return String "X" if task is done and " " if it is not done
      */
     public void setDone() {
         isDone = true;
