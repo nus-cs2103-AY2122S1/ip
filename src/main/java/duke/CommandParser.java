@@ -4,12 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.MarkDoneCommand;
+import duke.command.*;
 import duke.storage.TaskList;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -66,6 +61,8 @@ public class CommandParser {
             return parseDeleteCommand(commandString);
         } else if (commandString.startsWith(FIND_PREFIX)) {
             return parseFindCommand(commandString);
+        } else if (commandString.startsWith(EXIT_PREFIX)) {
+            return new ExitCommand();
         } else {
             throw new DukeException("Sorry, I don't understand that command...");
         }
@@ -76,12 +73,12 @@ public class CommandParser {
     }
 
     private static Command parseMarkDoneCommand(String commandString) throws DukeException {
-        String[] tokens = commandString.split(" ");
-        if (tokens.length <= 1) {
+        String payload = commandString.substring(TODO_PREFIX.length()).trim();
+        if (payload.length() <= 0) {
             throw new DukeException("Please indicate a task number to mark as done!");
         } else {
             try {
-                int taskIndex = Integer.parseInt(tokens[1]) - 1;
+                int taskIndex = Integer.parseInt(payload) - 1;
                 return new MarkDoneCommand(taskIndex);
             } catch (NumberFormatException e) {
                 throw new DukeException("Please indicate a valid task number to mark as done!");
@@ -142,7 +139,7 @@ public class CommandParser {
     }
 
     private static Command parseDeleteCommand(String commandString) throws DukeException {
-        String payload = commandString.substring(DEADLINE_PREFIX.length()).trim();
+        String payload = commandString.substring(DELETE_PREFIX.length()).trim();
         if (payload.length() <= 0) {
             throw new DukeException("Please indicate a task number to delete!");
         } else {

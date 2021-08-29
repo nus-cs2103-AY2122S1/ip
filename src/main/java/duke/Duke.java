@@ -1,10 +1,25 @@
 package duke;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+
 /**
  * Represents the chat bot
  */
 public class Duke {
     private Ui ui;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+//    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
+//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/bot.jpg"));
 
     /**
      * Constructor for <code>Duke</code>
@@ -18,21 +33,31 @@ public class Duke {
      */
     public void run() {
        ui.greet();
+       boolean isExit = false;
 
        String commandString;
-       while (true) {
+       while (!isExit) {
            commandString = ui.readCommand();
-           try {
-               if (CommandParser.isExit(commandString)) {
-                   break;
-               }
-               String message = CommandParser.parse(commandString).run();
-               ui.print(message);
-           } catch (DukeException e) {
-               ui.printError(e.getMessage());
+           if (commandString.length() <= 0) continue;
+           String response = getResponse(commandString);
+           ui.print(response);
+           if (CommandParser.isExit(commandString)) {
+               break;
            }
        }
-       ui.bye();
+    }
+
+    public String getResponse(String input) {
+        try {
+            String message = CommandParser.parse(input).run();
+            return message;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String greet() {
+        return "Yo, I'm Xiri.\nHow can I help you?";
     }
 
     /**
@@ -41,7 +66,6 @@ public class Duke {
      * @param args the command line arguments (ignored)
      */
     public static void main(String[] args) {
-       Duke xiri = new Duke();
-       xiri.run();
+       new Duke().run();
     }
 }

@@ -33,14 +33,19 @@ public class AddCommand implements Command {
             TaskList.getInstance().add(this.task);
             String resultString =
                     "Got it. I have added this task:\n" +
-                    "\t\t" + task.toString() + "\n" +
+                    task.toString() + "\n" +
                     String.format(
-                            "\t  Now you have %d task%s in your list.",
+                            "Now you have %d task%s in your list.",
                             TaskList.getInstance().getSize(),
                             TaskList.getInstance().getSize() > 1 ? "s" : "");
             return resultString;
         } catch (IOException e) {
             throw new DukeException("Error adding new task!");
         }
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

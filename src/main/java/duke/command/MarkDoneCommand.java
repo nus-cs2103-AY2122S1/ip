@@ -35,7 +35,12 @@ public class MarkDoneCommand implements Command {
         }
         String resultString =
                 "Nice, I have marked this task as done:\n" +
-                "\t\t" + TaskList.getInstance().get(index).toString();
+                TaskList.getInstance().get(index).toString();
         return resultString;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }

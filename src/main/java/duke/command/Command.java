@@ -13,4 +13,6 @@ public interface Command {
      * @throws DukeException if cannot access memory
      */
     String run() throws DukeException;
+
+    boolean isExit();
 }

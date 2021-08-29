@@ -44,4 +44,9 @@ public abstract class Task {
     public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s", this.isDone ? "X" : " ", this.content);
+    }
 }

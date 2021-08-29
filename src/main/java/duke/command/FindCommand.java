@@ -35,8 +35,13 @@ public class FindCommand implements Command {
         }
         String message = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < foundTasks.size(); i++) {
-            message += String.format("\t\t%d. %s\n", i + 1, foundTasks.get(i).toString());
+            message += String.format("%d. %s\n", i + 1, foundTasks.get(i).toString());
         }
         return message;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
     }
 }
