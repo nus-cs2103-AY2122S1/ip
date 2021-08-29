@@ -1,10 +1,10 @@
 package duke;
 
 
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.Scanner;
 
 public class Ui {
 
@@ -26,8 +26,7 @@ public class Ui {
 
     public void add(Task task, TaskList tasks) {
         System.out.println("Understood Sir/Mdm, I have added the indicated task: " + "\n   " + task);
-        System.out.println("Now you have " + tasks.size() + (tasks.size() == 1 ? " task." : " tasks.")
-                + "\n");
+        System.out.println("Now you have " + tasks.size() + (tasks.size() == 1 ? " task." : " tasks.") + "\n");
     }
 
     public void showList(TaskList tasks) {
@@ -38,13 +37,13 @@ public class Ui {
 
     public void markDone(Task task) {
         System.out.println("Good job Sir/Mdm! I shall mark this task as complete:\n   "
-                + task + "\n");
+            + task + "\n");
     }
 
     public void delete(Task task, TaskList tasks) {
-        System.out.println("Much obliged Sir/Mdm! I shall delete this task:\n   " +
-                task + "\n" + "Now you have " + tasks.size() +
-                (tasks.size() == 1 ? " task." : " tasks.") + "\n");
+        System.out.println("Much obliged Sir/Mdm! I shall delete this task:\n   "
+            + task + "\n" + "Now you have " + tasks.size()
+            + (tasks.size() == 1 ? " task." : " tasks.") + "\n");
 
     }
 
@@ -58,14 +57,14 @@ public class Ui {
 
     public void findByDate(TaskList foundTasks) {
         String message = "Here are the deadlines and events that match the date Sir/Mdm:\n"
-                + list(foundTasks);
+            + list(foundTasks);
         System.out.println(message);
         System.out.println();
     }
 
     public void findByDescription(TaskList foundTasks) {
         String message = "Here are the results of the search Sir/Mdm:\n"
-                + list(foundTasks);
+            + list(foundTasks);
         System.out.println(message);
         System.out.println();
     }

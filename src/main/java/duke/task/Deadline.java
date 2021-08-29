@@ -1,31 +1,24 @@
 package duke.task;
 
 
+import java.time.LocalDateTime;
+
 import duke.DukeException;
 import duke.Parser;
 
-import java.time.LocalDateTime;
-
 public class Deadline extends Task {
+
+    private static String errorMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n"
+        + "or as date and time: DATE TIME\n"
+        + "Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY\n"
+        + "Accepted formats for TIME (24H format): TT:TT, TTTT\n"
+        + "Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,\n"
+        + "2019-02-13 18:00\n"
+        + "Examples for DATE: 13/2/2019, 2019-02-13";
     protected LocalDateTime date;
     protected String taskType = "[D]";
     protected boolean isDateOnly = false;
 
-    public boolean getIsDateOnly() {
-        return isDateOnly ? true : false;
-    }
-
-    public LocalDateTime getDate() {
-        return LocalDateTime.parse(date.toString());
-    }
-
-    private static String errorMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n"
-            + "or as date and time: DATE TIME\n"
-            + "Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY\n"
-            + "Accepted formats for TIME (24H format): TT:TT, TTTT\n"
-            + "Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,\n"
-            + "2019-02-13 18:00\n"
-            + "Examples for DATE: 13/2/2019, 2019-02-13";
 
     public Deadline(String description, LocalDateTime date) {
         super(description);
@@ -65,6 +58,15 @@ public class Deadline extends Task {
         return new Deadline(description, dateTime, isDateOnly);
     }
 
+    public boolean getIsDateOnly() {
+        return isDateOnly ? true : false;
+    }
+
+    public LocalDateTime getDate() {
+        return LocalDateTime.parse(date.toString());
+    }
+
+
     @Override
     public String toString() {
         return taskType + super.toString() + " (by: " + Parser.dateTimeToString(this.date, isDateOnly) + ")";
@@ -78,7 +80,7 @@ public class Deadline extends Task {
             Deadline deadline = (Deadline) o;
 
             return description.equals(deadline.description) && isDateOnly == deadline.isDateOnly
-                    && isDone == deadline.isDone && date.equals(deadline.date);
+                && isDone == deadline.isDone && date.equals(deadline.date);
         }
         return false;
     }

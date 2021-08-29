@@ -3,11 +3,11 @@ package duke.command;
 import duke.Ui;
 import duke.task.TaskList;
 
-public class FindByDescriptionCommand extends Command{
+public class FindByDescriptionCommand extends Command {
 
-    String searchPhrase;
-    TaskList tasks;
-    Ui ui;
+    private String searchPhrase;
+    private TaskList tasks;
+    private Ui ui;
 
     public FindByDescriptionCommand(String searchPhrase, TaskList tasks, Ui ui) {
         this.searchPhrase = searchPhrase;

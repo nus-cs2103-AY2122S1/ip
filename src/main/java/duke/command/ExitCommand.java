@@ -3,16 +3,16 @@ package duke.command;
 
 import duke.Ui;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
-    public Ui ui;
+    private Ui ui;
 
     public ExitCommand(Ui ui) {
         this.ui = ui;
     }
 
     @Override
-    public void execute(){
+    public void execute() {
         ui.end();
     }
 

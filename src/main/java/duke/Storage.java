@@ -1,12 +1,6 @@
 package duke;
 
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +8,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 
 /**
@@ -113,12 +113,12 @@ public class Storage {
             if (currentTask instanceof Event) {
                 Event event = (Event) currentTask;
                 text += String.format("| E | %s | %s | %s | %s | %s\n", event.getIsDone() ? "X" : " ",
-                        event.getIsDateOnly() ? "X" : " ", event.getStartDateTime(), event.getEndDateTime(),
-                        event.getDescription());
+                    event.getIsDateOnly() ? "X" : " ", event.getStartDateTime(), event.getEndDateTime(),
+                    event.getDescription());
             } else if (currentTask instanceof Deadline) {
                 Deadline deadline = (Deadline) currentTask;
                 text += String.format("| D | %s | %s | %s | %s\n", deadline.getIsDone() ? "X" : " ",
-                        deadline.getIsDateOnly() ? "X" : " ", deadline.getDate(), deadline.getDescription());
+                    deadline.getIsDateOnly() ? "X" : " ", deadline.getDate(), deadline.getDescription());
             } else {
                 Todo todo = (Todo) currentTask;
                 text += String.format("| T | %s | %s\n", todo.getIsDone() ? "X" : " ", todo.getDescription());

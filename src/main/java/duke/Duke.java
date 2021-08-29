@@ -20,6 +20,7 @@ public class Duke {
 
     /**
      * Initialises a new Duke object by taking in a filePath for storage.
+     *
      * @param filePath This will be the location where user tasks are in the hard disk.
      */
     public Duke(String filePath) {
@@ -52,6 +53,7 @@ public class Duke {
 
     /**
      * This is the main method which makes use of the run method.
+     *
      * @param args
      */
     public static void main(String[] args) {
