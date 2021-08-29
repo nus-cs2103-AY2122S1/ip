@@ -2,9 +2,6 @@ package bot;
 
 import bot.utility.Duke;
 
-/**
- * The entry point into the Duke program.
- */
 import java.io.IOException;
 
 import bot.utility.MainWindow;
@@ -19,7 +16,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private final Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
