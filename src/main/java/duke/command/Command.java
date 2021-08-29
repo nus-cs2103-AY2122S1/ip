@@ -10,6 +10,13 @@ import duke.task.Task;
  * Class which represents a command to be run by Duke.
  */
 public abstract class Command {
+    /**
+     * Makes a command based on input.
+     * @param type command type.
+     * @param task the task to be executed.
+     * @return the command that is made.
+     * @throws DukeException if input is invalid.
+     */
     public static Command makeCommand(CommandsTypes type, Task task) throws DukeException {
         switch (type) {
         case Add: {
@@ -20,6 +27,13 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Makes a command based on input.
+     * @param type command type.
+     * @param index index of command to be executed.
+     * @return the command that is made.
+     * @throws DukeException if input is invalid.
+     */
     public static Command makeCommand(CommandsTypes type, int index) throws DukeException {
         switch (type) {
         case Delete: {
@@ -39,6 +53,12 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Makes a command based on input.
+     * @param type command type.
+     * @return the command that is made.
+     * @throws DukeException if input is invalid.
+     */
     public static Command makeCommand(CommandsTypes type) throws DukeException {
         switch (type) {
         case Exit: {
@@ -52,6 +72,13 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Makes a command based on input.
+     * @param type command type.
+     * @param keyword keyword to be executed on.
+     * @return the command that is made.
+     * @throws DukeException if input is invalid.
+     */
     public static Command makeCommand(CommandsTypes type, String keyword) throws DukeException {
         switch (type) {
         case Find:

@@ -1,14 +1,16 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.task.Task;
 
-import java.util.Scanner;
+
 
 /**
  * Class to handle the user interface of Duke.
  */
 public class Ui {
-    final private static String strBreak = "    ____________________________________________________________\n";
+    private static final String strBreak = "    ____________________________________________________________\n";
 
     /**
      * Prints out sentence welcoming user when Duke starts.
@@ -74,7 +76,7 @@ public class Ui {
     }
 
     /**
-     * To read the command that was input by user.
+     * Reads the command that was input by user.
      *
      * @return the command input that was input by user.
      */
@@ -83,8 +85,13 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void printRelatedTasks(Tasklist task, String keyword) {
+    /**
+     * Prints tasks that are related to keyword.
+     * @param tasks tasks that are related to keyword.
+     * @param keyword keyword that user is searching for.
+     */
+    public void printRelatedTasks(Tasklist tasks, String keyword) {
         System.out.println("Your match tasks with " + keyword + ":");
-        this.printList(task);
+        this.printList(tasks);
     }
 }

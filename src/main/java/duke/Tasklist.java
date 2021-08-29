@@ -1,9 +1,10 @@
 package duke;
 
-import duke.DukeException;
+import java.util.ArrayList;
+
 import duke.task.Task;
 
-import java.util.ArrayList;
+
 
 /**
  * Class to store the current tasks.
