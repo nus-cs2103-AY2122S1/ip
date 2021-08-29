@@ -1,5 +1,7 @@
 package duke.fulfillment;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exceptions.DukeException;
 import duke.io.UserInputHandler;
@@ -8,48 +10,81 @@ import duke.messages.GreetingMessage;
 import duke.messages.Message;
 import duke.tasks.TaskList;
 
-import java.io.IOException;
-
 /**
  * This class handles user input and handles user's commands.
  *
  * @author kevin9foong
  */
 public class FulfillmentHandler {
-    private final UserInputHandler consoleUserInputHandler;
-    private final UserOutputHandler consoleUserOutputHandler;
+    private final UserInputHandler userInputHandler;
+    private final UserOutputHandler userOutputHandler;
     private final TaskList taskList;
 
-    public FulfillmentHandler(UserInputHandler consoleUserInputHandler,
-                              UserOutputHandler consoleUserOutputHandler, TaskList taskList) {
-        this.consoleUserInputHandler = consoleUserInputHandler;
-        this.consoleUserOutputHandler = consoleUserOutputHandler;
+    /**
+     * Constructs an instance of <code>FulfillmentHandler</code> which is in charge of
+     * fulfilling user's commands by running the Duke chat bot.
+     *
+     * @param userInputHandler  handles input from the user.
+     * @param userOutputHandler handles displaying output to the user.
+     * @param taskList          list of tasks currently persisted.
+     */
+    public FulfillmentHandler(UserInputHandler userInputHandler,
+                              UserOutputHandler userOutputHandler, TaskList taskList) {
+        this.userInputHandler = userInputHandler;
+        this.userOutputHandler = userOutputHandler;
         this.taskList = taskList;
     }
 
     /**
-     * Initializes the Chatbot.
-     *
-     * @throws IOException thrown when an error connecting
-     *                     to input/output stream occurs.
+     * Initializes the CLI version of the Duke chat bot.
      */
-    public void runChatbot() throws IOException {
+    public void runCliChatBot() {
         handleGreeting();
         boolean isExit = false;
 
         while (!isExit) {
-            String userInput = consoleUserInputHandler.readInput();
             try {
+                String userInput = userInputHandler.readInput();
                 Command userCommand = Parser.parse(userInput);
-                userCommand.execute(consoleUserOutputHandler, taskList);
+                userCommand.execute(userOutputHandler, taskList);
                 isExit = userCommand.isExit();
             } catch (DukeException e) {
-                consoleUserOutputHandler.writeMessage(new Message(e.getMessage()));
+                userOutputHandler.writeMessage(new Message(e.getMessage()));
+            } catch (IOException ioe) {
+                userOutputHandler.writeMessage(new Message("OOPS!!! Unable to connect to "
+                        + "user input stream!"));
             }
         }
     }
 
+    /**
+     * Displays setup actions for GUI version of the chat bot which currently
+     * only includes displaying a greeting message.
+     */
+    public void runGuiChatBotSetup() {
+        handleGreeting();
+    }
+
+    /**
+     * Reads the text input by user into the GUI text field then executes command
+     * and displays response message to fulfill user's command.
+     */
+    public void handleGuiUserCommandInput() {
+        try {
+            // for ByeCommand, simply tell user bye - user ends session by
+            // exiting the GUI window.
+            String userCommandInput = userInputHandler.readInput();
+            Command userCommand = Parser.parse(userCommandInput);
+            userCommand.execute(userOutputHandler, taskList);
+        } catch (DukeException e) {
+            userOutputHandler.writeMessage(new Message(e.getMessage()));
+        } catch (IOException ioe) {
+            userOutputHandler.writeMessage(new Message("OOPS!!! Unable to connect to "
+                    + "user input stream!"));
+        }
+    }
+
     private void handleGreeting() {
-        consoleUserOutputHandler.writeMessage(new GreetingMessage());
+        userOutputHandler.writeMessage(new GreetingMessage());
     }
 }

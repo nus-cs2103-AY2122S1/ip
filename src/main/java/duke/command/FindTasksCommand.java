@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.exceptions.EmptyFindBodyException;
 import duke.io.UserOutputHandler;
 import duke.messages.TaskFindListMessage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Represents user command to find all tasks with contains specified text filter String
@@ -16,6 +16,14 @@ import java.util.stream.Collectors;
  * @author kevin9foong
  */
 public class FindTasksCommand extends Command {
+
+    /**
+     * Constructs instance of <code>FindTasksCommand</code> which searches within the list of
+     * persisted tasks for tasks which contain the specified user input search query string within
+     * its description.
+     *
+     * @param userInputBody <code>String</code> which includes the desired task description search query.
+     */
     public FindTasksCommand(String userInputBody) {
         super(userInputBody);
     }

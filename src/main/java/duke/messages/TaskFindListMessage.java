@@ -1,13 +1,26 @@
 package duke.messages;
 
-import duke.tasks.Task;
-
 import java.util.List;
 
+import duke.tasks.Task;
+
+/**
+ * Class is responsible for forming message which displays tasks which descriptions contains
+ * the search query <code>String</code>.
+ *
+ * @author kevin9foong
+ */
 public class TaskFindListMessage extends Message {
+
+    /**
+     * Constructs an instance of <code>TaskFindListMessage</code> which generates a message
+     * as response of a find command and detailing all tasks provided as argument.
+     *
+     * @param tasks tasks to include in output message.
+     */
     public TaskFindListMessage(List<Task> tasks) {
         super.setMessageText(MessageConstants.MESSAGE_FIND_TASK_LIST
-            + generateListMessageText(tasks));
+                + generateListMessageText(tasks));
     }
 
     private String generateListMessageText(List<Task> tasks) {

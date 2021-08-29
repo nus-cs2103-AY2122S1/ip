@@ -3,12 +3,20 @@ package duke.command;
 import duke.io.UserOutputHandler;
 import duke.messages.ByeMessage;
 import duke.tasks.TaskList;
+
 /**
- * Represents user command to add a <code>ToDo</code> to persisted Tasks.
+ * Represents user command to terminate current running instance of Duke.
  *
  * @author kevin9foong
  */
 public class ByeCommand extends Command {
+
+    /**
+     * Constructs instance of <code>ByeCommand</code> which when executed says bye to user and
+     * terminates current running Duke instance.
+     *
+     * @param userInputBody not being utilised.
+     */
     public ByeCommand(String userInputBody) {
         super(userInputBody);
     }

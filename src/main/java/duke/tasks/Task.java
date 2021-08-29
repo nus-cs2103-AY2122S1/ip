@@ -1,6 +1,9 @@
 package duke.tasks;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import duke.exceptions.InvalidTaskDataException;
 
 /**
  * This class encapsulates a user-added task
@@ -17,20 +20,25 @@ public abstract class Task {
      *
      * @param taskRepresentation comma separated String representation of a task.
      * @return Task with data extracted from the given String representation of the Task.
+     * @throws InvalidTaskDataException thrown when the String representation of Task is invalid.
      */
-    public static Task getTaskFromRepresentation(String taskRepresentation) {
-        String[] taskData = taskRepresentation.split(",");
-        boolean isDone = taskData[1].equals("X");
+    public static Task getTaskFromRepresentation(String taskRepresentation) throws InvalidTaskDataException {
+        String[] taskData = taskRepresentation.split(" \\|;; ");
+        try {
+            boolean isDone = taskData[1].equals("X");
 
-        switch (TaskType.valueOf(taskData[0])) {
-        case DEADLINE:
-            return new Deadline(taskData[2], isDone, LocalDate.parse(taskData[3]));
-        case EVENT:
-            return new Event(taskData[2], isDone, taskData[3]);
-        case TODO:
-            return new ToDo(taskData[2], isDone);
-        default:
-            return null;
+            switch (TaskType.valueOf(taskData[0])) {
+            case DEADLINE:
+                return new Deadline(taskData[2], isDone, LocalDate.parse(taskData[3]));
+            case EVENT:
+                return new Event(taskData[2], isDone, taskData[3]);
+            case TODO:
+                return new ToDo(taskData[2], isDone);
+            default:
+                return null;
+            }
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+            throw new InvalidTaskDataException();
         }
     }
 
@@ -61,7 +69,7 @@ public abstract class Task {
      * @return representation of this task's data
      */
     public String getTaskRepresentation() {
-        return (isDone ? "X," : ",") + description + ",";
+        return (isDone ? "X |;; " : " |;; ") + description + " |;; ";
     }
 
     /**

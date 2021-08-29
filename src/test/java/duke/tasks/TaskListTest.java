@@ -1,24 +1,27 @@
 package duke.tasks;
 
-import duke.data.TaskStorageStub;
-import duke.exceptions.InvalidTaskNumberException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Test;
+
+import duke.data.TaskStorageStub;
+import duke.exceptions.InvalidTaskDataException;
+import duke.exceptions.InvalidTaskNumberException;
+import duke.exceptions.TaskFileIoException;
+
 class TaskListTest {
     @Test
-    void canGetAllTasksWhenNoTasks_noTasks_returnsEmptyList() throws IOException {
+    void canGetAllTasksWhenNoTasks_noTasks_returnsEmptyList() throws TaskFileIoException, InvalidTaskDataException {
         TaskList taskList = new TaskList(new TaskStorageStub());
         assertEquals(new ArrayList<>(), taskList.getAllTasks());
     }
 
     @Test
     void canAddTasks_tasksToAdd_returnsListWithAddedTasks()
-            throws IOException, InvalidTaskNumberException {
+            throws InvalidTaskNumberException, TaskFileIoException, InvalidTaskDataException {
         TaskList taskList = new TaskList(new TaskStorageStub());
         Deadline deadline = new Deadline("deadline", true, LocalDate.parse("2021-12-12"));
         Event event = new Event("event", false, "home");
@@ -39,7 +42,7 @@ class TaskListTest {
 
     @Test
     void canDeleteTasks_tasksAndTaskIndexToDelete_returnsListWithNoDeletedTasks()
-            throws IOException, InvalidTaskNumberException {
+            throws InvalidTaskNumberException, TaskFileIoException, InvalidTaskDataException {
         TaskList taskList = new TaskList(new TaskStorageStub());
         Deadline deadline = new Deadline("deadline", true, LocalDate.parse("2021-12-12"));
         Event event = new Event("event", false, "home");
@@ -62,7 +65,7 @@ class TaskListTest {
 
     @Test
     void canMarkTaskAsDone_tasksAndTaskIndexToMarkDone_returnsListWithDoneTask()
-            throws IOException, InvalidTaskNumberException {
+            throws InvalidTaskNumberException, TaskFileIoException, InvalidTaskDataException {
         TaskList taskList = new TaskList(new TaskStorageStub());
         Deadline deadline = new Deadline("deadline", true, LocalDate.parse("2021-12-12"));
         Event event = new Event("event", false, "home");

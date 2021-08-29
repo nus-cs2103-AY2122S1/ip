@@ -31,6 +31,15 @@ public class Event extends Task {
         this.at = eventData[1].trim();
     }
 
+
+    /**
+     * Constructs an instance of <code>Event</code> with the provided description,
+     * completion status and venue.
+     *
+     * @param description description of what the <code>Event</code> entails.
+     * @param isDone      completion status of <code>Event</code>.
+     * @param at          venue which <code>Event</code> is held at.
+     */
     public Event(String description, boolean isDone, String at) {
         super.setDescription(description);
         super.setIsDone(isDone);
@@ -39,9 +48,15 @@ public class Event extends Task {
 
     @Override
     public String getTaskRepresentation() {
-        return TaskType.EVENT + "," + super.getTaskRepresentation() + this.at + ",";
+        return TaskType.EVENT + " |;; " + super.getTaskRepresentation() + this.at + " |;; ";
     }
 
+    /**
+     * Returns the <code>String</code> representation representing the task type,
+     * completion status, description and venue of this <code>Event</code>.
+     *
+     * @return <code>String</code> representation of this <code>Event</code>.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

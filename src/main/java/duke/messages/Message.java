@@ -7,12 +7,19 @@ package duke.messages;
  */
 public class Message {
     private String messageText;
-    private final String separator =
-            "____________________________________________________________";
 
+    /**
+     * Constructs an instance of <code>Message</code>.
+     */
     public Message() {
     }
 
+    /**
+     * Constructs an instance of <code>Message</code> with a given <code>String</code>
+     * payload to generate response message with.
+     *
+     * @param messageText main payload to generate response message with.
+     */
     public Message(String messageText) {
         this.messageText = messageText;
     }
@@ -21,8 +28,15 @@ public class Message {
         this.messageText = messageText;
     }
 
+    /**
+     * Returns the user response message with user-friendly separators wrapping around the main
+     * message text.
+     *
+     * @return user-friendly formatted response message.
+     */
     @Override
     public String toString() {
+        String separator = "____________________________________________________________";
         return separator + "\n" + this.messageText + "\n" + separator;
     }
 }

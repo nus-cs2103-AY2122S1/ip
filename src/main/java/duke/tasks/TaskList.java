@@ -1,12 +1,13 @@
 package duke.tasks;
 
-import duke.data.TaskFileStorage;
-import duke.data.TaskStorage;
-import duke.exceptions.InvalidTaskNumberException;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.data.TaskFileStorage;
+import duke.data.TaskStorage;
+import duke.exceptions.InvalidTaskDataException;
+import duke.exceptions.InvalidTaskNumberException;
+import duke.exceptions.TaskFileIoException;
 
 /**
  * Represents a list of tasks and provides functionality to manipulate tasks contained within the list.
@@ -17,7 +18,14 @@ public class TaskList {
     private final List<Task> tasks;
     private TaskStorage taskStorage;
 
-    public TaskList(TaskStorage taskStorage) throws IOException {
+    /**
+     * Constructs an instance of <code>TaskList</code> which persists data using the
+     * provided <code>TaskStorage</code>.
+     *
+     * @param taskStorage provides functionality to persist task data.
+     * @throws TaskFileIoException thrown when failure to load tasks occur.
+     */
+    public TaskList(TaskStorage taskStorage) throws TaskFileIoException, InvalidTaskDataException {
         this.taskStorage = taskStorage;
         tasks = taskStorage.loadTasks();
     }
@@ -26,9 +34,9 @@ public class TaskList {
      * Writes current taskList to the Task storage to be persisted.
      *
      * @param tasksToSave List of tasks to be saved to Task storage.
-     * @throws IOException thrown when failure to write to Task storage occurs.
+     * @throws TaskFileIoException thrown when failure to write to Task save file occurs.
      */
-    private void saveTasksToStorage(List<Task> tasksToSave) throws IOException {
+    private void saveTasksToStorage(List<Task> tasksToSave) throws TaskFileIoException {
         if (taskStorage == null) {
             taskStorage = new TaskFileStorage();
         }
@@ -54,9 +62,9 @@ public class TaskList {
      *
      * @param task task to be added.
      * @return task that has been added to TaskList.
-     * @throws IOException thrown when errors writing to storage occur.
+     * @throws TaskFileIoException thrown when errors writing to Task save file occur.
      */
-    public Task addTask(Task task) throws IOException {
+    public Task addTask(Task task) throws TaskFileIoException {
         tasks.add(task);
         saveTasksToStorage(tasks);
         return task;
@@ -67,9 +75,9 @@ public class TaskList {
      *
      * @param index index of task to mark as done.
      * @return task that has been marked as done.
-     * @throws IOException thrown when errors writing to storage occur.
+     * @throws TaskFileIoException thrown when errors writing to Task save file occur.
      */
-    public Task setDone(int index) throws IOException, InvalidTaskNumberException {
+    public Task setDone(int index) throws TaskFileIoException, InvalidTaskNumberException {
         Task doneTask = getTask(index);
         doneTask.setIsDone(true);
         saveTasksToStorage(tasks);
@@ -77,14 +85,14 @@ public class TaskList {
     }
 
     /**
-     * Deletes task associated with given index number
+     * Deletes task associated with given index number.
      *
-     * @param index index of task to delete
-     * @return deleted task
-     * @throws InvalidTaskNumberException thrown when index provided exceeds valid index range
-     * @throws IOException                thrown when errors writing to storage occur
+     * @param index index of task to delete.
+     * @return deleted task.
+     * @throws InvalidTaskNumberException thrown when index provided exceeds valid index range.
+     * @throws TaskFileIoException        thrown when errors writing to task save file occur.
      */
-    public Task deleteTask(int index) throws InvalidTaskNumberException, IOException {
+    public Task deleteTask(int index) throws TaskFileIoException, InvalidTaskNumberException {
         if (index < 0 || index >= tasks.size()) {
             throw new InvalidTaskNumberException();
         }

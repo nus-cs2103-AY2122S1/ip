@@ -11,6 +11,12 @@ import duke.tasks.TaskList;
  */
 public class ListTasksCommand extends Command {
 
+    /**
+     * Constructs an instance of <code>ListTasksCommand</code> which outputs a message
+     * displaying the details of all currently persisted tasks.
+     *
+     * @param userInputBody not being utilised.
+     */
     public ListTasksCommand(String userInputBody) {
         super(userInputBody);
     }
