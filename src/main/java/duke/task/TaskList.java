@@ -66,7 +66,6 @@ public class TaskList {
 
         this.getTasks().add(newTask);
         addTaskSuffix(newTask);
-
     }
 
     public void deleteTask(int taskNo) {
