@@ -38,6 +38,17 @@ public class Duke {
     protected String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            if (c.isExit()) {
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                System.exit(0);
+                            }
+                        },
+                        500
+                );
+            }
             return c.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
