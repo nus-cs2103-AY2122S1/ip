@@ -1,4 +1,10 @@
-package duke;
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.Ui;
 
 public class DeleteCommand extends Command {
 
@@ -15,8 +21,8 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             // Delete task
-            Task t = taskList.removeTask(index);
-            ui.showTasksReply(false, "Aights! Pepper Jack deleted this task:\n\t" + t, taskList.size());
+            Task task = taskList.removeTask(index);
+            ui.showTasksReply(false, "Aights! Pepper Jack deleted this task:\n\t" + task, taskList.size());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number does not exist!\n\t" + DeleteCommand.USAGE_TEXT);
         }

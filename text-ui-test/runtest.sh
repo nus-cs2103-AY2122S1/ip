@@ -13,7 +13,10 @@ then
 fi
 
 # compile the code into the bin folder, terminates if error occurred
-if ! javac -cp ../src/main/java/duke -Xlint:none -d ../bin ../src/main/java/duke/*.java
+find ../src/main/java/*/*.java  > sources.txt
+
+# compile the code into the bin folder, terminates if error occurred
+if ! javac -cp ../src/main/java -Xlint:none -d ../bin @sources.txt
 then
     echo "********** BUILD FAILURE **********"
     exit 1
