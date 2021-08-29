@@ -65,7 +65,7 @@ public class Duke {
      * Returns the appropriate response according to the user input.
      * @param input the user input
      * @return the corresponding <code>DukeResponse</code>. If a <code>DukeException</code> was thrown, it is wrapped
-     * in a <code>DukeResponse</code>.
+     * in a <code>DukeBadResponse</code>.
      */
     public DukeResponse getResponse(String input) {
         try {
