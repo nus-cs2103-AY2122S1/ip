@@ -8,7 +8,7 @@ import duke.Ui;
  * Type of Command that deletes a task from the task list.
  */
 public class DeleteCommand extends Command {
-    int taskToDelete;
+    private int taskToDelete;
 
     /**
      * Constructor.

@@ -8,7 +8,7 @@ import duke.Ui;
  * Type of Command that marks tasks as done in the task list.
  */
 public class DoneCommand extends Command {
-    int markAsDone;
+    private int markAsDone;
 
     /**
      * Constructor.

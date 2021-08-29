@@ -1,18 +1,19 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import duke.stubs.DeadlineStub;
 import duke.stubs.EventStub;
 import duke.stubs.TodoStub;
 import duke.task.Task;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.time.LocalDate;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class UiTest {
     private final PrintStream standardOut = System.out;
@@ -42,9 +43,9 @@ class UiTest {
         Ui ui = new Ui();
         ui.list(taskList);
 
-        assertEquals("Here are the tasks in your list:\n" +
-                "1.[T][ ] Create a todo task\n2.[D][ ] Create a deadline task (by: Dec 4 2021)\n" +
-                "3.[E][ ] Create an event task (at: Dec 4 2021)", outputStreamCaptor.toString().trim());
+        assertEquals("Here are the tasks in your list:\n"
+                + "1.[T][ ] Create a todo task\n2.[D][ ] Create a deadline task (by: Dec 4 2021)\n"
+                + "3.[E][ ] Create an event task (at: Dec 4 2021)", outputStreamCaptor.toString().trim());
     }
 
     @Test
@@ -71,8 +72,8 @@ class UiTest {
 
         Ui ui = new Ui();
         ui.delete(taskList, 1);
-        assertEquals("Noted. I've removed this task:\n  [T][ ] Create a todo task\n" +
-                        "Now you have 2 tasks in the list.", outputStreamCaptor.toString().trim());
+        assertEquals("Noted. I've removed this task:\n  [T][ ] Create a todo task\n"
+                        + "Now you have 2 tasks in the list.", outputStreamCaptor.toString().trim());
     }
 
     @Test

@@ -1,17 +1,13 @@
 package duke;
-
-import duke.TaskList;
-import duke.stubs.DeadlineStub;
-import duke.stubs.EventStub;
-import duke.stubs.TaskListStub;
-import duke.stubs.TodoStub;
-import duke.task.Task;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.stubs.TaskListStub;
+import duke.task.Task;
 
 class TaskListTest {
 
@@ -19,7 +15,6 @@ class TaskListTest {
     void checkDate() {
         TaskListStub taskListStub = new TaskListStub();
         ArrayList<Task> actualArray = taskListStub.checkDate(LocalDate.parse("2021-12-04"));
-        
         assertEquals("[D][ ] Create a deadline task (by: Dec 4 2021)", actualArray.get(0).toString());
     }
 }

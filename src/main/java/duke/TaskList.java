@@ -1,13 +1,12 @@
 package duke;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.testinginterface.TaskListInterface;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 /**
  * Contains task list and executes operations on task list.
  */
@@ -82,6 +81,12 @@ public class TaskList implements TaskListInterface {
         return results;
     }
 
+    /**
+     * Returns an ArrayList of tasks of which the description contains the given word.
+     *
+     * @param word given by user.
+     * @return List of tasks.
+     */
     public ArrayList<Task> find(String word) {
         ArrayList<Task> results = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {

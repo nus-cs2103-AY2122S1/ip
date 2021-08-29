@@ -1,13 +1,13 @@
 package duke;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with user.
@@ -61,8 +61,8 @@ public class Ui {
      * @param donePos position of task to mark as done.
      */
     public void done(TaskList taskList, int donePos) {
-        System.out.println("Nice! I've marked this task as done:\n  " +
-                taskList.getTasks().get(donePos - 1).toString());
+        System.out.println("Nice! I've marked this task as done:\n  "
+                + taskList.getTasks().get(donePos - 1).toString());
     }
 
     /**
@@ -150,6 +150,12 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Displays the tasks with descriptions that contain the given word.
+     *
+     * @param taskList current list of all tasks.
+     * @param word given by user.
+     */
     public void find(TaskList taskList, String word) {
         ArrayList<Task> matchingDates = taskList.find(word);
 
