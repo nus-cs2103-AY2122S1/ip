@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.Duke;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,10 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import duke.Duke;
-import org.w3c.dom.Text;
-
+import javafx.stage.Window;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -67,10 +65,15 @@ public class MainWindow extends AnchorPane {
     private void handleExitProgram(ActionEvent event) {
         Object o = event.getSource();
         if (o instanceof Button) {
-            ((Stage)(((Button)event.getSource()).getScene().getWindow())).close();
+            Button button = (Button) event.getSource();
+            Window window = button.getScene().getWindow();
+            Stage stage = (Stage) window;
+            stage.close();
         } else {
-            ((Stage)(((TextField)event.getSource()).getScene().getWindow())).close();
+            TextField textField = (TextField) event.getSource();
+            Window window = textField.getScene().getWindow();
+            Stage stage = (Stage) window;
+            stage.close();
         }
-
     }
 }

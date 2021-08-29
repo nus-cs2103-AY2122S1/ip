@@ -28,6 +28,11 @@ public class Duke {
         storage = new Storage(filePath);
     }
 
+    /**
+     * Initializes the task list based on the text file.
+     *
+     * @return The response from initializing the task list.
+     */
     public String initializeTaskList() {
         try {
             tasks = new TaskList(storage.load());
@@ -38,7 +43,9 @@ public class Duke {
                 File file = new File("./data/task_list.txt");
                 file.createNewFile();
                 tasks = new TaskList(new ArrayList<Task>());
-            } catch (IOException ee) {}
+            } catch (IOException ioE) {
+                System.out.println(ioE);
+            }
 
             return responseLogic.loadingErrorResponse(filePath);
         }

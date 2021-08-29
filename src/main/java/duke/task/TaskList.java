@@ -89,7 +89,8 @@ public class TaskList {
      * @return The response when a task is marked as done.
      * @throws FileNotFoundException If the file containing the tasks is not found.
      */
-    public String markTaskAsDone(int taskNumber, Storage storage, ResponseLogic responseLogic) throws FileNotFoundException {
+    public String markTaskAsDone(
+            int taskNumber, Storage storage, ResponseLogic responseLogic) throws FileNotFoundException {
         Task task = this.tasks.get(taskNumber - 1);
         task.markAsDone();
         storage.update(this.tasks);
@@ -105,7 +106,8 @@ public class TaskList {
      * @return The response when a task is deleted.
      * @throws FileNotFoundException If the file containing the tasks is not found.
      */
-    public String deleteTask(int taskNumber, Storage storage, ResponseLogic responseLogic) throws FileNotFoundException {
+    public String deleteTask(
+            int taskNumber, Storage storage, ResponseLogic responseLogic) throws FileNotFoundException {
         Task task = this.tasks.get(taskNumber - 1);
         this.tasks.remove(taskNumber - 1);
         storage.update(this.tasks);
@@ -121,7 +123,8 @@ public class TaskList {
      * @return The response when a Todo task is added.
      * @throws FileNotFoundException If the file containing the tasks is not found.
      */
-    public String addTodo(String description, Storage storage, ResponseLogic responseLogic) throws FileNotFoundException {
+    public String addTodo(
+            String description, Storage storage, ResponseLogic responseLogic) throws FileNotFoundException {
         Task task = new Todo(description);
         this.tasks.add(task);
         storage.update(this.tasks);
@@ -138,7 +141,8 @@ public class TaskList {
      * @return The response when a Deadline task is added.
      * @throws FileNotFoundException If the file containing the tasks is not found.
      */
-    public String addDeadline(String description, String deadline, Storage storage, ResponseLogic responseLogic) throws FileNotFoundException {
+    public String addDeadline(String description, String deadline, Storage storage,
+                              ResponseLogic responseLogic) throws FileNotFoundException {
         Task task = new Deadline(description, deadline);
         this.tasks.add(task);
         storage.update(this.tasks);
@@ -155,7 +159,8 @@ public class TaskList {
      * @retrun The response when an Event task is added.
      * @throws FileNotFoundException If the file containing the tasks is not found.
      */
-    public String addEvent(String description, String time, Storage storage, ResponseLogic responseLogic) throws FileNotFoundException {
+    public String addEvent(String description, String time,
+                           Storage storage, ResponseLogic responseLogic) throws FileNotFoundException {
         Task task = new Event(description, time);
         this.tasks.add(task);
         storage.update(this.tasks);

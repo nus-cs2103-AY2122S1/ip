@@ -2,8 +2,8 @@ package duke.command;
 
 import java.io.FileNotFoundException;
 
-import duke.Storage;
 import duke.ResponseLogic;
+import duke.Storage;
 import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
