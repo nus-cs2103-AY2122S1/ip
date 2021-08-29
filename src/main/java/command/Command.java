@@ -17,7 +17,17 @@ import ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Command class responsible for executing different command
+ *
+ * @author Kan Jitpakdi
+ * @author GitHub: kanjitp
+ * @version 0.01
+ * @since 0.00
+ *
+ */
 public class Command {
+    /** Different type of Command available*/
     public enum CommandType {
         TODO, DEADLINE, EVENT, LIST, DATE, DONE, DELETE, COMMANDS, BYE
     }
@@ -26,16 +36,37 @@ public class Command {
     private CommandType commandType;
     private boolean isExit;
 
+    /**
+     * Default constructor for Command.
+     *
+     * Create a Command object from given full Command
+     *
+     * @param fullCommand command with its arguments and tagger
+     * @throws AliceException invalid argument for command
+     */
     public Command(String fullCommand) throws AliceException {
         this.fullCommand = fullCommand;
         commandType = Parser.stringToCommand(fullCommand.split(" ")[0]);
         isExit = commandType == CommandType.BYE;
     }
 
+    /**
+     * Return whether the command given is of type Bye
+     *
+     * @return if the command is bye or not
+     */
     public boolean isExit() {
         return this.isExit;
     }
 
+    /**
+     * Execute the command according to its type
+     *
+     * @param taskDialog taskDialog for the command to interact with
+     * @param storage the storage for the command to interact with
+     * @throws DialogException dialog cannot have the same id while the app is running
+     * @throws IOException  if there is any error dealing with the system IO
+     */
     public void execute(TaskDialog taskDialog, Storage storage) throws DialogException, IOException {
 
             switch (commandType) {
