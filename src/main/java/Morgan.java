@@ -10,7 +10,7 @@ public class Morgan {
     }
 
     private static void launch() {
-        // Initialize UI
+        // Initialize Ui
         Ui ui = new Ui();
         ui.printStartDisplay();
 
