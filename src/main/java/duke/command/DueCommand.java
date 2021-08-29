@@ -5,8 +5,6 @@ import duke.task.TaskList;
 import duke.util.Ui;
 import duke.util.Storage;
 
-import java.io.IOException;
-
 /**
  * A class that represents the command when the user types in 'due'.
  */
