@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
     Scanner scan;
+    private String str;
     private static TaskList listOfTasks;
     private static Storage storage;
 
@@ -11,6 +12,10 @@ public class Ui {
         scan = new Scanner(System.in);
         this.listOfTasks = t;
         this.storage = s;
+    }
+
+    public Ui() {
+        str = "There has been a loading error";
     }
 
     public String input() {
@@ -22,6 +27,6 @@ public class Ui {
     }
 
     public String showLoadingError() {
-        return "There has been a loading error";
+        return this.str;
     }
 }
