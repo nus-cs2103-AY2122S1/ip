@@ -25,15 +25,15 @@ public class Duke {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         ui.startMessage();
-        boolean check = false;
+        boolean isExit = false;
 
-        while (!check) {
+        while (!isExit) {
             try {
                 String strCommand = scanner.nextLine();
                 ui.showLine();
                 Command command = Parser.parse(strCommand);
                 command.execute(taskList, ui, storage);
-                check = command.isExit();
+                isExit = command.isExit();
             } catch (DukeException e) {
                 ui.errorMessage(e);
             }

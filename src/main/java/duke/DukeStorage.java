@@ -2,7 +2,6 @@ package duke;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.Task;
 import duke.tasks.Todo;
 
 import java.io.File;
@@ -41,26 +40,26 @@ public class DukeStorage {
                     String[] parseTask = str.split(" \\| ");
 
                     String taskType = parseTask[0];
-                    boolean done = parseTask[1].equals("1") ? true : false;
+                    boolean isDone = parseTask[1].equals("1") ? true : false;
                     String taskDescr = parseTask[2];
 
                     if (taskType.equals("T")) {
                         Todo task = new Todo(taskDescr);
-                        if (done) {
+                        if (isDone) {
                             task.setDone();
                         }
 
                         taskList.add(task);
                     } else if (taskType.equals("D")) {
                         Deadline task = new Deadline(taskDescr, parseTask[3]);
-                        if (done) {
+                        if (isDone) {
                             task.setDone();
                         }
 
                         taskList.add(task);
                     } else {
                         Event task = new Event(taskDescr, parseTask[3]);
-                        if (done) {
+                        if (isDone) {
                             task.setDone();
                         }
 
