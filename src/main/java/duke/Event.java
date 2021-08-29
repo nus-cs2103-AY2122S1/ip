@@ -5,23 +5,23 @@ import java.time.format.DateTimeFormatter;
 
 
 /**
- * Class for duke.Event, a child class of duke.Task.
+ * Class for duke.Event, a child class of Task.
  * @author Liew Jian Hong
  */
-public class Event extends Task{
+public class Event extends Task {
     /**
      * The date the event.
      */
     protected LocalDate date;
 
     /**
-     * Constructor for an duke.Event task.
+     * Constructor for an Event task.
      *
      * @param desc String array consisting of parsed description.
      */
     public Event(String[] desc) {
 
-        super(desc[1], Boolean.valueOf(desc[3]));
+        super(desc[1], Boolean.parseBoolean(desc[3]));
         this.date = LocalDate.parse(desc[2]);
 
     }
@@ -33,7 +33,7 @@ public class Event extends Task{
      */
     @Override
     public String toWrite() {
-        return "event--" + Boolean.toString(this.isDone) + "--" + this.desc + "--" + this.date.toString() + "\n";
+        return "event--" + this.isDone + "--" + this.desc + "--" + this.date.toString() + "\n";
     }
 
     /**

@@ -43,7 +43,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s",isDone ? "X" : " " ,this.desc);
+        return String.format("[%s] %s", isDone ? "X" : " " , this.desc);
     }
 
 

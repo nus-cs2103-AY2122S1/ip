@@ -36,30 +36,32 @@ public class Duke {
      * @param t String array of parsed user input.
      * @throws DukeException Exception for wrong user inputs.
      */
-    public void add(String[] t) throws DukeException{
-        Task newTask = null;
+    public void add(String[] t) throws DukeException {
+        Task newTask;
         switch (t[0]) {
-            case "todo":
-                if (t[1].equals("")) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                } else {
-                    newTask = new Todo(t);
-                }
-                break;
-            case "deadline":
-                if (t[1].equals("") || t[2].equals("")) {
-                    throw new DukeException("☹ OOPS!!! The description or deadline of a deadline cannot be empty.");
-                } else {
-                    newTask = new Deadline(t);
-                }
-                break;
-            case "event":
-                if (t[1].equals("") || t[2].equals("")) {
-                    throw new DukeException("☹ OOPS!!! The description or scheduled time of an event cannot be empty.");
-                } else {
-                    newTask = new Event(t);
-                }
-                break;
+        case "todo":
+            if (t[1].equals("")) {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            } else {
+                newTask = new Todo(t);
+            }
+            break;
+        case "deadline":
+            if (t[1].equals("") || t[2].equals("")) {
+                throw new DukeException("☹ OOPS!!! The description or deadline of a deadline cannot be empty.");
+            } else {
+                newTask = new Deadline(t);
+            }
+            break;
+        case "event":
+            if (t[1].equals("") || t[2].equals("")) {
+                throw new DukeException("☹ OOPS!!! The description or scheduled time of an event cannot be empty.");
+            } else {
+                newTask = new Event(t);
+            }
+            break;
+        default:
+            throw new DukeException("Invalid task. Please check that your input is correct");
         }
         this.taskList.addTask(newTask);
         this.storage.write(this.taskList);
@@ -81,7 +83,7 @@ public class Duke {
      *
      * @param itemNum Position of duke.Task in the list.
      */
-    public void markDone(int itemNum){
+    public void markDone(int itemNum) {
         this.taskList.markDone(itemNum);
         this.storage.write(this.taskList);
         this.ui.showMarkDoneMessage(this.getTaskByIndex(itemNum - 1));
@@ -93,13 +95,12 @@ public class Duke {
      * @param items Parsed delete command from user.
      * @throws DukeException Exception for wrong user inputs.
      */
-    public void deleteTask(String[] items) throws DukeException{
+    public void deleteTask(String[] items) throws DukeException {
         if (items[1].equals("")) {
             throw new DukeException("☹ OOPS!!! The task's number cannot be empty");
         } else {
             int itemNum = Integer.parseInt(items[1]);
             Task toBeDeleted = this.getTaskByIndex(itemNum - 1);
-            String taskName = toBeDeleted.toString();
             this.taskList.deleteTask(itemNum - 1);
             this.storage.write(this.taskList);
             this.ui.showDeleteMessage(toBeDeleted, this.taskList);
@@ -112,7 +113,6 @@ public class Duke {
     public void run() {
         this.ui.showGreetMessage();
         this.storage.load();
-        boolean isExit = false;
         String userInput;
         while (true) {
             userInput = this.ui.getUserInput();
@@ -153,7 +153,12 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args){
+    /**
+     * Driver for the Duke class.
+     *
+     * @param args No args needed.
+     */
+    public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
     }

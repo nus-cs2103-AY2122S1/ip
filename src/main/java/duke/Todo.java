@@ -4,7 +4,7 @@ package duke;
  * Class for duke.Todo, a child class of duke.Task.
  * @author Liew Jian Hong
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /**
      * Constructor for a Todo task.

@@ -1,5 +1,4 @@
 deadline--true--return book--2021-08-23
 event--true--meet--2021-08-30
-todo--false--borrow more books--0
 deadline--true--return more books--2021-09-01
 todo--false--tutorial--0
