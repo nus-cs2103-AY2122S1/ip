@@ -28,22 +28,22 @@ public abstract class Task {
         Task newTask;
         String[] name_delimit;
         switch (type) {
-            case "todo":
-                newTask = new ToDo(rest);
-                break;
+        case "todo":
+            newTask = new ToDo(rest);
+            break;
 
-            case "deadline":
-                name_delimit = Parser.parseArgs(rest, "/by");
-                newTask = new Deadline(name_delimit[0], name_delimit[1]);
-                break;
+        case "deadline":
+            name_delimit = Parser.parseArgs(rest, "/by");
+            newTask = new Deadline(name_delimit[0], name_delimit[1]);
+            break;
 
-            case "event":
-                name_delimit = Parser.parseArgs(rest, "/at");
-                newTask = new Event(name_delimit[0], name_delimit[1]);
-                break;
+        case "event":
+            name_delimit = Parser.parseArgs(rest, "/at");
+            newTask = new Event(name_delimit[0], name_delimit[1]);
+            break;
 
-            default:
-                throw new DukeException("command not found");
+        default:
+            throw new DukeException("command not found");
         }
         return newTask;
     }
