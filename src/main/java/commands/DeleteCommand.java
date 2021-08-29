@@ -5,7 +5,7 @@ import tasks.TaskList;
 /**
  * A command to delete a task from Duke's taskList.
  */
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
 
     private final String input;
     private final TaskList taskList;
@@ -26,10 +26,10 @@ public class DeleteCommand implements Command {
         try {
             // Checks if an argument is provided
             int index = Integer.parseInt(input.split(" ", 2)[1].trim());
-            this.taskList.removeTask(index);
+            this.setExecutionMessage(this.taskList.removeTask(index));
             return true;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            this.invalidArgumentsProvided();
+            this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;
         }
     }
@@ -40,7 +40,7 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void invalidArgumentsProvided() {
-        System.out.println("Invalid argument to the \"delete\" function.\n");
+    public String getInvalidArgumentsMessage() {
+        return "Invalid argument to the \"delete\" function.\n";
     }
 }

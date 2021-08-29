@@ -1,18 +1,16 @@
 package commands;
 
-import duke.Ui;
-
 /**
  * A command to exit duke.
  */
-public class ExitCommand implements Command {
+public class ExitCommand extends Command {
 
     /**
      * Prints a command to say bye to the user and closed the Chat bot.
      */
     @Override
     public boolean execute() {
-        Ui.endChat();
+        this.setExecutionMessage("Bye!! Hope to see you again!!\n");
         return true;
     }
 
@@ -22,7 +20,8 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public void invalidArgumentsProvided() {
+    public String getInvalidArgumentsMessage() {
         // Not needed since no arguments are needed for the exit command
+        return "";
     }
 }

@@ -31,10 +31,10 @@ public class AddEventCommand extends AddCommand {
             try {
                 task = Event.newEventTask(details);
             } catch (DukeInvalidDateException e) {
-                System.out.println(e.getMessage() + "\n");
+                this.setExecutionMessage(e.getMessage() + "\n");
                 return false;
             }
-            this.taskList.addTask(task);
+            this.setExecutionMessage(this.taskList.addTask(task));
             return true;
         }
         return false;
@@ -51,12 +51,12 @@ public class AddEventCommand extends AddCommand {
     @Override
     public boolean verifyAddCommand(String input) {
         if (!input.contains("-at") && !input.contains("/at")) {
-            this.invalidArgumentsProvided();
+            this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;
         }
         String[] inputParts = input.split(" -at | /at ");
         if (inputParts.length != 2) {
-            this.invalidArgumentsProvided();
+            this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;
         }
         return true;

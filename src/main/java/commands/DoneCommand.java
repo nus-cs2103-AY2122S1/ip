@@ -5,7 +5,7 @@ import tasks.TaskList;
 /**
  * A command to marks a task in Duke's taskList as done.
  */
-public class DoneCommand implements Command {
+public class DoneCommand extends Command {
 
     private final String input;
     private final TaskList taskList;
@@ -26,10 +26,10 @@ public class DoneCommand implements Command {
         try {
             // Checks if an argument is provided
             int index = Integer.parseInt(input.split(" ", 2)[1].trim());
-            this.taskList.markTaskAsCompleted(index);
+            this.setExecutionMessage(this.taskList.markTaskAsCompleted(index));
             return true;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            this.invalidArgumentsProvided();
+            this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;
         }
     }
@@ -40,7 +40,7 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void invalidArgumentsProvided() {
-        System.out.println("Invalid argument to the \"done\" function.\n");
+    public String getInvalidArgumentsMessage() {
+        return "Invalid argument to the \"done\" function.\n";
     }
 }

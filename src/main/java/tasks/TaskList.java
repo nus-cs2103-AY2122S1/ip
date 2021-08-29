@@ -24,14 +24,14 @@ public class TaskList {
      *
      * @param task The task to be added to the task list.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
+        String message;
         this.taskArrayList.add(task);
         this.uncompletedTasks++;
         totalTasks++;
-        System.out.println("Got it! This task has been added:");
-        System.out.println(task);
-        this.printTaskListStatus();
+        message = "Got it! This task has been added:\n" + task + "\n" + this.getTaskListStatus();
         this.saveTaskList();
+        return message;
     }
 
     /**
@@ -40,6 +40,7 @@ public class TaskList {
      * inputted task from the user to the taskList.
      *
      * @param task The previously saved task to add to the taskList.
+     * @returns The message that should be shown to the user after saving a task.
      */
     public void addSavedTask(Task task) {
         this.taskArrayList.add(task);
@@ -51,64 +52,70 @@ public class TaskList {
 
     /**
      * Removes a task in the task list based on the index given.
-     * @param index he index of the task list. Note that the index provided starts from 1. So the index 1 represents
-     *              the first task in the taskList ArrayList.
+     *
+     * @param index The index of the task list. Note that the index provided starts from 1. So the
+     *              index 1 represents the first task in the taskList ArrayList.
+     * @return The message that should be shown to the user after removing a task.
      */
-    public void removeTask(int index) {
+    public String removeTask(int index) {
+        String message;
         if (index > this.taskArrayList.size() || index <= 0) {
-            System.out.println("This entry does not exist.\n");
-            return;
+            message = "This entry does not exist.\n";
+            return message;
         }
-        System.out.println("Understood. I've removed this task:");
         Task task = this.taskArrayList.get(index - 1);
         this.taskArrayList.remove(index - 1);
-        System.out.println(task);
         if (!task.isDone()) {
             uncompletedTasks--;
         }
         totalTasks--;
-        this.printTaskListStatus();
+        message = "Understood. I've removed this task:\n" + task + "\n" + this.getTaskListStatus();
         this.saveTaskList();
+        return message;
     }
 
     /**
      * Marks a task in the task list as completed based on the index given.
-     * @param index The index of the task list. Note that the index provided starts from 1. So the index 1 represents
-     *              the first task in the taskList ArrayList.
+     *
+     * @param index The index of the task list. Note that the index provided starts from 1.
+     *              So the index 1 represents the first task in the taskList ArrayList.
+     * @return The message that should be shown to the user after a task has been marked as done.
      */
-    public void markTaskAsCompleted(int index) {
+    public String markTaskAsCompleted(int index) {
         if (index > this.taskArrayList.size() || index <= 0) {
-            System.out.println("This entry does not exist.\n");
-            return;
+            return "This entry does not exist.\n";
         }
         if (this.taskArrayList.get(index - 1).isDone()) {
-            System.out.println("This task has already been completed.\n");
-            return;
+            return "This task has already been completed.\n";
         }
-        System.out.println("congratulations! This task has been completed:");
+        String message;
         this.taskArrayList.get(index - 1).setAsFinished();
         this.uncompletedTasks--;
-        System.out.println(this.taskArrayList.get(index - 1));
-        this.printTaskListStatus();
+        message = "congratulations! This task has been completed:\n"
+                + this.taskArrayList.get(index - 1) + "\n" + this.getTaskListStatus();
         this.saveTaskList();
+        return message;
     }
 
     /**
-     * Prints the task list for the user to view. If there are no tasks in the taskList,
-     * print message indicating that the taskList is empty.
+     * Gets the task list for the user to view. If there are no tasks in the taskList,
+     * return a message indicating that the taskList is empty.
+     *
+     * @return The contents of the taskList or a message indicating that it is empty.
      */
-    public void listHistory() {
-        System.out.println("-----------------------------------------------------------");
+    public String listHistory() {
+        StringBuilder message = new StringBuilder(Ui.DASHES);
         if (this.taskArrayList.isEmpty()) {
-            System.out.println("There are no tasks in your task list.");
-            System.out.println(Ui.DASHES);
-            return;
+            message.append("There are no tasks in your task list.\n");
+            message.append(Ui.DASHES);
+            return message.toString();
         }
-        System.out.println("Here are the tasks in your list:");
+        message.append("Here are the tasks in your list:\n");
         for (int i = 0; i < this.taskArrayList.size(); i++) {
-            System.out.println((i + 1) + ". " + this.taskArrayList.get(i));
+            message.append(i + 1).append(". ").append(this.taskArrayList.get(i)).append("\n");
         }
-        System.out.println(Ui.DASHES);
+        message.append(Ui.DASHES);
+        return message.toString();
     }
 
     public ArrayList<Task> findTask(String searchKeyword) {
@@ -130,13 +137,9 @@ public class TaskList {
         }
     }
 
-    /**
-     * Prints a message that tells the user the number of tasks in his list along with
-     * the number of uncompleted tasks.
-     */
-    private void printTaskListStatus() {
-        System.out.println("You currently have " + this.totalTasks + " tasks in your list with "
-                + this.uncompletedTasks + " uncompleted tasks remaining.\n");
+    private String getTaskListStatus() {
+        return "You currently have " + this.totalTasks + " tasks in your list with "
+                + this.uncompletedTasks + " uncompleted tasks remaining.\n";
     }
 
 }

@@ -6,7 +6,7 @@ import tasks.Task;
 import tasks.TaskList;
 
 /**
- * A command to add a Deadline task to dus taskList.
+ * A command to add a Deadline task to the taskList.
  */
 public class AddDeadlineCommand extends AddCommand {
 
@@ -31,10 +31,10 @@ public class AddDeadlineCommand extends AddCommand {
             try {
                 task = Deadline.newDeadlineTask(details);
             } catch (DukeInvalidDateException e) {
-                System.out.println(e.getMessage() + "\n");
+                this.setExecutionMessage(e.getMessage() + "\n");
                 return false;
             }
-            this.taskList.addTask(task);
+            this.setExecutionMessage(this.taskList.addTask(task));
             return true;
         }
         return false;
@@ -51,12 +51,12 @@ public class AddDeadlineCommand extends AddCommand {
     @Override
     public boolean verifyAddCommand(String input) {
         if (!input.contains("-by") && !input.contains("/by")) {
-            this.invalidArgumentsProvided();
+            this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;
         }
         String[] inputParts = input.split(" -by | /by ");
         if (inputParts.length != 2) {
-            this.invalidArgumentsProvided();
+            this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;
         }
         return true;

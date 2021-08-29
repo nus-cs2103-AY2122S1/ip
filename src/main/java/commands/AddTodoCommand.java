@@ -31,9 +31,10 @@ public class AddTodoCommand extends AddCommand {
         String details = this.removeFirstWordFromInput();
         if (details != null && this.verifyAddCommand(details.trim())) {
             Task task = Todo.newTodoTask(details);
-            this.taskList.addTask(task);
+            this.setExecutionMessage(this.taskList.addTask(task));
             return true;
         }
+        this.setExecutionMessage(this.getInvalidArgumentsMessage());
         return false;
     }
 

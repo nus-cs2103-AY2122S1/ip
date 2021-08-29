@@ -7,7 +7,7 @@ import tasks.Task;
  * An abstract class that represents commands given by the
  * user that involves adding a task to the taskList.
  */
-public abstract class AddCommand implements Command {
+public abstract class AddCommand extends Command {
 
     /** The type of task that should be added */
     private final Task.Type type;
@@ -33,8 +33,8 @@ public abstract class AddCommand implements Command {
     }
 
     @Override
-    public void invalidArgumentsProvided() {
-        Ui.printErrorMessage(type);
+    public String getInvalidArgumentsMessage() {
+        return Ui.getErrorMessage(type);
     }
 
     /**
@@ -48,7 +48,7 @@ public abstract class AddCommand implements Command {
         try {
             return this.userInput.split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            this.invalidArgumentsProvided();
+            this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return null;
         }
     }

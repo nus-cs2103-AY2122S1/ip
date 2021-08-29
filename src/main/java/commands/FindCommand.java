@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * a keyword. The command will then look for tasks with names that contain
  * the specified keyword.
  */
-public class FindCommand implements Command {
+public class FindCommand extends Command {
 
     private final String input;
     private final TaskList taskList;
@@ -35,7 +35,7 @@ public class FindCommand implements Command {
             this.displaySearchResults(this.taskList.findTask(keyword));
             return true;
         } catch (ArrayIndexOutOfBoundsException e) {
-            this.invalidArgumentsProvided();
+            this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;
         }
     }
@@ -46,20 +46,22 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void invalidArgumentsProvided() {
-        System.out.println("Please provide a keyword to search for a task.\n");
+    public String getInvalidArgumentsMessage() {
+        return "Please provide a keyword to search for a task.\n";
     }
 
     private void displaySearchResults(ArrayList<Task> searchResults) {
+        StringBuilder message;
         if (searchResults.isEmpty()) {
-            System.out.println("Sorry I could not find any matching tasks.\n");
+            message = new StringBuilder("Sorry I could not find any matching tasks.\n");
             return;
         }
-        System.out.println(Ui.DASHES);
-        System.out.println("Here are the matching tasks in your list:");
+        message = new StringBuilder(Ui.DASHES);
+        message.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < searchResults.size(); i++) {
-            System.out.println((i + 1) + ". " + searchResults.get(i));
+            message.append(i + 1).append(". ").append(searchResults.get(i)).append("\n");
         }
-        System.out.println(Ui.DASHES);
+        message.append(Ui.DASHES);
+        this.setExecutionMessage(message.toString());
     }
 }

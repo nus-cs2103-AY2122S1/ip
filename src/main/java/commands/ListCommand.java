@@ -5,7 +5,7 @@ import tasks.TaskList;
 /**
  * A command to list the task in Duke's taskList.
  */
-public class ListCommand implements Command {
+public class ListCommand extends Command {
 
     private final TaskList taskList;
 
@@ -20,7 +20,7 @@ public class ListCommand implements Command {
 
     @Override
     public boolean execute() {
-        this.taskList.listHistory();
+        this.setExecutionMessage(this.taskList.listHistory());
         return true;
     }
 
@@ -30,7 +30,8 @@ public class ListCommand implements Command {
     }
 
     @Override
-    public void invalidArgumentsProvided() {
+    public String getInvalidArgumentsMessage() {
         // No arguments are needed for a list command
+        return "";
     }
 }
