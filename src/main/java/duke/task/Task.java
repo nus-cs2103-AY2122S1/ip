@@ -1,4 +1,4 @@
-package duke.command.task;
+package duke.task;
 
 /**
  * Deadline, Event, and ToDo inherit from Task.

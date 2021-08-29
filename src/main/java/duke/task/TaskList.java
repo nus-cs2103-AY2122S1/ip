@@ -1,7 +1,6 @@
-package duke.command.task;
+package duke.task;
 
 import duke.util.DukeException;
-import duke.util.Message;
 import duke.util.Parser;
 
 import java.util.ArrayList;
@@ -31,6 +30,14 @@ public class TaskList {
     /**
      * Constructor for TaskList
      */
+    public TaskList(String taskList) throws DukeException {
+        this.taskArr = new ArrayList<>();
+        String[] taskArrStr = taskList.split("\n");
+        for (String task : taskArrStr) {
+            addSavedTask(task);
+        }
+    }
+
     public TaskList() {
         this.taskArr = new ArrayList<>();
     }

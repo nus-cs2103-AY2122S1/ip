@@ -1,14 +1,14 @@
 import duke.command.Command;
-import duke.command.task.Deadline;
-import duke.command.task.Event;
-import duke.command.task.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import org.junit.jupiter.api.Test;
 
-import duke.command.task.ToDo;
-import duke.util.Message;
+import duke.task.ToDo;
+import duke.util.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,9 +30,9 @@ public class DukeTest {
         String remainingText = Parser.getRemainingText(firstWord, inputString);
         try {
             ToDo myTodo = ToDo.newTodo(remainingText);
-            Message.display_message(taskList.addTask(myTodo));
+            Ui.display_message(taskList.addTask(myTodo));
         } catch (DukeException err) {
-            Message.display_message(err.getMessage());
+            Ui.display_message(err.getMessage());
         }
         assertEquals("1. [T][ ] make breakfast every morning", taskList.toString());
     }
@@ -47,9 +47,9 @@ public class DukeTest {
         String remainingText = Parser.getRemainingText(firstWord, inputString);
         try {
             Deadline myDeadline = Deadline.newDeadline(remainingText, false);
-            Message.display_message(taskList.addTask(myDeadline));
+            Ui.display_message(taskList.addTask(myDeadline));
         } catch (DukeException err) {
-            Message.display_message(err.getMessage());
+            Ui.display_message(err.getMessage());
         }
         assertEquals("1. [D][ ] make breakfast (by: 08.00 AM)", taskList.toString());
     }
@@ -64,9 +64,9 @@ public class DukeTest {
         String remainingText = Parser.getRemainingText(firstWord, inputString);
         try {
             Event myEvent = Event.newEvent(remainingText, false);
-            Message.display_message(taskList.addTask(myEvent));
+            Ui.display_message(taskList.addTask(myEvent));
         } catch (DukeException err) {
-            Message.display_message(err.getMessage());
+            Ui.display_message(err.getMessage());
         }
         assertEquals("1. [E][ ] go to concert (at: 08.00 AM) ", taskList.toString());
     }
@@ -83,7 +83,7 @@ public class DukeTest {
             Command.initialiseCommand(firstWord);
         } catch (DukeException err) {
             actual = err.getMessage();
-            Message.display_message(err.getMessage());
+            Ui.display_message(err.getMessage());
         }
         assertEquals(INCOHERENT_INPUT_MESSAGE, actual);
     }
@@ -107,7 +107,7 @@ public class DukeTest {
         } catch (DukeException err) {
             System.out.println(err.getMessage());
         } catch (FileNotFoundException err) {
-            Message.display_message("An error occurred. Unable to find file.");
+            Ui.display_message("An error occurred. Unable to find file.");
         }
     }
 
@@ -126,7 +126,7 @@ public class DukeTest {
             FileWriter fileWriterClearFile = new FileWriter(String.join(File.separator, FILE_PATH_ARR), false);
             fileWriterClearFile.close();
         } catch (FileNotFoundException err) {
-            Message.display_message("An error occurred. Unable to find file.");
+            Ui.display_message("An error occurred. Unable to find file.");
         } catch (IOException err) {
             System.out.println(err.getMessage());
         }

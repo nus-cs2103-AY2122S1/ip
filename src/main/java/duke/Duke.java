@@ -1,35 +1,41 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.task.Deadline;
-import duke.command.task.Event;
-import duke.command.task.TaskList;
-import duke.command.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
 import duke.util.DukeException;
-import duke.util.Message;
+import duke.util.Ui;
 import duke.util.Parser;
 import duke.util.Storage;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
+
+import static duke.util.Ui.DONE_MESSAGE;
+import static duke.util.Ui.EXIT_MESSAGE;
+import static duke.util.Ui.INVALID_NUMBER;
+import static duke.util.Ui.LIST_MESSAGE;
+import static duke.util.Ui.MISSING_DELETE_NUMBER_MESSAGE;
+import static duke.util.Ui.MISSING_DONE_NUMBER_MESSAGE;
+import static duke.util.Ui.NO_TASKS_IN_LIST_MESSAGE;
+import static duke.util.Ui.REWELCOME_MESSAGE;
+import static duke.util.Ui.TOO_MANY_ARGUMENTS_LIST_MESSAGE;
+import static duke.util.Ui.WELCOME_MESSAGE;
 
 /**
  * The Duke program. The input loop is abstracted here.
  */
 public class Duke {
+    /** Storage file path */
+    private static final String OUTER_DIR = "data";
+    private static final String FILE = "taskList.txt";
 
-    // Messages
-    private static final String WELCOME_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String REWELCOME_MESSAGE = "Welcome back!\nWhat can Duke do for you once again?";
-    private static final String LIST_MESSAGE = "Here are the tasks in your list:\n%s";
-    private static final String NO_TASKS_IN_LIST_MESSAGE = "You have no tasks currently. Go create some!";
-    private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";
-    private static final String INVALID_NUMBER = "Please input a valid task number";
-    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    private static final String TOO_MANY_ARGUMENTS_LIST_MESSAGE = "An argument after 'list' is not required. Just 'list' will do.";
-
-    // Errors
-    private static final String MISSING_DELETE_NUMBER_MESSAGE = "Please input a number after the delete command";
-    private static final String MISSING_DONE_NUMBER_MESSAGE = "Please input a number after the done command";
+    /** Instance variables */
+    private final Storage myStorage;
+    private TaskList taskList;
 
     /**
      * The input loop. Handles user input, creates tasks and outputs messages accordingly.
@@ -53,9 +59,9 @@ public class Duke {
                         throw new DukeException(TOO_MANY_ARGUMENTS_LIST_MESSAGE);
                     }
                     if (taskList.size() == 0) {
-                        Message.display_message(NO_TASKS_IN_LIST_MESSAGE);
+                        Ui.display_message(NO_TASKS_IN_LIST_MESSAGE);
                     } else {
-                        Message.display_message(String.format(LIST_MESSAGE, taskList));
+                        Ui.display_message(String.format(LIST_MESSAGE, taskList));
                     }
                     break;
                 case DONE:
@@ -64,7 +70,7 @@ public class Duke {
                     }
                     try {
                         int taskIndex = Integer.parseInt(remainingText);
-                        Message.display_message(String.format(DONE_MESSAGE, taskList.markTaskAsDone(taskIndex)));
+                        Ui.display_message(String.format(DONE_MESSAGE, taskList.markTaskAsDone(taskIndex)));
                     } catch (NumberFormatException err) {
                         throw new DukeException(INVALID_NUMBER);
                     }
@@ -75,25 +81,25 @@ public class Duke {
                     }
                     try {
                         int taskIndex = Integer.parseInt(remainingText);
-                        Message.display_message(taskList.deleteTask(taskIndex));
+                        Ui.display_message(taskList.deleteTask(taskIndex));
                     } catch (NumberFormatException err) {
                         throw new DukeException(INVALID_NUMBER);
                     }
                     break;
                 case TODO:
                     ToDo myTodo = ToDo.newTodo(remainingText);
-                    Message.display_message(taskList.addTask(myTodo));
+                    Ui.display_message(taskList.addTask(myTodo));
                     break;
                 case FIND:
-                    Message.display_message(taskList.findTask(remainingText));
+                    Ui.display_message(taskList.findTask(remainingText));
                     break;
                 case DEADLINE:
                     Deadline myDeadline = Deadline.newDeadline(remainingText, false);
-                    Message.display_message(taskList.addTask(myDeadline));
+                    Ui.display_message(taskList.addTask(myDeadline));
                     break;
                 case EVENT:
                     Event myEvent = Event.newEvent(remainingText, false);
-                    Message.display_message(taskList.addTask(myEvent));
+                    Ui.display_message(taskList.addTask(myEvent));
                     break;
                 case BYE:
                     canContinue = false;
@@ -101,22 +107,34 @@ public class Duke {
             }
                 storage.updateTaskListToFile(taskList);
             } catch (DukeException err) {
-                Message.display_message(err.getMessage());
+                Ui.display_message(err.getMessage());
             }
         }
         sc.close();
     }
 
-    public static void main(String[] args) {
-        TaskList taskList = new TaskList();
-        Storage myStorage = new Storage();
+    public Duke(Path filePath) {
+        myStorage = new Storage(filePath);
+        try {
+            taskList = new TaskList(myStorage.load());
+        } catch (DukeException err) {
+            Ui.display_message(err.getMessage());
+            taskList = new TaskList();
+        }
+    }
+
+    public void run() {
         if (!myStorage.didTaskFileExist()) {
-            Message.display_message(WELCOME_MESSAGE);
+            Ui.display_message(WELCOME_MESSAGE);
         } else {
-            Message.display_message(REWELCOME_MESSAGE);
+            Ui.display_message(REWELCOME_MESSAGE);
         }
         myStorage.readTaskFile(taskList);
         inputLoop(taskList, myStorage);
-        Message.display_message(EXIT_MESSAGE);
+        Ui.display_message(EXIT_MESSAGE);
+    }
+
+    public static void main(String[] args) {
+        new Duke(Paths.get(OUTER_DIR, FILE)).run();
     }
 }

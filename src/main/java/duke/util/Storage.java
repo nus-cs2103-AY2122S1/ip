@@ -1,21 +1,19 @@
 package duke.util;
 
-import duke.command.task.TaskList;
+import duke.task.TaskList;
 
 import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 /**
  * Storage class for storing the TaskList in taskList.txt
  */
 public class Storage {
-    private static final String OUTER_DIR = "data";
-    private static final String FILE = "taskList.txt";
-    private static final String[] FILE_PATH_ARR =  {".", OUTER_DIR , FILE};
     private static final String CREATE_FILE_ERROR = "An error occurred. Unable to create taskList file.";
     private static final String FILE_NOT_FOUND_MESSAGE = "An error occurred. Unable to find file.";
     private static final String INVALID_TASKLIST_MESSAGE = "Error reading taskLst. TaskList is probably invalid.";
@@ -26,9 +24,9 @@ public class Storage {
     /**
      * Constructor for Storage
      */
-    public Storage() {
-        taskFile = new File(getPath());
-        this.createOuterDirectory();
+    public Storage(Path filePath) {
+        taskFile = new File(String.valueOf(filePath));
+        createOuterDirectory(taskFile);
         try {
             if (!taskFile.createNewFile()) {
                 this.didTaskFileExist = true;
@@ -77,28 +75,33 @@ public class Storage {
             }
             taskScanner.close();
         } catch (FileNotFoundException err) {
-            Message.display_message(FILE_NOT_FOUND_MESSAGE);
+            Ui.display_message(FILE_NOT_FOUND_MESSAGE);
         } catch (ArrayIndexOutOfBoundsException err) {
-            Message.display_message(INVALID_TASKLIST_MESSAGE);
+            Ui.display_message(INVALID_TASKLIST_MESSAGE);
         } catch (DukeException err) {
-            Message.display_message(err.getMessage());
+            Ui.display_message(err.getMessage());
         }
-}
+    }
 
-    /**
-     * Gets the path to taskList.txt
-     *
-     * @return Path to taskList.txt
-     */
-    private String getPath() {
-        return String.join(File.separator, FILE_PATH_ARR);
+    public String load() throws DukeException{
+        StringBuilder taskList = new StringBuilder("");
+        try {
+            Scanner taskScanner = new Scanner(this.taskFile);
+            while (taskScanner.hasNextLine()) {
+                String taskLine = taskScanner.nextLine();
+                taskList.append(taskLine).append("\n");
+            }
+            taskScanner.close();
+            return taskList.toString();
+        } catch (FileNotFoundException err) {
+            throw new DukeException(FILE_NOT_FOUND_MESSAGE);
+        }
     }
 
     /**
      * Creates the outer directory. In this case data
      */
-    private void createOuterDirectory() {
-        File directory = new File(OUTER_DIR);
-        directory.mkdirs();
+    private static void createOuterDirectory(File taskFile) {
+        taskFile.getParentFile().mkdirs();
     }
 }
