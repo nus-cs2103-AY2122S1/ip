@@ -1,7 +1,8 @@
 package duke.task;
 
-import duke.exception.DukeException;
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
 
 /**
  * Creates an ArrayList to store tasks and provides functionality to manipulate the tasks inside the ArrayList.
@@ -10,6 +11,11 @@ public class TaskList {
     private ArrayList<Task> store;
     private String[] input;
 
+    /**
+     * Creates new TaskList object.
+     *
+     * @param input Input array of tasks in String representation.
+     */
     public TaskList(String[] input) {
         this.input = input;
         store = new ArrayList<>();
@@ -44,27 +50,29 @@ public class TaskList {
                 }
                 String task = words[0];
                 switch (task) {
-                    case ("T"):
-                        Task toAdd = new ToDo(words[2]);
-                        if (isCompleted) {
-                            toAdd.setCompleted();
-                        }
-                        store.add(toAdd);
-                        break;
-                    case ("E"):
-                        Task temp = new Event(words[2], words[3]);
-                        if (isCompleted) {
-                            temp.setCompleted();
-                        }
-                        store.add(temp);
-                        break;
-                    case ("D"):
-                        Task temp1 = new Deadline(words[2], words[3]);
-                        if (isCompleted) {
-                            temp1.setCompleted();
-                        }
-                        store.add(temp1);
-                        break;
+                case ("T"):
+                    Task toAdd = new ToDo(words[2]);
+                    if (isCompleted) {
+                        toAdd.setCompleted();
+                    }
+                    store.add(toAdd);
+                    break;
+                case ("E"):
+                    Task temp = new Event(words[2], words[3]);
+                    if (isCompleted) {
+                        temp.setCompleted();
+                    }
+                    store.add(temp);
+                    break;
+                case ("D"):
+                    Task temp1 = new Deadline(words[2], words[3]);
+                    if (isCompleted) {
+                        temp1.setCompleted();
+                    }
+                    store.add(temp1);
+                    break;
+                default:
+                    break;
                 }
             }
         }

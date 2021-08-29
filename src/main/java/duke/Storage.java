@@ -1,5 +1,7 @@
 package duke;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * Stores in real-time the edits to the TaskList directly into the destination text file.
@@ -17,6 +18,11 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class Storage {
     private String filepath;
 
+    /**
+     * Creates new Storage object.
+     *
+     * @param filepath Filepath of text file to store information in.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         makeFile();

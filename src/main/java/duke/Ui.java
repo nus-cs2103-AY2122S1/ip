@@ -1,9 +1,9 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.task.Task;
-
-import java.util.Scanner;
 
 /**
  * Manages the user interface and contains all user outputs to print during user interaction.
@@ -11,6 +11,9 @@ import java.util.Scanner;
 public class Ui {
     private Scanner s;
 
+    /**
+     * Creates new Ui object.
+     */
     public Ui() {
         this.s = new Scanner(System.in);
         printIntro();
@@ -76,7 +79,7 @@ public class Ui {
     public void printTaskAdded(Task task, int size) {
         System.out.println("    ______________________________________");
         System.out.println("     Got it. I've added this task: ");
-        System.out.printf("       %s\n",task);
+        System.out.printf("       %s\n", task);
         System.out.printf("     Now you have %d tasks in the list\n", size);
         System.out.println("    ______________________________________");
     }
