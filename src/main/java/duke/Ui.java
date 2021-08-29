@@ -3,6 +3,7 @@ package duke;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class Ui {
     private final BufferedReader in;
@@ -31,6 +32,19 @@ public class Ui {
         out.println("Hello! I'm Duke.Duke");
         out.println("What can I do for you?");
         out.flush();
+    }
+
+    /**
+     * Prints tasks found from find query
+     * @param tasks tasks found by taskList
+     */
+    public void printFind(ArrayList<Task> tasks) {
+        System.out.println("____________________________________________________________");
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
+        System.out.println("____________________________________________________________");
     }
 
     /**

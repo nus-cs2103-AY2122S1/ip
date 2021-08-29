@@ -37,7 +37,7 @@ public class Duke {
      */
     public void run(BufferedReader in, PrintWriter out) {
         Ui ui = new Ui(in, out);
-        Parser parser = new Parser();
+        Parser parser = new Parser(ui);
         Storage storage = new Storage(this.taskListFileName);
         TaskList taskList = storage.initialise();
 

@@ -24,6 +24,14 @@ public class Task implements Serializable {
     }
 
     /**
+     * Getter for task description.
+     * @return description of task
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
      * Changes task completion state to true.
      */
     public void complete() {

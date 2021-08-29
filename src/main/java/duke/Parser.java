@@ -1,23 +1,43 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+    private Ui ui;
+
+    /**
+     * Parses inputs provided by ui, and directs ui to print corresponding output.
+     * @param ui ui used to interact with users.
+     */
+    public Parser(Ui ui) {
+        this.ui = ui;
+    }
+
     /**
      * Executes action associated with provided string input, and prints out relevant details to console.
      * @param input command associated with an action
      * @param taskList storage used to carry out actions
      * @return whether Duke has completed executing
      */
-    public static boolean parse(String input, TaskList taskList) {
+    public boolean parse(String input, TaskList taskList) {
         Pattern todoPattern = Pattern.compile("todo (.*)");
         Pattern deadlinePattern = Pattern.compile("deadline (.*) /by (.*)");
         Pattern eventPattern = Pattern.compile("event (.*) /at (.*)");
+        Pattern findPattern = Pattern.compile("find (.*)");
 
         // print out list
         if (input.equals("list")) {
             taskList.list();
+            return false;
+        }
+
+        // finds related tasks
+        Matcher findMatcher = findPattern.matcher(input);
+        if (findMatcher.find()) {
+            ArrayList<Task> tasks = taskList.find(findMatcher.group(1));
+            this.ui.printFind(tasks);
             return false;
         }
 
