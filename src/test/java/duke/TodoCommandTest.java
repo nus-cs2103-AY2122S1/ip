@@ -35,7 +35,7 @@ public class TodoCommandTest {
         Task expected = new Todo("a simple todo task", false);
         try {
             assertEquals(expected.getLabel(),tl.get(1).getLabel()); //same label
-            assertEquals(expected.taskType(), tl.get(1).taskType()); //same type
+            assertEquals(expected.getTaskType(), tl.get(1).getTaskType()); //same type
         } catch(DukeException e) {
             fail(e.getMessage());
         }
@@ -49,7 +49,7 @@ public class TodoCommandTest {
             c.execute();
             Task expected = new Deadline("a simple deadline task", "2020-02-20 00:00:00", false);
             assertEquals(expected.getLabel(), tl.get(1).getLabel());
-            assertEquals(expected.taskType(), tl.get(1).taskType());
+            assertEquals(expected.getTaskType(), tl.get(1).getTaskType());
         } catch(DukeException e) {
             fail(e.getMessage());
         }
@@ -63,7 +63,7 @@ public class TodoCommandTest {
             c.execute();
             Task expected = new Event("a simple event task", "2020-02-20 00:00:00", false);
             assertEquals(expected.getLabel(), tl.get(1).getLabel());
-            assertEquals(expected.taskType(), tl.get(1).taskType());
+            assertEquals(expected.getTaskType(), tl.get(1).getTaskType());
         } catch(DukeException e) {
             fail(e.getMessage());
         }
