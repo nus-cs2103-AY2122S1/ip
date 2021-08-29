@@ -26,6 +26,7 @@ gradle-app.setting
 # Cache of project
 .gradletasknamecache
 
+data
 text-ui-test/data
 text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
