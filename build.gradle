@@ -41,6 +41,10 @@ checkstyle {
     toolVersion = '8.29'
 }
 
+task precommit {
+    dependsOn('clean', 'build', 'test', 'checkstyleMain', 'checkstyleTest')
+}
+
 run{
     standardInput = System.in
 }
