@@ -42,6 +42,18 @@ public class Duke {
         try {
             String exitTag = "bye";
             if (input.equalsIgnoreCase(exitTag)) {
+                new Thread() {
+                    public void run() {
+                        try {
+                            Thread.sleep(1250);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            System.exit(0);
+                        }
+                    }
+                }.start();
+
                 return Ui.exit();
             } else {
                 Command action = this.parser.checkCommandTag(input);
