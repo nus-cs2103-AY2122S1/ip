@@ -8,7 +8,7 @@ import duke.task.ToDo;
  * Represents a command to add a ToDo task.
  */
 public class CommandTodo extends DukeCommand {
-    ToDo task;
+    private ToDo task;
 
     /**
      * Creates a new CommandTodo command.

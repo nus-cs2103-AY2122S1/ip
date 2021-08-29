@@ -7,7 +7,7 @@ import duke.task.TaskList;
  * Represents a command to search the task list.
  */
 public class CommandFind extends DukeCommand {
-    String keyword;
+    private String keyword;
 
     /**
      * Creates a new CommandFind.

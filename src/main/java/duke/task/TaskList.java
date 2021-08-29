@@ -1,10 +1,8 @@
 package duke.task;
 
-import duke.DukeDate;
-
 import java.util.ArrayList;
-import java.lang.StringBuilder;
 
+import duke.DukeDate;
 /**
  * Represents the list of tasks the user has. Stores the tasks in the form of <code>Task</code> objects.
  */
@@ -152,7 +150,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         Task t;
 
-        for(int i = 1; i <= this.listSize; i++) {
+        for (int i = 1; i <= this.listSize; i++) {
             t = userList.get((i - 1));
             if (t.getName().contains(keyword)) {
                 sb.append(
@@ -185,16 +183,16 @@ public class TaskList {
     private String getTaskTime(Task t) {
         String time;
         switch (t.getTaskType()) {
-            case "D":
-                Deadline d = (Deadline) t;
-                time = "by: " + DukeDate.formatDateOutput(d.getTime());
-                break;
-            case "E":
-                Event e = (Event) t;
-                time = "at: " + DukeDate.formatDateOutput(e.getTime());
-                break;
-            default:
-                time = "No time specified";
+        case "D":
+            Deadline d = (Deadline) t;
+            time = "by: " + DukeDate.formatDateOutput(d.getTime());
+            break;
+        case "E":
+            Event e = (Event) t;
+            time = "at: " + DukeDate.formatDateOutput(e.getTime());
+            break;
+        default:
+            time = "No time specified";
         }
         return time;
     }

@@ -8,7 +8,7 @@ import duke.task.TaskList;
  * Represents a command to add an Event task.
  */
 public class CommandEvent extends DukeCommand {
-    Event task;
+    private Event task;
 
     /**
      * Creates a new CommandEvent.

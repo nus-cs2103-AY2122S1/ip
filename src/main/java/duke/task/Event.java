@@ -1,14 +1,14 @@
 package duke.task;
 
-import duke.DukeDate;
-
 import java.time.LocalDate;
+
+import duke.DukeDate;
 
 /**
  * Represents a Event task.
  * Inherits from <code>Task</code> with the addition of a <code>time</code> attribute.
  */
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate time;
 
     /**

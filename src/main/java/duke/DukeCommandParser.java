@@ -1,6 +1,15 @@
 package duke;
 
-import duke.command.*;
+import duke.command.CommandBye;
+import duke.command.CommandDeadline;
+import duke.command.CommandDelete;
+import duke.command.CommandDone;
+import duke.command.CommandEvent;
+import duke.command.CommandFind;
+import duke.command.CommandGeneric;
+import duke.command.CommandList;
+import duke.command.CommandTodo;
+import duke.command.DukeCommand;
 import duke.exception.DukeArgumentException;
 import duke.exception.DukeCommandException;
 import duke.task.Deadline;

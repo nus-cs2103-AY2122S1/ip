@@ -1,15 +1,15 @@
 package duke.command;
 
-import duke.exception.DukeFileException;
 import duke.DukeStorage;
 import duke.DukeUi;
+import duke.exception.DukeFileException;
 import duke.task.TaskList;
 
 /**
  * Represents a command to exit the app.
  */
 public class CommandBye extends DukeCommand {
-    boolean isEnd = true;
+    private boolean isEnd = true;
 
     /**
      * Saves the task list and attempts to exit the app.

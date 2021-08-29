@@ -5,7 +5,7 @@ import duke.task.TaskList;
 /**
  * Represents a dummy command that doesn't do anything.
  */
-public class CommandGeneric extends DukeCommand{
+public class CommandGeneric extends DukeCommand {
 
     /**
      * Does nothing.

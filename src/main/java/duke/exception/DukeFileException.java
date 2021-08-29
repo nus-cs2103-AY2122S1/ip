@@ -9,7 +9,7 @@ public class DukeFileException extends Exception {
      *
      * @param msg message to be added.
      */
-    public DukeFileException(String msg){
+    public DukeFileException(String msg) {
         super(msg);
     }
 

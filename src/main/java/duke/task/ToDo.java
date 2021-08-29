@@ -4,7 +4,7 @@ package duke.task;
  * Represents a ToDo task.
  * Inherits from <code>Task</code>.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Creates a new ToDo object.

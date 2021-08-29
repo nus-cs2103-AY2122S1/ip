@@ -1,14 +1,14 @@
 package duke.task;
 
-import duke.DukeDate;
-
 import java.time.LocalDate;
+
+import duke.DukeDate;
 
 /**
  * Represents a Deadline task.
  * Inherits from <code>Task</code> with the addition of a <code>time</code> attribute.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate time;
 
     /**
@@ -30,7 +30,7 @@ public class Deadline extends Task{
      * @param isComplete Boolean representing whether task is completed.
      */
     public Deadline(String name, LocalDate time, boolean isComplete) {
-        super(name,  isComplete, "D");
+        super(name, isComplete, "D");
         this.time = time;
     }
 
