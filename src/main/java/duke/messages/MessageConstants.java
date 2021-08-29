@@ -11,7 +11,7 @@ public class MessageConstants {
     public static final String MESSAGE_TASK_ADD_HEADER = "Got it. I've added this task:\n\t";
     public static final String MESSAGE_TASK_DONE_HEADER = "Nice! I've marked this task as done:";
     public static final String MESSAGE_TASK_LIST_HEADER = "Here are the tasks in your list:";
-    public static final String MESSAGE_FIND_TASK_LIST = "Here are the matching tasks in your list:";
+    public static final String MESSAGE_FIND_TASK_LIST = "Here are the tasks with matching descriptions in your list:";
     public static final String MESSAGE_TASK_DELETE_HEADER = "Noted. I've removed this task:\n\t";
     public static final String MESSAGE_INVALID_COMMAND =
             "Oof!!! I'm sorry, but I don't know what that means :-(";
@@ -39,7 +39,7 @@ public class MessageConstants {
     public static final String MESSAGE_INVALID_INTEGER = "Oof!!! Task number must be valid integer. eg. \"done 1\"";
     public static final String MESSAGE_TASK_FILE_IO_FAILURE = "Oof!!! Unable to read/write from save file.";
     public static final String MESSAGE_INVALID_TASK_DATA = "Oof!!! Saved task data is corrupted/invalid!"
-            + "\nTerminating Duke!";
+            + "\nDuke failed to start. Please verify/delete the saved data file and restart Duke!";
 
 
     // hide constructor for utility class
