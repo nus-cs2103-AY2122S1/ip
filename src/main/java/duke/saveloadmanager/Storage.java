@@ -79,7 +79,6 @@ public class Storage {
         fw.close();
     }
 
-
     /**
      * Returns char for "0" or "1". The value indicates whether the task is done or not.
      * It also deals with the local file data and convert them into task and store into TaskList.
@@ -111,5 +110,4 @@ public class Storage {
 
         return done;
     }
-
 }

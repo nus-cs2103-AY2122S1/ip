@@ -17,7 +17,6 @@ import java.util.Scanner;
 public class Ui {
     private static final String LINE = "____________________________________________________________";
 
-
     /**
      * Prints a line for users.
      */
@@ -77,7 +76,6 @@ public class Ui {
         System.out.println("Now you have " + size + " tasks in the list.");
     }
 
-
     /**
      * Prints the Ui info for the add method in Tasklists.
      *
@@ -90,8 +88,6 @@ public class Ui {
         System.out.println("Now you have " + size + "" +
                 " tasks in the list.");
     }
-
-
 
     /**
      * Prints the Ui info for the getSpecificDateEvent method in Tasklists.
@@ -106,7 +102,6 @@ public class Ui {
     public void findTasks() {
         System.out.println("Here are the matching tasks in your list:");
     }
-
 
     /**
      * Returns the line of input from users.
