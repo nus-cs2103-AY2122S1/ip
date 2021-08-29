@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
 
 
 /**
@@ -65,7 +65,7 @@ public class Parser {
         } else if (fullCommand.startsWith("list")) {
             return new ListCommand();
         } else if (!fullCommand.contains(" ")) {
-            throw new DukeException("☹ OOPS!!! Please enter something after the command.");
+            throw new DukeException("OOPS!!! Please enter something after the command.");
         } else if (fullCommand.startsWith("done")) {
             try {
                 int index = Integer.parseInt(fullCommand.split(" ", 2)[1].trim());
@@ -73,10 +73,10 @@ public class Parser {
                 if (index > 0 && index < taskList.taskCount() + 1) {
                     return new DoneCommand(index);
                 } else {
-                    throw new DukeException("☹ OOPS!!! Please enter a valid task index.");
+                    throw new DukeException("OOPS!!! Please enter a valid task index.");
                 }
             } catch (NumberFormatException e) {
-                throw new DukeException("☹ OOPS!!! Please enter an integer.");
+                throw new DukeException("OOPS!!! Please enter an integer.");
             }
         } else if (fullCommand.startsWith("delete")) {
             try {
@@ -85,16 +85,16 @@ public class Parser {
                 if (index > 0 && index < taskList.taskCount() + 1) {
                     return new DeleteCommand(index);
                 } else {
-                    throw new DukeException("☹ OOPS!!! Please enter a valid task index.");
+                    throw new DukeException("OOPS!!! Please enter a valid task index.");
                 }
             } catch (NumberFormatException e) {
-                throw new DukeException("☹ OOPS!!! Please enter an integer.");
+                throw new DukeException("OOPS!!! Please enter an integer.");
             }
         } else if (fullCommand.startsWith("find")) {
             String searchString = fullCommand.split(" ", 2)[1].trim();
 
             if (searchString.isEmpty()) {
-                throw new DukeException("☹ OOPS!!! Please enter the term you want to search.");
+                throw new DukeException("OOPS!!! Please enter the term you want to search.");
             } else {
                 return new FindCommand(searchString);
             }
@@ -109,7 +109,7 @@ public class Parser {
                 String content = fullCommand.split(" ", 2)[1].trim();
                 return parseEvent(content);
             } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
@@ -117,7 +117,7 @@ public class Parser {
     private static Command parseToDo(String input) throws DukeException {
 
         if (input.trim().isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else {
             return new AddCommand(input.trim(), "todo");
         }
@@ -129,9 +129,9 @@ public class Parser {
             String dateAndTime = input.split("/by", 2)[1].trim();
 
             if (description.isEmpty()) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             } else if (dateAndTime.isEmpty()) {
-                throw new DukeException("☹ OOPS!!! The deadline of a... deadline cannot be empty.");
+                throw new DukeException("OOPS!!! The deadline of a... deadline cannot be empty.");
             }
 
             if (isDateTime(dateAndTime)) {
@@ -142,10 +142,10 @@ public class Parser {
                 LocalDate dateObj = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern(detectedFormat));
                 return new AddCommand(description, dateObj, "deadline");
             } else {
-                throw new DukeException("☹ OOPS!!! Please enter a valid deadline!");
+                throw new DukeException("OOPS!!! Please enter a valid deadline!");
             }
         } else {
-            throw new DukeException("☹ OOPS!!! The deadline of a... deadline cannot be empty.");
+            throw new DukeException("OOPS!!! The deadline of a... deadline cannot be empty.");
         }
     }
 
@@ -176,9 +176,9 @@ public class Parser {
             String dateAndTimeDuration = input.split("/at", 2)[1].trim();
 
             if (description.isEmpty()) {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
             } else if (dateAndTimeDuration.isEmpty()) {
-                throw new DukeException("☹ OOPS!!! The duration of an event cannot be empty.");
+                throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
             }
 
             if (dateAndTimeDuration.contains(" ")) {
@@ -191,17 +191,17 @@ public class Parser {
                     if (isDuration(timeDuration)) {
                         return new AddCommand(description, eventDate, startTime, endTime, "event");
                     } else {
-                        throw new DukeException("☹ OOPS!!! Please enter a valid time duration!"
+                        throw new DukeException("OOPS!!! Please enter a valid time duration!"
                             + " Valid formats are (HHmm-HHmm or hh:mm a-hh:mm a)");
                     }
                 } else {
-                    throw new DukeException("☹ OOPS!!! Please enter a valid date in duration!");
+                    throw new DukeException("OOPS!!! Please enter a valid date in duration!");
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! The duration of an event cannot be empty.");
+                throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
             }
         } else {
-            throw new DukeException("☹ OOPS!!! The duration of an event cannot be empty.");
+            throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
         }
     }
 

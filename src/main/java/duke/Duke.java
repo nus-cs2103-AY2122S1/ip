@@ -1,13 +1,15 @@
 package duke;
 
-import duke.command.Command;
+import duke.commands.Command;
+import duke.gui.Main;
+import javafx.application.Application;
 
 /**
  * This program is Duke bot who keeps track of tasks that user inputs
  * and let user manage the tasks through various commands.
  */
 public class Duke {
-    //Added Gradle support in master branch
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -23,23 +25,18 @@ public class Duke {
         taskList = new TaskList(storage);
     }
 
-    /**
-     * This method lets Duke run and start asking for user input.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isRunning = true;
-        while (isRunning) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand, taskList);
-                c.execute(taskList, ui);
-                isRunning = c.isRunning();
-
-            } catch (DukeException e) {
-                ui.stringWithDivider(e.getMessage());
+    public String getResponse(String input) {
+        String dukeResponse = "";
+        try {
+            Command c = Parser.parse(input, taskList);
+            dukeResponse = c.execute(taskList, ui);
+            if (!c.isRunning()) {
+                System.exit(0);
             }
+        } catch (DukeException e) {
+            return e.getMessage();
         }
+        return dukeResponse;
     }
 
     /**
@@ -47,6 +44,6 @@ public class Duke {
      * @param args Main method arguments.
      */
     public static void main(String[] args) {
-        new Duke("./Duke.txt").run();
+        Application.launch(Main.class, args);
     }
 }
