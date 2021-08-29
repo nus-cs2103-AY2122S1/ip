@@ -1,5 +1,8 @@
 package duke.databse;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.core.UI;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -7,15 +10,13 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * A class to CRUD file that stores task
  */
 public class Database {
 
-    File file;
+    private File file;
     private UI ui;
 
     /**
@@ -70,50 +71,52 @@ public class Database {
             isDone = true;
         }
         switch (s[0]) {
-            case "T":
-                Todo todo = new Todo(s[1], isDone);
-                return todo;
-            case "E":
-                String taskname_event = "";
-                String tasktime_event = "";
-                boolean timepart_event = false;
-                for (int i = 1; i < s.length - 1; i++) {
-                    if (s[i].startsWith("/")) {
-                        timepart_event = true;
-                        tasktime_event = s[i].substring(1);
-                    } else if (timepart_event) {
-                        tasktime_event += " " + s[i];
+        case "T":
+            Todo todo = new Todo(s[1], isDone);
+            return todo;
+        case "E":
+            String taskname_event = "";
+            String tasktime_event = "";
+            boolean timepart_event = false;
+            for (int i = 1; i < s.length - 1; i++) {
+                if (s[i].startsWith("/")) {
+                    timepart_event = true;
+                    tasktime_event = s[i].substring(1);
+                } else if (timepart_event) {
+                    tasktime_event += " " + s[i];
+                } else {
+                    if (s[i + 1].startsWith("/")) {
+                        taskname_event += s[i];
                     } else {
-                        if (s[i + 1].startsWith("/")) {
-                            taskname_event += s[i];
-                        } else {
-                            taskname_event += s[i] + " ";
-                        }
+                        taskname_event += s[i] + " ";
+                    }
 
-                    }
                 }
-                Event event =  new Event(taskname_event, isDone, tasktime_event);
-                return event;
-            case "D":
-                String taskname_ddl = "";
-                String tasktime_ddl = "";
-                boolean timepart_ddl = false;
-                for (int i = 1; i < s.length - 1; i++) {
-                    if (s[i].startsWith("/")) {
-                        timepart_ddl = true;
-                        tasktime_ddl = s[i].substring(1);
-                    } else if (timepart_ddl) {
-                        tasktime_ddl += " " + s[i];
+            }
+            Event event = new Event(taskname_event, isDone, tasktime_event);
+            return event;
+        case "D":
+            String taskname_ddl = "";
+            String tasktime_ddl = "";
+            boolean timepart_ddl = false;
+            for (int i = 1; i < s.length - 1; i++) {
+                if (s[i].startsWith("/")) {
+                    timepart_ddl = true;
+                    tasktime_ddl = s[i].substring(1);
+                } else if (timepart_ddl) {
+                    tasktime_ddl += " " + s[i];
+                } else {
+                    if (s[i + 1].startsWith("/")) {
+                        taskname_ddl += s[i];
                     } else {
-                        if (s[i + 1].startsWith("/")) {
-                            taskname_ddl += s[i];
-                        } else {
-                            taskname_ddl += s[i] + " ";
-                        }
+                        taskname_ddl += s[i] + " ";
                     }
                 }
-                Deadline deadline = new Deadline(taskname_ddl,isDone, tasktime_ddl);
-                return deadline;
+            }
+            Deadline deadline = new Deadline(taskname_ddl, isDone, tasktime_ddl);
+            return deadline;
+        default:
+            break;
         }
         return null;
     }
@@ -201,10 +204,11 @@ public class Database {
         }
     }
 
-
-
-
-    public static void main(String args[]) {
+    /**
+     * run database
+     * @param args
+     */
+    public static void main(String[] args) {
         Database d = new Database("todoList.txt");
         d.getData();
     }

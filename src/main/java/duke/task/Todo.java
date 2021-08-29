@@ -1,20 +1,29 @@
 package duke.task;
 
-import java.time.LocalDate;
 
 /**
  * a class that represent todo task
  */
-public class Todo extends Task{
+public class Todo extends Task {
     private String name;
     private boolean isDone;
 
+    /**
+     * constructor
+     * @param name
+     * @param isDone
+     */
     public Todo(String name, boolean isDone) {
         super();
         this.name = name;
         this.isDone = isDone;
     }
 
+    /**
+     * search whether keyword exist
+     * @param keyword
+     * @return
+     */
     public boolean searchKeyword(String keyword) {
         String[] s = name.split(" ");
         for (String ss : s) {
@@ -43,7 +52,7 @@ public class Todo extends Task{
 
     @Override
     public String toString() {
-        return "T" + " " +  name  +" "+ isDone  + '\n';
+        return "T" + " " + name + " " + isDone + '\n';
     }
 
 }

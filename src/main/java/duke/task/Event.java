@@ -5,11 +5,17 @@ import java.time.LocalDate;
 /**
  * a clas that represent event task
  */
-public class Event extends Task{
+public class Event extends Task {
     private String name;
     private boolean isDone;
     private String time;
 
+    /**
+     * constrctor
+     * @param name
+     * @param isDone
+     * @param time
+     */
     public Event(String name, boolean isDone, String time) {
         super();
         this.name = name;
@@ -17,6 +23,11 @@ public class Event extends Task{
         this.time = time;
     }
 
+    /**
+     * search whether keyword exist
+     * @param keyword
+     * @return
+     */
     public boolean searchKeyword(String keyword) {
         String[] s = name.split(" ");
         for (String ss : s) {
@@ -34,8 +45,8 @@ public class Event extends Task{
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(s[0] + " ");
         stringBuilder.append(date.getMonth() + " ");
-        stringBuilder.append(date.getDayOfMonth()  + " ");
-        stringBuilder.append(date.getYear()  + " ");
+        stringBuilder.append(date.getDayOfMonth() + " ");
+        stringBuilder.append(date.getYear() + " ");
         for (int i = 2; i < s.length; i++) {
             stringBuilder.append(s[i] + " ");
         }
@@ -61,6 +72,7 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "E" + " " + name    +" "  +"/"+ time + " "+  isDone+ '\n';
+        return "E" + " " + name + " "
+                + "/" + time + " " + isDone + '\n';
     }
 }

@@ -5,10 +5,23 @@ import java.time.LocalDate;
 /**
  * A class that represent deadline task
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private String name;
     private boolean isDone;
     private String time;
+
+    /**
+     * constructor
+     * @param name
+     * @param isDone
+     * @param time
+     */
+    public Deadline(String name, boolean isDone, String time) {
+        super();
+        this.name = name;
+        this.isDone = isDone;
+        this.time = time;
+    }
 
     @Override
     public String getName() {
@@ -21,15 +34,10 @@ public class Deadline extends Task{
     }
 
 
-
-
-    public Deadline(String name, boolean isDone, String time) {
-        super();
-        this.name = name;
-        this.isDone = isDone;
-        this.time = time;
-    }
-
+    /**
+     * get time
+     * @return
+     */
     public String getTime() {
         String[] s = this.time.split(" ");
 
@@ -37,8 +45,8 @@ public class Deadline extends Task{
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(s[0] + " ");
         stringBuilder.append(date.getMonth() + " ");
-        stringBuilder.append(date.getDayOfMonth()  + " ");
-        stringBuilder.append(date.getYear()  + " ");
+        stringBuilder.append(date.getDayOfMonth() + " ");
+        stringBuilder.append(date.getYear() + " ");
         for (int i = 2; i < s.length; i++) {
             stringBuilder.append(s[i] + " ");
         }
@@ -46,6 +54,11 @@ public class Deadline extends Task{
         return stringBuilder.toString();
     }
 
+    /**
+     * search whether keyword exist
+     * @param keyword
+     * @return
+     */
     public boolean searchKeyword(String keyword) {
         String[] s = name.split(" ");
         for (String ss : s) {
@@ -63,7 +76,8 @@ public class Deadline extends Task{
 
     @Override
     public String toString() {
-        return "D" + " " +  name  +" "  +"/"+ time + " "+  isDone+ '\n';
+        return "D" + " " + name + " "
+                + "/" + time + " " + isDone + '\n';
     }
 
 
