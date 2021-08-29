@@ -3,7 +3,7 @@ package duke;
 import duke.commands.Command;
 
 /**
- * The main class which runs the Duke chat bot.
+ * The main class which runs the Duke chatbot.
  */
 public class Duke {
 
@@ -27,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * Runs
+     * Runs Duke chatbot and allows it to continuously receive inputs from the user.
      */
     public void run() {
         ui.showWelcome();
