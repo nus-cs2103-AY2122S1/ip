@@ -26,7 +26,7 @@ Features:
 - [ ] GUI 
 
 ***
-If you Java programmer, you can use it as a template to build upon. Here's the `main` method:
+If you are a Java programmer, you can use it as a template to build upon. Here's the `main` method:
 
 ```java
 public class Duchess {
