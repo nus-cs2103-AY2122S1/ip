@@ -10,10 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Represents testing the DukeException class.
  */
 public class DukeExceptionTest {
-
+    
     /**
-     * Tests the getMessage method.
+     * Class constructor.
      */
+    public DukeExceptionTest() {
+        
+    }
+    
     @Test
     public void getMessage_StringOutOfBoundsException_CommandIncompleteMessage(){
         StringIndexOutOfBoundsException e = new StringIndexOutOfBoundsException();
