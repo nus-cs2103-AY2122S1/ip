@@ -1,15 +1,21 @@
 package seedu.duke.command;
 
 import seedu.duke.DukeException;
-import seedu.duke.Storage;
 import seedu.duke.Ui;
-import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 
 public class FindCommand extends Command {
     private static final String FIND_MESSAGE = "Here are the matching tasks in your list.\n";
     private String keyword;
 
+    /**
+     * Public constructor for <code>FindCommand</code>.
+     *
+     * @param ui The Ui to handle user interactions.
+     * @param taskList The task list to be updated.
+     * @param keyword The keyword to search for among the tasks
+     *                in the task list.
+     */
     public FindCommand(Ui ui, TaskList taskList, String keyword) {
         super(ui, taskList);
         this.keyword = keyword;

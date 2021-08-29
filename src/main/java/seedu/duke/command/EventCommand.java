@@ -11,12 +11,25 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+/**
+ * Represents an event command. An <code>EventCommand</code> describes
+ * the action to be executed when a user input an event task description.
+ */
 public class EventCommand extends Command {
     private static final String ADD_MESSAGE = "Got it. I've added this task:\n";
     private Task task;
     private Storage storage;
     private LocalDate date;
 
+    /**
+     * Public constructor for <code>EventCommand</code>.
+     * @param ui The Ui to handle user interactions.
+     * @param taskList The task list to be updated.
+     * @param description The description of the task.
+     * @param date Date of the event.
+     * @param storage The storage to handle modifications to the file.
+     */
     public EventCommand(Ui ui, TaskList taskList, String description,
                            LocalDate date, Storage storage) {
         super(ui, taskList);

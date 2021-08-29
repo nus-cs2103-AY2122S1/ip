@@ -35,8 +35,8 @@ class Duke {
      * interprets it to Duke to execute relevant tasks.
      */
     private class Parser {
-        private String[] list_of_words = new String[0];
-        private String userInput ="";
+        private String[] listOfWords = new String[0];
+        private String userInput = "";
         private DateTimeManager manager = new DateTimeManager(
                 DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         private int taskIndex = -1;
@@ -59,7 +59,7 @@ class Duke {
                 handleInvalidInputs(userInput);
             }
 
-            this.list_of_words = arrOfCommandWords;
+            this.listOfWords = arrOfCommandWords;
             // Check the command word
             String commandWord = arrOfCommandWords[0];
             switch (commandWord) {
@@ -68,11 +68,11 @@ class Duke {
                         arrOfCommandWords[1], storage);
             case "deadline":
                 parseDescription(userInput, "/by ");
-                return new DeadlineCommand(ui, taskList, list_of_words[1],
+                return new DeadlineCommand(ui, taskList, listOfWords[1],
                         date, storage);
             case "event":
                 parseDescription(userInput, "/at ");
-                return new EventCommand(ui, taskList, list_of_words[1],
+                return new EventCommand(ui, taskList, listOfWords[1],
                         date, storage);
             case "done":
                 try {
@@ -83,7 +83,7 @@ class Duke {
                 }
                 return new DoneCommand(ui, taskList, taskIndex, storage);
             case "find":
-                return new FindCommand(ui, taskList, list_of_words[1]);
+                return new FindCommand(ui, taskList, listOfWords[1]);
             case "get":
                 try {
                     LocalDate tasksDate = manager.parseDateTime(arrOfCommandWords[1]);
@@ -113,7 +113,7 @@ class Duke {
                 }
 
                 String description = userInput.substring(startOfDescription, indexOfDate);
-                list_of_words[1] = description;
+                listOfWords[1] = description;
                 LocalDate date = manager.parseDateTime(
                         userInput.substring(indexOfDate + command.length())
                 );

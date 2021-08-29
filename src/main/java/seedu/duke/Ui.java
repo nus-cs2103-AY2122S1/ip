@@ -21,7 +21,7 @@ public class Ui {
     /**
      * Outputs the given command to the console.
      *
-     * @param command Command to be printed to user.
+     * @param message Message to be printed to user.
      */
     public void outputMessage(String message) {
         System.out.println(String.format("%4s%s", " ", message));

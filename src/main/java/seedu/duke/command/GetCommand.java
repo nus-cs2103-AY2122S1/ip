@@ -1,14 +1,11 @@
 package seedu.duke.command;
 
-import seedu.duke.DateTimeManager;
 import seedu.duke.DukeException;
-import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,6 +14,14 @@ public class GetCommand extends Command {
     private LocalDate date;
     private HashMap<LocalDate, ArrayList<Task>> dateTasks;
 
+    /**
+     * Public constructor for a <code>GetCommand</code>.
+     *
+     * @param ui The Ui to handle user interactions.
+     * @param taskList The task list to be updated.
+     * @param date The date to look up.
+     * @param dateTasks A HashMap classifying the tasks based on the date.
+     */
     public GetCommand(Ui ui, TaskList taskList, LocalDate date,
                       HashMap<LocalDate, ArrayList<Task>> dateTasks) {
         super(ui, taskList);
@@ -35,6 +40,7 @@ public class GetCommand extends Command {
     @Override
     public void execute() throws DukeException {
         ui.divide();
+        ui.outputMessage(GET_MESSAGE);
         ui.outputMessage(dateTasks.getOrDefault(date, new ArrayList<>())
                 .toString());
         ui.divide();

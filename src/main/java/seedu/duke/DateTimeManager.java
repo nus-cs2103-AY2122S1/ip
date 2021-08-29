@@ -15,7 +15,7 @@ import java.util.HashMap;
  * track and updates tasks that occur on specific days.
  */
 public class DateTimeManager {
-    DateTimeFormatter formatter;
+    private DateTimeFormatter formatter;
 
     public DateTimeManager(DateTimeFormatter formatter) {
         this.formatter = formatter;

@@ -65,6 +65,14 @@ public class TaskList {
         return new TaskList(newList);
     }
 
+    /**
+     * Returns a TaskList with all the tasks containing in the
+     * given keyword.
+     *
+     * @param keyword The string to search for among the tasks in the
+     *                tasklist.
+     * @return TaskList of the tasks containing the keyword.
+     */
     public TaskList findTasksByKeyword(String keyword) {
         TaskList matchingTasks = new TaskList();
         for (Task task : this.tasks) {

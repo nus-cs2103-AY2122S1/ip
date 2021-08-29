@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DateTimeManagerTest {
 
@@ -13,8 +15,8 @@ public class DateTimeManagerTest {
         DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String invalidDateFormat = "23-3-2001";
         DateTimeManager manager = new DateTimeManager(customFormatter);
-        Exception e = assertThrows(DukeException.class,
-                () -> manager.parseDateTime(invalidDateFormat));
+        Exception e = assertThrows(
+                DukeException.class, () -> manager.parseDateTime(invalidDateFormat));
 
         String expectedMessage = "Cannot read date.";
         String actualMessage = e.getMessage();

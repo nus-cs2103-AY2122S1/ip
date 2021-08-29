@@ -10,10 +10,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Represents a command. A <code>Command</code> describes
+ * the action to be executed based on the command.
+ */
 public abstract class Command {
 
     protected Ui ui;
     protected TaskList taskList;
+
+    /**
+     * Public constructor for a <code>Command</code>.
+     * @param ui Ui to handle user interactions.
+     * @param taskList TaskList to be updated.
+     */
+    public Command(Ui ui, TaskList taskList) {
+        this.ui = ui;
+        this.taskList = taskList;
+    }
 
     public boolean isExit() {
         return false;
@@ -30,11 +44,6 @@ public abstract class Command {
     public void updateDateTasks(HashMap<LocalDate, ArrayList<Task>> dateTasks,
                                 DateTimeManager manager) {
         return;
-    }
-
-    public Command(Ui ui, TaskList taskList) {
-        this.ui = ui;
-        this.taskList = taskList;
     }
 
     public abstract String getUsageMessage();

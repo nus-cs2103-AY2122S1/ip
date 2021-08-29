@@ -6,14 +6,26 @@ import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 import seedu.duke.task.ToDo;
 
+/**
+ * Represents a todo command. A <code>ToDoCommand</code> describes
+ * the action to be executed when a user input a todo task description.
+ */
 public class ToDoCommand extends Command {
     private static final String ADD_MESSAGE = "Got it. I've added this task:\n";
-    private String description;
+    private Task task;
     private Storage storage;
 
+    /**
+     * Public constructor for ToDoCommand
+     *
+     * @param ui The Ui to handle user interactions.
+     * @param taskList The tasklist to be updated.
+     * @param description The description of the task.
+     * @param storage The storage to handle modifications to the file.
+     */
     public ToDoCommand(Ui ui, TaskList taskList, String description, Storage storage) {
         super(ui, taskList);
-        this.description = description;
+        task = new ToDo(description);
         this.storage = storage;
     }
 
@@ -33,7 +45,6 @@ public class ToDoCommand extends Command {
      */
     @Override
     public void execute() {
-        Task task = new ToDo(description);
         taskList = taskList.add(task);
         storage.addTaskToFile(task);
 

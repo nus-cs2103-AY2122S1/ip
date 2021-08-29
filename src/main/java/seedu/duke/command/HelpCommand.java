@@ -5,10 +5,20 @@ import seedu.duke.task.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a help command. A <code>HelpCommand</code> returns
+ * Duke's usage when a user is needs help.
+ */
 public class HelpCommand extends Command {
     private static final String HELP_MESSAGE = "Here are the available commands:\n";
     private ArrayList<Command> commands;
 
+    /**
+     * Public constructor for HelpCommand.
+     *
+     * @param ui The Ui to handle user interactions.
+     * @param taskList The tasklist to be updated.
+     */
     public HelpCommand(Ui ui, TaskList taskList) {
         super(ui, taskList);
 
@@ -22,7 +32,7 @@ public class HelpCommand extends Command {
         commands.add(new EventCommand(ui, taskList, "", null, null));
         commands.add(new DoneCommand(ui, taskList, 0, null));
         commands.add(new DeleteCommand(ui, taskList, 0, null));
-        commands.add(new GetCommand(ui, taskList,null, null));
+        commands.add(new GetCommand(ui, taskList, null, null));
         commands.add(new FindCommand(ui, taskList, ""));
     }
 
