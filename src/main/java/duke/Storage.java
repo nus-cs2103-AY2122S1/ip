@@ -18,20 +18,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+/**
+ * A class that helps in storing the class offline
+ *
+ * @author mrmrinal
+ */
 public class Storage {
 
-    public String path;
-    public static String pathFolder = "." +  File.separator + "data" + File.separator;
-    public File file;
+    private final String path;
+    private static final String pathFolder = "." +  File.separator + "data" + File.separator;
+    private final File file;
     
     public Storage(String filePath){
         this.path = filePath;
         file = new File(path);
-        
-        
+
     }
-    
+
+    /**
+     * Method that loads the offline txt file tasks into the bot
+     *
+     * @return List that the dukebot uses
+     */
     public List<Task> loadIntoDuke() {
         List<Task> items = new ArrayList<>();
         try{
@@ -62,7 +70,12 @@ public class Storage {
             return items;
         }
     }
-    
+
+    /**
+     * Adds New task to storage
+     *
+     * @param task Task to be added to storage
+     */
     public void addNewTask(Task task) {
         try {
             String input = task.toStorageString();
@@ -71,8 +84,12 @@ public class Storage {
             e.printStackTrace();
         }
     }
-    
-    
+
+    /**
+     * Writes tasks in ArrayList to the offline storage
+     *
+     * @param taskList Tasklist storing all tasks in the bot
+     */
     public void writeToFile(TaskList taskList){
         try{
             FileWriter fw = new FileWriter(path, false);
@@ -89,7 +106,7 @@ public class Storage {
         }
     }
     
-    public void fixFileFolderProblems(){
+    private void fixFileFolderProblems(){
         try{
             if(!Files.isDirectory(Path.of(pathFolder))){
                 Files.createDirectory(Path.of(pathFolder));

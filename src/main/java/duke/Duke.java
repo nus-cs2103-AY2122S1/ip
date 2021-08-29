@@ -11,7 +11,11 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-
+/**
+ * A CLI bot which is based off Duke
+ *
+ * @author mrmrinal
+ */
 public class Duke {
     
     private final Storage storage;
@@ -27,18 +31,30 @@ public class Duke {
         TODO,
         UNUSUAL
     }
-    
+
+
+    /**
+     * Instantiates a new Dukebot that the user can input commands to.
+     * The filePath argument must specify an absolute location to where
+     * the duke.txt file is stored
+     *
+     * @param filePath String representation of storage path
+     */
     public Duke(String filePath){
         storage = new Storage(filePath);
         ui = new Ui();
         tasks = new TaskList(storage.loadIntoDuke());
     }
-    
+
+
+    /**
+     * Main method that is responsible for launching the bot
+     */
     public static void main(String[] args) {
         new Duke("." +  File.separator + "data" + File.separator + "duke.txt").run();
     }
     
-    public void run() {
+    private void run() {
         Scanner userSc = new Scanner(System.in);
         ui = new Ui();
         ui.dukeGreeting();
@@ -79,7 +95,7 @@ public class Duke {
         storage.writeToFile(tasks);
     }
 
-    public void echo(String userInput, String actionType){
+    private void echo(String userInput, String actionType){
         System.out.println("Got it sir, I have "+ actionType + " this task:\n " + userInput + "\nNow you have " + tasks.getSize() + " tasks in the list.\n");
     }
     

@@ -1,7 +1,18 @@
 package duke;
 
+/**
+ * A parser which aids with deciphering the nature of the user input
+ *
+ * @author mrmrinal
+ */
 public class Parser {
 
+    /**
+     * Method that returns an enum and determines the control flow of the dukebot
+     *
+     * @param userInput User Input of the user using the bot
+     * @return the enum which is used to determine the task the bot will perform
+     */
     public static Duke.RequestType parse(String userInput) {
 
         Duke.RequestType userRequest;
