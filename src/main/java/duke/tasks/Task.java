@@ -4,7 +4,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
 import duke.Duke;
-
 import duke.exceptions.NoDescriptionException;
 import duke.exceptions.UserInputError;
 
@@ -21,7 +20,7 @@ public abstract class Task {
     }
 
     private static final String SEPARATE = " ~#~ ";
-    private final DateTimeFormatter formatter =DateTimeFormatter.ofPattern("dd/MM/yy");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 
     private final String description;
     private final Type type;
@@ -35,9 +34,9 @@ public abstract class Task {
      * @param done The boolean value of whether task is completed.
      */
     protected Task(String description, Type type, boolean done) {
-      this.description = description;
-      this.type = type;
-      this.isDone = done;
+        this.description = description;
+        this.type = type;
+        this.isDone = done;
     }
 
     /**
@@ -94,10 +93,12 @@ public abstract class Task {
         case "E":
             try {
                 newTask = new Event(desc, date, isDone);
-             } catch (UserInputError e) {
+            } catch (UserInputError e) {
                 Duke.renderOutput(e.getMessage());
-             }
+            }
             break;
+        default:
+            newTask = new Todo(desc, isDone);
         }
 
         return newTask;
@@ -113,9 +114,10 @@ public abstract class Task {
      */
     private static String[] separateDetails(String str, String key) throws NoDescriptionException {
         if (str.split(key).length <= 1) {
-         throw new NoDescriptionException("Oops! Please use the correct format with " + key + " to indicate\ndatetime");
-         }
-         return str.split(key);
+            throw new NoDescriptionException(
+                    "Oops! Please use the correct format with " + key + " to indicate\ndatetime");
+        }
+        return str.split(key);
     }
 
     /**
@@ -154,30 +156,29 @@ public abstract class Task {
 
     /**
      * Return a formated icon to symbolise if task is completed.
-     * 
+     *
      * @return String icon representing completeness.
      */
     private String getStatusIcon() {
-
         return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
 
     /**
      * Check if task description contains the necessary keyword for find function.
-     * 
+     *
      * @param key keyword user is looking for.
      * @return Boolean if this task contains keyword.
      */
     public boolean descContains(String key) {
-      String regex = ".*\\b" + Pattern.quote(key.toLowerCase()) + "\\b.*";
-      return description.toLowerCase().matches(regex);
+        String regex = ".*\\b" + Pattern.quote(key.toLowerCase()) + "\\b.*";
+        return description.toLowerCase().matches(regex);
     }
 
     /**
      * Mark task as done.
      */
     public void markDone() {
-      isDone = true;
+        isDone = true;
     }
 
     /**
@@ -186,12 +187,11 @@ public abstract class Task {
      * @return Boolean value of task completeness.
      */
     public boolean isDone() {
-
-          return isDone;
+        return isDone;
     }
 
     @Override
     public String toString() {
-      return getStatusIcon() + " " + description;
+        return getStatusIcon() + " " + description;
     }
 }

@@ -13,6 +13,14 @@ public class Deadline extends Task {
 
     protected LocalDate when;
 
+    /**
+     * Constructor to create a Dedline task.
+     *
+     * @param description details of task
+     * @param when deadline of task
+     * @param done Boolean value that indicates completeness of task.
+     * @throws NoDescriptionException
+     */
     public Deadline(String description, String when, boolean done) throws NoDescriptionException {
         super(description, Task.Type.DEADLINE, done);
         try {
@@ -22,15 +30,15 @@ public class Deadline extends Task {
         }
     }
 
-  /**
-   * Appends datetime to the String format writeable to Storage file.
-   *
-   * @return Formatted data as a string
-   */
-  @Override
-  public String taskToString() {
-    return super.taskToString() + when;
-  }
+    /**
+     * Appends datetime to the String format writeable to Storage file.
+     *
+     * @return Formatted data as a string
+     */
+    @Override
+    public String taskToString() {
+        return super.taskToString() + when;
+    }
 
     @Override
     public String toString() {
