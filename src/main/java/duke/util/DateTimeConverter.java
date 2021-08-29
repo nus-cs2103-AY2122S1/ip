@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -37,7 +39,7 @@ public class DateTimeConverter {
             if (actualTime / 100 < 1) {
                 hour = "12";
             } else {
-                hour = String.valueOf(Math.floor(actualTime / 100));
+                hour = String.valueOf(Math.round(actualTime / 100));
             }
             minute = String.valueOf(actualTime % 100);
             if (minute.equals("0")) {

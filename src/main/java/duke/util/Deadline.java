@@ -1,3 +1,5 @@
+package duke.util;
+
 /**
  * This class simulates a special type of Task which has a date
  * for which it is to be completed by.
@@ -18,6 +20,9 @@ public class Deadline extends Task {
     @Override
     public String getDescription() {
         String temp = super.getDescription();
+        if (temp.endsWith(")")) {
+            return temp;
+        }
         temp = temp.replace("deadline ", "");
 
         String oldDate = temp.substring(temp.lastIndexOf("by") + 3);

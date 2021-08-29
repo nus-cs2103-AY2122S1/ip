@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.util.Scanner;
 import java.io.File;
 
@@ -7,8 +9,8 @@ import java.io.File;
  */
 public class Duke {
     private static Storage storage;
-    private TaskList tasks;
     private static Ui ui;
+    private final TaskList tasks;
 
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -34,6 +36,7 @@ public class Duke {
         Parser.evaluateUserInput(newScan);
         storage.writeFile();
         Ui.successfulWriteFile();
+        tasks.markTasksSaved();
         Ui.goodbyeMessage();
 
         System.exit(0);

@@ -1,3 +1,5 @@
+package duke.util;
+
 /**
  * This class simulates a special Task with a designated time
  * and date (if applicable).
@@ -19,6 +21,9 @@ public class Event extends Task {
     @Override
     public String getDescription() {
         String temp = super.getDescription();
+        if (temp.endsWith(")")) {
+            return temp;
+        }
         temp = temp.replace("event ", "");
 
         String oldDate = temp.substring(temp.lastIndexOf("at") + 3);

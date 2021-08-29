@@ -1,3 +1,5 @@
+package duke.util;
+
 /**
  * This class simulates a real life task to be completed and
  * its status of completion.
@@ -5,6 +7,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected boolean wasSaved;
 
     /**
      * Constructor for a Task.
@@ -13,6 +16,7 @@ public class Task {
     public Task (String description) {
         this.description = description;
         this.isDone = false;
+        this.wasSaved = false;
     }
 
     /**
@@ -44,5 +48,9 @@ public class Task {
      */
     public String printTask() {
         return this.getStatusIcon() + " " + this.getDescription();
+    }
+
+    public void markedSaved() {
+        this.wasSaved = true;
     }
 }

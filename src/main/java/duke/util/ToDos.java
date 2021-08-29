@@ -1,3 +1,5 @@
+package duke.util;
+
 /**
  * This class simulates a unique type of Task which only has description
  * but no designated deadline.

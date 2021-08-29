@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.util.ArrayList;
 
 /**
@@ -55,5 +57,11 @@ public class TaskList {
         Task temp = contents.get(x - 1);
         contents.remove(temp);
         Ui.removedTask(temp);
+    }
+
+    public void markTasksSaved() {
+        for (Task x: contents) {
+            x.markedSaved();
+        }
     }
 }

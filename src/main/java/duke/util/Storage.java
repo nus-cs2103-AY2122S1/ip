@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -54,7 +56,22 @@ public class Storage {
             while (readFile.hasNext()) {
                 // read file line by line and decipher into arraylist
                 String nextLine = readFile.nextLine();
-                newList.add(new Task(nextLine));
+                char typeOfTask = nextLine.charAt(1);
+                char isTaskDone = nextLine.charAt(4);
+                String description = nextLine.substring(6);
+                Task temp = null;
+                if (typeOfTask == 'D') {
+                    temp = new Deadline(description);
+                } else if (typeOfTask == 'E') {
+                    temp = new Event(description);
+                } else if (typeOfTask == 'T') {
+                    temp = new Task(description);
+                }
+                if (isTaskDone == 'X') {
+                    assert temp != null;
+                    temp.markedSaved();
+                }
+                newList.add(temp);
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());

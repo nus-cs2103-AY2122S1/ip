@@ -1,3 +1,5 @@
+package duke.util;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,8 +15,10 @@ public class Ui {
 
     public static void printTasksOnLoad(Scanner currList) {
         System.out.println("Current list:");
+        int counter = 1;
         while (currList.hasNext()) {
-            System.out.println(currList.nextLine());
+            System.out.println(counter + ". " + currList.nextLine());
+            counter++;
         }
     }
 
@@ -39,9 +43,13 @@ public class Ui {
         int counter = 1;
         System.out.println("    ***\n" + "    These are your tasks in the list:");
         for (Task x: contents) {
-            System.out.println("      " + counter + ". " + x.getStatusIcon() + " " +
-                    x.getDescription());
-            counter++;
+            if (x.wasSaved) {
+                System.out.println("      " + counter + ". " + x);
+            } else {
+                System.out.println("      " + counter + ". " + x.getStatusIcon() + " " +
+                        x.getDescription());
+                counter++;
+            }
         }
         System.out.println("    ***\n");
     }
