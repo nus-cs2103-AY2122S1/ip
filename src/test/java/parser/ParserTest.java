@@ -1,13 +1,14 @@
 package parser;
 
 import commands.*;
-import commands.DeleteCommand;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Tag("Test")
 public class ParserTest {
   @Test
   public void Test1() {
@@ -73,5 +74,11 @@ public class ParserTest {
   public void Test11() {
     Command c = new ToDoCommand(new ArrayList<>());
     assertEquals(c.getClass(), new Parser().parse("todo blah").getClass());
+  }
+
+  @Test
+  public void Test12() {
+    Command c = new FindCommand(new ArrayList<>());
+    assertEquals(c.getClass(), new Parser().parse("find 12313").getClass());
   }
 }
