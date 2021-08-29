@@ -21,7 +21,11 @@ public class Duke {
         bot.start();
     }
 
-    // This method is to return the string from user commands
+    /**
+     * Returns the output depending on the user's input command
+     * @param input User input command
+     * @return Bot response.
+     */
     public String getResponse(String input) {
         String temp;
         try {
@@ -32,31 +36,11 @@ public class Duke {
         return temp;
     }
 
+    /**
+     * Returns the starting message when duke starts up.
+     * @return Starting message.
+     */
     public String getStart() {
         return bot.handleStart();
     }
-//        String input = sc.nextLine();
-//        boolean running = true;
-//
-//        while (running) {
-//            try {
-//                parser.parse(input, bot);
-//                int temp = bot.getExitStatus();
-//                if (temp == 0) {
-//                    running = false;
-//                    break;
-//                }
-//                input = sc.nextLine();
-//            } catch (DukeException e) {
-//                bot.handleErrorMessage(e.getMessage());
-//                input = sc.nextLine();
-//            } catch (NumberFormatException e) {
-//                bot.handleErrorMessage("Please enter a valid number after done");
-//                input = sc.nextLine();
-//            }
-//        }
-//        sc.close();
-//    }
 }
-
-

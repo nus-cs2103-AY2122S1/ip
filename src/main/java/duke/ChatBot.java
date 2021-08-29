@@ -146,8 +146,7 @@ public class ChatBot {
     }
 
     /**
-     * This method prints the error message thrown by the program.
-     * @param message The error message.
+     * Calls the UI to return the start message.
      */
     public String handleStart() {
         return ui.showStartMessage();
