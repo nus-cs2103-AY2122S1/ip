@@ -47,6 +47,9 @@ public class MainWindow extends Stage {
         this.initialize();
     }
 
+    /**
+     * initiatises the
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -62,6 +65,7 @@ public class MainWindow extends Stage {
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     * Will terminate the program after user inputs "bye" command.
      */
     @FXML
     private void handleUserInput() {

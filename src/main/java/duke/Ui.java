@@ -13,10 +13,12 @@ public class Ui {
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
     private static final String ADD_TASK_MESSAGE = "Got it. I've added this task:";
     private static final String DELETE_TASK_MESSAGE = "Noted. I've removed this task:";
-    private static final String FIND_TAKS_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String FIND_TASK_MESSAGE = "Here are the matching tasks in your list:";
 
     /**
      * Prints a message indicating file loading error.
+     *
+     * @return String Message duke returns.
      */
     public String showLoadingError() {
         return "Can't load saved file";
@@ -36,6 +38,7 @@ public class Ui {
      * Prints the content of the task list in a form where users can see.
      *
      * @param taskList task list to be printed.
+     * @return String Message duke returns.
      */
     public String printArrayList (TaskList taskList) {
         String toReturn = LIST_MESSAGE + "\n";
@@ -47,6 +50,8 @@ public class Ui {
 
     /**
      * Prints a greeting for the user on startup.
+     *
+     * @return String Message duke returns.
      */
     public String greet() {
         String toReturn = GREETING + "\n";
@@ -66,6 +71,7 @@ public class Ui {
      * on which task is completed based on their command.
      *
      * @param task task that is completed.
+     * @return String Message duke returns.
      */
     public String completeTaskMessage (Task task) {
         String toReturn = DONE_MESSAGE + "\n" + task.toString();
@@ -76,10 +82,11 @@ public class Ui {
      * Prints a notification to inform users
      * on which task is found based on their keyword
      *
-     * @param tasks
+     * @param tasks tasklist to find tasks in.
+     * @return String Message duke returns.
      */
     public String findTaskMessage (TaskList tasks) {
-        String toReturn = FIND_TAKS_MESSAGE + "\n";
+        String toReturn = FIND_TASK_MESSAGE + "\n";
         for (int i = 0; i < tasks.getSize(); i++) {
             toReturn += String.valueOf(i + 1) + "." + tasks.get(i).toString() + "\n";
         }
@@ -92,6 +99,7 @@ public class Ui {
      *
      * @param task task that is deleted.
      * @param size size of the task list.
+     * @return String Message duke returns.
      */
     public String deleteTaskMessage (Task task, int size) {
         String toReturn = DELETE_TASK_MESSAGE + "\n";
@@ -106,6 +114,7 @@ public class Ui {
      *
      * @param task task that is added.
      * @param size size of the task list.
+     * @return String Message duke returns.
      */
     public String addedTaskMessage (Task task, int size) {
         String toReturn = ADD_TASK_MESSAGE + "\n";
@@ -118,6 +127,7 @@ public class Ui {
      * Prints a message of how many task are in the task list.
      *
      * @param size size of task list.
+     * @return String Message duke returns.
      */
     public String taskCounterMessage (int size) {
         return "Now you have " + size + " tasks in the list.";
