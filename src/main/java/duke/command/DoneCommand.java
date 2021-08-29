@@ -1,7 +1,14 @@
-public class DeleteCommand extends Command {
-    private int taskNo;
+package duke.command;
 
-    public DeleteCommand(String taskNo) throws DukeException {
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
+
+public class DoneCommand extends Command {
+    private final int taskNo;
+
+    public DoneCommand(String taskNo) throws DukeException {
         try {
             this.taskNo = Integer.parseInt(taskNo);
         } catch (NumberFormatException e) {
@@ -10,7 +17,7 @@ public class DeleteCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.deleteTask(taskNo);
+        tasks.taskDone(taskNo);
     }
 
     public boolean isExit() {

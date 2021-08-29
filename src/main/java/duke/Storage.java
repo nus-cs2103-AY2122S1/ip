@@ -1,5 +1,11 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -9,23 +15,10 @@ import java.util.Scanner;
 
 public class Storage {
     private static String saveLocation;
-    private static Ui ui = new Ui();
+    private static final Ui ui = new Ui();
 
     public Storage(String filePath) {
         saveLocation = String.valueOf(Paths.get(System.getProperty("user.home"), filePath));
-    }
-
-    public static void createFile() {
-        try {
-            File file = new File(saveLocation);
-            if (file.createNewFile()) {
-                ui.showFileCreated(file.getName());
-            } else {
-                ui.showFileExists();
-            }
-        } catch (IOException e) {
-            System.out.println("OOPS! Error occurred while creating file.");
-        }
     }
 
     private static Task parseTask(String input) {

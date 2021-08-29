@@ -1,8 +1,10 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    public LocalDate dueDate = null;
+    public LocalDate dueDate;
 
     public Deadline(String deadlineName) {
         super(deadlineName.substring(9, deadlineName.indexOf("/by ")));

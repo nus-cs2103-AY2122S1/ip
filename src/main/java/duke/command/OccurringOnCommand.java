@@ -1,8 +1,15 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.Ui;
+import duke.task.TaskList;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class OccurringOnCommand extends Command {
-    private LocalDate date;
+    private final LocalDate date;
 
     public OccurringOnCommand(String date) throws DukeException {
        try {

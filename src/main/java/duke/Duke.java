@@ -1,13 +1,18 @@
+package duke;
+
+import duke.command.Command;
+import duke.task.TaskList;
+
 public class Duke {
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(Storage.load());
         } catch (DukeException e) {
             ui.showError(e.getMessage());
             tasks = new TaskList();
