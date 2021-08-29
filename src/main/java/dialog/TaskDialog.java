@@ -67,6 +67,12 @@ public class TaskDialog extends Dialog {
         }).collect(Collectors.toList()))));
     }
 
+    public TaskDialog with(String keyword) {
+        return new TaskDialog(new ArrayList<>(List.of("Find: " + keyword)),
+                new TaskList(new ArrayList<>(this.taskList.getTasks().stream().filter(
+                        (task) -> task.description().contains(keyword)).collect(Collectors.toList()))));
+    }
+
     public TaskList getTaskList() {
         return this.taskList;
     }

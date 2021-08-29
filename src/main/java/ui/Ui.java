@@ -109,10 +109,11 @@ public class Ui {
             commandsList.add("3. 'event <task description> /at <at when>' - add an event task with specific time");
             commandsList.add("4. 'date <yyyy-mm-dd>' - list all todos and all the deadlines and events before specified time");
             commandsList.add("5. 'list' - show the current task list");
-            commandsList.add("6. 'done <task index>' - mark that task as done");
-            commandsList.add("7. 'delete <task index>' - delete that task from the list");
-            commandsList.add("8. 'commands' - show this current command window");
-            commandsList.add("9. 'bye' - end session and save your task list");
+            commandsList.add("6. 'find <keyword>' - list the task with specific keywords");
+            commandsList.add("7. 'done <task index>' - mark that task as done");
+            commandsList.add("8. 'delete <task index>' - delete that task from the list");
+            commandsList.add("9. 'commands' - show this current command window");
+            commandsList.add("10.'bye' - end session and save your task list");
             System.out.println(commandsList);
         }
     }
