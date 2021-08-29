@@ -90,9 +90,7 @@ public class Storage {
 
     public void purge() throws DukeException {
         try {
-            close();
-            txt.delete();
-            txt.createNewFile();
+            raf.setLength(0);
         } catch (IOException e) {
             throw ERROR_DB;
         }
