@@ -13,7 +13,7 @@ public class Duke {
     private Storage storage;
     private Tasklist tasklist;
     private String exitCmd = "bye";
-    private String defaultAddress = "src/main/java/data/tasklist.txt";
+    private static final String DEFAULT_ADDRESS = "src/main/java/data/tasklist.txt";
 
     /**
      * Constructs Duke Object that stores information in filepath
@@ -28,7 +28,7 @@ public class Duke {
      * Overloaded constructor of Duke Object with default address
      */
     public Duke() {
-        this.storage = new Storage(defaultAddress);
+        this.storage = new Storage(DEFAULT_ADDRESS);
         this.tasklist = storage.load();
     }
 
@@ -47,7 +47,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        String filepath = "src/main/java/data/tasklist.txt";
+        String filepath = DEFAULT_ADDRESS;
         new Duke(filepath).run();
     }
 }

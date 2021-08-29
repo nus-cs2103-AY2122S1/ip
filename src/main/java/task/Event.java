@@ -1,7 +1,5 @@
 package task;
 
-import duke.*;
-import ui.*;
 
 /**
  * A type of task that requires event details and extends from Task
@@ -12,7 +10,6 @@ public class Event extends Task{
 
     private String eventDetails;
     private static String taskCat = "event";
-    final static String split = " /at";
 
     /**
      *  Constructor to create an EVENT task

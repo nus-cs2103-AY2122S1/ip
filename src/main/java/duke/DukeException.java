@@ -1,8 +1,5 @@
 package duke;
 
-import task.*;
-import ui.*;
-
 /**
  * The possible type of DukeExceptions
  *
@@ -58,7 +55,9 @@ public class DukeException extends Exception{
      * Exception when task is not found
      */
     public static class TaskNotFoundException extends DukeException {
-        public TaskNotFoundException(String errorMsg) {super(errorMsg);}
+        public TaskNotFoundException(String errorMsg) {
+            super(errorMsg);
+        }
     }
 
 }
