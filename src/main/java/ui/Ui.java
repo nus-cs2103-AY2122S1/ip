@@ -20,10 +20,9 @@ import java.util.Scanner;
  * @author GitHub: kanjitp
  * @version 0.01
  * @since 0.00
- *
  */
 public class Ui {
-    /** Scanner of the Ui - getting the input from the user*/
+    /** Scanner of the Ui - getting the input from the user */
     public static Scanner sc = new Scanner(System.in);
 
     /** the latest input stored in the Ui */
@@ -32,7 +31,6 @@ public class Ui {
 
     /**
      * Constructor of Ui.
-     *
      * The Ui object should be specified of which TaskList it is supposed to import
      * with the method importTaskList(TaskList taskList) not through the constructor.
      */
@@ -80,7 +78,7 @@ public class Ui {
      * Static method for printing to the user the current save file names in the system.
      *
      * @throws DialogException the dialog cannot have the same id while the app is running
-     * @throws IOException if there is any error dealing with the system IO
+     * @throws IOException     if there is any error dealing with the system IO
      */
     public static void printSelectSaveFile() throws DialogException, IOException {
         String dialogId = "selectSaveFile";
@@ -93,7 +91,7 @@ public class Ui {
                 Storage.createSaveLocation();
             }
             ArrayList<File> files = new ArrayList<>(Arrays.asList(Storage.getFilesFromDirectory(
-                        Storage.DIRECTORY_PATH + Storage.DATA_PATH)));
+                    Storage.DIRECTORY_PATH + Storage.DATA_PATH)));
 
             int count = 1;
             for (File file : files) {
@@ -116,13 +114,12 @@ public class Ui {
     public static void showWelcome() throws DialogException {
         Dialog greeting = Dialog.generate("greeting");
 
-        String logo =
-                "     ___       __       __    ______  _______\n" +
-                        "        /   \\     |  |     |  |  /      ||   ____|\n" +
-                        "       /  ^  \\    |  |     |  | |  ,----'|  |__\n" +
-                        "      /  /_\\  \\   |  |     |  | |  |     |   __|\n" +
-                        "     /  _____  \\  |  `----.|  | |  `----.|  |____\n" +
-                        "    /__/     \\__\\ |_______||__|  \\______||_______|\n";
+        String logo = "     ___       __       __    ______  _______\n"
+                + "        /   \\     |  |     |  |  /      ||   ____|\n"
+                + "       /  ^  \\    |  |     |  | |  ,----'|  |__\n"
+                + "      /  /_\\  \\   |  |     |  | |  |     |   __|\n"
+                + "     /  _____  \\  |  `----.|  | |  `----.|  |____\n"
+                + "    /__/     \\__\\ |_______||__|  \\______||_______|\n";
 
         greeting.add(logo);
         greeting.add("Hello! I'm Alice, your personal assistant");
@@ -153,16 +150,19 @@ public class Ui {
      * @throws DialogException the dialog cannot have the same id while the app is running
      */
     public static void showCommandList() throws DialogException {
-        String dialogId ="commands";
+        String dialogId = "commands";
         if (Dialog.containsId(dialogId)) {
             System.out.println(Dialog.get(dialogId));
         } else {
             Dialog commandsList = Dialog.generate(dialogId);
             commandsList.add("This is the following commands, I can perform:\n");
             commandsList.add("1. 'todo <task description>' - add a todo task to the list");
-            commandsList.add("2. 'deadline <task description> /by <by when>' - add a deadline task with specific deadline");
-            commandsList.add("3. 'event <task description> /at <at when>' - add an event task with specific time");
-            commandsList.add("4. 'date <yyyy-mm-dd>' - list all todos and all the deadlines and events before specified time");
+            commandsList.add("2. 'deadline <task description> /by <by when>' "
+                    + "- add a deadline task with specific deadline");
+            commandsList.add("3. 'event <task description> /at <at when>' "
+                    + "- add an event task with specific time");
+            commandsList.add("4. 'date <yyyy-mm-dd>' "
+                    + "- list all todos and all the deadlines and events before specified time");
             commandsList.add("5. 'list' - show the current task list");
             commandsList.add("6. 'done <task index>' - mark that task as done");
             commandsList.add("7. 'delete <task index>' - delete that task from the list");

@@ -9,10 +9,8 @@ import java.util.ArrayList;
  * @author GitHub: kanjitp
  * @version 0.01
  * @since 0.00
- *
  */
 public class TaskList {
-
     /** ArrayList containing the tasks */
     private final ArrayList<Task> tasks;
 
@@ -64,7 +62,7 @@ public class TaskList {
      * @return the task at that index
      * @throws IndexOutOfBoundsException if the index is invalid
      */
-    public Task get(int index) throws IndexOutOfBoundsException{
+    public Task get(int index) throws IndexOutOfBoundsException {
         return tasks.get(index);
     }
 
@@ -89,26 +87,26 @@ public class TaskList {
     /**
      * Static helper method for manually adding the task to the specified taskList.
      *
-     * @param taskList the taskList to add the task to
-     * @param type the type of the task to be added to the taskList
-     * @param isDone whether the task should be done or not
+     * @param taskList    the taskList to add the task to
+     * @param type        the type of the task to be added to the taskList
+     * @param isDone      whether the task should be done or not
      * @param description the description of the task
-     * @param time if the task is subclass of time task specify the time in yyyy-MM-dd or put empty string or null for
-     *             non time task
+     * @param time        if the task is subclass of time task specify the time in yyyy-MM-dd or put empty string or null for
+     *                    non time task
      */
     public static void addTaskByType(TaskList taskList, TaskType type, boolean isDone, String description, String time) {
         switch (type) {
-            case TODO:
-                taskList.add(new Todo(description, isDone));
-                break;
-            case EVENT:
-                taskList.add(new Event(description, isDone, time));
-                break;
-            case DEADLINE:
-                taskList.add(new Deadline(description, isDone, time));
-                break;
-            default:
-                throw new IllegalArgumentException("addTask Unsuccessful");
+        case TODO:
+            taskList.add(new Todo(description, isDone));
+            break;
+        case EVENT:
+            taskList.add(new Event(description, isDone, time));
+            break;
+        case DEADLINE:
+            taskList.add(new Deadline(description, isDone, time));
+            break;
+        default:
+            throw new IllegalArgumentException("addTask Unsuccessful");
         }
     }
 

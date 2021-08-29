@@ -1,8 +1,10 @@
 package parser;
 
 import alice.AliceException;
+
 import command.Command;
 import command.InvalidTimeFormatException;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -19,7 +21,6 @@ import java.time.format.DateTimeParseException;
  * @author GitHub: kanjitp
  * @version 0.01
  * @since 0.00
- *
  */
 public class Parser {
     /**
@@ -31,28 +32,28 @@ public class Parser {
      */
     public static Command.CommandType stringToCommand(String s) throws AliceException {
         switch (s) {
-            case "list":
-                return Command.CommandType.LIST;
-            case "date":
-                return Command.CommandType.DATE;
-            case "todo":
-                return Command.CommandType.TODO;
-            case "deadline":
-                return Command.CommandType.DEADLINE;
-            case "event":
-                return Command.CommandType.EVENT;
-            case "done":
-                return Command.CommandType.DONE;
-            case "delete":
-                return Command.CommandType.DELETE;
-            case "commands":
-            case "?":
-            case "help":
-                return Command.CommandType.COMMANDS;
-            case "bye":
-                return Command.CommandType.BYE;
-            default:
-                throw new AliceException("I'm sorry, but I don't know what that means :-(");
+        case "list":
+            return Command.CommandType.LIST;
+        case "date":
+            return Command.CommandType.DATE;
+        case "todo":
+            return Command.CommandType.TODO;
+        case "deadline":
+            return Command.CommandType.DEADLINE;
+        case "event":
+            return Command.CommandType.EVENT;
+        case "done":
+            return Command.CommandType.DONE;
+        case "delete":
+            return Command.CommandType.DELETE;
+        case "commands":
+        case "?":
+        case "help":
+            return Command.CommandType.COMMANDS;
+        case "bye":
+            return Command.CommandType.BYE;
+        default:
+            throw new AliceException("I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -65,36 +66,37 @@ public class Parser {
      */
     public static TaskList.TaskType stringToTaskType(String s) throws AliceException {
         switch (s) {
-            case "TD":
-                return TaskList.TaskType.TODO;
-            case "DL":
-                return TaskList.TaskType.DEADLINE;
-            case "EV":
-                return TaskList.TaskType.EVENT;
-            default:
-                throw new AliceException("Invalid String detected: " + s);
+        case "TD":
+            return TaskList.TaskType.TODO;
+        case "DL":
+            return TaskList.TaskType.DEADLINE;
+        case "EV":
+            return TaskList.TaskType.EVENT;
+        default:
+            throw new AliceException("Invalid String detected: " + s);
         }
     }
 
     /**
      * Static method for converting a className of a task to the TaskType enum
+     *
      * @param cn class name
      * @return taskType of the classname passed
      * @throws AliceException invalid classname is parsed into the method
      */
     public static TaskList.TaskType classNameToTaskType(String cn) throws AliceException {
         switch (cn) {
-            case "task.Todo":
-            case "Todo":
-                return TaskList.TaskType.TODO;
-            case "task.Deadline":
-            case "Deadline":
-                return TaskList.TaskType.DEADLINE;
-            case "task.Event":
-            case "Event":
-                return TaskList.TaskType.EVENT;
-            default:
-                throw new AliceException("Invalid ClassName detected: " + cn);
+        case "task.Todo":
+        case "Todo":
+            return TaskList.TaskType.TODO;
+        case "task.Deadline":
+        case "Deadline":
+            return TaskList.TaskType.DEADLINE;
+        case "task.Event":
+        case "Event":
+            return TaskList.TaskType.EVENT;
+        default:
+            throw new AliceException("Invalid ClassName detected: " + cn);
         }
     }
 
@@ -106,15 +108,15 @@ public class Parser {
      * @throws AliceException invalid TaskType has been parsed into the method
      */
     public static String taskTypeToString(TaskList.TaskType t) throws AliceException {
-        switch(t) {
-            case TODO:
-                return "TD";
-            case DEADLINE:
-                return "DL";
-            case EVENT:
-                return "EV";
-            default:
-                throw new AliceException("Invalid TaskType detected: " + t);
+        switch (t) {
+        case TODO:
+            return "TD";
+        case DEADLINE:
+            return "DL";
+        case EVENT:
+            return "EV";
+        default:
+            throw new AliceException("Invalid TaskType detected: " + t);
         }
     }
 
@@ -128,16 +130,16 @@ public class Parser {
         TaskList.TaskType type = classNameToTaskType(task.getClass().getName());
         String s = taskTypeToString(type) + " | " + (task.isDone() ? 1 : 0) + " | " + task.description();
         switch (type) {
-            case EVENT:
-                Event ev = (Event) task;
-                s += " | " + ev.getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                break;
-            case DEADLINE:
-                Deadline dl = (Deadline) task;
-                s += " | " + dl.getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                break;
-            default:
-                break;
+        case EVENT:
+            Event ev = (Event) task;
+            s += " | " + ev.getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            break;
+        case DEADLINE:
+            Deadline dl = (Deadline) task;
+            s += " | " + dl.getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            break;
+        default:
+            break;
         }
         return s;
     }
@@ -149,13 +151,13 @@ public class Parser {
      * @return true for string resembling yes, false otherwise
      */
     public static boolean yesNoToBoolean(String yesNo) {
-        switch(yesNo) {
-            case "yes":
-            case "y":
-            case "Y":
-                return true;
-            default:
-                return false;
+        switch (yesNo) {
+        case "yes":
+        case "y":
+        case "Y":
+            return true;
+        default:
+            return false;
         }
     }
 
@@ -175,6 +177,7 @@ public class Parser {
 
     /**
      * For parsing a string of full command to a Command object
+     *
      * @param fullCommand command in string format
      * @return Command object of the string
      */

@@ -1,6 +1,8 @@
 import alice.AliceException;
+
 import dialog.DialogException;
 import dialog.TaskDialog;
+
 import parser.Parser;
 import storage.Storage;
 import command.Command;
@@ -17,7 +19,6 @@ import java.io.IOException;
  * @author GitHub: kanjitp
  * @version 0.01
  * @since 0.00
- *
  */
 public class Alice {
     /** storage for Alice */
@@ -32,16 +33,16 @@ public class Alice {
      *
      * @param fileName the filename without the suffix .txt, .TXT, etc.
      * @throws DialogException dialog cannot have the same id: same task with the same property (i.e. name, isDone)
-     * cannot coexist while the app is running
+     *                         cannot coexist while the app is running
      */
     public Alice(String fileName) throws DialogException {
         ui = new Ui();
         storage = new Storage(fileName);
         // import the task from what the storage manage to load
         ui.importTaskList(storage.load());
-         // set the current taskDialog of Alice to the one ui fetch from the storage
-         // in future update the taskDialog of Alice could change accordingly in case of reaching to other save file
-        taskDialog =ui.getTaskDialog();
+        // set the current taskDialog of Alice to the one ui fetch from the storage
+        // in future update the taskDialog of Alice could change accordingly in case of reaching to other save file
+        taskDialog = ui.getTaskDialog();
     }
 
     /**
@@ -52,7 +53,7 @@ public class Alice {
     public void run() throws DialogException {
         ui.showCurrentList();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
@@ -72,7 +73,7 @@ public class Alice {
      *
      * @param args user arguments
      * @throws DialogException dialog cannot have the same id while the app is running
-     * @throws IOException if there is any error dealing with the system IO
+     * @throws IOException     if there is any error dealing with the system IO
      */
     public static void main(String[] args) throws DialogException, IOException {
         Ui.showWelcome();
