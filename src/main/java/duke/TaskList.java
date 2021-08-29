@@ -1,11 +1,11 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import duke.task.Task;
 
 /**
  * This class represents Duke's list of tasks.
@@ -18,7 +18,7 @@ public class TaskList {
     /**
      * Constructor for a TaskList.
      */
-    public TaskList() {
+    public TaskList() throws DukeException {
         try {
             // Load data from saved file, if present.
             this.storage = new Storage(STORAGE_PATH);
@@ -88,7 +88,7 @@ public class TaskList {
      * @param searchTerm Search term inputted by user.
      * @return task list containing only tasks that match search term.
      */
-    public TaskList search(String searchTerm) {
+    public TaskList search(String searchTerm) throws DukeException {
         List<Task> matches = list.stream().filter(task -> task.getName().contains(searchTerm))
                 .collect(Collectors.toList());
         TaskList output = new TaskList();

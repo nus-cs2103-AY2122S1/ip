@@ -47,7 +47,7 @@ public abstract class Task {
      *
      * @return Returns the type of the task.
      */
-    abstract public String getType();
+    public abstract String getType();
 
     /**
      * Returns a string representation of the task.

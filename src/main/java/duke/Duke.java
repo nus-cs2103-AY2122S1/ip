@@ -1,21 +1,26 @@
 package duke;
 
-import duke.command.Command;
-
 import java.util.Scanner;
+
+import duke.command.Command;
 
 /**
  * This class represents an instance of the Duke chatbot.
  */
 public class Duke {
-    private final TaskList list = new TaskList();
     private boolean isStopped = false;
+    private TaskList list;
 
     /**
      * Starts the Duke chatbot.
      */
     public void start() {
         Ui.welcomeMessage();
+        try {
+            list = new TaskList();
+        } catch (DukeException e) {
+            Ui.formatAndPrint(e.getMessage());
+        }
         while (!this.isStopped) {
             try {
                 listen();

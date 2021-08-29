@@ -1,6 +1,10 @@
 package duke.command;
 
-import duke.*;
+import duke.Duke;
+import duke.DukeException;
+import duke.Parser;
+import duke.TaskList;
+import duke.Ui;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
