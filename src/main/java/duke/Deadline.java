@@ -21,10 +21,9 @@ public class Deadline extends Task {
      * @param time The due time of the task represented by a <code>String</code> object.
      */
     public Deadline(String description, LocalDate ld, String time) {
-        super(description);
+        super(TaskType.DEADLINE, description);
         this.date = ld;
         this.time = time;
-        this.type = TaskType.DEADLINE;
     }
 
     /**
@@ -34,12 +33,13 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy ")) + this.time + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.date.format(DateTimeFormatter.ofPattern("d MMM yyyy ")) + this.time + ")";
     }
 
     /**
      * Returns string representation of <code>Deadline</code> object's due date.
-     * 
+     *
      * @return String representation of due date.
      */
     public String getBy() {

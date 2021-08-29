@@ -35,7 +35,7 @@ public class Parser {
      * @return The command index.
      * @throws NumberFormatException Thrown when user does not put a number.
      */
-    public int findCommandIndex() throws NumberFormatException{
+    public int findCommandIndex() throws NumberFormatException {
         return Integer.parseInt(this.currentLine[1]);
     }
 

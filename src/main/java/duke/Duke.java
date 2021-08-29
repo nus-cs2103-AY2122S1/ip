@@ -1,7 +1,8 @@
 package duke;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
@@ -9,9 +10,10 @@ import java.util.regex.Pattern;
  * todos, deadlines and events.
  */
 public class Duke {
-    private final static String DATABASE_PATH = "data/duke.txt";
+    private static final String DATABASE_PATH = "data/duke.txt";
+    private static final Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-"
+            + "(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
     private TaskList tasks;
-    private final static Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
     private final DukeUI ui;
     private final Storage storage;
     private final Parser parser;
@@ -124,7 +126,8 @@ public class Duke {
             throw new DukeException("☹ OOPS!!! The description of " + aOrAn + " " + firstCommand + " cannot be empty.");
         } else if (date.equals("") && convertToTaskType(firstCommand) != Task.TaskType.TODO) {
             throw new DukeException("☹ OOPS!!! The date of " + aOrAn + " " + firstCommand + " cannot be empty.");
-        } else if (convertToTaskType(firstCommand) == Task.TaskType.DEADLINE || convertToTaskType(firstCommand) == Task.TaskType.EVENT) {
+        } else if (convertToTaskType(firstCommand) == Task.TaskType.DEADLINE
+                || convertToTaskType(firstCommand) == Task.TaskType.EVENT) {
             if (DATE_PATTERN.matcher(date).matches()) {
 
                 String[] dateSplit = date.split(" ");
@@ -145,6 +148,9 @@ public class Duke {
         this.writeDataToDuke();
     }
 
+    /**
+     * Confirms the addition of a task.
+     */
     public void confirmAdditionOfTask() {
         int tasksLength = this.tasks.getTasksLength();
         this.ui.showTaskAddedMessage(tasksLength, this.tasks.getTask(tasksLength).toString());
@@ -186,6 +192,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for Duke.
+     * @param args Optional arguments for CLI.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke(DATABASE_PATH);
         duke.ui.greetUser();

@@ -1,7 +1,12 @@
-import duke.Deadline;
-import org.junit.jupiter.api.Test;
-import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+
+import duke.Deadline;
+
+
 
 class DeadlineTest {
 
@@ -17,6 +22,4 @@ class DeadlineTest {
     void testToString() {
         assertEquals("[D][ ] homework (by: 10 Oct 2000 1000)", dl.toString());
     }
-
-
 }

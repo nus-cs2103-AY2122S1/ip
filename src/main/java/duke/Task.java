@@ -15,6 +15,11 @@ public class Task {
     }
 
     /**
+     * The <code>TaskType</code> of the task.
+     */
+    private TaskType type;
+
+    /**
      * The description of the task.
      */
     private final String taskDescription;
@@ -24,16 +29,15 @@ public class Task {
      */
     private boolean isDone;
 
-    public TaskType type;
-
     /**
      * Constructor for duke.Task object, takes in taskDescription string.`
      *
      * @param taskDescription Description of the task.
      */
-    protected Task(String taskDescription) {
+    protected Task(TaskType type, String taskDescription) {
         this.taskDescription = taskDescription;
-        this.isDone = false;
+        this.type = type;
+        isDone = false;
     }
 
     /**
@@ -64,5 +68,9 @@ public class Task {
 
     public String getTaskDescription() {
         return this.taskDescription;
+    }
+
+    public TaskType getType() {
+        return type;
     }
 }

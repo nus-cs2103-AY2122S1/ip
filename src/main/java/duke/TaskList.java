@@ -45,6 +45,13 @@ public class TaskList {
         this.taskIndex++;
     }
 
+    /**
+     * Adds task to list.
+     * @param task Task to add.
+     * @param type Type of task.
+     * @param ld LocalDate of task.
+     * @param time Time of task.
+     */
     public void addTask(String task, Task.TaskType type, LocalDate ld, String time) {
         switch (type) {
         case EVENT:
@@ -52,6 +59,8 @@ public class TaskList {
             break;
         case DEADLINE:
             this.tasks.add(new Deadline(task, ld, time));
+            break;
+        default:
             break;
         }
         this.taskIndex++;
@@ -109,6 +118,11 @@ public class TaskList {
         return this.taskIndex;
     }
 
+    /**
+     * Find tasks containing the keyword.
+     * @param keyword Keyword to find tasks with
+     * @return ArrayList of tasks containing the keyword.
+     */
     public ArrayList<Task> findTasksUsingKeyword(String keyword) {
         ArrayList<Task> tasksContainingKeyword = new ArrayList<>(100);
         for (int i = 0; i < tasks.size(); i++) {
