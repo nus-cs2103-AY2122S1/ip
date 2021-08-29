@@ -19,7 +19,6 @@ public class Farewell {
      * @return farewell message.
      */
     public String printFarewell() {
-        System.out.println(farewell);
         return farewell;
     }
 }

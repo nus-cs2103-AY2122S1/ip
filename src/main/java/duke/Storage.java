@@ -17,6 +17,7 @@ import java.util.Scanner;
 public class Storage {
 
     private String path;
+    private static String commandResult = "";
 
     public Storage(String path) {
         try {
@@ -47,9 +48,19 @@ public class Storage {
             FileWriter writeFile = new FileWriter(file.getAbsoluteFile());
             writeFile.write("");
             writeFile.close();
+            Storage.commandResult = "File not found, creating empty save file!";
         } catch (IOException ioException) {
-            System.out.println("Oops! Something went wrong: " + ioException.getMessage());
+            Storage.commandResult = "Oops! Something went wrong: " + ioException.getMessage();
         }
+    }
+
+    /**
+     * Returns results of commands(if any).
+     *
+     * @return result of commands.
+     */
+    public static String getCommandResult() {
+        return Storage.commandResult;
     }
 
     /**
@@ -114,7 +125,7 @@ public class Storage {
             writeFile.write(toSave + "\n");
             writeFile.close();
         } catch (IOException ioException) {
-            System.out.println("Oops! Something went wrong: " + ioException.getMessage());
+            Storage.commandResult = "Oops! Something went wrong: " + ioException.getMessage();
         }
     }
 
@@ -131,7 +142,7 @@ public class Storage {
             writeFile.write("");
             writeFile.close();
         } catch (IOException ioException) {
-            System.out.println("Oops! Something went wrong: " + ioException.getMessage());
+            Storage.commandResult = "Oops! Something went wrong: " + ioException.getMessage();
         }
     }
 }

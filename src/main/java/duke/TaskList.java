@@ -28,25 +28,27 @@ public class TaskList {
      *
      * @return returns List of all Tasks that contain the Query.
      */
-    public List<Task> search(String query) {
+    public String search(String query) {
         List<Task> results = new ArrayList<>();
+        String result = "Here's what I found!: \n";
+
         for (Task task : taskList) {
             if (task.getDescription().contains(query)) {
                 results.add(task);
             }
         }
+
         if (results.size() == 0) {
-            System.out.println("No matches found!");
+            return "No matches found!";
         } else {
-            System.out.println("Here's what I found!:");
             int counter = 1;
-            for (Task result : results) {
-                String printResult = counter + "." + result;
-                System.out.println(printResult);
+            for (Task resultFound : results) {
+                String printResult = counter + "." + resultFound + "\n";
+                counter++;
+                result += printResult;
             }
-            newLine();
         }
-        return results;
+        return result;
     }
 
     /**
@@ -56,16 +58,16 @@ public class TaskList {
      */
     public static String userCommands() {
         int count = 1;
+        String result = "";
 
         if (taskList.size() == 0) {
-            System.out.println("List is empty!");
+            return "List is Empty!";
         }
         for (Task item : taskList) {
-            System.out.println(count + ". " + item);
+            result += count + ". " + item + "\n";
             count++;
         }
-        newLine();
-        return taskList.toString();
+        return result;
     }
 
     /**
@@ -82,11 +84,7 @@ public class TaskList {
                 Task taskToChange = taskList.get(taskNumber - 1);
                 taskToChange.markAsDone();
 
-                System.out.println("Nice! I've marked this task as done: ");
-                System.out.println("   " + taskToChange);
-                newLine();
-
-                return "   " + taskToChange;
+                return "Nice! I've marked this task as done: \n" + "   " + taskToChange;
             } else {
                 throw new DukeException("Task does not exist");
             }
@@ -104,15 +102,14 @@ public class TaskList {
             throw new DukeException("Delete Task:", 2);
         } else {
             if (taskNumber <= taskList.size()) {
-                System.out.println("Noted. I've removed this task: ");
+                String result = "Noted. I've removed this task: \n";
 
                 Task taskToDelete = taskList.get(taskNumber - 1);
                 taskList.remove(taskNumber - 1);
 
-                System.out.println("   " + taskToDelete);
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
-                newLine();
-                return "   " + taskToDelete;
+                result += "   " + taskToDelete + "\n";
+                result += "Now you have " + taskList.size() + " tasks in the list.";
+                return result;
             } else {
                 throw new DukeException("Unable to Delete: Task does not exist");
             }
