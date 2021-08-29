@@ -1,62 +1,44 @@
 /**
  * @author Hang Zelin
  *
- * @description Task is an abstract class that encapsulates the info basic for a task
- *
+ * An abstract class that encapsulates the info basic for a task
  */
-package Duke.Task;
+package duke.task;
 
 public abstract class Task {
 
     /**
-     * @author Hang Zelin
+     * Returns the task info in the format of "[type][] task info (/by ...)"
      *
-     * @description Return the task info in the form of "[type][] task info (/by ...)"
-     *
-     * @param
-     * @return String
+     * @return Task info parsed in the format duke executes.
      */
     public abstract String getTaskInfo();
 
     /**
-     * @author Hang Zelin
+     * Returns the Parsed time info in the format of "MMM dd yyyy HH:mm"
+     * Noted: This method is only applicable for "event" and "deadline" type task.
      *
-     * @description Return the Parsed time info in the form of "MMM dd yyyy HH:mm"
-     * noted: This method is only applicable for "event" and "deadline" type task,
-     *
-     * @param
-     * @return String
+     * @return Return the parsed time in the format duke can understand.
      */
-    public abstract String ParsedTime();
+    public abstract String parsedTime();
 
     /**
-     * @author Hang Zelin
+     * Returns the Parsed time info in the format of "dd/mm/yy hhmm".
+     * Noted: This method is only applicable for "event" and "deadline" type task,
      *
-     * @description Return the Parsed time info in the form of "dd/mm/yy hhmm".
-     * noted: This method is only applicable for "event" and "deadline" type task,
-     *
-     * @param
-     * @return String
+     * @return Time in the format of "dd/mm/yy hhmm" which duke can understand.
      */
     public abstract String getTime();
 
     /**
-     * @author Hang Zelin
+     * Returns the task info in the format of save data requirement, that is: "taskType | done or not | task info | time".
      *
-     * @description Return the task info in the form of save data requirement, that is: "tasktype | done or not | task info | time".
-     *
-     * @param
-     * @return String
+     * @return Task info in the format of "taskType | done or not | task info | time".
      */
     public abstract String getSaveDataInfo();
 
     /**
-     * @author Hang Zelin
-     *
-     * @description Mark the task as done.
-     *
-     * @param
-     * @return void
+     * Mark this task as done.
      */
-    public abstract void MarkDone();
+    public abstract void markDone();
 }

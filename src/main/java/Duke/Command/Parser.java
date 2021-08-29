@@ -1,21 +1,18 @@
 /**
  * @author Hang Zelin
  *
- * @description Parser Programme will take in a full input Message and take out the operation type, task, time, index from the
+ * Parser will take in a full input Message and take out the operation type, task, time, index from the
  * one line command input by users.
- *
  * It can also deal with the local saved data and return the parsed Message, which can be a task, time, done(or not).
- *
  * It can also parse the time users input into the LocalDateTime.
- *
  * Some invalid input Messages may cause throwing DukeException.
- *
  */
 
-package Duke.Command;
+package duke.command;
 
-import Duke.Excpetions.DukeException;
-import Duke.Task.TaskList;
+import duke.excpetions.DukeException;
+import duke.task.TaskList;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
@@ -24,23 +21,19 @@ public class Parser {
     String Message;
 
     /**
-     * @author
-     *
-     * @description Constructor that stores the Message users take in to be parsed.
-     *
-     * @param Message
+     * @param Message Message users take in to be parsed.
      */
     public Parser(String Message) {
         this.Message = Message;
     }
 
 
-    private static boolean ValidDate(int day, int month, int year, int hour, int minute) {
-        if (((year%4 == 0 && year%100 != 0) || (year % 400 == 0)) && month == 2) {
+    private static boolean isValidDate(int day, int month, int year, int hour, int minute) {
+        if (((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) && month == 2) {
             if (day > 29 || day <= 0) {
                 return false;
             }
-        } else if (month == 2){
+        } else if (month == 2) {
             if (day > 28 || day <= 0) {
                 return false;
             }
@@ -51,10 +44,10 @@ public class Parser {
         }
 
         if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-            if (day > 31 || day <= 0){
+            if (day > 31 || day <= 0) {
                 return false;
             }
-        } else if (month != 2){
+        } else if (month != 2) {
             if (day > 30 || day <= 0) {
                 return false;
             }
@@ -72,23 +65,21 @@ public class Parser {
     }
 
     /**
-     * @author Hang Zelin
-     *
-     * @description return a LocalDateTime type that encapsulates the year, month, day, hour, minute of a time input.
+     * Returns a LocalDateTime type that encapsulates the year, month, day, hour, minute of a time input.
      * The method takes in a String of time and convert into LocalDateTime type.
      * The format can only be: 1. dd/mm/yyyy hhmm
-     *                         2. yyyy-mm-dd
+     * 2. yyyy-mm-dd
      *
-     * @param time
-     * @return LocalDateTime
+     * @param time Time User takes in to be parsed.
+     * @return Parsed time converted in the type of LocalDateTime
      */
-    public LocalDateTime ParseTime(String time) {
-        LocalDateTime parsedTime = null;
-        int day = 0;
-        int month = 0;
-        int year = 0;
-        int hour = 0;
-        int minute = 0;
+    public LocalDateTime parseTime(String time) {
+        LocalDateTime parsedTime;
+        int day;
+        int month;
+        int year;
+        int hour;
+        int minute;
 
         if (time.contains("/") && time.indexOf("/", 3) != -1 && time.contains(" ") && !time.contains("-")) {
             int endIndex1 = time.indexOf("/");
@@ -98,15 +89,15 @@ public class Parser {
             Integer dayInteger = day;
             int endIndex3 = time.indexOf("/", dayInteger.toString().length() + 1);
             month = Integer.parseInt(time.substring(endIndex1 + 1, endIndex3));
-            year = Integer.parseInt(time.substring(endIndex3 + 1,  endIndex2));
+            year = Integer.parseInt(time.substring(endIndex3 + 1, endIndex2));
 
             hour = Integer.parseInt(time.substring(endIndex2 + 1).substring(0, 2));
             minute = Integer.parseInt(time.substring(endIndex2 + 1).substring(2));
         } else if (time.contains("-")) {
             try {
-                parsedTime = LocalDate.parse(time).atTime(0,0);
+                parsedTime = LocalDate.parse(time).atTime(0, 0);
                 return parsedTime;
-            } catch (DateTimeParseException e){
+            } catch (DateTimeParseException e) {
                 return null;
             }
         } else {
@@ -114,10 +105,10 @@ public class Parser {
         }
 
         //Some Other cases;
-        if (!ValidDate(day,month,year,hour,minute)){
+        if (!isValidDate(day, month, year, hour, minute)) {
             return null;
         } else {
-            parsedTime = LocalDate.of(year,month,day).atTime(hour, minute);
+            parsedTime = LocalDate.of(year, month, day).atTime(hour, minute);
         }
 
 
@@ -125,19 +116,16 @@ public class Parser {
     }
 
     /**
-     * @author Hang Zelin
+     * Returns a String which is a task info in a local save data.
+     * Noted: you must specify it as local data, otherwise it can go wrong.
      *
-     * @description return a String which is a task info in a local save data.
-     * noted: you must specify it as local data, otherwise it can go wrong.
-     *
-     * @param
-     * @return String
+     * @return Task retrieved from save data.
      */
     public String getSaveTask() {
         String task;
         char taskType = Message.charAt(0);
         if (taskType == 'D' || taskType == 'E') {
-            task = Message.substring(8 ,Message.indexOf("|", 8) - 1);
+            task = Message.substring(8, Message.indexOf("|", 8) - 1);
         } else {
             task = Message.substring(8);
         }
@@ -146,13 +134,10 @@ public class Parser {
     }
 
     /**
-     * @author Hang Zelin
+     * Returns a String which is a time info in a local save data.
+     * Noted: you must specify it as local data, otherwise it can go wrong.
      *
-     * @description return a String which is a time info in a local save data.
-     * noted: you must specify it as local data, otherwise it can go wrong.
-     *
-     * @param
-     * @return String
+     * @return Time retrieved from save data.
      */
     public String getSaveTime() {
         String time;
@@ -167,13 +152,11 @@ public class Parser {
     }
 
     /**
-     * @author Hang Zelin
+     * Returns a String which is an operation type in a line of command.
      *
-     * @description return a String which is an operation type in a line of command.
-     *
-     * @param
-     * @return String
-     * @throws DukeException
+     * @return Operation type parsed from users' one line of command.
+     * @throws DukeException Throws when the operation type does not belong to any one of the types that
+     * duke can do.
      */
     public String getOperationType() throws DukeException {
         String OperationType;
@@ -195,18 +178,15 @@ public class Parser {
     }
 
     /**
-     * @author Hang Zelin
+     * Returns a String which is task info in a line of command.
      *
-     * @description return a String which is task info in a line of command.
-     *
-     * @param
-     * @return String
-     * @throws DukeException
+     * @return Operation type parsed from users' one line of command.
+     * @throws DukeException Throws when the task info cannot be retrieved from users' one line of command.
      */
-    public String getTask() throws DukeException{
+    public String getTask() throws DukeException {
         String task = "";
 
-        if (Message.startsWith("deadline") || Message.startsWith("event") || Message.startsWith("todo")) {
+        if (Message.startsWith("deadline") || Message.startsWith("event") || Message.startsWith("todo") || Message.startsWith("find")) {
             //Get Task description and time if it has it.
             if (Message.contains("/")) {
                 task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
@@ -223,15 +203,13 @@ public class Parser {
     }
 
     /**
-     * @author Hang Zelin
+     * Returns a String which is time info in a line of command.
      *
-     * @description return a String which is time info in a line of command.
-     *
-     * @param
-     * @return String
-     * @throws DukeException
+     * @return Time parsed from users' one line of command.
+     * @throws DukeException Throws when users' the time cannot be parsed out or the parsed out time does not
+     * fit the format for a specific task type.
      */
-    public String getTime() throws DukeException{
+    public String getTime() throws DukeException {
         String time = "";
 
         //throw exceptions for deadline or events' format.
@@ -263,26 +241,23 @@ public class Parser {
 
         //Time for deadlines or event cannot be empty.
         if ((Message.startsWith("event") || Message.startsWith("deadline") || Message.startsWith("tell")) && time.equals("")) {
-            throw new DukeException("☹ OOPS!!! The time of a " + Message.substring(0, Message.indexOf(" ")) +" cannot be empty.");
+            throw new DukeException("☹ OOPS!!! The time of a " + Message.substring(0, Message.indexOf(" ")) + " cannot be empty.");
         }
 
         return time;
     }
 
     /**
-     * @author Hang Zelin
-     *
-     * @description return a String which is index info in a line of command.
+     * return a String which is index info in a line of command.
      * Noted: It is possible that index does not exist. This method will only be applicable for "tell", "find",
      * "done" and "delete" operation type.
      *
-     * @param
-     * @return Integer
+     * @return Index parsed from users' one line of command if it contains an index.
      */
-    public Integer getIndex(){
+    public Integer getIndex() {
         int index = (Message.contains(" ") && (Message.startsWith("done") || Message.startsWith("delete")))
                 ? Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1
-                :-1;
+                : -1;
 
         return index;
     }

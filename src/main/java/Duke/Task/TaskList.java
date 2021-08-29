@@ -1,18 +1,14 @@
 /**
  * @author Hang Zelin
  *
- * @description Stores all the tasks for the Duke. Duke can refer to this tasklist to see a specific task
+ * Stores all the tasks for the Duke. Duke can refer to this tasklist to see a specific task
  * or make use of the methods in it to execute an operation.
- *
  */
-package Duke.Task;
+package duke.task;
 
-import Duke.Command.Parser;
-import Duke.Excpetions.DukeException;
-import Duke.Task.Deadlines;
-import Duke.Task.Events;
-import Duke.Task.Task;
-import Duke.Task.ToDos;
+import duke.command.Parser;
+import duke.excpetions.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,100 +19,83 @@ public class TaskList {
     ArrayList<Task> tasks;
 
     /**
-     * @author Hang Zelin
+     * Constructor to store all the tasks in a Generic ArrayList.
      *
-     * @description Constructor to store all the tasks in a Generic ArrayList.
-     *
+     * @param tasks A list of Task type variables.
      */
     public TaskList(ArrayList<Task> tasks) {
-
         this.tasks = tasks;
     }
 
     /**
-     * @author Hang Zelin
-     *
-     * @description Another Constructor to initialize an empty TaskList if there is no save data.
-     *
+     * Another Constructor to initialize an empty TaskList if there is no save data.
      */
-    public TaskList(){
+    public TaskList() {
         this.tasks = new ArrayList<Task>();
     }
 
     /**
-     * @author Hang Zelin
+     * Gets all the tasks that match the time users take in.
      *
-     * @description get all the events that match the time users take in.
-     *
-     * @param time
-     * @return void
+     * @param time String message that indicates time users take in to find specific event.
      */
-    public void getSpecificDateEvent(String time){
-        Parser p = new Parser("");
+    public void getSpecificDateEvent(String time) {
+        Parser parser = new Parser("");
         int count = 0;//count the number of the events happen on the time.
 
         for (int i = 0; i < tasks.size(); i++) {
-            String Message = tasks.get(i).getTaskInfo();
-            String UnParsedInfo = tasks.get(i).getTime();
-            String timeInFormat =(p.ParseTime(time) != null)?
-                    p.ParseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
-                    :"Nope";
+            String message = tasks.get(i).getTaskInfo();
+            String unParsedInfo = tasks.get(i).getTime();
+            String timeInFormat = (parser.parseTime(time) != null) ?
+                    parser.parseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
+                    : "Nope";
 
-            if ((UnParsedInfo != null && (UnParsedInfo.contains(time) || UnParsedInfo.contains(timeInFormat)))
-                            || Message.contains(time) || Message.contains(timeInFormat)) {
+            if ((unParsedInfo != null && (unParsedInfo.contains(time) || unParsedInfo.contains(timeInFormat)))
+                    || message.contains(time) || message.contains(timeInFormat)) {
                 count++;
-                System.out.println(count + "." + Message);
+                System.out.println(count + "." + message);
             }
         }
         if (count == 0) {
-            System.out.println("Sorry. There is no event occurred on the time you give me!! :(");
+            System.out.println("Sorry. There is no tasks occurred on the time you give me!! :(");
         }
     }
 
     /**
-     * @author Hang Zelin
+     * Marks a specific task as done.
      *
-     * @description Mark a specific task as done.
-     *
-     * @param index
-     * @return void
+     * @param index Integer indicates the index for the task
      */
-    public void MarkDone(int index) {
-        this.tasks.get(index).MarkDone();
+    public void markDone(int index) {
+        this.tasks.get(index).markDone();
     }
 
     /**
-     * @author Hang Zelin
+     * Deletes a specific task.
      *
-     * @description delete a specific task.
-     *
-     * @param index
-     * @return void
+     * @param index Integer indicates the index for the task
      */
-    public void Delete(int index) {
+    public void delete(int index) {
         this.tasks.remove(index);
     }
 
     /**
-     * @author Hang Zelin
-     *
-     * @description Add a task to the TaskLists. This method will automatically decide which type of the
+     * Adds a task to the TaskLists. This method will automatically decide which type of the
      * task is added to the list.
      *
-     * @param taskType
-     * @param task
-     * @param time
-     * @return void
-     * @throws DukeException
+     * @param taskType String message indicates the task type.
+     * @param task String message indicates the task info.
+     * @param time String message indicates the time info.
+     * @throws DukeException Throws when a task cannot be created or added to the TaskList.
      */
-    public void add(String taskType, String task, String time) throws DukeException{
-        Parser p = new Parser("");
+    public void add(String taskType, String task, String time) throws DukeException {
+        Parser parser = new Parser("");
 
-        LocalDateTime parsedTime = p.ParseTime(time);
+        LocalDateTime parsedTime = parser.parseTime(time);
         OperationType[] taskTypes = OperationType.values();
         for (OperationType t : taskTypes) {
-            if (t.toString().equals(taskType)){
-                Task newTask = t.AssignTaskType(t, task, parsedTime);
+            if (t.toString().equals(taskType)) {
+                Task newTask = t.assignTaskType(t, task, parsedTime);
                 tasks.add(newTask);
                 break;
             }
@@ -125,62 +104,54 @@ public class TaskList {
     }
 
     /**
-     * @author Hang Zelin
+     * Returns a specific task users refer to.
      *
-     * @description Return a specific task users are referring to.
-     *
-     * @param index
-     * @return Task
-     *
-     */
+     * @param index An integer indicates the index of the task.
+     * @return Task users refer to
+     * */
     public Task get(int index) {
         return this.tasks.get(index);
     }
 
 
     /**
-     * @author Hang Zelin
+     * Returns the size of the TaskList
      *
-     * @description Return the size of the TaskList
-     *
-     * @param
-     * @return int
+     * @return Integer indicates the size of the TaskList.
      */
-    public int size(){
+    public int size() {
         return this.tasks.size();
     }
 
     /**
-     * @author Hang Zelin
+     * Detects if the index taking in is invalid or not.
      *
-     * @description detect if the index taking in is invalid or not.
-     *
-     * @param index
-     * @return void
-     * @throws DukeException
+     * @param index Integer indicates the index of the task.
+     * @throws DukeException Throws when the index is invalid.
      */
-    public void detectIndex(int index) throws DukeException{
+    public void detectIndex(int index) throws DukeException {
         if (index < 0 || index >= this.tasks.size()) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
         }
     }
 
     /**
-     * @author Hang Zelin
-     *
-     * @description The enum of all types of operations that is able to execute.
+     * Enum of all types of operations that is able to execute.
      * It also contains a method AssignTask Type to find the specific type of task to create.
-     *
      */
-    public enum OperationType{
+    public enum OperationType {
         bye, done, delete, tell, list, todo, deadline, event;
 
-        public Task AssignTaskType(OperationType t,String task, LocalDateTime time){
-            switch (t) {
-            case todo: return new ToDos(false, task);
-            case deadline: return new Deadlines(false, task, time);
-            case event: return new Events(false, task, time);
-            default: return null;
+        public Task assignTaskType(OperationType type, String task, LocalDateTime time) {
+            switch (type) {
+            case todo:
+                return new ToDos(false, task);
+            case deadline:
+                return new Deadlines(false, task, time);
+            case event:
+                return new Events(false, task, time);
+            default:
+                return null;
             }
         }
     }

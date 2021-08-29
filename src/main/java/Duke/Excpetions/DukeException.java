@@ -1,49 +1,38 @@
 /**
  * @author Hang Zelin
  *
- * @description This is an exception class which deals with invalid input or errors.
- *
+ * Exception class which deals with invalid input or errors.
  */
 
-package Duke.Excpetions;
+package duke.excpetions;
 
 public class DukeException extends Exception {
 
-    private String ErrorMessage = "";
+    private String errorMessage = "";
 
     /**
-     * @author Hang Zelin
+     * Constructor that stores the ErrorMessage encountered in Duke programme.
      *
-     * @description Constructor that stores the ErrorMessage encountered in Duke programme.
-     *
-     * @param ErrorMessage
+     * @param errorMessage Detail info of the error.
      */
-    public DukeException(String ErrorMessage){
-        this.ErrorMessage = ErrorMessage;
+    public DukeException(String errorMessage){
+        this.errorMessage = errorMessage;
     }
 
     /**
-     * @author Hang Zelin
-     *
-     * @description Print out the Error Message in DukeException.
-     *
-     * @param
-     * @return void
+     * Prints out the Error Message in DukeException.
      */
-    public void PrintErrorMessage(){
-        System.out.println(this.ErrorMessage);
+    public void printErrorMessage(){
+        System.out.println(this.errorMessage);
     }
 
     /**
-     * @author Hang Zelin
+     * Returns the Error Message in DukeException.
      *
-     * @description Return the Error Message in DukeException.
-     *
-     * @param
-     * @return String
+     * @return Detailed info of error message.
      */
     @Override
     public String getMessage() {
-        return this.ErrorMessage;
+        return this.errorMessage;
     }
 }
