@@ -14,6 +14,6 @@ public class EventsTest {
     @Test
     public void saveDataTest() {
         Events events = new Events("Project meeting", "idk");
-        assertEquals("event 0 Project meeting /at idk",events.saveData());
+        assertEquals("event 0 Project meeting /at idk", events.saveData());
     }
 }
