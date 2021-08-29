@@ -1,8 +1,4 @@
-import duke.Duke;
-import duke.Storage;
-import duke.TaskList;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,11 +7,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import duke.Duke;
+import duke.Storage;
+import duke.TaskList;
 
 public class StorageTest {
     @Test
-    public void CreateTaskDirTest(){
+    public void createTaskDirTest() {
         final String testFileName = "createDirTest/createDirTest.txt";
 
         // Test creation of directory
