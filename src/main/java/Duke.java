@@ -1,13 +1,13 @@
-import duke.task.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /** This is the main class for the program. */
 public class Duke {
+    private static final String FILE_PATH = "data.txt";
     private TaskList tasks;
     private final Storage storage;
-    private static final String FILE_PATH = "data.txt";
     private final Ui ui;
 
     /**
@@ -25,7 +25,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    
     /** Start of the program. */
     public void run() {
         ui.welcomeMessage();

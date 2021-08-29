@@ -1,5 +1,8 @@
 package duke.storage;
 
+import static duke.parser.Parser.dateFormatter;
+import static duke.parser.Parser.timeFormatter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,10 +11,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exceptions.DukeException;
-import duke.task.*;
-
-import static duke.parser.Parser.dateFormatter;
-import static duke.parser.Parser.timeFormatter;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Encapsulates the loading of tasks from the file and the saving of tasks to the file

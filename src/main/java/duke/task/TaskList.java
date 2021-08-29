@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.ui.Ui;
-
 import java.util.ArrayList;
+
+import duke.ui.Ui;
 
 /**
  * Encapsulates a list of tasks. It supports operations to add and remove tasks.
@@ -37,6 +37,7 @@ public class TaskList {
         ui.printTaskLength(this);
     }
 
+    /** Prints all tasks in the variable tasks */
     public void printAllTasks() {
         for (int i = 0; i < this.numberOfTasks(); i++) {
             System.out.println((i + 1) + "." + this.taskNumber(i));

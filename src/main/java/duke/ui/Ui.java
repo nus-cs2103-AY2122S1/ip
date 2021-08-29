@@ -1,9 +1,9 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Class that deals with interactions with the user.
@@ -51,6 +51,11 @@ public class Ui {
         System.out.println("Here are the tasks in your list: ");
     }
 
+    /**
+     * Prints a standard message signalling task is marked as done.
+     *
+     * @param t The task to be marked as done.
+     */
     public void taskDone(Task t) {
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println("  " + t);
@@ -60,6 +65,11 @@ public class Ui {
         System.out.println("Now you have " + tasks.numberOfTasks() + " tasks in the list.");
     }
 
+    /**
+     * Prints a standard message signalling task is added.
+     *
+     * @param t The task to be added.
+     */
     public void addTaskMessage(Task t) {
         System.out.println("Got it. I've added this task: ");
         System.out.println("  " + t);
@@ -69,6 +79,11 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints a standard message signalling task is deleted.
+     *
+     * @param t The task to be deleted.
+     */
     public void deleteTask(Task t) {
         System.out.println("Noted! I've removed this task: ");
         System.out.println("  " + t);
