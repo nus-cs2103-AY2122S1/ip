@@ -89,7 +89,7 @@ public class Ui {
      *
      * @param task the task that was completed by the user
      */
-    public static void markedTask(Task task) {
+    public static void markTaskMessage(Task task) {
         System.out.println("    ***\n" + "    You have successfully done this task:\n" +
                 "      " + task.getStatusIcon() + " " + task.getDescription() + "\n    ***\n");
     }
@@ -101,7 +101,7 @@ public class Ui {
      * @param task the task the user is adding
      * @param count the size of the TaskList currently
      */
-    public static void addedTask(Task task, int count) {
+    public static void addTaskMessage(Task task, int count) {
         if (count == 1) {
             System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
                     task.printTask() + "\n    You now have " + count + " task in the list.\n" +
@@ -118,7 +118,7 @@ public class Ui {
      *
      * @param task the task removed by the user
      */
-    public static void removedTask(Task task) {
+    public static void removeTaskMessage(Task task) {
         System.out.println("    ***\n" + "    You have successfully removed this task:\n" +
                 "      " + task.getStatusIcon() + " " + task.getDescription() + "\n    ***\n");
     }
@@ -126,7 +126,7 @@ public class Ui {
     /**
      * Displays an error message when user input is invalid.
      */
-    public static void invalidTask() {
+    public static void invalidTaskMessage() {
         System.out.println("Invalid input. \nYou may only use the following inputs: " +
                 "(bye, list, done, deadline, event, todo) and any text thereafter.");
         importantMessage();
@@ -136,7 +136,7 @@ public class Ui {
      * Displays a message indicating that contents have been written safely and correctly
      * to the designated file.
      */
-    public static void successfulWriteFile() {
+    public static void successfulWriteFileMessage() {
         System.out.println("Successfully written contents to file.");
     }
 
@@ -145,7 +145,7 @@ public class Ui {
      *
      * @param error the error thrown when file is failed to be written to.
      */
-    public static void failedWriteFile(String error) {
+    public static void failToWriteFileMessage(String error) {
         System.out.println("Failed to write to the file. Error: " + error);
     }
 

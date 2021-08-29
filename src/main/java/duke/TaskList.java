@@ -39,9 +39,9 @@ public class TaskList {
                 newTask = new ToDos(userInput);
             }
             contents.add(newTask);
-            Ui.addedTask(newTask, contents.size());
+            Ui.addTaskMessage(newTask, contents.size());
         } else {
-            Ui.invalidTask();
+            Ui.invalidTaskMessage();
         }
     }
 
@@ -76,8 +76,8 @@ public class TaskList {
         String index = userInput.substring(5);
         int x = Integer.parseInt(index);
         Task temp = contents.get(x - 1);
-        temp.markedDone();
-        Ui.markedTask(temp);
+        temp.markDone();
+        Ui.markTaskMessage(temp);
     }
 
     /**
@@ -90,7 +90,7 @@ public class TaskList {
         int x = Integer.parseInt(index);
         Task temp = contents.get(x - 1);
         contents.remove(temp);
-        Ui.removedTask(temp);
+        Ui.removeTaskMessage(temp);
     }
 
     /**
@@ -98,7 +98,7 @@ public class TaskList {
      */
     public void markTasksSaved() {
         for (Task x: contents) {
-            x.markedSaved();
+            x.markSaved();
         }
     }
 }

@@ -48,8 +48,8 @@ public class Duke {
 
         Scanner newScan = new Scanner(System.in);
         Parser.evaluateUserInput(newScan);
-        storage.writeFile();
-        Ui.successfulWriteFile();
+        Storage.writeFile();
+        Ui.successfulWriteFileMessage();
         tasks.markTasksSaved();
         Ui.goodbyeMessage();
 

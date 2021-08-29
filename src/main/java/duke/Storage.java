@@ -36,7 +36,7 @@ public class Storage {
                 fw.write(content.printTask());
                 fw.close();
             } catch (IOException e) {
-                Ui.failedWriteFile(e.getMessage());
+                Ui.failToWriteFileMessage(e.getMessage());
             }
         }
     }
@@ -46,7 +46,7 @@ public class Storage {
      * to allow the user to see what contents are in the file that was previously saved.
      */
     public void printStartingFileContents() {
-        File testFile = new File(this.filePath);
+        File testFile = new File(filePath);
         Scanner s;
         try {
             s = new Scanner(testFile);
@@ -65,7 +65,7 @@ public class Storage {
      */
     public ArrayList<Task> load() {
         ArrayList<Task> newList = new ArrayList<>();
-        File newFile = new File(this.filePath);
+        File newFile = new File(filePath);
         try {
             Scanner readFile = new Scanner(newFile);
             while (readFile.hasNext()) {
@@ -84,7 +84,7 @@ public class Storage {
                 }
                 if (isTaskDone == 'X') {
                     assert temp != null;
-                    temp.markedSaved();
+                    temp.markSaved();
                 }
                 newList.add(temp);
             }

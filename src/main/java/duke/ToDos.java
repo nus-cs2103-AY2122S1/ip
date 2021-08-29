@@ -29,8 +29,8 @@ public class ToDos extends Task {
      * Marks the current ToDos object as done.
      */
     @Override
-    public void markedDone() {
-        super.markedDone();
+    public void markDone() {
+        super.markDone();
     }
 
     /**

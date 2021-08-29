@@ -47,8 +47,8 @@ public class Deadline extends Task {
      * Marks the current Deadline as done.
      */
     @Override
-    public void markedDone() {
-        super.markedDone();
+    public void markDone() {
+        super.markDone();
     }
 
     /**

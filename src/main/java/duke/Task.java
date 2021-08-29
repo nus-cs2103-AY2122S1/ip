@@ -38,7 +38,7 @@ public class Task {
     /**
      * Marks the current task as done.
      */
-    public void markedDone() {
+    public void markDone() {
         this.isDone = true;
     }
 
@@ -63,7 +63,7 @@ public class Task {
     /**
      * Indicates the current task as being saved in the file (using the filepath given).
      */
-    public void markedSaved() {
+    public void markSaved() {
         this.wasSaved = true;
     }
 }

@@ -48,8 +48,8 @@ public class Event extends Task {
      * Marks the current Event as done.
      */
     @Override
-    public void markedDone() {
-        super.markedDone();
+    public void markDone() {
+        super.markDone();
     }
 
     /**
