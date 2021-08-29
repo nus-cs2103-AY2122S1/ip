@@ -30,13 +30,12 @@ class Duke {
         Duke duke = new Duke();
         Ui.show("Hello! I'm Duke", "What can I do for you?");
         while (true) {
-            String command = Ui.nextLine();
-            if (duke.isExit(command)) {
-                Ui.show("Bye. Hope to see you again soon!");
-                duke.exit();
-                return;
+            String[] result = duke.handleInput(Ui.nextLine());
+            if (result != null) {
+                Ui.show(result);
             } else {
-                Ui.show(duke.handleInput(command));
+                Ui.show("Bye. Hope to see you again soon!");
+                return;
             }
         }
     }
@@ -44,23 +43,15 @@ class Duke {
 
     public String[] handleInput(String command) {
         try {
+            if (parser.isExit(command)) {
+                storage.close();
+                return null;
+            }
             String[] out = parser.parse(command);
             storage.write(command);
             return out;
         } catch (Exception e) {
             return new String[]{e.getMessage()};
-        }
-    }
-
-    public boolean isExit(String command) {
-        return parser.isExit(command);
-    }
-
-    public void exit() {
-        try {
-            storage.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
