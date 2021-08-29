@@ -28,7 +28,7 @@ public class Deadline extends Task {
      */
     public static Task of(boolean isDone, String description, String time) throws DateTimeException {
         Task ret = new Deadline(description, LocalDate.parse(time));
-        return isDone ? ret.done() : ret;
+        return isDone ? ret.markDone() : ret;
     }
 
     public String getTaskType() {

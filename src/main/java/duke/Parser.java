@@ -24,6 +24,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException, IllegalArgumentException {
         String[] parts = fullCommand.split(" ", 2);
+        String [] args;
         String action = parts[0];
         switch (action) {
         case "list":
@@ -31,34 +32,37 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "done":
-            if (parts.length < 2) throw new IllegalArgumentException("Not enough arguments");
-            else return new DoneCommand(Integer.parseInt(parts[1]));
+            assertInputSize(parts, 2, "Not enough arguments");
+            return new DoneCommand(Integer.parseInt(parts[1]));
         case "delete":
-            if (parts.length < 2) throw new IllegalArgumentException("Not enough arguments");
-            else return new DeleteCommand(Integer.parseInt(parts[1]));
+            assertInputSize(parts, 2, "Not enough arguments");
+            return new DeleteCommand(Integer.parseInt(parts[1]));
         case "find":
-            if (parts.length < 2) throw new IllegalArgumentException("Not enough arguments");
-            else return new FindCommand(parts[1]);
+            assertInputSize(parts, 2, "Not enough arguments");
+            return new FindCommand(parts[1]);
         case "todo":
-            if (parts.length < 2)
-                throw new IllegalArgumentException("☹ OOPS!!! The description of a todo cannot be empty.");
-            else return new AddCommand(action, parts[1]);
+            assertInputSize(parts, 2, "☹ OOPS!!! The description of a todo cannot be empty.");
+            return new AddCommand(action, parts[1]);
         case "deadline":
-            if (parts.length < 2) throw new IllegalArgumentException("Not enough arguments");
-            else {
-                String[] args = parts[1].split(" /by ");
-                if (args.length < 2) throw new IllegalArgumentException("☹ OOPS!!! Insufficient args for deadline.");
-                return new AddCommand(action, args);
-            }
+            assertInputSize(parts, 2, "Not enough arguments");
+            args = parts[1].split(" /by ");
+            assertInputSize(args, 2, "☹ OOPS!!! Insufficient args for deadline.");
+            return new AddCommand(action, args);
         case "event":
-            if (parts.length < 2) throw new IllegalArgumentException("Not enough arguments");
-            else {
-                String[] args = parts[1].split(" /at ");
-                if (args.length < 2) throw new IllegalArgumentException("☹ OOPS!!! Insufficient args for event.");
-                return new AddCommand(action, args);
-            }
+            assertInputSize(parts, 2, "Not enough arguments");
+            args = parts[1].split(" /at ");
+            assertInputSize(args, 2, "☹ OOPS!!! Insufficient args for event.");
+            return new AddCommand(action, args);
+        default:
+            throw new InvalidDukeCommandException();
         }
+    }
 
-        throw new InvalidDukeCommandException();
+    private static void assertInputSize(String[] inputs,
+                                        int expectedSize,
+                                        String errorMsg) throws IllegalArgumentException {
+        if (inputs.length != expectedSize) {
+            throw new IllegalArgumentException(errorMsg);
+        }
     }
 }

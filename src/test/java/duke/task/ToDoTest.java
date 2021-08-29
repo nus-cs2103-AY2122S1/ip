@@ -9,7 +9,7 @@ public class ToDoTest {
     public void createTodo() {
         String desc = "TEST TODO";
         Task todo = ToDo.of(false, desc);
-        assertEquals(desc, todo.getDescriptions());
+        assertEquals(desc, todo.getDescription());
         assertEquals(" ", todo.getStatusIcon());
         todo = ToDo.of(true, desc);
         assertEquals("X", todo.getStatusIcon());
@@ -19,7 +19,7 @@ public class ToDoTest {
     public void completeToDo() {
         String desc = "TEST TODO";
         Task todo = ToDo.of(false, desc);
-        todo.done();
+        todo.markDone();
         assertEquals(true, todo.isDone());
     }
 
@@ -29,7 +29,7 @@ public class ToDoTest {
         Task todo = ToDo.of(false, desc);
         assertEquals("[T][ ] TEST TODO", todo.toString());
         assertEquals("T|0|TEST TODO", todo.toDatabaseString());
-        todo.done();
+        todo.markDone();
         assertEquals("[T][X] TEST TODO", todo.toString());
         assertEquals("T|1|TEST TODO", todo.toDatabaseString());
     }

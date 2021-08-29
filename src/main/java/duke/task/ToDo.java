@@ -19,7 +19,7 @@ public class ToDo extends Task {
      */
     public static Task of(boolean isDone, String description) {
         Task ret = new ToDo(description);
-        return isDone ? ret.done() : ret;
+        return isDone ? ret.markDone() : ret;
     }
 
     public String getTaskType() {

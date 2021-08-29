@@ -13,7 +13,7 @@ public class DeadlineTest {
     public void createDeadline() {
         String desc = "TEST DEADLINE";
         Task task = Deadline.of(false, desc, "2020-02-02");
-        assertEquals(desc, task.getDescriptions());
+        assertEquals(desc, task.getDescription());
         assertEquals(" ", task.getStatusIcon());
         task = Deadline.of(true, desc, "2020-02-02");
         assertEquals("X", task.getStatusIcon());
@@ -23,7 +23,7 @@ public class DeadlineTest {
     public void completeDeadline() {
         String desc = "TEST DEADLINE";
         Task task = Deadline.of(false, desc, "2020-02-02");
-        task.done();
+        task.markDone();
         assertTrue(task.isDone());
     }
 
@@ -34,7 +34,7 @@ public class DeadlineTest {
 
         assertEquals("[D][ ] TEST DEADLINE (by: Feb 2 2020)", task.toString());
         assertEquals("D|0|TEST DEADLINE|2020-02-02", task.toDatabaseString());
-        task.done();
+        task.markDone();
         assertEquals("[D][X] TEST DEADLINE (by: Feb 2 2020)", task.toString());
         assertEquals("D|1|TEST DEADLINE|2020-02-02", task.toDatabaseString());
     }
