@@ -5,6 +5,9 @@ import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * DoneCommand will mark as task as completed when executed.
+ */
 public class DoneCommand extends Command {
 
     private int taskNumber;

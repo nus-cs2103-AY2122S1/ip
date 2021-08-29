@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import exception.InvalidDateFormat;
 
+/**
+ * Deadline is a subclass of Task with a deadline.
+ */
 public class Deadline extends Task {
 
     private LocalDate date;
@@ -17,6 +20,14 @@ public class Deadline extends Task {
     DateTimeFormatter dayInputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter timeInputFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
+    /**
+     * Initialises the description, deadline and isComplete status of task.
+     *
+     * @param description task description
+     * @param deadline deadline of task
+     * @param completed true if the task is completed
+     * @throws InvalidDateFormat
+     */
     public Deadline(String description, String deadline, boolean completed) throws InvalidDateFormat {
         super(description, completed);
         String date = deadline.split(" ")[0];
@@ -34,6 +45,7 @@ public class Deadline extends Task {
         return String.format("[D]%s (by: %s %s)", super.toString(),
                 date.format(dayOutputFormatter), time.format(timeOutputFormatter));
     }
+
 
     @Override
     public String getType() {

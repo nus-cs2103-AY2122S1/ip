@@ -42,6 +42,14 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Abstracts out the critical information from the user's input and insert task as the taskType.
+     * Initialises taskInfo and taskType with respective information.
+     *
+     * @param input The complete string input by users
+     * @throws NullDescription If the description of task is empty or contains only spaces.
+     * @throws InvalidDateFormat If the input does not follow the specified format YYYY-MM-DD HH:MM
+     */
     public AddCommand(String input) throws NullDescription, InvalidDateFormat {
         this.taskType = input.split(" ")[0];
 
@@ -92,6 +100,7 @@ public class AddCommand extends Command {
         System.out.printf("\tGot it. I've added this task:\n" + "\t%s\n" + "\tNow you have %d tasks in the list.\n",
                 newTask, tasks.size());
     }
+
 
     public boolean isExit() {
         return EXIT;

@@ -6,11 +6,19 @@ import task.Task;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * DeleteCommand will delete the task stored in local storage when executed.
+ */
 public class DeleteCommand extends Command {
 
     private int taskNumber;
     private final boolean EXIT = false;
 
+    /**
+     * Creates a delete task request using the task number i
+     *
+     * @param i the task number to be deleted
+     */
     public DeleteCommand(int i) {
         this.taskNumber = i;
     }

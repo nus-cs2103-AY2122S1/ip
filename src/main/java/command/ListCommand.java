@@ -7,6 +7,9 @@ import ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * ListCommand will list out the task number, task description and date(if applicable) when executed.
+ */
 public class ListCommand extends Command {
 
         private final boolean EXIT = false;

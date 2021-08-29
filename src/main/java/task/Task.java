@@ -30,6 +30,11 @@ public abstract class Task {
 
     }
 
+    /**
+     * Returns the type of task in String.
+     *
+     * @return string format of task type.
+     */
     public abstract String getType();
     public abstract String getDeadline();
 }

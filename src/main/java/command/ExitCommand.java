@@ -4,6 +4,9 @@ import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+/**
+ * ExitCommand will close Duke program when executed.
+ */
 public class ExitCommand extends Command {
 
     private final boolean EXIT = true;
