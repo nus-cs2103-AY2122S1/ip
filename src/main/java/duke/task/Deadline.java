@@ -17,6 +17,10 @@ public class Deadline extends Task {
 
     private DukeDate dueBy;
 
+    /**
+     * Constructor for Deadline
+     * Task that contains a deadline to accomplish the task by
+     */
     public Deadline(String description, DukeDate dueBy) {
         super(description);
         this.dueBy = dueBy;

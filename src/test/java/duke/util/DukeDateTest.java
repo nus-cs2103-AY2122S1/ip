@@ -1,15 +1,15 @@
 package duke.util;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class DukeDateTest {
     @Test
-    public void testToString(){
+    public void testToString() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
         LocalDateTime dateStartTime = LocalDateTime.parse("12-Dec-2020 12:00", format);
         LocalDateTime dateEndTime = LocalDateTime.parse("12-Jan-2020 20:00", format);
@@ -18,7 +18,7 @@ public class DukeDateTest {
     }
 
     @Test
-    public void testGetStartTime(){
+    public void testGetStartTime() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
         LocalDateTime dateStartTime = LocalDateTime.parse("12-Dec-2020 12:00", format);
         LocalDateTime dateEndTime = LocalDateTime.parse("12-Jan-2020 20:00", format);

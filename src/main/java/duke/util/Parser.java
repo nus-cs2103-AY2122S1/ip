@@ -9,7 +9,6 @@ import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
-
 import duke.exception.DukeException;
 import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidCommandException;
@@ -57,7 +56,8 @@ public class Parser {
      * @param strArr String array containing the command
      * @param event String stating the type of task to be added
      * @return String Returns the description of the task
-     * @throws MissingArgumentException throws a Duke.util.Duke.exception.MissingArgumentException if no description found
+     * @throws MissingArgumentException throws a MissingArgumentException if no description found
+     *
      */
     private static String checkDescription(String[] strArr, String event) throws MissingArgumentException {
 
@@ -77,14 +77,14 @@ public class Parser {
      * @param strArr String array containing the command
      * @param event String stating the type of task to be added
      * @return String Returns the description of the task
-     * @throws MissingArgumentException throws a Duke.util.Duke.exception.MissingArgumentException if no description found
+     * @throws MissingArgumentException throws a MissingArgumentException if no description found
      */
     private static String checkSearchTerm(String[] strArr, String event) throws MissingArgumentException,
             TooManyArgumentsException {
 
         if (strArr.length < 2) {
             throw new MissingArgumentException("search term", event);
-        } else if (strArr.length > 2){
+        } else if (strArr.length > 2) {
             throw new TooManyArgumentsException("search terms", event);
         } else if (strArr[1].trim().isEmpty()) {
             throw new MissingArgumentException("search term", event);
@@ -129,37 +129,37 @@ public class Parser {
         Command currentCommand = new InvalidCommand();
         String[] checkCommand = command.split(" ", 2);
         switch(checkCommand[0]) {
-            case "todo":
-                currentCommand = new AddCommand(checkDescription(checkCommand, "todo"), "todo");
-                break;
-            case "event":
-                currentCommand = new AddCommand(checkDescription(checkCommand, "event"), "event");
-                break;
-            case "deadline":
-                currentCommand = new AddCommand(checkDescription(checkCommand, "deadline"), "deadline");
-                break;
-            case "delete":
-                int deleteTaskNumber = checkInteger(checkCommand, "deleting task");
-                currentCommand = new DeleteCommand(deleteTaskNumber);
-                break;
-            case "done":
-                int doneTaskNumber = checkInteger(checkCommand, "marking of task");
-                currentCommand = new MarkCommand(doneTaskNumber);
-                break;
-            case "list":
-                currentCommand = new ListCommand();
-                break;
-            case "filter":
-                currentCommand = new FindCommand(checkSearchTerm(command.split(" "), "filter"));
-                break;
-            case "help":
-                currentCommand = new HelpCommand();
-                break;
-            case "bye":
-                currentCommand = new ExitCommand();
-                break;
-            default:
-                throw new InvalidCommandException();
+        case "todo":
+            currentCommand = new AddCommand(checkDescription(checkCommand, "todo"), "todo");
+            break;
+        case "event":
+            currentCommand = new AddCommand(checkDescription(checkCommand, "event"), "event");
+            break;
+        case "deadline":
+            currentCommand = new AddCommand(checkDescription(checkCommand, "deadline"), "deadline");
+            break;
+        case "delete":
+            int deleteTaskNumber = checkInteger(checkCommand, "deleting task");
+            currentCommand = new DeleteCommand(deleteTaskNumber);
+            break;
+        case "done":
+            int doneTaskNumber = checkInteger(checkCommand, "marking of task");
+            currentCommand = new MarkCommand(doneTaskNumber);
+            break;
+        case "list":
+            currentCommand = new ListCommand();
+            break;
+        case "filter":
+            currentCommand = new FindCommand(checkSearchTerm(command.split(" "), "filter"));
+            break;
+        case "help":
+            currentCommand = new HelpCommand();
+            break;
+        case "bye":
+            currentCommand = new ExitCommand();
+            break;
+        default:
+            throw new InvalidCommandException();
         }
         return currentCommand;
 

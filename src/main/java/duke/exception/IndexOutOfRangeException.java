@@ -13,6 +13,11 @@ package duke.exception;
  */
 public class IndexOutOfRangeException extends DukeException {
 
+    /**
+     * Constructor for IndexOutOfRangeException
+     * Exception when user inputs a integer that is out of the range of the
+     * current tasklist
+     */
     public IndexOutOfRangeException(int enteredIndex, int listSize) {
 
         super("Hi, " + enteredIndex + " is not a valid index. List has currently " + listSize + " items.");

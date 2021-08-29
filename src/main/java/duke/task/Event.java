@@ -17,6 +17,10 @@ public class Event extends Task {
 
     private DukeDate duration;
 
+    /**
+     * Constructor for Event
+     * Task that contains a duration to accomplish the task
+     */
     public Event(String description, DukeDate duration) {
         super(description);
         this.duration = duration;

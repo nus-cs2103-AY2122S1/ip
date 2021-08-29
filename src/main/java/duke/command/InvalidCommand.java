@@ -2,10 +2,9 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
-
+import duke.util.Store;
 import duke.util.Tasklist;
 import duke.util.Ui;
-import duke.util.Store;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1

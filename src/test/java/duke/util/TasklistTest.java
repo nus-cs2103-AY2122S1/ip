@@ -1,14 +1,15 @@
 package duke.util;
 
-import duke.exception.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.exception.DukeException;
 
 public class TasklistTest {
 
     @Test
-    public void testAddTask_deadlineTask_returnSuccessMessage(){
+    public void testAddTask_deadlineTask_returnSuccessMessage() {
         Tasklist temp = new Tasklist();
         String message = null;
         try {
@@ -24,7 +25,7 @@ public class TasklistTest {
     }
 
     @Test
-    public void testAddTask_invalidTask_returnInvalidCommandExceptionMessage(){
+    public void testAddTask_invalidTask_returnInvalidCommandExceptionMessage() {
         Tasklist temp = new Tasklist();
         String message = null;
         try {
@@ -37,7 +38,7 @@ public class TasklistTest {
     }
 
     @Test
-    public void testAddTask_invalidDate_returnInvalidArgumentExceptionMessage(){
+    public void testAddTask_invalidDate_returnInvalidArgumentExceptionMessage() {
         Tasklist temp = new Tasklist();
         String message = null;
         try {
@@ -50,7 +51,7 @@ public class TasklistTest {
     }
 
     @Test
-    public void testDeleteTask_deleteTask_returnSuccessMessage(){
+    public void testDeleteTask_deleteTask_returnSuccessMessage() {
         Tasklist temp = new Tasklist();
         String message = null;
         try {
@@ -68,13 +69,16 @@ public class TasklistTest {
     }
 
     @Test
-    public void testToString(){
+    public void testToString() {
         Tasklist temp = new Tasklist();
         try {
             temp.addTask("test1", "todo");
             temp.addTask("test12 /by 24-07-2010 19:00", "deadline");
             temp.addTask("test123 /at 24-07-2010 19:00 to 24-Dec-2010 00:00", "event");
         } catch (DukeException e) {
+
+            temp = new Tasklist();
+
         }
         String successMessage = "1.[T][ ] test1\n"
                 + "2.[D][ ] test12 (by: 24-Jul-2010 19:00)\n"

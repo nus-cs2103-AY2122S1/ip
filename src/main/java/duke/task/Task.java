@@ -16,6 +16,10 @@ public class Task {
     private String description;
     private boolean isCompleted;
 
+    /**
+     * Constructor for Task
+     * Task contains a description string and isCompleted boolean to show whether task has been completed
+     */
     public Task(String description) {
         this.description = description;
         this.isCompleted = false;

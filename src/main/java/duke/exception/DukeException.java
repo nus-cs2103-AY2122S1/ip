@@ -15,6 +15,10 @@ public class DukeException extends Exception {
 
     private String message;
 
+    /**
+     * Constructor for DukeException.
+     * Exception that might be raised during user interaction with Duke
+     */
     public DukeException(String message) {
 
         this.message = message;

@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.util.Store;
 import duke.util.Tasklist;
 import duke.util.Ui;
@@ -17,11 +16,15 @@ import duke.util.Ui;
  */
 public class AddCommand extends Command {
 
+    public static final String COMMAND_WORD = "add";
     private final String taskDetails;
     private final String taskType;
-    public static final String COMMAND_WORD = "add";
 
-
+    /**
+     * Constructor for AddCommand.
+     * Takes in the task details and type of task and creates a add command to add
+     * the current task to the tasklist
+     */
     public AddCommand(String taskDetails, String taskType) {
 
         this.taskDetails = taskDetails;

@@ -13,9 +13,13 @@ package duke.exception;
  */
 public class TooManyArgumentsException extends DukeException {
 
+    /**
+     * Constructor for TooManyArgumentsException
+     * Exception when user inputs too many arguments for the commands
+     */
     public TooManyArgumentsException(String missingCondition, String origin) {
 
-        super("Hi, there are too many " + missingCondition + " for the " + origin +  "!");
+        super("Hi, there are too many " + missingCondition + " for the " + origin + "!");
 
     }
 

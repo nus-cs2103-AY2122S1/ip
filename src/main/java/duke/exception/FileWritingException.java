@@ -13,9 +13,13 @@ package duke.exception;
  */
 public class FileWritingException extends DukeException {
 
+    /**
+     * Constructor for FileWritingException
+     * Exception raised when saving the tasklist to the hard drive
+     */
     public FileWritingException() {
 
-        super("Hi, Duke.util.Duke ran into an error trying to save task to your hard drive. Please try again!");
+        super("Hi, Duke ran into an error trying to save task to your hard drive. Please try again!");
 
     }
 
