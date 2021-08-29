@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * Class that represents the Command to mark a Task as completed from the TaskList.
@@ -24,7 +23,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        Ui.displayMessage(this.tasks.markTaskAsDone(this.index));
+    public String execute() {
+        return this.tasks.markTaskAsDone(this.index);
     }
 }

@@ -15,7 +15,7 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         throw new InvalidCommandException(this.input);
     }
 }

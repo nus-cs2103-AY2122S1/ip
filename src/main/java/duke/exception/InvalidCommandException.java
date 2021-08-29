@@ -13,8 +13,8 @@ public class InvalidCommandException extends DukeException {
      */
     public InvalidCommandException(String command) {
         super("BAKA! I don't understand this command!\n"
-                + String.format("     Command: %s\n", command)
-                + "     You might want to check for spelling and potential whitespaces!");
+                + String.format("Command: %s\n", command)
+                + "You might want to check for spelling and potential whitespaces!");
     }
 }
 

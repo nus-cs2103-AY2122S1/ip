@@ -1,18 +1,15 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
- * Project Duke: Incrementally building a Chatbot.
+ * Duke is a chatbot that keeps track of your tasks for you.
  *
- * Current Progress: Level 9. Find
+ * Current Progress: Level 10. GUI
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted commands:
@@ -43,40 +40,33 @@ import duke.util.Ui;
  * @author Benedict Chua
  */
 public class Duke {
+    private Storage storage;
+    private TaskList tasks;
+    private Parser parser;
+
     /**
-     * Main method for Duke.
-     * Initialises Duke and starts taking in commands from the user.
-     *
-     * @param args The command line arguments.
+     * Constructor for Duke.
+     * Initialises the classes that are necessary for Duke to run.
      */
-    public static void main(String[] args) {
-        // Initialise program
-        Storage storage = new Storage();
-        TaskList tasks = new TaskList(storage.retrieveData(), storage);
-        Parser parser = new Parser(tasks);
-        Scanner sc = new Scanner(System.in);
-        boolean isExit = false;
+    public Duke() {
+        storage = new Storage();
+        tasks = new TaskList(storage.retrieveData(), storage);
+        parser = new Parser(tasks);
+    }
 
-        // Greets user
-        Ui.printLineSeparator();
-        Ui.showWelcome();
-        Ui.printLineSeparator();
-        Ui.printEmptyLine();
-
-        // Carries out commands inputted by user into the Scanner
-        while (!isExit) {
-            try {
-                Ui.printLineSeparator();
-                String input = sc.nextLine();
-                Command command = parser.getCommand(input);
-                command.execute();
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                Ui.displayMessage(new String[] {e.toString()});
-            } finally {
-                Ui.printLineSeparator();
-                Ui.printEmptyLine();
-            }
+    /**
+     * Gets the response from Duke upon receiving user's input command.
+     *
+     * @param input String containing the user's input command.
+     * @return String containing Duke's response to the user's input command.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = parser.getCommand(input);
+            return command.execute();
+        } catch (DukeException e) {
+            return e.toString();
         }
+
     }
 }

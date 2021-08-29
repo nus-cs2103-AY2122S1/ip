@@ -77,7 +77,7 @@ public class TaskList {
      * @param task the task to add to the list.
      * @return String representation of messages stating that the task has been added
      */
-    public String[] addToList(String task, String typeOfTask) throws MissingArgumentException {
+    public String addToList(String task, String typeOfTask) throws MissingArgumentException {
         switch (typeOfTask) {
         case "ToDo":
             tasks.add(new ToDo(task));
@@ -98,12 +98,10 @@ public class TaskList {
 
         storage.writeToFile(convertListToString());
 
-        return new String[] {
-            "I've added this task but it's not like I did it for you or anything!",
-            String.format("  %s", tasks.get(tasks.size() - 1)),
-            String.format("Now you have %d %s in the list. Do your best doing them okay?",
-                tasks.size(), tasks.size() == 1 ? "task" : "tasks")
-        };
+        return "I've added this task but it's not like I did it for you or anything!\n"
+            + String.format("  %s\n", tasks.get(tasks.size() - 1))
+            + String.format("Now you have %d %s in the list. Do your best doing them okay?",
+                tasks.size(), tasks.size() == 1 ? "task" : "tasks");
     }
 
     /**
@@ -114,12 +112,13 @@ public class TaskList {
      * @param filterType the type of filtering to be done when displaying list
      * @param filterCondition String containing the respective filtering condition (expects date or keyword).
      */
-    public void printList(String filterType, String filterCondition) {
+    public String listTasks(String filterType, String filterCondition) {
+        String tasksString = "";
         switch (filterType) {
         case "all":
             for (int i = 0; i < tasks.size(); i++) {
                 Task currTask = tasks.get(i);
-                System.out.println(INDENTATION + String.format("%d:%s", i + 1, currTask));
+                tasksString = tasksString + String.format("%d:%s\n", i + 1, currTask);
             }
             break;
         case "date":
@@ -128,7 +127,7 @@ public class TaskList {
             for (int i = 0; i < tasks.size(); i++) {
                 Task currTask = tasks.get(i);
                 if (currTask.isOnDate(filterCondition)) {
-                    System.out.println(INDENTATION + String.format("%d:%s", dateIndex, currTask));
+                    tasksString = tasksString + String.format("%d:%s\n", dateIndex, currTask);
                     dateIndex++;
                 }
             }
@@ -139,7 +138,7 @@ public class TaskList {
             for (int i = 0; i < tasks.size(); i++) {
                 Task currTask = tasks.get(i);
                 if (currTask.containsKeyword(filterCondition)) {
-                    System.out.println(INDENTATION + String.format("%d:%s", keywordIndex, currTask));
+                    tasksString = tasksString + String.format("%d:%s\n", keywordIndex, currTask);
                     keywordIndex++;
                 }
             }
@@ -149,6 +148,10 @@ public class TaskList {
             // the same switch cases above.
             break;
         }
+
+        return tasksString.equals("")
+            ? "You have no tasks currently."
+            : tasksString;
     }
 
     /**
@@ -158,14 +161,12 @@ public class TaskList {
      * @return message of the completion of the Task.
      * @throws InvalidIndexException if index given does not exist in the TaskList.
      */
-    public String[] markTaskAsDone(int index) throws InvalidIndexException {
+    public String markTaskAsDone(int index) throws InvalidIndexException {
         if (index <= 0 || index > tasks.size()) {
             throw new InvalidIndexException(tasks.size());
         }
-        String[] message = {
-            "You completed a task! Maybe you aren't so incompetent after all.",
-            tasks.get(index - 1).markTaskAsDone()
-        };
+        String message = "You completed a task! Maybe you aren't so incompetent after all.\n"
+            + tasks.get(index - 1).markTaskAsDone();
 
         storage.writeToFile(convertListToString());
 
@@ -180,18 +181,16 @@ public class TaskList {
      * @return message of the deletion of the Task.
      * @throws InvalidIndexException if index given does not exist in the TaskList.
      */
-    public String[] deleteTask(int index) throws InvalidIndexException {
+    public String deleteTask(int index) throws InvalidIndexException {
         if (index <= 0 || index > tasks.size()) {
             throw new InvalidIndexException(tasks.size());
         }
 
         Task deletedTask = tasks.remove(index - 1);
-        String[] message = {
-            "I've deleted this task so show me some gratitude!",
-            String.format("  %s", deletedTask),
-            String.format("Now you have %d %s in the list. Do your best doing them okay?",
-                tasks.size(), tasks.size() == 1 ? "task" : "tasks")
-        };
+        String message = "I've deleted this task so show me some gratitude!\n"
+            + String.format("  %s\n", deletedTask)
+            + String.format("Now you have %d %s in the list. Do your best doing them okay?",
+                tasks.size(), tasks.size() == 1 ? "task" : "tasks");
 
         storage.writeToFile(convertListToString());
 

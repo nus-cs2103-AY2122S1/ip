@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.util.Ui;
-
 /**
  * Class that represents the Command to exit from the program.
  *
@@ -16,7 +14,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        Ui.bidFarewell();
+    public String execute() {
+        return "Hmph! It's not like I want to see you again or anything!";
     }
 }

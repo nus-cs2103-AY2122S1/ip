@@ -13,8 +13,8 @@ public class InvalidTimeInputException extends DukeException {
      */
     public InvalidTimeInputException(String timeString) {
         super("BAKA! I don't understand this Time input!\n"
-                + String.format("     Time: %s\n", timeString)
-                + "     It should be a valid time in the form HH:MM or HHMM!");
+                + String.format("Time: %s\n", timeString)
+                + "It should be a valid time in the form HH:MM or HHMM!");
     }
 }
 

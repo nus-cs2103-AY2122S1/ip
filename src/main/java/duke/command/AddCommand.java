@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * Class that represents the Command to add to the TaskList.
@@ -27,7 +26,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        Ui.displayMessage(this.tasks.addToList(this.task, this.taskType));
+    public String execute() {
+        return this.tasks.addToList(this.task, this.taskType);
     }
 }

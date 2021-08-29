@@ -26,7 +26,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        tasks.printList(this.filterType, this.filterCondition);
+    public String execute() {
+        return tasks.listTasks(this.filterType, this.filterCondition);
     }
 }

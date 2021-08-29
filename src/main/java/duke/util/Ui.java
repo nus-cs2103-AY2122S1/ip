@@ -2,6 +2,7 @@ package duke.util;
 
 /**
  * Class to deal with interactions with the user via messages.
+ * Unused in Level 10 as GUI is used now.
  *
  * @author Benedict Chua
  */

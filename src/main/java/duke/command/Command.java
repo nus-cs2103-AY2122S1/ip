@@ -18,5 +18,5 @@ public abstract class Command {
     /**
      * Executes the command and runs any methods that is related to the command.
      */
-    public abstract void execute();
+    public abstract String execute();
 }

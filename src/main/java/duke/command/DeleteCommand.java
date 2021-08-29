@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * Class that represents the Command to delete from the TaskList.
@@ -24,7 +23,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        Ui.displayMessage(this.tasks.deleteTask(this.index));
+    public String execute() {
+        return this.tasks.deleteTask(this.index);
     }
 }
