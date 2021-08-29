@@ -1,7 +1,6 @@
 package duke.util;
 
 import duke.Duke;
-
 import duke.exceptions.ExceedListSizeException;
 import duke.exceptions.InvalidInputException;
 import duke.exceptions.NoDescriptionException;
@@ -31,19 +30,19 @@ public class Parser {
      * @throws UserInputError
      */
     public String[] parse() throws UserInputError {
-            if (input.equals("list") || input.equals("bye")) {
-                return new String[] {command};
-            } else if (command.equals("done") || command.equals("delete")) {
-                int index = getTaskNumber() - 1;
-                checkIndexRange(index);
-                return new String[] {command, Integer.toString(index)};
-            } else if (command.equals("todo") || command.equals("deadline") ||
-                    command.equals("event") || command.equals("find")) {
-                checkDescExist();
-                return new String[] {command, getDesc(input)};
-            } else {
-                throw new InvalidInputException();
-            }
+        if (input.equals("list") || input.equals("bye")) {
+            return new String[] {command};
+        } else if (command.equals("done") || command.equals("delete")) {
+            int index = getTaskNumber() - 1;
+            checkIndexRange(index);
+            return new String[] {command, Integer.toString(index)};
+        } else if (command.equals("todo") || command.equals("deadline")
+                || command.equals("event") || command.equals("find")) {
+            checkDescExist();
+            return new String[] {command, getDesc(input)};
+        } else {
+            throw new InvalidInputException();
+        }
     }
 
     /**
@@ -75,9 +74,9 @@ public class Parser {
 
         if (index > Duke.taskList.length() - 1) {
             throw new ExceedListSizeException(
-                    "Invalid task reference!\nYou currently have " +
-                            Duke.taskList.length() +
-                            " tasks."
+                    "Invalid task reference!\nYou currently have "
+                            + Duke.taskList.length()
+                            + " tasks."
             );
         }
     }
