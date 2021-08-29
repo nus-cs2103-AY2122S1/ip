@@ -1,10 +1,11 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import java.util.ArrayList;
 
 /**
  * TaskList encapsulates all the functions related to managing the list of tasks.
@@ -17,10 +18,20 @@ public class TaskList {
     private ArrayList<String> saveFileInput;
     private Storage storage;
 
+    /**
+     * Default constructor
+     *
+     */
     public TaskList() {
 
     }
 
+    /**
+     * Overloaded constructor to be used if a save file is loaded.
+     *
+     * @param saveFileInput the ArrayList containing the save file.
+     * @param storage the Storage object.
+     */
     public TaskList(ArrayList<String> saveFileInput, Storage storage) {
         this.saveFileInput = saveFileInput;
         this.storage = storage;
@@ -218,6 +229,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all the tasks list that have the specified word in the description.
+     *
+     * @param s The specified word.
+     */
     public void printAllTasksWith(String s) {
         System.out.println("Here are the tasks in your list with the word: " + s + ":");
         int counter = 1;

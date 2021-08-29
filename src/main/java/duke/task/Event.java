@@ -1,5 +1,6 @@
 package duke.task;
 
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +15,14 @@ public class Event extends Task {
     private String timeStart;
     private String timeEnd;
 
+    /**
+     * This is the constructor for the event task which takes in the description,
+     * date and time.
+     *
+     * @param description The String description for the event.
+     * @param date The String date for the event.
+     * @param time The String time for the event.
+     */
     public Event(String description, String date, String time) {
         super(description, date, time);
         String[] segments = this.time.split("-");
@@ -35,8 +44,8 @@ public class Event extends Task {
         DateTimeFormatter timeFormatterOutput = DateTimeFormatter.ofPattern("h.mma");
         LocalTime timeStart = LocalTime.parse(this.timeStart, timeFormatter);
         LocalTime timeEnd = LocalTime.parse(this.timeEnd, timeFormatter);
-        return timeStart.format(timeFormatterOutput).toString() + " to " +
-                timeEnd.format(timeFormatterOutput).toString();
+        return timeStart.format(timeFormatterOutput).toString() + " to "
+                + timeEnd.format(timeFormatterOutput).toString();
 
     }
 

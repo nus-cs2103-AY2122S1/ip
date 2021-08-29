@@ -1,11 +1,12 @@
 package duke;
 
-import duke.task.Task;
-import java.util.ArrayList;
 import java.io.File;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Storage is the class that handles reading and writing to the save file.
@@ -15,11 +16,16 @@ import java.util.Scanner;
  */
 public class Storage {
     private Scanner s;
-    private final String FILEPATH;
+    private final String filePath;
     private File savefile;
 
+    /**
+     * Storage constructor that takes in the file path for the save file.
+     *
+     * @param filepath the file path of the save file.
+     */
     public Storage(String filepath) {
-        this.FILEPATH = filepath;
+        this.filePath = filepath;
         this.initialiseSaveFile();
     }
 
@@ -28,7 +34,7 @@ public class Storage {
      *
      */
     public void initialiseSaveFile() {
-        this.savefile = new File(this.FILEPATH);
+        this.savefile = new File(this.filePath);
 
         try {
             if (savefile.getParentFile().mkdir()) {

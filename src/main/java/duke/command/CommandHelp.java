@@ -13,6 +13,7 @@ import duke.Ui;
  */
 public class CommandHelp extends Command {
 
+    public static final String KEYWORD = "help";
     private static final String HELP_MESSAGE = "List of Commands:\n"
             + "List,\n"
             + "Done,\n"
@@ -22,8 +23,6 @@ public class CommandHelp extends Command {
             + "Delete,\n"
             + "Check,\n"
             + "Bye";
-
-    public static final String KEYWORD = "help";
 
 
     @Override

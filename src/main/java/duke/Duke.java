@@ -14,6 +14,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Duke constructor that takes in the file path for the save file.
+     *
+     * @param filePath the file path of the save file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         try {
@@ -25,7 +30,10 @@ public class Duke {
         }
     }
 
-
+    /**
+     * This method runs the program.
+     *
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

@@ -20,6 +20,11 @@ public class Ui {
         System.out.println(WELCOME_MESSAGE);
     }
 
+    /**
+     * Returns user input as a string.
+     *
+     * @return the typed in user input as a String.
+     */
     public String receiveUserInput() {
         Scanner sc = new Scanner(System.in);
         String userResponse = sc.nextLine();

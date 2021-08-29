@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import duke.command.Command;
 import duke.command.CommandBye;
@@ -12,9 +14,6 @@ import duke.command.CommandFind;
 import duke.command.CommandHelp;
 import duke.command.CommandList;
 import duke.command.CommandTodo;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Parser is the class that handles the parsing of strings.

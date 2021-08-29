@@ -11,7 +11,7 @@ import duke.Ui;
  * @author Loh Wen Hao Aaron
  *
  */
-public class CommandList extends Command{
+public class CommandList extends Command {
     public static final String KEYWORD = "list";
 
     public CommandList() {

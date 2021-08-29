@@ -12,6 +12,14 @@ public class Task {
     protected String time;
     protected boolean isDone;
 
+    /**
+     * This is the constructor for a task which takes in the description,
+     * date and time.
+     *
+     * @param description The String description for the task.
+     * @param date The String date for the task.
+     * @param time The String time for the task.
+     */
     public Task(String description, String date, String time) {
         this.description = description;
         this.date = date;
@@ -54,9 +62,13 @@ public class Task {
         return "";
     }
 
-    public String getDate() { return this.date; }
+    public String getDate() {
+        return this.date;
+    }
 
-    public String getDesc() { return this.description; }
+    public String getDesc() {
+        return this.description;
+    }
 
     @Override
     public String toString() {

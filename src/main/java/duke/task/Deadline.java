@@ -1,5 +1,6 @@
 package duke.task;
 
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -43,9 +44,9 @@ public class Deadline extends Task {
     public String getReadableString() {
         String status = this.isDone ? "1" : "0";
         if (this.time.isEmpty()) {
-            return "D | " + status + " | " + this.description + " | " + this.date  + "\n";
+            return "D | " + status + " | " + this.description + " | " + this.date + "\n";
         } else {
-            return "D | " + status + " | " + this.description + " | " + this.date  + " " + this.time + "\n";
+            return "D | " + status + " | " + this.description + " | " + this.date + " " + this.time + "\n";
         }
 
     }
