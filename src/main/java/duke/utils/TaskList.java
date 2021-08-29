@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
 
-    private final Consumer<String> loadDataAction = s -> {
+    private final Consumer<String> LOAD_DATA_ACTION = s -> {
         String[] loadedLine = s.split(",");
         char typeOfTask = loadedLine[0].charAt(0);
         boolean isDone = loadedLine[1].charAt(0) == '1';
@@ -79,7 +79,7 @@ public class TaskList {
      * @param persistedData the persisted tasks that we loaded from the hard disk/text file.
      */
     public TaskList(Stream<String> persistedData) {
-        persistedData.forEach(loadDataAction);
+        persistedData.forEach(LOAD_DATA_ACTION);
     }
 
     /**

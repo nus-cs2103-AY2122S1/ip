@@ -10,21 +10,21 @@ import java.util.Scanner;
  * Deals with all the user-facing commands such as reading user input, and printing results.
  */
 public class Ui {
-    private static final String horizontalLines = "-----------------------------------------";
+    private static final String HORIZONTAL_LINES = "-----------------------------------------";
     private final Scanner in = new Scanner(System.in);
 
     /**
      * Prints a long horizontal line which acts as a separator.
      */
     public void showLines() {
-        System.out.println(horizontalLines);
+        System.out.println(HORIZONTAL_LINES);
     }
 
     /**
      * Displays a welcome message.
      */
     public void showWelcome() {
-        System.out.println(horizontalLines + "\nHello! I'm Naruto\nWhat can I do for you?\n" + horizontalLines);
+        System.out.println(HORIZONTAL_LINES + "\nHello! I'm Naruto\nWhat can I do for you?\n" + HORIZONTAL_LINES);
     }
 
     /**
