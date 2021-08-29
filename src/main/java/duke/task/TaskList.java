@@ -102,7 +102,6 @@ public class TaskList {
 
         this.getTasks().add(newTask);
         addTaskSuffix(newTask);
-
     }
 
     /**

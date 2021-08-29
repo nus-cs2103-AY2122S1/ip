@@ -29,6 +29,8 @@ public class Parser {
             return new OccurringOnCommand(date);
         } else if (command.startsWith("todo ") || command.startsWith("deadline ") || command.startsWith("event ")) {
             return new AddCommand(command);
+        } else if (command.startsWith("find ")) {
+            return new FindCommand(command.substring(5));
         } else if (command.equals("help")) {
             return new HelpCommand();
         } else {

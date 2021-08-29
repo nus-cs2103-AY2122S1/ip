@@ -133,6 +133,15 @@ public class Ui {
     }
 
     /**
+     * Displays tasks in the list that matches a keyword.
+     * @param tasks The list of matching tasks.
+     */
+    public void showMatchingTasks(TaskList tasks) {
+        System.out.print("Here are the matching tasks in your list:\n" +
+                tasks.saveList());
+    }
+
+    /**
      * Displays all the accepted commands.
      */
     public void showHelp() {
@@ -144,6 +153,7 @@ public class Ui {
         System.out.println("done <task number>: marks the specific task as done.");
         System.out.println("delete <task number>: deletes the specific task from your task list.");
         System.out.println("occurring on <yyyy-mm-dd>: displays tasks occurring on the specified day.");
+        System.out.println("find <keyword>: displays tasks that contain the keyword.");
         System.out.println("bye: quits the program.");
     }
 
