@@ -7,6 +7,7 @@ import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
+import javafx.application.Application;
 
 /**
  * Represents the main Duke application.
@@ -75,7 +76,15 @@ public class Duke {
         }
     }
 
+    /**
+     * Main entrypoint for the Duke application.
+     * @param args arguments that allow user to start the CLI version
+     */
     public static void main(String[] args) {
-        new Duke("./data/tasks.txt").run();
+        if (args.length > 0 && args[0].equals("-c")) {
+            new Duke("./data/tasks.txt").run();
+        } else {
+            Application.launch(Gui.class, args);
+        }
     }
 }
