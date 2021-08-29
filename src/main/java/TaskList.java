@@ -10,6 +10,10 @@ public class TaskList {
         userList = new ArrayList<>();
     }
 
+    public TaskList(List<Task> taskList) {
+        userList = taskList;
+    }
+
     public void add(Task task) {
         userList.add(task);
         System.out.println("Got it. I've added this task: ");
@@ -44,7 +48,7 @@ public class TaskList {
     }
 
     public static TaskList load() throws FileNotFoundException {
-        return SaveHandler.retrieveTaskList();
+        return new TaskList(SaveHandler.retrieveTaskList());
     }
 
     public void save() {
