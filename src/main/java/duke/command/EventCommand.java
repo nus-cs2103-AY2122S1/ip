@@ -2,8 +2,8 @@ package duke.command;
 
 import java.io.FileNotFoundException;
 
+import duke.ResponseLogic;
 import duke.Storage;
-import duke.UI;
 import duke.task.TaskList;
 
 public class EventCommand extends Command {
@@ -23,7 +23,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws FileNotFoundException {
-        tasks.addEvent(description, time, storage, ui);
+    public String execute(TaskList tasks, ResponseLogic responseLogic, Storage storage) throws FileNotFoundException {
+        return tasks.addEvent(description, time, storage, responseLogic);
     }
 }

@@ -3,7 +3,7 @@ package duke.command;
 import java.io.FileNotFoundException;
 
 import duke.Storage;
-import duke.UI;
+import duke.ResponseLogic;
 import duke.task.TaskList;
 
 public abstract class Command {
@@ -12,11 +12,12 @@ public abstract class Command {
      * Executes the current command.
      *
      * @param tasks The TaskList object containing the list of tasks.
-     * @param ui The UI object of the current Duke object.
+     * @param responseLogic The ResponseLogic object of the current Duke object.
      * @param storage The Storage object of the current Duke object.
+     * @return The chatbot's response as a result of executing the command.
      * @throws FileNotFoundException If the file containing the tasks is not found.
      */
-    public abstract void execute(TaskList tasks, UI ui, Storage storage) throws FileNotFoundException;
+    public abstract String execute(TaskList tasks, ResponseLogic responseLogic, Storage storage) throws FileNotFoundException;
 
     /**
      * Returns true if the program should exit.

@@ -3,7 +3,7 @@ package duke.command;
 import java.io.FileNotFoundException;
 
 import duke.Storage;
-import duke.UI;
+import duke.ResponseLogic;
 import duke.task.TaskList;
 
 public class DeleteCommand extends Command {
@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws FileNotFoundException {
-        tasks.deleteTask(taskNumber, storage, ui);
+    public String execute(TaskList tasks, ResponseLogic responseLogic, Storage storage) throws FileNotFoundException {
+        return tasks.deleteTask(taskNumber, storage, responseLogic);
     }
 }

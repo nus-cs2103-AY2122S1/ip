@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Storage;
-import duke.UI;
+import duke.ResponseLogic;
 import duke.task.TaskList;
 
 public class DateCommand extends Command {
@@ -13,7 +13,7 @@ public class DateCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        tasks.printTasksOnDate(this.date, ui);
+    public String execute(TaskList tasks, ResponseLogic responseLogic, Storage storage) {
+        return tasks.getTasksOnDate(this.date, responseLogic);
     }
 }
