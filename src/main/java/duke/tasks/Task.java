@@ -16,14 +16,23 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-
-    @Override
-    public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
-    }
     
     public String toFileString() {
         String isDoneString = isDone ? "1" : "0";
         return " | " + isDoneString + " | " + description;
+    }
+    
+    @Override
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Task) {
+            Task other = (Task) obj;
+            return description.equals(other.description) && isDone == other.isDone;
+        }
+        return false;
     }
 }

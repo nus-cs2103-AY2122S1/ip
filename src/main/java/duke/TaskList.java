@@ -14,10 +14,6 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
     
-    public ArrayList<Task> getTasks() {
-        return tasks;
-    }
-    
     public void printTaskList() {
         if (tasks.size() == 0) {
             System.out.println("There are no tasks in the list.");
@@ -50,6 +46,14 @@ public class TaskList {
         tasks.remove(task);
         return task;
     }
+
+    public ArrayList<String> getTaskStrings() {
+        ArrayList<String> taskStrings = new ArrayList<>();
+        for (Task task : tasks) {
+            taskStrings.add(task.toFileString());
+        }
+        return taskStrings;
+    }
     
     private void validateTaskIndex(int taskIndex) throws DukeException { 
         int taskCount = tasks.size();
@@ -59,12 +63,13 @@ public class TaskList {
             throw new DukeException("Invalid task number. There are only " + taskCount + "tasks in the list");
         }
     }
-    
-    public ArrayList<String> getTaskStrings() {
-        ArrayList<String> taskStrings = new ArrayList<>();
-        for (Task task : tasks) {
-            taskStrings.add(task.toFileString());
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TaskList) {
+            TaskList other = (TaskList) obj;
+            return tasks.equals(other.tasks);
         }
-        return taskStrings;
+        return false;
     }
 }

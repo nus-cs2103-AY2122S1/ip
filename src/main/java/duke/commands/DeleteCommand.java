@@ -7,7 +7,7 @@ import duke.Ui;
 import duke.Storage;
 
 public class DeleteCommand extends Command {
-    private final int taskIndex;
+    public int taskIndex;
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
@@ -16,4 +16,14 @@ public class DeleteCommand extends Command {
         Task task = tasks.deleteTask(taskIndex);
         ui.showDelete(task, tasks);
     };
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DeleteCommand) {
+            DeleteCommand other = (DeleteCommand) obj;
+            return (taskIndex == other.taskIndex);
+        }
+        return false;
+    }
 }

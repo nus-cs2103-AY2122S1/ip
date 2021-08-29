@@ -2,8 +2,17 @@ package duke.tasks;
 
 public class Todo extends Task {
 
+    public Todo(String description) {
+        super(description, false);
+    }
+    
     public Todo(String description, boolean isDone) {
         super(description, isDone);
+    }
+
+    @Override
+    public String toFileString() {
+        return "T" + super.toFileString();
     }
 
     @Override
@@ -12,7 +21,10 @@ public class Todo extends Task {
     }
 
     @Override
-    public String toFileString() {
-        return "T" + super.toFileString();
+    public boolean equals(Object obj) {
+        if (obj instanceof Todo) {
+            return super.equals(obj);
+        }
+        return false;
     }
 }

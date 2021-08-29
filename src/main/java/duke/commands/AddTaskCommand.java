@@ -15,4 +15,13 @@ public class AddTaskCommand extends Command {
         tasks.addNewTask(task);
         ui.showAddTask(tasks, task);
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof AddTaskCommand) {
+            AddTaskCommand otherTask = (AddTaskCommand) obj;
+            return task.equals(otherTask.task);
+        }
+        return false;
+    }
 }

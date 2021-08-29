@@ -1,6 +1,12 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.AddTaskCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ListCommand;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
@@ -76,7 +82,7 @@ public class Parser {
         try {
             int taskIndex = Integer.parseInt(taskNo) - 1;
             if (taskIndex < 0) {
-                throw new DukeException("Invalid task number. Duke.Task number should be positive");
+                throw new DukeException("Invalid task number. Task number should be positive.");
             }
             return taskIndex;
         } catch (NumberFormatException e) {

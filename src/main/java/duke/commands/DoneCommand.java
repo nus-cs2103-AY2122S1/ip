@@ -15,5 +15,14 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.markTaskDone(taskIndex);
         ui.showMarkDone(task);
-    };
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof DoneCommand) {
+            DoneCommand other = (DoneCommand) obj;
+            return taskIndex == other.taskIndex;
+        }
+        return false;
+    }
 }

@@ -10,6 +10,11 @@ public class Deadline extends Task {
     private static DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("d MMM uuuu hh:mm a");
     protected LocalDateTime date;
 
+    public Deadline(String description, String by) {
+        super(description, false);
+        this.date = parseDateTime(by);
+    }
+
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.date = parseDateTime(by);
@@ -28,5 +33,14 @@ public class Deadline extends Task {
     @Override
     public String toFileString() {
         return "D" + super.toFileString() + " | " + date.format(FORMATTER);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Deadline) {
+            Deadline other = (Deadline) obj;
+            return super.equals(obj)  && date.equals(other.date);
+        }
+        return false;
     }
 }

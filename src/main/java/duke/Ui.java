@@ -54,4 +54,8 @@ public class Ui {
         System.out.println("Got it. I've added this task:\n\t" + task);
         printTasksCount(tasks);
     }
+    
+    public void close() {
+        myScanner.close();
+    }
 }
