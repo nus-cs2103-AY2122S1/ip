@@ -1,5 +1,3 @@
-package test;
-
 import whobot.main.UI;
 import whobot.main.WhoBotException;
 import whobot.task.Deadline;
@@ -8,7 +6,7 @@ import whobot.task.Task;
 import whobot.task.Todo;
 import whobot.utils.Storage;
 import whobot.utils.TaskList;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.ArrayList;

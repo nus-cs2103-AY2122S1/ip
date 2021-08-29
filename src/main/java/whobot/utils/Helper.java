@@ -142,15 +142,24 @@ public class Helper {
         List<String> commandList = Arrays.asList("list", "todo", "event", "deadline", "show", "done", "undo", "delete");
         int ind = commandList.indexOf(command);
         switch (ind) {
-            case 0 -> showListHelp();
-            case 1 -> showTodoHelp();
-            case 2 -> showEventHelp();
-            case 3 -> showDeadlineHelp();
-            case 4 -> showShowHelp();
-            case 5 -> showDoneHelp();
-            case 6 -> showUndoHelp();
-            case 7 -> showDeleteHelp();
-            default -> showDefaultHelp();
+            case 0: showListHelp();
+                    break;
+            case 1: showTodoHelp();
+                    break;
+            case 2: showEventHelp();
+                    break;
+            case 3: showDeadlineHelp();
+                    break;
+            case 4: showShowHelp();
+                    break;
+            case 5: showDoneHelp();
+                    break;
+            case 6: showUndoHelp();
+                    break;
+            case 7: showDeleteHelp();
+                    break;
+            default: showDefaultHelp();
+                    break;
         }
     }
 

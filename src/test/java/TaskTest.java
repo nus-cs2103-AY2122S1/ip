@@ -1,10 +1,8 @@
-package test;
-
 import whobot.main.WhoBotException;
 import whobot.task.Deadline;
 import whobot.task.Event;
 import whobot.task.Todo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
