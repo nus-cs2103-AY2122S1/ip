@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.Arrays;
+
 /**
  * A Class that extends the Command class.
  * It is specifically designed for a Command for adding.
@@ -15,19 +17,18 @@ public class AddCommand extends Command {
      * @param command A String containing information that can possibility be used to create an AddCommand object.
      * @throws duke.DukeException Will be thrown if information provided are insufficient/incorrect.
      */
-    public AddCommand(String command) throws duke.DukeException {
-        String[] holder = command.trim().split(" ");
-        if (holder.length == 1) {
+    public AddCommand(String... command) throws duke.DukeException {
+        if (command.length == 1) {
             throw new duke.DukeException(" ☹ OOPS!!! The description of a task cannot be empty.");
         } else {
-            if (holder[0].equals("todo")) {
+            if (command[0].equals("todo")) {
                 task = new duke.task.Todo(command);
             } else {
-                if (command.trim().split("/").length == 1) {
+                if (Arrays.stream(command).anyMatch("/"::equals) && command.length == 2) {
                     throw new duke.DukeException(
                             " ☹ HEY DEAR! Please enter a date after / following the task description");
                 }
-                if (holder[0].equals("deadline")) {
+                if (command[0].equals("deadline")) {
                     task = new duke.task.Deadline(command);
                 } else {
                     task = new duke.task.Event(command);

@@ -22,13 +22,15 @@ public class Deadline extends Task {
      * @param content A String containing information that is possibly enough to create a Deadline object.
      * @throws duke.DukeException Will be thrown if the information in content is insufficient/incorrect.
      */
-    public Deadline(String content) throws duke.DukeException {
-        super(content.substring(9, content.indexOf("/")).trim());
-        time = content.substring(content.indexOf("/") + 1).trim();
+    public Deadline(String... content) throws duke.DukeException {
+        super(content);
         try {
+            time = content[3];
             this.localDate = LocalDate.parse(time);
         } catch (DateTimeParseException e) {
             throw new DukeException(" D: SORZ but I only understand date in yyyy-MM-dd format!");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(" D: Pls add new deadline tasks in format of deadline task / yyyy-MM-dd!");
         }
     }
 

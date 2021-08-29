@@ -8,16 +8,16 @@ package duke.task;
  */
 public abstract class Task {
     private String content;
-    private boolean status;
+    private boolean ifCompleted;
 
     /**
      * Initialises the Task with the given information.
      *
      * @param content A String that contains information that can possibly create a Task Object.
      */
-    Task(String content) {
-        this.content = content;
-        status = false;
+    Task(String... content) {
+        this.content = content[1];
+        ifCompleted = false;
     }
 
     public String getContent() {
@@ -25,14 +25,14 @@ public abstract class Task {
     }
 
     public boolean getStatus() {
-        return status;
+        return ifCompleted;
     }
 
     /**
      * Sets the Task as done.
      */
     public void doneTask() {
-        status = true;
+        ifCompleted = true;
     }
 
     /**
@@ -43,7 +43,7 @@ public abstract class Task {
     @Override
     public String toString() {
         return String.format("[%s] %s",
-                status ? "x" : " ", content);
+                ifCompleted ? "x" : " ", content);
     }
 
     public abstract String record();

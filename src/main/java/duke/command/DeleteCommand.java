@@ -17,9 +17,9 @@ public class DeleteCommand extends Command {
      * @param command A String containing information that can possibility be used to create an DeleteCommand object.
      * @throws duke.DukeException Will be thrown if information provided are insufficient/incorrect.
      */
-    public DeleteCommand(String command) throws DukeException {
+    public DeleteCommand(String... command) throws DukeException {
         if (isDeleteOps(command)) {
-            index = Integer.parseInt(command.substring(7)) - 1;
+            index = Integer.parseInt(command[1]) - 1;
         } else {
             throw new DukeException("D: Would you specify the task for me my dear?");
         }
@@ -32,13 +32,13 @@ public class DeleteCommand extends Command {
      * @param input User input of the commands.
      * @return If the input contains a valid delete operations.
      */
-    public static boolean isDeleteOps(String input) {
-        int length = input.length();
-        if (length < 8) {
+    public static boolean isDeleteOps(String... input) {
+        int length = input.length;
+        if (length < 2) {
             return false;
         }
         try {
-            Integer.parseInt(input.substring(7));
+            Integer.parseInt(input[1]);
             return true;
         } catch (NumberFormatException e) {
             return false;

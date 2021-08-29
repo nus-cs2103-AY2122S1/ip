@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.DukeException;
+
 /**
  * A Class that extends the Task class.
  * It is specifically designed for a Task with time of occurrence.
@@ -20,13 +22,15 @@ public class Event extends Task {
      * @param content A String containing information that is possibly enough to create a Event object.
      * @throws duke.DukeException Will be thrown if the information in content is insufficient/incorrect.
      */
-    public Event(String content) throws duke.DukeException {
-        super(content.substring(6, content.indexOf("/")).trim());
-        time = content.substring(content.indexOf("/") + 1).trim();
+    public Event(String... content) throws duke.DukeException {
+        super(content);
         try {
+            time = content[3];
             this.localDate = LocalDate.parse(time);
         } catch (DateTimeParseException e) {
             throw new duke.DukeException(" D: SORZ but I only understand date in yyyy-MM-dd format!");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException(" D: Pls add new event tasks in format of event task / yyyy-MM-dd!");
         }
     }
 

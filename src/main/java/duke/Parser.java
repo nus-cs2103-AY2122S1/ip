@@ -31,8 +31,8 @@ public class Parser {
      * @return A Command that is corresponding to the specific user input of command.
      * @throws DukeException Will be thrown should the user input command are not in the correct formats.
      */
-    public static Command parse(String command) throws DukeException {
-        String commandHolder = command.split(" ", 2)[0];
+    public static Command parse(String... command) throws DukeException {
+        String commandHolder = command[0];
 
         for (Parser.CommandWord c : Parser.CommandWord.values()) {
 

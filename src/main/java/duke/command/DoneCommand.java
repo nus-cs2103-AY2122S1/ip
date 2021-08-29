@@ -20,9 +20,9 @@ public class DoneCommand extends Command {
      * @param command A String containing information that can possibility be used to create an DoneCommand object.
      * @throws duke.DukeException Will be thrown if information provided are insufficient/incorrect.
      */
-    public DoneCommand(String command) throws DukeException {
+    public DoneCommand(String... command) throws DukeException {
         if (isDoneOps(command)) {
-            index = Integer.parseInt(command.substring(5)) - 1;
+            index = Integer.parseInt(command[1]) - 1;
         } else {
             throw new DukeException("D: Would you specify the task for me my dear?");
         }
@@ -35,13 +35,13 @@ public class DoneCommand extends Command {
      * @param input User input of the commands.
      * @return If the input contains a valid done operations.
      */
-    public static boolean isDoneOps(String input) {
-        int length = input.length();
-        if (length < 6) {
+    public static boolean isDoneOps(String... input) {
+        int length = input.length;
+        if (length < 2) {
             return false;
         }
         try {
-            Integer.parseInt(input.substring(5));
+            Integer.parseInt(input[1]);
             return true;
         } catch (NumberFormatException e) {
             return false;

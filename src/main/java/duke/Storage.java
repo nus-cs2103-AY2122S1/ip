@@ -52,7 +52,7 @@ public class Storage {
 
                 switch (content[0]) {
                 case "T":
-                    duke.task.Todo todo = new duke.task.Todo("todo " + content[2].trim());
+                    duke.task.Todo todo = new duke.task.Todo("todo ", content[2].trim());
                     if (content[1].equals("1")) {
                         todo.doneTask();
                     }
@@ -60,8 +60,8 @@ public class Storage {
                     break;
 
                 case "D":
-                    duke.task.Deadline deadline = new duke.task.Deadline("deadline "
-                            + content[2].trim() + " /" + content[3].trim());
+                    duke.task.Deadline deadline = new duke.task.Deadline("deadline ",
+                            content[2].trim(), " /", content[3].trim());
                     if (content[1].equals("1")) {
                         deadline.doneTask();
                     }
@@ -70,7 +70,7 @@ public class Storage {
 
                 case "E":
                     duke.task.Event event = new duke.task.Event(
-                            "event " + content[2].trim() + " /" + content[3].trim());
+                            "event ", content[2].trim(), " /", content[3].trim());
                     if (content[1].equals("1")) {
                         event.doneTask();
                     }
