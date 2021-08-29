@@ -13,6 +13,10 @@ package duke.exception;
  */
 public class InvalidCommandException extends DukeException {
 
+    /**
+     * Constructor for InvalidCommandException
+     * Exception when user inputs a invalid coomand
+     */
     public InvalidCommandException() {
 
         super("Hi I don't understand your command :(");

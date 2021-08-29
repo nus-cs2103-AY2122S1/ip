@@ -1,8 +1,8 @@
 package duke.util;
 
-import duke.exception.DukeException;
-
 import java.util.Scanner;
+
+import duke.exception.DukeException;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1

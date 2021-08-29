@@ -16,10 +16,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class DukeDate {
 
+    private final DateTimeFormatter officialFormat = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private final DateTimeFormatter OFFICIAL_FORMAT = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
 
+    /**
+     * Constructor for DukeDate
+     * Holds the start time date and end time date of the task
+     */
     public DukeDate(LocalDateTime startTime, LocalDateTime endTime) {
 
         this.startTime = startTime;
@@ -27,6 +31,11 @@ public class DukeDate {
 
     }
 
+    /**
+     * Constructor for DukeDate
+     * Holds the start time date and end time date of the task and sets the start time
+     * to be the current start time date
+     */
     public DukeDate(LocalDateTime endTime) {
         this.endTime = endTime;
         this.startTime = LocalDateTime.now();
@@ -60,13 +69,13 @@ public class DukeDate {
      */
     public String getEndTimeString() {
 
-        return this.endTime.format(OFFICIAL_FORMAT);
+        return this.endTime.format(officialFormat);
 
     }
 
     @Override
     public String toString() {
-        return this.startTime.format(this.OFFICIAL_FORMAT) + " to " + this.endTime.format(this.OFFICIAL_FORMAT);
+        return this.startTime.format(this.officialFormat) + " to " + this.endTime.format(this.officialFormat);
     }
 
     @Override

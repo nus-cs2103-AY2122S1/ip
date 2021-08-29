@@ -1,14 +1,15 @@
 package duke.util;
 
-import duke.exception.FileWritingException;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.FileWritingException;
 
 public class UiTest {
 
@@ -16,7 +17,7 @@ public class UiTest {
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
-    private final String HORIZONTAL_LINE = "____________________________________________________________";
+    private final String horizontalLine = "____________________________________________________________";
 
     @BeforeEach
     public void setUpStreams() {
@@ -31,45 +32,45 @@ public class UiTest {
     }
 
     @Test
-    public void testPrintMessage(){
+    public void testPrintMessage() {
         Ui ui = new Ui();
         ui.printMessage("Test123");
-        assertEquals(HORIZONTAL_LINE + "\nTest123\n" + HORIZONTAL_LINE + "\n", outContent.toString());
+        assertEquals(horizontalLine + "\nTest123\n" + horizontalLine + "\n", outContent.toString());
     }
 
     @Test
-    public void testPrintWelcomeMessage(){
+    public void testPrintWelcomeMessage() {
         Ui ui = new Ui();
         ui.printWelcomeMessage();
-        assertEquals(HORIZONTAL_LINE
+        assertEquals(horizontalLine
                 + "\nHello! I'm Duke"
                 + "\nWhat can I do for you?\n"
-                + HORIZONTAL_LINE
+                + horizontalLine
                 + "\n", outContent.toString());
     }
 
     @Test
-    public void testPrintGoodbyeMessage(){
+    public void testPrintGoodbyeMessage() {
         Ui ui = new Ui();
         ui.printGoodByeMessage();
-        assertEquals(HORIZONTAL_LINE
+        assertEquals(horizontalLine
                 + "\nBye. Hope to see you again soon!\n"
-                + HORIZONTAL_LINE
+                + horizontalLine
                 + "\n", outContent.toString());
     }
 
     @Test
-    public void testPrintErrorMessage(){
+    public void testPrintErrorMessage() {
         Ui ui = new Ui();
         ui.printErrorMessage(new FileWritingException());
-        assertEquals(HORIZONTAL_LINE
+        assertEquals(horizontalLine
                 + "\nHi, Duke.util.Duke ran into an error trying to save task to your hard drive. Please try again!\n"
-                + HORIZONTAL_LINE
+                + horizontalLine
                 + "\n", outContent.toString());
     }
 
     @Test
-    public void testPrintHelpMessage(){
+    public void testPrintHelpMessage() {
         Ui ui = new Ui();
         ui.printHelpMessage();
         String helpString = "Here are the following commands Duke.util.Duke accepts:\n"
@@ -81,11 +82,11 @@ public class UiTest {
                 + "delete - deletes a task in the task list, type 'delete' followed by an integer\n"
                 + "filter - filter task lists for tasks through searching for a keyword\n"
                 + "bye - exits the duke chat bot and saves all task in the task list to the hard disk";
-        assertEquals(HORIZONTAL_LINE
+        assertEquals(horizontalLine
                 + "\n"
                 + helpString
                 + "\n"
-                + HORIZONTAL_LINE
+                + horizontalLine
                 + "\n", outContent.toString());
     }
 }

@@ -1,16 +1,17 @@
 package duke.task;
 
-import duke.util.DukeDate;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.util.DukeDate;
 
 public class DeadlineTest {
     @Test
-    public void testToString(){
+    public void testToString() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse("12-Dec-2020 12:00", format);
         Deadline tempTask = new Deadline("testing the tester", new DukeDate(dateTime));
@@ -18,7 +19,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void testGetDeadline(){
+    public void testGetDeadline() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
         LocalDateTime dateTime = LocalDateTime.parse("12-Dec-2020 12:00", format);
         DukeDate savedDate = new DukeDate(dateTime);

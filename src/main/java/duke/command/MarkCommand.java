@@ -1,10 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
+import duke.util.Store;
 import duke.util.Tasklist;
 import duke.util.Ui;
-import duke.util.Store;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
@@ -18,9 +17,13 @@ import duke.util.Store;
  */
 public class MarkCommand extends Command {
 
-    private final int toMark;
     public static final String COMMAND_WORD = "add";
+    private final int toMark;
 
+    /**
+     * Constructor for MarkCommand.
+     * Takes in the task number to mark and creates a mark command
+     */
     public MarkCommand(int toMark) {
 
         this.toMark = toMark;

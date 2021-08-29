@@ -13,6 +13,10 @@ package duke.task;
  */
 public class ToDo extends Task {
 
+    /**
+     * Constructor for ToDo
+     * Todo is a task without a duration
+     */
     public ToDo(String description) {
         super(description);
 

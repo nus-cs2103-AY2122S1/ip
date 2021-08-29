@@ -1,10 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
+import duke.util.Store;
 import duke.util.Tasklist;
 import duke.util.Ui;
-import duke.util.Store;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
@@ -20,6 +19,10 @@ public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 
+    /**
+     * Constructor for ExitCommand
+     * Initializes an exit command to signal Duke should be ended
+     */
     public ExitCommand() {
 
     }

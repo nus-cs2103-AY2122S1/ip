@@ -15,10 +15,14 @@ import duke.util.Ui;
  *
  * @author Keith Tan
  */
-public class FindCommand extends Command{
-    private final String searchTerm;
+public class FindCommand extends Command {
     public static final String COMMAND_WORD = "add";
+    private final String searchTerm;
 
+    /**
+     * Constructor for FindCommand.
+     * Takes in the search term to filter the tasks and creates the find command
+     */
     public FindCommand(String searchTerm) {
 
         this.searchTerm = searchTerm;

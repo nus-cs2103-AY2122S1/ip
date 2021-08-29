@@ -13,6 +13,10 @@ package duke.exception;
  */
 public class InvalidArgumentException extends DukeException {
 
+    /**
+     * Constructor for InvalidArgumentException
+     * Exception when user inputs a invalid argument for the commands
+     */
     public InvalidArgumentException(String invalidCondition, String origin) {
 
         super("Hi, the " + invalidCondition + " for the " + origin + " is invalid!");

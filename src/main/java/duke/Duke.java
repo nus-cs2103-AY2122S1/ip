@@ -11,7 +11,7 @@ import duke.util.Ui;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-Gradle. Add gradle support
+ * Current Progress: A-CheckStyle. Use CheckStyle
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
@@ -26,6 +26,10 @@ public class Duke {
     private Store storage;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     * Takes in the file path to load the save data from store
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Store(filePath);
@@ -56,6 +60,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method for Duke.
+     * Initialises Duke and starts taking in commands from the user.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
 
         new Duke("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt").run();

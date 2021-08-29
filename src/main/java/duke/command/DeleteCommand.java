@@ -1,10 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
+import duke.util.Store;
 import duke.util.Tasklist;
 import duke.util.Ui;
-import duke.util.Store;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
@@ -17,13 +16,15 @@ import duke.util.Store;
  * @author Keith Tan
  */
 public class DeleteCommand extends Command {
-    private final int toDelete;
     public static final String COMMAND_WORD = "delete";
+    private final int toDelete;
 
+    /**
+     * Constructor for DeleteCommand.
+     * Takes in the task number to delete and creates a delete command
+     */
     public DeleteCommand(int toDelete) {
-
         this.toDelete = toDelete;
-
     }
 
     /**

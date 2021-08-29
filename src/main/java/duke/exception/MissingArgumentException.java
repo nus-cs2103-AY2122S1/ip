@@ -13,9 +13,13 @@ package duke.exception;
  */
 public class MissingArgumentException extends DukeException {
 
+    /**
+     * Constructor for MissingArgumentException
+     * Exception when user is missing any arguments for the commands
+     */
     public MissingArgumentException(String missingCondition, String origin) {
 
-        super("Hi, you are missing the " + missingCondition + " for the " + origin +  "!");
+        super("Hi, you are missing the " + missingCondition + " for the " + origin + "!");
 
     }
 

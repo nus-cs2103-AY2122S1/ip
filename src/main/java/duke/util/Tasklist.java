@@ -1,20 +1,19 @@
 package duke.util;
 
-import duke.exception.DukeException;
-import duke.exception.MissingArgumentException;
-import duke.exception.IndexOutOfRangeException;
-import duke.exception.InvalidArgumentException;
-import duke.exception.InvalidCommandException;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.exception.IndexOutOfRangeException;
+import duke.exception.InvalidArgumentException;
+import duke.exception.InvalidCommandException;
+import duke.exception.MissingArgumentException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
@@ -28,8 +27,6 @@ import java.util.ArrayList;
  */
 public class Tasklist {
 
-    private ArrayList<Task> tasks;
-
     private static final DateTimeFormatter[] DATE_FORMATTERS = {
             DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm"),
             DateTimeFormatter.ofPattern("yyyy-MMM-dd HH:mm"),
@@ -38,6 +35,8 @@ public class Tasklist {
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
             DateTimeFormatter.ofPattern("yyyy-DD-mm HH:mm"),
     };
+
+    private ArrayList<Task> tasks;
 
     public Tasklist() {
         this.tasks = new ArrayList<Task>();
@@ -64,7 +63,8 @@ public class Tasklist {
      * @throws InvalidArgumentException throws a InvalidArgumentException if error occurs when parsing
      *                                  inputted command line for dates
      */
-    private DukeDate checkTime(String[] strArr, String event) throws MissingArgumentException, InvalidArgumentException {
+    private DukeDate checkTime(String[] strArr, String event) throws MissingArgumentException,
+        InvalidArgumentException {
 
         if (strArr.length < 2) {
             throw new MissingArgumentException("time", event);
@@ -134,22 +134,22 @@ public class Tasklist {
 
         Task newTask;
         switch(task) {
-            case "todo":
-                newTask = new ToDo(description);
-                break;
-            case "deadline":
-                String[] deadlineDetails = description.split(" /by ", 2);
-                DukeDate deadlineTime = checkTime(deadlineDetails, "deadline");
-                newTask = new Deadline(deadlineDetails[0], deadlineTime);
-                break;
-            case "event":
-                String[] eventDetails = description.split(" /at ", 2);
-                DukeDate eventTime =  checkTime(eventDetails, "event");
-                newTask = new Event(eventDetails[0], eventTime);
-                break;
-            default:
-                //unexpected error occurs
-                throw new InvalidCommandException();
+        case "todo":
+            newTask = new ToDo(description);
+            break;
+        case "deadline":
+            String[] deadlineDetails = description.split(" /by ", 2);
+            DukeDate deadlineTime = checkTime(deadlineDetails, "deadline");
+            newTask = new Deadline(deadlineDetails[0], deadlineTime);
+            break;
+        case "event":
+            String[] eventDetails = description.split(" /at ", 2);
+            DukeDate eventTime = checkTime(eventDetails, "event");
+            newTask = new Event(eventDetails[0], eventTime);
+            break;
+        default:
+            //unexpected error occurs
+            throw new InvalidCommandException();
         }
 
         tasks.add(newTask);
@@ -171,7 +171,7 @@ public class Tasklist {
 
         if (taskNumber > tasks.size()) {
 
-            throw new IndexOutOfRangeException(taskNumber, tasks.size() );
+            throw new IndexOutOfRangeException(taskNumber, tasks.size());
 
         } else {
 
@@ -202,7 +202,7 @@ public class Tasklist {
      */
     public String deleteTask(int taskNumber) throws IndexOutOfRangeException {
 
-        if (taskNumber> tasks.size()) {
+        if (taskNumber > tasks.size()) {
 
             throw new IndexOutOfRangeException(taskNumber, tasks.size());
 
@@ -228,7 +228,7 @@ public class Tasklist {
     public String filterTask(String searchTerm) {
 
         Tasklist tempList = new Tasklist();
-        for (int i = 0; i < this.tasks.size(); i++ ) {
+        for (int i = 0; i < this.tasks.size(); i++) {
             Task currentTask = this.tasks.get(i);
             if (currentTask.checkTerm(searchTerm)) {
                 tempList.addTask(currentTask);
