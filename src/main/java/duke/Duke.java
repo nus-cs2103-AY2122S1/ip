@@ -1,6 +1,16 @@
+package duke;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
+import duke.task.Event;
+
 import java.io.File;
 import java.time.LocalDate;
 import java.util.Scanner;
+
 
 public class Duke {
     
@@ -36,7 +46,7 @@ public class Duke {
         RequestType userRequest;
 
         while(!userInput.equals("bye")){
-            userRequest = Parser.parse(userInput);
+            userRequest = duke.Parser.parse(userInput);
             
             switch (userRequest){
                 case DEFAULT:
