@@ -42,7 +42,9 @@ public class Ui {
         System.out.println("Here are the matching tasks in your list:");
     }
 
-
+    /**
+     * Exits Duke.
+     */
     public void exit() {
         System.out.println("Bye! Feel free to ask me for help again anytime!");
         this.scanner.close();

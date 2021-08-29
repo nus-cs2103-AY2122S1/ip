@@ -10,6 +10,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath Relative path to the storage location.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -21,6 +26,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts Duke in the command line.
+     */
     public void run() {
         this.ui.showWelcome();
         boolean isExit = false;
@@ -38,6 +46,6 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
-    }    
+    }
 }
 

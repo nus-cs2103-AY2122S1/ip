@@ -34,7 +34,7 @@ public class Todo extends Task {
     public String toSaveString() {
         return "T" + super.toSaveString();
     }
-    
+
     /**
      * Returns the string representation of a Todo Task.
      *

@@ -27,7 +27,7 @@ public class Storage {
      *
      * @return List of saved tasks
      */
-    public List<Task> loadData() throws DukeException{
+    public List<Task> loadData() throws DukeException {
         List<Task> tasks = new ArrayList<>();
 
         // Check if data directory exists
@@ -71,14 +71,14 @@ public class Storage {
      *
      * @param tasks The list of tasks to be saved.
      */
-    public void saveData(List<Task> tasks) throws DukeException{
+    public void saveData(List<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.filePath);
             for (Task task : tasks) {
                 fw.write(task.toSaveString() + System.lineSeparator());
             }
             fw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
     }
