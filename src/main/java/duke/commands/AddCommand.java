@@ -2,9 +2,6 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import duke.exceptions.CommandParamException;
 import duke.exceptions.DukeFileException;
 import duke.exceptions.EmptyDescriptionException;
@@ -13,6 +10,9 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * This is an AddCommand class that extends Command.

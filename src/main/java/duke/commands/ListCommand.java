@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import duke.exceptions.EmptyListException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * This is a ListCommand class that extends Command.
