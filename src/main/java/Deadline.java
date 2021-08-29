@@ -1,10 +1,14 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
-    private String dueBy;
+    public LocalDate dueDate = null;
 
     public Deadline(String todoName) {
         super(todoName.substring(9, todoName.indexOf("/by ")));
         int start = todoName.indexOf("/by ");
-        this.dueBy = todoName.substring(start + 4);
+        this.dueDate = LocalDate.parse(todoName.substring(start + 4));
+
     }
 
     @Override
@@ -12,7 +16,7 @@ public class Deadline extends Task {
         return "[D]"
                 + super.toString()
                 + "(by: "
-                + this.dueBy
+                + this.dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
 }

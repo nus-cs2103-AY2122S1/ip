@@ -1,19 +1,21 @@
-public class Event extends Task {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    private String time;
+public class Event extends Task {
+    public LocalDate eventDate;
 
     public Event (String todoName) {
         super(todoName.substring(6, todoName.indexOf("/at")));
         int start = todoName.indexOf("/at");
-        this.time = todoName.substring(start + 4);
+        this.eventDate = LocalDate.parse(todoName.substring(start + 4));
     }
 
     @Override
     public String toString() {
         return "[E]"
                 + super.toString()
-                + "(by: "
-                + this.time
+                + "(at: "
+                + this.eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
 }
