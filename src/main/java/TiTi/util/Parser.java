@@ -5,6 +5,7 @@ import TiTi.task.Event;
 import TiTi.task.Deadline;
 import TiTi.task.ToDo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -38,9 +39,10 @@ public class Parser {
         String cue = input.split(" ", 2)[0];
 
         // handle missing description
-        if ((cue.equals("todo") || cue.equals("deadline") || cue.equals("event"))
+        if ((cue.equals("todo") || cue.equals("deadline")
+                || cue.equals("event") || cue.equals("find"))
                 && input.split(" ", 2).length == 1) {
-            return new Response(Response.Cue.MISSINGDESCRIPTION, null);
+            return new Response(Response.Cue.MISSINGDESCRIPTION);
         }
 
         int taskNumber;
@@ -52,15 +54,15 @@ public class Parser {
         switch (cue) {
         case "bye":
             savedHistory.saveHistory(taskList);
-            return new Response(Response.Cue.EXIT, null);
+            return new Response(Response.Cue.EXIT);
 
         case "list":
-            return new Response(Response.Cue.LIST, null);
+            return new Response(Response.Cue.LIST);
 
         case "done":
             taskNumber = Integer.parseInt("" + input.charAt(5));
             if (taskNumber > numberOfTasks) {
-                return new Response(Response.Cue.TASKERROR, null);
+                return new Response(Response.Cue.TASKERROR);
             } else {
                 Task task = taskList.get(taskNumber - 1);
                 task.complete();
@@ -70,7 +72,7 @@ public class Parser {
         case "delete":
             taskNumber = Integer.parseInt("" + input.charAt(7));
             if (taskNumber > numberOfTasks) {
-                return new Response(Response.Cue.TASKERROR, null);
+                return new Response(Response.Cue.TASKERROR);
             } else {
                 Task task = taskList.get(taskNumber - 1);
                 taskList.remove(taskNumber - 1);
@@ -99,8 +101,23 @@ public class Parser {
             taskList.add(event);
             return new Response(Response.Cue.EVENT, event);
 
+        case "find":
+            description = input.split(" ", 2)[1];
+            TaskList tempList = new TaskList();
+            for (int i = 0; i < taskList.size(); i++) {
+                Task task = taskList.get(i);
+                if (task.checkString(description)) {
+                    tempList.add(task);
+                }
+            }
+            if (tempList.size() == 0) {
+                return new Response(Response.Cue.UNRECOGNISED);
+            } else {
+                return new Response(Response.Cue.FIND, tempList);
+            }
+
         default:
-            return new Response(Response.Cue.UNRECOGNISED, null);
+            return new Response(Response.Cue.UNRECOGNISED);
         }
     }
 

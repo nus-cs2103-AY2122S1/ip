@@ -9,9 +9,13 @@ import TiTi.task.Task;
  */
 public class Response {
     public enum Cue {EXIT, LIST, DONE, DELETE, TASKERROR, TODO, DEADLINE,
-            EVENT, MISSINGDESCRIPTION, UNRECOGNISED};
+            EVENT, MISSINGDESCRIPTION, UNRECOGNISED, FIND};
     public Cue cue;
-    public Task task;
+    public TaskList taskList;
+
+    public Response(Cue cue) {
+        this.cue = cue;
+    }
 
     /**
      * Constructor for Response class.
@@ -21,6 +25,12 @@ public class Response {
      */
     public Response(Cue cue, Task task) {
         this.cue = cue;
-        this.task = task;
+        taskList = new TaskList();
+        taskList.add(task);
+    }
+
+    public Response(Cue cue, TaskList taskList) {
+        this.cue = cue;
+        this.taskList = taskList;
     }
 }

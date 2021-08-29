@@ -21,6 +21,14 @@ public class TaskList {
     }
 
     /**
+     * Constructor for TaskList class.
+     * Does not require parameter inputs and create a new empty ArrayList list.
+     */
+    public TaskList() {
+        this.list = new ArrayList<>();
+    }
+
+    /**
      * Retrieve the required task from the list.
      *
      * @param taskNumber the item number of the task
