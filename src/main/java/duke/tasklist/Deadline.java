@@ -1,7 +1,8 @@
 package duke.tasklist;
 
-import duke.exception.Messages;
 import java.time.LocalDateTime;
+
+import duke.exception.Messages;
 
 /**
  * Represents a deadline task within chat bot.
@@ -29,7 +30,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s(by: %s)", super.toString(),  Messages.dateFormat(time));
+        return String.format("[D]%s(by: %s)", super.toString(), Messages.dateFormat(time));
     }
 
     /**
@@ -38,6 +39,6 @@ public class Deadline extends Task {
      * @return task save description
      */
     public String save() {
-        return String.format("D | %s| %s", super.save(),  Messages.dateFormat(time));
+        return String.format("D | %s| %s", super.save(), Messages.dateFormat(time));
     }
 }

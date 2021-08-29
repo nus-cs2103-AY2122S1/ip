@@ -1,9 +1,9 @@
 import duke.command.Command;
-import duke.ui.Ui;
+import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import duke.exception.DukeException;
+import duke.ui.Ui;
 
 /**
  * Represents a chat bot request. A <code>Duke</code> object corresponds to

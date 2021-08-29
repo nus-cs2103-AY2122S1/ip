@@ -1,12 +1,14 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDateTime;
+import java.time.Month;
+
+import org.junit.jupiter.api.Test;
 
 import duke.tasklist.Deadline;
 import duke.tasklist.Event;
 import duke.tasklist.Todo;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.Month;
-import java.time.LocalDateTime;
 
 public class DukeTest {
     @Test

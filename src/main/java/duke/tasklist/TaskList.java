@@ -1,16 +1,15 @@
 package duke.tasklist;
 
-import duke.exception.DukeException;
-import duke.exception.Messages;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.exception.Messages;
 
 /**
  * Represents a list of task within chat bot.
@@ -32,11 +31,11 @@ public class TaskList {
      *
      * @param taskFile scanner object of text file.
      */
-    public TaskList(Scanner taskFile) throws DukeException{
+    public TaskList(Scanner taskFile) throws DukeException {
         this.library = new ArrayList<>(100);
 
         // Extract lines
-        while(taskFile.hasNext()) {
+        while (taskFile.hasNext()) {
             String str = taskFile.nextLine();
             add(str);
         }
@@ -49,8 +48,8 @@ public class TaskList {
      *
      * @param input task request line.
      * @param start substring after target word.
-     * @throws DukeException If start word doesn't exist.
      * @return substring-ed title.
+     * @throws DukeException If start word doesn't exist.
      */
     private String cut(String input, String start) throws DukeException {
         String result;
@@ -69,8 +68,8 @@ public class TaskList {
      * @param input task request line.
      * @param start substring after target word.
      * @param end substring before target word.
-     * @throws DukeException If start or end word doesn't exist.
      * @return substring-ed task field.
+     * @throws DukeException If start or end word doesn't exist.
      */
     private String cut(String input, String start, String end) throws DukeException {
         String result;
