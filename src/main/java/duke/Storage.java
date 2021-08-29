@@ -8,6 +8,10 @@ public class Storage {
     private String taskListFileName;
     private File taskListFile;
 
+    /**
+     * Handles saving of taskLists between Duke runtime sessions to text file by serialisation.
+     * @param taskListFileName path to text file to store taskList in.
+     */
     public Storage(String taskListFileName) {
         this.taskListFileName = taskListFileName;
         try {
@@ -18,6 +22,10 @@ public class Storage {
         this.taskListFile = new File(this.taskListFileName);
     }
 
+    /**
+     * Loads taskList from textFile configured in constructor if it exists, else initialises empty taskList.
+     * @return stored taskList if present, or empty taskList.
+     */
     public TaskList initialise() {
         TaskList taskList = new TaskList();
         try {
@@ -37,6 +45,10 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Serialises a taskList into a text file for use in future sessions.
+     * @param taskList taskList to be serialised.
+     */
     public void store(TaskList taskList) {
         try {
             FileOutputStream fos = new FileOutputStream(this.taskListFileName);

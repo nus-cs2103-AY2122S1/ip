@@ -11,17 +11,19 @@ public class Ui {
     private final BufferedReader in;
     private final PrintWriter out;
 
+    /**
+     * Handles user interaction. I/O dependencies are exposed for injection in tests.
+     * @param in source of user input.
+     * @param out output to respond to user input.
+     */
     public Ui(BufferedReader in, PrintWriter out) {
         this.in = in;
         this.out = out;
     }
 
-    public Ui(InputStream in, PrintStream out) {
-        this.in = new BufferedReader(
-                new InputStreamReader(in));
-        this.out = new PrintWriter(out);
-    }
-
+    /**
+     * Displays default Duke startup banner.
+     */
     public void init() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -34,6 +36,11 @@ public class Ui {
         out.flush();
     }
 
+    /**
+     * Reads next user input.
+     * @return user input in string format.
+     * @throws IOException issue found in reading file.
+     */
     public String getNextCommand() throws IOException {
         return this.in.readLine();
     }
