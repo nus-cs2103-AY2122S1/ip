@@ -101,4 +101,26 @@ public class TaskList {
             x.markSaved();
         }
     }
+
+    /**
+     * Finds and returns all tasks containing the userInput.
+     *
+     * @param userInput the search request by the user
+     */
+    public static void findTask(String userInput) {
+        String keyword = userInput.substring(5);
+        ArrayList<Task> matchingList = new ArrayList<>();
+        int counter = 0;
+        for (Task x : contents) {
+            if (x.getDescription().contains(keyword)) {
+                matchingList.add(x);
+                counter++;
+            }
+        }
+        if (counter == 0) {
+            Ui.searchFoundNothing();
+        } else {
+            Ui.searchList(matchingList);
+        }
+    }
 }

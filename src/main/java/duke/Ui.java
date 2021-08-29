@@ -133,6 +133,30 @@ public class Ui {
     }
 
     /**
+     * Prints out a list of Tasks matching the user's input when searching for a keyword
+     * or characters.
+     *
+     * @param matchingContents the list of contents that contain the keywords
+     *                         requested by the user.
+     */
+    public static void searchList(ArrayList<Task> matchingContents) {
+        int counter = 1;
+        System.out.println("    ***\n" + "    Here are the matching tasks in your list:");
+        for (Task x: matchingContents) {
+            System.out.println("      " + counter + ". " + x.printTask());
+        }
+        System.out.println("    ***\n");
+    }
+
+    /**
+     * Displays the message when user is unable to find a matching word in the
+     * TaskList when searching.
+     */
+    public static void searchFoundNothing() {
+        System.out.println("No task in the list matches your current search.");
+    }
+
+    /**
      * Displays a message indicating that contents have been written safely and correctly
      * to the designated file.
      */
