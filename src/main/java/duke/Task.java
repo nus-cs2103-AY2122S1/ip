@@ -29,6 +29,12 @@ public abstract class Task {
         this.datetime = LocalDateTime.now();
     }
 
+    /**
+     * Constructor with 3 params
+     * @param task Task string.
+     * @param type Type enum.
+     * @param done Boolean done.
+     */
     public Task(String task, Type type, Boolean done) {
         this.task = task;
         this.done = done;
@@ -36,6 +42,13 @@ public abstract class Task {
         this.datetime = LocalDateTime.now();
     }
 
+    /**
+     * Constructor with 3 params
+     * @param task Task string.
+     * @param type Type enum.
+     * @param done Boolean done.
+     * @param datetime Datetime datetime.
+     */
     public Task(String task, Type type, Boolean done, LocalDateTime datetime) {
         this.task = task;
         this.done = done;
@@ -43,6 +56,9 @@ public abstract class Task {
         this.datetime = datetime;
     }
 
+    /**
+     * Empty default constructor.
+     */
     public Task() {
         this.task = "";
         this.done = false;
@@ -66,20 +82,12 @@ public abstract class Task {
         this.done = done;
     }
 
-    public void setTask(String task) {
-        this.task = task;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
     /**
      * String representation of the done status of task
      * @return String representation of the done status of task.
      */
     public String checkBox() {
-        if(this.isDone()) {
+        if (this.isDone()) {
             return "[X]";
         } else {
             return "[ ]";
@@ -94,6 +102,10 @@ public abstract class Task {
         return task;
     }
 
+    /**
+     * String to write to file.
+     * @return File write string.
+     */
     public String fileWriteString() {
         String res = "";
         res += Type.typeString(getType()) + ",";

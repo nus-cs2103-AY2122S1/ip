@@ -1,3 +1,2 @@
 T,1,something else
 E,1,something else,2001-09-09 20:30
-T,1,something

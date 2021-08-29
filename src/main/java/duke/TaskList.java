@@ -18,9 +18,9 @@ public class TaskList {
     public static String taskListString(List<Task> tasks) {
         StringBuilder ans = new StringBuilder();
         ans.append("Here are the tasks in your list:\n");
-        for(int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            if(i != tasks.size()-1) {
+            if (i != tasks.size() - 1) {
                 ans.append(String.format("%d. %s\n", i + 1, task.toString()));
             } else {
                 ans.append(String.format("%d. %s", i + 1, task.toString()));
@@ -38,9 +38,9 @@ public class TaskList {
      * @return duke.Task of requisite type.
      */
     public static Task initialiseByType(String task, Type type, Boolean done, LocalDateTime localDateTime) {
-        if(type == Type.TODO) {
+        if (type == Type.TODO) {
             return new Todo(task, type, done);
-        } else if(type == Type.EVENT) {
+        } else if (type == Type.EVENT) {
             return new Event(task, type, done, localDateTime);
         } else {
             return new Deadline(task, type, done, localDateTime);
@@ -60,23 +60,23 @@ public class TaskList {
      * @param input The string of input command.
      * @throws DukeException Exceptions specific to this chatbot.
      */
-    public void interpretInput(String input) throws DukeException{
+    public void interpretInput(String input) throws DukeException {
         String task;
         Type type;
         LocalDateTime localDateTime;
-        if(input.equals("bye")) {
+        if (input.equals("bye")) {
             System.out.println(byeString());
-        } else if(input.equals("list")) {
+        } else if (input.equals("list")) {
             System.out.println(taskListString(tasks));
-        } else if(input.equals("hello")) {
-            System.out.println("Hello! I'm duke.Duke\n" +
-                    "What can I do for you?");
+        } else if (input.equals("hello")) {
+            System.out.println("Hello! I'm duke.Duke\n"
+                    + "What can I do for you?");
         } else if (input.startsWith("done ")) {
             Ui.doneTask(Integer.parseInt(input.substring(5)), tasks);
-        } else if(input.startsWith("todo ")) {
+        } else if (input.startsWith("todo ")) {
             // Remove all whitespaces to test if it is empty
-            String testInput = input.replaceAll("\\s+","");
-            if(testInput.equals("todo")) {
+            String testInput = input.replaceAll("\\s+", "");
+            if (testInput.equals("todo")) {
                 throw new EmptyTodoException();
             }
             task = input.substring(5);
@@ -107,7 +107,7 @@ public class TaskList {
         }
         try {
             Storage.writeToFile(tasks);
-        } catch(IOException err) {
+        } catch (IOException err) {
             System.out.println(err);
         }
 
@@ -126,15 +126,15 @@ public class TaskList {
             System.out.println(err);
         }
 
-        if(scanner.hasNext()) {
+        if (scanner.hasNext()) {
             String input = scanner.nextLine();
             try {
                 interpretInput(input);
-            } catch(DukeException dukeException) {
+            } catch (DukeException dukeException) {
                 System.out.println(dukeException.getMessage());
                 run(scanner);
             }
-            if(input.equals("bye"))  {
+            if (input.equals("bye")) {
                 scanner.close();
             } else {
                 run(scanner);

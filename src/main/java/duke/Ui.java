@@ -50,8 +50,8 @@ public class Ui {
      */
     public static List<Task> findTasks(String regex, List<Task> tasks) {
         List<Task> filteredTasks = new ArrayList<>();
-        for(Task task: tasks) {
-            if(task.getTask().contains(regex)) {
+        for (Task task: tasks) {
+            if (task.getTask().contains(regex)) {
                 filteredTasks.add(task);
             }
         }

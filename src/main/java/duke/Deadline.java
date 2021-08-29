@@ -2,7 +2,7 @@ package duke;
 
 import java.time.LocalDateTime;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     /**
      * Constructor to initialise the task.

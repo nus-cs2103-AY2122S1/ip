@@ -15,10 +15,10 @@ public class Parser {
      */
     public static ArrayList<Task> loadTasks(List<String> tasks) throws FileParseErrorException {
         ArrayList<Task> finalTasks = new ArrayList<>();
-        for(int i = 0; i<tasks.size();i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             String taskString = tasks.get(i);
             String[] tokens = taskString.split(",");
-            if(tokens.length < 3) {
+            if (tokens.length < 3) {
                 System.out.println("damn");
                 throw new FileParseErrorException();
             }
@@ -27,7 +27,7 @@ public class Parser {
             String interpretedString = "";
             Boolean done = false;
 
-            if(tokens[1].equals("0")) {
+            if (tokens[1].equals("0")) {
                 done = false;
             } else if (tokens[1].equals("1")) {
                 done = true;
@@ -36,7 +36,7 @@ public class Parser {
             }
 
             LocalDateTime localDateTime;
-            if(tokens[0].equals("D") && tokens.length == 4) {
+            if (tokens[0].equals("D") && tokens.length == 4) {
                 type = Type.DEADLINE;
                 interpretedString = tokens[2];
                 localDateTime = parseDate(tokens[3]);
@@ -63,7 +63,7 @@ public class Parser {
      * @return Datetime object.
      */
     public static LocalDateTime parseDate (String datetime) {
-        if(datetime.length() == 10) {
+        if (datetime.length() == 10) {
             datetime += " 00:00";
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

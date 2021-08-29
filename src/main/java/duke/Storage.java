@@ -17,9 +17,9 @@ public class Storage {
     public static void writeToFile(List<Task> tasks) throws IOException {
         int i = 1;
         String lines = "";
-        for(Task task: tasks) {
+        for (Task task: tasks) {
             lines += task.fileWriteString();
-            if(i != tasks.size()) {
+            if (i != tasks.size()) {
                 lines += "\n";
             }
             i++;
@@ -38,11 +38,11 @@ public class Storage {
         List<String> tasks = new ArrayList();
         try {
             Scanner readFile = new Scanner(file);
-            while(readFile.hasNext()) {
+            while (readFile.hasNext()) {
                 String task = readFile.nextLine();
                 tasks.add(task);
             }
-        } catch(Exception err) {
+        } catch (Exception err) {
             System.out.println(err);
         }
         return tasks;

@@ -2,7 +2,7 @@ package duke;
 
 import java.time.LocalDateTime;
 
-public class Event extends Task{
+public class Event extends Task {
 
     /**
      * Constructor to initialise the task.
