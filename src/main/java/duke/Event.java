@@ -2,12 +2,13 @@ package duke;
 
 /**
  * This class simulates a special Task with a designated time
- * and date (if applicable).
+ * and date, using the word 'at'.
  */
 public class Event extends Task {
 
     /**
      * Constructor of an Event.
+     *
      * @param description description of the event.
      */
     public Event(String description) {
@@ -16,6 +17,7 @@ public class Event extends Task {
 
     /**
      * Returns the description of the current Event
+     *
      * @return the description of the current Event
      */
     @Override
@@ -53,6 +55,7 @@ public class Event extends Task {
     /**
      * Returns the string representation of the
      * completion status of the Event.
+     *
      * @return the string representation of the
      *         completion status of the Event.
      */
@@ -64,6 +67,7 @@ public class Event extends Task {
     /**
      * Returns the string representation for the Event's description
      * and completion status.
+     *
      * @return the string representation for the Event's description
      *         and completion status.
      */

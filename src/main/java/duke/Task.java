@@ -2,15 +2,22 @@ package duke;
 
 /**
  * This class simulates a real life task to be completed and
- * its status of completion.
+ * its status of completion. May contain date and time depending on the
+ * type of task.
  */
 public class Task {
+    /** The description of the task. **/
     protected String description;
+
+    /** Indicates if the task has been completed. **/
     protected boolean isDone;
+
+    /** Indicates if the task has been saved in a file. **/
     protected boolean wasSaved;
 
     /**
      * Constructor for a Task.
+     *
      * @param description the description of the task.
      */
     public Task (String description) {
@@ -21,6 +28,7 @@ public class Task {
 
     /**
      * Returns the description of the current task.
+     *
      * @return the description of the current task.
      */
     public String getDescription() {
@@ -36,6 +44,7 @@ public class Task {
 
     /**
      * Returns the string representation of status of completion of the task.
+     *
      * @return the string representation of status of completion of the task.
      */
     public String getStatusIcon() {
@@ -44,12 +53,16 @@ public class Task {
 
     /**
      * Returns the string representation of the task and its completion status.
+     *
      * @return the string representation of the task and its completion status
      */
     public String printTask() {
         return this.getStatusIcon() + " " + this.getDescription();
     }
 
+    /**
+     * Indicates the current task as being saved in the file (using the filepath given).
+     */
     public void markedSaved() {
         this.wasSaved = true;
     }

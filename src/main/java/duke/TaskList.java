@@ -7,12 +7,26 @@ import java.util.ArrayList;
  * be used on the list.
  */
 public class TaskList {
+    /** The contents found in the TaskList. **/
     private static ArrayList<Task> contents;
 
+    /**
+     * Constructor for TaskList.
+     *
+     * @param fileContents the content of the file used to save data
+     */
     public TaskList(ArrayList<Task> fileContents) {
         contents = fileContents;
     }
 
+    /**
+     * Adds a task to the TaskList depending on what kind of task was added,
+     * checking the user input and acting accordingly.
+     * If input is valid, it is added; otherwise a reminder message is sent to the
+     * user to show what kind of input is valid.
+     *
+     * @param userInput the line of user input which contains the task
+     */
     public static void addTask(String userInput) {
         if (userInput.startsWith("deadline") || userInput.startsWith("event") ||
                 userInput.startsWith("todo")) {
@@ -31,10 +45,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * Obtains the list of the current tasks.
+     *
+     * @return the list of current tasks.
+     */
     public static ArrayList<Task> getList() {
         return contents;
     }
 
+    /**
+     * Prints out the list of current tasks. Displays a different
+     * message if list is empty.
+     */
     public static void printList() {
         if (contents.size() == 0) {
             Ui.emptyListMessage();
@@ -43,6 +66,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks the current task as done and changes its UI appearance when
+     * printed out.
+     *
+     * @param userInput the userInput which indicates which task is done.
+     */
     public static void markTaskDone(String userInput) {
         String index = userInput.substring(5);
         int x = Integer.parseInt(index);
@@ -51,6 +80,11 @@ public class TaskList {
         Ui.markedTask(temp);
     }
 
+    /**
+     * Removes the task completely from the list.
+     *
+     * @param userInput the userInput which indicates which task is to be removed.
+     */
     public static void removeTask(String userInput) {
         String index = userInput.substring(7);
         int x = Integer.parseInt(index);
@@ -59,6 +93,9 @@ public class TaskList {
         Ui.removedTask(temp);
     }
 
+    /**
+     * Marks all tasks as saved to the file.
+     */
     public void markTasksSaved() {
         for (Task x: contents) {
             x.markedSaved();

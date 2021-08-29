@@ -3,12 +3,23 @@ package duke;
 import java.util.Scanner;
 
 /**
- * This class deals with making sense of the user input/command.
+ * This class deals with making sense of the user input/command
+ * when using Duke.
  */
 public class Parser {
+
+    /**
+     * Empty constructor for Parser.
+     */
     public Parser() {
     }
 
+    /**
+     * Evaluates user input into understandable code for
+     * Duke to process. Saves data whenever the TaskList changes.
+     *
+     * @param scanner the scanner used to process user input
+     */
     public static void evaluateUserInput(Scanner scanner) {
         String userInput = scanner.nextLine();
 
@@ -30,6 +41,7 @@ public class Parser {
             } else {
                 TaskList.addTask(userInput);
             }
+            Storage.writeFile();
             userInput = scanner.nextLine();
         }
 

@@ -8,6 +8,7 @@ public class ToDos extends Task {
 
     /**
      * Constructor of a ToDos object.
+     *
      * @param description description of the ToDos object.
      */
     public ToDos(String description) {
@@ -16,6 +17,7 @@ public class ToDos extends Task {
 
     /**
      * Returns description of the current ToDos object.
+     *
      * @return description of the current ToDos object.
      */
     @Override
@@ -33,6 +35,7 @@ public class ToDos extends Task {
 
     /**
      * Returns the status icon of the current ToDos object.
+     *
      * @return the status icon of the current ToDos object.
      */
     @Override
@@ -42,6 +45,7 @@ public class ToDos extends Task {
 
     /**
      * Returns the current ToDos's description and completion status.
+     *
      * @return the current ToDos's description and completion status.
      */
     @Override

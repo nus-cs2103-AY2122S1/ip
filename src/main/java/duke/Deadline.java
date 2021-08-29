@@ -1,12 +1,13 @@
 package duke;
 
 /**
- * This class simulates a special type of Task which has a date
- * for which it is to be completed by.
+ * This class simulates a special type of Task which has a date and time
+ * for which it is to be completed by, using the word 'by'.
  */
 public class Deadline extends Task {
     /**
      * Constructor for Deadline
+     *
      * @param description the description of the Deadline object.
      */
     public Deadline(String description) {
@@ -15,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the description of the current deadline.
+     *
      * @return the description of the current deadline task.
      */
     @Override
@@ -51,6 +53,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the current status icon of the current Deadline.
+     *
      * @return the current status icon of the deadline.
      */
     @Override
@@ -61,6 +64,7 @@ public class Deadline extends Task {
     /**
      * Returns a string containing the Deadline description
      * and its completion status.
+     *
      * @return a string containing the Deadline description
      *         and its completion status.
      */

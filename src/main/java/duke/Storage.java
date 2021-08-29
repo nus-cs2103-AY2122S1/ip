@@ -9,23 +9,30 @@ import java.util.Scanner;
 
 /**
  * This class deals with loading tasks from the file
- * and saving tasks in the file.
+ * and saving tasks in the file for Duke to process and use later.
  */
 public class Storage {
-    private final String filePath;
 
+    /** The filepath used to track where the data is being saved to. **/
+    private static String filePath;
+
+    /**
+     * Constructor for Storage object.
+     * @param filePath the path of the file where
+     *                 data of Duke is being stored.
+     */
     public Storage (String filePath) {
-        this.filePath = filePath;
+        Storage.filePath = filePath;
     }
 
     /**
-     * Writes content to a file with given content.
+     * Writes content to the given filepath with given content.
      */
-    public void writeFile() {
+    public static void writeFile() {
         ArrayList<Task> currList = TaskList.getList();
         for (Task content : currList) {
             try {
-                FileWriter fw = new FileWriter(this.filePath);
+                FileWriter fw = new FileWriter(filePath);
                 fw.write(content.printTask());
                 fw.close();
             } catch (IOException e) {
@@ -35,7 +42,8 @@ public class Storage {
     }
 
     /**
-     *
+     * Prints out the file's contents just as Duke begins loading in the file,
+     * to allow the user to see what contents are in the file that was previously saved.
      */
     public void printStartingFileContents() {
         File testFile = new File(this.filePath);
@@ -48,6 +56,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads in the file from the given filename and retrieves the data from the file,
+     * processing it and copying the data into Duke and the TaskList for usage and
+     * processing.
+     *
+     * @return an ArrayList to be stored in TaskList.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> newList = new ArrayList<>();
         File newFile = new File(this.filePath);
