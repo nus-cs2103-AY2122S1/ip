@@ -23,7 +23,7 @@ public class DukeCommandParser {
         switch (tType) {
         case TODO:
             inputArr = input.split(" ", 2);
-            if(inputArr.length != 2 || inputArr[1].equals("")) {
+            if (inputArr.length != 2 || inputArr[1].equals("")) {
                 throw new DukeCommandException("todo");
             }
 
