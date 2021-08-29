@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.DateTimeManager;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 import seedu.duke.task.Event;
@@ -7,17 +8,19 @@ import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EventCommand extends Command {
     private static final String ADD_MESSAGE = "Got it. I've added this task:\n";
-    private String description;
+    private Task task;
     private Storage storage;
     private LocalDate date;
 
     public EventCommand(Ui ui, TaskList taskList, String description,
                            LocalDate date, Storage storage) {
         super(ui, taskList);
-        this.description = description;
+        task = new Event(description, date);
         this.date = date;
         this.storage = storage;
     }
@@ -38,7 +41,6 @@ public class EventCommand extends Command {
      */
     @Override
     public void execute() {
-        Task task = new Event(description, date);
         taskList = taskList.add(task);
         storage.addTaskToFile(task);
 
@@ -47,6 +49,11 @@ public class EventCommand extends Command {
         ui.outputMessage(task.toString());
         ui.outputMessage(taskList.status());
         ui.divide();
+    }
+
+    public void updateDateTasks(HashMap<LocalDate, ArrayList<Task>> dateTasks,
+                                DateTimeManager manager) {
+        manager.updateDateTasks(dateTasks, date, task);
     }
 
 }

@@ -1,8 +1,14 @@
 package seedu.duke.command;
 
+import seedu.duke.DateTimeManager;
 import seedu.duke.DukeException;
 import seedu.duke.Ui;
+import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Command {
 
@@ -19,6 +25,11 @@ public abstract class Command {
 
     public TaskList getTaskList() {
         return this.taskList;
+    }
+
+    public void updateDateTasks(HashMap<LocalDate, ArrayList<Task>> dateTasks,
+                                DateTimeManager manager) {
+        return;
     }
 
     public Command(Ui ui, TaskList taskList) {

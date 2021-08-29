@@ -29,10 +29,6 @@ import java.util.Scanner;
  */
 class Duke {
 
-    private enum UserCommands {
-        DONE, TODO, DEADLINE, EVENT, FIND, GET, DELETE, LIST, BYE;
-    }
-
     /**
      * Represents a parser for interpreting user inputs.
      * A <code>Parser</code> object takes in user inputs and
@@ -90,8 +86,8 @@ class Duke {
                 return new FindCommand(ui, taskList, list_of_words[1]);
             case "get":
                 try {
-                    manager.parseDateTime(arrOfCommandWords[1]);
-                    return new GetCommand(ui, taskList, list_of_words[1], dateTasks);
+                    LocalDate tasksDate = manager.parseDateTime(arrOfCommandWords[1]);
+                    return new GetCommand(ui, taskList, tasksDate, dateTasks);
                 } catch (DateTimeParseException e) {
                     throw new DukeException("Invalid date format.");
                 }
@@ -166,6 +162,7 @@ class Duke {
          */
         private void executeTasks(Command type) throws DukeException {
             type.execute();
+            type.updateDateTasks(dateTasks, manager);
             if (type.updatesTaskList()) {
                 taskList = type.getTaskList();
             }
