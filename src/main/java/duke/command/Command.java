@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * Represents a user command.
  */
 public abstract class Command {
-    String line;
+    private final String line;
 
     /**
      * Constructs Command object.
@@ -32,10 +32,12 @@ public abstract class Command {
         storage.save(tasks.getTasks());
     }
 
+    public String getLine() {
+        return line;
+    }
+
     /**
      * Returns if command exits program.
      */
-    public boolean isExit() {
-        return false;
-    }
+    public abstract boolean isExit();
 }

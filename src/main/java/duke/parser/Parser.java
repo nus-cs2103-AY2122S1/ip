@@ -1,12 +1,12 @@
 package duke.parser;
 
-import duke.command.Command;
 import duke.command.AddCommand;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
+import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.Messages;
 
@@ -22,7 +22,7 @@ public class Parser {
      * @param start substring after target word.
      * @return task details.
      */
-    private static String cut(String input, String start){
+    private static String cut(String input, String start) {
         return input.substring(input.indexOf(start) + start.length() + 1);
     }
 
@@ -33,8 +33,8 @@ public class Parser {
      * If command is exit, returns ExitCommand.
      *
      * @param cmd user command line.
-     * @throws DukeException If invalid command.
      * @return task command.
+     * @throws DukeException If invalid command.
      */
     public static Command parse(String cmd) throws DukeException {
         if (cmd.contains("add")) {
@@ -49,7 +49,7 @@ public class Parser {
             return new ExitCommand("");
         } else if (cmd.contains("find")) {
             return new FindCommand(cut(cmd, "find"));
-        }  else {
+        } else {
             throw new DukeException(Messages.KNOWN.toString());
         }
     }
