@@ -98,4 +98,12 @@ public class Ui {
         System.out.println("Here are the tasks in your list: " + taskList);
     }
 
+    /**
+     * Displays the matching tasks in the list.
+     * @param taskList List of matching tasks.
+     */
+    public void showMatchingTasks(TaskList taskList) {
+        System.out.println("Here are the matching tasks in your list: " + taskList);
+    }
+
 }
