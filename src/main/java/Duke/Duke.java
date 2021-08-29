@@ -3,6 +3,7 @@ package duke;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidInstructionException;
 
+import duke.gui.Main;
 import duke.parser.Parser;
 
 import duke.storage.Storage;
@@ -15,18 +16,21 @@ import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
 import duke.ui.Ui;
+import javafx.application.Application;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 /**
- * Represents a chat bot named Duke.
+ * Represents a chat-bot named Duke.
  */
 public class Duke {
 
@@ -71,148 +75,143 @@ public class Duke {
             if (task.getClass() == ToDo.class) {
                 String type = "T";
                 contents += type + ' ' + done + ' ' + details;
-            } else {
-
-                LocalDate date = task.getDate();
-                String dateStr = "";
-                if (date == null) {
-                    dateStr = "null";
-                } else {
-                    String year = "" + task.getDate().getYear();
-                    String month = task.getDate().getMonthValue() < 10
-                            ? "0" + task.getDate().getMonthValue()
-                            : "" + task.getDate().getMonthValue();
-                    String day = task.getDate().getDayOfMonth() < 10
-                            ? "0" + task.getDate().getDayOfMonth()
-                            : "" + task.getDate().getDayOfMonth();
-                    dateStr = year + '-' + month + '-' + day;
-                }
-
-                if (task.getClass() == Deadline.class) {
+            } else if (task.getClass() == Deadline.class) {
                     String type = "D";
-                    String by = ((Deadline) task).getBy() == null
-                            ? "null"
-                            : ((Deadline) task).getBy();
-                    String time = "" + task.getTime();
-                    contents += type + ' ' + done + ' ' + details + ' ' + by + ' '
-                            + dateStr + ' ' + time;
-                } else if (task.getClass() == Event.class) {
+                    LocalDateTime deadline = ((Deadline) task).getDeadline();
+                    if (deadline == null) {
+                        contents += type + ' ' + done + ' ' + details + ' '
+                                + ((Deadline) task).getDeadlineStr();
+                    } else {
+                        contents += type + ' ' + done + ' ' + details + ' '
+                                + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                    }
+            } else if (task.getClass() == Event.class) {
                     String type = "E";
-                    String at = ((Event) task).getAt() == null
-                            ? "null"
-                            : ((Event) task).getAt();
-                    String start = "" + task.getTime();
-                    String end = "" + ((Event) task).getEndTime();
-                    contents += type + ' ' + done + ' ' + details + ' ' + at + ' '
-                            + dateStr + ' ' + start + ' ' + end;
-                }
+                    LocalDateTime timing = ((Event) task).getTiming();
+                    if (timing == null) {
+                        contents += type + ' ' + done + ' ' + details + ' '
+                                + ((Event) task).getTimingStr();
+                    } else {
+                        LocalTime endTime = ((Event) task).getEndTime();
+                        contents += type + ' ' + done + ' ' + details + ' '
+                                + timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + '-'
+                                + endTime.format(DateTimeFormatter.ofPattern("HHmm"));
+                    }
             }
             contents += System.lineSeparator();
+
         }
         storage.writeToStorage(contents, false);
     }
 
     /**
-     * Runs Duke.
-     * Duke takes in an input from the user line-by-line and responds to it accordingly.
+     * Gets Duke's response to the given input string.
+     *
+     * @param inputStr The user's input.
+     * @return A pair of strings: Duke's response and the appropriate task list to display.
      */
-    public void run() {
+    public Pair<String, String> getResponse(String inputStr) {
 
-        ui.greeting(taskList.getList());
+        try {
+            HashMap<String, Object> input = parser.parse(inputStr);
 
-        Scanner scanner = new Scanner(System.in);
-
-        boolean leave = false;
-        while (!leave) {
-            try {
-                String inputStr = scanner.nextLine();
-                HashMap<String, Object> input = parser.parse(inputStr);
-
-                switch ((String) input.get("cmd")) {
-                case "bye":
-                    ui.farewell();
-                    leave = true;
-                    saveTasks();
-                    break;
-                case "list":
-                    ui.reply(taskList.getList());
-                    break;
-                case "done":
-                    try {
-                        taskList.completeTask((Integer) input.get("index") - 1);
-                        ui.doneMsg(taskList.getTask((Integer) input.get("index") - 1));
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new InvalidInputException("Task number does not exist. Complete failed.");
-                    }
-
-                    break;
-                case "delete":
-                    try {
-                        ui.deleteMsg(taskList.getTask((Integer) input.get("index") - 1),
-                                taskList.getSize());
-                        taskList.deleteTask((Integer) input.get("index") - 1);
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new InvalidInputException("Task number does not exist. Delete failed.");
-                    }
-                    break;
-                case "todo":
-                    ToDo todo = new ToDo((String) input.get("details"));
-                    taskList.addTask(todo);
-                    ui.addTaskMsg(todo, taskList.getSize());
-                    break;
-                case "deadline":
-                    Deadline deadline = new Deadline((String) input.get("details"), (String) input.get("by"),
-                            (String) input.get("date"), (Integer) input.get("time"));
-                    taskList.addTask(deadline);
-                    ui.addTaskMsg(deadline, taskList.getSize());
-                    break;
-                case "event":
-                    Event event = new Event((String) input.get("details"), (String) input.get("at"),
-                            (String) input.get("date"), (Integer) input.get("start"), (Integer) input.get("end"));
-                    taskList.addTask(event);
-                    ui.addTaskMsg(event, taskList.getSize());
-                    break;
-                case "date":
-                    LocalDate date = (LocalDate) input.get("date");
-                    int time = (Integer) input.get("time");
-                    String list = "";
-                    for (int i = 0; i < taskList.getSize(); i++) {
-                        Task task = taskList.getTask(i);
-                        if (date.equals(task.getDate()) && time == task.getTime()) {
-                            list += "\t\t" + task.toString() + '\n';
-                        }
-                    }
-                    if (list.equals("")) {
-                        ui.reply("No tasks are due/happening.");
-                    } else {
-                        ui.reply("These tasks are due/happening:\n"
-                                + list);
-                    }
-                    break;
-                case "find":
-                    ArrayList<Task> matchingTasks = taskList.matchingTasks((String) input.get("keyword"));
-                    this.ui.matchingTasksMsg(matchingTasks);
-                    break;
-                }
-            } catch (IllegalStateException | NoSuchElementException e) {
+            switch ((String) input.get("cmd")) {
+            case "bye":
+                saveTasks();
+                return new Pair<>(ui.farewell(),
+                        null);
+            case "list":
+                return new Pair<>(ui.listMsg(),
+                        getTasks());
+            case "done":
                 try {
-                    saveTasks();
-                } catch (IOException ie) {
-                    ui.printException(ie);
+                    taskList.completeTask((Integer) input.get("index") - 1);
+                    return new Pair<>(ui.doneMsg(taskList.getTask((Integer) input.get("index") - 1)),
+                            getTasks());
+                } catch (IndexOutOfBoundsException e) {
+                    throw new InvalidInputException("Task number does not exist. Complete failed.");
                 }
-                ui.printException(e);
-            } catch (InvalidInputException e) {
-                ui.invalidInput(e);
-            } catch (IOException e) {
-                ui.printException(e);
-            } catch (InvalidInstructionException e) {
-                ui.invalidInstruction(e);
+            case "delete":
+                try {
+                    String reply = ui.deleteMsg(taskList.getTask((Integer) input.get("index") - 1));
+                    taskList.deleteTask((Integer) input.get("index") - 1);
+                    return new Pair<>(reply,
+                            getTasks());
+                } catch (IndexOutOfBoundsException e) {
+                    throw new InvalidInputException("Task number does not exist. Delete failed.");
+                }
+            case "todo":
+                ToDo todo = new ToDo((String) input.get("details"));
+                taskList.addTask(todo);
+                return new Pair<>(ui.addTaskMsg(todo),
+                        getTasks());
+            case "deadline":
+                Deadline deadline = new Deadline((String) input.get("details"), (String) input.get("deadline"));
+                taskList.addTask(deadline);
+                return new Pair<>(ui.addTaskMsg(deadline),
+                        getTasks());
+            case "event":
+                Event event = new Event((String) input.get("details"), (String) input.get("timing"));
+                taskList.addTask(event);
+                return new Pair<>(ui.addTaskMsg(event),
+                        getTasks());
+            case "date":
+                LocalDate date = (LocalDate) input.get("date");
+                return new Pair<>(ui.matchingDate(date),
+                        getTasks(date));
+            case "find":
+                String keyword = (String) input.get("keyword");
+                return new Pair<>(this.ui.matchingKeyword(keyword),
+                        getTasks(keyword));
             }
+        } catch (IllegalStateException | NoSuchElementException e) {
+            try {
+                saveTasks();
+            } catch (IOException ie) {
+                return new Pair<>(ui.printException(ie), getTasks());
+            }
+            return new Pair<>(ui.printException(e), getTasks());
+        } catch (InvalidInputException e) {
+            return new Pair<>(ui.printException(e), getTasks());
+        } catch (IOException e) {
+            return new Pair<>(ui.printException(e), getTasks());
+        } catch (InvalidInstructionException e) {
+            return new Pair<>(ui.printException(e), getTasks());
         }
 
+        return new Pair<>("I have no response.", getTasks());
+    }
+
+    /**
+     * Returns a String representation of tasks in the task list.
+     *
+     * @return A String representing tasks in the task list.
+     */
+    public String getTasks() {
+        return taskList.getList();
+    }
+
+    /**
+     * Returns a String representation of tasks that occur on the given date.
+     *
+     * @param date The date to filter the tasks by.
+     * @return A String representing tasks that occur on the given date.
+     */
+    public String getTasks(LocalDate date) {
+        return taskList.filterByDate(date);
+    }
+
+    /**
+     * Returns a String representation of tasks that match the given keyword.
+     *
+     * @param keyword The keyword to filter the tasks by.
+     * @return A String representing tasks that match the given keyword.
+     */
+    public String getTasks(String keyword) {
+        return taskList.filterByKeyword(keyword);
     }
 
     public static void main(String[] args) {
-        new Duke("taskList.txt").run();
+        Application.launch(Main.class, args);
     }
 }

@@ -4,60 +4,32 @@ import duke.exception.InvalidInputException;
 import duke.exception.InvalidInstructionException;
 import duke.task.Task;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the user interface of Duke. Deals with Duke's interaction with the user.
  */
 public class Ui {
 
-    private static final String line =
-            "------------------------------------------------------------------------------"
-                    + "-------------------------------";
-
-    /**
-     * Returns the response in a standardised format.
-     *
-     * @param response Duke's response to the user.
-     * @return Duke's response in a standardised format.
-     */
-    private String wrap(String response) {
-        return line
-                + "\n\n"
-                + "\t" + response
-                + "\n\n"
-                + line
-                + "\n";
-    }
-
     public Ui() {}
 
     /**
-     * Prints a greeting message.
-     *
-     * @param savedTasks Previously saved tasks taken from storage.
-     */
-    public void greeting(String savedTasks) {
-        System.out.println(wrap("Hello! I'm Duke!\n\n"
-                + "\t" + savedTasks + "\n\n"
-                + "\tWhat can I do for you?")
-        );
-    }
-
-    /**
      * Prints a farewell message.
+     *
+     * @return A farewell message.
      */
-    public void farewell() {
-        System.out.println(wrap("Bye. Hope to see you again soon!"));
+    public String farewell() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints a response.
+     * Prints a message saying the task list has been displayed.
      *
-     * @param response Duke's response to the user input.
+     * @return A message saying the task list has been displayed.
      */
-    public void reply(String response) {
-        System.out.println(wrap(response));
+    public String listMsg() {
+        return "The tasks currently stored in the task list is shown on the right!";
     }
 
     /**
@@ -65,10 +37,11 @@ public class Ui {
      * When user inputs a done instruction.
      *
      * @param task The task marked as done.
+     * @return A message informing which task is done.
      */
-    public void doneMsg(Task task) {
-        System.out.println(wrap("Nice! I've marked this task as done:\n"
-                + "\t\t" + task.toString()));
+    public String doneMsg(Task task) {
+        return "Nice! I've marked this task as done:\n"
+                + "\t" + task.toString();
     }
 
     /**
@@ -76,12 +49,11 @@ public class Ui {
      * When user inputs a delete instruction.
      *
      * @param task The task deleted.
-     * @param taskCount The remaining number of tasks in the task list.
+     * @return A message informing which task is deleted.
      */
-    public void deleteMsg(Task task, int taskCount) {
-        System.out.println(wrap("Noted. I've removed this task: \n"
-                + "\t\t" + task.toString() + "\n"
-                + "\tNow you have " + taskCount + " tasks in the list."));
+    public String deleteMsg(Task task) {
+        return "Noted. I've removed this task: \n"
+                + "\t" + task.toString() + "\n";
     }
 
     /**
@@ -89,29 +61,35 @@ public class Ui {
      * When user inputs a add task instruction.
      *
      * @param task The task added.
-     * @param taskCount The current number of tasks in the task list.
+     * @return A message informing the task has been added.
      */
-    public void addTaskMsg(Task task, int taskCount) {
-        System.out.println(wrap("Got it. I've added this task:\n"
-                + "\t\t" + task.toString() + "\n"
-                + "\t" + "Now you have " + taskCount + " tasks in the list."));
+    public String addTaskMsg(Task task) {
+        return "Got it. I've added this task:\n"
+                + "\t" + task.toString() + "\n";
     }
 
     /**
-     * Prints a message showing matching tasks.
+     * Prints a message saying the tasks that match the given keyword has been displayed.
      *
-     * @param tasks Matching tasks to be printed.
+     * @param keyword The keyword that the tasks match.
+     * @return A message saying the tasks that match the given keyword has been displayed.
      */
-    public void matchingTasksMsg(ArrayList<Task> tasks) {
-        if (tasks.isEmpty()) {
-            System.out.println(wrap("There are no matching tasks in your list."));
-        } else {
-            String text = "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < tasks.size(); i++) {
-                text += "\n\t" + tasks.get(i).toString();
-            }
-            System.out.println(wrap(text));
-        }
+    public String matchingKeyword(String keyword) {
+        String text = "Tasks that match \"" + keyword + "\" are displayed on your right!";
+        return text;
+    }
+
+    /**
+     * Prints a message saying the tasks that occur on the given date has been displayed.
+     *
+     * @param date Matching tasks to be printed.
+     * @return A message saying the tasks that match the given keyword has been displayed.
+     */
+    public String matchingDate(LocalDate date) {
+        String text = "Tasks happening on "
+                + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+                + " are displayed on your right!";
+        return text;
     }
 
     /**
@@ -119,9 +97,10 @@ public class Ui {
      * When the user enters an invalid input.
      *
      * @param e The InvalidInputException.
+     * @return An invalid input message.
      */
-    public void invalidInput(InvalidInputException e) {
-        System.out.println(wrap(e.toString()));
+    public String invalidInput(InvalidInputException e) {
+        return e.toString();
     }
 
     /**
@@ -129,9 +108,10 @@ public class Ui {
      * When the user enters an invalid instruction.
      *
      * @param e The InvalidInputException.
+     * @return An invalid instruction message.
      */
-    public void invalidInstruction(InvalidInstructionException e) {
-        System.out.println(wrap(e.toString()));
+    public String invalidInstruction(InvalidInstructionException e) {
+        return e.toString();
     }
 
     /**
@@ -139,8 +119,9 @@ public class Ui {
      * When an exception that is not a Duke exception is thrown.
      *
      * @param e The non-Duke Exception.
+     * @return An exception message.
      */
-    public void printException(Exception e) {
-        System.out.println(wrap(e.toString()));
+    public String printException(Exception e) {
+        return e.toString();
     }
 }

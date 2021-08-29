@@ -5,6 +5,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -39,39 +42,16 @@ public class TaskList {
                 taskList.add(new ToDo(details));
                 break;
             case "D":
-
-                String by =  scanner.next();
-
-                if (by != null) {
-
-                    String date = scanner.next();
-
-                    int time = Integer.parseInt(scanner.next());
-
-                    taskList.add(new Deadline(details, null, date, time));
-                } else {
-                    taskList.add(new Deadline(details, by, null, -1));
-                }
+                String deadline = scanner.nextLine().trim();
+                taskList.add(new Deadline(details, deadline));
                 break;
             case "E":
-
-                String at = scanner.next();
-
-                if (at != null) {
-
-                    String date = scanner.next();
-
-                    int start = Integer.parseInt(scanner.next());
-                    int end = Integer.parseInt(scanner.next());
-
-                    taskList.add(new Event(details, null, date, start, end));
-                } else {
-                    taskList.add(new Event(details, at, null, -1, -1));
-                }
+                String timing = scanner.nextLine().trim();
+                taskList.add(new Event(details, timing));
                 break;
             }
             if (Objects.equals(done, "done")) {
-                taskList.get(taskList.size() - 1).isComplete();
+                taskList.get(taskList.size() - 1).complete();
             }
         }
     }
@@ -97,7 +77,7 @@ public class TaskList {
         else {
             String list = "Tasks in task list:\n";
             for (int i = 0; i < taskList.size(); i++) {
-                list += "\t\t" + (i + 1) + ". " + taskList.get(i).toString();
+                list += "\t" + (i + 1) + ". " + taskList.get(i).toString();
                 if (i != taskList.size() - 1) {
                     list += "\n";
                 }
@@ -114,7 +94,7 @@ public class TaskList {
      */
     public void completeTask(int index) throws IndexOutOfBoundsException {
         taskList.get(index)
-                .isComplete();
+                .complete();
     }
 
     /**
@@ -153,13 +133,39 @@ public class TaskList {
      * @param keyword The keyword to match the tasks.
      * @return A list of tasks that match the given keyword.
      */
-    public ArrayList<Task> matchingTasks(String keyword) {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public String filterByKeyword(String keyword) {
+        String list = "Tasks that contain " + keyword + ":\n";
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).getDetails().contains(keyword)) {
-                tasks.add(taskList.get(i));
+                list += "\t" + (i + 1) + ". " + taskList.get(i).toString();
+                if (i != taskList.size() - 1) {
+                    list += "\n";
+                }
             }
         }
-        return tasks;
+        return list;
+    }
+
+    /**
+     * Returns the tasks that occur on the given date.
+     *
+     * @param date The date to filter by.
+     * @return A list of tasks that occur on the given date.
+     */
+    public String filterByDate(LocalDate date) {
+        String list = "Tasks that occur on " + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ":\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            LocalDateTime taskDateTime = taskList.get(i).getDate();
+            LocalDate taskDate = taskDateTime == null
+                    ? null
+                    : taskDateTime.toLocalDate();
+            if (date.equals(taskDate)) {
+                list += "\t" + (i + 1) + ". " + taskList.get(i).toString();
+                if (i != taskList.size() - 1) {
+                    list += "\n";
+                }
+            }
+        }
+        return list;
     }
 }

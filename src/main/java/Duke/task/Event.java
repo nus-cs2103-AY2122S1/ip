@@ -1,79 +1,75 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
- * Represents an event task. An event task has a date and time that it will occur.
+ * Represents an event task. An event task has a start and end time.
  */
 public class Event extends Task {
 
-    private String at;
-    private LocalDate date;
-    private int startTime;
-    private int endTime;
+    private String timingStr;
+    private LocalDateTime timing;
+    private LocalTime endTime;
 
-    public Event(String details, String at, String date, int startTime, int endTime) {
+    public Event(String details, String timing) {
         super(details);
-        this.at = at;
-        this.date = date == null
-                ? null
-                : LocalDate.parse(date);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        if (timing.length() == 20) {
+            try {
+                this.timing = LocalDateTime.parse(timing.substring(0, 15),
+                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                endTime = LocalTime.parse(timing.substring(16),
+                        DateTimeFormatter.ofPattern("HHmm"));
+            } catch (DateTimeParseException e) {
+                timingStr = timing;
+                this.timing = null;
+                this.endTime = null;
+            }
+        } else {
+            timingStr = timing;
+            this.timing = null;
+            this.endTime = null;
+        }
     }
 
-    public String getAt() {
-        return at;
+    /**
+     * Returns timing of task.
+     *
+     * @return Task timing.
+     */
+    public LocalDateTime getTiming() {
+        return timing;
     }
 
     /**
      * Returns date of task.
      *
-     * @return Task date.
+     * @return Task timing.
      */
     @Override
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getDate() {
+        return getTiming();
     }
 
     /**
-     * Returns start time of task.
+     * Returns end time of task.
      *
-     * @return Task start time.
+     * @return Task end time.
      */
-    @Override
-    public int getTime() {
-        return startTime;
-    }
-
-    public int getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
     /**
-     * Converts a 24hr time to a 12hr time.
+     * Returns timing of task as a String.
+     * Most likely due to incorrect input format.
      *
-     * @param time 24hr time as an int.
-     * @return 12hr time as a String.
+     * @return Task timing as a String.
      */
-    private String twelveHrTime(int time) {
-        String timeStr = "";
-        if (time == 1200) {
-            timeStr = "12:00PM";
-        } else if (time == 0) {
-            timeStr = "12:00AM";
-        } else {
-            String min = time % 100 >= 10
-                    ? "" + (time % 100)
-                    : "0" + (time % 100);
-            if (time > 1159) {
-                timeStr = timeStr + (((time / 100) - 12) + ":" + min + "PM");
-            } else {
-                timeStr = timeStr + ((time / 100) + ":" + min + "AM");
-            }
-        }
-        return timeStr;
+    public String getTimingStr() {
+        return timingStr;
     }
 
     /**
@@ -83,12 +79,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        if (date == null) {
-            return "[E]" + super.toString() + " (at: " + at + ")";
+        if (timing == null || endTime == null) {
+            return "[E]" + super.toString() + " (at: " + timingStr + ")";
         } else {
             return "[E]" + super.toString() + " (at: "
-                    + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                    + ' ' + twelveHrTime(startTime) + " to " + twelveHrTime(endTime) + ")";
+                    + timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
+                    + " to " + endTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
         }
     }
 }

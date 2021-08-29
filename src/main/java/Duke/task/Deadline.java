@@ -1,72 +1,55 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a deadline task. A deadline task has to be completed by a certain date and time.
  */
 public class Deadline extends Task{
 
-    private String by;
-    private LocalDate date;
-    private int time;
+    private String deadlineStr;
+    private LocalDateTime deadline;
 
-    public Deadline(String details, String by, String date, int time) {
+    public Deadline(String details, String deadline) {
         super(details);
-        this.by = by;
-        this.date = date == null
-                ? null
-                : LocalDate.parse(date);
-        this.time = time;
+        try {
+            this.deadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            deadlineStr = null;
+        } catch (DateTimeParseException e) {
+            deadlineStr = deadline;
+            this.deadline = null;
+        }
     }
 
-    public String getBy() {
-        return by;
+    /**
+     * Returns deadline of task.
+     *
+     * @return Task deadline.
+     */
+    public LocalDateTime getDeadline() {
+        return deadline;
     }
 
     /**
      * Returns date of task.
      *
-     * @return Task date.
+     * @return Task deadline.
      */
     @Override
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getDate() {
+        return getDeadline();
     }
 
     /**
-     * Returns time of task.
+     * Returns deadline of task as a String.
+     * Most likely due to incorrect input format.
      *
-     * @return Task time.
+     * @return Task deadline as a String.
      */
-    @Override
-    public int getTime() {
-        return time;
-    }
-
-    /**
-     * Converts a 24hr time to a 12hr time.
-     *
-     * @return 12hr time as a String.
-     */
-    private String twelveHrTime() {
-        String timeStr = "";
-        if (time == 1200) {
-            timeStr = "12:00PM";
-        } else if (time == 0) {
-            timeStr = "12:00AM";
-        } else {
-            String min = time % 100 >= 10
-                    ? "" + (time % 100)
-                    : "0" + (time % 100);
-            if (time > 1159) {
-                timeStr = timeStr + (((time / 100) - 12) + ":" + min + "PM");
-            } else {
-                timeStr = timeStr + ((time / 100) + ":" + min + "AM");
-            }
-        }
-        return timeStr;
+    public String getDeadlineStr() {
+        return deadlineStr;
     }
 
     /**
@@ -76,12 +59,12 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        if (date == null) {
-            return "[D]" + super.toString() + " (by: " + by + ")";
+        if (deadline == null) {
+            return "[D]" + super.toString() + " (by: " + deadlineStr + ")";
         } else {
             return "[D]" + super.toString() + " (by: "
-                    + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                    + ' ' + twelveHrTime() + ")";
+                    + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
+                    + ")";
         }
     }
 }

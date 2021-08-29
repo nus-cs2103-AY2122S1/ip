@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <Pane prefHeight="100.0" prefWidth="278.0" style="-fx-background-color: lightblue; -fx-background-radius: 50;">
+         <children>
+              <Label fx:id="dialog" alignment="CENTER" layoutX="25.0" layoutY="13.0" minHeight="75.0" minWidth="228.0" prefHeight="75.0" prefWidth="228.0" text="Label" textFill="#000000" wrapText="true">
+               <font>
+                  <Font name="Comic Sans MS Italic" size="10.0" />
+               </font>
+              </Label>
+         </children>
+      </Pane>
+        <ImageView fx:id="displayPicture" fitHeight="102.0" fitWidth="122.0" pickOnBounds="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@../images/dog.jpg" />
+         </image>
+      </ImageView>
+    </children>
+</fx:root>
