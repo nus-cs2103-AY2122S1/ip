@@ -83,6 +83,11 @@ public class Duke {
             tasks.getSpecificDateEvent(time);
             break;
         }
+        case "find": {
+            ui.findTasks();
+            tasks.findTasks(task);
+            break;
+        }
         default: {
             try {
                 tasks.add(operationType, task, time);
