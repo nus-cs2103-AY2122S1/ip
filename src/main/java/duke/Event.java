@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 
 /**
- * Class for duke.Event, a child class of Task.
+ * Class for Event, a child class of Task.
  * @author Liew Jian Hong
  */
 public class Event extends Task {
