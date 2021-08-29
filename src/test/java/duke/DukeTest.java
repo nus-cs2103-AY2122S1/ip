@@ -71,7 +71,7 @@ public class DukeTest {
         expectedList.add(new Deadline("A deadline", LocalDate.parse("2021-08-28"), false));
         expectedList.add(new Event("An event", LocalDate.parse("2021-08-28"), true));
 
-        TaskList actualList = testList.filterDate(LocalDate.parse("2021-08-28"));
+        TaskList actualList = testList.filterByDate(LocalDate.parse("2021-08-28"));
 
         assertEquals(expectedList, actualList);
     }
