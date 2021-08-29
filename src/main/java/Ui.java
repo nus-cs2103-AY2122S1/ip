@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Messages {
+public class Ui {
 
     private static final String GREET = "Hi there! My name's Duke, how can I help you today?";
     private static final String EXIT = "Bye! See you next time!";
 
     private Scanner sc;
 
-    public Messages () {
+    public Ui() {
         this.sc = new Scanner(System.in);
     }
 
@@ -25,7 +25,7 @@ public class Messages {
     }
 
     public String retrieveList() {
-        ArrayList<Task> list = ToDoList.getTodoList();
+        ArrayList<Task> list = TaskList.getTodoList();
         if (list.size() == 0) {
             return "You currently have no tasks!";
         } else {
@@ -39,7 +39,7 @@ public class Messages {
 
     public String addedTask(Task task) {
         return String.format("Got it. I've added this task:\n %s\nNow you have %d tasks in the list.",
-                task.toString(), ToDoList.getTodoList().size());
+                task.toString(), TaskList.getTodoList().size());
     }
 
     public String doneTask (Task task) {
@@ -48,7 +48,7 @@ public class Messages {
 
     public String deletedTask(Task task) {
         return String.format("Noted. I've removed this task:\n %s\nNow you have %d tasks in the list.",
-                task.toString(), ToDoList.getTodoList().size());
+                task.toString(), TaskList.getTodoList().size());
     }
 
     public void getError(String e) {

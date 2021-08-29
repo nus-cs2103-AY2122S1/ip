@@ -1,7 +1,7 @@
 public class DeadlineInput extends InputHandler {
 
-    public DeadlineInput(Messages ui, ToDoList toDoList) throws DukeException {
-        super(ui, toDoList);
+    public DeadlineInput(Ui ui, TaskList taskList) throws DukeException {
+        super(ui, taskList);
     }
 
     @Override
@@ -14,7 +14,7 @@ public class DeadlineInput extends InputHandler {
         String by = input.substring(byIndex);
         String task = input.substring(9, charIndex - 1);
         Task deadlineTask = new Deadline(task, by);
-        toDoList.add(deadlineTask);
+        taskList.add(deadlineTask);
         return ui.addedTask(deadlineTask);
     }
 }

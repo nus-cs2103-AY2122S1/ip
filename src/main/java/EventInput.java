@@ -1,8 +1,8 @@
 public class EventInput extends InputHandler{
 
 
-    public EventInput(Messages ui, ToDoList toDoList) throws DukeException {
-        super(ui, toDoList);
+    public EventInput(Ui ui, TaskList taskList) throws DukeException {
+        super(ui, taskList);
     }
 
     public String handle(String input) throws EmptyDescriptionException {
@@ -16,7 +16,7 @@ public class EventInput extends InputHandler{
         String task = input.substring(6, charIndex - 1);
 
         Task eventTask = new Event(task, at);
-        toDoList.add(eventTask);
+        taskList.add(eventTask);
 
         return ui.addedTask(eventTask);
     }

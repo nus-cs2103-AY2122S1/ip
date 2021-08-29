@@ -2,13 +2,13 @@
 
 public class Duke {
 
-    private Messages ui;
-    private ToDoList toDoList;
+    private Ui ui;
+    private TaskList taskList;
     private boolean exit;
 
     public Duke () {
-        this.ui = new Messages ();
-        this.toDoList = new ToDoList();
+        this.ui = new Ui();
+        this.taskList = new TaskList();
         exit = false;
     }
 
@@ -28,19 +28,19 @@ public class Duke {
                 } else if (userCommand.equals("list")) {
                     System.out.println(ui.retrieveList());
                 } else if (userCommand.startsWith("done")) {
-                    InputHandler doneInputHandler = new DoneInput(ui, toDoList);
+                    InputHandler doneInputHandler = new DoneInput(ui, taskList);
                     System.out.println(doneInputHandler.handle(userCommand));
                 } else if (userCommand.startsWith("delete")) {
-                    InputHandler deleteInputHandler = new DeleteInput(ui, toDoList);
+                    InputHandler deleteInputHandler = new DeleteInput(ui, taskList);
                     System.out.println(deleteInputHandler.handle(userCommand));
                 } else if (userCommand.startsWith("todo")) {
-                    InputHandler todoInputHandler = new TodoInput(ui, toDoList);
+                    InputHandler todoInputHandler = new TodoInput(ui, taskList);
                     System.out.println(todoInputHandler.handle(userCommand));
                 } else if (userCommand.startsWith("deadline")) {
-                    InputHandler deadlineInputHandler = new DeadlineInput(ui, toDoList);
+                    InputHandler deadlineInputHandler = new DeadlineInput(ui, taskList);
                     System.out.println(deadlineInputHandler.handle(userCommand));
                 } else if (userCommand.startsWith("event")) {
-                    InputHandler eventInputHandler = new EventInput(ui, toDoList);
+                    InputHandler eventInputHandler = new EventInput(ui, taskList);
                     System.out.println(eventInputHandler.handle(userCommand));
                 } else if (userCommand.equals("listInputs")) {
                     for (InputCommands inputs : InputCommands.values()) {

@@ -1,9 +1,9 @@
 public abstract class InputHandler {
-    protected Messages ui;
-    protected ToDoList toDoList;
+    protected Ui ui;
+    protected TaskList taskList;
 
-    public InputHandler(Messages ui, ToDoList toDoList) {
-        this.toDoList = toDoList;
+    public InputHandler(Ui ui, TaskList taskList) {
+        this.taskList = taskList;
         this.ui = ui;
     }
 

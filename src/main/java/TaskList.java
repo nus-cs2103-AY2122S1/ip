@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class ToDoList {
+public class TaskList {
     private static ArrayList<Task> todoList;
 
-    public ToDoList () {
+    public TaskList() {
         todoList = new ArrayList<>();
     }
 

@@ -1,7 +1,7 @@
 public class TodoInput extends InputHandler {
 
-    public TodoInput(Messages ui, ToDoList toDoList) throws DukeException {
-        super(ui, toDoList);
+    public TodoInput(Ui ui, TaskList taskList) throws DukeException {
+        super(ui, taskList);
     }
 
     public String handle(String input) throws EmptyDescriptionException {
@@ -12,7 +12,7 @@ public class TodoInput extends InputHandler {
         String task = input.substring(5);
         Task toDoTask = new Todo(task);
 
-        toDoList.add(toDoTask);
+        taskList.add(toDoTask);
         return ui.addedTask(toDoTask);
     }
 }

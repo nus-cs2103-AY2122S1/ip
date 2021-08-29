@@ -1,7 +1,7 @@
 public class DeleteInput extends InputHandler {
 
-    public DeleteInput(Messages ui, ToDoList toDoList) {
-        super(ui, toDoList);
+    public DeleteInput(Ui ui, TaskList taskList) {
+        super(ui, taskList);
     }
 
     @Override
@@ -13,9 +13,9 @@ public class DeleteInput extends InputHandler {
         char taskIndex = input.charAt(7);
         int index = Integer.parseInt(String.valueOf(taskIndex));
 
-        Task taskAtIndex = toDoList.getTask(index);
+        Task taskAtIndex = taskList.getTask(index);
 
-        toDoList.removeTask(index);
+        taskList.removeTask(index);
         return ui.deletedTask(taskAtIndex);
     }
 }

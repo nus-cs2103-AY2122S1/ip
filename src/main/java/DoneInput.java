@@ -1,7 +1,7 @@
 public class DoneInput extends InputHandler {
 
-    public DoneInput(Messages ui, ToDoList toDoList) throws DukeException {
-        super(ui, toDoList);
+    public DoneInput(Ui ui, TaskList taskList) throws DukeException {
+        super(ui, taskList);
     }
 
     @Override
@@ -13,7 +13,7 @@ public class DoneInput extends InputHandler {
         char taskIndex = input.charAt(5);
         int index = Integer.parseInt(String.valueOf(taskIndex));
 
-        Task taskAtIndex = toDoList.getTask(index);
+        Task taskAtIndex = taskList.getTask(index);
         taskAtIndex.markAsDone();
 
         return ui.doneTask(taskAtIndex);
