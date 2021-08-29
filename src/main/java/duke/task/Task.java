@@ -14,6 +14,17 @@ public class Task {
     protected boolean isDone;
 
     /**
+     * Initializes a Task. Note that taskFactory method should be used instead.
+     *
+     * @param description Description of task.
+     */
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+
+    /**
      * Gets description of the task.
      *
      * @return Description.
@@ -30,16 +41,6 @@ public class Task {
      */
     public boolean getIsDone() {
         return isDone ? true : false;
-    }
-
-    /**
-     * Initializes a Task. Note that taskFactory method should be used instead.
-     *
-     * @param description Description of task.
-     */
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
     }
 
     /**

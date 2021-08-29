@@ -42,7 +42,6 @@ public class GraphicalUserInterface {
         ui.addGui(this);
 
 
-
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -122,7 +121,7 @@ public class GraphicalUserInterface {
 
         try {
             Parser.parse(userInputText, ui, tasks, storage).execute();
-        } catch (DukeException e){
+        } catch (DukeException e) {
             ui.showException(e);
         }
 

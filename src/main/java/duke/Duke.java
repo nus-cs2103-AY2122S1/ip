@@ -3,14 +3,8 @@ package duke;
 
 import duke.command.Command;
 import duke.task.TaskList;
-
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -20,11 +14,6 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
     private boolean isExit = false;
     private TaskList tasks = new TaskList();
     private Ui ui;
