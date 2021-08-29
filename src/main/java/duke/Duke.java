@@ -1,12 +1,13 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import exception.DukeException;
 
-import java.util.Scanner;
 
 /**
  * Personal Assistant Chat bot to keep track of tasks
@@ -32,6 +33,7 @@ public class Duke {
     /**
      * Method to run Duke
      */
+    @SuppressWarnings("checkstyle:Regexp")
     public void run() {
         //Greet
         this.ui.greet();
@@ -108,6 +110,7 @@ public class Duke {
                     break;
                 }
 
+                default: { }
                 }
                 input = sc.nextLine();
             } catch (DukeException e) {

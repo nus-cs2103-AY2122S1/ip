@@ -8,8 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     protected LocalDateTime at;
-    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy HHmm");
+    private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy HHmm");
 
     /**
      * Class Constructor
@@ -19,6 +18,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         this.at = LocalDateTime.parse(at, inputFormatter);
     }
 

@@ -90,7 +90,7 @@ public class Parser {
         } else {
             String description = parsed[1];
             int index = description.indexOf(conjunction);
-            if (index == - 1) {
+            if (index == -1) {
                 if (conjunction.equals("by")) {
                     throw new WrongDescriptionException("Deadline not included! Try: deadline ... /by ...");
                 } else {

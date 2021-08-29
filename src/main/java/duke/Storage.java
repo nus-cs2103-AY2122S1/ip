@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,18 +7,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Loads and save the tasks in the file
  */
 public class Storage {
-    File taskFile;
+    private final File taskFile;
 
     /**
      * Class Constructor
@@ -39,6 +37,7 @@ public class Storage {
      *
      * @return ArrayList of tasks in the file
      */
+    @SuppressWarnings("checkstyle:Regexp")
     public ArrayList<Task> load() {
         if (!this.taskFile.exists()) {
             try {
@@ -61,26 +60,28 @@ public class Storage {
                 String current = fileScanner.nextLine();
                 Task currentTask = new Task("");
                 switch(current.charAt(1)) {
-                    case 'T': {
-                        currentTask = new Todo(current.substring(7));
-                        break;
-                    }
+                case 'T': {
+                    currentTask = new Todo(current.substring(7));
+                    break;
+                }
 
-                    case 'D': {
-                        int index = current.indexOf("by");
-                        LocalDateTime by = LocalDateTime.parse(current.substring(index + 4, current.length() - 1),
-                                                                 formatter);
-                        currentTask = new Deadline(current.substring(7, index - 2), by);
-                        break;
-                    }
+                case 'D': {
+                    int index = current.indexOf("by");
+                    LocalDateTime by = LocalDateTime.parse(current.substring(index + 4, current.length() - 1),
+                                                             formatter);
+                    currentTask = new Deadline(current.substring(7, index - 2), by);
+                    break;
+                }
 
-                    case 'E': {
-                        int index = current.indexOf("at");
-                        LocalDateTime at = LocalDateTime.parse(current.substring(index + 4, current.length() - 1),
-                                                                 formatter);
-                        currentTask = new Event(current.substring(7, index - 2), at);
-                        break;
-                    }
+                case 'E': {
+                    int index = current.indexOf("at");
+                    LocalDateTime at = LocalDateTime.parse(current.substring(index + 4, current.length() - 1),
+                                                             formatter);
+                    currentTask = new Event(current.substring(7, index - 2), at);
+                    break;
+                }
+
+                default: { }
                 }
                 if (current.charAt(4) == 'X') {
                     currentTask.markAsDone();
@@ -120,17 +121,17 @@ public class Storage {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.taskFile));
             String line = reader.readLine();
-            StringBuilder current_file_content = new StringBuilder();
+            StringBuilder currentFileContent = new StringBuilder();
             while (line != null) {
-                current_file_content.append(line);
-                current_file_content.append('\n');
+                currentFileContent.append(line);
+                currentFileContent.append('\n');
                 line = reader.readLine();
             }
             reader.close();
 
-            String new_file_content = current_file_content.toString().replace(oldContent, newContent);
+            String newFileContent = currentFileContent.toString().replace(oldContent, newContent);
             FileWriter fileWriter = new FileWriter(this.taskFile);
-            fileWriter.write(new_file_content);
+            fileWriter.write(newFileContent);
             fileWriter.close();
         } catch (FileNotFoundException e) {
             System.out.println("duke.txt not found!");
@@ -148,15 +149,15 @@ public class Storage {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(this.taskFile));
             String line = reader.readLine();
-            String new_file_content = "";
+            StringBuilder newFileContent = new StringBuilder();
             while (line != null) {
                 if (!line.equals(taskContent)) {
-                    new_file_content = new_file_content + line + System.lineSeparator();
+                    newFileContent.append(line).append(System.lineSeparator());
                 }
                 line = reader.readLine();
             }
             FileWriter fileWriter = new FileWriter(this.taskFile);
-            fileWriter.write(new_file_content);
+            fileWriter.write(newFileContent.toString());
             reader.close();
             fileWriter.close();
         } catch (FileNotFoundException e) {

@@ -6,10 +6,9 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a task with deadline
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDateTime by;
-    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy HHmm");
+    private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy HHmm");
 
     /**
      * Class Constructor
@@ -19,6 +18,7 @@ public class Deadline extends Task{
      */
     public Deadline(String description, String by) {
         super(description);
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         this.by = LocalDateTime.parse(by, inputFormatter);
     }
 
