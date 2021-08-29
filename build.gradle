@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "cs2103t.duke.Duke"
+    mainClassName = "fan.cs2103t.duke.Launcher"
 }
 
 shadowJar {

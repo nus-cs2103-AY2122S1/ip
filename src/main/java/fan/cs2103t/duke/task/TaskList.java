@@ -2,8 +2,6 @@ package fan.cs2103t.duke.task;
 
 import java.util.ArrayList;
 
-import fan.cs2103t.duke.ui.Ui;
-
 /**
  * Represents a list of task.
  */
@@ -83,8 +81,7 @@ public class TaskList {
         int count = 0;
         for (Task task : tasks) {
             count++;
-            listAsString.append(Ui.SPACE)
-                    .append(count)
+            listAsString.append(count)
                     .append(".")
                     .append(task.getDescriptionWithStatus())
                     .append("\n");

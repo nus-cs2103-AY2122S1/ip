@@ -26,9 +26,11 @@ public class DoneCommand extends Command {
      * Executes this command. Changes the completion status of the task with the index to "done".
      * Displays a message to the user through the specified UI if the status of the task is successfully changed,
      * or the task has already been marked as done, or the task with the index does not exist.
+     * Returns the status message as a string.
      *
      * @param taskList the task list that the task to be marked as done is in.
      * @param ui the UI for the message to be displayed through.
+     * @return a message to indicate the status of execution.
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {
@@ -36,17 +38,17 @@ public class DoneCommand extends Command {
         try {
             Task t = taskList.getTasks().get(taskIndex - 1);
             if (t.getIsDone()) {
-                output = space + "You have already done this task!";
+                output = "You have already done this task!";
                 ui.displayText(output);
             } else {
                 t.markAsDone();
-                output = space + "Nice! I've marked this task as done: \n"
-                        + space + "  " + t.getDescriptionWithStatus();
+                output = "Nice! I've marked this task as done: \n"
+                        + "  " + t.getDescriptionWithStatus();
                 ui.displayText(output);
                 // dataHandler.storeTaskList(taskList);
             }
         } catch (IndexOutOfBoundsException ex) {
-            output = space + "Oops, the task doesn't seem to exist.";
+            output = "Oops, the task doesn't seem to exist.";
             ui.displayText(output);
         }
         return output;

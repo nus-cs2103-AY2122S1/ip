@@ -15,7 +15,6 @@ import fan.cs2103t.duke.task.Event;
 import fan.cs2103t.duke.task.Task;
 import fan.cs2103t.duke.task.TaskList;
 import fan.cs2103t.duke.task.Todo;
-import fan.cs2103t.duke.ui.Ui;
 
 /**
  * Represents a storage manager for Duke to manage the back-end data storage.
@@ -25,7 +24,6 @@ import fan.cs2103t.duke.ui.Ui;
 public class Storage {
 
     private final String filePath;
-    private final String space = Ui.SPACE;
 
     /**
      * Constructs a storage manager for Duke with the specified file path.
@@ -88,7 +86,7 @@ public class Storage {
             fw.flush();
             fw.close();
         } catch (IOException e) {
-            throw new DukeException(space + "OOPS!!! An error occurred when writing to the data file.");
+            throw new DukeException("OOPS!!! An error occurred when writing to the data file.");
         }
     }
 

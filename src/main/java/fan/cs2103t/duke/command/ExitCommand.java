@@ -12,9 +12,11 @@ public class ExitCommand extends Command {
 
     /**
      * Executes this command. Displays a goodbye message to the user through the specified UI.
+     * Returns the goodbye message as a string.
      *
      * @param taskList useless parameter.
      * @param ui the UI for the message to be displayed through.
+     * @return the goodbye message.
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {

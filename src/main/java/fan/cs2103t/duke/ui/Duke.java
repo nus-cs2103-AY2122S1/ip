@@ -38,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Runs Duke.
+     * Runs Duke. The method is not in use since GUI was added.
      */
     public void run() {
         ui.greet();
@@ -57,8 +57,11 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets and returns Duke's response message for every input.
+     * Terminates the current program immediately if the specified command is an exit command.
+     *
+     * @param input the one-line input entered by users.
+     * @return a response message for the specific input.
      */
     public String getResponse(String input) {
         String output;
