@@ -5,8 +5,33 @@ import bot.utility.Duke;
 /**
  * The entry point into the Duke program.
  */
-public class Main {
-    public static void main(String[] args) {
-        new Duke().run();
+import java.io.IOException;
+
+import bot.utility.MainWindow;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+/**
+ * A GUI for Duke using FXML.
+ */
+public class Main extends Application {
+
+    private Duke duke = new Duke();
+
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
