@@ -1,6 +1,7 @@
 package duke;
+
 public class DukeException extends IndexOutOfBoundsException {
-    DukeException(String error){
+    DukeException(String error) {
         super(error);
     }
 }

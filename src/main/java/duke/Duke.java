@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -21,21 +22,21 @@ class Duke {
 
     static List<Task> toDo = new ArrayList<>();
 
-    static int countTasks(){
+    static int countTasks() {
         int count = 0;
-        for(Task task:toDo){
-            if(!task.isDone){
-                count ++;
+        for (Task task : toDo) {
+            if (!task.isDone) {
+                count++;
             }
         }
         return count;
     }
 
-    static void saveTasks(List<Task> tasks){//Called on "bye"
-        try{
+    static void saveTasks(List<Task> tasks) {//Called on "bye"
+        try {
             File data_file = new File("Data/DukeData.txt");
             FileWriter writer = new FileWriter("Data/DukeData.txt");//Overwriting entire file
-            for(Task task: tasks){
+            for (Task task : tasks) {
                 writer.write(task.toString());
                 writer.write("\n");
             }
@@ -45,12 +46,12 @@ class Duke {
             } else {
                 System.out.println("File already exists.");
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-     static void readFile(String filePath) throws FileNotFoundException {
+    static void readFile(String filePath) throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
@@ -58,7 +59,7 @@ class Duke {
 //            System.out.println(currLine);
             char taskType = currLine.charAt(1);
 //            System.out.println(taskType);
-            switch (taskType){
+            switch (taskType) {
                 case 'T':
                     toDo.add(new ToDo(currLine.substring(7)));
                     System.out.println(new ToDo(currLine.substring(7)));
@@ -69,8 +70,8 @@ class Duke {
                     int n = currLine.indexOf(")");
 //                    System.out.println(currLine.substring(7,l));
 //                    System.out.println(currLine.substring(l+1,n));
-                    toDo.add(new Deadline(currLine.substring(7,l),currLine.substring(l+1,n)));
-                    System.out.println(new Deadline(currLine.substring(7,l),currLine.substring(l+1,n)));
+                    toDo.add(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
+                    System.out.println(new Deadline(currLine.substring(7, l), currLine.substring(l + 1, n)));
                     break;
                 case 'E':
                     int i = currLine.indexOf("(");
@@ -78,8 +79,8 @@ class Duke {
                     int k = currLine.indexOf(")");
 //                    System.out.println(currLine.substring(7,i));
 //                    System.out.println(currLine.substring(j,k));
-                    toDo.add(new Event(currLine.substring(7,i),currLine.substring(i+1,k)));
-                    System.out.println(new Event(currLine.substring(7,i),currLine.substring(i+1,k)));
+                    toDo.add(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
+                    System.out.println(new Event(currLine.substring(7, i), currLine.substring(i + 1, k)));
                     break;
             }
         }
@@ -92,7 +93,7 @@ class Duke {
             try {
                 String input = myScanner.nextLine();//Parse the line
                 parser.parse(input);
-                if(parser.getBreak()){
+                if (parser.getBreak()) {
                     break;
                 }
             } catch (DukeException e) {

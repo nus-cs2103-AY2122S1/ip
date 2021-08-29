@@ -11,6 +11,6 @@ class Event extends Task {//Starts and ends by a certain time
 
     @Override
     public String toString() {
-        return "[E]" + super.toString()  + "(" + by + ")";
+        return "[E]" + super.toString() + "(" + by + ")";
     }
 }
