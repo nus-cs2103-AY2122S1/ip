@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-[D][ ] meet Mark  (by: Tuesday)
-[D][ ] return book  (by: Monday)
-=======
-[E][ ] project meeting  (at: Oct 15 2015)
-[E][X] project call  (at: Nov 16 2015)
->>>>>>> branch-Level-8
+[D][ ] return book    by: 2019-12-02
+[E][ ] test code    at: 2018-11-03
+[E][ ] meeting    at: 2015-10-15
+[E][X] project meeting   at: 2015-10-15
