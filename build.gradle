@@ -1,0 +1,9 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'checkstyle'
+}
+
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4'
+}
