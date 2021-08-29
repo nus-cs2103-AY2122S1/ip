@@ -31,7 +31,7 @@ public class Duke {
     /**
      * Starts the Duke system
      */
-    private void start(){
+    private void start() {
         Ui.intro();
         listener.startListen();
         Ui.goodBye();

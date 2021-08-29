@@ -1,9 +1,10 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.command.CommandExit;
 
-import java.util.Scanner;
 
 /**
  * Waits for and processes a User Input
@@ -27,7 +28,7 @@ public class DukeListener {
      * Transfers input to the parser, or terminates the listening.
      */
     public void startListen() {
-        while(true) {
+        while (true) {
             // Receive Input text
             String input = sc.nextLine();
             System.out.println(Ui.LINE);

@@ -19,7 +19,7 @@ public class CommandDone extends Command {
         this.commandName = "done <index>";
         this.description = "Toggles completion of task";
         this.arguments = new String[]{
-                "<index> Number, (un)completes task at index as displayed in list command"
+            "<index> Number, (un)completes task at index as displayed in list command"
         };
 
         this.taskList = taskList;

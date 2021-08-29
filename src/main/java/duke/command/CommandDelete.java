@@ -19,7 +19,7 @@ public class CommandDelete extends Command {
         this.commandName = "delete <index>";
         this.description = "Delete task from list";
         this.arguments = new String[]{
-                "<index> Number, deletes task at index as displayed in list command"
+            "<index> Number, deletes task at index as displayed in list command"
         };
 
         this.taskList = taskList;

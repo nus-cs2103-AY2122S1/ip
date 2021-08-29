@@ -1,12 +1,12 @@
 package duke.command;
 
-import task.Task;
-import task.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.function.Predicate;
+
+import task.Task;
+import task.TaskList;
 
 /**
  * Command to list out tasks
@@ -26,9 +26,9 @@ public class CommandList extends Command {
         this.commandName = "list /name <name> /date DD/MM/YYYY";
         this.description = "Toggles completion of task";
         this.arguments = new String[]{
-                "/name Optional argument to search for particular name",
-                "/date Optional date argument in DAY/MONTH/YEAR, " +
-                        "to search for tasks on a particular date"
+            "/name Optional argument to search for particular name",
+            "/date Optional date argument in DAY/MONTH/YEAR, "
+                    + "to search for tasks on a particular date"
         };
 
         this.taskList = taskList;
@@ -93,15 +93,15 @@ public class CommandList extends Command {
             String arg = str.substring(index).trim();
 
             switch (command) {
-                case ("name"):
-                    results.add(task -> task.getDescription().contains(arg));
-                    break;
-                case ("date"):
-                    LocalDate date = Command.getDate(arg);
-                    results.add(task -> task.isDate(date));
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid argument found! :(");
+            case ("name"):
+                results.add(task -> task.getDescription().contains(arg));
+                break;
+            case ("date"):
+                LocalDate date = Command.getDate(arg);
+                results.add(task -> task.isDate(date));
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid argument found! :(");
             }
         }
 

@@ -1,10 +1,10 @@
 package duke.command;
 
-import task.TaskDeadline;
-import task.TaskList;
-
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
+
+import task.TaskDeadline;
+import task.TaskList;
 
 /**
  * Command to add a deadline
@@ -23,9 +23,9 @@ public class CommandAddDeadline extends Command {
         this.commandName = "deadline <string> /by DD/MM/YYYY xxxx";
         this.description = "Creates a deadline task";
         this.arguments = new String[]{
-                "<string> Description of Deadline",
-                "/by Date in Day/Month/Year format",
-                "Optional time argument (24 Hour format)"
+            "<string> Description of Deadline",
+            "/by Date in Day/Month/Year format",
+            "Optional time argument (24 Hour format)"
         };
 
         this.taskList = taskList;

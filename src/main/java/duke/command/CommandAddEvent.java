@@ -1,15 +1,15 @@
 package duke.command;
 
-import task.TaskEvent;
-import task.TaskList;
-
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
+
+import task.TaskEvent;
+import task.TaskList;
 
 /**
  * Command to add an event
  */
-public class CommandAddEvent extends Command{
+public class CommandAddEvent extends Command {
     private final TaskList taskList;
     private final Matcher input;
 
@@ -23,9 +23,9 @@ public class CommandAddEvent extends Command{
         this.commandName = "event <string> /at DD/MM/YYYY xxxxH";
         this.description = "Creates a deadline task (Optional time argument)";
         this.arguments = new String[]{
-                "<string> Description of Event",
-                "/at Date in Day/Month/Year format",
-                "Optional time argument (24 Hour format)"
+            "<string> Description of Event",
+            "/at Date in Day/Month/Year format",
+            "Optional time argument (24 Hour format)"
         };
 
         this.taskList = taskList;

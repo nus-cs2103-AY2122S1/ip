@@ -1,39 +1,38 @@
 package duke;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.command.Command;
-import duke.command.CommandExit;
-import duke.command.CommandHelp;
-import duke.command.CommandDelete;
-import duke.command.CommandDone;
 import duke.command.CommandAddDeadline;
 import duke.command.CommandAddEvent;
 import duke.command.CommandAddTodo;
-import duke.command.CommandList;
+import duke.command.CommandDelete;
+import duke.command.CommandDone;
+import duke.command.CommandExit;
+import duke.command.CommandHelp;
 import duke.command.CommandInvalid;
-
+import duke.command.CommandList;
 import task.TaskList;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Parses any command that requires inputs
  */
 public class DukeParser {
 
-    final private TaskList taskList;
+    private final TaskList taskList;
 
     /**
      * Patterns for the Parser to look out for in the input
      */
-    final private Pattern listPattern = Pattern.compile("list( .+)?", Pattern.CASE_INSENSITIVE);
-    final private Pattern donePattern = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
-    final private Pattern deletePattern = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
-    final private Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
-    final private Pattern deadlinePattern = Pattern.compile(
+    private final Pattern listPattern = Pattern.compile("list( .+)?", Pattern.CASE_INSENSITIVE);
+    private final Pattern donePattern = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
+    private final Pattern deletePattern = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
+    private final Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
+    private final Pattern deadlinePattern = Pattern.compile(
             "deadline (.+) /by (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
             Pattern.CASE_INSENSITIVE);
-    final private Pattern eventPattern = Pattern.compile(
+    private final Pattern eventPattern = Pattern.compile(
             "event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
             Pattern.CASE_INSENSITIVE);
 
@@ -77,7 +76,7 @@ public class DukeParser {
             return new CommandAddDeadline(taskList, checkDeadline);
         } else if (checkEvent.matches()) {
             return new CommandAddEvent(taskList, checkEvent);
-        }  else {
+        } else {
             return new CommandInvalid(input);
         }
     }

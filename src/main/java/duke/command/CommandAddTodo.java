@@ -21,7 +21,7 @@ public class CommandAddTodo extends Command {
         this.commandName = "todo <string>";
         this.description = "Creates a to-do task";
         this.arguments = new String[]{
-                "<string> Description of to-do"
+            "<string> Description of to-do"
         };
 
         this.taskList = taskList;

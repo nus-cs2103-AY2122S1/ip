@@ -1,13 +1,13 @@
 package task;
 
-import duke.Storage;
-import duke.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import duke.Storage;
+import duke.Ui;
 
 /**
  * Implementation of task list, which is a list of tasks
@@ -36,8 +36,8 @@ public class TaskList {
      * Prints the number of tasks in the list
      */
     public void printSize() {
-        System.out.println( Ui.OUTPUT_DISPLAY +
-                (tasks.size() == 1
+        System.out.println(Ui.OUTPUT_DISPLAY
+                + (tasks.size() == 1
                     ? "There is 1 task in your list"
                     : "There are " + tasks.size() + " tasks in your list"));
     }
@@ -58,7 +58,7 @@ public class TaskList {
                 });
         Storage.saveList(tasks);
     }
-    
+
     /**
      * Marks the task as complete (or incomplete if it is already complete)
      *
