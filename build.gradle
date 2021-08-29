@@ -52,6 +52,12 @@ shadowJar {
     archiveClassifier = null
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'duke.Duke'
+    }
+}
+
 checkstyle {
     toolVersion = '8.29'
 }

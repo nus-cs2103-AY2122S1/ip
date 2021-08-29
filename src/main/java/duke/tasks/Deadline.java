@@ -10,7 +10,8 @@ public class Deadline extends Task {
     /**
      * Instantiates a blank Deadline.
      */
-    public Deadline() {}
+    public Deadline() {
+    }
 
     /**
      * Instantiates a Deadline based on a database entry.
