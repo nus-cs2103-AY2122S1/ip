@@ -12,12 +12,12 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         String output = "Here are the matching tasks in your list:\n" + taskList.findTask(searchString);
         if (taskList.isTaskFound()) {
-            ui.stringWithDivider(output);
+            return output;
         } else {
-            ui.stringWithDivider("I'm sorry, but I can't find this task :-(");
+            return "I'm sorry, but I can't find this task :-(";
         }
     }
 

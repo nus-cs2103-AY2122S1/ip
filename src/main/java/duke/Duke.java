@@ -9,7 +9,7 @@ import javafx.application.Application;
  * and let user manage the tasks through various commands.
  */
 public class Duke {
-    //Added Gradle support in master branch
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -25,27 +25,18 @@ public class Duke {
         taskList = new TaskList(storage);
     }
 
-    /**
-     * This method lets Duke run and start asking for user input.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isRunning = true;
-        while (isRunning) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand, taskList);
-                c.execute(taskList, ui);
-                isRunning = c.isRunning();
-
-            } catch (DukeException e) {
-                ui.stringWithDivider(e.getMessage());
+    public String getResponse(String input) {
+        String dukeResponse = "";
+        try {
+            Command c = Parser.parse(input, taskList);
+            dukeResponse = c.execute(taskList, ui);
+            if (!c.isRunning()) {
+                System.exit(0);
             }
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-    }
-
-    public void getResponse(String input) {
-
+        return dukeResponse;
     }
 
     /**
@@ -54,6 +45,5 @@ public class Duke {
      */
     public static void main(String[] args) {
         Application.launch(Main.class, args);
-//        new Duke("./Duke.txt").run();
     }
 }

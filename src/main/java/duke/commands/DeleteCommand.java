@@ -11,10 +11,10 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         String output = String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
                 taskList.deleteFromList(index), taskList.taskCount());
-        ui.stringWithDivider(output);
+        return output;
     }
 
     @Override

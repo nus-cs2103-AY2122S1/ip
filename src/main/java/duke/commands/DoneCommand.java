@@ -11,9 +11,9 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         String output = "Nice! I've marked this task as done:\n" + taskList.taskDone(index);
-        ui.stringWithDivider(output);
+        return output;
     }
 
     @Override

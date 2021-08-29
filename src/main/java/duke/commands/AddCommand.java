@@ -41,7 +41,7 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         String output = "";
 
         switch (taskType) {
@@ -64,7 +64,7 @@ public class AddCommand implements Command {
             break;
         }
 
-        ui.stringWithDivider(output);
+        return output;
     }
 
     @Override

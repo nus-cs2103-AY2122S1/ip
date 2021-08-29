@@ -6,8 +6,8 @@ import duke.Ui;
 public class ExitCommand implements Command {
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        ui.stringWithDivider("Bye. Hope to see you again soon!");
+    public String execute(TaskList taskList, Ui ui) {
+        return "Bye. Hope to see you again soon!";
     }
 
     @Override

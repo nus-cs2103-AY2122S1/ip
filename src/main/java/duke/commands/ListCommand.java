@@ -6,8 +6,8 @@ import duke.Ui;
 public class ListCommand implements Command {
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        ui.stringWithDivider(taskList.getList());
+    public String execute(TaskList taskList, Ui ui) {
+        return taskList.getList();
     }
 
     @Override

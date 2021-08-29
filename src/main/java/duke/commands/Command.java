@@ -5,7 +5,7 @@ import duke.Ui;
 
 public interface Command {
 
-    public void execute(TaskList taskList, Ui ui);
+    public String execute(TaskList taskList, Ui ui);
     public boolean isRunning();
 
 }
