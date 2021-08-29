@@ -18,8 +18,8 @@ public class Ui {
      */
     public void showWelcome() {
         showLine();
-        String s = "\t Hello! I'm Duke, your personal assistant. \n" +
-                "\t What can I do for you? \n";
+        String s = "\t Hello! I'm Duke, your personal assistant. \n"
+                + "\t What can I do for you? \n";
         System.out.println(s);
         showLine();
     }
