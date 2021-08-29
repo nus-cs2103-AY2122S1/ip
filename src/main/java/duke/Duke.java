@@ -4,6 +4,7 @@ import duke.commands.Command;
 import duke.tasktypes.TaskList;
 import java.util.Scanner;
 
+
 /**
  * Represents the chat bot.
  */
@@ -22,6 +23,7 @@ public class Duke {
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
     }
+
 
     /**
      * Starts the Dory chat bot.
@@ -44,6 +46,16 @@ public class Duke {
                 ui.endOfResponse();
             }
         }
+    }
+
+    /**
+     * Generates response for user's input.
+     * @param input
+     * @return
+     */
+    public String getResponse(String input) {
+        Command c = Parser.parse(input);
+        return c.execute(taskList, ui, storage);
     }
 
     /**

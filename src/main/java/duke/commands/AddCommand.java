@@ -29,7 +29,7 @@ public class AddCommand extends Command {
      * @param ui User Interface to deal with interactions with user.
      * @param storage Storage to store data of user.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             if (command.contains("todo")) {
                 String updatedTask = command.replace("todo", "").trim();
@@ -38,7 +38,9 @@ public class AddCommand extends Command {
                 }
                 ToDos toDoTask = new ToDos(updatedTask);
                 taskList.add(toDoTask);
-                ui.displayAdd(toDoTask);
+                storage.updateHardDisk(taskList);
+                return ui.displayAdd(toDoTask);
+
 
             } else if (command.contains("deadline")) {
 
@@ -51,7 +53,8 @@ public class AddCommand extends Command {
 
                 Deadlines deadlineTask = new Deadlines(deadlineToAdd, finishBy);
                 taskList.add(deadlineTask);
-                ui.displayAdd(deadlineTask);
+                storage.updateHardDisk(taskList);
+                return ui.displayAdd(deadlineTask);
 
             } else if (command.contains("event")) {
                 String updatedTask = command.replace("event ", "").trim();
@@ -63,14 +66,13 @@ public class AddCommand extends Command {
 
                 Events eventTask = new Events(eventToAdd, dateOfEvent);
                 taskList.add(eventTask);
-                ui.displayAdd(eventTask);
+                storage.updateHardDisk(taskList);
+                return ui.displayAdd(eventTask);
             }
 
-            storage.updateHardDisk(taskList);
-
         } catch (DukeException e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
-
+        return "";
     }
 }

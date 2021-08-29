@@ -22,18 +22,20 @@ public class DoneCommand extends Command {
      * @param ui User Interface to deal with interactions with user.
      * @param storage Storage to store data of user.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             if (numToBeMarked < 0 || numToBeMarked > taskList.getSize()) {
                 ui.displayWrongCommand();
             } else {
                 Task done = taskList.get(numToBeMarked);
                 taskList.get(numToBeMarked).markAsDone();
-                ui.displayDone(done, taskList);
+                storage.updateHardDisk(taskList);
+                return ui.displayDone(done, taskList);
             }
         } catch (Exception e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
+        return "";
     }
 
 }

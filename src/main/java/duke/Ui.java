@@ -56,10 +56,13 @@ public class Ui {
      * @param removed Deleted Task.
      * @param taskList TaskList containing remaining tasks.
      */
-    public void displayDelete(Task removed, TaskList taskList) {
-        System.out.println(" > i've removed this task:");
-        System.out.println("  " + removed.toString());
-        System.out.println("you have " + taskList.getSize() + " things in your list");
+    public String displayDelete(Task removed, TaskList taskList) {
+        String defaultLine = " > i've removed this task:";
+        String task = "  " + removed.toString();
+        String itemsLeft = "you have " + taskList.getSize() + " things in your list";
+        String resultingLine = defaultLine + '\n' + task + '\n' + itemsLeft;
+        System.out.println(resultingLine);
+        return resultingLine;
     }
 
     /**
@@ -67,56 +70,79 @@ public class Ui {
      * @param done Done Task.
      * @param taskList TaskList containing remaining tasks.
      */
-    public void displayDone(Task done, TaskList taskList) {
-        System.out.println(" > i've marked this as done:");
-        System.out.println("  " + done.toString());
+    public String displayDone(Task done, TaskList taskList) {
+        String defaultLine = " > i've marked this as done:";
+        String task = "  " + done.toString();
+        String resultingLine = defaultLine + '\n' + task;
+        System.out.println(resultingLine);
+        return resultingLine;
     }
 
     /**
      * Displays goodbye message.
      */
-    public void displayBye() {
-        System.out.println(" > see you! hope to see you again :-)");
+    public String displayBye() {
+        String resultingLine = " > see you! hope to see you again :-)";
+        System.out.println(resultingLine);
+        return resultingLine;
     }
 
     /**
      * Displays added task.
      * @param taskAdded Added task.
      */
-    public void displayAdd(Task taskAdded) {
-        System.out.println(" > added:");
-        System.out.println("    " + taskAdded.toString());
+    public String displayAdd(Task taskAdded) {
+        String defaultLine = " > added:";
+        String task = "  " + taskAdded.toString();
+        String resultingLine = defaultLine + '\n' + task;
+        System.out.println(resultingLine);
+        return resultingLine;
     }
 
     /**
      * Displays invalid comment.
      */
-    public void displayWrongCommand() {
-        System.out.println("i'm not sure i know what you mean :-( try typing something\n"
-                + "using 'todo', 'deadline' or 'event'");
+    public String displayWrongCommand() {
+        String resultingLine = "i'm not sure i know what you mean :-( try typing something\n"
+                + "using 'todo', 'deadline' or 'event'";
+        System.out.println(resultingLine);
+        return resultingLine;
     }
 
     /**
      * Displays taskList.
      * @param taskList TaskList with all the tasks.
      */
-    public void displayList(TaskList taskList) {
+    public String displayList(TaskList taskList) {
         if (taskList.getSize() == 0) {
-            System.out.println("add anything using 'todo', 'deadline' or 'event'");
+            String resultingLine = "add anything using 'todo', 'deadline' or 'event'";
+            System.out.println(resultingLine);
+            return resultingLine;
         } else {
-            System.out.println(" > here you go!");
+            String defaultLine = " > here you go!";
+            String itemList = "";
+            System.out.println(defaultLine);
             // loop through the arraylist to show everything
             for (int count = 0; count < taskList.getSize(); count++) {
                 Task eachTask = taskList.get(count);
                 int countFromOne = count + 1;
+                itemList += countFromOne + ". " + eachTask.toString() + '\n';
                 System.out.println(countFromOne + ". " + eachTask.toString());
             }
+            return itemList;
         }
     }
 
 
-    public void displayFind(TaskList taskList) {
-        System.out.println(" > here are the matching tasks in your list!");
+    /**
+     * Displays items searched by user.
+     * @param taskList
+     * @return
+     */
+    public String displayFind(TaskList taskList) {
+        String defaultLine = " > here are the matching tasks in your list!";
+        System.out.println(defaultLine);
+        return defaultLine + '\n' + displayList(taskList);
     }
 
     /**
@@ -136,23 +162,29 @@ public class Ui {
     /**
      * Displays straight line.
      */
-    public void endOfCommand() {
-        System.out.println("------------------------------------");
+    public String endOfCommand() {
+        String defaultLine = "------------------------------------";
+        System.out.println(defaultLine);
+        return defaultLine;
     }
 
     /**
      * Displays straight line.
      */
-    public void endOfResponse() {
-        System.out.println("==================================Oo");
+    public String endOfResponse() {
+        String defaultLine = "==================================Oo";
+        System.out.println(defaultLine);
+        return defaultLine;
     }
 
     /**
      * Displays error message
      * @param e Exception
      */
-    public void showError(Exception e) {
-        System.out.println(e.getMessage());
+    public String showError(Exception e) {
+        String defaultLine = e.getMessage();
+        System.out.println(defaultLine);
+        return defaultLine;
     }
 
 }

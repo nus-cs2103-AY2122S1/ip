@@ -20,7 +20,7 @@ public class FindCommand extends Command {
      * @param ui User Interface to deal with interactions with user.
      * @param storage Storage to store data of user.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             ArrayList<Task> list = new ArrayList<>();
             TaskList listAfterSearch = new TaskList(list);
@@ -30,10 +30,9 @@ public class FindCommand extends Command {
                     listAfterSearch.add(taskMatch);
                 }
             }
-            ui.displayFind(listAfterSearch);
-            ui.displayList(listAfterSearch);
+            return ui.displayFind(listAfterSearch);
         } catch (Exception e) {
-            ui.showError(e);
+            return ui.showError(e);
         }
     }
 }
