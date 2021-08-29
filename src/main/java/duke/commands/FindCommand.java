@@ -25,7 +25,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage store, Ui ui) throws EmptyListException, TaskNotFoundException {
-        taskList.printFindTasks(ui, this.keyword);
+    public String execute(TaskList taskList, Storage store, Ui ui) throws EmptyListException, TaskNotFoundException {
+        return taskList.printFindTasks(ui, this.keyword);
     }
 }

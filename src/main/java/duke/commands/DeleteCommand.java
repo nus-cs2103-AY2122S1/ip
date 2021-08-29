@@ -22,10 +22,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage store, Ui ui)
+    public String execute(TaskList taskList, Storage store, Ui ui)
             throws DukeFileException, TaskNotFoundException {
         if (taskList.getSize() - 1 >= this.index && this.index >= 0) {
-            taskList.deleteTask(this.index, store, ui);
+            Task deletedTask = taskList.deleteTask(this.index, store);
+            return ui.printRemoveTask(deletedTask, taskList.getSize());
         } else {
             throw new TaskNotFoundException(this.index + 1);
         }

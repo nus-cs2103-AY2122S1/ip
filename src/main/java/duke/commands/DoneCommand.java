@@ -23,10 +23,11 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage store, Ui ui)
+    public String execute(TaskList taskList, Storage store, Ui ui)
             throws DukeFileException, TaskIsCompleteException, TaskNotFoundException {
         if (taskList.getSize() - 1 >= this.index && this.index >= 0) {
-            taskList.markTask(this.index, store, ui);
+            Task taskDone = taskList.markTask(this.index, store);
+            return ui.printMarkTaskDone(taskDone);
         } else {
             throw new TaskNotFoundException(this.index + 1);
         }

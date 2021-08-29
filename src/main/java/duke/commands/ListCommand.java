@@ -18,8 +18,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage store, Ui ui) throws EmptyListException {
-        taskList.printTasks(ui);
+    public String execute(TaskList taskList, Storage store, Ui ui) throws EmptyListException {
+        return taskList.printTasks(ui);
     }
 
     @Override

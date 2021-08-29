@@ -65,9 +65,10 @@ public abstract class Command {
      * @param taskList  A TaskList instance that may store or remove task (if any) by command.
      * @param store  A Storage instance that records the task list after executing the command.
      * @param ui  An Ui instance that prints the message generated from the action specified by the command.
+     * @return A String representing the message of the action.
      * @throws DukeException An Exception thrown if Duke gets an Error
      */
-    public abstract void execute(TaskList taskList, Storage store, Ui ui)
+    public abstract String execute(TaskList taskList, Storage store, Ui ui)
             throws DukeException;
 
     /**
