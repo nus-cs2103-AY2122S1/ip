@@ -2,8 +2,17 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Class that parses the user's input.
+ */
 public class Parser {
 
+    /**
+     * Parses the user's input.
+     * @param command The user's input.
+     * @return The command to be executed.
+     * @throws DukeException If the command is invalid.
+     */
     public static Command parse(String command) throws DukeException {
         if (command.equals("bye")) {
             return new ExitCommand();
