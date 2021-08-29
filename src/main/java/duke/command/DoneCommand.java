@@ -27,14 +27,17 @@ public class DoneCommand extends Command {
      * @param tasks list of tasks within chat bot.
      * @param ui user interface of chat bot.
      * @param storage file directory manager.
+     * @return chat bot response message.
      * @throws DukeException If unable to done task.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             int index = Integer.parseInt(getLine()) - 1;
-            ui.showDone(tasks.done(index));
+            String output = ui.showDone(tasks.done(index));
             super.execute(tasks, ui, storage);
+
+            return output;
         } catch (Exception e) {
             throw new DukeException(Messages.EXIST.toString());
         }

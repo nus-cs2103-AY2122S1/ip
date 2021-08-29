@@ -9,47 +9,47 @@ public class Ui {
     /**
      * Displays large logo and welcome message.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
 
         String greet = "____________________________________________________________\n"
                      + "Hello! I'm Duke\n"
                      + "What can I do for you?\n"
                      + "____________________________________________________________";
-        System.out.println(greet);
+
+        return logo + greet;
     }
 
     /**
      * Displays loading error message.
      */
-    public void showLoadingError() {
-        System.out.println("An error occurred when loading file.");
+    public String showLoadingError() {
+        return  "An error occurred when loading file.";
     }
 
     /**
      * Displays goodbye message.
      */
-    public void showBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Displays error message.
      */
-    public void showError(String message) {
-        System.out.println("☹ OOPS!!! " + message);
+    public String showError(String message) {
+        return "☹ OOPS!!! " + message;
     }
 
     /**
      * Displays a line.
      */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
+    public String showLine() {
+        return "____________________________________________________________";
     }
 
     /**
@@ -66,10 +66,10 @@ public class Ui {
      * @param task task added.
      * @param size total size of TaskList.
      */
-    public void showAdded(String task, int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.printf("Now you have %d tasks in the list.%n", size);
+    public String showAdded(String task, int size) {
+        return String.format("Got it. I've added this task:\n"
+                        + "%s\n"
+                        + "Now you have %d tasks in the list.", task, size);
     }
 
     /**
@@ -78,10 +78,10 @@ public class Ui {
      * @param task task added.
      * @param size total size of TaskList.
      */
-    public void showDelete(String task, int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.printf("Now you have %d tasks in the list.%n", size);
+    public String showDelete(String task, int size) {
+        return String.format("Got it. I've deleted this task:\n"
+                + "%s\n"
+                + "Now you have %d tasks in the list.", task, size);
     }
 
     /**
@@ -89,9 +89,8 @@ public class Ui {
      *
      * @param tasks list of task found.
      */
-    public void showFind(String tasks) {
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(tasks);
+    public String showFind(String tasks) {
+        return String.format("Here are the matching tasks in your list:\n%s", tasks);
     }
 
     /**
@@ -99,9 +98,8 @@ public class Ui {
      *
      * @param tasks list of task.
      */
-    public void showList(String tasks) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(tasks);
+    public String showList(String tasks) {
+        return String.format("Here are the tasks in your list:\n%s", tasks);
     }
 
     /**
@@ -109,8 +107,7 @@ public class Ui {
      *
      * @param task task completed.
      */
-    public void showDone(String task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+    public String showDone(String task) {
+        return String.format("Nice! I've marked this task as done:\n%s", task);
     }
 }

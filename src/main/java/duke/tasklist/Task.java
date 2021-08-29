@@ -48,6 +48,8 @@ public class Task {
 
     /**
      * Returns name of task.
+     *
+     * @return name of task.
      */
     public String getName() {
         return name;
@@ -56,7 +58,7 @@ public class Task {
     /**
      * Returns custom string of task for saving.
      *
-     * @return task save description
+     * @return task save description.
      */
     public String save() {
         int done = isDone ? 1 : 0;

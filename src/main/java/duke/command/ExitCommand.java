@@ -24,11 +24,12 @@ public class ExitCommand extends Command {
      *
      * @param tasks list of tasks within chat bot.
      * @param ui user interface of chat bot.
+     * @return chat bot response message.
      * @param storage file directory manager.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showBye();
     }
 
     /**
