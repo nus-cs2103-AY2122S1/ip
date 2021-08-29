@@ -1,20 +1,30 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.nio.file.Path;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import duke.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
-import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
+/**
+ * Test Storage for correct saving and loading of files.
+ */
 public class StorageTest {
+    /**
+     * The Temp path to test for saving and creating files from.
+     */
     @TempDir
     Path tempPath;
 
+    /**
+     * Test loading and saving to a file path.
+     */
     @Test
     public void loadAndSave() {
         Path file = tempPath.resolve("duke.txt");
@@ -29,10 +39,10 @@ public class StorageTest {
         TaskList loadList = new TaskList();
         Storage loadStorage = new Storage(loadList, file.toString());
 
-        String result = "Here are the tasks in your list:\n" +
-                "1.[T][X] life is tough\n" +
-                "2.[D][ ] monke (by: Aug 23 2021 06:00pm)\n" +
-                "3.[E][ ] monke (at: Aug 23 2021 06:00pm)";
+        String result = "Here are the tasks in your list:\n"
+                + "1.[T][X] life is tough\n"
+                + "2.[D][ ] monke (by: Aug 23 2021 06:00pm)\n"
+                + "3.[E][ ] monke (at: Aug 23 2021 06:00pm)";
 
         try {
             saveStorage.save();

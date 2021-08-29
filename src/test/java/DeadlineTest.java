@@ -1,50 +1,73 @@
-import duke.task.Deadline;
-import org.junit.jupiter.api.Test;
-
-import java.time.format.DateTimeParseException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.format.DateTimeParseException;
+
+import org.junit.jupiter.api.Test;
+
+import duke.task.Deadline;
+
+
+/**
+ * Test cases for Deadline.
+ */
 public class DeadlineTest {
 
+    /**
+     * Test constructing a Deadline object with only a date.
+     */
     @Test
-    public void dateOnlyTest() {
+    public void deadline_dateOnly_correctStringRepresentation() {
         Deadline deadline = new Deadline("work", "2021-08-23");
         assertEquals(deadline.toString(), "[D][ ] work (by: Aug 23 2021)");
     }
 
+    /**
+     * Test constructing a Deadline object with both date and time.
+     */
     @Test
-    public void dateTimeTest() {
+    public void deadline_dateAndTime_correctStringRepresentation() {
         Deadline deadline = new Deadline("work", "2021-08-23", "18:00");
         assertEquals(deadline.toString(), "[D][ ] work (by: Aug 23 2021 06:00pm)");
     }
 
+    /**
+     * Test marking a Deadline object with only date as done.
+     */
     @Test
-    public void dateOnlyMarkDoneTest() {
+    public void markDone_dateOnlyDeadline_correctStringRepresentation() {
         Deadline deadline = new Deadline("work", "2021-08-23");
         deadline.markDone();
         assertEquals(deadline.toString(), "[D][X] work (by: Aug 23 2021)");
     }
 
+    /**
+     * Test marking a Deadline object with both date and time as done.
+     */
     @Test
-    public void dateTimeMarkDoneTest() {
+    public void markDone_dateAndTimeDeadline_correctStringRepresentation() {
         Deadline deadline = new Deadline("work", "2021-08-23", "18:00");
         deadline.markDone();
         assertEquals(deadline.toString(), "[D][X] work (by: Aug 23 2021 06:00pm)");
     }
 
+    /**
+     * Invalid date test.
+     */
     @Test
-    public void invalidDateTest() {
+    public void deadline_invalidDate_dateTimeParseExceptionThrown() {
         assertThrows(DateTimeParseException.class, () -> {
-            Deadline deadline = new Deadline("work", "2021-20-23");
+            new Deadline("work", "2021-20-23");
         });
     }
 
+    /**
+     * Invalid time test.
+     */
     @Test
-    public void invalidTimeTest() {
+    public void deadline_invalidTime_dateTimeParseExceptionThrown() {
         assertThrows(DateTimeParseException.class, () -> {
-            Deadline deadline = new Deadline("work", "2021-08-23", "42:69");
+            new Deadline("work", "2021-08-23", "42:69");
         });
     }
 }

@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.UI;
+import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -32,6 +32,6 @@ public class FindCommand extends Command {
                 result += "\n" + i + "." + tasks.get(i).toString();
             }
         }
-        System.out.println(UI.tabAndFormat(result));
+        System.out.println(Ui.tabAndFormat(result));
     }
 }

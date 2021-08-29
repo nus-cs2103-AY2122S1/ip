@@ -1,9 +1,9 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.task.TaskList;
-
-import java.io.IOException;
 
 /**
  * The type Duke that is the main of the program.
@@ -15,7 +15,7 @@ public class Duke {
     /** storage to store tasks */
     private final TaskList tasks;
     /** handles basic interaction with the user and string formatting */
-    private final UI ui;
+    private final Ui ui;
 
     /**
      * Instantiates a new Duke.
@@ -24,7 +24,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         this.tasks = new TaskList();
-        this.ui = new UI();
+        this.ui = new Ui();
         // Initialise Storage with the tasks storage and the filepath to the save file
         this.storage = new Storage(this.tasks, filePath);
         // Loading save file from the filepath
@@ -32,7 +32,7 @@ public class Duke {
             storage.load();
         } catch (IOException e) {
             System.out.println(
-                    UI.tabAndFormat(
+                    Ui.tabAndFormat(
                             "☹ OOPS!!! Please enter a proper file path! e.g.:\n'./duke.txt'"
                     )
             );
@@ -64,7 +64,7 @@ public class Duke {
                 isExit = userCommand.isExit();
                 storage.save();
             } catch (DukeException | IllegalArgumentException e) {
-                System.out.println(UI.tabAndFormat(e.getMessage()));
+                System.out.println(Ui.tabAndFormat(e.getMessage()));
             } catch (IOException e) {
                 e.printStackTrace();
             }

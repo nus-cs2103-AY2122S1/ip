@@ -1,10 +1,17 @@
 package duke;
 
-import duke.command.*;
-import duke.task.TaskList;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.command.AddCommand;
+import duke.command.AddCommandType;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.task.TaskList;
 
 /**
  * The type Parser that parses user input and returns the appropriate command.
