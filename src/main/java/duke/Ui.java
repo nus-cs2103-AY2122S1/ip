@@ -18,91 +18,79 @@ public class Ui {
     }
 
     /**
-     * Greets the user.
-     */
-    public void greet() {
-        String greet = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(greet);
-    }
-
-    /**
      * Shows upon exiting the program.
      */
-    public void bye() {
-        System.out.println("___________________________________________________");
-        String byeCommand = "Bye. Hope to see you again soon!";
-        System.out.println(byeCommand);
-        System.out.println("___________________________________________________\n");
+    public String bye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Displays the task list.
+     *
+     * @return task display.
      */
-    public void displayTasks() {
-        System.out.println("___________________________________________________");
-        System.out.println("Here are the tasks in your list:");
+    public String displayTasks() {
+        String tasks = "Here are the tasks in your list:\n";
+
         for (int i = 0; i < this.taskList.size(); i++) {
-            System.out.println((i + 1) + ". " + taskList.get(i).toString());
+            tasks += (i + 1) + ". " + taskList.get(i).toString() + "\n";
         }
-        System.out.println("___________________________________________________\n");
+        return tasks;
     }
 
     /**
      * Notifies about the newly added task.
      *
      * @param task The new task added.
+     * @return Added task.
      */
-    public void showAddedTask(Task task) {
+    public String showAddedTask(Task task) {
         String output = "Added: " + task.toString();
-        System.out.println("___________________________________________________");
         System.out.println(output);
-        System.out.println("Now you have " + this.taskList.size() + " task"
-                + ((this.taskList.size() <= 1) ? "" : "s") + " in the list");
-        System.out.println("___________________________________________________\n");
+        return output + "\n"
+                + "Now you have " + this.taskList.size() + " task"
+                + ((this.taskList.size() <= 1) ? "" : "s") + " in the list";
     }
 
     /**
      * Notifies about the newly deleted task.
      *
      * @param toBeDeleted The task to be deleted.
+     * @return Deleted task.
      */
-    public void showDeletedTask(Task toBeDeleted) {
-        System.out.println("___________________________________________________");
-        System.out.println(" Noted. I've removed this task:");
-        System.out.println(toBeDeleted);
-        System.out.println("Now you have " + this.taskList.size()
-                + " task" + ((this.taskList.size() <= 1) ? "" : "s") + " in the list");
-        System.out.println("___________________________________________________\n");
+    public String showDeletedTask(Task toBeDeleted) {
+        return "Noted. I've removed this task:\n"
+                + toBeDeleted + "\n"
+                + "Now you have " + this.taskList.size()
+                + " task" + ((this.taskList.size() <= 1) ? "" : "s") + " in the list";
     }
 
     /**
      * Notifies about the task being marked as done.
      *
      * @param markedTask The task marked as done.
+     * @return Marked tasks
      */
-    public void showMarkedAsDone(Task markedTask) {
-        System.out.println("___________________________________________________");
-        System.out.println(" Nice! I've marked this task as done:\n" + markedTask);
-        System.out.println("___________________________________________________\n");
+    public String showMarkedAsDone(Task markedTask) {
+        return " Nice! I've marked this task as done:\n" + markedTask;
     }
 
     /**
      * Show a list of tasks found.
      *
      * @param taskList A list of tasks.
+     * @return found tasks.
      */
-    public void showFoundTask(List<Task> taskList) {
+    public String showFoundTask(List<Task> taskList) {
         if (taskList.isEmpty()) {
-            System.out.println("___________________________________________________");
-            System.out.println("OOPS, I couldn't find anything in your task list.");
-            System.out.println("___________________________________________________\n");
+            return "OOPS, I couldn't find anything in your task list.";
         } else {
-            System.out.println("___________________________________________________");
-            System.out.println("Here are the matching tasks in your list:");
+            String result = "Here are the matching tasks in your list:\n";
+
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.println((i + 1) + ". " + taskList.get(i).toString());
+                result += (i + 1) + ". " + taskList.get(i).toString() + "\n";
             }
-            System.out.println("___________________________________________________\n");
+            return result;
         }
     }
 }

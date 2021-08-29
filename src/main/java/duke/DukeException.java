@@ -18,9 +18,7 @@ class EmptyDescriptionException extends DukeException {
 
     @Override
     public String toString() {
-        return "___________________________________________________\n"
-                + "☹ OOPS!!! The description of a " + this.action + " cannot be empty.\n"
-                + "___________________________________________________\n";
+        return "OOPS!!! The description of a " + this.action + " cannot be empty.\n";
     }
 }
 
@@ -31,9 +29,7 @@ class UnrecognizableCommandException extends DukeException {
 
     @Override
     public String toString() {
-        return "___________________________________________________\n"
-                + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                + "___________________________________________________\n";
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
     }
 }
 
@@ -43,9 +39,7 @@ class UnrecognizableCommandException extends DukeException {
 class NoSuchTaskException extends DukeException {
     @Override
     public String toString() {
-        return "___________________________________________________\n"
-                + "☹ OOPS!!! There seems to be no such task.\n"
-                + "___________________________________________________\n";
+        return "OOPS!!! There seems to be no such task.\n";
     }
 }
 
@@ -61,9 +55,7 @@ class InvalidTaskIndexException extends DukeException {
 
     @Override
     public String toString() {
-        return "___________________________________________________\n"
-                + "Please enter the command " + action + " with a valid number\n"
-                + "___________________________________________________\n";
+        return "Please enter the command " + action + " with a valid number\n";
     }
 }
 
@@ -74,8 +66,7 @@ class InvalidDateTimeException extends DukeException {
 
     @Override
     public String toString() {
-        return "___________________________________________________\n"
-                + "☹ OOPS!!! please ensure you entered a valid date with format: yyyy-mm-dd\n"
-                + "___________________________________________________\n";
+        return "OOPS!!! please ensure you entered a valid date with format: yyyy-mm-dd\n";
+
     }
 }
