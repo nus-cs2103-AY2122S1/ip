@@ -12,8 +12,8 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
- *  This class is the entry point into the program, Duke.
- *  Duke is a chat bot that helps manage tasks that you have.
+ *  This class is the entry point to all other classes,
+ *  also includes GUI.
  *
  * @author Ryan Tian Jun.
  */
