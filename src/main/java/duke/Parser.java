@@ -1,9 +1,9 @@
 package duke;
 
+import static java.lang.Integer.parseInt;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-
-import static java.lang.Integer.parseInt;
 
 /**
  * This class represents a parser, which extracts the user's input into commands

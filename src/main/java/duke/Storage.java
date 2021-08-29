@@ -1,9 +1,6 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import static java.lang.Integer.parseInt;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static java.lang.Integer.parseInt;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * This class represents a Storage object, which saves the user's tasks into a text file.
@@ -60,8 +60,9 @@ public class Storage {
      *
      * @return List of Tasks extracted from file.
      * @throws FileNotFoundException If file is not found.
+     * @throws DukeException If task import fails to parse task list.
      */
-    public List<Task> readFile() throws FileNotFoundException {
+    public List<Task> readFile() throws FileNotFoundException, DukeException {
         List<Task> output = new ArrayList<>();
         Scanner sc = new Scanner(this.file);
         while (sc.hasNext()) {
@@ -104,11 +105,11 @@ public class Storage {
      * @param input String representing the task to be created.
      * @return Task created.
      */
-    private Task readTask(String input) {
+    private Task readTask(String input) throws DukeException {
         String[] splitInput = input.split("\\|", -1);
         String identifier = splitInput[0];
         boolean isComplete = parseInt(splitInput[1]) == 1;
-        Task task = null;
+        Task task;
         switch (identifier) {
         case Todo.IDENTIFIER:
             task = new Todo(splitInput[2]);
@@ -119,6 +120,8 @@ public class Storage {
         case Event.IDENTIFIER:
             task = new Event(splitInput[2], parseDate(splitInput[3]));
             break;
+        default:
+            throw new DukeException("Imported task with invalid type.");
         }
         if (isComplete) {
             task.setDone();
