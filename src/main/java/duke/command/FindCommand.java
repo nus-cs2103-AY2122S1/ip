@@ -48,6 +48,7 @@ public class FindCommand extends Command {
         // String standard response for search begin.
         String begin = ui.getFindBegin();
 
+        StringBuilder foundTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
 
@@ -55,7 +56,8 @@ public class FindCommand extends Command {
             if (task.getDescription().contains(keyword)) {
                 // Add 1 as display index is 1-based while TaskList index is 0-based.
                 int idx = i + 1;
-                System.out.println(idx + "." + task);
+                String foundTask = idx + "." + task + "\n";
+                foundTasks.append(foundTask);
                 counter++;
             }
         }
@@ -63,7 +65,7 @@ public class FindCommand extends Command {
         // String standard response for search success.
         String success = ui.getFindSuccess(counter, keyword);
 
-        return begin + "\n" + success;
+        return begin + "\n" + foundTasks + success;
     }
 
     /**
