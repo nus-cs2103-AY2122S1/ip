@@ -13,7 +13,7 @@ public class MarkDoneCommand implements Command{
     /**
      * Constructor of <code>MarkDoneCommand</code>
      *
-     * @param index
+     * @param index index of the task
      */
     public MarkDoneCommand(int index) {
         this.index = index;
