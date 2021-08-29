@@ -47,7 +47,7 @@ public class TaskList {
             if (task instanceof Event) {
                 Event event = (Event) task;
                 if (event.startDateTime.toLocalDate().compareTo(date) <= 0 && event.endDateTime.toLocalDate()
-                        .compareTo(date) >= 0) {
+                    .compareTo(date) >= 0) {
                     foundTasks.add(task);
                 }
 
@@ -73,7 +73,8 @@ public class TaskList {
 
             if (task.description.indexOf(input) != -1) {
                 foundTasks.add(task);
-            };
+            }
+            ;
         }
 
         return foundTasks;

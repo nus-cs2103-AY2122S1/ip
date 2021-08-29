@@ -1,6 +1,13 @@
 package duke;
 
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Pattern;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -13,13 +20,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
-import java.util.regex.Pattern;
-
 /**
  * The Parser class is responsible for parsing all user commands and input dates and times for Duke.
  *
@@ -28,12 +28,12 @@ import java.util.regex.Pattern;
 public class Parser {
 
     private static String errorMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n"
-            + "or as date and time: DATE TIME\n"
-            + "Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY\n"
-            + "Accepted formats for TIME (24H format): TT:TT, TTTT\n"
-            + "Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,\n"
-            + "2019-02-13 18:00\n"
-            + "Examples for DATE: 13/2/2019, 2019-02-13";
+        + "or as date and time: DATE TIME\n"
+        + "Accepted formats for DATE: YYYY-MM-DD, DD/MM/YYYY\n"
+        + "Accepted formats for TIME (24H format): TT:TT, TTTT\n"
+        + "Examples for DATE TIME: 13/2/2019 1800, 13/2/2019 18:00, 2019-02-13 1800,\n"
+        + "2019-02-13 18:00\n"
+        + "Examples for DATE: 13/2/2019, 2019-02-13";
 
 
     /**
@@ -58,7 +58,7 @@ public class Parser {
 
             if (parsedInput.length != 2) {
                 throw (new DukeException("Please specify a task you would like marked as done Sir/Mdm:\n"
-                        + ui.list(tasks)));
+                    + ui.list(tasks)));
             }
 
             int taskToMark;
@@ -83,7 +83,7 @@ public class Parser {
 
             if (parsedInput.length != 2) {
                 throw (new DukeException("Please specify a task you would like to delete Sir/Mdm:\n"
-                        + ui.list(tasks)));
+                    + ui.list(tasks)));
             }
 
             int taskToDelete;
@@ -109,14 +109,14 @@ public class Parser {
             String[] values = input.split(" ");
             if (values.length != 2) {
                 throw new DukeException("Please specify a date for which to find deadlines and events "
-                        + "Sir/Mdm!");
+                    + "Sir/Mdm!");
             } else {
                 try {
                     LocalDate date = Parser.parseDate(values[1]);
                     return new FindByDateCommand(date, tasks, ui);
                 } catch (DukeException e) {
                     throw new DukeException("Wrong format for date Sir/Mdm. Examples of dates accepted: "
-                            + "2/12/2019, 2019-12-02");
+                        + "2/12/2019, 2019-12-02");
                 }
             }
         } else if (input.startsWith("find")) {
@@ -166,7 +166,7 @@ public class Parser {
     /**
      * Formats LocalDateTime object into String for UI display.
      *
-     * @param dateTime The LocalDateTime object to be formatted.
+     * @param dateTime   The LocalDateTime object to be formatted.
      * @param isDateOnly Determines whether time will be displayed along with the date.
      * @return Formatted date and/or time String.
      */
@@ -176,11 +176,11 @@ public class Parser {
 
         if (isDateOnly) {
             return String.format("%s %s %s", dateTime.getDayOfMonth(), dateTime.getMonth().toString().substring(0, 1)
-                    + dateTime.getMonth().toString().substring(1).toLowerCase(), dateTime.getYear());
+                + dateTime.getMonth().toString().substring(1).toLowerCase(), dateTime.getYear());
         }
         return String.format("%s %s %s %s", dateTime.getDayOfMonth(), dateTime.getMonth().toString().substring(0, 1)
-                        + dateTime.getMonth().toString().substring(1).toLowerCase(), dateTime.getYear(),
-                dateTime.toString().substring(len - 5));
+                + dateTime.getMonth().toString().substring(1).toLowerCase(), dateTime.getYear(),
+            dateTime.toString().substring(len - 5));
     }
 
 

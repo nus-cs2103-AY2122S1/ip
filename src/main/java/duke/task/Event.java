@@ -1,10 +1,10 @@
 package duke.task;
 
 
+import java.time.LocalDateTime;
+
 import duke.DukeException;
 import duke.Parser;
-
-import java.time.LocalDateTime;
 
 public class Event extends Task {
     protected LocalDateTime startDateTime;
@@ -12,27 +12,38 @@ public class Event extends Task {
     protected String taskType = "[E]";
     protected boolean isDateOnly = false;
 
-    public boolean getIsDateOnly() {
-        return isDateOnly ? true : false;
+    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        super(description);
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
     }
 
-    public LocalDateTime getStartDateTime() {
-        return LocalDateTime.parse(startDateTime.toString());
+    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean isDone,
+                 boolean isDateOnly) {
+        super(description);
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.isDone = isDone;
+        this.isDateOnly = isDateOnly;
     }
 
-    public LocalDateTime getEndDateTime() {
-        return LocalDateTime.parse(endDateTime.toString());
+
+    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean isDateOnly) {
+        super(description);
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+        this.isDateOnly = isDateOnly;
     }
 
 
     public static Event of(String description, String input) throws DukeException {
 
         String exceptionMessage = "Wrong format for event timeline Sir/Mdm. Please use either formats:\n"
-                + "'DATE TIME to DATE TIME' or 'DATE to DATE' \n"
-                + "Hint: Use 'to' keyword and ensure that start and end date either both\n"
-                + "include TIME or both exclude TIME\n"
-                + "Examples for DATE TIME to DATE TIME: 13/2/2019 1800 to 13/2/2019 1900\n"
-                + "Examples for DATE: 13/2/2019 to 14/2/2019";
+            + "'DATE TIME to DATE TIME' or 'DATE to DATE' \n"
+            + "Hint: Use 'to' keyword and ensure that start and end date either both\n"
+            + "include TIME or both exclude TIME\n"
+            + "Examples for DATE TIME to DATE TIME: 13/2/2019 1800 to 13/2/2019 1900\n"
+            + "Examples for DATE: 13/2/2019 to 14/2/2019";
 
         String[] dateTimes = input.split("to");
         if (dateTimes.length != 2) {
@@ -67,34 +78,22 @@ public class Event extends Task {
 
     }
 
-
-    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        super(description);
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+    public boolean getIsDateOnly() {
+        return isDateOnly ? true : false;
     }
 
-    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean isDone,
-                 boolean isDateOnly) {
-        super(description);
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
-        this.isDone = isDone;
-        this.isDateOnly = isDateOnly;
+    public LocalDateTime getStartDateTime() {
+        return LocalDateTime.parse(startDateTime.toString());
     }
 
-
-    public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean isDateOnly) {
-        super(description);
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
-        this.isDateOnly = isDateOnly;
+    public LocalDateTime getEndDateTime() {
+        return LocalDateTime.parse(endDateTime.toString());
     }
 
     @Override
     public String toString() {
         return taskType + super.toString() + " (at: " + Parser.dateTimeToString(this.startDateTime, isDateOnly)
-                + " to " + Parser.dateTimeToString(this.endDateTime, isDateOnly) + ")";
+            + " to " + Parser.dateTimeToString(this.endDateTime, isDateOnly) + ")";
     }
 
     @Override
@@ -105,8 +104,8 @@ public class Event extends Task {
             Event event = (Event) o;
 
             return description.equals(event.description) && isDateOnly == event.isDateOnly
-                    && isDone == event.isDone && startDateTime.equals(event.startDateTime)
-                    && endDateTime.equals(event.endDateTime);
+                && isDone == event.isDone && startDateTime.equals(event.startDateTime)
+                && endDateTime.equals(event.endDateTime);
         }
         return false;
     }
