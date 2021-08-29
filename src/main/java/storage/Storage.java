@@ -5,7 +5,13 @@ import parser.Parser;
 import task.TaskList;
 import ui.Ui;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,7 +28,6 @@ import java.util.stream.Collectors;
  * @author GitHub: kanjitp
  * @version 0.01
  * @since 0.00
- *
  */
 public class Storage {
 
@@ -33,9 +38,9 @@ public class Storage {
     /** default name for the file */
     private static final String DEFAULT_FILE_NAME = "task_list";
 
-    /** the filePath for the save file*/
+    /** the filePath for the save file */
     private String filePath;
-    /** the taskList read from the save file*/
+    /** the taskList read from the save file */
     private TaskList taskListRead;
 
 
@@ -65,7 +70,7 @@ public class Storage {
                 createSaveLocation();
             }
             // the save file to be used as simple text file in this update
-            this.filePath = DIRECTORY_PATH + DATA_PATH +  "/" + fileName + ".txt";
+            this.filePath = DIRECTORY_PATH + DATA_PATH + "/" + fileName + ".txt";
             WRITER = new BufferedWriter(new FileWriter(filePath, true));
             READER = new BufferedReader(new FileReader(filePath));
         } catch (Exception e) {
@@ -75,6 +80,7 @@ public class Storage {
 
     /**
      * check if within the data folder of alice contain the following fileName or not
+     *
      * @param fileName the file name of the file in data folder
      * @return if the file name exist or not
      * @throws IOException if there is any error dealing with the system IO
@@ -86,7 +92,7 @@ public class Storage {
             createSaveLocation();
         }
         return new ArrayList<>(Arrays.stream(Storage.getFilesFromDirectory(Storage.DIRECTORY_PATH + Storage.DATA_PATH))
-                    .map(File::getName).collect(Collectors.toList())).contains(full_file_name);
+                .map(File::getName).collect(Collectors.toList())).contains(full_file_name);
     }
 
     /**

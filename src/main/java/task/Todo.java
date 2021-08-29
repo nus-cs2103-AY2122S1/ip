@@ -7,7 +7,6 @@ package task;
  * @author GitHub: kanjitp
  * @version 0.01
  * @since 0.00
- *
  */
 public class Todo extends Task {
     /**
@@ -23,7 +22,7 @@ public class Todo extends Task {
      * Default constructor for To-Do task
      *
      * @param description the description of the To-Do task
-     * @param isDone whether the task is done
+     * @param isDone      whether the task is done
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);

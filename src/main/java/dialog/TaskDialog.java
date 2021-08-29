@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
  * @author GitHub: kanjitp
  * @version 0.01
  * @since 0.00
- *
  */
 public class TaskDialog extends Dialog {
     // This class is a child of dialog class which allow the user to interact with the task
@@ -35,7 +34,6 @@ public class TaskDialog extends Dialog {
 
     /**
      * Factory method for creating TaskDialog as Dialog type (to be cast by developer)
-     *
      * Factory method from TaskDialog allow the user to fetch the existing Dialog in the archive.
      * The default TaskList will have an empty ArrayList of task.
      *
@@ -54,10 +52,9 @@ public class TaskDialog extends Dialog {
 
     /**
      * Factory method for creating TaskDialog as Dialog type (to be cast by developer)
-     *
      * Factory method from TaskDialog allow the user to fetch the existing Dialog in the archive.
      *
-     * @param id the id of the TaskDialog
+     * @param id       the id of the TaskDialog
      * @param taskList the taskList the TaskDialog is going to have
      * @return TaskDialog of type Dialog
      */
@@ -95,16 +92,17 @@ public class TaskDialog extends Dialog {
      */
     public TaskDialog by(String deadline) throws InvalidTimeFormatException {
         LocalDate dlDate = Parser.parseTimeString(deadline);
-        return new TaskDialog(new ArrayList<>(List.of("task.Deadline: " + dlDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))),
+        return new TaskDialog(new ArrayList<>(List.of("task.Deadline: "
+                + dlDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))),
                 new TaskList(new ArrayList<>(this.taskList.getTasks().stream().filter((task) -> {
-            if (!task.getClass().getSuperclass().getName().equals("task.TimeTask")) {
-                // return any task without time associated with it
-                return true;
-            } else {
-                TimeTask timetask = (TimeTask) task;
-                return timetask.getTime().isBefore(dlDate) || timetask.getTime().isEqual(dlDate);
-            }
-        }).collect(Collectors.toList()))));
+                    if (!task.getClass().getSuperclass().getName().equals("task.TimeTask")) {
+                        // return any task without time associated with it
+                        return true;
+                    } else {
+                        TimeTask timetask = (TimeTask) task;
+                        return timetask.getTime().isBefore(dlDate) || timetask.getTime().isEqual(dlDate);
+                    }
+                }).collect(Collectors.toList()))));
     }
 
     /**
@@ -133,7 +131,7 @@ public class TaskDialog extends Dialog {
      *
      * @param index the index of the Task in TaskList in this TaskDialog to mark as done
      * @throws IndexOutOfBoundsException illegal index
-     * @throws DialogException dialog cannot have the same id while the app is running
+     * @throws DialogException           dialog cannot have the same id while the app is running
      */
     public void markTaskAsDone(int index) throws IndexOutOfBoundsException, DialogException {
         if (index < 0 || index > this.taskList.length()) {
@@ -156,7 +154,7 @@ public class TaskDialog extends Dialog {
      *
      * @param index the index of the task to be deleted in TaskList of this TaskDialog
      * @throws IndexOutOfBoundsException illegal index
-     * @throws DialogException dialog cannot have the same id while the app is running
+     * @throws DialogException           dialog cannot have the same id while the app is running
      */
     public void deleteTaskByIndex(int index) throws IndexOutOfBoundsException, DialogException {
         if (index < 0 || index > this.taskList.length()) {
@@ -186,10 +184,10 @@ public class TaskDialog extends Dialog {
     public String toString() {
         String dialogs = this.sentences.stream().reduce("    ", (s1, s2) -> s1 + s2 + "\n    ");
 
-        return "    ____________________________________________________________\n" +
-                dialogs +
-                "Here are the tasks in your list:\n"+
-                taskList +
-                "    ____________________________________________________________";
+        return "    ____________________________________________________________\n"
+                + dialogs
+                + "Here are the tasks in your list:\n"
+                + taskList
+                + "    ____________________________________________________________";
     }
 }

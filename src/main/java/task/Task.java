@@ -8,17 +8,14 @@ package task;
  * @author GitHub: kanjitp
  * @version 0.01
  * @since 0.00
- *
  */
 public abstract class Task {
-
     private String description;
     private boolean isDone;
 
     /**
      * Default constructor for Task to be used by its subclasses for convenience.
      * Abstract Task cannot be created.
-     *
      * isDone is set to false by default.
      *
      * @param description the description of the task
@@ -33,7 +30,7 @@ public abstract class Task {
      * Abstract Task cannot be created.
      *
      * @param description the description of the task
-     * @param isDone whether the task is done
+     * @param isDone      whether the task is done
      */
     public Task(String description, boolean isDone) {
         this.description = description;

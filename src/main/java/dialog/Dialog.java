@@ -5,19 +5,18 @@ import java.util.HashMap;
 
 /**
  * Dialog class deal with printing feedback to the user.
- *
  * Dialog stores sentences into an ArrayList before printing them in separate line
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
  * @version 0.01
  * @since 0.00
- *
  */
 public class Dialog {
 
     /** archive to be shared with its subclasses */
     protected static HashMap<String, Dialog> archive = new HashMap<>();
+
     /** sentences stored in the dialog */
     protected final ArrayList<String> sentences;
 
@@ -28,7 +27,7 @@ public class Dialog {
      */
     protected Dialog(ArrayList<String> sentences) {
         this.sentences = sentences;
-    };
+    }
 
     /**
      * Add sentence to current dialog
@@ -50,7 +49,6 @@ public class Dialog {
 
     /**
      * Generate dialog of specified Id.
-     *
      * Dialog is not to have the same Id to avoid duplication
      *
      * @param id the id of the dialog
@@ -95,8 +93,8 @@ public class Dialog {
     @Override
     public String toString() {
         String dialogs = this.sentences.stream().reduce("    ", (s1, s2) -> s1 + s2 + "\n    ");
-        return "    ____________________________________________________________\n" +
-                dialogs +
-                "____________________________________________________________";
+        return "    ____________________________________________________________\n"
+                + dialogs
+                + "____________________________________________________________";
     }
 }

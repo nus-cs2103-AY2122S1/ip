@@ -10,13 +10,10 @@ import java.time.format.DateTimeFormatter;
  * @author GitHub: kanjitp
  * @version 0.01
  * @since 0.00
- *
  */
 public class Deadline extends TimeTask {
-
     /**
      * Default constructor for deadline.
-     *
      * isDone is set to false and time is set to null.
      *
      * @param description the description of the deadline
@@ -27,11 +24,10 @@ public class Deadline extends TimeTask {
 
     /**
      * Default constructor for deadline.
-     *
      * time is set to null.
      *
      * @param description the description of the deadline
-     * @param isDone whether the deadline is done
+     * @param isDone      whether the deadline is done
      */
     public Deadline(String description, boolean isDone) {
         super(description, isDone);
@@ -41,8 +37,8 @@ public class Deadline extends TimeTask {
      * Default constructor for deadline.
      *
      * @param description the description of the deadline
-     * @param isDone whether the deadline is done
-     * @param time the LocalDate time object of the deadline
+     * @param isDone      whether the deadline is done
+     * @param time        the LocalDate time object of the deadline
      */
     public Deadline(String description, boolean isDone, LocalDate time) {
         super(description, isDone, time);
@@ -50,11 +46,10 @@ public class Deadline extends TimeTask {
 
     /**
      * Adapted constructor for deadline.
-     *
      * isDone is set to false.
      *
      * @param description the description of the deadline.
-     * @param by the time of the event with yyyy-MM-dd format
+     * @param by          the time of the event with yyyy-MM-dd format
      */
     public Deadline(String description, String by) {
         super(description, by);
@@ -64,8 +59,8 @@ public class Deadline extends TimeTask {
      * Adapted constructor for deadline.
      *
      * @param description the description of the deadline
-     * @param isDone whether the deadline is done
-     * @param by the time of the event with yyyy-MM-dd format
+     * @param isDone      whether the deadline is done
+     * @param by          the time of the event with yyyy-MM-dd format
      */
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone, by);
@@ -79,6 +74,7 @@ public class Deadline extends TimeTask {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + this.getTime().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + "(by: "
+                + this.getTime().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
