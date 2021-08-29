@@ -1,23 +1,24 @@
 /**
  * @author Hang Zelin
  *
- * Deadlines class that extends Task class. It is one of the types in 3 tasks.
+ * @description Events class that extends Task class. It is one of the types in 3 tasks.
  * Will contain a time in the form of "/by"
+ *
  */
-package duke.task;
+package Duke.Task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class Deadlines extends Task {
+public class Events extends Task{
 
-    private boolean done;
-    private String task;
-    private LocalDateTime time;
-    private String taskType = "D";
+    private boolean done = false;
+    private String task = "";
+    private LocalDateTime time = null;
+    private String taskType = "E";
 
-    public Deadlines(boolean done, String task, LocalDateTime time) {
+    public Events(boolean done, String task, LocalDateTime time) {
         this.done = done;
         this.task = task;
         this.time = time;
@@ -32,16 +33,16 @@ public class Deadlines extends Task {
             done_str = "X";
         }
 
-        return "[" + taskType + "]" + "[" + done_str + "] " + task + " (by: " + parsedTime() + ")";
+        return "[" + taskType + "]" + "[" + done_str + "] "  + task +" (at: " + ParsedTime() + ")";
     }
 
     @Override
-    public void markDone() {
+    public void MarkDone() {
         this.done = true;
     }
 
     @Override
-    public String parsedTime() {
+    public String ParsedTime() {
         String parsedTime = "";
         if (this.time != null) {
             parsedTime = this.time.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH));
@@ -58,15 +59,17 @@ public class Deadlines extends Task {
             return "I don't know the time";
         }
         return this.time.getDayOfMonth() + "/" + this.time.getMonthValue() + "/" + this.time.getYear() + " " +
-                ((this.time.getHour() < 10) ? "0" + this.time.getHour()
-                        : this.time.getHour())
-                + ((this.time.getMinute() < 10) ? "0" + this.time.getMinute()
-                : this.time.getMinute());
+                ((this.time.getHour() < 10)? "0" + this.time.getHour()
+                        :this.time.getHour())
+                + ((this.time.getMinute() < 10)? "0" + this.time.getMinute()
+                :this.time.getMinute());
     }
 
 
     @Override
     public String getSaveDataInfo() {
-        return this.taskType + " | " + (this.done ? 1 : 0) + " | " + task + " | " + getTime();
+        return this.taskType + " | " + (this.done? 1 : 0) + " | " + task + " | " + getTime();
     }
+
+
 }
