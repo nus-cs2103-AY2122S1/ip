@@ -8,14 +8,28 @@
 public class Todo extends Task {
     
     private final String TASK_MARKER = "T";
-
+    private String taskDescription;
+    private final String KEYWORD = "todo ";
     /**
      * Class constructor for Todo class.
      * 
      * @param description the task description.
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String description) throws DukeException {
+        try {
+            if (!description.contains("todo")) {
+                throw new IllegalArgumentException();
+            }
+            int startingIndex = description.indexOf(KEYWORD);
+            taskDescription = description.substring(startingIndex + KEYWORD.length());
+            if (taskDescription == "") {
+                throw new StringIndexOutOfBoundsException();
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new DukeException(e);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException(e);
+        }
     }
 
     /**
@@ -26,9 +40,29 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s | %s", TASK_MARKER, super.toString());
+        return String.format("[%s]%s %s", TASK_MARKER, super.toString(), taskDescription);
     }
 
+    /**
+     * Formats the task in to the storage format.
+     *
+     * @return storage format of the task.
+     */
+    public String formatToStore() {
+        return String.format("%s | %s | %s", TASK_MARKER, getStatusIcon() == " " ? 1 : 0,
+                taskDescription);
+    }
+
+    /**
+     * Class constructor for loading tasks from storage file.
+     *
+     * @param todoDescription description of todo task.
+     * @param dateOfTask date of the todo task (unused).
+     */
+    public Todo(String todoDescription, String dateOfTask) {
+        taskDescription = todoDescription;
+    }
+    
     /**
      * Returns task marker. 
      *

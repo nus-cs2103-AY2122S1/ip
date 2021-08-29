@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
@@ -7,23 +8,38 @@ import java.time.format.DateTimeParseException;
  * @author Gordon Yit
  * @Since 23-08-21
  */
-
 public class Event extends Task {
-
-    private DateDue dateDue;
     private final String TASK_MARKER = "E";
+    private String taskDescription;
+    private String eventDate;
+    private Date date;
+    private final String KEYWORD = "event ";
+    private final String AT = "at ";
     
     /**
      * Class constructor for Event class.
      * 
-     * @param description the task description.
-     * @param timing the duration of the event.
+     * @param description consisting of task description and timing.
      */
-    public Event(String description, String timing) throws DateTimeParseException {
-        super(description);
-        this.dateDue = new DateDue(timing);
+    public Event(String description) throws DateTimeParseException {
+        int startingIndex = description.indexOf(KEYWORD) + KEYWORD.length();
+        int startOfTimeIndex = description.indexOf(AT);
+        taskDescription = description.substring(startingIndex, startOfTimeIndex - 1);   
+        eventDate = description.substring(startOfTimeIndex + AT.length());
+        this.date = new Date(eventDate);
     }
 
+    /**
+     * Class constructor for loading tasks from storage file.
+     *
+     * @param eventDescription description of event task.
+     * @param dateOfTask date of the event task.
+     */
+    public Event(String eventDescription, String dateOfTask) throws ParseException {
+        taskDescription = eventDescription;
+        date = Date.convertDateStringToDate(dateOfTask);
+    }
+    
     /**
      * Print out the event task,
      * 
@@ -32,7 +48,18 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("| %s | %s | %s", TASK_MARKER, super.toString(), dateDue.toString());
+        return String.format("[%s]%s %s (at: %s)", TASK_MARKER, super.toString(), taskDescription,
+                date.toString());
+    }
+
+    /**
+     * Formats the task in to the storage format.
+     *
+     * @return storage format of the task.
+     */
+    public String formatToStore() {
+        return String.format("%s | %s | %s | %s", TASK_MARKER, getStatusIcon() == " " ? 1 : 0,
+                taskDescription, date.toString());
     }
 
     /**
@@ -47,11 +74,11 @@ public class Event extends Task {
     /**
      * checks if given datetime matches the tasks date time.
      * 
-     * @param dateTime date time to compare with.
+     * @param dateString date to compare with in string form.
      * @return true if the task date time matches the date time given.
      */
     @Override
-    public boolean isSameDate(Object dateTime) {
-        return this.dateDue.getLocalDate().equals(dateTime);
+    public boolean isSameDate(String dateString) {
+        return this.date.isSameDate(dateString);
     }
 }

@@ -1,5 +1,9 @@
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 
 /**
  * Represents tasks with deadline.
@@ -9,18 +13,36 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
     private final String TASK_MARKER = "D";
-    private DateDue dateDue;
+    private String taskDescription;
+    private String deadlineDate;
+    private Date date;
+    private final String KEYWORD = "deadline ";
+    private final String BY = "by ";
+    
     /**
      * Class constructor for Deadline class.
      * 
-     * @param description the task description.
-     * @param by the time by which the task must be completed.
+     * @param description consisting of task description and deadline date.
      */
-    public Deadline(String description, String by) throws DateTimeParseException {
-        super(description);
-        dateDue = new DateDue(by);
+    public Deadline(String description) throws DateTimeParseException {
+        int startingIndex = description.indexOf(KEYWORD) + KEYWORD.length();
+        int startOfTimingIndex = description.indexOf(BY);
+        taskDescription = description.substring(startingIndex, startOfTimingIndex - 1);
+        deadlineDate = description.substring(startOfTimingIndex + BY.length());
+        date = new Date(deadlineDate);
     }
 
+    /**
+     * Class constructor for loading tasks from storage file.
+     * 
+     * @param deadlineDescription description of deadline task.
+     * @param dateOfTask date of the deadline task.
+     */
+    public Deadline(String deadlineDescription, String dateOfTask) throws ParseException {
+        taskDescription = deadlineDescription;
+        date = Date.convertDateStringToDate(dateOfTask);
+    }
+    
     /**
      * Print out the deadline task,
      * 
@@ -29,9 +51,20 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("| %s | %s | %s", TASK_MARKER, super.toString(), dateDue.toString());
+        return String.format("[%s]%s %s (by: %s)", TASK_MARKER, super.toString(), taskDescription, 
+                                date.toString());
     }
 
+    /**
+     * Formats the task in to the storage format.
+     *
+     * @return storage format of the task.
+     */
+    public String formatToStore() {
+        return String.format("%s | %s | %s | %s", TASK_MARKER, getStatusIcon() == " " ? 1 : 0, 
+                                taskDescription, date.toString());
+    }
+    
     /**
      * Returns task marker. 
      *
@@ -44,12 +77,11 @@ public class Deadline extends Task {
     /**
      * checks if given datetime matches the tasks date time.
      *
-     * @param dateTime date time to compare with.
+     * @param dateString date time (in string form) to compare with.
      * @return true if the task date time matches the date time given.
      */
     @Override
-    public boolean isSameDate(Object dateTime) {
-        return this.dateDue.getLocalDate().equals(dateTime);
+    public boolean isSameDate(String dateString) {
+        return this.date.isSameDate(dateString);
     }
-    
 }

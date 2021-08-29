@@ -9,20 +9,17 @@ import java.time.LocalDate;
  */
 
 public class Task {
-    protected String description;
     protected boolean isDone;
 
     /**
      * Class constructor for Task class.
      * Sets isDone to false, meaning task is not done.
-     * 
-     * @param description the description of the task.
+     *
      */
-    public Task(String description) {
-        this.description = description;
+    public Task() {
         this.isDone = false;
     }
-
+    
     /**
      * Returns the status icon of the task.
      * 
@@ -47,9 +44,18 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("%s | %s", getStatusIcon() == " " ? 1 : 0, description);
+        return String.format("[%s]", getStatusIcon());
     }
 
+    /**
+     * Formats the task in to the storage format.
+     * 
+     * @return storage format of the task.
+     */
+    public String formatToStore() {
+        return String.format("%s |", getStatusIcon() == " " ? 1 : 0);
+    }
+    
     /**
      * Returns task marker. 
      *
@@ -62,10 +68,10 @@ public class Task {
     /**
      * checks if given datetime matches the deadline of the task.
      * 
-     * @param dt the local date time to compare with.
+     * @param dateString date in string form to to compare with.
      * @return false.
      */
-    public boolean isSameDate(Object dt) {
+    public boolean isSameDate(String dateString) {
         return false;
     }
 
