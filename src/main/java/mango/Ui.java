@@ -14,18 +14,20 @@ public class Ui {
 
     /**
      * Greets the user with the chat-bot logo and an introduction.
+     *
+     * @return A greeting message with an introduction.
      */
-    public void greet() {
-        String logo = " __  __    ___    _  _     ___     ___\n"
-                + "|  \\/  |  /   \\  | \\| |   / __|   / _ \\\n"
-                + "| |\\/| |  | - |  | .` |  | (_ |  | (_) |\n"
-                + "|_|__|_|  |_|_|  |_|\\_|   \\___|   \\___/\n"
-                + "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|\n"
-                + "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\n";
+    public String greet() {
+        String output = "";
+        String logo =
+                "   +--+--+--+--+\n" +
+                "   | m | a | n | g | o |\n" +
+                "   +--+--+--+--+\n\n";
 
+        output += "Hello from\n" + logo;
+        output += "Hello! I'm Mango\nWhat can I do for you?";
 
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Mango\nWhat can I do for you?");
+        return output;
     }
 
     /**
@@ -39,9 +41,11 @@ public class Ui {
 
     /**
      * Prints a farewell message to the user.
+     *
+     * @return A farewell message to the user.
      */
-    public void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
