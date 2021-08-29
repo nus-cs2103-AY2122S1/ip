@@ -57,7 +57,7 @@ checkstyle {
 }
 
 task precommit {
-    dependsOn('clean', 'build', 'test', 'checkstyleMain', 'checkstyleTest')
+    dependsOn('build', 'test', 'checkstyleMain', 'checkstyleTest')
 }
 
 run{

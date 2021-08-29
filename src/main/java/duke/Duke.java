@@ -18,12 +18,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
- * Main class representing the Duke helper chatbot.
+ * Main class representing the Duke helper chat bot.
  *
  * @author kevin9foong
  */
@@ -103,6 +104,7 @@ public class Duke extends Application {
 
         VBox vbox = new VBox(dukeTitle, userCommandInputTextField, userOutputTextArea);
         vbox.setAlignment(Pos.TOP_CENTER);
+        VBox.setVgrow(userOutputTextArea, Priority.ALWAYS);
 
         Scene scene = new Scene(vbox);
 
