@@ -1,0 +1,6 @@
+deadline return book /by 02/12/2019 1800
+event faggy /at 03/12/1999 0000
+todo hi
+todo thrid
+done 2
+delete 4
