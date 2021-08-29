@@ -46,6 +46,9 @@ public abstract class Command {
             case "list":
                 commandType = new ListCommand();
                 break;
+            case "find":
+                commandType = new FindCommand(output[1]);
+                break;
             case "todo":
 
             case "deadline":
