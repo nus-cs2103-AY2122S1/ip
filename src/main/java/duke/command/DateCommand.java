@@ -29,15 +29,16 @@ public class DateCommand extends Command {
     }
 
     /**
-     * Finds and prints tasks falling on user specified date.
+     * Finds and returns String describing tasks falling on user specified date.
      *
      * @param tasks TaskList to search in.
      * @param ui Ui to get enums, response messages and exception messages from.
+     * @return String describing tasks falling on user specified date.
      * @throws DukeException If user input is missing time input.
      * @throws DukeException If user input has missing spaces.
      * @throws DukeException If user input for time is in invalid date format.
      */
-    private void printTaskAtDate(TaskList tasks, Ui ui) throws DukeException {
+    private String getTaskAtDate(TaskList tasks, Ui ui) throws DukeException {
         // Initialize counters to track number of tasks, events and deadlines.
         int counter = 0;
         int events = 0;
@@ -62,8 +63,8 @@ public class DateCommand extends Command {
         LocalDate localDate = Parser.toLocalDate(dateString);
         String formattedDateString = Parser.parseLocalDate(localDate);
 
-        // Print to notify users of the date they are searching for.
-        ui.showDateListSuccess(formattedDateString);
+        // String to notify users of the date they are searching for.
+        String notification = ui.getDateListSuccess(formattedDateString);
 
         // Print Deadlines and Events with LocalDate that matches date input from user.
         for (Task task : tasks.getTasks()) {
@@ -86,24 +87,27 @@ public class DateCommand extends Command {
             }
         }
 
-        // Print a summary of matching tasks to the user.
-        ui.showDateListSummary(formattedDateString, counter, deadlines, events);
+        // String describing a summary of matching tasks to the user.
+        String summary = ui.getDateListSummary(formattedDateString, counter, deadlines, events);
+
+        return notification + "\n" + summary;
     }
 
     /**
-     * Finds and prints tasks falling on user specified date.
+     * Finds and returns String describing tasks falling on user specified date.
      *
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
+     * @return String describing tasks falling on user specified date.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storable storage) {
+    public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
             // Print tasks that fall on user specified date.
-            this.printTaskAtDate(tasks, ui);
+            return this.getTaskAtDate(tasks, ui);
         } catch (DukeException dukeException) {
-            System.out.println(dukeException);
+            return dukeException.toString();
         }
     }
 

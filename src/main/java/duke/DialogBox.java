@@ -54,7 +54,19 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getDukeWelcome(Image img) {
+        DialogBox db = new DialogBox("Duke: Hello! I'm Duke\nWhat can I do for you?", img);
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getDukeBye(Image img) {
+        DialogBox db = new DialogBox("Duke: Bye. Hope to see you again soon!", img);
         db.flip();
         return db;
     }

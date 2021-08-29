@@ -26,17 +26,19 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes a task based on user input, then prints the task deleted and new total count of tasks.
+     * Deletes a task based on user input,
+     * then returns String describing the task deleted and new total count of tasks.
      * Task is deleted at index provided by user input in format "delete N", where N can be any valid index.
      * Index provided should be 1-based.
      *
      * @param tasks TaskList to delete task from.
      * @param ui Ui to get enums, response messages and exception messages from.
+     * @return String describing the task deleted and new total count of tasks.
      * @throws DukeException If user input is missing an index.
      * @throws DukeException If user input for index is not an integer.
      * @throws DukeException If user input for index is invalid.
      */
-    private void deleteTask(TaskList tasks, Ui ui) throws DukeException {
+    private String deleteTask(TaskList tasks, Ui ui) throws DukeException {
 
         // Preliminary check for any input following command.
         Parser.checkInputValidity(this.userInput, Commands.DELETE.getCommand(),
@@ -56,30 +58,33 @@ public class DeleteCommand extends Command {
         // Deletes task at index and obtain the deleted task
         Task deletedTask = tasks.remove(idx);
 
-        // Prints response to user after successfully deleting task at index.
-        ui.showDeleteSuccess(deletedTask, tasks.size());
+        // Returns response to user after successfully deleting task at index.
+        return ui.getDeleteSuccess(deletedTask, tasks.size());
     }
 
     /**
-     * Deletes a task based on user input, prints the task deleted and new total count of tasks,
-     * then saves tasks to storage.
+     * Deletes a task based on user input, saves tasks to storage,
+     * then returns String describing the task deleted and new total count of tasks.
      * Task is deleted at index provided by user input in format "delete N", where N can be any valid index.
      * Index provided should be 1-based.
      *
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
+     * @return String describing the task deleted and new total count of tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storable storage) {
+    public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
             // Deletes task at user specified index.
-            this.deleteTask(tasks, ui);
+            String output = this.deleteTask(tasks, ui);
 
             // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
+
+            return output;
         } catch (DukeException dukeException) {
-            System.out.println(dukeException);
+            return dukeException.toString();
         }
     }
 

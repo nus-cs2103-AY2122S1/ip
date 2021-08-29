@@ -31,7 +31,8 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds task based on user input into tasks, then prints task added and new total count of tasks.
+     * Adds task based on user input into tasks,
+     * then returns String describing task added and new total count of tasks.
      * Event is added for user inputs of the form "event task-descr /at dd/mm/yyyy".
      * Deadline is added for user inputs of the form "deadline task-descr /by dd/mm/yyyy".
      * Todo is added for user inputs of the form "todo task-descr".
@@ -39,6 +40,7 @@ public class AddCommand extends Command {
      * @param tasks TaskList to add task to.
      * @param ui Ui to get enums, response messages and exception messages from.
      * @param separator char separator used to separate task description and time in Event and Deadline.
+     * @return String describing task added and new total count of tasks.
      * @throws DukeException If user command is invalid.
      * @throws DukeException If user input does not provide task description.
      * @throws DukeException If user input has missing spaces.
@@ -46,7 +48,7 @@ public class AddCommand extends Command {
      * @throws DukeException If user input does not contain descriptors by or at for Deadline and Event respectively.
      * @throws DukeException If user input is missing time input for Deadline and Event.
      */
-    private void addTask(TaskList tasks, Ui ui, char separator) throws DukeException {
+    private String addTask(TaskList tasks, Ui ui, char separator) throws DukeException {
         // Checks for command given in user input.
         String userCommand;
         if (this.userInput.startsWith(Commands.TODO.getCommand())) {
@@ -92,13 +94,13 @@ public class AddCommand extends Command {
             tasks.add(new Event(descriptions[0], localDate));
         }
 
-        // Prints response to user after successfully adding task to tasks.
-        ui.showAddSuccess(tasks.get(tasks.size() - 1), tasks.size());
+        // Returns response to user after successfully adding task to tasks.
+        return ui.getAddSuccess(tasks.get(tasks.size() - 1), tasks.size());
     }
 
     /**
-     * Adds task based on user input to tasks, prints task added and new total count of task
-     * and then saves tasks to storage.
+     * Adds task based on user input to tasks, saves tasks to storage,
+     * then returns String describing task added and new total count of task.
      * Event is added for user inputs of the form "event task-descr /at dd/mm/yyyy".
      * Deadline is added for user inputs of the form "deadline task-descr /by dd/mm/yyyy".
      * Todo is added for user inputs of the form "todo task-descr".
@@ -106,17 +108,20 @@ public class AddCommand extends Command {
      * @param tasks TaskList that command executes upon.
      * @param ui Ui contains enums, response messages and exception messages that command execution will use.
      * @param storage Storage that command executes upon.
+     * @return String describing task added and new total count of task.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storable storage) {
+    public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
             // Add task according to user specifications.
-            this.addTask(tasks, ui, '/');
+            String output = this.addTask(tasks, ui, '/');
 
             // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
+
+            return output;
         } catch (DukeException dukeException) {
-            System.out.println(dukeException);
+            return dukeException.toString();
         }
     }
 

@@ -56,35 +56,50 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
 
         // Prints greeting to user.
-        this.ui.showWelcome();
+        System.out.println(this.ui.getWelcome());
 
         // Scans user inputs and prints corresponding outputs until a "Bye" input is received.
         String userInput = sc.nextLine();
+
         // Only exactly "bye" is read as exit command.
         while (!userInput.equals(Commands.BYE.getCommand())) {
             Command command = Parser.parse(userInput);
-            command.execute(this.tasks, this.ui, this.storage);
+            System.out.println(command.execute(this.tasks, this.ui, this.storage));
             userInput = sc.nextLine();
         }
 
         // Prints goodbye message to user.
-        this.ui.showGoodbye();
+        System.out.println(this.ui.getGoodbye());
 
         // Closes scanner object.
         sc.close();
     }
 
     /**
-     * Returns the specified string input with "Duke heard: " prepended to it.
+     * Returns Duke's string output from executing input String.
      *
-     * @param input String to which "Duke head: " is prepended to.
-     * @return The specified string with "Duke heard: " prepended to it.
+     * @param input User's input String.
+     * @return Duke's string output from executing input String.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        // Check if input is "bye"
+        if (!input.equals(Commands.BYE.getCommand())) {
+            Command command = Parser.parse(input);
+            return command.execute(this.tasks, this.ui, this.storage);
+        }
+
+        // If input is "bye" return standard goodbye response.
+        return this.ui.getGoodbye();
     }
 
-
+    /**
+     * Returns Ui object specific to this Duke.
+     *
+     * @return Ui object specific to this Duke.
+     */
+    public Ui getUi() {
+        return ui;
+    }
 
     /**
      * The main method runs the duke.Duke chatbot.
