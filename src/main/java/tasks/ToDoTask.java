@@ -4,7 +4,7 @@ package tasks;
  * This is a ToDoTask class, which inherits from Task.
  */
 public class ToDoTask extends Task {
-    public static final String KEYWORD = "[TODO]";
+    public static final String KEYWORD = "[Todo]";
 
     /**
      * Constructor for ToDoTask.
