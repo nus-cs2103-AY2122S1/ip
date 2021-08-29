@@ -2,22 +2,38 @@ package duke;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.Task;
 import duke.tasks.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
-import java.util.Scanner;import java.util.ArrayList;
+import java.util.Scanner;
 
+/**
+ * Class that defines the storage for the data needed for Duke
+ *
+ */
 public class DukeStorage {
+
+    /** The destination of the stored data */
     public String path;
 
+    /**
+     * Constructor that initializes the storage for Duke
+     *
+     * @param path The destination of the stored data
+     */
     public DukeStorage(String path) {
         this.path = path;
     }
 
+    /**
+     * Method to read tasks from storage
+     *
+     * @return List of tasks read from storage
+     * @throws DukeException Error thrown if file cannot be read
+     */
     public TaskList readTasks() throws DukeException {
         File file = new File(this.path);
         if (file.exists()) {
@@ -82,6 +98,12 @@ public class DukeStorage {
         }
     }
 
+    /**
+     * Method to write task data into storage
+     *
+     * @param taskList The list of tasks to be written
+     * @throws DukeException Error thrown if file cannot be written
+     */
     public void writeTasks(TaskList taskList) throws DukeException {
         File file = new File(this.path);
 

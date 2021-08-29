@@ -12,8 +12,19 @@ import duke.commands.TodoCommand;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class that parses incoming input
+ *
+ */
 public class Parser {
 
+    /**
+     * Method that parses incoming input and returns relevant commands
+     *
+     * @param inputString The input from Duke user
+     * @return Command to be executed
+     * @throws DukeException Error thrown if there is an invalid input
+     */
     public static Command parse(String inputString) throws DukeException {
         String command = inputString.split(" ")[0];
 

@@ -4,14 +4,26 @@ import duke.commands.Command;
 
 import java.util.Scanner;
 
+/**
+ * Class that contains Duke
+ *
+ */
 public class Duke {
 
+    /** List of tasks that is used in Duke */
     private TaskList taskList;
 
+    /** The interactions used by Duke with the user */
     private Ui ui = new Ui();
 
+    /** Storage for Duke to store data */
     private DukeStorage storage;
 
+    /**
+     * Constructor that initializes the tasklist, ui and storage of Duke
+     *
+     * @param path The destination of the stored data
+     */
     public Duke(String path) {
         this.storage = new DukeStorage(path);
         try {
@@ -22,6 +34,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Method that starts Duke
+     *
+     */
     public void run() {
         Scanner scanner = new Scanner(System.in);
         ui.startMessage();
@@ -40,6 +56,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method that starts Duke
+     *
+     * @param args Command line for arguments passed
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("tasklist.txt");
         duke.run();
