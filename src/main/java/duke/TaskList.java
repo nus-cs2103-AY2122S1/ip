@@ -62,7 +62,7 @@ public class TaskList implements Serializable {
     /**
      * Indicates whether the taskList contains any tasks. Primarily used for testing.
      * @return whether taskList is empty.
-     * @throws Duke.DukeException
+     * @throws Duke.DukeException issue found in state of empty taskList
      */
     public boolean isEmpty() throws Duke.DukeException {
         if (this.numTask == 0) {

@@ -7,9 +7,14 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     private LocalDate deadline;
 
+    /**
+     * Task with a specified deadline.
+     * @param description description of task.
+     * @param deadline deadline of task.
+     */
     public Deadline(String description, String deadline) {
         super(description);
-        try{
+        try {
             this.deadline = LocalDate.parse(deadline);
         } catch (DateTimeParseException e) {
             this.deadline = null;
@@ -22,7 +27,7 @@ public class Deadline extends Task {
     public String toString() {
         String stem = super.toString();
         return String.format("[D]%s (by: %s)", stem, this.deadline == null
-                                                     ? "unspecified"
-                                                     : this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            ? "unspecified"
+            : this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

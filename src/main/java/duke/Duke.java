@@ -8,6 +8,10 @@ import java.io.PrintWriter;
 public class Duke {
     private String taskListFileName;
 
+    /**
+     * Configures a Duke runtime to use a taskList storage file at specified location.
+     * @param taskListFileName path to taskList storage file.
+     */
     public Duke(String taskListFileName) {
         this.taskListFileName = taskListFileName;
     }
@@ -18,12 +22,19 @@ public class Duke {
         }
     }
 
-    // Normal Method Invocation
+    /**
+     * Default way to run the Duke programme.
+     */
     public void run() {
         this.run(new BufferedReader(new InputStreamReader(System.in)), new PrintWriter(System.out));
     }
 
-    // Manually call for testing
+    /**
+     * Runs the Duke programme with provided inputs and outputs. Normally invoked by run() unless dependencies need
+     * to be injected by test.
+     * @param in BufferedReader taking in user input.
+     * @param out PrintWriter to write responses to user input.
+     */
     public void run(BufferedReader in, PrintWriter out) {
         Ui ui = new Ui(in, out);
         Parser parser = new Parser();
