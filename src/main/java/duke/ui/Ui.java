@@ -4,8 +4,10 @@ import duke.exceptions.DukeException;
 import duke.tasks.Task;
 import duke.tasklist.TaskList;
 import duke.utils.Constants;
+
 import java.time.LocalDate;
 import java.util.Scanner;
+
 
 /**
  * The Ui class deals with all the interactions with the user. Most of the methods prefixed with 'display' print out

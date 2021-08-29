@@ -1,7 +1,20 @@
 package duke.parser;
 
-import duke.commands.*;
-import duke.exceptions.*;
+import duke.commands.Command;
+import duke.commands.DoneCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.ByeCommand;
+import duke.commands.AddCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.TasksOnCommand;
+
+import duke.exceptions.InvalidKeywordException;
+import duke.exceptions.NonExistentTaskException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.IncorrectFormatException;
+import duke.exceptions.InvalidNumberInputException;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
@@ -28,7 +41,7 @@ public class Parser {
         String[] parsedInput = input.trim().split("\\s", 2);
         String command = parsedInput[0];
 
-        switch(command.toUpperCase()) {
+            switch(command.toUpperCase()) {
             case "BYE":
                 return parseBye();
             case "LIST":
@@ -48,7 +61,7 @@ public class Parser {
             default:
                 throw new InvalidKeywordException();
 
-        }
+            }
     }
 
     /**
@@ -105,7 +118,7 @@ public class Parser {
         String[] splitTasks = input.split("\\s", 2);
         String taskType = splitTasks[0].toLowerCase();
         try {
-            switch (taskType) {
+                switch (taskType) {
                 case "todo":
                     if (hasEmptyDesc(splitTasks)) {
                         throw new EmptyDescriptionException(
@@ -160,17 +173,17 @@ public class Parser {
                     break;
                 default:
                     throw new InvalidKeywordException();
-            }
+                }
             return new AddCommand(task);
         } catch (ArrayIndexOutOfBoundsException ex) {
-            switch (taskType) {
+                switch (taskType) {
                 case "deadline": throw new IncorrectFormatException(
                         "Please specify a description and date for your deadline!" + Constants.DEADLINE_FORMAT);
                 case "event": throw new IncorrectFormatException(
                         "Please specify a description, date and time for your event!" + Constants.EVENT_FORMAT);
                 default: throw new IncorrectFormatException(
                         "Please specify a description and date/time for your task!");
-            }
+                }
         }
     }
 

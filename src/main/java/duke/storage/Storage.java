@@ -1,12 +1,19 @@
 package duke.storage;
 
 import duke.exceptions.DukeException;
-import duke.tasks.*;
 import duke.parser.DateTimeParser;
 import duke.tasklist.TaskList;
 
-import java.io.*;
-import java.util.*;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 
 /**
  * The Storage Class handles the reading and writing of tasks onto the disk
@@ -82,7 +89,7 @@ public class Storage {
         String[] parsed = str.split("\\|");
         String taskType = parsed[0].trim();
         Task task;
-        switch (taskType) {
+            switch (taskType) {
             case "T":
                 task = new ToDo(parsed[2].trim());
                 if (parsed[1].trim().equals("1")) {
@@ -104,7 +111,7 @@ public class Storage {
 
             default:
                 task = new Task("");
-        }
+            }
         return task;
     }
 
@@ -119,7 +126,7 @@ public class Storage {
         String taskType = parsedTask[0];
         String str;
 
-        switch (taskType) {
+            switch (taskType) {
             case "[T]":
                 str = "T" + " | " + task.getIntStatus() + " | " + task.getDescription() + "\n";
                 break;
@@ -134,7 +141,7 @@ public class Storage {
             default:
                 str = "";
                 break;
-        }
+            }
         return str;
     }
 

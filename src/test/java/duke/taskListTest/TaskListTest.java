@@ -37,6 +37,4 @@ public class TaskListTest {
         assertFalse(testList.containsTask(task2));
     }
 
-
-
 }
