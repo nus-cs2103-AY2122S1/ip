@@ -13,10 +13,6 @@ import duke.task.Task;
 public class MessageFormatter {
 
     private static final String INDENTATION_UNIT_STRING = " ";
-    private static final int INDENTATION_UNIT_COUNT = 4;
-    private static final String DIVIDER_LINE_UNIT_STRING = "_";
-    private static final int DIVIDER_LINE_UNIT_COUNT = 60;
-    private static final int DIVIDER_INDENTATION_UNIT_COUNT = 1;
 
     private static MessageFormatter instance;
 
@@ -41,7 +37,6 @@ public class MessageFormatter {
      * @return The formatted message.
      */
     String getFormattedMessage(String message) {
-//        return indent(surroundWithDividerLines(message));
         return message;
     }
 
@@ -82,20 +77,6 @@ public class MessageFormatter {
             sb.append(String.format("%d.%s\n", findResult.getKey() + 1, findResult.getValue()));
         }
         return sb.toString().stripTrailing();
-    }
-
-    private String surroundWithDividerLines(String message) {
-        String dividerLine = getDividerLine();
-        return String.format("%s%s\n%s", dividerLine,
-                indent(message, DIVIDER_INDENTATION_UNIT_COUNT).stripTrailing(), dividerLine);
-    }
-
-    private String getDividerLine() {
-        return String.format("%s\n", DIVIDER_LINE_UNIT_STRING.repeat(DIVIDER_LINE_UNIT_COUNT));
-    }
-
-    private String indent(String string) {
-        return indent(string, INDENTATION_UNIT_STRING, INDENTATION_UNIT_COUNT);
     }
 
     private String indent(String string, int count) {

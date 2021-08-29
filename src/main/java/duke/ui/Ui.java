@@ -97,11 +97,6 @@ public class Ui extends AnchorPane {
         }
     }
 
-    private static final String LOGO = " ____        _\n"
-            + "|  _ \\ _   _| | _____\n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|";
     private static final String GREETING_MESSAGE = "Hello! I'm Duke!\n"
             + "What can I do for you?";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
@@ -134,7 +129,6 @@ public class Ui extends AnchorPane {
      * Displays the greeting.
      */
     public void printGreeting() {
-//        printFormattedMessage(LOGO + "\n" + GREETING_MESSAGE);
         printFormattedMessage(GREETING_MESSAGE);
     }
 
@@ -170,6 +164,10 @@ public class Ui extends AnchorPane {
         return new MessageBuilder();
     }
 
+    public void setDukeChatbot(DukeChatbot dukeChatbot) {
+        this.dukeChatbot = dukeChatbot;
+    }
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -187,10 +185,6 @@ public class Ui extends AnchorPane {
         dukeChatbot.readInput(input);
     }
 
-    public void setDukeChatbot(DukeChatbot dukeChatbot) {
-        this.dukeChatbot = dukeChatbot;
-    }
-
     private String getListLengthMessage(int listLength) {
         // Check whether singular or plural should be printed.
         if (listLength != 1) {
@@ -201,8 +195,6 @@ public class Ui extends AnchorPane {
     }
 
     private void printFormattedMessage(String message) {
-//        System.out.println(messageFormatter.getFormattedMessage(message));
-//        System.out.println();
         String formattedMessage = messageFormatter.getFormattedMessage(message);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(formattedMessage, dukeImage));
     }

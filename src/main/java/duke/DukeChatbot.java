@@ -1,8 +1,6 @@
 package duke;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import duke.command.Command;
 import duke.command.CommandParser;
@@ -29,64 +27,12 @@ public class DukeChatbot extends Application {
     private StorageHandler storageHandler;
     private TaskHandler taskHandler;
     private boolean hasErrorOnSave;
-//
-//    /**
-//     * Creates a Duke chatbot.
-//     */
-//    public DukeChatbot() {
-//    }
-//
-//    /**
-//     * Runs the Duke chatbot.
-//     */
-//    public void run() {
-//        try {
-//            initialise();
-//            ui.printGreeting();
-//            listenForInput();
-//        } catch (IOException e) {
-//            ui.printUnexpectedErrorMessage();
-//        }
-//    }
-//
-//    private void initialise() throws IOException {
-//        ui = new Ui();
-//        commandParser = new CommandParser();
-//        storageHandler = StorageHandler.getInstance();
-//        taskHandler = new TaskHandler(storageHandler.loadTasks());
-//        taskHandler.addTasksListUpdateObserver(tasks -> {
-//            try {
-//                storageHandler.saveTasks(tasks);
-//            } catch (IOException e) {
-//                hasErrorOnSave = true;
-//            }
-//        });
-//        hasErrorOnSave = false;
-//    }
-//
-//    private void listenForInput() {
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        String command;
-//        Command commandInstance;
-//        do {
-//            try {
-//                command = br.readLine();
-//                commandInstance = commandParser.getCommandInstance(command);
-//                commandInstance.execute(taskHandler, ui);
-//                if (hasErrorOnSave) {
-//                    ui.printUnexpectedErrorMessage();
-//                    break;
-//                }
-//            } catch (IOException e) {
-//                ui.printUnexpectedErrorMessage();
-//                break;
-//            } catch (DukeInvalidCommandException e) {
-//                ui.printInvalidCommandErrorMessage(e.getMessage());
-//                commandInstance = null;
-//            }
-//        } while (commandInstance == null || !commandInstance.mustExit());
-//    }
 
+    /**
+     * Reads the input, and if it is a valid command, executes it.
+     *
+     * @param input The input text.
+     */
     public void readInput(String input) {
         Command command = commandParser.getCommandInstance(input);
         try {
