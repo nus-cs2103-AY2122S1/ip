@@ -1,7 +1,5 @@
 package duke;
 
-import javafx.application.Platform;
-
 /**
  * Represents a personal assistant chatbot that responds to command line inputs.
  *

@@ -29,7 +29,8 @@ public class TaskList {
     }
 
     /**
-     * Prints the size of the list of tasks with the appropriate grammar.
+     * Returns the size of the list of tasks with the appropriate grammar.
+     * @return A String describing the size of the list of tasks with the appropriate grammar.
      */
     public String getTaskCount() {
         int taskCount = this.tasks.size();
@@ -60,6 +61,7 @@ public class TaskList {
      *
      * @param storage The storage object to handle saving tasks.
      * @param index The index of the task to mark as done.
+     * @return The deleted task.
      * @throws DukeException If index is out of range.
      */
     public Task deleteTask(Storage storage, String index) throws DukeException {
@@ -79,6 +81,7 @@ public class TaskList {
      *
      * @param storage The storage object to handle saving tasks.
      * @param index The index of the task to mark as done.
+     * @return The task marked as done.
      * @throws DukeException If index is out of range.
      */
     public Task doneTask(Storage storage, String index) throws DukeException {
@@ -94,8 +97,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of tasks with description containing the keyword.List of tasks with
-     * description containing the keyword.
+     * Returns a list of tasks with description containing the keyword.
      *
      * @param keyword Word to search for in task description.
      * @return List of tasks with description containing the keyword.

@@ -11,6 +11,10 @@ public class FindCommand extends Command {
     private String keyword;
     private StringBuilder sb;
 
+    /**
+     * Constructor for FindCommand.
+     * @param keyword The word to search for in the task description.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
         this.sb = new StringBuilder("Here are the matching tasks in your list:\n");
