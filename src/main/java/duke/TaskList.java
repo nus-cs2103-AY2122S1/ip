@@ -1,4 +1,4 @@
-package duke.command;
+package duke;
 
 import duke.task.Task;
 
