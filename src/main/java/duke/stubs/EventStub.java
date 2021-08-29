@@ -1,7 +1,7 @@
 package duke.stubs;
 
-import duke.testinginterface.EventInterface;
 import duke.task.Task;
+import duke.testinginterface.EventInterface;
 
 /**
  * Stub for Event class.

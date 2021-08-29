@@ -1,9 +1,12 @@
 package duke;
 
-import duke.stubs.TaskListStub;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.stubs.TaskListStub;
+
 
 class ParserTest {
 

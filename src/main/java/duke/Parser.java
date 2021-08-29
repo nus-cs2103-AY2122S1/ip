@@ -1,13 +1,20 @@
 package duke;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.CheckDateCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 import duke.testinginterface.TaskListInterface;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Makes sense of user commands.
@@ -15,8 +22,8 @@ import java.time.format.DateTimeParseException;
  * Checks for errors and converts user input to pass into other methods.
  */
 public class Parser {
-    TaskListInterface taskList;
-    private enum Command {Exit, List, Done, Delete, Todo, Deadline, Event, CheckDate, Find, Invalid};
+    private TaskListInterface taskList;
+    private enum Command { Exit, List, Done, Delete, Todo, Deadline, Event, CheckDate, Find, Invalid };
 
     /**
      * Constructor.
@@ -94,8 +101,8 @@ public class Parser {
         case Deadline:
             // handles any characters after 'deadline' that are not white space
             if (!input.startsWith("deadline ")) {
-                throw new DukeException("Oops! Improper formatting for deadline. " +
-                        "Please use: deadline <description> /by <date/time>");
+                throw new DukeException("Oops! Improper formatting for deadline. "
+                        + "Please use: deadline <description> /by <date/time>");
             }
             // handles case of no description and date/time
             if (input.length() == 9) {
@@ -125,13 +132,13 @@ public class Parser {
         case Event:
             // handles any characters after 'event' that are not white space
             if (!input.startsWith("event ")) {
-                throw new DukeException("Oops! Improper formatting for event. " +
-                        "Please use: event <description> /at <date/time>");
+                throw new DukeException("Oops! Improper formatting for event. "
+                        + "Please use: event <description> /at <date/time>");
             }
             if (input.length() == 6) {
                 throw new DukeException("Oops! The description and date/time of event cannot be empty.");
             }
-            if(!input.contains(" /at ")){
+            if (!input.contains(" /at ")) {
                 throw new DukeException("Oops! Inappropriate formatting for events.");
             }
             if (input.split(" /at ")[0].equals("event")) {
@@ -139,7 +146,7 @@ public class Parser {
             }
 
             String at = input.split(" /at ")[1];
-            try{
+            try {
                 LocalDate eventDate = LocalDate.parse(at);
                 String eventDescription = input.split(" /at ")[0].substring(6);
 
@@ -162,6 +169,7 @@ public class Parser {
         case Find:
             String word = input.substring(5);
             c = new FindCommand(word);
+            break;
         default:
         }
         return c;

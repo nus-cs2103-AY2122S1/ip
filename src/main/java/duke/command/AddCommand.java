@@ -2,17 +2,17 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.task.Todo;
 import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Type of Command that adds tasks to the task list.
  */
 public class AddCommand extends Command {
-    Task task;
+    private Task task;
 
     /**
      * Constructor.

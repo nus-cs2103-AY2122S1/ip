@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,11 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 /**
  * Loads tasks from hard disk and saves tasks to files after each command.
  */
 public class Storage {
-    String filePath;
+    private String filePath;
 
     /**
      * Constructor.
@@ -52,7 +51,7 @@ public class Storage {
         try {
             Scanner dataScanner = new Scanner(new File(this.filePath));
 
-            while(dataScanner.hasNext()) {
+            while (dataScanner.hasNext()) {
                 convertToTask(dataScanner.nextLine(), result, counter);
                 counter++;
             }

@@ -1,16 +1,16 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
-import java.time.LocalDate;
 
 /**
  * Type of Command that prints a list of tasks that match the date stated.
  */
 public class CheckDateCommand extends Command {
-    LocalDate dateToCheck;
+    private LocalDate dateToCheck;
 
     /**
      * Constructor.

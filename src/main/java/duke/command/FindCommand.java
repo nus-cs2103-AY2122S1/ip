@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.Ui;
 
 public class FindCommand extends Command {
-    String word;
+    private String word;
 
     public FindCommand(String word) {
         this.word = word;
