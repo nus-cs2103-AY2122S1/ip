@@ -40,5 +40,5 @@ abstract class Task {
      *
      * @return a string representing the task to be saved in save file
      */
-    abstract public String saveData();
+    public abstract String saveData();
 }
