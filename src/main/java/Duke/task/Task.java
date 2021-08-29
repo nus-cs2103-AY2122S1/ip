@@ -1,6 +1,6 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents a task.
@@ -18,7 +18,7 @@ abstract public class Task {
     /**
      * Completes task.
      */
-    public void isComplete() {
+    public void complete() {
         completed = true;
     }
 
@@ -45,14 +45,7 @@ abstract public class Task {
      *
      * @return Task date.
      */
-    abstract public LocalDate getDate();
-
-    /**
-     * Returns time of task.
-     *
-     * @return Task time.
-     */
-    abstract public int getTime();
+    abstract public LocalDateTime getDate();
 
     /**
      * Returns a String representation of the task.

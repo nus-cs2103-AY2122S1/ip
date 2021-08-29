@@ -23,8 +23,8 @@ public class TaskListTest {
     public void getList_filledList_returnsTasks() {
         TaskList taskList = new TaskList(new ArrayList<String>());
         taskList.addTask(new ToDo("Task 1"));
-        taskList.addTask(new Deadline("Task 2", null, "2021-08-23", 0134));
-        taskList.addTask(new Event("Task 3", null, "2021-08-23", 0134, 0140));
+        taskList.addTask(new Deadline("Task 2", "2021-08-23 0134"));
+        taskList.addTask(new Event("Task 3", "2021-08-23 0134-0140"));
         assertEquals("Tasks in task list:\n" +
                 "\t\t1. [T][ ] Task 1\n" +
                 "\t\t2. [D][ ] Task 2 (by: Aug 23 2021 0:92AM)\n" +
