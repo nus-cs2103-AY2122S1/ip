@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            int index = Integer.parseInt(line) - 1;
+            int index = Integer.parseInt(getLine()) - 1;
             ui.showDelete(tasks.remove(index), tasks.getSize());
             super.execute(tasks, ui, storage);
         } catch (Exception e) {

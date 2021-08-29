@@ -1,7 +1,8 @@
 package duke.tasklist;
 
-import duke.exception.Messages;
 import java.time.LocalDateTime;
+
+import duke.exception.Messages;
 
 /**
  * Represents an event task within chat bot.

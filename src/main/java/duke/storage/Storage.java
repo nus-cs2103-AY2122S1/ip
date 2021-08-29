@@ -1,12 +1,12 @@
 package duke.storage;
 
-import duke.tasklist.Task;
-import duke.exception.DukeException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.tasklist.Task;
 
 /**
  * Represents a file directory manager.
@@ -27,8 +27,8 @@ public class Storage {
     /**
      * Loads content task file from filePath.
      *
-     * @throws DukeException If filePath doesn't exist.
      * @return content of file.
+     * @throws DukeException If filePath doesn't exist.
      */
     public Scanner load() throws DukeException {
         try {
