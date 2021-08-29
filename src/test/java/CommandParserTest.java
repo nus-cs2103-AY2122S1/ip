@@ -2,6 +2,7 @@ import commands.AddDeadlineCommand;
 import commands.AddEventCommand;
 import commands.AddToDoCommand;
 import commands.DeleteCommand;
+import commands.MarkDoneCommand;
 import exceptions.MorganException;
 import org.testng.annotations.Test;
 import tasks.TaskList;
@@ -9,8 +10,8 @@ import tasks.ToDoTask;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class InputParserTest {
-    private final InputParser parser = new InputParser();
+public class CommandParserTest {
+    private final CommandParser parser = new CommandParser();
     private final Ui ui = new Ui();
 
     @Test
@@ -35,7 +36,7 @@ public class InputParserTest {
         t1.addTask(new ToDoTask("todo do CS2030 quiz"));
         t2.addTask(new ToDoTask("todo do CS2030 quiz"));
         try {
-            String expected = (new DeleteCommand("done 1")).execute(t1);
+            String expected = (new MarkDoneCommand("done 1")).execute(t1);
             String actual = parser.getCommand("done 1").execute(t2);
             assertEquals(expected, actual);
         } catch (MorganException e) {
