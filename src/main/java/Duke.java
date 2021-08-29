@@ -151,8 +151,12 @@ public class Duke {
             String[] deadlineTaskDetails = command[1].split("/", 2);
 
             if (deadlineTaskDetails.length == 2) {
+                String description = deadlineTaskDetails[0].trim();
+                String beforeDateTime = deadlineTaskDetails[1].trim();
+                String[] beforeDateTimeParts = beforeDateTime.split("\\s+", 2);
+
                 Task newDeadlineTask = new Deadline(TaskType.DEADLINE,
-                        deadlineTaskDetails[0], deadlineTaskDetails[1]);
+                        description, beforeDateTimeParts[1]);
                 tasksList.add(newDeadlineTask);
 
                 String response = taskAddedMessage() + System.lineSeparator() +
@@ -174,8 +178,12 @@ public class Duke {
             String[] eventTaskDetails = command[1].split("/", 2);
 
             if (eventTaskDetails.length == 2) {
+                String description = eventTaskDetails[0].trim();
+                String startEndDateTime = eventTaskDetails[1].trim();
+                String[] startEndDateTimeParts = startEndDateTime.split("\\s+", 2);
+
                 Task newEventTask = new Event(TaskType.EVENT,
-                        eventTaskDetails[0], eventTaskDetails[1]);
+                        description, startEndDateTimeParts[1]);
                 tasksList.add(newEventTask);
 
                 String response = taskAddedMessage() + System.lineSeparator() +
