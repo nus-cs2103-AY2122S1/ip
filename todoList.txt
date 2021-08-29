@@ -3,3 +3,6 @@ T fly true
 E run run run /at: 2020-02-12 4-6pm true
 D run and run /by: 2020-11-20 4pm false
 T run false
+T test false
+E test //at 2020-11-02 4pm - 6pm false
+D test //by 2020-11-03 4pm false

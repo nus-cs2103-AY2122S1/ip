@@ -10,9 +10,13 @@ repositories {
 }
 
 dependencies {
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
 }
+
+
 
 test {
     useJUnitPlatform()
@@ -44,3 +48,5 @@ checkstyle {
 run{
     standardInput = System.in
 }
+
+
