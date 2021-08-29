@@ -32,16 +32,16 @@ public class TaskList {
                 String[] values = line.split(",", -1);
 
                 // Checks to ensure correct line format
-                if (!((line.matches("T,[0,1],.*") && values.length == 3) ||
-                        (line.matches("[D,E],[0,1],.*") && values.length == 4))) {
+                if (!((line.matches("T,[0,1],.*") && values.length == 3) || (
+                        line.matches("[D,E],[0,1],.*") && values.length == 4))) {
                     throw new InvalidFileFormatException();
                 }
 
                 switch (values[0]) {
-                case "T":   // Todo task
+                case "T": // Todo task
                     newTask = new Todo(values[2], values[1].equals("1"));
                     break;
-                case "D":   // Deadline task
+                case "D": // Deadline task
                     LocalDate date;
                     try {
                         date = LocalDate.parse(values[3]);
@@ -50,7 +50,7 @@ public class TaskList {
                     }
                     newTask = new Deadline(values[2], date, values[1].equals("1"));
                     break;
-                case "E":   // Event task
+                case "E": // Event task
                     newTask = new Event(values[2], values[3], values[1].equals("1"));
                     break;
                 default:
@@ -179,6 +179,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds a task with the specified keyword(s).
+     *
+     * @param command The input command from the user.
+     * @return Formatted string containing the tasks found.
+     * @throws InvalidFormatException When the input command is of the wrong format.
+     */
     public String find(String command) throws InvalidFormatException {
         String[] matches = Parser.validateRegexAndMatch(command, "^find (.+)",
                 "find {search term}");

@@ -10,13 +10,13 @@ public class ParserTest {
     @Test
     void parse_validCommands_success() {
         String[] commands = {
-                "list",
-                "done 1",
-                "todo something",
-                "deadline thing /by 2021-08-25",
-                "event somewhere /at 6pm",
-                "delete 1",
-                "find something"
+            "list",
+            "done 1",
+            "todo something",
+            "deadline thing /by 2021-08-25",
+            "event somewhere /at 6pm",
+            "delete 1",
+            "find something"
         };
 
         for (String command : commands) {
@@ -27,10 +27,10 @@ public class ParserTest {
     @Test
     void parse_unknownCommands_exceptionThrown() {
         String[] commands = {
-                "done x",
-                "blah",
-                "invalid command",
-                "delete a"
+            "done x",
+            "blah",
+            "invalid command",
+            "delete a"
         };
 
         for (String command : commands) {
@@ -41,9 +41,9 @@ public class ParserTest {
     @Test
     void getIndexFromCommand_validCommands_success() {
         String[] commands = {
-                "delete 2",
-                "done 100",
-                "done -1"
+            "delete 2",
+            "done 100",
+            "done -1"
         };
         int[] expected = {2, 100, -1};
 
@@ -55,6 +55,7 @@ public class ParserTest {
             try {
                 assertEquals(expected[i], Parser.getIndexFromCommand(commands[i]));
             } catch (InvalidFormatException ignored) {
+                // Empty. Already asserted that no error is thrown.
             }
         }
     }
@@ -62,10 +63,10 @@ public class ParserTest {
     @Test
     void getIndexFromCommand_nonIntegers_exceptionThrown() {
         String[] commands = {
-                "delete x",
-                "delete 1.1",
-                "done y",
-                "done 0.0"
+            "delete x",
+            "delete 1.1",
+            "done y",
+            "done 0.0"
         };
 
         for (String command : commands) {
@@ -87,6 +88,7 @@ public class ParserTest {
                 assertEquals(expected[i], matches[i]);
             }
         } catch (InvalidFormatException ignored) {
+            // Empty. Already asserted that no error is thrown.
         }
     }
 
@@ -104,6 +106,7 @@ public class ParserTest {
                 assertEquals(expected[i], matches[i]);
             }
         } catch (InvalidFormatException ignored) {
+            // Empty. Already asserted that no error is thrown.
         }
     }
 
@@ -121,6 +124,7 @@ public class ParserTest {
                 assertEquals(expected[i], matches[i]);
             }
         } catch (InvalidFormatException ignored) {
+            // Empty. Already asserted that no error is thrown.
         }
     }
 
@@ -138,6 +142,7 @@ public class ParserTest {
                 assertEquals(expected[i], matches[i]);
             }
         } catch (InvalidFormatException ignored) {
+            // Empty. Already asserted that no error is thrown.
         }
     }
 }

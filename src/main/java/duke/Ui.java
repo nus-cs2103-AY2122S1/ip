@@ -55,7 +55,7 @@ public class Ui {
      * Displays an loading error message when the application save file is missing or non-existent.
      */
     public static void showLoadingError() {
-        Ui.printMessage("Seems like you do not have a previous save file. " +
-                "I will create one for you once you input a task!\n");
+        Ui.printMessage("Seems like you do not have a previous save file. "
+                + "I will create one for you once you input a task!\n");
     }
 }

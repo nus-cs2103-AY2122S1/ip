@@ -2,10 +2,10 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
@@ -43,10 +43,10 @@ public class TaskListTest {
         inputList.add("E,1,description,6pm");
         inputList.add("D,0,description,2020-08-25");
 
-        String expected = "Here are the tasks in your list:\n" +
-                "1.[T][ ] description\n" +
-                "2.[E][X] description (at: 6pm)\n" +
-                "3.[D][ ] description (by: Aug 25 2020)\n";
+        String expected = "Here are the tasks in your list:\n"
+                + "1.[T][ ] description\n"
+                + "2.[E][X] description (at: 6pm)\n"
+                + "3.[D][ ] description (by: Aug 25 2020)\n";
 
         TaskList list = new TaskList(inputList);
         assertEquals(expected, list.list());
