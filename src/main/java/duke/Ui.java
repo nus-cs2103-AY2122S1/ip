@@ -9,7 +9,7 @@ public class Ui {
     private static TaskList commands = new TaskList();
     private String currentCommand;
     private Parser parsedCommand;
-
+    private String commandResult;
 
     public Ui(String command) {
         try {
@@ -19,46 +19,53 @@ public class Ui {
             Parser.Command commandType = parser.getCommandType();
             executeCommand(commandType);
         } catch (DukeException dukeException) {
-            System.out.println(dukeException + "\n");
+            this.commandResult = dukeException + "\n";
         }
     }
 
     private void executeCommand(Parser.Command commandType) {
         try {
             if (commandType == Parser.Command.LIST) {
-                TaskList.userCommands();
+                this.commandResult = TaskList.userCommands();
             } else if (commandType == Parser.Command.DONE) {
                 int taskNumberDone = parsedCommand.getTaskNumber();
-                commands.markDone(taskNumberDone);
+                this.commandResult = commands.markDone(taskNumberDone);
             } else if (commandType == Parser.Command.TODO) {
                 Task taskTodo = new ToDo(currentCommand.substring(5).trim(), Task.Type.T);
                 Ui.commands.add(taskTodo);
-                printTask(taskTodo);
+                this.commandResult = printTask(taskTodo);
             } else if (commandType == Parser.Command.DEADLINE) {
                 Task taskDeadline = new DeadLine(currentCommand.substring(9).trim(),
                         Task.Type.D, returnDeadline(currentCommand).trim());
                 Ui.commands.add(taskDeadline);
-                printTask(taskDeadline);
+                this.commandResult = printTask(taskDeadline);
             } else if (commandType == Parser.Command.EVENT) {
                 Task taskEvent = new Event(currentCommand.substring(6).trim(),
                         Task.Type.E, returnTimeline(currentCommand).trim());
                 Ui.commands.add(taskEvent);
-                printTask(taskEvent);
+                this.commandResult = printTask(taskEvent);
             } else if (commandType == Parser.Command.DELETE) {
                 int taskNumberDelete = parsedCommand.getTaskNumber();
-                commands.deleteTask(taskNumberDelete);
+                this.commandResult = commands.deleteTask(taskNumberDelete);
             } else if (commandType == Parser.Command.FIND) {
                 String query = parsedCommand.getQuery();
-                commands.search(query);
+                this.commandResult = commands.search(query);
             } else {
                 // Unknown Command, throw error
-                throw new DukeException("Error, Invalid Command");
+                throw new DukeException("Error, Invalid Command" + "\n ");
             }
         } catch (DukeException dukeException) {
-            System.out.println(dukeException + "\n");
+            this.commandResult = dukeException + "\n";
         }
+    }
 
-
+    /**
+     * Returns results of commands to be output to the GUI.
+     *
+     * @return command result.
+     */
+    public String getCommandResult() {
+        return this.commandResult;
     }
 
     /**
@@ -125,10 +132,12 @@ public class Ui {
      *
      * @param task Takes in a task object, invoking its toString method.
      */
-    private void printTask(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + commands + " tasks in the list.\n");
+    private String printTask(Task task) {
+        String result = "";
+        result += "Got it. I've added this task:\n";
+        result += task + "\n";
+        result +="Now you have " + commands + " tasks in the list.\n";
+        return result;
     }
 
 }

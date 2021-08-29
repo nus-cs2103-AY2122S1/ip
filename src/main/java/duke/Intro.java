@@ -21,7 +21,6 @@ public class Intro {
      * @return returns welcome message when user launches program.
      */
     public String printIntro() {
-        System.out.println("Hello from\n" + logo + "\n" + intro + "\n");
         return "Hello from\n" + logo + "\n" + intro + "\n";
     }
 }
