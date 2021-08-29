@@ -1,4 +1,4 @@
-deadline reading /by 2021-12-01
+deadline reading /by 2026-02-02
 event marathon /at Saturday 2-5
 todo send email to mom
 list
@@ -10,7 +10,7 @@ list
 deadline /by 530
 event /at 6
 todo
-deadline cs2103 ip /by
+deadline cs2103 ip /by 2025-02-02
 event tutorial /at
 delete 1
 list

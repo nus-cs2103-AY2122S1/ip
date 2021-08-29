@@ -1,3 +1,4 @@
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -5,8 +6,11 @@ import java.util.Scanner;
 
 public class Duke {
     private final static List<Task> items = new ArrayList<>(100);
-    // TaskList = new TaskList();
+    
+    private final Storage storage;
+    private final TaskList tasks = new TaskList();
     private Ui ui;
+    
     enum RequestType {
         DEFAULT,
         DONE,
@@ -17,12 +21,17 @@ public class Duke {
         UNUSUAL
     }
     
+    public Duke(String filePath){
+        storage = new Storage(filePath);
+        ui = new Ui();
+    }
+    
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("." +  File.separator + "data" + File.separator + "duke.txt").run();
     }
     
     public void run() {
-        Storage.loadIntoDuke(items);
+        storage.loadIntoDuke(items);
         Scanner userSc = new Scanner(System.in);
         ui = new Ui();
         ui.dukeGreeting();
@@ -73,7 +82,7 @@ public class Duke {
         }
 
         ui.farewellMessage();
-        Storage.writeToFile(items);
+        storage.writeToFile(items);
     }
 
     public static void echo(String userInput, String actionType){
@@ -110,7 +119,7 @@ public class Duke {
         }
     }
     
-    private static void deadline(String userInput){
+    private void deadline(String userInput){
         if(userInput.indexOf("/by")  < 11 ){
             System.out.println("Enter a valid deadline activity description\n");
         } else if(userInput.length() <= userInput.indexOf("/by") +  4){
@@ -123,7 +132,7 @@ public class Duke {
                 LocalDate time = LocalDate.parse(by);
                 Task t =  new Deadline(description, by);
                 items.add(t);
-                Storage.addNewTask(t);
+                storage.addNewTask(t);
                 echo(t.toString(), "added");
             } catch (Exception e){
                 System.out.println("Enter a valid date in the format yyyy-mm-dd\n");
@@ -132,7 +141,7 @@ public class Duke {
         }
     }
     
-    private static void event(String userInput){
+    private void event(String userInput){
         if(userInput.indexOf("/at")  < 8 ){
             System.out.println("Enter a valid event activity description\n");
         } else if(userInput.length() <= userInput.indexOf("/at") +  4){
@@ -143,18 +152,18 @@ public class Duke {
             Task t =  new Event(description, at);
             items.add(t);
             echo(t.toString(), "added");
-            Storage.addNewTask(t);
+            storage.addNewTask(t);
         }
     }
     
-    private static void todo(String userInput){
+    private void todo(String userInput){
         try {
             readActivity(userInput.substring(5), "todo");
             String description = userInput.substring(5);
             Task t = new ToDo(description);
             items.add(t);
             echo(t.toString(), "added");
-            Storage.addNewTask(t);
+            storage.addNewTask(t);
         } catch (DukeException e){
             System.out.println(e.getMessage());
         } catch (StringIndexOutOfBoundsException e){

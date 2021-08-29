@@ -11,12 +11,19 @@ import java.util.Scanner;
 
 
 public class Storage {
-    
-    public static String path = "." +  File.separator + "data" + File.separator + "duke.txt";
+
+    public String path;
     public static String pathFolder = "." +  File.separator + "data" + File.separator;
-    public static File file = new File(path);
+    public File file;
     
-    public static void loadIntoDuke(List<Task> items) {
+    public Storage(String filePath){
+        this.path = filePath;
+        file = new File(path);
+        
+        
+    }
+    
+    public void loadIntoDuke(List<Task> items) {
         try{
             if (!file.createNewFile()) {
                 Scanner sc = new Scanner(file);
@@ -44,7 +51,7 @@ public class Storage {
         }
     }
     
-    public static void addNewTask(Task task) {
+    public void addNewTask(Task task) {
         try {
             String input = task.toStorageString();
             Files.write(Paths.get(path), input.getBytes(), StandardOpenOption.APPEND);
@@ -54,7 +61,7 @@ public class Storage {
     }
     
     
-    public static void writeToFile(List<Task> items){
+    public void writeToFile(List<Task> items){
         try{
             FileWriter fw = new FileWriter(path, false);
             PrintWriter pw= new PrintWriter(fw, false);
@@ -70,7 +77,7 @@ public class Storage {
         }
     }
     
-    public static void fixFileFolderProblems(){
+    public void fixFileFolderProblems(){
         try{
             if(!Files.isDirectory(Path.of(pathFolder))){
                 Files.createDirectory(Path.of(pathFolder));
