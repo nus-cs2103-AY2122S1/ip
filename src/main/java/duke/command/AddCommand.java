@@ -39,16 +39,19 @@ public class AddCommand extends Command {
     /**
      * Implements the execute method from Command superclass.
      * Executes the given add command accordingly by updating taskList and storage, interacting with ui.
+     * D:
      *
      * @param taskList A duke.TaskList object that contains an ArrayList of duke.task.task object to be updated.
      * @param ui A duke.Ui object that helps to perform interaction when the command is executed.
      * @param storage A duke.Storage object that helps to update the storage after the execution is done.
+     * @return a String of system reply when given certain input under excecution.
      * @throws duke.DukeException Will be thrown if unable to locate/update the storage file.
      */
-    public void execute(duke.TaskList taskList, duke.Ui ui, duke.Storage storage) throws duke.DukeException {
+    public String execute(duke.TaskList taskList, duke.Ui ui, duke.Storage storage) throws duke.DukeException {
         taskList.addTask(task);
-        ui.showAdd(task, taskList.size());
+        System.out.println(ui.showAdd(task, taskList.size()));
         storage.updateStorage(taskList);
+        return ui.showAdd(task, taskList.size());
     }
 
     /**

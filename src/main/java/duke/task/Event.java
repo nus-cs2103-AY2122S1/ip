@@ -26,7 +26,7 @@ public class Event extends Task {
         try {
             this.localDate = LocalDate.parse(time);
         } catch (DateTimeParseException e) {
-            throw new duke.DukeException(" ☹ SORZ but I only understand date in yyyy-MM-dd format!");
+            throw new duke.DukeException(" D: SORZ but I only understand date in yyyy-MM-dd format!");
         }
     }
 

@@ -6,6 +6,6 @@ package duke.command;
  * @author Gu Geng
  */
 public abstract class Command {
-    public abstract void execute(duke.TaskList taskList, duke.Ui ui, duke.Storage storage) throws duke.DukeException;
+    public abstract String execute(duke.TaskList taskList, duke.Ui ui, duke.Storage storage) throws duke.DukeException;
     public abstract boolean isExit();
 }

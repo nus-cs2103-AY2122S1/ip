@@ -49,27 +49,31 @@ public class ListCommand extends Command {
             LocalDate holder = LocalDate.parse(input.substring(5).trim());
             return true;
         } catch (DateTimeParseException e) {
-            throw new DukeException(" ☹ SORZ but I only understand date in yyyy-MM-dd format!");
+            throw new DukeException(" D: SORZ but I only understand date in yyyy-MM-dd format!");
         }
     }
 
     /**
      * Implements the execute method from Command superclass.
      * Executes the given listing command accordingly by updating taskList and storage, interacting with ui.
+     * Returns a String of system reply when given certain input under execution.
      *
      * @param taskList A duke.TaskList object that contains an ArrayList of duke.task.task object to be updated.
      * @param ui A duke.Ui object that helps to perform interaction when the command is executed.
      * @param storage A duke.Storage object that helps to update the storage after the execution is done.
-     * @throws duke.DukeException Will be thrown if unable to locate/update the storage file.
+     * @return a String of system reply when given certain input under execution.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (taskList.size() == 0) {
-            ui.emptyList();
+            System.out.println(ui.emptyList());
+            return ui.emptyList();
         } else {
             if (isOps) {
-                ui.showScheduleList(taskList, localDate);
+                System.out.println(ui.showScheduleList(taskList, localDate));
+                return ui.showScheduleList(taskList, localDate);
             } else {
-                ui.showFullList(taskList);
+                System.out.println(ui.showFullList(taskList));
+                return ui.showFullList(taskList);
             }
         }
     }
@@ -83,4 +87,5 @@ public class ListCommand extends Command {
     public boolean isExit() {
         return false;
     }
+
 }
