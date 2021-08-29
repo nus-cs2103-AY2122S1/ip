@@ -41,16 +41,6 @@ public abstract class Task {
      */
     public abstract String toFileFormat();
 
-    public boolean contains(String keyword) {
-        return name.contains(keyword);
-    }
-
-    public boolean isDone() {
-        return isDone;
-    }
-
-    public abstract LocalDateTime getDateTime();
-
     /**
      * Checks if a task contains a certain keyword.
      * @param keyword The keyword to check in a task.
