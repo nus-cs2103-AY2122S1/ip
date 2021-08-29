@@ -5,6 +5,7 @@ import task.deadline.Deadline;
 import task.event.Event;
 import task.Task;
 import task.Todo.Todo;
+import java.util.ArrayList;
 
 /**
  * Handle flow of user command
@@ -59,6 +60,37 @@ public class Parser {
                 Task todo = new Todo(nextLine);
                 task.addTodo(nextLine, todo);
                 firstTime = 1;
+            }
+
+            // finding words in the list
+            else if (nextLine.substring(0, 4).equals("find")) {
+                System.out.println("Found these matching tasks!");
+                ArrayList<Task> taskList = task.getList();
+                ArrayList<String> completeList = task.getDoneCheck();
+                int count = 1;
+                int found = 0;
+
+
+                for (int i = 0; i < taskList.size(); i++) {
+                    String current_line = taskList.get(i).getTask();
+                    int intIndex = current_line.indexOf(nextLine.substring(5));
+
+                    if (intIndex == -1) {
+                    } else {
+                        found = 1;
+                        System.out.println(count
+                                + ".["
+                                    + taskList.get(i).getType()
+                                        + "]["
+                                            + completeList.get(i)
+                                                + "]"
+                                                    + taskList.get(i).getTask());
+                        count = count + 1;
+                    }
+                }
+                if (found == 0) {
+                    System.out.println(nextLine.substring(5) + " not found");
+                }
             }
 
             //adding deadline to the list
