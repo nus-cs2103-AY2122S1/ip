@@ -1,17 +1,36 @@
+<<<<<<< HEAD:src/main/java/duke/Duke.java
 package duke;
 
+=======
+<<<<<<< Updated upstream:src/main/java/Duke.java
+=======
+package duke;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+<<<<<<< HEAD:src/main/java/duke/Duke.java
+=======
+>>>>>>> Stashed changes:src/main/java/duke/Duke.java
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
 import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
 
+<<<<<<< HEAD:src/main/java/duke/Duke.java
     protected static final String localFile = "data/duke.txt";
+=======
+<<<<<<< Updated upstream:src/main/java/Duke.java
+=======
+    protected static final String LOCAL_FILE = "data/duke.txt";
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
 
     public static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
@@ -30,6 +49,10 @@ public class Duke {
             throw new DukeException("Unknown type of task is detected.");
         }
     }
+<<<<<<< HEAD:src/main/java/duke/Duke.java
+=======
+>>>>>>> Stashed changes:src/main/java/duke/Duke.java
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
 
     public static void main(String[] args) {
 
@@ -45,9 +68,18 @@ public class Duke {
         String a = sc.nextLine();
         String[] b = a.split(" ", 2);
 
+<<<<<<< HEAD:src/main/java/duke/Duke.java
         ArrayList<Task> history = new ArrayList<>();
 
         File importedFile = new File(localFile);
+=======
+<<<<<<< Updated upstream:src/main/java/Duke.java
+        ArrayList<Task> history = new ArrayList<Task>();
+=======
+        ArrayList<Task> history = new ArrayList<>();
+
+        File importedFile = new File(LOCAL_FILE);
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
 
         try {
             importedFile.createNewFile();
@@ -92,6 +124,10 @@ public class Duke {
         }
 
 
+<<<<<<< HEAD:src/main/java/duke/Duke.java
+=======
+>>>>>>> Stashed changes:src/main/java/duke/Duke.java
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
 
             while (!a.equals("bye")) {
                 try {
@@ -111,6 +147,7 @@ public class Duke {
                             Task completedTask = history.get(taskIndex - 1);
                             completedTask.Done();
                             System.out.println("Nice! I have marked this task as done!");
+<<<<<<< HEAD:src/main/java/duke/Duke.java
                             System.out.println(completedTask);
 
                             try {
@@ -118,6 +155,19 @@ public class Duke {
                             } catch (IOException e) {
                                 System.out.println("Something went wrong: " + e.getMessage());
                             }
+=======
+<<<<<<< Updated upstream:src/main/java/Duke.java
+                            System.out.println(history.get(taskIndex - 1));
+=======
+                            System.out.println(completedTask);
+
+                            try {
+                                appendToFile(LOCAL_FILE, a + System.lineSeparator());
+                            } catch (IOException e) {
+                                System.out.println("Something went wrong: " + e.getMessage());
+                            }
+>>>>>>> Stashed changes:src/main/java/duke/Duke.java
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
 
                             a = sc.nextLine();
                             b = a.split(" ", 2);
@@ -135,6 +185,7 @@ public class Duke {
 
                             System.out.println("Added task:");
                             System.out.println(task);
+<<<<<<< HEAD:src/main/java/duke/Duke.java
                             System.out.println("You have " + length + " tasks in the list");
 
                             try {
@@ -142,6 +193,19 @@ public class Duke {
                             } catch (IOException e) {
                                 System.out.println("Something went wrong: " + e.getMessage());
                             }
+=======
+<<<<<<< Updated upstream:src/main/java/Duke.java
+                            System.out.println("You have " + String.valueOf(length) + " tasks in the list");
+=======
+                            System.out.println("You have " + length + " tasks in the list");
+
+                            try {
+                                appendToFile(LOCAL_FILE, a + System.lineSeparator());
+                            } catch (IOException e) {
+                                System.out.println("Something went wrong: " + e.getMessage());
+                            }
+>>>>>>> Stashed changes:src/main/java/duke/Duke.java
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
 
                             a = sc.nextLine();
                             b = a.split(" ", 2);
@@ -161,12 +225,23 @@ public class Duke {
                         System.out.println(task);
                         System.out.println("You have " + String.valueOf(length) + " tasks in the list");
 
+<<<<<<< HEAD:src/main/java/duke/Duke.java
                         try {
                             appendToFile(localFile, a + System.lineSeparator());
+=======
+<<<<<<< Updated upstream:src/main/java/Duke.java
+=======
+                        try {
+                            appendToFile(LOCAL_FILE, a + System.lineSeparator());
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
 
+<<<<<<< HEAD:src/main/java/duke/Duke.java
+=======
+>>>>>>> Stashed changes:src/main/java/duke/Duke.java
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
                         a = sc.nextLine();
                         b = a.split(" ", 2);
 
@@ -180,12 +255,23 @@ public class Duke {
                         System.out.println(task);
                         System.out.println("You have " + String.valueOf(length) + " tasks in the list");
 
+<<<<<<< HEAD:src/main/java/duke/Duke.java
                         try {
                             appendToFile(localFile, a + System.lineSeparator());
+=======
+<<<<<<< Updated upstream:src/main/java/Duke.java
+=======
+                        try {
+                            appendToFile(LOCAL_FILE, a + System.lineSeparator());
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
 
+<<<<<<< HEAD:src/main/java/duke/Duke.java
+=======
+>>>>>>> Stashed changes:src/main/java/duke/Duke.java
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
                         a = sc.nextLine();
                         b = a.split(" ", 2);
                     } else if (b[0].equals("delete")) {
@@ -199,13 +285,25 @@ public class Duke {
                         System.out.println(removed);
                         System.out.println("Now you have " + String.valueOf(length) + " tasks in the list.");
 
+<<<<<<< HEAD:src/main/java/duke/Duke.java
                         try {
                             appendToFile(localFile, a + System.lineSeparator());
+=======
+<<<<<<< Updated upstream:src/main/java/Duke.java
+                        a= sc.nextLine();
+=======
+                        try {
+                            appendToFile(LOCAL_FILE, a + System.lineSeparator());
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
                         } catch (IOException e) {
                             System.out.println("Something went wrong: " + e.getMessage());
                         }
 
                         a = sc.nextLine();
+<<<<<<< HEAD:src/main/java/duke/Duke.java
+=======
+>>>>>>> Stashed changes:src/main/java/duke/Duke.java
+>>>>>>> parent of b489ae1 (Revert "Level-8"):src/main/java/Duke.java
                         b = a.split(" ", 2);
                     } else {
                         throw new DukeException("I do not know what you want to do!");
