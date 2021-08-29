@@ -37,7 +37,7 @@ public class Task {
      * The main factory constructor method for Todo, Deadline and Event instances.
      *
      * @param taskType Enum representing the type of task to be initialized.
-     * @param input The raw input command from the user.
+     * @param input    The raw input command from the user.
      * @return Task constructed based of input command.
      * @throws DukeException
      */

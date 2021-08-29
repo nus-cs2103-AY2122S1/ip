@@ -9,7 +9,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> tasks) {
@@ -88,8 +88,6 @@ public class TaskList {
             TaskList taskList = (TaskList) o;
 
             return this.tasks.equals(taskList.tasks);
-
-
         }
         return false;
 

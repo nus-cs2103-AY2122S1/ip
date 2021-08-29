@@ -2,8 +2,12 @@ package duke.command;
 
 
 import duke.Storage;
-import duke.task.*;
 import duke.Ui;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.Todo;
 
 public class AddCommand extends Command {
 

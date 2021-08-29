@@ -1,7 +1,17 @@
 import duke.Parser;
 import duke.Ui;
-import duke.command.*;
-import duke.task.*;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindByDateCommand;
+import duke.command.ListCommand;
+import duke.command.MarkDoneCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.Todo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -152,8 +162,10 @@ public class ParserTest {
     public void testDateTimeToString() {
         LocalDateTime dateTime = LocalDateTime.parse("2021-11-23T00:00");
 
-        Assertions.assertEquals("23 November 2021", Parser.dateTimeToString(dateTime, true), Parser.dateTimeToString(dateTime, true));
-        Assertions.assertEquals("23 November 2021 00:00", Parser.dateTimeToString(dateTime, false), Parser.dateTimeToString(dateTime, false));
+        Assertions.assertEquals("23 November 2021", Parser.dateTimeToString(dateTime, true),
+                Parser.dateTimeToString(dateTime, true));
+        Assertions.assertEquals("23 November 2021 00:00", Parser.dateTimeToString(dateTime, false),
+                Parser.dateTimeToString(dateTime, false));
     }
 
 
@@ -171,10 +183,14 @@ public class ParserTest {
         LocalDateTime expectedDateTime = LocalDateTime.parse("2021-11-23T00:00");
 
 
-        Assertions.assertEquals(true, Parser.parseDateAndTime(dateOne, timeOne).equals(expectedDateTime), "parseDateTime failed");
-        Assertions.assertEquals(true, Parser.parseDateAndTime(dateOne, timeTwo).equals(expectedDateTime), "parseDateTime failed");
-        Assertions.assertEquals(true, Parser.parseDateAndTime(dateTwo, timeOne).equals(expectedDateTime), "parseDateTime failed");
-        Assertions.assertEquals(true, Parser.parseDateAndTime(dateTwo, timeTwo).equals(expectedDateTime), "parseDateTime failed");
+        Assertions.assertEquals(true, Parser.parseDateAndTime(dateOne, timeOne).equals(expectedDateTime),
+                "parseDateTime failed");
+        Assertions.assertEquals(true, Parser.parseDateAndTime(dateOne, timeTwo).equals(expectedDateTime),
+                "parseDateTime failed");
+        Assertions.assertEquals(true, Parser.parseDateAndTime(dateTwo, timeOne).equals(expectedDateTime),
+                "parseDateTime failed");
+        Assertions.assertEquals(true, Parser.parseDateAndTime(dateTwo, timeTwo).equals(expectedDateTime),
+                "parseDateTime failed");
 
 
         String expectedMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n" +

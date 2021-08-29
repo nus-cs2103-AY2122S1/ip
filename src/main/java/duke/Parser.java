@@ -1,7 +1,14 @@
 package duke;
 
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindByDateCommand;
+import duke.command.FindByDescriptionCommand;
+import duke.command.ListCommand;
+import duke.command.MarkDoneCommand;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
@@ -75,7 +82,8 @@ public class Parser {
             String[] parsedInput = input.split(" ");
 
             if (parsedInput.length != 2) {
-                throw (new DukeException("Please specify a task you would like to delete Sir/Mdm:\n" + ui.list(tasks)));
+                throw (new DukeException("Please specify a task you would like to delete Sir/Mdm:\n"
+                        + ui.list(tasks)));
             }
 
             int taskToDelete;
