@@ -13,6 +13,6 @@ public abstract class Command {
 
     protected String space = Ui.SPACE;
 
-    public abstract void execute(TaskList taskList, Ui ui);
+    public abstract String execute(TaskList taskList, Ui ui);
 
 }

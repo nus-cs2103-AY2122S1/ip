@@ -18,8 +18,10 @@ public class ListCommand extends Command {
      * @param ui the UI for the message to be displayed through.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        ui.displayText(taskList.printList());
+    public String execute(TaskList taskList, Ui ui) {
+        String output = taskList.printList();
+        ui.displayText(output);
+        return output;
     }
 
 }

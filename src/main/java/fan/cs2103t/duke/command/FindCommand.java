@@ -33,7 +33,8 @@ public class FindCommand extends Command {
      * @param ui the UI for the message to be displayed through.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
+        String output;
         StringBuilder result = new StringBuilder();
         int count = 0;
         boolean hasFound = false;
@@ -50,11 +51,13 @@ public class FindCommand extends Command {
         }
         if (hasFound) {
             result.setLength(result.length() - 1);
-            ui.displayText(space + "Here are the matching tasks in your list: \n" + result);
+            output = space + "Here are the matching tasks in your list: \n" + result;
+            ui.displayText(output);
         } else {
-            ui.displayText(space + "It seems nothing in your list matches the search query...");
+            output = space + "It seems nothing in your list matches the search query...";
+            ui.displayText(output);
         }
-
+        return output;
     }
 
 }

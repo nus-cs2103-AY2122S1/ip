@@ -17,8 +17,10 @@ public class ExitCommand extends Command {
      * @param ui the UI for the message to be displayed through.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        ui.dismiss();
+    public String execute(TaskList taskList, Ui ui) {
+        String output;
+        output = ui.dismiss();
+        return output;
     }
 
     /**

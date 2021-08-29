@@ -1,4 +1,4 @@
-package fan.cs2103t.duke;
+package fan.cs2103t.duke.ui;
 
 import fan.cs2103t.duke.command.Command;
 import fan.cs2103t.duke.command.ExitCommand;
@@ -6,7 +6,6 @@ import fan.cs2103t.duke.exception.DukeException;
 import fan.cs2103t.duke.parser.Parser;
 import fan.cs2103t.duke.storage.Storage;
 import fan.cs2103t.duke.task.TaskList;
-import fan.cs2103t.duke.ui.Ui;
 
 /**
  * Implementation of Duke, a personal assistant chatterbot that
@@ -57,8 +56,25 @@ public class Duke {
         } while (!isExit);
     }
 
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        String output;
+        try {
+            Command command = parser.parseCommand(input);
+            String tmp = command.execute(tasks, ui);
+            output = tmp == null ? "NULL" : tmp;
+            storage.saveTaskList(tasks); // save the latest task list no matter what command it is
+            if (ExitCommand.isExit(command)) {
+                System.exit(0); // TODO: better handle this
+            }
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+            output = e.getMessage();
+        }
+        return output;
     }
 
 }

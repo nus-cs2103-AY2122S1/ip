@@ -31,16 +31,19 @@ public class AddCommand extends Command {
      * @param ui the UI for the message to be displayed through.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
+        String output = null;
         if (taskList.addTask(task)) {
-            ui.displayText(space + "Got it. I've added this task: \n"
+            output = space + "Got it. I've added this task: \n"
                     + space + "  " + task.getDescriptionWithStatus() + "\n"
-                    + space + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.");
+                    + space + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.";
+            ui.displayText(output);
             // dataHandler.storeTaskList(taskList);
+            return output;
         } else {
-
             System.exit(1);
         }
+        return output;
     }
 
 }

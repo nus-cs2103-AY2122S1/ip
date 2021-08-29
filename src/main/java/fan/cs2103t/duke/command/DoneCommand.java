@@ -31,20 +31,25 @@ public class DoneCommand extends Command {
      * @param ui the UI for the message to be displayed through.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
+        String output;
         try {
             Task t = taskList.getTasks().get(taskIndex - 1);
             if (t.getIsDone()) {
-                ui.displayText(space + "You have already done this task!");
+                output = space + "You have already done this task!";
+                ui.displayText(output);
             } else {
                 t.markAsDone();
-                ui.displayText(space + "Nice! I've marked this task as done: \n"
-                        + space + "  " + t.getDescriptionWithStatus());
+                output = space + "Nice! I've marked this task as done: \n"
+                        + space + "  " + t.getDescriptionWithStatus();
+                ui.displayText(output);
                 // dataHandler.storeTaskList(taskList);
             }
         } catch (IndexOutOfBoundsException ex) {
-            ui.displayText(space + "Oops, the task doesn't seem to exist.");
+            output = space + "Oops, the task doesn't seem to exist.";
+            ui.displayText(output);
         }
+        return output;
     }
 
 }

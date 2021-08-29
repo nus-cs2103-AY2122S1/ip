@@ -31,21 +31,25 @@ public class DeleteCommand extends Command {
      * @param ui the UI for the message to be displayed through.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
+        String output = null;
         try {
             Task t = taskList.getTasks().get(taskIndex - 1);
             String description = t.getDescriptionWithStatus();
             if (taskList.deleteTask(taskIndex - 1)) {
-                ui.displayText(space + "Noted. I've removed this task: \n"
+                output = space + "Noted. I've removed this task: \n"
                         + space + "  " + description + "\n"
-                        + space + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.");
+                        + space + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.";
+                ui.displayText(output);
                 // dataHandler.storeTaskList(taskList);
             } else {
                 System.exit(1);
             }
         } catch (IndexOutOfBoundsException ex) {
-            ui.displayText(space + "Oops, the task doesn't seem to exist.");
+            output = space + "Oops, the task doesn't seem to exist.";
+            ui.displayText(output);
         }
+        return output;
     }
 
 }

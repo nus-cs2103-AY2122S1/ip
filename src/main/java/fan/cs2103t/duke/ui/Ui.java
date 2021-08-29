@@ -38,8 +38,10 @@ public class Ui {
     /**
      * Displays a goodbye message to the user through this UI.
      */
-    public void dismiss() {
-        displayText(SPACE + "Bye. Hope to see you again soon!");
+    public String dismiss() {
+        String byeMessage = SPACE + "Bye. Hope to see you again soon!";
+        displayText(byeMessage);
+        return byeMessage;
     }
 
     /**
