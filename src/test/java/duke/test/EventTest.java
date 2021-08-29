@@ -1,18 +1,22 @@
 package duke.test;
 
-import duke.task.Event;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
+
+import duke.task.Event;
+
 public class EventTest {
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    Event eventIncomplete = new Event("test 1", false,
+    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private final Event eventIncomplete = new Event("test 1", false,
             LocalDateTime.parse("31/12/2021 2359", dtf));
-    Event eventComplete = new Event("test 2", true, LocalDateTime.parse("01/08/2021 0800", dtf));
-    Event eventDifferentDateTimeFormat = new Event("test 3", false,
-            LocalDateTime.of(2021, 9, 1, 12, 00));
+    private final Event eventComplete = new Event("test 2", true,
+            LocalDateTime.parse("01/08/2021 0800", dtf));
+    private final Event eventDifferentDateTimeFormat = new Event("test 3", false,
+            LocalDateTime.of(2021, 9, 1, 12, 0));
     @Test
     public void toString_incompleteEvent_success() {
         assertEquals("[E][] test 1 (at: 31 Dec 2021 11:59 PM)", eventIncomplete.toString());

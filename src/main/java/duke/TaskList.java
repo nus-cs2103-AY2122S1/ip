@@ -1,7 +1,9 @@
 package duke;
 
-import duke.task.Task;
 import java.util.ArrayList;
+
+import duke.task.Task;
+
 
 /**
  * Encapsulates a list of Tasks that the user sets, with relevant processing methods.
@@ -63,13 +65,13 @@ public class TaskList {
      */
     public void deleteTask(int index) throws DukeException {
         if (this.list.size() < 1) {
-            throw new DukeException("You haven't added anything to the list yet! Try adding something before " +
-                    "deleting.");
+            throw new DukeException("You haven't added anything to the list yet! Try adding something before "
+                    + "deleting.");
         } else if (index <= this.list.size() && index >= 1) {
             Task toDelete = list.get(index - 1);
             list.remove(index - 1);
-            System.out.println("Noted. I've removed this task:\n" + "  " + toDelete + "\n" + "Now you have " +
-                    list.size() + " task" + (list.size() == 1 ? "" : "s") + " in the list.");
+            System.out.println("Noted. I've removed this task:\n" + "  " + toDelete + "\n" + "Now you have "
+                    + list.size() + " task" + (list.size() == 1 ? "" : "s") + " in the list.");
         } else {
             throw new DukeException("Couldn't find that task in the list! Try again.");
         }
@@ -84,6 +86,11 @@ public class TaskList {
         return this.list.get(index);
     }
 
+    /**
+     * Prints a Task List that is filtered such that it only consists of Tasks that contain the given search term.
+     * @param searchTerm The given search term to narrow down the Tasks in the Task List.
+     * @throws DukeException In the case where no Tasks matching the search term can be found.
+     */
     public void printFilteredTasks(String searchTerm) throws DukeException {
         ArrayList<Task> filteredList = new ArrayList<>();
         for (Task task : list) {

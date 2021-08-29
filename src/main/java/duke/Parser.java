@@ -1,13 +1,13 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * Encapsulates a Parser, which parses user inputs, interprets them as commands and
@@ -46,22 +46,22 @@ public class Parser {
             case ("done"):
                 throw new DukeException("Please ensure that there is a number after the command 'done'. Try again.");
             case ("deadline"):
-                throw new DukeException("Please ensure that there is a task description after the command 'deadline' " +
-                        "and a deadline after '/by'. Try again.");
+                throw new DukeException("Please ensure that there is a task description after the command 'deadline' "
+                        + "and a deadline after '/by'. Try again.");
             case ("event"):
-                throw new DukeException("Please ensure that there is a task description after the command 'deadline' " +
-                        "with a date and time after '/at'. Try again.");
+                throw new DukeException("Please ensure that there is a task description after the command 'deadline' "
+                        + "with a date and time after '/at'. Try again.");
             case ("todo"):
-                throw new DukeException("Please ensure that there is a task description after the command 'todo'. " +
-                        "Try again.");
+                throw new DukeException("Please ensure that there is a task description after the command 'todo'. "
+                        + "Try again.");
             case ("delete"):
                 throw new DukeException("Please ensure that there is a number after the command 'delete'. Try again.");
             case ("find"):
-                throw new DukeException("Please ensure that there is a search term after the command 'find'. " +
-                        "Try again.");
+                throw new DukeException("Please ensure that there is a search term after the command 'find'. "
+                        + "Try again.");
             default:
-                throw new DukeException("I didn't quite get what you meant. To add a task, begin with " +
-                        "'deadline', 'event' or 'todo'.");
+                throw new DukeException("I didn't quite get what you meant. To add a task, begin with "
+                        + "'deadline', 'event' or 'todo'.");
             }
         } else {
             switch (first) {
@@ -73,8 +73,8 @@ public class Parser {
                         list.completeTask(listIndex);
                         break;
                     } else {
-                        throw new DukeException("Please ensure that a valid number follows the command 'done'. " +
-                                "Try again.");
+                        throw new DukeException("Please ensure that a valid number follows the command 'done'. "
+                                + "Try again.");
                     }
                 } catch (NumberFormatException e) {
                     throw new DukeException("Please ensure only a number follows the command 'done'. Try again.");
@@ -87,8 +87,8 @@ public class Parser {
                     try {
                         String[] restOfDeadlineSplit = restOfDeadline.split(" /by ", 2);
                         if (restOfDeadlineSplit.length < 2) {
-                            throw new DukeException("Please ensure that there is a task description and deadline. " +
-                                    "Try again");
+                            throw new DukeException("Please ensure that there is a task description and deadline. "
+                                    + "Try again");
                         }
                         String deadlineDescription = restOfDeadlineSplit[0];
                         String deadlineDateString = restOfDeadlineSplit[1];
@@ -97,12 +97,12 @@ public class Parser {
                         Deadline createdDeadlineTask = new Deadline(deadlineDescription, false, deadlineDate);
                         list.addToList(createdDeadlineTask);
                         System.out.println("Got it. I've added this task:\n" + "  " + createdDeadlineTask + "\n"
-                                + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
-                                " in the list.");
+                                + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s")
+                                + " in the list.");
                         break;
                     } catch (DateTimeParseException e) {
-                        throw new DukeException("Please ensure that your deadline is formatted in the following " +
-                                "way: DD/MM/YY");
+                        throw new DukeException("Please ensure that your deadline is formatted in the following "
+                                + "way: DD/MM/YY");
                     }
                 }
             case ("event"):
@@ -113,8 +113,8 @@ public class Parser {
                     try {
                         String[] restOfEventSplit = restOfEvent.split(" /at ", 2);
                         if (restOfEventSplit.length < 2) {
-                            throw new DukeException("Please ensure that there is a task description with a date and " +
-                                    "time. Try again");
+                            throw new DukeException("Please ensure that there is a task description with a date and "
+                                    + "time. Try again");
                         }
                         String eventDescription = restOfEventSplit[0];
                         String eventDateTimeString = restOfEventSplit[1];
@@ -123,12 +123,12 @@ public class Parser {
                         Event createdEventTask = new Event(eventDescription, false, eventDateTime);
                         list.addToList(createdEventTask);
                         System.out.println("Got it. I've added this task:\n" + "  " + createdEventTask + "\n"
-                                + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
-                                " in the list.");
+                                + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s")
+                                + " in the list.");
                         break;
                     } catch (DateTimeParseException e) {
-                        throw new DukeException("Please ensure that your deadline is formatted in the following " +
-                                "way: DD/MM/YY");
+                        throw new DukeException("Please ensure that your deadline is formatted in the following "
+                                + "way: DD/MM/YY");
                     }
                 }
             case ("todo"):
@@ -136,8 +136,7 @@ public class Parser {
                 Todo createdTodoTask = new Todo(todoDescription, false);
                 list.addToList(createdTodoTask);
                 System.out.println("Got it. I've added this task:\n" + "  " + createdTodoTask + "\n"
-                        + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") +
-                        " in the list.");
+                        + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s") + " in the list.");
                 break;
             case ("delete"):
                 String toDeleteIndexString = splitInput[1];
@@ -146,8 +145,8 @@ public class Parser {
                     list.deleteTask(toDeleteIndex);
                     break;
                 } catch (NumberFormatException e) {
-                    throw new DukeException("Please make sure only a number follows the command 'delete'. " +
-                            "Try again.");
+                    throw new DukeException("Please make sure only a number follows the command 'delete'. "
+                            + "Try again.");
                 } catch (StringIndexOutOfBoundsException e) {
                     throw new DukeException("Please add a number after the command 'delete'. Try again.");
                 }
@@ -156,8 +155,8 @@ public class Parser {
                 list.printFilteredTasks(searchTerm);
                 break;
             default:
-                throw new DukeException("I didn't quite get what you meant. To add a task, begin with " +
-                        "'deadline', 'event' or 'todo'.");
+                throw new DukeException("I didn't quite get what you meant. To add a task, begin with "
+                        + "'deadline', 'event' or 'todo'.");
             }
         }
     }

@@ -1,19 +1,18 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * Encapsulates a class that handles saving to and loading from the text file that contains task data.
@@ -46,7 +45,7 @@ public class Storage {
             }
             bw.close();
         } catch (IOException e) {
-            throw new DukeException("Couldn't write the tasks!");
+            throw new DukeException("Error upon writing to data file: " + e.getMessage());
         }
     }
 
@@ -63,7 +62,7 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                System.out.println("Error creating data file: " + e.getMessage());
+                throw new DukeException("Error upon creating data file: " + e.getMessage());
             }
         }
         try {
@@ -96,11 +95,13 @@ public class Storage {
                     LocalDateTime correctEventAt = LocalDateTime.parse(eventAt, dtf2);
                     list.addToList(new Event(eventName, eventStatus, correctEventAt));
                     break;
+                default:
+                    throw new DukeException("Oh no! It seems that the data in the storage file ");
                 }
             }
             br.close();
         } catch (IOException e) {
-            throw new DukeException("Couldn't read the tasks!");
+            throw new DukeException("Error upon reading from data file: " + e.getMessage());
         }
     }
 }
