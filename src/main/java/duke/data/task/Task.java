@@ -21,6 +21,7 @@ public abstract class Task {
 
     /**
      * Retrieves the done status of the task.
+     *
      * @return string representation of the done status of the task.
      */
     public String getStatusIcon() {

@@ -25,6 +25,7 @@ public class Ui {
 
     /**
      * Informs the user that they have inputted an empty task.
+     *
      * @param s Type of task input.
      * @return The error message to the user.
      */
@@ -74,6 +75,7 @@ public class Ui {
 
     /**
      * Informs the user the number of tasks on their list.
+     *
      * @param i Number of tasks.
      */
     public static void printNoOfTasks(int i) {
