@@ -9,8 +9,7 @@ import java.util.regex.Pattern;
 
 // Deals with interactions with the user
 public class Ui {
-    private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-    private Scanner sc;
+    private final Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
@@ -38,10 +37,10 @@ public class Ui {
      * DONE
      * Method to call when user wishes to see a list of all events
      */
-    public void listTasks(TaskList taskList) {
+    public void listTasks() {
         System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < taskList.getSize(); i++) {
-            Task currTask = taskList.get(i);
+        for (int i = 0; i < TaskList.getSize(); i++) {
+            Task currTask = TaskList.get(i);
             System.out.println((i+1) + "." + currTask.toString());
         }
     }

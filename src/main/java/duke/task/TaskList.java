@@ -2,7 +2,7 @@ package duke.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    public static ArrayList<Task> taskList;
+    private static ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> tl) {
         taskList = tl;

@@ -7,7 +7,7 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 public class DoneCommand extends Command{
-    int index;
+    private final int index;
 
     public DoneCommand(int index) {
         this.index = index;

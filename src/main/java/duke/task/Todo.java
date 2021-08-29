@@ -7,7 +7,9 @@ public class Todo extends Task {
     }
 
     public boolean getIsDone() { return this.isDone;}
+
     public String getDescription() { return this.description; }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

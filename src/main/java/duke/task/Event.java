@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     protected String at;
-    LocalDate atDate;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    String[] monthArray = new  String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"};
+    protected LocalDate atDate;
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    protected String[] monthArray = new  String[] {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"};
 
     public Event(String description, String at) {
         super(description);
@@ -16,8 +16,11 @@ public class Event extends Task {
     }
 
     public boolean getIsDone() { return this.isDone;}
+
     public String getDescription() { return this.description; }
+
     public String getAt() {return this.at;}
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + monthArray[atDate.getMonthValue() - 1] + " " + atDate.getDayOfMonth() + " " + atDate.getYear() + ")";

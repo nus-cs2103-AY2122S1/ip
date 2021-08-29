@@ -5,7 +5,7 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 public class DeleteCommand extends Command {
-    private int index;
+    private final int index;
 
     public DeleteCommand(int index) {
         this.index = index;
@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Task task = taskList.get(this.index);
+        Task task = TaskList.get(this.index);
         taskList.deleteTask(this.index);
         ui.deleteTask(task);
     }
