@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * Represents a task which can be marked done.
  * 
  * @author Gordon Yit
- * @Since 23-08-21
+ * @version CS2103T, Semester 2
  */
 
 public class Task {
@@ -68,7 +68,7 @@ public class Task {
     }
 
     /**
-     * checks if given datetime matches the deadline of the task.
+     * Checks if given datetime matches the deadline of the task.
      * 
      * @param dateString date in string form to to compare with.
      * @return false.

@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  * Represents tasks with specific timing.
  * 
  * @author Gordon Yit
- * @Since 23-08-21
+ * @version CS2103T, Semester 2
  */
 public class Event extends Task {
     private final String TASK_MARKER = "E";
@@ -20,7 +20,7 @@ public class Event extends Task {
     private final String AT = "at ";
     
     /**
-     * Class constructor for Duke.Event class.
+     * Class constructor.
      * 
      * @param description consisting of task description and timing.
      */
@@ -76,7 +76,7 @@ public class Event extends Task {
     }
 
     /**
-     * checks if given datetime matches the tasks date time.
+     * Checks if given datetime matches the tasks date time.
      * 
      * @param dateString date to compare with in string form.
      * @return true if the task date time matches the date time given.

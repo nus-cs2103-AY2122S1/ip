@@ -23,9 +23,9 @@ public class Parser {
     
     /**
      * Takes in a user command, logic decides which command to call.
-     * @param command
      * 
-     * @return the command to call based on user command.
+     * @param command a string of user input command.
+     * @return a command object to execute the user command.
      */
     public static Command parse(String command) throws DukeException {
         String[] commandDescription = command.split(" ", 0);

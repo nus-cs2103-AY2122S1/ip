@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  * Represents tasks with deadline.
  * 
  * @author Gordon Yit
- * @Version CS2103T, Semester 1
+ * @version CS2103T, Semester 1
  */
 public class Deadline extends Task {
     private final String TASK_MARKER = "D";
@@ -20,7 +20,7 @@ public class Deadline extends Task {
     private final String BY = "by ";
     
     /**
-     * Class constructor for Duke.Deadline class.
+     * Class constructor.
      * 
      * @param description consisting of task description and deadline date.
      */
@@ -76,7 +76,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * checks if given datetime matches the tasks date time.
+     * Checks if given datetime matches the tasks date time.
      *
      * @param dateString date time (in string form) to compare with.
      * @return true if the task date time matches the date time given.

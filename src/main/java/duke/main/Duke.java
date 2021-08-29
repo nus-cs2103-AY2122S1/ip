@@ -2,12 +2,11 @@ package duke.main;
 
 import duke.command.Command;
 
-
 /**
  * Represents the duke chat bot, which has the ability to log and track and delete tasks.
  * 
  * @author Gordon Yit
- * @Since 23-08-21
+ * @version CS2103T, Semester 2
  */
 public class Duke {
     private Storage storage;
@@ -15,7 +14,10 @@ public class Duke {
     private Ui ui;
     
     /**
-     * Constructor for the Duke.Duke class.
+     * Class constructor.
+     * 
+     * @param fileName name of the storage file.
+     * @param filePath directory of the storage file.
      */
     public Duke(String filePath, String fileName) {
         ui = new Ui();
@@ -29,7 +31,7 @@ public class Duke {
     }
     
     /**
-     * Executes the duke chatbot.
+     * Executes the duke chat bot.
      */
     public void run() {
         ui.showWelcome();
