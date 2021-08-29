@@ -18,7 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Represents testing the TaskList class.
  */
 public class TaskListTest {
-    
+
+    /**
+     * Represents a stub for TaskList class.
+     */
     public class StubTaskArray {
         TaskList taskList;
         public StubTaskArray() {
@@ -34,27 +37,31 @@ public class TaskListTest {
         }
 
         /**
-         * retrives the list of tasks.
+         * Retrieves the list of tasks.
+         * 
          * @return taskList.
          */
         public TaskList getTaskListTest() {
             return this.taskList;
         }
     }
-    
+
+    /**
+     * Represents a stub for the date class.
+     */
     public class DateStub {
         
         Date date;
 
         /** 
-         * class constructor.
+         * Class constructor.
          */
         public DateStub() {
             date = new Date("03/09/2021");    
         }
 
         /**
-         * gets date object.
+         * Gets date object.
          * 
          * @return date of this dateStub.
          */
