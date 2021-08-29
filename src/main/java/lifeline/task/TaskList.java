@@ -77,6 +77,27 @@ public class TaskList {
     }
 
     /**
+     * Returns list of tasks containing keyword
+     *
+     * @param keyword Keyword used to search for tasks
+     * @return List of tasks containing keyword
+     * @throws LifelineException If no tasks with keyword is found
+     */
+    public TaskList findTasks(String keyword) throws LifelineException {
+        TaskList foundTasks = new TaskList(new ArrayList<>());
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currTask = taskList.get(i);
+            if (currTask.getName().toLowerCase().contains(keyword)) {
+                foundTasks.add(currTask);
+            }
+        }
+        if (foundTasks.size() == 0) {
+            throw new LifelineException("No tasks found with the given keyword " + keyword);
+        }
+        return foundTasks;
+    }
+
+    /**
      * Returns list of tasks
      *
      * @return ArrayList containing tasks

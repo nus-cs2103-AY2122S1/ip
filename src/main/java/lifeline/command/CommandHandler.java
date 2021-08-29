@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 import lifeline.exception.LifelineException;
 import lifeline.storage.Storage;
@@ -159,16 +158,7 @@ public class CommandHandler {
     public static String handleFind(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
-        TaskList foundTasks = new TaskList(new ArrayList<>());
-        for (int i = 0; i < taskList.size(); i++) {
-            Task currTask = taskList.get(i);
-            if (currTask.getName().toLowerCase().contains(commands[1].toLowerCase())) {
-                foundTasks.add(currTask);
-            }
-        }
-        if (foundTasks.size() == 0) {
-            throw new LifelineException("No tasks found with the given keyword " + commands[1]);
-        }
+        TaskList foundTasks = taskList.findTasks(commands[1].toLowerCase());
         return ui.showFoundTasks(foundTasks, commands[1]);
     }
 
