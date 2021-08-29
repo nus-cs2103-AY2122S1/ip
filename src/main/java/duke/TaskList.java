@@ -126,18 +126,21 @@ public class TaskList {
     }
 
     /**
-     * Finds a list of matching tasks given a keyword.
+     * Finds a list of matching tasks given some keywords.
      *
-     * @param keyword Keyword to be found among all tasks.
+     * @param keywords Keywords to be found among all tasks.
      * @return A list of matched tasks.
      */
-    public List<Task> findTask(String keyword) {
+    public List<Task> findTask(String ... keywords) {
         List<Task> matchedTasks = new ArrayList<>();
-        this.tasks.forEach((task) -> {
-            if (task.getDescription().contains(keyword)) {
-                matchedTasks.add(task);
-            }
-        });
+        for (String keyword : keywords) {
+            this.tasks.forEach((task) -> {
+                if (task.getDescription().contains(keyword)) {
+                    matchedTasks.add(task);
+                }
+            });
+        }
+
         return matchedTasks;
     }
 }
