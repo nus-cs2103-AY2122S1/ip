@@ -1,0 +1,7 @@
+todo hello
+event project meeting /at Mon 2-4pm
+deadline return book /by Sunday 
+delete 2
+todo hi
+todo hello2
+done 2
