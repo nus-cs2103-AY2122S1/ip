@@ -25,10 +25,11 @@ public class AddCommand extends Command {
      * @param tasks The list of tasks in the to-do-list.
      * @param ui The user interface that deals with interactions with the user.
      * @param storage The storage that Duke uses to deal with loading tasks from and saving tasks to a file.
+     * @return A message describing the result of the execution.
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = null;
 
         // Create Todo, Deadline or Event task
@@ -58,9 +59,9 @@ public class AddCommand extends Command {
         tasks.add(t);
         storage.append(t.toStringForFile() + System.lineSeparator());
 
-        // Display response to user
-        ui.showResponse("Got it. I've added this task: \n\t\t "
+        // Return a description of the execution result
+        return "Got it. I've added this task: \n"
                 + t
-                + "\n\t Now you have " + tasks.getSize() + " tasks in the list.");
+                + "\nNow you have " + tasks.getSize() + " tasks in the list.";
     }
 }

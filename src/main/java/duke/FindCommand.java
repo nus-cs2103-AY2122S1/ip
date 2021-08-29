@@ -24,10 +24,11 @@ public class FindCommand extends Command {
      * @param tasks The list of tasks in the to-do-list.
      * @param ui The instance of ui that handles interactions with the user.
      * @param storage The instance of storage that handles loading tasks from and saving tasks to a text file.
+     * @return A message describing the result of the execution.
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (query.isBlank()) {
             throw new DukeException("OOPS!!! You cannot search using an empty keyword.");
         } else {
@@ -40,8 +41,8 @@ public class FindCommand extends Command {
                 output += String.valueOf(i + 1) + ". " + matchingTasks.get(i) + "\n\t ";
             }
 
-            // Display the list of matching tasks
-            ui.showResponse(output);
+            // Return a description of the execution result
+            return output;
         }
     }
 }

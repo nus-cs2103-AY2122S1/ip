@@ -16,7 +16,7 @@ public class TaskList {
     public String toString() {
         String output = "";
         for (int i = 0; i < tasks.size(); i++) {
-            output += String.valueOf(i + 1) + ". " + tasks.get(i) + "\n\t ";
+            output += String.valueOf(i + 1) + ". " + tasks.get(i) + "\n";
         }
         return output;
     }
