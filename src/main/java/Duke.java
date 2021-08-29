@@ -1,14 +1,12 @@
 import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    private final static List<Task> items = new ArrayList<>(100);
+    //private final static List<Task> items = new ArrayList<>(100);
     
     private final Storage storage;
-    private final TaskList tasks = new TaskList();
+    private final TaskList tasks;
     private Ui ui;
     
     enum RequestType {
@@ -24,6 +22,7 @@ public class Duke {
     public Duke(String filePath){
         storage = new Storage(filePath);
         ui = new Ui();
+        tasks = new TaskList(storage.loadIntoDuke());
     }
     
     public static void main(String[] args) {
@@ -31,16 +30,16 @@ public class Duke {
     }
     
     public void run() {
-        storage.loadIntoDuke(items);
         Scanner userSc = new Scanner(System.in);
         ui = new Ui();
         ui.dukeGreeting();
         String userInput = userSc.nextLine();
         RequestType userRequest;
+
         while(!userInput.equals("bye")){
             if(userInput.equals("list")){
                 userRequest = RequestType.DEFAULT;
-                ui.list(items);
+                tasks.list();
             } else if(userInput.startsWith("done")){
                 userRequest = RequestType.DONE;
             } else if(userInput.startsWith("delete")){
@@ -82,21 +81,21 @@ public class Duke {
         }
 
         ui.farewellMessage();
-        storage.writeToFile(items);
+        storage.writeToFile(tasks);
     }
 
-    public static void echo(String userInput, String actionType){
-        System.out.println("Got it sir, I have "+ actionType + " this task:\n " + userInput + "\nNow you have " + items.size() + " tasks in the list.\n");
+    public void echo(String userInput, String actionType){
+        System.out.println("Got it sir, I have "+ actionType + " this task:\n " + userInput + "\nNow you have " + tasks.getSize() + " tasks in the list.\n");
     }
     
     
-    private static void done(String userInput){
+    private void done(String userInput){
         try{
             int task = Integer.parseInt(userInput.substring(5));
-            if(task > 0 && task <= items.size()){
-                markDone(task - 1);
+            if(task > 0 && task <= tasks.getSize()){
+                tasks.markDone(task - 1);
                 System.out.println("One task down sir. Here is the task I checked off:");
-                System.out.println("    " + items.get(task - 1).toString() + "\n");
+                System.out.println("    " + tasks.getTask(task).toString() + "\n");
             } else {
                 System.out.println("You have entered an invalid task number Sir, please input again.\n");
             }
@@ -106,11 +105,12 @@ public class Duke {
         
     }
     
-    private static void delete(String userInput){
+    private void delete(String userInput){
         try{
             int task = Integer.parseInt(userInput.substring(7));
-            if(task > 0 && task <= items.size()){
-                deleteTask(task - 1);
+            if(task > 0 && task <= tasks.getSize()){
+                Task t = tasks.deleteTask(task);
+                echo(t.toString(), "removed");
             } else {
                 System.out.println("You have entered an invalid task number Sir, please input again.\n");
             }
@@ -131,13 +131,12 @@ public class Duke {
             try{
                 LocalDate time = LocalDate.parse(by);
                 Task t =  new Deadline(description, by);
-                items.add(t);
+                tasks.addTask(t);
                 storage.addNewTask(t);
                 echo(t.toString(), "added");
             } catch (Exception e){
                 System.out.println("Enter a valid date in the format yyyy-mm-dd\n");
             }
-
         }
     }
     
@@ -150,7 +149,7 @@ public class Duke {
             String description = userInput.substring(6, userInput.indexOf("/at") - 1);
             String at = userInput.substring(userInput.indexOf("/at") + 4);
             Task t =  new Event(description, at);
-            items.add(t);
+            tasks.addTask(t);
             echo(t.toString(), "added");
             storage.addNewTask(t);
         }
@@ -161,7 +160,7 @@ public class Duke {
             readActivity(userInput.substring(5), "todo");
             String description = userInput.substring(5);
             Task t = new ToDo(description);
-            items.add(t);
+            tasks.addTask(t);
             echo(t.toString(), "added");
             storage.addNewTask(t);
         } catch (DukeException e){
@@ -171,9 +170,7 @@ public class Duke {
         }
     }
 
-    public static void markDone(int n){
-        items.get(n).markAsDone();
-    }
+
 
     private static void readActivity(String userTask, String taskType) throws DukeException{
         if(userTask.length() <= 1){
@@ -181,8 +178,5 @@ public class Duke {
         }
     }
     
-    public static void deleteTask(int number){
-        Task t = items.remove(number);
-        echo(t.toString(), "removed");
-    }
+
 }

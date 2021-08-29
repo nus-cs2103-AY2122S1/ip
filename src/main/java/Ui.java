@@ -1,4 +1,4 @@
-import java.util.List;
+
 
 public class Ui {
     public void dukeGreeting(){
@@ -14,12 +14,7 @@ public class Ui {
         System.out.println(output);
     }
 
-    public void list(List<Task> items){
-        for(int i = 1; i <= items.size(); i++){
-            System.out.println(i + ". " + items.get(i-1).toString());
-        }
-        System.out.println("");
-    }
+
     
     
     public void farewellMessage(){
