@@ -1,8 +1,12 @@
+package duke.tasks;
+
+import duke.exceptions.NoSuchCommandException;
+
 public class DeadlinesTask extends Task {
 
     private final String end;
 
-    DeadlinesTask(String name, boolean done, String end){
+    public DeadlinesTask(String name, boolean done, String end){
         super(name, done);
         this.end = end;
     }

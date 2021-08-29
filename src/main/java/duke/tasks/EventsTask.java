@@ -1,8 +1,12 @@
+package duke.tasks;
+
+import duke.exceptions.NoSuchCommandException;
+
 public class EventsTask extends Task {
 
     private final String startend;
 
-    EventsTask(String name, boolean done, String startend){
+    public EventsTask(String name, boolean done, String startend){
         super(name, done);
         this.startend = startend;
     }

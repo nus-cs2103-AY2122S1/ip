@@ -1,5 +1,9 @@
+package duke.tasks;
+
+import duke.exceptions.NoSuchCommandException;
+
 public class ToDosTask extends Task {
-    ToDosTask(String name, boolean done){
+    public ToDosTask(String name, boolean done){
         super(name, done);
     }
 

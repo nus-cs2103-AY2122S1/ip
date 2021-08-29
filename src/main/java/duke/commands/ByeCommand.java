@@ -1,3 +1,9 @@
+package duke.commands;
+
+import duke.Storage;
+import duke.Tasklist;
+import duke.Ui;
+
 public class ByeCommand extends Command {
 
     @Override

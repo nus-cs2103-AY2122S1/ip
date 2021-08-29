@@ -1,3 +1,10 @@
+package duke;
+
+import duke.exceptions.DukeException;
+import duke.exceptions.NoSuchTaskException;
+import duke.tasks.Task;
+
+
 import java.io.IOException;
 import java.io.File;
 import java.io.FileReader;

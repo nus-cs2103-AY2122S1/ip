@@ -1,3 +1,10 @@
+package duke;
+
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.exceptions.NoSuchCommandException;
+import duke.exceptions.NoSuchTaskException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 

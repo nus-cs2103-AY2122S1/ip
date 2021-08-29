@@ -1,3 +1,11 @@
+package duke;
+
+import duke.exceptions.NoSuchTaskException;
+import duke.tasks.DeadlinesTask;
+import duke.tasks.EventsTask;
+import duke.tasks.Task;
+import duke.tasks.ToDosTask;
+
 import java.util.ArrayList;
 public class Tasklist {
     public ArrayList<Task> tasks;

@@ -1,3 +1,13 @@
+package duke;
+
+import duke.commands.*;
+import duke.exceptions.NoSuchCommandException;
+import duke.tasks.DeadlinesTask;
+import duke.tasks.EventsTask;
+import duke.tasks.Task;
+import duke.tasks.ToDosTask;
+
+
 public class Parser {
     Parser(){
 
