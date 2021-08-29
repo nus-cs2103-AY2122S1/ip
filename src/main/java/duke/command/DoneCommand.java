@@ -1,14 +1,14 @@
 package duke.command;
 
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
+
 /**
  * Contains the executables when the user uses the 'done' command.
  */
 public class DoneCommand extends Command {
     private int taskNum;
-    
     /**
      * Constructor for the done command.
      * @param taskNumber the task that is to be marked as done

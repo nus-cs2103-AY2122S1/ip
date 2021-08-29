@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.DeadLine;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Contains the executables when the user uses the 'deadline' command.
@@ -20,7 +20,7 @@ public class DeadLineCommand extends Command {
     }
 
     /**
-     * Executes the deadline command. If there is no task specified, nothing is 
+     * Executes the deadline command. If there is no task specified, nothing is
      * added to the list.
      */
     @Override

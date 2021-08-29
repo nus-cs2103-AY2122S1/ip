@@ -2,7 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 /**
- * Contains the list of tasks from the text file that was saved. Various methods 
+ * Contains the list of tasks from the text file that was saved. Various methods
  * implemented to manipulate the the list of tasks.
  */
 public class TaskList {

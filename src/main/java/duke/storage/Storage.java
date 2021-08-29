@@ -25,7 +25,7 @@ public class Storage {
      * then a new file is created.
      * @return an ArrayList of tasks in the file
      */
-    public TaskList load() throws FileNotFoundException, IOException{
+    public TaskList load() throws FileNotFoundException, IOException {
         return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
     }
 

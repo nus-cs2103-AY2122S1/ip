@@ -1,16 +1,17 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DoneCommandTester {
-    Ui ui;
-    Storage storage;
-    TaskList taskList;
+    private Ui ui;
+    private Storage storage;
+    private TaskList taskList;
 
     DoneCommandTester() {
         this.ui = new Ui();

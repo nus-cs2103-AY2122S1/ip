@@ -3,11 +3,13 @@ package duke.storage;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.task.TaskList;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.task.Event;
 import duke.task.DeadLine;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
+
 
 /**
  * Decodes the class from a list of strings in the file to an Array list of tasks.
@@ -36,7 +38,7 @@ public class TaskListDecoder {
     static Task decodeTaskFromString(String task) {
         task.trim();
         String type = task.substring(1, 2);
-        String done = task.substring(4,5);
+        String done = task.substring(4, 5);
         String taskDescription = task.substring(7, task.length()).trim();
         switch (type) {
         case "T" :

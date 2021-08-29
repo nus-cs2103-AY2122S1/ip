@@ -1,15 +1,16 @@
 package duke.parser;
 
-import duke.command.Command;
 import duke.command.ByeCommand;
+import duke.command.Command;
 import duke.command.DeadLineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ErrorCommand;
 import duke.command.EventCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
-import duke.command.FindCommand;
+
 
 /**
  * Processes the commands from Duke and initialises the appropriate command for it.

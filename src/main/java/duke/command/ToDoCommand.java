@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Ui;
+
 /**
  * Contains the executables when the user uses the 'Todo' command.
  */
