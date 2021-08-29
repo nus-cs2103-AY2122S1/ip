@@ -15,8 +15,10 @@ public class TaskList {
     }
 
     public void add(Task task) {
-        this.taskList.add(task);
-        this.counter++;
+        if (!taskList.contains(task)) {
+            this.taskList.add(task);
+            this.counter++;
+        }
     }
 
     public Task delete(int index) {
@@ -41,6 +43,31 @@ public class TaskList {
     public Task setDone(int index) {
         this.taskList.get(index - 1).setDone();
         return this.taskList.get(index - 1);
+    }
+
+    /**
+     * Method to find all tasks whose description match the input string
+     *
+     * @param searchedString The input string
+     * @return Tasklist of all tasks whose description match input string
+     */
+    public TaskList findTasks(String searchedString) {
+        String[] searchedStrArr = searchedString.split(" ");
+        TaskList tasksFound = new TaskList();
+
+        for (int i = 0; i < searchedStrArr.length; i++) {
+
+            String string = searchedStrArr[i];
+
+            for (int j = 0; j  < taskList.size(); j++) {
+                Task task = taskList.get(j);
+
+                if (task.getDescription().contains(string)) {
+                    tasksFound.add(task);
+                }
+            }
+        }
+        return tasksFound;
     }
 
     @Override

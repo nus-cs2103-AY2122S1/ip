@@ -62,7 +62,19 @@ public class Ui {
 
     public void listTasks(TaskList taskList) {
         System.out.println(taskList.toString()
-            + DIVIDER
+                + DIVIDER
+        );
+    }
+
+    /**
+     * Method that prints the list of tasks matching input string
+     *
+     * @param taskList List of tasks matching input string
+     */
+    public void listFoundTasks(TaskList taskList) {
+        System.out.println("Here are your matching entries!\n"
+                + taskList.toString()
+                + DIVIDER
         );
     }
 
@@ -72,7 +84,7 @@ public class Ui {
 
     public void loadErrorMessage() {
         System.out.println("File could not be read.\n"
-        + DIVIDER);
+                + DIVIDER);
     }
 
     public void errorMessage(DukeException error) {

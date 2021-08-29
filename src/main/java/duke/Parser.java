@@ -1,13 +1,6 @@
 package duke;
 
-import duke.commands.Command;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.EventCommand;
-import duke.commands.ExitCommand;
-import duke.commands.ListCommand;
-import duke.commands.TodoCommand;
+import duke.commands.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -86,6 +79,14 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new DukeException("OOPS!!! Please input a number after delete.\n");
             }
+        } else if (command.equals("find")) {
+            String[] inputStringArr = inputString.split(" ");
+
+            if (inputStringArr.length < 2) {
+                throw new DukeException("OOPS!!! Please input a string after find.\n");
+            }
+
+            return new FindCommand(inputString.substring(5));
         } else {
             throw new DukeException("Invalid input. Please try again\n");
         }
