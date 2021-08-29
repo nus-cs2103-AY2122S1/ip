@@ -2,8 +2,8 @@ package duke.command;
 
 import java.io.FileNotFoundException;
 
+import duke.ResponseLogic;
 import duke.Storage;
-import duke.UI;
 import duke.task.TaskList;
 
 public class TodoCommand extends Command {
@@ -15,7 +15,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws FileNotFoundException {
-        tasks.addTodo(description, storage, ui);
+    public String execute(TaskList tasks, ResponseLogic responseLogic, Storage storage) throws FileNotFoundException {
+        return tasks.addTodo(description, storage, responseLogic);
     }
 }

@@ -1,13 +1,15 @@
 package duke.command;
 
+import duke.ResponseLogic;
 import duke.Storage;
-import duke.UI;
 import duke.task.TaskList;
 
 public class ByeCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {}
+    public String execute(TaskList tasks, ResponseLogic responseLogic, Storage storage) {
+        return responseLogic.goodByeResponse();
+    }
 
     @Override
     public boolean isExit() {

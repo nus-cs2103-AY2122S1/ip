@@ -1,7 +1,7 @@
 package duke.command;
 
+import duke.ResponseLogic;
 import duke.Storage;
-import duke.UI;
 import duke.task.TaskList;
 
 public class FindCommand extends Command {
@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        tasks.printTasksWithKeyword(keyword, ui);
+    public String execute(TaskList tasks, ResponseLogic responseLogic, Storage storage) {
+        return tasks.getTasksWithKeyword(keyword, responseLogic);
     }
 }
