@@ -1,30 +1,12 @@
-public class Task {
 
-    private boolean done = false;
-    private String task = "";
+public abstract class Task {
+    public abstract String PrintTaskInfo();
 
-    public Task(boolean done, String task){
-        this.done = done;
-        this.task = task;
-    }
+    public abstract String ParsedTime();
 
-    public String PrintTaskInfo(){
-        String done_str = "";
-        if (!this.done) {
-            done_str = " ";
-        } else {
-            done_str = "X";
-        }
+    public abstract String GetTime();
 
-        return "[" + done_str + "] "  + task;
-    }
+    public abstract String GetDataInfo();
 
-    public String GetDataInfo() {
-        return null;
-    }
-
-    public void MarkDone() {
-        this.done = true;
-    }
-
+    public abstract void MarkDone();
 }
