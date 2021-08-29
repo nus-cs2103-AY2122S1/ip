@@ -38,6 +38,8 @@ public class Parser {
                 } catch (ArrayIndexOutOfBoundsException f) {
                     System.out.println("Invalid number - Number is larger than list count.");
                 }
+            } else if (userInput.startsWith("find")) {
+                TaskList.findTask(userInput);
             } else {
                 TaskList.addTask(userInput);
             }
