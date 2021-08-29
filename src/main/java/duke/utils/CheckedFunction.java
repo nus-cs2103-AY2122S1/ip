@@ -1,5 +1,5 @@
 package duke.utils;
 
-public interface CheckedFunction<T,R> {
+public interface CheckedFunction<T, R> {
     R apply(T t) throws DukeException;
 }

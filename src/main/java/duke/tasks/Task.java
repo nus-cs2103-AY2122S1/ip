@@ -4,18 +4,18 @@ import duke.utils.DukeDateTime;
 import duke.utils.DukeException;
 
 public abstract class Task {
-    public final static DukeException FORMAT_EXCEPTION = 
-            new DukeException("I don't understand this entry, enter " +
+    public final static DukeException FORMAT_EXCEPTION = new DukeException("I don't understand this entry, enter " + 
             "'help' to learn the correct formatting!");
     protected boolean done;
-    protected String desc = new String();
-    protected String details = new String();
+    protected String desc = "";
+    protected String details = "";
     protected DukeDateTime dateTime = new DukeDateTime();
 
     /**
      * Instantiates an empty task.
      */
-    public Task() {}
+    public Task() {
+    }
 
     protected Task(String desc) {
         this.desc = desc;
@@ -31,7 +31,7 @@ public abstract class Task {
 
     /**
      * Adds a description to this task.
-     * 
+     *
      * @param desc
      */
     public void addDesc(String desc) {

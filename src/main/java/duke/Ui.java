@@ -22,8 +22,9 @@ public class Ui {
         System.out.println(BORDERS);
     }
 
-    /** 
+    /**
      * Returns the Duke help manual as a formatted string.
+     *
      * @return Duke help manual.
      * @throws DukeException
      */

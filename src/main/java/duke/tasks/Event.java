@@ -12,7 +12,8 @@ public class Event extends Task {
     /**
      * Instantiates a blank Event.
      */
-    public Event() {}
+    public Event() {
+    }
 
     /**
      * Instantiates an Event based on a database entry.
@@ -37,7 +38,7 @@ public class Event extends Task {
 
     /**
      * Adds a start and end time to the event.
-     * 
+     *
      * @param rawArgs Argument of the format "START_DATE_TIME ~ END_DATE_TIME / ADDITIONAL_INFO".
      * @throws DukeException
      */
@@ -62,7 +63,7 @@ public class Event extends Task {
 
     /**
      * Returns this event formatted as a database entry.
-     * 
+     *
      * @return String representing this event in database format.
      */
     public String toDB() {
