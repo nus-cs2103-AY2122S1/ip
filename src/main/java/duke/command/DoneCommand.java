@@ -10,7 +10,7 @@ import duke.util.Ui;
  * Represents the DoneCommand in the Duke program.
  */
 public class DoneCommand extends Command {
-    private int doneTask;
+    private final int doneTask;
 
     /**
      * Constructs a DoneCommand to mark a given task as done.
@@ -38,8 +38,8 @@ public class DoneCommand extends Command {
 
         tasks.getTask(doneTask).markAsDone();
 
-        String response = "Nice! I've marked this task as done:\n" +
-                "       " + tasks.getTask(doneTask);
+        String response = "Nice! I've marked this task as done:\n"
+                + "       " + tasks.getTask(doneTask);
         ui.showResponse(response);
 
         storage.save(tasks.getTaskList());

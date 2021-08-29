@@ -1,5 +1,13 @@
 package duke.util;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.exception.LoadingException;
 import duke.exception.SavingException;
@@ -9,19 +17,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /**
  * Represents the storage in the Duke program to store tasks created by users.
  */
 public class Storage {
-    private File file;
+    private final File file;
 
     /**
      * Constructs a Storage for the Duke program.
@@ -121,7 +121,7 @@ public class Storage {
                 try {
                     fw.write(task.toStringData() + "\n");
                 } catch (IOException e) {
-                    System.out.println(e);
+                    System.err.println();
                 }
             });
 

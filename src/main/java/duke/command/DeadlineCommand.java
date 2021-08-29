@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.time.LocalDate;
 
 /**
  * Represents the DeadlineCommand in the Duke program.
