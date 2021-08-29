@@ -24,7 +24,7 @@ public class EventCommand extends Command {
 
     @Override
     public String getUsageMessage() {
-        return "Event <description> /at dd/MM/yyy |"
+        return "event <description> /at dd/MM/yyy |"
                 + " add an event task to your list with the given description";
     }
 

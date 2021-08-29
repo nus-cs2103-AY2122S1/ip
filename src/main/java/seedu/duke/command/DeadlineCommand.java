@@ -30,7 +30,7 @@ public class DeadlineCommand extends Command {
 
     @Override
     public String getUsageMessage() {
-        return "deadlin <description> /by dd/MM/yyy |"
+        return "deadline <description> /by dd/MM/yyy |"
                 + " add a deadline task to your list with the given description";
     }
 

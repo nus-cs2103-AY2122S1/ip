@@ -8,6 +8,7 @@ import seedu.duke.command.EventCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.FindCommand;
 import seedu.duke.command.GetCommand;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.ToDoCommand;
 import seedu.duke.task.Task;
@@ -52,6 +53,8 @@ class Duke {
                 return new ExitCommand(ui, taskList);
             } else if (userInput.equals("list")) {
                 return new ListCommand(ui, taskList);
+            } else if (userInput.equals("help")) {
+                return new HelpCommand(ui, taskList);
             }
 
             // Separate them with space
@@ -224,6 +227,7 @@ class Duke {
                 }
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
+                new HelpCommand(ui, taskList).execute();
             }
         }
         // Close the scanner if "bye" command is given and
