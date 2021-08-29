@@ -1,3 +1,6 @@
+package duke;
+
+import duke.task.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -35,13 +38,13 @@ public class Storage {
                     System.out.println(str);
                     String[] parts = str.split("\\|", 4);
                     String subStr = parts[0].substring(3).trim();
-                    if (subStr.equals("Todo") || subStr.equals("Todo")) {
+                    if (subStr.equals("duke.task.Todo") || subStr.equals("duke.task.Todo")) {
                         Task task = new Todo(parts[2].trim());
                         if (parts[1].trim().equals("X")) {
                             task.markAsDone();
                         }
                         taskList.addTask(task);
-                    } else if (subStr.equals("Deadline") || subStr.equals("Deadline")) {
+                    } else if (subStr.equals("duke.task.Deadline") || subStr.equals("duke.task.Deadline")) {
                         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
                         LocalDateTime dateTime = LocalDateTime.parse(parts[3].substring(5).trim(), dtf);
                         Task task = new Deadline(parts[2].trim(), dateTime);

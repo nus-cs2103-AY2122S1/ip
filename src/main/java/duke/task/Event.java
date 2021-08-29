@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +16,7 @@ public class Event extends Task {
     }
 
     public String taskListOnDisk() {
-        return "Event |" + super.getStatusIcon() + "| " + description + " | by: " + formattedDtf;
+        return "duke.task.Event |" + super.getStatusIcon() + "| " + description + " | by: " + formattedDtf;
     }
     
     @Override

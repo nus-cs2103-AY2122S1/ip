@@ -1,10 +1,12 @@
+package duke.task;
+
 public class Todo extends Task {
     public Todo(String description) {
         super(description);
     }
 
     public String taskListOnDisk() {
-        return "Todo |" + super.getStatusIcon() + "| " + description;
+        return "duke.task.Todo |" + super.getStatusIcon() + "| " + description;
     }
     
     @Override

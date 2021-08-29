@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,7 +16,7 @@ public class Deadline extends Task {
     }
     
     public String taskListOnDisk() {
-        return "Deadline |" + super.getStatusIcon() + "| " + description + " | by: " + formattedDtf;
+        return "duke.task.Deadline |" + super.getStatusIcon() + "| " + description + " | by: " + formattedDtf;
     }
     
     @Override
