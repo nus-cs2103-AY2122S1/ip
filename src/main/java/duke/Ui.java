@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Ui {
 
     protected static final String FRIENDGREETING = "(*^_^*) Friend says: \n";
-    private static final String LOGO =
+    protected static final String LOGO =
          " _____     _                          _        \n"
         + "|  ___|  __  _  ___   _,___       | |       \n"
         + "| |_  |/  _|| |/ _ \\  |  __  |_____| |       \n"
@@ -31,11 +31,17 @@ public class Ui {
     }
 
     /**
-     * Prints on user interface the output for Welcome Message.
+     * Prints on user interface the output for Welcome Message 1.
      */
-    public String showWelcomeMessage() {
-        return "Hi there! Start chatting with your new \n" + LOGO
-            + FRIENDGREETING + "What would you like to do today?";
+    public String showWelcomeMessage1() {
+        return "Hi there! Start chatting with your new \n" + "\n";
+    }
+
+    /**
+     * Prints on user interface the output for Welcome Message 2.
+     */
+    public String showWelcomeMessage2() {
+        return "What would you like to do today?";
     }
 
     /**

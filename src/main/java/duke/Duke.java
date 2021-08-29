@@ -51,7 +51,9 @@ public class Duke extends Application {
      * Runs the duke chatbot by loading the TaskList and calling the Ui and Parser
      */
     private void run() {
-        System.out.println(ui.showWelcomeMessage());
+        System.out.println(ui.showWelcomeMessage1());
+        System.out.println(ui.LOGO);
+        System.out.println(ui.showWelcomeMessage2());
         try {
             System.out.println(storage.loadFileToList());
         } catch (FileNotFoundException e) {
@@ -89,7 +91,9 @@ public class Duke extends Application {
 
         String list = loadListGui();
 
-        Label welcome = new Label(ui.showWelcomeMessage());
+        Label welcome1 = new Label(ui.showWelcomeMessage1());
+        Label logo = new Label("Friend");
+        Label welcome2 = new Label(ui.showWelcomeMessage2());
         Label label = new Label("Enter your command here!");
         TextField inputField = new TextField();
         Label output = new Label(list);
@@ -126,20 +130,24 @@ public class Duke extends Application {
         gridPane.setAlignment(Pos.CENTER);
 
         // Arranging all the nodes in the grid
-        gridPane.add(welcome, 1, 0);
-        gridPane.add(label, 1, 2);
-        gridPane.add(inputField, 1, 3);
-        gridPane.add(button1, 1, 7);
-        gridPane.add(button2, 1, 10);
-        gridPane.add(output, 1, 14);
+        gridPane.add(welcome1, 1, 0);
+        gridPane.add(logo, 1,1);
+        gridPane.add(welcome2, 1, 2);
+        gridPane.add(label, 1, 4);
+        gridPane.add(inputField, 1, 5);
+        gridPane.add(button1, 1, 9);
+        gridPane.add(button2, 1, 12);
+        gridPane.add(output, 1, 16);
 
         // Styling nodes
         button1.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white; ");
         button1.setFont(Font.font("Calibri"));
         button2.setStyle("-fx-background-color: grey; -fx-text-fill: white; ");
         button2.setFont(Font.font("Calibri"));
-        welcome.setStyle("-fx-font: normal 16px 'robota' ");
+        welcome1.setStyle("-fx-font: normal 16px 'robota' ");
+        welcome2.setStyle("-fx-font: normal 16px 'robota' ");
         label.setStyle("-fx-font: normal bold 20px 'calibri' ");
+        logo.setStyle("-fx-font: normal italic 72px 'verdana' ");
         gridPane.setStyle("-fx-background-color: rgb(235, 235, 255);");
         output.setStyle("-fx-font: normal 16px 'robota' ");
 
