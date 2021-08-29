@@ -28,24 +28,6 @@ public class Task {
     }
 
     /**
-     * Returns the status of the task in the form of a String.
-     *
-     * @return A String indicating whether the task is accomplished or not.
-     */
-    public String getStatusIcon() {
-        return (isDone ? "X" : " ");
-    }
-
-    /**
-     * Returns the description of the task.
-     *
-     * @return The description.
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
      * Sets the task to done by updating the isDone variable.
      */
     public void markAsDone() {
