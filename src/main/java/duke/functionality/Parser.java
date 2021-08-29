@@ -1,10 +1,17 @@
 package duke.functionality;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.UnknownCommand;
 import duke.exceptions.DukeException;
-import duke.tasks.Todo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.Todo;
 
 /**
  * Creates a parser that makes sense of user inputs.

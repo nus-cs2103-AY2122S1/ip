@@ -1,14 +1,13 @@
 package duke.tasks;
 
-import duke.exceptions.DukeException;
 import duke.functionality.Datetime;
 
 /**
  * Represents a deadline task.
  */
 public class Deadline extends Task {
-    private final Datetime dueDate;
     private static final String TASK_TAG = "deadline";
+    private final Datetime dueDate;
 
     public Deadline(String taskName, String dueDate) {
         super(taskName);

@@ -1,11 +1,12 @@
 package duke.functionality;
 
-import duke.tasks.Task;
-
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
+
+import duke.tasks.Task;
+
 
 /**
  * Creates an Ui system that is responsible for interacting with the user.
