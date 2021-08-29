@@ -71,11 +71,12 @@ public class FulfillmentHandler {
      */
     public void handleGuiUserCommandInput() {
         try {
-            // for ByeCommand, simply tell user bye - user ends session by
-            // exiting the GUI window.
             String userCommandInput = userInputHandler.readInput();
             Command userCommand = Parser.parse(userCommandInput);
             userCommand.execute(userOutputHandler, taskList);
+            if (userCommand.isExit()) {
+                System.exit(0);
+            }
         } catch (DukeException e) {
             userOutputHandler.writeMessage(new Message(e.getMessage()));
         } catch (IOException ioe) {
