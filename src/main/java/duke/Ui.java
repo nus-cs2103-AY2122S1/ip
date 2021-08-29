@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Ui {
 
     /** line separator */
-    private static final String lineBreak = "\t____________________________________________________________\n";
+    private static final String LINE_BREAK = "\t____________________________________________________________\n";
 
     /** scanner for reading input */
     private final Scanner sc = new Scanner(System.in);
@@ -22,11 +22,11 @@ public class Ui {
      * @return the formatted string.
      */
     public static String formatString(String one, String... strings) {
-        String result = lineBreak + "\t" + one + "\n";
+        String result = LINE_BREAK + "\t" + one + "\n";
         for (String s : strings) {
             result += ("\t" + s + "\n");
         }
-        result += lineBreak;
+        result += LINE_BREAK;
         return result;
     }
 
@@ -38,14 +38,14 @@ public class Ui {
      * @return the formatted string.
      */
     public static String formatString(String[] strings) {
-        String result = lineBreak;
+        String result = LINE_BREAK;
         for (String s : strings) {
             if (s == null) {
                 break;
             }
             result += ("\t" + s + "\n");
         }
-        result += lineBreak;
+        result += LINE_BREAK;
         return result;
     }
 
