@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.UI;
+import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
         String result = "Noted. I've removed this task:\n  " + tasks.get(ind).toString() + "\n";
         tasks.delete(ind);
         result += "Now you have " + tasks.size() + " tasks in the list.";
-        System.out.println(UI.tabAndFormat(result));
+        System.out.println(Ui.tabAndFormat(result));
     }
 
 }

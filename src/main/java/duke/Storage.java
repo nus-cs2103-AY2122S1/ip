@@ -1,14 +1,14 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * The type Storage to save and load data.
@@ -72,6 +72,8 @@ public class Storage {
                     break;
                 }
                 tasks.add(new Event(inputs[2], inputs[3], inputs[4]));
+                break;
+            default:
                 break;
             }
 

@@ -1,9 +1,14 @@
 package duke.command;
 
-import duke.UI;
-import duke.task.*;
-
 import java.time.format.DateTimeParseException;
+
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 
 /**
  * The type Add command that adds a user-specified task to a given list of tasks.
@@ -60,12 +65,14 @@ public class AddCommand extends Command {
                 }
                 break;
             }
+            default:
+                break;
             }
         } catch (DateTimeParseException e) {
             System.out.println(
-                    UI.tabAndFormat(
-                            "☹ OOPS!!! Please enter an appropriate date (and optionally, 24-hour time)\n" +
-                                    "Format: YYYY-MM-DD HH:MM"
+                    Ui.tabAndFormat(
+                            "☹ OOPS!!! Please enter an appropriate date (and optionally, 24-hour time)\n"
+                                + "Format: YYYY-MM-DD HH:MM"
                     )
             );
             return;
@@ -74,7 +81,7 @@ public class AddCommand extends Command {
         String returnString = "Got it. I've added this task:\n  "
                 + newTask.toString() + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.";
-        System.out.println(UI.tabAndFormat(returnString));
+        System.out.println(Ui.tabAndFormat(returnString));
     }
 
 

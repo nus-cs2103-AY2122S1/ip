@@ -45,8 +45,8 @@ public class TaskList {
     public void markDone(int ind) {
         if (ind < 0 || ind >= tasks.size()) {
             throw new IllegalArgumentException(
-                    "☹ OOPS!!! Index entered is not valid. " +
-                            "Please use 'list' and check for the appropriate index for task(s)."
+                    "☹ OOPS!!! Index entered is not valid. "
+                    + "Please use 'list' and check for the appropriate index for task(s)."
             );
         }
         tasks.get(ind).markDone();
@@ -61,8 +61,8 @@ public class TaskList {
     public Task get(int ind) {
         if (ind < 0 || ind >= tasks.size()) {
             throw new IllegalArgumentException(
-                    "☹ OOPS!!! Index entered is not valid. " +
-                            "Please use 'list' and check for the appropriate index for task(s)."
+                "☹ OOPS!!! Index entered is not valid. "
+                + "Please use 'list' and check for the appropriate index for task(s)."
             );
         }
         return tasks.get(ind);
@@ -76,8 +76,8 @@ public class TaskList {
     public void delete(int ind) {
         if (ind < 0 || ind >= tasks.size()) {
             throw new IllegalArgumentException(
-                    "☹ OOPS!!! Index entered is not valid. " +
-                            "Please use 'list' and check for the appropriate index for task(s)."
+                "☹ OOPS!!! Index entered is not valid. "
+                + "Please use 'list' and check for the appropriate index for task(s)."
             );
         }
         tasks.remove(ind);

@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * The type Ui that handles string formatting and basic interactions with the user.
  */
-public class UI {
+public class Ui {
 
     /** line separator */
     private static final String lineBreak = "\t____________________________________________________________\n";
@@ -40,7 +40,9 @@ public class UI {
     public static String formatString(String[] strings) {
         String result = lineBreak;
         for (String s : strings) {
-            if (s == null) break;
+            if (s == null) {
+                break;
+            }
             result += ("\t" + s + "\n");
         }
         result += lineBreak;
@@ -73,13 +75,13 @@ public class UI {
     public void showWelcome() {
         // Starting Message
         String[] startMessage = {" ____        _        ",
-                "|  _ \\ _   _| | _____ ",
-                "| | | | | | | |/ / _ \\",
-                "| |_| | |_| |   <  __/",
-                "|____/ \\__,_|_|\\_\\___|",
-                "Hello! I'm Duke",
-                "What can I do for you?"};
-        System.out.println(UI.formatString(startMessage));
+            "|  _ \\ _   _| | _____ ",
+            "| | | | | | | |/ / _ \\",
+            "| |_| | |_| |   <  __/",
+            "|____/ \\__,_|_|\\_\\___|",
+            "Hello! I'm Duke",
+            "What can I do for you?"};
+        System.out.println(Ui.formatString(startMessage));
     }
 
     /**

@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.UI;
+import duke.Ui;
 
 /**
  * The type Exit command that exits the program Duke.
@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
     @Override
     public void execute() {
         System.out.println(
-                UI.formatString("Bye. Hope to see you again soon!")
+                Ui.formatString("Bye. Hope to see you again soon!")
         );
     }
 
