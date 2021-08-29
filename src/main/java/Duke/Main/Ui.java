@@ -17,13 +17,13 @@ public class Ui {
      * Initializing Duke (Animation)
      */
     public void start() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo = " ____       _________\\\n"
+                + "|  _ \\ _   _| |______/\n"
+                + "| | | | | | | |     \n"
+                + "| |_| | |_| | |______|\n"
+                + "|____/ \\__,_|_|______|\n";
         System.out.println("Hello from\n" + logo);
-        respondWith("Hello! I'm Duke. \nType in 'help' if you are new to us." +
+        respondWith("Hello! I'm DuC. \nType in 'help' if you are new to us." +
                 "\nWhat can I do for you?");
     }
 
