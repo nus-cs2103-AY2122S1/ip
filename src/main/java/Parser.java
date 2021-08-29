@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+/**
+ * This class deals with making sense of the user input/command.
+ */
+public class Parser {
+    public Parser() {
+    }
+
+    public static void evaluateUserInput(Scanner scanner) {
+        String userInput = scanner.nextLine();
+
+        while (!userInput.equals("bye")) {
+            if (userInput.equals("list")) {
+                TaskList.printList();
+            } else if (userInput.startsWith("done") || userInput.startsWith("delete")) {
+                try {
+                    if (userInput.startsWith("done")) {
+                        TaskList.markTaskDone(userInput);
+                    } else {
+                        TaskList.removeTask(userInput);
+                    }
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("Invalid input. Requires a number after done (e.g. done 1).");
+                } catch (ArrayIndexOutOfBoundsException f) {
+                    System.out.println("Invalid number - Number is larger than list count.");
+                }
+            } else {
+                TaskList.addTask(userInput);
+            }
+            userInput = scanner.nextLine();
+        }
+
+    }
+}
