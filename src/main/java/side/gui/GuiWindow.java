@@ -14,6 +14,12 @@ import side.Side;
 import side.util.TaskList;
 import side.util.Ui;
 
+/**
+ * Encapsulates the window that is shown to user when running the application.
+ *
+ * @author Lua Yi Da
+ */
+
 public class GuiWindow extends AnchorPane {
 
     private TaskList taskList;

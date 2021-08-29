@@ -13,6 +13,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Encapsulates a DialogBox that is used for user and Side messages.
+ *
+ * @author Lua Yi Da
+ */
+
 public class DialogBox extends HBox {
 
     @FXML

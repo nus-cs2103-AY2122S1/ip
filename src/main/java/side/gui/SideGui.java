@@ -9,8 +9,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import side.util.TaskList;
 
+/**
+ * Encapsulates a SideGui that is used to load in GUI on launching the application.
+ *
+ * @author Lua Yi Da
+ */
+
 public class SideGui extends Application {
 
+    /**
+     * Loads in elements to be shown upon launching the application.
+     *
+     * @param stage Stage to be shown to user.
+     */
     @Override
     public void start(Stage stage) {
         TaskList taskList = new TaskList();
