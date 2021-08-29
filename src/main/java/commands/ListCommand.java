@@ -1,4 +1,5 @@
 package commands;
+import exceptions.MorganException;
 import tasks.TaskList;
 
 /**
@@ -8,13 +9,17 @@ import tasks.TaskList;
  */
 public class ListCommand extends Command {
     public static final String KEYWORD = "list";
+    private final String EMPTY_LIST_ERROR_MESSAGE = "There is no existing task.";
 
     /**
      * Return list of tasks.
      * @param taskList The existing list of tasks.
      * @return The list of tasks.
      */
-    public String execute(TaskList taskList) {
+    public String execute(TaskList taskList) throws MorganException {
+        if (taskList.isEmpty()) {
+            throw new MorganException(EMPTY_LIST_ERROR_MESSAGE);
+        }
         return "Here are the tasks in your list:\n" + taskList.toString();
     }
 }

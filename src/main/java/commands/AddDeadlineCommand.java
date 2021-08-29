@@ -1,7 +1,7 @@
 package commands;
+import exceptions.MorganException;
 import tasks.DeadlineTask;
 import java.time.format.DateTimeParseException;
-import exceptions.DukeException;
 
 /**
  * This is an AddDeadlineCommand Class, which inherits from AddCommand.
@@ -15,27 +15,26 @@ public class AddDeadlineCommand extends AddCommand {
     private static final int INPUT_PARAMETERS = 2;
     private static final String INPUT_FORMAT = String.format("\t\"%s [task] %s " +
             "[dd-mm-yyyy hh:mm]\"", KEYWORD, DELIMITER);
+    private static final String INPUT_FORMAT_ERROR_MESSAGE = String.format("Please " +
+            "ensure your input is in the following format:\n" + INPUT_FORMAT);
 
     /**
      * Constructor for AddDeadlineCommand.
      * @param userInput The input string entered by the user.
-     * @throws DukeException
+     * @throws MorganException
      */
-    public AddDeadlineCommand(String userInput) throws DukeException {
+    public AddDeadlineCommand(String userInput) throws MorganException {
         // Check whether input contains delimiter
         boolean hasDelimiter = userInput.contains(DELIMITER);
         if (!hasDelimiter) {
-            throw new DukeException("OOPS!!! " +
-                    "Please ensure your input is in the following format:\n" + INPUT_FORMAT);
-
+            throw new MorganException(INPUT_FORMAT_ERROR_MESSAGE);
         }
 
         // Check whether input contains task and date/time
         String[] inputData = userInput.substring(KEYWORD.length()).trim().split(DELIMITER);
         boolean isValidInput = (inputData.length == INPUT_PARAMETERS);
         if (!isValidInput) {
-            throw new DukeException("OOPS!!! " +
-                    "Please ensure your input is in the following format:\n" + INPUT_FORMAT);
+            throw new MorganException(INPUT_FORMAT_ERROR_MESSAGE);
         }
 
         // Retrieve input parameters
@@ -44,8 +43,7 @@ public class AddDeadlineCommand extends AddCommand {
         try {
             this.task = new DeadlineTask(taskName, dateTime);
         } catch(DateTimeParseException e) {
-            throw new DukeException("OOPS!!! " +
-                    "Please ensure your input is in the following format:\n" + INPUT_FORMAT);
+            throw new MorganException(INPUT_FORMAT_ERROR_MESSAGE);
         }
     }
 
