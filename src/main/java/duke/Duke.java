@@ -40,7 +40,12 @@ class Duke {
         }
     }
 
-
+    /**
+     * Runs command and returns output
+     *
+     * @param command Command from user
+     * @return Array of outputs to be shown to user, returns null if command is exit
+     */
     public String[] handleInput(String command) {
         try {
             if (parser.isExit(command)) {
