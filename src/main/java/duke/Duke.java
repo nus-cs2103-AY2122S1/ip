@@ -43,7 +43,6 @@ public class Duke {
         }
 
         Ui.importantMessage();
-
         storage.printStartingFileContents();
 
         Scanner newScan = new Scanner(System.in);
