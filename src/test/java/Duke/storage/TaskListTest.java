@@ -1,11 +1,10 @@
-package duke.storage;
+package Duke.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
-
 import duke.storage.TaskList;
 import duke.tasks.ToDos;
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
