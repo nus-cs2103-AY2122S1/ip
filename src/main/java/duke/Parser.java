@@ -1,6 +1,6 @@
 package duke;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Parse user's input, identify whether it is a valid command and calls relevant method(s) to execute the command.
@@ -8,14 +8,12 @@ import java.util.Scanner;
 
 public class Parser {
     private final TaskList tasks;
-    private final ParserUi ui;
 
     /**
      * The constructor for a Parser Object.
      */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
-        this.ui = new ParserUi();
     }
 
     /**
@@ -54,42 +52,55 @@ public class Parser {
         return copy.isEmpty();
     }
 
-    /**
-     * Parses the user's command and calls relevant method to execute the command.
-     *
-     * @param scanner the scanner from ParserUi that reads the user's input.
-     */
-    public void parse(Scanner scanner) {
-        String userInput = scanner.nextLine();
-        while (!userInput.equals("bye")) {
-            if (userInput.equals("list")) {
-                ui.printUserInputRecord(tasks.getStorage().getUserInputRecords());
-            } else if (userInput.startsWith("done")) {
-                if (checkDoneCommand(userInput)) {
-                    tasks.markAsDone(userInput, tasks.getStorage().getUserInputRecords());
-                } else {
-                    ui.printCannotInterpretMessage();
-                }
-            } else if (userInput.equals("deleteAll")) {
-                tasks.deleteAll(tasks.getStorage().getUserInputRecords());
-            } else if (userInput.startsWith("delete")) {
-                if (checkDeleteCommand(userInput)) {
-                    tasks.delete(userInput, tasks.getStorage().getUserInputRecords());
-                } else {
-                    ui.printCannotInterpretMessage();
-                }
-            } else if (userInput.startsWith("save ")) {
-                tasks.getStorage().save(userInput);
-            } else if (userInput.startsWith("load ")) {
-                tasks.getStorage().load(userInput);
-            } else if (userInput.startsWith("find")) {
-                tasks.search(userInput, tasks.getStorage().getUserInputRecords());
-            } else if (userInput.equals("help")) {
-                ui.printHelpMessage();
+    public String parse(String userInput) {
+        if (userInput.equals("list")) {
+            ArrayList<Task> userInputRecords = tasks.getStorage().getUserInputRecords();
+            if (userInputRecords.isEmpty()) {
+                return "Ah oh, seems like nothing is added yet :( \n" + "Try to input something first! \n";
             } else {
-                tasks.add(userInput, tasks.getStorage().getUserInputRecords());
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("Here are the tasks in your list:\n");
+                for (int i = 0; i < userInputRecords.size(); i++) {
+                    stringBuilder.append("  " + (i + 1) + "." + userInputRecords.get(i) + "\n");
+                }
+                return stringBuilder.toString();
             }
-            userInput = scanner.nextLine();
+        } else if (userInput.startsWith("done")) {
+            if (checkDoneCommand(userInput)) {
+                return tasks.markAsDone(userInput, tasks.getStorage().getUserInputRecords());
+            } else {
+                return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+            }
+        } else if (userInput.equals("deleteAll")) {
+            return tasks.deleteAll(tasks.getStorage().getUserInputRecords());
+        } else if (userInput.startsWith("delete")) {
+            if (checkDeleteCommand(userInput)) {
+                return tasks.delete(userInput, tasks.getStorage().getUserInputRecords());
+            } else {
+                return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+            }
+        } else if (userInput.startsWith("save ")) {
+            return tasks.getStorage().save(userInput);
+        } else if (userInput.startsWith("load ")) {
+            return tasks.getStorage().load(userInput);
+        } else if (userInput.startsWith("find")) {
+            return tasks.search(userInput, tasks.getStorage().getUserInputRecords());
+        } else if (userInput.equals("help")) {
+            StringBuilder builder = new StringBuilder();
+            builder.append("todo <description>\n" );
+            builder.append("deadline <description> /by <time in format yyyy-mm-dd>\n");
+            builder.append("event <description> /at <time in format yyyy-mm-dd>\n");
+            builder.append("save <directory>\n");
+            builder.append("load <directory>\n");
+            builder.append("done <number>\n");
+            builder.append("delete <number>\n");
+            builder.append("deleteAll\n");
+            builder.append("find <keyword>\n");
+            return builder.toString();
+        } else if (userInput.startsWith("todo ") || userInput.startsWith("deadline ") || userInput.startsWith("event ")) {
+            return tasks.add(userInput, tasks.getStorage().getUserInputRecords());
+        } else {
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }
     }
 }

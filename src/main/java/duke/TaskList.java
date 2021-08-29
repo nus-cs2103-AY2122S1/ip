@@ -10,14 +10,12 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private Storage storage;
-    private TaskListUi ui;
-
+//Todo: Doc for @return
     /**
      * The constructor for a TaskList Object.
      */
     public TaskList(Storage storage) {
         this.storage = storage;
-        this.ui = new TaskListUi();
     }
 
     /**
@@ -26,13 +24,12 @@ public class TaskList {
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
      */
-    public void add(String userInput, ArrayList<Task> userInputRecords) {
+    public String add(String userInput, ArrayList<Task> userInputRecords) {
         Task task;
         if (userInput.startsWith("todo")) {
             String description = userInput.substring(5);
             if (description.trim().isEmpty()) {
-                ui.printNonEmptyDescriptionMessage("todo");
-                return;
+                return "OOPS!!! The description of a todo cannot be empty.\n";
             }
             task = new ToDo(description);
         } else if (userInput.startsWith("deadline")) {
@@ -42,11 +39,9 @@ public class TaskList {
                 LocalDate ddl = LocalDate.parse(userInput.substring(byPosition + 4));
                 task = new Deadline(description, ddl);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.printNonEmptyDescriptionMessage("deadline");
-                return;
+                return "OOPS!!! The description of a deadline cannot be empty.\n";
             } catch (DateTimeParseException e) {
-                ui.printInvalidDateFormMessage();
-                return;
+                return "Please enter a valid date in the format:/at yyyy-mm-dd!\n";
             }
         } else if (userInput.startsWith("event")) {
             try {
@@ -55,19 +50,18 @@ public class TaskList {
                 LocalDate time = LocalDate.parse(userInput.substring(atPosition + 4));
                 task = new Event(description, time);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.printNonEmptyDescriptionMessage("event");
-                return;
+                return "OOPS!!! The description of an event cannot be empty.\n";
             } catch (DateTimeParseException e) {
-                ui.printInvalidDateFormMessage();
-                return;
+                return "Please enter a valid date in the format:/at yyyy-mm-dd!\n";
             }
         } else {
-            ui.printCannotInterpretMessage();
-            return;
+            //Should not reach here
+            return "unexpected error.";
         }
         userInputRecords.add(task);
         storage.autoSave();
-        ui.printAddMessage(userInputRecords, task);
+        return "Got it. I've added this task:\n" + task + "\n" +"Now you have "
+                + userInputRecords.size() + " tasks in the list.\n";
     }
 
     /**
@@ -76,27 +70,28 @@ public class TaskList {
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
      */
-    public void delete(String userInput, ArrayList<Task> userInputRecords) {
+    public String delete(String userInput, ArrayList<Task> userInputRecords) {
         try {
             int itemToDelete = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
             Task itemDeleted = userInputRecords.get(itemToDelete);
             userInputRecords.remove(itemToDelete);
             storage.autoSave();
-            ui.printDeleteMessage(userInputRecords, itemDeleted);
+            return "Noted. I've removed this task:\n" + itemDeleted + "\n"
+                    + "Now you have " + userInputRecords.size() + " tasks in the list.\n";
         } catch (IndexOutOfBoundsException e) {
-            ui.printAbsentIdMessage();
+            return "Oops, the ID of the task does not exist!\n";
         } catch (NumberFormatException e) {
-            ui.printInvalidIdMessage();
+            return "Please enter a valid ID!\n";
         }
     }
 
     /**
      * Deletes all tasks saved in the record.
      */
-    public void deleteAll(ArrayList<Task> userInputRecords) {
-
+    public String deleteAll(ArrayList<Task> userInputRecords) {
         userInputRecords.clear();
-        ui.printDeleteAllMessage();
+        storage.autoSave();
+        return "All records deleted!\n";
     }
 
     public Storage getStorage() {
@@ -109,18 +104,18 @@ public class TaskList {
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
      */
-    public void markAsDone(String userInput, ArrayList<Task> userInputRecords) {
+    public String markAsDone(String userInput, ArrayList<Task> userInputRecords) {
         try {
             int itemToComplete = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
             Task taskDone = userInputRecords.get(itemToComplete);
             taskDone.setDone(true);
             userInputRecords.set(itemToComplete, taskDone);
-            ui.printMarkAsDoneMessage(userInputRecords, itemToComplete);
             storage.autoSave();
+            return "Nice! I've marked this task as done:\n" + userInputRecords.get(itemToComplete) + "\n";
         } catch (IndexOutOfBoundsException e) {
-            ui.printAbsentIdMessage();
+            return "Oops, the ID of the task does not exist!\n";
         } catch (NumberFormatException e) {
-            ui.printInvalidIdMessage();
+            return "Please enter a valid ID!\n";
         }
     }
 
@@ -130,7 +125,7 @@ public class TaskList {
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
      */
-    public void search(String userInput, ArrayList<Task> userInputRecords) {
+    public String search(String userInput, ArrayList<Task> userInputRecords) {
         String keyword = userInput.replace("find", "").trim();
         ArrayList<Task> searchResult = new ArrayList<>();
         for (Task userInputRecord : userInputRecords) {
@@ -139,6 +134,16 @@ public class TaskList {
                 searchResult.add(userInputRecord);
             }
         }
-        ui.printSearchResult(searchResult, keyword);
+
+        if (searchResult.isEmpty()) {
+            return "Oops,there is no record for the keyword " + keyword + "\n";
+        } else {
+            StringBuilder builder = new StringBuilder();
+            builder.append("Here are the matching tasks in your list:");
+            for (int i = 0; i < searchResult.size(); i++) {
+                builder.append("     " + (i + 1) + "." + searchResult.get(i));
+            }
+            return builder.toString();
+        }
     }
 }

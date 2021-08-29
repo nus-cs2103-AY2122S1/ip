@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,15 +16,17 @@ import java.util.Scanner;
  * directory by using the save/load command.
  */
 public class Storage {
+    private static final String[] MONTHS = new String[]{
+            "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY",
+            "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+    };
     private ArrayList<Task> userInputRecords;
-    private StorageUi ui;
 
     /**
      * The constructor for a Storage Object.
      */
     public Storage() {
         this.userInputRecords = new ArrayList<>();
-        this.ui = new StorageUi();
     }
 
     /**
@@ -42,7 +45,7 @@ public class Storage {
                     userInputRecords.add(task);
                 } else if (itemInfo.startsWith("[D]")) {
                     Task task = new Deadline(itemInfo.substring(7, itemInfo.indexOf("(by")),
-                            ui.convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(by") + 5,
+                            convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(by") + 5,
                                     itemInfo.length() - 1)));
                     if (itemInfo.contains("[X]")) {
                         task.setDone(true);
@@ -50,7 +53,7 @@ public class Storage {
                     userInputRecords.add(task);
                 } else if (itemInfo.startsWith("[E]")) {
                     Task task = new Event(itemInfo.substring(7, itemInfo.indexOf("(at")),
-                            ui.convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(at") + 5,
+                            convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(at") + 5,
                                     itemInfo.length() - 1)));
                     if (itemInfo.contains("[X]")) {
                         task.setDone(true);
@@ -60,7 +63,7 @@ public class Storage {
             }
             scanner.close();
         } catch (IOException e) {
-            ui.printSaveNotFoundMessage();
+            System.out.println("Saved data not found, a new data file created.\n");
         }
     }
 
@@ -74,13 +77,13 @@ public class Storage {
             try {
                 Files.createDirectory(Path.of("data"));
             } catch (IOException e) {
-                ui.printDirectoryAlreadyExistMessage();
+                System.out.println("This directory already exists!\n");
             }
         } else if (!fileExists) {
             try {
                 Files.createFile(Path.of("data", "record"));
             } catch (IOException e) {
-                ui.printFileAlreadyExistMessage();
+                System.out.println("This file already exists!\n");
             }
         }
         try {
@@ -91,7 +94,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            ui.printUnexpectedErrorMessage();
+            System.out.println("An unknown error has occurred.\n");
         }
     }
 
@@ -105,7 +108,7 @@ public class Storage {
      *
      * @param filePath the filepath indicated by the user.
      */
-    public void load(String filePath) {
+    public String load(String filePath) {
         try {
             filePath = filePath.replace("load ", "");
             Scanner scanner = new Scanner(Paths.get(filePath));
@@ -119,7 +122,7 @@ public class Storage {
                     userInputRecords.add(task);
                 } else if (itemInfo.startsWith("[D]")) {
                     Task task = new Deadline(itemInfo.substring(7, itemInfo.indexOf("(by")),
-                            ui.convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(by") + 5,
+                            convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(by") + 5,
                                     itemInfo.length() - 1)));
                     if (itemInfo.contains("[X]")) {
                         task.setDone(true);
@@ -127,7 +130,7 @@ public class Storage {
                     userInputRecords.add(task);
                 } else if (itemInfo.startsWith("[E]")) {
                     Task task = new Event(itemInfo.substring(7, itemInfo.indexOf("(at")),
-                            ui.convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(at") + 5,
+                            convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(at") + 5,
                                     itemInfo.length() - 1)));
                     if (itemInfo.contains("[X]")) {
                         task.setDone(true);
@@ -136,9 +139,9 @@ public class Storage {
                 }
             }
             scanner.close();
-            ui.printLoadSuccessfulMessage();
+            return "Load successfully.\n";
         } catch (IOException e) {
-            ui.printInvalidFilePathMessage();
+            return "Saved data not found.\n";
         }
     }
 
@@ -147,7 +150,7 @@ public class Storage {
      *
      * @param filePath the filepath indicated by the user.
      */
-    public void save(String filePath) {
+    public String save(String filePath) {
         try {
             filePath = filePath.replace("save ", "");
             Files.deleteIfExists(Path.of(filePath));
@@ -159,9 +162,27 @@ public class Storage {
             }
             writer.close();
             autoSave();
-            ui.printSaveSuccessfulMessage();
+            return "Save successfully.\n";
         } catch (IOException | InvalidPathException e) {
-            ui.printInvalidFilePathMessage();
+            return "Invalid file path detected, please try again.\n";
         }
+    }
+
+    private LocalDate convertToLocalTime(String time) {
+        String copy = time;
+        String month = copy.substring(0, time.indexOf(" "));
+        int monthValue = -1;
+        for (int i = 0; i < MONTHS.length; i++) {
+            if (month.equals(MONTHS[i])) {
+                monthValue = i + 1;
+                break;
+            }
+        }
+        copy = copy.replace(month + " ", "");
+        String day = copy.substring(0, copy.indexOf(" ")).trim();
+        int dayValue = Integer.parseInt(day);
+        copy = copy.replace(day + " ", "");
+        int yearValue = Integer.parseInt(copy);
+        return LocalDate.of(yearValue, monthValue, dayValue);
     }
 }

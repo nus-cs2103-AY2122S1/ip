@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 /**
  * A driver class that initializes the the parser, task list and storage for the chatterbot.
  */
@@ -7,28 +9,17 @@ package duke;
 public class Duke {
     private Parser parser;
     private Storage storage;
-    private DukeUi ui;
 
     /**
      * The constructor for a Duke Object.
      */
     public Duke() {
-        ui = new DukeUi();
         storage = new Storage();
         storage.autoLoad();
         parser = new Parser(new TaskList(storage));
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
-     * This method starts and ends the program, and pass the user input to the parser.
-     */
-    public void run() {
-        ui.printWelcomeMessage();
-        ui.readUserInput(parser);
-        ui.printExitMessage();
+    public String getResponse(String userInput) {
+        return parser.parse(userInput);
     }
 }
