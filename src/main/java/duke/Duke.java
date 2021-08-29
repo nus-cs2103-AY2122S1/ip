@@ -5,8 +5,9 @@ import duke.task.Event;
 import duke.task.ToDo;
 import duke.util.DukeException;
 
+import javafx.application.Application;
+
 import java.util.Hashtable;
-import java.util.Scanner;
 import java.util.function.Consumer;
 
 /**
@@ -15,6 +16,7 @@ import java.util.function.Consumer;
 public class Duke {
 
     private static TaskBank taskBank = new TaskBank("data/duke.txt");
+    private static Hashtable<String, Consumer<String>> commandTable = initCommandTable();
 
     private static Hashtable<String, Consumer<String>> initCommandTable() {
 
@@ -27,8 +29,23 @@ public class Duke {
         ret.put("done", (x) -> taskBank.markTask(x));
         ret.put("delete", (x) -> taskBank.deleteTask(x));
         ret.put("find", (x) -> Ui.printTasks(taskBank.searchTasks(x)));
+        ret.put("bye", (x) -> System.exit(0));
 
         return ret;
+    }
+
+    private static void parseInput(String input) {
+        String keyword = input.split(" ", 2)[0];
+        if (!commandTable.containsKey(keyword)) {
+            Ui.print("Oops, I'm not sure what you mean");
+            return;
+        }
+
+        try {
+            commandTable.get(keyword).accept(input);
+        } catch (DukeException e) {
+            Ui.print(e.toString());
+        }
     }
 
     /**
@@ -37,35 +54,7 @@ public class Duke {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
-
-        Ui.welcomeMessage();
-        Ui.printDivider();
-
-        Scanner sc = new Scanner(System.in);
-
-        Hashtable<String, Consumer<String>> commandTable = initCommandTable();
-
-        while (true) {
-            String input = sc.nextLine();
-            if (input.equals("bye")) {
-                break;
-            }
-
-            String keyword = input.split(" ", 2)[0];
-            if (!commandTable.containsKey(keyword)) {
-                Ui.print("Oops, I'm not sure what you mean :o");
-                continue;
-            }
-
-            try {
-                commandTable.get(keyword).accept(input);
-            } catch (DukeException e) {
-                Ui.print(e.toString());
-            }
-
-            Ui.printDivider();
-        }
-
-        Ui.goodbyeMessage();
+        Ui.setInputHandler(Duke::parseInput);
+        Application.launch(Ui.class);
     }
 }

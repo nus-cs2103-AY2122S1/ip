@@ -2,62 +2,85 @@ package duke;
 
 import duke.task.Task;
 
+import java.io.IOException;
 import java.util.Collection;
+import java.util.function.Consumer;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * Handles Duke's User Interface.
  */
-public class Ui {
+public class Ui extends Application {
 
-    private static final String DIVIDER = "------------------------------------------";
-    private static final String LOGO = " ____        _        \n"
-                                     + "|  _ \\ _   _| | _____ \n"
-                                     + "| | | | | | | |/ / _ \\\n"
-                                     + "| |_| | |_| |   <  __/\n"
-                                     + "|____/ \\__,_|_|\\_\\___|\n";
+    private static Consumer<String> inputHandler;
+    private static MainWindow mainWindow;
 
     /**
-     * Prints a welcome message.
+     * Get Duke to send a welcome message.
      */
-    public static void welcomeMessage() {
-        System.out.println("\nHello buddy! I am");
-        System.out.println(LOGO);
-        System.out.println("What can I do for you?");
+    private static void welcomeMessage() {
+        print("Greetings");
     }
 
     /**
-     * Prints a goodbye message.
+     * Get Duke to send a goodbye message.
      */
     public static void goodbyeMessage() {
-        System.out.println("Bye. Hope to see you soon!");
+        print("Bye. Hope to see you soon!");
     }
 
     /**
-     * Prints a section divider.
-     */
-    public static void printDivider() {
-        System.out.println(DIVIDER);
-    }
-
-    /**
-     * Prints a given String.
+     * Get Duke to send a given String.
      *
-     * @param text String to print
+     * @param text String to send
      */
     public static void print(String text) {
-        System.out.println(text);
+        mainWindow.print(text);
     }
 
     /**
-     * Pretty prints a given collection of tasks.
+     * Get Duke to send a given collection of tasks.
      *
      * @param tasks given collection of tasks
      */
     public static void printTasks(Collection<Task> tasks) {
         int i = 0;
+        StringBuilder listString = new StringBuilder();
+
         for (Task t : tasks) {
-            System.out.printf("%d. %s\n", i + 1, t);
+            listString.append(String.format("%d. %s\n", i + 1, t));
             i++;
+        }
+
+        Ui.print(listString.toString());
+    }
+
+    public static void setInputHandler(Consumer<String> handler) {
+        inputHandler = handler;
+    }
+
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Ui.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+
+            if (mainWindow != null) {
+                System.out.println("WARNING: more than one main window found!");
+            }
+
+            mainWindow = fxmlLoader.getController();
+            mainWindow.setInputHandler(inputHandler);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
