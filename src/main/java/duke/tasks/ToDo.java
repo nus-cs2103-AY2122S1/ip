@@ -30,7 +30,7 @@ public class ToDo extends Task {
 
     @Override
     public String getTaskRepresentation() {
-        return TaskType.TODO + "|" + super.getTaskRepresentation();
+        return TaskType.TODO + " |;; " + super.getTaskRepresentation();
     }
 
     /**

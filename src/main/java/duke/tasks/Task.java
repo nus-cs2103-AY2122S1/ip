@@ -25,7 +25,7 @@ public abstract class Task {
      * @throws InvalidTaskDataException thrown when the String representation of Task is invalid.
      */
     public static Task getTaskFromRepresentation(String taskRepresentation) throws InvalidTaskDataException {
-        String[] taskData = taskRepresentation.split("\\|");
+        String[] taskData = taskRepresentation.split(" \\|;; ");
         try {
             boolean isDone = taskData[1].equals("X");
 
@@ -75,7 +75,7 @@ public abstract class Task {
      * @return representation of this task's data
      */
     public String getTaskRepresentation() {
-        return (isDone ? "X|" : "|") + description + "|";
+        return (isDone ? "X |;; " : " |;; ") + description + " |;; ";
     }
 
     /**
