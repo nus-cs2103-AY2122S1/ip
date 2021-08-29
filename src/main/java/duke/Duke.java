@@ -3,23 +3,36 @@ package duke;
 import duke.command.Command;
 import java.time.format.DateTimeParseException;
 import java.io.IOException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 
 /**
  * Class containing main() method. Exception handling and highest level of program logic is implemented here.
  */
-public class Duke {
+public class Duke extends Application {
     private static TaskList tasklist;
     private static Ui ui;
     private static Storage storage;
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
     /**
      * Initial startup code and loading from saved data if found is done here. Saved data filename and location is
      * hardcoded in this implementation. data folder will be created if none exists.
-     * @param filePath is a String for a filename, assumed to be in src/data.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath, ui);
+        storage = new Storage("frosty.txt", ui);
         try {
             tasklist = new TaskList(storage.load(ui));
             ui.printLine();
@@ -68,6 +81,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("frosty.txt").run();
+        new Duke().run();
     }
 }

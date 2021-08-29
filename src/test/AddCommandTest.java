@@ -12,10 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddCommandTest {
     //store is irrelevant, tl code is simple enough that i did not stub it.
-    Storage store = new Storage("");
     TaskList tl = new TaskList();
     UiStub ui = new UiStub();
-
+    Storage store = new Storage("", ui);
 
     @Test
     void testAddTask_addOneTodo_listWithOneTodo() {

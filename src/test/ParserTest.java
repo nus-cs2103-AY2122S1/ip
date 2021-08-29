@@ -20,8 +20,8 @@ public class ParserTest {
     void testParse_parseDeadlineWithDate_DeadlineWithProperDate() throws DukeException {
         Command c = Parser.parse("deadline unit tests /by 2021-11-11");
         TaskList tl = new TaskList();
-        Storage store = new Storage("");
         UiStub ui = new UiStub();
+        Storage store = new Storage("", ui);
         c.execute(tl, ui, store);
 
         assertAll("checking created command",

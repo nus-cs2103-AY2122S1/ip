@@ -16,8 +16,8 @@ public class Event extends Task{
      * @param date date associated with the Task.
      */
     public Event(String label, LocalDate date) {
+        super(label);
         this.date = date;
-        this.label = label;
     }
 
     /**

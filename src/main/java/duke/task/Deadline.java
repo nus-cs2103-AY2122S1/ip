@@ -16,8 +16,8 @@ public class Deadline extends Task{
      * @param date date associated with the Task.
      */
     public Deadline(String label, LocalDate date) {
+        super(label);
         this.date = date;
-        this.label = label;
     }
 
     /**
