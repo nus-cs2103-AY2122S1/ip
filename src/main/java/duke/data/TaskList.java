@@ -44,6 +44,17 @@ public class TaskList {
                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Contains a new TaskList containing Tasks whose description contains the given keyword/String
+     *
+     * @param keyword A String to be used to filter Tasks with descriptions
+     * @return A new TaskList of smaller/equal size
+     */
+    public TaskList containsKeyword(String keyword) {
+        return new TaskList(this.taskData.stream().filter(x -> x.containsKeyword(keyword))
+                .collect(Collectors.toList()));
+    }
+
     @Override
     public boolean equals(Object otherObj) {
         if (!(otherObj instanceof TaskList)) {

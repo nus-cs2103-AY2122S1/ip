@@ -40,6 +40,16 @@ public abstract class Task {
         return false;
     }
 
+    /**
+     * Returns true if the Task description contains the given keyword/String
+     *
+     * @param keyword A String to be checked if it is contained in the Task description field
+     * @return True iff this.description contains the given keyword String
+     */
+    public boolean containsKeyword(String keyword) {
+        return this.description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.description;

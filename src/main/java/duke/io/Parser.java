@@ -98,6 +98,17 @@ public class Parser {
             // Command name + date only
             return new Command(CommandName.DATE, new String[]{userInput.substring(5)});
 
+        } else if (userInput.startsWith("find")) {
+            // FIND command
+
+            if (userInput.length() == 4) {
+                throw new DukeException("A keyword must be input for the FIND command to search through your tasks");
+            } else if (!userInput.startsWith("find ")) {
+                // If it does not start with "find " after trimming, it is an invalid command
+                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            }
+
+            return new Command(CommandName.FIND, new String[]{userInput.substring(5)});
         } else {
             // Unknown command
             throw new DukeException(("I'm sorry, but I don't know what that means :-("));
