@@ -8,7 +8,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.ui.Ui;
 
 /**
  * This AddCommand class represents a command to add a task to the task list.
@@ -47,11 +46,11 @@ public class AddCommand extends Command {
      * Adds a task to the task list and updates the hard disk of the change.
      *
      * @param tasks The task list.
-     * @param ui The UI of the application.
      * @param storage The storage system of the application.
+     * @return Completion message of this command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         // Adds a Task to the TaskList instance
         Task taskToBeAdded;
         if (taskType.equals("todo")) {
@@ -70,19 +69,10 @@ public class AddCommand extends Command {
         } else {
             message += "Now you have " + tasks.getNumberOfTasks() + " tasks in the list.";
         }
-        ui.showCommandDone(message);
 
         // Saves the current task list to the hard drive
         storage.save(tasks);
-    }
 
-    /**
-     * Indicates that this command does not intend to exit the system.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return message;
     }
 }

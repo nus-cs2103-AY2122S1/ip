@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * This FindCommand class represents a command to find tasks using a keyword.
@@ -24,22 +23,12 @@ public class FindCommand extends Command {
      * Displays the matching tasks in the task list to the user.
      *
      * @param tasks The task list.
-     * @param ui The UI of the application.
      * @param storage The storage system of the application.
+     * @return Completion message of this command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         TaskList tasksWithMatchingKeyword = tasks.findTasksWithKeyword(keyword);
-        ui.showCommandDone("Here are the matching tasks in your list:\n" + tasksWithMatchingKeyword);
-    }
-
-    /**
-     * Indicates that this command does not intend to exit the system.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return "Here are the matching tasks in your list:\n" + tasksWithMatchingKeyword.toString();
     }
 }
