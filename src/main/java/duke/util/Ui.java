@@ -6,7 +6,8 @@ package duke.util;
  * @author Chng Zi Hao
  */
 public class Ui {
-    private static final String DIVIDER = "--------------------------------------------------------------------------------";
+    private static final String DIVIDER = "----------------------------------"
+            + "----------------------------------------------";
     private static final String PROMPT = "Enter Command: ";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

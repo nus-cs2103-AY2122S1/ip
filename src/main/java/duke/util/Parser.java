@@ -1,5 +1,9 @@
 package duke.util;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -20,10 +24,6 @@ import duke.exception.DukeMissingIndexException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * Parser class deals with making sense of the user command.
@@ -109,7 +109,8 @@ public class Parser {
      */
     public static LocalDate parseDate(String date) throws DukeInvalidDateException {
         try {
-            // Reuse regex from https://www.javacodeexamples.com/java-regular-expression-validate-date-example-regex/1504
+            // Reuse regex from
+            // https://www.javacodeexamples.com/java-regular-expression-validate-date-example-regex/1504
             String[] dateSplit;
             if (date.matches("\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|[3][01])")) {
                 // for yyyy-mm-dd
@@ -139,7 +140,8 @@ public class Parser {
      */
     public static LocalTime parseTime(String time) throws DukeInvalidTimeException {
         try {
-            // Reuse regex from https://www.geeksforgeeks.org/how-to-validate-time-in-24-hour-format-using-regular-expression/
+            // Reuse regex from
+            // https://www.geeksforgeeks.org/how-to-validate-time-in-24-hour-format-using-regular-expression/
             if (time.length() == 4) {
                 String t = String.format("%s:%s", time.substring(0, 2), time.substring(2, 4));
                 if (t.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
@@ -194,6 +196,13 @@ public class Parser {
         return new String[]{splitDateTime[0], splitStartEnd[0], splitStartEnd[1]};
     }
 
+    /**
+     * Interprets user input and returns command to be executed.
+     *
+     * @param input User input.
+     * @return Command to be executed.
+     * @throws DukeException If any exception occurs when interpreting user input.
+     */
     public Command parse(String input) throws DukeException {
         Instruction instruction = Instruction.valueOfLabel(input.split(" ")[0]);
         switch (instruction) {

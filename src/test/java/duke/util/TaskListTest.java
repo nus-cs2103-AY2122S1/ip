@@ -1,12 +1,7 @@
 package duke.util;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.ToDo;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,7 +9,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.ToDo;
 
 class TaskListTest {
     // @author Jonathan Cook
@@ -22,6 +24,7 @@ class TaskListTest {
     // with minor modifications
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    private TaskList taskList = new TaskList(new ArrayList<Task>(), new Storage());
 
     @BeforeEach
     public void setUp() {
@@ -32,8 +35,6 @@ class TaskListTest {
     public void tearDown() {
         System.setOut(standardOut);
     }
-
-    private TaskList taskList = new TaskList(new ArrayList<Task>(), new Storage());
 
     @Test
     void testAddTask() {
@@ -47,8 +48,8 @@ class TaskListTest {
     void testPrintTaskList() {
         taskList.addTask(new ToDo("homework"));
         taskList.printTaskList();
-        assertEquals("Here are the tasks in your list:\n" +
-                "1.[T][ ] homework",outputStreamCaptor.toString().trim());
+        assertEquals("Here are the tasks in your list:\n"
+                + "1.[T][ ] homework", outputStreamCaptor.toString().trim());
     }
 
     @Test

@@ -1,13 +1,13 @@
 package duke.util;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 class UiTest {
     // @author Jonathan Cook
@@ -30,16 +30,16 @@ class UiTest {
     void testPrintWelcomeMessage() {
         Ui ui = new Ui();
         ui.printWelcomeMessage();
-        assertEquals("--------------------------------------------------------------------------------\n" +
-                " ____        _        \n" +
-                "|  _ \\ _   _| | _____ \n" +
-                "| | | | | | | |/ / _ \\\n" +
-                "| |_| | |_| |   <  __/\n" +
-                "|____/ \\__,_|_|\\_\\___|\n" +
-                "\n" +
-                "Hello! I'm Duke :)\n" +
-                "What can I do for you? (Type 'help' to see what I can do!)\n" +
-                "--------------------------------------------------------------------------------",
+        assertEquals("--------------------------------------------------------------------------------\n"
+                + " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n"
+                + "\n"
+                + "Hello! I'm Duke :)\n"
+                + "What can I do for you? (Type 'help' to see what I can do!)\n"
+                + "--------------------------------------------------------------------------------",
                 outputStreamCaptor.toString().trim());
     }
 

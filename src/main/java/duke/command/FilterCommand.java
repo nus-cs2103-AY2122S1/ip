@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.exception.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.time.LocalDate;
 
 /**
  * FilterCommand filters out task in task list by date.

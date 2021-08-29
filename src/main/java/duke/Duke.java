@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.Task;
@@ -7,9 +10,6 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
@@ -22,6 +22,9 @@ public class Duke {
     private final Parser parser;
     private final Ui ui;
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         ui = new Ui();
         parser = new Parser();
@@ -38,6 +41,9 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Runs the Duke Program.
+     */
     public void run() {
         ui.printWelcomeMessage();
         Scanner sc = new Scanner(System.in);

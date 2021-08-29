@@ -1,10 +1,10 @@
 package duke.util;
 
-import duke.exception.DukeNoSuchTaskException;
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import duke.exception.DukeNoSuchTaskException;
+import duke.task.Task;
 
 /**
  * TaskList class represents a list of tasks.

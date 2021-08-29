@@ -10,7 +10,7 @@ import duke.util.Ui;
  *
  * @author Chng Zi Hao
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private Task task;
 
     /**
