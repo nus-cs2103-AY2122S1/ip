@@ -1,5 +1,6 @@
+package mango;
+
 import java.io.IOException;
-import mango.*;
 
 /**
  * Represents a chat-bot named Mango that keeps track of a list of tasks that the user
