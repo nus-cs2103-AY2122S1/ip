@@ -146,6 +146,14 @@ public class ChatBot {
     }
 
     /**
+     * This method prints the error message thrown by the program.
+     * @param message The error message.
+     */
+    public String handleStart() {
+        return ui.showStartMessage();
+    }
+
+    /**
      * This method gets the total number of tasks.
      * @return total number of tasks.
      */

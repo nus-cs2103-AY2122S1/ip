@@ -31,6 +31,10 @@ public class Duke {
         }
         return temp;
     }
+
+    public String getStart() {
+        return bot.handleStart();
+    }
 //        String input = sc.nextLine();
 //        boolean running = true;
 //
