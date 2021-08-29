@@ -13,12 +13,26 @@ public class Duke {
 
     /**
      * Constructor for a Duke chat-bot.
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("data/mango.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            ui.showLoadingError(new DukeException(e.getMessage()));
+            tasks = new TaskList();
+        }
+    }
+    /**
+     * Constructor for a Duke chat-bot.
      *
-     * @param filePath The path for the file that will contain the list of tasks tracked by the chatbot.
+     * @param filePath The path for the file that will contain the list of tasks tracked by the chat-bot.
      */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
@@ -28,23 +42,35 @@ public class Duke {
     }
 
     /**
-     * Executes the functionality of the chat-bot.
+     * Returns a greeting from the ui.
+     *
+     * @return A greeting message to the user.
      */
-    public void run() {
-        ui.greet();
-
-        Parser.parse(this.tasks);
-
-        try {
-            storage.save(this.tasks);
-        } catch (IOException e) {
-            System.out.println("Error encountered when saving data: " + e.getMessage());
-        }
-
-        ui.exit();
+    public String greet() {
+        return this.ui.greet();
     }
 
-    public static void main(String[] args) {
-        new Duke("data/mango.txt").run();
+    /**
+     * Returns a farewell message from the ui.
+     *
+     * @return A farewell message to the user.
+     */
+    public String exit() {
+        try {
+            this.storage.save(this.tasks);
+        } catch (IOException e) {
+            return "Error encountered when saving: " + e.getMessage();
+        }
+        return this.ui.exit();
+    }
+
+    /**
+     * Retrieves Mango's response to the user input.
+     *
+     * @param input The user input string.
+     * @return Mango's response to the user input.
+     */
+    public String getResponse(String input) {
+        return Parser.parse(this.tasks, input, this);
     }
 }

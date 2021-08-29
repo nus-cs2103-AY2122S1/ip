@@ -39,12 +39,14 @@ public class TaskList {
 
     /**
      * Interprets an input string into its corresponding Task object and adds it to the task list.
-     * Prints a confirmation that the Task is added, and the new total number of tasks in the list.
+     * Returns a confirmation that the Task is added, and the new total number of tasks in the list.
      *
      * @param str The input string that contains the user's command.
+     * @return The confirmation message that the task has been added.
      * @throws DukeException If the input string does not make sense.
      */
-    public void add(String str) throws DukeException {
+    public String add(String str) throws DukeException {
+        String output = "";
         Task newTask = null;
         String[] arr1 = str.split(" ", 2);
         String type = arr1[0];
@@ -87,40 +89,47 @@ public class TaskList {
             word = "tasks";
         }
 
-        System.out.println("Got it. I've added this task:");
-        System.out.printf("   [%s][%s] %s\n", newTask.getType(), newTask.getStatusIcon(), newTask.getDescription());
-        System.out.printf("Now you have %d %s in the list.%n", listIndex + 1, word);
+        output += "Got it. I've added this task:\n";
+        output += String.format("   [%s][%s] %s\n", newTask.getType(), newTask.getStatusIcon(), newTask.getDescription());
+        output += String.format("Now you have %d %s in the list.%n", listIndex + 1, word);
 
         listIndex++;
+        return output;
     }
 
     /**
      * Marks a Task in the task list as completed.
-     * Prints a confirmation that the Task has been marked complete.
+     * Returns a confirmation that the Task has been marked complete.
      *
      * @param completedTask The task that is to be marked as done.
+     * @return The confirmation message that the task has been marked completed.
      */
-    public void complete(int completedTask) {
+    public String complete(int completedTask) {
+        String output = "";
         Task currentTask = list.get(completedTask - 1);
         if (!currentTask.isDone()) {
             currentTask.markDone();
         }
 
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.printf("[%s][X] %s\n", currentTask.getType(), currentTask.getDescription());
+        output += "Nice! I've marked this task as done:\n";
+        output += String.format("[%s][X] %s\n", currentTask.getType(), currentTask.getDescription());
+
+        return output;
     }
 
     /**
-     * Removes a Task from the task list. Prints a confirmation that the Task has been deleted,
+     * Removes a Task from the task list. Returns a confirmation that the Task has been deleted,
      * and the new total number of tasks in the list.
      *
      * @param deleteTask The task to be deleted.
+     * @return The confirmation message that the task has been deleted.
      */
-    public void delete(int deleteTask) {
+    public String delete(int deleteTask) {
+        String output = "";
         Task delTask = list.remove(deleteTask - 1);
         listIndex--;
-        System.out.println("Noted. I've removed this task:");
-        System.out.printf("[%s][%s] %s\n", delTask.getType(), delTask.getStatusIcon(), delTask.getDescription());
+        output += "Noted. I've removed this task:\n";
+        output += String.format("[%s][%s] %s\n", delTask.getType(), delTask.getStatusIcon(), delTask.getDescription());
 
         String word;
         if (listIndex == 1) {
@@ -129,38 +138,47 @@ public class TaskList {
             word = "tasks";
         }
 
-        System.out.printf("Now you have %d %s in the list.%n", listIndex, word);
+        output += String.format("Now you have %d %s in the list.%n", listIndex, word);
+        return output;
     }
 
 
     /**
      * Searches in the task list for tasks that contain the string given.
      * @param str The string to find.
+     * @return The tasks that match the keyword.
      */
-    public void find(String str) {
+    public String find(String str) {
+        String output = "";
         int i = 0;
-        System.out.println("Here are the matching tasks in your list:");
+        output += "Here are the matching tasks in your list:\n";
         while (i < listIndex) {
             int num = i+1;
             Task curr = list.get(i);
             if (curr.getDescription().contains(str)) {
-                System.out.printf("%d. [%s][%s] %s\n", num, curr.getType(), curr.getStatusIcon(), curr.getDescription());
+                output += String.format("%d. [%s][%s] %s\n", num, curr.getType(), curr.getStatusIcon(), curr.getDescription());
             }
             i++;
         }
+        return output;
     }
 
     /**
-     * Prints the current task list.
+     * Returns the current task list in a string.
+     *
+     * @return All tasks in the task list in a string.
      */
-    public void printList() {
+    public String printList() {
+        String completeList = "";
         int i = 0;
-        System.out.println("Here are the tasks in your list:");
+        completeList += "Here are the tasks in your list:\n";
         while (i < listIndex) {
             int num = i+1;
             Task curr = list.get(i);
-            System.out.printf("%d. [%s][%s] %s\n", num, curr.getType(), curr.getStatusIcon(), curr.getDescription());
+            completeList += String.format("%d. [%s][%s] %s\n", num, curr.getType(), curr.getStatusIcon(), curr.getDescription());
             i++;
         }
+
+        return completeList;
     }
 }
