@@ -92,8 +92,9 @@ public class Duke {
             return ui.showDeletedTask(toBeDeleted);
         }
         case FIND: {
-            String keyword = parser.parseTask(command);
-            List<Task> matchedTasks = taskList.findTask(keyword);
+            String keywords = parser.parseTask(command);
+            String[] keywordList = keywords.split(" ");
+            List<Task> matchedTasks = taskList.findTask(keywordList);
             return ui.showFoundTask(matchedTasks);
         }
         case BYE: {
