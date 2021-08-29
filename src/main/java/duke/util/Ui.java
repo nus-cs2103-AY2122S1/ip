@@ -1,5 +1,7 @@
 package duke.util;
 
+import java.util.Scanner;
+
 import static java.lang.Math.max;
 
 /**
@@ -25,28 +27,52 @@ public class Ui {
     private static final int INDENT_LENGTH = 4;
     private static final String INDENT = " ".repeat(INDENT_LENGTH);
 
-    // Message methods
+    /** Class Instance Members */
+    private final Scanner sc;
+
+    /**
+     * Constructor for Ui class.
+     */
+    public Ui() {
+        sc = new Scanner(System.in);
+    }
 
     /**
      * Prints a horizontal line to the console
      */
-    private static void horizontal_line() {
+    private static void printHorizontalLine() {
         System.out.print("_".repeat(BOX_LENGTH) + "\n");
     }
 
     /**
      * Displays the message in a text box
+     *
      * @param message The message to display
      */
-    public static void display_message(String message) {
-        horizontal_line();
+    public static void displayMessage(String message) {
+        printHorizontalLine();
         String[] lineArr = message.split("\n");
         // Print sides of the box
         for (String line : lineArr) {
             int remainingSpace = max(BOX_LENGTH - line.length() - INDENT_LENGTH - 2, 0);
             System.out.println("|" + INDENT + line + " ".repeat(remainingSpace) + "|");
         }
-        horizontal_line();
+        printHorizontalLine();
     }
 
+    /**
+     * Closes the scanner
+     */
+    public void closeScanner() {
+        sc.close();
+    }
+
+    /**
+     * Outputs the next line in the scanner.
+     *
+     * @return the next line in the scanner
+     */
+    public String readCommand() {
+        return sc.nextLine();
+    }
 }

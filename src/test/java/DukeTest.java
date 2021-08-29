@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,9 +31,9 @@ public class DukeTest {
         String remainingText = Parser.getRemainingText(firstWord, inputString);
         try {
             ToDo myTodo = ToDo.newTodo(remainingText);
-            Ui.display_message(taskList.addTask(myTodo));
+            Ui.displayMessage(taskList.addTask(myTodo));
         } catch (DukeException err) {
-            Ui.display_message(err.getMessage());
+            Ui.displayMessage(err.getMessage());
         }
         assertEquals("1. [T][ ] make breakfast every morning", taskList.toString());
     }
@@ -47,9 +48,9 @@ public class DukeTest {
         String remainingText = Parser.getRemainingText(firstWord, inputString);
         try {
             Deadline myDeadline = Deadline.newDeadline(remainingText, false);
-            Ui.display_message(taskList.addTask(myDeadline));
+            Ui.displayMessage(taskList.addTask(myDeadline));
         } catch (DukeException err) {
-            Ui.display_message(err.getMessage());
+            Ui.displayMessage(err.getMessage());
         }
         assertEquals("1. [D][ ] make breakfast (by: 08.00 AM)", taskList.toString());
     }
@@ -64,11 +65,11 @@ public class DukeTest {
         String remainingText = Parser.getRemainingText(firstWord, inputString);
         try {
             Event myEvent = Event.newEvent(remainingText, false);
-            Ui.display_message(taskList.addTask(myEvent));
+            Ui.displayMessage(taskList.addTask(myEvent));
         } catch (DukeException err) {
-            Ui.display_message(err.getMessage());
+            Ui.displayMessage(err.getMessage());
         }
-        assertEquals("1. [E][ ] go to concert (at: 08.00 AM) ", taskList.toString());
+        assertEquals("1. [E][ ] go to concert (at: 08.00 AM)", taskList.toString());
     }
 
     private static final String INCOHERENT_INPUT_MESSAGE = "I'm sorry, but I don't know what that means :-(";
@@ -80,10 +81,10 @@ public class DukeTest {
         String[] inputArr = inputString.split(" ");
         String firstWord = inputArr[0];
         try {
-            Command.initialiseCommand(firstWord);
+            Command.initialiseCommand(firstWord, "");
         } catch (DukeException err) {
             actual = err.getMessage();
-            Ui.display_message(err.getMessage());
+            Ui.displayMessage(err.getMessage());
         }
         assertEquals(INCOHERENT_INPUT_MESSAGE, actual);
     }
@@ -95,7 +96,7 @@ public class DukeTest {
     @Test
     public void storage_updateTaskListToFile_fileUpdated() {
         TaskList taskList = new TaskList();
-        Storage myStorage = new Storage();
+        Storage myStorage = new Storage(Paths.get(OUTER_DIR, FILE));
         try {
             taskList.addTask(ToDo.newTodo("eat lunch"));
             myStorage.updateTaskListToFile(taskList);
@@ -107,14 +108,14 @@ public class DukeTest {
         } catch (DukeException err) {
             System.out.println(err.getMessage());
         } catch (FileNotFoundException err) {
-            Ui.display_message("An error occurred. Unable to find file.");
+            Ui.displayMessage("An error occurred. Unable to find file.");
         }
     }
 
     @Test
     public void storage_readTaskFile_fileRead() {
         TaskList taskList = new TaskList();
-        Storage myStorage = new Storage();
+        Storage myStorage = new Storage(Paths.get(OUTER_DIR, FILE));
         try {
             FileWriter fileWriter = new FileWriter(String.join(File.separator, FILE_PATH_ARR), false);
             fileWriter.write("T | 0 | eat lunch");
@@ -126,7 +127,7 @@ public class DukeTest {
             FileWriter fileWriterClearFile = new FileWriter(String.join(File.separator, FILE_PATH_ARR), false);
             fileWriterClearFile.close();
         } catch (FileNotFoundException err) {
-            Ui.display_message("An error occurred. Unable to find file.");
+            Ui.displayMessage("An error occurred. Unable to find file.");
         } catch (IOException err) {
             System.out.println(err.getMessage());
         }

@@ -25,6 +25,7 @@ public class ToDo extends Task{
 
     /**
      * Factory method for creating a todo object.
+     *
      * @param input The remaining input after the initial 'todo' string
      * @return A Todo object
      * @throws DukeException An exception thrown according to the message given
@@ -40,6 +41,7 @@ public class ToDo extends Task{
 
     /**
      * Factory method for creating a todo object from taskList.txt.
+     *
      * @param input The remaining string after the 'T |' string.
      * @return A Todo object
      * @throws DukeException An exception thrown according to the message given

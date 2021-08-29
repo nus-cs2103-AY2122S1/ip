@@ -75,11 +75,11 @@ public class Storage {
             }
             taskScanner.close();
         } catch (FileNotFoundException err) {
-            Ui.display_message(FILE_NOT_FOUND_MESSAGE);
+            Ui.displayMessage(FILE_NOT_FOUND_MESSAGE);
         } catch (ArrayIndexOutOfBoundsException err) {
-            Ui.display_message(INVALID_TASKLIST_MESSAGE);
+            Ui.displayMessage(INVALID_TASKLIST_MESSAGE);
         } catch (DukeException err) {
-            Ui.display_message(err.getMessage());
+            Ui.displayMessage(err.getMessage());
         }
     }
 
