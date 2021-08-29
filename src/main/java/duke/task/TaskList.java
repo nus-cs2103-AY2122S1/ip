@@ -88,7 +88,7 @@ public class TaskList {
      * Constructs a Deadline object.
      *
      * @param description String description of the action item to be done.
-     * @param date String representation of date of yyyy-mm-dd format.
+     * @param date        String representation of date of yyyy-mm-dd format.
      * @return A Deadline object.
      */
     public Deadline createDeadline(String description, String date) {
@@ -101,8 +101,8 @@ public class TaskList {
      * Constructs an Event object.
      *
      * @param description String description of the action item to be done.
-     * @param date String representation of date of yyyy-mm-dd format.
-     * @param time String representation of time.
+     * @param date        String representation of date of yyyy-mm-dd format.
+     * @param time        String representation of time.
      * @return An Event object.
      */
     public Event createEvent(String description, String date, String time) {

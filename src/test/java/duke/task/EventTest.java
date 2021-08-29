@@ -1,11 +1,14 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
 
+    /**
+     * Tests Event constructor.
+     */
     @Test
     public void testEventConstructor() {
         Event event = new Event("Hackathon kick-off", "2021-09-22", "19:00");

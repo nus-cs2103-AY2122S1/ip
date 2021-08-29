@@ -1,11 +1,14 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TaskTest {
 
+    /**
+     * Tests Task constructor.
+     */
     @Test
     public void testTaskConstructor() {
         Task task = new Task("My first task");
@@ -13,6 +16,9 @@ public class TaskTest {
         assertEquals(expected, task.toString());
     }
 
+    /**
+     * Tests status icon when task is uncompleted.
+     */
     @Test
     public void testIncompleteStatus() {
         Task task = new Task("My first task");
@@ -20,6 +26,9 @@ public class TaskTest {
         assertEquals(expected, task.getStatusIcon());
     }
 
+    /**
+     * Tests status icon when task is completed.
+     */
     @Test
     public void testCompleteStatus() {
         Task task = new Task("My first task");

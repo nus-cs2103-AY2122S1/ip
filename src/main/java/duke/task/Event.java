@@ -9,6 +9,13 @@ public class Event extends Task {
     protected LocalDate duration;
     protected LocalTime time;
 
+    /**
+     * Constructs a new Event object.
+     *
+     * @param description Description of the task.
+     * @param duration    Duration of event.
+     * @param time        Time of event.
+     */
     public Event(String description, String duration, String time) {
         super(description);
         this.duration = LocalDate.parse(duration);

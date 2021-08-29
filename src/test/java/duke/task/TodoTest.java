@@ -1,11 +1,14 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
 
+    /**
+     * Tests Todo constructor.
+     */
     @Test
     public void testTodoConstructor() {
         Todo todo = new Todo("Send reminder emails");
@@ -13,6 +16,9 @@ public class TodoTest {
         assertEquals(expected, todo.toString());
     }
 
+    /**
+     * Tests functionality of marking task as done.
+     */
     @Test
     public void testMarkTodoAsDone() {
         Todo todo = new Todo("Send reminder emails");

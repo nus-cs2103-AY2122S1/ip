@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Ui class that encapsulates the interface which the user interacts with.
@@ -27,9 +27,9 @@ public class Ui {
      * Prints greeting message.
      */
     public void greet() {
-        display("Hi, I'm Sync-Me Sebby.\n    " +
-                "I'm here to assist you with tracking and synchronizing of your personal tasks.\n    " +
-                "Let me know how I can help?");
+        display("Hi, I'm Sync-Me Sebby.\n    "
+                + "I'm here to assist you with tracking and synchronizing of your personal tasks.\n    "
+                + "Let me know how I can help?");
     }
 
     /**
@@ -53,7 +53,7 @@ public class Ui {
     /**
      * Prints success message for adding task.
      *
-     * @param task The individual task which can be Todo, Deadline or Event.
+     * @param task     The individual task which can be Todo, Deadline or Event.
      * @param numTasks The number of tasks in the list.
      */
     public void displaySuccessMessage(Task task, int numTasks) {

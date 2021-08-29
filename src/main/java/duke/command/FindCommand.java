@@ -1,16 +1,21 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.List;
-
 public class FindCommand extends Command {
 
     private String searchQuery;
 
+    /**
+     * Constructs a FindCommand object.
+     *
+     * @param searchQuery Keyword to search for in a task's description.
+     */
     public FindCommand(String searchQuery) {
         super(false);
         this.searchQuery = searchQuery;

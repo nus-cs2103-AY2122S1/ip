@@ -9,6 +9,11 @@ public class DeleteCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Constructs a DeleteCommand object.
+     *
+     * @param taskNumber Index of the task item.
+     */
     public DeleteCommand(int taskNumber) {
         super(false);
         this.taskNumber = taskNumber;

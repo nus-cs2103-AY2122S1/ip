@@ -1,11 +1,14 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
 
+    /**
+     * Tests Deadline constructor.
+     */
     @Test
     public void testDeadlineConstructor() {
         Deadline dl = new Deadline("essay submission", "2021-08-30");

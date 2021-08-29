@@ -14,14 +14,24 @@ public class AddCommand extends Command {
     private String time;
     private String type;
 
-    // constructor for todo
+    /**
+     * Constructs a AddCommand object for Todo items.
+     *
+     * @param description Description of task.
+     * @param type        Type of task.
+     */
     public AddCommand(String description, String type) {
         super(false);
         this.description = description;
         this.type = type;
     }
 
-    // constructor for deadline
+    /**
+     * Constructs a AddCommand object for Deadline items.
+     *
+     * @param description Description of task.
+     * @param type        Type of task.
+     */
     public AddCommand(String description, String date, String type) {
         super(false);
         this.description = description;
@@ -29,7 +39,12 @@ public class AddCommand extends Command {
         this.type = type;
     }
 
-    // constructor for event
+    /**
+     * Constructs a AddCommand object for Event items.
+     *
+     * @param description Description of task.
+     * @param type        Type of task.
+     */
     public AddCommand(String description, String date, String time, String type) {
         super(false);
         this.description = description;
@@ -53,7 +68,8 @@ public class AddCommand extends Command {
             Event event = tasks.createEvent(this.description, this.date, this.time);
             ui.displaySuccessMessage(event, tasks.length());
             break;
+        default:
+            break;
         }
-
     }
 }

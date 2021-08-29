@@ -7,6 +7,12 @@ public class Deadline extends Task {
 
     protected LocalDate by;
 
+    /**
+     * Constructs a Deadline object.
+     *
+     * @param description Description of the task.
+     * @param by          Date of completion.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDate.parse(by);

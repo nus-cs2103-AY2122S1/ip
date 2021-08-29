@@ -9,6 +9,11 @@ public class DoneCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Constructs a DoneCommand object.
+     *
+     * @param taskNumber Index of the task item.
+     */
     public DoneCommand(int taskNumber) {
         super(false);
         this.taskNumber = taskNumber;

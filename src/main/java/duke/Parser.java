@@ -1,6 +1,14 @@
 package duke;
 
-import duke.command.*;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
 
 /**
  * Parser class that encapsulates handling of user input.

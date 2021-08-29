@@ -12,7 +12,7 @@ public class InvalidCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.display("OOPS! I do not understand what does that mean. Maybe you can try either one of " +
-                "[todo, deadline, event, done, list, delete]?");
+        ui.display("OOPS! I do not understand what does that mean. Maybe you can try either one of "
+                + "[todo, deadline, event, done, list, delete]?");
     }
 }
