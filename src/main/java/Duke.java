@@ -3,7 +3,6 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Duke {
-    //private final static List<Task> items = new ArrayList<>(100);
     
     private final Storage storage;
     private final TaskList tasks;
@@ -37,25 +36,11 @@ public class Duke {
         RequestType userRequest;
 
         while(!userInput.equals("bye")){
-            if(userInput.equals("list")){
-                userRequest = RequestType.DEFAULT;
-                tasks.list();
-            } else if(userInput.startsWith("done")){
-                userRequest = RequestType.DONE;
-            } else if(userInput.startsWith("delete")){
-                userRequest = RequestType.DELETE;
-            } else if(userInput.length() > 8 && userInput.startsWith("deadline")  && userInput.contains("/by")){
-                userRequest = RequestType.DEADLINE;
-            } else if(userInput.length() > 5 && userInput.startsWith("event")  && userInput.contains("/at")){
-                userRequest = RequestType.EVENT;
-            } else if(userInput.startsWith("todo")){
-                userRequest = RequestType.TODO;
-            } else {
-                userRequest = RequestType.UNUSUAL;
-            }
+            userRequest = Parser.parse(userInput);
             
             switch (userRequest){
                 case DEFAULT:
+                    tasks.list();
                     break;
                 case UNUSUAL:
                     ui.unusualRequest();
