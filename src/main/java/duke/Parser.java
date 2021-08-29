@@ -75,7 +75,7 @@ public class Parser {
     }
 
     private Record greet(String args) {
-        return new Record("Hello! I'm duke.Duke\n\t What can I do for you?");
+        return new Record("Hello! I'm Duke\n\t What can I do for you?");
     }
 
     private boolean verify() {

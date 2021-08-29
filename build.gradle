@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 repositories {
@@ -43,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.duke.Duke"
+    mainClassName = "duke.Main"
 }
 
 shadowJar {
@@ -53,6 +54,11 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.29'
+}
+
+
+javafx {
+    version = "8.0.171"
 }
 
 run{
