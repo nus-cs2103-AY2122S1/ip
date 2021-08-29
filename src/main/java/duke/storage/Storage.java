@@ -65,17 +65,17 @@ public class Storage {
         Task task;
 
         switch (info[0]) {
-            case "D":
-                task = new Deadline(info[2], info[3]);
-                break;
-            case "E":
-                task = new Event(info[2], info[3]);
-                break;
-            case "T":
-                task = new Todo(info[2]);
-                break;
-            default:
-                throw new DukeException("Error unknown value: " + info[0]);
+        case "D":
+            task = new Deadline(info[2], info[3]);
+            break;
+        case "E":
+            task = new Event(info[2], info[3]);
+            break;
+        case "T":
+            task = new Todo(info[2]);
+            break;
+        default:
+            throw new DukeException("Error unknown value: " + info[0]);
         }
         if (info[1].equals("1")) {
             task.markAsDone();
