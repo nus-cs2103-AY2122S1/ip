@@ -4,8 +4,18 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * The ExitCommand handles the command to exit the program.
+ */
 public class ExitCommand extends Command{
 
+    /**
+     * Handles the display of the goodbye message.
+     *
+     * @param taskList The current TaskList being used.
+     * @param ui The current Ui being used.
+     * @param storage The current Storage being used.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showGoodbye();
     }

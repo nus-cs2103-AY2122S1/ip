@@ -3,18 +3,35 @@ package duke.commands;
 import duke.*;
 import duke.tasks.Task;
 
+/**
+ * The DeleteCommand handles when a task is to be deleted.
+ */
 public class DeleteCommand extends Command{
 
     private final int taskIdx;
 
-    public DeleteCommand(String taskNum) throws DukeException {
+    /**
+     * Constructs a DeleteCommand Object.
+     *
+     * @param idx Index of task to be deleted.
+     * @throws DukeException If there is no task at given index.
+     */
+    public DeleteCommand(String idx) throws DukeException {
         try {
-            taskIdx = Integer.valueOf(taskNum.trim()) - 1;
+            taskIdx = Integer.valueOf(idx.trim()) - 1;
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid Command. 'delete' must be followed by a task number");
         }
     }
 
+    /**
+     * Executes the deletion of the Task in the TaskList at the given index.
+     *
+     * @param taskList The current TaskList being used.
+     * @param ui The current Ui being used.
+     * @param storage The current Storage being used.
+     * @throws DukeException
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskIdx >= taskList.size()) {
             throw new DukeException("Invalid task number entered.");
