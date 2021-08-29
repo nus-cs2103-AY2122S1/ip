@@ -14,11 +14,10 @@ public class TodoCommand extends Command {
     /**
      * Constructor for a {@code DeleteCommand}
      *
-     * @param args {@code String} array with length 1. {@code args[0]} contains the
-     *             task title.
+     * @param title Title of the new task.
      */
-    public TodoCommand(String[] args) {
-        super(args);
+    public TodoCommand(String title) {
+        super(title);
     }
 
     /**

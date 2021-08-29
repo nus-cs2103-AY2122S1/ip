@@ -16,11 +16,10 @@ public class DoneCommand extends Command {
     /**
      * Constructor for a {@code DeleteCommand}
      *
-     * @param args {@code String} array with length 1. {@code args[0]} contains the
-     *             task number to be marked as done.
+     * @param taskNo String representation of the task number.
      */
-    public DoneCommand(String[] args) {
-        super(args);
+    public DoneCommand(String taskNo) {
+        super(taskNo);
     }
 
     /**

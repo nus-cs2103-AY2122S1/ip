@@ -27,7 +27,7 @@ public abstract class Command {
      * @param args An array of {@code String} required to construct a {@code Task}
      *             object.
      */
-    public Command(String[] args) {
+    public Command(String ... args) {
         this.args = args;
     }
 

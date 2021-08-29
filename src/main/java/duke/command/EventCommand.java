@@ -14,11 +14,11 @@ public class EventCommand extends Command {
     /**
      * Constructor for a {@code EventCommand}
      *
-     * @param args {@code String} array with length 2. {@code args[0]} contains the
-     *             title, {@code args[1]} contains the deadline for a {@code Event}.
+     * @param title    Title of the new task.
+     * @param deadline Deadline of the new task.
      */
-    public EventCommand(String[] args) {
-        super(args);
+    public EventCommand(String title, String deadline) {
+        super(title, deadline);
     }
 
     /**

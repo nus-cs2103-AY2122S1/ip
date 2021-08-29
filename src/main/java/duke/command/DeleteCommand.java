@@ -15,11 +15,11 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for a {@code DeleteCommand}
      *
-     * @param args {@code String} array with length 1. {@code args[0]} contains the
-     *             task number to be deleted.
+     * @param taskNo String representation of the task
+     *               number of the task to be deleted.
      */
-    public DeleteCommand(String[] args) {
-        super(args);
+    public DeleteCommand(String taskNo) {
+        super(taskNo);
     }
 
     /**

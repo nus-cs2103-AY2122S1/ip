@@ -14,12 +14,11 @@ public class DeadlineCommand extends Command {
     /**
      * Constructor for a {@code DeadlineCommand}
      *
-     * @param args {@code String} array with length 2. {@code args[0]} contains the
-     *             title, {@code args[1]} contains the endDate for a
-     *             {@code Deadline}.
+     * @param title   Title of the new task.
+     * @param endDate End date of the new task.
      */
-    public DeadlineCommand(String[] args) {
-        super(args);
+    public DeadlineCommand(String title, String endDate) {
+        super(title, endDate);
     }
 
     /**

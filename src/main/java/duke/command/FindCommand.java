@@ -11,10 +11,10 @@ public class FindCommand extends Command {
     /**
      * Constructor for a {@code DeleteCommand}
      *
-     * @param args {@code String} array with length 1. {@code args[0]} contains the query keyword.
+     * @param keyword Search term.
      */
-    public FindCommand(String[] args) {
-        super(args);
+    public FindCommand(String keyword) {
+        super(keyword);
     }
 
     /**
