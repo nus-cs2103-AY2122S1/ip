@@ -1,12 +1,13 @@
 package duke.general;
 
+import java.util.ArrayList;
+
 import duke.error.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.util.ArrayList;
 
 /**
  * Contains the task list, and has operations to add/delete from the list

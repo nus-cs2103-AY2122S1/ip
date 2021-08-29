@@ -4,7 +4,7 @@ package duke.task;
  * Encapsulates the name and completion status of the task.
  */
 
-abstract public class Task {
+public abstract class Task {
     private final String name;
     private boolean completed;
 
@@ -43,10 +43,10 @@ abstract public class Task {
     }
 
     //TODO
-    abstract public String getType();
+    public abstract String getType();
 
     //TODO
-    abstract public String getInfo();
+    public abstract String getInfo();
 
     /**
      * Converts task into a string

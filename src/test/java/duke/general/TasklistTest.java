@@ -1,19 +1,20 @@
 package duke.general;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 import duke.error.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TasklistTest {
     @Test
-    public void dummyTest(){
+    public void dummyTest() {
         assertEquals(2, 2);
     }
 
@@ -49,7 +50,7 @@ public class TasklistTest {
     }
 
     @Test
-    public void deleteTask(){
+    public void deleteTask() {
         ToDo t = new ToDo("testing");
         Deadline d = new Deadline("testing", "2020-03-01");
         Event e = new Event("testing", "1 July");

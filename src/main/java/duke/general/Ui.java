@@ -1,10 +1,11 @@
 package duke.general;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.error.DukeException;
 import duke.task.Task;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user
@@ -42,17 +43,29 @@ public class Ui {
         t.addResponse(size);
     }
 
+    /**
+     * Shows response for done command
+     * @param t Task to be marked as done
+     */
     public void doneResponse(Task t) {
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(t);
     }
 
+    /**
+     * Shows response for delete command
+     * @param t Task to be deleted
+     * @param list Tasklist to delete the task from
+     */
     public void deleteResponse(Task t, Tasklist list) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(t);
         System.out.println("Now you have " + list.size() + " tasks in your list.");
     }
 
+    /**
+     * Shows the response for bye command
+     */
     public void byeResponse() {
         System.out.println("Bye bye. Duke going to sleep now.");
     }
@@ -75,6 +88,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays the task list
+     * @param t Tasklist
+     */
     public void showList(Tasklist t) {
         try {
             if (t.size() == 0) {

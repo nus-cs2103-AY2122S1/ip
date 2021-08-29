@@ -1,8 +1,8 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
     @Test
@@ -10,5 +10,4 @@ public class ToDoTest {
         ToDo t = new ToDo("test");
         assertEquals("[T][ ] test", t.toString());
     }
-
 }

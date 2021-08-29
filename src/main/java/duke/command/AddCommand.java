@@ -14,6 +14,11 @@ public class AddCommand extends Command {
     private TaskType type;
     private String[] input;
 
+    /**
+     * Constructs the AddCommand object
+     * @param t Task type
+     * @param inputSplit Input by user
+     */
     public AddCommand(TaskType t, String[] inputSplit) {
         this.type = t;
         this.input = inputSplit;

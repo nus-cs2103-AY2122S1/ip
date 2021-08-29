@@ -1,13 +1,13 @@
 package duke.general;
 
 import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
 import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
 import duke.command.ErrorCommand;
 import duke.command.FindCommand;
+import duke.command.ListCommand;
 
 /**
  * Deals with making sense of the user command

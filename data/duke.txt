@@ -1,3 +1,4 @@
 T/X/homework
 E/ /Welcome party/25 Aug
-D/X/iP/2021-09-05
+D/ /iP/2021-09-05
+T/ /hw
