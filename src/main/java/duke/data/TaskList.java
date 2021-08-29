@@ -39,7 +39,7 @@ public class TaskList {
         return this.taskData.size();
     }
 
-    public TaskList filterDate(LocalDate queryDate) {
+    public TaskList filterByDate(LocalDate queryDate) {
         return new TaskList(this.taskData.stream().filter(x -> x.hasDueDate(queryDate))
                 .collect(Collectors.toList()));
     }
