@@ -4,6 +4,13 @@ import Duke.Command.Command;
 
 public class Parser {
 
+    /**
+     * Returns a Command after taking in the user's input. What the command does will be completely
+     * up to what was entered by the user. Each Command will entail different behaviour from Duke.
+     *
+     * @param stringCommand This is the input that the user has typed into the console.
+     * @return a Command that can be executed to perform a specific action.
+     */
     public static Command parse(String stringCommand) {
         String keyword = stringCommand.split(" ")[0].trim().toLowerCase();
         switch (keyword) {

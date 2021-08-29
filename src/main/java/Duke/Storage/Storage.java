@@ -7,12 +7,21 @@ import Duke.Tasks.*;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Storage allows the creation and update of txt files to maintain past tasks.
+ */
 public class Storage {
     String path;
     public Storage(String path) {
         this.path = path;
     }
 
+    /**
+     * Returns a list of Tasks that were stored in the tasks.txt file.
+     *
+     * @return a list of Tasks
+     * @throws DukeException If there is an error writing to the files or when there is no previous file detected.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         try {
@@ -38,7 +47,7 @@ public class Storage {
         return list;
     }
 
-    public static Task convertToTask(String output) {
+    private static Task convertToTask(String output) {
         char type = output.charAt(1);
         char done = output.charAt(4);
         String taskAndDate = output.substring(7);
@@ -78,6 +87,11 @@ public class Storage {
         return task;
     }
 
+    /**
+     * Updates the txt file that is used to store and remember the tasks entered.
+     *
+     * @param tasklist This is taken in so that the txt file can be updated.
+     */
     public void updateTxtFile(TaskList tasklist) {
         BufferedWriter bw;
         try {
