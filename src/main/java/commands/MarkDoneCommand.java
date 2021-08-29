@@ -10,7 +10,10 @@ import tasks.TaskList;
 public class MarkDoneCommand extends Command {
     private final int taskNumber;
     public static final String KEYWORD = "done";
-    private static final String INDEX_ERROR_MESSAGE = String.format("Please " +
+    private static final String INPUT_FORMAT = String.format("\t\"%s [task number]\"", KEYWORD);
+    private static final String INPUT_FORMAT_ERROR_MESSAGE = String.format("Please " +
+            "ensure your input is in the following format:\n" + INPUT_FORMAT);
+    private static final String TASK_NUMBER_ERROR_MESSAGE = String.format("Please " +
             "provide a valid task number.");
 
     /**
@@ -21,11 +24,16 @@ public class MarkDoneCommand extends Command {
     public MarkDoneCommand(String userInput) throws MorganException {
         String intString = userInput.substring(KEYWORD.length()).trim();
 
-        // Parse user input to integer to obtain task number
+        // Checks if user specified task number
+        if (intString.isEmpty()) {
+            throw new MorganException(INPUT_FORMAT_ERROR_MESSAGE);
+        }
+
+        // Checks if task number is an integer
         try {
             this.taskNumber = Integer.parseInt(intString);
         } catch (NumberFormatException e) {
-            throw new MorganException(INDEX_ERROR_MESSAGE);
+            throw new MorganException(TASK_NUMBER_ERROR_MESSAGE);
         }
     }
 
@@ -36,15 +44,19 @@ public class MarkDoneCommand extends Command {
      * @throws MorganException
      */
     public String execute(TaskList taskList) throws MorganException {
-        // Checks if task number is valid
-        boolean isInputValid = this.taskNumber <= taskList.getNumOfTasks()
+        boolean isValidTaskNumber = this.taskNumber <= taskList.getNumOfTasks()
                 && this.taskNumber > 0;
-        if (!isInputValid) {
-            throw new MorganException(INDEX_ERROR_MESSAGE);
+
+        // Checks if task number is valid
+        if (!isValidTaskNumber) {
+            throw new MorganException(TASK_NUMBER_ERROR_MESSAGE);
         }
 
+        // Obtain task and mark done
         taskList.markAsDone(this.taskNumber);
         Task task = taskList.getTask(this.taskNumber);
+
+        // Message displayed upon execution
         return "Nice! I've marked this task as done:\n\t"
                 + task.toString();
     }
