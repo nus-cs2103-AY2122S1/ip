@@ -10,7 +10,7 @@ import duke.util.Ui;
  * Represents the DeleteCommand in the Duke program.
  */
 public class DeleteCommand extends Command {
-    private int deleteTask;
+    private final int deleteTask;
 
     /**
      * Constructs a DeleteCommand to delete a given task in tasks.

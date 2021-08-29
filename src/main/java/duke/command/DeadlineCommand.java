@@ -12,7 +12,7 @@ import duke.util.Ui;
  * Represents the DeadlineCommand in the Duke program.
  */
 public class DeadlineCommand extends Command {
-    private Deadline deadline;
+    private final Deadline deadline;
 
     /**
      * Constructs a DeadlineCommand to create a Deadline task with the given description and deadline.

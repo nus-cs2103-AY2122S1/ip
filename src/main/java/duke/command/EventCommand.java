@@ -10,7 +10,7 @@ import duke.util.Ui;
  * Represents the EventCommand in the Duke program.
  */
 public class EventCommand extends Command {
-    private Event event;
+    private final Event event;
 
     /**
      * Constructs a EventCommand to create an Event task with the given description and datetime.

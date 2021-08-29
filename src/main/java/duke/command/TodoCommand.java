@@ -10,7 +10,7 @@ import duke.util.Ui;
  * Represents the TodoCommand in the Duke program.
  */
 public class TodoCommand extends Command {
-    private Todo todo;
+    private final Todo todo;
 
     /**
      * Constructs a TodoCommand to create a Todo task with the given description.

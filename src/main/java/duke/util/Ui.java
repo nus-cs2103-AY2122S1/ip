@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Represents the user interface of the Duke program.
  */
 public class Ui {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Constructs a user interface for the Duke program.

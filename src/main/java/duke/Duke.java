@@ -12,7 +12,7 @@ import duke.util.Ui;
  */
 public class Duke {
     private Storage storage;
-    private Ui ui;
+    private final Ui ui;
     private TaskList tasks;
 
     /**

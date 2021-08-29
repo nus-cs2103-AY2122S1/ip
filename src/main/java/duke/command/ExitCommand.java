@@ -8,9 +8,6 @@ import duke.util.Ui;
  * Represents an execution where the Duke program is terminated.
  */
 public class ExitCommand extends Command {
-    public ExitCommand() {
-    }
-
     /**
      * Defines the execution of the DeadlineCommand where a Deadline task is created and added to tasks.
      *
