@@ -6,6 +6,11 @@ package duke;
  * @author felix-ong
  */
 public class ListCommand extends Command {
+    private StringBuilder sb;
+
+    public ListCommand() {
+        this.sb = new StringBuilder("Here are the tasks in your list:\n");
+    }
     /**
      * Executes the specific actions for this command.
      *
@@ -15,9 +20,8 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showList();
         for (int i = 0; i < tasks.getTasks().size(); i++) {
-            ui.printTaskInList(tasks.getTask(i), i);
+            sb.append(String.format(" %d. %s%n", i + 1, tasks.getTask(i)));
         }
     }
 
@@ -29,5 +33,10 @@ public class ListCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return sb.toString();
     }
 }

@@ -31,10 +31,9 @@ public class TaskList {
     /**
      * Prints the size of the list of tasks with the appropriate grammar.
      */
-    public int printSize() {
+    public String getTaskCount() {
         int taskCount = this.tasks.size();
-        System.out.printf("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
-        return taskCount;
+        return String.format("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
     }
 
     public List<Task> getTasks() {
@@ -54,8 +53,6 @@ public class TaskList {
     public void addTask(Storage storage, Task task) throws DukeException {
         this.tasks.add(task);
         storage.saveData(this.tasks);
-        System.out.println("Added task:\n " + task);
-        this.printSize();
     }
 
     /**
@@ -65,7 +62,7 @@ public class TaskList {
      * @param index The index of the task to mark as done.
      * @throws DukeException If index is out of range.
      */
-    public void deleteTask(Storage storage, String index) throws DukeException {
+    public Task deleteTask(Storage storage, String index) throws DukeException {
         if (index.isBlank()) {
             throw new DukeException("☹ OOPS!!! Please provide the index of the "
                     + "task you want to delete.");
@@ -74,8 +71,7 @@ public class TaskList {
         Task toBeDeleted = this.tasks.get(deleteTaskIndex);
         this.tasks.remove(deleteTaskIndex);
         storage.saveData(this.tasks);
-        System.out.printf("Noted! I have removed the following task:%n %s%n", toBeDeleted);
-        this.printSize();
+        return toBeDeleted;
     }
 
     /**
@@ -85,7 +81,7 @@ public class TaskList {
      * @param index The index of the task to mark as done.
      * @throws DukeException If index is out of range.
      */
-    public void doneTask(Storage storage, String index) throws DukeException {
+    public Task doneTask(Storage storage, String index) throws DukeException {
         if (index.isBlank()) {
             throw new DukeException("☹ OOPS!!! Please provide the index of the "
                     + "task you want to mark as done.");
@@ -94,7 +90,7 @@ public class TaskList {
         Task doneTask = this.tasks.get(taskIndex);
         doneTask.markAsDone();
         storage.saveData(this.tasks);
-        System.out.printf("Good job! I have marked the following task as done:%n %s%n", doneTask);
+        return doneTask;
     }
 
     /**

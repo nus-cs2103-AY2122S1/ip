@@ -9,9 +9,11 @@ import java.util.List;
  */
 public class FindCommand extends Command {
     private String keyword;
+    private StringBuilder sb;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
+        this.sb = new StringBuilder("Here are the matching tasks in your list:\n");
     }
 
     /**
@@ -23,10 +25,9 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showFound();
         List<Task> matches = tasks.findTask(this.keyword);
         for (int i = 0; i < matches.size(); i++) {
-            ui.printTaskInList(matches.get(i), i);
+            sb.append(String.format(" %d. %s%n", i + 1, matches.get(i)));
         }
     }
 
@@ -39,5 +40,10 @@ public class FindCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return sb.toString();
     }
 }

@@ -50,19 +50,12 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-//        final Circle clip = new Circle(50, 50, 50);
         var db = new DialogBox(text, img);
-//        db.setPadding(new Insets(10, 0, 10, 10));
-//        BackgroundFill bgFill = new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY);
-//        Background bg = new Background(bgFill);
-//        db.setBackground(bg);
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-//        final Circle clip = new Circle(50, 50, 50);
         var db = new DialogBox(text, img);
-//        db.setPadding(new Insets(10, 10, 10, 0));
         db.flip();
         return db;
     }

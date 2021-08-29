@@ -7,6 +7,7 @@ package duke;
  */
 public class AddCommand extends Command {
     private Task task;
+    private String taskCountMessage;
 
     public AddCommand(Task task) {
         this.task = task;
@@ -21,6 +22,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(storage, this.task);
+        this.taskCountMessage = tasks.getTaskCount();
     }
 
     /**
@@ -31,5 +33,10 @@ public class AddCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Added task: %n %s%n%s", task, taskCountMessage);
     }
 }

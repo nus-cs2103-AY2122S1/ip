@@ -76,6 +76,6 @@ public class Parser {
     }
 
     private static String getDescription(String[] parts, int partsLength) {
-        return String.join(" ", Arrays.copyOfRange(parts, 1, partsLength - 2));
+        return String.join(" ", Arrays.copyOfRange(parts, 1, partsLength - 3));
     }
 }

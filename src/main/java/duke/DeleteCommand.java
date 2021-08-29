@@ -7,6 +7,7 @@ package duke;
  */
 public class DeleteCommand extends Command {
     private String index;
+    private Task task;
 
     public DeleteCommand(String index) {
         this.index = index;
@@ -21,7 +22,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.deleteTask(storage, this.index);
+        this.task = tasks.deleteTask(storage, this.index);
     }
 
     /**
@@ -32,5 +33,10 @@ public class DeleteCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Noted! I have removed the following task:%n %s%n", task);
     }
 }
