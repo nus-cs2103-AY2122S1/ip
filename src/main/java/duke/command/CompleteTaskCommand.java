@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
-import duke.ui.Ui;
 
 /**
  * Represents a command for marking a <code>Task</code> as completed.
@@ -19,22 +19,18 @@ public class CompleteTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException {
+    public DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException {
         if (commandArguments.isEmpty()) {
             throw new DukeException("Invalid use of the 'done' command.\n\n" + USAGE_MESSAGE);
         }
         try {
             int taskNumber = Integer.parseInt(commandArguments);
-            ui.print(taskManager.markTaskAsDone(taskNumber));
+            String message = taskManager.markTaskAsDone(taskNumber);
             storage.saveTasks(taskManager);
+            return new DukeResponse(message);
         } catch (NumberFormatException e) {
             // User provided an argument that is not parsable.
             throw new DukeException("Invalid task number.");
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

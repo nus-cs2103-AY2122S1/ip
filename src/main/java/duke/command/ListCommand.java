@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
-import duke.ui.Ui;
 import duke.util.DukeDateTime;
 
 /**
@@ -21,17 +21,12 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException {
+    public DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException {
         if (commandArguments.isEmpty()) {
-            ui.print(taskManager.list());
+            return new DukeResponse(taskManager.list());
         } else {
             DukeDateTime date = DukeDateTime.parseUserInputDate(commandArguments);
-            ui.print(taskManager.list(date));
+            return new DukeResponse(taskManager.list(date));
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }
