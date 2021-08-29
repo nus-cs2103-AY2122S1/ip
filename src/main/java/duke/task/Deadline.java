@@ -26,13 +26,16 @@ public class Deadline extends Task {
 
     @Override
     public String outputFormat() {
-        return "D" + super.outputFormat() + " | " + date.getDayOfMonth() + "/" + date.getMonthValue() + "/" + date.getYear()
-                + " " + String.format("%1$" + 2 + "s", time.getHour()).replace(' ', '0') + String.format("%1$" + 2 + "s", time.getMinute()).replace(' ', '0');
+        return "D" + super.outputFormat() + " | " + date.getDayOfMonth() + "/" + date.getMonthValue()
+                + "/" + date.getYear() + " "
+                + String.format("%1$" + 2 + "s", time.getHour()).replace(' ', '0')
+                + String.format("%1$" + 2 + "s", time.getMinute()).replace(' ', '0');
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
+        return "[D]" + super.toString() + " (by: "
+                + date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
                 + " " + time.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
     }
 }

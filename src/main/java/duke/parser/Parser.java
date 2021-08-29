@@ -1,14 +1,20 @@
 package duke.parser;
 
-import duke.exceptions.DukeException;
-import duke.storage.Storage;
-import duke.task.*;
-import duke.ui.Ui;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+
+import duke.exceptions.DukeException;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.ui.Ui;
+
+
 
 /**
  * This class deals with making sense of the user command.
@@ -31,17 +37,31 @@ public class Parser {
         this.input = input;
     }
 
+    /**
+     * Formats the date inputted by the user into a LocalDate object.
+     *
+     * @param str The date string inputted by the user.
+     * @return A LocalDate object representation of the date string.
+     * @throws DukeException If the date is wrongly formatted.
+     */
     public static LocalDate dateFormatter(String str) throws DukeException {
         try {
             String[] splitStr = str.split("/");
             String day = String.format("%1$" + 2 + "s", splitStr[0]).replace(' ', '0');
             String month = String.format("%1$" + 2 + "s", splitStr[1]).replace(' ', '0');
-            return LocalDate.parse(splitStr[2] + "-" +  month + "-" + day);
+            return LocalDate.parse(splitStr[2] + "-" + month + "-" + day);
         } catch (Exception e) {
             throw new DukeException("Your Date is wrongly formatted! It should be in the form of dd-mm-yyyy.");
         }
     }
 
+    /**
+     * Formats the time inputted by the user.
+     *
+     * @param str The time string inputted by the user.
+     * @return A LocalTime object representation of the time string.
+     * @throws DukeException If the time is wrongly formatted.
+     */
     public static LocalTime timeFormatter(String str) throws DukeException {
         try {
             return LocalTime.parse(str.substring(0, 2) + ":" + str.substring(2));
@@ -92,6 +112,12 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Finds all related tasks which contains input as a keyword.
+     *
+     * @param tasks The current list of tasks by the user.
+     * @param ui The current user interface by the user.
+     */
     public void findCommand(TaskList tasks, Ui ui) {
         ArrayList<Task> list = new ArrayList<>();
         String description = input.substring("find".length()).trim();
@@ -153,8 +179,8 @@ public class Parser {
             String[] splitStr = by.split("\\s+");
             return new Deadline(description.trim(), timeFormatter(splitStr[1]), dateFormatter(splitStr[0]));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Your date and time is wrongly formatted. It should be in the form of" +
-                    " dd-mm-yyyy hhmm");
+            throw new DukeException("Your date and time is wrongly formatted. It should be in the form of"
+                    + " dd-mm-yyyy hhmm");
         }
 
     }
@@ -172,8 +198,8 @@ public class Parser {
             String[] splitStr = at.split("\\s+");
             return new Event(description.trim(), timeFormatter(splitStr[1]), dateFormatter(splitStr[0]));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Your date and time is wrongly formatted. It should be in the form of" +
-                    "dd-mm-yyyy hhmm.");
+            throw new DukeException("Your date and time is wrongly formatted. It should be in the form of"
+                    + "dd-mm-yyyy hhmm.");
         }
     }
 
