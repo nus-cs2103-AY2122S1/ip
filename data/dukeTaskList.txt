@@ -1,4 +1,4 @@
 1.[D][ ] homework (by: Dec 31 2020 11:59PM)
 2.[E][ ] meeting (at: Dec 23 2020 7:00PM)
-3.[T][ ] swim
+3.[T][X] swim
 4.[T][ ] run

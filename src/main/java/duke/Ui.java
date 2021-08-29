@@ -24,7 +24,7 @@ public class Ui {
      * Prints goodbye message.
      */
     public void goodbyeMsg() {
-       System.out.print(LINEBREAK
+        System.out.print(LINEBREAK
                 + "Have a good day, friend!\n"
                 + LINEBREAK);
     }
@@ -46,7 +46,7 @@ public class Ui {
      * @param task Task to be printed.
      */
     public void doneTaskMsg(Task task) {
-        System.out.print( LINEBREAK
+        System.out.print(LINEBREAK
                 + "Well Done, I'll get it marked:\n"
                 + task.checkIsDone()
                 + " " + task.getDescription() + "\n"
@@ -58,14 +58,14 @@ public class Ui {
      *
      * @param task Task to be printed.
      */
-    public void deleteTaskMsg(Task task) {
-        System.out.print( LINEBREAK
+    public void deleteTaskMsg(Task task, int noOfTask) {
+        System.out.print(LINEBREAK
                 + "Roger! I will remove this task from the list: \n"
                 + task.getTaskType()
                 + task.checkIsDone()
                 + task.getDescription() + "\n"
                 + "Now you have "
-                + Task.noOfTask
+                + noOfTask
                 + " tasks left in the list.\n"
                 + LINEBREAK);
     }
@@ -75,15 +75,15 @@ public class Ui {
      *
      * @param task Task to be printed.
      */
-    public void addTaskMsg(Task task) {
-        System.out.print( LINEBREAK
-                +"Roger! I will add this task in: \n"
+    public void addTaskMsg(Task task, int noOfTask) {
+        System.out.print(LINEBREAK
+                + "Roger! I will add this task in: \n"
                 + task.getTaskType()
                 + task.checkIsDone()
                 + " "
                 + task.getDescription() + "\n"
                 + "Now you have "
-                + Task.noOfTask
+                + noOfTask
                 + " tasks left in the list.\n"
                 + LINEBREAK);
     }
@@ -95,7 +95,7 @@ public class Ui {
      */
     public void findTaskMsg(TaskList taskList) {
         System.out.print(LINEBREAK
-                +"Are these what you were looking for?\n"
+                + "Are these what you were looking for?\n"
                 + taskList.toString()
                 + LINEBREAK);
     }

@@ -10,13 +10,19 @@ public class Duke {
     private Boolean isRunning;
     private Parser parser;
 
+    /**
+     * Constructor for Duke program.
+     *
+     * @param filePath File path to locate the saved task list file.
+     * @throws IOException
+     */
     public Duke(String filePath) throws IOException {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.taskList = new TaskList();
         this.isRunning = false;
         this.parser = new Parser();
-        if(storage.getDoesFileExists()) {
+        if (storage.getDoesFileExists()) {
             this.storage.retrieveFile(this.taskList);
         } else {
             this.storage.createFile();
@@ -44,7 +50,7 @@ public class Duke {
         this.isRunning = true;
         this.ui.greetingMsg();
         Scanner sc = new Scanner(System.in);
-        while (this.isRunning){
+        while (this.isRunning) {
             String input = sc.nextLine();
             if (input.equals("bye")) {
                 //Ends duke bot
@@ -61,8 +67,8 @@ public class Duke {
                 //Deletes task
                 Integer removeTaskIndex = parser.deleteInputParser(input);
                 Task removedTask = taskList.removeTask(removeTaskIndex);
-                this.ui.deleteTaskMsg(removedTask);
-            } else if(input.contains("find ")) {
+                this.ui.deleteTaskMsg(removedTask, this.taskList.getNoOfTask());
+            } else if (input.contains("find ")) {
                 //Find tasks
                 String keyword = parser.findInputParser(input);
                 TaskList taskListWithKeyword = this.taskList.findTasks(keyword);
@@ -93,14 +99,14 @@ public class Duke {
                     if (newTask != null) {
                         //Add task to the list and print message.
                         taskList.addTask(newTask);
-                        this.ui.addTaskMsg(newTask);
+                        this.ui.addTaskMsg(newTask, this.taskList.getNoOfTask());
                     } else {
                         //For invalid input message
                         throw new WrongInputException();
                     }
 
                 } catch (DukeException e) {
-                    System.out.print( e.toString()
+                    System.out.print(e.toString()
                             + "\n");
                 }
             }

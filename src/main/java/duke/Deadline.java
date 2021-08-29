@@ -1,10 +1,10 @@
 package duke;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     /** Date aspect of the deadline */
     private LocalDate date;
     /** Time aspect of the deadline */
@@ -18,7 +18,7 @@ public class Deadline extends Task{
      */
     public Deadline(String description, String deadline) {
         super(description, "[D]");
-        this.date = LocalDate.parse(deadline.substring(0,10));
+        this.date = LocalDate.parse(deadline.substring(0, 10));
         this.time = LocalTime.parse(deadline.substring(11), DateTimeFormatter.ofPattern("HHmm"));
     }
 

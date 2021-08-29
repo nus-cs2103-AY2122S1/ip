@@ -5,8 +5,14 @@ public class Task {
     private boolean isDone;
     private String isDoneBox;
     private String taskType;
-    static int noOfTask = 0;
 
+    /**
+     * Constructor for task class.
+     *
+     * @param description Description of task.
+     * @param taskType String format of task type.
+     * @throws TaskDescriptionException
+     */
     public Task(String description, String taskType) throws TaskDescriptionException {
         if (description.equals("")) {
             throw new TaskDescriptionException();
@@ -15,7 +21,6 @@ public class Task {
             this.isDone = false;
             this.isDoneBox = "[ ]";
             this.taskType = taskType;
-            noOfTask++;
         }
     }
 

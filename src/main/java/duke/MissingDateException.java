@@ -1,6 +1,6 @@
 package duke;
 
-public class MissingDateException extends DukeException{
+public class MissingDateException extends DukeException {
 
     MissingDateException() {
         super();

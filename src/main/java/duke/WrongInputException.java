@@ -1,6 +1,6 @@
 package duke;
 
-public class WrongInputException extends DukeException{
+public class WrongInputException extends DukeException {
 
     WrongInputException() {
         super();

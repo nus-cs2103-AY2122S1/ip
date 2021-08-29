@@ -1,11 +1,11 @@
 package duke;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 
-public class Event extends Task{
+public class Event extends Task {
     private LocalDate date;
     private LocalTime time;
 
@@ -17,7 +17,7 @@ public class Event extends Task{
      */
     public Event(String description, String deadline) {
         super(description, "[E]");
-        this.date = LocalDate.parse(deadline.substring(0,10));
+        this.date = LocalDate.parse(deadline.substring(0, 10));
         this.time = LocalTime.parse(deadline.substring(11), DateTimeFormatter.ofPattern("HHmm"));
     }
 

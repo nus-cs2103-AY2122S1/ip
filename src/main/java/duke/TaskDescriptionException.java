@@ -1,6 +1,6 @@
 package duke;
 
-public class TaskDescriptionException extends DukeException{
+public class TaskDescriptionException extends DukeException {
 
     TaskDescriptionException() {
         super();

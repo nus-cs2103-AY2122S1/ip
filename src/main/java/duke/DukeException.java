@@ -1,6 +1,6 @@
 package duke;
 
-public class DukeException extends IllegalArgumentException{
+public class DukeException extends IllegalArgumentException {
 
     DukeException() {
         super();
