@@ -2,6 +2,7 @@ package duke.date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.lang.NumberFormatException;
 import duke.exceptions.WrongDateFormatException;
 import duke.exceptions.WrongTimeFormatException;
@@ -22,7 +23,7 @@ public class Date {
         this.globalTime = inputTime;
     }
 
-    private LocalTime formatTime(String timeString) throws NumberFormatException, WrongTimeFormatException {
+    private LocalTime formatTime(String timeString) throws NumberFormatException, WrongTimeFormatException, DateTimeParseException {
         String[] hhmm = timeString.split("[-/:]+");
         LocalTime time;
         if (hhmm.length == 1) {

@@ -24,9 +24,9 @@ public class Parser {
         String commandInput = commandItems[0];
         if (this.isNormalCommandType(commandInput)) {
             return this.extractNormalCommand(commandInput, formatted_input);
-        } else {
-            return this.extractSpecialCommand(commandInput, formatted_input, commandItems);
         }
+        return this.extractSpecialCommand(commandInput, formatted_input, commandItems);
+
     }
 
     private Command extractSpecialCommand(String commandName,

@@ -2,8 +2,6 @@ package duke;
 import duke.commands.Command;
 import java.io.FileNotFoundException;
 import duke.exceptions.DukeException;
-import java.util.Scanner;
-
 public class Duke {
     private final Parser parser;
     private Storage storage;
@@ -23,7 +21,6 @@ public class Duke {
     }
 
     protected void run() {
-        Scanner sc = new Scanner(System.in);
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -39,7 +36,6 @@ public class Duke {
                 ui.showLine();
             }
         }
-        sc.close();
     }
 
 }
