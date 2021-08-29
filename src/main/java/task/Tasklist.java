@@ -16,7 +16,7 @@ public class Tasklist {
      * Constructor to create a new taskList to store tasks
      */
     public Tasklist(ArrayList<Task> taskList) {
-       this.taskList = taskList;
+        this.taskList = taskList;
     }
 
     /**
@@ -25,7 +25,7 @@ public class Tasklist {
      */
     public void add(Task task) {
         try {
-            if(task == null) {
+            if (task == null) {
                 throw new DukeException.TaskNotAddedException("Task has not been added successfully.");
             }
         } catch (DukeException e) {
@@ -36,7 +36,7 @@ public class Tasklist {
 
         this.taskList.add(task);
         System.out.println("Got it. I've added this task:");
-        String addMsg = String.format("%s", task.toString());
+        String addMsg = String.format("%s", task);
         String counterMsg = String.format("Now you have %d tasks in the list.", taskList.size());
         System.out.println(addMsg);
         System.out.println(counterMsg);
@@ -50,7 +50,7 @@ public class Tasklist {
      */
     public void list() {
         try {
-            if(this.taskList.size() == 0) {
+            if (this.taskList.size() == 0) {
                 throw new DukeException.EmptyListException("List is empty :(");
             }
         } catch (DukeException e) {
@@ -60,7 +60,7 @@ public class Tasklist {
         }
 
         System.out.println("Here are the tasks in your list:");
-        for(int i=0;i < taskList.size(); i++) {
+        for(int i = 0;i < taskList.size(); i++) {
             System.out.printf("%d. %s\n", i + 1, this.taskList.get(i).toString());
         }
         System.out.println(Ui.breakline);
@@ -81,7 +81,6 @@ public class Tasklist {
             System.out.println(Ui.breakline);
             return;
         }
-
         String removeMsg = String.format("Noted. I've removed this task:\n%s",removedTask.toString());
         System.out.println(removeMsg);
         System.out.printf("Now you have %d task(s) in the list.\n", taskList.size());

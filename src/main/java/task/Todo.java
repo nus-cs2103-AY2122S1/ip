@@ -1,8 +1,5 @@
 package task;
 
-import duke.*;
-import ui.*;
-
 /**
  * A type of task that has no additional arguments and extends from Task
  *
