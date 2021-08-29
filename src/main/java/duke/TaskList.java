@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class TaskList {
-    private ArrayList<Task> myList = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * A constructor of a TaskList.
@@ -24,11 +24,11 @@ public class TaskList {
      * @return The ArrayList of a TaskList.
      */
     public ArrayList<Task> getTaskList() {
-        return myList;
+        return tasks;
     }
 
     public int getLength() {
-        return myList.size();
+        return tasks.size();
     }
 
 
@@ -42,11 +42,11 @@ public class TaskList {
         try {
             Map<String, String> m = Parser.parseTextFromInput(text);
             switch (m.get("type")) {
-                case "T": myList.add(new Todo(m.get("description")));
+                case "T": tasks.add(new Todo(m.get("description")));
                     break;
-                case "D": myList.add(new Deadline(m.get("description"), m.get("time")));
+                case "D": tasks.add(new Deadline(m.get("description"), m.get("time")));
                     break;
-                case "E": myList.add(new Event(m.get("description"), m.get("time")));
+                case "E": tasks.add(new Event(m.get("description"), m.get("time")));
             }
         } catch (DukeException e) {
             throw e;
@@ -64,9 +64,9 @@ public class TaskList {
         text = text.trim();
         try {
             int i = Integer.parseInt(text.split(" ")[1]) - 1;
-            Task t = myList.get(i);
+            Task t = tasks.get(i);
             TextUi.showTaskRemoved(t);
-            myList.remove(i);
+            tasks.remove(i);
             TextUi.showUpdatedNumberOfTasks(this);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Indicate which task that you want to delete.");
@@ -83,7 +83,7 @@ public class TaskList {
     public void markAsDone(String text) throws DukeException {
         try {
             int i = Integer.parseInt(text.split(" ")[1]) - 1;
-            Task t = (Task) myList.get(i);
+            Task t = (Task) tasks.get(i);
             t.setDone();
             TextUi.showTaskDone(t);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -97,9 +97,9 @@ public class TaskList {
         try {
             text = text.substring(5);
             ArrayList<String> temp = new ArrayList<>();
-            int len = myList.size();
+            int len = tasks.size();
             for (int i = 0; i < len; i++) {
-                String taskInString = myList.get(i).toString();
+                String taskInString = tasks.get(i).toString();
                 int index = taskInString.indexOf(text);
                 String taskIndex = String.valueOf(i + 1);
                 if (index != -1) {
@@ -124,10 +124,10 @@ public class TaskList {
      * Prints the list of Tasks.
      */
     public void printList() {
-        int len = myList.size();
+        int len = tasks.size();
         if (len == 0) { System.out.println("The list is empty!"); }
         for (int i = 0; i < len; i++) {
-            Task t = (Task) myList.get(i);
+            Task t = (Task) tasks.get(i);
             TextUi.showTaskNumbered(i, t);
         }
     }

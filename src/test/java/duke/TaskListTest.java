@@ -7,20 +7,20 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TaskListTest {
     @Test
     public void invalidAddKeyword() {
-        TaskList tl = new TaskList();
+        TaskList tasks = new TaskList();
 
         assertThrows(DukeException.class, () -> {
-            tl.addTask("hello");
+            tasks.addTask("hello");
         });
     }
 
     @Test
     public void invalidDeleteIndexOutOfRange() {
-        TaskList tl = new TaskList();
+        TaskList tasks = new TaskList();
 
         assertThrows(DukeException.class, () -> {
-            tl.addTask("todo read book");
-            tl.deleteTask("delete 2");
+            tasks.addTask("todo read book");
+            tasks.deleteTask("delete 2");
         });
     }
 }

@@ -10,7 +10,7 @@ import duke.ui.TextUi;
  */
 public class Duke {
     private Storage storage;
-    private TaskList tl;
+    private TaskList tasks;
 
     /**
      * A constructor for a Duke chat bot.
@@ -18,8 +18,8 @@ public class Duke {
      * @param filePath The path of the file the task list is saved in.
      */
     public Duke(String filePath) {
-        tl = new TaskList();
-        storage = new Storage(filePath, tl);
+        tasks = new TaskList();
+        storage = new Storage(filePath, tasks);
         try {
             storage.readFile();
         } catch (DukeException e) {
@@ -41,20 +41,20 @@ public class Duke {
                     TextUi.showGoodbyeMessage();
                     break;
                 } else if (text.equals("ls")) {
-                    tl.printList();
+                    tasks.printList();
                 } else if (text.startsWith("done")) {
-                    tl.markAsDone(text);
+                    tasks.markAsDone(text);
                     storage.copyToFile();
                 } else if (text.startsWith("delete")) {
-                    tl.deleteTask(text);
+                    tasks.deleteTask(text);
                     storage.copyToFile();
                 } else if (text.startsWith("find")) {
-                    tl.findTask(text);
+                    tasks.findTask(text);
                 } else {
-                    tl.addTask(text);
+                    tasks.addTask(text);
                     storage.copyToFile();
-                    TextUi.showTaskAdded(tl);
-                    TextUi.showUpdatedNumberOfTasks(tl);
+                    TextUi.showTaskAdded(tasks);
+                    TextUi.showUpdatedNumberOfTasks(tasks);
                 }
             } catch (DukeException e) {
                 TextUi.showErrorMessage(e.getMessage());

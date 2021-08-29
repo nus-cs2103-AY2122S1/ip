@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Storage {
     protected String filePath;
     protected File f;
-    protected TaskList tl;
+    protected TaskList tasks;
 
     /**
      * A constructor of a Storage.
@@ -36,7 +36,7 @@ public class Storage {
             }
         }
 
-        this.tl = tl;
+        this.tasks = tl;
     }
 
     /**
@@ -51,9 +51,9 @@ public class Storage {
             while (s.hasNext()) {
                 String text = s.nextLine();
                 Map<String, String> m = Parser.parseTextFromFile(text);
-                tl.addTask(m.get("finalText"));
+                tasks.addTask(m.get("finalText"));
                 if (m.get("status").equals("X")) {
-                    tl.getTaskList().get(tl.getTaskList().size() - 1).setDone();
+                    tasks.getTaskList().get(tasks.getTaskList().size() - 1).setDone();
                 }
             }
         } catch (FileNotFoundException e) {
@@ -71,8 +71,8 @@ public class Storage {
     public void copyToFile() throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (int i = 0; i < tl.getTaskList().size(); i++) {
-                fw.write(tl.getTaskList().get(i).toString() + System.lineSeparator());
+            for (int i = 0; i < tasks.getTaskList().size(); i++) {
+                fw.write(tasks.getTaskList().get(i).toString() + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {

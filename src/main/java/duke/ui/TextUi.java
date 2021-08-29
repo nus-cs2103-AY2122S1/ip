@@ -27,10 +27,10 @@ public class TextUi {
     /**
      * Prints the message after a task is added.
      *
-     * @param tl The TaskList.
+     * @param tasks The TaskList.
      */
-    public static void showTaskAdded(TaskList tl) {
-        System.out.println("added: " + tl.getTaskList().get(tl.getLength() - 1));
+    public static void showTaskAdded(TaskList tasks) {
+        System.out.println("added: " + tasks.getTaskList().get(tasks.getLength() - 1));
     }
 
     /**
@@ -54,14 +54,14 @@ public class TextUi {
     /**
      * Prints the message after the TaskList is updated.
      *
-     * @param tl The TaskList.
+     * @param tasks The TaskList.
      */
-    public static void showUpdatedNumberOfTasks(TaskList tl) {
-        int len = tl.getLength();
+    public static void showUpdatedNumberOfTasks(TaskList tasks) {
+        int len = tasks.getLength();
         if (len == 1) {
-            System.out.printf("Now you have %d task in the list.\n", tl.getLength());
+            System.out.printf("Now you have %d task in the list.\n", tasks.getLength());
         } else {
-            System.out.printf("Now you have %d tasks in the list.\n", tl.getLength());
+            System.out.printf("Now you have %d tasks in the list.\n", tasks.getLength());
         }
     }
 
