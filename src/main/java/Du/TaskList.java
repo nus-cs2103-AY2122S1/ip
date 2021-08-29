@@ -42,32 +42,29 @@ public class TaskList {
      * removes task from the list
      * @param order the number the task is labelled as
      */
-    public void remove_task(int order) {
-        System.out.println("____________________________________________________________\n"
-                + "Okies, I have removed this task: \n"
+    public String remove_task(int order) {
+        String print = "Okies, I have removed this task: \n"
                 + list_of_tasks.get(order - 1) + "\n"
-                + "Now you have " + (this.size() - 1) + " task(s) in the list.\n"
-                + "____________________________________________________________");
+                + "Now you have " + (this.size() - 1) + " task(s) in the list.\n";
         list_of_tasks.remove(order - 1);
+        return print;
     }
 
 
     /**
      * prints list of task
      */
-    public void print_list_of_tasks() {
-        System.out.println("____________________________________________________________\n"
-                + "Here are the tasks in your list:\n");
+    public String print_list_of_tasks() {
         if (this.size() == 0) {
-            System.out.println(" ");
+            return "Here are the tasks in your list:\n ";
         } else {
+            String print = "Here are the tasks in your list:\n";
             for (int i = 0; i < this.size(); i++) {
-                System.out.println((i + 1) + "." + list_of_tasks.get(i).toString()
-                );
-            }
-        }
+                print += (i + 1) + "." + list_of_tasks.get(i).toString() + "\n";
 
-        System.out.println("____________________________________________________________");
+            }
+            return print;
+        }
     }
 
 
@@ -75,9 +72,9 @@ public class TaskList {
      * finds the task in the list and mark it as done
      * @param order the number the task is labelled as
      */
-    public void find_finished_task(int order) {
+    public String find_finished_task(int order) {
         Task complete_task = list_of_tasks.get(order - 1);
-        complete_task.finish_task();
+        return complete_task.finish_task();
     }
 
 
@@ -100,13 +97,12 @@ public class TaskList {
      * prints the Tasks that contain the substring from search function
      * @param arraylist prints the Tasks in the arraylist
      */
-    public void print(ArrayList<Task> arraylist) {
-        System.out.println("____________________________________________________________\n" +
-                "Here are the matching tasks in your list:");
+    public String print(ArrayList<Task> arraylist) {
+        String print = "Here are the matching tasks in your list:";
         for (Task t : arraylist) {
-            System.out.println(t);
+            print += t;
         }
-        System.out.println("____________________________________________________________");
+        return print;
     }
 
 }

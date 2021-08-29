@@ -26,23 +26,19 @@ public class Task {
     /**
      * prints log for adding a task
      */
-    public void log_add_task() {
-        System.out.println("____________________________________________________________\n"
-                + "Got it. I've added this task:\n"
+    public String log_add_task() {
+        return "Got it. I've added this task:\n"
                 + this + "\n"
-                + "Now you have " + taskList.size() + " task(s) in the list.\n"
-                + "____________________________________________________________");
+                + "Now you have " + taskList.size() + " task(s) in the list.\n";
     }
 
     /**
      * changes task's done state to be true
      */
-    public void finish_task() {
+    public String finish_task() {
         this.isDone = true;
-        System.out.println("____________________________________________________________\n"
-                + "Nice! I've marked this task as done:\n"
-                + this + "\n"
-                + "____________________________________________________________");
+        return "Nice! I've marked this task as done:\n"
+                + this + "\n";
     }
 
     /**

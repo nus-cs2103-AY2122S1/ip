@@ -27,22 +27,24 @@ public class Storage {
      * loads previously recorded items if there is any
      * @throws IOException
      */
-    public void load() throws IOException {
+    public String load() throws IOException {
         File f = new File(filepath);
-
+        String print = "";
         // check if data folder exists, if not, create it
         if (!f.getParentFile().exists())
             f.getParentFile().mkdirs();
 
         // check if du.txt exists, if not, create it
         if (f.createNewFile()) {
-
+            return print;
         } else {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
                 String task_name = s.nextLine();
-                read_task(task_name);
+                Task t = read_task(task_name);
+                print = print + t + "\n";
             }
+            return print;
         }
     }
 
@@ -51,7 +53,7 @@ public class Storage {
      * reads the tasks if there is any from the saved file
      * @param task_name name from the file
      */
-    public void read_task(String task_name) {
+    public Task read_task(String task_name) {
         String[] task = task_name.split(" , ", 4);
         boolean done = false;
         Task t = null;
@@ -67,6 +69,7 @@ public class Storage {
         } else if (Objects.equals(task[0], "E")) {
             t = new Event(task[2], done, tasks, LocalDateTime.parse(task[3], formatter));
         }
+        return t;
     }
 
     /**

@@ -2,9 +2,6 @@ package Du;
 
 import java.io.IOException;
 
-/**
- * main Du class
- */
 public class Du {
 
     private Storage storage;
@@ -19,32 +16,35 @@ public class Du {
         ui = new Ui();
         tasks = new TaskList();
         storage = new Storage(filepath, tasks);
-        try {
-            storage.load();
-        } catch (IOException e) {
-            ui.showLoadingError();
-        }
     }
 
+    public TaskList getTasks() {
+        return this.tasks;
+    }
+
+    public Ui getUi() {
+        return this.ui;
+    }
+
+    public Storage getStorage() {
+        return this.storage;
+    }
 
     /**
      * runs Du itself
      * @throws IOException from p.parse()
      */
-    public void run() throws IOException {
+    public void start() {
         ui.greet();
         System.out.println("Previous records (if there are any):");
         tasks.print_list_of_tasks();
         System.out.println("\nIs there anything I can do for you?");
-        Parser p = new Parser(tasks);
-        p.parse();
+    }
 
+    public void end() throws IOException {
         storage.update_records(tasks);
         ui.close_programme();
     }
 
-    public static void main(String[] args) throws IOException {
-        new Du("data/du.txt").run();
-    }
 
 }

@@ -18,15 +18,13 @@ public class Ui {
     /**
      * greets when the user first start the programme
      */
-    public void greet() {
+    public String greet() {
         String logo = " ____\n"
                 + "|  _ \\ _   _\n"
                 + "| | | | | | |\n"
                 + "| |_| | |_| |\n"
                 + "|____/ \\__,_|\n";
-        System.out.println("Hello from\n" + logo);
-
-        System.out.println("Hello! I'm Du, your personal assistant chatbot!:)");
+        return "Hello from\n" + logo  + "Hello! I'm Du, your personal assistant chatbot!:)";
     }
 
     /**
