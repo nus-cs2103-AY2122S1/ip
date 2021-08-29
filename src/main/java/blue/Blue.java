@@ -1,9 +1,16 @@
 package blue;
 
-import blue.handler.*;
-
 import java.util.HashMap;
 import java.util.Scanner;
+
+import blue.handler.CommandHandler;
+import blue.handler.DeadlineHandler;
+import blue.handler.DeleteHandler;
+import blue.handler.DoneHandler;
+import blue.handler.EventHandler;
+import blue.handler.FindHandler;
+import blue.handler.ListHandler;
+import blue.handler.ToDoHandler;
 
 /**
  * Entry point of the Blue application.
@@ -15,6 +22,11 @@ public class Blue {
     private final Ui ui;
     private HashMap<String, CommandHandler> commandHandlers;
 
+    /**
+     * Constructs a Blue instance.
+     *
+     * @param filePath Path to save tasks.
+     */
     public Blue(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -54,7 +66,7 @@ public class Blue {
         DoneHandler doneHandler = new DoneHandler(tasks);
         DeleteHandler deleteHandler = new DeleteHandler(tasks);
         FindHandler findHandler = new FindHandler(tasks);
-        
+
         // put the handlers into HashMap
         commandHandlers = new HashMap<>();
         commandHandlers.put(Command.LIST, listHandler);

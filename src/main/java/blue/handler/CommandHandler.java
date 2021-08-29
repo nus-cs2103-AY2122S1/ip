@@ -15,7 +15,7 @@ public abstract class CommandHandler {
 
     /**
      * Handles the user input.
-     * 
+     *
      * @param input User input.
      * @return Response.
      */

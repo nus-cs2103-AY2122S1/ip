@@ -1,16 +1,16 @@
 package blue;
 
-import blue.task.Deadline;
-import blue.task.Event;
-import blue.task.Task;
-import blue.task.ToDo;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+
+import blue.task.Deadline;
+import blue.task.Event;
+import blue.task.Task;
+import blue.task.ToDo;
 
 /**
  * Reads tasks from file and writes tasks to file.
@@ -58,7 +58,7 @@ class Storage {
         String[] lines = taskRepresentation.split(DELIMITER);
         String classRepr = lines[0];
         String title = lines[1];
-        
+
         if (classRepr.equals(ToDo.getClassRepr())) {
             task = new ToDo(title);
         } else if (classRepr.equals(Deadline.getClassRepr())) {
@@ -68,7 +68,7 @@ class Storage {
             String at = lines[2];
             task = new Event(title, at);
         }
-        
+
         return task;
     }
 

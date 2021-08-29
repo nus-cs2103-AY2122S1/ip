@@ -15,7 +15,7 @@ public class DoneHandler extends CommandHandler {
 
     /**
      * Handles the user input.
-     * 
+     *
      * @param input User input.
      * @return Response.
      * @throws BlueException If the user input is invalid.

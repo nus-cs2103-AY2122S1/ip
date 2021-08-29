@@ -1,11 +1,11 @@
 package blue.task;
 
-import blue.BlueException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
+
+import blue.BlueException;
 
 /**
  * Tasks that start at a specific time and ends at a specific time.
@@ -14,6 +14,13 @@ public class Event extends Task {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
     private final LocalDateTime at;
 
+    /**
+     * Constructs an Event.
+     *
+     * @param title    Title of Event.
+     * @param atString The start date and time of an Event, in ISO_LOCAL_DATE_TIME format, e.g. 2021-12-27T23:59:59.
+     * @throws BlueException If atString is not in the correct format.
+     */
     public Event(String title, String atString) throws BlueException {
         super(title);
         try {

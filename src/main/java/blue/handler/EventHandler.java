@@ -14,7 +14,7 @@ public class EventHandler extends CommandHandler {
 
     /**
      * Handles the user input.
-     * 
+     *
      * @param input User input.
      * @return Response.
      * @throws BlueException If the user input is invalid.
@@ -26,7 +26,7 @@ public class EventHandler extends CommandHandler {
             int indexAt = input.indexOf(" /at ");
             String title = input.substring(indexSpace + 1, indexAt).strip();
             String at = input.substring(indexAt + 5).strip();
-            
+
             Event event = new Event(title, at);
             taskList.add(event);
             String response = "Got it. I've added this task:\n" + event + "\n";

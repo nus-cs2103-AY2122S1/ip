@@ -1,12 +1,12 @@
 package blue.handler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import blue.BlueException;
 import blue.Parser;
 import blue.TaskList;
 import blue.task.Task;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Handles the find command.
