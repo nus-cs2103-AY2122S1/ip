@@ -8,7 +8,6 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * This Duke class implements the functionalities of a chatbot,
@@ -19,7 +18,6 @@ public class Duke {
     private static final String FILE_PATH = String.valueOf(Paths.get(
             System.getProperty("user.home"), "data", "dukeFile.txt"));
 
-    private Ui ui;
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
@@ -28,33 +26,25 @@ public class Duke {
      * Constructor for a Duke instance.
      */
     public Duke() {
-        ui = new Ui();
         storage = new Storage(FILE_PATH);
         tasks = new TaskList(storage.load());
         parser = new Parser();
     }
 
     /**
-     * Listens to the user input and executes the commands.
+     * Listens to the user input and returns the appropriate message.
+     *
+     * @param input The user input.
+     * @return A message indicating command execution or user input error.
      */
-    public void run() {
-        ui.greetUser();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (DateTimeParseException e) {
-                ui.showError("Please specify the date in this format: yyyy-mm-dd");
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = parser.parse(input);
+            return command.execute(tasks, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "Please specify the date in this format: yyyy-mm-dd";
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
     }
 }

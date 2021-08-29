@@ -4,7 +4,6 @@ import duke.exception.TaskIndexOutOfBoundsException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * This DeleteCommand class represents a command to delete a task from the task list.
@@ -26,12 +25,12 @@ public class DeleteCommand extends Command {
      * Deletes a task from the task list and updates the hard disk of the change.
      *
      * @param tasks The task list.
-     * @param ui The UI of the application.
      * @param storage The storage system of the application.
+     * @return Completion message of this command.
      * @throws TaskIndexOutOfBoundsException If the task list is accessed with an illegal index.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws TaskIndexOutOfBoundsException {
+    public String execute(TaskList tasks, Storage storage) throws TaskIndexOutOfBoundsException {
         // Removes a Task from the TaskList instance
         Task removedTask = tasks.deleteTask(taskId);
 
@@ -42,19 +41,10 @@ public class DeleteCommand extends Command {
         } else {
             message += "Now you have " + tasks.getNumberOfTasks() + " tasks in the list.";
         }
-        ui.showCommandDone(message);
 
         // Saves the current task list to the hard drive
         storage.save(tasks);
-    }
 
-    /**
-     * Indicates that this command does not intend to exit the system.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return message;
     }
 }
