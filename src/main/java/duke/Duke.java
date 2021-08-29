@@ -6,36 +6,11 @@ import java.io.IOException;
  * This is Duke, my java bot!
  */
 class Duke {
-    private static final TaskList tasks = new TaskList();
-    private static final Parser parser = new Parser(tasks);
-    private static Storage storage;
+    private final TaskList tasks = new TaskList();
+    private final Parser parser = new Parser(tasks);
+    private Storage storage;
 
-    /**
-     * Runs Duke, my java bot!
-     *
-     * @param args Input arguments, will be ignored
-     */
-    public static void main(String[] args) {
-        Ui.show("Hello! I'm Duke", "What can I do for you?");
-        loadStorage();
-        while (true) {
-            try {
-                String command = Ui.nextLine();
-                if (parser.isExit(command)) {
-                    Ui.show("Bye. Hope to see you again soon!");
-                    storage.close();
-                    return;
-                } else {
-                    Ui.show(parser.parse(command));
-                }
-                storage.write(command);
-            } catch (Exception e) {
-                Ui.show(e.getMessage());
-            }
-        }
-    }
-
-    private static void loadStorage() {
+    public Duke() {
         try {
             storage = new Storage("duke.txt");
             for (String command : storage.readAllLines()) {
@@ -45,4 +20,48 @@ class Duke {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Runs Duke, my java bot!
+     *
+     * @param args Input arguments, will be ignored
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        Ui.show("Hello! I'm Duke", "What can I do for you?");
+        while (true) {
+            String command = Ui.nextLine();
+            if (duke.isExit(command)) {
+                Ui.show("Bye. Hope to see you again soon!");
+                duke.exit();
+                return;
+            } else {
+                Ui.show(duke.handleInput(command));
+            }
+        }
+    }
+
+
+    public String[] handleInput(String command) {
+        try {
+            String[] out = parser.parse(command);
+            storage.write(command);
+            return out;
+        } catch (Exception e) {
+            return new String[]{e.getMessage()};
+        }
+    }
+
+    public boolean isExit(String command) {
+        return parser.isExit(command);
+    }
+
+    public void exit() {
+        try {
+            storage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
