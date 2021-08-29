@@ -47,9 +47,9 @@ public class CommandDelete extends Command {
         if (isArgumentValid()) {
             int number = Integer.parseInt(arguments.get(0)) - 1;
             if (number + 1 <= tl.numberOfTasks() && number + 1 > 0) {
-                ui.printout("Noted, I've removed this task\n" + tl.getTaskString(number));
+                ui.addDialog("Noted, I've removed this task\n" + tl.getTaskString(number), true);
                 tl.removeTask(number);
-                ui.printout("Now you have " + tl.numberOfTasks() + " tasks in the list.");
+                ui.addDialog("Now you have " + tl.numberOfTasks() + " tasks in the list.", true);
             } else {
                 throw new DukeException("That task does not exist!");
             }

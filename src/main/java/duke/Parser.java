@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.command.Command;
-import duke.command.CommandBye;
 import duke.command.CommandCheck;
 import duke.command.CommandDeadline;
 import duke.command.CommandDelete;
@@ -75,8 +74,6 @@ public class Parser {
             return new CommandDelete(arguments);
         case (CommandCheck.KEYWORD):
             return new CommandCheck(arguments);
-        case (CommandBye.KEYWORD):
-            return new CommandBye();
         case (CommandFind.KEYWORD):
             return new CommandFind(arguments);
         default:

@@ -17,13 +17,14 @@ public class TaskList {
     private ArrayList<Task> listOfTasks = new ArrayList<>();
     private ArrayList<String> saveFileInput;
     private Storage storage;
+    private Ui ui;
 
     /**
-     * Default constructor
+     * Default constructor to be used if a save file cannot be loaded.
      *
      */
-    public TaskList() {
-
+    public TaskList(Ui ui) {
+        this.ui = ui;
     }
 
     /**
@@ -32,9 +33,10 @@ public class TaskList {
      * @param saveFileInput the ArrayList containing the save file.
      * @param storage the Storage object.
      */
-    public TaskList(ArrayList<String> saveFileInput, Storage storage) {
+    public TaskList(ArrayList<String> saveFileInput, Storage storage, Ui ui) {
         this.saveFileInput = saveFileInput;
         this.storage = storage;
+        this.ui = ui;
         initialiseTaskList();
     }
 
@@ -84,10 +86,9 @@ public class TaskList {
      * @param t The task provided.
      */
     public void addTask(Task t) {
-        System.out.println("Got it. I'll add this task:");
+        ui.addDialog("Got it. I'll add this task: " + t.toString(), true);
         listOfTasks.add(t);
-        System.out.println(t);
-        System.out.println("Now you've got " + listOfTasks.size() + " tasks in your list.");
+        ui.addDialog("Now you've got " + listOfTasks.size() + " tasks in your list.", true);
         this.storage.updateSavefile(this);
     }
 
@@ -166,7 +167,7 @@ public class TaskList {
      */
     public void markAsDone(int i) {
         if (i > listOfTasks.size()) {
-            throw new DukeException("duke.task.Task does not exist!");
+            throw new DukeException("Task does not exist!");
         } else {
             listOfTasks.get(i).markAsDone();
         }
@@ -181,7 +182,7 @@ public class TaskList {
      */
     public Task getTask(int i) {
         if (i > listOfTasks.size()) {
-            throw new DukeException("duke.task.Task does not exist!");
+            throw new DukeException("Task does not exist!");
         } else {
             return listOfTasks.get(i);
         }
@@ -195,7 +196,7 @@ public class TaskList {
      */
     public String getTaskString(int i) {
         if (i > listOfTasks.size()) {
-            throw new DukeException("duke.task.Task does not exist!");
+            throw new DukeException("Task does not exist!");
         } else {
             return listOfTasks.get(i).toString();
         }
@@ -206,10 +207,12 @@ public class TaskList {
      *
      */
     public void printAllTasks() {
-        System.out.println("Here are the tasks in your list:");
+        ui.addDialog("Here are the tasks in your list:", true);
+        String list = "";
         for (int i = 0; i < listOfTasks.size(); i++) {
-            System.out.println((i + 1) + "." + listOfTasks.get(i).toString());
+            list += (i + 1) + ". " + listOfTasks.get(i).toString() + "\n";
         }
+        ui.addDialog(list, true);
     }
 
     /**
@@ -218,15 +221,17 @@ public class TaskList {
      * @param s The specified date.
      */
     public void printAllTasksOnDate(String s) {
-        System.out.println("Here are the tasks in your list due on " + s + ":");
+        ui.addDialog("Here are the tasks in your list due on " + s + ":", true);
         int counter = 1;
+        String list = "";
 
         for (int i = 0; i < listOfTasks.size(); i++) {
             if (listOfTasks.get(i).getDate().contains(s)) {
-                System.out.println(counter + ". " + listOfTasks.get(i).toString());
+                list += counter + ". " + listOfTasks.get(i).toString() + "\n";
                 counter++;
             }
         }
+        ui.addDialog(list, true);
     }
 
     /**
@@ -235,15 +240,17 @@ public class TaskList {
      * @param s The specified word.
      */
     public void printAllTasksWith(String s) {
-        System.out.println("Here are the tasks in your list with the word: " + s + ":");
+        ui.addDialog("Here are the tasks in your list with the word: " + s + ":", true);
         int counter = 1;
+        String list = "";
 
         for (int i = 0; i < listOfTasks.size(); i++) {
             if (listOfTasks.get(i).getDesc().contains(s)) {
-                System.out.println(counter + ". " + listOfTasks.get(i).toString());
+                list += counter + ". " + listOfTasks.get(i).toString() + "\n";
                 counter++;
             }
         }
+        ui.addDialog(list, true);
     }
 
 

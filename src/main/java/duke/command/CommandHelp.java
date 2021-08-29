@@ -14,24 +14,19 @@ import duke.Ui;
 public class CommandHelp extends Command {
 
     public static final String KEYWORD = "help";
-    private static final String HELP_MESSAGE = "List of Commands:\n"
-            + "List,\n"
-            + "Done,\n"
-            + "Todo,\n"
-            + "Deadline,\n"
-            + "Event,\n"
-            + "Delete,\n"
-            + "Check,\n"
-            + "Bye";
+    private static final String HELP_MESSAGE = "I don't understand your command.\nList of Commands:\n"
+            + "1. List,\n"
+            + "2. Done,\n"
+            + "3. Todo,\n"
+            + "4. Deadline,\n"
+            + "5. Event,\n"
+            + "6. Delete,\n"
+            + "7. Check,\n";
 
 
     @Override
     public void execute(TaskList tl, Storage st, Ui ui) {
-        ui.printout(HELP_MESSAGE);
+        ui.addDialog(HELP_MESSAGE, true);
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -22,8 +22,4 @@ public class CommandList extends Command {
         tl.printAllTasks();
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

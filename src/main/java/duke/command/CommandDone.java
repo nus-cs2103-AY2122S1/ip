@@ -48,7 +48,7 @@ public class CommandDone extends Command {
             int number = Integer.parseInt(arguments.get(0)) - 1;
             if (number + 1 <= tl.numberOfTasks() && number + 1 > 0) {
                 tl.markAsDone(number);
-                ui.printout("Nice, I've marked this task as done!\n" + tl.getTaskString(number));
+                ui.addDialog("Nice, I've marked this task as done!\n" + tl.getTaskString(number), true);
             } else {
                 throw new DukeException("That task does not exist!");
             }

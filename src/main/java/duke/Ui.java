@@ -1,5 +1,16 @@
 package duke;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.util.Scanner;
 
 /**
@@ -9,42 +20,122 @@ import java.util.Scanner;
  *
  */
 public class Ui {
-    private static final String WELCOME_MESSAGE = "Hello, I'm Duke!\nWhat can I do for you?";
-    private static final String LINE_DIVIDER = "______________________________________";
+    private static final String WELCOME_MESSAGE = "Hello, I'm Dobie!\nWhat can I do for you?";
 
-    public Ui() {
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Duke duke;
 
+    public Ui(Duke duke) {
+        this.duke = duke;
     }
 
-    public static void showWelcome() {
-        System.out.println(WELCOME_MESSAGE);
+    public String getWelcomeMessage() {
+        return WELCOME_MESSAGE;
     }
 
     /**
-     * Returns user input as a string.
-     *
-     * @return the typed in user input as a String.
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
      */
-    public String receiveUserInput() {
-        Scanner sc = new Scanner(System.in);
-        String userResponse = sc.nextLine();
-        return userResponse;
+    public void addDialog(String text, boolean isDobie) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        if (isDobie) {
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(textToAdd, dukeImage));
+        } else {
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(textToAdd, userImage));
+        }
 
     }
 
-    public void printout(String s) {
-        System.out.println(s);
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(userText, userImage));
+        this.duke.runCommand(userInput.getText());
+        userInput.clear();
     }
 
-    public static void showLine() {
-        System.out.println(LINE_DIVIDER);
-    }
 
-    public void showError(String s) {
-        System.out.println(s);
-    }
+    public Scene initialiseScene(Stage stage) {
 
-    public void showLoadingError() {
-        System.out.println("Save file could not be loaded!");
+        //Step 1. Setting up required components
+
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("DobieBot");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 10.0);
+        AnchorPane.setLeftAnchor(scrollPane, 5.0);
+        AnchorPane.setRightAnchor(scrollPane, 5.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 20.0);
+        AnchorPane.setRightAnchor(sendButton, 5.0);
+
+        AnchorPane.setLeftAnchor(userInput , 5.0);
+        AnchorPane.setBottomAnchor(userInput, 20.0);
+
+        //Step 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+
+        //Show welcome message
+        Label uiMessage = new Label(this.getWelcomeMessage());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(uiMessage, dukeImage));
+
+        scene = new Scene(mainLayout);
+
+        return this.scene;
     }
 }

@@ -28,12 +28,4 @@ public class Command {
         return true;
     }
 
-    /**
-     * A boolean flag that indicates whether the program should quit or not.
-     *
-     * @return A boolean indicating if the program should terminate.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -47,7 +47,7 @@ public class CommandFind extends Command {
         if (isArgumentValid()) {
             tl.printAllTasksWith(arguments.get(0));
         } else {
-            throw new DukeException("Invalid argument for command: find");
+            throw new DukeException("Invalid argument for Command: find");
         }
     }
 

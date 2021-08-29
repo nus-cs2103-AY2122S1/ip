@@ -50,7 +50,7 @@ public class CommandTodo extends Command {
             Todo newTodo = new Todo(arguments.get(0), "", "");
             tl.addTask(newTodo);
         } else {
-            throw new DukeException("Invalid argument for duke.command: todo");
+            throw new DukeException("Invalid argument for Command: Todo");
         }
     }
 }

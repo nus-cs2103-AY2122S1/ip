@@ -1,5 +1,8 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import duke.command.Command;
 
 /**
@@ -8,25 +11,28 @@ import duke.command.Command;
  * @author Loh Wen Hao Aaron
  *
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private Ui ui = new Ui(this);
 
     /**
      * Duke constructor that takes in the file path for the save file.
      *
-     * @param filePath the file path of the save file.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
+    public Duke() {
+
+    }
+
+    private void initialiseDuke(String filePath) {
         try {
             this.storage = new Storage(filePath);
-            this.tasks = new TaskList(storage.produceReadableString(), this.storage);
+            this.tasks = new TaskList(storage.produceReadableString(), this.storage, this.ui);
         } catch (DukeException e) {
-            ui.showLoadingError();
-            this.tasks = new TaskList();
+            System.out.println("Save file could not be loaded!");
+            System.out.println("Generating empty task list!");
+            this.tasks = new TaskList(this.ui);
         }
     }
 
@@ -34,27 +40,31 @@ public class Duke {
      * This method runs the program.
      *
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String userInput = ui.receiveUserInput();
-                ui.showLine();
-                Command c = Parser.parseCommand(userInput);
-                c.execute(tasks, storage, ui);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public void runCommand(String userInput) {
+        try {
+            Command c = Parser.parseCommand(userInput);
+            c.execute(tasks, storage, ui);
+        } catch (DukeException e) {
+            ui.addDialog(e.getMessage(), true);
         }
     }
 
+    @Override
+    public void start(Stage stage) {
+        initialiseDuke("saves/saves.txt");
+        Scene scene = ui.initialiseScene(stage);
 
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+/*
     public static void main(String[] args) {
+        //new Duke("saves/saves.txt").run();
         new Duke("saves/saves.txt").run();
     }
+
+ */
 
 }
