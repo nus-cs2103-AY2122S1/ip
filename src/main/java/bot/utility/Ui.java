@@ -52,9 +52,10 @@ public class Ui {
      * Shows the user a message indicating what happened with their input.
      *
      * @param message The main message to the user.
+     * @return A response to user.
      */
-    public void showToUser(String message) {
-        out.println(line + message + line);
+    public String showToUser(String message) {
+       return line + message + line;
     }
 
     protected void close() {
