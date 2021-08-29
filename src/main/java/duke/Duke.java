@@ -52,7 +52,7 @@ public class Duke {
         try {
             importedFile.createNewFile();
         } catch (IOException error) {
-            System.out.println("Something went wrong: " + error.getMessage());
+            System.out.println("Ensure you have created a folder named 'data' within the main project directory!");
         }
 
         try {
