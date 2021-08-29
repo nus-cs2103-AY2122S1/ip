@@ -1,13 +1,14 @@
 package task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TaskListTest {
 
@@ -21,7 +22,7 @@ class TaskListTest {
         TaskList testList = new TaskList(list);
         testList.printSize();
 
-        String expectedOutput  = "  →   " + "There are 0 tasks in your list\r\n";
+        String expectedOutput = "  →   " + "There are 0 tasks in your list\r\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -58,7 +59,7 @@ class TaskListTest {
         filter.add((x) -> true);
         testList.displayList(filter);
 
-        String expectedOutput  = "  →   There is nothing to display! :angery:\r\n";
+        String expectedOutput = "  →   There is nothing to display! :angery:\r\n";
         assertEquals(expectedOutput, outContent.toString());
     }
 }
