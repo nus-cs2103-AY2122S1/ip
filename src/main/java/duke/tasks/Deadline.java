@@ -3,12 +3,20 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline entered by the user.
+ */
 public class Deadline extends Task {
-
     protected final LocalDate by;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
+    /**
+     * Constructor for the Deadline.
+     *
+     * @param description Description of the deadline.
+     * @param by The date the deadline is due.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDate.parse(by, formatter);

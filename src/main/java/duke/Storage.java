@@ -13,6 +13,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents a storage which allows for reading and writing of tasks to a file.
+ */
 public class Storage {
     private static final Pattern STORE_FORMAT = Pattern.compile("\\[(?<type>\\S)] \\[(?<done> |X)] (?<arguments>.*)");
     private final String fileName;
@@ -21,14 +24,21 @@ public class Storage {
         this.fileName = fileName;
     }
 
-    public TaskList load() throws Exception {
+    /**
+     * Loads stored tasks from a file into a TaskList.
+     *
+     * @return A TaskList with the stored tasks.
+     * @throws IOException If file is not found.
+     * @throws DukeException If the format of the file is incorrect.
+     */
+    public TaskList load() throws IOException, DukeException {
         TaskList taskList = new TaskList();
         Scanner sc = new Scanner(new FileReader(fileName));
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             Matcher matcher = STORE_FORMAT.matcher(input);
             if (!matcher.matches()) {
-                throw new DukeException("HAHAHHAHA");
+                throw new DukeException("Task list corrupted, list will be deleted.");
             }
             String type = matcher.group("type");
             String done = matcher.group("done");
@@ -67,6 +77,11 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Writes tasks in tasklist into a file.
+     *
+     * @param taskList List of tasks to be written into the file.
+     */
     public void write(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(fileName);
@@ -79,6 +94,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new file.
+     */
     public void createNewFile() {
         File file = new File(fileName);
         try {
