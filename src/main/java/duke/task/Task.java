@@ -2,16 +2,29 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ * Abstract class that represent task.
+ */
 public abstract class Task {
     private String description;
     private boolean done = false;
-    final public static String sep = "4%213";
+    public static final String SEP = "4%213";
 
+    protected Task(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Makes a task based on the input.
+     * @param type type of command.
+     * @param description description of the command.
+     * @return task based on input.
+     * @throws DukeException if input is invalid.
+     */
     public static Task makeTask(String type, String description) throws DukeException {
         if (description.length() == 0) {
             throw new DukeException("The description cannot be empty");
         }
-
         switch (type) {
             case "todo": {
                 return (ToDos.of(description));
@@ -28,17 +41,18 @@ public abstract class Task {
         }
     }
 
-    protected Task(String description) {
-        this.description = description;
-    }
 
+    /**
+     * Marks the task as done.
+     */
     public void markDone() {
         this.done = true;
-//        if (toPrint) {
-//            System.out.println("Nice! I've marked this task as done:\n" + this.toString());
-//        }
     }
 
+    /**
+     * Returns string representation of the task.
+     * @return string representation of the task.
+     */
     @Override
     public String toString() {
         String doneIndicator = this.done
@@ -49,9 +63,13 @@ public abstract class Task {
                 );
     }
 
+    /**
+     * Returns string representation of the task to be saved in the hard disk.
+     * @param time time of the task.
+     * @return string representation of the task to be saved in the hard disl/
+     */
     protected String toSaveInFile(String time) {
-        return String.format("%s%s%s%s", this.description, time, Task.sep, this.done ? "1" : "0");
+        return String.format("%s%s%s%s", this.description, time, Task.SEP, this.done ? "1" : "0");
     }
-
     public abstract String typeString();
 }

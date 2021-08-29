@@ -1,12 +1,14 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
+
+
 
 /**
  * Class that manages the storage of the tasks.
@@ -38,7 +40,7 @@ public class FileManager {
                 while (fileReader.hasNextLine()) {
                     try {
                         String nextLine = fileReader.nextLine();
-                        String[] splitString = nextLine.split(Task.sep);
+                        String[] splitString = nextLine.split(Task.SEP);
                         if (splitString.length < 3) {
                             throw new DukeException("Invalid input in file");
                         }

@@ -1,15 +1,28 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task {
-    final private LocalDateTime date;
-    final private static String inputExample = " event my birtday /at 01/01/2000 1400";
+import duke.DukeException;
 
+/**
+ * Class that represent a event task.
+ */
+public class Event extends Task {
+    private final LocalDateTime date;
+    private static final String inputExample = " event my birtday /at 01/01/2000 1400";
+
+    private Event(String description, LocalDateTime dateTime) {
+        super(description);
+        this.date = dateTime;
+    }
+    /**
+     * Makes a event object.
+     * @param input description of event.
+     * @return event object.
+     * @throws DukeException if input is invalid.
+     */
     public static Event of(String input) throws DukeException {
         String[] eachWord = input.split("/at");
         if (eachWord.length == 0 || eachWord[0].length() == 0 || eachWord[0].equals(" ")) {
@@ -48,31 +61,23 @@ public class Event extends Task {
         }
     }
 
-//    private duke.task.Event(String input) {
-//        super(input.split("/at", 2)[0]);
-//        String dateDescription = input.split("/at", 2)[1];
-//        String[] dateSplitBySpace = dateDescription.split(" ");
-//        String[] dateArr = dateSplitBySpace[1].split("/");
-//        int hour = Integer.parseInt(dateSplitBySpace[2].substring(0, dateSplitBySpace[2].length() - 2));
-//        this.date = LocalDateTime.of(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1]),
-//                Integer.parseInt(dateArr[0]), hour,
-//                Integer.parseInt(dateSplitBySpace[2].substring(dateSplitBySpace[2].length() - 2)));
-//    }
-
-    private Event(String description, LocalDateTime dateTime) {
-        super(description);
-        this.date = dateTime;
-    }
-
+    /**
+     * Returns string representation of event object.
+     * @return string representation of event object.
+     */
     @Override
     public String toString() {
         return ("[E]" + super.toString() + String.format("(at:%s)", this.date));
     }
 
+    /**
+     * Returns string representation of event object to be saved in hard disk.
+     * @return string representation of event object to saved in hard disk.
+     */
     @Override
     public String typeString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String formatDateTime = this.date.format(formatter);
-        return "event" + Task.sep + super.toSaveInFile("/at " + formatDateTime);
+        return "event" + Task.SEP + super.toSaveInFile("/at " + formatDateTime);
     }
 }

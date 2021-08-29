@@ -1,11 +1,12 @@
 package duke;
 
-import duke.DukeException;
+import java.util.stream.Stream;
+
 import duke.command.Command;
 import duke.command.CommandsTypes;
 import duke.task.Task;
 
-import java.util.stream.Stream;
+
 
 /**
  * Class to parse the input by user.
@@ -19,10 +20,10 @@ public class Parser {
      * @throws DukeException if input is invalid.
      */
     public static Command parse(String input) throws DukeException {
-        if (input.replaceAll("\\s+","").toLowerCase().equals("bye")) {
+        if (input.replaceAll("\\s+", "").toLowerCase().equals("bye")) {
             return Command.makeCommand(CommandsTypes.Exit);
         }
-        if (input.replaceAll("\\s+","").toLowerCase().equals("list")) {
+        if (input.replaceAll("\\s+", "").toLowerCase().equals("list")) {
             return Command.makeCommand(CommandsTypes.List);
         }
         String[] splitBySpace = input.split(" ");

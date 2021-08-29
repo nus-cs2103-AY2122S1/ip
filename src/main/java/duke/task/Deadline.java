@@ -1,15 +1,28 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task {
-    final private LocalDateTime date;
-    final private static String inputExample = "deadline return book /by 3/4/2021 400";
+import duke.DukeException;
 
+/**
+ * Class that represent a deadline task.
+ */
+public class Deadline extends Task {
+    private final LocalDateTime date;
+    private static final String inputExample = "deadline return book /by 3/4/2021 400";
+
+    private Deadline(String description, LocalDateTime dateTime) {
+        super(description);
+        this.date = dateTime;
+    }
+    /**
+     * Makes a deadline object.
+     * @param input description of deadline.
+     * @return deadline object.
+     * @throws DukeException if input is invalid.
+     */
     public static Deadline of(String input) throws DukeException {
         String[] eachWord = input.split("/by");
         if (eachWord.length == 0 || eachWord[0].length() == 0 || eachWord[0].equals(" ")) {
@@ -48,31 +61,23 @@ public class Deadline extends Task {
         }
     }
 
-    private Deadline(String description, LocalDateTime dateTime) {
-        super(description);
-        this.date = dateTime;
-    }
-
-//    private duke.task.Deadline(String input) {
-//        super(input.split("/by", 2)[0]);
-//        String dateDescription = input.split("/by", 2)[1];
-//        String[] dateSplitBySpace = dateDescription.split(" ");
-//        String[] dateArr = dateSplitBySpace[1].split("/");
-//        int hour = Integer.parseInt(dateSplitBySpace[2].substring(0, dateSplitBySpace[2].length() - 2));
-//        this.date = LocalDateTime.of(Integer.parseInt(dateArr[2]), Integer.parseInt(dateArr[1]),
-//                Integer.parseInt(dateArr[0]), hour,
-//                Integer.parseInt(dateSplitBySpace[2].substring(dateSplitBySpace[2].length() - 2)));
-//    }
-
+    /**
+     * Returns string representation of deadline.
+     * @return string representation of deadline.
+     */
     @Override
     public String toString() {
         return ("[D]" + super.toString() + String.format("(by:%s)", this.date));
     }
 
+    /**
+     * Returns string representation of deadline to be saved in hard disk.
+     * @return String representation to be saved in hard disk.
+     */
     @Override
     public String typeString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String formatDateTime = this.date.format(formatter);
-        return "deadline" + Task.sep + super.toSaveInFile("/by " + formatDateTime);
+        return "deadline" + Task.SEP + super.toSaveInFile("/by " + formatDateTime);
     }
 }
