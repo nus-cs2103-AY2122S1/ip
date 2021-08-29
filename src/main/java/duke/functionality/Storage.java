@@ -1,9 +1,5 @@
 package duke.functionality;
 
-import duke.exceptions.DukeException;
-import duke.tasks.TaskList;
-import duke.tasks.*;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,11 +7,17 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+
 /**
  * Represents a storage system that deals with loading tasks from and saving tasks to a file.
  */
 public class Storage {
-    private final static String FILE_NAME = "dukestorage.txt";
+    private static final String FILE_NAME = "dukestorage.txt";
     private String filePath;
     private File f;
     private TaskList taskList;
@@ -93,7 +95,9 @@ public class Storage {
         return this.taskList.getTask(taskIndex);
     }
 
-    public TaskList getTaskList() { return this.taskList; }
+    public TaskList getTaskList() {
+        return this.taskList;
+    }
 
     /**
      * Returns the string representation of the TaskList within the storage object.

@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.exceptions.DukeException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +7,8 @@ import java.util.List;
  * Represents a list of tasks.
  */
 public class TaskList {
-    private List<Task> taskList;
     public static final int MAX_TASKS = 100;
+    private List<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<Task>();

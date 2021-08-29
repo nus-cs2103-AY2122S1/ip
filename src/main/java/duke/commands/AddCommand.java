@@ -1,10 +1,11 @@
 package duke.commands;
 
-import duke.exceptions.DukeException;
-import duke.functionality.Ui;
 import duke.functionality.Storage;
-import duke.tasks.*;
-
+import duke.functionality.Ui;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 /**
  * Represents the command when the user wants to add a new task.
  */

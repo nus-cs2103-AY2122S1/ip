@@ -6,8 +6,8 @@ import duke.functionality.Datetime;
  * Represents an Event task.
  */
 public class Event extends Task {
-    private final Datetime eventDatetime;
     private static final String TASK_TAG = "event";
+    private final Datetime eventDatetime;
 
     public Event(String taskName, String eventDatetime) {
         super(taskName);

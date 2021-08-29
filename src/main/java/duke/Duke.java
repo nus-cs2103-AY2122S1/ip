@@ -1,20 +1,21 @@
 package duke;
 
+import duke.commands.Command;
+import duke.exceptions.DukeException;
+import duke.functionality.Parser;
 import duke.functionality.Storage;
 import duke.functionality.Ui;
-import duke.functionality.Parser;
-import duke.commands.*;
-import duke.exceptions.DukeException;
 
 /**
  * Creates and runs a Duke bot. Main file for the bot that is run to create a new Duke bot.
  */
 public class Duke {
+    private static final String FILE_PATH = System.getProperty("user.dir");
     private Storage storage;
     private Ui ui;
-    private static final String FILE_PATH = System.getProperty("user.dir");
 
     public Duke(String filepath) {
+
         this.storage = new Storage(filepath);
         this.ui = new Ui();
     }
