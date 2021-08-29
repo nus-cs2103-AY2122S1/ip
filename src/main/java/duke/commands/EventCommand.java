@@ -15,8 +15,8 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void executeCommand(TaskList taskList) {
+    public String executeCommand(TaskList taskList) {
         taskList.addTask(this.task);
-        Ui.printAddTaskMessage(this.task, taskList.getTaskCount());
+        return Ui.printAddTaskMessage(this.task, taskList.getTaskCount());
     }
 }

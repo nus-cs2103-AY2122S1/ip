@@ -15,5 +15,5 @@ public abstract class Command {
      * @param taskList The list containing the tasks of the user.
      * @throws NoSuchTaskException May be thrown if the chat bot cannot find the task to execute the command.
      */
-    public abstract void executeCommand(TaskList taskList) throws NoSuchTaskException;
+    public abstract String executeCommand(TaskList taskList) throws NoSuchTaskException;
 }

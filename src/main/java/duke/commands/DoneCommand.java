@@ -16,11 +16,11 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void executeCommand(TaskList taskList) throws NoSuchTaskException {
+    public String executeCommand(TaskList taskList) throws NoSuchTaskException {
         if (this.id >= 0 && this.id < taskList.getTaskCount()) {
             Task task = taskList.getTask(this.id);
             taskList.markTaskAsComplete(this.id);
-            Ui.printTaskCompleteMessage(task);
+            return Ui.printTaskCompleteMessage(task);
         } else {
             throw new NoSuchTaskException();
         }

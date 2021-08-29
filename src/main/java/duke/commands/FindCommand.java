@@ -16,13 +16,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void executeCommand(TaskList taskList) throws NoSuchTaskException {
+    public String executeCommand(TaskList taskList) throws NoSuchTaskException {
         TaskList result = taskList.searchTaskByKeyword(this.keyword);
 
         if (result.getTaskCount() == 0) {
-            Ui.printNoneMatchMessage();
+            return Ui.printNoneMatchMessage();
         } else {
-            Ui.displayList(result);
+            return Ui.displayList(result);
         }
     }
 }

@@ -9,7 +9,7 @@ import duke.tasks.TaskList;
 public class ListCommand extends Command {
 
     @Override
-    public void executeCommand(TaskList taskList) {
-        Ui.displayList(taskList);
+    public String executeCommand(TaskList taskList) {
+        return Ui.displayList(taskList);
     }
 }
