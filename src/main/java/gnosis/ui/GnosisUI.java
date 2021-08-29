@@ -99,7 +99,7 @@ public class GnosisUI {
      * @param numOfTasks - number of task
      */
     public void updateTaskManagementViewMessage(String action, Task task, int numOfTasks) {
-        System.out.println("gnosis.main.model.Task " + action + ":");
+        System.out.println("Task " + action + ":");
         System.out.println(task);
         System.out.println("Total tasks in the list: " + numOfTasks);
         displayBottomDivider();
@@ -113,7 +113,7 @@ public class GnosisUI {
     public void displayAllTasksMessage(List<Task> tasks) {
         int len = tasks.size();
         if (len == 0) {
-            System.out.println("There is no gnosis.task in the list.");
+            System.out.println("There is no task in the list.");
         } else {
             System.out.println("Listing all tasks in list:");
             for (int i = 0; i < len; i++) {
