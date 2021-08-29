@@ -42,6 +42,9 @@ public class CommandEvent extends Command {
                 LocalDate date = LocalDate.parse(arguments.get(2), dateFormatter);
 
                 String[] segments = arguments.get(3).split("-");
+                if (segments.length < 2) {
+                    return false;
+                }
                 String timeStart = segments[0];
                 String timeEnd = segments[1];
                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("k:mm");
