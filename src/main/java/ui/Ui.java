@@ -96,6 +96,8 @@ public final class Ui{
         System.out.println("     If you wish to terminate the program, please input 'bye'.");
         System.out.println("     If you wish to check items due on a particular day, please " +
                 "input 'due YYYY/MM/DD'.");
+        System.out.println("     If you wish to find items, please " +
+                "input in the form: 'find <keyword>'.");
         System.out.println(SEPARATOR);
     }
 }
