@@ -1,7 +1,5 @@
 package duke.utils;
 
-import duke.tasks.Task;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,12 +8,14 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
+import duke.tasks.Task;
+
 /**
  * A class to handle all the operations that deals with the computer hard drive or memory.
  */
 public class Storage {
 
-    final private String persistedData;
+    private final String persistedData;
 
     /**
      * Constructor for Storage.
