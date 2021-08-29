@@ -19,11 +19,13 @@ public class Gui extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            stage.setTitle("Duke");
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            scene.getStylesheets().add("/view/styles.css");
             stage.setScene(scene);
+            String css = getClass().getResource("/view/styles.css").toExternalForm();
+            scene.getStylesheets().add(css);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

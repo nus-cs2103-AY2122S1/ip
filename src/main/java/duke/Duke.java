@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.CommandParser;
+import duke.response.DukeBadResponse;
 import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
@@ -72,7 +73,7 @@ public class Duke {
             DukeResponse response = command.execute(taskManager, storage);
             return response;
         } catch (DukeException e) {
-            return new DukeResponse(e.getMessage());
+            return new DukeBadResponse(e.getMessage());
         }
     }
 
