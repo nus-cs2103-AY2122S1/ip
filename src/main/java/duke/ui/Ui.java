@@ -8,6 +8,12 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 // Deals with interactions with the user
+
+/**
+ * Class that deals with interactions with the user
+ * such as reading user commands and displaying messages
+ * to the user.
+ */
 public class Ui {
     private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
     private Scanner sc;
@@ -16,27 +22,24 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Method that prints the welcome message
+     */
     public void showWelcome() {
         System.out.println("Hello! I'm Duke\n What can I do for you?");
     }
 
+    /**
+     * Method that reads in the user's next inputs
+     * @return
+     */
     public String readCommand() {
         return sc.nextLine();
     }
 
-    public void showLine() {
-        System.out.println("____________________________________________________________");
-        System.out.println("");
-    }
-
-
-    public void showError(String errorMsg) throws DukeException {
-//        System.out.println(errorMsg);
-        throw new DukeException(errorMsg);
-    }
     /**
-     * DONE
-     * Method to call when user wishes to see a list of all events
+     * Method that prints out the list of tasks
+     * @param taskList the list of tasks
      */
     public void listTasks(TaskList taskList) {
         System.out.println("Here are the tasks in your list:");
@@ -47,15 +50,16 @@ public class Ui {
     }
 
     /**
-     * DONE
-     * Method to call when user wishes to stop the bot
+     * Method that prints out the goodbye message
      */
     public void stopMethod() {
         System.out.print("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Method to call when user wishes to mark an item as done
+     * Method that prints out the task marked as done and
+     * total number of tasks when user marks it as done.
+     * @param task the task to be marked as done
      */
     public void doneTask(Task task) {
         System.out.println("Nice! I've marked this task as done:");
@@ -63,7 +67,8 @@ public class Ui {
     }
 
     /**
-     * Method to call when user wishes to add a new task
+     * Method that prints out the task that aas added
+     * @param task the task that is added
      */
     public void addTask(Task task) {
         System.out.println("Got it. I have added this task:");
@@ -72,13 +77,12 @@ public class Ui {
     }
 
     /**
-     * Method to call when user wishes to see a list of all events
+     * Method that prints out the task that the user deleted.
+     * @param task the task that is deleted
      */
     public void deleteTask(Task task) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task.toString());
         System.out.println("Now you have " + TaskList.getSize() + " tasks in the list.");
-    }
-    public void showLoadingError() {
     }
 }
