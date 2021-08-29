@@ -41,9 +41,9 @@ public class StorageTest {
         testStorage.load();
         FileWriter rewriter = new FileWriter(duke);
         
-        String expected = "  ______________________________________________________________\n" 
+        String expected = "  __________________________________________________________________\n" 
                 + "  Loading Duke...\n" 
-                + "  ______________________________________________________________\n" 
+                + "  __________________________________________________________________\n" 
                 + "\n" 
                 + "  OOPS!!! There was a problem with reading tasks in the hard disk!\n" 
                 + "  Check out duke.txt for any erroneous entries or incorrect formatting.\n";
