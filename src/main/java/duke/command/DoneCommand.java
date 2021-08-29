@@ -24,8 +24,8 @@ public class DoneCommand extends Command {
         if (tasks.isTaskExists(this.taskNumber)) {
             Task task = tasks.getTask(this.taskNumber - 1);
             task.markAsDone();
-            ui.display("Nice! This task is marked as done: \n" + "      " + task);
             storage.writeToFile(tasks.getAllTasks());
+            ui.display("Nice! This task is marked as done: \n" + "      " + task);
         } else {
             ui.display("This task does not exist! Please try again.");
         }

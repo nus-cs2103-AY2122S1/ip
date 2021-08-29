@@ -58,14 +58,17 @@ public class AddCommand extends Command {
         switch (this.type) {
         case "todo":
             Todo todo = tasks.createTodo(this.description);
+            storage.writeToFile(tasks.getAllTasks());
             ui.displaySuccessMessage(todo, tasks.length());
             break;
         case "deadline":
             Deadline dl = tasks.createDeadline(this.description, this.date);
+            storage.writeToFile(tasks.getAllTasks());
             ui.displaySuccessMessage(dl, tasks.length());
             break;
         case "event":
             Event event = tasks.createEvent(this.description, this.date, this.time);
+            storage.writeToFile(tasks.getAllTasks());
             ui.displaySuccessMessage(event, tasks.length());
             break;
         default:
