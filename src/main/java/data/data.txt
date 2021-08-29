@@ -5,4 +5,3 @@ T | 1 | borrow book
 T | 1 | borrow hello
 E | 0 | project meeting | Mon 2-4pm
 D | 0 | return book | 02 Dec 2019 18:00
-E | 1 | project meeting | Mon 2-4pm

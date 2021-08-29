@@ -1,7 +1,6 @@
 package duke.commands;
 
-import java.io.IOException;
-
+import duke.exceptions.storage.DukeStorageUpdateException;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 
@@ -29,8 +28,8 @@ public class DoneCommand extends Command {
         try {
             taskList.doneItem(this.taskId);
             storage.updateDone(this.taskId);
-        } catch (IOException e) {
-            System.out.println(e);
+        } catch (DukeStorageUpdateException err) {
+            throw new DukeStorageUpdateException(err.toString());
         }
     }
 

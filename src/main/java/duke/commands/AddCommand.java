@@ -1,7 +1,6 @@
 package duke.commands;
 
-import java.io.IOException;
-
+import duke.exceptions.storage.DukeStorageSaveException;
 import duke.storage.Storage;
 import duke.storage.TaskList;
 import duke.tasks.Task;
@@ -37,8 +36,8 @@ public class AddCommand extends Command {
             }
 
             storage.appendToData(inputToStorage);
-        } catch (IOException e) {
-            System.out.println(e);
+        } catch (DukeStorageSaveException err) {
+            throw new DukeStorageSaveException(err.toString());
         }
     }
 

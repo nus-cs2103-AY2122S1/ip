@@ -13,7 +13,7 @@ public class Main {
      *                               the given file path.
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        Duke duke = new Duke("data/data.txt");
+        Duke duke = new Duke();
         duke.start();
     }
 }
