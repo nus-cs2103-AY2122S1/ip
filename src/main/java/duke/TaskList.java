@@ -3,7 +3,6 @@ package duke;
 import duke.task.Task;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class TaskList {
     private final List<Task> tasks;
@@ -51,7 +50,7 @@ public class TaskList {
     public TaskList filter(String input) {
         TaskList taskList = new TaskList();
         for ( int i = 0; i < this.size() ; i++ ) {
-            Task task = this.store.get(i);
+            Task task = this.tasks.get(i);
             String nameOfTask = task.getName();
             if (nameOfTask.contains(input)) {
                 taskList.addTask(task);
