@@ -2,7 +2,9 @@ import java.util.*;
 
 public class Duke {
 
-    private String line = "__________________________________\n";
+//shui jie 2021-08-29 chnge for test
+
+	private String line = "__________________________________\n";
     // global varibale to keep track of all the task
     private ArrayList<Task> taskList = new ArrayList<>();
 
