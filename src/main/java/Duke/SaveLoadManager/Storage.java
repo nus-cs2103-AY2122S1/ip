@@ -3,7 +3,6 @@
  *
  * @description Programme that allows Duke to save any changes after execution and read data when it is initially invoked.
  * In other words, programme allows Duke to save and read data from a file.
- *
  */
 
 package Duke.SaveLoadManager;

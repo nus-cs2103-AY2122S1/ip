@@ -2,7 +2,6 @@
  * @author Hang Zelin
  *
  * @description a JUnit class that tests some methods in Parser.
- *
  */
 package Duke.JUnitTests;
 

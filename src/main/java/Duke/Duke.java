@@ -1,12 +1,9 @@
 /**
  * @author Hang Zelin
  * The main Programme to execute the Duke Project
- *
  * Duke will allow users to add three types of tasks: "todo" "deadline" "event".
- *
  * Duke also allow users to list all tasks, mark a task to be done if it is finished, and
  * delete the task if the task is finished.
- *
  * You can also search a specific task by its date, keyword(to be done later).
  */
 package Duke;

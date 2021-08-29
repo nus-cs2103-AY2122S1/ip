@@ -3,13 +3,9 @@
  *
  * @description Parser Programme will take in a full input Message and take out the operation type, task, time, index from the
  * one line command input by users.
- *
  * It can also deal with the local saved data and return the parsed Message, which can be a task, time, done(or not).
- *
  * It can also parse the time users input into the LocalDateTime.
- *
- * Some invalid input Messages may cause throwing DukeException.
- *
+ * Some invalid input Messages may cause throwing DukeException。
  */
 
 package Duke.Command;
