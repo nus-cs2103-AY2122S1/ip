@@ -29,7 +29,10 @@ public class Storage {
      */
     public Storage(String filePath) throws IOException {
         try {
-            new File(filePath).createNewFile();
+            File file = new File(filePath);
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+
             this.filePath = filePath;
         } catch (IOException ioException) {
             System.out.println(ioException);
