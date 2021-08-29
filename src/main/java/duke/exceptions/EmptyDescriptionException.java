@@ -23,6 +23,6 @@ public class EmptyDescriptionException extends DukeException {
 
     @Override
     public String getMessage() {
-        return String.format("☹ OOPS!!! The description of %s cannot be empty.", this.command);
+        return String.format("OOPS!!! The description of %s cannot be empty.", this.command);
     }
 }
