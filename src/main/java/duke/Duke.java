@@ -22,12 +22,14 @@ public class Duke {
         this.filePath = filePath;
         responseLogic = new ResponseLogic();
         storage = new Storage(filePath);
+    }
 
+    public String initializeTaskList() {
         try {
             tasks = new TaskList(storage.load());
+            return responseLogic.welcomeResponse();
         } catch (FileNotFoundException e) {
-            // TODO
-            responseLogic.loadingErrorResponse(filePath);
+            return responseLogic.loadingErrorResponse(filePath);
         }
     }
 
