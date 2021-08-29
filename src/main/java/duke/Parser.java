@@ -1,13 +1,7 @@
 package duke;
 
-import duke.commands.Command;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.ListCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.TodoCommand;
-import duke.commands.EventCommand;
-import duke.commands.DeadlineCommand;
+import duke.commands.*;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,6 +31,8 @@ public class Parser {
             return new EventCommand(arguments);
         case "deadline":
             return new DeadlineCommand(arguments);
+        case "find":
+            return new FindCommand(arguments);
         default:
             throw new DukeException("Invalid Command Entered");
         }
