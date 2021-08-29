@@ -1,3 +1,12 @@
+/**
+ * @author Hang Zelin
+ *
+ * @description Events class that extends Task class. It is one of the types in 3 tasks.
+ * Will contain a time in the form of "/by"
+ *
+ */
+package Duke.Task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -16,7 +25,7 @@ public class Events extends Task{
     }
 
     @Override
-    public String PrintTaskInfo() {
+    public String getTaskInfo() {
         String done_str = "";
         if (!this.done) {
             done_str = " ";
@@ -45,7 +54,7 @@ public class Events extends Task{
     }
 
     @Override
-    public String GetTime() {
+    public String getTime() {
         if (this.time == null) {
             return "I don't know the time";
         }
@@ -58,8 +67,8 @@ public class Events extends Task{
 
 
     @Override
-    public String GetDataInfo() {
-        return this.taskType + " | " + (this.done? 1 : 0) + " | " + task + " | " + GetTime();
+    public String getSaveDataInfo() {
+        return this.taskType + " | " + (this.done? 1 : 0) + " | " + task + " | " + getTime();
     }
 
 

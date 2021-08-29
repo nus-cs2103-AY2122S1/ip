@@ -1,4 +1,10 @@
-import java.time.LocalDateTime;
+/**
+ * @author Hang Zelin
+ *
+ * @description ToDos class that extends Task class. It is one of the types in 3 tasks.
+ *
+ */
+package Duke.Task;
 
 public class ToDos extends Task{
 
@@ -12,7 +18,7 @@ public class ToDos extends Task{
     }
 
     @Override
-    public String PrintTaskInfo() {
+    public String getTaskInfo() {
         String done_str = "";
         if (!this.done) {
             done_str = " ";
@@ -29,7 +35,7 @@ public class ToDos extends Task{
     }
 
     @Override
-    public String GetTime() {
+    public String getTime() {
         return null;
     }
 
@@ -39,7 +45,7 @@ public class ToDos extends Task{
     }
 
     @Override
-    public String GetDataInfo() {
+    public String getSaveDataInfo() {
         return this.taskType + " | " + (this.done? 1 : 0) + " | " + task;
     }
 }
