@@ -38,11 +38,12 @@ public class Storage {
     /**
      * Loads tasks from the file path given on instantiation. Called when Duke starts.
      *
+     * @return The list of tasks loaded from the save file.
      * @throws FileNotFoundException If file does not exist.
      * @throws DukeException         If the file contains invalid task data.
      */
     public List<Task> loadTasksFromFile() throws FileNotFoundException, DukeException {
-        File saveFile = this.filePath.toFile();
+        File saveFile = filePath.toFile();
         Scanner scanner = new Scanner(saveFile);
         List<Task> tasks = new ArrayList<>();
         while (scanner.hasNextLine()) {
@@ -71,11 +72,12 @@ public class Storage {
     /**
      * Saves tasks to the file path given at instantiation. Called when list is modified.
      *
+     * @param tasks The list of tasks to be saved.
      * @throws IOException If the saving process fails.
      */
     public void saveTasksToFile(TaskList tasks) throws IOException {
-        Files.createDirectories(this.filePath.getParent()); // Create directories if they do not exist
-        FileWriter fw = new FileWriter(this.filePath.toAbsolutePath().toString());
+        Files.createDirectories(filePath.getParent()); // Create directories if they do not exist
+        FileWriter fw = new FileWriter(filePath.toAbsolutePath().toString());
         StringBuilder saveData = new StringBuilder();
         tasks.forEach((task) -> saveData.append(task.toSaveData()).append(System.lineSeparator()));
         fw.write(saveData.toString());

@@ -24,11 +24,21 @@ public class Todo extends Task {
         super(taskName, isDone);
     }
 
+    /**
+     * Converts the todo task data into its corresponding save file data format.
+     *
+     * @return A string to represent the data of the todo task in the save file.
+     */
     @Override
     public String toSaveData() {
         return "T|" + super.toSaveData();
     }
 
+    /**
+     * Returns a string representation of the current todo task.
+     *
+     * @return A string that contains the information of the todo task.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

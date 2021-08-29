@@ -32,17 +32,22 @@ public class Task {
     }
 
     /**
+     * Checks if the current task contains a given key phrase within its name.
+     *
+     * @param phrase A string that is to be check against the task name.
+     * @return True if the task name contains this phrase, false otherwise.
+     */
+    public boolean containsPhrase(String phrase) {
+        return taskName.contains(phrase);
+    }
+
+    /**
      * Checks if the current task has the same date as the input date.
      * Proper functionality is present in the Deadline and Event classes.
      *
      * @param date A LocalDate object that contains date information.
      * @return False, since this class does not contain a date attribute.
      */
-
-    public boolean containsPhrase(String phrase) {
-        return taskName.contains(phrase);
-    }
-
     public boolean hasSameDate(LocalDate date) {
         return false;
     }
@@ -64,26 +69,26 @@ public class Task {
      * @return A task with the same task name, but is marked as done.
      */
     public Task markAsDone() {
-        return new Task(this.taskName, true);
+        return new Task(taskName, true);
     }
 
     /**
-     * Converts the task to a the data format.
+     * Converts the task data into its corresponding save file data format.
      *
      * @return A string to represent the data of the task in the save file.
      */
     public String toSaveData() {
-        return this.isDone + "|" + this.taskName;
+        return isDone + "|" + taskName;
     }
 
     /**
-     * Returns a string representation of the current task
+     * Returns a string representation of the current task.
      *
      * @return A string that contains the information of the task.
      */
     @Override
     public String toString() {
-        String statusString = this.isDone ? "X" : " ";
-        return String.format("[%s] %s", statusString, this.taskName);
+        String statusString = isDone ? "X" : " ";
+        return String.format("[%s] %s", statusString, taskName);
     }
 }

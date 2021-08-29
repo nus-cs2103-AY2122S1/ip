@@ -23,7 +23,7 @@ public class Ui {
      * Creates an instance of the Ui class.
      */
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     /**
@@ -84,7 +84,7 @@ public class Ui {
      * formatted data.
      */
     public void showLoadingError(String errorMessage) {
-        this.showError(errorMessage);
+        showError(errorMessage);
         System.out.printf(FORMAT, "This appears to be an error with your save file.");
         System.out.printf(FORMAT, "Either edit data/tasks.txt to rectify the error, or delete it.");
         System.out.printf(FORMAT, "For now, you'll start with an empty task list.");

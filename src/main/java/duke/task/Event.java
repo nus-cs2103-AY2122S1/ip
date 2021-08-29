@@ -80,25 +80,40 @@ public class Event extends Task {
     @Override
     public boolean isBeforeDate(LocalDateTime dateTime) {
         // Will also return true if the date times are equal
-        return !this.date.atTime(this.startTime).isAfter(dateTime);
+        return !date.atTime(startTime).isAfter(dateTime);
     }
 
+    /**
+     * Converts the event task data into its corresponding save file data format.
+     *
+     * @return A string to represent the data of the event task in the save file.
+     */
     @Override
     public String toSaveData() {
-        return "E|" + super.toSaveData() + "|" + this.date
-                + "|" + this.startTime + "|" + this.endTime;
+        return "E|" + super.toSaveData() + "|" + date
+                + "|" + startTime + "|" + endTime;
     }
 
+    /**
+     * Marks the current task as done. Returns a new instance of the task to maintain immutability.
+     *
+     * @return A task with the same task name, date and times but is marked as done.
+     */
     @Override
     public Task markAsDone() {
-        return new Event(this.taskName, true, this.date, this.startTime, this.endTime);
+        return new Event(taskName, true, date, startTime, endTime);
     }
 
+    /**
+     * Returns a string representation of the current event task.
+     *
+     * @return A string that contains the information of the event task.
+     */
     @Override
     public String toString() {
-        String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String formattedStartTime = this.startTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
-        String formattedEndTime = this.endTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedStartTime = startTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        String formattedEndTime = endTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
         return "[E]" + super.toString() + " (at: " + formattedDate + ", "
                 + formattedStartTime + " - " + formattedEndTime + ")";
     }

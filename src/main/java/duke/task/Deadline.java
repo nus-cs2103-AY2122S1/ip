@@ -61,23 +61,38 @@ public class Deadline extends Task {
     @Override
     public boolean isBeforeDate(LocalDateTime dateTime) {
         // Will also return true if the date times are equal
-        return !this.date.atTime(this.time).isAfter(dateTime);
+        return !date.atTime(time).isAfter(dateTime);
     }
 
+    /**
+     * Converts the deadline task data into its corresponding save file data format.
+     *
+     * @return A string to represent the data of the deadline task in the save file.
+     */
     @Override
     public String toSaveData() {
-        return "D|" + super.toSaveData() + "|" + this.date + "|" + this.time;
+        return "D|" + super.toSaveData() + "|" + date + "|" + time;
     }
 
+    /**
+     * Marks the current task as done. Returns a new instance of the task to maintain immutability.
+     *
+     * @return A task with the same task name, date and time but is marked as done.
+     */
     @Override
     public Task markAsDone() {
-        return new Deadline(this.taskName, true, this.date, this.time);
+        return new Deadline(taskName, true, date, time);
     }
 
+    /**
+     * Returns a string representation of the current deadline task.
+     *
+     * @return A string that contains the information of the deadline task.
+     */
     @Override
     public String toString() {
-        String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        String formattedTime = this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedTime = time.format(DateTimeFormatter.ofPattern("hh:mm a"));
         return "[D]" + super.toString() + " (by: " + formattedDate + ", " + formattedTime + ")";
     }
 }

@@ -25,7 +25,7 @@ public class TaskList {
      * Creates a task list with no tasks.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
