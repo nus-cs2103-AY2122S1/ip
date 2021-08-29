@@ -1,8 +1,5 @@
 package duke.util;
 
-import duke.task.*;
-import java.util.ArrayList;
-
 public class Ui {
     private static final String EXIT_MESSAGE = "Goodbyeeee! Hope to see you again soon! :>";
     private static final String SEPARATOR = "\t-------------------------------------------------------";
@@ -17,7 +14,9 @@ public class Ui {
         System.out.printf("%s\n\t%s\n%s\n", SEPARATOR, message, SEPARATOR);
     }
 
-    /** Prints introduction message when bot is first launched. **/
+    /**
+     * Prints introduction message when bot is first launched.
+     **/
     public void printIntroMessage() {
         prettify(
                 "Hello! I'm Duke, your personal CLI bot! :D\n\t"

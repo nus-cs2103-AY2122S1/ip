@@ -1,27 +1,27 @@
 package duke.util;
 
-import duke.command.Command;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import duke.command.AddTaskCommand;
+import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.exception.DukeException;
-import duke.exception.DukeMissingDescriptionException;
-import duke.exception.DukeNoSuchCommandException;
-import duke.exception.DukeMissingIndexException;
-import duke.exception.DukeInvalidIndexException;
 import duke.exception.DukeDeadlineMissingDateException;
 import duke.exception.DukeEventMissingDateException;
+import duke.exception.DukeException;
+import duke.exception.DukeInvalidIndexException;
+import duke.exception.DukeMissingDescriptionException;
+import duke.exception.DukeMissingIndexException;
+import duke.exception.DukeNoSuchCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * This class encapsulates the parser which interprets user input.
@@ -83,7 +83,7 @@ public class Parser {
      * @throws DukeMissingIndexException If user does not input index
      * @throws DukeInvalidIndexException If user inputs a number smaller than 1.
      */
-    private static int parseIndex(String input) throws DukeMissingIndexException,DukeInvalidIndexException {
+    private static int parseIndex(String input) throws DukeMissingIndexException, DukeInvalidIndexException {
         String[] splitInput = input.split("\\s+");
         if (splitInput.length == 1) {
             throw new DukeMissingIndexException(splitInput[0]);
@@ -137,7 +137,8 @@ public class Parser {
      * @throws DukeMissingDescriptionException If the description is missing.
      * @throws DukeDeadlineMissingDateException If the due date is missing.
      */
-    private static String[] parseDeadlineDetails(String input) throws DukeMissingDescriptionException, DukeDeadlineMissingDateException {
+    private static String[] parseDeadlineDetails(String input) throws DukeMissingDescriptionException,
+            DukeDeadlineMissingDateException {
         String[] splitInput = input.split("\\s+");
         if (splitInput.length < 2) {
             throw new DukeMissingDescriptionException(splitInput[0]);
@@ -158,7 +159,8 @@ public class Parser {
      * @throws DukeMissingDescriptionException If the description is missing.
      * @throws DukeEventMissingDateException If the event date is missing.
      */
-    private static String[] parseEventDetails(String input) throws DukeMissingDescriptionException, DukeEventMissingDateException {
+    private static String[] parseEventDetails(String input) throws DukeMissingDescriptionException,
+            DukeEventMissingDateException {
         String[] splitInput = input.split("\\s+");
         if (splitInput.length < 2) {
             throw new DukeMissingDescriptionException(splitInput[0]);

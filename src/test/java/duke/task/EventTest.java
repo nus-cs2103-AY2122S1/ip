@@ -1,7 +1,8 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
     @Test
@@ -26,7 +27,7 @@ public class EventTest {
      void testMarkAsDoneToString() {
         Event e = new Event("sleep", "12am midnight");
         e.markAsDone();
-        assertEquals("[E][X] sleep (at: 12am midnight)",e.toString());
+        assertEquals("[E][X] sleep (at: 12am midnight)", e.toString());
     }
 
     @Test

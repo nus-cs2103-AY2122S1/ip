@@ -5,11 +5,11 @@ package duke.exception;
  *
  * @author Teo Sin Yee
  */
-public class DukeIOException extends DukeException {
+public class DukeIoException extends DukeException {
     /**
-     * Constructor for DukeIOException.
+     * Constructor for DukeIoException.
      */
-    public DukeIOException(String errorMessage) {
+    public DukeIoException(String errorMessage) {
         super(errorMessage);
     }
 }

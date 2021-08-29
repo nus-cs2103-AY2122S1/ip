@@ -1,23 +1,23 @@
 package duke.util;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Todo;
+
 public class TaskHandlerTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
     private final String SEPARATOR = "\t-------------------------------------------------------";
 
     @BeforeEach
@@ -34,7 +34,7 @@ public class TaskHandlerTest {
     void testAddTask() {
         TaskHandler taskHandler = new TaskHandler(new ArrayList<>());
         taskHandler.addTask(new Todo("shopping"));
-        String expected = String.format("%s\n\t%s\n%s\n", SEPARATOR,"Voila! ^_^ I've added this task:\n\t"
+        String expected = String.format("%s\n\t%s\n%s\n", SEPARATOR, "Voila! ^_^ I've added this task:\n\t"
                 + "  [T][] shopping"
                 + "\n\tYou currently have 1 task(s) in the list.", SEPARATOR);
         assertEquals(expected, outputStreamCaptor.toString());

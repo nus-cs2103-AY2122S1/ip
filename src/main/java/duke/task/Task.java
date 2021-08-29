@@ -16,7 +16,7 @@ public class Task {
      * @param taskName description of the task.
      */
     public Task(String taskName) {
-        this.taskName= taskName;
+        this.taskName = taskName;
         this.isDone = false;
     }
 
@@ -40,7 +40,7 @@ public class Task {
      * @return "X" if completed and "" otherwise
      */
     private String getIcon() {
-        return isDone ? "X" :"";
+        return isDone ? "X" : "";
     }
 
     /**

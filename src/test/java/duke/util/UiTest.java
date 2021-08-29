@@ -1,18 +1,18 @@
 package duke.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class UiTest {
+    private static final String SEPARATOR = "\t-------------------------------------------------------";
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-    private static final String SEPARATOR = "\t-------------------------------------------------------";
 
     @BeforeEach
     public void setUp() {
@@ -58,7 +58,7 @@ public class UiTest {
                                         SEPARATOR,
                                         "Goodbyeeee! Hope to see you again soon! :>",
                                         SEPARATOR);
-        assertEquals(expected,outputStreamCaptor.toString());
+        assertEquals(expected, outputStreamCaptor.toString());
     }
 
     @Test
@@ -69,6 +69,6 @@ public class UiTest {
                 SEPARATOR,
                 "Enter a command ^_^",
                 SEPARATOR);
-        assertEquals(expected,outputStreamCaptor.toString());
+        assertEquals(expected, outputStreamCaptor.toString());
     }
 }
