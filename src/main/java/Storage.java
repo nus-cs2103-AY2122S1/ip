@@ -11,7 +11,7 @@ import tasks.Task;
  * This is a Storage class, which encapsulates storage of tasks.
  */
 public class Storage {
-    private static final String DIRECTORY_PATH = "./duke-files";
+    private static final String DIRECTORY_PATH = "./morgan-files";
     private static final String FILE_PATH = DIRECTORY_PATH + "/tasks.txt";
     private final TaskParser parser = new TaskParser();
     private final File file;
@@ -49,11 +49,12 @@ public class Storage {
                     Task task = parser.decode(taskString);
                     taskList.addTask(task);
                 } catch (MorganException e) {
+                    //TODO: edit this
                     continue;
                 }
             }
         } catch (IOException e) {
-            throw new MorganException("OOPS!!! " + e.getMessage());
+            throw new MorganException(e.getMessage());
         }
     }
 

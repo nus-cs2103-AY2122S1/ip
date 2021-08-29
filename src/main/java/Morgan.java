@@ -1,8 +1,8 @@
 import tasks.TaskList;
 import commands.Command;
-import exceptions.DukeException;
+import exceptions.MorganException;
 
-public class Duke {
+public class Morgan {
     private static final String EXIT_KEYWORD = "bye";
 
     public static void main(String[] args) {
@@ -12,7 +12,7 @@ public class Duke {
             Storage s = new Storage();
             TaskList tl = new TaskList();
             s.load(tl);
-            InputParser p = new InputParser();
+            CommandParser p = new CommandParser();
             String userInput = ui.getInput();
             while (!userInput.trim().toLowerCase().equals(EXIT_KEYWORD)) {
                 try {
@@ -20,13 +20,13 @@ public class Duke {
                     String output = command.execute(tl);
                     s.save(tl);
                     ui.print(output);
-                } catch (DukeException e) {
+                } catch (MorganException e) {
                     ui.print(e.getMessage());
                 }
                 userInput = ui.getInput();
             }
             ui.printEndDisplay();
-        } catch (DukeException e) {
+        } catch (MorganException e) {
             ui.print(e.getMessage());
         }
     }

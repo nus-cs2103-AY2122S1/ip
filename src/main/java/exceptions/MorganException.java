@@ -1,14 +1,14 @@
 package exceptions;
 
 /**
- * This class encapsulates all checked exceptions in Duke.
+ * This class encapsulates all checked exceptions in Morgan.
  */
-public class DukeException extends Exception {
+public class MorganException extends Exception {
     /**
-     * Constructor for DukeException.
+     * Constructor for MorganException.
      * @param message The error message to be displayed to user.
      */
-    public DukeException(String message) {
+    public MorganException(String message) {
         super(message);
     }
 }
