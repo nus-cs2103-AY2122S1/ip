@@ -4,8 +4,8 @@ import duke.tasks.Task;
 import duke.utils.DukeException;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     private final static DukeException ERROR_DB = new DukeException("Error loading database.");
@@ -13,20 +13,21 @@ public class TaskList {
     private Storage storage;
 
     /**
-     * Creates empty task list. 
+     * Creates empty task list.
      * If loadFromStorage == true, initializes database and loads any stored tasks.
-     * 
+     *
      * @param loadFromStorage Inform the TaskList whether to load tasks from storage.
      * @throws DukeException
      */
     public TaskList(boolean loadFromStorage) throws DukeException {
-        if (loadFromStorage)
+        if (loadFromStorage) {
             this.storage = new Storage(this);
+        }
     }
 
     /**
      * Adds a Task to the list.
-     * 
+     *
      * @param task to be added.
      * @throws DukeException
      */
@@ -54,7 +55,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the list.
-     * 
+     *
      * @param index of task to be deleted.
      * @return The deleted task.
      * @throws DukeException
@@ -70,7 +71,7 @@ public class TaskList {
 
     /**
      * Returns if the task is in this task list.
-     * 
+     *
      * @param task to be checked.
      * @return if task list contains task.
      */
@@ -80,7 +81,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks.
-     * 
+     *
      * @return number of tasks.
      */
     public int size() {
@@ -93,7 +94,7 @@ public class TaskList {
 
     /**
      * Clears the task list and the database.
-     * 
+     *
      * @throws DukeException
      */
     public void clear() throws DukeException {
@@ -103,6 +104,7 @@ public class TaskList {
 
     /**
      * Getter for the enclosed List<Task>.
+     *
      * @return The raw task list.
      */
     public List<Task> getList() {

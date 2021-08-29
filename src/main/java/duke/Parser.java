@@ -9,18 +9,17 @@ import duke.utils.DukeException;
 import duke.utils.Record;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Parser {
-    
-    private TaskList db;
-    private HashMap<String, CheckedFunction<String, Record>> cmds = new HashMap<>();
+
+    private final TaskList db;
+    private final HashMap<String, CheckedFunction<String, Record>> cmds = new HashMap<>();
 
     /**
      * Creates a Parser which initializes a TaskList.
-     * 
+     *
      * @param loadFromStorage Inform the TaskList whether to load tasks from storage.
      * @throws DukeException
      */
@@ -30,7 +29,7 @@ public class Parser {
 
     /**
      * Creates a Parser with TaskList db and with the recognized commands.
-     * 
+     *
      * @param db TaskList to be added.
      * @throws DukeException
      */
@@ -51,6 +50,7 @@ public class Parser {
 
     /**
      * Takes in a command, and if command is found, passes to it the remaining arguments.
+     *
      * @param input
      * @return
      * @throws DukeException
@@ -79,13 +79,12 @@ public class Parser {
     }
 
     private boolean verify() {
-        System.out.println("WARNING: This procedure is irreversible." +
-                "\n\t Are you sure about proceeding? [y/n]");
+        System.out.println("WARNING: This procedure is irreversible." + "\n\t Are you sure about proceeding? [y/n]");
         Scanner sc = new Scanner(System.in);
-        char response =  sc.hasNext() ? sc.next().charAt(0) : 'x';
+        char response = sc.hasNext() ? sc.next().charAt(0) : 'x';
         while (response != 'y' || response != 'n') {
             System.out.println("Are you sure about proceeding? [y/n]");
-            response =  sc.hasNext() ? sc.next().charAt(0) : 'x';
+            response = sc.hasNext() ? sc.next().charAt(0) : 'x';
         }
         return response == 'y';
     }
@@ -182,12 +181,12 @@ public class Parser {
         else return new Record("No worries! No changes were made.");
          */
     }
-    
+
     private Record find(String raw) throws DukeException {
         TaskList filtered = db.find(raw);
         if (filtered.size() == 0) {
             return new Record("No matching tasks found.");
-        } 
+        }
         return new Record("Here are the matching tasks in your list:\n " + filtered);
     }
 }
