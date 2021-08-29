@@ -19,7 +19,6 @@ import duke.task.TaskList;
 import duke.task.TaskType;
 import duke.task.Todo;
 
-
 public class ParserTest {
 
     private TaskList makeTasks() {
