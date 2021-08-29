@@ -67,8 +67,8 @@ public class TaskList {
      */
     public void deleteTask(Storage storage, String index) throws DukeException {
         if (index.isBlank()) {
-            throw new DukeException("☹ OOPS!!! Please provide the index of the " +
-                    "task you want to delete.");
+            throw new DukeException("☹ OOPS!!! Please provide the index of the "
+                    + "task you want to delete.");
         }
         int deleteTaskIndex = Integer.parseInt(index) - 1;
         Task toBeDeleted = this.tasks.get(deleteTaskIndex);
@@ -87,8 +87,8 @@ public class TaskList {
      */
     public void doneTask(Storage storage, String index) throws DukeException {
         if (index.isBlank()) {
-            throw new DukeException("☹ OOPS!!! Please provide the index of the " +
-                    "task you want to mark as done.");
+            throw new DukeException("☹ OOPS!!! Please provide the index of the "
+                    + "task you want to mark as done.");
         }
         int taskIndex = Integer.parseInt(index) - 1;
         Task doneTask = this.tasks.get(taskIndex);

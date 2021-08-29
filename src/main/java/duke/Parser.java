@@ -10,6 +10,14 @@ import java.util.Arrays;
  * @author felix-ong
  */
 public class Parser {
+
+    /**
+     * Parses the user input to determine the command.
+     *
+     * @param userInput Command and description entered by the user.
+     * @return Command to be executed.
+     * @throws DukeException If missing arguments for commands or unknown commands.
+     */
     public static Command parse(String userInput) throws DukeException {
         String[] parts = userInput.split(" ");
         String command = parts[0];
