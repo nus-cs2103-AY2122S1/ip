@@ -59,7 +59,7 @@ public class Parser {
             String taskDescription = input.replaceAll("/by.*", "").trim();
             validateDescription(taskDescription, "deadline");
             String deadline = input.split("/by")[1].trim();
-            return new DeadlineCommand(new String[] { taskDescription, deadline });
+            return new DeadlineCommand(taskDescription, deadline);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The end time of a deadline cannot be empty.");
         }
@@ -69,7 +69,7 @@ public class Parser {
         try {
             validateDescription(input, "delete");
             int taskNo = Integer.parseInt(input) - 1;
-            return new DeleteCommand(new String[] { String.valueOf(taskNo) });
+            return new DeleteCommand(String.valueOf(taskNo));
         } catch (NumberFormatException e) {
             throw new DukeException("Enter a number for a delete action");
         }
@@ -79,7 +79,7 @@ public class Parser {
         try {
             validateDescription(input, "done");
             int taskNo = Integer.parseInt(input) - 1;
-            return new DoneCommand(new String[] { String.valueOf(taskNo) });
+            return new DoneCommand(String.valueOf(taskNo));
         } catch (NumberFormatException e) {
             throw new DukeException("Enter a number for a done action!");
         }
@@ -90,7 +90,7 @@ public class Parser {
             String taskDescription = input.replaceAll("/at.*", "").trim();
             validateDescription(taskDescription, "event");
             String deadline = input.split("/at")[1].trim();
-            return new EventCommand(new String[] { taskDescription, deadline });
+            return new EventCommand(taskDescription, deadline);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("The start and end time of a event cannot be empty.");
         }
@@ -98,7 +98,7 @@ public class Parser {
 
     private static Command parseFindInput(String input) {
         validateDescription(input, "find");
-        return new FindCommand(new String[] { input });
+        return new FindCommand(input);
     }
 
     private static Command parseListInput() {
@@ -107,7 +107,7 @@ public class Parser {
 
     private static Command parseTodoInput(String input) {
         validateDescription(input, "todo");
-        return new TodoCommand(new String[] { input });
+        return new TodoCommand(input);
     }
 
     private static void validateDescription(String input, String type) throws DukeException {
