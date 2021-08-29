@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private final static String LOGO =
+    private static final String LOGO =
             "$$$$$$$\\                                                             $$$$$\\                     $$\\       \n" +
                     "$$  __$$\\                                                            \\__$$ |                    $$ |      \n" +
                     "$$ |  $$ | $$$$$$\\   $$$$$$\\   $$$$$$\\   $$$$$$\\   $$$$$$\\              $$ | $$$$$$\\   $$$$$$$\\ $$ |  $$\\ \n" +
@@ -17,7 +17,25 @@ public class Ui {
                     "                    $$ |      $$ |                                                                        \n" +
                     "                    \\__|      \\__|                                                                        ";
 
-    public String formatReply(String str) {
+    private static final String END_TEXT = "Pepper Jack love Fraggle Rock!";
+
+    private static final String[] LIST_OF_COMMAND_USAGE_TEXT = {
+            ByeCommand.USAGE_TEXT,
+            ListCommand.USAGE_TEXT,
+            DoneCommand.USAGE_TEXT,
+            DeleteCommand.USAGE_TEXT,
+            TodoCommand.USAGE_TEXT,
+            DeadlineCommand.USAGE_TEXT,
+            EventCommand.USAGE_TEXT,
+    };
+
+    public String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("[YOU] ");
+        return sc.nextLine();
+    }
+
+    public static String formatReply(String str) {
         String y_border = "------------------------------------------------------------\n";
         return y_border + "[PEPPER JACK]\n" + str + "\n" + y_border;
     }
@@ -26,16 +44,15 @@ public class Ui {
         System.out.print(formatReply(str));
     }
 
-    public void showTasksReply(Duke.Command c, String t, int numOfTasks) {
-        String show_task = "\nYou have " + numOfTasks +" task(s) now so get off that crack rock!";
+    public void showTasksReply(boolean isAdd, String taskDesc, int numOfTasks) {
+        String end = "\nYou have " + numOfTasks +" task(s) now so get off that crack rock!";
         // If adding new task reply with add task message
-        for (Duke.Command taskCommand : Duke.Command.taskCommands) {
-            if (c == taskCommand) {
-                System.out.print(formatReply("Pepper Jack added this task:\n\t" + t + show_task));
-            }
+        if (isAdd) {
+            System.out.print(formatReply("Pepper Jack added this task:\n\t" + taskDesc + end));
+        } else {
+            // Else reply with custom message
+            System.out.print(formatReply(taskDesc + end));
         }
-        // Else reply with custom message
-        System.out.print(formatReply( t + show_task));
     }
 
     public void showWelcome() {
@@ -44,6 +61,19 @@ public class Ui {
     }
 
     public void showLoadingError(String errorMessage) {
-        System.out.println(formatReply(errorMessage));
+        System.out.print(formatReply(errorMessage));
+    }
+
+    public void showHelp() {
+        String all_help_text = "";
+        for (String help_text : LIST_OF_COMMAND_USAGE_TEXT) {
+            all_help_text = all_help_text + "\t" + help_text + "\n";
+        }
+        System.out.println(formatReply("What you sayin brah! You better start makin sense or else...\n"
+                + "*Speak in words Pepper Jack can understand*\n" + all_help_text));
+    }
+
+    public void showBye() {
+        reply(END_TEXT);
     }
 }

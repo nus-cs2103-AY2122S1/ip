@@ -176,97 +176,19 @@ public class Duke {
         }
     }
 
-    /**
-     * Starts conversation with Pepper Jack
-     */
-    private void startConvo() {
-        Scanner sc = new Scanner(System.in);
-
-        while(true) {
-            // Get user input
-            System.out.print("[YOU] ");
-            String user_input = sc.nextLine();
-
-            // Check for valid while parsing user input
-            // Check for valid while parsing user input
-            try {
-                // Validate user input
-                Command c = validate(user_input);
-
-                // If command is BYE, end convo
-                if (c == Command.BYE) {
-                    ui.reply("Pepper Jack love Fraggle Rock!");
-                    break;
-                }
-                else {
-                    // Determine action according to command
-                    switch (c) {
-                        case LIST: {
-                            // Show list
-                            String lst_display = "\n";
-
-                            for (int i = 0; i < tasks.size(); i++) {
-                                lst_display = lst_display + String.format("\t%d. %s\n", i + 1, tasks.getTask(i));
-                            }
-                            ui.reply(lst_display);
-                            break;
-                        }
-                        case DONE: {
-                            // Mark task as done
-                            String desc = user_input.split(" ", 2)[1];
-                            int index = Integer.parseInt(desc) - 1;
-                            Task t = tasks.getTask(index);
-                            t.setDone();
-                            ui.reply("Noice! Pepper Jack marked this task as done:\n\t" + t);
-                            break;
-                        }
-                        case DELETE: {
-                            // Delete task
-                            String desc = user_input.split(" ", 2)[1];
-                            int index = Integer.parseInt(desc) - 1;
-                            Task t = tasks.removeTask(index);
-                            ui.showTasksReply(c, "Aights! Pepper Jack deleted this task:\n\t" + t, tasks.size());
-                            break;
-                        }
-                        case TODO: {
-                            // Add new to do
-                            String desc = user_input.split(" ", 2)[1];
-                            Task t = new Todo(desc);
-                            tasks.addTask(t);
-                            ui.showTasksReply(c, t.toString(), tasks.size());
-                            break;
-                        }
-                        case DEADLINE: {
-                            // Add new deadline
-                            String desc_date = user_input.split(" ", 2)[1];
-                            Task t = Deadline.build(desc_date);
-                            tasks.addTask(t);
-                            ui.showTasksReply(c, t.toString(), tasks.size());
-                            break;
-                        }
-                        case EVENT: {
-                            // Add new event
-                            String desc_date = user_input.split(" ", 2)[1];
-                            Task t = Event.build(desc_date);
-                            tasks.addTask(t);
-                            ui.showTasksReply(c, t.toString(), tasks.size());
-                            break;
-                        }
-                    }
-                }
-            }
-            catch (DukeException e) {
-                // Invalid user input
-                System.out.print(ui.formatReply(e.getMessage()));
-            }
-        }
-    }
-
     public void run() {
         ui.showWelcome();
-
-        startConvo();
-
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                duke.Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showLoadingError(e.getMessage());
+            }
+        }
         try {
             storage.save(tasks);
         } catch (DukeException e) {
