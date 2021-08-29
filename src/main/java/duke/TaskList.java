@@ -52,6 +52,7 @@ public class TaskList {
         return matchingTasks;
     }
 
+    /**
      * Returns size of the task list.
      *
      * @return Size of the task list.
