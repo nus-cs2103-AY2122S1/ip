@@ -1,8 +1,6 @@
-import java.time.LocalDate;
-
 public abstract class Task {
-    private final TaskType type;
-    private final String description;
+    private TaskType type;
+    private String description;
     private boolean isDone;
 
     public Task(TaskType type, String description) {
