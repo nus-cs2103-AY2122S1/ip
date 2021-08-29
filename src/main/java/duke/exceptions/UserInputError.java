@@ -5,12 +5,12 @@ package duke.exceptions;
  */
 public class UserInputError extends Exception {
 
-  /**
-   * Constructor for a UserInputError.
-   *
-   * @param msg Message of exception to be displayed to user.
-   */
-  public UserInputError(String msg) {
-    super(msg);
-  }
+    /**
+     * Constructor for a UserInputError.
+     *
+     * @param msg Message of exception to be displayed to user.
+     */
+    public UserInputError(String msg) {
+        super(msg);
+    }
 }

@@ -5,12 +5,12 @@ package duke.exceptions;
  */
 public class ExceedListSizeException extends UserInputError {
 
-  /**
-   * Constructor for a ExceedListSizeException.
-   *
-   * @param msg Message of exception to be displayed to user.
-   */
-  public ExceedListSizeException(String msg) {
-    super(msg);
-  }
+    /**
+     * Constructor for a ExceedListSizeException.
+     *
+     * @param msg Message of exception to be displayed to user.
+     */
+    public ExceedListSizeException(String msg) {
+        super(msg);
+    }
 }

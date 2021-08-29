@@ -5,12 +5,12 @@ package duke.exceptions;
  */
 public class NoDescriptionException extends UserInputError {
 
-  /**
-   * Constructor for a NoDescriptionException.
-   *
-   * @param msg Message of exception to be displayed to user.
-   */
-  public NoDescriptionException(String msg) {
-    super(msg);
-  }
+    /**
+     * Constructor for a NoDescriptionException.
+     *
+     * @param msg Message of exception to be displayed to user.
+     */
+    public NoDescriptionException(String msg) {
+        super(msg);
+    }
 }

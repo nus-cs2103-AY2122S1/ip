@@ -3,9 +3,7 @@ package duke.util;
 import java.util.Scanner;
 
 import duke.Duke;
-
 import duke.exceptions.UserInputError;
-
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -16,18 +14,18 @@ public class Ui {
     private static final String INDENT = "      ";
     private static final String LINE =
             "     ____________________________________________________________\n";
-    private static final String LOGO = " ____        _        \n" +
-            "|  _ \\ _   _| | _____ \n" +
-            "| | | | | | | |/ / _ \\\n" +
-            "| |_| | |_| |   <  __/\n" +
-            "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
     private final Scanner sc;
     private boolean isEndChat = false;
 
     /**
      * Constructor to create a Ui instance.
      */
-    public Ui(){
+    public Ui() {
         sc = new Scanner(System.in);
     }
 
@@ -87,11 +85,17 @@ public class Ui {
         System.out.println(LINE.trim());
     }
 
+    /**
+     * Find all tasks who's description contains the keyword users are looking for.
+     *
+     * @param key keyword
+     * @param ls users tasks
+     */
     public void find(String key, TaskList ls) {
         StringBuilder op = new StringBuilder();
 
         for (int i = 0; i < ls.length(); i++) {
-            if(ls.getTask(i).descContains(key)) {
+            if (ls.getTask(i).descContains(key)) {
                 op.append(ls.getTask(i).toString()).append("\n");
             }
         }
@@ -149,12 +153,12 @@ public class Ui {
      */
     protected void addTaskOutput(Task task) {
         String output =
-                "Got it. I've added this task:\n" +
-                        INDENT +
-                        task.toString() +
-                        "\nNow you have " +
-                        Duke.taskList.length() +
-                        " tasks in the list.";
+                "Got it. I've added this task:\n"
+                        + INDENT
+                        + task.toString()
+                        + "\nNow you have "
+                        + Duke.taskList.length()
+                        + " tasks in the list.";
         Duke.renderOutput(output);
     }
 
@@ -177,12 +181,12 @@ public class Ui {
      */
     protected void deleteTaskOutput(Task task) {
         String output =
-                "Noted. I've removed this task:\n" +
-                        INDENT +
-                        task.toString() +
-                        "\nNow you have " +
-                        Duke.taskList.length() +
-                        " tasks in the list.";
+                "Noted. I've removed this task:\n"
+                        + INDENT
+                        + task.toString()
+                        + "\nNow you have "
+                        + Duke.taskList.length()
+                        + " tasks in the list.";
         Duke.renderOutput(output);
     }
 
