@@ -34,6 +34,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the main Duke program.
+     *
+     */
     public void run() {
         boolean isActive = true;
 
@@ -48,8 +52,6 @@ public class Duke {
 
         while (isActive) {
             String input = sc.nextLine();
-//            String eventType = inputs[0];
-//            String remainder = inputs.length == 1 ? null : inputs[1];
             try {
                 //String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")

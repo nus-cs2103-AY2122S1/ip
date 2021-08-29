@@ -37,6 +37,12 @@ public class Parser {
             this.label = label;
         }
 
+        /**
+         * Gets the type of command corresponding to its String token.
+         *
+         * @param label of command enum
+         * @return command enum
+         */
         public static CommandEnum valueOfLabel(String label) {
             for (CommandEnum e : values()) {
                 if (e.label.equals(label)) {
@@ -47,6 +53,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input into an executable command.
+     *
+     * @param fullCommand text to be parsed into an executable command
+     * @return a Command for Duke program to execute
+     * @throws DukeException if the command executed has errors
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] tokens = fullCommand.split("\\s+", 2);
         String eventType = tokens[0];

@@ -1,14 +1,20 @@
 package duke.tasks;
 
-import duke.DukeException;
-
 import java.util.ArrayList;
+
+import duke.DukeException;
 
 /**
  * List to contain tasks
  */
-public class TaskList extends ArrayList<Task>{
+public class TaskList extends ArrayList<Task> {
 
+    /**
+     * Constructs a list of tasks.
+     *
+     * @param taskList List of tasks
+     * @throws DukeException when list provided is empty
+     */
     public TaskList(ArrayList<Task> taskList) throws DukeException {
         if (taskList.size() == 0) {
             throw DukeException.emptyList();
@@ -20,6 +26,5 @@ public class TaskList extends ArrayList<Task>{
     }
 
     public TaskList() {
-
     }
 }

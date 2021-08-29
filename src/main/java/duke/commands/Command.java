@@ -1,12 +1,12 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
+import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-import duke.storage.Storage;
-
-import java.util.ArrayList;
 
 /**
  * Represents an executable command
@@ -36,7 +36,7 @@ public abstract class Command {
     /**
      * Constructs a message containing all tasks in the ArrayList.
      *
-     * @param ArrayList<Task> lis of tasks
+     * @param list list of tasks
      * @return ArrayList in String format
      */
     public static String arrayToString(ArrayList<Task> list) {

@@ -10,8 +10,8 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -44,9 +44,6 @@ public class Storage {
             for (String line : lines) {
                 //System.out.println(line);
                 String[] tokens = line.trim().split("\\s\\|\\s", 3); // max range 2
-//                System.out.println(tokens[0]);
-//                System.out.println(tokens[1]);
-//                System.out.println(tokens[2]);
                 String taskIdentifier = tokens[0];
                 boolean isDone = Integer.parseInt(tokens[1]) == 1;
                 String remainder = tokens[2];

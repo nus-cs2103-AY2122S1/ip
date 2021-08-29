@@ -3,7 +3,11 @@ package duke.tasks;
 /**
  * Represents a task a user has to do.
  */
-public class Todo extends Task{
+public class Todo extends Task {
+
+    /**
+     * Default constructor for a Todo task.
+     */
     public Todo(boolean isDone, String description) {
         super(isDone, description);
     }

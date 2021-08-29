@@ -1,8 +1,9 @@
 import static duke.common.Formats.DT_INPUT_FORMAT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
 
 import duke.tasks.Deadline;
 

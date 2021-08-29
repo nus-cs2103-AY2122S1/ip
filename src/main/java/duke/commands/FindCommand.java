@@ -10,7 +10,7 @@ import duke.ui.Ui;
  * Finds the tasks containing a specific phrase.
  */
 public class FindCommand extends Command {
-    String toFind;
+    private String toFind;
 
     public FindCommand(String toFind) {
         this.toFind = toFind;
