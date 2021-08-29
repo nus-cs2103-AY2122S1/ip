@@ -13,6 +13,12 @@ public class Event extends Task {
 
     private final LocalDate time;
 
+    /**
+     * Constructs an Event object.
+     *
+     * @param description description of event.
+     * @param time time of event.
+     */
     public Event(String description, LocalDate time) {
         super(description);
         this.time = time;
@@ -31,7 +37,7 @@ public class Event extends Task {
     public static Task of(boolean isDone, String description, String time) throws DateTimeException {
 
         Task ret = new Event(description, LocalDate.parse(time));
-        return isDone ? ret.done() : ret;
+        return isDone ? ret.markDone() : ret;
     }
 
     @Override

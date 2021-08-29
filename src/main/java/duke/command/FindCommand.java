@@ -1,10 +1,10 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.TaskManager;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.List;
 
 /**
  * Represents the command "find x" to find tasks containing specified keyword x and outputs them to screen.

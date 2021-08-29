@@ -14,7 +14,7 @@ public class EventTest {
     public void createEvent() {
         String desc = "TEST EVENT";
         Task task = Event.of(false, desc, "2020-02-02");
-        assertEquals(desc, task.getDescriptions());
+        assertEquals(desc, task.getDescription());
         assertEquals(" ", task.getStatusIcon());
         task = Event.of(true, desc, "2020-02-02");
         assertEquals("X", task.getStatusIcon());
@@ -24,7 +24,7 @@ public class EventTest {
     public void completeEvent() {
         String desc = "TEST EVENT";
         Task task = Event.of(false, desc, "2020-02-02");
-        task.done();
+        task.markDone();
         assertEquals(true, task.isDone());
     }
 
@@ -35,7 +35,7 @@ public class EventTest {
 
         assertEquals("[E][ ] TEST EVENT (at: Feb 2 2020)", task.toString());
         assertEquals("E|0|TEST EVENT|2020-02-02", task.toDatabaseString());
-        task.done();
+        task.markDone();
         assertEquals("[E][X] TEST EVENT (at: Feb 2 2020)", task.toString());
         assertEquals("E|1|TEST EVENT|2020-02-02", task.toDatabaseString());
     }

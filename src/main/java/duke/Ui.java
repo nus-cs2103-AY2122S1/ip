@@ -18,9 +18,12 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Prints greeting message
+     */
     public void greet() {
-        reply("Hello! I'am Duke\n" +
-                "What can I do for you?");
+        reply("Hello! I'am Duke\n"
+                + "What can I do for you?");
     }
 
     /**
@@ -32,9 +35,9 @@ public class Ui {
         String indentedMsg = Arrays.stream(msg.split("\n"))
                 .map(s -> String.format("\t%s\n", s))
                 .collect(Collectors.joining(""));
-        System.out.printf("\t____________________________________\n" +
-                "%s" +
-                "\t____________________________________\n", indentedMsg);
+        System.out.printf("\t____________________________________\n"
+                + "%s"
+                + "\t____________________________________\n", indentedMsg);
     }
 
     /**

@@ -1,12 +1,12 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import duke.task.Task;
 
 /**
  * Represents a TaskManager object that stores and operates on a List of tasks.
@@ -61,7 +61,7 @@ public class TaskManager {
      */
     public Task completeTask(int taskId) throws IllegalArgumentException {
         if (taskId < taskList.size() && taskId >= 0) {
-            taskList.set(taskId, taskList.get(taskId).done());
+            taskList.set(taskId, taskList.get(taskId).markDone());
             save();
             return taskList.get(taskId);
         } else {
@@ -81,7 +81,7 @@ public class TaskManager {
     }
 
     public List<Task> find(String keyword) {
-        return this.taskList.stream().filter(t -> t.getDescriptions().contains(keyword)).collect(Collectors.toList());
+        return this.taskList.stream().filter(t -> t.getDescription().contains(keyword)).collect(Collectors.toList());
     }
 
     private void load() throws DateTimeException {

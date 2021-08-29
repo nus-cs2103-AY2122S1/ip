@@ -3,12 +3,17 @@ package duke.task;
 /**
  * Represents a Task object that support serializing to database string and pretty print. Can be marked as completed.
  */
-abstract public class Task {
-    protected final String descriptions;
+public abstract class Task {
+    protected final String description;
     protected boolean isDone;
 
-    public Task(String descriptions) {
-        this.descriptions = descriptions;
+    /**
+     * Construct a Task object
+     *
+     * @param description description of task.
+     */
+    public Task(String description) {
+        this.description = description;
         this.isDone = false;
     }
 
@@ -18,7 +23,12 @@ abstract public class Task {
 
     abstract String getTaskType();
 
-    public Task done() {
+    /**
+     * Mark task as done.
+     *
+     * @return Updated Task object.
+     */
+    public Task markDone() {
         this.isDone = true;
         return this;
     }
@@ -27,8 +37,8 @@ abstract public class Task {
         return this.isDone;
     }
 
-    public String getDescriptions() {
-        return this.descriptions;
+    public String getDescription() {
+        return this.description;
     }
 
     /**
@@ -39,11 +49,11 @@ abstract public class Task {
      */
     public String toDatabaseString() {
         return String.format("%s|%d|%s",
-                this.getTaskType(), this.isDone() ? 1 : 0, this.getDescriptions());
+                this.getTaskType(), this.isDone() ? 1 : 0, this.getDescription());
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.descriptions);
+        return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 }

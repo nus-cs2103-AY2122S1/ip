@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.time.DateTimeException;
+
 import duke.InvalidDukeCommandException;
 import duke.TaskManager;
 import duke.Ui;
@@ -8,7 +10,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.time.DateTimeException;
 
 /**
  * Represents the command to add additional tasks. Accepted task so far are "todo" "deadline" and "event".
@@ -17,6 +18,12 @@ public class AddCommand extends Command {
     private final String type;
     private final String[] args;
 
+    /**
+     * Constructs AddCommand object.
+     *
+     * @param type the type of task to be added.
+     * @param args the argument for the task to be added.
+     */
     public AddCommand(String type, String... args) {
         this.type = type;
         this.args = args;
@@ -42,9 +49,9 @@ public class AddCommand extends Command {
         taskManager.addTask(task);
 
         ui.reply(String.format(
-                "Got it. I've added this task: \n" +
-                        "%s\n" +
-                        "Now you have %d tasks in the list", task.toString(), taskManager.taskCount()
+                "Got it. I've added this task: \n"
+                        + "%s\n"
+                        + "Now you have %d tasks in the list", task.toString(), taskManager.taskCount()
         ));
     }
 }

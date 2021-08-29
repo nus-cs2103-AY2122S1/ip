@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -15,6 +10,11 @@ import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 /**
  * Represents a Storage object that handles file IO for tasks.
  */
@@ -22,9 +22,7 @@ public class Storage {
     private final Path path;
 
     public Storage() {
-        String DB_DIR = ".";
-        String DB_NAME = "db.txt";
-        this.path = Paths.get(DB_DIR, DB_NAME);
+        this.path = Paths.get(".", "db.txt");
     }
 
     public Storage(Path path) {
@@ -85,6 +83,8 @@ public class Storage {
                 break;
             case "E":
                 taskList.add(Event.of(isDone, parts[2], parts[3]));
+                break;
+            default:
                 break;
             }
         });
