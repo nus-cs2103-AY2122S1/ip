@@ -20,7 +20,7 @@ public class Duke {
      * Constructor for the Parser class.
      */
     public Duke() {
-        this.myObj = new Scanner(System.in);  // Create a Scanner object
+        this.myObj = new Scanner(System.in);
     }
 
     /**
