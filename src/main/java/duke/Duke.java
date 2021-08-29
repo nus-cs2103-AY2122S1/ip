@@ -21,30 +21,16 @@ public class Duke {
     }
 
     /**
-     * Runs an instance of Duke, that will prompt the user for an input.
+     * Processes a user input and returns a response.
+     *
+     * @param input The command that the user inputs.
      */
-    public void run() {
-        // Display welcome message to user
-        ui.showWelcome();
-
-        // Continuously prompt the user for input until the user commands Duke to exit
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showResponse(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
     }
 }

@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Encapsulates a command by the user to exit the program and close Duke.
+ * Encapsulates a command by the user to exit Duke.
  */
 public class ExitCommand extends Command {
 
@@ -11,19 +11,10 @@ public class ExitCommand extends Command {
      * @param tasks The list of tasks in the to-do-list.
      * @param ui The user interface that deals with interactions with the user.
      * @param storage The storage that Duke uses to deal with loading tasks from and saving tasks to a file.
+     * @return A message describing the result of the execution.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showResponse("Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Indicates whether the command is an exit command.
-     *
-     * @return True if the command is an exit command, False otherwise.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "Bye. Hope to see you again soon!";
     }
 }

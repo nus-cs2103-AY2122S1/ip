@@ -22,10 +22,11 @@ public class DoneCommand extends Command {
      * @param tasks The list of tasks in the to-do-list.
      * @param ui The user interface that deals with interactions with the user.
      * @param storage The storage that Duke uses to deal with loading tasks from and saving tasks to a file.
+     * @return A message describing the result of the execution.
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // Handle user inputs that are out of bounds
         if (index > tasks.getSize() || index <= 0) {
             throw new DukeException("OOPS!!! I'm sorry, but you've entered an invalid index.");
@@ -35,7 +36,7 @@ public class DoneCommand extends Command {
         Task t = tasks.markAsDone(index);
         storage.save(tasks);
 
-        // Display response to user
-        ui.showResponse("Nice! I've marked this task as done: \n\t\t " + t.toString());
+        // Return a description of the execution result
+        return "Nice! I've marked this task as done: \n" + t.toString();
     }
 }
