@@ -48,6 +48,7 @@ public class MainWindow extends AnchorPane {
             dialogContainer.getChildren().add(
                     DialogBox.getDukeDialog("OOPS!!! I don't understand your command.", dukeImage)
             );
+            userInput.clear();
             return;
         }
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
