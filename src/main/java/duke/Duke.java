@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.Ui.Commands;
 import duke.command.Command;
 
@@ -47,35 +45,6 @@ public class Duke {
     }
 
     /**
-     * Runs Duke chatbot.
-     * Takes in user input and prints the corresponding output to the user.
-     * Also manages the user's tasks by saving to and reading from a specified file.
-     */
-    public void run() {
-        // Initialize scanner object.
-        Scanner sc = new Scanner(System.in);
-
-        // Prints greeting to user.
-        System.out.println(this.ui.getWelcome());
-
-        // Scans user inputs and prints corresponding outputs until a "Bye" input is received.
-        String userInput = sc.nextLine();
-
-        // Only exactly "bye" is read as exit command.
-        while (!userInput.equals(Commands.BYE.getCommand())) {
-            Command command = Parser.parse(userInput);
-            System.out.println(command.execute(this.tasks, this.ui, this.storage));
-            userInput = sc.nextLine();
-        }
-
-        // Prints goodbye message to user.
-        System.out.println(this.ui.getGoodbye());
-
-        // Closes scanner object.
-        sc.close();
-    }
-
-    /**
      * Returns Duke's string output from executing input String.
      *
      * @param input User's input String.
@@ -99,16 +68,6 @@ public class Duke {
      */
     public Ui getUi() {
         return ui;
-    }
-
-    /**
-     * The main method runs the duke.Duke chatbot.
-     *
-     * @param args Commandline arguments.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke(SAVE_FILENAME);
-        duke.run();
     }
 
 }
