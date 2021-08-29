@@ -1,191 +1,103 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 public class Duke {
+    private Parser parser;
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String pathName, String fileName) {
+        parser = new Parser();
+        storage = new Storage(pathName, fileName);
+        tasks = new TaskList();
+        ui = new Ui();
+    }
+
     public static void main(String[] args) {
-        String pathName = "data";
-        String fileName = "tasks.txt";
+        new Duke("data", "tasks.txt").run();
+    }
 
+    public void run() {
         try {
-            File dataDirectory = Storage.initialiseDirectory(pathName);
-            File dataFile = Storage.initialiseFile(dataDirectory, fileName);
+            File dataDirectory = storage.initialiseDirectory();
+            File dataFile = storage.initialiseFile(dataDirectory);
 
-            List<Task> tasksList = new ArrayList<Task>();
+            ui.greet();
+            storage.loadTasksFromFile(dataFile, tasks);
 
-            Print.printProgramStartMessage();
-
-            Scanner sc = new Scanner(System.in);
-            String commandLine = "";
-
-            readTasksFromFile(dataFile, tasksList);
+            String commandLine;
 
             do {
-                System.out.println("ENTER COMMAND:");
-                System.out.print("\t");
-                commandLine = sc.nextLine().trim();
-                String[] commandLineParts = commandLine.split("\\s+", 2);
-
-                Command command;
-
-                if (commandLineParts.length == 2) {
-                    command = new Command(commandLineParts[0], commandLineParts[1]);
-                } else {
-                    command = new Command(commandLineParts[0], "");
-                }
+                commandLine = ui.readCommand();
+                Command command = parser.parseInput(commandLine);
 
                 try {
                     switch (command.getType()) {
                     case "bye":
-                        Print.printResponse(ResponseMessage.exitMessage());
+                        ui.exit();
                         break;
                     case "list":
-                        displayTasksList(tasksList);
+                        displayTasksList(tasks);
                         break;
                     case "done":
-                        markDone(command, tasksList);
-                        saveTasksToFile(dataFile, tasksList);
+                        markDone(command, tasks);
+                        storage.saveTasksToFile(dataFile, tasks);
                         break;
                     case "delete":
-                        deleteTask(command, tasksList);
-                        saveTasksToFile(dataFile, tasksList);
+                        deleteTask(command, tasks);
+                        storage.saveTasksToFile(dataFile, tasks);
                         break;
                     case "todo":
-                        addToDoTask(command, tasksList);
-                        saveTasksToFile(dataFile, tasksList);
+                        addToDoTask(command, tasks);
+                        storage.saveTasksToFile(dataFile, tasks);
                         break;
                     case "deadline":
-                        addDeadlineTask(command, tasksList);
-                        saveTasksToFile(dataFile, tasksList);
+                        addDeadlineTask(command, tasks);
+                        storage.saveTasksToFile(dataFile, tasks);
                         break;
                     case "event":
-                        addEventTask(command, tasksList);
-                        saveTasksToFile(dataFile, tasksList);
+                        addEventTask(command, tasks);
+                        storage.saveTasksToFile(dataFile, tasks);
                         break;
                     case "print":
-                        printTasksOnDate(command, tasksList);
+                        printTasksOnDate(command, tasks);
                         break;
                     default:
                         throw new DukeException("INVALID COMMAND. Please try again!");
                     }
                 } catch (DukeException e) {
-                    Print.printErrorMessage(e.getMessage());
+                    ui.displayError(e.getMessage());
                 }
             } while (!commandLine.equals("bye"));
+
         } catch (DukeException | IOException e) {
-            Print.printErrorMessage(e.getMessage());
+            ui.displayError(e.getMessage());
         }
     }
 
-    static void readTasksFromFile(File dataFile, List<Task> tasksList) {
-        try {
-            FileReader fr = new FileReader(dataFile);
-            BufferedReader br = new BufferedReader(fr);
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                String[] task = line.trim().split("\\|");
-                String type = task[0].trim();
-                boolean isdone = Boolean.parseBoolean(task[1].trim());
-                String description = task[2].trim();
-                String dateTime = "";
-
-                switch (type) {
-                case "T":
-                    Task todoTask = readToDoTask(isdone, description);
-                    tasksList.add(todoTask);
-                    break;
-                case "D":
-                    dateTime = task[3].trim();
-                    Task deadlineTask = readDeadlineTask(isdone, description, dateTime);
-                    tasksList.add(deadlineTask);
-                    break;
-                case "E":
-                    dateTime = task[3].trim();
-                    Task eventTask = readEventTask(isdone, description, dateTime);
-                    tasksList.add(eventTask);
-                    break;
-                }
-            }
-
-            fr.close();
-        } catch (IOException e) {
-            Print.printErrorMessage(e.getMessage());
-        }
-    }
-
-    static Task readToDoTask(boolean isDone, String description) {
-        return new ToDo(TaskType.TODO, description, isDone);
-    }
-
-    static Task readDeadlineTask(boolean isDone, String description, String dateTime) {
-        return new Deadline(TaskType.DEADLINE, description, dateTime, isDone);
-    }
-
-    static Task readEventTask(boolean isDone, String description, String dateTime) {
-        return new Event(TaskType.EVENT, description, dateTime, isDone);
-    }
-
-    static void saveTasksToFile(File dataFile, List<Task> taskList) {
-        try {
-            FileWriter fileWriter = new FileWriter(dataFile,false);
-            String taskDetails = "";
-
-            for (int i = 0; i < taskList.size(); i++) {
-                Task task = taskList.get(i);
-
-                TaskType type = task.getType();
-                boolean isDone = task.isDone();
-                String description = task.getDescription();
-                String dateTime;
-
-                if (type == TaskType.TODO) {
-                    dateTime = "";
-                } else {
-                    dateTime = ((TaskWithDateTime) task).getDateTimeInput();
-                }
-
-                taskDetails = taskDetailsSaveFormat(type, isDone, description, dateTime);
-                fileWriter.write(taskDetails + System.lineSeparator());
-            }
-
-            fileWriter.close();
-        } catch (IOException e) {
-            Print.printErrorMessage(e.getMessage());
-        }
-    }
-
-    static String taskDetailsSaveFormat(TaskType type, boolean isDone, String description, String dateTime) {
-        if (dateTime.equals("")) {
-            return type.getAbbr() + " | " + (isDone ? "1" : "0") + " | " + description;
-        } else {
-            return type.getAbbr() + " | " + (isDone ? "1" : "0") + " | " + description + " | " + dateTime;
-        }
-    }
-
-    static void displayTasksList(List<Task> tasksList) throws DukeException {
-        if (tasksList.size() != 0) {
-            String response = ResponseMessage.tasksInYourListMessage(tasksList);
-            Print.printResponse(response);
+    public void displayTasksList(TaskList tasks) throws DukeException {
+        if (tasks.size() != 0) {
+            String response = ui.tasksInYourList(tasks);
+            ui.displayResponse(response);
         } else {
             throw new DukeException("There are no tasks in your list!");
         }
     }
 
-    static void markDone(Command command, List<Task> tasksList) throws DukeException {
+    public void markDone(Command command, TaskList tasks) throws DukeException {
         String commandDetails = command.getDetails();
 
         if (commandDetails.trim().length() > 0) {
             try {
                 int taskNum = Integer.parseInt(commandDetails);
 
-                if (taskNum >= 1 && taskNum <= tasksList.size()) {
-                    tasksList.get(taskNum - 1).setDone();
-                    Task taskDone = tasksList.get(taskNum - 1);
+                if (taskNum >= 1 && taskNum <= tasks.size()) {
+                    tasks.get(taskNum - 1).setDone();
+                    Task taskDone = tasks.get(taskNum - 1);
 
-                    String response = ResponseMessage.taskDoneMessage(taskDone);
-                    Print.printResponse(response);
+                    String response = ui.taskDoneMessage(taskDone);
+                    ui.displayResponse(response);
                 } else {
                     throw new DukeException("Please enter a valid task number to be marked as done!");
                 }
@@ -197,20 +109,19 @@ public class Duke {
         }
     }
 
-    static void deleteTask(Command command, List<Task> tasksList) throws DukeException {
+    public void deleteTask(Command command, TaskList tasks) throws DukeException {
         String commandDetails = command.getDetails();
 
         if (commandDetails.trim().length() > 0) {
             try {
                 int taskNum = Integer.parseInt(commandDetails);
 
-                if (taskNum >= 1 && taskNum <= tasksList.size()) {
-                    Task taskToDelete = tasksList.get(taskNum - 1);
-                    tasksList.remove(taskToDelete);
+                if (taskNum >= 1 && taskNum <= tasks.size()) {
+                    Task taskDeleted = tasks.remove(taskNum - 1);
 
-                    String response = ResponseMessage.taskDeletedMessage(taskToDelete)
-                            + System.lineSeparator() + ResponseMessage.numOfTasksInList(tasksList);
-                    Print.printResponse(response);
+                    String response = ui.taskDeletedMessage(taskDeleted)
+                            + System.lineSeparator() + ui.numOfTasksInList(tasks);
+                    ui.displayResponse(response);
                 } else {
                     throw new DukeException("Please enter a valid task number to be deleted!");
                 }
@@ -222,22 +133,22 @@ public class Duke {
         }
     }
 
-    static void addToDoTask(Command command, List<Task> tasksList) throws DukeException {
+    public void addToDoTask(Command command, TaskList tasks) throws DukeException {
         String commandDetails = command.getDetails();
 
         if (commandDetails.trim().length() > 0) {
             Task newToDoTask = new ToDo(TaskType.TODO, commandDetails);
-            tasksList.add(newToDoTask);
+            tasks.add(newToDoTask);
 
-            String response = ResponseMessage.taskAddedMessage(newToDoTask)
-                    + System.lineSeparator() + ResponseMessage.numOfTasksInList(tasksList);
-            Print.printResponse(response);
+            String response = ui.taskAddedMessage(newToDoTask)
+                    + System.lineSeparator() + ui.numOfTasksInList(tasks);
+            ui.displayResponse(response);
         } else {
             throw new DukeException("The description of a todo cannot be empty!");
         }
     }
 
-    static void addDeadlineTask(Command command, List<Task> tasksList) throws DukeException {
+    public void addDeadlineTask(Command command, TaskList tasks) throws DukeException {
         String commandDetails = command.getDetails();
 
         if (commandDetails.trim().length() > 0) {
@@ -253,11 +164,11 @@ public class Duke {
                         if (beforeDateTimeParts.length == 2) {
                             Task newDeadlineTask = new Deadline(TaskType.DEADLINE,
                                     description, beforeDateTimeParts[1]);
-                            tasksList.add(newDeadlineTask);
+                            tasks.add(newDeadlineTask);
 
-                            String response = ResponseMessage.taskAddedMessage(newDeadlineTask)
-                                    + System.lineSeparator() + ResponseMessage.numOfTasksInList(tasksList);
-                            Print.printResponse(response);
+                            String response = ui.taskAddedMessage(newDeadlineTask)
+                                    + System.lineSeparator() + ui.numOfTasksInList(tasks);
+                            ui.displayResponse(response);
                         } else {
                             throw new DukeException("INCOMPLETE COMMAND"
                                     + System.lineSeparator() + "\t"
@@ -312,7 +223,7 @@ public class Duke {
         }
     }
 
-    static void addEventTask(Command command, List<Task> tasksList) throws DukeException {
+    public void addEventTask(Command command, TaskList tasks) throws DukeException {
         String commandDetails = command.getDetails();
 
         if (commandDetails.trim().length() > 0) {
@@ -328,11 +239,11 @@ public class Duke {
                         if (startEndDateTimeParts.length == 2) {
                             Task newEventTask = new Event(TaskType.EVENT,
                                     description, startEndDateTimeParts[1]);
-                            tasksList.add(newEventTask);
+                            tasks.add(newEventTask);
 
-                            String response = ResponseMessage.taskAddedMessage(newEventTask)
-                                    + System.lineSeparator() + ResponseMessage.numOfTasksInList(tasksList);
-                            Print.printResponse(response);
+                            String response = ui.taskAddedMessage(newEventTask)
+                                    + System.lineSeparator() + ui.numOfTasksInList(tasks);
+                            ui.displayResponse(response);
                         } else {
                             throw new DukeException("INCOMPLETE COMMAND"
                                     + System.lineSeparator() + "\t"
@@ -387,8 +298,8 @@ public class Duke {
         }
     }
 
-    static void printTasksOnDate(Command command, List<Task> tasksList) throws DukeException {
-        if (tasksList.size() != 0) {
+    public void printTasksOnDate(Command command, TaskList tasks) throws DukeException {
+        if (tasks.size() != 0) {
             String commandDetails = command.getDetails();
 
             if (commandDetails.trim().length() > 0) {
@@ -396,8 +307,8 @@ public class Duke {
                     String[] specificDateParts = commandDetails.split("\\s+", 2);
 
                     if (specificDateParts.length == 2) {
-                        String response = ResponseMessage.tasksOnDateMessage(specificDateParts[1], tasksList);
-                        Print.printResponse(response);
+                        String response = ui.tasksOnDate(specificDateParts[1], tasks);
+                        ui.displayResponse(response);
                     } else {
                         throw new DukeException("INCOMPLETE COMMAND"
                                 + System.lineSeparator() + "\t"

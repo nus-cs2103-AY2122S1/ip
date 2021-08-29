@@ -3,9 +3,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public abstract class TaskWithDateTime extends Task {
-    private final String dateTimeInput;
-    private final String dateInput;
-    private final String timeInput;
+    private String dateTimeInput;
+    private String dateInput;
+    private String timeInput;
     private LocalDate date;
     private LocalTime time;
     private String dateTimeOutput; // DateTime (of the task) to be printed
@@ -17,7 +17,10 @@ public abstract class TaskWithDateTime extends Task {
     public TaskWithDateTime(TaskType type, String description, String dateTimeInput, boolean isDone) {
         super(type, description, isDone);
         this.dateTimeInput = dateTimeInput;
+        processDateTimeInput();
+    }
 
+    private void processDateTimeInput() {
         boolean isTimeInputProper = true;
 
         String[] dateTimeInputParts = dateTimeInput.split("\\s+", 2);
@@ -30,12 +33,14 @@ public abstract class TaskWithDateTime extends Task {
             timeInput = "";
         }
 
+        // Process dateInput
         try {
             date = LocalDate.parse(dateInput);
         } catch (Exception e) {
             date = null;
         }
 
+        // Process timeInput
         if (!timeInput.equals("")) {
             try {
                 int timeInputInInt = Integer.parseInt(timeInput);
@@ -76,6 +81,7 @@ public abstract class TaskWithDateTime extends Task {
             time = null;
         }
 
+        // Generate dateTimeOutput
         dateTimeOutput = "";
 
         if (date == null && time == null) {
