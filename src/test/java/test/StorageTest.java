@@ -1,5 +1,8 @@
-package duke;
+package test;
 
+import duke.Duke;
+import duke.MyList;
+import duke.Storage;
 import duke.exception.WrongCommandFormatException;
 import duke.tasktype.Deadline;
 import duke.tasktype.Event;

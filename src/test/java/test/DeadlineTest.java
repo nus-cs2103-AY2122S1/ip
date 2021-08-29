@@ -1,7 +1,8 @@
-package duke.tasktype;
+package test;
 
 import duke.Duke;
 import duke.exception.WrongCommandFormatException;
+import duke.tasktype.Deadline;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
