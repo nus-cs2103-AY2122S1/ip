@@ -1,6 +1,7 @@
 package Duke;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Duke {
     private String taskListFileName;
@@ -15,9 +16,14 @@ public class Duke {
         }
     }
 
-
+    // Normal Method Invocation
     public void run() {
-        Ui ui = new Ui();
+        this.run(new BufferedReader(new InputStreamReader(System.in)), new PrintWriter(System.out));
+    }
+
+    // Manually call for testing
+    public void run(BufferedReader in, PrintWriter out) {
+        Ui ui = new Ui(in, out);
         Parser parser = new Parser();
         Storage storage = new Storage(this.taskListFileName);
         TaskList taskList = storage.initialise();
@@ -27,9 +33,6 @@ public class Duke {
 
         while (!ended) {
             String input = "";
-            // Enter data using BufferReader
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(System.in));
 
             // Reading data using readLine
             try {

@@ -5,16 +5,17 @@ import java.util.Scanner;
 
 public class Ui {
     private final BufferedReader in;
-    private final PrintStream out;
+    private final PrintWriter out;
 
-    public Ui() {
-        this(System.in, System.out);
+    public Ui(BufferedReader in, PrintWriter out) {
+        this.in = in;
+        this.out = out;
     }
 
     public Ui(InputStream in, PrintStream out) {
         this.in = new BufferedReader(
                 new InputStreamReader(in));
-        this.out = out;
+        this.out = new PrintWriter(out);
     }
 
     public void init() {
@@ -23,9 +24,10 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke.Duke");
-        System.out.println("What can I do for you?");
+        out.println("Hello from\n" + logo);
+        out.println("Hello! I'm Duke.Duke");
+        out.println("What can I do for you?");
+        out.flush();
     }
 
     public String getNextCommand() throws IOException {
