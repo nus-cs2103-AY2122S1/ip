@@ -1,3 +1,5 @@
+package duke;
+
 public class TodoInput extends InputHandler {
 
     public TodoInput(Ui ui, TaskList taskList) throws DukeException {

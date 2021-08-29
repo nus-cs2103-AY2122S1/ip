@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Deadline;
+
 public class DeadlineInput extends InputHandler {
 
     public DeadlineInput(Ui ui, TaskList taskList) throws DukeException {

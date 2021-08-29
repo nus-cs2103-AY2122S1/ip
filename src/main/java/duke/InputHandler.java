@@ -1,3 +1,5 @@
+package duke;
+
 public abstract class InputHandler {
     protected Ui ui;
     protected TaskList taskList;

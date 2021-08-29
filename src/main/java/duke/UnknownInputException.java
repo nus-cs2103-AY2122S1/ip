@@ -1,3 +1,5 @@
+package duke;
+
 public class UnknownInputException extends DukeException{
 
     public UnknownInputException(String e) {

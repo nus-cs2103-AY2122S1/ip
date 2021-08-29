@@ -1,5 +1,7 @@
 //Solution below slightly adapted from https://github.com/Wincenttjoi/CS2103T-duke-chatbot/blob/master/src/main/java/duke/Duke.java
 
+import duke.*;
+
 public class Duke {
 
     private Ui ui;

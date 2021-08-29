@@ -1,3 +1,5 @@
+package duke;
+
 public class DoneInput extends InputHandler {
 
     public DoneInput(Ui ui, TaskList taskList) throws DukeException {

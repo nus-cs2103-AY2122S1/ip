@@ -1,3 +1,5 @@
+package duke;
+
 public class DeleteInput extends InputHandler {
 
     public DeleteInput(Ui ui, TaskList taskList) {

@@ -1,4 +1,8 @@
-public class EventInput extends InputHandler{
+package duke;
+
+import duke.Event;
+
+public class EventInput extends InputHandler {
 
 
     public EventInput(Ui ui, TaskList taskList) throws DukeException {
