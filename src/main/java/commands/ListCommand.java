@@ -20,7 +20,8 @@ public class ListCommand extends Command {
 
     @Override
     public boolean execute() {
-        this.setExecutionMessage(this.taskList.listHistory());
+        String message = this.taskList.getTaskListStatus() + this.taskList.listHistory();
+        this.setExecutionMessage(message);
         return true;
     }
 

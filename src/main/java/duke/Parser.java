@@ -22,21 +22,9 @@ class Parser {
 
     /** A list of the tasks entered by the user */
     private final TaskList taskList;
-    /** A scanner to scan for user inputs */
-    private final Scanner scanner;
 
-    protected Parser(Scanner scanner) {
+    protected Parser() {
         taskList = new TaskList();
-        this.scanner = scanner;
-    }
-
-    /**
-     * Takes the user input to the chat bot and evaluates it.
-     *
-     * @return The user input as a String.
-     */
-    protected String getUserInput() {
-        return this.scanner.nextLine();
     }
 
     /**

@@ -35,8 +35,7 @@ public class Ui {
      */
     protected void startDuke() {
         System.out.println(getStartMessage());
-        Scanner scanner = new Scanner(System.in);
-        this.parser = new Parser(scanner);
+        this.parser = new Parser();
         Storage.initialise(this.parser.getTaskList());
     }
 
