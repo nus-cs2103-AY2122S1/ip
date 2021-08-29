@@ -17,7 +17,7 @@ public class TaskList {
      * Constructor for a duke.TaskList.
      */
     public TaskList() {
-        this.al = new ArrayList<Task>();
+        this.al = new ArrayList<>();
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
     /**
      * Marks the task in index itemNum (1-indexed) as completed.
      *
-     * @param itemNum The number in the Tasklist of the duke.Task to be mark completed (1-indexed).
+     * @param itemNum The number in the TaskList of the duke.Task to be mark completed (1-indexed).
      */
     public void markDone(int itemNum) {
         Task task = al.get(itemNum - 1);
@@ -67,13 +67,19 @@ public class TaskList {
         this.al.remove(itemNum);
     }
 
+    /**
+     * Finds the tasks (represented by a string) given a search term.
+     *
+     * @param searchTerm User input to find relevant tasks.
+     * @return String representation of tasks relevant to the search term.
+     */
     public String find(String searchTerm) {
         String result = "";
         int k = 1;
         for (int i = 0; i < this.al.size(); i++) {
             Task current = this.al.get(i);
             if (current.toString().contains(searchTerm)) {
-                result += Integer.toString(k) + ". " + current.toString();
+                result += k + ". " + current;
                 k++;
             }
         }
@@ -90,7 +96,7 @@ public class TaskList {
         String result = "-----------------------------------------\n" + "Here are the tasks in your list:\n";
         Task[] taskArray = this.al.toArray(new Task[0]);
         for (int i = 0; i < taskArray.length; i++) {
-            result += String.format("%s. %s", i+1, taskArray[i].toString());
+            result += String.format("%s. %s", i + 1, taskArray[i].toString());
         }
         return result + "-----------------------------------------\n";
     }

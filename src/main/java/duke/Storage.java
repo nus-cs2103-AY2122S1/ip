@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +12,7 @@ public class Storage {
     /**
      * Creates directory/file if it does not exist yet.
      *
-     * @throws IOException
+     * @throws IOException directory not found.
      */
     public void createDirectoryFile() throws IOException {
         if (Files.notExists(Path.of("src/data"))) {
@@ -47,6 +46,8 @@ public class Storage {
                 case "event":
                     tasks.addTask(new Event(parsedFromFile));
                     break;
+                default:
+                    throw new IOException("Invalid task detected");
                 }
             }
         } catch (Exception e) {

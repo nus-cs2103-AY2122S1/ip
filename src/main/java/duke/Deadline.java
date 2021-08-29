@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * @author Liew Jian Hong
  */
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     /**
      * The date the deadline.
      */
@@ -21,7 +21,7 @@ public class Deadline extends Task{
      */
     public Deadline(String[] desc) {
 
-        super(desc[1], Boolean.valueOf(desc[3]));
+        super(desc[1], Boolean.parseBoolean(desc[3]));
         this.date = LocalDate.parse(desc[2]);
 
     }
@@ -33,7 +33,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toWrite() {
-        return "deadline--" + Boolean.toString(this.isDone) + "--" + this.desc + "--" + this.date.toString() +"\n";
+        return "deadline--" + this.isDone + "--" + this.desc + "--" + this.date.toString() + "\n";
     }
 
     /**
