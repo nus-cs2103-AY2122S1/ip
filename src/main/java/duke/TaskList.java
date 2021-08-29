@@ -60,6 +60,21 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Finds stored tasks by keyword
+     * @param query keywords for task-finding
+     */
+    public ArrayList<Task> find(String query) {
+        ArrayList<Task> results = new ArrayList<>();
+        for (int i = 0; i < this.numTask; i++) {
+            Task tmp = this.tasks.get(i);
+            if (tmp.getDescription().contains(query)) {
+                results.add(tmp);
+            }
+        }
+        return results;
+    }
+
+    /**
      * Indicates whether the taskList contains any tasks. Primarily used for testing.
      * @return whether taskList is empty.
      * @throws Duke.DukeException issue found in state of empty taskList
