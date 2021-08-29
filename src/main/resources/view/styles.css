@@ -1,0 +1,20 @@
+.root {
+    -fx-font-size: 14;
+    -fx-font-weight: 700;
+}
+
+.send-button {
+    -fx-background-radius: 10em;
+}
+
+.dialog-container {
+    -fx-background-image: url(../images/background.png);
+    -fx-background-size: 100%;
+    -fx-background-position: bottom;
+}
+
+.dialog-box {
+    -fx-background-radius: 15;
+    -fx-background-color: #eeeee4;
+    -fx-padding: 10;
+}

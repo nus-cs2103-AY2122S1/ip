@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
-import duke.ui.Ui;
 
 /**
  * Represents a command for deleting a <code>Task</code>.
@@ -19,22 +19,18 @@ public class DeleteTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException {
+    public DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException {
         if (commandArguments.isEmpty()) {
             throw new DukeException("Invalid use of the 'delete' command.\n\n" + USAGE_MESSAGE);
         }
         try {
             int taskNumber = Integer.parseInt(commandArguments);
-            ui.print(taskManager.deleteTask(taskNumber));
+            String message = taskManager.deleteTask(taskNumber);
             storage.saveTasks(taskManager);
+            return new DukeResponse(message);
         } catch (NumberFormatException e) {
             // User provided an argument that is not parsable.
             throw new DukeException("Invalid task number.");
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

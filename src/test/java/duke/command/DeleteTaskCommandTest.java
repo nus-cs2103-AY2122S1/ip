@@ -8,14 +8,13 @@ import org.junit.jupiter.api.Test;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskManager;
-import duke.ui.Ui;
 
 public class DeleteTaskCommandTest {
     @Test
     public void execute_noArguments_exceptionThrown() {
         try {
             new DeleteTaskCommand("")
-                    .execute(new TaskManager(), new Ui(), new Storage("./data/tasks.txt"));
+                    .execute(new TaskManager(), new Storage("./data/tasks.txt"));
             fail();
         } catch (DukeException e) {
             assertEquals(
@@ -29,7 +28,7 @@ public class DeleteTaskCommandTest {
     public void execute_nonIntegerArgument_exceptionThrown() {
         try {
             new DeleteTaskCommand("blah")
-                    .execute(new TaskManager(), new Ui(), new Storage("./data/tasks.txt"));
+                    .execute(new TaskManager(), new Storage("./data/tasks.txt"));
             fail();
         } catch (DukeException e) {
             assertEquals(

@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.task.ToDo;
-import duke.ui.Ui;
 
 /**
  * Represents a command for adding a new <code>ToDo</code>.
@@ -20,17 +20,13 @@ public class AddToDoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException {
+    public DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException {
         if (commandArguments.isEmpty()) {
             throw new DukeException("Invalid use of the 'todo' command.\n\n" + USAGE_MESSAGE);
         }
         ToDo toDo = new ToDo(commandArguments);
-        ui.print(taskManager.addTask(toDo));
+        String message = taskManager.addTask(toDo);
         storage.saveTasks(taskManager);
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
+        return new DukeResponse(message);
     }
 }

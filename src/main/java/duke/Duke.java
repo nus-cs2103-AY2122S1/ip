@@ -3,9 +3,12 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.CommandParser;
+import duke.response.DukeBadResponse;
+import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
+import javafx.application.Application;
 
 /**
  * Represents the main Duke application.
@@ -31,24 +34,58 @@ public class Duke {
     }
 
     /**
-     * Runs the program until termination.
+     * Returns a <code>DukeResponse</code> on startup.
+     * Displays the saved tasks if the task manager was loaded from storage.
      */
-    public void run() {
-        ui.greet(taskManager);
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = CommandParser.parse(fullCommand);
-                command.execute(taskManager, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.print(e.getMessage());
-            }
+    public DukeResponse startUp() {
+        if (taskManager.getTaskCount() > 0) {
+            return new DukeResponse("Welcome back! I'm Duke. These are the tasks I recall from your last visit.\n\n"
+                    + taskManager);
+        } else {
+            return new DukeResponse("Hello! I'm Duke. What can I do for you?");
         }
     }
 
+    /**
+     * Runs the program until termination.
+     */
+    public void run() {
+        String startUpMessage = startUp().toString();
+        ui.print(startUpMessage);
+        boolean isExit = false;
+        while (!isExit) {
+            String input = ui.readCommand();
+            DukeResponse response = getResponse(input);
+            ui.print(response.toString());
+            isExit = response.isExit();
+        }
+    }
+
+    /**
+     * Returns the appropriate response according to the user input.
+     * @param input the user input
+     * @return the corresponding <code>DukeResponse</code>. If a <code>DukeException</code> was thrown, it is wrapped
+     * in a <code>DukeBadResponse</code>.
+     */
+    public DukeResponse getResponse(String input) {
+        try {
+            Command command = CommandParser.parse(input);
+            DukeResponse response = command.execute(taskManager, storage);
+            return response;
+        } catch (DukeException e) {
+            return new DukeBadResponse(e.getMessage());
+        }
+    }
+
+    /**
+     * Main entrypoint for the Duke application.
+     * @param args arguments that allow user to start the CLI version
+     */
     public static void main(String[] args) {
-        new Duke("./data/tasks.txt").run();
+        if (args.length > 0 && args[0].equals("-c")) {
+            new Duke("./data/tasks.txt").run();
+        } else {
+            Application.launch(Gui.class, args);
+        }
     }
 }

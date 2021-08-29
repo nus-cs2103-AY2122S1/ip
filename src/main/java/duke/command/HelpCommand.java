@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
-import duke.ui.Ui;
 
 /**
  * Represents a command for displaying help information and usage of the different commands.
@@ -21,12 +21,7 @@ public class HelpCommand extends Command {
     };
 
     @Override
-    public void execute(TaskManager taskManager, Ui ui, Storage storage) throws DukeException {
-        ui.print(String.join("\n", ALL_USAGES));
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
+    public DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException {
+        return new DukeResponse(String.join("\n", ALL_USAGES));
     }
 }
