@@ -11,6 +11,12 @@ public class Event extends Task {
      */
     protected String at;
 
+    /**
+     * Sets up the event task.
+     *
+     * @param description The content of event task.
+     * @param at The time when the task should be done.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = dateAndTime(at);

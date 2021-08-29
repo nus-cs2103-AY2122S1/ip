@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.parser.Parser;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.parser.Parser;
 
 /**
  * Represents the task user want to configure.
@@ -21,6 +21,11 @@ public class Task {
      */
     protected boolean isDone;
 
+    /**
+     * Sets up the task.
+     *
+     * @param description The content of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

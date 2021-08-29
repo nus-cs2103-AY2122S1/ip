@@ -1,16 +1,25 @@
 package duke.command;
 
 import duke.storage.Storage;
-
+//
 import duke.task.Task;
 import duke.task.TaskList;
-
+//
 import duke.ui.Ui;
 
+/**
+ * Represents what the search command does.
+ */
 public class SearchCommand extends Command {
     private int type;
     private String response;
 
+    /**
+     * Sets up the search command.
+     *
+     * @param response The user input.
+     * @param type The type of search command.
+     */
     public SearchCommand(String response, int type) {
         this.response = response;
         this.type = type;
@@ -35,6 +44,8 @@ public class SearchCommand extends Command {
         case 2:
             String content = response.substring(5);
             currList = tasks.tasksWithContent(content);
+            break;
+        default:
             break;
         }
         ui.showList(currList, currList.getSize());

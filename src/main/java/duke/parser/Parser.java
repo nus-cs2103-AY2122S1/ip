@@ -1,18 +1,16 @@
 package duke.parser;
 
 import duke.command.AddCommand;
+import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
-import duke.command.SearchCommand;
 import duke.command.Operation;
-import duke.command.Command;
-
+import duke.command.SearchCommand;
 import duke.exception.DukeException;
 import duke.exception.EmptyInputException;
 import duke.exception.NotRecognizeException;
-
 import duke.task.Task;
 
 public class Parser {
@@ -50,9 +48,9 @@ public class Parser {
         int len = response.length();
         switch (response) {
         case "bye":
-                return new ExitCommand();
+            return new ExitCommand();
         case "list":
-                return new ListCommand();
+            return new ListCommand();
         default:
             Operation op = checkResponse(response, len);
             switch (op) {

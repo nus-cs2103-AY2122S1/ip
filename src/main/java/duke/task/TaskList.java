@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.OutOfRangeException;
-
 import java.util.ArrayList;
+
+import duke.exception.OutOfRangeException;
 
 public class TaskList {
     /** The data structure used to store the tasks. */
@@ -15,6 +15,11 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Sets up the list of tasks.
+     *
+     * @param taskList The list for the task.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
         count = taskList.size();
@@ -43,6 +48,11 @@ public class TaskList {
         return shouldDelete;
     }
 
+    /**
+     * Adds the task to task list.
+     *
+     * @param task The task to be added.
+     */
     public void addElement(Task task) {
         taskList.add(task);
         count++;

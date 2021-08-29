@@ -1,15 +1,10 @@
 package duke;
 
 import duke.command.Command;
-
 import duke.exception.DukeException;
-
 import duke.parser.Parser;
-
 import duke.storage.Storage;
-
 import duke.task.TaskList;
-
 import duke.ui.Ui;
 
 /**
@@ -22,6 +17,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Sets up duke instance dealing with file path.
+     *
+     * @param filePath The important
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -33,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program of duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

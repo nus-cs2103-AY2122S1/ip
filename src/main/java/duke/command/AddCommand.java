@@ -1,19 +1,28 @@
 package duke.command;
 
 import duke.storage.Storage;
-
-import duke.task.Task;
-import duke.task.TaskList;
+//
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.Todo;
-
+//
 import duke.ui.Ui;
 
+/**
+ * Represents the class to specify how to add command.
+ */
 public class AddCommand extends Command {
     private String response;
     private int type;
 
+    /**
+     * Adds the command.
+     *
+     * @param response The content of user input.
+     * @param type The type of adding command.
+     */
     public AddCommand(String response, int type) {
         this.response = response;
         this.type = type;
@@ -44,6 +53,8 @@ public class AddCommand extends Command {
             String content3 = parts3[0];
             String time3 = parts3[1];
             task = new Event(content3, time3);
+            break;
+        default:
             break;
         }
         tasks.addElement(task);

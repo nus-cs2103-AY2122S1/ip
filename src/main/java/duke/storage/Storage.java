@@ -1,20 +1,19 @@
 package duke.storage;
 
-import duke.exception.LoadingException;
-
-import duke.task.Deadline;
-import duke.task.Todo;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Event;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
+//
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.LoadingException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Represents the class to store the data.
@@ -22,11 +21,11 @@ import java.util.Scanner;
  * @author QIN GUORUI
  */
 public class Storage {
-    /** The content in the data file. */
-    private String content = "";
-
     /** The recommended working directory path. */
     private static String dir = System.getProperty("user.dir");
+
+    /** The content in the data file. */
+    private String content = "";
 
     /** Relative file path. */
     private String filePath;
@@ -34,6 +33,11 @@ public class Storage {
     /** The actual file name. */
     private String file;
 
+    /**
+     * Sets up the store for data.
+     *
+     * @param filePath Where to store data.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = filePath.substring(4);
@@ -50,7 +54,7 @@ public class Storage {
         // inserts correct file path separator on *nix and Windows
         // works on *nix
         // works on Windows
-        java.nio.file.Path path = java.nio.file.Paths.get(dir,"data");
+        java.nio.file.Path path = java.nio.file.Paths.get(dir, "data");
         boolean directoryExists = java.nio.file.Files.exists(path);
         if (!directoryExists) {
             new File(dir + "/data").mkdir();
@@ -149,13 +153,14 @@ public class Storage {
         char done = task.charAt(4);
         String split = "by: ";
         String prefix = "0";
-        String dataForm = "";
+        String dataForm;
+
         if (done == 'X') {
             prefix = "1";
         }
         if (type == 'T') {
             dataForm = "T | " + prefix + " | " + task.substring(8, lens);
-        } else  {
+        } else {
             if (type == 'E') {
                 split = "at: ";
             }
@@ -190,7 +195,7 @@ public class Storage {
      * @param place The index of task in task list.
      * @param tasks The task list.
      */
-    public void replace(int place, TaskList tasks){
+    public void replace(int place, TaskList tasks) {
         try {
             String dataFile = dir + "/data" + file;
             String[] parts = content.split(System.lineSeparator());
@@ -201,7 +206,7 @@ public class Storage {
             }
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < lens; i++) {
-                String temp =parts[i];
+                String temp = parts[i];
                 if (i == place) {
                     if (tasks == null) {
                         continue;

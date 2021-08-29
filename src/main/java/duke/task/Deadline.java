@@ -9,6 +9,12 @@ public class Deadline extends Task {
     /** Stores the deadline. */
     protected String by;
 
+    /**
+     * Creates a deadline task.
+     *
+     * @param description The content of this task.
+     * @param by The deadline.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = dateAndTime(by);

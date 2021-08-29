@@ -1,11 +1,10 @@
 package duke.ui;
 
-import duke.exception.LoadingException;
+import java.util.Scanner;
 
+import duke.exception.LoadingException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.Scanner;
 
 public class Ui {
     private String logo = " ____        _        \n"
@@ -16,11 +15,17 @@ public class Ui {
 
     private Scanner sc;
 
+    /**
+     * Sets up the ui scanner.
+     */
     public Ui() {
         //User input.
         sc = new Scanner(System.in);
     }
 
+    /**
+     * Shows the welcome message.
+     */
     public void showWelcome() {
         System.out.println("Hello from\n" + logo);
         //Start Prompt.
@@ -47,7 +52,7 @@ public class Ui {
      * @param r The input string.
      * @return Formatted string.
      */
-   public String getPattern(String r) {
+    public String getPattern(String r) {
         StringBuilder result = new StringBuilder();
         StringBuilder curr = new StringBuilder();
         String empty = "   ";
@@ -65,6 +70,11 @@ public class Ui {
         System.out.println("   " + "*".repeat(80));
     }
 
+    /**
+     * Shows the error message.
+     *
+     * @param message
+     */
     public void showError(String message) {
         System.out.println("   " + message);
     }
@@ -103,10 +113,19 @@ public class Ui {
         System.out.println(title + out + end);
     }
 
+    /**
+     * Shows the tasks in the list.
+     *
+     * @param task The task want to be shown.
+     * @param count The number of tasks in task list.
+     */
     public void showTasks(String task, int count) {
         System.out.println(getOutputFrame(task, count));
     }
 
+    /**
+     * Shows error while loading.
+     */
     public void showLoadingError() {
         LoadingException e = new LoadingException();
         System.out.println(e.getMessage());
