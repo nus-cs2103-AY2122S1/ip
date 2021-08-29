@@ -1,11 +1,9 @@
 package blue;
 
-import org.junit.jupiter.api.Test;
-
-import java.lang.reflect.Executable;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test

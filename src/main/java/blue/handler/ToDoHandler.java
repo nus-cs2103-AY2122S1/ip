@@ -14,7 +14,7 @@ public class ToDoHandler extends CommandHandler {
 
     /**
      * Handles the user input.
-     * 
+     *
      * @param input User input.
      * @return Response.
      * @throws BlueException If the user input is invalid.
@@ -24,7 +24,7 @@ public class ToDoHandler extends CommandHandler {
         if (input.contains(" ")) {
             int index = input.indexOf(" ");
             String title = input.substring(index + 1).strip();
-            
+
             ToDo toDo = new ToDo(title);
             taskList.add(toDo);
             String response = "Got it. I've added this task:\n" + toDo + "\n";

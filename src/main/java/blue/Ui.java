@@ -4,8 +4,8 @@ package blue;
  * Deals with the interaction with user.
  */
 class Ui {
-    private static final String LOADING_ERROR_CONTENT
-            = "☹ OOPS!!! I'm sorry, but I can't find your previous tasks :-(";
+    private static final String LOADING_ERROR_CONTENT =
+            "☹ OOPS!!! I'm sorry, but I can't find your previous tasks :-(";
     private static final String LOGO = " ____  _                \n"
             + "|  . \\| | _   _   ____  \n"
             + "|____/| || | | | /  _  \\\n"
