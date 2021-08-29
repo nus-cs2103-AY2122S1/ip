@@ -134,12 +134,12 @@ public class TaskManager {
     }
 
     /**
-     * Displays the user's tasks which have names that contain the specified search string.
-     * @param searchString the target search string
+     * Displays the user's tasks which have names that contain any of the specified search strings.
+     * @param searchStrings the target search strings
      * @return the string representation of the filtered tasks
      */
-    public String list(String searchString) {
-        List<Task> filteredTasks = filterByName(searchString);
+    public String list(String... searchStrings) {
+        List<Task> filteredTasks = filterByName(searchStrings);
         String[] filteredTasksStrings = new String[filteredTasks.size()];
         for (int i = 0; i < filteredTasksStrings.length; i++) {
             Task task = filteredTasks.get(i);
@@ -169,15 +169,18 @@ public class TaskManager {
     }
 
     /**
-     * Returns a list of tasks that have names that include the specified search string.
-     * @param searchString the string to filter by
+     * Returns a list of tasks that have names that include any of the specified search strings.
+     * @param searchStrings the strings to filter by
      * @return the filtered list
      */
-    private List<Task> filterByName(String searchString) {
+    private List<Task> filterByName(String... searchStrings) {
         List<Task> tasks = new ArrayList<>();
         for (Task t : taskList) {
-            if (t.getName().contains(searchString)) {
-                tasks.add(t);
+            for (String s : searchStrings) {
+                if (t.getName().toLowerCase().contains(s.toLowerCase())) {
+                    tasks.add(t);
+                    break;
+                }
             }
         }
         return tasks;

@@ -7,7 +7,8 @@ import duke.task.TaskManager;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
-    public static final String USAGE_MESSAGE = "To find a task with a matching name, use 'find <search-string>'.";
+    public static final String USAGE_MESSAGE = "To find a task with matching names, "
+            + "use 'find [<search-string>...]'.";
 
     private final String commandArguments;
 
@@ -20,6 +21,7 @@ public class FindCommand extends Command {
         if (commandArguments.isEmpty()) {
             throw new DukeException("Invalid use of the 'find' command.\n\n" + USAGE_MESSAGE);
         }
-        return new DukeResponse(taskManager.list(commandArguments));
+        String[] searchStrings = commandArguments.split("\\s+");
+        return new DukeResponse(taskManager.list(searchStrings));
     }
 }
