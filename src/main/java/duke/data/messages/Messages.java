@@ -7,8 +7,8 @@ package duke.data.messages;
  */
 public class Messages {
     public static final String INDENTATION = "    ";
-    public static final String WELCOME_MESSAGE = "Hello! I'm Jacky\nWhat can I do for you?";
-    public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
+    public static final String WELCOME_MESSAGE = "Hi! I'm Jacky\nWhat can I do for you?";
+    public static final String BYE_MESSAGE = "Bye! Hope to see you again soon :-)";
     public static final String UNKNOWN_INPUT_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     public static final String MISSING_DATE = "OOPS!!! Please add a valid date in the format dd/MM/yy HHmm.";
     public static final String PRINT_LIST_MESSAGE = "Here are the tasks in your list:";
@@ -19,4 +19,8 @@ public class Messages {
     public static final String EMPTY_LIST = "You haven't added anything to your list!";
     public static final String MATCHING_TASK_FOUND = "Here are the matching tasks in your list:";
     public static final String NO_MATCHING_TASK_FOUND = "OOPS!!! There are no tasks with that keyword! :-(";
+    public static final String EMPTY_TODO_DESC = "OOPS!!! The description of a todo cannot be empty.";
+    public static final String EMPTY_DEADLINE_DESC = "OOPS!!! The description of a deadline cannot be empty.";
+    public static final String EMPTY_EVENT_DESC = "OOPS!!! The description of an event cannot be empty.";
+    public static final String EMPTY_FIND_CMD = "OOPS!!! The description of a find command cannot be empty.";
 }
