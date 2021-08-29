@@ -1,6 +1,10 @@
 public class Event extends TaskWithDateTime {
-    public Event(TaskType taskType, String taskDescription, String dateTime) {
-        super(taskType, taskDescription, dateTime);
+    public Event(TaskType type, String description, String dateTime) {
+        super(type, description, dateTime);
+    }
+
+    public Event(TaskType type, String description, String dateTime, boolean isDone) {
+        super(type, description, dateTime, isDone);
     }
 
     @Override
@@ -10,6 +14,6 @@ public class Event extends TaskWithDateTime {
 
     @Override
     public String toString() {
-        return "[" + TaskType.EVENT.getAbbr() + "]" + super.toString();
+        return "[" + TaskType.EVENT.getAbbr() + "] " + super.toString();
     }
 }

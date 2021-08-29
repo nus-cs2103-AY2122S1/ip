@@ -1,20 +1,23 @@
 public abstract class TaskWithDateTime extends Task {
-    protected String dateTime;
+    private String dateTime;
 
     public TaskWithDateTime(TaskType type, String description, String dateTime) {
-        super(type, description);
+        this(type, description, dateTime, false);
+    }
+
+    public TaskWithDateTime(TaskType type, String description, String dateTime, boolean isDone) {
+        super(type, description, isDone);
         this.dateTime = dateTime;
     }
 
-    protected String getDateTime() {
-        String[] dateTimeParts = dateTime.split(" ", 2);
-        return dateTimeParts[1];
+    public String getDateTime() {
+        return dateTime;
     }
 
     public abstract String dateTimeDetails();
 
     @Override
     public String toString() {
-        return super.toString() + dateTimeDetails();
+        return super.toString() + " " + dateTimeDetails();
     }
 }

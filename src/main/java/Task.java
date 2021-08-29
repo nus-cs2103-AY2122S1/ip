@@ -1,20 +1,32 @@
 public abstract class Task {
-    protected TaskType type;
-    protected String description;
-    protected boolean isDone;
+    private TaskType type;
+    private String description;
+    private boolean isDone;
 
     public Task(TaskType type, String description) {
-        this.type = type;
-        this.description = description;
-        this.isDone = false;
+        this(type, description, false);
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); // mark done task with X
+    public Task(TaskType type, String description, boolean isDone) {
+        this.type = type;
+        this.description = description;
+        this.isDone = isDone;
+    }
+
+    public TaskType getType() {
+        return type;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "[✔]" : "[ ]"); // mark done task with ✔
     }
 
     public void setDone() {
