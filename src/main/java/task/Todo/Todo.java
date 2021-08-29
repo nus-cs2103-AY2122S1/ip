@@ -7,9 +7,10 @@ import task.Task;
  * Allows users to get_type and get_task
  */
 public class Todo extends Task {
-    public String type;
-    public String date_time;
-    public String task;
+    private String type;
+    private String dateTime;
+    private String task;
+
 
 
     /**
@@ -18,34 +19,33 @@ public class Todo extends Task {
      *
      * @param message String the user input message
      */
-    public Todo (String message) {
+    public Todo (
+            String message) {
         super(message);
-        this.set_date_time();
-        this.set_task();
-        this.set_type();
+        this.setDateTime();
+        this.setTask();
+        this.setType();
     }
+
 
     /**
      * Constructor to create a todo task for Duke.txt lines
      * Sieve out the task and date separately
      *
      * @param message String the lines in Duke.txt file
-     * @param b Boolean to differentiate between 2 constructors, always true
+     * @param isDuke Boolean to differentiate between 2 constructors, always true
      */
-    public Todo (String message, Boolean b) {
+    public Todo (
+            String message,
+                Boolean isDuke) {
         super(message);
-        this.set_date_time();
-        this.set_task2();
-        this.set_type();
+        this.setDateTime();
+        this.setTask2();
+        this.setType();
     }
 
     @Override
-    public String get_type() {
-        return this.type;
-    }
-
-    @Override
-    public void set_type() {
+    public void setType() {
         this.type = "T";
     }
 
@@ -55,15 +55,15 @@ public class Todo extends Task {
      *
      */
     @Override
-    public void set_task() {
-        int start_index = 0;
+    public void setTask() {
+        int startIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("o")) {
-                start_index = i + 4;
+                startIndex = i + 4;
                 break;
             }
         }
-        this.task = " " + message.substring(start_index,this.message.length());
+        this.task = " " + message.substring(startIndex);
     }
 
     /**
@@ -72,19 +72,19 @@ public class Todo extends Task {
      *
      */
     @Override
-    public void set_task2() {
-        int start_index = 0;
+    public void setTask2() {
+        int startIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("o")) {
-                start_index = i + 4;
+                startIndex = i + 4;
                 break;
             }
         }
-        this.task = message.substring(start_index,this.message.length());
+        this.task = message.substring(startIndex);
     }
 
     @Override
-    public String get_task() {
+    public String getTask() {
         return this.task;
     }
 
@@ -94,12 +94,12 @@ public class Todo extends Task {
     }
 
     @Override
-    public void set_date_time() {
-        this.date_time = "";
+    public void setDateTime() {
+        this.dateTime = "";
     }
 
     @Override
-    public String getDate_time() {
-        return date_time;
+    public String getDateTime() {
+        return dateTime;
     }
 }

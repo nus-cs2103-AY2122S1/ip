@@ -11,39 +11,38 @@ public class Task {
     public String message;
 
 
-    public Task (String message) {
+    public Task (
+            String message) {
         this.message = message;
         }
 
-    public Task (String message, boolean b) {}
+    public Task (
+            String message,
+                boolean isDuke) {}
 
-    public String get_type() {
+    public String getType() {
         return this.type;
     }
 
-    public void set_type() {
+    public void setType() {
         this.type = "";
     }
 
-    public void set_task() {
+    public void setTask() {
     }
 
-    public void set_task2() {
+    public void setTask2() {
     }
 
-    public String get_task() {
+    public String getTask() {
         return "";
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void set_date_time() {
+    public void setDateTime() {
         this.date_time = "";
     }
 
-    public String getDate_time() {
+    public String getDateTime() {
         return date_time;
     }
 

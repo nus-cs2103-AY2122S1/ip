@@ -10,10 +10,10 @@ import java.time.format.DateTimeFormatter;
  * Allows users to get_type and get_task
  */
 public class Deadline extends Task {
-    public String type;
-    public String task = "";
-    public LocalDate date_time;
-    public String date_time2;
+    private String type;
+    private String task = "";
+    private LocalDate dateTime;
+    private String dateTime2;
 
 
     /**
@@ -24,32 +24,33 @@ public class Deadline extends Task {
      */
     public Deadline (String message) {
         super(message);
-        this.set_date_time();
-        this.set_task();
-        this.set_type();
+        this.setDateTime();
+        this.setTask();
+        this.setType();
     }
+
 
     /**
      * Constructor to create a deadline task for Duke.txt lines
      * Sieve out the task and date separately
      *
      * @param message String the lines in Duke.txt file
-     * @param b Boolean to differentiate between 2 constructors, always true
+     * @param isDuke Boolean to differentiate between 2 constructors, always true
      */
-    public Deadline (String message, boolean b) {
+    public Deadline (String message, boolean isDuke) {
         super(message);
-        this.set_date_time2();
-        this.set_task2();
-        this.set_type();
+        this.setDateTime2();
+        this.setTask2();
+        this.setType();
     }
 
     @Override
-    public String get_type() {
+    public String getType() {
         return this.type;
     }
 
     @Override
-    public void set_type() {
+    public void setType() {
         this.type = "D";
     }
 
@@ -59,22 +60,25 @@ public class Deadline extends Task {
      *
      */
     @Override
-    public void set_task() {
-        int start_index = 0;
-        int end_index = 0;
+    public void setTask() {
+        int startIndex = 0;
+        int endIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("d")) {
-                start_index = i + 8;
+                startIndex = i + 8;
                 break;
             }
         }
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("/")) {
-                end_index = i - 1;
+                endIndex = i - 1;
                 break;
             }
         }
-        this.task = message.substring(start_index,end_index) + " (by " + this.get_date_time() + ")";
+        this.task = message.substring(startIndex,endIndex)
+                + " (by "
+                    + this.getDateTime()
+                        + ")";
     }
 
     /**
@@ -83,26 +87,28 @@ public class Deadline extends Task {
      *
      */
     @Override
-    public void set_task2() {
-        int start_index = 0;
-        int end_index = 0;
+    public void setTask2() {
+        int startIndex = 0;
+        int endIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("d")) {
-                start_index = i + 9;
+                startIndex = i + 9;
                 break;
             }
         }
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("(")) {
-                end_index = i - 1;
+                endIndex = i - 1;
                 break;
             }
         }
-        this.task = message.substring(start_index,end_index) + " " + this.get_date_time2();
+        this.task = message.substring(startIndex,endIndex)
+                + " "
+                    + this.getDateTime2();
     }
 
     @Override
-    public String get_task() {
+    public String getTask() {
         return this.task;
     }
 
@@ -112,27 +118,30 @@ public class Deadline extends Task {
      *
      */
     @Override
-    public void set_date_time() {
-        int start_index = 0;
+    public void setDateTime() {
+        int startIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("/")) {
-                start_index = i + 4;
+                startIndex = i + 4;
                 break;
             }
         }
-        String date_timing = message.substring(start_index);
-        this.date_time = LocalDate.parse(date_timing);
+        String dateTiming = message.substring(startIndex);
+        this.dateTime = LocalDate.parse(dateTiming);
     }
+
 
     /**
      * Sieve out the date portion of the message
      * Only for Duke.txt messages
      *
      */
-    public void set_date_time2() {
+    public void setDateTime2() {
         int length = this.message.length();
-        this.date_time2 = "(" + message.substring(length - 15);
+        this.dateTime2 = "("
+                + message.substring(length - 15);
     }
+
 
     /**
      * Print out the LocalDate object as month date year format
@@ -141,12 +150,12 @@ public class Deadline extends Task {
      * @return date string
      *
      */
-    public String get_date_time() {
-        return this.date_time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    public String getDateTime() {
+        return this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
-    public String get_date_time2() {
-        return this.date_time2;
+    public String getDateTime2() {
+        return this.dateTime2;
     }
 
 }

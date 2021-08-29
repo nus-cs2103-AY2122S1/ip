@@ -8,7 +8,7 @@ public class TodoTest {
     @Test
     public void getTask_newTask_success() {
         assertEquals(" hw",
-                new Todo("todo hw").get_task());
+                new Todo("todo hw").getTask());
     }
 
 }

@@ -4,7 +4,7 @@ package exception;
  * Handle exception of random unrelated descriptions
  * Allows users to output error message
  */
-public class RandomDescription extends DukeException{
+public class RandomDescription extends DukeException {
 
     public RandomDescription(String message) {
         super(message);

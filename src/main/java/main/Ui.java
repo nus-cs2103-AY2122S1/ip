@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Handle errors and scanning for interaction with user
  */
 public class Ui {
-    Scanner scan;
+    private Scanner scan;
 
     public Ui() {
         this.scan = new Scanner(System.in);
@@ -21,29 +21,30 @@ public class Ui {
         System.out.println(greetings);
     }
 
-    public String scan_nextLine() {
-        String next_line = this.scan.nextLine();
-        return next_line;
+    public String scanNextLine() {
+        String nextLine = this.scan.nextLine();
+        return nextLine;
     }
+
 
     /**
      * Check whether the user input is a empty description
      * if yes, print out error statement
      *
-     * @param next_line String input to be checked
+     * @param nextLine String input to be checked
      */
-    public void Empty_Description_exception(String next_line) {
+    public void emptyDescriptionException(String nextLine) {
         int caught = 0;
 
         while (true) {
             try {
-                this.catch_error(next_line);
+                this.catchError(nextLine);
             } catch (DukeException e) {
                 System.out.println(e.output_error());
                 caught = 1;
             } finally {
                 if (caught == 1) {
-                    next_line = scan.nextLine();
+                    nextLine = scan.nextLine();
                     caught = 0;
                 } else {
                     break;
@@ -52,29 +53,30 @@ public class Ui {
         }
     }
 
-    public void catch_error(String next_line) throws DukeException {
-        if (next_line.equals("todo")) {
-            DukeException e = new EmptyDescription(next_line);
+    public void catchError(String nextLine) throws DukeException {
+        if (nextLine.equals("todo")) {
+            DukeException e = new EmptyDescription(nextLine);
             throw e;
-        } else if (next_line.equals("deadline")) {
-            DukeException e = new EmptyDescription(next_line);
+        } else if (nextLine.equals("deadline")) {
+            DukeException e = new EmptyDescription(nextLine);
             throw e;
-        } else if (next_line.equals("event")) {
-            DukeException e = new EmptyDescription(next_line);
+        } else if (nextLine.equals("event")) {
+            DukeException e = new EmptyDescription(nextLine);
             throw e;
         }
     }
+
 
     /**
      * Check whether the user input is a random unrelated description
      * if yes, print out error statement
      *
-     * @param next_line String input to be checked
+     * @param nextLine String input to be checked
      */
-    public void Random_Description_exception(String next_line) {
+    public void randomDescriptionException(String nextLine) {
         while (true) {
             try {
-                this.random_error(next_line);
+                this.randomError(nextLine);
             } catch (DukeException e) {
                 System.out.println(e.output_error());
             } finally {
@@ -83,8 +85,8 @@ public class Ui {
         }
     }
 
-    public void random_error(String next_line) throws DukeException {
-        DukeException e = new RandomDescription(next_line);
+    public void randomError(String nextLine) throws DukeException {
+        DukeException e = new RandomDescription(nextLine);
         throw e;
     }
 

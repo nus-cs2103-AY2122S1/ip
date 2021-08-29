@@ -8,9 +8,9 @@ import task.Task;
  * Allows users to get_type and get_task
  */
 public class Event extends Task {
-    public String type;
-    public String date_time = "";
-    public String task;
+    private String type;
+    private String date_time = "";
+    private String task;
 
     /**
      * Constructor to create an event task for newly inputed messages
@@ -20,10 +20,11 @@ public class Event extends Task {
      */
     public Event (String message) {
         super(message);
-        this.set_date_time();
-        this.set_task();
-        this.set_type();
+        this.setDateTime();
+        this.setTask();
+        this.setType();
     }
+
 
 
     /**
@@ -31,17 +32,17 @@ public class Event extends Task {
      * Sieve out the task and date separately
      *
      * @param message String the lines in Duke.txt file
-     * @param b Boolean to differentiate between 2 constructors, always true
+     * @param isDuke Boolean to differentiate between 2 constructors, always true
      */
-    public Event (String message, boolean b) {
+    public Event (String message, boolean isDuke) {
         super(message);
-        this.set_date_time2();
-        this.set_task2();
-        this.set_type();
+        this.setDateTime2();
+        this.setTask2();
+        this.setType();
     }
 
     @Override
-    public String get_type() {
+    public String getType() {
         return this.type;
     }
 
@@ -51,22 +52,24 @@ public class Event extends Task {
      *
      */
     @Override
-    public void set_task() {
-        int start_index = 0;
-        int end_index = 0;
+    public void setTask() {
+        int startIndex = 0;
+        int endIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("t")) {
-                start_index = i + 2;
+                startIndex = i + 2;
                 break;
             }
         }
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("/")) {
-                end_index = i - 1;
+                endIndex = i - 1;
                 break;
             }
         }
-        this.task = " " + message.substring(start_index,end_index) + this.getDate_time();
+        this.task = " "
+                + message.substring(startIndex,endIndex)
+                    + this.getDateTime();
     }
 
     /**
@@ -75,32 +78,33 @@ public class Event extends Task {
      *
      */
     @Override
-    public void set_task2() {
-        int start_index = 0;
-        int end_index = 0;
+    public void setTask2() {
+        int startIndex = 0;
+        int endIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("e")) {
-                start_index = i + 6;
+                startIndex = i + 6;
                 break;
             }
         }
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("(")) {
-                end_index = i - 1;
+                endIndex = i - 1;
                 break;
             }
         }
-        this.task = message.substring(start_index,end_index) + this.getDate_time();
+        this.task = message.substring(startIndex,endIndex)
+                + this.getDateTime();
     }
 
 
     @Override
-    public String get_task() {
+    public String getTask() {
         return this.task;
     }
 
     @Override
-    public void set_type() {
+    public void setType() {
         this.type = "E";
     }
 
@@ -110,35 +114,38 @@ public class Event extends Task {
      *
      */
     @Override
-    public void set_date_time() {
-        int start_index = 0;
+    public void setDateTime() {
+        int startIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("/")) {
-                start_index = i + 4;
+                startIndex = i + 4;
                 break;
             }
         }
-        this.date_time = " (at " + message.substring(start_index,message.length()) + ")";
+        this.date_time = " (at "
+                + message.substring(startIndex)
+                    + ")";
     }
+
 
     /**
      * Sieve out the date portion of the message
      * Only for Duke.txt lines
      *
      */
-    public void set_date_time2() {
-        int start_index = 0;
+    public void setDateTime2() {
+        int startIndex = 0;
         for (int i = 0; i < this.message.length(); i++) {
             if (this.message.substring(i, i+1).equals("(")) {
-                start_index = i - 1;
+                startIndex = i - 1;
                 break;
             }
         }
-        this.date_time = message.substring(start_index,message.length());
+        this.date_time = message.substring(startIndex);
     }
 
     @Override
-    public String getDate_time() {
+    public String getDateTime() {
         return date_time;
     }
 }
