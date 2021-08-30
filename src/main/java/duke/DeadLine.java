@@ -22,11 +22,10 @@ public class DeadLine extends Task{
     public DeadLine(String task, String deadLine) {
         super(task);
         this.deadLine = deadLine;
-        timeSetter(deadLine);
-        timerChange();
+        timeFormatter(deadLine);
     }
 
-    private void timeSetter(String timeInput) {
+    private void timeFormatter(String timeInput) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         dateTime = LocalDateTime.parse(timeInput, formatter);
     }
@@ -36,7 +35,7 @@ public class DeadLine extends Task{
      *
      * @return String representation of date and time after format change.
      */
-    public String timerChange() {
+    public String formatChanger() {
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h.mm a");
         return dateFormat.format(dateTime) + ", " + timeFormatter.format(dateTime);
@@ -55,6 +54,6 @@ public class DeadLine extends Task{
         } else {
             result = "[D][ ] ";
         }
-        return result + super.task + " (by: " + timerChange() + ")";
+        return result + super.task + " (by: " + formatChanger() + ")";
     }
 }

@@ -20,14 +20,8 @@ public class Duke {
     public Duke() {
         storage = new Storage();
         ArrayList readList = storage.fileReader();
-        ui = new Ui();
+        ui = new Ui(readList.size());
         taskList = new TaskList(readList, ui);
-
-        if (readList != null) {
-            ui.setItems(taskList.size());
-        } else {
-            taskList = new TaskList(new ArrayList<Task>(), ui);
-        }
         parser = new Parser(ui, taskList, storage);
     }
 
@@ -41,12 +35,12 @@ public class Duke {
 
         while(!byeMessage) {
             String userInput = ui.startInput();
-            int caseNum = parser.checkCase(userInput);
+            int caseNum = parser.caseChecker(userInput);
 
             if (caseNum == 1) {
                 byeMessage = true;
             } else {
-                parser.handle(caseNum, userInput, taskList);
+                parser.caseHandler(caseNum, userInput, taskList);
             }
         }
         ui.byeMessage();
@@ -58,8 +52,6 @@ public class Duke {
      * @throws InputError If user inputs are invalid or unrecognised.
      */
     public static void main(String[] args) throws InputError {
-
         new Duke().run();
-
     }
 }

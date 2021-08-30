@@ -6,8 +6,8 @@ public class Ui {
 
     int tasks;
 
-    public Ui() {
-        this.tasks = 0;
+    public Ui(int tasks) {
+        this.tasks = tasks;
     }
 
     public void startMessage() {
@@ -27,11 +27,6 @@ public class Ui {
 
     public void setItems(int num) {
         tasks = num;
-    }
-
-    public String printTasks() {
-        String numTasks = String.valueOf(this.tasks);
-        return "You have " + numTasks + "task(s) now!";
     }
 
     public void invalidInput() {

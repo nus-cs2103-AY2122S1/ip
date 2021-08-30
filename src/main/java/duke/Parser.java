@@ -25,7 +25,7 @@ public class Parser {
      * @param str User input.
      * @return True if bye command. False if not bye command.
      */
-    private boolean checkBye(String str) {
+    private boolean byeChecker(String str) {
         boolean isBye = false;
         if (str.length() >= 3) {
             isBye = str.equals("bye");
@@ -39,7 +39,7 @@ public class Parser {
      * @param str User input.
      * @return True if list command. False if not list command.
      */
-    private boolean checkList(String str) {
+    private boolean listChecker(String str) {
         boolean isList = false;
         if (str.length() >= 4) {
             isList = str.equals("list");
@@ -53,7 +53,7 @@ public class Parser {
      * @param str User input.
      * @return True if check command. False if not check command.
      */
-    private boolean checkDone(String str) {
+    private boolean doneChecker(String str) {
         boolean isDone = false;
         if (str.length() >= 4) {
             isDone = str.substring(0,4).equals("done");
@@ -67,7 +67,7 @@ public class Parser {
      * @param str User input.
      * @return True if To Do command. False if not To Do command.
      */
-    private boolean checkTodo(String str) {
+    private boolean todoChecker(String str) {
         boolean isTodo = false;
         if (str.length() >= 4) {
             isTodo = str.substring(0,4).equals("todo");
@@ -81,7 +81,7 @@ public class Parser {
      * @param str User input.
      * @return True if Deadline command. False if not Deadline command.
      */
-    private boolean checkDeadline(String str) {
+    private boolean deadlineChecker(String str) {
         boolean isDeadLine = false;
         if (str.length() >= 8) {
             isDeadLine = str.substring(0,8).equals("deadline");
@@ -95,7 +95,7 @@ public class Parser {
      * @param str User input.
      * @return True if Event command. False if not Event command.
      */
-    private boolean checkEvent(String str) {
+    private boolean eventChecker(String str) {
         boolean isEvent = false;
         if (str.length() >= 5) {
             isEvent = str.substring(0,5).equals("event");
@@ -109,7 +109,7 @@ public class Parser {
      * @param str User input.
      * @return True if delete command. False if not delete command.
      */
-    private boolean checkDelete(String str) {
+    private boolean deleteChecker(String str) {
         boolean isDelete = false;
         if (str.length() >= 6) {
             isDelete = str.substring(0,6).equals("delete");
@@ -117,7 +117,7 @@ public class Parser {
         return isDelete;
     }
 
-    private boolean checkFind(String str) {
+    private boolean findChecker(String str) {
         boolean isFind = false;
         if (str.length() >= 4) {
             isFind = str.substring(0,4).equals("find");
@@ -131,30 +131,30 @@ public class Parser {
      * @param input User input.
      * @return Case number of command.
      */
-    public int checkCase(String input) {
+    public int caseChecker(String input) {
         int caseNum = 0;
 
-        if (checkBye(input)) {
+        if (byeChecker(input)) {
             caseNum = 1;
-        } else if (checkList(input)) {
+        } else if (listChecker(input)) {
             caseNum = 2;
-        } else if (checkDone(input)) {
+        } else if (doneChecker(input)) {
             caseNum = 3;
-        } else if (checkTodo(input)) {
+        } else if (todoChecker(input)) {
             caseNum = 4;
-        } else if (checkDeadline(input)) {
+        } else if (deadlineChecker(input)) {
             caseNum = 5;
-        } else if (checkEvent(input)) {
+        } else if (eventChecker(input)) {
             caseNum = 6;
-        } else if (checkDelete(input)) {
+        } else if (deleteChecker(input)) {
             caseNum = 7;
-        } else if (checkFind(input)) {
+        } else if (findChecker(input)) {
             caseNum = 8;
         }
         return caseNum;
     }
 
-    private void listSeq(TaskList taskList) throws InputError {
+    private void listInput(TaskList taskList) throws InputError {
         try {
             if (taskList.size() == 0) {
                 throw new InputError("No items in list");
@@ -165,7 +165,7 @@ public class Parser {
         }
     }
 
-    private void doneSeq(String str, TaskList taskList) throws InputError {
+    private void doneInput(String str, TaskList taskList) throws InputError {
         try {
             if (str.length() == 4) {
                 throw new InputError("No task indicated");
@@ -177,7 +177,7 @@ public class Parser {
         }
     }
 
-    private void findSeq(String str, TaskList taskList) throws InputError {
+    private void findInput(String str, TaskList taskList) throws InputError {
         try {
             if (str.length() == 4) {
                 throw new InputError("No task indicated");
@@ -194,7 +194,7 @@ public class Parser {
         }
     }
 
-    private void todoSeq(String str, TaskList taskList) throws InputError {
+    private void todoInput(String str, TaskList taskList) throws InputError {
         try {
             if (str.length() == 4) {
                 throw new InputError("Description Please!");
@@ -205,7 +205,7 @@ public class Parser {
         }
     }
 
-    private void deadlineSeq(String str, TaskList taskList) throws InputError {
+    private void deadlineInput(String str, TaskList taskList) throws InputError {
         try {
             if (str.length() == 8) {
                 throw new InputError("Description Please!");
@@ -216,7 +216,7 @@ public class Parser {
         }
     }
 
-    private void eventSeq(String str, TaskList taskList) throws InputError {
+    private void eventInput(String str, TaskList taskList) throws InputError {
         try {
             if (str.length() == 5) {
                 throw new InputError("Description Please!");
@@ -227,7 +227,7 @@ public class Parser {
         }
     }
 
-    private void deleteSeq(String str, TaskList taskList) throws InputError {
+    private void deleteInput(String str, TaskList taskList) throws InputError {
         try {
             if (str.length() == 5) {
                 throw new InputError("No Task to delete");
@@ -247,33 +247,33 @@ public class Parser {
      * @param taskList Current TaskList being used.
      * @throws InputError If user input is invalid or unrecognised.
      */
-    public void handle(int caseNum, String input, TaskList taskList) throws InputError {
+    public void caseHandler(int caseNum, String input, TaskList taskList) throws InputError {
         switch (caseNum) {
             case 2:
-                listSeq(taskList);
+                listInput(taskList);
                 break;
             case 3:
-                doneSeq(input, taskList);
+                doneInput(input, taskList);
                 storage.fileSaver(taskList.currList());
                 break;
             case 4:
-                todoSeq(input, taskList);
+                todoInput(input, taskList);
                 storage.fileSaver(taskList.currList());
                 break;
             case 5:
-                deadlineSeq(input, taskList);
+                deadlineInput(input, taskList);
                 storage.fileSaver(taskList.currList());
                 break;
             case 6:
-                eventSeq(input, taskList);
+                eventInput(input, taskList);
                 storage.fileSaver(taskList.currList());
                 break;
             case 7:
-                deleteSeq(input, taskList);
+                deleteInput(input, taskList);
                 storage.fileSaver(taskList.currList());
                 break;
             case 8:
-                findSeq(input, taskList);
+                findInput(input, taskList);
                 break;
             default:
                 ui.invalidInput();
