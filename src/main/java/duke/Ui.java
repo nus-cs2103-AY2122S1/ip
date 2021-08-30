@@ -1,8 +1,10 @@
+package duke;
+
 import java.util.ArrayList;
 
 public class Ui {
 
-    public void startMessage() {
+    public void start() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -15,7 +17,7 @@ public class Ui {
         System.out.println("____________________________________________________________");
     }
 
-    public void endMessage() {
+    public void end() {
         System.out.println("    ____________________________________________________________");
         System.out.println("    Bye. Hope to see you again soon!");
         System.out.println("    ____________________________________________________________");
@@ -44,7 +46,6 @@ public class Ui {
 
     public void printInvalidInput() {
         System.out.println("    Invalid Input. Please try again.");
-
     }
 
     public void printInvalidTaskNumber() {
@@ -58,6 +59,5 @@ public class Ui {
     public void printDeletedMessage() {
          System.out.println("     Noted. I've removed this task:");
     }
-
 
 }

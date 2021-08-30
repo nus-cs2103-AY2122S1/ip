@@ -1,32 +1,33 @@
+package duke;
+
 import java.util.ArrayList;
 
 public class ListOfTasks {
     private static int count;
-    private ArrayList<Task> xs;
+    private ArrayList<Task> tasks;
     private Ui ui;
 
     public ListOfTasks() {
-        //this.xs = new Task[100];
         ui = new Ui();
-        this.xs = new ArrayList<>();
+        this.tasks = new ArrayList<>();
         this.count = 0;
     }
 
     public ArrayList<Task> getList() {
-        return xs;
+        return tasks;
     }
 
     public void includeAdditionalTask(Task x) {
-        xs.add(this.count,x);
+        tasks.add(this.count,x);
         count++;
     }
 
     public void addTask(String information) {
         ui.addTaskMessage();
         information = removeVal(information, "todo");
-        xs.add(count, new ToDo(information, "TODO"));
-        CompilationOfFiles.updateSavedFile(this.xs.get(count), "TODO");
-        ui.printCurrentTask(xs.get(count));
+        tasks.add(count, new ToDo(information, "TODO"));
+        CompilationOfFiles.updateSavedFile(this.tasks.get(count), "TODO");
+        ui.printCurrentTask(tasks.get(count));
         count++;
         ui.printNumberOfTasks(count);
     }
@@ -35,22 +36,22 @@ public class ListOfTasks {
         ui.listTaskMessage();
         int a = 0;
         while (a < count) {
-            ui.listEachTask(xs,a);
+            ui.listEachTask(tasks,a);
             a = a + 1;
         }
     }
 
-    public void isDone(String command) {
+    public void markDone(String command) {
         try {
             command = removeVal(command, "done");
             int a;
             a = Integer.parseInt(command);
             a = a - 1;
             if (a < count && a >= 0) {
-                this.xs.get(a).isDone();
-                CompilationOfFiles.updateFile(this.xs);
+                this.tasks.get(a).markDone();
+                CompilationOfFiles.updateFile(this.tasks);
                 ui.printDoneMessage();
-                ui.printCurrentTask(this.xs.get(a));
+                ui.printCurrentTask(this.tasks.get(a));
             } else {
                 ui.printInvalidTaskNumber();
             }
@@ -66,8 +67,8 @@ public class ListOfTasks {
             a = a - 1;
 
             if (a < count && a >= 0) {
-                Task deletedVal = this.xs.remove(a);
-                CompilationOfFiles.updateFile(this.xs);
+                Task deletedVal = this.tasks.remove(a);
+                CompilationOfFiles.updateFile(this.tasks);
                 ui.printDeletedMessage();
                 System.out.println("       " + deletedVal.toString());
                 count--;
@@ -98,9 +99,9 @@ public class ListOfTasks {
         information = removeVal(information, "event");
         String[] moreInformation = information.split("/at", 2);
 
-        this.xs.add(count,new Event(moreInformation[0],moreInformation[1].strip(),"EVENT") );
-        CompilationOfFiles.updateSavedFile(this.xs.get(count),"EVENT");
-        ui.printCurrentTask(this.xs.get(count));
+        this.tasks.add(count,new Event(moreInformation[0],moreInformation[1].strip(),"EVENT") );
+        CompilationOfFiles.updateSavedFile(this.tasks.get(count),"EVENT");
+        ui.printCurrentTask(this.tasks.get(count));
         count = count + 1;
         ui.printNumberOfTasks(count);
     }
@@ -115,10 +116,10 @@ public class ListOfTasks {
         information = removeVal(information, "deadline");
         String[] moreInformation2 = information.split("/by", 2);
 
-        this.xs.add(count,new Deadline(moreInformation2[0],moreInformation2[1].strip(), "DEADLINE") );
-        CompilationOfFiles.updateSavedFile(this.xs.get(count), "DEADLINE");
+        this.tasks.add(count,new Deadline(moreInformation2[0],moreInformation2[1].strip(), "DEADLINE") );
+        CompilationOfFiles.updateSavedFile(this.tasks.get(count), "DEADLINE");
         System.out.println("     Got it. I've added this task:");
-        ui.printCurrentTask(this.xs.get(count));
+        ui.printCurrentTask(this.tasks.get(count));
         count = count + 1;
         ui.printNumberOfTasks(count);
     }

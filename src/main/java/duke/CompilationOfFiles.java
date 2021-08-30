@@ -1,9 +1,10 @@
+package duke;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.io.FileWriter;
 import java.nio.file.Paths;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 public class CompilationOfFiles {
@@ -13,7 +14,7 @@ public class CompilationOfFiles {
         this.filepath = filepath;
     }
 
-    public static void loadAndSaveFile(ListOfTasks xs) {
+    public static void loadAndSaveFile(ListOfTasks tasks) {
         try {
             Task temp;
             Files.createDirectories(Paths.get("data/"));
@@ -27,21 +28,21 @@ public class CompilationOfFiles {
                     if ((line[0]).equals("TODO")) {
                         Task t = new ToDo(line[2], "TODO");
                         if (line[1].equals("1")) {
-                            t.isDone();
+                            t.markDone();
                         }
-                        xs.includeAdditionalTask(t);
+                        tasks.includeAdditionalTask(t);
                     } else if ((line[0]).equals("DEADLINE")) {
                         Deadline d = new Deadline(line[2], line[3], "DEADLINE");
                         if (line[1].equals("1")) {
-                            d.isDone();
+                            d.markDone();
                         }
-                        xs.includeAdditionalTask( d);
+                        tasks.includeAdditionalTask( d);
                     } else if ((line[0]).equals("EVENT")) {
                         Event e = new Event(line[2], line[3], "EVENT");
                         if (line[1].equals("1")) {
-                            e.isDone();
+                            e.markDone();
                         }
-                        xs.includeAdditionalTask(e);
+                        tasks.includeAdditionalTask(e);
                     } else {
                         System.out.println("    OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
@@ -55,7 +56,7 @@ public class CompilationOfFiles {
 
     public static void updateFile(ArrayList<Task> list) {
         try {
-            FileWriter newFileWriter = new FileWriter("data/duke.txt");
+            FileWriter newFileWriter = new FileWriter(filepath);
             newFileWriter.write("");
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,9 +68,9 @@ public class CompilationOfFiles {
 
     public static void updateSavedFile(Task t, String taskType) {
         try {
-            File newFile = new File("data/duke.txt");
+            File newFile = new File(filepath);
             Scanner sc = new Scanner(newFile);
-            FileWriter f = new FileWriter("data/duke.txt", true);
+            FileWriter f = new FileWriter(filepath, true);
             f.write((sc.hasNextLine() ? System.lineSeparator() : "") + taskType + "/"
                     + (t.getStatusIcon() == "[X] " ? "1" : "0") + "/" + t.getInformation()
                     + (taskType.equals("TODO") ? "" : "/" + t.getDetails()));

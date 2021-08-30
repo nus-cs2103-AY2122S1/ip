@@ -1,15 +1,17 @@
+package duke;
+
 public class Task {
     protected String information;
-    protected Boolean completedTask;
+    protected Boolean isCompletedTask;
     protected String type;
 
     public Task(String information) {
         this.information = information;
-        this.completedTask = false;
+        this.isCompletedTask = false;
     }
 
-    public void isDone() {
-        this.completedTask = true;
+    public void markDone() {
+        this.isCompletedTask = true;
     }
     public String getInformation() {
         return information;
@@ -24,7 +26,7 @@ public class Task {
         return getStatusIcon() + this.information;
     }
     public String getStatusIcon() {
-        if (completedTask) {
+        if (isCompletedTask) {
             return "[X] ";
         } else {
             return  "[ ] ";
