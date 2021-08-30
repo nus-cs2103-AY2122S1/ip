@@ -9,16 +9,19 @@ public class Ui {
     /**
      * Bot greeting which shows up whenever whenever the bot is instantiated
      */
-    public void dukeGreeting(){
+    public void dukeGreeting() {
         String name = "JARVIS";
-        System.out.println("Hello I am " + name +".\nIs there anything I can do for you Sir?\n");
+        System.out.println("Hello I am " + name + ".\n"
+                + "Is there anything I can do for you Sir?\n");
     }
 
     /**
      * Bot message whenever there is an unusual request
      */
-    public void unusualRequest(){
-        System.out.println("That is a rather unusual looking request sir.\nPerhaps you might want to specify the kind of task you would like to add.\n");
+    public void unusualRequest() {
+        System.out.println("That is a rather unusual looking request sir.\n"
+                + "Perhaps you might want to specify "
+                + "the kind of task you would like to add.\n");
     }
 
     /**
@@ -26,15 +29,16 @@ public class Ui {
      *
      * @param output String outputted from the CLI
      */
-    public void dukeResponse(String output){
+    public void dukeResponse(String output) {
         System.out.println(output);
     }
 
     /**
      * Message shown when the bot exists
      */
-    public void farewellMessage(){
-        System.out.println("Goodbye Sir! Will take good care of your garden in the meantime.");
+    public void farewellMessage() {
+        System.out.println("Goodbye Sir! Will take good "
+                + "care of your garden in the meantime.");
     }
-    
+
 }

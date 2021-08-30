@@ -13,7 +13,7 @@ public class ToDo extends Task {
    * @param description Description of Event
    */
   public ToDo(String description) {
-    super(description);
+      super(description);
   }
 
   /**
@@ -23,11 +23,11 @@ public class ToDo extends Task {
    * @param done Status of Event
    */
   public ToDo(String description, int done) {
-    super(description, done);
+      super(description, done);
   }
 
-  @Override
-  public String toString() {
-    return "[T]" + super.toString();
-  }
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
 }

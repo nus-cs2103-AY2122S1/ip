@@ -22,7 +22,8 @@ public class Parser {
             userRequest = Duke.RequestType.DONE;
         } else if (userInput.startsWith("delete")) {
             userRequest = Duke.RequestType.DELETE;
-        } else if (userInput.length() > 8 && userInput.startsWith("deadline") && userInput.contains("/by")) {
+        } else if (userInput.length() > 8 &&
+                userInput.startsWith("deadline") && userInput.contains("/by")) {
             userRequest = Duke.RequestType.DEADLINE;
         } else if (userInput.length() > 5 && userInput.startsWith("event") && userInput.contains("/at")) {
             userRequest = Duke.RequestType.EVENT;
