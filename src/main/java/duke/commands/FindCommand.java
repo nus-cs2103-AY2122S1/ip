@@ -12,7 +12,7 @@ import duke.util.Ui;
 public class FindCommand extends Command {
 
     /**
-     * This is the class field of a FindCommand
+     * This is the class field of a FindCommand.
      */
     private final String keyword;
 
