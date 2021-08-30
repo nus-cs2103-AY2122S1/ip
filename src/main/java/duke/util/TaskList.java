@@ -31,33 +31,37 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    public void addTask(Task task) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
+    public ArrayList<String> addTask(Task task) {
+        ArrayList<String> outputs = new ArrayList<>();
+        outputs.add("Got it. I've added this task:");
+        outputs.add(task.toString());
         list.add(task);
         if (list.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
+            outputs.add("Now you have 1 task in the list.");
         } else {
-            System.out.println(String.format("Now you have %d tasks in the list.", 
+            outputs.add(String.format("Now you have %d tasks in the list.", 
                     list.size()));
         }
+        return outputs;
     }
 
     /**
      * Lists the tasks in the list of tasks.
      */
-    public void list() {
+    public ArrayList<String> list() {
+        ArrayList<String> outputs = new ArrayList<>();
         if (list.isEmpty()) {
-            System.out.println("You have no task for now. Want to add a new task?");
-            return;
+            outputs.add("You have no task for now. Want to add a new task?");
+            return outputs;
         }
 
-        System.out.println("Here are the tasks in your list:");
+        outputs.add("Here are the tasks in your list:");
 
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(String.format("%d. %s",
+            outputs.add(String.format("%d. %s",
                     i + 1, list.get(i)));
         }
+        return outputs;
     }
 
     /**
@@ -66,7 +70,8 @@ public class TaskList {
      * @param index Index of the task to be set as done.
      * @throws DukeIndexException If index given by user is greater than size of list or non-positive.             
      */
-    public void setAsDone(int index) {
+    public ArrayList<String> setAsDone(int index) {
+        ArrayList<String> outputs = new ArrayList<>();
         try {
             if (index > list.size()) {
                 throw new DukeIndexException("The input task number is too big.");
@@ -76,12 +81,12 @@ public class TaskList {
             }
             list.get(index - 1).maskAsDone();
 
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(list.get(index - 1));
+            outputs.add("Nice! I've marked this task as done:");
+            outputs.add(list.get(index - 1).toString());
         } catch (DukeIndexException e) {
-            System.out.println(e.getMessage());
+            outputs.add(e.getMessage());
         }
-
+        return outputs;
     }
 
     /**
@@ -90,20 +95,21 @@ public class TaskList {
      * @param index Index of the task to be deleted.
      * @throws DukeIndexException If index given by user is greater than size of list.
      */
-    public void deleteTask(int index) throws DukeIndexException {
+    public ArrayList<String> deleteTask(int index) throws DukeIndexException {
+        ArrayList<String> outputs = new ArrayList<>();
         try {
             if (index > list.size()) {
                 throw new DukeIndexException("The input task number is too big.");
             }
             Task removedTask = list.remove(index - 1);
 
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("  " + removedTask);
-            System.out.println(String.format("Now you have %d tasks in the list.", list.size()));
+            outputs.add("Noted. I've removed this task:");
+            outputs.add("  " + removedTask);
+            outputs.add(String.format("Now you have %d tasks in the list.", list.size()));
         } catch (DukeIndexException e) {
-            System.out.println(e.getMessage());
+            outputs.add(e.getMessage());
         }
-
+        return outputs;
     }
 
     /**
@@ -111,13 +117,15 @@ public class TaskList {
      *
      * @param keyword Keyword given.
      */
-    public void showFind(String keyword) {
-        System.out.println("Here are the matching tasks in your list:");
+    public ArrayList<String> showFind(String keyword) {
+        ArrayList<String> outputs = new ArrayList<>();
+        outputs.add("Here are the matching tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             if(list.get(i).getDescription().contains(keyword)) {
-                System.out.println(list.get(i));
+                outputs.add(list.get(i).toString());
             }
         }
+        return outputs;
     }
 
 }

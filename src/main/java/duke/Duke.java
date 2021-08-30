@@ -7,21 +7,71 @@ import duke.util.Parser;
 import duke.util.Ui;
 import duke.util.Storage;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.util.List;
+import java.util.ArrayList;
+
 public class Duke {
     protected Storage storage;
     protected TaskList tasks;
     protected Ui ui;
 
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    
     protected static final String FILE_URL = "data/Duke.txt";
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_URL);
         tasks = new TaskList(storage.loadStorage());
     }
 
     public static void main(String[] args) {
-        new Duke(FILE_URL).run();
+        new Duke().run();
+    }
+    
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public BotOutput getBotOutput (String input) {
+        List<String> botOutputs = new ArrayList<>();
+        boolean isExit = false;
+
+        try {
+            botOutputs.add(ui.showLine());
+            Command c = Parser.parse(input);
+            botOutputs.addAll(c.execute(tasks, ui, storage));
+            isExit = c.isExit();
+        } catch (UnknownException e) {
+            ui.displayError(e.getMessage());
+        } finally {
+            botOutputs.add(ui.showLine());
+        }
+
+        return new BotOutput(String.join("\n", botOutputs), isExit);
+    }
+
+    public String greetToGui() {
+        return ui.greet();
     }
 
     /**

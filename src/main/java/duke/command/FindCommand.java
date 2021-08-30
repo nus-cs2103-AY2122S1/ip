@@ -4,6 +4,8 @@ import duke.util.TaskList;
 import duke.util.Ui;
 import duke.util.Storage;
 
+import java.util.ArrayList;
+
 public class FindCommand extends Command{
     private final String fullCommand;
 
@@ -17,8 +19,8 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public ArrayList<String> execute(TaskList taskList, Ui ui, Storage storage) {
         String keyword = fullCommand.substring(5, fullCommand.length() - 1);
-        taskList.showFind(keyword);
+        return taskList.showFind(keyword);
     }
 }

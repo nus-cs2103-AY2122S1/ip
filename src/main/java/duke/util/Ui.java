@@ -14,8 +14,8 @@ public class Ui {
         return sc.nextLine().trim();
     }
     
-    public static void displayError(String error) {
-        System.err.println(error);
+    public static String displayError(String error) {
+        return error;
     }
 
     public void exit() {
@@ -23,17 +23,17 @@ public class Ui {
         bye();
     }
 
-    public void showLine() {
-        System.out.println("-----------------------------------------");
+    public String showLine() {
+        return "-----------------------------------------";
     }
 
-    public static void greet() {
-        System.out.println("Hiiii~ I'm Duke created by Tianyue.\n" +
-                "How can I help you? :)");
+    public static String greet() {
+        return "Hiiii~ I'm Duke created by Tianyue.\n" +
+                "How can I help you? :)";
     }
 
-    public static void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String bye() {
+        return "Bye. Hope to see you again soon!";
     }
 
 

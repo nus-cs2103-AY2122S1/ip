@@ -8,6 +8,7 @@ import duke.util.TaskList;
 import duke.task.Todo;
 import duke.util.Ui;
 import duke.util.Storage;
+import java.util.ArrayList;
 
 
 public class AddCommand extends Command {
@@ -32,7 +33,7 @@ public class AddCommand extends Command {
 
     
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public ArrayList<String> execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task newTask = null;
             if (taskType.equals("todo")) {
@@ -44,10 +45,11 @@ public class AddCommand extends Command {
                 newTask = new Event(Event.extractTaskDescription(fullCommand), 
                         Event.extractTaskTime(fullCommand));
             }
-            taskList.addTask(newTask);
+            return taskList.addTask(newTask);
         } catch (UnclearInstructionException e) {
             System.err.println(e.getMessage());
         }
+        return null;
     }
     
 }

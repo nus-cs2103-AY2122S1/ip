@@ -4,6 +4,8 @@ import duke.util.TaskList;
 import duke.util.Ui;
 import duke.util.Storage;
 
+import java.util.ArrayList;
+
 public class ExitCommand extends Command {
     public ExitCommand() {}
 
@@ -13,8 +15,10 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.bye();
+    public ArrayList<String> execute(TaskList taskList, Ui ui, Storage storage) {
+        ArrayList<String> outputs = new ArrayList<>();
+        outputs.add(ui.bye());
         storage.saveToStorage(taskList.getTasks());
+        return outputs;
     }
 }
