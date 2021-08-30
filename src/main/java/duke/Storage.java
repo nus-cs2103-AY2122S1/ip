@@ -41,7 +41,7 @@ public class Storage {
         }
     }
 
-    public ArrayList load() {
+    public ArrayList<String> load() {
         try {
             Scanner sc = new Scanner(this.file);
             ArrayList<String> tasksInfo = new ArrayList<>();
