@@ -1,4 +1,4 @@
-package pib;
+package pib.utility;
 
 import pib.enums.TaskType;
 import pib.pibexception.PibException;
@@ -51,6 +51,25 @@ public class Parser {
         }
     }
 
+    public String readInput(String input) {
+        try {
+            if (input.contains(" ")) {
+                return taskCommandGui(input);
+            } else {
+                switch (input.toLowerCase()) {
+                case "list":
+                    return Ui.printList(list);
+                case "bye":
+                    return closeScanner();
+                default:
+                    throw new PibException("unknown-command");
+                }
+            }
+        } catch (PibException e) {
+            return e.print();
+        }
+    }
+
     private void taskCommand(String input) throws PibException {
         try {
             int spaceIndex = input.indexOf(" ");
@@ -84,8 +103,35 @@ public class Parser {
         }
     }
 
-    private void closeScanner() {
-        Ui.printEnd();
+    private String taskCommandGui(String input) throws PibException {
+        try {
+            int spaceIndex = input.indexOf(" ");
+            String taskType = input.substring(0, spaceIndex).toLowerCase();
+            String taskDetails = input.substring(1 + spaceIndex);
+
+            switch (taskType) {
+            case "todo":
+                return list.add(TaskType.TODO, taskDetails);
+            case "deadline":
+                return list.add(TaskType.DEADLINE, taskDetails);
+            case "event":
+                return list.add(TaskType.EVENT, taskDetails);
+            case "done":
+                return list.markAsDone(Integer.parseInt(taskDetails));
+            case "delete":
+                return list.delete(Integer.parseInt(taskDetails));
+            case "find":
+                return list.find(taskDetails);
+            default:
+                throw new PibException("unknown-command");
+            }
+        } catch (NumberFormatException e) {
+            throw new PibException("ioob-exception");
+        }
+    }
+
+    private String closeScanner() {
         sc.close();
+        return Ui.printEnd();
     }
 }

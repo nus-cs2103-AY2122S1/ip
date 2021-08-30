@@ -1,4 +1,4 @@
-package pib;
+package pib.utility;
 
 import pib.pibexception.PibException;
 import pib.tasks.Deadline;
@@ -41,11 +41,12 @@ public class Storage {
      * @param list TaskList to add previously saved tasks to
      * @throws PibException when FileNotFoundException is thrown by system when trying to locate the saved data file
      */
-    public void loadData(TaskList list) throws PibException {
+    public String loadData(TaskList list) throws PibException {
+        String response = "";
         try {
             Scanner sc = new Scanner(this.file);
             if (sc.hasNext()) {
-                Ui.printDataLoading();
+                response = response.concat(Ui.printDataLoading());
                 while (sc.hasNext()) {
                     String[] taskDetails = sc.nextLine().split(",");
                     Task newTask = null;
@@ -66,11 +67,12 @@ public class Storage {
                         list.addSavedData(newTask);
                     }
                 }
-                Ui.printDataLoadSuccess();
-                Ui.printList(list);
+                response = response.concat(Ui.printDataLoadSuccess());
+                response = response.concat(Ui.printList(list));
             } else {
-                Ui.printNoSavedDataFound();
+                response = response.concat(Ui.printNoSavedDataFound());
             }
+            return response;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new PibException("fnf-exception");

@@ -1,6 +1,6 @@
 package pib.pibexception;
 
-import pib.Ui;
+import pib.utility.Ui;
 
 /**
  * PibException class that represents all the exceptions that can be thrown by the Pib class functionalities.
@@ -20,8 +20,10 @@ public class PibException extends Exception {
 
     /**
      * Calls Ui.printError method to print the error message to user
+     *
+     * @return String containing response to be printed to user
      */
-    public void print() {
-        Ui.printError(errorType);
+    public String print() {
+        return Ui.printError(errorType);
     }
 }
