@@ -9,6 +9,6 @@ import duke.DukeException;
 public class AddCommandTest {
     @Test
     public void isExit_anyInput_false() throws DukeException {
-        assertFalse(new AddCommand("todo holder").isExit());
+        assertFalse(new AddCommand("todo holder".split(" ")).isExit());
     }
 }
