@@ -67,7 +67,9 @@ public class Task implements Comparable<Task> {
      *
      * @return description
      */
-    public String getTask() { return description; }
+    public String getTask() {
+        return description;
+    }
 
     /***
      * Returns the type of the task (overridden by subclasses)
@@ -113,8 +115,12 @@ public class Task implements Comparable<Task> {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Task task = (Task) o;
         return isDone == task.isDone && description.equals(task.description);
     }

@@ -1,3 +1,13 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+
 import whobot.main.UI;
 import whobot.main.WhoBotException;
 import whobot.task.Deadline;
@@ -6,44 +16,40 @@ import whobot.task.Task;
 import whobot.task.Todo;
 import whobot.utils.Storage;
 import whobot.utils.TaskList;
-import org.junit.jupiter.api.Test;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
 
-    Todo todo = new Todo("Buy A New Book");
-    Deadline deadline = new Deadline("Return Books /by 28/09/2021");
-    Event event = new Event("Team Meeting /at 27/09/2021 16:00");
-    ArrayList<Task> list = new ArrayList<>();
+    private Todo todo = new Todo("Buy A New Book");
+    private Deadline deadline = new Deadline("Return Books /by 28/09/2021");
+    private Event event = new Event("Team Meeting /at 27/09/2021 16:00");
+    private ArrayList<Task> list = new ArrayList<>();
 
     public TaskListTest() throws WhoBotException {
     }
 
+    /***
+     * Tests the Addition Function
+     */
     @Test
-    public void TestAddToList() {
+    public void testAddToList() {
         File file = new File("test.txt");
         try {
             Storage storage = new Storage("test.txt");
             TaskList taskList = new TaskList(storage);
             UI ui = new UI();
 
-            taskList.addTODO("todo Buy A New Book", ui);
+            taskList.addTodo("todo Buy A New Book", ui);
             list.add(todo);
-            assertTrue(taskList.getLIST().contains(todo), "addTodo() Function Error");
+            assertTrue(taskList.getList().contains(todo), "addTodo() Function Error");
 
 
             taskList.addDeadline("deadline Return Books /by 28/09/2021", ui);
             list.add(deadline);
-            assertTrue(taskList.getLIST().contains(deadline), "addDeadline() Function Error");
+            assertTrue(taskList.getList().contains(deadline), "addDeadline() Function Error");
 
             taskList.addEvent("event Team Meeting /at 27/09/2021 16:00", ui);
             list.add(event);
-            assertTrue(taskList.getLIST().contains(event), "addEvent() Function Error");
+            assertTrue(taskList.getList().contains(event), "addEvent() Function Error");
 
         } catch (WhoBotException e) {
             fail("Task Addition Error");
@@ -54,23 +60,26 @@ public class TaskListTest {
         }
     }
 
+    /***
+     * Tests the ordering of Tasks
+     */
     @Test
-    public void TestListOrder() {
+    public void testListOrder() {
         File file = new File("test.txt");
         try {
             Storage storage = new Storage("test.txt");
             TaskList taskList = new TaskList(storage);
-            taskList.getLIST().add(todo);
-            taskList.getLIST().add(deadline);
-            taskList.getLIST().add(event);
-            Collections.sort(taskList.getLIST());
+            taskList.getList().add(todo);
+            taskList.getList().add(deadline);
+            taskList.getList().add(event);
+            Collections.sort(taskList.getList());
 
             ArrayList<Task> orderedList = new ArrayList<>();
             orderedList.add(event);
             orderedList.add(deadline);
             orderedList.add(todo);
 
-            assertEquals(orderedList, taskList.getLIST(), "Task Ordering Error On Addition");
+            assertEquals(orderedList, taskList.getList(), "Task Ordering Error On Addition");
         } catch (WhoBotException e) {
             fail("Task Addition Error");
         } finally {
@@ -80,25 +89,27 @@ public class TaskListTest {
         }
     }
 
+    /***
+     * Tests marking tasks as done
+     */
     @Test
-    public void TestMarkAsDone() {
+    public void testMarkAsDone() {
         File file = new File("test.txt");
         try {
             Storage storage = new Storage("test.txt");
             TaskList taskList = new TaskList(storage);
-            UI ui = new UI();
-            taskList.getLIST().add(todo);
-            taskList.getLIST().add(deadline);
-            taskList.getLIST().add(event);
+            taskList.getList().add(todo);
+            taskList.getList().add(deadline);
+            taskList.getList().add(event);
             event.markAsDone();
-            Collections.sort(taskList.getLIST());
+            Collections.sort(taskList.getList());
 
             ArrayList<Task> orderedList = new ArrayList<>();
             orderedList.add(deadline);
             orderedList.add(todo);
             orderedList.add(event);
 
-            assertEquals(orderedList, taskList.getLIST(), "Task Ordering Error On Marking As Done");
+            assertEquals(orderedList, taskList.getList(), "Task Ordering Error On Marking As Done");
         } catch (WhoBotException e) {
             fail("Task Addition Error");
         } finally {

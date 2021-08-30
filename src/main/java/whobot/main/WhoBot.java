@@ -1,10 +1,12 @@
 package whobot.main;
 
 import java.io.File;
-import java.util.*;
-import whobot.utils.Storage;
+import java.util.Scanner;
+
 import whobot.utils.Parser;
+import whobot.utils.Storage;
 import whobot.utils.TaskList;
+
 
 /**
  * Main Driver Class
@@ -36,7 +38,7 @@ public class WhoBot {
             this.storage = new Storage("." + File.separator + "data" + File.separator + "WhoBotData.txt");
             this.taskList = new TaskList(storage);
         } catch (WhoBotException ex) {
-            ui.echo(ex.getMessage(), UI.TYPE.ERROR);
+            ui.echo(ex.getMessage(), UI.Type.ERROR);
             System.exit(0);
         }
     }
@@ -53,9 +55,9 @@ public class WhoBot {
                 command = CMD_READER.nextLine().trim();
                 if (parser.parse(command, ui, storage, taskList) == -1) {
                     break;
-                };
+                }
             } catch (WhoBotException ex) {
-                ui.echo(ex.getMessage(), UI.TYPE.ERROR);
+                ui.echo(ex.getMessage(), UI.Type.ERROR);
             }
         }
     }

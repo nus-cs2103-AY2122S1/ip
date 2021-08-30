@@ -3,7 +3,7 @@ package whobot.task;
 /***
  * Class to Handle Todo type Tasks
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /***
      * Constructor for Todo Class

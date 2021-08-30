@@ -1,15 +1,15 @@
 package whobot.task;
 
-import whobot.main.WhoBotException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import whobot.main.WhoBotException;
+
 /***
  * Class to Handle Deadline type Tasks
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     /** Deadline of the Task */
     private LocalDateTime deadline;
@@ -141,8 +141,12 @@ public class Deadline extends Task{
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Deadline deadline1 = (Deadline) o;
         return deadline.equals(deadline1.deadline) && this.hasTime == deadline1.hasTime
                 && this.getDescription().equals(deadline1.getDescription());

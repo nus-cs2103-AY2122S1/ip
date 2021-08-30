@@ -1,11 +1,5 @@
 package whobot.utils;
 
-import whobot.main.WhoBotException;
-import whobot.task.Deadline;
-import whobot.task.Event;
-import whobot.task.Task;
-import whobot.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +8,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import whobot.main.WhoBotException;
+import whobot.task.Deadline;
+import whobot.task.Event;
+import whobot.task.Task;
+import whobot.task.Todo;
 
 /***
  * Class to Maintain the Storage File
@@ -21,7 +20,7 @@ import java.util.Scanner;
 public class Storage {
 
     /** Name of storage file */
-    public String filename;
+    private String filename;
 
     /** Storage file */
     private final File taskFile;
@@ -42,7 +41,8 @@ public class Storage {
                 }
                 taskFile.createNewFile();
             } catch (IOException e) {
-                throw new WhoBotException("Oops, The file to store my data could not be created. If you continue, tasks won't be stored permanently.");
+                throw new WhoBotException("Oops, The file to store my data could not be created."
+                        + " If you continue, tasks won't be stored permanently.");
             }
         }
     }
@@ -50,32 +50,32 @@ public class Storage {
     /***
      * Reads Data from File and Adds to Task List
      *
-     * @param LIST the task list to store tasks in
+     * @param list the task list to store tasks in
      * @throws WhoBotException if file could not be read
      */
-    public void readData(ArrayList<Task> LIST) throws WhoBotException {
+    public void readData(ArrayList<Task> list) throws WhoBotException {
         try {
             Scanner taskReader = new Scanner(taskFile);
-            while(taskReader.hasNextLine()) {
+            while (taskReader.hasNextLine()) {
                 String[] data = taskReader.nextLine().split(" \\| ");
                 if (data[0].equals("T")) {
                     Todo tempTodo = new Todo(data[2]);
                     if (data[1].equals("X")) {
                         tempTodo.markAsDone();
                     }
-                    LIST.add(tempTodo);
+                    list.add(tempTodo);
                 } else if (data[0].equals("D")) {
                     Deadline tempDeadline = new Deadline(data[2]);
                     if (data[1].equals("X")) {
                         tempDeadline.markAsDone();
                     }
-                    LIST.add(tempDeadline);
+                    list.add(tempDeadline);
                 } else if (data[0].equals("E")) {
                     Event tempEvent = new Event(data[2]);
                     if (data[1].equals("X")) {
                         tempEvent.markAsDone();
                     }
-                    LIST.add(tempEvent);
+                    list.add(tempEvent);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -89,13 +89,13 @@ public class Storage {
     /***
      * Saves Task List to File
      *
-     * @param LIST the task list to save
+     * @param list the task list to save
      * @throws WhoBotException if data could not be written
      */
-    public void saveMemory(ArrayList<Task> LIST) throws WhoBotException {
+    public void saveMemory(ArrayList<Task> list) throws WhoBotException {
         try {
             FileWriter dataWriter = new FileWriter(taskFile);
-            for (Task tempTask : LIST) {
+            for (Task tempTask : list) {
                 String type = tempTask.getType();
                 if (type.equals("T")) {
                     dataWriter.write(type + " | " + tempTask.getStatusIcon().charAt(1) + " | " + tempTask.getTask());
@@ -106,8 +106,8 @@ public class Storage {
                 } else if (type.equals("D")) {
                     Deadline tempDeadline = (Deadline) tempTask;
                     dataWriter.write(type + " | " + tempTask.getStatusIcon().charAt(1) + " | " + tempTask.getTask()
-                            + " /by " +
-                            (tempDeadline.hasTime()
+                            + " /by "
+                            + (tempDeadline.hasTime()
                                     ? tempDeadline.getDeadline().format(DateTimeFormatter.ofPattern("d/M/yyyy HH:mm"))
                                     : tempDeadline.getDeadline().format(DateTimeFormatter.ofPattern("d/M/yyyy"))));
                 }

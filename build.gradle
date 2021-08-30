@@ -32,11 +32,11 @@ test {
 }
 
 application {
-    mainClassName = "seedu.main.WhoBot"
+    mainClassName = "whobot.main.WhoBot"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "main"
     archiveClassifier = null
 }
 

@@ -1,16 +1,17 @@
 package whobot.utils;
 
-import whobot.main.WhoBotException;
-import whobot.main.UI;
-import whobot.task.Task;
-import whobot.task.Event;
-import whobot.task.Deadline;
-import whobot.task.Todo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
+
+import whobot.main.UI;
+import whobot.main.WhoBotException;
+import whobot.task.Deadline;
+import whobot.task.Event;
+import whobot.task.Task;
+import whobot.task.Todo;
 
 /***
  * Class to Maintain the Task List
@@ -18,7 +19,7 @@ import java.util.Locale;
 public class TaskList {
 
     /** The Task List Arraylist */
-    private final ArrayList<Task> LIST = new ArrayList<>();
+    private final ArrayList<Task> list = new ArrayList<>();
 
     /***
      * Constructor for TaskList Class
@@ -27,7 +28,7 @@ public class TaskList {
      * @throws WhoBotException if there is an error reading data
      */
     public TaskList(Storage storage) throws WhoBotException {
-        storage.readData(LIST);
+        storage.readData(list);
     }
 
     /***
@@ -35,8 +36,8 @@ public class TaskList {
      *
      * @return the task list
      */
-    public ArrayList<Task> getLIST() {
-        return LIST;
+    public ArrayList<Task> getList() {
+        return list;
     }
 
     /***
@@ -45,18 +46,18 @@ public class TaskList {
      * @param ui UI to print list to
      */
     public void printList(UI ui) {
-        if (LIST.isEmpty()) {
-            ui.echo("There are currently no tasks in your list.", UI.TYPE.COMPLETE);
+        if (list.isEmpty()) {
+            ui.echo("There are currently no tasks in your list.", UI.Type.COMPLETE);
             return;
         }
-        Collections.sort(LIST);
+        Collections.sort(list);
         String listString = "The tasks in your list are:\n";
         int i;
-        for (i = 0; i < LIST.size() - 1; i++) {
-            listString = listString.concat("\t\t\t" + (i + 1) + ". " + LIST.get(i) + "\n");
+        for (i = 0; i < list.size() - 1; i++) {
+            listString = listString.concat("\t\t\t" + (i + 1) + ". " + list.get(i) + "\n");
         }
-        listString = listString.concat("\t\t\t" + (i + 1) + ". " + LIST.get(i));
-        ui.echo(listString, UI.TYPE.COMPLETE);
+        listString = listString.concat("\t\t\t" + (i + 1) + ". " + list.get(i));
+        ui.echo(listString, UI.Type.COMPLETE);
     }
 
     /***
@@ -69,15 +70,17 @@ public class TaskList {
     public void markAsDone(String ind, UI ui) throws WhoBotException {
         try {
             int index = Integer.parseInt(ind) - 1;
-            if (index < LIST.size()) {
-                LIST.get(index).markAsDone();
-                ui.echo("Congrats! I have marked this task complete: \"" + LIST.get(index).getDescription() + "\"",
-                        UI.TYPE.COMPLETE);
+            if (index < list.size()) {
+                list.get(index).markAsDone();
+                ui.echo("Congrats! I have marked this task complete: \"" + list.get(index).getDescription() + "\"",
+                        UI.Type.COMPLETE);
             } else {
-                throw new WhoBotException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
+                throw new WhoBotException("Oops, The index you gave is out of bound. "
+                        + "There are only " + list.size() + " tasks");
             }
-        } catch (NumberFormatException  ex) {
-            throw new WhoBotException("I didn't get what you meant. Ensure that the command is of the form \"done #index\"");
+        } catch (NumberFormatException ex) {
+            throw new WhoBotException("I didn't get what you meant. "
+                    + "Ensure that the command is of the form \"done #index\"");
         }
     }
 
@@ -91,15 +94,17 @@ public class TaskList {
     public void markAsUndone(String ind, UI ui) throws WhoBotException {
         try {
             int index = Integer.parseInt(ind) - 1;
-            if (index < LIST.size()) {
-                LIST.get(index).markAsUndone();
-                ui.echo("I have marked this task incomplete: \"" + LIST.get(index).getDescription() + "\"",
-                        UI.TYPE.COMPLETE);
+            if (index < list.size()) {
+                list.get(index).markAsUndone();
+                ui.echo("I have marked this task incomplete: \"" + list.get(index).getDescription() + "\"",
+                        UI.Type.COMPLETE);
             } else {
-                throw new WhoBotException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
+                throw new WhoBotException("Oops, The index you gave is out of bound. There are only "
+                        + list.size() + " tasks");
             }
-        } catch (NumberFormatException  ex) {
-            throw new WhoBotException("I didn't get what you meant. Ensure that the command is of the form \"undo #index\"");
+        } catch (NumberFormatException ex) {
+            throw new WhoBotException("I didn't get what you meant. "
+                    + "Ensure that the command is of the form \"undo #index\"");
         }
     }
 
@@ -113,27 +118,29 @@ public class TaskList {
     public void deleteFromList(String ind, UI ui) throws WhoBotException {
         try {
             int index = Integer.parseInt(ind) - 1;
-            if (index < LIST.size()) {
-                Task temp = LIST.get(index);
+            if (index < list.size()) {
+                Task temp = list.get(index);
 
                 //Check for confirmation before deleting
                 ui.echo("Are you sure you want to delete this task: \"" + temp.getDescription() + "\" ? (Yes/No)",
-                        UI.TYPE.COMPLETE);
+                        UI.Type.COMPLETE);
                 System.out.print(UI.COLOR_PURPLE + "> " + UI.COLOR_RESET);
                 String confirm = UI.CMD_READER.nextLine().trim();
                 if (confirm.toLowerCase(Locale.ROOT).equals("yes")) {
-                    LIST.remove(index);
-                    ui.echo("I have deleted this task from the list: \"" + temp.getDescription() + "\"", UI.TYPE.START);
-                    ui.echo("You now have " + LIST.size() + " task(s) in the list.", UI.TYPE.END);
+                    list.remove(index);
+                    ui.echo("I have deleted this task from the list: \"" + temp.getDescription() + "\"", UI.Type.START);
+                    ui.echo("You now have " + list.size() + " task(s) in the list.", UI.Type.END);
                 } else {
-                    ui.echo("The deletion has been cancelled.", UI.TYPE.COMPLETE);
+                    ui.echo("The deletion has been cancelled.", UI.Type.COMPLETE);
                 }
 
             } else {
-                throw new WhoBotException("Oops, The index you gave is out of bound. There are only " + LIST.size() + " tasks");
+                throw new WhoBotException("Oops, The index you gave is out of bound. "
+                        + "There are only " + list.size() + " tasks");
             }
-        } catch (NumberFormatException  ex) {
-            throw new WhoBotException("I didn't get what you meant. Ensure that the command is of the form \"delete #index\"");
+        } catch (NumberFormatException ex) {
+            throw new WhoBotException("I didn't get what you meant. "
+                    + "Ensure that the command is of the form \"delete #index\"");
         }
     }
 
@@ -144,12 +151,12 @@ public class TaskList {
      * @param ui UI to show output to
      * @throws WhoBotException If there is any error on addition
      */
-    public void addTODO(String command, UI ui) throws WhoBotException {
+    public void addTodo(String command, UI ui) throws WhoBotException {
         try {
             Todo task = new Todo(command.substring(5));
-            if (LIST.add(task)) {
-                ui.echo("I have added this ToDo Task to the list: \"" + task.getDescription() + "\"", UI.TYPE.START);
-                ui.echo("You now have " + LIST.size() + " task(s) in the list.", UI.TYPE.END);
+            if (list.add(task)) {
+                ui.echo("I have added this ToDo Task to the list: \"" + task.getDescription() + "\"", UI.Type.START);
+                ui.echo("You now have " + list.size() + " task(s) in the list.", UI.Type.END);
             } else {
                 throw new WhoBotException("I am sorry. The task couldn't be added, please try again.");
             }
@@ -173,9 +180,9 @@ public class TaskList {
                         + " The timing must be given.");
             }
             Event task = new Event(command.substring(6));
-            if (LIST.add(task)) {
-                ui.echo("I have added this Event Task to the list: \"" + task.getDescription() + "\"", UI.TYPE.START);
-                ui.echo("You now have " + LIST.size() + " task(s) in the list.", UI.TYPE.END);
+            if (list.add(task)) {
+                ui.echo("I have added this Event Task to the list: \"" + task.getDescription() + "\"", UI.Type.START);
+                ui.echo("You now have " + list.size() + " task(s) in the list.", UI.Type.END);
             } else {
                 throw new WhoBotException("I am sorry. The task couldn't be added, please try again.");
             }
@@ -195,14 +202,15 @@ public class TaskList {
     public void addDeadline(String command, UI ui) throws WhoBotException {
         try {
             if (!command.contains("/by ")) {
-                throw new WhoBotException("Ensure that the command is of the form \"deadline #description /by #deadline\"."
+                throw new WhoBotException("Ensure that the command is of the form "
+                        + "\"deadline #description /by #deadline\"."
                         + " The deadline must be given.");
             }
             Deadline task = new Deadline(command.substring(9));
-            if (LIST.add(task)) {
+            if (list.add(task)) {
                 ui.echo("I have added this Deadline Task to the list: \"" + task.getDescription() + "\"",
-                        UI.TYPE.START);
-                ui.echo("You now have " + LIST.size() + " task(s) in the list.", UI.TYPE.END);
+                        UI.Type.START);
+                ui.echo("You now have " + list.size() + " task(s) in the list.", UI.Type.END);
             } else {
                 throw new WhoBotException("I am sorry. The task couldn't be added, please try again.");
             }
@@ -226,7 +234,7 @@ public class TaskList {
             }
             LocalDate date = LocalDate.parse(command.split(" /on ")[1], DateTimeFormatter.ofPattern("d/M/yyyy"));
             ArrayList<Task> tasksToDisplay = new ArrayList<>();
-            for (Task tempTask : LIST) {
+            for (Task tempTask : list) {
                 if (tempTask instanceof Deadline) {
                     if (((Deadline) tempTask).getDeadline().toLocalDate().equals(date)) {
                         tasksToDisplay.add(tempTask);
@@ -239,7 +247,7 @@ public class TaskList {
             }
             String dateString = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
             if (tasksToDisplay.isEmpty()) {
-                ui.echo("There are currently no tasks on " + dateString, UI.TYPE.COMPLETE);
+                ui.echo("There are currently no tasks on " + dateString, UI.Type.COMPLETE);
                 return;
             }
             Collections.sort(tasksToDisplay);
@@ -249,7 +257,7 @@ public class TaskList {
                 listString = listString.concat("\t\t\t" + (i + 1) + ". " + tasksToDisplay.get(i) + "\n");
             }
             listString = listString.concat("\t\t\t" + (i + 1) + ". " + tasksToDisplay.get(i));
-            ui.echo(listString, UI.TYPE.COMPLETE);
+            ui.echo(listString, UI.Type.COMPLETE);
         } catch (IndexOutOfBoundsException e) {
             throw new WhoBotException("Ensure that the command is of the form \"show /on #date\"."
                     + " The description can not be empty.");
@@ -265,13 +273,13 @@ public class TaskList {
     public void findTask(String text, UI ui) {
         String searchText = text.substring(6).toLowerCase(Locale.ROOT);
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task : this.LIST) {
+        for (Task task : this.list) {
             if (task.getDescription().toLowerCase(Locale.ROOT).contains(searchText)) {
                 matchingTasks.add(task);
             }
         }
         if (matchingTasks.isEmpty()) {
-            ui.echo("There are currently no tasks that match your search.", UI.TYPE.COMPLETE);
+            ui.echo("There are currently no tasks that match your search.", UI.Type.COMPLETE);
             return;
         }
         String listString = "The tasks in your list that match your search are:\n";
@@ -280,6 +288,6 @@ public class TaskList {
             listString = listString.concat("\t\t\t" + (i + 1) + ". " + matchingTasks.get(i) + "\n");
         }
         listString = listString.concat("\t\t\t" + (i + 1) + ". " + matchingTasks.get(i));
-        ui.echo(listString, UI.TYPE.COMPLETE);
+        ui.echo(listString, UI.Type.COMPLETE);
     }
 }

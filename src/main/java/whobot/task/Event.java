@@ -1,10 +1,10 @@
 package whobot.task;
 
-import whobot.main.WhoBotException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import whobot.main.WhoBotException;
 
 /***
  * Class to Handle Event type Tasks
@@ -110,8 +110,12 @@ public class Event extends Task {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Event event = (Event) o;
         return timing.equals(event.timing) && this.getDescription().equals(event.getDescription());
     }
