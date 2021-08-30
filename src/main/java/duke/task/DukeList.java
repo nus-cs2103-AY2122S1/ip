@@ -24,11 +24,12 @@ public class DukeList {
      * Displays the addition of a task.
      *
      * @param task The task to be displayed.
+     * @return The message associated to the task being displayed.
      */
-    private void displayTask(Task task) {
+    private String displayTask(Task task) {
         String response = "Got it. I've added this task:\n";
         String taskCount = "\nNow you have " + tasks.size() + " tasks in the list.";
-        System.out.println(response + task.toString() + taskCount);
+        return response + task.toString() + taskCount;
     }
 
     /**
@@ -81,9 +82,10 @@ public class DukeList {
      * Adds a ToDos task to the list.
      *
      * @param text Body of the duke.task to be added.
+     * @return The message associated to the task being displayed.
      * @throws DukeException If there is no text.
      */
-    public void addToDo(String text) throws DukeException {
+    public String addToDo(String text) throws DukeException {
         String message = text.trim();
 
         if (message.equals("")) {
@@ -94,15 +96,16 @@ public class DukeList {
 
         tasks.add(input);
 
-        displayTask(input);
+        return displayTask(input);
     }
 
     /**
      * Adds a Deadlines task to the list.
      *
      * @param text Body of the task to be added.
+     * @return The message associated to the task being displayed.
      */
-    public void addDeadlines(String text) throws DukeException {
+    public String addDeadlines(String text) throws DukeException {
         String[] strings = text.split(" /by ", 2);
 
         String limit = strings[1];
@@ -111,7 +114,7 @@ public class DukeList {
 
             tasks.add(input);
 
-            displayTask(input);
+            return displayTask(input);
         } catch (DateTimeParseException e) {
             throw new DukeException("☹ OOPS!!! The deadline follows the format yyyy-MM-dd.");
         }
@@ -121,8 +124,9 @@ public class DukeList {
      * Adds an Events task to the list.
      *
      * @param text Body of the task to be added.
+     * @return The message associated to the task being displayed.
      */
-    public void addEvents(String text) {
+    public String addEvents(String text) {
         String[] strings = text.split(" /at ", 2);
 
         String limit = strings.length == 1 ? "" : strings[1];
@@ -131,53 +135,59 @@ public class DukeList {
 
         tasks.add(input);
 
-
-        displayTask(input);
+        return displayTask(input);
     }
 
     /**
      * Lists out the current tasks in the list.
+     *
+     * @return The list of tasks in the list.
      */
-    public void list() {
-        System.out.println("Here are the tasks in your list:");
+    public String list() {
+        String str = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
+            str += (i + 1) + "." + tasks.get(i).toString() + "\n";
         }
+
+        return str;
     }
 
     /**
      * Marks a task in the list as done.
      *
      * @param item Index of the task marked as done.
+     * @return The message associated to the task being done.
      */
-    public void done(int item) {
+    public String done(int item) {
         Task task = tasks.get(item - 1);
         task.done();
 
         String response = "Nice! I've marked this task as done:\n";
-        System.out.println(response + task.toString());
+        return response + task.toString();
     }
 
     /**
      * Deletes a task from the list.
      *
      * @param item Index of the task to be deleted.
+     * @return The message associated to the task being deleted.
      */
-    public void delete(int item) {
+    public String delete(int item) {
         Task task = tasks.get(item - 1);
         tasks.remove(item - 1);
 
         String response = "Noted. I've removed this task:\n";
         String taskCount = "\nNow you have " + tasks.size() + " tasks in the list.";
-        System.out.println(response + task.toString() + taskCount);
+        return response + task.toString() + taskCount;
     }
 
     /**
      * Finds all tasks in list with the input keyword.
      *
      * @param input User input keyword.
+     * @return The response to the number of tasks found.
      */
-    public void find(String input) {
+    public String find(String input) {
         String trimmedInput = input.trim();
         String str = "";
         String msg;
@@ -197,9 +207,9 @@ public class DukeList {
         }
 
         if (count == 0) {
-            System.out.println("Sorry no tasks found that match your input.");
+            return "Sorry no tasks found that match your input.";
         } else {
-            System.out.println(str + "Are these the tasks you're looking for?");
+            return str + "Are these the tasks you're looking for?";
         }
     }
 

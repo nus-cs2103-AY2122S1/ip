@@ -47,7 +47,7 @@ public class Ui {
         String input = scan.nextLine();
 
         while (!input.equals("bye")) {
-            this.parser.parse(input);
+            System.out.println(this.parser.parse(input));
 
             input = scan.nextLine();
         }

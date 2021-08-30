@@ -29,36 +29,41 @@ public class Parser {
      * Parses user input to duke and runs the appropriate function.
      *
      * @param input User input.
+     * @return The response to the user's input.
      */
-    public void parse(String input) {
+    public String parse(String input) {
         String[] segment = input.split(" ", 2);
+
+        String response;
 
         try {
             if (input.equals("list")) {
-                list.list();
+                response = list.list();
             } else if (segment[0].equals("done") && segment.length == 2) {
-                list.done(Integer.parseInt(segment[1]));
+                response = list.done(Integer.parseInt(segment[1]));
                 storage.save();
             } else if (segment[0].equals("delete") && segment.length == 2) {
-                list.delete(Integer.parseInt(segment[1]));
+                response = list.delete(Integer.parseInt(segment[1]));
                 storage.save();
             } else if (segment[0].equals("todo")) {
-                list.addToDo(input.split("todo", 2)[1]);
+                response = list.addToDo(input.split("todo", 2)[1]);
                 storage.save();
             } else if (segment[0].equals("deadline")) {
-                list.addDeadlines(input.split("deadline", 2)[1]);
+                response = list.addDeadlines(input.split("deadline", 2)[1]);
                 storage.save();
             } else if (segment[0].equals("event")) {
-                list.addEvents(input.split("event", 2)[1]);
+                response = list.addEvents(input.split("event", 2)[1]);
                 storage.save();
             } else if (segment[0].equals("find")) {
-                list.find(input.split("find", 2)[1]);
+                response = list.find(input.split("find", 2)[1]);
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry,"
                         + " but I don't know what that means :-(");
             }
+
+            return response;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }
