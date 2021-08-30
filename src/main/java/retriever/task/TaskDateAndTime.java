@@ -30,8 +30,8 @@ public class TaskDateAndTime {
     public boolean isValidDate() {
         String[] userInputDate = userInputDateAndTime.split("/");
 
-        if(userInputDate.length == 3) {
-            taskDateAndTime = LocalDate.parse(userInputDate[2] + "-" +userInputDate[1] + "-" + userInputDate[0]);
+        if (userInputDate.length == 3) {
+            taskDateAndTime = LocalDate.parse(userInputDate[2] + "-" + userInputDate[1] + "-" + userInputDate[0]);
         }
 
         return userInputDate.length == 3;

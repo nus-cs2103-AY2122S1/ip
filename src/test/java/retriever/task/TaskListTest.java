@@ -1,17 +1,17 @@
 package retriever.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import retriever.Storage;
 import retriever.exception.IllegalDateFormatException;
 import retriever.exception.IllegalDeadlineFormatException;
 import retriever.exception.RetrieverException;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TaskListTest {
     @Test

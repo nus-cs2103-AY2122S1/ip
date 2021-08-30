@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 import retriever.Storage;
 import retriever.Ui;
-
-import retriever.exception.IllegalDeadlineFormatException;
 import retriever.exception.IllegalDateFormatException;
+import retriever.exception.IllegalDeadlineFormatException;
 import retriever.exception.IllegalEventFormatException;
 import retriever.exception.IllegalTaskNumberException;
 import retriever.exception.IllegalTodoFormatException;
@@ -63,7 +62,7 @@ public class TaskList {
 
         // Making sure that the time is properly formatted.
         TaskDateAndTime deadlineDate = new TaskDateAndTime(userInputArray[1]);
-        if(!deadlineDate.isValidDate()) {
+        if (!deadlineDate.isValidDate()) {
             throw new IllegalDateFormatException("Please Follow The Date Format DD/MM/YYYY");
         }
 
@@ -94,7 +93,7 @@ public class TaskList {
 
         // Making sure that the date is properly formatted.
         TaskDateAndTime eventDate = new TaskDateAndTime(userInputArray[1]);
-        if(!eventDate.isValidDate()) {
+        if (!eventDate.isValidDate()) {
             throw new IllegalDateFormatException("Please Follow The Date Format DD/MM/YYYY");
         }
 
