@@ -16,7 +16,7 @@ import lifeline.Lifeline;
 
 
 /**
- * Controller for abc.controller.MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
