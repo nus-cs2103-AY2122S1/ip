@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,11 +11,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
+import duke.task.Task;
+
 /**
  * Manages the reading and writing of files onto the disk.
  */
 public class Storage {
-    private final File DATA_FILE;
+    private final File dataFile;
 
     /**
      * Initialises a new Storage with the given file location to save.
@@ -26,10 +26,10 @@ public class Storage {
      * @param filepath path to a .txt file
      */
     public Storage(String filepath) {
-        DATA_FILE = new File(filepath);
+        dataFile = new File(filepath);
 
         //Create data file if missing
-        if (!DATA_FILE.exists()) {
+        if (!dataFile.exists()) {
             try {
                 Files.createDirectory(Path.of("data"));
                 Files.createFile(Path.of(filepath));
@@ -47,13 +47,13 @@ public class Storage {
      */
     public ArrayList<Task> readFromDisk() {
         // Return empty list if file is empty
-        if (DATA_FILE.length() == 0) {
+        if (dataFile.length() == 0) {
             return new ArrayList<>();
         }
 
         // Else, deserialize data
         try {
-            FileInputStream f = new FileInputStream(DATA_FILE);
+            FileInputStream f = new FileInputStream(dataFile);
             ObjectInputStream i = new ObjectInputStream(f);
 
             return (ArrayList<Task>) (i.readObject());
@@ -78,7 +78,7 @@ public class Storage {
      */
     public void writeToDisk(ArrayList<Task> taskList) {
         try {
-            FileOutputStream f = new FileOutputStream(DATA_FILE);
+            FileOutputStream f = new FileOutputStream(dataFile);
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             o.writeObject(taskList);

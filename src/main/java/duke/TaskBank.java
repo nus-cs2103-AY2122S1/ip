@@ -1,11 +1,11 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.function.Function;
+
 import duke.task.Task;
 import duke.util.DukeException;
 import duke.util.Utility;
-
-import java.util.ArrayList;
-import java.util.function.Function;
 
 /**
  * Stores and manages the user's list of tasks.
@@ -46,7 +46,7 @@ public class TaskBank {
      *
      * @param input task to mark represented as a formatted string (done [id])
      */
-    public void  markTask(String input) {
+    public void markTask(String input) {
         int taskId = -1;
         try {
             taskId = Utility.getIdFromString(input, "done ");

@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -11,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import duke.task.Task;
 
 /**
  * Handles Duke's User Interface.

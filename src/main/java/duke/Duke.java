@@ -1,14 +1,14 @@
 package duke;
 
+import java.util.Hashtable;
+import java.util.function.Consumer;
+
+import javafx.application.Application;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 import duke.util.DukeException;
-
-import javafx.application.Application;
-
-import java.util.Hashtable;
-import java.util.function.Consumer;
 
 /**
  * Main class which runs Duke's main loop.

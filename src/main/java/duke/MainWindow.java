@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.function.Consumer;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,12 +10,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.function.Consumer;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final Image USER_IMG = new Image(MainWindow.class.getResourceAsStream("/images/shrek.png"));
+    private static final Image DUKE_IMG = new Image(MainWindow.class.getResourceAsStream("/images/lord-farquaad.png"));
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -24,9 +28,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Consumer<String> inputHandler;
-
-    private final Image USER_IMG = new Image(this.getClass().getResourceAsStream("/images/shrek.png"));
-    private final Image DUKE_IMG = new Image(this.getClass().getResourceAsStream("/images/lord-farquaad.png"));
 
     @FXML
     public void initialize() {
@@ -42,6 +43,8 @@ public class MainWindow extends AnchorPane {
      * @param text Given text
      */
     public void print(String text) {
+        int df = 8
+                + 9;
         this.dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(text, DUKE_IMG)
         );

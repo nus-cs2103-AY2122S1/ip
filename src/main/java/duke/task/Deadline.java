@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.util.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+
+import duke.util.DukeException;
 
 /**
  * A Task with a given finishing date.

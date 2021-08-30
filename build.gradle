@@ -42,6 +42,6 @@ dependencies {
 }
 
 checkstyle {
-    configFile file('su_edu.xml')
+    configFile file('config/checkstyle.xml')
     toolVersion = '8.45'
 }

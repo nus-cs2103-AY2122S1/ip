@@ -1,20 +1,18 @@
 package duke.task;
 
-import duke.util.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+
+import duke.util.DukeException;
 
 /**
  * Task with a time of occurrence.
  */
 public class Event extends Task {
 
-    private static final DateTimeFormatter DATE_SHORT_FORMATTER
-            = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private static final DateTimeFormatter DATE_MED_FORMATTER
-            = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
+    private static final DateTimeFormatter DATE_SHORT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter DATE_MED_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
 
     private LocalDate on;
 
