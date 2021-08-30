@@ -1,8 +1,8 @@
 T | 1 | new
 T | 0 | fly
 T | 1 | new
-E | 1 | somthing  | china
+E | 1 | something  | china
 D | 0 | eat  | dinner
 T | 0 | return book
 T | 0 | remove book
-T | 1 | enjoy food 
+T | 1 | enjoy food
