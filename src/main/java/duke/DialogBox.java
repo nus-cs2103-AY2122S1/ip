@@ -14,6 +14,11 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.Collections;
 
+/**
+ * Custom control modelled with FXML tools.
+ * Serves as a container consisting of an Image(photo) as well as the Label(text message) of the User/Duke.
+ */
+
 public class DialogBox extends HBox {
 
     @FXML
@@ -35,9 +40,6 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */

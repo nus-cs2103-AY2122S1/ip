@@ -6,8 +6,7 @@ import duke.exceptions.InvalidDirectoryException;
 import duke.exceptions.InvalidStorageFilePathException;
 
 /**
- * Entry point for the Duke Application.
- * Application is initialised here and user interaction starts.
+ * Models a custom CLI guided Chatbot for task tracking
  */
 
 public class Duke {
@@ -35,6 +34,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Parses the user input to get a display response for the GUI
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
@@ -44,6 +46,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Displays this startup message upon initialization of the app
+     */
     public String showOpeningMessage() {
         return "Hello! This is Duke :)\n"
                 + "To use my AUTOSAVE feature, please type 'bye' when you're done!\n"

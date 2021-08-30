@@ -8,6 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Controller for MainWindow.
+ * This class will provide the layout for other controls.
+ */
+
 public class MainWindow extends AnchorPane {
 
     @FXML
