@@ -3,6 +3,10 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * The class for creating and managing the list of tasks.
+ */
 public class TaskList {
     private static TaskList MainList = null;
     private ArrayList<Task> taskList = new ArrayList<>();

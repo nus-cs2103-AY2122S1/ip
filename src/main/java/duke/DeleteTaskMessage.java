@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * The class for creating Duke' response after a task is deleted from the list.
+ */
 public class DeleteTaskMessage extends DukeMessage{
     private Task deletedTask;
     private int taskIndex;

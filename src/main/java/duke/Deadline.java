@@ -3,6 +3,9 @@ package duke;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
+/**
+ * The class for creating and managing Deadlines added to TaskList. Extends Task.
+ */
 public class Deadline extends Task {
     private boolean done;
     private String taskString;

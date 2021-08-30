@@ -2,6 +2,9 @@ package duke;
 
 import java.io.IOException;
 
+/**
+ * The main class running Duke.
+ */
 public class Duke {
     //true indicates the conversation is ongoing
     public static boolean conversationState;

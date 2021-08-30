@@ -2,6 +2,9 @@ package duke;
 
 import duke.AddTaskMessage;
 
+/**
+ * The factory class responsible for instantiating the right sub-type of DukeMessage.
+ */
 public class MessageFactory {
     public static DukeMessage createMessage(String userStr) {
         try {
