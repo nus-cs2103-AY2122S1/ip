@@ -2,7 +2,7 @@ import duke.*;
 import duke.command.*;
 import duke.tasks.*;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CommandTest {
     @Test
