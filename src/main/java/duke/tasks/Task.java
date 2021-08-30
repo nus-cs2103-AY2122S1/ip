@@ -21,6 +21,10 @@ public class Task {
         String isDoneString = isDone ? "1" : "0";
         return " | " + isDoneString + " | " + description;
     }
+
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword);
+    }
     
     @Override
     public String toString() {

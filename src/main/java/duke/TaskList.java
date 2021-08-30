@@ -24,6 +24,17 @@ public class TaskList {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
     }
+
+    public void printTaskList(boolean isFindCommand) {
+        if (tasks.size() == 0) {
+            System.out.println("There are no matching tasks in the list.");
+            return;
+        }
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            System.out.println((i + 1) + ". " + tasks.get(i));
+        }
+    }
     
     protected int getLength() {
         return tasks.size();
@@ -64,6 +75,16 @@ public class TaskList {
         }
     }
 
+    public TaskList findTasksWithKeyword(String keyword) {
+        ArrayList<Task> arrListTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.containsKeyword(keyword)) {
+                arrListTasks.add(task);
+            }
+        }
+        return new TaskList(arrListTasks);
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TaskList) {
