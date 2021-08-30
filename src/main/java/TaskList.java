@@ -48,12 +48,12 @@ public class TaskList {
     }
 
     public static TaskList load() throws FileNotFoundException {
-        return new TaskList(SaveHandler.retrieveTaskList());
+        return new TaskList(Storage.retrieveTaskList());
     }
 
     public void save() {
         try {
-            SaveHandler.saveTaskList(userList);
+            Storage.saveTaskList(userList);
         } catch (Exception exception) {
             System.out.println("Saving failed: " + exception);
         }
