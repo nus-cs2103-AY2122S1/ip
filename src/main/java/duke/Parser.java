@@ -24,43 +24,40 @@ public class Parser {
      * @return The command that is with respect to the user input.
      * @throws DukeException In the event that the user input is invalid.
      */
-    public static Command parse(String inputText) throws DukeException {
-        if (inputText.equals("bye")) {
-            return new EndCommand();
+    public static Command parse(String... inputText) throws DukeException {
+        if (inputText.length == 1) {
+            switch (inputText[0]) {
+            case "bye":
+                return new EndCommand();
+            case "list":
+                return new ListCommand();
+            case "delete":
+                throw new DukeException("empty delete");
+            case "todo":
+                throw new DukeException("empty todo");
+            case "deadline":
+                throw new DukeException("empty deadline");
+            case "event":
+                throw new DukeException("empty event");
+            case "find":
+                throw new DukeException("empty find");
+            default:
+                throw new DukeException("invalid input");
+            }
         } else {
-            String[] inputArr = inputText.split(" ", 2);
-            if (inputArr.length == 1) {
-                switch (inputArr[0]) {
-                case "list":
-                    return new ListCommand();
-                case "delete":
-                    throw new DukeException("empty delete");
-                case "todo":
-                    throw new DukeException("empty todo");
-                case "deadline":
-                    throw new DukeException("empty deadline");
-                case "event":
-                    throw new DukeException("empty event");
-                case "find":
-                    throw new DukeException("empty find");
-                default:
-                    throw new DukeException("invalid input");
-                }
-            } else {
-                switch (inputArr[0]) {
-                case "todo" :
-                case "deadline":
-                case "event":
-                    return new AddCommand(inputArr[1], inputArr[0]);
-                case "done":
-                    return new DoneCommand(inputArr[1]);
-                case "delete":
-                    return new DeleteCommand(inputArr[1]);
-                case "find":
-                    return new FindCommand(inputArr[1]);
-                default:
-                    throw new DukeException("invalid input");
-                }
+            switch (inputText[0]) {
+            case "todo":
+            case "deadline":
+            case "event":
+                return new AddCommand(inputText[1], inputText[0]);
+            case "done":
+                return new DoneCommand(inputText[1]);
+            case "delete":
+                return new DeleteCommand(inputText[1]);
+            case "find":
+                return new FindCommand(inputText[1]);
+            default:
+                throw new DukeException("invalid input");
             }
         }
     }
