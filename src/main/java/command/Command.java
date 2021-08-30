@@ -11,7 +11,7 @@ public abstract class Command {
 
     protected String args;
 
-    protected Command(String args){
+    protected Command(String args) {
         this.args = args;
     }
 
@@ -23,9 +23,9 @@ public abstract class Command {
      * @throws DukeException if command is invalid.
      */
     public static Command createCommand(String input) throws DukeException {
-        String[] cmd_args = Parser.parseUserInput(input);
+        String[] cmdArgs = Parser.parseUserInput(input);
         Command cmd;
-        switch (cmd_args[0]){
+        switch (cmdArgs[0]) {
         case "bye":
             cmd = new ByeCommand();
             break;
@@ -33,22 +33,22 @@ public abstract class Command {
             cmd = new ListCommand();
             break;
         case "done":
-            cmd = new DoneCommand(cmd_args[1]);
+            cmd = new DoneCommand(cmdArgs[1]);
             break;
         case "delete":
-            cmd = new DeleteCommand(cmd_args[1]);
+            cmd = new DeleteCommand(cmdArgs[1]);
             break;
         case "find":
-            cmd = new FindCommand(cmd_args[1]);
+            cmd = new FindCommand(cmdArgs[1]);
             break;
         case "todo":
-            cmd = new TodoCommand(cmd_args[1]);
+            cmd = new TodoCommand(cmdArgs[1]);
             break;
         case "event":
-            cmd = new EventCommand(cmd_args[1]);
+            cmd = new EventCommand(cmdArgs[1]);
             break;
         case "deadline":
-            cmd = new DeadlineCommand(cmd_args[1]);
+            cmd = new DeadlineCommand(cmdArgs[1]);
             break;
         default:
             throw new DukeException("command not found");

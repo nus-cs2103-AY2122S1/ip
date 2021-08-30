@@ -14,14 +14,14 @@ public class Event extends Task {
         super(name);
         try {
             this.at = LocalDate.parse(at);
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("incorrect date format");
         }
     }
 
     @Override
-    public String saveTask(){
-        return "event|" + this.getName() +"/at" + at + (this.isDone() ? "|1" : "|0");
+    public String saveTask() {
+        return "event|" + this.getName() + "/at" + at + (this.isDone() ? "|1" : "|0");
     }
 
     @Override

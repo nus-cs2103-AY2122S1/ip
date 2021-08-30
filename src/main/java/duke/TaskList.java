@@ -1,13 +1,14 @@
 package duke;
 
 import java.util.ArrayList;
+
 import task.Task;
 
 public class TaskList {
 
     private ArrayList<Task> tasks;
 
-    public TaskList(){
+    public TaskList() {
         tasks = new ArrayList<>();
     }
 
@@ -16,7 +17,7 @@ public class TaskList {
      *
      * @param t Task to add to task list.
      */
-    public void add(Task t){
+    public void add(Task t) {
         this.tasks.add(t);
         System.out.println("You have " + tasks.size() + " tasks in the list");
         System.out.println(t);
@@ -27,14 +28,14 @@ public class TaskList {
      *
      * @param s String stored in storage.
      */
-    public void add(String s){
+    public void add(String s) {
         this.tasks.add(Task.getTask(s));
     }
 
     /**
      * Prints all the Tasks in task list.
      */
-    public void printTasks(){
+    public void printTasks() {
         System.out.println(this.toString());
     }
 
@@ -44,8 +45,8 @@ public class TaskList {
      * @param Id Id of tasks done.
      * @throws DukeException if Id is invalid.
      */
-    public void doneTask(int Id) throws DukeException{
-        if(Id >= this.tasks.size()){
+    public void doneTask(int Id) throws DukeException {
+        if (Id >= this.tasks.size()) {
             throw new DukeException("no such task");
         }
         Task t = this.tasks.get(Id);
@@ -58,8 +59,8 @@ public class TaskList {
      * @param Id Id of task to delete.
      * @throws DukeException if Id is invalid.
      */
-    public void deleteTask(int Id) throws DukeException{
-        if(Id >= this.tasks.size()){
+    public void deleteTask(int Id) throws DukeException {
+        if (Id >= this.tasks.size()) {
             throw new DukeException("no such task");
         }
         this.tasks.remove(Id);
@@ -71,12 +72,12 @@ public class TaskList {
      *
      * @param keyword Keyword used to find Task.
      */
-    public void findTasks(String keyword){
+    public void findTasks(String keyword) {
         System.out.println("Matching task(s) are:");
         for (int i = 0; i < tasks.size(); i++) {
             Task t = tasks.get(i);
             String name = t.getName();
-            if(name.contains(keyword)){
+            if (name.contains(keyword)) {
                 System.out.println(i + ": " + t.toString());
             }
         }
@@ -87,7 +88,7 @@ public class TaskList {
      *
      * @return String representing task list
      */
-    public String saveTasklist(){
+    public String saveTasklist() {
         String txt = "";
         for (int i = 0; i < tasks.size(); i++) {
             txt = txt + tasks.get(i).saveTask() + "\n";
@@ -96,7 +97,7 @@ public class TaskList {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder out = new StringBuilder();
         for (int i = 0; i < this.tasks.size(); i++) {
             out.append(i).append(": ").append(this.tasks.get(i).toString()).append("\n");

@@ -11,11 +11,11 @@ public class Storage {
 
     private final File file;
 
-    public Storage(String path_to_file){
-        file = new File(path_to_file);
+    public Storage(String pathToFile) {
+        file = new File(pathToFile);
         try {
             createDirectory(file.getParentFile());
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.createNewFile();
             }
         } catch (IOException e) {
@@ -24,7 +24,7 @@ public class Storage {
         }
     }
 
-    private void createDirectory(File file){
+    private void createDirectory(File file) {
         if (file.exists()) {
             return;
         } else {
@@ -60,7 +60,7 @@ public class Storage {
      *
      * @param tasklist Task list containing Tasks to store.
      */
-    public void saveToFile(TaskList tasklist){
+    public void saveToFile(TaskList tasklist) {
         try {
             String txt = tasklist.saveTasklist();
             FileWriter myWriter = new FileWriter(file);
