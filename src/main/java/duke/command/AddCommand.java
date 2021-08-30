@@ -77,7 +77,7 @@ public class AddCommand extends Command{
         }
         taskList.addTask(task);
         storage.save(taskList);
-        ui.showReply(
+        ui.printStringInBox(
                 String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.",
                         task.getStatusIcon(), task.getDescription(), taskList.size()));
 

@@ -41,7 +41,7 @@ public class DoneCommand extends Command{
         Task task = taskList.getTask(Integer.parseInt(parameter));
         taskList.markAsDone(Integer.parseInt(parameter));
         storage.save(taskList);
-        ui.showReply(String.format("Nice! I've marked this task as done:\n  %s %s",
+        ui.printStringInBox(String.format("Nice! I've marked this task as done:\n  %s %s",
                 task.getStatusIcon(), task.getDescription()));
     }
 

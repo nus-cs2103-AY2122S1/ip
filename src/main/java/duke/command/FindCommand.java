@@ -47,7 +47,7 @@ public class FindCommand extends Command{
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
         sb.append(searchList.toString());
-        ui.showReply(sb.toString());
+        ui.printStringInBox(sb.toString());
     }
 
     /**

@@ -34,7 +34,7 @@ public class ListCommand extends Command{
         StringBuilder sb = new StringBuilder();
         sb.append("Here is your task list:\n");
         sb.append(taskList.toString());
-        ui.showReply(sb.toString());
+        ui.printStringInBox(sb.toString());
     }
 
     /**

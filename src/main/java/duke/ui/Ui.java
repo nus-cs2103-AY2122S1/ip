@@ -12,8 +12,8 @@ import java.util.Scanner;
 public class Ui {
 
     // Name & logo of the chatbot
-    private final String chatbotName = "Barry";
-    private final String logo = " ____          _____  _______     __\n"
+    private final String CHATBOT_NAME = "Barry";
+    private final String LOGO = " ____          _____  _______     __\n"
             + "|  _ \\   /\\   |  __ \\|  __ \\ \\   / /\n"
             + "| |_) | /  \\  | |__) | |__) \\ \\_/ /\n"
             + "|  _ < / /\\ \\ |  _  /|  _  / \\   /\n"
@@ -33,15 +33,15 @@ public class Ui {
      * Prints the greeting text to user.
      */
     public void greetUser() {
-        System.out.println(logo);
-        showReply(String.format("Hello! I'm %s \nWhat can I do for you?", this.chatbotName));
+        System.out.println(LOGO);
+        printStringInBox(String.format("Hello! I'm %s \nWhat can I do for you?", CHATBOT_NAME));
     }
 
     /**
      * Print exit Message.
      */
     public void exit() {
-        showReply("Bye. Hope to see you again soon!");
+        printStringInBox("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -49,7 +49,7 @@ public class Ui {
      *
      * @param string The string to be formatted
      */
-    public void showReply(String string) {
+    public void printStringInBox(String string) {
         String[] textLine = string.split("\n");
         int maxLength = Arrays.stream(textLine).map(String::length).max(Integer::compareTo).orElse(-1);
         String lineStart = "." + "-".repeat(maxLength + 2) + ".";
@@ -66,7 +66,7 @@ public class Ui {
      *
      * @param string The string to be formatted
      */
-    public void showError(String string) {
+    public void printStringInErrorBox(String string) {
         String[] textLine = string.split("\n");
         int maxLength = Arrays.stream(textLine).map(String::length).max(Integer::compareTo).orElse(-1);
         String lineStart = "." + "+".repeat(maxLength + 2) + ".";
@@ -83,7 +83,7 @@ public class Ui {
      *
      * @return The user input as a string
      */
-    public String readCommand() {
+    public String getCommand() {
         return sc.nextLine();
     }
 }

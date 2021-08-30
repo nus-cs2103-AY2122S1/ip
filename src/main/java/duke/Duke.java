@@ -30,7 +30,7 @@ public class Duke {
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            ui.printStringInErrorBox(e.getMessage());
             taskList = new TaskList();
         }
     }
@@ -43,12 +43,12 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
+                String fullCommand = ui.getCommand();
                 Command c = Parser.parse(fullCommand);
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                ui.printStringInErrorBox(e.getMessage());
             }
         }
     }
