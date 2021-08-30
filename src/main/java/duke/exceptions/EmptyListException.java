@@ -10,7 +10,7 @@ public class EmptyListException extends DukeException {
      * This is the EmptyListException constructor.
      */
     public EmptyListException() {
-        super("☹ Sorry! The list is empty! ☹");
+        super("The list is empty!");
     }
 
 }

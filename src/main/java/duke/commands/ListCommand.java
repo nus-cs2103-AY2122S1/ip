@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import duke.exceptions.EmptyListException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * This is a ListCommand class that extends Command.
@@ -11,15 +11,15 @@ import duke.exceptions.EmptyListException;
 public class ListCommand extends Command {
 
     /**
-     * This is a ListCommand Constructor
+     * This is a ListCommand Constructor.
      */
     public ListCommand() {
         super("list");
     }
 
     @Override
-    public void execute(TaskList taskList, Storage store, Ui ui) throws EmptyListException {
-        taskList.printTasks(ui);
+    public String execute(TaskList taskList, Storage store, Ui ui) throws EmptyListException {
+        return taskList.printTasks(ui);
     }
 
     @Override

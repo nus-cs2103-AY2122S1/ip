@@ -10,7 +10,7 @@ public class UnknownCommandException extends DukeException {
      * This is the UnknownCommandException constructor.
      */
     public UnknownCommandException() {
-        super("☹ OOPS!!! I'm sorry, but I don't know what you mean ☹");
+        super("OOPS!!! You better think again");
     }
 
 }

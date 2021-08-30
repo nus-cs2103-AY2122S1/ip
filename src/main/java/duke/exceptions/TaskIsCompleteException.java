@@ -24,7 +24,7 @@ public class TaskIsCompleteException extends DukeException {
 
     @Override
     public String getMessage() {
-        return String.format("☹ OOPS! I think you have already completed task %d !☹", this.index);
+        return String.format("OOPS! I think you have already completed task %d !", this.index);
     }
 
 }

@@ -1,10 +1,10 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import duke.exceptions.EmptyListException;
 import duke.exceptions.TaskNotFoundException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * This is a FindCommand class that extends Command
@@ -12,7 +12,7 @@ import duke.exceptions.TaskNotFoundException;
 public class FindCommand extends Command {
 
     /**
-     * This is the class field of a FindCommand
+     * This is the class field of a FindCommand.
      */
     private final String keyword;
 
@@ -25,7 +25,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage store, Ui ui) throws EmptyListException, TaskNotFoundException {
-        taskList.printFindTasks(ui, this.keyword);
+    public String execute(TaskList taskList, Storage store, Ui ui) throws EmptyListException, TaskNotFoundException {
+        return taskList.printFindTasks(ui, this.keyword);
     }
 }

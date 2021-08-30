@@ -18,7 +18,7 @@ public class TaskNotFoundException extends DukeException {
      * @param index An index representing the task the user attempts to find, but does not exist.
      */
     public TaskNotFoundException(int index) {
-        super("☹ OOPS!!! There is no such task!");
+        super("OOPS!!! There is no such task!");
         this.index = index;
         this.hasIndex = true;
     }
@@ -27,7 +27,7 @@ public class TaskNotFoundException extends DukeException {
      * This is an Overloaded TaskNotFoundException for no index specified.
      */
     public TaskNotFoundException() {
-        super("☹ OOPS!!! There is no such task!");
+        super("OOPS!!! There is no such task!");
         this.index = 0;
         this.hasIndex = false;
     }
@@ -36,7 +36,7 @@ public class TaskNotFoundException extends DukeException {
     public String getMessage() {
         if (this.hasIndex) {
             return super.getMessage()
-                    + String.format("\n    I can't seem to find the task at number %d !", this.index);
+                    + String.format("\nI can't seem to find the task at number %d !", this.index);
         } else {
             return super.getMessage();
         }

@@ -10,7 +10,7 @@ public class DukeFileException extends DukeException {
      * This is a DukeFileException constructor.
      */
     public DukeFileException() {
-        super("☹ OOPS!!! Error loading file!!");
+        super("I guess I got an error loading data. Hmmm...");
     }
 
 }

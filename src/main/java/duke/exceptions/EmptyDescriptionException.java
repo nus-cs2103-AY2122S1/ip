@@ -12,7 +12,7 @@ public class EmptyDescriptionException extends DukeException {
     private final String command;
 
     /**
-     * This is a EmptyDescriptionException Contructor.
+     * This is a EmptyDescriptionException Constructor.
      *
      * @param command A String representing the command provided but without description.
      */
@@ -23,6 +23,6 @@ public class EmptyDescriptionException extends DukeException {
 
     @Override
     public String getMessage() {
-        return String.format("☹ OOPS!!! The description of %s cannot be empty.", this.command);
+        return String.format("OOPS!!! The description of %s cannot be empty.", this.command);
     }
 }
