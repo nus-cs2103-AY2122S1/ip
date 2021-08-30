@@ -1,8 +1,16 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Date;
+
 import org.json.simple.JSONObject;
 
 public class Deadline extends Task {
 
     private String by;
+    private String formattedDate;
+    private String formattedTime;
 
     public Deadline(String name, String by) {
         super(name);
@@ -17,8 +25,13 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        String[] date = by.split(" ",2);
+        LocalDate ld = LocalDate.parse(date[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        formattedDate = ld.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
+        LocalTime lt = LocalTime.parse(date[1], DateTimeFormatter.ofPattern("HHmm"));
+        formattedTime = lt.format(DateTimeFormatter.ofPattern("hh:mm a"));
         return String.format("[D]%s %s %s", isCompleted ? "[X]" : "[ ]", description,
-                "(by: " + by + ")");
+                "(by: " + formattedDate + ", " + formattedTime + ")");
     }
 
     @Override
