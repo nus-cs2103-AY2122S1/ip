@@ -1,36 +1,29 @@
 package duke;
 
+
+
 /**
  * Duke is a simple bot that allows users to keep track of different types of tasks.
  */
 public class Duke {
     private final Storage storage;
     private final TaskList tasks;
-    private final UI ui;
+    private Parser parser;
 
+    /**
+     * Constructs an instance of Duke.
+     *
+     * @param filePath the path to save data
+     */
     public Duke(String filePath) {
         this.storage = new Storage(filePath);
         this.tasks = this.storage.loadTasks();
-        this.ui = new UI();
+        this.parser = new Parser(tasks);
     }
 
-    /**
-     * Runs Duke and parses input using Parser class.
-     */
-    public void run() {
-        UI.greet();
-        Parser parser = new Parser(this.tasks);
-        while (!parser.isExit()) {
-            String userInput = ui.readInput();
-            parser.commands(userInput);
-            storage.saveData(tasks.encodeTasks());
-        }
+    public String getResponse(String input) {
+        return this.parser.getResponse(input);
     }
 
-    public static void main(String[] args) {
-        new Duke("data/Duke.txt").run();
 
-    }
 }
-
-

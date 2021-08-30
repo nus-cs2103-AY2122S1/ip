@@ -3,11 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.exception.InvalidFindException;
-import duke.exception.InvalidIndexException;
-import duke.exception.NoDateException;
-import duke.exception.NoDateIndicatorException;
-import duke.exception.NoTaskDescriptionException;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -36,78 +32,62 @@ public class TaskList {
     }
 
     /**
-     * Marks the task as complete and prints out the task, throws error if done command is not properly formatted.
+     * Marks the task as complete and return confirmation message,
+     * return error message if done command is not properly formatted.
      *
      * @param userInput the index of the task in lis.
+     * @throws DukeException exception thrown by Duke
      */
-    public void completeAndPrintTask(String userInput) {
+    public String completeTask(String userInput) throws DukeException {
         String[] tokens = userInput.split(" ");
         int taskNumber;
         boolean isTaskDoneCommand = tokens.length == 2 && tokens[0].equals("done");
         try {
-            try {
-                taskNumber = Integer.parseInt(tokens[1]);
-            } catch (NumberFormatException err) {
-                throw new InvalidIndexException("done");
-            }
+            taskNumber = Integer.parseInt(tokens[1]);
             if (!isTaskDoneCommand || taskNumber > tasks.size()) {
-                throw new InvalidIndexException("done");
+                throw new DukeException("OOPS!!! The task to set as done does not exists. Please try again!");
             }
-        } catch (InvalidIndexException err) {
-            UI.printErrorMessage(err);
-            return;
+        } catch (NumberFormatException err) {
+            throw new DukeException("OOPS!!! The task to set as done does not exists. Please try again!");
         }
-
-        UI.printLine();
-        UI.printRobotMsg("You have completed the following task:");
         tasks.get(taskNumber - 1).completeTask();
-        UI.printMsg(tasks.get(taskNumber - 1).toString());
-        UI.printLine();
+        return "You have completed the following task: \n" + tasks.get(taskNumber - 1).toString();
     }
 
     /**
-     * Delete the task and prints out the task and current number of tasks,
-     * throws error if done command is not properly formatted.
+     * Delete the task and return string message for deleting tasks,
+     * else return error message if done command is not properly formatted.
      *
      * @param userInput the index of the task in list
+     * @throws DukeException exception thrown by Duke
      */
-    public void deleteAndPrintTask(String userInput) {
+    public String deleteTask(String userInput) throws DukeException {
         String[] tokens = userInput.split(" ");
         int taskNumber;
         boolean isTaskDeleteCommand = tokens.length == 2 && tokens[0].equals("delete");
         try {
-            try {
-                taskNumber = Integer.parseInt(tokens[1]);
-            } catch (NumberFormatException err) {
-                throw new InvalidIndexException("delete");
-            }
-
+            taskNumber = Integer.parseInt(tokens[1]);
             if (!isTaskDeleteCommand || taskNumber > tasks.size()) {
-                throw new InvalidIndexException("delete");
+                throw new DukeException("OOPS!!! The task to delete does not exists. Please try again!");
             }
-        } catch (InvalidIndexException err) {
-            UI.printErrorMessage(err);
-            return;
+        } catch (NumberFormatException err) {
+            throw new DukeException("OOPS!!! The task to delete does not exists. Please try again!");
         }
-
-        UI.printLine();
-        UI.printRobotMsg("You have removed the following task:");
-        UI.printMsg(tasks.get(taskNumber - 1).toString());
         deleteTask(tasks.get(taskNumber - 1));
-        UI.printRobotMsg("You have " + tasks.size() + " task/s left.");
-        UI.printLine();
+        return "You have removed the following task:\n" + tasks.get(taskNumber - 1).toString() + "\n"
+                + "You have " + tasks.size() + " task/s left.";
     }
 
     /**
      * Prints all the tasks in the list.
      */
-    public void printList() {
-        UI.printLine();
-        UI.printRobotMsg("Your list contains the following task/s:");
+    public String listToString() {
+        StringBuilder listInString = new StringBuilder();
+        listInString.append("Your list contains the following task/s: \n");
         for (int i = 0; i < tasks.size(); i++) {
-            UI.printMsg((i + 1) + ". " + tasks.get(i).toString());
+            listInString.append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
         }
-        UI.printLine();
+        return listInString.toString();
     }
 
     /**
@@ -115,11 +95,11 @@ public class TaskList {
      *
      * @param userInput user input String
      * @return Todo task.
-     * @throws NoTaskDescriptionException if there is no task description, it will result in this error.
+     * @throws DukeException exception thrown by Duke
      */
-    public ToDo makeToDoTask(String userInput) throws NoTaskDescriptionException {
+    public ToDo makeToDoTask(String userInput) throws DukeException {
         if (userInput.length() == "todo".length()) {
-            throw new NoTaskDescriptionException("todo");
+            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
         }
         return new ToDo(userInput.substring("todo".length() + 1));
     }
@@ -129,12 +109,9 @@ public class TaskList {
      *
      * @param userInput user input String
      * @return Event task
-     * @throws NoTaskDescriptionException if there is no task description, it will result in this error.
-     * @throws NoDateIndicatorException if there is no /by indicator, it will result in this error.
-     * @throws NoDateException if there is no date, it will result in this error.
+     * @throws DukeException exception thrown by Duke
      */
-    public Task makeEventTask(String userInput) throws
-            NoTaskDescriptionException, NoDateIndicatorException, NoDateException {
+    public Task makeEventTask(String userInput) throws DukeException {
         int indexOfAt = userInput.indexOf("/at");
         int endIndexForEvent = "event".length();
         boolean doesAtExist = indexOfAt != -1;
@@ -142,13 +119,13 @@ public class TaskList {
         boolean doesEventDescriptionExist = indexOfAt != endIndexForEvent + 1;
 
         if (!doesAtExist) {
-            throw new NoDateIndicatorException("/at");
+            throw new DukeException("OOPS!!! You are missing /at before your date");
         }
         if (!doesTimeExist) {
-            throw new NoDateException("event");
+            throw new DukeException("OOPS!!! The date of a event cannot be empty.");
         }
         if (!doesEventDescriptionExist) {
-            throw new NoTaskDescriptionException("event");
+            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
         }
 
         return new Event(userInput.substring("event".length() + 1, indexOfAt - 1),
@@ -160,12 +137,9 @@ public class TaskList {
      *
      * @param userInput user input String
      * @return Deadline task
-     * @throws NoTaskDescriptionException if there is no task description, it will result in this error.
-     * @throws NoDateIndicatorException if there is no /by indicator, it will result in this error.
-     * @throws NoDateException if there is no date, it will result in this error.
+     * @throws DukeException exception thrown by Duke
      */
-    public Deadline makeDeadlineTask(String userInput) throws NoTaskDescriptionException,
-            NoDateIndicatorException, NoDateException {
+    public Deadline makeDeadlineTask(String userInput) throws DukeException {
         int indexOfBy = userInput.indexOf("/by");
         int endIndexForDeadline = "deadline".length();
         boolean doesByExist = indexOfBy != -1;
@@ -173,14 +147,14 @@ public class TaskList {
         boolean doesDeadlineDescriptionExist = indexOfBy != endIndexForDeadline + 1;
 
         if (!doesByExist) {
-            throw new NoDateIndicatorException("/by");
+            throw new DukeException("OOPS!!! You are missing /by before your date");
         }
         if (!doesDateExist) {
-            throw new NoDateException("deadline");
+            throw new DukeException("OOPS!!! The date of a deadline cannot be empty.");
         }
 
         if (!doesDeadlineDescriptionExist) {
-            throw new NoTaskDescriptionException("deadline");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
         String stringDate = userInput.substring(indexOfBy + "/by".length() + 1);
         return new Deadline(userInput.substring("deadline".length() + 1, indexOfBy - 1), stringDate);
@@ -209,31 +183,32 @@ public class TaskList {
 
 
     /**
-     * Prints the task matching the searched description, if searching description is empty, it will throw an error.
+     * Return string representation of the taskss matching the searched description,
+     * if searching description is empty, it will throw an error.
      *
      * @param userInput user input String
-     * @throws InvalidFindException if search description is empty
+     * @throws DukeException exception thrown by Duke
      */
-    public void findTasks(String userInput) throws InvalidFindException {
+    public String findTasks(String userInput) throws DukeException {
         boolean isSearchSuccess = false;
+        StringBuilder foundTasksString = new StringBuilder();
         int startingIndex = 1;
         try {
-            UI.printLine();
-            UI.printRobotMsg("Here are the matching tasks in your list:");
+            foundTasksString.append("Here are the matching tasks in your list: \n");
             String searchTerm = userInput.substring(5);
             for (Task task : tasks) {
                 if (task.toString().contains(searchTerm)) {
                     isSearchSuccess = true;
-                    UI.printMsg(startingIndex + ". " + task.toString());
+                    foundTasksString.append(startingIndex).append(". ").append(task.toString()).append("\n");
                     startingIndex++;
                 }
             }
             if (!isSearchSuccess) {
-                UI.printMsg("You have no tasks matching the description. Pls try again.");
+                return "You have no tasks matching the description. Pls try again.";
             }
-            UI.printLine();
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidFindException();
+            throw new DukeException("OOPS! The task description to find cannot be empty.");
         }
+        return foundTasksString.toString();
     }
 }

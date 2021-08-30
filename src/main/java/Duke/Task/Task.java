@@ -39,7 +39,7 @@ public class Task {
     @Override
     public String toString() {
         if (isComplete) {
-            return "[✓] " + taskDetails;
+            return "[X] " + taskDetails;
         } else {
             return "[ ] " + taskDetails;
         }

@@ -1,10 +1,6 @@
 package duke;
 
-import duke.exception.InvalidCommandException;
-import duke.exception.InvalidFindException;
-import duke.exception.NoDateException;
-import duke.exception.NoDateIndicatorException;
-import duke.exception.NoTaskDescriptionException;
+import duke.exception.DukeException;
 import duke.task.Task;
 
 public class Parser {
@@ -26,17 +22,15 @@ public class Parser {
      *
      * @param userInput user inputted String
      */
-    public void commands(String userInput) {
+    public String getResponse(String userInput) {
         Task newTask;
         String[] tokens = userInput.split(" ");
         try {
             switch (tokens[0]) {
             case "done":
-                tasks.completeAndPrintTask(userInput);
-                return;
+                return tasks.completeTask(userInput);
             case "delete":
-                tasks.deleteAndPrintTask(userInput);
-                return;
+                return tasks.deleteTask(userInput);
             case "todo":
                 newTask = tasks.makeToDoTask(userInput);
                 break;
@@ -48,36 +42,28 @@ public class Parser {
                 break;
             case "bye":
                 if (tokens.length > 1) {
-                    throw new InvalidCommandException();
+                    throw new DukeException("Invalid command! Try again.");
                 }
-                UI.bye();
                 this.isExit = true;
-                return;
+                return UI.bye();
             case "list":
                 if (tokens.length > 1) {
-                    throw new InvalidCommandException();
+                    throw new DukeException("Invalid command! Try again.");
                 }
-                tasks.printList();
-                return;
+                return tasks.listToString();
+
             case "find":
-                tasks.findTasks(userInput);
-                return;
+                return tasks.findTasks(userInput);
             default:
-                throw new InvalidCommandException();
+                throw new DukeException("Invalid command! Try again.");
             }
-        } catch (InvalidCommandException | NoTaskDescriptionException | NoDateIndicatorException
-                | NoDateException | InvalidFindException err) {
-            UI.printErrorMessage(err);
-            return;
+        } catch (DukeException err) {
+            return err.getMessage();
         }
         tasks.addTask(newTask);
-        UI.printLine();
-        UI.printRobotMsg("You have added this following task to the list:");
-        UI.printMsg(newTask.toString());
-        UI.printNoOfTasks(tasks.noOfTasks());
-        UI.printLine();
+        return "You have added this following task to the list: \n" + newTask.toString() + "\n"
+                + "You have " + tasks.noOfTasks() + " tasks now.";
     }
-
     /**
      * Return true if parser read user input of "bye".
      *
