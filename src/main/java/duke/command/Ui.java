@@ -1,18 +1,17 @@
 package duke.command;
 
-import duke.exception.InvalidCommandException;
-
 import java.util.Scanner;
 
+import duke.exception.InvalidCommandException;
 /**
  * This class handles the interactions with the user.
  */
 public class Ui {
     private static final String LINE_HORIZONTAL =
             "___________________________________________________________";
-    private final String BOT_NAME;
-    private Parser parser;
     private static Scanner sc;
+    private String botName;
+    private Parser parser;
 
     /**
      * Constructor to create a new UI.
@@ -20,7 +19,7 @@ public class Ui {
      * @param name The name of the bot.
      */
     public Ui(String name) {
-        this.BOT_NAME = name;
+        this.botName = name;
         sc = new Scanner(System.in);
         this.parser = new Parser();
     }
@@ -31,7 +30,7 @@ public class Ui {
     public void printWelcomeMessage() {
         System.out.printf("Greetings! This is %s.\n"
                 + "What can I do for you?\n",
-                this.BOT_NAME);
+                this.botName);
     }
 
     /**
@@ -96,10 +95,12 @@ public class Ui {
                     + "%s\n", LINE_HORIZONTAL);
             break;
         case "DateTimeParse":
-            System.out.printf("Your date might not be in the correct format.\n" +
-                    "Please ensure it is in the YYYY-MM-DD format.\n" +
-                    "%s\n", LINE_HORIZONTAL);
+            System.out.printf("Your date might not be in the correct format.\n"
+                    + "Please ensure it is in the YYYY-MM-DD format.\n"
+                    + "%s\n", LINE_HORIZONTAL);
             break;
+        default:
+            System.out.println("ERROR! ERROR!");
         }
     }
 
@@ -115,7 +116,7 @@ public class Ui {
      */
     public static void printBye() {
         System.out.printf("%s\n"
-                        + "Goodbye. Hope to see you again soon!\n",
+                + "Goodbye. Hope to see you again soon!\n",
                 LINE_HORIZONTAL);
 
         sc.close();

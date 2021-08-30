@@ -3,7 +3,7 @@ package duke.exception;
 /**
  * This class represents exceptions due to invalid time format.
  */
-public class InvalidDateFormatException extends DukeException{
+public class InvalidDateFormatException extends DukeException {
     /***
      * Constructor to create an invalid date exception.
      *
