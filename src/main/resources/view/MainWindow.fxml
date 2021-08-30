@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #363636#363636;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #363636#363636;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <children>
       <HBox layoutY="558.0" prefHeight="41.0" prefWidth="400.0" style="-fx-background-color: #2b2b2b#2b2b2b; -fx-border-width: 1 0 0 0;">
          <children>
@@ -19,7 +18,7 @@
                   <Font name="Avenir Book" size="13.0" />
                </font>
             </TextField>
-              <Button fx:id="sendButton" graphicTextGap="1.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: #474747#474747; -fx-background-radius: 100;" text="Send" textAlignment="CENTER" textFill="WHITE" translateX="10.0" translateY="5.0">
+              <Button fx:id="sendButton" graphicTextGap="1.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="30.0" prefWidth="60.0" stylesheets="@Button.css" text="Send" textAlignment="CENTER" textFill="WHITE" translateX="10.0" translateY="5.0">
                <font>
                   <Font name="Avenir Book" size="13.0" />
                </font>

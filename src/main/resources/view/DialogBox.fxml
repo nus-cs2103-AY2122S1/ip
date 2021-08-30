@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" prefWidth="400.0" style="-fx-background-color: #363636#363636;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" prefWidth="400.0" styleClass="dialogBox" stylesheets="@DialogBox.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" contentDisplay="CENTER" maxHeight="-Infinity" minHeight="-Infinity" text="Label" textFill="WHITE" wrapText="true">
          <font>
