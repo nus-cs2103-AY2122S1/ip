@@ -1,7 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import duke.Duke;
+import seedu.duke.Duke;
 
 public class Main {
     /**
