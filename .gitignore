@@ -22,6 +22,3 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 #test Directory storage
 /src/test/main/java/data
-
-# META-INF from building JAR
-/src/main/java/META-INF
