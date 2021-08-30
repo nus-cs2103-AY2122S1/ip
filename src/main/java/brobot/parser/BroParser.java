@@ -1,29 +1,36 @@
 package brobot.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.Scanner;
+
+import brobot.Storage;
+import brobot.UI;
 import brobot.exception.BroException;
 import brobot.exception.InvalidCommandException;
 import brobot.exception.InvalidCommandParameterException;
 import brobot.exception.NoSuchTaskException;
-import brobot.task.*;
-import brobot.UI;
-import brobot.Storage;
+import brobot.task.Deadline;
+import brobot.task.Event;
+import brobot.task.Task;
+import brobot.task.TaskList;
+import brobot.task.Todo;
 
-import java.time.LocalDateTime;
-import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 /**
  * Represents the input parser of the Duke Program.
  */
 public class BroParser {
-    TaskList list;
-    Storage storage;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.ENGLISH);
+    private final TaskList list;
+    private final Storage storage;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm",
+            Locale.ENGLISH);
 
     /**
      * Constructor.
-     * @param list The list to handle.
+     *
+     * @param list    The list to handle.
      * @param storage The storage to handle.
      */
     public BroParser(TaskList list, Storage storage) {
@@ -33,7 +40,8 @@ public class BroParser {
 
     /**
      * Takes in raw input of user, processes it and execute the  appropriate action.
-     * @param rawInput
+     *
+     * @param rawInput Raw user input string
      * @throws BroException
      */
     public void parse(String rawInput) throws BroException {
@@ -41,34 +49,35 @@ public class BroParser {
         String checkForKeyword = inputScanner.next();
 
         switch (checkForKeyword) {
-            case "list":
-                handleList(inputScanner);
-                break;
-            case "done":
-                handleDone(inputScanner);
-                break;
-            case "delete":
-                handleDelete(inputScanner);
-                break;
-            case "todo":
-                handleTodo(inputScanner);
-                break;
-            case "deadline":
-                handleDeadline(inputScanner);
-                break;
-            case "event":
-                handleEvent(inputScanner);
-                break;
-            case "find":
-                handleFind(inputScanner);
-                break;
-            default:
-                throw new InvalidCommandException();
+        case "list":
+            handleList(inputScanner);
+            break;
+        case "done":
+            handleDone(inputScanner);
+            break;
+        case "delete":
+            handleDelete(inputScanner);
+            break;
+        case "todo":
+            handleTodo(inputScanner);
+            break;
+        case "deadline":
+            handleDeadline(inputScanner);
+            break;
+        case "event":
+            handleEvent(inputScanner);
+            break;
+        case "find":
+            handleFind(inputScanner);
+            break;
+        default:
+            throw new InvalidCommandException();
         }
     }
 
     /**
      * Action for list command.
+     *
      * @param inputScanner Command Parameters.
      * @throws InvalidCommandParameterException
      */
@@ -82,12 +91,13 @@ public class BroParser {
 
     /**
      * Action for done command.
+     *
      * @param inputScanner Command Parameters.
      * @throws InvalidCommandParameterException
      * @throws NoSuchTaskException
      */
-    public void handleDone(Scanner inputScanner) throws InvalidCommandParameterException
-            , NoSuchTaskException {
+    public void handleDone(Scanner inputScanner) throws InvalidCommandParameterException,
+            NoSuchTaskException {
         if (inputScanner.hasNextInt()) {
             int taskPos = inputScanner.nextInt() - 1;
             list.markDone(taskPos);
@@ -100,12 +110,13 @@ public class BroParser {
 
     /**
      * Action for delete command.
+     *
      * @param inputScanner Command Parameters.
      * @throws InvalidCommandParameterException
      * @throws NoSuchTaskException
      */
-    public void handleDelete(Scanner inputScanner) throws InvalidCommandParameterException
-            , NoSuchTaskException {
+    public void handleDelete(Scanner inputScanner) throws InvalidCommandParameterException,
+            NoSuchTaskException {
         if (inputScanner.hasNextInt()) {
             int taskPos = inputScanner.nextInt() - 1;
             Task temp = list.deleteTask(taskPos);
@@ -118,6 +129,7 @@ public class BroParser {
 
     /**
      * Action for todo command.
+     *
      * @param inputScanner Command Parameters.
      * @throws InvalidCommandParameterException
      */
@@ -134,15 +146,15 @@ public class BroParser {
 
     /**
      * Action for deadline command.
+     *
      * @param inputScanner Command Parameters.
      * @throws InvalidCommandParameterException
      */
-    public void handleDeadline(Scanner inputScanner) throws InvalidCommandParameterException
-             {
+    public void handleDeadline(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNextLine()) {
             String[] contentAndDate = inputScanner.nextLine().split("/by ", 2);
             String content = contentAndDate[0];
-            LocalDateTime date = LocalDateTime.parse(contentAndDate[1],formatter);
+            LocalDateTime date = LocalDateTime.parse(contentAndDate[1], formatter);
             list.addTask(new Deadline(content, date));
             storage.writeList(list);
             UI.printTaskAdded(list);
@@ -153,6 +165,7 @@ public class BroParser {
 
     /**
      * Action for Event command.
+     *
      * @param inputScanner Command Parameters.
      * @throws InvalidCommandParameterException
      */
@@ -160,7 +173,7 @@ public class BroParser {
         if (inputScanner.hasNextLine()) {
             String[] contentAndDate = inputScanner.nextLine().split("/at ", 2);
             String content = contentAndDate[0];
-            LocalDateTime date = LocalDateTime.parse(contentAndDate[1],formatter);
+            LocalDateTime date = LocalDateTime.parse(contentAndDate[1], formatter);
             list.addTask(new Event(content, date));
             storage.writeList(list);
             UI.printTaskAdded(list);
@@ -171,6 +184,7 @@ public class BroParser {
 
     /**
      * Action for Find Command.
+     *
      * @param inputScanner Command Parameters.
      * @throws InvalidCommandParameterException
      */

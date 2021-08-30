@@ -9,12 +9,14 @@ import java.util.Locale;
  */
 public class Deadline extends Task {
     private final LocalDateTime by;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, MMM d,yyyy hh:mma", Locale.ENGLISH);
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, MMM d,yyyy hh:mma",
+            Locale.ENGLISH);
 
     /**
      * Constructor.
+     *
      * @param content Main content of the Deadline Task.
-     * @param by Date of deadline.
+     * @param by      Date of deadline.
      */
     public Deadline(String content, LocalDateTime by) {
         super(content);
@@ -23,6 +25,7 @@ public class Deadline extends Task {
 
     /**
      * String representation of a deadline.
+     *
      * @return Deadline in string.
      */
     @Override
@@ -32,6 +35,7 @@ public class Deadline extends Task {
 
     /**
      * String representation of a Deadline task for storage.
+     *
      * @return Deadline task in String(Storage format).
      */
     public String toStorageString() {

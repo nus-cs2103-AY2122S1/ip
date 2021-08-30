@@ -7,6 +7,7 @@ public class Todo extends Task {
 
     /**
      * Constructor.
+     *
      * @param content Main content of the Todo task.
      */
     public Todo(String content) {
@@ -15,6 +16,7 @@ public class Todo extends Task {
 
     /**
      * String representation of a todo task.
+     *
      * @return Todo task in string.
      */
     @Override
@@ -24,6 +26,7 @@ public class Todo extends Task {
 
     /**
      * String representation of a Todo for storage.
+     *
      * @return Todo task in String(Storage format).
      */
     public String toStorageString() {

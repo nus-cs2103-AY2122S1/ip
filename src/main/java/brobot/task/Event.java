@@ -8,14 +8,16 @@ import java.util.Locale;
  * Represents an Event task.
  */
 public class Event extends Task {
-    final private LocalDateTime at;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, MMM d,yyyy hh:mma", Locale.ENGLISH);
+    private final LocalDateTime at;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, MMM d,yyyy hh:mma",
+            Locale.ENGLISH);
 
 
     /**
      * Constructor.
+     *
      * @param content Main Content of the event task.
-     * @param at Date of the event.
+     * @param at      Date of the event.
      */
     public Event(String content, LocalDateTime at) {
         super(content);
@@ -24,6 +26,7 @@ public class Event extends Task {
 
     /**
      * String representation of an event.
+     *
      * @return Event in string.
      */
     @Override
@@ -33,6 +36,7 @@ public class Event extends Task {
 
     /**
      * String representation of an Event task for storage.
+     *
      * @return Event task in String(Storage format).
      */
     public String toStorageString() {

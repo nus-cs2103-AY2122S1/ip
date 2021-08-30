@@ -1,8 +1,8 @@
 package brobot.task;
 
-import brobot.exception.NoSuchTaskException;
-
 import java.util.ArrayList;
+
+import brobot.exception.NoSuchTaskException;
 
 /**
  * Represents a task list.
@@ -19,6 +19,7 @@ public class TaskList {
 
     /**
      * Adds the specified Task to the list.
+     *
      * @param task The Task.
      */
     public void addTask(Task task) {
@@ -27,6 +28,7 @@ public class TaskList {
 
     /**
      * Retrieves the nth Task from the list.
+     *
      * @param taskNumber The position of the task in the list.
      * @return The Task.
      */
@@ -36,6 +38,7 @@ public class TaskList {
 
     /**
      * Returns the amount of tasks in the specified list.
+     *
      * @return The amount of tasks.
      */
     public int getTaskAmount() {
@@ -44,6 +47,7 @@ public class TaskList {
 
     /**
      * Marks the nth Task as done.
+     *
      * @param taskPos The task position in the list.
      * @throws NoSuchTaskException
      */
@@ -57,6 +61,7 @@ public class TaskList {
 
     /**
      * Deletes the nth task from the list.
+     *
      * @param taskPos The task position in the list.
      * @return The deleted task.
      * @throws NoSuchTaskException
@@ -74,6 +79,7 @@ public class TaskList {
 
     /**
      * Returns a Task List with tasks matching the search word.
+     *
      * @param searchWord The search word.
      * @return The task list.
      */
@@ -89,6 +95,7 @@ public class TaskList {
 
     /**
      * String representation of the tasklist.
+     *
      * @return String representation of the tasklist.
      */
     @Override
@@ -102,6 +109,7 @@ public class TaskList {
 
     /**
      * String representation of the tasklist for storage.
+     *
      * @return String representation of the tasklist(storage format).
      */
     public String toStorageString() {
