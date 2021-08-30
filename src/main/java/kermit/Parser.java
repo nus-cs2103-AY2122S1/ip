@@ -1,10 +1,12 @@
 package kermit;
 
-import kermit.command.*;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
+import kermit.command.AddTaskCommand;
+import kermit.command.Command;
+import kermit.command.CompleteTaskCommand;
+import kermit.command.DeleteTaskCommand;
+import kermit.command.ExitCommand;
+import kermit.command.FindCommand;
+import kermit.command.ListTasksCommand;
 
 /**
  * Parses user commands for Kermit.
@@ -76,7 +78,8 @@ public class Parser {
         case "delete":
             return new DeleteTaskCommand(argument);
         case "todo":
-            return new AddTaskCommand("todo", argument, dateString);
+            AddTaskCommand todo = new AddTaskCommand("todo", argument, dateString);
+            return todo;
         case "event":
             return new AddTaskCommand("event", argument, dateString);
         case "deadline":

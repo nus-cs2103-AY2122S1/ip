@@ -1,20 +1,21 @@
 package kermit;
 
-import kermit.tasks.Task;
-import kermit.tasks.ToDo;
-import kermit.tasks.Deadline;
-import kermit.tasks.Event;
-import kermit.tasks.DateDependentTask;
-import java.io.File;
-import java.io.IOException;
-import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+
+import kermit.tasks.DateDependentTask;
+import kermit.tasks.Deadline;
+import kermit.tasks.Event;
+import kermit.tasks.Task;
+import kermit.tasks.ToDo;
 
 /**
  * Storage loads and saves task data from file.
@@ -31,7 +32,7 @@ public class Storage {
      * @param filePath The relative path where the data should be read/ saved to.
      */
     public Storage(String filePath) {
-        // Check if kermit.command.Kermit data exists, else create it
+        // Check if Kermit data exists, else create it
         this.filePath = filePath;
     }
 
@@ -88,6 +89,8 @@ public class Storage {
                         task = new Event(description, date, isCompleted);
                         taskList.add(task);
                         break;
+                    default:
+                        throw new KermitException("Unknown task!");
                     }
                 }
             }

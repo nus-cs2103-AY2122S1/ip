@@ -4,9 +4,6 @@ import kermit.KermitException;
 import kermit.Storage;
 import kermit.TaskList;
 import kermit.Ui;
-import kermit.tasks.Task;
-
-import java.util.ArrayList;
 
 public class FindCommand extends Command {
     private String filterText;
@@ -22,10 +19,10 @@ public class FindCommand extends Command {
      * @param storage Instance of storage class used.
      * @throws KermitException if there are any errors while performing action.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList filteredTasks = taskList.filter(filterText);
         ui.showFilteredTasks(filteredTasks);
-    };
+    }
 
     /**
      * If command is exit command

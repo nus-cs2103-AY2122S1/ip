@@ -1,10 +1,10 @@
 package kermit;
 
-import kermit.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import kermit.tasks.Task;
 
 /**
  *  Task list stores tasks.
@@ -29,6 +29,13 @@ public class TaskList extends ArrayList<Task> {
         super(taskArr);
     }
 
+    /**
+     * Mark task as complete using its index.
+     * Index is zero indexed.
+     *
+     * @param index index of task to mark as complete.
+     * @return Task that has been marked as complete.
+     */
     public Task markTaskAsComplete(int index) {
         Task task = super.get(index);
         task.markAsComplete();
@@ -58,7 +65,7 @@ public class TaskList extends ArrayList<Task> {
         TaskList filteredTasks = new TaskList();
         Iterator<Task> taskIter = super.iterator();
         while (taskIter.hasNext()) {
-            Task task = (Task) taskIter.next();
+            Task task = taskIter.next();
             if (task.getDescription().contains(searchString)) {
                 filteredTasks.add(task);
             }

@@ -1,9 +1,8 @@
 package kermit;
 
-import kermit.tasks.Task;
-import kermit.tasks.ToDo;
-
 import java.util.Scanner;
+
+import kermit.tasks.Task;
 
 /**
  * Ui handles interface with user such as receiving user input and printing messages to user.

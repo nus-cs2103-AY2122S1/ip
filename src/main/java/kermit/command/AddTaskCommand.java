@@ -1,42 +1,22 @@
 package kermit.command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import kermit.KermitException;
+import kermit.Storage;
 import kermit.TaskList;
 import kermit.Ui;
-import kermit.Storage;
 import kermit.tasks.Deadline;
 import kermit.tasks.Event;
 import kermit.tasks.Task;
 import kermit.tasks.ToDo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * AddTask command creates and adds task to task list.
  */
 public class AddTaskCommand extends Command {
     private Task task;
-
-    /**
-     * Parse dates in form dd-mm-yyyy to yyyy-mm-dd, the format LocalDate is compatible with.
-     *
-     * @param dateString  date string in form dd-mm-yyyy.
-     * @return LocalDate object.
-     * @throws KermitException if unable to parse string to date.
-     */
-    private static LocalDate parseDate(String dateString) throws KermitException {
-        String[] components = dateString.split("-");
-        try {
-            String day = components[0];
-            String month = components[1];
-            String year = components[2];
-            LocalDate parsedDate = LocalDate.parse(String.join("-", year, month, day));
-            return parsedDate;
-        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
-            throw new KermitException("That is an invalid date!");
-        }
-    }
 
     /**
      * AddTasks command constructor.
@@ -70,6 +50,26 @@ public class AddTaskCommand extends Command {
             } catch (DateTimeParseException e) {
                 throw new KermitException("That is an invalid date!");
             }
+        }
+    }
+
+    /**
+     * Parse dates in form dd-mm-yyyy to yyyy-mm-dd, the format LocalDate is compatible with.
+     *
+     * @param dateString  date string in form dd-mm-yyyy.
+     * @return LocalDate object.
+     * @throws KermitException if unable to parse string to date.
+     */
+    private static LocalDate parseDate(String dateString) throws KermitException {
+        String[] components = dateString.split("-");
+        try {
+            String day = components[0];
+            String month = components[1];
+            String year = components[2];
+            LocalDate parsedDate = LocalDate.parse(String.join("-", year, month, day));
+            return parsedDate;
+        } catch (IndexOutOfBoundsException | DateTimeParseException e) {
+            throw new KermitException("That is an invalid date!");
         }
     }
 
