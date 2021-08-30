@@ -1,7 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 /**
  * Class to test deadline objects.
@@ -17,8 +18,8 @@ public class DeadlineTest {
             Deadline deadline = new Deadline("completed deadline", "2012-12-29");
             deadline.setCompleted();
             assertEquals("[D][X] completed deadline (by: Dec 29 2012)", deadline.toString());
-        } catch (DukeException e){
-            System.out.println(e.toString());
+        } catch (DukeException e) {
+            System.out.println(e);
         }
     }
 
@@ -30,8 +31,8 @@ public class DeadlineTest {
         try {
             Deadline deadline = new Deadline("incomplete deadline", "2015-03-12");
             assertEquals("[D][ ] incomplete deadline (by: Mar 12 2015)", deadline.toString());
-        } catch (DukeException e){
-            System.out.println(e.toString());
+        } catch (DukeException e) {
+            System.out.println(e);
         }
     }
 }
