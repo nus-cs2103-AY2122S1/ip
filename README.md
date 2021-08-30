@@ -18,7 +18,8 @@ Follow these steps to get your own DukePro:
 4. ~~Manage~~ **Let _DukePro_ manage** your tasks for you! :wink:
 
 
-###Features 
+**Features**
+
 - [X] Manages Todo Lists
 - [X] Manages Deadlines
 - [X] Manages Events
