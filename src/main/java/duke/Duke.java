@@ -12,8 +12,11 @@ import duke.util.Ui;
  */
 public class Duke {
     private Storage storage;
-    private final Ui ui;
+    private Ui ui;
     private TaskList tasks;
+
+    public Duke() {
+    }
 
     /**
      * Sets up the Duke program by instantiating a user interface, a storage and a task list.
@@ -49,6 +52,19 @@ public class Duke {
             } finally {
                 ui.showClosingLine();
             }
+        }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.executeAndGetResponse(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.toString();
         }
     }
 
