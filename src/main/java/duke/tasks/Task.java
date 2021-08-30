@@ -4,8 +4,8 @@ package duke.tasks;
  * Represents a task for the user to do.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Default constructor for a task.
