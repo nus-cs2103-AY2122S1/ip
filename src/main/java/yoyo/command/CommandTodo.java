@@ -1,7 +1,7 @@
 package yoyo.command;
 
+import yoyo.core.DialogHandler;
 import yoyo.core.Storage;
-import yoyo.core.Ui;
 import yoyo.exception.YoyoException;
 import yoyo.task.Task;
 import yoyo.task.TaskList;
@@ -18,15 +18,16 @@ public class CommandTodo extends Command {
      *
      * @param tasks Tasks currently in the Yoyo program.
      * @param storage Storage instance of the Yoyo program.
-     * @param ui Ui instance of Yoyo program.
+     * @param dialogHandler Ui instance of Yoyo program.
      * @throws YoyoException
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui)
+    public String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException {
         checkCompleteCommand(inputTokens);
         Task newTask = new Todo(inputTokens[1]);
         tasks.add(newTask);
-        ui.printAddMessage(newTask, tasks);
+        return dialogHandler.printAddMessage(newTask, tasks);
     }
 }
