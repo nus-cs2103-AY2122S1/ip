@@ -54,12 +54,14 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (response.equals(new ExitCommand().run())) {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                // do nothing
-            }
-            Platform.exit();
+            new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // do nothing
+                }
+                Platform.exit();
+            }).start();
         }
     }
 }

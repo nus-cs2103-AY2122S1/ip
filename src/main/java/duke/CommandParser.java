@@ -32,11 +32,7 @@ public class CommandParser {
      * @return true if <code>commandString</code> represents an exit command, else false
      */
     public static boolean isExit(String commandString) {
-        if (commandString.startsWith(EXIT_PREFIX)) {
-            return true;
-        } else {
-            return false;
-        }
+        return commandString.startsWith(EXIT_PREFIX);
     }
 
     /**
