@@ -71,6 +71,27 @@ public class TaskList {
     }
 
     /**
+     * Finds tasks which match a query.
+     * 
+     * @param query String to check for in tasks.
+     * @return An array of strings with numbered tasks.
+     */
+    public String[] findMatchingTasks(String query) {
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        for (int i = 0; i < taskArray.size(); i++) {
+            if (taskArray.get(i).toString().contains(query)) {
+                matchingTasks.add(taskArray.get(i));
+            }
+        }
+        String[] taskStrings = new String[matchingTasks.size() + 1];
+        taskStrings[0] = "Here are the matching tasks in your list:";
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            taskStrings[i + 1] = (i + 1) + "." + matchingTasks.get(i).toString();
+        }
+        return taskStrings;
+    }
+
+    /**
      * Gets an array of strings with tasks numbered.
      *
      * @return A String array with numbered tasks.

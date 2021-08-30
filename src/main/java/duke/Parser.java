@@ -24,8 +24,10 @@ public class Parser {
     public String[] parseCommand(String command) throws DukeException {
         if (command.equals("bye")) {
             return Ui.BYE_MSG;
-        } else if (command.equals("list")){
+        } else if (command.equals("list")) {
             return tasks.getTaskStrings();
+        } else if (command.startsWith("find ")) {
+            return tasks.findMatchingTasks(command.substring(5));
         } else if (command.startsWith("done ")) {
             return tasks.markTask(Integer.parseInt(command.substring(5)) - 1);
         } else if (command.startsWith("delete ")) {

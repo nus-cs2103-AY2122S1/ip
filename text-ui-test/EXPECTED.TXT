@@ -42,6 +42,18 @@
     3.[E][ ] testEvent (at: Mar 1 2022)
     ---
     ---
+    Here are the matching tasks in your list:
+    1.[T][ ] testTodo
+    2.[D][X] testDeadline (by: Dec 27 2019)
+    3.[E][ ] testEvent (at: Mar 1 2022)
+    ---
+    ---
+    Here are the matching tasks in your list:
+    ---
+    ---
+    OOPS!!! I'm sorry, but I don't know what that means :-(
+    ---
+    ---
     Nice! I've marked this task as done:
     [E][X] testEvent (at: Mar 1 2022)
     ---
