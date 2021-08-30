@@ -1,26 +1,45 @@
 package duke;
 
-import duke.exceptions.*;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.util.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
-    ArrayList<Task> commands = new ArrayList<>();
-    int doneTasks = 0;
-    Ui ui = new Ui();
-    Storage storage = new Storage();
-    Parser parser = new Parser();
-    TaskList taskList = new TaskList();
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyTaskDescriptionException;
+import duke.exceptions.EmptyTaskNumberException;
+import duke.exceptions.InvalidTaskException;
+import duke.exceptions.MultipleKeywordException;
+import duke.exceptions.NoTimeException;
+import duke.exceptions.TaskDoneAlreadyException;
+import duke.exceptions.UnknownInputException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.util.DukeCommands;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
+
+
+public class Duke {
+    private ArrayList<Task> commands = new ArrayList<>();
+    private int doneTasks = 0;
+    private Ui ui = new Ui();
+    private Storage storage = new Storage();
+    private Parser parser = new Parser();
+    private TaskList taskList = new TaskList();
+
+    /**
+     * Executes the commands entered
+     * @param command command to be executed
+     * @param input description of the command
+     * @param isDone checks if the task is completed
+     */
     public void execute(DukeCommands command, String input, int isDone) {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("d-MM-yyyy");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d-MM-yyyy HHmm");
@@ -136,7 +155,7 @@ public class Duke {
             } else {
                 throw new InvalidTaskException();
             }
-        } catch (DukeException e){
+        } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
 
