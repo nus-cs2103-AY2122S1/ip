@@ -75,6 +75,6 @@ public class TaskList {
                     .append(Duke.taskList.getTask(i).toString())
                     .append("\n");
         }
-        return Duke.renderOutput("Here are the tasks in your list:\n" + op);
+        return "Here are the tasks in your list:\n" + op;
     }
 }

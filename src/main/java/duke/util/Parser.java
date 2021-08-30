@@ -1,10 +1,12 @@
 package duke.util;
 
 import duke.Duke;
+import duke.commands.*;
 import duke.exceptions.ExceedListSizeException;
 import duke.exceptions.InvalidInputException;
 import duke.exceptions.NoDescriptionException;
 import duke.exceptions.UserInputError;
+import duke.tasks.Task;
 
 /**
  * The Parser class that makes sense of the user input.
@@ -29,20 +31,70 @@ public class Parser {
      * @return Array of string sectioned into separate parts.
      * @throws UserInputError
      */
-    public String[] parse() throws UserInputError {
-        if (input.equals("list") || input.equals("bye")) {
-            return new String[] {command};
-        } else if (command.equals("done") || command.equals("delete")) {
-            int index = getTaskNumber() - 1;
-            checkIndexRange(index);
-            return new String[] {command, Integer.toString(index)};
-        } else if (command.equals("todo") || command.equals("deadline")
-                || command.equals("event") || command.equals("find")) {
-            checkDescExist();
-            return new String[] {command, getDesc(input)};
+//    public String[] parse() throws UserInputError {
+//        if (input.equals("list") || input.equals("bye")) {
+//            return new String[] {command};
+//        } else if (command.equals("done") || command.equals("delete")) {
+//            int index = getTaskNumber() - 1;
+//            checkIndexRange(index);
+//            return new String[] {command, Integer.toString(index)};
+//        } else if (command.equals("todo") || command.equals("deadline")
+//                || command.equals("event") || command.equals("find")) {
+//            checkDescExist();
+//            return new String[] {command, getDesc(input)};
+//        } else {
+//            throw new InvalidInputException();
+//        }
+//    }
+
+    public Command parse() throws UserInputError {
+        Command cmd = null;
+        int index;
+
+        if (input.indexOf(' ') > -1) {
+            switch(command) {
+            case "deadline":
+                checkDescExist();
+                cmd = new AddCommand(getDesc(input), Task.Type.DEADLINE);
+                break;
+            case "todo":
+                checkDescExist();
+                cmd = new AddCommand(getDesc(input), Task.Type.TODO);
+                break;
+            case "event":
+                checkDescExist();
+                cmd = new AddCommand(getDesc(input), Task.Type.EVENT);
+                break;
+            case "find":
+                checkDescExist();
+                cmd = new FindCommand(getDesc(input));
+                break;
+            case "delete":
+                index = getTaskNumber() - 1;
+                checkIndexRange(index);
+                cmd = new DeleteCommand(index);
+                break;
+            case "done":
+                index = getTaskNumber() - 1;
+                checkIndexRange(index);
+                cmd = new CompleteCommand(index);
+                break;
+            default:
+                cmd = new FalseCommand();
+            }
         } else {
-            throw new InvalidInputException();
+            switch (command) {
+            case "bye":
+                cmd = new ExitCommand();
+                break;
+            case "list":
+                cmd = new ListCommand();
+                break;
+            default:
+                cmd = new FalseCommand();
+            }
         }
+        return cmd;
     }
 
     /**

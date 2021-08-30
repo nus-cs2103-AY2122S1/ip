@@ -1,5 +1,6 @@
 package duke;
 
+import duke.commands.Command;
 import duke.exceptions.InvalidInputException;
 import duke.exceptions.UserInputError;
 import duke.tasks.Task;
@@ -22,57 +23,57 @@ public class Duke {
         Parser parser = new Parser(input);
         String output;
         try {
-            String[] arr = parser.parse();
-            output = directInput(arr);
+            Command command = parser.parse();
+            output = command.execute(taskList, ui, new Storage());
         } catch (UserInputError e) {
             output = e.getMessage();
         }
         return output;
     }
 
-    /**
-    * Direct input array to the correct Ui method to execute with user command.
-    *
-    * @param input Array string of user command information.
-    */
-    public String directInput(String[] input) {
-        System.out.println("direct input");
-        String output;
-        try {
-            System.out.println("enter try");
-            String cmd = input[0];
-            String details = input.length == 1 ? "" : input[1];
-            switch (cmd) {
-            case "bye":
-                output = "bye";
-                break;
-            case "list":
-                output = ui.renderList();
-                break;
-            case "done":
-                output = ui.markTaskComplete(Integer.parseInt(details));
-                break;
-            case "todo":
-                System.out.println("case todo");
-                output = ui.addNewTask(details, Task.Type.TODO);
-                break;
-            case "deadline":
-                output = ui.addNewTask(details, Task.Type.DEADLINE);
-                break;
-            case "event":
-                output = ui.addNewTask(details, Task.Type.EVENT);
-                break;
-            case "delete":
-                output = ui.deleteTask(Integer.parseInt(details));
-                break;
-            default:
-                throw new InvalidInputException();
-            }
-        } catch (UserInputError e) {
-            output = e.getMessage();
-        }
-        return output;
-    }
+//    /**
+//    * Direct input array to the correct Ui method to execute with user command.
+//    *
+//    * @param input Array string of user command information.
+//    */
+//    public String directInput(String[] input) {
+//        System.out.println("direct input");
+//        String output;
+//        try {
+//            System.out.println("enter try");
+//            String cmd = input[0];
+//            String details = input.length == 1 ? "" : input[1];
+//            switch (cmd) {
+//            case "bye":
+//                output = "bye";
+//                break;
+//            case "list":
+//                output = ui.renderList();
+//                break;
+//            case "done":
+//                output = ui.markTaskComplete(Integer.parseInt(details));
+//                break;
+//            case "todo":
+//                System.out.println("case todo");
+//                output = ui.addNewTask(details, Task.Type.TODO);
+//                break;
+//            case "deadline":
+//                output = ui.addNewTask(details, Task.Type.DEADLINE);
+//                break;
+//            case "event":
+//                output = ui.addNewTask(details, Task.Type.EVENT);
+//                break;
+//            case "delete":
+//                output = ui.deleteTask(Integer.parseInt(details));
+//                break;
+//            default:
+//                throw new InvalidInputException();
+//            }
+//        } catch (UserInputError e) {
+//            output = e.getMessage();
+//        }
+//        return output;
+//    }
 
     /**
      * Wrapper to render Duke output in a consistent format

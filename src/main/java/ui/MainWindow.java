@@ -44,12 +44,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        System.out.println(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        if (response.equals("bye")) {
+        if (response.equals("Bye. Hope to see you again soon!")) {
             System.exit(0);
         }
         userInput.clear();

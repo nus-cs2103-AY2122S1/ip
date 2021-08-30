@@ -35,12 +35,12 @@ public class Ui {
         isEndChat = true;
     }
 
-    /**
-     * Close the Scanner and exit Duke.
-     */
-    public void end() {
-        Duke.renderOutput("Bye. Hope to see you again soon!");
-    }
+//    /**
+//     * Close the Scanner and exit Duke.
+//     */
+//    public void end() {
+//        Duke.renderOutput("Bye. Hope to see you again soon!");
+//    }
 
     /**
      * Greet user when Duke is opened.
@@ -58,16 +58,16 @@ public class Ui {
      * @param key keyword
      * @param ls users tasks
      */
-    public String find(String key, TaskList ls) {
-        StringBuilder op = new StringBuilder();
-
-        for (int i = 0; i < ls.length(); i++) {
-            if (ls.getTask(i).descContains(key)) {
-                op.append(ls.getTask(i).toString()).append("\n");
-            }
-        }
-        return Duke.renderOutput("Here are the matching tasks in your list:\n" + op);
-    }
+//    public String find(String key, TaskList ls) {
+//        StringBuilder op = new StringBuilder();
+//
+//        for (int i = 0; i < ls.length(); i++) {
+//            if (ls.getTask(i).descContains(key)) {
+//                op.append(ls.getTask(i).toString()).append("\n");
+//            }
+//        }
+//        return Duke.renderOutput("Here are the matching tasks in your list:\n" + op);
+//    }
 
     /**
      * Output a list of all the current tasks.
@@ -76,21 +76,25 @@ public class Ui {
         return Duke.taskList.toString();
     }
 
+    public String formatOutput(String str) {
+        return LINE + str + LINE;
+    }
+
     /**
      * Mark task as complete.
      *
      * @param index Indicates which task to complete.
      * @throws UserInputError
      */
-    public String markTaskComplete(int index) throws UserInputError {
-        Task task = Duke.taskList.getTask(index);
-        if (task.isDone()) {
-            return Duke.renderOutput("Great! But you have already completed this task!");
-        } else {
-            task.markDone();
-            return Duke.renderOutput("Nice! I've marked this task as done: \n" + task);
-        }
-    }
+//    public String markTaskComplete(int index) throws UserInputError {
+//        Task task = Duke.taskList.getTask(index);
+//        if (task.isDone()) {
+//            return Duke.renderOutput("Great! But you have already completed this task!");
+//        } else {
+//            task.markDone();
+//            return Duke.renderOutput("Nice! I've marked this task as done: \n" + task);
+//        }
+//    }
 
     /**
      * Method to add new Task of either type: Todo, Event, Deadline to list.
@@ -110,7 +114,7 @@ public class Ui {
      *
      * @param task Task just added.
      */
-    protected String addTaskOutput(Task task) {
+    public String addTaskOutput(Task task) {
         String output =
                 "Got it. I've added this task:\n"
                         + INDENT
@@ -118,7 +122,7 @@ public class Ui {
                         + "\nNow you have "
                         + Duke.taskList.length()
                         + " tasks in the list.";
-        return Duke.renderOutput(output);
+        return formatOutput(output);
     }
 
     /**
@@ -138,7 +142,7 @@ public class Ui {
      *
      * @param task Task just deleted.
      */
-    protected String deleteTaskOutput(Task task) {
+    public String deleteTaskOutput(Task task) {
         String output =
                 "Noted. I've removed this task:\n"
                         + INDENT
@@ -146,7 +150,7 @@ public class Ui {
                         + "\nNow you have "
                         + Duke.taskList.length()
                         + " tasks in the list.";
-        return Duke.renderOutput(output);
+        return formatOutput(output);
     }
 
 }
