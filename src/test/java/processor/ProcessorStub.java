@@ -1,10 +1,10 @@
 package processor;
 
-import models.Command;
-
 import java.util.List;
 
-public class ProcessorStub implements IProcessor{
+import models.Command;
+
+public class ProcessorStub implements IProcessor {
 
     @Override
     public void processCommand(Command command, List<String> arguments) {
