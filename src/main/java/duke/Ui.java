@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -39,7 +43,7 @@ public class Ui {
     }
 
     private void displayWelcomeMessage() {
-        String message = "\t" + "Hello! I'm Duke, your Personal Assistant ChatBot."
+        String message = "\t" + "Hello! I'm duke.Duke, your Personal Assistant ChatBot."
                 + System.lineSeparator()
                 + "\t" + "What can I do for you?"
                 + System.lineSeparator();

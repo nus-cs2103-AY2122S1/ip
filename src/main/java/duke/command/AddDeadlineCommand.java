@@ -1,13 +1,23 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.TaskType;
+
 import java.io.IOException;
 
 public class AddDeadlineCommand extends AddCommand {
     private String taskDateTime;
 
     public AddDeadlineCommand(String type, String taskInfo) {
-        super(type, taskInfo.split("/", 2)[0]);
+        super(type, taskInfo.split("/", 2)[0].trim());
 
-        String taskByDateTime = taskInfo.split("/", 2)[1];
-        taskDateTime = taskByDateTime.split("\\s+", 2)[1];
+        String taskByDateTime = taskInfo.split("/", 2)[1].trim();
+        taskDateTime = taskByDateTime.split("\\s+", 2)[1].trim();
     }
 
     @Override

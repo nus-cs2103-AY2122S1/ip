@@ -1,3 +1,5 @@
+package duke.task;
+
 public abstract class Task {
     private TaskType type;
     private String description;
@@ -33,7 +35,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public boolean isOnDate(String specificDateStr) {
+    public boolean isOnDate(String dateStr) {
         return false;
     }
 

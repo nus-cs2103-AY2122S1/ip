@@ -1,4 +1,18 @@
-import java.io.*;
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskType;
+import duke.task.TaskWithDateTime;
+import duke.task.ToDo;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Storage {
     private String pathName;
@@ -53,7 +67,7 @@ public class Storage {
         while ((line = bufferedReader.readLine()) != null) {
             String[] taskDetails = line.trim().split("\\|");
             String type = taskDetails[0].trim();
-            boolean isDone = Boolean.parseBoolean(taskDetails[1].trim());
+            boolean isDone = (Integer.parseInt(taskDetails[1].trim()) == 1);
             String description = taskDetails[2].trim();
             String dateTime;
 

@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {
@@ -18,9 +26,9 @@ public class DoneCommand extends Command {
         }
     }
 
-    public void markDone(TaskList tasks, Ui ui) throws DukeException {
-        if (taskNum >= 1 && taskNum <= tasks.size()) {
-            Task taskDone = tasks.get(taskNum - 1);
+    public void markDone(TaskList taskList, Ui ui) throws DukeException {
+        if (taskNum > 0 && taskNum <= taskList.size()) {
+            Task taskDone = taskList.get(taskNum - 1);
             taskDone.setDone();
 
             String response = ui.taskDoneMessage(taskDone);
