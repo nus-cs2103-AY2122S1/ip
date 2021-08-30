@@ -11,6 +11,11 @@ public class TaskListCsvHandler {
     private static String path = "src/main/data/TaskList.txt";
     private static String fileNewLine = System.lineSeparator();
 
+    /**
+     * Loads list of tasks from TaskList.txt file into TaskList.
+     *
+     * @return boolean True indicates that the data was successfully loaded, and vice-verso.
+     */
     public static boolean loadAll() {
         try {
             File taskListCSV = new File("src/main/data/TaskList.txt");
@@ -67,6 +72,11 @@ public class TaskListCsvHandler {
         return true;
     }
 
+    /**
+     * Inserts a list of tasks from TaskList to TaskList.txt.
+     *
+     * @return boolean True indicates that the data was successfully transferred, and vice-verso.
+     */
     public static boolean insertTasks() {
         String linebreak = System.lineSeparator();
         boolean rewrite = true;

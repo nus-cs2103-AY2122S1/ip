@@ -1,5 +1,7 @@
 package duke;
-
+/**
+ * The class for creating Duke' response after a task is added to the list.
+ */
 public class AddTaskMessage extends DukeMessage {
     private String userString;
     private Task createdTask;
