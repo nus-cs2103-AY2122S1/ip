@@ -49,12 +49,12 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         if (tasks.size() < 1) {
-            return outputFormatter("No tasks yet!");
+            return formatOutput("No tasks yet!");
         }
         if (date == null) {
-            return outputFormatter("Here are the tasks in your list:", tasks.toStringArray());
+            return formatOutput("Here are the tasks in your list:", tasks.toStringArray());
         }
-        return outputFormatter("Here are the tasks happening on " + date + ":", tasks.toStringArray(date));
+        return formatOutput("Here are the tasks happening on " + date + ":", tasks.toStringArray(date));
     }
 
     /**

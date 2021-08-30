@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws NoSuchTaskException {
-        return outputFormatter("Give your tasks a good ol' rub, I've removed this task:",
+        return formatOutput("Give your tasks a good ol' rub, I've removed this task:",
                 tasks.deleteTask(index).toString(),
                 String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks"));
     }

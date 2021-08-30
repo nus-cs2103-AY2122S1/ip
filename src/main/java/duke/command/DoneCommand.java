@@ -43,7 +43,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws NoSuchTaskException {
-        return outputFormatter("Nice and spicy, I've marked this task as done:",
+        return formatOutput("Nice and spicy, I've marked this task as done:",
                 tasks.getTask(index).markTaskAsDone().toString());
     }
 

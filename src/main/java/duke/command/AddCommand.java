@@ -42,15 +42,15 @@ public class AddCommand extends Command {
             EmptyDescriptionException,
             InvalidDateException {
         AddCommand command;
-        switch (taskTypeParser(content)) {
+        switch (parseToTaskType(content)) {
         case TODO:
-            command = new AddCommand(Todo.of(taskDescriptionParser(content)));
+            command = new AddCommand(Todo.of(parseToTaskDescription(content)));
             break;
         case DEADLINE:
-            command = new AddCommand(Deadline.of(taskDescriptionParser(content)));
+            command = new AddCommand(Deadline.of(parseToTaskDescription(content)));
             break;
         case EVENT:
-            command = new AddCommand(Event.of(taskDescriptionParser(content)));
+            command = new AddCommand(Event.of(parseToTaskDescription(content)));
             break;
         default:
             throw new UnknownTaskTypeException(content);
@@ -67,7 +67,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         tasks.add(task);
-        return outputFormatter("Hehe buoi, I've added this task:",
+        return formatOutput("Hehe buoi, I've added this task:",
                 task.toString(),
                 String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks"));
     }
@@ -89,7 +89,7 @@ public class AddCommand extends Command {
      * @param content The user's input content.
      * @return A Tasks enum.
      */
-    private static Tasks taskTypeParser(String content) {
+    private static Tasks parseToTaskType(String content) {
         return Tasks.valueOfLabel(content.trim().split(" ")[0]);
     }
 
@@ -101,7 +101,7 @@ public class AddCommand extends Command {
      * @return The description of the Task.
      * @throws EmptyDescriptionException If the description is empty.
      */
-    private static String taskDescriptionParser(String content) throws EmptyDescriptionException {
+    private static String parseToTaskDescription(String content) throws EmptyDescriptionException {
         try {
             return content.trim().split(" ", 2)[1];
         } catch (ArrayIndexOutOfBoundsException e) {

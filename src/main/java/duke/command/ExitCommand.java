@@ -29,7 +29,7 @@ public class ExitCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         storage.write(tasks);
-        return outputFormatter("Bye. See ya l8er allig8er!", "*shutting down......*");
+        return formatOutput("Bye. See ya l8er allig8er!", "*shutting down......*");
     }
 
     /**

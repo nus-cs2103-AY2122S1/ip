@@ -90,7 +90,7 @@ public abstract class Task {
      * @param keyword The keyword as a string.
      * @return True if the description matches the keyword, false otherwise.
      */
-    public final boolean keywordMatcher(String keyword) {
+    public final boolean matchKeyword(String keyword) {
         return Pattern.compile(".*\\b" + keyword + "\\b.*").matcher(description).find();
     }
 }

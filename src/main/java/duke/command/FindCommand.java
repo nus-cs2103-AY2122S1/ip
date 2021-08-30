@@ -35,8 +35,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return outputFormatter("Here are the tasks containing \"" + keyword + "\":",
-                tasks.filter((task) -> task.keywordMatcher(keyword)).toStringArray());
+        return formatOutput("Here are the tasks containing \"" + keyword + "\":",
+                tasks.filter((task) -> task.matchKeyword(keyword)).toStringArray());
     }
 
     /**
