@@ -1,13 +1,14 @@
 package duke.command;
 
-import duke.util.Storage;
-import duke.util.TaskList;
-import duke.util.Ui;
+import java.io.IOException;
+import java.time.DateTimeException;
+
 import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
-import java.io.IOException;
-import java.time.DateTimeException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * Represents how Duke responds to an "event" command.
@@ -43,9 +44,9 @@ public class EventCommand extends Command {
             ui.showError("     Error! The description and date/time cannot be empty.");
         } else if (!command.contains("/at")) {
             //check for date separator
-            ui.showError("     Invalid event format!\n" +
-                    "     Please ensure you specify your date and time after a \"/at\"\n" +
-                    "     Eg: event Attend physical lessons /at 2021-08-29 15:00");
+            ui.showError("     Invalid event format!\n"
+                    + "     Please ensure you specify your date and time after a \"/at\"\n"
+                    + "     Eg: event Attend physical lessons /at 2021-08-29 15:00");
         } else {
             int dateTimeIndex = command.indexOf("/");
             String description = command.substring(inputValues[0].length() + 1, dateTimeIndex).strip();

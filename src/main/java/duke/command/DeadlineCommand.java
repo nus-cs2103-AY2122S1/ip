@@ -1,13 +1,14 @@
 package duke.command;
 
-import duke.util.Storage;
-import duke.util.TaskList;
-import duke.util.Ui;
+import java.io.IOException;
+import java.time.DateTimeException;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Task;
-import java.io.IOException;
-import java.time.DateTimeException;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * Represents how Duke responds to a "deadline" command.

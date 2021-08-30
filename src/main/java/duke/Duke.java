@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Parser;
@@ -7,7 +9,6 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.io.IOException;
 
 /**
  * Represents a chat bot called Duke.
@@ -17,14 +18,10 @@ import java.io.IOException;
  */
 public class Duke {
 
+    private static final String FILEPATH = "data/duke.txt";
     private Storage storage;
     private TaskList taskList;
     private final Ui ui;
-    private final static String FILEPATH = "data/duke.txt";
-
-    public static void main(String[] args) {
-        new Duke(FILEPATH).run();
-    }
 
     /**
      * Constructor for the Duke class.
@@ -59,5 +56,9 @@ public class Duke {
             ui.showBottomLine();
             isExit = c.isExit();
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke(FILEPATH).run();
     }
 }

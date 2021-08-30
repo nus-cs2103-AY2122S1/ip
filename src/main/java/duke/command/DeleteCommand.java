@@ -1,9 +1,10 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-import java.io.IOException;
 
 /**
  * Represents how Duke responds to a "delete" command.

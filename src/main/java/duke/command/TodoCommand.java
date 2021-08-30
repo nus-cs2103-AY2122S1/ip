@@ -1,11 +1,12 @@
 package duke.command;
 
+import java.io.IOException;
+
+import duke.task.Task;
+import duke.task.ToDo;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-import duke.task.Task;
-import duke.task.ToDo;
-import java.io.IOException;
 
 /**
  * Represents how Duke responds to a "todo" command.
