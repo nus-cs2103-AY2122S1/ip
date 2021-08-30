@@ -9,6 +9,13 @@ public class Ui {
     private static final String LINE_BREAK = "--------------------------\n";
 
     /**
+     * Constructs a new instance of Ui. No arguments are expected.
+     */
+    public Ui() {
+
+    }
+
+    /**
      * Wraps a string between 2 line breaks.
      *
      * @param s String to be wrapped.
@@ -16,13 +23,6 @@ public class Ui {
      */
     private static String wrapBetweenLines(String s) {
         return LINE_BREAK + s + "\n" + LINE_BREAK;
-    }
-
-    /**
-     * Constructs a new instance of Ui. No arguments are expected.
-     */
-    public Ui() {
-
     }
 
     /**

@@ -1,11 +1,11 @@
 package duke;
 
-import duke.exception.DukeFileSystemException;
-import duke.exception.InvalidDukeCommandException;
-
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Scanner;
+
+import duke.exception.DukeFileSystemException;
+import duke.exception.InvalidDukeCommandException;
 
 /**
  * A class that provides functionalities for users to run a command-line-interface task tracker.
@@ -16,6 +16,29 @@ public class Duke {
     private final DukeParser parser;
     private Optional<Storage> storage;
     private TaskList taskList;
+
+    /**
+     * Constructs a new instance of Duke, the task manager. If the file path specified, which is used to store and load
+     * previously added tasks, is invalid, Duke will default to a new empty task list instead, and executing Duke.run
+     * () will not cache the tasks added or deleted for that particular session.
+     *
+     * @param filePath the file path to store and load previously added tasks
+     */
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.parser = new DukeParser();
+        try {
+            this.storage = Optional.of(new Storage(filePath));
+            this.taskList = this.storage.map(value -> new TaskList(value.load())).orElseGet(TaskList::new);
+        } catch (IOException e) {
+            ui.dukeShowError("The file path " + filePath + " is invalid. This session will not be stored.");
+            this.storage = Optional.empty();
+            this.taskList = new TaskList();
+        } catch (DukeFileSystemException e) {
+            ui.dukePrint(e.getMessage());
+            this.taskList = new TaskList();
+        }
+    }
 
     private void todoHandler(String args) throws InvalidDukeCommandException {
         if (args.equals("")) {
@@ -158,6 +181,9 @@ public class Duke {
                 break;
             case INVALID:
                 defaultHandler();
+                break;
+            default:
+                defaultHandler();
                 // Fallthrough
             }
             if (storage.isPresent()) {
@@ -189,29 +215,6 @@ public class Duke {
             }
         }
         reader.close();
-    }
-
-    /**
-     * Constructs a new instance of Duke, the task manager. If the file path specified, which is used to store and load
-     * previously added tasks, is invalid, Duke will default to a new empty task list instead, and executing Duke.run
-     * () will not cache the tasks added or deleted for that particular session.
-     *
-     * @param filePath the file path to store and load previously added tasks
-     */
-    public Duke(String filePath) {
-        this.ui = new Ui();
-        this.parser = new DukeParser();
-        try {
-            this.storage = Optional.of(new Storage(filePath));
-            this.taskList = this.storage.map(value -> new TaskList(value.load())).orElseGet(TaskList::new);
-        } catch (IOException e) {
-            ui.dukeShowError("The file path " + filePath + " is invalid. This session will not be stored.");
-            this.storage = Optional.empty();
-            this.taskList = new TaskList();
-        } catch (DukeFileSystemException e) {
-            ui.dukePrint(e.getMessage());
-            this.taskList = new TaskList();
-        }
     }
 
     /**

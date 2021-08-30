@@ -1,11 +1,11 @@
 package duke;
 
-import duke.exception.InvalidDukeCommandException;
-
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+
+import duke.exception.InvalidDukeCommandException;
 
 /**
  * A class that extends Task, that allows for information about the due date of the task to be stored as well.
@@ -18,7 +18,7 @@ public class Deadline extends Task {
      * date. If the date specified is invalid, an InvalidDukeCommandException is thrown instead.
      *
      * @param taskDescription a brief description of the task.
-     * @param dateString a string literal of the due date, in the yyyy-mm-dd format.
+     * @param dateString      a string literal of the due date, in the yyyy-mm-dd format.
      * @throws InvalidDukeCommandException if the string literal dateString given does not follow the yyyy-mm-dd format.
      */
     public Deadline(String taskDescription, String dateString) throws InvalidDukeCommandException {
@@ -33,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string that represents a serialized store format of the task that is specific to Duke.
+     *
      * @return a string of serialized format.
      */
     @Override
@@ -42,6 +43,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string that shows the details of the task in a standardized format.
+     *
      * @return a string of task details.
      */
     @Override

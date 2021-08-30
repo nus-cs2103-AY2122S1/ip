@@ -38,8 +38,8 @@ public class DukeParser {
             task = new Event(taskDescription, date);
             break;
         default:
-            throw new DukeFileSystemException("Invalid data read from file while loading tasks. A new list will " +
-                    "be used for this session.");
+            throw new DukeFileSystemException("Invalid data read from file while loading tasks. A new list will "
+                    + "be used for this session.");
         }
         if (isDone) {
             task.markAsDone();
