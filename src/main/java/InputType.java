@@ -5,7 +5,7 @@ public enum InputType {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
-    DELETE("done"),
+    DELETE("delete"),
     DONE("done");
 
     public final String str;
