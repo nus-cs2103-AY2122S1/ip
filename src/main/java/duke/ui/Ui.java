@@ -3,7 +3,6 @@ package duke.ui;
 import duke.commands.Task;
 import duke.data.TaskList;
 
-
 /**
  * Encapsulates the Ui component of Duke.
  *
