@@ -25,7 +25,7 @@ public interface Command {
      *
      * @return true when it is an exit command, else false
      */
-    default public boolean isExit() {
+    public default boolean isExit() {
         return false;
     }
 }

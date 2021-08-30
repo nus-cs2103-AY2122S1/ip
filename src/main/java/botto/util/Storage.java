@@ -1,11 +1,5 @@
 package botto.util;
 
-import botto.BottoException;
-import botto.task.Deadline;
-import botto.task.Event;
-import botto.task.Task;
-import botto.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,6 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+
+import botto.BottoException;
+import botto.task.Deadline;
+import botto.task.Event;
+import botto.task.Task;
+import botto.task.Todo;
 
 /**
  * This class deals with loading tasks from the file and saving tasks in the file
@@ -48,7 +48,7 @@ public class Storage {
             }
 
             Scanner scanner = new Scanner(this.file);
-            while(scanner.hasNext()) {
+            while (scanner.hasNext()) {
                 Task task;
                 String next = scanner.nextLine();
                 boolean isDone = next.charAt(4) == 'X';
@@ -71,7 +71,7 @@ public class Storage {
                     continue;
                 }
 
-                if(isDone) {
+                if (isDone) {
                     task.markAsDone();
                 }
 
@@ -102,7 +102,7 @@ public class Storage {
 
             fw.write(data.toString());
             fw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new BottoException("Something went wrong when saving data: " + e.getMessage());
         }
     }

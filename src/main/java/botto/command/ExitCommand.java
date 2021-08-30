@@ -7,7 +7,7 @@ import botto.util.Ui;
 /**
  * Command for stopping the bot
  */
-public class ExitCommand implements Command{
+public class ExitCommand implements Command {
 
     /**
      * print goodBye message

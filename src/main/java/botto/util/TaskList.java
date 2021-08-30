@@ -1,9 +1,9 @@
 package botto.util;
 
+import java.util.List;
+
 import botto.BottoException;
 import botto.task.Task;
-
-import java.util.List;
 
 /**
  * This class contains the task list and handles operations like add/delete tasks in the list

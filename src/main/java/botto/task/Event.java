@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Format for the Botto bot's event task
  */
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDateTime dateTime;
 

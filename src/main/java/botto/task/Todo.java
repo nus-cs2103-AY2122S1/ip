@@ -3,7 +3,7 @@ package botto.task;
 /**
  * Format for the Botto bot's Todo task
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /**
      * Constructor for a Todo task

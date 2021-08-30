@@ -1,7 +1,16 @@
 package botto.util;
 
 import botto.BottoException;
-import botto.command.*;
+import botto.command.AddDeadlineCommand;
+import botto.command.AddEventCommand;
+import botto.command.AddToDoCommand;
+import botto.command.Command;
+import botto.command.DeleteCommand;
+import botto.command.ExitCommand;
+import botto.command.FindCommand;
+import botto.command.MarkDoneCommand;
+import botto.command.ShowListCommand;
+
 
 /**
  * This class deals with making sense of the user command
@@ -9,7 +18,7 @@ import botto.command.*;
 public class Parser {
 
     /** current available user commands */
-    private final static String[] COMMANDS = {"list", "done", "todo", "deadline", "event", "delete", "bye", "find"};
+    private static final String[] COMMANDS = {"list", "done", "todo", "deadline", "event", "delete", "bye", "find"};
 
 
     /**
@@ -39,16 +48,16 @@ public class Parser {
             return new ExitCommand();
         case "find":
             return new FindCommand(fullCommand);
+        default:
+            throw new BottoException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
-        throw new BottoException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
 
 
     private static String findCommand(String fullCommand) {
-        for(String x: COMMANDS) {
-            if(fullCommand.startsWith(x)) {
+        for (String x: COMMANDS) {
+            if (fullCommand.startsWith(x)) {
                 return x;
             }
         }

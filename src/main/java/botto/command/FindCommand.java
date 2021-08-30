@@ -1,13 +1,13 @@
 package botto.command;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import botto.BottoException;
 import botto.task.Task;
 import botto.util.Storage;
 import botto.util.TaskList;
 import botto.util.Ui;
-
-import java.util.LinkedList;
-import java.util.List;
 
 public class FindCommand implements Command {
     private String command;
@@ -28,8 +28,8 @@ public class FindCommand implements Command {
 
         List<Task> matchesTasks = new LinkedList<>();
 
-        for(Task task: taskList.getTasks()) {
-            if(task.getDescription().toLowerCase().contains(keyword)) {
+        for (Task task: taskList.getTasks()) {
+            if (task.getDescription().toLowerCase().contains(keyword)) {
                 matchesTasks.add(task);
             }
         }
