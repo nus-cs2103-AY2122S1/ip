@@ -1,3 +1,8 @@
+package duke.task;
+
+import duke.exception.NoSuchTaskException;
+import duke.ui.Ui;
+
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
@@ -23,7 +28,7 @@ public class TaskList {
         }
     }
 
-    protected TaskList(){
+    public TaskList(){
         list = new ArrayList<>();
     }
 

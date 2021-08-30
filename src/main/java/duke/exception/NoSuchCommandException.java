@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.ui.Ui;
+
 public class NoSuchCommandException extends DukeException {
     public NoSuchCommandException(Ui ui) {
         super(ui);

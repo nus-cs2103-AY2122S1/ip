@@ -1,3 +1,11 @@
+package duke.parser;
+
+import duke.command.*;
+import duke.exception.*;
+import duke.storage.Storage;
+import duke.task.*;
+import duke.ui.Ui;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,7 +21,7 @@ public class Parser {
         this.ui = ui;
     }
 
-    public Command parseUserInput(String userInput) throws DukeException{
+    public Command parseUserInput(String userInput) throws DukeException {
         String[] splitUserInput = userInput.split(" ");
         String commandType = splitUserInput[0];
         String commandDetails = userInput.substring(userInput.indexOf(" ") + 1);

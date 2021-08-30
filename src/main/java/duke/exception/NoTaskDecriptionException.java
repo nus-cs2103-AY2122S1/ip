@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.ui.Ui;
+
 public class NoTaskDecriptionException extends DukeException {
     public NoTaskDecriptionException(Ui ui) {
         super(ui);

@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.ui.Ui;
+
 public class InvalidDateTimeException extends DukeException {
     public InvalidDateTimeException(Ui ui) {
         super(ui);

@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.ui.Ui;
+
 public abstract class DukeException extends Exception {
     private Ui ui;
 

@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.ui.Ui;
+
 public class NoDateTimeException extends DukeException {
     public NoDateTimeException(Ui ui) {
         super(ui);
