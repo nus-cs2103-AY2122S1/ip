@@ -5,13 +5,26 @@ import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a TodoList that contains Tasks.
+ *
+ * @author Owen Tan
+ * @version Duke Level-9
+ */
 public class TaskList {
+    /** A list of tasks */
     private ArrayList<Task> lst;
 
+    /**
+     * Public constructor for TaskList.
+     */
     public TaskList() {
         lst = new ArrayList<Task>();
     }
 
+    /**
+     * Prints all items in a TaskList.
+     */
     public void iterList() {
         System.out.println("Here are the tasks in your list:");
         if (lst.size() == 0) {
@@ -24,10 +37,19 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Task to TaskList.
+     * @param text
+     */
     public void add(Task text) {
         lst.add(text);
     }
 
+    /**
+     * Completes a Task in a Tasklist with a given index.
+     * @param index Index of Task in the List (0-indexed)
+     * @throws DukeException
+     */
     public void complete(int index) throws DukeException {
         if (index < 0 || index > lst.size() - 1) {
             throw new DukeException("Hey! Invalid Task number given.");
@@ -36,6 +58,11 @@ public class TaskList {
         task.completeTask();
     }
 
+    /**
+     * Deletes a Task in a Tasklist with a given index.
+     * @param index Index of Task in the List (0-indexed)
+     * @throws DukeException
+     */
     public void delete(int index) throws DukeException {
         if (index < 0 || index > lst.size() - 1) {
             throw new DukeException("Hey! Invalid Task number given.");
@@ -47,6 +74,10 @@ public class TaskList {
         return lst;
     }
 
+    /**
+     * Returns a length of TaskList.
+     * @return An integer that represents the number of Tasks in a TaskList.
+     */
     public int count() {
         return lst.size();
     }
@@ -59,6 +90,10 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Prints all relevant tasks that contain a certain keyword.
+     * @param keyword Keyword to be contained in the Task's description.
+     */
     public void searchKeyword(String keyword) {
         System.out.println("Here are the matching tasks in your list:");
         int i = 1;

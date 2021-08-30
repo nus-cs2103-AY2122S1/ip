@@ -3,9 +3,20 @@ package duke.ui;
 import duke.commands.Task;
 import duke.data.TaskList;
 
+
+/**
+ * Encapsulates the Ui component of Duke.
+ *
+ * @author Owen Tan
+ * @version Duke Level-9
+ */
 public class Ui {
     TaskList tasks;
 
+    /**
+     * Public constructor for Ui.
+     * @param tasks Associated TaskList.
+     */
     public Ui(TaskList tasks) {
         this.tasks = tasks;
     }

@@ -6,12 +6,23 @@ import duke.parser.Parser;
 
 import java.util.Scanner;
 
+/**
+ * Encapsulates a bot that manages tasks for users.
+ *
+ * @author Owen Tan
+ * @version Duke Level-9
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filepath
+     */
     public Duke(String filepath) {
         tasks = new TaskList();
         ui = new Ui(tasks);
@@ -20,7 +31,7 @@ public class Duke {
         storage.load();
     }
 
-    public void run() {
+    private void run() {
         Scanner sc = new Scanner(System.in);
         ui.greeting();
         String cmd = sc.nextLine();

@@ -13,19 +13,38 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
+/**
+ * Encapsulates a Parser object that reads in and executes commands based on user's input.
+ *
+ * @author Owen Tan
+ * @version Duke Level-9
+ */
 public class Parser {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Commands from user's input
+     */
     public enum Keyword {
         TODO, LIST, DEADLINE, EVENT, DONE, DELETE, FIND
     }
 
+    /**
+     * Public constructor for Parser.
+     * @param tasks A list of tasks.
+     * @param ui Ui for Duke.
+     */
     public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;
     }
 
+    /**
+     * Reads in and executes user's input based on string given.
+     * @param cmd String from user's input.
+     * @throws DukeException
+     */
     public void parse(String cmd) throws DukeException {
         String[] tokens = cmd.split(" ");
         Keyword command = validateCommand(tokens);
