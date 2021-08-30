@@ -39,8 +39,8 @@ public class DeleteTaskCommand extends Command {
         }
 
         // Remove the task
-        tasks.removeFromList(this.task);
         storage.removeFromFile(tasks.indexOf(this.task));
+        tasks.removeFromList(this.task);
 
         // Update message
         this.message = String.format(
