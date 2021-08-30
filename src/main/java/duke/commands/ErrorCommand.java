@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.errors.DukeError;
+import duke.errors.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -33,7 +33,10 @@ public class ErrorCommand extends Command {
      * @param storage The Storage object that stores the TaskList on the Local Machine
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        DukeError e = DukeError.getError(this.code);
-        ui.showError(e);
+        try {
+            throw new DukeException(this.code);
+        } catch(DukeException e) {
+            ui.showError(e);
+        }
     }
 }

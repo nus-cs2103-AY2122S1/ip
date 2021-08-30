@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.commands.Command.CommandType;
-import duke.errors.DukeError;
+import duke.errors.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -18,7 +18,7 @@ public class Ui {
         System.out.println("Henlo, Duke here! How can I be of assistance?");
     }
 
-    public void showError(DukeError e) {
+    public void showError(DukeException e) {
         System.out.println(e);
     }
 

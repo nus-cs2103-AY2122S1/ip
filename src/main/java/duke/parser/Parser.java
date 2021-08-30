@@ -2,14 +2,9 @@ package duke.parser;
 
 import java.time.LocalDate;
 
-import duke.commands.AddCommand;
-import duke.commands.Command;
+import duke.commands.*;
 import duke.commands.Command.CommandType;
-import duke.commands.EditCommand;
-import duke.commands.ErrorCommand;
-import duke.commands.ExitCommand;
-import duke.commands.ListCommand;
-import duke.commands.SearchCommand;
+import duke.errors.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -33,6 +28,7 @@ public class Parser {
         Cleaner cl = new Cleaner();
         String cleanCommand = cl.clean(fullCommand, taskList.getCapacity());
         String firstWord = cleanCommand.split(" ")[0];
+
         switch (firstWord) {
         case "bye":
             return new ExitCommand();
@@ -55,6 +51,7 @@ public class Parser {
         default:
             return errorParser(cleanCommand);
         }
+
 
     }
 
