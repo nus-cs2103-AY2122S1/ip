@@ -1,14 +1,14 @@
 package botto.command;
 
-import botto.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import botto.BottoException;
 import botto.task.Deadline;
 import botto.task.Task;
 import botto.util.Storage;
 import botto.util.TaskList;
 import botto.util.Ui;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Command for adding a deadline
@@ -47,7 +47,7 @@ public class AddDeadlineCommand implements Command {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
 
         try {
-            Task task =  new Deadline(information[0], LocalDateTime.parse(information[1], formatter));
+            Task task = new Deadline(information[0], LocalDateTime.parse(information[1], formatter));
             taskList.addTask(task);
 
             ui.respondAdd(task, taskList.getSize());

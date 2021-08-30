@@ -1,6 +1,6 @@
 package botto.command;
 
-import botto.*;
+import botto.BottoException;
 import botto.task.Task;
 import botto.util.Storage;
 import botto.util.TaskList;
@@ -9,7 +9,7 @@ import botto.util.Ui;
 /**
  * Command for marking a task as done
  */
-public class MarkDoneCommand implements Command{
+public class MarkDoneCommand implements Command {
     private String command;
 
     /**

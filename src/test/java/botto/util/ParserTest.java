@@ -1,10 +1,18 @@
 package botto.util;
 
-import botto.BottoException;
-import botto.command.*;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import botto.BottoException;
+import botto.command.AddDeadlineCommand;
+import botto.command.AddEventCommand;
+import botto.command.AddToDoCommand;
+import botto.command.DeleteCommand;
+import botto.command.ExitCommand;
+import botto.command.MarkDoneCommand;
+import botto.command.ShowListCommand;
 
 public class ParserTest {
 

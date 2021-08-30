@@ -1,8 +1,8 @@
 package botto.task;
 
-public class TaskStub extends Task{
-    public String description;
-    public boolean isDone;
+public class TaskStub extends Task {
+    private String description;
+    private boolean isDone;
 
     public TaskStub(String description) {
         super(description);
@@ -14,6 +14,10 @@ public class TaskStub extends Task{
 
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     @Override

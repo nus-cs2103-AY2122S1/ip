@@ -1,23 +1,24 @@
 package botto.util;
 
-import botto.BottoException;
-import botto.task.Task;
-import botto.task.TaskStub;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import botto.BottoException;
+import botto.task.Task;
+import botto.task.TaskStub;
 
 public class TaskListTest {
     private TaskList taskList;
     private TaskStub t1 = new TaskStub("Collect Money");
     private TaskStub t2 = new TaskStub("Spend Money");
     private TaskStub t3 = new TaskStub("Earn Money");
-    List<Task> tasks = new LinkedList<>();
+    private List<Task> tasks = new LinkedList<>();
 
     @BeforeEach
     public void setUp() {
@@ -39,15 +40,15 @@ public class TaskListTest {
 
     @Test
     public void markAsDone_task1_success() throws BottoException {
-        assertEquals(false, t1.isDone);
+        assertEquals(false, t1.isDone());
         assertEquals(t1, taskList.markAsDone(0));
-        assertEquals(true, t1.isDone);
+        assertEquals(true, t1.isDone());
     }
 
     @Test
     public void markAsDone_notElement_exceptionThrown() {
         try {
-            assertEquals(new Task("Dummy"),taskList.markAsDone(4));
+            assertEquals(new Task("Dummy"), taskList.markAsDone(4));
         } catch (BottoException e) {
             assertEquals("☹ OOPS!!! The task does not exist.", e.getMessage());
         }

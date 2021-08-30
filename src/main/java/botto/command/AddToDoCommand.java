@@ -1,6 +1,6 @@
 package botto.command;
 
-import botto.*;
+import botto.BottoException;
 import botto.task.Task;
 import botto.task.Todo;
 import botto.util.Storage;

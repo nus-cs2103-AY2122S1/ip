@@ -3,7 +3,7 @@ package botto;
 /**
  * Potential exceptions of the Botto bot
  */
-public class BottoException extends Exception{
+public class BottoException extends Exception {
 
     /**
      * Constructor for a BottoException

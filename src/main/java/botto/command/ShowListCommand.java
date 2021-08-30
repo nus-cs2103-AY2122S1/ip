@@ -7,7 +7,7 @@ import botto.util.Ui;
 /**
  * Command for printing the user tasks
  */
-public class ShowListCommand implements Command{
+public class ShowListCommand implements Command {
 
     /**
      * print the user tasks
