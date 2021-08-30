@@ -32,7 +32,7 @@ public class TaskList {
         }
     }
     
-    String add(Task task) { //TODO refactor: add task from here not from parser
+    protected String add(Task task) {
         this.tasks.add(task);
         this.existingTasks.add(task.getTaskName());
         return String.format("New task added to list:\n%s", task);
@@ -40,7 +40,7 @@ public class TaskList {
 
     protected String markAsCompleted(String taskName) throws DukeException.TaskAlreadyCompleteException,
             DukeException.NoSuchTaskException {
-        int taskIdx = this.getTaskIdx(taskName);
+        int taskIdx = this.getTaskIndex(taskName);
         Task completedTask = this.tasks.get(taskIdx);
         if (completedTask.getIsCompleted()) {
             throw new DukeException.TaskAlreadyCompleteException("Task is already complete!!");
@@ -50,7 +50,7 @@ public class TaskList {
         return "Task marked as completed:\n" + this.tasks.get(taskIdx).toString();
     }
     
-    String deleteTask(int taskNum) throws DukeException.InvalidTaskNumException {
+    protected String deleteTask(int taskNum) throws DukeException.InvalidTaskNumException {
         if (taskNum > this.tasks.size() || taskNum < 1) {
             throw new DukeException.InvalidTaskNumException("Task number " + taskNum + " does not exist!");
         } else {
@@ -83,7 +83,7 @@ public class TaskList {
         return sb.toString();
     }
 
-    protected int getTaskIdx(String taskName) throws DukeException.NoSuchTaskException {
+    protected int getTaskIndex(String taskName) throws DukeException.NoSuchTaskException {
         int currentTaskNum = 0;
         while (currentTaskNum < this.tasks.size()) {
             if (this.tasks.get(currentTaskNum).getTaskName().equals(taskName)) {
@@ -104,12 +104,12 @@ public class TaskList {
             for (int i = 0; i < this.tasks.size(); i++) {
                 String taskName = this.tasks.get(i).getTaskName();
                 if (taskName.contains(keywords)) {
-                    sb.append(i + 1);
-                    sb.append(".");
-                    sb.append(this.tasks.get(i).toString());
-                    if (i < this.tasks.size() - 1) {
+                    if (sb.length() != 0) {
                         sb.append("\n");
                     }
+                    sb.append(i + 1);
+                    sb.append(". ");
+                    sb.append(this.tasks.get(i).toString());
                 }
             }
             if (sb.length() == 0) {
