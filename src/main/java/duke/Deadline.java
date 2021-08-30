@@ -13,6 +13,11 @@ public class Deadline extends Task {
         this.dateForObject = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * toString() method for deadline object
+     *
+     * @return String The task printed in the correct format
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " by: " + this.by;

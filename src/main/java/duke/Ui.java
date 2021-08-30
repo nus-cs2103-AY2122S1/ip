@@ -26,6 +26,12 @@ public class Ui {
         return "";
     }
 
+
+    /**
+     * Method that adds a Deadline task onto TaskList
+     *
+     * @return void
+     */
     public String showLoadingError() {
         return this.str;
     }

@@ -15,6 +15,15 @@ public class Storage {
 
     }
 
+
+
+    /**
+     * Method that adds the Tasklist arraylist into the text file
+     *
+     * @param listOfTasks The TaskList that contains all the tasks added
+     *
+     * @return void
+     */
     public static void appendListToFile(TaskList listOfTasks) {
         try {
             File fileStorage = new File("data/duke.txt");
