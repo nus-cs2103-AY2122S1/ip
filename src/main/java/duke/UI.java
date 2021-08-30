@@ -3,6 +3,7 @@ package duke;
 import java.util.Scanner;
 
 public class UI {
+
     public void initiate() {
         DukeMessage msg = MessageFactory.createMessage(null);
         msg.display();
