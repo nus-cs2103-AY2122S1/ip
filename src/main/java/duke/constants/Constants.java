@@ -13,6 +13,9 @@ public class Constants {
      * Encapsulates constants related to CLI display.
      */
     public static class Display {
+        /**
+         * Allows choice between tab and spaces for indentation in the CLI
+         */
         public static enum IndentationType {
             TAB("\t"), SPACE("    ");
 
@@ -29,9 +32,19 @@ public class Constants {
 
         }
 
+
         public static final IndentationType INDENTATION_TYPE = IndentationType.TAB;
+        /**
+         * Number of characters of breakline pattern used in breakline.
+         */
         public static final int BREAKLINE_LENGTH = 100;
+        /**
+         * A unit that makes up the breakline.
+         */
         public static final String BREAKLINE_PATTERN = "_";
+        /**
+         * Breakline consists of BREAKLINE_PATTERN repeated BREAKLINE_LENGTH times, together with a newline char.
+         */
         public static final String BREAKLINE;
         static {
             BREAKLINE = StringHelpers.repeat(BREAKLINE_LENGTH, BREAKLINE_PATTERN) + System.lineSeparator();

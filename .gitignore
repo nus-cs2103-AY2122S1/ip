@@ -4,10 +4,10 @@
 /*.iml
 
 # Custom class dir
-/dist/
+dist/
 
 # Local storage folder
-/data/
+data/
 
 # Gradle build files
 /.gradle/
