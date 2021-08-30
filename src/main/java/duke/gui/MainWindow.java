@@ -7,8 +7,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
- * Controller for duke.MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -21,14 +23,16 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Stage stage;
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke d, Stage stage) {
+        this.duke = d;
+        this.stage = stage;
         dialogContainer.getChildren().addAll(d.welcomeUser());
     }
 
@@ -39,7 +43,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        duke.getResponse(input, this.dialogContainer);
+        boolean isExit = duke.getResponse(input, this.dialogContainer);
         userInput.clear();
+        if (isExit) {
+            this.stage.close();
+        }
     }
 }
