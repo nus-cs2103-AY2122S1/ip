@@ -2,12 +2,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import seedu.duke.Duke;
 
 public class Main extends Application {
+    private Duke duke = new Duke();
+
     /**
      * Runs the main Duke ToDo Application
      * 
@@ -17,16 +20,21 @@ public class Main extends Application {
      *                               the given file path.
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        Duke duke = new Duke();
-        duke.start();
+        // Duke duke = new Duke();
+        // duke.start();
     }
 
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
