@@ -40,10 +40,10 @@ public class Ui {
     private static final String DONE = "Good job, meow! Marked this task as done:\n   ";
 
     /**
-     * Show starting logo and message on boot.
+     * Show message on boot.
      */
-    String showLogo() {
-        return LOGO + print(GREET);
+    public static String showGreet() {
+        return GREET;
     }
 
     String showSavedMessage() {

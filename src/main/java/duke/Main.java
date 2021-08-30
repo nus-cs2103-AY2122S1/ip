@@ -1,5 +1,6 @@
 package duke;
 
+import java.awt.*;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -23,6 +24,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(new Duke("data/tasks.txt"));
             stage.show();
+            fxmlLoader.<MainWindow>getController().displayGreeting();
         } catch (IOException e) {
             e.printStackTrace();
         }
