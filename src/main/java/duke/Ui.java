@@ -14,7 +14,7 @@ public class Ui {
     private final Storage storage;
 
     /**
-     * Constructs a Ui
+     * Constructs a user interface.
      *
      * @param tasks TaskList to record tasks.
      * @param storage Storage to store tasks.
