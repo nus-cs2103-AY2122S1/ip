@@ -31,13 +31,6 @@ public class UI {
         return "¡Adiós! See you soon!";
     }
 
-    /** Asks user for input **/
-    public static String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter your command:");
-        return sc.nextLine();
-    }
-
     /** Returns a message for when there is an unknown DukeException **/
     public static String dukeException() {
         return "There seems to be an error with Duke. Please try again!";
