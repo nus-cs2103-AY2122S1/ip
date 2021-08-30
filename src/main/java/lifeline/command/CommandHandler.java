@@ -258,7 +258,7 @@ public class CommandHandler {
     private static int convertIndexToInt(String command, String index, TaskList taskList) throws LifelineException {
         try {
             int taskIndex = Integer.parseInt(index) - 1;
-            if (taskIndex >= taskList.size() || taskIndex < 0) {
+            if (taskIndex >= taskList.getSize() || taskIndex < 0) {
                 throw new LifelineException("Index is out of bounds!");
             }
             return taskIndex;

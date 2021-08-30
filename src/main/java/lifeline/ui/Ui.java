@@ -10,13 +10,13 @@ import lifeline.task.TaskList;
  */
 public class Ui {
 
-    private Scanner sc;
+    private Scanner scanner;
 
     /**
      * Initialises the scanner object to read input from user
      */
     public Ui() {
-        this.sc = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -25,7 +25,7 @@ public class Ui {
      * @return Input from user
      */
     public String readCommand() {
-        return sc.nextLine().trim();
+        return scanner.nextLine().trim();
     }
 
     /**
@@ -36,13 +36,13 @@ public class Ui {
      */
     public String showTaskList(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder();
-        if (taskList.size() == 0) {
+        if (taskList.getSize() == 0) {
             stringBuilder.append("You have no remaining tasks.\n");
         } else {
             int uncompletedTask = 0;
-            stringBuilder.append("Here " + (taskList.size() > 1 ? "are" : "is")
-                    + " your " + (taskList.size() > 1 ? "tasks:" : "task:") + "\n");
-            for (int i = 0; i < taskList.size(); i++) {
+            stringBuilder.append("Here " + (taskList.getSize() > 1 ? "are" : "is")
+                    + " your " + (taskList.getSize() > 1 ? "tasks:" : "task:") + "\n");
+            for (int i = 0; i < taskList.getSize(); i++) {
                 Task currTask = taskList.get(i);
                 stringBuilder.append((i + 1) + ". " + currTask + "\n");
                 if (!currTask.isDone()) {
@@ -76,8 +76,8 @@ public class Ui {
      */
     public String showFoundTasks(TaskList foundTasks, String keyword) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append((foundTasks.size() == 1 ? "Task" : "Tasks") + " with keyword " + keyword + ":\n");
-        for (int i = 0; i < foundTasks.size(); i++) {
+        stringBuilder.append((foundTasks.getSize() == 1 ? "Task" : "Tasks") + " with keyword " + keyword + ":\n");
+        for (int i = 0; i < foundTasks.getSize(); i++) {
             stringBuilder.append(foundTasks.get(i) + "\n");
         }
         return stringBuilder.toString();

@@ -242,7 +242,7 @@ public class CommandHandlerTest {
         TaskList taskList = new TaskList(tasks);
         Ui ui = new Ui();
         Command.DELETE.getExecute().apply("done 1", storage, taskList, ui);
-        assertTrue(taskList.size() == 0);
+        assertTrue(taskList.getSize() == 0);
     }
 
     @Test

@@ -30,7 +30,7 @@ public class Storage {
     /**
      * File path to save the tasks
      */
-    private String filepath;
+    private String filePath;
 
     /**
      * Used to convert Java Objects into their JSON representation
@@ -40,10 +40,10 @@ public class Storage {
     /**
      * Default constructor for a Storage
      *
-     * @param filepath Path to save and load tasks from
+     * @param filePath Path to save and load tasks from
      */
-    public Storage(String filepath) {
-        this.filepath = filepath;
+    public Storage(String filePath) {
+        this.filePath = filePath;
         this.gson = new GsonBuilder().setPrettyPrinting().create();
     }
 
@@ -56,7 +56,7 @@ public class Storage {
     public void save(TaskList tasks) throws LifelineException {
         try {
             createDirectoryIfMissing();
-            FileWriter fileWriter = new FileWriter(filepath);
+            FileWriter fileWriter = new FileWriter(filePath);
             fileWriter.write(gson.toJson(tasks.getTaskList(), ArrayList.class));
             fileWriter.close();
         } catch (IOException e) {
@@ -72,7 +72,7 @@ public class Storage {
      */
     public TaskList load() throws LifelineException {
         try {
-            FileReader fileReader = new FileReader(filepath);
+            FileReader fileReader = new FileReader(filePath);
             JsonArray arr = JsonParser.parseReader(fileReader).getAsJsonArray();
             TaskList savedTasks = new TaskList(new ArrayList<Task>());
             for (int i = 0; i < arr.size(); i++) {
@@ -118,8 +118,8 @@ public class Storage {
     }
 
     private void createDirectoryIfMissing() {
-        int indexOfLastFileSeparator = filepath.indexOf(File.separator);
-        String directoryToSaveTo = filepath.substring(0, indexOfLastFileSeparator == -1 ? 0 : indexOfLastFileSeparator);
+        int indexOfLastFileSeparator = filePath.indexOf(File.separator);
+        String directoryToSaveTo = filePath.substring(0, indexOfLastFileSeparator == -1 ? 0 : indexOfLastFileSeparator);
         File directory = new File(directoryToSaveTo);
         directory.mkdirs();
     }

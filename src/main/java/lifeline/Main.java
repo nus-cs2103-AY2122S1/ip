@@ -23,8 +23,8 @@ public class Main extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            AnchorPane anchorPane = fxmlLoader.load();
+            Scene scene = new Scene(anchorPane);
             scene.getStylesheets().add("styles/lifeline.css");
             Image icon = new Image(this.getClass().getResourceAsStream("/images/Apex.png"));
             stage.getIcons().add(icon);

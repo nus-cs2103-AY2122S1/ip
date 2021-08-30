@@ -44,7 +44,7 @@ public class TaskList {
      *
      * @return Number of tasks in TaskList
      */
-    public int size() {
+    public int getSize() {
         return taskList.size();
     }
 
@@ -91,7 +91,7 @@ public class TaskList {
                 foundTasks.add(currTask);
             }
         }
-        if (foundTasks.size() == 0) {
+        if (foundTasks.getSize() == 0) {
             throw new LifelineException("No tasks found with the given keyword " + keyword);
         }
         return foundTasks;

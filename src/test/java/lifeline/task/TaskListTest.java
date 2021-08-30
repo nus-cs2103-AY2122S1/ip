@@ -17,9 +17,9 @@ public class TaskListTest {
     public void testAddTask() {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         ToDo todo = new ToDo("read book");
-        assertEquals(0, taskList.size());
+        assertEquals(0, taskList.getSize());
         taskList.add(todo);
-        assertEquals(1, taskList.size());
+        assertEquals(1, taskList.getSize());
     }
 
     @Test
@@ -28,9 +28,9 @@ public class TaskListTest {
         ToDo todo = new ToDo("read book");
         tasks.add(todo);
         TaskList taskList = new TaskList(tasks);
-        assertEquals(1, taskList.size());
+        assertEquals(1, taskList.getSize());
         taskList.deleteTask(0);
-        assertEquals(0, taskList.size());
+        assertEquals(0, taskList.getSize());
     }
 
     @Test
