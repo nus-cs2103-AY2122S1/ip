@@ -4,6 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event.
+ * An event contains extra information regarding the date, as well as start and end time of the event.
+ *
+ * @author Zhang Shi Chen
+ */
 public class Event extends Task {
     private final LocalDate date;
     private final LocalTime startTime;

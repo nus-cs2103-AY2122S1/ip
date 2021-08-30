@@ -1,5 +1,11 @@
 package duke.task;
 
+/**
+ * Represents a todo.
+ * A todo is the same as a task.
+ *
+ * @author Zhang Shi Chen
+ */
 public class Todo extends Task {
     /**
      * Constructor for todo.

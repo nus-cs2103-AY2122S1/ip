@@ -1,5 +1,11 @@
 package duke.task;
 
+/**
+ * Represents a task.
+ * Contains description of the task and whether it is completed.
+ *
+ * @author Zhang Shi Chen
+ */
 public class Task {
     private final String description;
     private boolean isDone;

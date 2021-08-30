@@ -15,6 +15,11 @@ import duke.exception.IllegalFormatException;
 import duke.exception.TaskNotFoundException;
 import duke.util.Message;
 
+/**
+ * Represents a list of tasks.
+ *
+ * @author Zhang Shi Chen
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
