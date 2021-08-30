@@ -1,20 +1,24 @@
 package duke;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 
     @Test
     public void emptyTextTest() {
         Parser p = new Parser();
-        assertEquals(new String[]{"",""}, p.inputParser(""));
+        String[] output = p.inputParser("");
+        assertEquals("", output[0]) ;
     }
 
     @Test
     public void validTextTest() {
         Parser p = new Parser();
-        assertEquals(new String[]{"todo","test text"}, p.inputParser("todo test text"));
+        String[] output = p.inputParser("todo test text");
+
+        assertEquals("todo", output[0]) ;
+        assertEquals("test text", output[1]) ;
     }
 }
