@@ -16,10 +16,12 @@ public class Parser {
      * @throws LifelineException if command is invalid
      */
     public static Command parse(String command) throws LifelineException {
-        try {
-            return Command.valueOf(command.split("\\s", 2)[0].toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new LifelineException("I am sorry! I don't know what that means!");
+        String cleanAndLowerString = command.split("\\s", 2)[0].toLowerCase();
+        for (Command c : Command.values()) {
+            if (c.hasCommand(cleanAndLowerString)) {
+                return c;
+            }
         }
+        throw new LifelineException("I am sorry! I don't know what that means!");
     }
 }

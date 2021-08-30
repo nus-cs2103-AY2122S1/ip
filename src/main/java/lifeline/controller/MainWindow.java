@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import lifeline.Lifeline;
+import lifeline.command.Command;
 
 
 /**
@@ -58,7 +59,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getLifelineDialog(response, lifelineImage)
         );
         userInput.clear();
-        if (input.toLowerCase().trim().equals("bye")) {
+        if (Command.BYE.hasCommand(input.toLowerCase().trim())) {
             PauseTransition delay = new PauseTransition(Duration.millis(400));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
