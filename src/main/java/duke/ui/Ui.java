@@ -1,8 +1,8 @@
 package duke.ui;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 /**
  * Handles interacting with the user.

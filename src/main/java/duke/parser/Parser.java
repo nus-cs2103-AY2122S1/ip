@@ -1,9 +1,7 @@
 package duke.parser;
 
-import duke.exception.TaskNotFoundException;
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-import duke.ui.Ui;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyCommandException;
@@ -11,9 +9,10 @@ import duke.exception.IncorrectFormatException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.MessageEmptyException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import duke.exception.TaskNotFoundException;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
 
 
 /**
@@ -120,13 +119,13 @@ public class Parser {
 
                 Ui.printList(matchedTasks);
                 break;
-            case "":                                // empty user input
+            case "": // empty user input
                 throw new EmptyCommandException();
-            default:                                // all other inputs that are not supported
+            default: // all other inputs that are not supported
                 throw new InvalidCommandException();
             }
         } catch (DukeException e) {
-            Ui.printMessage(e.getMessage());        // prints only error message out for user
+            Ui.printMessage(e.getMessage());
         }
     }
 }

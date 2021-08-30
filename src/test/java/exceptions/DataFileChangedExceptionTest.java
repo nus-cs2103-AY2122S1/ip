@@ -1,13 +1,15 @@
 package exceptions;
 
-import duke.exception.DataFileChangedException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import duke.exception.DataFileChangedException;
 
 public class DataFileChangedExceptionTest {
     @Test
     public void testExceptionMessage() {
-        assertEquals("Contents of file have been changed! Resetting the list!", new DataFileChangedException().getMessage());
+        assertEquals("Contents of file have been changed! Resetting the list!",
+                new DataFileChangedException().getMessage());
     }
 }

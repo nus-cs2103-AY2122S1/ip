@@ -1,14 +1,13 @@
 package duke;
 
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
-
-import java.util.Scanner;
 
 /**
  * Duke class that initialises the duke.Duke chat bot.
@@ -61,7 +60,7 @@ public class Duke {
 
         /* user input trimmed to remove unwanted spaces at the front and back of user input
         allows for greater margin of error when typing in commands */
-        while(!(input = sc.nextLine().trim()).equals("bye")) {
+        while (!(input = sc.nextLine().trim()).equals("bye")) {
             // continuously runs the bot as long as the "bye" command is not issued
             parser.handleCommands(input);
         }

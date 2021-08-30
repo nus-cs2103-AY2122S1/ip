@@ -1,9 +1,10 @@
 package exceptions;
 
-import duke.exception.MessageEmptyException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import duke.exception.MessageEmptyException;
 
 public class MessageEmptyExceptionTest {
     @Test
