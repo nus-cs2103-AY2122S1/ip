@@ -11,6 +11,7 @@ public class Ponyo {
     // CONSTANTS
     private static final String PATH = "src/main/data";
     private static final String FILENAME = "tasks.txt";
+    private static final String FILEPATH = PATH + "/" + FILENAME;
 
     private final Storage storage;
     private TaskList tasks;
@@ -55,6 +56,6 @@ public class Ponyo {
     }
 
     public static void main(String[] args) {
-        new Ponyo(PATH + "/" + FILENAME).run();
+        new Ponyo(FILEPATH).run();
     }
 }
