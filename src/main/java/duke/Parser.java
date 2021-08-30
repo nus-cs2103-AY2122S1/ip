@@ -158,30 +158,35 @@ public class Parser extends Application {
         return caseNum;
     }
 
-    private void listInput(TaskList taskList) throws InputError {
+    private String listInput(TaskList taskList) throws InputError {
+        String response = "";
         try {
             if (taskList.size() == 0) {
                 throw new InputError("No items in list");
             }
-            taskList.printList();
+            response = taskList.printList();
         } catch (InputError e) {
-            ui.errorMessage(e);
+            response = ui.errorMessage(e);
         }
+        return response;
     }
 
-    private void doneInput(String str, TaskList taskList) throws InputError {
+    private String doneInput(String str, TaskList taskList) throws InputError {
+        String response = "";
         try {
             if (str.length() == 4) {
                 throw new InputError("No task indicated");
             }
             int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
-            taskList.doneItem(indexNum);
+            response = taskList.doneItem(indexNum);
         } catch (InputError e) {
-            ui.errorMessage(e);
+            response = ui.errorMessage(e);
         }
+        return response;
     }
 
-    private void findInput(String str, TaskList taskList) throws InputError {
+    private String findInput(String str, TaskList taskList) throws InputError {
+        String response = "";
         try {
             if (str.length() == 4) {
                 throw new InputError("No task indicated");
@@ -191,56 +196,64 @@ public class Parser extends Application {
             if (foundList.currList().isEmpty()) {
                 throw new InputError("No such tasks found");
             }
-            System.out.println("We found these for you boss:");
-            foundList.printList();
+            response = "We found these for you boss:\n" + foundList.printList();
         } catch (InputError e) {
-            ui.errorMessage(e);
+            response = ui.errorMessage(e);
         }
+        return response;
     }
 
-    private void todoInput(String str, TaskList taskList) throws InputError {
+    private String todoInput(String str, TaskList taskList) throws InputError {
+        String response = "";
         try {
             if (str.length() == 4) {
                 throw new InputError("Description Please!");
             }
-            taskList.addTodo(str);
+            response = taskList.addTodo(str);
         } catch (InputError e) {
-            ui.errorMessage(e);
+            response = ui.errorMessage(e);
         }
+        return response;
     }
 
-    private void deadlineInput(String str, TaskList taskList) throws InputError {
+    private String deadlineInput(String str, TaskList taskList) throws InputError {
+        String response = "";
         try {
             if (str.length() == 8) {
                 throw new InputError("Description Please!");
             }
-            taskList.addDeadline(str);
+            response = taskList.addDeadline(str);
         } catch (InputError e) {
-            ui.errorMessage(e);
+            response = ui.errorMessage(e);
         }
+        return response;
     }
 
-    private void eventInput(String str, TaskList taskList) throws InputError {
+    private String eventInput(String str, TaskList taskList) throws InputError {
+        String response = "";
         try {
             if (str.length() == 5) {
                 throw new InputError("Description Please!");
             }
-            taskList.addEvent(str);
+            response = taskList.addEvent(str);
         } catch (InputError e) {
-            ui.errorMessage(e);
+            response = ui.errorMessage(e);
         }
+        return response;
     }
 
-    private void deleteInput(String str, TaskList taskList) throws InputError {
+    private String deleteInput(String str, TaskList taskList) throws InputError {
+        String response = "";
         try {
             if (str.length() == 5) {
                 throw new InputError("No Task to delete");
             }
             int indexNum = Integer.parseInt(str.replaceAll("[^0-9]", ""));
-            taskList.deleteItem(indexNum);
+            response = taskList.deleteItem(indexNum);
         } catch (InputError e) {
-            ui.errorMessage(e);
+            response = ui.errorMessage(e);
         }
+        return response;
     }
 
     /**
@@ -251,40 +264,43 @@ public class Parser extends Application {
      * @param taskList Current TaskList being used.
      * @throws InputError If user input is invalid or unrecognised.
      */
-    public void caseHandler(int caseNum, String input, TaskList taskList) throws InputError {
+    public String caseHandler(int caseNum, String input, TaskList taskList) throws InputError {
+        String response = "";
         switch (caseNum) {
         case 1:
+            response = ui.byeMessage();
             Platform.exit();
             break;
         case 2:
-            listInput(taskList);
+            response = listInput(taskList);
             break;
         case 3:
-            doneInput(input, taskList);
+            response = doneInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
         case 4:
-            todoInput(input, taskList);
+            response = todoInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
         case 5:
-            deadlineInput(input, taskList);
+            response = deadlineInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
         case 6:
-            eventInput(input, taskList);
+            response = eventInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
         case 7:
-            deleteInput(input, taskList);
+            response = deleteInput(input, taskList);
             storage.fileSaver(taskList.currList());
             break;
         case 8:
-            findInput(input, taskList);
+            response = findInput(input, taskList);
             break;
         default:
-            ui.invalidInput();
+            response = ui.invalidInput();
         }
+        return response;
     }
     @Override
     public void start(Stage stage) {

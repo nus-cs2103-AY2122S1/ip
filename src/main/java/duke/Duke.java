@@ -52,7 +52,8 @@ public class Duke {
      * @param input User input.
      * @return
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) throws InputError {
+        int caseNum = parser.caseChecker(input);
+        return parser.caseHandler(caseNum, input, taskList);
     }
 }
