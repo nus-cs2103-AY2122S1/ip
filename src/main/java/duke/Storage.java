@@ -2,7 +2,6 @@ package duke;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -47,7 +46,7 @@ public class Storage {
             try {
                 new File(directoryPath).mkdir();
             } catch (NullPointerException exception) {
-                Message.printUnknownError();
+                Ui.printUnknownError();
                 return;
             }
         }
@@ -69,7 +68,7 @@ public class Storage {
             }
 
         } catch (IOException exception) {
-            Message.printReadFileError();
+            Ui.printReadFileError();
 
         }
     }
@@ -90,7 +89,7 @@ public class Storage {
             writer.write(string.toString());
             writer.close();
         } catch (IOException e) {
-            Message.printFileError();
+            Ui.printFileError();
         }
     }
 

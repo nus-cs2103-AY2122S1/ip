@@ -21,7 +21,7 @@ public class TaskCreator {
         //preliminary check if more than 1 string was entered
         if (array.length < 2) {
             //case if no name is entered for the task
-            Message.printBadInputError();
+            Ui.printBadInputError();
             return;
         }
 
@@ -57,7 +57,7 @@ public class TaskCreator {
                 }
                 //check if a time was entered
                 if (!hasEnded) {
-                    Message.printBadDateFormatError();
+                    Ui.printBadDateFormatError();
                     return;
                 }
 
@@ -66,7 +66,7 @@ public class TaskCreator {
                     LocalDate date = Parser.parseDate(time);
                     tempTask = new Deadlines(str.toString(), date);
                 } catch (IllegalArgumentException exception) {
-                    Message.printBadDateFormatError();
+                    Ui.printBadDateFormatError();
                     return;
                 }
                 break;
@@ -90,7 +90,7 @@ public class TaskCreator {
                 }
                 //check if a duration was entered
                 if (!hasTerminated) {
-                    Message.printBadDateFormatError();
+                    Ui.printBadDateFormatError();
                     return;
                 }
 
@@ -99,16 +99,16 @@ public class TaskCreator {
                     LocalDate date = Parser.parseDate(eventTime);
                     tempTask = new Events(str.toString(), date);
                 } catch (IllegalArgumentException exception) {
-                    Message.printBadDateFormatError();
+                    Ui.printBadDateFormatError();
                     return;
                 }
                 break;
         }
         taskList.addTask(tempTask);
 
-        Message.printAddTaskCompletionMessage();
+        Ui.printAddTaskCompletionMessage();
         System.out.println(tempTask.toString());
-        Message.printTaskNumberReminder(taskList.getTaskNumber());
+        Ui.printTaskNumberReminder(taskList.getTaskNumber());
         storage.saveData();
 
     }

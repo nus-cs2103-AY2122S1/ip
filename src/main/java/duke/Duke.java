@@ -1,6 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -20,11 +19,10 @@ public class Duke {
         TaskList taskList = new TaskList();
         Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH, taskList);
 
-
         //activate storage and start reading user input
         storage.start();
         Scanner scan = new Scanner(System.in);
-        Message.printWelcomeMessage();
+        Ui.printWelcomeMessage();
 
         //start reading user input
         while(true) {
@@ -39,7 +37,7 @@ public class Duke {
         }
         //exit from the program
         scan.close();
-        Message.printEndMessage();
+        Ui.printEndMessage();
     }
 
     /**

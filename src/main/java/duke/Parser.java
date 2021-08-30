@@ -68,7 +68,7 @@ public class Parser {
     public static boolean parseInput(TaskList taskList, Storage storage,String firstString, String[] inputArray) {
         //case if nothing is entered
         if (firstString.equals("")) {
-            Message.printEmptyInputError();
+            Ui.printEmptyInputError();
             return false;
         }
 
@@ -82,7 +82,7 @@ public class Parser {
         if (firstString.equals("list")) {
             //if list is empty
             if (taskList.getTaskNumber() == 0) {
-                Message.printNoTaskError();
+                Ui.printNoTaskError();
                 return false;
             }
             //repeatedly print tasks in the list
@@ -97,7 +97,7 @@ public class Parser {
         if (firstString.equals("done") || firstString.equals("delete")) {
             //case if no number is entered
             if (inputArray.length < 2) {
-                Message.printNumberError();
+                Ui.printNumberError();
                 return false;
             }
 
@@ -107,27 +107,27 @@ public class Parser {
                 int arrayIndex = index - 1;
                 //case if entered index does not correspond to a task
                 if (index > taskList.getTaskNumber() || index < 1) {
-                    Message.printTaskError();
+                    Ui.printTaskError();
                 }
                 //retrieve the task
                 Task currentTask = taskList.getTask(arrayIndex);
                 if (firstString.equals("done")) {
                     //case to complete a task
                     currentTask.setCompleted();
-                    Message.printTaskCompleted();
+                    Ui.printTaskCompleted();
                     System.out.println(currentTask.toString());
                 } else {
                     //remaining case is to delete the task.
                     taskList.deleteTask(currentTask);
-                    Message.printTaskCompleted();
+                    Ui.printTaskCompleted();
                     System.out.println(currentTask.toString());
                 }
-                Message.printTaskNumberReminder(taskList.getTaskNumber());
+                Ui.printTaskNumberReminder(taskList.getTaskNumber());
                 storage.saveData();
 
             } catch (NumberFormatException exception) {
                 //case if string entered was not a number
-                Message.printNumberError();
+                Ui.printNumberError();
             }
             return false;
 
@@ -152,7 +152,7 @@ public class Parser {
         if (firstString.equals("find")) {
             if (inputArray.length < 2) {
                 //case if no number is entered
-                Message.printNumberError();
+                Ui.printNumberError();
                 return false;
             }
             StringBuilder str = new StringBuilder();
@@ -164,7 +164,7 @@ public class Parser {
         }
 
         //case if first string input is not a keyword
-        Message.printBadInputError();
+        Ui.printBadInputError();
         return false;
     }
 }

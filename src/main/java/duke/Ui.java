@@ -6,7 +6,7 @@ package duke;
  *
  * @author Toh Wang Bin
  */
-public class Message {
+public class Ui {
 
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

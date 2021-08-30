@@ -79,9 +79,9 @@ public class TaskList {
             }
         }
         if (list.isEmpty()) {
-            Message.printNoMatch();
+            Ui.printNoMatch();
         } else {
-            Message.printMatch();
+            Ui.printMatch();
             int index = 1;
             for (Task task: list) {
                 System.out.println(index + "." + task.toString());
