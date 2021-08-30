@@ -3,10 +3,10 @@ Greetings! I am duke.
 How can I assist you?
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+:( OOPS!!! I'm sorry, but I don't know what that means :-(
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+:( OOPS!!! I'm sorry, but I don't know what that means :-(
 __________________________________________________________
 __________________________________________________________
 Got it. I've added this task:
@@ -14,7 +14,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The description of a todo cannot be empty.
+:( OOPS!!! The description of a todo cannot be empty.
 __________________________________________________________
 __________________________________________________________
 Got it. I've added this task:
@@ -22,13 +22,13 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The description of a deadline cannot be empty.
+:( OOPS!!! The description of a deadline cannot be empty.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The day of a deadline cannot be empty.
+:( OOPS!!! The day of a deadline cannot be empty.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The day of a deadline cannot be empty.
+:( OOPS!!! The day of a deadline cannot be empty.
 __________________________________________________________
 __________________________________________________________
 Got it. I've added this task:
@@ -36,13 +36,13 @@ Got it. I've added this task:
 Now you have 3 tasks in the list.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The description of a event cannot be empty.
+:( OOPS!!! The description of a event cannot be empty.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The date and time of a event cannot be empty.
+:( OOPS!!! The date and time of a event cannot be empty.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The date and time of a event cannot be empty.
+:( OOPS!!! The date and time of a event cannot be empty.
 __________________________________________________________
 __________________________________________________________
 Got it. I've added this task:
@@ -59,13 +59,13 @@ Nice! I've marked this task as done:
   [T][X] borrow book
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The task number inputted is invalid.
+:( OOPS!!! The task number inputted is invalid.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The task number inputted is invalid.
+:( OOPS!!! The task number inputted is invalid.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The task number cannot be empty.
+:( OOPS!!! The task number cannot be empty.
 __________________________________________________________
 __________________________________________________________
 Here are the tasks in your list:
@@ -81,13 +81,13 @@ Noted. I've removed this task:
 Now you have 4 tasks in the list.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The task number inputted is invalid.
+:( OOPS!!! The task number inputted is invalid.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The task number inputted is invalid.
+:( OOPS!!! The task number inputted is invalid.
 __________________________________________________________
 __________________________________________________________
-☹ OOPS!!! The task number cannot be empty.
+:( OOPS!!! The task number cannot be empty.
 __________________________________________________________
 __________________________________________________________
 Here are the tasks in your list:

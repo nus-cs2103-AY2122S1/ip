@@ -1,11 +1,5 @@
 package duke.storage;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.tasklist.TaskList;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -16,13 +10,21 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+import duke.tasklist.TaskList;
+
+/**
+ * Stores the task.
+ */
 public class Storage {
 
     private final String filePath;
 
     /**
      * Creates storage with the file path provided.
-     *
      * @param filePath The file path where all the tasks are stored.
      */
     public Storage(String filePath) {
@@ -31,7 +33,6 @@ public class Storage {
 
     /**
      * Loads the text file and creates a text file if file does not exist.
-     *
      * @return A array list with all the tasks read from the file.
      */
     public ArrayList<Task> loadFile() {
@@ -71,7 +72,6 @@ public class Storage {
 
     /**
      * Updates the tasks given to the file.
-     *
      * @param taskList The tasks that will be updated to the file.
      */
     public void updateTasks(TaskList taskList) {

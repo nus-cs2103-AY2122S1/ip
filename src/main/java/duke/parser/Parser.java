@@ -1,9 +1,14 @@
 package duke.parser;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
@@ -11,15 +16,13 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
+/**
+ * Parses the user input.
+ */
 public class Parser {
 
     /**
      * Creates todo when given userInput.
-     *
      * @param userInput the input by the user.
      * @return the todo inputted by the user.
      * @throws DukeException if no description is inputted.
@@ -27,14 +30,13 @@ public class Parser {
     private static Todo createTodo(String userInput) throws DukeException {
         String description = userInput.substring(4).trim();
         if (description.length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description cannot be empty.");
+            throw new DukeException(":( OOPS!!! The description cannot be empty.");
         }
         return new Todo(description);
     }
 
     /**
      * Creates deadline when given userInput.
-     *
      * @param userInput the input by the user.
      * @return the deadline inputted by the user.
      * @throws DukeException if no date and time or description of deadline is inputted.
@@ -42,11 +44,11 @@ public class Parser {
     private static Deadline createDeadline(String userInput) throws DukeException {
         String[] splitByBy = userInput.split(" /by ");
         if (splitByBy.length == 1) {
-            throw new DukeException("☹ OOPS!!! The day of a deadline cannot be empty.");
+            throw new DukeException(":( OOPS!!! The day of a deadline cannot be empty.");
         }
         String description = splitByBy[0].substring(8).trim();
         if (description.length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description cannot be empty.");
+            throw new DukeException(":( OOPS!!! The description cannot be empty.");
         }
         String by = splitByBy[1];
         String[] splitDateTime = by.split(" ");
@@ -60,7 +62,6 @@ public class Parser {
 
     /**
      * Creates event when given userInput.
-     *
      * @param userInput the input by the user.
      * @return the event inputted by the user.
      * @throws DukeException if no date and time or description of event is inputted.
@@ -68,11 +69,11 @@ public class Parser {
     private static Event createEvent(String userInput) throws DukeException {
         String[] splitByAt = userInput.split(" /at ");
         if (splitByAt.length == 1) {
-            throw new DukeException("☹ OOPS!!! The day of a deadline cannot be empty.");
+            throw new DukeException(":( OOPS!!! The day of a deadline cannot be empty.");
         }
         String description = splitByAt[0].substring(5).trim();
         if (description.length() == 0) {
-            throw new DukeException("☹ OOPS!!! The description cannot be empty.");
+            throw new DukeException(":( OOPS!!! The description cannot be empty.");
         }
         String dayTime = splitByAt[1];
         String[] splitDateTime = dayTime.split(" ");
@@ -86,7 +87,6 @@ public class Parser {
 
     /**
      * Parses the string for command and returns the command.
-     *
      * @param fullCommand The string representing the command inputted by the user.
      * @return A command that can be executed to perform action specified by the user.
      * @throws DukeException if the command is not recognised.
@@ -108,8 +108,10 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(splitInput[1]));
         case "find":
             return new FindCommand(fullCommand.substring(4).trim());
+        case "bye":
+            return new ExitCommand();
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

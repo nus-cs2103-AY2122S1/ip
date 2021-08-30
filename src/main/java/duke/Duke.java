@@ -10,9 +10,9 @@ import duke.ui.Ui;
 
 public class Duke {
 
+    protected Ui ui;
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Creates duke with the file path given.
@@ -25,32 +25,16 @@ public class Duke {
         tasks = new TaskList(storage.loadFile());
     }
 
-    /**
-     * Starts duke.
-     */
-    public void run() {
-        ui.greetUser();
-        while (true) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                if (c instanceof ExitCommand) {
-                    ui.farewellUser();
-                    break;
-                }
-                ui.printLine();
-                c.execute(tasks, ui, storage);
-                ui.printLine();
-            } catch (DukeException e) {
-                ui.printLine();
-                ui.printsMessage(e.getMessage());
-                ui.printLine();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            if (c instanceof ExitCommand) {
+                return ui.farewellUser();
             }
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }
 
