@@ -28,26 +28,19 @@ public class Duke {
     }
 
     /**
-     * Starts the Duke application.
+     * Returns Duke's response to the input string.
+     *
+     * @param input The input into Duke.
+     * @return Duke's response.
      */
-    private void startApp() {
-        String command;
-        Ui.showWelcomeText();
-
-        while (!(command = ui.readCommand().trim()).equals("bye")) {
-            try {
-                String msg = Parser.parse(command).execute(this.tasks);
-                this.storage.save(this.tasks.toSaveFormat());
-                Ui.printMessage(msg);
-            } catch (DukeException e) {
-                Ui.printMessage(e.getMessage() + "\n");
-            }
+    public String handleInput(String input) {
+        String response;
+        try {
+            response = Parser.parse(input).execute(tasks);
+            storage.save(tasks.toSaveFormat());
+        } catch (DukeException e) {
+            response = e.getMessage() + "\n";
         }
-
-        Ui.showEndText();
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").startApp();
+        return "Duke's response:\n" + response;
     }
 }
