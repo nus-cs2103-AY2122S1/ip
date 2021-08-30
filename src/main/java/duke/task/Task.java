@@ -8,7 +8,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Intialises a new instance of task.
+     * Initialises a new instance of task.
      *
      * @param taskDescription The description of the task.
      * @param isDone Marks the task as done or not done.

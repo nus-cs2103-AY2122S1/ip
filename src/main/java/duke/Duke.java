@@ -109,51 +109,51 @@ public class Duke {
                         String substring = split[1].trim();
                         Task newTask;
                         switch (type) {
-                            case TODO:
-                                newTask = new ToDo(substring, false);
-                                break;
+                        case TODO:
+                            newTask = new ToDo(substring, false);
+                            break;
 
-                            case DEADLINE:
-                                String[] nameAndDeadline = substring.split(" /by ");
+                        case DEADLINE:
+                            String[] nameAndDeadline = substring.split(" /by ");
 
-                                if (nameAndDeadline.length > 1
-                                        && nameAndDeadline[1].trim().length() > 0) {
-                                    LocalDateTime deadline = Parser
-                                            .formatDateTime(nameAndDeadline[1]);
-                                    newTask = new Deadline(nameAndDeadline[0], deadline,
-                                            false);
+                            if (nameAndDeadline.length > 1
+                                    && nameAndDeadline[1].trim().length() > 0) {
+                                LocalDateTime deadline = Parser
+                                        .formatDateTime(nameAndDeadline[1]);
+                                newTask = new Deadline(nameAndDeadline[0], deadline,
+                                        false);
 
-                                } else {
-                                    throw new DukeException("☹ OOPS!!! Please provide a date or "
+                            } else {
+                                throw new DukeException("☹ OOPS!!! Please provide a date or "
                                             + "time for the deadline.");
-                                }
-                                break;
+                            }
+                            break;
 
-                            default:
-                                String[] nameAndTime = substring.split(" /at ");
+                        default:
+                            String[] nameAndTime = substring.split(" /at ");
 
-                                if (nameAndTime.length > 1
-                                        && nameAndTime[1].trim().length() > 0) {
-                                    String[] splitEndTime = nameAndTime[1].split(" - ");
-                                    LocalDateTime eventTime = Parser
-                                            .formatDateTime(splitEndTime[0]);
+                            if (nameAndTime.length > 1
+                                    && nameAndTime[1].trim().length() > 0) {
+                                String[] splitEndTime = nameAndTime[1].split(" - ");
+                                LocalDateTime eventTime = Parser
+                                        .formatDateTime(splitEndTime[0]);
 
-                                    if (splitEndTime.length > 1
-                                            && splitEndTime[1].trim().length() > 0) {
-                                        LocalTime endTime = LocalTime.parse(splitEndTime[1]);
-                                        newTask = new Event(nameAndTime[0],
+                                if (splitEndTime.length > 1
+                                        && splitEndTime[1].trim().length() > 0) {
+                                    LocalTime endTime = LocalTime.parse(splitEndTime[1]);
+                                    newTask = new Event(nameAndTime[0],
                                                 eventTime, endTime, false);
 
-                                    } else {
-                                        throw new DukeException("☹ OOPS!!! Please provide an end "
-                                                + "time for the event.");
-                                    }
-
                                 } else {
-                                    throw new DukeException("☹ OOPS!!! Please provide a date or "
-                                            + "time for the event.");
+                                    throw new DukeException("☹ OOPS!!! Please provide an end "
+                                                + "time for the event.");
                                 }
-                                break;
+
+                            } else {
+                                throw new DukeException("☹ OOPS!!! Please provide a date or "
+                                            + "time for the event.");
+                            }
+                            break;
                         }
                         this.ui.printMessage(this.taskList.addTask(newTask));
                         this.storage.save(this.taskList);
