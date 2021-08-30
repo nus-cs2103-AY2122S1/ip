@@ -24,6 +24,6 @@ This project uses the following libraries:
 
 ## Disclaimer
 This project uses images depicting celebrity chef Ainsley Harriott. 
-This project is in no way related nor endorsed by him, and depiction of Mr. Harriot is only for comedic effect.
+This project is in no way related nor endorsed by him, and depiction of Mr. Harriott is only for comedic effect.
 Do reach out and inform me via appropriate channels (GitHub issues or email) if these depictions are in breach of any existing laws, and I will remove the images.
 Until then, it stays up.
