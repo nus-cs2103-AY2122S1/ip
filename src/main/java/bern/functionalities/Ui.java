@@ -167,6 +167,8 @@ public class Ui {
             return ifToDo(input, arListTask);
         case BYE:
             return ifBye(input, arListTask);
+        case FIND:
+            return ifFind(input, arListTask);
         case LIST:
             return ifList(input, arListTask);
         case DELETE:
