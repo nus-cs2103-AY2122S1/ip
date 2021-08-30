@@ -29,6 +29,7 @@ public class Parser {
      * Parses user input to duke and runs the appropriate function.
      *
      * @param input User input.
+     * @return The response to the user's input.
      */
     public String parse(String input) {
         String[] segment = input.split(" ", 2);

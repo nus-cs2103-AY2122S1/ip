@@ -24,6 +24,7 @@ public class DukeList {
      * Displays the addition of a task.
      *
      * @param task The task to be displayed.
+     * @return The message associated to the task being displayed.
      */
     private String displayTask(Task task) {
         String response = "Got it. I've added this task:\n";
@@ -81,6 +82,7 @@ public class DukeList {
      * Adds a ToDos task to the list.
      *
      * @param text Body of the duke.task to be added.
+     * @return The message associated to the task being displayed.
      * @throws DukeException If there is no text.
      */
     public String addToDo(String text) throws DukeException {
@@ -101,6 +103,7 @@ public class DukeList {
      * Adds a Deadlines task to the list.
      *
      * @param text Body of the task to be added.
+     * @return The message associated to the task being displayed.
      */
     public String addDeadlines(String text) throws DukeException {
         String[] strings = text.split(" /by ", 2);
@@ -121,6 +124,7 @@ public class DukeList {
      * Adds an Events task to the list.
      *
      * @param text Body of the task to be added.
+     * @return The message associated to the task being displayed.
      */
     public String addEvents(String text) {
         String[] strings = text.split(" /at ", 2);
@@ -136,6 +140,8 @@ public class DukeList {
 
     /**
      * Lists out the current tasks in the list.
+     *
+     * @return The list of tasks in the list.
      */
     public String list() {
         String str = "Here are the tasks in your list:\n";
@@ -150,6 +156,7 @@ public class DukeList {
      * Marks a task in the list as done.
      *
      * @param item Index of the task marked as done.
+     * @return The message associated to the task being done.
      */
     public String done(int item) {
         Task task = tasks.get(item - 1);
@@ -163,6 +170,7 @@ public class DukeList {
      * Deletes a task from the list.
      *
      * @param item Index of the task to be deleted.
+     * @return The message associated to the task being deleted.
      */
     public String delete(int item) {
         Task task = tasks.get(item - 1);
@@ -177,6 +185,7 @@ public class DukeList {
      * Finds all tasks in list with the input keyword.
      *
      * @param input User input keyword.
+     * @return The response to the number of tasks found.
      */
     public String find(String input) {
         String trimmedInput = input.trim();

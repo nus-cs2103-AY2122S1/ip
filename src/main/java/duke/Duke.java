@@ -34,7 +34,12 @@ public class Duke {
         this.ui.run();
     }
 
-
+    /**
+     * Returns the response from Duke based on the user input.
+     *
+     * @param input User input.
+     * @return Duke's response.
+     */
     public String getResponse(String input) {
         return this.parser.parse(input);
     }
