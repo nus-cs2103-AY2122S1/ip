@@ -8,7 +8,7 @@ import dino.util.Storage;
  * Represents the command for which the user wants to search for a keyword in the task list
  */
 public class FindCommand extends Command {
-    String cmdString;
+    private String cmdString;
 
     /**
      * Constructs a FindCommand object
@@ -32,9 +32,13 @@ public class FindCommand extends Command {
         taskList.searchKeyword(this.getKeyword());
     }
 
-    public String getKeyword() throws InvalidInputException{
-        if (this.cmdString.length() < 6) throw new InvalidInputException();
-        if (this.cmdString.substring(5).trim().length() == 0) throw new InvalidInputException();
+    public String getKeyword() throws InvalidInputException {
+        if (this.cmdString.length() < 6) {
+            throw new InvalidInputException();
+        }
+        if (this.cmdString.substring(5).trim().length() == 0) {
+            throw new InvalidInputException();
+        }
         return this.cmdString.substring(5).trim();
     }
 }

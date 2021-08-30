@@ -2,6 +2,7 @@ package dino.task;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import dino.exception.*;
 
 public class TaskList {
@@ -16,6 +17,11 @@ public class TaskList {
         return taskList;
     }
 
+    /**
+     * Adds a new task to the task list
+     *
+     * @param task the task to be added
+     */
     public void addTask(Task task) {
         taskList.add(task);
         int size = taskList.size();
@@ -25,6 +31,11 @@ public class TaskList {
                 (size > 1 ? " tasks" : " task") + " in the list.");
     }
 
+    /**
+     * Prints out the task list in console, prefixed with index
+     *
+     * @throws EmptyListException if the current task list is empty
+     */
     public void printTaskList() throws EmptyListException{
         if (taskList.isEmpty()) throw new EmptyListException();
         System.out.println("Here are the tasks in your list:");
@@ -32,6 +43,14 @@ public class TaskList {
             System.out.println((i + 1) + ". " + taskList.get(i));
         }
     }
+
+    /**
+     * Marks the task indicated by the given index as done
+     *
+     * @param index the index of the task as indicated by the task list
+     * @throws InvalidIndexException if the index entered is out of bounds
+     * @throws TaskAlreadyDoneException if the task is already marked as done
+     */
 
     public void markTaskDone(int index) throws InvalidIndexException, TaskAlreadyDoneException {
         if (index > taskList.size()) {
@@ -44,6 +63,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes the task indicated by the index from the task list
+     *
+     * @param index the index of the task in the task list
+     * @throws InvalidIndexException if the index entered is out of bounds
+     */
+
     public void deleteTask(int index) throws InvalidIndexException {
         if (index > taskList.size()) {
             throw new InvalidIndexException();
@@ -55,6 +81,14 @@ public class TaskList {
                     (size > 1 ? " tasks" : " task") + " in the list.");
         }
     }
+
+    /**
+     * Prints out the task(s) that contains the input keyword in description
+     *
+     * @param keyword the keyword for searching tasks
+     * @throws TaskNotFoundException if there's no task in the task list that
+     * matches the given keyword
+     */
 
     public void searchKeyword(String keyword) throws TaskNotFoundException {
         List<Task> matchingTasks = new ArrayList<>();

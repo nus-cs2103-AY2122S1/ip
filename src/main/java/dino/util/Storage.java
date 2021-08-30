@@ -9,8 +9,10 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import dino.task.*;
+
 import dino.exception.*;
+import dino.task.*;
+
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -58,7 +60,7 @@ public class Storage {
     public List<Task> getDataFromStorage(File file)  {
         List<Task> taskList = new ArrayList<>();
         try {
-        Scanner sc = new Scanner(file);
+            Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String currTask = sc.nextLine();
                 String[] taskDetails = currTask.split(" \\| ");
@@ -116,7 +118,9 @@ public class Storage {
     public void saveToStorage(List<Task> tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (Task task: tasks) fw.write(task.toString() + "\n");
+            for (Task task: tasks) {
+                fw.write(task.toString() + "\n");
+            }
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
