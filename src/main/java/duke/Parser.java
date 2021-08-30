@@ -20,6 +20,13 @@ public class Parser {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Constructor for a Parser for Duke.
+     * @param duke Duke instance the Parser is being used for.
+     * @param taskList TaskList used by the Duke.
+     * @param storage Storage used by the Duke.
+     * @param ui Ui used by the Duke.
+     */
     public Parser(Duke duke, TaskList taskList, Storage storage, Ui ui) {
         this.duke = duke;
         this.taskList = taskList;
@@ -29,7 +36,7 @@ public class Parser {
 
     /**
      * Parses the user input string.
-     * @param input
+     * @param input user input
      * @return true if user enters the exit command, false otherwise.
      */
     public Command parse(String input) {
@@ -59,6 +66,11 @@ public class Parser {
         return null;
     }
 
+    /**
+     * Parses a user input to add a Todo type task.
+     * @param input user input split into individual words.
+     * @return Command to add a new TodoTask, null if error occurs.
+     */
     private Command addTodo(String[] input) {
         try {
             String name = input[1];
@@ -70,6 +82,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a user input to add a Event type task.
+     * @param input user input split into individual words.
+     * @return Command to add a new EventTask, null if error occurs.
+     */
     private Command addEvent(String[] input) {
 
         String TIME_MARKER = " /at ";
@@ -93,6 +110,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a user input to add a Deadline type task.
+     * @param input user input split into individual words.
+     * @return Command to add a new DeadlineTask, null if error occurs.
+     */
     private Command addDeadline(String[] input) {
 
         String DEADLINE_MARKER = " /by ";
@@ -118,6 +140,11 @@ public class Parser {
 
     }
 
+    /**
+     * Parses a user input to delete a task from task list.
+     * @param input user input split into individual words.
+     * @return Command to delete a Task from TaskList, null if error occurs.
+     */
     private Command deleteFromList(String[] input) {
         if (taskList.getSize() == 0) {
             ui.showError("No tasks in list!");
@@ -135,8 +162,9 @@ public class Parser {
     }
 
     /**
-     * Sets a task in itemList as 'done'.
-     * @param input String of user input.
+     * Parses a user input to set a task as 'done'.
+     * @param input user input split into individual words.
+     * @return Command to set a task as done, null if error occurs.
      */
     private Command setTaskDone(String[] input) {
 

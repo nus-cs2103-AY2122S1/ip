@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for a DeleteCommand.
      * @param taskList TaskList from which to delete Task.
+     * @param storage Storage involved in the command.
      * @param ui Ui involved in the command.
      * @param taskNumber Number of the Task to be deleted.
      */
