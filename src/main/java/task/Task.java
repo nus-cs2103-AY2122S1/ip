@@ -1,4 +1,4 @@
-package duke;
+package task;
 
 /**
  * Represents a task.

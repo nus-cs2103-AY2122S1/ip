@@ -1,4 +1,7 @@
-package duke;
+package command;
+
+import duke.Storage;
+import duke.TaskList;
 
 /**
  * Command to list all Tasks.
@@ -15,11 +18,10 @@ public class ListCommand extends Command {
      * Executes the specific actions for this command.
      *
      * @param tasks Handles the list of tasks.
-     * @param ui Handles the user interface.
      * @param storage Handles the saving and loading of tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         for (int i = 0; i < tasks.getTasks().size(); i++) {
             sb.append(String.format(" %d. %s%n", i + 1, tasks.getTask(i)));
         }

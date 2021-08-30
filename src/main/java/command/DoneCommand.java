@@ -1,4 +1,9 @@
-package duke;
+package command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import task.Task;
 
 /**
  * Command to mark a task as done.
@@ -17,11 +22,10 @@ public class DoneCommand extends Command {
      * Executes the specific actions for this command.
      *
      * @param tasks Handles the list of tasks.
-     * @param ui Handles the user interface.
      * @param storage Handles the saving and loading of tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         this.task = tasks.doneTask(storage, this.index);
     }
 

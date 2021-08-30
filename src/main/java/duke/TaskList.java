@@ -3,6 +3,8 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+import task.Task;
+
 /**
  * Contains the task list and operations to add/delete tasks in the list.
  *

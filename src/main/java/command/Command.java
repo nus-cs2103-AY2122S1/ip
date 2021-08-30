@@ -1,4 +1,8 @@
-package duke;
+package command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
 
 /**
  * Executes different actions depending on the command type derived from user input.
@@ -10,10 +14,9 @@ public abstract class Command {
      * Executes the specific actions for this command.
      *
      * @param tasks Handles the list of tasks.
-     * @param ui Handles the user interface.
      * @param storage Handles the saving and loading of tasks.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, Storage storage) throws DukeException;
 
     /**
      * Returns true if the command calls for the program to exit,
