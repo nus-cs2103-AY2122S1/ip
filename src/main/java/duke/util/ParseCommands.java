@@ -1,8 +1,9 @@
 package duke.util;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import java.io.IOException;
 
 /**
  * An interface that parses commands that executes the tasklist.

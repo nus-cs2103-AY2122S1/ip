@@ -9,9 +9,9 @@ import duke.task.TaskList;
  * Represents a parser object that interprets commands.
  */
 public class Parser {
+
     /**
-     * Matches user input commands. 
-     *
+     * Matches user input commands.
      * @param input the user input.
      * @throws DukeException Invalid command.
      * @throws IOException Invalid file.

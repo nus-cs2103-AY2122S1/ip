@@ -1,10 +1,11 @@
 package duke.task;
 
-import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
+
 import duke.exception.DukeException;
 import duke.exception.EmptyListException;
 import duke.exception.InvalidDateException;
@@ -44,8 +45,8 @@ public class TaskList {
      * of the list of tasks.
      *
      * @param command Task to be deleted.
-     * @throws DukeException Invalid task number, or task has invalid description.
      * @return Updated list of tasks without the deleted task.
+     * @throws DukeException Invalid task number, or task has invalid description.
      */
     public String deleteTask(String command) throws DukeException {
         int taskNum = Integer.parseInt(command.substring(7));
@@ -62,8 +63,8 @@ public class TaskList {
     /**
      * Returns a {@code string} representation of the list of tasks.
      *
-     * @throws DukeException List has no tasks.
      * @return List of tasks.
+     * @throws DukeException List has no tasks.
      */
     public String printTasks() throws DukeException {
         if (tasks.size() == 0) {
@@ -90,8 +91,8 @@ public class TaskList {
      * Marks a task as completed.
      *
      * @param command The user input.
-     * @throws DukeException Invalid task number or task has invalid description.
      * @return Formatted task marked as completed.
+     * @throws DukeException Invalid task number or task has invalid description.
      */
     public String finishTask(String command) throws DukeException {
         int taskNum = Integer.parseInt(command.substring(5));
@@ -107,8 +108,8 @@ public class TaskList {
      * Adds an event to the list of tasks.
      *
      * @param command the event with a specific time.
-     * @throws DukeException Task has invalid description.
      * @return Formatted event.
+     * @throws DukeException Task has invalid description.
      */
     public String addEvent(String command) throws DukeException {
         LocalDateTime dateTime;
@@ -133,8 +134,8 @@ public class TaskList {
      * Adds a deadline to the list of tasks.
      *
      * @param command the deadline with a specific time.
-     * @throws DukeException Task has invalid description.
      * @return Formatted deadline.
+     * @throws DukeException Task has invalid description.
      */
     public String addDeadline(String command) throws DukeException {
         LocalDateTime dateTime;

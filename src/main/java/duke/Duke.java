@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Ui;
-
-import java.io.IOException;
 
 /**
  * The {@code Duke} class is the entry point of duke.
@@ -49,8 +49,15 @@ public class Duke {
         ui.close();
     }
 
+    /**
+     * Main class that Duke builds from.
+     * @param args String array of arguments.
+     * @throws IOException Invalid file.
+     * @throws DukeException Throw respective exceptions.
+     */
     public static void main(String[] args) throws IOException, DukeException {
         Duke duke = new Duke();
         duke.run();
     }
+
 }
