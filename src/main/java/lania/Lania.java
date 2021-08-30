@@ -1,12 +1,12 @@
 package lania;
 
-import lania.command.Command;
-import lania.exception.LaniaException;
-import lania.task.*;
-
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
-import java.io.IOException;
+
+import lania.command.Command;
+import lania.exception.LaniaException;
+import lania.task.TaskList;
 
 /**
  * Represents the chatbot Lania that helps manage your tasks.
@@ -54,7 +54,7 @@ public class Lania {
         ui.showGreetingMessage();
         boolean isExit = false;
         Scanner s = new Scanner(System.in);
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String input = s.nextLine();
                 Command c = parser.parse(input);

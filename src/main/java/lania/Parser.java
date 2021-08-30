@@ -19,6 +19,12 @@ import lania.task.Todo;
  */
 public class Parser {
 
+    /**
+     * Decides which command to execute based on the given input.
+     *
+     * @param fullCommand The input given by user.
+     * @return The type of command to be executed.
+     */
     public Command parse(String fullCommand) {
         String firstCommand = parseCommand(fullCommand);
         if (firstCommand.equals("bye")) {
@@ -84,7 +90,7 @@ public class Parser {
      * @throws LaniaEmptyDescriptionException If the date and time is not provided.
      */
     public String[] parseDeadline(String command) throws LaniaEmptyDescriptionException {
-        String split[] = command.split(" /by ");
+        String[] split = command.split(" /by ");
         if (split.length == 1) {
             throw new LaniaEmptyDescriptionException("date/time");
         } else {
@@ -100,7 +106,7 @@ public class Parser {
      * @throws LaniaEmptyDescriptionException If the date and time is not provided.
      */
     public String[] parseEvent(String command) throws LaniaEmptyDescriptionException {
-        String split[] = command.split(" /at ");
+        String[] split = command.split(" /at ");
         if (split.length == 1) {
             throw new LaniaEmptyDescriptionException("date/time");
         } else {

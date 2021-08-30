@@ -1,12 +1,13 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import lania.Parser;
 import lania.exception.LaniaEmptyDescriptionException;
 import lania.task.Deadline;
 import lania.task.Event;
 import lania.task.Task;
 import lania.task.Todo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class LaniaTest {
     @Test
@@ -42,7 +43,7 @@ public class LaniaTest {
     }
 
     @Test
-    public void parseEventDeadline_DateTime_success() {
+    public void parseEventDeadline_dateTime_success() {
         Parser parser = new Parser();
         String a = "read book /by 24-08-2021 18:00";
         String b = "read book /at 24-08-2021 18:00";
