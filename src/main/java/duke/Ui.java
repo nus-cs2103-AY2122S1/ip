@@ -31,10 +31,9 @@ public class Ui {
      * A public method to output the greeting message.
      */
     public void greet() {
-        String[] greetMessage = new String[2];
-        greetMessage[0] = "Hello! I'm duke.Duke";
-        greetMessage[1] = "What can I do for you?";
-        printMessage(greetMessage);
+        printMessage(
+            "Hello! I'm duke.Duke",
+            "What can I do for you?");
     }
 
     /**
@@ -43,7 +42,7 @@ public class Ui {
      *
      * @param messages The given messages to be print, one message per row.
      */
-    public void printMessage(String[] messages) {
+    public void printMessage(String ...messages) {
         System.out.println("    ____________________________________________________________");
         int n = messages.length;
         for (int i = 0; i < n; i++) {
@@ -68,6 +67,6 @@ public class Ui {
      * @param e The given DukeException to be shown.
      */
     public void showDukeException(DukeException e) {
-        this.printMessage(new String[] {e.getMessage()});
+        this.printMessage(e.getMessage());
     }
 }

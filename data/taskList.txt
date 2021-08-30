@@ -1,8 +1,4 @@
-7
-1 0
-test1
-noSpecificTime
-
+5
 2 1
 test2
 01-01-2021
@@ -17,16 +13,11 @@ null
 cheese cheese
 noSpecificTime
 
-1 0
+1 1
 chees e
 noSpecificTime
 
 1 0
 chease
 noSpecificTime
-
-2 1
-cheese dont know how to code
-01-01-2021
-null
 
