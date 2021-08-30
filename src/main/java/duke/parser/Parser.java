@@ -11,18 +11,16 @@ import java.util.regex.Pattern;
  * A class that will make sense of the user's commands through string parsing
  */
 public class Parser {
-    private static boolean isStop = false;
-    private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
-    private static TaskList taskList;
+    private static final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
+    private static TaskList tasks;
     /**
      * The main method to decide which parsing is needed for the user input
      * @param input the input keyed in by user
      * @return the type of command the input is
      * @throws DukeException if the users enter a wrong input
      */
-    public static Command parse(String input, TaskList tasks) throws DukeException{
-        taskList = tasks;
-        Task currTask;
+    public static Command parse(String input, TaskList tl) throws DukeException{
+        tasks = tl;
         if (input.equals("list")) {
             return new ListCommand();
         } else if (input.equals("bye")) {
@@ -66,10 +64,10 @@ public class Parser {
             throw new DukeException("Please enter \'done [index of item]\' to mark item as done.");
         }
         int number = Integer.parseInt(String.valueOf(numberString));
-        if (number > taskList.getSize() || number < 0) {
+        if (number > tasks.getSize() || number < 0) {
             throw new DukeException("Item does not exist, we cannot mark it as done.");
         }
-        Task currTask = taskList.get(number - 1);
+        Task currTask = tasks.get(number - 1);
         if (currTask.getStatusIcon().equals(String.valueOf('X'))) {
             throw new DukeException("Item is already marked as done, we cannot mark it as done again.");
         }
@@ -88,7 +86,7 @@ public class Parser {
             throw new DukeException("Please enter \'delete [index of item]\' to mark item as done.");
         }
         int number = Integer.parseInt(String.valueOf(numberString));
-        if (number > taskList.getSize() || number < 0) {
+        if (number > tasks.getSize() || number < 0) {
             throw new DukeException("Item does not exist, we cannot delete it.");
         }
         return number - 1;

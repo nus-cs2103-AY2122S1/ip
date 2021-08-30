@@ -8,7 +8,7 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
-    private String target;
+    private final String target;
 
     public FindCommand(String target) {
         this.target = target;
@@ -20,7 +20,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.listFoundTasks(taskList.searchList(target));
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.listFoundTasks(tasks.searchList(target));
     }
 }

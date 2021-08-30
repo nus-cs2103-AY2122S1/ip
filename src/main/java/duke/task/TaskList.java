@@ -3,43 +3,39 @@ package duke.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    public ArrayList<Task> taskList;
+    public ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tl) {
-        taskList = tl;
+        tasks = tl;
     }
 
     public TaskList() {
-        taskList = new ArrayList<>();
-    }
-
-    public void doneTask(int index) {
-        taskList.get(index).markAsDone();
+        tasks = new ArrayList<>();
     }
 
     public void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     public void deleteTask(int index) {
-        taskList.remove(index);
+        tasks.remove(index);
     }
 
     public ArrayList<Task> getTaskList() {
-        return taskList;
+        return tasks;
     }
 
     public int getSize() {
-        return taskList.size();
+        return tasks.size();
     }
 
     public Task get(int index) {
-        return taskList.get(index);
+        return tasks.get(index);
     }
 
     public TaskList searchList(String target) {
         ArrayList<Task> foundTasks = new ArrayList<>();
-        for (Task t : taskList) {
+        for (Task t : tasks) {
             if (t.toString().contains(target)) {
                 foundTasks.add(t);
             }

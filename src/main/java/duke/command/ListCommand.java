@@ -21,12 +21,12 @@ public class ListCommand extends Command {
     /**
      * Method that executes the parsing of user input and the message
      * to print to the command line
-     * @param taskList the current list of tasks
+     * @param tasks the current list of tasks
      * @param ui the ui that interacts with the user
      * @param storage the place where the list of tasks will be stored
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.listTasks(taskList);
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.listTasks(tasks);
     }
 }

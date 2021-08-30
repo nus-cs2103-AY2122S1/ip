@@ -40,7 +40,7 @@ public class Storage {
             if (tasksFile.createNewFile()) {
                 return new ArrayList<>();
             } else {
-                ArrayList<Task> taskList = new ArrayList<>();
+                ArrayList<Task> tasks = new ArrayList<>();
 
                 Scanner sc = new Scanner(tasksFile);
                 while (sc.hasNext()) {
@@ -63,9 +63,9 @@ public class Storage {
                     if (taskDone.equals("1")) {
                         currTask.markAsDone();
                     }
-                    taskList.add(currTask);
+                    tasks.add(currTask);
                 }
-                return taskList;
+                return tasks;
             }
         } catch (IOException e) {
             System.out.println("Unable to load file");
@@ -78,10 +78,10 @@ public class Storage {
      * A method to update the file stored on the user's hard disk once
      * the user ends the usage of the bot.
      */
-    public void updateFile(TaskList taskList) {
+    public void updateFile(TaskList tasks) {
         String allLines = "";
 
-        for (Task t : taskList.getTaskList()) {
+        for (Task t : tasks.getTaskList()) {
             String currLine = "";
 
             // Checking for the type of task
