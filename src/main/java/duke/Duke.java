@@ -6,7 +6,13 @@ import java.lang.String;
 
 import java.io.File;
 
-public class Duke {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
+
+public class Duke extends Application {
     private static Ui ui = new Ui();
     private static Storage storage = new Storage();
     private static TaskList taskList = new TaskList();
@@ -22,6 +28,16 @@ public class Duke {
         taskList.initialise(file, storage);
 
         Parser.parse();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label allo = new Label("allo"); // Creating a new Label control
+        allo.setFont(new Font("Arial",50));
+        Scene scene = new Scene(allo); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
 
