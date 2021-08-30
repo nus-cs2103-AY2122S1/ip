@@ -70,6 +70,9 @@ public class Duke {
             case DEFAULT:
                 tasks.list();
                 break;
+            case FIND:
+                tasks.find(userInput.substring(5));
+                break;
             case UNUSUAL:
                 ui.unusualRequest();
                 break;

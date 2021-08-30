@@ -83,6 +83,9 @@ public class TaskList {
                 list++;
             }
         }
+        if(list == 1){
+            System.out.println("No such tasks found");
+        }
         System.out.println("");
     }
 
