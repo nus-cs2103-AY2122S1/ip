@@ -1,15 +1,16 @@
 package bruh.ui;
 
-import bruh.command.CommandStub;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import bruh.command.CommandStub;
 
 public class UiTest {
     private static final ByteArrayOutputStream redirectedOut = new ByteArrayOutputStream();

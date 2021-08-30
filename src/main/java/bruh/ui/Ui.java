@@ -1,9 +1,9 @@
 package bruh.ui;
 
+import java.util.Scanner;
+
 import bruh.command.Command;
 import bruh.exception.MissingArgumentException;
-
-import java.util.Scanner;
 
 /**
  * Encapsulates the user interface function of Bruh.

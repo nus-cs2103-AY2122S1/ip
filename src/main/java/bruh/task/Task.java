@@ -1,9 +1,9 @@
 package bruh.task;
 
+import java.io.Serializable;
+
 import bruh.exception.BruhException;
 import bruh.exception.InvalidArgumentException;
-
-import java.io.Serializable;
 
 /**
  * Represents a task that can be mark as done.

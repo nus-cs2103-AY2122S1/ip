@@ -1,13 +1,13 @@
 package bruh.tasklist;
 
-import bruh.task.LocalDateTimeOrString;
-import bruh.task.Task;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import bruh.task.LocalDateTimeOrString;
+import bruh.task.Task;
 
 /**
  * Encapsulates a list of tasks, as well as associated functions.
@@ -60,7 +60,7 @@ public class TaskList implements Serializable {
     public String getTaskCountDesc() {
         return tasks.isEmpty() ? "There are no " + (isFiltered ? "matching " : "") + "tasks."
                 : String.format("Now you have %d%s task%s in the list.", tasks.size(), (isFiltered ? " matching" : ""),
-                (tasks.size() == 1 ? "" : "s"));
+                tasks.size() == 1 ? "" : "s");
     }
 
     /**
