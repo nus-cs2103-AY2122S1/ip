@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws WrongDoneFormatException, DoneOutOfBoundsException {
-        String[] instructions = this.command_description.split(" ");
+        String[] instructions = this.commandDescription.split(" ");
         if (instructions.length != 2) {
             throw new WrongDoneFormatException();
         }

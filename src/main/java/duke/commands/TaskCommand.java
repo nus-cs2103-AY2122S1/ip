@@ -24,7 +24,7 @@ public class TaskCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws WrongDateFormatException, WrongTimeFormatException {
-        String[] instructions = this.command_description.split(" ");
+        String[] instructions = this.commandDescription.split(" ");
         String importantInstructions = String.join(" ", Arrays.copyOfRange(instructions, 1, instructions.length));
         String identity = instructions[0];
         Task task;

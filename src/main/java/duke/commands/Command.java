@@ -5,10 +5,10 @@ import duke.Ui;
 import duke.exceptions.DukeException;
 
 public abstract class Command {
-    protected final String command_description;
+    protected final String commandDescription;
 
     Command(String command_description) {
-        this.command_description = command_description;
+        this.commandDescription = command_description;
     }
 
     public abstract boolean isExit();
