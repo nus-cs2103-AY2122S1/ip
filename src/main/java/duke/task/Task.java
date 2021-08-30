@@ -4,10 +4,10 @@ package duke.task;
  * A Task is something that needs to be done.
  */
 public class Task {
+    protected static int idCounter = 1;
     protected int id;
     protected String description;
     protected boolean isDone;
-    protected static int idCounter = 1;
 
     /**
      * Initialises a Task without description.

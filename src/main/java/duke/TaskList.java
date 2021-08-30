@@ -1,7 +1,8 @@
 package duke;
 
-import duke.task.*;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * TaskList contains the list of Tasks.
@@ -13,7 +14,9 @@ public class TaskList {
     /**
      * Initialises an empty tasks arraylist.
      */
-    public TaskList() {this.tasks = new ArrayList<>();}
+    public TaskList() {
+        this.tasks = new ArrayList<>();
+    }
 
     /**
      * Initialises the tasks with the tasks from storage.
@@ -21,7 +24,7 @@ public class TaskList {
      * @param tasks the tasks obtained from storage.
      */
     public TaskList(ArrayList<Task> tasks) {
-        this.tasks= tasks;
+        this.tasks = tasks;
     }
 
     /**
@@ -32,8 +35,8 @@ public class TaskList {
     public void add(Task newTask) {
         String addedMessage = "Got it. I've added this task:\n";
         tasks.add(newTask);
-        System.out.println(addedMessage + newTask.toString() +
-                "\nNow you have " + tasks.size() + " tasks in the list.");
+        System.out.println(addedMessage + newTask.toString()
+                + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
     /**
@@ -43,8 +46,8 @@ public class TaskList {
      */
     public void markAsDone(int taskNumber) throws DukeException {
         if (taskNumber > tasks.size()) {
-            throw new DukeException("☹ OOPS!!! " +
-                    "There isn't a task number " + taskNumber + ".");
+            throw new DukeException("☹ OOPS!!! "
+                    + "There isn't a task number " + taskNumber + ".");
         }
         Task t = tasks.get(taskNumber - 1);
         t.setDone();
@@ -59,12 +62,12 @@ public class TaskList {
      */
     public void delete(int taskNumber) throws DukeException {
         if (taskNumber > tasks.size()) {
-            throw new DukeException("☹ OOPS!!! " +
-                    "There isn't a task number " + taskNumber + ".");
+            throw new DukeException("☹ OOPS!!! "
+                    + "There isn't a task number " + taskNumber + ".");
         }
         Task t = tasks.remove(taskNumber - 1);
         System.out.println("Noted! I've removed this task:\n" + "  "
-                + t.toString() + "\nNow you have " + tasks.size()  + " tasks in the list.");
+                + t.toString() + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
     /**
@@ -106,8 +109,8 @@ public class TaskList {
                     + "There isn't a task matching the keyword: "
                     + keyWord);
         } else {
-            new TaskList(filteredTasks).display("I have found " +
-                    "these tasks in your list matching the keyword:");
+            new TaskList(filteredTasks).display("I have found "
+                    + "these tasks in your list matching the keyword:");
         }
     }
 }
