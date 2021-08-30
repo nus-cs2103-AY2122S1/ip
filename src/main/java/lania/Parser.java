@@ -14,7 +14,9 @@ public class Parser {
 
     public Command parse(String fullCommand) {
         String firstCommand = parseCommand(fullCommand);
-        if (firstCommand.equals("list")) {
+        if (firstCommand.equals("bye")) {
+            return new ExitCommand();
+        } else if (firstCommand.equals("list")) {
             return new ListCommand();
         } else if (firstCommand.equals("find")) {
             return new FindCommand(parseTaskDescription(fullCommand));
