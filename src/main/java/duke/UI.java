@@ -7,9 +7,6 @@ import duke.tasks.TaskList;
  * UI class that handles all interactions with user.
  */
 public class UI {
-
-    public static final String LINE = "___________________________________________________\n";
-
     /**
      * This method is to print the starting message of Duke.
      */

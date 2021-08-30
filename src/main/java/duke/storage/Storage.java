@@ -61,8 +61,8 @@ public class Storage {
             while (myReader.hasNextLine()) {
                 String[] data = myReader.nextLine().split("/@", 0);
                 String marker = data[0];
-                boolean isDone = (data[1].equals("1"));
                 String name = data[2];
+                boolean isDone = (data[1].equals("1"));
                 LocalDateTime time = LocalDateTime.parse(data[3], formatter);
 
                 switch (marker) {

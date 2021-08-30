@@ -43,13 +43,22 @@ public class Duke {
         return bot.handleStart();
     }
 
+    /**
+     * Returns the exit status of the program with 0 equals exit and 1 otherwise.
+     * @return Int that corresponds to the exit status.
+     */
     public int getExitStatus() {
         return bot.getExitStatus();
     }
 
+    /**
+     * Checks if the program should exit before creating a new thread to handle
+     * bye message and exit.
+     *
+     */
     public void exit() {
         if (getExitStatus() == 0) {
-            new Thread() {
+            new Thread() { //inspiration from Lim PeiYuan
                 @Override
                 public void run() {
                     try {
