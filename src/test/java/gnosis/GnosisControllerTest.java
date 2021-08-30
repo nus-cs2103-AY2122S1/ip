@@ -18,7 +18,7 @@ public class GnosisControllerTest {
         try{
             gc = new GnosisController(view);
             Scanner sc = new Scanner(System.in);
-            gc.startGnosis(null);
+            gc.loadGreetingMessage();
         } catch (NullPointerException e) {
             assertTrue(true);
         }

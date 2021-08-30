@@ -1,16 +1,17 @@
 package gnosis.controller;
 
+import java.util.List;
 
-
-import gnosis.model.*;
+import gnosis.model.Command;
+import gnosis.model.Deadline;
+import gnosis.model.Event;
+import gnosis.model.Task;
+import gnosis.model.Todo;
 import gnosis.task.TaskCommandManager;
 import gnosis.task.TaskStorageManager;
 import gnosis.ui.GnosisUI;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
-
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Represents Logic flow of interaction of user input and, to specified
@@ -38,16 +39,11 @@ public class GnosisController {
     }
 
     /**
-     * starts execution of Gnosis program.
+     * loads Gnosis greeting message to UI.
      *
-     * @param sc user input
      */
-    public void startGnosis(Scanner sc) {
+    public void loadGreetingMessage() {
         view.displayGreetMessage(TaskStorageManager.isDataFileAvail());
-        do {
-            view.listenForInput(this, sc);
-        } while (view.isStillListeningInput());
-
     }
 
     /**
@@ -68,7 +64,6 @@ public class GnosisController {
         // parse the commands
         if (gc == Command.BYE) {
             view.displayByeMessage();
-            view.stopListeningInput();
         } else {
             // default is only task Manager, but future can include cases of other gnosis feautres, e.g phonebook
             this.executeTaskCommand(gc, commandInput);
@@ -88,15 +83,15 @@ public class GnosisController {
         switch (gc) {
             case TODO:
                 Todo td = taskCommandManager.addTodo(taskInput);
-                view.updateTaskManagementViewMessage(gc.name(),td, taskCommandManager.getNumOfTasks());
+                view.updateTaskManagementViewMessage(gc.name(), td, taskCommandManager.getNumOfTasks());
                 break;
             case DEADLINE:
                 Deadline dl = taskCommandManager.addDeadline(taskInput);
-                view.updateTaskManagementViewMessage(gc.name(),dl, taskCommandManager.getNumOfTasks());
+                view.updateTaskManagementViewMessage(gc.name(), dl, taskCommandManager.getNumOfTasks());
                 break;
             case EVENT:
                 Event evt = taskCommandManager.addEvent(taskInput);
-                view.updateTaskManagementViewMessage(gc.name(),evt, taskCommandManager.getNumOfTasks());
+                view.updateTaskManagementViewMessage(gc.name(), evt, taskCommandManager.getNumOfTasks());
                 break;
             case LIST:
                 view.displayAllTasksMessage(taskCommandManager.getTasks());
@@ -113,7 +108,7 @@ public class GnosisController {
             case DELETE:
                 taskIndex = Integer.parseInt(taskInput.trim()) - 1;
                 Task task = taskCommandManager.deleteTask(taskIndex);
-                view.updateTaskManagementViewMessage(gc.name(),task, taskCommandManager.getNumOfTasks());
+                view.updateTaskManagementViewMessage(gc.name(), task, taskCommandManager.getNumOfTasks());
                 break;
             default:
                 throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
