@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -13,12 +15,12 @@ public class Ui {
             userList = TaskList.load();
         } catch (Exception exception) {
             System.out.println(exception);
-            System.out.println("Task list not found.");
+            System.out.println("Duke.Task list not found.");
             userList = new TaskList();
             System.out.println("New task list created");
         }
 
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm Duke.Duke");
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);

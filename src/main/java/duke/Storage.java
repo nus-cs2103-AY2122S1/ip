@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
@@ -40,7 +42,7 @@ public class Storage {
         String taskType = taskString.substring(0,firstBarIndex).strip();
         if (!VALID_TASK_TYPE.contains(taskType)) {
             System.out.println(taskType);
-            throw new IllegalArgumentException("Invalid Task Type (Expects: T, D or E)");
+            throw new IllegalArgumentException("Invalid Duke.Task Type (Expects: T, D or E)");
         }
         int secondBarIndex = taskString.indexOf("|", firstBarIndex + 1);
         if (secondBarIndex == -1) {
