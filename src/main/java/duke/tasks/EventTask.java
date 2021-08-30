@@ -1,7 +1,6 @@
 package duke.tasks;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * The {@code EventTask} class extends from {@code Task} to contain an additional
@@ -9,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class EventTask extends Task {
     protected LocalDateTime time;
-    static DateTimeFormatter TIME_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM y, E, kk:mm");
 
     /**
      * Initializes an {@code EventTask} with {@code String description} and {@code LocalDateTime time}.

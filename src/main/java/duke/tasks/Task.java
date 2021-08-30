@@ -1,17 +1,19 @@
 package duke.tasks;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * The {@code Task} parent class contains abstractions for tasks.
  */
 public abstract class Task {
+    protected static final DateTimeFormatter TIME_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM y, E, kk:mm");
+    private static int numOfTasks = 0;
     protected String description;
     protected boolean isDone = false;
 
     public enum TaskTypes {
         TODO, DEADLINE, EVENT
     }
-
-    public static int numOfTasks = 0;
 
     /**
      * Initializes an instance of {@code Task} with {@code String description}.

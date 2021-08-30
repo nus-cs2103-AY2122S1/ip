@@ -1,11 +1,10 @@
 package duke.storage;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import duke.exceptions.AuguryException;
 import duke.exceptions.FileIOException;
@@ -59,7 +58,7 @@ public class Storage {
             File f = new File(path);
             String s = convertTaskListToString(t);
             writeStringToStorage(s);
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             throw new FileIOException("File error occured");
         }
@@ -67,13 +66,13 @@ public class Storage {
 
     private String convertTaskListToString(TaskList xs) {
         ArrayList<Task> tasks = xs.tasks();
-        ArrayList<String> tasks_string = new ArrayList<>();
+        ArrayList<String> tasksString = new ArrayList<>();
 
         for (Task t : tasks) {
-            tasks_string.add(t.toString());
+            tasksString.add(t.toString());
         }
 
-        String res = String.join("\n", tasks_string);
+        String res = String.join("\n", tasksString);
         return res.toString();
     }
 

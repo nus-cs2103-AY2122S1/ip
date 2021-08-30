@@ -1,17 +1,17 @@
 package duke;
 
-import duke.exceptions.*;
-import duke.tasks.Task;
-import duke.tasks.TaskFactory;
-import duke.tasks.TaskList;
-import duke.storage.Storage;
-import duke.io.Parser;
-import duke.ui.Ui;
-import duke.util.StringCleaner;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exceptions.*;
+import duke.io.Parser;
+import duke.storage.Storage;
+import duke.tasks.Task;
+import duke.tasks.TaskFactory;
+import duke.tasks.TaskList;
+import duke.ui.Ui;
+import duke.util.StringCleaner;
 
 /**
  * The {@code Augury} class contains the entry point of the entire Task Management app.
@@ -91,7 +91,7 @@ public class Augury {
             String input = scan.nextLine().trim().toLowerCase();
             try {
                 String command = parser.parse(input);
-                switch(command){
+                switch(command) {
                 case "COMMAND_QUIT":
                     ui.speak("The readiness is all.");
                     isRunning = false;
@@ -153,7 +153,7 @@ public class Augury {
         args = args.substring(5);
         ArrayList<Integer> listOfTasks = StringCleaner.toArrayListInteger(args);
 
-        for (Integer i : listOfTasks){
+        for (Integer i : listOfTasks) {
             if (i > taskList.size()) {
                 throw new InvalidActionException("Task " + i + " does not exist, please try again");
             }
@@ -171,7 +171,7 @@ public class Augury {
         args = args.substring(7);
         ArrayList<Integer> listOfTasks = StringCleaner.toArrayListInteger(args);
 
-        for (Integer i : listOfTasks){
+        for (Integer i : listOfTasks) {
             if (i > taskList.size()) {
                 throw new InvalidActionException("Task " + i + " does not exist, please try again.");
             }

@@ -1,7 +1,6 @@
 package duke.tasks;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import duke.exceptions.AuguryException;
 import duke.exceptions.InvalidTaskCreationException;
@@ -11,9 +10,8 @@ import duke.util.StringCleaner;
  * The {@code TaskFactory} is a factory class responsible for creating {@code Task}s.
  */
 public class TaskFactory {
-    static DateTimeFormatter TIME_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM y, E, kk:mm");
 
-    public TaskFactory() {  }
+    public TaskFactory() { }
 
     /**
      * Creates a single {@code Task} from the given {@code String newTaskDetails}.
@@ -26,7 +24,7 @@ public class TaskFactory {
         // this method is used when reading from duke.tasks.txt file
         // the syntax is [E][X] description (at: time)
 
-        if(newTaskDetails.startsWith("[T")) {
+        if (newTaskDetails.startsWith("[T")) {
             boolean isDone = newTaskDetails.charAt(4) == 'X';
             String description = newTaskDetails.split("] ")[1].trim();
             return new TodoTask(description, isDone);
@@ -36,8 +34,8 @@ public class TaskFactory {
                     .split(" \\(")[0]
                     .trim();
             String timeString = newTaskDetails.split("\\(at: ")[1]
-                    .replaceAll(".$",""); // get rid of last character ')'
-            LocalDateTime time = LocalDateTime.parse(timeString, TIME_DISPLAY_FORMAT);
+                    .replaceAll(".$", ""); // get rid of last character ')'
+            LocalDateTime time = LocalDateTime.parse(timeString, Task.TIME_DISPLAY_FORMAT);
             return new EventTask(description, time, isDone);
         } else if (newTaskDetails.startsWith("[D")) {
             boolean isDone = newTaskDetails.substring(4).equals("X");
@@ -45,8 +43,8 @@ public class TaskFactory {
                     .split(" \\(")[0]
                     .trim();
             String timeString = newTaskDetails.split("\\(by: ")[1]
-                    .replaceAll(".$",""); // get rid of last character ')'
-            LocalDateTime time = LocalDateTime.parse(timeString, TIME_DISPLAY_FORMAT);
+                    .replaceAll(".$", ""); // get rid of last character ')'
+            LocalDateTime time = LocalDateTime.parse(timeString, Task.TIME_DISPLAY_FORMAT);
             return new DeadlineTask(description, time, isDone);
         } else {
             return null;
@@ -90,9 +88,9 @@ public class TaskFactory {
 
     private void checkDetailsNonEmpty(String newTaskType, String details) throws AuguryException {
         int commandLength = newTaskType.length() + 1;
-        if (details.length() <= commandLength ||
-            details.contains("/at") && details.split("/at")[0].length() <= commandLength ||
-            details.contains("/by") && details.split("/by")[0].length() <= commandLength) {
+        if (details.length() <= commandLength
+                || details.contains("/at") && details.split("/at")[0].length() <= commandLength
+                || details.contains("/by") && details.split("/by")[0].length() <= commandLength) {
             throw new InvalidTaskCreationException("Description of " + newTaskType + " cannot be empty!");
         }
     }
