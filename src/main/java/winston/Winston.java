@@ -1,11 +1,6 @@
-import java.util.Scanner;
+package winston;
 
-import winston.Command;
-import winston.Parser;
-import winston.Storage;
-import winston.TaskList;
-import winston.TerminateCommand;
-import winston.Ui;
+import java.util.Scanner;
 
 /**
  * A class that creates your personal assistant Winston
@@ -28,11 +23,11 @@ public class Winston {
     
     public static void main(String[] args) {
         boolean isExit = false;
-        Winston winston1 = new Winston();
+        Winston winston = new Winston();
         Scanner scan = new Scanner(System.in);
         Ui.welcomeMessage();
         while (!isExit) {
-            Command c = winston1.parser.parse(scan.nextLine());
+            Command c = winston.parser.parse(scan.nextLine());
             c.run();
             isExit = TerminateCommand.isExit();
         }
