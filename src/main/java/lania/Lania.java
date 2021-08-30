@@ -1,7 +1,7 @@
 package lania;
 
-import java.time.format.DateTimeParseException;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import lania.command.Command;

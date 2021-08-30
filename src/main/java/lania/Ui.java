@@ -13,20 +13,26 @@ public class Ui {
      * Displays a message when the user adds a task.
      *
      * @param tasks The resulting TaskList.
-     * @param t The ask that has been added.
+     * @param task The task that has been added.
      */
-    public void showUpdateMessage(TaskList tasks, Task t) {
+    public void showUpdateMessage(TaskList tasks, Task task) {
         System.out.println("Lania has added: ");
-        System.out.println(t);
+        System.out.println(task);
         System.out.println("Great! Now you have "
                 + tasks.size() + (tasks.size() == 1 ? " task" : " tasks") + " in your list.");
     }
 
+    /**
+     * Displays a greeting message.
+     */
     public void showGreetingMessage() {
         System.out.println("Hello I am Lania! How may Lania be of assistance?");
         System.out.println("Enter 'bye' to exit");
     }
 
+    /**
+     * Displays an exit message.
+     */
     public void showExitMessage() {
         System.out.println("Bye. Lania looks forward to seeing you again!");
     }
