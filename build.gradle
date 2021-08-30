@@ -28,8 +28,16 @@ test {
     }
 }
 
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+compileTestJava {
+    options.encoding = "UTF-8"
+}
+
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Main"
 }
 
 shadowJar {
