@@ -29,12 +29,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        DialogBox.getDukeDialog(, dukeAvatar);
-        dialogContainer.getChildren();
     }
 
     public void setDuke(Duke d) {
         duke = d;
+        showNarutoWelcome();
     }
 
     /**
@@ -52,4 +51,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    @FXML
+    private void showNarutoWelcome() {
+        DialogBox welcomeFromNaruto = DialogBox.getDukeDialog(duke.initialMessageFromNaruto(), dukeAvatar);
+        dialogContainer.getChildren().addAll(welcomeFromNaruto);
+    }
 }

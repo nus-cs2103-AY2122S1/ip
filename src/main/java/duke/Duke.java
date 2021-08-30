@@ -7,6 +7,9 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 
 /**
  * A chat-bot called Naruto that acts as a task list.
@@ -59,6 +62,15 @@ public class Duke {
     }
 
     public String getResponse(String fullCommand) {
+        // Create a stream to hold the output
+        ByteArrayOutputStream narutoStream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(narutoStream);
+        // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
+
+        // Now execute the entire command from user. It goes to my special stream
         try {
             Command c = Parser.parse(fullCommand);
             c.execute(tasks, ui, storage);
@@ -67,6 +79,34 @@ public class Duke {
         } finally {
             ui.showLines();
         }
-        return "Duke heard: " + input;
+
+        // Put things back. Important!
+        System.out.flush();
+        System.setOut(old);
+        // Show what happened in the terminal on IntelliJ
+        System.out.println("Here: " + narutoStream.toString());
+
+        return "Naruto's reply! " + narutoStream.toString();
     }
+
+    public String initialMessageFromNaruto() {
+        // Create a stream to hold the output
+        ByteArrayOutputStream narutoStream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(narutoStream);
+        // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
+
+        ui.showWelcome();
+
+        // Put things back. Important!
+        System.out.flush();
+        System.setOut(old);
+        // Show what happened in the terminal on IntelliJ
+        System.out.println("Here: " + narutoStream.toString());
+
+        return "Naruto's reply! " + narutoStream.toString();
+    }
+
 }
