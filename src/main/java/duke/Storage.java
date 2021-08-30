@@ -7,17 +7,17 @@ import java.nio.file.Files;
 import java.util.List;
 
 /**
- * Represents a persistent storage that can be written to and read from
+ * Represents a persistent storage that can be written to and read from.
  */
 class Storage {
     private final String fileName;
     private final FileWriter writer;
 
     /**
-     * Creates storage
+     * Creates storage.
      *
-     * @param fileName File name to use
-     * @throws IOException If file cannot be opened or created
+     * @param fileName File name to use.
+     * @throws IOException If file cannot be opened or created.
      */
     Storage(String fileName) throws IOException {
         this.fileName = fileName;
@@ -25,30 +25,30 @@ class Storage {
     }
 
     /**
-     * Reads file and returns lines
+     * Reads file and returns lines.
      *
-     * @return list of lines in file
-     * @throws IOException If file cannot be read
+     * @return list of lines in file.
+     * @throws IOException If file cannot be read.
      */
     List<String> readAllLines() throws IOException {
         return Files.readAllLines(new File(fileName).toPath());
     }
 
     /**
-     * Writes line to file
-     * Newline will be appended after writing string
+     * Writes line to file.
+     * Newline will be appended after writing string.
      *
-     * @param s String to write
-     * @throws IOException If I/O error occurs while writing
+     * @param s String to write.
+     * @throws IOException If I/O error occurs while writing.
      */
     void write(String s) throws IOException {
         writer.write(s + '\n');
     }
 
     /**
-     * Closes file after flushing output
+     * Closes file after flushing output.
      *
-     * @throws IOException If I/O error occurs
+     * @throws IOException If I/O error occurs.
      */
     void close() throws IOException {
         writer.close();

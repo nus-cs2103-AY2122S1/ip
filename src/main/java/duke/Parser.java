@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Represents a parser that interprets commands
+ * Represents a parser that interprets commands.
  */
 class Parser {
     private final TaskList tasks;
@@ -21,11 +21,11 @@ class Parser {
     }
 
     /**
-     * Runs command and returns output
+     * Runs command and returns output.
      *
-     * @param input Command from user
-     * @return Array of outputs to be shown to user
-     * @throws DukeException If command is not valid
+     * @param input Command from user.
+     * @return Array of outputs to be shown to user.
+     * @throws DukeException If command is not valid.
      */
     String[] parse(String input) throws DukeException {
         if (input.equals("list")) {

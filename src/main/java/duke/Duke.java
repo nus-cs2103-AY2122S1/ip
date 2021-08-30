@@ -24,7 +24,7 @@ class Duke {
     /**
      * Runs Duke, my java bot!
      *
-     * @param args Input arguments, will be ignored
+     * @param args Input arguments, will be ignored.
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -41,10 +41,10 @@ class Duke {
     }
 
     /**
-     * Runs command and returns output
+     * Runs command and returns output.
      *
-     * @param command Command from user
-     * @return Array of outputs to be shown to user, returns null if command is exit
+     * @param command Command from user.
+     * @return Array of outputs to be shown to user, returns null if command is exit.
      */
     public String[] handleInput(String command) {
         try {

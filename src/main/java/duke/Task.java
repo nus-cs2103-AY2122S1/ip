@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Represents a task, deadline or event
+ * Represents a task, deadline or event.
  */
 abstract class Task {
     String description;
