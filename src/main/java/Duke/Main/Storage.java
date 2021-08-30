@@ -22,7 +22,7 @@ public class Storage {
             writer.flush();
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Cannot find file specified");
         }
     }
 
@@ -77,7 +77,7 @@ public class Storage {
             }
             sc.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Cannot find file specified");
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

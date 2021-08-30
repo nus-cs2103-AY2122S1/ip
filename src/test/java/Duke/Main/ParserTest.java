@@ -12,10 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
 
+
     @Test
     public void testDateConversion() {
         LocalDate today = LocalDate.now();
-        assertEquals("Aug 26 2021", Parser.convert(today));
+        assertEquals("Aug 30 2021", Parser.convert(today));
         LocalDate day1 = LocalDate.parse("2021-07-01");
         assertEquals("Jul 01 2021", Parser.convert(day1));
         LocalDate day2 = LocalDate.parse("2021-03-31");
