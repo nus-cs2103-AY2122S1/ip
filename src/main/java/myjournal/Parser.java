@@ -28,47 +28,40 @@ public class Parser {
      * @param line The current line parsed.
      * @param tasks The list of the tasks in MyJournal.
      */
-    public void parse(Scanner line, TaskList tasks, Ui ui) {
+    public String parse(Scanner line, TaskList tasks, Ui ui) {
         try {
             String firstWord = line.next();
             switch (firstWord) {
             case "done":
-                ui.doneTaskPrint(Parser.parseDone(line, tasks));
-                break;
+                return ui.doneTaskPrint(Parser.parseDone(line, tasks));
             case "delete":
-                ui.removeTaskPrint(Parser.parseDelete(line, tasks));
-                break;
+                return ui.removeTaskPrint(Parser.parseDelete(line, tasks));
             case "find":
-                ui.findTaskPrint(Parser.parseFind(line, tasks));
-                break;
+                return ui.findTaskPrint(Parser.parseFind(line, tasks));
             case "list":
-                Parser.parseList(tasks);
-                break;
+                return Parser.parseList(tasks);
             case "todo":
                 tasks.addTask(Parser.parseTodo(line));
-                ui.taskAddPrint(tasks);
-                break;
+                return ui.taskAddPrint(tasks);
             case "event":
                 tasks.addTask(Parser.parseEvent(line));
-                ui.taskAddPrint(tasks);
-                break;
+                return ui.taskAddPrint(tasks);
             case "deadline":
                 tasks.addTask(Parser.parseDeadline(line));
-                ui.taskAddPrint(tasks);
-                break;
+                return ui.taskAddPrint(tasks);
             default:
                 throw new InvalidTypeException("OOPS!!! Please put either todo/event/deadline!");
             }
         } catch (InvalidTypeException e) {
-            System.out.println(e.toString());
+            return e.toString();
         } catch (InvalidTaskNumberException e) {
-            System.out.println(e.toString());
+            return e.toString();
         } catch (EmptyDescriptionException e) {
-            System.out.println(e.toString());
+            return e.toString();
         } catch (InvalidWordException e) {
-            System.out.println(e.toString());
+            return e.toString();
         } catch (DateTimeParseException exception) {
-            System.out.println(exception.toString());
+            return exception.toString();
         }
     }
 
@@ -125,13 +118,15 @@ public class Parser {
      *
      * @param tasks The list of tasks.
      */
-    public static void parseList(TaskList tasks) {
+    public static String parseList(TaskList tasks) {
         if (tasks.getSize() == 0) {
-            System.out.println("You have no task!");
+            return "You have no task!";
         } else {
+            String s = "Here are your tasks:\n";
             for (int i = 0; i < tasks.getSize(); i++) {
-                System.out.println((i + 1) + "." + tasks.getTask(i));
+                s = s + (i + 1) + "." + tasks.getTask(i) + "\n";
             }
+            return s;
         }
     }
 

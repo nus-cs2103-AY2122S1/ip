@@ -167,10 +167,11 @@ public class MyJournal extends Application {
      */
     private void handleUserInput() {
         String userText = userInput.getText();
-        String myJournalText = getResponse(userInput.getText());
+        Scanner input = new Scanner(userText);
+        String parsedInput = parser.parse(input, tasks, ui);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new Image(String.valueOf(user))),
-                DialogBox.getMyJournalDialog(myJournalText, new Image(String.valueOf(myJournal)))
+                DialogBox.getMyJournalDialog(parsedInput, new Image(String.valueOf(myJournal)))
         );
         userInput.clear();
     }
@@ -179,8 +180,11 @@ public class MyJournal extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "MyJournal heard: " + input;
+    public String getResponse(String input) throws IOException {
+        Scanner text = new Scanner(input);
+        String parsedInput = parser.parse(text, tasks, ui);
+        storage.saveFile(tasks.toString());
+        return "MyJournal: " + parsedInput;
     }
 
     /**
