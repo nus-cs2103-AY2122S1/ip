@@ -21,5 +21,7 @@ public class DoneCommand extends Command {
      * @param ui Ui object for interaction with user
      * @param store Storage object that handles save and load functionality.
      */
-    public void execute(TaskList tasklist, Ui ui, Storage store){}
+    public String execute(TaskList tasklist, Ui ui, Storage store){
+        return "";
+    }
 }

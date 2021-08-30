@@ -16,7 +16,7 @@ public class InvalidCommand extends Command {
      * @param store Storage object that handles save and load functionality.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store) {
-        ui.notifyBadCommand();
+    public String execute(TaskList tasklist, Ui ui, Storage store) {
+        return ui.notifyBadCommand();
     }
 }

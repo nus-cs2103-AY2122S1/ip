@@ -25,8 +25,8 @@ public class MarkDoneCommand extends Command{
      * @param store Storage object that handles save and load functionality.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store) {
+    public String execute(TaskList tasklist, Ui ui, Storage store) {
         tasklist.get(index).setFlag(true);
-        ui.notifySuccessfulMarkDone(tasklist, index);
+        return ui.notifySuccessfulMarkDone(tasklist, index);
     }
 }

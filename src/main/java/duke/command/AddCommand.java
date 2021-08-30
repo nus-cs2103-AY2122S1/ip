@@ -44,7 +44,7 @@ public class AddCommand extends Command {
      * @param store Storage object that handles save and load functionality.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store) {
+    public String execute(TaskList tasklist, Ui ui, Storage store) {
         if (type.equals("todo")) {
             tasklist.add(new Todo(label));
         } else if (type.equals("deadline")) {
@@ -52,6 +52,6 @@ public class AddCommand extends Command {
         } else {
             tasklist.add(new Event(label, date));
         }
-        ui.notifySuccessfulAdd(tasklist);
+        return ui.notifySuccessfulAdd(tasklist);
     }
 }

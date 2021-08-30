@@ -11,7 +11,7 @@ import duke.Storage;
 public abstract class Command {
     protected boolean isDone = false;
 
-    public abstract void execute(TaskList tasklist, Ui ui, Storage store);
+    public abstract String execute(TaskList tasklist, Ui ui, Storage store);
 
     /**
      * This method is just for control purposes, to indicate when the application should exit

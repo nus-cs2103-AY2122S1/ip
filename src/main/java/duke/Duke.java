@@ -17,7 +17,20 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        String response = "";
+        try {
+            Command c = Parser.parse(input);
+            response = c.execute(tasklist, ui, storage);
+        } catch (DukeException e) {
+            ui.notifyEmptyDescription();
+        } catch (IndexOutOfBoundsException e) {
+            ui.notifyIndexOutOfBounds();
+        } catch (NumberFormatException e) {
+            ui.notifyImproperIndex();
+        } catch (DateTimeParseException e) {
+            ui.notifyImproperDateTime();
+        }
+        return response;
     }
 
 
@@ -30,10 +43,7 @@ public class Duke {
         storage = new Storage("frosty.txt", ui);
         try {
             tasklist = new TaskList(storage.load(ui));
-            ui.printLine();
         } catch (IOException | DukeException e) {
-            ui.notifyLoadingError();
-//            e.printStackTrace();
             tasklist = new TaskList();
         }
     }

@@ -27,8 +27,8 @@ public class DeleteCommand extends Command{
      * @throws IndexOutOfBoundsException If user gives an index not corresponding to an item in the list.
      */
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store) throws IndexOutOfBoundsException {
+    public String execute(TaskList tasklist, Ui ui, Storage store) throws IndexOutOfBoundsException {
         Task removed = tasklist.delete(index);
-        ui.notifySuccessfulDelete(tasklist, removed);
+        return ui.notifySuccessfulDelete(tasklist, removed);
     }
 }

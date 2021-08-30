@@ -27,104 +27,105 @@ public class Ui {
     /**
      * Method called at beginning of application run. Prints welcome message.
      */
-    public void init() {
-        System.out.println(
-                        "░▄░█░░░▄▀▀▀▀▀▄░░░█░▄░\n" +
-                        "▄▄▀▄░░░█─▀─▀─█░░░▄▀▄▄\n" +
-                        "░░░░▀▄▒▒▒▒▒▒▒▒▒▄▀░░░░\n" +
-                        "░░░░░█────▀────█░░░░░\n" +
-                        "░░░░░█────▀────█░░░░░\n");
-        System.out.println("I'm Frosty, your personal task manager! How can I help?");
+    public String init() {
+        return  "░▄░█░░░▄▀▀▀▀▀▄░░░█░▄░\n" +
+                "▄▄▀▄░░░█─▀─▀─█░░░▄▀▄▄\n" +
+                "░░░░▀▄▒▒▒▒▒▒▒▒▒▄▀░░░░\n" +
+                "░░░░░█────▀────█░░░░░\n" +
+                "░░░░░█────▀────█░░░░░\n" +
+                "I'm Frosty, your personal task manager! How can I help?";
     }
 
-    public void displayList(TaskList tasklist) {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasklist.size(); i++) {
-            System.out.println((i + 1) + ". " + tasklist.get(i));
-        }
+    //temporarily broken
+    public String displayList(TaskList tasklist) {
+        return "Here are the tasks in your list:";
     }
 
-    public void displayFindList(TaskList tasklist) {
-        System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < tasklist.size(); i++) {
-            System.out.println((i + 1) + ". " + tasklist.get(i));
-        }
+    //temporarily broken
+    public String displayFindList(TaskList tasklist) {
+        return "Here are the matching tasks in your list:";
     }
 
-    public void notifySuccessfulAdd(TaskList tasklist) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + tasklist.get(tasklist.size() - 1));
-        System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
+    public String notifySuccessfulAdd(TaskList tasklist) {
+        String res = "";
+        res +=  "Got it. I've added this task:\n";
+        res +=  "  " + tasklist.get(tasklist.size() - 1) + "\n";
+        res += "Now you have " + tasklist.size() + " tasks in the list.";
+        return res;
     }
 
-    public void notifySuccessfulMarkDone(TaskList tasklist, int index) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + tasklist.get(index));
+    public String notifySuccessfulMarkDone(TaskList tasklist, int index) {
+        String res = "";
+        res += "Nice! I've marked this task as done:\n";
+        res += "  " + tasklist.get(index);
+        return res;
     }
 
-    public void notifySuccessfulDelete(TaskList tasklist, Task removed) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + removed);
-        System.out.println("Now you have " + tasklist.size() + " tasks in the list.");
+    public String notifySuccessfulDelete(TaskList tasklist, Task removed) {
+        String res = "";
+        res += "Noted. I've removed this task:\n";
+        res += "  " + removed + "\n";
+        res += "Now you have " + tasklist.size() + " tasks in the list.";
+        return res;
     }
 
-    public void notifyBadCommand() {
-        System.out.println("Sorry! I don't know what your request means. Please try again?");
+    public String notifyBadCommand() {
+        return ("Sorry! I don't know what your request means. Please try again?");
     }
 
-    public void notifyLoadingError() {
-        System.out.println("An error occurred while loading in the saved data...");
+    public String notifyLoadingError() {
+        return ("An error occurred while loading in the saved data...");
     }
 
-    public void closing() {
-        System.out.println("Have a Merry Christmas and a Happy New Year!");
+    public String closing() {
+        return ("Have a Merry Christmas and a Happy New Year!");
     }
 
-    public void notifyLoadingBegin() {
-        System.out.println("It look like you have a previous session! Loading your data now...");
+    public String notifyLoadingBegin() {
+        return ("It look like you have a previous session! Loading your data now...");
     }
 
-    public void notifyLoadingComplete() {
-        System.out.println("Loading complete!");
+    public String notifyLoadingComplete() {
+        return ("Loading complete!");
     }
 
-    public void notifySavingBegin() {
-        System.out.println("Just a moment, i'm saving your list!");
+    public String notifySavingBegin() {
+        return ("Just a moment, i'm saving your list!");
     }
 
-    public void notifySavingComplete() {
-        System.out.println("Done!");
+    public String notifySavingComplete() {
+        return ("Done!");
     }
 
-    public void notifySavingError() {
-        System.out.println("Something went wrong and I can't save your list, sorry!");
+    public String notifySavingError() {
+        return ("Something went wrong and I can't save your list, sorry!");
     }
 
-    public void notifyIndexOutOfBounds() {
-        System.out.println("Sorry! Your command has an invalid index choice");
+    public String notifyIndexOutOfBounds() {
+        return ("Sorry! Your command has an invalid index choice");
     }
 
-    public void notifyImproperIndex() {
-        System.out.println("Sorry! I can't understand the index for your command");
+    public String notifyImproperIndex() {
+        return ("Sorry! I can't understand the index for your command");
     }
 
-    public void notifyEmptyDescription() {
-        System.out.println("Sorry! Your command appears to be missing a description");
+    public String notifyEmptyDescription() {
+        return ("Sorry! Your command appears to be missing a description");
     }
 
-    public void notifyImproperDateTime() {
-        System.out.println("Sorry! I don't recognise the format for the date and time you've entered.");
+    public String notifyImproperDateTime() {
+        return ("Sorry! I don't recognise the format for the date and time you've entered.");
     }
 
-    public void printLine() {
-        System.out.println("--------------------------------------------------");
+    public String printLine() {
+        return ("--------------------------------------------------");
     }
 
-    public void notifyFolderFound() {
-        System.out.println("I've found the data folder. Your session will be saved there.");
+    public String notifyFolderFound() {
+        return ("I've found the data folder. Your session will be saved there.");
     }
 
-    public void notifyFolderCreated() {
-        System.out.println("I couldn't find a data folder. I've initialised one for your data.");
+    public String notifyFolderCreated() {
+        return ("I couldn't find a data folder. I've initialised one for your data.");
     }
 }

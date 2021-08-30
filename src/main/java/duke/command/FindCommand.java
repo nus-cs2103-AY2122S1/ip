@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store) {
+    public String execute(TaskList tasklist, Ui ui, Storage store) {
         Task t;
         TaskList temp = new TaskList();
         for (int i = 0; i < tasklist.size(); i++) {
@@ -21,6 +21,6 @@ public class FindCommand extends Command {
                 temp.add(t);
             }
         }
-        ui.displayFindList(temp);
+        return ui.displayFindList(temp);
     }
 }
