@@ -1,8 +1,8 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TaskTest {
 
@@ -41,6 +41,4 @@ class TaskTest {
         task.setIsDone(true);
         assertEquals("| 1 | testSaveToFile", task.saveToFile());
     }
-
-
 }
