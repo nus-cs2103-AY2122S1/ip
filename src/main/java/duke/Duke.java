@@ -52,4 +52,10 @@ public class Duke {
     public static void main(String[] args) throws IOException {
         new Duke().run();
     }
+
+    public String getResponse(String input) throws DukeException {
+        Parser parser = new Parser();
+        Command c = parser.getCommand(input, tasks);
+        return c.getDesc();
+    }
 }

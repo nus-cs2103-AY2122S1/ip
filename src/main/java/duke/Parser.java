@@ -1,6 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -39,12 +38,16 @@ public class Parser {
         case "list":
             return new ListCommand("list");
         case "done":
-            checkIndex(fullCommand.length);
+            if (fullCommand.length == 1) {
+                throw new DukeException("Please give an index number");
+            }
             int doneIndex = Integer.parseInt(fullCommand[1]);
             checkIndex(doneIndex, tasks.size());
             return new DoneCommand("done", doneIndex);
         case "delete":
-            checkIndex(fullCommand.length);
+            if (fullCommand.length == 1) {
+                throw new DukeException("Please give an index number");
+            }
             int deleteIndex = Integer.parseInt(fullCommand[1]);
             checkIndex(deleteIndex, tasks.size());
             return new DeleteCommand("delete", deleteIndex);
@@ -104,18 +107,6 @@ public class Parser {
     }
 
     /**
-     * Checks if the user input an index number when using the commands: done, delete.
-     *
-     * @param length the number of words in the command line that the user input.
-     * @throws DukeException If the user did not enter an index number.
-     */
-    public static void checkIndex(int length) throws DukeException {
-        if (length == 1) {
-            throw new DukeException("Please give an index number");
-        }
-    }
-
-    /**
      * Checks if the index number that the user input is valid.
      *
      * @param i            the index number that the user input.
@@ -130,14 +121,20 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the date
+     * @param date The date of the task in String format.
+     * @return LocalDateTime of the task.
+     * @throws DukeException If the date format is invalid
+     */
     public LocalDateTime parseDate(String date) throws DukeException {
         DateTimeFormatter dtf = DateTimeFormatter
                 .ofPattern("[d/M/[uuuu][uu] H:mm][d-MMM-[uuuu][uu] H:mm][d-M-[uuuu][uu] H:mm][d/MMM/[uuuu][uu] H:mm]");
         try {
             return LocalDateTime.parse(date, dtf);
         } catch (DateTimeParseException err) {
-            throw new DukeException("Invalid date format\nPlease type out date in following format: d/M/yyyy H:mm " +
-                    "or d-M-yyyy H:mm, in 24-hour format");
+            throw new DukeException("Invalid date format\nPlease type out date in following format: d/M/yyyy H:mm "
+                    + "or d-M-yyyy H:mm, in 24-hour format");
         }
     }
 }
