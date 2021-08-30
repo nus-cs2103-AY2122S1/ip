@@ -2,7 +2,7 @@ package duke.main;
 
 import duke.task.TaskList;
 import duke.task.ToDo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
     @Test
