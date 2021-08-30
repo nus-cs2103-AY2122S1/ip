@@ -17,6 +17,6 @@ public class DeleteCommand extends Command {
     @Override
     public String run() {
         super.taskList.deleteTask(this.index);
-        return Ui.printDontWorry() + Ui.printTasksLeft(super.taskList.uncompletedTasks());
+        return Ui.printDontWorry() + Ui.printTasksLeft(super.taskList.numberOfIncompleteTasks());
     }
 }

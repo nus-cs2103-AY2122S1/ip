@@ -17,6 +17,6 @@ public class AddTodoCommand extends Command {
     @Override
     public String run() {
         super.taskList.addTask(new ToDoTask(this.description));
-        return Ui.printTasksLeft(taskList.uncompletedTasks());
+        return Ui.printTasksLeft(taskList.numberOfIncompleteTasks());
     }
 }

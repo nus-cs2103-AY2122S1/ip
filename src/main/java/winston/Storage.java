@@ -89,7 +89,7 @@ public class Storage {
         try {
             Files.deleteIfExists(this.path);
             PrintWriter out = new PrintWriter("data/winston.txt");
-            out.println(tList.getListData());
+            out.println(tList.listDataFormatter());
             out.close();
         } catch (IOException e) {
             System.out.println("Error overwriting file");

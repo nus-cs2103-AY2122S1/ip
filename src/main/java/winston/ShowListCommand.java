@@ -13,7 +13,7 @@ public class ShowListCommand extends Command {
      */
     @Override
     public String run() {
-        return Ui.printList(taskList) + Ui.printTasksLeft(taskList.uncompletedTasks());
+        return Ui.printList(taskList) + Ui.printTasksLeft(taskList.numberOfIncompleteTasks());
 
                 
     }

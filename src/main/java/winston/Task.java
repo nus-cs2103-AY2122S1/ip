@@ -28,7 +28,7 @@ public class Task {
      * Check the completion of the task
      * @return "[X]" if task is completed and "[ ]" if the task isn't
      */
-    public String taskCompletion() {
+    public String taskCompletionStatus() {
         if (done) {
             return "[X]";
         } else {

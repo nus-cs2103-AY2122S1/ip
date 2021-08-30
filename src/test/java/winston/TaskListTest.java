@@ -24,7 +24,7 @@ public class TaskListTest {
             }
         }
         TaskList taskList = new TaskList(list);
-        assertEquals(taskList.uncompletedTasks(), 10);
+        assertEquals(taskList.numberOfIncompleteTasks(), 10);
     }
     
     @Test
@@ -35,6 +35,6 @@ public class TaskListTest {
         list.add(new Event("test1 3","2021-01-01", true));
         TaskList taskList = new TaskList(list);
         String str = "T,1,test1\nD,0,test1 2,2020-12-12\nE,1,test1 3,2021-01-01";
-        assertEquals(taskList.getListData(), str);
+        assertEquals(taskList.listDataFormatter(), str);
     }
 }

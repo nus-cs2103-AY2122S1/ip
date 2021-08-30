@@ -15,10 +15,10 @@ public class TaskList {
      *
      * @return the number of tasks left in the list that are not completed
      */
-    public int uncompletedTasks() {
+    public int numberOfIncompleteTasks() {
         int counter = 0;
         for (Task task : list) {
-            if (task.taskCompletion().equals("[ ]")) {
+            if (task.taskCompletionStatus().equals("[ ]")) {
                 counter += 1;
             }
         }
@@ -70,21 +70,30 @@ public class TaskList {
         int counter = 1;
         StringBuilder result = new StringBuilder("List of things to do:\n\n");
         for (Task task : this.list) {
-            result.append("\t" + counter + ". " + task.taskCompletion() + task.toString() + "\n");
+            result.append("\t" + counter + ". " + task.taskCompletionStatus() + task.toString() + "\n");
             counter += 1;
         }
         result.append("End");
         return result.toString();
     }
 
-    public String getListData() {
+    /**
+     * A method that returns converts the list into save format
+     * @return A string of the list in save format
+     */
+    public String listDataFormatter() {
         StringBuilder result = new StringBuilder();
         for (Task task : this.list) {
             result.append(task.saveFormat()).append("\n");
         }
         return result.substring(0, result.length() - 1);
     }
-    
+
+    /**
+     *  A method that searches through the TaskList for a given string
+     * @param str The string to look for
+     * @return another TaskList with all Tasks that has a description that matches the given string
+     */
     public TaskList findString(String str) {
         ArrayList<Task> arrList = new ArrayList<>();
         for (Task task : this.list) {
