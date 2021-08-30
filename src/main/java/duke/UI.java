@@ -10,14 +10,14 @@ public class UI {
      * @return Welcome message
      */
     public static String welcome() {
+        /*
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String message = "Hello from\n" + logo;
-        message += "Stay on track with Duke!\nHow can I help you?";
-        return logo + message;
+         */
+        return "Stay on track with Duke!\nHow can I help you?";
     }
 
     /**
@@ -66,5 +66,16 @@ public class UI {
      */
     public static String numberOfTasks(int numberOfTasks) {
         return String.format("You currently have %d tasks.%n", numberOfTasks);
+    }
+
+    /**
+     * Lists the current Tasks in taskArrayList with numbering
+     */
+    public static String list(TaskList taskList) {
+        String list = "Here are your current tasks:\n";
+        for (int i = 1; i <= taskList.size(); i++) {
+            list += i + "." + taskList.get(i).toString() + "\n";
+        }
+        return list;
     }
 }

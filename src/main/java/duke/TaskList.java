@@ -64,17 +64,6 @@ public class TaskList {
     }
 
     /**
-     * Lists the current Tasks in taskArrayList with numbering
-     */
-    public String list() {
-        String list = "Here are your current tasks:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            list += i + 1 + "." + tasks.get(i).toString() + "\n";
-        }
-        return list;
-    }
-
-    /**
      * Retrieves the number of tasks currently
      *
      * @return Number of tasks

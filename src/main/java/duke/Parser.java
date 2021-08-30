@@ -46,7 +46,7 @@ public class Parser {
             taskList.saveTasksToStorage();
             return UI.bye();
         case "list":
-            return taskList.list();
+            return UI.list(taskList);
         case "done":
             return handleDone();
         case "todo":
@@ -80,7 +80,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException("Task does not exist");
         }
-        return UI.done(taskNumber) + "\n" + taskList.list();
+        return UI.done(taskNumber) + "\n" + UI.list(taskList);
     }
 
     /**
@@ -158,7 +158,7 @@ public class Parser {
             throw new InvalidTaskNumberException("Task does not exist");
         }
         return UI.delete(deleteTaskNumber) + "\n" + UI.numberOfTasks(taskList.size())
-                + "\n" + taskList.list();
+                + "\n" + UI.list(taskList);
     }
 
     /**
