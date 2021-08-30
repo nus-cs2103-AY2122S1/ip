@@ -14,16 +14,16 @@ public class Ui {
 
     private static final String LOGO =
             "$$$$$$$\\                                                             $$$$$\\                     $$\\       \n" +
-                    "$$  __$$\\                                                            \\__$$ |                    $$ |      \n" +
-                    "$$ |  $$ | $$$$$$\\   $$$$$$\\   $$$$$$\\   $$$$$$\\   $$$$$$\\              $$ | $$$$$$\\   $$$$$$$\\ $$ |  $$\\ \n" +
-                    "$$$$$$$  |$$  __$$\\ $$  __$$\\ $$  __$$\\ $$  __$$\\ $$  __$$\\             $$ | \\____$$\\ $$  _____|$$ | $$  |\n" +
-                    "$$  ____/ $$$$$$$$ |$$ /  $$ |$$ /  $$ |$$$$$$$$ |$$ |  \\__|      $$\\   $$ | $$$$$$$ |$$ /      $$$$$$  / \n" +
-                    "$$ |      $$   ____|$$ |  $$ |$$ |  $$ |$$   ____|$$ |            $$ |  $$ |$$  __$$ |$$ |      $$  _$$<  \n" +
-                    "$$ |      \\$$$$$$$\\ $$$$$$$  |$$$$$$$  |\\$$$$$$$\\ $$ |            \\$$$$$$  |\\$$$$$$$ |\\$$$$$$$\\ $$ | \\$$\\ \n" +
-                    "\\__|       \\_______|$$  ____/ $$  ____/  \\_______|\\__|             \\______/  \\_______| \\_______|\\__|  \\__|\n" +
-                    "                    $$ |      $$ |                                                                        \n" +
-                    "                    $$ |      $$ |                                                                        \n" +
-                    "                    \\__|      \\__|                                                                        ";
+            "$$  __$$\\                                                            \\__$$ |                    $$ |      \n" +
+            "$$ |  $$ | $$$$$$\\   $$$$$$\\   $$$$$$\\   $$$$$$\\   $$$$$$\\              $$ | $$$$$$\\   $$$$$$$\\ $$ |  $$\\ \n" +
+            "$$$$$$$  |$$  __$$\\ $$  __$$\\ $$  __$$\\ $$  __$$\\ $$  __$$\\             $$ | \\____$$\\ $$  _____|$$ | $$  |\n" +
+            "$$  ____/ $$$$$$$$ |$$ /  $$ |$$ /  $$ |$$$$$$$$ |$$ |  \\__|      $$\\   $$ | $$$$$$$ |$$ /      $$$$$$  / \n" +
+            "$$ |      $$   ____|$$ |  $$ |$$ |  $$ |$$   ____|$$ |            $$ |  $$ |$$  __$$ |$$ |      $$  _$$<  \n" +
+            "$$ |      \\$$$$$$$\\ $$$$$$$  |$$$$$$$  |\\$$$$$$$\\ $$ |            \\$$$$$$  |\\$$$$$$$ |\\$$$$$$$\\ $$ | \\$$\\ \n" +
+            "\\__|       \\_______|$$  ____/ $$  ____/  \\_______|\\__|             \\______/  \\_______| \\_______|\\__|  \\__|\n" +
+            "                    $$ |      $$ |                                                                        \n" +
+            "                    $$ |      $$ |                                                                        \n" +
+            "                    \\__|      \\__|                                                                        ";
 
     private static final String END_TEXT = "Pepper Jack love Fraggle Rock!";
 
@@ -37,8 +37,13 @@ public class Ui {
             EventCommand.USAGE_TEXT,
     };
 
+    private Scanner sc;
+
+    public Ui() {
+        this.sc = new Scanner(System.in);
+    }
+
     public String readCommand() {
-        Scanner sc = new Scanner(System.in);
         System.out.print("[YOU] ");
         return sc.nextLine();
     }
@@ -77,7 +82,7 @@ public class Ui {
         for (String help_text : LIST_OF_COMMAND_USAGE_TEXT) {
             all_help_text = all_help_text + "\t" + help_text + "\n";
         }
-        System.out.println(formatReply("What you sayin brah! You better start makin sense or else...\n"
+        System.out.print(formatReply("What you sayin brah! You better start makin sense or else...\n"
                 + "*Speak in words Pepper Jack can understand*\n" + all_help_text));
     }
 

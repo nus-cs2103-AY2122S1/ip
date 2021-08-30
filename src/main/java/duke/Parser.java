@@ -64,7 +64,7 @@ public class Parser {
         }
         // Makes sure that key phrase is a valid int
         try {
-            int index = Integer.parseInt(args);
+            int index = Integer.parseInt(args) - 1;
             return new DoneCommand(index);
         }
         catch (NumberFormatException e) {
@@ -75,11 +75,11 @@ public class Parser {
     public static Command prepareDelete(String args) throws DukeException {
         // Make sure there is argument to determine task to mark as done
         if (args.equals("")) {
-            throw new DukeException("Done what brah??\n\t" + DeleteCommand.USAGE_TEXT);
+            throw new DukeException("Delete what brah??\n\t" + DeleteCommand.USAGE_TEXT);
         }
         // Makes sure that key phrase is a valid int
         try {
-            int index = Integer.parseInt(args);
+            int index = Integer.parseInt(args) - 1;
             return new DeleteCommand(index);
         }
         catch (NumberFormatException e) {
@@ -98,12 +98,12 @@ public class Parser {
     public static Command prepareDeadline(String args) throws DukeException {
         // Make sure there is argument to record as task
         if (args.equals("")) {
-            throw new DukeException("Deadline for what brah??\n\t" + DeleteCommand.USAGE_TEXT);
+            throw new DukeException("Deadline for what brah??\n\t" + DeadlineCommand.USAGE_TEXT);
         }
         // Makes sure argument consists of task and datetime
         String[] desc_date = args.split(" /by ", 2);
         if (desc_date.length != 2) {
-            throw new DukeException("Deadline by when brah??\n\t" + DeleteCommand.USAGE_TEXT);
+            throw new DukeException("Deadline by when brah??\n\t" + DeadlineCommand.USAGE_TEXT);
         }
         // Make sure date format is correct
         try {
@@ -112,7 +112,7 @@ public class Parser {
             return new DeadlineCommand(desc, date);
         }
         catch (DateTimeParseException e) {
-            throw new DukeException("Follow the gahdam format!!\n\t" + DeleteCommand.USAGE_TEXT);
+            throw new DukeException("Follow the gahdam format!!\n\t" + DeadlineCommand.USAGE_TEXT);
         }
     }
 

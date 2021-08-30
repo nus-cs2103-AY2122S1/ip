@@ -70,20 +70,26 @@ public class Storage {
      * Saves tasks into a text file
      */
     public void save(TaskList taskList) throws DukeException {
-        File file = new File(filePath);
-        try {
-            // Create file if not already existing
-            file.createNewFile();
-            FileWriter fw = new FileWriter(filePath);
+        // Check if there are tasks to save
+        if (taskList.size() != 0) {
+            File file = new File(filePath);
+            try {
+                // Create directory if not already existing
+                new File(file.getParent()).mkdirs();
 
-            // Write current task list into file
-            for (Task t : taskList.getTaskList()) {
-                fw.write(t.toString());
-                fw.write(System.lineSeparator());
+                // Create file if not already existing
+                file.createNewFile();
+                FileWriter fw = new FileWriter(filePath);
+
+                // Write current task list into file
+                for (Task t : taskList.getTaskList()) {
+                    fw.write(t.toString());
+                    fw.write(System.lineSeparator());
+                }
+                fw.close();
+            } catch (IOException e) {
+                throw new DukeException("There was an error saving your tasks!");
             }
-            fw.close();
-        } catch (IOException e) {
-            throw new DukeException("There was an error! Try again!");
         }
     }
 }

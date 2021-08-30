@@ -17,6 +17,7 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 text-ui-test/sources.txt
+text-ui-test/data
 /data/tasks.txt
 
 # JAR metainfo
