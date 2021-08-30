@@ -2,12 +2,13 @@ package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.Ui;
-import org.junit.jupiter.api.Test;
 
 public class DoneCommandTest {
 
@@ -16,7 +17,7 @@ public class DoneCommandTest {
         int taskNumber = 0;
         try {
             TaskList tl = new TaskList();
-            tl.addTask(new Todo(false,"test"));
+            tl.addTask(new Todo(false, "test"));
             Storage storage = new Storage();
             Ui ui = new Ui();
             new DoneCommand(taskNumber).execute(storage, tl, ui);

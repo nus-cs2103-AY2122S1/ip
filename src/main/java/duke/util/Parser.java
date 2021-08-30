@@ -1,12 +1,17 @@
 package duke.util;
 
-import duke.command.*;
-import duke.task.TaskType;
-import duke.command.FindCommand;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.task.TaskType;
 
 /**
  * Makes sense of user inputs.
@@ -20,30 +25,30 @@ public class Parser {
      * @throws DukeException user input does not match any known format.
      */
     public static Command parseInputs(String userInput) throws DukeException {
-            int indexOfSpace = userInput.indexOf(' ');
-            String firstWord = indexOfSpace == -1
-                    ? userInput
-                    : userInput.substring(0, indexOfSpace);
+        int indexOfSpace = userInput.indexOf(' ');
+        String firstWord = indexOfSpace == -1
+                ? userInput
+                : userInput.substring(0, indexOfSpace);
 
-            switch (firstWord) {
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ListCommand();
-            case "find":
-                return getFindCommand(userInput, indexOfSpace);
-            case "done":
-                return getDoneCommand(userInput);
-            case "delete":
-                return getDeleteCommand(userInput);
-            case "deadline":
-                return getAddDeadlineCommand(userInput, indexOfSpace);
-            case "event":
-                return getAddEventCommand(userInput, indexOfSpace);
-            case "todo":
-                return getAddTodoCommand(userInput, indexOfSpace);
-            default:
-                throw new DukeException("Say something I can understand!! >:(");
+        switch (firstWord) {
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand();
+        case "find":
+            return getFindCommand(userInput, indexOfSpace);
+        case "done":
+            return getDoneCommand(userInput);
+        case "delete":
+            return getDeleteCommand(userInput);
+        case "deadline":
+            return getAddDeadlineCommand(userInput, indexOfSpace);
+        case "event":
+            return getAddEventCommand(userInput, indexOfSpace);
+        case "todo":
+            return getAddTodoCommand(userInput, indexOfSpace);
+        default:
+            throw new DukeException("Say something I can understand!! >:(");
         }
     }
 
@@ -62,8 +67,8 @@ public class Parser {
             String name = userInput.substring(indexOfSpace + 1);
             return new AddCommand(TaskType.TODO, name, null);
         } else {
-            throw new DukeException(">:( include task name after todo:\n" +
-                    "todo <some task name>");
+            throw new DukeException(">:( include task name after todo:\n"
+                    + "todo <some task name>");
         }
     }
 
@@ -74,8 +79,8 @@ public class Parser {
             String dateTime = deadlineDetails[1];
             return new AddCommand(TaskType.EVENT, name, parseDate(dateTime));
         } else {
-            throw new DukeException(">:( Follow format below:\n" +
-                    "deadline <taskname...> /at <dd-mm-yyyy HHmm>");
+            throw new DukeException(">:( Follow format below:\n"
+                    + "deadline <taskname...> /at <dd-mm-yyyy HHmm>");
         }
     }
 
@@ -86,8 +91,8 @@ public class Parser {
             String dateTime = deadlineDetails[1];
             return new AddCommand(TaskType.DEADLINE, name, parseDate(dateTime));
         } else {
-            throw new DukeException(">:( Follow format below:\n" +
-                    "deadline <taskname...> /by <dd-mm-yyyy HHmm>");
+            throw new DukeException(">:( Follow format below:\n"
+                    + "deadline <taskname...> /by <dd-mm-yyyy HHmm>");
         }
     }
 
@@ -96,8 +101,8 @@ public class Parser {
             int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
             return new DeleteCommand(taskNumber);
         } else {
-            throw new DukeException(">:( follow format below:\n" +
-                    "done <number between 1 and 100>");
+            throw new DukeException(">:( follow format below:\n"
+                    + "done <number between 1 and 100>");
         }
     }
 
@@ -106,8 +111,8 @@ public class Parser {
             int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
             return new DoneCommand(taskNumber);
         } else {
-            throw new DukeException(">:( follow format below:\n" +
-                    "done <number between 1 and 100>");
+            throw new DukeException(">:( follow format below:\n"
+                    + "done <number between 1 and 100>");
         }
     }
 

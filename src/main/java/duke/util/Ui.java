@@ -1,8 +1,8 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * A medium between the user and Duke to communicate.
@@ -54,7 +54,7 @@ public class Ui {
      * Prints greetings.
      */
     public void greet() {
-        System.out.println("Look at me! I'm DUKE\n"  + "How can I help?");
+        System.out.println("Look at me! I'm DUKE\n" + "How can I help?");
     }
 
     /**

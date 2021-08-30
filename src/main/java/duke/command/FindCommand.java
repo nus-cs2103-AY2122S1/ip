@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private final String searchTerm;
 
     public FindCommand(String searchTerm) {

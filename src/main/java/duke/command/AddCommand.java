@@ -1,22 +1,23 @@
 package duke.command;
 
-import duke.task.Task;
-import duke.task.TaskType;
-import duke.task.TaskList;
+import java.time.LocalDateTime;
+
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
 import duke.task.Todo;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import java.time.LocalDateTime;
 
 /**
  * Add task to task list. A Task can be of type Event, Deadline or Todo.
  */
 public class AddCommand extends Command {
-    Task task;
+    private Task task;
 
     /**
      * Constructs an command that adds a task to the task list.
@@ -33,9 +34,8 @@ public class AddCommand extends Command {
         case EVENT:
             this.task = new Event(false, name, dateTime);
             break;
-        case TODO:
+        default:
             this.task = new Todo(false, name);
-            break;
         }
     }
 

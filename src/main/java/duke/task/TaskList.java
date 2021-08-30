@@ -1,18 +1,25 @@
 package duke.task;
 
-import duke.util.DukeException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import duke.util.DukeException;
+
 /**
  * Manipulates and stores tasks.
  */
 public class TaskList {
     private final LinkedList<Task> tasks = new LinkedList<>();
+
+    /**
+     * Instantiates a task list to store tasks.
+     */
+    public TaskList() {
+
+    }
 
     /**
      * Retrieve value from a file on local storage to initialise a copy
@@ -32,13 +39,6 @@ public class TaskList {
             e.printStackTrace();
             throw new DukeException("Unable initialise task list from file memory");
         }
-    }
-
-    /**
-     * Instantiates a task list to store tasks.
-     */
-    public TaskList() {
-
     }
 
     /**
@@ -134,6 +134,11 @@ public class TaskList {
         return result.toString();
     }
 
+    /**
+     * Filter tasks in the task list with name that includes the search term.
+     *
+     * @return Task array comprising of all tasks with search term in task name.
+     */
     public Task[] findTasksWithName(String searchTerm) {
         return tasks
                 .stream()

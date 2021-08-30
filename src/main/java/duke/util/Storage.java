@@ -8,7 +8,7 @@ import java.io.IOException;
  * Reads and write memory to local storage.
  */
 public class Storage {
-    String filePath = "./data/duke.txt";
+    private String filePath = "./data/duke.txt";
 
     /**
      * Initiates a storage instance.
