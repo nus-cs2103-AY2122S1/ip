@@ -13,6 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
+
+import javax.swing.*;
 
 /**
  * An example of a custom control using FXML.
@@ -22,6 +27,8 @@ import javafx.scene.layout.HBox;
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
+    @FXML
+    private StackPane chatBubble;
     @FXML
     private ImageView displayPicture;
 
@@ -35,27 +42,38 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        dialog.setAlignment(Pos.CENTER_RIGHT);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+
+        dialog.setTextAlignment(TextAlignment.LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.chatBubble.getStyleClass().add("userBubble");
+        db.dialog.setTextFill(Color.WHITE);
+        db.dialog.setTextAlignment(TextAlignment.RIGHT);
+        db.dialog.setAlignment(Pos.CENTER_RIGHT);
+
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+
+        db.chatBubble.getStyleClass().add("dukeBubble");
+        db.dialog.setAlignment(Pos.CENTER_LEFT);
+        db.dialog.setTextAlignment(TextAlignment.LEFT);
+
         return db;
     }
 }

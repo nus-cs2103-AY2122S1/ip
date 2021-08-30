@@ -23,10 +23,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Consumer<String> inputHandler ;
+    private Consumer<String> inputHandler;
 
-    private final Image USER_IMG = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image DUKE_IMG = new Image(this.getClass().getResourceAsStream("/images/lord-farquaad.jpeg"));
+    private final Image USER_IMG = new Image(this.getClass().getResourceAsStream("/images/shrek.png"));
+    private final Image DUKE_IMG = new Image(this.getClass().getResourceAsStream("/images/lord-farquaad.png"));
 
     @FXML
     public void initialize() {
@@ -37,6 +37,10 @@ public class MainWindow extends AnchorPane {
         this.inputHandler = handler;
     }
 
+    /**
+     * Get Duke to send a given text.
+     * @param text Given text
+     */
     public void print(String text) {
         this.dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(text, DUKE_IMG)
@@ -46,6 +50,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String userText = userInput.getText();
+
+        if (userText.equals("")) {
+            return;
+        }
+
         dialogContainer.getChildren().add(
                 DialogBox.getUserDialog(userText, USER_IMG)
         );

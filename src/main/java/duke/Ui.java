@@ -78,6 +78,8 @@ public class Ui extends Application {
 
             mainWindow = fxmlLoader.getController();
             mainWindow.setInputHandler(inputHandler);
+
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
