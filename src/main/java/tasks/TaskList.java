@@ -4,7 +4,6 @@ import duke.Storage;
 import duke.Ui;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * A class that abstracts a list of tasks set by the user. It also contains methods
@@ -40,7 +39,6 @@ public class TaskList {
      * inputted task from the user to the taskList.
      *
      * @param task The previously saved task to add to the taskList.
-     * @returns The message that should be shown to the user after saving a task.
      */
     public void addSavedTask(Task task) {
         this.taskArrayList.add(task);
@@ -118,6 +116,13 @@ public class TaskList {
         return message.toString();
     }
 
+    /**
+     * Returns the tasks in the taskList that has a name that matches the
+     * search keyword.
+     *
+     * @param searchKeyword A search keyword that is provided by the user.
+     * @return An arrayList containing the tasks that contains the search keyword.
+     */
     public ArrayList<Task> findTask(String searchKeyword) {
         ArrayList<Task> searchList = new ArrayList<>();
         for (Task task : this.taskArrayList) {

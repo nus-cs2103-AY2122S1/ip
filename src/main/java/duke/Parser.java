@@ -1,6 +1,16 @@
 package duke;
 
-import commands.*;
+import commands.Command;
+import commands.ExitCommand;
+import commands.ListCommand;
+import commands.DoneCommand;
+import commands.AddTodoCommand;
+import commands.AddDeadlineCommand;
+import commands.AddEventCommand;
+import commands.DeleteCommand;
+import commands.FindCommand;
+import commands.InvalidCommand;
+
 import tasks.TaskList;
 
 /**
@@ -9,14 +19,14 @@ import tasks.TaskList;
 class Parser {
 
     /** User input keywords */
-    private final static String KEYWORD_DONE = "done";
-    private final static String KEYWORD_LIST = "list";
-    private final static String KEYWORD_BYE = "bye";
-    private final static String KEYWORD_TODO = "todo";
-    private final static String KEYWORD_DEADLINE = "deadline";
-    private final static String KEYWORD_EVENT = "event";
-    private final static String KEYWORD_DELETE = "delete";
-    private final static String KEYWORD_FIND = "find";
+    private static final String KEYWORD_DONE = "done";
+    private static final String KEYWORD_LIST = "list";
+    private static final String KEYWORD_BYE = "bye";
+    private static final String KEYWORD_TODO = "todo";
+    private static final String KEYWORD_DEADLINE = "deadline";
+    private static final String KEYWORD_EVENT = "event";
+    private static final String KEYWORD_DELETE = "delete";
+    private static final String KEYWORD_FIND = "find";
 
     /** A list of the tasks entered by the user */
     private final TaskList taskList;

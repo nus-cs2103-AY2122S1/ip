@@ -12,14 +12,14 @@ public class DukeDateTest {
 
     @Test
     public void recoverDateFromStorage() throws DukeInvalidDateException {
-        DukeDate date = DukeDate.GetDukeDateFromType("24 Dec 2021", DukeDate.HAS_DATE);
+        DukeDate date = DukeDate.getDukeDateFromType("24 Dec 2021", DukeDate.HAS_DATE);
         DukeDate testDate = DukeDate.of(testDateInput, true);
         assertEquals(date, testDate);
     }
 
     @Test
     public void recoverDateTimeFromStorage() throws DukeInvalidDateException {
-        DukeDate date = DukeDate.GetDukeDateFromType("24 Jun 1999 0400", DukeDate.HAS_DATE_TIME);
+        DukeDate date = DukeDate.getDukeDateFromType("24 Jun 1999 0400", DukeDate.HAS_DATE_TIME);
         DukeDate testDate = DukeDate.of(testDateTimeInput, true);
         assertEquals(date, testDate);
     }

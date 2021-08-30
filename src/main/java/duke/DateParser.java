@@ -12,12 +12,6 @@ import java.time.format.DateTimeParseException;
  */
 class DateParser {
 
-    /** The date formatters used by duke.Duke to format date strings provided by the user. */
-    private static final DateTimeFormatter DATE_FORMATTER =
-            DateTimeFormatter.ofPattern("d/M/[uuuu][uu]");
-    private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME =
-            DateTimeFormatter.ofPattern("d/M/[uuuu][uu] HHmm");
-
     /** The date formatters used by duke to format a date to a string to display to the user or to store
      * in the local file taskList.txt.
      * */
@@ -25,6 +19,12 @@ class DateParser {
             DateTimeFormatter.ofPattern("d MMM yyyy");
     protected static final DateTimeFormatter PRINT_DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("d MMM yyyy HHmm");
+
+    /** The date formatters used by duke.Duke to format date strings provided by the user. */
+    private static final DateTimeFormatter DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("d/M/[uuuu][uu]");
+    private static final DateTimeFormatter DATE_FORMATTER_WITH_TIME =
+            DateTimeFormatter.ofPattern("d/M/[uuuu][uu] HHmm");
 
     /**
      * Returns a LocalDate based on a formatted String containing a date. The string should have

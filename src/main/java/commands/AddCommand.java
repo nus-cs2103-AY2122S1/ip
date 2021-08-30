@@ -14,8 +14,6 @@ public abstract class AddCommand extends Command {
     /** The user input */
     private final String userInput;
 
-    public abstract boolean verifyAddCommand(String input);
-
     /**
      * Create a command to add a type of task to the taskList.
      *
@@ -26,6 +24,8 @@ public abstract class AddCommand extends Command {
         this.userInput = userInput;
         this.type = typeToAdd;
     }
+
+    public abstract boolean verifyAddCommand(String input);
 
     @Override
     public boolean isExit() {

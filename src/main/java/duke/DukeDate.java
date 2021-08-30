@@ -30,7 +30,7 @@ public class DukeDate {
 
     private DukeDate(String string) {
         dateString = string;
-        this.dateType =  DukeDate.HAS_STRING;
+        this.dateType = DukeDate.HAS_STRING;
     }
 
     private DukeDate(LocalDate date) {
@@ -80,7 +80,7 @@ public class DukeDate {
      * @param type The type of the saved DukeDate.
      * @return The reconverted DukeDates.
      */
-    public static DukeDate GetDukeDateFromType(String dateString, int type) {
+    public static DukeDate getDukeDateFromType(String dateString, int type) {
         if (type == DukeDate.HAS_STRING) {
             return new DukeDate(dateString);
         } else if (type == DukeDate.HAS_DATE) {
@@ -112,8 +112,12 @@ public class DukeDate {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         DukeDate dukeDate = (DukeDate) o;
         return dateType == dukeDate.dateType && Objects.equals(dateString, dukeDate.dateString)
                 && Objects.equals(date, dukeDate.date) && Objects.equals(dateTime, dukeDate.dateTime);

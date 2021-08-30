@@ -58,7 +58,7 @@ public class Storage {
      * @return True if the save operation is successful. False if it produces an unexpected error.
      */
     public static boolean saveTaskList(ArrayList<? extends Task> taskListArr) {
-        FileWriter fileWriter =  Storage.createFileWriter(fileName);
+        FileWriter fileWriter = Storage.createFileWriter(fileName);
         if (fileWriter == null) {
             return false;
         }

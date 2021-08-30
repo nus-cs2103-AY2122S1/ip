@@ -4,7 +4,6 @@ import exceptions.DukeInvalidDateException;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,14 +14,14 @@ public class DateParserTest {
 
     @Test
     public void nonExistentDate() {
-        assertThrows(DukeInvalidDateException.class,
-                () -> DateParser.parseDate("30/15/2021"));
+        assertThrows(DukeInvalidDateException.class, () ->
+            DateParser.parseDate("30/15/2021"));
     }
 
     @Test
     public void wronglyFormattedDate() {
-        assertThrows(DukeInvalidDateException.class,
-                () -> DateParser.parseDate("30-02-2021"));
+        assertThrows(DukeInvalidDateException.class, () ->
+            DateParser.parseDate("30-02-2021"));
     }
 
     @Test
@@ -32,8 +31,8 @@ public class DateParserTest {
 
     @Test
     public void wronglyFormattedTime() {
-        assertThrows(DukeInvalidDateException.class,
-                () -> DateParser.parseDateTime("05/08/2021 705"));
+        assertThrows(DukeInvalidDateException.class, () ->
+            DateParser.parseDateTime("05/08/2021 705"));
     }
 
 }

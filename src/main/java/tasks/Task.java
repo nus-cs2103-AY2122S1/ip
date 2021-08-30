@@ -23,7 +23,8 @@ public abstract class Task {
     /** The type of the task */
     private final Type type;
 
-    public Task(String taskName, Type type) {
+
+    protected Task(String taskName, Type type) {
         this.taskName = taskName;
         this.type = type;
     }
@@ -87,9 +88,9 @@ public abstract class Task {
         if (typeOfTask.equals("T")) {
             loadedTask = Todo.newTodoTask(taskName);
         } else if (typeOfTask.equals("D")) {
-            loadedTask = new Deadline(taskName, DukeDate.GetDukeDateFromType(strComponents[4].strip(), dukeDateType));
+            loadedTask = new Deadline(taskName, DukeDate.getDukeDateFromType(strComponents[4].strip(), dukeDateType));
         } else {
-            loadedTask = new Event(taskName, DukeDate.GetDukeDateFromType(strComponents[4].strip(), dukeDateType));
+            loadedTask = new Event(taskName, DukeDate.getDukeDateFromType(strComponents[4].strip(), dukeDateType));
         }
         loadedTask.isDone = isDone;
         return loadedTask;
@@ -103,7 +104,7 @@ public abstract class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return eventTypeToString() +  "[X] " + this.taskDescription();
+            return eventTypeToString() + "[X] " + this.taskDescription();
         }
         return eventTypeToString() + "[] " + this.taskDescription();
     }

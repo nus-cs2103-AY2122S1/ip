@@ -4,7 +4,6 @@ import commands.Command;
 import javafx.stage.Stage;
 import tasks.Task;
 
-import java.util.Scanner;
 
 /**
  * Class responsible for interacting with users by collecting user's input and displaying

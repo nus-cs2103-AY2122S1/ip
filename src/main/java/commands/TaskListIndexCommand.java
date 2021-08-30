@@ -1,7 +1,8 @@
 package commands;
 
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A command that edits the taskList based on an index given. Such a command
@@ -54,6 +55,7 @@ public abstract class TaskListIndexCommand extends Command {
 
     /**
      * Removes any duplicates index found in the list of indexes.
+     *
      * @param indexArr The list of indexes.
      * @return The list of indexes with any duplicates removed.
      */
@@ -66,7 +68,6 @@ public abstract class TaskListIndexCommand extends Command {
         int i = 0;
         for (int j : indexSet) {
             result[i++] = j;
-            System.out.println(j);
         }
         return result;
     }

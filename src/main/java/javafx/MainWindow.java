@@ -1,4 +1,4 @@
-package javaFx;
+package javafx;
 
 import duke.Ui;
 import javafx.fxml.FXML;
@@ -42,6 +42,11 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Takes a user input and evaluates it accordingly. It is triggered
+     * when the user press the send button on the GUI or presses enter
+     * on his keyboard.
+     */
     @FXML
     public void handleUserInput() {
         String input = userInput.getText();

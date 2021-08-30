@@ -1,4 +1,4 @@
-package javaFx;
+package javafx;
 
 import duke.Ui;
 import javafx.collections.FXCollections;
