@@ -1,14 +1,14 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 import duke.task.Task;
 
 /**
  * Implements the logic for deleting tasks from the users list.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private final int index;
 
     /**

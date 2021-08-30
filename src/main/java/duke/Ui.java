@@ -1,7 +1,8 @@
 package duke;
 
 import java.util.Scanner;
-import duke.task.*;
+
+import duke.task.Task;
 
 /**
  * Ui class to handle printing notices to the user, and reading of user input to pass to Parser.
@@ -28,13 +29,14 @@ public class Ui {
      * Method called at beginning of application run. Prints welcome message.
      */
     public String init() {
-        return  "░▄░█░░░▄▀▀▀▀▀▄░░░█░▄░\n" +
-                "▄▄▀▄░░░█─▀─▀─█░░░▄▀▄▄\n" +
-                "░░░░▀▄▒▒▒▒▒▒▒▒▒▄▀░░░░\n" +
-                "░░░░░█────▀────█░░░░░\n" +
-                "░░░░░█────▀────█░░░░░\n" +
-                "I'm Frosty, your personal task manager! How can I help?";
+        return "I'm Frosty, your personal task manager! How can I help?";
     }
+
+    /**
+     * Returns a String representing tasks in the list.
+     * @param tasklist tasks to be displayed.
+     * @return String representation of tasks.
+     */
 
     public String displayList(TaskList tasklist) {
         String res = "Here are the tasks in your list:\n";
@@ -44,19 +46,35 @@ public class Ui {
         return res;
     }
 
+    /**
+     * Returns a String representing tasks found.
+     * @param tasklist tasks to be displayed.
+     * @return String representation of tasks.
+     */
     public String displayFindList(TaskList tasklist) {
         String res = "Here are the matching tasks in your list:\n";
         return res + displayList(tasklist);
     }
 
+    /**
+     * Returns a String to notify user of task being added.
+     * @param tasklist tasks containing new added task.
+     * @return String representation of message.
+     */
     public String notifySuccessfulAdd(TaskList tasklist) {
         String res = "";
-        res +=  "Got it. I've added this task:\n";
-        res +=  "  " + tasklist.get(tasklist.size() - 1) + "\n";
+        res += "Got it. I've added this task:\n";
+        res += "  " + tasklist.get(tasklist.size() - 1) + "\n";
         res += "Now you have " + tasklist.size() + " tasks in the list.";
         return res;
     }
 
+    /**
+     * Returns a String to notify user that task has been marked done.
+     * @param tasklist tasks containing task marked done.
+     * @param index index of the task marked done.
+     * @return String to notify user that task has been marked done.
+     */
     public String notifySuccessfulMarkDone(TaskList tasklist, int index) {
         String res = "";
         res += "Nice! I've marked this task as done:\n";
@@ -64,6 +82,12 @@ public class Ui {
         return res;
     }
 
+    /**
+     * Returns a String to notify user that task has been deleted.
+     * @param tasklist remaining tasks after deletion
+     * @param removed task that was removed
+     * @return String to notify user that task has been deleted.
+     */
     public String notifySuccessfulDelete(TaskList tasklist, Task removed) {
         String res = "";
         res += "Noted. I've removed this task:\n";

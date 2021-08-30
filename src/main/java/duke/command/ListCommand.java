@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
 /**
  * This command is for displaying the users current list of tasks

@@ -1,13 +1,13 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
 /**
  * Implements the logic for marking a Task as done in the users list.
  */
-public class MarkDoneCommand extends Command{
+public class MarkDoneCommand extends Command {
     private final int index;
 
     /**

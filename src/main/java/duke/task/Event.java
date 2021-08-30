@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Class for Event type Task objects.
  */
 
-public class Event extends Task{
+public class Event extends Task {
     private final LocalDate date;
 
     /**

@@ -1,7 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
-import duke.task.*;
+
+import duke.task.Task;
 
 /**
  * Class to manage the list of users tasks during an application run. Class is basically an alias for

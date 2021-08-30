@@ -5,8 +5,8 @@ package duke.task;
  */
 
 public abstract class Task {
-    private boolean flag;
     protected String label;
+    private boolean flag;
 
     /**
      * Basic constructor, creates a task with the given label.
