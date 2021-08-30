@@ -9,6 +9,9 @@ import duke.task.ToDo;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * Takes in the user's inputs and processes them to be understood by Duke to run commands.
+ */
 public abstract class Parser {
     public enum CommandType {
         EXIT,

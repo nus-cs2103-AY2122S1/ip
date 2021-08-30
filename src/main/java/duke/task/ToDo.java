@@ -1,46 +1,43 @@
 package duke.task;
 
+/**
+ * A task to be marked as done.
+ */
 public class ToDo extends Task {
 
-    public ToDo(String taskName, boolean isDone) {
-        super(taskName, isDone);
+    /**
+     * Initialises a new instance of ToDo.
+     *
+     * @param taskDescription The description of the Todo task.
+     * @param isDone Marks the Todo task as done or not done.
+     */
+    public ToDo(String taskDescription, boolean isDone) {
+        super(taskDescription, isDone);
     }
 
     /**
-<<<<<<< HEAD
      * Returns the String representation of the ToDo task.
      *
      * @return The String representation of the task.
-=======
-     * Returns the string representation of the ToDo task.
-     *
-     * @return The string represenation of the task.
->>>>>>> Level-9
      */
     @Override
     public String toString() {
         if (super.isDone) {
-            return "[T][X] " + super.taskName;
+            return "[T][X] " + super.taskDescription;
         } else {
-            return "[T][ ] " + super.taskName;
+            return "[T][ ] " + super.taskDescription;
         }
     }
 
     /**
-<<<<<<< HEAD
      * Returns a String representation of the task to store within the save file.
      *
      * @return The String representation of the task.
-=======
-     * Returns a string representation of the task to store within the save file.
-     *
-     * @return The string representation of the task.
->>>>>>> Level-9
      */
     @Override
     public String parseToString() {
         String result = super.isDone ? "X" : "0";
-        result += "T/" + super.taskName;
+        result += "T/" + super.taskDescription;
         return result;
     }
 }

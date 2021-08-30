@@ -5,18 +5,26 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
+/**
+ * Stores and handles operations for a list of tasks.
+ */
 public class TaskList {
 
-    private ArrayList<Task> taskList;
+    private ArrayList<Task> tasks;
     private int taskCount;
 
+    /**
+     * Initialises a new instance of TaskList.
+     *
+     * @param tasks The given tasks to store in the task list.
+     */
     public TaskList(ArrayList<Task> tasks) {
-        this.taskList = tasks;
+        this.tasks = tasks;
         this.taskCount = tasks.size();
     }
 
     public ArrayList<Task> get() {
-        return this.taskList;
+        return this.tasks;
     }
 
     /**
@@ -26,7 +34,7 @@ public class TaskList {
      * @return A String output indicating that the task had been added to the task list.
      */
     public String addTask(Task task) {
-        this.taskList.add(task);
+        this.tasks.add(task);
         this.taskCount++;
         String taskCount = (this.taskCount == 1) ? "1 task" : this.taskCount + " tasks";
         return "Got it. I've added this task:\n" + "  " + task.toString()
@@ -42,7 +50,7 @@ public class TaskList {
         int i = 0;
         String header = "Here are the tasks in your list:\n";
         String result = "";
-        for (Task task : this.taskList) {
+        for (Task task : this.tasks) {
             if (task != null) {
                 result += ++i + "." + task.toString() + "\n";
             } else {
@@ -65,7 +73,7 @@ public class TaskList {
      */
     public String markTaskAsDone(int taskNumber) throws DukeException {
         try {
-            Task doneTask = this.taskList.get(taskNumber - 1);
+            Task doneTask = this.tasks.get(taskNumber - 1);
             doneTask.markDone();
             return "Nice! I've marked this task as done:\n" + "  "
                     + doneTask.toString() +"\n";
@@ -83,8 +91,8 @@ public class TaskList {
      */
     public String deleteTask(int taskNumber) throws DukeException {
         try {
-            Task deletedTask = this.taskList.get(taskNumber - 1);
-            this.taskList.remove(taskNumber - 1);
+            Task deletedTask = this.tasks.get(taskNumber - 1);
+            this.tasks.remove(taskNumber - 1);
             this.taskCount--;
             String taskCount = (this.taskCount == 1) ? "1 task" : this.taskCount + " tasks";
             return "Noted. I've removed this task:\n" + "  "
@@ -105,7 +113,7 @@ public class TaskList {
      */
     public String find(String string) {
         ArrayList<Task> found = new ArrayList<>();
-        for (Task task : this.taskList) {
+        for (Task task : this.tasks) {
             if (task.hasSubString(string)) {
                 found.add(task);
             }

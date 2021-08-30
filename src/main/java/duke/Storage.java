@@ -6,9 +6,17 @@ import duke.task.Task;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Handles the reading and writing to the save file.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Initialises a new instance of Storage.
+     *
+     * @param filePath The filepath to save the save file to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -48,6 +56,7 @@ public class Storage {
     /**
      * Saves the current task list to the save file.
      *
+     * @param  taskList The given task list.
      * @throws DukeException If there was an error writing to the save file.
      */
     public void save(TaskList taskList) throws DukeException {

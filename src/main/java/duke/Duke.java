@@ -10,12 +10,20 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * Handles the logic of Duke e.g. adding, saving and deleting tasks.
+ */
 public class Duke {
 
     private TaskList taskList;
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Initialises a new instance of Duke.
+     *
+     * @param filepath The filepath to save the save file in.
+     */
     private Duke(String filepath) {
         this.ui = new Ui();
         this.storage = new Storage(filepath);

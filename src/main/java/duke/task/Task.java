@@ -1,11 +1,20 @@
 package duke.task;
 
+/**
+ * Represents a task that has a given description and is either done or not done.
+ */
 public abstract class Task {
-    protected String taskName;
+    protected String taskDescription;
     protected boolean isDone;
 
-    public Task(String taskName, boolean isDone) {
-        this.taskName = taskName;
+    /**
+     * Intialises a new instance of task.
+     *
+     * @param taskDescription The description of the task.
+     * @param isDone Marks the task as done or not done.
+     */
+    public Task(String taskDescription, boolean isDone) {
+        this.taskDescription = taskDescription;
         this.isDone = isDone;
     }
 
@@ -17,15 +26,9 @@ public abstract class Task {
     }
 
     /**
-<<<<<<< HEAD
      * Returns a String representation of the task to store within the save file.
      *
      * @return The String representation of the task.
-=======
-     * Returns a string representation of the task to store within the save file.
-     *
-     * @return The string representation of the task.
->>>>>>> Level-9
      */
     public abstract String parseToString();
 
@@ -36,6 +39,6 @@ public abstract class Task {
      * @return True if the given String is a substring, and false otherwise.
      */
     public boolean hasSubString(String string) {
-        return this.taskName.contains(string);
+        return this.taskDescription.contains(string);
     }
 }

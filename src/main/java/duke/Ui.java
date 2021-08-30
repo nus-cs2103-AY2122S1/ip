@@ -4,10 +4,16 @@ import duke.exception.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * Handles the tasks of scanning in user inputs and displaying responses to the console.
+ */
 public class Ui {
     private final Scanner sc;
     private final String LINE_SEPARATOR = "____________________________________________________________";
 
+    /**
+     * Initialises a new instance of Ui.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
         String OPENING_MESSAGE = "Hello! I'm Duke\n"
