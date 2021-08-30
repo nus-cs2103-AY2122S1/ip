@@ -17,7 +17,7 @@ public class FileListStorageTest {
 	
 	@BeforeAll
 	public static void setUp() {
-		fileListStorage = new FileListStorage<>(Setting.FILE_TASK_PATH);
+		fileListStorage = new FileListStorage<>(Setting.DATA_DIR_PATH + "/" + Setting.DATA_TASKS);
 	}
 	
 	@Test

@@ -17,7 +17,7 @@ public class TaskDaoImpl implements TaskDao {
 	private final Logger logger = Logger.getLogger(TaskDaoImpl.class.getName());
 	
 	/** File containing the ArrayList of Task */
-	private final FileListStorage<Task> taskFileListStorage = new FileListStorage<>(Setting.FILE_TASK_PATH);
+	private final FileListStorage<Task> taskFileListStorage = new FileListStorage<>(Setting.DATA_DIR_PATH + "/" + Setting.DATA_TASKS);
 	
 	@Override
 	public void addTask(Task task) {

@@ -32,8 +32,10 @@ public class FileListStorage<T> {
 			// a local file is used to persistently store all the tasks,
 			// and it should only have 1 object, which is the list of task
 			File file = new File(filePath);
-			boolean isCreated = file.createNewFile();
-			if (isCreated) {
+			boolean isDirCreated = file.getParentFile().mkdirs();
+			boolean isFileCreated = file.createNewFile();
+			
+			if (isDirCreated && isFileCreated) {
 				writeArrayListToFile(new ArrayList<>());
 				logger.info("FileListStorage is successfully created at " + file.getAbsolutePath());
 			} else {
