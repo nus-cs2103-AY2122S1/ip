@@ -23,7 +23,7 @@ public class Storage {
      * Primary Constructor.
      */
     public Storage() {
-        this.data = new File("data/data.txt");
+        this.data = new File("src/main/java/seedu/data/data.txt");
     }
 
     /**
