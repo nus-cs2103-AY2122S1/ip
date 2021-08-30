@@ -7,8 +7,11 @@ import duke.Ui;
  * Represents the command that closes the program.
  */
 public class ByeCommand extends Command {
-    private Ui ui;
-    
+    private final Ui ui;
+
+    /**
+     * Constructor for a ByeCommand.
+     */
     public ByeCommand() {
         super(true);
         ui = new Ui();

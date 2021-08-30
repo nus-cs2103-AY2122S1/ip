@@ -12,7 +12,12 @@ public class TaskList {
     private final Storage storage;
     private final ArrayList<Task> list;
     private final Ui ui;
-    
+
+    /**
+     * Constructor for a task list.
+     *
+     * @param storage Storage object used to store the task list.
+     */
     public TaskList(Storage storage) {
         this.storage = storage;
         list = storage.load();
@@ -21,7 +26,7 @@ public class TaskList {
 
     /**
      * Checks if the given index is a valid task index.
-     * 
+     *
      * @param index The task index to be checked for validity.
      * @return True if the given index is invalid.
      */
@@ -38,7 +43,7 @@ public class TaskList {
 
     /**
      * Sets the task with the given index to done.
-     * 
+     *
      * @param index The index of the task to be set to done.
      */
     public void setTaskDone(int index) {
@@ -50,7 +55,7 @@ public class TaskList {
 
     /**
      * Deletes the task with the given index.
-     * 
+     *
      * @param index The index of the task to be deleted.
      */
     public void deleteTask(int index) {
@@ -61,7 +66,7 @@ public class TaskList {
 
     /**
      * Instructs the Ui to display a list of tasks that take place on the given date.
-     * 
+     *
      * @param desiredDate The date used to find tasks.
      */
     public void findTasksByDate(LocalDate desiredDate) {
@@ -79,7 +84,7 @@ public class TaskList {
 
     /**
      * Adds the given task to the task list.
-     * 
+     *
      * @param newTask The task to be added to the task list.
      */
     public void addTask(Task newTask) {

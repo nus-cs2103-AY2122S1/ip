@@ -33,7 +33,7 @@ public class Todo extends Task {
 
     /**
      * Returns false since Todo objects do not have date/time attributes.
-     * 
+     *
      * @param l The date against which to check this Todo object.
      * @return False.
      */

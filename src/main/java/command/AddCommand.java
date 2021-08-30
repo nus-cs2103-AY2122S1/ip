@@ -9,6 +9,11 @@ import task.Task;
 public class AddCommand extends Command {
     private final Task newTask;
 
+    /**
+     * Constructor of an AddCommand.
+     *
+     * @param newTask The task to be added.
+     */
     public AddCommand(Task newTask) {
         super();
         this.newTask = newTask;
@@ -16,7 +21,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes the command of adding the task to the given task list.
-     * 
+     *
      * @param taskList The task list to which the task is added.
      */
     @Override

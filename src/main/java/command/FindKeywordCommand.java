@@ -8,6 +8,11 @@ import duke.TaskList;
 public class FindKeywordCommand extends Command {
     private final String keyword;
 
+    /**
+     * Constructor for a FindKeywordCommand.
+     *
+     * @param keyword The keyword with which to find tasks.
+     */
     public FindKeywordCommand(String keyword) {
         super();
         this.keyword = keyword;

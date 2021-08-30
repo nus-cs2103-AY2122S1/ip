@@ -20,14 +20,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Deals with making sense of the user command. Static method parse parses the user command and returns a Command 
+ * Deals with making sense of the user command. Static method parse parses the user command and returns a Command
  * object.
  */
 public class Parser {
-    
+
     /**
      * Parses the given user input and returns the corresponding Command object for execution based on the input.
-     * 
+     *
      * @param fullCommand The full user input string for parsing.
      * @param taskList The list of currently saved tasks.
      * @return A Command object based on the parsed user input.
@@ -37,17 +37,17 @@ public class Parser {
         // Find case based on first word of command
         String[] parsedCommand = fullCommand.split("\\s+", 3);
         switch (parsedCommand[0]) {
-        
-        // "bye" command given  
-        case "bye":   
+
+        // "bye" command given
+        case "bye":
             return new ByeCommand();
 
-        // "list" command given    
-        case "list":   
+        // "list" command given
+        case "list":
             return new ListCommand();
-            
+
         // "done" command given
-        case "done":  
+        case "done":
             if (parsedCommand.length == 1) {
                 throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
             } else {
@@ -58,9 +58,9 @@ public class Parser {
                     return new DoneCommand(toSet - 1);
                 }
             }
-            
+
         // "delete" command given
-        case "delete":   
+        case "delete":
             if (parsedCommand.length == 1) {
                 throw new DukeException(DukeExceptionType.INVALID_TASK_INDEX);
             } else {
@@ -71,17 +71,17 @@ public class Parser {
                     return new DeleteCommand(toDelete - 1);
                 }
             }
-            
+
         // "find" command given
         case "find":
             if (parsedCommand.length == 1) {
-                throw new DukeException(DukeExceptionType.INVALID_FIND); 
+                throw new DukeException(DukeExceptionType.INVALID_FIND);
             } else {
                 if (parsedCommand[1].contains("/date")) {
                     if (parsedCommand.length == 2) {
                         throw new DukeException(DukeExceptionType.MISSING_FIND_DATE);
                     } else {
-                        LocalDate desiredDate = LocalDate.parse(parsedCommand[2]); 
+                        LocalDate desiredDate = LocalDate.parse(parsedCommand[2]);
                         return new FindDateCommand(desiredDate);
                     }
                 } else if (parsedCommand[1].contains("/keyword")) {
@@ -92,15 +92,14 @@ public class Parser {
                         return new FindKeywordCommand(keyword);
                     }
                 } else {
-                    throw new DukeException(DukeExceptionType.INVALID_FIND); 
+                    throw new DukeException(DukeExceptionType.INVALID_FIND);
                 }
-                
             }
-            
+
         // Task command given
         default:
             // Incomplete or invalid command
-            if (parsedCommand.length == 1) { 
+            if (parsedCommand.length == 1) {
                 switch (fullCommand) {
                 case "deadline":
                     throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DESC);
@@ -117,18 +116,18 @@ public class Parser {
 
             } else {
                 Task newTask;
-                
+
                 String[] taskString = fullCommand.split("\\s+", 2);
                 String taskType = taskString[0];
                 String taskDetails = taskString[1];
 
                 switch (taskType) {
-                    
+
                 // "deadline" command given
                 case "deadline": {
                     String[] details = taskDetails.split(" /by ");
 
-                    if (details.length == 1) { 
+                    if (details.length == 1) {
                         throw new DukeException(DukeExceptionType.MISSING_DEADLINE_DATETIME);
                     } else {
                         String[] deadline = details[1].split(" ");
@@ -148,7 +147,7 @@ public class Parser {
                 case "event": {
                     String[] details = taskDetails.split(" /at ");
 
-                    if (details.length == 1) { 
+                    if (details.length == 1) {
                         throw new DukeException(DukeExceptionType.MISSING_EVENT_PERIOD);
                     } else {
                         String[] periodRange = details[1].split(" ");
@@ -168,17 +167,17 @@ public class Parser {
                     }
                     break;
                 }
-                
+
                 // "todo" command given
                 case "todo":
                     newTask = new Todo(taskDetails);
                     break;
-                    
+
                 // Invalid command
-                default:  
+                default:
                     throw new DukeException(DukeExceptionType.INVALID_INPUT);
                 }
-                
+
                 return new AddCommand(newTask);
             }
         }

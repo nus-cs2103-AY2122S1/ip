@@ -8,6 +8,11 @@ import duke.TaskList;
 public class DoneCommand extends Command {
     private final int index;
 
+    /**
+     * Constructor for a DoneCommand.
+     *
+     * @param index Index of the task to be set to done.
+     */
     public DoneCommand(int index) {
         super();
         this.index = index;

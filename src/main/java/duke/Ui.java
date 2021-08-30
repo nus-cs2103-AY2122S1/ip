@@ -44,7 +44,7 @@ public class Ui {
 
     /**
      * Reads the given user input.
-     * 
+     *
      * @param input The Scanner used to take in user input.
      * @return A string of the given user input.
      */
@@ -61,7 +61,7 @@ public class Ui {
 
     /**
      * Displays the current task list.
-     * 
+     *
      * @param taskList The task list to be displayed.
      */
     public void showList(ArrayList<Task> taskList) {
@@ -73,7 +73,7 @@ public class Ui {
 
     /**
      * Displays a message to show that the given task has been set to done.
-     * 
+     *
      * @param toSetDone The task that has been set to done.
      */
     public void showDone(Task toSetDone) {
@@ -83,7 +83,7 @@ public class Ui {
 
     /**
      * Displays a message to show that the given task has been deleted.
-     * 
+     *
      * @param deleted The task that has been deleted.
      * @param listLength The new length of the task list after the deletion.
      */
@@ -129,7 +129,7 @@ public class Ui {
 
     /**
      * Displays a message to show that the given task has been added to the task list.
-     * 
+     *
      * @param newTask The task that has been added to the task list.
      * @param listLength The new length of the task list after the addition.
      */
@@ -141,7 +141,7 @@ public class Ui {
 
     /**
      * Displays the error message of the given DukeException.
-     * 
+     *
      * @param e The DukeException whose error message is to be displayed.
      */
     public void showException(DukeException e) {

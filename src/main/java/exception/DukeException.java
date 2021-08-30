@@ -6,6 +6,11 @@ package exception;
 public class DukeException extends Exception {
     private final String customMessage;
 
+    /**
+     * Constructor for a DukeException object.
+     *
+     * @param err The type of DukeException thrown.
+     */
     public DukeException(DukeExceptionType err) {
         switch (err) {
         case DB_ADD:
@@ -73,7 +78,7 @@ public class DukeException extends Exception {
 
     /**
      * Returns a string representation of the DukeException.
-     * 
+     *
      * @return a string representing the exception.
      */
     @Override

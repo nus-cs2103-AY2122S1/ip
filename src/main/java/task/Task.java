@@ -9,6 +9,11 @@ public abstract class Task {
     private final String taskName;
     private boolean done;
 
+    /**
+     * Constructor for a Task.
+     *
+     * @param taskName The task's name/description.
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         done = false;
@@ -49,14 +54,14 @@ public abstract class Task {
 
     /**
      * Checks if the Task's name contains the given keyword.
-     * 
+     *
      * @param keyword The keyword to look for in the Task's name.
      * @return true if the Task name contains the keyword.
      */
     public boolean containsKeyword(String keyword) {
         return taskName.contains(keyword);
     }
-    
+
     /**
      * Checks if the given date takes place during this Task's deadline or period.
      * This method is only relevant to Deadline and Event child classes.

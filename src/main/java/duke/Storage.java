@@ -26,7 +26,13 @@ public class Storage {
     private final File direc;
     private final File duke;
     private final Ui ui;
-    
+
+    /**
+     * Constructor for a Storage object.
+     *
+     * @param fileDirectory Directory containing the hard disk.
+     * @param fileName The hard disk.
+     */
     public Storage(String fileDirectory, String fileName) {
         filePath = fileDirectory + "/" + fileName;
         ui = new Ui();
@@ -37,7 +43,7 @@ public class Storage {
 
     /**
      * Loads the saved tasks from the hard disk to the Duke TaskList.
-     * 
+     *
      * @return An ArrayList of Tasks used to create the TaskList for the current instance of Duke.
      */
     public ArrayList<Task> load() {
@@ -45,7 +51,6 @@ public class Storage {
         ArrayList<Task> savedTasks = new ArrayList<>(100);
 
         try {
-            
             // Display initialisation message
             ui.showOpenLine();
             ui.showInitialise();
@@ -66,7 +71,7 @@ public class Storage {
                 String[] taskString = currLine.split(" \\| ", 3);
                 Task newTask;
 
-                // Current task is a Deadline 
+                // Current task is a Deadline
                 if (taskString[0].equals("D")) {
                     String[] deadlineDetails = taskString[2].split(" ");
                     if (deadlineDetails.length == 2) {
@@ -94,7 +99,7 @@ public class Storage {
                     } else {
                         throw new DukeException(DukeExceptionType.DB_READ);
                     }
-                    
+
                 // Current task is a Todo
                 } else if (taskString[0].equals("T")) {
                     newTask = new Todo(taskString[2]);
@@ -126,7 +131,7 @@ public class Storage {
 
     /**
      * Adds the given entry to the database (hard disk).
-     * 
+     *
      * @param s A string representation of the task to be added to the database.
      */
     public void addDbEntry(String s) {

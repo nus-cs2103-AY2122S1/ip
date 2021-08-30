@@ -12,10 +12,16 @@ import java.util.Scanner;
  * Represents the main Duke program. Running this class's main function executes the program.
  */
 public class Duke {
-    
+
     private final Ui ui;
     private final TaskList taskList;
-    
+
+    /**
+     * Constructor for the Duke program.
+     *
+     * @param fileDirectory Directory of the hard disk.
+     * @param fileName The hard disk.
+     */
     public Duke(String fileDirectory, String fileName) {
         ui = new Ui();
         Storage storage = new Storage(fileDirectory, fileName);
@@ -45,16 +51,16 @@ public class Duke {
                 Command c = Parser.parse(fullCommand, taskList);
                 c.execute(taskList);
                 isBye = c.isBye();
-                
+
             } catch (DukeException e) {
                 ui.showException(e);
-                
-            } catch (NumberFormatException e) { 
+
+            } catch (NumberFormatException e) {
                 ui.showException(new DukeException(DukeExceptionType.INVALID_TASK_INDEX));
 
             } catch (DateTimeParseException e) {
                 ui.showException(new DukeException(DukeExceptionType.INVALID_DATETIME));
-                
+
             } finally {
                 ui.showCloseLine();
             }

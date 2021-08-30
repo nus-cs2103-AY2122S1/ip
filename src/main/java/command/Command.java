@@ -11,7 +11,7 @@ public abstract class Command {
     public Command() {
         isBye = false;
     }
-    
+
     public Command(boolean isBye) {
         this.isBye = isBye;
     }
@@ -22,7 +22,7 @@ public abstract class Command {
      * @param taskList The TaskList used in the command.
      */
     public abstract void execute(TaskList taskList);
-    
+
     public boolean isBye() {
         return isBye;
     }
