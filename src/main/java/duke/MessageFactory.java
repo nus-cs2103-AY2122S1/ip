@@ -26,7 +26,11 @@ public class MessageFactory {
                 if (taskIndex >= TaskList.getTaskList().getTasks().size())
                     throw new ArrayIndexOutOfBoundsException();
                 return new DeleteTaskMessage(taskIndex);
-            } else {
+            } else if (userStr.length() >= 4 && userStr.substring(0,4).equals("find")) {
+                int len = userStr.length();
+                String searchStr = userStr.substring(5);
+                return new FindMessage(searchStr);
+            }else {
                 return new AddTaskMessage(userStr);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
