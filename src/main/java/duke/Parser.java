@@ -18,9 +18,6 @@ import duke.task.ToDo;
  * Bridges communication between the user string and the tasks
  */
 public class Parser {
-    /** Whether Duke should continue running after handling **/
-    private static boolean isRunning = true;
-
     /** TaskList object used by Duke **/
     private static TaskList taskList;
 
@@ -47,7 +44,6 @@ public class Parser {
         switch (firstWord) {
         case "bye":
             taskList.saveTasksToStorage();
-            isRunning = false;
             return UI.bye();
         case "list":
             return taskList.list();
@@ -175,9 +171,5 @@ public class Parser {
             throw new MissingTaskNameException("Missing task name");
         }
         return taskList.find(words[1]);
-    }
-
-    public static boolean isRunning() {
-        return Parser.isRunning();
     }
 }
