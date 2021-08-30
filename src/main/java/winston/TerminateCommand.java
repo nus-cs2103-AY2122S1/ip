@@ -14,8 +14,8 @@ public class TerminateCommand extends Command {
     /**
      * A method that prints the terminating message found in class Ui
      */
-    public void run() {
-        Ui.terminationMessage();
+    public String run() {
+        return Ui.terminationMessage();
     }
 
     /**

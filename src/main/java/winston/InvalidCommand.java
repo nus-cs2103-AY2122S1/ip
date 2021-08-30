@@ -11,7 +11,7 @@ public class InvalidCommand extends Command {
     /**
      * Prints a message to let user's know that the command given was invalid
      */
-    public void run() {
-        Ui.invalidTask();
+    public String run() {
+        return Ui.invalidTask();
     }
 }

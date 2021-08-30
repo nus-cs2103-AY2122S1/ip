@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Winston {
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
     private Parser parser;
 
     /**
@@ -20,13 +19,23 @@ public class Winston {
         taskList.setStorage(this.storage);
         this.parser = new Parser(taskList);
     }
-    
-    protected String getResponse(String str) {
-        return "test";
+
+    /**
+     * A method that calls commands based on the input string
+     * 
+     * @param str Input string that is used to call commands. 
+     * @param winston the class that manages the other classes.
+     * @return The reply of the bot.
+     */
+    protected String getResponse(String str, Winston winston) {
+        Command command = winston.parser.parse(str);
+        return command.run();
     }
-    
-    
-    public static void main(String[] args) {
+
+    /**
+     * A method that runs the CLI portion of the program
+     */
+    public void run() {
         boolean isExit = false;
         Winston winston = new Winston();
         Scanner scan = new Scanner(System.in);
@@ -38,4 +47,5 @@ public class Winston {
         }
         scan.close();
     }
+
 }

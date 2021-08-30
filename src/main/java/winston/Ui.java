@@ -1,5 +1,7 @@
 package winston;
 
+import javax.print.DocFlavor;
+
 /**
  * A class that manages all lines that handles user experience and lines that are commonly used.
  */
@@ -7,35 +9,35 @@ public class Ui {
     public Ui() {
     }
     
-    public static void invalidTask() {
-        System.out.print("Invalid command. Returning to Main Menu\n");
+    public static String invalidTask() {
+        return "Invalid command. Returning to Main Menu\n";
     }
     
-    public static void printTasksLeft(int tasksLeft) {
-        System.out.println(tasksLeft + " Tasks Left");
+    public static String printTasksLeft(int tasksLeft) {
+        return tasksLeft + " Tasks Left\n";
     }
     
-    public static void printList(TaskList taskList) {
-        System.out.println(taskList.getList());
+    public static String printList(TaskList taskList) {
+        return taskList.getList() + "\n";
     }
     
-    public static void printDontWorry() {
-        System.out.println("Don't worry, I've got you. Task Marked!");
+    public static String printDontWorry() {
+        return "Don't worry, I've got you. Task Marked!\n";
     }
     
-    public static void printMatchingTasks() {
-        System.out.println("Here are the matching tasks in your list:\n");
+    public static String printMatchingTasks() {
+        return "Here are the matching tasks in your list:\n";
     }
-    public static void invalidDateFormat() {
-        System.out.println("Invalid date format. Please give a valid date format. E.g 2021-12-12");
-    }
-    
-    public static void welcomeMessage() {
-        System.out.println("Hi there! Winston reporting.\nWhat can I do for you?\n" +
-                "Available Commands: done, list, todo, deadline, event, bye, delete, find");
+    public static String invalidDateFormat() {
+        return "Invalid date format. Please give a valid date format. E.g 2021-12-12";
     }
     
-    public static void terminationMessage() {
-        System.out.println("See ya later!");
+    public static String welcomeMessage() {
+        return "Hi there! Winston reporting.\nWhat can I do for you?\n" +
+                "Available Commands: done, list, todo, deadline, event, bye, delete, findString";
+    }
+    
+    public static String terminationMessage() {
+        return "See ya later!";
     }
 }

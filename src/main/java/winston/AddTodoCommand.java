@@ -15,8 +15,8 @@ public class AddTodoCommand extends Command {
      * Adds a 'todoTask' to the TaskList and prints the number of uncompleted tasks remaining
      */
     @Override
-    public void run() {
+    public String run() {
         super.taskList.addTask(new ToDoTask(this.description));
-        Ui.printTasksLeft(taskList.uncompletedTasks());
+        return Ui.printTasksLeft(taskList.uncompletedTasks());
     }
 }

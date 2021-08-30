@@ -12,8 +12,9 @@ public class ShowListCommand extends Command {
      * Prints the all tasks on TaskList as well as the number of uncompleted tasks remaining
      */
     @Override
-    public void run() {
-        Ui.printList(taskList);
-        Ui.printTasksLeft(taskList.uncompletedTasks());
+    public String run() {
+        return Ui.printList(taskList) + Ui.printTasksLeft(taskList.uncompletedTasks());
+
+                
     }
 }

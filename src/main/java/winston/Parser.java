@@ -5,23 +5,23 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 
 /**
- * A class that manages user commands
+ * A class that manages user commands.
  */
 public class Parser {
     private final TaskList taskList;
 
     /**
-     * Constructor for class Parser
-     * @param taskList the TaskList that will be modified based on commands
+     * Constructor for class Parser.
+     * @param taskList the TaskList that will be modified based on commands.
      */
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Method that parses the given user input
-     * @param str user input
-     * @return A command depending on the user input
+     * Method that parses the given user input.
+     * @param str user input.
+     * @return A command depending on the user input.
      */
     public Command parse(String str) {
         String[] splitBySpace = str.split(" ");
@@ -75,7 +75,7 @@ public class Parser {
             } catch (InputMismatchException | IndexOutOfBoundsException e) {
                 return new InvalidCommand(taskList);
             }
-        } else if (cmd.equals("find")) {
+        } else if (cmd.equals("findString")) {
             try {
                 int index = str.indexOf(" ");
                 String keyword = str.substring(index + 1);

@@ -15,9 +15,8 @@ public class DeleteCommand extends Command {
      * Deletes a task from the TaskList based on the index provided and prints number of uncompleted tasks remaining
      */
     @Override
-    public void run() {
+    public String run() {
         super.taskList.deleteTask(this.index);
-        Ui.printDontWorry();
-        Ui.printTasksLeft(super.taskList.uncompletedTasks());
+        return Ui.printDontWorry() + Ui.printTasksLeft(super.taskList.uncompletedTasks());
     }
 }

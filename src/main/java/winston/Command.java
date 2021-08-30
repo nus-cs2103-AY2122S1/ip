@@ -10,5 +10,5 @@ public abstract class Command {
         this.taskList = taskList;
     }
     
-    public abstract void run();
+    public abstract String run();
 }

@@ -4,7 +4,7 @@ public class FindCommand extends Command {
     private String str;
 
     /**
-     *  Represents an find command from the parent abstract class Command.
+     *  Represents an findString command from the parent abstract class Command.
      */
     public FindCommand(TaskList taskList, String str) {
         super(taskList);
@@ -13,12 +13,11 @@ public class FindCommand extends Command {
 
     /**
      * Creates a new TaskList containing all tasks with given string as a substring and prints out
-     * a list containing all of these tasks
+     * a list containing all of these tasks.
      */
     @Override
-    public void run() {
-        TaskList tList = taskList.find(this.str);
-        Ui.printMatchingTasks();
-        Ui.printList(tList);
+    public String run() {
+        TaskList tList = taskList.findString(this.str);
+        return Ui.printMatchingTasks() + Ui.printList(tList);
     }
 }

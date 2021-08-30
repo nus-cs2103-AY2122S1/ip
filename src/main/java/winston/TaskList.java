@@ -85,7 +85,7 @@ public class TaskList {
         return result.substring(0, result.length() - 1);
     }
     
-    public TaskList find(String str) {
+    public TaskList findString(String str) {
         ArrayList<Task> arrList = new ArrayList<>();
         for (Task task : this.list) {
             if (task.isSubString(str)) {

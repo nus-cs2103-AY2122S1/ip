@@ -17,9 +17,8 @@ public class DoneCommand extends Command {
      * tasks remaining
      */
     @Override
-    public void run() {
+    public String run() {
         super.taskList.markTask(this.index);
-        Ui.printDontWorry();
-        Ui.printTasksLeft(super.taskList.uncompletedTasks());
+        return Ui.printDontWorry() + Ui.printTasksLeft(super.taskList.uncompletedTasks());
     }
 }
