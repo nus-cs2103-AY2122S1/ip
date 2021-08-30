@@ -28,15 +28,10 @@ public class Storage {
 
     /**
      * This method makes a directory at a hardcoded location for the data to be stored.
+     * If the directory is already made, nothing happens.
      */
     public void makeDir() {
         File f = new File("./data");
-//        boolean bool = f.mkdir();
-//        if(bool){
-//            System.out.println("Directory created successfully");
-//        }else{
-//            System.out.println("Sorry couldn’t create specified directory");
-//        }
     }
 
     /**
@@ -47,11 +42,6 @@ public class Storage {
         try {
             File myObj = new File("./data/duke.txt");
             myObj.createNewFile();
-//            if (myObj.createNewFile()) {
-//                System.out.println("File created: " + myObj.getName());
-//            } else {
-//                System.out.println("File already exists.");
-//            }
         } catch (IOException e) {
             System.out.println("An error occurred when creating the file");
             e.printStackTrace();

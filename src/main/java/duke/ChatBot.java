@@ -39,7 +39,6 @@ public class ChatBot {
         s.checkFile();
         this.temp = s.loadTasks();
         tasklist = new TaskList(temp);
-//        ui.showStartMessage();
     }
 
     /**
@@ -161,8 +160,8 @@ public class ChatBot {
     }
 
     /**
-     * This method checks if the program should terminate.
-     * @return 1 to continue and 0 to terminate.
+     * Returns an int depending on exit status.
+     * @return 0 to exit, 1 to continue.
      */
     public int getExitStatus() {
         return exitStatus;

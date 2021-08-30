@@ -1,23 +1,22 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.exception.DukeException;
+
+import javafx.application.Platform;
 
 /**
  * The Duke program implements an application that reads the user input
  * and does the corresponding actions based on the user input.
+ *
+ * @author Teng Hon
  */
 public class Duke {
     private ChatBot bot;
     private Parser parser;
 
     public Duke() {
-
         bot = new ChatBot();
         parser = new Parser();
-        // create object of Scanner to take inputs
-//        Scanner sc = new Scanner(System.in);
         bot.start();
     }
 
@@ -42,5 +41,26 @@ public class Duke {
      */
     public String getStart() {
         return bot.handleStart();
+    }
+
+    public int getExitStatus() {
+        return bot.getExitStatus();
+    }
+
+    public void exit() {
+        if (getExitStatus() == 0) {
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        Platform.exit();
+                    }
+                }
+            }.start();
+        }
     }
 }
