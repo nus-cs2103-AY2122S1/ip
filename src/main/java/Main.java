@@ -1,8 +1,8 @@
 import duke.commands.*;
 import duke.data.DukeException;
+import duke.data.TaskList;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.data.TaskList;
 import duke.ui.Ui;
 
 import java.time.LocalDateTime;
@@ -80,6 +80,7 @@ public class Main {
                     ui.PrintSpecialTasks(this.taskList);
                 } catch (DukeException e) {
                     ui.PrintMessage(e.getMessage());
+
                 }
             } else if (this.parser.isDelete(splitInput[0])) {
                 try {
@@ -93,7 +94,7 @@ public class Main {
                     DukeException newException = new DukeException("Please input a number!");
                     ui.PrintMessage(newException.getMessage());
                 }
-            } else if (this.parser.isFind(splitInput[0])){
+            } else if (this.parser.isFind(splitInput[0])) {
                 try {
                     this.parser.parseFind(splitInput);
                     TaskList matched = this.finder.findMatch(splitInput[1], taskList);
