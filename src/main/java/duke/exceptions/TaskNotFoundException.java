@@ -8,6 +8,6 @@ public class TaskNotFoundException extends DukeException {
      * Constructor for TaskNotFoundException.
      */
     public TaskNotFoundException() {
-        super("☹ Sorry! There is no such task with this task index!");
+        super("Sorry! There is no such task with this task index!");
     }
 }

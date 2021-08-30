@@ -172,7 +172,7 @@ public class Storage {
     public void saveFile(TaskList taskList) throws IOException, EmptyListException {
         String path = System.getProperty("user.dir") + filePath;
         FileWriter myWriter = new FileWriter(path);
-        myWriter.write(taskList.printFullTaskList());
+        myWriter.write(taskList.toString());
         myWriter.close();
     }
 }

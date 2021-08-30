@@ -242,19 +242,14 @@ public class TaskList {
      * @throws EmptyListException if TaskList is empty
      */
     public String printTaskList(List<Task> tasks) throws EmptyListException {
-        String s = "";
+        String s;
         int size = tasks.size();
 
         if (size == 0) {
             throw new EmptyListException();
         }
 
-        for (int i = 0; i < size; i++) {
-            s = s.concat(tasks.get(i).toString());
-            if (i < tasks.size() - 1) {
-                s = s.concat("\n");
-            }
-        }
+        s = tasks.toString();
         return s;
     }
 
@@ -296,5 +291,24 @@ public class TaskList {
      */
     private String doneMessage(Task task) {
         return "Nice! I've marked this task as done:\n" + task;
+    }
+
+    /**
+     * Gets string representation of TaskList.
+     *
+     * @return String representation of TaskList.
+     */
+    @Override
+    public String toString() {
+        String s = "";
+        int size = tasks.size();
+
+        for (int i = 0; i < size; i++) {
+            s = s.concat(tasks.get(i).toString());
+            if (i < tasks.size() - 1) {
+                s = s.concat("\n");
+            }
+        }
+        return s;
     }
 }
