@@ -19,7 +19,8 @@ public class TaskList {
     /**
      * Retrieves the list of tasks that is being stored in this class.
      * 
-     * @return ArrayList<Task> of tasks which is being stored.
+     * @return an ArrayList of tasks which is being stored.
+     * @see java.util.ArrayList
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
@@ -27,10 +28,10 @@ public class TaskList {
 
     /**
      * Loads previous saved Tasks from a txt file. Save it in this current TaskList
-     * in an ArrayList<Task> object.
+     * in an ArrayList of Task object.
      * 
-     * @param savedTasks this is the ArrayList<Task> of Task coming from the txt
-     *                   file.
+     * @param savedTasks this is the ArrayList of Task coming from the txt file.
+     * @see java.util.ArrayList
      */
     public void loadFromStorage(ArrayList<Task> savedTasks) {
         this.taskList.addAll(savedTasks);

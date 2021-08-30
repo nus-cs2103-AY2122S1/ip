@@ -29,8 +29,10 @@ public class Storage {
     /**
      * Loads the saved Tasks from the txt file.
      * 
-     * @return ArrayList<Task> of Tasks containing all the previous Task
-     * @throws DukeStorageLoadException when file is not found in the given location.
+     * @return ArrayList of Tasks containing all the previous Task
+     * @throws DukeStorageLoadException when file is not found in the given
+     *                                  location.
+     * @see java.util.ArrayList
      */
     public ArrayList<Task> loadData() throws DukeStorageLoadException {
         ArrayList<Task> currList = new ArrayList<>();
@@ -49,40 +51,40 @@ public class Storage {
                 type = currLine.split("")[0];
                 isDone = false;
                 switch (type) {
-                    case "T":
-                        descriptions = stringArr[2];
-                        ToDos todos;
-                        if (stringArr[1].contains("1")) {
-                            isDone = true;
-                        }
-                        todos = new ToDos(descriptions, isDone);
-                        currList.add(todos);
-                        break;
+                case "T":
+                    descriptions = stringArr[2];
+                    ToDos todos;
+                    if (stringArr[1].contains("1")) {
+                        isDone = true;
+                    }
+                    todos = new ToDos(descriptions, isDone);
+                    currList.add(todos);
+                    break;
 
-                    case "D":
-                        descriptions = stringArr[2];
-                        dateTimeLocation = stringArr[3];
-                        Deadline deadline;
-                        if (stringArr[1].contains("1")) {
-                            isDone = true;
-                        }
-                        deadline = new Deadline(descriptions, dateTimeLocation, isDone);
-                        currList.add(deadline);
-                        break;
+                case "D":
+                    descriptions = stringArr[2];
+                    dateTimeLocation = stringArr[3];
+                    Deadline deadline;
+                    if (stringArr[1].contains("1")) {
+                        isDone = true;
+                    }
+                    deadline = new Deadline(descriptions, dateTimeLocation, isDone);
+                    currList.add(deadline);
+                    break;
 
-                    case "E":
-                        descriptions = stringArr[2];
-                        dateTimeLocation = stringArr[3];
-                        Events event;
-                        if (stringArr[1].contains("1")) {
-                            isDone = true;
-                        }
-                        event = new Events(descriptions, dateTimeLocation, isDone);
-                        currList.add(event);
-                        break;
+                case "E":
+                    descriptions = stringArr[2];
+                    dateTimeLocation = stringArr[3];
+                    Events event;
+                    if (stringArr[1].contains("1")) {
+                        isDone = true;
+                    }
+                    event = new Events(descriptions, dateTimeLocation, isDone);
+                    currList.add(event);
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
             }
             sc.close();
@@ -98,8 +100,8 @@ public class Storage {
      * Appends a new line in the txt file which saves all the Task.
      * 
      * @param textToAppend String to append into the txt file.
-     * @throws DukeStorageSaveException when FileWriter is not able to read or locate the file
-     *                     from the given file path.
+     * @throws DukeStorageSaveException when FileWriter is not able to read or
+     *                                  locate the file from the given file path.
      */
     public void appendToData(String textToAppend) throws DukeStorageSaveException {
         try {
@@ -115,8 +117,8 @@ public class Storage {
      * Helps to update the done status in the txt file.
      * 
      * @param number is the Task id.
-     * @throws DukeStorageUpdateException when Scanner is not able to read or locate the file from
-     *                     the given file path.
+     * @throws DukeStorageUpdateException when Scanner is not able to read or locate
+     *                                    the file from the given file path.
      */
     public void updateDone(String number) throws DukeStorageUpdateException {
         int index = Integer.parseInt(number);
@@ -147,8 +149,8 @@ public class Storage {
      * Helps to delete the Task from the saved txt file.
      * 
      * @param number is the Task id.
-     * @throws DukeStorageDeleteException when Scanner is not able to read or locate the file from
-     *                     the given file path.
+     * @throws DukeStorageDeleteException when Scanner is not able to read or locate
+     *                                    the file from the given file path.
      */
     public void deleteTaskFromData(String number) throws DukeStorageDeleteException {
         int index = Integer.parseInt(number);

@@ -23,6 +23,12 @@ public class Parser {
         return dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
     }
 
+    /**
+     * Helps to trigger and run the desired command which the user entered.
+     * 
+     * @param fullCommand is the command line which the user have entered.
+     * @return a Command which can be run to trigger it.
+     */
     public Command parseCommands(String fullCommand) {
         String descriptions;
         String onlyDescription;
@@ -32,55 +38,55 @@ public class Parser {
         String action = actionDescription[0];
 
         switch (action) {
-            case "bye":
-                return new ExitCommand();
+        case "bye":
+            return new ExitCommand();
 
-            case "list":
-                return new ListCommand();
+        case "list":
+            return new ListCommand();
 
-            case "done":
-                return new DoneCommand(actionDescription[1]);
+        case "done":
+            return new DoneCommand(actionDescription[1]);
 
-            case "todo":
-                descriptions = actionDescription[1];
-                if (descriptions.equals("")) {
-                    return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
-                }
-                ToDos todos = new ToDos(descriptions);
-                return new AddCommand(todos);
+        case "todo":
+            descriptions = actionDescription[1];
+            if (descriptions.equals("")) {
+                return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
+            }
+            ToDos todos = new ToDos(descriptions);
+            return new AddCommand(todos);
 
-            case "deadline":
-                descriptions = actionDescription[1];
-                if (descriptions.equals("")) {
-                    return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
-                }
-                onlyDescription = descriptions.split(" /")[0];
-                dateTime = descriptions.split(" /by ")[1];
-                dateTime = dateTimeFormatter(dateTime);
-                Deadline deadline = new Deadline(onlyDescription, dateTime);
-                return new AddCommand(deadline);
+        case "deadline":
+            descriptions = actionDescription[1];
+            if (descriptions.equals("")) {
+                return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
+            }
+            onlyDescription = descriptions.split(" /")[0];
+            dateTime = descriptions.split(" /by ")[1];
+            dateTime = dateTimeFormatter(dateTime);
+            Deadline deadline = new Deadline(onlyDescription, dateTime);
+            return new AddCommand(deadline);
 
-            case "event":
-                descriptions = actionDescription[1];
-                if (descriptions.equals("")) {
-                    return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
-                }
-                onlyDescription = descriptions.split(" /")[0];
-                dateTime = descriptions.split(" /at ")[1];
-                Events event = new Events(onlyDescription, dateTime);
-                return new AddCommand(event);
+        case "event":
+            descriptions = actionDescription[1];
+            if (descriptions.equals("")) {
+                return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
+            }
+            onlyDescription = descriptions.split(" /")[0];
+            dateTime = descriptions.split(" /at ")[1];
+            Events event = new Events(onlyDescription, dateTime);
+            return new AddCommand(event);
 
-            case "delete":
-                return new DeleteCommand(actionDescription[1]);
+        case "delete":
+            return new DeleteCommand(actionDescription[1]);
 
-            case "find":
-                return new FindCommand(actionDescription[1]);
+        case "find":
+            return new FindCommand(actionDescription[1]);
 
-            case "":
-                return new EmptyCommand();
+        case "":
+            return new EmptyCommand();
 
-            default:
-                return new UiCommand(Ui.ERROR_MSG_UNKOWN_MSG);
+        default:
+            return new UiCommand(Ui.ERROR_MSG_UNKOWN_MSG);
         }
     }
 }
