@@ -1,6 +1,11 @@
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import duke.commands.Deadline;
 import duke.commands.Event;
 import duke.commands.Find;
@@ -20,7 +25,7 @@ import duke.ui.Ui;
  * @author: Jason Ng
  * @version: Duke Level-9
  */
-public class Main {
+public class Main extends Application {
     /** Storage component for Duke */
     private Storage storage;
     /** UI component for Duke */
@@ -121,6 +126,15 @@ public class Main {
             input = sc.nextLine();
         }
         ui.PrintMessage("Bye. Hope to see you again soon!");
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     public static void main(String[] args) {
