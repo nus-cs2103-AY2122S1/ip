@@ -8,12 +8,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Iris using FXML.
+ * Represents the GUI Application for Iris
  */
 public class Main extends Application {
 
     private Iris iris = new Iris();
 
+    /**
+     * Starts the GUI Application for Iris
+     *
+     * @param stage  JavaFX stage for Application
+     */
     @Override
     public void start(Stage stage) {
         try {
