@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeUi;
 import duke.task.Deadline;
 import duke.task.TaskList;
 
@@ -25,8 +24,8 @@ public class CommandDeadline extends DukeCommand {
      * @param tl Task list for the user.
      */
     @Override
-    public void execute(TaskList tl) {
-        DukeUi.printLine(tl.addTask(task));
+    public String execute(TaskList tl) {
+        return tl.addTask(task);
     }
 
     /**

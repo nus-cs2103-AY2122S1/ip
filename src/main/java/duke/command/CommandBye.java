@@ -18,14 +18,16 @@ public class CommandBye extends DukeCommand {
      * @param tl Task list for the user.
      */
     @Override
-    public void execute(TaskList tl) {
+    public String execute(TaskList tl) {
+        String response;
         try {
             DukeStorage.saveTaskList(tl);
-            DukeUi.sayBye();
+            response = DukeUi.getGoodBye();
         } catch (DukeFileException e) {
-            DukeUi.printLine(e.getMessage());
+            response = e.getMessage();
             this.isEnd = false;
         }
+        return response;
     }
 
     /**

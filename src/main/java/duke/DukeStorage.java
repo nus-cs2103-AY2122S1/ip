@@ -18,6 +18,8 @@ import duke.task.ToDo;
 public class DukeStorage {
     private static String tasksFile = "data/tasks.txt";
     private static String dataFolder = "data/";
+    private static String partialLoadMessage = "you may have a corrupted/edited save file. Tasks partially loaded";
+    private static String successLoadMessage = "Tasks successfully loaded!";
 
     public static void saveTaskList(TaskList taskList) throws DukeFileException {
         File dataPath = new File(dataFolder);
@@ -80,7 +82,7 @@ public class DukeStorage {
                                 )
                         );
                     } catch (DukeArgumentException e) {
-                        DukeUi.printLine(e.getMessage());
+                        return partialLoadMessage;
                     }
                     break;
                 case "E":
@@ -93,16 +95,16 @@ public class DukeStorage {
                                 )
                         );
                     } catch (DukeArgumentException e) {
-                        DukeUi.printLine(e.getMessage());
+                        return partialLoadMessage;
                     }
                     break;
                 default:
-                    return "you may have a corrupted/edited save file. Tasks partially loaded";
+                    return partialLoadMessage;
                 }
             }
         } catch (FileNotFoundException e) {
             return "Save file not found";
         }
-        return "Tasks successfully loaded!";
+        return successLoadMessage;
     }
 }

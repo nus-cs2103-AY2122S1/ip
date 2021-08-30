@@ -11,7 +11,7 @@ public abstract class DukeCommand {
      *
      * @param tl Task list for the user.
      */
-    public abstract void execute(TaskList tl);
+    public abstract String execute(TaskList tl);
 
     /**
      * Checks if it is the Bye command.

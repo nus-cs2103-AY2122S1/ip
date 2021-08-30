@@ -13,8 +13,8 @@ public class CommandGeneric extends DukeCommand {
      * @param tl Task list for the user.
      */
     @Override
-    public void execute(TaskList tl) {
-
+    public String execute(TaskList tl) {
+        return "Shuba Shuba Shuba!";
     }
 
     /**

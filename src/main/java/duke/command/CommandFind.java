@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeUi;
 import duke.task.TaskList;
 
 /**
@@ -24,8 +23,8 @@ public class CommandFind extends DukeCommand {
      * @param tl Task list for the user.
      */
     @Override
-    public void execute(TaskList tl) {
-        DukeUi.printLine(tl.searchKeyword(this.keyword));
+    public String execute(TaskList tl) {
+        return tl.searchKeyword(this.keyword);
     }
 
     /**

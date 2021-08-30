@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeUi;
 import duke.task.TaskList;
 
 /**
@@ -24,8 +23,8 @@ public class CommandDone extends DukeCommand {
      * @param tl Task list for the user.
      */
     @Override
-    public void execute(TaskList tl) {
-        DukeUi.printLine(tl.markComplete(taskId));
+    public String execute(TaskList tl) {
+        return tl.markComplete(taskId);
     }
 
     /**

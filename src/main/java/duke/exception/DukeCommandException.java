@@ -42,7 +42,8 @@ public class DukeCommandException extends Exception {
      *
      * @return Error message.
      */
-    public String getMsg() {
+    @Override
+    public String getMessage() {
         return msg;
     }
 }

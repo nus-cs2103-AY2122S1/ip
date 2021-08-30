@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeUi;
 import duke.task.TaskList;
 import duke.task.ToDo;
 
@@ -25,9 +24,9 @@ public class CommandTodo extends DukeCommand {
      * @param tl Task list for the user.
      */
     @Override
-    public void execute(TaskList tl) {
-        DukeUi.printLine(tl.addTask(task));
-    };
+    public String execute(TaskList tl) {
+        return tl.addTask(task);
+    }
 
     /**
      * As described in DukeCommand.

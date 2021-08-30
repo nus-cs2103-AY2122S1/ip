@@ -71,71 +71,65 @@ public class DukeCommandParser {
         return task;
     }
 
-    public static DukeCommand parseCommand(String input) {
+    public static DukeCommand parseCommand(String input) throws DukeCommandException, DukeArgumentException {
         String[] inputArr = input.split(" ", 2);
         DukeCommand dc = new CommandGeneric();
-        try {
-            if (inputArr.length == 1) {
-                switch (inputArr[0]) {
-                case "bye":
-                    dc = new CommandBye();
-                    break;
-                case "list":
-                    dc = new CommandList();
-                    break;
-                case "todo":
-                    throw new DukeCommandException("todo");
-                case "deadline":
-                    throw new DukeCommandException("deadline");
-                case "done":
-                    throw new DukeCommandException("done");
-                case "event":
-                    throw new DukeCommandException("event");
-                case "delete":
-                    throw new DukeCommandException("delete");
-                case "find":
-                    throw new DukeCommandException("find");
-                default:
-                    throw new DukeCommandException(inputArr[0]);
-                }
-            } else {
-                switch (inputArr[0]) {
-                case "done":
-                    try {
-                        int taskId = Integer.parseInt(inputArr[1]);
-                        dc = new CommandDone(taskId);
-                    } catch (NumberFormatException nfe) {
-                        DukeUi.printLine("Incorrect argument for command Done, must be an integer");
-                    }
-                    break;
-                case "todo":
-                    dc = new CommandTodo((ToDo) parseTask(input, TaskType.TODO));
-                    break;
-                case "deadline":
-                    dc = new CommandDeadline((Deadline) parseTask(input, TaskType.DEADLINE));
-                    break;
-                case "event":
-                    dc = new CommandEvent((Event) parseTask(input, TaskType.EVENT));
-                    break;
-                case "delete":
-                    try {
-                        int taskId = Integer.parseInt(inputArr[1]);
-                        dc = new CommandDelete(taskId);
-                    } catch (NumberFormatException nfe) {
-                        DukeUi.printLine("Incorrect argument for command Delete, must be an integer");
-                    }
-                    break;
-                case "find":
-                    dc = new CommandFind(inputArr[1]);
-                    break;
-                default:
-                    throw new DukeCommandException(inputArr[0]);
-                }
+        if (inputArr.length == 1) {
+            switch (inputArr[0]) {
+            case "bye":
+                dc = new CommandBye();
+                break;
+            case "list":
+                dc = new CommandList();
+                break;
+            case "todo":
+                throw new DukeCommandException("todo");
+            case "deadline":
+                throw new DukeCommandException("deadline");
+            case "done":
+                throw new DukeCommandException("done");
+            case "event":
+                throw new DukeCommandException("event");
+            case "delete":
+                throw new DukeCommandException("delete");
+            case "find":
+                throw new DukeCommandException("find");
+            default:
+                throw new DukeCommandException(inputArr[0]);
             }
-        } catch (DukeCommandException e) {
-            DukeUi.printLine(e.getMsg());
-        } catch (DukeArgumentException e) {
-            DukeUi.printLine(e.getMessage());
+        } else {
+            switch (inputArr[0]) {
+            case "done":
+                try {
+                    int taskId = Integer.parseInt(inputArr[1]);
+                    dc = new CommandDone(taskId);
+                } catch (NumberFormatException nfe) {
+                    throw new DukeArgumentException("Incorrect argument for command Delete, must be an integer");
+                }
+                break;
+            case "todo":
+                dc = new CommandTodo((ToDo) parseTask(input, TaskType.TODO));
+                break;
+            case "deadline":
+                dc = new CommandDeadline((Deadline) parseTask(input, TaskType.DEADLINE));
+                break;
+            case "event":
+                dc = new CommandEvent((Event) parseTask(input, TaskType.EVENT));
+                break;
+            case "delete":
+                try {
+                    int taskId = Integer.parseInt(inputArr[1]);
+                    dc = new CommandDelete(taskId);
+                } catch (NumberFormatException nfe) {
+                    throw new DukeArgumentException("Incorrect argument for command Delete, must be an integer");
+                }
+                break;
+            case "find":
+                dc = new CommandFind(inputArr[1]);
+                break;
+            default:
+                throw new DukeCommandException(inputArr[0]);
+            }
         }
         return dc;
     }
