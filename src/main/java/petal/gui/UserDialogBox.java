@@ -25,7 +25,7 @@ public class UserDialogBox extends HBox {
     private Circle circle;
 
     private final Image img = new Image(Objects.requireNonNull(this.getClass()
-            .getResourceAsStream("/images/lauren_tsai_1.jpg")));
+            .getResourceAsStream("/images/user.png")));
 
     /**
      * Constructs a UserDialogBox instance
