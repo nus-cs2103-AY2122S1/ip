@@ -7,6 +7,7 @@ import duke.Ui;
 
 public class Command {
 
+    /** Checks if is ByeCommand */
     public boolean isExit() {
         return this instanceof ByeCommand;
     }
