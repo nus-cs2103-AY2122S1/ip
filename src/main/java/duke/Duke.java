@@ -5,6 +5,9 @@ import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
 
+/**
+ * The main program of the chatbot Duke. Consists of Tasklist, Ui and Storage instances.
+ */
 public class Duke {
     private TaskList tasks;
     private Ui ui;
@@ -19,6 +22,9 @@ public class Duke {
         this.tasks = new TaskList(this.storage.load(), this.ui);
     }
 
+    /**
+     * Starts Duke with the loaded tasks list.
+     */
     public void run() {
         this.ui.greetUser();
         boolean shouldContinue = true;

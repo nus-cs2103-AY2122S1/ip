@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Todo is a specific type of task that contains the description of the task.
+ */
 public class Todo extends Task {
     private static final char TASK_LETTER = 'T';
 
@@ -22,11 +25,21 @@ public class Todo extends Task {
         super(description, isDone);
     }
 
+    /**
+     * Returns string representation of todo.
+     *
+     * @return A string representing todo.
+     */
     @Override
     public String toString() {
         return String.format("[%c]%s", Todo.TASK_LETTER, super.toString());
     }
 
+    /**
+     * Convert todo to a string that can be saved to a file and converted back to itself.
+     *
+     * @return The string to be stored.
+     */
     @Override
     public String stringToStore() {
         return Todo.TASK_LETTER + " | " + this.getStatusIcon() + " | " + this.description + "\n";
