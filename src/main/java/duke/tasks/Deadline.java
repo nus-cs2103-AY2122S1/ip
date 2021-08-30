@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -8,8 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private final String by;
-    private final LocalDate date;
+    private final LocalDateTime by;
 
     /**
      * Constructor for Deadline.
@@ -18,42 +17,23 @@ public class Deadline extends Task {
      * @param by          when the deadline is.
      * @param isDone      if the task is done or not.
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, LocalDateTime by, boolean isDone) {
         super(description, isDone);
         this.by = by;
-        this.date = null;
-    }
-
-    /**
-     * Constructor for Deadline.
-     *
-     * @param description of the deadline.
-     * @param by          when the deadline is.
-     * @param isDone      if the task is done or not.
-     * @param date        date of deadline.
-     */
-    public Deadline(String description, String by, boolean isDone, LocalDate date) {
-        super(description, isDone);
-        this.by = by;
-        this.date = date;
     }
 
     public String getBy() {
-        return by;
+        return by.toString();
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getDate() {
+        return by;
     }
 
     @Override
     public String toString() {
-        if (date == null) {
-            return "[D]" + super.toString() + " (by: " + by + ")";
-        } else {
-            return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                    + " " + by + ")";
-        }
+        return "[D]" + super.toString() + "(by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a"))
+                + ")";
     }
 }
 

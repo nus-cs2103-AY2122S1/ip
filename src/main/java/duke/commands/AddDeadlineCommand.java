@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import duke.TaskList;
 import duke.tasks.Deadline;
@@ -10,8 +11,7 @@ import duke.tasks.Deadline;
  * Command that adds deadline to task list.
  */
 public class AddDeadlineCommand extends Command {
-    private final String by;
-    private final LocalDate date;
+    private final LocalDateTime by;
 
     /**
      * Constructor for AddDeadlineCommand.
@@ -19,23 +19,9 @@ public class AddDeadlineCommand extends Command {
      * @param desc The description of the deadline.
      * @param by   when the deadline is.
      */
-    public AddDeadlineCommand(String desc, String by) {
+    public AddDeadlineCommand(String desc, LocalDateTime by) {
         super(desc);
         this.by = by;
-        this.date = null;
-    }
-
-    /**
-     * Constructor for AddDeadlineCommand.
-     *
-     * @param desc The description of the deadline.
-     * @param by   when the deadline is.
-     * @param date date of deadline.
-     */
-    public AddDeadlineCommand(String desc, String by, LocalDate date) {
-        super(desc);
-        this.by = by;
-        this.date = date;
     }
 
     /**
@@ -55,13 +41,7 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks) throws IOException {
-        Deadline deadline;
-        if (date == null) {
-            deadline = new Deadline(super.getDesc(), by, false);
-        } else {
-            deadline = new Deadline(super.getDesc(), by, false, date);
-        }
-
+        Deadline deadline = new Deadline(super.getDesc(), by, false);
         tasks.add(deadline);
 
         System.out.println("Got it. I've added this task:");

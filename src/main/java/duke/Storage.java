@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -48,87 +50,32 @@ public class Storage {
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
-
         Scanner dataScanner = new Scanner(data);
+
         while (dataScanner.hasNext()) {
             String dataLine = dataScanner.nextLine();
-            String[] split = dataLine.split(" ");
-            String type = split[0];
-            boolean taskDone = split[2].equals("1"); //if taskDone = 1, task was done
+            String[] args = dataLine.split("\\Q| \\E");
+            String taskType = args[0].trim();
+            boolean taskDone = args[1].trim().equals("1"); //if taskDone = 1, task was done
             String desc;
-
-            switch (type) {
+            switch (taskType) {
             case "T":
-                StringBuilder todoBuilder = new StringBuilder();
-                for (int i = 4; i < split.length; i++) {
-                    if (i != 4) {
-                        todoBuilder.append(" ");
-                    }
-                    todoBuilder.append(split[i]);
-                }
-                desc = todoBuilder.toString();
+                desc = args[2];
 
                 tasks.add(new Todo(desc, taskDone));
                 break;
-
             case "D":
-                StringBuilder deadlineBuilder = new StringBuilder();
-                StringBuilder byBuilder = new StringBuilder();
-                String by;
-                boolean byFound = false;
-
-                for (int i = 4; i < split.length; i++) {
-                    if (byFound) {
-                        if (!byBuilder.toString().equals("")) {
-                            byBuilder.append(" ");
-                        }
-                        byBuilder.append(split[i]);
-                    } else {
-                        if (i == 4) {
-                            deadlineBuilder.append(split[i]);
-                        } else if (split[i].equals("|")) {
-                            byFound = true;
-                        } else {
-                            deadlineBuilder.append(" ");
-                            deadlineBuilder.append(split[i]);
-                        }
-                    }
-                }
-                desc = deadlineBuilder.toString();
-                by = byBuilder.toString();
+                desc = args[2];
+                LocalDateTime by = LocalDateTime.parse(args[3]);
 
                 tasks.add(new Deadline(desc, by, taskDone));
                 break;
-
             case "E":
-                StringBuilder eventBuilder = new StringBuilder();
-                StringBuilder atBuilder = new StringBuilder();
-                String at;
-                boolean atFound = false;
-
-                for (int i = 4; i < split.length; i++) {
-                    if (atFound) {
-                        if (!atBuilder.toString().equals("")) {
-                            atBuilder.append(" ");
-                        }
-                        atBuilder.append(split[i]);
-                    } else {
-                        if (i == 4) {
-                            eventBuilder.append(split[i]);
-                        } else if (split[i].equals("|")) {
-                            atFound = true;
-                        } else {
-                            eventBuilder.append(" ");
-                            eventBuilder.append(split[i]);
-                        }
-                    }
-                }
-                desc = eventBuilder.toString();
-                at = atBuilder.toString();
+                desc = args[2];
+                LocalDateTime at = LocalDateTime.parse(args[3]);
 
                 tasks.add(new Event(desc, at, taskDone));
                 break;
-
             default:
 
             }
@@ -149,11 +96,11 @@ public class Storage {
             fw.close();
         } else if (task instanceof Deadline) {
             Deadline deadline = (Deadline) task;
-            fw.write("D | 0 | " + task.getDescription() + " | " + deadline.getBy() + "\n");
+            fw.write("D | 0 | " + task.getDescription() + "| " + deadline.getBy() + "\n");
             fw.close();
         } else {
             Event event = (Event) task;
-            fw.write("E | 0 | " + task.getDescription() + " | " + event.getAt() + "\n");
+            fw.write("E | 0 | " + task.getDescription() + "| " + event.getAt() + "\n");
             fw.close();
         }
     }
@@ -178,7 +125,7 @@ public class Storage {
      */
     public void markAsDone(int doneIndex) throws IOException {
         List<String> fileContent = new ArrayList<>(Files.readAllLines(Path.of("data/tasks.txt"),
-                        StandardCharsets.UTF_8));
+                StandardCharsets.UTF_8));
 
         String oldLine = fileContent.get(doneIndex - 1);
         StringBuilder newLine = new StringBuilder(oldLine);

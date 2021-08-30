@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -48,99 +49,44 @@ public class Parser {
             checkIndex(deleteIndex, tasks.size());
             return new DeleteCommand("delete", deleteIndex);
         case "todo":
-            StringBuilder todoBuilder = new StringBuilder();
-            for (int i = 1; i < fullCommand.length; i++) {
-                if (i != 1) {
-                    todoBuilder.append(" ");
-                }
-                todoBuilder.append(fullCommand[i]);
+            desc = commandLine.replace("todo", "").trim();
+            if (desc.equals("")) {
+                throw new DukeException("A to-do needs a description");
             }
-            desc = todoBuilder.toString();
-            checkDesc(desc);
             return new AddTodoCommand(desc);
         case "deadline":
-            StringBuilder deadlineBuilder = new StringBuilder();
-            StringBuilder byBuilder = new StringBuilder();
             String by;
-            boolean byFound = false;
 
-            LocalDate deadlineDate = null;
-            DateTimeFormatter deadlineDateFormatter = DateTimeFormatter
-                    .ofPattern("[d/M/yyyy][d-MMM-yyyy][d-M-yyyy][d/MMM/yyyy]");
+            String[] deadlineArgs = commandLine.replace("deadline ", "").split("/by ");
 
-            for (int i = 1; i < fullCommand.length; i++) {
-                if (byFound) {
-                    try {
-                        deadlineDate = LocalDate.parse(fullCommand[i], deadlineDateFormatter);
-                    } catch (DateTimeParseException e) {
-                        if (!byBuilder.toString().equals("")) {
-                            byBuilder.append(" ");
-                        }
-                        byBuilder.append(fullCommand[i]);
-                    }
-                } else {
-                    if (i == 1) {
-                        deadlineBuilder.append(fullCommand[i]);
-                    } else if (fullCommand[i].equals("/by")) {
-                        byFound = true;
-                    } else {
-                        deadlineBuilder.append(" ");
-                        deadlineBuilder.append(fullCommand[i]);
-                    }
-                }
+            if (deadlineArgs.length != 2) {
+                throw new DukeException("Invalid format for deadline");
             }
-            desc = deadlineBuilder.toString();
-            by = byBuilder.toString();
 
-            checkDesc(desc);
+            desc = deadlineArgs[0];
+            by = deadlineArgs[1];
 
-            if (deadlineDate == null) {
-                return new AddDeadlineCommand(desc, by);
-            } else {
-                return new AddDeadlineCommand(desc, by, deadlineDate);
-            }
+            LocalDateTime deadlineDate = this.parseDate(by);
+            return new AddDeadlineCommand(desc, deadlineDate);
 
         case "event":
-            StringBuilder eventBuilder = new StringBuilder();
-            StringBuilder atBuilder = new StringBuilder();
             String at;
-            boolean atFound = false;
 
-            LocalDate eventDate = null;
-            DateTimeFormatter eventDateFormatter = DateTimeFormatter
-                .ofPattern("[d/M/yyyy][d-MMM-yyyy][d-M-yyyy][d/MMM/yyyy]");
+            String[] eventArgs = commandLine.replace("event ", "").split("/at ");
 
-            for (int i = 1; i < fullCommand.length; i++) {
-                if (atFound) {
-                    try {
-                        eventDate = LocalDate.parse(fullCommand[i], eventDateFormatter);
-                    } catch (DateTimeParseException e) {
-                        if (!atBuilder.toString().equals("")) {
-                            atBuilder.append(" ");
-                        }
-                        atBuilder.append(fullCommand[i]);
-                    }
-                } else {
-                    if (i == 1) {
-                        eventBuilder.append(fullCommand[i]);
-                    } else if (fullCommand[i].equals("/at")) {
-                        atFound = true;
-                    } else {
-                        eventBuilder.append(" ");
-                        eventBuilder.append(fullCommand[i]);
-                    }
-                }
+            if (eventArgs.length != 2) {
+                throw new DukeException("Invalid format for event");
             }
-            desc = eventBuilder.toString();
-            at = atBuilder.toString();
 
-            checkDesc(desc);
+            desc = eventArgs[0];
+            at = eventArgs[1];
 
-            if (eventDate == null) {
-                return new AddEventCommand(desc, at);
-            } else {
-                return new AddEventCommand(desc, at, eventDate);
+            if (desc.equals("")) {
+                throw new DukeException("An event needs a description");
             }
+
+            LocalDateTime eventDate = this.parseDate(at);
+            return new AddEventCommand(desc, eventDate);
 
         case "find":
             StringBuilder keywordBuilder = new StringBuilder();
@@ -152,20 +98,8 @@ public class Parser {
             }
             return new FindCommand("find", keywordBuilder.toString());
 
-        default :
+        default:
             throw new DukeException("I do not understand that command");
-        }
-    }
-
-    /**
-     * Checks whether there is a description in the command line. Throws DukeException if description is missing.
-     *
-     * @param test the description the user input.
-     * @throws DukeException if there is no description in the command line.
-     */
-    public static void checkDesc(String test) throws DukeException {
-        if (test.equals("")) {
-            throw new DukeException("The description is empty");
         }
     }
 
@@ -193,6 +127,17 @@ public class Parser {
             throw new DukeException("Please give an index number > 0");
         } else if (i > lengthOfList) {
             throw new DukeException("Maximum index number is " + lengthOfList);
+        }
+    }
+
+    public LocalDateTime parseDate(String date) throws DukeException {
+        DateTimeFormatter dtf = DateTimeFormatter
+                .ofPattern("[d/M/[uuuu][uu] H:mm][d-MMM-[uuuu][uu] H:mm][d-M-[uuuu][uu] H:mm][d/MMM/[uuuu][uu] H:mm]");
+        try {
+            return LocalDateTime.parse(date, dtf);
+        } catch (DateTimeParseException err) {
+            throw new DukeException("Invalid date format\nPlease type out date in following format: d/M/yyyy H:mm " +
+                    "or d-M-yyyy H:mm, in 24-hour format");
         }
     }
 }

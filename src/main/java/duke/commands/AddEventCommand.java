@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import duke.TaskList;
 import duke.tasks.Event;
@@ -10,8 +11,7 @@ import duke.tasks.Event;
  * Command that adds event to task list.
  */
 public class AddEventCommand extends Command {
-    private final String at;
-    private LocalDate date;
+    private LocalDateTime at;
 
     /**
      * Constructor for AddEventCommand.
@@ -19,23 +19,9 @@ public class AddEventCommand extends Command {
      * @param desc description of event.
      * @param at   when the event is.
      */
-    public AddEventCommand(String desc, String at) {
+    public AddEventCommand(String desc, LocalDateTime at) {
         super(desc);
         this.at = at;
-        this.date = null;
-    }
-
-    /**
-     * Constructor for AddEventCommand.
-     *
-     * @param desc description of event.
-     * @param at   when the event is.
-     * @param date date of event.
-     */
-    public AddEventCommand(String desc, String at, LocalDate date) {
-        super(desc);
-        this.at = at;
-        this.date = date;
     }
 
     /**
@@ -44,7 +30,7 @@ public class AddEventCommand extends Command {
      * @return when the event is.
      */
     public String getAt() {
-        return this.at;
+        return this.at.toString();
     }
 
     /**
@@ -64,12 +50,7 @@ public class AddEventCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks) throws IOException {
-        Event event;
-        if (date == null) {
-            event = new Event(super.getDesc(), at, false);
-        } else {
-            event = new Event(super.getDesc(), at, false, date);
-        }
+        Event event = new Event(super.getDesc(), at, false);
         tasks.add(event);
 
         System.out.println("Got it. I've added this task:");
