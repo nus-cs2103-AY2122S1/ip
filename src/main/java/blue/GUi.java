@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class GUi extends Application {
+    private Blue blue;
     private Stage stage;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -21,11 +22,12 @@ public class GUi extends Application {
     private Button sendButton;
     private Scene scene;
     private AnchorPane mainLayout;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image blue = new Image(this.getClass().getResourceAsStream("/images/DaBlue.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image blueImage = new Image(this.getClass().getResourceAsStream("/images/DaBlue.png"));
 
     @Override
     public void start(Stage stage) {
+        blue = new Blue("data/tasks.txt");
         this.stage = stage;
         designAndShowLayout();
         styleControls();
@@ -86,17 +88,21 @@ public class GUi extends Application {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label blueText = new Label(getResponse(userInput.getText()));
+        String userInputText = userInput.getText();
+        Label userText = new Label(userInputText);
+        Label blueText = new Label(getResponse(userInputText));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(blueText, new ImageView(blue))
+                new DialogBox(userText, new ImageView(userImage)),
+                new DialogBox(blueText, new ImageView(blueImage))
         );
+        String command = Parser.getCommand(userInputText);
+        if (command.equals(Command.EXIT)) {
+            System.exit(0);
+        }
         userInput.clear();
     }
 
     private String getResponse(String input) {
-        // TODO replace with appropriate responses form Blue
-        return "Blue heard: " + input;
+        return blue.getResponse(input);
     }
 }
