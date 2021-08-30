@@ -7,6 +7,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MainWindow extends AnchorPane {
 
@@ -23,14 +28,23 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Ui dukeUi;
+    private Stage primaryStage;
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Ui dukeUi) {
+    /**
+     * Configures the main window when launching.
+     *
+     * @param dukeUi the dukeUi that power the chat bot.
+     * @param primaryStage The stage that hosts this window.
+     */
+    public void setMainWindow(Ui dukeUi, Stage primaryStage) {
         this.dukeUi = dukeUi;
+        this.primaryStage = primaryStage;
+        this.displayStartMessage();
     }
 
     /**
@@ -55,6 +69,17 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(getResponse(input))
         );
         userInput.clear();
+
+        // Checks to see if the user input given is to close the chat bot.
+        if (this.dukeUi.isExit()) {
+            this.closeDuke();
+        }
+    }
+
+    private void closeDuke() {
+        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.schedule(() -> System.exit(1),
+                2, TimeUnit.SECONDS);
     }
 
     private String getResponse(String input) {

@@ -5,20 +5,28 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.Collections;
 
 public class DialogBox extends HBox {
 
+    private static final Color DUKE_COLOR = Color.rgb( 57, 255, 90, 0.7);
+    private static final Color USER_COLOR = Color.rgb(236, 229, 221, 0.7);
+
     @FXML
     private Label dialog;
 
-    private DialogBox(String text) {
+    private DialogBox(String text, boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -29,6 +37,11 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        if (isUser) {
+            this.setStyle(USER_COLOR);
+        } else {
+            this.setStyle(DUKE_COLOR);
+        }
     }
 
     /**
@@ -48,7 +61,7 @@ public class DialogBox extends HBox {
      * @return The DialogBox containing the user input.
      */
     public static DialogBox getUserDialog(String text) {
-        var db = new DialogBox("You:\n" + text);
+        var db = new DialogBox("You:\n" + text, true);
         db.flip();
         return db;
     }
@@ -62,7 +75,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text) {
         // Remove blank lines at the end of the list.
         text = text.replaceAll("([\\n\\r]+\\s*)*$", "");
-        var db = new DialogBox("Duke:\n" + text + " ");
+        var db = new DialogBox("Duke:\n" + text + " ", false);
         db.flip();
         return db;
     }
@@ -74,6 +87,16 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getStartDialog() {
         String startMessage = Ui.getStartMessage();
-        return new DialogBox(startMessage + " ");
+        var db = new DialogBox(startMessage + " ", false);
+        db.flip();
+        return db;
+    }
+
+    private void setStyle(Color color) {
+        this.setBackground(new Background(new BackgroundFill(
+                color,
+                new CornerRadii(25),
+                new Insets(5,5,5,5)
+        )));
     }
 }
