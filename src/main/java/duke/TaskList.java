@@ -29,20 +29,23 @@ public class TaskList {
         return this.taskList;
     }
 
+
     /**
-     * Marks the task corresponding to the given task number as done.
+     * Marks the task corresponding to the given task number as done and returns the task marked
+     * as done.
      *
      * @param taskNumber The task number of the task that should be marked as done.
      *                   The first task in the user's todo list have the task number of 1,
      *                   the second task in the user's todo list have the task number of 2,
      *                   etc.
+     * @return The task marked as done.
      * @throws DukeException If no task in the user's todo list corresponds to the given task number.
      */
-    public void markAsDone(int taskNumber) throws DukeException {
+    public Task markTaskAsDone(int taskNumber) throws DukeException {
         int index = taskNumber - 1;
         checkCanDeleteOrMarkAsDone(taskNumber, index);
         this.taskList.get(index).markAsDone();
-        System.out.println();
+        return this.taskList.get(index);
     }
 
     /**
@@ -52,41 +55,29 @@ public class TaskList {
      */
     public void addTask(Task task) {
         this.taskList.add(task);
-        System.out.println("Got it! I have added this task:");
-        System.out.println(this.taskList.get(this.numOfTask));
         this.numOfTask = this.numOfTask + 1;
-        if (this.numOfTask > 1) {
-            System.out.printf("Now you have %s tasks in your list.\n", this.numOfTask);
-        } else {
-            System.out.printf("Now you have 1 task in your list.\n");
-        }
-        System.out.println();
     }
 
 
     /**
-     * Deletes the task corresponding to the given task number.
+     * Deletes the task corresponding to the given task number and returns the task deleted.
      *
      * @param taskNumber The task number of the task that should be deleted.
      *                   The first task in the user's todo list have the task number of 1,
      *                   the second task in the user's todo list have the task number of 2,
      *                   etc.
+     * @return The deleted task.
      * @throws DukeException If no task in the user's todo list corresponds to the given task number.
      */
-    public void deleteTask(int taskNumber) throws DukeException {
+    public Task deleteTask(int taskNumber) throws DukeException {
         int index = taskNumber - 1;
         checkCanDeleteOrMarkAsDone(taskNumber, index);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(this.taskList.get(index));
+        Task task = this.taskList.get(index);
         this.taskList.remove(index);
         this.numOfTask = this.numOfTask - 1;
-        if (this.numOfTask > 1) {
-            System.out.printf("You have %s tasks left on your list.\n", this.numOfTask);
-        } else {
-            System.out.printf("You have %s task left on your list.\n", this.numOfTask);
-        }
-        System.out.println();
+        return task;
     }
+
 
     private void checkCanDeleteOrMarkAsDone(int taskNumber, int index) throws DukeException {
         if (index > this.numOfTask - 1) {
@@ -118,6 +109,14 @@ public class TaskList {
             }
         }
         return matchingTasks;
+    }
+
+    /**
+     * Get the number of tasks in todo list.
+     * @return the number of tasks in todo list.
+     */
+    public int getNumOfTask() {
+        return this.numOfTask;
     }
 
 }

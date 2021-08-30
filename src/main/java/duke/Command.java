@@ -49,7 +49,7 @@ public class Command {
             System.out.println("File path is corrupted :( Cannot start Duke.");
             return;
         }
-        this.ui.printStartMessage(this.taskList.getTaskList());
+        System.out.println(this.ui.getStartMessage(this.taskList.getTaskList()));
         Scanner scanner = new Scanner(System.in);
         boolean hasNextCommand = true;
         while (hasNextCommand) {
@@ -59,54 +59,54 @@ public class Command {
             }
             command = scanner.nextLine();
             String action = this.parser.parseCommand(command);
-            hasNextCommand = runNextCommand(action, command);
+            String reply = getReplyFromDuke(action, command);
+            System.out.println(reply);
+            if (reply.equals(this.ui.getEndMessage())) {
+                hasNextCommand = false;
+            }
         }
     }
 
+
+
     /**
-     * Runs the type of command given in the parameters and returns whether Duke
-     * should be stop or not.
+     * Runs the type of command given in the parameters and returns Duke's
+     * reply.
      *
      * @param typeOfCommand String that determines the actions of Duke.
      * @param description   The original command given by the user.
-     * @return True if Duke should continue to take in commands from the user and false if Duke should stop.
+     * @return String of Duke's reply.
      */
-    public boolean runNextCommand(String typeOfCommand, String description) {
+    public String getReplyFromDuke(String typeOfCommand, String description) {
         try {
             if (typeOfCommand.equals("bye")) {
-                this.ui.endMessage();
                 this.storage.writeToFile(this.taskList.getTaskList());
-                return false;
+                return this.ui.getEndMessage();
             } else if (typeOfCommand.equals("list")) {
-                this.ui.iterateTaskList(this.taskList.getTaskList());
-                return true;
+                return this.ui.getIterateTaskList(this.taskList.getTaskList());
             } else if (typeOfCommand.equals("done")) {
                 int task = this.parser.parseDoneCommand(description);
-                this.taskList.markAsDone(task);
-                return true;
+                Task t = this.taskList.markTaskAsDone(task);
+                return this.ui.getMarkAsDoneMessage(t);
             } else if (typeOfCommand.equals("delete")) {
                 int task = this.parser.parseDeleteCommand(description);
-                this.taskList.deleteTask(task);
-                return true;
+                Task t = this.taskList.deleteTask(task);
+                return this.ui.getDeletedTaskMessage(t) + this.ui.getNumberOfTasksInList(this.taskList);
             } else if (typeOfCommand.equals("addTask")) {
                 Task task = this.parser.parseAddTask(description);
                 this.taskList.addTask(task);
-                return true;
+                return this.ui.getAddedTaskMessage(task) + this.ui.getNumberOfTasksInList(this.taskList);
             } else if (typeOfCommand.equals("empty")) {
-                System.out.println("Please enter a new task or action.");
-                return true;
+                return "Please enter a new task or action.";
             } else if (typeOfCommand.equals("find")) {
                 String str = this.parser.parseFindCommand(description);
                 ArrayList<Task> matchingTasks = this.taskList.findTask(str);
-                this.ui.iterateMatchingTaskList(matchingTasks);
-                return true;
+                return this.ui.getMatchingTaskList(matchingTasks);
             } else {
                 throw new DukeException("Sorry I don't understand this command :(");
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            System.out.println();
-            return true;
+            return e.getMessage() + "\n";
         }
     }
 

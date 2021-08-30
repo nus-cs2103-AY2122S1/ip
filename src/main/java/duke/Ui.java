@@ -7,64 +7,117 @@ import java.util.ArrayList;
  */
 public class Ui {
 
+
     /**
-     * Prints the welcoming message for the user and the current tasks in the user's todo list.
+     * Returns the welcoming message for the user and the current tasks in the user's todo list.
      *
      * @param taskList The user's current todo list.
+     * @return welcoming message for user
      */
-    public void printStartMessage(ArrayList<Task> taskList) {
-        System.out.println("Hello I am Duke.\nWhat can I do for you?");
-        System.out.println();
+    public String getStartMessage(ArrayList<Task> taskList) {
+        String str = "";
+        str = str + "Hello I am Duke.\nWhat can I do for you?\n\n";
         if (taskList.size() > 0) {
-            System.out.println("Current number of tasks: " + taskList.size());
-            iterateTaskList(taskList);
-            System.out.println();
+            str = str + "Current number of tasks: " + taskList.size() + "\n";
+            str = str + getIterateTaskList(taskList) + '\n';
         }
+        str = str + "\n";
+        return str;
     }
 
     /**
-     * Prints the current tasks in the user's todo list.
+     * Returns the current tasks in the user's todo list.
      *
      * @param taskList The user's current todo list.
+     * @return User's todo list.
      */
-    public void iterateTaskList(ArrayList<Task> taskList) {
+    public String getIterateTaskList(ArrayList<Task> taskList) {
+        String str = "";
         if (taskList.size() == 0) {
-            System.out.println("List is empty!");
-            System.out.println();
-            return;
+            str = str + "List is empty!\n\n";
+            return str;
         }
-        System.out.println("Here are the tasks in your list:");
+        str = str + "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
             Task temp = taskList.get(i);
-            System.out.printf("%s. %s\n", i + 1, temp);
+            str = str + (i + 1) + ". " + temp + "\n";
         }
-        System.out.println();
+        str = str + "\n";
+        return str;
     }
 
     /**
-     * Prints the goodbye message for the user.
+     * Returns the goodbye message for the user.
+     *
+     * @return Goodbye message for the user.
      */
-    public void endMessage() {
-        System.out.println("Bye! See you next time!");
+    public String getEndMessage() {
+        return "Bye! See you next time!";
     }
 
     /**
-     * Prints the result of finding matching tasks.
+     * Returns the message for marking a task as done.
+     *
+     * @return Message for marking a task as done.
+     */
+    public String getMarkAsDoneMessage(Task task) {
+        return "I have marked \"" + task.getDescription() + "\" as done!\n" + task + "\n";
+    }
+
+    /**
+     * Returns the message for getting the number of task in user's todo list.
+     *
+     * @return Message  for getting the number of task in user's list.
+     */
+    public String getNumberOfTasksInList(TaskList taskList) {
+        String str = "";
+        if (taskList.getNumOfTask() > 1) {
+            str = str + "You have " + taskList.getNumOfTask() + " tasks left in your list.\n";
+        } else {
+            str = str + "You have " + taskList.getNumOfTask() + " task left in your list.\n";
+        }
+        str = str + "\n";
+        return str;
+    }
+
+    /**
+     * Returns the message for deleting a task.
+     *
+     * @return Message for deleting a task.
+     */
+    public String getDeletedTaskMessage(Task task) {
+        return  "Noted. I've removed this task:\n" + task + "\n";
+    }
+
+    /**
+     * Returns the message for adding a task.
+     *
+     * @return Message for adding a task.
+     */
+    public String getAddedTaskMessage(Task task) {
+        return  "Got it! I have added this task:\n " + task + "\n";
+    }
+
+
+    /**
+     * Gets the result of finding matching tasks.
      *
      * @param taskList The result of finding matching tasks.
+     * @return A string of matching tasks.
      */
-    public void iterateMatchingTaskList(ArrayList<Task> taskList) {
+    public String getMatchingTaskList(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
-            System.out.println("No matching task!");
-            System.out.println();
-            return;
+            return "No matching task!\n\n";
         }
-        System.out.println("Here are the tasks that matches your search:");
+        String str = "Here are the tasks that matches your search:\n";
         for (int i = 0; i < taskList.size(); i++) {
             Task temp = taskList.get(i);
-            System.out.printf("%s. %s\n", i + 1, temp);
+           str = str +  (i + 1) + "." + temp +"\n";
         }
-        System.out.println();
+        str = str + "\n";
+        return str;
     }
+
+
 
 }

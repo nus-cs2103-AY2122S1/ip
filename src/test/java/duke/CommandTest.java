@@ -19,8 +19,8 @@ public class CommandTest {
     @Test
     public void runCommand(){
         CommandTest test = new CommandTest();
-        assertEquals(false, test.command.runNextCommand("bye", ""));
-        assertEquals(true, test.command.runNextCommand("empty", ""));
+        assertEquals("Bye! See you next time!", test.command.getReplyFromDuke("bye", ""));
+        assertEquals("Please enter a new task or action.", test.command.getReplyFromDuke("empty", ""));
 
     }
 }
