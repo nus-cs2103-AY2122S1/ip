@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a task that takes place over a period of time. The event can take place between dates, on one date 
+ * Represents a task that takes place over a period of time. The event can take place between dates, on one date
  * between two times, or date-time to date-time.
  */
 public class Event extends Task {
@@ -13,10 +13,18 @@ public class Event extends Task {
     private LocalDate endDate;
     private LocalTime startTime;
     private LocalTime endTime;
-    
+
     private final boolean hasTime;
     private final boolean hasEndDate;
 
+    /**
+     * Constructor for an event taking place on one day, with a start and end time.
+     *
+     * @param taskName The task's name/description.
+     * @param startDate The date of the event.
+     * @param startTime The time at which the event starts.
+     * @param endTime The time at which the event ends.
+     */
     public Event(String taskName, LocalDate startDate, LocalTime startTime, LocalTime endTime) {
         super(taskName);
         this.startDate = startDate;
@@ -26,6 +34,15 @@ public class Event extends Task {
         hasEndDate = false;
     }
 
+    /**
+     * Constructor for an event taking place over multiple days, with start and end times.
+     *
+     * @param taskName The task's name/description.
+     * @param startDate The start date of the event.
+     * @param startTime The time at which the event starts on the start date.
+     * @param endDate The end date of the event.
+     * @param endTime The time at which the event ends on the end date.
+     */
     public Event(String taskName, LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime) {
         super(taskName);
         this.startDate = startDate;
@@ -36,6 +53,13 @@ public class Event extends Task {
         hasEndDate = true;
     }
 
+    /**
+     * Constructor for an event taking place over multiple days.
+     *
+     * @param taskName The task's name/description.
+     * @param startDate The start date of the event.
+     * @param endDate The end date of the event.
+     */
     public Event(String taskName, LocalDate startDate, LocalDate endDate) {
         super(taskName);
         this.startDate = startDate;
@@ -53,8 +77,8 @@ public class Event extends Task {
     public String listEntry() {
         if (hasTime) {
             if (hasEndDate) {
-                return "[E]" + super.listEntry() 
-                        + " (from " + startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+                return "[E]" + super.listEntry()
+                        + " (from " + startDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                         + " at " + startTime.format(DateTimeFormatter.ofPattern("h:mm a"))
                         + " to " + endDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                         + " at " + endTime.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";

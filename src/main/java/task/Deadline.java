@@ -12,12 +12,25 @@ public class Deadline extends Task {
     private LocalTime deadlineTime;
     private final boolean isTimeGiven;
 
+    /**
+     * Constructor for a deadline on a given day.
+     *
+     * @param taskName The task name/description.
+     * @param deadlineDate The deadline.
+     */
     public Deadline(String taskName, LocalDate deadlineDate) {
         super(taskName);
         this.deadlineDate = deadlineDate;
         isTimeGiven = false;
     }
 
+    /**
+     * Constructor for a deadline on a given day at a given time.
+     *
+     * @param taskName The task name/description.
+     * @param deadlineDate The date of the deadline.
+     * @param deadlineTime The time of the deadline.
+     */
     public Deadline(String taskName, LocalDate deadlineDate, LocalTime deadlineTime) {
         super(taskName);
         this.deadlineDate = deadlineDate;
@@ -27,24 +40,24 @@ public class Deadline extends Task {
 
     /**
      * Returns this Deadline's list entry string.
-     * 
+     *
      * @return A string representation of this Deadline's list entry.
      */
     @Override
     public String listEntry() {
         if (isTimeGiven) {
-            return "[D]" + super.listEntry() 
-                    + " (by " + deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+            return "[D]" + super.listEntry()
+                    + " (by " + deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                     + " at " + deadlineTime.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
         } else {
-            return "[D]" + super.listEntry() 
+            return "[D]" + super.listEntry()
                     + " (by " + deadlineDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
     }
 
     /**
      * Returns this Deadline's database entry string.
-     * 
+     *
      * @return A string representation of this Deadline's database entry.
      */
     @Override
@@ -58,7 +71,7 @@ public class Deadline extends Task {
 
     /**
      * Checks if this Deadline object's deadline is on the given date.
-     * 
+     *
      * @param l The date against which to check this Deadline object's deadline.
      * @return true if the deadline is on the given date.
      */
