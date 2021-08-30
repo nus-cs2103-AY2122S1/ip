@@ -96,6 +96,6 @@ public abstract class Command {
      * @param fileManager the filemanger that manages the storage of duke.
      * @throws DukeException if command has issues.
      */
-    public abstract void execute(Tasklist task, Ui ui, FileManager fileManager) throws DukeException;
+    public abstract String execute(Tasklist task, Ui ui, FileManager fileManager) throws DukeException;
     public abstract boolean isExit();
 }

@@ -16,8 +16,8 @@ public class ListCommand extends Command {
      * @param fileManager the filemanger that manages the storage of duke.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, FileManager fileManager) {
-        ui.printList(tasks);
+    public String execute(Tasklist tasks, Ui ui, FileManager fileManager) {
+        return ui.printList(tasks);
     }
 
     /**

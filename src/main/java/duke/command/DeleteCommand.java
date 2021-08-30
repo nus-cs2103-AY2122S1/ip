@@ -30,11 +30,11 @@ public class DeleteCommand extends Command {
      * @throws DukeException if index is out of bounds or if task is missing.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, FileManager fileManager) throws DukeException {
+    public String execute(Tasklist tasks, Ui ui, FileManager fileManager) throws DukeException {
         Task removedTask = tasks.getTask(this.index);
         tasks.delete(this.index);
-        ui.deleteTask(removedTask);
         fileManager.updateTaskList(tasks, ui);
+        return ui.deleteTask(removedTask);
     }
 
     /**

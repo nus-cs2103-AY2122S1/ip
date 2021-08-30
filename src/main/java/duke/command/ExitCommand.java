@@ -16,8 +16,8 @@ public class ExitCommand extends Command {
      * @param fileManager the filemanger that manages the storage of duke.
      */
     @Override
-    public void execute(Tasklist task, Ui ui, FileManager fileManager) {
-        ui.sayBye();
+    public String execute(Tasklist task, Ui ui, FileManager fileManager) {
+        return ui.sayBye();
     }
 
     /**
