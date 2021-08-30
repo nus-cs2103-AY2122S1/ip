@@ -1,7 +1,7 @@
 package models;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Event class that represents a Todo that will be saved by Dub.
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Event extends Task {
 
     /** The time of the event. */
-    private LocalDate time;
+    private final LocalDate time;
 
     /**
      * Constructor of the Event class.
@@ -36,7 +36,7 @@ public class Event extends Task {
 
         if (obj instanceof Event) {
             Event temp = (Event) obj;
-            return temp.toString() == this.toString();
+            return temp.toString().equals(this.toString());
         }
 
         return false;
@@ -50,8 +50,10 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[E][X] " + this.description + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[E][X] " + this.description + " (by: "
+                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
-        return "[E][ ] " + this.description + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E][ ] " + this.description + " (by: "
+                + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

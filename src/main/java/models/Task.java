@@ -44,7 +44,7 @@ public class Task implements Serializable {
 
         if (obj instanceof Task) {
             Task temp = (Task) obj;
-            return temp.toString() == this.toString();
+            return temp.toString().equals(this.toString());
         }
 
         return false;

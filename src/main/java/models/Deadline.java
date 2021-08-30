@@ -1,7 +1,7 @@
 package models;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Event class that represents a Deadline that will be saved by Dub.
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Deadline extends Task {
 
     /** The deadline of the task. */
-    private LocalDate time;
+    private final LocalDate time;
 
     /**
      * Constructor of the Deadline class.
@@ -36,7 +36,7 @@ public class Deadline extends Task {
 
         if (obj instanceof Deadline) {
             Deadline temp = (Deadline) obj;
-            return temp.toString() == this.toString();
+            return temp.toString().equals(this.toString());
         }
 
         return false;
@@ -50,8 +50,10 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return "[D][X] " + this.description + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[D][X] " + this.description + " (by: "
+                    + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         }
-        return "[D][ ] " + this.description + " (by: " + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D][ ] " + this.description + " (by: "
+                + time.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

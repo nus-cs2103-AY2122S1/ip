@@ -10,4 +10,4 @@ public enum Command {
     DELETE,
     DEFAULT,
     FIND
-};
+}
