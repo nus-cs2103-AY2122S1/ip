@@ -35,12 +35,12 @@ package model;
  * </ol>
  */
 public enum Command {
-	BYE,
-	LIST,
-	FIND,
-	DEADLINE,
-	EVENT,
-	TODOS,
-	DELETE,
-	DONE,
+    BYE,
+    LIST,
+    FIND,
+    DEADLINE,
+    EVENT,
+    TODOS,
+    DELETE,
+    DONE,
 }

@@ -22,6 +22,12 @@ public class Dude {
     /** UI class responsible for the interaction and display with user */
     private final IUi ui;
     
+    private final String LOGO = " ____        ____      \n"
+            + "|  _ \\ _   _|  _ \\____\n"
+            + "| | | | | | | | |/ __ \\\n"
+            + "| |_| | |_| | |_|   __/\n"
+            + "|____/ \\__,_|____\\____|\n";
+    
     /**
      * Constructor of the Dude chatter-bot with the corresponding logic.
      *
@@ -49,12 +55,7 @@ public class Dude {
      */
     @SuppressWarnings("InfiniteLoopStatement")
     public void run() {
-        String logo = " ____        ____      \n"
-                + "|  _ \\ _   _|  _ \\____\n"
-                + "| | | | | | | | |/ __ \\\n"
-                + "| |_| | |_| | |_|   __/\n"
-                + "|____/ \\__,_|____\\____|\n";
-        System.out.println("Hello from\n" + logo + "by Simon - CS2103T/2122S1");
+        System.out.println("Hello from\n" + LOGO + "by Simon - CS2103T/2122S1");
         
         starting();
         
