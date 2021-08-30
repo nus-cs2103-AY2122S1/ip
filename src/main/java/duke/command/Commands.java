@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * Enum of commands to cycle through and return the right command that matches user input
+ */
 public enum Commands {
     EXIT (new ExitCommand()),
     LIST (new ListCommand()),

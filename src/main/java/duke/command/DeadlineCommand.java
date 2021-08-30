@@ -3,10 +3,13 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.Deadline;
+import duke.task.TaskList;
 
+/**
+ * Command to add a deadline into the task list
+ */
 public class DeadlineCommand extends Command {
     public DeadlineCommand() {
         setCommandString("deadline");
@@ -17,10 +20,12 @@ public class DeadlineCommand extends Command {
      * then creates the deadline and adds it into the taskList
      *
      * @param input Full user input
+     * @param taskList The list of tasks
+     * @return The response
      * @throws DukeException Any exception caught when executing this command
      */
     @Override
-    public void parse(String input) throws DukeException {
+    public String parse(String input, TaskList taskList) throws DukeException {
         if (input.length() <= getCommandLength()) {
             throw new DukeException("Please input the deadline's name and date!");
         }
@@ -48,6 +53,6 @@ public class DeadlineCommand extends Command {
         }
 
         Deadline deadline = new Deadline(name, date);
-        Duke.getTaskList().addTask(deadline);
+        return taskList.addTask(deadline);
     }
 }

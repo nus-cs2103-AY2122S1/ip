@@ -1,7 +1,8 @@
 package duke.task;
 
-import duke.io.TextColor;
-
+/**
+ * Abstract class representing a task
+ */
 public abstract class Task {
     protected boolean isDone;
     protected String name;
@@ -58,21 +59,6 @@ public abstract class Task {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Returns what color the task should be listed with.
-     *
-     * @return The text color representing the task's status
-     */
-    public TextColor getListColor() {
-        return isDone()
-                ? TextColor.DEFAULT
-                : isToday()
-                ? TextColor.YELLOW
-                : isExpired()
-                ? TextColor.RED
-                : TextColor.DEFAULT;
     }
 
     /**

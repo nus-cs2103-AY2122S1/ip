@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDate;
 
+/**
+ * Class representing an event that happens at a specified date
+ */
 public class Event extends Task {
     private LocalDate date;
 

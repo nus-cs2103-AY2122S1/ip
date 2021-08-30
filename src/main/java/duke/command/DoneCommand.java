@@ -1,8 +1,11 @@
 package duke.command;
 
-import duke.Duke;
 import duke.exception.DukeException;
+import duke.task.TaskList;
 
+/**
+ * Command to mark a task as done
+ */
 public class DoneCommand extends Command {
     public DoneCommand() {
         setCommandString("done");
@@ -13,10 +16,12 @@ public class DoneCommand extends Command {
      * Then marks the specified task as done.
      *
      * @param input Full user input
+     * @param taskList The list of tasks
+     * @return The response
      * @throws DukeException Any exception caught when executing this command
      */
     @Override
-    public void parse(String input) throws DukeException {
+    public String parse(String input, TaskList taskList) throws DukeException {
         if (input.length() <= getCommandLength()) {
             throw new DukeException("Please input a task number.");
         }
@@ -30,6 +35,6 @@ public class DoneCommand extends Command {
             throw new DukeException("Please input a number");
         }
 
-        Duke.getTaskList().doTask(idx);
+        return taskList.doTask(idx);
     }
 }
