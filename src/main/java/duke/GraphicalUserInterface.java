@@ -18,6 +18,12 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
+
+/**
+ * Class responsible for setting up GUI for Duke.
+ *
+ * @author Aiken Wong
+ */
 public class GraphicalUserInterface {
 
     private Stage stage;
@@ -33,7 +39,14 @@ public class GraphicalUserInterface {
     private TaskList tasks;
     private Storage storage;
 
-
+    /**
+     * Instantiates a new Graphical User Interface for Duke.
+     *
+     * @param stage
+     * @param ui
+     * @param tasks
+     * @param storage
+     */
     public GraphicalUserInterface(Stage stage, Ui ui, TaskList tasks, Storage storage) {
         this.ui = ui;
         this.tasks = tasks;
@@ -55,7 +68,6 @@ public class GraphicalUserInterface {
 
         this.stage = stage;
         stage.setScene(scene);
-        stage.show();
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -84,7 +96,6 @@ public class GraphicalUserInterface {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        ui.greet();
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -98,12 +109,15 @@ public class GraphicalUserInterface {
 
     }
 
-
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Display GUI and greet user.
      */
+    public void showGui() {
+        stage.show();
+        ui.greet();
+    }
+
+
     private void handleUserInput() {
 
         String userInputText = userInput.getText();
@@ -129,6 +143,11 @@ public class GraphicalUserInterface {
         userInput.clear();
     }
 
+    /**
+     * Displays a given string as a duke reply in the GUI.
+     *
+     * @param dukeReply The given string for duke to reply with.
+     */
     public void displayDukeReply(String dukeReply) {
         Label dukeTextLabel = new Label(dukeReply);
         dukeTextLabel.setPadding(new Insets(0, 0, 0, 10));

@@ -4,8 +4,8 @@ package duke;
 import duke.command.Command;
 import duke.task.TaskList;
 import javafx.application.Application;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 
 /**
  * Duke program implements a basic task bot application. He serves like an efficient butler.
@@ -18,8 +18,6 @@ public class Duke extends Application {
     private TaskList tasks = new TaskList();
     private Ui ui;
     private Storage storage;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Initialises a new Duke object with storage path data/taskList.txt
@@ -73,6 +71,7 @@ public class Duke extends Application {
      * @param args
      */
     public static void main(String[] args) {
+
         Duke duke = new Duke("data/taskList.txt");
         duke.run();
     }
@@ -80,7 +79,8 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
 
-        Duke duke = new Duke();
+        Duke duke = new Duke("data/taskList.txt");
         GraphicalUserInterface gui = new GraphicalUserInterface(stage, duke.ui, duke.tasks, duke.storage);
+        gui.showGui();
     }
 }

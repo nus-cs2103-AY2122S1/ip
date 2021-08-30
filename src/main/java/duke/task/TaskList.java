@@ -4,6 +4,11 @@ package duke.task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * A list of a user's tasks.
+ *
+ * @author Aiken Wong
+ */
 public class TaskList {
 
     private ArrayList<Task> tasks;
@@ -36,6 +41,13 @@ public class TaskList {
         return this.tasks.get(index);
     }
 
+
+    /**
+     * Finds among its members, all tasks with dates that match the given date.
+     *
+     * @param date Date to match.
+     * @return All tasks with matching dates.
+     */
     public TaskList findByDate(LocalDate date) {
 
 
@@ -63,6 +75,12 @@ public class TaskList {
         return foundTasks;
     }
 
+    /**
+     * Finds among its members, all tasks with text that match the given text.
+     *
+     * @param input Text to match.
+     * @return All tasks with matching text.
+     */
     public TaskList findByDescription(String input) {
 
         TaskList foundTasks = new TaskList();

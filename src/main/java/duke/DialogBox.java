@@ -8,14 +8,25 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Class that represent a dialog made in the GUI.
+ *
+ * @author Aiken Wong
+ */
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    /**
+     * Instantiates a DialogBox object.
+     *
+     * @param label The given Label object.
+     * @param imageView The given imageView object
+     */
+    public DialogBox(Label label, ImageView imageView) {
+        text = label;
+        displayPicture = imageView;
 
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
@@ -33,12 +44,26 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    /**
+     * Constructor for a new user DialogBox.
+     *
+     * @param label The given Label object.
+     * @param imageView The given imageView object
+     * @return
+     */
+    public static DialogBox getUserDialog(Label label, ImageView imageView) {
+        return new DialogBox(label, imageView);
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        DialogBox db = new DialogBox(l, iv);
+    /**
+     * Constructor for a new Duke DialogBox.
+     *
+     * @param label The given Label object.
+     * @param imageView The given imageView object
+     * @return
+     */
+    public static DialogBox getDukeDialog(Label label, ImageView imageView) {
+        DialogBox db = new DialogBox(label, imageView);
         db.flip();
         return db;
     }

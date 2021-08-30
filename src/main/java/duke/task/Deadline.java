@@ -6,6 +6,11 @@ import java.time.LocalDateTime;
 import duke.DukeException;
 import duke.Parser;
 
+/**
+ * A task with a done-by date, or due date.
+ *
+ * @author Aiken Wong
+ */
 public class Deadline extends Task {
 
     private static String errorMessage = "Wrong format Sir/Mdm. Dates and times must be given as only a date: DATE\n"
@@ -19,18 +24,38 @@ public class Deadline extends Task {
     protected String taskType = "[D]";
     protected boolean isDateOnly = false;
 
-
+    /**
+     * Constructor for a Deadline.
+     *
+     * @param description The description of the deadline.
+     * @param date The due-date of the deadline.
+     */
     public Deadline(String description, LocalDateTime date) {
         super(description);
         this.date = date;
     }
 
+    /**
+     * Constructor for a Deadline.
+     *
+     * @param description The description of the deadline.
+     * @param date The due-date of the deadline.
+     * @param isDateOnly Represents whether only date is given (without time).
+     */
     public Deadline(String description, LocalDateTime date, boolean isDateOnly) {
         super(description);
         this.date = date;
         this.isDateOnly = isDateOnly;
     }
 
+    /**
+     * Constructor for a Deadline.
+     *
+     * @param description The description of the deadline.
+     * @param date The due-date of the deadline.
+     * @param isDone Represents whether the task has been completed.
+     * @param isDateOnly Represents whether only date is given (without time).
+     */
     public Deadline(String description, LocalDateTime date, boolean isDone, boolean isDateOnly) {
         super(description);
         this.date = date;
@@ -38,7 +63,14 @@ public class Deadline extends Task {
         this.isDateOnly = isDateOnly;
     }
 
-
+    /**
+     * Factory constructor for Deadline. Parses String input to obtain date and/or time for due date.
+     *
+     * @param description The description of the deadline.
+     * @param input The input from the user representing date and/or time.
+     * @return Deadline with the given inputs.
+     * @throws DukeException
+     */
     public static Deadline of(String description, String input) throws DukeException {
 
         String[] dateAndOrTime = input.split(" ");
@@ -58,10 +90,20 @@ public class Deadline extends Task {
         return new Deadline(description, dateTime, isDateOnly);
     }
 
+    /**
+     * Getter for isDateOnly.
+     *
+     * @return Gives isDateOnly
+     */
     public boolean getIsDateOnly() {
         return isDateOnly ? true : false;
     }
 
+    /**
+     * Getter for the current due date.
+     *
+     * @return Current due date.
+     */
     public LocalDateTime getDate() {
         return LocalDateTime.parse(date.toString());
     }
