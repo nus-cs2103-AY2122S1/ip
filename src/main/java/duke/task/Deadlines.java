@@ -34,7 +34,8 @@ public class Deadlines extends Task {
 
     /**
      * Saves the task to the txt file.
-     * Format is as follow: <Type(D)> | <Description> | <Done> | <Datetime>.
+     * Format is as follow: {@literal <}Type(D){@literal >} | {@literal <}Description{@literal >} |
+     * {@literal <}Done{@literal >} | {@literal <}Datetime{@literal >}.
      *
      * @return string to save the txt file.
      */
@@ -45,6 +46,6 @@ public class Deadlines extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + super.getDateTime()  + ")";
+        return "[D]" + super.toString() + " (by: " + super.getDateTime() + ")";
     }
 }

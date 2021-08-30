@@ -12,15 +12,16 @@ import java.util.Date;
  * @since 23 Aug 2021
  */
 public abstract class Task {
+    /** Date format. */
+    private static final String DATETIME = "dd/MM/yy HHmm";
+    private static final SimpleDateFormat formatDateTime = new SimpleDateFormat(DATETIME);
+
     /** Stores the task. */
     private String task;
     /** Stores if the task is done. */
     private boolean isDone;
     /** Stores the date time for the task. */
     private Date dateTime;
-    /** Date format. */
-    private static final String DATETIME = "dd/MM/yy HHmm";
-    private static final SimpleDateFormat formatDateTime = new SimpleDateFormat(DATETIME);
 
     /**
      * Constructor for duke.task.Task.
@@ -78,15 +79,17 @@ public abstract class Task {
      * @return if update is successful.
      */
     public boolean markDone() {
-        if (isDone)
+        if (isDone) {
             return false;
+        }
         isDone = true;
         return true;
     }
 
     /**
      * Returns an output to save to the txt file.
-     * Format is as follow: <Type(T/D/E)> <Description> <Done> <DateTime if applicable>.
+     * Format is as follow: {@literal <}Type(T/D/E){@literal >} | {@literal <}Description{@literal >} |
+     * {@literal <}Done{@literal >} | {@literal <}DateTime if applicable{@literal >}.
      *
      * @return string to save the txt file
      */

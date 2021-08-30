@@ -30,7 +30,7 @@ public enum Keyword {
     /** Separator for spliting up various input. */
     private String separator;
     /** Code for saving task. */
-    private  String saveWord;
+    private String saveWord;
 
     /**
      * Constructor for duke.util.Keyword Enum.

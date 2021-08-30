@@ -22,23 +22,23 @@ public class Parser {
     public static Command parseChat(String message) throws DukeException {
         String command = message.split(" ")[0].toLowerCase();
 
-        if (command.equals(Keyword.EXIT.getKeyword()))
+        if (command.equals(Keyword.EXIT.getKeyword())) {
             return null;
-        else if (command.equals(Keyword.LIST.getKeyword()))
+        } else if (command.equals(Keyword.LIST.getKeyword())) {
             return new ListCommand();
-        else if (command.equals(Keyword.DONE.getKeyword()))
+        } else if (command.equals(Keyword.DONE.getKeyword())) {
             return new DoneCommand(message);
-        else if (command.equals(Keyword.DEADLINE.getKeyword()))
+        } else if (command.equals(Keyword.DEADLINE.getKeyword())) {
             return new DeadlineCommand(message);
-        else if (command.equals(Keyword.EVENTS.getKeyword()))
+        } else if (command.equals(Keyword.EVENTS.getKeyword())) {
             return new EventCommand(message);
-        else if (command.equals(Keyword.TODOS.getKeyword()))
+        } else if (command.equals(Keyword.TODOS.getKeyword())) {
             return new TodoCommand(message);
-        else if (command.equals(Keyword.FIND.getKeyword()))
+        } else if (command.equals(Keyword.FIND.getKeyword())) {
             return new FindCommand(message);
-        else if (command.equals(Keyword.DELETE.getKeyword()))
+        } else if (command.equals(Keyword.DELETE.getKeyword())) {
             return new DeleteCommand(message);
-
+        }
         throw new DukeException("Command not parsable");
     }
 }

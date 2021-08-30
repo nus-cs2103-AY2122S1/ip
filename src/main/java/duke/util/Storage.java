@@ -1,20 +1,20 @@
 package duke.util;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Task;
 import duke.task.ToDos;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class Storage {
     /** File name for the storage. */
-    private final String LOCATION = "./data/duke.txt";
+    private static final String LOCATION_OF_FILE = "./data/duke.txt";
     /** To deals with the errorMessages. */
     private Ui ui;
 
@@ -45,7 +45,7 @@ public class Storage {
      */
     public void exportTask(List<Task> taskList) {
         try {
-            File file = new File(LOCATION);
+            File file = new File(LOCATION_OF_FILE);
             file.getParentFile().mkdirs();
             file.createNewFile();
 
@@ -73,7 +73,7 @@ public class Storage {
      * @return A list of all the task stored.
      */
     public List<Task> importTask() {
-        File file = new File(LOCATION);
+        File file = new File(LOCATION_OF_FILE);
         List<Task> taskList = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader(file);

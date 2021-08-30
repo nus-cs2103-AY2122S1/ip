@@ -1,15 +1,15 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
-import java.text.ParseException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.text.ParseException;
+
+import org.junit.jupiter.api.Test;
+
 public class DeadlinesTest {
     @Test
-    public void toString_parseableDate_success(){
+    public void toString_parseableDate_success() {
         try {
             Deadlines deadline = new Deadlines("CS2103", "21/8/21 1500");
             assertEquals("[D][ ] CS2103 (by: 21/08/21 1500)", deadline.toString());

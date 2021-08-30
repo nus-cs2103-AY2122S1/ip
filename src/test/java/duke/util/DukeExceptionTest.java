@@ -1,12 +1,12 @@
 package duke.util;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DukeExceptionTest {
     @Test
-    public void testExceptionMessage(){
+    public void testExceptionMessage() {
         assertEquals("Hello world", new DukeException("Hello world").getMessage());
     }
 }

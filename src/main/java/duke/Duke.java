@@ -1,13 +1,13 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.command.Parser;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
-import java.util.Scanner;
 
 public class Duke {
     /** For the chatboard to read the user input. */
@@ -41,10 +41,11 @@ public class Duke {
             message = sc.nextLine().strip();
             try {
                 command = Parser.parseChat(message);
-                if (command == null)
+                if (command == null) {
                     isRunning = false;
-                else
+                } else {
                     command.execute(taskList, ui);
+                }
             } catch (DukeException e) {
                 ui.chatErrorMessage();
             }

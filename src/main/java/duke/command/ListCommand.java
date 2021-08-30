@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.util.TaskList;
-import duke.util.Ui;
-import duke.task.Task;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import duke.task.Task;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * Handles the command for list.

@@ -1,8 +1,9 @@
 package duke.util;
 
+import java.util.List;
+
 import duke.task.Task;
 
-import java.util.List;
 
 /**
  * Deals with the interactions with the user. This class only
@@ -19,10 +20,11 @@ public class Ui {
      * @param taskArray To list out all the task.
      */
     public void listTask(String[] taskArray) {
-        if (taskArray.length == 0)
+        if (taskArray.length == 0) {
             printMessage("You have no task.");
-        else
+        } else {
             printMessage(taskArray);
+        }
     }
 
     /**
@@ -232,8 +234,9 @@ public class Ui {
      */
     private void printMessage(String... strings) {
         System.out.println("\t____________________________________________________________");
-        for (String str: strings)
+        for (String str: strings) {
             System.out.println("\t" + str);
+        }
         System.out.println("\t____________________________________________________________");
     }
 

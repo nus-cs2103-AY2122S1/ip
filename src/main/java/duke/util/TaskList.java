@@ -1,13 +1,14 @@
 package duke.util;
 
+import java.text.ParseException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Task;
 import duke.task.ToDos;
 
-import java.text.ParseException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Deals with storing of task as well as operations involving the tasks.
@@ -102,8 +103,9 @@ public class TaskList {
         if (success) {
             saveTaskList();
             ui.doneSuccessMessage(task);
-        } else
+        } else {
             ui.doneFailedMessage(task);
+        }
     }
 
     /**
@@ -129,7 +131,6 @@ public class TaskList {
      * all the tasks.
      *
      * @param s Keyword to search for the task.
-     * @return String list containing all the description of the task.
      */
     public void findTask(String s) {
         List<String> taskFiltered = taskList.stream()

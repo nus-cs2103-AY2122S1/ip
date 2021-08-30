@@ -1,15 +1,16 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
-import java.text.ParseException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.text.ParseException;
+
+import org.junit.jupiter.api.Test;
+
+
 public class EventsTest {
     @Test
-    public void toString_parseableDate_success(){
+    public void toString_parseableDate_success() {
         try {
             Events event = new Events("CS2103", "21/8/21 1500");
             assertEquals("[E][ ] CS2103 (at: 21/08/21 1500)", event.toString());
@@ -30,8 +31,8 @@ public class EventsTest {
         } catch (ParseException e) {
             fail();
         }
-
     }
+
 
     @Test
     public void toString_unparseableDate_exceptionThrown() {
