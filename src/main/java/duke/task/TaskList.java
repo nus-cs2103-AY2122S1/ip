@@ -5,7 +5,6 @@ import java.util.List;
 
 public class TaskList {
     
-    
     private List<Task> items = new ArrayList<>(100);
     
     public TaskList(List<Task> items){
@@ -14,7 +13,8 @@ public class TaskList {
 
     public void list(){
         for(int i = 1; i <= items.size(); i++){
-            System.out.println(i + ". " + items.get(i-1).toString());
+            System.out.println(i + ". "
+                    + items.get(i-1).toString());
         }
         System.out.println("");
     }
@@ -39,9 +39,4 @@ public class TaskList {
         return items.size();
     }
 
-
-    
-
-    
-    
 }

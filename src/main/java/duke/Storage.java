@@ -40,16 +40,19 @@ public class Storage {
                 while (sc.hasNextLine()) {
                     String task = sc.nextLine();
                     if (task.startsWith("T")) {
-                        items.add(new ToDo(task.substring(8), Integer.parseInt(task.substring(4, 5))));
+                        items.add(new ToDo(
+                                task.substring(8), Integer.parseInt(task.substring(4, 5))));
                     } else if (task.startsWith("D")) {
                         String taskSubstring = task.substring((8));
-                        items.add(new Deadline(taskSubstring.substring(0, taskSubstring.indexOf("|")),
+                        items.add(new Deadline(
+                                taskSubstring.substring(0, taskSubstring.indexOf("|")),
                                 taskSubstring.substring(taskSubstring.indexOf("|") + 2),
                                 Integer.parseInt(task.substring(4, 5))
                         ));
                     } else {
                         String taskSubstring = task.substring((8));
-                        items.add(new Event(taskSubstring.substring(0, taskSubstring.indexOf("|")),
+                        items.add(new Event(
+                                taskSubstring.substring(0, taskSubstring.indexOf("|")),
                                 taskSubstring.substring(taskSubstring.indexOf("|") + 2),
                                 Integer.parseInt(task.substring(4, 5))
                         ));
@@ -89,7 +92,7 @@ public class Storage {
         }
     }
     
-    public void fixFileFolderProblems(){
+    private void fixFileFolderProblems(){
         try{
             if(!Files.isDirectory(Path.of(pathFolder))){
                 Files.createDirectory(Path.of(pathFolder));
