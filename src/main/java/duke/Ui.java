@@ -1,12 +1,12 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.command.CommandKeyword;
 import duke.exception.DukeException;
 import duke.task.Task;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user.
@@ -132,8 +132,8 @@ public class Ui {
      */
     public void showDeletedTask(Task task, int totalTasks) {
         if (task != null) {
-            this.printMessage(String.format("Noted. I've removed this task: \n\t%s\n" +
-                    "Now you have %d tasks in the list.", task, totalTasks));
+            this.printMessage(String.format("Noted. I've removed this task: \n\t%s\n"
+                    + "Now you have %d tasks in the list.", task, totalTasks));
         } else {
             this.printMessage("There is no such task to delete!");
         }

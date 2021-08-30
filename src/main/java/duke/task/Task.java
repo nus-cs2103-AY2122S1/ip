@@ -8,9 +8,9 @@ import java.time.format.DateTimeFormatter;
  * Task is an abstract class that provides attributes and methods that are common to all types of task.
  */
 public abstract class Task {
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
     protected String description;
     protected boolean isDone;
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
      * Constructs a task. Should not be used to instantiate Task object because Task is an abstract class.
