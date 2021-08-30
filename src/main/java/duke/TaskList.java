@@ -33,7 +33,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a Task from the taskList.
+     * Deletes a Task from the taskList, using its index in the list.
      *
      * @param number The index of the Task object to be deleted.
      */
@@ -43,7 +43,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a Task from the taskList.
+     * Deletes a Task from the taskList, using its instance.
      *
      * @param task The Task object to be deleted.
      */
@@ -79,9 +79,9 @@ public class TaskList {
             }
         }
         if (list.isEmpty()) {
-            Ui.printNoMatch();
+            Message.printNoMatch();
         } else {
-            Ui.printMatch();
+            Message.printMatch();
             int index = 1;
             for (Task task: list) {
                 System.out.println(index + "." + task.toString());

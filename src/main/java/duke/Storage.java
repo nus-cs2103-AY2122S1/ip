@@ -47,7 +47,7 @@ public class Storage {
             try {
                 new File(directoryPath).mkdir();
             } catch (NullPointerException exception) {
-                Ui.printUnknownError();
+                Message.printUnknownError();
                 return;
             }
         }
@@ -62,15 +62,15 @@ public class Storage {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(dataFile));
             String nextLine;
+
+            //repeatedly add tasks from the file into the ArrayList
             while ((nextLine = reader.readLine()) != null) {
                 taskList.addTask((Parser.parseData(nextLine)));
             }
-        } catch (Exception exception) {
-            if (exception instanceof FileNotFoundException || exception instanceof IOException) {
-                Ui.printFileError();
-            } else {
-                Ui.printUnknownError();
-            }
+
+        } catch (IOException exception) {
+            Message.printReadFileError();
+
         }
     }
 
@@ -81,14 +81,16 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(dataFile);
             StringBuilder string = new StringBuilder();
+            //repeatedly append the task strings until all tasks have been saved
             for (int i = 0; i < taskList.getTaskNumber(); i++) {
                 Task task = taskList.getTask(i);
                 string.append(task.toDataString()).append("\n");
             }
+            //save the string into the file
             writer.write(string.toString());
             writer.close();
         } catch (IOException e) {
-            Ui.printFileError();
+            Message.printFileError();
         }
     }
 

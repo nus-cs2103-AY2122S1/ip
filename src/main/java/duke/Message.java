@@ -6,7 +6,7 @@ package duke;
  *
  * @author Toh Wang Bin
  */
-public class Ui {
+public class Message {
 
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -34,6 +34,8 @@ public class Ui {
     private static final String ADD_TASK_COMPLETION_MESSAGE = "Ok can, sure. I have added this task as you wanted.";
 
     private static final String FILE_ERROR = "An error occurred while processing your data file.";
+
+    private static final String READ_FILE_ERROR = "No save file detected. Creating one for you...";
 
     private static final String UNKNOWN_ERROR = "An unknown error has occurred. Try restarting me!";
 
@@ -123,6 +125,10 @@ public class Ui {
      */
     public static void printFileError() {
         System.out.println(FILE_ERROR);
+    }
+
+    public static void printReadFileError() {
+        System.out.println(READ_FILE_ERROR);
     }
 
     /**
