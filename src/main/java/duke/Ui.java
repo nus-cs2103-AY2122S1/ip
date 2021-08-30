@@ -1,13 +1,13 @@
 package duke;
 
 /**
- * Class responsible for displaying the output messages the bot gives
+ * Class responsible for displaying the output messages the bot gives.
  *
  * @author mrmrinal
  */
 public class Ui {
     /**
-     * Bot greeting which shows up whenever whenever the bot is instantiated
+     * Bot greeting which shows up whenever the bot is instantiated.
      */
     public void dukeGreeting() {
         String name = "JARVIS";
@@ -16,7 +16,7 @@ public class Ui {
     }
 
     /**
-     * Bot message whenever there is an unusual request
+     * Bot message whenever there is an unusual request.
      */
     public void unusualRequest() {
         System.out.println("That is a rather unusual looking request sir.\n"
@@ -25,7 +25,7 @@ public class Ui {
     }
 
     /**
-     * Bot message which will display the output the user wants to show
+     * Bot message which will display the output the user wants to show.
      *
      * @param output String outputted from the CLI
      */
@@ -34,7 +34,7 @@ public class Ui {
     }
 
     /**
-     * Message shown when the bot exists
+     * Message shown when the bot exists.
      */
     public void farewellMessage() {
         System.out.println("Goodbye Sir! Will take good "

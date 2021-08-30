@@ -7,10 +7,10 @@ package duke.task;
  */
 public class Event extends Task {
 
-    protected String at;
+    private final String at;
 
     /**
-     * Creates new Event task
+     * Creates new Event task.
      *
      * @param description Description of Event
      * @param at Time of Event
@@ -21,7 +21,7 @@ public class Event extends Task {
     }
 
     /**
-     * Creates new Event task
+     * Creates new Event task.
      *
      * @param description Description of Event
      * @param at Time of Event
@@ -39,9 +39,9 @@ public class Event extends Task {
     }
 
     @Override
-    public String toStorageString(){
+    public String toStorageString() {
         int done = 0;
-        if(this.isDone){
+        if (this.isDone) {
             done = 1;
         }
         return "E | " + done + " | " +  this.description

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
- * A CLI bot which is based off Duke
+ * A CLI bot which is based off Duke.
  *
  * @author mrmrinal
  */
@@ -37,7 +37,7 @@ public class Duke {
     /**
      * Instantiates a new Dukebot that the user can input commands to.
      * The filePath argument must specify an absolute location to where
-     * the duke.txt file is stored
+     * the duke.txt file is stored.
      *
      * @param filePath String representation of storage path
      */
@@ -49,7 +49,7 @@ public class Duke {
 
 
     /**
-     * Main method that is responsible for launching the bot
+     * Main method that is responsible for launching the bot.
      */
     public static void main(String[] args) {
         new Duke("." +  File.separator + "data"
@@ -93,7 +93,6 @@ public class Duke {
                 break;
 
             }
-            
             userInput = userSc.nextLine();
         }
 
@@ -101,18 +100,22 @@ public class Duke {
         storage.writeToFile(tasks);
     }
 
-
+    /**
+     * Prints the following statement once an action is performed.
+     * 
+     * @param userInput Name of task
+     * @param actionType Type of action
+     */
     public void echo(String userInput, String actionType) {
-        System.out.println("Got it sir, I have "+ actionType + " this task:\n "
+        System.out.println("Got it sir, I have " + actionType + " this task:\n "
                 + userInput + "\nNow you have " + tasks.getSize() + " tasks in the list.\n");
 
     }
     
-    
     private void done(String userInput) {
-        try{
+        try {
             int task = Integer.parseInt(userInput.substring(5));
-            if(task > 0 && task <= tasks.getSize()){
+            if (task > 0 && task <= tasks.getSize()) {
                 tasks.markDone(task - 1);
                 System.out.println("One task down sir. Here is the task I checked off:");
                 System.out.println("    " + tasks.getTask(task).toString() + "\n");
@@ -125,7 +128,7 @@ public class Duke {
     }
     
     private void delete(String userInput) {
-        try{
+        try {
             int task = Integer.parseInt(userInput.substring(7));
             if(task > 0 && task <= tasks.getSize()){
                 Task t = tasks.deleteTask(task);
@@ -138,22 +141,22 @@ public class Duke {
         }
     }
     
-    private void deadline(String userInput){
-        if(userInput.indexOf("/by")  < 11 ){
+    private void deadline(String userInput) {
+        if (userInput.indexOf("/by")  < 11 ) {
             System.out.println("Enter a valid deadline activity description\n");
-        } else if(userInput.length() <= userInput.indexOf("/by") +  4){
+        } else if (userInput.length() <= userInput.indexOf("/by") +  4) {
             System.out.println("Enter a valid deadline time\n");
         } else {
             String description = userInput.substring(9, userInput.indexOf("/by") - 1);
             String by = userInput.substring(userInput.indexOf("/by") + 4);
 
-            try{
+            try {
                 LocalDate time = LocalDate.parse(by);
                 Task t =  new Deadline(description, by);
                 tasks.addTask(t);
                 storage.addNewTask(t);
                 echo(t.toString(), "added");
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Enter a valid date in the format yyyy-mm-dd\n");
             }
         }
@@ -188,14 +191,12 @@ public class Duke {
             System.out.println("Enter a valid todo activity\n");
         }
     }
-
-
-
-    private static void readActivity(String userTask, String taskType) throws DukeException {
-        if(userTask.length() <= 1){
+    
+    private static void readActivity(String userTask, 
+                                     String taskType) throws DukeException {
+        if (userTask.length() <= 1) {
             throw new DukeException("Enter valid " + taskType + " activity\n");
         }
     }
     
-
 }

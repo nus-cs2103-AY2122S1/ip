@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Todo Task class used by bot
+ * Todo Task class used by bot.
  *
  * @author mrmrinal
  */

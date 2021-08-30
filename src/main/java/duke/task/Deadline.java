@@ -1,9 +1,10 @@
 package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class that is used in order to create a new
+ * Class that is used in order to create a new.
  *
  * @author mrmrinal
  */
@@ -24,7 +25,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor to instantiate new deadline object
+     * Constructor to instantiate new deadline object.
      *
      * @param description Description of the deadline task
      * @param by Due date of the deadline task
@@ -36,7 +37,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Method to return String that has been stored in the Arraylist
+     * Method to return String that has been stored in the Arraylist.
      *
      * @return String stored in the ArrayList
      */

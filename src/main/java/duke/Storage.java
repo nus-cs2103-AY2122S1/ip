@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * A class that helps in storing the class offline
+ * A class that helps in storing the class offline.
  *
  * @author mrmrinal
  */
@@ -28,21 +28,26 @@ public class Storage {
     private final String path;
     private static final String pathFolder = "." +  File.separator + "data" + File.separator;
     private final File file;
-    
-    public Storage(String filePath){
+
+    /**
+     * Constructor to create new Storage instance.
+     * 
+     * @param filePath the path of the data.txt file
+     */
+    public Storage(String filePath) { 
         this.path = filePath;
         file = new File(path);
 
     }
 
     /**
-     * Method that loads the offline txt file tasks into the bot
+     * Method that loads the offline txt file tasks into the bot.
      *
      * @return List that the dukebot uses
      */
     public List<Task> loadIntoDuke() {
         List<Task> items = new ArrayList<>();
-        try{
+        try {
             if (!file.createNewFile()) {
                 Scanner sc = new Scanner(file);
                 while (sc.hasNextLine()) {
@@ -68,14 +73,14 @@ public class Storage {
                 }
             }
             return items;
-        } catch (Exception e){
+        } catch (Exception e) {
             fixFileFolderProblems();
             return items;
         }
     }
 
     /**
-     * Adds New task to storage
+     * Adds New task to storage.
      *
      * @param task Task to be added to storage
      */
@@ -89,18 +94,18 @@ public class Storage {
     }
 
     /**
-     * Writes tasks in ArrayList to the offline storage
+     * Writes tasks in ArrayList to the offline storage.
      *
      * @param taskList Tasklist storing all tasks in the bot
      */
-    public void writeToFile(TaskList taskList){
-        try{
+    public void writeToFile(TaskList taskList) {
+        try {
             FileWriter fw = new FileWriter(path, false);
-            PrintWriter pw= new PrintWriter(fw, false);
+            PrintWriter pw = new PrintWriter(fw, false);
             pw.flush();
             pw.close();
             fw.close();
-            for(int i = 0; i < taskList.getSize(); i++){
+            for (int i = 0; i < taskList.getSize(); i++) {
                 String input = taskList.getTask(i + 1).toStorageString();
                 Files.write(Paths.get(path), input.getBytes(), StandardOpenOption.APPEND);
             }
@@ -109,11 +114,11 @@ public class Storage {
         }
     }
     
-    private void fixFileFolderProblems(){
-        try{
-            if(!Files.isDirectory(Path.of(pathFolder))){
+    private void fixFileFolderProblems() {
+        try {
+            if (!Files.isDirectory(Path.of(pathFolder))) {
                 Files.createDirectory(Path.of(pathFolder));
-            } if(!Files.isRegularFile(Path.of(path))){
+            } if (!Files.isRegularFile(Path.of(path))) {
                 Files.createFile(Path.of(path));
             }
         } catch (IOException e) {

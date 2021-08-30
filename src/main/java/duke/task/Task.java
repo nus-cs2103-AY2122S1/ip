@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Task class used by bot
+ * Task class used by bot.
  *
  * @author mrmrinal
  */
@@ -13,7 +13,7 @@ public class Task {
    /**
     * Constructor of task
     *
-    * @param description Description of task
+    * @param description Description of task.
     */
     public Task(String description) {
         this.description = description;
@@ -23,7 +23,7 @@ public class Task {
    /**
     * Constructor of task
     *
-    * @param description Description of task
+    * @param description Description of task.
     * @param done Status of Task
     */
     public Task(String description, int done){
@@ -32,7 +32,7 @@ public class Task {
     }
 
     /**
-     * Get description of task
+     * Get description of task.
      *
      * @return String description of task
      */
@@ -41,42 +41,41 @@ public class Task {
     }
 
     /**
-     * Return status of task as string
+     * Return status of task as string.
      *
-     * @return String status of tassk
+     * @return String status of task
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
     /**
-     * Change task status to done
+     * Change task status to done.
      */
     public void markAsDone() {
         this.isDone = true;
     }
 
     /**
-     * Method to return String that has been stored in the Arraylist
+     * Method to return String that has been stored in the Arraylist.
      *
      * @return String stored in the ArrayList
      */
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription() ;
+        return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 
 
     /**
-     * Method to return String that has been stored in the txt File
+     * Method to return String that has been stored in the txt File.
      *
      * @return String stored in the .txt file
      */
-    public String toStorageString(){
+    public String toStorageString() {
         int done = 0;
-        if(this.isDone){
+        if (this.isDone) {
             done = 1;
         }
         return "T | " + done +  " | " +  this.description + "\n";
     }
-
 }
