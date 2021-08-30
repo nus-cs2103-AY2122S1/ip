@@ -30,7 +30,7 @@ public class Ui {
     private String command;
     
     /**
-     * Class constructor for Duke.Ui.
+     * Class constructor.
      */
     public Ui() {
         sc = new Scanner(System.in);
@@ -78,7 +78,7 @@ public class Ui {
     }
 
     /**
-     * Shows the error message from error contained in Duke.DukeException.
+     * Shows the error message from dukeException class.
      *
      * @return the error message.
      */
@@ -89,7 +89,7 @@ public class Ui {
     /**
      * Displays a specific task that was marked done.
      * 
-     * @param task task marked as done.
+     * @param task the task marked as done.
      */
     public void showMarkTaskDone(Task task) {
         String doneMessage = "Yay, one task down!";

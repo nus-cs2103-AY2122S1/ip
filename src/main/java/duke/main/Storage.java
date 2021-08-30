@@ -19,7 +19,7 @@ import java.util.Scanner;
  * Represents a file to store data, operations to write on the file.
  * 
  * @author Gordon
- * @Since 25/8/21
+ * @version CS2103T, Semester 2
  */
 public class Storage {
     private String filePath;
@@ -39,7 +39,7 @@ public class Storage {
     }
 
     /**
-     * loads all the tasks saved in the storage folder into a tasks arraylist.
+     * Loads all the tasks saved in the storage folder into a tasks arraylist.
      * 
      * @return an arraylist of tasks.
      * @throws IOException
@@ -99,7 +99,8 @@ public class Storage {
     }
 
     /**
-     * stores all the tasks from the tasks array into the storage file.
+     * Stores all the tasks from the tasks array into the storage file.
+     * 
      * @param tasks an arraylist of tasks.
      * @throws IOException
      */

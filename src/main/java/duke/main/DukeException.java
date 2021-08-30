@@ -8,34 +8,36 @@ import java.time.format.DateTimeParseException;
  * Represents exceptions raised in Duke.Duke.
  * 
  * @author Gordon Yit
- * @Version CS2103T, Semester 2.
+ * @version CS2103T, Semester 2.
  */
 public class DukeException extends Exception{
     private String message;
-    private Exception e;
+    private Exception exception;
 
     /**
-     * Class constructor for duke exception class.
+     * Class constructor.
+     * 
+     * @param exception the exception thrown.
      */
-    public DukeException(Exception e) {
-        this.e = e;
+    public DukeException(Exception exception) {
+        this.exception = exception;
     }
     
     /**
-     * Returns the exception message.
-     * @return exception message.
+     * Returns a message notifying user of an error.
+     * 
+     * @return error message.
      */
-
     @Override
     public String getMessage() {
-        if (e instanceof NumberFormatException) {
+        if (exception instanceof NumberFormatException) {
             message = "☹ OH NO!!! The task does not exist.>:(\n";
-        } else if (e instanceof StringIndexOutOfBoundsException || 
-                    e instanceof ArrayIndexOutOfBoundsException) {
+        } else if (exception instanceof StringIndexOutOfBoundsException || 
+                    exception instanceof ArrayIndexOutOfBoundsException) {
             message = "☹ The task description or command is incomplete.:$\n";
-        } else if (e instanceof IOException) {
+        } else if (exception instanceof IOException) {
             message = "☹ OH NO!!! I cannot find the file.\n";
-        } else if (e instanceof DateTimeParseException) {
+        } else if (exception instanceof DateTimeParseException) {
             message = "Please enter a proper date and time format.";
         } else {
             message = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";

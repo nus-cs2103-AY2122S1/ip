@@ -15,6 +15,7 @@ public class TaskList {
 
     /**
      * Class constructor, loads arraylist of tasks from the storage to the tasks arraylist.
+     * 
      * @param tasksStored an arraylist of tasks.
      */
     public TaskList(ArrayList<Task> tasksStored) {
@@ -52,6 +53,7 @@ public class TaskList {
     public Task getTask(int taskIndex) {
         return tasks.get(taskIndex);
     }
+    
     /**
      * Marks the task corresponding to the done. 
      *
@@ -75,7 +77,7 @@ public class TaskList {
     }
     
     /**
-     * finds all the tasks matching the date given. 
+     * Finds all the tasks matching the date given. 
      * 
      * @param date the date of interest.
      * @return an arraylist of tasks which fall on that date.
@@ -98,14 +100,6 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
-    }
-    
-    /**
-     * Provides the number of tasks in the tasks list.
-     * @return size of the tasks arraylist.
-     */
-    public int getNumOfTasks() {
-        return tasks.size();
     }
     
 }
