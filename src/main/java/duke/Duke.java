@@ -15,33 +15,19 @@ public class Duke {
 
     private static final String LINE =
         "     ____________________________________________________________\n";
-    public static TaskList taskList;
-    private Ui ui;
+    public static TaskList taskList = new TaskList(Storage.readDatabase());
+    private Ui ui = new Ui();
 
-    /**
-    * Run Duke and parse user input.
-    */
-    private void run() {
-        ui = new Ui();
-        ui.greet();
-        taskList = new TaskList(Storage.readDatabase());
-
-        while (ui.hasInput()) {
-            String input = ui.nextInput();
-            Parser parser = new Parser(input);
-
-            try {
-                directInput(parser.parse());
-            } catch (UserInputError e) {
-                Duke.renderOutput(e.getMessage());
-            }
-            if (ui.hasEnded()) {
-                break;
-            }
+    public String getResponse(String input) {
+        Parser parser = new Parser(input);
+        String output;
+        try {
+            String[] arr = parser.parse();
+            output = directInput(arr);
+        } catch (UserInputError e) {
+            output = e.getMessage();
         }
-
-        Storage.writeDatabase(taskList.toArrayList());
-        ui.end();
+        return output;
     }
 
     /**
@@ -49,30 +35,43 @@ public class Duke {
     *
     * @param input Array string of user command information.
     */
-    public void directInput(String[] input) {
+    public String directInput(String[] input) {
+        System.out.println("direct input");
+        String output;
         try {
+            System.out.println("enter try");
             String cmd = input[0];
             String details = input.length == 1 ? "" : input[1];
-            if (cmd.equals("bye")) {
-                ui.setEndChat();
-            } else if (cmd.equals("list")) {
-                ui.renderList();
-            } else if (cmd.equals("done")) {
-                ui.markTaskComplete(Integer.parseInt(details));
-            } else if (cmd.equals("todo")) {
-                ui.addNewTask(details, Task.Type.TODO);
-            } else if (cmd.equals("deadline")) {
-                ui.addNewTask(details, Task.Type.DEADLINE);
-            } else if (cmd.equals("event")) {
-                ui.addNewTask(details, Task.Type.EVENT);
-            } else if (cmd.equals("delete")) {
-                ui.deleteTask(Integer.parseInt(details));
-            } else {
+            switch (cmd) {
+            case "bye":
+                output = "bye";
+                break;
+            case "list":
+                output = ui.renderList();
+                break;
+            case "done":
+                output = ui.markTaskComplete(Integer.parseInt(details));
+                break;
+            case "todo":
+                System.out.println("case todo");
+                output = ui.addNewTask(details, Task.Type.TODO);
+                break;
+            case "deadline":
+                output = ui.addNewTask(details, Task.Type.DEADLINE);
+                break;
+            case "event":
+                output = ui.addNewTask(details, Task.Type.EVENT);
+                break;
+            case "delete":
+                output = ui.deleteTask(Integer.parseInt(details));
+                break;
+            default:
                 throw new InvalidInputException();
             }
         } catch (UserInputError e) {
-            Duke.renderOutput(e.getMessage());
+            output = e.getMessage();
         }
+        return output;
     }
 
     /**
@@ -80,14 +79,11 @@ public class Duke {
      *
      * @param op String representing Duke ouput.
      */
-    public static void renderOutput(String op) {
-        System.out.println(LINE);
-        op.lines().forEach(line -> System.out.println("      " + line));
-        System.out.println(LINE);
-    }
-
-    public static void main(String[] args) {
-        Duke bot = new Duke();
-        bot.run();
+    public static String renderOutput(String op) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(LINE);
+        op.lines().forEach(line -> sb.append("      ").append(line));
+        sb.append(LINE);
+        return sb.toString();
     }
 }
