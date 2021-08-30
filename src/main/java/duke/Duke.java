@@ -6,15 +6,12 @@ import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+
 
 /**
  * A chat-bot called Naruto that acts as a task list.
  */
-public class Duke extends Application {
+public class Duke {
     private final Storage storage;
     private final TaskList tasks;
     private final Ui ui;
@@ -60,35 +57,16 @@ public class Duke extends Application {
             }
         }
     }
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
 
-    @Override
-    public void init() {
-        int i = 1 + 1;
-    }
-
-    /**
-     * The main entry point for all JavaFX applications.
-     * The start method is called after the init method has returned,
-     * and after the system is ready for the application to begin running.
-     *
-     * <p>
-     * NOTE: This method is called on the JavaFX Application Thread.
-     * </p>
-     *
-     * @param primaryStage the primary stage for this application, onto which
-     *                     the application scene can be set.
-     *                     Applications may create other stages, if needed, but they will not be
-     *                     primary stages.
-     */
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Naruto Chat-bot!");
-        Label helloWorld = new Label("Hello World!");
-        Scene scene = new Scene(helloWorld, 300, 250);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public String getResponse(String fullCommand) {
+        try {
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.showError(e);
+        } finally {
+            ui.showLines();
+        }
+        return "Duke heard: " + input;
     }
 }
