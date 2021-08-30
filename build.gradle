@@ -57,7 +57,7 @@ group 'main.java.duke'
 version '0.1.0'
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.29'
 }
 
 task appVeyorTest(type: Test) {

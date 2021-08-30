@@ -1,9 +1,9 @@
 package duke.util;
+import java.io.IOException;
 
 import duke.exception.DukeException;
 import duke.exception.UnknownCommandException;
 import duke.task.TaskList;
-import java.io.IOException;
 
 /**
  * Represents a parser object that interprets commands.
@@ -35,4 +35,5 @@ public class Parser {
             throw new UnknownCommandException();
         }
     }
+
 }

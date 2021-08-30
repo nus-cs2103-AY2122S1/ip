@@ -1,7 +1,7 @@
 package duke.util;
 
-import duke.task.TaskList;
 import duke.exception.DukeException;
+import duke.task.TaskList;
 import java.io.IOException;
 
 /**

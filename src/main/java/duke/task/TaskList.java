@@ -1,26 +1,25 @@
 package duke.task;
 
+import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import duke.exception.DukeException;
 import duke.exception.EmptyListException;
 import duke.exception.InvalidDateException;
 import duke.exception.InvalidTaskException;
 import duke.exception.TaskNotFoundException;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Represent a task list object that performs operations on tasks.
  */
 public class TaskList {
-    private final String MESSAGE_DONE = "Nice! (ᵔ.ᵔ) Task done:";
-    private final String MESSAGE_LIST = "Here's your tasks!";
-    private final String MESSAGE_ADD = "Nee added this task:";
-    private final String MESSAGE_DELETE = "Nee has deleted this task:";
-    private final String MESSAGE_FIND = "Nee found matching tasks!";
+    private static final String DONE = "Nice! (ᵔ.ᵔ) Task done:";
+    private static final String LIST = "Here's your tasks!";
+    private static final String ADD = "Nee added this task:";
+    private static final String DELETE = "Nee has deleted this task:";
+    private static final String FIND = "Nee found matching tasks!";
 
     private ArrayList<Task> tasks;
 
@@ -37,7 +36,7 @@ public class TaskList {
      */
     public String formatTask(Task task, int size) {
         String str = (tasks.size() > 1) ? " tasks in the list." : " task in the list.";
-        return (MESSAGE_ADD + "\n  " + task + "\n" + "Nee has " + size + str);
+        return (ADD + "\n  " + task + "\n" + "Nee has " + size + str);
     }
 
     /**
@@ -57,7 +56,7 @@ public class TaskList {
         this.tasks.remove(taskNum - 1);
         // Show number of tasks in list
         String str = (tasks.size() == 1) ? " task in the list." : " tasks in the list.";
-        return (MESSAGE_DELETE + "\n  " + task + "\n" + "Nee has " + tasks.size() + str);
+        return (DELETE + "\n  " + task + "\n" + "Nee has " + tasks.size() + str);
     }
 
     /**
@@ -76,7 +75,7 @@ public class TaskList {
             res.append((i + 1) + ".\t" + this.tasks.get(i) + "\n");
         }
         res.append(tasks.size() + ".\t" + this.tasks.get(tasks.size() - 1));
-        return MESSAGE_LIST + "\n" + res;
+        return LIST + "\n" + res;
     }
 
     /**
@@ -101,7 +100,7 @@ public class TaskList {
         }
         Task task = this.tasks.get(taskNum - 1);
         task.toggleDone();
-        return MESSAGE_DONE + "\n" + "  " + task;
+        return DONE + "\n" + "  " + task;
     }
 
     /**
@@ -191,7 +190,7 @@ public class TaskList {
             res.append((i + 1) + ".\t" + filteredTasks.get(i) + "\n");
         }
         res.append(filteredTasks.size() + ".\t" + filteredTasks.get(filteredTasks.size() - 1));
-        return MESSAGE_FIND + "\n" + res;
+        return FIND + "\n" + res;
     }
 
 }

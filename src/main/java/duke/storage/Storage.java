@@ -1,5 +1,15 @@
 package duke.storage;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidDateException;
 import duke.task.Deadline;
@@ -7,15 +17,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.LocalDateTime;
 
 /**
  * Represents a {@code Storage} object that can load and save data
@@ -126,7 +127,7 @@ public class Storage {
             fw.write(output.toString());
             fw.flush();
             fw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new DukeException("Save file failed!");
         }
     }
