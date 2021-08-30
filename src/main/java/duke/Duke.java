@@ -19,13 +19,13 @@ public class Duke {
     /**
      * The following are private class fields of a Duke instance.
      */
-    private Storage store;
-    private Ui ui;
+    private final Storage store;
+    private final Ui ui;
     private TaskList taskList;
 
-    private Image userAvatar = new Image(this.getClass().getResourceAsStream("/images/UserAvatar.png"));
-    private Image dukeAvatar = new Image(this.getClass().getResourceAsStream("/images/DukeAvatar.png"));
-    private Image dukeAvatarWhenException = new Image(this.getClass()
+    private final Image userAvatar = new Image(this.getClass().getResourceAsStream("/images/UserAvatar.png"));
+    private final Image dukeAvatar = new Image(this.getClass().getResourceAsStream("/images/DukeAvatar.png"));
+    private final Image dukeAvatarWhenException = new Image(this.getClass()
             .getResourceAsStream("/images/DukeAvatar_Exceptions.png"));
 
     /**
