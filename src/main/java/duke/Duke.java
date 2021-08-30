@@ -10,11 +10,6 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    /**
-     * The variants of the Tasks handled by Duke
-     */
-    enum Tasks {DEADLINE, EVENT, TODO}
-
     //path of file containing stored data
     private static final String FILE_PATH = "data/test.txt";
     //path of folder containing data file

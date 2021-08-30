@@ -135,17 +135,17 @@ public class Parser {
 
         //cases for the 3 task types
         if (firstString.equals("todo")) {
-            TaskCreator.createTask(Duke.Tasks.TODO, inputArray, storage, taskList);
+            TaskCreator.createTask(Task.Tasks.TODO, inputArray, storage, taskList);
             return false;
         }
 
         if (firstString.equals("deadline")) {
-            TaskCreator.createTask(Duke.Tasks.DEADLINE, inputArray, storage, taskList);
+            TaskCreator.createTask(Task.Tasks.DEADLINE, inputArray, storage, taskList);
             return false;
         }
 
         if (firstString.equals("event")) {
-            TaskCreator.createTask(Duke.Tasks.EVENT, inputArray, storage, taskList);
+            TaskCreator.createTask(Task.Tasks.EVENT, inputArray, storage, taskList);
             return false;
         }
 

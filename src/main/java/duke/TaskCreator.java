@@ -17,7 +17,7 @@ public class TaskCreator {
      * @param storage The instance of Storage that will save the task in the file.
      * @param taskList The instance of TaskList that will store the task.
      */
-    public static void createTask(Duke.Tasks taskType, String[] array, Storage storage, TaskList taskList) {
+    public static void createTask(Task.Tasks taskType, String[] array, Storage storage, TaskList taskList) {
         //preliminary check if more than 1 string was entered
         if (array.length < 2) {
             //case if no name is entered for the task

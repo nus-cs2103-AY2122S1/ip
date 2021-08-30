@@ -7,6 +7,11 @@ package duke;
  */
 public abstract class Task {
 
+    /**
+     * The variants of the Tasks handled by Duke
+     */
+    enum Tasks {DEADLINE, EVENT, TODO}
+
     //A description of the task
     String name;
     //A boolean signifying if the task has been completed
