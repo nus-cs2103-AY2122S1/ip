@@ -1,22 +1,24 @@
 package duke.core;
 
+import java.util.Scanner;
+
+import duke.command.Commandable;
+import duke.exception.DukeException;
+
 /**
  * Encapsulates the Main Program where Duke is run.
  *
  * @author Clifford
  */
-
-import duke.command.Commandable;
-import duke.exception.DukeException;
-
-import java.util.Scanner;
-
 public class Duke {
+    private static final String TASKS_FILE_PATH = "bin/data/tasks.txt";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    private static final String TASKS_FILE_PATH = "bin/data/tasks.txt";
 
+    /**
+     * Initialises Duke for whole application to run
+     */
     public Duke() {
         ui = new Ui();
         try {
@@ -28,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the whole application
+     */
     public void run() {
         ui.greetUser();
         boolean isExit = false;

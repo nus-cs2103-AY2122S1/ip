@@ -8,9 +8,15 @@ import duke.exception.DukeException;
 public class FindCommand implements Commandable {
     private String word;
 
+    /**
+     * Initialises the FindCommand.
+     *
+     * @param description the user input
+     * @throws DukeException if user passes in more than one keyword
+     */
     public FindCommand(String description) throws DukeException {
         String[] wordArray = description.split(" ");
-        if(wordArray.length > 1) {
+        if (wordArray.length > 1) {
             throw new DukeException("I can only find using ONE keyword, you have too many!");
         }
         this.word = wordArray[0];

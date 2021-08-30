@@ -1,9 +1,8 @@
 package duke.task;
 
-import java.time.format.DateTimeParseException;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * <h1> Deadline </h1>
@@ -12,11 +11,19 @@ import java.time.LocalDateTime;
  * @author Clifford
  */
 public class Deadline extends Task {
-    protected static final String TASK_SYMBOL = "[D]";
-    protected LocalDateTime dateTime;
     protected static final DateTimeFormatter PARSE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
+    protected static final String TASK_SYMBOL = "[D]";
+    protected LocalDateTime dateTime;
 
+    /**
+     * Initialises a deadline tasks with the description of the task and expected
+     * date of completion.
+     *
+     * @param description the task description
+     * @param dateTime expected date of completion of the task
+     * @throws DateTimeParseException
+     */
     public Deadline(String description, String dateTime) throws DateTimeParseException {
         super(description, TASK_SYMBOL);
         this.dateTime = LocalDateTime.parse(dateTime.trim(), PARSE_FORMAT);

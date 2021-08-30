@@ -7,24 +7,21 @@ package duke.core;
  * @author Clifford
  */
 public class Ui {
-    private static final String LOGO =
-            " ____        _        \n" +
-            "|  _ \\ _   _| | _____ \n" +
-            "| | | | | | | |/ / _ \\\n" +
-            "| |_| | |_| |   <  __/\n" +
-            "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String HORIZONTAL_SEPARATOR =
             "------------------------------------------------------------------------";
 
     /**
      * Greets user when the user starts up the program.
-     *
-     * @return a welcome message when user starts interacting with ChatBot
      */
     public void greetUser() {
-        formatDisplay("Hello from\n" + LOGO +
-                "Hello! I'm Duke!\nHow may I be of service to you?");
+        formatDisplay("Hello from\n" + LOGO
+                + "Hello! I'm Duke!\nHow may I be of service to you?");
     }
 
     /**

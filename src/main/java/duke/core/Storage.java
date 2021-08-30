@@ -1,11 +1,11 @@
 package duke.core;
 
-import duke.exception.DukeException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import duke.exception.DukeException;
 
 /**
  * Encapsulates the Storage class which saves and retrieves tasks in Duke to and from file.

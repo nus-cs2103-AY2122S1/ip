@@ -1,15 +1,15 @@
 package duke.core;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.exception.DukeException;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Encapsulates a checkList which can hold 100 tasks, display task information, add, delete, mark
@@ -18,17 +18,24 @@ import java.util.Scanner;
  * @author Clifford
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
     private static final int TASKS_LIMIT = 100;
+    private ArrayList<Task> tasks;
     private int currentIdx;
     private Storage tasksStorage;
 
+    /**
+     *
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
         this.currentIdx = 0;
         this.tasksStorage = null;
     }
 
+    /**
+     *
+     * @param tasksStorage
+     */
     public TaskList(Storage tasksStorage) {
         this.tasks = new ArrayList<>();
         this.currentIdx = 0;
@@ -42,16 +49,15 @@ public class TaskList {
      */
     public void retrieveTasks() throws DukeException {
         File taskData = this.tasksStorage.retrieveTasks();
-        if (taskData == null || tasksStorage == null) {
-            return ;
-        }
-        try {
-            Scanner sc = new Scanner(taskData);
-            while (sc.hasNext()) {
-                record(Task.createTaskFromText(sc.nextLine()));
+        if (taskData != null && tasksStorage != null) {
+            try {
+                Scanner sc = new Scanner(taskData);
+                while (sc.hasNext()) {
+                    record(Task.createTaskFromText(sc.nextLine()));
+                }
+            } catch (IOException e) {
+                throw new DukeException("File could not be read by the taskList. :(");
             }
-        } catch (IOException e) {
-            throw new DukeException("File could not be read by the taskList. :(");
         }
     }
 
@@ -62,10 +68,9 @@ public class TaskList {
      * @throws DukeException if there is an IOException when handling the file
      */
     public void saveTasks() throws DukeException {
-        if (tasksStorage == null) {
-            return ;
+        if (tasksStorage != null) {
+            this.tasksStorage.saveTasks(this.convertTasksToText());
         }
-        this.tasksStorage.saveTasks(this.convertTasksToText());
     }
 
     /**
@@ -232,7 +237,7 @@ public class TaskList {
     public String findTasks(String searchWord) throws DukeException {
         TaskList matchList = new TaskList();
         for (int i = 0; i < currentIdx; i++) {
-            if(tasks.get(i).toString().indexOf(searchWord) != -1) {
+            if (tasks.get(i).toString().indexOf(searchWord) != -1) {
                 matchList.record(tasks.get(i));
             }
         }
