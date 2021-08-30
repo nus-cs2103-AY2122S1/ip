@@ -44,11 +44,11 @@ public class Task {
         for (int i = 0; i < TaskList.getTaskList().size(); i++) {
             if (i == 0) {
                 writeToFile("data/jarvis.txt", (i + 1) + "." +
-                        TaskList.getTaskList().get(i).toString()
+                        TaskList.getTaskList().get(i).toPrintToFile()
                         + System.lineSeparator());
             } else {
                 appendToFile("data/jarvis.txt", (i + 1) + "." +
-                        TaskList.getTaskList().get(i).toString()
+                        TaskList.getTaskList().get(i).toPrintToFile()
                         + System.lineSeparator());
             }
         }
