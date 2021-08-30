@@ -141,7 +141,7 @@ public class Ui {
 
                         System.out.println(linebreakstart);
                         System.out.println("Uwu! Addewd yourw taskws:\n");
-                        System.out.println(tasklist.lastAddedTask() + '\n');
+                        System.out.println("   " + tasklist.lastAddedTask() + '\n');
                         System.out.println("Youw noww havew "
                                 + (tasklist.getTaskCounter())
                                 + " taskw(s) inw thew wist! uwu\n");

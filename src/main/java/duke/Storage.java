@@ -48,10 +48,21 @@ public class Storage {
                     } else if (strparse[0].equals("T")) {
                         tasklist.addReadTodo(strparse[2], Integer.parseInt(strparse[1]));
                     } else if (strparse[0].equals("D")) {
-                        tasklist.addReadDeadline(strparse[2], Integer.parseInt(strparse[1]), strparse[3]);
+                        if (strparse.length < 4) {
+                            tasklist.addReadDeadline(strparse[2],
+                                    Integer.parseInt(strparse[1]), strparse[3], null);
+                        } else {
+                            tasklist.addReadDeadline(strparse[2],
+                                    Integer.parseInt(strparse[1]), strparse[3], strparse[4]);
+                        }
                     } else if (strparse[0].equals("E")) {
-                        tasklist.addReadEvent(strparse[2], Integer.parseInt(strparse[1]), strparse[3]);
-                    }
+                        if (strparse.length < 4) {
+                            tasklist.addReadEvent(strparse[2],
+                                    Integer.parseInt(strparse[1]), strparse[3], null);
+                        } else {
+                            tasklist.addReadEvent(strparse[2],
+                                    Integer.parseInt(strparse[1]), strparse[3], strparse[4]);
+                        }                    }
                 }
                 return tasklist;
             } catch (DukeException e) {

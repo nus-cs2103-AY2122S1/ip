@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -13,6 +14,7 @@ public class Task {
     protected String taskString;
     protected boolean isDone;
     protected LocalDate date;
+    protected LocalTime time;
 
     /**
      * Constructor to initialize Deadline.
@@ -29,7 +31,7 @@ public class Task {
      * Is blank because Todo doesn't have a Time. Is Overwritten in Event and Deadline.
      * @return ""
      */
-    public String getTime() {
+    public String getDate() {
         return "";
     }
 
@@ -38,8 +40,25 @@ public class Task {
      * Occurs when wanting to convert date to simplified form for saving in file.
      * @return ""
      */
-    public String getTimeStorage() {
+    public String getDateTimeStorage() {
         return "";
+    }
+
+    /**
+     * Returns date stored in Task in String form.
+     * Is blank because Todo doesn't have a Time. Is Overwritten in Event and Deadline.
+     * @return ""
+     */
+    public String getTime() {
+        return "";
+    }
+
+    /**
+     * Checks if Task has a time.
+     * @return True if task has a time, false if not.
+     */
+    public boolean hasTime() {
+        return (this.time != null);
     }
 
     /**

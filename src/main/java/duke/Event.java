@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -10,18 +11,29 @@ import java.time.temporal.ChronoUnit;
  * @author Ruth Poh
  */
 public class Event extends Task {
-    protected String at;
 
     /**
      * Constructor to initialize Deadline.
      *
      * @param taskstr Task.
-     * @param at Date/Time of task.
+     * @param date Date/Time of task.
      */
-    public Event(String taskstr, LocalDate at) {
+    public Event(String taskstr, LocalDate date) {
         super(taskstr);
-        this.at = at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        super.date = at;
+        super.date = date;
+        super.time = null;
+    }
+
+    /**
+     * Constructor to initialize Event. With time.
+     * @param taskstr Task.
+     * @param date Date/Time of task.
+     * @param time Time of task.
+     */
+    public Event(String taskstr, LocalDate date, LocalTime time) {
+        super(taskstr);
+        super.date = date;
+        super.time = time;
     }
 
     /**
@@ -29,25 +41,51 @@ public class Event extends Task {
      * @return Time Event occurs at.
      */
     @Override
-    public String getTime() {
-        return this.at;
+    public String getDate() {
+        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
-     * Returns simplified time Event occurs at, in String form.
-     * @return Simplified time Event occurs at.
+     * Returns time Event occurs at.
+     * @return
      */
     @Override
-    public String getTimeStorage() {
-        return this.date.toString();
+    public String getTime() {
+        if (this.time == null) {
+            return "";
+        } else {
+            return this.date.toString();
+        }
     }
 
     /**
-     * Returns string of Deadline (Task).
-     * @return string of Deadline.
+     * Returns simplified date and time Event occurs at, in String form.
+     * @return
+     */
+    @Override
+    public String getDateTimeStorage() {
+        if (this.time == null) {
+            return this.date.toString();
+        } else {
+            return this.date.toString() + " | " + this.time.toString();
+        }
+    }
+
+    /**
+     * Returns string of Event (Task).
+     * @return string of Event.
      */
     @Override
     public String toString() {
-        return "[E] " + super.toString() + "(at: " + this.at + ")";
+        Parser parser = new Parser();
+        if (this.time == null) {
+            return "[E] " + super.toString() + "(at: "
+                    + parser.simplifyDate(this.date) + ")";
+        } else {
+            return "[E] " + super.toString() + "(at: "
+                    + parser.simplifyDate(this.date)
+                    + " " + parser.simplifyTime(this.time)
+                    + ")";
+        }
     }
 }

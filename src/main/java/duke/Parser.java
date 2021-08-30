@@ -1,6 +1,8 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -47,8 +49,11 @@ public class Parser {
      */
     public String parseFind(String[] strparse) {
         StringBuilder strb = new StringBuilder();
-        for (int i = 1; i < strparse.length; i ++) {
+        for (int i = 1; i < strparse.length; i++) {
             strb.append(strparse[i]);
+            if (i != strparse.length - 1) {
+                strb.append(" ");
+            }
         }
         return strb.toString();
     }
@@ -95,13 +100,20 @@ public class Parser {
                 i++;
             }
             i++;
-            if (strb.toString().equals("") || i != strparse.length - 1) {
-                throw new IncorrectInputException("deadline", "using 'deadline (task) /by (yyyy-mm-dd format)'");
+            if (strb.toString().equals("") || (i != strparse.length - 1 && i != strparse.length - 2)) {
+                throw new IncorrectInputException("deadline",
+                        "using 'deadline (task) /by yyyy-mm-dd (date) xx:xx (time, optional)'");
             }
-            LocalDate deadline = LocalDate.parse(strparse[i]);
-            return new Deadline(strb.toString(), deadline);
+            LocalDate date = LocalDate.parse(strparse[i++]);
+            if (i == strparse.length - 1) {
+                LocalTime time = LocalTime.parse(strparse[i]);
+                return new Deadline(strb.toString(), date, time);
+            } else {
+                return new Deadline(strb.toString(), date);
+            }
         } catch (DateTimeParseException e) {
-            throw new IncorrectInputException("deadline", "using 'deadline (task) /by (yyyy-mm-dd format)'");
+            throw new IncorrectInputException("deadline",
+                    "using 'deadline (task) /by yyyy-mm-dd (date) xx:xx (time, optional)'");
         }
     }
 
@@ -121,15 +133,54 @@ public class Parser {
                 i++;
             }
             i++;
-            if (strb.toString().equals("") || i != strparse.length - 1) {
-                throw new IncorrectInputException("event", "'event (event) /at (date)'");
+            if (strb.toString().equals("") || (i != strparse.length - 1 && i != strparse.length - 2)) {
+                throw new IncorrectInputException("event",
+                        "using 'event (task) /at yyyy-mm-dd (date) xx:xx (time, optional)'");            }
+            LocalDate date = LocalDate.parse(strparse[i++]);
+            if (i == strparse.length - 1) {
+                LocalTime time = LocalTime.parse(strparse[i]);
+                return new Event(strb.toString(), date, time);
+            } else {
+                return new Event(strb.toString(), date);
             }
-            LocalDate at = LocalDate.parse(strparse[i]);
-            return new Event(strb.toString(), at);
         } catch (DateTimeParseException e) {
-            throw new IncorrectInputException("deadline", "a cowwect (yyyy-mm-dd format)'");
+            throw new IncorrectInputException("event",
+                    "using 'event (task) /at yyyy-mm-dd (date) xx:xx (time, optional)'");
         }
-
     }
 
+    /**
+     * Converts date to readable String format.
+     * @param date Date to be converted.
+     * @return String of readable Date.
+     */
+    public String simplifyDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
+    /**
+     * Converts time to readable String format.
+     * @param time Time to be converted.
+     * @return String of readable time.
+     */
+    public String simplifyTime(LocalTime time) {
+        int hour = time.getHour();
+        int minute = time.getMinute();
+        String hourInString;
+        String minuteInString;
+        String AmOrPm;
+        if (hour < 12) {
+            hourInString = String.valueOf(hour);
+            AmOrPm = "am";
+        } else {
+            hourInString = String.valueOf(hour - 12);
+            AmOrPm = "pm";
+        }
+        if (minute < 10) {
+            minuteInString = "0" + String.valueOf(minute);
+        } else {
+            minuteInString = String.valueOf(minute);
+        }
+        return hourInString + "." + minuteInString + AmOrPm;
+    }
 }

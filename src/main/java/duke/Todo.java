@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -19,6 +20,7 @@ public class Todo extends Task {
     public Todo(String taskstr) {
         super(taskstr);
         super.date = null;
+        super.time = null;
     }
 
     /**

@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -72,11 +73,16 @@ public class TaskList {
      * Adds Deadline Task to TaskList. Occurs when loading from file.
      * @param task String of task.
      * @param isDoneInt Whether task is done or not. 0 is not done, 1 is done.
-     * @param by String of Date deadline task needs to be done by.
+     * @param date Date deadline task needs to be done by.
+     * @param time Time deadline occurs by.
      * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addReadDeadline(String task, int isDoneInt, String by) throws DukeException {
-        taskArr.add(new Deadline(task, LocalDate.parse(by)));
+    public void addReadDeadline(String task, int isDoneInt, String date, String time) throws DukeException {
+        if (time != null) {
+            taskArr.add(new Deadline(task, LocalDate.parse(date)));
+        } else {
+            taskArr.add(new Deadline(task, LocalDate.parse(date), LocalTime.parse(time)));
+        }
         if (isDoneInt == 1) {
             this.markReadDone(this.counter);
         }
@@ -97,12 +103,16 @@ public class TaskList {
      * Adds Event Task to TaskList. Occurs when loading from file.
      * @param task String of task.
      * @param isDoneInt Whether task is done or not. 0 is not done, 1 is done.
-     * @param at String of Date event occurs at.
+     * @param date Date event occurs at.
+     * @param time Time event occurs at.
      * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addReadEvent(String task, int isDoneInt, String at) throws DukeException {
-        taskArr.add(new Event(task.toString(), LocalDate.parse(at)));
-        if (isDoneInt == 1) {
+    public void addReadEvent(String task, int isDoneInt, String date, String time) throws DukeException {
+        if (time != null) {
+            taskArr.add(new Event(task, LocalDate.parse(date)));
+        } else {
+            taskArr.add(new Event(task, LocalDate.parse(date), LocalTime.parse(time)));
+        }        if (isDoneInt == 1) {
             this.markReadDone(this.counter);
         }
         counter++;
@@ -245,10 +255,10 @@ public class TaskList {
             strb.append(taskArr.get(i).getTaskStr());
             if (taskArr.get(i) instanceof Deadline) {
                 strb.append(" | ");
-                strb.append(taskArr.get(i).getTimeStorage());
+                strb.append(taskArr.get(i).getDateTimeStorage());
             } else if (taskArr.get(i) instanceof Event) {
                 strb.append(" | ");
-                strb.append(taskArr.get(i).getTimeStorage());
+                strb.append(taskArr.get(i).getDateTimeStorage());
             } else {
                 // do nothing
             }
