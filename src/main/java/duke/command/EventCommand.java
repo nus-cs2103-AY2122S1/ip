@@ -3,10 +3,13 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.Event;
+import duke.task.TaskList;
 
+/**
+ * Command to add an event into the task list
+ */
 public class EventCommand extends Command {
     public EventCommand() {
         setCommandString("event");
@@ -17,10 +20,12 @@ public class EventCommand extends Command {
      * then creates the event and adds it into the taskList
      *
      * @param input Full user input
+     * @param taskList The list of tasks
+     * @return The response
      * @throws DukeException Any exception caught when executing this command
      */
     @Override
-    public void parse(String input) throws DukeException {
+    public String parse(String input, TaskList taskList) throws DukeException {
         if (input.length() <= getCommandLength()) {
             throw new DukeException("Please input the event's name and date!");
         }
@@ -49,6 +54,6 @@ public class EventCommand extends Command {
         }
 
         Event event = new Event(name, date);
-        Duke.getTaskList().addTask(event);
+        return taskList.addTask(event);
     }
 }

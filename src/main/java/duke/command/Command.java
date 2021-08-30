@@ -1,7 +1,11 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.task.TaskList;
 
+/**
+ * A command keeps track of its string and parses user input using its parse function
+ */
 public abstract class Command {
     private String commandString;
 
@@ -36,7 +40,9 @@ public abstract class Command {
      * Parse the user input based on the command's possible parameters
      *
      * @param input Full user input
+     * @param taskList The list of tasks
+     * @return the response
      * @throws DukeException Any exception handled when executing the command
      */
-    public abstract void parse(String input) throws DukeException;
+    public abstract String parse(String input, TaskList taskList) throws DukeException;
 }

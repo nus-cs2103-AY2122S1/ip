@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Class representing a todo task that can be marked as done
+ */
 public class ToDo extends Task {
     public ToDo(String name) {
         super(name);

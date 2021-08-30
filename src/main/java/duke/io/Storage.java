@@ -7,14 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.TaskList;
 import duke.task.ToDo;
 
+/**
+ * Storage class that manages the saving and loading of the task list
+ */
 public class Storage {
     private final File saveFile;
 
@@ -23,11 +24,11 @@ public class Storage {
     }
 
     /**
-     * Loads the taskList from save.csv
+     * Loads the taskList from the saveFile
      *
      * @return false if the file does not exist, i.e. the user is a new user. true otherwise.
      */
-    public boolean load() {
+    public ArrayList<Task> load() {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
             Scanner sc = new Scanner(saveFile);
@@ -47,20 +48,21 @@ public class Storage {
                     break;
                 }
             }
-            Duke.setTaskList(new TaskList(tasks));
-            return true;
+            return tasks;
         } catch (FileNotFoundException e) {
-            return false;
+            return new ArrayList<>();
         }
     }
 
     /**
      * Saves the taskList into save.csv
      *
-     * @param taskListContent The formatted string representing the tasks in the task list
+     * @param tasks The tasks to be saved
      * @throws DukeException Any exception caught that has to do with the I/O
      */
-    public void save(String taskListContent) throws DukeException {
+    public void save(ArrayList<Task> tasks) throws DukeException {
+        String taskListContent = convertToSaveString(tasks);
+
         try {
             // create the file if it does not exist
             saveFile.createNewFile();
@@ -73,5 +75,29 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
+    }
+
+    /**
+     * Returns a string representing the tasks compliant to the save format
+     *
+     * @param tasks The tasks to be saved
+     * @return a string representing the tasks compliant to the save format
+     */
+    private String convertToSaveString(ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder();
+
+        if (tasks.size() == 0) {
+            return "";
+        }
+
+        for (Task task : tasks) {
+            sb.append(task.getSaveString());
+            sb.append('\n');
+        }
+
+        // remove the last newline character
+        sb.deleteCharAt(sb.length() - 1);
+
+        return sb.toString();
     }
 }

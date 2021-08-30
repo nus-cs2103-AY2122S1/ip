@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
+import duke.stubs.StorageStub;
 
 class TaskListTest {
     @Test
     void addTask() throws DukeException {
-        TaskList taskList = new TaskList();
+        TaskList taskList = new TaskList(new StorageStub());
         Task todo = new ToDo("name");
         Task deadline = new Deadline("name", LocalDate.now());
         Task event = new Event("name", LocalDate.now());
@@ -33,7 +34,7 @@ class TaskListTest {
 
     @Test
     void doTask() throws DukeException {
-        TaskList taskList = new TaskList();
+        TaskList taskList = new TaskList(new StorageStub());
         Task toDo = new ToDo("name");
         taskList.getList().add(toDo);
 
@@ -44,7 +45,7 @@ class TaskListTest {
 
     @Test
     void deleteTask() throws DukeException {
-        TaskList taskList = new TaskList();
+        TaskList taskList = new TaskList(new StorageStub());
         Task toDo = new ToDo("name");
         taskList.getList().add(toDo);
         taskList.deleteTask(1);
@@ -53,7 +54,7 @@ class TaskListTest {
 
     @Test
     void deleteDone() throws DukeException {
-        TaskList taskList = new TaskList();
+        TaskList taskList = new TaskList(new StorageStub());
         Task toDo1 = new ToDo("name");
         Task toDo2 = new ToDo("name");
         taskList.getList().add(toDo1);
@@ -68,7 +69,7 @@ class TaskListTest {
 
     @Test
     void deleteExpired() throws DukeException {
-        TaskList taskList = new TaskList();
+        TaskList taskList = new TaskList(new StorageStub());
         Task deadline1 = new Deadline("name", LocalDate.now());
         Task deadline2 = new Deadline("name", LocalDate.parse("2010-01-01"));
         taskList.getList().add(deadline1);
