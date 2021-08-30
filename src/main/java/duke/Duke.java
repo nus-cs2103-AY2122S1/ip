@@ -21,7 +21,6 @@ public class Duke {
         this.tasks = storage.readFromDatabase();
         Parser parser = new Parser(this.tasks);
         ui = new Ui(parser);
-        storage.ui = ui;
     }
 
     protected void run() {

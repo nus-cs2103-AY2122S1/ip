@@ -9,7 +9,9 @@ import java.util.regex.Pattern;
  */
 public class Task {
 
-    /** Category of task. */
+    /**
+     * Category of task.
+     */
     public enum Type {
         TODO, // task without a date
         EVENT, // task with a start date and end date
@@ -20,6 +22,15 @@ public class Task {
     private final String title;
     private final Type type;
     private boolean isComplete = false;
+
+    protected Task(String title, Type type) {
+        title = title.trim();
+        if (title.length() == 0) {
+            throw new InvalidTaskException("Task description cannot be empty");
+        }
+        this.title = title;
+        this.type = type;
+    }
 
     /**
      * Static factory method for creating Tasks.
@@ -50,9 +61,9 @@ public class Task {
                 endDate = DateParser.parseDateTimeInput(arr[1]);
             } catch (DateTimeParseException e) {
                 throw new InvalidTaskException(
-                        "The two dates for deadline creation could not be parsed. Expected:\n"
-                                + "2 dates separated by ' - '. Dates come in the forms: "
-                                + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' (Time in 24hr format)."
+                    "The two dates for deadline creation could not be parsed. Expected:\n"
+                        + "2 dates separated by ' - '. Dates come in the forms: "
+                        + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' (Time in 24hr format)."
                 );
             }
             return new EventTask(args[0].trim(), startDate, endDate);
@@ -66,23 +77,14 @@ public class Task {
                 date = DateParser.parseDateTimeInput(args[1].trim());
             } catch (DateTimeParseException e) {
                 throw new InvalidTaskException(
-                        "Date for event creation could not be parsed. Expected:\n"
-                                + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' (Time in 24hr format)."
+                    "Date for event creation could not be parsed. Expected:\n"
+                        + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' (Time in 24hr format)."
                 );
             }
             return new DeadlineTask(args[0].trim(), date);
         default:
             throw new InvalidTaskException("Task type not expected.");
         }
-    }
-
-    protected Task(String title, Type type) {
-        title = title.trim();
-        if (title.length() == 0) {
-            throw new InvalidTaskException("Task description cannot be empty");
-        }
-        this.title = title;
-        this.type = type;
     }
 
     /**
@@ -97,7 +99,7 @@ public class Task {
         String[] taskAttr = stringifiedTask.split(Pattern.quote(DELIMITER));
         if (taskAttr.length < 3 || taskAttr.length > 4) {
             throw new IllegalArgumentException(
-                    "This task is not correctly stringified. - " + stringifiedTask
+                "This task is not correctly stringified. - " + stringifiedTask
             );
         }
 
@@ -120,11 +122,11 @@ public class Task {
             break;
         default:
             throw new IllegalArgumentException(
-                    "This task is not correctly stringified. - " + stringifiedTask
+                "This task is not correctly stringified. - " + stringifiedTask
             );
         }
 
-        task.markComplete(isComplete);
+        task.setComplete(isComplete);
         return task;
     }
 
@@ -149,13 +151,13 @@ public class Task {
             throw new IllegalArgumentException("Task type enums inconsistently applied");
         }
         return String.format(
-                "%b%s%s%s%s%s",
-                this.isComplete,
-                DELIMITER,
-                type,
-                DELIMITER,
-                this.title,
-                DELIMITER
+            "%b%s%s%s%s%s",
+            this.isComplete,
+            DELIMITER,
+            type,
+            DELIMITER,
+            this.title,
+            DELIMITER
         );
     }
 
@@ -164,7 +166,7 @@ public class Task {
      *
      * @param isComplete new completion status
      */
-    public void markComplete(boolean isComplete) {
+    public void setComplete(boolean isComplete) {
         this.isComplete = isComplete;
     }
 

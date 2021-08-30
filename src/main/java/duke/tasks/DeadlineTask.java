@@ -9,6 +9,12 @@ public class DeadlineTask extends Task {
 
     private LocalDateTime date;
 
+    /**
+     * Creata new Deadline task.
+     *
+     * @param title description of the task
+     * @param date date the task is to be completed by.
+     */
     public DeadlineTask(String title, LocalDateTime date) {
         super(title, Type.DEADLINE);
         this.date = date;

@@ -1,8 +1,5 @@
 package duke;
 
-import duke.tasks.Task;
-import duke.tasks.TaskList;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,14 +7,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+
 /**
  * Handle database data and operations for Duke.
  * Source of truth for the task list as well as able to write to and read from
  * the database as necessary.
  */
 public class Storage {
-
-    public Ui ui;
 
     /**
      * Checks for the save file, and if it exists, read from it to restore tasks.
@@ -39,14 +37,14 @@ public class Storage {
         try {
             Stream<String> databaseToString = Files.lines(filePath);
             databaseToString.forEach(
-                    taskString -> {
-                        try {
-                            Task task = Task.stringToTask(taskString);
-                            taskArr.add(task);
-                        } catch (IllegalArgumentException e) {
-                            failedParses.add(taskString);
-                        }
+                taskString -> {
+                    try {
+                        Task task = Task.stringToTask(taskString);
+                        taskArr.add(task);
+                    } catch (IllegalArgumentException e) {
+                        failedParses.add(taskString);
                     }
+                }
             );
             databaseToString.close();
         } catch (IOException e) {
@@ -55,9 +53,9 @@ public class Storage {
 
         if (failedParses.size() > 0) {
             String status = String.format(
-                    "Save file was read partially. %d tasks added, %d tasks not understood:\n",
-                    taskArr.size(),
-                    failedParses.size()
+                "Save file was read partially. %d tasks added, %d tasks not understood:\n",
+                taskArr.size(),
+                failedParses.size()
             );
             status += "Failed to parse\n:";
             status += failedParses.stream().map(x -> x + "\n").reduce("", (a, b) -> a + b);
@@ -78,12 +76,12 @@ public class Storage {
         StringBuilder save = new StringBuilder();
 
         taskList
-                .stream()
-                .forEach(x -> save.append(x.taskToString()).append(System.lineSeparator()));
+            .stream()
+            .forEach(x -> save.append(x.taskToString()).append(System.lineSeparator()));
         byte[] saveResult = save.toString().getBytes();
 
-        ui.renderOutput("Saving tasks  - " + filePath);
-        ui.renderOutput("DEBUG: Text to be saved \n" + save);
+        System.out.println("Saving tasks  - " + filePath);
+        System.out.println("DEBUG: Text to be saved \n" + save);
 
         try {
             if (!Files.isDirectory(folderPath)) {
@@ -95,7 +93,7 @@ public class Storage {
             Files.write(filePath, saveResult);
         } catch (IOException e) {
             // Potentially add why it failed (e.g. no write permissions in folder)
-            ui.renderOutput("File could not be saved. - " + e.getMessage());
+            System.out.println("File could not be saved. - " + e.getMessage());
         }
     }
 }

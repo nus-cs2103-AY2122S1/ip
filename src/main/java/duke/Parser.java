@@ -1,11 +1,12 @@
 package duke;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import duke.tasks.InvalidTaskException;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Handles matching input to behaviour and execution action.
@@ -115,10 +116,10 @@ public class Parser {
                 tasks.remove(taskNum - 1);
                 output += "Noted. I have deleted the following:\n    " + task;
                 output += String.format(
-                        "%s\nYou now have %d tasks in the list", output, tasks.size());
+                    "%s\nYou now have %d tasks in the list", output, tasks.size());
                 break;
             case MARK_COMPLETE:
-                task.markComplete(true);
+                task.setComplete(true);
                 output += "Great! I've marked this task as done:\n    " + task;
                 break;
             default:
@@ -127,10 +128,10 @@ public class Parser {
             return output;
         } catch (NumberFormatException err) {
             return "Which task are you interacting with?\n"
-                    + "USAGE:\n{action} {task number}\n"
-                    + "Example: > done 4\n"
-                    + "         > delete 2\n"
-                    + "Try the `list` command to see the list of tasks";
+                + "USAGE:\n{action} {task number}\n"
+                + "Example: > done 4\n"
+                + "         > delete 2\n"
+                + "Try the `list` command to see the list of tasks";
         } catch (IndexOutOfBoundsException err) {
             return "There is no task at that index.";
         }
