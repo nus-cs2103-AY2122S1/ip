@@ -1,13 +1,24 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.task.TaskList;
 import duke.Ui;
 
+/**
+ * Represents a command to list all tasks
+ */
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String USAGE_TEXT = "Usage: list";
 
+    /**
+     * Displays all tasks in given TaskList to the user.
+     *
+     * @param taskList List of tasks.
+     * @param ui User interface.
+     * @param storage Storage of tasks.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         // Show list

@@ -15,10 +15,22 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Represents parser to parse user input
+ */
 public class Parser {
 
+    /** Regex of user input format */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<command>\\S+)(\\s*)(?<args>.*)");
 
+    /**
+     * Returns command invoked by user with parsed arguments to execute.
+     * If command word given by user is invalid, HelpCommand is returned.
+     *
+     * @param userInput User input with command word and arguments to parse.
+     * @return Command to execute.
+     * @throws DukeException if user input does not match BASIC_COMMAND_FORMAT.
+     */
     public static Command parse (String userInput) throws DukeException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
         if (!matcher.matches()) {
@@ -57,6 +69,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns DoneCommand to execute.
+     *
+     * @param args User input argument to determine index of task to mark as done.
+     * @return DoneCommand to execute.
+     * @throws DukeException If there are no arguments given or argument is not an integer.
+     */
     public static Command prepareDone(String args) throws DukeException {
         // Make sure there is argument to determine task to mark as done
         if (args.equals("")) {
@@ -72,6 +91,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns DeleteCommand to execute.
+     *
+     * @param args User input argument to determine index of task to mark delete from tasks.
+     * @return DeleteCommand to execute.
+     * @throws DukeException If there are no arguments given or argument is not an integer.
+     */
     public static Command prepareDelete(String args) throws DukeException {
         // Make sure there is argument to determine task to mark as done
         if (args.equals("")) {
@@ -87,6 +113,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns TodoCommand to execute.
+     *
+     * @param args User input argument of to do task description.
+     * @return TodoCommand to execute.
+     * @throws DukeException If there are no arguments given.
+     */
     public static Command prepareTodo(String args) throws DukeException {
         // Make sure there is argument to record as task
         if (args.equals("")) {
@@ -95,6 +128,13 @@ public class Parser {
         return new TodoCommand(args);
     }
 
+    /**
+     * Returns DeadlineCommand to execute.
+     *
+     * @param args User input argument of deadline task description and date.
+     * @return DeadlineCommand to execute.
+     * @throws DukeException If there are no arguments given, or given in wrong format.
+     */
     public static Command prepareDeadline(String args) throws DukeException {
         // Make sure there is argument to record as task
         if (args.equals("")) {
@@ -116,6 +156,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns EventCommand to execute.
+     *
+     * @param args User input argument of event task description and date.
+     * @return EventCommand to execute.
+     * @throws DukeException If there are no arguments given, or given in wrong format.
+     */
     public static Command prepareEvent(String args) throws DukeException {
         // Make sure there is argument to record as task
         if (args.equals("")) {

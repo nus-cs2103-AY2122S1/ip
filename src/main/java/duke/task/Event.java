@@ -4,15 +4,31 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event
+ */
 public class Event extends Task {
 
-    protected LocalDate dt;
+    protected LocalDate date;
 
-    public Event(String description, LocalDate dt) {
+    /**
+     * Event constructor.
+     * 
+     * @param description Description of event.
+     * @param date Date of event.
+     */
+    public Event(String description, LocalDate date) {
         super(description);
-        this.dt = dt;
+        this.date = date;
     }
 
+    /**
+     * Returns a Event from string input with description and date.
+     *
+     * @param desc_date String input with description and date in
+     *                  '[description] (by: [MMM d yyyy]' format.
+     * @return Event from string input with description and date.
+     */
     public static Event build(String desc_date) {
         desc_date = desc_date.replaceAll("\\(at: (.*)\\)", "/at $1");
         String[] input = desc_date.split(" /at ",2);
@@ -27,6 +43,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dt.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
