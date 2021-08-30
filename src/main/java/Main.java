@@ -1,11 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
 import duke.commands.Deadline;
 import duke.commands.Event;
 import duke.commands.Find;
@@ -17,6 +12,10 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 /**
  * Encapsulates the entire Duke program.
  * Main class contains the storage, ui, tasklist, parser and finder objects,
