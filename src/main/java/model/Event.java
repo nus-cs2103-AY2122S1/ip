@@ -32,6 +32,9 @@ public class Event extends Task implements TimedItem {
         return "[E]" + super.toString() + " (at : " + time.format(formatter) + ")";
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public LocalDateTime getTime() {
         return time;

@@ -45,6 +45,9 @@ public class ParserImpl implements IParser {
         this.ui = ui;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void processInput(String input) {
         // take the next command within a line, inputted using enter

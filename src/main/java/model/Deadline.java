@@ -33,6 +33,9 @@ public class Deadline extends Task implements TimedItem {
         return "[D]" + super.toString() + " (by: " + deadline.format(formatter) + ")";
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public LocalDateTime getTime() {
         return deadline;

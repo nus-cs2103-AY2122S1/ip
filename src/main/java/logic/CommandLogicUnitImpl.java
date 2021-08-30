@@ -37,6 +37,9 @@ public class CommandLogicUnitImpl implements ICommandLogicUnit {
         this.ui = ui;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void processCommand(Command command, Map<String, String> arguments) {
         switch (command) {

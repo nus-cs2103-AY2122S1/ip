@@ -10,11 +10,13 @@ import java.util.List;
  */
 public class UiImpl implements IUi {
     /**
+     * {@inheritDoc}
      * Displays a list for the CLI using --- + ordered list + ---- format.
      *
      * @param list List.
      * @param <T> Parameter, implicitly inferred.
      */
+    @Override
     public <T> void printIndexedList(List<T> list) {
         int numbering = 1;
         StringBuilder string = new StringBuilder();
@@ -37,10 +39,12 @@ public class UiImpl implements IUi {
     }
     
     /**
+     * {@inheritDoc}
      * Displays the sentence for the CLI using ---- + sentence + ----- format.
      *
      * @param sentence String to be printed.
      */
+    @Override
     public void printSentence(String sentence) {
         System.out.println(("\t____________________________________________________________\n"
                 + "\t" + sentence.replace("\n", "\n\t")

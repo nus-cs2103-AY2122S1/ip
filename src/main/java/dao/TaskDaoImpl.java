@@ -23,6 +23,9 @@ public class TaskDaoImpl implements TaskDao {
     private final FileListStorage<Task> taskFileListStorage =
             new FileListStorage<>(Setting.DATA_DIR_PATH + "/" + Setting.DATA_TASKS);
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addTask(Task task) {
         synchronized (this) {
@@ -36,6 +39,9 @@ public class TaskDaoImpl implements TaskDao {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Task deleteTask(int index) {
         if (isInvalidIndex(index)) {
@@ -57,6 +63,9 @@ public class TaskDaoImpl implements TaskDao {
         return null;
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void markDone(int index) {
         if (isInvalidIndex(index)) {
@@ -75,6 +84,9 @@ public class TaskDaoImpl implements TaskDao {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Task getTask(int index) {
         if (isInvalidIndex(index)) {
@@ -90,6 +102,9 @@ public class TaskDaoImpl implements TaskDao {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Task> getAll() {
         try {
@@ -100,6 +115,9 @@ public class TaskDaoImpl implements TaskDao {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Task> getByKeyword(String keyword) {
         try {
@@ -113,6 +131,9 @@ public class TaskDaoImpl implements TaskDao {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getSize() {
         try {
