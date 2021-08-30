@@ -1,11 +1,12 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.exceptions.InvalidDirectoryException;
 import duke.tasks.Task;
 
-import java.util.ArrayList;
 
 /**
  * Tells Duke to reflect the most updated lists of tasks in the current session.
