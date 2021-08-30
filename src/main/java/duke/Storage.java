@@ -1,24 +1,28 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.io.File;
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
-import java.util.ArrayList;
 import java.time.LocalDate;
-import duke.task.*;
+import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Class responsible for saving and loading the data at the start and end of application runs.
  */
 public class Storage {
-    BufferedWriter writer;
-    BufferedReader reader;
-    Path path;
+    private BufferedWriter writer;
+    private BufferedReader reader;
+    private Path path;
 
     /**
      * When a Storage object is initialised, it will create the data directory in the source directory.
@@ -49,7 +53,7 @@ public class Storage {
         if (data == null) {
             return loadedData;
         } else {
-            while(data != null) {
+            while (data != null) {
                 loadedData.add(formatForLoad(data));
                 data = reader.readLine();
             }

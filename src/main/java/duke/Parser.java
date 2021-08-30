@@ -1,8 +1,17 @@
 package duke;
 
-import duke.command.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.MarkDoneCommand;
+import duke.command.SaveCommand;
+
 
 /**
  * Class responsible for parsing and understanding user input.
@@ -13,7 +22,6 @@ public abstract class Parser {
             throw new DukeException("Command has empty description");
         }
     }
-    //TODO exit command is now redudant
 
     /**
      * Takes in a String representing user input, and parses it, producing the appropriate Command.
@@ -24,7 +32,7 @@ public abstract class Parser {
      * @throws NumberFormatException if the user's command has an index that the application does not understand.
      * @throws DateTimeParseException if the user's command has a date that does not match "yyyy-mm-dd" format.
      */
-    public static Command parse(String in) throws DukeException,IndexOutOfBoundsException,
+    public static Command parse(String in) throws DukeException, IndexOutOfBoundsException,
             NumberFormatException, DateTimeParseException {
         if (in.equals("list")) {
             return new ListCommand();
