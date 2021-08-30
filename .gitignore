@@ -1,11 +1,12 @@
 # IDEA files
-/.idea/
+.idea/
 /out/
 /*.iml
 
 # Gradle build files
-/.gradle/
-/build/
+.gradle/
+build/
+build/.gradle
 src/main/resources/docs/
 
 # MacOS custom attributes files created by Finder
