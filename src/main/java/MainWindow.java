@@ -1,3 +1,4 @@
+import iris.Iris;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -15,7 +16,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
 
-    private IrisApplication irisApplication;
+    private Iris iris;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image irisImage = new Image(this.getClass().getResourceAsStream("/images/DaIris.png"));
@@ -25,8 +26,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setIris(IrisApplication irisApplication) {
-        this.irisApplication = irisApplication;
+    public void setIris(Iris iris) {
+        this.iris = iris;
     }
 
     /**
@@ -36,7 +37,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = irisApplication.getResponse(userInput.getText());
+        String response = iris.getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getIrisDialog(response, irisImage)

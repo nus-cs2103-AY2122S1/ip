@@ -46,7 +46,7 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String rawCommand = scanner.nextLine();
                 Command command = Parser.parse(rawCommand);
-                command.runSilently(tasks);
+                command.run(tasks);
             }
         } catch (FileNotFoundException exception) {
             createTaskFile();

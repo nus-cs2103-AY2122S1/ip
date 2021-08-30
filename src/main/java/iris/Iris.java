@@ -8,7 +8,6 @@ import iris.command.Command;
 public class Iris {
     private final Storage storage;
     private final TaskList tasks = new TaskList();
-    private final Ui ui;
 
     /**
      * Creates a new Iris instance
@@ -16,12 +15,11 @@ public class Iris {
      * @param filePath Path to file containing tasks
      */
     public Iris(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         try {
             storage.readTasks(tasks);
         } catch (IrisException exception) {
-            ui.sayError(exception);
+            System.out.println(String.format("An error has occurred: %s", exception.toString()));
         }
     }
 
@@ -29,26 +27,12 @@ public class Iris {
         this("data/tasks.txt");
     }
 
-    /**
-     * Starts an Iris instance
-     */
-    public void run() {
-        ui.sayHello();
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String rawCommand = ui.prompt();
-                Command command = Parser.parse(rawCommand);
-                command.run(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (IrisException exception) {
-                ui.sayError(exception);
-            }
+    public String getResponse(String rawCommand) {
+        try {
+            Command command = Parser.parse(rawCommand);
+            return command.runAndStore(tasks, storage);
+        } catch (IrisException exception) {
+            return exception.getMessage();
         }
-    }
-
-    public static void main(String[] args) {
-        new Iris("data/tasks.txt").run();
     }
 }
