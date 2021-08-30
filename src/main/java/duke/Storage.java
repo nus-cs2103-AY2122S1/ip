@@ -3,7 +3,9 @@ package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,6 +20,7 @@ public class Storage {
 
     /**
      * Constructor for Storage object.
+     *
      * @param filePath the path of the file where
      *                 data of Duke is being stored.
      */

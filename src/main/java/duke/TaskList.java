@@ -13,7 +13,7 @@ public class TaskList {
     /**
      * Constructor for TaskList.
      *
-     * @param fileContents the content of the file used to save data
+     * @param fileContents the content of the file used to save data.
      */
     public TaskList(ArrayList<Task> fileContents) {
         contents = fileContents;
@@ -25,7 +25,7 @@ public class TaskList {
      * If input is valid, it is added; otherwise a reminder message is sent to the
      * user to show what kind of input is valid.
      *
-     * @param userInput the line of user input which contains the task
+     * @param userInput the line of user input which contains the task.
      */
     public static void addTask(String userInput) {
         if (userInput.startsWith("deadline") || userInput.startsWith("event") ||
@@ -105,7 +105,7 @@ public class TaskList {
     /**
      * Finds and returns all tasks containing the userInput.
      *
-     * @param userInput the search request by the user
+     * @param userInput the search request by the user.
      */
     public static void findTask(String userInput) {
         String keyword = userInput.substring(5);

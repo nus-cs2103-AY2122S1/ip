@@ -16,9 +16,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the description of the current Event
+     * Returns the description of the current Event.
      *
-     * @return the description of the current Event
+     * @return the description of the current Event.
      */
     @Override
     public String getDescription() {

@@ -6,7 +6,7 @@ package duke;
  */
 public class Deadline extends Task {
     /**
-     * Constructor for Deadline
+     * Constructor for Deadline.
      *
      * @param description the description of the Deadline object.
      */

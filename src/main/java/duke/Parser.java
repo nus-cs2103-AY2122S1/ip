@@ -18,7 +18,7 @@ public class Parser {
      * Evaluates user input into understandable code for
      * Duke to process. Saves data whenever the TaskList changes.
      *
-     * @param scanner the scanner used to process user input
+     * @param scanner the scanner used to process user input.
      */
     public static void evaluateUserInput(Scanner scanner) {
         String userInput = scanner.nextLine();

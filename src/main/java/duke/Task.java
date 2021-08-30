@@ -54,7 +54,7 @@ public class Task {
     /**
      * Returns the string representation of the task and its completion status.
      *
-     * @return the string representation of the task and its completion status
+     * @return the string representation of the task and its completion status.
      */
     public String printTask() {
         return this.getStatusIcon() + " " + this.getDescription();

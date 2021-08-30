@@ -1,7 +1,8 @@
 package duke;
 
-import java.util.Scanner;
 import java.io.File;
+import java.util.Scanner;
+
 
 /**
  * This class is used to simulate an automatic list creator which saves its data and changes it
@@ -18,7 +19,7 @@ public class Duke {
     private final TaskList tasks;
 
     /**
-     * Constructor for Duke
+     * Constructor for Duke.
      *
      * @param filePath the path of the file to be used when
      *                 starting Duke.

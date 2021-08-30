@@ -37,7 +37,7 @@ public class Ui {
 
     /**
      * Prints the message when user starts up Duke for the first time
-     * (where no file has been created and no contents saved)
+     * (where no file has been created and no contents saved).
      */
     public static void firstTimeMessage() {
         System.out.println("\nNote: This is your first time using Duke. " +
@@ -87,7 +87,7 @@ public class Ui {
     /**
      * Displays the message when user marks a task as completed.
      *
-     * @param task the task that was completed by the user
+     * @param task the task that was completed by the user.
      */
     public static void markTaskMessage(Task task) {
         System.out.println("    ***\n" + "    You have successfully done this task:\n" +
@@ -98,8 +98,8 @@ public class Ui {
      * Displays the message when user adds a task. English slightly differs when list only
      * has 1 task.
      *
-     * @param task the task the user is adding
-     * @param count the size of the TaskList currently
+     * @param task the task the user is adding.
+     * @param count the size of the TaskList currently.
      */
     public static void addTaskMessage(Task task, int count) {
         if (count == 1) {
@@ -116,7 +116,7 @@ public class Ui {
     /**
      * Prints a message when a user removes a task from the list.
      *
-     * @param task the task removed by the user
+     * @param task the task removed by the user.
      */
     public static void removeTaskMessage(Task task) {
         System.out.println("    ***\n" + "    You have successfully removed this task:\n" +
