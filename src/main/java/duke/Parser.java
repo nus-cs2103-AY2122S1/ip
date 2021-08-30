@@ -3,6 +3,7 @@ package duke;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -89,6 +90,23 @@ public class Parser {
             System.out.println(removedTask.toString());
             System.out.println("Now you have " + t.size() + " tasks in the list.");
             s.appendListToFile(t);
+        } else if (input.startsWith("find")) {
+            String keyword = input.substring(5);
+            ArrayList<Task> output = new ArrayList<>();
+            int count = 0;
+            for (Task task: t.getTaskList()) {
+                String desc = task.description.substring(0,task.description.length()-4);
+                String[] splitDesc = desc.split(" ");
+                for (String str: splitDesc) {
+                    if (str.equals(keyword)) {
+                        System.out.println(task.toString());
+                        count = count + 1;
+                    }
+                }
+            }
+            if (count == 0) {
+                System.out.println("OOPS! The task does not exist");
+            }
         } else {
             DukeException e = new NonExistentKeyword();
             System.out.println(e.getMsg());
