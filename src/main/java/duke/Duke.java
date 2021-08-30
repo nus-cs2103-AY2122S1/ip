@@ -1,13 +1,12 @@
 package duke;
 
-import java.util.Scanner;
-
+import duke.gui.Main;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import exception.DukeException;
-
+import javafx.application.Application;
 
 /**
  * Personal Assistant Chat bot to keep track of tasks
@@ -29,100 +28,84 @@ public class Duke {
         this.tasks = new TaskList(this.storage.load());
     }
 
-
     /**
      * Method to run Duke
      */
-    @SuppressWarnings("checkstyle:Regexp")
-    public void run() {
-        //Greet
-        this.ui.greet();
+    public String getResponse(String input) {
+        Parser parser = new Parser();
+        try {
+            Command inputCommand = parser.parseCommand(input);
+            switch (inputCommand) {
 
-        //Get input
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        while (!input.equals("bye")) {
-            Parser parser = new Parser();
-
-            try {
-                Command inputCommand = parser.parseCommand(input);
-
-                switch (inputCommand) {
-                case LIST: {
-                    if (this.tasks.isEmpty()) {
-                        this.ui.showNoTaskMessage();
-                    } else {
-                        this.ui.showTaskList(this.tasks);
-                    }
-                    break;
+            case LIST: {
+                if (this.tasks.isEmpty()) {
+                    return this.ui.showNoTaskMessage();
+                } else {
+                    return this.ui.showTaskList(this.tasks);
                 }
-
-                case DONE: {
-                    int taskNo = parser.getTaskNo(input);
-                    Task doneTask = this.tasks.get(taskNo);
-                    String oldContent = doneTask.toString();
-                    doneTask.markAsDone();
-                    this.storage.editTask(oldContent, doneTask.toString());
-                    this.ui.showDoneMessage(doneTask);
-                    break;
-                }
-
-                case DELETE: {
-                    int taskNo = parser.getTaskNo(input);
-                    Task deletedTask = this.tasks.get(taskNo);
-                    this.tasks.remove(taskNo);
-                    this.storage.deleteTask(deletedTask.toString());
-                    this.ui.showDeleteMessage(deletedTask, this.tasks.size());
-                    break;
-                }
-
-                case TODO: {
-                    String description = parser.parseDescription(input);
-                    Task newTask = new Todo(description);
-                    this.tasks.add(newTask);
-                    this.storage.writeTask(newTask.toString());
-                    this.ui.showAddTaskMessage(newTask, this.tasks.size());
-                    break;
-                }
-
-                case DEADLINE: {
-                    String[] separatedContent = parser.parseDescription(input, "by");
-                    Task newTask = new Deadline(separatedContent[0], separatedContent[1]);
-                    this.tasks.add(newTask);
-                    this.storage.writeTask(newTask.toString());
-                    this.ui.showAddTaskMessage(newTask, this.tasks.size());
-                    break;
-                }
-
-                case EVENT: {
-                    String[] separatedContent = parser.parseDescription(input, "at");
-                    Task newTask = new Event(separatedContent[0], separatedContent[1]);
-                    this.tasks.add(newTask);
-                    this.storage.writeTask(newTask.toString());
-                    this.ui.showAddTaskMessage(newTask, this.tasks.size());
-                    break;
-                }
-
-                case FIND: {
-                    String keyword = parser.parseDescription(input);
-                    this.ui.showMatchMessage(keyword, this.tasks);
-                    break;
-                }
-
-                default: { }
-                }
-                input = sc.nextLine();
-            } catch (DukeException e) {
-                this.ui.showErrorMessage(e);
-                input = sc.nextLine();
             }
-        }
 
-        this.ui.bye();
+            case DONE: {
+                int taskNo = parser.getTaskNo(input);
+                Task doneTask = this.tasks.get(taskNo);
+                String oldContent = doneTask.toString();
+                doneTask.markAsDone();
+                this.storage.editTask(oldContent, doneTask.toString());
+                return this.ui.showDoneMessage(doneTask);
+            }
+
+            case DELETE: {
+                int taskNo = parser.getTaskNo(input);
+                Task deletedTask = this.tasks.get(taskNo);
+                this.tasks.remove(taskNo);
+                this.storage.deleteTask(deletedTask.toString());
+                return this.ui.showDeleteMessage(deletedTask, this.tasks.size());
+            }
+
+            case TODO: {
+                String description = parser.parseDescription(input);
+                Task newTask = new Todo(description);
+                this.tasks.add(newTask);
+                this.storage.writeTask(newTask.toString());
+                return this.ui.showAddTaskMessage(newTask, this.tasks.size());
+            }
+
+            case DEADLINE: {
+                String[] separatedContent = parser.parseDescription(input, "by");
+                Task newTask = new Deadline(separatedContent[0], separatedContent[1]);
+                this.tasks.add(newTask);
+                this.storage.writeTask(newTask.toString());
+                return this.ui.showAddTaskMessage(newTask, this.tasks.size());
+            }
+
+            case EVENT: {
+                String[] separatedContent = parser.parseDescription(input, "at");
+                Task newTask = new Event(separatedContent[0], separatedContent[1]);
+                this.tasks.add(newTask);
+                this.storage.writeTask(newTask.toString());
+                return this.ui.showAddTaskMessage(newTask, this.tasks.size());
+            }
+
+            case FIND: {
+                String keyword = parser.parseDescription(input);
+                return this.ui.showMatchMessage(keyword, this.tasks);
+            }
+
+            case BYE: {
+                return this.ui.bye();
+            }
+
+            default: {
+                return "An error has occurred!";
+            }
+
+            }
+        } catch (DukeException e) {
+            return this.ui.showErrorMessage(e);
+        }
     }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        Application.launch(Main.class, args);
     }
 }

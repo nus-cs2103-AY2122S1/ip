@@ -7,47 +7,49 @@ import exception.DukeException;
  * Deals with interaction with the user
  */
 public class Ui {
-    /**
-     * Greets the user
-     */
 
-    public void greet() {
-        System.out.println("Hello! I'm Duke!\nWhat can I do for you?\n");
-    }
 
     /**
      * Says bye to the user
+     *
+     * @return farewell message
      */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again!");
+    public String bye() {
+        return "Bye. Hope to see you again!";
     }
 
     /**
      * Shows the user the duke error message
      *
      * @param e the exception
+     * @return error message
      */
-    public void showErrorMessage(DukeException e) {
-        System.out.println(e.getMessage());
+    public String showErrorMessage(DukeException e) {
+        return e.getMessage();
     }
 
     /**
      * Informs the user that there are no tasks in the list
+     *
+     * @return no task message
      */
-    public void showNoTaskMessage() {
-        System.out.println("There are no tasks!");
+    public String showNoTaskMessage() {
+        return "There are no tasks!";
     }
 
     /**
      * Shows the user the current task list
      *
      * @param taskList the list of the tasks
+     * @return task list
      */
-    public void showTaskList(TaskList taskList) {
-        System.out.println("Here are the tasks in your list:");
+    public String showTaskList(TaskList taskList) {
+        StringBuilder list = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i < taskList.size() + 1; i++) {
-            System.out.printf("  %d.%s%n", i, taskList.get(i));
+            String s = String.format("  %d.%s%n\n", i, taskList.get(i));
+            list.append(s);
         }
+        return list.toString();
     }
 
     /**
@@ -55,9 +57,10 @@ public class Ui {
      *
      * @param deletedTask the deleted task
      * @param taskListSize the number of tasks in list after deletion
+     * @return delete message
      */
-    public void showDeleteMessage(Task deletedTask, int taskListSize) {
-        System.out.printf("Noted. I've removed this task:\n  %s\nNow you have %d task(s) in the list.%n",
+    public String showDeleteMessage(Task deletedTask, int taskListSize) {
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d task(s) in the list.%n",
                 deletedTask, taskListSize);
     }
 
@@ -66,9 +69,10 @@ public class Ui {
      *
      * @param newTask the task to add to list
      * @param taskListSize the number of tasks in list after adding new task
+     * @return add task message
      */
-    public void showAddTaskMessage(Task newTask, int taskListSize) {
-        System.out.printf("Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.%n",
+    public String showAddTaskMessage(Task newTask, int taskListSize) {
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.%n",
                 newTask, taskListSize);
     }
 
@@ -76,9 +80,10 @@ public class Ui {
      * Informs the user that the task is marked as done
      *
      * @param doneTask the task after marking as done
+     * @return done message
      */
-    public void showDoneMessage(Task doneTask) {
-        System.out.println("Nice! I've marked this task as done:\n  " + doneTask);
+    public String showDoneMessage(Task doneTask) {
+        return "Nice! I've marked this task as done:\n  " + doneTask;
     }
 
     /**
@@ -87,14 +92,16 @@ public class Ui {
      * @param keyword the keyword user enters
      * @param taskList the list of tasks
      */
-    public void showMatchMessage(String keyword, TaskList taskList) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showMatchMessage(String keyword, TaskList taskList) {
+        StringBuilder list = new StringBuilder("Here are the matching tasks in your list:\n");
         int currentNo = 1;
         for (int i = 1; i < taskList.size() + 1; i++) {
             if (taskList.get(i).toString().contains(keyword)) {
-                System.out.printf("  %d.%s%n", currentNo, taskList.get(i));
+                String s = String.format("  %d.%s%n\n", currentNo, taskList.get(i));
                 currentNo++;
+                list.append(s);
             }
         }
+        return list.toString();
     }
 }
