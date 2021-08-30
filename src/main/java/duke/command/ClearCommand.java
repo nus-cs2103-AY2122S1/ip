@@ -23,12 +23,13 @@ public class ClearCommand extends Command {
      * @param tasks the given TaskList.
      * @param ui the given Ui.
      * @param storage the given Storage.
+     * @return the string for the Ui to print.
      * @throws DukeException when something goes wrong with the saving of the TaskList.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.clear();
         storage.save(tasks);
-        ui.printMsg("All entries in the list of tasks have been removed. To undo, type restore");
+        return "All entries in the list of tasks have been removed. To undo, type restore";
     }
 }
