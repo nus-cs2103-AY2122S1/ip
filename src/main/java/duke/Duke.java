@@ -11,7 +11,7 @@ import duke.util.Ui;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: A-CheckStyle. Use CheckStyle
+ * Current Progress: Level-10. Add a GUI to Duke
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
@@ -31,44 +31,25 @@ public class Duke {
      * Takes in the file path to load the save data from store
      */
     public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Store(filePath);
+        this.ui = new Ui();
+        this.storage = new Store(filePath);
+        this.taskList = storage.load();
+    }
+
+    /**
+     * Gets the response from Duke upon receiving user's input command.
+     *
+     * @param input String containing the user's input command.
+     * @return String containing Duke's response to the user's input command.
+     */
+    public String getResponse(String input) {
         try {
-            taskList = storage.load();
+            Command command = Parser.parseCommandString(input, this.taskList, this.storage);
+            return command.execute();
         } catch (DukeException e) {
-            ui.printErrorMessage(e);
-            taskList = new Tasklist();
+            return e.toString();
         }
-    }
-
-    /**
-     * Initializes the Duke chat bot and runs the chat bot
-     *
-     */
-    public void run() {
-        ui.printWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parseCommandString(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printErrorMessage(e);
-            }
-        }
-    }
-
-    /**
-     * Main method for Duke.
-     * Initialises Duke and starts taking in commands from the user.
-     *
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
-
-        new Duke("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt").run();
 
     }
+
 }

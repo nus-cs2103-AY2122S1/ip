@@ -125,37 +125,40 @@ public class Parser {
      * @throws DukeException throws a Duke Exception that might be raised during the parsing of the inputted
      *                       command
      */
-    public static Command parseCommandString(String command) throws DukeException {
+    public static Command parseCommandString(String command, Tasklist currentTaskList, Store storage)
+        throws DukeException {
+
         Command currentCommand = new InvalidCommand();
         String[] checkCommand = command.split(" ", 2);
         switch(checkCommand[0]) {
         case "todo":
-            currentCommand = new AddCommand(checkDescription(checkCommand, "todo"), "todo");
+            currentCommand = new AddCommand(currentTaskList, checkDescription(checkCommand, "todo"), "todo");
             break;
         case "event":
-            currentCommand = new AddCommand(checkDescription(checkCommand, "event"), "event");
+            currentCommand = new AddCommand(currentTaskList, checkDescription(checkCommand, "event"), "event");
             break;
         case "deadline":
-            currentCommand = new AddCommand(checkDescription(checkCommand, "deadline"), "deadline");
+            currentCommand = new AddCommand(currentTaskList, checkDescription(checkCommand, "deadline"), "deadline");
             break;
         case "delete":
             int deleteTaskNumber = checkInteger(checkCommand, "deleting task");
-            currentCommand = new DeleteCommand(deleteTaskNumber);
+            currentCommand = new DeleteCommand(currentTaskList, deleteTaskNumber);
             break;
         case "done":
             int doneTaskNumber = checkInteger(checkCommand, "marking of task");
-            currentCommand = new MarkCommand(doneTaskNumber);
+            currentCommand = new MarkCommand(currentTaskList, doneTaskNumber);
             break;
         case "list":
-            currentCommand = new ListCommand();
+            currentCommand = new ListCommand(currentTaskList);
             break;
         case "filter":
-            currentCommand = new FindCommand(checkSearchTerm(command.split(" "), "filter"));
+            currentCommand = new FindCommand(currentTaskList, checkSearchTerm(command.split(" "), "filter"));
             break;
         case "help":
             currentCommand = new HelpCommand();
             break;
         case "bye":
+            storage.saveTasksToStore(currentTaskList);
             currentCommand = new ExitCommand();
             break;
         default:

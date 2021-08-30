@@ -1,9 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.util.Store;
-import duke.util.Tasklist;
-import duke.util.Ui;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
@@ -30,15 +27,22 @@ public class HelpCommand extends Command {
     /**
      * Executes the help command. Prints the help message for the user.
      *
-     * @param list Tasklist of current tasks
-     * @param ui Ui which prints any successful message from the associated methods
-     * @param storage Current Storage of DUke
      * @throws DukeException throws an exception if any Duke Error occurs while running
      *                       the associated methods
      */
     @Override
-    public void execute(Tasklist list, Ui ui, Store storage) throws DukeException {
-        ui.printHelpMessage();
+    public String execute() throws DukeException {
+        String helpString = "Here are the following commands Duke.util.Duke accepts:\n"
+                + "todo - adds a todo task, type 'todo' followed by a description\n"
+                + "event - adds a event task, type 'todo' followed by a description and event duration\n"
+                + "deadline - adds a deadline task, type 'deadline' followed by a description and event due date\n"
+                + "list - shows the current task list\n"
+                + "done - marks a task in the task list as complete, type 'done' followed by an integer\n"
+                + "delete - deletes a task in the task list, type 'delete' followed by an integer\n"
+                + "filter - filter task lists for tasks through searching for a keyword\n"
+                + "bye - exits the duke chat bot and saves all task in the task list to the hard disk";
+
+        return helpString;
 
     }
 

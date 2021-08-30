@@ -39,10 +39,8 @@ public class Store {
      * Loads tasks in hard disk to current task list
      *
      * @return Tasklist returns a tasklist of all tasks stored in the hard drive
-     * @throws FileWritingException throws an Duke.util.Duke.exception.FileWritingException if error encountered during
-     *                              loading of tasks
      */
-    public Tasklist load() throws FileWritingException {
+    public Tasklist load() {
         Tasklist result;
         try {
 
@@ -66,8 +64,8 @@ public class Store {
             reader.close();
             result = storeList;
 
-        } catch (IOException e) {
-            throw new FileWritingException();
+        } catch (IOException | FileWritingException e) {
+            result = new Tasklist();
         }
         return result;
     }

@@ -1,9 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.util.Store;
 import duke.util.Tasklist;
-import duke.util.Ui;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
@@ -18,23 +16,29 @@ import duke.util.Ui;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
+    private Tasklist list;
 
-    public ListCommand() {
+    /**
+     * Constructor for ListCommand.
+     * Command that informs ui to print out the current task list
+     */
+    public ListCommand(Tasklist list) {
+
+        this.list = list;
 
     }
 
     /**
      * Executes the list command. Prints the current task list for the user.
      *
-     * @param list Tasklist of current tasks
-     * @param ui Ui which prints any successful message from the associated methods
-     * @param storage Current Storage of DUke
      * @throws DukeException throws an exception if any Duke Error occurs while running
      *                       the associated methods
      */
     @Override
-    public void execute(Tasklist list, Ui ui, Store storage) throws DukeException {
-        ui.printMessage("Here are the tasks in your list:\n" + list.toString());
+    public String execute() throws DukeException {
+
+        String listString = "Here are the tasks in your list:\n" + list.toString();
+        return listString;
 
     }
 }

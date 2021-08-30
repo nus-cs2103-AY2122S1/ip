@@ -1,9 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.util.Store;
-import duke.util.Tasklist;
-import duke.util.Ui;
 
 /**
  * CS2103T Individual Project AY 21/22 Sem 1
@@ -29,12 +26,9 @@ public abstract class Command {
     /**
      * Executes the command and runs any methods that is related to the command.
      *
-     * @param list Tasklist of current tasks
-     * @param ui Ui which prints any successful message from the associated methods
-     * @param storage Current Storage of DUke
      * @throws DukeException throws an exception if any Duke Error occurs while running
      *                       the associated methods
      */
-    public abstract void execute(Tasklist list, Ui ui, Store storage) throws DukeException;
+    public abstract String execute() throws DukeException;
 
 }

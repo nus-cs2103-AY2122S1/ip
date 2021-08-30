@@ -17,9 +17,11 @@ public class ParserTest {
     public void testParseCommandString_exitCommand_returnExitCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
+        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Tasklist tempList = new Tasklist();
         try {
 
-            finalCommand = parser.parseCommandString("bye");
+            finalCommand = parser.parseCommandString("bye", tempList, storage);
 
         } catch (DukeException e) {
 
@@ -33,9 +35,11 @@ public class ParserTest {
     public void testParseCommandString_invalidCommand_returnInvalidCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
+        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Tasklist tempList = new Tasklist();
         try {
 
-            finalCommand = parser.parseCommandString("diwjiewjiqjeq");
+            finalCommand = parser.parseCommandString("diwjiewjiqjeq", tempList, storage);
 
         } catch (DukeException e) {
 
@@ -49,9 +53,11 @@ public class ParserTest {
     public void testParseCommandString_todoTask_returnAddCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
+        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Tasklist tempList = new Tasklist();
         try {
 
-            finalCommand = parser.parseCommandString("todo test123");
+            finalCommand = parser.parseCommandString("todo test123", tempList, storage);
 
         } catch (DukeException e) {
 
@@ -65,9 +71,12 @@ public class ParserTest {
     public void testParseCommandString_deadlineTask_returnAddCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
+        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Tasklist tempList = new Tasklist();
         try {
 
-            finalCommand = parser.parseCommandString("deadline test123 /by 2020-Aug-20 21:00");
+            finalCommand = parser.parseCommandString("deadline test123 /by 2020-Aug-20 21:00", tempList,
+                storage);
 
         } catch (DukeException e) {
 
@@ -81,9 +90,12 @@ public class ParserTest {
     public void testParseCommandString_eventTask_returnAddCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
+        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Tasklist tempList = new Tasklist();
         try {
 
-            finalCommand = parser.parseCommandString("event test123 /by 2020-Aug-20 21:00 to 21-Sep-2021 17:00");
+            finalCommand = parser.parseCommandString(
+            "event test123 /by 2020-Aug-20 21:00 to 21-Sep-2021 17:00", tempList, storage);
 
         } catch (DukeException e) {
 
@@ -97,9 +109,11 @@ public class ParserTest {
     public void testParseCommandString_invalidTask_returnInvalidCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
+        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Tasklist tempList = new Tasklist();
         try {
 
-            finalCommand = parser.parseCommandString("todo    ");
+            finalCommand = parser.parseCommandString("todo    ", tempList, storage);
 
         } catch (DukeException e) {
 
@@ -113,9 +127,11 @@ public class ParserTest {
     public void testParseCommandString_markTask_returnMarkCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
+        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Tasklist tempList = new Tasklist();
         try {
 
-            finalCommand = parser.parseCommandString("done 2");
+            finalCommand = parser.parseCommandString("done 2", tempList, storage);
 
         } catch (DukeException e) {
 
@@ -129,9 +145,11 @@ public class ParserTest {
     public void testParseCommandString_deleteTask_returnDeleteCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
+        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Tasklist tempList = new Tasklist();
         try {
 
-            finalCommand = parser.parseCommandString("delete 2");
+            finalCommand = parser.parseCommandString("delete 2", tempList, storage);
 
         } catch (DukeException e) {
 
@@ -145,9 +163,11 @@ public class ParserTest {
     public void testParseCommandString_invalidInteger_returnInvalidCommand() {
         Parser parser = new Parser();
         Command finalCommand = new InvalidCommand();
+        Store storage = new Store("/Users/keithtan/Desktop/NUS/CS2103 IP/ip/data/duke.txt");
+        Tasklist tempList = new Tasklist();
         try {
 
-            finalCommand = parser.parseCommandString("done dfadjowe");
+            finalCommand = parser.parseCommandString("done dfadjowe", tempList, storage);
 
         } catch (DukeException e) {
 
