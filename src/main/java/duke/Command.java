@@ -53,7 +53,11 @@ public class Command {
         Scanner scanner = new Scanner(System.in);
         boolean hasNextCommand = true;
         while (hasNextCommand) {
-            String command = scanner.nextLine();
+            String command = "";
+            if (!scanner.hasNextLine()) {
+                break;
+            }
+            command = scanner.nextLine();
             String action = this.parser.parseCommand(command);
             hasNextCommand = runNextCommand(action, command);
         }
