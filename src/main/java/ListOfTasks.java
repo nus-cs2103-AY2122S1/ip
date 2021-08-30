@@ -3,9 +3,11 @@ import java.util.ArrayList;
 public class ListOfTasks {
     private static int count;
     private ArrayList<Task> xs;
+    private Ui ui;
 
     public ListOfTasks() {
         //this.xs = new Task[100];
+        ui = new Ui();
         this.xs = new ArrayList<>();
         this.count = 0;
     }
@@ -15,25 +17,25 @@ public class ListOfTasks {
     }
 
     public void includeAdditionalTask(Task x) {
-            xs.add(this.count,x);
-            count++;
+        xs.add(this.count,x);
+        count++;
     }
 
     public void addTask(String information) {
-            System.out.println("     Got it. I've added this task:");
-            information = removeVal(information, "todo");
-            xs.add(count, new ToDo(information, "TODO"));
-            CompilationOfFiles.updateSavedFile(this.xs.get(count), "TODO");
-            System.out.println("       " + this.xs.get(count).toString());
-            count++;
-            System.out.println("     Now you have " + count + " task" + ((count > 1) ? "s" : "") + " in the list.");
+        ui.addTaskMessage();
+        information = removeVal(information, "todo");
+        xs.add(count, new ToDo(information, "TODO"));
+        CompilationOfFiles.updateSavedFile(this.xs.get(count), "TODO");
+        ui.printCurrentTask(xs.get(count));
+        count++;
+        ui.printNumberOfTasks(count);
     }
 
     public void listOut() {
-        System.out.println("     Here are the tasks in your list:");
+        ui.listTaskMessage();
         int a = 0;
         while (a < count) {
-            System.out.println("     " + ( a + 1 ) + ". " + this.xs.get(a).toString() );
+            ui.listEachTask(xs,a);
             a = a + 1;
         }
     }
@@ -44,18 +46,16 @@ public class ListOfTasks {
             int a;
             a = Integer.parseInt(command);
             a = a - 1;
-
             if (a < count && a >= 0) {
                 this.xs.get(a).isDone();
                 CompilationOfFiles.updateFile(this.xs);
-                System.out.println("     Nice! I've marked this task as done!");
-                System.out.println("     " + this.xs.get(a).toString());
-
+                ui.printDoneMessage();
+                ui.printCurrentTask(this.xs.get(a));
             } else {
-                System.out.println("     Invalid task number. Please try again.");
+                ui.printInvalidTaskNumber();
             }
         } catch (NumberFormatException e) {
-            System.out.println("     Invalid task number. Please try again.");
+            ui.printInvalidTaskNumber();
         }
     }
     public void delete(String command) {
@@ -68,16 +68,15 @@ public class ListOfTasks {
             if (a < count && a >= 0) {
                 Task deletedVal = this.xs.remove(a);
                 CompilationOfFiles.updateFile(this.xs);
-                System.out.println("     Noted. I've removed this task:");
+                ui.printDeletedMessage();
                 System.out.println("       " + deletedVal.toString());
                 count--;
-                System.out.println("     Now you have " + count + " task" + ((count > 1) ? "s" : "") + " in the list.");
-
+                ui.printNumberOfTasks(count);
             } else {
-                System.out.println("     Invalid task number. Please try again.");
+                ui.printInvalidTaskNumber();
             }
         } catch (NumberFormatException e) {
-            System.out.println("     Invalid task number. Please try again.");
+            ui.printInvalidTaskNumber();
         }
     }
     private String removeVal(String val, String command) {
@@ -91,26 +90,25 @@ public class ListOfTasks {
     public void addEvent(String information) {
 
         if (!information.contains("/at")) {
-
-            System.out.println("    Invalid Input. Please try again.");
+            ui.printInvalidInput();
             return;
         }
-        System.out.println("     Got it. I've added this task:");
+        ui.addTaskMessage();
 
         information = removeVal(information, "event");
         String[] moreInformation = information.split("/at", 2);
 
         this.xs.add(count,new Event(moreInformation[0],moreInformation[1].strip(),"EVENT") );
         CompilationOfFiles.updateSavedFile(this.xs.get(count),"EVENT");
-        System.out.println("       " + this.xs.get(count).toString());
+        ui.printCurrentTask(this.xs.get(count));
         count = count + 1;
-        System.out.println("     Now you have "+ count + " task" + ((count > 1) ? "s" : "" ) +" in the list.");
+        ui.printNumberOfTasks(count);
     }
 
     public void addDeadline(String information) {
-        if (!information.contains("/by")) {
 
-            System.out.println("    Invalid Input. Please try again.");
+        if (!information.contains("/by")) {
+            ui.printInvalidInput();
             return;
         }
 
@@ -120,9 +118,9 @@ public class ListOfTasks {
         this.xs.add(count,new Deadline(moreInformation2[0],moreInformation2[1].strip(), "DEADLINE") );
         CompilationOfFiles.updateSavedFile(this.xs.get(count), "DEADLINE");
         System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + this.xs.get(count).toString());
+        ui.printCurrentTask(this.xs.get(count));
         count = count + 1;
-        System.out.println("     Now you have "+ count + " task" + ((count > 1) ? "s" : "" ) +" in the list.");
+        ui.printNumberOfTasks(count);
     }
 
 }

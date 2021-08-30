@@ -7,11 +7,17 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class CompilationOfFiles {
+    private static String filepath;
+
+    public CompilationOfFiles(String filepath) {
+        this.filepath = filepath;
+    }
+
     public static void loadAndSaveFile(ListOfTasks xs) {
         try {
             Task temp;
             Files.createDirectories(Paths.get("data/"));
-            File newFile = new File("data/duke.txt");
+            File newFile = new File(filepath);
             if (newFile.createNewFile()) {
                 System.out.println("A new file has been created as there are no saved files.");
             } else {
