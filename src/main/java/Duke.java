@@ -1,5 +1,4 @@
 import duke.*;
-//included package
 import java.io.File;
 
 public class Duke {
@@ -52,4 +51,3 @@ public class Duke {
         new Duke("./data/duke.txt").run();
     }
 }
-
