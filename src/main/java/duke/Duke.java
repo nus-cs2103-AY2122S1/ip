@@ -12,7 +12,7 @@ import java.io.IOException;
  * Encapsulates the Duke bot that has the ability to create, read, update and delete tasks
  * such as todo, deadline and event tasks based on user input.
  */
-public class Duke  {
+public class Duke {
     private final Storage storage;
     private TaskList tasks;
 

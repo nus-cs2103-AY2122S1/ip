@@ -35,32 +35,12 @@ public class TaskList {
     }
 
     /**
-     * Checks user command format.
-     *
-     * @param command user input command
-     * @param regex command format to match
-     * @param correctFormat command format to follow
-     * @throws IllegalFormatException if user gives invalid command
-     */
-    private void checkCommandFormat(String command, String regex, String correctFormat)
-            throws IllegalFormatException {
-        if (!command.matches(regex)) {
-            throw new IllegalFormatException(correctFormat);
-        }
-    }
-
-    /**
      * Adds a todo task to TaskList.
      *
      * @param command user input command
      * @return message for successful addition of todo task
-     * @throws IllegalFormatException if user gives invalid command
      */
-    public String addTodo(String command) throws IllegalFormatException {
-        String regexToMatch = "^todo .*";
-        String correctFormat = "todo <todo description>";
-        checkCommandFormat(command, regexToMatch, correctFormat);
-
+    public String addTodo(String command) {
         Task task = new ToDo(command.substring(5).trim());
         tasks.add(task);
 
@@ -75,10 +55,7 @@ public class TaskList {
      * @throws IllegalFormatException if user gives invalid command
      */
     public String addEvent(String command) throws IllegalFormatException {
-        String regexToMatch = "^event .* /at \\d{2}/\\d{2}/\\d{2} \\d{4}-\\d{4}";
         String correctFormat = "event <event description> /at <dd/MM/yy> <HHmm>-<HHmm>";
-        checkCommandFormat(command, regexToMatch, correctFormat);
-
         String[] eventInfo = command.substring(6).split("/at ");
         String eventDescription = eventInfo[0];
         String dateString = eventInfo[1].substring(0, 8);
@@ -117,10 +94,7 @@ public class TaskList {
      * @throws IllegalFormatException if user gives invalid command
      */
     public String addDeadline(String command) throws IllegalFormatException {
-        String regexToMatch = "^deadline .* /by \\d{2}/\\d{2}/\\d{2} \\d{4}";
         String correctFormat = "deadline <deadline description> /by <dd/MM/yy> <HHmm>";
-        checkCommandFormat(command, regexToMatch, correctFormat);
-
         String[] eventInfo = command.substring(9).split("/by ");
         String eventDescription = eventInfo[0];
         String dateTimeString = eventInfo[1].trim();
@@ -146,13 +120,8 @@ public class TaskList {
      * @param command user input command
      * @return message for successful marking of task as done
      * @throws TaskNotFoundException if user inputs invalid task index
-     * @throws IllegalFormatException if user gives invalid command
      */
-    public String markTaskDone(String command) throws TaskNotFoundException, IllegalFormatException {
-        String regexToMatch = "^done [0-9].*";
-        String correctFormat = "done <task index>";
-        checkCommandFormat(command, regexToMatch, correctFormat);
-
+    public String markTaskDone(String command) throws TaskNotFoundException {
         int taskIndex;
 
         try {
@@ -177,13 +146,8 @@ public class TaskList {
      * @param command user input command
      * @return message for successful deletion of task
      * @throws TaskNotFoundException if user inputs invalid task index
-     * @throws IllegalFormatException if user gives invalid command
      */
-    public String deleteTask(String command) throws TaskNotFoundException, IllegalFormatException {
-        String regexToMatch = "^delete [0-9].*";
-        String correctFormat = "delete <task index>";
-        checkCommandFormat(command, regexToMatch, correctFormat);
-
+    public String deleteTask(String command) throws TaskNotFoundException {
         int taskIndex;
 
         try {
@@ -208,14 +172,9 @@ public class TaskList {
      *
      * @param command user input command
      * @return string representation of filtered TaskList stored
-     * @throws IllegalFormatException if user gives invalid command
      * @throws EmptyListException if the TaskList is empty
      */
-    public String findFromList(String command) throws IllegalFormatException, EmptyListException {
-        String regexToMatch = "^find .*";
-        String correctFormat = "find <keyword to find>";
-        checkCommandFormat(command, regexToMatch, correctFormat);
-
+    public String findFromList(String command) throws EmptyListException {
         String keyword = command.substring(5).trim();
 
         List<Task> filteredTaskList = tasks.stream()
@@ -242,14 +201,19 @@ public class TaskList {
      * @throws EmptyListException if TaskList is empty
      */
     public String printTaskList(List<Task> tasks) throws EmptyListException {
-        String s;
+        String s = "";
         int size = tasks.size();
 
         if (size == 0) {
             throw new EmptyListException();
         }
 
-        s = tasks.toString();
+        for (int i = 0; i < size; i++) {
+            s = s.concat(tasks.get(i).toString());
+            if (i < tasks.size() - 1) {
+                s = s.concat("\n");
+            }
+        }
         return s;
     }
 

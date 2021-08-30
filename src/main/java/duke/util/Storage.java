@@ -106,6 +106,9 @@ public class Storage {
         String dateString;
         String startTimeString;
         String endTimeString;
+        LocalDate date;
+        LocalTime startTime;
+        LocalTime endTime;
 
         taskInfo = command.substring(7).split(" \\(at: ");
         description = taskInfo[0];
@@ -113,10 +116,6 @@ public class Storage {
         dateString = taskInfo[0];
         startTimeString = taskInfo[1];
         endTimeString = taskInfo[2];
-
-        LocalDate date;
-        LocalTime startTime;
-        LocalTime endTime;
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mma");
 
@@ -144,12 +143,11 @@ public class Storage {
         String[] taskInfo;
         String description;
         String dateTimeString;
+        LocalDateTime dateTime;
 
         taskInfo = command.substring(7).split(" \\(by: ");
         description = taskInfo[0];
         dateTimeString = taskInfo[1].substring(0, taskInfo[1].indexOf(")"));
-
-        LocalDateTime dateTime;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d yyyy h:mma");
 
         try {
