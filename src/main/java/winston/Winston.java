@@ -21,6 +21,11 @@ public class Winston {
         this.parser = new Parser(taskList);
     }
     
+    protected String getResponse(String str) {
+        return "test";
+    }
+    
+    
     public static void main(String[] args) {
         boolean isExit = false;
         Winston winston = new Winston();
