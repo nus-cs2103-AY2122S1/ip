@@ -12,6 +12,11 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Initializes a new Duke Object so that it can run the programme.
+     *
+     * @param path relative position of the txt file
+     */
     public Duke(String path) {
         ui = new Ui();
         storage = new Storage(path);
@@ -23,6 +28,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke Object by calling introduceDuke() from the Ui class. It is capable of
+     * Understanding user's commands and catching errors when thrown.
+     */
     public void run() {
         ui.introduceDuke();
         boolean isExit = false;
@@ -39,6 +48,11 @@ public class Duke {
         }
     }
 
+    /**
+     * This is the main file for this java programme.
+     *
+     * @param args There is no arguments that is required to run this programme.
+     */
     public static void main(String[] args) {
         new Duke("./tasks.txt").run();
     }

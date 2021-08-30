@@ -12,12 +12,22 @@ import Duke.Tasks.Todo;
 import Duke.Tasks.Deadline;
 import Duke.Tasks.Event;
 import Duke.Ui.Ui;
-
 import java.util.ArrayList;
 
+/**
+ * The Command class is responsible for directing the user's interaction with Duke.
+ */
 public abstract class Command {
     private static boolean exit;
 
+    /**
+     * Executes the specified action that is expected of the command.
+     *
+     * @param tasklist Takes in a tasklist to update the list of tasks
+     * @param ui Takes in an instance of the ui class to show details to the user
+     * @param storage Takes in an instance of the storage to update and renew the txt files.
+     * @throws DukeException If an error caused by Duke's limitation occurs
+     */
     public abstract void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException;
 
     public static class ListCommand extends Command {
@@ -31,6 +41,13 @@ public abstract class Command {
 
     public static class ClearCommand extends Command {
 
+        /**
+         * Executes the clearing of the task list.
+         *
+         * @param tasklist Takes in a tasklist to update the list of tasks
+         * @param ui Takes in an instance of the ui class to show details to the user
+         * @param storage Takes in an instance of the storage to update and renew the txt files.
+         */
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage) {
             tasklist.deleteAll();
@@ -66,6 +83,13 @@ public abstract class Command {
             this.input = input;
         }
 
+        /**
+         * Executes the completing of a specific task and outputting the behaviour of duke.
+         *
+         * @param tasklist Takes in a tasklist to update the list of tasks
+         * @param ui Takes in an instance of the ui class to show details to the user
+         * @param storage Takes in an instance of the storage to update and renew the txt files.
+         */
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage)
                 throws IndexNotInListException, WrongInputException, NoDescriptionException {
@@ -92,6 +116,13 @@ public abstract class Command {
             this.input = input;
         }
 
+        /**
+         * Executes the TodoCommand, which creates a new Todo task and displaying the appropriate reaction from Duke.
+         *
+         * @param tasklist Takes in a tasklist to update the list of tasks
+         * @param ui Takes in an instance of the ui class to show details to the user
+         * @param storage Takes in an instance of the storage to update and renew the txt files.
+         */
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage) throws NoDescriptionException{
             if (input.trim().toLowerCase().equals("todo")) {
@@ -115,6 +146,13 @@ public abstract class Command {
             this.input = input;
         }
 
+        /**
+         * Executes the Deadline, which creates a new Deadline task and displaying the appropriate reaction from Duke.
+         *
+         * @param tasklist Takes in a tasklist to update the list of tasks
+         * @param ui Takes in an instance of the ui class to show details to the user
+         * @param storage Takes in an instance of the storage to update and renew the txt files.
+         */
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage) throws NoDescriptionException, WrongInputException {
             if (input.trim().toLowerCase().equals("deadline")) {
@@ -146,6 +184,13 @@ public abstract class Command {
             this.input = input;
         }
 
+        /**
+         * Executes the Event, which creates a new Event task and displaying the appropriate reaction from Duke.
+         *
+         * @param tasklist Takes in a tasklist to update the list of tasks
+         * @param ui Takes in an instance of the ui class to show details to the user
+         * @param storage Takes in an instance of the storage to update and renew the txt files.
+         */
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage) throws NoDescriptionException, WrongInputException {
             if (input.trim().toLowerCase().equals("event")) {
@@ -176,6 +221,13 @@ public abstract class Command {
             this.input = input;
         }
 
+        /**
+         * Executes the DeleteCommand, which deletes a specific task from the task list.
+         *
+         * @param tasklist Takes in a tasklist to update the list of tasks
+         * @param ui Takes in an instance of the ui class to show details to the user
+         * @param storage Takes in an instance of the storage to update and renew the txt files.
+         */
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage)
                 throws IndexNotInListException, NoDescriptionException, WrongInputException {
@@ -202,6 +254,13 @@ public abstract class Command {
             this.input = input;
         }
 
+        /**
+         * Executes the NonsenseCommand, which only occurs if duke does not understand what the user typed.
+         *
+         * @param tasklist Takes in a tasklist to update the list of tasks
+         * @param ui Takes in an instance of the ui class to show details to the user
+         * @param storage Takes in an instance of the storage to update and renew the txt files.
+         */
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage) {
             ui.showNonsenseMessage(input);
@@ -210,6 +269,13 @@ public abstract class Command {
 
     public static class ExitCommand extends Command {
 
+        /**
+         * Executes theExitCommand, which will cause Duke to terminate immediately.
+         *
+         * @param tasklist Takes in a tasklist to update the list of tasks
+         * @param ui Takes in an instance of the ui class to show details to the user
+         * @param storage Takes in an instance of the storage to update and renew the txt files.
+         */
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage) {
             ui.showExitMessage();
@@ -217,6 +283,11 @@ public abstract class Command {
         }
     }
 
+    /**
+     * Returns whether the programme should terminate or not
+     *
+     * @return the boolean variable
+     */
     public boolean isExit() {
         return exit;
     }
