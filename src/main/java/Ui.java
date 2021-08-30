@@ -10,32 +10,30 @@ public class Ui {
         return sc.nextLine().trim();
     }
 
-    public void greet() {
+    public void exit() {
+        String message = "\t" + "Bye. Hope to see you again soon!";
+        displayResponse(message);
+    }
+
+    public void displayWelcome() {
         displayLine();
         displayWelcomeMessage();
         displayMenuOptions();
         displayLine();
     }
 
-    public void exit() {
-        String message = "\t" + "Bye. Hope to see you again soon!";
-        displayResponse(message);
-    }
-
     public void displayResponse(String message) {
         displayLine();
         System.out.println(message);
-        displayLine();
     }
 
     public void displayError(String message) {
         displayLine();
         System.out.println("ERROR MESSAGE:");
         System.out.println("\t" + "☹ " + message);
-        displayLine();
     }
 
-    private void displayLine() {
+    public void displayLine() {
         String horizontalLine = "____________________________________________________________";
         System.out.println(horizontalLine);
     }
@@ -102,43 +100,43 @@ public class Ui {
                 + System.lineSeparator() + "\t\t" + task;
     }
 
-    public String numOfTasksInList(TaskList tasks) {
-        return "\t" + "Now you have " + tasks.size()
-                + (tasks.size() > 1 ? " tasks" : " task")
+    public String getNumOfTasksInList(TaskList taskList) {
+        return "\t" + "Now you have " + taskList.size()
+                + (taskList.size() > 1 ? " tasks" : " task")
                 + " in the list.";
     }
 
-    public String tasksInYourList(TaskList tasks) {
+    public String getTasksInList(TaskList taskList) {
         StringBuilder response = new StringBuilder("\t" + "Here are the tasks in your list:"
                 + System.lineSeparator()
                 + "\t" + "[Legend: T = todo, D = deadline, E = event]"
                 + System.lineSeparator()
                 + System.lineSeparator());
 
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             if (i != 0) {
                 response.append(System.lineSeparator());
             }
 
             response.append("\t\t").append(i + 1).append(".")
-                    .append("\t").append(tasks.get(i).toString());
+                    .append("\t").append(taskList.get(i).toString());
         }
 
         return response.toString();
     }
 
-    public String tasksOnDate(String dateStr, TaskList tasks) {
-        TaskList tasksToPrint = new TaskList();
+    public String getTasksOnDate(String dateStr, TaskList taskList) {
+        TaskList taskOnDateList = new TaskList();
 
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).isOnDate(dateStr)) {
-                tasksToPrint.add(tasks.get(i));
+        for (int i = 0; i < taskList.size(); i++) {
+            if (taskList.get(i).isOnDate(dateStr)) {
+                taskOnDateList.add(taskList.get(i));
             }
         }
 
         StringBuilder response;
 
-        if (tasksToPrint.size() != 0) {
+        if (taskOnDateList.size() != 0) {
             response = new StringBuilder("\t" + "Here are the tasks on this date ("
                     + processDateStr(dateStr) + "):"
                     + System.lineSeparator()
@@ -146,13 +144,13 @@ public class Ui {
                     + System.lineSeparator()
                     + System.lineSeparator());
 
-            for (int i = 0; i < tasksToPrint.size(); i++) {
+            for (int i = 0; i < taskOnDateList.size(); i++) {
                 if (i != 0) {
                     response.append(System.lineSeparator());
                 }
 
                 response.append("\t\t").append(i + 1).append(".")
-                        .append("\t").append(tasksToPrint.get(i).toString());
+                        .append("\t").append(taskOnDateList.get(i).toString());
             }
         } else {
             response = new StringBuilder("\t" + "There are no tasks on this date.");

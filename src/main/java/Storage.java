@@ -1,15 +1,19 @@
 import java.io.*;
 
 public class Storage {
-    private final String pathName;
-    private final String fileName;
+    private String pathName;
+    private String fileName;
+    private File dataDirectory;
+    private File dataFile;
 
-    public Storage(String pathName, String fileName) {
+    public Storage(String pathName, String fileName) throws DukeException, IOException {
         this.pathName = pathName;
         this.fileName = fileName;
+        dataDirectory = initialiseDirectory();
+        dataFile = initialiseFile(dataDirectory);
     }
 
-    public File initialiseDirectory() throws DukeException {
+    private File initialiseDirectory() throws DukeException {
         File directory = new File(pathName);
         boolean hasDirectory = directory.exists();
 
@@ -24,7 +28,7 @@ public class Storage {
         }
     }
 
-    public File initialiseFile(File directory) throws IOException {
+    private File initialiseFile(File directory) throws IOException {
         File file = new File(directory + "/" + fileName);
         boolean hasFile = file.exists();
 
@@ -39,45 +43,49 @@ public class Storage {
         }
     }
 
-    public void loadTasksFromFile(File dataFile, TaskList tasks) throws IOException {
+    public TaskList loadTasksFromFile() throws IOException {
+        TaskList taskList = new TaskList();
+
         FileReader fileReader = new FileReader(dataFile);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line;
 
         while ((line = bufferedReader.readLine()) != null) {
-            String[] task = line.trim().split("\\|");
-            String type = task[0].trim();
-            boolean isDone = Boolean.parseBoolean(task[1].trim());
-            String description = task[2].trim();
+            String[] taskDetails = line.trim().split("\\|");
+            String type = taskDetails[0].trim();
+            boolean isDone = Boolean.parseBoolean(taskDetails[1].trim());
+            String description = taskDetails[2].trim();
             String dateTime;
 
             switch (type) {
             case "T":
                 Task todoTask = new ToDo(TaskType.TODO, description, isDone);
-                tasks.add(todoTask);
+                taskList.add(todoTask);
                 break;
             case "D":
-                dateTime = task[3].trim();
+                dateTime = taskDetails[3].trim();
                 Task deadlineTask = new Deadline(TaskType.DEADLINE, description, dateTime, isDone);
-                tasks.add(deadlineTask);
+                taskList.add(deadlineTask);
                 break;
             case "E":
-                dateTime = task[3].trim();
+                dateTime = taskDetails[3].trim();
                 Task eventTask = new Event(TaskType.EVENT, description, dateTime, isDone);
-                tasks.add(eventTask);
+                taskList.add(eventTask);
                 break;
             }
         }
 
         bufferedReader.close();
+
+        return taskList;
     }
 
-    public void saveTasksToFile(File dataFile, TaskList tasks) throws IOException {
+    public void saveTasksToFile(TaskList taskList) throws IOException {
         FileWriter fileWriter = new FileWriter(dataFile,false);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
 
             TaskType type = task.getType();
             boolean isDone = task.isDone();
@@ -90,14 +98,14 @@ public class Storage {
                 dateTime = ((TaskWithDateTime) task).getDateTimeInput();
             }
 
-            String taskDetails = taskDetailsSaveFormat(type, isDone, description, dateTime);
-            bufferedWriter.write(taskDetails + System.lineSeparator());
+            String taskToSave = taskSaveFormat(type, isDone, description, dateTime);
+            bufferedWriter.write(taskToSave + System.lineSeparator());
         }
 
         bufferedWriter.close();
     }
 
-    private String taskDetailsSaveFormat(TaskType type, boolean isDone, String description, String dateTime) {
+    private String taskSaveFormat(TaskType type, boolean isDone, String description, String dateTime) {
         if (dateTime.equals("")) {
             return type.getAbbr() + " | " + (isDone ? "1" : "0") + " | " + description;
         } else {
