@@ -18,7 +18,7 @@ public class Task {
     /**
      * Constructor for a Task.
      *
-     * @param description the description of the task.
+     * @param description Description of the task.
      */
     public Task (String description) {
         this.description = description;
@@ -29,7 +29,7 @@ public class Task {
     /**
      * Returns the description of the current task.
      *
-     * @return the description of the current task.
+     * @return Description of the current task.
      */
     public String getDescription() {
         return this.description;
@@ -45,7 +45,7 @@ public class Task {
     /**
      * Returns the string representation of status of completion of the task.
      *
-     * @return the string representation of status of completion of the task.
+     * @return String representation of status of completion of the task.
      */
     public String getStatusIcon() {
         return (this.isDone ? "[X]" : "[ ]");
@@ -54,7 +54,7 @@ public class Task {
     /**
      * Returns the string representation of the task and its completion status.
      *
-     * @return the string representation of the task and its completion status.
+     * @return String representation of the task and its completion status.
      */
     public String printTask() {
         return this.getStatusIcon() + " " + this.getDescription();

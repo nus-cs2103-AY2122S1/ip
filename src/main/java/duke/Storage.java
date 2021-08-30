@@ -21,7 +21,7 @@ public class Storage {
     /**
      * Constructor for Storage object.
      *
-     * @param filePath the path of the file where
+     * @param filePath Path of the file where
      *                 data of Duke is being stored.
      */
     public Storage (String filePath) {
@@ -64,7 +64,7 @@ public class Storage {
      * processing it and copying the data into Duke and the TaskList for usage and
      * processing.
      *
-     * @return an ArrayList to be stored in TaskList.
+     * @return ArrayList to be stored in TaskList.
      */
     public ArrayList<Task> load() {
         ArrayList<Task> newList = new ArrayList<>();

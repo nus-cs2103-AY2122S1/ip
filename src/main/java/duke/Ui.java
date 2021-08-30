@@ -24,7 +24,7 @@ public class Ui {
      * Prints out the tasks of the list from the saved file upon starting
      * Duke.
      *
-     * @param currList the contents of the file processed into the scanner.
+     * @param currList Contents of the file processed into the scanner.
      */
     public static void printTasksOnLoad(Scanner currList) {
         System.out.println("Current list:");
@@ -67,7 +67,7 @@ public class Ui {
     /**
      * Prints out the current tasks of the list when using Duke.
      *
-     * @param contents the Tasks in the TaskList in Duke.
+     * @param contents Tasks in the TaskList in Duke.
      */
     public static void getCurrentTasks(ArrayList<Task> contents) {
         int counter = 1;
@@ -87,7 +87,7 @@ public class Ui {
     /**
      * Displays the message when user marks a task as completed.
      *
-     * @param task the task that was completed by the user.
+     * @param task Task that was completed by the user.
      */
     public static void markTaskMessage(Task task) {
         System.out.println("    ***\n" + "    You have successfully done this task:\n" +
@@ -98,8 +98,8 @@ public class Ui {
      * Displays the message when user adds a task. English slightly differs when list only
      * has 1 task.
      *
-     * @param task the task the user is adding.
-     * @param count the size of the TaskList currently.
+     * @param task Task the user is adding.
+     * @param count Size of the TaskList currently.
      */
     public static void addTaskMessage(Task task, int count) {
         if (count == 1) {
@@ -116,7 +116,7 @@ public class Ui {
     /**
      * Prints a message when a user removes a task from the list.
      *
-     * @param task the task removed by the user.
+     * @param task Task removed by the user.
      */
     public static void removeTaskMessage(Task task) {
         System.out.println("    ***\n" + "    You have successfully removed this task:\n" +
@@ -136,7 +136,7 @@ public class Ui {
      * Prints out a list of Tasks matching the user's input when searching for a keyword
      * or characters.
      *
-     * @param matchingContents the list of contents that contain the keywords
+     * @param matchingContents List of contents that contain the keywords
      *                         requested by the user.
      */
     public static void searchList(ArrayList<Task> matchingContents) {
@@ -167,7 +167,7 @@ public class Ui {
     /**
      * Displays a message indicating that the file was unable to be written.
      *
-     * @param error the error thrown when file is failed to be written to.
+     * @param error Error thrown when file is failed to be written to.
      */
     public static void failToWriteFileMessage(String error) {
         System.out.println("Failed to write to the file. Error: " + error);

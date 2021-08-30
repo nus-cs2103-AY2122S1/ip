@@ -17,9 +17,9 @@ public class DateTimeConverter {
     /**
      * Returns a string containing a newly formatted date and time.
      *
-     * @param datetime the string containing the date and time to be
+     * @param datetime String containing the date and time to be
      *                 changed.
-     * @return a string containing a newly formatted date and time.
+     * @return String containing a newly formatted date and time.
      */
     public String convertDateAndTime(String datetime) {
         String time = datetime.substring(datetime.length() - 4);

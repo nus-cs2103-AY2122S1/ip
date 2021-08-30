@@ -13,7 +13,7 @@ public class TaskList {
     /**
      * Constructor for TaskList.
      *
-     * @param fileContents the content of the file used to save data.
+     * @param fileContents Content of the file used to save data.
      */
     public TaskList(ArrayList<Task> fileContents) {
         contents = fileContents;
@@ -25,7 +25,7 @@ public class TaskList {
      * If input is valid, it is added; otherwise a reminder message is sent to the
      * user to show what kind of input is valid.
      *
-     * @param userInput the line of user input which contains the task.
+     * @param userInput Line of user input which contains the task.
      */
     public static void addTask(String userInput) {
         if (userInput.startsWith("deadline") || userInput.startsWith("event") ||
@@ -48,7 +48,7 @@ public class TaskList {
     /**
      * Obtains the list of the current tasks.
      *
-     * @return the list of current tasks.
+     * @return List of current tasks.
      */
     public static ArrayList<Task> getList() {
         return contents;
@@ -70,7 +70,7 @@ public class TaskList {
      * Marks the current task as done and changes its UI appearance when
      * printed out.
      *
-     * @param userInput the userInput which indicates which task is done.
+     * @param userInput UserInput which indicates which task is done.
      */
     public static void markTaskDone(String userInput) {
         String index = userInput.substring(5);
@@ -83,7 +83,7 @@ public class TaskList {
     /**
      * Removes the task completely from the list.
      *
-     * @param userInput the userInput which indicates which task is to be removed.
+     * @param userInput UserInput which indicates which task is to be removed.
      */
     public static void removeTask(String userInput) {
         String index = userInput.substring(7);
@@ -105,7 +105,7 @@ public class TaskList {
     /**
      * Finds and returns all tasks containing the userInput.
      *
-     * @param userInput the search request by the user.
+     * @param userInput Search request by the user.
      */
     public static void findTask(String userInput) {
         String keyword = userInput.substring(5);

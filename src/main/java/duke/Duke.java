@@ -21,8 +21,7 @@ public class Duke {
     /**
      * Constructor for Duke.
      *
-     * @param filePath the path of the file to be used when
-     *                 starting Duke.
+     * @param filePath Path of the file to be used when starting Duke.
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -56,11 +55,6 @@ public class Duke {
         System.exit(0);
     }
 
-    /**
-     * Main method to prompt Duke to run.
-     *
-     * @param args arguments to be used in the method
-     */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }

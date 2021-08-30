@@ -9,7 +9,7 @@ public class Event extends Task {
     /**
      * Constructor of an Event.
      *
-     * @param description description of the event.
+     * @param description Description of the event.
      */
     public Event(String description) {
         super(description);
@@ -18,7 +18,7 @@ public class Event extends Task {
     /**
      * Returns the description of the current Event.
      *
-     * @return the description of the current Event.
+     * @return Description of the current Event.
      */
     @Override
     public String getDescription() {
@@ -56,7 +56,7 @@ public class Event extends Task {
      * Returns the string representation of the
      * completion status of the Event.
      *
-     * @return the string representation of the
+     * @return String representation of the
      *         completion status of the Event.
      */
     @Override
@@ -68,7 +68,7 @@ public class Event extends Task {
      * Returns the string representation for the Event's description
      * and completion status.
      *
-     * @return the string representation for the Event's description
+     * @return String representation for the Event's description
      *         and completion status.
      */
     @Override

@@ -8,7 +8,7 @@ public class Deadline extends Task {
     /**
      * Constructor for Deadline.
      *
-     * @param description the description of the Deadline object.
+     * @param description Description of the Deadline object.
      */
     public Deadline(String description) {
         super(description);
@@ -17,7 +17,7 @@ public class Deadline extends Task {
     /**
      * Returns the description of the current deadline.
      *
-     * @return the description of the current deadline task.
+     * @return Description of the current deadline task.
      */
     @Override
     public String getDescription() {
@@ -54,7 +54,7 @@ public class Deadline extends Task {
     /**
      * Returns the current status icon of the current Deadline.
      *
-     * @return the current status icon of the deadline.
+     * @return Current status icon of the deadline.
      */
     @Override
     public String getStatusIcon() {
@@ -65,7 +65,7 @@ public class Deadline extends Task {
      * Returns a string containing the Deadline description
      * and its completion status.
      *
-     * @return a string containing the Deadline description
+     * @return String containing the Deadline description
      *         and its completion status.
      */
     @Override

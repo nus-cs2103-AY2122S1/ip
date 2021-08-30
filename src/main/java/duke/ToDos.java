@@ -9,7 +9,7 @@ public class ToDos extends Task {
     /**
      * Constructor for ToDos.
      *
-     * @param description description of the ToDos object.
+     * @param description Description of the ToDos object.
      */
     public ToDos(String description) {
         super(description);
@@ -18,7 +18,7 @@ public class ToDos extends Task {
     /**
      * Returns description of the current ToDos object.
      *
-     * @return description of the current ToDos object.
+     * @return Description of the current ToDos object.
      */
     @Override
     public String getDescription() {
@@ -36,7 +36,7 @@ public class ToDos extends Task {
     /**
      * Returns the status icon of the current ToDos object.
      *
-     * @return the status icon of the current ToDos object.
+     * @return Status icon of the current ToDos object.
      */
     @Override
     public String getStatusIcon() {
@@ -46,7 +46,7 @@ public class ToDos extends Task {
     /**
      * Returns the current ToDos's description and completion status.
      *
-     * @return the current ToDos's description and completion status.
+     * @return Current ToDos's description and completion status.
      */
     @Override
     public String printTask() {
