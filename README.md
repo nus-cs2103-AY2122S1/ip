@@ -1,6 +1,6 @@
-# Jar-VIS
+# JarVIS
 
-This repo contains the code for the `Jar-VIS` chatbot as part of **CS2103: Software Engineering**.
+This repo contains the code for the `JarVIS` chatbot as part of **CS2103: Software Engineering**.
 
 ## The name
 The chatbot is fully programmed in Java and packaged as a `.jar` file, hence the name.
