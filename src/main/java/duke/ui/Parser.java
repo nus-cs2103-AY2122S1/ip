@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.command.*;
 import duke.exception.*;
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 
@@ -31,7 +32,11 @@ public class Parser {
             String[] information = words[1].split(regex);
             if (information.length == 2) {
                 try {
-                    return new AddTaskCommand(new Event(information[0], information[1]));
+                    if (isEvent) {
+                        return new AddTaskCommand(new Event(information[0], information[1]));
+                    } else {
+                        return new AddTaskCommand(new Deadline(information[0], information[1]));
+                    }
                 } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
                     throw new InvalidTimeException(timeFormat);
                 }
