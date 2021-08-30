@@ -11,16 +11,28 @@ import blue.handler.EventHandler;
 import blue.handler.FindHandler;
 import blue.handler.ListHandler;
 import blue.handler.ToDoHandler;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Entry point of the Blue application.
  * Initializes the application and interacts with the user.
  */
-public class Blue {
+public class Blue extends Application {
+    private static final String DEFAULT_FILEPATH = "data/tasks.txt";
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
     private HashMap<String, CommandHandler> commandHandlers;
+
+    /**
+     * Default constructor to avoid NoSuchElementExceptions
+     */
+    public Blue() {
+        this(DEFAULT_FILEPATH);
+    }
 
     /**
      * Constructs a Blue instance.
@@ -105,5 +117,13 @@ public class Blue {
      */
     public static void main(String[] args) {
         new Blue("data/tasks.txt").run();
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }
