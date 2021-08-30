@@ -22,7 +22,7 @@ public class Parser {
     /**
      * Parses user inputs.
      *
-     * @param input    String from user.
+     * @param input String from user.
      * @return true if input is not "bye", else false.
      */
     public boolean parse(String input) {
@@ -63,9 +63,9 @@ public class Parser {
                 break;
             default:
                 if (command.equals("")) {
-                    ui.showEmptyInputException();
+                    ui.showEmptyInputMessage();
                 } else {
-                    ui.showUnknownCommandException(command);
+                    ui.showUnknownCommandMessage(command);
                 }
                 break;
         }

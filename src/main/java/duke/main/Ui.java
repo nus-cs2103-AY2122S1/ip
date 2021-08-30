@@ -48,14 +48,14 @@ public class Ui {
     /**
      * Displays error when user input is empty.
      */
-    public void showEmptyInputException() {
+    public void showEmptyInputMessage() {
         System.out.println("\tTake your time :)\n");
     }
 
     /**
      * Displays error when user command is not found.
      */
-    public void showUnknownCommandException(String command) {
+    public void showUnknownCommandMessage(String command) {
         System.out.println("\tI don't understand " + command + " (yet...)\n");
     }
 

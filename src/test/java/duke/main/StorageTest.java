@@ -2,7 +2,7 @@ package duke.main;
 
 import duke.task.TaskList;
 import duke.task.ToDo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
     private String path = "tasks.txt";
@@ -35,7 +35,7 @@ public class StorageTest {
         TaskList retrievedTasks = storage.load();
         TaskList toCompareList = new TaskList();
         toCompareList.addTask(new ToDo("abcd"));
-        assertEquals("Unable to Load Tasks from Memory", toCompareList, retrievedTasks);
+        assertEquals(toCompareList, retrievedTasks, "Unable to Load Tasks from Memory");
     }
 
     @Test
