@@ -1,6 +1,10 @@
 package duke;
 
-public class Parser {
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
+
+public class Parser extends Application {
 
     private Ui ui;
     private TaskList taskList;
@@ -249,6 +253,9 @@ public class Parser {
      */
     public void caseHandler(int caseNum, String input, TaskList taskList) throws InputError {
         switch (caseNum) {
+        case 1:
+            Platform.exit();
+            break;
         case 2:
             listInput(taskList);
             break;
@@ -278,5 +285,8 @@ public class Parser {
         default:
             ui.invalidInput();
         }
+    }
+    @Override
+    public void start(Stage stage) {
     }
 }

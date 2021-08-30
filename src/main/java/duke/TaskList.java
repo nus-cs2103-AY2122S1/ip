@@ -16,7 +16,7 @@ public class TaskList implements Serializable {
      * * @param list Lists of tasks as an Array List.
      * @param ui UI to handle user interactions.
      */
-    public TaskList(ArrayList list, Ui ui) {
+    public TaskList(ArrayList<Task> list, Ui ui) {
         this.taskList = list;
         this.ui = ui;
     }
