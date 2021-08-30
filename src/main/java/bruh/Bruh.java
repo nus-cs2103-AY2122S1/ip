@@ -11,6 +11,8 @@ import bruh.ui.Ui;
  * The main class for the Bruh chatbot program.
  */
 public class Bruh {
+    private static final String STORAGE_PATH = "/output/tasklist.txt";
+
     private final TaskList taskList;
     private final Storage storage;
     private final Ui ui;
@@ -55,8 +57,12 @@ public class Bruh {
         storage.saveToDisk(taskList);
     }
 
+    /**
+     * Main method which runs the chatbot program.
+     *
+     * @param args The command line arguments specified.
+     */
     public static void main(String[] args) {
-        final String STORAGE_PATH = "/output/tasklist.txt";
         new Bruh(STORAGE_PATH).run();
     }
 }

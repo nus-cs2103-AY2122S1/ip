@@ -31,7 +31,7 @@ public abstract class Command {
      * @param storage  The storage function to be affected by the operations.
      * @return A description of the operations run.
      */
-    abstract public String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage);
+    public abstract String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Getter for the command description.

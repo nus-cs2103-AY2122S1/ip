@@ -1,7 +1,5 @@
 package bruh.storage;
 
-import bruh.tasklist.TaskList;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -10,6 +8,8 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import bruh.tasklist.TaskList;
 
 /**
  * Represents the chatbot's storage function, by saving & loading the task list

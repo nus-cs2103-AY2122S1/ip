@@ -23,6 +23,7 @@ public class AddTaskCommand extends Command {
     @Override
     public String runAndGenerateDescription(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(taskToAdd);
-        return String.format("Got it. I've added this task:\n  %s\n%s", taskToAdd.toString(), taskList.getTaskCountDesc());
+        return String.format("Got it. I've added this task:\n  %s\n%s",
+                taskToAdd.toString(), taskList.getTaskCountDesc());
     }
 }
