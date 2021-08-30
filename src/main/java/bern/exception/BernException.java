@@ -1,7 +1,7 @@
 package bern.exception;
 
 /**
- * A parent class for all exceptions Bern(this programme) related.
+ * A parent class for all exceptions bern.Bern(this programme) related.
  */
 public class BernException extends Exception {
     /**

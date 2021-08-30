@@ -1,3 +1,5 @@
+package bern;
+
 import bern.functionalities.Parser;
 import bern.functionalities.Storage;
 import bern.functionalities.TaskList;
@@ -18,7 +20,7 @@ public class Bern {
     private Parser parser;
 
     /**
-     * Constructor for class Bern.
+     * Constructor for class bern.Bern.
      */
     public Bern() {
         ui = new Ui();
@@ -28,7 +30,7 @@ public class Bern {
     }
 
     /**
-     * Method that runs the programme from an instance of Bern.
+     * Method that runs the programme from an instance of bern.Bern.
      */
     public void run() {
         Scanner myObj = new Scanner(System.in);
