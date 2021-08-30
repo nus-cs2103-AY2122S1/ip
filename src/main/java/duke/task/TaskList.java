@@ -75,4 +75,15 @@ public class TaskList {
         return items.size();
     }
 
+    public void find(String substring){
+        int list = 1;
+        for(int i = 1; i <= items.size(); i++){
+            if(this.getTask(i).description.contains(substring)){
+                System.out.println(list + ". " + items.get(i-1).toString());
+                list++;
+            }
+        }
+        System.out.println("");
+    }
+
 }

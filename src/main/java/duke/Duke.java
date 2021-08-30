@@ -24,6 +24,7 @@ public class Duke {
 
      public enum RequestType {
         DEFAULT,
+        FIND,
         DONE,
         DELETE,
         DEADLINE,
@@ -64,7 +65,7 @@ public class Duke {
 
         while (!userInput.equals("bye")) {
             userRequest = duke.Parser.parse(userInput);
-            
+
             switch (userRequest) {
             case DEFAULT:
                 tasks.list();
@@ -87,6 +88,7 @@ public class Duke {
             case TODO:
                 todo(userInput);
                 break;
+
             }
             
             userInput = userSc.nextLine();
