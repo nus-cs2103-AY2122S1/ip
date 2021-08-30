@@ -13,10 +13,10 @@ import addon.Ui;
  * A simple task tracking interface.
  */
 
-public class Duke {
+public class Sados {
     private Parser parse;
 
-    public Duke() {
+    public Sados() {
         try {
             File saveFile = new File("./save.txt");
             Tasklist tasks;
@@ -58,7 +58,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke currentlist = new Duke();
+        Sados currentlist = new Sados();
         currentlist.run();
     }
 }
