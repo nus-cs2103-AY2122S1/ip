@@ -53,7 +53,7 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
-            Command c = Parser.parse(input.split(" "));
+            Command c = Parser.parse(input.split(" ", 2));
             storage.save(tasks);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {

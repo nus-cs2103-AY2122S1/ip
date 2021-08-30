@@ -30,7 +30,7 @@ public class ListCommand implements Command {
                 listString += "\n " + count + ". " + t.get(i);
             }
         }
-        return ui.textFrame(" This be ye list of things to do Sire:" + listString);
+        return ui.textFrame(" These are your list of things to do:" + listString);
     }
 
     /**
