@@ -13,6 +13,7 @@ public enum Command {
     DONE(CommandHandler::handleDone),
     EVENT(CommandHandler::handleEvent),
     FIND(CommandHandler:: handleFind),
+    HELP(CommandHandler:: handleHelp),
     LIST(CommandHandler::handleList),
     TODO(CommandHandler::handleToDo);
 

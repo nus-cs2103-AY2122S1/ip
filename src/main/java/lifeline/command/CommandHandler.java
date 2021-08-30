@@ -46,6 +46,10 @@ public class CommandHandler {
         return ui.exit();
     }
 
+    public static String handleHelp(String command, Storage storage, TaskList taskList, Ui ui) {
+        return ui.showHelpMessage();
+    }
+
     /**
      * Creates and saves an instance of a Deadline. Instance is added to TaskList
      *

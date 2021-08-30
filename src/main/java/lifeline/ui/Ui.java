@@ -120,6 +120,22 @@ public class Ui {
         return stringBuilder.toString();
     }
 
+    /**
+     * Tells user what commands are available and what the commmands do
+     *
+     * @return Message to tell user what commands are available and what the commands do
+     */
+    public String showHelpMessage() {
+        return "bye: Exits the program.\n"
+                + "list: Lists your tasks.\n"
+                + "done <INDEX>: Marks task at index as done.\n"
+                + "delete <INDEX>: Deletes task at index.\n"
+                + "find <KEYWORD>: Find all tasks containing keyword,\n"
+                + "deadline <DESC> /by <dd/MM/yy> <HHmm>: Creates Deadline.\n"
+                + "event <DESC> /at <dd/MM/yy> <HHmm>-<HHmm>: Creates Event.\n"
+                + "todo <DESC>: Creates ToDo.\n"
+                + "help: Shows this message.\n";
+    }
 
     /**
      * Returns string representation of error message
