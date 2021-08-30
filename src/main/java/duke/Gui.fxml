@@ -5,14 +5,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.Controller">
    <children>
-      <Button layoutX="300.0" layoutY="64.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="226.0" layoutY="64.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="451.0" layoutY="64.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="374.0" layoutY="64.0" mnemonicParsing="false" text="Button" />
-      <TextArea layoutX="14.0" layoutY="144.0" prefHeight="240.0" prefWidth="571.0" text="Testing testing" />
-      <TextField layoutX="14.0" layoutY="104.0" prefHeight="26.0" prefWidth="571.0" />
+      <Button fx:id="deleteBtn" layoutX="392.0" layoutY="51.0" mnemonicParsing="false" text="Delete" />
+      <Button fx:id="addBtn" layoutX="328.0" layoutY="51.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="markBtn" layoutX="526.0" layoutY="51.0" mnemonicParsing="false" text="Mark" />
+      <Button fx:id="listAllBtn" layoutX="469.0" layoutY="51.0" mnemonicParsing="false" onAction="#listAll" text="List" />
+      <TextArea fx:id="display" layoutX="14.0" layoutY="144.0" prefHeight="240.0" prefWidth="571.0" text="Testing testing" />
+      <TextField fx:id="cmdLine" layoutX="14.0" layoutY="104.0" onKeyPressed="#enter" prefHeight="26.0" prefWidth="571.0" />
    </children>
 </AnchorPane>

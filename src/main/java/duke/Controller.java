@@ -45,6 +45,8 @@ public class Controller {
     public void listAll(ActionEvent event) {
         String s = this.list.listAll();
         System.out.println(s);
+        this.display.setEditable(false);
+        this.display.setText(s);
     }
 
 }
