@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -27,6 +29,10 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
     private static final String FILEPATH = "data/duke.txt";
+    private final Image duke = new Image(this.getClass()
+            .getResourceAsStream("/images/DukeIcon.png"));
+    private final Image user = new Image(this.getClass()
+            .getResourceAsStream("/images/UserIcon.png"));
     private Storage storage;
     private TaskList taskList;
     private final Ui ui;
@@ -34,7 +40,6 @@ public class Duke extends Application {
 
     /**
      * Constructor for the Duke class.
-     *
      */
     public Duke() {
         this.ui = new Ui();
@@ -113,22 +118,23 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput(dialogContainer, userInput));
 
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
+        userInput.setOnAction((event) -> handleUserInput(dialogContainer, userInput));
     }
 
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
+    private void handleUserInput(VBox dialogContainer, TextField userInput) {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
 
-        return textToAdd;
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     public static void main(String[] args) {
