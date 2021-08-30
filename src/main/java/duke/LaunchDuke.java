@@ -14,7 +14,9 @@ public class LaunchDuke {
      * @throws FileNotFoundException if scanner in storage class 
      * cannot locate the text file to be written to or read from.
      */
-    public static void main(String[] args) throws FileNotFoundException {
+
+    public static void main(
+            String[] args) throws FileNotFoundException {
         Duke duke = new Duke(path);
         duke.run();
     }

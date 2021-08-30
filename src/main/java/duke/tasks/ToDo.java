@@ -19,7 +19,9 @@ public class ToDo extends Task {
      * @throws WrongDateFormatException if format of date in todo is wrong
      * @throws WrongTimeFormatException if format of time in todo is wrong
      */
-    public ToDo(String desc) throws WrongDateFormatException, WrongTimeFormatException {
+    public ToDo(
+            String desc) throws WrongDateFormatException,
+            WrongTimeFormatException {
         super(desc, hasDateTime, "");
     }
 
@@ -55,7 +57,8 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        String assignmentProg = assignmentType + this.status + " " + this.taskDescription;
+        String assignmentProg = assignmentType +
+                this.status + " " + this.taskDescription;
         return assignmentProg;
     }
 

@@ -20,7 +20,10 @@ public class Event extends Task {
      * @throws WrongDateFormatException if format of date in event is wrong
      * @throws WrongTimeFormatException if format of time in event is wrong
      */
-    public Event(String desc) throws WrongDateFormatException, WrongTimeFormatException {
+
+    public Event(
+            String desc) throws WrongDateFormatException,
+            WrongTimeFormatException {
         super(desc, hasDateTime, taskDirectivePoint);
     }
 
@@ -55,8 +58,10 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String outputString = this.getOutputMessage(this.date.get().toString());
-        String assignmentProg = assignmentType + this.status + " " + outputString;
+        String outputString = this.getOutputMessage(
+                this.date.get().toString());
+        String assignmentProg = assignmentType +
+                this.status + " " + outputString;
         return assignmentProg;
     }
 
@@ -70,6 +75,8 @@ public class Event extends Task {
             }
             sb.append(item + " ");
         }
-        return sb.toString() + "(" + taskDirectivePoint + ": " + dateExpression + ")";
+        return sb.toString() + "(" +
+                taskDirectivePoint + ": " +
+                dateExpression + ")";
     }
 }

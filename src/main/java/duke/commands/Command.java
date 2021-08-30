@@ -8,15 +8,17 @@ import duke.exceptions.DukeException;
  * Abstract class that specifies the properties of a command
  */
 public abstract class Command {
-    protected final String command_description;
+    protected final String commandDescription;
+
 
     /**
      * Initializes the Command class with user input
      * 
      * @param command_description String of the user input
      */
-    Command(String command_description) {
-        this.command_description = command_description;
+    Command(String commandDescription) {
+        this.commandDescription = commandDescription;
+
     }
 
     /**

@@ -16,6 +16,7 @@ public class Date {
     private static final String EVENING_INDICATOR = "pm";
     private final LocalDate globalDate;
     private final LocalTime globalTime;
+
     
     /**
      * Initializes the date class with 
@@ -25,7 +26,9 @@ public class Date {
      * @throws WrongTimeFormatException if the expected time format given by user is wrong
      * @throws WrongDateFormatException if the expected date format given by user is wrong
      */
-    public Date(String dateAndTime) throws WrongTimeFormatException, WrongDateFormatException {
+    public Date(
+            String dateAndTime) throws WrongTimeFormatException,
+            WrongDateFormatException {
         String[] dateTimeSplit = dateAndTime.split(" ");
         LocalDate inputDate;
         LocalTime inputTime;
@@ -35,7 +38,9 @@ public class Date {
         this.globalTime = inputTime;
     }
 
-    private LocalTime formatTime(String timeString) throws NumberFormatException, WrongTimeFormatException, DateTimeParseException {
+    private LocalTime formatTime(
+            String timeString) throws NumberFormatException,
+            WrongTimeFormatException, DateTimeParseException {
         String[] hhmm = timeString.split("[-/:]+");
         LocalTime time;
         if (hhmm.length == 1) {
@@ -51,7 +56,9 @@ public class Date {
         return time;
     }
 
-    private LocalDate formatDate(String dateString) throws NumberFormatException, WrongDateFormatException {
+    private LocalDate formatDate(
+            String dateString) throws NumberFormatException,
+            WrongDateFormatException {
         String[] ddmmyyyy = dateString.split("[-/:]+");
         if (ddmmyyyy.length != 3) {
             throw new WrongDateFormatException();
@@ -76,8 +83,10 @@ public class Date {
 
     @Override
     public String toString() {
-        return this.globalDate.getMonth() + " " + this.globalDate.getDayOfMonth() +
-        " " + this.globalDate.getYear() + " " + this.getStringTime();
+        return this.globalDate.getMonth() + " " +
+                this.globalDate.getDayOfMonth() +
+                " " + this.globalDate.getYear() +
+                " " + this.getStringTime();
     }
 
     private String getStringTime() {
@@ -85,17 +94,22 @@ public class Date {
         int timeInMins = this.globalTime.getMinute();
         if (timeInHours == 12) {
             if (timeInMins > 0) {
-                return String.valueOf(timeInHours) + "." + timeInMins + EVENING_INDICATOR;
+                return String.valueOf(timeInHours) +
+                        "." + timeInMins +
+                        EVENING_INDICATOR;
             }
-            return String.valueOf(timeInHours) + EVENING_INDICATOR;
+            return String.valueOf(timeInHours) +
+                    EVENING_INDICATOR;
         } else if (timeInHours > 12) {
             if (timeInMins > 0) {
-                return String.valueOf(timeInHours - 12) + "." + timeInMins + EVENING_INDICATOR;
+                return String.valueOf(timeInHours - 12) + "."
+                        + timeInMins + EVENING_INDICATOR;
             }
             return String.valueOf(timeInHours - 12) + EVENING_INDICATOR;
         } else {
             if (timeInMins > 0) {
-                return String.valueOf(timeInHours) + "." + timeInMins + MORNING_INDICATOR;
+                return String.valueOf(timeInHours) + "."
+                        + timeInMins + MORNING_INDICATOR;
             }
             return String.valueOf(timeInHours) + MORNING_INDICATOR;
         }

@@ -67,6 +67,7 @@ public class TaskList {
         return updatedTask;
     }
 
+
     /**
      * Returns the task that user wishes to remove.
      * 
@@ -76,7 +77,9 @@ public class TaskList {
      * @throws DeleteOutOfBoundsException if user specify the task number to be deleted
      * is greater than the total tasks in the tracking arraylist
      */
-    public Task deleteTask(int taskNumber) throws DeleteOutOfBoundsException {
+
+    public Task deleteTask(
+            int taskNumber) throws DeleteOutOfBoundsException {
         if (taskNumber > allTasks.size()){ 
             throw new DeleteOutOfBoundsException(allTasks.size());
         }

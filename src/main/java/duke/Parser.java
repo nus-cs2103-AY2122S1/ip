@@ -36,36 +36,28 @@ public class Parser {
      * and thus not recognized
      */
     Command parse(String input) throws NoSuchCommandException {
-        String formatted_input = input.trim();
-        String[] commandItems = formatted_input.split(" ");
+        String formattedInput = input.trim();
+        String[] commandItems = formattedInput.split(" ");
         String commandInput = commandItems[0];
         if (this.isNormalCommandType(commandInput)) {
-            return this.extractNormalCommand(commandInput, formatted_input);
+            return this.extractNormalCommand(commandInput, formattedInput);
         }
-        return this.extractSpecialCommand(commandInput, formatted_input, commandItems);
+        return this.extractSpecialCommand(commandInput, formattedInput, commandItems);
+
     }
 
-
-    /**
-     * returns TaskCommand that will contain ToDo, Event or Deadline inputs from user
-     * 
-     * @param commandName String of the name of the type of the command given
-     * @param fullCommandInput String of the full instructions given by user
-     * @param commandList array of the full command given by user
-     * @return Command of the correct type
-     * @throws NoSuchCommandException if the command given by user is not something that this bot is supposed to handle
-     */
-
-    private Command extractSpecialCommand(String commandName,
-                                          String fullCommandInput,
-                                          String[] commandList) throws NoSuchCommandException {
+    private Command extractSpecialCommand(
+        String commandName, String fullCommandInput, String[] commandList)
+            throws NoSuchCommandException {
         if (commandList.length == 1) {
-            String errorMessage = "☹ OOPS!!! The description of a " + commandName + " cannot be empty.";
+            String errorMessage = "☹ OOPS!!! The description of a " +
+                    commandName + " cannot be empty.";
             throw new NoSuchCommandException(errorMessage);
         }
         String actualInputs = String.join(" ", commandList);
         return new TaskCommand(actualInputs);
     }
+
 
     /**
      * returns the respective command of the user as a Command object 
@@ -75,7 +67,8 @@ public class Parser {
      * @return Command of the correct type
      * @throws NoSuchCommandException if the command given by user is not something that this bot is supposed to handle
      */
-    private Command extractNormalCommand(String commandName, String fullCommandInput) throws NoSuchCommandException {
+    private Command extractNormalCommand(
+        String commandName, String fullCommandInput) throws NoSuchCommandException {
         if (commandName.equals(DELETE_COMMAND)) {
             return new DeleteCommand(fullCommandInput);
         } else if (commandName.equals(LIST_COMMAND)) {
@@ -97,8 +90,8 @@ public class Parser {
      * @return boolean to indicate if the command given is a todo, event, deadline or otherwise
      */
     private boolean isNormalCommandType(String commandName) {
-        return (!commandName.equals(TODO_COMMAND)) && 
-        (!commandName.equals(DEADLINE_COMMAND)) && 
-        (!commandName.equals(EVENT_COMMAND));
+        return (!commandName.equals(TODO_COMMAND))
+                && (!commandName.equals(DEADLINE_COMMAND))
+                && (!commandName.equals(EVENT_COMMAND));
     }
 }

@@ -15,6 +15,7 @@ public abstract class Task {
     protected final String status;
     protected final Optional<Date> date;
 
+
     /**
      * Initializes a new task object with description 
      * of Task and its placement if any.
@@ -25,13 +26,19 @@ public abstract class Task {
      * @throws WrongDateFormatException if format of date in a task is wrong
      * @throws WrongTimeFormatException if format of time in a task is wrong
      */
-    public Task(String desc, boolean hasDateTime, String taskDirective) throws WrongDateFormatException, WrongTimeFormatException {
+    public Task(
+            String desc, boolean hasDateTime,
+            String taskDirective) throws WrongDateFormatException,
+            WrongTimeFormatException {
         this.taskDescription = desc;
         this.status = Status.NOT_COMPLETED.getStatus();
         this.date = this.getDateAndTime(desc, hasDateTime, taskDirective);
     }
 
-    private Optional<Date> getDateAndTime(String desc, boolean hasDateTime, String taskDirective) throws WrongDateFormatException, WrongTimeFormatException {
+    private Optional<Date> getDateAndTime(
+            String desc, boolean hasDateTime,
+            String taskDirective) throws WrongDateFormatException,
+            WrongTimeFormatException {
         if (hasDateTime) {
             String[] descArray = desc.split("/" + taskDirective);
             String dateAndTime = descArray[1].trim();
@@ -49,7 +56,10 @@ public abstract class Task {
      * @param newStatus String updated staus of task
      * @param date Optional date atribute of task
      */
-    public Task(String desc, String newStatus, Optional<Date> date) {
+
+    public Task(
+            String desc, String newStatus,
+            Optional<Date> date) {
         this.taskDescription = desc;
         this.status = newStatus;
         this.date = date;
