@@ -10,6 +10,8 @@ import duke.task.Todo;
 //
 import duke.ui.Ui;
 
+import java.io.IOException;
+
 /**
  * Represents the class to specify how to add command.
  */
@@ -36,7 +38,7 @@ public class AddCommand extends Command {
      * @param storage The instance to store data.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Task task = new Task("");
         switch (type) {
         case 1:
@@ -60,7 +62,7 @@ public class AddCommand extends Command {
         tasks.addElement(task);
         String taskString = task.toString();
         storage.store(taskString);
-        ui.showTasks(taskString, tasks.getSize());
+        return ui.showTasks(taskString, tasks.getSize());
     }
 
     @Override

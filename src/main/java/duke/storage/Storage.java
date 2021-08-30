@@ -49,7 +49,7 @@ public class Storage {
      * @return The task list.
      * @throws LoadingException The exception related to loading.
      */
-    public ArrayList<Task> load() throws LoadingException {
+    public ArrayList<Task> load() throws LoadingException, IOException {
         String dir = System.getProperty("user.dir");
         // inserts correct file path separator on *nix and Windows
         // works on *nix
@@ -102,13 +102,8 @@ public class Storage {
             content = sb.toString();
             return taskList;
         } catch (FileNotFoundException e) {
-            try {
-                f.createNewFile();
-                throw new LoadingException();
-            } catch (IOException io) {
-                System.out.println("file not created");
-                return null;
-            }
+            f.createNewFile();
+            throw new LoadingException();
         }
     }
 
@@ -130,15 +125,11 @@ public class Storage {
      *
      * @param task The string format of task representation.
      */
-    public void store(String task) {
+    public void store(String task) throws IOException{
         String dataFile = dir + "/data" + file;
-        try {
-            String data = transformToData(task);
-            appendToFile(dataFile, data + System.lineSeparator());
-            content = content + data + System.lineSeparator();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
+        String data = transformToData(task);
+        appendToFile(dataFile, data + System.lineSeparator());
+        content = content + data + System.lineSeparator();
     }
 
     /**

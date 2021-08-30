@@ -26,10 +26,10 @@ public class Ui {
     /**
      * Shows the welcome message.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         System.out.println("Hello from\n" + logo);
         //Start Prompt.
-        System.out.println(getPattern("Hello! I'm duke.Duke\n   What can I do for you?"));
+        return getPattern("Hello! I'm duke.Duke\n   What can I do for you?");
     }
 
     /**
@@ -66,8 +66,8 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void showLine() {
-        System.out.println("   " + "*".repeat(80));
+    public String showLine() {
+        return "   " + "*".repeat(80);
     }
 
     /**
@@ -75,8 +75,8 @@ public class Ui {
      *
      * @param message
      */
-    public void showError(String message) {
-        System.out.println("   " + message);
+    public String showError(String message) {
+        return "   " + message;
     }
 
     /**
@@ -85,7 +85,7 @@ public class Ui {
      * @param tasks The list of tasks.
      * @param count The number of tasks.
      */
-    public void showList(TaskList tasks, int count) {
+    public String showList(TaskList tasks, int count) {
         StringBuilder curr = new StringBuilder();
         String end = "\n   ";
         String begin = "   Here are the tasks in your list:\n   ";
@@ -97,7 +97,7 @@ public class Ui {
             String out = ((i + 1)) + "." + tasks.elementToString(i) + end;
             curr.append(out);
         }
-        System.out.println(curr);
+        return curr.toString();
     }
 
     /**
@@ -106,11 +106,11 @@ public class Ui {
      * @param shouldDelete The task should be deleted.
      * @param tasks The list of tasks.
      */
-    public void showDelete(Task shouldDelete, TaskList tasks) {
+    public String showDelete(Task shouldDelete, TaskList tasks) {
         String title = "   Noted. I've removed this task: \n";
         String out = "     " + shouldDelete.toString() + "\n   ";
         String end = "Now you have " + tasks.getSize() + " tasks in the list.";
-        System.out.println(title + out + end);
+        return title + out + end;
     }
 
     /**
@@ -119,16 +119,16 @@ public class Ui {
      * @param task The task want to be shown.
      * @param count The number of tasks in task list.
      */
-    public void showTasks(String task, int count) {
-        System.out.println(getOutputFrame(task, count));
+    public String showTasks(String task, int count) {
+        return getOutputFrame(task, count);
     }
 
     /**
      * Shows error while loading.
      */
-    public void showLoadingError() {
+    public String showLoadingError() {
         LoadingException e = new LoadingException();
-        System.out.println(e.getMessage());
+        return e.getMessage();
     }
 
     /**
@@ -136,13 +136,13 @@ public class Ui {
      *
      * @param stringForm The string form of that task.
      */
-    public void showDone(String stringForm) {
+    public String showDone(String stringForm) {
         String title = "   Nice! I've marked this task as done: \n";
         String out = "     " + stringForm;
-        System.out.println(title + out);
+        return title + out;
     }
 
-    public void showBye() {
-        System.out.println("   " + "Bye, see you soon. ^-^");
+    public String showBye() {
+        return "   " + "Bye, see you soon. ^-^";
     }
 }

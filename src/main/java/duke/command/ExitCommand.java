@@ -13,8 +13,8 @@ public class ExitCommand extends Command {
      * @param storage The instance to store data.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showBye();
     }
 
     @Override

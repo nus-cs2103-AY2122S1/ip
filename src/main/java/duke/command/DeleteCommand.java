@@ -24,12 +24,12 @@ public class DeleteCommand extends Command {
      * @param storage The instance to store data.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws OutOfRangeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws OutOfRangeException {
         //check with the special response "delete X", where X is index of deleted item.
         int curr = Integer.parseInt(response.substring(7));
         Task shouldDelete = tasks.removeElement(curr - 1);
         storage.replace(curr - 1, null);
-        ui.showDelete(shouldDelete, tasks);
+        return ui.showDelete(shouldDelete, tasks);
     }
 
     @Override
