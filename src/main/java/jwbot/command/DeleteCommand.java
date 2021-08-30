@@ -1,7 +1,7 @@
 package jwbot.command;
 
 import jwbot.data.TaskList;
-import jwbot.data.exception.JWBotException;
+import jwbot.data.exception.JwBotException;
 import jwbot.data.task.Task;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;
@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
      * @param storage the storage object responsible for writing and reading txt file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JWBotException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
         try {
             String[] separated = input.split(" ");
             int index = Integer.parseInt(separated[1]);
@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
             storage.write(tasks);
             ui.showDeleteSuccessMessage(task, tasks.getSize());
         } catch (Exception e) {
-            throw new JWBotException("Sorry bro, I think you chose an incorrect index number to delete!");
+            throw new JwBotException("Sorry bro, I think you chose an incorrect index number to delete!");
         }
     }
 

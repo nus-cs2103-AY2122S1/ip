@@ -1,10 +1,10 @@
 package jwbot.ui;
 
-import jwbot.data.TaskList;
-import jwbot.data.task.Task;
-
 import java.util.List;
 import java.util.Scanner;
+
+import jwbot.data.TaskList;
+import jwbot.data.task.Task;
 
 /**
  * The class that is in charge of user interaction with the bot
@@ -15,10 +15,10 @@ public class Ui {
 
     private Scanner sc;
 
-    private final static String greeting = "Wassup bro! I'm jwbot.JWBot\n"
+    private static final String GREETING = "Wassup bro! I'm jwbot.JWBot\n"
             + "How can I help you?\n";
 
-    private final static String byeMessage = "You leaving already? See you soon bro!";
+    private static final String BYE_MESSAGE = "You leaving already? See you soon bro!";
 
     /**
      * The constructor of the ui class. Initializes a scanner.
@@ -31,14 +31,14 @@ public class Ui {
      * Show welcome messages to the user.
      */
     public void showWelcome() {
-        System.out.println(greeting);
+        System.out.println(GREETING);
     }
 
     /**
      * Show bye messages to the user.
      */
     public void showBye() {
-        System.out.println(byeMessage);
+        System.out.println(BYE_MESSAGE);
     }
 
     /**
@@ -64,8 +64,8 @@ public class Ui {
      * @param listSize the total size of the list after the deletion
      */
     public void showDeleteSuccessMessage(Task task, int listSize) {
-        System.out.println("OK Bro, I noted you've deleted this task:\n" +
-                task);
+        System.out.println("OK Bro, I noted you've deleted this task:\n"
+                + task);
         System.out.println("So bro, now you have " + listSize + " tasks stored in the list!");
     }
 
@@ -95,8 +95,8 @@ public class Ui {
     }
 
     public void showDoneSuccessMessage(Task doneTask) {
-        System.out.println("OK Bro, I noted you've done this task:\n" +
-                doneTask);
+        System.out.println("OK Bro, I noted you've done this task:\n"
+                + doneTask);
     }
 
     /**

@@ -5,14 +5,14 @@ package jwbot.data.exception;
  *
  * @author Yim Jaewon
  */
-public class JWBotException extends Exception {
+public class JwBotException extends Exception {
 
     /**
      * The constructor of the exception.
      *
      * @param e the description of the exception
      */
-    public JWBotException(String e) {
+    public JwBotException(String e) {
         super(e);
     }
 }

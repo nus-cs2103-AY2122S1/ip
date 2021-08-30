@@ -1,7 +1,7 @@
 package jwbot.command;
 
 import jwbot.data.TaskList;
-import jwbot.data.exception.JWBotException;
+import jwbot.data.exception.JwBotException;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;
 
@@ -30,7 +30,7 @@ public abstract class Command {
      * @param ui the ui object responsible for user interaction
      * @param storage the storage object responsible for writing and reading txt file
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws JWBotException;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException;
 
     /**
      * The method that checks if the bot should be stopped.

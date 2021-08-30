@@ -1,7 +1,7 @@
 package jwbot.command;
 
 import jwbot.data.TaskList;
-import jwbot.data.exception.JWBotException;
+import jwbot.data.exception.JwBotException;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;
 
@@ -19,7 +19,7 @@ public class DoneCommand extends Command {
      * @param storage the storage object responsible for writing and reading txt file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JWBotException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
         try {
             String[] separated = input.split(" ");
             int index = Integer.parseInt(separated[1]);
@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
             storage.write(tasks);
             ui.showDoneSuccessMessage(tasks.getTask(index - 1));
         } catch (Exception e) {
-            throw new JWBotException("Sorry bro, I think you chose an incorrect index number to mark done!");
+            throw new JwBotException("Sorry bro, I think you chose an incorrect index number to mark done!");
         }
     }
 

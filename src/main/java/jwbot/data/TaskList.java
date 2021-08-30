@@ -1,9 +1,9 @@
 package jwbot.data;
 
-import jwbot.data.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import jwbot.data.task.Task;
 
 /**
  * Class that stores the list of the tasks.

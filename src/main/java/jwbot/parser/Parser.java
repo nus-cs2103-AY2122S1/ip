@@ -1,7 +1,16 @@
 package jwbot.parser;
 
-import jwbot.command.*;
-import jwbot.data.exception.JWBotException;
+import jwbot.command.AddDeadlineCommand;
+import jwbot.command.AddEventCommand;
+import jwbot.command.AddTodoCommand;
+import jwbot.command.Command;
+import jwbot.command.DeleteCommand;
+import jwbot.command.DoneCommand;
+import jwbot.command.ExitCommand;
+import jwbot.command.FindCommand;
+import jwbot.command.ListCommand;
+import jwbot.data.exception.JwBotException;
+
 
 /**
  * Parser class that parses the user command
@@ -16,7 +25,7 @@ public class Parser {
      * @param input the command entered by the user
      * @return a parsed Command object created based on the user command
      */
-    public static Command parse(String input) throws JWBotException {
+    public static Command parse(String input) throws JwBotException {
         if (input.equals("bye")) {
             return new ExitCommand(input);
         } else if (input.equals("list")) {
@@ -34,7 +43,7 @@ public class Parser {
         } else if (input.startsWith("delete ")) {
             return new DeleteCommand(input);
         } else {
-            throw new JWBotException("Sorry bro, I don't understand what you mean!");
+            throw new JwBotException("Sorry bro, I don't understand what you mean!");
         }
     }
 

@@ -1,15 +1,20 @@
 package jwbot.storage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import jwbot.data.TaskList;
-import jwbot.data.exception.JWBotException;
+import jwbot.data.exception.JwBotException;
 import jwbot.data.task.Deadline;
 import jwbot.data.task.Event;
 import jwbot.data.task.Task;
 import jwbot.data.task.Todo;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The storage class that reads and writes the txt file.
@@ -56,14 +61,14 @@ public class Storage {
      *
      * @return the loaded list of tasks from the txt file
      */
-    public List<Task> load() throws JWBotException {
+    public List<Task> load() throws JwBotException {
         List<Task> items = new ArrayList<>();
         File file = new File(filePath);
         if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                throw new JWBotException("Load error, bro!");
+                throw new JwBotException("Load error, bro!");
             }
         }
         try {
@@ -88,7 +93,8 @@ public class Storage {
                 } else if (line.charAt(1) == 'D') {
                     String desAndBy = line.substring(7);
                     String[] separated = desAndBy.split(" \\(by: ");
-                    Deadline deadline = new Deadline(separated[0], separated[1].substring(0, separated[1].length() - 1));
+                    Deadline deadline =
+                            new Deadline(separated[0], separated[1].substring(0, separated[1].length() - 1));
                     if (line.charAt(4) == 'X') {
                         deadline.markAsDone();
                     }
@@ -97,7 +103,7 @@ public class Storage {
             }
             bufReader.close();
         } catch (IOException e) {
-            throw new JWBotException("There was a file error, bro!");
+            throw new JwBotException("There was a file error, bro!");
         }
         return items;
     }

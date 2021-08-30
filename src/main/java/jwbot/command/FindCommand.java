@@ -1,13 +1,15 @@
 package jwbot.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jwbot.data.TaskList;
-import jwbot.data.exception.JWBotException;
+import jwbot.data.exception.JwBotException;
 import jwbot.data.task.Task;
 import jwbot.storage.Storage;
 import jwbot.ui.Ui;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class FindCommand extends Command {
 
@@ -16,7 +18,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JWBotException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
         List<Task> results = new ArrayList<>();
         String keyword = input.split(" ", 2)[1];
         for (Task task : tasks.getItems()) {
@@ -26,7 +28,7 @@ public class FindCommand extends Command {
         }
         ui.showSearchList(results);
     }
-    
+
     @Override
     public boolean isExit() {
         return false;
