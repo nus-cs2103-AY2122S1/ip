@@ -1,12 +1,16 @@
-import duke.commands.*;
+import java.time.LocalDateTime;
+import java.util.Scanner;
+
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.Find;
+import duke.commands.Task;
+import duke.commands.Todo;
 import duke.data.DukeException;
 import duke.data.TaskList;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
-import java.util.Scanner;
 
 /**
  * Encapsulates the entire Duke program.
