@@ -2,9 +2,6 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import duke.exceptions.CommandParamException;
 import duke.exceptions.DukeFileException;
 import duke.exceptions.EmptyDescriptionException;
@@ -13,6 +10,9 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * This is an AddCommand class that extends Command.
@@ -30,7 +30,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage store, Ui ui)
+    public String execute(TaskList taskList, Storage store, Ui ui)
             throws CommandParamException, DukeFileException, EmptyDescriptionException, UnknownCommandException {
         try {
             Task task;
@@ -74,7 +74,7 @@ public class AddCommand extends Command {
 
             taskList.addToList(task);
             store.appendCommand(task.fullCommand());
-            ui.printAddTask(task, taskList.getSize());
+            return ui.printAddTask(task, taskList.getSize());
 
         } catch (IOException e) {
             throw new DukeFileException();

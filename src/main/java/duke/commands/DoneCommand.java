@@ -1,11 +1,12 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import duke.exceptions.DukeFileException;
 import duke.exceptions.TaskIsCompleteException;
 import duke.exceptions.TaskNotFoundException;
+import duke.task.Task;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * This is a DoneCommand class that extends Command.
@@ -22,10 +23,11 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage store, Ui ui)
+    public String execute(TaskList taskList, Storage store, Ui ui)
             throws DukeFileException, TaskIsCompleteException, TaskNotFoundException {
         if (taskList.getSize() - 1 >= this.index && this.index >= 0) {
-            taskList.markTask(this.index, store, ui);
+            Task taskDone = taskList.markTask(this.index, store);
+            return ui.printMarkTaskDone(taskDone);
         } else {
             throw new TaskNotFoundException(this.index + 1);
         }

@@ -13,6 +13,7 @@ import duke.commands.ListCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.UnknownCommandException;
+import duke.util.Parser;
 
 public class ParserTest {
 

@@ -1,10 +1,11 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import duke.exceptions.DukeFileException;
 import duke.exceptions.TaskNotFoundException;
+import duke.task.Task;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 /**
  * This is a DeleteCommand class that extends Command.
@@ -21,10 +22,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage store, Ui ui)
+    public String execute(TaskList taskList, Storage store, Ui ui)
             throws DukeFileException, TaskNotFoundException {
         if (taskList.getSize() - 1 >= this.index && this.index >= 0) {
-            taskList.deleteTask(this.index, store, ui);
+            Task deletedTask = taskList.deleteTask(this.index, store);
+            return ui.printRemoveTask(deletedTask, taskList.getSize());
         } else {
             throw new TaskNotFoundException(this.index + 1);
         }

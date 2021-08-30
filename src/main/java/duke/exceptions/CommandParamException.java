@@ -22,6 +22,6 @@ public class CommandParamException extends DukeException {
 
     @Override
     public String getMessage() {
-        return String.format("☹ OOPS! I don't think your %s is keyed in correctly.☹", this.command);
+        return String.format("I don't think your %s is keyed in correctly. Think again!", this.command);
     }
 }
