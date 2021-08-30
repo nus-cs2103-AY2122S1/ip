@@ -24,7 +24,6 @@ public class Duke {
      * Parser instance to handle parsing.
      */
     private final Parser parser;
-
     /**
      * Construct a Duke instance to run Duke.
      *
@@ -41,7 +40,6 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("./data/", "duke.txt").run();
     }
-
     /**
      * Find tasks from task list that contains a given pattern and print the tasks.
      *
