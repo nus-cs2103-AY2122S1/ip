@@ -4,21 +4,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.time.LocalDate;
-
-import duke.task.Task;
-import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 
 
 public class Storage {
-    public static final String directory = "./data";
+    public static final String DIRECTORY = "./data";
     private final String fileName;
 
     public Storage(String fileName) {
@@ -31,7 +29,7 @@ public class Storage {
      * @return List of Tasks.
      */
     public List<Task> load() {
-        String path = directory + "/" + fileName;
+        String path = DIRECTORY + "/" + fileName;
         File file = new File(path);
         List<Task> loadedTasks = new ArrayList<Task>();
 
@@ -54,7 +52,8 @@ public class Storage {
                     name = name.split("\\(")[0].stripTrailing();
                     String parsedInput = line.split("deadline:")[1];
                     String deadline = parsedInput.substring(1, parsedInput.length() - 1);
-                    loadedTasks.add(new Deadline(name, isDone, LocalDate.parse(deadline, Deadline.formatter)));
+                    loadedTasks.add(new Deadline(name, isDone,
+                            LocalDate.parse(deadline, Deadline.DATE_TIME_FORMATTER)));
                 } else {
                     name = name.split("\\(")[0].stripTrailing();
                     String parsedInput = line.split("at:")[1];
@@ -80,12 +79,12 @@ public class Storage {
      * @throws IOException if an I/O error occurred.
      */
     public boolean createFileIfNotExists(String fileName) throws IOException {
-        File fileDirectory = new File(directory);
+        File fileDirectory = new File(DIRECTORY);
         if (!fileDirectory.exists()) {
             fileDirectory.mkdir();
         }
 
-        File file = new File(directory + "/" + fileName);
+        File file = new File(DIRECTORY + "/" + fileName);
         try {
             return file.createNewFile();
         } catch (IOException e) {

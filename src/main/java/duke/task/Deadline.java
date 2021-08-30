@@ -3,9 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy");
     protected final LocalDate deadline;
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     public Deadline(String name, LocalDate deadline) {
         super(name);
@@ -25,6 +25,6 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return String.format("[D]%s (deadline: %s)", super.toString(),
-                deadline.format(formatter));
+                deadline.format(DATE_TIME_FORMATTER));
     }
 }
