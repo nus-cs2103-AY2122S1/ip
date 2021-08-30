@@ -17,58 +17,34 @@ import duke.exceptions.MissingTaskNumberException;
  */
 public class Duke {
     /** A class to keep track of all tasks of the Duke instance **/
-    private TaskList taskList;
+    private TaskList taskList = new TaskList("data/duke.txt");
 
     /**
-     * Initializes a new Duke instance with specified filepath to store tasks
-     *
-     * @param filePath Path to storage file
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public Duke(String filePath) {
-        this.taskList = new TaskList(filePath);
-    }
-
-    /**
-     * Entry point of Duke
-     *
-     * @param args Command line arguments
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
-
-    /**
-     * Starts an instance of Duke
-     */
-    public void run() {
-        // Welcome the user
-        UI.welcome();
-        boolean running = true;
-
-        while (running) {
-            // Get input from the user
-            String command = UI.readCommand();
-            try {
-                Parser.handle(command, taskList);
-                running = Parser.isRunning();
-            } catch (InvalidCommandException e) {
-                System.out.println("I'm afraid I don't recognise that, please try again!");
-            } catch (MissingTaskNameException e) {
-                System.out.println("Duke.Task name cannot be empty!");
-            } catch (MissingTaskNumberException e) {
-                System.out.println("Did you forget to enter your task number?");
-            } catch (InvalidTaskNumberException e) {
-                System.out.println("Sorry, that task does not exist!");
-            } catch (MissingDeadlineException e) {
-                System.out.println("When is that due? Let me know after '/by'!");
-            } catch (MissingEventTimeException e) {
-                System.out.println("When is the event happening? Let me know after '/at'!");
-            } catch (DateTimeParseException e) {
-                System.out.println("Oops, did you enter your date in yyyy-mm-dd format?");
-            } catch (DukeException e) {
-                UI.dukeException();
-            }
+    public String getResponse(String input) {
+        String dukeResponse = "";
+        try {
+            dukeResponse = Parser.handle(input, taskList);
+        } catch (InvalidCommandException e) {
+            dukeResponse = "I'm afraid I don't recognise that, please try again!";
+        } catch (MissingTaskNameException e) {
+            dukeResponse = "Task name cannot be empty!";
+        } catch (MissingTaskNumberException e) {
+            dukeResponse = "Did you forget to enter your task number?";
+        } catch (InvalidTaskNumberException e) {
+            dukeResponse = "Sorry, that task does not exist!";
+        } catch (MissingDeadlineException e) {
+            dukeResponse = "When is that due? Let me know after '/by'!";
+        } catch (MissingEventTimeException e) {
+            dukeResponse = "When is the event happening? Let me know after '/at'!";
+        } catch (DateTimeParseException e) {
+            dukeResponse = "Oops, did you enter your date in yyyy-mm-dd format?";
+        } catch (DukeException e) {
+            dukeResponse = UI.dukeException();
         }
+        return dukeResponse;
     }
 }
 
