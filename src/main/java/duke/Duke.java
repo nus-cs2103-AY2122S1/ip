@@ -1,21 +1,22 @@
+package duke;
+
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
 import java.time.DateTimeException;
 
 /**
- * Represents the main class for Duke.
+ * Represents the main class for duke.Duke.
  */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
 
     /**
-     * Constructor for Duke class.
+     * Constructor for duke.Duke class.
      *
      * @param dirPath  Directory path of the file.
      * @param fileName Name of the file.
@@ -102,7 +103,7 @@ public class Duke {
     }
 
     /**
-     * Creates an instance of Duke and starts the user interaction.
+     * Creates an instance of duke.Duke and starts the user interaction.
      *
      * @param args Command line arguments.
      */

@@ -1,4 +1,4 @@
-Hello, I'm Duke
+Hello, I'm duke.Duke
 >> Got it. I've added this task:
    [T][ ] run test
 Now you have 1 task(s) in the list.
