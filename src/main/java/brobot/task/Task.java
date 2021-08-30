@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Constructor for a task.
+     *
      * @param content The task main content.
      */
     public Task(String content) {
@@ -18,7 +19,8 @@ public class Task {
 
     /**
      * Returns true if task is marked completed.
-     * @return
+     *
+     * @return True if task is complete, false otherwise
      */
     public boolean isComplete() {
         return this.isCompleted;
@@ -33,6 +35,7 @@ public class Task {
 
     /**
      * Checks if the task contains the search word
+     *
      * @param searchWord The word to look for in the task.
      * @return True if the word exists in the Task, false otherwise.
      */
@@ -42,6 +45,7 @@ public class Task {
 
     /**
      * String representation of a task.
+     *
      * @return Task in string.
      */
     @Override
@@ -52,6 +56,7 @@ public class Task {
 
     /**
      * String representation of a task for storage.
+     *
      * @return Task in String(Storage format).
      */
     public String toStorageString() {

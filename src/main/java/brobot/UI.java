@@ -2,8 +2,8 @@ package brobot;
 
 import java.util.Scanner;
 
-import brobot.task.TaskList;
 import brobot.task.Task;
+import brobot.task.TaskList;
 
 /**
  * Represents the User interface of the Duke Program. Interfaces through the terminal.
@@ -52,7 +52,7 @@ public class UI {
      * @return The formatted string.
      */
     public static String listTaskAmount(int count) {
-        return("\nNow you have " + count + " task(s) in the list bro.");
+        return ("\nNow you have " + count + " task(s) in the list bro.");
     }
 
     /**
@@ -83,7 +83,7 @@ public class UI {
      * @param task The deleted task.
      * @param list The list from which the task was deleted.
      */
-    public static void printTaskDeleted(Task task,TaskList list) {
+    public static void printTaskDeleted(Task task, TaskList list) {
         System.out.println(
                 formatWithSpace("Ok Bro, I removed the following task:\n "
                     + task

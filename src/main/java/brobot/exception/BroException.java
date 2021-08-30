@@ -6,6 +6,7 @@ package brobot.exception;
 public class BroException extends Exception {
     /**
      * Constructor for the exception.
+     *
      * @param errorMessage The error message;
      */
     public BroException(String errorMessage) {
