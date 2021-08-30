@@ -14,6 +14,7 @@ public class DateHelpers {
     public static LocalDateTime parseDateString(String input) {
         TemporalAccessor temporalAccessor = Constants.Input.DATETIME_FORMATTER.parseBest(input, LocalDateTime::from,
                 LocalDate::from);
+        assert temporalAccessor != null;
         if (temporalAccessor instanceof LocalDateTime) {
             return (LocalDateTime) temporalAccessor;
         } else {

@@ -7,7 +7,7 @@
 /dist/
 
 # Local storage folder
-/data/
+data/
 
 # Gradle build files
 /.gradle/
