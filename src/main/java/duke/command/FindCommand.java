@@ -13,13 +13,16 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printsMessage("Here are the matching tasks in your list:");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String output = "";
+        output += (ui.returnMessage("Here are the matching tasks in your list:"));
+        output += "\n";
         int index = 1;
         for (Task task : taskList.getAllTasks()) {
             if (task.isMatchingTask(this.keyword)) {
-                ui.printsMessage(String.format("%d.%s", index++, task));
+                output += ui.returnMessage(String.format("%d.%s", index++, task));
             }
         }
+        return output;
     }
 }

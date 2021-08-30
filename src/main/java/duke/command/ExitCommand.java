@@ -8,7 +8,7 @@ import duke.ui.Ui;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         throw new DukeException("This should not be executed");
     }
 }
