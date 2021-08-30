@@ -1,7 +1,7 @@
 list
 todo borrow book
-event project meeting /at Mon 2-4pm
-deadline return book /by Friday
+event project meeting /at 2021-12-12 2-4pm
+deadline return book /by 2021-10-10 14:55
 todo
 deadline
 blah
@@ -11,4 +11,5 @@ done 1
 list
 delete 2
 list
+find project
 bye
