@@ -1,4 +1,5 @@
 package duke;
+import java.util.Arrays;
 import java.util.Scanner;
 /**
  * Encapsulates the user interface. Scans for input and responds to user.
@@ -14,7 +15,7 @@ public class Ui {
 
     /**
      * Constructs a Ui
-     * 
+     *
      * @param tasks TaskList to record tasks.
      * @param storage Storage to store tasks.
      */
@@ -29,12 +30,11 @@ public class Ui {
     public void run() {
         // Print a welcome message
         printMsg(WELCOME_MSG);
-        
         // Let user input commands and take actions accordingly.
         Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser(tasks);
         boolean exit = false;
-        while(!exit) {
+        while (!exit) {
             try {
                 if (scanner.hasNextLine()) {
                     String command = scanner.nextLine();
@@ -47,7 +47,7 @@ public class Ui {
                 } else {
                     exit = true;
                 }
-            } catch(DukeException e) {
+            } catch (DukeException e) {
                 printMsg(new String[] {e.getMessage()});
             }
 
@@ -70,11 +70,11 @@ public class Ui {
 
     /**
      * Checks if a message is a terminating message.
-     * 
+     *
      * @param msg Message string to be checked.
      * @return Boolean describing if the message is terminal.
      */
     public static boolean isByeMsg(String[] msg) {
-        return msg.equals(BYE_MSG);
+        return Arrays.equals(msg, BYE_MSG);
     }
 }

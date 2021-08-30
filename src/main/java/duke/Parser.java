@@ -7,7 +7,7 @@ public class Parser {
 
     /**
      * Constructs a Parser.
-     * 
+     *
      * @param tasks TaskList to add tasks to.
      */
     public Parser(TaskList tasks) {
@@ -16,7 +16,7 @@ public class Parser {
 
     /**
      * Parses a command and manipulates the TaskList accordingly.
-     * 
+     *
      * @param command String representation of command.
      * @return An array of message strings.
      * @throws DukeException Thrown when an invalid command is given.

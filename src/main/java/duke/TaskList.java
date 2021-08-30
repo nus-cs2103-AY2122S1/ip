@@ -10,7 +10,7 @@ public class TaskList {
      * Constructs a TaskList.
      */
     public TaskList() {
-        taskArray = new ArrayList<Task>();
+        taskArray = new ArrayList<>();
     }
 
     /**
@@ -44,8 +44,8 @@ public class TaskList {
         Task t = taskArray.get(index);
         t.setCompleted();
         return new String[] {
-                "Nice! I've marked this task as done:",
-                t.toString()
+            "Nice! I've marked this task as done:",
+            t.toString()
         };
     }
 
@@ -72,15 +72,15 @@ public class TaskList {
 
     /**
      * Finds tasks which match a query.
-     * 
+     *
      * @param query String to check for in tasks.
      * @return An array of strings with numbered tasks.
      */
     public String[] findMatchingTasks(String query) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (int i = 0; i < taskArray.size(); i++) {
-            if (taskArray.get(i).toString().contains(query)) {
-                matchingTasks.add(taskArray.get(i));
+        for (Task task : taskArray) {
+            if (task.toString().contains(query)) {
+                matchingTasks.add(task);
             }
         }
         String[] taskStrings = new String[matchingTasks.size() + 1];
@@ -108,11 +108,11 @@ public class TaskList {
     /**
      * Checks if an ID is an invalid index for the task list.
      *
-     * @param ID Integer index of the task.
+     * @param id Integer index of the task.
      * @return Boolean representing validity of ID.
      */
-    private boolean isInvalidID(int ID) {
-        return ID < 0 || ID >= taskArray.size();
+    private boolean isInvalidID(int id) {
+        return id < 0 || id >= taskArray.size();
     }
 
 

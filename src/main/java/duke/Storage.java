@@ -1,8 +1,8 @@
 package duke;
-import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 /**
  * Encapsulates the storage for a Duke program.
@@ -12,7 +12,7 @@ public class Storage {
 
     /**
      * Constructs a Storage.
-     * 
+     *
      * @param filePath Path where cache is stored.
      */
     public Storage(String filePath) {
@@ -21,7 +21,7 @@ public class Storage {
 
     /**
      * Loads the cache and reads any previous tasks, if cache exists.
-     * 
+     *
      * @return TaskList with any previous tasks.
      * @throws DukeException Thrown if cache cannot load properly.
      */
@@ -34,9 +34,8 @@ public class Storage {
             try {
                 Scanner scanner = new Scanner(cache);
                 boolean exit = false;
-                Parser parser = new Parser(tasks); 
-        
-                while(!exit) {
+                Parser parser = new Parser(tasks);
+                while (!exit) {
                     try {
                         if (scanner.hasNextLine()) {
                             String nextInput = scanner.nextLine();
@@ -47,7 +46,7 @@ public class Storage {
                         } else {
                             exit = true;
                         }
-                    } catch(DukeException e) {
+                    } catch (DukeException e) {
                         // Ignore previous invalid statements, continue adding tasks.
                     }
                 }
@@ -78,7 +77,7 @@ public class Storage {
 
     /**
      * Adds a command to the cache.
-     * 
+     *
      * @param command String representation of a command.
      * @throws DukeException Thrown if FileWriter fails to append to cache.
      */

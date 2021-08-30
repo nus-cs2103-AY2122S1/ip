@@ -5,10 +5,8 @@ import java.time.format.DateTimeParseException;
 /**
  * Class for deadline tasks.
  */
-public class Deadline extends Task{
-
+public class Deadline extends Task {
     private final LocalDate byTime;
-    
     /**
      * Constructs a deadline task.
      *
