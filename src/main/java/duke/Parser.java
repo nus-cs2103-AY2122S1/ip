@@ -21,7 +21,7 @@ public class Parser {
      * @return the command to be executed
      * @throws DukeException
      */
-    public static Command parse(String input) throws DukeException{
+    public static Command parse(String input) throws DukeException {
         String[] x = input.split(" ");
         String cmd = x[0];
         if (x.length == 1) {
@@ -81,7 +81,7 @@ public class Parser {
      * @param cmd the type of command
      * @throws DukeException
      */
-    public static void missingTaskName(String cmd) throws DukeException{
+    public static void missingTaskName(String cmd) throws DukeException {
         String str = String.format("☹ OOPS!!! The description of a %s cannot be empty.", cmd);
         throw new DukeException(str);
     }

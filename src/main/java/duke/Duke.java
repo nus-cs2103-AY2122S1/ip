@@ -8,6 +8,9 @@ import java.io.IOException;
  */
 public class Duke {
 
+    /** The filepath for storage */
+    private static final String FILE_PATH = "data/tasks.txt";
+
     /** The storage utility */
     private Storage storage;
 
@@ -16,9 +19,6 @@ public class Duke {
 
     /** The UI for the program */
     private Ui ui;
-
-    /** The filepath for storage */
-    private static final String FILE_PATH = "data/tasks.txt";
 
     /**
      * The constructor for Duke class
