@@ -12,6 +12,11 @@ import java.util.Scanner;
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath Path to duke storage file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         File dukeFile = new File(filePath);
@@ -86,7 +91,7 @@ public class Storage {
      *
      * @return TaskList that includes all tasks in the file.
      */
-    public TaskList convertFileToTaskList() throws Exception{
+    public TaskList convertFileToTaskList() throws Exception {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         File dukeFile = new File(filePath);
         try {
@@ -97,8 +102,8 @@ public class Storage {
                 taskList.add(task);
             }
         } catch (Exception e) {
-            throw new Exception("Can't understand data in the duke file. " +
-                    "Detail information: "
+            throw new Exception("Can't understand data in the duke file. "
+                    + "Detail information: "
                     + e.getMessage());
         }
         return taskList;

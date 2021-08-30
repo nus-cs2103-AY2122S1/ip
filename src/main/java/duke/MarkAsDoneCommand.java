@@ -4,7 +4,7 @@ package duke;
  * Command that mark certain task as done.
  */
 public class MarkAsDoneCommand extends Command {
-    private int doneListIndex;//index in the list
+    private int doneListIndex; //index in the list
 
     public MarkAsDoneCommand(int doneListIndex) {
         this.doneListIndex = doneListIndex;

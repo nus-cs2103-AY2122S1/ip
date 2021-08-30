@@ -7,11 +7,19 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Default constructor for Task.
+     */
     public Task() {
         this.description = "";
         this.isDone = false;
     }
 
+    /**
+     * Constructor for Task with String description.
+     *
+     * @param description Description for task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

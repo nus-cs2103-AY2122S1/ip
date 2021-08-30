@@ -1,6 +1,5 @@
 package duke;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -23,7 +22,7 @@ public class Parser {
      * @throws DukeException Exception that duke could generate.
      */
     public Command parse(String input) throws DukeException {
-        String words[] = input.split(this.splitRegex);
+        String[] words = input.split(splitRegex);
         if (words[0].equals("list")) {
             System.out.println("Here are the tasks in your list:");
             return new ListCommand();
@@ -33,24 +32,24 @@ public class Parser {
         } else if (words[0].equals("delete")) {
             int deleteIndex = Integer.parseInt(words[1]);
             return new DeleteCommand(deleteIndex - 1);
-        } else if(words[0].equals("find")){
+        } else if (words[0].equals("find")) {
             String keyWords = input.substring(5);
             System.out.println(keyWords);
             return new FindCommand(keyWords);
-        } else if(words[0].equals("bye")) {
+        } else if (words[0].equals("bye")) {
             return new ExitCommand();
         } else {
             Task task = new Task();
             if (words[0].equals("todo")) {
                 if (words.length <= 1) {
-                    throw new DukeException("The description of a todo " +
-                            "cannot be empty.");
+                    throw new DukeException("The description of a todo "
+                            + "cannot be empty.");
                 }
                 task = new ToDo(input.substring(5));
             } else if (words[0].equals("deadline")) {
                 if (words.length <= 1 || words[1].equals("/by")) {
-                    throw new DukeException("The description of deadline task " +
-                            "cannot be empty.");
+                    throw new DukeException("The description of deadline task "
+                            + "cannot be empty.");
                 }
                 if (input.indexOf("/by") < 0) {
                     throw new DukeException("Please enter '/by' followed by a task deadline.");
@@ -60,17 +59,17 @@ public class Parser {
                     throw new DukeException("Please enter a deadline.");
                 }
                 String by = input.substring(input.indexOf("/by") + 4);
-                try{
+                try {
                     task = new Deadline(content, by);
-                } catch(DateTimeParseException e){
-                    throw new DukeException("Invalid date, " +
-                            "please enter a valid date in the format: " +
-                            "yyyy/MM/dd HH:mm");
+                } catch (DateTimeParseException e) {
+                    throw new DukeException("Invalid date, "
+                            + "please enter a valid date in the format: "
+                            + "yyyy/MM/dd HH:mm");
                 }
             } else if (words[0].equals("event")) {
                 if (words.length <= 1 || words[1].equals("/at")) {
-                    throw new DukeException("The description of event " +
-                            "cannot be empty.");
+                    throw new DukeException("The description of event "
+                            + "cannot be empty.");
                 }
                 if (input.indexOf("/at") < 0) {
                     throw new DukeException("Please enter '/at' followed by an event time.");
@@ -80,12 +79,12 @@ public class Parser {
                     throw new DukeException("Please provide the event time.");
                 }
                 String at = input.substring(input.indexOf("/at") + 4);
-                try{
+                try {
                     task = new Event(content, at);
-                } catch(DateTimeParseException | ArrayIndexOutOfBoundsException e){
-                    throw new DukeException("Invalid date, " +
-                            "please enter a valid time period in the format: " +
-                            "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm");
+                } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+                    throw new DukeException("Invalid date, "
+                            + "please enter a valid time period in the format: "
+                            + "yyyy/MM/dd HH:mm--yyyy/MM/dd HH:mm");
                 }
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
