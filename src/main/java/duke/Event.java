@@ -20,12 +20,12 @@ public class Event extends Task {
      * gets event timing
      * @return getter method to get event time
      */
-    public String getAt(){
+    public String getAt() {
         return this.at;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at:" + at + ")" ;
+        return "[E]" + super.toString() + "(at:" + at + ")";
     }
 }

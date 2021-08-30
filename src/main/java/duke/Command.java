@@ -10,9 +10,9 @@ import java.util.Scanner;
  */
 public class Command {
 
-    String input;
+    private String input;
 
-    Command(String input){
+    Command(String input) {
         this.input = input;
     }
     /**
@@ -26,13 +26,13 @@ public class Command {
         String filePath = "data/duke.txt";
         String command = Parser.parseCommand(sc.next());
         System.out.println(command);
-        switch(command){
+        switch(command) {
         case "bye":
-            return ui.Bye();
+            return ui.showBye();
         case "list":
             String list = "";
             int listNum = 1;
-            for (int i = 0; i < tasks.size(); i++){
+            for (int i = 0; i < tasks.size(); i++) {
                 list += listNum + "." + tasks.get(i) + "\n";
                 listNum++;
             }
@@ -41,7 +41,7 @@ public class Command {
             int doneNum = sc.nextInt() - 1;
             try {
                 tasks.get(doneNum).markAsDone();
-                return ui.Done(tasks.get(doneNum));
+                return ui.done(tasks.get(doneNum));
             } catch (IndexOutOfBoundsException e) {
                 return ui.showDoneError();
             }
@@ -49,72 +49,72 @@ public class Command {
             try {
                 String todoDescription = sc.nextLine().trim();
                 Task todo = new Todo(todoDescription);
-                if(todoDescription.isEmpty()){
+                if (todoDescription.isEmpty()) {
                     throw new DukeException(ui.emptyDescriptionError());
                 }
                 tasks.add(todo);
-                return ui.todo(tasks,todo);
-            } catch (DukeException e){
+                return ui.todo(tasks, todo);
+            } catch (DukeException e) {
                 return e.getMessage();
             }
         case "delete":
-            int delNum = sc.nextInt()-1;
+            int delNum = sc.nextInt() - 1;
             try {
                 Task delete = tasks.get(delNum);
                 tasks.remove(delNum);
-                return ui.Delete(tasks,delete);
-            } catch (IndexOutOfBoundsException e){
+                return ui.delete(tasks, delete);
+            } catch (IndexOutOfBoundsException e) {
                 return ui.showDeleteError();
             }
         case "deadline":
             try {
                 String[] deadlineArr = sc.nextLine().split("/by");
-                if(deadlineArr[0].strip().isEmpty()){
+                if (deadlineArr[0].strip().isEmpty()) {
                     throw new DukeException(ui.emptyDescriptionError());
                 }
                 LocalDate d1 = LocalDate.parse(deadlineArr[1].trim());
                 Task deadline = new Deadline(deadlineArr[0].trim(),
                         d1.format(DateTimeFormatter.ofPattern("MMM dd YYYY")));
                 tasks.add(deadline);
-                return ui.deadline(tasks,deadline);
-            } catch (DateTimeParseException e){
+                return ui.deadline(tasks, deadline);
+            } catch (DateTimeParseException e) {
                 ui.showDeadlineError();
                 break;
-            } catch (DukeException e){
+            } catch (DukeException e) {
                 return e.getMessage();
             }
         case "event":
             try {
                 String[] eventArr = sc.nextLine().split("/at");
-                if(eventArr[0].strip().isEmpty()){
+                if (eventArr[0].strip().isEmpty()) {
                     throw new DukeException(ui.emptyDescriptionError());
                 }
-                Task event = new Event(eventArr[0].trim(),eventArr[1].trim());
+                Task event = new Event(eventArr[0].trim(), eventArr[1].trim());
                 tasks.add(event);
-                return ui.event(tasks,event);
-            } catch (DukeException e){
+                return ui.event(tasks, event);
+            } catch (DukeException e) {
                 return e.getMessage();
             }
         case "find":
             try {
                 String keyword = sc.nextLine().trim();
                 String findList = "\n";
-                if(keyword.strip().isEmpty()){
+                if (keyword.strip().isEmpty()) {
                     throw new DukeException(ui.emptyDescriptionError());
                 }
-                for (int i = 0; i < tasks.size(); i++){
-                    if (tasks.get(i).getDescription().contains(keyword)){
+                for (int i = 0; i < tasks.size(); i++) {
+                    if (tasks.get(i).getDescription().contains(keyword)) {
                         findList += tasks.get(i) + "\n";
                     }
                 }
                 return ui.find(findList);
-            } catch (DukeException e){
+            } catch (DukeException e) {
                 return e.getMessage();
             }
         default:
             return ui.defaultError();
         }
-        save.writeToFile(filePath,tasks);
-        return ui.Start();
+        save.writeToFile(filePath, tasks);
+        return null;
     }
 }

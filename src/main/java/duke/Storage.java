@@ -11,14 +11,14 @@ import java.util.Scanner;
  * Storage class to handle saving and loading tasks from a file
  */
 public class Storage {
-    File file;
-    String filePath;
+    private File file;
+    private String filePath;
 
     /**
      * creates a Storage object
      * @param filePath a String representing the directory of the file
      */
-    Storage(String filePath){
+    Storage(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
         if (!file.exists()) {
@@ -27,7 +27,7 @@ public class Storage {
                 file.mkdir();
                 file = new File("data/duke.txt");
                 file.createNewFile();
-            } catch (IOException e){
+            } catch (IOException e) {
                 System.out.println("Something went wrong: " + e.getMessage());
             }
         }
@@ -38,17 +38,17 @@ public class Storage {
      * @param filePath a String representing the directory of the file
      * @param list list of tasks that will be written into the file
      */
-    public void writeToFile(String filePath, TaskList list){
+    public void writeToFile(String filePath, TaskList list) {
         try {
             String text = "";
             FileWriter fw = new FileWriter(filePath);
-            for (int i = 0; i < list.size(); i++){
+            for (int i = 0; i < list.size(); i++) {
                 Task t = list.get(i);
                 text += textToAdd(t);
             }
             fw.write(text);
             fw.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
@@ -59,13 +59,13 @@ public class Storage {
      * @return return a TaskList object containing the list of tasks that was in the file
      * @throws FileNotFoundException
      */
-    public ArrayList<Task> readFile(String filePath) throws FileNotFoundException{
+    public ArrayList<Task> readFile(String filePath) throws FileNotFoundException {
         File f = new File(filePath);
         Scanner s = new Scanner(f);
         ArrayList<Task> list = new ArrayList<>();
         while (s.hasNext()) {
             String taskType = s.next();
-            switch(taskType){
+            switch(taskType) {
             case "T":
                 String[] todoArr = s.nextLine().trim().split("\\|");
                 Task todo = new Todo(todoArr[2].trim());
@@ -76,7 +76,7 @@ public class Storage {
                 break;
             case "D":
                 String[] deadlineArr = s.nextLine().trim().split("\\|");
-                Task deadline = new Deadline(deadlineArr[2].trim(),deadlineArr[3].trim());
+                Task deadline = new Deadline(deadlineArr[2].trim(), deadlineArr[3].trim());
                 if (Integer.parseInt(deadlineArr[1].trim()) == 1) {
                     deadline.markAsDone();
                 }
@@ -84,11 +84,13 @@ public class Storage {
                 break;
             case "E":
                 String[] eventArr = s.nextLine().trim().split("\\|");
-                Task event = new Event(eventArr[2].trim(),eventArr[3].trim());
+                Task event = new Event(eventArr[2].trim(), eventArr[3].trim());
                 if (Integer.parseInt(eventArr[1].trim()) == 1) {
                     event.markAsDone();
                 }
                 list.add(event);
+                break;
+            default:
                 break;
             }
         }
@@ -103,14 +105,14 @@ public class Storage {
     private static String textToAdd(Task t) {
         String mes = "";
         if (t instanceof Todo) {
-            mes += "T" + statusIcon(t) + t.description +"\n";
+            mes += "T" + statusIcon(t) + t.description + "\n";
         }
         if (t instanceof Deadline) {
-            Deadline d = (Deadline)t;
+            Deadline d = (Deadline) t;
             mes += "D" + statusIcon(t) + t.description + " | " + d.getBy() + "\n";
         }
         if (t instanceof Event) {
-            Event e = (Event)t;
+            Event e = (Event) t;
             mes += "E" + statusIcon(t) + t.description + " | " + e.getAt() + "\n";
         }
         return mes;
@@ -121,7 +123,7 @@ public class Storage {
      * @param t takes in a task to check its status
      * @return a String representing the status
      */
-    private static String statusIcon(Task t){
+    private static String statusIcon(Task t) {
         if (t.getStatusIcon() == "X") {
             return " | 1 | ";
         } else {

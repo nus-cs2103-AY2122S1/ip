@@ -9,7 +9,7 @@ public class Parser {
      * @param command takes in a String representing user's command
      * @return a String with only lower case letters representing user's command
      */
-    public static String parseCommand(String command){
+    public static String parseCommand(String command) {
         return command.toLowerCase();
     }
 

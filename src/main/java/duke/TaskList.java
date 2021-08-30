@@ -12,7 +12,7 @@ public class TaskList {
     /**
      * Creates a TaskList object
      */
-    TaskList(){
+    TaskList() {
         this.list = new ArrayList<>();
     }
 
@@ -20,7 +20,7 @@ public class TaskList {
      * Creates a TaskList object
      * @param list takes in a list of Task
      */
-    TaskList(ArrayList<Task> list){
+    TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
@@ -28,7 +28,7 @@ public class TaskList {
      * Adds a task to the list
      * @param t takes in a Task to be added
      */
-    public void add(Task t){
+    public void add(Task t) {
         list.add(t);
     }
 
@@ -37,7 +37,7 @@ public class TaskList {
      * @param getNum takes in a int representing the index
      * @return a Task at the specific index
      */
-    public Task get(int getNum){
+    public Task get(int getNum) {
         return list.get(getNum);
     }
 
@@ -45,7 +45,7 @@ public class TaskList {
      * Gets the size of the list
      * @return a int representing the list size
      */
-    public int size(){
+    public int size() {
         return list.size();
     }
 
@@ -53,7 +53,7 @@ public class TaskList {
      * Removes a task at the specific index from the list
      * @param delNum takes in a int representing the index
      */
-    public void remove(int delNum){
+    public void remove(int delNum) {
         list.remove(delNum);
     }
 

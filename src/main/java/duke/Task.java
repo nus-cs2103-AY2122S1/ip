@@ -35,12 +35,12 @@ public class Task {
     /**
      * marks a task as done
      */
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
-    
+
     @Override
-    public String toString(){
-        return "[" + this.getStatusIcon() + "] " + this.description ;
+    public String toString() {
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }

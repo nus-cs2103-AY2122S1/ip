@@ -8,8 +8,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-
-    public Duke(String filePath){
+    /**
+     * creates a Duke object
+     * @param filePath takes a String representing the directory
+     */
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -26,7 +29,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         Command c = new Command(input);
-        String s = c.execute(tasks,ui,storage);
+        String s = c.execute(tasks, ui, storage);
         return s;
     }
 }
