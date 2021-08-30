@@ -1,4 +1,16 @@
-import java.util.*;
+import javax.xml.stream.FactoryConfigurationError;
+import java.io.FileOutputStream;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Arrays;
 
 public class Duke {
 
@@ -14,14 +26,16 @@ public class Duke {
         private String done;
         private String[] dataOfAction;
         private String finalAction = "";
-
+        private TaskTypes type;
+        private boolean isDone = false;
         /**
          * constructor for Task.
+         *
          * @param action
          */
-        public Task(String action, String done) {
+        public Task(String action, String done, TaskTypes type) {
             this.done = done;
-
+            this.type = type;
             dataOfAction = action.split("/")[0].split(" ");
             for (int i = 1; i < dataOfAction.length; i++) {
                 finalAction += dataOfAction[i] + " ";
@@ -40,7 +54,7 @@ public class Duke {
         private String setDate(String[] data) {
             String output = " (" + data[0] + ": ";
             for (int i = 1 ;i < data.length; i++) {
-                output += data[i];
+                output += " " + data[i];
             }
             return output + " )";
         }
@@ -48,9 +62,8 @@ public class Duke {
          * modify the task message if done.
          */
         public void done() {
-            System.out.println("Nice! I've marked this task as done: ");
             done = done.substring(0, 3) + "[X] ";
-            System.out.println("    " + this);
+            this.isDone = true;
         }
         /**
          * Override the original toString method to generate the correct value.
@@ -59,6 +72,30 @@ public class Duke {
         public String toString() {
             return done + finalAction;
         }
+
+        /////////////////getters////////////////////////
+
+        /**
+         * get Task Type
+         * @return
+         */
+        public TaskTypes getType() {
+            return type;
+        }
+
+        /**
+         * get isDone
+         * @return
+         */
+        public boolean getIsDone() {
+            return isDone;
+        }
+    }
+
+    private enum TaskTypes {
+        Todo,
+        Deadline,
+        Events
     }
 
     private class TodoTasks extends Task {
@@ -68,7 +105,7 @@ public class Duke {
          * @param action
          */
         public TodoTasks(String action) throws TodoException{
-            super(action, "[T][] ");
+            super(action, "[T][] ", TaskTypes.Todo);
             if (action.split(" ").length < 2){
                 throw new TodoException("OOPS!!! The description of a todo cannot be empty.");
             }
@@ -76,13 +113,14 @@ public class Duke {
     }
 
     private class DeadlineTask extends Task {
+        public TaskTypes type = TaskTypes.Deadline;
         /**
          * constructor for Task.
          *
          * @param action
          */
         public DeadlineTask(String action) throws DeadlineException {
-            super(action, "[D][] ");
+            super(action, "[D][] ", TaskTypes.Deadline);
             if (action.split("/").length < 2) {
                 throw new DeadlineException("incorrect format for deadline task");
             } else if (action.split("/")[1].split(" ").length < 2) {
@@ -98,7 +136,7 @@ public class Duke {
          * @param action
          */
         public EventsTask(String action) throws EventsException{
-            super(action, "[E][] ");
+            super(action, "[E][] ", TaskTypes.Events);
             if (action.split("/").length < 2){
                 throw new EventsException("incorrect format for Events task");
             } else if (action.split("/")[1].split(" ").length < 3) {
@@ -171,6 +209,7 @@ public class Duke {
         String line = "__________________________________";
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(line);
+        saveListInFile("src/main/java/Duke.txt");
     }
     /**
      * The original method to simply generate an echo message.
@@ -240,6 +279,8 @@ public class Duke {
                 int index = Integer.parseInt(newInput[1]);
                 if (index <= taskList.size() && index > 0) {
                     taskList.get(index - 1).done();
+                    System.out.println("Nice! I've marked this task as done: ");
+                    System.out.println("    " + this);
                 } else {
                     System.out.println("invalid index");
                 }
@@ -279,11 +320,105 @@ public class Duke {
         System.out.println(line);
     }
 
+    /**
+     * Function obtain data from previous file records. Creates the file if it's not present.
+     */
+    private void getDataInputList() {
+        try {
+            File f = new File("src/main/java/Duke.txt");
+            if(!f.exists()){
+                f.createNewFile();
+            }
+            FileReader reader = new FileReader(new File("src/main/java/Duke.txt"));
+            BufferedReader br = new BufferedReader(reader);  //creates a buffering character input stream
+            String line;
+            Task curTask;
+            boolean isCurTaskDone = false;
+
+            while ((line = br.readLine()) != null) {
+
+                String[] data = line.split(" ");
+                int lengthLimit = data.length;
+                String taskData = "";
+
+                if (data[data.length - 1].equals("done")){
+                    isCurTaskDone = true;
+                    lengthLimit -= 1;
+                }
+
+                try {
+                    for (int i = 0; i < lengthLimit; i++) {
+                        taskData += data[i] + " ";
+                    }
+                    curTask = createTask(taskData);
+                    if (isCurTaskDone) {
+                        curTask.done();
+                    }
+                    taskList.add(curTask);
+                } catch (Exception e) {
+                }
+            }
+        }catch (FileNotFoundException f) {
+        }catch(IOException io){
+        }
+    }
+
+    /**
+     * Save the current Task in the target file.
+     * @param filename
+     */
+    private void saveListInFile(String filename) {
+        try {
+            //clear the current data file
+            PrintWriter pw = new PrintWriter(filename);
+            pw.close();
+            //write into the file
+            File tempFile = new File(filename);
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+            for (Task task : taskList) {
+                writer.write(formatTaskIntoCommands(task));
+            }
+            writer.close();
+        }catch (IOException io) {
+        }
+    }
+
+    private String formatTaskIntoCommands(Task task) {
+        String[] taskInfo = task.toString().split(" ");
+        String output;
+        String separator = "";
+        String keyword = "";
+        taskInfo = Arrays.copyOfRange(taskInfo, 1, taskInfo.length);
+        if (task.getType().equals(TaskTypes.Todo)) {
+            output = "Todo";
+        } else if (task.getType().equals(TaskTypes.Deadline)) {
+            output = "Deadline";
+            separator = "(by:";
+            keyword = "by";
+        } else {
+            output = "Events";
+            separator = "(at:";
+            keyword = "at";
+        }
+        for (String str : taskInfo) {
+            if (!str.equals(")") && !str.equals("")) {
+                if (str.equals(separator)) {
+                    str = "/" + keyword;
+                }
+                output += " " + str;
+            }
+        }
+        if (task.getIsDone()) {
+            output += " done";
+        }
+        return output + "\n";
+    }
 
     public static void main(String[] args) {
         Duke bot = new Duke();
         bot.greet();
         boolean end = true;
+        bot.getDataInputList();
         while (end) {
             end = bot.echo();
         }
