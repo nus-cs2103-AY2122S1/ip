@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.Parser;
-
 import java.time.LocalDate;
+
+import duke.Parser;
 
 /**
  * A Deadline type task representation for Duke.
@@ -37,5 +37,4 @@ public class Deadline extends Task {
         }
         return false;
     }
-
 }

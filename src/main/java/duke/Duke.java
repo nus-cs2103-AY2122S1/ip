@@ -153,7 +153,8 @@ public class Duke {
         } catch (DukeException e) {
             ui.printMessage(e.getMessage());
         }
-        ui.printMessage("Got it. I've added this task:\n\t" + todo + "\nNow you have " + tasks.size() + " tasks in the list.");
+        ui.printMessage("Got it. I've added this task:\n\t" + todo
+                + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
     /**
@@ -175,7 +176,8 @@ public class Duke {
         } catch (DukeException e) {
             ui.printMessage(e.getMessage());
         }
-        ui.printMessage("Got it. I've added this task:\n\t" + event + "\nNow you have " + tasks.size() + " tasks in the list.");
+        ui.printMessage("Got it. I've added this task:\n\t" + event
+                + "\nNow you have " + tasks.size() + " tasks in the list.");
 
     }
 
@@ -198,7 +200,8 @@ public class Duke {
         } catch (DukeException e) {
             ui.printMessage(e.getMessage());
         }
-        ui.printMessage("Got it. I've added this task:\n\t" + deadline + "\nNow you have " + tasks.size() + " tasks in the list.");
+        ui.printMessage("Got it. I've added this task:\n\t" + deadline
+                + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 
     /**

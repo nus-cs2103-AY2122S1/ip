@@ -1,19 +1,20 @@
 package duke;
 
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * A collection of storage io methods.
@@ -109,7 +110,9 @@ public class Storage {
             // not of any task type
             throw new IllegalArgumentException("Task type not recognized: " + taskType);
         }
-        if (Integer.parseInt(taskInfo[1]) == 1) task.markAsDone();
+        if (Integer.parseInt(taskInfo[1]) == 1) {
+            task.markAsDone();
+        }
         return task;
     }
 

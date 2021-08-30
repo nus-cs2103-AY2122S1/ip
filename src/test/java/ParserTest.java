@@ -1,11 +1,11 @@
-import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
 import duke.Parser;
 import duke.task.Deadline;
-
-import java.time.LocalDate;
 
 public class ParserTest {
 
@@ -47,7 +47,8 @@ public class ParserTest {
         String command = "deadline cs2103t ip /by 2021-08-24";
 
         try {
-            Assertions.assertEquals(new Deadline("cs2103t ip", p.stringToLocalDate("2021-08-24")), p.commandToTask(command));
+            Assertions.assertEquals(new Deadline("cs2103t ip", p.stringToLocalDate("2021-08-24")),
+                    p.commandToTask(command));
         } catch (DukeException e) {
             Assertions.fail();
         }
