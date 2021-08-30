@@ -13,6 +13,11 @@
    * _Need to know what to get done today? Find tasks by date!_
    * _You can also find tasks by keywords!_
 
+**Why you need Duke:**
+- Why worry about forgetting tasks and deadlines?
+- Why worry about whether you've finished something?
+- I needed to make a bullet list.
+
 All you need to do is: 
 
 - [ ] Head over to this application's [GitHub page](https://github.com/ntwbruce/ip)!
@@ -33,3 +38,5 @@ public class Duke {
 ````
 
 > See Mumei-ter!
+
+:lemon:
