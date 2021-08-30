@@ -11,6 +11,7 @@ public class Pix {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private Parser parser;
 
     /**
      * Constructor for Pix.
@@ -45,15 +46,5 @@ public class Pix {
                 ui.showError(e.getMessage());
             }
         }
-    }
-
-    /**
-     * Running the application.
-     *
-     * @param args String.
-     */
-    public static void main(String[] args) {
-        System.out.println();
-        new Pix("./data/Pix.txt").run();
     }
 }

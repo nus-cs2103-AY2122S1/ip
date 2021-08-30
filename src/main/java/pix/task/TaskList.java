@@ -3,7 +3,7 @@ package pix.task;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import pix.exception.PixIOException;
+import pix.exception.PixIoException;
 import pix.exception.PixNoSuchTaskException;
 import pix.storage.Storage;
 
@@ -48,7 +48,7 @@ public class TaskList {
         res += "\nYou now have " + taskList.size() + " task(s) in your list";
         try {
             storage.writeToFile(taskList);
-        } catch (IOException | PixIOException e) {
+        } catch (IOException | PixIoException e) {
             //The format should be set and there shouldn't be any I/O error.
         }
         return res;
