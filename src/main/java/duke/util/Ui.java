@@ -11,7 +11,6 @@ public class Ui {
     public Ui() {
         // Initialize scanner and print welcome message
         sc = new Scanner(System.in);
-        printMessage(Message.WELCOME);
     }
 
     /**
