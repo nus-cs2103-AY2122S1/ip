@@ -1,8 +1,17 @@
 package gnosis.main;
+
+import java.io.IOException;
+import java.util.Scanner;
+
 import gnosis.controller.GnosisController;
 import gnosis.ui.GnosisUI;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-import java.util.Scanner;
+
 
 /**
  *
@@ -20,7 +29,7 @@ import java.util.Scanner;
  * @author Pawandeep Singh
 
  * */
-public class Gnosis {
+public class Gnosis extends Application {
 
     /** Handles Gnosis View */
     private GnosisUI gnosisView;
@@ -28,32 +37,27 @@ public class Gnosis {
     /** Handles Gnosis Logic */
     private GnosisController gnosisController;
 
-    /**
-     * Gnosis constructor to initialise view and controller.
-     */
-    public Gnosis() {
-        gnosisView = new GnosisUI();
-        this.gnosisController = new GnosisController(gnosisView);
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(GnosisUI.class.getResource("/gnosis/ui/GnosisMainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+
+            // Set up connection between Gnosis UI and Gnosis Logic Controller
+            gnosisView = fxmlLoader.getController();
+            this.gnosisController = new GnosisController(gnosisView);
+            gnosisView.setUpGnosis(gnosisController);
+
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Starts running Gnosis programme by retrieving user input.
-     *
-     * @param sc user input
-     */
-    private void run(Scanner sc) {
-        gnosisController.startGnosis(sc);
-    }
-
-
-    public static void main(String[] args) {
-            // initialise gnosis program
-            Gnosis gnosis = new Gnosis();
-
-            // runs program and waits for user input
-            Scanner sc = new Scanner(System.in);
-            gnosis.run(sc);
-
-            sc.close();
-    }
 }
