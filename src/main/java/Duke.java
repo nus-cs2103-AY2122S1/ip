@@ -68,7 +68,7 @@ public class Duke {
                         String taskDesc = input.replaceFirst("^deadline", "").split(" /")[0];
                         String deadline = "";
                         if (input.contains("/by")) {
-                            deadline = input.substring(input.indexOf("/by") + 3);
+                            deadline = input.substring(input.indexOf("/by") + 4);
                         }
                         Deadline dTask = new Deadline(taskDesc, deadline);
                         ls.addTask(dTask);
@@ -77,7 +77,7 @@ public class Duke {
                         String taskDesc = input.replaceFirst("^event", "").split(" /")[0];
                         String eventTime = "";
                         if (input.contains("/at")) {
-                            eventTime = input.substring(input.indexOf("/at") + 3);
+                            eventTime = input.substring(input.indexOf("/at") + 4);
                         }
                         Event eTask = new Event(taskDesc, eventTime);
                         ls.addTask(eTask);
