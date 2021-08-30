@@ -23,7 +23,7 @@ This project uses the following libraries:
 1. [JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple)
 
 ## Disclaimer
-This project uses images depicting celebrity chef Ainsley Harriot. 
+This project uses images depicting celebrity chef Ainsley Harriott. 
 This project is in no way related nor endorsed by him, and depiction of Mr. Harriot is only for comedic effect.
 Do reach out and inform me via appropriate channels (GitHub issues or email) if these depictions are in breach of any existing laws, and I will remove the images.
 Until then, it stays up.
