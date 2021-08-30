@@ -43,34 +43,38 @@ public class Parser {
      * @param userInt the user interface object for logging.
      * @param memBuff the memory buffer that reads and writes files
      */
-    public void execute(String command, DataStore dataStore, Ui userInt, MemoryBuffer memBuff) {
+    public String execute(String command, DataStore dataStore, Ui userInt, MemoryBuffer memBuff) {
+        String result = "";
+
         if (command.equals("list")) {
-            brain.listItems(dataStore, userInt);
+            result = brain.listItems(dataStore, userInt);
         } else if (command.contains("todo")) {
-            brain.createTodo(command, dataStore, userInt);
+            result = brain.createTodo(command, dataStore, userInt);
         } else if (command.contains("deadline")) {
-            brain.createDeadline(command, dataStore, userInt);
+            result = brain.createDeadline(command, dataStore, userInt);
         } else if (command.contains("event")) {
-            brain.createEvent(command, dataStore, userInt);
+            result = brain.createEvent(command, dataStore, userInt);
         } else if (command.contains("done")) {
             try {
-                brain.completeTask(command, dataStore, userInt, IDX_OUT_OF_BOUNDS);
+                result = brain.completeTask(command, dataStore, userInt, IDX_OUT_OF_BOUNDS);
             } catch (BotException e) {
-                userInt.say(e.getMessage());
+                result = e.getMessage();
             }
         } else if (command.equals("bye")) {
-            brain.shutdownBot(userInt, dataStore, memBuff);
+            result = brain.shutdownBot(userInt, dataStore, memBuff);
         } else if (command.contains("delete")) {
-            brain.deleteTask(command, dataStore, userInt);
+            result = brain.deleteTask(command, dataStore, userInt);
         } else if (command.contains("find")) {
-            brain.find(command, dataStore, userInt);
+            result = brain.find(command, dataStore, userInt);
         } else {
             try {
                 errorHandle(command);
             } catch (BotException e) {
-                userInt.say(UNRECOG);
+                result = UNRECOG;
             }
         }
+
+        return result;
     }
 
     /**

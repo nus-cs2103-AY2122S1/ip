@@ -1,13 +1,13 @@
-/** 
+package duke;
+
+/**
  * This file contains the main logic behind the Duke chatbot.
  * 
  * @author: Rishabh Anand
  * @version: CS2103, AY21/22 Semester 1
+ *
  */
 
-package duke;
-
-import java.util.ArrayList;
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.IOException;
 
@@ -16,45 +16,45 @@ import duke.membuffer.MemoryBuffer;
 import duke.parser.Parser;
 import duke.ui.Ui;
 
-/**
- * This represents the Duke chatbot and its business logic.
- */
 public class Duke {
     private MemoryBuffer memBuff;
-    private Ui userInt;
-    private DataStore dataStore;
-    private Parser parser;
+    public Ui userInt;
+    public DataStore dataStore;
+    final public Parser parser;
 
-    public Duke(String filePath) {
+    public Duke() {
         dataStore = new DataStore();
-        memBuff = new MemoryBuffer(filePath);
+        memBuff = new MemoryBuffer("./data/duke.txt");
         parser = new Parser();
         userInt = new Ui();
-        ArrayList<String> store;
 
         try {
-            store = memBuff.readFile();
-            dataStore.ingestExternalSource(store, parser);
+            dataStore.ingestExternalSource(memBuff.readFile(), parser);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            System.out.println("File not found!");
             dataStore = new DataStore();
         }
     }
 
-    public void run() {
-        userInt.greet();
-
-        while (true) {
-            try {
-                String userInput = userInt.getUserInput();
-                parser.execute(userInput, dataStore, userInt, memBuff);
-            } catch (IOException e) {
-                userInt.say(e.getMessage());
-            }
-        }
+    public String getResponse(String input) {
+        String response = parser.execute(input, dataStore, userInt, memBuff);
+        return response;
     }
 
-    public static void main(String[] args) {
-        new Duke("../../../data/duke.txt").run();
-    }
+//    public void run() {
+//        userInt.greet();
+//
+//        while (true) {
+//            try {
+//                String userInput = userInt.getUserInput();
+//                parser.execute(userInput, dataStore, userInt, memBuff);
+//            } catch (IOException e) {
+//                userInt.say(e.getMessage());
+//            }
+//        }
+//    }
+
+//    public static void main(String[] args) {
+//        new Duke().run();
+//    }
 }
