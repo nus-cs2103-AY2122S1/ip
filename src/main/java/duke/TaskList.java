@@ -238,34 +238,10 @@ public class TaskList {
     public String saveAsString() throws DukeException {
         StringBuilder strb = new StringBuilder();
         for (int i = 0; i < this.counter; i++) {
-            if (taskArr.get(i) instanceof Todo) {
-                strb.append("T | ");
-            } else if (taskArr.get(i) instanceof Deadline) {
-                strb.append("D | ");
-            } else if (taskArr.get(i) instanceof Event) {
-                strb.append("E | ");
-            } else {
-                // nothing happens because it shouldn't reach here.
-            }
-            if (taskArr.get(i).isDone) {
-                strb.append("1 | ");
-            } else {
-                strb.append("0 | ");
-            }
-            strb.append(taskArr.get(i).getTaskStr());
-            if (taskArr.get(i) instanceof Deadline) {
-                strb.append(" | ");
-                strb.append(taskArr.get(i).getDateTimeStorage());
-            } else if (taskArr.get(i) instanceof Event) {
-                strb.append(" | ");
-                strb.append(taskArr.get(i).getDateTimeStorage());
-            } else {
-                // do nothing
-            }
+            strb.append(taskArr.get(i).toStorageString());
             if (i < this.counter - 1) {
                 strb.append('\n');
             }
-
         }
         return strb.toString();
     }
@@ -281,7 +257,7 @@ public class TaskList {
 
         for (int i = 0; i < counter; i++) {
             Task temp = taskArr.get(i);
-            if (temp.getTaskStr().toLowerCase().contains(keyword.toLowerCase())) {
+            if (temp.getTaskString().toLowerCase().contains(keyword.toLowerCase())) {
                 isFound = true;
                 strb.append(i).append(". ").append(temp.toString());
                 if (i < counter - 1) {

@@ -15,12 +15,27 @@ public class Todo extends Task {
     /**
      * Constructor to initialize Todo.
      *
-     * @param taskstr Task.
+     * @param taskString Task.
      */
-    public Todo(String taskstr) {
-        super(taskstr);
+    public Todo(String taskString) {
+        super(taskString);
         super.date = null;
         super.time = null;
+    }
+
+    /**
+     * Converts Todo to String for Storage.
+     * @return Todo String for storage.
+     */
+    @Override
+    public String toStorageString() {
+        String isDoneString;
+        if (super.isDone) {
+            isDoneString = "1";
+        } else {
+            isDoneString = "0";
+        }
+        return ("T | " + isDoneString + " | " + super.taskString);
     }
 
     /**

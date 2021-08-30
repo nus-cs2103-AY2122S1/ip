@@ -141,7 +141,7 @@ public class Ui {
 
                         System.out.println(linebreakstart);
                         System.out.println("Uwu! Addewd yourw taskws:\n");
-                        System.out.println("   " + tasklist.lastAddedTask() + '\n');
+                        System.out.println(tasklist.lastAddedTask() + '\n');
                         System.out.println("Youw noww havew "
                                 + (tasklist.getTaskCounter())
                                 + " taskw(s) inw thew wist! uwu\n");
@@ -160,9 +160,7 @@ public class Ui {
 
                         System.out.println(linebreakstart);
                         System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n");
-                        System.out.println("   "
-                                + tasklist.getTaskDescr(i)
-                                + '\n');
+                        System.out.println(tasklist.getTaskDescr(i) + '\n');
                         System.out.println(linebreakend);
 
                     } catch (DukeException e) {
@@ -179,9 +177,7 @@ public class Ui {
 
                         System.out.println(linebreakstart);
                         System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw hasw beenw deweted:\n");
-                        System.out.println("   "
-                                + t.toString()
-                                + '\n');
+                        System.out.println(t.toString() + '\n');
                         System.out.println("Youw noww havew "
                                 + (tasklist.getTaskCounter())
                                 + " taskw(s) inw thew wist! uwu\n");

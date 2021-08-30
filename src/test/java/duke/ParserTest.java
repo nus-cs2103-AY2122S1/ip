@@ -28,11 +28,19 @@ public class ParserTest {
 //        assertEquals("2020-01-01 | 01:00", parser.parseEvent(strparse).getDateTimeStorage());
 //    }
 
+//    @Test
+//    public void parseTime() throws DukeException {
+//        Parser parser = new Parser();
+//        LocalTime time = LocalTime.parse("13:00");
+//        assertEquals("1.00pm", parser.simplifyTime(time));
+//    }
+
     @Test
-    public void parseTime() throws DukeException {
+    public void parseEvent() throws DukeException {
         Parser parser = new Parser();
-        LocalTime time = LocalTime.parse("13:00");
-        assertEquals("1.00pm", parser.simplifyTime(time));
+        String[] strparse = new String[] {"event", "kill", "me" ,"now", "/at", "2020-01-01", "23:23"};
+        Event event = parser.parseEvent(strparse);
+        assertEquals("E | 0 | kill me now | 2020-01-01 | 23:23", event.toStorageString());
     }
 
 }

@@ -94,7 +94,8 @@ public class Parser {
             while (i < strparse.length
                     && !strparse[i].equalsIgnoreCase("/by")) {
                 strb.append(strparse[i]);
-                if (i != strparse.length - 1) {
+                if (i < strparse.length - 1
+                        && !strparse[i + 1].equalsIgnoreCase("/by")) {
                     strb.append(" ");
                 }
                 i++;
@@ -127,7 +128,8 @@ public class Parser {
             while (i < strparse.length
                     && !strparse[i].equalsIgnoreCase("/at")) {
                 strb.append(strparse[i]);
-                if (i != strparse.length - 1) {
+                if (i < strparse.length - 1
+                        && !strparse[i + 1].equalsIgnoreCase("/at")) {
                     strb.append(" ");
                 }
                 i++;

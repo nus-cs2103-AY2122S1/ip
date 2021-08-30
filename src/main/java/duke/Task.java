@@ -45,6 +45,14 @@ public class Task {
     }
 
     /**
+     * Returns String for storage.
+     * @return String for storage.
+     */
+    public String toStorageString() {
+        return "";
+    }
+
+    /**
      * Returns date stored in Task in String form.
      * Is blank because Todo doesn't have a Time. Is Overwritten in Event and Deadline.
      * @return ""
@@ -74,7 +82,7 @@ public class Task {
      * Returns the pure String of task.
      * @return Pure String of task.
      */
-    public String getTaskStr() {
+    public String getTaskString() {
         return taskString;
     }
 

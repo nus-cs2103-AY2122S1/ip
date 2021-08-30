@@ -15,11 +15,11 @@ public class Deadline extends Task {
     /**
      * Constructor to initialize Deadline.
      *
-     * @param taskstr Task.
+     * @param taskString Task.
      * @param date Date of deadline.
      */
-    public Deadline(String taskstr, LocalDate date) {
-        super(taskstr);
+    public Deadline(String taskString, LocalDate date) {
+        super(taskString);
         super.date = date;
         super.time = null;
     }
@@ -72,6 +72,21 @@ public class Deadline extends Task {
     }
 
     /**
+     * Converts Deadline to String for Storage.
+     * @return Deadline String for storage.
+     */
+    @Override
+    public String toStorageString() {
+        String isDoneString;
+        if (super.isDone) {
+            isDoneString = "1";
+        } else {
+            isDoneString = "0";
+        }
+        return ("D | " + isDoneString + " | " + super.taskString + " | " + this.getDateTimeStorage());
+    }
+
+    /**
      * Returns string of Deadline (Task).
      * @return string of Deadline.
      */
@@ -79,10 +94,10 @@ public class Deadline extends Task {
     public String toString() {
         Parser parser = new Parser();
         if (this.time == null) {
-            return "[D] " + super.toString() + "(by: "
+            return "[D] " + super.toString() + " (by: "
                     + parser.simplifyDate(this.date) + ")";
         } else {
-            return "[D] " + super.toString() + "(by: "
+            return "[D] " + super.toString() + " (by: "
                     + parser.simplifyDate(this.date)
                     + " " + parser.simplifyTime(this.time)
                     + ")";

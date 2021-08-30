@@ -72,6 +72,21 @@ public class Event extends Task {
     }
 
     /**
+     * Converts Event to String for storage.
+     * @return Event String for storage.
+     */
+    @Override
+    public String toStorageString() {
+        String isDoneString;
+        if (super.isDone) {
+            isDoneString = "1";
+        } else {
+            isDoneString = "0";
+        }
+        return ("E | " + isDoneString + " | " + super.taskString + " | " + this.getDateTimeStorage());
+    }
+
+    /**
      * Returns string of Event (Task).
      * @return string of Event.
      */
@@ -79,10 +94,10 @@ public class Event extends Task {
     public String toString() {
         Parser parser = new Parser();
         if (this.time == null) {
-            return "[E] " + super.toString() + "(at: "
+            return "[E] " + super.toString() + " (at: "
                     + parser.simplifyDate(this.date) + ")";
         } else {
-            return "[E] " + super.toString() + "(at: "
+            return "[E] " + super.toString() + " (at: "
                     + parser.simplifyDate(this.date)
                     + " " + parser.simplifyTime(this.time)
                     + ")";

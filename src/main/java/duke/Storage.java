@@ -42,7 +42,7 @@ public class Storage {
 
                 for (String str : lines) {
                     String[] strparse = str.split(Pattern.quote(" | "));
-                    if (strparse.length < 3) {
+                    if (strparse.length < 3 || strparse.length > 5) {
                         continue;
                         // incorrect task listed for some reason
                     } else if (strparse[0].equals("T")) {
