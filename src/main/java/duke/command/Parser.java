@@ -1,16 +1,9 @@
 package duke.command;
 
-import duke.exception.InvalidCommandException;
-
 /**
  * This class handles the making sense of user commands.
  */
 public class Parser {
-
-    public Parser() {
-
-    }
-
     /**
      * Takes in user input and performs an action accordingly.
      */

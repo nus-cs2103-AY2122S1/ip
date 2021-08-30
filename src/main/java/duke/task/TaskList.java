@@ -1,16 +1,13 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidTaskException;
 import duke.exception.MissingTaskException;
 import duke.exception.MissingTimeException;
-
-import java.io.IOException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
-import java.util.ArrayList;
 
 /**
  * This class handles commands dealing with the user's task list.
@@ -87,8 +84,6 @@ public class TaskList {
      *
      * @param toMark The index of the task to be marked.
      * @throws InvalidTaskException If task cannot be found in user's list.
-     * @throws IOException If there are problems with writing into the file.
-     *
      */
     public static void markTaskAsDone(int toMark) throws InvalidTaskException {
         if (toMark <= 0 || toMark > taskList.size()) {
