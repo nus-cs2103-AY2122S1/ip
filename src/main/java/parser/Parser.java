@@ -1,9 +1,8 @@
 package parser;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.List;
 import java.util.Scanner;
 
 import models.Command;
@@ -38,19 +37,19 @@ public class Parser implements IParser {
     @Override
     public boolean parseLine(String line) {
         List<String> arguments = new ArrayList<>(Arrays.asList(line.split(" ")));
-        if(line.equals("bye")) {
+        if (line.equals("bye")) {
             this.processor.processCommand(Command.BYE, arguments);
             return false;
-        } else if(line.equals("list")) {
+        } else if (line.equals("list")) {
             this.processor.processCommand(Command.LIST, arguments);
             return true;
-        } else if(arguments.get(0).equals("done")) {
+        } else if (arguments.get(0).equals("done")) {
             this.processor.processCommand(Command.DONE, arguments);
             return true;
-        } else if(arguments.get(0).equals("delete")) {
+        } else if (arguments.get(0).equals("delete")) {
             this.processor.processCommand(Command.DELETE, arguments);
             return true;
-        } else if(arguments.get(0).equals("find")) {
+        } else if (arguments.get(0).equals("find")) {
             this.processor.processCommand(Command.FIND, arguments);
             return true;
         } else {
