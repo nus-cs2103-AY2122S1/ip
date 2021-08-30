@@ -11,7 +11,6 @@ public class Duke {
     private static UI dukeUI = new UI();
 
     public static void main(String[] args) throws IOException {
-
         dukeUI.initiate();
         boolean dataLoaded = TaskListCsvHandler.loadAll();
         if(!dataLoaded) {
