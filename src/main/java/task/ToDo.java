@@ -9,7 +9,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String saveTask(){
+    public String saveTask() {
         return "todo|" + this.getName() + (this.isDone() ? "|1" : "|0");
     }
 

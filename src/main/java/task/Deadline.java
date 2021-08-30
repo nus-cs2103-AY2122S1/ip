@@ -14,15 +14,15 @@ public class Deadline extends Task {
         super(name);
         try {
             this.by = LocalDate.parse(by);
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("incorrect date format");
         }
 
     }
 
     @Override
-    public String saveTask(){
-        return "deadline|" + this.getName() +"/by" + by + (this.isDone() ? "|1" : "|0");
+    public String saveTask() {
+        return "deadline|" + this.getName() + "/by" + by + (this.isDone() ? "|1" : "|0");
     }
 
     @Override
