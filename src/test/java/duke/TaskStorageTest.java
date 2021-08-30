@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class TaskStorageTest {
     @Test
     public void loadTasks_invalidFileFormat_fileParseExceptionThrown() throws IOException {
-        String invalidFileLocation = "resources/invalidFileFormat.txt";
+        String invalidFileLocation = "src/test/resources/invalidFileFormat.txt";
         try {
             new TaskStorage(invalidFileLocation).loadTasks();
             fail();
@@ -35,7 +35,7 @@ public class TaskStorageTest {
         Task fourthTask = new Todo("go school");
         fourthTask.markAsDone();
 
-        String validFileLocation = "resources/validFileFormat.txt";
+        String validFileLocation = "src/test/resources/validFileFormat.txt";
         ArrayList<Task> tasks = new TaskStorage(validFileLocation).loadTasks();
 
         assertEquals(4, tasks.size());
