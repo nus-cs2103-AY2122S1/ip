@@ -1,10 +1,7 @@
 package duke;
 
+import duke.gui.DukeGui;
 import duke.task.Task;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +12,7 @@ import java.util.Scanner;
  * @author Jovyn Tan
  * @version CS2103 AY21/22 Sem 1
  */
-public class Duke extends Application implements duke.ChatbotUI, duke.Parser {
+public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
     private static final String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String FAREWELL_MESSAGE = "See you soon! :)";
     private static final String FAREWELL_COMMAND = "bye";
@@ -58,19 +55,6 @@ public class Duke extends Application implements duke.ChatbotUI, duke.Parser {
         this.storage = new Storage("../../data/duke_storage.txt");
         this.loadData();
         this.sc = new Scanner(System.in);
-    }
-
-    /**
-     * Starts the JavaFX GUI.
-     * @param stage The primary stage that JavaFX provides
-     */
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
     }
 
     /**
