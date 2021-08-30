@@ -7,6 +7,7 @@ import duke.commands.ByeCommand;
 import duke.commands.TaskCommand;
 import duke.commands.ListCommand;
 import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
 
 /**
  * Class that converts inputs by user to Command Object to be used.
@@ -19,6 +20,7 @@ public class Parser {
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EVENT_COMMAND = "event";
     private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
 
     /**
      * Instantiates a new Parser class
@@ -77,6 +79,8 @@ public class Parser {
             return new ByeCommand(fullCommandInput);
         } else if (commandName.equals(DONE_COMMAND)) {
             return new DoneCommand(fullCommandInput);
+        } else if (commandName.equals(FIND_COMMAND)) {
+            return new FindCommand(fullCommandInput);
         }
         String errorMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         throw new NoSuchCommandException(errorMessage);

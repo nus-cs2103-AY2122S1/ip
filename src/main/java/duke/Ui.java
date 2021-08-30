@@ -98,4 +98,9 @@ public class Ui {
         System.out.println("Here are the tasks in your list:" + 
         "\n" + listMessage);
     }
+
+    public void displayFoundTasks(String tasksFound) {
+        System.out.println("Here are the matching tasks in your list:" + 
+        "\n" + tasksFound);
+    }
 }
