@@ -1,7 +1,8 @@
 package duke;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * Deals with interactions with the user.
  */

@@ -41,7 +41,7 @@ public class Duke {
         ui.greet();
 
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showDivider();

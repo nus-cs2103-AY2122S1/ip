@@ -2,16 +2,19 @@ package duke;
 
 import java.io.File;
 import java.io.FileWriter;
+
 import java.io.IOException;
-import java.util.Scanner;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import java.util.Scanner;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
-    String filePath;
+    private String filePath;
 
     /**
      * Constructs a Storage object.

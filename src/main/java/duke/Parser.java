@@ -57,7 +57,7 @@ public class Parser {
      * @throws NoDescriptionException If no description is appended after command.
      * @throws MissingTimeCommandException If "/by" is not in full command
      */
-    public static Deadline validateDeadline(String req) throws NoDescriptionException, MissingTimeCommandException{
+    public static Deadline validateDeadline(String req) throws NoDescriptionException, MissingTimeCommandException {
         if (req.equals("deadline")) {
             throw new NoDescriptionException("The description of a deadline cannot be empty.");
         }
@@ -208,55 +208,55 @@ public class Parser {
 
         //Switch statement based on initial command
         switch (cmd) {
-            case "list":
-                ui.enumTasks(this.tasks.getAll());
-                break;
+        case "list":
+            ui.enumTasks(this.tasks.getAll());
+            break;
 
-            case "bye":
-                ui.sendGoodbye();
-                end = true;
-                break;
+        case "bye":
+            ui.sendGoodbye();
+            end = true;
+            break;
 
-            case "todo":
-                ToDo t = Parser.validateToDo(fullCommand);
-                tasks.add(t);
-                ui.sendAddTask(t);
-                storage.rewriteFile(tasks);
-                break;
+        case "todo":
+            ToDo t = Parser.validateToDo(fullCommand);
+            tasks.add(t);
+            ui.sendAddTask(t);
+            storage.rewriteFile(tasks);
+            break;
 
-            case "deadline":
-                Deadline d = Parser.validateDeadline(fullCommand);
-                tasks.add(d);
-                ui.sendAddTask(d);
-                storage.rewriteFile(tasks);
-                break;
+        case "deadline":
+            Deadline d = Parser.validateDeadline(fullCommand);
+            tasks.add(d);
+            ui.sendAddTask(d);
+            storage.rewriteFile(tasks);
+            break;
 
-            case "event":
-                Event e = Parser.validateEvent(fullCommand);
-                ui.sendAddTask(e);
-                storage.rewriteFile(tasks);
-                break;
+        case "event":
+            Event e = Parser.validateEvent(fullCommand);
+            ui.sendAddTask(e);
+            storage.rewriteFile(tasks);
+            break;
 
-            case "done":
-                int indexOfDoneTask = Parser.validateDone(fullCommand);
-                Task completedTask = this.tasks.markAsDone(indexOfDoneTask);
-                storage.rewriteFile(tasks);
-                ui.sendDone(completedTask);
-                break;
+        case "done":
+            int indexOfDoneTask = Parser.validateDone(fullCommand);
+            Task completedTask = this.tasks.markAsDone(indexOfDoneTask);
+            storage.rewriteFile(tasks);
+            ui.sendDone(completedTask);
+            break;
 
-            case "delete":
-                int indexOfDeletedTask = Parser.validateDelete(fullCommand);
-                Task deletedTask = this.tasks.deleteTask(indexOfDeletedTask);
-                storage.rewriteFile(tasks);
-                ui.sendDeleted(deletedTask);
-                break;
+        case "delete":
+            int indexOfDeletedTask = Parser.validateDelete(fullCommand);
+            Task deletedTask = this.tasks.deleteTask(indexOfDeletedTask);
+            storage.rewriteFile(tasks);
+            ui.sendDeleted(deletedTask);
+            break;
 
-            case "find":
-                validateFind(fullCommand);
-                break;
+        case "find":
+            validateFind(fullCommand);
+            break;
 
-            default:
-                Parser.invalidInput(req);
+        default:
+            Parser.invalidInput(req);
         }
-     }
+    }
 }
