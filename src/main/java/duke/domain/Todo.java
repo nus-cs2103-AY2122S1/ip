@@ -35,4 +35,16 @@ public class Todo extends Task {
         String name = fields[2];
         return new Todo(name, isDone);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Todo) {
+            Todo e = (Todo) o;
+            return this.getName().equals(e.getName());
+        } else {
+            return false;
+        }
+    }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import duke.shared.DateHelpers;
 import duke.shared.DateRange;
+import duke.shared.GenericHelpers;
 
 /**
  * Encapsulates a task taking place over a specified period of time.
@@ -103,5 +104,22 @@ public class Event extends Task {
         String base = super.toString();
         String result = String.format("%s (at: %s)", base, dateRange);
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Event) {
+            Event e = (Event) o;
+            return this.getName().equals(e.getName()) && this.dateRange.equals(e.dateRange);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return GenericHelpers.combineHashCodes(super.hashCode(), this.dateRange.hashCode());
     }
 }
