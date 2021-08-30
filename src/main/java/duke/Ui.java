@@ -29,7 +29,7 @@ public class Ui {
      */
     public void showWelcome() {
         System.out.println("-------------------------------------");
-        System.out.println("Good Morning Master Wayne, Alfred here.\nWhat can I do for you today?");
+        System.out.println("Hello there, Duke here.\nWhat can I do for you today?");
         System.out.println("-------------------------------------");
     }
 

@@ -42,9 +42,9 @@ public class Storage {
     }
 
     /**
-     * Returns the save file.
+     * Reads the file data into an ArrayList.
      *
-     * @return the save file.
+     * @return the ArrayList containing the saved tasks.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -145,7 +145,6 @@ public class Storage {
     public void save(Task task) throws IOException {
         FileWriter fw = new FileWriter("data/tasks.txt", true);
         if (task instanceof Todo) {
-            Todo todo = (Todo) task;
             fw.write("T | 0 | " + task.getDescription() + "\n");
             fw.close();
         } else if (task instanceof Deadline) {
@@ -154,7 +153,7 @@ public class Storage {
             fw.close();
         } else {
             Event event = (Event) task;
-            fw.write("E | 0 | " + event.getDescription() + " | " + event.getAt() + "\n");
+            fw.write("E | 0 | " + task.getDescription() + " | " + event.getAt() + "\n");
             fw.close();
         }
     }

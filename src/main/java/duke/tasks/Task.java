@@ -43,6 +43,10 @@ public class Task {
         return this.description;
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     @Override
     public String toString() {
         return this.getStatusIcon() + " " + this.description;

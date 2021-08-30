@@ -1,9 +1,7 @@
 package duke.commands;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
-import duke.Storage;
 import duke.TaskList;
 import duke.tasks.Todo;
 

@@ -10,7 +10,6 @@ import duke.commands.Command;
  */
 public class Duke {
 
-    private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
@@ -39,7 +38,7 @@ public class Duke {
                 c.execute(tasks);
                 isExit = c.isExit();
             } catch (DukeException | IOException e) {
-                System.out.println("***WARNING*** An error has occurred Master Wayne: " + e.getMessage());
+                System.out.println("***WARNING*** An error has occurred: " + e.getMessage());
             }
         }
     }

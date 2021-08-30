@@ -65,6 +65,11 @@ public class TaskList {
         storage.save(task);
     }
 
+    /**
+     * Marks a task as done and reflects it in the storage.
+     * @param index of task to be marked as done.
+     * @throws IOException
+     */
     public void markAsDone(int index) throws IOException {
         list.get(index).markAsDone();
         storage.markAsDone(index + 1);

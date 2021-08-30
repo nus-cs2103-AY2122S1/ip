@@ -13,7 +13,6 @@ import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
-import duke.commands.UnknownCommand;
 
 /**
  * Represents the Parser class which makes sense of what the user typed.
@@ -79,7 +78,6 @@ public class Parser {
                         }
                         byBuilder.append(fullCommand[i]);
                     }
-
                 } else {
                     if (i == 1) {
                         deadlineBuilder.append(fullCommand[i]);
@@ -155,8 +153,8 @@ public class Parser {
             return new FindCommand("find", keywordBuilder.toString());
 
         default :
+            throw new DukeException("I do not understand that command");
         }
-        return new UnknownCommand("unknown");
     }
 
     /**

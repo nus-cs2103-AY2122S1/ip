@@ -1,5 +1,5 @@
 -------------------------------------
-Good Morning Master Wayne, Alfred here.
+Hello there, Duke here.
 What can I do for you today?
 -------------------------------------
 Got it. I've added this task:
@@ -25,7 +25,7 @@ Now you have 5 tasks in the list.
 5.  [T][ ] read book
 -------------------------------------
 -------------------------------------
-Very well, Master Wayne. This task has been marked as per your request.
+Very well. This task has been marked as per your request.
 2. [D][X] return book (by: June 6th)
 -------------------------------------
 -------------------------------------
@@ -35,10 +35,10 @@ Very well, Master Wayne. This task has been marked as per your request.
 4.  [T][ ] join sports club
 5.  [T][ ] read book
 -------------------------------------
-*** Apologies, Master Wayne. But I don't know what that means ***
-***WARNING*** An error has occurred Master Wayne: The description is empty
+***WARNING*** An error has occurred: I do not understand that command
+***WARNING*** An error has occurred: The description is empty
 -------------------------------------
-Very well, Master Wayne. This task has been deleted as per your request.
+Very well. This task has been deleted as per your request.
 1. [T][ ] borrow book
 Now you have 4 tasks in the list.
 -------------------------------------
@@ -49,12 +49,12 @@ Now you have 4 tasks in the list.
 4.  [T][ ] read book
 -------------------------------------
 -------------------------------------
-Here are the matching tasks in your list, Master Wayne:
+Here are the matching tasks in your list:
 1. [D][X] return book (by: June 6th)
 2. [T][ ] read book
 -------------------------------------
 -------------------------------------
-Very well, Master Wayne. This task has been deleted as per your request.
+Very well. This task has been deleted as per your request.
 1. [D][X] return book (by: June 6th)
 Now you have 3 tasks in the list.
 -------------------------------------
@@ -63,5 +63,5 @@ Now you have 3 tasks in the list.
 2.  [T][ ] join sports club
 3.  [T][ ] read book
 -------------------------------------
-Have a pleasant day, Master Wayne.
+Have a pleasant day.
 

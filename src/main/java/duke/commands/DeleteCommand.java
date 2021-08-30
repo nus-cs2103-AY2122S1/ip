@@ -2,7 +2,6 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.Storage;
 import duke.TaskList;
 
 /**
@@ -39,7 +38,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks) throws IOException {
         System.out.println("-------------------------------------");
-        System.out.println("Very well, Master Wayne. This task has been deleted as per your request.");
+        System.out.println("Very well. This task has been deleted as per your request.");
         System.out.println((deleteIndex) + ". " + tasks.get(deleteIndex - 1)); //actual index is index - 1
 
         tasks.remove(deleteIndex - 1);

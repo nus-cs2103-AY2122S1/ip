@@ -2,35 +2,30 @@ package duke;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import duke.tasks.Todo;
 import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
-    public void dummyTest() {
-        assertEquals(2, 2);
-    }
-
-    @Test
-    public void sizeTest() {
+    public void check_desc_Test() {
         try {
-            File input = new File("java/duke/input.txt");
-            TaskList tasks = new TaskList();
-            assertEquals(tasks.size(), 4);
+            TaskList temp = new TaskList();
+            temp.add(new Todo("return book", false));
+            assertEquals("return book",  temp.get(temp.size() - 1).getDescription());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void descTest() {
+    void set_done_test() {
         try {
-            File input = new File("java/duke/input.txt");
             TaskList tasks = new TaskList();
-            assertEquals(tasks.get(1).getDescription(), "return book");
+            tasks.add(new Todo("return book", false));
+            tasks.markAsDone(0);
+            assertEquals(tasks.get(0).isDone(), true);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,7 +2,6 @@ package duke.commands;
 
 import java.io.IOException;
 
-import duke.Storage;
 import duke.TaskList;
 
 /**
@@ -42,7 +41,7 @@ public class DoneCommand extends Command {
         tasks.markAsDone(doneIndex - 1);
 
         System.out.println("-------------------------------------");
-        System.out.println("Very well, Master Wayne. This task has been marked as per your request.");
+        System.out.println("Very well. This task has been marked as per your request.");
         System.out.println((doneIndex) + ". " + tasks.get(doneIndex - 1)); //actual index is index - 1
         System.out.println("-------------------------------------");
     }
