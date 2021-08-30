@@ -1,10 +1,21 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
 
     protected String at;
+    protected String date;
 
     public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = at;
+
+        try {
+            LocalDate localDate = LocalDate.parse(at);
+            this.date = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Event date should be in a yyyy-mm-dd format.");
+        }
 
         if (description.isEmpty() || description == "" || description == " ") {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -15,7 +26,7 @@ public class Event extends Task {
         if (at.isEmpty() || at == "" || at == " ") {
             throw new DukeException("☹ OOPS!!! The time of the event must be indicated.");
         } else {
-            this.at = at.substring(1);
+            this.at = date;
         }
     }
 

@@ -1,10 +1,22 @@
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-    protected String by;
+    protected String deadline;
+    protected String date = "";
 
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, String deadline) throws DukeException {
         super(description);
-        this.by = by;
+
+        try {
+            LocalDate localDate = LocalDate.parse(deadline);
+            this.date = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Deadline should be in a yyyy-mm-dd format.");
+        }
 
         if (description.isEmpty() || description == "" || description == " ") {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -12,20 +24,16 @@ public class Deadline extends Task {
             this.description = description.substring(1);
         }
 
-        if (by.isEmpty() || by == "" || by == " ") {
+        if (deadline.isEmpty() || deadline == "" || deadline == " ") {
             throw new DukeException("☹ OOPS!!! The deadline of this task must be indicated.");
         } else {
-            this.by = by.substring(1);
+            this.deadline = this.date;
         }
-    }
-
-    public String getDeadline() {
-        return this.by;
     }
 
     @Override
     public String toString() {
-        return "\t[D]" + super.toString() + " (by: " + by + ")";
+        return "\t[D]" + super.toString() + " (by: " + deadline + ")";
     }
 
     @Override
@@ -35,6 +43,6 @@ public class Deadline extends Task {
 
     @Override
     public String addOns() {
-        return this.by;
+        return this.deadline;
     }
 }
