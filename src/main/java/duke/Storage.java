@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import duke.exceptions.DukeException;
 import duke.status.Status;
 import duke.status.typeTask;
@@ -15,8 +13,11 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
 import java.util.Map;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 public class Storage {
     private static final String TODO_IDENTIFIER = "T";
@@ -32,19 +33,29 @@ public class Storage {
     private static final String INDICATOR_DEADLINE = "/by";
     // private static final String INDICATOR_INCOMPLETE = "0";
 
-    private final File FileSource;
+    private final File fileSource;
+    private List<String> allStringTasks = new ArrayList<>();
 
     public Storage(String filePath) {
-        this.FileSource = new File(filePath);
+        this.fileSource = new File(filePath);
+        Path path = this.fileSource.toPath();
+        try {
+            Path parentPath = path.getParent();
+            Files.createDirectories(parentPath);
+            if (!Files.exists(path)) {
+                Files.createFile(path);
+            }
+            this.allStringTasks = Files.readAllLines(path);
+        } catch (IOException e) {
+            System.err.println("Error in path set!");
+        }
     }
 
     protected ArrayList<Task> load() throws FileNotFoundException, DukeException {
         HashMap<String, Boolean> stringTasks = new HashMap<>();
-        Scanner scanner = new Scanner(FileSource);
-        while (scanner.hasNext()) {
-            this.storeDiskStorageInputs(scanner.nextLine(), stringTasks);
+        for (String tasks : allStringTasks) {
+            this.storeDiskStorageInputs(tasks, stringTasks);
         }
-        scanner.close();
         return this.changeStorageToTasks(stringTasks);
     }
 
@@ -89,7 +100,7 @@ public class Storage {
 
     public void updateStorageList(ArrayList<Task> storageTaskList) {
         try {
-            FileWriter fw = new FileWriter(FileSource);
+            FileWriter fw = new FileWriter(fileSource);
             StringBuilder sb = new StringBuilder("");
             for (int i = 0; i < storageTaskList.size(); i++) {
                 Task task = storageTaskList.get(i);
