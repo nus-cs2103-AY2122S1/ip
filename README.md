@@ -1,6 +1,9 @@
-# duke.Duke project template
+# CS2106 individual Project <br /> (Duke Chatbot)
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This project started of as a greenfield java project. It's named after the Java mascot _Duke_. Given below are 
+instructions on how to use it.
+
+Duke helps you remember things and keep tracks of things for you.
 
 ## Setting up in Intellij
 
@@ -22,3 +25,15 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+   
+  
+## Main advantage of Duke includes
+- Text based
+- Easy to use
+- Minimalistic
+
+## Features:
+* Managing Task
+* Managing datelines
+* Managing Todos
+* Reminders (coming soon)
