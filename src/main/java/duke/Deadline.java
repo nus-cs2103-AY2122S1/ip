@@ -25,16 +25,4 @@ public class Deadline extends Task {
             return "[D][ ] " + this.taskString + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }
     }
-
-    public boolean getDone() {
-        return done;
-    }
-
-    public String getDescription() {
-        return taskString;
-    }
-
-    public String getDeadline() {
-        return this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-    }
 }
