@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
 public class StorageTest {
@@ -25,7 +26,9 @@ public class StorageTest {
                     + "bye");
             Storage storage = new Storage();
             Parser parser = new Parser(new TaskList(storage));
-            parser.parse(testScanner);
+            while (testScanner.hasNextLine()) {
+                parser.parse(testScanner.nextLine());
+            }
 
             BufferedReader expectedReader = new BufferedReader(new FileReader(String.valueOf(Path.of("data",
                     "expected-storage"))));
@@ -64,7 +67,9 @@ public class StorageTest {
                     + "bye");
             Storage storage = new Storage();
             Parser parser = new Parser(new TaskList(storage));
-            parser.parse(testScanner);
+            while (testScanner.hasNextLine()) {
+                parser.parse(testScanner.nextLine());
+            }
 
             BufferedReader expectedReader = new BufferedReader(new FileReader(String.valueOf(Path.of("data",
                     "expected-storage"))));
@@ -87,5 +92,12 @@ public class StorageTest {
         } catch (IOException e) {
             fail("The expected output is different from the actual output.");
         }
+    }
+
+    @AfterAll
+    private static void clear() {
+        Storage storage = new Storage();
+        Parser parser = new Parser(new TaskList(storage));
+        parser.parse("deleteAll");
     }
 }

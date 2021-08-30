@@ -8,7 +8,6 @@ import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 
 public class ParserTaskListTest {
-
     @Test
     public void parseAndTaskList_addAndMarkDone_eventsCreatedAndMarkedDone() {
         Scanner testScanner = new Scanner("todo sleep\n"
@@ -20,7 +19,9 @@ public class ParserTaskListTest {
                 + "bye");
         Storage storage = new Storage();
         Parser parser = new Parser(new TaskList(storage));
-        parser.parse(testScanner);
+        while (testScanner.hasNextLine()) {
+            parser.parse(testScanner.nextLine());
+        }
         assertEquals(storage.getUserInputRecords().get(0).toString(), "[T][X] sleep");
         assertEquals(storage.getUserInputRecords().get(1).toString(), "[D][X] assignment (by: AUGUST 9 2021)");
         assertEquals(storage.getUserInputRecords().get(2).toString(), "[E][X] meeting (at: AUGUST 1 2021)");
@@ -38,7 +39,9 @@ public class ParserTaskListTest {
         ArrayList<Task> expectedRecord = new ArrayList<>();
         expectedRecord.add(new ToDo("task 1"));
         Parser parser = new Parser(new TaskList(storage));
-        parser.parse(testScanner);
+        while (testScanner.hasNextLine()) {
+            parser.parse(testScanner.nextLine());
+        }
         assertEquals(storage.getUserInputRecords(), expectedRecord);
     }
 
@@ -51,7 +54,9 @@ public class ParserTaskListTest {
                 + "bye");
         Storage storage = new Storage();
         Parser parser = new Parser(new TaskList(storage));
-        parser.parse(testScanner);
+        while (testScanner.hasNextLine()) {
+            parser.parse(testScanner.nextLine());
+        }
         assert (storage.getUserInputRecords().isEmpty());
     }
 }
