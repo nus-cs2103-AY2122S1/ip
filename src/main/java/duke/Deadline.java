@@ -1,5 +1,4 @@
 package duke;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,20 +7,21 @@ import java.util.Date;
 /**
  * Encapsulates the Deadlines which is a subtype of Task.
  */
-public class Deadline extends Task{
-
-    private final Date DEADLINE;
-    private final String DATE_INPUT;
+public class Deadline extends Task {
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
+    private final Date deadline;
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
+    private final String dateInput;
 
     /**
-     * Constructor to create a DukePakage.Deadline.
-     * @param description Description of the DukePakage.Deadline task.
-     * @param dateInput Date of when DukePakage.Deadline is due entered by user in String format.
+     * Constructor to create a Deadline.
+     * @param description Description of the Deadline task.
+     * @param dateInput Date of when Deadline is due entered by user in String format.
      */
     public Deadline(String description, String dateInput) {
         super(description);
-        this.DATE_INPUT = dateInput;
-        this.DEADLINE = stringToDate(dateInput);
+        this.dateInput = dateInput;
+        this.deadline = stringToDate(dateInput);
     }
 
     /**
@@ -51,17 +51,17 @@ public class Deadline extends Task{
      * @return A String object of the Date
      */
     public String dateToString() {
-        if (DEADLINE == null) {
-            return DATE_INPUT;
+        if (deadline == null) {
+            return dateInput;
         }
 
         DateFormat outFormat;
-        if (this.DATE_INPUT.split(" ").length == 2) {
-            outFormat =  new SimpleDateFormat("MMM dd yyyy h.mm aa");
+        if (this.dateInput.split(" ").length == 2) {
+            outFormat = new SimpleDateFormat("MMM dd yyyy h.mm aa");
         } else {
             outFormat = new SimpleDateFormat("MMM dd yyyy");
         }
-        return outFormat.format(this.DEADLINE);
+        return outFormat.format(this.deadline);
     }
 
     /**
@@ -70,10 +70,10 @@ public class Deadline extends Task{
      */
     @Override
     public String toTxt() {
-        return String.format("D | %d | %s | %s"
-                , super.getIsDone() ? 1 : 0
-                , super.getDescription()
-                , dateToString());
+        return String.format("D | %d | %s | %s",
+                super.getIsDone() ? 1 : 0,
+                super.getDescription(),
+                dateToString());
     }
 
     @Override
@@ -83,5 +83,4 @@ public class Deadline extends Task{
                 + " (by: " + dateToString()
                 + ")";
     }
-
 }

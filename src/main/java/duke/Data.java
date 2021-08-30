@@ -15,13 +15,17 @@ public class Data {
     private static File data;
     private final String filePath;
 
+    /**
+     * Constructor for Data.
+     * @param filePath takes in a String specifying file path.
+     */
     public Data(String filePath) {
         data = new File(filePath);
         this.filePath = filePath;
     }
 
     /**
-     * Loads the Tasks stored in the form of an ArrayList<Task>.
+     * Loads the Tasks stored in the form of an ArrayList of type Task.
      * @return An ArrayList of type Task with all Tasks previously stored.
      */
     public static ArrayList<Task> loadData() {

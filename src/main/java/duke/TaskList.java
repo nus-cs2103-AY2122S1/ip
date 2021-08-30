@@ -10,6 +10,11 @@ public class TaskList {
     private static ArrayList<Task> dukeList;
     private static Data data;
 
+    /**
+     * Constructor for TaskList
+     * @param dukeList List of Tasks.
+     * @param data Data object.
+     */
     public TaskList(ArrayList<Task> dukeList, Data data) {
         TaskList.dukeList = dukeList;
         TaskList.data = data;
@@ -43,7 +48,7 @@ public class TaskList {
      * @param input The entire String that the user has input i.e. "done 2".
      * @throws DukeException If an incorrect input is entered.
      */
-    public static void markDone(String input) throws DukeException{
+    public static void markDone(String input) throws DukeException {
         int itemNumber;
         if (input.split(" ", 2).length == 1) {
             throw new DukeException("☹ Oops! Looks like you are missing the task number you wish to mark as done!"
@@ -53,12 +58,13 @@ public class TaskList {
         try {
             itemNumber = Integer.parseInt(numberInput);
         } catch (NumberFormatException e) {
-            throw new DukeException("☹ You may have entered something incorrectly. Try adding a number behind 'done'!");
+            throw new DukeException("☹ You may have entered something incorrectly. "
+                                    + "Try adding a number behind 'done'!");
         }
         String message = "☹ Oops! I cannot seem to find that task number. Try again!";
         if (dukeList.isEmpty()) {
             message = "☹ Oops! Your list is empty! Try adding a Task first!";
-        } else if (itemNumber <= dukeList.size()){
+        } else if (itemNumber <= dukeList.size()) {
             Task targetItem = dukeList.get(itemNumber - 1);
             targetItem.markDone();
             message = "Nice! I've marked this task as done:\n" + " " + targetItem.toString();
@@ -71,7 +77,7 @@ public class TaskList {
      * @param input The entire String that the user has input i.e. "delete 2".
      * @throws DukeException If an incorrect input is entered.
      */
-    public static void delete(String input) throws DukeException{
+    public static void delete(String input) throws DukeException {
         int itemNumber;
         if (input.split(" ", 2).length == 1) {
             throw new DukeException("☹ Oops! Looks like you are missing the number of the task you wish to delete! "
@@ -100,7 +106,7 @@ public class TaskList {
      * Updates the stored Data.
      * @throws DukeException If file not found or error updating data.
      */
-    public static void update() throws DukeException{
+    public static void update() throws DukeException {
         Data.updateData(dukeList);
     }
 

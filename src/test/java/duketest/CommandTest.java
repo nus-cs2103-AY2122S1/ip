@@ -1,14 +1,15 @@
 package duketest;
 
-import duke.Command;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.Command;
 
 public class CommandTest {
     @Test
-    public void commandByeTest() { assertEquals(Command.BYE, Command.readInput("bye")); }
+    public void commandByeTest() {
+        assertEquals(Command.BYE, Command.readInput("bye")); }
 
     @Test
     public void commandDeadlineTest() {
@@ -16,7 +17,8 @@ public class CommandTest {
     }
 
     @Test
-    public void commandDoneTest() { assertEquals(Command.DONE, Command.readInput("done")); }
+    public void commandDoneTest() {
+        assertEquals(Command.DONE, Command.readInput("done")); }
 
     @Test
     public void commandEventTest() {

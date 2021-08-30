@@ -1,10 +1,10 @@
 package duketest;
 
-import duke.Deadline;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.Deadline;
 
 public class DeadlineTest {
     @Test

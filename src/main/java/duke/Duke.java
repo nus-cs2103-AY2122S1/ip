@@ -11,11 +11,15 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private  UI ui;
-    private  Parser parser;
+    private UI ui;
+    private Parser parser;
     private TaskList list;
     private final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Constructor for Duke
+     * @param filePath Specified file path.
+     */
     public Duke(String filePath) {
         ui = new UI();
         Data data = new Data(filePath);
@@ -89,6 +93,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Run Duke
+     * @param args Ignore for main method.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("data/data.txt");
         duke.start();

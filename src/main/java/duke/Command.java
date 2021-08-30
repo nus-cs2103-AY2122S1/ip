@@ -1,5 +1,4 @@
 package duke;
-
 /**
  * This encapsulates all Commands that can be understood by Duke.
  */
@@ -13,6 +12,11 @@ public enum Command {
     DELETE,
     BYE;
 
+    /**
+     * Reads user input in form of a String and returns a Command
+     * @param input String that is entered by the user.
+     * @return A Command that is the interpreted user command.
+     */
     public static Command readInput(String input) {
         String newInput = input.toLowerCase();
         Command newCommand;

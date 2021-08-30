@@ -1,12 +1,17 @@
 package duke;
 
 public class Parser {
-    private final TaskList DUKE_LIST;
-    private final Data DATA;
+    private final TaskList dukeList;
+    private final Data data;
 
+    /**
+     * Constructor for Parser
+     * @param dukeList Lists of Tasks taken in.
+     * @param data Data object.
+     */
     public Parser(TaskList dukeList, Data data) {
-        this.DUKE_LIST = dukeList;
-        this.DATA = data;
+        this.dukeList = dukeList;
+        this.data = data;
     }
 
     /**
@@ -24,7 +29,7 @@ public class Parser {
      * @param input The entire String that the user has input i.e. "deadline Whatever /by Whenever".
      * @throws DukeException If an incorrect input is entered.
      */
-    public void addDeadline(String input) throws DukeException{
+    public void addDeadline(String input) throws DukeException {
         // First check if the user has only input the one word "deadline".
         if (input.split(" ", 2).length == 1) {
             throw new DukeException("☹ Oops! Looks like you are missing the description and the deadline date! "
@@ -39,9 +44,9 @@ public class Parser {
             throw new DukeException("☹ Oops! Looks like you are missing the deadline date! Try again :-)");
         }
         Deadline newDL = new Deadline(description[0], description[1]);
-        DUKE_LIST.add(newDL);
+        dukeList.add(newDL);
         Data.writeToFile(newDL);
-        System.out.println(UI.addedText
+        System.out.println(UI.getAddedText()
                 + newDL.toString()
                 + "\nNow you have "
                 + TaskList.numberOfTasks()
@@ -53,7 +58,7 @@ public class Parser {
      * @param input The entire String that the user has input i.e. "event Here /at There".
      * @throws DukeException If an incorrect input is entered.
      */
-    public void addEvent(String input) throws DukeException{
+    public void addEvent(String input) throws DukeException {
         // First check if the user has only input the one word "event".
         if (input.split(" ", 2).length == 1) {
             throw new DukeException("☹ Oops! Looks like you are missing the description and the event location!"
@@ -68,9 +73,9 @@ public class Parser {
             throw new DukeException("☹ Oops! Looks like you are missing the event location! Try again :-)");
         }
         Event newEV = new Event(description[0], description[1]);
-        DUKE_LIST.add(newEV);
+        dukeList.add(newEV);
         Data.writeToFile(newEV);
-        System.out.println(UI.addedText
+        System.out.println(UI.getAddedText()
                 + newEV.toString()
                 + "\nNow you have "
                 + TaskList.numberOfTasks()
@@ -90,9 +95,9 @@ public class Parser {
         //If "todo" is entered with more words, use the information.
         String[] information = input.split(" ", 2);
         Todo newTD = new Todo(information[1]);
-        DUKE_LIST.add(newTD);
+        dukeList.add(newTD);
         Data.writeToFile(newTD);
-        System.out.println(UI.addedText
+        System.out.println(UI.getAddedText()
                 + newTD.toString()
                 + "\nNow you have "
                 + TaskList.numberOfTasks()
