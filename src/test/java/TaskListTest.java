@@ -1,15 +1,14 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import tasks.Deadline;
 import tasks.Task;
 import tasks.Todo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
 

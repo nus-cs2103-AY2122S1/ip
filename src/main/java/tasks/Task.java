@@ -1,12 +1,14 @@
 package tasks;
 
-import tasks.Task;
-
 public class Task {
 
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates task with given description.
+     * @param description describes what the task is.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
