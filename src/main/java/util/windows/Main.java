@@ -26,6 +26,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setMinHeight(590);
+            stage.setMinWidth(770);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             TaskInputWindow.setDuke(duke);
             stage.show();

@@ -4,7 +4,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -48,13 +53,15 @@ public class MainWindow extends AnchorPane {
         listOfTasks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
+    /**
+     * Initialises a Duke for this anchorPane.
+     *
+     * @param d The duke to be used.
+     */
     public void setDuke(Duke d) {
         duke = d;
-
         duke.setOut(listOfTasks);
         duke.printList();
-
-
     }
 
     /**
