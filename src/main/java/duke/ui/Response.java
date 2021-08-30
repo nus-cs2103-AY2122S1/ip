@@ -8,18 +8,18 @@ import duke.errors.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class Ui {
+public class Response {
 
     public static String pluralOrNo(int cap) {
         return cap <= 1 ? "" : "s";
     }
 
-    public void showWelcome() {
-        System.out.println("Henlo, Duke here! How can I be of assistance?");
+    public static String showWelcome() {
+        return "Henlo, Duke here! How can I be of assistance?";
     }
 
-    public void showError(DukeException e) {
-        System.out.println(e);
+    public String showError(DukeException e) {
+        return e.toString();
     }
 
     /**
@@ -29,9 +29,9 @@ public class Ui {
      * @param task The Task being added
      * @param taskList The Task List being added to
      */
-    public void showAddTaskMessage(Task task, TaskList taskList) {
+    public String showAddTaskMessage(Task task, TaskList taskList) {
         int size = taskList.getCapacity();
-        System.out.printf("Got it. I've added this task:\n    %s\n"
+        return String.format("Got it. I've added this task:\n    %s\n"
                 + "Now you have %d task%s in the list\n", task , size, pluralOrNo(size));
     }
 
@@ -42,21 +42,19 @@ public class Ui {
      * @param task The Task being edited
      * @param taskList The Task List being edited
      */
-    public void showEditTaskMessage(Task task, CommandType commandType, TaskList taskList) {
+    public String showEditTaskMessage(Task task, CommandType commandType, TaskList taskList) {
         switch(commandType) {
         case DELETE:
             int size = taskList.getCapacity();
-            System.out.printf("Noted. Ive removed this task:\n    %s\n"
+            return String.format("Noted. Ive removed this task:\n    %s\n"
                     + "Now you have %d task%s in the list\n", task, size, pluralOrNo(size));
-            break;
+
         case DONE:
-            System.out.printf("Nice! I've marked this task as done:\n    %s\n", task);
-            break;
+            return String.format("Nice! I've marked this task as done:\n    %s\n", task);
         case UNDO:
-            System.out.printf("I've marked this task as undone:\n    %s\n", task);
-            break;
+            return String.format("I've marked this task as undone:\n    %s\n", task);
         default:
-            break;
+            return "";
         }
     }
 
@@ -66,7 +64,7 @@ public class Ui {
      *
      * @param taskList The Task List to be displayed
      */
-    public void showTaskList(TaskList taskList) {
+    public String showTaskList(TaskList taskList) {
         ArrayList<Task> arrayList = taskList.getArrayList();
         int currentCapacity = arrayList.size();
         if (currentCapacity > 0) {
@@ -75,9 +73,9 @@ public class Ui {
                 Task task = arrayList.get(i);
                 toPrint += String.format("%d. %s\n", i + 1, task);
             }
-            System.out.print(toPrint);
+            return toPrint;
         } else {
-            System.out.println("You have no tasks!");
+            return "You have no tasks!";
         }
     }
 
@@ -87,20 +85,21 @@ public class Ui {
      *
      * @param tasks The ArrayList containing the Tasks to be displayed.
      */
-    public void showSearchMessage(ArrayList<Task> tasks) {
+    public String showSearchMessage(ArrayList<Task> tasks) {
         int size = tasks.size();
         if (size < 1) {
-            System.out.println("Sorry, no tasks match your search query!");
+            return "Sorry, no tasks match your search query!";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String searchString = "Here are the matching tasks in your list:\n";
             for (int i = 1; i <= size; i++) {
-                System.out.println("    " + i + ". " + tasks.get(i - 1));
+                searchString += String.format("    " + i + ". " + tasks.get(i - 1) + "\n");
             }
+            return searchString;
         }
     }
 
-    public void showExitMessage() {
-        System.out.println("Good bye!");
+    public String showExitMessage() {
+        return "Good bye!";
     }
 
     /**

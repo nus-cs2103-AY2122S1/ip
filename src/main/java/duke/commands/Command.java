@@ -2,7 +2,7 @@ package duke.commands;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.Response;
 
 /**
  * This abstract class provides the framework for Commands to be implemented.
@@ -28,7 +28,7 @@ public abstract class Command {
     }
 
     /** The execute method to be implemented by the Commands. */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Response response, Storage storage);
 
     /** The types of Commands. */
     public enum CommandType {

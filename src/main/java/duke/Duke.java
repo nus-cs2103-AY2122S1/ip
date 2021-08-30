@@ -6,22 +6,21 @@ import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.Response;
 
 
 public class Duke {
 
-    private Ui ui;
+    private Response response;
     private Storage storage;
     private TaskList tasks;
+    private String filePath = "data/duke.txt";
 
     /**
-     * This is the constructor for the Duke object.
-     *
-     * @param filePath
+     * Constructor for the Duke object.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
+    public Duke() {
+        response = new Response();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -31,23 +30,9 @@ public class Duke {
         }
     }
 
-    /** This method starts the Duke chat bot. */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            Command c = Parser.parse(fullCommand, tasks);
-            c.execute(tasks, ui, storage);
-            if (c.isExit()) {
-                break;
-            }
-        }
-    }
-
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    public String getResponse(String input) {
+        Command c = Parser.parse(input, tasks);
+        return c.execute(tasks, response, storage);
     }
 
 }

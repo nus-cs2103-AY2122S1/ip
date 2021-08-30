@@ -3,7 +3,7 @@ package duke.commands;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.Response;
 
 /**
  * The AddCommand class extends the Command class and is the Command that
@@ -29,12 +29,12 @@ public class AddCommand extends Command {
      * Task is added to the TaskList.
      *
      * @param tasks The TaskList to be added to
-     * @param ui The Ui object to interact with the user
+     * @param response The Ui object to interact with the user
      * @param storage The Storage object that stores the TaskList on the Local Machine
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Response response, Storage storage) {
         storage.addToStorage(taskToAdd);
         tasks.addToTaskList(taskToAdd);
-        ui.showAddTaskMessage(taskToAdd, tasks);
+        return response.showAddTaskMessage(taskToAdd, tasks);
     }
 }
