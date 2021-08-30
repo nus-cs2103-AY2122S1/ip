@@ -1,6 +1,6 @@
 package duke;
 
-import duke.Deadline;
+import java.time.LocalDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
