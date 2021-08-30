@@ -1,23 +1,20 @@
 package tasks;
 
-import duke.exception.DukeException;
-
-import duke.tasks.Task;
-import duke.tasks.Todo;
-import duke.tasks.Event;
-import duke.tasks.Deadline;
-import duke.tasks.TaskList;
-
-import duke.tasks.TaskList;
-import duke.tasks.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
 
 public class TaskListTest {
     @Test

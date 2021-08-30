@@ -1,13 +1,15 @@
 package tasks;
 
-import duke.tasks.Event;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import duke.tasks.Event;
+
 
 public class EventTest {
     @Test

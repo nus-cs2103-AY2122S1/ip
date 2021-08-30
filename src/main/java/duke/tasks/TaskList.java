@@ -1,21 +1,19 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
 import duke.exception.EmptyListException;
 import duke.exception.IncorrectFormatException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidDurationException;
 import duke.exception.InvalidIndexException;
 import duke.exception.MessageEmptyException;
-
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
-import java.util.ArrayList;
 
 /**
  * Represents the list of tasks.
@@ -76,7 +74,7 @@ public class TaskList {
      *
      * @param taskIndex The index of the duke.tasks.Task in the list of Tasks to be marked as Done.
      * @throws EmptyListException If the list of Tasks is empty and there is nothing to be marked as Done.
-     * @throws InvalidIndexException If the index of the duke.tasks.Task provided is out of range of the current list of Tasks.
+     * @throws InvalidIndexException If the index of the Task provided is out of range of the current list of Tasks.
      */
 
     public void markDone(String taskIndex) throws EmptyListException, InvalidIndexException {
@@ -103,7 +101,8 @@ public class TaskList {
      * @throws IncorrectFormatException If the deadline command is used but a "/by" is not present in the message.
      */
 
-    public void addDeadline(String deadline) throws IncorrectFormatException, InvalidDateTimeException, MessageEmptyException {
+    public void addDeadline(String deadline) throws IncorrectFormatException,
+            InvalidDateTimeException, MessageEmptyException {
         String[] result = deadline.split("/by");
 
         if (result.length == 0) {
@@ -146,7 +145,8 @@ public class TaskList {
      * @throws IncorrectFormatException If the event command is used but a "/at" is not present in the message.
      */
 
-    public void addEvent(String event) throws IncorrectFormatException, MessageEmptyException, InvalidDateTimeException, InvalidDurationException {
+    public void addEvent(String event) throws IncorrectFormatException, MessageEmptyException,
+            InvalidDateTimeException, InvalidDurationException {
         String[] result = event.split("/at");
 
         if (result.length == 0) {
@@ -155,8 +155,8 @@ public class TaskList {
             // throws an error if "/at" is not present in the message
             throw new IncorrectFormatException("event", "/at");
         }
-        String description = result[0].trim();    // trims the additional spaces to the left and right of "at"
-        String at = result[1].trim();             // trims the additional spaces to the left and right of "at"
+        String description = result[0].trim(); // trims the additional spaces to the left and right of "at"
+        String at = result[1].trim(); // trims the additional spaces to the left and right of "at"
 
         // throws error if it doesn't even contain sufficient number of characters for correct format
         if (at.replaceAll("\\s", "").length() < 19) { // YYYY/MM/DD HHMM - HHMM
@@ -198,7 +198,7 @@ public class TaskList {
      *
      * @param taskIndex Index of the Task to be deleted.
      * @throws EmptyListException If the list of Tasks is empty and there is nothing to be deleted.
-     * @throws InvalidIndexException If the index of the duke.tasks.Task provided is out of range of the current list of Tasks.
+     * @throws InvalidIndexException If the index of the Task provided is out of range of the current list of Tasks.
      */
 
     public void deleteTask(String taskIndex) throws EmptyListException, InvalidIndexException {

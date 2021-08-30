@@ -1,23 +1,21 @@
 package duke.storage;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-import duke.exception.DataFileChangedException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DataFileChangedException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /**
  * Handles loading and saving tasks from the data file.
@@ -79,27 +77,27 @@ public class Storage {
 
         Scanner sc = new Scanner(file);
 
-        while(sc.hasNext()) {
+        while (sc.hasNext()) {
             String nextCommand = sc.nextLine();
             Task task;
 
             switch (nextCommand.charAt(1)) {
             case 'D':
                 try {
-                    task = extractDeadline(nextCommand.substring(7));   // [D][X] something by time
+                    task = extractDeadline(nextCommand.substring(7)); // [D][X] something by time
                     break;
                 } catch (DataFileChangedException e) {
                     throw new DataFileChangedException();
                 }
             case 'E':
                 try {
-                    task = extractEvent(nextCommand.substring(7));      // [D][X] something at time
+                    task = extractEvent(nextCommand.substring(7)); // [D][X] something at time
                     break;
                 } catch (DataFileChangedException e) {
                     throw new DataFileChangedException();
                 }
-            case 'T':                                                   // todos
-                task = new Todo(nextCommand.substring(7));              // disregards [T][X]
+            case 'T': // todos
+                task = new Todo(nextCommand.substring(7)); // disregards [T][X]
                 break;
             default:
                 throw new DataFileChangedException();

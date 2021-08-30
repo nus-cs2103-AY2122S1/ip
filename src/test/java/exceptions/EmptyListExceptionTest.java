@@ -1,9 +1,10 @@
 package exceptions;
 
-import duke.exception.EmptyListException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import duke.exception.EmptyListException;
 
 public class EmptyListExceptionTest {
     @Test
