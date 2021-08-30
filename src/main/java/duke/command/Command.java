@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * The class to represent user commands.
+ */
 public abstract class Command {
 
     /** Constructor of Command class */

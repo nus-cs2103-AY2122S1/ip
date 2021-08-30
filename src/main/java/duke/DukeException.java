@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * The class to represent an exception thrown in the program.
+ */
 public class DukeException extends Exception {
 
     /**

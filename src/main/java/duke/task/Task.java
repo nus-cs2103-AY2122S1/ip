@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * The class to represent a task.
+ */
 public abstract class Task {
 
     /** name of the task */
@@ -38,6 +41,11 @@ public abstract class Task {
         return (this.isDone ? "X" : " ");
     }
 
+    /**
+     * Method to get the name of the task
+     *
+     * @return the name of the task
+     */
     public String getName() {
         return this.name;
     }

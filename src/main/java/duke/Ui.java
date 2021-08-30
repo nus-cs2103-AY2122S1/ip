@@ -6,6 +6,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * The class to handle interactions with the user.
+ */
 public class Ui {
 
     /** the reader to get the user input */
@@ -56,6 +59,11 @@ public class Ui {
         System.out.println("Bye. See you again soon! :)");
     }
 
+    /**
+     * The method to show all tasks to user.
+     *
+     * @param listOfTasks the tasks to be printed
+     */
     public void showAllTasks(TaskList listOfTasks) {
         if (listOfTasks.isEmpty()) {
             System.out.println("You currently have no tasks! Add one now ☻");
@@ -65,6 +73,11 @@ public class Ui {
         }
     }
 
+    /**
+     * The method to show all matching tasks to user.
+     *
+     * @param listOfTasks the tasks to be printed
+     */
     public void showMatchingTasks(TaskList listOfTasks) {
         if (listOfTasks.isEmpty()) {
             System.out.println("No matching tasks found! ☹");
@@ -74,6 +87,11 @@ public class Ui {
         }
     }
 
+    /**
+     * The method to print all tasks in the listOfTasks to user.
+     *
+     * @param listOfTasks the tasks to be printed
+     */
     public void showTasks(TaskList listOfTasks) {
         int size = listOfTasks.size();
         for (int i = 0; i < size; i++) {

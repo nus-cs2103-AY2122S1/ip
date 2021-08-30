@@ -3,6 +3,9 @@ package duke;
 import duke.task.Task;
 import java.util.ArrayList;
 
+/**
+ * The class to represent a list of tasks the user has.
+ */
 public class TaskList {
 
     /** the list of tasks */
@@ -49,14 +52,29 @@ public class TaskList {
         }
     }
 
+    /**
+     * Method to determine if the list of tasks is empty
+     *
+     * @return whether the list of tasks is empty
+     */
     public boolean isEmpty() {
         return this.listOfTasks.isEmpty();
     }
 
+    /**
+     * Method to determine the number of elements in the list of tasks
+     *
+     * @return the number of elements in the list of tasks
+     */
     public int size() {
         return this.listOfTasks.size();
     }
 
+    /**
+     * Method to return a task at a specific index in the list
+     *
+     * @return the task at the specific index in the list
+     */
     public Task get(int i) {
         return this.listOfTasks.get(i);
     }
@@ -109,6 +127,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * The method to get a list of matching tasks based on a given keyword.
+     *
+     * @param keyword keyword to filter out matching tasks
+     * @return the list of tasks matching the given keyword
+     */
     public TaskList findMatchingTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task t : this.listOfTasks) {

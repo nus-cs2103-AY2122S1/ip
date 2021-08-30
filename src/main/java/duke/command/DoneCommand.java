@@ -4,8 +4,12 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * The class to represent a command to mark tasks as done.
+ */
 public class DoneCommand extends Command {
 
+    /** index of task to be marked as done */
     private int index;
 
     /** Constructor of DoneCommand class */

@@ -3,6 +3,9 @@ package duke;
 import duke.command.Command;
 import java.io.IOException;
 
+/**
+ * The main logic flow of the Duke program.
+ */
 public class Duke {
 
     /** The storage utility */
@@ -19,12 +22,10 @@ public class Duke {
 
     /**
      * The constructor for Duke class
-     *
-     * @param filePath file path to be used for storage
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -55,6 +56,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(FILE_PATH).run();
+        new Duke().run();
     }
 }

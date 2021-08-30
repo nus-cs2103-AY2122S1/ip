@@ -13,6 +13,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The class to write data to and retrieve data from a file.
+ */
 public class Storage {
 
     /** the path of the file used for storage */
