@@ -19,8 +19,8 @@ public class EndCommand implements Command {
      * @throws DukeException Thrown in the event of input format errors.
      */
     @Override
-    public void execute(TaskList t, Ui ui, Storage storage) {
-        ui.textFrame("Goodbye from Bob's list adder!");
+    public String execute(TaskList t, Ui ui, Storage storage) {
+        return ui.textFrame("Goodbye from Bob's list adder!");
     }
 
     /**

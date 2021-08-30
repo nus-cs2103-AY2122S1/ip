@@ -60,10 +60,11 @@ public class Ui {
      *
      * @param s The string to be wrapped.
      */
-    public void textFrame(String s) {
-        System.out.println(".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.\n"
-                + s + "\n"
-                + ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.");
+    public String textFrame(String s) {
+//        return ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.\n"
+//                + s + "\n"
+//                + ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.";
+        return s;
     }
 
     /**
@@ -71,10 +72,11 @@ public class Ui {
      *
      * @param s Error string to be wrapped.
      */
-    public void errorFrame(String s) {
-        System.out.println(".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.\n"
-                + s + "\n"
-                + ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.");
+    public String errorFrame(String s) {
+//        return ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.\n"
+//                + s + "\n"
+//                + ".-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-._.-.";
+        return "ERROR\n" + s;
     }
 
     /**

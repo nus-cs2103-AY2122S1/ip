@@ -40,18 +40,18 @@ public class DoneCommand implements Command {
      * @throws DukeException Thrown in the event of input format errors.
      */
     @Override
-    public void execute(TaskList t, Ui ui, Storage storage) {
+    public String execute(TaskList t, Ui ui, Storage storage) {
         try {
             int index = Integer.parseInt(indexString) - 1;
             if (index >= t.getSize() || index <= -1) {
-                ui.errorFrame(" That task does not exist!");
+                return ui.errorFrame(" That task does not exist!");
             } else {
                 t.get(index).setDone();
-                ui.textFrame("Good job, I have marked the task as done!" + "\n"
+                return ui.textFrame("Good job, I have marked the task as done!" + "\n"
                         + t.get(index).toString());
             }
         } catch (NumberFormatException e) {
-            ui.errorFrame("That is not a valid index!");
+            return ui.errorFrame("That is not a valid index!");
         }
     }
 }

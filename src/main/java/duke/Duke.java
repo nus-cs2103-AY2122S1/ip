@@ -21,7 +21,7 @@ public class Duke {
      *
      * @param filePath the path for the data.txt file
      */
-    Duke(String filePath) {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(new ArrayList< Task >());
@@ -50,6 +50,17 @@ public class Duke {
             }
         }
     }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            storage.save(tasks);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.errorFrame(e.getMessage());
+        }
+    }
+
 
     /**
      * The main method for Duke application

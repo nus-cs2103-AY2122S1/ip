@@ -51,7 +51,7 @@ public class AddCommand implements Command {
      * @throws DukeException Thrown in the event of input format errors.
      */
     @Override
-    public void execute(TaskList t, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList t, Ui ui, Storage storage) throws DukeException {
         try {
             switch(taskType) {
             case "TODO":
@@ -85,9 +85,9 @@ public class AddCommand implements Command {
             default:
                 System.out.println("should never reach here");
             }
-            ui.textFrame("Got it I've added this task:\n" + t.get(t.getSize() - 1));
+            return ui.textFrame("Got it I've added this task:\n" + t.get(t.getSize() - 1));
         } catch (DukeException e) {
-            ui.errorFrame(e.getMessage());
+            return ui.errorFrame(e.getMessage());
         }
     }
 }

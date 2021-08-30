@@ -39,7 +39,7 @@ public class FindCommand implements Command {
      * @param storage The Storage object being used by the application.
      */
     @Override
-    public void execute(TaskList t, Ui ui, Storage storage) {
+    public String execute(TaskList t, Ui ui, Storage storage) {
         String itemString = "";
         for (int i = 0; i < t.getSize(); i++) {
             Task currTask = t.get(i);
@@ -54,6 +54,6 @@ public class FindCommand implements Command {
             itemString = "Here are the matching tasks in your list:\n";
             itemString += temp;
         }
-        ui.textFrame(itemString);
+        return ui.textFrame(itemString);
     }
 }

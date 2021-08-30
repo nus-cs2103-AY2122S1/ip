@@ -26,5 +26,5 @@ public interface Command {
      * @param storage The Storage object handling the loading and saving.
      * @throws DukeException Thrown in the event of input format errors.
      */
-    void execute(TaskList t, Ui ui, Storage storage) throws DukeException;
+    String execute(TaskList t, Ui ui, Storage storage) throws DukeException;
 }

@@ -20,7 +20,7 @@ public class ListCommand implements Command {
      * @throws DukeException Thrown in the event of input format errors.
      */
     @Override
-    public void execute(TaskList t, Ui ui, Storage storage) {
+    public String execute(TaskList t, Ui ui, Storage storage) {
         String listString = "";
         if (t.getSize() == 0) {
             listString = "\n Your list is empty!";
@@ -30,7 +30,7 @@ public class ListCommand implements Command {
                 listString += "\n " + count + ". " + t.get(i);
             }
         }
-        ui.textFrame(" This be ye list of things to do Sire:" + listString);
+        return ui.textFrame(" This be ye list of things to do Sire:" + listString);
     }
 
     /**

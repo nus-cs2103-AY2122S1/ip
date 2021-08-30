@@ -1,0 +1,5 @@
+T | 1 | Eat apples | 
+D | 0 | count apples | 05 Jun 2020 07:20 PM
+E | 0 | Apple Eating Contest | Jacob's place
+T | 0 | Buy 10 more apples | 
+T | 0 | Eat the 10 new apples I just bought | 
