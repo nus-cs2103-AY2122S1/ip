@@ -27,9 +27,12 @@ public class FindCommand extends Command {
      * @param taskList   TaskList of Duke.
      * @param ui      The user interface.
      * @param storage Storage for Duke.
+     * @retunr Message to be shown to user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.formatPrint(taskList.filterByKeyword(this.keyword));
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String message = taskList.filterByKeyword(keyword);
+        ui.formatPrint(message);
+        return message;
     }
 }

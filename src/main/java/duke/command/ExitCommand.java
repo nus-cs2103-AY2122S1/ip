@@ -23,13 +23,15 @@ public class ExitCommand extends Command {
      * @param taskList   TaskList of Duke.
      * @param ui      The user interface.
      * @param storage Storage for Duke.
+     * @return Message to be shown to user.
      * @throws DukeException If we are not able to save the data.txt file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ui.printDivider();
         storage.save(taskList.toDataFileInput());
         ui.printGoodbyeMessage();
         ui.printDivider();
+        return "Data has been saved! Goodbye!";
     }
 }

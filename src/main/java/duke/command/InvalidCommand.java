@@ -19,10 +19,11 @@ public class InvalidCommand extends Command {
      * @param taskList   TaskList of Duke.
      * @param ui      The user interface.
      * @param storage Storage for Duke.
+     * @return Message to be shown to user.
      * @throws DukeException If command is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         throw new DukeInvalidCommandException();
     }
 }

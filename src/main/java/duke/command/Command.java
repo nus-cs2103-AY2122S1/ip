@@ -11,7 +11,7 @@ import duke.util.Ui;
  * @author Chng Zi Hao
  */
 public abstract class Command {
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns a boolean on whether the command is an exit command.

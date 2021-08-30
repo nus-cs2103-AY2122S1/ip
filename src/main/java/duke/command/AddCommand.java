@@ -28,9 +28,12 @@ public class AddCommand extends Command {
      * @param taskList   TaskList of Duke.
      * @param ui      The user interface.
      * @param storage Storage for Duke.
+     * @return Message to be shown to user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.formatPrint(taskList.addTask(this.task));
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String message = taskList.addTask(task);
+        ui.formatPrint(message);
+        return message;
     }
 }

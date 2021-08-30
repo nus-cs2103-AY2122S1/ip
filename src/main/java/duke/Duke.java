@@ -37,27 +37,36 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
-    }
+//    public static void main(String[] args) {
+//        new Duke().run();
+//    }
+//
+//    /**
+//     * Runs the Duke Program.
+//     */
+//    public void run() {
+//        ui.printWelcomeMessage();
+//        Scanner sc = new Scanner(System.in);
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                ui.printPrompt();
+//                String input = sc.nextLine();
+//                Command c = parser.parse(input);
+//                c.execute(taskList, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.formatPrint(e.getMessage());
+//            }
+//        }
+//    }
 
-    /**
-     * Runs the Duke Program.
-     */
-    public void run() {
-        ui.printWelcomeMessage();
-        Scanner sc = new Scanner(System.in);
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                ui.printPrompt();
-                String input = sc.nextLine();
-                Command c = parser.parse(input);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.formatPrint(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

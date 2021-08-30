@@ -30,10 +30,13 @@ public class FilterCommand extends Command {
      * @param taskList   TaskList of Duke.
      * @param ui      The user interface.
      * @param storage Storage for Duke.
+     * @return Message to be shown to user.
      * @throws DukeException If date is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.formatPrint(taskList.filterByDate(this.filterDate));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String message = taskList.filterByDate(filterDate);
+        ui.formatPrint(message);
+        return message;
     }
 }
