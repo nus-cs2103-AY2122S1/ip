@@ -3,7 +3,7 @@ package pix.command;
 import java.io.IOException;
 
 import pix.exception.PixException;
-import pix.exception.PixIOException;
+import pix.exception.PixIoException;
 import pix.storage.Storage;
 import pix.task.TaskList;
 import pix.ui.Ui;
@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
     public String trigger(Storage storage, TaskList taskList, Ui ui) throws PixException {
         try {
             storage.writeToFile(taskList.getTaskList());
-        } catch (IOException | PixIOException e) {
+        } catch (IOException | PixIoException e) {
             //The format should be set and there shouldn't be any I/O error.
         }
 

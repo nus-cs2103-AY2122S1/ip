@@ -15,8 +15,8 @@ public class Ui {
     /**
      * Displays the welcome message for the user.
      */
-    public void displayWelcome() {
-        System.out.println("This is Pix. Why did you summon me AGAIN...\nWhat do want now?");
+    public String displayWelcome() {
+        return "This is Pix. Why did you summon me AGAIN...\nWhat do want now?";
     }
 
     /**

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import pix.exception.PixException;
-import pix.exception.PixIOException;
+import pix.exception.PixIoException;
 import pix.exception.PixInvalidDateException;
 import pix.task.Deadline;
 import pix.task.Event;
@@ -59,11 +59,11 @@ public class Storage {
                     break;
                 default:
                     //throw Pix.exception.PixIOException
-                    throw new PixIOException();
+                    throw new PixIoException();
                 }
             }
-        } catch (PixIOException e) {
-            throw new PixIOException();
+        } catch (PixIoException e) {
+            throw new PixIoException();
         } catch (FileNotFoundException e) {
             throw new PixException("Loading error");
         } catch (DateTimeException e) {
@@ -78,7 +78,7 @@ public class Storage {
      *
      * @param taskList Task list to write the data from.
      */
-    public void writeToFile(ArrayList<Task> taskList) throws IOException, PixIOException {
+    public void writeToFile(ArrayList<Task> taskList) throws IOException, PixIoException {
         try {
             //Clear the Pix.task list in the file and rewrite all tasks inside
             FileWriter pixFileWriter = new FileWriter(file);
@@ -88,7 +88,7 @@ public class Storage {
             }
             pixFileWriter.close();
         } catch (IOException e) {
-            throw new PixIOException();
+            throw new PixIoException();
         }
     }
 }
