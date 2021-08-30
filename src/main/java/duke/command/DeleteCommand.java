@@ -33,9 +33,10 @@ public class DeleteCommand extends Command {
      * @param ui      The ui interacting with the user.
      * @param storage The location where the list of tasks is stored.
      * @throws DukeException If arguments are invalid.
+     * @return The output of executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isEmpty()) {
             throw new DukeException("No index was keyed in. Please try again.");
         }
@@ -46,11 +47,10 @@ public class DeleteCommand extends Command {
         }
 
         Task taskDeleted = tasks.remove(index - 1);
-        ui.printToUser("Noted! I've removed this task:");
-        ui.printToUser("  " + taskDeleted);
-        ui.printToUser("Now you have " + tasks.size()
+        return "Noted! I've removed this task:\n" + "  " 
+                + taskDeleted + "\nNow you have " + tasks.size()
                 + (tasks.size() == 1 ? " task" : " tasks")
-                + " in your list.");
+                + " in your list.";
     }
 
     /**

@@ -29,6 +29,11 @@ public class Duke {
     private Ui ui;
 
     /**
+     * The default path used when using the empty constructor.
+     */
+    private static final String DEFAULT_PATH = "./data/tasks.txt";
+    
+    /**
      * Initializes the duke program with a given filePath.
      *
      * @param filePath The path of the file containing your list of tasks.
@@ -45,32 +50,25 @@ public class Duke {
     }
 
     /**
-     * Runs the chatbot until the user inputs the bye command.
+     * Empty constructor for Duke.
      */
-    public void run() {
-        ui.welcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.printBorder();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                storage.write(tasks);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.printBorder();
-            }
-        }
+    public Duke() {
+        this(DEFAULT_PATH);
     }
 
     /**
-     * Runs the program
-     **/
-    public static void main(String[] args) {
-        new Duke("./data/tasks.txt").run();
+     * Generates a response to user input.
+     * 
+     * @param input The String representing the user input.
+     * @return A string in response to the user input. 
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage(); 
+        }
     }
 
 }

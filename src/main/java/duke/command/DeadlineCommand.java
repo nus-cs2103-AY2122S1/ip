@@ -36,9 +36,10 @@ public class DeadlineCommand extends Command {
      * @param ui      The ui interacting with the user.
      * @param storage The location where the list of tasks is stored.
      * @throws DukeException If arguments are invalid.
+     * @return The output of executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isEmpty()) {
             throw new DukeException(String.format("The description of a %s cannot be left empty. "
                     + "Please try again.", this.getCommand()));
@@ -52,11 +53,10 @@ public class DeadlineCommand extends Command {
         LocalDate newTaskDate = Parser.convertDate(argArr[1].trim());
         Deadline newTask = new Deadline(argArr[0].trim(), newTaskDate);
         tasks.add(newTask);
-        ui.printToUser("Got it. I've added this task:");
-        ui.printToUser("  " + newTask);
-        ui.printToUser("Now you have " + tasks.size()
+        return "Got it. I've added this task:\n" + "  " 
+                + newTask + "\nNow you have " + tasks.size()
                 + (tasks.size() == 1 ? " task" : " tasks")
-                + " in your list.");
+                + " in your list.";
     }
 
     /**

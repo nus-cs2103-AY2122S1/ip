@@ -31,8 +31,9 @@ public abstract class Command {
      * @param ui      The ui interacting with the user.
      * @param storage The location where the list of tasks is stored.
      * @throws DukeException
+     * @return The output of executing the command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Checks whether command terminate the program.

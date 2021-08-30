@@ -23,8 +23,8 @@ public class ByeCommand extends Command {
      * @param storage The location where the list of tasks is stored.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printToUser("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

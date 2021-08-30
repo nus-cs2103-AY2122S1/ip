@@ -33,9 +33,10 @@ public class DoneCommand extends Command {
      * @param ui      The ui interacting with the user.
      * @param storage The location where the list of tasks is stored.
      * @throws DukeException If arguments are invalid.
+     * @return The output of executing the command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isEmpty()) {
             throw new DukeException("No index was keyed in. Please try again.");
         }
@@ -47,8 +48,8 @@ public class DoneCommand extends Command {
 
         Task taskToBeMarked = tasks.get(index - 1);
         taskToBeMarked.markTaskAsDone();
-        ui.printToUser("Nice! I've marked this task as done:");
-        ui.printToUser("  " + taskToBeMarked);
+        return "Nice! I've marked this task as done:\n" 
+                + "  " + taskToBeMarked;
     }
 
     /**
