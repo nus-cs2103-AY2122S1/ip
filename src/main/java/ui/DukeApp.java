@@ -19,7 +19,7 @@ import tasks.TaskList;
 //@@author wanyu-l-reused
 //Reused from https://se-education.org/guides/tutorials/javaFxPart3.html
 // with minor modifications
-public final class DukeApp extends Application{
+public final class DukeApp extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -31,6 +31,9 @@ public final class DukeApp extends Application{
     private Storage storage;
     private long startTime;
 
+    /**
+     * Constructs a DukeApp object.
+     */
     public DukeApp() {
         this.ui = new Ui();
         this.storage = new Storage();
@@ -102,7 +105,7 @@ public final class DukeApp extends Application{
     private void handleUserInput() {
         String inputText = userInput.getText();
         Command c = new Parser().parse(inputText);
-        if (c!= null) {
+        if (c != null) {
             Label userText = new Label(inputText);
             String executeResult = c.execute(lst, ui, storage);
             Label dukeText = new Label(getResponse(executeResult));

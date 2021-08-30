@@ -1,7 +1,13 @@
 package storage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
 import duke.DukeException;
 import tasks.DeadLineTask;
 import tasks.EventTask;
@@ -14,8 +20,8 @@ import ui.Ui;
  * of data stored locally on the computer.
  */
 
-public final class Storage{
-    private final static String FILE_PATH = "./data/duke.txt";
+public final class Storage {
+    private static final String FILE_PATH = "./data/duke.txt";
 
     /**
      * Checks if folder and text files for where the information
@@ -30,10 +36,10 @@ public final class Storage{
         File saves = new File(FILE_PATH);
         try {
             if (!folder.exists() || !folder.isDirectory()) {
-              boolean isFolderCreated = folder.mkdir();
+                boolean isFolderCreated = folder.mkdir();
             }
             if (!saves.exists()) {
-              boolean isSavesCreated = saves.createNewFile();
+                boolean isSavesCreated = saves.createNewFile();
             }
         } catch (IOException e) {
             Ui.showInput(e.getMessage());

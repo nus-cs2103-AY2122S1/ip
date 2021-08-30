@@ -14,6 +14,11 @@ public final class DialogBox extends HBox {
 
     private Label text;
 
+    /**
+     * Constructs a DialogBox object.
+     *
+     * @param l the input by user or output by user wrapped by Label
+     */
     public DialogBox(Label ... l) {
         for (Label label : l) {
             label.setWrapText(true);

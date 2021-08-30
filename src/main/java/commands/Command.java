@@ -1,15 +1,15 @@
 package commands;
 
+import java.util.ArrayList;
+
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.util.ArrayList;
-
 /**
  * The Command class represents the action to be done.
  */
-public abstract class Command{
+public abstract class Command {
 
     private final ArrayList<String> input;
 

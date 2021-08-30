@@ -10,7 +10,7 @@ import ui.Ui;
  * @author damithc
  * edited by Wanyu
  */
-public class Duke{
+public class Duke {
     private static TaskList tasks;
     private final Parser parser;
     private final Ui ui;

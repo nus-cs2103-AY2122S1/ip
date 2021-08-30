@@ -1,16 +1,16 @@
 package commands;
 
+import java.util.ArrayList;
+
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * The ByeCommand Class inherits Command and is
  * a specific type of executable command.
  */
-public final class ByeCommand extends Command{
+public final class ByeCommand extends Command {
 
 
     /**

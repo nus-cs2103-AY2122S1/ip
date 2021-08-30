@@ -7,25 +7,27 @@ import java.util.Scanner;
  * the user directly and displays various dialog prompts
  * to help user with input.
  */
-public final class Ui{
-    private final static String LOGO = " ____        _        \n"
+public final class Ui {
+
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private final static String SEPARATOR = "     _____________________________________________" +
-            "__________________________________________________________________________" +
-            "____________________________________________________________";
+
+    private static final String SEPARATOR = "     _____________________________________________"
+            + "__________________________________________________________________________"
+            + "____________________________________________________________";
 
     private final Scanner sc;
 
-    private final static String WELCOME_MESSAGE =
+    private static final String WELCOME_MESSAGE =
             "Hello from\n" + LOGO + "\n" + SEPARATOR + "\n"
             + "     Hi! I am Duke!\n" + "     What can I do for you?\n"
             + SEPARATOR;
 
 
-    private final static String HELPER_MESSAGE = SEPARATOR + "\n"
+    private static final String HELPER_MESSAGE = SEPARATOR + "\n"
             + "     The following can be used:\n" + "     Types of tasks: 'todo', 'deadline', 'event'\n"
             + "     If you wish to add a task, please input in the form: '<Type of tasks.Task> <Name of tasks.Task>'"
             + " and include keyword '/at' OR '/by' followed by <Date> if relevant.\n"
@@ -34,9 +36,9 @@ public final class Ui{
             + "     If you wish to mark a task as done, please input 'done <task index>.'\n"
             + "     If you wish to terminate the program, please input 'bye'.\n"
             + "     If you wish to check items due on a particular day, please input 'due YYYY/MM/DD'.\n"
-            + "     If you wish to find items, please input in the form: 'find <keyword>'.\n"
-            + SEPARATOR;
-    private final static String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+            + "     If you wish to find items, please input in the form: 'find <keyword>'.\n" + SEPARATOR;
+
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     /**
      * Constructs an Ui.
@@ -64,7 +66,7 @@ public final class Ui{
     public String readLine() {
         String s = " ";
         if (sc.hasNext()) {
-          s = sc.nextLine();
+            s = sc.nextLine();
         }
         return s;
     }

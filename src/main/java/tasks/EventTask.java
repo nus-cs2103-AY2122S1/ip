@@ -10,12 +10,12 @@ import java.util.regex.Pattern;
  * to support different specificities of a task
  * as per input by user.
  */
-public final class EventTask extends Task{
+public final class EventTask extends Task {
     /**
      * Stores the type of task information
      * that identifies a EventTask.
      */
-    private final String TYPE = "[E]";
+    private final String taskType = "[E]";
 
     /**
      * Stores the date information of an Event task.
@@ -69,7 +69,7 @@ public final class EventTask extends Task{
      * @return the String description of the type of task
      */
     public String getType() {
-        return this.TYPE;
+        return this.taskType;
     }
 
     private void setLocalDate(LocalDate localDate) {

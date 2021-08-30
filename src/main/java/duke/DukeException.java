@@ -4,7 +4,7 @@ package duke;
  * The DukeException class inherits Exception and
  * is unique Duke instances.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     /**
      * Constructs the DukeException object.
      *

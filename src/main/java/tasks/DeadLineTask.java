@@ -10,12 +10,12 @@ import java.util.regex.Pattern;
  * to support different specificities of a task
  * as per input by user.
  */
-public final class DeadLineTask extends Task{
+public final class DeadLineTask extends Task {
     /**
      * Stores the type of task information
      * that identifies a DeadlineTask.
      */
-    private final String TYPE = "[D]";
+    private final String taskType = "[D]";
 
     /**
      * Stores the do-by-date information.
@@ -69,7 +69,7 @@ public final class DeadLineTask extends Task{
      * @return the String description of the type of task
      */
     public String getType() {
-        return this.TYPE;
+        return this.taskType;
     }
 
     private void setLocalDate(LocalDate localDate) {

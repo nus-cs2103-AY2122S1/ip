@@ -5,14 +5,14 @@ package tasks;
  * to support different specificities of a task
  * as per input by user.
  */
-public final class ToDoTask extends Task{
+public final class ToDoTask extends Task {
 
 
     /**
      * Stores the type of task information
      * that identifies a ToDoTask.
      */
-    private final String TYPE = "[T]";
+    private final String taskType = "[T]";
 
     /**
      * Constructs a ToDoTask.
@@ -30,7 +30,7 @@ public final class ToDoTask extends Task{
      */
     @Override
     public String getType() {
-      return this.TYPE;
+        return this.taskType;
     }
 
     /**

@@ -3,7 +3,7 @@ package tasks;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public final class TaskList{
+public final class TaskList {
     private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> inputTasks) {
@@ -87,7 +87,7 @@ public final class TaskList{
      * @param start the starting index
      * @return String representation of date as input by user
      */
-    public String getDate(ArrayList<String> s,int start) {
+    public String getDate(ArrayList<String> s, int start) {
         String temp = "";
         for (int i = start; i < s.size(); i++) {
             if (i + 1 < s.size()) {
@@ -104,7 +104,7 @@ public final class TaskList{
      *
      * @param t the task to be added/e
      */
-    public String addTask(Task t){
+    public String addTask(Task t) {
         if (tasks == null) {
             tasks = new ArrayList<>();
         }

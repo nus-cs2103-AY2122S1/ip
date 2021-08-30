@@ -1,17 +1,17 @@
 package commands;
 
+import java.util.ArrayList;
+
 import storage.Storage;
 import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.util.ArrayList;
-
 /**
  * The DoneCommand Class inherits Command and is
  * a specific type of executable command.
  */
-public final class DoneCommand extends Command{
+public final class DoneCommand extends Command {
 
 
     /**

@@ -1,13 +1,14 @@
 package tasks;
 
 import java.time.LocalDate;
+
 import ui.Ui;
 
 /**
  * The Task class implements the tasks to be tracked by the
  * Duke assistant.
  */
-public class Task{
+public class Task {
 
     /**
      * Description of the task.

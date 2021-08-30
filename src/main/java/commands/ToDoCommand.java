@@ -1,18 +1,18 @@
 package commands;
 
+import java.util.ArrayList;
+
 import storage.Storage;
 import tasks.TaskList;
 import tasks.ToDoTask;
 import ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * The ToDoCommand Class inherits Command and is
  * a specific type of executable command.
  */
 
-public final class ToDoCommand extends Command{
+public final class ToDoCommand extends Command {
 
     /**
      * Constructs the ToDoCommand object.

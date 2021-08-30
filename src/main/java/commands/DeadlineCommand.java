@@ -1,17 +1,17 @@
 package commands;
 
+import java.util.ArrayList;
+
 import storage.Storage;
 import tasks.DeadLineTask;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.util.ArrayList;
-
 /**
  * The DeadlineCommand Class inherits Command and is
  * a specific type of executable command.
  */
-public final class DeadlineCommand extends Command{
+public final class DeadlineCommand extends Command {
 
 
     /**
@@ -41,10 +41,10 @@ public final class DeadlineCommand extends Command{
             return result;
         } catch (IllegalArgumentException e) {
             if (e.getMessage().equals("deadline")) {
-                return "Invalid input :(\n" +
-                        "Please input in the form: 'deadline <Name> /by <Date>'.";
+                return "Invalid input :(\n"
+                        + "Please input in the form: 'deadline <Name> /by <Date>'.";
             } else {
-               return e.getMessage() + "\n" + "Hey, no deadline recorded does not mean no deadline >:(";
+                return e.getMessage() + "\n" + "Hey, no deadline recorded does not mean no deadline >:(";
             }
         }
     }

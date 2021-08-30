@@ -1,15 +1,25 @@
 package parser;
 
-import commands.*;
-import duke.DukeException;
 import java.util.ArrayList;
+
+import commands.ByeCommand;
+import commands.Command;
+import commands.DeadlineCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.DueCommand;
+import commands.EventCommand;
+import commands.FindCommand;
+import commands.ListCommand;
+import commands.ToDoCommand;
+import duke.DukeException;
 import ui.Ui;
 
 /**
  * The Parser class attempts to make sense of
  * user's input and generates commands accordingly.
  */
-public final class Parser{
+public final class Parser {
 
     /**
      * Generates the command corresponding to user's input.
@@ -23,7 +33,9 @@ public final class Parser{
             ArrayList<String> words = new ArrayList<>();
             String[] arr = str.split("\\s+");
             for (String ss : arr) {
-                if (!ss.equals("")) words.add(ss);
+                if (!ss.equals("")) {
+                    words.add(ss);
+                }
             }
             c = generateCommand(words);
         } catch (DukeException e) {

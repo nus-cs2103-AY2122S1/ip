@@ -1,17 +1,17 @@
 package commands;
 
+import java.util.ArrayList;
+
 import storage.Storage;
 import tasks.EventTask;
 import tasks.TaskList;
 import ui.Ui;
 
-import java.util.ArrayList;
-
 /**
  * The EventCommand Class inherits Command and is
  * a specific type of executable command.
  */
-public final class EventCommand extends Command{
+public final class EventCommand extends Command {
 
 
     /**

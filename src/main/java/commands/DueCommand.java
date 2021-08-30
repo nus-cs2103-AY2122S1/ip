@@ -1,17 +1,17 @@
 package commands;
 
+import java.util.ArrayList;
+
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * The DueCommand Class inherits Command and is
  * a specific type of executable command.
  */
 
-public final class DueCommand extends Command{
+public final class DueCommand extends Command {
 
     /**
      * Constructs the DueCommand object.
@@ -36,8 +36,7 @@ public final class DueCommand extends Command{
             String result = lst.anyTaskDue(getInput().get(1));
             return result;
         } catch (IndexOutOfBoundsException e) {
-           return "Invalid input :(\n"
-                   + Ui.getHelperMessage();
+            return "Invalid input :(\n" + Ui.getHelperMessage();
         }
     }
 }
