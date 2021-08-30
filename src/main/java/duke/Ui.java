@@ -4,116 +4,126 @@ package duke;
  * Ui class provides methods for user interaction
  */
 public class Ui {
-    String line = "____________________________________________________________\n";
+    String line = "_______________________________________________________\n";
 
     /**
      * Shows a welcome text
+     * @return a String representing welcome text
      */
-    public void Start(){
-        System.out.println(line + " Hello! I'm Duke\n" + " What can I do for you?\n" + line);
+    public String Start(){
+        return line + " Hello! I'm Duke\n" + " What can I do for you?\n" + line;
     }
 
     /**
      * Shows a farewell text
+     * @return a String representing farewell text
      */
-    public void Bye(){
-        System.out.println(line + "Bye. Hope to see you again soon!\n" + line);
+    public String Bye(){
+        return line + "Bye. Hope to see you again soon!\n" + line;
     }
 
     /**
      * Shows a response when user uses the 'list' command
-     * @param list
+     * @param list a String representing the list
+     * @return a String representing the list with lines
      */
-    public void list(String list){
-        System.out.println(line + list + line);
+    public String list(String list){
+        return line + list + line;
     }
 
     /**
      * Shows a response when user uses the 'done' command
      * @param t takes in a task that user marked as done
+     * @return a String representing the done task
      */
-    public void Done(Task t){
-        System.out.println(line + "Nice! I've marked this task as done:\n" + t);
+    public String Done(Task t){
+        return line + "Nice! I've marked this task as done:\n" + t + line;
     }
 
     /**
      * Shows a response when user uses the 'delete' command
      * @param tasks takes in a TaskList
      * @param delete takes in a Task representing the deleted task
+     * @return a String representing the deleted task
      */
-    public void Delete(TaskList tasks, Task delete){
-        System.out.println(line + "Noted. I've removed this task:\n" + delete +
-                "\nNow you have " + tasks.size() + " tasks in the list.\n" + line);
+    public String Delete(TaskList tasks, Task delete){
+        return line + "Noted. I've removed this task:\n" + delete +
+                "\nNow you have " + tasks.size() + " tasks in the list.\n" + line;
     }
 
     /**
-     * Shows error message for 'done' command
-     * when index is out of bound
+     * Shows error message for 'done' command when index is out of bound
+     * @return a String representing the error message
      */
-    public void showDoneError(){
-        System.out.println("\n" + line +
-                "\n☹ OOPS!!! No such task to be done.\n" + line);
+    public String showDoneError(){
+        return "\n" + line +
+                "\n☹ OOPS!!! No such task to be done.\n" + line;
     }
 
     /**
-     * Shows error message for 'delete' command
-     * when index is out of bound
+     * Shows error message for 'delete' command when index is out of bound
+     * @return a String representing the error message
      */
-    public void showDeleteError(){
-        System.out.println("\n" + line +
-                "\n☹ OOPS!!! No such task to be deleted.\n" + line);
+    public String showDeleteError(){
+        return "\n" + line +
+                "\n☹ OOPS!!! No such task to be deleted.\n" + line;
     }
 
     /**
      * Shows a response when user uses the 'todo' command
      * @param tasks takes in a TaskList
      * @param todo takes in a Task that user added as todo
+     * @return a String representing the todo Task
      */
-    public void todo(TaskList tasks,Task todo){
-        System.out.println(line + "Got it. I've added this task:\n" + todo +
-                "\nNow you have " + tasks.size() + " tasks in the list.\n" + line);
+    public String todo(TaskList tasks,Task todo){
+        return line + "Got it. I've added this task:\n" + todo +
+                "\nNow you have " + tasks.size() + " tasks in the list.\n" + line;
     }
 
     /**
      * Shows a response when user uses the 'deadline' command
      * @param tasks takes in a TaskList
      * @param deadline takes in a Task that user added as deadline
+     * @return a String representing the deadline task
      */
-    public void deadline(TaskList tasks,Task deadline){
-        System.out.println(line + "Got it. I've added this task:\n" + deadline +
-                "\nNow you have " + tasks.size() + " tasks in the list.\n" + line);
+    public String deadline(TaskList tasks,Task deadline){
+        return line + "Got it. I've added this task:\n" + deadline +
+                "\nNow you have " + tasks.size() + " tasks in the list.\n" + line;
     }
 
     /**
-     * Shows an error message for 'deadline' command
-     * if date is not in yyyy-mm-dd format
+     * Shows an error message for 'deadline' command if date is not in yyyy-mm-dd format
+     * @return a String representing the error message
      */
-    public void showDeadlineError(){
-        System.out.println("\n" + line +
-                "\n☹ OOPS!!! The time must be in the format YYYY-MM-DD\n" + line);
+    public String showDeadlineError(){
+        return "\n" + line +
+                "\n☹ OOPS!!! The time must be in the format YYYY-MM-DD\n" + line;
     }
 
     /**
      * Shows a response when user uses the 'event' command
      * @param tasks takes in a TaskList
      * @param event takes in a Task that user added as event
+     * @return a String representing the event task
      */
-    public void event(TaskList tasks,Task event){
-        System.out.println(line + "Got it. I've added this task:\n" + event +
-                "\nNow you have " + tasks.size() + " tasks in the list.\n" + line);
+    public String event(TaskList tasks,Task event){
+        return line + "Got it. I've added this task:\n" + event +
+                "\nNow you have " + tasks.size() + " tasks in the list.\n" + line;
     }
 
     /**
      * Shows a respone when user uses the 'find' command
      * @param findList takes in a String representing the results of find
+     * @return a String representing the task found by find
      */
-    public void find(String findList){
-        System.out.println(line + "Here are the matching tasks in your list:" + findList + line);
+    public String find(String findList){
+        return line + "Here are the matching tasks in your list:" + findList + line;
     }
 
     /**
      * Shows an error message when description of task is empty
      * @return a String describing the error
+     * @return a String representing the error message
      */
     public String emptyDescriptionError(){
         return "\n" + line + "\n☹ OOPS!!! The description cannot be empty.\n" + line;
@@ -121,9 +131,10 @@ public class Ui {
 
     /**
      * Shows an error message when user command is invalid
+     * @return a String representing the error message
      */
-    public void defaultError(){
-        System.out.println("\n" + line +
-                "\n☹ OOPS!!! I'm sorry, but I don't know what that means :-(.\n" + line);
+    public String defaultError(){
+        return "\n" + line +
+                "\n☹ OOPS!!! I'm sorry, but I don't know what that means :-(.\n" + line;
     }
 }
