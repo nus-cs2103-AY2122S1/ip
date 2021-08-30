@@ -71,12 +71,12 @@ public class Parser {
         case "list":
             return new String[]{command};
 
-        case "find" :
+        case "find":
             parsedInput = checkFind(input);
             extractedInfo = new String[]{command, parsedInput};
             return extractedInfo;
 
-            // If none of the command words was used as the first word, throw an exception
+        // If none of the command words was used as the first word, throw an exception
 
         default:
             throw new DukeException("Please enter a valid command");
@@ -184,7 +184,7 @@ public class Parser {
 
     }
 
-    public String checkFind(String input) throws DukeException{
+    public String checkFind(String input) throws DukeException {
         if (input.length() == 4) {
             throw new DukeException("Please enter a keyword!");
         } else if (input.split(" ").length > 2) {

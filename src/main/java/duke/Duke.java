@@ -25,6 +25,7 @@ public class Duke {
 
     /**
      * Constructor for the Duke instance
+     *
      * @param filePath the String representing the path of the file where the data is saved
      */
     public Duke(String filePath) {
@@ -83,12 +84,12 @@ public class Duke {
                     taskListIsAddedTo = true;
 
                     // Case where user wants to add a new event task
-                } else if (nextTask.startsWith("event")) {
+                } else if (command.equals("event")) {
                     tasks.addTask(new Event(parsedInputString[1], parsedInputString[2]));
                     taskListIsAddedTo = true;
 
                     // Case where user wants to add a new deadline task
-                } else if (nextTask.startsWith("deadline")) {
+                } else if (command.equals("deadline")) {
                     LocalDate date = LocalDate.parse(parsedInputString[2]);
                     LocalTime time = LocalTime.parse(parsedInputString[3]);
                     String deadlineDesc = parsedInputString[1]; //skip the "deadline "
@@ -96,7 +97,7 @@ public class Duke {
                     taskListIsAddedTo = true;
 
                     // Case where user wants to find a keyword
-                } else if (nextTask.startsWith("find")) {
+                } else if (command.equals("find")) {
                     String keyword = parsedInputString[1];
                     System.out.println(ui.findMessage(tasks.findTask(keyword)));
                     continue;
@@ -106,12 +107,12 @@ public class Duke {
                     throw new DukeException("Please enter a valid command");
                 }
 
-                if (taskListIsUpdated || taskListIsAddedTo) {
-                    storage.saveToFile();
-                    if (taskListIsAddedTo) {
-                        // When adding a new task, this message be printed
-                        System.out.println(ui.displayAddTaskMessage(tasks));
-                    }
+                // If the program reaches this point, meaning no continue or break was hit, it means
+                // there was an update to the file, and we can save the file
+                storage.saveToFile();
+                if (taskListIsAddedTo) {
+                    // When adding a new task, this message be printed
+                    System.out.println(ui.displayAddTaskMessage(tasks));
                 }
 
                 // catch all the custom exceptions and displays the message
@@ -127,6 +128,7 @@ public class Duke {
 
     /**
      * Main method to start the whole program
+     *
      * @param args NIL
      */
     public static void main(String[] args) {

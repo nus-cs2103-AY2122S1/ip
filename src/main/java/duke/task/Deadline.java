@@ -15,9 +15,10 @@ public class Deadline extends Task {
 
     /**
      * Constructor for a Deadline
+     *
      * @param description String representing the description of the deadline task
-     * @param date LocalDate object representing a date
-     * @param time LocalTime object representing a time
+     * @param date        LocalDate object representing a date
+     * @param time        LocalTime object representing a time
      */
     public Deadline(String description, LocalDate date, LocalTime time) {
         super(description);
@@ -39,6 +40,7 @@ public class Deadline extends Task {
     public LocalDate getDate() {
         return this.deadlineDate;
     }
+
     public LocalTime getTime() {
         return this.deadlineTime;
     }

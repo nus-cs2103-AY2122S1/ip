@@ -13,14 +13,17 @@ public abstract class Task {
 
     /**
      * Constructor for the task object
+     *
      * @param description the description of the task
      */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
+
     /**
      * Returns the String representation of the task status
+     *
      * @return "X" if the task is done, " " otherwise
      */
     public String getStatusIcon() {
@@ -41,6 +44,7 @@ public abstract class Task {
 
     /**
      * Returns the description of the task
+     *
      * @return string representing the description of the task
      */
     public String getDescription() {
@@ -49,6 +53,7 @@ public abstract class Task {
 
     /**
      * Returns the task type
+     *
      * @return "T", "D" or "E"
      */
     public String getTaskType() {
@@ -57,6 +62,7 @@ public abstract class Task {
 
     /**
      * Returns the dueDate of the task
+     *
      * @return String representing the dueDate of task
      */
     public String getDueDate() {
