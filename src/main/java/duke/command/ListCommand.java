@@ -27,6 +27,24 @@ public class ListCommand extends Command {
     }
 
     /**
+     * Returns listings.
+     *
+     * @param tasks   Tasks of the Duke program.
+     * @param ui      Ui of the Duke program.
+     * @param storage Storage of the Duke program.
+     */
+    @Override
+    public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
+        String response;
+        if (tasks.getSize() == 0) {
+            response = "You do not have any tasks.";
+        } else {
+            response = "Here are the tasks in your list:\n" + tasks;
+        }
+        return response;
+    }
+
+    /**
      * Returns false as this command is not the ExitCommand.
      *
      * @return false as this command is not the ExitCommand.

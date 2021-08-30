@@ -45,6 +45,29 @@ public class EventCommand extends Command {
     }
 
     /**
+     * Returns the response after creating an Event task.
+     *
+     * @param tasks   Tasks of the Duke program.
+     * @param ui      Ui of the Duke program.
+     * @param storage Storage of the Duke program.
+     * @throws DukeException If changes cannot be saved to storage.
+     */
+    @Override
+    public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        tasks.addTask(event);
+
+        String response = "Got it. I've added this task:\n"
+                + "       " + event + "\n"
+                + "     Now you have "
+                + tasks.getSize() + (tasks.getSize() > 1 ? " tasks" : " task")
+                + " in the list.";
+
+        storage.save(tasks.getTaskList());
+
+        return response;
+    }
+
+    /**
      * Returns false as this command is not the ExitCommand.
      *
      * @return false as this command is not the ExitCommand.
