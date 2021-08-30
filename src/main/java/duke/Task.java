@@ -46,6 +46,7 @@ public class Task {
      * Returns the descriptive String of task. Used in displayList.
      * @return string of task.
      */
+    @Override
     public String toString() {
         return "[" + (isDone ? "X" : " ") + "] " + taskString;
     }
