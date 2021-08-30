@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.exceptions.InvalidTaskCreationException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -133,7 +131,7 @@ public class TaskList {
         StringBuilder res = new StringBuilder("Your search matched these tasks:\n\t ");
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(query)) {
-                res.append(i+1).append(". ").append(tasks.get(i));
+                res.append(i + 1).append(". ").append(tasks.get(i));
                 if (i != tasks.size() - 1) {
                     // do not append a newline to the last item
                     res.append("\n\t ");
@@ -152,7 +150,7 @@ public class TaskList {
     public String toString() {
         StringBuilder res = new StringBuilder("Here are your tasks:\n\t ");
         for (int i = 0; i < tasks.size(); i++) {
-            res.append(i+1).append(". ").append(tasks.get(i));
+            res.append(i + 1).append(". ").append(tasks.get(i));
             if (i != tasks.size() - 1) {
                 // do not append a newline to the last item
                 res.append("\n\t ");
