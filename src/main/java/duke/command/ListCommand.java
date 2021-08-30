@@ -13,8 +13,8 @@ public class ListCommand extends Command {
      * @param storage The instance to store data.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showList(tasks, tasks.getSize());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showList(tasks, tasks.getSize());
     }
 
     @Override

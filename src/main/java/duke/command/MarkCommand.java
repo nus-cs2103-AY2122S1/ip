@@ -21,12 +21,12 @@ public class MarkCommand extends Command {
      * @param storage The instance to store data.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int curr = Integer.parseInt(response.substring(5));
         Task shouldMark = tasks.markElement(curr - 1);
         String stringForm = shouldMark.toString();
         storage.replace(curr - 1, tasks);
-        ui.showDone(stringForm);
+        return ui.showDone(stringForm);
     }
 
     @Override

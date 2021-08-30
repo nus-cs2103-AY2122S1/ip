@@ -33,7 +33,7 @@ public class SearchCommand extends Command {
      * @param storage The instance to store data.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList currList = new TaskList();
         switch (type) {
         case 1:
@@ -48,7 +48,7 @@ public class SearchCommand extends Command {
         default:
             break;
         }
-        ui.showList(currList, currList.getSize());
+        return ui.showList(currList, currList.getSize());
     }
 
     @Override
