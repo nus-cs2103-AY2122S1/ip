@@ -8,10 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -76,7 +74,6 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getStartDialog() {
         String startMessage = Ui.getStartMessage();
-        var db = new DialogBox(startMessage + " ");
-        return db;
+        return new DialogBox(startMessage + " ");
     }
 }
