@@ -35,6 +35,5 @@ public class Parser {
             default:
                 return new Command.NonsenseCommand(stringCommand);
         }
-
     }
 }

@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
+public class Event extends Task {
     protected String at;
 
     public Event(String name, String at) {
@@ -23,7 +23,7 @@ public class Event extends Task{
         }
     }
 
-    private static String processDateAndTime(String dateAndTime) throws WrongInputException{
+    private static String processDateAndTime(String dateAndTime) throws WrongInputException {
         String input = dateAndTime.trim();
         String[] list = input.split(" ");
         String output = "";
@@ -41,7 +41,8 @@ public class Event extends Task{
             DateTimeFormatter resultDF = DateTimeFormatter.ofPattern("dd MMM yyyy");
             DateTimeFormatter resultTF = DateTimeFormatter.ofPattern("HH.mm a");
 
-            output = " " + LocalDate.parse(date, dateF).format(resultDF).toString() + ", " + LocalTime.parse(time, timeF).format(resultTF).toString();
+            output = " " + LocalDate.parse(date, dateF).format(resultDF).toString()
+                    + ", " + LocalTime.parse(time, timeF).format(resultTF).toString();
             return output;
         } catch (DateTimeParseException e) {
             throw new WrongInputException("You must enter Date and Time in this format: dd/MM/yyyy HHmm");
