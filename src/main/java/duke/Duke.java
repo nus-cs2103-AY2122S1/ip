@@ -39,16 +39,20 @@ public class Duke {
         try {
             taskList = new TaskList(store.load());
         } catch (DukeFileException e) {
-            ui.showError(e.getMessage());
+            System.out.println(e.getMessage());
             taskList = new TaskList();
         }
     }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container.
+     *
+     * @param input A String representing the input of user in the text box.
+     * @param dialogContainer A VBox instance on main window.
+     * @return A boolean representing if duke is shutting down.
      */
-    private void handleUserInput(String input, VBox dialogContainer) {
+    public boolean getResponse(String input, VBox dialogContainer) {
         try {
             Command command = Parser.decipher(input);
             String output = command.execute(this.taskList, this.store, this.ui);
@@ -58,12 +62,14 @@ public class Duke {
                     DialogBox.getUserDialog(input, userAvatar),
                     DialogBox.getDukeDialog(dukeText, dukeAvatar)
             );
+            return command.isExit();
         } catch (DukeException e) {
             String dukeTextWhenException = "FullOfBugs:\n" + e.getMessage();
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userAvatar),
                     DialogBox.getDukeDialog(dukeTextWhenException, dukeAvatarWhenException)
             );
+            return false;
         }
     }
 
@@ -76,13 +82,4 @@ public class Duke {
         return DialogBox.getDukeDialog(ui.showWelcomeMessage(), dukeAvatar);
     }
 
-    /**
-     * Appends Duke's message with its name to show as a chat.
-     *
-     * @param input  A String representing the message print out by Duke.
-     * @param dialogContainer A VBox instance that deals with
-     */
-    public void getResponse(String input, VBox dialogContainer) {
-        this.handleUserInput(input, dialogContainer);
-    }
 }
