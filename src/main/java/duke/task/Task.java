@@ -9,14 +9,20 @@ import duke.exception.DukeException;
  *
  * @author Clifford
  */
-abstract public class Task {
-    protected String description;
-    protected boolean isDone;
-    protected String taskSymbol;
+public abstract class Task {
     protected static final String DIVIDER = ",";
     protected static final String DONE_STATUS = "[X]";
     protected static final String NOT_DONE_STATUS = "[ ]";
+    protected String description;
+    protected boolean isDone;
+    protected String taskSymbol;
 
+    /**
+     * Initialises the Task Object with a description
+     *
+     * @param description the task description
+     * @param taskSymbol the unique symbol associated with the different types of task
+     */
     public Task(String description, String taskSymbol) {
         this.description = description;
         this.isDone = false;

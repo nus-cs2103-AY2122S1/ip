@@ -1,10 +1,11 @@
 package duke.core;
 
-import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
 
 public class TaskListTest {
     @Test
@@ -18,9 +19,9 @@ public class TaskListTest {
         try {
             TaskList t = new TaskList();
             t.recordTodo("Hello");
-            assertEquals("--- Start of List ---\n" +
-                    "1. [T][ ] Hello\n" +
-                    "--- End of List ---", t.printTasks());
+            assertEquals("--- Start of List ---\n"
+                    + "1. [T][ ] Hello\n"
+                    + "--- End of List ---", t.printTasks());
         } catch (DukeException e) {
             fail();
         }
@@ -45,9 +46,9 @@ public class TaskListTest {
         try {
             TaskList t = new TaskList();
             t.recordTodo("Hello");
-            assertEquals("--- Start of List ---\n" +
-                    "1. [T][ ] Hello\n" +
-                    "--- End of List ---", t.printTasks());
+            assertEquals("--- Start of List ---\n"
+                    + "1. [T][ ] Hello\n"
+                    + "--- End of List ---", t.printTasks());
             t.deleteTask(1);
             assertEquals("--- List is Empty ---", t.printTasks());
         } catch (DukeException e) {

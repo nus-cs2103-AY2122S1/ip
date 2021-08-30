@@ -9,7 +9,6 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-
 import duke.exception.DukeException;
 
 /**
@@ -29,7 +28,7 @@ public class Parser {
      *     a valid command with missing arguments is entered
      */
     public static Commandable identifyCommand(String input) throws DukeException {
-        if(input.equals("")) {
+        if (input.equals("")) {
             throw new DukeException("Go on, I'm all ears!");
         }
         String[] fullCommand = input.trim().split(" ", 2);
@@ -56,7 +55,7 @@ public class Parser {
             if (command.equals("event")) {
                 return new AddEventCommand(fullCommand[1].trim());
             }
-            if(command.equals("find")) {
+            if (command.equals("find")) {
                 return new FindCommand(fullCommand[1].trim());
             }
             throw new DukeException("Sorry, I don't understand what you are saying!");

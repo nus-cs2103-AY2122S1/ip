@@ -1,11 +1,14 @@
 package duke.core;
 
-import duke.command.*;
-import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.DoneCommand;
+import duke.exception.DukeException;
 
 public class ParserTest {
     @Test
@@ -40,7 +43,7 @@ public class ParserTest {
     }
 
     @Test
-    public void identifyCommand_validDoneCommand_DoneCommand() {
+    public void identifyCommand_validDoneCommand_doneCommandReturned() {
         try {
             assertEquals(true,
                     Parser.identifyCommand("done 23") instanceof DoneCommand);
@@ -50,7 +53,7 @@ public class ParserTest {
     }
 
     @Test
-    public void identifyCommand_validDeadlineCommand_DeadlineCommand() {
+    public void identifyCommand_validDeadlineCommand_deadlineCommandReturned() {
         try {
             assertEquals(true,
                     Parser.identifyCommand(
@@ -61,7 +64,7 @@ public class ParserTest {
     }
 
     @Test
-    public void identifyCommand_validEventCommand_EventCommand() {
+    public void identifyCommand_validEventCommand_eventCommandReturned() {
         try {
             assertEquals(true,
                     Parser.identifyCommand(
