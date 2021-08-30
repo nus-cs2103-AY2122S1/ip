@@ -1,6 +1,11 @@
-package duke;
+package command;
 
 import java.util.List;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import task.Task;
 
 /**
  * Command to find tasks by searching for a keyword.
@@ -9,24 +14,28 @@ import java.util.List;
  */
 public class FindCommand extends Command {
     private String keyword;
+    private StringBuilder sb;
 
+    /**
+     * Constructor for FindCommand.
+     * @param keyword The word to search for in the task description.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
+        this.sb = new StringBuilder("Here are the matching tasks in your list:\n");
     }
 
     /**
      * Executes the specific actions for this command.
      *
      * @param tasks   Handles the list of tasks.
-     * @param ui      Handles the user interface.
      * @param storage Handles the saving and loading of tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showFound();
+    public void execute(TaskList tasks, Storage storage) throws DukeException {
         List<Task> matches = tasks.findTask(this.keyword);
         for (int i = 0; i < matches.size(); i++) {
-            ui.printTaskInList(matches.get(i), i);
+            sb.append(String.format(" %d. %s%n", i + 1, matches.get(i)));
         }
     }
 
@@ -39,5 +48,10 @@ public class FindCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return sb.toString();
     }
 }

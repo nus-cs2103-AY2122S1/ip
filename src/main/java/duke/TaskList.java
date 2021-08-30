@@ -3,6 +3,8 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+import task.Task;
+
 /**
  * Contains the task list and operations to add/delete tasks in the list.
  *
@@ -29,12 +31,12 @@ public class TaskList {
     }
 
     /**
-     * Prints the size of the list of tasks with the appropriate grammar.
+     * Returns the size of the list of tasks with the appropriate grammar.
+     * @return A String describing the size of the list of tasks with the appropriate grammar.
      */
-    public int printSize() {
+    public String getTaskCount() {
         int taskCount = this.tasks.size();
-        System.out.printf("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
-        return taskCount;
+        return String.format("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
     }
 
     public List<Task> getTasks() {
@@ -54,8 +56,6 @@ public class TaskList {
     public void addTask(Storage storage, Task task) throws DukeException {
         this.tasks.add(task);
         storage.saveData(this.tasks);
-        System.out.println("Added task:\n " + task);
-        this.printSize();
     }
 
     /**
@@ -63,9 +63,10 @@ public class TaskList {
      *
      * @param storage The storage object to handle saving tasks.
      * @param index The index of the task to mark as done.
+     * @return The deleted task.
      * @throws DukeException If index is out of range.
      */
-    public void deleteTask(Storage storage, String index) throws DukeException {
+    public Task deleteTask(Storage storage, String index) throws DukeException {
         if (index.isBlank()) {
             throw new DukeException("☹ OOPS!!! Please provide the index of the "
                     + "task you want to delete.");
@@ -74,8 +75,7 @@ public class TaskList {
         Task toBeDeleted = this.tasks.get(deleteTaskIndex);
         this.tasks.remove(deleteTaskIndex);
         storage.saveData(this.tasks);
-        System.out.printf("Noted! I have removed the following task:%n %s%n", toBeDeleted);
-        this.printSize();
+        return toBeDeleted;
     }
 
     /**
@@ -83,9 +83,10 @@ public class TaskList {
      *
      * @param storage The storage object to handle saving tasks.
      * @param index The index of the task to mark as done.
+     * @return The task marked as done.
      * @throws DukeException If index is out of range.
      */
-    public void doneTask(Storage storage, String index) throws DukeException {
+    public Task doneTask(Storage storage, String index) throws DukeException {
         if (index.isBlank()) {
             throw new DukeException("☹ OOPS!!! Please provide the index of the "
                     + "task you want to mark as done.");
@@ -94,12 +95,11 @@ public class TaskList {
         Task doneTask = this.tasks.get(taskIndex);
         doneTask.markAsDone();
         storage.saveData(this.tasks);
-        System.out.printf("Good job! I have marked the following task as done:%n %s%n", doneTask);
+        return doneTask;
     }
 
     /**
-     * Returns a list of tasks with description containing the keyword.List of tasks with
-     * description containing the keyword.
+     * Returns a list of tasks with description containing the keyword.
      *
      * @param keyword Word to search for in task description.
      * @return List of tasks with description containing the keyword.
