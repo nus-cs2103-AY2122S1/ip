@@ -5,7 +5,7 @@ package duke;
 public class Todo extends Task {
 
     /**
-     * Constructor for a todo task.
+     * Constructs a todo task.
      *
      * @param description String describing the todo.
      */
@@ -15,7 +15,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Get string representation of a todo task.
+     * Gets string representation of a todo task.
      *
      * @return String describing the todo task.
      */

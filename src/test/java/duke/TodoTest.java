@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class TodoTest {
     /**
-     * Test if the todo representation is generated as expected.
+     * Tests if the todo representation is generated as expected.
      */
     @Test
     public void todoCreationTest(){

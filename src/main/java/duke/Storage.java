@@ -11,7 +11,7 @@ public class Storage {
     private final File cache;
 
     /**
-     * Constructor for a Storage.
+     * Constructs a Storage.
      * 
      * @param filePath Path where cache is stored.
      */
@@ -20,7 +20,7 @@ public class Storage {
     }
 
     /**
-     * Load the cache and read any previous tasks, if cache exists.
+     * Loads the cache and reads any previous tasks, if cache exists.
      * 
      * @return TaskList with any previous tasks.
      * @throws DukeException Thrown if cache cannot load properly.
@@ -32,14 +32,14 @@ public class Storage {
         if (cache.exists()) {
             // If cache exists, scan for any previously cached tasks.
             try {
-                Scanner sc = new Scanner(cache);
+                Scanner scanner = new Scanner(cache);
                 boolean exit = false;
                 Parser parser = new Parser(tasks); 
         
                 while(!exit) {
                     try {
-                        if (sc.hasNextLine()) {
-                            String nextInput = sc.nextLine();
+                        if (scanner.hasNextLine()) {
+                            String nextInput = scanner.nextLine();
                             String[] resultMsg = parser.parseCommand(nextInput);
                             if (Ui.isByeMsg(resultMsg)) {
                                 exit = true;
@@ -51,7 +51,7 @@ public class Storage {
                         // Ignore previous invalid statements, continue adding tasks.
                     }
                 }
-                sc.close();
+                scanner.close();
             } catch (FileNotFoundException e) {
                 throw new DukeException("Could not load from cache.");
             }
@@ -77,7 +77,7 @@ public class Storage {
     }
 
     /**
-     * Add a command to the cache.
+     * Adds a command to the cache.
      * 
      * @param command String representation of a command.
      * @throws DukeException Thrown if FileWriter fails to append to cache.

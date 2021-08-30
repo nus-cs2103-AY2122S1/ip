@@ -6,7 +6,7 @@ public class Parser {
     private final TaskList tasks;
 
     /**
-     * Constructor for a Parser.
+     * Constructs a Parser.
      * 
      * @param tasks TaskList to add tasks to.
      */
@@ -15,7 +15,7 @@ public class Parser {
     }
 
     /**
-     * Parse a command and manipulate the TaskList accordingly.
+     * Parses a command and manipulates the TaskList accordingly.
      * 
      * @param command String representation of command.
      * @return An array of message strings.

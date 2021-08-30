@@ -5,7 +5,7 @@ package duke;
 public class DukeException extends Exception {
 
     /**
-     * Constructor for an exception related to Duke.
+     * Constructs an exception related to Duke.
      *
      * @param errorMsg String describing error.
      */

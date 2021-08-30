@@ -13,7 +13,7 @@ public class Ui {
     private final Storage storage;
 
     /**
-     * Constructor for a Ui
+     * Constructs a Ui
      * 
      * @param tasks TaskList to record tasks.
      * @param storage Storage to store tasks.
@@ -24,20 +24,20 @@ public class Ui {
     }
 
     /**
-     * Run the Ui and read input from the user.
+     * Runs the Ui and read input from the user.
      */
     public void run() {
         // Print a welcome message
         printMsg(WELCOME_MSG);
         
         // Let user input commands and take actions accordingly.
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         Parser parser = new Parser(tasks);
         boolean exit = false;
         while(!exit) {
             try {
-                if (sc.hasNextLine()) {
-                    String command = sc.nextLine();
+                if (scanner.hasNextLine()) {
+                    String command = scanner.nextLine();
                     storage.cache(command);
                     String[] resultMsg = parser.parseCommand(command);
                     printMsg(resultMsg);
@@ -52,7 +52,7 @@ public class Ui {
             }
 
         }
-        sc.close();
+        scanner.close();
     }
 
     /**

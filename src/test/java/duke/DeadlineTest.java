@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class DeadlineTest {
     /**
-     * Test if the deadline representation is generated as expected.
+     * Tests if the deadline representation is generated as expected.
      * 
      * @throws DukeException Thrown if deadline fails to be generated.
      */
