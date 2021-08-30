@@ -7,7 +7,7 @@ package duke.junittests;
 
 import duke.command.Parser;
 import duke.excpetions.DukeException;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 

@@ -10,8 +10,7 @@ import duke.saveloadmanager.Storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
