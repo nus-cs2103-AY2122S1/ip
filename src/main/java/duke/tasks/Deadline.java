@@ -10,7 +10,9 @@ public class Deadline extends Task {
     private static final String assignmentType = AssignmentType.DEADLINE.getStatus();
     private static final boolean hasDateTime = true;
 
-    public Deadline(String desc) throws WrongDateFormatException, WrongTimeFormatException {
+    public Deadline(
+            String desc) throws WrongDateFormatException,
+            WrongTimeFormatException {
         super(desc, hasDateTime, taskDirectivePoint);
     }
 
@@ -25,13 +27,15 @@ public class Deadline extends Task {
 
     @Override
     public String getOriginalFormatForStorage() {
-        return assignmentType + this.status + " " + this.getOutputMessage(this.date.get().getOriginalFormat());
+        return assignmentType + this.status + " " +
+                this.getOutputMessage(this.date.get().getOriginalFormat());
     }
 
     @Override
     public String toString() {
         String outputString = this.getOutputMessage(this.date.get().toString());
-        String assignmentProg = assignmentType + this.status + " " + outputString;
+        String assignmentProg = assignmentType +
+                this.status + " " + outputString;
         return assignmentProg;
     }
 
@@ -45,6 +49,8 @@ public class Deadline extends Task {
             }
             sb.append(item + " ");
         }
-        return sb.toString() + "(" + taskDirectivePoint + ": " + dateExpression + ")";
+        return sb.toString() + "(" +
+                taskDirectivePoint + ": " +
+                dateExpression + ")";
     }
 }

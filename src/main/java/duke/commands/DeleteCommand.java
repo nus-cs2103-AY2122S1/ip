@@ -18,8 +18,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws WrongDeleteFormatException, DeleteOutOfBoundsException {
-        String[] instructions = this.command_description.split(" ");
+    public void execute(
+            TaskList tasks, Ui ui,
+            Storage storage) throws WrongDeleteFormatException,
+            DeleteOutOfBoundsException {
+        String[] instructions = this.commandDescription.split(" ");
         if (instructions.length != 2) {
             throw new WrongDeleteFormatException();
         }

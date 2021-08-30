@@ -35,7 +35,8 @@ public class TaskList {
         return updatedTask;
     }
 
-    public Task deleteTask(int taskNumber) throws DeleteOutOfBoundsException {
+    public Task deleteTask(
+            int taskNumber) throws DeleteOutOfBoundsException {
         if (taskNumber > allTasks.size()){ 
             throw new DeleteOutOfBoundsException(allTasks.size());
         }

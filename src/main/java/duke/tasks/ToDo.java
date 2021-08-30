@@ -9,7 +9,9 @@ public class ToDo extends Task {
     private static final String assignmentType = AssignmentType.TODO.getStatus();
     private static final boolean hasDateTime = false;
 
-    public ToDo(String desc) throws WrongDateFormatException, WrongTimeFormatException {
+    public ToDo(
+            String desc) throws WrongDateFormatException,
+            WrongTimeFormatException {
         super(desc, hasDateTime, "");
     }
 
@@ -30,9 +32,9 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        String assignmentProg = assignmentType + this.status + " " + this.taskDescription;
+        String assignmentProg = assignmentType +
+                this.status + " " + this.taskDescription;
         return assignmentProg;
     }
-
 
 }

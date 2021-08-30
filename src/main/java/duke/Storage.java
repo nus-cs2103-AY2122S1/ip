@@ -59,17 +59,21 @@ public class Storage {
         return this.changeStorageToTasks(stringTasks);
     }
 
-    private ArrayList<Task> changeStorageToTasks(HashMap<String, Boolean> stringTasks) throws DukeException {
+    private ArrayList<Task> changeStorageToTasks(
+            HashMap<String, Boolean> stringTasks) throws DukeException {
         ArrayList<Task> finalOutputTasks = new ArrayList<>();
         for (Map.Entry<String, Boolean> entry : stringTasks.entrySet()) {
             String fullInstructions = entry.getKey();
             String[] instructionsArray = fullInstructions.split(" ");
-            String crucialInstructions = String.join(" ", Arrays.copyOfRange(instructionsArray, 1, instructionsArray.length));
+            String crucialInstructions = String.join(" ",
+                    Arrays.copyOfRange(instructionsArray,
+                            1, instructionsArray.length));
             String identity = instructionsArray[0];
             if (identity.equals(TODO_FULL_IDEN)) {
                 Task ToDoTask;
                 if (entry.getValue()) {
-                    ToDoTask = new ToDo(crucialInstructions).updateStatus(Status.COMPLETED.getStatus());
+                    ToDoTask = new ToDo(crucialInstructions).
+                            updateStatus(Status.COMPLETED.getStatus());
                 } else {
                     ToDoTask = new ToDo(crucialInstructions);
                 }
@@ -77,7 +81,8 @@ public class Storage {
             } else if (identity.equals(EVENT_FULL_IDEN)) {
                 Task EventTask;
                 if (entry.getValue()) {
-                    EventTask = new Event(crucialInstructions).updateStatus(Status.COMPLETED.getStatus());
+                    EventTask = new Event(crucialInstructions).
+                            updateStatus(Status.COMPLETED.getStatus());
                 } else {
                     EventTask = new Event(crucialInstructions);
                 }
@@ -85,7 +90,8 @@ public class Storage {
             } else if (identity.equals(DEADLINE_FULL_IDEN)) {
                 Task DeadlineTask;
                 if (entry.getValue()) {
-                    DeadlineTask = new Deadline(crucialInstructions).updateStatus(Status.COMPLETED.getStatus());
+                    DeadlineTask = new Deadline(crucialInstructions).
+                            updateStatus(Status.COMPLETED.getStatus());
                 } else {
                     DeadlineTask = new Deadline(crucialInstructions);
                 }
@@ -108,9 +114,11 @@ public class Storage {
                 String[] instr = fullInstr.split(" ");
                 String indicator = instr[0];
                 if (i == storageTaskList.size() - 1) {
-                    this.addToStringBuilder(sb, indicator, instr, fullInstr, "");
+                    this.addToStringBuilder(sb, indicator,
+                            instr, fullInstr, "");
                 } else {
-                    this.addToStringBuilder(sb, indicator, instr, fullInstr, System.lineSeparator());
+                    this.addToStringBuilder(sb, indicator,
+                            instr, fullInstr, System.lineSeparator());
                 }
             }
             fw.write(sb.toString());
@@ -120,10 +128,12 @@ public class Storage {
         }
     }
 
-    private void addToStringBuilder(StringBuilder sb, String indicator, String[] instr, String fullInstr,
-            String extra) {
+    private void addToStringBuilder(
+            StringBuilder sb, String indicator,
+            String[] instr, String fullInstr, String extra) {
         if (indicator.contains(TODO_IDENTIFIER)) {
-            String details = String.join(" ", Arrays.copyOfRange(instr, 1, instr.length));
+            String details = String.join(" ",
+                    Arrays.copyOfRange(instr, 1, instr.length));
             if (indicator.contains("X")) {
                 details = TODO_IDENTIFIER + " | 1 | " + details;
             } else {
@@ -155,7 +165,8 @@ public class Storage {
         String[] stringParts = input.split(" ");
         for (int i = 0; i < stringParts.length; i++) {
             String str = stringParts[i];
-            if (str.matches("[/|(a-zA-Z0-9)|-]+") && i != stringParts.length - 1) {
+            if (str.matches("[/|(a-zA-Z0-9)|-]+") &&
+                    i != stringParts.length - 1) {
                 sb.append(str + " ");
             } else if (i == stringParts.length - 1) {
                 sb.append(str.substring(0, str.length() - 1));
@@ -164,27 +175,35 @@ public class Storage {
         return sb.toString();
     }
 
-    private void storeDiskStorageInputs(String input, HashMap<String, Boolean> stringStorage) {
+    private void storeDiskStorageInputs(
+            String input, HashMap<String, Boolean> stringStorage) {
         String[] formatted = input.trim().split("[|]+");
         String[] trimFormatted = this.formatStringToProperInput(formatted).split(" ");
         boolean isDone = this.isTaskCompleted(trimFormatted);
         String[] finalFormatted = this.removeDigitIndicator(trimFormatted);
         String formattedIden = finalFormatted[0];
-        String[] finalToOutuput = this.updateToCommandConverterReadableFormat(formattedIden, finalFormatted);
+        String[] finalToOutuput = this.
+                updateToCommandConverterReadableFormat(
+                        formattedIden, finalFormatted);
         String outputStorageInput = String.join(" ", finalToOutuput);
         stringStorage.put(outputStorageInput, isDone);
     }
 
-    private String[] updateToCommandConverterReadableFormat(String identifier, String[] finalFormatted) {
+    private String[] updateToCommandConverterReadableFormat(
+            String identifier, String[] finalFormatted) {
         if (identifier.equals(TODO_IDENTIFIER)) {
             finalFormatted[0] = "todo";
             return finalFormatted;
         } else if (identifier.equals(EVENT_IDENTIFIER)) {
             finalFormatted[0] = "event";
-            return this.addIndicator(finalFormatted, 3, INDICATOR_EVENT);
+            return this.addIndicator(
+                    finalFormatted, 3,
+                    INDICATOR_EVENT);
         } else {
             finalFormatted[0] = "deadline";
-            return this.addIndicator(finalFormatted, 3, INDICATOR_DEADLINE);
+            return this.addIndicator(
+                    finalFormatted, 3,
+                    INDICATOR_DEADLINE);
         }
     }
 
@@ -192,7 +211,8 @@ public class Storage {
         return (input[1].equals(INDICATOR_COMPLETE)) ? true : false;
     }
 
-    private String[] addIndicator(String[] input, int index, String indicator) {
+    private String[] addIndicator(
+            String[] input, int index, String indicator) {
         String[] output = new String[input.length + 1];
         for (int i = 0; i < output.length; i++) {
             if (i == index) {
