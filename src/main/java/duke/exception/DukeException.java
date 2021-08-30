@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Custom class for exceptions related to Duke.
+ * Custom class for exceptions related to duke.Duke.
  */
 public class DukeException extends Exception {
     /**
