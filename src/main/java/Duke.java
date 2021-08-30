@@ -8,9 +8,12 @@ import java.io.FileNotFoundException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Duke {
 
@@ -28,6 +31,7 @@ public class Duke {
         private String finalAction = "";
         private TaskTypes type;
         private boolean isDone = false;
+        private LocalDate localDate;
         /**
          * constructor for Task.
          *
@@ -41,19 +45,38 @@ public class Duke {
                 finalAction += dataOfAction[i] + " ";
             }
             if (action.split("/").length > 1) {
-                String day = setDate(action.split("/")[1].split(" "));
+                String day = setDate(action);
                 finalAction += day;
             }
         }
 
         /**
          * Create a tail made up of the deadline.
-         * @param data
+         * @param inputs
          * @return String
          */
-        private String setDate(String[] data) {
-            String output = " (" + data[0] + ": ";
-            for (int i = 1 ;i < data.length; i++) {
+        private String setDate(String inputs) {
+            String[] data = inputs.split(" ");
+            int pos = 0;
+            String keywords = "";
+            if (type.equals(TaskTypes.Deadline)) {
+                keywords = "by";
+            } else if (type.equals(TaskTypes.Events)) {
+                keywords = "at";
+            }
+            for (String str : data) {
+                if (str.equals("/" + keywords)) {
+                    break;
+                }
+                pos += 1;
+            }
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+            String date = data[pos + 1];
+            localDate = LocalDate.parse(date, formatter);
+
+            String output = " (" + keywords + ": ";
+            for (int i = pos + 1 ;i < data.length; i++) {
                 output += " " + data[i];
             }
             return output + " )";
@@ -139,8 +162,6 @@ public class Duke {
             super(action, "[E][] ", TaskTypes.Events);
             if (action.split("/").length < 2){
                 throw new EventsException("incorrect format for Events task");
-            } else if (action.split("/")[1].split(" ").length < 3) {
-                throw new EventsException("incorrect date format for Events task");
             }
         }
     }
