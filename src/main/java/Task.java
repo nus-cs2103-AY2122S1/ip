@@ -2,7 +2,7 @@
  * An encapsulation of a Task to be done, that can be marked as completed.
  * @author Thomas Hogben
  */
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -14,8 +14,17 @@ public class Task {
         this.isDone = false;
     }
 
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
+    }
+
     public void setDone() {
         this.isDone = true;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
     }
 
     public String getStatusIcon() {
@@ -25,6 +34,8 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
+
+    public abstract String getSave();
 
     @Override
     public String toString() {

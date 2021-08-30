@@ -21,6 +21,19 @@ public class Event extends Task {
         this.eventDate = eventDate;
     }
 
+    public Event(String description, String eventDate, boolean isDone) {
+        super(description, isDone);
+        this.eventDate = eventDate;
+    }
+
+    @Override
+    public String getSave() {
+        return "E" +
+                (this.isDone() ? "1" : "0") + "|" +
+                this.getDescription() + "|" +
+                this.eventDate;
+    }
+
     @Override
     public String toString() {
         String result = "[E]" + super.toString();

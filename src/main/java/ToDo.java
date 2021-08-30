@@ -11,6 +11,18 @@ public class ToDo extends Task {
         super(description);
     }
 
+    public ToDo(String description, boolean isDone) {
+        super(description, isDone);
+    }
+
+
+    @Override
+    public String getSave() {
+        return "T" +
+                (this.isDone() ? "1" : "0") + "|" +
+                this.getDescription();
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

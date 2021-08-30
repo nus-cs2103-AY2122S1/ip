@@ -1,3 +1,9 @@
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,6 +14,8 @@ import java.util.Scanner;
 public class Duke {
     private static final String MSG_ERROR_DEFAULT = "im sorry I is no understand.";
     private static final String MSG_ERROR_BLANK_DESCRIPTION = "is no leave description blank;";
+    private static final String MSG_ERROR_CORRUPT_TASK = "save file corrupt. is delete task.";
+    private static final String MSG_ERROR_CORRUPT_SAVE = "save file corrupt. is no exit program until message stops.";
     private static final String MSG_ERROR_INVALID_TASK_NUMBER = "what kind of number is (||❛︵❛.)";
     private static final String MSG_ERROR_NOT_ENOUGH_TASKS = "we is dont have that many tasks yet.";
     private static final String MSG_ERROR_UNSPECIFIED_TASK = "please is specify task please,";
@@ -18,8 +26,10 @@ public class Duke {
     private static final String MSG_TASK_DONE = "is done!";
 
     /** Program loops until this is set to false */
-    private static boolean running = true;
+    private static boolean isRunning = true;
+    private static boolean isSavable = true;
     private static Scanner sc;
+    private static Path savePath;
     /** A list of tasks to be done */
     private static ArrayList<Task> tasks = new ArrayList<>();
 
@@ -118,7 +128,7 @@ public class Duke {
      */
     private static void exit() {
         System.out.println(MSG_EXIT);
-        running = false;
+        isRunning = false;
     }
 
     /**
@@ -192,6 +202,58 @@ public class Duke {
         }
     }
 
+    private static void save() throws DukeException {
+        try {
+            Files.delete(savePath);
+            Files.createFile(savePath);
+            String saves = "";
+            for (int i = 0; i < tasks.size(); i++) {
+                saves += tasks.get(i).getSave() + "\n";
+            }
+            byte[] savesToBytes = saves.getBytes();
+            Files.write(savePath, savesToBytes);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    private static void loadSaveFile() throws DukeException {
+        Path saveDirectory = Paths.get(".", "data");
+        savePath = Paths.get(".", "data", "duke.txt");
+        try {
+            if (!Files.exists(saveDirectory)) {
+                Files.createDirectory(saveDirectory);
+            }
+            if (!Files.exists(savePath)) {
+                Files.createFile(savePath);
+            }
+            Scanner sc = new Scanner(savePath);
+            while(sc.hasNextLine()) {
+                String nextTask = sc.nextLine();
+                char taskType = nextTask.charAt(0);
+                boolean isDone = Integer.parseInt(nextTask.substring(1,2)) == 1;
+                String taskDetails = nextTask.substring(3);
+                if (taskType == 'T') {
+                    tasks.add(new ToDo(taskDetails, isDone));
+                } else {
+                    int breakIndex = taskDetails.indexOf('|');
+                    String taskDescription = taskDetails.substring(0, breakIndex);
+                    String taskDateAndTime = taskDetails.substring(breakIndex + 1);
+                    if (taskType == 'D') {
+                        tasks.add(new Deadline(taskDescription, taskDateAndTime, isDone));
+                    } else if (taskType == 'E') {
+                        tasks.add(new Event(taskDescription, taskDateAndTime, isDone));
+                    } else {
+                        throw new DukeException(MSG_ERROR_CORRUPT_TASK);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+    }
+
     /**
      * Parses the provided input and executes the command inside.
      *
@@ -216,6 +278,7 @@ public class Duke {
             } else {
                 throw new DukeException(MSG_ERROR_DEFAULT);
             }
+            save();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -231,9 +294,15 @@ public class Duke {
         System.out.println("hello name is duke");
         System.out.println("how is help today; （´・｀ ）♡");
 
+        try {
+            loadSaveFile();
+        } catch (DukeException e) {
+            System.out.println(e);
+        }
+
         sc = new Scanner(System.in);
 
-        while (running) {
+        while (isRunning) {
             parseInput(sc.nextLine());
         }
     }
