@@ -1,13 +1,15 @@
 package functionalities;
 
-import bern.functionalities.TaskList;
-import bern.model.Task;
-import bern.model.ToDo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import bern.functionalities.TaskList;
+import bern.model.Task;
+import bern.model.ToDo;
+
 
 /**
  * A class to encapsulates tests for TaskList functions.

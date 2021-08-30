@@ -1,13 +1,13 @@
 package bern;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import bern.functionalities.Parser;
 import bern.functionalities.Storage;
 import bern.functionalities.TaskList;
 import bern.functionalities.Ui;
 import bern.model.Task;
-
-import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * This class is where the main method resides.

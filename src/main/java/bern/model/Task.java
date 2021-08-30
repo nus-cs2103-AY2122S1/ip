@@ -43,7 +43,13 @@ public class Task {
         this.isDone = true;
     }
 
-    public boolean findWord(String word) {
+    /***
+     * A method to see whether can find the word inside the description.
+     *
+     * @param word The given word.
+     * @return Whether can find the word or not.
+     */
+    public boolean canFindWord(String word) {
         String[] words = description.split("\\s+");
         for (String s : words) {
             if (s.equals(word)) {

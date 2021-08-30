@@ -1,9 +1,11 @@
 package functionalities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import bern.functionalities.Parser;
 import bern.model.ToDo;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * A class to encapsulates tests for Parser functions.

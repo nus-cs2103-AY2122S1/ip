@@ -1,13 +1,14 @@
 package functionalities;
 
-import bern.exception.BernException;
-import bern.functionalities.Ui;
-import bern.model.Task;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import bern.exception.BernException;
+import bern.functionalities.Ui;
+import bern.model.Task;
 
 /**
  * A class to encapsulates tests for UI functions.

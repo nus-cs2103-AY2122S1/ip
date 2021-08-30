@@ -1,8 +1,8 @@
 package bern.functionalities;
 
-import bern.model.Task;
-
 import java.util.ArrayList;
+
+import bern.model.Task;
 
 /**
  * A class to encapsulates all methods TaskList related.

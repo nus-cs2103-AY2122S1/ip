@@ -3,7 +3,7 @@ package bern.exception;
 /**
  * An exception for accessing index that is not valid.
  */
-public class IndexException extends BernException{
+public class IndexException extends BernException {
     /**
      * Constructor for IndexException.
      *

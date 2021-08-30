@@ -1,15 +1,15 @@
 package bern.functionalities;
 
-import bern.Command;
-import bern.exception.BernException;
-import bern.model.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import bern.Command;
+import bern.exception.BernException;
+import bern.model.Task;
 
 /**
  * A class to encapsulates all methods storage/file related.

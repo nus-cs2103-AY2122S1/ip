@@ -1,5 +1,7 @@
 package bern.functionalities;
 
+import java.util.ArrayList;
+
 import bern.Command;
 import bern.exception.BernException;
 import bern.exception.EmptyDescriptionException;
@@ -10,15 +12,13 @@ import bern.model.Event;
 import bern.model.Task;
 import bern.model.ToDo;
 
-import java.util.ArrayList;
-
 /**
  * A class to encapsulates all methods UI related.
  */
 public class Ui {
 
-    Parser parser = new Parser();
-    Storage storage = new Storage();
+    private Parser parser = new Parser();
+    private Storage storage = new Storage();
 
     /**
      * A method to get the reply if input starts with deadline.
@@ -61,8 +61,7 @@ public class Ui {
         return "Got it. I've added this task:\n"
                 + arListTask.get(arListTask.size() - 1).toString() + "\n"
                 + "Now you have " + String.valueOf(arListTask.size())
-                + (arListTask.size() == 1 ? " task in the list" : " tasks in the list")
-        ;
+                + (arListTask.size() == 1 ? " task in the list" : " tasks in the list");
     }
 
     /**
@@ -81,8 +80,7 @@ public class Ui {
         return "Got it. I've added this task:\n"
                 + arListTask.get(arListTask.size() - 1).toString() + "\n"
                 + "Now you have " + String.valueOf(arListTask.size())
-                + (arListTask.size() == 1 ? " task in the list" : " tasks in the list")
-        ;
+                + (arListTask.size() == 1 ? " task in the list" : " tasks in the list");
     }
 
     /**
@@ -175,10 +173,19 @@ public class Ui {
             return ifDelete(input, arListTask);
         case INVALID:
             throw new InvalidCommandException(input);
+        default:
+            return "";
         }
-        return "";
     }
 
+    /***
+     * A method to get the reply if input starts with find.
+     *
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     * @return The reply by the bot.
+     * @throws BernException If input is invalid.
+     */
     public String ifFind(String input, ArrayList<Task> arListTask) throws BernException {
         if (input.length() == 4 || (input.length() == 5 && input.substring(4, 5).equals(" "))) {
             throw new EmptyDescriptionException("find");
@@ -186,7 +193,7 @@ public class Ui {
         String word = input.substring(5);
         ArrayList<Task> found = new ArrayList<>();
         for (Task t : arListTask) {
-            if (t.findWord(word)) {
+            if (t.canFindWord(word)) {
                 found.add(t);
             }
         }
@@ -237,7 +244,7 @@ public class Ui {
      */
     public void processInput(String input, ArrayList<Task> arListTask) {
         try {
-            if (parser.isDone(input)){
+            if (parser.isDone(input)) {
                 System.out.println(new Ui().getReply(Command.DONE, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isDeadline(input)) {
@@ -249,12 +256,12 @@ public class Ui {
             } else if (parser.isToDo(input)) {
                 System.out.println(new Ui().getReply(Command.TODO, input, arListTask));
                 storage.writeIntoFile(arListTask);
-            } else if (parser.isBye(input)){
+            } else if (parser.isBye(input)) {
                 System.out.println(new Ui().getReply(Command.BYE, input, arListTask));
-            } else if (parser.isList(input)){
+            } else if (parser.isList(input)) {
                 System.out.println(new Ui().getReply(Command.LIST, input, arListTask));
                 storage.writeIntoFile(arListTask);
-            } else if (parser.isDelete(input)){
+            } else if (parser.isDelete(input)) {
                 System.out.println(new Ui().getReply(Command.DELETE, input, arListTask));
                 storage.writeIntoFile(arListTask);
             } else if (parser.isFind(input)) {

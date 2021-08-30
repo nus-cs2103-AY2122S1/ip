@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 /**
  * A class to represents a Task of type "Event".
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate at;
 
     /**
