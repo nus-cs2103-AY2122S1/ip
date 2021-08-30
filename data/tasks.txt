@@ -2,3 +2,4 @@ T | 0 | 1
 T | 0 | werqerqwe
 T | 0 | 1
 T | 0 | 1
+T | 0 | we are dying

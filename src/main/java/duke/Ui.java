@@ -73,8 +73,6 @@ public class Ui {
                         System.out.println(e.getMessage());
                         System.out.println(linebreakend);
                     }
-
-
                     break;
                 case "list":
                     // lists history of current tasks.
@@ -100,7 +98,7 @@ public class Ui {
                 case "todo":
                     // adds a todo task to the list.
                     try {
-                        tasklist.addTodo(strparse);
+                        tasklist.addTodo(parser.parseTodo(strparse));
                         storage.saveData(tasklist);
 
                         System.out.println(linebreakstart);
@@ -119,7 +117,7 @@ public class Ui {
                 case "deadline":
                     // adds a deadline task to the list.
                     try {
-                        tasklist.addDeadline(strparse);
+                        tasklist.addDeadline(parser.parseDeadline(strparse));
                         storage.saveData(tasklist);
 
                         System.out.println(linebreakstart);
@@ -138,7 +136,7 @@ public class Ui {
                 case "event":
                     // adds an event to the list. pretty much like deadline.
                     try {
-                        tasklist.addEvent(strparse);
+                        tasklist.addEvent(parser.parseEvent(strparse));
                         storage.saveData(tasklist);
 
                         System.out.println(linebreakstart);

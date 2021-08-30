@@ -30,27 +30,17 @@ public class TaskList {
      */
     TaskList(ArrayList<Task> taskArr) {
         this.taskArr = taskArr;
-        this.counter = 0;
+        this.counter = taskArr.size();
 
     }
 
     /**
      * Adds Todo (Task) to TaskList.
-     * @param strparse Array of Strings to be parsed.
+     * @param todo Todo task.
      * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addTodo(String[] strparse) throws DukeException {
-        StringBuilder taskb = new StringBuilder();
-        if (strparse.length == 1) {
-            throw new IncorrectInputException("todo", "using 'todo (taskw)'");
-        }
-        for (int i = 1; i < strparse.length; i++) {
-            taskb.append(strparse[i]);
-            if (i != strparse.length - 1) {
-                taskb.append(" ");
-            }
-        }
-        taskArr.add(new Todo(taskb.toString()));
+    public void addTodo(Todo todo) throws DukeException {
+        taskArr.add(todo);
         counter++;
     }
 
@@ -70,34 +60,12 @@ public class TaskList {
 
     /**
      * Adds Deadline Task to TaskList.
-     * @param strparse Array of Strings to be parsed.
+     * @param deadline Deadline task.
      * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addDeadline(String[] strparse) throws DukeException {
-        try {
-            if (strparse.length == 1) {
-                throw new MissingInputException("deadline");
-            }
-            StringBuilder taskb = new StringBuilder();
-            int i = 1;
-            while (i < strparse.length
-                    && !strparse[i].equalsIgnoreCase("/by")) {
-                taskb.append(strparse[i]);
-                if (i != strparse.length - 1) {
-                    taskb.append(" ");
-                }
-                i++;
-            }
-            i++;
-            if (taskb.toString().equals("") || i != strparse.length - 1) {
-                throw new IncorrectInputException("deadline", "using 'deadline (task) /by (yyyy-mm-dd format)'");
-            }
-            LocalDate deadline = LocalDate.parse(strparse[i]);
-            taskArr.add(new Deadline(taskb.toString(), deadline));
-            counter++;
-        } catch (DateTimeParseException e) {
-            throw new IncorrectInputException("deadline", "using 'deadline (task) /by (yyyy-mm-dd format)'");
-        }
+    public void addDeadline(Deadline deadline) throws DukeException {
+        taskArr.add(deadline);
+        counter++;
     }
 
     /**
@@ -117,35 +85,12 @@ public class TaskList {
 
     /**
      * Adds Event Task to TaskList.
-     * @param strparse Array of Strings to be parsed.
+     * @param event Event task.
      * @throws DukeException Occurs when anything goes wrong during method.
      */
-    public void addEvent(String[] strparse) throws DukeException {
-        try {
-            if (strparse.length == 1) {
-                throw new MissingInputException("event");
-            }
-            StringBuilder taskb = new StringBuilder();
-            StringBuilder atb = new StringBuilder();
-            int i = 1;
-            while (i < strparse.length
-                    && !strparse[i].equalsIgnoreCase("/at")) {
-                taskb.append(strparse[i]);
-                if (i != strparse.length - 1) {
-                    taskb.append(" ");
-                }
-                i++;
-            }
-            i++;
-            if (taskb.toString().equals("") || i != strparse.length - 1) {
-                throw new IncorrectInputException("event", "'event (event) /at (date)'");
-            }
-            LocalDate deadline = LocalDate.parse(strparse[i]);
-            taskArr.add(new Event(taskb.toString(), deadline));
-            counter++;
-        } catch (DateTimeParseException e) {
-            throw new IncorrectInputException("deadline", "a cowwect (yyyy-mm-dd format)'");
-        }
+    public void addEvent(Event event) throws DukeException {
+        taskArr.add(event);
+        counter++;
     }
 
     /**
@@ -307,7 +252,10 @@ public class TaskList {
             } else {
                 // do nothing
             }
-            strb.append('\n');
+            if (i < this.counter - 1) {
+                strb.append('\n');
+            }
+
         }
         return strb.toString();
     }
