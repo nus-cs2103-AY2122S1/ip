@@ -10,7 +10,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for a Duke program.
+     * Constructs a Duke program.
      * 
      * @param filePath Relative path of cache as string.
      */
@@ -25,14 +25,14 @@ public class Duke {
     }    
 
     /**
-     * Run a Duke program.
+     * Runs a Duke program.
      */
     public void run() {
         ui.run();
     }
 
     /**
-     * Create and run a duke program.
+     * Creates and runs a duke program.
      *
      * @param args Will not be used.
      */

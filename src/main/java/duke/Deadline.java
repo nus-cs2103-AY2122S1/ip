@@ -10,7 +10,7 @@ public class Deadline extends Task{
     private final LocalDate byTime;
     
     /**
-     * Constructor for a deadline task.
+     * Constructs a deadline task.
      *
      * @param description String describing the task.
      * @param by Deadline string for the task.
@@ -27,13 +27,13 @@ public class Deadline extends Task{
     }
 
     /**
-     * String representation of a deadline task.
+     * Returns string representation of a deadline task.
      *
      * @return String describing the deadline task.
      */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-            + byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+              + byTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

@@ -12,7 +12,7 @@ public class Task {
     private boolean completed;
 
     /**
-     * Constructor for a Task
+     * Constructs a Task
      *
      * @param description String description of task.
      */
@@ -22,9 +22,9 @@ public class Task {
     }
 
     /**
-     * Mark a task as completed.
+     * Marks a task as completed.
      */
-    public void markCompleted() {
+    public void setCompleted() {
         completed = true;
     }
 
@@ -38,7 +38,7 @@ public class Task {
     }
 
     /**
-     * String representation of task.
+     * Returns string representation of task.
      *
      * @return String representing task.
      */
