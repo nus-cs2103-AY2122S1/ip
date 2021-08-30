@@ -1,21 +1,37 @@
 package duke;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Class to test the Event class.
+ * Class to test event objects.
  */
 public class EventTest {
+
     /**
-     * Test if the event representation is generated as expected.
-     * 
-     * @throws DukeException Thrown if event fails to be generated.
+     * Checks if completed events are handled appropriately.
      */
     @Test
-    public void eventCreationTest() throws DukeException {
-        assertEquals(new Event("description","2012-12-01").toString(),
-                "[E] description (at: Dec 12 2012)");
+    public void completedEventTest() {
+        try {
+            Event event = new Event("completed event", "2012-12-29");
+            event.setCompleted();
+            assertEquals("[E][X] completed event (at: Dec 29 2012)", event.toString());
+        } catch (DukeException e){
+            System.out.println(e.toString());
+        }
+    }
+
+    /**
+     * Checks if incomplete events are handled appropriately.
+     */
+    @Test
+    public void incompleteEventTest() {
+        try {
+            Event event = new Event("incomplete event", "2015-03-12");
+            assertEquals("[E][ ] incomplete event (at: Mar 12 2015)", event.toString());
+        } catch (DukeException e){
+            System.out.println(e.toString());
+        }
     }
 }

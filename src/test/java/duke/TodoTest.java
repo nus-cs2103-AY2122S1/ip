@@ -1,19 +1,29 @@
 package duke;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Class to test the Todo class.
+ * Class to test todo objects.
  */
 public class TodoTest {
+
     /**
-     * Tests if the todo representation is generated as expected.
+     * Checks if completed todos are handled appropriately.
      */
     @Test
-    public void todoCreationTest(){
-        assertEquals(new Todo("description").toString(),
-                "[T] description");
+    public void completedTodoTest() {
+        Todo todo = new Todo("completed task");
+        todo.setCompleted();
+        assertEquals("[T][X] completed task", todo.toString());
+    }
+
+    /**
+     * Checks if incomplete todos are handled appropriately.
+     */
+    @Test
+    public void incompleteTodoTest() {
+        Todo todo = new Todo("incomplete task");
+        assertEquals("[T][ ] incomplete task", todo.toString());
     }
 }
