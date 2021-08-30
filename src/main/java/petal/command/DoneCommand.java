@@ -15,7 +15,7 @@ public class DoneCommand implements Command {
     private final String input;
 
     /**
-     * Constructor for the DoneCommand class
+     * Constructs a DoneCommand instance
      *
      * @param input The input in question
      */

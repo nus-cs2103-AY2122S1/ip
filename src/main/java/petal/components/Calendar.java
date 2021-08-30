@@ -11,18 +11,18 @@ import petal.task.Task;
 import petal.task.Timeable;
 
 /**
- * The Calendar class encapsulates a calender, where tasks
+ * The Calendar class encapsulates a calendar, where tasks
  * have dates, and can be retrieved and added by date
  */
 public class Calendar {
 
-    private HashMap<LocalDate, ArrayList<Timeable>> dateAndTimeable;
+    private HashMap<LocalDate, ArrayList<Timeable>> dateAndTimeables;
 
     /**
-     * Constructor for the Calender class
+     * Constructs a Calendar instance
      */
     public Calendar() {
-        dateAndTimeable = new HashMap<>();
+        dateAndTimeables = new HashMap<>();
     }
 
     /**
@@ -32,13 +32,14 @@ public class Calendar {
      */
     public void addToCalendar(Timeable timeable) {
         LocalDate date = timeable.getDate();
-        Optional<ArrayList<Timeable>> current = Optional.ofNullable(dateAndTimeable.get(date));
+        //Optional handles null case
+        Optional<ArrayList<Timeable>> current = Optional.ofNullable(dateAndTimeables.get(date));
         if (current.isPresent()) {
             current.get().add(timeable);
         } else {
-            ArrayList<Timeable> firstList = new ArrayList<>();
-            firstList.add(timeable);
-            dateAndTimeable.put(date, firstList);
+            ArrayList<Timeable> lists = new ArrayList<>();
+            lists.add(timeable);
+            dateAndTimeables.put(date, lists);
         }
     }
 
@@ -49,7 +50,7 @@ public class Calendar {
      */
     public String showTasksOnDate(LocalDate date) throws InvalidInputException {
         int count = 1;
-        Optional<ArrayList<Timeable>> current = Optional.ofNullable(dateAndTimeable.get(date));
+        Optional<ArrayList<Timeable>> current = Optional.ofNullable(dateAndTimeables.get(date));
         if (current.isPresent()) {
             StringBuilder result = new StringBuilder("Here are the tasks on this date: ");
             for (Timeable d: current.get()) {
@@ -67,11 +68,12 @@ public class Calendar {
      * @param newList The new arraylist of Tasks, which will be used to update the calendar
      */
     public void updateCalendar(List<Task> newList) {
-        dateAndTimeable = new HashMap<>();
+        dateAndTimeables = new HashMap<>();
         for (Task t: newList) {
             if (t.isTimeable()) {
                 addToCalendar((Timeable) t);
             }
         }
     }
+
 }

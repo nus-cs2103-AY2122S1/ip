@@ -14,7 +14,7 @@ public class DateCommand implements Command {
     private final String input;
 
     /**
-     * Constructor for the DateCommand class
+     * Constructs a DateCommand instance
      *
      * @param input The given input
      */

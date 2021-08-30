@@ -34,7 +34,7 @@ public class Storage {
     private final Ui ui;
 
     /**
-     * Constructor for the Storage class
+     * Constructs a Storage instance
      *
      * @param taskList Instance of TaskList being used
      * @param ui The Ui instance being used
@@ -49,21 +49,22 @@ public class Storage {
 
     /**
      * Creates the main PetalData folder, containing Tasks.txt
+     * @return String greeting the user
      */
-    public void createDirectory() {
+    public String createDirectory() {
         try {
             if (retrieveTasks()) {
-                return;
+                return Responses.WELCOME_BACK.toString();
             }
             Path path = Paths.get(folderPath);
             Files.createDirectories(path);
             File petalData = new File(filePath);
-            boolean done = petalData.createNewFile();
+            petalData.createNewFile();
         } catch (IOException e) {
             isLocationPresent = false;
-            ui.output(Responses.FILE_ERROR);
+            return Responses.FILE_ERROR.toString();
         }
-        ui.output(Responses.START_MESSAGE);
+        return Responses.START_MESSAGE.toString();
     }
 
     /**
@@ -75,26 +76,26 @@ public class Storage {
         try {
             File tasks = new File(filePath);
             Scanner scanner = new Scanner(tasks);
-            ArrayList<Task> toBeAdded = new ArrayList<>();
+            ArrayList<Task> addPasts = new ArrayList<>();
             while (scanner.hasNextLine()) {
                 String taskLine = scanner.nextLine();
                 String[] components = taskLine.split("\\|");
                 boolean isDone = Objects.equals(components[1], "X");
                 switch (components[0]) {
                 case "T":
-                    toBeAdded.add(new ToDo(components[2], isDone));
+                    addPasts.add(new ToDo(components[2], isDone));
                     break;
                 case "D":
-                    toBeAdded.add(new Deadline(components[2], components[3], isDone));
+                    addPasts.add(new Deadline(components[2], components[3], isDone));
                     break;
                 case "E":
-                    toBeAdded.add(new Event(components[2], components[3], isDone));
+                    addPasts.add(new Event(components[2], components[3], isDone));
                     break;
                 default:
                     break;
                 }
             }
-            taskList.addTask(toBeAdded);
+            taskList.addTask(addPasts);
             scanner.close();
             return true;
         } catch (FileNotFoundException | NoSuchElementException e) {

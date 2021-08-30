@@ -19,7 +19,7 @@ public class Deadline extends Task implements Timeable {
     private final LocalTime time;
 
     /**
-     * Constructor for the Deadline class
+     * Constructs a Deadline instance
      *
      * @param description The description of the object
      * @param dateTime The date given by the user

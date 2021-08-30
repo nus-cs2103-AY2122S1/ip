@@ -23,7 +23,7 @@ public class TaskList {
     private final Calendar calendar;
 
     /**
-     * Constructor for TaskList
+     * Constructs a TaskList instance
      *
      * @param ui The instance of Ui used
      */
@@ -147,7 +147,7 @@ public class TaskList {
         int count = 1;
         StringBuilder list = new StringBuilder();
         for (Task m : tasks) {
-            //I do this check to ensure there isn't a newline at the top
+            //To ensure there isn't a newline at the top
             if (count == 1) {
                 list.append(count++).append(". ").append(m);
             } else {
@@ -194,7 +194,6 @@ public class TaskList {
 
     /**
      * Returns a formatted string representation of the list of tasks that can be used for saving
-     *
      * @return Formatted string representation of all the user-added tasks
      */
     public String formatForSaving() {

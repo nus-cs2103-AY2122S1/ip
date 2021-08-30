@@ -17,7 +17,7 @@ public class TaskCommand implements Command {
     private final String input;
 
     /**
-     * Constructor for TaskCommand
+     * Constructs a TaskCommand instance
      *
      * @param type The type of Task
      * @param input The input

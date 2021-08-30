@@ -20,7 +20,7 @@ public class Event extends Task implements Timeable {
     private final LocalTime endTime;
 
     /**
-     * Constructor for the Event class
+     * Constructs an Event instance
      *
      * @param description Description of the event
      * @param dateTime String with the date and start/end timings
