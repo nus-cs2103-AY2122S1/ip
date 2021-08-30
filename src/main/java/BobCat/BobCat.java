@@ -1,3 +1,5 @@
+package BobCat;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -6,7 +8,7 @@ import BobCat.executor.ExecutionUnit;
 import BobCat.view.Ui;
 
 /**
- * Main entrypoint to the BobCat Chat Application. Attempts to follow the MVC pattern
+ * Main entrypoint to the BobCat.BobCat Chat Application. Attempts to follow the MVC pattern
  */
 public class BobCat {
     public static void main(String[] args) throws IOException {
@@ -14,7 +16,7 @@ public class BobCat {
         Ui ui = new Ui();
         ExecutionUnit executor = new ExecutionUnit("memory/taskList.txt");
 
-        ui.respond(new String[]{"Hello! I'm BobCat!", "Trying to remember what happened..."});
+        ui.respond(new String[]{"Hello! I'm BobCat.BobCat!", "Trying to remember what happened..."});
         try {
             executor.initStorage();
         } catch (IOException e) {
