@@ -59,7 +59,7 @@ public class Parser {
 
         } else {
 
-            throw new DukeException("You've entered an unknown request... The main.java.bot doesn't know what that means!");
+            throw new DukeException("You've entered an unknown request... Duke doesn't know what that means!");
 
         }
     }

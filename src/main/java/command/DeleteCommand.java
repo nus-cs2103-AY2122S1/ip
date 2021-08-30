@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
             Storage.save(list);
 
             System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                    + "Noted. I've removed the following main.java.task:\n"
+                    + "Noted. I've removed the following task:\n"
                     + (index + 1)
                     + ". "
                     + removedTask.getTaskState()
@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
                     + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
 
         } catch (NumberFormatException e) {
-            throw new DukeException("It looks like you did not enter a valid integer for the \"delete\" main.java.command. Please try again!");
+            throw new DukeException("It looks like you did not enter a valid integer for the \"delete\" command. Please try again!");
         }
     }
 }
