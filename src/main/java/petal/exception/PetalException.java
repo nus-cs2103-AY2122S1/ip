@@ -7,7 +7,7 @@ package petal.exception;
 public class PetalException extends Exception {
 
     /**
-     * Constructor for the PetalException class
+     * Constructs a PetalException
      *
      * @param message The message
      */
@@ -16,7 +16,7 @@ public class PetalException extends Exception {
     }
 
     /**
-     * Constructor for the PetalException class (Used as Wrapper)
+     * Constructs a PetalException (used as a wrapper)
      *
      * @param message The exception message
      * @param cause Initial cause

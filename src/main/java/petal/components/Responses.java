@@ -8,12 +8,9 @@ public enum Responses {
 
     //Starting bot responses
     WELCOME_BACK("Welcome back! It definitely is good to see you again :D"),
-    LINE("===================================================================="
-                + "==========================================================="
-                + "============================================================"),
-    START_MESSAGE("Welcome to Petal (•◡•)/" + "\nI am the best chat bot you'll meet! Don't be shy, "
+    START_MESSAGE("Welcome to Petal!" + "\nI am the best chat bot you'll meet! Don't be shy, "
                 + "say something! :P\nPssss here's a disclaimer: "
-                + "   use the 'bye' command to exit or else your tasks won't save properly!"),
+                + "use the 'bye' command to exit or else your tasks won't save properly!"),
     //Error responses
     INVALID_FORMAT("Invalid format given! Please try again :("),
     INVALID_TASK_NO("Invalid task number given! Please enter another value!"),
@@ -38,7 +35,7 @@ public enum Responses {
     private final String response;
 
     /**
-     * Constructor for Responses
+     * Constructs a Response instance
      *
      * @param response The String response
      */

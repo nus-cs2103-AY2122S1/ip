@@ -13,6 +13,6 @@ public interface Timeable {
      *
      * @return LocalDate object corresponding to the date of that object
      */
-    public LocalDate getDate();
+    LocalDate getDate();
 
 }

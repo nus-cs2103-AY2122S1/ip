@@ -10,7 +10,7 @@ import petal.components.Responses;
 public class EmptyDescException extends PetalException {
 
     /**
-     * Constructor for the EmptyDescException
+     * Constructs an EmptyDescException
      *
      * @param message The exception message
      */
@@ -19,7 +19,7 @@ public class EmptyDescException extends PetalException {
     }
 
     /**
-     * Constructor for the EmptyDescException
+     * Constructs an EmptyDescException
      *
      * @param message The exception message
      */
@@ -28,7 +28,7 @@ public class EmptyDescException extends PetalException {
     }
 
     /**
-     * Constructor for the EmptyDescException (Used as wrapper)
+     * Constructs an EmptyDescException (used as a wrapper)
      *
      * @param message The exception message
      * @param cause Initial Cause
@@ -38,7 +38,7 @@ public class EmptyDescException extends PetalException {
     }
 
     /**
-     * Constructor for the EmptyDescException (Used as wrapper)
+     * Constructs an EmptyDescException (used as a wrapper)
      *
      * @param response The exception message
      * @param cause Initial Cause

@@ -2,8 +2,6 @@ package petal.task;
 
 import java.time.LocalDate;
 
-import petal.components.Responses;
-
 /**
  * The Task class that encapsulates a directive given
  * by the user to track a certain activity and may have
@@ -16,7 +14,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Constructor for the Task class
+     * Constructs a Task instance
      *
      * @param description The description of the task
      * @param isDone  The boolean isDone, representing if the Task is done
@@ -28,7 +26,7 @@ public abstract class Task {
     }
 
     /**
-     * Constructor for the Task class
+     * Constructs a Task instance
      *
      * @param description The description of the task
      * @param isDone The boolean isDone, representing if the Task is done
@@ -40,6 +38,7 @@ public abstract class Task {
 
     /**
      * Formats string representation which is optimized for saving
+     * e.g. To.Do go for a run (done) -> T|X|go for a run
      *
      * @return Formatted string representation
      */
@@ -65,11 +64,11 @@ public abstract class Task {
      * Sets the task instance as done
      */
     public void taskDone() {
-        System.out.println(Responses.LINE + "\nYou have completed the task: " + "'"
-                                          + this.description + "'!"
-                                          + "\nI am so happy for you!\n"
-                                          + Responses.LINE);
         this.isDone = true;
+        System.out.println("\nYou have completed the task: "
+                              + "'"
+                              + this.description + "'!"
+                              + "\nI am so happy for you!\n");
     }
 
     /**

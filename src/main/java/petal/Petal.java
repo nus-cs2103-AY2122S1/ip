@@ -15,9 +15,6 @@ import petal.components.Ui;
  */
 public class Petal {
 
-    /** Represents whether the user has said bye or not */
-    private boolean isBye = false;
-
     //Components of the Petal instance
     private final Storage storage;
     private final Parser parser;
@@ -28,38 +25,27 @@ public class Petal {
      * Constructor for the Petal class
      */
     public Petal() {
-        ui = new Ui(this);
+        ui = new Ui();
         taskList = new TaskList(ui);
         storage = new Storage(taskList, ui);
         parser = new Parser();
     }
 
     /**
-     * Flips the boolean isBye and terminates the process
+     * Returns either start message or welcome back message
+     * @return String greeting the user
      */
-    public void stop() {
-        this.isBye = true;
+    public String greetUser() {
+        //It calls createDirectory as it has to check if user has used Petal before
+        return storage.createDirectory();
     }
 
     /**
      * Starts the Petal instance
      */
-    public void run() {
-        storage.createDirectory();
-        while (!isBye) {
-            String message = ui.readCommand();
-            Command command = parser.handleInput(message);
-            command.execute(taskList, ui, storage);
-        }
-    }
-
-    /**
-     * This is the main method for the Petal bot
-     * @param args
-     */
-    public static void main(String[] args) {
-        Petal petal = new Petal();
-        petal.run();
+    public void run(String message) {
+        Command command = parser.handleInput(message);
+        command.execute(taskList, ui, storage);
     }
 }
 

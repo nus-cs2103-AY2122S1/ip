@@ -10,7 +10,7 @@ import petal.components.Responses;
 public class InvalidInputException extends PetalException {
 
     /**
-     * Constructor for InvalidInputException
+     * Constructs an InvalidInputException
      *
      * @param message The exception message
      */
@@ -19,7 +19,7 @@ public class InvalidInputException extends PetalException {
     }
 
     /**
-     * Constructor for InvalidInputException
+     * Constructs an InvalidInputException
      *
      * @param message The exception message
      */
@@ -28,7 +28,7 @@ public class InvalidInputException extends PetalException {
     }
 
     /**
-     * Constructor for InvalidInputException (Used as wrapper)
+     * Constructs an InvalidInputException (used as a wrapper)
      *
      * @param message The exception message
      * @param cause Initial cause
@@ -38,7 +38,7 @@ public class InvalidInputException extends PetalException {
     }
 
     /**
-     * Constructor for InvalidInputException (Used as wrapper)
+     * Constructs an InvalidInputException (used as a wrapper)
      *
      * @param response The exception message
      * @param cause Initial cause

@@ -14,7 +14,8 @@ public class FindCommand implements Command {
     private final String input;
 
     /**
-     * Constructor for FindCommand class
+     * Constructs a FindCommand instance
+     *
      * @param input The given input
      */
     public FindCommand(String input) {

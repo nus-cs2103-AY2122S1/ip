@@ -15,7 +15,7 @@ public class DeleteCommand implements Command {
     private final String input;
 
     /**
-     * Constructor for the DeleteCommand class
+     * Constructs a DeleteCommand instance
      *
      * @param input The given class
      */
