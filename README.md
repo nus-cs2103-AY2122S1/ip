@@ -9,6 +9,7 @@ DukePro is your companion to free your mind of having to remember things you nee
 - Easy to learn and use
 - **_VERY_** efficient and handy!
 
+
 ### How to set up DukePro?
 Follow these steps to get your own DukePro:
 1. Download it from [here](https://github.com/janjanchen/ip). 
@@ -16,11 +17,13 @@ Follow these steps to get your own DukePro:
 3. Add your tasks. 
 4. ~~Manage~~ **Let _DukePro_ manage** your tasks for you! :wink:
 
+
 ###Features 
 - [X] Manages Todo Lists
 - [X] Manages Deadlines
 - [X] Manages Events
 - [X] Save, Delete, Filters and many more!
+- [ ] More features to be added
 
 ### Code SneakPeaks
 This is the code in DukePro that can be found in its `Task` class:
