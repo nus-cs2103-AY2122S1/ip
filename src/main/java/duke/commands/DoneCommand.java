@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidInputException;
 
@@ -24,14 +23,13 @@ public class DoneCommand extends Command {
      * Marks the specified task from the tasklist as complete and reflects the result via the Ui.
      * @throws InvalidInputException if the task does not exist in the list.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList task, Storage storage) throws DukeException {
         if (taskIndex <= 0 || taskIndex > task.getNumTasks() || task.isEmptyTaskList()) {
-            String errorMessage = String.format("   INDEX ERROR: Task number %d does not exist to be completed",
-                    taskIndex);
+            String errorMessage = String.format("Error: Task number '%d' is not within the list", taskIndex);
             throw new InvalidInputException(errorMessage);
         } else {
             String completedTaskInfo = task.completeTask(taskIndex);
-            ui.showCompletedTask(completedTaskInfo);
+            return String.format("Nice! I've marked this task as done: \n   %s", completedTaskInfo);
         }
     }
 

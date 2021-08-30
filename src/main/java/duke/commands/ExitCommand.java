@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 /**
  * Tells Duke to stop reading inputs.
@@ -15,9 +14,9 @@ public class ExitCommand extends Command {
     /**
      * Tells the storage to save the most updated list and displays farewell message via the Ui.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) {
+    public String execute(TaskList task, Storage storage) {
         storage.save(task);
-        ui.showByeMessage();
+        return "Bye! Hope to see you again soon!";
     }
 
     /**

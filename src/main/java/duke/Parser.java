@@ -52,7 +52,7 @@ public class Parser {
                 int doneIndex = Integer.parseInt(remainingWords);
                 c = new DoneCommand(doneIndex);
             } catch (NumberFormatException e) {
-                throw new InvalidInputException("   Please specify the TASK NUMBER after typing 'done'");
+                throw new InvalidInputException("Please specify the TASK NUMBER after typing 'done'");
             }
             break;
         case "todo": case "deadline": case "event":
@@ -63,7 +63,7 @@ public class Parser {
                 int deleteIndex = Integer.parseInt(remainingWords);
                 c = new DeleteCommand(deleteIndex);
             } catch (NumberFormatException e) {
-                throw new InvalidInputException("   Please specify the TASK NUMBER after typing 'delete'");
+                throw new InvalidInputException("Please specify the TASK NUMBER after typing 'delete'");
             }
             break;
         default:

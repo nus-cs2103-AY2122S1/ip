@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 /**
  * Deals with invalid inputs.
@@ -16,8 +15,8 @@ public class UnknownCommand extends Command {
     /**
      * Calls the Ui to show an error message upon receiving invalid inputs.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) {
-        ui.showInvalidCommand();
+    public String execute(TaskList task, Storage storage) {
+        return "Please start the sentence with either 'todo'/'deadline'/'event'/'list'/'done'/'delete'/'bye'";
     }
 
     /**

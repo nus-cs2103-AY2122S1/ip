@@ -23,7 +23,7 @@ import duke.tasks.Todo;
 public class Storage {
 
     /** Contains the filepath for the project's directory */
-    private static final String PROJECT_DIRECTORY = System.getProperty("user.dir") + "/src/main/java/duke";
+    private static final String DESKTOP_DIRECTORY = System.getProperty("user.home") + "/Desktop";
 
     /** User specified filePath destination */
     private final String givenFilePath;
@@ -36,15 +36,14 @@ public class Storage {
      */
     Storage(String givenFilePath) throws InvalidStorageFilePathException {
         this.givenFilePath = givenFilePath;
-        File currDir = new File(PROJECT_DIRECTORY);
+        File currDir = new File(DESKTOP_DIRECTORY);
         File finalPath = new File(currDir, givenFilePath);
         p = Paths.get(finalPath.getPath());
         if (!isValidPath(p)) {
-            throw new InvalidStorageFilePathException("   Storage filepath should end with '.txt'");
+            throw new InvalidStorageFilePathException("Storage filepath should end with '.txt'");
         }
         if (!isValidDirectory(givenFilePath)) {
-            throw new InvalidDirectoryException("   1 or more directories "
-                    + "in the specified file path does not exist");
+            throw new InvalidDirectoryException("1 or more directories in the specified file path does not exist");
         }
     }
 
@@ -60,7 +59,7 @@ public class Storage {
      */
     public static boolean isValidDirectory(String filePath) {
         String[] folderNames = filePath.split("/");
-        String currentPath = PROJECT_DIRECTORY;
+        String currentPath = DESKTOP_DIRECTORY;
         for (String folder: folderNames) {
             File file = new File(currentPath);
             if (!file.exists()) {
@@ -86,21 +85,16 @@ public class Storage {
             for (String s: lines) {
                 lt.add(convertToTask(s));
             }
-            System.out.println("   Autosave feature detected. "
-                    + "Please type 'list' to view previously saved tasks...");
             return lt;
         } catch (IOException e) {
-            System.out.println("   FILE NOT FOUND ERROR: Creating empty tasklist...");
-            String createdPath = PROJECT_DIRECTORY + "/" + givenFilePath;
+            String createdPath = DESKTOP_DIRECTORY + "/" + givenFilePath;
             File tempfile = new File(createdPath);
-            System.out.println(tempfile.getAbsolutePath());
             try {
                 tempfile.createNewFile();
-                System.out.println("   Succesfully created 'tasklist.txt' "
-                        + "within ./src/main/java/" + givenFilePath);
+                System.out.println("Succesfully created 'tasklist.txt' within " + tempfile.getAbsolutePath());
                 return lt;
             } catch (IOException x) {
-                throw new DukeException("   UNEXPECTED ERROR: Unable to create file...");
+                throw new DukeException("UNEXPECTED ERROR: Unable to create file...");
             }
         }
     }
@@ -113,11 +107,9 @@ public class Storage {
         try {
             // clears the file
             Files.write(p, "".getBytes());
-
             Files.write(p, outputText.getBytes(), StandardOpenOption.APPEND);
-            System.out.println("   Saved tasks to file...");
         } catch (IOException e) {
-            System.out.println("   An error occurred while trying to save...");
+            System.out.println("An error occurred while trying to save...");
         }
     }
 

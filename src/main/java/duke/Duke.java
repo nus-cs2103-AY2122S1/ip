@@ -18,49 +18,37 @@ public class Duke {
     /** contains the task list: has operations to add/delete tasks in the list.  */
     private TaskList tasks;
 
-    /** deals with interactions with the user.  */
-    private Ui ui;
-
     /**
      * Initialises the Duke object which will run the main program.
      *
      * @param filePath user specified file path to store/load saved data
      */
     Duke(String filePath) {
-        this.ui = new Ui();
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
         } catch (InvalidStorageFilePathException isfpe) {
-            ui.showError(isfpe.getMessage());
+            tasks = new TaskList();
+            System.out.println(isfpe.getMessage());
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    /** Runs the program until termination condition is met upon parsing of Command. */
-    public void run() {
-        this.ui.showWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (InvalidDirectoryException ide) {
-                ui.showError(ide.getMessage());
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage);
+        } catch (DukeException | InvalidDirectoryException e) {
+            return e.getMessage();
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasklist.txt").run();
+    public String showOpeningMessage() {
+        return "Hello! This is Duke :)\n"
+                + "To use my AUTOSAVE feature, please type 'bye' when you're done!\n"
+                + "Otherwise, I am unable to save your tasks for future reference :(\n"
+                + "Now, what can I do for you?";
     }
+
 }

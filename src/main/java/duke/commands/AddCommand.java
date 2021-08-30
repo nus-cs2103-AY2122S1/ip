@@ -5,7 +5,6 @@ import java.time.format.DateTimeParseException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exceptions.InvalidInputException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -39,9 +38,9 @@ public class AddCommand extends Command {
      * Adds the specified task to the tasklist and reflects the result via the Ui.
      * @throws InvalidInputException if date is not indicated or it is in the incorrect format.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(TaskList task, Storage storage) throws InvalidInputException {
         if (taskDescription.equals("")) {
-            throw new InvalidInputException(ui.printEmptyDescription(taskType));
+            throw new InvalidInputException(printEmptyDescription(taskType));
         } else {
             Task t;
             if (taskType.equals("todo")) {
@@ -51,25 +50,39 @@ public class AddCommand extends Command {
                     String[] info = Parser.parseDeadline(taskDescription);
                     t = new Deadline(info[0], info[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidInputException("   INVALID INPUT: Please specify the date for the deadline");
+                    throw new InvalidInputException("Please specify the date for the deadline");
                 } catch (DateTimeParseException e) {
-                    throw new InvalidInputException("   INVALID INPUT: Please specify date in "
-                            + "'YYYY-MM-DD TIME' format");
+                    throw new InvalidInputException("Please specify date in 'YYYY-MM-DD TIME' format");
                 }
             } else {
                 try {
                     String[] info = Parser.parseEvent(taskDescription);
                     t = new Event(info[0], info[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidInputException("   INVALID INPUT: Please specify the date for the event");
+                    throw new InvalidInputException("Please specify the date for the event");
                 } catch (DateTimeParseException e) {
-                    throw new InvalidInputException("   INVALID INPUT: Please specify date in "
-                            + "'YYYY-MM-DD TIME' format");
+                    throw new InvalidInputException("Please specify date in YYYY-MM-DD TIME' format");
                 }
             }
             task.addTask(t);
-            ui.showAddTaskMessage(t.toString(), task.getNumTasks());
+            return showAddTaskMessage(t.toString(), task.getNumTasks());
+            //ui.showAddTaskMessage(t.toString(), task.getNumTasks());
         }
+    }
+
+    /**
+     * Prints the message with information on the task type if the user input enters an empty description
+     */
+    public String printEmptyDescription(String taskType) {
+        return String.format("OOPS!!! The description of a %s cannot be empty.", taskType);
+    }
+
+    /**
+     * Displays the description of the newly added task.
+     */
+    public String showAddTaskMessage(String message, int numTotalTasks) {
+        return String.format("Got it. I've added this task: \n   %s\n"
+                + "Now you have %d tasks in the list.", message, numTotalTasks);
     }
 
     /**

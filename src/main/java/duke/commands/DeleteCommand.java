@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exceptions.InvalidInputException;
 
 /**
@@ -23,14 +22,14 @@ public class DeleteCommand extends Command {
      * Delete the specified task from the tasklist and reflects the result via the Ui.
      * @throws InvalidInputException if the task does not exist in the list.
      */
-    public void execute(TaskList task, Ui ui, Storage storage) throws InvalidInputException {
+    public String execute(TaskList task, Storage storage) throws InvalidInputException {
         if (deletionIndex <= 0 || deletionIndex > task.getNumTasks() || task.isEmptyTaskList()) {
-            String errorMessage = String.format("   INDEX ERROR: Task number %d does not exist to be deleted",
-                    deletionIndex);
+            String errorMessage = String.format("Error: Task number '%d' is not within the list", deletionIndex);
             throw new InvalidInputException(errorMessage);
         } else {
             String deletedTaskInfo = task.deleteTask(deletionIndex);
-            ui.showDeletedTask(deletedTaskInfo, task.getNumTasks());
+            return String.format("Noted. I've deleted this task: \n   %s\n"
+                    + "Now you have %d tasks in the list.", deletedTaskInfo, task.getNumTasks());
         }
     }
 
