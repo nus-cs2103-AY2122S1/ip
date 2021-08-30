@@ -10,14 +10,13 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final String line = "\n\t_______________________________________________________________";
-    private final PrintStream out;
     private final Scanner in;
 
     /**
      * Creates a UI object for the user to interact with.
      */
     public Ui() {
-        this.out = System.out;
+        PrintStream out = System.out;
         this.in = new Scanner(System.in);
     }
 
@@ -55,7 +54,7 @@ public class Ui {
      * @return A response to user.
      */
     public String showToUser(String message) {
-       return line + message + line;
+        return line + message + line;
     }
 
     protected void close() {
