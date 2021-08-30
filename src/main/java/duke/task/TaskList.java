@@ -49,7 +49,7 @@ public class TaskList {
     }
 
     public Task markAsDone(int taskNumber) throws NoSuchTaskException {
-        if (taskNumber < 0 || taskNumber >= list.size()) {
+        if (taskNumber < 0 || taskNumber > list.size()) {
             throw new NoSuchTaskException(new Ui());
         }
         Task task = list.get(taskNumber - 1);

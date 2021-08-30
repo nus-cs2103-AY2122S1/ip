@@ -78,7 +78,7 @@ public class Parser {
                 try {
                     LocalDateTime by = LocalDateTime.parse(commandDetails.substring(deadlineDetails.indexOf("by") + 3),
                             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                    return new Deadline(commandDetails, false, by);
+                    return new Deadline(deadlineDetails, false, by);
                 } catch (DateTimeParseException e) {
                     throw new InvalidDateTimeException(ui);
                 }
@@ -100,7 +100,7 @@ public class Parser {
                 try {
                     LocalDateTime at = LocalDateTime.parse(commandDetails.substring(eventDetails.indexOf("at") + 3),
                             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-                    return new Event(commandDetails, false, at);
+                    return new Event(eventDetails, false, at);
                 } catch (DateTimeParseException e) {
                     throw new InvalidDateTimeException(ui);
                 }

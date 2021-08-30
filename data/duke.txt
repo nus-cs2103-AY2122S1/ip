@@ -1,3 +1,4 @@
 T | 1 | run
 D | 0 | work | 1999-02-02T01:01
 E | 1 | project meeting | 2021-08-31T15:00
+T | 0 | sleep

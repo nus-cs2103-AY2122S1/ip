@@ -3,7 +3,7 @@ package duke.task;
 public abstract class Task {
     protected final String description;
     protected boolean isDone;
-    protected final TaskType taskType;
+    public final TaskType taskType;
 
     protected Task(String description, boolean isDone, TaskType taskType) {
         this.description = description;
