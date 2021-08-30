@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 public class TaskList {
 
     private ArrayList<Task> list;
-    private final Storage storage;
 
     public static Task stringToTask(String str){
         String[] taskStr = str.split(" \\| ");
@@ -26,7 +25,6 @@ public class TaskList {
 
     protected TaskList(){
         list = new ArrayList<>();
-        storage = new Storage();
     }
 
     public Task getTask(int taskNumber){
@@ -35,23 +33,31 @@ public class TaskList {
 
     public void addTask(Task task){
         list.add(task);
-        storage.save(list);
     }
 
-    public Task deleteTask(int taskNumber){
+    public Task deleteTask(int taskNumber) throws NoSuchTaskException {
+        if (taskNumber < 0 || taskNumber >= list.size()) {
+            throw new NoSuchTaskException(new Ui());
+        }
         Task task = list.remove(taskNumber - 1);
-        storage.save(list);
         return task;
     }
 
-    public void markAsDone(int taskNumber){
+    public Task markAsDone(int taskNumber) throws NoSuchTaskException {
+        if (taskNumber < 0 || taskNumber >= list.size()) {
+            throw new NoSuchTaskException(new Ui());
+        }
         Task task = list.get(taskNumber - 1);
         task.markDone();
-        storage.save(list);
+        return task;
     }
 
     public int size(){
         return list.size();
+    }
+
+    public ArrayList<Task> getList(){
+        return this.list;
     }
 
     public void loadFromStorage(ArrayList<Task> listOfTasks){
