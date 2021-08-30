@@ -55,8 +55,6 @@ public class JWBot {
 
 
     public static void main(String[] args) {
-
         new JWBot(TXT_PATH).run();
-
     }
 }
