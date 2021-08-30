@@ -16,17 +16,6 @@ public class Ui {
      */
     public String showWelcomeMessage() {
         String message = "Hello I'm FullOfBugs. What can I do for you?";
-        System.out.println(message);
-        return message;
-    }
-
-    /**
-     * Returns the String for the error message from DukeExceptions.
-     *
-     * @param message A String representing the message to be printed.
-     * @return A String of message printed out in CLI.
-     */
-    public String showError(String message) {
         return message;
     }
 
