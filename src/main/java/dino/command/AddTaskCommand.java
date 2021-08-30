@@ -2,6 +2,7 @@ package dino.command;
 
 import java.time.format.DateTimeParseException;
 
+import dino.util.Parser;
 import dino.util.Storage;
 import dino.exception.*;
 import dino.task.Deadline;
@@ -18,8 +19,8 @@ import java.time.LocalDate;
  */
 public class AddTaskCommand extends Command {
 
-    private String taskString;
-    private CMDTYPE taskType;
+    private final String taskString;
+    private final Parser.CMDTYPE taskType;
 
     /**
      * Constructs a AskTaskCommand object
@@ -27,7 +28,7 @@ public class AddTaskCommand extends Command {
      * @param taskString the user input command
      * @param taskType the type of the task, which can only be one of the type ToDo, Deadline, or Event
      */
-    public AddTaskCommand(String taskString, CMDTYPE taskType) {
+    public AddTaskCommand(String taskString, Parser.CMDTYPE taskType) {
         this.taskString = taskString;
         this.taskType = taskType;
     }
@@ -37,6 +38,7 @@ public class AddTaskCommand extends Command {
      *
      * @param storage the local storage file
      * @param taskList the current task list to which the new task will be added
+     * @return the output message after execution
      * @throws TimeNotSpecifiedException if the task is of type Deadline or Event
      * but the time is not specified
      * @throws EmptyTaskDescriptionException if the description of the task is empty
@@ -44,32 +46,30 @@ public class AddTaskCommand extends Command {
      * but the time is not entered in the format of "yyyy-mm-dd"
      */
     @Override
-    public void execute(Storage storage, TaskList taskList) throws
+    public String execute(Storage storage, TaskList taskList) throws
             TimeNotSpecifiedException, EmptyTaskDescriptionException, InvalidFormatException {
         String description = getTaskDescription(this.taskString, this.taskType);
-        Task task;
-        switch (this.taskType) {
+        Task task = null;
+        switch (taskType) {
         case TODO: {
             task = new ToDo(description);
-            taskList.addTask(task);
             break;
         }
         case DEADLINE: {
             LocalDate time = getTaskTime(this.taskString);
             task = new Deadline(description, time);
-            taskList.addTask(task);
             break;
         }
         case EVENT : {
             LocalDate time = getTaskTime(this.taskString);
             task = new Event(description, time);
-            taskList.addTask(task);
             break;
         }
         default: {
             break;
         }
         }
+        return taskList.addTask(task);
     }
 
     /**
@@ -81,7 +81,7 @@ public class AddTaskCommand extends Command {
      * @throws EmptyTaskDescriptionException if the description of the task is empty
      * @throws TimeNotSpecifiedException if the task is of type Deadline or Event but the time is not specified
      */
-    public static String getTaskDescription(String s, CMDTYPE type) throws EmptyTaskDescriptionException, TimeNotSpecifiedException {
+    public static String getTaskDescription(String s, Parser.CMDTYPE type) throws EmptyTaskDescriptionException, TimeNotSpecifiedException {
         if (s.length() < type.toString().length() + 2) {
             throw new EmptyTaskDescriptionException();
         }

@@ -1,11 +1,12 @@
 package dino;
 
-import dino.command.Command;
+import dino.command.*;
 import dino.exception.*;
 import dino.task.TaskList;
 import dino.util.Parser;
 import dino.util.Storage;
 import dino.util.Ui;
+
 
 /**
  * Represents a Personal Assistant ChatBot name Dino
@@ -15,46 +16,66 @@ public class Dino {
     private final TaskList taskList;
     private final Storage storage;
     private final Ui ui;
-    private boolean isExited = false;
 
     /**
      * Constructs a Dino object
      * Loads storage file from the path specified, if available
-     *
-     * @param filePath path to the storage file
      */
-    public Dino(String filePath) {
-        this.storage = new Storage(filePath);
+    public Dino() {
+        this.storage = new Storage("data/dino.txt");
         this.taskList = new TaskList(this.storage.loadStorage());
+        System.out.println("dino " + taskList.getTaskList().size());
         this.ui = new Ui();
     }
 
     /**
-     * Runs the program
-     * Exits only if the user enters "bye"
+     * Gets the response from the chatbot based on input command
+     * @param input the input command
+     * @return the output message after processing command
      */
-    public void run() {
-        ui.greeting();
-        while (!isExited) {
-            String input = ui.readNextLine();
-            if (input.equals("bye")) {
-                isExited = true;
-            } else {
-                try {
-                    Command cmd = Parser.parse(input);
-                    cmd.execute(storage, taskList);
-                } catch (DinoException e) {
-                    System.out.println(e.getMessage());
-                }
-            }
+    public String getResponse(String input) {
+        try {
+            return processCommand(input);
+        } catch (DinoException e) {
+            return e.getMessage();
         }
-        ui.processExit(storage, taskList);
     }
 
+
     /**
-     * Drives the start of the program
+     * Processes the input command after parsing and returns the output message
+     * @param command the input command
+     * @return the output message after execution
+     * @throws DinoException the general set of exceptions
      */
-    public static void main(String[] args) {
-        new Dino("data/dino.txt").run();
+    public String processCommand(String command) throws DinoException {
+        Parser.CMDTYPE cmdType = Parser.parse(command);
+        switch (cmdType) {
+        case TODO:
+        case EVENT:
+        case DEADLINE: {
+            Command cmd = new AddTaskCommand(command, cmdType);
+            return cmd.execute(storage, taskList);
+        }
+        case DONE:
+        case DELETE: {
+            Command cmd = new MarkCommand(command, cmdType);
+            return cmd.execute(storage, taskList);
+        }
+        case LIST: {
+            Command cmd = new ListCommand();
+            return cmd.execute(storage, taskList);
+        }
+        case FIND: {
+            Command cmd = new FindCommand(command);
+            return cmd.execute(storage, taskList);
+        }
+        case BYE: {
+            return ui.exit(storage, taskList);
+        }
+        default: {
+            throw new InvalidInputException();
+        }
+        }
     }
 }
