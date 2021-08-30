@@ -1,7 +1,6 @@
 package addon;
 
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 
 import addon.Ui.IncorrectFormatException;
@@ -52,8 +51,8 @@ public class Tasklist {
     public void removeEntry(int num) throws IncorrectFormatException {
         if (num >= 1 && num <= this.list.size() + 1) {
             System.out.println(Ui.BAR + "\n    Nice! I've removed this task off the face of the Earth:\n\n    "
-                    + (list.get(num - 1)).toString() + "\n    Now you have " + list.size() +
-                    " tasks in the list.\n" + Ui.BAR);
+                    + (list.get(num - 1)).toString() + "\n    Now you have " + list.size()
+                    + " tasks in the list.\n" + Ui.BAR);
             this.list.remove(num - 1);
             Storage.rewriteFile(this.list);
         } else {
@@ -70,7 +69,7 @@ public class Tasklist {
         if (num >= 1 && num <= this.list.size() + 1) {
             (list.get(num - 1)).markDone();
             System.out.println(Ui.BAR + "\n     Nice! I've marked the following as "
-                    + ((list.get(num - 1)).isDone ? "undone: " : "done: ") + "\n     "
+                    + ((list.get(num - 1)).isDone ? "done: " : "undone: ") + "\n     "
                     + (list.get(num - 1)).toString() + "\n" + Ui.BAR);
             Storage.rewriteFile(this.list);
         } else {
@@ -101,15 +100,15 @@ public class Tasklist {
      */
     public void filterDates(LocalDateTime date) {
         System.out.println(Ui.BAR + "\n    Here are your " + Ui.printDate(date, false) + " tasks: \n");
-        for(Task i : list) {
+        for (Task i : list) {
             if (i instanceof Event) {
-                Event o = (Event)i;
+                Event o = (Event) i;
                 if (o.date.getYear() == date.getYear() && o.date.getMonth().equals(date.getMonth())
                         && o.date.getDayOfMonth() == date.getDayOfMonth()) {
                     System.out.println("    " + i.toString());
                 }
             } else if (i instanceof Deadline) {
-                Deadline o = (Deadline)i;
+                Deadline o = (Deadline) i;
                 if (o.date.getYear() == date.getYear() && o.date.getMonth().equals(date.getMonth())
                         && o.date.getDayOfMonth() == date.getDayOfMonth()) {
                     System.out.println("    " + i.toString());
@@ -126,7 +125,7 @@ public class Tasklist {
      */
     public void filterNames(String keyword) {
         System.out.println(Ui.BAR + "\n    Here are your tasks with the word \"" + keyword + "\": \n");
-        for(Task i : list) {
+        for (Task i : list) {
             String[] words = i.description.split(" ");
             for (String s : words) {
                 boolean found = false;
@@ -159,6 +158,10 @@ public class Tasklist {
         protected String description;
         protected boolean isDone;
 
+        /**
+         * Task constructor.
+         * @param description Name of task.
+         */
         public Task(String description) {
             this.description = description;
             this.isDone = false;
@@ -180,6 +183,11 @@ public class Tasklist {
 
         protected LocalDateTime date;
 
+        /**
+         * Deadline constructor.
+         * @param description Name of deadline.
+         * @param by Deadline of task.
+         */
         public Deadline(String description, LocalDateTime by) {
             super(description);
             this.date = by;
@@ -196,6 +204,10 @@ public class Tasklist {
      */
     public static class Todo extends Task {
 
+        /**
+         * Todo constructor.
+         * @param description Name of task.
+         */
         public Todo(String description) {
             super(description);
         }
@@ -213,6 +225,11 @@ public class Tasklist {
 
         protected LocalDateTime date;
 
+        /**
+         * Event constructor.
+         * @param description Name of event.
+         * @param at Date of event.
+         */
         public Event(String description, LocalDateTime at) {
             super(description);
             this.date = at;

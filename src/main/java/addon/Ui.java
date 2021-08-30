@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
  */
 public class Ui {
 
-    public static String BAR = " -------------------------------------------------------------";
+    public static final String BAR = " -------------------------------------------------------------";
 
     /**
      * Presents date and time in a specific manner.
@@ -20,7 +20,7 @@ public class Ui {
         String month = raw.getMonth().toString().substring(0, 3);
         int hour = raw.getHour();
         int mins = raw.getMinute();
-        return month + " " + raw.getDayOfMonth() + " " + raw.getYear() + (time ? ( " @ " + (hour < 10 ? "0" : "")
+        return month + " " + raw.getDayOfMonth() + " " + raw.getYear() + (time ? (" @ " + (hour < 10 ? "0" : "")
                 + hour + (mins < 10 ? "0" : "") + raw.getMinute()) : "");
     }
 

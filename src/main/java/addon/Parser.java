@@ -11,8 +11,8 @@ import addon.Ui.IncorrectFormatException;
  */
 public class Parser {
 
-    private final Tasklist tasklist;
     private static final LocalDateTime NULLDATE = LocalDateTime.of(1, 1, 1, 1, 0);
+    private final Tasklist tasklist;
 
     public Parser(Tasklist tasklist) {
         this.tasklist = tasklist;
@@ -30,8 +30,8 @@ public class Parser {
             if (input.indexOf(' ') > 0) { // checking if command given was >= two words
                 String[] splitted = input.split(" ", 2);
                 input = splitted[1];
-                if (splitted[0].equalsIgnoreCase("/done") ||
-                        splitted[0].equalsIgnoreCase("/delete")) {
+                if (splitted[0].equalsIgnoreCase("/done")
+                        || splitted[0].equalsIgnoreCase("/delete")) {
                     if (!input.matches("^[0-9]*$")) {
                         throw new IncorrectFormatException("Number not detected.");
                     } else {
@@ -109,7 +109,7 @@ public class Parser {
                             + "    \"/done x\" where x is the task number to mark task as done.\n"
                             + "    \"/check DATE\" where DATE is the date you want to query.\n"
                             + "    \"/clearlist\" clears.\n" + "    \"/list x\" lists.\n"
-                            + "    \"/delete x\" where x is the task number to be deleted. \n"+ Ui.BAR);
+                            + "    \"/delete x\" where x is the task number to be deleted. \n" + Ui.BAR);
                 } else if (input.equals("/clearlist")) {
                     tasklist.clearList();
                 } else {

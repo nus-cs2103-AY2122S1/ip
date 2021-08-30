@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -66,12 +64,12 @@ public class Storage {
                 fw.write("T\r\n");
                 fw.write(s.description + "\r\n");
             } else if (s instanceof Event) {
-                Event e = (Event)s;
+                Event e = (Event) s;
                 fw.write("E\r\n");
                 fw.write(s.description + "\r\n");
                 fw.write(e.date.toString() + "\r\n");
             } else if (s instanceof Deadline) {
-                Deadline e = (Deadline)s;
+                Deadline e = (Deadline) s;
                 fw.write("D\r\n");
                 fw.write(s.description + "\r\n");
                 fw.write(e.date.toString() + "\r\n");
@@ -95,7 +93,7 @@ public class Storage {
         Scanner s = new Scanner(saveFile);
         ArrayList<Task> list = new ArrayList<>();
 
-        while(s.hasNext()) {
+        while (s.hasNext()) {
             String type = s.nextLine();
             String name = s.nextLine();
             if (type.equals("T")) {
