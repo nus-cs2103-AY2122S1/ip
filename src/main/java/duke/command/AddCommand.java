@@ -44,6 +44,12 @@ public class AddCommand extends Command {
         return false;
     }
 
+    /**
+     * Returns string representation of AddCommand.
+     * For testing purposes.
+     *
+     * @return string representation of AddCommand.
+     */
     @Override
     public String toString() {
         return toAddTask.toString();
