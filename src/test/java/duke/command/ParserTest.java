@@ -10,10 +10,10 @@ public class ParserTest {
     public void testInterpretCommand_normalInputs() throws InvalidCommandException {
         Parser parser = new Parser();
         assertEquals("list", parser.interpretCommand("list"));
-        assertEquals("mark", parser.interpretCommand("mark 2"));
+        assertEquals("mark", parser.interpretCommand("done 2"));
         assertEquals("todo", parser.interpretCommand("todo fishing"));
-        assertEquals("deadline", parser.interpretCommand("cake /by 2020-03-03"));
-        assertEquals("event", parser.interpretCommand("homework /at 2020-03-03 5pm"));
+        assertEquals("deadline", parser.interpretCommand("deadline cake /by 2020-03-03"));
+        assertEquals("event", parser.interpretCommand("event homework /at 2020-03-03 5pm"));
     }
 
     @Test
