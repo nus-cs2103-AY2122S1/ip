@@ -1,11 +1,10 @@
 package duke;
 
-import commands.Command;
 import parser.Parser;
 import storage.Storage;
 import tasks.TaskList;
+import ui.Launcher;
 import ui.Ui;
-
 
 /** This class implements the Duke memo assistant.
  * @author damithc
@@ -41,16 +40,7 @@ public class Duke{
      * detected by parser as per user input.
      */
     public void run() {
-        boolean isExit = false;
-        while (!isExit) {
-            String next = ui.readLine();
-            Ui.showAsUserInput(next);
-            Command command = parser.parse(next);
-            if (command != null) {
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            }
-        }
+        Launcher.run();
     }
 
     /**

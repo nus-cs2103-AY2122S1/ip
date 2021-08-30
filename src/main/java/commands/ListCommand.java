@@ -1,9 +1,10 @@
 package commands;
 
-import java.util.ArrayList;
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
+
+import java.util.ArrayList;
 
 /**
  * The ListCommand Class inherits Command and is
@@ -27,9 +28,10 @@ public final class ListCommand extends Command{
      * @param lst the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
+     * @return the message displaying the result
      */
     @Override
-    public void execute(TaskList lst, Ui ui, Storage storage) {
-        lst.getList();
+    public String execute(TaskList lst, Ui ui, Storage storage) {
+        return lst.getList();
     }
 }

@@ -28,9 +28,10 @@ public final class FindCommand extends Command{
      * @param lst the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
+     * @return the message displaying the result
      */
     @Override
-    public void execute(TaskList lst, Ui ui, Storage storage) {
+    public String execute(TaskList lst, Ui ui, Storage storage) {
         String target = "";
         for (int i = 1; i < getInput().size(); i++) {
             if (i + 1 < getInput().size()) {
@@ -41,9 +42,9 @@ public final class FindCommand extends Command{
         }
         ArrayList<Task> tasksFound = lst.findTask(target);
         if (tasksFound.isEmpty()) {
-            Ui.showInput("No task tasksFound!");
+            return "No task tasks found!";
         } else {
-            String temp = "The items tasksFound are: \n";
+            String temp = "The tasks found are: \n";
             for (int i = 0; i < tasksFound.size(); i++) {
                 if (i + 1 < tasksFound.size()) {
                     temp += "     " + (i + 1) + "." + tasksFound.get(i).getType()
@@ -53,7 +54,7 @@ public final class FindCommand extends Command{
                             + tasksFound.get(i).getStatus() + " " + tasksFound.get(i).getTask();
                 }
             }
-            Ui.showInput(temp);
+            return temp;
         }
     }
 }

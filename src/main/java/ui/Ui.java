@@ -13,9 +13,30 @@ public final class Ui{
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private final static String SEPARATOR = "     _______________________________________________________";
+    private final static String SEPARATOR = "     _____________________________________________" +
+            "__________________________________________________________________________" +
+            "____________________________________________________________";
 
     private final Scanner sc;
+
+    private final static String WELCOME_MESSAGE =
+            "Hello from\n" + LOGO + "\n" + SEPARATOR + "\n"
+            + "     Hi! I am Duke!\n" + "     What can I do for you?\n"
+            + SEPARATOR;
+
+
+    private final static String HELPER_MESSAGE = SEPARATOR + "\n"
+            + "     The following can be used:\n" + "     Types of tasks: 'todo', 'deadline', 'event'\n"
+            + "     If you wish to add a task, please input in the form: '<Type of tasks.Task> <Name of tasks.Task>'"
+            + " and include keyword '/at' OR '/by' followed by <Date> if relevant.\n"
+            + "     If you wish to delete a task, please input in the form: 'delete <task index>'.\n"
+            + "     If you wish to see the current tasks, please input 'list'.\n"
+            + "     If you wish to mark a task as done, please input 'done <task index>.'\n"
+            + "     If you wish to terminate the program, please input 'bye'.\n"
+            + "     If you wish to check items due on a particular day, please input 'due YYYY/MM/DD'.\n"
+            + "     If you wish to find items, please input in the form: 'find <keyword>'.\n"
+            + SEPARATOR;
+    private final static String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
     /**
      * Constructs an Ui.
@@ -28,10 +49,11 @@ public final class Ui{
      * Displays the message when program is first started.
      */
     public static void welcomeMessage() {
-        System.out.println("Hello from\n" + LOGO);
-        System.out.println(SEPARATOR);
-        System.out.println("     Hi! I am Duke!\n" + "     What can I do for you?");
-        System.out.println(SEPARATOR);
+        System.out.println(WELCOME_MESSAGE);
+    }
+
+    public static String getWelcomeMessage() {
+        return WELCOME_MESSAGE;
     }
 
     /**
@@ -45,6 +67,10 @@ public final class Ui{
           s = sc.nextLine();
         }
         return s;
+    }
+
+    public String getSeparator() {
+        return SEPARATOR;
     }
 
 
@@ -76,28 +102,21 @@ public final class Ui{
      * Displays the message upon termination of program.
      */
     public static void showExitMessage() {
-        showInput("Bye. Hope to see you again soon!");
+        showInput(EXIT_MESSAGE);
+    }
+
+    public static String getExitMessage() {
+        return EXIT_MESSAGE;
     }
 
     /**
      * Displays commands to help user with input as much as possible
      */
     public static void helperMessage() {
-        System.out.println(SEPARATOR);
-        System.out.println("     The following can be used:");
-        System.out.println("     Types of tasks: 'todo', 'deadline', 'event'");
-        System.out.println("     If you wish to add a task," +
-                " please input in the form: '<Type of tasks.Task> <Name of tasks.Task>'" +
-                " and include keyword '/at' OR '/by' followed by <Date> if relevant.");
-        System.out.println("     If you wish to delete a task, "
-                + "please input in the form: 'delete <task index>'.");
-        System.out.println("     If you wish to see the current tasks, please input 'list'.");
-        System.out.println("     If you wish to mark a task as done, please input 'done <task index>.'");
-        System.out.println("     If you wish to terminate the program, please input 'bye'.");
-        System.out.println("     If you wish to check items due on a particular day, please " +
-                "input 'due YYYY/MM/DD'.");
-        System.out.println("     If you wish to find items, please " +
-                "input in the form: 'find <keyword>'.");
-        System.out.println(SEPARATOR);
+        System.out.println(HELPER_MESSAGE);
+    }
+
+    public static String getHelperMessage() {
+        return HELPER_MESSAGE;
     }
 }

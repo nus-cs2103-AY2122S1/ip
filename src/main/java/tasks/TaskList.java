@@ -2,7 +2,6 @@ package tasks;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import ui.Ui;
 
 public final class TaskList{
     private ArrayList<Task> tasks;
@@ -105,27 +104,27 @@ public final class TaskList{
      *
      * @param t the task to be added/e
      */
-    public void addTask(Task t){
+    public String addTask(Task t){
         if (tasks == null) {
             tasks = new ArrayList<>();
         }
         tasks.add(t);
-        Ui.showInput("Successfully added:", t.getType() + t.getStatus() + " " + t.getTask());
+        return "Successfully added:\n" + t.getType() + t.getStatus() + " " + t.getTask();
     }
 
     /**
      * Displays the entire list of tasks sequentially
      */
-    public void getList() {
+    public String getList() {
         if (tasks != null && !tasks.isEmpty()) {
             String temp = "The current list has these items:\n";
             for (int i = 0; i < tasks.size(); i++) {
                 temp += "     " + (i + 1) + "." + tasks.get(i).getType() + tasks.get(i).getStatus() + " "
                         + tasks.get(i).getTask() + "\n";
             }
-            Ui.showInput(temp, "There are " + tasks.size() + " task(s) now, keep up!");
+            return temp + "\n" + "There are " + tasks.size() + " task(s) now, keep up!";
         } else {
-            Ui.showInput("There are no items in your list, keep adding them!");
+            return "There are no items in your list, keep adding them!";
         }
     }
 
@@ -134,11 +133,11 @@ public final class TaskList{
      *
      * @param ind the index of task to be deleted
      */
-    public void deleteTask(int ind) {
+    public String deleteTask(int ind) {
         Task t = tasks.remove(ind);
-        Ui.showInput("Noted, the following task has been deleted: ",
-                t.getType() + t.getStatus() + " " + t.getTask(),
-                "Nice! there are " + tasks.size() + " task(s) left.");
+        return "Noted, the following task has been deleted: \n"
+                + t.getType() + t.getStatus() + " " + t.getTask() + "\n"
+                + "Nice! there are " + tasks.size() + " task(s) left.";
     }
 
     /**
@@ -146,10 +145,10 @@ public final class TaskList{
      *
      * @param s the date which user wants to check
      */
-    public void anyTaskDue(String s) {
+    public String anyTaskDue(String s) {
         ArrayList<Task> dueItems = new ArrayList<>();
         if (tasks.isEmpty()) {
-            Ui.showInput("No tasks yet!");
+            return "No tasks yet!";
         } else {
             String[] date = s.split("/");
             LocalDate ref = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
@@ -163,6 +162,7 @@ public final class TaskList{
                     }
                 }
             }
+            return "Check completed.";
         }
     }
 

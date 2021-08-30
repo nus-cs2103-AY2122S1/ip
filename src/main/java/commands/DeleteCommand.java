@@ -1,9 +1,10 @@
 package commands;
 
-import java.util.ArrayList;
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
+
+import java.util.ArrayList;
 
 /**
  * The DeleteCommand Class inherits Command and is
@@ -27,28 +28,30 @@ public final class DeleteCommand extends Command{
      * @param lst the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
+     * @return the message displaying the result
      */
     @Override
-    public void execute(TaskList lst, Ui ui, Storage storage) {
+    public String execute(TaskList lst, Ui ui, Storage storage) {
         if (super.getInput().size() == 1) {
-            Ui.showInput("Unable to delete task without an index. Please input index :)",
-                    "Please input in the form: 'delete <task index>'.",
-                    "Note: list can be used to see the current tasks.");
+            return "Unable to delete task without an index. Please input index :)\n"
+                    + "Please input in the form: 'delete <task index>'.\n"
+                    + "Note: list can be used to see the current tasks.";
         } else {
             if (lst.getTasks().isEmpty()) {
-                Ui.showInput("List is empty, no tasks to delete, looking good!");
+                return "List is empty, no tasks to delete, looking good!";
             } else if (super.getInput().size() > 2) {
-                Ui.showInput("Please input in the form: 'delete <index>'.");
+                return "Please input in the form: 'delete <index>'.";
             } else {
                 try {
                     int index = Integer.parseInt(super.getInput().get(1)) - 1;
-                    lst.deleteTask(index);
+                    String result = lst.deleteTask(index);
                     storage.resetFile(lst.getTasks());
+                    return result;
                 } catch (NumberFormatException e) {
-                    Ui.showInput("Please use a number instead :(");
+                    return "Please use a number instead :(";
                 } catch (IndexOutOfBoundsException e) {
-                    Ui.showInput("Please input a valid index :)",
-                            "Note: 'list' can be used to see the current tasks.");
+                    return "Please input a valid index :)\n"
+                            + "Note: 'list' can be used to see the current tasks.";
                 }
             }
         }

@@ -1,9 +1,10 @@
 package commands;
 
-import java.util.ArrayList;
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
+
+import java.util.ArrayList;
 
 /**
  * The Command class represents the action to be done.
@@ -45,6 +46,7 @@ public abstract class Command{
      * @param lst the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
+     * @return the message displaying the result
      */
-    public abstract void execute(TaskList lst, Ui ui, Storage storage);
+    public abstract String execute(TaskList lst, Ui ui, Storage storage);
 }

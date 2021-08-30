@@ -1,10 +1,11 @@
 package commands;
 
-import java.util.ArrayList;
 import storage.Storage;
 import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
+
+import java.util.ArrayList;
 
 /**
  * The DoneCommand Class inherits Command and is
@@ -29,9 +30,10 @@ public final class DoneCommand extends Command{
      * @param lst the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
+     * @return the message displaying the result
      */
     @Override
-    public void execute(TaskList lst, Ui ui, Storage storage) {
+    public String execute(TaskList lst, Ui ui, Storage storage) {
         ArrayList<Task> tasks = lst.getTasks();
         try {
             if (getInput().size() == 1) {
@@ -47,12 +49,13 @@ public final class DoneCommand extends Command{
             tasks.get(index).setIsDone();
             storage.resetFile(tasks);
         } catch (IndexOutOfBoundsException e) {
-            Ui.showInput("Please input a valid index :)",
-                    "Note: 'list' can be used to see the current tasks.");
+            return "Please input a valid index :)\n"
+                    + "Note: 'list' can be used to see the current tasks.";
         } catch (NumberFormatException e) {
-            Ui.showInput("Please use a number instead :(");
+            return "Please use a number instead :(";
         } catch (IllegalArgumentException e) {
-            Ui.showInput(e.getMessage());
+            return e.getMessage();
         }
+        return "";
     }
 }
