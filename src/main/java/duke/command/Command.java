@@ -17,9 +17,10 @@ public abstract class Command {
      * @param tasks the given TaskList.
      * @param ui the given Ui.
      * @param storage the given Storage.
+     * @return the string for the Ui to print.
      * @throws DukeException when the Command cannot be executed.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns true if the Command is the ExitCommand, false otherwise.

@@ -38,10 +38,11 @@ public class AddCommand extends Command {
      * @param tasks the given TaskList.
      * @param ui the given Ui.
      * @param storage the given Storage.
+     * @return the string for the Ui to print.
      * @throws DukeException when a Task cannot be created.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task newTask;
 
         switch (type) {
@@ -60,7 +61,7 @@ public class AddCommand extends Command {
 
         tasks.add(newTask);
         storage.save(tasks);
-        ui.printMsg(generateMsg(newTask, tasks));
+        return generateMsg(newTask, tasks);
     }
 
     private String generateMsg(Task tsk, TaskList tasks) {

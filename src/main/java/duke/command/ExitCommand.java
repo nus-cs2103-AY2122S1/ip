@@ -23,11 +23,12 @@ public class ExitCommand extends Command {
      * @param tasks the given TaskList.
      * @param ui the given Ui.
      * @param storage the given Storage.
+     * @return the string for the Ui to print.
      * @throws DukeException shouldn't happen.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printMsg(EXIT_MSG);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return EXIT_MSG;
     }
 
     /**

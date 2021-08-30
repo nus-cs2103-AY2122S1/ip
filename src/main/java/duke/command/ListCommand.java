@@ -23,15 +23,16 @@ public class ListCommand extends Command {
      * @param tasks the given TaskList.
      * @param ui the given Ui.
      * @param storage the given Storage.
+     * @return the string for the Ui to print.
      * @throws DukeException shouldn't happen.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String msg = tasks.listTaskArr();
         if (msg.isBlank()) {
             msg = "No tasks in the list!";
         }
-        ui.printMsg(msg);
+        return msg;
     }
 
 }
