@@ -25,6 +25,10 @@ public class Iris {
         }
     }
 
+    public Iris() {
+        this("data/tasks.txt");
+    }
+
     /**
      * Starts an Iris instance
      */
