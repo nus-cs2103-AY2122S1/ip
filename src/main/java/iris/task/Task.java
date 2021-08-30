@@ -29,7 +29,7 @@ public class Task {
     }
 
     private String getStatusIcon() {
-        return this.isDone ? "X" : " ";
+        return this.isDone ? "✔️" : "   ";
     }
 
     /**
@@ -39,7 +39,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.name);
+        return String.format(" %s %s", this.getStatusIcon(), this.name);
     }
 
     /**
