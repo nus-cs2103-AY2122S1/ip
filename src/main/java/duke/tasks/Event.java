@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected final LocalDateTime at;
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
 
     /**
      * The constructor for the Event.

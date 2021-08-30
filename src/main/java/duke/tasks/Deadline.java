@@ -8,8 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     protected final LocalDate by;
-
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Constructor for the Deadline.

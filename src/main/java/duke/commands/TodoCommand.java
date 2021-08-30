@@ -9,7 +9,7 @@ import duke.tasks.Todo;
 /**
  * The TodoCommand class handles when a todo is entered by a user.
  */
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
     private final Todo todo;
 
     /**

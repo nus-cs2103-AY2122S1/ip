@@ -1,22 +1,24 @@
 package duke.commands;
 
-import duke.DukeException;
-import duke.TaskList;
-import duke.tasks.Task;
-import duke.Ui;
-import duke.Storage;
-import duke.tasks.Event;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.tasks.Event;
+import duke.tasks.Task;
 
 /**
  * The EventCommand handles when an event command is entered.
  */
 public class EventCommand extends Command {
 
-    private  static final Pattern EVENT_FORMAT = Pattern.compile("(?<description>\\S+) /at (?<at>.*)");
+    private static final Pattern EVENT_FORMAT = Pattern.compile("(?<description>\\S+) /at (?<at>.*)");
 
-    private final String description, at;
+    private final String description;
+    private final String at;
 
     /**
      * Constructs an EventCommand object with given arguments.

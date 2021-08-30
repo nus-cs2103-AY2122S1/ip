@@ -9,7 +9,7 @@ import duke.tasks.Task;
 /**
  * The DeleteCommand handles when a task is to be deleted.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     private final int taskIdx;
 

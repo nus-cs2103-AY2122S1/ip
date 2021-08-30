@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * The ExitCommand handles the command to exit the program.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Handles the display of the goodbye message.

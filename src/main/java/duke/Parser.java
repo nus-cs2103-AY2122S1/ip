@@ -1,9 +1,17 @@
 package duke;
 
-import duke.commands.*;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.TodoCommand;
 
 /**
  * Represents a parser which parses input from the user.

@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * The ListCommand handles the command to display the tasklist.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /**
      * Displays the current TaskList being used.

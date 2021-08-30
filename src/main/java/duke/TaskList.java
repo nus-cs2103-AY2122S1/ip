@@ -1,7 +1,8 @@
 package duke;
 
-import duke.tasks.Task;
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 /**
  * Encapsulates a List of Tasks and supports various functions related to managing the List of Tasks.

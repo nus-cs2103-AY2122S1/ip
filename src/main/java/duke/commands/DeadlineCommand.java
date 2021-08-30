@@ -1,13 +1,16 @@
 package duke.commands;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+
 
 /**
  * The DeadlineCommand handles when a deadline command is entered.
@@ -16,7 +19,8 @@ public class DeadlineCommand extends Command {
 
     private static final Pattern EVENT_FORMAT = Pattern.compile("(?<description>\\S+) /by (?<by>.*)");
 
-    private final String description, by;
+    private final String description;
+    private final String by;
 
     /**
      * Constructs a DeadlineCommand object.
@@ -35,7 +39,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes the addition of a Deadline being added to the TaskList.
-     * 
+     *
      * @param taskList The current TaskList being used.
      * @param ui The current Ui being used.
      * @param storage The current Storage being used.

@@ -12,6 +12,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructs a Duke object.
+     *
+     * @param filePath File path of where the TaskList is stored.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         parser = new Parser();

@@ -1,15 +1,16 @@
 package duke;
 
-import duke.tasks.Task;
 import java.util.Scanner;
+
+import duke.tasks.Task;
 
 /**
  * Handles all functionality related to displaying of the user interface.
  */
 public class Ui {
-    private final String DIVIDER = "───────────────────────────────────────────────────────────────────────\n";
-    private final String DOUBLE_DIVIDER = "═══════════════════════════════════════" +
-            "════════════════════════════════\n";
+    private static final String DIVIDER = "───────────────────────────────────────────────────────────────────────\n";
+    private static final String DOUBLE_DIVIDER = "═══════════════════════════════════════"
+            + "════════════════════════════════\n";
     private final Scanner scanner = new Scanner(System.in);
 
     /**
@@ -17,8 +18,8 @@ public class Ui {
      */
     public void showWelcome() {
         System.out.println(DOUBLE_DIVIDER + "Welcome to Duke!\n" + DOUBLE_DIVIDER);
-        System.out.println("Please enter the tasks (todo/event/deadline) to be added to the list.\n" +
-                "(Enter 'list' to view the list, or 'bye' to exit.)\n" + DIVIDER);
+        System.out.println("Please enter the tasks (todo/event/deadline) to be added to the list.\n"
+                + "(Enter 'list' to view the list, or 'bye' to exit.)\n" + DIVIDER);
     }
 
     /**
@@ -41,8 +42,8 @@ public class Ui {
      * @param taskList The TaskList with the Task added.
      */
     public void showTaskAdded(Task task, TaskList taskList) {
-        System.out.println("Got it. I have added this task:\n  " + task + "\n Now you have " +
-                taskList.size() + " tasks in the list.\n");
+        System.out.println("Got it. I have added this task:\n  " + task + "\n Now you have "
+                + taskList.size() + " tasks in the list.\n");
     }
 
     /**
@@ -51,8 +52,8 @@ public class Ui {
      * @param taskList The TaskList the Task is deleted from.
      */
     public void showTaskDeleted(Task task, TaskList taskList) {
-        System.out.println("Noted. I have removed this task:\n  " + task + "\n Now you have " +
-                taskList.size() + " tasks in the list.\n");
+        System.out.println("Noted. I have removed this task:\n  " + task + "\n Now you have "
+                + taskList.size() + " tasks in the list.\n");
     }
 
     /**
