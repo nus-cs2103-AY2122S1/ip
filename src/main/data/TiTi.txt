@@ -1,4 +1,3 @@
-[D][ ] project work (by: 10 Aug)
 [T][X] running
 [E][X] concert (at: 8pm)
 [E][ ] birthday (at: Jan 22 2022)
