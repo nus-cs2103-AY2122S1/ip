@@ -2,6 +2,9 @@ package duke;
 
 import duke.Deadline;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class TaskFactory {
     public static Task createTask(String taskStr) throws IllegalFormatException, EmptyDescriptionException, InvalidCommandException {
 
@@ -22,8 +25,9 @@ public class TaskFactory {
             try {
                 int slashIndex = taskStr.indexOf("/by");
                 String taskDescription = taskStr.substring(9, slashIndex - 1);
-                String deadline = taskStr.substring(slashIndex + 4);
-                return new Deadline(taskDescription, deadline);
+                String deadlineStr = taskStr.substring(slashIndex + 4);
+                LocalDate deadlineDate = LocalDate.parse(deadlineStr);
+                return new Deadline(taskDescription, deadlineDate);
             } catch (Exception e) {
                 throw new IllegalFormatException("Ja ammi se deadline banane ka format seekh ke aa!");
             }

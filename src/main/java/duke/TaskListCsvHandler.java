@@ -3,6 +3,8 @@ package duke;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class TaskListCsvHandler {
@@ -33,7 +35,7 @@ public class TaskListCsvHandler {
                                 ? data.indexOf("(at:")
                                 : data.indexOf("(by:");
                         description = data.substring(7, slashIndex - 1);
-                        dateString = data.substring(slashIndex + 4, data.length() - 1);
+                        dateString = data.substring(slashIndex + 5, data.length() - 1);
                     } else {
                         description = data.substring(7);
                     }
@@ -44,7 +46,8 @@ public class TaskListCsvHandler {
                             task.markAsDone();
                         TaskList.getTaskList().addTask(task);
                     } else if (taskType == 'D') {
-                        task = new Deadline(description, dateString);
+                        LocalDate deadlineDate = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("MMM dd yyyy"));
+                        task = new Deadline(description, deadlineDate);
                         if (done == 1)
                             task.markAsDone();
                         TaskList.getTaskList().addTask(task);
