@@ -1,10 +1,16 @@
 package dino.command;
 
+import java.time.format.DateTimeParseException;
+
 import dino.util.Storage;
 import dino.exception.*;
-import dino.task.*;
+import dino.task.Deadline;
+import dino.task.Event;
+import dino.task.Task;
+import dino.task.TaskList;
+import dino.task.ToDo;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+
 
 /**
  * Represents the command for which the user wants to add a task to the task list
@@ -12,8 +18,8 @@ import java.time.format.DateTimeParseException;
  */
 public class AddTaskCommand extends Command {
 
-    String taskString;
-    CMDTYPE taskType;
+    private String taskString;
+    private CMDTYPE taskType;
 
     /**
      * Constructs a AskTaskCommand object
@@ -31,13 +37,15 @@ public class AddTaskCommand extends Command {
      *
      * @param storage the local storage file
      * @param taskList the current task list to which the new task will be added
-     * @throws TimeNotSpecifiedException if the task is of type Deadline or Event but the time is not specified
+     * @throws TimeNotSpecifiedException if the task is of type Deadline or Event
+     * but the time is not specified
      * @throws EmptyTaskDescriptionException if the description of the task is empty
-     * @throws InvalidFormatException if the task is of type Deadline or Event but the time is not entered in the
-     * format of "yyyy-mm-dd"
+     * @throws InvalidFormatException if the task is of type Deadline or Event
+     * but the time is not entered in the format of "yyyy-mm-dd"
      */
     @Override
-    public void execute(Storage storage, TaskList taskList) throws TimeNotSpecifiedException, EmptyTaskDescriptionException, InvalidFormatException {
+    public void execute(Storage storage, TaskList taskList) throws
+            TimeNotSpecifiedException, EmptyTaskDescriptionException, InvalidFormatException {
         String description = getTaskDescription(this.taskString, this.taskType);
         Task task;
         switch (this.taskType) {
@@ -58,6 +66,9 @@ public class AddTaskCommand extends Command {
             taskList.addTask(task);
             break;
         }
+        default: {
+            break;
+        }
         }
     }
 
@@ -75,17 +86,20 @@ public class AddTaskCommand extends Command {
             throw new EmptyTaskDescriptionException();
         }
         switch (type) {
-            case TODO: {
-                return s.substring(5).trim();
+        case TODO: {
+            return s.substring(5).trim();
+        }
+        case DEADLINE:
+        case EVENT: {
+            if (s.contains("/by ") || s.contains("/at ")) {
+                return s.substring(type.toString().length() + 1, s.indexOf("/")).trim();
+            } else {
+                throw new TimeNotSpecifiedException(type.toString());
             }
-            case DEADLINE:
-            case EVENT: {
-                if (s.contains("/by ") || s.contains("/at ")) {
-                    return s.substring(type.toString().length() + 1, s.indexOf("/")).trim();
-                } else {
-                    throw new TimeNotSpecifiedException(type.toString());
-                }
-            }
+        }
+        default: {
+            break;
+        }
         }
         return s;
     }

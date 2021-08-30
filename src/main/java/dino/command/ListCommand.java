@@ -1,8 +1,9 @@
 package dino.command;
 
 import dino.exception.EmptyListException;
-import dino.util.Storage;
 import dino.task.TaskList;
+import dino.util.Storage;
+
 
 /**
  * Represents the command for which the user wants to view the list of tasks

@@ -1,6 +1,10 @@
 package dino.util;
 
-import dino.command.*;
+import dino.command.AddTaskCommand;
+import dino.command.Command;
+import dino.command.FindCommand;
+import dino.command.ListCommand;
+import dino.command.MarkCommand;
 import dino.exception.*;
 
 /**
@@ -20,29 +24,29 @@ public class Parser {
     public static Command parse(String input) throws InvalidInputException {
         Command.CMDTYPE type;
         try {
-            type= Command.CMDTYPE.valueOf(getFirstWord(input).toUpperCase());
+            type = Command.CMDTYPE.valueOf(getFirstWord(input).toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new InvalidInputException();
         }
         switch (type) {
-            case TODO:
-            case EVENT:
-            case DEADLINE: {
-                return new AddTaskCommand(input, type);
-            }
-            case DONE:
-            case DELETE: {
-                return new MarkCommand(input, type);
-            }
-            case LIST: {
-                return new ListCommand();
-            }
-            case FIND: {
-                return new FindCommand(input);
-            }
-            default: {
-                throw new InvalidInputException();
-            }
+        case TODO:
+        case EVENT:
+        case DEADLINE: {
+            return new AddTaskCommand(input, type);
+        }
+        case DONE:
+        case DELETE: {
+            return new MarkCommand(input, type);
+        }
+        case LIST: {
+            return new ListCommand();
+        }
+        case FIND: {
+            return new FindCommand(input);
+        }
+        default: {
+            throw new InvalidInputException();
+        }
         }
     }
 

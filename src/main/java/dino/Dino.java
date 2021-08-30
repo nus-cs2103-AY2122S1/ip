@@ -4,8 +4,8 @@ import dino.command.Command;
 import dino.exception.*;
 import dino.task.TaskList;
 import dino.util.Parser;
-import dino.util.Ui;
 import dino.util.Storage;
+import dino.util.Ui;
 
 /**
  * Represents a Personal Assistant ChatBot name Dino
@@ -35,10 +35,11 @@ public class Dino {
      */
     public void run() {
         ui.greeting();
-        while(!isExited) {
+        while (!isExited) {
             String input = ui.readNextLine();
-            if (input.equals("bye")) isExited = true;
-            else {
+            if (input.equals("bye")) {
+                isExited = true;
+            } else {
                 try {
                     Command cmd = Parser.parse(input);
                     cmd.execute(storage, taskList);
