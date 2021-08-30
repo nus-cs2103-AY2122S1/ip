@@ -10,6 +10,12 @@ public class TaskList implements Serializable {
     private Ui ui;
     private int currIndex = 1;
 
+    /**
+     * Creates a task list object.
+     *
+     * * @param list Lists of tasks as an Array List.
+     * @param ui UI to handle user interactions.
+     */
     public TaskList(ArrayList list, Ui ui) {
         this.taskList = list;
         this.ui = ui;
@@ -88,7 +94,14 @@ public class TaskList implements Serializable {
         }
     }
 
-    public TaskList findTasks(String str) throws InputError {
+    /**
+     * Returns tasks that have the keyword in the task list.
+     *
+     * @param str Keyword to search.
+     * @return A new TaskList with the tasks containing the keyword.
+     *
+     */
+    public TaskList findTasks(String str) {
         ArrayList<Task> resultList = new ArrayList<Task>();
         List<Task> foundArray = taskList.stream().filter(task -> task.printTask().contains(str))
                 .collect(Collectors.toList());

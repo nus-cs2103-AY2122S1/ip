@@ -20,7 +20,7 @@ public class Duke {
     public Duke() {
         storage = new Storage();
         ArrayList readList = storage.fileReader();
-        ui = new Ui(readList.size());
+        ui = new Ui();
         taskList = new TaskList(readList, ui);
         parser = new Parser(ui, taskList, storage);
     }
@@ -33,7 +33,7 @@ public class Duke {
         boolean byeMessage = false;
         ui.startMessage();
 
-        while(!byeMessage) {
+        while (!byeMessage) {
             String userInput = ui.startInput();
             int caseNum = parser.caseChecker(userInput);
 

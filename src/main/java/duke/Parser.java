@@ -56,7 +56,7 @@ public class Parser {
     private boolean doneChecker(String str) {
         boolean isDone = false;
         if (str.length() >= 4) {
-            isDone = str.substring(0,4).equals("done");
+            isDone = str.substring(0, 4).equals("done");
         }
         return isDone;
     }
@@ -70,7 +70,7 @@ public class Parser {
     private boolean todoChecker(String str) {
         boolean isTodo = false;
         if (str.length() >= 4) {
-            isTodo = str.substring(0,4).equals("todo");
+            isTodo = str.substring(0, 4).equals("todo");
         }
         return isTodo;
     }
@@ -84,7 +84,7 @@ public class Parser {
     private boolean deadlineChecker(String str) {
         boolean isDeadLine = false;
         if (str.length() >= 8) {
-            isDeadLine = str.substring(0,8).equals("deadline");
+            isDeadLine = str.substring(0, 8).equals("deadline");
         }
         return isDeadLine;
     }
@@ -98,7 +98,7 @@ public class Parser {
     private boolean eventChecker(String str) {
         boolean isEvent = false;
         if (str.length() >= 5) {
-            isEvent = str.substring(0,5).equals("event");
+            isEvent = str.substring(0, 5).equals("event");
         }
         return isEvent;
     }
@@ -112,7 +112,7 @@ public class Parser {
     private boolean deleteChecker(String str) {
         boolean isDelete = false;
         if (str.length() >= 6) {
-            isDelete = str.substring(0,6).equals("delete");
+            isDelete = str.substring(0, 6).equals("delete");
         }
         return isDelete;
     }
@@ -120,7 +120,7 @@ public class Parser {
     private boolean findChecker(String str) {
         boolean isFind = false;
         if (str.length() >= 4) {
-            isFind = str.substring(0,4).equals("find");
+            isFind = str.substring(0, 4).equals("find");
         }
         return isFind;
     }
@@ -249,34 +249,34 @@ public class Parser {
      */
     public void caseHandler(int caseNum, String input, TaskList taskList) throws InputError {
         switch (caseNum) {
-            case 2:
-                listInput(taskList);
-                break;
-            case 3:
-                doneInput(input, taskList);
-                storage.fileSaver(taskList.currList());
-                break;
-            case 4:
-                todoInput(input, taskList);
-                storage.fileSaver(taskList.currList());
-                break;
-            case 5:
-                deadlineInput(input, taskList);
-                storage.fileSaver(taskList.currList());
-                break;
-            case 6:
-                eventInput(input, taskList);
-                storage.fileSaver(taskList.currList());
-                break;
-            case 7:
-                deleteInput(input, taskList);
-                storage.fileSaver(taskList.currList());
-                break;
-            case 8:
-                findInput(input, taskList);
-                break;
-            default:
-                ui.invalidInput();
+        case 2:
+            listInput(taskList);
+            break;
+        case 3:
+            doneInput(input, taskList);
+            storage.fileSaver(taskList.currList());
+            break;
+        case 4:
+            todoInput(input, taskList);
+            storage.fileSaver(taskList.currList());
+            break;
+        case 5:
+            deadlineInput(input, taskList);
+            storage.fileSaver(taskList.currList());
+            break;
+        case 6:
+            eventInput(input, taskList);
+            storage.fileSaver(taskList.currList());
+            break;
+        case 7:
+            deleteInput(input, taskList);
+            storage.fileSaver(taskList.currList());
+            break;
+        case 8:
+            findInput(input, taskList);
+            break;
+        default:
+            ui.invalidInput();
         }
     }
 }

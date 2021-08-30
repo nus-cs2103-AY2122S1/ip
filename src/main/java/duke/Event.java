@@ -4,7 +4,7 @@ package duke;
  * Represents an Event task.
  * @author Nikki
  */
-public class Event extends Task{
+public class Event extends Task {
 
     private String timing;
 

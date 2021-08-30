@@ -30,7 +30,7 @@ public class Task implements Serializable {
      * @return String representation of this Task.
      */
     String printTask() {
-        String result = "";
+        String result;
         if (complete) {
             result = "[X] ";
         } else {

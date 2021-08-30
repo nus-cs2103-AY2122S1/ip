@@ -8,10 +8,10 @@ public class ToDo extends Task {
 
     @Override
     public String printTask() {
-         String result = "";
-        if(this.complete) {
+        String result = "";
+        if (this.complete) {
             result = "[T][X] ";
-         } else {
+        } else {
             result = "[T][ ] ";
         }
         return result + this.task;

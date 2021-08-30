@@ -4,17 +4,19 @@ import java.util.Scanner;
 
 public class Ui {
 
-    int tasks;
-
-    public Ui(int tasks) {
-        this.tasks = tasks;
-    }
-
+    /**
+     * Displays start message.
+     */
     public void startMessage() {
         String greeting = "Why hello there! It's Duke here!\n" + "How can I help you today master?";
         System.out.println(greeting);
     }
 
+    /**
+     * Initialises the user input.
+     *
+     * @return User input.
+     */
     public String startInput() {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -25,10 +27,9 @@ public class Ui {
         System.out.println("See ya again later!");
     }
 
-    public void setItems(int num) {
-        tasks = num;
-    }
-
+    /**
+     * Returns an error message for the user.
+     */
     public void invalidInput() {
         try {
             throw new InputError("Invalid Input");

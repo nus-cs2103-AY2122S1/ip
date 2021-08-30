@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * @author Nikki
  */
 
-public class DeadLine extends Task{
+public class DeadLine extends Task {
 
     private String deadLine;
     private LocalDateTime dateTime;

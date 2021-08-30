@@ -4,7 +4,7 @@ package duke;
  * Custom Error when users enters an invalid input.
  * @author Nikki
  */
-public class InputError extends Exception{
+public class InputError extends Exception {
 
     /**
      * Creates an InputError.
