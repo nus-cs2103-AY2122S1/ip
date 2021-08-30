@@ -1,12 +1,11 @@
 import java.io.File;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import addon.Tasklist;
 import addon.Parser;
 import addon.Storage;
+import addon.Tasklist;
 import addon.Ui;
 
 /**
@@ -16,6 +15,9 @@ import addon.Ui;
 public class Sados {
     private Parser parse;
 
+    /**
+     * Sados constructor.
+     */
     public Sados() {
         try {
             File saveFile = new File("./save.txt");
@@ -50,14 +52,17 @@ public class Sados {
             } else {
                 try {
                     parse.updateList(str);
-                } catch (Ui.IncorrectFormatException e){
+                } catch (Ui.IncorrectFormatException e) {
                     e.printStackTrace();
                 }
             }
         } while (!away);
     }
 
-    public static void main(String[] args) {
+    /**
+     * Initialises a new Sados, and starts the program by calling run().
+     */
+    public static void main() {
         Sados currentlist = new Sados();
         currentlist.run();
     }
