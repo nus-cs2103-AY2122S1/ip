@@ -1,13 +1,12 @@
-package duke.parser;
+package brobot.parser;
 
-import duke.exception.DukeException;
-import duke.exception.InvalidCommandException;
-import duke.exception.InvalidCommandParameterException;
-import duke.exception.NoSuchTaskException;
-import java.io.IOException;
-import duke.task.*;
-import duke.UI;
-import duke.Storage;
+import brobot.exception.BroException;
+import brobot.exception.InvalidCommandException;
+import brobot.exception.InvalidCommandParameterException;
+import brobot.exception.NoSuchTaskException;
+import brobot.task.*;
+import brobot.UI;
+import brobot.Storage;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -17,7 +16,7 @@ import java.util.Locale;
 /**
  * Represents the input parser of the Duke Program.
  */
-public class DukeParser {
+public class BroParser {
     TaskList list;
     Storage storage;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.ENGLISH);
@@ -27,7 +26,7 @@ public class DukeParser {
      * @param list The list to handle.
      * @param storage The storage to handle.
      */
-    public DukeParser(TaskList list, Storage storage) {
+    public BroParser(TaskList list, Storage storage) {
         this.list = list;
         this.storage = storage;
     }
@@ -35,9 +34,9 @@ public class DukeParser {
     /**
      * Takes in raw input of user, processes it and execute the  appropriate action.
      * @param rawInput
-     * @throws DukeException
+     * @throws BroException
      */
-    public void parse(String rawInput) throws DukeException {
+    public void parse(String rawInput) throws BroException {
         Scanner inputScanner = new Scanner(rawInput);
         String checkForKeyword = inputScanner.next();
 

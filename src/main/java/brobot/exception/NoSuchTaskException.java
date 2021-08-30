@@ -1,13 +1,13 @@
-package duke.exception;
+package brobot.exception;
 
 /**
  * Represents an exception caused when no such task is found for a command that needs a task number
  */
-public class NoSuchTaskException extends DukeException {
+public class NoSuchTaskException extends BroException {
     /**
      * Constructor for the exception.
      */
     public NoSuchTaskException() {
-        super("Hey, there is no such task!");
+        super("Ey bro, no such task lah!");
     }
 }

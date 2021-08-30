@@ -1,14 +1,14 @@
-package duke.exception;
+package brobot.exception;
 
 /**
  * Represents all exceptions specific to the Duke program.
  */
-public class DukeException extends Exception {
+public class BroException extends Exception {
     /**
      * Constructor for the exception.
      * @param errorMessage The error message;
      */
-    public DukeException(String errorMessage) {
+    public BroException(String errorMessage) {
         super(errorMessage);
     }
 }

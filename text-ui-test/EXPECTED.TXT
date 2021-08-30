@@ -1,49 +1,49 @@
-Hello! I'm Duke
-What can I do for you?
+Hey Bro! I'm Brobot
+What can I do for you bro?
 
 
-Oops, unfortunately i am not yet smart enough to understand what you are saying
+Eh bro, I don't understand what you are saying lah
 
 
-Got it. I've added this task:
+Alright bro. I've added this task:
 [T][ ] read book
-Now you have 1 task(s) in the list.
+Now you have 1 task(s) in the list bro.
 
 
-Got it. I've added this task:
+Alright bro. I've added this task:
 [T][ ] sleep
-Now you have 2 task(s) in the list.
+Now you have 2 task(s) in the list bro.
 
 
-Got it. I've added this task:
+Alright bro. I've added this task:
 [D][ ] eat lunch  (by: Wed, May 12,2021 05:00PM)
-Now you have 3 task(s) in the list.
+Now you have 3 task(s) in the list bro.
 
 
-Nice! I've marked this task as done:
+Good job bro! I've marked this task as done:
  [T][X] sleep
 
 
-Got it. I've added this task:
+Alright bro. I've added this task:
 [D][ ] sleep  (by: Fri, Jul 2,2021 11:00PM)
-Now you have 4 task(s) in the list.
+Now you have 4 task(s) in the list bro.
 
 
-Got it. I've added this task:
+Alright bro. I've added this task:
 [E][ ] complete ip  (at: Sun, Aug 15,2021 11:59PM)
-Now you have 5 task(s) in the list.
+Now you have 5 task(s) in the list bro.
 
 
-Got it. I've added this task:
+Alright bro. I've added this task:
 [E][ ] sleep  (at: Thu, Aug 19,2021 12:00AM)
-Now you have 6 task(s) in the list.
+Now you have 6 task(s) in the list bro.
 
 
-Nice! I've marked this task as done:
+Good job bro! I've marked this task as done:
  [D][X] eat lunch  (by: Wed, May 12,2021 05:00PM)
 
 
-Here are the tasks in your list:
+Alright here are the tasks in your list bro:
 1.[T][ ] read book
 2.[T][X] sleep
 3.[D][X] eat lunch  (by: Wed, May 12,2021 05:00PM)
@@ -52,27 +52,27 @@ Here are the tasks in your list:
 6.[E][ ] sleep  (at: Thu, Aug 19,2021 12:00AM)
 
 
-Nice! I've marked this task as done:
+Good job bro! I've marked this task as done:
  [E][X] complete ip  (at: Sun, Aug 15,2021 11:59PM)
 
 
-Hey, there is no such task!
+Ey bro, no such task lah!
 
 
-Ok, I have removed the following task:
+Ok Bro, I removed the following task:
  [D][X] eat lunch  (by: Wed, May 12,2021 05:00PM)
-Now you have 5 task(s) in the list.
+Now you have 5 task(s) in the list bro.
 
 
-Ok, I have removed the following task:
+Ok Bro, I removed the following task:
  [T][ ] read book
-Now you have 4 task(s) in the list.
+Now you have 4 task(s) in the list bro.
 
 
-Here are the tasks in your list:
+Alright here are the tasks in your list bro:
 1.[T][X] sleep
 2.[D][ ] sleep  (by: Fri, Jul 2,2021 11:00PM)
 3.[E][X] complete ip  (at: Sun, Aug 15,2021 11:59PM)
 4.[E][ ] sleep  (at: Thu, Aug 19,2021 12:00AM)
 
-Bye. Hope to see you again soon!
+Bye bro. Hope to see you again bro!

@@ -1,8 +1,6 @@
-package duke.task;
+package brobot.task;
 
-import duke.Storage;
-import duke.exception.DukeException;
-import duke.parser.DukeParser;
+import brobot.exception.BroException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +15,7 @@ public class TaskListTest {
             list.addTask(new Todo("test"));
             list.markDone(2);
             fail();
-        } catch (DukeException e) {
+        } catch (BroException e) {
             assertEquals("Hey, there is no such task!", e.getMessage());
         }
     }

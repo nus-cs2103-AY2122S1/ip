@@ -1,19 +1,19 @@
-import duke.parser.DukeParser;
-import duke.UI;
-import duke.exception.DukeException;
+import brobot.parser.BroParser;
+import brobot.UI;
+import brobot.exception.BroException;
 
-import duke.task.TaskList;
-import duke.Storage;
+import brobot.task.TaskList;
+import brobot.Storage;
 
 /**
  * Represents the main Duke Program, a task manager.
  */
-public class Duke {
+public class Brobot {
     public static void main(String[] args) {
 
             Storage storage = new Storage("./data/list1.txt");
             TaskList list = storage.readList();
-            DukeParser parser = new DukeParser(list, storage);
+            BroParser parser = new BroParser(list, storage);
 
             UI.printGreeting();
             String input = UI.getUserInput();
@@ -21,7 +21,7 @@ public class Duke {
             while (!input.equals("bye")) {
                 try {
                     parser.parse(input);
-                } catch (DukeException e) {
+                } catch (BroException e) {
                     UI.printError(e);
                 } finally {
                     input = UI.getUserInput();

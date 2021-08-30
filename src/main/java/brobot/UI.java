@@ -1,16 +1,16 @@
-package duke;
+package brobot;
 
 import java.util.Scanner;
 
-import duke.task.TaskList;
-import duke.task.Task;
+import brobot.task.TaskList;
+import brobot.task.Task;
 
 /**
  * Represents the User interface of the Duke Program. Interfaces through the terminal.
  */
 public class UI {
-    protected static String greetingText = "Hello! I'm Duke\nWhat can I do for you?\n";
-    protected static String byeText = "Bye. Hope to see you again soon!";
+    protected static String greetingText = "Hey Bro! I'm Brobot\nWhat can I do for you bro?\n";
+    protected static String byeText = "Bye bro. Hope to see you again bro!";
 
     protected static Scanner scanner = new Scanner(System.in);
 
@@ -42,7 +42,7 @@ public class UI {
      * @param list The TaskList to be printed.
      */
     public static void printList(TaskList list) {
-        String s = "Here are the tasks in your list:" + list.toString();
+        String s = "Alright here are the tasks in your list bro:" + list.toString();
         System.out.println(formatWithSpace(s));
     }
 
@@ -52,7 +52,7 @@ public class UI {
      * @return The formatted string.
      */
     public static String listTaskAmount(int count) {
-        return("\nNow you have " + count + " task(s) in the list.");
+        return("\nNow you have " + count + " task(s) in the list bro.");
     }
 
     /**
@@ -62,7 +62,7 @@ public class UI {
     public static void printTaskAdded(TaskList list) {
         int taskAmount = list.getTaskAmount();
         System.out.println(
-                formatWithSpace("Got it. I've added this task:\n"
+                formatWithSpace("Alright bro. I've added this task:\n"
                         + list.getTask(taskAmount)
                         + listTaskAmount(taskAmount)
                 )
@@ -75,7 +75,7 @@ public class UI {
      * @param task The specified task.
      */
     public static void printTaskDone(Task task) {
-        System.out.println(formatWithSpace("Nice! I've marked this task as done:\n " + task));
+        System.out.println(formatWithSpace("Good job bro! I've marked this task as done:\n " + task));
     }
 
     /**
@@ -85,7 +85,7 @@ public class UI {
      */
     public static void printTaskDeleted(Task task,TaskList list) {
         System.out.println(
-                formatWithSpace("Ok, I have removed the following task:\n "
+                formatWithSpace("Ok Bro, I removed the following task:\n "
                     + task
                     + listTaskAmount(list.getTaskAmount())));
     }
@@ -111,7 +111,7 @@ public class UI {
      * @param list The list to be printed.
      */
     public static void printSearchList(TaskList list) {
-        String s = "Here are the matching tasks in your list:" + list.toString();
+        String s = "Here are the matching tasks in your list bro:" + list.toString();
         System.out.println(formatWithSpace(s));
     }
 }
