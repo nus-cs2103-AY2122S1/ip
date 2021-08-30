@@ -1,11 +1,13 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.File;
 import java.nio.file.Files;
-import java.io.FileWriter;
 import java.nio.file.Paths;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+
 
 public class CompilationOfFiles {
     private static String filepath;
