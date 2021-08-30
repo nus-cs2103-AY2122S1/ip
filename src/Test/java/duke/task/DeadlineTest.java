@@ -1,10 +1,14 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.DateTimeException;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.EmptyFieldException;
 import duke.exception.InvalidCommandException;
-import org.junit.jupiter.api.Test;
-import java.time.DateTimeException;
-import static org.junit.jupiter.api.Assertions.*;
 
 class DeadlineTest {
 
@@ -43,20 +47,20 @@ class DeadlineTest {
         }
 
         //invalid date
-        assertThrows(DateTimeException.class,
-                () -> new Deadline("read book", "2021-13-13").saveToFile());
+        assertThrows(DateTimeException.class, () ->
+                new Deadline("read book", "2021-13-13").saveToFile());
 
         //invalid time
-        assertThrows(DateTimeException.class,
-                () -> new Deadline("read book", "25:00").saveToFile());
+        assertThrows(DateTimeException.class, () ->
+                new Deadline("read book", "25:00").saveToFile());
 
         //non 24hr time
-        assertThrows(DateTimeException.class,
-                () -> new Deadline("read book", "2 pm").saveToFile());
+        assertThrows(DateTimeException.class, () ->
+                new Deadline("read book", "2 pm").saveToFile());
 
         //invalid date and time
-        assertThrows(DateTimeException.class,
-                () -> new Deadline("read book", "2021-13-13 25:00").saveToFile());
+        assertThrows(DateTimeException.class, () ->
+                new Deadline("read book", "2021-13-13 25:00").saveToFile());
 
     }
 
@@ -95,20 +99,20 @@ class DeadlineTest {
         }
 
         //invalid date
-        assertThrows(DateTimeException.class,
-                () -> new Deadline("read book", "2021-13-13").toString());
+        assertThrows(DateTimeException.class, () ->
+                new Deadline("read book", "2021-13-13").toString());
 
         //invalid time
-        assertThrows(DateTimeException.class,
-                () -> new Deadline("read book", "25:00").toString());
+        assertThrows(DateTimeException.class, () ->
+                new Deadline("read book", "25:00").toString());
 
         //non 24hr time
-        assertThrows(DateTimeException.class,
-                () -> new Deadline("read book", "2 pm").toString());
+        assertThrows(DateTimeException.class, () ->
+                new Deadline("read book", "2 pm").toString());
 
         //invalid date and time
-        assertThrows(DateTimeException.class,
-                () -> new Deadline("read book", "2021-13-13 25:00").toString());
+        assertThrows(DateTimeException.class, () ->
+                new Deadline("read book", "2021-13-13 25:00").toString());
 
     }
 
