@@ -40,14 +40,14 @@ public class List {
      * @param input the command given.
      * @throws IOException If the file cannot be read/found.
      */
-    public void addTask(String input, Parser parser, Storage storage) throws IOException {
+    public String addTask(String input, Parser parser, Storage storage) throws IOException {
         if (input.equals("list")) {
-            showList();
+            return showList();
         } else {
             try {
-                parser.process(input, this, storage);
+                return parser.process(input, this, storage);
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return (e.getMessage());
             }
         }
     }
@@ -56,10 +56,12 @@ public class List {
      * Display the current content of the list.
      * Ordered by creation time.
      */
-    public void showList() {
+    public String showList() {
+        String result = "";
         for (int i = 0; i < todos.size(); i++) {
-            System.out.println(i + 1 + ". " + todos.get(i).toString());
+            result += (i + 1 + ". " + todos.get(i).toString() + "\n");
         }
+        return result;
     }
 
     /**
@@ -68,14 +70,14 @@ public class List {
      * @param array The input command.
      * @throws DukeDoneException If the number of entry is not specified in the command.
      */
-    public void done(String[] array) throws DukeDoneException {
+    public String done(String[] array) throws DukeDoneException {
         if (array.length == 1) {
             throw new DukeDoneException();
         }
         int index = parseInt(array[1]);
         Task temp = todos.get(index - 1);
         temp.markAsDone();
-        System.out.println("Nice! I've marked this task as done:\n" + temp);
+        return "Nice! I've marked this task as done:\n" + temp;
     }
 
     /**
@@ -83,10 +85,10 @@ public class List {
      *
      * @param array The input command.
      */
-    public void delete(String[] array) {
+    public String delete(String[] array) {
         int index = parseInt(array[1]);
         Task temp = todos.remove(index - 1);
-        System.out.println("Noted. I've removed this task:\n"
+        return ("Noted. I've removed this task:\n"
                 + temp
                 + "\nNow you have "
                 + todos.size()
@@ -100,8 +102,8 @@ public class List {
      *
      * @param item The new Task created.
      */
-    public void echo(Task item) {
-        System.out.println("Got it. I've added this task:\n"
+    public String echo(Task item) {
+        return ("Got it. I've added this task:\n"
                 + item
                 + "\nNow you have "
                 + todos.size()
@@ -115,16 +117,17 @@ public class List {
      *
      * @param input The keyword to be searched.
      */
-    public void search(String input) {
+    public String search(String input) {
         ArrayList<Task> result = new ArrayList<>();
         for (int i = 0; i < todos.size(); i++) {
             if (todos.get(i).getName().contains(input)) {
                 result.add(todos.get(i));
             }
         }
-        System.out.println("Here are the matching tasks in your list:");
+        String text = "Here are the matching tasks in your list:";
         for (int i = 0; i < result.size(); i++) {
-            System.out.println(i + 1 + ". " + result.get(i).toString());
+            text += ("\n" + (i + 1) + ". " + result.get(i).toString());
         }
+        return text;
     }
 }

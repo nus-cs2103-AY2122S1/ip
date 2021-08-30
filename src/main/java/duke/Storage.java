@@ -45,13 +45,17 @@ public class Storage {
      *
      * @throws IOException If the file cannot be read/found.
      */
-    public void writeToFile(List list) throws IOException {
-        FileWriter myWriter = new FileWriter("filename.txt");
+    public void writeToFile(List list) {
+        try {
+            FileWriter myWriter = new FileWriter("filename.txt");
 
-        for (int i = 0; i < list.getTodos().size(); i++) {
-            myWriter.write(list.getTodos().get(i).toDataString());
-            myWriter.write(System.lineSeparator());
+            for (int i = 0; i < list.getTodos().size(); i++) {
+                myWriter.write(list.getTodos().get(i).toDataString());
+                myWriter.write(System.lineSeparator());
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("ERROR!");
         }
-        myWriter.close();
     }
 }

@@ -14,21 +14,21 @@ public class Parser {
      * @throws DukeException If input do not meet the requirements.
      * @throws IOException If the file cannot be read/found.
      */
-    public void process(String input, List list, Storage storage) throws DukeException, IOException {
+    public String process(String input, List list, Storage storage) throws DukeException, IOException {
         String[] split = input.split(" ", 2);
         if (split[0].equals("done")) {
-            list.done(split);
+            return list.done(split);
         } else if (split[0].equals("delete")) {
-            list.delete(split);
+            return list.delete(split);
         } else if (split[0].equals("find")) {
-            list.search(split[1]);
+            return list.search(split[1]);
         } else if (split[0].equals("todo")) {
             if (split.length == 1) {
                 throw new DukeTodoException();
             }
             Task newItem = new Todo(split[1]);
             list.getTodos().add(newItem);
-            list.echo(newItem);
+            return list.echo(newItem);
         } else if (split[0].equals("deadline")) {
             if (split.length == 1) {
                 throw new DukeDeadlineException();
@@ -36,9 +36,9 @@ public class Parser {
             try {
                 Task newItem = new Deadline(split[1]);
                 list.getTodos().add(newItem);
-                list.echo(newItem);
+                return list.echo(newItem);
             } catch (DateTimeException e) {
-                System.out.println("Please enter the date in yyyy-mm-dd format!");
+                return ("Please enter the date in yyyy-mm-dd format!");
             }
         } else if (split[0].equals("event")) {
             if (split.length == 1) {
@@ -46,10 +46,9 @@ public class Parser {
             }
             Task newItem = new Event(split[1]);
             list.getTodos().add(newItem);
-            list.echo(newItem);
+            return list.echo(newItem);
         } else {
             throw new DukeException();
         }
-        storage.writeToFile(list);
     }
 }
