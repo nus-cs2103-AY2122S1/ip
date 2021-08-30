@@ -3,4 +3,5 @@ deadline 23 /by 2021-08-23
 event 24 /At 2021-08-24
 /done 1
 event 24 /At 2021-08-24
+/find 23
 /check 2021-08-24
