@@ -1,14 +1,12 @@
 package duke.tasklist;
 
 import java.io.IOException;
-
-import java.util.List;
-import java.util.ArrayList;
-
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.storage.Storage;
@@ -136,7 +134,7 @@ public class TaskList {
         String fileName = "list.txt";
         try {
             storage.createFileIfNotExists(fileName);
-            Path path = Paths.get(Storage.directory + "/" + fileName);
+            Path path = Paths.get(Storage.DIRECTORY + "/" + fileName);
             Files.write(path, listItems(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();

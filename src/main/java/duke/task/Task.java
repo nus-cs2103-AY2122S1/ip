@@ -1,9 +1,9 @@
 package duke.task;
 
 public abstract class Task {
+    public static final String DONE_STATUS_INDICATOR = "X";
     private final String name;
     private final boolean isDone;
-    public static final String DONE_STATUS_INDICATOR = "X";
 
     public Task(String name) {
         this.name = name;
