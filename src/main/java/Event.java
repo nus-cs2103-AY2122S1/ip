@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 public class Event extends Task {
 
     protected String at;
-    protected String date;
+    protected String date = "";
 
     public Event(String description, String at) throws DukeException {
         super(description);
@@ -26,7 +26,7 @@ public class Event extends Task {
         if (at.isEmpty() || at == "" || at == " ") {
             throw new DukeException("☹ OOPS!!! The time of the event must be indicated.");
         } else {
-            this.at = date;
+            this.at = this.date;
         }
     }
 
