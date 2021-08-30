@@ -1,3 +1,15 @@
+package duke;
+
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddToDoCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.PrintCommand;
+
 public class Parser {
     public Command parse(String commandLine) throws DukeException {
         String[] commandLineParts = commandLine.split("\\s+", 2);
@@ -21,7 +33,7 @@ public class Parser {
         Command command;
         int taskNum;
         String taskDescription;
-        String taskDetails;
+        String taskInfo;
         String date;
 
         switch (commandType) {
@@ -44,12 +56,12 @@ public class Parser {
             command = new AddToDoCommand(commandType, taskDescription);
             break;
         case "deadline":
-            taskDetails = getTaskInfoFromDeadlineCommand(commandInfo);
-            command = new AddDeadlineCommand(commandType, taskDetails);
+            taskInfo = getTaskInfoFromDeadlineCommand(commandInfo);
+            command = new AddDeadlineCommand(commandType, taskInfo);
             break;
         case "event":
-            taskDetails = getTaskInfoFromEventCommand(commandInfo);
-            command = new AddEventCommand(commandType, taskDetails);
+            taskInfo = getTaskInfoFromEventCommand(commandInfo);
+            command = new AddEventCommand(commandType, taskInfo);
             break;
         case "print":
             date = getDateFromPrintCommand(commandInfo);

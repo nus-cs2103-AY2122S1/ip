@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Event extends TaskWithDateTime {
     public Event(TaskType type, String description, String dateTimeInput) {
         super(type, description, dateTimeInput);

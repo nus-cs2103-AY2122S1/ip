@@ -1,3 +1,13 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+import duke.task.TaskType;
+import duke.task.ToDo;
+
 import java.io.IOException;
 
 public class AddToDoCommand extends AddCommand {

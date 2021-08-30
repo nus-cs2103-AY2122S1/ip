@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Task;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
@@ -19,7 +27,7 @@ public class DeleteCommand extends Command {
     }
 
     public void deleteTask(TaskList taskList, Ui ui) throws DukeException {
-        if (taskNum >= 1 && taskNum <= taskList.size()) {
+        if (taskNum > 0 && taskNum <= taskList.size()) {
             Task taskDeleted = taskList.remove(taskNum - 1);
 
             String response = ui.taskDeletedMessage(taskDeleted)

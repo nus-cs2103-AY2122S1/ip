@@ -1,13 +1,23 @@
+package duke.command;
+
+import duke.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskType;
+
 import java.io.IOException;
 
 public class AddEventCommand extends AddCommand {
     private String taskDateTime;
 
     public AddEventCommand(String type, String taskInfo) {
-        super(type, taskInfo.split("/", 2)[0]);
+        super(type, taskInfo.split("/", 2)[0].trim());
 
-        String taskAtDateTime = taskInfo.split("/", 2)[1];
-        taskDateTime = taskAtDateTime.split("\\s+", 2)[1];
+        String taskAtDateTime = taskInfo.split("/", 2)[1].trim();
+        taskDateTime = taskAtDateTime.split("\\s+", 2)[1].trim();
     }
 
     @Override
