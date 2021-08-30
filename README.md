@@ -1,9 +1,10 @@
 # TiTi Catbot
 
 > <h3>"Meow Meow Meowww~ ฅ^•ﻌ•^ฅ" – TiTi </h3> 
-> <h6>(~~and yes whatever TiTi says shall be correct~~)</h5>
+> <h6> (<strike>and yes whatever TiTi says shall be correct</strike>)</h5> 
 
 <br> 
+
 TiTi Catbot frees your mind of having to remember things you need to do. It's, 
 * text-based
 * SUPER easy to learn
@@ -14,7 +15,7 @@ All you need to do is,
 1. download it from [here](https://github.com/zhing22/ip).
 2. and start chatting with TiTi! 🐾
 
-And it is <strong body style="color: red;">FREE</strong>!!!
+And it is __FREE__!!!
 
 <hr> 
 
