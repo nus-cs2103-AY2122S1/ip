@@ -1,17 +1,17 @@
 package duke.task;
 
-import duke.*;
-import duke.command.CommandKeyword;
-import duke.exception.DukeException;
-import duke.exception.IncompleteTaskDescriptionException;
-import duke.exception.InvalidCommandException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import duke.Ui;
+import duke.command.CommandKeyword;
+import duke.exception.DukeException;
+import duke.exception.IncompleteTaskDescriptionException;
+import duke.exception.InvalidCommandException;
 
 /**
  * Contains the task list. It has operations to change the tasks in the list.
@@ -92,7 +92,7 @@ public class TaskList {
                 throw new IncompleteTaskDescriptionException("deadline");
             }
         case EVENT:
-            if(description.matches("[^ ].* /at *[^ ].* [^ ].*")) {
+            if (description.matches("[^ ].* /at *[^ ].* [^ ].*")) {
                 int separator = description.indexOf("/at");
                 String taskDetail = description.substring(0, separator).trim();
                 String at = description.substring(separator + 3).trim();
