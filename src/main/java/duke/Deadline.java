@@ -1,14 +1,17 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Deadline extends Task {
     private boolean done;
     private String taskString;
-    private String deadline;
+    private LocalDate deadline;
 
     public Deadline(String taskString, String deadline) {
         this.taskString = taskString;
         this.done = false;
-        this.deadline = deadline;
+        this.deadline = LocalDate.parse(deadline);
     }
 
     public void markAsDone() {
@@ -17,9 +20,11 @@ public class Deadline extends Task {
 
     public String getTaskString() {
         if(done) {
-            return "[D][X] " + this.taskString + " (by: " + this.deadline + ")";
+            return "[D][X] " + this.taskString + " (by: " +
+                    this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         } else {
-            return "[D][ ] " + this.taskString + " (by: " + this.deadline + ")";
+            return "[D][ ] " + this.taskString + " (by: " +
+                    this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }
     }
 }
