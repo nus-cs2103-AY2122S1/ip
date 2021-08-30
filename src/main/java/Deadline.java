@@ -2,8 +2,6 @@ import org.json.simple.JSONObject;
 
 public class Deadline extends Task {
 
-    private boolean isCompleted = false;
-    private String description;
     private String by;
 
     public Deadline(String name, String by) {
@@ -11,9 +9,16 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public Deadline(String name, String by, boolean isCompleted) {
+        super(name);
+        this.by = by;
+        this.isCompleted = isCompleted;
+    }
+
     @Override
     public String toString() {
-        return "[D][ ]" + super.toString() + " (by: " + by + ")";
+        return String.format("[D]%s %s %s", isCompleted ? "[X]" : "[ ]", description,
+                "(by: " + by + ")");
     }
 
     @Override

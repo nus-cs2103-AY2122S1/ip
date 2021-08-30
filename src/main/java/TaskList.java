@@ -5,8 +5,8 @@ public class TaskList {
 
     private ArrayList<Task> list;
 
-    public TaskList() {
-        list = new ArrayList<>();
+    public TaskList(ArrayList<Task> tasks) {
+        list = tasks;
     }
 
     public Task get(int index) {
@@ -19,6 +19,10 @@ public class TaskList {
 
     public void delete(int i) throws NoSuchTaskException {
         list.remove(i);
+    }
+
+    public int size() {
+        return list.size();
     }
 
     public void forEach(Consumer<? super Task> action) {

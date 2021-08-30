@@ -2,8 +2,8 @@ import org.json.simple.JSONObject;
 
 public class Task {
 
-    private boolean isCompleted;
-    private String description;
+    protected boolean isCompleted;
+    protected String description;
 
     public Task(String description) {
         this.isCompleted = false;
@@ -31,14 +31,11 @@ public class Task {
     }
 
     public String toString() {
-        String output = description;
-        if (this.isCompleted) {
-            output = output.replaceFirst(" ", "X");
-        }
-        return output;
+        return description;
     }
 
     public JSONObject toJsonObject() {
+        // OOP!
         return null;
     }
 
@@ -47,18 +44,20 @@ public class Task {
         String taskType = (String) obj.get("type");
         String description = (String) obj.get("description");
         boolean isCompleted = (boolean) obj.get("isCompleted");
+        String by = (String) obj.get("by");
+        String at = (String) obj.get("at");
         switch (taskType) {
             case "deadline":
-                task = new Deadline(description, (String) obj.get("by"));
+                task = new Deadline(description, by, isCompleted);
                 break;
             case "event":
-                task = new Event(description, (String) obj.get("by"));
+                task = new Event(description, at, isCompleted);
                 break;
             case "todo":
-                task = new ToDo(description);
+                task = new ToDo(description, isCompleted);
                 break;
             default:
-                throw new InvalidInputException("Wrong input!");
+                throw new InvalidInputException("Invalid input!");
         }
         return task;
     }
