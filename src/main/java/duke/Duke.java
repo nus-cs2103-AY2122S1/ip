@@ -12,12 +12,12 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    private boolean exit;
+    private boolean isExit;
 
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
-        this.exit = false;
+        this.isExit = false;
         try {
             taskList = storage.load();
         } catch (FileNotFoundException e) {
@@ -30,8 +30,7 @@ public class Duke {
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
 
-        while (!exit) {
-//            String userInput = ui.takeInput();
+        while (!isExit) {
             if (sc.hasNextLine()) {
                 Command cmd = parser.parse(sc.nextLine());
                 if (cmd != null) {
@@ -45,7 +44,7 @@ public class Duke {
     }
 
     public void triggerExit() {
-        exit = true;
+        isExit = true;
     }
 
     /**
