@@ -32,6 +32,6 @@ public class Event extends Task {
         } else {
             result = "[E][ ] ";
         }
-        return result + super.task + "(at: " + this.timing + ")";
+        return result + super.task + " (at: " + this.timing + ")";
     }
 }
