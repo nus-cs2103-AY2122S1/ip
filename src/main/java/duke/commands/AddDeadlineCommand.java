@@ -52,30 +52,25 @@ public class AddDeadlineCommand extends Command {
     /**
      * Executes the command. Adds deadline to task list. Updates the save file.
      *
-     * @param tasks   the task list.
-     * @param storage the storage of the programme.
+     * @param tasks the task list.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
-        try {
-            Deadline deadline;
-            if (date == null) {
-                deadline = new Deadline(super.getDesc(), by, false);
-            } else {
-                deadline = new Deadline(super.getDesc(), by, false, date);
-            }
-            tasks.add(deadline);
-            storage.add(deadline);
+    public void execute(TaskList tasks) throws IOException {
+        Deadline deadline;
+        if (date == null) {
+            deadline = new Deadline(super.getDesc(), by, false);
+        } else {
+            deadline = new Deadline(super.getDesc(), by, false, date);
+        }
 
-            System.out.println("Got it. I've added this task:");
-            System.out.println(deadline);
-            if (tasks.size() == 1) {
-                System.out.println("Now you have 1 task in the list.");
-            } else {
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        tasks.add(deadline);
+
+        System.out.println("Got it. I've added this task:");
+        System.out.println(deadline);
+        if (tasks.size() == 1) {
+            System.out.println("Now you have 1 task in the list.");
+        } else {
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         }
     }
 }

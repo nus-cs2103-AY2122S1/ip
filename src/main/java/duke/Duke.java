@@ -17,13 +17,10 @@ public class Duke {
     /**
      * Constructor for Duke class.
      *
-     * @param pathname the path of the save file.
-     * @param dir      the directory containing the save file.
      * @throws IOException when an IO operation fails.
      */
-    public Duke(String pathname, String dir) throws IOException {
-        this.storage = new Storage(pathname, dir);
-        this.tasks = new TaskList(storage.load());
+    public Duke() throws IOException {
+        this.tasks = new TaskList();
         this.ui = new Ui(new Scanner(System.in));
     }
 
@@ -38,10 +35,10 @@ public class Duke {
         while (!isExit) {
             try {
                 String commandLine = ui.readCommand();
-                Command c = parser.parse(commandLine, tasks);
-                c.execute(tasks, storage);
+                Command c = parser.getCommand(commandLine, tasks);
+                c.execute(tasks);
                 isExit = c.isExit();
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 System.out.println("***WARNING*** An error has occurred Master Wayne: " + e.getMessage());
             }
         }
@@ -54,6 +51,6 @@ public class Duke {
      * @throws IOException when an IO operations fails.
      */
     public static void main(String[] args) throws IOException {
-        new Duke("data/tasks.txt", "data").run();
+        new Duke().run();
     }
 }

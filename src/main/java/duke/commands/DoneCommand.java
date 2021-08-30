@@ -35,21 +35,15 @@ public class DoneCommand extends Command {
     /**
      * Executes the command. Adds deadline to task list. Updates the save file.
      *
-     * @param tasks   the task list.
-     * @param storage the storage of the programme.
+     * @param tasks the task list.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
-        tasks.get(doneIndex - 1).markAsDone();
+    public void execute(TaskList tasks) throws IOException {
+        tasks.markAsDone(doneIndex - 1);
+
         System.out.println("-------------------------------------");
         System.out.println("Very well, Master Wayne. This task has been marked as per your request.");
         System.out.println((doneIndex) + ". " + tasks.get(doneIndex - 1)); //actual index is index - 1
         System.out.println("-------------------------------------");
-
-        try {
-            storage.markAsDone(doneIndex);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

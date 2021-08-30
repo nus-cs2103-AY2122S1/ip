@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Storage;
 import duke.TaskList;
 
 /**
@@ -29,11 +28,10 @@ public class ExitCommand extends Command {
     /**
      * Executes the command. Adds deadline to task list. Updates the save file.
      *
-     * @param tasks   the task list.
-     * @param storage the storage of the programme.
+     * @param tasks the task list.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks) {
         System.out.println("Have a pleasant day, Master Wayne.\n");
     }
 }

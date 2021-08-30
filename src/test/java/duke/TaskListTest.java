@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +18,9 @@ public class TaskListTest {
     public void sizeTest() {
         try {
             File input = new File("java/duke/input.txt");
-            TaskList tasks = new TaskList(input);
+            TaskList tasks = new TaskList();
             assertEquals(tasks.size(), 4);
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -28,9 +29,9 @@ public class TaskListTest {
     public void descTest() {
         try {
             File input = new File("java/duke/input.txt");
-            TaskList tasks = new TaskList(input);
+            TaskList tasks = new TaskList();
             assertEquals(tasks.get(1).getDescription(), "return book");
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

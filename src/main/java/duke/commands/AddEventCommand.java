@@ -61,31 +61,25 @@ public class AddEventCommand extends Command {
     /**
      * Executes the command. Adds deadline to task list. Updates the save file.
      *
-     * @param tasks   the task list.
-     * @param storage the storage of the programme.
+     * @param tasks the task list.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
-        try {
-            Event event;
-            if (date == null) {
-                event = new Event(super.getDesc(), at, false);
-            } else {
-                event = new Event(super.getDesc(), at, false, date);
-            }
-            tasks.add(event);
-            storage.add(event);
+    public void execute(TaskList tasks) throws IOException {
+        Event event;
+        if (date == null) {
+            event = new Event(super.getDesc(), at, false);
+        } else {
+            event = new Event(super.getDesc(), at, false, date);
+        }
+        tasks.add(event);
 
-            System.out.println("Got it. I've added this task:");
-            System.out.println(event);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(event);
 
-            if (tasks.size() == 1) {
-                System.out.println("Now you have 1 task in the list.");
-            } else {
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (tasks.size() == 1) {
+            System.out.println("Now you have 1 task in the list.");
+        } else {
+            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         }
     }
 }

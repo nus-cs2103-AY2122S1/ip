@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Storage;
 import duke.TaskList;
 import duke.tasks.Task;
 
@@ -30,11 +29,10 @@ public class ListCommand extends Command {
     /**
      * Executes the command. Adds deadline to task list. Updates the save file.
      *
-     * @param tasks   the task list.
-     * @param storage the storage of the programme.
+     * @param tasks the task list.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks) {
         if (tasks.size() == 0) {
             System.out.println("You have not added anything to the list, Master Wayne.");
         } else {

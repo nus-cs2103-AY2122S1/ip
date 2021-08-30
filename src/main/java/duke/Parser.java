@@ -28,7 +28,7 @@ public class Parser {
      * @return Command command deciphered from the user input.
      * @throws DukeException If the user gives a bad input.
      */
-    public Command parse(String commandLine, TaskList tasks) throws DukeException {
+    public Command getCommand(String commandLine, TaskList tasks) throws DukeException {
         String[] fullCommand = commandLine.split(" ");
         String command = fullCommand[0];
         String desc;

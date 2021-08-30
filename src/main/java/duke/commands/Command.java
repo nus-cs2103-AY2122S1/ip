@@ -3,6 +3,8 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 
+import java.io.IOException;
+
 /**
  * Abstract class for commands.
  */
@@ -35,5 +37,5 @@ public abstract class Command {
     /**
      * Executes the command. Adds deadline to task list. Updates the save file.
      */
-    public abstract void execute(TaskList tasks, Storage storage);
+    public abstract void execute(TaskList tasks) throws IOException;
 }

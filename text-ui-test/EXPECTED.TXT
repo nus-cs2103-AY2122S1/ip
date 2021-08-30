@@ -49,9 +49,9 @@ Now you have 4 tasks in the list.
 4.  [T][ ] read book
 -------------------------------------
 -------------------------------------
-Here are the matching tasks in your list:
+Here are the matching tasks in your list, Master Wayne:
 1. [D][X] return book (by: June 6th)
-2. [T][X] read book
+2. [T][ ] read book
 -------------------------------------
 -------------------------------------
 Very well, Master Wayne. This task has been deleted as per your request.
