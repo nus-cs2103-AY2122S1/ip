@@ -1,14 +1,12 @@
 package myjournal.task;
 
-import myjournal.task.Task;
-
 /**
  * Creates task with the type of Deadline.
  *
  * @author Felissa Faustine
  */
 public class Deadline extends Task {
-    public String time;
+    private String time;
 
     /**
      * Constructs the Deadline object.

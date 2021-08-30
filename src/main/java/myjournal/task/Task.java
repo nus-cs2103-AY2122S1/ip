@@ -6,8 +6,8 @@ package myjournal.task;
  * @author Felissa Faustine
  */
 public abstract class Task {
-    public String taskName;
-    public boolean isDone;
+    private String taskName;
+    private boolean isDone;
 
     /**
      * Constructs the Task object.

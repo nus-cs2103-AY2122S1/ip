@@ -216,7 +216,7 @@ public class Parser {
      * @return A boolean stating whether the string is a time.
      */
     public static boolean isTime(String string) {
-        return string.length() == 5 && isInteger(string.substring(0,2)) && isInteger(string.substring(3,5))
+        return string.length() == 5 && isInteger(string.substring(0, 2)) && isInteger(string.substring(3, 5))
                 && string.charAt(2) == ':';
     }
 
@@ -242,7 +242,7 @@ public class Parser {
      * @return The Todo object.
      */
     public static Todo parseTodo(Scanner line) {
-        String taskName= "";
+        String taskName = "";
         if (!line.hasNext()) {
             throw new EmptyDescriptionException("OOPS!!! Please specify the todo!!");
         }
@@ -260,7 +260,7 @@ public class Parser {
      * @return The Event object.
      */
     public static Event parseEvent(Scanner line) {
-        String taskName= "";
+        String taskName = "";
         if (!line.hasNext()) {
             throw new EmptyDescriptionException("OOPS!!! Please specify the event!!");
         }

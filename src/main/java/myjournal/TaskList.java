@@ -79,7 +79,7 @@ public class TaskList {
             newFile = newFile + tasks.get(i).getSymbol() + "|" + (tasks.get(i).isDone() ? "1" : "0") + "| "
                     + tasks.get(i).getTaskName()
                     + ((tasks.get(i) instanceof Deadline || tasks.get(i) instanceof Event)
-                    ? "|" + tasks.get(i).getTime(): "")  + "\n";
+                    ? "|" + tasks.get(i).getTime() : "") + "\n";
         }
         return newFile;
     }

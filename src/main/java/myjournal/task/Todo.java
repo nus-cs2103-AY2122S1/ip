@@ -1,7 +1,5 @@
 package myjournal.task;
 
-import myjournal.task.Task;
-
 /**
  * Creates task with the type of todo.
  *

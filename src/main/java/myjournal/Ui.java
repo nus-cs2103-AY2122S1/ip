@@ -27,7 +27,6 @@ public class Ui {
      * Prints out the statement after a task is added.
      *
      * @param taskList The list of all tasks.
-     * @return The statement to be printed after a task is added.
      */
     public void taskAddPrint(TaskList taskList) {
         System.out.println("Okay!! I've added the following task:\n"

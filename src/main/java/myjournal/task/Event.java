@@ -1,14 +1,12 @@
 package myjournal.task;
 
-import myjournal.task.Task;
-
 /**
  * Creates tasks with the type of event.
  *
  * @author Felissa Faustine
  */
 public class Event extends Task {
-    public String time;
+    private String time;
 
     /**
      * Constructs the Event object.
