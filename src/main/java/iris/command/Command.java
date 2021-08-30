@@ -3,27 +3,24 @@ package iris.command;
 import iris.IrisException;
 import iris.Storage;
 import iris.TaskList;
-import iris.Ui;
 
 public abstract class Command {
-    public boolean isExit() {
-        return false;
+    public void store(TaskList tasks, Storage storage) {
+
     }
 
-    public abstract void runSilently(TaskList tasks) throws IrisException;
-
-    public abstract void say(TaskList tasks, Ui ui);
+    public abstract String run(TaskList tasks) throws IrisException;
 
     /**
-     * Run the given command's actions (runSilently) and say
-     *
-     * @param tasks   tasks of current Iris instance
-     * @param ui      ui of current Iris instance
-     * @param storage storage of current Iris instance
-     * @throws IrisException for invalid command
+     * Run the command and store the tasks in the data file if tasks have changed
+     * @param tasks   TaskList representing list of tasks
+     * @param storage Storage object encapsulating storage functionality
+     * @return        String representing Iris's response to the user
+     * @throws IrisException for invalid commands
      */
-    public void run(TaskList tasks, Ui ui, Storage storage) throws IrisException {
-        runSilently(tasks);
-        say(tasks, ui);
+    public String runAndStore(TaskList tasks, Storage storage) throws IrisException {
+        String response = run(tasks);
+        store(tasks, storage);
+        return response;
     };
 }

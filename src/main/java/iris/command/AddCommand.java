@@ -1,15 +1,18 @@
 package iris.command;
 
+import iris.IrisException;
 import iris.TaskList;
-import iris.Ui;
 
 public abstract class AddCommand extends ModifyTaskListCommand {
     @Override
-    public void say(TaskList tasks, Ui ui) {
+    public String run(TaskList tasks) throws IrisException {
         int count = tasks.getCount();
-        ui.say("Got it. I've added this task:");
-        ui.say(tasks.get(count - 1).toString(), false);
-        ui.say(String.format("Now you have %d %s in the list.",
-                count, count == 1 ? "task" : "tasks"), false);
+
+        return String.format(
+                "Noted, I've added this task:\n%s\nNow you have %d %s in the list.",
+                tasks.get(count - 1).toString(),
+                count,
+                count == 1 ? "task" : "tasks"
+        );
     }
 }

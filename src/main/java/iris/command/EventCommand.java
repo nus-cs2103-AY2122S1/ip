@@ -19,7 +19,8 @@ public class EventCommand extends AddCommand {
     }
 
     @Override
-    public void runSilently(TaskList tasks) throws IrisException {
+    public String run(TaskList tasks) throws IrisException {
         tasks.addEvent(this.name, this.at);
+        return super.run(tasks);
     }
 }
