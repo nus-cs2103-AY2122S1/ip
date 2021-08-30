@@ -32,7 +32,7 @@ public class AddTaskCommand extends Command {
 
         // Update message
         this.message = String.format(
-                "Got it. I've added this task:\n  %s\nNow you have %o tasks in the list.\n",
+                "Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.\n",
                 this.task, tasks.getNumOfTasks());
     }
 }

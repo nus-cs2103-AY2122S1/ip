@@ -44,7 +44,7 @@ public class DeleteTaskCommand extends Command {
 
         // Update message
         this.message = String.format(
-                "Noted. I've removed this task:\n  %s\nNow you have %o tasks in the list.\n",
+                "Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list.\n",
                 this.task, tasks.getNumOfTasks());
     }
 }

@@ -25,7 +25,7 @@ public class GetListCommand extends Command {
     public void execute(TaskList tasks, Storage storage) {
         int len = tasks.getNumOfTasks();
         for (int i = 0; i < len; i++) {
-            this.message += String.format("%o.%s\n", i + 1, tasks.get(i).toString());
+            this.message += String.format("%d.%s\n", (i + 1), tasks.get(i).toString());
         }
     }
 }

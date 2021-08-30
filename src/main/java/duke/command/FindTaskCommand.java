@@ -35,7 +35,7 @@ public class FindTaskCommand extends Command {
         ArrayList<Task> filteredTasks = tasks.filter(this.keyword);
         int len = filteredTasks.size();
         for (int i = 0; i < len; i++) {
-            this.message += String.format("%o.%s\n", i + 1, filteredTasks.get(i).toString());
+            this.message += String.format("%d.%s\n", i + 1, filteredTasks.get(i).toString());
         }
     }
 }
