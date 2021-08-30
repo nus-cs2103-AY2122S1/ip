@@ -1,11 +1,10 @@
 package duke;
 
 /**
- * Task class.
- * TODO: Make abstract
+ * Abstract Task class.
  */
 
-public class Task {
+public abstract class Task {
 
     private String description;
     private boolean isDone;
