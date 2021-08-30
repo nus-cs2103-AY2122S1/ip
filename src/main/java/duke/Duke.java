@@ -57,7 +57,7 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
      */
     public Duke() {
         this.taskList = new TaskList();
-        this.storage = new Storage("../../data/duke_storage.txt");
+        this.storage = new Storage("../../../../data/duke_storage.txt");
         this.loadData();
         this.sc = new Scanner(System.in);
     }
@@ -91,20 +91,12 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeText = new Label(taskMode(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 new UserDialogBox(userText, new ImageView(user)),
                 new DukeDialogBox(dukeText, new ImageView(duke))
         );
         userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return taskMode(input);
     }
 
     /**
@@ -155,6 +147,10 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
      * Handles the logic for managing a user's tasks.
      */
     public String taskMode(String msg) {
+        if (msg.equals(FAREWELL_COMMAND)) {
+            this.endDuke();
+            return "I've saved the tasks. You can close Duke now!";
+        }
         try {
             TaskList tasks = this.taskList;
             if (msg.equals(LIST_COMMAND)) {
