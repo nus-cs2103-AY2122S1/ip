@@ -1,14 +1,14 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Represents the text parser for Duke. When parsing a user input, the parser
@@ -76,8 +76,7 @@ public class Parser {
                     int taskIndex = Integer.parseInt(inputStringArray[1]) - 1;
                     Task deletedTask = tasks.getTask(taskIndex);
                     tasks.deleteTask(taskIndex);
-                    return "Noted. I've removed this task:\n "
-                            + deletedTask.toString();
+                    return "Noted. I've removed this task:\n " + deletedTask.toString();
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     throw new DukeException("Please specify a valid task number.");
                 }
@@ -93,8 +92,7 @@ public class Parser {
                     LocalDate by = LocalDate.parse(deadlineInfo[1], dateFormatter);
                     Task newDeadline = new Deadline(deadlineInfo[0], by);
                     tasks.addTask(newDeadline);
-                    return "Got it. I've added this task:\n "
-                            + newDeadline.toString();
+                    return "Got it. I've added this task:\n " + newDeadline.toString();
                 } catch (DateTimeParseException e) {
                     throw new DukeException("Please enter a valid date.");
                 }
@@ -108,16 +106,14 @@ public class Parser {
                     LocalDateTime at = LocalDateTime.parse(eventInfo[1], dateTimeFormatter);
                     Task newEvent = new Event(eventInfo[0], at);
                     tasks.addTask(newEvent);
-                    return "Got it. I've added this task:\n " +
-                            newEvent.toString();
+                    return "Got it. I've added this task:\n " + newEvent.toString();
                 } catch (DateTimeParseException e) {
                     throw new DukeException("Please enter a valid date.");
                 }
             case "todo":
                 Task newToDo = new ToDo(inputStringArray[1]);
                 tasks.addTask(newToDo);
-                return "Got it. I've added this task:\n " +
-                        newToDo.toString();
+                return "Got it. I've added this task:\n " + newToDo.toString();
             default:
                 throw new DukeException("Sorry, I don't know what that means.");
             }

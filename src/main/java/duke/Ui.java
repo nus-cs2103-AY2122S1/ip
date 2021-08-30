@@ -36,7 +36,7 @@ public class Ui {
 
     /**
      * Returns the user input.
-     * 
+     *
      * @return The user input.
      */
     public String getUserInput() {

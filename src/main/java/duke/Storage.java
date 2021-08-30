@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -14,6 +9,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Representation of a storage file which can be read from and written to.
@@ -95,7 +95,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             int taskCount = tasks.getSize();
             for (int i = 0; i < taskCount; i++) {
-                fw.write( tasks.getTask(i).toString() + System.lineSeparator());
+                fw.write(tasks.getTask(i).toString() + System.lineSeparator());
             }
             fw.close();
         } catch (java.io.IOException e) {
