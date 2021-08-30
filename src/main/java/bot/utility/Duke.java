@@ -1,5 +1,7 @@
 package bot.utility;
 
+import java.util.Objects;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,8 +14,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.Objects;
-
 /**
  * Simulates the Duke chatBot.
  */
@@ -21,8 +21,12 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private final Image user = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
-    private final Image duke = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
+    private final Image user = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png"))
+    );
+    private final Image duke = new Image(
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png"))
+    );
     private Parser parser;
     private Logger logger;
     private TaskList tasks;
@@ -32,11 +36,11 @@ public class Duke extends Application {
      * Runs the Duke chatBot
      */
     public void run() {
-        start();
+        initialize();
         analyzeLog();
     }
 
-    private void start() {
+    private void initialize() {
         logger = new Logger("tasks.txt");
         parser = new Parser();
         ui = new Ui();
@@ -58,7 +62,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        start();
+        initialize();
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -106,13 +110,9 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));

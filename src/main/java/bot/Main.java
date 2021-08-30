@@ -1,9 +1,8 @@
 package bot;
 
-import bot.utility.Duke;
-
 import java.io.IOException;
 
+import bot.utility.Duke;
 import bot.utility.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
