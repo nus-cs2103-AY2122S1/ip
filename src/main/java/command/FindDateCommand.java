@@ -10,6 +10,11 @@ import java.time.LocalDate;
 public class FindDateCommand extends Command {
     private final LocalDate desiredDate;
 
+    /**
+     * Constructor for a FindDateCommand.
+     *
+     * @param desiredDate Find tasks that take place on this date.
+     */
     public FindDateCommand(LocalDate desiredDate) {
         super();
         this.desiredDate = desiredDate;

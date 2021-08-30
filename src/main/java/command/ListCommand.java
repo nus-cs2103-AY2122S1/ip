@@ -6,7 +6,10 @@ import duke.TaskList;
  * Represents the command that lists all the tasks on the task list.
  */
 public class ListCommand extends Command {
-    
+
+    /**
+     * Constructor for a ListCommand.
+     */
     public ListCommand() {
         super();
     }
