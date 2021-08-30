@@ -1,9 +1,12 @@
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+package duke;
+
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
+
 import java.io.IOException;
 
 /**

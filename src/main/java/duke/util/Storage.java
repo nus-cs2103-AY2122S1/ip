@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import duke.exception.EmptyFieldException;
 import duke.exception.InvalidCommandException;
