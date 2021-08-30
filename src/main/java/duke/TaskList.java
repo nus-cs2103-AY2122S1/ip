@@ -34,9 +34,11 @@ public class TaskList {
      */
     public void remove(int index) throws IndexOutOfBoundsException {
         Task task = tasks.remove(index - 1);
-        Ui.showMessage("Noted. I've removed this task:\n  " +
-                task +
-                "\nNow you have " + tasks.size() + " tasks in the list.\n");
+        Ui.showMessage("Noted. I've removed this task:\n  "
+                + task
+                + "\nNow you have "
+                + tasks.size()
+                + " tasks in the list.\n");
     }
 
     /**
@@ -46,9 +48,11 @@ public class TaskList {
      */
     public void add(Task task) {
         tasks.add(task);
-        String msg = "Got it. I've added this task:\n  " +
-                task +
-                "\nNow you have " + tasks.size() + " tasks in the list.\n";
+        String msg = "Got it. I've added this task:\n  "
+                + task
+                + "\nNow you have "
+                + tasks.size()
+                + " tasks in the list.\n";
 
         Ui.showMessage(msg);
     }
@@ -64,6 +68,11 @@ public class TaskList {
         Ui.showMessage("Nice! I've marked this task as done:\n" + task + "\n");
     }
 
+    /**
+     * filter out the tasks by the search string and print the result.
+     *
+     * @param searchString the string contained by the description.
+     */
     public void filter(String searchString) {
         List<Task> searchResult = tasks
                 .stream()

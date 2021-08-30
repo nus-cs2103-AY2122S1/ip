@@ -1,13 +1,14 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 
 class EventTest {
-    Event event = new Event("event", LocalDate.parse("2021-08-09"));
+    private static Event event = new Event("event", LocalDate.parse("2021-08-09"));
 
     @Test
     void testToString_success() {

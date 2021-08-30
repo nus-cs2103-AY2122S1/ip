@@ -38,13 +38,13 @@ public class Parser {
             command = new AddCommand(action, todo);
             break;
         case DEADLINE:
-            descriptionTime = parseDescription(argument, Deadline.typeName, Deadline.deliminator);
+            descriptionTime = parseDescription(argument, Deadline.TYPE, Deadline.DELIMINATOR);
             time = parseTime(descriptionTime[1]);
             Task deadline = new Deadline(descriptionTime[0], time);
             command = new AddCommand(action, deadline);
             break;
         case EVENT:
-            descriptionTime = parseDescription(argument, Event.typeName, Event.deliminator);
+            descriptionTime = parseDescription(argument, Event.TYPE, Event.DELIMINATOR);
             time = parseTime(descriptionTime[1]);
             Task event = new Event(descriptionTime[0], time);
             command = new AddCommand(action, event);
@@ -98,7 +98,8 @@ public class Parser {
         }
     }
 
-    private static String[] parseDescription(String argument, String typeName, String deliminator) throws DukeException {
+    private static String[] parseDescription(String argument, String typeName, String deliminator)
+            throws DukeException {
         String[] descriptionTime = argument.split(" " + deliminator + " ");
         if (argument.trim().equals(deliminator) || argument.isBlank()) {
             throw new EmptyDescriptionException();

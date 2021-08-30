@@ -10,9 +10,9 @@ import java.time.format.DateTimeFormatter;
  */
 
 class Deadline extends Task {
-    public static String deliminator = "/by";
-    public static String typeName = "deadline";
-    LocalDate time;
+    public static final String DELIMINATOR = "/by";
+    public static final String TYPE = "deadline";
+    private LocalDate time;
 
     public Deadline(String description, LocalDate time) {
         super(description);

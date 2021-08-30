@@ -19,6 +19,11 @@ public class Storage {
     private final String filePath;
     private String status;
 
+    /**
+     * This is the public constructor for storage.
+     *
+     * @param filePath the path in which the file is stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.file = new File(filePath);

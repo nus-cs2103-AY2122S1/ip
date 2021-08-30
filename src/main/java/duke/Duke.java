@@ -37,14 +37,16 @@ public class Duke {
         Ui.showGreeting();
         boolean isExit = false;
 
-        while (!isExit) try {
-            Ui.showCaret();
-            String input = ui.readInput();
-            Command command = Parser.parse(input);
-            command.execute(tasks, ui, storage);
-            isExit = command.isExit();
-        } catch (DukeException e) {
-            Ui.showError(e.getMessage());
+        while (!isExit) {
+            try {
+                Ui.showCaret();
+                String input = ui.readInput();
+                Command command = Parser.parse(input);
+                command.execute(tasks, ui, storage);
+                isExit = command.isExit();
+            } catch (DukeException e) {
+                Ui.showError(e.getMessage());
+            }
         }
     }
 }

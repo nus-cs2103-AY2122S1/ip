@@ -10,9 +10,9 @@ import java.time.format.DateTimeFormatter;
  */
 
 class Event extends Task {
-    public static String deliminator = "/at";
-    public static String typeName = "event";
-    LocalDate time;
+    public static final String DELIMINATOR = "/at";
+    public static final String TYPE = "event";
+    private LocalDate time;
 
     public Event(String description, LocalDate time) {
         super(description);

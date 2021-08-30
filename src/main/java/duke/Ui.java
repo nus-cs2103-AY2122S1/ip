@@ -13,13 +13,16 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
+    /**
+     * This method is called at the start of the program to greet the user.
+     */
     public static void showGreeting() {
         String logo =
-                " _   _ _ _\n" +
-                        "| | | (_) | _____\n" +
-                        "| |_| | | |/ / _ \\\n" +
-                        "|  _  | |   < (_) |\n" +
-                        "|_| |_|_|_|\\_\\___/\n";
+                " _   _ _ _\n"
+                        + "| | | (_) | _____\n"
+                        + "| |_| | | |/ / _ \\\n"
+                        + "|  _  | |   < (_) |\n"
+                        + "|_| |_|_|_|\\_\\___/\n";
 
         showMessage("Hello from\n" + logo + "What can I do for you?\n");
     }

@@ -56,8 +56,8 @@ abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() +
-                "] " + this.description;
+        return "[" + this.getStatusIcon()
+                + "] " + this.description;
     }
 
     /**
@@ -65,5 +65,5 @@ abstract class Task {
      *
      * @return the array of Strings representing the task
      */
-    abstract public String[] saveStrings();
+    public abstract String[] saveStrings();
 }
