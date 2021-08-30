@@ -8,7 +8,7 @@ public class Event extends TaskWithDateTime {
     }
 
     @Override
-    public String dateTimeDetails() {
+    public String dateTimeInfo() {
         return "(at: " + super.getDateTimeOutput() +")";
     }
 

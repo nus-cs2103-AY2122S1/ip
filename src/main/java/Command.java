@@ -1,17 +1,23 @@
-public class Command {
+public abstract class Command {
     private String type;
-    private String details;
+    private boolean isExit;
 
-    public Command(String type, String details) {
+    public Command(String type) {
         this.type = type;
-        this.details = details;
+        this.isExit = false;
     }
 
     public String getType() {
         return type;
     }
 
-    public String getDetails() {
-        return details;
+    public boolean isExit() {
+        return isExit;
     }
+
+    public void setExit() {
+        this.isExit = true;
+    }
+
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
 }

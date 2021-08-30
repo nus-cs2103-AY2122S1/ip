@@ -115,25 +115,25 @@ public abstract class TaskWithDateTime extends Task {
         return dateTimeOutput;
     }
 
-    public abstract String dateTimeDetails();
+    public abstract String dateTimeInfo();
 
     @Override
-    public boolean isOnDate(String specificDateStr) {
+    public boolean isOnDate(String dateStr) {
         try {
-            LocalDate dateToSearch = LocalDate.parse(specificDateStr);
+            LocalDate dateToSearch = LocalDate.parse(dateStr);
 
-            if (this.date != null) {
-                return this.date.equals(dateToSearch);
+            if (date != null) {
+                return date.equals(dateToSearch);
             } else {
-                return this.dateInput.equals(specificDateStr);
+                return dateInput.equals(dateStr);
             }
         } catch (Exception e) {
-            return this.dateInput.equals(specificDateStr);
+            return dateInput.equals(dateStr);
         }
     }
 
     @Override
     public String toString() {
-        return super.toString() + " " + dateTimeDetails();
+        return super.toString() + " " + dateTimeInfo();
     }
 }

@@ -8,7 +8,7 @@ public class Deadline extends TaskWithDateTime {
     }
 
     @Override
-    public String dateTimeDetails() {
+    public String dateTimeInfo() {
         return "(by: " + super.getDateTimeOutput() + ")";
     }
 
