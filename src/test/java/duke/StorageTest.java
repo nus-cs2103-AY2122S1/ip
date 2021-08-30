@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class StorageTest {
 
     @Test
-    public void writeToFileAndTaskSaveToFile() throws FileNotFoundException {
+    public void writeToFileAndTaskSaveToFile() throws FileNotFoundException, DukeException {
         Storage storage = new Storage("test.txt");
         ArrayList<Task> taskList = new ArrayList<>();
         taskList.add(new ToDo("say hello"));

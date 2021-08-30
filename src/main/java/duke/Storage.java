@@ -29,7 +29,6 @@ public class Storage {
         try {
             File file = new File(this.filePath);
             if (file.createNewFile()) {
-                System.out.println("File created.");
                 return true;
             } else {
                 return false;
@@ -94,7 +93,7 @@ public class Storage {
      *
      * @param tasks The user's todo list.
      */
-    public void writeToFile(ArrayList<Task> tasks) {
+    public void writeToFile(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.filePath);
             for (int i = 0; i < tasks.size(); i++) {
@@ -107,7 +106,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println("Cannot update todo list to the file.");
+            throw new DukeException("Cannot update todo list to the file.");
         }
     }
 }

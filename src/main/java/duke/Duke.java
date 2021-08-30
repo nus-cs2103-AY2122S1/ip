@@ -1,5 +1,18 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**
  * Represents a robot object that can take in commands from the user and construct a todo list.
  * A file path is provided to a Duke object for the todo list to be saved locally on the user's
@@ -9,8 +22,11 @@ public class Duke {
 
     private Command command;
 
+    public Duke() {
+        this.command = new Command("file.text");
+    }
 
-    Duke(String filePath) {
+    public Duke(String filePath) {
         this.command = new Command(filePath);
     }
 
@@ -21,8 +37,19 @@ public class Duke {
      * @param args Not used in this program.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("file.text");
+        Duke duke = new Duke("file.txt");
         duke.command.startDuke();
     }
 
+    /**
+     * Returns a string response to user input.
+     *
+     * @param input User's input.
+     * @return String response from Duke.
+     */
+    public String getResponse(String input) {
+        Parser parser = new Parser();
+        String typeOfCommand = parser.parseCommand(input);
+        return this.command.getReplyFromDuke(typeOfCommand, input);
+    }
 }
