@@ -1,6 +1,7 @@
 import exceptions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
@@ -87,12 +88,15 @@ public class Duke {
     // Adding a Deadline to list of tasks
     public static void addDeadline(String userInput) throws DeadlineException {
         // Check if line follows the format "<description> /by <time/date>"
+        // Make new regex for deadline which shall understand the pattern of date and time as per level 8 - as of now this is resolved
         if (!userInput.matches(RegexType.DEADLINE_REGEX.getRegexType())){
             throw new DeadlineException();
         }
 
-        // get description and by from line
+        // get the description of the task
         String description = userInput.replaceAll(RegexType.GET_DESCRIPTION_REGEX.getRegexType(), "");
+
+        // get the date and time of the deadline in the format of dd/mm/yyyy HHmm
         String by = userInput.replaceAll(RegexType.GET_BY_REGEX.getRegexType(), "");
 
         // Create new Deadline instance an add it to end taskList
@@ -105,6 +109,7 @@ public class Duke {
     // Adding an Event to list of tasks
     public static void addEvent(String userInput) throws EventException{
         // Check if userInput follows the format "<description> /at <time/date>"
+        //Make new regex for event which shall understand the pattern of date and time as per level 8 - as of now this has been resolved
         if (!userInput.matches(RegexType.EVENT_REGEX.getRegexType())){
             throw new EventException();
         }
