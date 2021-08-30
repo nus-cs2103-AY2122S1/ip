@@ -19,7 +19,7 @@ public class Duke {
      */
     public Duke() {
         storage = new Storage();
-        ArrayList readList = storage.fileReader();
+        ArrayList<Task> readList = storage.fileReader();
         ui = new Ui();
         taskList = new TaskList(readList, ui);
         parser = new Parser(ui, taskList, storage);
@@ -47,11 +47,13 @@ public class Duke {
     }
 
     /**
-     * Starts the program with this method.
-     * @param args The command line arguments which is empty.
-     * @throws InputError If user inputs are invalid or unrecognised.
+     * Generates duke response for any user input.
+     *
+     * @param input User input.
+     * @return
      */
-    public static void main(String[] args) throws InputError {
-        new Duke().run();
+    public String getResponse(String input) throws InputError {
+        int caseNum = parser.caseChecker(input);
+        return parser.caseHandler(caseNum, input, taskList);
     }
 }

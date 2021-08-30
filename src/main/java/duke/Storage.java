@@ -18,7 +18,7 @@ public class Storage {
      *
      * @param saveThis Any ArrayList of Tasks to save.
      */
-    public void fileSaver(ArrayList saveThis) {
+    public void fileSaver(ArrayList<Task> saveThis) {
         try {
             FileOutputStream fileOut = new FileOutputStream("saveFile");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -38,7 +38,7 @@ public class Storage {
      *
      * @return ArrayList of tasks for the current program to use.
      */
-    public ArrayList fileReader() {
+    public ArrayList<Task> fileReader() {
         ArrayList result = new ArrayList<Task>();
         File tempFile = new File("saveFile");
 
@@ -46,7 +46,7 @@ public class Storage {
             try {
                 FileInputStream file = new FileInputStream("saveFile");
                 ObjectInputStream in = new ObjectInputStream(file);
-                result = (ArrayList) in.readObject();
+                result = (ArrayList<Task>) in.readObject();
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Read failed");

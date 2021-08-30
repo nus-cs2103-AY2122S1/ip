@@ -23,25 +23,25 @@ public class Ui {
         return input;
     }
 
-    public void byeMessage() {
-        System.out.println("See ya again later!");
+    public String byeMessage() {
+        return "See ya again later!";
     }
 
     /**
      * Returns an error message for the user.
      */
-    public void invalidInput() {
+    public String invalidInput() {
+        String response = "";
         try {
             throw new InputError("Invalid Input");
         } catch (InputError e) {
-            System.out.println("Here is the error boss. " + e.getMessage());
-            System.out.println("I'm not too sure what you meant.");
-            System.out.println("Try again with these keywords.");
-            System.out.println("todo deadline event");
+            response = "Here is the error boss. " + e.getMessage() + "\n" + "I'm not too sure what you meant.\n"
+                    + "Try again with these keywords.\n" + "todo deadline event";
         }
+        return response;
     }
 
-    public void errorMessage(InputError e) {
-        System.out.println("Here is the error boss. " + e.getMessage());
+    public String errorMessage(InputError e) {
+        return "Here is the error boss. " + e.getMessage();
     }
 }

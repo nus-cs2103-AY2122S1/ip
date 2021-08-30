@@ -9,6 +9,7 @@ public class TaskList implements Serializable {
     private ArrayList<Task> taskList;
     private Ui ui;
     private int currIndex = 1;
+    private String stringList = "";
 
     /**
      * Creates a task list object.
@@ -16,7 +17,7 @@ public class TaskList implements Serializable {
      * * @param list Lists of tasks as an Array List.
      * @param ui UI to handle user interactions.
      */
-    public TaskList(ArrayList list, Ui ui) {
+    public TaskList(ArrayList<Task> list, Ui ui) {
         this.taskList = list;
         this.ui = ui;
     }
@@ -30,62 +31,75 @@ public class TaskList implements Serializable {
     }
 
     private void printItem(Task task) {
-        System.out.println(currIndex + "." + task.printTask());
+        if (stringList.equals("")) {
+            stringList = currIndex + "." + task.printTask();
+        } else {
+            stringList = stringList + "\n" + currIndex + "." + task.printTask();
+        }
         currIndex++;
     }
 
-    void printList() {
+    String printList() {
         taskList.forEach((task) -> printItem(task));
+        String response = stringList;
         currIndex = 1;
+        stringList = "";
+        return response;
     }
 
-    void doneItem(int index) throws InputError {
+    String doneItem(int index) throws InputError {
+        String response = "";
         try {
             if (index > taskList.size()) {
                 throw new InputError("Invalid Number");
             }
-            System.out.println("Good job for this thing done man:");
             Task currTask = taskList.get(index - 1);
             currTask.setComplete();
-            System.out.println("   " + currTask.printTask());
+            response = "Good job for this thing done man: \n" + "   " + currTask.printTask();
         } catch (InputError e) {
-            ui.errorMessage(e);
+            response = ui.errorMessage(e);
         }
+        return response;
     }
 
-    void addTodo(String str) {
+    String addTodo(String str) {
+        String response = "";
         System.out.println("Alrighty! I have added this task:");
         taskList.add(new ToDo(str.substring(5)));
-        System.out.println("   " + taskList.get(taskList.size() - 1).printTask());
-        System.out.println("Now you have " + taskList.size() + " task(s) in total!");
+        response = "Alrighty! I have added this task:\n" + "   " + taskList.get(taskList.size() - 1).printTask() + "\n"
+                + "Now you have " + taskList.size() + " task(s) in total!";
+        return response;
     }
 
-    void addDeadline(String str) {
-        System.out.println("Alrighty! I have added this task:");
+    String addDeadline(String str) {
+        String response = "";
         taskList.add(new DeadLine(str.substring(9, str.indexOf("/") - 1), str.substring(str.indexOf("/") + 4)));
-        System.out.println("   " + taskList.get(taskList.size() - 1).printTask());
-        System.out.println("Now you have " + taskList.size() + " task(s) in total!");
+        response = "Alrighty! I have added this task:\n" + "   " + taskList.get(taskList.size() - 1).printTask()
+                + "\n" + "Now you have " + taskList.size() + " task(s) in total!";
+        return response;
     }
 
-    void addEvent(String str) {
-        System.out.println("Alrighty! I have added this task:");
+    String addEvent(String str) {
+        String response = "";
         taskList.add(new Event(str.substring(6, str.indexOf("/") - 1), str.substring(str.indexOf("/") + 4)));
-        System.out.println("   " + taskList.get(taskList.size() - 1).printTask());
-        System.out.println("Now you have " + taskList.size() + " task(s) in total!");
+        response = "Alrighty! I have added this task:\n" + "   " + taskList.get(taskList.size() - 1).printTask()
+                + "\n" + "Now you have " + taskList.size() + " task(s) in total!";
+        return response;
     }
 
-    void deleteItem(int index) throws InputError {
+    String deleteItem(int index) throws InputError {
+        String response = "";
         try {
             if (index > taskList.size()) {
                 throw new InputError("Invalid Number");
             }
-            System.out.println("Alrighty! I have deleted this task:");
             Task removed = taskList.remove(index - 1);
-            System.out.println("   " + removed.printTask());
-            System.out.println("Now you have " + taskList.size() + " task(s) in total!");
+            response = "Alrighty! I have deleted this task:\n" + "   " + removed.printTask() + "\n"
+                    + "Now you have " + taskList.size() + " task(s) in total!";
         } catch (InputError e) {
-            ui.errorMessage(e);
+            response = ui.errorMessage(e);
         }
+        return response;
     }
 
     private void addTasks(Task task, ArrayList<Task> list, String word) {
@@ -109,5 +123,4 @@ public class TaskList implements Serializable {
 
         return new TaskList(resultList, ui);
     }
-
 }
