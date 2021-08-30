@@ -13,6 +13,7 @@ public abstract class Parser {
             throw new DukeException("Command has empty description");
         }
     }
+    //TODO exit command is now redudant
 
     /**
      * Takes in a String representing user input, and parses it, producing the appropriate Command.
@@ -59,8 +60,8 @@ public abstract class Parser {
         } else if (in.startsWith("delete")) {
             String[] temp = in.split(" ");
             return new DeleteCommand(Integer.parseInt(temp[1]) - 1);
-        } else if (in.equals("bye")) {
-            return new DoneCommand();
+        } else if (in.equals("save")) {
+            return new SaveCommand();
         } else {
             return new InvalidCommand();
         }

@@ -36,14 +36,17 @@ public class Ui {
                 "I'm Frosty, your personal task manager! How can I help?";
     }
 
-    //temporarily broken
     public String displayList(TaskList tasklist) {
-        return "Here are the tasks in your list:";
+        String res = "Here are the tasks in your list:\n";
+        for (int i = 0; i < tasklist.size(); i++) {
+            res += tasklist.get(i).toString() + "\n";
+        }
+        return res;
     }
 
-    //temporarily broken
     public String displayFindList(TaskList tasklist) {
-        return "Here are the matching tasks in your list:";
+        String res = "Here are the matching tasks in your list:\n";
+        return res + displayList(tasklist);
     }
 
     public String notifySuccessfulAdd(TaskList tasklist) {
@@ -94,7 +97,7 @@ public class Ui {
     }
 
     public String notifySavingComplete() {
-        return ("Done!");
+        return ("Your list has been saved!");
     }
 
     public String notifySavingError() {
