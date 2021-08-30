@@ -14,19 +14,19 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class DukeGui extends Application {
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    protected ScrollPane scrollPane;
+    protected VBox dialogContainer;
+    protected TextField userInput;
+    protected Button sendButton;
+    protected Scene scene;
+    protected Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    protected Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     /**
      * Creates components of the GUI.
      * @param stage The stage on which to render the scene.
      */
-    private void setUpGuiComponents(Stage stage) {
+    protected void setUpGuiComponents(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
