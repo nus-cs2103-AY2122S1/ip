@@ -7,11 +7,6 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -25,6 +20,4 @@ public abstract class Task {
     }
 
     public abstract String showTask();
-
-    public abstract String saveTask();
 }
