@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 /**
  * A driver class that initializes the the parser, task list and storage for the chatterbot.
  */

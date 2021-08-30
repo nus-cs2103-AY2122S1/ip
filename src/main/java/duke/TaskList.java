@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     private Storage storage;
-//Todo: Doc for @return
+
     /**
      * The constructor for a TaskList Object.
      */
@@ -23,6 +23,7 @@ public class TaskList {
      *
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
+     * @return the response on whether a task is successfully added.
      */
     public String add(String userInput, ArrayList<Task> userInputRecords) {
         Task task;
@@ -60,7 +61,7 @@ public class TaskList {
         }
         userInputRecords.add(task);
         storage.autoSave();
-        return "Got it. I've added this task:\n" + task + "\n" +"Now you have "
+        return "Got it. I've added this task:\n" + task + "\n" + "Now you have "
                 + userInputRecords.size() + " tasks in the list.\n";
     }
 
@@ -69,6 +70,7 @@ public class TaskList {
      *
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
+     * @return the response on whether a task is successfully deleted.
      */
     public String delete(String userInput, ArrayList<Task> userInputRecords) {
         try {
@@ -87,6 +89,7 @@ public class TaskList {
 
     /**
      * Deletes all tasks saved in the record.
+     * @return the response on whether all tasks are successfully deleted.
      */
     public String deleteAll(ArrayList<Task> userInputRecords) {
         userInputRecords.clear();
@@ -103,6 +106,7 @@ public class TaskList {
      *
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
+     * @return the response on whether a task is successfully marked done.
      */
     public String markAsDone(String userInput, ArrayList<Task> userInputRecords) {
         try {
@@ -124,6 +128,7 @@ public class TaskList {
      *
      * @param userInput        input from the user.
      * @param userInputRecords the saved record.
+     * @return the response on whether a task is successfully found.
      */
     public String search(String userInput, ArrayList<Task> userInputRecords) {
         String keyword = userInput.replace("find", "").trim();

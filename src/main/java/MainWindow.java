@@ -27,11 +27,15 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Tom.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Jerry.png"));
 
+
+    /**
+     * Initialize the MainWindow.
+     * */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String welcome = "Hello! I'm Peoduo\n" + "Can I help you?\n";
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome,dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -52,5 +56,4 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-
 }

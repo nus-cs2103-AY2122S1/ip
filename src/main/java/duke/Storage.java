@@ -16,10 +16,10 @@ import java.util.Scanner;
  * directory by using the save/load command.
  */
 public class Storage {
-    private static final String[] MONTHS = new String[]{
-            "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY",
-            "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
-    };
+    private enum Month {
+        JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY,
+        AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
+    }
     private ArrayList<Task> userInputRecords;
 
     /**
@@ -107,6 +107,7 @@ public class Storage {
      * Texts not recorded in the standard format wll be ignored.
      *
      * @param filePath the filepath indicated by the user.
+     * @return the response on whether a file is successfully loaded.
      */
     public String load(String filePath) {
         try {
@@ -149,6 +150,7 @@ public class Storage {
      * Saves the current task list to a user-specified file, upon receiving a save command.
      *
      * @param filePath the filepath indicated by the user.
+     * @return the response on whether a file is successfully saved.
      */
     public String save(String filePath) {
         try {
@@ -168,16 +170,16 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts time from String format to LocalDate.
+     *
+     * @param time the time keyed in by user.
+     * @return LocalDate represented by the time String.
+     * */
     private LocalDate convertToLocalTime(String time) {
         String copy = time;
         String month = copy.substring(0, time.indexOf(" "));
-        int monthValue = -1;
-        for (int i = 0; i < MONTHS.length; i++) {
-            if (month.equals(MONTHS[i])) {
-                monthValue = i + 1;
-                break;
-            }
-        }
+        int monthValue = Month.valueOf(month).ordinal() + 1;
         copy = copy.replace(month + " ", "");
         String day = copy.substring(0, copy.indexOf(" ")).trim();
         int dayValue = Integer.parseInt(day);
