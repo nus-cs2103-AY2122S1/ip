@@ -24,12 +24,12 @@ public class TaskList {
 
         return this.taskList;
     }
-    public List<? extends Task> addTask(Task task) {
+    public int addTask(Task task) {
         if( MainList == null) {
             MainList = new TaskList();
         }
         this.taskList.add(task);
-        return this.taskList;
+        return this.taskList.size();
     }
 
     public int getSize() {
