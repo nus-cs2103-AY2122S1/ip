@@ -3,7 +3,6 @@ package Duke.Parser;
 import Duke.Command.Command;
 
 public class Parser {
-
     public static Command parse(String stringCommand) {
         String keyword = stringCommand.split(" ")[0].trim().toLowerCase();
         switch (keyword) {
@@ -26,6 +25,5 @@ public class Parser {
             default:
                 return new Command.NonsenseCommand(stringCommand);
         }
-
     }
 }

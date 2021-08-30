@@ -2,13 +2,23 @@ package Duke.Storage;
 
 import Duke.Exceptions.DukeException;
 import Duke.Exceptions.NoPreviousFileException;
-import Duke.Tasks.*;
+import Duke.Tasks.Deadline;
+import Duke.Tasks.Event;
+import Duke.Tasks.Task;
+import Duke.Tasks.Todo;
+import Duke.Tasks.TaskList;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Storage {
-    String path;
+    private final String path;
+
     public Storage(String path) {
         this.path = path;
     }
@@ -16,7 +26,7 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader("./tasks.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(path));
             String line;
             while ((line = br.readLine()) != null) {
                 if (!line.equals("Tasks:")) {
@@ -26,7 +36,7 @@ public class Storage {
             }
             br.close();
         } catch (IOException e1) {
-            File file = new File("./tasks.txt");
+            File file = new File(path);
             try {
                 file.createNewFile();
             } catch (IOException e2) {
@@ -81,7 +91,7 @@ public class Storage {
     public void updateTxtFile(TaskList tasklist) {
         BufferedWriter bw;
         try {
-            bw = new BufferedWriter(new FileWriter("./tasks.txt"));
+            bw = new BufferedWriter(new FileWriter(path));
             for (Task t : tasklist.getTaskList()) {
                 if (t.getType() == 'D') {
                     Deadline dl = (Deadline) t;

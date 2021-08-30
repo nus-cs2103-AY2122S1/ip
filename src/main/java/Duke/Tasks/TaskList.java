@@ -1,7 +1,6 @@
 package Duke.Tasks;
 
 import Duke.Exceptions.IndexNotInListException;
-import Duke.Tasks.Task;
 
 import java.util.ArrayList;
 
