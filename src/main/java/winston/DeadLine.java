@@ -30,7 +30,7 @@ public class DeadLine extends Task {
 
     /**
      * Method to convert information from object instance into a different format to be saved
-     * 
+     *   
      * @return a string with the type, completion status, task description and due date
      */
     @Override
@@ -40,7 +40,7 @@ public class DeadLine extends Task {
 
     /**
      *  Method to convert information from object instance into a more readable format
-     * 
+     *   
      * @return a string with the type, completion status, task description and due date
      */
     @Override

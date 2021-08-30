@@ -3,12 +3,12 @@ package winston;
 /**
  *  Represents the done command from the parent abstract class Command.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private final int index;
     
-    public DoneCommand(TaskList tasklist, int index) {
-            super(tasklist);
-            this.index = index;
+    public DoneCommand(TaskList tasklist, int index) {         
+        super(tasklist);
+        this.index = index;
     }
 
 

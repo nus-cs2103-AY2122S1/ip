@@ -1,11 +1,11 @@
 import java.util.Scanner;
+
+import winston.Command;
+import winston.Parser;
 import winston.Storage;
 import winston.TaskList;
-import winston.Ui;
-import winston.Parser;
-import winston.Command;
 import winston.TerminateCommand;
-
+import winston.Ui;
 
 /**
  * A class that creates your personal assistant Winston

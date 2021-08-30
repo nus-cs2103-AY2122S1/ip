@@ -3,7 +3,7 @@ package winston;
 /**
  *  Represents an invalid command from the parent abstract class Command.
  */
-public class InvalidCommand extends Command{
+public class InvalidCommand extends Command {
     public InvalidCommand(TaskList taskList) {
         super(taskList);
     }
