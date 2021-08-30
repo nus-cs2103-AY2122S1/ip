@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+
 import duke.storage.Storage;
 import duke.ui.TextUi;
 

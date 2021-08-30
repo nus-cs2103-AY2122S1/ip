@@ -1,11 +1,11 @@
 package duke.tasks;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 /**
  * Represents a deadline, which is a subtype of a Task.
@@ -32,8 +32,7 @@ public class Deadline extends Task {
             } else {
                 this.time = LocalTime.parse(by);
             }
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             throw new DukeException("Use the right format for date and/or time: yyyy-MM-dd and/or HH:mm");
         }
     }

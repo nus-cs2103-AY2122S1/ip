@@ -1,11 +1,11 @@
 package duke.parser;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
+
+import duke.DukeException;
 
 public class Parser {
 
@@ -69,7 +69,8 @@ public class Parser {
             String temp = input.split(":", 2)[1];
             time = temp.substring(1, temp.length() - 1);
             if (time.length() > 11) {
-                String date = LocalDate.parse(time.substring(0, 11), DateTimeFormatter.ofPattern("dd MMM yyyy")).toString();
+                String date = LocalDate.parse(time.substring(0, 11),
+                        DateTimeFormatter.ofPattern("dd MMM yyyy")).toString();
                 time = date + " " + time.substring(12);
             } else if (time.contains(":")) {
             } else {
@@ -84,8 +85,9 @@ public class Parser {
             break;
         case "E": finalText = "event " + description + " /at " + time;
             break;
+        default:
         }
 
         return Map.of("finalText", finalText, "status", status);
-   }
+    }
 }
