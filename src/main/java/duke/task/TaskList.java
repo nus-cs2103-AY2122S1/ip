@@ -25,7 +25,7 @@ public class TaskList {
      * @param str String representation of a task.
      * @return Task created from string.
      */
-    public static Task stringToTask(String str){
+    public static Task stringToTask(String str) {
         String[] taskStr = str.split(" \\| ");
         boolean isDone = taskStr[1].equals("1");
 
@@ -46,7 +46,7 @@ public class TaskList {
     /**
      * Constructor for TaskList.
      */
-    public TaskList(){
+    public TaskList() {
         list = new ArrayList<>();
     }
 
@@ -56,7 +56,7 @@ public class TaskList {
      * @param taskNumber The index of task to be returned.
      * @return Task at the index task number minus one.
      */
-    public Task getTask(int taskNumber){
+    public Task getTask(int taskNumber) {
         return list.get(taskNumber - 1);
     }
 
@@ -65,7 +65,7 @@ public class TaskList {
      *
      * @param task Task to be added to the list.
      */
-    public void addTask(Task task){
+    public void addTask(Task task) {
         list.add(task);
     }
 
@@ -105,7 +105,7 @@ public class TaskList {
      * Returns the size of the task list.
      * @return Size of task list.
      */
-    public int size(){
+    public int size() {
         return list.size();
     }
 
@@ -113,7 +113,7 @@ public class TaskList {
      * Returns the ArrayList of Tasks.
      * @return ArrayList of Tasks.
      */
-    public ArrayList<Task> getList(){
+    public ArrayList<Task> getList() {
         return this.list;
     }
 
@@ -123,7 +123,7 @@ public class TaskList {
      *
      * @param listOfTasks List of task saved in local directory.
      */
-    public void loadFromStorage(ArrayList<Task> listOfTasks){
+    public void loadFromStorage(ArrayList<Task> listOfTasks) {
         list = listOfTasks;
     }
 }

@@ -118,7 +118,7 @@ public class Parser {
 
 
         case EVENT:
-            try{
+            try {
                 int atIndex = commandDetails.indexOf("/at") - 1 ;
                 if (atIndex <= 0) {
                     throw new NoDateTimeException(ui);

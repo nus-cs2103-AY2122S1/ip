@@ -15,7 +15,7 @@ public class ToDo extends Task  {
      * @param description Description of task to be done.
      * @param isDone      Boolean representation of completion of task.
      */
-    public ToDo(String description, boolean isDone){
+    public ToDo(String description, boolean isDone) {
         super(description, isDone, TaskType.TODO);
     }
 
@@ -27,7 +27,7 @@ public class ToDo extends Task  {
      * @return String representation of status of task.
      */
     @Override
-    public String getStatus(){
+    public String getStatus() {
         return "[T]" + super.getStatus();
     }
 
@@ -38,7 +38,7 @@ public class ToDo extends Task  {
      * @return String representation of a Todo.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "T" + " | " + super.toString();
     }
 }

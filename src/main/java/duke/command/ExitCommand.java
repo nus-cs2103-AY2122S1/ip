@@ -10,7 +10,7 @@ import duke.ui.Ui;
  * @author Cheong Yee Ming
  * @version Duke A-JavaDoc
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     /**
      * Constructor for a DukeCommand.
      *

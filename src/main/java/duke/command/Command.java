@@ -23,7 +23,7 @@ public abstract class Command {
      * @param storage  Save and load data from local directory.
      * @param ui       Prints message with respect to user input.
      */
-    public Command(TaskList taskList, Storage storage, Ui ui){
+    public Command(TaskList taskList, Storage storage, Ui ui) {
         this.taskList = taskList;
         this.storage = storage;
         this.ui = ui;

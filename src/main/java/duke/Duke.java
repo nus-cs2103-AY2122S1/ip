@@ -27,7 +27,7 @@ public class Duke {
     /**
      * Constructor for Duke.
      */
-    public Duke(){
+    public Duke() {
         taskList = new TaskList();
         storage = new Storage();
         ui = new Ui();

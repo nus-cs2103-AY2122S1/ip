@@ -41,14 +41,14 @@ public abstract class Task {
      *
      * @return String representation of task status.
      */
-    public String getStatus(){
+    public String getStatus() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
     /**
      * Marks a task as done.
      */
-    public void markDone(){
+    public void markDone() {
         isDone = true;
     }
 
@@ -59,7 +59,7 @@ public abstract class Task {
      * @return String representation of task.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return (getStatusIcon().equals("X") ? "1" : "0") + " | " + description;
     }
 }

@@ -11,7 +11,7 @@ import duke.ui.Ui;
  * @author Cheong Yee Ming
  * @version Duke A-JavaDoc
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private final Task task;
 
     /**
@@ -33,7 +33,7 @@ public class AddCommand extends Command{
      * and update local data file.
      */
     @Override
-    public void runCommand(){
+    public void runCommand() {
         taskList.addTask(task);
         ui.taskAddedMessage(task, taskList.size());
         storage.save(taskList.getList());

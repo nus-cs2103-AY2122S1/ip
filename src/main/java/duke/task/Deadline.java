@@ -32,7 +32,7 @@ public class Deadline extends Task {
      *
      * @return String representation of deadline of task.
      */
-    public String getDeadlineTime(){
+    public String getDeadlineTime() {
         return "(by: " + by.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")) + ")";
     }
 

@@ -11,7 +11,7 @@ import duke.ui.Ui;
  * @author Cheong Yee Ming
  * @version Duke A-JavaDoc
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private final int taskNumber;
 
     /**

@@ -12,7 +12,7 @@ import duke.ui.Ui;
  * @author Cheong Yee Ming
  * @version Duke A-JavaDoc
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private final int taskNumber;
 
     /**

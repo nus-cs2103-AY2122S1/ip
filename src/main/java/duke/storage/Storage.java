@@ -25,7 +25,7 @@ public class Storage {
     /**
      * Creates a folder in local directory.
      */
-    public void createFolder(){
+    public void createFolder() {
         File folder = new File(FOLDER);
         boolean folderCreated = folder.mkdir();
         if (!folderCreated) {
@@ -36,7 +36,7 @@ public class Storage {
     /**
      * Creates a file in local directory.
      */
-    public void createFile(){
+    public void createFile() {
         File file = new File(FOLDER + "/" + FILE);
         boolean fileCreated = false;
         try {
@@ -58,7 +58,7 @@ public class Storage {
      *
      * @return An ArrayList of Task saved in local directory.
      */
-    public ArrayList<Task> load(){
+    public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(FOLDER + "/" + FILE);
         try {

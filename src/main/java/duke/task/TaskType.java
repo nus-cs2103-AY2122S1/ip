@@ -26,7 +26,7 @@ public enum TaskType {
      * Returns the character representation of task type.
      * @return Character representation of task type.
      */
-    public String getTaskType(){
+    public String getTaskType() {
         return taskType;
     }
 }
