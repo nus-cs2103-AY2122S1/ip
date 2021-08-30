@@ -7,6 +7,9 @@ done 2
 event testEvent /at 2022-03-01
 event testEvent /at 987654321
 list
+find test
+find nonexistent
+find
 done 3
 list
 todo
