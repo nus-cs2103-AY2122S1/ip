@@ -42,40 +42,40 @@ public class Ui {
     /**
      * Show starting logo and message on boot.
      */
-    void showLogo() {
-        System.out.println(LOGO);
-        print(GREET);
+    String showLogo() {
+        return LOGO + print(GREET);
     }
 
-    void showSavedMessage() {
-        print(SAVE);
+    String showSavedMessage() {
+        return print(SAVE);
     }
 
-    void showMarkedDoneMessage(Task task) {
-        print(DONE + task);
+    String showMarkedDoneMessage(Task task) {
+        return print(DONE + task);
     }
 
-    void showDeletedMessage(Task task, int size) {
-        print("Understood, meow! Deleted this task:\n   "
+    String showDeletedMessage(Task task, int size) {
+        return print("Understood, meow! Deleted this task:\n   "
                 + task + "\n" + "|  Now you have " + size + " tasks in the list.");
     }
 
-    void showAddedMessage(Task task, int size) {
-        print("Meow. I've added this task:\n   "
+    String showAddedMessage(Task task, int size) {
+        return print("Meow. I've added this task:\n   "
                 + task + "\n" + "|  Now you have " + size + " tasks in the list.");
     }
 
-    void showExitMessage() {
-        print(EXIT);
+    String showExitMessage() {
+        return print(EXIT);
     }
 
     /**
-     * Print fancily in the theme of the chatbot.
+     * Returns printable string fancily in the theme of the chatbot.
      *
      * @param message Message to print
+     * @return String to print
      */
-    public void print(String message) {
-        System.out.println(BOX_LINE + BOX_MIDDLE + message + "\n" + BOX_LINE);
+    public String print(String message) {
+        return message;
     }
 
 }

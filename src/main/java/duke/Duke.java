@@ -13,6 +13,8 @@ public class Duke {
     private final TaskList tasks;
     private final Ui ui;
 
+    boolean hasQuit;
+
 
     public enum Commands {
         LIST,
@@ -64,117 +66,93 @@ public class Duke {
 
 
     /**
-     * Runs the chatbot. Begin to accept user input.
+     * Gets response to user input.
      */
-    public void run() {
-        ui.showLogo();
-        Scanner sc = new Scanner(System.in);
+    public String getResponse(String input) {
+        try {
+            Parser parser = new Parser();
+            parser.parse(input, this);
+            Commands command = parser.command;
 
-        String input = sc.nextLine();
+            switch (command) {
+            case BYE:
+                hasQuit = true;
+                return ui.showExitMessage();
 
-        while (!input.equalsIgnoreCase("bye")) {
-            try {
-                Parser parser = new Parser();
-                parser.parse(input, this);
-                Commands command = parser.command;
+            case LIST:
+                return ui.print(tasks.toString());
 
-                switch (command) {
-                case LIST:
-                    ui.print(tasks.toString());
-                    break;
-
-                case DONE:
-                    if (parser.description == null) {
-                        ui.showMarkedDoneMessage(tasks.markDone(parser.index));
-                    } else {
-                        ui.showMarkedDoneMessage(tasks.markDone(parser.description, parser.taskTypes));
-                    }
-                    break;
-
-                case DELETE:
-                    if (parser.description == null) {
-                        ui.showDeletedMessage(tasks.remove(parser.index), tasks.size());
-                    } else {
-                        ui.showDeletedMessage(tasks.remove(parser.description, parser.taskTypes), tasks.size());
-                    }
-                    break;
-
-                case FIND:
-                    ui.print(tasks.find(parser.searchKey).toString().replace(
-                            "Here are the tasks in your list, meow:",
-                            "Here are the matching tasks found, meow:"));
-                    break;
-
-                case TODO:
-                    // Extra Functionality: No duplicate tasks
-                    if (tasks.getTaskIndex(parser.description, TaskTypes.TODO) != -1) {
-                        throw new TaskExistsException(TaskTypes.TODO, parser.description);
-                    }
-
-
-                    Task todo = new Todo(parser.description);
-                    tasks.add(todo);
-                    ui.showAddedMessage(todo, tasks.size());
-                    break;
-
-                case DEADLINE:
-                    // Extra Functionality: No duplicate tasks
-                    if (tasks.getTaskIndex(parser.description, TaskTypes.DEADLINE) != -1) {
-                        throw new TaskExistsException(TaskTypes.DEADLINE, parser.description);
-                    }
-
-                    Task deadline;
-                    if (parser.by.trim().split("\\s+").length < 2) { // no time given
-                        deadline = new Deadline(parser.description, Parser.parseDate(parser.by));
-                    } else {
-                        deadline = new Deadline(parser.description, Parser.parseDateTime(parser.by));
-                    }
-
-                    tasks.add(deadline);
-                    ui.showAddedMessage(deadline, tasks.size());
-                    break;
-
-                case EVENT:
-                    // Extra Functionality: No duplicate tasks
-                    if (tasks.getTaskIndex(parser.description, TaskTypes.EVENT) != -1) {
-                        throw new TaskExistsException(TaskTypes.EVENT, parser.description);
-                    }
-
-                    Task event;
-                    if (parser.at.trim().split("\\s+").length < 2) { // no time given
-                        event = new Event(parser.description, Parser.parseDate(parser.at));
-                    } else {
-                        event = new Event(parser.description, Parser.parseDateTime(parser.at));
-                    }
-
-                    tasks.add(event);
-                    ui.showAddedMessage(event, tasks.size());
-                    break;
-
-                case SAVE:
-                    storage.save(tasks);
-                    ui.showSavedMessage();
-                    break;
-
-                default:
-                    throw new IllegalCommandException(""); // should be unreachable by design
+            case DONE:
+                if (parser.description == null) {
+                    return ui.showMarkedDoneMessage(tasks.markDone(parser.index));
+                } else {
+                    return ui.showMarkedDoneMessage(tasks.markDone(parser.description, parser.taskTypes));
+                }
+            case DELETE:
+                if (parser.description == null) {
+                    return ui.showDeletedMessage(tasks.remove(parser.index), tasks.size());
+                } else {
+                    return ui.showDeletedMessage(tasks.remove(parser.description, parser.taskTypes), tasks.size());
                 }
 
-            } catch (DukeException e) {
-                ui.print(e.getMessage());
-            } finally {
-                input = sc.nextLine();
+            case FIND:
+                return ui.print(tasks.find(parser.searchKey).toString().replace(
+                        "Here are the tasks in your list, meow:",
+                        "Here are the matching tasks found, meow:"));
+
+            case TODO:
+                // Extra Functionality: No duplicate tasks
+                if (tasks.getTaskIndex(parser.description, TaskTypes.TODO) != -1) {
+                    throw new TaskExistsException(TaskTypes.TODO, parser.description);
+                }
+
+                Task todo = new Todo(parser.description);
+                tasks.add(todo);
+                return ui.showAddedMessage(todo, tasks.size());
+
+            case DEADLINE:
+                // Extra Functionality: No duplicate tasks
+                if (tasks.getTaskIndex(parser.description, TaskTypes.DEADLINE) != -1) {
+                    throw new TaskExistsException(TaskTypes.DEADLINE, parser.description);
+                }
+
+                Task deadline;
+                if (parser.by.trim().split("\\s+").length < 2) { // no time given
+                    deadline = new Deadline(parser.description, Parser.parseDate(parser.by));
+                } else {
+                    deadline = new Deadline(parser.description, Parser.parseDateTime(parser.by));
+                }
+
+                tasks.add(deadline);
+                return ui.showAddedMessage(deadline, tasks.size());
+
+            case EVENT:
+                // Extra Functionality: No duplicate tasks
+                if (tasks.getTaskIndex(parser.description, TaskTypes.EVENT) != -1) {
+                    throw new TaskExistsException(TaskTypes.EVENT, parser.description);
+                }
+
+                Task event;
+                if (parser.at.trim().split("\\s+").length < 2) { // no time given
+                    event = new Event(parser.description, Parser.parseDate(parser.at));
+                } else {
+                    event = new Event(parser.description, Parser.parseDateTime(parser.at));
+                }
+
+                tasks.add(event);
+                return ui.showAddedMessage(event, tasks.size());
+
+            case SAVE:
+                storage.save(tasks);
+                return ui.showSavedMessage();
+
+            default:
+                throw new IllegalCommandException(""); // should be unreachable by design
             }
 
+        } catch (DukeException e) {
+            return ui.print(e.getMessage());
         }
 
-        ui.showExitMessage();
-
-        sc.close();
-    }
-
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }
