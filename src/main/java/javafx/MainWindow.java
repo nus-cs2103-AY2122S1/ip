@@ -78,8 +78,8 @@ public class MainWindow extends AnchorPane {
 
     private void closeDuke() {
         ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.schedule(() -> System.exit(1),
-                2, TimeUnit.SECONDS);
+        executorService.schedule(() -> System.exit(0),
+                1, TimeUnit.SECONDS);
     }
 
     private String getResponse(String input) {
