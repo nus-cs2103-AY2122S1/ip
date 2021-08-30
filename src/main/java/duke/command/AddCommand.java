@@ -4,20 +4,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import duke.Ui;
-import duke.Storage;
 import duke.DukeException;
-
+import duke.Storage;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
 
+/**
+ * This class encapsulates the command to add tasks. The supported
+ * Task types are Deadline, Event and Todo.
+ */
 public class AddCommand extends Command {
 
     private String taskType;
 
+    /**
+     * Constructor for AddCommand.
+     * @param userInput String containing the user input
+     * @param taskType String identifying type of task to be added
+     */
     public AddCommand(String userInput, String taskType) {
         super(userInput);
         this.taskType = taskType;
@@ -39,11 +47,11 @@ public class AddCommand extends Command {
         }
 
         if (taskType.equals("event")) {
-           addEvent(this.getUserInput(), taskList, ui, storage);
+            addEvent(this.getUserInput(), taskList, ui, storage);
         }
 
         if (taskType.equals(("todo"))) {
-           addTodo(this.getUserInput(), taskList, ui, storage);
+            addTodo(this.getUserInput(), taskList, ui, storage);
         }
 
     }
@@ -54,8 +62,9 @@ public class AddCommand extends Command {
     }
 
     private void displayAddedTask(Task currentTask, TaskList taskList, Ui ui) {
-        String displayTask = String.format("Got it. I've added this duke.task: \n%s\nNow you have %d tasks in the list.",
-                                currentTask, taskList.size());
+        String displayTask = String
+                .format("Got it. I've added this duke.task: \n%s\nNow you have %d tasks in the list.",
+                        currentTask, taskList.size());
         ui.printMessage(displayTask);
     }
 
@@ -86,15 +95,15 @@ public class AddCommand extends Command {
     }
 
     private void addTodo(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        List<String>  inputArray = Arrays.asList(userInput.split(" "));
+        List<String> inputArray = Arrays.asList(userInput.split(" "));
 
         if (inputArray.size() <= 1) {
             throw new DukeException("todo");
         }
 
-        ArrayList<String> descriptionArray =  new ArrayList<String>(inputArray);
+        ArrayList<String> descriptionArray = new ArrayList<String>(inputArray);
         descriptionArray.remove(0);
-        String description = String.join(" ",descriptionArray);
+        String description = String.join(" ", descriptionArray);
         Todo newTodo = new Todo(description);
         taskList.addTask(newTodo);
         storage.saveData(taskList);

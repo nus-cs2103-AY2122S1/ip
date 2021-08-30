@@ -32,21 +32,21 @@ public class Duke {
         ui.sayGreeting();
         boolean isExit = false;
         while (!isExit) {
-           try {
-               String userInput = ui.getUserInput();
-               Command c = Parser.parseCommand(userInput);
-               c.execute(taskList, ui, storage);
-               isExit = c.isExit();
-           } catch (DukeException e) {
-               ui.printError(e);
-           }
-       }
+            try {
+                String userInput = ui.getUserInput();
+                Command c = Parser.parseCommand(userInput);
+                c.execute(taskList, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.printError(e);
+            }
+        }
 
     }
 
     public static void main(String[] args) {
-            new Duke("data/data.txt").run();
-        }
+        new Duke("data/data.txt").run();
+    }
 
 }
 

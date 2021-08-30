@@ -4,6 +4,11 @@ public class Event extends Task {
 
     private String timeFrame;
 
+    /**
+     * Constructor for an Event
+     * @param description of Event
+     * @param timeFrame where Event occurs
+     */
     public Event (String description, String timeFrame) {
         super(description);
         this.timeFrame = timeFrame;

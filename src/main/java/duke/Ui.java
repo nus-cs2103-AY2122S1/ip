@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private final static String LINE = "____________________________________________________________";
-    private final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String LINE = "____________________________________________________________";
+    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
     private Scanner sc = new Scanner(System.in);
 
     public String getUserInput() {
@@ -17,6 +17,9 @@ public class Ui {
         System.out.println(String.format("%s\n%s\n%s", LINE, message, LINE));
     }
 
+    /**
+     * Prints out Duke greeting message.
+     */
     public void sayGreeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -27,7 +30,7 @@ public class Ui {
     }
 
     public void sayBye() {
-       printMessage(EXIT_MESSAGE);
+        printMessage(EXIT_MESSAGE);
     }
 
     public void printError(DukeException e) {

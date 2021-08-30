@@ -1,9 +1,15 @@
 package duke.task;
 
 public class Task {
+
     protected String description;
+
     protected boolean isDone;
 
+    /**
+     * Constructor for Task
+     * @param description String containing description of Task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -13,14 +19,15 @@ public class Task {
         return (isDone ? "X" : " "); // mark done duke.task with X
     }
 
-    public void markAsDone() { this.isDone = true; }
+    public void markAsDone() {
+        this.isDone = true; }
 
     public boolean doesDescriptionContainString(String query) {
         return this.description.contains(query);
     }
 
     public String getData() {
-        return String.format("%b,%s", this.isDone,this.description);
+        return String.format("%b,%s", this.isDone, this.description);
     }
 
     /**
@@ -32,4 +39,5 @@ public class Task {
     public String toString() {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
+
 }

@@ -4,6 +4,10 @@ public class DukeException extends Exception {
 
     private String dukeError;
 
+    /**
+     * Constructor for a DukeException
+     * @param errorCommand String representing failed operation
+     */
     public DukeException(String errorCommand) {
         if (errorCommand.equals("todo")) {
             this.dukeError = "☹ OOPS!!! The description of a todo cannot be empty.";
