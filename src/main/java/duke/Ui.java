@@ -15,8 +15,8 @@ public class Ui {
     /**
      * Prints out sentence welcoming user when Duke starts.
      */
-    public void showWelcome() {
-        System.out.println("Urgh I hate having to wake up. Why did you do that");
+    public String showWelcome() {
+        return "Urgh I hate having to wake up. Why did you do that";
     }
 
     /**
@@ -25,18 +25,18 @@ public class Ui {
      * @param task the task which is added.
      * @param count the current number of tasks.
      */
-    public void taskAdded(Task task, int count) {
+    public String taskAdded(Task task, int count) {
         String toPrint = String.format("     Got it. I've added this task:\n     "
                         + "%s\n     Now you have %x task%s in the list.",
                 task.toString(), count, count > 1 ? "s" : "");
-        System.out.println(strBreak + toPrint + "\n" + strBreak);
+        return strBreak + toPrint + "\n" + strBreak;
     }
 
     /**
      * Prints out sentence saying bye when user exits.
      */
-    public void sayBye() {
-        System.out.println("Don't wake me up again");
+    public String sayBye() {
+        return "Don't wake me up again";
     }
 
     /**
@@ -44,8 +44,8 @@ public class Ui {
      *
      * @param task task that is marked done.
      */
-    public void showMarkDone(Task task) {
-        System.out.println("Toight!\n" + task + " marked done.");
+    public String showMarkDone(Task task) {
+        return "Toight!\n" + task + " marked done.";
     }
 
     /**
@@ -53,8 +53,8 @@ public class Ui {
      *
      * @param task task that is deleted.
      */
-    public void deleteTask(Task task) {
-        System.out.println(task + " deleted. Bruh be more careful next time");
+    public String deleteTask(Task task) {
+        return task + " deleted. Bruh be more careful next time";
     }
 
     /**
@@ -62,8 +62,8 @@ public class Ui {
      *
      * @param tasks the current list of tasks.
      */
-    public void printList(Tasklist tasks) {
-        System.out.println(tasks);
+    public String printList(Tasklist tasks) {
+        return tasks.toString();
     }
 
     /**
@@ -71,18 +71,8 @@ public class Ui {
      *
      * @param e the exception that was thrown.
      */
-    public void showError(Exception e) {
-        System.out.println(e.getMessage());
-    }
-
-    /**
-     * Reads the command that was input by user.
-     *
-     * @return the command input that was input by user.
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+    public String showError(Exception e) {
+        return e.getMessage();
     }
 
     /**
@@ -90,8 +80,7 @@ public class Ui {
      * @param tasks tasks that are related to keyword.
      * @param keyword keyword that user is searching for.
      */
-    public void printRelatedTasks(Tasklist tasks, String keyword) {
-        System.out.println("Your match tasks with " + keyword + ":");
-        this.printList(tasks);
+    public String printRelatedTasks(Tasklist tasks, String keyword) {
+        return "Your match tasks with " + keyword + ":\n" + this.printList(tasks);
     }
 }

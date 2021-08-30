@@ -27,9 +27,9 @@ public class FindCommand extends Command {
      * @param fileManager filemanager to manages storage.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, FileManager fileManager) {
+    public String execute(Tasklist tasks, Ui ui, FileManager fileManager) {
         Tasklist relatedTasks = tasks.findRelated(this.keyword);
-        ui.printRelatedTasks(relatedTasks, this.keyword);
+        return ui.printRelatedTasks(relatedTasks, this.keyword);
     }
 
     /**
