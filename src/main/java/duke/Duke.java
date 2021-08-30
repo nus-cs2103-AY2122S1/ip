@@ -22,7 +22,6 @@ public class Duke {
     private final Storage store;
     private final Ui ui;
     private TaskList taskList;
-
     private final Image userAvatar = new Image(this.getClass().getResourceAsStream("/images/UserAvatar.png"));
     private final Image dukeAvatar = new Image(this.getClass().getResourceAsStream("/images/DukeAvatar.png"));
     private final Image dukeAvatarWhenException = new Image(this.getClass()

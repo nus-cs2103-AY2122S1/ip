@@ -30,6 +30,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Initializes duke and welcome message when Gui opens.
+     *
+     * @param d
+     * @param stage
+     */
     public void setDuke(Duke d, Stage stage) {
         this.duke = d;
         this.stage = stage;
