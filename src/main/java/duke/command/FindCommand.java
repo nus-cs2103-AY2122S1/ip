@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private String searchPhrase;
     private final String FIND_KEYWORD = "find";

@@ -77,14 +77,13 @@ public class TaskList {
     /**
      * finds all the tasks matching the date given. 
      * 
-     * @param date the date of interest.
-     * @return an arraylist of tasks which fall on that date.
+     * @param searchPhrase the phrase use to filter out tasks.
+     * @return an arraylist of tasks containing the searchPhrase.
      */
-    public ArrayList<Task> findTasksMatchingDate(Date date) {
-        String dateString = date.toString();
+    public ArrayList<Task> findMatchingTasks(String searchPhrase) {
         ArrayList<Task> tasksMatchingDate = new ArrayList<>();
         for (Task t: tasks) {
-            if (t.isSameDate(dateString)) {
+            if (t.hasSearchPhrase(searchPhrase)) {
                 tasksMatchingDate.add(t);
             }
         }
@@ -107,5 +106,5 @@ public class TaskList {
     public int getNumOfTasks() {
         return tasks.size();
     }
-    
+
 }

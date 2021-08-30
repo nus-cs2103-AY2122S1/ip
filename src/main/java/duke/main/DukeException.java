@@ -38,7 +38,8 @@ public class DukeException extends Exception{
         } else if (e instanceof DateTimeParseException) {
             message = "Please enter a proper date and time format.";
         } else {
-            message = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+            message = e.getMessage();
+            //message = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }
         return message;
     }

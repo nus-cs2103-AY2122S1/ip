@@ -85,4 +85,15 @@ public class Event extends Task {
     public boolean isSameDate(String dateString) {
         return this.date.isSameDate(dateString);
     }
+
+    /**
+     * Checks if task description contains the search phrase.
+     *
+     * @param searchPhrase the phrase use to search for related tasks.
+     * @return true if the task contains the search phrase, false otherwise.
+     */
+    @Override
+    public boolean hasSearchPhrase(String searchPhrase) {
+        return toString().contains(searchPhrase);
+    }
 }

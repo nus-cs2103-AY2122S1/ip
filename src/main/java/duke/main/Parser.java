@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FilterCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
 
@@ -32,17 +33,19 @@ public class Parser {
         String action = commandDescription[0];
         try {
             switch (action) {
-                case "done":
+            case "done":
                     return new MarkDoneCommand(Integer.parseInt(commandDescription[1]));
-                case "list":
+            case "list":
                     return new ListCommand();
-                case "delete":
+            case "delete":
                     return new DeleteCommand(Integer.parseInt(commandDescription[1]));
-                case "filter":
+            case "find":
+                    return new FindCommand(command);
+            case "filter":
                     return new FilterCommand(commandDescription[1]);
-                case "bye":
+            case "bye":
                     return new ExitCommand();
-                default:
+            default:
                     return new AddCommand(command);
             }
         } catch (ArrayIndexOutOfBoundsException e) {

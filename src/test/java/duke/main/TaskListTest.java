@@ -45,21 +45,21 @@ public class TaskListTest {
     public class DateStub {
         
         Date date;
+        private final String DATE_STRING = "Sep 03";
 
         /** 
          * class constructor.
          */
         public DateStub() {
-            date = new Date("03/09/2021");    
         }
 
         /**
-         * gets date object.
-         * 
+         * gets stub date.
+         *
          * @return date of this dateStub.
          */
-        public Date getDate() {
-            return date;
+        public String getDate() {
+            return DATE_STRING;
         }
     }
 
@@ -68,9 +68,9 @@ public class TaskListTest {
      */
     @Test
     public void findTasksMatchingDate_03SEP_ThreeTASKS() {
-        Date stubDate = new DateStub().getDate();
+        String stubDate = new DateStub().getDate();
         StubTaskArray stubTaskArray = new StubTaskArray();
-        ArrayList<Task> matchingTasks = stubTaskArray.getTaskListTest().findTasksMatchingDate(stubDate);
+        ArrayList<Task> matchingTasks = stubTaskArray.getTaskListTest().findMatchingTasks(stubDate);
         assertEquals(matchingTasks.size(), 3);
     }
 

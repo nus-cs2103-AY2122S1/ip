@@ -28,13 +28,17 @@ public class FilterCommand extends Command {
     
     /**
      * Executes a command to filter out tasks falling on the specified date.
+     *
      * @param tasks lists of tasks
      * @param ui the user interface.
      * @param storage the storage file.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ArrayList<Task> tasksMatchingDate = tasks.findTasksMatchingDate(date);
-        ui.showFilteredTasks(tasksMatchingDate, date);
+        String dateString = date.toString();
+        ArrayList<Task> tasksMatchingDate = tasks.findMatchingTasks(dateString);
+        String message = String.format("On %s, you have %d %s: ", dateString,
+                tasksMatchingDate.size(), (tasksMatchingDate.size() > 1 ? "tasks" : "task"));
+        ui.showMatchingTasks(tasksMatchingDate, message);
     }
 }
