@@ -14,7 +14,7 @@ import java.util.Scanner;
  * Program to keep track of a list of tasks.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class Duke {
 

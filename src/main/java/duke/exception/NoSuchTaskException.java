@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * when executing deletion or marking of tasks.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class NoSuchTaskException extends DukeException {
     /**

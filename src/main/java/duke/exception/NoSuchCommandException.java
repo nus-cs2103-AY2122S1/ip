@@ -7,7 +7,7 @@ import duke.ui.Ui;
  * an invalid command is input.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class NoSuchCommandException extends DukeException {
     /**

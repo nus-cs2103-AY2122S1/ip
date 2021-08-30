@@ -16,7 +16,7 @@ import java.time.format.DateTimeParseException;
  * respective commands.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class Parser {
     private final TaskList taskList;
@@ -74,6 +74,9 @@ public class Parser {
 
         case "delete":
             return new DeleteCommand(taskList, storage, ui, Integer.parseInt(splitUserInput[1]));
+
+        case "find":
+            return new FindCommand(taskList, storage, ui, userInput.substring(userInput.indexOf(" ") + 1));
 
         default:
             throw new NoSuchCommandException(ui);

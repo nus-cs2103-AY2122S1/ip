@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * Command to add a task to the task list.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class AddCommand extends Command {
     private final Task task;

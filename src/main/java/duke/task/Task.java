@@ -62,4 +62,15 @@ public abstract class Task {
     public String toString() {
         return (getStatusIcon().equals("X") ? "1" : "0") + " | " + description;
     }
+
+    /**
+     * Returns a boolean representation whether the
+     * description contains the keyword.
+     *
+     * @param keyword The keyword to look for in the description.
+     * @return Boolean representation whether description contains keyword.
+     */
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword);
+    }
 }

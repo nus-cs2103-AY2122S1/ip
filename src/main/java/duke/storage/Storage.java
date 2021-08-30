@@ -15,7 +15,7 @@ import java.util.Scanner;
  * from the local directory.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class Storage {
 

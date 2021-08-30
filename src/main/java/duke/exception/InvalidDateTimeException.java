@@ -7,7 +7,7 @@ import duke.ui.Ui;
  * format of date or time is input.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class InvalidDateTimeException extends DukeException {
 

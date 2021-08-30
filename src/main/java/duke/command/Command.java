@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * Commands that can be executed by Duke.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public abstract class Command {
     protected final TaskList taskList;

@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * Command to list all tasks in the task list.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class ListCommand extends Command {
     /**

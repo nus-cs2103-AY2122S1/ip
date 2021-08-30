@@ -5,7 +5,7 @@ package duke.task;
  * Contains the description of task.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class ToDo extends Task  {
 

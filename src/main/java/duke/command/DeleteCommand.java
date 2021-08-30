@@ -10,7 +10,7 @@ import duke.ui.Ui;
  * Command to remove a task from the task list.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class DeleteCommand extends Command {
     private final int taskNumber;

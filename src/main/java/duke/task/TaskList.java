@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * Handles all operations regarding tasks.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class TaskList {
 
@@ -125,5 +125,21 @@ public class TaskList {
      */
     public void loadFromStorage(ArrayList<Task> listOfTasks) {
         list = listOfTasks;
+    }
+
+    /**
+     * Returns an arraylist of tasks containing the keyword.
+     *
+     * @param keyword The keyword to look for in the description.
+     * @return ArrayList of tasks containing the keyword in its description.
+     */
+    public ArrayList<Task> findRelatedTask(String keyword) {
+        ArrayList<Task> relatedTaskList = new ArrayList<>();
+        for (Task task: this.list) {
+            if (task.containsKeyword(keyword)) {
+                relatedTaskList.add(task);
+            }
+        }
+        return relatedTaskList;
     }
 }

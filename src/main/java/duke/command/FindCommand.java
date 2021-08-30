@@ -5,31 +5,33 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Command to exit the Duke program.
+ * Command to search for tasks containing the keyword.
  *
  * @author Cheong Yee Ming
  * @version Duke Level-9
  */
-public class ExitCommand extends Command {
+public class FindCommand extends Command {
+    private final String keyword;
+
     /**
-     * Constructor for a DukeCommand.
+     * Constructor for FindCommand.
      *
      * @param taskList Handles all operations regarding tasks.
      * @param storage  Save and load data from local directory.
      * @param ui       Prints message with respect to user input.
+     * @param keyword  Keyword to find related tasks.
      */
-    public ExitCommand(TaskList taskList, Storage storage, Ui ui) {
+    public FindCommand(TaskList taskList, Storage storage, Ui ui, String keyword) {
         super(taskList, storage, ui);
+        this.keyword = keyword;
     }
 
     /**
-     * Executes runCommand.
-     * Prints a message to say good bye to user
-     * and update local data file.
+     * Executes command to print out
+     * every task containing the keyword.
      */
     @Override
     public void runCommand() {
-        ui.bye();
-        storage.save(taskList.getList());
+        ui.printFindTask(taskList.findRelatedTask(keyword));
     }
 }

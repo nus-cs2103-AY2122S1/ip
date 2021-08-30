@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * Contains the time of task.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public class Event extends Task {
 

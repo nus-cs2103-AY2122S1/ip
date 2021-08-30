@@ -4,7 +4,7 @@ package duke.task;
  * Enumeration of the different task types.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public enum TaskType {
     DEADLINE("D"),

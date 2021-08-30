@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * produced invalid or incomplete commands.
  *
  * @author Cheong Yee Ming
- * @version Duke A-JavaDoc
+ * @version Duke Level-9
  */
 public abstract class DukeException extends Exception {
     private Ui ui;
