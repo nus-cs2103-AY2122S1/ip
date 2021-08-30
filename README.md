@@ -24,3 +24,4 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    ```
 
 ## Acknowldgements
+* [Azeem](https://github.com/DrWala/) for his repo to help me install Gradle and get my JavaFX GUI working since it was not working on my end even after following the steps provided
