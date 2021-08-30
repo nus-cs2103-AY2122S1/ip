@@ -13,6 +13,8 @@ import Duke.Tasks.Deadline;
 import Duke.Tasks.Event;
 import Duke.Ui.Ui;
 
+import java.util.ArrayList;
+
 public abstract class Command {
     private static boolean exit;
 
@@ -37,6 +39,26 @@ public abstract class Command {
         }
     }
 
+    public static class FindCommand extends Command {
+        String input;
+
+        public FindCommand(String input) {
+            this.input = input;
+        }
+
+        @Override
+        public void execute(TaskList tasklist, Ui ui, Storage storage) throws NoDescriptionException {
+            if (input.trim().toLowerCase().equals("find")) {
+                String message = "Oi, what you want me find?!";
+                throw new NoDescriptionException(message);
+            } else {
+                String keyword = input.split(" ")[1].trim();
+                ArrayList<Task> searches = tasklist.find(keyword);
+                ui.showSearches(searches);
+            }
+        }
+    }
+
     public static class DoneCommand extends Command {
         String input;
 
@@ -47,7 +69,7 @@ public abstract class Command {
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage)
                 throws IndexNotInListException, WrongInputException, NoDescriptionException {
-            if (input.split(" ")[0].trim().toLowerCase().equals("todo")) {
+            if (input.trim().toLowerCase().equals("done")) {
                 String message = "You say done but neh tell me do which one?!";
                 throw new NoDescriptionException(message);
             } else {
@@ -157,8 +179,8 @@ public abstract class Command {
         @Override
         public void execute(TaskList tasklist, Ui ui, Storage storage)
                 throws IndexNotInListException, NoDescriptionException, WrongInputException {
-            if (input.split(" ")[0].trim().toLowerCase().equals("todo")) {
-                String message = "You say done but neh tell me do which one?!";
+            if (input.trim().toLowerCase().equals("delete")) {
+                String message = "You say want delete but neh tell me do which one?!";
                 throw new NoDescriptionException(message);
             } else {
                 try {

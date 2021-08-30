@@ -31,6 +31,10 @@ public class Task {
         return this.type;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String toString() {
         return "[" + getStatus() + "] " + name;

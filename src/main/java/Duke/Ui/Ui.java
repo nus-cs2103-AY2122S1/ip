@@ -3,6 +3,7 @@ package Duke.Ui;
 import Duke.Tasks.Task;
 import Duke.Tasks.TaskList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -79,5 +80,20 @@ public class Ui {
     public void showTasklistDeleted() {
         String msg = "Ok la, Uncle get rid of all your tasks already.";
         formatMessages(msg);
+    }
+
+    public void showSearches(ArrayList<Task> searches) {
+
+        StringBuilder output = new StringBuilder("Ah boy, here is the list you wanted.\n      ");
+        int i = 1;
+        for (Task task : searches) {
+            if (i != 1) {
+                output.append("      ");
+            }
+            output.append(i).append(". ").append(task.toString()).append("\n");
+            i += 1;
+        }
+
+        formatMessages(output.toString());
     }
 }

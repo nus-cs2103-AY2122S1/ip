@@ -11,6 +11,8 @@ public class Parser {
                 return new Command.ListCommand();
             case "clear":
                 return new Command.ClearCommand();
+            case "find":
+                return new Command.FindCommand(stringCommand);
             case "done":
                 return new Command.DoneCommand(stringCommand);
             case "todo":

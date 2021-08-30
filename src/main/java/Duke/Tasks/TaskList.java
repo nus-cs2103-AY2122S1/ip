@@ -39,6 +39,16 @@ public class TaskList {
         return taskList;
     }
 
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> searches = new ArrayList<>();
+        for (Task t: taskList) {
+            if (t.getName().toLowerCase().contains(keyword.toLowerCase())) {
+                searches.add(t);
+            }
+        }
+        return searches;
+    }
+
     public void deleteAll() {
         taskList.clear();
     }
